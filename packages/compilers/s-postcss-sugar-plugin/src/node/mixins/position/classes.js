@@ -1,31 +1,58 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name           classes
- * @namespace      node.mixins.position
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the position helper classes like s-position:absolute, etc...
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.position.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginPositionClassesInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginPositionClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginPositionClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginPositionClassesInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const vars = new CssVars();
-    vars.comment(() => `
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const vars = new CssVars();
+  vars.comment(() => `
       /**
         * @name          Positions
         * @namespace          sugar.css.helpers
@@ -93,7 +120,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    vars.comment(() => `
+  vars.comment(() => `
         
       /**
        * @name            s-position:absolute
@@ -117,7 +144,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           position: absolute !important;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
 
           /**
            * @name            s-position:relative
@@ -141,7 +168,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           position: relative !important;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
           /**
            * @name            s-position:fixed
            * @namespace       sugar.css.position
@@ -164,7 +191,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           position: fixed !important;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
         /**
          * @name            s-position::sticky
          * @namespace       sugar.css.mixins.position
@@ -187,7 +214,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           position: sticky !important;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
         /**
          * @name            s-position:top
          * @namespace       sugar.css.position
@@ -210,7 +237,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         top: 0;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
         /**
          * @name            s-position:left
          * @namespace       sugar.css.position
@@ -233,7 +260,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         left: 0;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
         /**
          * @name            s-position:bottom
          * @namespace       sugar.css.position
@@ -256,7 +283,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         bottom: 0;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
       /**
          * @name            s-position:right
          * @namespace       sugar.css.position
@@ -279,7 +306,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         right: 0;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
       /**
          * @name            s-position:center
          * @namespace       sugar.css.position
@@ -314,6 +341,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         transform: translateX(-50%);
       }
       `);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFJckQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLDBDQUEyQyxTQUFRLFlBQVk7SUFDakUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUsMENBQTBDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbkUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7S0FtRVQsQ0FDQSxDQUFDO0lBRUYsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQW1CVCxDQUNBLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQW1CTCxDQUNKLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBa0JMLENBQ0osQ0FBQyxJQUFJLENBQUM7Ozs7T0FJSixDQUFDLENBQUM7SUFFTCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FrQlAsQ0FDRixDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWtCUCxDQUNGLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Ba0JQLENBQ0YsQ0FBQyxJQUFJLENBQUM7Ozs7T0FJSixDQUFDLENBQUM7SUFFTCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FrQlAsQ0FDRixDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWtCUCxDQUNGLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Ba0JQLENBQ0YsQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7T0FnQkosQ0FBQyxDQUFDO0lBRUwsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

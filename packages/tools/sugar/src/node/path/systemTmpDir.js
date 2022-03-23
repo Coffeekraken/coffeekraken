@@ -1,29 +1,32 @@
-// @ts-nocheck
-import __tmpDir from 'temp-dir';
-/**
- * @name                            systemTmpDir
- * @namespace            node.path
- * @type                            Function
- * @platform        node
- * @status          beta
- *
- * Return the system temp directory path
- *
- * @return                {String}                      The real os temp directory path
- * *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import systemTmpDir from '@coffeekraken/node/fs/systemTmpDir';
- * systemTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
- *
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function () {
-    const tmpDir = __tmpDir;
-    return tmpDir;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var systemTmpDir_exports = {};
+__export(systemTmpDir_exports, {
+  default: () => systemTmpDir_default
+});
+module.exports = __toCommonJS(systemTmpDir_exports);
+var import_temp_dir = __toESM(require("temp-dir"), 1);
+function systemTmpDir_default() {
+  const tmpDir = import_temp_dir.default;
+  return tmpDir;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3lzdGVtVG1wRGlyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3lzdGVtVG1wRGlyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFHaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUVILE1BQU0sQ0FBQyxPQUFPO0lBQ1YsTUFBTSxNQUFNLEdBQUcsUUFBUSxDQUFDO0lBQ3hCLE9BQU8sTUFBTSxDQUFDO0FBQ2xCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

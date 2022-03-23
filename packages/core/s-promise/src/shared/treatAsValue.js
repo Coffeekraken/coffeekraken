@@ -1,53 +1,67 @@
-/**
- * @name           treatAsValue
- * @namespace       SPromise.js
- * @type            Function
- * @status              beta
- *
- * This function allows you to wrap a promise in a ```resolve``` call to prevent
- * this promise to be treated as a "chaining" promise but to be treated as
- * normal value passed in the resolve call.
- *
- * @param           {Promise}          promise          The promise to treat as a simple value
- * @return          {ITreatAsValueProxy}                             A proxy of this promise that will act just like a normal promise once getted by the "await" statement
- *
- * @example         js
- * import treatAsValue from '@coffeekraken/sugar/js/promise/treatAsValue';
- * await new Promise(resolve => {
- *      const myPromise = new Promise(resolve => {});
- *      resolve(treatAsValue(myPromise));
- * }); // => myPromise
- *
- * @since           2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-const fn = function treatAsValue(promise, settings = {}) {
-    settings = Object.assign({ during: -1 }, settings);
-    let during = settings.during || -1;
-    try {
-        const proxy = Proxy.revocable(promise, {
-            get(target, prop, receiver) {
-                if (prop === 'then') {
-                    return target;
-                }
-                if (during > 0)
-                    during--;
-                else if (during === 0) {
-                    proxy.revoke();
-                }
-                // @ts-ignore
-                return Reflect.get(...arguments);
-            }
-        });
-        proxy.proxy.restorePromiseBehavior = () => {
-            proxy.revoke();
-            return promise;
-        };
-        return proxy.proxy;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    catch (e) {
-        return promise;
-    }
+  return a;
 };
-export default fn;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJlYXRBc1ZhbHVlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHJlYXRBc1ZhbHVlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBY0gsTUFBTSxFQUFFLEdBQWtCLFNBQVMsWUFBWSxDQUM3QyxPQUFZLEVBQ1osV0FBa0MsRUFBRTtJQUVwQyxRQUFRLG1CQUNOLE1BQU0sRUFBRSxDQUFDLENBQUMsSUFDUCxRQUFRLENBQ1osQ0FBQztJQUNGLElBQUksTUFBTSxHQUFXLFFBQVEsQ0FBQyxNQUFNLElBQUksQ0FBQyxDQUFDLENBQUM7SUFDM0MsSUFBSTtRQUNGLE1BQU0sS0FBSyxHQUFHLEtBQUssQ0FBQyxTQUFTLENBQUMsT0FBTyxFQUFFO1lBQ3JDLEdBQUcsQ0FBQyxNQUFNLEVBQUUsSUFBSSxFQUFFLFFBQVE7Z0JBQ3hCLElBQUksSUFBSSxLQUFLLE1BQU0sRUFBRTtvQkFDbkIsT0FBTyxNQUFNLENBQUM7aUJBQ2Y7Z0JBQ0QsSUFBSSxNQUFNLEdBQUcsQ0FBQztvQkFBRSxNQUFNLEVBQUUsQ0FBQztxQkFDcEIsSUFBSSxNQUFNLEtBQUssQ0FBQyxFQUFFO29CQUNyQixLQUFLLENBQUMsTUFBTSxFQUFFLENBQUM7aUJBQ2hCO2dCQUNELGFBQWE7Z0JBQ2IsT0FBTyxPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsU0FBUyxDQUFDLENBQUM7WUFDbkMsQ0FBQztTQUNGLENBQUMsQ0FBQztRQUNILEtBQUssQ0FBQyxLQUFLLENBQUMsc0JBQXNCLEdBQUcsR0FBRyxFQUFFO1lBQ3hDLEtBQUssQ0FBQyxNQUFNLEVBQUUsQ0FBQztZQUNmLE9BQU8sT0FBTyxDQUFDO1FBQ2pCLENBQUMsQ0FBQztRQUNGLE9BQU8sS0FBSyxDQUFDLEtBQUssQ0FBQztLQUNwQjtJQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ1YsT0FBTyxPQUFPLENBQUM7S0FDaEI7QUFDSCxDQUFDLENBQUM7QUFDRixlQUFlLEVBQUUsQ0FBQyJ9
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var treatAsValue_exports = {};
+__export(treatAsValue_exports, {
+  default: () => treatAsValue_default
+});
+module.exports = __toCommonJS(treatAsValue_exports);
+const fn = function treatAsValue(promise, settings = {}) {
+  settings = __spreadValues({
+    during: -1
+  }, settings);
+  let during = settings.during || -1;
+  try {
+    const proxy = Proxy.revocable(promise, {
+      get(target, prop, receiver) {
+        if (prop === "then") {
+          return target;
+        }
+        if (during > 0)
+          during--;
+        else if (during === 0) {
+          proxy.revoke();
+        }
+        return Reflect.get(...arguments);
+      }
+    });
+    proxy.proxy.restorePromiseBehavior = () => {
+      proxy.revoke();
+      return promise;
+    };
+    return proxy.proxy;
+  } catch (e) {
+    return promise;
+  }
+};
+var treatAsValue_default = fn;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

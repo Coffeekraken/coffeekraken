@@ -1,31 +1,28 @@
-// @ts-nocheck
-/**
- * @name                    px2em
- * @namespace            js.unit
- * @type                    Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Convert rem value to a px one
- *
- * @param         {Number}          em           The rem value to convert
- * @param         {HTMLElement}     [$elm=document.documentElement]         The HTMLElement to take as source for calculating the em
- * @return        {Number}                        The pixel value
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import px2em from '@coffeekraken/sugar/js/unit/px2em';
- * px2em(36);
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var px2em_exports = {};
+__export(px2em_exports, {
+  default: () => px2em_default
+});
+module.exports = __toCommonJS(px2em_exports);
 function px2em(px, $elm = document.documentElement) {
-    return px / parseFloat(getComputedStyle($elm).fontSize || '16px');
+  return px / parseFloat(getComputedStyle($elm).fontSize || "16px");
 }
-export default px2em;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHgyZW0uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJweDJlbS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsS0FBSyxDQUFDLEVBQUUsRUFBRSxJQUFJLEdBQUcsUUFBUSxDQUFDLGVBQWU7SUFDOUMsT0FBTyxFQUFFLEdBQUcsVUFBVSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxDQUFDLFFBQVEsSUFBSSxNQUFNLENBQUMsQ0FBQztBQUN0RSxDQUFDO0FBQ0QsZUFBZSxLQUFLLENBQUMifQ==
+var px2em_default = px2em;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

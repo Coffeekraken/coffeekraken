@@ -1,35 +1,42 @@
-import __SFile from '@coffeekraken/s-file';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
-/**
- * @name            configFiles
- * @namespace       node.helpers
- * @type            Function
- * @platform        js
- * @platform        node
- * @status          beta
- *
- * This helper allows you to get the SFile object representation of each config files that correspond to the passed configId
- *
- * @param       {String}        configId            The config id like "frontendServer", etc...
- * @return      {String}                    The .config.js filename
- *
- * @since           2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-export default function configFiles(configId, simplify = false) {
-    const paths = __SSugarConfig.filesPaths
-        .filter((path) => {
-        return path.includes(`/${configId}.config.js`);
-    })
-        .map((path) => {
-        const obj = __SFile.new(path).toObject();
-        if (simplify) {
-            // obj.content = __stripDocblocks(obj.content);
-            obj.content = __stripSourcemap(obj.content);
-        }
-        return obj;
-    });
-    return paths;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var configFiles_exports = {};
+__export(configFiles_exports, {
+  default: () => configFiles
+});
+module.exports = __toCommonJS(configFiles_exports);
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_stripSourcemap = __toESM(require("@coffeekraken/sugar/shared/string/stripSourcemap"), 1);
+function configFiles(configId, simplify = false) {
+  const paths = import_s_sugar_config.default.filesPaths.filter((path) => {
+    return path.includes(`/${configId}.config.js`);
+  }).map((path) => {
+    const obj = import_s_file.default.new(path).toObject();
+    if (simplify) {
+      obj.content = (0, import_stripSourcemap.default)(obj.content);
+    }
+    return obj;
+  });
+  return paths;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uZmlnRmlsZXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb25maWdGaWxlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLE9BQU8sTUFBTSxzQkFBc0IsQ0FBQztBQUMzQyxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUUxRCxPQUFPLGdCQUFnQixNQUFNLGtEQUFrRCxDQUFDO0FBRWhGOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsV0FBVyxDQUFDLFFBQWdCLEVBQUUsUUFBUSxHQUFHLEtBQUs7SUFDbEUsTUFBTSxLQUFLLEdBQUcsY0FBYyxDQUFDLFVBQVU7U0FDbEMsTUFBTSxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDYixPQUFPLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxRQUFRLFlBQVksQ0FBQyxDQUFDO0lBQ25ELENBQUMsQ0FBQztTQUNELEdBQUcsQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ1YsTUFBTSxHQUFHLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztRQUN6QyxJQUFJLFFBQVEsRUFBRTtZQUNWLCtDQUErQztZQUMvQyxHQUFHLENBQUMsT0FBTyxHQUFHLGdCQUFnQixDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQztTQUMvQztRQUNELE9BQU8sR0FBRyxDQUFDO0lBQ2YsQ0FBQyxDQUFDLENBQUM7SUFDUCxPQUFPLEtBQUssQ0FBQztBQUNqQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -37,7 +37,7 @@ export default function (settings: ISrcImgDirSettings = {}) {
     };
     const srcImgDir = __SSugarConfig.get('storage.src.imgDir');
     if (srcImgDir !== undefined) {
-        __fs.ensureDirSync(srcImgDir);
+        // __fs.ensureDirSync(srcImgDir);
         return srcImgDir;
     }
     return undefined;

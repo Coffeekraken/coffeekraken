@@ -1,40 +1,37 @@
-// @ts-nocheck
-/**
- * @name                                  parse
- * @namespace            js.string
- * @type                                  Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Parse a string and convert it into his native data type like date, number, boolean, etc...
- *
- * @param             {String}                        value                                 The value to convert
- * @return            {Mixed}                                                               The converted value
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example           js
- * import parse from '@coffeekraken/sugar/js/string/parse';
- * parse('10'); // => 10
- *
- * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default (value) => {
-    if (typeof value !== 'string')
-        return value;
-    value = value.split('⠀').join('').trim();
-    try {
-        return Function(`
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var parse_exports = {};
+__export(parse_exports, {
+  default: () => parse_default
+});
+module.exports = __toCommonJS(parse_exports);
+var parse_default = (value) => {
+  if (typeof value !== "string")
+    return value;
+  value = value.split("\u2800").join("").trim();
+  try {
+    return Function(`
       "use strict";
       return (${value});
     `)();
-    }
-    catch (e) {
-        return value;
-    }
+  } catch (e) {
+    return value;
+  }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYXJzZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsZUFBZSxDQUFDLEtBQUssRUFBRSxFQUFFO0lBQ3JCLElBQUksT0FBTyxLQUFLLEtBQUssUUFBUTtRQUFFLE9BQU8sS0FBSyxDQUFDO0lBQzVDLEtBQUssR0FBRyxLQUFLLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUMsQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUN6QyxJQUFJO1FBQ0EsT0FBTyxRQUFRLENBQUM7O2dCQUVSLEtBQUs7S0FDaEIsQ0FBQyxFQUFFLENBQUM7S0FDSjtJQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ1IsT0FBTyxLQUFLLENBQUM7S0FDaEI7QUFDTCxDQUFDLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

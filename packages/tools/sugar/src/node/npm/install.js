@@ -1,49 +1,84 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __SPromise from '@coffeekraken/s-promise';
-import __commandExists from '../command/commandExists';
-import __spawn from '../process/spawn';
-import __argsToString from '../../shared/cli/argsToString';
-export default function install(settings) {
-    return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
-        settings = Object.assign({ cwd: process.cwd(), yarn: true, args: {} }, settings);
-        let command;
-        if (settings.yarn) {
-            if (yield __commandExists('yarn')) {
-                command = 'yarn install';
-                emit('log', {
-                    value: `<yellow>[install]</yellow> Using to "<yellow>yarn</yellow>" to install dependencies`,
-                });
-            }
-            else {
-                emit('log', {
-                    value: `<yellow>[install]</yellow> Sorry but "<yellow>yarn</yellow>" is not available on this system`,
-                });
-            }
-        }
-        if (!command) {
-            if (yield __commandExists('npm')) {
-                command = 'npm install';
-                emit('log', {
-                    value: `<yellow>[install]</yellow> Using to "<yellow>npm</yellow>" to install dependencies`,
-                });
-            }
-        }
-        if (!command) {
-            throw new Error(`<red>[install]</red> Sorry but it seems that none of "<yellow>npm</yellow>" or "<yellow>yarn</yellow>" are available...`);
-        }
-        command += ` ${__argsToString(settings.args)}`;
-        const result = yield __spawn(command, [], {
-            cwd: settings.cwd,
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var install_exports = {};
+__export(install_exports, {
+  default: () => install
+});
+module.exports = __toCommonJS(install_exports);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_commandExists = __toESM(require("../command/commandExists"), 1);
+var import_spawn = __toESM(require("../process/spawn"), 1);
+var import_argsToString = __toESM(require("../../shared/cli/argsToString"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+function install(packageNames = "", settings) {
+  return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
+    settings = __spreadValues({
+      cwd: process.cwd(),
+      manager: import_s_sugar_config.default.get("package.manager"),
+      args: {}
+    }, settings);
+    let command;
+    if (settings.manager === "yarn") {
+      if (await (0, import_commandExists.default)("yarn")) {
+        command = "yarn add";
+        emit("log", {
+          value: `<yellow>[install]</yellow> Using to "<yellow>yarn</yellow>" to install dependencies`
         });
-        resolve(result);
+      } else {
+        emit("log", {
+          value: `<yellow>[install]</yellow> Sorry but "<yellow>yarn</yellow>" is not available on this system`
+        });
+      }
+    }
+    if (!command) {
+      if (await (0, import_commandExists.default)("npm")) {
+        command = "npm install";
+        emit("log", {
+          value: `<yellow>[install]</yellow> Using to "<yellow>npm</yellow>" to install dependencies`
+        });
+      }
+    }
+    if (!command) {
+      throw new Error(`<red>[install]</red> Sorry but it seems that none of "<yellow>npm</yellow>" or "<yellow>yarn</yellow>" are available...`);
+    }
+    command += ` ${packageNames} ${(0, import_argsToString.default)(settings.args)}`.replace(/\s{2,999}/, " ");
+    const result = await pipe((0, import_spawn.default)(command, [], {
+      cwd: settings.cwd
     }));
+    resolve(result);
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5zdGFsbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluc3RhbGwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFDakQsT0FBTyxlQUFlLE1BQU0sMEJBQTBCLENBQUM7QUFDdkQsT0FBTyxPQUFPLE1BQU0sa0JBQWtCLENBQUM7QUFDdkMsT0FBTyxjQUFjLE1BQU0sK0JBQStCLENBQUM7QUFxQzNELE1BQU0sQ0FBQyxPQUFPLFVBQVUsT0FBTyxDQUMzQixRQUFzQztJQUV0QyxPQUFPLElBQUksVUFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDdEQsUUFBUSxtQkFDSixHQUFHLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUNsQixJQUFJLEVBQUUsSUFBSSxFQUNWLElBQUksRUFBRSxFQUFFLElBQ0wsUUFBUSxDQUNkLENBQUM7UUFDRixJQUFJLE9BQU8sQ0FBQztRQUNaLElBQUksUUFBUSxDQUFDLElBQUksRUFBRTtZQUNmLElBQUksTUFBTSxlQUFlLENBQUMsTUFBTSxDQUFDLEVBQUU7Z0JBQy9CLE9BQU8sR0FBRyxjQUFjLENBQUM7Z0JBQ3pCLElBQUksQ0FBQyxLQUFLLEVBQUU7b0JBQ1IsS0FBSyxFQUFFLHFGQUFxRjtpQkFDL0YsQ0FBQyxDQUFDO2FBQ047aUJBQU07Z0JBQ0gsSUFBSSxDQUFDLEtBQUssRUFBRTtvQkFDUixLQUFLLEVBQUUsOEZBQThGO2lCQUN4RyxDQUFDLENBQUM7YUFDTjtTQUNKO1FBQ0QsSUFBSSxDQUFDLE9BQU8sRUFBRTtZQUNWLElBQUksTUFBTSxlQUFlLENBQUMsS0FBSyxDQUFDLEVBQUU7Z0JBQzlCLE9BQU8sR0FBRyxhQUFhLENBQUM7Z0JBQ3hCLElBQUksQ0FBQyxLQUFLLEVBQUU7b0JBQ1IsS0FBSyxFQUFFLG9GQUFvRjtpQkFDOUYsQ0FBQyxDQUFDO2FBQ047U0FDSjtRQUNELElBQUksQ0FBQyxPQUFPLEVBQUU7WUFDVixNQUFNLElBQUksS0FBSyxDQUNYLHlIQUF5SCxDQUM1SCxDQUFDO1NBQ0w7UUFFRCxPQUFPLElBQUksSUFBSSxjQUFjLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUM7UUFFL0MsTUFBTSxNQUFNLEdBQUcsTUFBTSxPQUFPLENBQUMsT0FBTyxFQUFFLEVBQUUsRUFBRTtZQUN0QyxHQUFHLEVBQUUsUUFBUSxDQUFDLEdBQUc7U0FDcEIsQ0FBQyxDQUFDO1FBRUgsT0FBTyxDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQ3BCLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

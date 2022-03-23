@@ -1,53 +1,62 @@
-// @ts-nocheck
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                WhenInteractSettingsInterface
- * @namespace           js.dom.detect.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             js
- *
- * This interface represent the `whenInteract` settings.
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class WhenInteractSettingsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            mouseover: {
-                description: 'Specify if the mouseover event has to be used',
-                type: 'Boolean',
-                default: true
-            },
-            mouseout: {
-                description: 'Specify if the mouseout event has to be used',
-                type: 'Boolean',
-                default: true
-            },
-            click: {
-                description: 'Specify if the click event has to be used',
-                type: 'Boolean',
-                default: true
-            },
-            touchstart: {
-                description: 'Specify if the touchstart event has to be used',
-                type: 'Boolean',
-                default: true
-            },
-            touchend: {
-                description: 'Specify if the touchend event has to be used',
-                type: 'Boolean',
-                default: true
-            },
-            focus: {
-                description: 'Specify if the focus event has to be used',
-                type: 'Boolean',
-                default: true
-            }
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var WhenInteractSettingsInterface_exports = {};
+__export(WhenInteractSettingsInterface_exports, {
+  default: () => WhenInteractSettingsInterface
+});
+module.exports = __toCommonJS(WhenInteractSettingsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class WhenInteractSettingsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      mouseover: {
+        description: "Specify if the mouseover event has to be used",
+        type: "Boolean",
+        default: true
+      },
+      mouseout: {
+        description: "Specify if the mouseout event has to be used",
+        type: "Boolean",
+        default: true
+      },
+      click: {
+        description: "Specify if the click event has to be used",
+        type: "Boolean",
+        default: true
+      },
+      touchstart: {
+        description: "Specify if the touchstart event has to be used",
+        type: "Boolean",
+        default: true
+      },
+      touchend: {
+        description: "Specify if the touchend event has to be used",
+        type: "Boolean",
+        default: true
+      },
+      focus: {
+        description: "Specify if the focus event has to be used",
+        type: "Boolean",
+        default: true
+      }
+    };
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiV2hlbkludGVyYWN0U2V0dGluZ3NJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJXaGVuSW50ZXJhY3RTZXR0aW5nc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7R0FhRztBQUNILE1BQU0sQ0FBQyxPQUFPLE9BQU8sNkJBQThCLFNBQVEsWUFBWTtJQUNuRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsU0FBUyxFQUFFO2dCQUNQLFdBQVcsRUFBRSwrQ0FBK0M7Z0JBQzVELElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxJQUFJO2FBQ2hCO1lBQ0QsUUFBUSxFQUFFO2dCQUNOLFdBQVcsRUFBRSw4Q0FBOEM7Z0JBQzNELElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxJQUFJO2FBQ2hCO1lBQ0QsS0FBSyxFQUFFO2dCQUNILFdBQVcsRUFBRSwyQ0FBMkM7Z0JBQ3hELElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxJQUFJO2FBQ2hCO1lBQ0QsVUFBVSxFQUFFO2dCQUNSLFdBQVcsRUFBRSxnREFBZ0Q7Z0JBQzdELElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxJQUFJO2FBQ2hCO1lBQ0QsUUFBUSxFQUFFO2dCQUNOLFdBQVcsRUFBRSw4Q0FBOEM7Z0JBQzNELElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxJQUFJO2FBQ2hCO1lBQ0QsS0FBSyxFQUFFO2dCQUNILFdBQVcsRUFBRSwyQ0FBMkM7Z0JBQ3hELElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxJQUFJO2FBQ2hCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSiJ9

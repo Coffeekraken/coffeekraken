@@ -1,35 +1,27 @@
-// @ts-nocheck
-import __querySelectorUp from './querySelectorUp';
-/**
- * @name        closest
- * @namespace            js.dom.query
- * @type      Function
- * @platform          js
- * @status      beta
- *
- * Go up the dom three to find the first element that matches the passed selector
- *
- * @param 		{HTMLElement} 					$elm  		The element to start on
- * @param 		{String|Function} 				selector 	A css selector to search for or a check function that will be used
- * @return 		{HTMLElement} 								The element found or null
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import closest from '@coffeekraken/sugar/js/dom/query/closest'
- * const closestElm = closest(myCoolElement, '.my-cool-class');
- * if (closestElm) {
- * 		// we have found en element that matches the selector
- * }
- * // the selector param can be a function that need to return either true or false like so:
- * closest(myCoolElement, (elm) => {
- *   return elm.hasAttribute('my-cool-attribute')
- * })
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default __querySelectorUp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xvc2VzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsb3Nlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLE9BQU8saUJBQWlCLE1BQU0sbUJBQW1CLENBQUM7QUFFbEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQThCRztBQUNILGVBQWUsaUJBQWlCLENBQUMifQ==
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var closest_exports = {};
+__export(closest_exports, {
+  default: () => closest_default
+});
+module.exports = __toCommonJS(closest_exports);
+var import_querySelectorUp = __toESM(require("./querySelectorUp"), 1);
+var closest_default = import_querySelectorUp.default;

@@ -1,38 +1,32 @@
-// @ts-nocheck
-/**
- * @name        up
- * @namespace            js.dom.traverse
- * @type      Function
- * @platform          js
- * @status      beta
- *
- * Go up the dom three until the callback function return true
- *
- * @param 		{HTMLElement} 					$elm  		The element to start on
- * @param 		{Function} 				        callback 	The callback function to call on each element. If this returns on an element, it will be the returned element
- * @return 		{HTMLElement} 								The element found or null
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import up from '@coffeekraken/sugar/js/dom/traverse/up'
- * const $elm = up($myElement, elm => {
- *      return elm.classList.contains('my-class')
- * });
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function up($elm, callback) {
-    const originalElm = $elm;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var up_exports = {};
+__export(up_exports, {
+  default: () => up
+});
+module.exports = __toCommonJS(up_exports);
+function up($elm, callback) {
+  const originalElm = $elm;
+  $elm = $elm.parentNode;
+  while ($elm && $elm != originalElm.ownerDocument) {
+    if (callback($elm))
+      return $elm;
     $elm = $elm.parentNode;
-    while ($elm && $elm != originalElm.ownerDocument) {
-        if (callback($elm))
-            return $elm;
-        $elm = $elm.parentNode;
-    }
-    return null;
+  }
+  return null;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXAuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ1cC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLEVBQUUsQ0FBQyxJQUFpQixFQUFFLFFBQWtCO0lBQzVELE1BQU0sV0FBVyxHQUFHLElBQUksQ0FBQztJQUN6QixJQUFJLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQztJQUN2QixPQUFPLElBQUksSUFBSSxJQUFJLElBQUksV0FBVyxDQUFDLGFBQWEsRUFBRTtRQUM5QyxJQUFJLFFBQVEsQ0FBQyxJQUFJLENBQUM7WUFBRSxPQUFPLElBQUksQ0FBQztRQUNoQyxJQUFJLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQztLQUMxQjtJQUNELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==

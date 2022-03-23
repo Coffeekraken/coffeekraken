@@ -1,45 +1,43 @@
-// @ts-nocheck
-import * as __convertColors from 'colors-convert';
-/**
- * @name                  rgba2hsla
- * @namespace            js.color
- * @type                  Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * RGBA to HSL
- *
- * @param       	{Number|Object}        	r 	        	The red value between 0-255 or an object representing r, b, g, a
- * @param       	{Number}        	g 	        	The green value between 0-255
- * @param       	{Number}        	b 	        	The blue value between 0-255
- * @param       	{Number}        	a 	        	The alpha value between 0-100|0-1
- * @return 	      {object} 		                    	The hsl object representation
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import rgba2hsla from '@coffeekraken/sugar/js/color/rgba2hsla';
- * rgba2hsla(10,20,50,10);
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var rgba2hsla_exports = {};
+__export(rgba2hsla_exports, {
+  default: () => rgba2hsla_default
+});
+module.exports = __toCommonJS(rgba2hsla_exports);
+var __convertColors = __toESM(require("colors-convert"), 1);
 function rgba2hsla(r, g, b, a = 1) {
-    if (typeof r === 'object') {
-        g = r.g;
-        b = r.b;
-        a = r.a;
-        r = r.r;
-    }
-    return __convertColors.rgbaToHsla({
-        r,
-        g,
-        b,
-        a,
-    });
+  if (typeof r === "object") {
+    g = r.g;
+    b = r.b;
+    a = r.a;
+    r = r.r;
+  }
+  return __convertColors.rgbaToHsla({
+    r,
+    g,
+    b,
+    a
+  });
 }
-export default rgba2hsla;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmdiYTJoc2xhLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmdiYTJoc2xhLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLEtBQUssZUFBZSxNQUFNLGdCQUFnQixDQUFDO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMsU0FBUyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsR0FBRyxDQUFDO0lBQzdCLElBQUksT0FBTyxDQUFDLEtBQUssUUFBUSxFQUFFO1FBQ3ZCLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ1IsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDUixDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNSLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDO0tBQ1g7SUFDRCxPQUFPLGVBQWUsQ0FBQyxVQUFVLENBQUM7UUFDOUIsQ0FBQztRQUNELENBQUM7UUFDRCxDQUFDO1FBQ0QsQ0FBQztLQUNKLENBQUMsQ0FBQztBQUNQLENBQUM7QUFDRCxlQUFlLFNBQVMsQ0FBQyJ9
+var rgba2hsla_default = rgba2hsla;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

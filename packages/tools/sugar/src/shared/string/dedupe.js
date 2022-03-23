@@ -1,43 +1,38 @@
-// @ts-nocheck
-import __toRegex from 'to-regex';
-/**
- * @name        dedupe
- * @namespace            js.string
- * @type        Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function simple make sure that you don't have duplicate statements in the passed string
- *
- * @param           {String}        string        The string to process
- * @param           {String}        statement       The statement to check
- * @return          {String}                      The deduplicated string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import dedupe from '@coffeekraken/sugar/js/string/dedupe';
- * dedupe('hello world hello your', 'hello'); // => hello world your
- *
- * @since       2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var dedupe_exports = {};
+__export(dedupe_exports, {
+  default: () => dedupe_default
+});
+module.exports = __toCommonJS(dedupe_exports);
+var import_to_regex = __toESM(require("to-regex"), 1);
 function dedupe(str, statement) {
-    const reg = __toRegex(`(${statement})`, {
-        contains: true,
-        flags: 'g',
-    });
-    return str
-        .split(reg)
-        .reverse()
-        .filter(function (e, i, arr) {
-        return arr.indexOf(e, i + 1) === -1;
-    })
-        .reverse()
-        .join('');
+  const reg = (0, import_to_regex.default)(`(${statement})`, {
+    contains: true,
+    flags: "g"
+  });
+  return str.split(reg).reverse().filter(function(e, i, arr) {
+    return arr.indexOf(e, i + 1) === -1;
+  }).reverse().join("");
 }
-export default dedupe;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVkdXBlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZGVkdXBlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFNBQVMsTUFBTSxVQUFVLENBQUM7QUFFakM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsTUFBTSxDQUFDLEdBQUcsRUFBRSxTQUFTO0lBQzFCLE1BQU0sR0FBRyxHQUFHLFNBQVMsQ0FBQyxJQUFJLFNBQVMsR0FBRyxFQUFFO1FBQ3BDLFFBQVEsRUFBRSxJQUFJO1FBQ2QsS0FBSyxFQUFFLEdBQUc7S0FDYixDQUFDLENBQUM7SUFDSCxPQUFPLEdBQUc7U0FDTCxLQUFLLENBQUMsR0FBRyxDQUFDO1NBQ1YsT0FBTyxFQUFFO1NBQ1QsTUFBTSxDQUFDLFVBQVUsQ0FBQyxFQUFFLENBQUMsRUFBRSxHQUFHO1FBQ3ZCLE9BQU8sR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDLEVBQUUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO0lBQ3hDLENBQUMsQ0FBQztTQUNELE9BQU8sRUFBRTtTQUNULElBQUksQ0FBQyxFQUFFLENBQUMsQ0FBQztBQUNsQixDQUFDO0FBQ0QsZUFBZSxNQUFNLENBQUMifQ==
+var dedupe_default = dedupe;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

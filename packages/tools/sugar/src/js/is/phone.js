@@ -1,34 +1,31 @@
-// @ts-nocheck
-import MobileDetect from 'mobile-detect';
-/**
- * @name        isPhone
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Detect if is a phone device
- *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * @return    {Boolean}    true if is a phone, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import isPhone from '@coffeekraken/sugar/js/is/phone'
- * if (isPhone()) {
- *   // do something cool...
- * }
- *
- * @see       https://www.npmjs.com/package/mobile-detect
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var phone_exports = {};
+__export(phone_exports, {
+  default: () => phone_default
+});
+module.exports = __toCommonJS(phone_exports);
+var import_mobile_detect = __toESM(require("mobile-detect"), 1);
 function isPhone(ua = navigator.userAgent) {
-    const md = new MobileDetect(ua);
-    return md.phone() !== null;
+  const md = new import_mobile_detect.default(ua);
+  return md.phone() !== null;
 }
-export default isPhone;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGhvbmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwaG9uZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxZQUFZLE1BQU0sZUFBZSxDQUFDO0FBQ3pDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBUyxPQUFPLENBQUMsS0FBYSxTQUFTLENBQUMsU0FBUztJQUM3QyxNQUFNLEVBQUUsR0FBRyxJQUFJLFlBQVksQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUNoQyxPQUFPLEVBQUUsQ0FBQyxLQUFLLEVBQUUsS0FBSyxJQUFJLENBQUM7QUFDL0IsQ0FBQztBQUNELGVBQWUsT0FBTyxDQUFDIn0=
+var phone_default = isPhone;

@@ -7,20 +7,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __SFaviconBuilderBuildParamsInterface from '../node/interface/SFaviconBuilderBuildParamsInterface';
-import __SFaviconBuilder from '../node/SFaviconBuilder';
-import __SPromise from '@coffeekraken/s-promise';
-export default function build(stringArgs = '') {
-    return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
-        const builder = new __SFaviconBuilder({
-            builder: {
-                interface: __SFaviconBuilderBuildParamsInterface,
-            },
-        });
-        const promise = builder.build(stringArgs);
-        pipe(promise);
-        resolve(yield promise);
-        process.exit();
-    }));
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVpbGQuY2xpLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYnVpbGQuY2xpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUNBLE9BQU8scUNBQXFDLE1BQU0sdURBQXVELENBQUM7QUFDMUcsT0FBTyxpQkFBaUIsTUFBTSx5QkFBeUIsQ0FBQztBQUV4RCxPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUVqRCxNQUFNLENBQUMsT0FBTyxVQUFVLEtBQUssQ0FBQyxVQUFVLEdBQUcsRUFBRTtJQUN6QyxPQUFPLElBQUksVUFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQzVELE1BQU0sT0FBTyxHQUFHLElBQUksaUJBQWlCLENBQUM7WUFDbEMsT0FBTyxFQUFFO2dCQUNMLFNBQVMsRUFBRSxxQ0FBcUM7YUFDbkQ7U0FDSixDQUFDLENBQUM7UUFDSCxNQUFNLE9BQU8sR0FBRyxPQUFPLENBQUMsS0FBSyxDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBQzFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUNkLE9BQU8sQ0FBQyxNQUFNLE9BQU8sQ0FBQyxDQUFDO1FBQ3ZCLE9BQU8sQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUNuQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyJ9
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../node/interface/SFaviconBuilderBuildParamsInterface", "../node/SFaviconBuilder", "@coffeekraken/s-promise"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const SFaviconBuilderBuildParamsInterface_1 = __importDefault(require("../node/interface/SFaviconBuilderBuildParamsInterface"));
+    const SFaviconBuilder_1 = __importDefault(require("../node/SFaviconBuilder"));
+    const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    function build(stringArgs = '') {
+        return new s_promise_1.default(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
+            const builder = new SFaviconBuilder_1.default({
+                builder: {
+                    interface: SFaviconBuilderBuildParamsInterface_1.default,
+                },
+            });
+            const promise = builder.build(stringArgs);
+            pipe(promise);
+            resolve(yield promise);
+            process.exit();
+        }));
+    }
+    exports.default = build;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVpbGQuY2xpLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYnVpbGQuY2xpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBQ0EsZ0lBQTBHO0lBQzFHLDhFQUF3RDtJQUV4RCx3RUFBaUQ7SUFFakQsU0FBd0IsS0FBSyxDQUFDLFVBQVUsR0FBRyxFQUFFO1FBQ3pDLE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1lBQzVELE1BQU0sT0FBTyxHQUFHLElBQUkseUJBQWlCLENBQUM7Z0JBQ2xDLE9BQU8sRUFBRTtvQkFDTCxTQUFTLEVBQUUsNkNBQXFDO2lCQUNuRDthQUNKLENBQUMsQ0FBQztZQUNILE1BQU0sT0FBTyxHQUFHLE9BQU8sQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLENBQUM7WUFDMUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQ2QsT0FBTyxDQUFDLE1BQU0sT0FBTyxDQUFDLENBQUM7WUFDdkIsT0FBTyxDQUFDLElBQUksRUFBRSxDQUFDO1FBQ25CLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFDUCxDQUFDO0lBWkQsd0JBWUMifQ==

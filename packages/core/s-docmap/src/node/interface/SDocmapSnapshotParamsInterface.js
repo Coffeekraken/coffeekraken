@@ -1,35 +1,45 @@
-// @ts-nocheck
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SDocMapSnapshotParamsInterface
- * @namespace           node.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This class represent the interface that describe the minimum requirement
- * needed to make a docmap snapshot
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SDocMapSnapshotParamsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            outDir: {
-                description: 'Specify the directory path where to store your snapshots',
-                type: 'String',
-                path: {
-                    absolute: true,
-                    tokens: true,
-                },
-                default: __SSugarConfig.get('docmap.snapshot.outDir'),
-            },
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SDocmapSnapshotParamsInterface_exports = {};
+__export(SDocmapSnapshotParamsInterface_exports, {
+  default: () => SDocmapSnapshotParamsInterface_default
+});
+module.exports = __toCommonJS(SDocmapSnapshotParamsInterface_exports);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SDocMapSnapshotParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      outDir: {
+        description: "Specify the directory path where to store your snapshots",
+        type: "String",
+        path: {
+          absolute: true,
+          tokens: true
+        },
+        default: import_s_sugar_config.default.get("docmap.snapshot.outDir")
+      }
+    };
+  }
 }
-export default SDocMapSnapshotParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY21hcFNuYXBzaG90UGFyYW1zSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0RvY21hcFNuYXBzaG90UGFyYW1zSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUMxRCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRDs7Ozs7Ozs7Ozs7Ozs7R0FjRztBQUNILE1BQU0sOEJBQStCLFNBQVEsWUFBWTtJQUNyRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLFdBQVcsRUFDUCwwREFBMEQ7Z0JBQzlELElBQUksRUFBRSxRQUFRO2dCQUNkLElBQUksRUFBRTtvQkFDRixRQUFRLEVBQUUsSUFBSTtvQkFDZCxNQUFNLEVBQUUsSUFBSTtpQkFDZjtnQkFDRCxPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyx3QkFBd0IsQ0FBQzthQUN4RDtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDRCxlQUFlLDhCQUE4QixDQUFDIn0=
+var SDocmapSnapshotParamsInterface_default = SDocMapSnapshotParamsInterface;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

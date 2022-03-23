@@ -1,33 +1,31 @@
-/**
- * @name          mapToObject
- * @namespace            js.map
- * @type          Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function simply take a Map object and convert it to a plain object
- *
- * @param       {Map}         map       The map object to convert into object
- * @return      {Object}                The plain object
- *
- * @example       js
- * import mapToObject from '@coffeekraken/sugar/js/map/mapToObject';
- * const myMap = new Map();
- * myMap.set('hello', 'world');
- * mapToObject(myMap);
- * // {
- * //   hello: 'world'
- * // }
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var mapToObject_exports = {};
+__export(mapToObject_exports, {
+  default: () => mapToObject_default
+});
+module.exports = __toCommonJS(mapToObject_exports);
 function mapToObject(map) {
-    const obj = {};
-    for (const [k, v] of map)
-        obj[k] = v;
-    return obj;
+  const obj = {};
+  for (const [k, v] of map)
+    obj[k] = v;
+  return obj;
 }
-export default mapToObject;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwVG9PYmplY3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJtYXBUb09iamVjdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxXQUFXLENBQUMsR0FBUTtJQUN6QixNQUFNLEdBQUcsR0FBRyxFQUFFLENBQUM7SUFDZixLQUFLLE1BQU0sQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLElBQUksR0FBRztRQUFFLEdBQUcsQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDckMsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBQ0QsZUFBZSxXQUFXLENBQUMifQ==
+var mapToObject_default = mapToObject;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

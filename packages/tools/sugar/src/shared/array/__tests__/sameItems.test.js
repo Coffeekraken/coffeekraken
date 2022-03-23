@@ -1,51 +1,65 @@
-import __sameItems from '../sameItems';
-describe('@coffeekraken.sugar.shared.array.sameItems', () => {
-    it('Should extract same items in simple number array', () => {
-        const res = __sameItems([1, 2, 3, 4, 5, 6], [1, 3, 5, 7]);
-        expect(res).toEqual([1, 3, 5]);
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_sameItems = __toESM(require("../sameItems"), 1);
+describe("@coffeekraken.sugar.shared.array.sameItems", () => {
+  it("Should extract same items in simple number array", () => {
+    const res = (0, import_sameItems.default)([1, 2, 3, 4, 5, 6], [1, 3, 5, 7]);
+    expect(res).toEqual([1, 3, 5]);
+  });
+  it("Should extract same items in simple string array", () => {
+    const res = (0, import_sameItems.default)(["hello", "world", "plop", "coco"], ["world", "coco"]);
+    expect(res).toEqual(["world", "coco"]);
+  });
+  it("Should extract same items in array of objects", () => {
+    const res = (0, import_sameItems.default)([{
+      hello: "world"
+    }, {
+      plop: "world"
+    }, {
+      coco: "world"
+    }], [{
+      hello1: "world"
+    }, {
+      plop: "world"
+    }, {
+      something: "wrong"
+    }]);
+    expect(res).toEqual([{
+      plop: "world"
+    }]);
+  });
+  it("Should extract same items in more that 2 arrays in simple number array", () => {
+    const res = (0, import_sameItems.default)([1, 2, 3, 4, 5, 6], [1, 3, 5, 7], [1, 5, 6]);
+    expect(res).toEqual([1, 5]);
+  });
+  it("Should extract same items in array of objects and hashes disabled", () => {
+    const plopObj = {
+      plop: "world"
+    };
+    const res = (0, import_sameItems.default)([{
+      hello: "world"
+    }, plopObj, {
+      coco: "world"
+    }], [{
+      hello1: "world"
+    }, plopObj, {
+      something: "wrong"
+    }], {
+      hash: false
     });
-    it('Should extract same items in simple string array', () => {
-        const res = __sameItems(['hello', 'world', 'plop', 'coco'], ['world', 'coco']);
-        expect(res).toEqual(['world', 'coco']);
-    });
-    it('Should extract same items in array of objects', () => {
-        const res = __sameItems([{
-                hello: 'world'
-            }, {
-                plop: 'world'
-            }, {
-                coco: 'world'
-            }], [{
-                hello1: 'world'
-            }, {
-                plop: 'world'
-            }, {
-                something: 'wrong'
-            }]);
-        expect(res).toEqual([{
-                plop: 'world'
-            }]);
-    });
-    it('Should extract same items in more that 2 arrays in simple number array', () => {
-        const res = __sameItems([1, 2, 3, 4, 5, 6], [1, 3, 5, 7], [1, 5, 6]);
-        expect(res).toEqual([1, 5]);
-    });
-    it('Should extract same items in array of objects and hashes disabled', () => {
-        const plopObj = {
-            plop: 'world'
-        };
-        const res = __sameItems([{
-                hello: 'world'
-            }, plopObj, {
-                coco: 'world'
-            }], [{
-                hello1: 'world'
-            }, plopObj, {
-                something: 'wrong'
-            }], {
-            hash: false
-        });
-        expect(res).toEqual([plopObj]);
-    });
+    expect(res).toEqual([plopObj]);
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2FtZUl0ZW1zLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzYW1lSXRlbXMudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSxjQUFjLENBQUM7QUFFdkMsUUFBUSxDQUFDLDRDQUE0QyxFQUFFLEdBQUcsRUFBRTtJQUV4RCxFQUFFLENBQUMsa0RBQWtELEVBQUUsR0FBRyxFQUFFO1FBQ3hELE1BQU0sR0FBRyxHQUFHLFdBQVcsQ0FDbkIsQ0FBQyxDQUFDLEVBQUMsQ0FBQyxFQUFDLENBQUMsRUFBQyxDQUFDLEVBQUMsQ0FBQyxFQUFDLENBQUMsQ0FBQyxFQUNiLENBQUMsQ0FBQyxFQUFDLENBQUMsRUFBQyxDQUFDLEVBQUMsQ0FBQyxDQUFDLENBQ1osQ0FBQztRQUNGLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUMsQ0FBQyxFQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDakMsQ0FBQyxDQUFDLENBQUM7SUFFSCxFQUFFLENBQUMsa0RBQWtELEVBQUUsR0FBRyxFQUFFO1FBQ3hELE1BQU0sR0FBRyxHQUFHLFdBQVcsQ0FDbkIsQ0FBQyxPQUFPLEVBQUMsT0FBTyxFQUFDLE1BQU0sRUFBQyxNQUFNLENBQUMsRUFDL0IsQ0FBQyxPQUFPLEVBQUMsTUFBTSxDQUFDLENBQ25CLENBQUM7UUFDRixNQUFNLENBQUMsR0FBRyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUM7SUFDMUMsQ0FBQyxDQUFDLENBQUM7SUFFSCxFQUFFLENBQUMsK0NBQStDLEVBQUUsR0FBRyxFQUFFO1FBQ3JELE1BQU0sR0FBRyxHQUFHLFdBQVcsQ0FDbkIsQ0FBQztnQkFDRyxLQUFLLEVBQUUsT0FBTzthQUNqQixFQUFFO2dCQUNDLElBQUksRUFBRSxPQUFPO2FBQ2hCLEVBQUM7Z0JBQ0UsSUFBSSxFQUFFLE9BQU87YUFDaEIsQ0FBQyxFQUNGLENBQUM7Z0JBQ0csTUFBTSxFQUFFLE9BQU87YUFDbEIsRUFBRTtnQkFDQyxJQUFJLEVBQUUsT0FBTzthQUNoQixFQUFFO2dCQUNDLFNBQVMsRUFBRSxPQUFPO2FBQ3JCLENBQUMsQ0FDTCxDQUFDO1FBQ0YsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDO2dCQUNqQixJQUFJLEVBQUUsT0FBTzthQUNoQixDQUFDLENBQUMsQ0FBQztJQUNSLENBQUMsQ0FBQyxDQUFDO0lBRUgsRUFBRSxDQUFDLHdFQUF3RSxFQUFFLEdBQUcsRUFBRTtRQUM5RSxNQUFNLEdBQUcsR0FBRyxXQUFXLENBQ25CLENBQUMsQ0FBQyxFQUFDLENBQUMsRUFBQyxDQUFDLEVBQUMsQ0FBQyxFQUFDLENBQUMsRUFBQyxDQUFDLENBQUMsRUFDYixDQUFDLENBQUMsRUFBQyxDQUFDLEVBQUMsQ0FBQyxFQUFDLENBQUMsQ0FBQyxFQUNULENBQUMsQ0FBQyxFQUFDLENBQUMsRUFBQyxDQUFDLENBQUMsQ0FDVixDQUFDO1FBQ0YsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsRUFBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQy9CLENBQUMsQ0FBQyxDQUFDO0lBRUgsRUFBRSxDQUFDLG1FQUFtRSxFQUFFLEdBQUcsRUFBRTtRQUV6RSxNQUFNLE9BQU8sR0FBRztZQUNSLElBQUksRUFBRSxPQUFPO1NBQ2hCLENBQUM7UUFFTixNQUFNLEdBQUcsR0FBRyxXQUFXLENBQ25CLENBQUM7Z0JBQ0csS0FBSyxFQUFFLE9BQU87YUFDakIsRUFBRSxPQUFPLEVBQUU7Z0JBQ1IsSUFBSSxFQUFFLE9BQU87YUFDaEIsQ0FBQyxFQUNGLENBQUM7Z0JBQ0csTUFBTSxFQUFFLE9BQU87YUFDbEIsRUFBRSxPQUFPLEVBQUU7Z0JBQ1IsU0FBUyxFQUFFLE9BQU87YUFDckIsQ0FBQyxFQUFFO1lBQ0EsSUFBSSxFQUFFLEtBQUs7U0FDZCxDQUNKLENBQUM7UUFDRixNQUFNLENBQUMsR0FBRyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQztJQUNuQyxDQUFDLENBQUMsQ0FBQztBQUVQLENBQUMsQ0FBQyxDQUFDIn0=

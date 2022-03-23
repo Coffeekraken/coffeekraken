@@ -1,6 +1,21 @@
-import __replaceTags from '../replaceTags';
-describe('sugar.shared.html.replaceTags', () => {
-    const html = `
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_replaceTags = __toESM(require("../replaceTags"), 1);
+describe("sugar.shared.html.replaceTags", () => {
+  const html = `
   <div>
     <bold>Hello world</bold>
     <h1>
@@ -8,19 +23,18 @@ describe('sugar.shared.html.replaceTags', () => {
     </h1>
   </div>
 `;
-    const res = __replaceTags(html, {
-        bold: (tag, content) => `<yop>${content}</yop>`,
-        h1: (tag, content) => content,
-    });
-    it('Should have replace the tags correctly', () => {
-        expect(res.replace(/\s/g, '')).toBe(`
+  const res = (0, import_replaceTags.default)(html, {
+    bold: (tag, content) => `<yop>${content}</yop>`,
+    h1: (tag, content) => content
+  });
+  it("Should have replace the tags correctly", () => {
+    expect(res.replace(/\s/g, "")).toBe(`
 <div>
 <yop>Hello world</yop>
 
   How are you?
 
 </div>
-`.replace(/\s/g, ''));
-    });
+`.replace(/\s/g, ""));
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVwbGFjZVRhZ3MudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlcGxhY2VUYWdzLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sZ0JBQWdCLENBQUM7QUFFM0MsUUFBUSxDQUFDLCtCQUErQixFQUFFLEdBQUcsRUFBRTtJQUMzQyxNQUFNLElBQUksR0FBRzs7Ozs7OztDQU9oQixDQUFDO0lBRUUsTUFBTSxHQUFHLEdBQUcsYUFBYSxDQUFDLElBQUksRUFBRTtRQUM1QixJQUFJLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxRQUFRLE9BQU8sUUFBUTtRQUMvQyxFQUFFLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxPQUFPO0tBQ2hDLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQyx3Q0FBd0MsRUFBRSxHQUFHLEVBQUU7UUFDOUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUMvQjs7Ozs7OztDQU9YLENBQUMsT0FBTyxDQUFDLEtBQUssRUFBRSxFQUFFLENBQUMsQ0FDWCxDQUFDO0lBQ04sQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDLENBQUMsQ0FBQyJ9

@@ -1,28 +1,32 @@
-// @ts-nocheck
-import __fs from 'fs-extra';
-/**
- * @name        ensureFileSync
- * @namespace            node.fs
- * @type          Function
- * @platform        node
- * @status          beta
- *
- * Ensure that the passed file exists. If not, will be created... (async)
- *
- * @param       {String}              file           The file to ensure that it exists...
- *
- * @example       js
- * import ensureFileSync from '@coffeekraken/node/fs/ensureFileSync';
- * try {
- *    ensureFileSync('my/cool/file.jpg');
- * } catch(e) {}
- *
- * @see             https://github.com/jprichardson/node-fs-extra
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var ensureFileSync_exports = {};
+__export(ensureFileSync_exports, {
+  default: () => ensureFileSync_default
+});
+module.exports = __toCommonJS(ensureFileSync_exports);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function ensureFileSync(file) {
-    __fs.ensureFileSync(file);
+  import_fs_extra.default.ensureFileSync(file);
 }
-export default ensureFileSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlRmlsZVN5bmMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlbnN1cmVGaWxlU3luYy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxJQUFJLE1BQU0sVUFBVSxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQVMsY0FBYyxDQUFDLElBQUk7SUFDeEIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUM5QixDQUFDO0FBQ0QsZUFBZSxjQUFjLENBQUMifQ==
+var ensureFileSync_default = ensureFileSync;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

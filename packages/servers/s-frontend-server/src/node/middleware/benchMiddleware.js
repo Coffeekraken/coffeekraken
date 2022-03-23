@@ -1,46 +1,44 @@
-// @ts-nocheck
-import __SBench from '@coffeekraken/s-bench';
-import __SPromise from '@coffeekraken/s-promise';
-/**
- * @name            benchEndMiddleware
- * @namespace       sugar.node.server.frontend.middleware
- * @type            Function
- * @status              beta
- *
- * SMall middleware to end the request benchmark
- *
- * @param           {Object}            req             The request made on the express server
- * @param           {Object}            res             The response object of the express server
- * @param           {Function}          next            The next function to call when the middleware has finished his job
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import express from 'express';
- * import benchEndMiddleware from '@coffeekraken/sugar/server/frontend/middleware/benchEndMiddleware';
- * const server = express();
- * server.use(benchEndMiddleware);
- * server.listen(3000);
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var benchMiddleware_exports = {};
+__export(benchMiddleware_exports, {
+  default: () => benchMiddleware_default
+});
+module.exports = __toCommonJS(benchMiddleware_exports);
+var import_s_bench = __toESM(require("@coffeekraken/s-bench"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function benchEndMiddleware(settings = {}) {
-    return function (req, res, next) {
-        return new __SPromise(({ resolve, reject, pipe }) => {
-            // console.log('___ST');
-            __SBench.start('request');
-            function afterResponse() {
-                __SBench.end('request', {}).log();
-            }
-            res.on('finish', afterResponse);
-            setTimeout(() => {
-                next();
-            }, 100);
-        });
-    };
+  return function(req, res, next) {
+    return new import_s_promise.default(({ resolve, reject, pipe }) => {
+      import_s_bench.default.start("request");
+      function afterResponse() {
+        import_s_bench.default.end("request", {}).log();
+      }
+      res.on("finish", afterResponse);
+      setTimeout(() => {
+        next();
+      }, 100);
+    });
+  };
 }
-export default benchEndMiddleware;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmVuY2hNaWRkbGV3YXJlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmVuY2hNaWRkbGV3YXJlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUM3QyxPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQVMsa0JBQWtCLENBQUMsUUFBUSxHQUFHLEVBQUU7SUFDckMsT0FBTyxVQUFVLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSTtRQUMzQixPQUFPLElBQUksVUFBVSxDQUFDLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7WUFDaEQsd0JBQXdCO1lBQ3hCLFFBQVEsQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLENBQUM7WUFFMUIsU0FBUyxhQUFhO2dCQUNsQixRQUFRLENBQUMsR0FBRyxDQUFDLFNBQVMsRUFBRSxFQUFFLENBQUMsQ0FBQyxHQUFHLEVBQUUsQ0FBQztZQUN0QyxDQUFDO1lBRUQsR0FBRyxDQUFDLEVBQUUsQ0FBQyxRQUFRLEVBQUUsYUFBYSxDQUFDLENBQUM7WUFFaEMsVUFBVSxDQUFDLEdBQUcsRUFBRTtnQkFDWixJQUFJLEVBQUUsQ0FBQztZQUNYLENBQUMsRUFBRSxHQUFHLENBQUMsQ0FBQztRQUNaLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFDO0FBQ04sQ0FBQztBQUNELGVBQWUsa0JBQWtCLENBQUMifQ==
+var benchMiddleware_default = benchEndMiddleware;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

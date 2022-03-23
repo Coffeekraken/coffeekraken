@@ -1,52 +1,44 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import __SPromise from '@coffeekraken/s-promise';
-import __deepMap from '../../shared/object/deepMap';
-import __dependencyTree from './dependencyTree';
-/**
- * @name                dependencyList
- * @namespace            node.module
- * @type                Function
- * @async
- * @platform        node
- * @status          beta
- *
- * This function make use of the ```dependencyTree``` one and returns the result into a simple array of file pathes
- *
- * @param       {String}                    filePath                The absolute file path you want to get the dependency tree from
- * @param       {IDependencyTreeExtendedSettings}       [settings={}]       Some settings (like all the dependency-tree supported ones (excluding filename and directory)), and some additional like caching.
- * @return      {SPromise}                               An SPromise instance through which you can get logs, and that will be resolved once the process is over
- *
- * @example         js
- * import dependencyList from '@coffeekraken/sugar/node/module/dependencyList';
- * await dependencyList('/something/cool.js', {
- *      cache: true,
- *      // etc...
- * });
- *
- * @see             https://www.npmjs.com/package/dependency-tree
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function dependencyList(filePath, settings) {
-    return new __SPromise(({ resolve, pipe }) => __awaiter(this, void 0, void 0, function* () {
-        const tree = yield pipe(__dependencyTree(filePath, settings));
-        const list = [];
-        __deepMap(tree, ({ prop, value }) => {
-            if (list.indexOf(prop) === -1)
-                list.push(prop);
-            return value;
-        }, {
-            processObjects: true,
-        });
-        resolve(list);
-    }));
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var dependencyList_exports = {};
+__export(dependencyList_exports, {
+  default: () => dependencyList
+});
+module.exports = __toCommonJS(dependencyList_exports);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_deepMap = __toESM(require("../../shared/object/deepMap"), 1);
+var import_dependencyTree = __toESM(require("./dependencyTree"), 1);
+function dependencyList(filePath, settings) {
+  return new import_s_promise.default(async ({ resolve, pipe }) => {
+    const tree = await pipe((0, import_dependencyTree.default)(filePath, settings));
+    const list = [];
+    (0, import_deepMap.default)(tree, ({ prop, value }) => {
+      if (list.indexOf(prop) === -1)
+        list.push(prop);
+      return value;
+    }, {
+      processObjects: true
+    });
+    resolve(list);
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVwZW5kZW5jeUxpc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkZXBlbmRlbmN5TGlzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUNqRCxPQUFPLFNBQVMsTUFBTSw2QkFBNkIsQ0FBQztBQUNwRCxPQUFPLGdCQUVOLE1BQU0sa0JBQWtCLENBQUM7QUFFMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILE1BQU0sQ0FBQyxPQUFPLFVBQVUsY0FBYyxDQUNsQyxRQUFnQixFQUNoQixRQUFtRDtJQUVuRCxPQUFPLElBQUksVUFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUM5QyxNQUFNLElBQUksR0FBRyxNQUFNLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLEVBQUUsUUFBUSxDQUFDLENBQUMsQ0FBQztRQUM5RCxNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7UUFDMUIsU0FBUyxDQUNMLElBQUksRUFDSixDQUFDLEVBQUUsSUFBSSxFQUFFLEtBQUssRUFBRSxFQUFFLEVBQUU7WUFDaEIsSUFBSSxJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQy9DLE9BQU8sS0FBSyxDQUFDO1FBQ2pCLENBQUMsRUFDRDtZQUNJLGNBQWMsRUFBRSxJQUFJO1NBQ3ZCLENBQ0osQ0FBQztRQUNGLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

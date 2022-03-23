@@ -1,24 +1,38 @@
-import __SBench from '../exports';
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
-describe('s-bench', () => {
-    it('Should handle a basic time benchmark correctly', (done) => {
-        const bench = new __SBench('testing');
-        bench.on('log', (log) => {
-            console.log(__parseHtml(log.value));
-        });
-        bench.start();
-        bench.step('compilation');
-        bench.end();
-        done();
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_exports = __toESM(require("../exports"), 1);
+var import_parseHtml = __toESM(require("@coffeekraken/sugar/shared/console/parseHtml"), 1);
+describe("s-bench", () => {
+  it("Should handle a basic time benchmark correctly", (done) => {
+    const bench = new import_exports.default("testing");
+    bench.on("log", (log) => {
+      console.log((0, import_parseHtml.default)(log.value));
     });
-    it('Should handle a basic time benchmark using static methods correctly', (done) => {
-        __SBench.start('testing').on('log', (log) => {
-            console.log(__parseHtml(log.value));
-        });
-        __SBench.start('testing');
-        __SBench.step('testing', 'compilation');
-        __SBench.end('testing');
-        done();
+    bench.start();
+    bench.step("compilation");
+    bench.end();
+    done();
+  });
+  it("Should handle a basic time benchmark using static methods correctly", (done) => {
+    import_exports.default.start("testing").on("log", (log) => {
+      console.log((0, import_parseHtml.default)(log.value));
     });
+    import_exports.default.start("testing");
+    import_exports.default.step("testing", "compilation");
+    import_exports.default.end("testing");
+    done();
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0JlbmNoLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQmVuY2gudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFFBQVEsTUFBTSxZQUFZLENBQUM7QUFDbEMsT0FBTyxXQUFXLE1BQU0sOENBQThDLENBQUM7QUFHdkUsUUFBUSxDQUFDLFNBQVMsRUFBRSxHQUFHLEVBQUU7SUFDckIsRUFBRSxDQUFDLGdEQUFnRCxFQUFFLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDMUQsTUFBTSxLQUFLLEdBQUcsSUFBSSxRQUFRLENBQUMsU0FBUyxDQUFDLENBQUM7UUFFdEMsS0FBSyxDQUFDLEVBQUUsQ0FBQyxLQUFLLEVBQUUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtZQUNwQixPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztRQUN4QyxDQUFDLENBQUMsQ0FBQztRQUVILEtBQUssQ0FBQyxLQUFLLEVBQUUsQ0FBQztRQUNkLEtBQUssQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUM7UUFDMUIsS0FBSyxDQUFDLEdBQUcsRUFBRSxDQUFDO1FBRVosSUFBSSxFQUFFLENBQUM7SUFDWCxDQUFDLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQyxxRUFBcUUsRUFBRSxDQUFDLElBQUksRUFBRSxFQUFFO1FBQy9FLFFBQVEsQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLENBQUMsRUFBRSxDQUFDLEtBQUssRUFBRSxDQUFDLEdBQUcsRUFBRSxFQUFFO1lBQ3hDLE9BQU8sQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO1FBQ3hDLENBQUMsQ0FBQyxDQUFDO1FBRUgsUUFBUSxDQUFDLEtBQUssQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUMxQixRQUFRLENBQUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxhQUFhLENBQUMsQ0FBQztRQUN4QyxRQUFRLENBQUMsR0FBRyxDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBRXhCLElBQUksRUFBRSxDQUFDO0lBQ1gsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDLENBQUMsQ0FBQyJ9

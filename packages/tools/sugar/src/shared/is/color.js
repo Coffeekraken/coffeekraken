@@ -1,45 +1,36 @@
-// @ts-nocheck
-/**
- * @name        isColor
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the passed value is a color
- *
- * @param 		{Mixed} 		value 		The value to check
- * @return 		{Boolean} 					The check result
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import isColor from '@coffeekraken/sugar/js/is/color';
- * isColor('red') => true
- * isColor('#fff') => true
- * isColor('hello') => false
- *
- * @see 		http://stackoverflow.com/questions/6386090/validating-css-color-names
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var color_exports = {};
+__export(color_exports, {
+  default: () => color_default
+});
+module.exports = __toCommonJS(color_exports);
 function isColor(value) {
-    try {
-        const ele = document.createElement('div');
-        ele.style.color = value;
-        return ele.style.color.split(/\s+/).join('').toLowerCase() !== '';
-    }
-    catch (e) { }
-    if (typeof value !== 'string')
-        return false;
-    return (value.match(/^#[a-zA-Z0-9]{3,6}$/) ||
-        value.match(/^rgba\([0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}\)$/) ||
-        value.match(/^rgb\([0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}\)$/) ||
-        value.match(/^hsl\([0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?\)$/) ||
-        value.match(/^hsv\([0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?\)$/));
+  try {
+    const ele = document.createElement("div");
+    ele.style.color = value;
+    return ele.style.color.split(/\s+/).join("").toLowerCase() !== "";
+  } catch (e) {
+  }
+  if (typeof value !== "string")
+    return false;
+  return value.match(/^#[a-zA-Z0-9]{3,6}$/) || value.match(/^rgba\([0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}\)$/) || value.match(/^rgb\([0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}\)$/) || value.match(/^hsl\([0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?\)$/) || value.match(/^hsv\([0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?\)$/);
 }
-export default isColor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29sb3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb2xvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxPQUFPLENBQUMsS0FBVTtJQUN2QixJQUFJO1FBQ0EsTUFBTSxHQUFHLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUMxQyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssR0FBRyxLQUFLLENBQUM7UUFDeEIsT0FBTyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDLFdBQVcsRUFBRSxLQUFLLEVBQUUsQ0FBQztLQUNyRTtJQUFDLE9BQU8sQ0FBQyxFQUFFLEdBQUU7SUFFZCxJQUFJLE9BQU8sS0FBSyxLQUFLLFFBQVE7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUU1QyxPQUFPLENBQ0gsS0FBSyxDQUFDLEtBQUssQ0FBQyxxQkFBcUIsQ0FBQztRQUNsQyxLQUFLLENBQUMsS0FBSyxDQUNQLDJGQUEyRixDQUM5RjtRQUNELEtBQUssQ0FBQyxLQUFLLENBQ1AsbUVBQW1FLENBQ3RFO1FBQ0QsS0FBSyxDQUFDLEtBQUssQ0FDUCwrRUFBK0UsQ0FDbEY7UUFDRCxLQUFLLENBQUMsS0FBSyxDQUNQLCtFQUErRSxDQUNsRixDQUNKLENBQUM7QUFDTixDQUFDO0FBQ0QsZUFBZSxPQUFPLENBQUMifQ==
+var color_default = isColor;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

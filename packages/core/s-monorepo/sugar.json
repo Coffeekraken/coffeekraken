@@ -1,0 +1,30 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./src/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "monorepo",
+            "description": "Mono repository related actions",
+            "defaultAction": "list",
+            "actions": {
+                "list": {
+                    "scope": "global",
+                    "description": "List all the repositories that compose the current mono repo",
+                    "interface": "./src/node/interface/SCliMonoListParamsInterface.js",
+                    "process": "./src/cli/list.cli.js"
+                },
+                "upgrade": {
+                    "scope": "global",
+                    "description": "Upgrade the repositories informations depending on the mono repo ones",
+                    "interface": "./src/node/interface/SCliMonoUpgradeParamsInterface.js",
+                    "process": "./src/cli/upgrade.cli.js"
+                }
+            }
+        }
+    ]
+}

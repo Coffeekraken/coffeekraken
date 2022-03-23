@@ -1,40 +1,31 @@
-// @ts-nocheck
-/**
- * @name        toQueryString
- * @namespace            js.object
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Transform an object (key => pairs) to a query string like "?var1=value1&var2"
- *
- * @param 		{Object} 		obj 		The object to serialize
- * @return 		{String} 					The query string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import toQueryString from '@coffeekraken/sugar/js/object/toQueryString'
- * console.log(toQueryString({
- * 	value1 : 'coco',
- * 	value1 : 'plop'
- * }));
- * // => ?value1=coco&value2=plop
- *
- * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var toQueryString_exports = {};
+__export(toQueryString_exports, {
+  default: () => toQueryString_default
+});
+module.exports = __toCommonJS(toQueryString_exports);
 function toQueryString(obj) {
-    return ('?' +
-        Object.keys(obj)
-            .reduce(function (a, k) {
-            a.push(k + '=' + encodeURIComponent(obj[k]));
-            return a;
-        }, [])
-            .join('&'));
+  return "?" + Object.keys(obj).reduce(function(a, k) {
+    a.push(k + "=" + encodeURIComponent(obj[k]));
+    return a;
+  }, []).join("&");
 }
-export default toQueryString;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9RdWVyeVN0cmluZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRvUXVlcnlTdHJpbmcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFDSCxTQUFTLGFBQWEsQ0FBQyxHQUFHO0lBQ3RCLE9BQU8sQ0FDSCxHQUFHO1FBQ0gsTUFBTSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUM7YUFDWCxNQUFNLENBQUMsVUFBVSxDQUFDLEVBQUUsQ0FBQztZQUNsQixDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsR0FBRyxHQUFHLEdBQUcsa0JBQWtCLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUM3QyxPQUFPLENBQUMsQ0FBQztRQUNiLENBQUMsRUFBRSxFQUFFLENBQUM7YUFDTCxJQUFJLENBQUMsR0FBRyxDQUFDLENBQ2pCLENBQUM7QUFDTixDQUFDO0FBQ0QsZUFBZSxhQUFhLENBQUMifQ==
+var toQueryString_default = toQueryString;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

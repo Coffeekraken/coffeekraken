@@ -1,30 +1,27 @@
-// @ts-nocheck
-/**
- * @name                                      isNode
- * @namespace            js.is
- * @type                                      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the current script is running under node runtime or not...
- *
- * @return                {Boolean}                           true if running under javascript runtime, false if not...
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example               js
- * import isNode from '@coffeekraken/sugar/js/is/node';
- * isNode(); // => true
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default () => {
-    return (typeof process !== 'undefined' &&
-        process.release &&
-        process.release.name === 'node');
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibm9kZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5vZGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsZUFBZSxHQUFHLEVBQUU7SUFDaEIsT0FBTyxDQUNILE9BQU8sT0FBTyxLQUFLLFdBQVc7UUFDOUIsT0FBTyxDQUFDLE9BQU87UUFDZixPQUFPLENBQUMsT0FBTyxDQUFDLElBQUksS0FBSyxNQUFNLENBQ2xDLENBQUM7QUFDTixDQUFDLENBQUMifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var node_exports = {};
+__export(node_exports, {
+  default: () => node_default
+});
+module.exports = __toCommonJS(node_exports);
+var node_default = () => {
+  return typeof process !== "undefined" && process.release && process.release.name === "node";
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

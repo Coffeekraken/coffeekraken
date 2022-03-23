@@ -14,11 +14,11 @@
         "*.css": "postcss"
     },
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": false
     },
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "SimonSiefke.prettier-vscode",
     "todo-tree.general.enableFileWatcher": true,
     "todo-tree.general.tags": [
         "@todo",
@@ -104,5 +104,8 @@
     },
     "[blade]": {
         "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "SimonSiefke.prettier-vscode"
     }
 }

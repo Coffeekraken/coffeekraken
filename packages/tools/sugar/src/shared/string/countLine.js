@@ -1,52 +1,48 @@
-// @ts-nocheck
-import __deepMerge from '../object/deepMerge';
-import __stripAnsi from 'strip-ansi';
-/**
- * @name                                  countLine
- * @namespace            js.string
- * @type                                  Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Count how many characters their is in the passed line.
- * This function will exclude the characters like the html tags like <red>, etc...
- *
- * @param           {String}              line              The line to count
- * @param           {Object}              [count={}]        Specify what you want to count outside of the normal characters of yourse. Here's the list of available options:
- * - htmlTags (false) {Boolean}: Specify if you want to count the html tags or not
- * - terminalSpecialChars (false) {Boolean}: Specify if you want to count the terminal specials chars like "\u001b[30m", etc...
- * - newLineChars (false) {Boolean}: Specify if you want to count the new line special char "\n" or not
- * @return          {Number}                                How many characters their is in the line
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import countLine from '@coffeekraken/sugar/js/string/countLine';
- * countLine('Hello <red>World</red>'); // 11
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var countLine_exports = {};
+__export(countLine_exports, {
+  default: () => countLine_default
+});
+module.exports = __toCommonJS(countLine_exports);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_strip_ansi = __toESM(require("strip-ansi"), 1);
 function countLine(line, count = {}) {
-    count = __deepMerge({
-        htmlTags: false,
-        terminalSpecialChars: false,
-        newLineChars: false,
-    }, count);
-    let newLine = line;
-    if (count.terminalSpecialChars === false) {
-        newLine = __stripAnsi(newLine);
-    }
-    if (count.htmlTags === false) {
-        newLine = newLine.replace(/<\/?[a-zA-Z0-9]+\s?\/?>/g, '');
-    }
-    if (count.newLineChars === false) {
-        newLine = newLine.replace('\n', '');
-    }
-    return newLine.length;
+  count = (0, import_deepMerge.default)({
+    htmlTags: false,
+    terminalSpecialChars: false,
+    newLineChars: false
+  }, count);
+  let newLine = line;
+  if (count.terminalSpecialChars === false) {
+    newLine = (0, import_strip_ansi.default)(newLine);
+  }
+  if (count.htmlTags === false) {
+    newLine = newLine.replace(/<\/?[a-zA-Z0-9]+\s?\/?>/g, "");
+  }
+  if (count.newLineChars === false) {
+    newLine = newLine.replace("\n", "");
+  }
+  return newLine.length;
 }
-export default countLine;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY291bnRMaW5lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY291bnRMaW5lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFdBQVcsTUFBTSxxQkFBcUIsQ0FBQztBQUM5QyxPQUFPLFdBQVcsTUFBTSxZQUFZLENBQUM7QUFFckM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E0Qkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxJQUFJLEVBQUUsS0FBSyxHQUFHLEVBQUU7SUFDL0IsS0FBSyxHQUFHLFdBQVcsQ0FDZjtRQUNJLFFBQVEsRUFBRSxLQUFLO1FBQ2Ysb0JBQW9CLEVBQUUsS0FBSztRQUMzQixZQUFZLEVBQUUsS0FBSztLQUN0QixFQUNELEtBQUssQ0FDUixDQUFDO0lBRUYsSUFBSSxPQUFPLEdBQUcsSUFBSSxDQUFDO0lBQ25CLElBQUksS0FBSyxDQUFDLG9CQUFvQixLQUFLLEtBQUssRUFBRTtRQUN0QyxPQUFPLEdBQUcsV0FBVyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0tBQ2xDO0lBQ0QsSUFBSSxLQUFLLENBQUMsUUFBUSxLQUFLLEtBQUssRUFBRTtRQUMxQixPQUFPLEdBQUcsT0FBTyxDQUFDLE9BQU8sQ0FBQywwQkFBMEIsRUFBRSxFQUFFLENBQUMsQ0FBQztLQUM3RDtJQUNELElBQUksS0FBSyxDQUFDLFlBQVksS0FBSyxLQUFLLEVBQUU7UUFDOUIsT0FBTyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUMsSUFBSSxFQUFFLEVBQUUsQ0FBQyxDQUFDO0tBQ3ZDO0lBRUQsT0FBTyxPQUFPLENBQUMsTUFBTSxDQUFDO0FBQzFCLENBQUM7QUFDRCxlQUFlLFNBQVMsQ0FBQyJ9
+var countLine_default = countLine;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

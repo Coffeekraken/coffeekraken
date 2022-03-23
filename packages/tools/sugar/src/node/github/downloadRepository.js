@@ -1,71 +1,99 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __fs from 'fs';
-import __https from 'https';
-import __tmpDir from '../path/systemTmpDir';
-import __unzip from '../zip/unzip';
-import __fsExtra from 'fs-extra';
-import __fileName from '../fs/filename';
-import __folderPath from '../fs/folderPath';
-export default function downloadRepository(repository, settings) {
-    return new Promise((resolve, reject) => {
-        settings = Object.assign({ dest: '', unzip: false, branch: 'master' }, (settings !== null && settings !== void 0 ? settings : {}));
-        if (!settings.dest) {
-            settings.dest = `${__tmpDir()}/downloads/${repository
-                .replace(/[\/\s]/gm, '-')
-                .toLowerCase()}-${settings.branch}.zip`;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var downloadRepository_exports = {};
+__export(downloadRepository_exports, {
+  default: () => downloadRepository
+});
+module.exports = __toCommonJS(downloadRepository_exports);
+var import_fs = __toESM(require("fs"), 1);
+var import_https = __toESM(require("https"), 1);
+var import_systemTmpDir = __toESM(require("../path/systemTmpDir"), 1);
+var import_unzip = __toESM(require("../zip/unzip"), 1);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
+var import_filename = __toESM(require("../fs/filename"), 1);
+var import_folderPath = __toESM(require("../fs/folderPath"), 1);
+function downloadRepository(repository, settings) {
+  return new Promise((resolve, reject) => {
+    settings = __spreadValues({
+      dest: "",
+      unzip: false,
+      branch: "master"
+    }, settings != null ? settings : {});
+    if (!settings.dest) {
+      settings.dest = `${(0, import_systemTmpDir.default)()}/downloads/${repository.replace(/[\/\s]/gm, "-").toLowerCase()}-${settings.branch}.zip`;
+    }
+    let dest = settings.dest;
+    if (!dest.match(/\.g?zip$/)) {
+      dest = `${dest}/${repository.replace(/[\/\s]/gm, "-").toLowerCase()}-${settings.branch}.zip`;
+    }
+    const folderName = (0, import_filename.default)(dest).replace(/\.g?zip$/, "");
+    import_fs_extra.default.ensureDir((0, import_folderPath.default)(dest));
+    const url = `https://codeload.github.com/${repository}/zip/${settings.branch}`;
+    const file = import_fs.default.createWriteStream(dest);
+    const request = import_https.default.get(url, function(response) {
+      response.pipe(file);
+      file.on("finish", async () => {
+        await file.close();
+        if (settings == null ? void 0 : settings.unzip) {
+          const newDest = dest.split("/").slice(0, -1).join("/");
+          const destFolderPath = dest.replace(/\.g?zip$/, "");
+          import_fs_extra.default.removeSync(destFolderPath);
+          await (0, import_unzip.default)(dest, {
+            dest: newDest
+          });
+          const files = import_fs.default.readdirSync(destFolderPath);
+          import_fs_extra.default.moveSync(`${destFolderPath}/${files[0]}`, `${newDest}/${files[0]}`, { overwrite: true });
+          import_fs_extra.default.removeSync(destFolderPath);
+          import_fs_extra.default.moveSync(`${newDest}/${files[0]}`, `${newDest}/${folderName}`);
+          import_fs_extra.default.removeSync(dest);
+          dest = `${newDest}/${folderName}`;
         }
-        let dest = settings.dest;
-        if (!dest.match(/\.g?zip$/)) {
-            dest = `${dest}/${repository
-                .replace(/[\/\s]/gm, '-')
-                .toLowerCase()}-${settings.branch}.zip`;
-        }
-        const folderName = __fileName(dest).replace(/\.g?zip$/, '');
-        __fsExtra.ensureDir(__folderPath(dest));
-        const url = `https://codeload.github.com/${repository}/zip/${settings.branch}`;
-        const file = __fs.createWriteStream(dest);
-        const request = __https
-            .get(url, function (response) {
-            response.pipe(file);
-            file.on('finish', () => __awaiter(this, void 0, void 0, function* () {
-                yield file.close(); // close() is async, call cb after close completes.
-                if (settings === null || settings === void 0 ? void 0 : settings.unzip) {
-                    const newDest = dest.split('/').slice(0, -1).join('/');
-                    const destFolderPath = dest.replace(/\.g?zip$/, '');
-                    __fsExtra.removeSync(destFolderPath);
-                    yield __unzip(dest, {
-                        dest: newDest,
-                    });
-                    const files = __fs.readdirSync(destFolderPath);
-                    __fsExtra.moveSync(`${destFolderPath}/${files[0]}`, `${newDest}/${files[0]}`, { overwrite: true });
-                    __fsExtra.removeSync(destFolderPath);
-                    __fsExtra.moveSync(`${newDest}/${files[0]}`, `${newDest}/${folderName}`);
-                    __fsExtra.removeSync(dest);
-                    dest = `${newDest}/${folderName}`;
-                }
-                resolve({
-                    dest,
-                });
-            }));
-        })
-            .on('error', (err) => __awaiter(this, void 0, void 0, function* () {
-            // Handle errors
-            try {
-                __fs.unlinkSync(settings === null || settings === void 0 ? void 0 : settings.dest); // Delete the file async. (But we don't check the result)
-            }
-            catch (e) { }
-            reject({
-                error: err,
-            });
-        }));
+        resolve({
+          dest
+        });
+      });
+    }).on("error", async (err) => {
+      try {
+        import_fs.default.unlinkSync(settings == null ? void 0 : settings.dest);
+      } catch (e) {
+      }
+      reject({
+        error: err
+      });
     });
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG93bmxvYWRSZXBvc2l0b3J5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZG93bmxvYWRSZXBvc2l0b3J5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUN0QixPQUFPLE9BQU8sTUFBTSxPQUFPLENBQUM7QUFDNUIsT0FBTyxRQUFRLE1BQU0sc0JBQXNCLENBQUM7QUFDNUMsT0FBTyxPQUFPLE1BQU0sY0FBYyxDQUFDO0FBQ25DLE9BQU8sU0FBUyxNQUFNLFVBQVUsQ0FBQztBQUNqQyxPQUFPLFVBQVUsTUFBTSxnQkFBZ0IsQ0FBQztBQUN4QyxPQUFPLFlBQVksTUFBTSxrQkFBa0IsQ0FBQztBQW1DNUMsTUFBTSxDQUFDLE9BQU8sVUFBVSxrQkFBa0IsQ0FDdEMsVUFBa0IsRUFDbEIsUUFBcUQ7SUFFckQsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUNuQyxRQUFRLG1CQUNKLElBQUksRUFBRSxFQUFFLEVBQ1IsS0FBSyxFQUFFLEtBQUssRUFDWixNQUFNLEVBQUUsUUFBUSxJQUNiLENBQUMsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQ3RCLENBQUM7UUFDRixJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksRUFBRTtZQUNoQixRQUFRLENBQUMsSUFBSSxHQUFHLEdBQUcsUUFBUSxFQUFFLGNBQWMsVUFBVTtpQkFDaEQsT0FBTyxDQUFDLFVBQVUsRUFBRSxHQUFHLENBQUM7aUJBQ3hCLFdBQVcsRUFBRSxJQUFJLFFBQVEsQ0FBQyxNQUFNLE1BQU0sQ0FBQztTQUMvQztRQUVELElBQUksSUFBSSxHQUFXLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFDakMsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLEVBQUU7WUFDekIsSUFBSSxHQUFHLEdBQUcsSUFBSSxJQUFJLFVBQVU7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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

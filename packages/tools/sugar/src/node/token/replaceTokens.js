@@ -1,29 +1,34 @@
-import __replacePathTokens from '../path/replacePathTokens';
-import __replacePackageJsonTokens from '../package/replacePackageJsonTokens';
-/**
- * @name            replaceTokens
- * @namespace       node.tokens
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * This function take as input a string and replace some tokens using these functions:
- * - replacePathTokens: Replace path tokens like %packageRootDir, %distJsDir, etc...
- * - replacePackageJsonTokens: Replace tokens like %packageJson.name, %packageJson.version, etc... with package.json values
- *
- * @param       {String}            string          The string you want to process
- * @return      {String}                            The processed string
- *
- * @example         js
- * import replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
- * replaceTokens('Hello %packageJson.name, hope you are doing well (%packageRootDir)');
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function replaceTokens(string) {
-    string = __replacePathTokens(string);
-    string = __replacePackageJsonTokens(string);
-    return string;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var replaceTokens_exports = {};
+__export(replaceTokens_exports, {
+  default: () => replaceTokens
+});
+module.exports = __toCommonJS(replaceTokens_exports);
+var import_replacePathTokens = __toESM(require("../path/replacePathTokens"), 1);
+var import_replacePackageJsonTokens = __toESM(require("../package/replacePackageJsonTokens"), 1);
+function replaceTokens(string) {
+  string = (0, import_replacePathTokens.default)(string);
+  string = (0, import_replacePackageJsonTokens.default)(string);
+  return string;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVwbGFjZVRva2Vucy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlcGxhY2VUb2tlbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxtQkFBbUIsTUFBTSwyQkFBMkIsQ0FBQztBQUM1RCxPQUFPLDBCQUEwQixNQUFNLHFDQUFxQyxDQUFDO0FBRTdFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsYUFBYSxDQUFDLE1BQWM7SUFDaEQsTUFBTSxHQUFXLG1CQUFtQixDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQzdDLE1BQU0sR0FBRywwQkFBMEIsQ0FBQyxNQUFNLENBQUMsQ0FBQztJQUM1QyxPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

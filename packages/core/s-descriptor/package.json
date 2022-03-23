@@ -1,17 +1,17 @@
 {
-  "name": "@coffeekraken/s-descriptor",
-  "version": "2.0.0",
-  "description": "",
-  "type": "module",
-  "main": "./src/node/exports.js",
-  "browser": "./src/js/exports.js",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/sugar": "^2.0.0",
-    "@coffeekraken/s-class": "^2.0.0",
-    "@coffeekraken/s-glob": "^2.0.0"
-  },
-  "devDependencies": {}
+    "name": "@coffeekraken/s-descriptor",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./src/node/exports.js",
+    "browser": "./src/js/exports.js",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-class": "^2.0.0",
+        "@coffeekraken/s-glob": "^2.0.0"
+    },
+    "devDependencies": {}
 }

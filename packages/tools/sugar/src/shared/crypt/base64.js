@@ -1,57 +1,42 @@
-// @ts-nocheck
-import toString from '../string/toString';
-import parse from '../string/parse';
-import __btoa from 'btoa';
-import __atob from 'atob';
-/**
- * @name            base64
- * @namespace            js.crypt
- * @type            Object
- * @platform          js
- * @platform          node
- * @status              beta
- *
- * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the base64 algorithm
- *
- * @todo        interface
- * @todo        doc
- *
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default {
-    /**
-     * @name        encrypt
-     * @type        Function
-     *
-     * Encrypt
-     *
-     * @param       {String}       message        The message to encrypt
-     * @return      {String}                       The encrypted message
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    encrypt: function (message) {
-        if (typeof message !== 'string')
-            message = toString(message);
-        return __btoa(message);
-    },
-    /**
-     * @name        decrypt
-     * @type        Function
-     *
-     * Decrypt
-     *
-     * @param       {String}      message         The message to decrypt
-     * @return      {String}                      The decrypted message
-     *
-     * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    decrypt: function (message) {
-        message = __atob(message);
-        return parse(message);
-    },
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzZTY0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmFzZTY0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFHZCxPQUFPLFFBQVEsTUFBTSxvQkFBb0IsQ0FBQztBQUMxQyxPQUFPLEtBQUssTUFBTSxpQkFBaUIsQ0FBQztBQUNwQyxPQUFPLE1BQU0sTUFBTSxNQUFNLENBQUM7QUFDMUIsT0FBTyxNQUFNLE1BQU0sTUFBTSxDQUFDO0FBRTFCOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILGVBQWU7SUFDWDs7Ozs7Ozs7Ozs7T0FXRztJQUNILE9BQU8sRUFBRSxVQUFVLE9BQU87UUFDdEIsSUFBSSxPQUFPLE9BQU8sS0FBSyxRQUFRO1lBQUUsT0FBTyxHQUFHLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUM3RCxPQUFPLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUMzQixDQUFDO0lBRUQ7Ozs7Ozs7Ozs7O09BV0c7SUFDSCxPQUFPLEVBQUUsVUFBVSxPQUFPO1FBQ3RCLE9BQU8sR0FBRyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDMUIsT0FBTyxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUM7SUFDMUIsQ0FBQztDQUNKLENBQUMifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var base64_exports = {};
+__export(base64_exports, {
+  default: () => base64_default
+});
+module.exports = __toCommonJS(base64_exports);
+var import_toString = __toESM(require("../string/toString"), 1);
+var import_parse = __toESM(require("../string/parse"), 1);
+var import_btoa = __toESM(require("btoa"), 1);
+var import_atob = __toESM(require("atob"), 1);
+var base64_default = {
+  encrypt: function(message) {
+    if (typeof message !== "string")
+      message = (0, import_toString.default)(message);
+    return (0, import_btoa.default)(message);
+  },
+  decrypt: function(message) {
+    message = (0, import_atob.default)(message);
+    return (0, import_parse.default)(message);
+  }
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

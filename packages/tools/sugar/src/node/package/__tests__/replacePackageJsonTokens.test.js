@@ -1,7 +1,22 @@
-import __replacePackageJsonTokens from '../replacePackageJsonTokens';
-describe('@coffeekraken.sugar.node.meta.replacePackageJsonTokens', () => {
-    it('Should replace tokens correctly', () => {
-        const res = __replacePackageJsonTokens(`
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_replacePackageJsonTokens = __toESM(require("../replacePackageJsonTokens"), 1);
+describe("@coffeekraken.sugar.node.meta.replacePackageJsonTokens", () => {
+  it("Should replace tokens correctly", () => {
+    const res = (0, import_replacePackageJsonTokens.default)(`
             Hello %packageJson.name
 
             Hope you are doing well...
@@ -10,7 +25,6 @@ describe('@coffeekraken.sugar.node.meta.replacePackageJsonTokens', () => {
             Best regards
             %packageJson.author (%packageJson.version)
         `);
-        expect(res.match(/%packageJson\./gm)).toBe(null);
-    });
+    expect(res.match(/%packageJson\./gm)).toBe(null);
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVwbGFjZVBhY2thZ2VKc29uVG9rZW5zLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZXBsYWNlUGFja2FnZUpzb25Ub2tlbnMudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLDBCQUEwQixNQUFNLDZCQUE2QixDQUFDO0FBRXJFLFFBQVEsQ0FBQyx3REFBd0QsRUFBRSxHQUFHLEVBQUU7SUFFcEUsRUFBRSxDQUFDLGlDQUFpQyxFQUFFLEdBQUcsRUFBRTtRQUV2QyxNQUFNLEdBQUcsR0FBRywwQkFBMEIsQ0FBQzs7Ozs7Ozs7U0FRdEMsQ0FBQyxDQUFDO1FBRUgsTUFBTSxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsa0JBQWtCLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUVyRCxDQUFDLENBQUMsQ0FBQztBQUVQLENBQUMsQ0FBQyxDQUFDIn0=

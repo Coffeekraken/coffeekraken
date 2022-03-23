@@ -1,82 +1,126 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import * as __fa from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-class postcssSugarPluginIconFaInterface extends __SInterface {
-    static get _definition() {
-        return {
-            icon: {
-                type: 'String',
-                required: true,
-            },
-            style: {
-                type: 'String',
-                values: ['solid', 'regular', 'light', 'duotone', 'brands'],
-                default: 'solid',
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var fa_exports = {};
+__export(fa_exports, {
+  default: () => fa_default,
+  interface: () => postcssSugarPluginIconFaInterface
+});
+module.exports = __toCommonJS(fa_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_parseHtml = __toESM(require("@coffeekraken/sugar/shared/console/parseHtml"));
+var import_upperFirst = __toESM(require("@coffeekraken/sugar/shared/string/upperFirst"));
+var __fa = __toESM(require("@fortawesome/fontawesome-svg-core"));
+var import_free_brands_svg_icons = require("@fortawesome/free-brands-svg-icons");
+var import_free_solid_svg_icons = require("@fortawesome/free-solid-svg-icons");
+class postcssSugarPluginIconFaInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      icon: {
+        type: "String",
+        required: true
+      },
+      style: {
+        type: "String",
+        values: ["solid", "regular", "light", "duotone", "brands"],
+        default: "solid"
+      }
+    };
+  }
 }
-export { postcssSugarPluginIconFaInterface as interface };
 let _isFaInitialised = false;
-export default function ({ params, atRule, replaceWith, }) {
-    var _a;
-    const finalParams = Object.assign({ icon: '', style: 'solid' }, params);
-    if (finalParams.style === 'fa')
-        finalParams.style = 'fas';
-    const prefixes = {
-        solid: 'fas',
-        regular: 'far',
-        light: 'fal',
-        duotone: 'fad',
-        brand: 'fab',
-    };
-    const fontNames = {
-        fas: 'Free',
-        far: 'Free',
-        fal: 'Free',
-        fad: 'Free',
-        fab: 'Brands',
-    };
-    // register icons if first call
-    if (!_isFaInitialised) {
-        __fa.library.add(fas, fab);
-        atRule.root().append(`
-      @import url('${__SSugarConfig.get('icons.fontawesome.url')}');
+function fa_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  var _a;
+  const finalParams = __spreadValues({
+    icon: "",
+    style: "solid"
+  }, params);
+  if (finalParams.style === "fa")
+    finalParams.style = "fas";
+  const prefixes = {
+    solid: "fas",
+    regular: "far",
+    light: "fal",
+    duotone: "fad",
+    brand: "fab"
+  };
+  const fontNames = {
+    fas: "Free",
+    far: "Free",
+    fal: "Free",
+    fad: "Free",
+    fab: "Brands"
+  };
+  if (!_isFaInitialised) {
+    __fa.library.add(import_free_solid_svg_icons.fas, import_free_brands_svg_icons.fab);
+    atRule.root().append(`
+      @import url('${import_s_sugar_config.default.get("icons.fontawesome.url")}');
     `);
-        _isFaInitialised = true;
-    }
-    const prefix = (_a = prefixes[finalParams.style]) !== null && _a !== void 0 ? _a : finalParams.style;
-    const iconDef = __fa.findIconDefinition({
-        prefix,
-        // @ts-ignore
-        iconName: finalParams.icon,
-    });
-    if (!iconDef) {
-        console.log(__parseHtml(`<red>!!!</red> It seems that you don't have access to the icon "<yellow>${finalParams.icon}</<yellow>"...`));
-        return;
-    }
-    if (finalParams.style === 'solid' || finalParams.style === 'fas')
-        finalParams.style = 'free';
-    const vars = [];
-    const fontWeight = {
-        fas: 900,
-        far: 400,
-        fal: 300,
-        fad: 900,
-        fab: 400,
-    };
-    vars.push(`
+    _isFaInitialised = true;
+  }
+  const prefix = (_a = prefixes[finalParams.style]) != null ? _a : finalParams.style;
+  const iconDef = __fa.findIconDefinition({
+    prefix,
+    iconName: finalParams.icon
+  });
+  if (!iconDef) {
+    console.log((0, import_parseHtml.default)(`<red>!!!</red> It seems that you don't have access to the icon "<yellow>${finalParams.icon}</<yellow>"...`));
+    return;
+  }
+  if (finalParams.style === "solid" || finalParams.style === "fas")
+    finalParams.style = "free";
+  const vars = [];
+  const fontWeight = {
+    fas: 900,
+    far: 400,
+    fal: 300,
+    fad: 900,
+    fab: 400
+  };
+  vars.push(`
     -webkit-font-smoothing: antialiased;
     display: inline-block;
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
-    font-family: "Font Awesome 5 ${__upperFirst(fontNames[prefix])}";
+    font-family: "Font Awesome 5 ${(0, import_upperFirst.default)(fontNames[prefix])}";
     font-weight: ${fontWeight[prefix]};
     
     &:before {
@@ -84,6 +128,9 @@ export default function ({ params, atRule, replaceWith, }) {
       display: inline-block;
     }
   `);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmEuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmYS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUMxRCxPQUFPLFdBQVcsTUFBTSw4Q0FBOEMsQ0FBQztBQUN2RSxPQUFPLFlBQVksTUFBTSw4Q0FBOEMsQ0FBQztBQUN4RSxPQUFPLEtBQUssSUFBSSxNQUFNLG1DQUFtQyxDQUFDO0FBQzFELE9BQU8sRUFBRSxHQUFHLEVBQUUsTUFBTSxvQ0FBb0MsQ0FBQztBQUN6RCxPQUFPLEVBQUUsR0FBRyxFQUFFLE1BQU0sbUNBQW1DLENBQUM7QUFFeEQsTUFBTSxpQ0FBa0MsU0FBUSxZQUFZO0lBQ3hELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7YUFDakI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFNBQVMsRUFBRSxPQUFPLEVBQUUsU0FBUyxFQUFFLFFBQVEsQ0FBQztnQkFDMUQsT0FBTyxFQUFFLE9BQU87YUFDbkI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBT0QsT0FBTyxFQUFFLGlDQUFpQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTFELElBQUksZ0JBQWdCLEdBQUcsS0FBSyxDQUFDO0FBRTdCLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7O0lBQ0csTUFBTSxXQUFXLG1CQUNiLElBQUksRUFBRSxFQUFFLEVBQ1IsS0FBSyxFQUFFLE9BQU8sSUFDWCxNQUFNLENBQ1osQ0FBQztJQUVGLElBQUksV0FBVyxDQUFDLEtBQUssS0FBSyxJQUFJO1FBQUUsV0FBVyxDQUFDLEtBQUssR0FBRyxLQUFLLENBQUM7SUFFMUQsTUFBTSxRQUFRLEdBQUc7UUFDYixLQUFLLEVBQUUsS0FBSztRQUNaLE9BQU8sRUFBRSxLQUFLO1FBQ2QsS0FBSyxFQUFFLEtBQUs7UUFDWixPQUFPLEVBQUUsS0FBSztRQUNkLEtBQUssRUFBRSxLQUFLO0tBQ2YsQ0FBQztJQUVGLE1BQU0sU0FBUyxHQUFHO1FBQ2QsR0FBRyxFQUFFLE1BQU07UUFDWCxHQUFHLEVBQUUsTUFBTTtRQUNYLEdBQUcsRUFBRSxNQUFNO1FBQ1gsR0FBRyxFQUFFLE1BQU07UUFDWCxHQUFHLEVBQUUsUUFBUTtLQUNoQixDQUFDO0lBRUYsK0JBQStCO0lBQy9CLElBQUksQ0FBQyxnQkFBZ0IsRUFBRTtRQUNuQixJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFDM0IsTUFBTSxDQUFDLElBQUksRUFBRSxDQUFDLE1BQU0sQ0FBQztxQkFDUixjQUFjLENBQUMsR0FBRyxDQUFDLHVCQUF1QixDQUFDO0tBQzNELENBQUMsQ0FBQztRQUNDLGdCQUFnQixHQUFHLElBQUksQ0FBQztLQUMzQjtJQUVELE1BQU0sTUFBTSxHQUFHLE1BQUEsUUFBUSxDQUFDLFdBQVcsQ0FBQyxLQUFLLENBQUMsbUNBQUksV0FBVyxDQUFDLEtBQUssQ0FBQztJQUVoRSxNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUMsa0JBQWtCLENBQUM7UUFDcEMsTUFBTTtRQUNOLGFBQWE7UUFDYixRQUFRLEVBQUUsV0FBVyxDQUFDLElBQUk7S0FDN0IsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLE9BQU8sRUFBRTtRQUNWLE9BQU8sQ0FBQyxHQUFHLENBQ1AsV0FBVyxDQUNQLDJFQUEyRSxXQUFXLENBQUMsSUFBSSxnQkFBZ0IsQ0FDOUcsQ0FDSixDQUFDO1FBQ0YsT0FBTztLQUNWO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxLQUFLLE9BQU8sSUFBSSxXQUFXLENBQUMsS0FBSyxLQUFLLEtBQUs7UUFDNUQsV0FBVyxDQUFDLEtBQUssR0FBRyxNQUFNLENBQUM7SUFFL0IsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE1BQU0sVUFBVSxHQUFHO1FBQ2YsR0FBRyxFQUFFLEdBQUc7UUFDUixHQUFHLEVBQUUsR0FBRztRQUNSLEdBQUcsRUFBRSxHQUFHO1FBQ1IsR0FBRyxFQUFFLEdBQUc7UUFDUixHQUFHLEVBQUUsR0FBRztLQUNYLENBQUM7SUFFRixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7O21DQU9xQixZQUFZLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxDQUFDO21CQUMvQyxVQUFVLENBQUMsTUFBTSxDQUFDOzs7b0JBR2pCLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDOzs7R0FHaEMsQ0FBQyxDQUFDO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

@@ -30,7 +30,8 @@ export default function (env, config) {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        description: 'Create easily a next.js app with coffeekraken tools support',
+        description:
+            'Create easily a next.js app with coffeekraken tools support',
         /**
          * @name            requirements
          * @namespace       config.frontstackRecipeNextJs
@@ -43,7 +44,7 @@ export default function (env, config) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         requirements: {
-            commands: ['[config.package.manager]']
+            commands: ['[config.package.manager]'],
         },
         /**
          * @name            defaultStack
@@ -84,7 +85,8 @@ export default function (env, config) {
                      */
                     createApp: __deepMerge(config.frontstack.actions.copy, {
                         title: 'Create the app',
-                        description: 'Create the app using the create-next-app utility',
+                        description:
+                            'Create the app using the create-next-app utility',
                         command: `npx create-next-app next-js --typescript`,
                         after() {
                             process.chdir(`${process.cwd()}/next-js`);
@@ -103,8 +105,7 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     rename: __deepMerge(config.frontstack.actions.rename, {
-                        params: {
-                        }
+                        params: {},
                     }),
                     /**
                      * @name            addSugarJson
@@ -116,11 +117,14 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    addSugarJson: __deepMerge(config.frontstack.actions.addSugarJson, {
-                        params: {
-                            recipe: 'nextJs'
-                        }
-                    }),
+                    addSugarJson: __deepMerge(
+                        config.frontstack.actions.addSugarJson,
+                        {
+                            params: {
+                                recipe: 'nextJs',
+                            },
+                        },
+                    ),
                     /**
                      * @name            addManifestJson
                      * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
@@ -131,9 +135,30 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    addManifestJson: __deepMerge(config.frontstack.actions.addManifestJson, {
-                        params: {}
-                    }),
+                    addManifestJson: __deepMerge(
+                        config.frontstack.actions.addManifestJson,
+                        {
+                            params: {},
+                        },
+                    ),
+
+                    /**
+                     * @name            addSugarPostcss
+                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addSugarPostcss action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addSugarPostcss: __deepMerge(
+                        config.frontstack.actions.addSugarPostcss,
+                        {
+                            params: {},
+                        },
+                    ),
+
                     // /**
                     //  * @name            installDependencies
                     //  * @namespace       config.frontstackRecipeNextJs.stacks.new.actions

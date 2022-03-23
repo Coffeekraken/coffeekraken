@@ -1,55 +1,41 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import _glob from 'glob';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-/**
- * @name            findPackages
- * @namespace            node.monorepo
- * @type            Function
- * @async
- * @platform        node
- * @status          beta
- *
- * This function simply let you search for packages (that are not dependencies) inside
- * the passed folder and returns a object with relative paths as keys and package.json
- * content value
- *
- * @param         {String}          [rootDir=process.cwd()]       The root directory from where to search for packages
- * @return        {Promise}                                       A promise that will be resolved once the process is finished with the resulting object
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import findPackages from '@coffeekraken/sugar/node/monorepo/findPackages';
- * const packages = await findPackages();
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function findPackages(rootDir = process.cwd()) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const packagesObj = {};
-        const packagesPaths = _glob
-            .sync('**/package.json', {
-            cwd: rootDir,
-            ignore: '**/node_modules/**',
-        })
-            .filter((path) => path !== 'package.json');
-        packagesPaths.forEach((path) => {
-            const folder = path.split('/').slice(0, -1).join('/');
-            packagesObj[folder] = __readJsonSync(`${rootDir}/${path}`);
-        });
-        return packagesObj;
-    });
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var findPackages_exports = {};
+__export(findPackages_exports, {
+  default: () => findPackages
+});
+module.exports = __toCommonJS(findPackages_exports);
+var import_glob = __toESM(require("glob"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
+async function findPackages(rootDir = process.cwd()) {
+  const packagesObj = {};
+  const packagesPaths = import_glob.default.sync("**/package.json", {
+    cwd: rootDir,
+    ignore: "**/node_modules/**"
+  }).filter((path) => path !== "package.json");
+  packagesPaths.forEach((path) => {
+    const folder = path.split("/").slice(0, -1).join("/");
+    packagesObj[folder] = (0, import_readJsonSync.default)(`${rootDir}/${path}`);
+  });
+  return packagesObj;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmluZFBhY2thZ2VzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZmluZFBhY2thZ2VzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLEtBQUssTUFBTSxNQUFNLENBQUM7QUFDekIsT0FBTyxjQUFjLE1BQU0sMENBQTBDLENBQUM7QUFFdEU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFnQixZQUFZLENBQ3RDLE9BQU8sR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFOztRQUt2QixNQUFNLFdBQVcsR0FBaUIsRUFBRSxDQUFDO1FBQ3JDLE1BQU0sYUFBYSxHQUFHLEtBQUs7YUFDdEIsSUFBSSxDQUFDLGlCQUFpQixFQUFFO1lBQ3JCLEdBQUcsRUFBRSxPQUFPO1lBQ1osTUFBTSxFQUFFLG9CQUFvQjtTQUMvQixDQUFDO2FBQ0QsTUFBTSxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUUsQ0FBQyxJQUFJLEtBQUssY0FBYyxDQUFDLENBQUM7UUFDL0MsYUFBYSxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1lBQzNCLE1BQU0sTUFBTSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUN0RCxXQUFXLENBQUMsTUFBTSxDQUFDLEdBQUcsY0FBYyxDQUFDLEdBQUcsT0FBTyxJQUFJLElBQUksRUFBRSxDQUFDLENBQUM7UUFDL0QsQ0FBQyxDQUFDLENBQUM7UUFDSCxPQUFPLFdBQVcsQ0FBQztJQUN2QixDQUFDO0NBQUEifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

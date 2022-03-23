@@ -1,38 +1,63 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name          scalable
- * @namespace     node.function.scalable
- * @type          PostcssFunction
- * @platform      postcss
- * @status        beta
- *
- * This function allows you to get value that will be scaled using the "--s-scale" variable.
- * This allows you to make your components aware of classes like "s-scale-10", etc...
- *
- * @param       {Number}        value      The value you want to be scalable
- * @return      {Css}                   The corresponding css
- *
- * @example       css
- * .my-element {
- *    padding: sugar.scalable(20px);
- * }
- *
- * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginScalableFunctionInterface extends __SInterface {
-    static get _definition() {
-        return {
-            value: {
-                type: 'String|Number',
-                required: true,
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var scalable_exports = {};
+__export(scalable_exports, {
+  default: () => scalable_default,
+  interface: () => postcssSugarPluginScalableFunctionInterface
+});
+module.exports = __toCommonJS(scalable_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginScalableFunctionInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      value: {
+        type: "String|Number",
+        required: true
+      }
+    };
+  }
 }
-export { postcssSugarPluginScalableFunctionInterface as interface };
-export default function ({ params, }) {
-    const finalParams = Object.assign({ value: '' }, params);
-    return `calc(${finalParams.value} * var(--s-scale, 1))`;
+function scalable_default({
+  params
+}) {
+  const finalParams = __spreadValues({
+    value: ""
+  }, params);
+  return `calc(${finalParams.value} * var(--s-scale, 1))`;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NhbGFibGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY2FsYWJsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFFSCxNQUFNLDJDQUE0QyxTQUFRLFlBQVk7SUFDbEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsZUFBZTtnQkFDckIsUUFBUSxFQUFFLElBQUk7YUFDakI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ0QsT0FBTyxFQUFFLDJDQUEyQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBTXBFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxHQUdUO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxFQUFFLElBQ04sTUFBTSxDQUNaLENBQUM7SUFFRixPQUFPLFFBQVEsV0FBVyxDQUFDLEtBQUssdUJBQXVCLENBQUM7QUFDNUQsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

@@ -1,37 +1,37 @@
-// @ts-nocheck
-import __packageRoot from './packageRoot';
-/**
- * @name                            packageRootDir
- * @namespace            node.path
- * @type                            Function
- * @platform        node
- * @status          beta
- *
- * Return the package root directory path
- *
- * @param       {IPackageRootDirSettings}       [settings={}]   Some settings to configure your temp directory process
- * @return                {String}                      The real os temp directory path
- *
- * @setting     {String}        [scope='local']         Specify the scope in which you want your packageRootDir to be returned. Can be "local" or "global"
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import packageRootDir from '@coffeekraken/node/fs/packageRootDir';
- * packageRootDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
- *
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var packageRootDir_exports = {};
+__export(packageRootDir_exports, {
+  default: () => packageRootDir_default
+});
+module.exports = __toCommonJS(packageRootDir_exports);
+var import_packageRoot = __toESM(require("./packageRoot"), 1);
 global.packageRootDirs = {};
-export default function (from = process.cwd(), highest = false) {
-    const storageKey = `${from}-${highest ? 'highest' : ''}`;
-    if (!from && global.packageRootDirs[storageKey])
-        return global.packageRootDirs[storageKey];
-    const path = __packageRoot(from, highest);
-    global.packageRootDirs[storageKey] = path;
-    return path;
+function packageRootDir_default(from = process.cwd(), highest = false) {
+  const storageKey = `${from}-${highest ? "highest" : ""}`;
+  if (!from && global.packageRootDirs[storageKey])
+    return global.packageRootDirs[storageKey];
+  const path = (0, import_packageRoot.default)(from, highest);
+  global.packageRootDirs[storageKey] = path;
+  return path;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZVJvb3REaXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYWNrYWdlUm9vdERpci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxhQUFhLE1BQU0sZUFBZSxDQUFDO0FBRTFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxNQUFNLENBQUMsZUFBZSxHQUFHLEVBQUUsQ0FBQztBQUM1QixNQUFNLENBQUMsT0FBTyxXQUNWLE9BQWUsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUM1QixPQUFPLEdBQUcsS0FBSztJQUVmLE1BQU0sVUFBVSxHQUFHLEdBQUcsSUFBSSxJQUFJLE9BQU8sQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQztJQUV6RCxJQUFJLENBQUMsSUFBSSxJQUFJLE1BQU0sQ0FBQyxlQUFlLENBQUMsVUFBVSxDQUFDO1FBQzNDLE9BQU8sTUFBTSxDQUFDLGVBQWUsQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUU5QyxNQUFNLElBQUksR0FBRyxhQUFhLENBQUMsSUFBSSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQzFDLE1BQU0sQ0FBQyxlQUFlLENBQUMsVUFBVSxDQUFDLEdBQUcsSUFBSSxDQUFDO0lBRTFDLE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

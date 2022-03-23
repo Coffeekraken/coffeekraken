@@ -1,13 +1,44 @@
-import SProcess from './SProcess';
-import SProcessManager from './SProcessManager';
-// import SProcessPipe from './SProcessPipe';
-import SProcessInterface from './interface/SProcessInterface';
-import SCommandProcess from './SCommandProcess';
-export * from './SProcessManager';
-export * from './SCommandProcess';
-// export * from './SProcessPipe';
-export * from './SProcess';
-export * from './ISProcess';
-export { SProcessManager, SProcessInterface, SCommandProcess };
-export default SProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxRQUFRLE1BQU0sWUFBWSxDQUFDO0FBQ2xDLE9BQU8sZUFBZSxNQUFNLG1CQUFtQixDQUFDO0FBQ2hELDZDQUE2QztBQUM3QyxPQUFPLGlCQUFpQixNQUFNLCtCQUErQixDQUFDO0FBQzlELE9BQU8sZUFBZSxNQUFNLG1CQUFtQixDQUFDO0FBRWhELGNBQWMsbUJBQW1CLENBQUM7QUFDbEMsY0FBYyxtQkFBbUIsQ0FBQztBQUNsQyxrQ0FBa0M7QUFDbEMsY0FBYyxZQUFZLENBQUM7QUFDM0IsY0FBYyxhQUFhLENBQUM7QUFFNUIsT0FBTyxFQUFFLGVBQWUsRUFBRSxpQkFBaUIsRUFBRSxlQUFlLEVBQUUsQ0FBQztBQUMvRCxlQUFlLFFBQVEsQ0FBQyJ9
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var exports_exports = {};
+__export(exports_exports, {
+  SCommandProcess: () => import_SCommandProcess.default,
+  SProcessInterface: () => import_SProcessInterface.default,
+  SProcessManager: () => import_SProcessManager.default,
+  default: () => exports_default
+});
+module.exports = __toCommonJS(exports_exports);
+var import_SProcess = __toESM(require("./SProcess"), 1);
+var import_SProcessManager = __toESM(require("./SProcessManager"), 1);
+var import_SProcessInterface = __toESM(require("./interface/SProcessInterface"), 1);
+var import_SCommandProcess = __toESM(require("./SCommandProcess"), 1);
+__reExport(exports_exports, require("./SProcessManager"), module.exports);
+__reExport(exports_exports, require("./SCommandProcess"), module.exports);
+__reExport(exports_exports, require("./SProcess"), module.exports);
+__reExport(exports_exports, require("./ISProcess"), module.exports);
+var exports_default = import_SProcess.default;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  SCommandProcess,
+  SProcessInterface,
+  SProcessManager
+});

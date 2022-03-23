@@ -1,43 +1,93 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
-class postcssSugarPluginUiListClassesInterface extends __SInterface {
-    static get _definition() {
-        var _a;
-        return {
-            styles: {
-                type: 'String[]',
-                values: ['dl', 'ul', 'ol', 'icon'],
-                default: ['dl', 'ul', 'ol', 'icon'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['dl', 'ul', 'ol', 'icon'],
-                default: (_a = __STheme.config('ui.list.defaultStyle')) !== null && _a !== void 0 ? _a : 'dl',
-            },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'tf', 'vr'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-}
-export { postcssSugarPluginUiListClassesInterface as interface };
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-export function dependencies() {
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  dependencies: () => dependencies,
+  interface: () => postcssSugarPluginUiListClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+var import_faker = __toESM(require("faker"));
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
+class postcssSugarPluginUiListClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    var _a;
     return {
-        files: [`${__dirname()}/list.js`],
+      styles: {
+        type: "String[]",
+        values: ["dl", "ul", "ol", "icon"],
+        default: ["dl", "ul", "ol", "icon"]
+      },
+      defaultStyle: {
+        type: "String",
+        values: ["dl", "ul", "ol", "icon"],
+        default: (_a = import_s_theme.default.config("ui.list.defaultStyle")) != null ? _a : "dl"
+      },
+      scope: {
+        type: {
+          type: "Array<String>",
+          splitChars: [",", " "]
+        },
+        values: ["bare", "lnf", "tf", "vr"],
+        default: ["bare", "lnf", "tf", "vr"]
+      }
     };
+  }
 }
-export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ styles: [], defaultStyle: 'dl', scope: [] }, params);
-    finalParams.scope = applyNoScopes(finalParams.scope);
-    const vars = new CssVars();
-    vars.comment(() => `
+function dependencies() {
+  return {
+    files: [`${(0, import_dirname.default)()}/list.js`]
+  };
+}
+function classes_default({
+  params,
+  atRule,
+  applyNoScopes,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    styles: [],
+    defaultStyle: "dl",
+    scope: []
+  }, params);
+  finalParams.scope = applyNoScopes(finalParams.scope);
+  const vars = new CssVars();
+  vars.comment(() => `
       /**
         * @name          Lists
         * @namespace          sugar.css.ui
@@ -58,57 +108,49 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @cssClass     s-list${style === finalParams.defaultStyle ? '' : `:${style}`}           Apply the ${style} list style`;
-    })
-        .join('\n')}
+        ${finalParams.styles.map((style) => {
+    return ` * @cssClass     s-list${style === finalParams.defaultStyle ? "" : `:${style}`}           Apply the ${style} list style`;
+  }).join("\n")}
         * 
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @example        html       ${style} style ${params.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
-            *   <ul class="s-list:${style} ${style === 'ol' ? 's-color:accent s-scale:15' : ''}">
-            *     <li>${style === 'icon' ? `<i class="s-icon:user"></i>` : ''}${__faker.name.title()} ${__faker.name.findName()}</li>
-            *     <li>${style === 'icon'
-            ? `<i class="s-icon:heart s-color:accent"></i>`
-            : ''}${__faker.name.title()} ${__faker.name.findName()}</li>
-            *     <li>${style === 'icon'
-            ? `<i class="s-icon:fire s-color:error"></i>`
-            : ''}${__faker.name.title()} ${__faker.name.findName()}</li>
+        ${finalParams.styles.map((style) => {
+    return ` * @example        html       ${style} style ${params.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ""}
+            *   <ul class="s-list:${style} ${style === "ol" ? "s-color:accent s-scale:15" : ""}">
+            *     <li>${style === "icon" ? `<i class="s-icon:user"></i>` : ""}${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+            *     <li>${style === "icon" ? `<i class="s-icon:heart s-color:accent"></i>` : ""}${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+            *     <li>${style === "icon" ? `<i class="s-icon:fire s-color:error"></i>` : ""}${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
             *   </ul>
             * `;
-    })
-        .join('\n')}
+  }).join("\n")}
         *
         * @example        html          RTL Support
         * <div dir="rtl">
         *   <ul class="s-list:ul s-color:accent s-mbe:30">
-        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
-        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
         *   </ul>
         *   <ul class="s-list:ol s-color:accent s-mbe:30">
-        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
-        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
         *   </ul>
         *   <ul class="s-list:icon s-color:accent s-mbe:30">
-        *     <li><i class="s-icon:user"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
-        *     <li><i class="s-icon:heart s-color:error"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li><i class="s-icon:user"></i> ${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+        *     <li><i class="s-icon:heart s-color:error"></i> ${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
         *   </ul>
         * </div>
         * 
         * @example          html         Colors (none-exhaustive)
         *   <ul class="s-list:ol s-color:accent">
-        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
-        *     <li class="s-color:complementary">${__faker.name.title()} ${__faker.name.findName()}</li>
-        *     <li class="s-color:error">${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+        *     <li class="s-color:complementary">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+        *     <li class="s-color:error">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
         *   </ul>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(() => `/**
+  if (finalParams.scope.includes("bare")) {
+    vars.comment(() => `/**
             * @name           s-list
             * @namespace      sugar.css.ui.list
             * @type           CssClass
@@ -131,11 +173,11 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             @sugar.ui.list($scope: bare);
         }
     `);
-    }
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
-            vars.comment(() => `/**
-                * @name           s-list${finalParams.defaultStyle === style ? '' : `:${style}`}
+  }
+  if (finalParams.scope.includes("lnf")) {
+    finalParams.styles.forEach((style) => {
+      vars.comment(() => `/**
+                * @name           s-list${finalParams.defaultStyle === style ? "" : `:${style}`}
                 * @namespace      sugar.css.ui.list
                 * @type           CssClass
                 * 
@@ -144,7 +186,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
                 * @feature       Support vertical rhythm
                 * 
                 * @example        html
-                * <ul class="s-list${finalParams.defaultStyle === style ? '' : `:${style}`}">
+                * <ul class="s-list${finalParams.defaultStyle === style ? "" : `:${style}`}">
                 *   <li>Hello</li>
                 *   <li>World</li>
                 * </ul>
@@ -153,14 +195,13 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
-            .s-list${finalParams.defaultStyle === style ? '' : `--${style}`} {
+            .s-list${finalParams.defaultStyle === style ? "" : `--${style}`} {
                 @sugar.ui.list($scope: lnf);
             }
         `);
-        });
-    }
-    // ul
-    vars.comment(() => `/**
+    });
+  }
+  vars.comment(() => `/**
         * @name           s-list--ul
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -180,11 +221,10 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
       */
      `).code(`
       .s-list--ul {
-        @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(',')}');
+        @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(",")}');
       }
   `);
-    // ul:icon
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name           s-list--icon
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -202,12 +242,11 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */`);
-    vars.code(() => `
+  vars.code(() => `
       .s-list--icon {
-          @sugar.ui.list($style: icon, $scope: '${finalParams.scope.join(',')}');
+          @sugar.ui.list($style: icon, $scope: '${finalParams.scope.join(",")}');
       }`);
-    // ol
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name           s-list--ol
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -227,11 +266,10 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
       */
      `).code(`
       .s-list--ol {
-        @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(',')}');
+        @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(",")}');
       }   
   `);
-    // dl
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name           s-list--dl
         * @namespace      sugar.css.ui.list
         * @type           CssClass
@@ -251,11 +289,11 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
       */
      `).code(`
       .s-list--dl {
-        @sugar.ui.list($style: dl, $scope: '${finalParams.scope.join(',')}');
+        @sugar.ui.list($style: dl, $scope: '${finalParams.scope.join(",")}');
       }   
   `);
-    if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.comment(() => `/**
+  if (finalParams.scope.indexOf("tf") !== -1) {
+    vars.comment(() => `/**
             * @name           s-format:text ul
             * @namespace      sugar.css.ui.list
             * @type           CssClass
@@ -277,11 +315,11 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
        `).code(`
             @sugar.format.text {
                 ul {
-                    @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(',')}');
+                    @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(",")}');
                 } 
             }
         `);
-        vars.comment(() => `/**
+    vars.comment(() => `/**
             * @name           s-format:text ol
             * @namespace      sugar.css.ui.list
             * @type           CssClass
@@ -303,13 +341,13 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
        `).code(`
             @sugar.format.text {
                 ol {
-                    @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(',')}');
+                    @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(",")}');
                 } 
             }
         `);
-    }
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(() => `/**
+  }
+  if (finalParams.scope.indexOf("vr") !== -1) {
+    vars.comment(() => `/**
             * @name           s-rhythm:vertical
             * @namespace      sugar.css.ui.list
             * @type           CssClass
@@ -339,11 +377,15 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             @sugar.rhythm.vertical {
                 ul, .s-list--ul,
                 ol, .s-list--ol {
-                    ${__STheme.jsObjectToCssProperties(__STheme.config('ui.list.rhythmVertical'))}
+                    ${import_s_theme.default.jsObjectToCssProperties(import_s_theme.default.config("ui.list.rhythmVertical"))}
                 } 
             }
         `);
-    }
-    return vars;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCLE1BQU0sd0NBQXlDLFNBQVEsWUFBWTtJQUMvRCxNQUFNLEtBQUssV0FBVzs7UUFDbEIsT0FBTztZQUNILE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUUsVUFBVTtnQkFDaEIsTUFBTSxFQUFFLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsTUFBTSxDQUFDO2dCQUNsQyxPQUFPLEVBQUUsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxNQUFNLENBQUM7YUFDdEM7WUFDRCxZQUFZLEVBQUU7Z0JBQ1YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsTUFBTSxDQUFDO2dCQUNsQyxPQUFPLEVBQUUsTUFBQSxRQUFRLENBQUMsTUFBTSxDQUFDLHNCQUFzQixDQUFDLG1DQUFJLElBQUk7YUFDM0Q7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxJQUFJLENBQUM7Z0JBQ25DLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLElBQUksQ0FBQzthQUN2QztTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFRRCxPQUFPLEVBQUUsd0NBQXdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFakUsT0FBTyxTQUFT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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  dependencies,
+  interface
+});

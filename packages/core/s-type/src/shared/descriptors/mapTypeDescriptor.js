@@ -1,35 +1,41 @@
-// shared
-import __isMap from '@coffeekraken/sugar/shared/is/map';
-/**
- * @name              mapTypeDescriptor
- * @namespace         sugar.js.type.descriptor
- * @type              ISTypeDescriptor
- *
- * Describe the type "map" with some utilities methods like "is", "cast", etc...
- *
- * @example         js
- * export default {
- *    name: 'String',
- *    id: 'string',
- *    is: (value) => typeof value === 'string',
- *    cast: (value) => '' + value,
- *    // etc...
- * };
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-const descriptor = {
-    name: 'Map',
-    id: 'map',
-    is: (value) => __isMap(value),
-    cast: (value) => {
-        if (__isMap(value))
-            return value;
-        const map = new Map();
-        map.set('value', value);
-        return map;
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-export default descriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwVHlwZURlc2NyaXB0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJtYXBUeXBlRGVzY3JpcHRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxTQUFTO0FBRVQsT0FBTyxPQUFPLE1BQU0sbUNBQW1DLENBQUM7QUFJeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQU0sVUFBVSxHQUFxQjtJQUNuQyxJQUFJLEVBQUUsS0FBSztJQUNYLEVBQUUsRUFBRSxLQUFLO0lBQ1QsRUFBRSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDO0lBQ2xDLElBQUksRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFO1FBQ25CLElBQUksT0FBTyxDQUFDLEtBQUssQ0FBQztZQUFFLE9BQU8sS0FBSyxDQUFDO1FBQ2pDLE1BQU0sR0FBRyxHQUFHLElBQUksR0FBRyxFQUFFLENBQUM7UUFDdEIsR0FBRyxDQUFDLEdBQUcsQ0FBQyxPQUFPLEVBQUUsS0FBSyxDQUFDLENBQUM7UUFDeEIsT0FBTyxHQUFHLENBQUM7SUFDYixDQUFDO0NBQ0YsQ0FBQztBQUVGLGVBQWUsVUFBVSxDQUFDIn0=
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var mapTypeDescriptor_exports = {};
+__export(mapTypeDescriptor_exports, {
+  default: () => mapTypeDescriptor_default
+});
+module.exports = __toCommonJS(mapTypeDescriptor_exports);
+var import_map = __toESM(require("@coffeekraken/sugar/shared/is/map"), 1);
+const descriptor = {
+  name: "Map",
+  id: "map",
+  is: (value) => (0, import_map.default)(value),
+  cast: (value) => {
+    if ((0, import_map.default)(value))
+      return value;
+    const map = /* @__PURE__ */ new Map();
+    map.set("value", value);
+    return map;
+  }
+};
+var mapTypeDescriptor_default = descriptor;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

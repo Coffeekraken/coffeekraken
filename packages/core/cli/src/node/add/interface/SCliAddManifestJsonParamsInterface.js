@@ -1,22 +1,33 @@
-// @ts-nocheck
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SCliAddManifestJsonParamsInterface
- * @namespace           node.add.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This interface specify the parameters needed to the `sugar add.manifestJson` command.
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SCliAddManifestJsonParamsInterface extends __SInterface {
-    static get _definition() {
-        return {};
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SCliAddManifestJsonParamsInterface_exports = {};
+__export(SCliAddManifestJsonParamsInterface_exports, {
+  default: () => SCliAddManifestJsonParamsInterface
+});
+module.exports = __toCommonJS(SCliAddManifestJsonParamsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SCliAddManifestJsonParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsaUFkZE1hbmlmZXN0SnNvblBhcmFtc0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDbGlBZGRNYW5pZmVzdEpzb25QYXJhbXNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7O0dBYUc7QUFDSCxNQUFNLENBQUMsT0FBTyxPQUFPLGtDQUFtQyxTQUFRLFlBQVk7SUFDeEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0oifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,52 +1,36 @@
-// @ts-nocheck
-import __set from './set';
-/**
- * @name          deepize
- * @namespace            js.object
- * @type          Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function simply take an object like this one:
- * {
- *    'something.cool': 'hello'
- * }
- * and convert it to something like this:
- * {
- *    something: {
- *      cool: 'hello'
- *    }
- * }
- *
- * @param       {Object}        object        The object to convert
- * @return      {Object}                      The converted object
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import deepize from '@coffeekraken/sugar/js/object/deepize';
- * deepize({ 'something.cool': 'hello' }); // => { something: { cool: 'hello' } }
- *
- * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var deepize_exports = {};
+__export(deepize_exports, {
+  default: () => deepize_default
+});
+module.exports = __toCommonJS(deepize_exports);
+var import_set = __toESM(require("./set"), 1);
 function deepize(object) {
-    const finalObject = {};
-    for (const key in object) {
-        __set(finalObject, key, object[key]);
-    }
-    return finalObject;
+  const finalObject = {};
+  for (const key in object) {
+    (0, import_set.default)(finalObject, key, object[key]);
+  }
+  return finalObject;
 }
-// console.log(
-//   deepize({
-//     'someting.cool': 'hello',
-//     'you.coco[0]': 'hello',
-//     'coco[1]': 'world',
-//     'world."coco.plop".yep': 'dsojiofj'
-//   })
-// );
-export default deepize;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVlcGl6ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRlZXBpemUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sS0FBSyxNQUFNLE9BQU8sQ0FBQztBQUMxQjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQ0c7QUFDSCxTQUFTLE9BQU8sQ0FBQyxNQUFNO0lBQ25CLE1BQU0sV0FBVyxHQUFHLEVBQUUsQ0FBQztJQUN2QixLQUFLLE1BQU0sR0FBRyxJQUFJLE1BQU0sRUFBRTtRQUN0QixLQUFLLENBQUMsV0FBVyxFQUFFLEdBQUcsRUFBRSxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQztLQUN4QztJQUNELE9BQU8sV0FBVyxDQUFDO0FBQ3ZCLENBQUM7QUFFRCxlQUFlO0FBQ2YsY0FBYztBQUNkLGdDQUFnQztBQUNoQyw4QkFBOEI7QUFDOUIsMEJBQTBCO0FBQzFCLDBDQUEwQztBQUMxQyxPQUFPO0FBQ1AsS0FBSztBQUVMLGVBQWUsT0FBTyxDQUFDIn0=
+var deepize_default = deepize;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

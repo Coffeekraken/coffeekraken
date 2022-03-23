@@ -1,32 +1,58 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __faker from 'faker';
-/**
- * @name           classes
- * @namespace      node.mixins.userSelect
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the user-select helper classes like ```.s-user-select:none```, etc...
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.userSelect.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginUserSelectClassesInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginUserSelectClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_faker = __toESM(require("faker"));
+class postcssSugarPluginUserSelectClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginUserSelectClassesInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const vars = [];
-    vars.push(`
+function classes_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const vars = [];
+  vars.push(`
       /**
         * @name          User select
         * @namespace          sugar.css.helpers
@@ -49,32 +75,35 @@ export default function ({ params, atRule, replaceWith, }) {
         * 
         * @example        html          All
         *   <p class="s-user-select:all">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example      html            auto
         *   <p class="s-user-select:auto">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example          html            none
         *   <p class="s-user-select:none">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example          html                text
         *   <p class="s-user-select:text">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    [
-        'all', 'auto', 'none', 'text'
-    ].forEach((value) => {
-        vars.push(`/**
+  [
+    "all",
+    "auto",
+    "none",
+    "text"
+  ].forEach((value) => {
+    vars.push(`/**
     * @name          s-user-select:${value}
     * @namespace          sugar.css.whiteSpace
     * @type               CssClass
@@ -84,12 +113,15 @@ export default function ({ params, atRule, replaceWith, }) {
     * This class allows you to apply a "<yellow>${value}</yellow>" user-select style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-user-select:${value}">${__faker.lorem.paragraph()}</div>
+    * <div class="s-user-select:${value}">${import_faker.default.lorem.paragraph()}</div>
     */
     .s-user-select--${value} {
         user-select: ${value};
     }`);
-    });
-    return vars;
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSw0Q0FBNkMsU0FBUSxZQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLDRDQUE0QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXJFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7a0JBdUJJLE9BQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7OztrQkFLekIsT0FBTyxDQUFDLEtBQUssQ0FBQyxTQUFTLEVBQUU7Ozs7O2tCQUt6QixPQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTs7Ozs7a0JBS3pCLE9BQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7Ozs7S0FNdEMsQ0FBQyxDQUFDO0lBRUg7UUFDSSxLQUFLLEVBQUMsTUFBTSxFQUFDLE1BQU0sRUFBQyxNQUFNO0tBQzdCLENBQUMsT0FBTyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDaEIsSUFBSSxDQUFDLElBQUksQ0FBQztxQ0FDbUIsS0FBSzs7Ozs7O2tEQU1RLEtBQUs7OztrQ0FHckIsS0FBSyxLQUFLLE9BQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOztzQkFFL0MsS0FBSzt1QkFDSixLQUFLO01BQ3RCLENBQUMsQ0FBQztJQUNKLENBQUMsQ0FBQyxDQUFDO0lBRUgsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

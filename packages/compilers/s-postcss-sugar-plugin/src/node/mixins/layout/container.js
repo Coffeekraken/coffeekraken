@@ -1,51 +1,79 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name           container
- * @namespace      node.mixins.layout
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the css needed for a container depending
- * on the config.theme.layout.container configuration stack
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * .my-cool-container {
- *    \@sugar.layout.container;
- * }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginLayoutContainerInterface extends __SInterface {
-    static get _definition() {
-        return {
-            name: {
-                type: 'String',
-                required: true,
-                default: 'default',
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var container_exports = {};
+__export(container_exports, {
+  default: () => container_default,
+  interface: () => postcssSugarPluginLayoutContainerInterface
+});
+module.exports = __toCommonJS(container_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginLayoutContainerInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      name: {
+        type: "String",
+        required: true,
+        default: "default"
+      }
+    };
+  }
 }
-export { postcssSugarPluginLayoutContainerInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ name: 'default' }, params);
-    const vars = [
-        `
+function container_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    name: "default"
+  }, params);
+  const vars = [
+    `
     margin: auto;
-  `,
-    ];
-    const containerConfig = __STheme.config(`layout.container.${finalParams.name}`);
-    if (!containerConfig) {
-        throw new Error(`<red>[mixins.layout.container]</red> Sorry but the requested "<yellow>${finalParams.name}</yellow>" does not exists in the "<cyan>config.theme.layout.container</cyan>" configuration`);
-    }
-    Object.keys(containerConfig).forEach((key) => {
-        vars.push(`${key}: ${containerConfig[key]};`);
-    });
-    return vars;
+  `
+  ];
+  const containerConfig = import_s_theme.default.config(`layout.container.${finalParams.name}`);
+  if (!containerConfig) {
+    throw new Error(`<red>[mixins.layout.container]</red> Sorry but the requested "<yellow>${finalParams.name}</yellow>" does not exists in the "<cyan>config.theme.layout.container</cyan>" configuration`);
+  }
+  Object.keys(containerConfig).forEach((key) => {
+    vars.push(`${key}: ${containerConfig[key]};`);
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udGFpbmVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY29udGFpbmVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBRUgsTUFBTSwwQ0FBMkMsU0FBUSxZQUFZO0lBQ2pFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7Z0JBQ2QsT0FBTyxFQUFFLFNBQVM7YUFDckI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTUQsT0FBTyxFQUFFLDBDQUEwQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRW5FLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLFNBQVMsSUFDWixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhO1FBQ25COztHQUVMO0tBQ0UsQ0FBQztJQUVGLE1BQU0sZUFBZSxHQUFHLFFBQVEsQ0FBQyxNQUFNLENBQ25DLG9CQUFvQixXQUFXLENBQUMsSUFBSSxFQUFFLENBQ3pDLENBQUM7SUFFRixJQUFJLENBQUMsZUFBZSxFQUFFO1FBQ2xCLE1BQU0sSUFBSSxLQUFLLENBQ1gseUVBQXlFLFdBQVcsQ0FBQyxJQUFJLDhGQUE4RixDQUMxTCxDQUFDO0tBQ0w7SUFFRCxNQUFNLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFO1FBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxHQUFHLEtBQUssZUFBZSxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUNsRCxDQUFDLENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

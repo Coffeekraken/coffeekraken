@@ -1,38 +1,40 @@
-import __deepMap from './deepMap';
-import __set from './set';
-/**
- * @name                toJson
- * @namespace            shared.object
- * @type                Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Convert class instances to plain JSON object
- *
- * @param       {Any}           object      The object to convert
- * @return      {Any}                       The converted object
- *
- * @example         js
- * import toJson from '@coffeekraken/sugar/shared/object/toJson';
- * class MyClass {
- *      hello = 'world';
- *      something() {}
- * }
- * toJson(new MyClass()); // => { hello: 'world' }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function toJson(object) {
-    const newObj = {};
-    __deepMap(object, ({ value, path }) => {
-        __set(newObj, path, value);
-        return value;
-    }, {
-        privateProps: false,
-        classInstances: true,
-    });
-    return newObj;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var toJson_exports = {};
+__export(toJson_exports, {
+  default: () => toJson
+});
+module.exports = __toCommonJS(toJson_exports);
+var import_deepMap = __toESM(require("./deepMap"), 1);
+var import_set = __toESM(require("./set"), 1);
+function toJson(object) {
+  const newObj = {};
+  (0, import_deepMap.default)(object, ({ value, path }) => {
+    (0, import_set.default)(newObj, path, value);
+    return value;
+  }, {
+    privateProps: false,
+    classInstances: true
+  });
+  return newObj;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9Kc29uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidG9Kc29uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLFdBQVcsQ0FBQztBQUNsQyxPQUFPLEtBQUssTUFBTSxPQUFPLENBQUM7QUFFMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQUMsTUFBVztJQUN0QyxNQUFNLE1BQU0sR0FBRyxFQUFFLENBQUM7SUFDbEIsU0FBUyxDQUNMLE1BQU0sRUFDTixDQUFDLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDaEIsS0FBSyxDQUFDLE1BQU0sRUFBRSxJQUFJLEVBQUUsS0FBSyxDQUFDLENBQUM7UUFDM0IsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQyxFQUNEO1FBQ0ksWUFBWSxFQUFFLEtBQUs7UUFDbkIsY0FBYyxFQUFFLElBQUk7S0FDdkIsQ0FDSixDQUFDO0lBQ0YsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

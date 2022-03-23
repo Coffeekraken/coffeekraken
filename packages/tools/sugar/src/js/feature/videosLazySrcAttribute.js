@@ -1,13 +1,52 @@
-// @ts-nocheck
-import whenInViewport from '../dom/whenInViewport';
-import querySelectorLive from '../dom/querySelectorLive';
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var videosLazySrcAttribute_exports = {};
+__export(videosLazySrcAttribute_exports, {
+  default: () => videosLazySrcAttribute_default
+});
+module.exports = __toCommonJS(videosLazySrcAttribute_exports);
+var import_whenInViewport = __toESM(require("../dom/whenInViewport"), 1);
+var import_querySelectorLive = __toESM(require("../dom/querySelectorLive"), 1);
 function videoLazySrcAttribute(settings = {}) {
-    settings = Object.assign({ offset: 50 }, settings);
-    querySelectorLive('video[lazy-src]:not([is])', ($videoElm) => {
-        whenInViewport($videoElm, settings.offset).then(() => {
-            $videoElm.setAttribute('src', $videoElm.getAttribute('lazy-src'));
-        });
+  settings = __spreadValues({
+    offset: 50
+  }, settings);
+  (0, import_querySelectorLive.default)("video[lazy-src]:not([is])", ($videoElm) => {
+    (0, import_whenInViewport.default)($videoElm, settings.offset).then(() => {
+      $videoElm.setAttribute("src", $videoElm.getAttribute("lazy-src"));
     });
+  });
 }
-export default videoLazySrcAttribute;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlkZW9zTGF6eVNyY0F0dHJpYnV0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInZpZGVvc0xhenlTcmNBdHRyaWJ1dGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sY0FBYyxNQUFNLHVCQUF1QixDQUFDO0FBQ25ELE9BQU8saUJBQWlCLE1BQU0sMEJBQTBCLENBQUM7QUFrQ3pELFNBQVMscUJBQXFCLENBQzFCLFdBQW9ELEVBQUU7SUFFdEQsUUFBUSxtQkFDSixNQUFNLEVBQUUsRUFBRSxJQUNQLFFBQVEsQ0FDZCxDQUFDO0lBQ0YsaUJBQWlCLENBQUMsMkJBQTJCLEVBQUUsQ0FBQyxTQUFTLEVBQUUsRUFBRTtRQUN6RCxjQUFjLENBQUMsU0FBUyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFO1lBQ2pELFNBQVMsQ0FBQyxZQUFZLENBQUMsS0FBSyxFQUFFLFNBQVMsQ0FBQyxZQUFZLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQztRQUN0RSxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQUNELGVBQWUscUJBQXFCLENBQUMifQ==
+var videosLazySrcAttribute_default = videoLazySrcAttribute;

@@ -1,60 +1,67 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name           transition
- * @namespace      node.mixins.transition
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the needed css to apply a transition setted in
- * the config.theme.transition configuration stack like "slow", "default" and "fast"
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.platform.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginTransitionMixinInterface extends __SInterface {
-    static get _definition() {
-        return {
-            name: {
-                type: 'String',
-                required: true,
-                default: 'default',
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var transition_exports = {};
+__export(transition_exports, {
+  default: () => transition_default,
+  interface: () => postcssSugarPluginTransitionMixinInterface
+});
+module.exports = __toCommonJS(transition_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginTransitionMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      name: {
+        type: "String",
+        required: true,
+        default: "default"
+      }
+    };
+  }
 }
-export { postcssSugarPluginTransitionMixinInterface as interface };
-/**
- * @name           transition
- * @namespace      mixins.transition
- * @type           Mixin
- * @status        beta
- *
- * This mixin allows apply a transition specified in the theme config like "fast", "slow" and "slow" or others you've been defined
- *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
- *
- * @example         postcss
- * .my-cool-element {
- *    \@sugar.transition(fast);
- * }
- *
- * @example       html
- * <h1 class="my-cool-element">Hello world</h1>
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({}, (params !== null && params !== void 0 ? params : {}));
-    const vars = [
-        `transition: sugar.transition(${finalParams.name}) ${finalParams.name !== 'default' ? '!important' : ''};`,
-    ];
-    return vars;
+function transition_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params != null ? params : {});
+  const vars = [
+    `transition: sugar.transition(${finalParams.name}) ${finalParams.name !== "default" ? "!important" : ""};`
+  ];
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJhbnNpdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRyYW5zaXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBRUgsTUFBTSwwQ0FBMkMsU0FBUSxZQUFZO0lBQ2pFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7Z0JBQ2QsT0FBTyxFQUFFLFNBQVM7YUFDckI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ0QsT0FBTyxFQUFFLDBDQUEwQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBTW5FOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsR0FBRyxrQkFDYixDQUFDLE1BQU0sYUFBTixNQUFNLGNBQU4sTUFBTSxHQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO0lBQ0YsTUFBTSxJQUFJLEdBQWE7UUFDbkIsZ0NBQWdDLFdBQVcsQ0FBQyxJQUFJLEtBQzVDLFdBQVcsQ0FBQyxJQUFJLEtBQUssU0FBUyxDQUFDLENBQUMsQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDLEVBQ3BELEdBQUc7S0FDTixDQUFDO0lBRUYsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

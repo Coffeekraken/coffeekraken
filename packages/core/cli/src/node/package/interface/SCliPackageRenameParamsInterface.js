@@ -1,32 +1,42 @@
-// @ts-nocheck
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SCliPackageRenameParamsInterface
- * @namespace           node.package.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This class represent the interface that describe the minimum requirement
- * needed for a process instance usable across the toolkit like in an SCli instance, etc...
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SCliPackageRenameParamsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            name: {
-                description: 'Specify the new name for your package',
-                type: 'String'
-            },
-            folder: {
-                description: 'Specify if the folder has to be renames as well',
-                type: 'Boolean'
-            }
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SCliPackageRenameParamsInterface_exports = {};
+__export(SCliPackageRenameParamsInterface_exports, {
+  default: () => SCliPackageRenameParamsInterface
+});
+module.exports = __toCommonJS(SCliPackageRenameParamsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SCliPackageRenameParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      name: {
+        description: "Specify the new name for your package",
+        type: "String"
+      },
+      folder: {
+        description: "Specify if the folder has to be renames as well",
+        type: "Boolean"
+      }
+    };
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsaVBhY2thZ2VSZW5hbWVQYXJhbXNJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ2xpUGFja2FnZVJlbmFtZVBhcmFtc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7O0dBY0c7QUFDSCxNQUFNLENBQUMsT0FBTyxPQUFPLGdDQUFpQyxTQUFRLFlBQVk7SUFDdEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILElBQUksRUFBRTtnQkFDRixXQUFXLEVBQUUsdUNBQXVDO2dCQUNwRCxJQUFJLEVBQUUsUUFBUTthQUNqQjtZQUNELE1BQU0sRUFBRTtnQkFDSixXQUFXLEVBQUUsaURBQWlEO2dCQUM5RCxJQUFJLEVBQUUsU0FBUzthQUNsQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0oifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

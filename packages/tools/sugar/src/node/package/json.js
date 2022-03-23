@@ -1,36 +1,70 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __packageRoot from './rootPath';
-import __fs from 'fs';
-import __standardizeJson from '../../shared/npm/utils/standardizeJson';
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var json_exports = {};
+__export(json_exports, {
+  default: () => json_default
+});
+module.exports = __toCommonJS(json_exports);
+var import_rootPath = __toESM(require("./rootPath"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_standardizeJson = __toESM(require("../../shared/npm/utils/standardizeJson"), 1);
 const __packageJson = {};
 function json(from = process.cwd(), settings) {
-    return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-        const finalSettings = Object.assign({ highest: false, standardize: false }, settings !== null && settings !== void 0 ? settings : {});
-        const hash = __objectHash(Object.assign({ from }, finalSettings));
-        if (__packageJson[hash]) {
-            return resolve(__packageJson[hash]);
-        }
-        const path = `${__packageRoot(from, finalSettings.highest)}/package.json`;
-        if (!__fs.existsSync(path))
-            return false;
-        let json = __readJsonSync(path);
-        if (finalSettings.standardize) {
-            json = __standardizeJson(json);
-        }
-        // cache
-        if (!__packageJson[hash])
-            __packageJson[hash] = json;
-        resolve(json);
-    }));
+  return new Promise(async (resolve) => {
+    const finalSettings = __spreadValues({
+      highest: false,
+      standardize: false
+    }, settings != null ? settings : {});
+    const hash = __objectHash(__spreadValues({
+      from
+    }, finalSettings));
+    if (__packageJson[hash]) {
+      return resolve(__packageJson[hash]);
+    }
+    const path = `${(0, import_rootPath.default)(from, finalSettings.highest)}/package.json`;
+    if (!import_fs.default.existsSync(path))
+      return false;
+    let json2 = __readJsonSync(path);
+    if (finalSettings.standardize) {
+      json2 = (0, import_standardizeJson.default)(json2);
+    }
+    if (!__packageJson[hash])
+      __packageJson[hash] = json2;
+    resolve(json2);
+  });
 }
-export default json;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianNvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImpzb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7OztBQUVkLE9BQU8sYUFBYSxNQUFNLFlBQVksQ0FBQztBQUN2QyxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFFdEIsT0FBTyxpQkFBaUIsTUFBTSx3Q0FBd0MsQ0FBQztBQWdDdkUsTUFBTSxhQUFhLEdBQUcsRUFBRSxDQUFDO0FBQ3pCLFNBQVMsSUFBSSxDQUFDLElBQUksR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsUUFBNEM7SUFFNUUsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFPLE9BQU8sRUFBRSxFQUFFO1FBRWpDLE1BQU0sYUFBYSxtQkFDZixPQUFPLEVBQUUsS0FBSyxFQUNkLFdBQVcsRUFBRSxLQUFLLElBQ2YsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNwQixDQUFDO1FBRUYsTUFBTSxJQUFJLEdBQUcsWUFBWSxpQkFDckIsSUFBSSxJQUNELGFBQWEsRUFDbEIsQ0FBQztRQUVILElBQUksYUFBYSxDQUFDLElBQUksQ0FBQyxFQUFFO1lBQ3JCLE9BQU8sT0FBTyxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO1NBQ3ZDO1FBRUQsTUFBTSxJQUFJLEdBQUcsR0FBRyxhQUFhLENBQUMsSUFBSSxFQUFFLGFBQWEsQ0FBQyxPQUFPLENBQUMsZUFBZSxDQUFDO1FBQzFFLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQztZQUFFLE9BQU8sS0FBSyxDQUFDO1FBRXpDLElBQUksSUFBSSxHQUFHLGNBQWMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNoQyxJQUFJLGFBQWEsQ0FBQyxXQUFXLEVBQUU7WUFDM0IsSUFBSSxHQUFHLGlCQUFpQixDQUFDLElBQUksQ0FBQyxDQUFDO1NBQ2xDO1FBRUQsUUFBUTtRQUNSLElBQUksQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDO1lBQUUsYUFBYSxDQUFDLElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQztRQUVyRCxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUM7QUFDRCxlQUFlLElBQUksQ0FBQyJ9
+var json_default = json;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

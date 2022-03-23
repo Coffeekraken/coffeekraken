@@ -1,89 +1,96 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import __SInterface from '@coffeekraken/s-interface';
-import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
-import __STheme from '@coffeekraken/s-theme';
-class postcssSugarPluginClassesMixinInterface extends __SInterface {
-    static get _definition() {
-        return {};
-    }
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginClassesMixinInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_objectHash = __toESM(require("@coffeekraken/sugar/shared/object/objectHash"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginClassesMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginClassesMixinInterface as interface };
-/**
- * @name           classes
- * @namespace      node.mixins.classes
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...
- *
- * @return        {Css}         The generated css for all the classes in the toolkit
- *
- * @example         postcss
- * \@sugar.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function ({ params, atRule, cache, sharedData, toCache, replaceWith, }) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const cssArray = [
-            '@sugar.reset;',
-            '@sugar.ui.classes;',
-            '@sugar.typo.classes;',
-            '@sugar.layout.classes;',
-            '@sugar.clearfix.classes;',
-            '@sugar.cursor.classes;',
-            '@sugar.color.classes;',
-            '@sugar.fit.classes;',
-            '@sugar.format.classes;',
-            '@sugar.link.classes;',
-            '@sugar.gap.classes;',
-            '@sugar.height.classes;',
-            '@sugar.text.classes;',
-            '@sugar.font.classes;',
-            '@sugar.depth.classes;',
-            '@sugar.disabled.classes;',
-            '@sugar.flex.classes;',
-            '@sugar.float.classes;',
-            '@sugar.ratio.classes;',
-            '@sugar.border.classes;',
-            '@sugar.display.classes;',
-            '@sugar.overflow.classes;',
-            '@sugar.position.classes;',
-            '@sugar.pointer.classes;',
-            '@sugar.transition.classes;',
-            '@sugar.margin.classes;',
-            '@sugar.offsize.classes;',
-            '@sugar.order.classes;',
-            '@sugar.opacity.classes;',
-            '@sugar.scale.classes;',
-            '@sugar.padding.classes;',
-            '@sugar.userSelect.classes;',
-            '@sugar.visibility.classes;',
-            '@sugar.visually.classes;',
-            '@sugar.truncate.classes;',
-            '@sugar.until.classes;',
-            '@sugar.when.classes;',
-            '@sugar.scrollbar.classes;',
-            '@sugar.width.classes;',
-            '@sugar.components.classes;',
-            '@sugar.whiteSpace.classes;',
-        ];
-        const hash = `@sugar.classes.${__objectHash({
-            css: cssArray,
-            theme: __STheme.hash(),
-        })}`;
-        const c = cache('@sugar.classes', hash, cssArray);
-        return c;
-    });
+async function classes_default({
+  params,
+  atRule,
+  cache,
+  sharedData,
+  toCache,
+  replaceWith
+}) {
+  const cssArray = [
+    "@sugar.reset;",
+    "@sugar.ui.classes;",
+    "@sugar.typo.classes;",
+    "@sugar.layout.classes;",
+    "@sugar.clearfix.classes;",
+    "@sugar.cursor.classes;",
+    "@sugar.color.classes;",
+    "@sugar.fit.classes;",
+    "@sugar.format.classes;",
+    "@sugar.link.classes;",
+    "@sugar.gap.classes;",
+    "@sugar.height.classes;",
+    "@sugar.text.classes;",
+    "@sugar.font.classes;",
+    "@sugar.depth.classes;",
+    "@sugar.disabled.classes;",
+    "@sugar.flex.classes;",
+    "@sugar.float.classes;",
+    "@sugar.ratio.classes;",
+    "@sugar.border.classes;",
+    "@sugar.display.classes;",
+    "@sugar.overflow.classes;",
+    "@sugar.position.classes;",
+    "@sugar.pointer.classes;",
+    "@sugar.transition.classes;",
+    "@sugar.margin.classes;",
+    "@sugar.offsize.classes;",
+    "@sugar.order.classes;",
+    "@sugar.opacity.classes;",
+    "@sugar.scale.classes;",
+    "@sugar.padding.classes;",
+    "@sugar.userSelect.classes;",
+    "@sugar.visibility.classes;",
+    "@sugar.visually.classes;",
+    "@sugar.truncate.classes;",
+    "@sugar.until.classes;",
+    "@sugar.when.classes;",
+    "@sugar.scrollbar.classes;",
+    "@sugar.width.classes;",
+    "@sugar.components.classes;",
+    "@sugar.whiteSpace.classes;"
+  ];
+  const hash = `@sugar.classes.${(0, import_objectHash.default)({
+    css: cssArray,
+    theme: import_s_theme.default.hash()
+  })}`;
+  const c = cache("@sugar.classes", hash, cssArray);
+  return c;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxZQUFZLE1BQU0sOENBQThDLENBQUM7QUFDeEUsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFLN0MsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZO0lBQzlELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBQ0QsT0FBTyxFQUFFLHVDQUF1QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWhFOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sV0FBaUIsRUFDM0IsTUFBTSxFQUNOLE1BQU0sRUFDTixLQUFLLEVBQ0wsVUFBVSxFQUNWLE9BQU8sRUFDUCxXQUFXLEdBQ2Q7O1FBQ0csTUFBTSxRQUFRLEdBQWE7WUFDdkIsZUFBZTtZQUNmLG9CQUFvQjtZQUNwQixzQkFBc0I7WUFDdEIsd0JBQXdCO1lBQ3hCLDBCQUEwQjtZQUMxQix3QkFBd0I7WUFDeEIsdUJBQXVCO1lBQ3ZCLHFCQUFxQjtZQUNyQix3QkFBd0I7WUFDeEIsc0JBQXNCO1lBQ3RCLHFCQUFxQjtZQUNyQix3QkFBd0I7WUFDeEIsc0JBQXNCO1lBQ3RCLHNCQUFzQjtZQUN0Qix1QkFBdUI7WUFDdkIsMEJBQTBCO1lBQzFCLHNCQUFzQjtZQUN0Qix1QkFBdUI7WUFDdkIsdUJBQXVCO1lBQ3ZCLHdCQUF3QjtZQUN4Qix5QkFBeUI7WUFDekIsMEJBQTBCO1lBQzFCLDBCQUEwQjtZQUMxQix5QkFBeUI7WUFDekIsNEJBQTRCO1lBQzVCLHdCQUF3QjtZQUN4Qix5QkFBeUI7WUFDekIsdUJBQXVCO1lBQ3ZCLHlCQUF5QjtZQUN6Qix1QkFBdUI7WUFDdkIseUJBQXlCO1lBQ3pCLDRCQUE0QjtZQUM1Qiw0QkFBNEI7WUFDNUIsMEJBQTBCO1lBQzFCLDBCQUEwQjtZQUMxQix1QkFBdUI7WUFDdkIsc0JBQXNCO1lBQ3RCLDJCQUEyQjtZQUMzQix1QkFBdUI7WUFDdkIsNEJBQTRCO1lBQzVCLDRCQUE0QjtTQUMvQixDQUFDO1FBQ0YsTUFBTSxJQUFJLEdBQUcsa0JBQWtCLFlBQVksQ0FBQztZQUN4QyxHQUFHLEVBQUUsUUFBUTtZQUNiLEtBQUssRUFBRSxRQUFRLENBQUMsSUFBSSxFQUFFO1NBQ3pCLENBQUMsRUFBRSxDQUFDO1FBQ0wsTUFBTSxDQUFDLEdBQUcsS0FBSyxDQUFDLGdCQUFnQixFQUFFLElBQUksRUFBRSxRQUFRLENBQUMsQ0FBQztRQUNsRCxPQUFPLENBQUMsQ0FBQztJQUNiLENBQUM7Q0FBQSJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

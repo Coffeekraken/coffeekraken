@@ -1,70 +1,64 @@
-// @ts-nocheck
-import __SPromise from '@coffeekraken/s-promise';
-/**
- * @name      scriptLoaded
- * @namespace            js.dom.load
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Detect when a script has been fully loaded
- *
- * @feature       Promise based API
- * @feature       Callback support
- *
- * @param    {HTMLScriptElement}    $script    The script element to detect the loading state
- * @param       {Function}      [cb=null]     A callback if you prefer
- * @return    {Promise}    The promise that will be resolved when the script is fully loaded
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import scriptLoaded from '@coffeekraken/sugar/js/dom/scriptLoaded'
- * scriptLoaded($script).then(($script) => {
- *   // do something here
- * })
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var scriptLoaded_exports = {};
+__export(scriptLoaded_exports, {
+  default: () => scriptLoaded_default
+});
+module.exports = __toCommonJS(scriptLoaded_exports);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function loadScript($script, cb = null) {
-    return new __SPromise(({ resolve, reject, emit }) => {
-        let done = false;
-        $script.onload = handleLoad;
-        $script.onreadystatechange = handleReadyStateChange;
-        $script.onerror = handleError;
-        function handleLoad() {
-            if (!done) {
-                done = true;
-                if (cb)
-                    cb($script);
-                resolve($script);
-            }
+  return new import_s_promise.default(({ resolve, reject, emit }) => {
+    let done = false;
+    $script.onload = handleLoad;
+    $script.onreadystatechange = handleReadyStateChange;
+    $script.onerror = handleError;
+    function handleLoad() {
+      if (!done) {
+        done = true;
+        if (cb)
+          cb($script);
+        resolve($script);
+      }
+    }
+    function handleReadyStateChange() {
+      let state;
+      if (!done) {
+        state = $script.readyState;
+        if (state === "complete") {
+          handleLoad();
         }
-        function handleReadyStateChange() {
-            let state;
-            if (!done) {
-                state = $script.readyState;
-                if (state === 'complete') {
-                    handleLoad();
-                }
-            }
-        }
-        function handleError(e) {
-            if (!done) {
-                done = true;
-                reject(new Error(e));
-            }
-        }
-    }, {
-        id: 'scriptLoaded',
-    }).on('finally', () => {
-        $script.onload = null;
-        $script.onreadystatechange = null;
-        $script.onerror = null;
-    });
+      }
+    }
+    function handleError(e) {
+      if (!done) {
+        done = true;
+        reject(new Error(e));
+      }
+    }
+  }, {
+    id: "scriptLoaded"
+  }).on("finally", () => {
+    $script.onload = null;
+    $script.onreadystatechange = null;
+    $script.onerror = null;
+  });
 }
-export default loadScript;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NyaXB0TG9hZGVkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2NyaXB0TG9hZGVkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILFNBQVMsVUFBVSxDQUNmLE9BQTBCLEVBQzFCLEVBQUUsR0FBRyxJQUFJO0lBRVQsT0FBTyxJQUFJLFVBQVUsQ0FDakIsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUMxQixJQUFJLElBQUksR0FBRyxLQUFLLENBQUM7UUFFakIsT0FBTyxDQUFDLE1BQU0sR0FBRyxVQUFVLENBQUM7UUFDNUIsT0FBTyxDQUFDLGtCQUFrQixHQUFHLHNCQUFzQixDQUFDO1FBQ3BELE9BQU8sQ0FBQyxPQUFPLEdBQUcsV0FBVyxDQUFDO1FBRTlCLFNBQVMsVUFBVTtZQUNmLElBQUksQ0FBQyxJQUFJLEVBQUU7Z0JBQ1AsSUFBSSxHQUFHLElBQUksQ0FBQztnQkFDWixJQUFJLEVBQUU7b0JBQUUsRUFBRSxDQUFDLE9BQU8sQ0FBQyxDQUFDO2dCQUNwQixPQUFPLENBQUMsT0FBTyxDQUFDLENBQUM7YUFDcEI7UUFDTCxDQUFDO1FBRUQsU0FBUyxzQkFBc0I7WUFDM0IsSUFBSSxLQUFLLENBQUM7WUFDVixJQUFJLENBQUMsSUFBSSxFQUFFO2dCQUNQLEtBQUssR0FBRyxPQUFPLENBQUMsVUFBVSxDQUFDO2dCQUMzQixJQUFJLEtBQUssS0FBSyxVQUFVLEVBQUU7b0JBQ3RCLFVBQVUsRUFBRSxDQUFDO2lCQUNoQjthQUNKO1FBQ0wsQ0FBQztRQUNELFNBQVMsV0FBVyxDQUFDLENBQUM7WUFDbEIsSUFBSSxDQUFDLElBQUksRUFBRTtnQkFDUCxJQUFJLEdBQUcsSUFBSSxDQUFDO2dCQUNaLE1BQU0sQ0FBQyxJQUFJLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO2FBQ3hCO1FBQ0wsQ0FBQztJQUNMLENBQUMsRUFDRDtRQUNJLEVBQUUsRUFBRSxjQUFjO0tBQ3JCLENBQ0osQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLEdBQUcsRUFBRTtRQUNqQixPQUFPLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQztRQUN0QixPQUFPLENBQUMsa0JBQWtCLEdBQUcsSUFBSSxDQUFDO1FBQ2xDLE9BQU8sQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDO0lBQzNCLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQUNELGVBQWUsVUFBVSxDQUFDIn0=
+var scriptLoaded_default = loadScript;

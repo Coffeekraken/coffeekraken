@@ -1,26 +1,28 @@
-// @ts-nocheck
-/**
- * @name      easeOutQuad
- * @namespace            js.easing
- * @type      Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * Ease out quad function
- *
- * @param 		{Number} 		t 		The current time
- * @return 		{Number} 				The value depending on time
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var easeOutQuad_exports = {};
+__export(easeOutQuad_exports, {
+  default: () => easeOutQuad_default
+});
+module.exports = __toCommonJS(easeOutQuad_exports);
 function ease(t) {
-    return t * (2 - t);
+  return t * (2 - t);
 }
-export default ease;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWFzZU91dFF1YWQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlYXNlT3V0UXVhZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FtQkc7QUFDSCxTQUFTLElBQUksQ0FBQyxDQUFDO0lBQ1gsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUM7QUFDdkIsQ0FBQztBQUNELGVBQWUsSUFBSSxDQUFDIn0=
+var easeOutQuad_default = ease;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

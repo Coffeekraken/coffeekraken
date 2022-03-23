@@ -1,26 +1,43 @@
-// @ts-nocheck
-import __scrollTo from './scrollTo';
-import __deepMerge from '../../../shared/object/deepMerge';
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var scrollToLocationHash_exports = {};
+__export(scrollToLocationHash_exports, {
+  default: () => scrollToLocationHash_default
+});
+module.exports = __toCommonJS(scrollToLocationHash_exports);
+var import_scrollTo = __toESM(require("./scrollTo"), 1);
+var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"), 1);
 function scrollToLocationHash(settings = {}) {
-    settings = __deepMerge({
-        scroll: {},
-    }, settings);
-    // check if we have an hash in the url
-    const hash = document.location.hash;
-    // if not, do nothing
-    if (!hash)
-        return;
-    // try to get the hash target in the page
-    const targetElm = document.querySelector(hash);
-    // if no target found, do nothing
-    if (!targetElm)
-        return;
-    // tell the browser that we handle the scroll restoration manually
-    if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-    }
-    // scroll to target
-    return __scrollTo(targetElm, settings.scroll);
+  settings = (0, import_deepMerge.default)({
+    scroll: {}
+  }, settings);
+  const hash = document.location.hash;
+  if (!hash)
+    return;
+  const targetElm = document.querySelector(hash);
+  if (!targetElm)
+    return;
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+  return (0, import_scrollTo.default)(targetElm, settings.scroll);
 }
-export default scrollToLocationHash;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsVG9Mb2NhdGlvbkhhc2guanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY3JvbGxUb0xvY2F0aW9uSGFzaC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFpQyxNQUFNLFlBQVksQ0FBQztBQUUzRCxPQUFPLFdBQVcsTUFBTSxrQ0FBa0MsQ0FBQztBQWlDM0QsU0FBUyxvQkFBb0IsQ0FDekIsV0FBbUQsRUFBRTtJQUVyRCxRQUFRLEdBQUcsV0FBVyxDQUNsQjtRQUNJLE1BQU0sRUFBRSxFQUFFO0tBQ2IsRUFDRCxRQUFRLENBQ1gsQ0FBQztJQUVGLHNDQUFzQztJQUN0QyxNQUFNLElBQUksR0FBRyxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQztJQUVwQyxxQkFBcUI7SUFDckIsSUFBSSxDQUFDLElBQUk7UUFBRSxPQUFPO0lBRWxCLHlDQUF5QztJQUN6QyxNQUFNLFNBQVMsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBRS9DLGlDQUFpQztJQUNqQyxJQUFJLENBQUMsU0FBUztRQUFFLE9BQU87SUFFdkIsa0VBQWtFO0lBQ2xFLElBQUksbUJBQW1CLElBQUksT0FBTyxFQUFFO1FBQ2hDLE9BQU8sQ0FBQyxpQkFBaUIsR0FBRyxRQUFRLENBQUM7S0FDeEM7SUFFRCxtQkFBbUI7SUFDbkIsT0FBTyxVQUFVLENBQUMsU0FBUyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsQ0FBQztBQUNsRCxDQUFDO0FBQ0QsZUFBZSxvQkFBb0IsQ0FBQyJ9
+var scrollToLocationHash_default = scrollToLocationHash;

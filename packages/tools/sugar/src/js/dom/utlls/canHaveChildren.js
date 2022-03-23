@@ -1,43 +1,37 @@
-// @ts-nocheck
-/**
- * @name          canHaveChildren
- * @namespace            js.dom.utils
- * @type          Function
- * @platform          js
- * @status      beta
- *
- * This function take as input either a tagName String like "img", "div", etc... or an HTMLElement node
- * and return true or false depending if this element is supposed to have children or not.
- *
- * @param       {String|HTMLElement}          element       The element to check. A tagName like "img", or directly a HTMLElement node reference
- * @return      {Boolean}                                   true if the element is supposed to have children, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import canHaveChildren from '@coffeekraken/sugar/js/dom/canHaveChildren';
- * canHaveChildren('img'); // => false
- * canHaveChildren('div'); // => true
- *
- * @since         2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var canHaveChildren_exports = {};
+__export(canHaveChildren_exports, {
+  default: () => canHaveChildren_default
+});
+module.exports = __toCommonJS(canHaveChildren_exports);
 function canHaveChildren(element) {
-    if (typeof element === 'string') {
-        element = document.createElement(element);
-    }
-    else if (!(element instanceof HTMLElement)) {
-        throw `The element parameter can be either a string or an HTMLElement node reference... You've passed "${typeof element}"`;
-    }
-    if ('canHaveHTML' in element)
-        return element.canHaveHTML;
-    const tagName = element.tagName;
-    const closeTag = `</${tagName}>`.toLowerCase();
-    if (element.outerHTML.slice((tagName.length + 3) * -1) === closeTag)
-        return true;
-    return false;
+  if (typeof element === "string") {
+    element = document.createElement(element);
+  } else if (!(element instanceof HTMLElement)) {
+    throw `The element parameter can be either a string or an HTMLElement node reference... You've passed "${typeof element}"`;
+  }
+  if ("canHaveHTML" in element)
+    return element.canHaveHTML;
+  const tagName = element.tagName;
+  const closeTag = `</${tagName}>`.toLowerCase();
+  if (element.outerHTML.slice((tagName.length + 3) * -1) === closeTag)
+    return true;
+  return false;
 }
-export default canHaveChildren;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2FuSGF2ZUNoaWxkcmVuLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2FuSGF2ZUNoaWxkcmVuLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxlQUFlLENBQUMsT0FBb0I7SUFDekMsSUFBSSxPQUFPLE9BQU8sS0FBSyxRQUFRLEVBQUU7UUFDN0IsT0FBTyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsT0FBTyxDQUFDLENBQUM7S0FDN0M7U0FBTSxJQUFJLENBQUMsQ0FBQyxPQUFPLFlBQVksV0FBVyxDQUFDLEVBQUU7UUFDMUMsTUFBTSxtR0FBbUcsT0FBTyxPQUFPLEdBQUcsQ0FBQztLQUM5SDtJQUNELElBQUksYUFBYSxJQUFJLE9BQU87UUFBRSxPQUFPLE9BQU8sQ0FBQyxXQUFXLENBQUM7SUFDekQsTUFBTSxPQUFPLEdBQUcsT0FBTyxDQUFDLE9BQU8sQ0FBQztJQUNoQyxNQUFNLFFBQVEsR0FBRyxLQUFLLE9BQU8sR0FBRyxDQUFDLFdBQVcsRUFBRSxDQUFDO0lBQy9DLElBQUksT0FBTyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxPQUFPLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEtBQUssUUFBUTtRQUMvRCxPQUFPLElBQUksQ0FBQztJQUNoQixPQUFPLEtBQUssQ0FBQztBQUNqQixDQUFDO0FBQ0QsZUFBZSxlQUFlLENBQUMifQ==
+var canHaveChildren_default = canHaveChildren;

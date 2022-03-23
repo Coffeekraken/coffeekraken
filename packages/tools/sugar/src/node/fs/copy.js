@@ -1,31 +1,32 @@
-// @ts-nocheck
-import __fs from 'fs-extra';
-/**
- * @name        copy
- * @namespace            node.fs
- * @type          Function
- * @async
- * @platform        node
- * @status          beta
- *
- * Copy a file or directory (async)
- *
- * @param       {String}              src           The source path to copy
- * @param       {String}              dest          The destination path
- * @return      {Promise}                           A promise that will be resolved when the copy is completed
- *
- * @example       js
- * import copy from '@coffeekraken/node/fs/copy';
- * copy('my/cool/file.jpg', 'my/new/file.jpg').then(() => {
- *    // do something on complete...
- * });
- *
- * @see             https://github.com/jprichardson/node-fs-extra
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var copy_exports = {};
+__export(copy_exports, {
+  default: () => copy_default
+});
+module.exports = __toCommonJS(copy_exports);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function copy(src, dest) {
-    return __fs.copy(src, dest);
+  return import_fs_extra.default.copy(src, dest);
 }
-export default copy;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29weS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvcHkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sSUFBSSxNQUFNLFVBQVUsQ0FBQztBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSTtJQUNuQixPQUFPLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxDQUFDO0FBQ2hDLENBQUM7QUFDRCxlQUFlLElBQUksQ0FBQyJ9
+var copy_default = copy;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

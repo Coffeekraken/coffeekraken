@@ -1,41 +1,36 @@
-// @ts-nocheck
-/**
- * @name        isJson
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the passed value is a valid json
- *
- * @param    {Mixed}    value    The value to check
- * @return   {Boolean}   true if it's a valid json, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import isJson from '@coffeekraken/sugar/js/is/json'
- * if (isJson('[{id:10}]')) {
- *   // do something
- * }
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var json_exports = {};
+__export(json_exports, {
+  default: () => json_default
+});
+module.exports = __toCommonJS(json_exports);
 function isJson(value) {
-    try {
-        const res = JSON.parse(value);
-        if (Object.keys(res).length)
-            return true;
-        return false;
-    }
-    catch (e) {
-        return false;
-    }
-    return true;
+  try {
+    const res = JSON.parse(value);
+    if (Object.keys(res).length)
+      return true;
+    return false;
+  } catch (e) {
+    return false;
+  }
+  return true;
 }
-export default isJson;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianNvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImpzb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBUyxNQUFNLENBQUMsS0FBSztJQUNqQixJQUFJO1FBQ0EsTUFBTSxHQUFHLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUM5QixJQUFJLE1BQU0sQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUMsTUFBTTtZQUFFLE9BQU8sSUFBSSxDQUFDO1FBQ3pDLE9BQU8sS0FBSyxDQUFDO0tBQ2hCO0lBQUMsT0FBTyxDQUFDLEVBQUU7UUFDUixPQUFPLEtBQUssQ0FBQztLQUNoQjtJQUNELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFDRCxlQUFlLE1BQU0sQ0FBQyJ9
+var json_default = isJson;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

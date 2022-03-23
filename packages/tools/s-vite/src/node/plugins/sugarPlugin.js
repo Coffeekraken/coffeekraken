@@ -1,4 +1,33 @@
-import __sVitePluginSugar from '@coffeekraken/s-vite-plugin-sugar';
-export const postcss = true;
-export default __sVitePluginSugar({});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3VnYXJQbHVnaW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdWdhclBsdWdpbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLGtCQUFrQixNQUFNLG1DQUFtQyxDQUFDO0FBQ25FLE1BQU0sQ0FBQyxNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUM7QUFDNUIsZUFBZSxrQkFBa0IsQ0FBQyxFQUFFLENBQUMsQ0FBQyJ9
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var sugarPlugin_exports = {};
+__export(sugarPlugin_exports, {
+  default: () => sugarPlugin_default,
+  postcss: () => postcss
+});
+module.exports = __toCommonJS(sugarPlugin_exports);
+var import_s_vite_plugin_sugar = __toESM(require("@coffeekraken/s-vite-plugin-sugar"), 1);
+const postcss = true;
+var sugarPlugin_default = (0, import_s_vite_plugin_sugar.default)({});
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  postcss
+});

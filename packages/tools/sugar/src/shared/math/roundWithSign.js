@@ -1,25 +1,27 @@
-/**
- * @name        roundWithSign
- * @namespace   sugar.shared.math
- * @type       Function
- * @status      stable
- * @platform    node
- * @platform        js
- *
- * This function allows you to round a number by keeping his sign "+" or "-"
- *
- * @param       {Number}    number    The number to round
- * @return      {Number}     The rounded number
- *
- * @example         js
- * import __roundWithSign from '@coffeekraken/sugar/shared/math/roundWithSign';
- * __roundWithSign(1.5); // => 1
- * __roundWithSign(-1.5); // => -1
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function roundWithSign(number) {
-    return Math.sign(number) * Math.round(Math.abs(number));
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var roundWithSign_exports = {};
+__export(roundWithSign_exports, {
+  default: () => roundWithSign
+});
+module.exports = __toCommonJS(roundWithSign_exports);
+function roundWithSign(number) {
+  return Math.sign(number) * Math.round(Math.abs(number));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm91bmRXaXRoU2lnbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJvdW5kV2l0aFNpZ24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxhQUFhLENBQUMsTUFBYztJQUNoRCxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUM7QUFDNUQsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

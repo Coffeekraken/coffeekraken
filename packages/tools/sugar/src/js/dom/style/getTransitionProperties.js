@@ -1,68 +1,57 @@
-// @ts-nocheck
-import __getStyleProperty from './getStyleProperty';
-import __convert from '../../../shared/time/convert';
-/**
- * @name      getTransitionProperties
- * @namespace            js.dom.style
- * @type      Function
- * @platform          js
- * @status        wip
- *
- * Get the css transition properties from an HTMLElement in an object format
- *
- * @param 		{HTMLElement} 					elm  		The element to get the properties from
- * @return 		{Object} 									The animation properties
- *
- * @todo      refactor
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import getTransitionProperties from '@coffeekraken/sugar/js/dom/getTransitionProperties'
- * const props = getTransitionProperties(myCoolHTMLElement);
- * // output format
- * // {
- * // 	property : ['all'],
- * // 	duration : [200],
- * // 	delay : [0],
- * // 	timingFunction : ['linear'],
- * // 	totalDuration : 200
- * // }
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var getTransitionProperties_exports = {};
+__export(getTransitionProperties_exports, {
+  default: () => getTransitionProperties_default
+});
+module.exports = __toCommonJS(getTransitionProperties_exports);
+var import_getStyleProperty = __toESM(require("./getStyleProperty"), 1);
+var import_convert = __toESM(require("../../../shared/time/convert"), 1);
 function splitIfNeeded(what, separator) {
-    if (what.indexOf(separator) !== -1) {
-        return what.split(separator).map((item) => item.trim());
-    }
-    return [what];
+  if (what.indexOf(separator) !== -1) {
+    return what.split(separator).map((item) => item.trim());
+  }
+  return [what];
 }
 function getTransitionProperties(elm) {
-    // get the transition properties
-    const property = __getStyleProperty(elm, 'transition-property');
-    const duration = __getStyleProperty(elm, 'transition-duration') || 0;
-    const timingFunction = __getStyleProperty(elm, 'transition-timing-function');
-    const delay = __getStyleProperty(elm, 'transition-delay');
-    // return the transition object
-    const props = {
-        property: splitIfNeeded(property, ','),
-        duration: splitIfNeeded(duration, ',').map((value) => __convert(value, 'ms')),
-        delay: splitIfNeeded(delay, ',').map((value) => __convert(value, 'ms')),
-        timingFunction: splitIfNeeded(timingFunction, ','),
-    };
-    let totalDuration = 0;
-    let i = 0;
-    const delays = [0].concat(props.delay);
-    [0].concat(props.duration).forEach((val) => {
-        if (val + delays[i] > totalDuration) {
-            totalDuration = val + delays[i];
-        }
-        i++;
-    });
-    props.totalDuration = totalDuration;
-    return props;
+  const property = (0, import_getStyleProperty.default)(elm, "transition-property");
+  const duration = (0, import_getStyleProperty.default)(elm, "transition-duration") || 0;
+  const timingFunction = (0, import_getStyleProperty.default)(elm, "transition-timing-function");
+  const delay = (0, import_getStyleProperty.default)(elm, "transition-delay");
+  const props = {
+    property: splitIfNeeded(property, ","),
+    duration: splitIfNeeded(duration, ",").map((value) => (0, import_convert.default)(value, "ms")),
+    delay: splitIfNeeded(delay, ",").map((value) => (0, import_convert.default)(value, "ms")),
+    timingFunction: splitIfNeeded(timingFunction, ",")
+  };
+  let totalDuration = 0;
+  let i = 0;
+  const delays = [0].concat(props.delay);
+  [0].concat(props.duration).forEach((val) => {
+    if (val + delays[i] > totalDuration) {
+      totalDuration = val + delays[i];
+    }
+    i++;
+  });
+  props.totalDuration = totalDuration;
+  return props;
 }
-export default getTransitionProperties;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0VHJhbnNpdGlvblByb3BlcnRpZXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJnZXRUcmFuc2l0aW9uUHJvcGVydGllcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxrQkFBa0IsTUFBTSxvQkFBb0IsQ0FBQztBQUNwRCxPQUFPLFNBQVMsTUFBTSw4QkFBOEIsQ0FBQztBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQStCRztBQUVILFNBQVMsYUFBYSxDQUFDLElBQUksRUFBRSxTQUFTO0lBQ2xDLElBQUksSUFBSSxDQUFDLE9BQU8sQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUNoQyxPQUFPLElBQUksQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUUsQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQztLQUMzRDtJQUNELE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUNsQixDQUFDO0FBRUQsU0FBUyx1QkFBdUIsQ0FBQyxHQUFnQjtJQUM3QyxnQ0FBZ0M7SUFDaEMsTUFBTSxRQUFRLEdBQUcsa0JBQWtCLENBQUMsR0FBRyxFQUFFLHFCQUFxQixDQUFDLENBQUM7SUFDaEUsTUFBTSxRQUFRLEdBQUcsa0JBQWtCLENBQUMsR0FBRyxFQUFFLHFCQUFxQixDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3JFLE1BQU0sY0FBYyxHQUFHLGtCQUFrQixDQUNyQyxHQUFHLEVBQ0gsNEJBQTRCLENBQy9CLENBQUM7SUFDRixNQUFNLEtBQUssR0FBRyxrQkFBa0IsQ0FBQyxHQUFHLEVBQUUsa0JBQWtCLENBQUMsQ0FBQztJQUUxRCwrQkFBK0I7SUFDL0IsTUFBTSxLQUFLLEdBQUc7UUFDVixRQUFRLEVBQUUsYUFBYSxDQUFDLFFBQVEsRUFBRSxHQUFHLENBQUM7UUFDdEMsUUFBUSxFQUFFLGFBQWEsQ0FBQyxRQUFRLEVBQUUsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FDakQsU0FBUyxDQUFDLEtBQUssRUFBRSxJQUFJLENBQUMsQ0FDekI7UUFDRCxLQUFLLEVBQUUsYUFBYSxDQUFDLEtBQUssRUFBRSxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLFNBQVMsQ0FBQyxLQUFLLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFDdkUsY0FBYyxFQUFFLGFBQWEsQ0FBQyxjQUFjLEVBQUUsR0FBRyxDQUFDO0tBQ3JELENBQUM7SUFDRixJQUFJLGFBQWEsR0FBRyxDQUFDLENBQUM7SUFDdEIsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQ1YsTUFBTSxNQUFNLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3ZDLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxHQUFHLEVBQUUsRUFBRTtRQUN2QyxJQUFJLEdBQUcsR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDLEdBQUcsYUFBYSxFQUFFO1lBQ2pDLGFBQWEsR0FBRyxHQUFHLEdBQUcsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDO1NBQ25DO1FBQ0QsQ0FBQyxFQUFFLENBQUM7SUFDUixDQUFDLENBQUMsQ0FBQztJQUNILEtBQUssQ0FBQyxhQUFhLEdBQUcsYUFBYSxDQUFDO0lBQ3BDLE9BQU8sS0FBSyxDQUFDO0FBQ2pCLENBQUM7QUFDRCxlQUFlLHVCQUF1QixDQUFDIn0=
+var getTransitionProperties_default = getTransitionProperties;

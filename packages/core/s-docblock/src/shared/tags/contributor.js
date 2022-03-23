@@ -1,37 +1,40 @@
-// @ts-nocheck
-/**
- * @name              contributor
- * @namespace           shared.tags
- * @type              Function
- * @platform            node
- * @status              beta
- *
- * Parse the contributor tag
- *
- * @param       {Object}          data        The data object parsed in the string
- * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
- * @return      {Object}                      The formated object
- *
- * @todo      interface
- * @todo      doc
- *
- * @since       2.0.0
- * @contributor 	Olivier Bossel <olivier.bossel@gmail.com>
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var contributor_exports = {};
+__export(contributor_exports, {
+  default: () => contributor_default
+});
+module.exports = __toCommonJS(contributor_exports);
 function contributor(data, blockSettings) {
-    data = Array.from(data);
-    const contributors = [];
-    data.forEach((d) => {
-        const contributorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(d.value);
-        if (!contributorNfo)
-            return null;
-        contributors.push({
-            name: contributorNfo[1],
-            email: contributorNfo[2],
-            url: contributorNfo[3],
-        });
+  data = Array.from(data);
+  const contributors = [];
+  data.forEach((d) => {
+    const contributorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(d.value);
+    if (!contributorNfo)
+      return null;
+    contributors.push({
+      name: contributorNfo[1],
+      email: contributorNfo[2],
+      url: contributorNfo[3]
     });
-    return contributors;
+  });
+  return contributors;
 }
-export default contributor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udHJpYnV0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb250cmlidXRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILFNBQVMsV0FBVyxDQUFDLElBQUksRUFBRSxhQUFhO0lBQ3BDLElBQUksR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBRXhCLE1BQU0sWUFBWSxHQUFVLEVBQUUsQ0FBQztJQUUvQixJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7UUFDZixNQUFNLGNBQWMsR0FDaEIsNkRBQTZELENBQUMsSUFBSSxDQUM5RCxDQUFDLENBQUMsS0FBSyxDQUNWLENBQUM7UUFDTixJQUFJLENBQUMsY0FBYztZQUFFLE9BQU8sSUFBSSxDQUFDO1FBRWpDLFlBQVksQ0FBQyxJQUFJLENBQUM7WUFDZCxJQUFJLEVBQUUsY0FBYyxDQUFDLENBQUMsQ0FBQztZQUN2QixLQUFLLEVBQUUsY0FBYyxDQUFDLENBQUMsQ0FBQztZQUN4QixHQUFHLEVBQUUsY0FBYyxDQUFDLENBQUMsQ0FBQztTQUN6QixDQUFDLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztJQUVILE9BQU8sWUFBWSxDQUFDO0FBQ3hCLENBQUM7QUFDRCxlQUFlLFdBQVcsQ0FBQyJ9
+var contributor_default = contributor;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,34 +1,38 @@
-import __callsites from 'callsites';
-import __esm from 'esm';
-import { createRequire } from 'module';
-/**
- * @name                require
- * @namespace           node.esm
- * @type                Function
- * @platform            node
- * @status              beta
- *
- * This function allows you to get back an fully functional "require" function in
- * an ESM context.
- *
- * @param       {String}            package         The package you want to require
- * @return      {Function}                  The "require" cjs fully functional function
- *
- * @example         js
- * import require from '@coffeekraken/sugar/node/esm/require';
- * require('something');
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function require(pkg) {
-    var _a;
-    // @ts-ignore
-    let filePath = (_a = __callsites()[1]
-        .getFileName()) === null || _a === void 0 ? void 0 : _a.replace(/^file:\/\//, '');
-    const rr = createRequire(filePath);
-    const r = __esm({});
-    const requiredPkg = rr(pkg);
-    return requiredPkg;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var require_exports = {};
+__export(require_exports, {
+  default: () => require2
+});
+module.exports = __toCommonJS(require_exports);
+var import_callsites = __toESM(require("callsites"), 1);
+var import_esm = __toESM(require("esm"), 1);
+var import_module = require("module");
+function require2(pkg) {
+  var _a;
+  let filePath = (_a = (0, import_callsites.default)()[1].getFileName()) == null ? void 0 : _a.replace(/^file:\/\//, "");
+  const rr = (0, import_module.createRequire)(filePath);
+  const r = (0, import_esm.default)({});
+  const requiredPkg = rr(pkg);
+  return requiredPkg;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVxdWlyZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlcXVpcmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxXQUFXLE1BQU0sV0FBVyxDQUFDO0FBQ3BDLE9BQU8sS0FBSyxNQUFNLEtBQUssQ0FBQztBQUN4QixPQUFPLEVBQUUsYUFBYSxFQUFFLE1BQU0sUUFBUSxDQUFDO0FBRXZDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxPQUFPLENBQUMsR0FBVzs7SUFDdkMsYUFBYTtJQUNiLElBQUksUUFBUSxHQUFHLE1BQUEsV0FBVyxFQUFFLENBQUMsQ0FBQyxDQUFDO1NBQzFCLFdBQVcsRUFBRSwwQ0FDWixPQUFPLENBQUMsWUFBWSxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ2hDLE1BQU0sRUFBRSxHQUFHLGFBQWEsQ0FBUyxRQUFRLENBQUMsQ0FBQztJQUMzQyxNQUFNLENBQUMsR0FBRyxLQUFLLENBQUMsRUFBRSxDQUFDLENBQUM7SUFDcEIsTUFBTSxXQUFXLEdBQUcsRUFBRSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQzVCLE9BQU8sV0FBVyxDQUFDO0FBQ3ZCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

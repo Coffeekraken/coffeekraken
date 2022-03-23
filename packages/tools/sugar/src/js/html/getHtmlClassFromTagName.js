@@ -1,39 +1,38 @@
-// @ts-nocheck
-import __upperFirst from '../../shared/string/upperFirst';
-import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
-/**
- * @name            getHtmlClassFromTagName
- * @namespace            js.html
- * @type            Function
- * @platform          js
- * @status        beta
- *
- * This function simply return the HTML{name}Element class depending on the passed
- * tag name like "p", "input", "textarea", etc...
- *
- * @param       {String}      tagName       The tagName to get the class for
- * @return      {HTMLElement}               The HTMLElement class that correspond to the requested tag name
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import getHtmlClassFromTagName from '@coffeekraken/sugar/js/html/getHtmlClassFromTagName';
- * getHtmlClassFromTagName('a'); // => HTMLAnchorElement
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var getHtmlClassFromTagName_exports = {};
+__export(getHtmlClassFromTagName_exports, {
+  default: () => getHtmlClassFromTagName_default
+});
+module.exports = __toCommonJS(getHtmlClassFromTagName_exports);
+var import_upperFirst = __toESM(require("../../shared/string/upperFirst"), 1);
+var import_htmlTagToHtmlClassMap = __toESM(require("./htmlTagToHtmlClassMap"), 1);
 function getHtmlClassFromTagName(tagName) {
-    if (!tagName)
-        return HTMLElement;
-    const tagNameUpperFirst = __upperFirst(tagName);
-    if (window[`HTML${tagNameUpperFirst}Element`])
-        return window[`HTML${tagNameUpperFirst}Element`];
-    if (__htmlTagToHtmlClassMap[tagName])
-        return __htmlTagToHtmlClassMap[tagName];
-    return window.HTMLElement;
+  if (!tagName)
+    return HTMLElement;
+  const tagNameUpperFirst = (0, import_upperFirst.default)(tagName);
+  if (window[`HTML${tagNameUpperFirst}Element`])
+    return window[`HTML${tagNameUpperFirst}Element`];
+  if (import_htmlTagToHtmlClassMap.default[tagName])
+    return import_htmlTagToHtmlClassMap.default[tagName];
+  return window.HTMLElement;
 }
-export default getHtmlClassFromTagName;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0SHRtbENsYXNzRnJvbVRhZ05hbWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJnZXRIdG1sQ2xhc3NGcm9tVGFnTmFtZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxZQUFZLE1BQU0sZ0NBQWdDLENBQUM7QUFDMUQsT0FBTyx1QkFBdUIsTUFBTSx5QkFBeUIsQ0FBQztBQUU5RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLHVCQUF1QixDQUFDLE9BQWU7SUFDNUMsSUFBSSxDQUFDLE9BQU87UUFBRSxPQUFPLFdBQVcsQ0FBQztJQUVqQyxNQUFNLGlCQUFpQixHQUFHLFlBQVksQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUNoRCxJQUFJLE1BQU0sQ0FBQyxPQUFPLGlCQUFpQixTQUFTLENBQUM7UUFDekMsT0FBTyxNQUFNLENBQUMsT0FBTyxpQkFBaUIsU0FBUyxDQUFDLENBQUM7SUFFckQsSUFBSSx1QkFBdUIsQ0FBQyxPQUFPLENBQUM7UUFDaEMsT0FBTyx1QkFBdUIsQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUU1QyxPQUFPLE1BQU0sQ0FBQyxXQUFXLENBQUM7QUFDOUIsQ0FBQztBQUNELGVBQWUsdUJBQXVCLENBQUMifQ==
+var getHtmlClassFromTagName_default = getHtmlClassFromTagName;

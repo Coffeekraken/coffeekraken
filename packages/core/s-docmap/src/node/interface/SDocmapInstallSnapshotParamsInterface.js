@@ -1,31 +1,41 @@
-// @ts-nocheck
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SDocmapInstallSnapshotParamsInterface
- * @namespace           node.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This class represent the interface that describe the minimum requirement
- * needed to install snapshots
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SDocmapInstallSnapshotParamsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            glob: {
-                description: 'Specify a glob pattern where to find the snapshots to install',
-                type: 'String',
-                default: __SSugarConfig.get('docmap.installSnapshot.glob'),
-            },
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SDocmapInstallSnapshotParamsInterface_exports = {};
+__export(SDocmapInstallSnapshotParamsInterface_exports, {
+  default: () => SDocmapInstallSnapshotParamsInterface_default
+});
+module.exports = __toCommonJS(SDocmapInstallSnapshotParamsInterface_exports);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SDocmapInstallSnapshotParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      glob: {
+        description: "Specify a glob pattern where to find the snapshots to install",
+        type: "String",
+        default: import_s_sugar_config.default.get("docmap.installSnapshot.glob")
+      }
+    };
+  }
 }
-export default SDocmapInstallSnapshotParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY21hcEluc3RhbGxTbmFwc2hvdFBhcmFtc0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNEb2NtYXBJbnN0YWxsU25hcHNob3RQYXJhbXNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sY0FBYyxNQUFNLDhCQUE4QixDQUFDO0FBQzFELE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7OztHQWNHO0FBQ0gsTUFBTSxxQ0FBc0MsU0FBUSxZQUFZO0lBQzVELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsV0FBVyxFQUNQLCtEQUErRDtnQkFDbkUsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLGNBQWMsQ0FBQyxHQUFHLENBQUMsNkJBQTZCLENBQUM7YUFDN0Q7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ0QsZUFBZSxxQ0FBcUMsQ0FBQyJ9
+var SDocmapInstallSnapshotParamsInterface_default = SDocmapInstallSnapshotParamsInterface;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

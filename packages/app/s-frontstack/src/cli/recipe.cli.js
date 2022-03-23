@@ -7,19 +7,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __SPromise from '@coffeekraken/s-promise';
-import __SFrontstack from '../node/SFrontstack';
-import __SStdio from '@coffeekraken/s-stdio';
-export const sugarCliSettings = {
-    stdio: __SStdio.UI_TERMINAL,
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-export default function recipe(stringArgs = '') {
-    return new __SPromise(({ resolve, pipe }) => __awaiter(this, void 0, void 0, function* () {
-        const frontstack = new __SFrontstack();
-        const promise = frontstack.recipe(stringArgs);
-        pipe(promise);
-        yield promise;
-        resolve(promise);
-    }));
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVjaXBlLmNsaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlY2lwZS5jbGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFDakQsT0FBTyxhQUFhLE1BQU0scUJBQXFCLENBQUM7QUFDaEQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0MsTUFBTSxDQUFDLE1BQU0sZ0JBQWdCLEdBQUc7SUFDNUIsS0FBSyxFQUFFLFFBQVEsQ0FBQyxXQUFXO0NBQzlCLENBQUM7QUFFRixNQUFNLENBQUMsT0FBTyxVQUFVLE1BQU0sQ0FBQyxVQUFVLEdBQUcsRUFBRTtJQUMxQyxPQUFPLElBQUksVUFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUM5QyxNQUFNLFVBQVUsR0FBRyxJQUFJLGFBQWEsRUFBRSxDQUFDO1FBQ3ZDLE1BQU0sT0FBTyxHQUFHLFVBQVUsQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUFDLENBQUM7UUFDOUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQ2QsTUFBTSxPQUFPLENBQUM7UUFDZCxPQUFPLENBQUMsT0FBTyxDQUFDLENBQUM7SUFDckIsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUMifQ==
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "@coffeekraken/s-promise", "../node/SFrontstack", "@coffeekraken/s-stdio"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.sugarCliSettings = void 0;
+    const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    const SFrontstack_1 = __importDefault(require("../node/SFrontstack"));
+    const s_stdio_1 = __importDefault(require("@coffeekraken/s-stdio"));
+    exports.sugarCliSettings = {
+        stdio: s_stdio_1.default.UI_TERMINAL,
+    };
+    function recipe(stringArgs = '') {
+        return new s_promise_1.default(({ resolve, pipe }) => __awaiter(this, void 0, void 0, function* () {
+            const frontstack = new SFrontstack_1.default();
+            const promise = frontstack.recipe(stringArgs);
+            pipe(promise);
+            yield promise;
+            resolve(promise);
+        }));
+    }
+    exports.default = recipe;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVjaXBlLmNsaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlY2lwZS5jbGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBQUEsd0VBQWlEO0lBQ2pELHNFQUFnRDtJQUNoRCxvRUFBNkM7SUFFaEMsUUFBQSxnQkFBZ0IsR0FBRztRQUM1QixLQUFLLEVBQUUsaUJBQVEsQ0FBQyxXQUFXO0tBQzlCLENBQUM7SUFFRixTQUF3QixNQUFNLENBQUMsVUFBVSxHQUFHLEVBQUU7UUFDMUMsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBTyxFQUFFLE9BQU8sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1lBQzlDLE1BQU0sVUFBVSxHQUFHLElBQUkscUJBQWEsRUFBRSxDQUFDO1lBQ3ZDLE1BQU0sT0FBTyxHQUFHLFVBQVUsQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUFDLENBQUM7WUFDOUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQ2QsTUFBTSxPQUFPLENBQUM7WUFDZCxPQUFPLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDckIsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7SUFSRCx5QkFRQyJ9

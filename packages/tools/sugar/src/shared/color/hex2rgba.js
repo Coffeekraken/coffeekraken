@@ -1,31 +1,32 @@
-// @ts-nocheck
-import * as __convertColors from 'colors-convert';
-/**
- * @name                  hex2rgba
- * @namespace            js.color
- * @type                  Function
- * @platform          js
- * @platform          node
- * @status            beta
- *
- * Hex to RGBA
- *
- * @param	              {string}       	hex         		The hex string to convert
- * @return            	{object} 			                  	The rgba object representation
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import hex2rgba from '@coffeekraken/sugar/js/color/hex2rgba';
- * hex2rgba('#ff00ff');
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var hex2rgba_exports = {};
+__export(hex2rgba_exports, {
+  default: () => hex2rgba_default
+});
+module.exports = __toCommonJS(hex2rgba_exports);
+var __convertColors = __toESM(require("colors-convert"), 1);
 function hex2rgba(hex) {
-    return __convertColors.hexToRgba(hex, 1);
+  return __convertColors.hexToRgba(hex, 1);
 }
-export default hex2rgba;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGV4MnJnYmEuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJoZXgycmdiYS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsT0FBTyxLQUFLLGVBQWUsTUFBTSxnQkFBZ0IsQ0FBQztBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLFFBQVEsQ0FBQyxHQUFHO0lBQ2pCLE9BQU8sZUFBZSxDQUFDLFNBQVMsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUM7QUFDN0MsQ0FBQztBQUNELGVBQWUsUUFBUSxDQUFDIn0=
+var hex2rgba_default = hex2rgba;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

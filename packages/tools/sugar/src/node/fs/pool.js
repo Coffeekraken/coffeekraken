@@ -1,130 +1,145 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __SFile from '@coffeekraken/s-file';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SPromise from '@coffeekraken/s-promise';
-import __chokidar from 'chokidar';
-import __fs from 'fs';
-import __expandGlob from '../../shared/glob/expandGlob';
-import __deepMerge from '../../shared/object/deepMerge';
-import __matchGlob from '../glob/matchGlob';
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var pool_exports = {};
+__export(pool_exports, {
+  default: () => pool_default
+});
+module.exports = __toCommonJS(pool_exports);
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_chokidar = __toESM(require("chokidar"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_matchGlob = __toESM(require("../glob/matchGlob"), 1);
 function pool(input, settings) {
-    const filesStack = {};
-    return new __SPromise(({ resolve, reject, emit, cancel, on }) => __awaiter(this, void 0, void 0, function* () {
-        var _a;
-        yield __SSugarConfig.load();
-        const set = __deepMerge({
-            SFile: true,
-            cwd: process.cwd(),
-            watch: false,
-            chokidar: {},
-            exclude: [],
-            ignored: ['**/node_modules/**/*', '**/.git/**/*'],
-        }, settings || {});
-        set.chokidar.cwd = set.cwd;
-        if (!Array.isArray(input))
-            input = [input];
-        input = input.map((i) => {
-            var _a;
-            return (_a = i.path) !== null && _a !== void 0 ? _a : i;
-        });
-        // expand glob
-        const expandedGlobs = __expandGlob(input).map((l) => {
-            return l
-                .split(':')[0]
-                .replace(set.cwd + '/', '')
-                .replace(set.cwd, '');
-        });
-        // using chokidar to watch files
-        const watcher = __chokidar.watch(expandedGlobs, Object.assign(Object.assign({}, set.chokidar), { ignored: [...set.ignored, ...((_a = set.exclude) !== null && _a !== void 0 ? _a : [])] }));
-        watcher
-            .on('add', (path) => {
-            if (filesStack[path] ||
-                !__fs.existsSync(`${set.cwd}/${path}`))
-                return;
-            // make sure it's not exists already
-            if (!filesStack[path]) {
-                if (set.SFile)
-                    filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
-                else
-                    filesStack[path] = path;
-            }
-            emit('add', filesStack[path]);
-            emit('file', filesStack[path]);
-        })
-            .on('change', (path) => {
-            if (!__fs.existsSync(`${set.cwd}/${path}`))
-                return;
-            if (!filesStack[path]) {
-                if (set.SFile)
-                    filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
-                else
-                    filesStack[path] = path;
-            }
-            emit('update', filesStack[path]);
-            emit('change', filesStack[path]);
-            emit('file', filesStack[path]);
-        })
-            .on('unlink', (path) => {
-            // @ts-ignore
-            if (filesStack[path] && filesStack[path].path) {
-                // @ts-ignore
-                emit('unlink', filesStack[path].path);
-            }
-            else if (filesStack[path] &&
-                typeof filesStack[path] === 'string') {
-                emit('unlink', filesStack[path]);
-            }
-            delete filesStack[path];
-        })
-            .on('ready', () => {
-            const files = watcher.getWatched();
-            const filesPaths = [];
-            const finalFiles = [];
-            Object.keys(files).forEach((path) => {
-                files[path].forEach((fileName) => {
-                    filesPaths.push(`${path}/${fileName}`);
-                });
-            });
-            filesPaths
-                .filter((filePath) => {
-                return __matchGlob(filePath, input, {
-                    cwd: set.cwd,
-                });
-            })
-                .forEach((filePath) => {
-                if (set.SFile)
-                    finalFiles.push(__SFile.new(`${set.cwd}/${filePath}`));
-                else
-                    finalFiles.push(filePath);
-                emit('file', finalFiles[finalFiles.length - 1]);
-                // save file in file stack
-                filesStack[filePath] =
-                    finalFiles[finalFiles.length - 1];
-            });
-            emit('ready', finalFiles);
-            if (finalFiles.length && !set.ignoreInitial) {
-                emit('files', finalFiles);
-            }
-            if (!set.watch) {
-                watcher.close();
-                resolve(finalFiles);
-            }
-        })
-            // handle cancel
-            .on('cancel', () => {
-            watcher.close();
-        });
-    }), {
-        eventEmitter: {},
+  const filesStack = {};
+  return new import_s_promise.default(async ({ resolve, reject, emit, cancel, on }) => {
+    var _a;
+    await import_s_sugar_config.default.load();
+    const set = (0, import_deepMerge.default)({
+      SFile: true,
+      cwd: process.cwd(),
+      watch: false,
+      chokidar: {},
+      exclude: [],
+      ignored: ["**/node_modules/**/*", "**/.git/**/*"]
+    }, settings || {});
+    set.chokidar.cwd = set.cwd;
+    if (!Array.isArray(input))
+      input = [input];
+    input = input.map((i) => {
+      var _a2;
+      return (_a2 = i.path) != null ? _a2 : i;
     });
+    const expandedGlobs = (0, import_expandGlob.default)(input).map((l) => {
+      return l.split(":")[0].replace(set.cwd + "/", "").replace(set.cwd, "");
+    });
+    const watcher = import_chokidar.default.watch(expandedGlobs, __spreadProps(__spreadValues({}, set.chokidar), {
+      ignored: [...set.ignored, ...(_a = set.exclude) != null ? _a : []]
+    }));
+    watcher.on("add", (path) => {
+      if (filesStack[path] || !import_fs.default.existsSync(`${set.cwd}/${path}`))
+        return;
+      if (!filesStack[path]) {
+        if (set.SFile)
+          filesStack[path] = import_s_file.default.new(`${set.cwd}/${path}`);
+        else
+          filesStack[path] = path;
+      }
+      emit("add", filesStack[path]);
+      emit("file", filesStack[path]);
+    }).on("change", (path) => {
+      if (!import_fs.default.existsSync(`${set.cwd}/${path}`))
+        return;
+      if (!filesStack[path]) {
+        if (set.SFile)
+          filesStack[path] = import_s_file.default.new(`${set.cwd}/${path}`);
+        else
+          filesStack[path] = path;
+      }
+      emit("update", filesStack[path]);
+      emit("change", filesStack[path]);
+      emit("file", filesStack[path]);
+    }).on("unlink", (path) => {
+      if (filesStack[path] && filesStack[path].path) {
+        emit("unlink", filesStack[path].path);
+      } else if (filesStack[path] && typeof filesStack[path] === "string") {
+        emit("unlink", filesStack[path]);
+      }
+      delete filesStack[path];
+    }).on("ready", () => {
+      const files = watcher.getWatched();
+      const filesPaths = [];
+      const finalFiles = [];
+      Object.keys(files).forEach((path) => {
+        files[path].forEach((fileName) => {
+          filesPaths.push(`${path}/${fileName}`);
+        });
+      });
+      filesPaths.filter((filePath) => {
+        return (0, import_matchGlob.default)(filePath, input, {
+          cwd: set.cwd
+        });
+      }).forEach((filePath) => {
+        if (set.SFile)
+          finalFiles.push(import_s_file.default.new(`${set.cwd}/${filePath}`));
+        else
+          finalFiles.push(filePath);
+        emit("file", finalFiles[finalFiles.length - 1]);
+        filesStack[filePath] = finalFiles[finalFiles.length - 1];
+      });
+      emit("ready", finalFiles);
+      if (finalFiles.length && !set.ignoreInitial) {
+        emit("files", finalFiles);
+      }
+      if (!set.watch) {
+        watcher.close();
+        resolve(finalFiles);
+      }
+    }).on("cancel", () => {
+      watcher.close();
+    });
+  }, {
+    eventEmitter: {}
+  });
 }
-export default pool;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9vbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInBvb2wudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxPQUFPLE1BQU0sc0JBQXNCLENBQUM7QUFDM0MsT0FBTyxjQUFjLE1BQU0sOEJBQThCLENBQUM7QUFDMUQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFDakQsT0FBTyxVQUFVLE1BQU0sVUFBVSxDQUFDO0FBQ2xDLE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUV0QixPQUFPLFlBQVksTUFBTSw4QkFBOEIsQ0FBQztBQUN4RCxPQUFPLFdBQVcsTUFBTSwrQkFBK0IsQ0FBQztBQUN4RCxPQUFPLFdBQVcsTUFBTSxtQkFBbUIsQ0FBQztBQTJFNUMsU0FBUyxJQUFJLENBQUMsS0FBSyxFQUFFLFFBQWlDO0lBQ2xELE1BQU0sVUFBVSxHQUFxQyxFQUFFLENBQUM7SUFFeEQsT0FBTyxJQUFJLFVBQVUsQ0FDakIsQ0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLE1BQU0sRUFBRSxFQUFFLEVBQUUsRUFBRSxFQUFFOztRQUM1QyxNQUFNLGNBQWMsQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUU1QixNQUFNLEdBQUcsR0FBa0IsV0FBVyxDQUNsQztZQUNJLEtBQUssRUFBRSxJQUFJO1lBQ1gsR0FBRyxFQUFFLE9BQU8sQ0FBQyxHQUFHLEVBQUU7WUFDbEIsS0FBSyxFQUFFLEtBQUs7WUFDWixRQUFRLEVBQUUsRUFBRTtZQUNaLE9BQU8sRUFBRSxFQUFFO1lBQ1gsT0FBTyxFQUFFLENBQUMsc0JBQXNCLEVBQUUsY0FBYyxDQUFDO1NBQ3BELEVBQ0QsUUFBUSxJQUFJLEVBQUUsQ0FDakIsQ0FBQztRQUVGLEdBQUcsQ0FBQyxRQUFRLENBQUMsR0FBRyxHQUFHLEdBQUcsQ0FBQyxHQUFHLENBQUM7UUFFM0IsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDO1lBQUUsS0FB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
+var pool_default = pool;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

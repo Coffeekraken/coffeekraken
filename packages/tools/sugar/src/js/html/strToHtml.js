@@ -1,36 +1,35 @@
-// @ts-nocheck
-/**
- * @name        strToHtml
- * @namespace            js.html
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Return the html (dom) version of a string
- *
- * @param    {HTMLElement}    html    The string to convert to dom nodes
- * @return    {HTMLElement}    The dom nodes representation of the passed string
- * *
- * @example    js
- * import strToHtml from '@coffeekraken/sugar/js/html/strToHtml'
- * const myString = '<p>Hello World</p>'
- * strToHtml(myString) // <p>Hello World</p>
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var strToHtml_exports = {};
+__export(strToHtml_exports, {
+  default: () => strToHtml_default
+});
+module.exports = __toCommonJS(strToHtml_exports);
 function strToHtml(string) {
-    if (document !== undefined && document.createElement !== undefined) {
-        const cont = document.createElement('div');
-        cont.innerHTML = string;
-        if (cont.children.length === 1) {
-            return cont.children[0];
-        }
-        else {
-            return cont;
-        }
+  if (document !== void 0 && document.createElement !== void 0) {
+    const cont = document.createElement("div");
+    cont.innerHTML = string;
+    if (cont.children.length === 1) {
+      return cont.children[0];
+    } else {
+      return cont;
     }
-    return string;
+  }
+  return string;
 }
-export default strToHtml;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyVG9IdG1sLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3RyVG9IdG1sLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQVMsU0FBUyxDQUFDLE1BQWM7SUFDN0IsSUFBSSxRQUFRLEtBQUssU0FBUyxJQUFJLFFBQVEsQ0FBQyxhQUFhLEtBQUssU0FBUyxFQUFFO1FBQ2hFLE1BQU0sSUFBSSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDM0MsSUFBSSxDQUFDLFNBQVMsR0FBRyxNQUFNLENBQUM7UUFDeEIsSUFBSSxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sS0FBSyxDQUFDLEVBQUU7WUFDNUIsT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1NBQzNCO2FBQU07WUFDSCxPQUFPLElBQUksQ0FBQztTQUNmO0tBQ0o7SUFDRCxPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var strToHtml_default = strToHtml;

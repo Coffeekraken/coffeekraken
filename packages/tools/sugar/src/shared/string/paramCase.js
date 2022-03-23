@@ -1,32 +1,29 @@
-// @ts-nocheck
-import { paramCase } from 'param-case';
-/**
- * @name          paramCase
- * @namespace            js.string
- * @type          Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function transform a string into a param case one like so "something-cool"
- *
- * @param       {String}        string          The string to convert
- * @return      {String}                        The converted string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import paramCase from '@coffeekraken/sugar/js/string/paramCase';
- * paramCase('some thoing cool'); // => some-thing-cool
- *
- * @see         https://www.npmjs.com/package/param-case
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var paramCase_exports = {};
+__export(paramCase_exports, {
+  default: () => paramCase_default
+});
+module.exports = __toCommonJS(paramCase_exports);
+var import_param_case = require("param-case");
 function paramCaseFn(string) {
-    return paramCase(string);
+  return (0, import_param_case.paramCase)(string);
 }
-export default paramCaseFn;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyYW1DYXNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFyYW1DYXNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0sWUFBWSxDQUFDO0FBRXZDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLFdBQVcsQ0FBQyxNQUFNO0lBQ3ZCLE9BQU8sU0FBUyxDQUFDLE1BQU0sQ0FBQyxDQUFDO0FBQzdCLENBQUM7QUFDRCxlQUFlLFdBQVcsQ0FBQyJ9
+var paramCase_default = paramCaseFn;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

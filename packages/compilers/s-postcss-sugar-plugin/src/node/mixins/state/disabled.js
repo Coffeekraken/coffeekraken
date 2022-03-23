@@ -1,40 +1,65 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __astNodesToString from '../../utils/astNodesToString';
-class postcssSugarPluginStateDisabledMixinInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var disabled_exports = {};
+__export(disabled_exports, {
+  default: () => disabled_default,
+  interface: () => postcssSugarPluginStateDisabledMixinInterface
+});
+module.exports = __toCommonJS(disabled_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_astNodesToString = __toESM(require("../../utils/astNodesToString"));
+class postcssSugarPluginStateDisabledMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginStateDisabledMixinInterface as interface };
-/**
- * @name           disabled
- * @namespace      node.mixins.state
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin allows you to target some disabled items to apply some styling.
- * Here's the generated selector:
- * - &:disabled
- *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
- *
- * @example         postcss
- * .myCoolItem {
- *  \@sugar.state.disabled {
- *      // ...
- *  }
- * }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ className: '' }, (params !== null && params !== void 0 ? params : {}));
-    const vars = [];
-    vars.push(`&:disabled, &[disabled] {`);
-    vars.push(__astNodesToString(atRule.nodes));
-    vars.push(`}`);
-    return vars;
+function disabled_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    className: ""
+  }, params != null ? params : {});
+  const vars = [];
+  vars.push(`&:disabled, &[disabled] {`);
+  vars.push((0, import_astNodesToString.default)(atRule.nodes));
+  vars.push(`}`);
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGlzYWJsZWQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkaXNhYmxlZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGtCQUFrQixNQUFNLDhCQUE4QixDQUFDO0FBRTlELE1BQU0sNkNBQThDLFNBQVEsWUFBWTtJQUNwRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUNELE9BQU8sRUFBRSw2Q0FBNkMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUl0RTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsR0FBRyxnQkFDaEIsU0FBUyxFQUFFLEVBQUUsSUFDVixDQUFDLE1BQU0sYUFBTixNQUFNLGNBQU4sTUFBTSxHQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUMsMkJBQTJCLENBQUMsQ0FBQztJQUN2QyxJQUFJLENBQUMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO0lBQzVDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7SUFFZixPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

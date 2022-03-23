@@ -38,7 +38,7 @@ export default function (settings: IPackageCacheDirSettings = {}) {
     };
     const packageCacheDir = __SSugarConfig.get('storage.package.cacheDir');
     if (packageCacheDir !== undefined) {
-        __fs.ensureDirSync(packageCacheDir);
+        // __fs.ensureDirSync(packageCacheDir);
         return packageCacheDir;
     }
     return undefined;

@@ -1,73 +1,84 @@
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var parseTypeString_exports = {};
+__export(parseTypeString_exports, {
+  default: () => parseTypeString_default
+});
+module.exports = __toCommonJS(parseTypeString_exports);
 function parseSingleTypeString(typeString) {
-    let ofStr = '', typeStr = typeString;
-    const ofPartsString = typeString.match(/<(.+)>$/gm);
-    if (ofPartsString && ofPartsString.length) {
-        ofStr = ofPartsString[0].replace('<', '').replace('>', '');
-    }
-    if (ofStr !== '') {
-        typeStr = typeStr.replace(`<${ofStr}>`, '');
-    }
-    // handle the "of" part
-    let ofTypes = ofStr !== '' ? [ofStr.toLowerCase()] : undefined;
-    if (ofStr !== undefined && ofStr.includes('|')) {
-        ofTypes = ofStr.split('|').map((t) => t.trim().toLowerCase());
-    }
-    return {
-        type: typeStr,
-        of: ofTypes
-    };
+  let ofStr = "", typeStr = typeString;
+  const ofPartsString = typeString.match(/<(.+)>$/gm);
+  if (ofPartsString && ofPartsString.length) {
+    ofStr = ofPartsString[0].replace("<", "").replace(">", "");
+  }
+  if (ofStr !== "") {
+    typeStr = typeStr.replace(`<${ofStr}>`, "");
+  }
+  let ofTypes = ofStr !== "" ? [ofStr.toLowerCase()] : void 0;
+  if (ofStr !== void 0 && ofStr.includes("|")) {
+    ofTypes = ofStr.split("|").map((t) => t.trim().toLowerCase());
+  }
+  return {
+    type: typeStr,
+    of: ofTypes
+  };
 }
 const fn = function parseTypeString(typeString) {
-    // typeString = 'Array<Path>|String|Array<Object|Map>|Youhou[]';
-    typeString = typeString.toLowerCase().trim();
-    typeString = typeString
-        .split('|')
-        .map((part) => {
-        part = part.trim().replace(/^([a-zA-Z0-9-_]+)\[\]$/, 'array<$1>');
-        return part;
-    })
-        .join('|');
-    typeString = typeString
-        .split('|')
-        .map((part) => {
-        part = part.trim().replace(/^([a-zA-Z0-9-_]+)\{\}$/, 'object<$1>');
-        return part;
-    })
-        .join('|');
-    let types = [], inGroup = false, currentStr = '';
-    for (let i = 0; i < typeString.length; i++) {
-        const char = typeString[i];
-        if (char === '<') {
-            inGroup = true;
-            currentStr += char;
-        }
-        else if (char === '>') {
-            inGroup = false;
-            currentStr += char;
-        }
-        else if (char === '|') {
-            if (inGroup === false) {
-                types.push(currentStr);
-                currentStr = '';
-            }
-            else {
-                currentStr += char;
-            }
-        }
-        else {
-            currentStr += char;
-        }
+  typeString = typeString.toLowerCase().trim();
+  typeString = typeString.split("|").map((part) => {
+    part = part.trim().replace(/^([a-zA-Z0-9-_]+)\[\]$/, "array<$1>");
+    return part;
+  }).join("|");
+  typeString = typeString.split("|").map((part) => {
+    part = part.trim().replace(/^([a-zA-Z0-9-_]+)\{\}$/, "object<$1>");
+    return part;
+  }).join("|");
+  let types = [], inGroup = false, currentStr = "";
+  for (let i = 0; i < typeString.length; i++) {
+    const char = typeString[i];
+    if (char === "<") {
+      inGroup = true;
+      currentStr += char;
+    } else if (char === ">") {
+      inGroup = false;
+      currentStr += char;
+    } else if (char === "|") {
+      if (inGroup === false) {
+        types.push(currentStr);
+        currentStr = "";
+      } else {
+        currentStr += char;
+      }
+    } else {
+      currentStr += char;
     }
-    types.push(currentStr);
-    const finalTypes = [];
-    types.forEach((type) => {
-        finalTypes.push(parseSingleTypeString(type));
-    });
-    const res = {
-        raw: typeString,
-        types: finalTypes
-    };
-    return res;
+  }
+  types.push(currentStr);
+  const finalTypes = [];
+  types.forEach((type) => {
+    finalTypes.push(parseSingleTypeString(type));
+  });
+  const res = {
+    raw: typeString,
+    types: finalTypes
+  };
+  return res;
 };
-export default fn;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VUeXBlU3RyaW5nLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFyc2VUeXBlU3RyaW5nLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQTRDQSxTQUFTLHFCQUFxQixDQUM1QixVQUFrQjtJQUVsQixJQUFJLEtBQUssR0FBRyxFQUFFLEVBQ1osT0FBTyxHQUFXLFVBQVUsQ0FBQztJQUUvQixNQUFNLGFBQWEsR0FBRyxVQUFVLENBQUMsS0FBSyxDQUFDLFdBQVcsQ0FBQyxDQUFDO0lBQ3BELElBQUksYUFBYSxJQUFJLGFBQWEsQ0FBQyxNQUFNLEVBQUU7UUFDekMsS0FBSyxHQUFHLGFBQWEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsRUFBRSxDQUFDLENBQUM7S0FDNUQ7SUFDRCxJQUFJLEtBQUssS0FBSyxFQUFFLEVBQUU7UUFDaEIsT0FBTyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUMsSUFBSSxLQUFLLEdBQUcsRUFBRSxFQUFFLENBQUMsQ0FBQztLQUM3QztJQUNELHVCQUF1QjtJQUN2QixJQUFJLE9BQU8sR0FBRyxLQUFLLEtBQUssRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxXQUFXLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUM7SUFDL0QsSUFBSSxLQUFLLEtBQUssU0FBUyxJQUFJLEtBQUssQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLEVBQUU7UUFDOUMsT0FBTyxHQUFHLEtBQUssQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUMsV0FBVyxFQUFFLENBQUMsQ0FBQztLQUMvRDtJQUVELE9BQU87UUFDTCxJQUFJLEVBQUUsT0FBTztRQUNiLEVBQUUsRUFBRSxPQUFPO0tBQ1osQ0FBQztBQUNKLENBQUM7QUFDRCxNQUFNLEVBQUUsR0FBcUIsU0FBUyxlQUFlLENBQ25ELFVBQWtCO0lBRWxCLGdFQUFnRTtJQUVoRSxVQUFVLEdBQUcsVUFBVSxDQUFDLFdBQVcsRUFBRSxDQUFDLElBQUksRUFBRSxDQUFDO0lBRTdDLFVBQVUsR0FBRyxVQUFVO1NBQ3BCLEtBQUssQ0FBQyxHQUFHLENBQUM7U0FDVixHQUFHLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtRQUNaLElBQUksR0FBRyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUMsT0FBTyxDQUFDLHdCQUF3QixFQUFFLFdBQVcsQ0FBQyxDQUFDO1FBQ2xFLE9BQU8sSUFBSSxDQUFDO0lBQ2QsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRWIsVUFBVSxHQUFHLFVBQVU7U0FDcEIsS0FBSyxDQUFDLEdBQUcsQ0FBQztTQUNWLEdBQUcsQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ1osSUFBSSxHQUFHLElBQUksQ0FBQyxJQUFJLEVBQUUsQ0FBQyxPQUFPLENBQUMsd0JBQXdCLEVBQUUsWUFBWSxDQUFDLENBQUM7UUFDbkUsT0FBTyxJQUFJLENBQUM7SUFDZCxDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7SUFFYixJQUFJLEtBQUssR0FBYSxFQUFFLEVBQ3RCLE9BQU8sR0FBRyxLQUFLLEVBQ2YsVUFBVSxHQUFHLEVBQUUsQ0FBQztJQUNsQixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsVUFBVSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtRQUMxQyxNQUFNLElBQUksR0FBRyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDM0IsSUFBSSxJQUFJLEtBQUssR0FBRyxFQUFFO1lBQ2hCLE9BQU8sR0FBRyxJQUFJLENBQUM7WUFDZixVQUFVLElBQUksSUFBSSxDQUFDO1NBQ3BCO2FBQU0sSUFBSSxJQUFJLEtBQUssR0FBRyxFQUFFO1lBQ3ZCLE9BQU8sR0FBRyxLQUFLLENBQUM7WUFDaEIsVUFBVSxJQUFJLElBQUksQ0FBQztTQUNwQjthQUFNLElBQUksSUFBSSxLQUFLLEdBQUcsRUFBRTtZQUN2QixJQUFJLE9BQU8sS0FBSyxLQUFLLEVBQUU7Z0JBQ3JCLEtBQUssQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7Z0JBQ3ZCLFVBQVUsR0FBRyxFQUFFLENBQUM7YUFDakI7aUJBQU07Z0JBQ0wsVUFBVSxJQUFJLElBQUksQ0FBQzthQUNwQjtTQUNGO2FBQU07WUFDTCxVQUFVLElBQUksSUFBSSxDQUFDO1NBQ3BCO0tBQ0Y7SUFDRCxLQUFLLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBRXZCLE1BQU0sVUFBVSxHQUFzQyxFQUFFLENBQUM7SUFDekQsS0FBSyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ3JCLFVBQVUsQ0FBQyxJQUFJLENBQUMscUJBQXFCLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztJQUMvQyxDQUFDLENBQUMsQ0FBQztJQUVILE1BQU0sR0FBRyxHQUE4QjtRQUNyQyxHQUFHLEVBQUUsVUFBVTtRQUNmLEtBQUssRUFBRSxVQUFVO0tBQ2xCLENBQUM7SUFDRixPQUFPLEdBQUcsQ0FBQztBQUNiLENBQUMsQ0FBQztBQUNGLGVBQWUsRUFBRSxDQUFDIn0=
+var parseTypeString_default = fn;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

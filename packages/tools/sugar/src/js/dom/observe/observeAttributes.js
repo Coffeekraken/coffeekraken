@@ -1,63 +1,62 @@
-// @ts-nocheck
-import __SPromise from '@coffeekraken/s-promise';
-/**
- * @name        observeAttributes
- * @namespace            js.dom.observe
- * @type      Function
- * @async
- * @platform          js
- * @status        beta
- *
- * Observe attributes on an HTMLElement and get mutations through the SPromise instance
- *
- * @param 		{HTMLElement} 					target 		The element to observe
- * @param 		{MutationObserverInit} 			settings 	The mutation observer settings
- * @return 		{SPromise} 								The SPromise throught which you can have the mutations using the "then" callback
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import observeAttributes from 'sugarcss/js/dom/observeAttributes'
- * const observer = observeAttributes(myCoolHTMLElement).then(mutation => {
- * 		// do something with the mutation
- * });
- * / the observer
- * observe();
- *
- * @see 		https://developer.mozilla.org/en/docs/Web/API/MutationObserver
- * @since       1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var observeAttributes_exports = {};
+__export(observeAttributes_exports, {
+  default: () => observeAttributes_default
+});
+module.exports = __toCommonJS(observeAttributes_exports);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function observeAttributes(target, settings = {}) {
-    return new __SPromise(({ emit }) => {
-        // create a new observer
-        const mutationObserver = new MutationObserver((mutations) => {
-            let mutedAttrs = {};
-            // loop on mutations
-            mutations.forEach((mutation) => {
-                // push mutation
-                if (!mutedAttrs[mutation.attributeName]) {
-                    emit('then', mutation);
-                    mutedAttrs[mutation.attributeName] = true;
-                }
-            });
-            mutedAttrs = {};
-        });
-        mutationObserver.observe(target, Object.assign({ attributes: true }, settings));
-    }, {
-        id: 'observeAttributes',
-    }).on('finally', () => {
-        mutationObserver.disconnect();
+  return new import_s_promise.default(({ emit }) => {
+    const mutationObserver2 = new MutationObserver((mutations) => {
+      let mutedAttrs = {};
+      mutations.forEach((mutation) => {
+        if (!mutedAttrs[mutation.attributeName]) {
+          emit("then", mutation);
+          mutedAttrs[mutation.attributeName] = true;
+        }
+      });
+      mutedAttrs = {};
     });
+    mutationObserver2.observe(target, __spreadValues({
+      attributes: true
+    }, settings));
+  }, {
+    id: "observeAttributes"
+  }).on("finally", () => {
+    mutationObserver.disconnect();
+  });
 }
-/**
- * List of attributes to observe
- * @setting
- * @name 		attributes
- * @type 		{Array}
- * @default 	null
- */
-export default observeAttributes;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2JzZXJ2ZUF0dHJpYnV0ZXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJvYnNlcnZlQXR0cmlidXRlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFFakQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsU0FBUyxpQkFBaUIsQ0FDdEIsTUFBbUIsRUFDbkIsV0FBZ0IsRUFBRTtJQUVsQixPQUFPLElBQUksVUFBVSxDQUNqQixDQUFDLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUNULHdCQUF3QjtRQUN4QixNQUFNLGdCQUFnQixHQUFHLElBQUksZ0JBQWdCLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtZQUN4RCxJQUFJLFVBQVUsR0FBRyxFQUFFLENBQUM7WUFDcEIsb0JBQW9CO1lBQ3BCLFNBQVMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtnQkFDM0IsZ0JBQWdCO2dCQUNoQixJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsRUFBRTtvQkFDckMsSUFBSSxDQUFDLE1BQU0sRUFBRSxRQUFRLENBQUMsQ0FBQztvQkFDdkIsVUFBVSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsR0FBRyxJQUFJLENBQUM7aUJBQzdDO1lBQ0wsQ0FBQyxDQUFDLENBQUM7WUFDSCxVQUFVLEdBQUcsRUFBRSxDQUFDO1FBQ3BCLENBQUMsQ0FBQyxDQUFDO1FBQ0gsZ0JBQWdCLENBQUMsT0FBTyxDQUFDLE1BQU0sa0JBQzNCLFVBQVUsRUFBRSxJQUFJLElBRWIsUUFBUSxFQUNiLENBQUM7SUFDUCxDQUFDLEVBQ0Q7UUFDSSxFQUFFLEVBQUUsbUJBQW1CO0tBQzFCLENBQ0osQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLEdBQUcsRUFBRTtRQUNqQixnQkFBZ0IsQ0FBQyxVQUFVLEVBQUUsQ0FBQztJQUNsQyxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFFRDs7Ozs7O0dBTUc7QUFDSCxlQUFlLGlCQUFpQixDQUFDIn0=
+var observeAttributes_default = observeAttributes;

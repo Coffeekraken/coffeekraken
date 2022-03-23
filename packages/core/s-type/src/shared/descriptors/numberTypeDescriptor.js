@@ -1,36 +1,39 @@
-// shared
-/**
- * @name              numberTypeDescriptor
- * @namespace         sugar.js.type.descriptor
- * @type              ISTypeDescriptor
- *
- * Describe the type "number" with some utilities methods like "is", "cast", etc...
- *
- * @example         js
- * export default {
- *    name: 'String',
- *    id: 'string',
- *    is: (value) => typeof value === 'string',
- *    cast: (value) => '' + value,
- *    // etc...
- * };
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-const descriptor = {
-    name: 'Number',
-    id: 'number',
-    is: (value) => typeof value === 'number',
-    cast: (value) => {
-        if (typeof value !== 'string') {
-            return new Error(`Sorry but only strings can be casted to numbers...`);
-        }
-        const res = parseFloat(value);
-        if (isNaN(res))
-            return new Error(`Sorry but the conversion of "<yellow>${value}</yellow>" to a <green>Number</green> does not work...`);
-        return res;
-    }
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-export default descriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibnVtYmVyVHlwZURlc2NyaXB0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJudW1iZXJUeXBlRGVzY3JpcHRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxTQUFTO0FBTVQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQU0sVUFBVSxHQUFxQjtJQUNuQyxJQUFJLEVBQUUsUUFBUTtJQUNkLEVBQUUsRUFBRSxRQUFRO0lBQ1osRUFBRSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FBQyxPQUFPLEtBQUssS0FBSyxRQUFRO0lBQzdDLElBQUksRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFO1FBQ25CLElBQUksT0FBTyxLQUFLLEtBQUssUUFBUSxFQUFFO1lBQzdCLE9BQU8sSUFBSSxLQUFLLENBQUMsb0RBQW9ELENBQUMsQ0FBQztTQUN4RTtRQUNELE1BQU0sR0FBRyxHQUFHLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUM5QixJQUFJLEtBQUssQ0FBQyxHQUFHLENBQUM7WUFDWixPQUFPLElBQUksS0FBSyxDQUNkLHdDQUF3QyxLQUFLLHdEQUF3RCxDQUN0RyxDQUFDO1FBQ0osT0FBTyxHQUFHLENBQUM7SUFDYixDQUFDO0NBQ0YsQ0FBQztBQUVGLGVBQWUsVUFBVSxDQUFDIn0=
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var numberTypeDescriptor_exports = {};
+__export(numberTypeDescriptor_exports, {
+  default: () => numberTypeDescriptor_default
+});
+module.exports = __toCommonJS(numberTypeDescriptor_exports);
+const descriptor = {
+  name: "Number",
+  id: "number",
+  is: (value) => typeof value === "number",
+  cast: (value) => {
+    if (typeof value !== "string") {
+      return new Error(`Sorry but only strings can be casted to numbers...`);
+    }
+    const res = parseFloat(value);
+    if (isNaN(res))
+      return new Error(`Sorry but the conversion of "<yellow>${value}</yellow>" to a <green>Number</green> does not work...`);
+    return res;
+  }
+};
+var numberTypeDescriptor_default = descriptor;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

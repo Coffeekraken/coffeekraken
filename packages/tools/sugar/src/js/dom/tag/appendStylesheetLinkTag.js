@@ -1,35 +1,35 @@
-// @ts-nocheck
-import linkLoaded from './linkLoaded';
-/**
- * @name        appendStylesheetLinkTag
- * @namespace            js.dom.tag
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Append a stylesheet link to the page head
- *
- * @param    {String}    href    THe url to the stylesheet
- * @return    {Promise}    A promise when the stylesheet is loaded with the link element as parameter
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import appendStylesheetLink from '@coffeekraken/sugar/js/dom/appendStylesheetLink'
- * appendStylesheetLink('/dist/css/style.css')
- *
- * @since     1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var appendStylesheetLinkTag_exports = {};
+__export(appendStylesheetLinkTag_exports, {
+  default: () => appendStylesheetLinkTag_default
+});
+module.exports = __toCommonJS(appendStylesheetLinkTag_exports);
+var import_linkLoaded = __toESM(require("./linkLoaded"), 1);
 function appendStylesheetLink(href) {
-    const $link = document.createElement('link');
-    $link.type = 'text/css';
-    $link.rel = 'stylesheet';
-    $link.href = href;
-    document.head.appendChild($link);
-    return linkLoaded($link);
+  const $link = document.createElement("link");
+  $link.type = "text/css";
+  $link.rel = "stylesheet";
+  $link.href = href;
+  document.head.appendChild($link);
+  return (0, import_linkLoaded.default)($link);
 }
-export default appendStylesheetLink;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwZW5kU3R5bGVzaGVldExpbmtUYWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhcHBlbmRTdHlsZXNoZWV0TGlua1RhZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0sY0FBYyxDQUFDO0FBRXRDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBUyxvQkFBb0IsQ0FBQyxJQUFZO0lBQ3RDLE1BQU0sS0FBSyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDN0MsS0FBSyxDQUFDLElBQUksR0FBRyxVQUFVLENBQUM7SUFDeEIsS0FBSyxDQUFDLEdBQUcsR0FBRyxZQUFZLENBQUM7SUFDekIsS0FBSyxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7SUFDbEIsUUFBUSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDakMsT0FBTyxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUM7QUFDN0IsQ0FBQztBQUNELGVBQWUsb0JBQW9CLENBQUMifQ==
+var appendStylesheetLinkTag_default = appendStylesheetLink;

@@ -1,37 +1,36 @@
-// @ts-nocheck
-import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
-/**
- * @name            getHtmlhtmlClassFromHtmlClass
- * @namespace            js.html
- * @type            Function
- * @platform          js
- * @status        beta
- *
- * This function simply return the tagname depending on the passed HTML class
- * like HTMLAnchorElement, HTMLLinkElement, etc...
- *
- * @param       {HTMLElement}      htmlClass       The htmlClass to get the tag for
- * @return      {String}               The tagname that correspond to the passed HTMLElement class
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import getHtmlhtmlClassFromHtmlClass from '@coffeekraken/sugar/js/html/getHtmlhtmlClassFromHtmlClass';
- * getHtmlhtmlClassFromHtmlClass(HTMLAnchorElement); // => 'a'
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var getTagNameFromHtmlClass_exports = {};
+__export(getTagNameFromHtmlClass_exports, {
+  default: () => getTagNameFromHtmlClass_default
+});
+module.exports = __toCommonJS(getTagNameFromHtmlClass_exports);
+var import_htmlTagToHtmlClassMap = __toESM(require("./htmlTagToHtmlClassMap"), 1);
 function getHtmlhtmlClassFromHtmlClass(htmlClass) {
-    if (!htmlClass)
-        return false;
-    for (const key in __htmlTagToHtmlClassMap) {
-        if (__htmlTagToHtmlClassMap[key] === htmlClass)
-            return key;
-    }
+  if (!htmlClass)
     return false;
+  for (const key in import_htmlTagToHtmlClassMap.default) {
+    if (import_htmlTagToHtmlClassMap.default[key] === htmlClass)
+      return key;
+  }
+  return false;
 }
-export default getHtmlhtmlClassFromHtmlClass;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0VGFnTmFtZUZyb21IdG1sQ2xhc3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJnZXRUYWdOYW1lRnJvbUh0bWxDbGFzcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBR2QsT0FBTyx1QkFBdUIsTUFBTSx5QkFBeUIsQ0FBQztBQUU5RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLDZCQUE2QixDQUFDLFNBQXNCO0lBQ3pELElBQUksQ0FBQyxTQUFTO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFFN0IsS0FBSyxNQUFNLEdBQUcsSUFBSSx1QkFBdUIsRUFBRTtRQUN2QyxJQUFJLHVCQUF1QixDQUFDLEdBQUcsQ0FBQyxLQUFLLFNBQVM7WUFBRSxPQUFPLEdBQUcsQ0FBQztLQUM5RDtJQUVELE9BQU8sS0FBSyxDQUFDO0FBQ2pCLENBQUM7QUFDRCxlQUFlLDZCQUE2QixDQUFDIn0=
+var getTagNameFromHtmlClass_default = getHtmlhtmlClassFromHtmlClass;

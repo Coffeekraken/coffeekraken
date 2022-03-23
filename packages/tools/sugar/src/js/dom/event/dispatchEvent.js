@@ -1,39 +1,35 @@
-// @ts-nocheck
-import __SEvent from '../../event/SEvent';
-/**
- * @name      dispatchEvent
- * @namespace            js.dom.event
- * @type      Function
- * @platform          js
- * @status          stable
- *
- * Helper to quickly display an event with some optional data attached to it
- *
- * @param 		{HTMLElement} 					$target  		The element to dispatch the event from
- * @param 		{String} 						name 			The event name to dispatch
- * @param 		{Mixed} 						data 			The data to attache to the event
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import dispatchEvent from '@coffeekraken/sugar/js/dom/dispatchEvent'
- * dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {
- * 		var1 : 'value1'
- * });
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var dispatchEvent_exports = {};
+__export(dispatchEvent_exports, {
+  default: () => dispatchEvent_default
+});
+module.exports = __toCommonJS(dispatchEvent_exports);
+var import_SEvent = __toESM(require("../../event/SEvent"), 1);
 function dispatchEvent($target, name, data = null) {
-    // create new event
-    const e = new __SEvent(name, {
-        detail: data,
-        bubbles: true,
-        cancelable: true,
-    });
-    $target.dispatchEvent(e);
+  const e = new import_SEvent.default(name, {
+    detail: data,
+    bubbles: true,
+    cancelable: true
+  });
+  $target.dispatchEvent(e);
 }
-export default dispatchEvent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGlzcGF0Y2hFdmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRpc3BhdGNoRXZlbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sUUFBUSxNQUFNLG9CQUFvQixDQUFDO0FBRTFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBUyxhQUFhLENBQ2xCLE9BQW9CLEVBQ3BCLElBQVksRUFDWixPQUFZLElBQUk7SUFFaEIsbUJBQW1CO0lBQ25CLE1BQU0sQ0FBQyxHQUFHLElBQUksUUFBUSxDQUFDLElBQUksRUFBRTtRQUN6QixNQUFNLEVBQUUsSUFBSTtRQUNaLE9BQU8sRUFBRSxJQUFJO1FBQ2IsVUFBVSxFQUFFLElBQUk7S0FDbkIsQ0FBQyxDQUFDO0lBQ0gsT0FBTyxDQUFDLGFBQWEsQ0FBQyxDQUFDLENBQUMsQ0FBQztBQUM3QixDQUFDO0FBQ0QsZUFBZSxhQUFhLENBQUMifQ==
+var dispatchEvent_default = dispatchEvent;

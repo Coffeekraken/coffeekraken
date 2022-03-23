@@ -1,44 +1,42 @@
-// @ts-nocheck
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SDocMapReadParamsInterface
- * @namespace           node.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This class represent the interface that describe the minimum requirement
- * needed to build the docMap.json file
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SDocMapReadParamsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            input: {
-                description: 'Specify the input path to the docmap.json file to read',
-                type: 'String',
-                default: __SSugarConfig.get('docmap.read.input'),
-                alias: 'i',
-            },
-            // snapshot: {
-            //     type: 'String',
-            //     alias: 's',
-            // },
-            // snapshotDir: {
-            //     type: 'String',
-            //     path: {
-            //         absolute: true,
-            //         tokens: true,
-            //     },
-            //     default: __SSugarConfig.get('docmap.snapshot.outDir'),
-            // },
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SDocMapReadParamsInterface_exports = {};
+__export(SDocMapReadParamsInterface_exports, {
+  default: () => SDocMapReadParamsInterface_default
+});
+module.exports = __toCommonJS(SDocMapReadParamsInterface_exports);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SDocMapReadParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      input: {
+        description: "Specify the input path to the docmap.json file to read",
+        type: "String",
+        default: import_s_sugar_config.default.get("docmap.read.input"),
+        alias: "i"
+      }
+    };
+  }
 }
-export default SDocMapReadParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY01hcFJlYWRQYXJhbXNJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRG9jTWFwUmVhZFBhcmFtc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxjQUFjLE1BQU0sOEJBQThCLENBQUM7QUFDMUQsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7O0dBY0c7QUFDSCxNQUFNLDBCQUEyQixTQUFRLFlBQVk7SUFDakQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxXQUFXLEVBQ1Asd0RBQXdEO2dCQUM1RCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxtQkFBbUIsQ0FBQztnQkFDaEQsS0FBSyxFQUFFLEdBQUc7YUFDYjtZQUNELGNBQWM7WUFDZCxzQkFBc0I7WUFDdEIsa0JBQWtCO1lBQ2xCLEtBQUs7WUFDTCxpQkFBaUI7WUFDakIsc0JBQXNCO1lBQ3RCLGNBQWM7WUFDZCwwQkFBMEI7WUFDMUIsd0JBQXdCO1lBQ3hCLFNBQVM7WUFDVCw2REFBNkQ7WUFDN0QsS0FBSztTQUNSLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDRCxlQUFlLDBCQUEwQixDQUFDIn0=
+var SDocMapReadParamsInterface_default = SDocMapReadParamsInterface;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

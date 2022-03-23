@@ -1,34 +1,33 @@
-import __urlSlug from 'url';
-/**
- * @name            urlFromString
- * @namespace       shared.url
- * @type            Function
- * @platform        js
- * @platform        node
- * @platform         ts
- * @status          stable
- *
- * Simple function that take a string as parameter and returns you a valid
- * url ready one
- *
- * @todo            tests
- *
- * @example             js
- * import urlFromString from '@coffeekraken/sugar/shared/url/urlFromString';
- * urlFromString('Sir James Paul McCartney MBE is an English singer-songwriter');
- * // sir-james-paul-mc-cartney-mbe-is-an-english-singer-songwriter
- *
- * @see             https://www.npmjs.com/package/url-slug
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function urlFromString(string) {
-    return string
-        .split('/')
-        .map((l) => {
-        // @ts-ignore
-        return __urlSlug(l.trim());
-    })
-        .join('/');
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var urlFromString_exports = {};
+__export(urlFromString_exports, {
+  default: () => urlFromString
+});
+module.exports = __toCommonJS(urlFromString_exports);
+var import_url = __toESM(require("url"), 1);
+function urlFromString(string) {
+  return string.split("/").map((l) => {
+    return (0, import_url.default)(l.trim());
+  }).join("/");
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXJsRnJvbVN0cmluZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInVybEZyb21TdHJpbmcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxTQUFTLE1BQU0sS0FBSyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxhQUFhLENBQUMsTUFBYztJQUNoRCxPQUFPLE1BQU07U0FDUixLQUFLLENBQUMsR0FBRyxDQUFDO1NBQ1YsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7UUFDUCxhQUFhO1FBQ2IsT0FBTyxTQUFTLENBQUMsQ0FBQyxDQUFDLElBQUksRUFBRSxDQUFDLENBQUM7SUFDL0IsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQ25CLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,66 +1,91 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name           theme
- * @namespace      node.mixins.theme
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin simply generate all the css needed for a theme to be applied
- * in any scope. It will print all the theme variables like colors, etc, as well
- * as set the correct font style and some other small things...
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.theme(light);
- * .my-cool-element {
- *    \@sugar.theme(dark);
- * }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginThemeinInterface extends __SInterface {
-    static get _definition() {
-        return {
-            variant: {
-                type: 'String',
-            },
-            theme: {
-                type: 'String',
-            },
-            scope: {
-                type: 'Boolean',
-                default: false,
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var theme_exports = {};
+__export(theme_exports, {
+  default: () => theme_default,
+  interface: () => postcssSugarPluginThemeinInterface
+});
+module.exports = __toCommonJS(theme_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginThemeinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      variant: {
+        type: "String"
+      },
+      theme: {
+        type: "String"
+      },
+      scope: {
+        type: "Boolean",
+        default: false
+      }
+    };
+  }
 }
-export { postcssSugarPluginThemeinInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ variant: undefined, theme: undefined, scope: false }, params);
-    const vars = __STheme.toCssVars(finalParams.theme, finalParams.variant);
-    const selectors = [];
-    if (finalParams.theme)
-        selectors.push(`[theme^="${finalParams.theme}"]`);
-    if (finalParams.variant)
-        selectors.push(`[theme$="${finalParams.variant}"]`);
-    if (finalParams.scope) {
-        vars.unshift(`${selectors.length === 2 ? `${selectors[0]}${selectors[1]}` :
-            selectors.join(',')} {`);
-        vars.push(`@sugar.lnf.base;`);
-        vars.push('}');
-    }
-    else if (atRule.parent.type === 'root') {
-        vars.unshift(':root {');
-        vars.push(`@sugar.lnf.base;`);
-        vars.push('}');
-    }
-    else {
-        vars.push(`@sugar.lnf.base;`);
-    }
-    return vars;
+function theme_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    variant: void 0,
+    theme: void 0,
+    scope: false
+  }, params);
+  const vars = import_s_theme.default.toCssVars(finalParams.theme, finalParams.variant);
+  const selectors = [];
+  if (finalParams.theme)
+    selectors.push(`[theme^="${finalParams.theme}"]`);
+  if (finalParams.variant)
+    selectors.push(`[theme$="${finalParams.variant}"]`);
+  if (finalParams.scope) {
+    vars.unshift(`${selectors.length === 2 ? `${selectors[0]}${selectors[1]}` : selectors.join(",")} {`);
+    vars.push(`@sugar.lnf.base;`);
+    vars.push("}");
+  } else if (atRule.parent.type === "root") {
+    vars.unshift(":root {");
+    vars.push(`@sugar.lnf.base;`);
+    vars.push("}");
+  } else {
+    vars.push(`@sugar.lnf.base;`);
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSxrQ0FBbUMsU0FBUSxZQUFZO0lBQ3pELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsSUFBSSxFQUFFLFFBQVE7YUFDakI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7YUFDakI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsT0FBTyxFQUFFLEtBQUs7YUFDakI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUUQsT0FBTyxFQUFFLGtDQUFrQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBQzNELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsT0FBTyxFQUFFLFNBQVMsRUFDbEIsS0FBSyxFQUFFLFNBQVMsRUFDaEIsS0FBSyxFQUFFLEtBQUssSUFDVCxNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLFFBQVEsQ0FBQyxTQUFTLENBQUMsV0FBVyxDQUFDLEtBQUssRUFBRSxXQUFXLENBQUMsT0FBTyxDQUFDLENBQUM7SUFFeEUsTUFBTSxTQUFTLEdBQWEsRUFBRSxDQUFDO0lBQy9CLElBQUksV0FBVyxDQUFDLEtBQUs7UUFBRSxTQUFTLENBQUMsSUFBSSxDQUFDLFlBQVksV0FBVyxDQUFDLEtBQUssSUFBSSxDQUFDLENBQUM7SUFDekUsSUFBSSxXQUFXLENBQUMsT0FBTztRQUFFLFNBQVMsQ0FBQyxJQUFJLENBQUMsWUFBWSxXQUFXLENBQUMsT0FBTyxJQUFJLENBQUMsQ0FBQztJQUc3RSxJQUFJLFdBQVcsQ0FBQyxLQUFLLEVBQUU7UUFDbkIsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUNULFNBQVMsQ0FBQyxNQUFNLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLFNBQVMsQ0FBQyxDQUFDLENBQUMsR0FBRyxTQUFTLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1lBQzNELFNBQVMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUN0QixJQUFJLENBQUMsQ0FBQztRQUNOLElBQUksQ0FBQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsQ0FBQztRQUM5QixJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0tBQ2xCO1NBQU0sSUFBSSxNQUFNLENBQUMsTUFBTSxDQUFDLElBQUksS0FBSyxNQUFNLEVBQUU7UUFDdEMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUN4QixJQUFJLENBQUMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLENBQUM7UUFDOUIsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztLQUNsQjtTQUFNO1FBQ0gsSUFBSSxDQUFDLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0tBQ2pDO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

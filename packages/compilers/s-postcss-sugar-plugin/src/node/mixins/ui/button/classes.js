@@ -1,51 +1,102 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
-    static get _definition() {
-        var _a;
-        return {
-            styles: {
-                type: 'String[]',
-                values: ['solid', 'gradient', 'outline', 'text'],
-                default: ['solid', 'gradient', 'outline', 'text'],
-            },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid', 'gradient', 'outline', 'text'],
-                default: (_a = __STheme.config('ui.button.defaultStyle')) !== null && _a !== void 0 ? _a : 'solid',
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.button.defaultShape'),
-            },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'shape', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'shape', 'tf', 'vr'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-}
-export { postcssSugarPluginUiButtonClassesInterface as interface };
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-export function dependencies() {
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  dependencies: () => dependencies,
+  interface: () => postcssSugarPluginUiButtonClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
+class postcssSugarPluginUiButtonClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    var _a;
     return {
-        files: [`${__dirname()}/button.js`],
+      styles: {
+        type: "String[]",
+        values: ["solid", "gradient", "outline", "text"],
+        default: ["solid", "gradient", "outline", "text"]
+      },
+      shapes: {
+        type: "String[]",
+        values: ["default", "square", "pill"],
+        default: ["default", "square", "pill"]
+      },
+      defaultStyle: {
+        type: "String",
+        values: ["solid", "gradient", "outline", "text"],
+        default: (_a = import_s_theme.default.config("ui.button.defaultStyle")) != null ? _a : "solid"
+      },
+      defaultShape: {
+        type: "String",
+        values: ["default", "square", "pill"],
+        default: import_s_theme.default.config("ui.button.defaultShape")
+      },
+      scope: {
+        type: {
+          type: "Array<String>",
+          splitChars: [",", " "]
+        },
+        values: ["bare", "lnf", "shape", "tf", "vr"],
+        default: ["bare", "lnf", "shape", "tf", "vr"]
+      }
     };
+  }
 }
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ styles: ['solid', 'gradient', 'outline', 'text'], shapes: [], defaultStyle: 'solid', defaultShape: 'default', scope: ['bare', 'lnf', 'shape', 'tf', 'vr'] }, params);
-    const vars = new CssVars();
-    vars.comment(() => `
+function dependencies() {
+  return {
+    files: [`${(0, import_dirname.default)()}/button.js`]
+  };
+}
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    styles: ["solid", "gradient", "outline", "text"],
+    shapes: [],
+    defaultStyle: "solid",
+    defaultShape: "default",
+    scope: ["bare", "lnf", "shape", "tf", "vr"]
+  }, params);
+  const vars = new CssVars();
+  vars.comment(() => `
       /**
         * @name          Buttons
         * @namespace          sugar.css.ui
@@ -66,53 +117,45 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @cssClass     s-btn${style === finalParams.defaultStyle ? '' : `:${style}`}           Apply the ${style} button style`;
-    })
-        .join('\n')}
-        ${finalParams.shapes
-        .map((shape) => {
-        return ` * @cssClass     s-btn${shape === finalParams.defaultShape ? '' : `:${shape}`}           Apply the ${shape} button shape`;
-    })
-        .join('\n')}
+        ${finalParams.styles.map((style) => {
+    return ` * @cssClass     s-btn${style === finalParams.defaultStyle ? "" : `:${style}`}           Apply the ${style} button style`;
+  }).join("\n")}
+        ${finalParams.shapes.map((shape) => {
+    return ` * @cssClass     s-btn${shape === finalParams.defaultShape ? "" : `:${shape}`}           Apply the ${shape} button shape`;
+  }).join("\n")}
         * @cssClass            s-format:text button             Apply the button style on button tags inside the s-format:text scope 
         * @cssClass            s-btn-group s-btn                Apply the button group style on a buttons wrapper
         * @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped button(s)
         * 
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? '' : `:${style}`} s-mie:20 s-mbe:20"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? '' : `:${style}`} s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? '' : `:${style}`} s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? '' : `:${style}`} s-mie:20 s-mbe:20 s-color:info"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? '' : `:${style}`} s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
+        ${finalParams.styles.map((style) => {
+    return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ""}
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? "" : `:${style}`} s-mie:20 s-mbe:20"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? "" : `:${style}`} s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? "" : `:${style}`} s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? "" : `:${style}`} s-mie:20 s-mbe:20 s-color:info"><span>Click me!</span></a>
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? "" : `:${style}`} s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
             *   <span class="s-btn-group s-mie:20 s-mbe:20">
-            *       <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? '' : `:${style}`}"><span>Click me!</span></a>
-            *       <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? '' : `:${style}`}"><span>+</span></a>
+            *       <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? "" : `:${style}`}"><span>Click me!</span></a>
+            *       <a tabindex="0" class="s-btn:${finalParams.defaultStyle === style ? "" : `:${style}`}"><span>+</span></a>
             *   </span>
-            *   <a tabindex="0" disabled class="s-btn:${finalParams.defaultStyle === style ? '' : `:${style}`} s-mie:20 s-mbe:20"><span>Click me!</span></a>
+            *   <a tabindex="0" disabled class="s-btn:${finalParams.defaultStyle === style ? "" : `:${style}`} s-mie:20 s-mbe:20"><span>Click me!</span></a>
             * `;
-    })
-        .join('\n')}
+  }).join("\n")}
         *
-        ${finalParams.shapes
-        .map((shape) => {
-        return ` * @example        html       ${shape} shape ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-mie:20 s-mbe:20">Click me!</a>
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-mie:20 s-mbe:20 s-color:accent">Click me!</a>
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-mie:20 s-mbe:20 s-color:complementary">Click me!</a>
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-mie:20 s-mbe:20 s-color:info">Click me!</a>
-            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-mie:20 s-mbe:20 s-color:error">Click me!</a>
+        ${finalParams.shapes.map((shape) => {
+    return ` * @example        html       ${shape} shape ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ""}
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? "" : `:${shape}`} s-mie:20 s-mbe:20">Click me!</a>
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? "" : `:${shape}`} s-mie:20 s-mbe:20 s-color:accent">Click me!</a>
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? "" : `:${shape}`} s-mie:20 s-mbe:20 s-color:complementary">Click me!</a>
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? "" : `:${shape}`} s-mie:20 s-mbe:20 s-color:info">Click me!</a>
+            *   <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? "" : `:${shape}`} s-mie:20 s-mbe:20 s-color:error">Click me!</a>
             *   <span class="s-btn-group s-mie:20 s-mbe:20">
-            *       <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? '' : `:${shape}`}">Click me!</a>
-            *       <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? '' : `:${shape}`}"><span>+</span></a>
+            *       <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? "" : `:${shape}`}">Click me!</a>
+            *       <a tabindex="0" class="s-btn:${finalParams.defaultShape === shape ? "" : `:${shape}`}"><span>+</span></a>
             *   </span>
-            *   <a tabindex="0" disabled class="s-btn:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-mie:20 s-mbe:20">Click me!</a>
+            *   <a tabindex="0" disabled class="s-btn:${finalParams.defaultShape === shape ? "" : `:${shape}`} s-mie:20 s-mbe:20">Click me!</a>
             * `;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @example       html       Scales
         *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20">Click me!</a>
@@ -124,8 +167,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(() => `/**
+  if (finalParams.scope.includes("bare")) {
+    vars.comment(() => `/**
             * @name           s-btn
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -142,14 +185,14 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .s-btn {
             @sugar.ui.button($scope: bare);
         }`);
-    }
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
-            let cls = `s-btn`;
-            if (style !== finalParams.defaultStyle) {
-                cls += `--${style}`;
-            }
-            vars.comment(() => `/**
+  }
+  if (finalParams.scope.includes("lnf")) {
+    finalParams.styles.forEach((style) => {
+      let cls = `s-btn`;
+      if (style !== finalParams.defaultStyle) {
+        cls += `--${style}`;
+      }
+      vars.comment(() => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -157,9 +200,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class represent a(n) "<s-color="accent">${style}</s-color>" button
             * 
             * @example        html
-            * <a class="${cls
-                .replace(/\./gm, ' ')
-                .trim()}">I'm a cool button</a>
+            * <a class="${cls.replace(/\./gm, " ").trim()}">I'm a cool button</a>
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -168,15 +209,15 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .${cls} {
             @sugar.ui.button($style: ${style}, $scope: lnf);
         }`);
-        });
-    }
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            let cls = `s-btn`;
-            if (shape !== finalParams.defaultShape) {
-                cls += `--${shape}`;
-            }
-            vars.comment(() => `/**
+    });
+  }
+  if (finalParams.scope.includes("shape")) {
+    finalParams.shapes.forEach((shape) => {
+      let cls = `s-btn`;
+      if (shape !== finalParams.defaultShape) {
+        cls += `--${shape}`;
+      }
+      vars.comment(() => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -184,9 +225,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class represent a(n) "<s-color="accent">${shape}</s-color>" button
             * 
             * @example        html
-            * <a class="${cls
-                .replace(/\./gm, ' ')
-                .trim()}">I'm a cool button</a>
+            * <a class="${cls.replace(/\./gm, " ").trim()}">I'm a cool button</a>
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -195,9 +234,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .${cls} {
             @sugar.ui.button($shape: ${shape}, $scope: shape);
         }`);
-        });
-    }
-    vars.comment(() => `/**
+    });
+  }
+  vars.comment(() => `/**
         * @name           s-btn--block
         * @namespace      sugar.css.ui.button
         * @type           CssClass
@@ -214,7 +253,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         display: block !important;
       }
     `);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name           s-btn-group
         * @namespace      sugar.css.ui.button
         * @type           CssClass
@@ -230,7 +269,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */`);
-    vars.code(`
+  vars.code(`
       .s-btn-group {
           display: inline-flex !important;   
           flex-wrap: nowrap;
@@ -262,8 +301,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         }
       }
     `);
-    if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.comment(() => `/**
+  if (finalParams.scope.indexOf("tf") !== -1) {
+    vars.comment(() => `/**
             * @name           s-format:text button
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -283,13 +322,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        `).code(`
             @sugar.format.text {
                 button {
-                    @sugar.ui.button($scope: '${finalParams.scope.join(',')}');
+                    @sugar.ui.button($scope: '${finalParams.scope.join(",")}');
                 } 
             }
         `);
-    }
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(() => `/**
+  }
+  if (finalParams.scope.indexOf("vr") !== -1) {
+    vars.comment(() => `/**
             * @name           s-rhythm:vertical
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -317,11 +356,15 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        `).code(`
             @sugar.rhythm.vertical {
                 button, .s-btn {
-                    ${__STheme.jsObjectToCssProperties(__STheme.config('ui.button.rhythmVertical'))}
+                    ${import_s_theme.default.jsObjectToCssProperties(import_s_theme.default.config("ui.button.rhythmVertical"))}
                 } 
             }
         `);
-    }
-    return vars;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFHN0MsTUFBTSwwQ0FBMkMsU0FBUSxZQUFZO0lBQ2pFLE1BQU0sS0FBSyxXQUFXOztRQUNsQixPQUFPO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxVQUFVO2dCQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLENBQUM7Z0JBQ2hELE9BQU8sRUFBRSxDQUFDLE9BQU8sRUFBRSxVQUFVLEVBQUUsU0FBUyxFQUFFLE1BQU0sQ0FBQzthQUNwRDtZQUNELE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUUsVUFBVTtnQkFDaEIsTUFBTSxFQUFFLENBQUMsU0FBUyxFQUFFLFFBQVEsRUFBRSxNQUFNLENBQUM7Z0JBQ3JDLE9BQU8sRUFBRSxDQUFDLFNBQVMsRUFBRSxRQUFRLEVBQUUsTUFBTSxDQUFDO2FBQ3pDO1lBQ0QsWUFBWSxFQUFFO2dCQUNWLElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxVQUFVLEVBQUUsU0FBUyxFQUFFLE1BQU0sQ0FBQztnQkFDaEQsT0FBTyxFQUFFLE1BQUEsUUFBUSxDQUFDLE1BQU0sQ0FBQyx3QkFBd0IsQ0FBQyxtQ0FBSSxPQUFPO2FBQ2hFO1lBQ0QsWUFBWSxFQUFFO2dCQUNWLElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBRSxRQUFRLEVBQUUsTUFBTSxDQUFDO2dCQUNyQyxPQUFPLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQyx3QkFBd0IsQ0FBQzthQUNyRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JB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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  dependencies,
+  interface
+});

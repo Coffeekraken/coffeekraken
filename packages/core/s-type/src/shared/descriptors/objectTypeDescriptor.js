@@ -1,35 +1,41 @@
-// shared
-import __isObject from '@coffeekraken/sugar/shared/is/object';
-/**
- * @name              objectTypeDescriptor
- * @namespace         sugar.js.type.descriptor
- * @type              ISTypeDescriptor
- *
- * Describe the type "object" with some utilities methods like "is", "cast", etc...
- *
- * @example         js
- * export default {
- *    name: 'String',
- *    id: 'string',
- *    is: (value) => typeof value === 'string',
- *    cast: (value) => '' + value,
- *    // etc...
- * };
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-const descriptor = {
-    name: 'Object',
-    id: 'object',
-    is: (value) => __isObject(value),
-    cast: (value) => {
-        if (__isObject(value))
-            return value;
-        return {
-            value
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-export default descriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2JqZWN0VHlwZURlc2NyaXB0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJvYmplY3RUeXBlRGVzY3JpcHRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxTQUFTO0FBRVQsT0FBTyxVQUFVLE1BQU0sc0NBQXNDLENBQUM7QUFLOUQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQU0sVUFBVSxHQUFxQjtJQUNuQyxJQUFJLEVBQUUsUUFBUTtJQUNkLEVBQUUsRUFBRSxRQUFRO0lBQ1osRUFBRSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDO0lBQ3JDLElBQUksRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFO1FBQ25CLElBQUksVUFBVSxDQUFDLEtBQUssQ0FBQztZQUFFLE9BQU8sS0FBSyxDQUFDO1FBQ3BDLE9BQU87WUFDTCxLQUFLO1NBQ04sQ0FBQztJQUNKLENBQUM7Q0FDRixDQUFDO0FBRUYsZUFBZSxVQUFVLENBQUMifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var objectTypeDescriptor_exports = {};
+__export(objectTypeDescriptor_exports, {
+  default: () => objectTypeDescriptor_default
+});
+module.exports = __toCommonJS(objectTypeDescriptor_exports);
+var import_object = __toESM(require("@coffeekraken/sugar/shared/is/object"), 1);
+const descriptor = {
+  name: "Object",
+  id: "object",
+  is: (value) => (0, import_object.default)(value),
+  cast: (value) => {
+    if ((0, import_object.default)(value))
+      return value;
+    return {
+      value
+    };
+  }
+};
+var objectTypeDescriptor_default = descriptor;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

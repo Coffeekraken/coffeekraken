@@ -1,27 +1,70 @@
-// @ts-nocheck
-import __packageRoot from './rootPath';
-import __fs from 'fs';
-import __readJsonSync from '../fs/readJsonSync';
-import __standardizeJson from '../../shared/npm/utils/standardizeJson';
-import __objectHash from '../../shared/object/objectHash';
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var jsonSync_exports = {};
+__export(jsonSync_exports, {
+  default: () => jsonSync_default
+});
+module.exports = __toCommonJS(jsonSync_exports);
+var import_rootPath = __toESM(require("./rootPath"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_readJsonSync = __toESM(require("../fs/readJsonSync"), 1);
+var import_standardizeJson = __toESM(require("../../shared/npm/utils/standardizeJson"), 1);
+var import_objectHash = __toESM(require("../../shared/object/objectHash"), 1);
 let __packageJson = {};
 function jsonSync(from = process.cwd(), settings) {
-    const finalSettings = Object.assign({ highest: false, standardize: false }, settings !== null && settings !== void 0 ? settings : {});
-    const hash = __objectHash(Object.assign({ from }, finalSettings));
-    if (__packageJson[hash]) {
-        return __packageJson[hash];
-    }
-    const path = `${__packageRoot(from, finalSettings.highest)}/package.json`;
-    if (!__fs.existsSync(path))
-        return false;
-    let json = __readJsonSync(path);
-    if (finalSettings.standardize) {
-        json = __standardizeJson(json);
-    }
-    // cache
-    if (!__packageJson[hash])
-        __packageJson[hash] = json;
-    return json;
+  const finalSettings = __spreadValues({
+    highest: false,
+    standardize: false
+  }, settings != null ? settings : {});
+  const hash = (0, import_objectHash.default)(__spreadValues({
+    from
+  }, finalSettings));
+  if (__packageJson[hash]) {
+    return __packageJson[hash];
+  }
+  const path = `${(0, import_rootPath.default)(from, finalSettings.highest)}/package.json`;
+  if (!import_fs.default.existsSync(path))
+    return false;
+  let json = (0, import_readJsonSync.default)(path);
+  if (finalSettings.standardize) {
+    json = (0, import_standardizeJson.default)(json);
+  }
+  if (!__packageJson[hash])
+    __packageJson[hash] = json;
+  return json;
 }
-export default jsonSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianNvblN5bmMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJqc29uU3luYy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxhQUFhLE1BQU0sWUFBWSxDQUFDO0FBQ3ZDLE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUN0QixPQUFPLGNBQWMsTUFBTSxvQkFBb0IsQ0FBQztBQUNoRCxPQUFPLGlCQUFpQixNQUFNLHdDQUF3QyxDQUFDO0FBQ3ZFLE9BQU8sWUFBWSxNQUFNLGdDQUFnQyxDQUFDO0FBK0IxRCxJQUFJLGFBQWEsR0FBRyxFQUFFLENBQUM7QUFDdkIsU0FBUyxRQUFRLENBQUMsSUFBSSxHQUFHLE9BQU8sQ0FBQyxHQUFHLEVBQUUsRUFBRSxRQUE0QztJQUNoRixNQUFNLGFBQWEsbUJBQ2YsT0FBTyxFQUFFLEtBQUssRUFDZCxXQUFXLEVBQUUsS0FBSyxJQUNmLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FDcEIsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLFlBQVksaUJBQ3JCLElBQUksSUFDRCxhQUFhLEVBQ2xCLENBQUM7SUFHSCxJQUFJLGFBQWEsQ0FBQyxJQUFJLENBQUMsRUFBRTtRQUNyQixPQUFPLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQztLQUM5QjtJQUVELE1BQU0sSUFBSSxHQUFHLEdBQUcsYUFBYSxDQUFDLElBQUksRUFBRSxhQUFhLENBQUMsT0FBTyxDQUFDLGVBQWUsQ0FBQztJQUMxRSxJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUM7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUV6QyxJQUFJLElBQUksR0FBRyxjQUFjLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDaEMsSUFBSSxhQUFhLENBQUMsV0FBVyxFQUFFO1FBQzNCLElBQUksR0FBRyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztLQUNsQztJQUVELFFBQVE7SUFDUixJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQztRQUFFLGFBQWEsQ0FBQyxJQUFJLENBQUMsR0FBRyxJQUFJLENBQUM7SUFFckQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQUNELGVBQWUsUUFBUSxDQUFDIn0=
+var jsonSync_default = jsonSync;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

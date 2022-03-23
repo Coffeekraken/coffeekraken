@@ -1,46 +1,42 @@
-// @ts-nocheck
-import __addEventListenerOnce from './addEventListenerOnce';
-import __SPromise from '@coffeekraken/s-promise';
-/**
- * @name      removeClassOnAnimationEnd
- * @namespace            js.dom.class
- * @type      Function
- * @platform          js
- * @status      beta
- *
- * Remove some class on animation end
- *
- * @param    {HTMLElement}    elm    The element to take care of
- * @param    {String|Array}    class    The class or classes (Array) to remove
- * @return   {Promise}                  A promise that will be resolved once the class has been removed and the animation finished
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import removeClassOnAnimationEnd from '@coffeekraken/sugar/js/dom/removeClassOnAnimationEnd'
- * removeClassOnAnimationEnd(myCoolElm, 'my-class');
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var removeClassOnAnimationEnd_exports = {};
+__export(removeClassOnAnimationEnd_exports, {
+  default: () => removeClassOnAnimationEnd_default
+});
+module.exports = __toCommonJS(removeClassOnAnimationEnd_exports);
+var import_addEventListenerOnce = __toESM(require("./addEventListenerOnce"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function removeClassOnAnimationEnd($elm, cls) {
-    return new __SPromise(({ resolve }) => {
-        // listen for animation end on the element just once
-        __addEventListenerOnce($elm, 'animationend', (e) => {
-            if (!Array.isArray(cls))
-                cls = [cls];
-            // remove the cls
-            cls.forEach((_cls) => {
-                $elm.classList.remove(_cls);
-            });
-            // resolve the process
-            resolve(e);
-        });
-    }, {
-        id: 'removeClassOnAnimationEnd',
+  return new import_s_promise.default(({ resolve }) => {
+    (0, import_addEventListenerOnce.default)($elm, "animationend", (e) => {
+      if (!Array.isArray(cls))
+        cls = [cls];
+      cls.forEach((_cls) => {
+        $elm.classList.remove(_cls);
+      });
+      resolve(e);
     });
+  }, {
+    id: "removeClassOnAnimationEnd"
+  });
 }
-export default removeClassOnAnimationEnd;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVtb3ZlQ2xhc3NPbkFuaW1hdGlvbkVuZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlbW92ZUNsYXNzT25BbmltYXRpb25FbmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sc0JBQXNCLE1BQU0sd0JBQXdCLENBQUM7QUFDNUQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFFakQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyx5QkFBeUIsQ0FBQyxJQUFJLEVBQUUsR0FBRztJQUN4QyxPQUFPLElBQUksVUFBVSxDQUNqQixDQUFDLEVBQUUsT0FBTyxFQUFFLEVBQUUsRUFBRTtRQUNaLG9EQUFvRDtRQUNwRCxzQkFBc0IsQ0FBQyxJQUFJLEVBQUUsY0FBYyxFQUFFLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDL0MsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDO2dCQUFFLEdBQUcsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQ3JDLGlCQUFpQjtZQUNqQixHQUFHLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7Z0JBQ2pCLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUMsQ0FBQyxDQUFDO1lBQ0gsc0JBQXNCO1lBQ3RCLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNmLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxFQUNEO1FBQ0ksRUFBRSxFQUFFLDJCQUEyQjtLQUNsQyxDQUNKLENBQUM7QUFDTixDQUFDO0FBQ0QsZUFBZSx5QkFBeUIsQ0FBQyJ9
+var removeClassOnAnimationEnd_default = removeClassOnAnimationEnd;

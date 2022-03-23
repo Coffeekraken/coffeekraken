@@ -1,36 +1,31 @@
-// @ts-nocheck
-/**
- * @name            toString
- * @namespace            js.html
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Return the string version of a dom node or the dom node and his children
- *
- * @param    {HTMLElement}    html    The HTMLElement to convert to string
- * @param    {Boolean}    [deep=true]    Include or not his children
- * @return    {String}    The string version of the dom node
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import toString from '@coffeekraken/sugar/js/string/toString'
- * const myDomNode = document.querySelector('.my-dom-node')
- * toString(myDomNode, false) // <div class="my-dom-node"></div>
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var toString_exports = {};
+__export(toString_exports, {
+  default: () => toString_default
+});
+module.exports = __toCommonJS(toString_exports);
 function toStringFn(html, deep = true) {
-    if (document !== undefined && document.createElement !== undefined) {
-        const cont = document.createElement('div');
-        cont.appendChild(html.cloneNode(deep));
-        return cont.innerHTML;
-    }
-    return html;
+  if (document !== void 0 && document.createElement !== void 0) {
+    const cont = document.createElement("div");
+    cont.appendChild(html.cloneNode(deep));
+    return cont.innerHTML;
+  }
+  return html;
 }
-export default toStringFn;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9TdHJpbmcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0b1N0cmluZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsVUFBVSxDQUFDLElBQWlCLEVBQUUsT0FBZ0IsSUFBSTtJQUN2RCxJQUFJLFFBQVEsS0FBSyxTQUFTLElBQUksUUFBUSxDQUFDLGFBQWEsS0FBSyxTQUFTLEVBQUU7UUFDaEUsTUFBTSxJQUFJLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUMzQyxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztRQUN2QyxPQUFPLElBQUksQ0FBQyxTQUFTLENBQUM7S0FDekI7SUFDRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBQ0QsZUFBZSxVQUFVLENBQUMifQ==
+var toString_default = toStringFn;

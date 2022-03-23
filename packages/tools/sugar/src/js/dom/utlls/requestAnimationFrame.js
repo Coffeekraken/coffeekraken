@@ -1,32 +1,23 @@
-// @ts-nocheck
-/**
- * @name      requestAnimationFrame
- * @namespace            js.dom.utils
- * @type      Function
- * @platform       js
- * @status      beta
- *
- * Proxy for the window.requestAnimationFrame function
- *
- * @param       {Function}      cb          The function to call when it's time to update your animation for the next repaint
- * @return      {Integer}                   A long integer value, the request id, that uniquely identifies the entry in the callback list
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example     js
- * @import requestAnimationFrame from '@coffeekraken/sugar/js/dom/requestAnimationFrame';
- * requestAnimationFrame(function() {
- *    // do something...
- * });
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVxdWVzdEFuaW1hdGlvbkZyYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmVxdWVzdEFuaW1hdGlvbkZyYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsZUFBZSxNQUFNLENBQUMscUJBQXFCO0lBQ3pDLE1BQU0sQ0FBQywyQkFBMkI7SUFDbEMsTUFBTSxDQUFDLHdCQUF3QjtJQUMvQixNQUFNLENBQUMsc0JBQXNCO0lBQzdCLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQyJ9
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var requestAnimationFrame_exports = {};
+__export(requestAnimationFrame_exports, {
+  default: () => requestAnimationFrame_default
+});
+module.exports = __toCommonJS(requestAnimationFrame_exports);
+var requestAnimationFrame_default = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame;

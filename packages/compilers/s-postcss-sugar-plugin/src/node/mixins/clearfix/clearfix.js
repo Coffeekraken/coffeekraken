@@ -1,54 +1,76 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name           clearfix
- * @namespace      node.mixins.clearfix
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:
- * - overflow (default)
- * - facebook
- * - float
- * - micro
- * - after
- *
- * @return        {Css}         The generated css for all the classes in the toolkit
- *
- * @example         postcss
- * .my-element {
- *    \@sugar.clearfix();
- * }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginClearfixInterface extends __SInterface {
-    static get _definition() {
-        return {
-            clearfix: {
-                type: 'String',
-                values: ['overflow', 'facebook', 'micro', 'after'],
-                default: __STheme.config('helpers.clearfix.default'),
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var clearfix_exports = {};
+__export(clearfix_exports, {
+  default: () => clearfix_default,
+  interface: () => postcssSugarPluginClearfixInterface
+});
+module.exports = __toCommonJS(clearfix_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginClearfixInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      clearfix: {
+        type: "String",
+        values: ["overflow", "facebook", "micro", "after"],
+        default: import_s_theme.default.config("helpers.clearfix.default")
+      }
+    };
+  }
 }
-export { postcssSugarPluginClearfixInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ clearfix: 'overflow' }, params);
-    const vars = new CssVars();
-    switch (finalParams.clearfix) {
-        case 'facebook':
-            vars.code(`
+function clearfix_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    clearfix: "overflow"
+  }, params);
+  const vars = new CssVars();
+  switch (finalParams.clearfix) {
+    case "facebook":
+      vars.code(`
                 display: table-cell;
                 vertical-align: top;
                 width: 10000px !important;
             `);
-            break;
-        case 'micro':
-            vars.code(`
+      break;
+    case "micro":
+      vars.code(`
                 zoom: 1;
                 &:before,
                 &:after {
@@ -59,22 +81,25 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                     clear: both;
                 }
             `);
-            break;
-        case 'after':
-            vars.code(`
+      break;
+    case "after":
+      vars.code(`
                 &:after {
                     content: "";
                     clear: both;
                     display: table;
                 }
             `);
-            break;
-        case 'overflow':
-            vars.code(`
+      break;
+    case "overflow":
+      vars.code(`
                 overflow: hidden;
             `);
-            break;
-    }
-    return vars;
+      break;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xlYXJmaXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjbGVhcmZpeC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFFSCxNQUFNLG1DQUFvQyxTQUFRLFlBQVk7SUFDMUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILFFBQVEsRUFBRTtnQkFDTixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxVQUFVLEVBQUUsVUFBVSxFQUFFLE9BQU8sRUFBRSxPQUFPLENBQUM7Z0JBQ2xELE9BQU8sRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLDBCQUEwQixDQUFDO2FBQ3ZEO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU1ELE9BQU8sRUFBRSxtQ0FBbUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUU1RCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixRQUFRLEVBQUUsVUFBVSxJQUNqQixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsUUFBUSxXQUFXLENBQUMsUUFBUSxFQUFFO1FBQzFCLEtBQUssVUFBVTtZQUNYLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7YUFJVCxDQUFDLENBQUM7WUFDSCxNQUFNO1FBQ1YsS0FBSyxPQUFPO1lBQ1IsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7OzthQVVULENBQUMsQ0FBQztZQUNILE1BQU07UUFDVixLQUFLLE9BQU87WUFDUixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7YUFNVCxDQUFDLENBQUM7WUFDSCxNQUFNO1FBQ1YsS0FBSyxVQUFVO1lBQ1gsSUFBSSxDQUFDLElBQUksQ0FBQzs7YUFFVCxDQUFDLENBQUM7WUFDSCxNQUFNO0tBQ2I7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

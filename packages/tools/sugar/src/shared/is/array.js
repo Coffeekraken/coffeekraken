@@ -1,32 +1,28 @@
-// @ts-nocheck
-/**
- * @name        isArray
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the passed value is a js Array
- *
- * @param    {Mixed}    value    The value to check
- * @return   {Boolean}   true if it's a Array, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import isArray from '@coffeekraken/sugar/js/is/array'
- * if (isArray([]) {
- *   // do something
- * }
- *
- * @since      1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var array_exports = {};
+__export(array_exports, {
+  default: () => array_default
+});
+module.exports = __toCommonJS(array_exports);
 function isArray(value) {
-    return value && typeof value === 'object' && value.constructor === Array;
+  return value && typeof value === "object" && value.constructor === Array;
 }
-export default isArray;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXJyYXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhcnJheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxTQUFTLE9BQU8sQ0FBQyxLQUFLO0lBQ2xCLE9BQU8sS0FBSyxJQUFJLE9BQU8sS0FBSyxLQUFLLFFBQVEsSUFBSSxLQUFLLENBQUMsV0FBVyxLQUFLLEtBQUssQ0FBQztBQUM3RSxDQUFDO0FBQ0QsZUFBZSxPQUFPLENBQUMifQ==
+var array_default = isArray;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

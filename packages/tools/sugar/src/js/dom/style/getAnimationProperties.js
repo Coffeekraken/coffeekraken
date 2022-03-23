@@ -1,76 +1,54 @@
-// @ts-nocheck
-import __getStyleProperty from './getStyleProperty';
-import __convert from '../../../shared/time/convert';
-/**
- * @name      getAnimationProperties
- * @namespace            js.dom.style
- * @type      Function
- * @platform          js
- * @status          wip
- *
- * Get the css animation properties from an HTMLElement in an object format
- *
- * @param 		{HTMLElement} 					elm  		The element to get the properties from
- * @return 		{Object} 									The animation properties
- *
- * @todo      refactore
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import getAnimationProperties from '@coffeekraken/sugar/js/dom/getAnimationProperties'
- * const props = getAnimationProperties(myCoolHTMLElement);
- * // output format
- * // {
- * // 	name : ['animation1'],
- * // 	duration : [200],
- * // 	delay : [0],
- * // 	timingFunction : ['linear'],
- * // 	iterationCount : [1],
- * // 	direction : ['forward'],
- * // 	totalDuration : 200
- * // }
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-// export interface IGetAnimationPropertiesObject {
-//   name : ['animation1'],
-//   duration : [200],
-//   delay : [0],
-//   timingFunction : ['linear'],
-//   iterationCount : [1],
-//   direction : ['forward'],
-//   totalDuration : 200
-// }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var getAnimationProperties_exports = {};
+__export(getAnimationProperties_exports, {
+  default: () => getAnimationProperties_default
+});
+module.exports = __toCommonJS(getAnimationProperties_exports);
+var import_getStyleProperty = __toESM(require("./getStyleProperty"), 1);
+var import_convert = __toESM(require("../../../shared/time/convert"), 1);
 function getAnimationProperties(elm) {
-    // get the animation properties
-    const name = __getStyleProperty(elm, 'animation-name') || '';
-    const duration = __getStyleProperty(elm, 'animation-duration') || '0s';
-    const timingFunction = __getStyleProperty(elm, 'animation-timing-function') || 'linear';
-    const delay = __getStyleProperty(elm, 'animation-delay') || '0s';
-    const iterationCount = __getStyleProperty(elm, 'animation-iteration-count') || 1;
-    const direction = __getStyleProperty(elm, 'animation-direction') || 'normal';
-    // return the animation object
-    const props = {
-        name: name.split(','),
-        duration: duration.split(',').map((value) => __convert(value, 'ms')),
-        delay: `${delay}`.split(',').map((value) => __convert(value, 'ms')),
-        timingFunction: timingFunction.split(','),
-        iterationCount: `${iterationCount}`.split(','),
-        direction: direction.split(','),
-    };
-    let totalDuration = 0;
-    const i = 0;
-    const delays = [0].concat(props.delay);
-    [0].concat(props.duration).forEach((val) => {
-        if (val + delays[i] > totalDuration) {
-            totalDuration = val + delays[i];
-        }
-    });
-    props.totalDuration = totalDuration;
-    return props;
+  const name = (0, import_getStyleProperty.default)(elm, "animation-name") || "";
+  const duration = (0, import_getStyleProperty.default)(elm, "animation-duration") || "0s";
+  const timingFunction = (0, import_getStyleProperty.default)(elm, "animation-timing-function") || "linear";
+  const delay = (0, import_getStyleProperty.default)(elm, "animation-delay") || "0s";
+  const iterationCount = (0, import_getStyleProperty.default)(elm, "animation-iteration-count") || 1;
+  const direction = (0, import_getStyleProperty.default)(elm, "animation-direction") || "normal";
+  const props = {
+    name: name.split(","),
+    duration: duration.split(",").map((value) => (0, import_convert.default)(value, "ms")),
+    delay: `${delay}`.split(",").map((value) => (0, import_convert.default)(value, "ms")),
+    timingFunction: timingFunction.split(","),
+    iterationCount: `${iterationCount}`.split(","),
+    direction: direction.split(",")
+  };
+  let totalDuration = 0;
+  const i = 0;
+  const delays = [0].concat(props.delay);
+  [0].concat(props.duration).forEach((val) => {
+    if (val + delays[i] > totalDuration) {
+      totalDuration = val + delays[i];
+    }
+  });
+  props.totalDuration = totalDuration;
+  return props;
 }
-export default getAnimationProperties;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0QW5pbWF0aW9uUHJvcGVydGllcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldEFuaW1hdGlvblByb3BlcnRpZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFDcEQsT0FBTyxTQUFTLE1BQU0sOEJBQThCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWlDRztBQUVILG1EQUFtRDtBQUNuRCwyQkFBMkI7QUFDM0Isc0JBQXNCO0FBQ3RCLGlCQUFpQjtBQUNqQixpQ0FBaUM7QUFDakMsMEJBQTBCO0FBQzFCLDZCQUE2QjtBQUM3Qix3QkFBd0I7QUFDeEIsSUFBSTtBQUVKLFNBQVMsc0JBQXNCLENBQUMsR0FBZ0I7SUFDNUMsK0JBQStCO0lBQy9CLE1BQU0sSUFBSSxHQUFHLGtCQUFrQixDQUFDLEdBQUcsRUFBRSxnQkFBZ0IsQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUM3RCxNQUFNLFFBQVEsR0FBRyxrQkFBa0IsQ0FBQyxHQUFHLEVBQUUsb0JBQW9CLENBQUMsSUFBSSxJQUFJLENBQUM7SUFDdkUsTUFBTSxjQUFjLEdBQ2hCLGtCQUFrQixDQUFDLEdBQUcsRUFBRSwyQkFBMkIsQ0FBQyxJQUFJLFFBQVEsQ0FBQztJQUNyRSxNQUFNLEtBQUssR0FBRyxrQkFBa0IsQ0FBQyxHQUFHLEVBQUUsaUJBQWlCLENBQUMsSUFBSSxJQUFJLENBQUM7SUFDakUsTUFBTSxjQUFjLEdBQ2hCLGtCQUFrQixDQUFDLEdBQUcsRUFBRSwyQkFBMkIsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUM5RCxNQUFNLFNBQVMsR0FDWCxrQkFBa0IsQ0FBQyxHQUFHLEVBQUUscUJBQXFCLENBQUMsSUFBSSxRQUFRLENBQUM7SUFFL0QsOEJBQThCO0lBQzlCLE1BQU0sS0FBSyxHQUFHO1FBQ1YsSUFBSSxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDO1FBQ3JCLFFBQVEsRUFBRSxRQUFRLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFLENBQUMsU0FBUyxDQUFDLEtBQUssRUFBRSxJQUFJLENBQUMsQ0FBQztRQUNwRSxLQUFLLEVBQUUsR0FBRyxLQUFLLEVBQUUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxTQUFTLENBQUMsS0FBSyxFQUFFLElBQUksQ0FBQyxDQUFDO1FBQ25FLGNBQWMsRUFBRSxjQUFjLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQztRQUN6QyxjQUFjLEVBQUUsR0FBRyxjQUFjLEVBQUUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDO1FBQzlDLFNBQVMsRUFBRSxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQztLQUNsQyxDQUFDO0lBQ0YsSUFBSSxhQUFhLEdBQUcsQ0FBQyxDQUFDO0lBQ3RCLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUNaLE1BQU0sTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN2QyxDQUFDLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7UUFDdkMsSUFBSSxHQUFHLEdBQUcsTUFBTSxDQUFDLENBQUMsQ0FBQyxHQUFHLGFBQWEsRUFBRTtZQUNqQyxhQUFhLEdBQUcsR0FBRyxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUNuQztJQUNMLENBQUMsQ0FBQyxDQUFDO0lBQ0gsS0FBSyxDQUFDLGFBQWEsR0FBRyxhQUFhLENBQUM7SUFDcEMsT0FBTyxLQUFLLENBQUM7QUFDakIsQ0FBQztBQUNELGVBQWUsc0JBQXNCLENBQUMifQ==
+var getAnimationProperties_default = getAnimationProperties;

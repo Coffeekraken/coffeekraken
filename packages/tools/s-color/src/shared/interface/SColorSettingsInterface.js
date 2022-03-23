@@ -1,39 +1,46 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SColorSettingsInterface
- * @namespace           shared.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- * @platform        js
- *
- * This interface represent the settings of an SColor instance.
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SColorSettingsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            returnNewInstance: {
-                description: 'Specify if the methods returns by default a new SColor instance or the same',
-                type: 'boolean',
-                default: false
-            },
-            defaultFormat: {
-                description: 'Specify the default format of the color',
-                type: 'String',
-                values: ['hex', 'rgb', 'rgba', 'hsl', 'hsla'],
-                default: 'hex'
-            }
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SColorSettingsInterface_exports = {};
+__export(SColorSettingsInterface_exports, {
+  default: () => SColorSettingsInterface_default
+});
+module.exports = __toCommonJS(SColorSettingsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SColorSettingsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      returnNewInstance: {
+        description: "Specify if the methods returns by default a new SColor instance or the same",
+        type: "boolean",
+        default: false
+      },
+      defaultFormat: {
+        description: "Specify the default format of the color",
+        type: "String",
+        values: ["hex", "rgb", "rgba", "hsl", "hsla"],
+        default: "hex"
+      }
+    };
+  }
 }
-export default SColorSettingsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbG9yU2V0dGluZ3NJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ29sb3JTZXR0aW5nc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsTUFBTSx1QkFBd0IsU0FBUSxZQUFZO0lBQzlDLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxpQkFBaUIsRUFBRTtnQkFDZixXQUFXLEVBQUUsNkVBQTZFO2dCQUMxRixJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELGFBQWEsRUFBRTtnQkFDWCxXQUFXLEVBQUUseUNBQXlDO2dCQUN0RCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxLQUFLLEVBQUMsS0FBSyxFQUFDLE1BQU0sRUFBQyxLQUFLLEVBQUMsTUFBTSxDQUFDO2dCQUN6QyxPQUFPLEVBQUUsS0FBSzthQUNqQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFFRCxlQUFlLHVCQUF1QixDQUFDIn0=
+var SColorSettingsInterface_default = SColorSettingsInterface;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,49 +1,80 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __deepMerge from '../../shared/object/deepMerge';
-import __openGraphScraper from 'open-graph-scraper';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
-import __fs from 'fs';
-export default function srapeUrl(url, settings = {}) {
-    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        const finalSettings = __deepMerge({
-            id: undefined,
-            scraper: {},
-            cache: {
-                ttl: '1w',
-            },
-        }, settings);
-        const cacheFilePath = `${__packageCacheDir()}/sugar/scrapeUrl.json`;
-        let cacheJson = {};
-        // leverage cache
-        if (finalSettings.cache && __fs.existsSync(cacheFilePath)) {
-            cacheJson = __readJsonSync(cacheFilePath);
-            if (cacheJson[url]) {
-                return resolve(cacheJson[url]);
-            }
-        }
-        // process to actual scraping
-        const data = yield __openGraphScraper(Object.assign(Object.assign({}, finalSettings.scraper), { url }));
-        // check if got some results
-        if (data.error) {
-            return reject(data.result);
-        }
-        // cache if needed
-        if (finalSettings.cache && data.result) {
-            cacheJson[url] = data.result;
-            __writeJsonSync(cacheFilePath, cacheJson);
-        }
-        // return the resuls
-        return resolve(data.result);
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var scrapeUrl_exports = {};
+__export(scrapeUrl_exports, {
+  default: () => srapeUrl
+});
+module.exports = __toCommonJS(scrapeUrl_exports);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_open_graph_scraper = __toESM(require("open-graph-scraper"), 1);
+var import_packageCacheDir = __toESM(require("@coffeekraken/sugar/node/path/packageCacheDir"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
+var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"), 1);
+var import_fs = __toESM(require("fs"), 1);
+function srapeUrl(url, settings = {}) {
+  return new Promise(async (resolve, reject) => {
+    const finalSettings = (0, import_deepMerge.default)({
+      id: void 0,
+      scraper: {},
+      cache: {
+        ttl: "1w"
+      }
+    }, settings);
+    const cacheFilePath = `${(0, import_packageCacheDir.default)()}/sugar/scrapeUrl.json`;
+    let cacheJson = {};
+    if (finalSettings.cache && import_fs.default.existsSync(cacheFilePath)) {
+      cacheJson = (0, import_readJsonSync.default)(cacheFilePath);
+      if (cacheJson[url]) {
+        return resolve(cacheJson[url]);
+      }
+    }
+    const data = await (0, import_open_graph_scraper.default)(__spreadProps(__spreadValues({}, finalSettings.scraper), {
+      url
     }));
+    if (data.error) {
+      return reject(data.result);
+    }
+    if (finalSettings.cache && data.result) {
+      cacheJson[url] = data.result;
+      (0, import_writeJsonSync.default)(cacheFilePath, cacheJson);
+    }
+    return resolve(data.result);
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NyYXBlVXJsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2NyYXBlVXJsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sV0FBVyxNQUFNLCtCQUErQixDQUFDO0FBQ3hELE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFDcEQsT0FBTyxpQkFBaUIsTUFBTSwrQ0FBK0MsQ0FBQztBQUM5RSxPQUFPLGNBQWMsTUFBTSwwQ0FBMEMsQ0FBQztBQUN0RSxPQUFPLGVBQWUsTUFBTSwyQ0FBMkMsQ0FBQztBQUN4RSxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUF1RHRCLE1BQU0sQ0FBQyxPQUFPLFVBQVUsUUFBUSxDQUM1QixHQUFXLEVBQ1gsV0FBd0MsRUFBRTtJQUUxQyxPQUFPLElBQUksT0FBTyxDQUFDLENBQU8sT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFO1FBQ3pDLE1BQU0sYUFBYSxHQUF1QixXQUFXLENBQ2pEO1lBQ0ksRUFBRSxFQUFFLFNBQVM7WUFDYixPQUFPLEVBQUUsRUFBRTtZQUNYLEtBQUssRUFBRTtnQkFDSCxHQUFHLEVBQUUsSUFBSTthQUNaO1NBQ0osRUFDRCxRQUFRLENBQ1gsQ0FBQztRQUVGLE1BQU0sYUFBYSxHQUFHLEdBQUcsaUJBQWlCLEVBQUUsdUJBQXVCLENBQUM7UUFFcEUsSUFBSSxTQUFTLEdBQUcsRUFBRSxDQUFDO1FBRW5CLGlCQUFpQjtRQUNqQixJQUFJLGFBQWEsQ0FBQyxLQUFLLElBQUksSUFBSSxDQUFDLFVBQVUsQ0FBQyxhQUFhLENBQUMsRUFBRTtZQUN2RCxTQUFTLEdBQUcsY0FBYyxDQUFDLGFBQWEsQ0FBQyxDQUFDO1lBQzFDLElBQUksU0FBUyxDQUFDLEdBQUcsQ0FBQyxFQUFFO2dCQUNoQixPQUFPLE9BQU8sQ0FBQyxTQUFTLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQzthQUNsQztTQUNKO1FBRUQsNkJBQTZCO1FBQzdCLE1BQU0sSUFBSSxHQUFHLE1BQU0sa0JBQWtCLGlDQUM5QixhQUFhLENBQUMsT0FBTyxLQUN4QixHQUFHLElBQ0wsQ0FBQztRQUVILDRCQUE0QjtRQUM1QixJQUFJLElBQUksQ0FBQyxLQUFLLEVBQUU7WUFDWixPQUFPLE1BQU0sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7U0FDOUI7UUFFRCxrQkFBa0I7UUFDbEIsSUFBSSxhQUFhLENBQUMsS0FBSyxJQUFJLElBQUksQ0FBQyxNQUFNLEVBQUU7WUFDcEMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxHQUFHLElBQUksQ0FBQyxNQUFNLENBQUM7WUFDN0IsZUFBZSxDQUFDLGFBQWEsRUFBRSxTQUFTLENBQUMsQ0FBQztTQUM3QztRQUVELG9CQUFvQjtRQUNwQixPQUFPLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDaEMsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

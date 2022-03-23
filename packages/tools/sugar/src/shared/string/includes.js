@@ -1,42 +1,38 @@
-// @ts-nocheck
-/**
- * @name        includes
- * @namespace            js.string
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Same as the native String.includes function but accept either an array of items
- * or a simple comma separated string like "something,cool,hello,world"
- *
- * @param    {String}    string    The string to check
- * @param     {Array|String}    values      An array or comma separated string to check
- * @return    {Boolean|Array}     An array of values that exists in the string or false if nothing match
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import includes from '@coffeekraken/sugar/js/string/includes'
- * includes('Hello world', 'world,coco') // ['world']
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var includes_exports = {};
+__export(includes_exports, {
+  default: () => includes_default
+});
+module.exports = __toCommonJS(includes_exports);
 function includes(string, values) {
-    if (!Array.isArray(values))
-        values = values.split(',').map((t) => t.trim());
-    const valuesThatExists = [];
-    values.forEach((v) => {
-        if (string.includes(v)) {
-            valuesThatExists.push(v);
-        }
-    });
-    if (valuesThatExists.length)
-        return valuesThatExists;
-    return false;
+  if (!Array.isArray(values))
+    values = values.split(",").map((t) => t.trim());
+  const valuesThatExists = [];
+  values.forEach((v) => {
+    if (string.includes(v)) {
+      valuesThatExists.push(v);
+    }
+  });
+  if (valuesThatExists.length)
+    return valuesThatExists;
+  return false;
 }
-export default includes;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5jbHVkZXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmNsdWRlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxTQUFTLFFBQVEsQ0FBQyxNQUFNLEVBQUUsTUFBTTtJQUM1QixJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUM7UUFBRSxNQUFNLEdBQUcsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxDQUFDO0lBQzVFLE1BQU0sZ0JBQWdCLEdBQUcsRUFBRSxDQUFDO0lBQzVCLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtRQUNqQixJQUFJLE1BQU0sQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLEVBQUU7WUFDcEIsZ0JBQWdCLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO1NBQzVCO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDSCxJQUFJLGdCQUFnQixDQUFDLE1BQU07UUFBRSxPQUFPLGdCQUFnQixDQUFDO0lBQ3JELE9BQU8sS0FBSyxDQUFDO0FBQ2pCLENBQUM7QUFDRCxlQUFlLFFBQVEsQ0FBQyJ9
+var includes_default = includes;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,42 +1,53 @@
-// @ts-nocheck
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SCliFsCopyParamsInterface
- * @namespace           node.fs.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This interface specify the parameters needed to the `sugar fs.copy` command.
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SCliFsCopyParamsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            src: {
-                description: 'Specify the file/folder to copy',
-                type: 'String',
-                required: true
-            },
-            glob: {
-                description: 'Specify a glob pattern to search for files inside the specified src"',
-                type: 'String',
-            },
-            dest: {
-                description: 'Specify the destination file/folder',
-                type: 'String',
-                required: true
-            },
-            chdir: {
-                description: 'Specify if you want the process to change directory inside the destination one or not',
-                type: 'Boolean',
-                default: false
-            }
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SCliFsCopyParamsInterface_exports = {};
+__export(SCliFsCopyParamsInterface_exports, {
+  default: () => SCliFsCopyParamsInterface
+});
+module.exports = __toCommonJS(SCliFsCopyParamsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SCliFsCopyParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      src: {
+        description: "Specify the file/folder to copy",
+        type: "String",
+        required: true
+      },
+      glob: {
+        description: 'Specify a glob pattern to search for files inside the specified src"',
+        type: "String"
+      },
+      dest: {
+        description: "Specify the destination file/folder",
+        type: "String",
+        required: true
+      },
+      chdir: {
+        description: "Specify if you want the process to change directory inside the destination one or not",
+        type: "Boolean",
+        default: false
+      }
+    };
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsaUZzQ29weVBhcmFtc0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDbGlGc0NvcHlQYXJhbXNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7O0dBYUc7QUFDSCxNQUFNLENBQUMsT0FBTyxPQUFPLHlCQUEwQixTQUFRLFlBQVk7SUFDL0QsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEdBQUcsRUFBRTtnQkFDRCxXQUFXLEVBQUUsaUNBQWlDO2dCQUM5QyxJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELElBQUksRUFBRTtnQkFDRixXQUFXLEVBQUUsc0VBQXNFO2dCQUNuRixJQUFJLEVBQUUsUUFBUTthQUNqQjtZQUNELElBQUksRUFBRTtnQkFDRixXQUFXLEVBQUUscUNBQXFDO2dCQUNsRCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELEtBQUssRUFBRTtnQkFDSCxXQUFXLEVBQUUsdUZBQXVGO2dCQUNwRyxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsS0FBSzthQUNqQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0oifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

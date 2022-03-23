@@ -1,97 +1,116 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __SDocMap from '@coffeekraken/s-docmap';
-import __SDocblock from '@coffeekraken/s-docblock';
-import __SPromise from '@coffeekraken/s-promise';
-import __fs from 'fs';
-import __SLog from '@coffeekraken/s-log';
-import __SViewRenderer from '@coffeekraken/s-view-renderer';
-import { page404 } from '@coffeekraken/s-view-renderer';
-import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
-import __SBench from '@coffeekraken/s-bench';
-/**
- * @name                styleguideHandler
- * @namespace           sugar.node.server.frontend.modules.styleguide
- * @type                Function
- * @status              wip
- *
- * This function is responsible of responding to express requests made on the doc pages
- *
- * @param         {Object}          req             The express request object
- * @param         {Object}          res             The express response object
- * @param         {Object}         [settings={}]    The handler settings
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function styleguide(req, res, settings = {}) {
-    return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
-        __SBench.start('handlers.styleguide');
-        __SBench.step('handlers.styleguide', 'beforeDocmapRead');
-        const docmap = new __SDocMap();
-        const docmapJson = yield docmap.read();
-        const styleguideMenu = docmapJson.menu.custom.styleguide;
-        __SBench.step('handlers.styleguide', 'afterDocmapRead');
-        const styleguideObj = styleguideMenu.slug[req.path];
-        if (!styleguideObj || !__fs.existsSync(styleguideObj.docmap.path)) {
-            const error = yield page404(Object.assign(Object.assign({}, (res.templateData || {})), { title: `Styleguide "${req.path}" not found`, body: `The styleguide "${req.path}" you requested does not exists...` }));
-            res.type('text/html');
-            res.status(404);
-            res.send(error.value);
-            return reject(error.value);
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var styleguideHandler_exports = {};
+__export(styleguideHandler_exports, {
+  default: () => styleguide
+});
+module.exports = __toCommonJS(styleguideHandler_exports);
+var import_s_docmap = __toESM(require("@coffeekraken/s-docmap"), 1);
+var import_s_docblock = __toESM(require("@coffeekraken/s-docblock"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
+var import_s_view_renderer = __toESM(require("@coffeekraken/s-view-renderer"), 1);
+var import_s_view_renderer2 = require("@coffeekraken/s-view-renderer");
+var import_scrapeUrl = __toESM(require("@coffeekraken/sugar/node/og/scrapeUrl"), 1);
+var import_s_bench = __toESM(require("@coffeekraken/s-bench"), 1);
+function styleguide(req, res, settings = {}) {
+  return new import_s_promise.default(async ({ resolve, reject, emit }) => {
+    import_s_bench.default.start("handlers.styleguide");
+    import_s_bench.default.step("handlers.styleguide", "beforeDocmapRead");
+    const docmap = new import_s_docmap.default();
+    const docmapJson = await docmap.read();
+    const styleguideMenu = docmapJson.menu.custom.styleguide;
+    import_s_bench.default.step("handlers.styleguide", "afterDocmapRead");
+    const styleguideObj = styleguideMenu.slug[req.path];
+    if (!styleguideObj || !import_fs.default.existsSync(styleguideObj.docmap.path)) {
+      const error = await (0, import_s_view_renderer2.page404)(__spreadProps(__spreadValues({}, res.templateData || {}), {
+        title: `Styleguide "${req.path}" not found`,
+        body: `The styleguide "${req.path}" you requested does not exists...`
+      }));
+      res.type("text/html");
+      res.status(404);
+      res.send(error.value);
+      return reject(error.value);
+    }
+    const finalReqPath = `/styleguide/${req.path.split("/styleguide/")[1]}`;
+    import_s_bench.default.step("handlers.styleguide", "beforeDocblockParsing");
+    const docblocksInstance = new import_s_docblock.default(styleguideObj.docmap.path, {
+      docblock: {
+        renderMarkdown: false,
+        filterByTag: {
+          menu: (value) => {
+            if (!value || typeof value !== "string")
+              return false;
+            const parts = value.split(/\s{2,99999999}/);
+            if (parts.length >= 2 && parts[1] === finalReqPath)
+              return true;
+            return false;
+          }
         }
-        const finalReqPath = `/styleguide/${req.path.split('/styleguide/')[1]}`;
-        __SBench.step('handlers.styleguide', 'beforeDocblockParsing');
-        const docblocksInstance = new __SDocblock(styleguideObj.docmap.path, {
-            docblock: {
-                renderMarkdown: false,
-                filterByTag: {
-                    menu: (value) => {
-                        if (!value || typeof value !== 'string')
-                            return false;
-                        const parts = value.split(/\s{2,99999999}/);
-                        if (parts.length >= 2 && parts[1] === finalReqPath)
-                            return true;
-                        return false;
-                    },
-                },
-            },
-        });
-        yield docblocksInstance.parse();
-        const docblocks = docblocksInstance.toObject();
-        if (docblocks.length) {
-            if (docblocks[0].see) {
-                for (let i = 0; i < docblocks[0].see.length; i++) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[og]</yellow> Scraping opengraph from url "<cyan>${docblocks[0].see[i].url}</cyan>"`
-                    });
-                    docblocks[0].see[i].og = yield __scrapeUrl(docblocks[0].see[i].url);
-                }
-            }
+      }
+    });
+    await docblocksInstance.parse();
+    const docblocks = docblocksInstance.toObject();
+    if (docblocks.length) {
+      if (docblocks[0].see) {
+        for (let i = 0; i < docblocks[0].see.length; i++) {
+          emit("log", {
+            type: import_s_log.default.TYPE_INFO,
+            value: `<yellow>[og]</yellow> Scraping opengraph from url "<cyan>${docblocks[0].see[i].url}</cyan>"`
+          });
+          docblocks[0].see[i].og = await (0, import_scrapeUrl.default)(docblocks[0].see[i].url);
         }
-        __SBench.step('handlers.styleguide', 'afterDocblockParsing');
-        __SBench.step('handlers.styleguide', 'beforeViewRendering');
-        const docView = new __SViewRenderer('pages.styleguide.styleguide');
-        const pageHtml = yield docView.render(Object.assign(Object.assign({}, (res.templateData || {})), { docblocks }));
-        __SBench.step('handlers.styleguide', 'afterViewRendering');
-        __SBench.end('handlers.styleguide', {}).log();
-        res.status(200);
-        res.type('text/html');
-        res.send(pageHtml.value);
-        resolve(pageHtml.value);
+      }
+    }
+    import_s_bench.default.step("handlers.styleguide", "afterDocblockParsing");
+    import_s_bench.default.step("handlers.styleguide", "beforeViewRendering");
+    const docView = new import_s_view_renderer.default("pages.styleguide.styleguide");
+    const pageHtml = await docView.render(__spreadProps(__spreadValues({}, res.templateData || {}), {
+      docblocks
     }));
+    import_s_bench.default.step("handlers.styleguide", "afterViewRendering");
+    import_s_bench.default.end("handlers.styleguide", {}).log();
+    res.status(200);
+    res.type("text/html");
+    res.send(pageHtml.value);
+    resolve(pageHtml.value);
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVndWlkZUhhbmRsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdHlsZWd1aWRlSGFuZGxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7O0FBR2QsT0FBTyxTQUFTLE1BQU0sd0JBQXdCLENBQUM7QUFDL0MsT0FBTyxXQUFXLE1BQU0sMEJBQTBCLENBQUM7QUFDbkQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFFakQsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBQ3RCLE9BQU8sTUFBTSxNQUFNLHFCQUFxQixDQUFDO0FBQ3pDLE9BQU8sZUFBZSxNQUFNLCtCQUErQixDQUFDO0FBRTVELE9BQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSwrQkFBK0IsQ0FBQztBQUN4RCxPQUFPLFdBQVcsTUFBTSx1Q0FBdUMsQ0FBQztBQUNoRSxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxVQUFVLENBQUMsR0FBRyxFQUFFLEdBQUcsRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUN0RCxPQUFPLElBQUksVUFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDdEQsUUFBUSxDQUFDLEtBQUssQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO1FBRXRDLFFBQVEsQ0FBQyxJQUFJLENBQUMscUJBQXFCLEVBQUUsa0JBQWtCLENBQUMsQ0FBQztRQUV6RCxNQUFNLE1BQU0sR0FBRyxJQUFJLFNBQVMsRUFBRSxDQUFDO1FBQy9CLE1BQU0sVUFBVSxHQUFHLE1BQU0sTUFBTSxDQUFDLElBQUksRUFBRSxDQUFDO1FBQ3ZDLE1BQU0sY0FBYyxHQUFHLFVBQVUsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQztRQUV6RCxRQUFRLENBQUMsSUFBSSxDQUFDLHFCQUFxQixF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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

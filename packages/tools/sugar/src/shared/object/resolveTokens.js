@@ -1,62 +1,49 @@
-// @ts-nocheck
-import __deepProxy from './deepProxy';
-import __get from './get';
-/**
- * @name                      resolveTokens
- * @namespace            js.object
- * @type                      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function take an object and propare it to accept tokens like:
- * - '{this.something.else}'
- * - etc...
- *
- * @param         {Object}            object        The object to process
- * @return        {Object}                          The proxied object that you can use
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- * @todo      add some settings to set token structure
- *
- * @example       js
- * import resolveTokens from '@coffeekraken/sugar/js/object/resolveTokens';
- * const myObj = resolveTokens({
- *    hello: 'world',
- *    plop: '{this.hello}
- * });
- *
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var resolveTokens_exports = {};
+__export(resolveTokens_exports, {
+  default: () => resolveTokens_default
+});
+module.exports = __toCommonJS(resolveTokens_exports);
+var import_deepProxy = __toESM(require("./deepProxy"), 1);
+var import_get = __toESM(require("./get"), 1);
 function resolveTokens(object) {
-    // proxy the object
-    const proxiedObject = __deepProxy(object, (getObj) => {
-        // get the raw value
-        const rawValue = __get(getObj.target, getObj.key);
-        // check if it's a string
-        if (typeof rawValue !== 'string')
-            return rawValue;
-        // check if we have some tokens
-        const reg = /\{([a-zA-Z0-9\.-_]+)\}/g;
-        const tokens = rawValue.match(reg);
-        let finalValue = rawValue;
-        if (!tokens)
-            return rawValue;
-        tokens.forEach((token) => {
-            finalValue = finalValue.replace(token, __get(object, token
-                .replace('{', '')
-                .replace('}', '')
-                .replace('this.', '')));
-        });
-        return finalValue;
-    }, {
-        handleGet: true,
+  const proxiedObject = (0, import_deepProxy.default)(object, (getObj) => {
+    const rawValue = (0, import_get.default)(getObj.target, getObj.key);
+    if (typeof rawValue !== "string")
+      return rawValue;
+    const reg = /\{([a-zA-Z0-9\.-_]+)\}/g;
+    const tokens = rawValue.match(reg);
+    let finalValue = rawValue;
+    if (!tokens)
+      return rawValue;
+    tokens.forEach((token) => {
+      finalValue = finalValue.replace(token, (0, import_get.default)(object, token.replace("{", "").replace("}", "").replace("this.", "")));
     });
-    // return the proxied object
-    return proxiedObject;
+    return finalValue;
+  }, {
+    handleGet: true
+  });
+  return proxiedObject;
 }
-export default resolveTokens;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVzb2x2ZVRva2Vucy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlc29sdmVUb2tlbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sV0FBVyxNQUFNLGFBQWEsQ0FBQztBQUN0QyxPQUFPLEtBQUssTUFBTSxPQUFPLENBQUM7QUFFMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsU0FBUyxhQUFhLENBQUMsTUFBTTtJQUN6QixtQkFBbUI7SUFDbkIsTUFBTSxhQUFhLEdBQUcsV0FBVyxDQUM3QixNQUFNLEVBQ04sQ0FBQyxNQUFNLEVBQUUsRUFBRTtRQUNQLG9CQUFvQjtRQUNwQixNQUFNLFFBQVEsR0FBRyxLQUFLLENBQUMsTUFBTSxDQUFDLE1BQU0sRUFBRSxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUM7UUFDbEQseUJBQXlCO1FBQ3pCLElBQUksT0FBTyxRQUFRLEtBQUssUUFBUTtZQUFFLE9BQU8sUUFBUSxDQUFDO1FBQ2xELCtCQUErQjtRQUMvQixNQUFNLEdBQUcsR0FBRyx5QkFBeUIsQ0FBQztRQUN0QyxNQUFNLE1BQU0sR0FBRyxRQUFRLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ25DLElBQUksVUFBVSxHQUFHLFFBQVEsQ0FBQztRQUUxQixJQUFJLENBQUMsTUFBTTtZQUFFLE9BQU8sUUFBUSxDQUFDO1FBRTdCLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtZQUNyQixVQUFVLEdBQUcsVUFBVSxDQUFDLE9BQU8sQ0FDM0IsS0FBSyxFQUNMLEtBQUssQ0FDRCxNQUFNLEVBQ04sS0FBSztpQkFDQSxPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQztpQkFDaEIsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUFFLENBQUM7aUJBQ2hCLE9BQU8sQ0FBQyxPQUFPLEVBQUUsRUFBRSxDQUFDLENBQzVCLENBQ0osQ0FBQztRQUNOLENBQUMsQ0FBQyxDQUFDO1FBRUgsT0FBTyxVQUFVLENBQUM7SUFDdEIsQ0FBQyxFQUNEO1FBQ0ksU0FBUyxFQUFFLElBQUk7S0FDbEIsQ0FDSixDQUFDO0lBQ0YsNEJBQTRCO0lBQzVCLE9BQU8sYUFBYSxDQUFDO0FBQ3pCLENBQUM7QUFDRCxlQUFlLGFBQWEsQ0FBQyJ9
+var resolveTokens_default = resolveTokens;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

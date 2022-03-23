@@ -1,37 +1,37 @@
-// @ts-nocheck
-import __uniqid from '../../../shared/string/uniqid';
-/**
- * @name            injectStyle
- * @namespace            js.css
- * @type            Function
- * @platform          js
- * @status              beta
- *
- * Inject a passed style string in the DOM
- *
- * @param         {String}          style         The style to inject in DOM
- * @param         {HTMLElement}     [node=document.head]    The node in which to inject the new style tag
- * @return                          {HTMLStyleElement}      The injected HTMLStyleElement node
- *
- * @todo        interface
- * @todo        doc
- *
- * @example       js
- * import injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
- * injectStyle('a { color: red; }');
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function injectStyle(style, id = `injected-style-${__uniqid()}`, node = document.head) {
-    if (document.querySelector(`#${id}`))
-        return;
-    const $tag = document.createElement('style');
-    $tag.type = 'text/css';
-    $tag.setAttribute('id', `injected-style-${id.toLowerCase()}`);
-    $tag.innerHTML = style;
-    node.appendChild($tag);
-    return $tag;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var injectStyle_exports = {};
+__export(injectStyle_exports, {
+  default: () => injectStyle_default
+});
+module.exports = __toCommonJS(injectStyle_exports);
+var import_uniqid = __toESM(require("../../../shared/string/uniqid"), 1);
+function injectStyle(style, id = `injected-style-${(0, import_uniqid.default)()}`, node = document.head) {
+  if (document.querySelector(`#${id}`))
+    return;
+  const $tag = document.createElement("style");
+  $tag.type = "text/css";
+  $tag.setAttribute("id", `injected-style-${id.toLowerCase()}`);
+  $tag.innerHTML = style;
+  node.appendChild($tag);
+  return $tag;
 }
-export default injectStyle;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5qZWN0U3R5bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmplY3RTdHlsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsT0FBTyxRQUFRLE1BQU0sK0JBQStCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxTQUFTLFdBQVcsQ0FDaEIsS0FBYSxFQUNiLEtBQWEsa0JBQWtCLFFBQVEsRUFBRSxFQUFFLEVBQzNDLElBQUksR0FBRyxRQUFRLENBQUMsSUFBSTtJQUVwQixJQUFJLFFBQVEsQ0FBQyxhQUFhLENBQUMsSUFBSSxFQUFFLEVBQUUsQ0FBQztRQUFFLE9BQU87SUFDN0MsTUFBTSxJQUFJLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUM3QyxJQUFJLENBQUMsSUFBSSxHQUFHLFVBQVUsQ0FBQztJQUN2QixJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksRUFBRSxrQkFBa0IsRUFBRSxDQUFDLFdBQVcsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUM5RCxJQUFJLENBQUMsU0FBUyxHQUFHLEtBQUssQ0FBQztJQUN2QixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3ZCLE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFDRCxlQUFlLFdBQVcsQ0FBQyJ9
+var injectStyle_default = injectStyle;

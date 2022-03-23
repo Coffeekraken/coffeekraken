@@ -1,39 +1,38 @@
-// @ts-nocheck
-import uniq from 'lodash/uniq';
-/**
- * @name        keysFirst
- * @namespace            js.array
- * @type      Function
- * @platform          js
- * @platform          node
- * @status            beta
- *
- * Make sure the passed array start with the passed keys
- *
- * @param    {Array}    array    The array to sort
- * @param    {Array}    keys    The keys to start the array with
- * @return    {Array}    The processed array
- *
- * @example    js
- * import keysFirst from '@coffeekraken/sugar/js/array/keysFirst'
- * keysFirst(['a','b','d','g','c'], ['d','g'])
- * // ['d','g','a','b','c']
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var keysFirst_exports = {};
+__export(keysFirst_exports, {
+  default: () => keysFirst_default
+});
+module.exports = __toCommonJS(keysFirst_exports);
+var import_uniq = __toESM(require("lodash/uniq"), 1);
 function keysFirst(array, keys) {
-    // all the keys has to exist in the array stack
-    // otherwise we filter it out
-    keys = keys.filter((key) => {
-        return array.indexOf(key) !== -1;
-    });
-    // add the keys at start
-    const empty = [];
-    let res = empty.concat(keys).concat(array);
-    // remove double items
-    res = uniq(res);
-    // return the result
-    return res;
+  keys = keys.filter((key) => {
+    return array.indexOf(key) !== -1;
+  });
+  const empty = [];
+  let res = empty.concat(keys).concat(array);
+  res = (0, import_uniq.default)(res);
+  return res;
 }
-export default keysFirst;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoia2V5c0ZpcnN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsia2V5c0ZpcnN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLElBQUksTUFBTSxhQUFhLENBQUM7QUFFL0I7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsU0FBUyxTQUFTLENBQUMsS0FBWSxFQUFFLElBQVc7SUFDeEMsK0NBQStDO0lBQy9DLDZCQUE2QjtJQUM3QixJQUFJLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFO1FBQ3ZCLE9BQU8sS0FBSyxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztJQUNyQyxDQUFDLENBQUMsQ0FBQztJQUNILHdCQUF3QjtJQUN4QixNQUFNLEtBQUssR0FBVSxFQUFFLENBQUM7SUFDeEIsSUFBSSxHQUFHLEdBQUcsS0FBSyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDM0Msc0JBQXNCO0lBQ3RCLEdBQUcsR0FBRyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDaEIsb0JBQW9CO0lBQ3BCLE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQUVELGVBQWUsU0FBUyxDQUFDIn0=
+var keysFirst_default = keysFirst;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

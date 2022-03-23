@@ -1,36 +1,32 @@
-// @ts-nocheck
-/**
- * @name      exitFullscreen
- * @namespace            js.dom.utils
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Exit the fullscreen mode
- *
- * @return    {Promise}    Returns a Promise which is resolved once full-screen mode has been desactivated.
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import exitFullscreen from '@coffeekraken/sugar/js/dom/exitFullscreen'
- * exitFullscreen()
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var exitFullscreen_exports = {};
+__export(exitFullscreen_exports, {
+  default: () => exitFullscreen_default
+});
+module.exports = __toCommonJS(exitFullscreen_exports);
 function exitFullscreen() {
-    if (document.cancelFullScreen) {
-        return document.cancelFullScreen();
-    }
-    else if (document.mozCancelFullScreen) {
-        return document.mozCancelFullScreen();
-    }
-    else if (document.webkitCancelFullScreen) {
-        return document.webkitCancelFullScreen();
-    }
+  if (document.cancelFullScreen) {
+    return document.cancelFullScreen();
+  } else if (document.mozCancelFullScreen) {
+    return document.mozCancelFullScreen();
+  } else if (document.webkitCancelFullScreen) {
+    return document.webkitCancelFullScreen();
+  }
 }
-export default exitFullscreen;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhpdEZ1bGxzY3JlZW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJleGl0RnVsbHNjcmVlbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQVMsY0FBYztJQUNuQixJQUFJLFFBQVEsQ0FBQyxnQkFBZ0IsRUFBRTtRQUMzQixPQUFPLFFBQVEsQ0FBQyxnQkFBZ0IsRUFBRSxDQUFDO0tBQ3RDO1NBQU0sSUFBSSxRQUFRLENBQUMsbUJBQW1CLEVBQUU7UUFDckMsT0FBTyxRQUFRLENBQUMsbUJBQW1CLEVBQUUsQ0FBQztLQUN6QztTQUFNLElBQUksUUFBUSxDQUFDLHNCQUFzQixFQUFFO1FBQ3hDLE9BQU8sUUFBUSxDQUFDLHNCQUFzQixFQUFFLENBQUM7S0FDNUM7QUFDTCxDQUFDO0FBQ0QsZUFBZSxjQUFjLENBQUMifQ==
+var exitFullscreen_default = exitFullscreen;

@@ -1,71 +1,97 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name           depth
- * @namespace      node.mixins.fit
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin allows you to apply a certain depth that are defined
- * in the config.theme.depth stack like 10, 20, etc...
- *
- * @return        {Css}         The generated css for all the classes in the toolkit
- *
- * @example         postcss
- * .my-element {
- *    \@sugar.depth(20);
- * }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginFitInterface extends __SInterface {
-    static get _definition() {
-        return {
-            size: {
-                type: 'String',
-                values: ['fill', 'contain', 'cover', 'none'],
-                default: 'fill',
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var fit_exports = {};
+__export(fit_exports, {
+  default: () => fit_default,
+  interface: () => postcssSugarPluginFitInterface
+});
+module.exports = __toCommonJS(fit_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginFitInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      size: {
+        type: "String",
+        values: ["fill", "contain", "cover", "none"],
+        default: "fill"
+      }
+    };
+  }
 }
-export { postcssSugarPluginFitInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ size: 'fill' }, params);
-    const vars = [];
-    switch (finalParams.size) {
-        case 'cover':
-            vars.push(`
+function fit_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    size: "fill"
+  }, params);
+  const vars = [];
+  switch (finalParams.size) {
+    case "cover":
+      vars.push(`
                 & {
                     object-fit: cover;
                 }
             `);
-            break;
-        case 'contain':
-            vars.push(`
+      break;
+    case "contain":
+      vars.push(`
                 & {
                     object-fit: contain;
                 }
             `);
-            break;
-        case 'none':
-            vars.push(`
+      break;
+    case "none":
+      vars.push(`
                 & {
                     object-fit: none;
                 }
             `);
-            break;
-        case 'fill':
-        default:
-            vars.push(`
+      break;
+    case "fill":
+    default:
+      vars.push(`
                 & {
                     object-fit: fill;
                 }
             `);
-            break;
-    }
-    vars.push(`
+      break;
+  }
+  vars.push(`
         & {
             width: 100%; height: 100%;
         }
@@ -76,6 +102,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                     width: 100%; height: 100%;
                 }
     `);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZml0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZml0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBRUgsTUFBTSw4QkFBK0IsU0FBUSxZQUFZO0lBQ3JELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLFNBQVMsRUFBRSxPQUFPLEVBQUUsTUFBTSxDQUFDO2dCQUM1QyxPQUFPLEVBQUUsTUFBTTthQUNsQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFNRCxPQUFPLEVBQUUsOEJBQThCLElBQUksU0FBUyxFQUFFLENBQUM7QUFFdkQsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLE1BQU0sSUFDVCxNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixRQUFRLFdBQVcsQ0FBQyxJQUFJLEVBQUU7UUFDdEIsS0FBSyxPQUFPO1lBQ1IsSUFBSSxDQUFDLElBQUksQ0FBQzs7OzthQUlULENBQUMsQ0FBQztZQUNILE1BQU07UUFDVixLQUFLLFNBQVM7WUFDVixJQUFJLENBQUMsSUFBSSxDQUFDOzs7O2FBSVQsQ0FBQyxDQUFDO1lBQ0gsTUFBTTtRQUNWLEtBQUssTUFBTTtZQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7YUFJVCxDQUFDLENBQUM7WUFDSCxNQUFNO1FBQ1YsS0FBSyxNQUFNLENBQUM7UUFDWjtZQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7YUFJVCxDQUFDLENBQUM7WUFDSCxNQUFNO0tBQ2I7SUFFRCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7O0tBVVQsQ0FBQyxDQUFDO0lBRUgsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

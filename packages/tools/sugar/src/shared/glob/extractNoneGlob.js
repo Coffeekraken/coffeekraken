@@ -1,33 +1,33 @@
-// @ts-nocheck
-import __globParent from 'glob-parent';
-/**
- * @name                extractNoneGlob
- * @namespace            js.glob
- * @type                Function
- * @platform          js
- * @platform          node
- * @status            beta
- *
- * This function simply return you the none glob part of a passed string
- *
- * @param       {String}            string          The string from which to extract the none glob part
- * @return      {String}                            The none glob part of the passed string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import extractNoneGlob from '@coffeekraken/sugar/js/glob/extractNoneGlob';
- * extractNoneGlob('/coco/hello/*.js'); // => '*.js'
- *
- * @see             https://www.npmjs.com/package/glob-parent
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var extractNoneGlob_exports = {};
+__export(extractNoneGlob_exports, {
+  default: () => extractNoneGlob_default
+});
+module.exports = __toCommonJS(extractNoneGlob_exports);
+var import_glob_parent = __toESM(require("glob-parent"), 1);
 function extractNoneGlob(string) {
-    const parent = __globParent(string);
-    return parent;
+  const parent = (0, import_glob_parent.default)(string);
+  return parent;
 }
-export default extractNoneGlob;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXh0cmFjdE5vbmVHbG9iLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZXh0cmFjdE5vbmVHbG9iLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxhQUFhLENBQUM7QUFFdkM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsZUFBZSxDQUFDLE1BQU07SUFDM0IsTUFBTSxNQUFNLEdBQUcsWUFBWSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQ3BDLE9BQU8sTUFBTSxDQUFDO0FBQ2xCLENBQUM7QUFDRCxlQUFlLGVBQWUsQ0FBQyJ9
+var extractNoneGlob_default = extractNoneGlob;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

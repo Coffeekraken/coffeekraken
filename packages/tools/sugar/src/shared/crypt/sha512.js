@@ -1,62 +1,49 @@
-// @ts-nocheck
-import sha512 from 'crypto-js/sha512';
-import toString from '../string/toString';
-import parse from '../string/parse';
-const __encryptedMessages = {};
-/**
- * @name            sha512
- * @namespace            js.crypt
- * @type            Object
- * @platform          js
- * @platform          node
- * @status              beta
- *
- * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha512 algorithm
- *
- * @todo        interface
- * @todo        doc
- *
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default {
-    /**
-     * @name        encrypt
-     * @type          Function
-     *
-     * Encrypt
-     *
-     * @param       {String}      message         The message to encrypt
-     * @return      {String}                      The encrypted string
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    encrypt: function (message) {
-        if (typeof message !== 'string')
-            message = toString(message);
-        const string = sha512(message).toString();
-        __encryptedMessages[string] = message;
-        return string;
-    },
-    /**
-     * @name        decrypt
-     * @type        Function
-     *
-     * Decrypt
-     *
-     * @param       {String}        message         The message to decrypt
-     * @return      {String}                        The decrypted message
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    decrypt: function (message) {
-        if (!__encryptedMessages[message]) {
-            console.warn(`The message "${message}" cannot be decrypted...`);
-            return;
-        }
-        const string = __encryptedMessages[message];
-        delete __encryptedMessages[message];
-        return parse(string);
-    },
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2hhNTEyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2hhNTEyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLE1BQU0sTUFBTSxrQkFBa0IsQ0FBQztBQUN0QyxPQUFPLFFBQVEsTUFBTSxvQkFBb0IsQ0FBQztBQUMxQyxPQUFPLEtBQUssTUFBTSxpQkFBaUIsQ0FBQztBQUVwQyxNQUFNLG1CQUFtQixHQUFHLEVBQUUsQ0FBQztBQUUvQjs7Ozs7Ozs7Ozs7Ozs7O0dBZUc7QUFDSCxlQUFlO0lBQ1g7Ozs7Ozs7Ozs7T0FVRztJQUNILE9BQU8sRUFBRSxVQUFVLE9BQU87UUFDdEIsSUFBSSxPQUFPLE9BQU8sS0FBSyxRQUFRO1lBQUUsT0FBTyxHQUFHLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUM3RCxNQUFNLE1BQU0sR0FBRyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7UUFDMUMsbUJBQW1CLENBQUMsTUFBTSxDQUFDLEdBQUcsT0FBTyxDQUFDO1FBQ3RDLE9BQU8sTUFBTSxDQUFDO0lBQ2xCLENBQUM7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0gsT0FBTyxFQUFFLFVBQVUsT0FBTztRQUN0QixJQUFJLENBQUMsbUJBQW1CLENBQUMsT0FBTyxDQUFDLEVBQUU7WUFDL0IsT0FBTyxDQUFDLElBQUksQ0FBQyxnQkFBZ0IsT0FBTywwQkFBMEIsQ0FBQyxDQUFDO1lBQ2hFLE9BQU87U0FDVjtRQUNELE1BQU0sTUFBTSxHQUFHLG1CQUFtQixDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQzVDLE9BQU8sbUJBQW1CLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDcEMsT0FBTyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDekIsQ0FBQztDQUNKLENBQUMifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var sha512_exports = {};
+__export(sha512_exports, {
+  default: () => sha512_default
+});
+module.exports = __toCommonJS(sha512_exports);
+var import_sha512 = __toESM(require("crypto-js/sha512"), 1);
+var import_toString = __toESM(require("../string/toString"), 1);
+var import_parse = __toESM(require("../string/parse"), 1);
+const __encryptedMessages = {};
+var sha512_default = {
+  encrypt: function(message) {
+    if (typeof message !== "string")
+      message = (0, import_toString.default)(message);
+    const string = (0, import_sha512.default)(message).toString();
+    __encryptedMessages[string] = message;
+    return string;
+  },
+  decrypt: function(message) {
+    if (!__encryptedMessages[message]) {
+      console.warn(`The message "${message}" cannot be decrypted...`);
+      return;
+    }
+    const string = __encryptedMessages[message];
+    delete __encryptedMessages[message];
+    return (0, import_parse.default)(string);
+  }
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

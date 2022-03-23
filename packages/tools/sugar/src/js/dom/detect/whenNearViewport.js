@@ -1,44 +1,71 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var whenNearViewport_exports = {};
+__export(whenNearViewport_exports, {
+  default: () => whenNearViewport_default
+});
+module.exports = __toCommonJS(whenNearViewport_exports);
 function whenNearViewport(elm, settings = {}) {
-    settings = Object.assign({ offset: `${window.innerHeight}px ${window.innerWidth}px` }, settings);
-    let observer, resizeTimeout;
-    return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-        const options = {
-            root: null,
-            rootMargin: settings.offset,
-            threshold: 1.0, // visible amount of item shown in relation to root
-        };
-        function onChange(changes, observer) {
-            changes.forEach((change) => {
-                var _a;
-                if (change.intersectionRatio > 0) {
-                    (_a = observer.disconnect) === null || _a === void 0 ? void 0 : _a.call(observer);
-                    resolve(elm);
-                }
-            });
+  settings = __spreadValues({
+    offset: `${window.innerHeight}px ${window.innerWidth}px`
+  }, settings);
+  let observer, resizeTimeout;
+  return new Promise(async (resolve) => {
+    const options = {
+      root: null,
+      rootMargin: settings.offset,
+      threshold: 1
+    };
+    function onChange(changes, observer2) {
+      changes.forEach((change) => {
+        var _a;
+        if (change.intersectionRatio > 0) {
+          (_a = observer2.disconnect) == null ? void 0 : _a.call(observer2);
+          resolve(elm);
         }
+      });
+    }
+    observer = new IntersectionObserver(onChange, options);
+    observer.observe(elm);
+    window.addEventListener("resize", (e) => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        var _a;
+        (_a = observer.disconnect) == null ? void 0 : _a.call(observer);
+        options.rootMargin = `${window.innerHeight}px ${window.innerWidth}px`;
         observer = new IntersectionObserver(onChange, options);
         observer.observe(elm);
-        window.addEventListener('resize', (e) => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                var _a;
-                (_a = observer.disconnect) === null || _a === void 0 ? void 0 : _a.call(observer);
-                options.rootMargin = `${window.innerHeight}px ${window.innerWidth}px`;
-                observer = new IntersectionObserver(onChange, options);
-                observer.observe(elm);
-            }, 500);
-        });
-    }));
+      }, 500);
+    });
+  });
 }
-export default whenNearViewport;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2hlbk5lYXJWaWV3cG9ydC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIndoZW5OZWFyVmlld3BvcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7OztBQXVDZCxTQUFTLGdCQUFnQixDQUNyQixHQUFnQixFQUNoQixXQUFnRCxFQUFFO0lBRWxELFFBQVEsbUJBQ0osTUFBTSxFQUFFLEdBQUcsTUFBTSxDQUFDLFdBQVcsTUFBTSxNQUFNLENBQUMsVUFBVSxJQUFJLElBQ3JELFFBQVEsQ0FDZCxDQUFDO0lBRUYsSUFBSSxRQUE4QixFQUFFLGFBQXFCLENBQUM7SUFFMUQsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFPLE9BQU8sRUFBRSxFQUFFO1FBQ2pDLE1BQU0sT0FBTyxHQUFHO1lBQ1osSUFBSSxFQUFFLElBQUk7WUFDVixVQUFVLEVBQUUsUUFBUSxDQUFDLE1BQU07WUFDM0IsU0FBUyxFQUFFLEdBQUcsRUFBRSxtREFBbUQ7U0FDdEUsQ0FBQztRQUVGLFNBQVMsUUFBUSxDQUFDLE9BQU8sRUFBRSxRQUFRO1lBQy9CLE9BQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQyxNQUFNLEVBQUUsRUFBRTs7Z0JBQ3ZCLElBQUksTUFBTSxDQUFDLGlCQUFpQixHQUFHLENBQUMsRUFBRTtvQkFDOUIsTUFBQSxRQUFRLENBQUMsVUFBVSwrQ0FBbkIsUUFBUSxDQUFlLENBQUM7b0JBQ3hCLE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQztpQkFDaEI7WUFDTCxDQUFDLENBQUMsQ0FBQztRQUNQLENBQUM7UUFFRCxRQUFRLEdBQUcsSUFBSSxvQkFBb0IsQ0FBQyxRQUFRLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDdkQsUUFBUSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUV0QixNQUFNLENBQUMsZ0JBQWdCLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDcEMsWUFBWSxDQUFDLGFBQWEsQ0FBQyxDQUFDO1lBQzVCLGFBQWEsR0FBRyxVQUFVLENBQUMsR0FBRyxFQUFFOztnQkFDNUIsTUFBQSxRQUFRLENBQUMsVUFBVSwrQ0FBbkIsUUFBUSxDQUFlLENBQUM7Z0JBQ3hCLE9BQU8sQ0FBQyxVQUFVLEdBQUcsR0FBRyxNQUFNLENBQUMsV0FBVyxNQUFNLE1BQU0sQ0FBQyxVQUFVLElBQUksQ0FBQztnQkFDdEUsUUFBUSxHQUFHLElBQUksb0JBQW9CLENBQUMsUUFBUSxFQUFFLE9BQU8sQ0FBQyxDQUFDO2dCQUN2RCxRQUFRLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQzFCLENBQUMsRUFBRSxHQUFHLENBQUMsQ0FBQztRQUNaLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUM7QUFDRCxlQUFlLGdCQUFnQixDQUFDIn0=
+var whenNearViewport_default = whenNearViewport;

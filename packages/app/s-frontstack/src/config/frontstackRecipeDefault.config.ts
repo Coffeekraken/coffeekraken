@@ -55,7 +55,7 @@ export default function (env, config) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         requirements: {
-            commands: ['[config.package.manager]','composer']
+            commands: ['[config.package.manager]', 'composer'],
         },
         /**
          * @name            defaultStack
@@ -99,10 +99,13 @@ export default function (env, config) {
                         title: 'Copy default template',
                         description: 'Copy the default template files',
                         params: {
-                            'src': __path.resolve(__dirname(), `../templates/default/.`),
-                            'dest': `${process.cwd()}/default`,
-                            'chdir': true
-                        }
+                            src: __path.resolve(
+                                __dirname(),
+                                `../templates/default/.`,
+                            ),
+                            dest: `${process.cwd()}/default`,
+                            chdir: true,
+                        },
                     },
                     /**
                      * @name            rename
@@ -117,9 +120,9 @@ export default function (env, config) {
                     rename: {
                         extends: 'rename',
                         title: 'Rename default template package',
-                        description: 'Renamt the default template package with the user input',
-                        params: {
-                        }
+                        description:
+                            'Renamt the default template package with the user input',
+                        params: {},
                     },
                     /**
                      * @name            addSugarJson
@@ -136,8 +139,8 @@ export default function (env, config) {
                         title: 'Add the sugar.json file',
                         description: 'Add the sugar.json file',
                         params: {
-                            recipe: 'default'
-                        }
+                            recipe: 'default',
+                        },
                     },
                     /**
                      * @name            addManifestJson
@@ -153,7 +156,7 @@ export default function (env, config) {
                         extends: 'addManifestJson',
                         title: 'Add manifest.json file',
                         description: 'Add the manifest.json file',
-                        params: {}
+                        params: {},
                     },
                     /**
                      * @name            installDependencies
@@ -168,9 +171,10 @@ export default function (env, config) {
                     installDependencies: {
                         extends: 'installDependencies',
                         title: 'Install the dependencies',
-                        description: 'Install the package dependencies (npm,composer)',
-                        params: {}
-                    }
+                        description:
+                            'Install the package dependencies (npm,composer)',
+                        params: {},
+                    },
                 },
             },
             dev: {
@@ -345,7 +349,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    docmapBuild: '[config.frontstack.actions.docmapBuild]'
+                    docmapBuild: '[config.frontstack.actions.docmapBuild]',
                     /**
                      * @name            sitemapBuild
                      * @namespace       config.frontstackRecipeDefault.stacks.build.actions
@@ -357,7 +361,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    sitemapBuild: '[config.frontstack.actions.sitemapBuild]'
+                    sitemapBuild: '[config.frontstack.actions.sitemapBuild]',
                 },
             },
         },

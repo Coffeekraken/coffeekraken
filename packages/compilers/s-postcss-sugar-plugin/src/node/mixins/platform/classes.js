@@ -1,45 +1,71 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __fs from 'fs';
-/**
- * @name           classes
- * @namespace      node.mixins.platform
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the "platforms" css classes like s-platform:css, etc...
- * "Platforms" are some kind of "icons" of platforms like "css", "node", "js", "php", etc...
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.platform.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginPlatformClassesMixinInterface extends __SInterface {
-    static get _definition() {
-        return {
-            platforms: {
-                type: 'Array<String>',
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginPlatformClassesMixinInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
+var import_fs = __toESM(require("fs"));
+class postcssSugarPluginPlatformClassesMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      platforms: {
+        type: "Array<String>"
+      }
+    };
+  }
 }
-export { postcssSugarPluginPlatformClassesMixinInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ platforms: [] }, params);
-    // list all the available platforms in the folder
-    const files = __fs.readdirSync(`${__dirname()}/platforms`);
-    const vars = new CssVars();
-    files.forEach((filename) => {
-        const name = filename.split('.')[0];
-        if (finalParams.platforms.length &&
-            finalParams.platforms.indexOf(name) === -1)
-            return;
-        vars.comment(() => `
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    platforms: []
+  }, params);
+  const files = import_fs.default.readdirSync(`${(0, import_dirname.default)()}/platforms`);
+  const vars = new CssVars();
+  files.forEach((filename) => {
+    const name = filename.split(".")[0];
+    if (finalParams.platforms.length && finalParams.platforms.indexOf(name) === -1)
+      return;
+    vars.comment(() => `
         
         /**
          * @name            s-platform:${name}
@@ -51,7 +77,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * This class allows you to display a plarform "icon" like "js", "node, "php", etc...
          * 
          * @example     html
-         * <i class="s-platform\:${name} s-font:50"></i>
+         * <i class="s-platform:${name} s-font:50"></i>
          * 
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -62,7 +88,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         }
 
   `);
-    });
-    return vars;
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxTQUFTLE1BQU0scUNBQXFDLENBQUM7QUFDNUQsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBRXRCOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQU0sK0NBQWdELFNBQVEsWUFBWTtJQUN0RSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsU0FBUyxFQUFFO2dCQUNQLElBQUksRUFBRSxlQUFlO2FBQ3hCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU1ELE9BQU8sRUFBRSwrQ0FBK0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUV4RSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sT0FBTyxFQUNQLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixTQUFTLEVBQUUsRUFBRSxJQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsaURBQWlEO0lBQ2pELE1BQU0sS0FBSyxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxTQUFTLEVBQUUsWUFBWSxDQUFDLENBQUM7SUFFM0QsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixLQUFLLENBQUMsT0FBTyxDQUFDLENBQUMsUUFBUSxFQUFFLEVBQUU7UUFDdkIsTUFBTSxJQUFJLEdBQUcsUUFBUSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUVwQyxJQUNJLFdBQVcsQ0FBQyxTQUFTLENBQUMsTUFBTTtZQUM1QixXQUFXLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7WUFFMUMsT0FBTztRQUVYLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozt5Q0FHdUIsSUFBSTs7Ozs7Ozs7O21DQVNWLElBQUk7Ozs7O1NBSzlCLENBQ0EsQ0FBQyxJQUFJLENBQUM7dUJBQ1EsSUFBSTs0QkFDQyxJQUFJOzs7R0FHN0IsQ0FBQyxDQUFDO0lBQ0QsQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

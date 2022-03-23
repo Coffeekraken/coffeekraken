@@ -1,39 +1,44 @@
-// @ts-nocheck
-import __tagsMap from './html/tagsMap';
-import __replaceTags from '../html/replaceTags';
-/**
- * @name                                parseHtml
- * @namespace            js.console
- * @type                                Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * Parse the simple html tags to format the console message
- *
- * @param           {String|Array}                  message                 The message to format of an array of messages to format
- * @return          {String}                                          The formated message
- *
- * @todo        interface
- * @todo        doc
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var parseHtml_exports = {};
+__export(parseHtml_exports, {
+  default: () => parseHtml_default
+});
+module.exports = __toCommonJS(parseHtml_exports);
+var import_tagsMap = __toESM(require("./html/tagsMap"), 1);
+var import_replaceTags = __toESM(require("../html/replaceTags"), 1);
 function parseHtml(message) {
-    let isArray = false;
-    if (Array.isArray(message)) {
-        isArray = true;
-    }
-    else {
-        message = [message];
-    }
-    message = message.map((m) => {
-        return __replaceTags(m, __tagsMap);
-    });
-    if (isArray)
-        return message;
-    return message[0];
+  let isArray = false;
+  if (Array.isArray(message)) {
+    isArray = true;
+  } else {
+    message = [message];
+  }
+  message = message.map((m) => {
+    return (0, import_replaceTags.default)(m, import_tagsMap.default);
+  });
+  if (isArray)
+    return message;
+  return message[0];
 }
-export default parseHtml;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VIdG1sLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFyc2VIdG1sLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFNBQVMsTUFBTSxnQkFBZ0IsQ0FBQztBQUV2QyxPQUFPLGFBQWEsTUFBTSxxQkFBcUIsQ0FBQztBQUVoRDs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsU0FBUyxTQUFTLENBQUMsT0FBTztJQUN0QixJQUFJLE9BQU8sR0FBRyxLQUFLLENBQUM7SUFDcEIsSUFBSSxLQUFLLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ3hCLE9BQU8sR0FBRyxJQUFJLENBQUM7S0FDbEI7U0FBTTtRQUNILE9BQU8sR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0tBQ3ZCO0lBRUQsT0FBTyxHQUFHLE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtRQUN4QixPQUFPLGFBQWEsQ0FBQyxDQUFDLEVBQUUsU0FBUyxDQUFDLENBQUM7SUFDdkMsQ0FBQyxDQUFDLENBQUM7SUFFSCxJQUFJLE9BQU87UUFBRSxPQUFPLE9BQU8sQ0FBQztJQUM1QixPQUFPLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQztBQUN0QixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var parseHtml_default = parseHtml;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

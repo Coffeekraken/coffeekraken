@@ -1,98 +1,130 @@
-import __typeOf from '../value/typeof';
-const fn = function (stack, callback, settings = {}) {
-    settings = Object.assign({ newStack: false }, settings);
-    const stackType = __typeOf(stack).toLowerCase();
-    let loopOnKeys;
-    if (stackType === 'object')
-        loopOnKeys = Object.keys(stack);
-    // @ts-ignore
-    else if (stackType === 'array')
-        // @ts-ignore
-        loopOnKeys = Array.from(Array(stack.length).keys());
-    else if (stackType === 'number' || stackType === 'integer')
-        // @ts-ignore
-        loopOnKeys = Array.from(Array(Math.round(stack)).keys());
-    else if (stackType === 'string')
-        loopOnKeys = Array.from(stack);
-    else if (stackType === 'set')
-        loopOnKeys = Array.from(stack);
-    // @ts-ignore
-    else
-        loopOnKeys = Array.from(stack.keys());
-    // handle the forcing of "newStack" setting
-    if (stackType === 'string' ||
-        stackType === 'number' ||
-        stackType === 'integer' ||
-        stackType === 'set')
-        settings.newStack = true;
-    // create a newStack by stack types
-    let newStack = [];
-    if (stackType === 'object')
-        newStack = {};
-    else if (stackType === 'map')
-        newStack = new Map();
-    else if (stackType === 'set')
-        newStack = new Set();
-    let value;
-    let newValue;
-    const _get = (s, k) => {
-        switch (__typeOf(s).toLowerCase()) {
-            case 'array':
-            case 'object':
-                return s[k];
-                break;
-            case 'string':
-                return k;
-                break;
-            case 'number':
-            case 'integer':
-                return k;
-                break;
-            case 'map':
-                return s.get(k);
-                break;
-            case 'set':
-                return k;
-                break;
-        }
-    };
-    const _set = (s, k, v) => {
-        switch (__typeOf(s).toLowerCase()) {
-            case 'array':
-                if (settings.newStack === true)
-                    s.push(v);
-                else
-                    s[k] = v;
-                break;
-            case 'object':
-                s[k] = v;
-                break;
-            case 'number':
-            case 'integer':
-            case 'string':
-                s.push(v);
-                break;
-            case 'map':
-                s.set(k, v);
-                break;
-            case 'set':
-                s.add(v);
-                break;
-        }
-    };
-    for (let i = 0; i < loopOnKeys.length; i++) {
-        const key = loopOnKeys[i];
-        value = _get(stack, key);
-        newValue = callback({ key, prop: key, value, i, idx: i });
-        if (newValue === -1)
-            break;
-        // @ts-ignore
-        _set(settings.newStack ? newStack : stack, key, newValue);
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    if (stackType === 'string') {
-        return newStack.join('');
-    }
-    return settings.newStack ? newStack : stack;
+  return a;
 };
-export default fn;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLGlCQUFpQixDQUFDO0FBcUR2QyxNQUFNLEVBQUUsR0FBVyxVQUFVLEtBQUssRUFBRSxRQUFRLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDdkQsUUFBUSxtQkFDSixRQUFRLEVBQUUsS0FBSyxJQUNaLFFBQVEsQ0FDZCxDQUFDO0lBRUYsTUFBTSxTQUFTLEdBQUcsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDLFdBQVcsRUFBRSxDQUFDO0lBQ2hELElBQUksVUFBK0IsQ0FBQztJQUNwQyxJQUFJLFNBQVMsS0FBSyxRQUFRO1FBQUUsVUFBVSxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDNUQsYUFBYTtTQUNSLElBQUksU0FBUyxLQUFLLE9BQU87UUFDMUIsYUFBYTtRQUNiLFVBQVUsR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQztTQUNuRCxJQUFJLFNBQVMsS0FBSyxRQUFRLElBQUksU0FBUyxLQUFLLFNBQVM7UUFDdEQsYUFBYTtRQUNiLFVBQVUsR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQztTQUN4RCxJQUFJLFNBQVMsS0FBSyxRQUFRO1FBQUUsVUFBVSxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDM0QsSUFBSSxTQUFTLEtBQUssS0FBSztRQUFFLFVBQVUsR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQzdELGFBQWE7O1FBQ1IsVUFBVSxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFD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
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var map_exports = {};
+__export(map_exports, {
+  default: () => map_default
+});
+module.exports = __toCommonJS(map_exports);
+var import_typeof = __toESM(require("../value/typeof"), 1);
+const fn = function(stack, callback, settings = {}) {
+  settings = __spreadValues({
+    newStack: false
+  }, settings);
+  const stackType = (0, import_typeof.default)(stack).toLowerCase();
+  let loopOnKeys;
+  if (stackType === "object")
+    loopOnKeys = Object.keys(stack);
+  else if (stackType === "array")
+    loopOnKeys = Array.from(Array(stack.length).keys());
+  else if (stackType === "number" || stackType === "integer")
+    loopOnKeys = Array.from(Array(Math.round(stack)).keys());
+  else if (stackType === "string")
+    loopOnKeys = Array.from(stack);
+  else if (stackType === "set")
+    loopOnKeys = Array.from(stack);
+  else
+    loopOnKeys = Array.from(stack.keys());
+  if (stackType === "string" || stackType === "number" || stackType === "integer" || stackType === "set")
+    settings.newStack = true;
+  let newStack = [];
+  if (stackType === "object")
+    newStack = {};
+  else if (stackType === "map")
+    newStack = /* @__PURE__ */ new Map();
+  else if (stackType === "set")
+    newStack = /* @__PURE__ */ new Set();
+  let value;
+  let newValue;
+  const _get = (s, k) => {
+    switch ((0, import_typeof.default)(s).toLowerCase()) {
+      case "array":
+      case "object":
+        return s[k];
+        break;
+      case "string":
+        return k;
+        break;
+      case "number":
+      case "integer":
+        return k;
+        break;
+      case "map":
+        return s.get(k);
+        break;
+      case "set":
+        return k;
+        break;
+    }
+  };
+  const _set = (s, k, v) => {
+    switch ((0, import_typeof.default)(s).toLowerCase()) {
+      case "array":
+        if (settings.newStack === true)
+          s.push(v);
+        else
+          s[k] = v;
+        break;
+      case "object":
+        s[k] = v;
+        break;
+      case "number":
+      case "integer":
+      case "string":
+        s.push(v);
+        break;
+      case "map":
+        s.set(k, v);
+        break;
+      case "set":
+        s.add(v);
+        break;
+    }
+  };
+  for (let i = 0; i < loopOnKeys.length; i++) {
+    const key = loopOnKeys[i];
+    value = _get(stack, key);
+    newValue = callback({ key, prop: key, value, i, idx: i });
+    if (newValue === -1)
+      break;
+    _set(settings.newStack ? newStack : stack, key, newValue);
+  }
+  if (stackType === "string") {
+    return newStack.join("");
+  }
+  return settings.newStack ? newStack : stack;
+};
+var map_default = fn;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

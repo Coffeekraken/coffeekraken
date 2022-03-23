@@ -1,48 +1,33 @@
-// @ts-nocheck
-/**
- * @name      wrapInner
- * @namespace            js.dom.manipulate
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Wrap the content of the passed `$parent` inside a the passed HTMLElement `$wrapper`
- *
- * @param    {HTMLElement}    $parent    The parent to wrap inner
- * @param    {HTMLElement}    $wrapper    The wrapper element
- * @return    {HTMLElement}             Return the parent element
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import wrapInner from '@coffeekraken/sugar/js/dom/wrapInner'
- * const $myWrapper = document.createElement('div')
- * // assuming
- * // <div class="container">
- * //   <span>Hello World</span>
- * // </div>
- * wrapInner(document.querySelector('.container'), $myWrapper)
- * // return
- * // <div class="container">
- * //   <div>
- * //     <span>Hello World</span>
- * //   </div>
- * // </div>
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel@gmail.com)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var wrapInner_exports = {};
+__export(wrapInner_exports, {
+  default: () => wrapInner_default
+});
+module.exports = __toCommonJS(wrapInner_exports);
 function wrapInner($parent, $wrapper) {
-    if (typeof $wrapper === 'string') {
-        $wrapper = document.createElement($wrapper);
-    }
-    $parent.appendChild($wrapper);
-    while ($parent.firstChild !== $wrapper) {
-        $wrapper.appendChild($parent.firstChild);
-    }
-    return $parent;
+  if (typeof $wrapper === "string") {
+    $wrapper = document.createElement($wrapper);
+  }
+  $parent.appendChild($wrapper);
+  while ($parent.firstChild !== $wrapper) {
+    $wrapper.appendChild($parent.firstChild);
+  }
+  return $parent;
 }
-export default wrapInner;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid3JhcElubmVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsid3JhcElubmVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtDRztBQUNILFNBQVMsU0FBUyxDQUFDLE9BQW9CLEVBQUUsUUFBcUI7SUFDMUQsSUFBSSxPQUFPLFFBQVEsS0FBSyxRQUFRLEVBQUU7UUFDOUIsUUFBUSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLENBQUM7S0FDL0M7SUFDRCxPQUFPLENBQUMsV0FBVyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzlCLE9BQU8sT0FBTyxDQUFDLFVBQVUsS0FBSyxRQUFRLEVBQUU7UUFDcEMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUMsVUFBVSxDQUFDLENBQUM7S0FDNUM7SUFDRCxPQUFPLE9BQU8sQ0FBQztBQUNuQixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var wrapInner_default = wrapInner;

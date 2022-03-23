@@ -1,27 +1,65 @@
-import __fs from 'fs';
-import __unzipper from 'unzipper';
-import __folderPath from '../fs/folderPath';
-import __fileName from '../fs/filename';
-import __SDuration from '@coffeekraken/s-duration';
-export default function unzip(zipFilePath, settings) {
-    return new Promise((resolve, reject) => {
-        settings = Object.assign({}, (settings !== null && settings !== void 0 ? settings : {}));
-        if (!__fs.existsSync(zipFilePath)) {
-            throw new Error(`The passed file "${zipFilePath}" does not exists...`);
-        }
-        const duration = new __SDuration();
-        const folderName = __fileName(zipFilePath).replace(/\.g?zip$/, '');
-        let dest = settings.dest
-            ? `${settings.dest}/${folderName}`
-            : `${__folderPath(zipFilePath)}/${folderName}`;
-        __fs.createReadStream(zipFilePath)
-            .pipe(__unzipper.Extract({ path: dest }))
-            .on('close', () => {
-            if (!__fs.existsSync(dest)) {
-                throw new Error(`Something went wrong during the unzip process of the file "${zipFilePath}"...`);
-            }
-            resolve(Object.assign({ dest }, duration.end()));
-        });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var unzip_exports = {};
+__export(unzip_exports, {
+  default: () => unzip
+});
+module.exports = __toCommonJS(unzip_exports);
+var import_fs = __toESM(require("fs"), 1);
+var import_unzipper = __toESM(require("unzipper"), 1);
+var import_folderPath = __toESM(require("../fs/folderPath"), 1);
+var import_filename = __toESM(require("../fs/filename"), 1);
+var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
+function unzip(zipFilePath, settings) {
+  return new Promise((resolve, reject) => {
+    settings = __spreadValues({}, settings != null ? settings : {});
+    if (!import_fs.default.existsSync(zipFilePath)) {
+      throw new Error(`The passed file "${zipFilePath}" does not exists...`);
+    }
+    const duration = new import_s_duration.default();
+    const folderName = (0, import_filename.default)(zipFilePath).replace(/\.g?zip$/, "");
+    let dest = settings.dest ? `${settings.dest}/${folderName}` : `${(0, import_folderPath.default)(zipFilePath)}/${folderName}`;
+    import_fs.default.createReadStream(zipFilePath).pipe(import_unzipper.default.Extract({ path: dest })).on("close", () => {
+      if (!import_fs.default.existsSync(dest)) {
+        throw new Error(`Something went wrong during the unzip process of the file "${zipFilePath}"...`);
+      }
+      resolve(__spreadValues({
+        dest
+      }, duration.end()));
     });
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW56aXAuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ1bnppcC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxVQUFVLE1BQU0sVUFBVSxDQUFDO0FBQ2xDLE9BQU8sWUFBWSxNQUFNLGtCQUFrQixDQUFDO0FBQzVDLE9BQU8sVUFBVSxNQUFNLGdCQUFnQixDQUFDO0FBQ3hDLE9BQU8sV0FBaUMsTUFBTSwwQkFBMEIsQ0FBQztBQW1DekUsTUFBTSxDQUFDLE9BQU8sVUFBVSxLQUFLLENBQ3pCLFdBQW1CLEVBQ25CLFFBQWtDO0lBRWxDLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUU7UUFDbkMsUUFBUSxxQkFDRCxDQUFDLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FBQyxDQUN0QixDQUFDO1FBRUYsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLEVBQUU7WUFDL0IsTUFBTSxJQUFJLEtBQUssQ0FDWCxvQkFBb0IsV0FBVyxzQkFBc0IsQ0FDeEQsQ0FBQztTQUNMO1FBRUQsTUFBTSxRQUFRLEdBQUcsSUFBSSxXQUFXLEVBQUUsQ0FBQztRQUVuQyxNQUFNLFVBQVUsR0FBRyxVQUFVLENBQUMsV0FBVyxDQUFDLENBQUMsT0FBTyxDQUFDLFVBQVUsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUNuRSxJQUFJLElBQUksR0FBRyxRQUFRLENBQUMsSUFBSTtZQUNwQixDQUFDLENBQUMsR0FBRyxRQUFRLENBQUMsSUFBSSxJQUFJLFVBQVUsRUFBRTtZQUNsQyxDQUFDLENBQUMsR0FBRyxZQUFZLENBQUMsV0FBVyxDQUFDLElBQUksVUFBVSxFQUFFLENBQUM7UUFFbkQsSUFBSSxDQUFDLGdCQUFnQixDQUFDLFdBQVcsQ0FBQzthQUM3QixJQUFJLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFDO2FBQ3hDLEVBQUUsQ0FBQyxPQUFPLEVBQUUsR0FBRyxFQUFFO1lBQ2QsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLEVBQUU7Z0JBQ3hCLE1BQU0sSUFBSSxLQUFLLENBQ1gsOERBQThELFdBQVcsTUFBTSxDQUNsRixDQUFDO2FBQ0w7WUFDRCxPQUFPLGlCQUNILElBQUksSUFDRCxRQUFRLENBQUMsR0FBRyxFQUFFLEVBQ25CLENBQUM7UUFDUCxDQUFDLENBQUMsQ0FBQztJQUNYLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

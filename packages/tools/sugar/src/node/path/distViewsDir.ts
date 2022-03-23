@@ -38,7 +38,7 @@ export default function (settings: IDistViewsDirSettings = {}) {
     };
     const distViewsDir = __SSugarConfig.get('storage.dist.viewsDir');
     if (distViewsDir !== undefined) {
-        __fs.ensureDirSync(distViewsDir);
+        // __fs.ensureDirSync(distViewsDir);
         return distViewsDir;
     }
     return undefined;

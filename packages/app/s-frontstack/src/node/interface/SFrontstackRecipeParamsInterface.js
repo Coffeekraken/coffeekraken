@@ -1,46 +1,54 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SFrontstackRecipeParamsInterface
- * @namespace           node.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This class represent the interface that describe parameters of the SFrontstack.action method
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SFrontstackRecipeParamsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            stack: {
-                description: 'Specify the stack you want to execute like "dev", "build", etc...',
-                type: 'String',
-                alias: 's',
-            },
-            recipe: {
-                description: 'Specify the recipe you want to execute the stack from',
-                type: 'String',
-                alias: 'r',
-            },
-            runInParallel: {
-                description: 'Specify if you want the recipe actions to run in parallel of not',
-                type: 'Boolean',
-                alias: 'p'
-            },
-            env: {
-                description: 'Specify the environment in which to execute your recipe',
-                type: 'String',
-            },
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SFrontstackRecipeParamsInterface_exports = {};
+__export(SFrontstackRecipeParamsInterface_exports, {
+  default: () => SFrontstackRecipeParamsInterface_default
+});
+module.exports = __toCommonJS(SFrontstackRecipeParamsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SFrontstackRecipeParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      stack: {
+        description: 'Specify the stack you want to execute like "dev", "build", etc...',
+        type: "String",
+        alias: "s"
+      },
+      recipe: {
+        description: "Specify the recipe you want to execute the stack from",
+        type: "String",
+        alias: "r"
+      },
+      runInParallel: {
+        description: "Specify if you want the recipe actions to run in parallel of not",
+        type: "Boolean",
+        alias: "p"
+      },
+      env: {
+        description: "Specify the environment in which to execute your recipe",
+        type: "String"
+      }
+    };
+  }
 }
-export default SFrontstackRecipeParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2tSZWNpcGVQYXJhbXNJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRnJvbnRzdGFja1JlY2lwZVBhcmFtc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxNQUFNLGdDQUFpQyxTQUFRLFlBQVk7SUFDdkQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxXQUFXLEVBQ1AsbUVBQW1FO2dCQUN2RSxJQUFJLEVBQUUsUUFBUTtnQkFDZCxLQUFLLEVBQUUsR0FBRzthQUNiO1lBQ0QsTUFBTSxFQUFFO2dCQUNKLFdBQVcsRUFDUCx1REFBdUQ7Z0JBQzNELElBQUksRUFBRSxRQUFRO2dCQUNkLEtBQUssRUFBRSxHQUFHO2FBQ2I7WUFDRCxhQUFhLEVBQUU7Z0JBQ1gsV0FBVyxFQUFFLGtFQUFrRTtnQkFDL0UsSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsS0FBSyxFQUFFLEdBQUc7YUFDYjtZQUNELEdBQUcsRUFBRTtnQkFDRCxXQUFXLEVBQ1AseURBQXlEO2dCQUM3RCxJQUFJLEVBQUUsUUFBUTthQUNqQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFFRCxlQUFlLGdDQUFnQyxDQUFDIn0=
+var SFrontstackRecipeParamsInterface_default = SFrontstackRecipeParamsInterface;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,33 +1,27 @@
-/**
- * @name          clamp
- * @namespace            js.math
- * @type          Function
- * @platform          js
- * @platform          node
- * @status        stable
- *
- * Clamp a number between two values
- *
- * @param       {Number}       num             The number to clamp
- * @param       {Number}       min             The minimum value
- * @param       {Number}       max             The maximum value
- * @return      {Number}                The clamped number
- *
- * @example       js
- * import clamp from '@coffeekraken/sugar/js/math/clamp';
- * clamp(10, 0, 100); // => 10
- * clamp(0, 0, 100); // => 0
- * clamp(100, 0, 100); // => 100
- * clamp(101, 0, 100); // => 100
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function clamp(num, min, max) {
-    // console.log('NUM', num, 'MIN', min, 'MAX', max);
-    // if (num < min) num = min;
-    // else if (num > max) num = max;
-    // return num;
-    return Math.min(Math.max(num, min), max);
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var clamp_exports = {};
+__export(clamp_exports, {
+  default: () => clamp
+});
+module.exports = __toCommonJS(clamp_exports);
+function clamp(num, min, max) {
+  return Math.min(Math.max(num, min), max);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhbXAuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjbGFtcC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxLQUFLLENBQUMsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHO0lBRXZDLG1EQUFtRDtJQUVuRCw0QkFBNEI7SUFDNUIsaUNBQWlDO0lBQ2pDLGNBQWM7SUFFZCxPQUFRLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDLEVBQUUsR0FBRyxDQUFDLENBQUM7QUFDOUMsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,44 +1,88 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-class postcssSugarPluginUiBaseInterface extends __SInterface {
-    static get _definition() {
-        return {
-            name: {
-                type: 'String',
-                required: true,
-            },
-            scope: {
-                type: 'String',
-                default: ['bare', 'lnf'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var base_exports = {};
+__export(base_exports, {
+  default: () => base_default,
+  interface: () => postcssSugarPluginUiBaseInterface
+});
+module.exports = __toCommonJS(base_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginUiBaseInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      name: {
+        type: "String",
+        required: true
+      },
+      scope: {
+        type: "String",
+        default: ["bare", "lnf"]
+      }
+    };
+  }
 }
-export { postcssSugarPluginUiBaseInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ name: '', scope: ['bare', 'lnf'] }, params);
-    if (!finalParams.name)
-        return;
-    const vars = [];
-    // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+function base_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    name: "",
+    scope: ["bare", "lnf"]
+  }, params);
+  if (!finalParams.name)
+    return;
+  const vars = [];
+  if (finalParams.scope.indexOf("bare") !== -1) {
+    vars.push(`
             font-size: sugar.scalable(1rem);
             display: inline-block;
             padding-inline: sugar.theme(ui.${finalParams.name}.paddingInline);
             padding-block: sugar.theme(ui.${finalParams.name}.paddingBlock);
         `);
-    }
-    // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+  }
+  if (finalParams.scope.indexOf("lnf") !== -1) {
+    vars.push(`
             color: sugar.color(main, uiForeground);
             background-color: sugar.color(main, ui);
             font-size: sugar.scalable(1rem);
             border: sugar.color(current, --alpha 0.5) solid sugar.theme(ui.${finalParams.name}.borderWidth);
             border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
             transition: sugar.theme(ui.${finalParams.name}.transition);
-            @sugar.depth(${__STheme.config(`ui.${finalParams.name}.depth`)});
+            @sugar.depth(${import_s_theme.default.config(`ui.${finalParams.name}.depth`)});
             cursor: auto !important;
 
             &::placeholder {
@@ -60,7 +104,10 @@ export default function ({ params, atRule, replaceWith, }) {
                 border: sugar.color(current) solid 1px;
             }
     `);
-    }
-    return vars;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJhc2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0MsTUFBTSxpQ0FBa0MsU0FBUSxZQUFZO0lBQ3hELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7YUFDakI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQzthQUMzQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFPRCxPQUFPLEVBQUUsaUNBQWlDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFMUQsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixJQUFJLEVBQUUsRUFBRSxFQUNSLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUk7UUFBRSxPQUFPO0lBRTlCLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixPQUFPO0lBQ1AsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7NkNBRzJCLFdBQVcsQ0FBQyxJQUFJOzRDQUNqQixXQUFXLENBQUMsSUFBSTtTQUNuRCxDQUFDLENBQUM7S0FDTjtJQUVELE1BQU07SUFDTixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7NkVBS0YsV0FBVyxDQUFDLElBQ2hCOzRDQUNnQyxXQUFXLENBQUMsSUFBSTt5Q0FDbkIsV0FBVyxDQUFDLElBQUk7MkJBQzlCLFFBQVEsQ0FBQyxNQUFNLENBQUMsTUFBTSxXQUFXLENBQUMsSUFBSSxRQUFRLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQXFCckUsQ0FBQyxDQUFDO0tBQ0Y7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

@@ -1,46 +1,75 @@
-// @ts-nocheck
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name           classes
- * @namespace      node.mixins.gradient
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the gradient helper classes like s-gradient:accent, etc...
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.gradient.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginGradientClassesInterface extends __SInterface {
-    static get _definition() {
-        return {
-            types: {
-                type: 'String[]',
-                values: ['linear', 'radial'],
-                default: ['linear', 'radial'],
-                alias: 't',
-            },
-            angles: {
-                type: 'Number[]',
-                default: [0, 45, 90, 135, 180, 225, 270],
-                alias: 'a',
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginGradientClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginGradientClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      types: {
+        type: "String[]",
+        values: ["linear", "radial"],
+        default: ["linear", "radial"],
+        alias: "t"
+      },
+      angles: {
+        type: "Number[]",
+        default: [0, 45, 90, 135, 180, 225, 270],
+        alias: "a"
+      }
+    };
+  }
 }
-export { postcssSugarPluginGradientClassesInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ types: ['linear', 'radial'], angles: [0, 45, 90, 135, 180, 225, 270] }, params);
-    const vars = new CssVars();
-    if (finalParams.types.indexOf('linear') !== -1) {
-        vars.comment(`/**
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    types: ["linear", "radial"],
+    angles: [0, 45, 90, 135, 180, 225, 270]
+  }, params);
+  const vars = new CssVars();
+  if (finalParams.types.indexOf("linear") !== -1) {
+    vars.comment(`/**
         * @name             s-gradient:linear
         * @namespace          sugar.css.gradient
         * @type                 CssClass
@@ -51,7 +80,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * apply something different, make use of the "<cyan>s-gradient-start-{colorName}</cyan>" and "<cyan>s-gradient-end-{colorName}</cyan>" classes...
         *
         * @example        html
-        * <div class="s-gradient\:linear\:accent">
+        * <div class="s-gradient:linear:accent">
         *   Hello gradient
         * </div>
         * 
@@ -62,9 +91,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     .s-gradient--linear {
         --s-gradient-type-inline: linear;
     }`);
-    }
-    if (finalParams.types.indexOf('radial') !== -1) {
-        vars.comment(`/**
+  }
+  if (finalParams.types.indexOf("radial") !== -1) {
+    vars.comment(`/**
         * @name             s-gradient:radial
         * @namespace          sugar.css.gradient
         * @type                 CssClass
@@ -75,7 +104,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * apply something different, make use of the "<cyan>s-gradient-start-{colorName}</cyan>" and "<cyan>s-gradient-end-{colorName}</cyan>" classes...
         *
         * @example        html
-        * <div class="s-gradient\:radial\:accent">
+        * <div class="s-gradient:radial:accent">
         *   Hello gradient
         * </div>
         * 
@@ -86,10 +115,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     .s-gradient--radial {
         --s-gradient-type-inline: radial;
     }`);
-    }
-    if (finalParams.angles) {
-        finalParams.angles.forEach((angle) => {
-            vars.comment(`
+  }
+  if (finalParams.angles) {
+    finalParams.angles.forEach((angle) => {
+      vars.comment(`
         /**
          * @name        .s-gradient:${angle}deg
          * @namespace       sugar.css.gradient
@@ -101,7 +130,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * is of type "<yellow>linear</yellow>" of course.
          * 
          * @example             html
-         * <div class="s-ratio\:16-9 s-gradient\:linear\:${angle}deg\:start-primary-50\:end-primary-70">
+         * <div class="s-ratio:16-9 s-gradient:linear:${angle}deg:start-primary-50:end-primary-70">
          *     <div class="s-center-abs">I'm a cool depth button</div>
          * </div>
          * 
@@ -113,13 +142,12 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             --s-gradient-angle-inline: ${angle}deg;
         }
     `);
-        });
-    }
-    let currentName;
-    __STheme.getTheme().loopOnColors(({ name, variant, value }) => {
-        if (currentName !== name) {
-            // default gradients
-            vars.comment(`
+    });
+  }
+  let currentName;
+  import_s_theme.default.getTheme().loopOnColors(({ name, variant, value }) => {
+    if (currentName !== name) {
+      vars.comment(`
           /**
            * @name        .s-gradient:${name}
            * @namespace   sugar.css.gradient
@@ -133,7 +161,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
            * classes like the "<yellow>s-gradient-type-{type}</yellow>", etc...
            *
            * @example         html
-           * <div class="s-ratio\:16-9 s-gradient\:${name}">
+           * <div class="s-ratio:16-9 s-gradient:${name}">
            *     <div class="s-center-abs">I'm a cool depth button</div>
            * </div>
            *
@@ -144,16 +172,16 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           .s-gradient--${name} {
               @sugar.gradient(
                   $start: ${name},
-                  $end: ${name}--${__STheme.config('gradient.defaultVariant')},
-                  $type: ${__STheme.config('gradient.defaultType')},
-                  $angle: ${__STheme.config('gradient.defaultAngle')}
+                  $end: ${name}--${import_s_theme.default.config("gradient.defaultVariant")},
+                  $type: ${import_s_theme.default.config("gradient.defaultType")},
+                  $angle: ${import_s_theme.default.config("gradient.defaultAngle")}
               );
           }
       `);
-        }
-        currentName = name;
-        const startColorClassName = `s-gradient:start-${name}${variant === 'default' ? '' : `-${variant}`}`;
-        vars.comment(`/**
+    }
+    currentName = name;
+    const startColorClassName = `s-gradient:start-${name}${variant === "default" ? "" : `-${variant}`}`;
+    vars.comment(`/**
         * @name          ${startColorClassName}
         * @namespace          sugar.css.gradient
         * @type               CssClass
@@ -163,7 +191,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * This class allows you to apply a "<yellow>${name}</yellow>" gradient start color to any HTMLElement
         *
         * @example        html
-        * <div class="s-ratio\:16-9 ${startColorClassName.replace(':', ':')}\:end-${name}${next.variant === 'default' ? '' : `-${next.variant}`}">
+        * <div class="s-ratio:16-9 ${startColorClassName.replace(":", ":")}:end-${name}${next.variant === "default" ? "" : `-${next.variant}`}">
         *     <div class="s-center-abs">I'm a cool depth button</div>
         * </div>
         *
@@ -171,21 +199,21 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
-      .${startColorClassName.replace(':', '--')} {
+      .${startColorClassName.replace(":", "--")} {
           --s-gradient-start-color-inline: sugar.color(${name}, ${variant});
       }`);
-        const endColorClassName = `s-gradient:end-${name}${variant === 'default' ? '' : `-${variant}`}`;
-        vars.comment(`/**
+    const endColorClassName = `s-gradient:end-${name}${variant === "default" ? "" : `-${variant}`}`;
+    vars.comment(`/**
       * @name          ${endColorClassName}
       * @namespace          sugar.css.gradient
       * @type               CssClass
       * @platform         css
       * @status           beta
       *
-      * This class allows you to apply a "<yellow>${name}${variant === 'default' ? '' : `-${variant}`}</yellow>" gradient end color to any HTMLElement
+      * This class allows you to apply a "<yellow>${name}${variant === "default" ? "" : `-${variant}`}</yellow>" gradient end color to any HTMLElement
       *
       * @example        html
-      * <div class="s-ratio\:16-9 ${endColorClassName.replace(':', ':')}\:start-${name}${previous.variant === 'default' ? '' : `-${previous.variant}`} ${endColorClassName}">
+      * <div class="s-ratio:16-9 ${endColorClassName.replace(":", ":")}:start-${name}${previous.variant === "default" ? "" : `-${previous.variant}`} ${endColorClassName}">
       *     <div class="s-center-abs">I'm a cool depth button</div>
       * </div>
       *
@@ -193,10 +221,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
-    .${endColorClassName.replace(':', '--')} {
+    .${endColorClassName.replace(":", "--")} {
         --s-gradient-end-color-inline: sugar.color(${name}, ${variant});
     }`);
-    });
-    return vars;
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSwwQ0FBMkMsU0FBUSxZQUFZO0lBQ2pFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLE1BQU0sRUFBRSxDQUFDLFFBQVEsRUFBRSxRQUFRLENBQUM7Z0JBQzVCLE9BQU8sRUFBRSxDQUFDLFFBQVEsRUFBRSxRQUFRLENBQUM7Z0JBQzdCLEtBQUssRUFBRSxHQUFHO2FBQ2I7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLE9BQU8sRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFLEVBQUUsRUFBRSxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsQ0FBQztnQkFDeEMsS0FBSyxFQUFFLEdBQUc7YUFDYjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFPRCxPQUFPLEVBQUUsMENBQTBDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbkUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLENBQUMsUUFBUSxFQUFFLFFBQVEsQ0FBQyxFQUMzQixNQUFNLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRSxFQUFFLEVBQUUsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLENBQUMsSUFDcEMsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFB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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

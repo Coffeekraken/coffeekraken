@@ -1,78 +1,88 @@
-// @ts-nocheck
-import __unquote from '../string/unquote';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-/**
- * @name                          get
- * @namespace            js.object
- * @type                          Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Retreive an object value using a dotted path like "myObject.myProperty.myValue"
- *
- * @feature       Support optional property in the doted path like "something.cool?.hello.world"
- *
- * @param               {Object}                 obj                The object in which to set the value
- * @param               {String}                path                The dotted object path to get
- * @return              {Mixed}                                     The getted value or "undefined" if nothing found...
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import get from '@coffeekraken/sugar/js/object/get';
- * get('myObject.cool.value'); // => 'Hello world'
- *
- * @since     2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var get_exports = {};
+__export(get_exports, {
+  default: () => get_default
+});
+module.exports = __toCommonJS(get_exports);
+var import_unquote = __toESM(require("../string/unquote"), 1);
+var import_unique = __toESM(require("@coffeekraken/sugar/shared/array/unique"), 1);
 function get(obj, path, settings = {}) {
-    settings = Object.assign({}, settings);
-    if (obj[path] !== undefined)
-        return obj[path];
-    if (!path || path === '' || path === '.')
-        return obj;
-    path = path.replace(/\[(\w+)\]/g, '.$1');
-    path = path.replace(/^\./, '');
-    let potentialPaths = [path.replace(/\?/gm, '')];
-    const parts = path.split('.');
-    for (let i = parts.length - 1; i >= 0; i--) {
-        const part = parts[i];
-        if (part.match(/\?$/)) {
-            const before = parts.slice(0, i);
-            const after = parts.slice(i + 1);
-            potentialPaths.push([...before, ...after].join('.'));
-            potentialPaths.push([...before, ...after.filter((a) => !a.match(/\?$/))].join('.'));
-        }
+  settings = __spreadValues({}, settings);
+  if (obj[path] !== void 0)
+    return obj[path];
+  if (!path || path === "" || path === ".")
+    return obj;
+  path = path.replace(/\[(\w+)\]/g, ".$1");
+  path = path.replace(/^\./, "");
+  let potentialPaths = [path.replace(/\?/gm, "")];
+  const parts = path.split(".");
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const part = parts[i];
+    if (part.match(/\?$/)) {
+      const before = parts.slice(0, i);
+      const after = parts.slice(i + 1);
+      potentialPaths.push([...before, ...after].join("."));
+      potentialPaths.push([...before, ...after.filter((a) => !a.match(/\?$/))].join("."));
     }
-    potentialPaths = __unique(potentialPaths.map((s) => s.replace(/\?/gm, '')));
-    for (let i = 0; i < potentialPaths.length; i++) {
-        const path = potentialPaths[i];
-        const result = __get(obj, path, settings);
-        if (result !== undefined)
-            return result;
-    }
+  }
+  potentialPaths = (0, import_unique.default)(potentialPaths.map((s) => s.replace(/\?/gm, "")));
+  for (let i = 0; i < potentialPaths.length; i++) {
+    const path2 = potentialPaths[i];
+    const result = __get(obj, path2, settings);
+    if (result !== void 0)
+      return result;
+  }
 }
 function __get(obj, path, settings = {}) {
-    settings = Object.assign({}, settings);
-    if (obj[path] !== undefined)
-        return obj[path];
-    if (!path || path === '' || path === '.')
-        return obj;
-    const a = path
-        .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
-        .map((p) => __unquote(p));
-    let o = obj;
-    while (a.length) {
-        const n = a.shift().replace(/\?$/, '');
-        if (typeof o !== 'object' || !(n in o)) {
-            return;
-        }
-        o = o[n];
+  settings = __spreadValues({}, settings);
+  if (obj[path] !== void 0)
+    return obj[path];
+  if (!path || path === "" || path === ".")
+    return obj;
+  const a = path.split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm).map((p) => (0, import_unquote.default)(p));
+  let o = obj;
+  while (a.length) {
+    const n = a.shift().replace(/\?$/, "");
+    if (typeof o !== "object" || !(n in o)) {
+      return;
     }
-    return o;
+    o = o[n];
+  }
+  return o;
 }
-export default get;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZ2V0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFNBQVMsTUFBTSxtQkFBbUIsQ0FBQztBQUMxQyxPQUFPLFFBQVEsTUFBTSx5Q0FBeUMsQ0FBQztBQUUvRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUFTLEdBQUcsQ0FBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLFFBQVEsR0FBRyxFQUFFO0lBQ2pDLFFBQVEscUJBQ0QsUUFBUSxDQUNkLENBQUM7SUFDRixJQUFJLEdBQUcsQ0FBQyxJQUFJLENBQUMsS0FBSyxTQUFTO1FBQUUsT0FBTyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDOUMsSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLEtBQUssRUFBRSxJQUFJLElBQUksS0FBSyxHQUFHO1FBQUUsT0FBTyxHQUFHLENBQUM7SUFDckQsSUFBSSxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsWUFBWSxFQUFFLEtBQUssQ0FBQyxDQUFDO0lBQ3pDLElBQUksR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLEtBQUssRUFBRSxFQUFFLENBQUMsQ0FBQztJQUUvQixJQUFJLGNBQWMsR0FBRyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFFaEQsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUM5QixLQUFLLElBQUksQ0FBQyxHQUFHLEtBQUssQ0FBQyxNQUFNLEdBQUcsQ0FBQyxFQUFFLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxFQUFFLEVBQUU7UUFDeEMsTUFBTSxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3RCLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsRUFBRTtZQUNuQixNQUFNLE1BQU0sR0FBRyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUNqQyxNQUFNLEtBQUssR0FBRyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQztZQUNqQyxjQUFjLENBQUMsSUFBSSxDQUFDLENBQUMsR0FBRyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQztZQUNyRCxjQUFjLENBQUMsSUFBSSxDQUNmLENBQUMsR0FBRyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FDakUsQ0FBQztTQUNMO0tBQ0o7SUFFRCxjQUFjLEdBQUcsUUFBUSxDQUFDLGNBQWMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztJQUU1RSxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsY0FBYyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtRQUM1QyxNQUFNLElBQUksR0FBRyxjQUFjLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDL0IsTUFBTSxNQUFNLEdBQUcsS0FBSyxDQUFDLEdBQUcsRUFBRSxJQUFJLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFDMUMsSUFBSSxNQUFNLEtBQUssU0FBUztZQUFFLE9BQU8sTUFBTSxDQUFDO0tBQzNDO0FBQ0wsQ0FBQztBQUVELFNBQVMsS0FBSyxDQUFDLEdBQUcsRUFBRSxJQUFJLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDbkMsUUFBUSxxQkFDRCxRQUFRLENBQ2QsQ0FBQztJQUNGLElBQUksR0FBRyxDQUFDLElBQUksQ0FBQyxLQUFLLFNBQVM7UUFBRSxPQUFPLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUM5QyxJQUFJLENBQUMsSUFBSSxJQUFJLElBQUksS0FBSyxFQUFFLElBQUksSUFBSSxLQUFLLEdBQUc7UUFBRSxPQUFPLEdBQUcsQ0FBQztJQUNyRCxNQUFNLENBQUMsR0FBRyxJQUFJO1NBQ1QsS0FBSyxDQUFDLDhCQUE4QixDQUFDO1NBQ3JDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDOUIsSUFBSSxDQUFDLEdBQUcsR0FBRyxDQUFDO0lBRVosT0FBTyxDQUFDLENBQUMsTUFBTSxFQUFFO1FBQ2IsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLEtBQUssRUFBRSxDQUFDLE9BQU8sQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLENBQUM7UUFDdkMsSUFBSSxPQUFPLENBQUMsS0FBSyxRQUFRLElBQUksQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsRUFBRTtZQUNwQyxPQUFPO1NBQ1Y7UUFDRCxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0tBQ1o7SUFFRCxPQUFPLENBQUMsQ0FBQztBQUNiLENBQUM7QUFFRCxlQUFlLEdBQUcsQ0FBQyJ9
+var get_default = get;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

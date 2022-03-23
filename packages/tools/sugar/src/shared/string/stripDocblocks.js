@@ -1,24 +1,27 @@
-/**
- * @name            stripDocblocks
- * @namespace       shared.string
- * @type            Function
- * @platform        js
- * @platform        node
- * @status          beta
- *
- * This function simply take a string and get rid of all docblocks
- *
- * @param       {String}            str         The string to process
- * @return      {String}                        The processed string
- *
- * @example         js
- * import __stripDocblocks from '@coffeekraken/sugar/shared/string/stripDocblocks';
- * __stripDocblocks('...');
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function stripDocblocks(str) {
-    return str.replace(/(\/\*{2})([\s\S]+?)(\*\/)/gm, '');
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var stripDocblocks_exports = {};
+__export(stripDocblocks_exports, {
+  default: () => stripDocblocks
+});
+module.exports = __toCommonJS(stripDocblocks_exports);
+function stripDocblocks(str) {
+  return str.replace(/(\/\*{2})([\s\S]+?)(\*\/)/gm, "");
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaXBEb2NibG9ja3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdHJpcERvY2Jsb2Nrcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsY0FBYyxDQUFDLEdBQVc7SUFDOUMsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLDZCQUE2QixFQUFFLEVBQUUsQ0FBQyxDQUFDO0FBQzFELENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

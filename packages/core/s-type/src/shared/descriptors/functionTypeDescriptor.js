@@ -1,30 +1,33 @@
-// shared
-/**
- * @name              functionTypeDescriptor
- * @namespace         sugar.js.type.descriptor
- * @type              ISTypeDescriptor
- *
- * Describe the type "function" with some utilities methods like "is", "cast", etc...
- *
- * @example         js
- * export default {
- *    name: 'String',
- *    id: 'string',
- *    is: (value) => typeof value === 'string',
- *    cast: (value) => '' + value,
- *    // etc...
- * };
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-const descriptor = {
-    name: 'Function',
-    id: 'function',
-    is: (value) => typeof value === 'function',
-    cast: (value) => {
-        return new Error(`Sorry but nothing is castable to a Function`);
-    }
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-export default descriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnVuY3Rpb25UeXBlRGVzY3JpcHRvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImZ1bmN0aW9uVHlwZURlc2NyaXB0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsU0FBUztBQUlUOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxNQUFNLFVBQVUsR0FBcUI7SUFDbkMsSUFBSSxFQUFFLFVBQVU7SUFDaEIsRUFBRSxFQUFFLFVBQVU7SUFDZCxFQUFFLEVBQUUsQ0FBQyxLQUFVLEVBQUUsRUFBRSxDQUFDLE9BQU8sS0FBSyxLQUFLLFVBQVU7SUFDL0MsSUFBSSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUU7UUFDbkIsT0FBTyxJQUFJLEtBQUssQ0FBQyw2Q0FBNkMsQ0FBQyxDQUFDO0lBQ2xFLENBQUM7Q0FDRixDQUFDO0FBRUYsZUFBZSxVQUFVLENBQUMifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var functionTypeDescriptor_exports = {};
+__export(functionTypeDescriptor_exports, {
+  default: () => functionTypeDescriptor_default
+});
+module.exports = __toCommonJS(functionTypeDescriptor_exports);
+const descriptor = {
+  name: "Function",
+  id: "function",
+  is: (value) => typeof value === "function",
+  cast: (value) => {
+    return new Error(`Sorry but nothing is castable to a Function`);
+  }
+};
+var functionTypeDescriptor_default = descriptor;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -82,7 +82,6 @@ export interface ISEventEmitterCallbackFn {
     (value: any, metas: ISEventEmitterMetas, answer?: Function): any;
 }
 
-
 export interface ISEventEmitterEventStackItem {
     callback: ISEventEmitterCallbackFn;
     callNumber: number;
@@ -150,14 +149,14 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      */
     static _globalInstance;
     static get global(): SEventEmitter {
-        if (!this._globalInstance) {
-            this._globalInstance = new SEventEmitter({
+        if (!SEventEmitter._globalInstance) {
+            SEventEmitter._globalInstance = new SEventEmitter({
                 metas: {
                     id: 'sugarEventSPromise',
                 },
             });
         }
-        return this._globalInstance;
+        return SEventEmitter._globalInstance;
     }
 
     /**
@@ -283,9 +282,9 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                         this._ipcInstance.of[`ipc-${process.ppid}`].emit(
                             'message',
                             {
-                            value,
-                            metas: emitMetas   
-                            }
+                                value,
+                                metas: emitMetas,
+                            },
                         );
                     }
 
@@ -410,10 +409,10 @@ class SEventEmitter extends SClass implements ISEventEmitter {
 
     /**
      * @name          bind
-     * @type      Function 
-     * 
+     * @type      Function
+     *
      * This method allows you to bind another object as the emitter.
-     * 
+     *
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
@@ -618,12 +617,16 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         if (logObj.event === 'ask') {
             // @ts-ignore
             this.constructor.global.on(
-                `answer.${logObj.metas.askId}:1`,
+                `answer.${logObj.metas.askId}`,
                 (answer, metas) => {
                     logObj.resolve(answer);
                 },
             );
-            this._emitEvents(logObj.event, logObj.value, Object.assign({}, logObj.metas));
+            this._emitEvents(
+                logObj.event,
+                logObj.value,
+                Object.assign({}, logObj.metas),
+            );
         } else {
             const res = await this._emitEvents(
                 logObj.event,

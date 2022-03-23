@@ -1,30 +1,32 @@
-// @ts-nocheck
-import __fs from 'fs-extra';
-/**
- * @name        ensureFile
- * @namespace            node.fs
- * @type          Function
- * @async
- * @platform        node
- * @status          beta
- *
- * Ensure that the passed file exists. If not, it will be created... (async)
- *
- * @param       {String}              file           The file to ensure that it exists...
- * @return      {Promise}                           A promise that will be resolved once the file has been created if needed...
- *
- * @example       js
- * import ensureFile from '@coffeekraken/node/fs/ensureFile';
- * ensureFile('my/cool/file.jpg').then(() => {
- *    // do something...
- * });
- *
- * @see             https://github.com/jprichardson/node-fs-extra
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var ensureFile_exports = {};
+__export(ensureFile_exports, {
+  default: () => ensureFile_default
+});
+module.exports = __toCommonJS(ensureFile_exports);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function ensureFile(file) {
-    return __fs.ensureFile(file);
+  return import_fs_extra.default.ensureFile(file);
 }
-export default ensureFile;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlRmlsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVuc3VyZUZpbGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sSUFBSSxNQUFNLFVBQVUsQ0FBQztBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsVUFBVSxDQUFDLElBQUk7SUFDcEIsT0FBTyxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ2pDLENBQUM7QUFDRCxlQUFlLFVBQVUsQ0FBQyJ9
+var ensureFile_default = ensureFile;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

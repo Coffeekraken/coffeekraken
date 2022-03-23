@@ -1,42 +1,65 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-/**
- * @name           reset
- * @namespace      node.mixins.reset
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the reset css needed to standardize display
- * on all browsers.
- *
- * @ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css
- * @feature      Body height on desktop and IOS using "fill-available" technique
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.ratio.classes;
- *
- * @see       https://github.com/nicolas-cusan/destyle.css
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginResetInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var reset_exports = {};
+__export(reset_exports, {
+  default: () => reset_default,
+  dependencies: () => dependencies,
+  interface: () => postcssSugarPluginResetInterface
+});
+module.exports = __toCommonJS(reset_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
+class postcssSugarPluginResetInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginResetInterface as interface };
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/destyle.js`, `${__dirname()}/sugar.js`],
-    };
+function dependencies() {
+  return {
+    files: [`${(0, import_dirname.default)()}/destyle.js`, `${(0, import_dirname.default)()}/sugar.js`]
+  };
 }
-export default function ({ params, CssVars, atRule, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const vars = new CssVars();
-    vars.comment(() => `
+function reset_default({
+  params,
+  CssVars,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const vars = new CssVars();
+  vars.comment(() => `
         /**
         * @name          Global reset
         * @namespace          sugar.css.resets
@@ -58,7 +81,7 @@ export default function ({ params, CssVars, atRule, replaceWith, }) {
         * @support      edge
         * 
         * @example        css
-        * \@sugar.reset;
+        * @sugar.reset;
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -67,6 +90,10 @@ export default function ({ params, CssVars, atRule, replaceWith, }) {
       @sugar.reset.destyle;
       @sugar.reset.sugar;
   `);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVzZXQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZXNldC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLFNBQVMsTUFBTSxxQ0FBcUMsQ0FBQztBQUU1RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSxnQ0FBaUMsU0FBUSxZQUFZO0lBQ3ZELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLGdDQUFnQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXpELE1BQU0sVUFBVSxZQUFZO0lBQ3hCLE9BQU87UUFDSCxLQUFLLEVBQUUsQ0FBQyxHQUFHLFNBQVMsRUFBRSxhQUFhLEVBQUUsR0FBRyxTQUFTLEVBQUUsV0FBVyxDQUFDO0tBQ2xFLENBQUM7QUFDTixDQUFDO0FBRUQsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sT0FBTyxFQUNQLE1BQU0sRUFDTixXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQTJCZCxDQUFDLENBQUMsSUFBSSxDQUFDOzs7R0FHYixDQUFDLENBQUM7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  dependencies,
+  interface
+});

@@ -1,27 +1,28 @@
-/**
- * @name            stripSourcemap
- * @namespace       shared.string
- * @type            Function
- * @platform        js
- * @platform        node
- * @status          beta
- *
- * This function simply take a string and get rid of all sourcemap
- *
- * @feature        Support sourcemap like `//# sourceMappingURL=...`
- *
- * @param       {String}            str         The string to process
- * @return      {String}                        The processed string
- *
- * @example         js
- * import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
- * __stripSourcemap('...');
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function stripSourcemap(str) {
-    str = str.replace(/\/\/#\s?sourceMappingURL=[\w\W]+/gm, '');
-    return str;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var stripSourcemap_exports = {};
+__export(stripSourcemap_exports, {
+  default: () => stripSourcemap
+});
+module.exports = __toCommonJS(stripSourcemap_exports);
+function stripSourcemap(str) {
+  str = str.replace(/\/\/#\s?sourceMappingURL=[\w\W]+/gm, "");
+  return str;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaXBTb3VyY2VtYXAuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdHJpcFNvdXJjZW1hcC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxjQUFjLENBQUMsR0FBVztJQUM5QyxHQUFHLEdBQUcsR0FBRyxDQUFDLE9BQU8sQ0FBQyxvQ0FBb0MsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUM1RCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

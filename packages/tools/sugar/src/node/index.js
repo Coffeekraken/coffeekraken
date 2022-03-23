@@ -1,23 +1,22 @@
-// @ts-nocheck
-import __handleError from './error/handleError';
-import __exitCleanup from './process/exitCleanup';
-import __onProcessExit from './process/onProcessExit';
-// import __registerSFileClasses from './fs/registerSFileClasses';
-/**
- * @name                    index
- * @namespace           node
- *
- * This file is the "initialisation" one for the sugar node toolkit.
- * It's optional to include it but if you do, you will get these features "for free":
- * - Logging: Get the powerfull options of the SLog class without any change in your codebase
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-// handle the errors
-__handleError();
-// exit cleanup
-__onProcessExit(() => {
-    return __exitCleanup;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_handleError = __toESM(require("./error/handleError"), 1);
+var import_exitCleanup = __toESM(require("./process/exitCleanup"), 1);
+var import_onProcessExit = __toESM(require("./process/onProcessExit"), 1);
+(0, import_handleError.default)();
+(0, import_onProcessExit.default)(() => {
+  return import_exitCleanup.default;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxhQUFhLE1BQU0scUJBQXFCLENBQUM7QUFDaEQsT0FBTyxhQUFhLE1BQU0sdUJBQXVCLENBQUM7QUFDbEQsT0FBTyxlQUFlLE1BQU0seUJBQXlCLENBQUM7QUFDdEQsa0VBQWtFO0FBRWxFOzs7Ozs7Ozs7O0dBVUc7QUFFSCxvQkFBb0I7QUFDcEIsYUFBYSxFQUFFLENBQUM7QUFFaEIsZUFBZTtBQUNmLGVBQWUsQ0FBQyxHQUFHLEVBQUU7SUFDakIsT0FBTyxhQUFhLENBQUM7QUFDekIsQ0FBQyxDQUFDLENBQUMifQ==

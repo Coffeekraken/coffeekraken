@@ -1,85 +1,94 @@
-// @ts-nocheck
-import __isPlain from '../is/plainObject';
-/**
- * @name                              flatten
- * @namespace            js.object
- * @type                              Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Transform the passed multiple level object into a single level one
- *
- * @param               {Object}                          object                    The object to flatten
- * @param               {Object}                          [settings={}]             An object of settings to configure your flatten process
- * @return              {Object}                                                    The flatten object
- *
- * @setting               {String}            [separation="."]          The separation character to use for preperty names
- * @setting 							{Boolean}			    	[array=false] 		Specify if you want to flatten array or not
- * @setting               {Boolean}          [quoteSeparatedProperties=true]      Specify if you want to quote dotted properties to be able to restore them correctly later
- * @setting               {String}        [quoteCharacter='"']        Specify the quote character to use when need to quote separated properties
- * @setting               {Boolean}       [keepLastIntact=false]       Specify if you want to keep the last level (object, array) intact and not to flatten each properties
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import flatten from '@coffeekraken/sugar/js/object/flatten';
- * flatten({
- *    hello: {
- *      world: 'Coco'
- *    }
- * });
- *
- * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function flatten(object, settings = {}) {
-    const toReturn = {};
-    // make sure the passed object is not null, undefined
-    if (!Array.isArray(object) && !__isPlain(object))
-        return object;
-    settings = Object.assign({ separator: '.', array: false, quoteSeparatedProperties: true, quoteCharacter: '"', excludeProps: [], keepLastIntact: false }, settings);
-    for (const key in object) {
-        if (object[key] === undefined)
-            continue;
-        if (object[key] === null) {
-            toReturn[key] = null;
-            continue;
-        }
-        if (settings.excludeProps.indexOf(key) !== -1) {
-            toReturn[key] = object[key];
-            continue;
-        }
-        if ((Array.isArray(object[key]) && settings.array) ||
-            (!Array.isArray(object[key]) && typeof object[key]) == 'object') {
-            const isArray = Array.isArray(object[key]);
-            const flatObject = flatten(object[key], Object.assign(Object.assign({}, settings), { keepLastIntact: false }));
-            for (const x in flatObject) {
-                if (flatObject[x] === undefined)
-                    continue;
-                if (isArray) {
-                    toReturn[`${key}[${x}]`] = flatObject[x];
-                }
-                else {
-                    const part = key;
-                    if (settings.quoteSeparatedProperties &&
-                        part.includes(settings.separator)) {
-                        toReturn[`${settings.quoteCharacter}${key}${settings.quoteCharacter}` +
-                            settings.separator +
-                            x] = flatObject[x];
-                    }
-                    else {
-                        toReturn[key + settings.separator + x] = flatObject[x];
-                    }
-                }
-            }
-            continue;
-        }
-        toReturn[key] = object[key];
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    return toReturn;
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var flatten_exports = {};
+__export(flatten_exports, {
+  default: () => flatten_default
+});
+module.exports = __toCommonJS(flatten_exports);
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
+function flatten(object, settings = {}) {
+  const toReturn = {};
+  if (!Array.isArray(object) && !(0, import_plainObject.default)(object))
+    return object;
+  settings = __spreadValues({
+    separator: ".",
+    array: false,
+    quoteSeparatedProperties: true,
+    quoteCharacter: '"',
+    excludeProps: [],
+    keepLastIntact: false
+  }, settings);
+  for (const key in object) {
+    if (object[key] === void 0)
+      continue;
+    if (object[key] === null) {
+      toReturn[key] = null;
+      continue;
+    }
+    if (settings.excludeProps.indexOf(key) !== -1) {
+      toReturn[key] = object[key];
+      continue;
+    }
+    if (Array.isArray(object[key]) && settings.array || (!Array.isArray(object[key]) && typeof object[key]) == "object") {
+      const isArray = Array.isArray(object[key]);
+      const flatObject = flatten(object[key], __spreadProps(__spreadValues({}, settings), {
+        keepLastIntact: false
+      }));
+      for (const x in flatObject) {
+        if (flatObject[x] === void 0)
+          continue;
+        if (isArray) {
+          toReturn[`${key}[${x}]`] = flatObject[x];
+        } else {
+          const part = key;
+          if (settings.quoteSeparatedProperties && part.includes(settings.separator)) {
+            toReturn[`${settings.quoteCharacter}${key}${settings.quoteCharacter}` + settings.separator + x] = flatObject[x];
+          } else {
+            toReturn[key + settings.separator + x] = flatObject[x];
+          }
+        }
+      }
+      continue;
+    }
+    toReturn[key] = object[key];
+  }
+  return toReturn;
 }
-export default flatten;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmxhdHRlbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImZsYXR0ZW4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sU0FBUyxNQUFNLG1CQUFtQixDQUFDO0FBRTFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0NHO0FBQ0gsU0FBUyxPQUFPLENBQUMsTUFBTSxFQUFFLFFBQVEsR0FBRyxFQUFFO0lBQ2xDLE1BQU0sUUFBUSxHQUFHLEVBQUUsQ0FBQztJQUVwQixxREFBcUQ7SUFDckQsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDO1FBQUUsT0FBTyxNQUFNLENBQUM7SUFFaEUsUUFBUSxtQkFDSixTQUFTLEVBQUUsR0FBRyxFQUNkLEtBQUssRUFBRSxLQUFLLEVBQ1osd0JBQXdCLEVBQUUsSUFBSSxFQUM5QixjQUFjLEVBQUUsR0FBRyxFQUNuQixZQUFZLEVBQUUsRUFBRSxFQUNoQixjQUFjLEVBQUUsS0FBSyxJQUNsQixRQUFRLENBQ2QsQ0FBQztJQUVGLEtBQUssTUFBTSxHQUFHLElBQUksTUFBTSxFQUFFO1FBQ3RCLElBQUksTUFBTSxDQUFDLEdBQUcsQ0FBQyxLQUFLLFNBQVM7WUFBRSxTQUFTO1FBRXhDLElBQUksTUFBTSxDQUFDLEdBQUcsQ0FBQyxLQUFLLElBQUksRUFBRTtZQUN0QixRQUFRLENBQUMsR0FBRyxDQUFDLEdBQUcsSUFBSSxDQUFDO1lBQ3JCLFNBQVM7U0FDWjtRQUVELElBQUksUUFBUSxDQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7WUFDM0MsUUFBUSxDQUFDLEdBQUcsQ0FBQyxHQUFHLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUM1QixTQUFTO1NBQ1o7UUFFRCxJQUNJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUMsSUFBSSxRQUFRLENBQUMsS0FBSyxDQUFDO1lBQzlDLENBQUMsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQyxJQUFJLE9BQU8sTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLElBQUksUUFBUSxFQUNqRTtZQUNFLE1BQU0sT0FBTyxHQUFHLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUM7WUFFM0MsTUFBTSxVQUFVLEdBQUcsT0FBTyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsa0NBQy9CLFFBQVEsS0FDWCxjQUFjLEVBQUUsS0FBSyxJQUN2QixDQUFDO1lBRUgsS0FBSyxNQUFNLENBQUMsSUFBSSxVQUFVLEVBQUU7Z0JBQ3hCLElBQUksVUFBVSxDQUFDLENBQUMsQ0FBQyxLQUFLLFNBQVM7b0JBQUUsU0FBUztnQkFFMUMsSUFBSSxPQUFPLEVBQUU7b0JBQ1QsUUFBUSxDQUFDLEdBQUcsR0FBRyxJQUFJLENBQUMsR0FBRyxDQUFDLEdBQUcsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDO2lCQUM1QztxQkFBTTtvQkFDSCxNQUFNLElBQUksR0FBRyxHQUFHLENBQUM7b0JBQ2pCLElBQ0ksUUFBUSxDQUFDLHdCQUF3Qjt3QkFDakMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsU0FBUyxDQUFDLEVBQ25DO3dCQUNFLFFBQVEsQ0FDSixHQUFHLFFBQVEsQ0FBQyxjQUFjLEdBQUcsR0FBRyxHQUFHLFFBQVEsQ0FBQyxjQUFjLEVBQUU7NEJBQ3hELFFBQVEsQ0FBQyxTQUFTOzRCQUNsQixDQUFDLENBQ1IsR0FBRyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUM7cUJBQ3JCO3lCQUFNO3dCQUNILFFBQVEsQ0FBQyxHQUFHLEdBQUcsUUFBUSxDQUFDLFNBQVMsR0FBRyxDQUFDLENBQUMsR0FBRyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUM7cUJBQzFEO2lCQUNKO2FBQ0o7WUFDRCxTQUFTO1NBQ1o7UUFFRCxRQUFRLENBQUMsR0FBRyxDQUFDLEdBQUcsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0tBQy9CO0lBRUQsT0FBTyxRQUFRLENBQUM7QUFDcEIsQ0FBQztBQUVELGVBQWUsT0FBTyxDQUFDIn0=
+var flatten_default = flatten;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,30 +1,33 @@
-// shared
-/**
- * @name              weakmapTypeDescriptor
- * @namespace         sugar.js.type.descriptor
- * @type              ISTypeDescriptor
- *
- * Describe the type "map" with some utilities methods like "is", "cast", etc...
- *
- * @example         js
- * export default {
- *    name: 'String',
- *    id: 'string',
- *    is: (value) => typeof value === 'string',
- *    cast: (value) => '' + value,
- *    // etc...
- * };
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-const descriptor = {
-    name: 'WeakMap',
-    id: 'weakmap',
-    is: (value) => value instanceof WeakMap,
-    cast: (value) => {
-        return new Error(`Sorry but nothing can be casted to a WeakMap for now`);
-    }
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-export default descriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2Vha21hcFR5cGVEZXNjcmlwdG9yLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsid2Vha21hcFR5cGVEZXNjcmlwdG9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFNBQVM7QUFJVDs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsTUFBTSxVQUFVLEdBQXFCO0lBQ25DLElBQUksRUFBRSxTQUFTO0lBQ2YsRUFBRSxFQUFFLFNBQVM7SUFDYixFQUFFLEVBQUUsQ0FBQyxLQUFVLEVBQUUsRUFBRSxDQUFDLEtBQUssWUFBWSxPQUFPO0lBQzVDLElBQUksRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFO1FBQ25CLE9BQU8sSUFBSSxLQUFLLENBQUMsc0RBQXNELENBQUMsQ0FBQztJQUMzRSxDQUFDO0NBQ0YsQ0FBQztBQUVGLGVBQWUsVUFBVSxDQUFDIn0=
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var weakmapTypeDescriptor_exports = {};
+__export(weakmapTypeDescriptor_exports, {
+  default: () => weakmapTypeDescriptor_default
+});
+module.exports = __toCommonJS(weakmapTypeDescriptor_exports);
+const descriptor = {
+  name: "WeakMap",
+  id: "weakmap",
+  is: (value) => value instanceof WeakMap,
+  cast: (value) => {
+    return new Error(`Sorry but nothing can be casted to a WeakMap for now`);
+  }
+};
+var weakmapTypeDescriptor_default = descriptor;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,44 +1,45 @@
-// @ts-nocheck
-import __fs from 'fs';
-import __deepMerge from '../../shared/object/deepMerge';
-/**
- * @name            file
- * @namespace            node.is
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * This function check if the passed string path is a file or not
- *
- * @param     {String}        path        The path to check
- * @return    {Boolean}                   true if is a file, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example     js
- * import isFile from '@coffeekraken/sugar/node/is/file';
- * isFile('something/cool');
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var file_exports = {};
+__export(file_exports, {
+  default: () => file_default
+});
+module.exports = __toCommonJS(file_exports);
+var import_fs = __toESM(require("fs"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
 function isFile(path, settings = {}) {
-    settings = __deepMerge({
-        symlink: true,
-    }, settings);
-    let isMatching = __fs.existsSync(path);
-    if (!isMatching)
-        return false;
-    if (settings.symlink && __fs.lstatSync(path).isSymbolicLink()) {
-        const realPath = __fs.realpathSync(path);
-        isMatching = isMatching && __fs.lstatSync(realPath).isFile();
-    }
-    else {
-        isMatching = isMatching && __fs.lstatSync(path).isFile();
-    }
-    return isMatching;
+  settings = (0, import_deepMerge.default)({
+    symlink: true
+  }, settings);
+  let isMatching = import_fs.default.existsSync(path);
+  if (!isMatching)
+    return false;
+  if (settings.symlink && import_fs.default.lstatSync(path).isSymbolicLink()) {
+    const realPath = import_fs.default.realpathSync(path);
+    isMatching = isMatching && import_fs.default.lstatSync(realPath).isFile();
+  } else {
+    isMatching = isMatching && import_fs.default.lstatSync(path).isFile();
+  }
+  return isMatching;
 }
-export default isFile;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImZpbGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUN0QixPQUFPLFdBQVcsTUFBTSwrQkFBK0IsQ0FBQztBQUV4RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsTUFBTSxDQUFDLElBQUksRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUMvQixRQUFRLEdBQUcsV0FBVyxDQUNsQjtRQUNJLE9BQU8sRUFBRSxJQUFJO0tBQ2hCLEVBQ0QsUUFBUSxDQUNYLENBQUM7SUFFRixJQUFJLFVBQVUsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3ZDLElBQUksQ0FBQyxVQUFVO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFDOUIsSUFBSSxRQUFRLENBQUMsT0FBTyxJQUFJLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUMsY0FBYyxFQUFFLEVBQUU7UUFDM0QsTUFBTSxRQUFRLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUN6QyxVQUFVLEdBQUcsVUFBVSxJQUFJLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsTUFBTSxFQUFFLENBQUM7S0FDaEU7U0FBTTtRQUNILFVBQVUsR0FBRyxVQUFVLElBQUksSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxNQUFNLEVBQUUsQ0FBQztLQUM1RDtJQUNELE9BQU8sVUFBVSxDQUFDO0FBQ3RCLENBQUM7QUFDRCxlQUFlLE1BQU0sQ0FBQyJ9
+var file_default = isFile;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

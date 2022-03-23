@@ -1,42 +1,38 @@
-// @ts-nocheck
-import __isVisible from '../is/visible';
-/**
- * @name        closestNotVisible
- * @namespace            js.dom.query
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Go up the dom three to find the first element that is not visible.
- * Not visible mean that has either an opacity to 0, a visibility to hidden or a display to none
- *
- * @param 		{HTMLElement} 					elm  		The element to start on
- * @return 		{HTMLElement} 								The element found or null
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import closestNotVisible from 'sugarcss/js/dom/query/closestNotVisible'
- * const closestElm = closestNotVisible(myCoolElement);
- * if (closestElm) {
- * 		// we have found en element that is not visible
- * }
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var closestNotVisible_exports = {};
+__export(closestNotVisible_exports, {
+  default: () => closestNotVisible_default
+});
+module.exports = __toCommonJS(closestNotVisible_exports);
+var import_visible = __toESM(require("../is/visible"), 1);
 function closestNotVisible(elm) {
-    const originalElm = elm;
-    elm = elm.parentNode;
-    while (elm && elm != originalElm.ownerDocument) {
-        if (!__isVisible(elm)) {
-            return elm;
-        }
-        elm = elm.parentNode;
+  const originalElm = elm;
+  elm = elm.parentNode;
+  while (elm && elm != originalElm.ownerDocument) {
+    if (!(0, import_visible.default)(elm)) {
+      return elm;
     }
-    return null;
+    elm = elm.parentNode;
+  }
+  return null;
 }
-export default closestNotVisible;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xvc2VzdE5vdFZpc2libGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjbG9zZXN0Tm90VmlzaWJsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxXQUFXLE1BQU0sZUFBZSxDQUFDO0FBRXhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMsaUJBQWlCLENBQUMsR0FBZ0I7SUFDdkMsTUFBTSxXQUFXLEdBQUcsR0FBRyxDQUFDO0lBQ3hCLEdBQUcsR0FBRyxHQUFHLENBQUMsVUFBVSxDQUFDO0lBQ3JCLE9BQU8sR0FBRyxJQUFJLEdBQUcsSUFBSSxXQUFXLENBQUMsYUFBYSxFQUFFO1FBQzVDLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLEVBQUU7WUFDbkIsT0FBTyxHQUFHLENBQUM7U0FDZDtRQUNELEdBQUcsR0FBRyxHQUFHLENBQUMsVUFBVSxDQUFDO0tBQ3hCO0lBQ0QsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQUNELGVBQWUsaUJBQWlCLENBQUMifQ==
+var closestNotVisible_default = closestNotVisible;

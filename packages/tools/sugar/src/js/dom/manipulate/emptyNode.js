@@ -1,32 +1,29 @@
-// @ts-nocheck
-/**
- * @name        emptyNode
- * @namespace            js.dom.manipulate
- * @type        Function
- * @platform          js
- * @status        beta
- *
- * Empty a node by removing each childs one after the other
- *
- * @param           {HTMLElement}         node          The node to empty
- * @return          {HTMLElement}                       The node that was passed to maintain chainability
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * @import emptyNode from '@coffeekraken/sugar/js/dom/emptyNode';
- * emptyNode(myCoolNode);
- *
- * @since       1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var emptyNode_exports = {};
+__export(emptyNode_exports, {
+  default: () => emptyNode_default
+});
+module.exports = __toCommonJS(emptyNode_exports);
 function emptyNode(node) {
-    while (node.firstChild) {
-        node.removeChild(node.firstChild);
-    }
-    return node;
+  while (node.firstChild) {
+    node.removeChild(node.firstChild);
+  }
+  return node;
 }
-export default emptyNode;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW1wdHlOb2RlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW1wdHlOb2RlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsU0FBUyxDQUFDLElBQWlCO0lBQ2hDLE9BQU8sSUFBSSxDQUFDLFVBQVUsRUFBRTtRQUNwQixJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztLQUNyQztJQUNELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFDRCxlQUFlLFNBQVMsQ0FBQyJ9
+var emptyNode_default = emptyNode;

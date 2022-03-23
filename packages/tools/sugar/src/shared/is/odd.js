@@ -1,31 +1,28 @@
-// @ts-nocheck
-/**
- * @name        isOdd
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if a number is odd or not
- *
- * @param    {Number}    value    The value to check
- * @return    {Boolean}    true if odd, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import isOdd from '@coffeekraken/sugar/js/is/odd'
- * isOdd(1) // true
- * isOdd(2) // false
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var odd_exports = {};
+__export(odd_exports, {
+  default: () => odd_default
+});
+module.exports = __toCommonJS(odd_exports);
 function isOdd(value) {
-    return value % 2 === 1;
+  return value % 2 === 1;
 }
-export default isOdd;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2RkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2RkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxLQUFLLENBQUMsS0FBSztJQUNoQixPQUFPLEtBQUssR0FBRyxDQUFDLEtBQUssQ0FBQyxDQUFDO0FBQzNCLENBQUM7QUFDRCxlQUFlLEtBQUssQ0FBQyJ9
+var odd_default = isOdd;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

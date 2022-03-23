@@ -1,42 +1,35 @@
-// @ts-nocheck
-/**
- * @name                                    methodExists
- * @namespace            js.class.utils
- * @type                                    Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * Check if one or more methods exists on a class instance
- *
- * @param           {Object}              instance                The instance to check the methods on
- * @param           {String}              ...methods              The methods to check
- * @return          {Boolean|Array}                               Return true if all is ok, and an array of missing methods if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example           js
- * class Coco {
- *    hello() {}
- * }
- * import methodExists from '@coffeekraken/sugar/node/class/utils/methodExists';
- * const myInstance = new Coco();
- * methodExists(myInstance, 'hello', 'world'); // => ['world'];
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var methodExists_exports = {};
+__export(methodExists_exports, {
+  default: () => methodExists_default
+});
+module.exports = __toCommonJS(methodExists_exports);
 function methodExists(instance, ...methods) {
-    const missingMethodsArray = [];
-    if (!Array.isArray(methods))
-        methods = [methods];
-    methods.forEach((method) => {
-        if (typeof instance[method] !== 'function')
-            missingMethodsArray.push(method);
-    });
-    return !missingMethodsArray.length ? true : missingMethodsArray;
+  const missingMethodsArray = [];
+  if (!Array.isArray(methods))
+    methods = [methods];
+  methods.forEach((method) => {
+    if (typeof instance[method] !== "function")
+      missingMethodsArray.push(method);
+  });
+  return !missingMethodsArray.length ? true : missingMethodsArray;
 }
-export default methodExists;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWV0aG9kRXhpc3RzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWV0aG9kRXhpc3RzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILFNBQVMsWUFBWSxDQUFDLFFBQVEsRUFBRSxHQUFHLE9BQU87SUFDdEMsTUFBTSxtQkFBbUIsR0FBRyxFQUFFLENBQUM7SUFDL0IsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1FBQUUsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7SUFDakQsT0FBTyxDQUFDLE9BQU8sQ0FBQyxDQUFDLE1BQU0sRUFBRSxFQUFFO1FBQ3ZCLElBQUksT0FBTyxRQUFRLENBQUMsTUFBTSxDQUFDLEtBQUssVUFBVTtZQUN0QyxtQkFBbUIsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDekMsQ0FBQyxDQUFDLENBQUM7SUFDSCxPQUFPLENBQUMsbUJBQW1CLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLG1CQUFtQixDQUFDO0FBQ3BFLENBQUM7QUFDRCxlQUFlLFlBQVksQ0FBQyJ9
+var methodExists_default = methodExists;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

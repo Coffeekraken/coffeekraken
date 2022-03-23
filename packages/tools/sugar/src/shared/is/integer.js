@@ -1,35 +1,30 @@
-// @ts-nocheck
-/**
- * @name        isInteger
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the passed value is an integer
- *
- * @param 		{Mixed} 		value 		The value to check
- * @return 		{Boolean} 					The check result
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import isInteger from '@coffeekraken/sugar/js/is/integer';
- * isInteger(10) => true
- * isInteger('hello') => false
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var integer_exports = {};
+__export(integer_exports, {
+  default: () => integer_default
+});
+module.exports = __toCommonJS(integer_exports);
 function isInteger(data) {
-    return (typeof data === 'number' &&
-        !isNaN(data) &&
-        (function (x) {
-            return (x | 0) === x;
-        })(parseFloat(data)));
+  return typeof data === "number" && !isNaN(data) && function(x) {
+    return (x | 0) === x;
+  }(parseFloat(data));
 }
-export default isInteger;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW50ZWdlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImludGVnZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxJQUFJO0lBQ25CLE9BQU8sQ0FDSCxPQUFPLElBQUksS0FBSyxRQUFRO1FBQ3hCLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQztRQUNaLENBQUMsVUFBVSxDQUFDO1lBQ1IsT0FBTyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDekIsQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQ3ZCLENBQUM7QUFDTixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var integer_default = isInteger;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

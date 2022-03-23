@@ -1,58 +1,83 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name          range
- * @namespace     ui.range
- * @type               PostcssMixin
- * @interface     ./range          interface
- * @platform      postcss
- * @status        beta
- *
- * Apply the range style to any HTMLInputElement
- *
- * @param       {'solid'}           [style='theme.ui.range.defaultStyle']        The style you want for your range
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.range.defaultShape]      The shape you want for your range
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
- * @return      {String}            The generated css
- *
- * @example     css
- * .my-range {
- *    @sugar.ui.range;
- * }
- *
- * @since      2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginUiRangeInterface extends __SInterface {
-    static get _definition() {
-        return {
-            style: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.config('ui.range.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pull', 'circle'],
-                default: __STheme.config('ui.range.defaultShape'),
-            },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var range_exports = {};
+__export(range_exports, {
+  default: () => range_default,
+  interface: () => postcssSugarPluginUiRangeInterface
+});
+module.exports = __toCommonJS(range_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginUiRangeInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      style: {
+        type: "String",
+        values: ["solid"],
+        default: import_s_theme.default.config("ui.range.defaultStyle")
+      },
+      shape: {
+        type: "String",
+        values: ["default", "square", "pull", "circle"],
+        default: import_s_theme.default.config("ui.range.defaultShape")
+      },
+      scope: {
+        type: {
+          type: "Array<String>",
+          splitChars: [",", " "]
+        },
+        values: ["bare", "lnf", "shape"],
+        default: ["bare", "lnf", "shape"]
+      }
+    };
+  }
 }
-export { postcssSugarPluginUiRangeInterface as interface };
-export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
-    const finalParams = Object.assign({ style: 'solid', shape: 'default', scope: ['bare', 'lnf', 'shape'] }, params);
-    finalParams.scope = applyNoScopes(finalParams.scope);
-    const vars = [
-        `
+function range_default({
+  params,
+  atRule,
+  applyNoScopes,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    style: "solid",
+    shape: "default",
+    scope: ["bare", "lnf", "shape"]
+  }, params);
+  finalParams.scope = applyNoScopes(finalParams.scope);
+  const vars = [
+    `
         --track-color: sugar.color(main, ui);
         --thumb-color: sugar.color(current);
 
@@ -73,31 +98,30 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
         --contrast: 5%;
 
         --ie-bottom-track-color: darken($track-color, $contrast);
-`,
-    ];
-    const trackCss = `
+`
+  ];
+  const trackCss = `
         transition: sugar.theme(ui.range.transition);
     `;
-    const trackCssBare = `
+  const trackCssBare = `
         height: var(--track-height);
         width: 100%;
         cursor: pointer;
     `;
-    const thumbCss = `
+  const thumbCss = `
         background: var(--thumb-color);
         border: var(--thumb-border-width) solid var(--thumb-border-color);
         border-radius: var(--thumb-radius);
         box-shadow: 0 0 0 0 var(--thumb-border-color);
     `;
-    const thumbCssBare = `
+  const thumbCssBare = `
         box-sizing: border-box;
         height: var(--thumb-height);
         width: var(--thumb-width);
         cursor: pointer;
     `;
-    // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+  if (finalParams.scope.indexOf("lnf") !== -1) {
+    vars.push(`
             &:hover,
             &:focus {
 
@@ -165,10 +189,9 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                 border-radius: calc(var(--track-radius) * 2);
             }
     `);
-    }
-    // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+  }
+  if (finalParams.scope.indexOf("bare") !== -1) {
+    vars.push(`
             -webkit-appearance: none;
             background: transparent;
 
@@ -225,41 +248,42 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
             }
 
     `);
-    }
-    // style
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                vars.push(`
+  }
+  if (finalParams.scope.indexOf("lnf") !== -1) {
+    switch (finalParams.style) {
+      case "solid":
+      default:
+        vars.push(`
                 `);
-                break;
-        }
+        break;
     }
-    // shapes
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
+  }
+  if (finalParams.scope.includes("shape")) {
+    switch (finalParams.shape) {
+      case "square":
+        vars.push(`
                     --thumb-radius: 0;
                     --track-radius: 0;
                 `);
-                break;
-            case 'pill':
-            case 'circle':
-                vars.push(`
+        break;
+      case "pill":
+      case "circle":
+        vars.push(`
                     --thumb-radius: 9999px;
                     --track-radius: 9999px;
                 `);
-                break;
-            default:
-                vars.push(`
+        break;
+      default:
+        vars.push(`
                     --thumb-radius: sugar.theme(ui.range.borderRadius);
                     --track-radius: sugar.theme(ui.range.borderRadius);
                 `);
-                break;
-        }
+        break;
     }
-    return vars;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmFuZ2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyYW5nZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUVILE1BQU0sa0NBQW1DLFNBQVEsWUFBWTtJQUN6RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sQ0FBQztnQkFDakIsT0FBTyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsdUJBQXVCLENBQUM7YUFDcEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsU0FBUyxFQUFFLFFBQVEsRUFBRSxNQUFNLEVBQUUsUUFBUSxDQUFDO2dCQUMvQyxPQUFPLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQzthQUNwRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxDQUFDO2dCQUNoQyxPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQzthQUNwQztTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFRRCxPQUFPLEVBQUUsa0NBQWtDLElBQUksU0FBUyxFQUFFLENBQUM7QUFDM0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLGFBQWEsRUFDYixXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLE9BQU8sRUFDZCxLQUFLLEVBQUUsU0FBUyxFQUNoQixLQUFLLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQyxJQUM1QixNQUFNLENBQ1osQ0FBQztJQUNGLFdBQVcsQ0FBQyxLQUFLLEdBQUcsYUFBYSxDQUFDLFdBQVcsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUVyRCxNQUFNLElBQUksR0FBYTtRQUNuQjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0NBcUJQO0tBQ0ksQ0FBQztJQUVGLE1BQU0sUUFBUSxHQUFHOztLQUVoQixDQUFDO0lBQ0YsTUFBTSxZQUFZLEdBQUc7Ozs7S0FJcEIsQ0FBQztJQUNGLE1BQU0sUUFBUSxHQUFHOzs7OztLQUtoQixDQUFDO0lBQ0YsTUFBTSxZQUFZLEdBQUc7Ozs7O0tBS3BCLENBQUM7SUFFRixNQUFNO0lBQ04sSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN6QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztrQkE2QkEsUUFBUTs7O2tCQUdSLFFBQVE7OztrQkFHUixRQUFROzs7O2tCQUlSLFFBQVE7Ozs7OztrQkFNUixRQUFROzs7Ozs7a0JBTVIsUUFBUTs7Ozs7Ozs7Ozs7Ozs7OztLQWdCckIsQ0FBQyxDQUFDO0tBQ0Y7SUFFRCxPQUFPO0lBQ1AsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7O2tCQWFBLFlBQVk7Ozs7a0JBSVosWUFBWTs7Ozs7O2tCQU1aLFlBQVk7Ozs7O2tCQUtaLFlBQVk7Ozs7a0JBSVosWUFBWTs7Ozs7Ozs7O2tCQVNaLFlBQVk7Ozs7Ozs7Ozs7Ozs7OztLQWV6QixDQUFDLENBQUM7S0FDRjtJQUVELFFBQVE7SUFDUixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3pDLFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN2QixLQUFLLE9BQU8sQ0FBQztZQUNiO2dCQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7aUJBQ1QsQ0FBQyxDQUFDO2dCQUNILE1BQU07U0FDYjtLQUNKO0lBRUQsU0FBUztJQUNULElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLEVBQUU7UUFDckMsUUFBUSxXQUFXLENBQUMsS0FBSyxFQUFFO1lBQ3ZCLEtBQUssUUFBUTtnQkFDVCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7aUJBR1QsQ0FBQyxDQUFDO2dCQUNILE1BQU07WUFDVixLQUFLLE1BQU0sQ0FBQztZQUNaLEtBQUssUUFBUTtnQkFDVCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7aUJBR1QsQ0FBQyxDQUFDO2dCQUNILE1BQU07WUFDVjtnQkFDSSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7aUJBR1QsQ0FBQyxDQUFDO2dCQUNILE1BQU07U0FDYjtLQUNKO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

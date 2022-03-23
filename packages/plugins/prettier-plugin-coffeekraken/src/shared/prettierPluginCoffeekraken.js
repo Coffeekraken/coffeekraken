@@ -1,27 +1,53 @@
-export const languages = [
-    {
-        // The language name
-        name: 'SugarCss',
-        // Parsers that can parse this language.
-        // This can be built-in parsers, or parsers you have contributed via this plugin.
-        parsers: ['sugar-css'],
-    },
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var prettierPluginCoffeekraken_exports = {};
+__export(prettierPluginCoffeekraken_exports, {
+  languages: () => languages,
+  parsers: () => parsers
+});
+module.exports = __toCommonJS(prettierPluginCoffeekraken_exports);
+const languages = [
+  {
+    name: "SugarCss",
+    parsers: ["sugar-css"]
+  }
 ];
 const loc = (prop) => (node) => {
-    return node.loc && node.loc[prop] && node.loc[prop].offset;
+  return node.loc && node.loc[prop] && node.loc[prop].offset;
 };
-export const parsers = {
-    'sugar-css': {
-        parse,
-        // The name of the AST that
-        astFormat: 'sugar-css-ast',
-        hasPragma,
-        locStart: loc('start'),
-        locEnd: loc('end'),
-        preprocess,
-    },
+const parsers = {
+  "sugar-css": {
+    parse,
+    astFormat: "sugar-css-ast",
+    hasPragma,
+    locStart: loc("start"),
+    locEnd: loc("end"),
+    preprocess
+  }
 };
-function parse(text, parsers, options) { }
-function hasPragma(text) { }
-function preprocess(text, options) { }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJldHRpZXJQbHVnaW5Db2ZmZWVrcmFrZW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwcmV0dGllclBsdWdpbkNvZmZlZWtyYWtlbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsTUFBTSxTQUFTLEdBQUc7SUFDckI7UUFDSSxvQkFBb0I7UUFDcEIsSUFBSSxFQUFFLFVBQVU7UUFDaEIsd0NBQXdDO1FBQ3hDLGlGQUFpRjtRQUNqRixPQUFPLEVBQUUsQ0FBQyxXQUFXLENBQUM7S0FDekI7Q0FDSixDQUFDO0FBRUYsTUFBTSxHQUFHLEdBQUcsQ0FBQyxJQUFJLEVBQUUsRUFBRSxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7SUFDM0IsT0FBTyxJQUFJLENBQUMsR0FBRyxJQUFJLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLElBQUksSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQyxNQUFNLENBQUM7QUFDL0QsQ0FBQyxDQUFDO0FBRUYsTUFBTSxDQUFDLE1BQU0sT0FBTyxHQUFHO0lBQ25CLFdBQVcsRUFBRTtRQUNULEtBQUs7UUFDTCwyQkFBMkI7UUFDM0IsU0FBUyxFQUFFLGVBQWU7UUFDMUIsU0FBUztRQUNULFFBQVEsRUFBRSxHQUFHLENBQUMsT0FBTyxDQUFDO1FBQ3RCLE1BQU0sRUFBRSxHQUFHLENBQUMsS0FBSyxDQUFDO1FBQ2xCLFVBQVU7S0FDYjtDQUNKLENBQUM7QUFFRixTQUFTLEtBQUssQ0FBQyxJQUFZLEVBQUUsT0FBZSxFQUFFLE9BQWUsSUFBRyxDQUFDO0FBRWpFLFNBQVMsU0FBUyxDQUFDLElBQVksSUFBWSxDQUFDO0FBRTVDLFNBQVMsVUFBVSxDQUFDLElBQVksRUFBRSxPQUFlLElBQVcsQ0FBQyJ9
+function parse(text, parsers2, options) {
+}
+function hasPragma(text) {
+}
+function preprocess(text, options) {
+}
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  languages,
+  parsers
+});

@@ -1,90 +1,119 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name           shadow
- * @namespace      node.mixins.shadow
- * @type           PostcssMixin
- * @platform        css
- * @status        beta
- *
- * This mixin allows you to apply a linear gradient shadow to any HTMLElement.
- * Note that this mixin make use of the :before pseudo class.
- *
- * @return        {Css}           The generated css
- *
- * @example         postcss
- * .myCoolElement {
- *    @sugar.shadow.gradient(0, 10px, 10px, 0, sugar.color(accent), sugar.color(complementary));
- * }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginShadowGradientInterface extends __SInterface {
-    static get _definition() {
-        return {
-            x: {
-                type: 'Number|String',
-                required: true,
-                default: 0,
-            },
-            y: {
-                type: 'Number|String',
-                required: true,
-                default: 0,
-            },
-            blur: {
-                type: 'Number|String',
-                required: true,
-                default: 0,
-            },
-            spread: {
-                type: 'Number|String',
-                required: true,
-                default: 0,
-            },
-            startColor: {
-                type: 'String',
-                required: true,
-                default: 'sugar.color(accent)',
-            },
-            endColor: {
-                type: 'String',
-                required: true,
-                default: 'sugar.color(complementary)',
-            },
-            angle: {
-                type: 'String',
-                required: false,
-                default: '90deg',
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var gradient_exports = {};
+__export(gradient_exports, {
+  default: () => gradient_default,
+  interface: () => postcssSugarPluginShadowGradientInterface
+});
+module.exports = __toCommonJS(gradient_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginShadowGradientInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      x: {
+        type: "Number|String",
+        required: true,
+        default: 0
+      },
+      y: {
+        type: "Number|String",
+        required: true,
+        default: 0
+      },
+      blur: {
+        type: "Number|String",
+        required: true,
+        default: 0
+      },
+      spread: {
+        type: "Number|String",
+        required: true,
+        default: 0
+      },
+      startColor: {
+        type: "String",
+        required: true,
+        default: "sugar.color(accent)"
+      },
+      endColor: {
+        type: "String",
+        required: true,
+        default: "sugar.color(complementary)"
+      },
+      angle: {
+        type: "String",
+        required: false,
+        default: "90deg"
+      }
+    };
+  }
 }
-export { postcssSugarPluginShadowGradientInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ x: 0, y: 0, blur: 0, spread: 0, startColor: '', endColor: '', angle: '' }, params);
-    const vars = [];
-    // lnf
-    vars.push(`
+function gradient_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    x: 0,
+    y: 0,
+    blur: 0,
+    spread: 0,
+    startColor: "",
+    endColor: "",
+    angle: ""
+  }, params);
+  const vars = [];
+  vars.push(`
         &:before {
             z-index: 0;
             content: '';
             position: absolute;
-            top: calc(50% + ${typeof finalParams.y === 'number'
-        ? finalParams.y + 'px'
-        : finalParams.y});
-            left: calc(50% + ${typeof finalParams.x === 'number'
-        ? finalParams.x + 'px'
-        : finalParams.x});
+            top: calc(50% + ${typeof finalParams.y === "number" ? finalParams.y + "px" : finalParams.y});
+            left: calc(50% + ${typeof finalParams.x === "number" ? finalParams.x + "px" : finalParams.x});
             width: 100%; height: 100%;
             background: linear-gradient(${finalParams.angle}, ${finalParams.startColor}, ${finalParams.endColor});
             filter: blur(${finalParams.blur});
             transform: translate(-50%, -50%) scale(${finalParams.spread});
 
-            ${atRule.nodes.map((node) => node.toString()).join(';')}
+            ${atRule.nodes.map((node) => node.toString()).join(";")}
 
         }
     `);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ3JhZGllbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJncmFkaWVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUVILE1BQU0seUNBQTBDLFNBQVEsWUFBWTtJQUNoRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsQ0FBQyxFQUFFO2dCQUNDLElBQUksRUFBRSxlQUFlO2dCQUNyQixRQUFRLEVBQUUsSUFBSTtnQkFDZCxPQUFPLEVBQUUsQ0FBQzthQUNiO1lBQ0QsQ0FBQyxFQUFFO2dCQUNDLElBQUksRUFBRSxlQUFlO2dCQUNyQixRQUFRLEVBQUUsSUFBSTtnQkFDZCxPQUFPLEVBQUUsQ0FBQzthQUNiO1lBQ0QsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxlQUFlO2dCQUNyQixRQUFRLEVBQUUsSUFBSTtnQkFDZCxPQUFPLEVBQUUsQ0FBQzthQUNiO1lBQ0QsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxlQUFlO2dCQUNyQixRQUFRLEVBQUUsSUFBSTtnQkFDZCxPQUFPLEVBQUUsQ0FBQzthQUNiO1lBQ0QsVUFBVSxFQUFFO2dCQUNSLElBQUksRUFBRSxRQUFRO2dCQUNkLFFBQVEsRUFBRSxJQUFJO2dCQUNkLE9BQU8sRUFBRSxxQkFBcUI7YUFDakM7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7Z0JBQ2QsT0FBTyxFQUFFLDRCQUE0QjthQUN4QztZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsS0FBSztnQkFDZixPQUFPLEVBQUUsT0FBTzthQUNuQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFZRCxPQUFPLEVBQUUseUNBQXlDLElBQUksU0FBUyxFQUFFLENBQUM7QUFDbEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixDQUFDLEVBQUUsQ0FBQyxFQUNKLENBQUMsRUFBRSxDQUFDLEVBQ0osSUFBSSxFQUFFLENBQUMsRUFDUCxNQUFNLEVBQUUsQ0FBQyxFQUNULFVBQVUsRUFBRSxFQUFFLEVBQ2QsUUFBUSxFQUFFLEVBQUUsRUFDWixLQUFLLEVBQUUsRUFBRSxJQUNOLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE1BQU07SUFDTixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs4QkFNRSxPQUFPLFdBQVcsQ0FBQyxDQUFDLEtBQUssUUFBUTtRQUM3QixDQUFDLENBQUMsV0FBVyxDQUFDLENBQUMsR0FBRyxJQUFJO1FBQ3RCLENBQUMsQ0FBQyxXQUFXLENBQUMsQ0FDdEI7K0JBRUksT0FBTyxXQUFXLENBQUMsQ0FBQyxLQUFLLFFBQVE7UUFDN0IsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDLEdBQUcsSUFBSTtRQUN0QixDQUFDLENBQUMsV0FBVyxDQUFDLENBQ3RCOzswQ0FFOEIsV0FBVyxDQUFDLEtBQUssS0FDbkQsV0FBVyxDQUFDLFVBQ2hCLEtBQUssV0FBVyxDQUFDLFFBQVE7MkJBQ0YsV0FBVyxDQUFDLElBQUk7cURBQ1UsV0FBVyxDQUFDLE1BQU07O2NBRXpELE1BQU0sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUUsQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDOzs7S0FHOUQsQ0FBQyxDQUFDO0lBRUgsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

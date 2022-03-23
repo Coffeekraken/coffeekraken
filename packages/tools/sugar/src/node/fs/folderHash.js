@@ -1,34 +1,60 @@
-import __fs from 'fs';
-import __sha256 from '../../shared/crypt/sha256';
-import __isDirectory from '../is/directory';
-import __fileHash from './fileHash';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-export default function folderHash(folderPath, settings = {}) {
-    settings = __deepMerge({
-        recursive: true,
-        algo: 'sha256',
-        digest: 'base64',
-        include: {
-            ctime: false,
-        },
-    }, settings !== null && settings !== void 0 ? settings : {});
-    const paths = [];
-    function readDir(dir) {
-        const files = __fs.readdirSync(dir);
-        files.forEach((filePath) => {
-            if (settings.recursive && __isDirectory(`${dir}/${filePath}`)) {
-                return readDir(`${dir}/${filePath}`);
-            }
-            paths.push(`${dir}/${filePath}`);
-        });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var folderHash_exports = {};
+__export(folderHash_exports, {
+  default: () => folderHash
+});
+module.exports = __toCommonJS(folderHash_exports);
+var import_fs = __toESM(require("fs"), 1);
+var import_sha256 = __toESM(require("../../shared/crypt/sha256"), 1);
+var import_directory = __toESM(require("../is/directory"), 1);
+var import_fileHash = __toESM(require("./fileHash"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+function folderHash(folderPath, settings = {}) {
+  settings = (0, import_deepMerge.default)({
+    recursive: true,
+    algo: "sha256",
+    digest: "base64",
+    include: {
+      ctime: false
     }
-    readDir(folderPath);
-    const filesHashes = [];
-    paths.forEach((path) => {
-        if (__isDirectory(path))
-            return;
-        filesHashes.push(__fileHash(path, settings));
+  }, settings != null ? settings : {});
+  const paths = [];
+  function readDir(dir) {
+    const files = import_fs.default.readdirSync(dir);
+    files.forEach((filePath) => {
+      if (settings.recursive && (0, import_directory.default)(`${dir}/${filePath}`)) {
+        return readDir(`${dir}/${filePath}`);
+      }
+      paths.push(`${dir}/${filePath}`);
     });
-    return __sha256.encrypt(filesHashes.join('-'));
+  }
+  readDir(folderPath);
+  const filesHashes = [];
+  paths.forEach((path) => {
+    if ((0, import_directory.default)(path))
+      return;
+    filesHashes.push((0, import_fileHash.default)(path, settings));
+  });
+  return import_sha256.default.encrypt(filesHashes.join("-"));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9sZGVySGFzaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImZvbGRlckhhc2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0EsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBQ3RCLE9BQU8sUUFBUSxNQUFNLDJCQUEyQixDQUFDO0FBQ2pELE9BQU8sYUFBYSxNQUFNLGlCQUFpQixDQUFDO0FBQzVDLE9BQU8sVUFBVSxNQUFNLFlBQVksQ0FBQztBQUNwQyxPQUFPLFdBQVcsTUFBTSw2Q0FBNkMsQ0FBQztBQXlDdEUsTUFBTSxDQUFDLE9BQU8sVUFBVSxVQUFVLENBQzlCLFVBQWtCLEVBQ2xCLFdBQXlDLEVBQUU7SUFFM0MsUUFBUSxHQUFHLFdBQVcsQ0FDbEI7UUFDSSxTQUFTLEVBQUUsSUFBSTtRQUNmLElBQUksRUFBRSxRQUFRO1FBQ2QsTUFBTSxFQUFFLFFBQVE7UUFDaEIsT0FBTyxFQUFFO1lBQ0wsS0FBSyxFQUFFLEtBQUs7U0FDZjtLQUNKLEVBQ0QsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNqQixDQUFDO0lBQ0YsTUFBTSxLQUFLLEdBQWEsRUFBRSxDQUFDO0lBRTNCLFNBQVMsT0FBTyxDQUFDLEdBQUc7UUFDaEIsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUNwQyxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUMsUUFBUSxFQUFFLEVBQUU7WUFDdkIsSUFBSSxRQUFRLENBQUMsU0FBUyxJQUFJLGFBQWEsQ0FBQyxHQUFHLEdBQUcsSUFBSSxRQUFRLEVBQUUsQ0FBQyxFQUFFO2dCQUMzRCxPQUFPLE9BQU8sQ0FBQyxHQUFHLEdBQUcsSUFBSSxRQUFRLEVBQUUsQ0FBQyxDQUFDO2FBQ3hDO1lBQ0QsS0FBSyxDQUFDLElBQUksQ0FBQyxHQUFHLEdBQUcsSUFBSSxRQUFRLEVBQUUsQ0FBQyxDQUFDO1FBQ3JDLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVELE9BQU8sQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUVwQixNQUFNLFdBQVcsR0FBYSxFQUFFLENBQUM7SUFFakMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ25CLElBQUksYUFBYSxDQUFDLElBQUksQ0FBQztZQUFFLE9BQU87UUFDaEMsV0FBVyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxFQUFFLFFBQVEsQ0FBQyxDQUFDLENBQUM7SUFDakQsQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLFFBQVEsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDO0FBQ25ELENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

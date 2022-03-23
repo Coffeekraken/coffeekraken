@@ -1,31 +1,29 @@
-// @ts-nocheck
-import { v4 as __uuidv4 } from 'uuid';
-/**
- * @name          uniqid
- * @namespace            js.string
- * @type          Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.
- *
- * @return          {String}                A 8 bytes uniqid string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import uniqid from '@coffeekraken/sugar/js/string/uniqid';
- * console.log(uniqid()); // => 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed
- *
- * @see       https://www.npmjs.com/package/uuid
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var uniqid_exports = {};
+__export(uniqid_exports, {
+  default: () => uniqid_default
+});
+module.exports = __toCommonJS(uniqid_exports);
+var import_uuid = require("uuid");
 function uniqid() {
-    return __uuidv4();
+  return (0, import_uuid.v4)();
 }
-export default uniqid;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsRUFBRSxJQUFJLFFBQVEsRUFBRSxNQUFNLE1BQU0sQ0FBQztBQUN0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLE1BQU07SUFDWCxPQUFPLFFBQVEsRUFBRSxDQUFDO0FBQ3RCLENBQUM7QUFDRCxlQUFlLE1BQU0sQ0FBQyJ9
+var uniqid_default = uniqid;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

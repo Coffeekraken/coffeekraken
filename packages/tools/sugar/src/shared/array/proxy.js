@@ -1,143 +1,117 @@
-// @ts-nocheck
-import __uniqid from '../string/uniqid';
-/**
- * @name                  proxy
- * @namespace            js.array
- * @type                  Function
- * @platform          js
- * @platform          node
- * @status              wip
- *
- * This function override the passed array prototype to intercept changes made through
- *
- * @param         {Array}           array           The array to proxy
- * @return        {Array}                           The same array with his prototype proxied
- *
- * @example       js
- * import proxy from '@coffeekraken/sugar/js/array/proxy';
- * const myArray = proxy([1,2,3]);
- * myArray.watch(['push','pop'], (watchObj) => {
- *    // check the watchObj action
- *    switch (watchObj.action) {
- *      case 'push':
- *        // do something...
- *      break;
- *    }
- * });
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function proxy(array) {
-    if (array.__$proxied)
-        return array;
-    const watchStack = {};
-    // mark that this array has already been proxied
-    Object.defineProperty(array, '__$proxied', {
-        value: true,
-        enumerable: false,
-        writable: false,
-    });
-    function _proxyMethod(name, ...args) {
-        const handlersStack = [];
-        Object.keys(watchStack).forEach((watchId) => {
-            const watch = watchStack[watchId];
-            if (watch.methods.indexOf(name) === -1)
-                return;
-            handlersStack.push({
-                handlerFn: watch.handlerFn,
-                watchObj: {
-                    oldValue: [...array],
-                    action: `${name}`,
-                    fullAction: `Array.${name}`,
-                    args,
-                },
-            });
-        });
-        const returnValue = Array.prototype[name].call(array, ...args);
-        handlersStack.forEach((handlerObj) => {
-            handlerObj.watchObj = Object.assign(Object.assign({}, handlerObj.watchObj), { value: array, returnedValue: returnValue });
-            handlerObj.handlerFn(handlerObj.watchObj);
-        });
-        return returnValue;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    Object.getOwnPropertyNames(Array.prototype).forEach((methodName) => {
-        const unProxyMethods = ['length', 'constructor'];
-        if (unProxyMethods.indexOf(methodName) !== -1)
-            return;
-        Object.defineProperty(array, methodName, {
-            writable: false,
-            configurable: false,
-            enumerable: false,
-            value: (...args) => {
-                return _proxyMethod(methodName, ...args);
-            },
-        });
-    });
-    /**
-     * @name                    watch
-     * @type                    Function
-     *
-     * This method allows you to specify which Array methods you want to watch by passing an array of methods names like ['push','pop'].
-     * You can also specify the handler function that will be called on each array updates, etc...
-     *
-     * @param         {Array|String}          methods               The methods you want to watch
-     * @param         {Function}              handler               The function that will be called on each updates. This function will be called with an object as parameters. Here's the list of properties available:
-     * - method (null) {String}: The method name that causes the watch emit
-     * - args ([]) {Array}: An array of all the arguments passed to the method call
-     * - oldValue (null) {Array}: The array just before the method call
-     * - value (null) {Array}: The array after the method call
-     * - returnedValue (null) {Mixed}: This is the value that the method call has returned
-     * @return        {String}                                    Return a uniq watchid that you can use to unwatch this process
-     *
-     * @example         js
-     * const watchId = myProxiedArray.watch(['push', 'pop'], (watchObj) => {
-     *    // do something...
-     * });
-     *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    Object.defineProperty(array, 'watch', {
-        writable: false,
-        configurable: false,
-        enumerable: false,
-        value: (methods, handlerFn) => {
-            // create a watch id that we send back to the caller
-            const watchId = __uniqid();
-            // append this watch process
-            watchStack[watchId] = {
-                methods,
-                handlerFn,
-            };
-            // return the watchId to be able to unwatcn this watch process
-            return watchId;
-        },
-    });
-    /**
-     * @name                  unwatch
-     * @type                  Function
-     *
-     * This methods allows you to unwatch a process started with the "watch" method.
-     * You have to pass as parameter the watchId that the "watch" method has returned you.
-     *
-     * @param       {String}          watchId         The watchId returned by the "watch" method
-     *
-     * @example       js
-     * const watchId = myArray.watch('push', (obj) => //...);
-     * myArray.unwatch(watchId);
-     *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    Object.defineProperty(array, 'unwatch', {
-        writable: false,
-        configurable: false,
-        enumerable: false,
-        value: (watchId) => {
-            // delete the watch process
-            delete watchStack[watchId];
-        },
-    });
-    // return the processed array
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var proxy_exports = {};
+__export(proxy_exports, {
+  default: () => proxy_default
+});
+module.exports = __toCommonJS(proxy_exports);
+var import_uniqid = __toESM(require("../string/uniqid"), 1);
+function proxy(array) {
+  if (array.__$proxied)
     return array;
+  const watchStack = {};
+  Object.defineProperty(array, "__$proxied", {
+    value: true,
+    enumerable: false,
+    writable: false
+  });
+  function _proxyMethod(name, ...args) {
+    const handlersStack = [];
+    Object.keys(watchStack).forEach((watchId) => {
+      const watch = watchStack[watchId];
+      if (watch.methods.indexOf(name) === -1)
+        return;
+      handlersStack.push({
+        handlerFn: watch.handlerFn,
+        watchObj: {
+          oldValue: [...array],
+          action: `${name}`,
+          fullAction: `Array.${name}`,
+          args
+        }
+      });
+    });
+    const returnValue = Array.prototype[name].call(array, ...args);
+    handlersStack.forEach((handlerObj) => {
+      handlerObj.watchObj = __spreadProps(__spreadValues({}, handlerObj.watchObj), {
+        value: array,
+        returnedValue: returnValue
+      });
+      handlerObj.handlerFn(handlerObj.watchObj);
+    });
+    return returnValue;
+  }
+  Object.getOwnPropertyNames(Array.prototype).forEach((methodName) => {
+    const unProxyMethods = ["length", "constructor"];
+    if (unProxyMethods.indexOf(methodName) !== -1)
+      return;
+    Object.defineProperty(array, methodName, {
+      writable: false,
+      configurable: false,
+      enumerable: false,
+      value: (...args) => {
+        return _proxyMethod(methodName, ...args);
+      }
+    });
+  });
+  Object.defineProperty(array, "watch", {
+    writable: false,
+    configurable: false,
+    enumerable: false,
+    value: (methods, handlerFn) => {
+      const watchId = (0, import_uniqid.default)();
+      watchStack[watchId] = {
+        methods,
+        handlerFn
+      };
+      return watchId;
+    }
+  });
+  Object.defineProperty(array, "unwatch", {
+    writable: false,
+    configurable: false,
+    enumerable: false,
+    value: (watchId) => {
+      delete watchStack[watchId];
+    }
+  });
+  return array;
 }
-export default proxy;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJveHkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwcm94eS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxRQUFRLE1BQU0sa0JBQWtCLENBQUM7QUFFeEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxLQUFLLENBQUMsS0FBSztJQUNoQixJQUFJLEtBQUssQ0FBQyxVQUFVO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFFbkMsTUFBTSxVQUFVLEdBQUcsRUFBRSxDQUFDO0lBRXRCLGdEQUFnRDtJQUNoRCxNQUFNLENBQUMsY0FBYyxDQUFDLEtBQUssRUFBRSxZQUFZLEVBQUU7UUFDdkMsS0FBSyxFQUFFLElBQUk7UUFDWCxVQUFVLEVBQUUsS0FBSztRQUNqQixRQUFRLEVBQUUsS0FBSztLQUNsQixDQUFDLENBQUM7SUFFSCxTQUFTLFlBQVksQ0FBQyxJQUFJLEVBQUUsR0FBRyxJQUFJO1FBQy9CLE1BQU0sYUFBYSxHQUFHLEVBQUUsQ0FBQztRQUN6QixNQUFNLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFFO1lBQ3hDLE1BQU0sS0FBSyxHQUFHLFVBQVUsQ0FBQyxPQUFPLENBQUMsQ0FBQztZQUNsQyxJQUFJLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFBRSxPQUFPO1lBQy9DLGFBQWEsQ0FBQyxJQUFJLENBQUM7Z0JBQ2YsU0FBUyxFQUFFLEtBQUssQ0FBQyxTQUFTO2dCQUMxQixRQUFRLEVBQUU7b0JBQ04sUUFBUSxFQUFFLENBQUMsR0FBRyxLQUFLLENBQUM7b0JBQ3BCLE1BQU0sRUFBRSxHQUFHLElBQUksRUFBRTtvQkFDakIsVUFBVSxFQUFFLFNBQVMsSUFBSSxFQUFFO29CQUMzQixJQUFJO2lCQUNQO2FBQ0osQ0FBQyxDQUFDO1FBQ1AsQ0FBQyxDQUFDLENBQUM7UUFFSCxNQUFNLFdBQVcsR0FBRyxLQUFLLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsR0FBRyxJQUFJLENBQUMsQ0FBQztRQUUvRCxhQUFhLENBQUMsT0FBTyxDQUFDLENBQUMsVUFBVSxFQUFFLEVBQUU7WUFDakMsVUFBVSxDQUFDLFFBQVEsbUNBQ1osVUFBVSxDQUFDLFFBQVEsS0FDdEIsS0FBSyxFQUFFLEtBQUssRUFDWixhQUFhLEVBQUUsV0FBVyxHQUM3QixDQUFDO1lBQ0YsVUFBVSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDOUMsQ0FBQyxDQUFDLENBQUM7UUFFSCxPQUFPLFdBQVcsQ0FBQztJQUN2QixDQUFDO0lBRUQsTUFBTSxDQUFDLG1CQUFtQixDQUFDLEtBQUssQ0FBQyxTQUFTLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxVQUFVLEVBQUUsRUFBRTtRQUMvRCxNQUFNLGNBQWMsR0FBRyxDQUFDLFFBQVEsRUFBRSxhQUFhLENBQUMsQ0FBQztRQUNqRCxJQUFJLGNBQWMsQ0FBQyxPQUFPLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQUUsT0FBTztRQUN0RCxNQUFNLENBQUMsY0FBYyxDQUFDLEtBQUssRUFBRSxVQUFVLEVBQUU7WUFDckMsUUFBUSxFQUFFLEtBQUs7WUFDZixZQUFZLEVBQUUsS0FBSztZQUNuQixVQUFVLEVBQUUsS0FBSztZQUNqQixLQUFLLEVBQUUsQ0FBQyxHQUFHLElBQUksRUFBRSxFQUFFO2dCQUNmLE9BQU8sWUFBWSxDQUFDLFVBQVUsRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO1lBQzdDLENBQUM7U0FDSixDQUFDLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztJQUVIOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bc0JHO0lBQ0gsTUFBTSxDQUFDLGNBQWMsQ0FBQyxLQUFLLEVBQUUsT0FBTyxFQUFFO1FBQ2xDLFFBQVEsRUFBRSxLQUFLO1FBQ2YsWUFBWSxFQUFFLEtBQUs7UUFDbkIsVUFBVSxFQUFFLEtBQUs7UUFDakIsS0FBSyxFQUFFLENBQUMsT0FBTyxFQUFFLFNBQVMsRUFBRSxFQUFFO1lBQzFCLG9EQUFvRDtZQUNwRCxNQUFNLE9BQU8sR0FBRyxRQUFRLEVBQUUsQ0FBQztZQUMzQiw0QkFBNEI7WUFDNUIsVUFBVSxDQUFDLE9BQU8sQ0FBQyxHQUFHO2dCQUNsQixPQUFPO2dCQUNQLFNBQVM7YUFDWixDQUFDO1lBQ0YsOERBQThEO1lBQzlELE9BQU8sT0FBTyxDQUFDO1FBQ25CLENBQUM7S0FDSixDQUFDLENBQUM7SUFFSDs7Ozs7Ozs7Ozs7Ozs7T0FjRztJQUNILE1BQU0sQ0FBQyxjQUFjLENBQUMsS0FBSyxFQUFFLFNBQVMsRUFBRTtRQUNwQyxRQUFRLEVBQUUsS0FBSztRQUNmLFlBQVksRUFBRSxLQUFLO1FBQ25CLFVBQVUsRUFBRSxLQUFLO1FBQ2pCLEtBQUssRUFBRSxDQUFDLE9BQU8sRUFBRSxFQUFFO1lBQ2YsMkJBQTJCO1lBQzNCLE9BQU8sVUFBVSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQy9CLENBQUM7S0FDSixDQUFDLENBQUM7SUFFSCw2QkFBNkI7SUFDN0IsT0FBTyxLQUFLLENBQUM7QUFDakIsQ0FBQztBQUNELGVBQWUsS0FBSyxDQUFDIn0=
+var proxy_default = proxy;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

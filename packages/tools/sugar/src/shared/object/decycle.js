@@ -1,31 +1,29 @@
-import { decycle as __decycle } from 'json-cyclic';
-/**
- * @name          decycle
- * @namespace            js.object
- * @type          Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This method simply remove the circular references in the passed object
- *
- * @param     {Object}      obj         The object to process
- * @return    {Object}                  The new object circular references free
- *
- * @example     js
- * import decycle from '@coffeekraken/sugar/js/object/decycle';
- * decycle({
- *    something: 'cool',
- *    with: 'circular references',
- *    //..
- * });
- *
- * @see         https://www.npmjs.com/package/json-cyclic
- * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var decycle_exports = {};
+__export(decycle_exports, {
+  default: () => decycle_default
+});
+module.exports = __toCommonJS(decycle_exports);
+var import_json_cyclic = require("json-cyclic");
 function decycle(obj) {
-    return __decycle(obj);
+  return (0, import_json_cyclic.decycle)(obj);
 }
-export default decycle;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVjeWNsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRlY3ljbGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLE9BQU8sSUFBSSxTQUFTLEVBQUUsTUFBTSxhQUFhLENBQUM7QUFFbkQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsT0FBTyxDQUFDLEdBQUc7SUFDaEIsT0FBTyxTQUFTLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDMUIsQ0FBQztBQUNELGVBQWUsT0FBTyxDQUFDIn0=
+var decycle_default = decycle;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

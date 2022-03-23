@@ -1,35 +1,32 @@
-// @ts-nocheck
-/**
- * @name            wait
- * @namespace            js.time
- * @type            Function
- * @async
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function is a simple "setTimeout" wrapper inside a promise.
- *
- * @param         {Number}        timeout       The timeout to wait in ms
- * @return        {Promise}                     A simple promise resolved once the timeout is finished
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import wait from '@coffeekraken/sugar/js/time/wait';
- * await wait(2000);
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var wait_exports = {};
+__export(wait_exports, {
+  default: () => wait_default
+});
+module.exports = __toCommonJS(wait_exports);
 function wait(timeout = 0) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve();
-        }, timeout);
-    });
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, timeout);
+  });
 }
-export default wait;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2FpdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIndhaXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLElBQUksQ0FBQyxVQUFrQixDQUFDO0lBQzdCLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtRQUMzQixVQUFVLENBQUMsR0FBRyxFQUFFO1lBQ1osT0FBTyxFQUFFLENBQUM7UUFDZCxDQUFDLEVBQUUsT0FBTyxDQUFDLENBQUM7SUFDaEIsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBQ0QsZUFBZSxJQUFJLENBQUMifQ==
+var wait_default = wait;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

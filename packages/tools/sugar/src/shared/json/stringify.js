@@ -1,38 +1,32 @@
-// @ts-nocheck
-// import { decycle } from 'json-cyclic';
-import __stringify from 'fast-safe-stringify';
-/**
- * @name            stringify
- * @namespace            js.json
- * @type            Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function do the same as the ```JSON.stringify``` one but add some features.
- *
- * @feature       2.0.0         Remove circular dependencies by default
- *
- * @param         {Object}        obj       The object to stringify
- * @param         {Function}    [replacer=null]       A function that alters the behavior of the stringification process.
- * @param         {Number}      [space=null]      The number of spaces you want tp use
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import stringify from '@coffeekraken/sugar/js/json/stringify';
- * stringify({
- *    hello: 'world'
- * }); // => {"hello":"world"}
- *
- * @see         https://www.npmjs.com/package/fast-safe-stringify
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var stringify_exports = {};
+__export(stringify_exports, {
+  default: () => stringify_default
+});
+module.exports = __toCommonJS(stringify_exports);
+var import_fast_safe_stringify = __toESM(require("fast-safe-stringify"), 1);
 function stringify(obj, replacer = null, space = null) {
-    return __stringify(obj, replacer, space);
+  return (0, import_fast_safe_stringify.default)(obj, replacer, space);
 }
-export default stringify;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaW5naWZ5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3RyaW5naWZ5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFHZCx5Q0FBeUM7QUFDekMsT0FBTyxXQUFXLE1BQU0scUJBQXFCLENBQUM7QUFFOUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsR0FBRyxFQUFFLFFBQVEsR0FBRyxJQUFJLEVBQUUsS0FBSyxHQUFHLElBQUk7SUFDakQsT0FBTyxXQUFXLENBQUMsR0FBRyxFQUFFLFFBQVEsRUFBRSxLQUFLLENBQUMsQ0FBQztBQUM3QyxDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var stringify_default = stringify;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

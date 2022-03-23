@@ -1,169 +1,119 @@
-// @ts-nocheck
-import __chalk from 'chalk';
-import __deepMap from '../object/deepMap';
-import __isMap from '../is/map';
-import __isArray from '../is/array';
-import __isBoolean from '../is/boolean';
-import __isFunction from '../is/function';
-import __isJson from '../is/json';
-import __isObject from '../is/object';
-import __deepMerge from '../object/deepMerge';
-import __mapToObj from '../map/mapToObject';
-// import { highlight as __cliHighlight } from 'cli-highlight';
-import { decycle } from 'json-cyclic';
-// import __prettyFormat from 'pretty-format';
-// import __reactTestPlugin from 'pretty-format/build/plugins/ReactTestComponent';
-// import __reactElementPlugin from 'pretty-format/build/plugins/ReactElement';
-/**
- * @name        toString
- * @namespace            js.string
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Convert passed value to a string
- *
- * @param    {Mixed}    value    The value to convert to string
- * @param     {Object}      [settings={}]             An object of settings to configure your toString process:
- * - beautify (true) {Boolean}: Specify if you want to beautify the output like objects, arrays, etc...
- * - highlight (true) {Boolean}: Specify if you want to color highlight the output like objects, arrays, etc...
- * - theme ({}) {Object}: The theme to use to colorize the output. See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
- * @return    {String}    The resulting string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import toString from '@coffeekraken/sugar/js/string/toString'
- * toString({
- * 	id:'hello'
- * }) // '{"id":"hello"}'
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var toString_exports = {};
+__export(toString_exports, {
+  default: () => toString_default
+});
+module.exports = __toCommonJS(toString_exports);
+var import_chalk = __toESM(require("chalk"), 1);
+var import_deepMap = __toESM(require("../object/deepMap"), 1);
+var import_map = __toESM(require("../is/map"), 1);
+var import_array = __toESM(require("../is/array"), 1);
+var import_boolean = __toESM(require("../is/boolean"), 1);
+var import_function = __toESM(require("../is/function"), 1);
+var import_json = __toESM(require("../is/json"), 1);
+var import_object = __toESM(require("../is/object"), 1);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_mapToObject = __toESM(require("../map/mapToObject"), 1);
+var import_json_cyclic = require("json-cyclic");
 function fn(value, settings = {}) {
-    settings = __deepMerge({
-        beautify: true,
-        highlight: true,
-        verbose: true,
-        theme: {
-            number: __chalk.yellow,
-            default: __chalk.white,
-            keyword: __chalk.blue,
-            regexp: __chalk.red,
-            string: __chalk.whiteBright,
-            class: __chalk.yellow,
-            function: __chalk.yellow,
-            comment: __chalk.gray,
-            variable: __chalk.red,
-            attr: __chalk.green,
-        },
-    }, settings);
-    // string
-    if (typeof value === 'string')
-        return value;
-    // null
-    if (value === null)
-        return null;
-    // undefined
-    if (value === undefined)
-        return undefined;
-    // error
-    if (value instanceof Error) {
-        const errorStr = value.toString();
-        const stackStr = value.stack;
-        const messageStr = value.message;
-        // if (settings.beautify) {
-        //   if (__isNode()) {
-        //     const __packageRoot = require('../path/packageRootDir').default; // eslint-disable-line
-        //     stackStr = stackStr.replace(errorStr, '').trim();
-        //     stackStr = stackStr
-        //       .split(`${__packageRoot(process.cwd(), true)}/`)
-        //       .join('');
-        //     stackStr = `${stackStr
-        //       .split('\n')
-        //       .map((l) => {
-        //         l.match(/[a-zA-Z-0-9\-_\./]+/gm).forEach((str) => {
-        //           if (str.match(/\//) && str.match(/\.ts$/))
-        //             l = l.replace(str, `<blue>${str}</blue>`);
-        //           else if (str.match(/\//))
-        //             l = l.replace(str, `<cyan>${str}</cyan>`);
-        //         });
-        //         l = l.trim().replace(/^at\s/, '<yellow>at</yellow> ');
-        //         l = l.replace('->', '<yellow>└-></yellow>');
-        //         l = l.replace(/:([0-9]{1,29}:[0-9]{1,29})/, `:<yellow>$1</yellow>`);
-        //         return `<yellow>│</yellow> ${l.trim()}`;
-        //       })
-        //       .join('\n')}`;
-        //   }
-        // }
-        if (settings.verbose) {
-            return [
-                `<red>${value.constructor.name || 'Error'}</red>`,
-                '',
-                messageStr,
-                '',
-                stackStr,
-            ].join('\n');
-        }
-        return errorStr;
+  settings = (0, import_deepMerge.default)({
+    beautify: true,
+    highlight: true,
+    verbose: true,
+    theme: {
+      number: import_chalk.default.yellow,
+      default: import_chalk.default.white,
+      keyword: import_chalk.default.blue,
+      regexp: import_chalk.default.red,
+      string: import_chalk.default.whiteBright,
+      class: import_chalk.default.yellow,
+      function: import_chalk.default.yellow,
+      comment: import_chalk.default.gray,
+      variable: import_chalk.default.red,
+      attr: import_chalk.default.green
     }
-    // Map
-    if (__isMap(value)) {
-        value = __mapToObj(value);
+  }, settings);
+  if (typeof value === "string")
+    return value;
+  if (value === null)
+    return null;
+  if (value === void 0)
+    return void 0;
+  if (value instanceof Error) {
+    const errorStr = value.toString();
+    const stackStr = value.stack;
+    const messageStr = value.message;
+    if (settings.verbose) {
+      return [
+        `<red>${value.constructor.name || "Error"}</red>`,
+        "",
+        messageStr,
+        "",
+        stackStr
+      ].join("\n");
     }
-    // JSON
-    if (__isObject(value) || __isArray(value) || __isJson(value)) {
-        try {
-            value = decycle(value);
-        }
-        catch (e) { }
-        value = __deepMap(value, ({ value }) => {
-            if (value instanceof Map)
-                return __mapToObj(value);
-            return value;
-        });
-        let prettyString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
-        prettyString = prettyString
-            .replace(/"([^"]+)":/g, '$1:')
-            .replace(/\uFFFF/g, '\\"');
-        if (settings.highlight) {
-            // prettyString = __cliHighlight(prettyString, {
-            //   language: 'js',
-            //   theme: settings.theme
-            // });
-        }
-        return prettyString;
-    }
-    // boolean
-    if (__isBoolean(value)) {
-        if (value)
-            return 'true';
-        else
-            return 'false';
-    }
-    // function
-    if (__isFunction(value)) {
-        return '' + value;
-    }
-    // stringify
-    let returnString = '';
+    return errorStr;
+  }
+  if ((0, import_map.default)(value)) {
+    value = (0, import_mapToObject.default)(value);
+  }
+  if ((0, import_object.default)(value) || (0, import_array.default)(value) || (0, import_json.default)(value)) {
     try {
-        value = decycle(value);
-        returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
+      value = (0, import_json_cyclic.decycle)(value);
+    } catch (e) {
     }
-    catch (e) {
-        try {
-            returnString = value.toString();
-        }
-        catch (e) {
-            returnString = value;
-        }
+    value = (0, import_deepMap.default)(value, ({ value: value2 }) => {
+      if (value2 instanceof Map)
+        return (0, import_mapToObject.default)(value2);
+      return value2;
+    });
+    let prettyString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
+    prettyString = prettyString.replace(/"([^"]+)":/g, "$1:").replace(/\uFFFF/g, '\\"');
+    if (settings.highlight) {
     }
-    return returnString;
+    return prettyString;
+  }
+  if ((0, import_boolean.default)(value)) {
+    if (value)
+      return "true";
+    else
+      return "false";
+  }
+  if ((0, import_function.default)(value)) {
+    return "" + value;
+  }
+  let returnString = "";
+  try {
+    value = (0, import_json_cyclic.decycle)(value);
+    returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
+  } catch (e) {
+    try {
+      returnString = value.toString();
+    } catch (e2) {
+      returnString = value;
+    }
+  }
+  return returnString;
 }
-export default fn;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9TdHJpbmcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0b1N0cmluZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBR2QsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBQzVCLE9BQU8sU0FBUyxNQUFNLG1CQUFtQixDQUFDO0FBQzFDLE9BQU8sT0FBTyxNQUFNLFdBQVcsQ0FBQztBQUNoQyxPQUFPLFNBQVMsTUFBTSxhQUFhLENBQUM7QUFDcEMsT0FBTyxXQUFXLE1BQU0sZUFBZSxDQUFDO0FBQ3hDLE9BQU8sWUFBWSxNQUFNLGdCQUFnQixDQUFDO0FBQzFDLE9BQU8sUUFBUSxNQUFNLFlBQVksQ0FBQztBQUNsQyxPQUFPLFVBQVUsTUFBTSxjQUFjLENBQUM7QUFDdEMsT0FBTyxXQUFXLE1BQU0scUJBQXFCLENBQUM7QUFDOUMsT0FBTyxVQUFVLE1BQU0sb0JBQW9CLENBQUM7QUFDNUMsK0RBQStEO0FBQy9ELE9BQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxhQUFhLENBQUM7QUFFdEMsOENBQThDO0FBQzlDLGtGQUFrRjtBQUNsRiwrRUFBK0U7QUFFL0U7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsU0FBUyxFQUFFLENBQUMsS0FBSyxFQUFFLFFBQVEsR0FBRyxFQUFFO0lBQzVCLFFBQVEsR0FBRyxXQUFXLENBQ2xCO1FBQ0ksUUFBUSxFQUFFLElBQUk7UUFDZCxTQUFTLEVBQUUsSUFBSTtRQUNmLE9BQU8sRUFBRSxJQUFJO1FBQ2IsS0FBSyxFQUFFO1lBQ0gsTUFBTSxFQUFFLE9BQU8sQ0FBQyxNQUFNO1lBQ3RCLE9BQU8sRUFBRSxPQUFPLENBQUMsS0FBSztZQUN0QixPQUFPLEVBQUUsT0FBTyxDQUFDLElBQUk7WUFDckIsTUFBTSxFQUFFLE9BQU8sQ0FBQyxHQUFHO1lBQ25CLE1BQU0sRUFBRSxPQUFPLENBQUMsV0FBVztZQUMzQixLQUFLLEVBQUUsT0FBTyxDQUFDLE1BQU07WUFDckIsUUFB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
+var toString_default = fn;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

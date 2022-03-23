@@ -1,30 +1,32 @@
-// @ts-nocheck
-import __fs from 'fs-extra';
-/**
- * @name        ensureDir
- * @namespace            node.fs
- * @type          Function
- * @async
- * @platform        node
- * @status          beta
- *
- * Ensure that the passed directory exists. If not, will be created recursively... (async)
- *
- * @param       {String}              dir           The directory to ensure that it exists...
- * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
- *
- * @example       js
- * import ensureDir from '@coffeekraken/node/fs/ensureDir';
- * ensureDir('my/cool/dir').then(() => {
- *    // do something...
- * });
- *
- * @see             https://github.com/jprichardson/node-fs-extra
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var ensureDir_exports = {};
+__export(ensureDir_exports, {
+  default: () => ensureDir_default
+});
+module.exports = __toCommonJS(ensureDir_exports);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function ensureDir(dir) {
-    return __fs.ensureDir(dir);
+  return import_fs_extra.default.ensureDir(dir);
 }
-export default ensureDir;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlRGlyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW5zdXJlRGlyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLElBQUksTUFBTSxVQUFVLENBQUM7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxHQUFHO0lBQ2xCLE9BQU8sSUFBSSxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUMvQixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var ensureDir_default = ensureDir;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

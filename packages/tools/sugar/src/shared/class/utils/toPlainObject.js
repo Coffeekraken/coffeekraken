@@ -1,40 +1,33 @@
-// @ts-nocheck
-/**
- * @name                          toPlainObject
- * @namespace          shared.class.utils
- * @type                          Function
- * @platform          js
- * @platform          node
- * @status            beta
- *
- * This function take a instance as parameter and return a plain object of it
- *
- * @param               {Mixed}               instance                Any class instance to transform into a plain object
- * @return              {Object}                                      A plain object version of the the class instance
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import toPlainObject from '@coffeekraken/sugar/shared/class/utils/toPlainObject';
- * class Coco {
- *    constructor() {
- *      this.hello = 'world';
- *    }
- * }
- * toPlainObject(new Coco()); // => { hello: 'world' }
- *
- * @since       2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var toPlainObject_exports = {};
+__export(toPlainObject_exports, {
+  default: () => toPlainObject_default
+});
+module.exports = __toCommonJS(toPlainObject_exports);
 function toPlainObject(theClass) {
-    const originalClass = theClass || {};
-    const keys = Object.getOwnPropertyNames(originalClass);
-    return keys.reduce((classAsObj, key) => {
-        classAsObj[key] = originalClass[key];
-        return classAsObj;
-    }, {});
+  const originalClass = theClass || {};
+  const keys = Object.getOwnPropertyNames(originalClass);
+  return keys.reduce((classAsObj, key) => {
+    classAsObj[key] = originalClass[key];
+    return classAsObj;
+  }, {});
 }
-export default toPlainObject;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9QbGFpbk9iamVjdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRvUGxhaW5PYmplY3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJHO0FBQ0gsU0FBUyxhQUFhLENBQUMsUUFBUTtJQUMzQixNQUFNLGFBQWEsR0FBRyxRQUFRLElBQUksRUFBRSxDQUFDO0lBQ3JDLE1BQU0sSUFBSSxHQUFHLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQyxhQUFhLENBQUMsQ0FBQztJQUN2RCxPQUFPLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQyxVQUFVLEVBQUUsR0FBRyxFQUFFLEVBQUU7UUFDbkMsVUFBVSxDQUFDLEdBQUcsQ0FBQyxHQUFHLGFBQWEsQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUNyQyxPQUFPLFVBQVUsQ0FBQztJQUN0QixDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUM7QUFDWCxDQUFDO0FBQ0QsZUFBZSxhQUFhLENBQUMifQ==
+var toPlainObject_default = toPlainObject;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

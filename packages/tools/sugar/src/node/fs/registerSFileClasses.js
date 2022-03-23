@@ -1,35 +1,38 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var registerSFileClasses_exports = {};
+__export(registerSFileClasses_exports, {
+  default: () => registerSFileClasses_default
+});
+module.exports = __toCommonJS(registerSFileClasses_exports);
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var registerSFileClasses_default = () => {
+  const map = import_s_sugar_config.default.get("fs.sFileClassesMap");
+  Object.keys(map).forEach(async (key) => {
+    const { default: cls } = await Promise.resolve().then(() => __toESM(require(map[key])));
+    key.split(",").map((l) => l.trim()).forEach((pattern) => {
+      import_s_file.default.registerClass(pattern, cls);
     });
+  });
 };
-import __SFile from '@coffeekraken/s-file';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-/**
- * @name            registerSFileClasses
- * @namespace            node.fs
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * This function is responsivle to register the SFile classes with their proper
- * extensions.
- *
- * @since       2.0.0
- */
-export default () => {
-    const map = __SugarConfig.get('fs.sFileClassesMap');
-    Object.keys(map).forEach((key) => __awaiter(void 0, void 0, void 0, function* () {
-        const { default: cls } = yield import(map[key]);
-        key.split(',')
-            .map((l) => l.trim())
-            .forEach((pattern) => {
-            __SFile.registerClass(pattern, cls);
-        });
-    }));
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVnaXN0ZXJTRmlsZUNsYXNzZXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZWdpc3RlclNGaWxlQ2xhc3Nlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxPQUFPLE9BQU8sTUFBTSxzQkFBc0IsQ0FBQztBQUMzQyxPQUFPLGFBQWEsTUFBTSw4QkFBOEIsQ0FBQztBQUV6RDs7Ozs7Ozs7Ozs7R0FXRztBQUNILGVBQWUsR0FBRyxFQUFFO0lBQ2hCLE1BQU0sR0FBRyxHQUEyQixhQUFhLENBQUMsR0FBRyxDQUFDLG9CQUFvQixDQUFDLENBQUM7SUFDNUUsTUFBTSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBTyxHQUFHLEVBQUUsRUFBRTtRQUNuQyxNQUFNLEVBQUUsT0FBTyxFQUFFLEdBQUcsRUFBRSxHQUFHLE1BQU0sTUFBTSxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDO1FBQ2hELEdBQUcsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDO2FBQ1QsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUM7YUFDcEIsT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUU7WUFDakIsT0FBTyxDQUFDLGFBQWEsQ0FBQyxPQUFPLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFDeEMsQ0FBQyxDQUFDLENBQUM7SUFDWCxDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyxDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

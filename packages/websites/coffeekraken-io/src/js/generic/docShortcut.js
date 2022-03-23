@@ -1,14 +1,22 @@
-import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
-// search shortcut
-__hotkey('cmd+p').on('press', (e) => {
-    // prevent behavior
-    e.cancelBubble = true;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    // svcroll to top
-    // __scrollTo(document.body);
-    // focus in search input
-    // @ts-ignore
-    document.querySelector('#search-input > input').focus();
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_hotkey = __toESM(require("@coffeekraken/sugar/js/keyboard/hotkey"), 1);
+(0, import_hotkey.default)("cmd+p").on("press", (e) => {
+  e.cancelBubble = true;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  document.querySelector("#search-input > input").focus();
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jU2hvcnRjdXQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkb2NTaG9ydGN1dC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFFBQVEsTUFBTSx3Q0FBd0MsQ0FBQztBQUc5RCxrQkFBa0I7QUFDbEIsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEVBQUUsQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTtJQUNoQyxtQkFBbUI7SUFDbkIsQ0FBQyxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUM7SUFDdEIsQ0FBQyxDQUFDLGNBQWMsRUFBRSxDQUFDO0lBQ25CLENBQUMsQ0FBQyx3QkFBd0IsRUFBRSxDQUFDO0lBQzdCLGlCQUFpQjtJQUNqQiw2QkFBNkI7SUFDN0Isd0JBQXdCO0lBQ3hCLGFBQWE7SUFDYixRQUFRLENBQUMsYUFBYSxDQUFDLHVCQUF1QixDQUFDLENBQUMsS0FBSyxFQUFFLENBQUM7QUFDNUQsQ0FBQyxDQUFDLENBQUMifQ==

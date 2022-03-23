@@ -1,26 +1,65 @@
-// @ts-nocheck
-import hotkeys from 'hotkeys-js/dist/hotkeys.common';
-import __SPromise from '@coffeekraken/s-promise';
-hotkeys.filter = function () {
-    return true;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-function hotkey(hotkey, settings = {}) {
-    return new __SPromise(({ resolve, reject, emit, cancel }) => {
-        // merge default settings with passed ones:
-        settings = Object.assign({ element: null, keyup: false, keydown: true, once: false, splitKey: '+' }, settings);
-        // init the hotkey
-        hotkeys(hotkey, settings, (e, h) => {
-            // call the handler function
-            emit('press', e);
-            // unsubscribe if once is truc
-            if (settings.once)
-                cancel();
-        });
-    }, {
-        id: 'hotkey',
-    }).on('finally', () => {
-        hotkeys.unbind(hotkey);
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var hotkey_exports = {};
+__export(hotkey_exports, {
+  default: () => hotkey_default
+});
+module.exports = __toCommonJS(hotkey_exports);
+var import_hotkeys = __toESM(require("hotkeys-js/dist/hotkeys.common"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+import_hotkeys.default.filter = function() {
+  return true;
+};
+function hotkey(hotkey2, settings = {}) {
+  return new import_s_promise.default(({ resolve, reject, emit, cancel }) => {
+    settings = __spreadValues({
+      element: null,
+      keyup: false,
+      keydown: true,
+      once: false,
+      splitKey: "+"
+    }, settings);
+    (0, import_hotkeys.default)(hotkey2, settings, (e, h) => {
+      emit("press", e);
+      if (settings.once)
+        cancel();
     });
+  }, {
+    id: "hotkey"
+  }).on("finally", () => {
+    import_hotkeys.default.unbind(hotkey2);
+  });
 }
-export default hotkey;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaG90a2V5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaG90a2V5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLE9BQU8sTUFBTSxnQ0FBZ0MsQ0FBQztBQUNyRCxPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUNqRCxPQUFPLENBQUMsTUFBTSxHQUFHO0lBQ2IsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyxDQUFDO0FBcURGLFNBQVMsTUFBTSxDQUNYLE1BQWMsRUFDZCxXQUFxQyxFQUFFO0lBRXZDLE9BQU8sSUFBSSxVQUFVLENBQ2pCLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFO1FBQ2xDLDJDQUEyQztRQUMzQyxRQUFRLG1CQUNKLE9BQU8sRUFBRSxJQUFJLEVBQ2IsS0FBSyxFQUFFLEtBQUssRUFDWixPQUFPLEVBQUUsSUFBSSxFQUNiLElBQUksRUFBRSxLQUFLLEVBQ1gsUUFBUSxFQUFFLEdBQUcsSUFDVixRQUFRLENBQ2QsQ0FBQztRQUVGLGtCQUFrQjtRQUNsQixPQUFPLENBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUMvQiw0QkFBNEI7WUFDNUIsSUFBSSxDQUFDLE9BQU8sRUFBRSxDQUFDLENBQUMsQ0FBQztZQUNqQiw4QkFBOEI7WUFDOUIsSUFBSSxRQUFRLENBQUMsSUFBSTtnQkFBRSxNQUFNLEVBQUUsQ0FBQztRQUNoQyxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUMsRUFDRDtRQUNJLEVBQUUsRUFBRSxRQUFRO0tBQ2YsQ0FDSixDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUUsR0FBRyxFQUFFO1FBQ2pCLE9BQU8sQ0FBQyxNQUFNLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDM0IsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBQ0QsZUFBZSxNQUFNLENBQUMifQ==
+var hotkey_default = hotkey;

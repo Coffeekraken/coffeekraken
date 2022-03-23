@@ -1,56 +1,45 @@
-// @ts-nocheck
-import __deepMerge from '../object/deepMerge';
-import __stripCssComments from 'strip-css-comments';
-/**
- * @name          stripCssComments
- * @namespace            js.css
- * @type          Function
- * @platform          js
- * @platform          node
- * @status              beta
- *
- * This function simply remove all the css comments like:
- * - Multiline blocks css comments begining with /* *, ending with * /
- * - Single line comments begining with //
- *
- * @param       {String}        css         The css code to process
- * @param       {Object}      [settings={}]   An object of settings
- * @return      {String}                    The processed css code
- *
- * @setting     {Boolean}     [block=true]       Remove the blocks comments
- * @setting     {Boolean}     [line=true]       Remove the line comments
- *
- * @todo        tests
- * @todo        interface
- * @todo        doc
- *
- * @example       js
- * import stripCssComments from '@coffeekraken/sugar/js/css/stripCssComments';
- * stripCssComments(`
- * // something cool
- * body { background-color: red; }
- * `);
- * // body { background-color: red }
- *
- * @see         https://www.npmjs.com/package/strip-css-comments
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var stripCssComments_exports = {};
+__export(stripCssComments_exports, {
+  default: () => stripCssComments_default
+});
+module.exports = __toCommonJS(stripCssComments_exports);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_strip_css_comments = __toESM(require("strip-css-comments"), 1);
 function stripCssComments(css, settings = {}) {
-    settings = __deepMerge({
-        block: true,
-        line: true,
-    }, settings);
-    if (settings.block) {
-        // css = css.replace(/\/\*{2}([\s\S]+?)\*\//g, '');
-        css = __stripCssComments(css, {
-            preserve: false,
-        });
-    }
-    if (settings.line) {
-        css = css.replace(/^[\s]{0,99999999}\/\/.*$/gm, '');
-    }
-    return css;
+  settings = (0, import_deepMerge.default)({
+    block: true,
+    line: true
+  }, settings);
+  if (settings.block) {
+    css = (0, import_strip_css_comments.default)(css, {
+      preserve: false
+    });
+  }
+  if (settings.line) {
+    css = css.replace(/^[\s]{0,99999999}\/\/.*$/gm, "");
+  }
+  return css;
 }
-export default stripCssComments;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaXBDc3NDb21tZW50cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0cmlwQ3NzQ29tbWVudHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sV0FBVyxNQUFNLHFCQUFxQixDQUFDO0FBQzlDLE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFFcEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUFTLGdCQUFnQixDQUFDLEdBQUcsRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUN4QyxRQUFRLEdBQUcsV0FBVyxDQUNsQjtRQUNJLEtBQUssRUFBRSxJQUFJO1FBQ1gsSUFBSSxFQUFFLElBQUk7S0FDYixFQUNELFFBQVEsQ0FDWCxDQUFDO0lBQ0YsSUFBSSxRQUFRLENBQUMsS0FBSyxFQUFFO1FBQ2hCLG1EQUFtRDtRQUNuRCxHQUFHLEdBQUcsa0JBQWtCLENBQUMsR0FBRyxFQUFFO1lBQzFCLFFBQVEsRUFBRSxLQUFLO1NBQ2xCLENBQUMsQ0FBQztLQUNOO0lBQ0QsSUFBSSxRQUFRLENBQUMsSUFBSSxFQUFFO1FBQ2YsR0FBRyxHQUFHLEdBQUcsQ0FBQyxPQUFPLENBQUMsNEJBQTRCLEVBQUUsRUFBRSxDQUFDLENBQUM7S0FDdkQ7SUFDRCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUM7QUFDRCxlQUFlLGdCQUFnQixDQUFDIn0=
+var stripCssComments_default = stripCssComments;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

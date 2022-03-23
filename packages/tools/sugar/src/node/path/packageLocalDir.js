@@ -1,32 +1,33 @@
-// @ts-nocheck
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __fs from 'fs-extra';
-/**
- * @name                            packageLocalDir
- * @namespace            node.fs
- * @type                            Function
- * @platform        node
- * @status          beta
- *
- * Return the .local directory path
- *
- * @return                {String}                      The path to the .local package directory path
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import packageLocalDir from '@coffeekraken/node/path/packageLocalDir';
- * packageLocalDir(); // => '/my/cool/path/.local'
- *
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-const fn = function () {
-    const path = __SSugarConfig.get('storage.package.localDir');
-    __fs.ensureDirSync(path);
-    return path;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-export default fn;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZUxvY2FsRGlyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFja2FnZUxvY2FsRGlyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUMxRCxPQUFPLElBQUksTUFBTSxVQUFVLENBQUM7QUFDNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILE1BQU0sRUFBRSxHQUFxQjtJQUN6QixNQUFNLElBQUksR0FBRyxjQUFjLENBQUMsR0FBRyxDQUFDLDBCQUEwQixDQUFDLENBQUM7SUFDNUQsSUFBSSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUN6QixPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDLENBQUM7QUFDRixlQUFlLEVBQUUsQ0FBQyJ9
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var packageLocalDir_exports = {};
+__export(packageLocalDir_exports, {
+  default: () => packageLocalDir_default
+});
+module.exports = __toCommonJS(packageLocalDir_exports);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+const fn = function() {
+  const path = import_s_sugar_config.default.get("storage.package.localDir");
+  return path;
+};
+var packageLocalDir_default = fn;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

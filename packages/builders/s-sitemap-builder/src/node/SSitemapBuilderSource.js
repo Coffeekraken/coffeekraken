@@ -1,54 +1,46 @@
-import __SClass from '@coffeekraken/s-class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-export default class SSitemapSource extends __SClass {
-    /**
-     * @name            sitemapSourceSettings
-     * @type            ISSitemapSourceSettings
-     * @get
-     *
-     * Access the sitemap source settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get sitemapSourceSettings() {
-        var _a;
-        return (_a = this._settings.sitemapSource) !== null && _a !== void 0 ? _a : {};
-    }
-    /**
-     * @name            constructor
-     * @type            Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    constructor(id, settings) {
-        super(__deepMerge({
-            metas: {
-                id,
-            },
-            sitemapSource: {},
-        }, settings !== null && settings !== void 0 ? settings : {}));
-    }
-    /**
-     * @name            build
-     * @type            Function
-     * @async
-     *
-     * This method MUST be implemented in your child class to build your particular sitemap.
-     * Is has to return a Promise and resolve it with an ISSitemapSourceBuildResult object type
-     *
-     * @param           {ISSitemapBuilderBuildParams}          [params={}]         Some params passed to the build method
-     * @return          {Promise<ISSitemapSourceBuildResult>}               A promise resolved when the sitemap has been successfully generated
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    build(params = {}) {
-        throw new Error(`This "<yellow>build</yellow>" method must be overrided by your SitemapSource class implementation...`);
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SSitemapBuilderSource_exports = {};
+__export(SSitemapBuilderSource_exports, {
+  default: () => SSitemapSource
+});
+module.exports = __toCommonJS(SSitemapBuilderSource_exports);
+var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+class SSitemapSource extends import_s_class.default {
+  get sitemapSourceSettings() {
+    var _a;
+    return (_a = this._settings.sitemapSource) != null ? _a : {};
+  }
+  constructor(id, settings) {
+    super((0, import_deepMerge.default)({
+      metas: {
+        id
+      },
+      sitemapSource: {}
+    }, settings != null ? settings : {}));
+  }
+  build(params = {}) {
+    throw new Error(`This "<yellow>build</yellow>" method must be overrided by your SitemapSource class implementation...`);
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1NpdGVtYXBCdWlsZGVyU291cmNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1NpdGVtYXBCdWlsZGVyU291cmNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBNEJ0RSxNQUFNLENBQUMsT0FBTyxPQUFPLGNBQWUsU0FBUSxRQUFRO0lBQ2hEOzs7Ozs7Ozs7T0FTRztJQUNILElBQUkscUJBQXFCOztRQUNyQixPQUFPLE1BQU0sSUFBSSxDQUFDLFNBQVUsQ0FBQyxhQUFhLG1DQUFJLEVBQUUsQ0FBQztJQUNyRCxDQUFDO0lBRUQ7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxFQUFVLEVBQUUsUUFBK0M7UUFDbkUsS0FBSyxDQUNELFdBQVcsQ0FDUDtZQUNJLEtBQUssRUFBRTtnQkFDSCxFQUFFO2FBQ0w7WUFDRCxhQUFhLEVBQUUsRUFBRTtTQUNwQixFQUNELFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FDakIsQ0FDSixDQUFDO0lBQ04sQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7O09BYUc7SUFDSCxLQUFLLENBQ0QsU0FBK0MsRUFBRTtRQUVqRCxNQUFNLElBQUksS0FBSyxDQUNYLHNHQUFzRyxDQUN6RyxDQUFDO0lBQ04sQ0FBQztDQUNKIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,31 +1,32 @@
-// @ts-nocheck
-import __packageRootDir from '../path/packageRootDir';
-/**
- * @name          rootPath
- * @namespace            node.package
- * @type          Function
- * @platform        node
- * @status          beta
- *
- * This function return the absolute path of your current working package
- *
- * @param           {String}              [from=process.cwd()]    Specify from where the research has to be done
- * @param           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
- * @return    {String}          The current working package root path
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example     js
- * import json from '@coffeekraken/sugar/node/package/rootPath';
- * rootPath(); => // /something/cool/myCoolPackage'
- *
- * @since       2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var rootPath_exports = {};
+__export(rootPath_exports, {
+  default: () => rootPath_default
+});
+module.exports = __toCommonJS(rootPath_exports);
+var import_packageRootDir = __toESM(require("../path/packageRootDir"), 1);
 function rootPath(from = process.cwd(), highest = false) {
-    return __packageRootDir(from, highest);
+  return (0, import_packageRootDir.default)(from, highest);
 }
-export default rootPath;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm9vdFBhdGguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyb290UGF0aC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxnQkFBZ0IsTUFBTSx3QkFBd0IsQ0FBQztBQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLFFBQVEsQ0FBQyxJQUFJLEdBQUcsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUFFLE9BQU8sR0FBRyxLQUFLO0lBQ25ELE9BQU8sZ0JBQWdCLENBQUMsSUFBSSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0FBQzNDLENBQUM7QUFDRCxlQUFlLFFBQVEsQ0FBQyJ9
+var rootPath_default = rootPath;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

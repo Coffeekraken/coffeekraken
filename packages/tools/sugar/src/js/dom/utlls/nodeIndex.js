@@ -1,37 +1,30 @@
-// @ts-nocheck
-/**
- * @name      nodeIndex
- * @namespace            js.dom.utils
- * @type      Function
- * @platform          js
- * @status      beta
- *
- * Return the inde of the passed node inside the html
- *
- * @param    {HTMLElement}    node    The node to get the index for
- * @return    {Integer}    The index of the node inside the html
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import nodeIndex from '@coffeekraken/sugar/js/dom/nodeIndex'
- * // assuming:
- * // <li>item #1</li>
- * // <li class="match">item #2</li>
- * // <li>item #3</li>
- * nodeIndex(document.querySelector('.match')) // 1
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var nodeIndex_exports = {};
+__export(nodeIndex_exports, {
+  default: () => nodeIndex_default
+});
+module.exports = __toCommonJS(nodeIndex_exports);
 function nodeIndex(node) {
-    let index = 0;
-    while ((node = node.previousElementSibling)) {
-        index++;
-    }
-    return index;
+  let index = 0;
+  while (node = node.previousElementSibling) {
+    index++;
+  }
+  return index;
 }
-export default nodeIndex;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibm9kZUluZGV4LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibm9kZUluZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxJQUFpQjtJQUNoQyxJQUFJLEtBQUssR0FBRyxDQUFDLENBQUM7SUFDZCxPQUFPLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxzQkFBc0IsQ0FBQyxFQUFFO1FBQ3pDLEtBQUssRUFBRSxDQUFDO0tBQ1g7SUFDRCxPQUFPLEtBQUssQ0FBQztBQUNqQixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var nodeIndex_default = nodeIndex;

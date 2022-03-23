@@ -1,64 +1,90 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name          badge
- * @namespace     node.mixins.ui.badge
- * @type          PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin allows you to generate the "badge" UI component css.
- *
- * @param       {'default'|'square'|'rounded'}          [shape='default']       The shape you want your avatar to have
- * @param       {'solid'|'outline'}                           [style='solid']         The style you want your badge to have
- * @param       {('bare'|'lnf'|'shape'|'interactive')[]}        [scope=['bare','lnf','shape']]      The scope you want to generate
- * @return      {Css}                   The corresponding css
- *
- * @example       css
- * .my-element {
- *      \@sugar.ui.badge();
- * }
- *
- * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginUiBadgeInterface extends __SInterface {
-    static get _definition() {
-        return {
-            style: {
-                type: 'String',
-                values: ['solid', 'outline'],
-                default: 'solid',
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: 'default',
-            },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var badge_exports = {};
+__export(badge_exports, {
+  default: () => badge_default,
+  interface: () => postcssSugarPluginUiBadgeInterface
+});
+module.exports = __toCommonJS(badge_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginUiBadgeInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      style: {
+        type: "String",
+        values: ["solid", "outline"],
+        default: "solid"
+      },
+      shape: {
+        type: "String",
+        values: ["default", "square", "pill"],
+        default: "default"
+      },
+      scope: {
+        type: {
+          type: "Array<String>",
+          splitChars: [",", " "]
+        },
+        values: ["bare", "lnf", "shape"],
+        default: ["bare", "lnf", "shape"]
+      }
+    };
+  }
 }
-export { postcssSugarPluginUiBadgeInterface as interface };
-export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
-    const finalParams = Object.assign({ style: 'solid', shape: 'default', scope: ['bare', 'lnf', 'shape'] }, params);
-    finalParams.scope = applyNoScopes(finalParams.scope);
-    const vars = [];
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`   
+function badge_default({
+  params,
+  atRule,
+  applyNoScopes,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    style: "solid",
+    shape: "default",
+    scope: ["bare", "lnf", "shape"]
+  }, params);
+  finalParams.scope = applyNoScopes(finalParams.scope);
+  const vars = [];
+  if (finalParams.scope.indexOf("bare") !== -1) {
+    vars.push(`   
         display: inline-block;
         white-space: nowrap;
         user-select: none;
     `);
-    }
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+  }
+  if (finalParams.scope.indexOf("lnf") !== -1) {
+    vars.push(`
             font-size: sugar.scalable(0.75em);
             padding-inline: sugar.theme(ui.badge.paddingInline);
             padding-block: sugar.theme(ui.badge.paddingBlock);
@@ -69,9 +95,9 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
             }
 
         `);
-        switch (finalParams.style) {
-            case 'outline':
-                vars.push(`
+    switch (finalParams.style) {
+      case "outline":
+        vars.push(`
                 position: relative;
                 color: sugar.color(current);
                 background: none !important;
@@ -87,45 +113,48 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                     pointer-events: none;
                 }
             `);
-                break;
-            case 'solid':
-            default:
-                vars.push(`
+        break;
+      case "solid":
+      default:
+        vars.push(`
                      color: sugar.color(current, foreground);
                      background-color: sugar.color(current);
                 `);
-                break;
-        }
+        break;
     }
-    if (finalParams.scope.indexOf('shape') !== -1) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
+  }
+  if (finalParams.scope.indexOf("shape") !== -1) {
+    switch (finalParams.shape) {
+      case "square":
+        vars.push(`
                     border-radius: 0;
                     &:after {
                         border-radius: 0;
                     }
             `);
-                break;
-            case 'pill':
-                vars.push(`
+        break;
+      case "pill":
+        vars.push(`
                     border-radius: 999999px;
                     &:after {
                         border-radius: 999999px;
                     }
                 `);
-                break;
-            case 'default':
-            default:
-                vars.push(`
+        break;
+      case "default":
+      default:
+        vars.push(`
                     border-radius: 0.5em;
                     &:after {
                         border-radius: 0.5em;
                     }
                 `);
-                break;
-        }
+        break;
     }
-    return vars;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFkZ2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJiYWRnZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUdyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSxrQ0FBbUMsU0FBUSxZQUFZO0lBQ3pELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFNBQVMsQ0FBQztnQkFDNUIsT0FBTyxFQUFFLE9BQU87YUFDbkI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsU0FBUyxFQUFFLFFBQVEsRUFBRSxNQUFNLENBQUM7Z0JBQ3JDLE9BQU8sRUFBRSxTQUFTO2FBQ3JCO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLENBQUM7Z0JBQ2hDLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxDQUFDO2FBQ3BDO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQVFELE9BQU8sRUFBRSxrQ0FBa0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUMzRCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sYUFBYSxFQUNiLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsT0FBTyxFQUNkLEtBQUssRUFBRSxTQUFTLEVBQ2hCLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxDQUFDLElBQzVCLE1BQU0sQ0FDWixDQUFDO0lBQ0YsV0FBVyxDQUFDLEtBQUssR0FBRyxhQUFhLENBQUMsV0FBVyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBRXJELE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7S0FJYixDQUFDLENBQUM7S0FDRjtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7OztTQVVULENBQUMsQ0FBQztRQUVILFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN2QixLQUFLLFNBQVM7Z0JBQ1YsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O2FBZWIsQ0FBQyxDQUFDO2dCQUNILE1BQU07WUFDTixLQUFLLE9BQU8sQ0FBQztZQUNiO2dCQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7OztpQkFHVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtTQUNiO0tBQ0o7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzNDLFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN2QixLQUFLLFFBQVE7Z0JBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7YUFLYixDQUFDLENBQUM7Z0JBQ0MsTUFBTTtZQUNWLEtBQUssTUFBTTtnQkFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztpQkFLVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtZQUNWLEtBQUssU0FBUyxDQUFDO1lBQ2Y7Z0JBQ0ksSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7aUJBS1QsQ0FBQyxDQUFDO2dCQUNILE1BQU07U0FDYjtLQUNKO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

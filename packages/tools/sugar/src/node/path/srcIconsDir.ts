@@ -38,7 +38,7 @@ export default function (settings: ISrcIconsDirSettings = {}) {
     };
     const srcIconsDir = __SSugarConfig.get('storage.src.iconsDir');
     if (srcIconsDir !== undefined) {
-        __fs.ensureDirSync(srcIconsDir);
+        // __fs.ensureDirSync(srcIconsDir);
         return srcIconsDir;
     }
     return undefined;

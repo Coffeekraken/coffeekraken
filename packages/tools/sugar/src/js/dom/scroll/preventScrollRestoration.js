@@ -1,23 +1,27 @@
-/**
- * @name      preventScrollRestoration
- * @namespace            js.dom.scroll
- * @type      Function
- * @platform          js
- * @status          stable
- *
- * Function that set the `history.scrollRestoration` property to `manual`
- *
- * @example 	js
- * import __preventScrolLRestoration from '@coffeekraken/sugar/js/dom/scroll/preventScrollRestoration'
- * __preventScrollRestoration();
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function () {
-    if ('scrollRestoration' in history) {
-        // Back off, browser, I got this...
-        history.scrollRestoration = 'manual';
-    }
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var preventScrollRestoration_exports = {};
+__export(preventScrollRestoration_exports, {
+  default: () => preventScrollRestoration_default
+});
+module.exports = __toCommonJS(preventScrollRestoration_exports);
+function preventScrollRestoration_default() {
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJldmVudFNjcm9sbFJlc3RvcmF0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicHJldmVudFNjcm9sbFJlc3RvcmF0aW9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILE1BQU0sQ0FBQyxPQUFPO0lBQ1YsSUFBSSxtQkFBbUIsSUFBSSxPQUFPLEVBQUU7UUFDbEMsbUNBQW1DO1FBQ25DLE9BQU8sQ0FBQyxpQkFBaUIsR0FBRyxRQUFRLENBQUM7S0FDdEM7QUFDTCxDQUFDIn0=

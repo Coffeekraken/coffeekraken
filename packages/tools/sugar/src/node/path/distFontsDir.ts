@@ -38,7 +38,7 @@ export default function (settings: IDistFontsDirSettings = {}) {
     };
     const distFontsDir = __SSugarConfig.get('storage.dist.fontsDir');
     if (distFontsDir !== undefined) {
-        __fs.ensureDirSync(distFontsDir);
+        // __fs.ensureDirSync(distFontsDir);
         return distFontsDir;
     }
     return undefined;

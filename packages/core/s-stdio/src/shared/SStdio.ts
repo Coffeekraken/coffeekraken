@@ -1,10 +1,11 @@
 import __SClass, { ISClass } from '@coffeekraken/s-class';
 import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
+import __SLog, { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { ISPromise } from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
+import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
@@ -194,12 +195,13 @@ export default class SStdio extends __SClass implements ISStdio {
             this.registeredComponents[this.name] = {};
 
         // save the component inside the stack
-        this.registeredComponents[this.name][as || component.id || 'default'] =
-            {
-                component,
-                settings: settings || {},
-                as,
-            };
+        this.registeredComponents[this.name][
+            as || component.id || 'default'
+        ] = {
+            component,
+            settings: settings || {},
+            as,
+        };
     }
 
     /**
@@ -318,7 +320,7 @@ export default class SStdio extends __SClass implements ISStdio {
         super(
             __deepMerge(
                 {
-                    stdio: __SStdioSettingsInterface.defaults()
+                    stdio: __SStdioSettingsInterface.defaults(),
                 },
                 settings,
             ),
@@ -518,22 +520,32 @@ export default class SStdio extends __SClass implements ISStdio {
                 this.constructor.name
             ][logType];
             if (!componentObj) {
-                // @ts-ignore
-                this._log({
-                    type: 'default',
-                    metas: {},
-                    group: this.constructor.name,
-                    value: `The requested "<yellow>${
-                        log.type || 'default'
-                    }</yellow>" component in the "<cyan>${
-                        this.constructor.name
-                    }</cyan>" stdio class does not exists...`
-                }, {
-                    id: 'default',
-                    render(logObj) {
-                        return `⚠️  ${logObj.value}`;
-                    }
-                });
+                if (
+                    __SLog.isTypeEnabled([
+                        __SLog.TYPE_VERBOSE,
+                        __SLog.TYPE_VERBOSER,
+                    ])
+                ) {
+                    // @ts-ignore
+                    this._log(
+                        {
+                            type: __SLog.TYPE_VERBOSE,
+                            metas: {},
+                            group: this.constructor.name,
+                            value: `The requested "<yellow>${
+                                log.type || 'default'
+                            }</yellow>" component in the "<cyan>${
+                                this.constructor.name
+                            }</cyan>" stdio class does not exists...`,
+                        },
+                        {
+                            id: 'default',
+                            render(logObj) {
+                                return `⚠️  ${logObj.value}`;
+                            },
+                        },
+                    );
+                }
                 componentObj = (<any>this).constructor.registeredComponents[
                     this.constructor.name
                 ].default;

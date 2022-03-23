@@ -39,7 +39,7 @@ export default function (settings: IDistIconsDirSettings = {}) {
     };
     const distIconsDir = __SSugarConfig.get('storage.dist.iconsDir');
     if (distIconsDir !== undefined) {
-        __fs.ensureDirSync(distIconsDir);
+        // __fs.ensureDirSync(distIconsDir);
         return distIconsDir;
     }
     return undefined;

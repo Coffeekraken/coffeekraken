@@ -1,30 +1,35 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-import __SViewRenderer from '../SViewRenderer';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-describe('s-view.blade', () => {
-    it('Should compile the passed blade view correctly', () => __awaiter(void 0, void 0, void 0, function* () {
-        yield __SSugarConfig.load();
-        const view = new __SViewRenderer('default', {
-            viewRenderer: {
-                rootDirs: [`${__dirname}/views`],
-            },
-        });
-        const res = yield view.render({});
-        expect(res.value).not.toBeUndefined();
-        expect(res.value.includes('<title>Smoth</title>')).toBe(true);
-        expect(res.view).not.toBeUndefined();
-        expect(res.startTime).not.toBeUndefined();
-        expect(res.endTime).not.toBeUndefined();
-        expect(res.duration).not.toBeUndefined();
-        expect(res.formatedDuration).not.toBeUndefined();
-    }));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_SViewRenderer = __toESM(require("../SViewRenderer"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+describe("s-view.blade", () => {
+  it("Should compile the passed blade view correctly", async () => {
+    await import_s_sugar_config.default.load();
+    const view = new import_SViewRenderer.default("default", {
+      viewRenderer: {
+        rootDirs: [`${__dirname}/views`]
+      }
+    });
+    const res = await view.render({});
+    expect(res.value).not.toBeUndefined();
+    expect(res.value.includes("<title>Smoth</title>")).toBe(true);
+    expect(res.view).not.toBeUndefined();
+    expect(res.startTime).not.toBeUndefined();
+    expect(res.endTime).not.toBeUndefined();
+    expect(res.duration).not.toBeUndefined();
+    expect(res.formatedDuration).not.toBeUndefined();
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmxhZGUudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJsYWRlLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxlQUFlLE1BQU0sa0JBQWtCLENBQUM7QUFDL0MsT0FBTyxjQUFjLE1BQU0sOEJBQThCLENBQUM7QUFFMUQsUUFBUSxDQUFDLGNBQWMsRUFBRSxHQUFHLEVBQUU7SUFDMUIsRUFBRSxDQUFDLGdEQUFnRCxFQUFFLEdBQVMsRUFBRTtRQUM1RCxNQUFNLGNBQWMsQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUU1QixNQUFNLElBQUksR0FBRyxJQUFJLGVBQWUsQ0FBQyxTQUFTLEVBQUU7WUFDeEMsWUFBWSxFQUFFO2dCQUNWLFFBQVEsRUFBRSxDQUFDLEdBQUcsU0FBUyxRQUFRLENBQUM7YUFDbkM7U0FDSixDQUFDLENBQUM7UUFFSCxNQUFNLEdBQUcsR0FBRyxNQUFNLElBQUksQ0FBQyxNQUFNLENBQUMsRUFBRSxDQUFDLENBQUM7UUFFbEMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQyxHQUFHLENBQUMsYUFBYSxFQUFFLENBQUM7UUFDdEMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLHNCQUFzQixDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDOUQsTUFBTSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQyxHQUFHLENBQUMsYUFBYSxFQUFFLENBQUM7UUFDckMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsQ0FBQyxHQUFHLENBQUMsYUFBYSxFQUFFLENBQUM7UUFDMUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQyxHQUFHLENBQUMsYUFBYSxFQUFFLENBQUM7UUFDeEMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxRQUFRLENBQUMsQ0FBQyxHQUFHLENBQUMsYUFBYSxFQUFFLENBQUM7UUFDekMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxhQUFhLEVBQUUsQ0FBQztJQUNyRCxDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyxDQUFDLENBQUMifQ==

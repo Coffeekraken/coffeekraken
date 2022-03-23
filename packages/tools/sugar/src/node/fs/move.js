@@ -1,30 +1,32 @@
-// @ts-nocheck
-import __fs from 'fs-extra';
-/**
- * @name        move
- * @namespace            node.fs
- * @type          Function
- * @platform        node
- * @status          stable
- *
- * Moves a file or directory, even across devices (async)
- *
- * @param       {String}              src           The source path to move
- * @param       {String}              dest          The destination path
- * @return      {Promise}                           A promise that will be resolved once the file/directory has been moved...
- *
- * @example       js
- * import move from '@coffeekraken/node/fs/move';
- * move('my/cool/dir', 'another/place/for/directory').then(() => {
- *    // do something...
- * });
- *
- * @see             https://github.com/jprichardson/node-fs-extra
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var move_exports = {};
+__export(move_exports, {
+  default: () => move_default
+});
+module.exports = __toCommonJS(move_exports);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function move(src, dest) {
-    return __fs.move(src, dest);
+  return import_fs_extra.default.move(src, dest);
 }
-export default move;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW92ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm1vdmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sSUFBSSxNQUFNLFVBQVUsQ0FBQztBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsSUFBSSxDQUFDLEdBQUcsRUFBRSxJQUFJO0lBQ25CLE9BQU8sSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLENBQUM7QUFDaEMsQ0FBQztBQUNELGVBQWUsSUFBSSxDQUFDIn0=
+var move_default = move;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

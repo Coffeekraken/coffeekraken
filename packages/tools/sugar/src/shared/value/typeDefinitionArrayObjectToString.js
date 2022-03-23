@@ -1,57 +1,39 @@
-// @ts-nocheck
-/**
- * @name          typeDefinitionArrayObjectToString
- * @namespace            js.value
- * @type          Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function take as parameter a type definition object like this one:
- * {
- *    type: [{
- *      type: 'Array',
- *      of: [{
- *        type: 'Boolean'
- *      }]
- *    }]
- * }
- * an transform it to a string like so "Array<Boolean>"
- *
- * @param       {Object}        typeDefinitionArrayObj       The type definition array object
- * @return      {String}                                The string representation of the type definition object
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import typeDefinitionArrayObjToString from '@coffeekraken/sugar/js/value/typeDefinitionArrayObjectToString'
- * typeDefinitionArrayObjToString([{
- *    type: [{
- *      type: 'Array',
- *      of: [{
- *        type: 'Boolean'
- *      }]
- *    }]
- * }]); // => Array<Boolean>
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var typeDefinitionArrayObjectToString_exports = {};
+__export(typeDefinitionArrayObjectToString_exports, {
+  default: () => typeDefinitionArrayObjectToString_default
+});
+module.exports = __toCommonJS(typeDefinitionArrayObjectToString_exports);
 function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
-    const parts = [];
-    if (!Array.isArray(typeDefinitionArrayObj))
-        typeDefinitionArrayObj = [typeDefinitionArrayObj];
-    typeDefinitionArrayObj.forEach((definition) => {
-        let part = definition.type;
-        if (definition.of) {
-            const ofString = typeDefinitionArrayObjectToString(definition.of);
-            part += `<${ofString}>`;
-        }
-        parts.push(part);
-    });
-    return parts.join('|');
+  const parts = [];
+  if (!Array.isArray(typeDefinitionArrayObj))
+    typeDefinitionArrayObj = [typeDefinitionArrayObj];
+  typeDefinitionArrayObj.forEach((definition) => {
+    let part = definition.type;
+    if (definition.of) {
+      const ofString = typeDefinitionArrayObjectToString(definition.of);
+      part += `<${ofString}>`;
+    }
+    parts.push(part);
+  });
+  return parts.join("|");
 }
-export default typeDefinitionArrayObjectToString;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHlwZURlZmluaXRpb25BcnJheU9iamVjdFRvU3RyaW5nLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHlwZURlZmluaXRpb25BcnJheU9iamVjdFRvU3RyaW5nLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUNHO0FBQ0gsU0FBUyxpQ0FBaUMsQ0FBQyxzQkFBc0I7SUFDN0QsTUFBTSxLQUFLLEdBQUcsRUFBRSxDQUFDO0lBRWpCLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLHNCQUFzQixDQUFDO1FBQ3RDLHNCQUFzQixHQUFHLENBQUMsc0JBQXNCLENBQUMsQ0FBQztJQUV0RCxzQkFBc0IsQ0FBQyxPQUFPLENBQUMsQ0FBQyxVQUFVLEVBQUUsRUFBRTtRQUMxQyxJQUFJLElBQUksR0FBRyxVQUFVLENBQUMsSUFBSSxDQUFDO1FBQzNCLElBQUksVUFBVSxDQUFDLEVBQUUsRUFBRTtZQUNmLE1BQU0sUUFBUSxHQUFHLGlDQUFpQyxDQUFDLFVBQVUsQ0FBQyxFQUFFLENBQUMsQ0FBQztZQUNsRSxJQUFJLElBQUksSUFBSSxRQUFRLEdBQUcsQ0FBQztTQUMzQjtRQUNELEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDckIsQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDM0IsQ0FBQztBQUNELGVBQWUsaUNBQWlDLENBQUMifQ==
+var typeDefinitionArrayObjectToString_default = typeDefinitionArrayObjectToString;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,37 +1,38 @@
-// @ts-nocheck
-import __folderPath from './folderPath';
-import __ensureDirSync from './ensureDirSync';
-import __fs from 'fs';
-import __stringify from '../../shared/json/stringify';
-/**
- * @name        writeJson
- * @namespace            node.fs
- * @type          Function
- * @async
- * @platform        node
- * @status          stable
- *
- * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... ( (async)
- *
- * @param       {String}              path           The file path to write
- * @param       {String}              object          The object to write in the JSON file
- * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeJson()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
- * @return      {Promise}                           A promise that will be resolved when the writeJson is completed
- *
- * @example       js
- * import writeJson from '@coffeekraken/node/fs/writeJson';
- * writeJson('my/cool/file.json', { hello: 'world' }).then(() => {
- *    // do something on complete...
- * });
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var writeJson_exports = {};
+__export(writeJson_exports, {
+  default: () => writeJson_default
+});
+module.exports = __toCommonJS(writeJson_exports);
+var import_folderPath = __toESM(require("./folderPath"), 1);
+var import_ensureDirSync = __toESM(require("./ensureDirSync"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_stringify = __toESM(require("../../shared/json/stringify"), 1);
 function writeJson(path, data, options = {}) {
-    const folderPath = __folderPath(path);
-    __ensureDirSync(folderPath);
-    const jsonStr = __stringify(data, null, 4);
-    return __fs.writeFile(path, jsonStr);
+  const folderPath = (0, import_folderPath.default)(path);
+  (0, import_ensureDirSync.default)(folderPath);
+  const jsonStr = (0, import_stringify.default)(data, null, 4);
+  return import_fs.default.writeFile(path, jsonStr);
 }
-export default writeJson;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid3JpdGVKc29uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsid3JpdGVKc29uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxjQUFjLENBQUM7QUFDeEMsT0FBTyxlQUFlLE1BQU0saUJBQWlCLENBQUM7QUFDOUMsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBQ3RCLE9BQU8sV0FBVyxNQUFNLDZCQUE2QixDQUFDO0FBRXREOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsU0FBUyxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsT0FBTyxHQUFHLEVBQUU7SUFDdkMsTUFBTSxVQUFVLEdBQUcsWUFBWSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3RDLGVBQWUsQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUM1QixNQUFNLE9BQU8sR0FBRyxXQUFXLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztJQUMzQyxPQUFPLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0FBQ3pDLENBQUM7QUFDRCxlQUFlLFNBQVMsQ0FBQyJ9
+var writeJson_default = writeJson;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

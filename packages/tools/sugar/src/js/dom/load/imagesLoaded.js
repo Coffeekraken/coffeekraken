@@ -1,61 +1,47 @@
-// @ts-nocheck
-import __imageLoaded from './imageLoaded';
-import __SPromise from '@coffeekraken/s-promise';
-/**
- * @name      imagesLoaded
- * @namespace            js.dom.load
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Detect when some images are loaded. This function take advantage of the SPromise class
- * and trigger an event called "img.loaded" that will be triggered on each loaded images and another called "loaded" once all the images are loaded.
- * See in the example bellow.
- *
- * @feature       Promise based API
- * @feature       Callback support
- *
- * @param    {Array<HTMLImageElement>}    $imgs    An array (or nodeList) of HTMLImageElement to detect the load
- * @param     {Function}          [cb=null]       A callback function if you prefer
- * @return    {Promise}    A promise resolved when all images are loaded properly
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import imagesLoaded from '@coffeekraken/sugar/js/dom/imagesLoaded'
- * imagesLoaded([
- * 	$img1, $img2, $img3
- * ]).on('loaded', $img => {
- *    // do something with the loaded image
- * }).then(() => {
- *   // do something here
- * })
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var imagesLoaded_exports = {};
+__export(imagesLoaded_exports, {
+  default: () => imagesLoaded_default
+});
+module.exports = __toCommonJS(imagesLoaded_exports);
+var import_imageLoaded = __toESM(require("./imageLoaded"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function imagesLoaded($imgs, cb = null) {
-    return new __SPromise(({ resolve, reject, emit }) => {
-        const promises = [], loadedImages = [];
-        Array.from($imgs).forEach(($img) => {
-            promises.push(__imageLoaded($img)
-                .then((_$img) => {
-                loadedImages.push(_$img);
-                emit('img.loaded', _$img);
-                if (loadedImages.length === $imgs.length) {
-                    emit('loaded', loadedImages);
-                    if (cb)
-                        cb(loadedImages);
-                    resolve(loadedImages);
-                }
-            })
-                .catch((error) => {
-                reject(error);
-            }));
-        });
+  return new import_s_promise.default(({ resolve, reject, emit }) => {
+    const promises = [], loadedImages = [];
+    Array.from($imgs).forEach(($img) => {
+      promises.push((0, import_imageLoaded.default)($img).then((_$img) => {
+        loadedImages.push(_$img);
+        emit("img.loaded", _$img);
+        if (loadedImages.length === $imgs.length) {
+          emit("loaded", loadedImages);
+          if (cb)
+            cb(loadedImages);
+          resolve(loadedImages);
+        }
+      }).catch((error) => {
+        reject(error);
+      }));
     });
+  });
 }
-export default imagesLoaded;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW1hZ2VzTG9hZGVkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaW1hZ2VzTG9hZGVkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxlQUFlLENBQUM7QUFDMUMsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFFakQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUFTLFlBQVksQ0FDakIsS0FBeUIsRUFDekIsRUFBRSxHQUFHLElBQUk7SUFFVCxPQUFPLElBQUksVUFBVSxDQUFDLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDaEQsTUFBTSxRQUFRLEdBQUcsRUFBRSxFQUNmLFlBQVksR0FBRyxFQUFFLENBQUM7UUFDdEIsS0FBSyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtZQUMvQixRQUFRLENBQUMsSUFBSSxDQUNULGFBQWEsQ0FBQyxJQUFJLENBQUM7aUJBQ2QsSUFBSSxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7Z0JBQ1osWUFBWSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFDekIsSUFBSSxDQUFDLFlBQVksRUFBRSxLQUFLLENBQUMsQ0FBQztnQkFDMUIsSUFBSSxZQUFZLENBQUMsTUFBTSxLQUFLLEtBQUssQ0FBQyxNQUFNLEVBQUU7b0JBQ3RDLElBQUksQ0FBQyxRQUFRLEVBQUUsWUFBWSxDQUFDLENBQUM7b0JBQzdCLElBQUksRUFBRTt3QkFBRSxFQUFFLENBQUMsWUFBWSxDQUFDLENBQUM7b0JBQ3pCLE9BQU8sQ0FBQyxZQUFZLENBQUMsQ0FBQztpQkFDekI7WUFDTCxDQUFDLENBQUM7aUJBQ0QsS0FBSyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7Z0JBQ2IsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQ2xCLENBQUMsQ0FBQyxDQUNULENBQUM7UUFDTixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQUNELGVBQWUsWUFBWSxDQUFDIn0=
+var imagesLoaded_default = imagesLoaded;

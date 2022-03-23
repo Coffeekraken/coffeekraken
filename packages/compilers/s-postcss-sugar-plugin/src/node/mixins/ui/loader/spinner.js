@@ -1,51 +1,75 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name          spinner
- * @namespace     ui.loader
- * @type               PostcssMixin
- * @interface     ./spinner          interface
- * @platform      postcss
- * @status        beta
- *
- * Apply the spinner style to any element
- *
- * @param        {String}           [name='s-loader-spinner']               A name for your spinner
- * @param       {String}            [duration='theme.ui.loaderSpinner.duration']        The duration of your spinner animation
- * @param        {String}           [easing='theme.ui.loaderSpinner.easing']            The easing you want for your spinner animation
- * @return      {String}            The generated css
- *
- * @example     css
- * .my-spinner {
- *    @sugar.ui.loader.spinner;
- * }
- *
- * @since      2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginUiLoaderSpinnerMixinInterface extends __SInterface {
-    static get _definition() {
-        return {
-            name: {
-                type: 'String',
-                default: 's-loader-spinner',
-            },
-            duration: {
-                type: 'String',
-                default: __STheme.config('ui.loaderSpinner.duration'),
-            },
-            easing: {
-                type: 'String',
-                default: __STheme.config('ui.loaderSpinner.easing'),
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var spinner_exports = {};
+__export(spinner_exports, {
+  default: () => spinner_default,
+  interface: () => postcssSugarPluginUiLoaderSpinnerMixinInterface
+});
+module.exports = __toCommonJS(spinner_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginUiLoaderSpinnerMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      name: {
+        type: "String",
+        default: "s-loader-spinner"
+      },
+      duration: {
+        type: "String",
+        default: import_s_theme.default.config("ui.loaderSpinner.duration")
+      },
+      easing: {
+        type: "String",
+        default: import_s_theme.default.config("ui.loaderSpinner.easing")
+      }
+    };
+  }
 }
-export { postcssSugarPluginUiLoaderSpinnerMixinInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ name: '', duration: '', easing: '' }, params);
-    const vars = [];
-    vars.push(`
+function spinner_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    name: "",
+    duration: "",
+    easing: ""
+  }, params);
+  const vars = [];
+  vars.push(`
     display: inline-block;
     pointer-events: none;
     text-indent: -9999em;
@@ -67,6 +91,9 @@ export default function ({ params, atRule, replaceWith, }) {
         }
     }
   `);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3Bpbm5lci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInNwaW5uZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFFSCxNQUFNLCtDQUFnRCxTQUFRLFlBQVk7SUFDdEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsa0JBQWtCO2FBQzlCO1lBQ0QsUUFBUSxFQUFFO2dCQUNOLElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLDJCQUEyQixDQUFDO2FBQ3hEO1lBQ0QsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLHlCQUF5QixDQUFDO2FBQ3REO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQVFELE9BQU8sRUFBRSwrQ0FBK0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUV4RSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLG1CQUNiLElBQUksRUFBRSxFQUFFLEVBQ1IsUUFBUSxFQUFFLEVBQUUsRUFDWixNQUFNLEVBQUUsRUFBRSxJQUNQLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7O2lCQVdHLFdBQVcsQ0FBQyxJQUFJLElBQUksV0FBVyxDQUFDLFFBQVEsSUFBSSxXQUFXLENBQUMsTUFBTTs7aUJBRTlELFdBQVcsQ0FBQyxJQUFJOzs7Ozs7OztHQVE5QixDQUFDLENBQUM7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

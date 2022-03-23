@@ -1,48 +1,43 @@
-// @ts-nocheck
-import camelize from '../../../shared/string/camelize';
-import autoCast from '../../../shared/string/autoCast';
-/**
- * @name      getStyleProperty
- * @namespace            js.dom.style
- * @type      Function
- * @platform          js
- * @status      beta
- *
- * Get a style property on the passed element through the computed style.
- * This function try to store the actual style to not trigger more that 1 redraw
- * each js execution loop.
- *
- * @param 		{HTMLElement} 					elm  		The element to get style from
- * @param 		{String} 						property 	The css property to get
- * @return 		{Mixed} 									The style value
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import getStyleProperty from '@coffeekraken/sugar/js/dom/getStyleProperty'
- * const opacity = getStyleProperty(myCoolHTMLElement, 'opacity');
- *
- * @see 		https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var getStyleProperty_exports = {};
+__export(getStyleProperty_exports, {
+  default: () => getStyleProperty_default
+});
+module.exports = __toCommonJS(getStyleProperty_exports);
+var import_camelize = __toESM(require("../../../shared/string/camelize"), 1);
+var import_autoCast = __toESM(require("../../../shared/string/autoCast"), 1);
 function getStyleProperty(elm, property) {
-    // caching mecanisme
-    setTimeout(() => {
-        elm._sComputedStyle = null;
-    });
-    const computed = elm._sComputedStyle || window.getComputedStyle(elm);
-    elm._sComputedStyle = computed;
-    const prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
-    for (let i = 0; i < prefixes.length; i++) {
-        const prefix = prefixes[i];
-        const value = computed[camelize(`${prefix}${property}`)];
-        if (value && value.trim() !== '')
-            return autoCast(value);
-    }
-    return null;
+  setTimeout(() => {
+    elm._sComputedStyle = null;
+  });
+  const computed = elm._sComputedStyle || window.getComputedStyle(elm);
+  elm._sComputedStyle = computed;
+  const prefixes = ["", "webkit-", "moz-", "ms-", "o-", "khtml-"];
+  for (let i = 0; i < prefixes.length; i++) {
+    const prefix = prefixes[i];
+    const value = computed[(0, import_camelize.default)(`${prefix}${property}`)];
+    if (value && value.trim() !== "")
+      return (0, import_autoCast.default)(value);
+  }
+  return null;
 }
-export default getStyleProperty;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0U3R5bGVQcm9wZXJ0eS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldFN0eWxlUHJvcGVydHkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sUUFBUSxNQUFNLGlDQUFpQyxDQUFDO0FBQ3ZELE9BQU8sUUFBUSxNQUFNLGlDQUFpQyxDQUFDO0FBRXZEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMsZ0JBQWdCLENBQUMsR0FBZ0IsRUFBRSxRQUFnQjtJQUN4RCxvQkFBb0I7SUFDcEIsVUFBVSxDQUFDLEdBQUcsRUFBRTtRQUNaLEdBQUcsQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDO0lBQy9CLENBQUMsQ0FBQyxDQUFDO0lBRUgsTUFBTSxRQUFRLEdBQUcsR0FBRyxDQUFDLGVBQWUsSUFBSSxNQUFNLENBQUMsZ0JBQWdCLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDckUsR0FBRyxDQUFDLGVBQWUsR0FBRyxRQUFRLENBQUM7SUFFL0IsTUFBTSxRQUFRLEdBQUcsQ0FBQyxFQUFFLEVBQUUsU0FBUyxFQUFFLE1BQU0sRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ2hFLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxRQUFRLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1FBQ3RDLE1BQU0sTUFBTSxHQUFHLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUMzQixNQUFNLEtBQUssR0FBRyxRQUFRLENBQUMsUUFBUSxDQUFDLEdBQUcsTUFBTSxHQUFHLFFBQVEsRUFBRSxDQUFDLENBQUMsQ0FBQztRQUN6RCxJQUFJLEtBQUssSUFBSSxLQUFLLENBQUMsSUFBSSxFQUFFLEtBQUssRUFBRTtZQUFFLE9BQU8sUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDO0tBQzVEO0lBQ0QsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQUNELGVBQWUsZ0JBQWdCLENBQUMifQ==
+var getStyleProperty_default = getStyleProperty;

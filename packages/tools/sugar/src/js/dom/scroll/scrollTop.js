@@ -1,28 +1,26 @@
-// @ts-nocheck
-/**
- * @name      scrollTop
- * @namespace            js.dom.scroll
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Return the amount of scroll top that the user as made in the page
- *
- * @return      {Number}            The amount of scroll top that the user as made in the page
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example     js
- * import scrollTop from '@coffeekraken/sugar/js/dom/scroll/scrollTop';
- * scrollTop();
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) (https://olivierbossel.com)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var scrollTop_exports = {};
+__export(scrollTop_exports, {
+  default: () => scrollTop_default
+});
+module.exports = __toCommonJS(scrollTop_exports);
 function scrollTop() {
-    return window.pageYOffset || document.scrollTop || document.body.scrollTop;
+  return window.pageYOffset || document.scrollTop || document.body.scrollTop;
 }
-export default scrollTop;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsVG9wLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2Nyb2xsVG9wLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxTQUFTO0lBQ2QsT0FBTyxNQUFNLENBQUMsV0FBVyxJQUFJLFFBQVEsQ0FBQyxTQUFTLElBQUksUUFBUSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUM7QUFDL0UsQ0FBQztBQUNELGVBQWUsU0FBUyxDQUFDIn0=
+var scrollTop_default = scrollTop;

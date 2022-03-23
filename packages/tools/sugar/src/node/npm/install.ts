@@ -2,6 +2,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __commandExists from '../command/commandExists';
 import __spawn from '../process/spawn';
 import __argsToString from '../../shared/cli/argsToString';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            install
@@ -32,26 +33,27 @@ import __argsToString from '../../shared/cli/argsToString';
 
 export interface INpmInstallSettings {
     cwd: string;
-    yarn: boolean;
+    manager: 'yarn' | 'npm';
     args: any;
 }
 
 export interface INpmInstallResult {}
 
 export default function install(
+    packageNames: string = '',
     settings: Partial<INpmInstallSettings>,
 ): Promise<INpmInstallResult> {
-    return new __SPromise(async ({ resolve, reject, emit }) => {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         settings = {
             cwd: process.cwd(),
-            yarn: true,
+            manager: __SSugarConfig.get('package.manager'),
             args: {},
             ...settings,
         };
         let command;
-        if (settings.yarn) {
+        if (settings.manager === 'yarn') {
             if (await __commandExists('yarn')) {
-                command = 'yarn install';
+                command = 'yarn add';
                 emit('log', {
                     value: `<yellow>[install]</yellow> Using to "<yellow>yarn</yellow>" to install dependencies`,
                 });
@@ -75,11 +77,16 @@ export default function install(
             );
         }
 
-        command += ` ${__argsToString(settings.args)}`;
+        command += ` ${packageNames} ${__argsToString(settings.args)}`.replace(
+            /\s{2,999}/,
+            ' ',
+        );
 
-        const result = await __spawn(command, [], {
-            cwd: settings.cwd,
-        });
+        const result = await pipe(
+            __spawn(command, [], {
+                cwd: settings.cwd,
+            }),
+        );
 
         resolve(result);
     });

@@ -1,21 +1,26 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-import __check from '../checkPathWithMultipleExtensions';
-describe('sugar.node.fs.checkPathWithMultipleExtensions', () => {
-    it('Should find a file with multiple extensions given', () => __awaiter(void 0, void 0, void 0, function* () {
-        const filePath = __check(`${__dirname}/data/file.mkv`, [
-            'css',
-            'js',
-            'txt',
-        ]);
-        expect(filePath).toBe(`${__dirname}/data/file.txt`);
-    }));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_checkPathWithMultipleExtensions = __toESM(require("../checkPathWithMultipleExtensions"), 1);
+describe("sugar.node.fs.checkPathWithMultipleExtensions", () => {
+  it("Should find a file with multiple extensions given", async () => {
+    const filePath = (0, import_checkPathWithMultipleExtensions.default)(`${__dirname}/data/file.mkv`, [
+      "css",
+      "js",
+      "txt"
+    ]);
+    expect(filePath).toBe(`${__dirname}/data/file.txt`);
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hlY2tQYXRoV2l0aE11bHRpcGxlRXh0ZW5zaW9ucy50ZXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2hlY2tQYXRoV2l0aE11bHRpcGxlRXh0ZW5zaW9ucy50ZXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sT0FBTyxNQUFNLG9DQUFvQyxDQUFDO0FBQ3pELFFBQVEsQ0FBQywrQ0FBK0MsRUFBRSxHQUFHLEVBQUU7SUFDM0QsRUFBRSxDQUFDLG1EQUFtRCxFQUFFLEdBQVMsRUFBRTtRQUMvRCxNQUFNLFFBQVEsR0FBRyxPQUFPLENBQUMsR0FBRyxTQUFTLGdCQUFnQixFQUFFO1lBQ25ELEtBQUs7WUFDTCxJQUFJO1lBQ0osS0FBSztTQUNSLENBQUMsQ0FBQztRQUNILE1BQU0sQ0FBQyxRQUFRLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxTQUFTLGdCQUFnQixDQUFDLENBQUM7SUFDeEQsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUMsQ0FBQyxDQUFDIn0=

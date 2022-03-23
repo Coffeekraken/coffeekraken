@@ -1,38 +1,40 @@
-import __extension from './extension';
-import __fs from 'fs';
-/**
- * @name            checkPathWithMultipleExtensions
- * @namespace            node.fs
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * This function take a path and some extensions to check if a file
- * exists with one of these particular extensions.
- * If a file exists, the function return the path with the first extensions that matches
- *
- * @todo        tests
- *
- * @param       {String}            path            The file path you want to check. With or without an extension
- * @param       {Array<String>}     extensions      The extensions (without the dot) you want to check
- * @return      {String|undefined}                  The first valid path founded, or undefined
- *
- * @example         js
- * import checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
- * checkPathWithMultipleExtensions('/my/cool/file.txt', ['txt','js','css']);
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function checkPathWithMultipleExtensions(path, exts) {
-    const extension = __extension(path) || '';
-    const pathWithoutExt = path.replace(`.${extension}`, '');
-    for (let i = 0; i < exts.length; i++) {
-        const ext = exts[i];
-        if (__fs.existsSync(`${pathWithoutExt}.${ext}`)) {
-            return `${pathWithoutExt}.${ext}`;
-        }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var checkPathWithMultipleExtensions_exports = {};
+__export(checkPathWithMultipleExtensions_exports, {
+  default: () => checkPathWithMultipleExtensions
+});
+module.exports = __toCommonJS(checkPathWithMultipleExtensions_exports);
+var import_extension = __toESM(require("./extension"), 1);
+var import_fs = __toESM(require("fs"), 1);
+function checkPathWithMultipleExtensions(path, exts) {
+  const extension = (0, import_extension.default)(path) || "";
+  const pathWithoutExt = path.replace(`.${extension}`, "");
+  for (let i = 0; i < exts.length; i++) {
+    const ext = exts[i];
+    if (import_fs.default.existsSync(`${pathWithoutExt}.${ext}`)) {
+      return `${pathWithoutExt}.${ext}`;
     }
-    return undefined;
+  }
+  return void 0;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hlY2tQYXRoV2l0aE11bHRpcGxlRXh0ZW5zaW9ucy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNoZWNrUGF0aFdpdGhNdWx0aXBsZUV4dGVuc2lvbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxXQUFXLE1BQU0sYUFBYSxDQUFDO0FBQ3RDLE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUd0Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLCtCQUErQixDQUNuRCxJQUFZLEVBQ1osSUFBYztJQUVkLE1BQU0sU0FBUyxHQUFHLFdBQVcsQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUM7SUFFMUMsTUFBTSxjQUFjLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLFNBQVMsRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ3pELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1FBQ2xDLE1BQU0sR0FBRyxHQUFHLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNwQixJQUFJLElBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxjQUFjLElBQUksR0FBRyxFQUFFLENBQUMsRUFBRTtZQUM3QyxPQUFPLEdBQUcsY0FBYyxJQUFJLEdBQUcsRUFBRSxDQUFDO1NBQ3JDO0tBQ0o7SUFDRCxPQUFPLFNBQVMsQ0FBQztBQUNyQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

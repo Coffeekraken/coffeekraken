@@ -1,4 +1,30 @@
-import __vitePluginSvelte from '@sveltejs/vite-plugin-svelte';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-export default __vitePluginSvelte(__SugarConfig.get('svelte'));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ZlbHRlUGx1Z2luLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3ZlbHRlUGx1Z2luLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sa0JBQWtCLE1BQU0sOEJBQThCLENBQUM7QUFDOUQsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFDekQsZUFBZSxrQkFBa0IsQ0FBQyxhQUFhLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMifQ==
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var sveltePlugin_exports = {};
+__export(sveltePlugin_exports, {
+  default: () => sveltePlugin_default
+});
+module.exports = __toCommonJS(sveltePlugin_exports);
+var import_vite_plugin_svelte = __toESM(require("@sveltejs/vite-plugin-svelte"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var sveltePlugin_default = (0, import_vite_plugin_svelte.default)(import_s_sugar_config.default.get("svelte"));
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,41 +1,35 @@
-// @ts-nocheck
-import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
-/**
- * @name        addAnimationClass
- * @namespace            js.dom.class
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Add a class that trigger an animation and remove it at the end
- *
- * @param    {HTMLElement}    $elm    The element to take care of
- * @param    {String|Array}    cls    The class or classes (Array) to apply
- * @return    {Promise}               A promise that will be resolved once the class have been removed and the animation finished
- *
- * @todo        interface
- * @todo        doc
- * @todo        tests
- *
- * @example    js
- * import addAnimationClass from '@coffeekraken/sugar/js/dom/addAnimationClass'
- * addAnimationClass(myElm, 'my-cool-class').then($elm => {
- *    // do something at the animation end...
- * });
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var addAnimationClass_exports = {};
+__export(addAnimationClass_exports, {
+  default: () => addAnimationClass_default
+});
+module.exports = __toCommonJS(addAnimationClass_exports);
+var import_removeClassOnAnimationEnd = __toESM(require("./removeClassOnAnimationEnd"), 1);
 function addAnimationClass($elm, cls) {
-    // make sure the cls argument is an Array
-    if (!Array.isArray(cls))
-        cls = [cls];
-    // add the class to the element
-    cls.forEach((_cls) => {
-        $elm.classList.add(_cls);
-    });
-    // remove the class at the end of the animation
-    return __removeClassesOnAnimationEnd($elm, cls);
+  if (!Array.isArray(cls))
+    cls = [cls];
+  cls.forEach((_cls) => {
+    $elm.classList.add(_cls);
+  });
+  return (0, import_removeClassOnAnimationEnd.default)($elm, cls);
 }
-export default addAnimationClass;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWRkQW5pbWF0aW9uQ2xhc3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhZGRBbmltYXRpb25DbGFzcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyw2QkFBNkIsTUFBTSw2QkFBNkIsQ0FBQztBQUN4RTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQVMsaUJBQWlCLENBQUMsSUFBSSxFQUFFLEdBQUc7SUFDaEMseUNBQXlDO0lBQ3pDLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQztRQUFFLEdBQUcsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQ3JDLCtCQUErQjtJQUMvQixHQUFHLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDakIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDN0IsQ0FBQyxDQUFDLENBQUM7SUFDSCwrQ0FBK0M7SUFDL0MsT0FBTyw2QkFBNkIsQ0FBQyxJQUFJLEVBQUUsR0FBRyxDQUFDLENBQUM7QUFDcEQsQ0FBQztBQUNELGVBQWUsaUJBQWlCLENBQUMifQ==
+var addAnimationClass_default = addAnimationClass;

@@ -2,6 +2,7 @@
 
 import __isFile from '../is/file';
 import __findPkgJson from 'find-package-json';
+import __fs from 'fs';
 
 /**
  * @name                    packageRoot

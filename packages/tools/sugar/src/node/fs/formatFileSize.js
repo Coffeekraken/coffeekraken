@@ -1,29 +1,32 @@
-// @ts-nocheck
-import __filesize from 'filesize';
-/**
- * @name                                    formatFileSize
- * @namespace            node.fs
- * @type                                    Function
- * @platform        node
- * @status          stable
- *
- * Transform into human readable string a file size from a number (float or integer) or string.
- * This function use the wonderfull "filesize" npm package under the houd.
- *
- * @param               {Number|String}             size              The size to transform
- * @param               {Object}                    [settings={}]     The "filesize" settings to customize the output. See [filesize](https://www.npmjs.com/package/filesize) settings
- * @return              {String}                                      The human readable version of the passed size
- *
- * @example             js
- * import formatFilesize from '@coffeekraken/sugar/node/fs/formatFileSize';
- * formatFileSize(163931); // => 326.86 KB
- *
- * @see             https://www.npmjs.com/package/filesize
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var formatFileSize_exports = {};
+__export(formatFileSize_exports, {
+  default: () => formatFileSize_default
+});
+module.exports = __toCommonJS(formatFileSize_exports);
+var import_filesize = __toESM(require("filesize"), 1);
 function formatFileSize(size, settings = {}) {
-    return __filesize(size, settings);
+  return (0, import_filesize.default)(size, settings);
 }
-export default formatFileSize;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9ybWF0RmlsZVNpemUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb3JtYXRGaWxlU2l6ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0sVUFBVSxDQUFDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFDSCxTQUFTLGNBQWMsQ0FBQyxJQUFJLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDdkMsT0FBTyxVQUFVLENBQUMsSUFBSSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0FBQ3RDLENBQUM7QUFDRCxlQUFlLGNBQWMsQ0FBQyJ9
+var formatFileSize_default = formatFileSize;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

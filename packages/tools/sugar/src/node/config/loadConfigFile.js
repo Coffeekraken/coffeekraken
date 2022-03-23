@@ -1,45 +1,74 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __packageRoot from '../path/packageRoot';
-import __path from 'path';
-import __yaml from 'yaml';
-import __fs from 'fs';
-export default function loadConfigFile(filePath, settings) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const finalSettings = Object.assign({ rootDir: __packageRoot(), throw: false }, (settings !== null && settings !== void 0 ? settings : {}));
-        const filePathArray = Array.isArray(filePath) ? filePath : [filePath];
-        let finalFilePath;
-        for (let i = 0; i < filePathArray.length; i++) {
-            if (__fs.existsSync(__path.resolve(finalSettings.rootDir, filePathArray[i]))) {
-                finalFilePath = filePathArray[i];
-                break;
-            }
-        }
-        if (finalSettings.throw && !finalFilePath) {
-            throw new Error(`Sorry but none of the passed config files "${filePathArray.join(',')}" does exists...`);
-        }
-        else if (!finalFilePath)
-            return;
-        const extension = finalFilePath.split('.').pop();
-        switch (extension) {
-            case 'js':
-            case 'json':
-                return (yield import(__path.resolve(finalSettings.rootDir, finalFilePath))).default;
-                break;
-            case 'yml':
-                const str = __fs
-                    .readFileSync(__path.resolve(finalSettings.rootDir, finalFilePath), 'utf8')
-                    .toString();
-                return __yaml.parse(str);
-                break;
-        }
-    });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var loadConfigFile_exports = {};
+__export(loadConfigFile_exports, {
+  default: () => loadConfigFile
+});
+module.exports = __toCommonJS(loadConfigFile_exports);
+var import_packageRoot = __toESM(require("../path/packageRoot"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_yaml = __toESM(require("yaml"), 1);
+var import_fs = __toESM(require("fs"), 1);
+async function loadConfigFile(filePath, settings) {
+  const finalSettings = __spreadValues({
+    rootDir: (0, import_packageRoot.default)(),
+    throw: false
+  }, settings != null ? settings : {});
+  const filePathArray = Array.isArray(filePath) ? filePath : [filePath];
+  let finalFilePath;
+  for (let i = 0; i < filePathArray.length; i++) {
+    if (import_fs.default.existsSync(import_path.default.resolve(finalSettings.rootDir, filePathArray[i]))) {
+      finalFilePath = filePathArray[i];
+      break;
+    }
+  }
+  if (finalSettings.throw && !finalFilePath) {
+    throw new Error(`Sorry but none of the passed config files "${filePathArray.join(",")}" does exists...`);
+  } else if (!finalFilePath)
+    return;
+  const extension = finalFilePath.split(".").pop();
+  switch (extension) {
+    case "js":
+    case "json":
+      return (await Promise.resolve().then(() => __toESM(require(import_path.default.resolve(finalSettings.rootDir, finalFilePath))))).default;
+      break;
+    case "yml":
+      const str = import_fs.default.readFileSync(import_path.default.resolve(finalSettings.rootDir, finalFilePath), "utf8").toString();
+      return import_yaml.default.parse(str);
+      break;
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9hZENvbmZpZ0ZpbGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJsb2FkQ29uZmlnRmlsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxPQUFPLGFBQWEsTUFBTSxxQkFBcUIsQ0FBQztBQUNoRCxPQUFPLE1BQU0sTUFBTSxNQUFNLENBQUM7QUFDMUIsT0FBTyxNQUFNLE1BQU0sTUFBTSxDQUFDO0FBQzFCLE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQW9DdEIsTUFBTSxDQUFDLE9BQU8sVUFBZ0IsY0FBYyxDQUN4QyxRQUEyQixFQUMzQixRQUEyQzs7UUFFM0MsTUFBTSxhQUFhLG1CQUNmLE9BQU8sRUFBRSxhQUFhLEVBQUUsRUFDeEIsS0FBSyxFQUFFLEtBQUssSUFDVCxDQUFDLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FBQyxDQUN0QixDQUFDO1FBRUYsTUFBTSxhQUFhLEdBQUcsS0FBSyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ3RFLElBQUksYUFBYSxDQUFDO1FBRWxCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxhQUFhLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzNDLElBQ0ksSUFBSSxDQUFDLFVBQVUsQ0FDWCxNQUFNLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxPQUFPLEVBQUUsYUFBYSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQzFELEVBQ0g7Z0JBQ0UsYUFBYSxHQUFHLGFBQWEsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDakMsTUFBTTthQUNUO1NBQ0o7UUFFRCxJQUFJLGFBQWEsQ0FBQyxLQUFLLElBQUksQ0FBQyxhQUFhLEVBQUU7WUFDdkMsTUFBTSxJQUFJLEtBQUssQ0FDWCw4Q0FBOEMsYUFBYSxDQUFDLElBQUksQ0FDNUQsR0FBRyxDQUNOLGtCQUFrQixDQUN0QixDQUFDO1NBQ0w7YUFBTSxJQUFJLENBQUMsYUFBYTtZQUFFLE9BQU87UUFFbEMsTUFBTSxTQUFTLEdBQUcsYUFBYSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLEVBQUUsQ0FBQztRQUNqRCxRQUFRLFNBQVMsRUFBRTtZQUNmLEtBQUssSUFBSSxDQUFDO1lBQ1YsS0FBSyxNQUFNO2dCQUNQLE9BQU8sQ0FDSCxNQUFNLE1BQU0sQ0FDUixNQUFNLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxPQUFPLEVBQUUsYUFBYSxDQUFDLENBQ3ZELENBQ0osQ0FBQyxPQUFPLENBQUM7Z0JBQ1YsTUFBTTtZQUNWLEtBQUssS0FBSztnQkFDTixNQUFNLEdBQUcsR0FBRyxJQUFJO3FCQUNYLFlBQVksQ0FDVCxNQUFNLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxPQUFPLEVBQUUsYUFBYSxDQUFDLEVBQ3BELE1BQU0sQ0FDVDtxQkFDQSxRQUFRLEVBQUUsQ0FBQztnQkFDaEIsT0FBTyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO2dCQUN6QixNQUFNO1NBQ2I7SUFDTCxDQUFDO0NBQUEifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,23 +1,33 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-/**
- * @name            configValue
- * @namespace       node.helpers
- * @type            Function
- * @platform        js
- * @platform        node
- * @status          beta
- *
- * This helper allows you to "sanitize" some configuration values makes absolute paths to relative, etc...
- *
- * @param       {Any}        value            The value to sanitize
- * @return      {Any}                           The sanitized value
- *
- * @since           2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-export default function configValue(value) {
-    if (typeof value !== 'string')
-        return value;
-    return value.replace(`${__packageRoot()}/`, '');
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var configValue_exports = {};
+__export(configValue_exports, {
+  default: () => configValue
+});
+module.exports = __toCommonJS(configValue_exports);
+var import_packageRoot = __toESM(require("@coffeekraken/sugar/node/path/packageRoot"), 1);
+function configValue(value) {
+  if (typeof value !== "string")
+    return value;
+  return value.replace(`${(0, import_packageRoot.default)()}/`, "");
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uZmlnVmFsdWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb25maWdWYWx1ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLGFBQWEsTUFBTSwyQ0FBMkMsQ0FBQztBQUV0RTs7Ozs7Ozs7Ozs7Ozs7O0dBZUc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFdBQVcsQ0FBQyxLQUFhO0lBQzdDLElBQUksT0FBTyxLQUFLLEtBQUssUUFBUTtRQUFFLE9BQU8sS0FBSyxDQUFDO0lBQzVDLE9BQU8sS0FBSyxDQUFDLE9BQU8sQ0FBQyxHQUFHLGFBQWEsRUFBRSxHQUFHLEVBQUUsRUFBRSxDQUFDLENBQUM7QUFDcEQsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

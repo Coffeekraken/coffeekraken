@@ -1,30 +1,32 @@
-// @ts-nocheck
-import __fs from 'fs-extra';
-/**
- * @name        emptyDir
- * @namespace            node.fs
- * @type          Function
- * @async
- * @platform        node
- * @status          beta
- *
- * Empty a directory (async)
- *
- * @param       {String}              dir           The directory path to empty
- * @return      {Promise}                           A promise that will be resolved once the directory has been cleaned
- *
- * @example       js
- * import emptyDir from '@coffeekraken/node/fs/emptyDir';
- * emptyDir('my/cool/directory').then(() => {
- *    // do something...
- * });
- *
- * @see             https://github.com/jprichardson/node-fs-extra
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var emptyDir_exports = {};
+__export(emptyDir_exports, {
+  default: () => emptyDir_default
+});
+module.exports = __toCommonJS(emptyDir_exports);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function emptyDir(dir) {
-    return __fs.emptyDir(dir);
+  return import_fs_extra.default.emptyDir(dir);
 }
-export default emptyDir;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW1wdHlEaXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlbXB0eURpci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxJQUFJLE1BQU0sVUFBVSxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBUyxRQUFRLENBQUMsR0FBRztJQUNqQixPQUFPLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDOUIsQ0FBQztBQUNELGVBQWUsUUFBUSxDQUFDIn0=
+var emptyDir_default = emptyDir;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

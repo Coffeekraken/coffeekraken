@@ -1,32 +1,58 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __faker from 'faker';
-/**
- * @name           classes
- * @namespace      node.mixins.visibility
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the overflow helper classes like ```.s-visibility:hidden```, etc...
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.visibility.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginWrapClassesInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginWrapClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_faker = __toESM(require("faker"));
+class postcssSugarPluginWrapClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginWrapClassesInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const vars = [];
-    vars.push(`
+function classes_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const vars = [];
+  vars.push(`
       /**
         * @name          White space
         * @namespace          sugar.css.helpers
@@ -54,65 +80,65 @@ export default function ({ params, atRule, replaceWith, }) {
         * 
         * @example        html          Wrap
         *   <p class="s-white-space:wrap">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example      html            Nowrap
         *   <p class="s-white-space:nowrap">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example          html            Break spaces
         *   <p class="s-white-space:break-spaces">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example          html                Normal
         *   <p class="s-white-space:normal">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example      html            Pre
         *   <p class="s-white-space:pre">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example      html            Pre-line
         *   <p class="s-white-space:pre-line">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example      html            Pre-wrap
         *   <p class="s-white-space:pre-wrap">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example          html            Revert
         *   <p class="s-white-space:revert">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @example          html                Unset
         *   <p class="s-white-space:unset">
-        *       ${__faker.lorem.paragraph()}
+        *       ${import_faker.default.lorem.paragraph()}
         *   </p>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    [
-        'wrap',
-        'nowrap',
-        'break-spaces',
-        'normal',
-        'pre',
-        'pre-line',
-        'pre-wrap',
-        'revert',
-        'unset',
-    ].forEach((value) => {
-        vars.push(`/**
+  [
+    "wrap",
+    "nowrap",
+    "break-spaces",
+    "normal",
+    "pre",
+    "pre-line",
+    "pre-wrap",
+    "revert",
+    "unset"
+  ].forEach((value) => {
+    vars.push(`/**
     * @name          s-white-space:${value}
     * @namespace          sugar.css.whiteSpace
     * @type               CssClass
@@ -122,12 +148,15 @@ export default function ({ params, atRule, replaceWith, }) {
     * This class allows you to apply a "<yellow>${value}</yellow>" white-space style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-white-space:${value}">${__faker.lorem.paragraph()}</div>
+    * <div class="s-white-space:${value}">${import_faker.default.lorem.paragraph()}</div>
     */
     .s-white-space--${value} {
         white-space: ${value};
     }`);
-    });
-    return vars;
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZO0lBQzdELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHNDQUFzQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRS9ELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztrQkE0QkksT0FBTyxDQUFDLEtBQUssQ0FBQyxTQUFTLEVBQUU7Ozs7O2tCQUt6QixPQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTs7Ozs7a0JBS3pCLE9BQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7OztrQkFLekIsT0FBTyxDQUFDLEtBQUssQ0FBQyxTQUFTLEVBQUU7Ozs7O2tCQUt6QixPQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTs7Ozs7a0JBS3pCLE9BQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7OztrQkFLekIsT0FBTyxDQUFDLEtBQUssQ0FBQyxTQUFTLEVBQUU7Ozs7O2tCQUt6QixPQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTs7Ozs7a0JBS3pCLE9BQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxFQUFFOzs7Ozs7S0FNdEMsQ0FBQyxDQUFDO0lBRUg7UUFDSSxNQUFNO1FBQ04sUUFBUTtRQUNSLGNBQWM7UUFDZCxRQUFRO1FBQ1IsS0FBSztRQUNMLFVBQVU7UUFDVixVQUFVO1FBQ1YsUUFBUTtRQUNSLE9BQU87S0FDVixDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQ2hCLElBQUksQ0FBQyxJQUFJLENBQUM7cUNBQ21CLEtBQUs7Ozs7OztrREFNUSxLQUFLOzs7a0NBR3JCLEtBQUssS0FBSyxPQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRTs7c0JBRS9DLEtBQUs7dUJBQ0osS0FBSztNQUN0QixDQUFDLENBQUM7SUFDSixDQUFDLENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

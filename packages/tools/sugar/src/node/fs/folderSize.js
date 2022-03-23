@@ -1,38 +1,39 @@
-// @ts-nocheck
-import __getSize from 'get-folder-size';
-import __filesize from 'filesize';
-/**
- * @name                            folderSize
- * @namespace            node.fs
- * @type                            Function
- * @async
- * @platform        node
- * @status          beta
- *
- * Calculate the size of the passed folder and return it through a promise, either in raw format, either in human readdable one...
- *
- * @param             {String}                folderPath                  The folder path to calculate the size
- * @param             {Boolean|Any}               [format={}]               False if you want raw size, an object that will be sent to [filesize](https://www.npmjs.com/package/filesize) package to format your data
- * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
- *
- * @example           js
- * import folderSize from '@coffeekraken/sugar/node/fs/folderSize';
- * await folderSize('my/cool/folder');
- * await folderSize('my/cool/folder', false); // no formatting
- *
- *
- * @see             https://www.npmjs.com/package/filesize
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var folderSize_exports = {};
+__export(folderSize_exports, {
+  default: () => folderSize_default
+});
+module.exports = __toCommonJS(folderSize_exports);
+var import_get_folder_size = __toESM(require("get-folder-size"), 1);
+var import_filesize = __toESM(require("filesize"), 1);
 function folderSize(folderPath, format = {}) {
-    return new Promise((resolve, reject) => {
-        __getSize(folderPath, (error, size) => {
-            if (error)
-                throw error;
-            resolve(format === false ? size : __filesize(size, format));
-        });
+  return new Promise((resolve, reject) => {
+    (0, import_get_folder_size.default)(folderPath, (error, size) => {
+      if (error)
+        throw error;
+      resolve(format === false ? size : (0, import_filesize.default)(size, format));
     });
+  });
 }
-export default folderSize;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9sZGVyU2l6ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImZvbGRlclNpemUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sU0FBUyxNQUFNLGlCQUFpQixDQUFDO0FBQ3hDLE9BQU8sVUFBVSxNQUFNLFVBQVUsQ0FBQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLFVBQVUsQ0FBQyxVQUFrQixFQUFFLE1BQU0sR0FBRyxFQUFFO0lBQy9DLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUU7UUFDbkMsU0FBUyxDQUFDLFVBQVUsRUFBRSxDQUFDLEtBQUssRUFBRSxJQUFJLEVBQUUsRUFBRTtZQUNsQyxJQUFJLEtBQUs7Z0JBQUUsTUFBTSxLQUFLLENBQUM7WUFDdkIsT0FBTyxDQUFDLE1BQU0sS0FBSyxLQUFLLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQyxDQUFDO1FBQ2hFLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBQ0QsZUFBZSxVQUFVLENBQUMifQ==
+var folderSize_default = folderSize;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

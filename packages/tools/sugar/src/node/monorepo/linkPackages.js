@@ -1,103 +1,116 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-// import _ensureDirSync from '../fs/ensureDirSync';
-import _path from 'path';
-import _findPackages from './findPackages';
-import _childProcess from 'child_process';
-import __fs from 'fs';
-import __chalk from 'chalk';
-import __packageRootDir from '../path/packageRootDir';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-export default function linkPackages(params = {}, settings = {}) {
-    settings = Object.assign({ rootDir: process.cwd() }, settings);
-    params = Object.assign({ individual: false }, params);
-    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        // make sure we are in a package
-        if (!__fs.existsSync(`${settings.rootDir}/package.json`)) {
-            return reject(`Sorry but the rootDir passed "<yellow>${settings.rootDir}</yellow>" does not contain any "<cyan>package.json</cyan>" file...`);
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var linkPackages_exports = {};
+__export(linkPackages_exports, {
+  default: () => linkPackages
+});
+module.exports = __toCommonJS(linkPackages_exports);
+var import_path = __toESM(require("path"), 1);
+var import_findPackages = __toESM(require("./findPackages"), 1);
+var import_child_process = __toESM(require("child_process"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_chalk = __toESM(require("chalk"), 1);
+var import_packageRootDir = __toESM(require("../path/packageRootDir"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
+function linkPackages(params = {}, settings = {}) {
+  settings = __spreadValues({
+    rootDir: process.cwd()
+  }, settings);
+  params = __spreadValues({
+    individual: false
+  }, params);
+  return new Promise(async (resolve, reject) => {
+    if (!import_fs.default.existsSync(`${settings.rootDir}/package.json`)) {
+      return reject(`Sorry but the rootDir passed "<yellow>${settings.rootDir}</yellow>" does not contain any "<cyan>package.json</cyan>" file...`);
+    }
+    const topPackagePath = `${(0, import_packageRootDir.default)(process.cwd(), true)}`;
+    const topPackageJson = (0, import_readJsonSync.default)(`${topPackagePath}/package.json`);
+    if (!params.individual) {
+      console.log(`
+${import_chalk.default.yellow(topPackageJson.name)} ${topPackageJson.license} (${import_chalk.default.cyan(topPackageJson.version)})`);
+    }
+    const packagesObj = await (0, import_findPackages.default)(settings.rootDir);
+    Object.keys(packagesObj).forEach((packagePath) => {
+      const packageJson = packagesObj[packagePath];
+      if (params.individual) {
+        console.log(`
+${import_chalk.default.yellow(packageJson.name)} ${packageJson.license} (${import_chalk.default.cyan(packageJson.version)})`);
+      }
+      if (!params.individual) {
+        const topPackageNodeModulesPath = `${topPackagePath}/node_modules`;
+        const topPackageContainerPath = `${topPackageNodeModulesPath}${packageJson.name.split("/").length >= 2 ? "/" + packageJson.name.split("/")[0] : ""}`;
+        const symlinkFolderName = packageJson.name.split("/").length >= 2 ? packageJson.name.split("/")[1] : packageJson.name;
+        if (!import_fs.default.existsSync(topPackageContainerPath)) {
+          import_fs.default.mkdirSync(topPackageContainerPath, {
+            recursive: true
+          });
         }
-        const topPackagePath = `${__packageRootDir(process.cwd(), true)}`;
-        const topPackageJson = __readJsonSync(`${topPackagePath}/package.json`); // eslint-disable-line
-        if (!params.individual) {
-            // logs
-            console.log(`\n${__chalk.yellow(topPackageJson.name)} ${topPackageJson.license} (${__chalk.cyan(topPackageJson.version)})`);
-        }
-        // search for packages of the monorepo
-        const packagesObj = yield _findPackages(settings.rootDir);
-        // loop on each packages
-        Object.keys(packagesObj).forEach((packagePath) => {
-            // get json
-            const packageJson = packagesObj[packagePath];
-            if (params.individual) {
-                // logs
-                console.log(`\n${__chalk.yellow(packageJson.name)} ${packageJson.license} (${__chalk.cyan(packageJson.version)})`);
+        const relPathToDestinationModule = import_path.default.relative(topPackageContainerPath, packagePath);
+        import_child_process.default.execSync(`cd ${topPackageContainerPath} && rm -rf ${symlinkFolderName} && ln -s ${relPathToDestinationModule} ${symlinkFolderName}`);
+        console.log(`- Symlinked package ${import_chalk.default.green(packageJson.name)} ${packageJson.license} (${import_chalk.default.cyan(packageJson.version)})`);
+      } else {
+        Object.keys(packagesObj).forEach((path) => {
+          if (packagePath === path)
+            return;
+          const json = packagesObj[path];
+          if (packageJson.dependencies && Object.keys(packageJson.dependencies).includes(json.name) || packageJson.devDependencies && Object.keys(packageJson.devDependencies).includes(json.name)) {
+          } else
+            return;
+          const currentModulePath = `${settings.rootDir}/${packagePath}`;
+          const destinationModulePath = `${settings.rootDir}/${path}`;
+          const nodeModulesPath = `${currentModulePath}/node_modules`;
+          let symlinkFolderPath = nodeModulesPath;
+          const splitedName = json.name.split("/");
+          const groupFolder = splitedName.length === 2 ? splitedName[0] : null;
+          if (groupFolder) {
+            if (!import_fs.default.existsSync(`${nodeModulesPath}/${groupFolder}`)) {
+              import_fs.default.mkdirSync(`${nodeModulesPath}/${groupFolder}`, {
+                recursive: true
+              });
             }
-            if (!params.individual) {
-                const topPackageNodeModulesPath = `${topPackagePath}/node_modules`;
-                const topPackageContainerPath = `${topPackageNodeModulesPath}${packageJson.name.split('/').length >= 2
-                    ? '/' + packageJson.name.split('/')[0]
-                    : ''}`;
-                const symlinkFolderName = packageJson.name.split('/').length >= 2
-                    ? packageJson.name.split('/')[1]
-                    : packageJson.name;
-                if (!__fs.existsSync(topPackageContainerPath)) {
-                    __fs.mkdirSync(topPackageContainerPath, {
-                        recursive: true,
-                    });
-                }
-                const relPathToDestinationModule = _path.relative(topPackageContainerPath, packagePath);
-                _childProcess.execSync(`cd ${topPackageContainerPath} && rm -rf ${symlinkFolderName} && ln -s ${relPathToDestinationModule} ${symlinkFolderName}`);
-                // logs
-                console.log(`- Symlinked package ${__chalk.green(packageJson.name)} ${packageJson.license} (${__chalk.cyan(packageJson.version)})`);
-            }
-            else {
-                // loop again in the packagesObj to create symlink in every
-                // node_modules packages folders
-                Object.keys(packagesObj).forEach((path) => {
-                    if (packagePath === path)
-                        return; // avoid linking itself
-                    const json = packagesObj[path];
-                    if ((packageJson.dependencies &&
-                        Object.keys(packageJson.dependencies).includes(json.name)) ||
-                        (packageJson.devDependencies &&
-                            Object.keys(packageJson.devDependencies).includes(json.name))) {
-                    }
-                    else
-                        return;
-                    const currentModulePath = `${settings.rootDir}/${packagePath}`;
-                    const destinationModulePath = `${settings.rootDir}/${path}`;
-                    const nodeModulesPath = `${currentModulePath}/node_modules`;
-                    let symlinkFolderPath = nodeModulesPath;
-                    const splitedName = json.name.split('/');
-                    const groupFolder = splitedName.length === 2 ? splitedName[0] : null;
-                    if (groupFolder) {
-                        if (!__fs.existsSync(`${nodeModulesPath}/${groupFolder}`)) {
-                            __fs.mkdirSync(`${nodeModulesPath}/${groupFolder}`, {
-                                recursive: true,
-                            });
-                        }
-                        symlinkFolderPath = `${symlinkFolderPath}/${groupFolder}`;
-                    }
-                    const nameFolder = splitedName.length === 2
-                        ? splitedName[1]
-                        : splitedName[0];
-                    const relPathToDestinationModule = _path.relative(symlinkFolderPath, destinationModulePath);
-                    _childProcess.execSync(`cd ${symlinkFolderPath} && rm -rf ${nameFolder} && ln -s ${relPathToDestinationModule} ${nameFolder}`);
-                    // logs
-                    console.log(`- Symlinked package ${__chalk.green(json.name)} ${json.license} (${__chalk.cyan(json.version)})`);
-                });
-            }
+            symlinkFolderPath = `${symlinkFolderPath}/${groupFolder}`;
+          }
+          const nameFolder = splitedName.length === 2 ? splitedName[1] : splitedName[0];
+          const relPathToDestinationModule = import_path.default.relative(symlinkFolderPath, destinationModulePath);
+          import_child_process.default.execSync(`cd ${symlinkFolderPath} && rm -rf ${nameFolder} && ln -s ${relPathToDestinationModule} ${nameFolder}`);
+          console.log(`- Symlinked package ${import_chalk.default.green(json.name)} ${json.license} (${import_chalk.default.cyan(json.version)})`);
         });
-        // resolvee
-        resolve();
-    }));
+      }
+    });
+    resolve();
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibGlua1BhY2thZ2VzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibGlua1BhY2thZ2VzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxvREFBb0Q7QUFDcEQsT0FBTyxLQUFLLE1BQU0sTUFBTSxDQUFDO0FBQ3pCLE9BQU8sYUFBYSxNQUFNLGdCQUFnQixDQUFDO0FBQzNDLE9BQU8sYUFBYSxNQUFNLGVBQWUsQ0FBQztBQUMxQyxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBQzVCLE9BQU8sZ0JBQWdCLE1BQU0sd0JBQXdCLENBQUM7QUFDdEQsT0FBTyxjQUFjLE1BQU0sMENBQTBDLENBQUM7QUFzQ3RFLE1BQU0sQ0FBQyxPQUFPLFVBQVUsWUFBWSxDQUNoQyxNQUFNLEdBQUcsRUFBRSxFQUNYLFFBQVEsR0FBRyxFQUFFO0lBRWIsUUFBUSxtQkFDSixPQUFPLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRSxJQUNuQixRQUFRLENBQ2QsQ0FBQztJQUNGLE1BQU0sbUJBQ0YsVUFBVSxFQUFFLEtBQUssSUFDZCxNQUFNLENBQ1osQ0FBQztJQUVGLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUU7UUFDekMsZ0NBQWdDO1FBQ2hDLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsUUFBUSxDQUFDLE9BQU8sZUFBZSxDQUFDLEVBQUU7WUFDdEQsT0FBTyxNQUFNLENBQ1QseUNBQXlDLFFBQVEsQ0FBQyxPQUFPLHFFQUFxRSxDQUNqSSxDQUFDO1NBQ0w7UUFFRCxNQUFNLGNBQWMsR0FBRyxHQUFHLGdCQUFnQixDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsRUFBRSxJQUFJLENBQUMsRUFBRSxDQUFDO1FBQ2xFLE1BQU0sY0FBYyxHQUFHLGNBQWMsQ0FBQyxHQUFHLGNBQWMsZUFBZSxDQUFDLENBQUMsQ0FB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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

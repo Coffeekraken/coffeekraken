@@ -1,41 +1,34 @@
-// @ts-nocheck
-/**
- * @name 		distanceBetween
- * @namespace            js.geom.2d
- * @type      Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * Get the distance between two points
- *
- * @param    {Point}    point1    The point 1, x and y value
- * @param    {Point}    point2    The point 2, x and y value
- * @return    {Number}    The distance between the two points
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import distanceBetween from '@coffeekraken/sugar/js/geom/2d/distanceBetween'
- * distanceBetween({
- * 	x: 10, y: 20
- * }, {
- * 	x: 10, y: 30
- * }) // 10
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var distanceBetween_exports = {};
+__export(distanceBetween_exports, {
+  default: () => distanceBetween_default
+});
+module.exports = __toCommonJS(distanceBetween_exports);
 function distanceBetween(point1, point2) {
-    let xs = 0;
-    let ys = 0;
-    xs = point2.x - point1.x;
-    xs = xs * xs;
-    ys = point2.y - point1.y;
-    ys = ys * ys;
-    return Math.sqrt(xs + ys);
+  let xs = 0;
+  let ys = 0;
+  xs = point2.x - point1.x;
+  xs = xs * xs;
+  ys = point2.y - point1.y;
+  ys = ys * ys;
+  return Math.sqrt(xs + ys);
 }
-export default distanceBetween;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGlzdGFuY2VCZXR3ZWVuLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZGlzdGFuY2VCZXR3ZWVuLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILFNBQVMsZUFBZSxDQUFDLE1BQU0sRUFBRSxNQUFNO0lBQ25DLElBQUksRUFBRSxHQUFHLENBQUMsQ0FBQztJQUNYLElBQUksRUFBRSxHQUFHLENBQUMsQ0FBQztJQUVYLEVBQUUsR0FBRyxNQUFNLENBQUMsQ0FBQyxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUM7SUFDekIsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLENBQUM7SUFFYixFQUFFLEdBQUcsTUFBTSxDQUFDLENBQUMsR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDO0lBQ3pCLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxDQUFDO0lBRWIsT0FBTyxJQUFJLENBQUMsSUFBSSxDQUFDLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQztBQUM5QixDQUFDO0FBQ0QsZUFBZSxlQUFlLENBQUMifQ==
+var distanceBetween_default = distanceBetween;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

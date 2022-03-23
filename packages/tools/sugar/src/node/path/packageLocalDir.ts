@@ -26,7 +26,7 @@ import __fs from 'fs-extra';
  */
 const fn: IpackageLocalDir = function () {
     const path = __SSugarConfig.get('storage.package.localDir');
-    __fs.ensureDirSync(path);
+    // __fs.ensureDirSync(path);
     return path;
 };
 export default fn;

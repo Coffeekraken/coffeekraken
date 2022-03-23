@@ -1,66 +1,87 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name           mounted
- * @namespace      node.mixins.until
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin allows you to set some css applied only UNTIL a specific "state" has been
- * reached.
- * Supported states are:
- * - mounted: When a sugar webcomponent has the "mounted" attribute
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * .myElement {
- *      display: block;
- *
- *      @sugar.until.mounted {
- *          display: none;
- *      }
- * }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginmountedMixinInterface extends __SInterface {
-    static get _definition() {
-        return {
-            state: {
-                type: 'String',
-                values: ['mounted'],
-                required: true,
-            },
-            sibling: {
-                type: 'Boolean',
-                default: false,
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var mounted_exports = {};
+__export(mounted_exports, {
+  default: () => mounted_default,
+  interface: () => postcssSugarPluginmountedMixinInterface
+});
+module.exports = __toCommonJS(mounted_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginmountedMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      state: {
+        type: "String",
+        values: ["mounted"],
+        required: true
+      },
+      sibling: {
+        type: "Boolean",
+        default: false
+      }
+    };
+  }
 }
-export { postcssSugarPluginmountedMixinInterface as interface };
-export default function ({ params, atRule, postcssApi, }) {
-    const finalParams = Object.assign({ state: 'mounted', sibling: false }, (params !== null && params !== void 0 ? params : {}));
-    let selector;
-    switch (finalParams.state) {
-        case 'mounted':
-            if (finalParams.sibling) {
-                selector = '*:not([mounted]):not(.mounted) &';
-            }
-            else {
-                selector = '&:not([mounted]):not(.mounted)';
-            }
-            break;
-    }
-    const wrapperRule = new postcssApi.Rule({
-        selector,
-    });
-    // @ts-ignore
-    atRule.nodes.forEach((node) => {
-        wrapperRule.append(node);
-    });
-    atRule.replaceWith(wrapperRule);
+function mounted_default({
+  params,
+  atRule,
+  postcssApi
+}) {
+  const finalParams = __spreadValues({
+    state: "mounted",
+    sibling: false
+  }, params != null ? params : {});
+  let selector;
+  switch (finalParams.state) {
+    case "mounted":
+      if (finalParams.sibling) {
+        selector = "*:not([mounted]):not(.mounted) &";
+      } else {
+        selector = "&:not([mounted]):not(.mounted)";
+      }
+      break;
+  }
+  const wrapperRule = new postcssApi.Rule({
+    selector
+  });
+  atRule.nodes.forEach((node) => {
+    wrapperRule.append(node);
+  });
+  atRule.replaceWith(wrapperRule);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW91bnRlZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm1vdW50ZWQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFFSCxNQUFNLHVDQUF3QyxTQUFRLFlBQVk7SUFDOUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLENBQUM7Z0JBQ25CLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1lBQ0QsT0FBTyxFQUFFO2dCQUNMLElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxLQUFLO2FBQ2pCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUNELE9BQU8sRUFBRSx1Q0FBdUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQU1oRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sVUFBVSxHQUtiO0lBQ0csTUFBTSxXQUFXLEdBQUcsZ0JBQ2hCLEtBQUssRUFBRSxTQUFTLEVBQ2hCLE9BQU8sRUFBRSxLQUFLLElBQ1gsQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUVGLElBQUksUUFBUSxDQUFDO0lBRWIsUUFBUSxXQUFXLENBQUMsS0FBSyxFQUFFO1FBQ3ZCLEtBQUssU0FBUztZQUNWLElBQUksV0FBVyxDQUFDLE9BQU8sRUFBRTtnQkFDckIsUUFBUSxHQUFHLGtDQUFrQyxDQUFDO2FBQ2pEO2lCQUFNO2dCQUNILFFBQVEsR0FBRyxnQ0FBZ0MsQ0FBQzthQUMvQztZQUNELE1BQU07S0FDYjtJQUVELE1BQU0sV0FBVyxHQUFHLElBQUksVUFBVSxDQUFDLElBQUksQ0FBQztRQUNwQyxRQUFRO0tBQ1gsQ0FBQyxDQUFDO0lBRUgsYUFBYTtJQUNiLE1BQU0sQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDMUIsV0FBVyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUM3QixDQUFDLENBQUMsQ0FBQztJQUVILE1BQU0sQ0FBQyxXQUFXLENBQUMsV0FBVyxDQUFDLENBQUM7QUFDcEMsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

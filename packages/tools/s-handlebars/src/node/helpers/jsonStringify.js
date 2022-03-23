@@ -1,22 +1,27 @@
-/**
- * @name            jsonStringify
- * @namespace       node.helpers
- * @type            Function
- * @platform        js
- * @platform        node
- * @status          beta
- *
- * This helper allows you to stringify an object
- *
- * @param       {Object}        object      The object to stringify
- * @param       {Any}           arg1        The arg 1 of the JSON.stringify function
- * @param       {Number}        [tabWidth=4]        How many spaces tab has to be
- * @return      {String}                    The stringified object
- *
- * @since           2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-export default function jsonStringify(object, arg1, tabWidth = 4) {
-    return JSON.stringify(object, arg1, tabWidth);
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var jsonStringify_exports = {};
+__export(jsonStringify_exports, {
+  default: () => jsonStringify
+});
+module.exports = __toCommonJS(jsonStringify_exports);
+function jsonStringify(object, arg1, tabWidth = 4) {
+  return JSON.stringify(object, arg1, tabWidth);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianNvblN0cmluZ2lmeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImpzb25TdHJpbmdpZnkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxhQUFhLENBQUMsTUFBTSxFQUFFLElBQUksRUFBRSxRQUFRLEdBQUcsQ0FBQztJQUM1RCxPQUFPLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxFQUFFLElBQUksRUFBRSxRQUFRLENBQUMsQ0FBQztBQUNsRCxDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

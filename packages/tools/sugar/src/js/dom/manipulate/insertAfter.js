@@ -1,38 +1,32 @@
-// @ts-nocheck
-/**
- * @name      insertAfter
- * @namespace            js.dom.manipulate
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Insert an HTMLElement after another HTMLElement
- *
- * @param 		{HTMLElement} 				elm  		The element to insert
- * @param 		{HTMLElement} 				refElm 		The element after which to insert the passed element
- * @return    {HTMLElement}               The inserted node
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import insertAfter from '@coffeekraken/sugar/js/dom/insertAfter'
- * insertAfter(myElementToInsert, theReferenceElement);
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var insertAfter_exports = {};
+__export(insertAfter_exports, {
+  default: () => insertAfter_default
+});
+module.exports = __toCommonJS(insertAfter_exports);
 function insertAfter(elm, refElm) {
-    // next sibling of ref elm
-    const nextSibling = refElm.nextSibling;
-    if (!nextSibling) {
-        refElm.parentNode.appendChild(elm);
-    }
-    else {
-        refElm.parentNode.insertBefore(elm, nextSibling);
-    }
-    return elm;
+  const nextSibling = refElm.nextSibling;
+  if (!nextSibling) {
+    refElm.parentNode.appendChild(elm);
+  } else {
+    refElm.parentNode.insertBefore(elm, nextSibling);
+  }
+  return elm;
 }
-export default insertAfter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5zZXJ0QWZ0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbnNlcnRBZnRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyxXQUFXLENBQUMsR0FBZ0IsRUFBRSxNQUFtQjtJQUN0RCwwQkFBMEI7SUFDMUIsTUFBTSxXQUFXLEdBQUcsTUFBTSxDQUFDLFdBQVcsQ0FBQztJQUN2QyxJQUFJLENBQUMsV0FBVyxFQUFFO1FBQ2QsTUFBTSxDQUFDLFVBQVUsQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDdEM7U0FBTTtRQUNILE1BQU0sQ0FBQyxVQUFVLENBQUMsWUFBWSxDQUFDLEdBQUcsRUFBRSxXQUFXLENBQUMsQ0FBQztLQUNwRDtJQUNELE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQUNELGVBQWUsV0FBVyxDQUFDIn0=
+var insertAfter_default = insertAfter;

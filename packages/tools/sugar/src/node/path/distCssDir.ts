@@ -38,7 +38,7 @@ export default function (settings: IDistCssDirSettings = {}) {
     };
     const distCssDir = __SSugarConfig.get('storage.dist.cssDir');
     if (distCssDir !== undefined) {
-        __fs.ensureDirSync(distCssDir);
+        // __fs.ensureDirSync(distCssDir);
         return distCssDir;
     }
     return undefined;

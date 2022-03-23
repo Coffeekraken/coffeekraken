@@ -1,35 +1,61 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-/**
- * @name           classes
- * @namespace      node.mixins.transition
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the transition helper classes like s-transition:slow, etc.
- * The generated transitions are specified in the config.theme.transition configuration stack
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.transition.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginTransitionClassesInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginTransitionClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"));
+class postcssSugarPluginTransitionClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginTransitionClassesInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const transitionObj = __STheme.config('transition');
-    const vars = new CssVars();
-    vars.comment(() => `
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const transitionObj = import_s_theme.default.config("transition");
+  const vars = new CssVars();
+  vars.comment(() => `
       /**
         * @name          Transitions
         * @namespace          sugar.css.helpers
@@ -47,31 +73,29 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support      edge
         * 
         ${Object.keys(transitionObj).map((transition) => {
-        return ` * @cssClass             s-transition${transition === 'default' ? '' : `:${transition}`}            Apply the \`${transition}\` transition`;
-    })}
+    return ` * @cssClass             s-transition${transition === "default" ? "" : `:${transition}`}            Apply the \`${transition}\` transition`;
+  })}
         * 
-        ${Object.keys(transitionObj)
-        .map((transition) => {
-        const id = `s-transition-${__uniqid()}`;
-        return `
+        ${Object.keys(transitionObj).map((transition) => {
+    const id = `s-transition-${(0, import_uniqid.default)()}`;
+    return `
                 * @example          html        ${transition}
                 *   <div class="s-bg:main s-radius:30" id="${id}">
-                *      <div class="s-transition${transition === 'default' ? '' : `:${transition}`} s-ratio:1 s-bg:accent s-radius:30"></div>
+                *      <div class="s-transition${transition === "default" ? "" : `:${transition}`} s-ratio:1 s-bg:accent s-radius:30"></div>
                 *       <style>
                 *           #${id} > div { position: relative; left: 0; width: 100px; }
                 *           #${id}:hover > div { left: calc(100% - 100px); )  }
                 *       </style>
                 *   </div>`;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    Object.keys(transitionObj).forEach((transitionName) => {
-        vars.comment(() => `/**
-  * @name          s-ratio:${transitionName.replace('/', '-')}
+  Object.keys(transitionObj).forEach((transitionName) => {
+    vars.comment(() => `/**
+  * @name          s-ratio:${transitionName.replace("/", "-")}
   * @namespace          sugar.css.transition
   * @type               CssClass
   * @platform             css
@@ -80,15 +104,18 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
   * This class allows you to apply a "<yellow>${transitionName}</yellow>" transition style to any HTMLElement
   * 
   * @example        html
-  * <div class="s-transition\:${transitionName.replace('/', '-')} s-bg:accent">
+  * <div class="s-transition:${transitionName.replace("/", "-")} s-bg:accent">
   *     <div class="s-center-abs">I'm a cool container</div>
   * </div>
   */
  `).code(`
-.s-transition${transitionName === 'default' ? '' : `--${transitionName}`} {
+.s-transition${transitionName === "default" ? "" : `--${transitionName}`} {
     @sugar.transition(${transitionName});
 }`);
-    });
-    return vars;
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxRQUFRLE1BQU0sMENBQTBDLENBQUM7QUFFaEU7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBRUgsTUFBTSw0Q0FBNkMsU0FBUSxZQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLDRDQUE0QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXJFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxhQUFhLEdBQUcsUUFBUSxDQUFDLE1BQU0sQ0FBQyxZQUFZLENBQUMsQ0FBQztJQUVwRCxNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7O1VBaUJKLE1BQU0sQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsVUFBVSxFQUFFLEVBQUU7UUFDNUMsT0FBTyx3Q0FDSCxVQUFVLEtBQUssU0FBUyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksVUFBVSxFQUNsRCwyQkFBMkIsVUFBVSxlQUFlLENBQUM7SUFDekQsQ0FBQyxDQUFDOztVQUVBLE1BQU0sQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDO1NBQ3ZCLEdBQUcsQ0FBQyxDQUFDLFVBQVUsRUFBRSxFQUFFO1FBQ2hCLE1BQU0sRUFBRSxHQUFHLGdCQUFnQixRQUFRLEVBQUUsRUFBRSxDQUFDO1FBQ3hDLE9BQU87a0RBQzJCLFVBQVU7NkRBQ0MsRUFBRTtpREFFM0MsVUFBVSxLQUFLLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLFVBQVUsRUFDbEQ7OytCQUVlLEVBQUU7K0JBQ0YsRUFBRTs7MkJBRU4sQ0FBQztJQUNoQixDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztLQUtsQixDQUNBLENBQUM7SUFFRixNQUFNLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLGNBQWMsRUFBRSxFQUFFO1FBQ2xELElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7NkJBQ1csY0FBYyxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDOzs7Ozs7Z0RBTWIsY0FBYzs7O2dDQUc5QixjQUFjLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7Ozs7RUFJOUQsQ0FDTyxDQUFDLElBQUksQ0FBQztlQUNBLGNBQWMsS0FBSyxTQUFTLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsS0FBSyxjQUFjLEVBQUU7d0JBQ2hELGNBQWM7RUFDcEMsQ0FBQyxDQUFDO0lBQ0EsQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

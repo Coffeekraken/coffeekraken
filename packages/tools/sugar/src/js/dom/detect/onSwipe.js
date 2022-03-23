@@ -1,41 +1,77 @@
-// @ts-nocheck
-function onSwipe(elm, cb, settings = {}) {
-    settings = Object.assign({ threshold: 100 }, settings);
-    let touchstartX = 0;
-    let touchstartY = 0;
-    let touchendX = 0;
-    let touchendY = 0;
-    const gesuredZone = elm;
-    gesuredZone.addEventListener('touchstart', function (event) {
-        touchstartX = event.changedTouches[0].screenX;
-        touchstartY = event.changedTouches[0].screenY;
-    }, false);
-    gesuredZone.addEventListener('touchend', function (event) {
-        touchendX = event.changedTouches[0].screenX;
-        touchendY = event.changedTouches[0].screenY;
-        handleGesure();
-    }, false);
-    function handleGesure() {
-        const swipeNfo = {
-            distanceX: Math.abs(touchendX - touchstartX),
-            distanceY: Math.abs(touchendY - touchstartY),
-        };
-        if (touchendX + settings.threshold < touchstartX) {
-            swipeNfo.left = true;
-        }
-        if (touchendX - settings.threshold > touchstartX) {
-            swipeNfo.right = true;
-        }
-        if (touchendY + settings.threshold < touchstartY) {
-            swipeNfo.up = true;
-        }
-        if (touchendY - settings.threshold > touchstartY) {
-            swipeNfo.down = true;
-        }
-        if (swipeNfo.left || swipeNfo.right || swipeNfo.down || swipeNfo.up) {
-            cb(swipeNfo);
-        }
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var onSwipe_exports = {};
+__export(onSwipe_exports, {
+  default: () => onSwipe_default
+});
+module.exports = __toCommonJS(onSwipe_exports);
+function onSwipe(elm, cb, settings = {}) {
+  settings = __spreadValues({
+    threshold: 100
+  }, settings);
+  let touchstartX = 0;
+  let touchstartY = 0;
+  let touchendX = 0;
+  let touchendY = 0;
+  const gesuredZone = elm;
+  gesuredZone.addEventListener("touchstart", function(event) {
+    touchstartX = event.changedTouches[0].screenX;
+    touchstartY = event.changedTouches[0].screenY;
+  }, false);
+  gesuredZone.addEventListener("touchend", function(event) {
+    touchendX = event.changedTouches[0].screenX;
+    touchendY = event.changedTouches[0].screenY;
+    handleGesure();
+  }, false);
+  function handleGesure() {
+    const swipeNfo = {
+      distanceX: Math.abs(touchendX - touchstartX),
+      distanceY: Math.abs(touchendY - touchstartY)
+    };
+    if (touchendX + settings.threshold < touchstartX) {
+      swipeNfo.left = true;
+    }
+    if (touchendX - settings.threshold > touchstartX) {
+      swipeNfo.right = true;
+    }
+    if (touchendY + settings.threshold < touchstartY) {
+      swipeNfo.up = true;
+    }
+    if (touchendY - settings.threshold > touchstartY) {
+      swipeNfo.down = true;
+    }
+    if (swipeNfo.left || swipeNfo.right || swipeNfo.down || swipeNfo.up) {
+      cb(swipeNfo);
+    }
+  }
 }
-export default onSwipe;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib25Td2lwZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm9uU3dpcGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQStDZCxTQUFTLE9BQU8sQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLFdBQXNDLEVBQUU7SUFDOUQsUUFBUSxtQkFDSixTQUFTLEVBQUUsR0FBRyxJQUNYLFFBQVEsQ0FDZCxDQUFDO0lBRUYsSUFBSSxXQUFXLEdBQUcsQ0FBQyxDQUFDO0lBQ3BCLElBQUksV0FBVyxHQUFHLENBQUMsQ0FBQztJQUNwQixJQUFJLFNBQVMsR0FBRyxDQUFDLENBQUM7SUFDbEIsSUFBSSxTQUFTLEdBQUcsQ0FBQyxDQUFDO0lBQ2xCLE1BQU0sV0FBVyxHQUFHLEdBQUcsQ0FBQztJQUN4QixXQUFXLENBQUMsZ0JBQWdCLENBQ3hCLFlBQVksRUFDWixVQUFVLEtBQUs7UUFDWCxXQUFXLEdBQUcsS0FBSyxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUM7UUFDOUMsV0FBVyxHQUFHLEtBQUssQ0FBQyxjQUFjLENBQUMsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDO0lBQ2xELENBQUMsRUFDRCxLQUFLLENBQ1IsQ0FBQztJQUVGLFdBQVcsQ0FBQyxnQkFBZ0IsQ0FDeEIsVUFBVSxFQUNWLFVBQVUsS0FBSztRQUNYLFNBQVMsR0FBRyxLQUFLLENBQUMsY0FBYyxDQUFDLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQztRQUM1QyxTQUFTLEdBQUcsS0FBSyxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUM7UUFDNUMsWUFBWSxFQUFFLENBQUM7SUFDbkIsQ0FBQyxFQUNELEtBQUssQ0FDUixDQUFDO0lBRUYsU0FBUyxZQUFZO1FBQ2pCLE1BQU0sUUFBUSxHQUFHO1lBQ2IsU0FBUyxFQUFFLElBQUksQ0FBQyxHQUFHLENBQUMsU0FBUyxHQUFHLFdBQVcsQ0FBQztZQUM1QyxTQUFTLEVBQUUsSUFBSSxDQUFDLEdBQUcsQ0FBQyxTQUFTLEdBQUcsV0FBVyxDQUFDO1NBQy9DLENBQUM7UUFDRixJQUFJLFNBQVMsR0FBRyxRQUFRLENBQUMsU0FBUyxHQUFHLFdBQVcsRUFBRTtZQUM5QyxRQUFRLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztTQUN4QjtRQUNELElBQUksU0FBUyxHQUFHLFFBQVEsQ0FBQyxTQUFTLEdBQUcsV0FBVyxFQUFFO1lBQzlDLFFBQVEsQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO1NBQ3pCO1FBQ0QsSUFBSSxTQUFTLEdBQUcsUUFBUSxDQUFDLFNBQVMsR0FBRyxXQUFXLEVBQUU7WUFDOUMsUUFBUSxDQUFDLEVBQUUsR0FBRyxJQUFJLENBQUM7U0FDdEI7UUFDRCxJQUFJLFNBQVMsR0FBRyxRQUFRLENBQUMsU0FBUyxHQUFHLFdBQVcsRUFBRTtZQUM5QyxRQUFRLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztTQUN4QjtRQUNELElBQUksUUFBUSxDQUFDLElBQUksSUFBSSxRQUFRLENBQUMsS0FBSyxJQUFJLFFBQVEsQ0FBQyxJQUFJLElBQUksUUFBUSxDQUFDLEVBQUUsRUFBRTtZQUNqRSxFQUFFLENBQUMsUUFBUSxDQUFDLENBQUM7U0FDaEI7SUFDTCxDQUFDO0FBQ0wsQ0FBQztBQUNELGVBQWUsT0FBTyxDQUFDIn0=
+var onSwipe_default = onSwipe;

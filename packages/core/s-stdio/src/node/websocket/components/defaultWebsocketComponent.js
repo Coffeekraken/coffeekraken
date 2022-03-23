@@ -1,17 +1,30 @@
-/**
- * @name        defaultWebsocketComponent
- * @namespace   shared.websocket.components
- * @type        ISStdioComponent
- *
- * Websocket default stdio component
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default {
-    id: 'default',
-    render(logObj, settings = {}) {
-        return logObj;
-    }
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdFdlYlNvY2tldENvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRlZmF1bHRXZWJTb2NrZXRDb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBR0E7Ozs7Ozs7OztHQVNHO0FBQ0gsZUFBZTtJQUNYLEVBQUUsRUFBRSxTQUFTO0lBQ2IsTUFBTSxDQUFDLE1BQU0sRUFBRSxRQUFRLEdBQUcsRUFBRTtRQUN4QixPQUFPLE1BQU0sQ0FBQztJQUNsQixDQUFDO0NBQ0osQ0FBQyJ9
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var defaultWebsocketComponent_exports = {};
+__export(defaultWebsocketComponent_exports, {
+  default: () => defaultWebsocketComponent_default
+});
+module.exports = __toCommonJS(defaultWebsocketComponent_exports);
+var defaultWebsocketComponent_default = {
+  id: "default",
+  render(logObj, settings = {}) {
+    return logObj;
+  }
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

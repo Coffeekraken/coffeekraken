@@ -1,33 +1,28 @@
-// @ts-nocheck
-/**
- * @name        isMap
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the passed value is a js Map
- *
- * @param    {Mixed}    value    The value to check
- * @return   {Boolean}   true if it's a Map, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import isMap from '@coffeekraken/sugar/js/is/map'
- * const map = new Map();
- * if (isMap(map) {
- *   // do something
- * }
- *
- * @since         1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var map_exports = {};
+__export(map_exports, {
+  default: () => map_default
+});
+module.exports = __toCommonJS(map_exports);
 function isMap(value) {
-    return value instanceof Map;
+  return value instanceof Map;
 }
-export default isMap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUFTLEtBQUssQ0FBQyxLQUFLO0lBQ2hCLE9BQU8sS0FBSyxZQUFZLEdBQUcsQ0FBQztBQUNoQyxDQUFDO0FBQ0QsZUFBZSxLQUFLLENBQUMifQ==
+var map_default = isMap;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

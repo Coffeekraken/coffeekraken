@@ -1,51 +1,75 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name          round
- * @namespace     ui.loader
- * @type               PostcssMixin
- * @interface     ./round          interface
- * @platform      postcss
- * @status        beta
- *
- * Apply the round style to any element
- *
- * @param        {String}           [name='s-loader-round']               A name for your round
- * @param       {String}            [duration='theme.ui.loaderRound.duration']        The duration of your round animation
- * @param        {String}           [easing='theme.ui.loaderRound.easing']            The easing you want for your round animation
- * @return      {String}            The generated css
- *
- * @example     css
- * .my-round {
- *    @sugar.ui.loader.round;
- * }
- *
- * @since      2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginUiloaderRoundMixinInterface extends __SInterface {
-    static get _definition() {
-        return {
-            name: {
-                type: 'String',
-                default: 's-loader-round',
-            },
-            duration: {
-                type: 'String',
-                default: __STheme.config('ui.loaderRound.duration'),
-            },
-            easing: {
-                type: 'String',
-                default: __STheme.config('ui.loaderRound.easing'),
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var round_exports = {};
+__export(round_exports, {
+  default: () => round_default,
+  interface: () => postcssSugarPluginUiloaderRoundMixinInterface
+});
+module.exports = __toCommonJS(round_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginUiloaderRoundMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      name: {
+        type: "String",
+        default: "s-loader-round"
+      },
+      duration: {
+        type: "String",
+        default: import_s_theme.default.config("ui.loaderRound.duration")
+      },
+      easing: {
+        type: "String",
+        default: import_s_theme.default.config("ui.loaderRound.easing")
+      }
+    };
+  }
 }
-export { postcssSugarPluginUiloaderRoundMixinInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ name: '', duration: '', easing: '' }, params);
-    const vars = [];
-    vars.push(`
+function round_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    name: "",
+    duration: "",
+    easing: ""
+  }, params);
+  const vars = [];
+  vars.push(`
     pointer-events: none;
     display: inline-block;
     border-radius: 50%;
@@ -70,6 +94,9 @@ export default function ({ params, atRule, replaceWith, }) {
         }
     }
   `);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm91bmQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyb3VuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUVILE1BQU0sNkNBQThDLFNBQVEsWUFBWTtJQUNwRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSxnQkFBZ0I7YUFDNUI7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMseUJBQXlCLENBQUM7YUFDdEQ7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsdUJBQXVCLENBQUM7YUFDcEQ7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUUQsT0FBTyxFQUFFLDZDQUE2QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXRFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLEVBQUUsRUFDUixRQUFRLEVBQUUsRUFBRSxFQUNaLE1BQU0sRUFBRSxFQUFFLElBQ1AsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7OztpQkFPRyxXQUFXLENBQUMsSUFBSSxJQUFJLFdBQVcsQ0FBQyxRQUFRLElBQUksV0FBVyxDQUFDLE1BQU07O2lCQUU5RCxXQUFXLENBQUMsSUFBSTs7Ozs7Ozs7Ozs7Ozs7O0dBZTlCLENBQUMsQ0FBQztJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

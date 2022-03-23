@@ -1,37 +1,42 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-import __loadConfigFile from '../loadConfigFile';
-describe('sugar.node.config.loadConfigFile', () => {
-    it('Should load a simple js file correctly', () => __awaiter(void 0, void 0, void 0, function* () {
-        const config = yield __loadConfigFile('config.js', {
-            rootDir: `${__dirname}/data`,
-        });
-        expect(config).toEqual({
-            name: 'config.js',
-        });
-    }));
-    it('Should load a simple yaml file correctly', () => __awaiter(void 0, void 0, void 0, function* () {
-        const config = yield __loadConfigFile('config.yml', {
-            rootDir: `${__dirname}/data`,
-        });
-        expect(config).toEqual({
-            name: 'config.yml',
-        });
-    }));
-    it('Should load a file that exists against others that not correctly', () => __awaiter(void 0, void 0, void 0, function* () {
-        const config = yield __loadConfigFile(['support.js', 'something.ts', 'config.yml'], {
-            rootDir: `${__dirname}/data`,
-        });
-        expect(config).toEqual({
-            name: 'config.yml',
-        });
-    }));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_loadConfigFile = __toESM(require("../loadConfigFile"), 1);
+describe("sugar.node.config.loadConfigFile", () => {
+  it("Should load a simple js file correctly", async () => {
+    const config = await (0, import_loadConfigFile.default)("config.js", {
+      rootDir: `${__dirname}/data`
+    });
+    expect(config).toEqual({
+      name: "config.js"
+    });
+  });
+  it("Should load a simple yaml file correctly", async () => {
+    const config = await (0, import_loadConfigFile.default)("config.yml", {
+      rootDir: `${__dirname}/data`
+    });
+    expect(config).toEqual({
+      name: "config.yml"
+    });
+  });
+  it("Should load a file that exists against others that not correctly", async () => {
+    const config = await (0, import_loadConfigFile.default)(["support.js", "something.ts", "config.yml"], {
+      rootDir: `${__dirname}/data`
+    });
+    expect(config).toEqual({
+      name: "config.yml"
+    });
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9hZENvbmZpZ0ZpbGUudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImxvYWRDb25maWdGaWxlLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxnQkFBZ0IsTUFBTSxtQkFBbUIsQ0FBQztBQUVqRCxRQUFRLENBQUMsa0NBQWtDLEVBQUUsR0FBRyxFQUFFO0lBQzlDLEVBQUUsQ0FBQyx3Q0FBd0MsRUFBRSxHQUFTLEVBQUU7UUFDcEQsTUFBTSxNQUFNLEdBQUcsTUFBTSxnQkFBZ0IsQ0FBQyxXQUFXLEVBQUU7WUFDL0MsT0FBTyxFQUFFLEdBQUcsU0FBUyxPQUFPO1NBQy9CLENBQUMsQ0FBQztRQUNILE1BQU0sQ0FBQyxNQUFNLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDbkIsSUFBSSxFQUFFLFdBQVc7U0FDcEIsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNILEVBQUUsQ0FBQywwQ0FBMEMsRUFBRSxHQUFTLEVBQUU7UUFDdEQsTUFBTSxNQUFNLEdBQUcsTUFBTSxnQkFBZ0IsQ0FBQyxZQUFZLEVBQUU7WUFDaEQsT0FBTyxFQUFFLEdBQUcsU0FBUyxPQUFPO1NBQy9CLENBQUMsQ0FBQztRQUNILE1BQU0sQ0FBQyxNQUFNLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDbkIsSUFBSSxFQUFFLFlBQVk7U0FDckIsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNILEVBQUUsQ0FBQyxrRUFBa0UsRUFBRSxHQUFTLEVBQUU7UUFDOUUsTUFBTSxNQUFNLEdBQUcsTUFBTSxnQkFBZ0IsQ0FDakMsQ0FBQyxZQUFZLEVBQUUsY0FBYyxFQUFFLFlBQVksQ0FBQyxFQUM1QztZQUNJLE9BQU8sRUFBRSxHQUFHLFNBQVMsT0FBTztTQUMvQixDQUNKLENBQUM7UUFDRixNQUFNLENBQUMsTUFBTSxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQ25CLElBQUksRUFBRSxZQUFZO1NBQ3JCLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDLENBQUMsQ0FBQyJ9

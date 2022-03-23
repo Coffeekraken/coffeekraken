@@ -1,16 +1,37 @@
-export const purgecss = {
-    safelist: {
-        standard: [
-            's-tabs',
-            's-btn',
-            's-color',
-            's-color--accent',
-            /^language-/,
-        ],
-        greedy: [
-            /s-code-example/,
-            /hljs/,
-        ]
-    }
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvZGVFeGFtcGxlLnNwZWMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ29kZUV4YW1wbGUuc3BlYy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsTUFBTSxRQUFRLEdBQUc7SUFDcEIsUUFBUSxFQUFFO1FBQ04sUUFBUSxFQUFFO1lBQ04sUUFBUTtZQUNSLE9BQU87WUFDUCxTQUFTO1lBQ1QsaUJBQWlCO1lBQ2pCLFlBQVk7U0FDZjtRQUNELE1BQU0sRUFBRTtZQUNKLGdCQUFnQjtZQUNoQixNQUFNO1NBQ1Q7S0FDSjtDQUNKLENBQUEifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SCodeExample_spec_exports = {};
+__export(SCodeExample_spec_exports, {
+  purgecss: () => purgecss
+});
+module.exports = __toCommonJS(SCodeExample_spec_exports);
+const purgecss = {
+  safelist: {
+    standard: [
+      "s-tabs",
+      "s-btn",
+      "s-color",
+      "s-color--accent",
+      /^language-/
+    ],
+    greedy: [
+      /s-code-example/,
+      /hljs/
+    ]
+  }
+};

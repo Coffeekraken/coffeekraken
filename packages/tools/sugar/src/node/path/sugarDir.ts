@@ -39,7 +39,7 @@ export default function (settings: ISugarRootDirSettings = {}) {
     };
     const sugarRootDir = __SSugarConfig.get('storage.sugar.rootDir');
     if (sugarRootDir !== undefined) {
-        __fs.ensureDirSync(sugarRootDir);
+        // __fs.ensureDirSync(sugarRootDir);
         return sugarRootDir;
     }
 }

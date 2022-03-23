@@ -1,56 +1,74 @@
-// @ts-nocheck
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name          var
- * @namespace     node.function.theme
- * @type          PostcssFunction
- * @platform      postcss
- * @status        beta
- *
- * This function allows you to get a theme value using dot path like "font.family.default.font-family", etc...
- * Usually the best way to access theme config is to use dedicated functions/mixins like "sugar.margin", "sugar.font.family", etc...
- * This function make the same as using the `sugar.theme` one with the parameter `return`set to "var"
- *
- * @param       {String}        dotPath      The dot path to the theme config value you want back
- * @param       {Boolean}       [scalable=false]        Specify if you want to value back to be scalable. Work only for number config as well
- * @param       {Any}           [fallback=null]         Specify a fallback in case the variable does not resolve to any value
- * @return      {Css}                   The corresponding css
- *
- * @example       css
- * .my-element {
- *    font-family: sugar.theme(font.family.default.font-family);
- * }
- *
- * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginThemeInterface extends __SInterface {
-    static get _definition() {
-        return {
-            dotPath: {
-                type: 'String',
-                required: true,
-            },
-            scalable: {
-                type: 'Boolean',
-                default: false,
-            },
-            fallback: {
-                type: 'Boolean',
-                default: true,
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var var_exports = {};
+__export(var_exports, {
+  default: () => theme,
+  interface: () => postcssSugarPluginThemeInterface
+});
+module.exports = __toCommonJS(var_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginThemeInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      dotPath: {
+        type: "String",
+        required: true
+      },
+      scalable: {
+        type: "Boolean",
+        default: false
+      },
+      fallback: {
+        type: "Boolean",
+        default: true
+      }
+    };
+  }
 }
-export { postcssSugarPluginThemeInterface as interface };
-export default function theme({ params, }) {
-    const finalParams = Object.assign({}, params);
-    if (finalParams.scalable) {
-        return `sugar.scalable(${__STheme.cssVar(finalParams.dotPath, finalParams.fallback)})`;
-    }
-    else {
-        return __STheme.cssVar(finalParams.dotPath, finalParams.fallback);
-    }
+function theme({
+  params
+}) {
+  const finalParams = __spreadValues({}, params);
+  if (finalParams.scalable) {
+    return `sugar.scalable(${import_s_theme.default.cssVar(finalParams.dotPath, finalParams.fallback)})`;
+  } else {
+    return import_s_theme.default.cssVar(finalParams.dotPath, finalParams.fallback);
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmFyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidmFyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFFSCxNQUFNLGdDQUFpQyxTQUFRLFlBQVk7SUFDdkQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELFFBQVEsRUFBRTtnQkFDTixJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELFFBQVEsRUFBRTtnQkFDTixJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsSUFBSTthQUNoQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDRCxPQUFPLEVBQUUsZ0NBQWdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFRekQsTUFBTSxDQUFDLE9BQU8sVUFBVSxLQUFLLENBQUMsRUFDMUIsTUFBTSxHQUdUO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsSUFBSSxXQUFXLENBQUMsUUFBUSxFQUFFO1FBQ3RCLE9BQU8sa0JBQWtCLFFBQVEsQ0FBQyxNQUFNLENBQ3BDLFdBQVcsQ0FBQyxPQUFPLEVBQ25CLFdBQVcsQ0FBQyxRQUFRLENBQ3ZCLEdBQUcsQ0FBQztLQUNSO1NBQU07UUFDSCxPQUFPLFFBQVEsQ0FBQyxNQUFNLENBQUMsV0FBVyxDQUFDLE9BQU8sRUFBRSxXQUFXLENBQUMsUUFBUSxDQUFDLENBQUM7S0FDckU7QUFDTCxDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

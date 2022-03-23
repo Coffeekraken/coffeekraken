@@ -1,25 +1,31 @@
-import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions';
-/**
- * @name            commonTextFileExtensions
- * @namespace       shared.extension
- * @type            Function
- * @platform       node
- * @platform        js
- * @status         beta
- *
- * This function allows you to get an array of common text file extensions with or without the dot
- *
- * @param       {Boolean}           withDot          If true, the dot will be added to the extension
- * @return     {Array<String>}                           The array of extensions
- *
- * @example         js
- * import __commonTextFileExtensions from '@coffeekraken/sugar/shared/extension/commonTextFileExtensions';
- * const extensions = __commonTextFileExtensions();
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function commonTextFileExtensions(withDot = false) {
-    return ['txt', 'htm', 'html', 'md', 'json', 'csv', 'rss', 'xhtml', ...__commonProgrammingFileExtensions(withDot)].map(ext => withDot ? `.${ext}` : ext);
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var commonTextFileExtensions_exports = {};
+__export(commonTextFileExtensions_exports, {
+  default: () => commonTextFileExtensions
+});
+module.exports = __toCommonJS(commonTextFileExtensions_exports);
+var import_commonProgrammingFileExtensions = __toESM(require("./commonProgrammingFileExtensions"), 1);
+function commonTextFileExtensions(withDot = false) {
+  return ["txt", "htm", "html", "md", "json", "csv", "rss", "xhtml", ...(0, import_commonProgrammingFileExtensions.default)(withDot)].map((ext) => withDot ? `.${ext}` : ext);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tbW9uVGV4dEZpbGVFeHRlbnNpb25zLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY29tbW9uVGV4dEZpbGVFeHRlbnNpb25zLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8saUNBQWlDLE1BQU0sbUNBQW1DLENBQUM7QUFFbEY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FtQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLHdCQUF3QixDQUFDLE9BQU8sR0FBRyxLQUFLO0lBQzVELE9BQU8sQ0FBQyxLQUFLLEVBQUMsS0FBSyxFQUFDLE1BQU0sRUFBQyxJQUFJLEVBQUMsTUFBTSxFQUFDLEtBQUssRUFBQyxLQUFLLEVBQUMsT0FBTyxFQUFDLEdBQUcsaUNBQWlDLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQ3BKLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,32 +1,58 @@
-import __commonAudioFileExtensions from './commonAudioFileExtensions';
-import __commonCompressedFileExtensions from './commonCompressedFileExtensions';
-import __commonDataFileExtensions from './commonDataFileExtensions';
-import __commonDiscFileExtensions from './commonDiscFileExtensions';
-import __commonEmailFileExtensions from './commonEmailFileExtensions';
-import __commonExecutableFileExtensions from './commonExecutableFileExtensions';
-import __commonFontFileExtensions from './commonFontFileExtensions';
-import __commonImageFileExtensions from './commonImageFileExtensions';
-import __commonMediaFileExtensions from './commonMediaFileExtensions';
-import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions';
-import __commonTextFileExtensions from './commonTextFileExtensions';
-import __commonVideoFileExtensions from './commonVideoFileExtensions';
-import __commonWebFileExtensions from './commonWebFileExtensions';
-import __unique from '../array/unique';
-export default function commonFileExtensions(types = ['audio', 'compressed', 'data', 'disc', 'email', 'executable', 'font', 'image', 'media', 'programming', 'text', 'video', 'web'], withDot = false) {
-    return __unique([
-        ...(types.includes('audio') ? __commonAudioFileExtensions(false) : []),
-        ...(types.includes('compressed') ? __commonCompressedFileExtensions(false) : []),
-        ...(types.includes('data') ? __commonDataFileExtensions(false) : []),
-        ...(types.includes('disc') ? __commonDiscFileExtensions(false) : []),
-        ...(types.includes('email') ? __commonEmailFileExtensions(false) : []),
-        ...(types.includes('executable') ? __commonExecutableFileExtensions(false) : []),
-        ...(types.includes('font') ? __commonFontFileExtensions(false) : []),
-        ...(types.includes('image') ? __commonImageFileExtensions(false) : []),
-        ...(types.includes('media') ? __commonMediaFileExtensions(false) : []),
-        ...(types.includes('programming') ? __commonProgrammingFileExtensions(false) : []),
-        ...(types.includes('text') ? __commonTextFileExtensions(false) : []),
-        ...(types.includes('video') ? __commonVideoFileExtensions(false) : []),
-        ...(types.includes('web') ? __commonWebFileExtensions(false) : []),
-    ]).map(ext => withDot ? `.${ext}` : ext);
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var commonFileExtensions_exports = {};
+__export(commonFileExtensions_exports, {
+  default: () => commonFileExtensions
+});
+module.exports = __toCommonJS(commonFileExtensions_exports);
+var import_commonAudioFileExtensions = __toESM(require("./commonAudioFileExtensions"), 1);
+var import_commonCompressedFileExtensions = __toESM(require("./commonCompressedFileExtensions"), 1);
+var import_commonDataFileExtensions = __toESM(require("./commonDataFileExtensions"), 1);
+var import_commonDiscFileExtensions = __toESM(require("./commonDiscFileExtensions"), 1);
+var import_commonEmailFileExtensions = __toESM(require("./commonEmailFileExtensions"), 1);
+var import_commonExecutableFileExtensions = __toESM(require("./commonExecutableFileExtensions"), 1);
+var import_commonFontFileExtensions = __toESM(require("./commonFontFileExtensions"), 1);
+var import_commonImageFileExtensions = __toESM(require("./commonImageFileExtensions"), 1);
+var import_commonMediaFileExtensions = __toESM(require("./commonMediaFileExtensions"), 1);
+var import_commonProgrammingFileExtensions = __toESM(require("./commonProgrammingFileExtensions"), 1);
+var import_commonTextFileExtensions = __toESM(require("./commonTextFileExtensions"), 1);
+var import_commonVideoFileExtensions = __toESM(require("./commonVideoFileExtensions"), 1);
+var import_commonWebFileExtensions = __toESM(require("./commonWebFileExtensions"), 1);
+var import_unique = __toESM(require("../array/unique"), 1);
+function commonFileExtensions(types = ["audio", "compressed", "data", "disc", "email", "executable", "font", "image", "media", "programming", "text", "video", "web"], withDot = false) {
+  return (0, import_unique.default)([
+    ...types.includes("audio") ? (0, import_commonAudioFileExtensions.default)(false) : [],
+    ...types.includes("compressed") ? (0, import_commonCompressedFileExtensions.default)(false) : [],
+    ...types.includes("data") ? (0, import_commonDataFileExtensions.default)(false) : [],
+    ...types.includes("disc") ? (0, import_commonDiscFileExtensions.default)(false) : [],
+    ...types.includes("email") ? (0, import_commonEmailFileExtensions.default)(false) : [],
+    ...types.includes("executable") ? (0, import_commonExecutableFileExtensions.default)(false) : [],
+    ...types.includes("font") ? (0, import_commonFontFileExtensions.default)(false) : [],
+    ...types.includes("image") ? (0, import_commonImageFileExtensions.default)(false) : [],
+    ...types.includes("media") ? (0, import_commonMediaFileExtensions.default)(false) : [],
+    ...types.includes("programming") ? (0, import_commonProgrammingFileExtensions.default)(false) : [],
+    ...types.includes("text") ? (0, import_commonTextFileExtensions.default)(false) : [],
+    ...types.includes("video") ? (0, import_commonVideoFileExtensions.default)(false) : [],
+    ...types.includes("web") ? (0, import_commonWebFileExtensions.default)(false) : []
+  ]).map((ext) => withDot ? `.${ext}` : ext);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tbW9uRmlsZUV4dGVuc2lvbnMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb21tb25GaWxlRXh0ZW5zaW9ucy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLDJCQUEyQixNQUFNLDZCQUE2QixDQUFDO0FBQ3RFLE9BQU8sZ0NBQWdDLE1BQU0sa0NBQWtDLENBQUM7QUFDaEYsT0FBTywwQkFBMEIsTUFBTSw0QkFBNEIsQ0FBQztBQUNwRSxPQUFPLDBCQUEwQixNQUFNLDRCQUE0QixDQUFDO0FBQ3BFLE9BQU8sMkJBQTJCLE1BQU0sNkJBQTZCLENBQUM7QUFDdEUsT0FBTyxnQ0FBZ0MsTUFBTSxrQ0FBa0MsQ0FBQztBQUNoRixPQUFPLDBCQUEwQixNQUFNLDRCQUE0QixDQUFDO0FBQ3BFLE9BQU8sMkJBQTJCLE1BQU0sNkJBQTZCLENBQUM7QUFDdEUsT0FBTywyQkFBMkIsTUFBTSw2QkFBNkIsQ0FBQztBQUN0RSxPQUFPLGlDQUFpQyxNQUFNLG1DQUFtQyxDQUFDO0FBQ2xGLE9BQU8sMEJBQTBCLE1BQU0sNEJBQTRCLENBQUM7QUFDcEUsT0FBTywyQkFBMkIsTUFBTSw2QkFBNkIsQ0FBQztBQUN0RSxPQUFPLHlCQUF5QixNQUFNLDJCQUEyQixDQUFDO0FBRWxFLE9BQU8sUUFBUSxNQUFNLGlCQUFpQixDQUFDO0FBdUN2QyxNQUFNLENBQUMsT0FBTyxVQUFVLG9CQUFvQixDQUFDLFFBQWUsQ0FBQyxPQUFPLEVBQUMsWUFBWSxFQUFDLE1BQU0sRUFBQyxNQUFNLEVBQUMsT0FBTyxFQUFDLFlBQVksRUFBQyxNQUFNLEVBQUMsT0FBTyxFQUFDLE9BQU8sRUFBQyxhQUFhLEVBQUMsTUFBTSxFQUFDLE9BQU8sRUFBQyxLQUFLLENBQUMsRUFBRSxPQUFPLEdBQUcsS0FBSztJQUM1TCxPQUFPLFFBQVEsQ0FBQztRQUNaLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQywyQkFBMkIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ3RFLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUMsQ0FBQyxnQ0FBZ0MsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ2hGLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQywwQkFBMEIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ3BFLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQywwQkFBMEIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ3BFLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQywyQkFBMkIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ3RFLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUMsQ0FBQyxnQ0FBZ0MsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ2hGLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQywwQkFBMEIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ3BFLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQywyQkFBMkIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ3RFLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQywyQkFBMkIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ3RFLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxpQ0FBaUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ2xGLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQywwQkFBMEIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ3BFLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQywyQkFBMkIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO1FBQ3RFLEdBQUcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyx5QkFBeUIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDO0tBQ3JFLENBQUMsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzdDLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

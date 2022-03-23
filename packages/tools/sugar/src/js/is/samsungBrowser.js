@@ -1,31 +1,26 @@
-// @ts-nocheck
-/**
- * @name        isSamsumgBrowser
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Detect if is the samsung stock browser that is running the page
- *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- * @return      {Boolean}                                       true if is a samsung browser, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import isSamsumgBrowser from '@coffeekraken/sugar/js/is/samsungBrowser'
- * if (isSamsumgBrowser()) {
- *   // do something
- * }
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var samsungBrowser_exports = {};
+__export(samsungBrowser_exports, {
+  default: () => samsungBrowser_default
+});
+module.exports = __toCommonJS(samsungBrowser_exports);
 function isSamsumgBrowser(ua = navigator.userAgent) {
-    return ua.match(/SamsungBrowser/i) !== null;
+  return ua.match(/SamsungBrowser/i) !== null;
 }
-export default isSamsumgBrowser;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Ftc3VuZ0Jyb3dzZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzYW1zdW5nQnJvd3Nlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsZ0JBQWdCLENBQUMsS0FBYSxTQUFTLENBQUMsU0FBUztJQUN0RCxPQUFPLEVBQUUsQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQUMsS0FBSyxJQUFJLENBQUM7QUFDaEQsQ0FBQztBQUNELGVBQWUsZ0JBQWdCLENBQUMifQ==
+var samsungBrowser_default = isSamsumgBrowser;

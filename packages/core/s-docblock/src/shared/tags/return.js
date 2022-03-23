@@ -1,41 +1,44 @@
-// @ts-nocheck
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-/**
- * @name              return
- * @namespace           shared.tags
- * @type              Function
- * @platform            node
- * @status              beta
- *
- * Parse the return tag
- *
- * @param       {Object}          data        The data object parsed in the string
- * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
- * @return      {Object}                      The formated object
- *
- * @todo      interface
- * @todo      doc
- *
- * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var return_exports = {};
+__export(return_exports, {
+  default: () => return_default
+});
+module.exports = __toCommonJS(return_exports);
+var import_upperFirst = __toESM(require("@coffeekraken/sugar/shared/string/upperFirst"), 1);
 function returnTag(data, blockSettings) {
-    const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
-    let type = stringArray && stringArray[0]
-        ? __upperFirst(stringArray[0].replace('{', '').replace('}', ''))
-        : null;
-    if (type && type.includes('|')) {
-        type = type.split('|').map((l) => __upperFirst(l.trim()));
-    }
-    else {
-        type = [type];
-    }
-    const description = new String(stringArray[1] ? stringArray[1].trim() : '');
-    description.render = true;
-    return {
-        type,
-        description,
-    };
+  const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
+  let type = stringArray && stringArray[0] ? (0, import_upperFirst.default)(stringArray[0].replace("{", "").replace("}", "")) : null;
+  if (type && type.includes("|")) {
+    type = type.split("|").map((l) => (0, import_upperFirst.default)(l.trim()));
+  } else {
+    type = [type];
+  }
+  const description = new String(stringArray[1] ? stringArray[1].trim() : "");
+  description.render = true;
+  return {
+    type,
+    description
+  };
 }
-export default returnTag;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmV0dXJuLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmV0dXJuLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSw4Q0FBOEMsQ0FBQztBQUV4RTs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsU0FBUyxTQUFTLENBQUMsSUFBSSxFQUFFLGFBQWE7SUFDbEMsTUFBTSxXQUFXLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUUsQ0FBQyxLQUFLLENBQUMsYUFBYSxDQUFDLENBQUM7SUFFM0QsSUFBSSxJQUFJLEdBQ0osV0FBVyxJQUFJLFdBQVcsQ0FBQyxDQUFDLENBQUM7UUFDekIsQ0FBQyxDQUFDLFlBQVksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQyxDQUFDO1FBQ2hFLENBQUMsQ0FBQyxJQUFJLENBQUM7SUFDZixJQUFJLElBQUksSUFBSSxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxFQUFFO1FBQzVCLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUM7S0FDN0Q7U0FBTTtRQUNILElBQUksR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDO0tBQ2pCO0lBRUQsTUFBTSxXQUFXLEdBQUcsSUFBSSxNQUFNLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDO0lBQzVFLFdBQVcsQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDO0lBRTFCLE9BQU87UUFDSCxJQUFJO1FBQ0osV0FBVztLQUNkLENBQUM7QUFDTixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var return_default = returnTag;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

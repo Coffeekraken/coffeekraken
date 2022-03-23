@@ -1,35 +1,32 @@
-/**
- * @name            sanitizeSugarJson
- * @namespace            node.sugar
- * @type            Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function allows you to sanitize a sugarJson JSON to be sure you'll get
- * the same structure everytime
- *
- * @param       {JSON}          sugarJson           The sugar.json JSON to sanitize
- * @return      {JSON}                              Sanitizes sugarJson
- *
- * @example         js
- * import sanitizeSugarJson from '@coffeekraken/sugar/node/sugar/sanitizeSugarJson';
- * sanitizeSugarJson({
- *      extends: 'something',
- *      // ...
- * }); // => { extends: ['something'], ... }
- *
- * @since       2.0.0
- * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function sanitizeSugarJson(sugarJson) {
-    // break reference
-    sugarJson = Object.assign({}, sugarJson);
-    // extends
-    if (!sugarJson.extends)
-        sugarJson.extends = [];
-    else if (!Array.isArray(sugarJson.extends))
-        sugarJson.extends = [sugarJson.extends];
-    return sugarJson;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var sanitizeSugarJson_exports = {};
+__export(sanitizeSugarJson_exports, {
+  default: () => sanitizeSugarJson
+});
+module.exports = __toCommonJS(sanitizeSugarJson_exports);
+function sanitizeSugarJson(sugarJson) {
+  sugarJson = Object.assign({}, sugarJson);
+  if (!sugarJson.extends)
+    sugarJson.extends = [];
+  else if (!Array.isArray(sugarJson.extends))
+    sugarJson.extends = [sugarJson.extends];
+  return sugarJson;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2FuaXRpemVTdWdhckpzb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzYW5pdGl6ZVN1Z2FySnNvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGlCQUFpQixDQUFDLFNBQWM7SUFDcEQsa0JBQWtCO0lBQ2xCLFNBQVMsR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDLEVBQUUsRUFBRSxTQUFTLENBQUMsQ0FBQztJQUV6QyxVQUFVO0lBQ1YsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPO1FBQUUsU0FBUyxDQUFDLE9BQU8sR0FBRyxFQUFFLENBQUM7U0FDMUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQztRQUN0QyxTQUFTLENBQUMsT0FBTyxHQUFHLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRTVDLE9BQU8sU0FBUyxDQUFDO0FBQ3JCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,51 +1,49 @@
-// @ts-nocheck
-import __isValidPath from 'is-valid-path';
-import __fs from 'fs';
-/**
- * @name                            isPath
- * @namespace            node.fs
- * @type                            Function
- * @platform        node
- * @status          beta
- *
- * Check if the passed string is a valid path or not
- *
- * @param         {String}            path              The path to check
- * @param         {Boolean}           [checkExistence=false]      Specify if you want to check that the passed path actually exist
- * @return        {Boolean}                             true if the path is valide, false if not
- *
- * @example       js
- * import isPath from '@coffeekraken/sugar/node/fs/isPath';
- * isPath('hello/world'); // => true
- *
- * @see       https://www.npmjs.com/package/is-valid-path
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var isPath_exports = {};
+__export(isPath_exports, {
+  default: () => isPath_default
+});
+module.exports = __toCommonJS(isPath_exports);
+var import_is_valid_path = __toESM(require("is-valid-path"), 1);
+var import_fs = __toESM(require("fs"), 1);
 function isPath(path, checkExistence = false) {
-    if (typeof path !== 'string')
-        return false;
-    // empty string
-    if (path.trim() === '')
-        return false;
-    // multiple lines content
-    if (path.split('\n').length > 1)
-        return false;
-    // check if we have some /
-    if (!path.includes('/')) {
-        if (!path.includes('.'))
-            return false;
-    }
-    // check if the path is valid or not
-    if (!__isValidPath(path))
-        return false;
-    // if we have to check the path existence
-    if (checkExistence) {
-        if (!__fs.existsSync(path))
-            return false;
-    }
-    // otherwise, all is ok
-    return true;
+  if (typeof path !== "string")
+    return false;
+  if (path.trim() === "")
+    return false;
+  if (path.split("\n").length > 1)
+    return false;
+  if (!path.includes("/")) {
+    if (!path.includes("."))
+      return false;
+  }
+  if (!(0, import_is_valid_path.default)(path))
+    return false;
+  if (checkExistence) {
+    if (!import_fs.default.existsSync(path))
+      return false;
+  }
+  return true;
 }
-export default isPath;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaXNQYXRoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaXNQYXRoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxlQUFlLENBQUM7QUFDMUMsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBRXRCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQVMsTUFBTSxDQUFDLElBQUksRUFBRSxjQUFjLEdBQUcsS0FBSztJQUN4QyxJQUFJLE9BQU8sSUFBSSxLQUFLLFFBQVE7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUUzQyxlQUFlO0lBQ2YsSUFBSSxJQUFJLENBQUMsSUFBSSxFQUFFLEtBQUssRUFBRTtRQUFFLE9BQU8sS0FBSyxDQUFDO0lBRXJDLHlCQUF5QjtJQUN6QixJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUMsTUFBTSxHQUFHLENBQUM7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUU5QywwQkFBMEI7SUFDMUIsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLEVBQUU7UUFDckIsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDO1lBQUUsT0FBTyxLQUFLLENBQUM7S0FDekM7SUFFRCxvQ0FBb0M7SUFDcEMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUM7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUV2Qyx5Q0FBeUM7SUFDekMsSUFBSSxjQUFjLEVBQUU7UUFDaEIsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDO1lBQUUsT0FBTyxLQUFLLENBQUM7S0FDNUM7SUFFRCx1QkFBdUI7SUFDdkIsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQUNELGVBQWUsTUFBTSxDQUFDIn0=
+var isPath_default = isPath;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

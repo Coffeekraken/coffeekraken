@@ -1,35 +1,42 @@
-import __get from '@coffeekraken/sugar/shared/object/get';
-/**
- * @name            get
- * @namespace       node.helpers
- * @type            Function
- * @platform        js
- * @platform        node
- * @status          beta
- *
- * This helper allows you to get get a value deep into the passed object using dotpath syntax
- *
- * @param       {Object}        object          The object you want to get a value from
- * @param      {String}        path             The dotpath to the value you want to get
- * @param       {Boolean}       [resolveDots=true]      Specify if you want to resolve the passed dotpath or treat it as a property
- * @param       {String}        [insidePath=null]       Gives you the ability to take a subvalue if you have set the "resolveDots" to false
- *
- * @since           2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-export default function get(object, path, resolveDots = true, insidePath = null) {
-    if (typeof insidePath !== 'string')
-        insidePath = null;
-    let res;
-    if (resolveDots) {
-        res = __get(object, path);
-    }
-    else {
-        res = object[path];
-    }
-    if (insidePath) {
-        return __get(res, insidePath);
-    }
-    return res;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var get_exports = {};
+__export(get_exports, {
+  default: () => get
+});
+module.exports = __toCommonJS(get_exports);
+var import_get = __toESM(require("@coffeekraken/sugar/shared/object/get"), 1);
+function get(object, path, resolveDots = true, insidePath = null) {
+  if (typeof insidePath !== "string")
+    insidePath = null;
+  let res;
+  if (resolveDots) {
+    res = (0, import_get.default)(object, path);
+  } else {
+    res = object[path];
+  }
+  if (insidePath) {
+    return (0, import_get.default)(res, insidePath);
+  }
+  return res;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZ2V0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sS0FBSyxNQUFNLHVDQUF1QyxDQUFDO0FBRTFEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsR0FBRyxDQUN2QixNQUFNLEVBQ04sSUFBSSxFQUNKLFdBQVcsR0FBRyxJQUFJLEVBQ2xCLFVBQVUsR0FBRyxJQUFJO0lBR2pCLElBQUksT0FBTyxVQUFVLEtBQUssUUFBUTtRQUFFLFVBQVUsR0FBRyxJQUFJLENBQUM7SUFFdEQsSUFBSSxHQUFHLENBQUM7SUFDUixJQUFJLFdBQVcsRUFBRTtRQUNiLEdBQUcsR0FBRyxLQUFLLENBQUMsTUFBTSxFQUFFLElBQUksQ0FBQyxDQUFDO0tBQzdCO1NBQU07UUFDSCxHQUFHLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDO0tBQ3RCO0lBQ0QsSUFBSSxVQUFVLEVBQUU7UUFDWixPQUFPLEtBQUssQ0FBQyxHQUFHLEVBQUUsVUFBVSxDQUFDLENBQUM7S0FDakM7SUFDRCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

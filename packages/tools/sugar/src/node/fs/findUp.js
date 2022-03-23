@@ -1,57 +1,87 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __SFile from '@coffeekraken/s-file';
-import __fs from 'fs';
-import __glob from 'glob';
-import __isGlob from '../../shared/is/glob';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-export default function findUp(search, settings) {
-    settings = Object.assign({ symlinks: true, cwd: process.cwd(), stopWhenFound: true, SFile: true }, settings);
-    return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-        yield __SSugarConfig.load();
-        const cwd = settings.cwd;
-        let currentPath = cwd.split('/').filter((p) => p.trim() !== '');
-        let foundedFiles = [];
-        while (currentPath.length > 0) {
-            const path = `/${currentPath.join('/')}`;
-            if (__isGlob(search)) {
-                let files = __glob.sync(search, {
-                    cwd: path,
-                    symlinks: settings.symlinks,
-                });
-                if (files && files.length) {
-                    files = files.map((f) => {
-                        return `${path}/${f}`;
-                    });
-                    foundedFiles = [...foundedFiles, ...files];
-                }
-            }
-            else if (__fs.existsSync(`${path}/${search}`)) {
-                foundedFiles.push(`${path}/${search}`);
-            }
-            // check if we need to stop when found
-            if (settings.stopWhenFound && foundedFiles.length) {
-                break;
-            }
-            // update the currentPath
-            currentPath = currentPath.slice(0, -1);
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var findUp_exports = {};
+__export(findUp_exports, {
+  default: () => findUp
+});
+module.exports = __toCommonJS(findUp_exports);
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_glob = __toESM(require("glob"), 1);
+var import_glob2 = __toESM(require("../../shared/is/glob"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+function findUp(search, settings) {
+  settings = __spreadValues({
+    symlinks: true,
+    cwd: process.cwd(),
+    stopWhenFound: true,
+    SFile: true
+  }, settings);
+  return new Promise(async (resolve) => {
+    await import_s_sugar_config.default.load();
+    const cwd = settings.cwd;
+    let currentPath = cwd.split("/").filter((p) => p.trim() !== "");
+    let foundedFiles = [];
+    while (currentPath.length > 0) {
+      const path = `/${currentPath.join("/")}`;
+      if ((0, import_glob2.default)(search)) {
+        let files = import_glob.default.sync(search, {
+          cwd: path,
+          symlinks: settings.symlinks
+        });
+        if (files && files.length) {
+          files = files.map((f) => {
+            return `${path}/${f}`;
+          });
+          foundedFiles = [...foundedFiles, ...files];
         }
-        if (settings.SFile === true) {
-            // wrap into an SFile
-            foundedFiles = foundedFiles.map((path) => {
-                return new __SFile(path);
-            });
-        }
-        // athe end
-        return resolve(foundedFiles);
-    }));
+      } else if (import_fs.default.existsSync(`${path}/${search}`)) {
+        foundedFiles.push(`${path}/${search}`);
+      }
+      if (settings.stopWhenFound && foundedFiles.length) {
+        break;
+      }
+      currentPath = currentPath.slice(0, -1);
+    }
+    if (settings.SFile === true) {
+      foundedFiles = foundedFiles.map((path) => {
+        return new import_s_file.default(path);
+      });
+    }
+    return resolve(foundedFiles);
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmluZFVwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZmluZFVwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLE9BQU8sTUFBTSxzQkFBc0IsQ0FBQztBQUMzQyxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxNQUFNLE1BQU0sTUFBTSxDQUFDO0FBQzFCLE9BQU8sUUFBUSxNQUFNLHNCQUFzQixDQUFDO0FBQzVDLE9BQU8sY0FBYyxNQUFNLDhCQUE4QixDQUFDO0FBaUMxRCxNQUFNLENBQUMsT0FBTyxVQUFVLE1BQU0sQ0FDMUIsTUFBYyxFQUNkLFFBQXlCO0lBRXpCLFFBQVEsbUJBQ0osUUFBUSxFQUFFLElBQUksRUFDZCxHQUFHLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUNsQixhQUFhLEVBQUUsSUFBSSxFQUNuQixLQUFLLEVBQUUsSUFBSSxJQUNSLFFBQVEsQ0FDZCxDQUFDO0lBRUYsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFPLE9BQU8sRUFBRSxFQUFFO1FBQ2pDLE1BQU0sY0FBYyxDQUFDLElBQUksRUFBRSxDQUFDO1FBRTVCLE1BQU0sR0FBRyxHQUFHLFFBQVEsQ0FBQyxHQUFHLENBQUM7UUFDekIsSUFBSSxXQUFXLEdBQUcsR0FBRyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLEVBQUUsS0FBSyxFQUFFLENBQUMsQ0FBQztRQUNoRSxJQUFJLFlBQVksR0FBRyxFQUFFLENBQUM7UUFFdEIsT0FBTyxXQUFXLENBQUMsTUFBTSxHQUFHLENBQUMsRUFBRTtZQUMzQixNQUFNLElBQUksR0FBRyxJQUFJLFdBQVcsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQztZQUN6QyxJQUFJLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtnQkFDbEIsSUFBSSxLQUFLLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUU7b0JBQzVCLEdBQUcsRUFBRSxJQUFJO29CQUNULFFBQVEsRUFBRSxRQUFRLENBQUMsUUFBUTtpQkFDOUIsQ0FBQyxDQUFDO2dCQUNILElBQUksS0FBSyxJQUFJLEtBQUssQ0FBQyxNQUFNLEVBQUU7b0JBQ3ZCLEtBQUssR0FBRyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7d0JBQ3BCLE9BQU8sR0FBRyxJQUFJLElBQUksQ0FBQyxFQUFFLENBQUM7b0JBQzFCLENBQUMsQ0FBQyxDQUFDO29CQUNILFlBQVksR0FBRyxDQUFDLEdBQUcsWUFBWSxFQUFFLEdBQUcsS0FBSyxDQUFDLENBQUM7aUJBQzlDO2FBQ0o7aUJBQU0sSUFBSSxJQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsSUFBSSxJQUFJLE1BQU0sRUFBRSxDQUFDLEVBQUU7Z0JBQzdDLFlBQVksQ0FBQyxJQUFJLENBQUMsR0FBRyxJQUFJLElBQUksTUFBTSxFQUFFLENBQUMsQ0FBQzthQUMxQztZQUNELHNDQUFzQztZQUN0QyxJQUFJLFFBQVEsQ0FBQyxhQUFhLElBQUksWUFBWSxDQUFDLE1BQU0sRUFBRTtnQkFDL0MsTUFBTTthQUNUO1lBQ0QseUJBQXlCO1lBQ3pCLFdBQVcsR0FBRyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO1NBQzFDO1FBRUQsSUFBSSxRQUFRLENBQUMsS0FBSyxLQUFLLElBQUksRUFBRTtZQUN6QixxQkFBcUI7WUFDckIsWUFBWSxHQUFHLFlBQVksQ0FBQyxHQUFHLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtnQkFDckMsT0FBTyxJQUFJLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUM3QixDQUFDLENBQUMsQ0FBQztTQUNOO1FBRUQsV0FBVztRQUNYLE9BQU8sT0FBTyxDQUFDLFlBQVksQ0FBQyxDQUFDO0lBQ2pDLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

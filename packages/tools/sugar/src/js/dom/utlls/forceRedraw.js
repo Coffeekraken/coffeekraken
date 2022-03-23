@@ -1,34 +1,34 @@
-// @ts-nocheck
-import __getStyleProperty from '../style/getStyleProperty';
-/**
- * @name      forceRedraw
- * @namespace            js.dom.utils
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Force the element to be painted again in case of visual issues
- *
- * @param    {HTMLElement}    $elm    The HTMLElement to force the redraw on
- * @return    {HTMLElement}    The HTMLElement to maintain chainability
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import forceRedraw from '@coffeekraken/sugar/js/dom/forceRedraw'
- * forceRedraw($elm)
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var forceRedraw_exports = {};
+__export(forceRedraw_exports, {
+  default: () => forceRedraw_default
+});
+module.exports = __toCommonJS(forceRedraw_exports);
+var import_getStyleProperty = __toESM(require("../style/getStyleProperty"), 1);
 function forceRedraw($elm) {
-    const display = __getStyleProperty($elm, 'display');
-    $elm.style.display = 'none';
-    $elm.offsetHeight;
-    $elm.style.display = display;
-    return $elm;
+  const display = (0, import_getStyleProperty.default)($elm, "display");
+  $elm.style.display = "none";
+  $elm.offsetHeight;
+  $elm.style.display = display;
+  return $elm;
 }
-export default forceRedraw;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9yY2VSZWRyYXcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb3JjZVJlZHJhdy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxrQkFBa0IsTUFBTSwyQkFBMkIsQ0FBQztBQUUzRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsV0FBVyxDQUFDLElBQWlCO0lBQ2xDLE1BQU0sT0FBTyxHQUFHLGtCQUFrQixDQUFDLElBQUksRUFBRSxTQUFTLENBQUMsQ0FBQztJQUNwRCxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sR0FBRyxNQUFNLENBQUM7SUFDNUIsSUFBSSxDQUFDLFlBQVksQ0FBQztJQUNsQixJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sR0FBRyxPQUFPLENBQUM7SUFDN0IsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQUNELGVBQWUsV0FBVyxDQUFDIn0=
+var forceRedraw_default = forceRedraw;

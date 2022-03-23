@@ -1,12 +1,23 @@
-/**
- * @jest-environment jsdom
- */
-import __getHtmlClassFromTagName from '../getHtmlClassFromTagName';
-describe('sugar.js.html.getHtmlClassFromTagName', () => {
-    it('Should get back the correct HTMLElement class from passed tags', (done) => {
-        expect(__getHtmlClassFromTagName('a')).toBe(window.HTMLAnchorElement);
-        expect(__getHtmlClassFromTagName('img')).toBe(window.HTMLImageElement);
-        done();
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_getHtmlClassFromTagName = __toESM(require("../getHtmlClassFromTagName"), 1);
+describe("sugar.js.html.getHtmlClassFromTagName", () => {
+  it("Should get back the correct HTMLElement class from passed tags", (done) => {
+    expect((0, import_getHtmlClassFromTagName.default)("a")).toBe(window.HTMLAnchorElement);
+    expect((0, import_getHtmlClassFromTagName.default)("img")).toBe(window.HTMLImageElement);
+    done();
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0SHRtbENsYXNzRnJvbVRhZ05hbWUudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldEh0bWxDbGFzc0Zyb21UYWdOYW1lLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxPQUFPLHlCQUF5QixNQUFNLDRCQUE0QixDQUFDO0FBRW5FLFFBQVEsQ0FBQyx1Q0FBdUMsRUFBRSxHQUFHLEVBQUU7SUFDbkQsRUFBRSxDQUFDLGdFQUFnRSxFQUFFLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDMUUsTUFBTSxDQUFDLHlCQUF5QixDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO1FBQ3RFLE1BQU0sQ0FBQyx5QkFBeUIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsZ0JBQWdCLENBQUMsQ0FBQztRQUV2RSxJQUFJLEVBQUUsQ0FBQztJQUNYLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyxDQUFDLENBQUMifQ==

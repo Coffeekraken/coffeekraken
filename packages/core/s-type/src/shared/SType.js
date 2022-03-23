@@ -1,5 +1,32 @@
-import __SType from './_SType';
-import './sTypeRegisterDefaultDescriptors';
-export * from './_SType';
-export default __SType;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1R5cGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTVHlwZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLE9BQU8sTUFBTSxVQUFVLENBQUM7QUFDL0IsT0FBTyxtQ0FBbUMsQ0FBQztBQUUzQyxjQUFjLFVBQVUsQ0FBQztBQUN6QixlQUFlLE9BQU8sQ0FBQyJ9
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SType_exports = {};
+__export(SType_exports, {
+  default: () => SType_default
+});
+module.exports = __toCommonJS(SType_exports);
+var import_SType = __toESM(require("./_SType"), 1);
+var import_sTypeRegisterDefaultDescriptors = require("./sTypeRegisterDefaultDescriptors");
+__reExport(SType_exports, require("./_SType"), module.exports);
+var SType_default = import_SType.default;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

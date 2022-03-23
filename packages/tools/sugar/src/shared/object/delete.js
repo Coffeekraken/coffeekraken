@@ -1,60 +1,55 @@
-// @ts-nocheck
-import __set from './set';
-/**
- * @name                      delete
- * @namespace            js.object
- * @type                      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Delete an object property using a dotPath like "something.else"
- *
- * @param         {Object}          object            The object on which you want to delete the property
- * @param         {String}          dotPath           The dotpath to the property you want to delete
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import delete from '@coffeekraken/sugar/js/object/delete';
- * const myObject = {
- *    hello: 'world',
- *    plop: 'yop'
- * };
- * delete(myObject, 'plop');
- *
- * @since     2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var delete_exports = {};
+__export(delete_exports, {
+  default: () => delete_default
+});
+module.exports = __toCommonJS(delete_exports);
+var import_set = __toESM(require("./set"), 1);
 function del(object, dotPath) {
-    const parentDotPath = dotPath.split('.').slice(0, -1).join('.');
-    if (!dotPath || dotPath === '' || dotPath === '.')
-        return object;
-    dotPath = dotPath.replace(/\[(\w+)\]/g, '.$1');
-    dotPath = dotPath.replace(/^\./, '');
-    const a = dotPath.split('.');
-    let o = object;
-    while (a.length) {
-        const n = a.shift();
-        if (a.length < 1) {
-            if (Array.isArray(o)) {
-                const valueToDelete = o[n];
-                o = o.filter((v) => {
-                    return v !== valueToDelete;
-                });
-            }
-            else {
-                delete o[n];
-            }
-            __set(object, parentDotPath, o);
-        }
-        else {
-            o = o[n];
-        }
-    }
+  const parentDotPath = dotPath.split(".").slice(0, -1).join(".");
+  if (!dotPath || dotPath === "" || dotPath === ".")
     return object;
+  dotPath = dotPath.replace(/\[(\w+)\]/g, ".$1");
+  dotPath = dotPath.replace(/^\./, "");
+  const a = dotPath.split(".");
+  let o = object;
+  while (a.length) {
+    const n = a.shift();
+    if (a.length < 1) {
+      if (Array.isArray(o)) {
+        const valueToDelete = o[n];
+        o = o.filter((v) => {
+          return v !== valueToDelete;
+        });
+      } else {
+        delete o[n];
+      }
+      (0, import_set.default)(object, parentDotPath, o);
+    } else {
+      o = o[n];
+    }
+  }
+  return object;
 }
-export default del;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVsZXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZGVsZXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEtBQUssTUFBTSxPQUFPLENBQUM7QUFFMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJCRztBQUNILFNBQVMsR0FBRyxDQUFDLE1BQU0sRUFBRSxPQUFPO0lBQ3hCLE1BQU0sYUFBYSxHQUFHLE9BQU8sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUVoRSxJQUFJLENBQUMsT0FBTyxJQUFJLE9BQU8sS0FBSyxFQUFFLElBQUksT0FBTyxLQUFLLEdBQUc7UUFBRSxPQUFPLE1BQU0sQ0FBQztJQUNqRSxPQUFPLEdBQUcsT0FBTyxDQUFDLE9BQU8sQ0FBQyxZQUFZLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDL0MsT0FBTyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ3JDLE1BQU0sQ0FBQyxHQUFHLE9BQU8sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDN0IsSUFBSSxDQUFDLEdBQUcsTUFBTSxDQUFDO0lBQ2YsT0FBTyxDQUFDLENBQUMsTUFBTSxFQUFFO1FBQ2IsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ3BCLElBQUksQ0FBQyxDQUFDLE1BQU0sR0FBRyxDQUFDLEVBQUU7WUFDZCxJQUFJLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUU7Z0JBQ2xCLE1BQU0sYUFBYSxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDM0IsQ0FBQyxHQUFHLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtvQkFDZixPQUFPLENBQUMsS0FBSyxhQUFhLENBQUM7Z0JBQy9CLENBQUMsQ0FBQyxDQUFDO2FBQ047aUJBQU07Z0JBQ0gsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDZjtZQUNELEtBQUssQ0FBQyxNQUFNLEVBQUUsYUFBYSxFQUFFLENBQUMsQ0FBQyxDQUFDO1NBQ25DO2FBQU07WUFDSCxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1NBQ1o7S0FDSjtJQUNELE9BQU8sTUFBTSxDQUFDO0FBQ2xCLENBQUM7QUFDRCxlQUFlLEdBQUcsQ0FBQyJ9
+var delete_default = del;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

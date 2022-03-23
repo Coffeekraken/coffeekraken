@@ -1,59 +1,88 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-class postcssUiFiltrableInputInterface extends __SInterface {
-    static get _definition() {
-        return {
-            style: {
-                type: 'String',
-                values: ['solid', 'gradient', 'outline', 'text'],
-                default: __STheme.config('ui.button.defaultStyle'),
-            },
-            outline: {
-                type: 'Boolean',
-                default: __STheme.config('ui.button.outline'),
-            },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var filtrableInput_exports = {};
+__export(filtrableInput_exports, {
+  default: () => filtrableInput_default,
+  interface: () => postcssUiFiltrableInputInterface
+});
+module.exports = __toCommonJS(filtrableInput_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"), 1);
+class postcssUiFiltrableInputInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      style: {
+        type: "String",
+        values: ["solid", "gradient", "outline", "text"],
+        default: import_s_theme.default.config("ui.button.defaultStyle")
+      },
+      outline: {
+        type: "Boolean",
+        default: import_s_theme.default.config("ui.button.outline")
+      },
+      scope: {
+        type: {
+          type: "Array<String>",
+          splitChars: [",", " "]
+        },
+        values: ["bare", "lnf"],
+        default: ["bare", "lnf"]
+      }
+    };
+  }
 }
-export { postcssUiFiltrableInputInterface as interface };
-/**
- * @name          filtrableInput
- * @namespace     ui.filtrableInput
- * @type               PostcssMixin
- * @interface     ./button          interface
- * @platform      css
- * @status        beta
- *
- * Apply the filtrable input style to any s-filtrable-input element
- *
- * @example     css
- * .s-filtrable-input {
- *    @sugar.ui.filtrableInput;
- * }
- *
- * @since      2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function ({ params, atRule, applyNoScopes, sharedData, replaceWith, }) {
-    const finalParams = Object.assign({ style: __STheme.config('ui.button.defaultStyle'), outline: true, scope: ['bare', 'lnf'] }, params);
-    finalParams.scope = applyNoScopes(finalParams.scope);
-    const vars = [];
-    // bare
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+function filtrableInput_default({
+  params,
+  atRule,
+  applyNoScopes,
+  sharedData,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    style: import_s_theme.default.config("ui.button.defaultStyle"),
+    outline: true,
+    scope: ["bare", "lnf"]
+  }, params);
+  finalParams.scope = applyNoScopes(finalParams.scope);
+  const vars = [];
+  if (finalParams.scope.indexOf("bare") !== -1) {
+    vars.push(`
     `);
-    }
-    // lnf
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+  }
+  if (finalParams.scope.indexOf("lnf") !== -1) {
+    vars.push(`
         
             .s-filtrable-input__dropdown {
                 overflow: hidden;
@@ -69,10 +98,10 @@ export default function ({ params, atRule, applyNoScopes, sharedData, replaceWit
                 transition: sugar.theme(ui.filtrableInput.transition);
             }
         `);
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                vars.push(`
+    switch (finalParams.style) {
+      case "solid":
+      default:
+        vars.push(`
 
                 .s-filtrable-input__dropdown {
                     background-color: sugar.color(secondary, background);
@@ -106,15 +135,18 @@ export default function ({ params, atRule, applyNoScopes, sharedData, replaceWit
                     }
                 }
         `);
-                break;
-        }
-        if (finalParams.outline) {
-            vars.push(`
+        break;
+    }
+    if (finalParams.outline) {
+      vars.push(`
             
 
           `);
-        }
     }
-    return vars;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlsdHJhYmxlSW5wdXQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWx0cmFibGVJbnB1dC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3QyxNQUFNLGdDQUFpQyxTQUFRLFlBQVk7SUFDdkQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsVUFBVSxFQUFFLFNBQVMsRUFBRSxNQUFNLENBQUM7Z0JBQ2hELE9BQU8sRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLHdCQUF3QixDQUFDO2FBQ3JEO1lBQ0QsT0FBTyxFQUFFO2dCQUNMLElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLG1CQUFtQixDQUFDO2FBQ2hEO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQztnQkFDdkIsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQzthQUMzQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFRRCxPQUFPLEVBQUUsZ0NBQWdDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFekQ7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBRUgsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLGFBQWEsRUFDYixVQUFVLEVBQ1YsV0FBVyxHQU9kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLHdCQUF3QixDQUFDLEVBQ2hELE9BQU8sRUFBRSxJQUFJLEVBQ2IsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQyxJQUNuQixNQUFNLENBQ1osQ0FBQztJQUNGLFdBQVcsQ0FBQyxLQUFLLEdBQUcsYUFBYSxDQUFDLFdBQVcsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUVyRCxNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQztLQUNiLENBQUMsQ0FBQztLQUNGO0lBRUQsTUFBTTtJQUNOLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7O1NBZVQsQ0FBQyxDQUFDO1FBRUgsUUFBUSxXQUFXLENBQUMsS0FBSyxFQUFFO1lBQ3ZCLEtBQUssT0FBTyxDQUFDO1lBQ2I7Z0JBQ0ksSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBaUNqQixDQUFDLENBQUM7Z0JBQ0ssTUFBTTtTQUNiO1FBRUQsSUFBSSxXQUFXLENBQUMsT0FBTyxFQUFFO1lBQ3JCLElBQUksQ0FBQyxJQUFJLENBQUM7OztXQUdYLENBQUMsQ0FBQztTQUNKO0tBQ0o7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

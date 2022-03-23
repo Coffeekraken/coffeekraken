@@ -1,48 +1,39 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import __folderPath from './folderPath';
-import __ensureDirSync from './ensureDirSync';
-import __fs from 'fs-extra';
-/**
- * @name        writeFile
- * @namespace            node.fs
- * @type          Function
- * @async
- * @platform        node
- * @status          stable
- *
- * CWrite a file. If don't exist, will be created as well as the directory structure if needed... ( (async)
- *
- * @param       {String}              path           The file path to write
- * @param       {String}              data          The data to write in the file
- * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeFile()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
- * @return      {Promise}                           A promise that will be resolved when the writeFile is completed
- *
- * @example       js
- * import writeFile from '@coffeekraken/node/fs/writeFile';
- * writeFile('my/cool/file.txt', 'Hello World').then(() => {
- *    // do something on complete...
- * });
- *
- * @see             https://github.com/jprichardson/node-fs-extra
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var writeFile_exports = {};
+__export(writeFile_exports, {
+  default: () => writeFile_default
+});
+module.exports = __toCommonJS(writeFile_exports);
+var import_folderPath = __toESM(require("./folderPath"), 1);
+var import_ensureDirSync = __toESM(require("./ensureDirSync"), 1);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function writeFile(path, data, options = {}) {
-    return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-        const folderPath = __folderPath(path);
-        __ensureDirSync(folderPath);
-        yield __fs.outputFile(path, data, options);
-        resolve(path);
-    }));
+  return new Promise(async (resolve) => {
+    const folderPath = (0, import_folderPath.default)(path);
+    (0, import_ensureDirSync.default)(folderPath);
+    await import_fs_extra.default.outputFile(path, data, options);
+    resolve(path);
+  });
 }
-export default writeFile;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid3JpdGVGaWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsid3JpdGVGaWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLFlBQVksTUFBTSxjQUFjLENBQUM7QUFDeEMsT0FBTyxlQUFlLE1BQU0saUJBQWlCLENBQUM7QUFDOUMsT0FBTyxJQUFJLE1BQU0sVUFBVSxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sR0FBRyxFQUFFO0lBQ3ZDLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsRUFBRTtRQUNqQyxNQUFNLFVBQVUsR0FBRyxZQUFZLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDdEMsZUFBZSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBQzVCLE1BQU0sSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQzNDLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQUNELGVBQWUsU0FBUyxDQUFDIn0=
+var writeFile_default = writeFile;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

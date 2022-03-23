@@ -1,43 +1,58 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import __SDocmap from '@coffeekraken/s-docmap';
-import __SPromise from '@coffeekraken/s-promise';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-export default function docmap(express, settings, config) {
-    return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
-        const docmap = new __SDocmap();
-        const docmapJson = yield pipe(docmap.read());
-        const menu = docmapJson.menu;
-        config.middlewares.docmap = {
-            path: `${__dirname()}/docmapMiddleware`,
-            settings: {},
-        };
-        // @ts-ignore
-        Object.keys(menu.slug).forEach((slug) => {
-            config.routes[slug] = {
-                handler: 'markdown',
-            };
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var docmap_exports = {};
+__export(docmap_exports, {
+  default: () => docmap
+});
+module.exports = __toCommonJS(docmap_exports);
+var import_s_docmap = __toESM(require("@coffeekraken/s-docmap"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"), 1);
+function docmap(express, settings, config) {
+  return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
+    const docmap2 = new import_s_docmap.default();
+    const docmapJson = await pipe(docmap2.read());
+    const menu = docmapJson.menu;
+    config.middlewares.docmap = {
+      path: `${(0, import_dirname.default)()}/docmapMiddleware`,
+      settings: {}
+    };
+    Object.keys(menu.slug).forEach((slug) => {
+      config.routes[slug] = {
+        handler: "markdown"
+      };
+    });
+    if (menu.packages) {
+      Object.keys(menu.packages).forEach((packageName) => {
+        var _a;
+        const packageObj = menu.packages[packageName];
+        Object.keys((_a = packageObj == null ? void 0 : packageObj.slug) != null ? _a : {}).forEach((slug) => {
+          config.routes[slug] = {
+            handler: "markdown"
+          };
         });
-        if (menu.packages) {
-            Object.keys(menu.packages).forEach((packageName) => {
-                var _a;
-                // @ts-ignore
-                const packageObj = menu.packages[packageName];
-                Object.keys((_a = packageObj === null || packageObj === void 0 ? void 0 : packageObj.slug) !== null && _a !== void 0 ? _a : {}).forEach((slug) => {
-                    config.routes[slug] = {
-                        handler: 'markdown',
-                    };
-                });
-            });
-        }
-        resolve(true);
-    }));
+      });
+    }
+    resolve(true);
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZG9jbWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sU0FBUyxNQUFNLHdCQUF3QixDQUFDO0FBRS9DLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFVBQVUsTUFBTSxDQUFDLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTTtJQUNwRCxPQUFPLElBQUksVUFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQzVELE1BQU0sTUFBTSxHQUFHLElBQUksU0FBUyxFQUFFLENBQUM7UUFDL0IsTUFBTSxVQUFVLEdBQUcsTUFBTSxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksRUFBRSxDQUFDLENBQUM7UUFDN0MsTUFBTSxJQUFJLEdBQUcsVUFBVSxDQUFDLElBQUksQ0FBQztRQUU3QixNQUFNLENBQUMsV0FBVyxDQUFDLE1BQU0sR0FBRztZQUN4QixJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsbUJBQW1CO1lBQ3ZDLFFBQVEsRUFBRSxFQUFFO1NBQ2YsQ0FBQztRQUVGLGFBQWE7UUFDYixNQUFNLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtZQUNwQyxNQUFNLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxHQUFHO2dCQUNsQixPQUFPLEVBQUUsVUFBVTthQUN0QixDQUFDO1FBQ04sQ0FBQyxDQUFDLENBQUM7UUFFSCxJQUFJLElBQUksQ0FBQyxRQUFRLEVBQUU7WUFDZixNQUFNLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxXQUFXLEVBQUUsRUFBRTs7Z0JBQy9DLGFBQWE7Z0JBQ2IsTUFBTSxVQUFVLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsQ0FBQztnQkFDOUMsTUFBTSxDQUFDLElBQUksQ0FBQyxNQUFBLFVBQVUsYUFBVixVQUFVLHVCQUFWLFVBQVUsQ0FBRSxJQUFJLG1DQUFJLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO29CQUNqRCxNQUFNLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxHQUFHO3dCQUNsQixPQUFPLEVBQUUsVUFBVTtxQkFDdEIsQ0FBQztnQkFDTixDQUFDLENBQUMsQ0FBQztZQUNQLENBQUMsQ0FBQyxDQUFDO1NBQ047UUFFRCxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,19 +1,33 @@
-import __isPath from '../isPath';
-describe('sugar.node.fs.isPath', () => {
-    it('Should detect that a valid path is a valid path', () => {
-        expect(__isPath('/my/cool/path.png')).toBe(true);
-    });
-    it('Should detect that a simple file path is a valid path', () => {
-        expect(__isPath('path.png')).toBe(true);
-    });
-    it('Should return true when checking for a valid path that exists', () => {
-        expect(__isPath(`${__dirname}/data/file.jpg`, true)).toBe(true);
-    });
-    it('Should return false when checking for a valid path that does not exists', () => {
-        expect(__isPath(`${__dirname}/data/file22232323.jpg`, true)).toBe(false);
-    });
-    it('Should detect that passing null is not a valid path', () => {
-        expect(__isPath(null)).toBe(false);
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_isPath = __toESM(require("../isPath"), 1);
+describe("sugar.node.fs.isPath", () => {
+  it("Should detect that a valid path is a valid path", () => {
+    expect((0, import_isPath.default)("/my/cool/path.png")).toBe(true);
+  });
+  it("Should detect that a simple file path is a valid path", () => {
+    expect((0, import_isPath.default)("path.png")).toBe(true);
+  });
+  it("Should return true when checking for a valid path that exists", () => {
+    expect((0, import_isPath.default)(`${__dirname}/data/file.jpg`, true)).toBe(true);
+  });
+  it("Should return false when checking for a valid path that does not exists", () => {
+    expect((0, import_isPath.default)(`${__dirname}/data/file22232323.jpg`, true)).toBe(false);
+  });
+  it("Should detect that passing null is not a valid path", () => {
+    expect((0, import_isPath.default)(null)).toBe(false);
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaXNQYXRoLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpc1BhdGgudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFFBQVEsTUFBTSxXQUFXLENBQUM7QUFDakMsUUFBUSxDQUFDLHNCQUFzQixFQUFFLEdBQUcsRUFBRTtJQUNsQyxFQUFFLENBQUMsaURBQWlELEVBQUUsR0FBRyxFQUFFO1FBQ3ZELE1BQU0sQ0FBQyxRQUFRLENBQUMsbUJBQW1CLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNyRCxDQUFDLENBQUMsQ0FBQztJQUNILEVBQUUsQ0FBQyx1REFBdUQsRUFBRSxHQUFHLEVBQUU7UUFDN0QsTUFBTSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUM1QyxDQUFDLENBQUMsQ0FBQztJQUNILEVBQUUsQ0FBQywrREFBK0QsRUFBRSxHQUFHLEVBQUU7UUFDckUsTUFBTSxDQUFDLFFBQVEsQ0FBQyxHQUFHLFNBQVMsZ0JBQWdCLEVBQUUsSUFBSSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDcEUsQ0FBQyxDQUFDLENBQUM7SUFDSCxFQUFFLENBQUMseUVBQXlFLEVBQUUsR0FBRyxFQUFFO1FBQy9FLE1BQU0sQ0FBQyxRQUFRLENBQUMsR0FBRyxTQUFTLHdCQUF3QixFQUFFLElBQUksQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUM3RCxLQUFLLENBQ1IsQ0FBQztJQUNOLENBQUMsQ0FBQyxDQUFDO0lBQ0gsRUFBRSxDQUFDLHFEQUFxRCxFQUFFLEdBQUcsRUFBRTtRQUMzRCxNQUFNLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3ZDLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyxDQUFDLENBQUMifQ==

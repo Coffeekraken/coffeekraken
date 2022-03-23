@@ -1,14 +1,14 @@
 {
-  "name": "@coffeekraken/s-log",
-  "version": "2.0.0",
-  "description": "",
-  "type": "module",
-  "main": "./src/shared/exports.js",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-class": "^2.0.0",
-    "@coffeekraken/sugar": "^2.0.0"
-  }
+    "name": "@coffeekraken/s-log",
+    "version": "2.0.0",
+    "description": "",
+    "main": "./src/shared/exports.js",
+    "module": "./src/shared/exports.mjs",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0"
+    }
 }

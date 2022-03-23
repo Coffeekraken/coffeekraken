@@ -1,31 +1,26 @@
-// @ts-nocheck
-/**
- * @name      focusWithin
- * @namespace            js.dom.is
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Check if the mouse is focusWithin the passed HTMLElement
- *
- * @param    {HTMLElement}    $elm    The HTMLElement to check
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import isFocusWithin from '@coffeekraken/sugar/js/dom/is/focusWithin'
- * const $myElm = document.querySelector('.my-elm')
- * if (isFocusWithin($myElm)) {
- *   // do something
- * }
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var focusWithin_exports = {};
+__export(focusWithin_exports, {
+  default: () => focusWithin_default
+});
+module.exports = __toCommonJS(focusWithin_exports);
 function focusWithin($elm) {
-    return $elm.parentElement.querySelector(':focus-within') === $elm;
+  return $elm.parentElement.querySelector(":focus-within") === $elm;
 }
-export default focusWithin;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9jdXNXaXRoaW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb2N1c1dpdGhpbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsV0FBVyxDQUFDLElBQWlCO0lBQ2xDLE9BQU8sSUFBSSxDQUFDLGFBQWEsQ0FBQyxhQUFhLENBQUMsZUFBZSxDQUFDLEtBQUssSUFBSSxDQUFDO0FBQ3RFLENBQUM7QUFDRCxlQUFlLFdBQVcsQ0FBQyJ9
+var focusWithin_default = focusWithin;

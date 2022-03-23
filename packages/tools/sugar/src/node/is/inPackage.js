@@ -1,32 +1,32 @@
-// @ts-nocheck
-import __isInPackage from '../path/isInPackage';
-/**
- * @name            inPackage
- * @namespace            node.is
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * This function check if the we are in (one of) the package(s) passed as parameter
- *
- * @param           {String|Array}              name             The package name to check or a string comma separated like "myPackage,another"
- * @param           {String}              [from=process.cwd()]    Specify from where the research has to be done
- * @param           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
- * @return      {Boolean}                           true if is in the passed package, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import isInPackage from '@coffeekraken/sugar/node/is/inPackage';
- * isInPackage('@coffeekraken/sugar'); // => true
- *
- * @since       2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var inPackage_exports = {};
+__export(inPackage_exports, {
+  default: () => inPackage_default
+});
+module.exports = __toCommonJS(inPackage_exports);
+var import_isInPackage = __toESM(require("../path/isInPackage"), 1);
 function inPackage(name, from = process.cwd(), highest = false) {
-    return __isInPackage(name, from, highest);
+  return (0, import_isInPackage.default)(name, from, highest);
 }
-export default inPackage;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5QYWNrYWdlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaW5QYWNrYWdlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxxQkFBcUIsQ0FBQztBQUVoRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxTQUFTLENBQUMsSUFBSSxFQUFFLElBQUksR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsT0FBTyxHQUFHLEtBQUs7SUFDMUQsT0FBTyxhQUFhLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztBQUM5QyxDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var inPackage_default = inPackage;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

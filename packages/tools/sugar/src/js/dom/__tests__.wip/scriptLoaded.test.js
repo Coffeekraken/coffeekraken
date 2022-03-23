@@ -1,36 +1,35 @@
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../scriptLoaded"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var scriptLoaded_1 = __importDefault(require("../scriptLoaded"));
-    describe('sugar.js.dom.scriptLoaded', function () {
-        document.head.innerHTML = "\n    <script type=\"text/javascript\" src=\"src/data/tests/testing.js\"></script>\n  ";
-        var $elm = document.head.querySelector('script');
-        var isLoaded = false, isError = false;
-        scriptLoaded_1.default($elm)
-            .then(function () {
-            isLoaded = true;
-        })
-            .catch(function (e) {
-            isError = true;
-        });
-        it('Should detect the script loading complete state', function () {
-            $elm.onload();
-            setTimeout(function () {
-                expect(isLoaded).toBe(true);
-                expect(isError).toBe(false);
-            });
-        });
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_scriptLoaded = __toESM(require("../scriptLoaded"), 1);
+describe("sugar.js.dom.scriptLoaded", () => {
+  document.head.innerHTML = `
+    <script type="text/javascript" src="src/data/tests/testing.js"><\/script>
+  `;
+  const $elm = document.head.querySelector("script");
+  let isLoaded = false, isError = false;
+  (0, import_scriptLoaded.default)($elm).then(() => {
+    isLoaded = true;
+  }).catch((e) => {
+    isError = true;
+  });
+  it("Should detect the script loading complete state", () => {
+    $elm.onload();
+    setTimeout(() => {
+      expect(isLoaded).toBe(true);
+      expect(isError).toBe(false);
     });
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NyaXB0TG9hZGVkLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY3JpcHRMb2FkZWQudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztJQUFBLGlFQUE2QztJQUc3QyxRQUFRLENBQUMsMkJBQTJCLEVBQUU7UUFDcEMsUUFBUSxDQUFDLElBQUksQ0FBQyxTQUFTLEdBQUcsd0ZBRXpCLENBQUM7UUFDRixJQUFNLElBQUksR0FBRyxRQUFRLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUVuRCxJQUFJLFFBQVEsR0FBRyxLQUFLLEVBQ2xCLE9BQU8sR0FBRyxLQUFLLENBQUM7UUFFbEIsc0JBQWMsQ0FBQyxJQUFJLENBQUM7YUFDakIsSUFBSSxDQUFDO1lBQ0osUUFBUSxHQUFHLElBQUksQ0FBQztRQUNsQixDQUFDLENBQUM7YUFDRCxLQUFLLENBQUMsVUFBQyxDQUFDO1lBQ1AsT0FBTyxHQUFHLElBQUksQ0FBQztRQUNqQixDQUFDLENBQUMsQ0FBQztRQUVMLEVBQUUsQ0FBQyxpREFBaUQsRUFBRTtZQUNwRCxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUM7WUFDZCxVQUFVLENBQUM7Z0JBQ1QsTUFBTSxDQUFDLFFBQVEsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztnQkFDNUIsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUM5QixDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQyxDQUFDLENBQUMifQ==

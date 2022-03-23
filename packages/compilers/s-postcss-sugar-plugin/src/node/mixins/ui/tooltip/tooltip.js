@@ -1,62 +1,89 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name          tooltip
- * @namespace     ui.tooltip
- * @type               PostcssMixin
- * @interface     ./tooltip          interface
- * @platform      postcss
- * @status        beta
- *
- * Apply the tooltip style to any element
- *
- * @param       {'solid'}           [style='theme.ui.tooltip.defaultStyle']        The style you want for your tooltip
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.tooltip.defaultShape]      The shape you want for your tooltip
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
- * @return      {String}            The generated css
- *
- * @example     css
- * .my-tooltip {
- *    @sugar.ui.tooltip;
- * }
- *
- * @since      2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginUiTooltipInterface extends __SInterface {
-    static get _definition() {
-        return {
-            position: {
-                type: 'String',
-                values: [
-                    'top',
-                    'right',
-                    'bottom',
-                    'left',
-                ],
-                default: 'top',
-            },
-            interactive: {
-                type: 'Boolean',
-                default: false,
-            },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'shape', 'position', 'interactive'],
-                default: ['bare', 'lnf', 'shape', 'position', 'interactive'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var tooltip_exports = {};
+__export(tooltip_exports, {
+  default: () => tooltip_default,
+  interface: () => postcssSugarPluginUiTooltipInterface
+});
+module.exports = __toCommonJS(tooltip_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginUiTooltipInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      position: {
+        type: "String",
+        values: [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        default: "top"
+      },
+      interactive: {
+        type: "Boolean",
+        default: false
+      },
+      scope: {
+        type: {
+          type: "Array<String>",
+          splitChars: [",", " "]
+        },
+        values: ["bare", "lnf", "shape", "position", "interactive"],
+        default: ["bare", "lnf", "shape", "position", "interactive"]
+      }
+    };
+  }
 }
-export { postcssSugarPluginUiTooltipInterface as interface };
-export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
-    const finalParams = Object.assign({ style: 'solid', shape: 'default', position: 'top', interactive: false, scope: ['bare', 'lnf', 'shape', 'position', 'interactive'] }, params);
-    finalParams.scope = applyNoScopes(finalParams.scope);
-    const vars = [];
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+function tooltip_default({
+  params,
+  atRule,
+  applyNoScopes,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    style: "solid",
+    shape: "default",
+    position: "top",
+    interactive: false,
+    scope: ["bare", "lnf", "shape", "position", "interactive"]
+  }, params);
+  finalParams.scope = applyNoScopes(finalParams.scope);
+  const vars = [];
+  if (finalParams.scope.indexOf("bare") !== -1) {
+    vars.push(`
             font-size: sugar.scalable(1rem);
             position: absolute;
             z-index: 500;
@@ -64,15 +91,15 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
             max-width: 9999999px !important;
             pointer-events: none;
       `);
-    }
-    vars.push(`
+  }
+  vars.push(`
         .s-tooltip-container--active > & {
             opacity: 1;
         }
     `);
-    if (finalParams.scope.indexOf('interactive') !== -1) {
-        if (finalParams.interactive) {
-            vars.push(`
+  if (finalParams.scope.indexOf("interactive") !== -1) {
+    if (finalParams.interactive) {
+      vars.push(`
                 .s-tooltip-container--active > &,
                 .s-tooltip-container:focus > &,
                 .s-tooltip-container:focus-within > &,
@@ -81,10 +108,10 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                     pointer-events: all;
                 }
             `);
-        }
     }
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(`
+  }
+  if (finalParams.scope.indexOf("lnf") !== -1) {
+    vars.push(`
           background-color: sugar.color(current);
           color: sugar.color(current, foreground);
           transition: sugar.theme(ui.tooltip.transition);
@@ -108,14 +135,12 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
             }
 
       `);
-    }
-    // not s-floating tooltips
-    vars.push(`&:not([s-floating]) {`);
-    if (finalParams.scope.indexOf('position') !== -1) {
-        switch (finalParams.position) {
-            // RIGHT
-            case 'right':
-                vars.push(`  
+  }
+  vars.push(`&:not([s-floating]) {`);
+  if (finalParams.scope.indexOf("position") !== -1) {
+    switch (finalParams.position) {
+      case "right":
+        vars.push(`  
                 top: 50%;
                 left: calc(100% + sugar.theme(ui.tooltip.arrowSize));
                 right: auto;    
@@ -132,10 +157,9 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                     transform: rotate(90deg);
                 }
             `);
-                break;
-            // LEFT
-            case 'left':
-                vars.push(`  
+        break;
+      case "left":
+        vars.push(`  
                 top: 50%;
                 right: calc(100% + sugar.theme(ui.tooltip.arrowSize));
                 left: auto;    
@@ -152,9 +176,9 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                     transform: rotate(-90deg);
                 }
             `);
-                break;
-            case 'bottom':
-                vars.push(`  
+        break;
+      case "bottom":
+        vars.push(`  
                 bottom: auto;
                 right: auto;
                 left: 50%;
@@ -171,10 +195,10 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                     transform: rotate(180deg);
                 }
             `);
-                break;
-            case 'top':
-            default:
-                vars.push(`  
+        break;
+      case "top":
+      default:
+        vars.push(`  
                 bottom: calc(100% + sugar.theme(ui.tooltip.arrowSize));
                 left: 50%;
                 transform: translateX(-50%);
@@ -186,16 +210,14 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                     border-width: calc(sugar.theme(ui.tooltip.arrowSize) / 2);
                 }
             `);
-                break;
-        }
+        break;
     }
-    // not s-floating tooltips
-    vars.push(`}`);
-    if (finalParams.scope.indexOf('position') !== -1) {
-        switch (finalParams.position) {
-            // RIGHT
-            case 'right':
-                vars.push(`  
+  }
+  vars.push(`}`);
+  if (finalParams.scope.indexOf("position") !== -1) {
+    switch (finalParams.position) {
+      case "right":
+        vars.push(`  
                 &:before {
                   height: 100%;
                   width: sugar.theme(ui.tooltip.arrowSize);
@@ -205,10 +227,9 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                   top: 0;
                 }
             `);
-                break;
-            // LEFT
-            case 'left':
-                vars.push(`  
+        break;
+      case "left":
+        vars.push(`  
                 &:before {
                   height: 100%;
                   width: sugar.theme(ui.tooltip.arrowSize);
@@ -218,9 +239,9 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                   top: 0;
                 }
             `);
-                break;
-            case 'bottom':
-                vars.push(`  
+        break;
+      case "bottom":
+        vars.push(`  
                 &:before {
                   width: 100%;
                   height: sugar.theme(ui.tooltip.arrowSize);
@@ -229,10 +250,10 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                   left: 0;
                 }
             `);
-                break;
-            case 'top':
-            default:
-                vars.push(`  
+        break;
+      case "top":
+      default:
+        vars.push(`  
                 &:before {
                   width: 100%;
                   height: sugar.theme(ui.tooltip.arrowSize);
@@ -240,28 +261,31 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
                   left: 0;
                 }
             `);
-                break;
-        }
+        break;
     }
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
+  }
+  if (finalParams.scope.includes("shape")) {
+    switch (finalParams.shape) {
+      case "square":
+        vars.push(`
                     border-radius: 0;
                 `);
-                break;
-            case 'pill':
-                vars.push(`
+        break;
+      case "pill":
+        vars.push(`
                     border-radius: 9999px;
                 `);
-                break;
-            default:
-                vars.push(`
+        break;
+      default:
+        vars.push(`
                     border-radius: sugar.theme(ui.tooltip.borderRadius);
                 `);
-                break;
-        }
+        break;
     }
-    return vars;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9vbHRpcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRvb2x0aXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFFSCxNQUFNLG9DQUFxQyxTQUFRLFlBQVk7SUFDM0QsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILFFBQVEsRUFBRTtnQkFDTixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUU7b0JBQ0osS0FBSztvQkFDTCxPQUFPO29CQUNQLFFBQVE7b0JBQ1IsTUFBTTtpQkFDVDtnQkFDRCxPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELFdBQVcsRUFBRTtnQkFDVCxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxFQUFFLFVBQVUsRUFBRSxhQUFhLENBQUM7Z0JBQzNELE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxFQUFFLFVBQVUsRUFBRSxhQUFhLENBQUM7YUFDL0Q7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBY0QsT0FBTyxFQUFFLG9DQUFvQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBQzdELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixhQUFhLEVBQ2IsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxPQUFPLEVBQ2QsS0FBSyxFQUFFLFNBQVMsRUFDaEIsUUFBUSxFQUFFLEtBQUssRUFDZixXQUFXLEVBQUUsS0FBSyxF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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

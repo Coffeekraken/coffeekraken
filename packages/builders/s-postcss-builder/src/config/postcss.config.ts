@@ -2,8 +2,11 @@ import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 export async function preprocess(env, rawPostcssConfig, rawConfig) {
-    const config = (await __loadConfigFile('postcss.config.js')) ?? {};
-    return __deepMerge(rawPostcssConfig, config);
+    return __deepMerge(
+        Object.assign({}, rawPostcssConfig),
+        (await __loadConfigFile('postcss.config.js')) ?? {},
+        (await __loadConfigFile('.postcssrc.json')) ?? {},
+    );
 }
 
 export default function (env, config) {

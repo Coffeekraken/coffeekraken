@@ -1,39 +1,39 @@
-// @ts-nocheck
-import __clipboardy from 'clipboardy';
-import __toString from '../../shared/string/toString';
-import __ncp from 'copy-paste';
-/**
- * @name            copy
- * @namespace            node.clipboard
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * Simple function to copy things into the system clipboard.
- * This is using https://www.npmjs.com/package/clipboardy under the hood.
- *
- * @param       {String}      text        The text to copy
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import copy from '@coffeekraken/sugar/node/clipboard/copy';
- * copy('Hello world');
- *
- * @since       2.0.0
- * @see         https://www.npmjs.com/package/clipboardy
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var copy_exports = {};
+__export(copy_exports, {
+  default: () => copy_default
+});
+module.exports = __toCommonJS(copy_exports);
+var import_clipboardy = __toESM(require("clipboardy"), 1);
+var import_toString = __toESM(require("../../shared/string/toString"), 1);
+var import_copy_paste = __toESM(require("copy-paste"), 1);
 function copy(text) {
-    text = __toString(text);
-    try {
-        __clipboardy.writeSync(text);
-    }
-    catch (e) {
-        __ncp.copy(text);
-    }
+  text = (0, import_toString.default)(text);
+  try {
+    import_clipboardy.default.writeSync(text);
+  } catch (e) {
+    import_copy_paste.default.copy(text);
+  }
 }
-export default copy;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29weS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvcHkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sWUFBWSxNQUFNLFlBQVksQ0FBQztBQUN0QyxPQUFPLFVBQVUsTUFBTSw4QkFBOEIsQ0FBQztBQUN0RCxPQUFPLEtBQUssTUFBTSxZQUFZLENBQUM7QUFFL0I7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyxJQUFJLENBQUMsSUFBSTtJQUNkLElBQUksR0FBRyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDeEIsSUFBSTtRQUNBLFlBQVksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDaEM7SUFBQyxPQUFPLENBQUMsRUFBRTtRQUNSLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDcEI7QUFDTCxDQUFDO0FBQ0QsZUFBZSxJQUFJLENBQUMifQ==
+var copy_default = copy;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,47 +1,37 @@
-// @ts-nocheck
-/**
- * @name        throttle
- * @namespace            js.function
- * @type      Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * This utils function allows you to make sure that a function that will normally be called
- * several times, for example during a scroll event, to be called once each threshhold time
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 		js
- * import throttle from '@coffeekraken/sugar/js/function/throttle';
- * const myThrottledFn = throttle(() => {
- * 		// my function content that will be
- * 		// executed only once each second
- * }, 1000);
- *
- * document.addEventListener('scroll', (e) => {
- * 		// call my throttled function
- * 		myThrottledFn();
- * });
- *
- * @since         2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-/*eslint-disable */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var throttle_exports = {};
+__export(throttle_exports, {
+  default: () => throttle_default
+});
+module.exports = __toCommonJS(throttle_exports);
 function throttle(fn, threshhold) {
-    threshhold || (threshhold = 250);
-    let last;
-    return function () {
-        const context = this;
-        const now = new Date(), args = arguments;
-        if (!last || last <= now - threshhold) {
-            last = now;
-            fn.apply(context, args);
-        }
-    };
+  threshhold || (threshhold = 250);
+  let last;
+  return function() {
+    const context = this;
+    const now = new Date(), args = arguments;
+    if (!last || last <= now - threshhold) {
+      last = now;
+      fn.apply(context, args);
+    }
+  };
 }
-/*eslint-enable */
-export default throttle;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhyb3R0bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aHJvdHRsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsbUJBQW1CO0FBQ25CLFNBQVMsUUFBUSxDQUFDLEVBQUUsRUFBRSxVQUFVO0lBQzVCLFVBQVUsSUFBSSxDQUFDLFVBQVUsR0FBRyxHQUFHLENBQUMsQ0FBQztJQUNqQyxJQUFJLElBQUksQ0FBQztJQUNULE9BQU87UUFDSCxNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUM7UUFDckIsTUFBTSxHQUFHLEdBQUcsSUFBSSxJQUFJLEVBQUUsRUFDbEIsSUFBSSxHQUFHLFNBQVMsQ0FBQztRQUNyQixJQUFJLENBQUMsSUFBSSxJQUFJLElBQUksSUFBSSxHQUFHLEdBQUcsVUFBVSxFQUFFO1lBQ25DLElBQUksR0FBRyxHQUFHLENBQUM7WUFDWCxFQUFFLENBQUMsS0FBSyxDQUFDLE9BQU8sRUFBRSxJQUFJLENBQUMsQ0FBQztTQUMzQjtJQUNMLENBQUMsQ0FBQztBQUNOLENBQUM7QUFDRCxrQkFBa0I7QUFDbEIsZUFBZSxRQUFRLENBQUMifQ==
+var throttle_default = throttle;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

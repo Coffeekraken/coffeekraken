@@ -1,17 +1,40 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __deepMerge from '../../../shared/object/deepMerge';
-import __fs from 'fs';
-export default function packageJson(name, settings) {
-    const set = __deepMerge({
-        rootDir: __SugarConfig.get('npm.rootDir'),
-    });
-    // check if the package exists
-    if (!__fs.existsSync(`${set.rootDir}/${name}`) ||
-        !__fs.existsSync(`${set.rootDir}/${name}/package.json`)) {
-        throw new Error(`packageJson: Sorry but the package named "<yellow>${name}</yellow>" from which you try to get the package.json content seems to not exists...`);
-    }
-    // read the file
-    const json = JSON.parse(__fs.readFileSync(`${set.rootDir}/${name}/package.json`, 'utf8'));
-    return json;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var packageJson_exports = {};
+__export(packageJson_exports, {
+  default: () => packageJson
+});
+module.exports = __toCommonJS(packageJson_exports);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"), 1);
+var import_fs = __toESM(require("fs"), 1);
+function packageJson(name, settings) {
+  const set = (0, import_deepMerge.default)({
+    rootDir: import_s_sugar_config.default.get("npm.rootDir")
+  });
+  if (!import_fs.default.existsSync(`${set.rootDir}/${name}`) || !import_fs.default.existsSync(`${set.rootDir}/${name}/package.json`)) {
+    throw new Error(`packageJson: Sorry but the package named "<yellow>${name}</yellow>" from which you try to get the package.json content seems to not exists...`);
+  }
+  const json = JSON.parse(import_fs.default.readFileSync(`${set.rootDir}/${name}/package.json`, "utf8"));
+  return json;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZUpzb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYWNrYWdlSnNvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLGFBQWEsTUFBTSw4QkFBOEIsQ0FBQztBQUN6RCxPQUFPLFdBQVcsTUFBTSxrQ0FBa0MsQ0FBQztBQUUzRCxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUEyQnRCLE1BQU0sQ0FBQyxPQUFPLFVBQVUsV0FBVyxDQUMvQixJQUFZLEVBQ1osUUFBd0M7SUFFeEMsTUFBTSxHQUFHLEdBQXlCLFdBQVcsQ0FBQztRQUMxQyxPQUFPLEVBQUUsYUFBYSxDQUFDLEdBQUcsQ0FBQyxhQUFhLENBQUM7S0FDNUMsQ0FBQyxDQUFDO0lBRUgsOEJBQThCO0lBQzlCLElBQ0ksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsR0FBRyxDQUFDLE9BQU8sSUFBSSxJQUFJLEVBQUUsQ0FBQztRQUMxQyxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxHQUFHLENBQUMsT0FBTyxJQUFJLElBQUksZUFBZSxDQUFDLEVBQ3pEO1FBQ0UsTUFBTSxJQUFJLEtBQUssQ0FDWCxxREFBcUQsSUFBSSxzRkFBc0YsQ0FDbEosQ0FBQztLQUNMO0lBRUQsZ0JBQWdCO0lBQ2hCLE1BQU0sSUFBSSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQ25CLElBQUksQ0FBQyxZQUFZLENBQUMsR0FBRyxHQUFHLENBQUMsT0FBTyxJQUFJLElBQUksZUFBZSxFQUFFLE1BQU0sQ0FBQyxDQUNuRSxDQUFDO0lBQ0YsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

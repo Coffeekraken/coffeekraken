@@ -1,31 +1,34 @@
-// @ts-nocheck
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-/**
- * @name                            excludeGlobs
- * @namespace            node.path
- * @type                            Function
- * @platform        node
- * @status          beta
- *
- * Return the array of exclude globs
- *
- * @return                {Array<String>}         The array of globs to exclude from the overall project
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import excludeGlobs from '@coffeekraken/node/fs/excludeGlobs';
- * excludeGlobs();
- *
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function () {
-    if (__SugarConfig.isLoaded()) {
-        return __SugarConfig.get('storage.exclude');
-    }
-    return [];
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var excludeGlobs_exports = {};
+__export(excludeGlobs_exports, {
+  default: () => excludeGlobs_default
+});
+module.exports = __toCommonJS(excludeGlobs_exports);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+function excludeGlobs_default() {
+  if (import_s_sugar_config.default.isLoaded()) {
+    return import_s_sugar_config.default.get("storage.exclude");
+  }
+  return [];
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhjbHVkZUdsb2JzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZXhjbHVkZUdsb2JzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSw4QkFBOEIsQ0FBQztBQUV6RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSxDQUFDLE9BQU87SUFDVixJQUFJLGFBQWEsQ0FBQyxRQUFRLEVBQUUsRUFBRTtRQUMxQixPQUFPLGFBQWEsQ0FBQyxHQUFHLENBQUMsaUJBQWlCLENBQUMsQ0FBQztLQUMvQztJQUNELE9BQU8sRUFBRSxDQUFDO0FBQ2QsQ0FBQyJ9
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

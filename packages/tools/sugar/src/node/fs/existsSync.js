@@ -1,22 +1,65 @@
-import __fs from 'fs';
-export default function existsSync(path, settings) {
-    const set = Object.assign({ directory: true, file: true, symlink: true }, (settings || {}));
-    let isSymlink = false, stats;
-    try {
-        stats = __fs.statSync(path);
-        if (!stats)
-            return false;
-        isSymlink = stats.isSymbolicLink();
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    catch (e) {
-        return false;
-    }
-    if (isSymlink && !set.symlink)
-        return false;
-    if (stats.isDirectory() && !set.directory)
-        return false;
-    if (stats.isFile() && !set.file)
-        return false;
-    return true;
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var existsSync_exports = {};
+__export(existsSync_exports, {
+  default: () => existsSync
+});
+module.exports = __toCommonJS(existsSync_exports);
+var import_fs = __toESM(require("fs"), 1);
+function existsSync(path, settings) {
+  const set = __spreadValues({
+    directory: true,
+    file: true,
+    symlink: true
+  }, settings || {});
+  let isSymlink = false, stats;
+  try {
+    stats = import_fs.default.statSync(path);
+    if (!stats)
+      return false;
+    isSymlink = stats.isSymbolicLink();
+  } catch (e) {
+    return false;
+  }
+  if (isSymlink && !set.symlink)
+    return false;
+  if (stats.isDirectory() && !set.directory)
+    return false;
+  if (stats.isFile() && !set.file)
+    return false;
+  return true;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhpc3RzU3luYy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4aXN0c1N5bmMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBZ0N0QixNQUFNLENBQUMsT0FBTyxVQUFVLFVBQVUsQ0FDOUIsSUFBWSxFQUNaLFFBQW1DO0lBRW5DLE1BQU0sR0FBRyxtQkFDTCxTQUFTLEVBQUUsSUFBSSxFQUNmLElBQUksRUFBRSxJQUFJLEVBQ1YsT0FBTyxFQUFFLElBQUksSUFDVixDQUFDLFFBQVEsSUFBSSxFQUFFLENBQUMsQ0FDdEIsQ0FBQztJQUVGLElBQUksU0FBUyxHQUFHLEtBQUssRUFDakIsS0FBVSxDQUFDO0lBRWYsSUFBSTtRQUNBLEtBQUssR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzVCLElBQUksQ0FBQyxLQUFLO1lBQUUsT0FBTyxLQUFLLENBQUM7UUFDekIsU0FBUyxHQUFHLEtBQUssQ0FBQyxjQUFjLEVBQUUsQ0FBQztLQUN0QztJQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ1IsT0FBTyxLQUFLLENBQUM7S0FDaEI7SUFFRCxJQUFJLFNBQVMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxPQUFPO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFDNUMsSUFBSSxLQUFLLENBQUMsV0FBVyxFQUFFLElBQUksQ0FBQyxHQUFHLENBQUMsU0FBUztRQUFFLE9BQU8sS0FBSyxDQUFDO0lBQ3hELElBQUksS0FBSyxDQUFDLE1BQU0sRUFBRSxJQUFJLENBQUMsR0FBRyxDQUFDLElBQUk7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUM5QyxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

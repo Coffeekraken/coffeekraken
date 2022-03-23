@@ -1,42 +1,68 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name           classes
- * @namespace      node.mixins.clearfix
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin allows you to generate all the clearfix helper classes like s-clearfix:micro, etc...
- *
- * @return        {Css}        The generated css
- *
- * @example         postcss
- * \@sugar.clearfix.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginClearfixClassesInterface extends __SInterface {
-    static get _definition() {
-        return {
-            defaultClearfix: {
-                type: 'String',
-                default: __STheme.config('helpers.clearfix.default'),
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginClearfixClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginClearfixClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      defaultClearfix: {
+        type: "String",
+        default: import_s_theme.default.config("helpers.clearfix.default")
+      }
+    };
+  }
 }
-export { postcssSugarPluginClearfixClassesInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ defaultClearfix: 'overflow' }, params);
-    const vars = new CssVars();
-    const clearfixes = ['overflow', 'facebook', 'micro', 'after'];
-    const notStr = clearfixes
-        .filter((c) => c !== finalParams.defaultClearfix)
-        .map((c) => `:not(.s-clearfix--${c})`)
-        .join('');
-    vars.comment(() => `
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    defaultClearfix: "overflow"
+  }, params);
+  const vars = new CssVars();
+  const clearfixes = ["overflow", "facebook", "micro", "after"];
+  const notStr = clearfixes.filter((c) => c !== finalParams.defaultClearfix).map((c) => `:not(.s-clearfix--${c})`).join("");
+  vars.comment(() => `
       /**
         * @name          Clearfix
         * @namespace          sugar.css.helpers
@@ -52,35 +78,25 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support      safari
         * @support      edge
         * 
-        ${clearfixes
-        .map((clearfixName) => {
-        return ` * @cssClass     s-clearfixs-clearfix${clearfixName === finalParams.defaultClearfix
-            ? ``
-            : `:${clearfixName}`}            Apply the ${clearfixName} clearfix`;
-    })
-        .join('\n')}
+        ${clearfixes.map((clearfixName) => {
+    return ` * @cssClass     s-clearfixs-clearfix${clearfixName === finalParams.defaultClearfix ? `` : `:${clearfixName}`}            Apply the ${clearfixName} clearfix`;
+  }).join("\n")}
         * 
-        ${clearfixes
-        .map((clearfixName) => {
-        return ` * @example        html         ${clearfixName}
-            *   <div class="s-clearfix${clearfixName === finalParams.defaultClearfix
-            ? ``
-            : `:${clearfixName}`} s-bg:ui">
+        ${clearfixes.map((clearfixName) => {
+    return ` * @example        html         ${clearfixName}
+            *   <div class="s-clearfix${clearfixName === finalParams.defaultClearfix ? `` : `:${clearfixName}`} s-bg:ui">
             *       <img src="https://picsum.photos/200/200" style="float: right" />
             *   </div>
             * `;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    clearfixes.forEach((clearfixName) => {
-        vars.comment(() => `/**
-                * @name          s-clearfix${clearfixName === finalParams.defaultClearfix
-            ? ''
-            : `:${clearfixName}`}
+  clearfixes.forEach((clearfixName) => {
+    vars.comment(() => `/**
+                * @name          s-clearfix${clearfixName === finalParams.defaultClearfix ? "" : `:${clearfixName}`}
                 * @namespace          sugar.css.clearfix
                 * @type               CssClass
                 * @platform         css
@@ -89,20 +105,19 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * This class allows you to apply a "<yellow>${clearfixName}</yellow>" clearfix to any HTMLElement
                 * 
                 * @example        html
-                * <div class="s-clearfix${clearfixName === finalParams.defaultClearfix
-            ? ''
-            : `:${clearfixName}`}">I'm a cool clearfix element</div>
+                * <div class="s-clearfix${clearfixName === finalParams.defaultClearfix ? "" : `:${clearfixName}`}">I'm a cool clearfix element</div>
                 * 
                 * @since        2.0.0
                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
             `).code(`
-                .s-clearfix${clearfixName === finalParams.defaultClearfix
-            ? `${notStr}`
-            : `--${clearfixName}`} {
+                .s-clearfix${clearfixName === finalParams.defaultClearfix ? `${notStr}` : `--${clearfixName}`} {
                     @sugar.clearfix(${clearfixName});
                 }`);
-    });
-    return vars;
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLDBDQUEyQyxTQUFRLFlBQVk7SUFDakUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILGVBQWUsRUFBRTtnQkFDYixJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQywwQkFBMEIsQ0FBQzthQUN2RDtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFNRCxPQUFPLEVBQUUsMENBQTBDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbkUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsZUFBZSxFQUFFLFVBQVUsSUFDeEIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLE1BQU0sVUFBVSxHQUFHLENBQUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxPQUFPLEVBQUUsT0FBTyxDQUFDLENBQUM7SUFDOUQsTUFBTSxNQUFNLEdBQUcsVUFBVTtTQUNwQixNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsS0FBSyxXQUFXLENBQUMsZUFBZSxDQUFDO1NBQ2hELEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMscUJBQXFCLENBQUMsR0FBRyxDQUFDO1NBQ3JDLElBQUksQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUVkLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7VUFnQkosVUFBVTtTQUNQLEdBQUcsQ0FBQyxDQUFDLFlBQVksRUFBRSxFQUFFO1FBQ2xCLE9BQU8sd0NBQ0gsWUFBWSxLQUFLLFdBQVcsQ0FBQyxlQUFlO1lBQ3hDLENBQUMsQ0FBQyxFQUFFO1lBQ0osQ0FBQyxDQUFDLElBQUksWUFBWSxFQUMxQix5QkFBeUIsWUFBWSxXQUFXLENBQUM7SUFDckQsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7VUFFYixVQUFVO1NBQ1AsR0FBRyxDQUFDLENBQUMsWUFBWSxFQUFFLEVBQUU7UUFDbEIsT0FBTyxtQ0FBbUMsWUFBWTt3Q0FFdEQsWUFBWSxLQUFLLFdBQVcsQ0FBQyxlQUFlO1lBQ3hDLENBQUMsQ0FBQyxFQUFFO1lBQ0osQ0FBQyxDQUFDLElBQUksWUFBWSxFQUMxQjs7O2VBR0csQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O0tBS2xCLENBQ0EsQ0FBQztJQUVGLFVBQVUsQ0FBQyxPQUFPLENBQUMsQ0FBQyxZQUFZLEVBQUUsRUFBRTtRQUNoQyxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzZDQUVFLFlBQVksS0FBSyxXQUFXLENBQUMsZUFBZTtZQUN4QyxDQUFDLENBQUMsRUFBRTtZQUNKLENBQUMsQ0FBQyxJQUFJLFlBQVksRUFDMUI7Ozs7Ozs4REFNOEMsWUFBWTs7OzBDQUl0RCxZQUFZLEtBQUssV0FBVyxDQUFDLGVBQWU7WUFDeEMsQ0FBQyxDQUFDLEVBQUU7WUFDSixDQUFDLENBQUMsSUFBSSxZQUFZLEVBQzFCOzs7OzthQUtILENBQ0osQ0FBQyxJQUFJLENBQUM7NkJBRUssWUFBWSxLQUFLLFdBQVcsQ0FBQyxlQUFlO1lBQ3hDLENBQUMsQ0FBQyxHQUFHLE1BQU0sRUFBRTtZQUNiLENBQUMsQ0FBQyxLQUFLLFlBQVksRUFDM0I7c0NBQ3NCLFlBQVk7a0JBQ2hDLENBQUMsQ0FBQztJQUNoQixDQUFDLENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

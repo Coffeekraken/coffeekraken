@@ -1,58 +1,66 @@
-import __SInterface from '@coffeekraken/s-interface';
-class postcssSugarPluginRhythmVerticalMixinInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var vertical_exports = {};
+__export(vertical_exports, {
+  default: () => vertical_default,
+  interface: () => postcssSugarPluginRhythmVerticalMixinInterface
+});
+module.exports = __toCommonJS(vertical_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginRhythmVerticalMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginRhythmVerticalMixinInterface as interface };
-/**
- * @name           vertical
- * @namespace      node.mixins.rhythm
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin allows you to scope some css that you want to apply only in vertical rhythm context.
- * Your css will be scoped inside the "s-rhythm:vertical" class.
- *
- * @return      {Css}         The generated css
- *
- * @example         postcss
- * .my-cool-element {
- *    \@sugar.rhythm.vertical {
- *      margin-bottom: 50px;
- *    }
- * }
- *
- * @example       html
- * <h1 class="my-cool-element s-rhythm\:vertical">Hello world</h1>
- * <div class="s-rhythm\:vertical">
- *     <h1 class="my-cool-element">Hello world</h1>
- * </div>
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function ({ params, atRule, postcssApi, }) {
-    var _a;
-    const finalParams = Object.assign({}, (params !== null && params !== void 0 ? params : {}));
-    // const container = new postcssApi.Rule({
-    //     selectors: [`.s-rhythm--vertical`],
-    // });
-    (_a = atRule.nodes) === null || _a === void 0 ? void 0 : _a.forEach((node) => {
-        if (!node.selector)
-            return;
-        node.selector = node.selector
-            .split(',')
-            .map((sel) => {
-            return `.s-rhythm--vertical > ${sel}`;
-        })
-            .join(',');
-    });
-    atRule.replaceWith(atRule.nodes);
-    // atRule.nodes.forEach((n) => {
-    //     container.append(n.clone());
-    // });
-    // atRule.replaceWith(container);
+function vertical_default({
+  params,
+  atRule,
+  postcssApi
+}) {
+  var _a;
+  const finalParams = __spreadValues({}, params != null ? params : {});
+  (_a = atRule.nodes) == null ? void 0 : _a.forEach((node) => {
+    if (!node.selector)
+      return;
+    node.selector = node.selector.split(",").map((sel) => {
+      return `.s-rhythm--vertical > ${sel}`;
+    }).join(",");
+  });
+  atRule.replaceWith(atRule.nodes);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmVydGljYWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ2ZXJ0aWNhbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUdyRCxNQUFNLDhDQUErQyxTQUFRLFlBQVk7SUFDckUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFDRCxPQUFPLEVBQUUsOENBQThDLElBQUksU0FBUyxFQUFFLENBQUM7QUFJdkU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEdBS2I7O0lBQ0csTUFBTSxXQUFXLEdBQUcsa0JBQ2IsQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUNGLDBDQUEwQztJQUMxQywwQ0FBMEM7SUFDMUMsTUFBTTtJQUVOLE1BQUEsTUFBTSxDQUFDLEtBQUssMENBQUUsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDM0IsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFRO1lBQUUsT0FBTztRQUMzQixJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxRQUFRO2FBQ3hCLEtBQUssQ0FBQyxHQUFHLENBQUM7YUFDVixHQUFHLENBQUMsQ0FBQyxHQUFHLEVBQUUsRUFBRTtZQUNULE9BQU8seUJBQXlCLEdBQUcsRUFBRSxDQUFDO1FBQzFDLENBQUMsQ0FBQzthQUNELElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUNuQixDQUFDLENBQUMsQ0FBQztJQUNILE1BQU0sQ0FBQyxXQUFXLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBRWpDLGdDQUFnQztJQUNoQyxtQ0FBbUM7SUFDbkMsTUFBTTtJQUNOLGlDQUFpQztBQUNyQyxDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

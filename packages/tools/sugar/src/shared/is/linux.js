@@ -1,33 +1,31 @@
-// @ts-nocheck
-// TODO tests
-/**
- * @name                            linux
- * @namespace            js.is
- * @type                            Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the app run on linux
- *
- * @return        {Boolean}                             true if linux, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import isLinux from '@coffeekraken/sugar/js/is/linux';
- * isLinux(); // => true
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var linux_exports = {};
+__export(linux_exports, {
+  default: () => linux_default
+});
+module.exports = __toCommonJS(linux_exports);
 function linux() {
-    if (process && process.platform) {
-        return process.platform === 'linux';
-    }
-    return navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
+  if (process && process.platform) {
+    return process.platform === "linux";
+  }
+  return navigator.platform.toUpperCase().indexOf("LINUX") >= 0;
 }
-export default linux;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibGludXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJsaW51eC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsYUFBYTtBQUViOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBUyxLQUFLO0lBQ1YsSUFBSSxPQUFPLElBQUksT0FBTyxDQUFDLFFBQVEsRUFBRTtRQUM3QixPQUFPLE9BQU8sQ0FBQyxRQUFRLEtBQUssT0FBTyxDQUFDO0tBQ3ZDO0lBQ0QsT0FBTyxTQUFTLENBQUMsUUFBUSxDQUFDLFdBQVcsRUFBRSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDbEUsQ0FBQztBQUNELGVBQWUsS0FBSyxDQUFDIn0=
+var linux_default = linux;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

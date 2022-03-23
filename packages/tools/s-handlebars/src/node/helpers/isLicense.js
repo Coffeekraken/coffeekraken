@@ -1,27 +1,38 @@
-// @ts-nocheck
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
-const packageJson = __packageJsonSync();
-/**
- * @name            islicense
- * @namespace       node.helpers
- * @type            Function
- * @platform        js
- * @platform        node
- * @status          beta
- *
- * This helper allows you to make an conditional check if a license is specified in your package.json file
- *
- * @since           2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-export default function isLicense(conditional, options) {
-    var _a;
-    let license = (_a = this.license) !== null && _a !== void 0 ? _a : packageJson.license;
-    if (license.toLowerCase() === conditional.toLowerCase()) {
-        return options.fn(this);
-    }
-    else {
-        return options.inverse(this);
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var isLicense_exports = {};
+__export(isLicense_exports, {
+  default: () => isLicense
+});
+module.exports = __toCommonJS(isLicense_exports);
+var import_jsonSync = __toESM(require("@coffeekraken/sugar/node/package/jsonSync"), 1);
+const packageJson = (0, import_jsonSync.default)();
+function isLicense(conditional, options) {
+  var _a;
+  let license = (_a = this.license) != null ? _a : packageJson.license;
+  if (license.toLowerCase() === conditional.toLowerCase()) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaXNMaWNlbnNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaXNMaWNlbnNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFHZCxPQUFPLGlCQUFpQixNQUFNLDJDQUEyQyxDQUFDO0FBRTFFLE1BQU0sV0FBVyxHQUFHLGlCQUFpQixFQUFFLENBQUM7QUFFeEM7Ozs7Ozs7Ozs7OztHQVlHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxTQUFTLENBQUMsV0FBVyxFQUFFLE9BQU87O0lBQ2xELElBQUksT0FBTyxHQUFHLE1BQUEsSUFBSSxDQUFDLE9BQU8sbUNBQUksV0FBVyxDQUFDLE9BQU8sQ0FBQztJQUVsRCxJQUFJLE9BQU8sQ0FBQyxXQUFXLEVBQUUsS0FBSyxXQUFXLENBQUMsV0FBVyxFQUFFLEVBQUU7UUFDckQsT0FBTyxPQUFPLENBQUMsRUFBRSxDQUFDLElBQUksQ0FBQyxDQUFDO0tBQzNCO1NBQU07UUFDSCxPQUFPLE9BQU8sQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDaEM7QUFDTCxDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

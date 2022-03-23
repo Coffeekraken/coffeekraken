@@ -1,47 +1,65 @@
-// @ts-nocheck
-import __picomatch from 'picomatch';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __chokidar from 'chokidar';
-import __SEventEmitter from '@coffeekraken/s-event-emitter';
-/**
- * Allows to automatically reload the page when a watched file changes.
- */
-export default (config = {}) => ({
-    name: 's-vite-plugin-internal-watcher-reload',
-    apply: 'serve',
-    // NOTE: Enable globbing so that Vite keeps track of the template files.
-    config: () => ({ server: { watch: { disableGlobbing: false, followSymlinks: true } } }),
-    configureServer({ watcher, ws, config: { logger } }) {
-        config = __deepMerge({
-            config: true,
-            css: true
-        }, config);
-        const configFiles = __SugarConfig.foldersRealPaths.map(p => `${p}/*.config.js`);
-        const shouldReloadConfigs = __picomatch(configFiles);
-        const checkReload = (path) => {
-            if (!path.match(/\.config\.js$/) && !path.match(/\.css$/))
-                return;
-            let passChecks = false;
-            if (shouldReloadConfigs(path) && config.config)
-                passChecks = true;
-            if (!passChecks && path.match(/\.css$/) && config.css)
-                passChecks = true;
-            if (!passChecks)
-                return;
-            setTimeout(() => ws.send({ type: 'full-reload' }, path), 100);
-        };
-        __SEventEmitter.global.on('s-postcss-sugar-plugin-import-update', (e) => {
-            checkReload(e.path);
-        });
-        const localWatcher = __chokidar.watch(configFiles, {
-            ignoreInitial: true
-        });
-        // Ensure Vite keeps track of the files and triggers HMR as needed.
-        // watcher.add(configFiles)
-        // Do a full page reload if any of the watched files changes.
-        localWatcher.on('add', checkReload);
-        localWatcher.on('change', checkReload);
-    },
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var internalWatcherReloadPlugin_exports = {};
+__export(internalWatcherReloadPlugin_exports, {
+  default: () => internalWatcherReloadPlugin_default
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW50ZXJuYWxXYXRjaGVyUmVsb2FkUGx1Z2luLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaW50ZXJuYWxXYXRjaGVyUmVsb2FkUGx1Z2luLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFdBQVcsTUFBTSxXQUFXLENBQUE7QUFDbkMsT0FBTyxXQUFXLE1BQU0sNkNBQTZDLENBQUM7QUFDdEUsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFHekQsT0FBTyxVQUFVLE1BQU0sVUFBVSxDQUFDO0FBQ2xDLE9BQU8sZUFBZSxNQUFNLCtCQUErQixDQUFDO0FBUzVEOztHQUVHO0FBQ0gsZUFBZSxDQUFDLFNBQWlCLEVBQUUsRUFBZ0IsRUFBRSxDQUFDLENBQUM7SUFDckQsSUFBSSxFQUFFLHVDQUF1QztJQUU3QyxLQUFLLEVBQUUsT0FBTztJQUVkLHdFQUF3RTtJQUN4RSxNQUFNLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQyxFQUFFLE1BQU0sRUFBRSxFQUFFLEtBQUssRUFBRSxFQUFFLGVBQWUsRUFBRSxLQUFLLEVBQUUsY0FBYyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUUsQ0FBQztJQUV2RixlQUFlLENBQUUsRUFBRSxPQUFPLEVBQUUsRUFBRSxFQUFFLE1BQU0sRUFBRSxFQUFFLE1BQU0sRUFBRSxFQUFpQjtRQUNqRSxNQUFNLEdBQUcsV0FBVyxDQUFDO1lBQ2pCLE1BQU0sRUFBRSxJQUFJO1lBQ1osR0FBRyxFQUFFLElBQUk7U0FDWixFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBRVgsTUFBTSxXQUFXLEdBQUcsYUFBYSxDQUFDLGdCQUFnQixDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLEdBQUcsQ0FBQyxjQUFjLENBQUMsQ0FBQztRQUVoRixNQUFNLG1CQUFtQixHQUFHLFdBQVcsQ0FBQyxXQUFXLENBQUMsQ0FBQTtRQUNwRCxNQUFNLFdBQVcsR0FBRyxDQUFDLElBQVksRUFBRSxFQUFFO1lBRW5DLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUM7Z0JBQUUsT0FBTztZQUdsRSxJQUFJLFVBQVUsR0FBRyxLQUFLLENBQUM7WUFFdkIsSUFBSSxtQkFBbUIsQ0FBQyxJQUFJLENBQUMsSUFBSSxNQUFNLENBQUMsTUFBTTtnQkFBRSxVQUFVLEdBQUcsSUFBSSxDQUFDO1lBQ2xFLElBQUksQ0FBQyxVQUFVLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsSUFBSSxNQUFNLENBQUMsR0FBRztnQkFBRSxVQUFVLEdBQUcsSUFBSSxDQUFDO1lBRXpFLElBQUksQ0FBQyxVQUFVO2dCQUFFLE9BQU87WUFHeEIsVUFBVSxDQUFDLEdBQUcsRUFBRSxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUMsRUFBRSxJQUFJLEVBQUUsYUFBYSxFQUFFLEVBQUUsSUFBSSxDQUFFLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFDakUsQ0FBQyxDQUFBO1FBRUQsZUFBZSxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsc0NBQXNDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUN0RSxXQUFXLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ3RCLENBQUMsQ0FBQyxDQUFDO1FBRUgsTUFBTSxZQUFZLEdBQUcsVUFBVSxDQUFDLEtBQUssQ0FBQyxXQUFXLEVBQUU7WUFDakQsYUFBYSxFQUFFLElBQUk7U0FDcEIsQ0FBQyxDQUFDO1FBRUgsbUVBQW1FO1FBQ25FLDJCQUEyQjtRQUUzQiw2REFBNkQ7UUFDN0QsWUFBWSxDQUFDLEVBQUUsQ0FBQyxLQUFLLEVBQUUsV0FBVyxDQUFDLENBQUE7UUFDbkMsWUFBWSxDQUFDLEVBQUUsQ0FBQyxRQUFRLEVBQUUsV0FBVyxDQUFDLENBQUE7SUFDeEMsQ0FBQztDQUNGLENBQUMsQ0FBQSJ9
+module.exports = __toCommonJS(internalWatcherReloadPlugin_exports);
+var import_picomatch = __toESM(require("picomatch"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_chokidar = __toESM(require("chokidar"), 1);
+var import_s_event_emitter = __toESM(require("@coffeekraken/s-event-emitter"), 1);
+var internalWatcherReloadPlugin_default = (config = {}) => ({
+  name: "s-vite-plugin-internal-watcher-reload",
+  apply: "serve",
+  config: () => ({ server: { watch: { disableGlobbing: false, followSymlinks: true } } }),
+  configureServer({ watcher, ws, config: { logger } }) {
+    config = (0, import_deepMerge.default)({
+      config: true,
+      css: true
+    }, config);
+    const configFiles = import_s_sugar_config.default.foldersRealPaths.map((p) => `${p}/*.config.js`);
+    const shouldReloadConfigs = (0, import_picomatch.default)(configFiles);
+    const checkReload = (path) => {
+      if (!path.match(/\.config\.js$/) && !path.match(/\.css$/))
+        return;
+      let passChecks = false;
+      if (shouldReloadConfigs(path) && config.config)
+        passChecks = true;
+      if (!passChecks && path.match(/\.css$/) && config.css)
+        passChecks = true;
+      if (!passChecks)
+        return;
+      setTimeout(() => ws.send({ type: "full-reload" }, path), 100);
+    };
+    import_s_event_emitter.default.global.on("s-postcss-sugar-plugin-import-update", (e) => {
+      checkReload(e.path);
+    });
+    const localWatcher = import_chokidar.default.watch(configFiles, {
+      ignoreInitial: true
+    });
+    localWatcher.on("add", checkReload);
+    localWatcher.on("change", checkReload);
+  }
+});
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

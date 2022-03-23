@@ -1,31 +1,34 @@
-import __scrollTop from '../scroll/scrollTop';
-import __offset from '../offset/offset';
-/**
- * @name            fromElementTopToViewportBottom
- * @namespace       js.dom.distance
- * @type            Function
- * @platform          js
- * @status          beta
- *
- * This function take an element as parameter and returns you to distance it has
- * from the element top to the viewport bottom in pixels
- *
- * @param       {HTMLElement}       elm             The element you want to get the distance from
- * @return      {Number}                            The calculated distance
- *
- * @example         js
- * import distanceFromElementTopToViewportBottom from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportBottom';
- * distanceFromElementTopViewportBottom(myElement); // => 23
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function fromElementTopToViewportBottom(elm) {
-    const offsets = __offset(elm);
-    const scrollTop = __scrollTop();
-    // @ts-ignore
-    const viewportHeight = window.innerHeight;
-    const distance = viewportHeight - offsets.top + scrollTop;
-    return distance;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var fromElementTopToViewportBottom_exports = {};
+__export(fromElementTopToViewportBottom_exports, {
+  default: () => fromElementTopToViewportBottom
+});
+module.exports = __toCommonJS(fromElementTopToViewportBottom_exports);
+var import_scrollTop = __toESM(require("../scroll/scrollTop"), 1);
+var import_offset = __toESM(require("../offset/offset"), 1);
+function fromElementTopToViewportBottom(elm) {
+  const offsets = (0, import_offset.default)(elm);
+  const scrollTop = (0, import_scrollTop.default)();
+  const viewportHeight = window.innerHeight;
+  const distance = viewportHeight - offsets.top + scrollTop;
+  return distance;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbUVsZW1lbnRUb3BUb1ZpZXdwb3J0Qm90dG9tLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbUVsZW1lbnRUb3BUb1ZpZXdwb3J0Qm90dG9tLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLHFCQUFxQixDQUFDO0FBQzlDLE9BQU8sUUFBUSxNQUFNLGtCQUFrQixDQUFDO0FBRXhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSw4QkFBOEIsQ0FDbEQsR0FBZ0I7SUFFaEIsTUFBTSxPQUFPLEdBQUcsUUFBUSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQzlCLE1BQU0sU0FBUyxHQUFHLFdBQVcsRUFBRSxDQUFDO0lBQ2hDLGFBQWE7SUFDYixNQUFNLGNBQWMsR0FBRyxNQUFNLENBQUMsV0FBVyxDQUFDO0lBQzFDLE1BQU0sUUFBUSxHQUFHLGNBQWMsR0FBRyxPQUFPLENBQUMsR0FBRyxHQUFHLFNBQVMsQ0FBQztJQUMxRCxPQUFPLFFBQVEsQ0FBQztBQUNwQixDQUFDIn0=

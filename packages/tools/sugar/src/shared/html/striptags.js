@@ -1,35 +1,32 @@
-// @ts-nocheck
-import __striptags from 'striptags';
-/**
- * @name        striptags
- * @namespace            js.html
- * @type      Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * Strip tags of an html string.
- * This is a simple wrapper of the nice "striptags" package that you can find here: https://www.npmjs.com/package/striptags
- *
- * @param    {String}    html    The html string to process
- * @param    {String}    allowedTags    The tags that are allowed like <h1><h2>...
- * @param     {String}    tagReplacement    A string with which you want to replace the tags
- * @return    {String}    The processed string without tags
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import striptags from '@coffeekraken/sugar/js/string/striptags'
- * striptags('<p><span>Hello</span> world</p>', '<span>') // <span>Hello</span> world
- *
- * @see       https://www.npmjs.com/package/striptags
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function striptags(html, allowedTags = '', tagReplacement = '') {
-    return __striptags(html, allowedTags, tagReplacement);
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var striptags_exports = {};
+__export(striptags_exports, {
+  default: () => striptags_default
+});
+module.exports = __toCommonJS(striptags_exports);
+var import_striptags = __toESM(require("striptags"), 1);
+function striptags(html, allowedTags = "", tagReplacement = "") {
+  return (0, import_striptags.default)(html, allowedTags, tagReplacement);
 }
-export default striptags;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaXB0YWdzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3RyaXB0YWdzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFdBQVcsTUFBTSxXQUFXLENBQUM7QUFFcEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJCRztBQUNILFNBQVMsU0FBUyxDQUFDLElBQUksRUFBRSxXQUFXLEdBQUcsRUFBRSxFQUFFLGNBQWMsR0FBRyxFQUFFO0lBQzFELE9BQU8sV0FBVyxDQUFDLElBQUksRUFBRSxXQUFXLEVBQUUsY0FBYyxDQUFDLENBQUM7QUFDMUQsQ0FBQztBQUNELGVBQWUsU0FBUyxDQUFDIn0=
+var striptags_default = striptags;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

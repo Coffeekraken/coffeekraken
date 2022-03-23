@@ -1,11 +1,35 @@
-// @ts-nocheck
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-export default function clearTransmations($elm = document.body, settings) {
-    const cls = `s-clear-transmations-${__uniqid()}`;
-    $elm.classList.add(cls);
-    const $tag = document.createElement('style');
-    $tag.type = 'text/css';
-    $tag.innerHTML = `
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var clearTransmations_exports = {};
+__export(clearTransmations_exports, {
+  default: () => clearTransmations
+});
+module.exports = __toCommonJS(clearTransmations_exports);
+var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"), 1);
+function clearTransmations($elm = document.body, settings) {
+  const cls = `s-clear-transmations-${(0, import_uniqid.default)()}`;
+  $elm.classList.add(cls);
+  const $tag = document.createElement("style");
+  $tag.type = "text/css";
+  $tag.innerHTML = `
         .${cls},
         .${cls}:before,
         .${cls}:after,
@@ -16,16 +40,15 @@ export default function clearTransmations($elm = document.body, settings) {
             transition: none !important;
         }
     `;
-    document.head.appendChild($tag);
-    function reset() {
-        $elm.classList.remove(cls);
-        $tag.remove();
-    }
-    if (settings === null || settings === void 0 ? void 0 : settings.timeout) {
-        setTimeout(() => {
-            reset();
-        }, settings.timeout);
-    }
-    return reset;
+  document.head.appendChild($tag);
+  function reset() {
+    $elm.classList.remove(cls);
+    $tag.remove();
+  }
+  if (settings == null ? void 0 : settings.timeout) {
+    setTimeout(() => {
+      reset();
+    }, settings.timeout);
+  }
+  return reset;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xlYXJUcmFuc21hdGlvbnMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjbGVhclRyYW5zbWF0aW9ucy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsT0FBTyxRQUFRLE1BQU0sMENBQTBDLENBQUM7QUFzQ2hFLE1BQU0sQ0FBQyxPQUFPLFVBQVUsaUJBQWlCLENBQ3JDLE9BQW9CLFFBQVEsQ0FBQyxJQUFJLEVBQ2pDLFFBQThDO0lBRzlDLE1BQU0sR0FBRyxHQUFHLHdCQUF3QixRQUFRLEVBQUUsRUFBRSxDQUFDO0lBQ2pELElBQUksQ0FBQyxTQUFTLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRXhCLE1BQU0sSUFBSSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsT0FBTyxDQUFDLENBQUM7SUFDN0MsSUFBSSxDQUFDLElBQUksR0FBRyxVQUFVLENBQUM7SUFDdkIsSUFBSSxDQUFDLFNBQVMsR0FBRztXQUNWLEdBQUc7V0FDSCxHQUFHO1dBQ0gsR0FBRztXQUNILEdBQUc7V0FDSCxHQUFHO1dBQ0gsR0FBRzs7OztLQUlULENBQUM7SUFDRixRQUFRLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUVoQyxTQUFTLEtBQUs7UUFDVixJQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUMzQixJQUFJLENBQUMsTUFBTSxFQUFFLENBQUM7SUFDbEIsQ0FBQztJQUVELElBQUksUUFBUSxhQUFSLFFBQVEsdUJBQVIsUUFBUSxDQUFFLE9BQU8sRUFBRTtRQUNuQixVQUFVLENBQUMsR0FBRyxFQUFFO1lBQ1osS0FBSyxFQUFFLENBQUM7UUFDWixDQUFDLEVBQUUsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0tBQ3hCO0lBRUQsT0FBTyxLQUFLLENBQUM7QUFDakIsQ0FBQyJ9

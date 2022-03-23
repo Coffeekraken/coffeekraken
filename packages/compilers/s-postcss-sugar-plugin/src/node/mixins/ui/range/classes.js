@@ -1,51 +1,102 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
-class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
-    static get _definition() {
-        return {
-            styles: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill', 'circle'],
-                default: ['default', 'square', 'pill', 'circle'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.config('ui.range.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill', 'circle'],
-                default: __STheme.config('ui.range.defaultShape'),
-            },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-}
-export { postcssSugarPluginUiRangeClassesInterface as interface };
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-export function dependencies() {
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  dependencies: () => dependencies,
+  interface: () => postcssSugarPluginUiRangeClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+var import_faker = __toESM(require("faker"));
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
+class postcssSugarPluginUiRangeClassesInterface extends import_s_interface.default {
+  static get _definition() {
     return {
-        files: [`${__dirname()}/range.js`],
+      styles: {
+        type: "String[]",
+        values: ["solid"],
+        default: ["solid"]
+      },
+      shapes: {
+        type: "String[]",
+        values: ["default", "square", "pill", "circle"],
+        default: ["default", "square", "pill", "circle"]
+      },
+      defaultStyle: {
+        type: "String",
+        values: ["solid"],
+        default: import_s_theme.default.config("ui.range.defaultStyle")
+      },
+      defaultShape: {
+        type: "String",
+        values: ["default", "square", "pill", "circle"],
+        default: import_s_theme.default.config("ui.range.defaultShape")
+      },
+      scope: {
+        type: {
+          type: "Array<String>",
+          splitChars: [",", " "]
+        },
+        values: ["bare", "lnf", "shape", "vr", "tf"],
+        default: ["bare", "lnf", "shape", "vr", "tf"]
+      }
     };
+  }
 }
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ styles: [], shapes: [], defaultStyle: 'solid', defaultShape: 'default', scope: [] }, params);
-    const vars = new CssVars();
-    vars.comment(() => `
+function dependencies() {
+  return {
+    files: [`${(0, import_dirname.default)()}/range.js`]
+  };
+}
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    styles: [],
+    shapes: [],
+    defaultStyle: "solid",
+    defaultShape: "default",
+    scope: []
+  }, params);
+  const vars = new CssVars();
+  vars.comment(() => `
       /**
         * @name          Range
         * @namespace          sugar.css.ui
@@ -64,97 +115,89 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @cssClass     s-range${style === finalParams.defaultStyle ? '' : `:${style}`}           Apply the ${style} range style`;
-    })
-        .join('\n')}
-        ${finalParams.shapes
-        .map((shape) => {
-        return ` * @cssClass     s-range${shape === finalParams.defaultShape ? '' : `:${shape}`}           Apply the ${shape} range shape`;
-    })
-        .join('\n')}
+        ${finalParams.styles.map((style) => {
+    return ` * @cssClass     s-range${style === finalParams.defaultStyle ? "" : `:${style}`}           Apply the ${style} range style`;
+  }).join("\n")}
+        ${finalParams.shapes.map((shape) => {
+    return ` * @cssClass     s-range${shape === finalParams.defaultShape ? "" : `:${shape}`}           Apply the ${shape} range shape`;
+  }).join("\n")}
         * 
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @example        html       ${style}
+        ${finalParams.styles.map((style) => {
+    return ` * @example        html       ${style}
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="range" class="s-range${finalParams.defaultStyle === style ? '' : `:${style}`}" min="0" max="100" step="10" />
+            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     <input type="range" class="s-range${finalParams.defaultStyle === style ? "" : `:${style}`}" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="range" class="s-range${finalParams.defaultStyle === style ? '' : `:${style}`} s-color:accent" min="0" max="100" step="10" />
+            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     <input type="range" class="s-range${finalParams.defaultStyle === style ? "" : `:${style}`} s-color:accent" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="range" class="s-range${finalParams.defaultStyle === style ? '' : `:${style}`} s-color:complementary" min="0" max="100" step="10" />
+            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     <input type="range" class="s-range${finalParams.defaultStyle === style ? "" : `:${style}`} s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     I'm disabled
-            *     <input type="range" disabled class="s-range${finalParams.defaultStyle === style ? '' : `:${style}`} s-color:complementary" min="0" max="100" step="10" />
+            *     <input type="range" disabled class="s-range${finalParams.defaultStyle === style ? "" : `:${style}`} s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             * `;
-    })
-        .join('\n')}
+  }).join("\n")}
         *
-        ${finalParams.shapes
-        .map((shape) => {
-        return ` * @example        html       ${shape}
+        ${finalParams.shapes.map((shape) => {
+    return ` * @example        html       ${shape}
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="range" class="s-range${finalParams.defaultShape === shape ? '' : `:${shape}`}" min="0" max="100" step="10" />
+            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     <input type="range" class="s-range${finalParams.defaultShape === shape ? "" : `:${shape}`}" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="range" class="s-range${finalParams.defaultShape === shape ? '' : `:${shape}`} s-color:accent" min="0" max="100" step="10" />
+            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     <input type="range" class="s-range${finalParams.defaultShape === shape ? "" : `:${shape}`} s-color:accent" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="range" class="s-range${finalParams.defaultShape === shape ? '' : `:${shape}`} s-color:complementary" min="0" max="100" step="10" />
+            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     <input type="range" class="s-range${finalParams.defaultShape === shape ? "" : `:${shape}`} s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     I'm disabled
-            *     <input type="range" disabled class="s-range${finalParams.defaultShape === shape ? '' : `:${shape}`} s-color:complementary" min="0" max="100" step="10" />
+            *     <input type="range" disabled class="s-range${finalParams.defaultShape === shape ? "" : `:${shape}`} s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             * `;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @example        html          Colors (none-exclusive)
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *   </label>
         * 
         * @example      html        RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
@@ -166,27 +209,27 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @example        html          Scales
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-scale:08" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-scale:12" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-scale:14" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
         *   </label>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(() => `/**
+  if (finalParams.scope.includes("bare")) {
+    vars.comment(() => `/**
         * @name           s-range
         * @namespace      sugar.css.ui.range
         * @type           CssClass
@@ -204,14 +247,14 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             @sugar.ui.range($scope: bare);
         }
         `);
-    }
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
-            let cls = `s-range`;
-            if (style !== finalParams.defaultStyle) {
-                cls += `--${style}`;
-            }
-            vars.comment(() => `/**
+  }
+  if (finalParams.scope.includes("lnf")) {
+    finalParams.styles.forEach((style) => {
+      let cls = `s-range`;
+      if (style !== finalParams.defaultStyle) {
+        cls += `--${style}`;
+      }
+      vars.comment(() => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.range
             * @type           CssClass
@@ -219,7 +262,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class represent a(n) "<s-color="accent">${style}</s-color>" range
             * 
             * @example        html
-            * <input type="range" class="s-range${finalParams.defaultStyle === style ? '' : `:${style}`}" min="0" max="100" step="10" />
+            * <input type="range" class="s-range${finalParams.defaultStyle === style ? "" : `:${style}`}" min="0" max="100" step="10" />
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -229,15 +272,15 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 @sugar.ui.range($style: ${style}, $scope: lnf);
             }
             `);
-        });
-    }
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            let cls = `s-range`;
-            if (shape !== finalParams.defaultShape) {
-                cls += `--${shape}`;
-            }
-            vars.comment(() => `/**
+    });
+  }
+  if (finalParams.scope.includes("shape")) {
+    finalParams.shapes.forEach((shape) => {
+      let cls = `s-range`;
+      if (shape !== finalParams.defaultShape) {
+        cls += `--${shape}`;
+      }
+      vars.comment(() => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.range
             * @type           CssClass
@@ -245,7 +288,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class represent a(n) "<s-color="accent">${shape}</s-color>" range
             * 
             * @example        html
-            * <input type="range" class="s-range${finalParams.defaultShape === shape ? '' : `:${shape}`}" min="0" max="100" step="10" />
+            * <input type="range" class="s-range${finalParams.defaultShape === shape ? "" : `:${shape}`}" min="0" max="100" step="10" />
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -255,8 +298,12 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 @sugar.ui.range($shape: ${shape}, $scope: shape);
             }
             `);
-        });
-    }
-    return vars;
+    });
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCLE1BQU0seUNBQTBDLFNBQVEsWUFBWTtJQUNoRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxVQUFVO2dCQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLENBQUM7Z0JBQ2pCLE9BQU8sRUFBRSxDQUFDLE9BQU8sQ0FBQzthQUNyQjtZQUNELE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUUsVUFBVTtnQkFDaEIsTUFBTSxFQUFFLENBQUMsU0FBUyxFQUFFLFFBQVEsRUFBRSxNQUFNLEVBQUUsUUFBUSxDQUFDO2dCQUMvQyxPQUFPLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sRUFBRSxRQUFRLENBQUM7YUFDbkQ7WUFDRCxZQUFZLEVBQUU7Z0JBQ1YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQzthQUNwRDtZQUNELFlBQVksRUFBRTtnQkFDVixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sRUFBRSxRQUFRLENBQUM7Z0JBQy9DLE9BQU8sRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLHVCQUF1QixDQUFDO2FBQ3BEO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7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RUFBRSxJQUFJLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7Ozs7Z0JBTS9DLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Z0JBSS9DLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Z0JBSS9DLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Z0JBSS9DLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLElBQUksT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7Ozs7OztnQkFZL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7OztnQkFJL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7OztnQkFJL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7OztnQkFJL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsSUFBSSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7O0tBTTFELENBQ0EsQ0FBQztJQUVGLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLEVBQUU7UUFDcEMsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7OztNQWFaLENBQ0csQ0FBQyxJQUFJLENBQUM7Ozs7U0FJTixDQUFDLENBQUM7S0FDTjtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLEVBQUU7UUFDbkMsV0FBVyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtZQUNqQyxJQUFJLEdBQUcsR0FBRyxTQUFTLENBQUM7WUFDcEIsSUFBSSxLQUFLLEtBQUssV0FBVyxDQUFDLFlBQVksRUFBRTtnQkFDcEMsR0FBRyxJQUFJLEtBQUssS0FBSyxFQUFFLENBQUM7YUFDdkI7WUFFRCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO2dDQUNVLEdBQUc7Ozs7NkRBSTBCLEtBQUs7OztrREFJbEQsV0FBVyxDQUFDLFlBQVksS0FBSyxLQUFLLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxLQUFLLEVBQ3ZEOzs7OztRQUtKLENBQ0ssQ0FBQyxJQUFJLENBQUM7ZUFDSixHQUFHOzBDQUN3QixLQUFLOzthQUVsQyxDQUFDLENBQUM7UUFDUCxDQUFDLENBQUMsQ0FBQztLQUNOO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsRUFBRTtRQUNyQyxXQUFXLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1lBQ2pDLElBQUksR0FBRyxHQUFHLFNBQVMsQ0FBQztZQUNwQixJQUFJLEtBQUssS0FBSyxXQUFXLENBQUMsWUFBWSxFQUFFO2dCQUNwQyxHQUFHLElBQUksS0FBSyxLQUFLLEVBQUUsQ0FBQzthQUN2QjtZQUVELElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Z0NBQ1UsR0FBRzs7Ozs2REFJMEIsS0FBSzs7O2tEQUlsRCxXQUFXLENBQUMsWUFBWSxLQUFLLEtBQUssQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLEtBQUssRUFDdkQ7Ozs7O1FBS0osQ0FDSyxDQUFDLElBQUksQ0FBQztlQUNKLEdBQUc7MENBQ3dCLEtBQUs7O2FBRWxDLENBQUMsQ0FBQztRQUNQLENBQUMsQ0FBQyxDQUFDO0tBQ047SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  dependencies,
+  interface
+});

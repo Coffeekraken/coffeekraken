@@ -1,44 +1,70 @@
-import __SPromise from '@coffeekraken/s-promise';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __execPhp from '@coffeekraken/sugar/node/php/execPhp';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __fs from 'fs';
-import __path from 'path';
-import __SViewRendererBladeEngineSettingsInterface from './interface/SViewRendererEngineBladeSettingsInterface';
-export default class SViewRendererEngineBlade {
-    constructor(settings) {
-        this.settings = {};
-        this.settings = settings !== null && settings !== void 0 ? settings : {};
-    }
-    render(viewPath, data = {}, viewRendererSettings) {
-        return new __SPromise(({ resolve, reject, emit }) => {
-            if (!__fs.existsSync(viewPath)) {
-                return reject(`It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`);
-            }
-            if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
-                __fs.mkdirSync(viewRendererSettings.cacheDir, { recursive: true });
-            }
-            let viewDotPath = viewPath;
-            __unique([...viewRendererSettings.rootDirs]).forEach((path) => {
-                viewDotPath = viewDotPath.replace(`${path}/`, '');
-            });
-            viewDotPath = viewDotPath.split('/').join('.').replace('.blade.php', '');
-            resolve(__execPhp(__path.resolve(__dirname(), '../php/compile.php'), {
-                rootDirs: __unique([...viewRendererSettings.rootDirs]),
-                viewDotPath,
-                data,
-                cacheDir: viewRendererSettings.cacheDir,
-            }, {
-                paramsThroughFile: true,
-            }));
-        }, {
-            eventEmitter: {
-                bind: this,
-            },
-        });
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SViewRendererEngineBlade_exports = {};
+__export(SViewRendererEngineBlade_exports, {
+  default: () => SViewRendererEngineBlade
+});
+module.exports = __toCommonJS(SViewRendererEngineBlade_exports);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"), 1);
+var import_execPhp = __toESM(require("@coffeekraken/sugar/node/php/execPhp"), 1);
+var import_unique = __toESM(require("@coffeekraken/sugar/shared/array/unique"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_SViewRendererEngineBladeSettingsInterface = __toESM(require("./interface/SViewRendererEngineBladeSettingsInterface"), 1);
+class SViewRendererEngineBlade {
+  constructor(settings) {
+    this.settings = {};
+    this.settings = settings != null ? settings : {};
+  }
+  render(viewPath, data = {}, viewRendererSettings) {
+    return new import_s_promise.default(({ resolve, reject, emit }) => {
+      if (!import_fs.default.existsSync(viewPath)) {
+        return reject(`It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`);
+      }
+      if (!import_fs.default.existsSync(viewRendererSettings.cacheDir)) {
+        import_fs.default.mkdirSync(viewRendererSettings.cacheDir, { recursive: true });
+      }
+      let viewDotPath = viewPath;
+      (0, import_unique.default)([...viewRendererSettings.rootDirs]).forEach((path) => {
+        viewDotPath = viewDotPath.replace(`${path}/`, "");
+      });
+      viewDotPath = viewDotPath.split("/").join(".").replace(".blade.php", "");
+      resolve((0, import_execPhp.default)(import_path.default.resolve((0, import_dirname.default)(), "../php/compile.php"), {
+        rootDirs: (0, import_unique.default)([...viewRendererSettings.rootDirs]),
+        viewDotPath,
+        data,
+        cacheDir: viewRendererSettings.cacheDir
+      }, {
+        paramsThroughFile: true
+      }));
+    }, {
+      eventEmitter: {
+        bind: this
+      }
+    });
+  }
 }
-SViewRendererEngineBlade.id = 'blade';
-SViewRendererEngineBlade.extensions = ['blade.php'];
-SViewRendererEngineBlade.settingsInterface = __SViewRendererBladeEngineSettingsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1ZpZXdSZW5kZXJlckVuZ2luZUJsYWRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1ZpZXdSZW5kZXJlckVuZ2luZUJsYWRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBQzVELE9BQU8sU0FBUyxNQUFNLHNDQUFzQyxDQUFDO0FBQzdELE9BQU8sUUFBUSxNQUFNLHlDQUF5QyxDQUFDO0FBQy9ELE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUN0QixPQUFPLE1BQU0sTUFBTSxNQUFNLENBQUM7QUFFMUIsT0FBTywyQ0FBMkMsTUFBTSx1REFBdUQsQ0FBQztBQW9CaEgsTUFBTSxDQUFDLE9BQU8sT0FBTyx3QkFBd0I7SUFNekMsWUFBWSxRQUFxRDtRQUZqRSxhQUFRLEdBQXNDLEVBQUUsQ0FBQztRQUc3QyxJQUFJLENBQUMsUUFBUSxHQUFHLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FBQztJQUNuQyxDQUFDO0lBRUQsTUFBTSxDQUFDLFFBQWdCLEVBQUUsT0FBWSxFQUFFLEVBQUUsb0JBQTRDO1FBRWpGLE9BQU8sSUFBSSxVQUFVLENBQ2pCLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7WUFDMUIsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLEVBQUU7Z0JBQzVCLE9BQU8sTUFBTSxDQUFDLDRDQUE0QyxRQUFRLDZCQUE2QixDQUFDLENBQUM7YUFDcEc7WUFFRCxJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxvQkFBb0IsQ0FBQyxRQUFRLENBQUMsRUFBRTtnQkFDakQsSUFBSSxDQUFDLFNBQVMsQ0FBQyxvQkFBb0IsQ0FBQyxRQUFRLEVBQUUsRUFBRSxTQUFTLEVBQUUsSUFBSSxFQUFFLENBQUMsQ0FBQzthQUN0RTtZQUVELElBQUksV0FBVyxHQUFHLFFBQVEsQ0FBQztZQUMzQixRQUFRLENBQUMsQ0FBQyxHQUFHLG9CQUFvQixDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7Z0JBQzFELFdBQVcsR0FBRyxXQUFXLENBQUMsT0FBTyxDQUFDLEdBQUcsSUFBSSxHQUFHLEVBQUUsRUFBRSxDQUFDLENBQUM7WUFDdEQsQ0FBQyxDQUFDLENBQUM7WUFDSCxXQUFXLEdBQUcsV0FBVyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUMsT0FBTyxDQUFDLFlBQVksRUFBRSxFQUFFLENBQUMsQ0FBQztZQUV6RSxPQUFPLENBQ0gsU0FBUyxDQUNMLE1BQU0sQ0FBQyxPQUFPLENBQ1YsU0FBUyxFQUFFLEVBQ1gsb0JBQW9CLENBQ3ZCLEVBQ0Q7Z0JBQ0ksUUFBUSxFQUFFLFFBQVEsQ0FBQyxDQUFDLEdBQUcsb0JBQW9CLENBQUMsUUFBUSxDQUFDLENBQUM7Z0JBQ3RELFdBQVc7Z0JBQ1gsSUFBSTtnQkFDSixRQUFRLEVBQUUsb0JBQW9CLENBQUMsUUFBUTthQUMxQyxFQUNEO2dCQUNJLGlCQUFpQixFQUFFLElBQUk7YUFDMUIsQ0FDSixDQUNKLENBQUM7UUFDTixDQUFDLEVBQ0Q7WUFDSSxZQUFZLEVBQUU7Z0JBQ1YsSUFBSSxFQUFFLElBQUk7YUFDYjtTQUNKLENBQ0osQ0FBQztJQUNOLENBQUM7O0FBbkRNLDJCQUFFLEdBQUcsT0FBTyxDQUFDO0FBQ2IsbUNBQVUsR0FBRyxDQUFDLFdBQVcsQ0FBQyxDQUFDO0FBQzNCLDBDQUFpQixHQUFHLDJDQUEyQyxDQUFDIn0=
+SViewRendererEngineBlade.id = "blade";
+SViewRendererEngineBlade.extensions = ["blade.php"];
+SViewRendererEngineBlade.settingsInterface = import_SViewRendererEngineBladeSettingsInterface.default;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -7,19 +7,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __SMarkdownBuilderBuildParamsInterface from '../node/interface/SMarkdownBuilderBuildParamsInterface';
-import __SMarkdownBuilder from '../node/SMarkdownBuilder';
-import __SPromise from '@coffeekraken/s-promise';
-export default function build(stringArgs = '') {
-    return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
-        const builder = new __SMarkdownBuilder({
-            builder: {
-                interface: __SMarkdownBuilderBuildParamsInterface,
-            },
-        });
-        const promise = builder.build(stringArgs);
-        pipe(promise);
-        resolve(yield promise);
-    }));
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVpbGQuY2xpLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYnVpbGQuY2xpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUNBLE9BQU8sc0NBQXNDLE1BQU0sd0RBQXdELENBQUM7QUFDNUcsT0FBTyxrQkFBa0IsTUFBTSwwQkFBMEIsQ0FBQztBQUMxRCxPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUVqRCxNQUFNLENBQUMsT0FBTyxVQUFVLEtBQUssQ0FBQyxVQUFVLEdBQUcsRUFBRTtJQUN6QyxPQUFPLElBQUksVUFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQzVELE1BQU0sT0FBTyxHQUFHLElBQUksa0JBQWtCLENBQUM7WUFDbkMsT0FBTyxFQUFFO2dCQUNMLFNBQVMsRUFBRSxzQ0FBc0M7YUFDcEQ7U0FDSixDQUFDLENBQUM7UUFFSCxNQUFNLE9BQU8sR0FBRyxPQUFPLENBQUMsS0FBSyxDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBQzFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUNkLE9BQU8sQ0FBQyxNQUFNLE9BQU8sQ0FBQyxDQUFDO0lBQzNCLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDIn0=
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../node/interface/SMarkdownBuilderBuildParamsInterface", "../node/SMarkdownBuilder", "@coffeekraken/s-promise"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const SMarkdownBuilderBuildParamsInterface_1 = __importDefault(require("../node/interface/SMarkdownBuilderBuildParamsInterface"));
+    const SMarkdownBuilder_1 = __importDefault(require("../node/SMarkdownBuilder"));
+    const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    function build(stringArgs = '') {
+        return new s_promise_1.default(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
+            const builder = new SMarkdownBuilder_1.default({
+                builder: {
+                    interface: SMarkdownBuilderBuildParamsInterface_1.default,
+                },
+            });
+            const promise = builder.build(stringArgs);
+            pipe(promise);
+            resolve(yield promise);
+        }));
+    }
+    exports.default = build;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVpbGQuY2xpLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYnVpbGQuY2xpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBQ0Esa0lBQTRHO0lBQzVHLGdGQUEwRDtJQUMxRCx3RUFBaUQ7SUFFakQsU0FBd0IsS0FBSyxDQUFDLFVBQVUsR0FBRyxFQUFFO1FBQ3pDLE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1lBQzVELE1BQU0sT0FBTyxHQUFHLElBQUksMEJBQWtCLENBQUM7Z0JBQ25DLE9BQU8sRUFBRTtvQkFDTCxTQUFTLEVBQUUsOENBQXNDO2lCQUNwRDthQUNKLENBQUMsQ0FBQztZQUVILE1BQU0sT0FBTyxHQUFHLE9BQU8sQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLENBQUM7WUFDMUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQ2QsT0FBTyxDQUFDLE1BQU0sT0FBTyxDQUFDLENBQUM7UUFDM0IsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7SUFaRCx3QkFZQyJ9

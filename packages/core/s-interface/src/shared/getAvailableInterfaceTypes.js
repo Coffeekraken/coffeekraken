@@ -1,33 +1,37 @@
-import __isNode from '@coffeekraken/sugar/shared/is/node';
-/**
- * @name                getAvailableInterfaceTypes
- * @namespace           s-interface.shared
- * @type                Function
- * @status              beta
- *
- * This function simply return an object with all the promoted as types interfaces.
- *
- * @return          {Object<SInterface>}            An object of types mapped to SInterfaces classes
- *
- * @example         js
- * import getAvailableInterfaceTypes from '@coffeekraken/sugar/js/interface/getAvailableInterfaceTypes';
- * getAvailableInterfaceTypes();
- * // {
- * //    MyCoolType: MyInterface
- * // }
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var getAvailableInterfaceTypes_exports = {};
+__export(getAvailableInterfaceTypes_exports, {
+  default: () => getAvailableInterfaceTypes_default
+});
+module.exports = __toCommonJS(getAvailableInterfaceTypes_exports);
+var import_node = __toESM(require("@coffeekraken/sugar/shared/is/node"), 1);
 function getAvailableInterfaceTypes() {
-    // @ts-ignore
-    if (__isNode())
-        return global._registeredInterfacesTypes || {};
-    // @ts-ignore
-    else if (window !== undefined)
-        return window._registeredInterfacesTypes || {};
-    else
-        return {};
+  if ((0, import_node.default)())
+    return global._registeredInterfacesTypes || {};
+  else if (window !== void 0)
+    return window._registeredInterfacesTypes || {};
+  else
+    return {};
 }
-export default getAvailableInterfaceTypes;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0QXZhaWxhYmxlSW50ZXJmYWNlVHlwZXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJnZXRBdmFpbGFibGVJbnRlcmZhY2VUeXBlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFFBQVEsTUFBTSxvQ0FBb0MsQ0FBQztBQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQVMsMEJBQTBCO0lBQ2pDLGFBQWE7SUFDYixJQUFJLFFBQVEsRUFBRTtRQUFFLE9BQU8sTUFBTSxDQUFDLDBCQUEwQixJQUFJLEVBQUUsQ0FBQztJQUMvRCxhQUFhO1NBQ1IsSUFBSSxNQUFNLEtBQUssU0FBUztRQUFFLE9BQU8sTUFBTSxDQUFDLDBCQUEwQixJQUFJLEVBQUUsQ0FBQzs7UUFDekUsT0FBTyxFQUFFLENBQUM7QUFDakIsQ0FBQztBQUNELGVBQWUsMEJBQTBCLENBQUMifQ==
+var getAvailableInterfaceTypes_default = getAvailableInterfaceTypes;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -60,7 +60,6 @@ export interface ISLogFilterObj {
 }
 
 export default class SLog {
-
     /**
      * @name            TYPE_LOG
      * @type            ISLogType[]
@@ -179,7 +178,17 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static TYPES: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_VERBOSER, SLog.TYPE_SUMMARY, SLog.TYPE_DECORATOR, SLog.TYPE_CHILD_PROCESS];
+    static TYPES: ISLogType[] = [
+        SLog.TYPE_LOG,
+        SLog.TYPE_INFO,
+        SLog.TYPE_WARN,
+        SLog.TYPE_ERROR,
+        SLog.TYPE_VERBOSE,
+        SLog.TYPE_VERBOSER,
+        SLog.TYPE_SUMMARY,
+        SLog.TYPE_DECORATOR,
+        SLog.TYPE_CHILD_PROCESS,
+    ];
 
     /**
      * @name            PRESET_SILENT
@@ -209,7 +218,15 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESET_DEFAULT: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_SUMMARY, SLog.TYPE_DECORATOR, SLog.TYPE_CHILD_PROCESS];
+    static PRESET_DEFAULT: ISLogType[] = [
+        SLog.TYPE_LOG,
+        SLog.TYPE_INFO,
+        SLog.TYPE_WARN,
+        SLog.TYPE_ERROR,
+        SLog.TYPE_SUMMARY,
+        SLog.TYPE_DECORATOR,
+        SLog.TYPE_CHILD_PROCESS,
+    ];
 
     /**
      * @name            PRESET_WARN
@@ -223,7 +240,11 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESET_WARN: ISLogType[] = [SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_CHILD_PROCESS];
+    static PRESET_WARN: ISLogType[] = [
+        SLog.TYPE_WARN,
+        SLog.TYPE_ERROR,
+        SLog.TYPE_CHILD_PROCESS,
+    ];
 
     /**
      * @name            PRESET_ERROR
@@ -236,7 +257,10 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESET_ERROR: ISLogType[] = [SLog.TYPE_ERROR, SLog.TYPE_CHILD_PROCESS];
+    static PRESET_ERROR: ISLogType[] = [
+        SLog.TYPE_ERROR,
+        SLog.TYPE_CHILD_PROCESS,
+    ];
 
     /**
      * @name            PRESET_VERBOSE
@@ -255,7 +279,16 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESET_VERBOSE: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY, SLog.TYPE_CHILD_PROCESS];
+    static PRESET_VERBOSE: ISLogType[] = [
+        SLog.TYPE_LOG,
+        SLog.TYPE_INFO,
+        SLog.TYPE_WARN,
+        SLog.TYPE_ERROR,
+        SLog.TYPE_VERBOSE,
+        SLog.TYPE_DECORATOR,
+        SLog.TYPE_SUMMARY,
+        SLog.TYPE_CHILD_PROCESS,
+    ];
 
     /**
      * @name            PRESET_VERBOSER
@@ -275,7 +308,17 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESET_VERBOSER: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_VERBOSER, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY, SLog.TYPE_CHILD_PROCESS];
+    static PRESET_VERBOSER: ISLogType[] = [
+        SLog.TYPE_LOG,
+        SLog.TYPE_INFO,
+        SLog.TYPE_WARN,
+        SLog.TYPE_ERROR,
+        SLog.TYPE_VERBOSE,
+        SLog.TYPE_VERBOSER,
+        SLog.TYPE_DECORATOR,
+        SLog.TYPE_SUMMARY,
+        SLog.TYPE_CHILD_PROCESS,
+    ];
 
     /**
      * @name            PRESETS
@@ -287,7 +330,14 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESETS: String[] = ['silent', 'default', 'warn', 'error', 'verbose', 'verboser'];
+    static PRESETS: String[] = [
+        'silent',
+        'default',
+        'warn',
+        'error',
+        'verbose',
+        'verboser',
+    ];
 
     /**
      * @name            filter
@@ -359,12 +409,12 @@ export default class SLog {
      * You can pass as well multiple log types as an array.
      *
      * @param       {ISLogType|ISLogType[]}             types      The log type(s) you want to check
-     * @return      {Boolean}                              True if the log type is enabled, false otherwise                 
+     * @return      {Boolean}                              True if the log type is enabled, false otherwise
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static isTypeEnabled(types: ISLogType | ISLogType[]): boolean {
+    static isTypeEnabled(types: ISLogType | ISLogType[]): boolean {
         if (!Array.isArray(types)) types = [types];
         for (const type of types) {
             if (!this._filteredTypes.includes(type)) return false;
@@ -470,7 +520,8 @@ export default class SLog {
 
         // check type
         // @ts-ignore
-        if (!this.constructor._filteredTypes.includes(this._logObj.type)) return false;
+        if (!this.constructor._filteredTypes.includes(this._logObj.type))
+            return false;
 
         // active by default
         return true;
@@ -555,9 +606,12 @@ export default class SLog {
      */
     get margin(): ISLogMargin {
         // @ts-ignore
-        return this._logObj.margin ?? {
-            top: 0, bottom: 0
-        };
+        return (
+            this._logObj.margin ?? {
+                top: 0,
+                bottom: 0,
+            }
+        );
     }
 
     /**

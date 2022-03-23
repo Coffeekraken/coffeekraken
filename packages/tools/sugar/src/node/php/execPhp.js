@@ -1,26 +1,68 @@
-import __childProcess from 'child_process';
-import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
-export default function execPhp(scriptPath, params, settings) {
-    return new Promise((resolve, reject) => {
-        settings = Object.assign({ encryptParams: false, paramsThroughFile: false }, (settings !== null && settings !== void 0 ? settings : {}));
-        let paramsFilePath, paramsStr;
-        if (settings.encryptParams) {
-            paramsStr = __base64.encrypt(paramsStr);
-        }
-        else if (settings.paramsThroughFile) {
-            paramsFilePath = `${__packageTmpDir()}/exec-php-${__uniqid()}.json`;
-            __writeJsonSync(paramsFilePath, params);
-        }
-        const result = __childProcess.spawnSync(`php ${scriptPath} '${paramsFilePath !== null && paramsFilePath !== void 0 ? paramsFilePath : paramsStr}'`, [], {
-            shell: true,
-        });
-        if (result.stderr.toString()) {
-            return reject(result.stderr.toString());
-        }
-        resolve(result.stdout.toString());
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var execPhp_exports = {};
+__export(execPhp_exports, {
+  default: () => execPhp
+});
+module.exports = __toCommonJS(execPhp_exports);
+var import_child_process = __toESM(require("child_process"), 1);
+var import_base64 = __toESM(require("@coffeekraken/sugar/shared/crypt/base64"), 1);
+var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"), 1);
+var import_packageTmpDir = __toESM(require("@coffeekraken/sugar/node/path/packageTmpDir"), 1);
+var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"), 1);
+function execPhp(scriptPath, params, settings) {
+  return new Promise((resolve, reject) => {
+    settings = __spreadValues({
+      encryptParams: false,
+      paramsThroughFile: false
+    }, settings != null ? settings : {});
+    let paramsFilePath, paramsStr;
+    if (settings.encryptParams) {
+      paramsStr = import_base64.default.encrypt(paramsStr);
+    } else if (settings.paramsThroughFile) {
+      paramsFilePath = `${(0, import_packageTmpDir.default)()}/exec-php-${(0, import_uniqid.default)()}.json`;
+      (0, import_writeJsonSync.default)(paramsFilePath, params);
+    }
+    const result = import_child_process.default.spawnSync(`php ${scriptPath} '${paramsFilePath != null ? paramsFilePath : paramsStr}'`, [], {
+      shell: true
     });
+    if (result.stderr.toString()) {
+      return reject(result.stderr.toString());
+    }
+    resolve(result.stdout.toString());
+  });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhlY1BocC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4ZWNQaHAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxjQUFjLE1BQU0sZUFBZSxDQUFDO0FBQzNDLE9BQU8sUUFBUSxNQUFNLHlDQUF5QyxDQUFDO0FBRy9ELE9BQU8sUUFBUSxNQUFNLDBDQUEwQyxDQUFDO0FBQ2hFLE9BQU8sZUFBZSxNQUFNLDZDQUE2QyxDQUFDO0FBQzFFLE9BQU8sZUFBZSxNQUFNLDJDQUEyQyxDQUFDO0FBdUJ4RSxNQUFNLENBQUMsT0FBTyxVQUFVLE9BQU8sQ0FDM0IsVUFBa0IsRUFDbEIsTUFBVyxFQUNYLFFBQW9DO0lBRXBDLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUU7UUFDbkMsUUFBUSxtQkFDSixhQUFhLEVBQUUsS0FBSyxFQUNwQixpQkFBaUIsRUFBRSxLQUFLLElBQ3JCLENBQUMsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQ3RCLENBQUM7UUFDRixJQUFJLGNBQWMsRUFBRSxTQUFTLENBQUM7UUFFOUIsSUFBSSxRQUFRLENBQUMsYUFBYSxFQUFFO1lBQ3hCLFNBQVMsR0FBRyxRQUFRLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxDQUFDO1NBQzNDO2FBQU0sSUFBSSxRQUFRLENBQUMsaUJBQWlCLEVBQUU7WUFDbkMsY0FBYyxHQUFHLEdBQUcsZUFBZSxFQUFFLGFBQWEsUUFBUSxFQUFFLE9BQU8sQ0FBQztZQUNwRSxlQUFlLENBQUMsY0FBYyxFQUFFLE1BQU0sQ0FBQyxDQUFDO1NBQzNDO1FBRUQsTUFBTSxNQUFNLEdBQUcsY0FBYyxDQUFDLFNBQVMsQ0FDbkMsT0FBTyxVQUFVLEtBQUssY0FBYyxhQUFkLGNBQWMsY0FBZCxjQUFjLEdBQUksU0FBUyxHQUFHLEVBQ3BELEVBQUUsRUFDRjtZQUNJLEtBQUssRUFBRSxJQUFJO1NBQ2QsQ0FDSixDQUFDO1FBRUYsSUFBSSxNQUFNLENBQUMsTUFBTSxDQUFDLFFBQVEsRUFBRSxFQUFFO1lBQzFCLE9BQU8sTUFBTSxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQztTQUMzQztRQUVELE9BQU8sQ0FBQyxNQUFNLENBQUMsTUFBTSxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUM7SUFDdEMsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

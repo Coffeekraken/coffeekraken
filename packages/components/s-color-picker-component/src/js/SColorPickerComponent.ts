@@ -15,7 +15,7 @@ export interface ISColorPickerComponentProps {
     name: string;
     value: string;
     placeholder: string;
-    theme: 'nano' | 'monolith';
+    theme: 'nano' | 'monolith';
     input: boolean;
     button: boolean;
     position: 'top' | 'bottom';
@@ -43,10 +43,10 @@ export interface ISColorPickerComponentProps {
  * @support         firefox
  * @support         safari
  * @support         edge
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-color-picker-component
- * 
+ *
  * @install         js
  * import { define } from '@coffeekraken/s-color-picker-component';
  * define();
@@ -60,19 +60,19 @@ export interface ISColorPickerComponentProps {
  *      Choose a color
  *      <s-color-picker value="#FABB03" placeholder="Choose a color" input></s-color-picker>
  * </label>
- * 
+ *
  * @example         html            With an input and a button
  * <label class="s-label:responsive">
  *      Choose a color
  *      <s-color-picker value="#5101FF" placeholder="Choose a color" input button></s-color-picker>
  * </label>
- * 
+ *
  * @example         html            Just a button
  * <label class="s-label:responsive">
  *      Choose a color
  *      <s-color-picker value="#55FFFF" button></s-color-picker>
  * </label>
- * 
+ *
  * @example         html            With a custom input
  * <label class="s-label:responsive">
  *      Choose a color
@@ -80,7 +80,7 @@ export interface ISColorPickerComponentProps {
  *          <input type="text" placeholder="Choose a color" value="#FABB03" />
  *      </s-color-picker>
  * </label>
- * 
+ *
  * @example         html            With a custom button
  * <label class="s-label:responsive">
  *      Choose a color
@@ -88,7 +88,7 @@ export interface ISColorPickerComponentProps {
  *          <button class="s-btn s-color:error">Choose a color</button>
  *      </s-color-picker>
  * </label>
- * 
+ *
  * @example         html            With a custom input and button
  * <label class="s-label:responsive">
  *      Choose a color
@@ -97,7 +97,7 @@ export interface ISColorPickerComponentProps {
  *          <button class="s-btn s-color:error">Choose a color</button>
  *      </s-color-picker>
  * </label>
- * 
+ *
  * @example         html            Disabled
  * <label class="s-label:responsive">
  *      Choose a color
@@ -150,11 +150,11 @@ export default class SColorPicker extends __SLitComponent {
         this._hasInput = this._$input !== null;
         this._$button = this.querySelector('button');
         this._hasButton = this._$button !== null;
-
     }
     async firstUpdated() {
-        
-        this._$root = this.querySelector(`.${this.componentUtils.className('')}`);
+        this._$root = this.querySelector(
+            `.${this.componentUtils.className('')}`,
+        );
 
         // input
         if (!this._$input) {
@@ -171,7 +171,7 @@ export default class SColorPicker extends __SLitComponent {
         if (!this._$input?.hasAttribute('autocomplete')) {
             this._$input?.setAttribute('autocomplete', 'off');
         }
-        
+
         // button
         if (!this._$button) {
             this._$button = this.querySelector('button');
@@ -186,7 +186,9 @@ export default class SColorPicker extends __SLitComponent {
 
         const value = this.props.value ?? this._$input?.value ?? '#ff0000';
         const pickr = __Pickr.create({
-            el: this.querySelector(`.${this.componentUtils.className('__picker')}`),
+            el: this.querySelector(
+                `.${this.componentUtils.className('__picker')}`,
+            ),
             theme: 'nano', // or 'monolith', or 'nano'
             container: this._$root,
             default: value,
@@ -212,13 +214,19 @@ export default class SColorPicker extends __SLitComponent {
         });
 
         const $preview = this.querySelector('.pcr-button');
-        $preview?.innerHTML = `
-            ${this.colorIcon ? `
-                ${this.colorIcon}
-            ` : `
-                <i class="s-icon s-icon--color"></i>
-            `}
-        `;
+        if ($preview) {
+            $preview.innerHTML = `
+                ${
+                    this.colorIcon
+                        ? `
+                    ${this.colorIcon}
+                `
+                        : `
+                    <i class="s-icon s-icon--color"></i>
+                `
+                }
+            `;
+        }
 
         function getPickrState() {
             const color = pickr.getColor();
@@ -264,16 +272,15 @@ export default class SColorPicker extends __SLitComponent {
 
         __STheme.applyCurrentColor(value, this._$root);
 
-
         pickr.on('change', () => {
             pickr.applyColor();
             const detail = getPickrState();
-    
+
             const change = new CustomEvent('change', {
                 bubbles: true,
-                detail
+                detail,
             });
- 
+
             __STheme.applyCurrentColor(detail.hex, this._$root);
 
             if (this._$input) {
@@ -327,26 +334,46 @@ export default class SColorPicker extends __SLitComponent {
                     '',
                 )} ${this.componentUtils.className('')}--${this.props.position}"
             >
-                ${!this._hasInput && this.props.input ? html`
-                    <input ?disabled=${this.props.disabled} type="text" autocomplete="off" name="${this.props.name}" value="${this.props.value}" placeholder="${this.props.placeholder}" class="${this.componentUtils.className('__input','s-input')}" />
-                ` : !this._hasInput ? html`
-                    <input ?disabled=${this.props.disabled} type="hidden" name="${this.props.name}" value="${this.props.value}" />
-                ` : ``}
+                ${!this._hasInput && this.props.input
+                    ? html`
+                          <input
+                              ?disabled=${this.props.disabled}
+                              type="text"
+                              autocomplete="off"
+                              name="${this.props.name}"
+                              value="${this.props.value}"
+                              placeholder="${this.props.placeholder}"
+                              class="${this.componentUtils.className(
+                                  '__input',
+                                  's-input',
+                              )}"
+                          />
+                      `
+                    : !this._hasInput
+                    ? html`
+                          <input
+                              ?disabled=${this.props.disabled}
+                              type="hidden"
+                              name="${this.props.name}"
+                              value="${this.props.value}"
+                          />
+                      `
+                    : ``}
                 ${!this._hasButton && this.props.button
                     ? html`
                           <button
-                                ?disabled=${this.props.disabled} 
+                              ?disabled=${this.props.disabled}
                               onclick="return false"
                               class="${this.componentUtils.className(
                                   '__button',
                                   's-btn',
                               )}"
                           >
-                              ${this.props.colorIcon ? html`
-                                ${staticHTML(this.props.colorIcon)}
-                              ` : html`
-                                <i class="s-icon s-icon--calendar"></i>
-                              `}
+                              ${this.props.colorIcon
+                                  ? html` ${staticHTML(this.props.colorIcon)} `
+                                  : html`
+                                        <i class="s-icon s-icon--calendar"></i>
+                                    `}
                           </button>
                       `
                     : ''}

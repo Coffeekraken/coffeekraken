@@ -1,25 +1,30 @@
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../emptyNode"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var emptyNode_1 = __importDefault(require("../emptyNode"));
-    describe('sugar.js.dom.emptyNode', function () {
-        document.body.innerHTML = "\n      <div id=\"testing\">\n        <div class=\"coco\">\n        </div>\n        <div id=\"source\"></div>\n      </div>\n  ";
-        var $elm = document.querySelector('#testing');
-        emptyNode_1.default($elm);
-        it('Should have empty the node correctly', function () {
-            expect($elm.childNodes.length).toBe(0);
-        });
-    });
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_emptyNode = __toESM(require("../manipulate/emptyNode"), 1);
+describe("sugar.js.dom.emptyNode", () => {
+  document.body.innerHTML = `
+      <div id="testing">
+        <div class="coco">
+        </div>
+        <div id="source"></div>
+      </div>
+  `;
+  const $elm = document.querySelector("#testing");
+  (0, import_emptyNode.default)($elm);
+  it("Should have empty the node correctly", () => {
+    expect($elm.childNodes.length).toBe(0);
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW1wdHlOb2RlLnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlbXB0eU5vZGUudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztJQUFBLDJEQUF1QztJQUV2QyxRQUFRLENBQUMsd0JBQXdCLEVBQUU7UUFFakMsUUFBUSxDQUFDLElBQUksQ0FBQyxTQUFTLEdBQUcsaUlBTXpCLENBQUM7UUFDRixJQUFNLElBQUksR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBRWhELG1CQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7UUFFbEIsRUFBRSxDQUFDLHNDQUFzQyxFQUFFO1lBQ3pDLE1BQU0sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLE1BQU0sQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUN6QyxDQUFDLENBQUMsQ0FBQztJQUVMLENBQUMsQ0FBQyxDQUFDIn0=

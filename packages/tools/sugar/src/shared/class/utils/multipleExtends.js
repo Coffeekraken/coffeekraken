@@ -1,31 +1,31 @@
-// @ts-nocheck
-import __aggregation from 'aggregation/es5';
-/**
- * @name                multipleExtends
- * @namespace           shared.class.utils
- * @type                Function
- * @platform          js
- * @platform          node
- * @status          alpha
- *
- * This function allows you to extends your class with multiple other ones.
- *
- * @param     {Class}           ...classes          All the classed you want to extend the first one with
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import multipleExtends from '@coffeekraken/sugar/shared/class/utils/multipleExtends';
- * class MyCoolClass extends multipleExtends(Another, AnotherOne) {
- * }
- *
- * @see       https://www.npmjs.com/package/aggregation
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default (...classes) => {
-    return __aggregation(...classes);
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibXVsdGlwbGVFeHRlbmRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibXVsdGlwbGVFeHRlbmRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxpQkFBaUIsQ0FBQztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsZUFBZSxDQUFDLEdBQUcsT0FBTyxFQUFFLEVBQUU7SUFDMUIsT0FBTyxhQUFhLENBQUMsR0FBRyxPQUFPLENBQUMsQ0FBQztBQUNyQyxDQUFDLENBQUMifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var multipleExtends_exports = {};
+__export(multipleExtends_exports, {
+  default: () => multipleExtends_default
+});
+module.exports = __toCommonJS(multipleExtends_exports);
+var import_es5 = __toESM(require("aggregation/es5"), 1);
+var multipleExtends_default = (...classes) => {
+  return (0, import_es5.default)(...classes);
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

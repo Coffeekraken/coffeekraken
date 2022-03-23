@@ -1,50 +1,47 @@
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../addEventListener", "../dispatchEvent"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var addEventListener_1 = __importDefault(require("../addEventListener"));
-    var dispatchEvent_1 = __importDefault(require("../dispatchEvent"));
-    describe('sugar.js.dom.addEventListener', function () {
-        var isCallbackCalled = false, isThenCalled = false, hasBeenReleased = false, hasBeenCanceled = false;
-        var clickCount = 0;
-        document.body.innerHTML = "\n    <div id=\"testing\"></div>\n  ";
-        var $elm = document.querySelector('#testing');
-        var listener = addEventListener_1.default($elm, 'click', function (event) {
-            isCallbackCalled = true;
-        })
-            .on('click', function (event) {
-            isThenCalled = true;
-            clickCount++;
-        })
-            .finally(function (event) {
-            hasBeenReleased = true;
-        })
-            .on('cancel', function (event) {
-            hasBeenCanceled = true;
-        });
-        dispatchEvent_1.default($elm, 'click');
-        // release the listener
-        listener.cancel();
-        setTimeout(function () {
-            dispatchEvent_1.default($elm, 'click');
-        });
-        it('Should have register the listener correctly and called as expected', function (done) {
-            expect(isCallbackCalled).toBe(true);
-            expect(isThenCalled).toBe(true);
-            expect(clickCount).toBe(1);
-            expect(hasBeenCanceled).toBe(true);
-            done();
-        });
-    });
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_addEventListener = __toESM(require("../event/addEventListener"), 1);
+var import_dispatchEvent = __toESM(require("../event/dispatchEvent"), 1);
+describe("sugar.js.dom.addEventListener", () => {
+  let isCallbackCalled = false, isThenCalled = false, hasBeenReleased = false, hasBeenCanceled = false;
+  let clickCount = 0;
+  document.body.innerHTML = `
+    <div id="testing"></div>
+  `;
+  const $elm = document.querySelector("#testing");
+  const listener = (0, import_addEventListener.default)($elm, "click", (event) => {
+    isCallbackCalled = true;
+  }).on("click", (event) => {
+    isThenCalled = true;
+    clickCount++;
+  }).finally((event) => {
+    hasBeenReleased = true;
+  }).on("cancel", (event) => {
+    hasBeenCanceled = true;
+  });
+  (0, import_dispatchEvent.default)($elm, "click");
+  listener.cancel();
+  setTimeout(() => {
+    (0, import_dispatchEvent.default)($elm, "click");
+  });
+  it("Should have register the listener correctly and called as expected", (done) => {
+    expect(isCallbackCalled).toBe(true);
+    expect(isThenCalled).toBe(true);
+    expect(clickCount).toBe(1);
+    expect(hasBeenCanceled).toBe(true);
+    done();
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWRkRXZlbnRMaXN0ZW5lci50ZXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYWRkRXZlbnRMaXN0ZW5lci50ZXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0lBQUEseUVBQXFEO0lBQ3JELG1FQUErQztJQUUvQyxRQUFRLENBQUMsK0JBQStCLEVBQUU7UUFDeEMsSUFBSSxnQkFBZ0IsR0FBRyxLQUFLLEVBQzFCLFlBQVksR0FBRyxLQUFLLEVBQ3BCLGVBQWUsR0FBRyxLQUFLLEVBQ3ZCLGVBQWUsR0FBRyxLQUFLLENBQUM7UUFDMUIsSUFBSSxVQUFVLEdBQUcsQ0FBQyxDQUFDO1FBRW5CLFFBQVEsQ0FBQyxJQUFJLENBQUMsU0FBUyxHQUFHLHNDQUV6QixDQUFDO1FBQ0YsSUFBTSxJQUFJLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxVQUFVLENBQUMsQ0FBQztRQUNoRCxJQUFNLFFBQVEsR0FBRywwQkFBa0IsQ0FBQyxJQUFJLEVBQUUsT0FBTyxFQUFFLFVBQUMsS0FBSztZQUN2RCxnQkFBZ0IsR0FBRyxJQUFJLENBQUM7UUFDMUIsQ0FBQyxDQUFDO2FBQ0MsRUFBRSxDQUFDLE9BQU8sRUFBRSxVQUFDLEtBQUs7WUFDakIsWUFBWSxHQUFHLElBQUksQ0FBQztZQUNwQixVQUFVLEVBQUUsQ0FBQztRQUNmLENBQUMsQ0FBQzthQUNELE9BQU8sQ0FBQyxVQUFDLEtBQUs7WUFDYixlQUFlLEdBQUcsSUFBSSxDQUFDO1FBQ3pCLENBQUMsQ0FBQzthQUNELEVBQUUsQ0FBQyxRQUFRLEVBQUUsVUFBQyxLQUFLO1lBQ2xCLGVBQWUsR0FBRyxJQUFJLENBQUM7UUFDekIsQ0FBQyxDQUFDLENBQUM7UUFFTCx1QkFBZSxDQUFDLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztRQUUvQix1QkFBdUI7UUFDdkIsUUFBUSxDQUFDLE1BQU0sRUFBRSxDQUFDO1FBRWxCLFVBQVUsQ0FBQztZQUNULHVCQUFlLENBQUMsSUFBSSxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ2pDLENBQUMsQ0FBQyxDQUFDO1FBRUgsRUFBRSxDQUFDLG9FQUFvRSxFQUFFLFVBQUMsSUFBSTtZQUM1RSxNQUFNLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDcEMsTUFBTSxDQUFDLFlBQVksQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNoQyxNQUFNLENBQUMsVUFBVSxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQzNCLE1BQU0sQ0FBQyxlQUFlLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDbkMsSUFBSSxFQUFFLENBQUM7UUFDVCxDQUFDLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDIn0=

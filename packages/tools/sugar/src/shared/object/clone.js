@@ -1,42 +1,53 @@
-// @ts-nocheck
-import __clone from 'lodash.clone';
-import __deepClone from 'lodash.clonedeep';
-/**
- * @name                clone
- * @namespace            js.object
- * @type                Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function allows you to clone an object either at 1 level, or deeply.
- *
- * @param       {Object}        object        The object to copy
- * @param       {Object}       [settings={}]   Specify some settings to configure your clone process
- * @return      {Object}                      The cloned object
- *
- * @setting     {Boolean}       [deep=false]      Specify if you want to clone the object deeply
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import clone from '@coffeekraken/sugar/js/object/clone';
- * clone({
- *    hello: 'world'
- * });
- *
- * @see       https://www.npmjs.com/package/lodash
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function clone(object, settings = {}) {
-    settings = Object.assign({ deep: false }, settings);
-    if (settings.deep) {
-        return __deepClone(object);
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    return __clone(object);
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var clone_exports = {};
+__export(clone_exports, {
+  default: () => clone_default
+});
+module.exports = __toCommonJS(clone_exports);
+var import_lodash = __toESM(require("lodash.clone"), 1);
+var import_lodash2 = __toESM(require("lodash.clonedeep"), 1);
+function clone(object, settings = {}) {
+  settings = __spreadValues({
+    deep: false
+  }, settings);
+  if (settings.deep) {
+    return (0, import_lodash2.default)(object);
+  }
+  return (0, import_lodash.default)(object);
 }
-export default clone;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xvbmUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjbG9uZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxPQUFPLE1BQU0sY0FBYyxDQUFDO0FBQ25DLE9BQU8sV0FBVyxNQUFNLGtCQUFrQixDQUFDO0FBRTNDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTZCRztBQUNILFNBQVMsS0FBSyxDQUFDLE1BQU0sRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUNoQyxRQUFRLG1CQUNKLElBQUksRUFBRSxLQUFLLElBQ1IsUUFBUSxDQUNkLENBQUM7SUFDRixJQUFJLFFBQVEsQ0FBQyxJQUFJLEVBQUU7UUFDZixPQUFPLFdBQVcsQ0FBQyxNQUFNLENBQUMsQ0FBQztLQUM5QjtJQUNELE9BQU8sT0FBTyxDQUFDLE1BQU0sQ0FBQyxDQUFDO0FBQzNCLENBQUM7QUFDRCxlQUFlLEtBQUssQ0FBQyJ9
+var clone_default = clone;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

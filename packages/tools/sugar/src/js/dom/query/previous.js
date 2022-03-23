@@ -1,41 +1,37 @@
-// @ts-nocheck
-import __matches from './matches';
-/**
- * @name      previous
- * @namespace            js.dom.query
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Browse the passed element previous siblings to find the first element that matches the passed selector
- *
- * @param 		{HTMLElement} 					elm  		The element to start on
- * @param 		{String} 						selector 	A css selector to search for
- * @return 		{HTMLElement} 								The element found or null
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import previous from '@coffeekraken/sugar/js/dom/query/previous'
- * const previousElm = previous(myCoolElement, '.my-cool-class');
- * if (previousElm) {
- * 		// we have found en element that matches the selector
- * }
- *
- * @since       1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var previous_exports = {};
+__export(previous_exports, {
+  default: () => previous_default
+});
+module.exports = __toCommonJS(previous_exports);
+var import_matches = __toESM(require("./matches"), 1);
 function previous(elm, selector) {
-    elm = elm.previousSibling;
-    while (elm) {
-        if (__matches(elm, selector)) {
-            return elm;
-        }
-        elm = elm.previousSibling;
+  elm = elm.previousSibling;
+  while (elm) {
+    if ((0, import_matches.default)(elm, selector)) {
+      return elm;
     }
-    return false;
+    elm = elm.previousSibling;
+  }
+  return false;
 }
-export default previous;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJldmlvdXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwcmV2aW91cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxTQUFTLE1BQU0sV0FBVyxDQUFDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMsUUFBUSxDQUFDLEdBQWdCLEVBQUUsUUFBZ0I7SUFDaEQsR0FBRyxHQUFHLEdBQUcsQ0FBQyxlQUFlLENBQUM7SUFDMUIsT0FBTyxHQUFHLEVBQUU7UUFDUixJQUFJLFNBQVMsQ0FBQyxHQUFHLEVBQUUsUUFBUSxDQUFDLEVBQUU7WUFDMUIsT0FBTyxHQUFHLENBQUM7U0FDZDtRQUNELEdBQUcsR0FBRyxHQUFHLENBQUMsZUFBZSxDQUFDO0tBQzdCO0lBQ0QsT0FBTyxLQUFLLENBQUM7QUFDakIsQ0FBQztBQUNELGVBQWUsUUFBUSxDQUFDIn0=
+var previous_default = previous;

@@ -1,20 +1,36 @@
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
-import __toString from '@coffeekraken/sugar/shared/string/toString';
-/**
- * @name        defaultBasicStdioComponent
- * @namespace   shared.basic.components
- * @type        ISStdioComponent
- *
- * Basic stdio component
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default {
-    id: 'default',
-    render(logObj, settings = {}) {
-        const value = logObj.value !== undefined ? logObj.value : logObj;
-        return __parseHtml(__toString(value));
-    },
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdEJhc2ljU3RkaW9Db21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkZWZhdWx0QmFzaWNTdGRpb0NvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVcsTUFBTSw4Q0FBOEMsQ0FBQztBQUN2RSxPQUFPLFVBQVUsTUFBTSw0Q0FBNEMsQ0FBQztBQUVwRTs7Ozs7Ozs7O0dBU0c7QUFDSCxlQUFlO0lBQ1gsRUFBRSxFQUFFLFNBQVM7SUFDYixNQUFNLENBQUMsTUFBTSxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQ3hCLE1BQU0sS0FBSyxHQUFHLE1BQU0sQ0FBQyxLQUFLLEtBQUssU0FBUyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUM7UUFDakUsT0FBTyxXQUFXLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7SUFDMUMsQ0FBQztDQUNKLENBQUMifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var defaultBasicStdioComponent_exports = {};
+__export(defaultBasicStdioComponent_exports, {
+  default: () => defaultBasicStdioComponent_default
+});
+module.exports = __toCommonJS(defaultBasicStdioComponent_exports);
+var import_parseHtml = __toESM(require("@coffeekraken/sugar/shared/console/parseHtml"), 1);
+var import_toString = __toESM(require("@coffeekraken/sugar/shared/string/toString"), 1);
+var defaultBasicStdioComponent_default = {
+  id: "default",
+  render(logObj, settings = {}) {
+    const value = logObj.value !== void 0 ? logObj.value : logObj;
+    return (0, import_parseHtml.default)((0, import_toString.default)(value));
+  }
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

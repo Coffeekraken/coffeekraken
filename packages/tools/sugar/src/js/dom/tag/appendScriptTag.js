@@ -1,33 +1,33 @@
-// @ts-nocheck
-import scriptLoaded from '../scriptLoaded';
-/**
- * @name        appendScriptTag
- * @namespace            js.dom.tag
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Append a script tag either to the head or the body
- *
- * @param    {String}    src    The script src to load
- * @return    {Promise}    A promise resolved with the script tag when it has fully loaded
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import appendScriptTag from '@coffeekraken/sugar/js/dom/appendScriptTag'
- * appendScriptTag('dist/js/app.js')
- *
- * @since     1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var appendScriptTag_exports = {};
+__export(appendScriptTag_exports, {
+  default: () => appendScriptTag_default
+});
+module.exports = __toCommonJS(appendScriptTag_exports);
+var import_scriptLoaded = __toESM(require("../scriptLoaded"), 1);
 function appendScriptTag(src, $parent = document.body) {
-    const $script = document.createElement('script');
-    $script.src = src;
-    $parent.appendChild($script);
-    return scriptLoaded($script);
+  const $script = document.createElement("script");
+  $script.src = src;
+  $parent.appendChild($script);
+  return (0, import_scriptLoaded.default)($script);
 }
-export default appendScriptTag;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwZW5kU2NyaXB0VGFnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXBwZW5kU2NyaXB0VGFnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxpQkFBaUIsQ0FBQztBQUUzQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsZUFBZSxDQUNwQixHQUFXLEVBQ1gsVUFBdUIsUUFBUSxDQUFDLElBQUk7SUFFcEMsTUFBTSxPQUFPLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUNqRCxPQUFPLENBQUMsR0FBRyxHQUFHLEdBQUcsQ0FBQztJQUNsQixPQUFPLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQzdCLE9BQU8sWUFBWSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0FBQ2pDLENBQUM7QUFDRCxlQUFlLGVBQWUsQ0FBQyJ9
+var appendScriptTag_default = appendScriptTag;

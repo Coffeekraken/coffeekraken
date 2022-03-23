@@ -1,35 +1,36 @@
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_observeMutations = __toESM(require("../observeMutations"), 1);
+describe("sugar.js.dom.observeMutations", () => {
+  document.body.innerHTML = `
+      <div id="testing">
+      </div>
+  `;
+  const $elm = document.querySelector("#testing");
+  let mutationsCount = 0;
+  (0, import_observeMutations.default)($elm).then((mutation) => {
+    if (mutation.attributeName === "plop" || mutation.attributeName === "hello") {
+      mutationsCount++;
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../observeMutations"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var observeMutations_1 = __importDefault(require("../observeMutations"));
-    describe('sugar.js.dom.observeMutations', function () {
-        document.body.innerHTML = "\n      <div id=\"testing\">\n      </div>\n  ";
-        var $elm = document.querySelector('#testing');
-        var mutationsCount = 0;
-        observeMutations_1.default($elm).then(function (mutation) {
-            if (mutation.attributeName === 'plop' ||
-                mutation.attributeName === 'hello') {
-                mutationsCount++;
-            }
-        });
-        $elm.setAttribute('plop', 'coco');
-        $elm.setAttribute('hello', 'world');
-        it('Should have detect all the mutations done on the $elm', function () {
-            setTimeout(function () {
-                expect(mutationsCount).toBe(2);
-            });
-        });
+  });
+  $elm.setAttribute("plop", "coco");
+  $elm.setAttribute("hello", "world");
+  it("Should have detect all the mutations done on the $elm", () => {
+    setTimeout(() => {
+      expect(mutationsCount).toBe(2);
     });
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2JzZXJ2ZU11dGF0aW9ucy50ZXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2JzZXJ2ZU11dGF0aW9ucy50ZXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0lBQUEseUVBQXFEO0lBRXJELFFBQVEsQ0FBQywrQkFBK0IsRUFBRTtRQUN4QyxRQUFRLENBQUMsSUFBSSxDQUFDLFNBQVMsR0FBRyxnREFHekIsQ0FBQztRQUNGLElBQU0sSUFBSSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsVUFBVSxDQUFDLENBQUM7UUFDaEQsSUFBSSxjQUFjLEdBQUcsQ0FBQyxDQUFDO1FBRXZCLDBCQUFrQixDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQyxVQUFDLFFBQVE7WUFDckMsSUFDRSxRQUFRLENBQUMsYUFBYSxLQUFLLE1BQU07Z0JBQ2pDLFFBQVEsQ0FBQyxhQUFhLEtBQUssT0FBTyxFQUNsQztnQkFDQSxjQUFjLEVBQUUsQ0FBQzthQUNsQjtRQUNILENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLFlBQVksQ0FBQyxNQUFNLEVBQUUsTUFBTSxDQUFDLENBQUM7UUFDbEMsSUFBSSxDQUFDLFlBQVksQ0FBQyxPQUFPLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFFcEMsRUFBRSxDQUFDLHVEQUF1RCxFQUFFO1lBQzFELFVBQVUsQ0FBQztnQkFDVCxNQUFNLENBQUMsY0FBYyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ2pDLENBQUMsQ0FBQyxDQUFDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDLENBQUMsQ0FBQyJ9

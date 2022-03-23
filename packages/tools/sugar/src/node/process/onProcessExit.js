@@ -1,76 +1,61 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import __terminalKit from 'terminal-kit';
-/**
- * @name            onProcessExit222
- * @namespace            node.process
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * This function allows you to register a callback to execute when the process
- * is exiting by one of these events:
- * - exit: when app is closing
- * - SIGINT: on ctrl+c
- * - SIGUSR1, SIGUSR2: catches "kill pid"
- * - uncaughtException: catches uncaught exceptions
- *
- * @param       {Function}          callback            The callback function you want to call
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
- * onProcessExit(() => {
- *      // do something
- * });
- *
- * @since       2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var onProcessExit_exports = {};
+__export(onProcessExit_exports, {
+  default: () => onProcessExit_default
+});
+module.exports = __toCommonJS(onProcessExit_exports);
+var import_terminal_kit = __toESM(require("terminal-kit"), 1);
 const __onProcessExitCallbacks = [];
 function onProcessExit(callback) {
-    if (!__onProcessExitCallbacks.length) {
-        process.stdin.resume();
-        process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
-        let isExiting = false;
-        function exitHandler(state) {
-            return __awaiter(this, void 0, void 0, function* () {
-                if (isExiting)
-                    return;
-                isExiting = true;
-                for (let i = 0; i < __onProcessExitCallbacks.length; i++) {
-                    const cbFn = __onProcessExitCallbacks[i];
-                    yield cbFn(state);
-                }
-                setTimeout(() => {
-                    __terminalKit.terminal.processExit('SIGTERM');
-                }, 100);
-            });
-        }
-        process.on('close', (code) => code === 0 ? exitHandler('success') : exitHandler('error'));
-        process.on('exit', (code) => code === 0 ? exitHandler('success') : exitHandler('error'));
-        process.on('custom_exit', (state) => {
-            exitHandler(state);
-        });
-        process.on('SIGINT', () => exitHandler('killed'));
-        process.on('SIGUSR1', () => exitHandler('killed'));
-        process.on('SIGUSR2', () => exitHandler('killed'));
-        process.on('uncaughtException', () => exitHandler('error'));
-    }
-    if (__onProcessExitCallbacks.indexOf(callback) !== -1)
+  if (!__onProcessExitCallbacks.length) {
+    process.stdin.resume();
+    process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
+    let isExiting = false;
+    async function exitHandler(state) {
+      if (isExiting)
         return;
-    __onProcessExitCallbacks.push(callback);
+      isExiting = true;
+      for (let i = 0; i < __onProcessExitCallbacks.length; i++) {
+        const cbFn = __onProcessExitCallbacks[i];
+        await cbFn(state);
+      }
+      setTimeout(() => {
+        import_terminal_kit.default.terminal.processExit("SIGTERM");
+      }, 100);
+    }
+    process.on("close", (code) => code === 0 ? exitHandler("success") : exitHandler("error"));
+    process.on("exit", (code) => code === 0 ? exitHandler("success") : exitHandler("error"));
+    process.on("custom_exit", (state) => {
+      exitHandler(state);
+    });
+    process.on("SIGINT", () => exitHandler("killed"));
+    process.on("SIGUSR1", () => exitHandler("killed"));
+    process.on("SIGUSR2", () => exitHandler("killed"));
+    process.on("uncaughtException", () => exitHandler("error"));
+  }
+  if (__onProcessExitCallbacks.indexOf(callback) !== -1)
+    return;
+  __onProcessExitCallbacks.push(callback);
 }
-export default onProcessExit;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib25Qcm9jZXNzRXhpdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm9uUHJvY2Vzc0V4aXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7OztBQUlkLE9BQU8sYUFBYSxNQUFNLGNBQWMsQ0FBQztBQUV6Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILE1BQU0sd0JBQXdCLEdBQUcsRUFBRSxDQUFDO0FBRXBDLFNBQVMsYUFBYSxDQUFDLFFBQVE7SUFDM0IsSUFBSSxDQUFDLHdCQUF3QixDQUFDLE1BQU0sRUFBRTtRQUNsQyxPQUFPLENBQUMsS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDO1FBQ3ZCLE9BQU8sQ0FBQyxHQUFHLENBQUMsNEJBQTRCLEdBQUcsSUFBSSxDQUFDO1FBQ2hELElBQUksU0FBUyxHQUFHLEtBQUssQ0FBQztRQUN0QixTQUFlLFdBQVcsQ0FBQyxLQUFLOztnQkFDNUIsSUFBSSxTQUFTO29CQUFFLE9BQU87Z0JBQ3RCLFNBQVMsR0FBRyxJQUFJLENBQUM7Z0JBQ2pCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyx3QkFBd0IsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7b0JBQ3RELE1BQU0sSUFBSSxHQUFHLHdCQUF3QixDQUFDLENBQUMsQ0FBQyxDQUFDO29CQUN6QyxNQUFNLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztpQkFDckI7Z0JBQ0QsVUFBVSxDQUFDLEdBQUcsRUFBRTtvQkFDWixhQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxTQUFTLENBQUMsQ0FBQztnQkFDbEQsQ0FBQyxFQUFFLEdBQUcsQ0FBQyxDQUFDO1lBQ1osQ0FBQztTQUFBO1FBQ0QsT0FBTyxDQUFDLEVBQUUsQ0FBQyxPQUFPLEVBQUUsQ0FBQyxJQUFJLEVBQUUsRUFBRSxDQUN6QixJQUFJLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUMsQ0FDN0QsQ0FBQztRQUNGLE9BQU8sQ0FBQyxFQUFFLENBQUMsTUFBTSxFQUFFLENBQUMsSUFBSSxFQUFFLEVBQUUsQ0FDeEIsSUFBSSxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsV0FBVyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxXQUFXLENBQUMsT0FBTyxDQUFDLENBQzdELENBQUM7UUFDRixPQUFPLENBQUMsRUFBRSxDQUFDLGFBQWEsRUFBRSxDQUFDLEtBQUssRUFBRSxFQUFFO1lBQ2hDLFdBQVcsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUN2QixDQUFDLENBQUMsQ0FBQztRQUNILE9BQU8sQ0FBQyxFQUFFLENBQUMsUUFBUSxFQUFFLEdBQUcsRUFBRSxDQUFDLFdBQVcsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO1FBQ2xELE9BQU8sQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLEdBQUcsRUFBRSxDQUFDLFdBQVcsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO1FBQ25ELE9BQU8sQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLEdBQUcsRUFBRSxDQUFDLFdBQVcsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO1FBQ25ELE9BQU8sQ0FBQyxFQUFFLENBQUMsbUJBQW1CLEVBQUUsR0FBRyxFQUFFLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUM7S0FDL0Q7SUFDRCxJQUFJLHdCQUF3QixDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUM7UUFBRSxPQUFPO0lBQzlELHdCQUF3QixDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQztBQUM1QyxDQUFDO0FBQ0QsZUFBZSxhQUFhLENBQUMifQ==
+var onProcessExit_default = onProcessExit;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

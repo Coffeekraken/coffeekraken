@@ -1,52 +1,40 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import { spawnSync } from 'child_process';
-/**
- * @name            commandExists
- * @namespace       node.command
- * @type            Function
- * @async
- * @platform        node
- * @status          beta
- *
- * This function allows you to check if a command exists on the system where the script is running
- *
- * @todo        tests           high
- * @todo        Documentation
- *
- * @param       {String}            command         The command to check like "ls", "node", etc...
- * @return      {Promise}                           A promise fullfiled once the check has finished with true of false as value
- *
- * @example         js
- * import commandExists from '@coffeekraken/sugar/node/command/commandExists';
- * await commandExists('ls'); // => true
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function commandExists(command) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const isWin = process.platform === 'win32';
-        const where = isWin ? 'where' : 'whereis';
-        // check by version
-        const versionOut = spawnSync(`${command} --version`, ['/?'], {
-            encoding: 'utf-8',
-            shell: true,
-        });
-        if (versionOut.stdout)
-            return versionOut.stdout;
-        const out = spawnSync(where + ' ' + command, ['/?'], {
-            encoding: 'utf8',
-            shell: true,
-        });
-        return out.stdout !== '';
-    });
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var commandExists_exports = {};
+__export(commandExists_exports, {
+  default: () => commandExists
+});
+module.exports = __toCommonJS(commandExists_exports);
+var import_child_process = require("child_process");
+async function commandExists(command) {
+  const isWin = process.platform === "win32";
+  const where = isWin ? "where" : "whereis";
+  const versionOut = (0, import_child_process.spawnSync)(`${command} --version`, ["/?"], {
+    encoding: "utf-8",
+    shell: true
+  });
+  if (versionOut.stdout)
+    return versionOut.stdout;
+  const out = (0, import_child_process.spawnSync)(where + " " + command, ["/?"], {
+    encoding: "utf8",
+    shell: true
+  });
+  return out.stdout !== "";
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tbWFuZEV4aXN0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvbW1hbmRFeGlzdHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxFQUFFLFNBQVMsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUUxQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQWdCLGFBQWEsQ0FBQyxPQUFlOztRQUN2RCxNQUFNLEtBQUssR0FBRyxPQUFPLENBQUMsUUFBUSxLQUFLLE9BQU8sQ0FBQztRQUMzQyxNQUFNLEtBQUssR0FBRyxLQUFLLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUFDO1FBRTFDLG1CQUFtQjtRQUNuQixNQUFNLFVBQVUsR0FBRyxTQUFTLENBQUMsR0FBRyxPQUFPLFlBQVksRUFBRSxDQUFDLElBQUksQ0FBQyxFQUFFO1lBQ3pELFFBQVEsRUFBRSxPQUFPO1lBQ2pCLEtBQUssRUFBRSxJQUFJO1NBQ2QsQ0FBQyxDQUFDO1FBQ0gsSUFBSSxVQUFVLENBQUMsTUFBTTtZQUFFLE9BQU8sVUFBVSxDQUFDLE1BQU0sQ0FBQztRQUVoRCxNQUFNLEdBQUcsR0FBRyxTQUFTLENBQUMsS0FBSyxHQUFHLEdBQUcsR0FBRyxPQUFPLEVBQUUsQ0FBQyxJQUFJLENBQUMsRUFBRTtZQUNqRCxRQUFRLEVBQUUsTUFBTTtZQUNoQixLQUFLLEVBQUUsSUFBSTtTQUNkLENBQUMsQ0FBQztRQUNILE9BQU8sR0FBRyxDQUFDLE1BQU0sS0FBSyxFQUFFLENBQUM7SUFDN0IsQ0FBQztDQUFBIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

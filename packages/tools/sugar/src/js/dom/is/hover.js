@@ -1,31 +1,26 @@
-// @ts-nocheck
-/**
- * @name      hover
- * @namespace            js.dom.is
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Check if the mouse is hover the passed HTMLElement
- *
- * @param    {HTMLElement}    $elm    The HTMLElement to check
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import hover from '@coffeekraken/sugar/js/dom/is/hover'
- * const $myElm = document.querySelector('.my-elm')
- * if (hover($myElm)) {
- *   // do something
- * }
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var hover_exports = {};
+__export(hover_exports, {
+  default: () => hover_default
+});
+module.exports = __toCommonJS(hover_exports);
 function hover($elm) {
-    return $elm.parentElement.querySelector(':hover') === $elm;
+  return $elm.parentElement.querySelector(":hover") === $elm;
 }
-export default hover;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaG92ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJob3Zlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsS0FBSyxDQUFDLElBQWlCO0lBQzVCLE9BQU8sSUFBSSxDQUFDLGFBQWEsQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLEtBQUssSUFBSSxDQUFDO0FBQy9ELENBQUM7QUFDRCxlQUFlLEtBQUssQ0FBQyJ9
+var hover_default = hover;

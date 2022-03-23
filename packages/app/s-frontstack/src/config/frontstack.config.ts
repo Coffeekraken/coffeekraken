@@ -92,7 +92,7 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.copy
                  * @type            String
-                 * @default        sugar 
+                 * @default        sugar
                  *
                  * Specify the frontend server action command
                  *
@@ -127,13 +127,12 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description:
-                    'Rename a project (folder, package.json, etc...)',
+                description: 'Rename a project (folder, package.json, etc...)',
                 /**
                  * @name            command
                  * @namespace       config.frontstack.actions.rename
                  * @type            String
-                 * @default        sugar 
+                 * @default        sugar
                  *
                  * Specify the frontstack rename action command
                  *
@@ -168,13 +167,12 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description:
-                    'Adding the sugar.json file to the project',
+                description: 'Adding the sugar.json file to the project',
                 /**
                  * @name            command
                  * @namespace       config.frontstack.actions.addSugarJson
                  * @type            String
-                 * @default        sugar 
+                 * @default        sugar
                  *
                  * Specify the frontstack addSugarJson action command
                  *
@@ -209,13 +207,12 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description:
-                    'Adding the manifest.json file to the project',
+                description: 'Adding the manifest.json file to the project',
                 /**
                  * @name            command
                  * @namespace       config.frontstack.actions.addManifestJson
                  * @type            String
-                 * @default        sugar 
+                 * @default        sugar
                  *
                  * Specify the frontstack addManifestJson action command
                  *
@@ -223,6 +220,46 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: `sugar add.manifestJson [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addSugarPostcss: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.addSugarPostcss
+                 * @type            String
+                 * @default        Adding manifest.json file
+                 *
+                 * Add the manifest.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Adding sugar postcss plugin',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.addSugarPostcss
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addSugarPostcss action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Adding the sugar postcss plugin to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.addSugarPostcss
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the frontstack addSugarPostcss action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar postcss.installPlugin [arguments]`,
                 params: {},
                 settings: {},
             },
@@ -256,7 +293,7 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.installDependencies
                  * @type            String
-                 * @default        sugar 
+                 * @default        sugar
                  *
                  * Specify the frontstack addManifestJson action command
                  *
@@ -621,7 +658,7 @@ export default function (env, config) {
                 settings: {
                     processManager: {},
                 },
-            }
+            },
         },
     };
 }

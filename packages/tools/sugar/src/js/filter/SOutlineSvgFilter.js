@@ -1,60 +1,43 @@
-// @ts-nocheck
-import SSvgFilter from './SSvgFilter';
-/**
- * @name 		        SOutlineSvgFilter
- * @namespace            js.filter
- * @type            Class
- * @extends 	    	SSvgFilter
- * @platform          js
- * @status        beta
- *
- * This class represent an outline filter that can be applied on any HTMLElement.
- *
- * @example 		js
- * const filter = new SOutlineSvgFilter();
- * filter.applyTo(myCoolHTMLElement);
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since         1.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SOutlineSvgFilter extends SSvgFilter {
-    /**
-     * @name            constructor
-     * @type            Function
-     *
-     * Constructor
-     *
-     * @param 		{Number} 		[radius=8] 		The amount of effect to apply
-     *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    constructor(radius = 8) {
-        super(`
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SOutlineSvgFilter_exports = {};
+__export(SOutlineSvgFilter_exports, {
+  default: () => SOutlineSvgFilter_default
+});
+module.exports = __toCommonJS(SOutlineSvgFilter_exports);
+var import_SSvgFilter = __toESM(require("./SSvgFilter"), 1);
+class SOutlineSvgFilter extends import_SSvgFilter.default {
+  constructor(radius = 8) {
+    super(`
 			<feMorphology operator="dilate" radius="${radius}"
 			in="SourceGraphic" result="THICKNESS" />
 			<feComposite operator="out" in="THICKNESS" in2="SourceGraphic" ></feComposite>
 		`);
-        this._$morphology = this.filter.querySelector('feMorphology');
-    }
-    /**
-     * @name          radius
-     * @type          Number
-     *
-     * Get/Set the radius to produce the effect
-     *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    set radius(value) {
-        this._$morphology.setAttribute('radius', value);
-    }
-    get radius() {
-        return parseFloat(this._$morphology.getAttribute('radius'));
-    }
+    this._$morphology = this.filter.querySelector("feMorphology");
+  }
+  set radius(value) {
+    this._$morphology.setAttribute("radius", value);
+  }
+  get radius() {
+    return parseFloat(this._$morphology.getAttribute("radius"));
+  }
 }
-// export modules
-export default SOutlineSvgFilter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU091dGxpbmVTdmdGaWx0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTT3V0bGluZVN2Z0ZpbHRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0sY0FBYyxDQUFDO0FBRXRDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILE1BQU0saUJBQWtCLFNBQVEsVUFBVTtJQUN0Qzs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLE1BQU0sR0FBRyxDQUFDO1FBQ2xCLEtBQUssQ0FBQzs2Q0FDK0IsTUFBTTs7O0dBR2hELENBQUMsQ0FBQztRQUNHLElBQUksQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxhQUFhLENBQUMsY0FBYyxDQUFDLENBQUM7SUFDbEUsQ0FBQztJQUVEOzs7Ozs7O09BT0c7SUFDSCxJQUFJLE1BQU0sQ0FBQyxLQUFLO1FBQ1osSUFBSSxDQUFDLFlBQVksQ0FBQyxZQUFZLENBQUMsUUFBUSxFQUFFLEtBQUssQ0FBQyxDQUFDO0lBQ3BELENBQUM7SUFDRCxJQUFJLE1BQU07UUFDTixPQUFPLFVBQVUsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO0lBQ2hFLENBQUM7Q0FDSjtBQUVELGlCQUFpQjtBQUNqQixlQUFlLGlCQUFpQixDQUFDIn0=
+var SOutlineSvgFilter_default = SOutlineSvgFilter;

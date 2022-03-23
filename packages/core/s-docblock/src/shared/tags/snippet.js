@@ -1,35 +1,34 @@
-// @ts-nocheck
-/**
- * @name              snippet
- * @namespace           shared.tags
- * @type              Function
- * @platform            node
- * @status              beta
- *
- * Parse the snippet tag
- *
- * @param       {Object}          data        The data object parsed in the string
- * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
- * @snippet      {Object}                      The formated object
- *
- * @todo      interface
- * @todo      doc
- *
- * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var snippet_exports = {};
+__export(snippet_exports, {
+  default: () => snippet_default
+});
+module.exports = __toCommonJS(snippet_exports);
 function snippet(data, blockSettings) {
-    if (data.content && data.content[data.content.length - 1] === '') {
-        data.content = data.content.slice(0, -1);
-    }
-    return {
-        language: typeof data.value === 'string'
-            ? data.value.toLowerCase()
-            : data.value,
-        code: Array.isArray(data.content)
-            ? data.content.join('\n')
-            : data.content,
-    };
+  if (data.content && data.content[data.content.length - 1] === "") {
+    data.content = data.content.slice(0, -1);
+  }
+  return {
+    language: typeof data.value === "string" ? data.value.toLowerCase() : data.value,
+    code: Array.isArray(data.content) ? data.content.join("\n") : data.content
+  };
 }
-export default snippet;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic25pcHBldC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInNuaXBwZXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxTQUFTLE9BQU8sQ0FBQyxJQUFJLEVBQUUsYUFBYTtJQUNoQyxJQUFJLElBQUksQ0FBQyxPQUFPLElBQUksSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU0sR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDOUQsSUFBSSxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztLQUM1QztJQUNELE9BQU87UUFDSCxRQUFRLEVBQ0osT0FBTyxJQUFJLENBQUMsS0FBSyxLQUFLLFFBQVE7WUFDMUIsQ0FBQyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsV0FBVyxFQUFFO1lBQzFCLENBQUMsQ0FBQyxJQUFJLENBQUMsS0FBSztRQUNwQixJQUFJLEVBQUUsS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDO1lBQzdCLENBQUMsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUM7WUFDekIsQ0FBQyxDQUFDLElBQUksQ0FBQyxPQUFPO0tBQ3JCLENBQUM7QUFDTixDQUFDO0FBQ0QsZUFBZSxPQUFPLENBQUMifQ==
+var snippet_default = snippet;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

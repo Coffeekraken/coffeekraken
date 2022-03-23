@@ -1,31 +1,32 @@
-// @ts-nocheck
-import __camelize from './camelize';
-/**
- * @name        camelCase
- * @namespace            js.string
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * camelCase a string
- *
- * @param         {String}          text        The string to camelCase
- * @return        {String}                      The camelCased string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example     js
- * import camelCase from '@coffeekraken/sugar/js/string/camelCase';
- * camelCase('hello world'); // => helloWorld
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var camelCase_exports = {};
+__export(camelCase_exports, {
+  default: () => camelCase_default
+});
+module.exports = __toCommonJS(camelCase_exports);
+var import_camelize = __toESM(require("./camelize"), 1);
 function camelCase(text) {
-    return __camelize(text);
+  return (0, import_camelize.default)(text);
 }
-export default camelCase;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2FtZWxDYXNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2FtZWxDYXNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFVBQVUsTUFBTSxZQUFZLENBQUM7QUFFcEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsSUFBSTtJQUNuQixPQUFPLFVBQVUsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUM1QixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var camelCase_default = camelCase;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

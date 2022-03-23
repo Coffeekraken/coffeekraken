@@ -1,57 +1,68 @@
-// @ts-nocheck
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SGlobSettingsInterface
- * @namespace           node.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This interface represent the SGlob settings.
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SGlobSettingsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            cwd: {
-                description: 'Specify the working directory to run the command in.',
-                type: 'String',
-                default: process.cwd(),
-            },
-            symlinks: {
-                description: 'Specify if you want to follow symlinks or not',
-                type: 'Boolean',
-                default: true
-            },
-            nodir: {
-                description: 'Specify if you want to ignore directories or not',
-                type: 'Boolean',
-                default: false
-            },
-            contentRegExp: {
-                description: 'Specify a regex to use on the file content to filter resolved files',
-                type: 'RegExp'
-            },
-            SFile: {
-                description: 'Specify if you want back some SFile instances or simple string path',
-                type: 'Boolean',
-                default: true
-            },
-            exclude: {
-                description: 'Specify some paths or patterns you want to exclude from your resolve process',
-                type: 'Array<String>',
-                default: []
-            },
-            defaultExcludes: {
-                description: 'Specfy if you want to use the default excludes globs setted under the config.storage.exclude configuration',
-                type: 'Boolean',
-                default: true
-            }
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SGlobSettingsInterface_exports = {};
+__export(SGlobSettingsInterface_exports, {
+  default: () => SGlobSettingsInterface
+});
+module.exports = __toCommonJS(SGlobSettingsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SGlobSettingsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      cwd: {
+        description: "Specify the working directory to run the command in.",
+        type: "String",
+        default: process.cwd()
+      },
+      symlinks: {
+        description: "Specify if you want to follow symlinks or not",
+        type: "Boolean",
+        default: true
+      },
+      nodir: {
+        description: "Specify if you want to ignore directories or not",
+        type: "Boolean",
+        default: false
+      },
+      contentRegExp: {
+        description: "Specify a regex to use on the file content to filter resolved files",
+        type: "RegExp"
+      },
+      SFile: {
+        description: "Specify if you want back some SFile instances or simple string path",
+        type: "Boolean",
+        default: true
+      },
+      exclude: {
+        description: "Specify some paths or patterns you want to exclude from your resolve process",
+        type: "Array<String>",
+        default: []
+      },
+      defaultExcludes: {
+        description: "Specfy if you want to use the default excludes globs setted under the config.storage.exclude configuration",
+        type: "Boolean",
+        default: true
+      }
+    };
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0dsb2JTZXR0aW5nc0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNHbG9iU2V0dGluZ3NJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7O0dBYUc7QUFDSCxNQUFNLENBQUMsT0FBTyxPQUFPLHNCQUF1QixTQUFRLFlBQVk7SUFDNUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEdBQUcsRUFBRTtnQkFDRCxXQUFXLEVBQUUsc0RBQXNEO2dCQUNuRSxJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRTthQUN6QjtZQUNELFFBQVEsRUFBRTtnQkFDTixXQUFXLEVBQUUsK0NBQStDO2dCQUM1RCxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsSUFBSTthQUNoQjtZQUNELEtBQUssRUFBRTtnQkFDSCxXQUFXLEVBQUUsa0RBQWtEO2dCQUMvRCxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELGFBQWEsRUFBRTtnQkFDWCxXQUFXLEVBQUUscUVBQXFFO2dCQUNsRixJQUFJLEVBQUUsUUFBUTthQUNqQjtZQUNELEtBQUssRUFBRTtnQkFDSCxXQUFXLEVBQUUscUVBQXFFO2dCQUNsRixJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsSUFBSTthQUNoQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxXQUFXLEVBQUUsOEVBQThFO2dCQUMzRixJQUFJLEVBQUUsZUFBZTtnQkFDckIsT0FBTyxFQUFFLEVBQUU7YUFDZDtZQUNELGVBQWUsRUFBRTtnQkFDYixXQUFXLEVBQUUsNEdBQTRHO2dCQUN6SCxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsSUFBSTthQUNoQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0oifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

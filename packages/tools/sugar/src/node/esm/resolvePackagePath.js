@@ -1,28 +1,33 @@
-import __resolvePackagePath from 'resolve-package-path';
-import __packageRoot from '../path/packageRoot';
-/**
- * @name                resolvePackagePath
- * @namespace           node.esm
- * @type                Function
- * @platform            node
- * @status              beta
- *
- * This function allows you to resolve a passed package name or a folder directory to it's package.json file
- *
- * @param       {String}            package         The package bane you want to get the path for
- * @param       {String}           [baseDir=`${__packageRoot()}/node_modules`]      The directory from which to search for the package
- * @return      {String}                  The absolute path to the requested package
- *
- * @example         js
- * import resolvePackagePath from '@coffeekraken/sugar/node/esm/resolvePackagePath';
- * resolvePackagePath('something');
- *
- * @see             https://www.npmjs.com/package/resolve-package-path
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function resolvePackagePath(pkg, baseDir = `${__packageRoot()}/node_modules`) {
-    var _a;
-    return (_a = __resolvePackagePath(pkg, baseDir)) === null || _a === void 0 ? void 0 : _a.replace(/\/package\.json$/, '');
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var resolvePackagePath_exports = {};
+__export(resolvePackagePath_exports, {
+  default: () => resolvePackagePath
+});
+module.exports = __toCommonJS(resolvePackagePath_exports);
+var import_resolve_package_path = __toESM(require("resolve-package-path"), 1);
+var import_packageRoot = __toESM(require("../path/packageRoot"), 1);
+function resolvePackagePath(pkg, baseDir = `${(0, import_packageRoot.default)()}/node_modules`) {
+  var _a;
+  return (_a = (0, import_resolve_package_path.default)(pkg, baseDir)) == null ? void 0 : _a.replace(/\/package\.json$/, "");
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVzb2x2ZVBhY2thZ2VQYXRoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmVzb2x2ZVBhY2thZ2VQYXRoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sb0JBQW9CLE1BQU0sc0JBQXNCLENBQUM7QUFDeEQsT0FBTyxhQUFhLE1BQU0scUJBQXFCLENBQUM7QUFFaEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxrQkFBa0IsQ0FBQyxHQUFXLEVBQUUsVUFBa0IsR0FBRyxhQUFhLEVBQUUsZUFBZTs7SUFDdkcsT0FBTyxNQUFBLG9CQUFvQixDQUFDLEdBQUcsRUFBRSxPQUFPLENBQUMsMENBQUUsT0FBTyxDQUFDLGtCQUFrQixFQUFFLEVBQUUsQ0FBQyxDQUFDO0FBQy9FLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,49 +1,53 @@
-// @ts-nocheck
-import __idCompliant from '@coffeekraken/sugar/shared/string/idCompliant';
-/**
- * @name              cssClass
- * @namespace           shared.tags
- * @type              Function
- * @platform            node
- * @status              beta
- *
- * Parse the cssClass tag
- *
- * @cssClass       {Object}          data        The data object parsed in the string
- * @cssClass       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
- * @cssClass      {Object}                      The formated object
- *
- * @todo      interface
- * @todo      doc
- *
- * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var cssClass_exports = {};
+__export(cssClass_exports, {
+  default: () => cssClass_default
+});
+module.exports = __toCommonJS(cssClass_exports);
+var import_idCompliant = __toESM(require("@coffeekraken/sugar/shared/string/idCompliant"), 1);
 function cssClass(data, blockSettings) {
-    if (!Array.isArray(data))
-        data = [data];
-    const res = {};
-    data.forEach((cssClass) => {
-        if (typeof cssClass !== 'object' ||
-            !cssClass.value ||
-            typeof cssClass.value !== 'string')
-            return;
-        const parts = cssClass.value.split(/\s{2,20000}/).map((l) => l.trim());
-        let className = parts === null || parts === void 0 ? void 0 : parts[0];
-        const name = __idCompliant(className, {});
-        const description = new String(parts && parts[1] ? parts[1] : null);
-        description.render = true;
-        res[name] = {
-            name: parts[0],
-            description,
-        };
-        if (cssClass.content) {
-            const content = new String(cssClass.content.join('\n'));
-            content.render = true;
-            res[name].content = content;
-        }
-    });
-    return res;
+  if (!Array.isArray(data))
+    data = [data];
+  const res = {};
+  data.forEach((cssClass2) => {
+    if (typeof cssClass2 !== "object" || !cssClass2.value || typeof cssClass2.value !== "string")
+      return;
+    const parts = cssClass2.value.split(/\s{2,20000}/).map((l) => l.trim());
+    let className = parts == null ? void 0 : parts[0];
+    const name = (0, import_idCompliant.default)(className, {});
+    const description = new String(parts && parts[1] ? parts[1] : null);
+    description.render = true;
+    res[name] = {
+      name: parts[0],
+      description
+    };
+    if (cssClass2.content) {
+      const content = new String(cssClass2.content.join("\n"));
+      content.render = true;
+      res[name].content = content;
+    }
+  });
+  return res;
 }
-export default cssClass;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY3NzQ2xhc3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjc3NDbGFzcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBSWQsT0FBTyxhQUFhLE1BQU0sK0NBQStDLENBQUM7QUFFMUU7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILFNBQVMsUUFBUSxDQUFDLElBQUksRUFBRSxhQUFhO0lBQ2pDLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQztRQUFFLElBQUksR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBRXhDLE1BQU0sR0FBRyxHQUFHLEVBQUUsQ0FBQztJQUVmLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtRQUN0QixJQUNJLE9BQU8sUUFBUSxLQUFLLFFBQVE7WUFDNUIsQ0FBQyxRQUFRLENBQUMsS0FBSztZQUNmLE9BQU8sUUFBUSxDQUFDLEtBQUssS0FBSyxRQUFRO1lBRWxDLE9BQU87UUFDWCxNQUFNLEtBQUssR0FBRyxRQUFRLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxhQUFhLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxDQUFDO1FBQ3ZFLElBQUksU0FBUyxHQUFHLEtBQUssYUFBTCxLQUFLLHVCQUFMLEtBQUssQ0FBRyxDQUFDLENBQUMsQ0FBQztRQUMzQixNQUFNLElBQUksR0FBRyxhQUFhLENBQUMsU0FBUyxFQUFFLEVBQUUsQ0FBQyxDQUFDO1FBQzFDLE1BQU0sV0FBVyxHQUFHLElBQUksTUFBTSxDQUFDLEtBQUssSUFBSSxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDcEUsV0FBVyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUM7UUFFMUIsR0FBRyxDQUFDLElBQUksQ0FBQyxHQUFHO1lBQ1IsSUFBSSxFQUFFLEtBQUssQ0FBQyxDQUFDLENBQUM7WUFDZCxXQUFXO1NBQ2QsQ0FBQztRQUNGLElBQUksUUFBUSxDQUFDLE9BQU8sRUFBRTtZQUNsQixNQUFNLE9BQU8sR0FBRyxJQUFJLE1BQU0sQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO1lBQ3hELE9BQU8sQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDO1lBQ3RCLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQyxPQUFPLEdBQUcsT0FBTyxDQUFDO1NBQy9CO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDSCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUM7QUFDRCxlQUFlLFFBQVEsQ0FBQyJ9
+var cssClass_default = cssClass;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

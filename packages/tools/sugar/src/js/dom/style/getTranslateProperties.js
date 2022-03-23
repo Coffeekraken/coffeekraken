@@ -1,58 +1,49 @@
-// @ts-nocheck
-import * as __rematrix from 'rematrix';
-/**
- * @name      getTranslateProperties
- * @namespace            js.dom.style
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Get a translate properties of an HTMLElement
- *
- * @param 		{HTMLElement} 					$elm  		The element to get the properties from
- * @return 		{Object} 									The translate x,y and z properties
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import getTranslateProperties from '@coffeekraken/sugar/js/dom/getTranslateProperties'
- * const props = getTranslateProperties(myCoolHTMLElement);
- * // output format
- * // {
- * // 	x : 100,
- * // 	y : 0,
- * // 	z : 0
- * // }
- *
- * @since           1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var getTranslateProperties_exports = {};
+__export(getTranslateProperties_exports, {
+  default: () => getTranslateProperties_default
+});
+module.exports = __toCommonJS(getTranslateProperties_exports);
+var __rematrix = __toESM(require("rematrix"), 1);
 function getTranslateProperties($elm) {
-    if (!window.getComputedStyle)
-        return {
-            x: 0,
-            y: 0,
-            z: 0
-        };
-    const style = getComputedStyle($elm);
-    const transform = style.transform ||
-        style.webkitTransform ||
-        style.mozTransform ||
-        style.msTransform;
-    if (!transform)
-        return {
-            x: 0,
-            y: 0,
-            z: 0,
-        };
-    const matrix3d = __rematrix.fromString(transform);
+  if (!window.getComputedStyle)
     return {
-        x: matrix3d[12],
-        y: matrix3d[13],
-        z: matrix3d[14],
+      x: 0,
+      y: 0,
+      z: 0
     };
+  const style = getComputedStyle($elm);
+  const transform = style.transform || style.webkitTransform || style.mozTransform || style.msTransform;
+  if (!transform)
+    return {
+      x: 0,
+      y: 0,
+      z: 0
+    };
+  const matrix3d = __rematrix.fromString(transform);
+  return {
+    x: matrix3d[12],
+    y: matrix3d[13],
+    z: matrix3d[14]
+  };
 }
-export default getTranslateProperties;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0VHJhbnNsYXRlUHJvcGVydGllcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldFRyYW5zbGF0ZVByb3BlcnRpZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sS0FBSyxVQUFVLE1BQU0sVUFBVSxDQUFDO0FBRXZDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJHO0FBQ0gsU0FBUyxzQkFBc0IsQ0FDM0IsSUFBaUI7SUFNakIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxnQkFBZ0I7UUFBRSxPQUFPO1lBQ2pDLENBQUMsRUFBRSxDQUFDO1lBQ0osQ0FBQyxFQUFFLENBQUM7WUFDSixDQUFDLEVBQUUsQ0FBQztTQUNQLENBQUM7SUFDRixNQUFNLEtBQUssR0FBRyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNyQyxNQUFNLFNBQVMsR0FDWCxLQUFLLENBQUMsU0FBUztRQUNmLEtBQUssQ0FBQyxlQUFlO1FBQ3JCLEtBQUssQ0FBQyxZQUFZO1FBQ2xCLEtBQUssQ0FBQyxXQUFXLENBQUM7SUFDdEIsSUFBSSxDQUFDLFNBQVM7UUFDVixPQUFPO1lBQ0gsQ0FBQyxFQUFFLENBQUM7WUFDSixDQUFDLEVBQUUsQ0FBQztZQUNKLENBQUMsRUFBRSxDQUFDO1NBQ1AsQ0FBQztJQUVOLE1BQU0sUUFBUSxHQUFHLFVBQVUsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDbEQsT0FBTztRQUNILENBQUMsRUFBRSxRQUFRLENBQUMsRUFBRSxDQUFDO1FBQ2YsQ0FBQyxFQUFFLFFBQVEsQ0FBQyxFQUFFLENBQUM7UUFDZixDQUFDLEVBQUUsUUFBUSxDQUFDLEVBQUUsQ0FBQztLQUNsQixDQUFDO0FBQ04sQ0FBQztBQUNELGVBQWUsc0JBQXNCLENBQUMifQ==
+var getTranslateProperties_default = getTranslateProperties;

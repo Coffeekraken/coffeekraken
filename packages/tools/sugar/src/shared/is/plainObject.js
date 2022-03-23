@@ -1,40 +1,37 @@
-// @ts-nocheck
-/**
- * @name                      plainObject
- * @namespace            js.is
- * @type                      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the passed object (or array of objects) is/are plain object(s)
- *
- * @param         {Object|Array}            object                  The object(s) to check
- * @return        {Boolean}                                         true if is plain object(s), false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example           js
- * import isPlainObject from '@coffeekraken/sugar/js/is/plainObject';
- * isPlainObject({ hello: 'world'}); // => true
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function plainObject(object) {
-    if (!object)
-        return false;
-    if (typeof object !== 'object')
-        return false;
-    if (object.constructor && object.constructor.name !== 'Object')
-        return false;
-    if (Object.prototype.toString.call(object) !== '[object Object]')
-        return false;
-    if (object !== Object(object))
-        return false;
-    // if (object.constructor !== Object) return false;
-    return true;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var plainObject_exports = {};
+__export(plainObject_exports, {
+  default: () => plainObject
+});
+module.exports = __toCommonJS(plainObject_exports);
+function plainObject(object) {
+  if (!object)
+    return false;
+  if (typeof object !== "object")
+    return false;
+  if (object.constructor && object.constructor.name !== "Object")
+    return false;
+  if (Object.prototype.toString.call(object) !== "[object Object]")
+    return false;
+  if (object !== Object(object))
+    return false;
+  return true;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGxhaW5PYmplY3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwbGFpbk9iamVjdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxXQUFXLENBQUMsTUFBTTtJQUN0QyxJQUFJLENBQUMsTUFBTTtRQUFFLE9BQU8sS0FBSyxDQUFDO0lBQzFCLElBQUksT0FBTyxNQUFNLEtBQUssUUFBUTtRQUFFLE9BQU8sS0FBSyxDQUFDO0lBQzdDLElBQUksTUFBTSxDQUFDLFdBQVcsSUFBSSxNQUFNLENBQUMsV0FBVyxDQUFDLElBQUksS0FBSyxRQUFRO1FBQzFELE9BQU8sS0FBSyxDQUFDO0lBQ2pCLElBQUksTUFBTSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLGlCQUFpQjtRQUM1RCxPQUFPLEtBQUssQ0FBQztJQUNqQixJQUFJLE1BQU0sS0FBSyxNQUFNLENBQUMsTUFBTSxDQUFDO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFDNUMsbURBQW1EO0lBQ25ELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

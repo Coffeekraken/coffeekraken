@@ -1,42 +1,50 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SFrontstackCopyActionParamsInterface
- * @namespace           node.actions.interface
- * @type.                      Class
- * @extends             SInterface
- * @status              beta
- * @platform             node
- * @interface
- *
- * This class represent the interface that describe parameters of the "copy" action
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SFrontstackCopyActionParamsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            src: {
-                description: 'Specify what to copy',
-                type: 'String',
-                required: true
-            },
-            dest: {
-                description: 'Specify where to paste',
-                type: 'String',
-                required: true
-            },
-            chdir: {
-                description: 'Specify if need to change the cwd to the pasted folder location',
-                type: 'Boolean',
-                default: false
-            }
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SFrontstackCopyActionParamsInterface_exports = {};
+__export(SFrontstackCopyActionParamsInterface_exports, {
+  default: () => SFrontstackCopyActionParamsInterface_default
+});
+module.exports = __toCommonJS(SFrontstackCopyActionParamsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SFrontstackCopyActionParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      src: {
+        description: "Specify what to copy",
+        type: "String",
+        required: true
+      },
+      dest: {
+        description: "Specify where to paste",
+        type: "String",
+        required: true
+      },
+      chdir: {
+        description: "Specify if need to change the cwd to the pasted folder location",
+        type: "Boolean",
+        default: false
+      }
+    };
+  }
 }
-export default SFrontstackCopyActionParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2tDb3B5QWN0aW9uUGFyYW1zSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0Zyb250c3RhY2tDb3B5QWN0aW9uUGFyYW1zSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUNILE1BQU0sb0NBQXFDLFNBQVEsWUFBWTtJQUMzRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsR0FBRyxFQUFFO2dCQUNELFdBQVcsRUFBRSxzQkFBc0I7Z0JBQ25DLElBQUksRUFBRSxRQUFRO2dCQUNkLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1lBQ0QsSUFBSSxFQUFFO2dCQUNGLFdBQVcsRUFBRSx3QkFBd0I7Z0JBQ3JDLElBQUksRUFBRSxRQUFRO2dCQUNkLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1lBQ0QsS0FBSyxFQUFFO2dCQUNILFdBQVcsRUFBRSxpRUFBaUU7Z0JBQzlFLElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxLQUFLO2FBQ2pCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUVELGVBQWUsb0NBQW9DLENBQUMifQ==
+var SFrontstackCopyActionParamsInterface_default = SFrontstackCopyActionParamsInterface;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,45 +1,51 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SRefocusFeatureInterface
- * @namespace           js.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             js
- *
- * This interface represent the attributes of the SRefocusFeature
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SRefocusFeatureInterface extends __SInterface {
-    static get _definition() {
-        return {
-            trigger: {
-                description: 'Specify some trigger(s) on which to refocus a particular element like `event:actual`, `anchor`, `history`, etc...',
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [','],
-                },
-                values: ['event:eventName', 'anchor', 'history'],
-                default: [],
-            },
-            scrollToSettings: {
-                description: 'Specify some `scrollTo` settings to override the default ones',
-                type: "IScrollToSettings",
-                default: {}
-            },
-            timeout: {
-                description: 'Specify a timeout to wait before refocus the element',
-                type: 'Number',
-                default: 500,
-            }
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SRefocusFeatureInterface_exports = {};
+__export(SRefocusFeatureInterface_exports, {
+  default: () => SRefocusFeatureInterface
+});
+module.exports = __toCommonJS(SRefocusFeatureInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SRefocusFeatureInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      trigger: {
+        description: "Specify some trigger(s) on which to refocus a particular element like `event:actual`, `anchor`, `history`, etc...",
+        type: {
+          type: "Array<String>",
+          splitChars: [","]
+        },
+        values: ["event:eventName", "anchor", "history"],
+        default: []
+      },
+      scrollToSettings: {
+        description: "Specify some `scrollTo` settings to override the default ones",
+        type: "IScrollToSettings",
+        default: {}
+      },
+      timeout: {
+        description: "Specify a timeout to wait before refocus the element",
+        type: "Number",
+        default: 500
+      }
+    };
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1JlZm9jdXNGZWF0dXJlSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1JlZm9jdXNGZWF0dXJlSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQU0sQ0FBQyxPQUFPLE9BQU8sd0JBQXlCLFNBQVEsWUFBWTtJQUM5RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLFdBQVcsRUFDUCxtSEFBbUg7Z0JBQ3ZILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxDQUFDO2lCQUNwQjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxpQkFBaUIsRUFBRSxRQUFRLEVBQUUsU0FBUyxDQUFDO2dCQUNoRCxPQUFPLEVBQUUsRUFBRTthQUNkO1lBQ0QsZ0JBQWdCLEVBQUU7Z0JBQ2QsV0FBVyxFQUFFLCtEQUErRDtnQkFDNUUsSUFBSSxFQUFFLG1CQUFtQjtnQkFDekIsT0FBTyxFQUFFLEVBQUU7YUFDZDtZQUNELE9BQU8sRUFBRTtnQkFDTCxXQUFXLEVBQUUsc0RBQXNEO2dCQUNuRSxJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsR0FBRzthQUNmO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSiJ9

@@ -1,51 +1,36 @@
-// @ts-nocheck
-import __encodeObject from 'object-encode';
-/**
- * @name            object
- * @namespace            js.crypt
- * @type            Object
- * @platform          js
- * @platform          node
- * @status              wip
- *
- * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the object algorithm
- *
- * @todo        interface
- * @todo        doc
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default {
-    /**
-     * @name        encrypt
-     * @type        Function
-     *
-     * Encrypt
-     *
-     * @param       {Object}       object         The object to encrypt
-     * @param       {String}       [salt="coffeekraken.sugar.crypt.object"]   The salt to encode the object. Needed to decode correctly the object
-     * @return      {String}                       The encrypted object
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    encrypt: function (object, salt = 'coffeekraken.sugar.crypt.object') {
-        return __encodeObject.encode_object(object, 'base64', salt);
-    },
-    /**
-     * @name        decrypt
-     * @type        Function
-     *
-     * Decrypt
-     *
-     * @param       {String}      encodedObject          The object to decrypt
-     * @param       {String}      [salt='coffeekraken.sugar.crypt.object']        The salt to decode the object
-     * @return      {Object}                      The decrypted object
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    decrypt: function (encodedObject, salt = 'coffeekraken.sugar.crypt.object') {
-        return __encodeObject.decode_object(encodedObject, 'base64', salt);
-    },
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGNBQWMsTUFBTSxlQUFlLENBQUM7QUFFM0M7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsZUFBZTtJQUNYOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsT0FBTyxFQUFFLFVBQVUsTUFBTSxFQUFFLElBQUksR0FBRyxpQ0FBaUM7UUFDL0QsT0FBTyxjQUFjLENBQUMsYUFBYSxDQUFDLE1BQU0sRUFBRSxRQUFRLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFDaEUsQ0FBQztJQUVEOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsT0FBTyxFQUFFLFVBQ0wsYUFBYSxFQUNiLElBQUksR0FBRyxpQ0FBaUM7UUFFeEMsT0FBTyxjQUFjLENBQUMsYUFBYSxDQUFDLGFBQWEsRUFBRSxRQUFRLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFDdkUsQ0FBQztDQUNKLENBQUMifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var object_exports = {};
+__export(object_exports, {
+  default: () => object_default
+});
+module.exports = __toCommonJS(object_exports);
+var import_object_encode = __toESM(require("object-encode"), 1);
+var object_default = {
+  encrypt: function(object, salt = "coffeekraken.sugar.crypt.object") {
+    return import_object_encode.default.encode_object(object, "base64", salt);
+  },
+  decrypt: function(encodedObject, salt = "coffeekraken.sugar.crypt.object") {
+    return import_object_encode.default.decode_object(encodedObject, "base64", salt);
+  }
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

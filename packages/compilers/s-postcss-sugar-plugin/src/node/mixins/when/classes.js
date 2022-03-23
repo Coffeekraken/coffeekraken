@@ -1,39 +1,62 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name           classes
- * @namespace      node.mixins.when
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the "when" classes that allows you to apply some display
- * styles like "hide", etc... only when a certain state is reached.
- * Supported states are:
- * - mounted: Apply only when the state of a webcomponent for example has been reached
- * - active: When the element has the "active" class or the "active" attribute
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.when.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginActiveClassesInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginActiveClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginActiveClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginActiveClassesInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const queries = __STheme.config('media.queries');
-    const states = __STheme.config('helpers.states');
-    const vars = new CssVars();
-    states.forEach(state => {
-        vars.comment(() => `/**
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const queries = import_s_theme.default.config("media.queries");
+  const states = import_s_theme.default.config("helpers.states");
+  const vars = new CssVars();
+  states.forEach((state) => {
+    vars.comment(() => `/**
             * @name          s-when:${state}
             * @namespace          sugar.css.when
             * @type               CssClass
@@ -56,7 +79,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent).${state} {
                 display: unset;
             }`);
-        vars.comment(() => `/**
+    vars.comment(() => `/**
             * @name          s-when:sibling:${state}
             * @namespace          sugar.css.when
             * @type               CssClass
@@ -82,7 +105,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             *.${state} + .s-when.s-when--sibling.s-when--${state} {
                 display: unset !important;
             }`);
-        vars.comment(() => `/**
+    vars.comment(() => `/**
             * @name          s-when:siblings:${state}
             * @namespace          sugar.css.when
             * @type               CssClass
@@ -108,7 +131,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             *.${state} ~ .s-when.s-when--siblings.s-when--${state} {
                 display: unset !important;
             }`);
-        vars.comment(() => `/**
+    vars.comment(() => `/**
             * @name          s-when:parent:${state}
             * @namespace          sugar.css.when
             * @type               CssClass
@@ -134,7 +157,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             *.${state} > .s-when.s-when--parent.s-when--${state} {
                 display: unset;
             }`);
-        vars.comment(() => `/**
+    vars.comment(() => `/**
             * @name          s-when:grandparent:${state}
             * @namespace          sugar.css.when
             * @type               CssClass
@@ -160,7 +183,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             *.${state} > * > .s-when.s-when--grandparent.s-when--${state} {
                 display: unset;
             }`);
-        vars.comment(() => `/**
+    vars.comment(() => `/**
             * @name          s-when:ancestor:${state}
             * @namespace          sugar.css.when
             * @type               CssClass
@@ -186,8 +209,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             *.${state} .s-when.s-when--ancestor.s-when--${state} {
                 display: unset;
             }`);
-    });
-    vars.comment(() => `/**
+  });
+  vars.comment(() => `/**
         * @name          s-when:dark
         * @namespace          sugar.css.when
         * @type               CssClass
@@ -214,7 +237,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             display: inherit;
         }
         `);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name          s-when:light
         * @namespace          sugar.css.when
         * @type               CssClass
@@ -237,13 +260,12 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             display: none;
         }
         `);
-    // Queries
-    vars.comment(() => ``).code(`
+  vars.comment(() => ``).code(`
             .s-when--media {
                 display: none;
             }`);
-    Object.keys(queries).forEach(query => {
-        vars.comment(() => `/**
+  Object.keys(queries).forEach((query) => {
+    vars.comment(() => `/**
             * @name          s-when:media:${query}
             * @namespace          sugar.css.when
             * @type               CssClass
@@ -264,7 +286,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                     display: unset;
                 }
             }`);
-    });
-    return vars;
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBRUgsTUFBTSx3Q0FBeUMsU0FBUSxZQUFZO0lBQy9ELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHdDQUF3QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWpFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxPQUFPLEdBQUcsUUFBUSxDQUFDLE1BQU0sQ0FBQyxlQUFlLENBQUMsQ0FBQztJQUNqRCxNQUFNLE1BQU0sR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLGdCQUFnQixDQUFDLENBQUM7SUFFakQsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUczQixNQUFNLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxFQUFFO1FBRW5CLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7c0NBQ29CLEtBQUs7Ozs7Ozs2RkFNa0QsS0FBSzs7O3VDQUczRCxLQUFLOzs7OztTQUtuQyxDQUNBLENBQUMsSUFBSSxDQUFDOzhCQUNlLEtBQUssNEhBQTRILEtBQUssV0FBVyxLQUFLOzs7OEJBR3RKLEtBQUssdUhBQXVILEtBQUs7OEJBQ2pJLEtBQUssdUhBQXVILEtBQUs7O2NBRWpKLENBQUMsQ0FBQztRQUVSLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7OENBQzRCLEtBQUs7Ozs7OzsrR0FNNEQs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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

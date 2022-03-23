@@ -38,7 +38,7 @@ export default function (settings: ISrcRootDirSettings = {}) {
     };
     const srcRootDir = __SSugarConfig.get('storage.src.rootDir');
     if (srcRootDir !== undefined) {
-        __fs.ensureDirSync(srcRootDir);
+        // __fs.ensureDirSync(srcRootDir);
         return srcRootDir;
     }
     return undefined;

@@ -1,80 +1,71 @@
-// @ts-nocheck
-import __parseHtml from '../../shared/console/parseHtml';
-import __isChildProcess from '../../node/is/childProcess';
-import __toString from '../../shared/string/toString';
-/**
- * @name                    handleError
- * @namespace            node.error
- * @type                    Function
- * @platform        node
- * @status          wip
- *
- * This function take a thrown error and try to display it the best way possible.
- * Simply add the "uncaughtException" and the "unhandledRejection" listeners on the process object,
- * pass this function as the handler one and that's it...
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example           js
- * import handleError from '@coffeekraken/sugar/node/error/handleError';
- * process.on('uncaughtException', handleError);
- * process.on('unhandledRejection', handleError);
- *
- * @since         2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var handleError_exports = {};
+__export(handleError_exports, {
+  default: () => handleError_default
+});
+module.exports = __toCommonJS(handleError_exports);
+var import_parseHtml = __toESM(require("../../shared/console/parseHtml"), 1);
+var import_childProcess = __toESM(require("../../node/is/childProcess"), 1);
+var import_toString = __toESM(require("../../shared/string/toString"), 1);
 function handleError() {
-    if (process.env.NODE_ENV === 'test')
-        return;
-    if (__isChildProcess()) {
-        process.on('uncaughtException', __handleChildProcessErrors);
-        process.on('unhandledRejection', __handleChildProcessErrors);
-    }
-    else {
-        process.on('uncaughtException', __handleMainProcessErrors);
-        process.on('unhandledRejection', __handleMainProcessErrors);
-    }
-    // process.on('uncaughtException', (err) => {
-    //   console.log(`Uncaught Exception: ${err.message}`);
-    //   process.exit(1);
-    // });
-    // process.on('unhandledRejection', (err, promise) => {
-    //   console.log('Unhandled rejection at ', promise, `reason: ${err.message}`);
-    //   process.exit(1);
-    // });
+  if (process.env.NODE_ENV === "test")
+    return;
+  if ((0, import_childProcess.default)()) {
+    process.on("uncaughtException", __handleChildProcessErrors);
+    process.on("unhandledRejection", __handleChildProcessErrors);
+  } else {
+    process.on("uncaughtException", __handleMainProcessErrors);
+    process.on("unhandledRejection", __handleMainProcessErrors);
+  }
 }
 function __handleChildProcessErrors(error) {
-    if (error.toString().includes(`Cannot read property 'itop' of null`))
-        return;
-    if (error.instanceId)
-        return;
-    if (!error)
-        return;
-    const errorStringArray = [error.stack];
-    console.log(__parseHtml(errorStringArray.join('\n')));
+  if (error.toString().includes(`Cannot read property 'itop' of null`))
+    return;
+  if (error.instanceId)
+    return;
+  if (!error)
+    return;
+  const errorStringArray = [error.stack];
+  console.log((0, import_parseHtml.default)(errorStringArray.join("\n")));
 }
 function __handleMainProcessErrors(error) {
-    if (error.toString().includes(`Cannot read property 'itop' of null`))
-        return;
-    if (error.instanceId)
-        return;
-    if (error instanceof Buffer) {
-        error = error.toString();
+  if (error.toString().includes(`Cannot read property 'itop' of null`))
+    return;
+  if (error.instanceId)
+    return;
+  if (error instanceof Buffer) {
+    error = error.toString();
+  }
+  setTimeout(() => {
+    if (typeof error === "string") {
+      console.log((0, import_parseHtml.default)(error));
+    } else if (typeof error === "object" && error.name && error.message) {
+      console.log((0, import_parseHtml.default)([error.name, error.message, error.stack].join("\n\n")));
+    } else {
+      console.log((0, import_parseHtml.default)((0, import_toString.default)(error)));
     }
-    setTimeout(() => {
-        if (typeof error === 'string') {
-            console.log(__parseHtml(error));
-        }
-        else if (typeof error === 'object' && error.name && error.message) {
-            console.log(__parseHtml([error.name, error.message, error.stack].join('\n\n')));
-        }
-        else {
-            console.log(__parseHtml(__toString(error)));
-        }
-        process.exit(1);
-    }, 50);
+    process.exit(1);
+  }, 50);
 }
-export default handleError;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGFuZGxlRXJyb3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJoYW5kbGVFcnJvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxXQUFXLE1BQU0sZ0NBQWdDLENBQUM7QUFDekQsT0FBTyxnQkFBZ0IsTUFBTSw0QkFBNEIsQ0FBQztBQUMxRCxPQUFPLFVBQVUsTUFBTSw4QkFBOEIsQ0FBQztBQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsV0FBVztJQUNoQixJQUFJLE9BQU8sQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBQzVDLElBQUksZ0JBQWdCLEVBQUUsRUFBRTtRQUNwQixPQUFPLENBQUMsRUFBRSxDQUFDLG1CQUFtQixFQUFFLDBCQUEwQixDQUFDLENBQUM7UUFDNUQsT0FBTyxDQUFDLEVBQUUsQ0FBQyxvQkFBb0IsRUFBRSwwQkFBMEIsQ0FBQyxDQUFDO0tBQ2hFO1NBQU07UUFDSCxPQUFPLENBQUMsRUFBRSxDQUFDLG1CQUFtQixFQUFFLHlCQUF5QixDQUFDLENBQUM7UUFDM0QsT0FBTyxDQUFDLEVBQUUsQ0FBQyxvQkFBb0IsRUFBRSx5QkFBeUIsQ0FBQyxDQUFDO0tBQy9EO0lBRUQsNkNBQTZDO0lBQzdDLHVEQUF1RDtJQUN2RCxxQkFBcUI7SUFDckIsTUFBTTtJQUVOLHVEQUF1RDtJQUN2RCwrRUFBK0U7SUFDL0UscUJBQXFCO0lBQ3JCLE1BQU07QUFDVixDQUFDO0FBRUQsU0FBUywwQkFBMEIsQ0FBQyxLQUFLO0lBQ3JDLElBQUksS0FBSyxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxxQ0FBcUMsQ0FBQztRQUNoRSxPQUFPO0lBQ1gsSUFBSSxLQUFLLENBQUMsVUFBVTtRQUFFLE9BQU87SUFDN0IsSUFBSSxDQUFDLEtBQUs7UUFBRSxPQUFPO0lBQ25CLE1BQU0sZ0JBQWdCLEdBQUcsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDdkMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztBQUMxRCxDQUFDO0FBRUQsU0FBUyx5QkFBeUIsQ0FBQyxLQUFLO0lBQ3BDLElBQUksS0FBSyxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxxQ0FBcUMsQ0FBQztRQUNoRSxPQUFPO0lBQ1gsSUFBSSxLQUFLLENBQUMsVUFBVTtRQUFFLE9BQU87SUFFN0IsSUFBSSxLQUFLLFlBQVksTUFBTSxFQUFFO1FBQ3pCLEtBQUssR0FBRyxLQUFLLENBQUMsUUFBUSxFQUFFLENBQUM7S0FDNUI7SUFFRCxVQUFVLENBQUMsR0FBRyxFQUFFO1FBQ1osSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7WUFDM0IsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztTQUNuQzthQUFNLElBQUksT0FBTyxLQUFLLEtBQUssUUFBUSxJQUFJLEtBQUssQ0FBQyxJQUFJLElBQUksS0FBSyxDQUFDLE9BQU8sRUFBRTtZQUNqRSxPQUFPLENBQUMsR0FBRyxDQUNQLFdBQVcsQ0FDUCxDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUUsS0FBSyxDQUFDLE9BQU8sRUFBRSxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUN4RCxDQUNKLENBQUM7U0FDTDthQUFNO1lBQ0gsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUMvQztRQUNELE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDcEIsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDO0FBQ1gsQ0FBQztBQUNELGVBQWUsV0FBVyxDQUFDIn0=
+var handleError_default = handleError;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

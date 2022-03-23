@@ -1,21 +1,43 @@
-// @ts-nocheck
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var todo_exports = {};
+__export(todo_exports, {
+  default: () => todo_default
+});
+module.exports = __toCommonJS(todo_exports);
 function todo(data, blockSettings) {
-    if (!Array.isArray(data))
-        data = [data];
-    const res = [];
-    data.forEach((todo) => {
-        var _a, _b;
-        if (!todo.value)
-            return;
-        const parts = todo.value.split(/\s{2,20000}/).map((l) => l.trim());
-        const priority = (_a = parts[1]) !== null && _a !== void 0 ? _a : 'normal', description = new String((_b = parts[0]) !== null && _b !== void 0 ? _b : '');
-        description.render = true;
-        res.push({
-            priority,
-            description,
-        });
+  if (!Array.isArray(data))
+    data = [data];
+  const res = [];
+  data.forEach((todo2) => {
+    var _a, _b;
+    if (!todo2.value)
+      return;
+    const parts = todo2.value.split(/\s{2,20000}/).map((l) => l.trim());
+    const priority = (_a = parts[1]) != null ? _a : "normal", description = new String((_b = parts[0]) != null ? _b : "");
+    description.render = true;
+    res.push({
+      priority,
+      description
     });
-    return res;
+  });
+  return res;
 }
-export default todo;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9kby5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRvZG8udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQThCZCxTQUFTLElBQUksQ0FBQyxJQUFJLEVBQUUsYUFBYTtJQUM3QixJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUM7UUFBRSxJQUFJLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUV4QyxNQUFNLEdBQUcsR0FBRyxFQUFFLENBQUM7SUFFZixJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7O1FBQ2xCLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSztZQUFFLE9BQU87UUFFeEIsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsYUFBYSxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQztRQUVuRSxNQUFNLFFBQVEsR0FBRyxNQUFBLEtBQUssQ0FBQyxDQUFDLENBQUMsbUNBQUksUUFBUSxFQUNqQyxXQUFXLEdBQUcsSUFBSSxNQUFNLENBQUMsTUFBQSxLQUFLLENBQUMsQ0FBQyxDQUFDLG1DQUFJLEVBQUUsQ0FBQyxDQUFDO1FBQzdDLFdBQVcsQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDO1FBRTFCLEdBQUcsQ0FBQyxJQUFJLENBQUM7WUFDTCxRQUFRO1lBQ1IsV0FBVztTQUNkLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQyxDQUFDO0lBQ0gsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBQ0QsZUFBZSxJQUFJLENBQUMifQ==
+var todo_default = todo;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

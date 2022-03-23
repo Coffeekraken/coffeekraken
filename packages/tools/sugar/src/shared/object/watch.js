@@ -1,38 +1,33 @@
-// @ts-nocheck
-import __SWatch from './SWatch';
-/**
- * @name                      watch
- * @namespace            js.object
- * @type                      Function
- * @platform          js
- * @platform          node
- * @status        wip
- *
- * This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays
- *
- * @param       {Object|Array}        target          The array or object to watch
- * @param       {Object}          [settings={}]       A settings object to configure your watch process. Check the SWatch class documentation for more.
- * @return      {Object}                              Return the proxied object on which you can make all the updates that you want
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import watch from '@coffeekraken/sugar/js/object/watch';
- * let myObj = watch({
- *    hello: 'world'
- * }).on('*', watchResult => {
- *    // do something...
- * });
- * myObj.hello = 'plop';
- *
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var watch_exports = {};
+__export(watch_exports, {
+  default: () => watch_default
+});
+module.exports = __toCommonJS(watch_exports);
+var import_SWatch = __toESM(require("./SWatch"), 1);
 function watch(target, settings = {}) {
-    const watchedObj = new __SWatch(target, settings);
-    return watchedObj;
+  const watchedObj = new import_SWatch.default(target, settings);
+  return watchedObj;
 }
-export default watch;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2F0Y2guanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3YXRjaC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxRQUFRLE1BQU0sVUFBVSxDQUFDO0FBR2hDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTZCRztBQUNILFNBQVMsS0FBSyxDQUFDLE1BQU0sRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUNoQyxNQUFNLFVBQVUsR0FBRyxJQUFJLFFBQVEsQ0FBQyxNQUFNLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDbEQsT0FBTyxVQUFVLENBQUM7QUFDdEIsQ0FBQztBQUNELGVBQWUsS0FBSyxDQUFDIn0=
+var watch_default = watch;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

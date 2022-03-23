@@ -1,97 +1,105 @@
-import __SFeature from '@coffeekraken/s-feature';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SRefocusFeatureInterface from './interface/SRefocusFeatureInterface';
-import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
-/**
- * @name            SRefocusFeature
- * @namespace       js
- * @type            Feature
- * @interface       ./interface/SRefocusFeatureInterface.js
- * @menu            Styleguide / Features               /styleguide/feature/s-activate-feature
- * @platform        js
- * @status          beta
- *
- * This feature allows you to automatically visually refocus an element that is inside a scrollable one on different trigger(s) like events, etc...
- *
- * @support          chromium
- * @support          firefox
- * @support          safari
- * @support          edge
- *
- * @example         html            Simple usage
- * <div class="scrollable" s-refocus trigger="event:actual">
- *    <ul>
- *       <li>
- *          <a href="#hello">Hello</a>
- *          <!-- when this element dispatch an "actual" event,
- *               it will be refocused -->
- *       </li>
- *       <li>
- *          <a href="#world">World</a>
- *       </li>
- *    </ul>
- * </div>
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SRefocusFeature extends __SFeature {
-    constructor(name, node, settings) {
-        super(name, node, __deepMerge({
-            componentUtils: {
-                interface: __SRefocusFeatureInterface,
-            },
-            feature: {},
-        }, settings !== null && settings !== void 0 ? settings : {}));
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    mount() {
-        this.props.trigger.forEach((trigger) => {
-            switch (trigger) {
-                case 'anchor':
-                    setTimeout(() => {
-                        if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(document.location.hash);
-                            if ($targetElm) {
-                                this._scrollTo($targetElm);
-                            }
-                        }
-                    }, this.props.timeout);
-                    break;
-                case 'history':
-                    window.addEventListener('hashchange', (e) => {
-                        if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(document.location.hash);
-                            if ($targetElm) {
-                                this._scrollTo($targetElm);
-                            }
-                        }
-                    });
-                    window.addEventListener('popstate', (e) => {
-                        if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(document.location.hash);
-                            if ($targetElm) {
-                                this._scrollTo($targetElm);
-                            }
-                        }
-                    });
-                    break;
-                default:
-                    if (trigger.match(/^event:/)) {
-                        const event = trigger.replace('event:', '').trim();
-                        this.node.addEventListener(event, (e) => {
-                            this._scrollTo(e.target);
-                        });
-                    }
-                    break;
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SRefocusFeature_exports = {};
+__export(SRefocusFeature_exports, {
+  default: () => SRefocusFeature,
+  define: () => define
+});
+module.exports = __toCommonJS(SRefocusFeature_exports);
+var import_s_feature = __toESM(require("@coffeekraken/s-feature"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+var import_SRefocusFeatureInterface = __toESM(require("./interface/SRefocusFeatureInterface"), 1);
+var import_scrollTo = __toESM(require("@coffeekraken/sugar/js/dom/scroll/scrollTo"), 1);
+class SRefocusFeature extends import_s_feature.default {
+  constructor(name, node, settings) {
+    super(name, node, (0, import_deepMerge.default)({
+      componentUtils: {
+        interface: import_SRefocusFeatureInterface.default
+      },
+      feature: {}
+    }, settings != null ? settings : {}));
+  }
+  mount() {
+    this.props.trigger.forEach((trigger) => {
+      switch (trigger) {
+        case "anchor":
+          setTimeout(() => {
+            if (document.location.hash) {
+              const $targetElm = this.node.querySelector(document.location.hash);
+              if ($targetElm) {
+                this._scrollTo($targetElm);
+              }
             }
-        });
-    }
-    _scrollTo($elm) {
-        var _a;
-        __scrollTo($elm, Object.assign({ $elm: this.node }, (_a = this.props.scrollToSettings) !== null && _a !== void 0 ? _a : {}));
-    }
+          }, this.props.timeout);
+          break;
+        case "history":
+          window.addEventListener("hashchange", (e) => {
+            if (document.location.hash) {
+              const $targetElm = this.node.querySelector(document.location.hash);
+              if ($targetElm) {
+                this._scrollTo($targetElm);
+              }
+            }
+          });
+          window.addEventListener("popstate", (e) => {
+            if (document.location.hash) {
+              const $targetElm = this.node.querySelector(document.location.hash);
+              if ($targetElm) {
+                this._scrollTo($targetElm);
+              }
+            }
+          });
+          break;
+        default:
+          if (trigger.match(/^event:/)) {
+            const event = trigger.replace("event:", "").trim();
+            this.node.addEventListener(event, (e) => {
+              this._scrollTo(e.target);
+            });
+          }
+          break;
+      }
+    });
+  }
+  _scrollTo($elm) {
+    var _a;
+    (0, import_scrollTo.default)($elm, __spreadValues({
+      $elm: this.node
+    }, (_a = this.props.scrollToSettings) != null ? _a : {}));
+  }
 }
-export function define(props = {}, name = 's-refocus') {
-    __SFeature.defineFeature(name, SRefocusFeature, props);
+function define(props = {}, name = "s-refocus") {
+  import_s_feature.default.defineFeature(name, SRefocusFeature, props);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1JlZm9jdXNGZWF0dXJlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1JlZm9jdXNGZWF0dXJlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBQ3RFLE9BQU8sMEJBQTBCLE1BQU0sc0NBQXNDLENBQUM7QUFHOUUsT0FBTyxVQUFpQyxNQUFNLDRDQUE0QyxDQUFDO0FBUTNGOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWdDRztBQUNILE1BQU0sQ0FBQyxPQUFPLE9BQU8sZUFBZ0IsU0FBUSxVQUFVO0lBQ25ELFlBQVksSUFBWSxFQUFFLElBQWlCLEVBQUUsUUFBYTtRQUN0RCxLQUFLLENBQ0QsSUFBSSxFQUNKLElBQUksRUFDSixXQUFXLENBQ1A7WUFDSSxjQUFjLEVBQUU7Z0JBQ1osU0FBUyxFQUFFLDBCQUEwQjthQUN4QztZQUNELE9BQU8sRUFBRSxFQUFFO1NBQ2QsRUFDRCxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQ2pCLENBQ0osQ0FBQztJQUNOLENBQUM7SUFDRCxLQUFLO1FBQ0QsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUU7WUFDbkMsUUFBTyxPQUFPLEVBQUU7Z0JBQ1osS0FBSyxRQUFRO29CQUNULFVBQVUsQ0FBQyxHQUFHLEVBQUU7d0JBQ1osSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksRUFBRTs0QkFDeEIsTUFBTSxVQUFVLEdBQUcsSUFBSSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQzs0QkFDbkUsSUFBSSxVQUFVLEVBQUU7Z0NBQ1osSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsQ0FBQzs2QkFDOUI7eUJBQ0o7b0JBQ0wsQ0FBQyxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUM7b0JBQzNCLE1BQU07Z0JBQ04sS0FBSyxTQUFTO29CQUNWLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxZQUFZLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTt3QkFDeEMsSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksRUFBRTs0QkFDeEIsTUFBTSxVQUFVLEdBQUcsSUFBSSxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQzs0QkFDbkUsSUFBSSxVQUFVLEVBQUU7Z0NBQ1osSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsQ0FBQzs2QkFDOUI7eUJBQ0o7b0JBQ0wsQ0FBQyxDQUFDLENBQUM7b0JBQ0gsTUFBTSxDQUFDLGdCQUFnQixDQUFDLFVBQVUsRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFO3dCQUN0QyxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxFQUFFOzRCQUN4QixNQUFNLFVBQVUsR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDOzRCQUNuRSxJQUFJLFVBQVUsRUFBRTtnQ0FDWixJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxDQUFDOzZCQUM5Qjt5QkFDSjtvQkFDTCxDQUFDLENBQUMsQ0FBQztvQkFDUCxNQUFNO2dCQUNOO29CQUNJLElBQUksT0FBTyxDQUFDLEtBQUssQ0FBQyxTQUFTLENBQUMsRUFBRTt3QkFDMUIsTUFBTSxLQUFLLEdBQUcsT0FBTyxDQUFDLE9BQU8sQ0FBQyxRQUFRLEVBQUUsRUFBRSxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUM7d0JBQ25ELElBQUksQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsS0FBSyxFQUFFLENBQUMsQ0FBQyxFQUFFLEVBQUU7NEJBQ3BDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDO3dCQUM3QixDQUFDLENBQUMsQ0FBQztxQkFDTjtvQkFDTCxNQUFNO2FBQ1Q7UUFDTCxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFDRCxTQUFTLENBQUMsSUFBSTs7UUFDVixVQUFVLENBQUMsSUFBSSxrQkFDWCxJQUFJLEVBQUUsSUFBSSxDQUFDLElBQUksSUFDWixNQUFBLElBQUksQ0FBQyxLQUFLLENBQUMsZ0JBQWdCLG1DQUFJLEVBQUUsRUFFdEMsQ0FBQztJQUNQLENBQUM7Q0FFSjtBQUVELE1BQU0sVUFBVSxNQUFNLENBQ2xCLFFBQXdDLEVBQUUsRUFDMUMsSUFBSSxHQUFHLFdBQVc7SUFFbEIsVUFBVSxDQUFDLGFBQWEsQ0FBQyxJQUFJLEVBQUUsZUFBZSxFQUFFLEtBQUssQ0FBQyxDQUFDO0FBQzNELENBQUMifQ==

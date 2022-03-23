@@ -1,30 +1,30 @@
-// @ts-nocheck
-import __traverseUp from '../traverse/up';
-import __isScrollable from '../is/scrollable';
-/**
- * @name        closestScrollable
- * @namespace            js.dom.query
- * @type      Function
- * @platform          js
- * @status      beta
- *
- * Go up the dom three to find the first element that is scrollable
- *
- * @param 		{HTMLElement} 					$elm  		The element to start on
- * @return 		{HTMLElement} 								The element found or null
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import __closestScrollable from '@coffeekraken/sugar/js/node/query/closestScrollable';
- * __closestScrollable($myElement);
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function closestScrollable($elm, selector) {
-    return __traverseUp($elm, ($e) => __isScrollable($e));
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var closestScrollable_exports = {};
+__export(closestScrollable_exports, {
+  default: () => closestScrollable
+});
+module.exports = __toCommonJS(closestScrollable_exports);
+var import_up = __toESM(require("../traverse/up"), 1);
+var import_scrollable = __toESM(require("../is/scrollable"), 1);
+function closestScrollable($elm, selector) {
+  return (0, import_up.default)($elm, ($e) => (0, import_scrollable.default)($e));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xvc2VzdFNjcm9sbGFibGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjbG9zZXN0U2Nyb2xsYWJsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsT0FBTyxZQUFZLE1BQU0sZ0JBQWdCLENBQUM7QUFDMUMsT0FBTyxjQUFjLE1BQU0sa0JBQWtCLENBQUM7QUFFOUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGlCQUFpQixDQUFDLElBQWlCLEVBQUUsUUFBMkI7SUFDcEYsT0FBTyxZQUFZLENBQUMsSUFBSSxFQUFFLENBQUMsRUFBRSxFQUFFLEVBQUUsQ0FBQyxjQUFjLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztBQUMxRCxDQUFDIn0=

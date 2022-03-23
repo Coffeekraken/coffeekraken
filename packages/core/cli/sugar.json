@@ -1,8 +1,10 @@
 {
     "config": {
-        "folders": [{
-            "path": "./src/config"
-        }]
+        "folders": [
+            {
+                "path": "./src/config"
+            }
+        ]
     },
     "cli": [
         {

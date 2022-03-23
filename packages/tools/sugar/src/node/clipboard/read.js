@@ -1,33 +1,32 @@
-// @ts-nocheck
-import __clipboardy from 'clipboardy';
-/**
- * @name            read
- * @namespace            node.clipboard
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * Simple function to read things from the system clipboard.
- * This is using https://www.npmjs.com/package/clipboardy under the hood.
- *
- * @return       {String}             The text to read
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import read from '@coffeekraken/sugar/node/clipboard/read';
- * import copy from '@coffeekraken/sugar/node/clipboard/copy';
- * copy('Hello world');
- * read(); // => Hello world
- *
- * @since       2.0.0
- * @see         https://www.npmjs.com/package/clipboardy
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var read_exports = {};
+__export(read_exports, {
+  default: () => read_default
+});
+module.exports = __toCommonJS(read_exports);
+var import_clipboardy = __toESM(require("clipboardy"), 1);
 function read() {
-    return __clipboardy.readSync();
+  return import_clipboardy.default.readSync();
 }
-export default read;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVhZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlYWQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sWUFBWSxNQUFNLFlBQVksQ0FBQztBQUV0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQVMsSUFBSTtJQUNULE9BQU8sWUFBWSxDQUFDLFFBQVEsRUFBRSxDQUFDO0FBQ25DLENBQUM7QUFDRCxlQUFlLElBQUksQ0FBQyJ9
+var read_default = read;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

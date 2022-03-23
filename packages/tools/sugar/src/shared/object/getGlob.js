@@ -1,67 +1,59 @@
-// @ts-nocheck
-import __minimatch from 'minimatch';
-import __flatten from './flatten';
-import __deepize from './deepize';
-/**
- * @name                          getGlob
- * @namespace            js.object
- * @type                          Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Retreive an object value using a dotted path like "myObject.myProperty.myValue".
- * It support glob patterns like "something.*.id" and returns you a new object containing
- * all values with the path that matches the passed glob pattern.
- *
- * @param               {Object}                 obj                The object in which to set the value
- * @param               {String}                path                The dotted object path to get
- * @param               {Object}            [settings={}]           A settings object to configure your glob get process
- * @return              {Mixed}                                     The getted value or "undefined" if nothing found...
- *
- * @setting         {Boolean}               [deepize=true]          Specify if you want the result object to be deepized using the ```deepize``` sugar function
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import get from '@coffeekraken/sugar/js/object/get';
- * get('myObject.cool.value'); // => 'Hello world'
- *
- * @since     2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function getGlob(obj, glob, settings = {}) {
-    settings = Object.assign({ deepize: true }, settings);
-    const flat = __flatten(obj);
-    const resultObj = {};
-    Object.keys(flat).forEach((path) => {
-        if (__minimatch(path, glob)) {
-            resultObj[path] = flat[path];
-        }
-    });
-    // if (glob === 'watch') {
-    //   console.log('GLOB', resultObj);
-    // }
-    if (settings.deepize === true)
-        return __deepize(resultObj);
-    return resultObj;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var getGlob_exports = {};
+__export(getGlob_exports, {
+  default: () => getGlob
+});
+module.exports = __toCommonJS(getGlob_exports);
+var import_minimatch = __toESM(require("minimatch"), 1);
+var import_flatten = __toESM(require("./flatten"), 1);
+var import_deepize = __toESM(require("./deepize"), 1);
+function getGlob(obj, glob, settings = {}) {
+  settings = __spreadValues({
+    deepize: true
+  }, settings);
+  const flat = (0, import_flatten.default)(obj);
+  const resultObj = {};
+  Object.keys(flat).forEach((path) => {
+    if ((0, import_minimatch.default)(path, glob)) {
+      resultObj[path] = flat[path];
+    }
+  });
+  if (settings.deepize === true)
+    return (0, import_deepize.default)(resultObj);
+  return resultObj;
 }
-// console.log(
-//   getGlob(
-//     {
-//       someting: {
-//         cool: 'hello'
-//       },
-//       coco: ['hello', 'world'],
-//       world: {
-//         'coco.plop': {
-//           yep: 'dsojiofj'
-//         }
-//       }
-//     },
-//     'world.*'
-//   )
-// );
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0R2xvYi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldEdsb2IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sV0FBVyxNQUFNLFdBQVcsQ0FBQztBQUNwQyxPQUFPLFNBQVMsTUFBTSxXQUFXLENBQUM7QUFDbEMsT0FBTyxTQUFTLE1BQU0sV0FBVyxDQUFDO0FBSWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTZCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsT0FBTyxDQUFDLEdBQUcsRUFBRSxJQUFJLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDcEQsUUFBUSxtQkFDSixPQUFPLEVBQUUsSUFBSSxJQUNWLFFBQVEsQ0FDZCxDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsU0FBUyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRTVCLE1BQU0sU0FBUyxHQUFHLEVBQUUsQ0FBQztJQUVyQixNQUFNLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQy9CLElBQUksV0FBVyxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsRUFBRTtZQUN6QixTQUFTLENBQUMsSUFBSSxDQUFDLEdBQUcsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1NBQ2hDO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFFSCwwQkFBMEI7SUFDMUIsb0NBQW9DO0lBQ3BDLElBQUk7SUFFSixJQUFJLFFBQVEsQ0FBQyxPQUFPLEtBQUssSUFBSTtRQUFFLE9BQU8sU0FBUyxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQzNELE9BQU8sU0FBUyxDQUFDO0FBQ3JCLENBQUM7QUFFRCxlQUFlO0FBQ2YsYUFBYTtBQUNiLFFBQVE7QUFDUixvQkFBb0I7QUFDcEIsd0JBQXdCO0FBQ3hCLFdBQVc7QUFDWCxrQ0FBa0M7QUFDbEMsaUJBQWlCO0FBQ2pCLHlCQUF5QjtBQUN6Qiw0QkFBNEI7QUFDNUIsWUFBWTtBQUNaLFVBQVU7QUFDVixTQUFTO0FBQ1QsZ0JBQWdCO0FBQ2hCLE1BQU07QUFDTixLQUFLIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

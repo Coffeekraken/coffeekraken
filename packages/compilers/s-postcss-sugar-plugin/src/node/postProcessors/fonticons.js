@@ -1,102 +1,105 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import __SDuration from '@coffeekraken/s-duration';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
-import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
-import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
-import { generateFonts } from 'fantasticon';
-import __svgFixer from 'oslllo-svg-fixer';
-import __fs from 'fs';
-import __path from 'path';
-import __postcss from 'postcss';
-export default function ({ root, sharedData }) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const duration = new __SDuration();
-        if (!sharedData.icons || !sharedData.icons.length)
-            return;
-        const fantasticonConfig = __SSugarConfig.get('icons.fantasticon');
-        // prepend the icons import
-        const importFontUrl = __path.relative(__srcCssDir(), fantasticonConfig.outputDir);
-        root.nodes.unshift(__postcss.parse(`
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var fonticons_exports = {};
+__export(fonticons_exports, {
+  default: () => fonticons_default
+});
+module.exports = __toCommonJS(fonticons_exports);
+var import_s_duration = __toESM(require("@coffeekraken/s-duration"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_extension = __toESM(require("@coffeekraken/sugar/node/fs/extension"));
+var import_ensureDirSync = __toESM(require("@coffeekraken/sugar/node/fs/ensureDirSync"));
+var import_folderHash = __toESM(require("@coffeekraken/sugar/node/fs/folderHash"));
+var import_writeFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeFileSync"));
+var import_packageCacheDir = __toESM(require("@coffeekraken/sugar/node/path/packageCacheDir"));
+var import_srcCssDir = __toESM(require("@coffeekraken/sugar/node/path/srcCssDir"));
+var import_fantasticon = require("fantasticon");
+var import_oslllo_svg_fixer = __toESM(require("oslllo-svg-fixer"));
+var import_fs = __toESM(require("fs"));
+var import_path = __toESM(require("path"));
+var import_postcss = __toESM(require("postcss"));
+async function fonticons_default({ root, sharedData }) {
+  const duration = new import_s_duration.default();
+  if (!sharedData.icons || !sharedData.icons.length)
+    return;
+  const fantasticonConfig = import_s_sugar_config.default.get("icons.fantasticon");
+  const importFontUrl = import_path.default.relative((0, import_srcCssDir.default)(), fantasticonConfig.outputDir);
+  root.nodes.unshift(import_postcss.default.parse(`
         @import url(${importFontUrl}/${fantasticonConfig.name}.css);
     `));
-        const inputDir = `${__packageCacheDir()}/icons/sugarIcons`;
-        // delete input folder
-        try {
-            __fs.rmSync(inputDir, { recursive: true });
-        }
-        catch (e) { }
-        __ensureDirSync(inputDir);
-        __ensureDirSync(fantasticonConfig.outputDir);
-        // copy icons inside folder
-        sharedData.icons.forEach((iconObj) => {
-            __fs.copyFileSync(iconObj.path, `${inputDir}/${iconObj.as}.${__extension(iconObj.path)}`);
-        });
-        // get actual folder hash
-        const folderHash = __folderHash(inputDir);
-        // handle cached hash
-        const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
-        if (__fs.existsSync(hashCacheFilePath)) {
-            const cachedFolderHash = __fs
-                .readFileSync(hashCacheFilePath, 'utf8')
-                .toString();
-            if (cachedFolderHash === folderHash) {
-                // same icons, nothing to generate again
-                console.log(`<green>[fonticons]</green> All icon(s) are up to date`);
-                return;
-            }
-        }
-        console.log(`<yellow>[fonticons]</yellow> Generate icons font...`);
-        // fix svg's just to be sure
-        const fixResult = yield __svgFixer(inputDir, inputDir).fix();
-        const result = yield generateFonts({
-            inputDir,
-            outputDir: fantasticonConfig.outputDir,
-            name: fantasticonConfig.name,
-            normalize: true,
-            selector: '.s-icon',
-            prefix: '--',
-        });
-        // read folder icons
-        const iconsFilenames = __fs.readdirSync(inputDir);
-        if (!iconsFilenames.length)
-            return;
-        // generate the scoped icons selector
-        const iconsSelectorsArrayBefore = [], iconsSelectorsArray = [];
-        iconsFilenames.forEach((filename) => {
-            iconsSelectorsArrayBefore.push(`.s-icon--${filename.replace(/\.svg$/, '')}:before`);
-            iconsSelectorsArray.push(`.s-icon--${filename.replace(/\.svg$/, '')}`);
-        });
-        const cssPath = `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`;
-        let cssStr = __fs.readFileSync(cssPath, 'utf8').toString();
-        // replace some parts in the output css
-        cssStr = cssStr.replace(/\.s-icon\.--/gm, '.s-icon-');
-        cssStr = cssStr.replace(/\.s-icon:before\s?{/, `${iconsSelectorsArrayBefore.join(',')} {\nposition: relative;\n`);
-        cssStr += [
-            `${iconsSelectorsArray.join(',')} {`,
-            'display: inline-block;',
-            'line-height: 1;',
-            'width: 1em;',
-            'height:1em;',
-            'vertical-align: middle;',
-            '}',
-        ].join('\n');
-        // rewrite the css file
-        __fs.writeFileSync(cssPath, cssStr);
-        // saving folder hash
-        __writeFileSync(hashCacheFilePath, folderHash);
-        console.log(`<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${duration.end().formatedDuration}</cyan>`);
-    });
+  const inputDir = `${(0, import_packageCacheDir.default)()}/icons/sugarIcons`;
+  try {
+    import_fs.default.rmSync(inputDir, { recursive: true });
+  } catch (e) {
+  }
+  (0, import_ensureDirSync.default)(inputDir);
+  (0, import_ensureDirSync.default)(fantasticonConfig.outputDir);
+  sharedData.icons.forEach((iconObj) => {
+    import_fs.default.copyFileSync(iconObj.path, `${inputDir}/${iconObj.as}.${(0, import_extension.default)(iconObj.path)}`);
+  });
+  const folderHash = (0, import_folderHash.default)(inputDir);
+  const hashCacheFilePath = `${(0, import_packageCacheDir.default)()}/postcss/iconsFolderHash.txt`;
+  if (import_fs.default.existsSync(hashCacheFilePath)) {
+    const cachedFolderHash = import_fs.default.readFileSync(hashCacheFilePath, "utf8").toString();
+    if (cachedFolderHash === folderHash) {
+      console.log(`<green>[fonticons]</green> All icon(s) are up to date`);
+      return;
+    }
+  }
+  console.log(`<yellow>[fonticons]</yellow> Generate icons font...`);
+  const fixResult = await (0, import_oslllo_svg_fixer.default)(inputDir, inputDir).fix();
+  const result = await (0, import_fantasticon.generateFonts)({
+    inputDir,
+    outputDir: fantasticonConfig.outputDir,
+    name: fantasticonConfig.name,
+    normalize: true,
+    selector: ".s-icon",
+    prefix: "--"
+  });
+  const iconsFilenames = import_fs.default.readdirSync(inputDir);
+  if (!iconsFilenames.length)
+    return;
+  const iconsSelectorsArrayBefore = [], iconsSelectorsArray = [];
+  iconsFilenames.forEach((filename) => {
+    iconsSelectorsArrayBefore.push(`.s-icon--${filename.replace(/\.svg$/, "")}:before`);
+    iconsSelectorsArray.push(`.s-icon--${filename.replace(/\.svg$/, "")}`);
+  });
+  const cssPath = `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`;
+  let cssStr = import_fs.default.readFileSync(cssPath, "utf8").toString();
+  cssStr = cssStr.replace(/\.s-icon\.--/gm, ".s-icon-");
+  cssStr = cssStr.replace(/\.s-icon:before\s?{/, `${iconsSelectorsArrayBefore.join(",")} {
+position: relative;
+`);
+  cssStr += [
+    `${iconsSelectorsArray.join(",")} {`,
+    "display: inline-block;",
+    "line-height: 1;",
+    "width: 1em;",
+    "height:1em;",
+    "vertical-align: middle;",
+    "}"
+  ].join("\n");
+  import_fs.default.writeFileSync(cssPath, cssStr);
+  (0, import_writeFileSync.default)(hashCacheFilePath, folderHash);
+  console.log(`<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${duration.end().formatedDuration}</cyan>`);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9udGljb25zLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZm9udGljb25zLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sV0FBVyxNQUFNLDBCQUEwQixDQUFDO0FBQ25ELE9BQU8sY0FBYyxNQUFNLDhCQUE4QixDQUFDO0FBRTFELE9BQU8sV0FBVyxNQUFNLHVDQUF1QyxDQUFDO0FBRWhFLE9BQU8sZUFBZSxNQUFNLDJDQUEyQyxDQUFDO0FBQ3hFLE9BQU8sWUFBWSxNQUFNLHdDQUF3QyxDQUFDO0FBQ2xFLE9BQU8sZUFBZSxNQUFNLDJDQUEyQyxDQUFDO0FBQ3hFLE9BQU8saUJBQWlCLE1BQU0sK0NBQStDLENBQUM7QUFFOUUsT0FBTyxXQUFXLE1BQU0seUNBQXlDLENBQUM7QUFFbEUsT0FBTyxFQUFFLGFBQWEsRUFBRSxNQUFNLGFBQWEsQ0FBQztBQUM1QyxPQUFPLFVBQVUsTUFBTSxrQkFBa0IsQ0FBQztBQUMxQyxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxNQUFNLE1BQU0sTUFBTSxDQUFDO0FBQzFCLE9BQU8sU0FBUyxNQUFNLFNBQVMsQ0FBQztBQUVoQyxNQUFNLENBQUMsT0FBTyxXQUFpQixFQUFFLElBQUksRUFBRSxVQUFVLEVBQUU7O1FBQy9DLE1BQU0sUUFBUSxHQUFHLElBQUksV0FBVyxFQUFFLENBQUM7UUFFbkMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLE1BQU07WUFBRSxPQUFPO1FBRTFELE1BQU0saUJBQWlCLEdBQUcsY0FBYyxDQUFDLEdBQUcsQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDO1FBRWxFLDJCQUEyQjtRQUMzQixNQUFNLGFBQWEsR0FBRyxNQUFNLENBQUMsUUFBUSxDQUNqQyxXQUFXLEVBQUUsRUFDYixpQkFBaUIsQ0FBQyxTQUFTLENBQzlCLENBQUM7UUFDRixJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8s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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

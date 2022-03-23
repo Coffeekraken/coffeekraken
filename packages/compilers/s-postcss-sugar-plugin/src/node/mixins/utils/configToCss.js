@@ -1,62 +1,81 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name            configToCss
- * @namespace       node.mixins.utils
- * @type            PostcssMixin
- * @platform        css
- * @status          beta
- *
- * This mixin allows you to pass a theme config dot path that point to an object
- * and to print out the result as css properties.
- *
- * @feature         Support rhythmVertical property object
- * @feature         Support camel case properties like borderRadius
- * @feature         Support padding theme value as well as padding unit values
- * @feature         Support margin theme value as well as margin unit values
- * @feature         Support transition theme value as well as normal transition values
- * @feature         Support depth theme value
- * @feature         Support border radius theme value as well as normal border radius values
- * @feature
- *
- * @param           {String}            dotPath             The theme relative dot path to an object to output as css
- * @return          {Css}                                   The generated css
- *
- * @example         css
- * .my-cool-element {
- *      @sugar.utils.configToCss(ui.code);
- * }
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginUtilsConfigToCssInterface extends __SInterface {
-    static get _definition() {
-        return {
-            dotPath: {
-                type: 'String',
-                required: true,
-            },
-            exclude: {
-                type: 'Array<String>',
-            },
-            only: {
-                type: 'Array<String>',
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var configToCss_exports = {};
+__export(configToCss_exports, {
+  default: () => configToCss_default,
+  interface: () => postcssSugarPluginUtilsConfigToCssInterface
+});
+module.exports = __toCommonJS(configToCss_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginUtilsConfigToCssInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      dotPath: {
+        type: "String",
+        required: true
+      },
+      exclude: {
+        type: "Array<String>"
+      },
+      only: {
+        type: "Array<String>"
+      }
+    };
+  }
 }
-export { postcssSugarPluginUtilsConfigToCssInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ dotPath: '', exclude: [], only: [] }, params);
-    // @ts-ignore
-    const configObj = __STheme.config(params.dotPath);
-    const vars = [
-        __STheme.jsObjectToCssProperties(configObj, {
-            exclude: finalParams.exclude,
-            only: finalParams.only,
-        }),
-    ];
-    return vars;
+function configToCss_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    dotPath: "",
+    exclude: [],
+    only: []
+  }, params);
+  const configObj = import_s_theme.default.config(params.dotPath);
+  const vars = [
+    import_s_theme.default.jsObjectToCssProperties(configObj, {
+      exclude: finalParams.exclude,
+      only: finalParams.only
+    })
+  ];
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uZmlnVG9Dc3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb25maWdUb0Nzcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFFSCxNQUFNLDJDQUE0QyxTQUFRLFlBQVk7SUFDbEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsZUFBZTthQUN4QjtZQUNELElBQUksRUFBRTtnQkFDRixJQUFJLEVBQUUsZUFBZTthQUN4QjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFRRCxPQUFPLEVBQUUsMkNBQTJDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFcEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixPQUFPLEVBQUUsRUFBRSxFQUNYLE9BQU8sRUFBRSxFQUFFLEVBQ1gsSUFBSSxFQUFFLEVBQUUsSUFDTCxNQUFNLENBQ1osQ0FBQztJQUVGLGFBQWE7SUFDYixNQUFNLFNBQVMsR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUVsRCxNQUFNLElBQUksR0FBYTtRQUNuQixRQUFRLENBQUMsdUJBQXVCLENBQUMsU0FBUyxFQUFFO1lBQ3hDLE9BQU8sRUFBRSxXQUFXLENBQUMsT0FBTztZQUM1QixJQUFJLEVBQUUsV0FBVyxDQUFDLElBQUk7U0FDekIsQ0FBQztLQUNMLENBQUM7SUFFRixPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

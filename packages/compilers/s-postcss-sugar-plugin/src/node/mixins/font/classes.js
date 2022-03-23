@@ -1,56 +1,83 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
-/**
- * @name           classes
- * @namespace      node.mixins.font
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate font helper classes like s-font:title, s-font:20, etc...
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.font.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginFontClassesInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginFontClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+var import_faker = __toESM(require("faker"));
+class postcssSugarPluginFontClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginFontClassesInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const vars = new CssVars();
-    const fontsFamiliesObj = __STheme.config('font.family'), fontSizesObj = __STheme.config('font.size'), fontStretchProps = [
-        'ultra-condensed',
-        'extra-condensed',
-        'condensed',
-        'semi-condensed',
-        'semi-expanded',
-        'expanded',
-        'extra-expanded',
-        'ultra-expanded',
-    ], fontWeightProps = [
-        'bold',
-        'bolder',
-        'lighter',
-        'weight-100',
-        'weight-200',
-        'weight-300',
-        'weight-400',
-        'weight-500',
-        'weight-600',
-        'weight-700',
-        'weight-800',
-        'weight-900',
-    ];
-    vars.comment(() => `
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const vars = new CssVars();
+  const fontsFamiliesObj = import_s_theme.default.config("font.family"), fontSizesObj = import_s_theme.default.config("font.size"), fontStretchProps = [
+    "ultra-condensed",
+    "extra-condensed",
+    "condensed",
+    "semi-condensed",
+    "semi-expanded",
+    "expanded",
+    "extra-expanded",
+    "ultra-expanded"
+  ], fontWeightProps = [
+    "bold",
+    "bolder",
+    "lighter",
+    "weight-100",
+    "weight-200",
+    "weight-300",
+    "weight-400",
+    "weight-500",
+    "weight-600",
+    "weight-700",
+    "weight-800",
+    "weight-900"
+  ];
+  vars.comment(() => `
       /**
         * @name          Families
         * @namespace          sugar.css.font
@@ -66,27 +93,23 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support      safari
         * @support      edge
         * 
-        ${Object.keys(fontsFamiliesObj)
-        .map((fontName) => {
-        return `* @cssClass      s-font:${fontName}       Apply the \`${fontName}\` font on any HTMLElement`;
-    })
-        .join('\n ')}
+        ${Object.keys(fontsFamiliesObj).map((fontName) => {
+    return `* @cssClass      s-font:${fontName}       Apply the \`${fontName}\` font on any HTMLElement`;
+  }).join("\n ")}
         *    
         * @example        html
-        ${Object.keys(fontsFamiliesObj)
-        .map((family) => {
-        return ` * <div class="s-mbe:50">
+        ${Object.keys(fontsFamiliesObj).map((family) => {
+    return ` * <div class="s-mbe:50">
                         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${family}</h3>
-                        *   <p class="s-font:${family} s-font:60">${__faker.lorem.sentence()}</p>
+                        *   <p class="s-font:${family} s-font:60">${import_faker.default.lorem.sentence()}</p>
                         * </div>`;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    vars.comment(() => `
+  vars.comment(() => `
       /**
         * @name          Sizes
         * @namespace          sugar.css.font
@@ -102,28 +125,24 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support      safari
         * @support      edge
         * 
-        ${Object.keys(fontSizesObj)
-        .map((sizeName) => {
-        return ` * @cssClass            s-font:${sizeName}          Apply the \`${sizeName}\` size`;
-    })
-        .join('\n')}
+        ${Object.keys(fontSizesObj).map((sizeName) => {
+    return ` * @cssClass            s-font:${sizeName}          Apply the \`${sizeName}\` size`;
+  }).join("\n")}
         * 
         *    
         * @example        html
-        ${Object.keys(fontSizesObj)
-        .map((size) => {
-        return ` * <div class="s-mbe:50">
+        ${Object.keys(fontSizesObj).map((size) => {
+    return ` * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${size}</h3>
-            *   <p class="s-font:${size}">${__faker.lorem.sentence()}</p>
+            *   <p class="s-font:${size}">${import_faker.default.lorem.sentence()}</p>
             * </div>`;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    vars.comment(() => `
+  vars.comment(() => `
       /**
         * @name          Styles
         * @namespace          sugar.css.font
@@ -145,19 +164,19 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @example        html
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Italic</h3>
-        *   <p class="s-font:italic s-mbe:20">${__faker.lorem.sentence()}</p>
+        *   <p class="s-font:italic s-mbe:20">${import_faker.default.lorem.sentence()}</p>
         * </div>
         * 
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Oblique</h3>
-        *   <p class="s-font:oblique s-mbe:20">${__faker.lorem.sentence()}</p>
+        *   <p class="s-font:oblique s-mbe:20">${import_faker.default.lorem.sentence()}</p>
         * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    vars.comment(() => `
+  vars.comment(() => `
       /**
         * @name          Weights
         * @namespace          sugar.css.font
@@ -188,20 +207,18 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         *    
         * @example        html
-        ${fontWeightProps
-        .map((weight) => {
-        return ` * <div class="s-mbe:50">
+        ${fontWeightProps.map((weight) => {
+    return ` * <div class="s-mbe:50">
                     *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${weight}</h3>
-                    *   <p class="s-font:${weight}:50">${__faker.lorem.sentence()}</p>
+                    *   <p class="s-font:${weight}:50">${import_faker.default.lorem.sentence()}</p>
                     * </div>`;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    vars.comment(() => `
+  vars.comment(() => `
       /**
         * @name          Stretches
         * @namespace          sugar.css.font
@@ -227,20 +244,18 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @cssClass         s-font:ultra-expanded              Apply the \`ultra-expanded\` font-stretch value
         *    
         * @example        html
-        ${fontStretchProps
-        .map((stretch) => {
-        return ` * <div class="s-mbe:50">
+        ${fontStretchProps.map((stretch) => {
+    return ` * <div class="s-mbe:50">
                     *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${stretch}</h3>
-                    *   <p class="s-font:${stretch}:50">${__faker.lorem.sentence()}</p>
+                    *   <p class="s-font:${stretch}:50">${import_faker.default.lorem.sentence()}</p>
                     * </div> `;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    vars.comment(() => `
+  vars.comment(() => `
       /**
         * @name          Resets
         * @namespace          sugar.css.font
@@ -257,20 +272,20 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @example        html
         * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset size</h3>
         * <div class="s-font:60 s-mbe:30">
-        *   ${__faker.name.title()} <span class="s-font:reset-size">${__faker.name.findName()}</span>
+        *   ${import_faker.default.name.title()} <span class="s-font:reset-size">${import_faker.default.name.findName()}</span>
         * </div>
         * 
         * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset family</h3>
         * <div class="s-font:quote s-font:50">
-        *   ${__faker.name.title()} <span class="s-font:reset-family">${__faker.name.findName()}</span>
+        *   ${import_faker.default.name.title()} <span class="s-font:reset-family">${import_faker.default.name.findName()}</span>
         * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    Object.keys(fontsFamiliesObj).forEach((fontName) => {
-        vars.comment(() => `
+  Object.keys(fontsFamiliesObj).forEach((fontName) => {
+    vars.comment(() => `
         /**
         * @name          s-font:${fontName}
         * @namespace          sugar.css.font
@@ -290,11 +305,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
 .s-font--${fontName} {
     @sugar.font.family(${fontName});
 }`);
-    });
-    Object.keys(fontSizesObj).forEach((sizeName) => {
-        if (sizeName === 'default')
-            return;
-        vars.comment(() => `/**
+  });
+  Object.keys(fontSizesObj).forEach((sizeName) => {
+    if (sizeName === "default")
+      return;
+    vars.comment(() => `/**
   * @name          s-font:${sizeName}
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -310,9 +325,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
 .s-font--${sizeName} {
     @sugar.font.size(${sizeName});
 }`);
-    });
-    // reset
-    vars.comment(() => `/**
+  });
+  vars.comment(() => `/**
   * @name          s-font:reset-size
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -331,7 +345,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
 .s-font--reset-size {
   font-size: sugar.scalable(1rem);
 }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
   * @name          s-font:reset-family
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -350,8 +364,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
 .s-font--reset-family {
   @sugar.font.family(default);
 }`);
-    fontStretchProps.forEach((value) => {
-        vars.comment(() => `/**
+  fontStretchProps.forEach((value) => {
+    vars.comment(() => `/**
             * @name          s-font:${value}
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -370,8 +384,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             .s-font--${value} {
                 font-stretch: ${value};
             }`);
-    });
-    vars.comment(() => `/**
+  });
+  vars.comment(() => `/**
             * @name          s-font:italic
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -390,7 +404,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             .s-font--italic {
                 font-style: italic;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-font:oblique
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -409,27 +423,30 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             .s-font--oblique {
                 font-style: oblique;
             }`);
-    fontWeightProps.forEach((value) => {
-        vars.comment(() => `/**
+  fontWeightProps.forEach((value) => {
+    vars.comment(() => `/**
             * @name          s-font:${value}
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
             * @platform         css
             * @status           beta
             * 
-            * This class allows you to apply the \`font-weight: ${value.replace('weight-', '')}\` value to any HTMLElement
+            * This class allows you to apply the \`font-weight: ${value.replace("weight-", "")}\` value to any HTMLElement
             * 
             * @example        html
-            * <h1 class="s-font:${value.replace('weight-', '')}">Hello world</h1>
+            * <h1 class="s-font:${value.replace("weight-", "")}">Hello world</h1>
             * 
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             .s-font--${value} {
-                font-weight: ${value.replace('weight-', '')};
+                font-weight: ${value.replace("weight-", "")};
             }`);
-    });
-    return vars;
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZO0lBQzdELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHNDQUFzQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRS9ELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixNQUFNLGdCQUFnQixHQUFHLFFBQVEsQ0FBQyxNQUFNLENBQUMsYUFBYSxDQUFDLEVBQ25ELFlBQVksR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQyxFQUMzQyxnQkFBZ0IsR0FBRztRQUNmLGlCQUFpQjtRQUNqQixpQkFBaUI7UUFDakIsV0FBVztRQUNYLGdCQUFnQjtRQUNoQixlQUFlO1FBQ2YsVUFBVTtRQUNWLGdCQUFnQjtRQUNoQixnQkFBZ0I7S0FDbkIsRUFDRCxlQUFlLEdBQUc7UUFDZCxNQUFNO1FBQ04sUUFBUTtRQUNSLFNBQVM7UUFDVCxZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7S0FDZixDQUFDO0lBRU4sSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

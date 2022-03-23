@@ -1,26 +1,34 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SFrontstackNewParamsInterface
- * @namespace           node.interface
- * @type.                      Class
- * @extends             SInterface
- * @status              beta
- * @platform             node
- * @interface
- *
- * This class represent the interface that describe parameters of the SFrontstack.new method
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SFrontstackNewParamsInterface extends __SInterface {
-    static get _definition() {
-        return {};
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SFrontstackNewParamsInterface_exports = {};
+__export(SFrontstackNewParamsInterface_exports, {
+  default: () => SFrontstackNewParamsInterface_default
+});
+module.exports = __toCommonJS(SFrontstackNewParamsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SFrontstackNewParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export default SFrontstackNewParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2tOZXdQYXJhbXNJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRnJvbnRzdGFja05ld1BhcmFtc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxNQUFNLDZCQUE4QixTQUFRLFlBQVk7SUFDcEQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUNOLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFFRCxlQUFlLDZCQUE2QixDQUFDIn0=
+var SFrontstackNewParamsInterface_default = SFrontstackNewParamsInterface;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

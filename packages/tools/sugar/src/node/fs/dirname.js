@@ -1,40 +1,35 @@
-import __callsites from 'callsites';
-import { fileURLToPath } from 'url';
-/**
- * @name            dirname
- * @namespace       node.fs
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * Return the dirname the same as the __dirname cjs variable.
- * The only difference is that it's a function and you need to pass the "import" variable
- * from the filename in which you use this...
- *
- * @param       {Import}            import          The "import" variable from the file you use this function
- * @return      {String}                            The dirname path
- *
- * @example             js
- * import dirname from '@coffeekraken/sugar/node/fs/dirname';
- * dirname(import);
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function () {
-    if (process.env.NODE_ENV === 'test') {
-        // @ts-ignore
-        // const call = __callsites()[1].getFileName();
-        //     console.log('TEDT', __callsites()[1].getFileName());
-        //     console.log(__callsites()[1].getFileName());
-        return __callsites()[1].getFileName().split('/')
-            .slice(0, -1)
-            .join('/');
-    }
-    // @ts-ignore
-    return fileURLToPath(__callsites()[1].getFileName())
-        .split('/')
-        .slice(0, -1)
-        .join('/');
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var dirname_exports = {};
+__export(dirname_exports, {
+  default: () => dirname_default
+});
+module.exports = __toCommonJS(dirname_exports);
+var import_callsites = __toESM(require("callsites"), 1);
+var import_url = require("url");
+function dirname_default() {
+  if (process.env.NODE_ENV === "test") {
+    return (0, import_callsites.default)()[1].getFileName().split("/").slice(0, -1).join("/");
+  }
+  return (0, import_url.fileURLToPath)((0, import_callsites.default)()[1].getFileName()).split("/").slice(0, -1).join("/");
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGlybmFtZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRpcm5hbWUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxXQUFXLE1BQU0sV0FBVyxDQUFDO0FBQ3BDLE9BQU8sRUFBRSxhQUFhLEVBQUUsTUFBTSxLQUFLLENBQUM7QUFFcEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU87SUFFVixJQUFJLE9BQU8sQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU0sRUFBRTtRQUNqQyxhQUFhO1FBRWIsK0NBQStDO1FBQy9DLDJEQUEyRDtRQUMzRCxtREFBbUQ7UUFDbkQsT0FBTyxXQUFXLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDO2FBQy9DLEtBQUssQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7YUFDWixJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDZDtJQUVELGFBQWE7SUFDYixPQUFPLGFBQWEsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxXQUFXLEVBQUUsQ0FBQztTQUMvQyxLQUFLLENBQUMsR0FBRyxDQUFDO1NBQ1YsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztTQUNaLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUNuQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

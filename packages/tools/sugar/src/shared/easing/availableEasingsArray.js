@@ -1,38 +1,41 @@
-// @ts-nocheck
-/**
- * @name            availableEasingsArray
- * @namespace            js.easing
- * @type            Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * This function simply return back an array of all the available easings function in the sugar toolkit
- *
- * @return      {Array}             An array of all the easing functions available
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var availableEasingsArray_exports = {};
+__export(availableEasingsArray_exports, {
+  default: () => availableEasingsArray_default
+});
+module.exports = __toCommonJS(availableEasingsArray_exports);
 function availableEasingsArray() {
-    return [
-        'easeInOutCubic',
-        'easeInOutQuad',
-        'easeInOutQuart',
-        'easeInOutQuint',
-        'easeInCubic',
-        'easeInQuad',
-        'easeInQuart',
-        'easeInQuint',
-        'easeOutCubic',
-        'easeOutQuad',
-        'easeOutQuart',
-        'easeOutQuint',
-    ];
+  return [
+    "easeInOutCubic",
+    "easeInOutQuad",
+    "easeInOutQuart",
+    "easeInOutQuint",
+    "easeInCubic",
+    "easeInQuad",
+    "easeInQuart",
+    "easeInQuint",
+    "easeOutCubic",
+    "easeOutQuad",
+    "easeOutQuart",
+    "easeOutQuint"
+  ];
 }
-export default availableEasingsArray;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXZhaWxhYmxlRWFzaW5nc0FycmF5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXZhaWxhYmxlRWFzaW5nc0FycmF5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsU0FBUyxxQkFBcUI7SUFDMUIsT0FBTztRQUNILGdCQUFnQjtRQUNoQixlQUFlO1FBQ2YsZ0JBQWdCO1FBQ2hCLGdCQUFnQjtRQUNoQixhQUFhO1FBQ2IsWUFBWTtRQUNaLGFBQWE7UUFDYixhQUFhO1FBQ2IsY0FBYztRQUNkLGFBQWE7UUFDYixjQUFjO1FBQ2QsY0FBYztLQUNqQixDQUFDO0FBQ04sQ0FBQztBQUNELGVBQWUscUJBQXFCLENBQUMifQ==
+var availableEasingsArray_default = availableEasingsArray;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

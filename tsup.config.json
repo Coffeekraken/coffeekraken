@@ -1,0 +1,12 @@
+{
+    "entry": "packages/*/*/src/node/**/*.ts",
+    "bundle": false,
+    "format": [
+        "esm",
+        "cjs"
+    ],
+    "outDir": "packages",
+    "platform": "node",
+    "dts": false,
+    "tsconfig": "my-tsconfig.json"
+}

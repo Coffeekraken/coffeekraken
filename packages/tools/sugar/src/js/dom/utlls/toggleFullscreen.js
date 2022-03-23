@@ -1,39 +1,36 @@
-// @ts-nocheck
-import requestFullscreen from './requestFullscreen';
-import exitFullscreen from './exitFullscreen';
-/**
- * @name      toggleFullscreen
- * @namespace            js.dom.utils
- * @type      Function
- * @platform          js
- * @status      beta
- *
- * Toggle the fullscreen mode
- *
- * @param    {HTMLElement}    elm    The element on which to request the fullscreen
- * @return    {Promise}   Returns a Promise which is resolved once full-screen mode has been des/activated.
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example   js
- * import toggleFullscreen from '@coffeekraken/sugar/js/dom/toggleFullscreen'
- * toggleFullscreen(myDomElm)
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var toggleFullscreen_exports = {};
+__export(toggleFullscreen_exports, {
+  default: () => toggleFullscreen_default
+});
+module.exports = __toCommonJS(toggleFullscreen_exports);
+var import_requestFullscreen = __toESM(require("./requestFullscreen"), 1);
+var import_exitFullscreen = __toESM(require("./exitFullscreen"), 1);
 function toggleFullscreen(elm) {
-    const fullscreenElm = document.fullscreenElement ||
-        document.mozFullScreenElement ||
-        document.webkitFullscreenElement;
-    if (!fullscreenElm || fullscreenElm !== elm) {
-        return requestFullscreen(elm);
-    }
-    else {
-        return exitFullscreen();
-    }
+  const fullscreenElm = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+  if (!fullscreenElm || fullscreenElm !== elm) {
+    return (0, import_requestFullscreen.default)(elm);
+  } else {
+    return (0, import_exitFullscreen.default)();
+  }
 }
-export default toggleFullscreen;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidG9nZ2xlRnVsbHNjcmVlbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRvZ2dsZUZ1bGxzY3JlZW4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8saUJBQWlCLE1BQU0scUJBQXFCLENBQUM7QUFDcEQsT0FBTyxjQUFjLE1BQU0sa0JBQWtCLENBQUM7QUFFOUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxTQUFTLGdCQUFnQixDQUFDLEdBQWdCO0lBQ3RDLE1BQU0sYUFBYSxHQUNmLFFBQVEsQ0FBQyxpQkFBaUI7UUFDMUIsUUFBUSxDQUFDLG9CQUFvQjtRQUM3QixRQUFRLENBQUMsdUJBQXVCLENBQUM7SUFDckMsSUFBSSxDQUFDLGFBQWEsSUFBSSxhQUFhLEtBQUssR0FBRyxFQUFFO1FBQ3pDLE9BQU8saUJBQWlCLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDakM7U0FBTTtRQUNILE9BQU8sY0FBYyxFQUFFLENBQUM7S0FDM0I7QUFDTCxDQUFDO0FBQ0QsZUFBZSxnQkFBZ0IsQ0FBQyJ9
+var toggleFullscreen_default = toggleFullscreen;

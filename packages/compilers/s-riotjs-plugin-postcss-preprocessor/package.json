@@ -1,16 +1,16 @@
 {
-  "name": "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-  "version": "2.0.0",
-  "description": "",
-  "type": "module",
-  "main": "./src/node/exports.js",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@riotjs/compiler": "^5.4.2",
-    "postcss": "^8.2.15",
-    "riot": "^5.4.2"
-  },
-  "peerDependencies": {}
+    "name": "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./src/node/exports.js",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@riotjs/compiler": "^5.4.2",
+        "postcss": "^8.2.15",
+        "riot": "^5.4.2"
+    },
+    "peerDependencies": {}
 }

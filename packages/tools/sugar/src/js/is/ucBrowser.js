@@ -1,30 +1,26 @@
-// @ts-nocheck
-/**
- * @name        isUcBrowser
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Detect if is the UC stock browser that is running the page
- *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import isUcBrowser from '@coffeekraken/sugar/js/is/ucBrowser'
- * if (isUcBrowser()) {
- *   // do something
- * }
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var ucBrowser_exports = {};
+__export(ucBrowser_exports, {
+  default: () => ucBrowser_default
+});
+module.exports = __toCommonJS(ucBrowser_exports);
 function isUcBrowser(ua = navigator.userAgent) {
-    return ua.match(/UCBrowser/i) !== null;
+  return ua.match(/UCBrowser/i) !== null;
 }
-export default isUcBrowser;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidWNCcm93c2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidWNCcm93c2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLFdBQVcsQ0FBQyxLQUFhLFNBQVMsQ0FBQyxTQUFTO0lBQ2pELE9BQU8sRUFBRSxDQUFDLEtBQUssQ0FBQyxZQUFZLENBQUMsS0FBSyxJQUFJLENBQUM7QUFDM0MsQ0FBQztBQUNELGVBQWUsV0FBVyxDQUFDIn0=
+var ucBrowser_default = isUcBrowser;

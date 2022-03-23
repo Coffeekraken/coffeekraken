@@ -1,301 +1,197 @@
-import __SClass from '@coffeekraken/s-class';
-import __isOfType from '@coffeekraken/sugar/shared/is/ofType';
-import __typeof from '@coffeekraken/sugar/shared/value/typeof';
-import __SDescriptorResult from './SDescriptorResult';
-import __get from '@coffeekraken/sugar/shared/object/get';
-import __isGlob from '@coffeekraken/sugar/shared/is/glob';
-import __set from '@coffeekraken/sugar/shared/object/set';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-// @ts-ignore
-class SDescriptor extends __SClass {
-    /**
-     * @name      constructor
-     * @type      Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    constructor(settings) {
-        // save the settings
-        super(__deepMerge({
-            descriptor: {
-                rules: {},
-                type: 'Object',
-                arrayAsValue: false,
-                throwOnMissingRule: false,
-                defaults: true,
-            },
-        }, settings !== null && settings !== void 0 ? settings : {}));
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    /**
-     * @name      registerRule
-     * @type      Function
-     * @static
-     *
-     * This static method allows you to register a new rule
-     * by passing a valid ISDescriptorRule object
-     *
-     * @param     {ISDescriptorRule}        rule        The rule object to register
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    static registerRule(rule) {
-        if (rule.id === undefined || typeof rule.id !== 'string') {
-            throw new Error(`Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`);
-        }
-        this._registeredRules[rule.id] = rule;
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SDescriptor_exports = {};
+__export(SDescriptor_exports, {
+  default: () => SDescriptor_default
+});
+module.exports = __toCommonJS(SDescriptor_exports);
+var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
+var import_ofType = __toESM(require("@coffeekraken/sugar/shared/is/ofType"), 1);
+var import_typeof = __toESM(require("@coffeekraken/sugar/shared/value/typeof"), 1);
+var import_SDescriptorResult = __toESM(require("./SDescriptorResult"), 1);
+var import_get = __toESM(require("@coffeekraken/sugar/shared/object/get"), 1);
+var import_glob = __toESM(require("@coffeekraken/sugar/shared/is/glob"), 1);
+var import_set = __toESM(require("@coffeekraken/sugar/shared/object/set"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+class SDescriptor extends import_s_class.default {
+  static registerRule(rule) {
+    if (rule.id === void 0 || typeof rule.id !== "string") {
+      throw new Error(`Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`);
     }
-    /**
-     * @name      descriptorSettings
-     * @type      ISDescriptorSettings
-     * @get
-     *
-     * Access the descriptor settings
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get descriptorSettings() {
-        return this._settings.descriptor;
+    this._registeredRules[rule.id] = rule;
+  }
+  get descriptorSettings() {
+    return this._settings.descriptor;
+  }
+  constructor(settings) {
+    super((0, import_deepMerge.default)({
+      descriptor: {
+        rules: {},
+        type: "Object",
+        arrayAsValue: false,
+        throwOnMissingRule: false,
+        defaults: true
+      }
+    }, settings != null ? settings : {}));
+  }
+  apply(value, settings) {
+    const set = (0, import_deepMerge.default)(this.descriptorSettings, settings || {});
+    if (value === void 0 || value === null)
+      value = {};
+    const valuesObjToProcess = {}, finalValuesObj = {};
+    this._descriptorResult = new import_SDescriptorResult.default(this, finalValuesObj, Object.assign({}, set));
+    const rules = set.rules;
+    if (!(0, import_ofType.default)(value, set.type)) {
+      throw new Error(`Sorry but this descriptor "<yellow>${this.metas.name}</yellow>" does not accept values of type "<cyan>${(0, import_typeof.default)(value)}</cyan>" but only "<green>${set.type}</green>"...`);
     }
-    /**
-     * @name          apply
-     * @type          Function
-     *
-     * This method simply apply the descriptor instance on the passed value.
-     * The value can be anything depending on the descriptor you use.
-     * When you pass an Array, by default it will apply the descriptor on
-     * each array items. If you don't want this behavior and the Array passed has to be
-     * treated as a single value, pass the "arrayAsValue" setting to true
-     *
-     * @param       {Any}       value         The value to apply the descriptor on
-     * @param       {ISDescriptorSettings}        [settings={}]       An object of settings to configure your descriptor. These settings will override the base ones passed in the constructor
-     * @return      {ISDescriptorResultObj|true}           Will return true if all is ok, and an object describing the issue if not
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    apply(value, settings) {
-        // handle settings
-        const set = (__deepMerge(this.descriptorSettings, settings || {}));
-        // ensure we can apply the descriptor
-        if (value === undefined || value === null)
-            value = {};
-        // need to be before the instanciation of the
-        // descriptorResult for references reasons... to check when have time
-        const valuesObjToProcess = {}, finalValuesObj = {};
-        // initialize the descriptor result instance
-        this._descriptorResult = new __SDescriptorResult(this, finalValuesObj, Object.assign({}, set));
-        const rules = set.rules;
-        // check the passed value type correspond to the descriptor type
-        if (!__isOfType(value, set.type)) {
-            throw new Error(`Sorry but this descriptor "<yellow>${this.metas.name}</yellow>" does not accept values of type "<cyan>${__typeof(value)}</cyan>" but only "<green>${set.type}</green>"...`);
+    if (Array.isArray(value) && !set.arrayAsValue) {
+      throw new Error(`Sorry but the support for arrays like values has not been integrated for not...`);
+    } else if (typeof value === "object" && value !== null && value !== void 0) {
+      Object.keys(rules).forEach((propName) => {
+        if ((0, import_glob.default)(propName) && value) {
+        } else {
+          valuesObjToProcess[propName] = (0, import_get.default)(value, propName);
         }
-        // check the type to validate correctly the value
-        if (Array.isArray(value) && !set.arrayAsValue) {
-            // loop on each items
-            throw new Error(`Sorry but the support for arrays like values has not been integrated for not...`);
-            // value.forEach((item) => {});
+      });
+      Object.keys(valuesObjToProcess).forEach((propName) => {
+        const ruleObj = rules[propName];
+        if (valuesObjToProcess[propName] === void 0 && set.defaults && ruleObj.default !== void 0) {
+          valuesObjToProcess[propName] = ruleObj.default;
         }
-        else if (typeof value === 'object' &&
-            value !== null &&
-            value !== undefined) {
-            // loop on each object properties
-            Object.keys(rules).forEach((propName) => {
-                // const ruleObj = rules[propName];
-                if (__isGlob(propName) && value) {
-                    // const globPropValue = __getGlob(value, `${propName}.*`, {
-                    //   deepize: false
-                    // });
-                    // if (Object.keys(globPropValue).length) {
-                    //   Object.keys(globPropValue).forEach((propName) => {
-                    //     valuesObjToProcess[propName] = globPropValue[propName];
-                    //     rules[propName] = ruleObj;
-                    //   });
-                    // }
-                }
-                else {
-                    valuesObjToProcess[propName] = __get(value, propName);
-                }
-            });
-            Object.keys(valuesObjToProcess).forEach((propName) => {
-                const ruleObj = rules[propName];
-                // complete
-                if (valuesObjToProcess[propName] === undefined &&
-                    set.defaults &&
-                    ruleObj.default !== undefined) {
-                    valuesObjToProcess[propName] = ruleObj.default;
-                }
-                // interface
-                if (ruleObj.interface !== undefined) {
-                    const interfaceValue = valuesObjToProcess[propName];
-                    // _console.log('VAL', valuesObjToProcess[propName], propName);
-                    valuesObjToProcess[propName] = ruleObj.interface.apply(interfaceValue || {}, {});
-                }
-                // validate the property
-                const validationResult = this._validate(valuesObjToProcess[propName], propName, ruleObj, set);
-                if (validationResult !== undefined &&
-                    validationResult !== null) {
-                    __set(finalValuesObj, propName, validationResult);
-                }
-            });
+        if (ruleObj.interface !== void 0) {
+          const interfaceValue = valuesObjToProcess[propName];
+          valuesObjToProcess[propName] = ruleObj.interface.apply(interfaceValue || {}, {});
         }
-        else {
-            console.warn(value);
-            throw new Error(`You can apply an <yellow>SDescriptor</yellow> only on an Object like value...`);
+        const validationResult = this._validate(valuesObjToProcess[propName], propName, ruleObj, set);
+        if (validationResult !== void 0 && validationResult !== null) {
+          (0, import_set.default)(finalValuesObj, propName, validationResult);
         }
-        if (this._descriptorResult.hasIssues()) {
-            throw new Error(this._descriptorResult.toString());
-        }
-        return this._descriptorResult;
+      });
+    } else {
+      console.warn(value);
+      throw new Error(`You can apply an <yellow>SDescriptor</yellow> only on an Object like value...`);
     }
-    /**
-     * @name          _validate
-     * @type          Function
-     * @private
-     *
-     * This method take a value and validate it using the defined rules
-     *
-     * @param       {Any}       value       The value to validate
-     * @return      {ISDescriptionValidationResult|true}        true if the validation has been made correctly, an object describing the issue if not
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    _validate(value, propName, rulesObj, settings) {
-        if (rulesObj === undefined)
-            return value;
-        if (rulesObj.required === undefined || rulesObj.required === false) {
-            if (value === undefined || value === null)
-                return value;
+    if (this._descriptorResult.hasIssues()) {
+      throw new Error(this._descriptorResult.toString());
+    }
+    return this._descriptorResult;
+  }
+  _validate(value, propName, rulesObj, settings) {
+    if (rulesObj === void 0)
+      return value;
+    if (rulesObj.required === void 0 || rulesObj.required === false) {
+      if (value === void 0 || value === null)
+        return value;
+    }
+    let rulesNamesInOrder = Object.keys(rulesObj).filter((l) => l !== "default");
+    rulesNamesInOrder = rulesNamesInOrder.sort((a, b) => {
+      const objA = this.constructor._registeredRules[a];
+      const objB = this.constructor._registeredRules[b];
+      if (!objA)
+        return -1;
+      if (!objB)
+        return 1;
+      if (objA.priority === void 0)
+        objA.priority = 9999999999;
+      if (objB.priority === void 0)
+        objB.priority = 9999999999;
+      return objA.priotity - objB.priority;
+    }).reverse();
+    let resultValue = value;
+    rulesNamesInOrder.forEach((ruleName) => {
+      const ruleValue = rulesObj[ruleName];
+      if (this.constructor._registeredRules[ruleName] === void 0) {
+        if (settings.throwOnMissingRule) {
+          throw new Error(`Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
+              - ${Object.keys(this.constructor._registeredRules).join("\n- ")}`);
         }
-        let rulesNamesInOrder = Object.keys(rulesObj).filter((l) => l !== 'default');
-        rulesNamesInOrder = rulesNamesInOrder
-            .sort((a, b) => {
-            const objA = this.constructor._registeredRules[a];
-            const objB = this.constructor._registeredRules[b];
-            if (!objA)
-                return -1;
-            if (!objB)
-                return 1;
-            if (objA.priority === undefined)
-                objA.priority = 9999999999;
-            if (objB.priority === undefined)
-                objB.priority = 9999999999;
-            return objA.priotity - objB.priority;
-        })
-            .reverse();
-        let resultValue = value;
-        // loop on the rules object
-        rulesNamesInOrder.forEach((ruleName) => {
-            const ruleValue = rulesObj[ruleName];
-            // make sure we have this rule registered
-            if (this.constructor._registeredRules[ruleName] === undefined) {
-                if (settings.throwOnMissingRule) {
-                    throw new Error(`Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
-              - ${Object.keys(this.constructor._registeredRules).join('\n- ')}`);
-                }
+      } else {
+        const ruleObj = this.constructor._registeredRules[ruleName];
+        const params = ruleObj.processParams !== void 0 ? ruleObj.processParams(ruleValue) : ruleValue;
+        const ruleSettings = ruleObj.settings !== void 0 ? ruleObj.settings : {};
+        if (ruleSettings.mapOnArray && Array.isArray(resultValue)) {
+          let newResultValue = [];
+          resultValue.forEach((v) => {
+            const processedValue = this._processRule(v, ruleObj, propName, params, ruleSettings, settings);
+            if (Array.isArray(processedValue)) {
+              newResultValue = [
+                ...newResultValue,
+                ...processedValue
+              ];
+            } else {
+              newResultValue.push(processedValue);
             }
-            else {
-                const ruleObj = this.constructor._registeredRules[ruleName];
-                const params = ruleObj.processParams !== undefined
-                    ? ruleObj.processParams(ruleValue)
-                    : ruleValue;
-                const ruleSettings = ruleObj.settings !== undefined ? ruleObj.settings : {};
-                // check if the rule accept this type of value
-                // _console.log('AAA', propName, value, params);
-                // if (ruleObj.accept && __isOfType(value, ruleObj.accept) !== true)
-                //   return;
-                // console.log('CC', propName, value, params);
-                if (ruleSettings.mapOnArray && Array.isArray(resultValue)) {
-                    let newResultValue = [];
-                    resultValue.forEach((v) => {
-                        const processedValue = this._processRule(v, ruleObj, propName, params, ruleSettings, settings);
-                        if (Array.isArray(processedValue)) {
-                            newResultValue = [
-                                ...newResultValue,
-                                ...processedValue,
-                            ];
-                        }
-                        else {
-                            newResultValue.push(processedValue);
-                        }
-                    });
-                    resultValue = newResultValue;
-                }
-                else {
-                    const processedValue = this._processRule(resultValue, ruleObj, propName, params, ruleSettings, settings);
-                    resultValue = processedValue;
-                }
-            }
-        });
-        // return the value that can have been processed
-        return resultValue;
+          });
+          resultValue = newResultValue;
+        } else {
+          const processedValue = this._processRule(resultValue, ruleObj, propName, params, ruleSettings, settings);
+          resultValue = processedValue;
+        }
+      }
+    });
+    return resultValue;
+  }
+  _processRule(value, ruleObj, propName, params, ruleSettings, settings) {
+    const ruleResult = ruleObj.apply(value, params, ruleSettings, __spreadProps(__spreadValues({}, settings), {
+      propName,
+      name: `${settings.name}.${propName}`
+    }));
+    if (params && params.type && params.type.toLowerCase() === "boolean" && ruleResult === true) {
+      return true;
     }
-    _processRule(value, ruleObj, propName, params, ruleSettings, settings) {
-        const ruleResult = ruleObj.apply(value, params, ruleSettings, Object.assign(Object.assign({}, settings), { propName, name: `${settings.name}.${propName}` }));
-        if (params &&
-            params.type &&
-            params.type.toLowerCase() === 'boolean' &&
-            ruleResult === true) {
-            return true;
-        }
-        if (ruleResult instanceof Error) {
-            const obj = {
-                __error: ruleResult,
-                __ruleObj: ruleObj,
-                __propName: propName,
-            };
-            if (this._descriptorResult) {
-                this._descriptorResult.add(obj);
-                throw new Error(this._descriptorResult.toString());
-            }
-        }
-        else {
-            return ruleResult;
-        }
+    if (ruleResult instanceof Error) {
+      const obj = {
+        __error: ruleResult,
+        __ruleObj: ruleObj,
+        __propName: propName
+      };
+      if (this._descriptorResult) {
+        this._descriptorResult.add(obj);
+        throw new Error(this._descriptorResult.toString());
+      }
+    } else {
+      return ruleResult;
     }
+  }
 }
-/**
- * @name      _registeredRules
- * @type      Object
- * @static
- *
- * Store the registered _registeredRules into a simple object
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com>
- */
 SDescriptor._registeredRules = {};
-/**
- * @name      rules
- * @type      Object
- * @static
- *
- * Store the registered rules into a simple object
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com>
- */
 SDescriptor.rules = {};
-/**
- * @name      type
- * @type      String
- * @static
- * @default     Object
- *
- * Specify the type of the values that this descriptor is made for.
- * Can be:
- *
- * @todo      check utility of this property
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com>
- */
-SDescriptor.type = 'Object';
-export default SDescriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiX1NEZXNjcmlwdG9yLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiX1NEZXNjcmlwdG9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sVUFBVSxNQUFNLHNDQUFzQyxDQUFDO0FBQzlELE9BQU8sUUFBUSxNQUFNLHlDQUF5QyxDQUFDO0FBQy9ELE9BQU8sbUJBSU4sTUFBTSxxQkFBcUIsQ0FBQztBQUM3QixPQUFPLEtBQUssTUFBTSx1Q0FBdUMsQ0FBQztBQUMxRCxPQUFPLFFBQVEsTUFBTSxvQ0FBb0MsQ0FBQztBQUMxRCxPQUFPLEtBQUssTUFBTSx1Q0FBdUMsQ0FBQztBQUMxRCxPQUFPLFdBQVcsTUFBTSw2Q0FBNkMsQ0FBQztBQXdGdEUsYUFBYTtBQUNiLE1BQU0sV0FBWSxTQUFRLFFBQVE7SUF5RjlCOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBbUM7UUFDM0Msb0JBQW9CO1FBQ3BCLEtBQUssQ0FDRCxXQUFXLENBQ1A7WUFDSSxVQUFVLEVBQUU7Z0JBQ1IsS0FBSyxFQUFFLEVBQUU7Z0JBQ1QsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsWUFBWSxFQUFFLEtBQUs7Z0JBQ25CLGtCQUFrQixFQUFFLEtBQUs7Z0JBQ3pCLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1NBQ0osRUFDRCxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQ2pCLENBQ0osQ0FBQztJQUNOLENBQUM7SUE5REQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsTUFBTSxDQUFDLFlBQVksQ0FBQyxJQUFzQjtRQUN0QyxJQUFJLElBQUksQ0FBQyxFQUFFLEtBQUssU0FBUyxJQUFJLE9BQU8sSUFBSSxDQUFDLEVBQUUsS0FBSyxRQUFRLEVBQUU7WUFDdEQsTUFBTSxJQUFJLEtBQUssQ0FDWCwyRkFBMkYsQ0FDOUYsQ0FBQztTQUNMO1FBQ0QsSUFBSSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxF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
+SDescriptor.type = "Object";
+var SDescriptor_default = SDescriptor;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

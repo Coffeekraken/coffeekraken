@@ -1,48 +1,74 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name          transition
- * @namespace     node.function.border
- * @type          PostcssFunction
- * @platform      postcss
- * @status        beta
- *
- * This function allows you to get a transition value depending on your theme config
- *
- * @param       {String}        transition      The transition to get
- * @return      {Css}                   The corresponding css
- *
- * @example       css
- * .my-element {
- *      transition: sugar.transition(fast);
- * }
- *
- * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginTransitionFunctionInterface extends __SInterface {
-    static get _definition() {
-        return {
-            name: {
-                type: 'String',
-                values: Object.keys(__STheme.config('transition')),
-                default: 'default',
-                required: true,
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var transition_exports = {};
+__export(transition_exports, {
+  default: () => transition_default,
+  interface: () => postcssSugarPluginTransitionFunctionInterface
+});
+module.exports = __toCommonJS(transition_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginTransitionFunctionInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      name: {
+        type: "String",
+        values: Object.keys(import_s_theme.default.config("transition")),
+        default: "default",
+        required: true
+      }
+    };
+  }
 }
-export { postcssSugarPluginTransitionFunctionInterface as interface };
-export default function ({ params, }) {
-    const finalParams = Object.assign({ name: 'default' }, params);
-    if (__STheme.config('transition')[finalParams.name] === undefined)
-        return finalParams.name;
-    const transitions = finalParams.name.split(' ').map((t) => {
-        const transition = __STheme.config(`transition.${t}`);
-        if (!transition)
-            return transition;
-        return `var(${`--s-theme-transition-${t}`}, ${transition})`;
-    });
-    return transitions.join(' ');
+function transition_default({
+  params
+}) {
+  const finalParams = __spreadValues({
+    name: "default"
+  }, params);
+  if (import_s_theme.default.config("transition")[finalParams.name] === void 0)
+    return finalParams.name;
+  const transitions = finalParams.name.split(" ").map((t) => {
+    const transition = import_s_theme.default.config(`transition.${t}`);
+    if (!transition)
+      return transition;
+    return `var(${`--s-theme-transition-${t}`}, ${transition})`;
+  });
+  return transitions.join(" ");
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJhbnNpdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRyYW5zaXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FtQkc7QUFFSCxNQUFNLDZDQUE4QyxTQUFRLFlBQVk7SUFDcEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsTUFBTSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLFlBQVksQ0FBQyxDQUFDO2dCQUNsRCxPQUFPLEVBQUUsU0FBUztnQkFDbEIsUUFBUSxFQUFFLElBQUk7YUFDakI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ0QsT0FBTyxFQUFFLDZDQUE2QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBTXRFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxHQUdUO0lBQ0csTUFBTSxXQUFXLG1CQUNiLElBQUksRUFBRSxTQUFTLElBQ1osTUFBTSxDQUNaLENBQUM7SUFFRixJQUFJLFFBQVEsQ0FBQyxNQUFNLENBQUMsWUFBWSxDQUFDLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxLQUFLLFNBQVM7UUFDN0QsT0FBTyxXQUFXLENBQUMsSUFBSSxDQUFDO0lBRTVCLE1BQU0sV0FBVyxHQUFHLFdBQVcsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1FBQ3RELE1BQU0sVUFBVSxHQUFHLFFBQVEsQ0FBQyxNQUFNLENBQUMsY0FBYyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ3RELElBQUksQ0FBQyxVQUFVO1lBQUUsT0FBTyxVQUFVLENBQUM7UUFDbkMsT0FBTyxPQUFPLHdCQUF3QixDQUFDLEVBQUUsS0FBSyxVQUFVLEdBQUcsQ0FBQztJQUNoRSxDQUFDLENBQUMsQ0FBQztJQUVILE9BQU8sV0FBVyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUNqQyxDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

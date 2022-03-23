@@ -1,37 +1,35 @@
-// @ts-nocheck
-import __get from './get';
-import __set from './set';
-/**
- * @name                        ensureExists
- * @namespace            js.object
- * @type                        Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Pass a string like "my.cool.object" and the value it has to be and this function will ensure that this deep object exist
- *
- * @param           {Object}            obj                           The object on which to check the path existence
- * @param           {String}            path                           The dotted object path to check
- * @param           {Mixed}             value                         The value to set to the object path created if not already exist
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example           js
- * import ensureExists from '@coffeekraken/sugar/js/object/ensureExists';
- * const myObj = { hello: 'world' }«
- * ensureExists(myObj, 'cool.object', {});
- * // { hello: 'world', cool: { object: {} } }
- *
- * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default (obj, path, value = {}) => {
-    const v = __get(obj, path);
-    if (v === undefined) {
-        __set(obj, path, value);
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlRXhpc3RzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW5zdXJlRXhpc3RzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEtBQUssTUFBTSxPQUFPLENBQUM7QUFDMUIsT0FBTyxLQUFLLE1BQU0sT0FBTyxDQUFDO0FBRTFCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILGVBQWUsQ0FBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLEtBQUssR0FBRyxFQUFFLEVBQUUsRUFBRTtJQUNyQyxNQUFNLENBQUMsR0FBRyxLQUFLLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxDQUFDO0lBQzNCLElBQUksQ0FBQyxLQUFLLFNBQVMsRUFBRTtRQUNqQixLQUFLLENBQUMsR0FBRyxFQUFFLElBQUksRUFBRSxLQUFLLENBQUMsQ0FBQztLQUMzQjtBQUNMLENBQUMsQ0FBQyJ9
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var ensureExists_exports = {};
+__export(ensureExists_exports, {
+  default: () => ensureExists_default
+});
+module.exports = __toCommonJS(ensureExists_exports);
+var import_get = __toESM(require("./get"), 1);
+var import_set = __toESM(require("./set"), 1);
+var ensureExists_default = (obj, path, value = {}) => {
+  const v = (0, import_get.default)(obj, path);
+  if (v === void 0) {
+    (0, import_set.default)(obj, path, value);
+  }
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

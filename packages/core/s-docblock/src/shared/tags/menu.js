@@ -1,42 +1,47 @@
-// @ts-nocheck
-import __urlFromString from '@coffeekraken/sugar/shared/url/urlFromString';
-/**
- * @name              menuTag
- * @namespace           shared.tags
- * @type              Function
- * @platform            node
- * @status              beta
- *
- * Parse the menu tag
- *
- * @param       {Object}          data        The data object parsed in the string
- * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
- * @return      {Object}                      The formated object
- *
- * @todo      interface
- * @todo      doc
- *
- * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var menu_exports = {};
+__export(menu_exports, {
+  default: () => menu_default
+});
+module.exports = __toCommonJS(menu_exports);
+var import_urlFromString = __toESM(require("@coffeekraken/sugar/shared/url/urlFromString"), 1);
 function menuTag(data, blockSettings) {
-    if (data && data.value && typeof data.value === 'string') {
-        const parts = data.value.split(/\s{2,20000}/).map((l) => l.trim());
-        let slug;
-        if (parts.length > 1) {
-            slug = parts[1];
-        }
-        else {
-            slug = parts[0].split('/').map((l) => {
-                return __urlFromString(l);
-            });
-        }
-        return {
-            tree: parts[0].split('/').map((l) => l.trim()),
-            slug,
-        };
+  if (data && data.value && typeof data.value === "string") {
+    const parts = data.value.split(/\s{2,20000}/).map((l) => l.trim());
+    let slug;
+    if (parts.length > 1) {
+      slug = parts[1];
+    } else {
+      slug = parts[0].split("/").map((l) => {
+        return (0, import_urlFromString.default)(l);
+      });
     }
-    return data.value;
+    return {
+      tree: parts[0].split("/").map((l) => l.trim()),
+      slug
+    };
+  }
+  return data.value;
 }
-export default menuTag;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWVudS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm1lbnUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLE9BQU8sZUFBZSxNQUFNLDhDQUE4QyxDQUFDO0FBRTNFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxTQUFTLE9BQU8sQ0FBQyxJQUFJLEVBQUUsYUFBYTtJQUNoQyxJQUFJLElBQUksSUFBSSxJQUFJLENBQUMsS0FBSyxJQUFJLE9BQU8sSUFBSSxDQUFDLEtBQUssS0FBSyxRQUFRLEVBQUU7UUFDdEQsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsYUFBYSxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQztRQUVuRSxJQUFJLElBQUksQ0FBQztRQUVULElBQUksS0FBSyxDQUFDLE1BQU0sR0FBRyxDQUFDLEVBQUU7WUFDbEIsSUFBSSxHQUFHLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUNuQjthQUFNO1lBQ0gsSUFBSSxHQUFHLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUU7Z0JBQ2pDLE9BQU8sZUFBZSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQzlCLENBQUMsQ0FBQyxDQUFDO1NBQ047UUFFRCxPQUFPO1lBQ0gsSUFBSSxFQUFFLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUM7WUFDOUMsSUFBSTtTQUNQLENBQUM7S0FDTDtJQUNELE9BQU8sSUFBSSxDQUFDLEtBQUssQ0FBQztBQUN0QixDQUFDO0FBQ0QsZUFBZSxPQUFPLENBQUMifQ==
+var menu_default = menuTag;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

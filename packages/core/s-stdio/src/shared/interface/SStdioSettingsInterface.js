@@ -1,44 +1,52 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SStdioSettingsInterface
- * @namespace           shared.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             js
- *
- * This class represent the interface that describe SStdio settings
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SStdioSettingsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            filter: {
-                description: 'Specify a function that will be used to filter the logs. It will take the log object as parameter and MUST return a boolean.',
-                type: 'Function'
-            },
-            processor: {
-                description: 'Specify a function that will be used to process the logs. It will take the log object and MUST return it, updated or not...',
-                type: 'Function'
-            },
-            defaultLogObj: {
-                description: 'Specify a default log object that will be used as base for each received logs',
-                type: 'Object',
-                default: {}
-            },
-            defaultAskObj: {
-                description: 'Specify a default ask object that will be used as base for each received questions (ask)',
-                type: 'Object',
-                default: {}
-            }
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SStdioSettingsInterface_exports = {};
+__export(SStdioSettingsInterface_exports, {
+  default: () => SStdioSettingsInterface
+});
+module.exports = __toCommonJS(SStdioSettingsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SStdioSettingsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      filter: {
+        description: "Specify a function that will be used to filter the logs. It will take the log object as parameter and MUST return a boolean.",
+        type: "Function"
+      },
+      processor: {
+        description: "Specify a function that will be used to process the logs. It will take the log object and MUST return it, updated or not...",
+        type: "Function"
+      },
+      defaultLogObj: {
+        description: "Specify a default log object that will be used as base for each received logs",
+        type: "Object",
+        default: {}
+      },
+      defaultAskObj: {
+        description: "Specify a default ask object that will be used as base for each received questions (ask)",
+        type: "Object",
+        default: {}
+      }
+    };
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N0ZGlvU2V0dGluZ3NJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTU3RkaW9TZXR0aW5nc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFFSCxNQUFNLENBQUMsT0FBTyxPQUFPLHVCQUF3QixTQUFRLFlBQVk7SUFDN0QsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILE1BQU0sRUFBRTtnQkFDSixXQUFXLEVBQUUsOEhBQThIO2dCQUMzSSxJQUFJLEVBQUUsVUFBVTthQUNuQjtZQUNELFNBQVMsRUFBRTtnQkFDUCxXQUFXLEVBQUUsNkhBQTZIO2dCQUMxSSxJQUFJLEVBQUUsVUFBVTthQUNuQjtZQUNELGFBQWEsRUFBRTtnQkFDWCxXQUFXLEVBQUUsK0VBQStFO2dCQUM1RixJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsRUFBRTthQUNkO1lBQ0QsYUFBYSxFQUFFO2dCQUNYLFdBQVcsRUFBRSwwRkFBMEY7Z0JBQ3ZHLElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSxFQUFFO2FBQ2Q7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

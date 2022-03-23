@@ -1,64 +1,90 @@
-import __SInterface from '@coffeekraken/s-interface';
-class postcssSugarPluginStateOutlineWhenMixinInterface extends __SInterface {
-    static get _definition() {
-        return {
-            when: {
-                type: 'Array<String>',
-                values: ['hover', 'focus', 'always'],
-                default: ['focus'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var outlineWhen_exports = {};
+__export(outlineWhen_exports, {
+  default: () => outlineWhen_default,
+  interface: () => postcssSugarPluginStateOutlineWhenMixinInterface
+});
+module.exports = __toCommonJS(outlineWhen_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginStateOutlineWhenMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      when: {
+        type: "Array<String>",
+        values: ["hover", "focus", "always"],
+        default: ["focus"]
+      }
+    };
+  }
 }
-export { postcssSugarPluginStateOutlineWhenMixinInterface as interface };
-/**
- * @name           outline
- * @namespace      node.mixins.outline
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin allows you to apply a nice outline on any HTMLElement.
- * This outline will be display on hover and focus by default but can be displayed
- * always by passing the `on` parameter to `always` like so `@sugar.outline(always)`
- *
- *
- * @return      {Css}         The generated css
- *
- * @example         postcss
- * .myCoolItem {
- *      @sugar.outline();
- * }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ when: ['focus'] }, (params !== null && params !== void 0 ? params : {}));
-    const vars = [];
-    if (finalParams.when.indexOf('focus') !== -1) {
-        vars.push(`
+function outlineWhen_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    when: ["focus"]
+  }, params != null ? params : {});
+  const vars = [];
+  if (finalParams.when.indexOf("focus") !== -1) {
+    vars.push(`
             &:focus-visible {
                 &:not(:hover):not(:active) {
                     @sugar.outline;
                 }
             }
         `);
-    }
-    if (finalParams.when.indexOf('hover') !== -1) {
-        vars.push(`
+  }
+  if (finalParams.when.indexOf("hover") !== -1) {
+    vars.push(`
                 &:hover {
                     @sugar.outline;
                 }
             `);
-    }
-    if (finalParams.when.indexOf('always') !== -1) {
-        vars.push(`
+  }
+  if (finalParams.when.indexOf("always") !== -1) {
+    vars.push(`
            & {
                 @sugar.outline;
             }
         `);
-    }
-    return vars;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib3V0bGluZVdoZW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJvdXRsaW5lV2hlbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRCxNQUFNLGdEQUFpRCxTQUFRLFlBQVk7SUFDdkUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJLEVBQUUsZUFBZTtnQkFDckIsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLE9BQU8sRUFBRSxRQUFRLENBQUM7Z0JBQ3BDLE9BQU8sRUFBRSxDQUFDLE9BQU8sQ0FBQzthQUNyQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDRCxPQUFPLEVBQUUsZ0RBQWdELElBQUksU0FBUyxFQUFFLENBQUM7QUFNekU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsR0FBRyxnQkFDaEIsSUFBSSxFQUFFLENBQUMsT0FBTyxDQUFDLElBQ1osQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztTQU1ULENBQUMsQ0FBQztLQUNOO0lBRUQsSUFBSSxXQUFXLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O2FBSUwsQ0FBQyxDQUFDO0tBQ1Y7SUFFRCxJQUFJLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzNDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7U0FJVCxDQUFDLENBQUM7S0FDTjtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

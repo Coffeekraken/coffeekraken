@@ -1,32 +1,59 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __faker from 'faker';
-/**
- * @name           classes
- * @namespace      node.mixins.display
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the display helper classes like s-display:block, etc...
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.display.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginDisplayClassesInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginDisplayClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_faker = __toESM(require("faker"));
+class postcssSugarPluginDisplayClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginDisplayClassesInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const vars = new CssVars();
-    vars.comment(() => `
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const vars = new CssVars();
+  vars.comment(() => `
       /**
         * @name          Display
         * @namespace          sugar.css.helpers
@@ -54,65 +81,65 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example    html      Block
         *   <div class="s-display:block">
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
         *   </div>
         * 
         * @example    html      Inline-block
         *   <div class="s-display:inline-block">
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
         *   </div>
         * 
         * @example   html      Contents
         *   <div class="s-display:contents">
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
         *   </div>
         * 
         * @example          html      Flex 
         *   <div class="s-display:flex">
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
         *   </div>
         * 
         * @example          html      Grid
         *   <div class="s-display:grid">
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
         *   </div>
         * 
         * @example          html      Inline-flex
         *   <div class="s-display:inline-flex">
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
         *   </div>
         * 
         * @example         html      Inline-grid
         *   <div class="s-display:inline-grid">
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
         *   </div>
         * 
         * @example     html      None
         *   <div class="s-display:none">
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
-        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
         *   </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    vars.comment(() => `
+  vars.comment(() => `
         
       /**
        * @name            s-display:block
@@ -124,7 +151,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * This class allows you to apply the value "<yellow>block</yellow>" to the display property on any HTMLElement
        * 
        * @example     html
-       * <div class="s-display\:block">
+       * <div class="s-display:block">
        *  Hello world
        * </div>
        * 
@@ -136,7 +163,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           display: block !important;
       }
     `);
-    vars.comment(() => `
+  vars.comment(() => `
       /**
        * @name            s-display:inline-block
        * @namespace       sugar.css.display
@@ -147,7 +174,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * This class allows you to apply the value "<yellow>inline-block</yellow>" to the display property on any HTMLElement
        * 
        * @example     html
-       * <div class="s-display\:inline-block">
+       * <div class="s-display:inline-block">
        *  Hello world
        * </div>
        * 
@@ -159,7 +186,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           display: inline-block !important;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
         /**
          * @name            s-display:contents
          * @namespace       sugar.css.display
@@ -170,7 +197,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * This class allows you to apply the value "<yellow>contents</yellow>" to the display property on any HTMLElement
          * 
          * @example     html
-         * <div class="s-display\:contents">
+         * <div class="s-display:contents">
          *  Hello world
          * </div>
          * 
@@ -182,7 +209,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           display: contents !important;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
         /**
          * @name            s-display:flex
          * @namespace       sugar.css.display
@@ -193,7 +220,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * This class allows you to apply the value "<yellow>flex</yellow>" to the display property on any HTMLElement
          * 
          * @example     html
-         * <div class="s-display\:flex">
+         * <div class="s-display:flex">
          *  Hello world
          * </div>
          * 
@@ -205,7 +232,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           display: flex !important;
       }
     `);
-    vars.comment(() => `
+  vars.comment(() => `
       /**
        * @name            s-display:grid
        * @namespace       sugar.css.display
@@ -216,7 +243,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * This class allows you to apply the value "<yellow>grid</yellow>" to the display property on any HTMLElement
        * 
        * @example     html
-       * <div class="s-display\:grid">
+       * <div class="s-display:grid">
        *  Hello world
        * </div>
        * 
@@ -228,7 +255,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           display: grid !important;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
         /**
          * @name            s-display:inline-flex
          * @namespace       sugar.css.display
@@ -239,7 +266,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * This class allows you to apply the value "<yellow>inline-flex</yellow>" to the display property on any HTMLElement
          * 
          * @example     html
-         * <div class="s-display\:inline-flex">
+         * <div class="s-display:inline-flex">
          *  Hello world
          * </div>
          * 
@@ -251,7 +278,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           display: inline-flex !important;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
         /**
          * @name            s-display:inline-grid
          * @namespace       sugar.css.display
@@ -262,7 +289,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * This class allows you to apply the value "<yellow>inline-grid</yellow>" to the display property on any HTMLElement
          * 
          * @example     html
-         * <div class="s-display\:inline-grid">
+         * <div class="s-display:inline-grid">
          *  Hello world
          * </div>
          * 
@@ -274,7 +301,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           display: inline-grid !important;
       }
       `);
-    vars.comment(() => `
+  vars.comment(() => `
         /**
          * @name            s-display:none
          * @namespace       sugar.css.display
@@ -285,7 +312,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * This class allows you to apply the value "<yellow>none</yellow>" to the display property on any HTMLElement
          * 
          * @example     html
-         * <div class="s-display\:none">
+         * <div class="s-display:none">
          *  Hello world
          * </div>
          * 
@@ -297,6 +324,9 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           display: none !important;
       }
       `);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSx5Q0FBMEMsU0FBUSxZQUFZO0lBQ2hFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHlDQUF5QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWxFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O29DQTRCc0IsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7b0NBS3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7O29DQUt2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7OztvQ0FLdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7b0NBS3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7O29DQUt2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7OztvQ0FLdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7b0NBS3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7OztLQU10RCxDQUNBLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBbUJULENBQ0EsQ0FBQyxJQUFJLENBQUM7Ozs7S0FJTixDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7S0FrQlQsQ0FDQSxDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQWtCVCxDQUNBLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBa0JULENBQ0EsQ0FBQyxJQUFJLENBQUM7Ozs7S0FJTixDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FrQlAsQ0FDRixDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQWtCVCxDQUNBLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBa0JULENBQ0EsQ0FBQyxJQUFJLENBQUM7Ozs7T0FJSixDQUFDLENBQUM7SUFFTCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FrQkwsQ0FDSixDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

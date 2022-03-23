@@ -1,51 +1,40 @@
-// @ts-nocheck
-import __linkLoaded from '../load/linkLoaded';
-/**
- * @name      whenStylesheetsReady
- * @namespace            js.dom.detect
- * @type      Function
- * @async
- * @platform          js
- * @status        beta
- *
- * Wait until all the HTMLLinkElement's are properly loaded
- *
- * @feature       Async promise based
- * @feature       Callback support
- * @feature       Multiple stylesheets elements listening
- *
- * @param 		{Array}<HTMLLinkElement> 		[links=null] 			The HTMLLinkElement tags to process. If not passed, take the local stylesheets links
- * @param 		{Function} 						[cb=null] 		An optional callback function to call when all the links are loaded
- * @return 		{Promise} 										The promise that will be resolved when all the links are loaded
- *
- * @todo      interface
- * @todo      docindex.ts
- * @todo      tests
- *
- * @example 	js
- * import whenStylesheetsReady from '@coffeekraken/sugar/js/dom/whenStylesheetsReady'
- * whenStylesheetsReady([
- * 		myHTMLLinkElement1,
- * 		myHTMLLinkElement2
- * ]).then(() => {
- * 		// do something when all the links are loaded
- * });
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function whenStylesheetsReady(links = null, cb = null) {
-    if (!links) {
-        links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
-    }
-    const promises = [];
-    [].forEach.call(neededStylesheetsStack, ($link) => {
-        promises.push(__linkLoaded($link));
-    });
-    const allPromises = Promise.all(promises);
-    allPromises.then(() => {
-        cb === null || cb === void 0 ? void 0 : cb();
-    });
-    return allPromises;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var whenStylesheetsReady_exports = {};
+__export(whenStylesheetsReady_exports, {
+  default: () => whenStylesheetsReady
+});
+module.exports = __toCommonJS(whenStylesheetsReady_exports);
+var import_linkLoaded = __toESM(require("../load/linkLoaded"), 1);
+function whenStylesheetsReady(links = null, cb = null) {
+  if (!links) {
+    links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
+  }
+  const promises = [];
+  [].forEach.call(neededStylesheetsStack, ($link) => {
+    promises.push((0, import_linkLoaded.default)($link));
+  });
+  const allPromises = Promise.all(promises);
+  allPromises.then(() => {
+    cb == null ? void 0 : cb();
+  });
+  return allPromises;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2hlblN0eWxlc2hlZXRzUmVhZHkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3aGVuU3R5bGVzaGVldHNSZWFkeS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxZQUFZLE1BQU0sb0JBQW9CLENBQUM7QUFDOUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWlDRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsb0JBQW9CLENBQUMsUUFBMkIsSUFBSSxFQUFFLEtBQWUsSUFBSTtJQUM3RixJQUFJLENBQUMsS0FBSyxFQUFFO1FBQ1IsS0FBSyxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLGdCQUFnQixDQUFDLHdCQUF3QixDQUFDLENBQUMsQ0FBQztLQUMzRTtJQUNELE1BQU0sUUFBUSxHQUFHLEVBQUUsQ0FBQztJQUNwQixFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxzQkFBc0IsRUFBRSxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQzlDLFFBQVEsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7SUFDdkMsQ0FBQyxDQUFDLENBQUM7SUFDSCxNQUFNLFdBQVcsR0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFO1FBQ2xCLEVBQUUsYUFBRixFQUFFLHVCQUFGLEVBQUUsRUFBSSxDQUFDO0lBQ1gsQ0FBQyxDQUFDLENBQUM7SUFDSCxPQUFPLFdBQVcsQ0FBQztBQUN2QixDQUFDIn0=

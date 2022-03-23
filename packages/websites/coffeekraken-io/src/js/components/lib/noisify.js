@@ -1,37 +1,53 @@
-// @ts-nocheck
-export default function noiseCanvas(canvasSlt, noiseFn, config = {}) {
-    const canvas = typeof canvasSlt === 'string' && document
-        ? document.querySelector(canvasSlt)
-        : canvasSlt;
-    const { width, height } = canvas;
-    const ctx = canvas.getContext('2d');
-    const pixelData = new Uint8ClampedArray(width * height * 4);
-    let functs = [];
-    let isRGBA = false;
-    if (typeof noiseFn === 'object') {
-        isRGBA = true;
-        for (let i = 0; i < 4; i++) {
-            if (noiseFn[i]) {
-                functs[i] = (x, y) => (255 * (noiseFn[i](x, y) + 1)) / 2;
-            }
-            else {
-                functs[i] = () => 255;
-            }
-        }
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var noisify_exports = {};
+__export(noisify_exports, {
+  default: () => noiseCanvas
+});
+module.exports = __toCommonJS(noisify_exports);
+function noiseCanvas(canvasSlt, noiseFn, config = {}) {
+  const canvas = typeof canvasSlt === "string" && document ? document.querySelector(canvasSlt) : canvasSlt;
+  const { width, height } = canvas;
+  const ctx = canvas.getContext("2d");
+  const pixelData = new Uint8ClampedArray(width * height * 4);
+  let functs = [];
+  let isRGBA = false;
+  if (typeof noiseFn === "object") {
+    isRGBA = true;
+    for (let i = 0; i < 4; i++) {
+      if (noiseFn[i]) {
+        functs[i] = (x, y) => 255 * (noiseFn[i](x, y) + 1) / 2;
+      } else {
+        functs[i] = () => 255;
+      }
     }
-    for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-            let pixel;
-            if (isRGBA) {
-                pixel = new Uint8Array(functs.map((fn) => fn(x, y)));
-            }
-            else {
-                const n = (255 * (noiseFn(x, y) + 1)) / 2;
-                pixel = new Uint8Array([n, n, n, 255]);
-            }
-            pixelData.set(pixel, x * 4 + y * 4 * width);
-        }
+  }
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      let pixel;
+      if (isRGBA) {
+        pixel = new Uint8Array(functs.map((fn) => fn(x, y)));
+      } else {
+        const n = 255 * (noiseFn(x, y) + 1) / 2;
+        pixel = new Uint8Array([n, n, n, 255]);
+      }
+      pixelData.set(pixel, x * 4 + y * 4 * width);
     }
-    ctx.putImageData(new ImageData(pixelData, width, height), 0, 0);
+  }
+  ctx.putImageData(new ImageData(pixelData, width, height), 0, 0);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibm9pc2lmeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm5vaXNpZnkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLE1BQU0sQ0FBQyxPQUFPLFVBQVUsV0FBVyxDQUFDLFNBQVMsRUFBRSxPQUFPLEVBQUUsTUFBTSxHQUFHLEVBQUU7SUFDL0QsTUFBTSxNQUFNLEdBQ1IsT0FBTyxTQUFTLEtBQUssUUFBUSxJQUFJLFFBQVE7UUFDckMsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsU0FBUyxDQUFDO1FBQ25DLENBQUMsQ0FBQyxTQUFTLENBQUM7SUFDcEIsTUFBTSxFQUFFLEtBQUssRUFBRSxNQUFNLEVBQUUsR0FBRyxNQUFNLENBQUM7SUFDakMsTUFBTSxHQUFHLEdBQUcsTUFBTSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNwQyxNQUFNLFNBQVMsR0FBRyxJQUFJLGlCQUFpQixDQUFDLEtBQUssR0FBRyxNQUFNLEdBQUcsQ0FBQyxDQUFDLENBQUM7SUFFNUQsSUFBSSxNQUFNLEdBQUcsRUFBRSxDQUFDO0lBQ2hCLElBQUksTUFBTSxHQUFHLEtBQUssQ0FBQztJQUVuQixJQUFJLE9BQU8sT0FBTyxLQUFLLFFBQVEsRUFBRTtRQUM3QixNQUFNLEdBQUcsSUFBSSxDQUFDO1FBRWQsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUN4QixJQUFJLE9BQU8sQ0FBQyxDQUFDLENBQUMsRUFBRTtnQkFDWixNQUFNLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLEdBQUcsR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUM7YUFDNUQ7aUJBQU07Z0JBQ0gsTUFBTSxDQUFDLENBQUMsQ0FBQyxHQUFHLEdBQUcsRUFBRSxDQUFDLEdBQUcsQ0FBQzthQUN6QjtTQUNKO0tBQ0o7SUFFRCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1FBQzdCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxLQUFLLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDNUIsSUFBSSxLQUFLLENBQUM7WUFFVixJQUFJLE1BQU0sRUFBRTtnQkFDUixLQUFLLEdBQUcsSUFBSSxVQUFVLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLEVBQUUsRUFBRSxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDeEQ7aUJBQU07Z0JBQ0gsTUFBTSxDQUFDLEdBQUcsQ0FBQyxHQUFHLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDO2dCQUMxQyxLQUFLLEdBQUcsSUFBSSxVQUFVLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxHQUFHLENBQUMsQ0FBQyxDQUFDO2FBQzFDO1lBRUQsU0FBUyxDQUFDLEdBQUcsQ0FBQyxLQUFLLEVBQUUsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxHQUFHLEtBQUssQ0FBQyxDQUFDO1NBQy9DO0tBQ0o7SUFFRCxHQUFHLENBQUMsWUFBWSxDQUFDLElBQUksU0FBUyxDQUFDLFNBQVMsRUFBRSxLQUFLLEVBQUUsTUFBTSxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDO0FBQ3BFLENBQUMifQ==

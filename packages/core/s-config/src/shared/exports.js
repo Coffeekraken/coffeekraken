@@ -1,6 +1,33 @@
-import __SConfig from './SConfig';
-import __SConfigAdapter from './adapters/SConfigAdapter';
-export { __SConfigAdapter as SConfigAdapter };
-// export * from './SConfig';
-export default __SConfig;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxTQUFTLE1BQU0sV0FBVyxDQUFDO0FBQ2xDLE9BQU8sZ0JBQWdCLE1BQU0sMkJBQTJCLENBQUM7QUFDekQsT0FBTyxFQUFFLGdCQUFnQixJQUFJLGNBQWMsRUFBRSxDQUFDO0FBRTlDLDZCQUE2QjtBQUM3QixlQUFlLFNBQVMsQ0FBQyJ9
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var exports_exports = {};
+__export(exports_exports, {
+  SConfigAdapter: () => import_SConfigAdapter.default,
+  default: () => exports_default
+});
+module.exports = __toCommonJS(exports_exports);
+var import_SConfig = __toESM(require("./SConfig"), 1);
+var import_SConfigAdapter = __toESM(require("./adapters/SConfigAdapter"), 1);
+var exports_default = import_SConfig.default;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  SConfigAdapter
+});

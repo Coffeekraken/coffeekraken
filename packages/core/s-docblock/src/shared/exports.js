@@ -1,7 +1,36 @@
-import SDocblock from './SDocblock';
-import SDocblockBlock from './SDocblockBlock';
-export * from './SDocblock';
-export * from './SDocblockBlock';
-export { SDocblockBlock };
-export default SDocblock;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxTQUFTLE1BQU0sYUFBYSxDQUFDO0FBQ3BDLE9BQU8sY0FBYyxNQUFNLGtCQUFrQixDQUFDO0FBRTlDLGNBQWMsYUFBYSxDQUFDO0FBQzVCLGNBQWMsa0JBQWtCLENBQUM7QUFFakMsT0FBTyxFQUFFLGNBQWMsRUFBRSxDQUFDO0FBQzFCLGVBQWUsU0FBUyxDQUFDIn0=
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var exports_exports = {};
+__export(exports_exports, {
+  SDocblockBlock: () => import_SDocblockBlock.default,
+  default: () => exports_default
+});
+module.exports = __toCommonJS(exports_exports);
+var import_SDocblock = __toESM(require("./SDocblock"), 1);
+var import_SDocblockBlock = __toESM(require("./SDocblockBlock"), 1);
+__reExport(exports_exports, require("./SDocblock"), module.exports);
+__reExport(exports_exports, require("./SDocblockBlock"), module.exports);
+var exports_default = import_SDocblock.default;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  SDocblockBlock
+});

@@ -1,27 +1,68 @@
-import __isGlob from '../../shared/is/glob';
-import __isPath from '../../shared/is/path';
-import __path from 'path';
-import __packageRootDir from './packageRootDir';
-function absolute(path, from = __packageRootDir(), settings = {}) {
-    settings = Object.assign({ glob: true }, settings);
-    const isArray = Array.isArray(path);
-    if (!isArray)
-        path = [path];
-    path = path.map((p) => {
-        if (__path.isAbsolute(p))
-            return p;
-        if (__isGlob(p)) {
-            if (settings.glob)
-                return __path.resolve(from, p);
-            return p;
-        }
-        else if (__isPath(p))
-            return __path.resolve(from, p);
-        return p;
-    });
-    if (isArray)
-        return path;
-    return path[0];
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var absolute_exports = {};
+__export(absolute_exports, {
+  default: () => absolute_default
+});
+module.exports = __toCommonJS(absolute_exports);
+var import_glob = __toESM(require("../../shared/is/glob"), 1);
+var import_path = __toESM(require("../../shared/is/path"), 1);
+var import_path2 = __toESM(require("path"), 1);
+var import_packageRootDir = __toESM(require("./packageRootDir"), 1);
+function absolute(path, from = (0, import_packageRootDir.default)(), settings = {}) {
+  settings = __spreadValues({
+    glob: true
+  }, settings);
+  const isArray = Array.isArray(path);
+  if (!isArray)
+    path = [path];
+  path = path.map((p) => {
+    if (import_path2.default.isAbsolute(p))
+      return p;
+    if ((0, import_glob.default)(p)) {
+      if (settings.glob)
+        return import_path2.default.resolve(from, p);
+      return p;
+    } else if ((0, import_path.default)(p))
+      return import_path2.default.resolve(from, p);
+    return p;
+  });
+  if (isArray)
+    return path;
+  return path[0];
 }
-export default absolute;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWJzb2x1dGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhYnNvbHV0ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFFBQVEsTUFBTSxzQkFBc0IsQ0FBQztBQUM1QyxPQUFPLFFBQVEsTUFBTSxzQkFBc0IsQ0FBQztBQUM1QyxPQUFPLE1BQU0sTUFBTSxNQUFNLENBQUM7QUFDMUIsT0FBTyxnQkFBZ0IsTUFBTSxrQkFBa0IsQ0FBQztBQW1DaEQsU0FBUyxRQUFRLENBQ2IsSUFBSSxFQUNKLElBQUksR0FBRyxnQkFBZ0IsRUFBRSxFQUN6QixXQUE4QixFQUFFO0lBRWhDLFFBQVEsbUJBQ0osSUFBSSxFQUFFLElBQUksSUFDUCxRQUFRLENBQ2QsQ0FBQztJQUNGLE1BQU0sT0FBTyxHQUFHLEtBQUssQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDcEMsSUFBSSxDQUFDLE9BQU87UUFBRSxJQUFJLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUU1QixJQUFJLEdBQUcsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1FBQ2xCLElBQUksTUFBTSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUM7WUFBRSxPQUFPLENBQUMsQ0FBQztRQUNuQyxJQUFJLFFBQVEsQ0FBQyxDQUFDLENBQUMsRUFBRTtZQUNiLElBQUksUUFBUSxDQUFDLElBQUk7Z0JBQUUsT0FBTyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztZQUNsRCxPQUFPLENBQUMsQ0FBQztTQUNaO2FBQU0sSUFBSSxRQUFRLENBQUMsQ0FBQyxDQUFDO1lBQUUsT0FBTyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztRQUN2RCxPQUFPLENBQUMsQ0FBQztJQUNiLENBQUMsQ0FBQyxDQUFDO0lBQ0gsSUFBSSxPQUFPO1FBQUUsT0FBTyxJQUFJLENBQUM7SUFDekIsT0FBTyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDbkIsQ0FBQztBQUVELGVBQWUsUUFBUSxDQUFDIn0=
+var absolute_default = absolute;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

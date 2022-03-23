@@ -99,14 +99,15 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
         if (!groupObj || this._lastLogObj?.group !== group) {
             // @ts-ignore
             groupObj = {
-                color: __getColorFor(group)
+                color: __getColorFor(group),
             };
-            groupObj.prefix = __parseHtml(`<${groupObj.color}>█</${groupObj.color}>`);
+            groupObj.prefix = __parseHtml(
+                `<${groupObj.color}>█</${groupObj.color}>`,
+            );
             // @ts-ignore
             this._loggedGroups[group] = groupObj;
         }
         return groupObj;
-
     }
 
     /**
@@ -146,40 +147,59 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
         if (logObj.group !== this._lastLogObj?.group) {
             console.log(groupObj.prefix);
             // @ts-ignore
-            console.log(`<bg${__upperFirst(groupObj.color)}><black> ${logObj.group} </black></bg${__upperFirst(groupObj.color)}><${groupObj.color}>${'-'.repeat(process.stdout.columns - 2 - logObj.group?.length ?? 0)}</${groupObj.color}>`);
+            console.log(
+                `<bg${__upperFirst(groupObj.color)}><black> ${
+                    logObj.group
+                } </black></bg${__upperFirst(groupObj.color)}><${
+                    groupObj.color
+                }>${'-'.repeat(
+                    process.stdout.columns - 2 - logObj.group?.length ?? 0,
+                )}</${groupObj.color}>`,
+            );
             console.log(groupObj.prefix);
         }
 
-        if (logObj.clear && this._lastLogObj?.type !== __SLog.TYPE_WARN && this._lastLogObj?.type !== __SLog.TYPE_ERROR) {
+        if (
+            logObj.clear &&
+            this._lastLogObj?.type !== __SLog.TYPE_WARN &&
+            this._lastLogObj?.type !== __SLog.TYPE_ERROR
+        ) {
             if (typeof logObj.clear === 'number') {
                 // @ts-ignore
-                const toClear = this._lastLogLinesCountStack.slice(logObj.clear * -1).reduce((a, b) => a + b);
-                process.stdout.moveCursor(0, toClear * -1) // up one line
+                const toClear = this._lastLogLinesCountStack
+                    .slice(logObj.clear * -1)
+                    .reduce((a, b) => a + b);
+                process.stdout.moveCursor(0, toClear * -1); // up one line
                 process.stdout.clearScreenDown();
                 // for (let i = 0; i < toClear; i++) {
                 //     process.stdout.clearLine(1); // clear current line
                 // }
             } else {
-                process.stdout.moveCursor(0, this._lastLogLinesCountStack.slice(-1)[0] * -1) // up one line
-                process.stdout.clearLine(1) // from cursor to end
+                process.stdout.moveCursor(
+                    0,
+                    this._lastLogLinesCountStack.slice(-1)[0] * -1,
+                ); // up one line
+                process.stdout.clearLine(1); // from cursor to end
             }
         }
 
         let logLinesCount = 0;
 
         if (logObj.margin?.top) {
-            for(let i=0; i<logObj.margin.top; i++) {
+            for (let i = 0; i < logObj.margin.top; i++) {
                 console.log(`<${groupObj.color}>█</${groupObj.color}>`);
             }
             logLinesCount += logObj.margin.top;
         }
 
-        const log = `<${groupObj.color}>█</${groupObj.color}>   ${__parseHtml(component.render(logObj, this.basicStdioSettings))}`;
+        const log = `<${groupObj.color}>█</${groupObj.color}>   ${__parseHtml(
+            component.render(logObj, this.basicStdioSettings),
+        )}`;
         logLinesCount += __countLines(log);
         console.log(log);
 
         if (logObj.margin?.bottom) {
-            for(let i=0; i<logObj.margin.bottom; i++) {
+            for (let i = 0; i < logObj.margin.bottom; i++) {
                 console.log(`<${groupObj.color}>█</${groupObj.color}>`);
             }
             // @ts-ignore
@@ -191,12 +211,8 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
         this._lastLogObj = logObj;
     }
 
-    _addPrefix(string: string): string {
-
-    }
-    _removePrefix(string: string): string {
-
-    }
+    _addPrefix(string: string): string {}
+    _removePrefix(string: string): string {}
 
     _getPromptClass(BasePromptClass: any): any {
         return class MyPrompt extends BasePromptClass {
@@ -205,24 +221,49 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     ...options,
                     format(str) {
                         if (typeof str !== 'string') return str;
-                        return str.replace(`${__parseHtml(`<${this.options.color ?? 'yellow'}>█</${this.options.color ?? 'yellow'}>`)}`, '');
-                    }
+                        return str.replace(
+                            `${__parseHtml(
+                                `<${this.options.color ?? 'yellow'}>█</${
+                                    this.options.color ?? 'yellow'
+                                }>`,
+                            )}`,
+                            '',
+                        );
+                    },
                 });
 
                 if (this.options.choices) {
-                    this.options.choices = this.options.choices?.map(choice => {
-                        return `${__parseHtml(`<${this.options.color ?? 'yellow'}>█</${this.options.color ?? 'yellow'}>`)} ${choice}`;
-                    });
+                    this.options.choices = this.options.choices?.map(
+                        (choice) => {
+                            return `${__parseHtml(
+                                `<${this.options.color ?? 'yellow'}>█</${
+                                    this.options.color ?? 'yellow'
+                                }>`,
+                            )} ${choice}`;
+                        },
+                    );
                 }
 
-
-                this.symbols = this.symb(__clone(this.symbols, {
-                    deep: true
-                }));
+                this.symbols = this.symb(
+                    __clone(this.symbols, {
+                        deep: true,
+                    }),
+                );
             }
             symb(obj) {
                 for (let [key, value] of Object.entries(obj)) {
-                    if (['ellipsis','ellipsisLarge','ellipsisSmall','question','questionFull','questionSmall','pointerSmall'].includes(key)) continue;
+                    if (
+                        [
+                            'ellipsis',
+                            'ellipsisLarge',
+                            'ellipsisSmall',
+                            'question',
+                            'questionFull',
+                            'questionSmall',
+                            'pointerSmall',
+                        ].includes(key)
+                    )
+                        continue;
                     if (value === '›') continue;
                     if (value === '%') continue;
                     if (typeof value !== 'string') {
@@ -233,13 +274,16 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                         obj[key] = __stripAnsi(obj[key]);
                         obj[key] = obj[key].replace(/█\s?/, '');
                     }
-                    obj[key] = `${__parseHtml(`<${this.options.color ?? 'yellow'}>█</${this.options.color ?? 'yellow'}>`)} ${value}`;
+                    obj[key] = `${__parseHtml(
+                        `<${this.options.color ?? 'yellow'}>█</${
+                            this.options.color ?? 'yellow'
+                        }>`,
+                    )} ${value}`;
                 }
                 return obj;
             }
-        }
+        };
     }
-
 
     /**
      * @name          _ask
@@ -273,7 +317,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
             switch (askObj.type) {
                 case 'select':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.Select))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.Select,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                     });
@@ -281,7 +327,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     break;
                 case 'autocomplete':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.AutoComplete))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.AutoComplete,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                         choices: askObj.choices,
@@ -290,7 +338,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     break;
                 case 'confirm':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.Confirm))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.Confirm,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                     });
@@ -298,7 +348,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     break;
                 case 'form':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.Form))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.Form,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                     });
@@ -306,21 +358,27 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     break;
                 case 'input':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.Input))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.Input,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                         validate(value) {
                             if (!askObj.pattern) return true;
-                            const pattern = Array.isArray(askObj.pattern) ? askObj.pattern : [askObj.pattern];
+                            const pattern = Array.isArray(askObj.pattern)
+                                ? askObj.pattern
+                                : [askObj.pattern];
                             const reg = new RegExp(pattern[0], pattern[1]);
                             return reg.test(value);
-                        }
+                        },
                     });
                     res = await prompt.run();
                     break;
                 case 'secret':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.Secret))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.Secret,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                     });
@@ -328,7 +386,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     break;
                 case 'list':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.List))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.List,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                     });
@@ -336,7 +396,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     break;
                 case 'multiselect':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.MultiSelect))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.MultiSelect,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                     });
@@ -344,7 +406,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     break;
                 case 'number':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.NumberPrompt))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.NumberPrompt,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                     });
@@ -352,7 +416,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     break;
                 case 'password':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.Password))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.Password,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                     });
@@ -360,7 +426,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                     break;
                 case 'toggle':
                     // @ts-ignore
-                    prompt = new (this._getPromptClass(__Enquirer.default.Toggle))({
+                    prompt = new (this._getPromptClass(
+                        __Enquirer.default.Toggle,
+                    ))({
                         ...askObj,
                         color: groupObj.color,
                     });
@@ -377,7 +445,6 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
         });
     }
 }
-
 
 SBasicStdio.registerComponent(__defaultBasicStdioComponent);
 SBasicStdio.registerComponent(__errorBasicStdioComponent);

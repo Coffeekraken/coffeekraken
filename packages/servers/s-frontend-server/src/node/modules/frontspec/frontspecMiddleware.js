@@ -1,55 +1,56 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __SBench from '@coffeekraken/s-bench';
-import __SFrontspec from '@coffeekraken/s-frontspec';
-/**
- * @name            frontspecMiddleware
- * @namespace       sugar.node.server.frontend.middleware
- * @type            Function
- * @status              wip
- *
- * This function describe the middleware that will fetch the ```frontspec.json``` file at the root of
- * your server directory and add it to the template data sended to the rendered view
- *
- * @param           {Object}            req             The request made on the express server
- * @param           {Object}            res             The response object of the express server
- * @param           {Function}          next            The next function to call when the middleware has finished his job
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import express from 'express';
- * import frontspecMiddleware from '@coffeekraken/sugar/server/frontend/middleware/frontspecMiddleware';
- * const server = express();
- * server.use(frontspecMiddleware);
- * server.listen(3000);
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var frontspecMiddleware_exports = {};
+__export(frontspecMiddleware_exports, {
+  default: () => frontspecMiddleware_default
+});
+module.exports = __toCommonJS(frontspecMiddleware_exports);
+var import_s_bench = __toESM(require("@coffeekraken/s-bench"), 1);
+var import_s_frontspec = __toESM(require("@coffeekraken/s-frontspec"), 1);
 function frontspecMiddleware(settings = {}) {
-    return function (req, res, next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const frontspec = new __SFrontspec();
-            if (!res.templateData)
-                res.templateData = {};
-            if (!res.templateData.frontspec)
-                res.templateData.frontspec = {};
-            res.templateData.frontspec = Object.assign(Object.assign({}, (yield frontspec.read())), res.templateData.frontspec);
-            __SBench.step('request', 'frontspecMiddleware');
-            return next();
-        });
-    };
+  return async function(req, res, next) {
+    const frontspec = new import_s_frontspec.default();
+    if (!res.templateData)
+      res.templateData = {};
+    if (!res.templateData.frontspec)
+      res.templateData.frontspec = {};
+    res.templateData.frontspec = __spreadValues(__spreadValues({}, await frontspec.read()), res.templateData.frontspec);
+    import_s_bench.default.step("request", "frontspecMiddleware");
+    return next();
+  };
 }
-export default frontspecMiddleware;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRzcGVjTWlkZGxld2FyZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImZyb250c3BlY01pZGRsZXdhcmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7OztBQUVkLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBSXJEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMsbUJBQW1CLENBQUMsUUFBUSxHQUFHLEVBQUU7SUFDdEMsT0FBTyxVQUFnQixHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUk7O1lBQ2pDLE1BQU0sU0FBUyxHQUFHLElBQUksWUFBWSxFQUFFLENBQUM7WUFFckMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxZQUFZO2dCQUFFLEdBQUcsQ0FBQyxZQUFZLEdBQUcsRUFBRSxDQUFDO1lBQzdDLElBQUksQ0FBQyxHQUFHLENBQUMsWUFBWSxDQUFDLFNBQVM7Z0JBQUUsR0FBRyxDQUFDLFlBQVksQ0FBQyxTQUFTLEdBQUcsRUFBRSxDQUFDO1lBRWpFLEdBQUcsQ0FBQyxZQUFZLENBQUMsU0FBUyxtQ0FDbkIsQ0FBQyxNQUFNLFNBQVMsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxHQUN4QixHQUFHLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FDaEMsQ0FBQztZQUVGLFFBQVEsQ0FBQyxJQUFJLENBQUMsU0FBUyxFQUFFLHFCQUFxQixDQUFDLENBQUM7WUFFaEQsT0FBTyxJQUFJLEVBQUUsQ0FBQztRQUNsQixDQUFDO0tBQUEsQ0FBQztBQUNOLENBQUM7QUFDRCxlQUFlLG1CQUFtQixDQUFDIn0=
+var frontspecMiddleware_default = frontspecMiddleware;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

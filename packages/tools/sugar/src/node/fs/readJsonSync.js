@@ -1,33 +1,40 @@
-import __fs from 'fs';
-/**
- * @name            readJsonSync
- * @namespace       node.fs
- * @type            Function
- * @platform        node
- * @status          beta
- *
- * This function allows you to read a json file
- *
- * @param       {String}           path            The json file path to read
- * @return      {Object}                            The readed json
- *
- * @example         js
- * import readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
- * await readJsonSync('my-cool-json/file.json');
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var readJsonSync_exports = {};
+__export(readJsonSync_exports, {
+  default: () => readJsonSync
+});
+module.exports = __toCommonJS(readJsonSync_exports);
+var import_fs = __toESM(require("fs"), 1);
 const _cache = {};
-export default function readJsonSync(path) {
-    if (_cache[path])
-        return _cache[path];
-    if (!__fs.existsSync(path)) {
-        throw new Error(`<red>[readJsonSync]</red> Sorry but the passed file path "<cyan>${path}</cyan>" does not exists...`);
-    }
-    const jsonStr = __fs.readFileSync(path, 'utf8').toString();
-    const json = JSON.parse(jsonStr);
-    _cache[path] = json;
-    return json;
+function readJsonSync(path) {
+  if (_cache[path])
+    return _cache[path];
+  if (!import_fs.default.existsSync(path)) {
+    throw new Error(`<red>[readJsonSync]</red> Sorry but the passed file path "<cyan>${path}</cyan>" does not exists...`);
+  }
+  const jsonStr = import_fs.default.readFileSync(path, "utf8").toString();
+  const json = JSON.parse(jsonStr);
+  _cache[path] = json;
+  return json;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVhZEpzb25TeW5jLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmVhZEpzb25TeW5jLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUV0Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBRUgsTUFBTSxNQUFNLEdBQUcsRUFBRSxDQUFDO0FBQ2xCLE1BQU0sQ0FBQyxPQUFPLFVBQVUsWUFBWSxDQUFDLElBQVk7SUFDN0MsSUFBSSxNQUFNLENBQUMsSUFBSSxDQUFDO1FBQUUsT0FBTyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUM7SUFFdEMsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLEVBQUU7UUFDeEIsTUFBTSxJQUFJLEtBQUssQ0FDWCxtRUFBbUUsSUFBSSw2QkFBNkIsQ0FDdkcsQ0FBQztLQUNMO0lBQ0QsTUFBTSxPQUFPLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDM0QsTUFBTSxJQUFJLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUNqQyxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsSUFBSSxDQUFDO0lBQ3BCLE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

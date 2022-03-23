@@ -1,32 +1,59 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __faker from 'faker';
-/**
- * @name           classes
- * @namespace      node.mixins.flex
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the flex helper classes like s-flex, s-flex:align-top, etc...
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.flex.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginFlexClassesInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginFlexClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_faker = __toESM(require("faker"));
+class postcssSugarPluginFlexClassesInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginFlexClassesInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const vars = new CssVars();
-    vars.comment(() => `
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const vars = new CssVars();
+  vars.comment(() => `
       /**
         * @name          Flexbox
         * @namespace          sugar.css.helpers
@@ -79,38 +106,38 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html          Simple grid
         *   <div class="s-flex:row:wrap s-radius">
-        *     <div class="s-bg:main s-width:50 s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-width:50 s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-width:50 s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:info s-width:50 s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:main s-width:50 s-p:30">${import_faker.default.name.findName()}</div>
+        *     <div class="s-bg:accent s-width:50 s-p:30">${import_faker.default.name.findName()}</div>
+        *     <div class="s-bg:complementary s-width:50 s-p:30">${import_faker.default.name.findName()}</div>
+        *     <div class="s-bg:info s-width:50 s-p:30">${import_faker.default.name.findName()}</div>
         *   </div>
         * 
         * @example        html          Grow
         *   <div class="s-flex:row:nowrap s-radius">
-        *     <div class="s-flex-item:grow s-bg:main s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-flex-item:grow s-bg:main s-p:30">${import_faker.default.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:30">${import_faker.default.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:30">${import_faker.default.name.findName()}</div>
         *   </div>
         * 
         * @example      html          Orders
         *   <div class="s-flex:row:nowrap s-radius">
-        *     <div class="s-flex-item:order-3 s-bg:main s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-flex-item:order-3 s-bg:main s-p:30">${import_faker.default.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:30">${import_faker.default.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:30">${import_faker.default.name.findName()}</div>
         *   </div>
         * 
         * @example          html            Aligns
         *   <div class="s-flex:row:nowrap:align-end s-radius">
-        *     <div class="s-bg:main s-p:30">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:main s-p:30">${import_faker.default.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:30">${import_faker.default.name.findName()}<br />${import_faker.default.name.findName()}<br />${import_faker.default.name.findName()}<br />${import_faker.default.name.findName()}<br />${import_faker.default.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:30">${import_faker.default.name.findName()}</div>
         *   </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -126,7 +153,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             .s-flex {
                 display: flex;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:row
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -136,13 +163,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the flex-direction to row
             * 
             * @example        html
-            * <div class="s-flex\:row"></div>
+            * <div class="s-flex:row"></div>
             */
         `).code(`
             .s-flex--row {
                 flex-direction: row;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:row-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -152,13 +179,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the flex-direction to row-reverse
             * 
             * @example        html
-            * <div class="s-flex\:row-reverse"></div>
+            * <div class="s-flex:row-reverse"></div>
             */
         `).code(`
             .s-flex--row-reverse {
                 flex-direction: row-reverse;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:column
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -168,13 +195,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the flex-direction to column
             * 
             * @example        html
-            * <div class="s-flex\:column"></div>
+            * <div class="s-flex:column"></div>
             */
         `).code(`
             .s-flex--column {
                 flex-direction: column;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:column-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -184,13 +211,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the flex-direction to column-reverse
             * 
             * @example        html
-            * <div class="s-flex\:column-reverse"></div>
+            * <div class="s-flex:column-reverse"></div>
             */
            `).code(`
             .s-flex--column-reverse {
                 flex-direction: column-reverse;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:nowrap
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -200,13 +227,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the flex-wrap to nowrap
             * 
             * @example        html
-            * <div class="s-flex\:nowrap"></div>
+            * <div class="s-flex:nowrap"></div>
             */
            `).code(`
             .s-flex--nowrap {
                 flex-wrap: nowrap;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:wrap
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -216,13 +243,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the flex-wrap to wrap
             * 
             * @example        html
-            * <div class="s-flex\:wrap"></div>
+            * <div class="s-flex:wrap"></div>
             */
            `).code(`
             .s-flex--wrap {
                 flex-wrap: wrap;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:wrap-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -232,13 +259,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the flex-wrap to wrap-reverse
             * 
             * @example        html
-            * <div class="s-flex\:wrap-reverse"></div>
+            * <div class="s-flex:wrap-reverse"></div>
             */
            `).code(`
             .s-flex--wrap-reverse {
                 flex-wrap: wrap-reverse;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:justify-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -248,13 +275,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the justify-content property to start
             * 
             * @example        html
-            * <div class="s-flex\:justify-start"></div>
+            * <div class="s-flex:justify-start"></div>
             */
            `).code(`
             .s-flex--justify-start {
                 justify-content: start;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:justify-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -264,13 +291,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the justify-content property to flex-start
             * 
             * @example        html
-            * <div class="s-flex\:justify-flex-start"></div>
+            * <div class="s-flex:justify-flex-start"></div>
             */
            `).code(`
             .s-flex--justify-flex-start {
                 justify-content: flex-start;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:justify-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -280,13 +307,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the justify-content property to end
             * 
             * @example        html
-            * <div class="s-flex\:justify-end"></div>
+            * <div class="s-flex:justify-end"></div>
             */
            `).code(`
             .s-flex--justify-end {
                 justify-content: end;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:justify-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -296,13 +323,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the justify-content property to flex-end
             * 
             * @example        html
-            * <div class="s-flex\:justify-flex-end"></div>
+            * <div class="s-flex:justify-flex-end"></div>
             */
            `).code(`
             .s-flex--justify-flex-end {
                 justify-content: flex-end;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:justify-center
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -312,13 +339,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the justify-content property to flex-center
             * 
             * @example        html
-            * <div class="s-flex\:justify-center"></div>
+            * <div class="s-flex:justify-center"></div>
             */
            `).code(`
             .s-flex--justify-center {
                 justify-content: center;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:justify-space-between
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -328,13 +355,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the justify-content property to space-between
             * 
             * @example        html
-            * <div class="s-flex\:justify-space-between"></div>
+            * <div class="s-flex:justify-space-between"></div>
             */
            `).code(`
             .s-flex--justify-space-between {
                 justify-content: space-between;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:justify-space-around
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -344,13 +371,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the justify-content property to space-around
             * 
             * @example        html
-            * <div class="s-flex\:justify-space-around"></div>
+            * <div class="s-flex:justify-space-around"></div>
             */
            `).code(`
             .s-flex--justify-space-around {
                 justify-content: space-around;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:justify-space-evenly
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -360,13 +387,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the justify-content property to space-evenly
             * 
             * @example        html
-            * <div class="s-flex\:justify-space-evenly"></div>
+            * <div class="s-flex:justify-space-evenly"></div>
             */
            `).code(`
             .s-flex--justify-space-evenly {
                 justify-content: space-evenly;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:justify-stretch
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -376,13 +403,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the justify-content property to stretch
             * 
             * @example        html
-            * <div class="s-flex\:justify-stretch"></div>
+            * <div class="s-flex:justify-stretch"></div>
             */
            `).code(`
             .s-flex--justify-stretch {
                 justify-content: stretch;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:align-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -392,13 +419,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the align-items property to start
             * 
             * @example        html
-            * <div class="s-flex\:align-start"></div>
+            * <div class="s-flex:align-start"></div>
             */
            `).code(`
             .s-flex--align-start {
                 align-items: start;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:align-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -408,13 +435,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the align-items property to flex-start
             * 
             * @example        html
-            * <div class="s-flex\:align-flex-start"></div>
+            * <div class="s-flex:align-flex-start"></div>
             */
            `).code(`
             .s-flex--align-flex-start {
                 align-items: flex-start;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:align-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -424,13 +451,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the align-items property to end
             * 
             * @example        html
-            * <div class="s-flex\:align-end"></div>
+            * <div class="s-flex:align-end"></div>
             */
            `).code(`
             .s-flex--align-end {
                 align-items: end;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:align-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -440,13 +467,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the align-items property to flex-end
             * 
             * @example        html
-            * <div class="s-flex\:align-flex-end"></div>
+            * <div class="s-flex:align-flex-end"></div>
             */
            `).code(`
             .s-flex--align-flex-end {
                 align-items: flex-end;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:align-center
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -456,13 +483,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the align-items property to center
             * 
             * @example        html
-            * <div class="s-flex\:align-center"></div>
+            * <div class="s-flex:align-center"></div>
             */
            `).code(`
             .s-flex--align-center {
                 align-items: center;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex:align-baseline
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -472,13 +499,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * This class allows specify the align-items property to baseline
             * 
             * @example        html
-            * <div class="s-flex\:align-baseline"></div>
+            * <div class="s-flex:align-baseline"></div>
             */
            `).code(`
             .s-flex--align-baseline {
                 align-items: baseline;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name          s-flex-item:grow
         * @namespace          sugar.css.flex
         * @type               CssClass
@@ -489,14 +516,14 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html
         * <div class="s-flex">
-        *   <div class="s-flex-item\:grow"></div>
+        *   <div class="s-flex-item:grow"></div>
         * </div>
         */
        `).code(`
         .s-flex-item--grow {
             flex-grow: 1;
         }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name          s-flex-item:shrink
         * @namespace          sugar.css.flex
         * @type               CssClass
@@ -507,15 +534,15 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @example        html
         * <div class="s-flex">
-        *   <div class="s-flex-item\:shrink"></div>
+        *   <div class="s-flex-item:shrink"></div>
         * </div>
         */
        `).code(`
         .s-flex-item--shrink {
             flex-shrink: 1;
         }`);
-    for (let i = 1; i < 20; i++) {
-        vars.comment(() => `/**
+  for (let i = 1; i < 20; i++) {
+    vars.comment(() => `/**
                 * @name          s-flex-item:order-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
@@ -526,16 +553,16 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * 
                 * @example        html
                 * <div class="s-flex">
-                *   <div class="s-flex-item\:order-${i}"></div>
+                *   <div class="s-flex-item:order-${i}"></div>
                 * </div>
                 */
                `).code(`
                 .s-flex-item--order-${i} {
                     order: ${i};
                 }`);
-    }
-    for (let i = 1; i < 20; i++) {
-        vars.comment(() => `/**
+  }
+  for (let i = 1; i < 20; i++) {
+    vars.comment(() => `/**
                 * @name          s-flex-item:grow-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
@@ -546,16 +573,16 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * 
                 * @example        html
                 * <div class="s-flex">
-                *   <div class="s-flex-item\:grow-${i}"></div>
+                *   <div class="s-flex-item:grow-${i}"></div>
                 * </div>
                 */
                `).code(`
                 .s-flex-item--grow-${i} {
                     flex-grow: ${i};
                 }`);
-    }
-    for (let i = 1; i < 20; i++) {
-        vars.comment(() => `/**
+  }
+  for (let i = 1; i < 20; i++) {
+    vars.comment(() => `/**
                 * @name          s-flex-item:shrink-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
@@ -566,15 +593,15 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * 
                 * @example        html
                 * <div class="s-flex">
-                *   <div class="s-flex-item\:shrink-${i}"></div>
+                *   <div class="s-flex-item:shrink-${i}"></div>
                 * </div>
                 */
                `).code(`
                 .s-flex-item--shrink-${i} {
                     flex-shrink: ${i};
                 }`);
-    }
-    vars.comment(() => `/**
+  }
+  vars.comment(() => `/**
             * @name          s-flex-item:align-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -585,14 +612,14 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item\:align-flex-start"></div>
+            *   <div class="s-flex-item:align-flex-start"></div>
             * </div>
             */
            `).code(`
             .s-flex-item--align-flex-start {
                 align-self: flex-start;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex-item:align-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -603,14 +630,14 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item\:align-flex-end"></div>
+            *   <div class="s-flex-item:align-flex-end"></div>
             * </div>
             */
            `).code(`
             .s-flex-item--align-flex-end {
                 align-self: flex-end;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex-item:align-center
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -621,14 +648,14 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item\:align-center"></div>
+            *   <div class="s-flex-item:align-center"></div>
             * </div>
             */
            `).code(`
             .s-flex-item--align-center {
                 align-self: center;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex-item:align-baseline
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -639,14 +666,14 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item\:align-baseline"></div>
+            *   <div class="s-flex-item:align-baseline"></div>
             * </div>
             */
            `).code(`
             .s-flex-item--align-baseline {
                 align-self: baseline;
             }`);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
             * @name          s-flex-item:align-stretch
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -657,13 +684,16 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @example        html
             * <div class="s-flex">
-            *   <div class="s-flex-item\:align-stretch"></div>
+            *   <div class="s-flex-item:align-stretch"></div>
             * </div>
             */
            `).code(`
             .s-flex-item--align-stretch {
                 align-self: stretch;
             }`);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZO0lBQzdELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHNDQUFzQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRS9ELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozt5REFxRDJDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzJEQUNyQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtrRUFDaEIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7eURBQ2hDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7OzsrREFLakIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Z0RBQ3RDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VEQUNoQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7a0VBS1osT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Z0RBQ3pDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VEQUNoQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OENBS2hDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO2dEQUNyQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxTQUFTLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFLFNBQVMsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUUsU0FBUyxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxTQUFTLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VEQUNoSixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7O0tBTXpFLENBQ0EsQ0FBQztJQUVGLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztTQVlMLENBQ0osQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztTQVlMLENBQ0osQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztTQVlMLENBQ0osQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztTQVlMLENBQ0osQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7OztZQVlGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVa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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

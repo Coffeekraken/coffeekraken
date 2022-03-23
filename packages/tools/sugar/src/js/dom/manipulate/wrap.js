@@ -1,52 +1,36 @@
-// @ts-nocheck
-/**
- * @name      wrap
- * @namespace            js.dom.manipulate
- * @type      Function
- * @platform          js
- * @status      beta
- *
- * Wrap an HTMLElement inside another `$wrapper` one
- *
- * @param    {HTMLElement}    $toWrap    The element to wrap
- * @param    {HTMLElement}    $wrapper    The wrapper element
- * @return    {HTMLElement}           The toWrap element
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import wrap from '@coffeekraken/sugar/js/dom/wrap'
- * const $wrapper = document.createElement('div')
- * // assuming:
- * // <div>
- * //   <span class="wrap">Hello World</span>
- * // </div>
- * wrap(document.querySelector('.wrap'), $wrapper)
- * // output:
- * // <div>
- * //   <div>
- * //     <span class="wrap">Hello World</span>
- * //   </div>
- * // </div>
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var wrap_exports = {};
+__export(wrap_exports, {
+  default: () => wrap_default
+});
+module.exports = __toCommonJS(wrap_exports);
 function wrap($elm, $wrapper) {
-    if (typeof $wrapper === 'string') {
-        $wrapper = document.createElement($wrapper);
-    }
-    const $parent = $elm.parentNode;
-    const $sibling = $elm.nextSibling;
-    if ($sibling) {
-        $parent.insertBefore($wrapper, $sibling);
-    }
-    else {
-        $parent.appendChild($wrapper);
-    }
-    return $wrapper.appendChild($elm);
+  if (typeof $wrapper === "string") {
+    $wrapper = document.createElement($wrapper);
+  }
+  const $parent = $elm.parentNode;
+  const $sibling = $elm.nextSibling;
+  if ($sibling) {
+    $parent.insertBefore($wrapper, $sibling);
+  } else {
+    $parent.appendChild($wrapper);
+  }
+  return $wrapper.appendChild($elm);
 }
-export default wrap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid3JhcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIndyYXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0NHO0FBQ0gsU0FBUyxJQUFJLENBQUMsSUFBaUIsRUFBRSxRQUFxQjtJQUNsRCxJQUFJLE9BQU8sUUFBUSxLQUFLLFFBQVEsRUFBRTtRQUM5QixRQUFRLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztLQUMvQztJQUNELE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7SUFDaEMsTUFBTSxRQUFRLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQztJQUNsQyxJQUFJLFFBQVEsRUFBRTtRQUNWLE9BQU8sQ0FBQyxZQUFZLENBQUMsUUFBUSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0tBQzVDO1NBQU07UUFDSCxPQUFPLENBQUMsV0FBVyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0tBQ2pDO0lBQ0QsT0FBTyxRQUFRLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3RDLENBQUM7QUFDRCxlQUFlLElBQUksQ0FBQyJ9
+var wrap_default = wrap;

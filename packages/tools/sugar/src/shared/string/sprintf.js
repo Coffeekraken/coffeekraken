@@ -1,36 +1,29 @@
-// @ts-nocheck
-import { sprintf as _sprintf } from 'sprintf-js';
-/**
- * @name        sprintf
- * @namespace            js.string
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Javascript implementation of the sprintf php function.
- * >For more infos, check [this github repository](https://github.com/alexei/sprintf.js)
- *
- * @param    {String}    format    The format of the string wanted as output
- * @param    {Mixed}    ...replacements    The replacement tokens to apply to the string
- * @return    {String}    The processed string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import sprintf from '@coffeekraken/sugar/js/string/sprintf'
- * sprintf('Hello %s', 'world') // Hello World
- * const user = { name: 'Dolly' }
- * sprintf('Hello %(name)s', user) // Hello Dolly
- *
- * @see    https://github.com/alexei/sprintf.js
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var sprintf_exports = {};
+__export(sprintf_exports, {
+  default: () => sprintf_default
+});
+module.exports = __toCommonJS(sprintf_exports);
+var import_sprintf_js = require("sprintf-js");
 function sprintf() {
-    return _sprintf.apply(this, arguments);
+  return import_sprintf_js.sprintf.apply(this, arguments);
 }
-export default sprintf;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ByaW50Zi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInNwcmludGYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sRUFBRSxPQUFPLElBQUksUUFBUSxFQUFFLE1BQU0sWUFBWSxDQUFDO0FBRWpEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJHO0FBQ0gsU0FBUyxPQUFPO0lBQ1osT0FBTyxRQUFRLENBQUMsS0FBSyxDQUFDLElBQUksRUFBRSxTQUFTLENBQUMsQ0FBQztBQUMzQyxDQUFDO0FBQ0QsZUFBZSxPQUFPLENBQUMifQ==
+var sprintf_default = sprintf;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

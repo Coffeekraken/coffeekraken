@@ -1,72 +1,58 @@
-// @ts-nocheck
-import __getStyleProperty from '../style/getStyleProperty';
-/**
- * @name      textWidth
- * @namespace            js.dom.utils
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Get the text width in px of a passed string or the passed HTMLElement
- *
- * @param 		{String|HTMLElement}		source 		The source to process
- * @return 		{Number} 								The calculated width of the text
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import textWidth from '@coffeekraken/sugar/js/dom/textWidth'
- * // text of an HTMLElement
- * const width = textWidth(myCoolHTMLElement);
- *
- * // text directly (no font-size management so it's less accurate...)
- * const width = textWidth('Hello World');
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var textWidth_exports = {};
+__export(textWidth_exports, {
+  default: () => textWidth_default
+});
+module.exports = __toCommonJS(textWidth_exports);
+var import_getStyleProperty = __toESM(require("../style/getStyleProperty"), 1);
 function textWidth(source) {
-    // create an element
-    const elm = document.createElement('span');
-    elm.style.whiteSpace = 'nowrap';
-    elm.style.position = 'absolute';
-    elm.style.visibility = 'hidden';
-    let text = source;
-    // if the source if an html element
-    if (source.tagName) {
-        // set the text into the element
-        const tagName = source.tagName.toLowerCase();
-        switch (tagName) {
-            case 'input':
-            case 'textarea':
-                text = source.value;
-                break;
-            default:
-                text = source.innerText;
-                break;
-        }
-        // get the font properties
-        const fs = __getStyleProperty(source, 'font-size');
-        const ff = __getStyleProperty(source, 'font-family');
-        const ls = __getStyleProperty(source, 'letter-spacing');
-        elm.style.fontSize = fs;
-        elm.style.fontFamily = ff;
-        elm.style.letterSpacing = ls;
+  const elm = document.createElement("span");
+  elm.style.whiteSpace = "nowrap";
+  elm.style.position = "absolute";
+  elm.style.visibility = "hidden";
+  let text = source;
+  if (source.tagName) {
+    const tagName = source.tagName.toLowerCase();
+    switch (tagName) {
+      case "input":
+      case "textarea":
+        text = source.value;
+        break;
+      default:
+        text = source.innerText;
+        break;
     }
-    // replacing spaces
-    text = text.replace(/ /g, '\u00a0');
-    // set the element content
-    elm.innerHTML = text;
-    // append the element to the body
-    document.body.appendChild(elm);
-    // return the width of the element
-    const width = elm.offsetWidth;
-    // remove the element from the dom
-    document.body.removeChild(elm);
-    // return the width
-    return width;
+    const fs = (0, import_getStyleProperty.default)(source, "font-size");
+    const ff = (0, import_getStyleProperty.default)(source, "font-family");
+    const ls = (0, import_getStyleProperty.default)(source, "letter-spacing");
+    elm.style.fontSize = fs;
+    elm.style.fontFamily = ff;
+    elm.style.letterSpacing = ls;
+  }
+  text = text.replace(/ /g, "\xA0");
+  elm.innerHTML = text;
+  document.body.appendChild(elm);
+  const width = elm.offsetWidth;
+  document.body.removeChild(elm);
+  return width;
 }
-export default textWidth;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGV4dFdpZHRoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGV4dFdpZHRoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGtCQUFrQixNQUFNLDJCQUEyQixDQUFDO0FBRTNEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMsU0FBUyxDQUFDLE1BQTRCO0lBQzNDLG9CQUFvQjtJQUNwQixNQUFNLEdBQUcsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQzNDLEdBQUcsQ0FBQyxLQUFLLENBQUMsVUFBVSxHQUFHLFFBQVEsQ0FBQztJQUNoQyxHQUFHLENBQUMsS0FBSyxDQUFDLFFBQVEsR0FBRyxVQUFVLENBQUM7SUFDaEMsR0FBRyxDQUFDLEtBQUssQ0FBQyxVQUFVLEdBQUcsUUFBUSxDQUFDO0lBQ2hDLElBQUksSUFBSSxHQUFHLE1BQU0sQ0FBQztJQUVsQixtQ0FBbUM7SUFDbkMsSUFBSSxNQUFNLENBQUMsT0FBTyxFQUFFO1FBQ2hCLGdDQUFnQztRQUNoQyxNQUFNLE9BQU8sR0FBRyxNQUFNLENBQUMsT0FBTyxDQUFDLFdBQVcsRUFBRSxDQUFDO1FBQzdDLFFBQVEsT0FBTyxFQUFFO1lBQ2IsS0FBSyxPQUFPLENBQUM7WUFDYixLQUFLLFVBQVU7Z0JBQ1gsSUFBSSxHQUFHLE1BQU0sQ0FBQyxLQUFLLENBQUM7Z0JBQ3BCLE1BQU07WUFDVjtnQkFDSSxJQUFJLEdBQUcsTUFBTSxDQUFDLFNBQVMsQ0FBQztnQkFDeEIsTUFBTTtTQUNiO1FBRUQsMEJBQTBCO1FBQzFCLE1BQU0sRUFBRSxHQUFHLGtCQUFrQixDQUFDLE1BQU0sRUFBRSxXQUFXLENBQUMsQ0FBQztRQUNuRCxNQUFNLEVBQUUsR0FBRyxrQkFBa0IsQ0FBQyxNQUFNLEVBQUUsYUFBYSxDQUFDLENBQUM7UUFDckQsTUFBTSxFQUFFLEdBQUcsa0JBQWtCLENBQUMsTUFBTSxFQUFFLGdCQUFnQixDQUFDLENBQUM7UUFDeEQsR0FBRyxDQUFDLEtBQUssQ0FBQyxRQUFRLEdBQUcsRUFBRSxDQUFDO1FBQ3hCLEdBQUcsQ0FBQyxLQUFLLENBQUMsVUFBVSxHQUFHLEVBQUUsQ0FBQztRQUMxQixHQUFHLENBQUMsS0FBSyxDQUFDLGFBQWEsR0FBRyxFQUFFLENBQUM7S0FDaEM7SUFFRCxtQkFBbUI7SUFDbkIsSUFBSSxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ3BDLDBCQUEwQjtJQUMxQixHQUFHLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQztJQUNyQixpQ0FBaUM7SUFDakMsUUFBUSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDL0Isa0NBQWtDO0lBQ2xDLE1BQU0sS0FBSyxHQUFHLEdBQUcsQ0FBQyxXQUFXLENBQUM7SUFDOUIsa0NBQWtDO0lBQ2xDLFFBQVEsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQy9CLG1CQUFtQjtJQUNuQixPQUFPLEtBQUssQ0FBQztBQUNqQixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var textWidth_default = textWidth;

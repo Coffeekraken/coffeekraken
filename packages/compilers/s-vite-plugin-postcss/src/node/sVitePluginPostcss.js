@@ -1,59 +1,76 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __postcss from 'postcss';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-/**
- * @name            sVitePluginPostcss
- * @namespace       node
- * @type            Function
- *
- * This plugin allows you to use the awesome RiotJs library
- * to build your webcomponent using vite frontend development stack.
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function sVitePluginPostcss() {
-    const fileRegex = /\.css(\?.*)?$/;
-    const postcssConfig = __SSugarConfig.get('postcss');
-    return {
-        name: 's-vite-plugin-postcss',
-        transform(src, id) {
-            var _a, _b;
-            return __awaiter(this, void 0, void 0, function* () {
-                if (fileRegex.test(id)) {
-                    // resolve plugins paths
-                    const plugins = [];
-                    for (let i = 0; i < postcssConfig.plugins.length; i++) {
-                        const p = postcssConfig.plugins[i];
-                        if (typeof p === 'string') {
-                            const { default: plugin } = yield import(p);
-                            const fn = (_a = plugin.default) !== null && _a !== void 0 ? _a : plugin;
-                            const options = (_b = postcssConfig.pluginsOptions[p]) !== null && _b !== void 0 ? _b : {};
-                            plugins.push(fn(Object.assign({ target: 'vite' }, options)));
-                        }
-                        else {
-                            plugins.push(p);
-                        }
-                    }
-                    // build postcss
-                    const result = yield __postcss(plugins).process(src !== null && src !== void 0 ? src : '', {
-                        from: id.split('?')[0],
-                    });
-                    return {
-                        code: result.css,
-                        map: null,
-                    };
-                }
-            });
-        },
-    };
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var sVitePluginPostcss_exports = {};
+__export(sVitePluginPostcss_exports, {
+  default: () => sVitePluginPostcss
+});
+module.exports = __toCommonJS(sVitePluginPostcss_exports);
+var import_postcss = __toESM(require("postcss"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+function sVitePluginPostcss() {
+  const fileRegex = /\.css(\?.*)?$/;
+  const postcssConfig = import_s_sugar_config.default.get("postcss");
+  return {
+    name: "s-vite-plugin-postcss",
+    async transform(src, id) {
+      var _a, _b;
+      if (fileRegex.test(id)) {
+        const plugins = [];
+        for (let i = 0; i < postcssConfig.plugins.length; i++) {
+          const p = postcssConfig.plugins[i];
+          if (typeof p === "string") {
+            const { default: plugin } = await Promise.resolve().then(() => __toESM(require(p)));
+            const fn = (_a = plugin.default) != null ? _a : plugin;
+            const options = (_b = postcssConfig.pluginsOptions[p]) != null ? _b : {};
+            plugins.push(fn(__spreadValues({
+              target: "vite"
+            }, options)));
+          } else {
+            plugins.push(p);
+          }
+        }
+        const result = await (0, import_postcss.default)(plugins).process(src != null ? src : "", {
+          from: id.split("?")[0]
+        });
+        return {
+          code: result.css,
+          map: null
+        };
+      }
+    }
+  };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic1ZpdGVQbHVnaW5Qb3N0Y3NzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic1ZpdGVQbHVnaW5Qb3N0Y3NzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sU0FBUyxNQUFNLFNBQVMsQ0FBQztBQUNoQyxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUUxRDs7Ozs7Ozs7OztHQVVHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxrQkFBa0I7SUFDdEMsTUFBTSxTQUFTLEdBQUcsZUFBZSxDQUFDO0lBRWxDLE1BQU0sYUFBYSxHQUFHLGNBQWMsQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7SUFFcEQsT0FBTztRQUNILElBQUksRUFBRSx1QkFBdUI7UUFDdkIsU0FBUyxDQUFDLEdBQUcsRUFBRSxFQUFFOzs7Z0JBQ25CLElBQUksU0FBUyxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUMsRUFBRTtvQkFDcEIsd0JBQXdCO29CQUN4QixNQUFNLE9BQU8sR0FBVSxFQUFFLENBQUM7b0JBQzFCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxhQUFhLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTt3QkFDbkQsTUFBTSxDQUFDLEdBQUcsYUFBYSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQzt3QkFFbkMsSUFBSSxPQUFPLENBQUMsS0FBSyxRQUFRLEVBQUU7NEJBQ3ZCLE1BQU0sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLEdBQUcsTUFBTSxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7NEJBQzVDLE1BQU0sRUFBRSxHQUFHLE1BQUEsTUFBTSxDQUFDLE9BQU8sbUNBQUksTUFBTSxDQUFDOzRCQUNwQyxNQUFNLE9BQU8sR0FBRyxNQUFBLGFBQWEsQ0FBQyxjQUFjLENBQUMsQ0FBQyxDQUFDLG1DQUFJLEVBQUUsQ0FBQzs0QkFDdEQsT0FBTyxDQUFDLElBQUksQ0FDUixFQUFFLGlCQUNFLE1BQU0sRUFBRSxNQUFNLElBQ1gsT0FBTyxFQUNaLENBQ0wsQ0FBQzt5QkFDTDs2QkFBTTs0QkFDSCxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO3lCQUNuQjtxQkFDSjtvQkFFRCxnQkFBZ0I7b0JBQ2hCLE1BQU0sTUFBTSxHQUFHLE1BQU0sU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxHQUFHLGFBQUgsR0FBRyxjQUFILEdBQUcsR0FBSSxFQUFFLEVBQUU7d0JBQ3ZELElBQUksRUFBRSxFQUFFLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQztxQkFDekIsQ0FBQyxDQUFDO29CQUNILE9BQU87d0JBQ0gsSUFBSSxFQUFFLE1BQU0sQ0FBQyxHQUFHO3dCQUNoQixHQUFHLEVBQUUsSUFBSTtxQkFDWixDQUFDO2lCQUNMOztTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

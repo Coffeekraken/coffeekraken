@@ -1,31 +1,36 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-import __downloadRepository from '../downloadRepository';
-import __tmpDir from '../../path/systemTmpDir';
-describe('sugar.node.github.downloadRepository', () => {
-    it('Should download a repository successfully', () => __awaiter(void 0, void 0, void 0, function* () {
-        const repo = yield __downloadRepository('Coffeekraken/download-test-repo', {
-            branch: 'main',
-        });
-        expect(repo).toEqual({
-            dest: `${__tmpDir()}/downloads/coffeekraken-download-test-repo-main.zip`,
-        });
-    }), 999999);
-    it('Should download a repository and unzip it successfully', () => __awaiter(void 0, void 0, void 0, function* () {
-        const repo = yield __downloadRepository('Coffeekraken/download-test-repo', {
-            branch: 'main',
-            unzip: true,
-        });
-        expect(repo).toEqual({
-            dest: `${__tmpDir()}/downloads/coffeekraken-download-test-repo-main`,
-        });
-    }), 999999);
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_downloadRepository = __toESM(require("../downloadRepository"), 1);
+var import_systemTmpDir = __toESM(require("../../path/systemTmpDir"), 1);
+describe("sugar.node.github.downloadRepository", () => {
+  it("Should download a repository successfully", async () => {
+    const repo = await (0, import_downloadRepository.default)("Coffeekraken/download-test-repo", {
+      branch: "main"
+    });
+    expect(repo).toEqual({
+      dest: `${(0, import_systemTmpDir.default)()}/downloads/coffeekraken-download-test-repo-main.zip`
+    });
+  }, 999999);
+  it("Should download a repository and unzip it successfully", async () => {
+    const repo = await (0, import_downloadRepository.default)("Coffeekraken/download-test-repo", {
+      branch: "main",
+      unzip: true
+    });
+    expect(repo).toEqual({
+      dest: `${(0, import_systemTmpDir.default)()}/downloads/coffeekraken-download-test-repo-main`
+    });
+  }, 999999);
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG93bmxvYWRSZXBvc2l0b3J5LnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkb3dubG9hZFJlcG9zaXRvcnkudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxPQUFPLG9CQUFvQixNQUFNLHVCQUF1QixDQUFDO0FBRXpELE9BQU8sUUFBUSxNQUFNLHlCQUF5QixDQUFDO0FBRS9DLFFBQVEsQ0FBQyxzQ0FBc0MsRUFBRSxHQUFHLEVBQUU7SUFDbEQsRUFBRSxDQUFDLDJDQUEyQyxFQUFFLEdBQVMsRUFBRTtRQUN2RCxNQUFNLElBQUksR0FBRyxNQUFNLG9CQUFvQixDQUNuQyxpQ0FBaUMsRUFDakM7WUFDSSxNQUFNLEVBQUUsTUFBTTtTQUNqQixDQUNKLENBQUM7UUFFRixNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQ2pCLElBQUksRUFBRSxHQUFHLFFBQVEsRUFBRSxxREFBcUQ7U0FDM0UsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLEVBQUUsTUFBTSxDQUFDLENBQUM7SUFFWCxFQUFFLENBQUMsd0RBQXdELEVBQUUsR0FBUyxFQUFFO1FBQ3BFLE1BQU0sSUFBSSxHQUFHLE1BQU0sb0JBQW9CLENBQ25DLGlDQUFpQyxFQUNqQztZQUNJLE1BQU0sRUFBRSxNQUFNO1lBQ2QsS0FBSyxFQUFFLElBQUk7U0FDZCxDQUNKLENBQUM7UUFFRixNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQ2pCLElBQUksRUFBRSxHQUFHLFFBQVEsRUFBRSxpREFBaUQ7U0FDdkUsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLEVBQUUsTUFBTSxDQUFDLENBQUM7QUFDZixDQUFDLENBQUMsQ0FBQyJ9

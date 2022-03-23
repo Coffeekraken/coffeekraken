@@ -1,37 +1,62 @@
-// @ts-nocheck
-import __deepMerge from '../object/deepMerge';
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var sugarBanner_exports = {};
+__export(sugarBanner_exports, {
+  default: () => sugarBanner_default
+});
+module.exports = __toCommonJS(sugarBanner_exports);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
 function sugarBanner(settings = {}) {
-    settings = __deepMerge({
-        version: '',
-        borders: true,
-        marginLeft: 2,
-        paddingTop: 0,
-        paddingBottom: 0,
-    }, settings);
-    let version = '';
-    if (settings.version)
-        version = `<white>${settings.version}</white>`;
-    const value = [
-        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(settings.marginLeft)}  ____                           </yellow>`,
-        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(settings.marginLeft)}/ ____|</yellow><white>Coffee<magenta>kraken</magenta></white><yellow> __ _ _ __   </yellow>`,
-        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(settings.marginLeft)}\\___ \\| | | |/ _\` |/ _\` | \`__|  </yellow>`,
-        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(settings.marginLeft)} ___) | |_| | (_| | (_| | |       </yellow>`,
-        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(settings.marginLeft)}|____/ \\__,_|\\__, |\\__,_|_|</yellow> ${version}    `,
-        `<yellow>${settings.borders ? '█' : ''}</yellow><white>${' '.repeat(settings.marginLeft)}             </white><yellow>|___/</yellow>`,
-    ].map((line) => {
-        return line;
-    });
-    if (settings.paddingTop) {
-        for (let i = 0; i < settings.paddingTop; i++) {
-            value.unshift(`<yellow>${settings.borders ? '█' : ''}${' '.repeat(settings.marginLeft)}</yellow>`);
-        }
+  settings = (0, import_deepMerge.default)({
+    version: "",
+    borders: true,
+    marginLeft: 2,
+    paddingTop: 0,
+    paddingBottom: 0
+  }, settings);
+  let version = "";
+  if (settings.version)
+    version = `<white>${settings.version}</white>`;
+  const value = [
+    `<yellow>${settings.borders ? "\u2588" : ""}${" ".repeat(settings.marginLeft)}  ____                           </yellow>`,
+    `<yellow>${settings.borders ? "\u2588" : ""}${" ".repeat(settings.marginLeft)}/ ____|</yellow><white>Coffee<magenta>kraken</magenta></white><yellow> __ _ _ __   </yellow>`,
+    `<yellow>${settings.borders ? "\u2588" : ""}${" ".repeat(settings.marginLeft)}\\___ \\| | | |/ _\` |/ _\` | \`__|  </yellow>`,
+    `<yellow>${settings.borders ? "\u2588" : ""}${" ".repeat(settings.marginLeft)} ___) | |_| | (_| | (_| | |       </yellow>`,
+    `<yellow>${settings.borders ? "\u2588" : ""}${" ".repeat(settings.marginLeft)}|____/ \\__,_|\\__, |\\__,_|_|</yellow> ${version}    `,
+    `<yellow>${settings.borders ? "\u2588" : ""}</yellow><white>${" ".repeat(settings.marginLeft)}             </white><yellow>|___/</yellow>`
+  ].map((line) => {
+    return line;
+  });
+  if (settings.paddingTop) {
+    for (let i = 0; i < settings.paddingTop; i++) {
+      value.unshift(`<yellow>${settings.borders ? "\u2588" : ""}${" ".repeat(settings.marginLeft)}</yellow>`);
     }
-    if (settings.paddingBottom) {
-        for (let i = 0; i < settings.paddingBottom; i++) {
-            value.push(`<yellow>${settings.borders ? '█' : ''}${' '.repeat(settings.marginLeft)}</yellow>`);
-        }
+  }
+  if (settings.paddingBottom) {
+    for (let i = 0; i < settings.paddingBottom; i++) {
+      value.push(`<yellow>${settings.borders ? "\u2588" : ""}${" ".repeat(settings.marginLeft)}</yellow>`);
     }
-    return value.join('\n');
+  }
+  return value.join("\n");
 }
-export default sugarBanner;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3VnYXJCYW5uZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdWdhckJhbm5lci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxXQUFXLE1BQU0scUJBQXFCLENBQUM7QUFtQzlDLFNBQVMsV0FBVyxDQUFDLFdBQTBDLEVBQUU7SUFDN0QsUUFBUSxHQUFHLFdBQVcsQ0FDbEI7UUFDSSxPQUFPLEVBQUUsRUFBRTtRQUNYLE9BQU8sRUFBRSxJQUFJO1FBQ2IsVUFBVSxFQUFFLENBQUM7UUFDYixVQUFVLEVBQUUsQ0FBQztRQUNiLGFBQWEsRUFBRSxDQUFDO0tBQ25CLEVBQ0QsUUFBUSxDQUNYLENBQUM7SUFDRixJQUFJLE9BQU8sR0FBRyxFQUFFLENBQUM7SUFDakIsSUFBSSxRQUFRLENBQUMsT0FBTztRQUFFLE9BQU8sR0FBRyxVQUFVLFFBQVEsQ0FBQyxPQUFPLFVBQVUsQ0FBQztJQUNyRSxNQUFNLEtBQUssR0FBRztRQUNWLFdBQVcsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FDL0MsUUFBUSxDQUFDLFVBQVUsQ0FDdEIsNENBQTRDO1FBQzdDLFdBQVcsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FDL0MsUUFBUSxDQUFDLFVBQVUsQ0FDdEIsOEZBQThGO1FBQy9GLFdBQVcsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FDL0MsUUFBUSxDQUFDLFVBQVUsQ0FDdEIsZ0RBQWdEO1FBQ2pELFdBQVcsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FDL0MsUUFBUSxDQUFDLFVBQVUsQ0FDdEIsNkNBQTZDO1FBQzlDLFdBQVcsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FDL0MsUUFBUSxDQUFDLFVBQVUsQ0FDdEIsMkNBQTJDLE9BQU8sTUFBTTtRQUN6RCxXQUFXLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxtQkFBbUIsR0FBRyxDQUFDLE1BQU0sQ0FDL0QsUUFBUSxDQUFDLFVBQVUsQ0FDdEIsNkNBQTZDO0tBQ2pELENBQUMsR0FBRyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDLENBQUMsQ0FBQztJQUNILElBQUksUUFBUSxDQUFDLFVBQVUsRUFBRTtRQUNyQixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsUUFBUSxDQUFDLFVBQVUsRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUMxQyxLQUFLLENBQUMsT0FBTyxDQUNULFdBQVcsUUFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxFQUFFLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FDL0MsUUFBUSxDQUFDLFVBQVUsQ0FDdEIsV0FBVyxDQUNmLENBQUM7U0FDTDtLQUNKO0lBQ0QsSUFBSSxRQUFRLENBQUMsYUFBYSxFQUFFO1FBQ3hCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxRQUFRLENBQUMsYUFBYSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzdDLEtBQUssQ0FBQyxJQUFJLENBQ04sV0FBVyxRQUFRLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsR0FBRyxHQUFHLENBQUMsTUFBTSxDQUMvQyxRQUFRLENBQUMsVUFBVSxDQUN0QixXQUFXLENBQ2YsQ0FBQztTQUNMO0tBQ0o7SUFFRCxPQUFPLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDNUIsQ0FBQztBQUVELGVBQWUsV0FBVyxDQUFDIn0=
+var sugarBanner_default = sugarBanner;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

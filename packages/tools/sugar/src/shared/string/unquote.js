@@ -1,45 +1,36 @@
-// @ts-nocheck
-/**
- * @name        unquote
- * @namespace            js.string
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Remove the quotes of a string
- * Types of quotes removed :
- * - `"`, `'`, `”`, '`'
- *
- * @param    {String}    string    The string to process
- * @param    {Array<String>}    [quotesToRemove=['"','\'','”','`']]    The quotes to removes
- * @return    {String}    The unquoted string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import unquote from '@coffeekraken/sugar/js/string/unquote'
- * unquote("'Hello world'") // "Hello world"
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
-    // trim the string just in case
-    string = string.trim();
-    // loop on each quotes to remove
-    quotesToRemove.forEach((quote) => {
-        if (string.substr(0, 1) === quote && string.substr(-1) === quote) {
-            string = string.substr(1);
-            string = string.substr(0, string.length - 1);
-            // break the loop to avoid unquoting multiple levels
-            return;
-        }
-    });
-    // return the processed string
-    return string;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var unquote_exports = {};
+__export(unquote_exports, {
+  default: () => unquote_default
+});
+module.exports = __toCommonJS(unquote_exports);
+function unquote(string, quotesToRemove = ['"', "'", "\u201D", "`"]) {
+  string = string.trim();
+  quotesToRemove.forEach((quote) => {
+    if (string.substr(0, 1) === quote && string.substr(-1) === quote) {
+      string = string.substr(1);
+      string = string.substr(0, string.length - 1);
+      return;
+    }
+  });
+  return string;
 }
-export default unquote;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5xdW90ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInVucXVvdGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMsT0FBTyxDQUFDLE1BQU0sRUFBRSxjQUFjLEdBQUcsQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLENBQUM7SUFDMUQsK0JBQStCO0lBQy9CLE1BQU0sR0FBRyxNQUFNLENBQUMsSUFBSSxFQUFFLENBQUM7SUFDdkIsZ0NBQWdDO0lBQ2hDLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUM3QixJQUFJLE1BQU0sQ0FBQyxNQUFNLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxLQUFLLEtBQUssSUFBSSxNQUFNLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUssS0FBSyxFQUFFO1lBQzlELE1BQU0sR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQzFCLE1BQU0sR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDLENBQUMsRUFBRSxNQUFNLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDO1lBQzdDLG9EQUFvRDtZQUNwRCxPQUFPO1NBQ1Y7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUNILDhCQUE4QjtJQUM5QixPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDO0FBQ0QsZUFBZSxPQUFPLENBQUMifQ==
+var unquote_default = unquote;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,324 +1,249 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import __SLitComponent from '@coffeekraken/s-lit-component';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __Pickr from '@simonwep/pickr';
-import __baseCss from '@simonwep/pickr/dist/themes/nano.min.css';
-import { css, html, unsafeCSS } from 'lit';
-import __css from '../css/s-color-picker.css';
-import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name                Color Picker
- * @namespace           js
- * @type                CustomElement
- * @interface           ./interface/SColorPickerComponentInterface.js
- * @menu                Styleguide / Forms              /styleguide/form/s-color-picker
- * @platform            html
- * @status              beta
- *
- * This component specify a color picker. It uses under the hood the **AMAZING Pickr library** with some additional features like
- * sugar theming support as well as some events and more.
- * Almost all the Pickr options are available through properties. Check out the api documentation for more details...
- *
- * @feature           All the Pickr features are supported
- * @feature           Full support for sugar theming system for easy integration
- *
- * @support         chromium
- * @support         firefox
- * @support         safari
- * @support         edge
- *
- * @install         bash
- * npm i @coffeekraken/s-color-picker-component
- *
- * @install         js
- * import { define } from '@coffeekraken/s-color-picker-component';
- * define();
- *
- * @event           change              Emitted when the color is changing inside the picker
- * @event           show                Emitted when the color picker is shown
- * @event           hide                Emitted when the color picker is hided
- *
- * @example         html            Simple input
- * <label class="s-label:responsive">
- *      Choose a color
- *      <s-color-picker value="#FABB03" placeholder="Choose a color" input></s-color-picker>
- * </label>
- *
- * @example         html            With an input and a button
- * <label class="s-label:responsive">
- *      Choose a color
- *      <s-color-picker value="#5101FF" placeholder="Choose a color" input button></s-color-picker>
- * </label>
- *
- * @example         html            Just a button
- * <label class="s-label:responsive">
- *      Choose a color
- *      <s-color-picker value="#55FFFF" button></s-color-picker>
- * </label>
- *
- * @example         html            With a custom input
- * <label class="s-label:responsive">
- *      Choose a color
- *      <s-color-picker>
- *          <input type="text" placeholder="Choose a color" value="#FABB03" />
- *      </s-color-picker>
- * </label>
- *
- * @example         html            With a custom button
- * <label class="s-label:responsive">
- *      Choose a color
- *      <s-color-picker>
- *          <button class="s-btn s-color:error">Choose a color</button>
- *      </s-color-picker>
- * </label>
- *
- * @example         html            With a custom input and button
- * <label class="s-label:responsive">
- *      Choose a color
- *      <s-color-picker>
- *          <input type="text" placeholder="Choose a color" value="#FABB03" />
- *          <button class="s-btn s-color:error">Choose a color</button>
- *      </s-color-picker>
- * </label>
- *
- * @example         html            Disabled
- * <label class="s-label:responsive">
- *      Choose a color
- *      <s-color-picker disabled input button></s-color-picker>
- * </label>
- *
- * @example         html            RTL Support
- * <label class="s-label:responsive" dir="rtl">
- *      Choose a color
- *      <s-color-picker value="#FABB03" placeholder="Choose a color" input button dir="rtl"></s-color-picker>
- * </label>
- *
- * @see             https://www.npmjs.com/package/@simonwep/pickr
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SColorPicker extends __SLitComponent {
-    constructor() {
-        super(__deepMerge({
-            litComponent: {
-                shadowDom: false,
-            },
-            componentUtils: {
-                interface: __SColorPickerComponentInterface,
-            },
-        }));
-        this._hasInput = false;
-        this._hasButton = false;
-        this._$input = this.querySelector('input');
-        this._hasInput = this._$input !== null;
-        this._$button = this.querySelector('button');
-        this._hasButton = this._$button !== null;
-    }
-    static get properties() {
-        return __SLitComponent.properties({}, __SColorPickerComponentInterface);
-    }
-    static get styles() {
-        return css `
-            ${unsafeCSS(`
-                ${__baseCss}
-                ${__css}
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SColorPickerComponent_exports = {};
+__export(SColorPickerComponent_exports, {
+  default: () => SColorPicker,
+  define: () => define
+});
+module.exports = __toCommonJS(SColorPickerComponent_exports);
+var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+var import_pickr = __toESM(require("@simonwep/pickr"), 1);
+var import_nano_min = __toESM(require("@simonwep/pickr/dist/themes/nano.min.css"), 1);
+var import_lit = require("lit");
+var import_s_color_picker = __toESM(require("../css/s-color-picker.css"), 1);
+var import_SColorPickerComponentInterface = __toESM(require("./interface/SColorPickerComponentInterface"), 1);
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"), 1);
+class SColorPicker extends import_s_lit_component.default {
+  constructor() {
+    super((0, import_deepMerge.default)({
+      litComponent: {
+        shadowDom: false
+      },
+      componentUtils: {
+        interface: import_SColorPickerComponentInterface.default
+      }
+    }));
+    this._hasInput = false;
+    this._hasButton = false;
+    this._$input = this.querySelector("input");
+    this._hasInput = this._$input !== null;
+    this._$button = this.querySelector("button");
+    this._hasButton = this._$button !== null;
+  }
+  static get properties() {
+    return import_s_lit_component.default.properties({}, import_SColorPickerComponentInterface.default);
+  }
+  static get styles() {
+    return import_lit.css`
+            ${(0, import_lit.unsafeCSS)(`
+                ${import_nano_min.default}
+                ${import_s_color_picker.default}
             `)}
         `;
+  }
+  async firstUpdated() {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i;
+    this._$root = this.querySelector(`.${this.componentUtils.className("")}`);
+    if (!this._$input) {
+      this._$input = this.querySelector("input");
+    } else {
+      this._$root.append(this._$input);
     }
-    firstUpdated() {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
-        return __awaiter(this, void 0, void 0, function* () {
-            this._$root = this.querySelector(`.${this.componentUtils.className('')}`);
-            // input
-            if (!this._$input) {
-                this._$input = this.querySelector('input');
-            }
-            else {
-                this._$root.append(this._$input);
-            }
-            if (!((_a = this._$input) === null || _a === void 0 ? void 0 : _a.hasAttribute('name'))) {
-                (_b = this._$input) === null || _b === void 0 ? void 0 : _b.setAttribute('name', this.props.name);
-            }
-            if (!((_c = this._$input) === null || _c === void 0 ? void 0 : _c.hasAttribute('placeholder'))) {
-                (_d = this._$input) === null || _d === void 0 ? void 0 : _d.setAttribute('placeholder', this.props.placeholder);
-            }
-            if (!((_e = this._$input) === null || _e === void 0 ? void 0 : _e.hasAttribute('autocomplete'))) {
-                (_f = this._$input) === null || _f === void 0 ? void 0 : _f.setAttribute('autocomplete', 'off');
-            }
-            // button
-            if (!this._$button) {
-                this._$button = this.querySelector('button');
-            }
-            else {
-                this._$root.append(this._$button);
-            }
-            if (this._$button) {
-                this._$button.classList.add(this.componentUtils.className('__button'));
-            }
-            const value = (_j = (_g = this.props.value) !== null && _g !== void 0 ? _g : (_h = this._$input) === null || _h === void 0 ? void 0 : _h.value) !== null && _j !== void 0 ? _j : '#ff0000';
-            const pickr = __Pickr.create({
-                el: this.querySelector(`.${this.componentUtils.className('__picker')}`),
-                theme: 'nano',
-                container: this._$root,
-                default: value,
-                inline: true,
-                // autoReposition: false,
-                comparison: false,
-                swatches: [],
-                components: {
-                    preview: true,
-                    opacity: true,
-                    hue: true,
-                    interaction: {
-                        hex: true,
-                        rgba: true,
-                        hsla: true,
-                        // hsva: true,
-                        // cmyk: true,
-                        input: true,
-                        clear: true,
-                        // save: true
-                    },
-                },
-            });
-            const $preview = this.querySelector('.pcr-button');
-            $preview === null || $preview === void 0 ? void 0 : $preview.innerHTML = `
-            ${this.colorIcon ? `
-                ${this.colorIcon}
-            ` : `
-                <i class="s-icon s-icon--color"></i>
-            `}
-        `;
-            function getPickrState() {
-                const color = pickr.getColor();
-                const hsla = color.toHSLA(), hsva = color.toHSVA(), rgba = color.toRGBA(), hex = color.toHEXA(), cmyk = color.toCMYK();
-                return {
-                    isOpened: pickr.isOpen(),
-                    hsla: {
-                        h: hsla[0],
-                        s: hsla[1],
-                        l: hsla[2],
-                        a: hsla[3],
-                        string: `hsla(${hsla[0]},${hsla[1]},${hsla[2]},${hsla[3]})`,
-                    },
-                    hsva: {
-                        h: hsva[0],
-                        s: hsva[1],
-                        v: hsva[2],
-                        a: hsva[3],
-                        string: `hsva(${hsva[0]},${hsva[1]},${hsva[2]},${hsva[3]})`,
-                    },
-                    rgba: {
-                        r: rgba[0],
-                        g: rgba[1],
-                        b: rgba[2],
-                        a: rgba[3],
-                        string: `rgba(${rgba[0]},${rgba[1]},${rgba[2]},${rgba[3]})`,
-                    },
-                    hex: hex.toString(),
-                    cmyk: {
-                        c: cmyk[0],
-                        m: cmyk[1],
-                        y: cmyk[2],
-                        k: cmyk[3],
-                        string: `cmyk(${cmyk[0]},${cmyk[1]},${cmyk[2]},${cmyk[3]})`,
-                    },
-                };
-            }
-            __STheme.applyCurrentColor(value, this._$root);
-            pickr.on('change', () => {
-                pickr.applyColor();
-                const detail = getPickrState();
-                const change = new CustomEvent('change', {
-                    bubbles: true,
-                    detail
-                });
-                __STheme.applyCurrentColor(detail.hex, this._$root);
-                if (this._$input) {
-                    this._$input.value = detail.hex;
-                }
-                this.dispatchEvent(change);
-            });
-            pickr.on('show', () => {
-                const detail = getPickrState();
-                const change = new CustomEvent('show', {
-                    detail,
-                });
-                this.dispatchEvent(change);
-            });
-            pickr.on('hide', () => {
-                const detail = getPickrState();
-                const change = new CustomEvent('hide', {
-                    detail,
-                });
-                this.dispatchEvent(change);
-            });
-            pickr.on('cancel', () => {
-                const detail = getPickrState();
-                const change = new CustomEvent('cancel', {
-                    detail,
-                });
-                this.dispatchEvent(change);
-            });
-            if (this._$input) {
-                this._$input.addEventListener('focus', () => {
-                    pickr.show();
-                });
-                this._$input.addEventListener('change', () => {
-                    pickr.setColor(this._$input.value);
-                });
-            }
-            if (this._$button) {
-                this._$button.addEventListener('focus', () => {
-                    pickr.show();
-                });
-            }
-            const $app = this.querySelector('.pcr-app');
-            $app === null || $app === void 0 ? void 0 : $app.classList.add(this.componentUtils.className('__picker'));
-        });
+    if (!((_a = this._$input) == null ? void 0 : _a.hasAttribute("name"))) {
+      (_b = this._$input) == null ? void 0 : _b.setAttribute("name", this.props.name);
     }
-    render() {
-        return html `
+    if (!((_c = this._$input) == null ? void 0 : _c.hasAttribute("placeholder"))) {
+      (_d = this._$input) == null ? void 0 : _d.setAttribute("placeholder", this.props.placeholder);
+    }
+    if (!((_e = this._$input) == null ? void 0 : _e.hasAttribute("autocomplete"))) {
+      (_f = this._$input) == null ? void 0 : _f.setAttribute("autocomplete", "off");
+    }
+    if (!this._$button) {
+      this._$button = this.querySelector("button");
+    } else {
+      this._$root.append(this._$button);
+    }
+    if (this._$button) {
+      this._$button.classList.add(this.componentUtils.className("__button"));
+    }
+    const value = (_i = (_h = this.props.value) != null ? _h : (_g = this._$input) == null ? void 0 : _g.value) != null ? _i : "#ff0000";
+    const pickr = import_pickr.default.create({
+      el: this.querySelector(`.${this.componentUtils.className("__picker")}`),
+      theme: "nano",
+      container: this._$root,
+      default: value,
+      inline: true,
+      comparison: false,
+      swatches: [],
+      components: {
+        preview: true,
+        opacity: true,
+        hue: true,
+        interaction: {
+          hex: true,
+          rgba: true,
+          hsla: true,
+          input: true,
+          clear: true
+        }
+      }
+    });
+    const $preview = this.querySelector(".pcr-button");
+    if ($preview) {
+      $preview.innerHTML = `
+                ${this.colorIcon ? `
+                    ${this.colorIcon}
+                ` : `
+                    <i class="s-icon s-icon--color"></i>
+                `}
+            `;
+    }
+    function getPickrState() {
+      const color = pickr.getColor();
+      const hsla = color.toHSLA(), hsva = color.toHSVA(), rgba = color.toRGBA(), hex = color.toHEXA(), cmyk = color.toCMYK();
+      return {
+        isOpened: pickr.isOpen(),
+        hsla: {
+          h: hsla[0],
+          s: hsla[1],
+          l: hsla[2],
+          a: hsla[3],
+          string: `hsla(${hsla[0]},${hsla[1]},${hsla[2]},${hsla[3]})`
+        },
+        hsva: {
+          h: hsva[0],
+          s: hsva[1],
+          v: hsva[2],
+          a: hsva[3],
+          string: `hsva(${hsva[0]},${hsva[1]},${hsva[2]},${hsva[3]})`
+        },
+        rgba: {
+          r: rgba[0],
+          g: rgba[1],
+          b: rgba[2],
+          a: rgba[3],
+          string: `rgba(${rgba[0]},${rgba[1]},${rgba[2]},${rgba[3]})`
+        },
+        hex: hex.toString(),
+        cmyk: {
+          c: cmyk[0],
+          m: cmyk[1],
+          y: cmyk[2],
+          k: cmyk[3],
+          string: `cmyk(${cmyk[0]},${cmyk[1]},${cmyk[2]},${cmyk[3]})`
+        }
+      };
+    }
+    import_s_theme.default.applyCurrentColor(value, this._$root);
+    pickr.on("change", () => {
+      pickr.applyColor();
+      const detail = getPickrState();
+      const change = new CustomEvent("change", {
+        bubbles: true,
+        detail
+      });
+      import_s_theme.default.applyCurrentColor(detail.hex, this._$root);
+      if (this._$input) {
+        this._$input.value = detail.hex;
+      }
+      this.dispatchEvent(change);
+    });
+    pickr.on("show", () => {
+      const detail = getPickrState();
+      const change = new CustomEvent("show", {
+        detail
+      });
+      this.dispatchEvent(change);
+    });
+    pickr.on("hide", () => {
+      const detail = getPickrState();
+      const change = new CustomEvent("hide", {
+        detail
+      });
+      this.dispatchEvent(change);
+    });
+    pickr.on("cancel", () => {
+      const detail = getPickrState();
+      const change = new CustomEvent("cancel", {
+        detail
+      });
+      this.dispatchEvent(change);
+    });
+    if (this._$input) {
+      this._$input.addEventListener("focus", () => {
+        pickr.show();
+      });
+      this._$input.addEventListener("change", () => {
+        pickr.setColor(this._$input.value);
+      });
+    }
+    if (this._$button) {
+      this._$button.addEventListener("focus", () => {
+        pickr.show();
+      });
+    }
+    const $app = this.querySelector(".pcr-app");
+    $app == null ? void 0 : $app.classList.add(this.componentUtils.className("__picker"));
+  }
+  render() {
+    return import_lit.html`
             <div
-                class="${this.componentUtils.className('')} ${this.componentUtils.className('')}--${this.props.position}"
+                class="${this.componentUtils.className("")} ${this.componentUtils.className("")}--${this.props.position}"
             >
-                ${!this._hasInput && this.props.input ? html `
-                    <input ?disabled=${this.props.disabled} type="text" autocomplete="off" name="${this.props.name}" value="${this.props.value}" placeholder="${this.props.placeholder}" class="${this.componentUtils.className('__input', 's-input')}" />
-                ` : !this._hasInput ? html `
-                    <input ?disabled=${this.props.disabled} type="hidden" name="${this.props.name}" value="${this.props.value}" />
-                ` : ``}
-                ${!this._hasButton && this.props.button
-            ? html `
+                ${!this._hasInput && this.props.input ? import_lit.html`
+                          <input
+                              ?disabled=${this.props.disabled}
+                              type="text"
+                              autocomplete="off"
+                              name="${this.props.name}"
+                              value="${this.props.value}"
+                              placeholder="${this.props.placeholder}"
+                              class="${this.componentUtils.className("__input", "s-input")}"
+                          />
+                      ` : !this._hasInput ? import_lit.html`
+                          <input
+                              ?disabled=${this.props.disabled}
+                              type="hidden"
+                              name="${this.props.name}"
+                              value="${this.props.value}"
+                          />
+                      ` : ``}
+                ${!this._hasButton && this.props.button ? import_lit.html`
                           <button
-                                ?disabled=${this.props.disabled} 
+                              ?disabled=${this.props.disabled}
                               onclick="return false"
-                              class="${this.componentUtils.className('__button', 's-btn')}"
+                              class="${this.componentUtils.className("__button", "s-btn")}"
                           >
-                              ${this.props.colorIcon ? html `
-                                ${staticHTML(this.props.colorIcon)}
-                              ` : html `
-                                <i class="s-icon s-icon--calendar"></i>
-                              `}
+                              ${this.props.colorIcon ? import_lit.html` ${staticHTML(this.props.colorIcon)} ` : import_lit.html`
+                                        <i class="s-icon s-icon--calendar"></i>
+                                    `}
                           </button>
-                      `
-            : ''}
-                <div class="${this.componentUtils.className('__picker')}"></div>
+                      ` : ""}
+                <div class="${this.componentUtils.className("__picker")}"></div>
             </div>
         `;
-    }
+  }
 }
-export function define(props = {}, tagName = 's-color-picker') {
-    __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SColorPicker);
+function define(props = {}, tagName = "s-color-picker") {
+  import_s_lit_component.default.setDefaultProps(tagName, props);
+  customElements.define(tagName, SColorPicker);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbG9yUGlja2VyQ29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NvbG9yUGlja2VyQ29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLGVBQWUsTUFBTSwrQkFBK0IsQ0FBQztBQUM1RCxPQUFPLFdBQVcsTUFBTSw2Q0FBNkMsQ0FBQztBQUN0RSxPQUFPLE9BQU8sTUFBTSxpQkFBaUIsQ0FBQztBQUN0QyxPQUFPLFNBQVMsTUFBTSwwQ0FBMEMsQ0FBQztBQUNqRSxPQUFPLEVBQUUsR0FBRyxFQUFFLElBQUksRUFBRSxTQUFTLEVBQUUsTUFBTSxLQUFLLENBQUM7QUFDM0MsT0FBTyxLQUFLLE1BQU0sMkJBQTJCLENBQUM7QUFDOUMsT0FBTyxnQ0FBZ0MsTUFBTSw0Q0FBNEMsQ0FBQztBQUcxRixPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQWM3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEZHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sT0FBTyxZQUFhLFNBQVEsZUFBZTtJQW9CckQ7UUFDSSxLQUFLLENBQ0QsV0FBVyxDQUFDO1lBQ1IsWUFBWSxFQUFFO2dCQUNWLFNBQVMsRUFBRSxLQUFLO2FBQ25CO1lBQ0QsY0FBYyxFQUFFO2dCQUNaLFNBQVMsRUFBRSxnQ0FBZ0M7YUFDOUM7U0FDSixDQUFDLENBQ0wsQ0FBQztRQWhCTixjQUFTLEdBQUcsS0FBSyxDQUFDO1FBQ2xCLGVBQVUsR0FBRyxLQUFLLENBQUM7UUFpQmYsSUFBSSxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQzNDLElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLE9BQU8sS0FBSyxJQUFJLENBQUM7UUFDdkMsSUFBSSxDQUFD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d0JBQ1YsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ1YsTUFBTSxFQUFFLFFBQVEsSUFBSSxDQUFDLENBQUMsQ0FBQyxJQUFJLElBQUksQ0FBQyxDQUFDLENBQUMsSUFBSSxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUksSUFBSSxDQUFDLENBQUMsQ0FBQyxHQUFHO3FCQUM5RDtvQkFDRCxJQUFJLEVBQUU7d0JBQ0YsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ1YsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ1YsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ1YsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ1YsTUFBTSxFQUFFLFFBQVEsSUFBSSxDQUFDLENBQUMsQ0FBQyxJQUFJLElBQUksQ0FBQyxDQUFDLENBQUMsSUFBSSxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUksSUFBSSxDQUFDLENBQUMsQ0FBQyxHQUFHO3FCQUM5RDtvQkFDRCxJQUFJLEVBQUU7d0JBQ0YsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ1YsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ1YsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ1YsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDLENBQUM7d0JBQ1YsTUFBTSxFQUFFLFFBQVEsSUFBSSxDQUFDLENBQUMsQ0FBQyxJQUFJLElBQUksQ0FBQyxDQUFDLENBQUMsSUFBSSxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUksSUFBSSxDQUFDLENBQUMsQ0FBQyxHQUFHO3FCQUM5RDtvQkFDRCxHQUFHLEVBQUUsR0FBRyxDQUFDLFFBQVEsRUFBRTtvQkFDbkIsSUFBSSxFQUFFO3dCQUNGLENBQUMsRUFBRSxJQUFJLENBQUMsQ0FBQyxDQUFDO3dCQUNWLENBQUMsRUFBRSxJQUFJLENBQUMsQ0FBQyxDQUFDO3dCQUNWLENBQUMsRUFBRSxJQUFJLENBQUMsQ0FBQyxDQUFD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

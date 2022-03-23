@@ -1,43 +1,36 @@
-// @ts-nocheck
-import __getTransitionProperties from './style/getTransitionProperties';
-/**
- * @name      whenTransitionEnd
- * @namespace            js.dom.detect
- * @type      Function
- * @async
- * @platform          js
- * @status        beta
- *
- * Monitor an HTMLElement to be notified when his transition has ended
- *
- * @feature       Promise based API
- * @feature       Callback support
- *
- * @param 		{HTMLElement} 				elm 		The element to monitor
- * @param 		{Function} 					[cb=null] 	An optional callback to call when the element transition has ended
- * @return 		(Promise) 								The promise that will be resolved when the element transition has ended
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import whenTransitionEnd from '@coffeekraken/sugar/js/dom/whenTransitionEnd'
- * whenTransitionEnd(myCoolHTMLElement).then((elm) => {
- * 		// do something with your element transition has ended...
- * });
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var whenTransitionEnd_exports = {};
+__export(whenTransitionEnd_exports, {
+  default: () => whenTransitionEnd_default
+});
+module.exports = __toCommonJS(whenTransitionEnd_exports);
+var import_getTransitionProperties = __toESM(require("./style/getTransitionProperties"), 1);
 function whenTransitionEnd(elm, cb = null) {
-    return new Promise((resolve, reject) => {
-        const transition = __getTransitionProperties(elm);
-        setTimeout(() => {
-            resolve();
-            cb && cb();
-        }, transition.totalDuration);
-    });
+  return new Promise((resolve, reject) => {
+    const transition = (0, import_getTransitionProperties.default)(elm);
+    setTimeout(() => {
+      resolve();
+      cb && cb();
+    }, transition.totalDuration);
+  });
 }
-export default whenTransitionEnd;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2hlblRyYW5zaXRpb25FbmQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3aGVuVHJhbnNpdGlvbkVuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyx5QkFBeUIsTUFBTSxpQ0FBaUMsQ0FBQztBQUV4RTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUFTLGlCQUFpQixDQUFDLEdBQWdCLEVBQUUsRUFBRSxHQUFHLElBQUk7SUFDbEQsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUNuQyxNQUFNLFVBQVUsR0FBRyx5QkFBeUIsQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUNsRCxVQUFVLENBQUMsR0FBRyxFQUFFO1lBQ1osT0FBTyxFQUFFLENBQUM7WUFDVixFQUFFLElBQUksRUFBRSxFQUFFLENBQUM7UUFDZixDQUFDLEVBQUUsVUFBVSxDQUFDLGFBQWEsQ0FBQyxDQUFDO0lBQ2pDLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQUNELGVBQWUsaUJBQWlCLENBQUMifQ==
+var whenTransitionEnd_default = whenTransitionEnd;

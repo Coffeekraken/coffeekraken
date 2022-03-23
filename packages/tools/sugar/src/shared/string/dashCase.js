@@ -1,32 +1,29 @@
-// @ts-nocheck
-import { paramCase } from 'param-case';
-/**
- * @name        dashCase
- * @namespace            js.string
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * dashCase a string
- *
- * @param         {String}          text        The string to dashCase
- * @return        {String}                      The dashCased string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example     js
- * import dashCase from '@coffeekraken/sugar/js/string/dashCase';
- * dashCase('hello world'); // => hello-world
- *
- * @see             https://www.npmjs.com/package/param-case
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var dashCase_exports = {};
+__export(dashCase_exports, {
+  default: () => dashCase_default
+});
+module.exports = __toCommonJS(dashCase_exports);
+var import_param_case = require("param-case");
 function dashCase(text) {
-    return paramCase(text);
+  return (0, import_param_case.paramCase)(text);
 }
-export default dashCase;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGFzaENhc2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkYXNoQ2FzZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxFQUFFLFNBQVMsRUFBRSxNQUFNLFlBQVksQ0FBQztBQUV2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxRQUFRLENBQUMsSUFBSTtJQUNsQixPQUFPLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUMzQixDQUFDO0FBQ0QsZUFBZSxRQUFRLENBQUMifQ==
+var dashCase_default = dashCase;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

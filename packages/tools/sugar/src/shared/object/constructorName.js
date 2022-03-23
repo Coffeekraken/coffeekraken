@@ -1,36 +1,28 @@
-// @ts-nocheck
-/**
- * @name        constructorName
- * @namespace            js.object
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Return the constructor name of the passed object
- *
- * @param 		{Object} 			obj 		The object to get the constructor name from
- * @return 		{String}						The constructor name
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import constructorName from '@coffeekraken/sugar/js/object/constructorName';
- * class MyCoolClass {
- * 		// class implementation...
- * }
- * const myObj = new MyCoolClass();
- * console.log(constructorName(myObj)); => MyCoolClass
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var constructorName_exports = {};
+__export(constructorName_exports, {
+  default: () => constructorName_default
+});
+module.exports = __toCommonJS(constructorName_exports);
 function constructorName(obj) {
-    return obj.constructor && obj.constructor.name
-        ? obj.constructor.name
-        : null;
+  return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
 }
-export default constructorName;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uc3RydWN0b3JOYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY29uc3RydWN0b3JOYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBUyxlQUFlLENBQUMsR0FBRztJQUN4QixPQUFPLEdBQUcsQ0FBQyxXQUFXLElBQUksR0FBRyxDQUFDLFdBQVcsQ0FBQyxJQUFJO1FBQzFDLENBQUMsQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDLElBQUk7UUFDdEIsQ0FBQyxDQUFDLElBQUksQ0FBQztBQUNmLENBQUM7QUFDRCxlQUFlLGVBQWUsQ0FBQyJ9
+var constructorName_default = constructorName;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

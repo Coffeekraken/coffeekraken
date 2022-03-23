@@ -1,187 +1,173 @@
-// @ts-nocheck
-import __proxy from '../array/proxy';
-import __deepMap from '../object/deepMap';
-import __clone from '../object/clone';
-import __deepMerge from '../object/deepMerge';
-/**
- * @name                            deepProxy
- * @namespace            js.object
- * @type                            Function
- * @platform          js
- * @platform          node
- * @status        wip
- *
- * This function allows you to add Proxy to an object in deep fashion.
- * Normally the Proxy process only the level on which it has been added. Here we add Proxy to all the
- * object levels and to new properties as well.
- *
- * On the returned proxied object, you will have access to the ```revoke``` method that you can call to revoke the proxy applied.
- * This method will return you a shallow version of the proxied object that you can use as you want
- *
- * @param          {Object}                 object            The object on which to add the proxy
- * @param           {Function}                handlerFn       The handler function that will be called with the update object. It can be a property deleted, an array item added, a property updated, etc...:
- * - set: An object property added or updated
- * - delete: An object property deleted
- * - push: An item has been added inside an array
- * - {methodName}: Every array actions
- * @param         {Object}                [settings={}]         An object of settings to configure your proxy:
- * - deep (true) {Boolean}: Specify if you want to watch the passed object deeply or juste the first level
- * - handleSet (true) {Boolean}: Specify if you want to handle the "set" action
- * - handleGet (false) {Boolean}: Specify if you want to handle the "get" action
- * - handleDelete (true) {Boolean}: Specify if you want to handle the "delete" action
- * @return          {Object}                                  The proxied object
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example           js
- * import deepProxy from '@coffeekraken/sugar/js/object/deepProxy';
- * const a = deepProxy({
- *    hello: 'world'
- * }, (actionObj) => {
- *    // do something with the actionObj...
- * });
- * a.hello = 'coco';
- *
- * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var deepProxy_exports = {};
+__export(deepProxy_exports, {
+  default: () => deepProxy_default
+});
+module.exports = __toCommonJS(deepProxy_exports);
+var import_proxy = __toESM(require("../array/proxy"), 1);
+var import_deepMap = __toESM(require("../object/deepMap"), 1);
+var import_clone = __toESM(require("../object/clone"), 1);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
 function deepProxy(object, handlerFn, settings = {}) {
-    const preproxy = new WeakMap();
-    let isRevoked = false;
-    settings = __deepMerge({
-        deep: true,
-        handleSet: true,
-        handleGet: false,
-        handleDelete: true,
-    }, settings);
-    function makeHandler(path) {
-        return {
-            set(target, key, value) {
-                if (isRevoked || !settings.handleSet)
-                    return true;
-                if (settings.deep && typeof value === 'object') {
-                    value = proxify(value, [...path, key]);
-                }
-                const oldValue = target[key];
-                target[key] = value;
-                handlerFn({
-                    object,
-                    target,
-                    key,
-                    path: [...path, key].join('.'),
-                    action: 'set',
-                    fullAction: `Object.set`,
-                    oldValue,
-                    value,
-                });
-                return true;
-            },
-            get(target, key, receiver) {
-                if (Reflect.has(target, key)) {
-                    if (!settings.handleGet)
-                        return target[key];
-                    const value = handlerFn({
-                        object,
-                        target,
-                        key,
-                        path: [...path, key].join('.'),
-                        action: 'get',
-                        fullAction: 'Object.get',
-                    });
-                    if (key === 'revoke')
-                        return receiver.revoke;
-                    if (value === undefined)
-                        return target[key];
-                    return value;
-                }
-                return undefined;
-            },
-            deleteProperty(target, key) {
-                if (isRevoked || !settings.handleDelete)
-                    return true;
-                if (Reflect.has(target, key)) {
-                    // unproxy(target, key);
-                    const oldValue = target[key];
-                    const deleted = Reflect.deleteProperty(target, key);
-                    if (deleted) {
-                        handlerFn({
-                            object,
-                            target,
-                            key,
-                            path: [...path, key].join('.'),
-                            action: 'delete',
-                            fullAction: 'Object.delete',
-                            oldValue,
-                        });
-                    }
-                    return deleted;
-                }
-                return false;
-            },
-        };
-    }
-    function proxify(obj, path) {
-        if (obj === null)
-            return obj;
-        if (settings.deep) {
-            for (const key of Object.keys(obj)) {
-                if (Array.isArray(obj[key])) {
-                    obj[key] = __proxy(obj[key]);
-                    obj[key].watch(Object.getOwnPropertyNames(Array.prototype), (watchObj) => {
-                        handlerFn(Object.assign({ path: [...path, key].join('.') }, watchObj));
-                    });
-                }
-                else if (typeof obj[key] === 'object') {
-                    obj[key] = proxify(obj[key], [...path, key]);
-                }
-            }
+  const preproxy = /* @__PURE__ */ new WeakMap();
+  let isRevoked = false;
+  settings = (0, import_deepMerge.default)({
+    deep: true,
+    handleSet: true,
+    handleGet: false,
+    handleDelete: true
+  }, settings);
+  function makeHandler(path) {
+    return {
+      set(target, key, value) {
+        if (isRevoked || !settings.handleSet)
+          return true;
+        if (settings.deep && typeof value === "object") {
+          value = proxify(value, [...path, key]);
         }
-        const p = Proxy.revocable(obj, makeHandler(path));
-        // preproxy.set(p, obj);
-        const revokePropertyObj = {
-            writable: true,
-            configurable: false,
-            enumerable: true,
-            value: () => {
-                // make a shallow copy of the proxy object
-                let __copy = __clone(p.proxy, { deep: true });
-                // mark the proxy as revoked
-                isRevoked = true;
-                // sanitize the copy
-                __copy = __deepMap(__copy, ({ value, prop }) => {
-                    if (prop === 'revoke' && typeof value === 'function') {
-                        return -1;
-                    }
-                    return value;
-                });
-                // deep revoke the proxies
-                setTimeout(() => {
-                    __deepMap(p.proxy, ({ value, prop }) => {
-                        if (prop === 'revoke' &&
-                            typeof value === 'function') {
-                            value();
-                        }
-                    }, {});
-                    // revoke the proxy at first level
-                    p.revoke();
-                });
-                // return the shallow copy
-                return __copy;
-            },
-        };
-        if (Array.isArray(p.proxy)) {
-            p.proxy.revoke = revokePropertyObj.value;
+        const oldValue = target[key];
+        target[key] = value;
+        handlerFn({
+          object,
+          target,
+          key,
+          path: [...path, key].join("."),
+          action: "set",
+          fullAction: `Object.set`,
+          oldValue,
+          value
+        });
+        return true;
+      },
+      get(target, key, receiver) {
+        if (Reflect.has(target, key)) {
+          if (!settings.handleGet)
+            return target[key];
+          const value = handlerFn({
+            object,
+            target,
+            key,
+            path: [...path, key].join("."),
+            action: "get",
+            fullAction: "Object.get"
+          });
+          if (key === "revoke")
+            return receiver.revoke;
+          if (value === void 0)
+            return target[key];
+          return value;
         }
-        else {
-            Object.defineProperties(p.proxy, {
-                revoke: revokePropertyObj,
+        return void 0;
+      },
+      deleteProperty(target, key) {
+        if (isRevoked || !settings.handleDelete)
+          return true;
+        if (Reflect.has(target, key)) {
+          const oldValue = target[key];
+          const deleted = Reflect.deleteProperty(target, key);
+          if (deleted) {
+            handlerFn({
+              object,
+              target,
+              key,
+              path: [...path, key].join("."),
+              action: "delete",
+              fullAction: "Object.delete",
+              oldValue
             });
+          }
+          return deleted;
         }
-        return p.proxy;
+        return false;
+      }
+    };
+  }
+  function proxify(obj, path) {
+    if (obj === null)
+      return obj;
+    if (settings.deep) {
+      for (const key of Object.keys(obj)) {
+        if (Array.isArray(obj[key])) {
+          obj[key] = (0, import_proxy.default)(obj[key]);
+          obj[key].watch(Object.getOwnPropertyNames(Array.prototype), (watchObj) => {
+            handlerFn(__spreadValues({
+              path: [...path, key].join(".")
+            }, watchObj));
+          });
+        } else if (typeof obj[key] === "object") {
+          obj[key] = proxify(obj[key], [...path, key]);
+        }
+      }
     }
-    return proxify(object, []);
+    const p = Proxy.revocable(obj, makeHandler(path));
+    const revokePropertyObj = {
+      writable: true,
+      configurable: false,
+      enumerable: true,
+      value: () => {
+        let __copy = (0, import_clone.default)(p.proxy, { deep: true });
+        isRevoked = true;
+        __copy = (0, import_deepMap.default)(__copy, ({ value, prop }) => {
+          if (prop === "revoke" && typeof value === "function") {
+            return -1;
+          }
+          return value;
+        });
+        setTimeout(() => {
+          (0, import_deepMap.default)(p.proxy, ({ value, prop }) => {
+            if (prop === "revoke" && typeof value === "function") {
+              value();
+            }
+          }, {});
+          p.revoke();
+        });
+        return __copy;
+      }
+    };
+    if (Array.isArray(p.proxy)) {
+      p.proxy.revoke = revokePropertyObj.value;
+    } else {
+      Object.defineProperties(p.proxy, {
+        revoke: revokePropertyObj
+      });
+    }
+    return p.proxy;
+  }
+  return proxify(object, []);
 }
-export default deepProxy;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVlcFByb3h5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZGVlcFByb3h5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLE9BQU8sTUFBTSxnQkFBZ0IsQ0FBQztBQUNyQyxPQUFPLFNBQVMsTUFBTSxtQkFBbUIsQ0FBQztBQUMxQyxPQUFPLE9BQU8sTUFBTSxpQkFBaUIsQ0FBQztBQUV0QyxPQUFPLFdBQVcsTUFBTSxxQkFBcUIsQ0FBQztBQUU5Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJDRztBQUNILFNBQVMsU0FBUyxDQUFDLE1BQU0sRUFBRSxTQUFTLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDL0MsTUFBTSxRQUFRLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUMvQixJQUFJLFNBQVMsR0FBRyxLQUFLLENBQUM7SUFDdEIsUUFBUSxHQUFHLFdBQVcsQ0FDbEI7UUFDSSxJQUFJLEVBQUUsSUFBSTtRQUNWLFNBQVMsRUFBRSxJQUFJO1FBQ2YsU0FBUyxFQUFFLEtBQUs7UUFDaEIsWUFBWSxFQUFFLElBQUk7S0FDckIsRUFDRCxRQUFRLENBQ1gsQ0FBQztJQUVGLFNBQVMsV0FBVyxDQUFDLElBQUk7UUFDckIsT0FBTztZQUNILEdBQUcsQ0FBQyxNQUFNLEVBQUUsR0FBRyxFQUFFLEtBQUs7Z0JBQ2xCLElBQUksU0FBUyxJQUFJLENBQUMsUUFBUSxDQUFDLFNBQVM7b0JBQUUsT0FBTyxJQUFJLENBQUM7Z0JBRWxELElBQUksUUFBUSxDQUFDLElBQUksSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7b0JBQzVDLEtBQUssR0FBRyxPQUFPLENBQUMsS0FBSyxFQUFFLENBQUMsR0FBRyxJQUFJLEVBQUUsR0FBRyxDQUFDLENBQUMsQ0FBQztpQkFDMUM7Z0JBRUQsTUFBTSxRQUFRLEdBQUcsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDO2dCQUU3QixNQUFNLENBQUMs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
+var deepProxy_default = deepProxy;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

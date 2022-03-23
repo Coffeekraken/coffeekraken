@@ -1,32 +1,36 @@
-// @ts-nocheck
-/**
- * @name                    dataTypesArray
- * @namespace           shared.dev.types
- * @type                    Array
- * @platform          js
- * @platform          node
- * @status              wip
- *
- * This is just a list of data types available in the
- * current language (node/js)
- *
- * @todo        interface
- * @todo        doc
- * @todo        move this into more appropriate folder
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default [
-    'Number',
-    'String',
-    'Symbol',
-    'Boolean',
-    'Null',
-    'Undefined',
-    'Object',
-    'Array',
-    'JSON',
-    'Function',
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var dataTypesArray_exports = {};
+__export(dataTypesArray_exports, {
+  default: () => dataTypesArray_default
+});
+module.exports = __toCommonJS(dataTypesArray_exports);
+var dataTypesArray_default = [
+  "Number",
+  "String",
+  "Symbol",
+  "Boolean",
+  "Null",
+  "Undefined",
+  "Object",
+  "Array",
+  "JSON",
+  "Function"
 ];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGF0YVR5cGVzQXJyYXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkYXRhVHlwZXNBcnJheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBQ0gsZUFBZTtJQUNYLFFBQVE7SUFDUixRQUFRO0lBQ1IsUUFBUTtJQUNSLFNBQVM7SUFDVCxNQUFNO0lBQ04sV0FBVztJQUNYLFFBQVE7SUFDUixPQUFPO0lBQ1AsTUFBTTtJQUNOLFVBQVU7Q0FDYixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

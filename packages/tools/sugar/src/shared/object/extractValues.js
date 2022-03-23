@@ -1,44 +1,34 @@
-// @ts-nocheck
-/**
- * @name            extractValues
- * @namespace            js.object
- * @type            Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function take an array of objects and a key name as parameters and return an array containing
- * only the specified object key value.
- *
- * @param       {Array<Object>}         arrayOfObjects            An array of objects as source
- * @param       {String}                keyName                   The key name you want to extract of the objects
- * @return      {Array}                                           An array containing only the values of the property specified
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import extractValues from '@coffeekraken/sugar/js/object/extractValues';
- * extractValues([{
- *    hello: 'world',
- *    plop: 'Yes'
- * }, {
- *    hello: 'king',
- *    plop: 'something'
- * }], 'hello'); // => ['world', 'king']
- *
- * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var extractValues_exports = {};
+__export(extractValues_exports, {
+  default: () => extractValues_default
+});
+module.exports = __toCommonJS(extractValues_exports);
 function extractValues(arrayOfObjects, keyName) {
-    const finalArray = [];
-    arrayOfObjects.forEach((object) => {
-        if (object[keyName] === undefined)
-            return;
-        finalArray.push(object[keyName]);
-    });
-    return finalArray;
+  const finalArray = [];
+  arrayOfObjects.forEach((object) => {
+    if (object[keyName] === void 0)
+      return;
+    finalArray.push(object[keyName]);
+  });
+  return finalArray;
 }
-export default extractValues;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXh0cmFjdFZhbHVlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4dHJhY3RWYWx1ZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBK0JHO0FBQ0gsU0FBUyxhQUFhLENBQUMsY0FBYyxFQUFFLE9BQU87SUFDMUMsTUFBTSxVQUFVLEdBQUcsRUFBRSxDQUFDO0lBQ3RCLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxNQUFNLEVBQUUsRUFBRTtRQUM5QixJQUFJLE1BQU0sQ0FBQyxPQUFPLENBQUMsS0FBSyxTQUFTO1lBQUUsT0FBTztRQUMxQyxVQUFVLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDO0lBQ3JDLENBQUMsQ0FBQyxDQUFDO0lBQ0gsT0FBTyxVQUFVLENBQUM7QUFDdEIsQ0FBQztBQUNELGVBQWUsYUFBYSxDQUFDIn0=
+var extractValues_default = extractValues;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

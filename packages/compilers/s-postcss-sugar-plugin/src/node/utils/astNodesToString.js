@@ -1,31 +1,38 @@
-/**
- * @name                astNodesToString
- * @namespace           node.utils
- * @type                Function
- * @status              beta
- *
- * This function just take an AST nodes array and returns the string version of it
- * with ";" when needed, etc...
- *
- * @param           {Array}        nodes      An array of AST nodes to transform into string
- * @return          {String}                            The processed css string
- *
- * @since       2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function astNodesToString(nodes) {
-    const res = nodes
-        .map((node) => {
-        if (node.type === 'decl')
-            return node.toString() + ';';
-        return node.toString();
-    }).map(item => {
-        item = item.trim();
-        if (!item.match(/\}$/) && !item.match(/;$/)) {
-            item += ';';
-        }
-        return item;
-    });
-    return res.join('\n');
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var astNodesToString_exports = {};
+__export(astNodesToString_exports, {
+  default: () => astNodesToString
+});
+module.exports = __toCommonJS(astNodesToString_exports);
+function astNodesToString(nodes) {
+  const res = nodes.map((node) => {
+    if (node.type === "decl")
+      return node.toString() + ";";
+    return node.toString();
+  }).map((item) => {
+    item = item.trim();
+    if (!item.match(/\}$/) && !item.match(/;$/)) {
+      item += ";";
+    }
+    return item;
+  });
+  return res.join("\n");
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXN0Tm9kZXNUb1N0cmluZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFzdE5vZGVzVG9TdHJpbmcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7Ozs7Ozs7Ozs7Ozs7O0dBY0c7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGdCQUFnQixDQUFDLEtBQUs7SUFDNUMsTUFBTSxHQUFHLEdBQUksS0FBSztTQUNmLEdBQUcsQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ1osSUFBSSxJQUFJLENBQUMsSUFBSSxLQUFLLE1BQU07WUFBRSxPQUFPLElBQUksQ0FBQyxRQUFRLEVBQUUsR0FBRyxHQUFHLENBQUM7UUFDdkQsT0FBTyxJQUFJLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDekIsQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxFQUFFO1FBQ1osSUFBSSxHQUFHLElBQUksQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUNuQixJQUFJLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEVBQUU7WUFDM0MsSUFBSSxJQUFJLEdBQUcsQ0FBQztTQUNiO1FBQ0QsT0FBTyxJQUFJLENBQUM7SUFDZCxDQUFDLENBQUMsQ0FBQztJQUNILE9BQU8sR0FBRyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUMxQixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,50 +1,101 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
-class postcssSugarPluginUiDropdownClassesInterface extends __SInterface {
-    static get _definition() {
-        return {
-            styles: {
-                type: 'String[]',
-                default: ['solid'],
-            },
-            shape: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.config('ui.dropdown.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.dropdown.defaultShape'),
-            },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-}
-export { postcssSugarPluginUiDropdownClassesInterface as interface };
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-export function dependencies() {
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  dependencies: () => dependencies,
+  interface: () => postcssSugarPluginUiDropdownClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+var import_faker = __toESM(require("faker"));
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
+class postcssSugarPluginUiDropdownClassesInterface extends import_s_interface.default {
+  static get _definition() {
     return {
-        files: [`${__dirname()}/dropdown.js`],
+      styles: {
+        type: "String[]",
+        default: ["solid"]
+      },
+      shape: {
+        type: "String[]",
+        values: ["default", "square", "pill"],
+        default: ["default", "square", "pill"]
+      },
+      defaultStyle: {
+        type: "String",
+        values: ["solid"],
+        default: import_s_theme.default.config("ui.dropdown.defaultStyle")
+      },
+      defaultShape: {
+        type: "String",
+        values: ["default", "square", "pill"],
+        default: import_s_theme.default.config("ui.dropdown.defaultShape")
+      },
+      scope: {
+        type: {
+          type: "Array<String>",
+          splitChars: [",", " "]
+        },
+        values: ["bare", "lnf", "shape", "vr", "tf"],
+        default: ["bare", "lnf", "shape", "vr", "tf"]
+      }
     };
+  }
 }
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ styles: ['solid'], shapes: ['default', 'square', 'pill'], defaultStyle: 'solid', defaultShape: 'default', scope: ['bare', 'lnf', 'shape', 'tf', 'vr'] }, params);
-    const vars = new CssVars();
-    vars.comment(() => `
+function dependencies() {
+  return {
+    files: [`${(0, import_dirname.default)()}/dropdown.js`]
+  };
+}
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    styles: ["solid"],
+    shapes: ["default", "square", "pill"],
+    defaultStyle: "solid",
+    defaultShape: "default",
+    scope: ["bare", "lnf", "shape", "tf", "vr"]
+  }, params);
+  const vars = new CssVars();
+  vars.comment(() => `
       /**
         * @name          Dropdown
         * @namespace          sugar.css.ui
@@ -64,16 +115,12 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @support          edge
         * 
         * @cssClass             s-dropdown-container        The container of the dropdown that will trigger the display, hide, etc...
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @cssClass     s-dropdown${style === finalParams.defaultStyle ? '' : `:${style}`}           Apply the ${style} dropdown style`;
-    })
-        .join('\n')}
-        ${finalParams.shapes
-        .map((shape) => {
-        return ` * @cssClass     s-dropdown${shape === finalParams.defaultShape ? '' : `:${shape}`}           Apply the ${shape} dropdown shape`;
-    })
-        .join('\n')}
+        ${finalParams.styles.map((style) => {
+    return ` * @cssClass     s-dropdown${style === finalParams.defaultStyle ? "" : `:${style}`}           Apply the ${style} dropdown style`;
+  }).join("\n")}
+        ${finalParams.shapes.map((shape) => {
+    return ` * @cssClass     s-dropdown${shape === finalParams.defaultShape ? "" : `:${shape}`}           Apply the ${shape} dropdown shape`;
+  }).join("\n")}
         * @cssClass       s-dropdown:bottom      Apply the bottom dropdown position
         * @cssClass       s-dropdown:bottom-start        Apply the bottom start dropdown position
         * @cssClass       s-dropdown:bottom-end        Apply the bottom end dropdown position
@@ -81,37 +128,33 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @cssClass       s-dropdown:top-start        Apply the top start dropdown position
         * @cssClass       s-dropdown:top-end        Apply the top end dropdown position
         * 
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+        ${finalParams.styles.map((style) => {
+    return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ""}
             * <div class="s-dropdown-container">
             *   <button class="s-btn s-color:accent">
             *      Click me!
             *   </button>
             *   <div class="s-dropdown s-bg:base s-p:30 s-radius">
-            *      <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *      <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
             *      <a class="s-btn s-color:accent">You find me!</a>
             *   </div>
             * </div>
             * `;
-    })
-        .join('\n')}
+  }).join("\n")}
         *
-        ${finalParams.shapes
-        .map((shape) => {
-        return ` * @example        html       ${shape} style ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+        ${finalParams.shapes.map((shape) => {
+    return ` * @example        html       ${shape} style ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ""}
             * <div class="s-dropdown-container">
             *   <button class="s-btn s-color:accent">
             *       Click me!
             *   </button>
             *   <div class="s-dropdown:${shape}">
-            *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
             * </div>
             * `;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @example        html       Position
         * <div class="s-dropdown-container s-mie:20">
@@ -119,7 +162,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *       Bottom (default)
         *   </button>
         *   <div class="s-dropdown">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         * </div>
@@ -128,7 +171,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *       Bottom start
         *   </button>
         *   <div class="s-dropdown:bottom-start">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         * </div>
@@ -137,7 +180,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *       Bottom end
         *   </button>
         *   <div class="s-dropdown:bottom-end">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         * </div>
@@ -146,7 +189,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *       Top
         *   </button>
         *   <div class="s-dropdown:top">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         * </div>
@@ -155,7 +198,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *       Top start
         *   </button>
         *   <div class="s-dropdown:top-start">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         * </div>
@@ -164,7 +207,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *      Top end
         *   </button>
         *   <div class="s-dropdown:top-end">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         * </div>
@@ -175,7 +218,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *       Click me!
         *   </button>
         *   <div class="s-dropdown">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         * </div>
@@ -184,7 +227,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *       Top start
         *   </button>
         *   <div class="s-dropdown:top-start">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         * </div>
@@ -193,7 +236,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *       Top end
         *   </button>
         *   <div class="s-dropdown:top-end">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *          <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         * </div>
@@ -202,8 +245,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(() => `/**
+  if (finalParams.scope.includes("bare")) {
+    vars.comment(() => `/**
             * @name           s-dropdown
             * @namespace      sugar.css.ui.dropdown
             * @type           CssClass
@@ -214,7 +257,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <span class="s-dropdown-container">
             *     <button class="s-btn">Click me!</button>
             *     <div class="s-dropdown">
-            *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *         <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
             *         <a class="s-btn s-color:accent">You find me!</a>
             *     </div>
             * </span>
@@ -227,11 +270,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 @sugar.ui.dropdown($scope: bare);
             }
             `);
-    }
-    if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
-            vars.comment(() => `/**
-            * @name           s-dropdown${finalParams.defaultStyle === style ? '' : `:${style}`}
+  }
+  if (finalParams.scope.includes("lnf")) {
+    finalParams.styles.forEach((style) => {
+      vars.comment(() => `/**
+            * @name           s-dropdown${finalParams.defaultStyle === style ? "" : `:${style}`}
             * @namespace      sugar.css.ui.dropdown
             * @type           CssClass
             * 
@@ -240,8 +283,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @example        html
             * <span class="s-dropdown-container">
             *     <button class="s-btn">Click me!</button>
-            *     <div class="s-dropdown${finalParams.defaultStyle === style ? '' : `:${style}`}">
-            *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *     <div class="s-dropdown${finalParams.defaultStyle === style ? "" : `:${style}`}">
+            *         <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
             *         <a class="s-btn s-color:accent">You find me!</a>
             *     </div>
             * </span>
@@ -250,16 +293,16 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
-            .s-dropdown${finalParams.defaultStyle === style ? '' : `--${style}`} {
+            .s-dropdown${finalParams.defaultStyle === style ? "" : `--${style}`} {
                 @sugar.ui.dropdown($style: ${style}, $scope: lnf);
             }
             `);
-        });
-    }
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            vars.comment(() => `/**
-        * @name           s-dropdown${finalParams.defaultShape === shape ? '' : `:${shape}`}
+    });
+  }
+  if (finalParams.scope.includes("shape")) {
+    finalParams.shapes.forEach((shape) => {
+      vars.comment(() => `/**
+        * @name           s-dropdown${finalParams.defaultShape === shape ? "" : `:${shape}`}
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
         * 
@@ -268,8 +311,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @example        html
         * <span class="s-dropdown-container">
         *     <button class="s-btn">Click me!</button>
-        *     <div class="s-dropdown${finalParams.defaultShape === shape ? '' : `:${shape}`}">
-        *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *     <div class="s-dropdown${finalParams.defaultShape === shape ? "" : `:${shape}`}">
+        *         <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *         <a class="s-btn s-color:accent">You find me!</a>
         *     </div>
         * </span>
@@ -278,13 +321,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
-        .s-dropdown${finalParams.defaultShape === shape ? '' : `--${shape}`} {
+        .s-dropdown${finalParams.defaultShape === shape ? "" : `--${shape}`} {
             @sugar.ui.dropdown($shape: ${shape}, $scope: shape);
         }
         `);
-        });
-    }
-    vars.comment(() => `/**
+    });
+  }
+  vars.comment(() => `/**
         * @name           s-dropdown
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -295,7 +338,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -309,7 +352,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             @sugar.ui.dropdown($position: bottom, $scope: position);
         }
         `);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name           s-dropdown:bottom-start
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -320,7 +363,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-start">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -334,7 +377,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             @sugar.ui.dropdown($position: bottom-start, $scope: position);
         }
         `);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name           s-dropdown:bottom-end
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -345,7 +388,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:bottom-end">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -359,7 +402,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             @sugar.ui.dropdown($position: bottom-end, $scope: position);
         }
         `);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name           s-dropdown:top
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -370,7 +413,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -384,7 +427,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             @sugar.ui.dropdown($position: top, $scope: position);
         }
         `);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name           s-dropdown:top-start
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -395,7 +438,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-start">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -409,7 +452,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             @sugar.ui.dropdown($position: top-start, $scope: position);
         }
         `);
-    vars.comment(() => `/**
+  vars.comment(() => `/**
         * @name           s-dropdown:top-end
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -420,7 +463,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <button class="s-btn">
         *   Click me!
         *   <div class="s-dropdown:top-end">
-        *       <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *       <p class="s-typo:p s-mbe:30">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</p>
         *       <a class="s-btn s-color:accent">You find me!</a>
         *   </div>
         * </button>
@@ -434,8 +477,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             @sugar.ui.dropdown($position: top-end, $scope: position);
         }
         `);
-    if (finalParams.scope.includes('bare')) {
-        vars.comment(() => `/**
+  if (finalParams.scope.includes("bare")) {
+    vars.comment(() => `/**
             * @name           s-dropdown-container
             * @namespace      sugar.css.ui.tooltip
             * @type           CssClass
@@ -452,7 +495,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`);
-        vars.code(() => `
+    vars.code(() => `
             .s-dropdown-container {
                 position: relative;
                 display: inline-block;
@@ -472,7 +515,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 }
             }
         `);
-        vars.comment(() => `/**
+    vars.comment(() => `/**
             * @name           s-dropdown-container:active
             * @namespace      sugar.css.ui.dropdown
             * @type           CssClass
@@ -488,8 +531,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`);
-        // no need to write a class here cause this is handled in the dropdown.ts file directly...
-    }
-    return vars;
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCLE1BQU0sNENBQTZDLFNBQVEsWUFBWTtJQUNuRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxVQUFVO2dCQUNoQixPQUFPLEVBQUUsQ0FBQyxPQUFPLENBQUM7YUFDckI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBRSxRQUFRLEVBQUUsTUFBTSxDQUFDO2dCQUNyQyxPQUFPLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQzthQUN6QztZQUNELFlBQVksRUFBRTtnQkFDVixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLENBQUM7Z0JBQ2pCLE9BQU8sRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLDBCQUEwQixDQUFDO2FBQ3ZEO1lBQ0QsWUFBWSxFQUFFO2dCQUNWLElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBRSxRQUFRLEVBQUUsTUFBTSxDQUFDO2dCQUNyQyxPQUFPLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQywwQkFBMEIsQ0FBQzthQUN2RDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRSxJ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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  dependencies,
+  interface
+});

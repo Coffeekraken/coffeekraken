@@ -1,25 +1,40 @@
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_getAnimationProperties = __toESM(require("../style/getAnimationProperties"), 1);
+describe("sugar.js.dom.getAnimationProperties", () => {
+  document.body.innerHTML = `
+  <style>
+    @keyframes coco {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../getAnimationProperties"], factory);
+    #testing {
+      animation: coco 2s ease-in-out;
+      animation-name: coco;
     }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var getAnimationProperties_1 = __importDefault(require("../getAnimationProperties"));
-    describe('sugar.js.dom.getAnimationProperties', function () {
-        document.body.innerHTML = "\n  <style>\n    @keyframes coco {\n      from {\n        opacity: 0;\n      }\n      to {\n        opacity: 1;\n      }\n    }\n    #testing {\n      animation: coco 2s ease-in-out;\n      animation-name: coco;\n    }\n  </style>\n      <div id=\"testing\">\n      </div>\n  ";
-        var $elm = document.querySelector('#testing');
-        var props = getAnimationProperties_1.default($elm);
-        it('Should find the "testing" element that is up in the dom tree', function () {
-            //  expect($testing.id).toBe('testing');
-        });
-    });
+  </style>
+      <div id="testing">
+      </div>
+  `;
+  const $elm = document.querySelector("#testing");
+  const props = (0, import_getAnimationProperties.default)($elm);
+  it('Should find the "testing" element that is up in the dom tree', () => {
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0QW5pbWF0aW9uUHJvcGVydGllcy50ZXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZ2V0QW5pbWF0aW9uUHJvcGVydGllcy50ZXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0lBQUEscUZBQWlFO0lBRWpFLFFBQVEsQ0FBQyxxQ0FBcUMsRUFBRTtRQUU5QyxRQUFRLENBQUMsSUFBSSxDQUFDLFNBQVMsR0FBRyxzUkFpQnpCLENBQUM7UUFDRixJQUFNLElBQUksR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1FBRWhELElBQU0sS0FBSyxHQUFHLGdDQUF3QixDQUFDLElBQUksQ0FBQyxDQUFDO1FBRTdDLEVBQUUsQ0FBQyw4REFBOEQsRUFBRTtZQUNqRSx3Q0FBd0M7UUFDMUMsQ0FBQyxDQUFDLENBQUM7SUFFTCxDQUFDLENBQUMsQ0FBQyJ9

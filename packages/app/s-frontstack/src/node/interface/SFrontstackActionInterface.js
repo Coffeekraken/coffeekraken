@@ -1,37 +1,45 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SFrontstackActionInterface
- * @namespace           node.interface
- * @type.                      Class
- * @extends             SInterface
- * @status              beta
- * @platform             node
- * @interface
- *
- * This class represent the interface that describe parameters of the SFrontstack.action method
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SFrontstackActionInterface extends __SInterface {
-    static get _definition() {
-        return {
-            action: {
-                description: 'Specify the action you want to launch',
-                type: 'String',
-                requried: true,
-            },
-            params: {
-                description: 'Specify the action parameters using the cli "--param value" syntax',
-                type: 'String',
-                alias: 'p',
-            },
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SFrontstackActionInterface_exports = {};
+__export(SFrontstackActionInterface_exports, {
+  default: () => SFrontstackActionInterface_default
+});
+module.exports = __toCommonJS(SFrontstackActionInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SFrontstackActionInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      action: {
+        description: "Specify the action you want to launch",
+        type: "String",
+        requried: true
+      },
+      params: {
+        description: 'Specify the action parameters using the cli "--param value" syntax',
+        type: "String",
+        alias: "p"
+      }
+    };
+  }
 }
-export default SFrontstackActionInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zyb250c3RhY2tBY3Rpb25JbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRnJvbnRzdGFja0FjdGlvbkludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxNQUFNLDBCQUEyQixTQUFRLFlBQVk7SUFDakQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILE1BQU0sRUFBRTtnQkFDSixXQUFXLEVBQUUsdUNBQXVDO2dCQUNwRCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELE1BQU0sRUFBRTtnQkFDSixXQUFXLEVBQ1Asb0VBQW9FO2dCQUN4RSxJQUFJLEVBQUUsUUFBUTtnQkFDZCxLQUFLLEVBQUUsR0FBRzthQUNiO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUVELGVBQWUsMEJBQTBCLENBQUMifQ==
+var SFrontstackActionInterface_default = SFrontstackActionInterface;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

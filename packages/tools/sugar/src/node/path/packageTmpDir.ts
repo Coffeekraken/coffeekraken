@@ -31,9 +31,9 @@ import __fs from 'fs-extra';
 export default function () {
     const tmpDir = __SSugarConfig.get('storage.package.tmpDir');
     if (tmpDir !== undefined) {
-        __fs.ensureDirSync(tmpDir);
+        // __fs.ensureDirSync(tmpDir);
         return tmpDir;
     }
-    __fs.ensureDirSync(__tmpDir);
+    // __fs.ensureDirSync(__tmpDir);
     return __tmpDir;
 }

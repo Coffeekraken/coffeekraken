@@ -1,42 +1,36 @@
-// @ts-nocheck
-/**
- * @name                    parseHsla
- * @namespace            js.color
- * @type                    Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * Parse HSL
- *
- * @param 	      {string}	        hslaString			      The hsl string (hsl(h,s,l)) to parse
- * @return 	        {object} 					                  	The hsl object representation
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import parseHsl from '@coffeekraken/sugar/color/parseHsl';
- * parseHsl('hsl(20,20,20)');
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var parseHsla_exports = {};
+__export(parseHsla_exports, {
+  default: () => parseHsla_default
+});
+module.exports = __toCommonJS(parseHsla_exports);
 function parseHsl(hslaString) {
-    hslaString = hslaString.toLowerCase();
-    const string = hslaString
-        .replace('hsla(', '')
-        .replace('hsl(', '')
-        .replace(')', '')
-        .replace(/\s/g, '');
-    const array = string.split(',');
-    return {
-        h: parseFloat(array[0]),
-        s: parseFloat(array[1]),
-        l: parseFloat(array[2]),
-        a: array[3] ? parseFloat(array[3]) : 1,
-    };
+  hslaString = hslaString.toLowerCase();
+  const string = hslaString.replace("hsla(", "").replace("hsl(", "").replace(")", "").replace(/\s/g, "");
+  const array = string.split(",");
+  return {
+    h: parseFloat(array[0]),
+    s: parseFloat(array[1]),
+    l: parseFloat(array[2]),
+    a: array[3] ? parseFloat(array[3]) : 1
+  };
 }
-export default parseHsl;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VIc2xhLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFyc2VIc2xhLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLFFBQVEsQ0FBQyxVQUFVO0lBQ3hCLFVBQVUsR0FBRyxVQUFVLENBQUMsV0FBVyxFQUFFLENBQUM7SUFDdEMsTUFBTSxNQUFNLEdBQUcsVUFBVTtTQUNwQixPQUFPLENBQUMsT0FBTyxFQUFFLEVBQUUsQ0FBQztTQUNwQixPQUFPLENBQUMsTUFBTSxFQUFFLEVBQUUsQ0FBQztTQUNuQixPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQztTQUNoQixPQUFPLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ3hCLE1BQU0sS0FBSyxHQUFHLE1BQU0sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7SUFFaEMsT0FBTztRQUNILENBQUMsRUFBRSxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3ZCLENBQUMsRUFBRSxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3ZCLENBQUMsRUFBRSxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3ZCLENBQUMsRUFBRSxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztLQUN6QyxDQUFDO0FBQ04sQ0FBQztBQUNELGVBQWUsUUFBUSxDQUFDIn0=
+var parseHsla_default = parseHsl;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,31 +1,26 @@
-// @ts-nocheck
-/**
- * @name      focus
- * @namespace            js.dom.is
- * @type      Function
- * @platform          js
- * @status        beta
- *
- * Check if the mouse is focus the passed HTMLElement
- *
- * @param    {HTMLElement}    $elm    The HTMLElement to check
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import isFocus from '@coffeekraken/sugar/js/dom/is/focus'
- * const $myElm = document.querySelector('.my-elm')
- * if (isFocus($myElm)) {
- *   // do something
- * }
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var focus_exports = {};
+__export(focus_exports, {
+  default: () => focus_default
+});
+module.exports = __toCommonJS(focus_exports);
 function focus($elm) {
-    return $elm.parentElement.querySelector(':focus') === $elm;
+  return $elm.parentElement.querySelector(":focus") === $elm;
 }
-export default focus;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9jdXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb2N1cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsS0FBSyxDQUFDLElBQWlCO0lBQzVCLE9BQU8sSUFBSSxDQUFDLGFBQWEsQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLEtBQUssSUFBSSxDQUFDO0FBQy9ELENBQUM7QUFDRCxlQUFlLEtBQUssQ0FBQyJ9
+var focus_default = focus;

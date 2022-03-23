@@ -55,15 +55,19 @@ const cliParams = __SSugarCliParamsInterface.apply(
     process.argv.slice(2).join(' '),
 );
 if (cliParams.bench) {
-    __SBench.filter(
-        cliParams.bench === true ? '*' : cliParams.bench,
-    );
+    __SBench.filter(cliParams.bench === true ? '*' : cliParams.bench);
 }
 
 if (!__SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`]) {
-    console.log(`The log preset "${cliParams.logPreset}" does not exists... Here's the list of available presets:\n${__SLog.PRESETS.map(preset => {
-        return `- ${preset}\n`;
-    }).join('')}`);
+    console.log(
+        `The log preset "${
+            cliParams.logPreset
+        }" does not exists... Here's the list of available presets:\n${__SLog.PRESETS.map(
+            (preset) => {
+                return `- ${preset}\n`;
+            },
+        ).join('')}`,
+    );
     cliParams.logPreset = 'default';
 }
 
@@ -74,7 +78,7 @@ export interface ISSugarCliArgs {
     stack: string;
     action: string;
     isHelp: boolean;
-    params: Record<string, any>
+    params: Record<string, any>;
 }
 
 export default class SSugarCli {
@@ -85,7 +89,6 @@ export default class SSugarCli {
     _sugarJsons: any;
 
     args: ISSugarCliArgs;
-
 
     _availableCli: ISSugarCliAvailableCli = {
         defaultByStack: {},
@@ -125,7 +128,10 @@ export default class SSugarCli {
      * @author          Olivier Bossel <olivier.bossel@gmail.com>
      */
     static replaceTokens(command: string, params?: any): string {
-        command = command.replace('[arguments]', params ? __argsToString(params) :'');
+        command = command.replace(
+            '[arguments]',
+            params ? __argsToString(params) : '',
+        );
         command = __replaceTokens(command);
         command = command.replace(/%sugar/gm, SSugarCli.command);
         command = this.replaceSugarCommandForDev(command);
@@ -296,17 +302,15 @@ export default class SSugarCli {
     _parseArgs(argv = process.argv): ISSugarCliArgs {
         const args: ISSugarCliArgs = {};
 
-        args.command =
-            argv && argv[2]
-                ? argv[2].split(' ')[0]
-                : '';
+        args.command = argv && argv[2] ? argv[2].split(' ')[0] : '';
 
         args.stack = args.command.split('.')[0];
         if (!args.stack?.match(/^[a-zA-Z0-9]+$/)) args.stack = undefined;
         args.action = args.command.split('.')[1] || null;
         if (!args.action?.match(/^[a-zA-Z0-9]+$/)) args.action = undefined;
 
-        const a = argv
+        const a =
+            argv
                 .slice(3)
                 .map((arg) => {
                     // @todo      support for command with 1 sub param like: --something "--else"
@@ -315,7 +319,7 @@ export default class SSugarCli {
                     } else if (
                         arg.slice(0, 2) !== '--' &&
                         arg.slice(0, 1) !== '-' &&
-                        arg.split(' ').length > 1  
+                        arg.split(' ').length > 1
                     ) {
                         return `"${arg}"`;
                     }
@@ -324,7 +328,7 @@ export default class SSugarCli {
                 .join(' ') || '';
         args.args = a;
         args.params = __parseArgs(a);
-        
+
         args.isHelp = false;
         if (!args.stack && !args.action) args.isHelp = true;
         const lastArg = argv.slice(-1)[0];
@@ -362,13 +366,13 @@ export default class SSugarCli {
                     // sugarCliSettings?.stdio ?? null,
                 );
             }
-            if (websocket) {
-                this._websocketStdio = __SStdio.existingOrNew(
-                    'websocket',
-                    this._eventEmitter,
-                    __SStdio.UI_WEBSOCKET
-                );
-            }
+            // if (websocket) {
+            //     this._websocketStdio = __SStdio.existingOrNew(
+            //         'websocket',
+            //         this._eventEmitter,
+            //         __SStdio.UI_WEBSOCKET,
+            //     );
+            // }
         }
     }
 
@@ -377,8 +381,9 @@ export default class SSugarCli {
     }
 
     _getCliObj() {
-        const defaultStackAction =
-            this._availableCli.defaultByStack[this.args.stack];
+        const defaultStackAction = this._availableCli.defaultByStack[
+            this.args.stack
+        ];
 
         if (
             !this._availableCli.endpoints[
@@ -388,39 +393,28 @@ export default class SSugarCli {
             this._displayHelpAfterError();
             process.exit(0);
         }
-        let cliObj =
-            this._availableCli.endpoints[
-                `${this.args.stack}.${this.args.action ?? defaultStackAction}`
-            ];
+        let cliObj = this._availableCli.endpoints[
+            `${this.args.stack}.${this.args.action ?? defaultStackAction}`
+        ];
 
         return cliObj;
     }
 
     async _process() {
-
         // get cli object for current args
         let cliObj = this._getCliObj();
 
-        let argv = [
-            process.argv[0],
-            process.argv[1],
-            process.argv[2],
-        ];
+        let argv = [process.argv[0], process.argv[1], process.argv[2]];
 
         // handle sugar inception
         if (cliObj.command && cliObj.command.match(/^sugard?\s/)) {
-
             const p = __parseArgs(cliObj.command);
             argv[2] = p['1'];
 
-            argv = [
-                ...argv.slice(0,3),
-                ...process.argv.slice(2)
-            ]
+            argv = [...argv.slice(0, 3), ...process.argv.slice(2)];
 
             this.args = this._parseArgs(argv);
             cliObj = this._getCliObj();
-
         }
 
         // @ts-ignore
@@ -433,6 +427,10 @@ export default class SSugarCli {
             this._initStdio(true, true);
 
             await __wait(100);
+
+            if (!__isChildProcess()) {
+                this._newStep();
+            }
 
             let args = this.args.args;
 
@@ -456,10 +454,9 @@ export default class SSugarCli {
             await proPromise;
             await __wait(1000);
             // if (!__isChildProcess()) {
-                process.exit(0);
+            process.exit(0);
             // }
         } else if (cliObj.command) {
-
             // init stdio
             this._initStdio(true, true);
 
@@ -471,7 +468,7 @@ export default class SSugarCli {
             this._eventEmitter.pipe(promise);
             const res = await promise;
             // if (!__isChildProcess()) {
-                process.exit(0);
+            process.exit(0);
             // }
         }
     }
@@ -581,18 +578,20 @@ export default class SSugarCli {
                         cliObj.defaultAction &&
                         action === cliObj.defaultAction
                     ) {
-                        this._availableCli.defaultByStack[cliObj.stack] =
-                            action;
+                        this._availableCli.defaultByStack[
+                            cliObj.stack
+                        ] = action;
                     }
 
-                    this._availableCli.endpoints[`${cliObj.stack}.${action}`] =
-                        {
-                            packageJson,
-                            ...actionObj,
-                            processPath,
-                            command,
-                            interfacePath,
-                        };
+                    this._availableCli.endpoints[
+                        `${cliObj.stack}.${action}`
+                    ] = {
+                        packageJson,
+                        ...actionObj,
+                        processPath,
+                        command,
+                        interfacePath,
+                    };
                 });
             });
         }
@@ -632,7 +631,6 @@ export default class SSugarCli {
     }
 
     _newStep() {
-
         const packageJson = this.packageJson;
 
         const logStr = [
@@ -658,7 +656,7 @@ export default class SSugarCli {
             '',
         ]
             .filter((l) => l !== '')
-            .forEach(l => {
+            .forEach((l) => {
                 this.log({
                     clear: false,
                     decorators: false,
@@ -697,17 +695,17 @@ export default class SSugarCli {
     }
 
     async _displayHelp() {
-
         // init stdop
         this._initStdio(true, false);
-        
+
         await __wait(100);
 
         this._newStep();
 
         if (this.args.stack && this.args.action) {
-            const commandObj =
-                this._availableCli.endpoints[`${this.args.stack}.${this.args.action}`];
+            const commandObj = this._availableCli.endpoints[
+                `${this.args.stack}.${this.args.action}`
+            ];
 
             this.log(
                 ` Action <cyan>${this.args.stack}.${this.args.action}</cyan>`,
@@ -753,7 +751,7 @@ export default class SSugarCli {
             await __wait(1000);
 
             // if (!__isChildProcess()) {
-                process.exit(0);
+            process.exit(0);
             // }
         }
 
@@ -767,8 +765,9 @@ export default class SSugarCli {
 
             if (!sortedByStack[_stack]) sortedByStack[_stack] = {};
 
-            sortedByStack[_stack][_action] =
-                this._availableCli.endpoints[stackAction];
+            sortedByStack[_stack][_action] = this._availableCli.endpoints[
+                stackAction
+            ];
         });
 
         // this.log(
@@ -801,7 +800,7 @@ export default class SSugarCli {
         await __wait(1000);
 
         // if (!__isChildProcess()) {
-            process.exit(0);
+        process.exit(0);
         // }
     }
 

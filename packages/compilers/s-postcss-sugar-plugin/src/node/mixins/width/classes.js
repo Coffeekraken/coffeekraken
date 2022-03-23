@@ -1,34 +1,59 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name           classes
- * @namespace      node.mixins.width
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin generate all the width helper classes like s-width:20, s-width:50, etc...
- * It will generate all the width defined in the config.theme.width configuration stack
- *
- * @return        {Css}         The generated css
- *
- * @example         postcss
- * \@sugar.width.classes;
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginWidthClassesMixinInterface extends __SInterface {
-    static get _definition() {
-        return {};
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  interface: () => postcssSugarPluginWidthClassesMixinInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+class postcssSugarPluginWidthClassesMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {};
+  }
 }
-export { postcssSugarPluginWidthClassesMixinInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
-    const vars = [];
-    const widthObj = __STheme.config('width');
-    vars.push(`
+function classes_default({
+  params,
+  atRule,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({}, params);
+  const vars = [];
+  const widthObj = import_s_theme.default.config("width");
+  vars.push(`
       /**
         * @name          Widths
         * @namespace          sugar.css.helpers
@@ -46,23 +71,21 @@ export default function ({ params, atRule, replaceWith, }) {
         * @support      edge
         * 
         ${Object.keys(widthObj).map((width) => {
-        return ` * @cssClass             s-width:${width}            Apply the \`${width}\` width`;
-    })}
+    return ` * @cssClass             s-width:${width}            Apply the \`${width}\` width`;
+  })}
         * 
-        ${Object.keys(widthObj)
-        .map((width) => {
-        return ` * @example         html        ${width}%
+        ${Object.keys(widthObj).map((width) => {
+    return ` * @example         html        ${width}%
                 *   <div class="s-bg:main s-radius:30">
                 *      <div style="overflow:hidden" class="s-width:${width} s-text:center s-bg:accent s-p:30 s-radius:30">s-width:${width}</div>
                 *   </div>`;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    vars.push(`/**
+  vars.push(`/**
     * @name            s-width:viewport
     * @namespace        sugar.css.width
     * @type             CssClass
@@ -73,9 +96,9 @@ export default function ({ params, atRule, replaceWith, }) {
     * 
     * @example      html
     * <div class="s-container">
-    *   <h1 class="s-typo\:h1">Hello world</h1>
-    *   <div class="s-width\:viewport">
-    *       <p class="s-typo\:p">Something cool</p>
+    *   <h1 class="s-typo:h1">Hello world</h1>
+    *   <div class="s-width:viewport">
+    *       <p class="s-typo:p">Something cool</p>
     *   </div>
     * </div>
     * 
@@ -88,8 +111,8 @@ export default function ({ params, atRule, replaceWith, }) {
         width: 100vw;
         transform: translate(-50%);
    }`);
-    Object.keys(widthObj).forEach((name) => {
-        vars.push(`/**
+  Object.keys(widthObj).forEach((name) => {
+    vars.push(`/**
         * @name            s-width:${name}
         * @namespace        sugar.css.width
         * @type             CssClass
@@ -100,9 +123,9 @@ export default function ({ params, atRule, replaceWith, }) {
         * 
         * @example      html
         * <div class="s-container">
-        *   <h1 class="s-typo\:h1">Hello world</h1>
-        *   <div class="s-width\:${name}">
-        *       <p class="s-typo\:p">Something cool</p>
+        *   <h1 class="s-typo:h1">Hello world</h1>
+        *   <div class="s-width:${name}">
+        *       <p class="s-typo:p">Something cool</p>
         *   </div>
         * </div>
         * 
@@ -112,7 +135,10 @@ export default function ({ params, atRule, replaceWith, }) {
       .s-width--${name} {
             width: ${widthObj[name]};
       }`);
-    });
-    return vars;
+  });
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBRUgsTUFBTSw0Q0FBNkMsU0FBUSxZQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLDRDQUE0QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXJFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsTUFBTSxRQUFRLEdBQUcsUUFBUSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUUxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7OztVQWlCSixNQUFNLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQ2xDLE9BQU8sb0NBQW9DLEtBQUssMkJBQTJCLEtBQUssVUFBVSxDQUFDO0lBQy9GLENBQUMsQ0FBQzs7VUFFQSxNQUFNLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQztTQUNsQixHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8sbUNBQW1DLEtBQUs7O3FFQUVNLEtBQUssMERBQTBELEtBQUs7MkJBQzlHLENBQUM7SUFDaEIsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7S0FLbEIsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQXlCVCxDQUFDLENBQUM7SUFFSCxNQUFNLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ25DLElBQUksQ0FBQyxJQUFJLENBQUM7cUNBQ21CLElBQUk7Ozs7Ozt3REFNZSxJQUFJOzs7OzttQ0FLekIsSUFBSTs7Ozs7Ozs7a0JBUXJCLElBQUk7cUJBQ0QsUUFBUSxDQUFDLElBQUksQ0FBQztRQUMzQixDQUFDLENBQUM7SUFDTixDQUFDLENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

@@ -1,55 +1,61 @@
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SSidePanelComponentInterface
- * @namespace           js.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             js
- *
- * This class represent the interface that describe parameters of the SSidePanelComponent
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SSidePanelComponentInterface extends __SInterface {
-    static get _definition() {
-        return {
-            side: {
-                description: 'Specify the side where to display the panel. Can be "top","left","bottom" or "right"',
-                type: 'String',
-                values: ['top', 'left', 'bottom', 'right'],
-                default: 'left',
-            },
-            active: {
-                description: 'Specify the panel initial state',
-                type: 'Boolean',
-                default: false,
-            },
-            overlay: {
-                description: 'Specify if you want an "overlay" between the panel and your content',
-                type: 'Boolean',
-                default: false,
-            },
-            triggerer: {
-                description: 'Specify a css selector that targets the elements in your UI you want to open the panel on click',
-                type: 'String',
-            },
-            closeOn: {
-                description: 'Specify which "action(s)" close the panel. Valid values are "click" or/and "escape"',
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [','],
-                },
-                values: ['click', 'escape'],
-                default: ['click', 'escape'],
-            },
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SSidePanelComponentInterface_exports = {};
+__export(SSidePanelComponentInterface_exports, {
+  default: () => SSidePanelComponentInterface
+});
+module.exports = __toCommonJS(SSidePanelComponentInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SSidePanelComponentInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      side: {
+        description: 'Specify the side where to display the panel. Can be "top","left","bottom" or "right"',
+        type: "String",
+        values: ["top", "left", "bottom", "right"],
+        default: "left"
+      },
+      active: {
+        description: "Specify the panel initial state",
+        type: "Boolean",
+        default: false
+      },
+      overlay: {
+        description: 'Specify if you want an "overlay" between the panel and your content',
+        type: "Boolean",
+        default: false
+      },
+      triggerer: {
+        description: "Specify a css selector that targets the elements in your UI you want to open the panel on click",
+        type: "String"
+      },
+      closeOn: {
+        description: 'Specify which "action(s)" close the panel. Valid values are "click" or/and "escape"',
+        type: {
+          type: "Array<String>",
+          splitChars: [","]
+        },
+        values: ["click", "escape"],
+        default: ["click", "escape"]
+      }
+    };
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1NpZGVQYW5lbENvbXBvbmVudEludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNTaWRlUGFuZWxDb21wb25lbnRJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBRUgsTUFBTSxDQUFDLE9BQU8sT0FBTyw0QkFBNkIsU0FBUSxZQUFZO0lBQ2xFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsV0FBVyxFQUNQLHNGQUFzRjtnQkFDMUYsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsS0FBSyxFQUFFLE1BQU0sRUFBRSxRQUFRLEVBQUUsT0FBTyxDQUFDO2dCQUMxQyxPQUFPLEVBQUUsTUFBTTthQUNsQjtZQUNELE1BQU0sRUFBRTtnQkFDSixXQUFXLEVBQUUsaUNBQWlDO2dCQUM5QyxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxXQUFXLEVBQ1AscUVBQXFFO2dCQUN6RSxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELFNBQVMsRUFBRTtnQkFDUCxXQUFXLEVBQ1AsaUdBQWlHO2dCQUNyRyxJQUFJLEVBQUUsUUFBUTthQUNqQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxXQUFXLEVBQ1AscUZBQXFGO2dCQUN6RixJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsQ0FBQztpQkFDcEI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFFBQVEsQ0FBQztnQkFDM0IsT0FBTyxFQUFFLENBQUMsT0FBTyxFQUFFLFFBQVEsQ0FBQzthQUMvQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0oifQ==

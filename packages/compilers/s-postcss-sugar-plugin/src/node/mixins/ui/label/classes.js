@@ -1,43 +1,90 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
-class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
-    static get _definition() {
-        return {
-            styles: {
-                type: 'String[]',
-                values: ['inline', 'block', 'float'],
-                default: ['inline', 'block', 'float'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['inline', 'block', 'float'],
-                default: __STheme.config('ui.label.defaultStyle'),
-            },
-            scope: {
-                type: {
-                    type: 'Array<String>',
-                    splitChars: [',', ' '],
-                },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-}
-export { postcssSugarPluginUiLabelClassesInterface as interface };
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-export function dependencies() {
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var classes_exports = {};
+__export(classes_exports, {
+  default: () => classes_default,
+  dependencies: () => dependencies,
+  interface: () => postcssSugarPluginUiLabelClassesInterface
+});
+module.exports = __toCommonJS(classes_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
+var import_faker = __toESM(require("faker"));
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
+class postcssSugarPluginUiLabelClassesInterface extends import_s_interface.default {
+  static get _definition() {
     return {
-        files: [`${__dirname()}/label.js`],
+      styles: {
+        type: "String[]",
+        values: ["inline", "block", "float"],
+        default: ["inline", "block", "float"]
+      },
+      defaultStyle: {
+        type: "String",
+        values: ["inline", "block", "float"],
+        default: import_s_theme.default.config("ui.label.defaultStyle")
+      },
+      scope: {
+        type: {
+          type: "Array<String>",
+          splitChars: [",", " "]
+        },
+        values: ["bare", "lnf", "shape", "vr", "tf"],
+        default: ["bare", "lnf", "shape", "vr", "tf"]
+      }
     };
+  }
 }
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ styles: [], 
-        // shapes: [],
-        defaultStyle: 'inline', scope: [] }, params);
-    const vars = new CssVars();
-    vars.comment(() => `
+function dependencies() {
+  return {
+    files: [`${(0, import_dirname.default)()}/label.js`]
+  };
+}
+function classes_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    styles: [],
+    defaultStyle: "inline",
+    scope: []
+  }, params);
+  const vars = new CssVars();
+  vars.comment(() => `
       /**
         * @name          Labels
         * @namespace          sugar.css.ui
@@ -48,50 +95,46 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * These classes allows you to structure forms using labels.
         * 
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @cssClass     s-label${style === finalParams.defaultStyle ? '' : `:${style}`}           Apply the ${style} label style`;
-    })
-        .join('\n')}
+        ${finalParams.styles.map((style) => {
+    return ` * @cssClass     s-label${style === finalParams.defaultStyle ? "" : `:${style}`}           Apply the ${style} label style`;
+  }).join("\n")}
         * @cssClass         s-label:inline          Make sure the input and label stay inline even on mobile. Usefull for checkbox and radio for example.
         * 
-        ${finalParams.styles
-        .map((style) => {
-        return ` * @example        html       ${style} style
-            *   <label class="s-mbe:30 s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
+        ${finalParams.styles.map((style) => {
+    return ` * @example        html       ${style} style
+            *   <label class="s-mbe:30 s-label${style === finalParams.defaultStyle ? "" : `:${style}`}">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *     <span>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</span>
             *   </label>
-            *   <label class="s-mbe:30 s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
+            *   <label class="s-mbe:30 s-label${style === finalParams.defaultStyle ? "" : `:${style}`}">
             *     <textarea class="s-input s-width:40" placeholder="Type something!" rows="3"></textarea>
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *     <span>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</span>
             *   </label>
-        *   <label class="s-mbe:30 s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
+        *   <label class="s-mbe:30 s-label${style === finalParams.defaultStyle ? "" : `:${style}`}">
     *     <input type="text" disabled class="s-input s-width:40" placeholder="Type something!" />
     *     <span>I'm disabled</span>
     *   </label>
-    *   <label dir="rtl" class="s-mbe:30 s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
+    *   <label dir="rtl" class="s-mbe:30 s-label${style === finalParams.defaultStyle ? "" : `:${style}`}">
     *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
     *     <span>Support RTL</span>
     *   </label>
-    *   <label class="s-mbe:30 s-label${style === finalParams.defaultStyle ? '' : `:${style}`} s-color:accent">
+    *   <label class="s-mbe:30 s-label${style === finalParams.defaultStyle ? "" : `:${style}`} s-color:accent">
     *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
     *     <span>With the accent color</span>
     *   </label>
             * `;
-    })
-        .join('\n')}
+  }).join("\n")}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-    finalParams.styles.forEach((style) => {
-        let cls = `s-label`;
-        if (style !== finalParams.defaultStyle) {
-            cls += `:${style}`;
-        }
-        vars.comment(() => `/**
+  finalParams.styles.forEach((style) => {
+    let cls = `s-label`;
+    if (style !== finalParams.defaultStyle) {
+      cls += `:${style}`;
+    }
+    vars.comment(() => `/**
                 * @name           ${cls}
                 * @namespace      sugar.css.ui.label
                 * @type           CssClass
@@ -99,7 +142,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * This class represent a(n) "<s-color="accent">${style}</s-color>" label
                 * 
                 * @example        html
-                * <label class="${cls.replace(':', ':')}">
+                * <label class="${cls.replace(":", ":")}">
                 *   Hello world
                 *   <input type="text" class="s-input" placeholder="Type something!" />
                 * </label>
@@ -108,21 +151,21 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `);
-        if (finalParams.scope.includes('bare')) {
-            vars.code(`.s-label${finalParams.defaultStyle === style ? '' : `--${style}`} {
+    if (finalParams.scope.includes("bare")) {
+      vars.code(`.s-label${finalParams.defaultStyle === style ? "" : `--${style}`} {
                 @sugar.ui.label($style: ${style}, $scope: bare);
             } 
             `);
-        }
-        if (finalParams.scope.includes('lnf')) {
-            vars.code(() => `
-                .${cls.replace(':', '--')} {
+    }
+    if (finalParams.scope.includes("lnf")) {
+      vars.code(() => `
+                .${cls.replace(":", "--")} {
                     @sugar.ui.label($style: ${style}, $scope: lnf);
                 } 
             `);
-        }
-    });
-    vars.comment(() => `/**
+    }
+  });
+  vars.comment(() => `/**
         * @name           s-label:responsive
         * @namespace      sugar.css.ui.input
         * @type           CssClass
@@ -146,6 +189,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             }
         }
         `);
-    return vars;
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCLE1BQU0seUNBQTBDLFNBQVEsWUFBWTtJQUNoRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxVQUFVO2dCQUNoQixNQUFNLEVBQUUsQ0FBQyxRQUFRLEVBQUUsT0FBTyxFQUFFLE9BQU8sQ0FBQztnQkFDcEMsT0FBTyxFQUFFLENBQUMsUUFBUSxFQUFFLE9BQU8sRUFBRSxPQUFPLENBQUM7YUFDeEM7WUFDRCxZQUFZLEVBQUU7Z0JBQ1YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsUUFBUSxFQUFFLE9BQU8sRUFBRSxPQUFPLENBQUM7Z0JBQ3BDLE9BQU8sRUFBRSxRQUFRLENBQUMsTUFBTSxDQUFDLHVCQUF1QixDQUFDO2FBQ3BEO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFLElBQUksQ0FBQztnQkFDNUMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFLElBQUksQ0FBQzthQUNoRDtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFTRCxPQUFPLEVBQUUseUNBQXlDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbEUsT0FBTyxTQUFTLE1BQU0scUNBQXFDLENBQUM7QUFDNUQsTUFB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
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  dependencies,
+  interface
+});

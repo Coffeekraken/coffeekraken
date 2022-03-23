@@ -1,36 +1,35 @@
-// @ts-nocheck
-import __offset from './offset';
-/**
- * @name      offsetParent
- * @namespace            js.dom.offset
- * @type      Function
- * @platform          js
- * @status      beta
- *
- * Get the offset top and left of the passed element from his parent top left point
- *
- * @param 		{HTMLElement} 					elm  		The element to get the offset from
- * @return 		{top: number; left: number;} 									The offset top and left object
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example  	js
- * import offsetParent from '@coffeekraken/sugar/js/dom/offsetParent'
- * const offsetParentElm = offsetParent(myCoolElement);
- * // output : { top : 200, left : 300 }
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var offsetParent_exports = {};
+__export(offsetParent_exports, {
+  default: () => offsetParent_default
+});
+module.exports = __toCommonJS(offsetParent_exports);
+var import_offset = __toESM(require("./offset"), 1);
 function offsetParent(elm) {
-    const parentOffset = __offset(elm.parentNode);
-    const offset = __offset(elm);
-    return {
-        top: offset.top - parentOffset.top,
-        left: offset.left - parentOffset.left,
-    };
+  const parentOffset = (0, import_offset.default)(elm.parentNode);
+  const offset = (0, import_offset.default)(elm);
+  return {
+    top: offset.top - parentOffset.top,
+    left: offset.left - parentOffset.left
+  };
 }
-export default offsetParent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2Zmc2V0UGFyZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2Zmc2V0UGFyZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFDaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyxZQUFZLENBQUMsR0FBZ0I7SUFJbEMsTUFBTSxZQUFZLEdBQUcsUUFBUSxDQUFDLEdBQUcsQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUM5QyxNQUFNLE1BQU0sR0FBRyxRQUFRLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDN0IsT0FBTztRQUNILEdBQUcsRUFBRSxNQUFNLENBQUMsR0FBRyxHQUFHLFlBQVksQ0FBQyxHQUFHO1FBQ2xDLElBQUksRUFBRSxNQUFNLENBQUMsSUFBSSxHQUFHLFlBQVksQ0FBQyxJQUFJO0tBQ3hDLENBQUM7QUFDTixDQUFDO0FBQ0QsZUFBZSxZQUFZLENBQUMifQ==
+var offsetParent_default = offsetParent;

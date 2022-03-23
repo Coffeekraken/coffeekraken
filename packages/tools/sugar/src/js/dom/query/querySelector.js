@@ -1,34 +1,68 @@
-// @ts-nocheck
-import __isVisible from './isVisible';
-import __isInViewport from './isInViewport';
-import __closestNotVisible from './closestNotVisible';
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var querySelector_exports = {};
+__export(querySelector_exports, {
+  default: () => querySelector_default
+});
+module.exports = __toCommonJS(querySelector_exports);
+var import_isVisible = __toESM(require("./isVisible"), 1);
+var import_isInViewport = __toESM(require("./isInViewport"), 1);
+var import_closestNotVisible = __toESM(require("./closestNotVisible"), 1);
 function querySelector(selector, settings = {}) {
-    // extend settings
-    settings = Object.assign({ visible: null, inViewport: null, rootNode: document.body }, settings);
-    // grab the element into the dom
-    const elm = settings.rootNode.querySelector(selector);
-    // if no element, stop here
-    if (!elm)
-        return null;
-    // check settings
-    if (settings.visible === false) {
-        if (__isVisible(elm) || __closestNotVisible(elm))
-            return null;
-    }
-    else if (settings.visible === true) {
-        if (!__isVisible(elm) || !__closestNotVisible(elm))
-            return null;
-    }
-    if (settings.inViewport === false) {
-        if (__isInViewport(elm))
-            return null;
-    }
-    else if (settings.inViewport === true) {
-        if (!__isInViewport(elm))
-            return null;
-    }
-    // return the element
-    return elm;
+  settings = __spreadValues({
+    visible: null,
+    inViewport: null,
+    rootNode: document.body
+  }, settings);
+  const elm = settings.rootNode.querySelector(selector);
+  if (!elm)
+    return null;
+  if (settings.visible === false) {
+    if ((0, import_isVisible.default)(elm) || (0, import_closestNotVisible.default)(elm))
+      return null;
+  } else if (settings.visible === true) {
+    if (!(0, import_isVisible.default)(elm) || !(0, import_closestNotVisible.default)(elm))
+      return null;
+  }
+  if (settings.inViewport === false) {
+    if ((0, import_isInViewport.default)(elm))
+      return null;
+  } else if (settings.inViewport === true) {
+    if (!(0, import_isInViewport.default)(elm))
+      return null;
+  }
+  return elm;
 }
-export default querySelector;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicXVlcnlTZWxlY3Rvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInF1ZXJ5U2VsZWN0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sV0FBVyxNQUFNLGFBQWEsQ0FBQztBQUN0QyxPQUFPLGNBQWMsTUFBTSxnQkFBZ0IsQ0FBQztBQUM1QyxPQUFPLG1CQUFtQixNQUFNLHFCQUFxQixDQUFDO0FBK0N0RCxTQUFTLGFBQWEsQ0FDbEIsUUFBcUIsRUFDckIsV0FBNEMsRUFBRTtJQUU5QyxrQkFBa0I7SUFDbEIsUUFBUSxtQkFDSixPQUFPLEVBQUUsSUFBSSxFQUNiLFVBQVUsRUFBRSxJQUFJLEVBQ2hCLFFBQVEsRUFBRSxRQUFRLENBQUMsSUFBSSxJQUNwQixRQUFRLENBQ2QsQ0FBQztJQUVGLGdDQUFnQztJQUNoQyxNQUFNLEdBQUcsR0FBRyxRQUFRLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUN0RCwyQkFBMkI7SUFDM0IsSUFBSSxDQUFDLEdBQUc7UUFBRSxPQUFPLElBQUksQ0FBQztJQUV0QixpQkFBaUI7SUFDakIsSUFBSSxRQUFRLENBQUMsT0FBTyxLQUFLLEtBQUssRUFBRTtRQUM1QixJQUFJLFdBQVcsQ0FBQyxHQUFHLENBQUMsSUFBSSxtQkFBbUIsQ0FBQyxHQUFHLENBQUM7WUFBRSxPQUFPLElBQUksQ0FBQztLQUNqRTtTQUFNLElBQUksUUFBUSxDQUFDLE9BQU8sS0FBSyxJQUFJLEVBQUU7UUFDbEMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLG1CQUFtQixDQUFDLEdBQUcsQ0FBQztZQUFFLE9BQU8sSUFBSSxDQUFDO0tBQ25FO0lBQ0QsSUFBSSxRQUFRLENBQUMsVUFBVSxLQUFLLEtBQUssRUFBRTtRQUMvQixJQUFJLGNBQWMsQ0FBQyxHQUFHLENBQUM7WUFBRSxPQUFPLElBQUksQ0FBQztLQUN4QztTQUFNLElBQUksUUFBUSxDQUFDLFVBQVUsS0FBSyxJQUFJLEVBQUU7UUFDckMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxHQUFHLENBQUM7WUFBRSxPQUFPLElBQUksQ0FBQztLQUN6QztJQUVELHFCQUFxQjtJQUNyQixPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUM7QUFDRCxlQUFlLGFBQWEsQ0FBQyJ9
+var querySelector_default = querySelector;

@@ -1,30 +1,28 @@
-// @ts-nocheck
-/**
- * @name        lowerFirst
- * @namespace            js.string
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Lower first letter
- *
- * @param    {String}    string    The string to lower the first letter
- * @return    {String}    The string with the first letter lowered
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import lowerFirst from '@coffeekraken/sugar/js/string/lowerFirst'
- * lowerFirst('Hello world') // hello world
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var lowerFirst_exports = {};
+__export(lowerFirst_exports, {
+  default: () => lowerFirst_default
+});
+module.exports = __toCommonJS(lowerFirst_exports);
 function lowerFirst(string) {
-    return string.charAt(0).toLowerCase() + string.slice(1);
+  return string.charAt(0).toLowerCase() + string.slice(1);
 }
-export default lowerFirst;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG93ZXJGaXJzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImxvd2VyRmlyc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsVUFBVSxDQUFDLE1BQU07SUFDdEIsT0FBTyxNQUFNLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLFdBQVcsRUFBRSxHQUFHLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDNUQsQ0FBQztBQUNELGVBQWUsVUFBVSxDQUFDIn0=
+var lowerFirst_default = lowerFirst;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

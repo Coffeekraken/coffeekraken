@@ -1,59 +1,70 @@
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SInterface from '@coffeekraken/s-interface';
-/**
- * @name                SProcessSettingsInterface
- * @namespace           node.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This class represent the interface that describe the minimum requirement
- * needed for a process instance usable across the toolkit like in an SCli instance, etc...
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SProcessSettingsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            killOnError: {
-                description: 'Specify if you want to kill the process when an error occurs',
-                type: 'Boolean',
-                default: __SSugarConfig.get('process.killOnError'),
-            },
-            stdio: {
-                description: 'Specify the stdio to use for your process',
-                type: 'String|SStdio|Boolean',
-                alias: 's',
-                default: __SSugarConfig.get('process.stdio'),
-            },
-            throw: {
-                description: 'Specify if you want to throw error when an error occurs',
-                type: 'Boolean',
-                alias: 't',
-                default: __SSugarConfig.get('process.throw'),
-            },
-            exitAtEnd: {
-                description: 'Specify if you want to kill the process at his end',
-                type: 'Boolean',
-                alias: 'e',
-                default: __SSugarConfig.get('process.exitAtEnd'),
-            },
-            runAsChild: {
-                description: 'Specify if you want to run your process as a child one',
-                type: 'Boolean',
-                alias: 'c',
-                default: __SSugarConfig.get('process.runAsChild'),
-            },
-            processPath: {
-                description: 'Specify a path to a process file that exports a process supported type like an SProcess based class, a function, etc...',
-                type: 'String',
-                default: __SSugarConfig.get('process.processPath'),
-            },
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SProcessSettingsInterface_exports = {};
+__export(SProcessSettingsInterface_exports, {
+  default: () => SProcessSettingsInterface_default
+});
+module.exports = __toCommonJS(SProcessSettingsInterface_exports);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+class SProcessSettingsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      killOnError: {
+        description: "Specify if you want to kill the process when an error occurs",
+        type: "Boolean",
+        default: import_s_sugar_config.default.get("process.killOnError")
+      },
+      stdio: {
+        description: "Specify the stdio to use for your process",
+        type: "String|SStdio|Boolean",
+        alias: "s",
+        default: import_s_sugar_config.default.get("process.stdio")
+      },
+      throw: {
+        description: "Specify if you want to throw error when an error occurs",
+        type: "Boolean",
+        alias: "t",
+        default: import_s_sugar_config.default.get("process.throw")
+      },
+      exitAtEnd: {
+        description: "Specify if you want to kill the process at his end",
+        type: "Boolean",
+        alias: "e",
+        default: import_s_sugar_config.default.get("process.exitAtEnd")
+      },
+      runAsChild: {
+        description: "Specify if you want to run your process as a child one",
+        type: "Boolean",
+        alias: "c",
+        default: import_s_sugar_config.default.get("process.runAsChild")
+      },
+      processPath: {
+        description: "Specify a path to a process file that exports a process supported type like an SProcess based class, a function, etc...",
+        type: "String",
+        default: import_s_sugar_config.default.get("process.processPath")
+      }
+    };
+  }
 }
-export default SProcessSettingsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NTZXR0aW5nc0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNQcm9jZXNzU2V0dGluZ3NJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxjQUFjLE1BQU0sOEJBQThCLENBQUM7QUFDMUQsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQ7Ozs7Ozs7Ozs7Ozs7O0dBY0c7QUFDSCxNQUFNLHlCQUEwQixTQUFRLFlBQVk7SUFDaEQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILFdBQVcsRUFBRTtnQkFDVCxXQUFXLEVBQ1AsOERBQThEO2dCQUNsRSxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxxQkFBcUIsQ0FBQzthQUNyRDtZQUNELEtBQUssRUFBRTtnQkFDSCxXQUFXLEVBQUUsMkNBQTJDO2dCQUN4RCxJQUFJLEVBQUUsdUJBQXVCO2dCQUM3QixLQUFLLEVBQUUsR0FBRztnQkFDVixPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7YUFDL0M7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsV0FBVyxFQUNQLHlEQUF5RDtnQkFDN0QsSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsS0FBSyxFQUFFLEdBQUc7Z0JBQ1YsT0FBTyxFQUFFLGNBQWMsQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDO2FBQy9DO1lBQ0QsU0FBUyxFQUFFO2dCQUNQLFdBQVcsRUFDUCxvREFBb0Q7Z0JBQ3hELElBQUksRUFBRSxTQUFTO2dCQUNmLEtBQUssRUFBRSxHQUFHO2dCQUNWLE9BQU8sRUFBRSxjQUFjLENBQUMsR0FBRyxDQUFDLG1CQUFtQixDQUFDO2FBQ25EO1lBQ0QsVUFBVSxFQUFFO2dCQUNSLFdBQVcsRUFDUCx3REFBd0Q7Z0JBQzVELElBQUksRUFBRSxTQUFTO2dCQUNmLEtBQUssRUFBRSxHQUFHO2dCQUNWLE9BQU8sRUFBRSxjQUFjLENBQUMsR0FBRyxDQUFDLG9CQUFvQixDQUFDO2FBQ3BEO1lBQ0QsV0FBVyxFQUFFO2dCQUNULFdBQVcsRUFDUCx5SEFBeUg7Z0JBQzdILElBQUksRUFBRSxRQUFRO2dCQUNkLE9BQU8sRUFBRSxjQUFjLENBQUMsR0FBRyxDQUFDLHFCQUFxQixDQUFDO2FBQ3JEO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUNELGVBQWUseUJBQXlCLENBQUMifQ==
+var SProcessSettingsInterface_default = SProcessSettingsInterface;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

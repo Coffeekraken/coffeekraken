@@ -1,50 +1,43 @@
-// @ts-nocheck
-import distanceBetween from './distanceBetween';
-/**
- * @name 		circleConstrain
- * @namespace            js.geom.2d
- * @type      Function
- * @platform          js
- * @platform          node
- * @status            beta
- *
- * Take as parameter a central point, a radius and a points to constrain inside the circle defined by the radius
- *
- * @param    {Vector2}    center    The center point of the circle
- * @param    {Number}    radius    The radius to constrain the point in
- * @param    {Vector2}    point    The point to constrain
- * @return    {Vector2}    The new constrained value for the point
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import circleConstrain from '@coffeekraken/sugar/js/geom/2d/circleConstrain'
- * circleConstrain({
- * 	x: 10, y: 10
- * }, 10, {
- * 	x: 10, y: 5
- * })
- *
- * @see    https://stackoverflow.com/questions/8515900/how-to-constrain-movement-within-the-area-of-a-circle
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var circleConstrain_exports = {};
+__export(circleConstrain_exports, {
+  default: () => circleConstrain_default
+});
+module.exports = __toCommonJS(circleConstrain_exports);
+var import_distanceBetween = __toESM(require("./distanceBetween"), 1);
 function circleConstrain(center, radius, point) {
-    const dist = distanceBetween(center, point);
-    if (dist <= radius) {
-        return point;
-    }
-    else {
-        const x = point.x - center.x;
-        const y = point.y - center.y;
-        const radians = Math.atan2(y, x);
-        return {
-            x: Math.cos(radians) * radius + center.x,
-            y: Math.sin(radians) * radius + center.y,
-        };
-    }
+  const dist = (0, import_distanceBetween.default)(center, point);
+  if (dist <= radius) {
+    return point;
+  } else {
+    const x = point.x - center.x;
+    const y = point.y - center.y;
+    const radians = Math.atan2(y, x);
+    return {
+      x: Math.cos(radians) * radius + center.x,
+      y: Math.sin(radians) * radius + center.y
+    };
+  }
 }
-export default circleConstrain;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2lyY2xlQ29uc3RyYWluLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2lyY2xlQ29uc3RyYWluLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGVBQWUsTUFBTSxtQkFBbUIsQ0FBQztBQUVoRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsU0FBUyxlQUFlLENBQUMsTUFBTSxFQUFFLE1BQU0sRUFBRSxLQUFLO0lBQzFDLE1BQU0sSUFBSSxHQUFHLGVBQWUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDNUMsSUFBSSxJQUFJLElBQUksTUFBTSxFQUFFO1FBQ2hCLE9BQU8sS0FBSyxDQUFDO0tBQ2hCO1NBQU07UUFDSCxNQUFNLENBQUMsR0FBRyxLQUFLLENBQUMsQ0FBQyxHQUFHLE1BQU0sQ0FBQyxDQUFDLENBQUM7UUFDN0IsTUFBTSxDQUFDLEdBQUcsS0FBSyxDQUFDLENBQUMsR0FBRyxNQUFNLENBQUMsQ0FBQyxDQUFDO1FBQzdCLE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBQ2pDLE9BQU87WUFDSCxDQUFDLEVBQUUsSUFBSSxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsR0FBRyxNQUFNLEdBQUcsTUFBTSxDQUFDLENBQUM7WUFDeEMsQ0FBQyxFQUFFLElBQUksQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDLEdBQUcsTUFBTSxHQUFHLE1BQU0sQ0FBQyxDQUFDO1NBQzNDLENBQUM7S0FDTDtBQUNMLENBQUM7QUFDRCxlQUFlLGVBQWUsQ0FBQyJ9
+var circleConstrain_default = circleConstrain;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,61 +1,47 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import __SBench from '@coffeekraken/s-bench';
-import __SDocmap from '@coffeekraken/s-docmap';
-/**
- * @name            docmapMiddleware
- * @namespace       sugar.node.server.frontend.middleware
- * @type            Function
- * @status              wip
- *
- * This function describe the middleware that will fetch the ```docmap.json``` file at the root of
- * your server directory and add it to the template data sended to the rendered view
- *
- * @param           {Object}            req             The request made on the express server
- * @param           {Object}            res             The response object of the express server
- * @param           {Function}          next            The next function to call when the middleware has finished his job
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import express from 'express';
- * import docmapMiddleware from '@coffeekraken/sugar/server/frontend/middleware/docmapMiddleware';
- * const server = express();
- * server.use(docmapMiddleware);
- * server.listen(3000);
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var docmapMiddleware_exports = {};
+__export(docmapMiddleware_exports, {
+  default: () => docmapMiddleware_default
+});
+module.exports = __toCommonJS(docmapMiddleware_exports);
+var import_s_bench = __toESM(require("@coffeekraken/s-bench"), 1);
+var import_s_docmap = __toESM(require("@coffeekraken/s-docmap"), 1);
 let docmapCache;
 function docmapMiddleware(settings = {}) {
-    return function (req, res, next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!res.templateData)
-                res.templateData = {};
-            if (docmapCache) {
-                res.templateData.docmap = docmapCache;
-                return next();
-            }
-            const docmap = new __SDocmap();
-            const docmapJson = yield docmap.read();
-            // console.log(docmapJson);
-            res.templateData.docmap = docmapJson;
-            docmapCache = docmapJson;
-            __SBench.step('request', 'docmapMiddleware');
-            return next();
-        });
-    };
+  return async function(req, res, next) {
+    if (!res.templateData)
+      res.templateData = {};
+    if (docmapCache) {
+      res.templateData.docmap = docmapCache;
+      return next();
+    }
+    const docmap = new import_s_docmap.default();
+    const docmapJson = await docmap.read();
+    res.templateData.docmap = docmapJson;
+    docmapCache = docmapJson;
+    import_s_bench.default.step("request", "docmapMiddleware");
+    return next();
+  };
 }
-export default docmapMiddleware;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwTWlkZGxld2FyZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcE1pZGRsZXdhcmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7OztBQUVkLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRzdDLE9BQU8sU0FBUyxNQUFNLHdCQUF3QixDQUFDO0FBRS9DOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILElBQUksV0FBVyxDQUFDO0FBQ2hCLFNBQVMsZ0JBQWdCLENBQUMsUUFBUSxHQUFHLEVBQUU7SUFDbkMsT0FBTyxVQUFnQixHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUk7O1lBQ2pDLElBQUksQ0FBQyxHQUFHLENBQUMsWUFBWTtnQkFBRSxHQUFHLENBQUMsWUFBWSxHQUFHLEVBQUUsQ0FBQztZQUU3QyxJQUFJLFdBQVcsRUFBRTtnQkFDYixHQUFHLENBQUMsWUFBWSxDQUFDLE1BQU0sR0FBRyxXQUFXLENBQUM7Z0JBQ3RDLE9BQU8sSUFBSSxFQUFFLENBQUM7YUFDakI7WUFFRCxNQUFNLE1BQU0sR0FBRyxJQUFJLFNBQVMsRUFBRSxDQUFDO1lBQy9CLE1BQU0sVUFBVSxHQUFHLE1BQU0sTUFBTSxDQUFDLElBQUksRUFBRSxDQUFDO1lBRXZDLDJCQUEyQjtZQUUzQixHQUFHLENBQUMsWUFBWSxDQUFDLE1BQU0sR0FBRyxVQUFVLENBQUM7WUFDckMsV0FBVyxHQUFHLFVBQVUsQ0FBQztZQUV6QixRQUFRLENBQUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxrQkFBa0IsQ0FBQyxDQUFDO1lBRTdDLE9BQU8sSUFBSSxFQUFFLENBQUM7UUFDbEIsQ0FBQztLQUFBLENBQUM7QUFDTixDQUFDO0FBQ0QsZUFBZSxnQkFBZ0IsQ0FBQyJ9
+var docmapMiddleware_default = docmapMiddleware;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

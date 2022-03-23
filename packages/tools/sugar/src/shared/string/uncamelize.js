@@ -1,39 +1,34 @@
-// @ts-nocheck
-/**
- * @name        uncamelize
- * @namespace            js.string
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Uncamelize a string
- *
- * @param    {String}    string    The string to uncamelize
- * @param    {String}    [separator='-']    The separator to use
- * @return    {String}    The uncamelized string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import uncamelize from '@coffeekraken/sugar/js/string/uncamelize'
- * uncamelize('helloWorldAndUniverse') // hello-world-and-universe
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function uncamelize(text, separator = '-') {
-    // Replace all capital letters by separator followed by lowercase one
-    let res = '';
-    res = text.replace(/[A-Z]/g, function (letter) {
-        return separator + letter.toLowerCase();
-    });
-    // Remove first separator (to avoid _hello_world name)
-    if (res.slice(0, 1) === separator)
-        res = res.slice(1);
-    return res;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var uncamelize_exports = {};
+__export(uncamelize_exports, {
+  default: () => uncamelize_default
+});
+module.exports = __toCommonJS(uncamelize_exports);
+function uncamelize(text, separator = "-") {
+  let res = "";
+  res = text.replace(/[A-Z]/g, function(letter) {
+    return separator + letter.toLowerCase();
+  });
+  if (res.slice(0, 1) === separator)
+    res = res.slice(1);
+  return res;
 }
-export default uncamelize;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5jYW1lbGl6ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInVuY2FtZWxpemUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLFVBQVUsQ0FBQyxJQUFJLEVBQUUsU0FBUyxHQUFHLEdBQUc7SUFDckMscUVBQXFFO0lBQ3JFLElBQUksR0FBRyxHQUFHLEVBQUUsQ0FBQztJQUNiLEdBQUcsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsRUFBRSxVQUFVLE1BQU07UUFDekMsT0FBTyxTQUFTLEdBQUcsTUFBTSxDQUFDLFdBQVcsRUFBRSxDQUFDO0lBQzVDLENBQUMsQ0FBQyxDQUFDO0lBRUgsc0RBQXNEO0lBQ3RELElBQUksR0FBRyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEtBQUssU0FBUztRQUFFLEdBQUcsR0FBRyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBRXRELE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQUNELGVBQWUsVUFBVSxDQUFDIn0=
+var uncamelize_default = uncamelize;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

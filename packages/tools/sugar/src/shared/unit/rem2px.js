@@ -1,31 +1,28 @@
-// @ts-nocheck
-/**
- * @name                    rem2px
- * @namespace            js.unit
- * @type                    Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Convert rem value to a px one
- *
- * @param         {Number}          rem           The rem value to convert
- * @return        {Number}                        The pixel value
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import rem2px from '@coffeekraken/sugar/js/unit/rem2px';
- * rem2px(2);
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var rem2px_exports = {};
+__export(rem2px_exports, {
+  default: () => rem2px_default
+});
+module.exports = __toCommonJS(rem2px_exports);
 function rem2px(rem) {
-    return (rem *
-        parseFloat(getComputedStyle(document.documentElement).fontSize || '16px'));
+  return rem * parseFloat(getComputedStyle(document.documentElement).fontSize || "16px");
 }
-export default rem2px;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVtMnB4LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmVtMnB4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLE1BQU0sQ0FBQyxHQUFHO0lBQ2YsT0FBTyxDQUNILEdBQUc7UUFDSCxVQUFVLENBQ04sZ0JBQWdCLENBQUMsUUFBUSxDQUFDLGVBQWUsQ0FBQyxDQUFDLFFBQVEsSUFBSSxNQUFNLENBQ2hFLENBQ0osQ0FBQztBQUNOLENBQUM7QUFDRCxlQUFlLE1BQU0sQ0FBQyJ9
+var rem2px_default = rem2px;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

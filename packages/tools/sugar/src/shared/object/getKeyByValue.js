@@ -1,31 +1,28 @@
-// @ts-nocheck
-/**
- * @name          getKeyByValue
- * @namespace            js.object
- * @type          Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Return the key that correspond to the passed value in the passed object
- *
- * @param         {Object}        object        The object in which to search for the value
- * @param         {Mixed}         value         The value to find in the object
- * @return        {String}                      The key of the wanted value or false if not found
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import getKeyByValue from '@coffeekraken/sugar/js/object/getKeyByValue';
- * console.log(getKeyByValue({ hello: 'world' }, 'world')); // => hello
- *
- * @since     2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var getKeyByValue_exports = {};
+__export(getKeyByValue_exports, {
+  default: () => getKeyByValue_default
+});
+module.exports = __toCommonJS(getKeyByValue_exports);
 function getKeyByValue(object, value) {
-    return Object.keys(object).find((key) => object[key] === value);
+  return Object.keys(object).find((key) => object[key] === value);
 }
-export default getKeyByValue;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0S2V5QnlWYWx1ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldEtleUJ5VmFsdWUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLGFBQWEsQ0FBQyxNQUFNLEVBQUUsS0FBSztJQUNoQyxPQUFPLE1BQU0sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLEtBQUssS0FBSyxDQUFDLENBQUM7QUFDcEUsQ0FBQztBQUNELGVBQWUsYUFBYSxDQUFDIn0=
+var getKeyByValue_default = getKeyByValue;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

@@ -1,40 +1,43 @@
-// @ts-nocheck
-/**
- * @name              see
- * @namespace           shared.tags
- * @type              Function
- * @platform            node
- * @status              beta
- *
- * Parse the see tag
- *
- * @see       {Object}          data        The data object parsed in the string
- * @param       {ISDocblockBlockSettings}     blockSettings     The SDocblockBlock settings
- * @see      {Object}                      The formated object
- *
- * @todo      interface
- * @todo      doc
- *
- * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var see_exports = {};
+__export(see_exports, {
+  default: () => see_default
+});
+module.exports = __toCommonJS(see_exports);
 function see(data, blockSettings) {
-    if (!Array.isArray(data))
-        data = [data];
-    const res = [];
-    data.forEach((see) => {
-        var _a;
-        if (!see.value)
-            return;
-        const parts = see.value.split(/\s{2,20000}/).map((l) => l.trim());
-        const url = parts[0], description = new String((_a = parts[1]) !== null && _a !== void 0 ? _a : '');
-        description.render = true;
-        res.push({
-            url,
-            description,
-        });
+  if (!Array.isArray(data))
+    data = [data];
+  const res = [];
+  data.forEach((see2) => {
+    var _a;
+    if (!see2.value)
+      return;
+    const parts = see2.value.split(/\s{2,20000}/).map((l) => l.trim());
+    const url = parts[0], description = new String((_a = parts[1]) != null ? _a : "");
+    description.render = true;
+    res.push({
+      url,
+      description
     });
-    return res;
+  });
+  return res;
 }
-export default see;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2VlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFNZDs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsU0FBUyxHQUFHLENBQUMsSUFBSSxFQUFFLGFBQWE7SUFDNUIsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDO1FBQUUsSUFBSSxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7SUFFeEMsTUFBTSxHQUFHLEdBQUcsRUFBRSxDQUFDO0lBRWYsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFOztRQUNqQixJQUFJLENBQUMsR0FBRyxDQUFDLEtBQUs7WUFBRSxPQUFPO1FBQ3ZCLE1BQU0sS0FBSyxHQUFHLEdBQUcsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLGFBQWEsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksRUFBRSxDQUFDLENBQUM7UUFDbEUsTUFBTSxHQUFHLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQyxFQUNoQixXQUFXLEdBQUcsSUFBSSxNQUFNLENBQUMsTUFBQSxLQUFLLENBQUMsQ0FBQyxDQUFDLG1DQUFJLEVBQUUsQ0FBQyxDQUFDO1FBQzdDLFdBQVcsQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDO1FBQzFCLEdBQUcsQ0FBQyxJQUFJLENBQUM7WUFDTCxHQUFHO1lBQ0gsV0FBVztTQUNkLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQyxDQUFDO0lBQ0gsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBQ0QsZUFBZSxHQUFHLENBQUMifQ==
+var see_default = see;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

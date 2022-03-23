@@ -1,51 +1,89 @@
-import __simplifySpecialChars from './simplifySpecialChars';
-export default function namespaceCompliant(str, settings) {
-    settings = Object.assign({ exclude: [] }, (settings !== null && settings !== void 0 ? settings : {}));
-    // spaces
-    str = str.replace(/\s{1,9999999999999999}/gm, '-');
-    // special characters
-    str = __simplifySpecialChars(str);
-    // replace characters like /, etc...
-    const dict = {
-        '\\': '-',
-        '(': '-',
-        ')': '-',
-        '{': '-',
-        '}': '-',
-        '[': '-',
-        ']': '-',
-        '=': '-',
-        '?': '-',
-        '!': '-',
-        '&': '-',
-        '%': '-',
-        '*': '-',
-        '"': '-',
-        "'": '-',
-        '`': '-',
-        '+': '-',
-        '/': '.',
-        '°': '-',
-        $: '-',
-        '<': '-',
-        '>': '-',
-        ',': '-',
-        ':': '-',
-        '#': '-',
-    };
-    settings.exclude.forEach((char) => {
-        delete dict[char];
-    });
-    Object.keys(dict).forEach((char) => {
-        str = str.split(char).join(dict[char]);
-    });
-    // first and last characters + multiple ---
-    str = str.replace(/\.{2,999}/gm, '.');
-    str = str.replace(/^-{1,999}/gm, '');
-    str = str.replace(/-{1,999}$/gm, '');
-    str = str.replace(/-{2,999}/gm, '-');
-    str = str.replace(/[^a-zA-Z0-9@]{1,999}$/, '');
-    str = str.replace(/^[^a-zA-Z0-9@]{1,999}/, '');
-    return str;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var namespaceCompliant_exports = {};
+__export(namespaceCompliant_exports, {
+  default: () => namespaceCompliant
+});
+module.exports = __toCommonJS(namespaceCompliant_exports);
+var import_simplifySpecialChars = __toESM(require("./simplifySpecialChars"), 1);
+function namespaceCompliant(str, settings) {
+  settings = __spreadValues({
+    exclude: []
+  }, settings != null ? settings : {});
+  str = str.replace(/\s{1,9999999999999999}/gm, "-");
+  str = (0, import_simplifySpecialChars.default)(str);
+  const dict = {
+    "\\": "-",
+    "(": "-",
+    ")": "-",
+    "{": "-",
+    "}": "-",
+    "[": "-",
+    "]": "-",
+    "=": "-",
+    "?": "-",
+    "!": "-",
+    "&": "-",
+    "%": "-",
+    "*": "-",
+    '"': "-",
+    "'": "-",
+    "`": "-",
+    "+": "-",
+    "/": ".",
+    "\xB0": "-",
+    $: "-",
+    "<": "-",
+    ">": "-",
+    ",": "-",
+    ":": "-",
+    "#": "-"
+  };
+  settings.exclude.forEach((char) => {
+    delete dict[char];
+  });
+  Object.keys(dict).forEach((char) => {
+    str = str.split(char).join(dict[char]);
+  });
+  str = str.replace(/\.{2,999}/gm, ".");
+  str = str.replace(/^-{1,999}/gm, "");
+  str = str.replace(/-{1,999}$/gm, "");
+  str = str.replace(/-{2,999}/gm, "-");
+  str = str.replace(/[^a-zA-Z0-9@]{1,999}$/, "");
+  str = str.replace(/^[^a-zA-Z0-9@]{1,999}/, "");
+  return str;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmFtZXNwYWNlQ29tcGxpYW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibmFtZXNwYWNlQ29tcGxpYW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sc0JBQXNCLE1BQU0sd0JBQXdCLENBQUM7QUE0QjVELE1BQU0sQ0FBQyxPQUFPLFVBQVUsa0JBQWtCLENBQ3RDLEdBQVcsRUFDWCxRQUFzQztJQUV0QyxRQUFRLG1CQUNKLE9BQU8sRUFBRSxFQUFFLElBQ1IsQ0FBQyxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQUMsQ0FDdEIsQ0FBQztJQUVGLFNBQVM7SUFDVCxHQUFHLEdBQUcsR0FBRyxDQUFDLE9BQU8sQ0FBQywwQkFBMEIsRUFBRSxHQUFHLENBQUMsQ0FBQztJQUNuRCxxQkFBcUI7SUFDckIsR0FBRyxHQUFHLHNCQUFzQixDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQ2xDLG9DQUFvQztJQUNwQyxNQUFNLElBQUksR0FBRztRQUNULElBQUksRUFBRSxHQUFHO1FBQ1QsR0FBRyxFQUFFLEdBQUc7UUFDUixHQUFHLEVBQUUsR0FBRztRQUNSLEdBQUcsRUFBRSxHQUFHO1FBQ1IsR0FBRyxFQUFFLEdBQUc7UUFDUixHQUFHLEVBQUUsR0FBRztRQUNSLEdBQUcsRUFBRSxHQUFHO1FBQ1IsR0FBRyxFQUFFLEdBQUc7UUFDUixHQUFHLEVBQUUsR0FBRztRQUNSLEdBQUcsRUFBRSxHQUFHO1FBQ1IsR0FBRyxFQUFFLEdBQUc7UUFDUixHQUFHLEVBQUUsR0FBRztRQUNSLEdBQUcsRUFBRSxHQUFHO1FBQ1IsR0FBRyxFQUFFLEdBQUc7UUFDUixHQUFHLEVBQUUsR0FBRztRQUNSLEdBQUcsRUFBRSxHQUFHO1FBQ1IsR0FBRyxFQUFFLEdBQUc7UUFDUixHQUFHLEVBQUUsR0FBRztRQUNSLEdBQUcsRUFBRSxHQUFHO1FBQ1IsQ0FBQyxFQUFFLEdBQUc7UUFDTixHQUFHLEVBQUUsR0FBRztRQUNSLEdBQUcsRUFBRSxHQUFHO1FBQ1IsR0FBRyxFQUFFLEdBQUc7UUFDUixHQUFHLEVBQUUsR0FBRztRQUNSLEdBQUcsRUFBRSxHQUFHO0tBQ1gsQ0FBQztJQUVGLFFBQVEsQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDOUIsT0FBTyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDdEIsQ0FBQyxDQUFDLENBQUM7SUFFSCxNQUFNLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQy9CLEdBQUcsR0FBRyxHQUFHLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztJQUMzQyxDQUFDLENBQUMsQ0FBQztJQUNILDJDQUEyQztJQUMzQyxHQUFHLEdBQUcsR0FBRyxDQUFDLE9BQU8sQ0FBQyxhQUFhLEVBQUUsR0FBRyxDQUFDLENBQUM7SUFDdEMsR0FBRyxHQUFHLEdBQUcsQ0FBQyxPQUFPLENBQUMsYUFBYSxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ3JDLEdBQUcsR0FBRyxHQUFHLENBQUMsT0FBTyxDQUFDLGFBQWEsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUNyQyxHQUFHLEdBQUcsR0FBRyxDQUFDLE9BQU8sQ0FBQyxZQUFZLEVBQUUsR0FBRyxDQUFDLENBQUM7SUFDckMsR0FBRyxHQUFHLEdBQUcsQ0FBQyxPQUFPLENBQUMsdUJBQXVCLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFDL0MsR0FBRyxHQUFHLEdBQUcsQ0FBQyxPQUFPLENBQUMsdUJBQXVCLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFFL0MsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDIn0=
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

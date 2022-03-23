@@ -1,14 +1,38 @@
-import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks';
-import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad';
-import __smoothScrollOnHashChange from './smoothScrollOnHashChange';
-import __deepMerge from '../../shared/object/deepMerge';
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var smoothScroll_exports = {};
+__export(smoothScroll_exports, {
+  default: () => smoothScroll_default
+});
+module.exports = __toCommonJS(smoothScroll_exports);
+var import_smoothScrollOnAnchorLinks = __toESM(require("./smoothScrollOnAnchorLinks"), 1);
+var import_smoothScrollOnPageLoad = __toESM(require("./smoothScrollOnPageLoad"), 1);
+var import_smoothScrollOnHashChange = __toESM(require("./smoothScrollOnHashChange"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
 function smoothScroll(settings = {}) {
-    settings = __deepMerge({
-        scroll: {},
-    }, settings);
-    __smoothScrollOnPageLoad(settings);
-    __smoothScrollOnAnchorLinks(settings);
-    __smoothScrollOnHashChange(settings);
+  settings = (0, import_deepMerge.default)({
+    scroll: {}
+  }, settings);
+  (0, import_smoothScrollOnPageLoad.default)(settings);
+  (0, import_smoothScrollOnAnchorLinks.default)(settings);
+  (0, import_smoothScrollOnHashChange.default)(settings);
 }
-export default smoothScroll;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic21vb3RoU2Nyb2xsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic21vb3RoU2Nyb2xsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE9BQU8sMkJBQTJCLE1BQU0sNkJBQTZCLENBQUM7QUFDdEUsT0FBTyx3QkFBd0IsTUFBTSwwQkFBMEIsQ0FBQztBQUNoRSxPQUFPLDBCQUEwQixNQUFNLDRCQUE0QixDQUFDO0FBQ3BFLE9BQU8sV0FBVyxNQUFNLCtCQUErQixDQUFDO0FBbUN4RCxTQUFTLFlBQVksQ0FBQyxXQUEyQyxFQUFFO0lBQy9ELFFBQVEsR0FBRyxXQUFXLENBQ2xCO1FBQ0ksTUFBTSxFQUFFLEVBQUU7S0FDYixFQUNELFFBQVEsQ0FDWCxDQUFDO0lBRUYsd0JBQXdCLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDbkMsMkJBQTJCLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDdEMsMEJBQTBCLENBQUMsUUFBUSxDQUFDLENBQUM7QUFDekMsQ0FBQztBQUNELGVBQWUsWUFBWSxDQUFDIn0=
+var smoothScroll_default = smoothScroll;

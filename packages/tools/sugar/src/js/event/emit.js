@@ -1,37 +1,34 @@
-// @ts-nocheck
-import __SPromise from '@coffeekraken/s-promise';
-/**
- * @name        emit
- * @namespace            js.event
- * @type          Function
- * @platform          js
- * @status      beta
- *
- * This function can ben used to emit an event globally.
- * You can subscribe to these events using the "sugar.js.event.subscribe" function
- *
- * @param         {String}        name          The event name you want to trigger to
- * @param         {Mixed}        value          The value you want to send alongside the event
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import emit from '@coffeekraken/sugar/js/event/emit';
- * emit('something', 'Hello world');
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var emit_exports = {};
+__export(emit_exports, {
+  default: () => emit_default
+});
+module.exports = __toCommonJS(emit_exports);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function emit(name, value) {
-    // check that the global SPromise exists
-    if (!window._sugarEventSPromise)
-        window._sugarEventSPromise = new __SPromise({
-            id: 'sugarEventSPromise',
-        });
-    // emit to the event
-    window._sugarEventSPromise.emit(name, value);
+  if (!window._sugarEventSPromise)
+    window._sugarEventSPromise = new import_s_promise.default({
+      id: "sugarEventSPromise"
+    });
+  window._sugarEventSPromise.emit(name, value);
 }
-export default emit;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW1pdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVtaXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBRWpEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsSUFBSSxDQUFDLElBQVksRUFBRSxLQUFVO0lBQ2xDLHdDQUF3QztJQUN4QyxJQUFJLENBQUMsTUFBTSxDQUFDLG1CQUFtQjtRQUMzQixNQUFNLENBQUMsbUJBQW1CLEdBQUcsSUFBSSxVQUFVLENBQUM7WUFDeEMsRUFBRSxFQUFFLG9CQUFvQjtTQUMzQixDQUFDLENBQUM7SUFDUCxvQkFBb0I7SUFDcEIsTUFBTSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUUsS0FBSyxDQUFDLENBQUM7QUFDakQsQ0FBQztBQUNELGVBQWUsSUFBSSxDQUFDIn0=
+var emit_default = emit;

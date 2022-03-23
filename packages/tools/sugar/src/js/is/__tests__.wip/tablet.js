@@ -1,23 +1,12 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "jest-useragent-mock"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var jest_useragent_mock_1 = require("jest-useragent-mock");
-    module.exports = function (__testFn) {
-        describe('sugar.js.is.tablet', function () {
-            afterEach(function () { jest_useragent_mock_1.clear(); });
-            jest_useragent_mock_1.mockUserAgent('Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148');
-            it('Should detect the passed variable type correctly', function () {
-                expect(__testFn()).toBe(true);
-            });
-        });
-    };
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGFibGV0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGFibGV0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0lBQUEsMkRBQTJEO0lBRTNELE1BQU0sQ0FBQyxPQUFPLEdBQUcsVUFBQyxRQUFRO1FBRXhCLFFBQVEsQ0FBQyxvQkFBb0IsRUFBRTtZQUU3QixTQUFTLENBQUMsY0FBUSwyQkFBSyxFQUFFLENBQUEsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUM3QixtQ0FBYSxDQUFDLHNHQUFzRyxDQUFDLENBQUM7WUFFdEgsRUFBRSxDQUFDLGtEQUFrRCxFQUFFO2dCQUNyRCxNQUFNLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQyxDQUFDLENBQUM7UUFFTCxDQUFDLENBQUMsQ0FBQztJQUVMLENBQUMsQ0FBQSJ9
+var import_jest_useragent_mock = require("jest-useragent-mock");
+module.exports = (__testFn) => {
+  describe("sugar.js.is.tablet", () => {
+    afterEach(() => {
+      (0, import_jest_useragent_mock.clear)();
+    });
+    (0, import_jest_useragent_mock.mockUserAgent)("Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148");
+    it("Should detect the passed variable type correctly", () => {
+      expect(__testFn()).toBe(true);
+    });
+  });
+};

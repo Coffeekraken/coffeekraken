@@ -1,36 +1,38 @@
-// @ts-nocheck
-import __countLine from '../../shared/string/countLine';
-/**
- * @name                                  countLine
- * @namespace            node.terminal
- * @type                                  Function
- * @platform          node
- * @status        beta
- *
- * Count how many lines the passed string will take in the current terminal
- *
- * @param           {String}              string              The string to count
- * @return          {Number}                                How many lines their is in the string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import countLines from '@coffeekraken/sugar/node//countLine';
- * countLines('Hello <red>World</red>'); // 11
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var countLines_exports = {};
+__export(countLines_exports, {
+  default: () => countLines_default
+});
+module.exports = __toCommonJS(countLines_exports);
+var import_countLine = __toESM(require("../../shared/string/countLine"), 1);
 function countLines(string) {
-    let currentCount = 0;
-    let lines = string.split('\n');
-    lines.forEach((line) => {
-        const lineCount = __countLine(line);
-        currentCount += Math.ceil(lineCount / process.stdout.columns);
-    });
-    return currentCount;
+  let currentCount = 0;
+  let lines = string.split("\n");
+  lines.forEach((line) => {
+    const lineCount = (0, import_countLine.default)(line);
+    currentCount += Math.ceil(lineCount / process.stdout.columns);
+  });
+  return currentCount;
 }
-export default countLines;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY291bnRMaW5lcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvdW50TGluZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUlkLE9BQU8sV0FBVyxNQUFNLCtCQUErQixDQUFDO0FBRXhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBUyxVQUFVLENBQUMsTUFBTTtJQUN0QixJQUFJLFlBQVksR0FBRyxDQUFDLENBQUM7SUFDckIsSUFBSSxLQUFLLEdBQUcsTUFBTSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUMvQixLQUFLLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDbkIsTUFBTSxTQUFTLEdBQUcsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ3BDLFlBQVksSUFBSSxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsR0FBRyxPQUFPLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQ2xFLENBQUMsQ0FBQyxDQUFDO0lBQ0gsT0FBTyxZQUFZLENBQUM7QUFDeEIsQ0FBQztBQUNELGVBQWUsVUFBVSxDQUFDIn0=
+var countLines_default = countLines;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

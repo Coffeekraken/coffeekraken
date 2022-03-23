@@ -1,29 +1,29 @@
-// @ts-nocheck
-import __funcToClass from 'func-to-classes';
-/**
- * @name            functionToClass
- * @namespace            js.class.utils
- * @type            Function
- * @platform          js
- * @platform          node
- * @status          beta
- *
- * Transform ES5 Functions to ES6 Classes
- *
- * @param       {Function}          function        The function to transform into class
- * @return      {Class}                             An ES6 class version of your function
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import functionToClass from '@coffeekraken/sugar/js/class/functionToClass';
- * functionToClass(function coco() {});
- *
- * @see             https://www.npmjs.com/package/func-to-classes
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default __funcToClass;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnVuY3Rpb25Ub0NsYXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnVuY3Rpb25Ub0NsYXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxpQkFBaUIsQ0FBQztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsZUFBZSxhQUFhLENBQUMifQ==
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var functionToClass_exports = {};
+__export(functionToClass_exports, {
+  default: () => functionToClass_default
+});
+module.exports = __toCommonJS(functionToClass_exports);
+var import_func_to_classes = __toESM(require("func-to-classes"), 1);
+var functionToClass_default = import_func_to_classes.default;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

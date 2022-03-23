@@ -1,28 +1,32 @@
-// @ts-nocheck
-import __fs from 'fs-extra';
-/**
- * @name        emptyDirSync
- * @namespace            node.fs
- * @type          Function
- * @platform        node
- * @status          beta
- *
- * Empty a directory (sync)
- *
- * @param       {String}              dir           The directory path to empty
- *
- * @example       js
- * import emptyDirSync from '@coffeekraken/node/fs/emptyDirSync';
- * try {
- *    emptyDirSync('my/cool/directory');
- * } catch(e) {}
- *
- * @see             https://github.com/jprichardson/node-fs-extra
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var emptyDirSync_exports = {};
+__export(emptyDirSync_exports, {
+  default: () => emptyDirSync_default
+});
+module.exports = __toCommonJS(emptyDirSync_exports);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function emptyDirSync(dir) {
-    __fs.emptyDirSync(dir);
+  import_fs_extra.default.emptyDirSync(dir);
 }
-export default emptyDirSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW1wdHlEaXJTeW5jLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW1wdHlEaXJTeW5jLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLElBQUksTUFBTSxVQUFVLENBQUM7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsU0FBUyxZQUFZLENBQUMsR0FBRztJQUNyQixJQUFJLENBQUMsWUFBWSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzNCLENBQUM7QUFDRCxlQUFlLFlBQVksQ0FBQyJ9
+var emptyDirSync_default = emptyDirSync;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

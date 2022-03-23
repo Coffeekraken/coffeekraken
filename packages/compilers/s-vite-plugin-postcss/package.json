@@ -1,15 +1,15 @@
 {
-  "name": "@coffeekraken/s-vite-plugin-postcss",
-  "version": "2.0.0",
-  "description": "",
-  "type": "module",
-  "main": "./src/node/exports.js",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "postcss": "^8.2.15",
-    "@coffeekraken/s-sugar-config": "^2.0.0"
-  },
-  "peerDependencies": {}
+    "name": "@coffeekraken/s-vite-plugin-postcss",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./src/node/exports.js",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "postcss": "^8.2.15",
+        "@coffeekraken/s-sugar-config": "^2.0.0"
+    },
+    "peerDependencies": {}
 }

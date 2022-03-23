@@ -1,68 +1,55 @@
-// @ts-nocheck
-import SAjax from '../http/SAjax';
-import __formSerialize from 'form-serialize';
-/**
- * @name      sendForm
- * @namespace            js.dom.form
- * @type      Function
- * @platform          js
- * @status        wip
- *
- * Send a form through an ajax call and return back a promise resolved with the server response
- *
- * @param 		{HTMLFormElement} 		form 		The form to send
- * @return     {Promise}                    A promise resolved when the forn has been sent
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import sendForm from '@coffeekraken/sugar/js/dom/sendForm'
- * const myCoolForm = document.querySelector('.my-cool-form')
- * sentForm(myCoolForm).then((response) => {
- * 	// do something with the response
- * })
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var sendForm_exports = {};
+__export(sendForm_exports, {
+  default: () => sendForm_default
+});
+module.exports = __toCommonJS(sendForm_exports);
+var import_SAjax = __toESM(require("../http/SAjax"), 1);
+var import_form_serialize = __toESM(require("form-serialize"), 1);
 function sendForm(form) {
-    // protect
-    if (!form.tagName || form.tagName.toLowerCase() !== 'form') {
-        console.error('passed arguments', form);
-        throw `The "form" parameter passed to the "sendForm" function is not a form`;
-    }
-    // get the enctype
-    const enctype = form.getAttribute('enctype') || 'application/x-www-form-urlencoded';
-    // encode form datas
-    let data = null;
-    if (enctype === 'application/x-www-form-urlencoded') {
-        // serialize the form values
-        data = __formSerialize(form);
-    }
-    else {
-        data = new FormData(form);
-    }
-    // create ajax instance
-    const ajx = new SAjax({
-        url: form.getAttribute('action'),
-        method: form.getAttribute('method') || 'POST',
-        data: data,
-        contentType: enctype,
-    });
-    // set the loading attribute on the form
-    form.setAttribute('loading', true);
-    // send and return the promise
-    const promise = ajx.send();
-    // listen for the end of loading
-    promise.then((success) => {
-        form.removeAttribute('loading');
-    }, (error) => {
-        form.removeAttribute('loading');
-    });
-    // return the promise
-    return promise;
+  if (!form.tagName || form.tagName.toLowerCase() !== "form") {
+    console.error("passed arguments", form);
+    throw `The "form" parameter passed to the "sendForm" function is not a form`;
+  }
+  const enctype = form.getAttribute("enctype") || "application/x-www-form-urlencoded";
+  let data = null;
+  if (enctype === "application/x-www-form-urlencoded") {
+    data = (0, import_form_serialize.default)(form);
+  } else {
+    data = new FormData(form);
+  }
+  const ajx = new import_SAjax.default({
+    url: form.getAttribute("action"),
+    method: form.getAttribute("method") || "POST",
+    data,
+    contentType: enctype
+  });
+  form.setAttribute("loading", true);
+  const promise = ajx.send();
+  promise.then((success) => {
+    form.removeAttribute("loading");
+  }, (error) => {
+    form.removeAttribute("loading");
+  });
+  return promise;
 }
-export default sendForm;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VuZEZvcm0uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzZW5kRm9ybS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxLQUFLLE1BQU0sZUFBZSxDQUFDO0FBQ2xDLE9BQU8sZUFBZSxNQUFNLGdCQUFnQixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBUyxRQUFRLENBQUMsSUFBcUI7SUFDbkMsVUFBVTtJQUNWLElBQUksQ0FBQyxJQUFJLENBQUMsT0FBTyxJQUFJLElBQUksQ0FBQyxPQUFPLENBQUMsV0FBVyxFQUFFLEtBQUssTUFBTSxFQUFFO1FBQ3hELE9BQU8sQ0FBQyxLQUFLLENBQUMsa0JBQWtCLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFDeEMsTUFBTSxzRUFBc0UsQ0FBQztLQUNoRjtJQUVELGtCQUFrQjtJQUNsQixNQUFNLE9BQU8sR0FDVCxJQUFJLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQyxJQUFJLG1DQUFtQyxDQUFDO0lBRXhFLG9CQUFvQjtJQUNwQixJQUFJLElBQUksR0FBRyxJQUFJLENBQUM7SUFDaEIsSUFBSSxPQUFPLEtBQUssbUNBQW1DLEVBQUU7UUFDakQsNEJBQTRCO1FBQzVCLElBQUksR0FBRyxlQUFlLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDaEM7U0FBTTtRQUNILElBQUksR0FBRyxJQUFJLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQztLQUM3QjtJQUVELHVCQUF1QjtJQUN2QixNQUFNLEdBQUcsR0FBRyxJQUFJLEtBQUssQ0FBQztRQUNsQixHQUFHLEVBQUUsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUM7UUFDaEMsTUFBTSxFQUFFLElBQUksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLElBQUksTUFBTTtRQUM3QyxJQUFJLEVBQUUsSUFBSTtRQUNWLFdBQVcsRUFBRSxPQUFPO0tBQ3ZCLENBQUMsQ0FBQztJQUVILHdDQUF3QztJQUN4QyxJQUFJLENBQUMsWUFBWSxDQUFDLFNBQVMsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUVuQyw4QkFBOEI7SUFDOUIsTUFBTSxPQUFPLEdBQUcsR0FBRyxDQUFDLElBQUksRUFBRSxDQUFDO0lBRTNCLGdDQUFnQztJQUNoQyxPQUFPLENBQUMsSUFBSSxDQUNSLENBQUMsT0FBTyxFQUFFLEVBQUU7UUFDUixJQUFJLENBQUMsZUFBZSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQ3BDLENBQUMsRUFDRCxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQ04sSUFBSSxDQUFDLGVBQWUsQ0FBQyxTQUFTLENBQUMsQ0FBQztJQUNwQyxDQUFDLENBQ0osQ0FBQztJQUVGLHFCQUFxQjtJQUNyQixPQUFPLE9BQU8sQ0FBQztBQUNuQixDQUFDO0FBQ0QsZUFBZSxRQUFRLENBQUMifQ==
+var sendForm_default = sendForm;

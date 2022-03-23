@@ -1,23 +1,45 @@
-// @ts-nocheck
-const ruleObj = {
-    priority: 1,
-    name: 'Required',
-    id: 'required',
-    settings: {
-        when: [undefined, null]
-    },
-    message: 'This value is required',
-    processParams: (params) => {
-        return { value: params };
-    },
-    apply: (value, params, ruleSettings, settings) => {
-        if (params.value === true) {
-            if (ruleSettings.when.indexOf(value) !== -1) {
-                return new Error('This property is <yellow>required</yellow>');
-            }
-        }
-        return value;
-    }
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-export default ruleObj;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVxdWlyZWRSdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmVxdWlyZWRSdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUF1QmQsTUFBTSxPQUFPLEdBQXFCO0lBQ2hDLFFBQVEsRUFBRSxDQUFDO0lBQ1gsSUFBSSxFQUFFLFVBQVU7SUFDaEIsRUFBRSxFQUFFLFVBQVU7SUFDZCxRQUFRLEVBQUU7UUFDUixJQUFJLEVBQUUsQ0FBQyxTQUFTLEVBQUUsSUFBSSxDQUFDO0tBQ3hCO0lBQ0QsT0FBTyxFQUFFLHdCQUF3QjtJQUNqQyxhQUFhLEVBQUUsQ0FBQyxNQUFlLEVBQUUsRUFBRTtRQUNqQyxPQUFPLEVBQUUsS0FBSyxFQUFFLE1BQU0sRUFBRSxDQUFDO0lBQzNCLENBQUM7SUFDRCxLQUFLLEVBQUUsQ0FDTCxLQUFVLEVBQ1YsTUFBbUIsRUFDbkIsWUFBMkIsRUFDM0IsUUFBOEIsRUFDQSxFQUFFO1FBQ2hDLElBQUksTUFBTSxDQUFDLEtBQUssS0FBSyxJQUFJLEVBQUU7WUFDekIsSUFBSSxZQUFZLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtnQkFDM0MsT0FBTyxJQUFJLEtBQUssQ0FBQyw0Q0FBNEMsQ0FBQyxDQUFDO2FBQ2hFO1NBQ0Y7UUFDRCxPQUFPLEtBQUssQ0FBQztJQUNmLENBQUM7Q0FDRixDQUFDO0FBRUYsZUFBZSxPQUFPLENBQUMifQ==
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var requiredRule_exports = {};
+__export(requiredRule_exports, {
+  default: () => requiredRule_default
+});
+module.exports = __toCommonJS(requiredRule_exports);
+const ruleObj = {
+  priority: 1,
+  name: "Required",
+  id: "required",
+  settings: {
+    when: [void 0, null]
+  },
+  message: "This value is required",
+  processParams: (params) => {
+    return { value: params };
+  },
+  apply: (value, params, ruleSettings, settings) => {
+    if (params.value === true) {
+      if (ruleSettings.when.indexOf(value) !== -1) {
+        return new Error("This property is <yellow>required</yellow>");
+      }
+    }
+    return value;
+  }
+};
+var requiredRule_default = ruleObj;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

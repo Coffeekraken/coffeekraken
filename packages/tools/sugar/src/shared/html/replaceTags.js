@@ -1,76 +1,69 @@
-// @ts-nocheck
-import __toString from '../string/toString';
-/**
- * @name                            replaceTags
- * @namespace            js.html
- * @type                            Function
- * @platform          js
- * @platform          node
- * @status            beta
- *
- * Replace all the html tags that you specify by something else that you can fully choose
- *
- * @param               {String}                 text                           The text in which replace all the tags
- * @param               {Object}                 tags                           An object of tags to replace which have as value the replacement function that take the tag name, the tag content and must return the replacement content
- * @return              {String}                                                The new text
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import replaceTags from '@coffeekraken/sugar/js/html/replaceTags';
- * replaceTags('<span>Hello</span> world', {
- *    span: (tag, content) => `<div>${content}</div>`; // => <div>Hello</div> world
- * });
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var replaceTags_exports = {};
+__export(replaceTags_exports, {
+  default: () => replaceTags_default
+});
+module.exports = __toCommonJS(replaceTags_exports);
+var import_toString = __toESM(require("../string/toString"), 1);
 function replaceTags(text, tags) {
-    if (!text)
-        text = '';
-    text = __toString(text);
-    let oneLineText = text.replace(/\r\n/g, '|rn|');
-    oneLineText = oneLineText.replace(/\n/g, '|n|');
-    oneLineText = oneLineText.replace(/\r/g, '|r|');
-    // loop on the tags
-    Object.keys(tags).forEach((tagName) => {
-        // create the match regex
-        const reg = new RegExp(`<\s*${tagName}[^>]*>((.*?))<\\s*\/\\s*${tagName}>`, 'g');
-        // const reg = new RegExp(`<\s*${tagName}[^>]*>(([\S\s]+)?)<\\s*\/\\s*${tagName}>`, 'g');
-        const tagsArray = oneLineText.match(reg);
-        const singleReg = new RegExp(`\\s?<${tagName}\\s?\/>\\s?`, 'g');
-        const singleTagsArray = oneLineText.match(singleReg);
-        if (tagsArray) {
-            for (let i = 0; i < tagsArray.length; i++) {
-                const t = tagsArray[i];
-                const tagArgs = t.match(`<\\s*${tagName}[^>]*>((.*?))<\\s*\/\\s*${tagName}>`);
-                if (!tagArgs)
-                    continue;
-                const tagToReplace = tagArgs[0];
-                const tagContent = tagArgs[1];
-                // call the replacement function
-                oneLineText = oneLineText.replace(tagToReplace, tags[tagName](tagName, tagContent));
-            }
-        }
-        if (singleTagsArray) {
-            for (let i = 0; i < singleTagsArray.length; i++) {
-                const t = singleTagsArray[i];
-                const tagArgs = t.match(`\\s?<${tagName}\\s?\/>\\s?`);
-                if (!tagArgs)
-                    continue;
-                const tagToReplace = tagArgs[0];
-                const tagContent = '';
-                // call the replacement function
-                oneLineText = oneLineText.replace(tagToReplace, tags[tagName](tagName, tagContent));
-            }
-        }
-    });
-    oneLineText = oneLineText.replace(/\|rn\|/g, '\r\n');
-    oneLineText = oneLineText.replace(/\|n\|/g, '\n');
-    oneLineText = oneLineText.replace(/\|r\|/g, '\r');
-    return oneLineText;
+  if (!text)
+    text = "";
+  text = (0, import_toString.default)(text);
+  let oneLineText = text.replace(/\r\n/g, "|rn|");
+  oneLineText = oneLineText.replace(/\n/g, "|n|");
+  oneLineText = oneLineText.replace(/\r/g, "|r|");
+  Object.keys(tags).forEach((tagName) => {
+    const reg = new RegExp(`<s*${tagName}[^>]*>((.*?))<\\s*/\\s*${tagName}>`, "g");
+    const tagsArray = oneLineText.match(reg);
+    const singleReg = new RegExp(`\\s?<${tagName}\\s?/>\\s?`, "g");
+    const singleTagsArray = oneLineText.match(singleReg);
+    if (tagsArray) {
+      for (let i = 0; i < tagsArray.length; i++) {
+        const t = tagsArray[i];
+        const tagArgs = t.match(`<\\s*${tagName}[^>]*>((.*?))<\\s*/\\s*${tagName}>`);
+        if (!tagArgs)
+          continue;
+        const tagToReplace = tagArgs[0];
+        const tagContent = tagArgs[1];
+        oneLineText = oneLineText.replace(tagToReplace, tags[tagName](tagName, tagContent));
+      }
+    }
+    if (singleTagsArray) {
+      for (let i = 0; i < singleTagsArray.length; i++) {
+        const t = singleTagsArray[i];
+        const tagArgs = t.match(`\\s?<${tagName}\\s?/>\\s?`);
+        if (!tagArgs)
+          continue;
+        const tagToReplace = tagArgs[0];
+        const tagContent = "";
+        oneLineText = oneLineText.replace(tagToReplace, tags[tagName](tagName, tagContent));
+      }
+    }
+  });
+  oneLineText = oneLineText.replace(/\|rn\|/g, "\r\n");
+  oneLineText = oneLineText.replace(/\|n\|/g, "\n");
+  oneLineText = oneLineText.replace(/\|r\|/g, "\r");
+  return oneLineText;
 }
-export default replaceTags;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVwbGFjZVRhZ3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZXBsYWNlVGFncy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0sb0JBQW9CLENBQUM7QUFFNUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxXQUFXLENBQUMsSUFBSSxFQUFFLElBQUk7SUFDM0IsSUFBSSxDQUFDLElBQUk7UUFBRSxJQUFJLEdBQUcsRUFBRSxDQUFDO0lBQ3JCLElBQUksR0FBRyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDeEIsSUFBSSxXQUFXLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLEVBQUUsTUFBTSxDQUFDLENBQUM7SUFDaEQsV0FBVyxHQUFHLFdBQVcsQ0FBQyxPQUFPLENBQUMsS0FBSyxFQUFFLEtBQUssQ0FBQyxDQUFDO0lBQ2hELFdBQVcsR0FBRyxXQUFXLENBQUMsT0FBTyxDQUFDLEtBQUssRUFBRSxLQUFLLENBQUMsQ0FBQztJQUNoRCxtQkFBbUI7SUFDbkIsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtRQUNsQyx5QkFBeUI7UUFDekIsTUFBTSxHQUFHLEdBQUcsSUFBSSxNQUFNLENBQ2xCLE9BQU8sT0FBTywyQkFBMkIsT0FBTyxHQUFHLEVBQ25ELEdBQUcsQ0FDTixDQUFDO1FBQ0YseUZBQXlGO1FBQ3pGLE1BQU0sU0FBUyxHQUFHLFdBQVcsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7UUFFekMsTUFBTSxTQUFTLEdBQUcsSUFBSSxNQUFNLENBQUMsUUFBUSxPQUFPLGFBQWEsRUFBRSxHQUFHLENBQUMsQ0FBQztRQUNoRSxNQUFNLGVBQWUsR0FBRyxXQUFXLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBRXJELElBQUksU0FBUyxFQUFFO1lBQ1gsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLFNBQVMsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7Z0JBQ3ZDLE1BQU0sQ0FBQyxHQUFHLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDdkIsTUFBTSxPQUFPLEdBQUcsQ0FBQyxDQUFDLEtBQUssQ0FDbkIsUUFBUSxPQUFPLDJCQUEyQixPQUFPLEdBQUcsQ0FDdkQsQ0FBQztnQkFDRixJQUFJLENBQUMsT0FBTztvQkFBRSxTQUFTO2dCQUN2QixNQUFNLFlBQVksR0FBRyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7Z0JBQ2hDLE1BQU0sVUFBVSxHQUFHLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFFOUIsZ0NBQWdDO2dCQUNoQyxXQUFXLEdBQUcsV0FBVyxDQUFDLE9BQU8sQ0FDN0IsWUFBWSxFQUNaLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsVUFBVSxDQUFDLENBQ3JDLENBQUM7YUFDTDtTQUNKO1FBRUQsSUFBSSxlQUFlLEVBQUU7WUFDakIsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLGVBQWUsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7Z0JBQzdDLE1BQU0sQ0FBQyxHQUFHLGVBQWUsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDN0IsTUFBTSxPQUFPLEdBQUcsQ0FBQyxDQUFDLEtBQUssQ0FBQyxRQUFRLE9BQU8sYUFBYSxDQUFDLENBQUM7Z0JBQ3RELElBQUksQ0FBQyxPQUFPO29CQUFFLFNBQVM7Z0JBQ3ZCLE1BQU0sWUFBWSxHQUFHLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDaEMsTUFBTSxVQUFVLEdBQUcsRUFBRSxDQUFDO2dCQUV0QixnQ0FBZ0M7Z0JBQ2hDLFdBQVcsR0FBRyxXQUFXLENBQUMsT0FBTyxDQUM3QixZQUFZLEVBQ1osSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxVQUFVLENBQUMsQ0FDckMsQ0FBQzthQUNMO1NBQ0o7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILFdBQVcsR0FBRyxXQUFXLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSxNQUFNLENBQUMsQ0FBQztJQUNyRCxXQUFXLEdBQUcsV0FBVyxDQUFDLE9BQU8sQ0FBQyxRQUFRLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFDbEQsV0FBVyxHQUFHLFdBQVcsQ0FBQyxPQUFPLENBQUMsUUFBUSxFQUFFLElBQUksQ0FBQyxDQUFDO0lBRWxELE9BQU8sV0FBVyxDQUFDO0FBQ3ZCLENBQUM7QUFDRCxlQUFlLFdBQVcsQ0FBQyJ9
+var replaceTags_default = replaceTags;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

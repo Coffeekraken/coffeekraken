@@ -1,35 +1,34 @@
-// @ts-nocheck
-import __isValidPath from 'is-valid-path';
-/**
- * @name                            path
- * @namespace           node.is
- * @type                            Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the passed string is a valid path or not
- *
- * @param         {String}            path              The path to check
- * @return        {Boolean}                             true if the path is valide, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import isPath from '@coffeekraken/sugar/js/is/path';
- * isPath('hello/world'); // => true
- *
- * @since           1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function path(path) {
-    // check if the path is valid or not
-    if (!__isValidPath(path))
-        return false;
-    // otherwise, all is ok
-    return true;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var path_exports = {};
+__export(path_exports, {
+  default: () => path_default
+});
+module.exports = __toCommonJS(path_exports);
+var import_is_valid_path = __toESM(require("is-valid-path"), 1);
+function path(path2) {
+  if (!(0, import_is_valid_path.default)(path2))
+    return false;
+  return true;
 }
-export default path;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGF0aC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInBhdGgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sYUFBYSxNQUFNLGVBQWUsQ0FBQztBQUUxQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLElBQUksQ0FBQyxJQUFJO0lBQ2Qsb0NBQW9DO0lBQ3BDLElBQUksQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFDdkMsdUJBQXVCO0lBQ3ZCLE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFDRCxlQUFlLElBQUksQ0FBQyJ9
+var path_default = path;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

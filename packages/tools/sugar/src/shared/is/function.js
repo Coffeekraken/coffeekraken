@@ -1,32 +1,28 @@
-// @ts-nocheck
-/**
- * @name        isFunction
- * @namespace            js.is
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Check if the passed value is a js function
- *
- * @param    {Mixed}    value    The value to check
- * @return   {Boolean}   true if it's a function, false if not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import isFunction from '@coffeekraken/sugar/js/is/function'
- * if (isFunction(function() {})) {
- *   // do something
- * }
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var function_exports = {};
+__export(function_exports, {
+  default: () => function_default
+});
+module.exports = __toCommonJS(function_exports);
 function isFunction(value) {
-    return value && {}.toString.call(value) === '[object Function]';
+  return value && {}.toString.call(value) === "[object Function]";
 }
-export default isFunction;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnVuY3Rpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmdW5jdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxTQUFTLFVBQVUsQ0FBQyxLQUFLO0lBQ3JCLE9BQU8sS0FBSyxJQUFJLEVBQUUsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLG1CQUFtQixDQUFDO0FBQ3BFLENBQUM7QUFDRCxlQUFlLFVBQVUsQ0FBQyJ9
+var function_default = isFunction;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

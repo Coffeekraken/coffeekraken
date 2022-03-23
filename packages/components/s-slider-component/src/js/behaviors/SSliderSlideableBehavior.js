@@ -1,49 +1,73 @@
-import __slideable from '@coffeekraken/sugar/js/dom/slide/slideable';
-import __SSliderBehavior from '../SSliderBehavior';
-// @ts-ignore
-import __css from '../../css/s-slider-slideable-behavior.css';
-import __SSliderSlideableBehaviorInterface from './interface/SSliderSlideableBehaviorInterface';
-export default class SSliderSlideableBehavior extends __SSliderBehavior {
-    /**
-     * @name            constructor
-     * @type        Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    constructor(settings) {
-        super(Object.assign(Object.assign({}, __SSliderSlideableBehaviorInterface.defaults()), settings));
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    static get properties() {
-        return __SSliderBehavior.properties({}, __SSliderSlideableBehaviorInterface);
-    }
-    static get styles() {
-        return __css;
-    }
-    firstUpdated() {
-        // handle slide
-        this._handleSlide();
-        this.$slider.addEventListener('s-slider-goto', (e) => {
-            // @ts-ignore
-            this._$lastGoToSlide = e.detail.$slide;
-        });
-    }
-    _handleSlide() {
-        console.log('SSS', this.settings);
-        __slideable(this.$slider.$slidesWrapper, {
-            friction: this.settings.friction,
-            direction: this.$slider.props.direction
-        }).on('start', () => {
-            this.$slider.stop();
-        }).on('refocusStart', ($slide) => {
-            // if (this._$lastGoToSlide !== $slide) return;
-            this.$slider.setCurrentSlide($slide);
-        });
-    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SSliderSlideableBehavior_exports = {};
+__export(SSliderSlideableBehavior_exports, {
+  default: () => SSliderSlideableBehavior
+});
+module.exports = __toCommonJS(SSliderSlideableBehavior_exports);
+var import_slideable = __toESM(require("@coffeekraken/sugar/js/dom/slide/slideable"), 1);
+var import_SSliderBehavior = __toESM(require("../SSliderBehavior"), 1);
+var import_s_slider_slideable_behavior = __toESM(require("../../css/s-slider-slideable-behavior.css"), 1);
+var import_SSliderSlideableBehaviorInterface = __toESM(require("./interface/SSliderSlideableBehaviorInterface"), 1);
+class SSliderSlideableBehavior extends import_SSliderBehavior.default {
+  static get properties() {
+    return import_SSliderBehavior.default.properties({}, import_SSliderSlideableBehaviorInterface.default);
+  }
+  static get styles() {
+    return import_s_slider_slideable_behavior.default;
+  }
+  constructor(settings) {
+    super(__spreadValues(__spreadValues({}, import_SSliderSlideableBehaviorInterface.default.defaults()), settings));
+  }
+  firstUpdated() {
+    this._handleSlide();
+    this.$slider.addEventListener("s-slider-goto", (e) => {
+      this._$lastGoToSlide = e.detail.$slide;
+    });
+  }
+  _handleSlide() {
+    console.log("SSS", this.settings);
+    (0, import_slideable.default)(this.$slider.$slidesWrapper, {
+      friction: this.settings.friction,
+      direction: this.$slider.props.direction
+    }).on("start", () => {
+      this.$slider.stop();
+    }).on("refocusStart", ($slide) => {
+      this.$slider.setCurrentSlide($slide);
+    });
+  }
 }
-SSliderSlideableBehavior.interface = __SSliderSlideableBehaviorInterface;
-SSliderSlideableBehavior.id = 'slideable';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1NsaWRlclNsaWRlYWJsZUJlaGF2aW9yLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1NsaWRlclNsaWRlYWJsZUJlaGF2aW9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLDRDQUE0QyxDQUFDO0FBQ3JFLE9BQU8saUJBQWlCLE1BQU0sb0JBQW9CLENBQUM7QUFDbkQsYUFBYTtBQUNiLE9BQU8sS0FBSyxNQUFNLDJDQUEyQyxDQUFDO0FBQzlELE9BQU8sbUNBQW1DLE1BQU0sK0NBQStDLENBQUM7QUFNaEcsTUFBTSxDQUFDLE9BQU8sT0FBTyx3QkFBeUIsU0FBUSxpQkFBaUI7SUFnQm5FOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBbUM7UUFDM0MsS0FBSyxpQ0FDRSxtQ0FBbUMsQ0FBQyxRQUFRLEVBQUUsR0FDOUMsUUFBUSxFQUNiLENBQUM7SUFDUCxDQUFDO0lBN0JELE1BQU0sS0FBSyxVQUFVO1FBQ2pCLE9BQU8saUJBQWlCLENBQUMsVUFBVSxDQUFDLEVBQUUsRUFBRSxtQ0FBbUMsQ0FBQyxDQUFDO0lBQ2pGLENBQUM7SUFFRCxNQUFNLEtBQUssTUFBTTtRQUNiLE9BQU8sS0FBSyxDQUFDO0lBQ2pCLENBQUM7SUF5QkQsWUFBWTtRQUNSLGVBQWU7UUFDZixJQUFJLENBQUMsWUFBWSxFQUFFLENBQUM7UUFDcEIsSUFBSSxDQUFDLE9BQU8sQ0FBQyxnQkFBZ0IsQ0FBQyxlQUFlLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUNqRCxhQUFhO1lBQ2IsSUFBSSxDQUFDLGVBQWUsR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLE1BQU0sQ0FBQztRQUMzQyxDQUFDLENBQUMsQ0FBQztJQUVQLENBQUM7SUFFRCxZQUFZO1FBQ1IsT0FBTyxDQUFDLEdBQUcsQ0FBQyxLQUFLLEVBQUUsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ2xDLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLGNBQWMsRUFBRTtZQUNyQyxRQUFRLEVBQUUsSUFBSSxDQUFDLFFBQVEsQ0FBQyxRQUFRO1lBQ2hDLFNBQVMsRUFBRSxJQUFJLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxTQUFTO1NBQzFDLENBQUMsQ0FBQyxFQUFFLENBQUMsT0FBTyxFQUFFLEdBQUcsRUFBRTtZQUNoQixJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxDQUFDO1FBQ3hCLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxjQUFjLEVBQUUsQ0FBQyxNQUFNLEVBQUUsRUFBRTtZQUM3QiwrQ0FBK0M7WUFDL0MsSUFBSSxDQUFDLE9BQU8sQ0FBQyxlQUFlLENBQUMsTUFBTSxDQUFDLENBQUE7UUFDeEMsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDOztBQTVDTSxrQ0FBUyxHQUFHLG1DQUFtQyxDQUFDO0FBQ2hELDJCQUFFLEdBQUcsV0FBVyxDQUFDIn0=
+SSliderSlideableBehavior.interface = import_SSliderSlideableBehaviorInterface.default;
+SSliderSlideableBehavior.id = "slideable";

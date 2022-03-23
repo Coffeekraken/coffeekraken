@@ -1,38 +1,38 @@
-// @ts-nocheck
-import __tcpPortUsed from 'tcp-port-used';
-/**
- * @name            isPortFree
- * @namespace            node.http
- * @type            Function
- * @async
- * @platform        node
- * @status          beta
- *
- * This function simply check if the passed port is free or not
- *
- * @param           {Number}            port            The port to check
- * @return          {Promise}                           A promise resolved with the result when the check has been done
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
- * await isPortFree(22000); // => true
- *
- * @see             https://www.npmjs.com/package/tcp-port-used
- * @since       2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var isPortFree_exports = {};
+__export(isPortFree_exports, {
+  default: () => isPortFree_default
+});
+module.exports = __toCommonJS(isPortFree_exports);
+var import_tcp_port_used = __toESM(require("tcp-port-used"), 1);
 function isPortFree(port) {
-    return new Promise((resolve) => {
-        __tcpPortUsed.check(port, '127.0.0.1').then(function (inUse) {
-            resolve(!inUse);
-        }, function () {
-            resolve(false);
-        });
+  return new Promise((resolve) => {
+    import_tcp_port_used.default.check(port, "127.0.0.1").then(function(inUse) {
+      resolve(!inUse);
+    }, function() {
+      resolve(false);
     });
+  });
 }
-export default isPortFree;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaXNQb3J0RnJlZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImlzUG9ydEZyZWUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLE9BQU8sYUFBYSxNQUFNLGVBQWUsQ0FBQztBQUUxQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxVQUFVLENBQUMsSUFBSTtJQUNwQixPQUFPLElBQUksT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUU7UUFDM0IsYUFBYSxDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUUsV0FBVyxDQUFDLENBQUMsSUFBSSxDQUN2QyxVQUFVLEtBQUs7WUFDWCxPQUFPLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUNwQixDQUFDLEVBQ0Q7WUFDSSxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDbkIsQ0FBQyxDQUNKLENBQUM7SUFDTixDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFDRCxlQUFlLFVBQVUsQ0FBQyJ9
+var isPortFree_default = isPortFree;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

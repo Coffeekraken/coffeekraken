@@ -1,66 +1,80 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
-import { html, css, unsafeCSS } from 'lit';
-import { property } from 'lit/decorators.js';
-import __SClipboardCopyComponentInterface from './interface/SClipboardCopyComponentInterface';
-import __SLitComponent from '@coffeekraken/s-lit-component';
-import __copy from '@coffeekraken/sugar/js/clipboard/copy';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-// @ts-ignore
-import __css from '../css/s-clipboard-copy.css';
-export default class SClipboardCopy extends __SLitComponent {
-    constructor() {
-        super(__deepMerge({
-            litComponent: {
-                shadowDom: false,
-            },
-            componentUtils: {
-                interface: __SClipboardCopyComponentInterface,
-            },
-        }));
-        this._state = 'pending';
-    }
-    static get styles() {
-        return css `
-            ${unsafeCSS(__css)}
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __decorateClass = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
+  for (var i = decorators.length - 1, decorator; i >= 0; i--)
+    if (decorator = decorators[i])
+      result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+  if (kind && result)
+    __defProp(target, key, result);
+  return result;
+};
+var SClipboardCopy_exports = {};
+__export(SClipboardCopy_exports, {
+  default: () => SClipboardCopy,
+  define: () => define
+});
+module.exports = __toCommonJS(SClipboardCopy_exports);
+var import_lit = require("lit");
+var import_decorators = require("lit/decorators.js");
+var import_SClipboardCopyComponentInterface = __toESM(require("./interface/SClipboardCopyComponentInterface"), 1);
+var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
+var import_copy = __toESM(require("@coffeekraken/sugar/js/clipboard/copy"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+var import_s_clipboard_copy = __toESM(require("../css/s-clipboard-copy.css"), 1);
+class SClipboardCopy extends import_s_lit_component.default {
+  constructor() {
+    super((0, import_deepMerge.default)({
+      litComponent: {
+        shadowDom: false
+      },
+      componentUtils: {
+        interface: import_SClipboardCopyComponentInterface.default
+      }
+    }));
+    this._state = "pending";
+  }
+  static get styles() {
+    return import_lit.css`
+            ${(0, import_lit.unsafeCSS)(import_s_clipboard_copy.default)}
         `;
-    }
-    /**
-     * @name                copy
-     * @type                Function
-     *
-     * This method allows you to copy some text through the s-clipboard-copy component that will
-     * update itself to display the copy state.
-     *
-     * @param       {String}            text            The text you want to copy
-     *
-     * @since           2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    copy(text) {
-        this._state = 'copy';
-        __copy(text)
-            .then(() => {
-            this._state = 'success';
-            setTimeout(() => {
-                this._state = 'pending';
-            }, this.props.successTimeout);
-        })
-            .catch((e) => {
-            this._state = 'error';
-            setTimeout(() => {
-                this._state = 'pending';
-            }, this.props.errorTimeout);
-        });
-    }
-    render() {
-        return html `
+  }
+  copy(text) {
+    this._state = "copy";
+    (0, import_copy.default)(text).then(() => {
+      this._state = "success";
+      setTimeout(() => {
+        this._state = "pending";
+      }, this.props.successTimeout);
+    }).catch((e) => {
+      this._state = "error";
+      setTimeout(() => {
+        this._state = "pending";
+      }, this.props.errorTimeout);
+    });
+  }
+  render() {
+    return import_lit.html`
             <div
-                class="${this.componentUtils.className('')}"
+                class="${this.componentUtils.className("")}"
                 state="${this._state}"
             >
                 <svg
@@ -127,14 +141,12 @@ export default class SClipboardCopy extends __SLitComponent {
                 </svg>
             </div>
         `;
-    }
+  }
 }
-__decorate([
-    property()
-], SClipboardCopy.prototype, "_state", void 0);
-export function define(props = {}, tagName = 's-clipboard-copy') {
-    __SLitComponent.setDefaultProps(tagName, props);
-    // @ts-ignore
-    customElements.define(tagName, SClipboardCopy);
+__decorateClass([
+  (0, import_decorators.property)()
+], SClipboardCopy.prototype, "_state", 2);
+function define(props = {}, tagName = "s-clipboard-copy") {
+  import_s_lit_component.default.setDefaultProps(tagName, props);
+  customElements.define(tagName, SClipboardCopy);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsaXBib2FyZENvcHkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ2xpcGJvYXJkQ29weS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQSxPQUFPLEVBQUUsSUFBSSxFQUFFLEdBQUcsRUFBRSxTQUFTLEVBQUUsTUFBTSxLQUFLLENBQUM7QUFDM0MsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBQzdDLE9BQU8sa0NBQWtDLE1BQU0sOENBQThDLENBQUM7QUFDOUYsT0FBTyxlQUFlLE1BQU0sK0JBQStCLENBQUM7QUFDNUQsT0FBTyxNQUFNLE1BQU0sdUNBQXVDLENBQUM7QUFFM0QsT0FBTyxXQUFXLE1BQU0sNkNBQTZDLENBQUM7QUFFdEUsYUFBYTtBQUNiLE9BQU8sS0FBSyxNQUFNLDZCQUE2QixDQUFDO0FBT2hELE1BQU0sQ0FBQyxPQUFPLE9BQU8sY0FBZSxTQUFRLGVBQWU7SUFVdkQ7UUFDSSxLQUFLLENBQ0QsV0FBVyxDQUFDO1lBQ1IsWUFBWSxFQUFFO2dCQUNWLFNBQVMsRUFBRSxLQUFLO2FBQ25CO1lBQ0QsY0FBYyxFQUFFO2dCQUNaLFNBQVMsRUFBRSxrQ0FBa0M7YUFDaEQ7U0FDSixDQUFDLENBQ0wsQ0FBQztRQVpOLFdBQU0sR0FBRyxTQUFTLENBQUM7SUFhbkIsQ0FBQztJQXBCRCxNQUFNLEtBQUssTUFBTTtRQUNiLE9BQU8sR0FBRyxDQUFBO2NBQ0osU0FBUyxDQUFDLEtBQUssQ0FBQztTQUNyQixDQUFDO0lBQ04sQ0FBQztJQWtCRDs7Ozs7Ozs7Ozs7T0FXRztJQUNILElBQUksQ0FBQyxJQUFJO1FBQ0wsSUFBSSxDQUFDLE1BQU0sR0FBRyxNQUFNLENBQUM7UUFDckIsTUFBTSxDQUFDLElBQUksQ0FBQzthQUNQLElBQUksQ0FBQyxHQUFHLEVBQUU7WUFDUCxJQUFJLENBQUMsTUFBTSxHQUFHLFNBQVMsQ0FBQztZQUN4QixVQUFVLENBQUMsR0FBRyxFQUFFO2dCQUNaLElBQUksQ0FBQyxNQUFNLEdBQUcsU0FBUyxDQUFDO1lBQzVCLENBQUMsRUFBRSxJQUFJLENBQUMsS0FBSyxDQUFDLGNBQWMsQ0FBQyxDQUFDO1FBQ2xDLENBQUMsQ0FBQzthQUNELEtBQUssQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ1QsSUFBSSxDQUFDLE1BQU0sR0FBRyxPQUFPLENBQUM7WUFDdEIsVUFBVSxDQUFDLEdBQUcsRUFBRTtnQkFDWixJQUFJLENBQUMsTUFBTSxHQUFHLFNBQVMsQ0FBQztZQUM1QixDQUFDLEVBQUUsSUFBSSxDQUFDLEtBQUssQ0FBQyxZQUFZLENBQUMsQ0FBQztRQUNoQyxDQUFDLENBQUMsQ0FBQztJQUNYLENBQUM7SUFDRCxNQUFNO1FBQ0YsT0FBTyxJQUFJLENBQUE7O3lCQUVNLElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLEVBQUUsQ0FBQzt5QkFDakMsSUFBSSxDQUFDLE1BQU07Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBaUUzQixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBbEhHO0lBREMsUUFBUSxFQUFFOzhDQUNRO0FBb0h2QixNQUFNLFVBQVUsTUFBTSxDQUNsQixRQUFnRCxFQUFFLEVBQ2xELE9BQU8sR0FBRyxrQkFBa0I7SUFFNUIsZUFBZSxDQUFDLGVBQWUsQ0FBQyxPQUFPLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDaEQsYUFBYTtJQUNiLGNBQWMsQ0FBQyxNQUFNLENBQUMsT0FBTyxFQUFFLGNBQWMsQ0FBQyxDQUFDO0FBQ25ELENBQUMifQ==

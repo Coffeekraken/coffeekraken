@@ -1,9 +1,7 @@
-"use strict";
-const __packageRoot = require('../packageRoot');
-describe('sugar.node.path.packageRoot', () => {
-    it('Should return a path when calling it', () => {
-        expect(__packageRoot(__dirname).split('/').pop()).toBe('sugar');
-        expect(__packageRoot(__dirname, true).split('/').pop()).toBe('coffeekraken');
-    });
+const __packageRoot = require("../packageRoot");
+describe("sugar.node.path.packageRoot", () => {
+  it("Should return a path when calling it", () => {
+    expect(__packageRoot(__dirname).split("/").pop()).toBe("sugar");
+    expect(__packageRoot(__dirname, true).split("/").pop()).toBe("coffeekraken");
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZVJvb3QudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInBhY2thZ2VSb290LnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE1BQU0sYUFBYSxHQUFHLE9BQU8sQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO0FBRWhELFFBQVEsQ0FBQyw2QkFBNkIsRUFBRSxHQUFHLEVBQUU7SUFDM0MsRUFBRSxDQUFDLHNDQUFzQyxFQUFFLEdBQUcsRUFBRTtRQUM5QyxNQUFNLENBQUMsYUFBYSxDQUFDLFNBQVMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUNoRSxNQUFNLENBQUMsYUFBYSxDQUFDLFNBQVMsRUFBRSxJQUFJLENBQUMsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxFQUFFLENBQUMsQ0FBQyxJQUFJLENBQzFELGNBQWMsQ0FDZixDQUFDO0lBQ0osQ0FBQyxDQUFDLENBQUM7QUFDTCxDQUFDLENBQUMsQ0FBQyJ9

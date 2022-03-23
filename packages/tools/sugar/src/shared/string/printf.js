@@ -1,35 +1,32 @@
-// @ts-nocheck
-import __sprintf from 'sprintf-js';
-/**
- * @name        printf
- * @namespace            js.string
- * @type      Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * printf php equavalent
- *
- * @param 		{String} 						source 			The source in which to replace the tokens
- * @param 		{Miyed} 			values... 			  Any number of arguments to replace the placeholders in the string
- * @return 	{String} 										The resulting string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example     js
- * import printf from '@coffeekraken/sugar/js/string/printf';
- * printf('Hello %s', 'world'); // => Hello world
- * printf('Hello %s, I\'m %s', 'world', 'John Doe'); // Hello world, I'm John Doe
- * printf('Hello %(first)s, I\'m %(name)s', { first : 'world', name : 'John Doe'}); // Hello world, I'm John Doe
- *
- * @see 				https://www.npmjs.com/package/sprintf-js
- * @since       2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var printf_exports = {};
+__export(printf_exports, {
+  default: () => printf_default
+});
+module.exports = __toCommonJS(printf_exports);
+var import_sprintf_js = __toESM(require("sprintf-js"), 1);
 function _printf(...args) {
-    return __sprintf.sprintf.apply(null, args);
+  return import_sprintf_js.default.sprintf.apply(null, args);
 }
-export default _printf;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJpbnRmLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicHJpbnRmLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFNBQVMsTUFBTSxZQUFZLENBQUM7QUFFbkM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJCRztBQUNILFNBQVMsT0FBTyxDQUFDLEdBQUcsSUFBSTtJQUNwQixPQUFPLFNBQVMsQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsQ0FBQztBQUMvQyxDQUFDO0FBQ0QsZUFBZSxPQUFPLENBQUMifQ==
+var printf_default = _printf;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

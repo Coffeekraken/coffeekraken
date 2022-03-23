@@ -1,46 +1,41 @@
-/**
- * @name            stylesheetToString
- * @namespace       js.css
- * @type             Function
- * @platform          js
- * @status           stable
- *
- * This function take a StyleSheet instance and convert it to a simple string
- *
- * @todo        check online doc
- * @todo        tests
- *
- * @param       {StyleSheet|StyleSheet[]}        stalesheet      The StyleSheet instance to convert
- * @return      {String}                            The css string
- *
- * @example         js
- * import stylesheetToString from '@coffeekraken/sugar/js/dom/css/stylesheetToString';
- * stylesheetToString(document.stylesheets); // => body { ... }
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function stylesheetToString(
-// @ts-ignore
-stylesheet) {
-    let stack = [];
-    if (!(stylesheet instanceof StyleSheetList)) {
-        if (!Array.isArray(stylesheet))
-            stack.push(stylesheet);
-    }
-    else {
-        Object.keys(stylesheet).forEach((k) => {
-            stack.push(stylesheet[k]);
-        });
-    }
-    let str = ``;
-    stack.forEach((style) => {
-        str += style.cssRules
-            ? Array.from(style.cssRules)
-                .map((rule) => { var _a; return (_a = rule.cssText) !== null && _a !== void 0 ? _a : ''; })
-                .join('\n')
-            : '';
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var stylesheetToString_exports = {};
+__export(stylesheetToString_exports, {
+  default: () => stylesheetToString
+});
+module.exports = __toCommonJS(stylesheetToString_exports);
+function stylesheetToString(stylesheet) {
+  let stack = [];
+  if (!(stylesheet instanceof StyleSheetList)) {
+    if (!Array.isArray(stylesheet))
+      stack.push(stylesheet);
+  } else {
+    Object.keys(stylesheet).forEach((k) => {
+      stack.push(stylesheet[k]);
     });
-    return str;
+  }
+  let str = ``;
+  stack.forEach((style) => {
+    str += style.cssRules ? Array.from(style.cssRules).map((rule) => {
+      var _a;
+      return (_a = rule.cssText) != null ? _a : "";
+    }).join("\n") : "";
+  });
+  return str;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVzaGVldFRvU3RyaW5nLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3R5bGVzaGVldFRvU3RyaW5nLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGtCQUFrQjtBQUN0QyxhQUFhO0FBQ2IsVUFBdUM7SUFFdkMsSUFBSSxLQUFLLEdBQVUsRUFBRSxDQUFDO0lBRXRCLElBQUksQ0FBQyxDQUFDLFVBQVUsWUFBWSxjQUFjLENBQUMsRUFBRTtRQUN6QyxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUM7WUFBRSxLQUFLLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0tBQzFEO1NBQU07UUFDSCxNQUFNLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ2xDLEtBQUssQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDOUIsQ0FBQyxDQUFDLENBQUM7S0FDTjtJQUNELElBQUksR0FBRyxHQUFHLEVBQUUsQ0FBQztJQUNiLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNwQixHQUFHLElBQUksS0FBSyxDQUFDLFFBQVE7WUFDakIsQ0FBQyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQztpQkFDckIsR0FBRyxDQUFDLENBQUMsSUFBUyxFQUFFLEVBQUUsV0FBQyxPQUFBLE1BQUEsSUFBSSxDQUFDLE9BQU8sbUNBQUksRUFBRSxDQUFBLEVBQUEsQ0FBQztpQkFDdEMsSUFBSSxDQUFDLElBQUksQ0FBQztZQUNqQixDQUFDLENBQUMsRUFBRSxDQUFDO0lBQ2IsQ0FBQyxDQUFDLENBQUM7SUFDSCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUMifQ==

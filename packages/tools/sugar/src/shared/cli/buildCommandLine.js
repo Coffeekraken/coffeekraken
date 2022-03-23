@@ -1,11 +1,52 @@
-import __argsToString from './argsToString';
-export default function buildCommandLine(command, args = {}, settings) {
-    settings = Object.assign({ keepFalsy: false }, (settings !== null && settings !== void 0 ? settings : {}));
-    // loop on args
-    const string = __argsToString(args, {
-        keepFalsy: settings.keepFalsy,
-    });
-    const cmdString = command.replace('[arguments]', string);
-    return cmdString;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var buildCommandLine_exports = {};
+__export(buildCommandLine_exports, {
+  default: () => buildCommandLine
+});
+module.exports = __toCommonJS(buildCommandLine_exports);
+var import_argsToString = __toESM(require("./argsToString"), 1);
+function buildCommandLine(command, args = {}, settings) {
+  settings = __spreadValues({
+    keepFalsy: false
+  }, settings != null ? settings : {});
+  const string = (0, import_argsToString.default)(args, {
+    keepFalsy: settings.keepFalsy
+  });
+  const cmdString = command.replace("[arguments]", string);
+  return cmdString;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVpbGRDb21tYW5kTGluZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJ1aWxkQ29tbWFuZExpbmUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxjQUFjLE1BQU0sZ0JBQWdCLENBQUM7QUFtRTVDLE1BQU0sQ0FBQyxPQUFPLFVBQVUsZ0JBQWdCLENBQ3BDLE9BQWUsRUFDZixPQUFnQyxFQUFFLEVBQ2xDLFFBQTZDO0lBRTdDLFFBQVEsbUJBQ0osU0FBUyxFQUFFLEtBQUssSUFDYixDQUFDLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FBQyxDQUN0QixDQUFDO0lBQ0YsZUFBZTtJQUNmLE1BQU0sTUFBTSxHQUFHLGNBQWMsQ0FBQyxJQUFJLEVBQUU7UUFDaEMsU0FBUyxFQUFFLFFBQVEsQ0FBQyxTQUFTO0tBQ2hDLENBQUMsQ0FBQztJQUNILE1BQU0sU0FBUyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUMsYUFBYSxFQUFFLE1BQU0sQ0FBQyxDQUFDO0lBQ3pELE9BQU8sU0FBUyxDQUFDO0FBQ3JCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

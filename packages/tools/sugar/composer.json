@@ -1,9 +1,10 @@
 {
-  "autoload": {
-    "files": [
-      "src/php/autoload.php"
-    ]
-  },
-  "require": {
-  }
+    "name": "@coffeekraken/sugar",
+    "autoload": {
+        "files": [
+            "src/php/autoload.php"
+        ]
+    },
+    "require": {},
+    "version": "2.0.0"
 }

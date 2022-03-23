@@ -1,26 +1,31 @@
-import __unescape from 'unescape';
-/**
- * @name            unescapeHtml
- * @namespace       shared.html
- * @type            Function
- * @platform        js
- * @platform        node
- * @status          beta
- *
- * This function allows you to unescape some html characters like &lt;, etc...
- *
- * @param       {String}            html            The html to unescape
- * @return      {String}                            The unescaped html
- *
- * @example         js
- * import unescapeHtml from '@coffeekraken/sugar/shared/html/unescapeHtml';
- * unescapeHtml('&lt;s-code-example&gt;'); // => <s-code-example>
- *
- * @see             https://www.npmjs.com/package/unescape
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function unescapeHtml(html) {
-    return __unescape(html);
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var unescapeHtml_exports = {};
+__export(unescapeHtml_exports, {
+  default: () => unescapeHtml
+});
+module.exports = __toCommonJS(unescapeHtml_exports);
+var import_unescape = __toESM(require("unescape"), 1);
+function unescapeHtml(html) {
+  return (0, import_unescape.default)(html);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5lc2NhcGVIdG1sLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5lc2NhcGVIdG1sLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLFVBQVUsQ0FBQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFlBQVksQ0FBQyxJQUFJO0lBQ3JDLE9BQU8sVUFBVSxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQzVCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

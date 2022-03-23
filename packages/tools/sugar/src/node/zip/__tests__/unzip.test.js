@@ -1,20 +1,25 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
 };
-import __unzip from '../unzip';
-import __tmpDir from '../../path/systemTmpDir';
-describe('sugar.node.zip.unzip', () => {
-    it('Should unzip a simple file correctly at the same destination folder', () => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield __unzip(`${__dirname}/data/coffeekraken-new-logo.zip`, {
-            dest: __tmpDir() + '/downloads',
-        });
-        expect(result.dest).toBe(`${__tmpDir()}/downloads/coffeekraken-new-logo`);
-    }));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var import_unzip = __toESM(require("../unzip"), 1);
+var import_systemTmpDir = __toESM(require("../../path/systemTmpDir"), 1);
+describe("sugar.node.zip.unzip", () => {
+  it("Should unzip a simple file correctly at the same destination folder", async () => {
+    const result = await (0, import_unzip.default)(`${__dirname}/data/coffeekraken-new-logo.zip`, {
+      dest: (0, import_systemTmpDir.default)() + "/downloads"
+    });
+    expect(result.dest).toBe(`${(0, import_systemTmpDir.default)()}/downloads/coffeekraken-new-logo`);
+  });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW56aXAudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInVuemlwLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxPQUFPLE1BQU0sVUFBVSxDQUFDO0FBQy9CLE9BQU8sUUFBUSxNQUFNLHlCQUF5QixDQUFDO0FBRS9DLFFBQVEsQ0FBQyxzQkFBc0IsRUFBRSxHQUFHLEVBQUU7SUFDbEMsRUFBRSxDQUFDLHFFQUFxRSxFQUFFLEdBQVMsRUFBRTtRQUNqRixNQUFNLE1BQU0sR0FBRyxNQUFNLE9BQU8sQ0FDeEIsR0FBRyxTQUFTLGlDQUFpQyxFQUM3QztZQUNJLElBQUksRUFBRSxRQUFRLEVBQUUsR0FBRyxZQUFZO1NBQ2xDLENBQ0osQ0FBQztRQUNGLE1BQU0sQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUNwQixHQUFHLFFBQVEsRUFBRSxrQ0FBa0MsQ0FDbEQsQ0FBQztJQUNOLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDLENBQUMsQ0FBQyJ9

@@ -1,27 +1,29 @@
-import __memoizee from 'memoizee';
-/**
- * @name            memoize
- * @namespace       shared.function
- * @type            Function
- * @platform        js
- * @platform        node
- * @status          stable
- *
- * This function can be used to memorize a function call result in order to save memory.
- * This is just a "proxy" of the "memoizee" package.
- *
- * @example         js
- * import memoize from '@coffeekraken/sugar/shared/function/memoize';
- * const fn = memoize(function(text) => {
- *    return `Hello ${text}`;
- * });
- * const result = fn('world'); // first execution. no cache
- * const result1 = fn('plop'); // first execution with this argument, no cache
- * const result2 = fn('world'); // taken from cache
- *
- * @see             https://www.npmjs.com/package/memoizee
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default __memoizee;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWVtb2l6ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm1lbW9pemUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxVQUFVLE1BQU0sVUFBVSxDQUFDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILGVBQWUsVUFBVSxDQUFDIn0=
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var memoize_exports = {};
+__export(memoize_exports, {
+  default: () => memoize_default
+});
+module.exports = __toCommonJS(memoize_exports);
+var import_memoizee = __toESM(require("memoizee"), 1);
+var memoize_default = import_memoizee.default;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

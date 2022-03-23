@@ -1,42 +1,51 @@
-// @ts-nocheck
-import __SType from '@coffeekraken/s-type';
-/**
- * @name              ofType
- * @namespace            js.is
- * @type              Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * This function take the value to check and an argument type definition string like "String", "Array<String>", etc... and return true or false depending
- * if the value pass the test or not...
- *
- * @param       {Mixed}        value          The value to check
- * @param       {String}       typeString      The argument type definition string to use for the test
- * @param       {Object}        [settings={}]         Some settings to configure your type checking
- * @return      {Boolean|Object}                    true if the value pass the test, an object with two sub-objects describing the issue. 1 names "expected" and the othet names "received"
- *
- * @param     {Boolean}       [verbose=false]       Specify if you want to get back just "false", or an object describing the issue
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import isOfType from '@coffeekraken/sugar/js/is/ofType';
- * ifOfType(true, 'Boolean'); // => true
- * isOfType(12, 'String|Number'); // => true
- * isOfType(['hello',true], 'Array<String>'); // => { expected: { type: 'Array<String>' }, received: { type: 'Array<String|Boolean>' }}
- * isOfType(['hello',true], 'Array<String|Boolean>'); // => true
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var ofType_exports = {};
+__export(ofType_exports, {
+  default: () => ofType_default
+});
+module.exports = __toCommonJS(ofType_exports);
+var import_s_type = __toESM(require("@coffeekraken/s-type"), 1);
 function ofType(value, typeString, settings = {}) {
-    settings = Object.assign({ verbose: false }, settings);
-    const typeInstance = new __SType(typeString, settings);
-    const res = typeInstance.is(value);
-    return res;
+  settings = __spreadValues({
+    verbose: false
+  }, settings);
+  const typeInstance = new import_s_type.default(typeString, settings);
+  const res = typeInstance.is(value);
+  return res;
 }
-export default ofType;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2ZUeXBlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2ZUeXBlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLE9BQU8sTUFBTSxzQkFBc0IsQ0FBQztBQUUzQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQStCRztBQUNILFNBQVMsTUFBTSxDQUFDLEtBQUssRUFBRSxVQUFVLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDNUMsUUFBUSxtQkFDSixPQUFPLEVBQUUsS0FBSyxJQUNYLFFBQVEsQ0FDZCxDQUFDO0lBQ0YsTUFBTSxZQUFZLEdBQUcsSUFBSSxPQUFPLENBQUMsVUFBVSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ3ZELE1BQU0sR0FBRyxHQUFZLFlBQVksQ0FBQyxFQUFFLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDNUMsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBQ0QsZUFBZSxNQUFNLENBQUMifQ==
+var ofType_default = ofType;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

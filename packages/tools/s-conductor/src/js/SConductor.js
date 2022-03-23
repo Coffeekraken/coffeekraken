@@ -1,309 +1,150 @@
-// @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
 };
-import __SClass from '@coffeekraken/s-class';
-import __SDuration from '@coffeekraken/s-duration';
-import __SPromise from '@coffeekraken/s-promise';
-import __when from '@coffeekraken/sugar/js/dom/detect/when';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
-import __SConductorSettingsInterface from './interface/SConductorSettingsInterface';
-export default class SConductor extends __SClass {
-    /**
-     * @name            constructor
-     * @type            Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    constructor(settings) {
-        super(__deepMerge({
-            conductor: __SConductorSettingsInterface.defaults()
-        }, settings !== null && settings !== void 0 ? settings : {}));
-        /**
-         * @name            _tasksStack
-         * @type            Record<string, ISConductorTaskObj>
-         * @private
-         *
-         * Store all the tasks to be executed
-         *
-         * @since       2.0.0
-         * @author      Olivier Bossel <olivier.bossel@gmail.com>
-         */
-        this._tasksStack = {};
-        /**
-         * @name            _runningTasksStack
-         * @type            Record<string, ISConductorTaskObj>
-         * @private
-         *
-         * Store all the tasks that are running
-         *
-         * @since       2.0.0
-         * @author      Olivier Bossel <olivier.bossel@gmail.com>
-         */
-        this._runningTasksStack = {};
-        /**
-         * @name        _logTimeout
-         * @type        number
-         * @private
-         *
-         * Store the log timeout
-         *
-         * @since       2.0.0
-         * @author      Olivier Bossel <olivier.bossel@gmail.com>
-         */
-        this._logTimeout = null;
-        /**
-         * @name        _idleInterval
-         * @type        number
-         * @private
-         *
-         * Store the idle interval
-         *
-         * @since       2.0.0
-         * @author      Olivier Bossel <olivier.bossel@gmail.com>
-         */
-        this._idleInterval = null;
-        /**
-         * @name           _startTime
-         * @type            number
-         * @private
-         *
-         * Store the SDuration instance that tells us how much time has passed between the start of the conductor to the log.
-         * Note that the log is done after the conductor has been idle for the setted "idleTimeout" setting.
-         *
-         * @since       2.0.0
-         * @author      Olivier Bossel <olivier.bossel@gmail.com>
-         */
-        this._startTime = Date.now();
-        this._idleInterval = setInterval(() => {
-            this._checkIdle();
-        }, this.conductorSettings.idleInterval);
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SConductor_exports = {};
+__export(SConductor_exports, {
+  default: () => SConductor
+});
+module.exports = __toCommonJS(SConductor_exports);
+var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
+var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_when = __toESM(require("@coffeekraken/sugar/js/dom/detect/when"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"), 1);
+var import_formatDuration = __toESM(require("@coffeekraken/sugar/shared/time/formatDuration"), 1);
+var import_SConductorSettingsInterface = __toESM(require("./interface/SConductorSettingsInterface"), 1);
+const _SConductor = class extends import_s_class.default {
+  constructor(settings) {
+    super((0, import_deepMerge.default)({
+      conductor: import_SConductorSettingsInterface.default.defaults()
+    }, settings != null ? settings : {}));
+    this._tasksStack = {};
+    this._runningTasksStack = {};
+    this._logTimeout = null;
+    this._idleInterval = null;
+    this._startTime = Date.now();
+    this._idleInterval = setInterval(() => {
+      this._checkIdle();
+    }, this.conductorSettings.idleInterval);
+  }
+  static get defaultInstance() {
+    if (this._defaultInstance)
+      return this._defaultInstance;
+    this._defaultInstance = new _SConductor({
+      conductor: this._defaultInstanceSettings
+    });
+    return this._defaultInstance;
+  }
+  static when($elm, trigger, task) {
+    return this.defaultInstance.when($elm, trigger, task);
+  }
+  static setup(settings) {
+    if (this._defaultInstance) {
+      throw new Error(`Sorry but you need to call the "SConductor.setup" method before all other static methods like "when"`);
     }
-    /**
-     * @name            defaultInstance
-     * @type            SConductor
-     * @static
-     * @get
-     *
-     * Access the default instance of the SConductor class
-     *
-     * @since       2.0.0
-     * @author      Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    static get defaultInstance() {
-        if (this._defaultInstance)
-            return this._defaultInstance;
-        this._defaultInstance = new SConductor({
-            conductor: this._defaultInstanceSettings,
-        });
-        return this._defaultInstance;
+    this._defaultInstanceSettings = settings;
+  }
+  get conductorSettings() {
+    return this._settings.conductor;
+  }
+  _checkIdle() {
+    if (Object.keys(this._runningTasksStack).length) {
+      return;
     }
-    /**
-     * @name            when
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to register a task to execute at a specific time in the "default" conductor instance.
-     *
-     * @param       {TSConductorTrigger[]}     trigger            The trigger when to execute the task. Can be multiple times and the first reached will be the one used
-     * @param       {HTMLElement}       [$elm=null]            The element to watch
-     * @param       {Function}           task           The task function to execute
-     * @return      {SPromise}                          An SPromise instance resolved when one of the passed time(s) is/are reached
-     *
-     * @since      2.0.0
-     * @author      Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    static when($elm, trigger, task) {
-        return this.defaultInstance.when($elm, trigger, task);
+    let taskToExecute;
+    for (let [taskId, taskObj] of Object.entries(this._tasksStack)) {
+      if (taskObj.triggers.includes("idle")) {
+        taskToExecute = taskObj;
+        break;
+      }
     }
-    /**
-     * @name            setup
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to setup the "default" SConductor instance created when you use the static methods like "when", etc...
-     *
-     * @param      {Partial<ISConductorSettings>}       settings    The settings to use
-     *
-     * @since      2.0.0
-     * @author      Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    static setup(settings) {
-        if (this._defaultInstance) {
-            throw new Error(`Sorry but you need to call the "SConductor.setup" method before all other static methods like "when"`);
-        }
-        this._defaultInstanceSettings = settings;
+    if (taskToExecute) {
+      this._executeTask(taskToExecute);
+    } else if (!this._logTimeout && this.conductorSettings.log) {
+      this._logTimeout = setTimeout(() => {
+        console.log(`[SConductor] The conductor "${this.metas.id}" has been executed tasks during ${(0, import_formatDuration.default)(Date.now() - this._startTime - this.conductorSettings.logTimeout)}`);
+      }, this.conductorSettings.logTimeout);
     }
-    /**
-     * @name        conductorSettings
-     * @type        ISConductorSettings
-     * @get
-     *
-     * Access the settings of the conductor
-     *
-     * @since       2.0.0
-     * @author      Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    get conductorSettings() {
-        return this._settings.conductor;
+  }
+  async _executeTask(taskObj) {
+    this._runningTasksStack[taskObj.id] = taskObj;
+    clearTimeout(this._logTimeout);
+    taskObj.watchers.forEach((watcher) => {
+      var _a;
+      (_a = watcher.cancel) == null ? void 0 : _a.call(watcher);
+    });
+    const duration = new import_s_duration.default();
+    await taskObj.task();
+    taskObj = __spreadValues(__spreadValues({
+      resolved: true
+    }, taskObj), duration.end());
+    delete this._tasksStack[taskObj.id];
+    delete this._runningTasksStack[taskObj.id];
+    taskObj.resolve(taskObj);
+    clearInterval(this._idleInterval);
+    setTimeout(() => {
+      this._checkIdle();
+      this._idleInterval = setInterval(() => {
+        this._checkIdle();
+      }, this.conductorSettings.idleTimeout);
+    }, 100);
+    return taskObj;
+  }
+  _elementNeeded($elm = null, time) {
+    if (!$elm) {
+      throw new Error(`To use the "${time}" SConductor.when detector, you MUST pass an HTMLElement...`);
     }
-    /**
-     * @name        _checkIdle
-     * @type       Function
-     * @private
-     *
-     * Check if the conductor is idle (no more tasks to execute) and run the next idle task
-     *
-     * @since       2.0.0
-     * @author      Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    _checkIdle() {
-        if (Object.keys(this._runningTasksStack).length) {
-            return;
-        }
-        let taskToExecute;
-        for (let [taskId, taskObj] of Object.entries(this._tasksStack)) {
-            if (taskObj.triggers.includes('idle')) {
-                taskToExecute = taskObj;
-                break;
-            }
-        }
-        if (taskToExecute) {
-            this._executeTask(taskToExecute);
-        }
-        else if (!this._logTimeout && this.conductorSettings.log) {
-            this._logTimeout = setTimeout(() => {
-                console.log(`[SConductor] The conductor "${this.metas.id}" has been executed tasks during ${__formatDuration(Date.now() -
-                    this._startTime -
-                    this.conductorSettings.logTimeout)}`);
-            }, this.conductorSettings.logTimeout);
-        }
-    }
-    /**
-     * @name        _executeTask
-     * @type       Function
-     * @async
-     * @private
-     *
-     * Build the result object to send back with the promise resolve statement
-     *
-     * @param       {ISConductorTaskObj}    taskObj    The task object to execute
-     * @return      {Promise<ISConductorTaskObj}        A promise resolved with the task object
-     *
-     * @since       2.0.0
-     * @author      Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    _executeTask(taskObj) {
-        return __awaiter(this, void 0, void 0, function* () {
-            // add the task into the running stack
-            this._runningTasksStack[taskObj.id] = taskObj;
-            // cancel the log timeout
-            clearTimeout(this._logTimeout);
-            // cancel all watchers
-            taskObj.watchers.forEach((watcher) => {
-                var _a;
-                (_a = watcher.cancel) === null || _a === void 0 ? void 0 : _a.call(watcher);
-            });
-            // init an SDuration instance
-            const duration = new __SDuration();
-            // execute the task
-            yield taskObj.task();
-            // set the duration
-            taskObj = Object.assign(Object.assign({ resolved: true }, taskObj), duration.end());
-            // remove the task from the running stack
-            delete this._tasksStack[taskObj.id];
-            delete this._runningTasksStack[taskObj.id];
-            // resolve the task
-            taskObj.resolve(taskObj);
-            // check idle
-            clearInterval(this._idleInterval);
-            setTimeout(() => {
-                this._checkIdle();
-                this._idleInterval = setInterval(() => {
-                    this._checkIdle();
-                }, this.conductorSettings.idleTimeout);
-            }, 100);
-            // return the task object
-            return taskObj;
-        });
-    }
-    /**
-     * @name            _elementNeeded
-     * @type            Function
-     *
-     * This method simply check if the element parameter has been passed or not.
-     * If not, throw an error
-     *
-     * @param       {HTMLElement}       [$elm=null]            The element that has been passed
-     *
-     * @since      2.0.0
-     * @author      Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    _elementNeeded($elm = null, time) {
-        if (!$elm) {
-            throw new Error(`To use the "${time}" SConductor.when detector, you MUST pass an HTMLElement...`);
-        }
-    }
-    /**
-     * @name            when
-     * @type            Function
-     *
-     * This method allows you to register a task to execute at a specific time in the "default" conductor instance.
-     *
-     * @param       {TSConductorTrigger[]}     time            The time to execute the task. Can be multiple times and the first reached will be the one used
-     * @param       {HTMLElement}       [$elm=null]            The element to watch. Optional depending on the time listened
-     * @param       {Function}           task           The task function to execute
-     * @return      {SPromise}                          An SPromise instance resolved when one of the passed time(s) is/are reached
-     *
-     * @since      2.0.0
-     * @author      Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    when($elm, trigger, task) {
-        return new __SPromise(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
-            // ensure we work with an array of time(s)
-            if (!Array.isArray(trigger))
-                trigger = trigger.split(',').map((t) => t.trim());
-            // register the task
-            const taskObj = {
-                id: __uniqid(),
-                registerTime: Date.now(),
-                triggers: trigger,
-                $elm,
-                task,
-                watchers: [],
-                resolve,
-            };
-            // adding into tasks stack
-            this._tasksStack[taskObj.id] = taskObj;
-            // listen for at least 1 promise resolved
-            yield __when($elm, trigger, {});
-            // execute the task
-            this._executeTask(taskObj);
-        }));
-    }
-}
-/**
- * @name            _defaultInstanceSettings
- * @type            Partial<ISConductorSettings>
- * @private
- * @static
- *
- * Store the default instance settings
- *
- * @since       2.0.0
- * @author      Olivier Bossel <olivier.bossel@gmail.com>
- */
+  }
+  when($elm, trigger, task) {
+    return new import_s_promise.default(async ({ resolve, reject }) => {
+      if (!Array.isArray(trigger))
+        trigger = trigger.split(",").map((t) => t.trim());
+      const taskObj = {
+        id: (0, import_uniqid.default)(),
+        registerTime: Date.now(),
+        triggers: trigger,
+        $elm,
+        task,
+        watchers: [],
+        resolve
+      };
+      this._tasksStack[taskObj.id] = taskObj;
+      await (0, import_when.default)($elm, trigger, {});
+      this._executeTask(taskObj);
+    });
+  }
+};
+let SConductor = _SConductor;
 SConductor._defaultInstanceSettings = {};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbmR1Y3Rvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDb25kdWN0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7OztBQUVkLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sV0FBaUMsTUFBTSwwQkFBMEIsQ0FBQztBQUN6RSxPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUNqRCxPQUFPLE1BQXdCLE1BQU0sd0NBQXdDLENBQUM7QUFDOUUsT0FBTyxXQUFXLE1BQU0sNkNBQTZDLENBQUM7QUFDdEUsT0FBTyxRQUFRLE1BQU0sMENBQTBDLENBQUM7QUFDaEUsT0FBTyxnQkFBZ0IsTUFBTSxnREFBZ0QsQ0FBQztBQUM5RSxPQUFPLDZCQUE2QixNQUFNLHlDQUF5QyxDQUFDO0FBOERwRixNQUFNLENBQUMsT0FBTyxPQUFPLFVBQVcsU0FBUSxRQUFRO0lBcUs1Qzs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLFFBQTJDO1FBQ25ELEtBQUssQ0FBQyxXQUFXLENBQ1Q7WUFDSSxTQUFTLEVBQUUsNkJBQTZCLENBQUMsUUFBUSxFQUFFO1NBQ3RELEVBQ0QsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNqQixDQUNKLENBQUM7UUE1Rk47Ozs7Ozs7OztXQVNHO1FBQ0gsZ0JBQVcsR0FBdUMsRUFBRSxDQUFDO1FBRXJEOzs7Ozs7Ozs7V0FTRztRQUNILHVCQUFrQixHQUF1QyxFQUFFLENBQUM7UUFnQjVEOzs7Ozs7Ozs7V0FTRztRQUNILGdCQUFXLEdBQVcsSUFBSSxDQUFDO1FBRTNCOzs7Ozs7Ozs7V0FTRztRQUNILGtCQUFhLEdBQVcsSUFBSSxDQUFDO1FBRTdCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxlQUFVLEdBQVcsSUFBSSxDQUFDLEdBQUcsRUFBRSxDQUFDO1FBcUI1QixJQUFJLENBQUMsYUFBYSxHQUFHLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDbEMsSUFBSSxDQUFD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

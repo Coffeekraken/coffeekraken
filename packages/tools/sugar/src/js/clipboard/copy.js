@@ -1,29 +1,29 @@
-import __copy from 'clipboard-copy';
-/**
- * @name                copy
- * @namespace           js.clipboard
- * @type                Function
- * @platform          js
- * @async
- * @status              stable
- *
- * This function allows you to copy to the clipboard the passed text
- *
- * @param       {String}            text            The text to copy
- * @return      {Promise}                          A promise fullfilled when the copy has been made correctly
- *
- * @todo        doc
- * @todo        tests
- *
- * @example         js
- * import __copy from '@coffeekraken/sugar/js/clipboard/copy';
- * __copy('Hello world');
- *
- * @see             https://www.npmjs.com/package/clipboard-copy
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function copy(text) {
-    return __copy(text);
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var copy_exports = {};
+__export(copy_exports, {
+  default: () => copy
+});
+module.exports = __toCommonJS(copy_exports);
+var import_clipboard_copy = __toESM(require("clipboard-copy"), 1);
+function copy(text) {
+  return (0, import_clipboard_copy.default)(text);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29weS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvcHkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxNQUFNLE1BQU0sZ0JBQWdCLENBQUM7QUFFcEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxJQUFJLENBQUMsSUFBWTtJQUNyQyxPQUFPLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN4QixDQUFDIn0=

@@ -1,22 +1,22 @@
 {
-  "name": "@coffeekraken/s-view-renderer",
-  "version": "2.0.0",
-  "description": "",
-  "type": "module",
-  "main": "./src/node/exports.js",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-view-renderer-engine-blade": "^2.0.0",
-    "@coffeekraken/s-view-renderer-data-handler-js": "^2.0.0",
-    "@coffeekraken/s-duration": "^2.0.0",
-    "@coffeekraken/s-file": "^2.0.0",
-    "@coffeekraken/s-sugar-config": "^2.0.0",
-    "@coffeekraken/s-interface": "^2.0.0",
-    "@coffeekraken/s-process": "^2.0.0",
-    "@coffeekraken/s-promise": "^2.0.0",
-    "@coffeekraken/sugar": "^2.0.0",
-    "exec-php": "^0.0.5"
-  }
+    "name": "@coffeekraken/s-view-renderer",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./src/node/exports.js",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-view-renderer-engine-blade": "^2.0.0",
+        "@coffeekraken/s-view-renderer-data-handler-js": "^2.0.0",
+        "@coffeekraken/s-duration": "^2.0.0",
+        "@coffeekraken/s-file": "^2.0.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/s-process": "^2.0.0",
+        "@coffeekraken/s-promise": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0",
+        "exec-php": "^0.0.5"
+    }
 }

@@ -1,35 +1,54 @@
-import __SInterfaceRenderer from './SInterfaceRenderer';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-/**
- * @name            SInterfaceTerminalRenderer
- * @namespace       sugar.node.interface.renderers
- * @type            Class
- * @extends         SClass
- *
- * This class represent the terminal interface renderer
- *
- * @param        {ISInterface}              interface           The interface you want to render
- * @param       {ISInterfaceTerminalRendererSettings}       [settings={}]       Some settings to configure your renderer like properties to exclude, etc...
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class SInterfaceTerminalRenderer extends __SInterfaceRenderer {
-    /**
-     * @name        constructor
-     * @type          Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    constructor(int, settings) {
-        super(int, Object.assign({ templatesDir: `${__dirname()}/terminal` }, settings));
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
-    renderType(type) { }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SInterfaceTerminalRenderer_exports = {};
+__export(SInterfaceTerminalRenderer_exports, {
+  default: () => SInterfaceTerminalRenderer_default
+});
+module.exports = __toCommonJS(SInterfaceTerminalRenderer_exports);
+var import_SInterfaceRenderer = __toESM(require("./SInterfaceRenderer"), 1);
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"), 1);
+class SInterfaceTerminalRenderer extends import_SInterfaceRenderer.default {
+  constructor(int, settings) {
+    super(int, __spreadValues({
+      templatesDir: `${(0, import_dirname.default)()}/terminal`
+    }, settings));
+  }
+  renderType(type) {
+  }
 }
-SInterfaceTerminalRenderer.id = 'terminal';
-export default SInterfaceTerminalRenderer;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZVRlcm1pbmFsUmVuZGVyZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTSW50ZXJmYWNlVGVybWluYWxSZW5kZXJlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLG9CQUFvQixNQUFNLHNCQUFzQixDQUFDO0FBS3hELE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRTVEOzs7Ozs7Ozs7Ozs7O0dBYUc7QUFDSCxNQUFNLDBCQUEyQixTQUFRLG9CQUFvQjtJQUczRDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUNFLEdBQWlCLEVBQ2pCLFFBQStDO1FBRS9DLEtBQUssQ0FBQyxHQUFHLGtCQUNQLFlBQVksRUFBRSxHQUFHLFNBQVMsRUFBRSxXQUFXLElBQ3BDLFFBQVEsRUFDWCxDQUFDO0lBQ0wsQ0FBQztJQUVELFVBQVUsQ0FBQyxJQUFJLElBQUcsQ0FBQzs7QUF0QlosNkJBQUUsR0FBRyxVQUFVLENBQUM7QUF5QnpCLGVBQWUsMEJBQTBCLENBQUMifQ==
+SInterfaceTerminalRenderer.id = "terminal";
+var SInterfaceTerminalRenderer_default = SInterfaceTerminalRenderer;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

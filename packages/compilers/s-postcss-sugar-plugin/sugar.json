@@ -5,5 +5,18 @@
                 "path": "./src/config"
             }
         ]
-    }
+    },
+    "cli": [
+        {
+            "stack": "postcss",
+            "description": "Sugar postcss plugin related commands",
+            "actions": {
+                "installPlugin": {
+                    "scope": "package",
+                    "description": "Add the sugar postcss plugin into yout project",
+                    "process": "./src/cli/installPlugin.cli.js"
+                }
+            }
+        }
+    ]
 }

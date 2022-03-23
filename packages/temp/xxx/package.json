@@ -1,0 +1,30 @@
+{
+    "name": "xxx",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "autoprefixer": "^10.4.4",
+        "next": "12.1.0",
+        "postcss-atroot": "^0.2.3",
+        "postcss-extend-rule": "^4.0.0",
+        "postcss-import": "^14.1.0",
+        "postcss-nested": "^5.0.6",
+        "postcss-property-lookup": "^3.0.0",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "17.0.22",
+        "@types/react": "17.0.42",
+        "eslint": "8.11.0",
+        "eslint-config-next": "12.1.0",
+        "typescript": "4.6.2"
+    }
+}

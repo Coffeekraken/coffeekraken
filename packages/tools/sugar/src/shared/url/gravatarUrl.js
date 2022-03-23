@@ -1,33 +1,32 @@
-// @ts-nocheck
-import __md5 from '../crypt/md5';
-/**
- * @name            gravatarUrl
- * @namespace            js.url
- * @type            Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Return a gravatar url depending on the passed user email and size
- *
- * @param           {String}            email             The user email
- * @param           {Number}            [size=200]        The wanted image size. From 1 to 2048
- * @return          {String}                              The generated gravatar url
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- * @todo      move into "gravatar" folder
- *
- * @example       js
- * import gravatarUrl from '@coffeekraken/sugar/js/util/gravatarUrl';
- * console.log(gravatarUrl('olivier.bossel@gmail.com')); // https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var gravatarUrl_exports = {};
+__export(gravatarUrl_exports, {
+  default: () => gravatarUrl_default
+});
+module.exports = __toCommonJS(gravatarUrl_exports);
+var import_md5 = __toESM(require("../crypt/md5"), 1);
 function gravatarUrl(email, size = 200) {
-    return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
+  return `https://www.gravatar.com/avatar/${import_md5.default.encrypt(email)}?s=${size}`;
 }
-export default gravatarUrl;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ3JhdmF0YXJVcmwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJncmF2YXRhclVybC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxLQUFLLE1BQU0sY0FBYyxDQUFDO0FBRWpDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBUyxXQUFXLENBQUMsS0FBSyxFQUFFLElBQUksR0FBRyxHQUFHO0lBQ2xDLE9BQU8sbUNBQW1DLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLE1BQU0sSUFBSSxFQUFFLENBQUM7QUFDL0UsQ0FBQztBQUNELGVBQWUsV0FBVyxDQUFDIn0=
+var gravatarUrl_default = gravatarUrl;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

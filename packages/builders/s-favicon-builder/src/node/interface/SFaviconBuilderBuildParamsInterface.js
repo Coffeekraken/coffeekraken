@@ -1,44 +1,52 @@
-import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-/**
- * @name                SFaviconBuilderBuildParamsInterface
- * @namespace           node.interface
- * @type.                      Class
- * @extends             SInterface
- * @interface
- * @status              beta
- * @platform             node
- *
- * This class represent the interface that describe parameters of the SFaviconBuilder.build method
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default class SFaviconBuilderBuildParamsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            input: {
-                description: 'Specify the input image file to use',
-                type: 'String',
-                required: true,
-                default: __SSugarConfig.get('faviconBuilder.input')
-            },
-            outDir: {
-                description: 'Specify the output directory ou want your icons in',
-                type: 'String',
-                required: true,
-                default: __SSugarConfig.get('faviconBuilder.outDir')
-            },
-            settings: {
-                description: 'Specify some settings to override and pass to the [favicons](https://www.npmjs.com/package/favicons) builder',
-                type: 'Object',
-                default: __SSugarConfig.get('faviconBuilder.settings')
-            }
-        };
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SFaviconBuilderBuildParamsInterface_exports = {};
+__export(SFaviconBuilderBuildParamsInterface_exports, {
+  default: () => SFaviconBuilderBuildParamsInterface
+});
+module.exports = __toCommonJS(SFaviconBuilderBuildParamsInterface_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+class SFaviconBuilderBuildParamsInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      input: {
+        description: "Specify the input image file to use",
+        type: "String",
+        required: true,
+        default: import_s_sugar_config.default.get("faviconBuilder.input")
+      },
+      outDir: {
+        description: "Specify the output directory ou want your icons in",
+        type: "String",
+        required: true,
+        default: import_s_sugar_config.default.get("faviconBuilder.outDir")
+      },
+      settings: {
+        description: "Specify some settings to override and pass to the [favicons](https://www.npmjs.com/package/favicons) builder",
+        type: "Object",
+        default: import_s_sugar_config.default.get("faviconBuilder.settings")
+      }
+    };
+  }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Zhdmljb25CdWlsZGVyQnVpbGRQYXJhbXNJbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRmF2aWNvbkJ1aWxkZXJCdWlsZFBhcmFtc0ludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxPQUFPLG1DQUFvQyxTQUFRLFlBQVk7SUFDekUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxXQUFXLEVBQUUscUNBQXFDO2dCQUNsRCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTtnQkFDZCxPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxzQkFBc0IsQ0FBQzthQUN0RDtZQUNELE1BQU0sRUFBRTtnQkFDSixXQUFXLEVBQUUsb0RBQW9EO2dCQUNqRSxJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTtnQkFDZCxPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyx1QkFBdUIsQ0FBQzthQUN2RDtZQUNELFFBQVEsRUFBRTtnQkFDTixXQUFXLEVBQUUsOEdBQThHO2dCQUMzSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyx5QkFBeUIsQ0FBQzthQUN6RDtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0oifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

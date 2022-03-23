@@ -1,41 +1,27 @@
-// @ts-nocheck
-/**
- * @name 		                SEvent
- * @namespace            js.event
- * @type                    Class
- * @import              import SEvent from '@coffeekraken/sugar/js/event/SEvent';
- * @platform          js
- * @status                  stable
- *
- * Proxy class to create custom events that can be dispatched
- * through the standard dispatch method on any HTMLElement
- *
- * @setting         {Boolean}       [cancelable=true]           Specify if the event is cancelable or not
- * @setting         {Boolean}           [bubbles=true]          Specify if the event has to bubble or not
- * @setting             {Any}            [detail=null]           Specify some data to emit with the event
- *
- * @param           {String}            name            The event name
- * @param           {ISEventSettings}           [settings={}]           Some settings to tweak the event behavior
- *
- * @todo            interface
- * @todo            doc
- * @todo            tests
- *
- * @example 	          js
- * let myEvent = new SEvent('myCoolEvent', {
- * 		cancelable : true,
- * 		bubbles : false,
- * 		detail : {
- * 			// some datas to send with the event
- * 		}
- * });
- * // dispatch the event from an HTMLElement
- * myHTMLElement.dispatch(myEvent);
- *
- * @see 		https://www.npmjs.com/package/customevent
- * @since           2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-import customEvent from 'custom-event';
-export default customEvent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0V2ZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0V2ZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0NHO0FBQ0gsT0FBTyxXQUFXLE1BQU0sY0FBYyxDQUFDO0FBUXZDLGVBQWUsV0FBVyxDQUFDIn0=
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SEvent_exports = {};
+__export(SEvent_exports, {
+  default: () => SEvent_default
+});
+module.exports = __toCommonJS(SEvent_exports);
+var import_custom_event = __toESM(require("custom-event"), 1);
+var SEvent_default = import_custom_event.default;

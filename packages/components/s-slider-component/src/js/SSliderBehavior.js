@@ -1,20 +1,33 @@
-import __SLitComponent from '@coffeekraken/s-lit-component';
-export default class SSliderBehavior {
-    /**
-     * @name        constructor
-     * @type        Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    constructor(settings) {
-        this.settings = settings !== null && settings !== void 0 ? settings : {};
-        // @ts-ignore
-        this.$slider = undefined;
-    }
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var SSliderBehavior_exports = {};
+__export(SSliderBehavior_exports, {
+  default: () => SSliderBehavior
+});
+module.exports = __toCommonJS(SSliderBehavior_exports);
+var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
+class SSliderBehavior {
+  constructor(settings) {
+    this.settings = settings != null ? settings : {};
+    this.$slider = void 0;
+  }
 }
-SSliderBehavior.properties = __SLitComponent.properties;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1NsaWRlckJlaGF2aW9yLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1NsaWRlckJlaGF2aW9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sZUFBZSxNQUFNLCtCQUErQixDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLE9BQU8sZUFBZTtJQTJCaEM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxRQUFjO1FBQ3RCLElBQUksQ0FBQyxRQUFRLEdBQUcsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDO1FBQy9CLGFBQWE7UUFDYixJQUFJLENBQUMsT0FBTyxHQUFHLFNBQVMsQ0FBQztJQUM3QixDQUFDOztBQWhCTSwwQkFBVSxHQUFHLGVBQWUsQ0FBQyxVQUFVLENBQUMifQ==
+SSliderBehavior.properties = import_s_lit_component.default.properties;

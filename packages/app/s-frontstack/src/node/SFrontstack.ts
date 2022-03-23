@@ -29,9 +29,7 @@ export interface ISFrontstackCtorSettings {
     frontstack: Partial<ISFrontstackSettings>;
 }
 
-export interface ISFrontstackNewParams {
-    
-}
+export interface ISFrontstackNewParams {}
 
 export interface ISFrontstackRecipesettings {
     process: Partial<ISProcessSettings>;
@@ -64,8 +62,8 @@ export interface ISFrontstackRecipeStack {
     sharedParams: any;
     runInParallel: boolean;
     actions:
-    | Record<string, ISFrontstackAction>
-    | Record<string, ISFrontstackActionWrapper>;
+        | Record<string, ISFrontstackAction>
+        | Record<string, ISFrontstackActionWrapper>;
 }
 
 export interface ISFrontstackRecipe {
@@ -143,40 +141,45 @@ export default class SFrontstack extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     new(params: ISFrontstackNewParams | string) {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const frontstackConfig = __SSugarConfig.get('frontstack');
-                const recipesObj = __filter(frontstackConfig.recipes, (key, recipeObj) => {
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            const frontstackConfig = __SSugarConfig.get('frontstack');
+            const recipesObj = __filter(
+                frontstackConfig.recipes,
+                (key, recipeObj) => {
                     return recipeObj.stacks?.new !== undefined;
-                });
+                },
+            );
 
-                const finalParams: ISFrontstackNewParams =
-                    __SFronstackNewParamsInterface.apply(params);
+            const finalParams: ISFrontstackNewParams = __SFronstackNewParamsInterface.apply(
+                params,
+            );
 
-                const availableRecipes = Object.keys(recipesObj);
+            const availableRecipes = Object.keys(recipesObj);
 
-                const recipe = await emit('ask', {
-                    type: 'autocomplete',
-                    message: 'Please select one of the available recipes',
-                    choices: availableRecipes,
-                });
+            const recipe = await emit('ask', {
+                type: 'autocomplete',
+                message: 'Please select one of the available recipes',
+                choices: availableRecipes,
+            });
 
-                if (!recipe) process.exit();
+            if (!recipe) process.exit();
 
-                const recipeObj = recipesObj[recipe];
+            const recipeObj = recipesObj[recipe];
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `Starting project creation using the "<yellow>${recipe}</yellow>" recipe...`,
-                });
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `Starting project creation using the "<yellow>${recipe}</yellow>" recipe...`,
+            });
 
-                resolve(pipe(this.recipe({
-                    recipe,
-                    stack: 'new'
-                })));
-
-            }
-        ).bind(this);
+            resolve(
+                pipe(
+                    this.recipe({
+                        recipe,
+                        stack: 'new',
+                    }),
+                ),
+            );
+        }).bind(this);
     }
 
     /**
@@ -190,73 +193,70 @@ export default class SFrontstack extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     action(params: ISFrontstackActionParams | string) {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const frontstackConfig = __SSugarConfig.get('frontstack');
-                const actionsObj = frontstackConfig.actions;
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            const frontstackConfig = __SSugarConfig.get('frontstack');
+            const actionsObj = frontstackConfig.actions;
 
-                const finalParams: ISFrontstackActionParams =
-                    __SFrontstackActionInterface.apply(params);
+            const finalParams: ISFrontstackActionParams = __SFrontstackActionInterface.apply(
+                params,
+            );
 
-                const availableActions = Object.keys(actionsObj);
+            const availableActions = Object.keys(actionsObj);
 
-                if (availableActions.indexOf(finalParams.action) === -1) {
-                    throw new Error(
-                        `<red>[${
-                            this.constructor.name
-                        }.action]</red> Sorry but the requested action "<yellow>${
-                            finalParams.action
-                        }</yellow>" does not exists. Here's the list of available action(s):\n${availableActions
-                            .map((r) => `- <yellow>${r}</yellow>`)
-                            .join('\n')}`,
-                    );
-                }
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `Starting frontstack process using "<yellow>${finalParams.action}</yellow>" action`,
-                });
-
-                // get the recipe object and treat it
-                const actionObj: Partial<ISFrontstackAction> =
-                    // @ts-ignore
-                    actionsObj[finalParams.action];
-
-                // instanciate the process manager
-                const processManager = new __SProcessManager({
-                    // processManager: {
-                    //     runInParallel: false
-                    // }
-                });
-                pipe(processManager);
-                // loop on each actions for this recipe
-
-                const finalCommand = __SSugarCli.replaceTokens(
-                    // @ts-ignore
-                    actionObj.command ?? actionObj.process,
-                    // params
+            if (availableActions.indexOf(finalParams.action) === -1) {
+                throw new Error(
+                    `<red>[${
+                        this.constructor.name
+                    }.action]</red> Sorry but the requested action "<yellow>${
+                        finalParams.action
+                    }</yellow>" does not exists. Here's the list of available action(s):\n${availableActions
+                        .map((r) => `- <yellow>${r}</yellow>`)
+                        .join('\n')}`,
                 );
+            }
 
-                const actionId = actionObj.id ?? finalParams.action;
-                // create a process from the recipe object
-                const pro = await __SProcess.from(finalCommand);
-                // add the process to the process manager
-                // @TODO    integrate log filter feature
-                processManager.attachProcess(actionId, pro, {
-                    // log: {
-                    //   filter: undefined
-                    // }
-                });
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `Starting frontstack process using "<yellow>${finalParams.action}</yellow>" action`,
+            });
 
-                processManager.run(
-                    actionId,
-                    finalParams.params ?? actionObj.params ?? {},
-                    actionObj.settings?.process ?? {},
-                );
-            },
-            {
-            },
-        ).bind(this);
+            // get the recipe object and treat it
+            const actionObj: Partial<ISFrontstackAction> =
+                // @ts-ignore
+                actionsObj[finalParams.action];
+
+            // instanciate the process manager
+            const processManager = new __SProcessManager({
+                // processManager: {
+                //     runInParallel: false
+                // }
+            });
+            pipe(processManager);
+            // loop on each actions for this recipe
+
+            const finalCommand = __SSugarCli.replaceTokens(
+                // @ts-ignore
+                actionObj.command ?? actionObj.process,
+                // params
+            );
+
+            const actionId = actionObj.id ?? finalParams.action;
+            // create a process from the recipe object
+            const pro = await __SProcess.from(finalCommand);
+            // add the process to the process manager
+            // @TODO    integrate log filter feature
+            processManager.attachProcess(actionId, pro, {
+                // log: {
+                //   filter: undefined
+                // }
+            });
+
+            processManager.run(
+                actionId,
+                finalParams.params ?? actionObj.params ?? {},
+                actionObj.settings?.process ?? {},
+            );
+        }, {}).bind(this);
     }
 
     /**
@@ -270,293 +270,327 @@ export default class SFrontstack extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     recipe(params: Partial<ISFrontstackRecipeParams> | string) {
-
         const processesPromises: any[] = [];
 
         const duration = new __SDuration();
 
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const frontstackConfig = __SSugarConfig.get('frontstack');
-                const recipesObj = frontstackConfig.recipes;
-                const actionsObj = frontstackConfig.actions;
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            const frontstackConfig = __SSugarConfig.get('frontstack');
+            const recipesObj = frontstackConfig.recipes;
+            const actionsObj = frontstackConfig.actions;
 
-                const finalParams =
-                    __SFrontstackRecipeParamsInterface.apply(params);
+            const finalParams = __SFrontstackRecipeParamsInterface.apply(
+                params,
+            );
 
-                const sugarJson = new __SSugarJson().current();
-                
-                if (!finalParams.recipe) {
-                    if (sugarJson.recipe) finalParams.recipe = sugarJson.recipe;
-                }
-                if (!finalParams.recipe) {
-                    finalParams.recipe = frontstackConfig.defaultRecipe;
-                }
+            const sugarJson = new __SSugarJson().current();
 
-                if (!finalParams.recipe) {
+            if (!finalParams.recipe) {
+                if (sugarJson.recipe) finalParams.recipe = sugarJson.recipe;
+            }
+            if (!finalParams.recipe) {
+                finalParams.recipe = frontstackConfig.defaultRecipe;
+            }
+
+            if (!finalParams.recipe) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but it seems that you missed to pass a recipe to use or that you don't have any "<cyan>sugar.json</cyan>" file at the root of your project with a "<yellow>recipe</yellow>" property that define which recipe to use for this project...`,
+                );
+            }
+
+            if (!recipesObj[finalParams.recipe]) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but the specified "<yellow>${
+                        finalParams.recipe
+                    }</yellow>" recipe does not exists. Here's the available ones: <green>${Object.keys(
+                        recipesObj,
+                    ).join(', ')}</green>`,
+                );
+            }
+
+            if (!finalParams.stack) {
+                if (!recipesObj[finalParams.recipe].defaultStack) {
                     throw new Error(
-                        `<red>[recipe]</red> Sorry but it seems that you missed to pass a recipe to use or that you don't have any "<cyan>sugar.json</cyan>" file at the root of your project with a "<yellow>recipe</yellow>" property that define which recipe to use for this project...`,
+                        `<red>[recipe]</red> Sorry but you MUST specify a "<yellow>stack</yellow>" to use in the requested "<cyan>${finalParams.recipe}</cyan>" recipe`,
                     );
                 }
+                finalParams.stack = recipesObj[finalParams.recipe].defaultStack;
+            }
 
-                if (!recipesObj[finalParams.recipe]) {
-                    throw new Error(
-                        `<red>[recipe]</red> Sorry but the specified "<yellow>${
-                            finalParams.recipe
-                        }</yellow>" recipe does not exists. Here's the available ones: <green>${Object.keys(
-                            recipesObj,
-                        ).join(', ')}</green>`,
-                    );
-                }
+            // get the recipe object and treat it
+            const recipeObj: ISFrontstackRecipe =
+                // @ts-ignore
+                recipesObj[finalParams.recipe];
 
-                if (!finalParams.stack) {
-                    if (!recipesObj[finalParams.recipe].defaultStack) {
+            // defined actions in the sugar.jcon file
+            if (sugarJson.frontstack?.[finalParams.stack]) {
+                for (let [key, value] of Object.entries(
+                    sugarJson.frontstack?.[finalParams.stack],
+                )) {
+                    if (!frontstackConfig.actions[value.action]) {
                         throw new Error(
-                            `<red>[recipe]</red> Sorry but you MUST specify a "<yellow>stack</yellow>" to use in the requested "<cyan>${finalParams.recipe}</cyan>" recipe`,
+                            `The requested action "<yellow>${
+                                value.action
+                            }</yellow>" does not exists in the config.frontstack.actions stack... Here's the available ones: <green>${Object.keys(
+                                frontstackConfig.actions,
+                            ).join(',')}</green>`,
                         );
                     }
-                    finalParams.stack =
-                        recipesObj[finalParams.recipe].defaultStack;
-                }
-
-                // get the recipe object and treat it
-                const recipeObj: ISFrontstackRecipe =
                     // @ts-ignore
-                    recipesObj[finalParams.recipe];
-
-                // defined actions in the sugar.jcon file
-                if (sugarJson.frontstack?.[finalParams.stack]) {
-                    for (let [key, value] of Object.entries(sugarJson.frontstack?.[finalParams.stack])) {
-                        if (!frontstackConfig.actions[value.action]) {
-                            throw new Error(`The requested action "<yellow>${value.action}</yellow>" does not exists in the config.frontstack.actions stack... Here's the available ones: <green>${Object.keys(frontstackConfig.actions).join(',')}</green>`)
-                        }
-                        // @ts-ignore
-                        recipeObj.stacks[finalParams.stack].actions[`sugarJson-${value.action}`] = __deepMerge(Object.assign({}, frontstackConfig.actions[value.action], value));
-                        delete recipeObj.stacks[finalParams.stack].actions[`sugarJson-${value.action}`].action;
-                    }
-                }
-
-                // check the recipe stacks
-                if (
-                    !recipeObj.stacks ||
-                    !Object.keys(recipeObj.stacks).length
-                ) {
-                    throw new Error(
-                        `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}</yellow>" configuration object missed the requested "<yellow>stacks</yellow>" property that list the stacks to execute`,
+                    recipeObj.stacks[finalParams.stack].actions[
+                        `sugarJson-${value.action}`
+                    ] = __deepMerge(
+                        Object.assign(
+                            {},
+                            frontstackConfig.actions[value.action],
+                            value,
+                        ),
                     );
+                    delete recipeObj.stacks[finalParams.stack].actions[
+                        `sugarJson-${value.action}`
+                    ].action;
                 }
-                if (!recipeObj.stacks[finalParams.stack]) {
-                    throw new Error(
-                        `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks</yellow>" configuration object missed the requested "<yellow>${finalParams.stack}</yellow>" stack`,
-                    );
-                }
+            }
 
-                // make sure this recipe has some actions
-                if (
-                    !recipeObj.stacks[finalParams.stack].actions ||
-                    !Object.keys(recipeObj.stacks[finalParams.stack].actions)
-                        .length
-                ) {
-                    throw new Error(
-                        `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks.${finalParams.stack}.actions</yellow>" configuration object missed the requested "<yellow>actions</yellow>" property that list the actions to execute`,
-                    );
-                }
+            // check the recipe stacks
+            if (!recipeObj.stacks || !Object.keys(recipeObj.stacks).length) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}</yellow>" configuration object missed the requested "<yellow>stacks</yellow>" property that list the stacks to execute`,
+                );
+            }
+            if (!recipeObj.stacks[finalParams.stack]) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks</yellow>" configuration object missed the requested "<yellow>${finalParams.stack}</yellow>" stack`,
+                );
+            }
 
-                // requirements
-                if (recipeObj.requirements) {
-                    if (recipeObj.requirements.commands) {
-                        for (let i=0; i<recipeObj.requirements.commands.length; i++) {
-                            emit('log', {
-                                type: __SLog.TYPE_VERBOSE,
-                                value: `<yellow>[requirements]</yellow> Checking for the "<magenta>${recipeObj.requirements.commands[i]}</magenta>" command to exists...`
-                            });
-                            const version = await __commandExists(recipeObj.requirements.commands[i])
-                            if (!version) {
-                                throw new Error(
-                                    `<red>[requirements]</red> Sorry but the command "<yellow>${recipeObj.requirements.commands[i]}</yellow>" is required but it does not exists.`,
-                                );
-                            } else {
-                                emit('log', {
-                                    type: __SLog.TYPE_VERBOSE,
-                                    value: `<green>[requirements]</green> Command "<magenta>${recipeObj.requirements.commands[i]}</magenta>" available in version <cyan>${__stripAnsi(String(version).replace('\n',''))}</cyan>.`
-                                });
-                            }
-                        }
-                    }
-                }
+            // make sure this recipe has some actions
+            if (
+                !recipeObj.stacks[finalParams.stack].actions ||
+                !Object.keys(recipeObj.stacks[finalParams.stack].actions).length
+            ) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks.${finalParams.stack}.actions</yellow>" configuration object missed the requested "<yellow>actions</yellow>" property that list the actions to execute`,
+                );
+            }
 
-                const stackObj: Partial<ISFrontstackRecipeStack> = recipeObj.stacks[finalParams.stack];
-                
-                if (!finalParams.runInParallel) {
-                    finalParams.runInParallel = stackObj.runInParallel ?? false;
-                }
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `Starting frontstack process`,
-                });
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Stack  : <cyan>${finalParams.stack}</cyan>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Run in parallel : ${finalParams.runInParallel ? '<green>true</green>' : '<red>false</red>'}`,
-                });
-
-                // build shared params to pass to every sub-processes
-                let sharedParams = Object.assign({}, finalParams);
-                delete sharedParams.recipe;
-                delete sharedParams.stack;
-                delete sharedParams.help;
-
-                // extend with "sharedParams" if exists on the recipe stack
-                if (stackObj.sharedParams) {
-                    sharedParams = {
-                        ...stackObj.sharedParams,
-                        ...sharedParams,
-                    };
-                }
-
-                // instanciate the process manager
-                const processManager = new __SProcessManager({
-                    processManager: {
-                        // @ts-ignore
-                        runInParallel: finalParams.runInParallel
-                    }
-                });
-                pipe(processManager, {
-                    overrideEmitter: true,
-                });
-
-                // loop on each actions for this recipe
-                if (stackObj.actions) {
+            // requirements
+            if (recipeObj.requirements) {
+                if (recipeObj.requirements.commands) {
                     for (
                         let i = 0;
-                        i <
-                        Object.keys(stackObj.actions)
-                            .length;
+                        i < recipeObj.requirements.commands.length;
                         i++
                     ) {
-                        const actionName = Object.keys(
-                            stackObj.actions,
-                        )[i];
-
-                        // Object.keys(
-                        //     stackObj.actions,
-                        // ).forEach(async (actionName) => {
-                        if (
-                            finalParams.exclude &&
-                            finalParams.exclude.indexOf(actionName) !== -1
-                        ) {
+                        emit('log', {
+                            type: __SLog.TYPE_VERBOSE,
+                            value: `<yellow>[requirements]</yellow> Checking for the "<magenta>${recipeObj.requirements.commands[i]}</magenta>" command to exists...`,
+                        });
+                        const version = await __commandExists(
+                            recipeObj.requirements.commands[i],
+                        );
+                        if (!version) {
+                            throw new Error(
+                                `<red>[requirements]</red> Sorry but the command "<yellow>${recipeObj.requirements.commands[i]}</yellow>" is required but it does not exists.`,
+                            );
+                        } else {
                             emit('log', {
                                 type: __SLog.TYPE_VERBOSE,
-                                value: `Excluding the action "<yellow>${actionName}</yellow>"`,
+                                value: `<green>[requirements]</green> Command "<magenta>${
+                                    recipeObj.requirements.commands[i]
+                                }</magenta>" available in version <cyan>${__stripAnsi(
+                                    String(version).replace('\n', ''),
+                                )}</cyan>.`,
                             });
-                            return;
                         }
-
-                        // @ts-ignore
-                        let actionObj =
-                            // @ts-ignore
-                            stackObj.actions[
-                                actionName
-                            ];
-
-                        // check `extends` property
-                        if (actionObj.extends) {
-                            if (!actionsObj[actionObj.extends]) {
-                                throw new Error(`<red>[action]</red> Your action "<yellow>${actionName}</yellow>" tries to extends the "<cyan>${actionObj.extends}</cyan>" action that does not exists... Here's the available actions at this time: <green>${Object.keys(actionsObj).join(',')}</green>`);
-                            }
-                            emit('log', {
-                                type: __SLog.TYPE_INFO,
-                                value: `<yellow>○</yellow> <magenta>extends</magenta> : Your action "<yellow>${actionName}</yellow>" extends the "<cyan>${actionObj.extends}</cyan>" one`,
-                            })
-                            actionObj = <ISFrontstackAction>__deepMerge(Object.assign({}, actionsObj[actionObj.extends]), actionObj);
-                        }
-
-                        let actionSpecificParams = {},
-                            actionParams = {};
-
-                        if (
-                            actionObj.action &&
-                            !actionObj.process &&
-                            !actionObj.command
-                        ) {
-                            actionSpecificParams = actionObj.params ?? {};
-                            actionObj = actionObj.action;
-                        }
-                        actionParams = actionObj.params ?? {};
-
-                        const finalActionParams = __deepMerge(
-                            actionParams,
-                            actionSpecificParams,
-                        );
-
-                        const sharedParamsStr =
-                            __argsToString(sharedParams).trim();
-
-                        // build shared params cli string
-
-                        const actionId = actionObj.id ?? actionName;
-                        // create a process from the recipe object
-                        let finalCommand =
-                            (actionObj.command ?? actionObj.process).trim() +
-                            ' ' +
-                            sharedParamsStr;
-                        finalCommand = __SSugarCli.replaceTokens(finalCommand, finalActionParams);
-
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`,
-                        });
-
-                        const pro = await __SProcess.from(finalCommand, {
-                            process: {
-                                before: actionObj.before,
-                                after: actionObj.after,
-                            }
-                        });
-
-                        const finalProcessManagerParams = {
-                            ...sharedParams,
-                            ...(actionObj.params ?? {}),
-                        };
-
-                        // add the process to the process manager
-                        // @TODO    integrate log filter feature
-                        processManager.attachProcess(actionId, pro, {});
-
-                        const processPro = processManager.run(
-                            actionId,
-                            finalProcessManagerParams,
-                            actionObj.settings?.process ?? {},
-                        );
-                        if (!processesPromises.includes(processPro)) {
-                            processesPromises.push(processPro);
-                        }
-
                     }
                 }
+            }
 
-                await Promise.all(processesPromises);
+            const stackObj: Partial<ISFrontstackRecipeStack> =
+                recipeObj.stacks[finalParams.stack];
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<green>[success]</green> All actions have been executed <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`,
-                })
+            if (!finalParams.runInParallel) {
+                finalParams.runInParallel = stackObj.runInParallel ?? false;
+            }
 
-                resolve(processesPromises);
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `Starting frontstack process`,
+            });
 
-            },
-            {
-            },
-        ).bind(this);
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`,
+            });
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>○</yellow> Stack  : <cyan>${finalParams.stack}</cyan>`,
+            });
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>○</yellow> Run in parallel : ${
+                    finalParams.runInParallel
+                        ? '<green>true</green>'
+                        : '<red>false</red>'
+                }`,
+            });
+
+            // build shared params to pass to every sub-processes
+            let sharedParams = Object.assign({}, finalParams);
+            delete sharedParams.recipe;
+            delete sharedParams.stack;
+            delete sharedParams.help;
+
+            // extend with "sharedParams" if exists on the recipe stack
+            if (stackObj.sharedParams) {
+                sharedParams = {
+                    ...stackObj.sharedParams,
+                    ...sharedParams,
+                };
+            }
+
+            // instanciate the process manager
+            const processManager = new __SProcessManager({
+                processManager: {
+                    // @ts-ignore
+                    runInParallel: finalParams.runInParallel,
+                },
+            });
+            pipe(processManager, {
+                overrideEmitter: true,
+            });
+
+            // loop on each actions for this recipe
+            if (stackObj.actions) {
+                for (let i = 0; i < Object.keys(stackObj.actions).length; i++) {
+                    const actionName = Object.keys(stackObj.actions)[i];
+
+                    // Object.keys(
+                    //     stackObj.actions,
+                    // ).forEach(async (actionName) => {
+                    if (
+                        finalParams.exclude &&
+                        finalParams.exclude.indexOf(actionName) !== -1
+                    ) {
+                        emit('log', {
+                            type: __SLog.TYPE_VERBOSE,
+                            value: `Excluding the action "<yellow>${actionName}</yellow>"`,
+                        });
+                        return;
+                    }
+
+                    // @ts-ignore
+                    let actionObj =
+                        // @ts-ignore
+                        stackObj.actions[actionName];
+
+                    // check `extends` property
+                    if (actionObj.extends) {
+                        if (!actionsObj[actionObj.extends]) {
+                            throw new Error(
+                                `<red>[action]</red> Your action "<yellow>${actionName}</yellow>" tries to extends the "<cyan>${
+                                    actionObj.extends
+                                }</cyan>" action that does not exists... Here's the available actions at this time: <green>${Object.keys(
+                                    actionsObj,
+                                ).join(',')}</green>`,
+                            );
+                        }
+                        emit('log', {
+                            type: __SLog.TYPE_VERBOSE,
+                            value: `<yellow>○</yellow> <magenta>extends</magenta> : Your action "<yellow>${actionName}</yellow>" extends the "<cyan>${actionObj.extends}</cyan>" one`,
+                        });
+                        actionObj = <ISFrontstackAction>(
+                            __deepMerge(
+                                Object.assign(
+                                    {},
+                                    actionsObj[actionObj.extends],
+                                ),
+                                actionObj,
+                            )
+                        );
+                    }
+
+                    let actionSpecificParams = {},
+                        actionParams = {};
+
+                    if (
+                        actionObj.action &&
+                        !actionObj.process &&
+                        !actionObj.command
+                    ) {
+                        actionSpecificParams = actionObj.params ?? {};
+                        actionObj = actionObj.action;
+                    }
+                    actionParams = actionObj.params ?? {};
+
+                    const finalActionParams = __deepMerge(
+                        actionParams,
+                        actionSpecificParams,
+                    );
+
+                    const sharedParamsStr = __argsToString(sharedParams).trim();
+
+                    // build shared params cli string
+
+                    const actionId = actionObj.id ?? actionName;
+                    // create a process from the recipe object
+                    let finalCommand =
+                        (actionObj.command ?? actionObj.process).trim() +
+                        ' ' +
+                        sharedParamsStr;
+                    finalCommand = __SSugarCli.replaceTokens(
+                        finalCommand,
+                        finalActionParams,
+                    );
+
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`,
+                    });
+
+                    const pro = await __SProcess.from(finalCommand, {
+                        process: {
+                            before: actionObj.before,
+                            after: actionObj.after,
+                        },
+                    });
+
+                    const finalProcessManagerParams = {
+                        ...sharedParams,
+                        ...(actionObj.params ?? {}),
+                    };
+
+                    // add the process to the process manager
+                    // @TODO    integrate log filter feature
+                    processManager.attachProcess(actionId, pro, {});
+
+                    const processPro = processManager.run(
+                        actionId,
+                        finalProcessManagerParams,
+                        actionObj.settings?.process ?? {},
+                    );
+                    if (!processesPromises.includes(processPro)) {
+                        processesPromises.push(processPro);
+                    }
+
+                    if (!finalParams.runInParallel) {
+                        await processPro;
+                    }
+                }
+            }
+
+            await Promise.all(processesPromises);
+
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<green>[success]</green> All actions have been executed <green>successfully</green> in <yellow>${
+                    duration.end().formatedDuration
+                }</yellow>`,
+            });
+
+            resolve(processesPromises);
+        }, {}).bind(this);
     }
 
     /**
@@ -598,8 +632,9 @@ export default class SFrontstack extends __SClass {
             ({ resolve, reject, emit }) => {
                 const recipes = this.listRecipes();
 
-                const finalParams =
-                    __SFrontstackListParamsInterface.apply(params);
+                const finalParams = __SFrontstackListParamsInterface.apply(
+                    params,
+                );
 
                 let recipe, stack;
                 if (finalParams.recipe) {

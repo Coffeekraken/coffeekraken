@@ -1,49 +1,86 @@
-import __SInterface from '@coffeekraken/s-interface';
-class postcssSugarPluginColorMixinInterface extends __SInterface {
-    static get _definition() {
-        return {
-            current: {
-                type: 'String',
-                required: true,
-            },
-            primary: {
-                type: 'String',
-            },
-            secondary: {
-                type: 'String',
-            },
-        };
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
     }
+  return a;
+};
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var color_exports = {};
+__export(color_exports, {
+  default: () => color_default,
+  interface: () => postcssSugarPluginColorMixinInterface
+});
+module.exports = __toCommonJS(color_exports);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+class postcssSugarPluginColorMixinInterface extends import_s_interface.default {
+  static get _definition() {
+    return {
+      current: {
+        type: "String",
+        required: true
+      },
+      primary: {
+        type: "String"
+      },
+      secondary: {
+        type: "String"
+      }
+    };
+  }
 }
-export { postcssSugarPluginColorMixinInterface as interface };
-export default function ({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ current: '', primary: undefined, secondary: undefined }, params);
-    // if (finalParams.current === 'current')
-    //     throw new Error(
-    //         `You cannot remap the "<yellow>current</yellow>" color to "<cyan>current</cyan>"...`,
-    //     );
-    // if (finalParams.primary === 'primary')
-    //     throw new Error(
-    //         `You cannot remap the "<yellow>primary</yellow>" color to "<cyan>primary</cyan>"...`,
-    //     );
-    // if (finalParams.secondary === 'secondary')
-    //     throw new Error(
-    //         `You cannot remap the "<yellow>secondary</yellow>" color to "<cyan>secondary</cyan>"...`,
-    //     );
-    const vars = new CssVars(`
+function color_default({
+  params,
+  atRule,
+  CssVars,
+  replaceWith
+}) {
+  const finalParams = __spreadValues({
+    current: "",
+    primary: void 0,
+    secondary: void 0
+  }, params);
+  const vars = new CssVars(`
         @sugar.color.remap(current, ${finalParams.current});`);
-    if (finalParams.primary) {
-        vars.code(`@sugar.color.remap(primary, ${finalParams.primary});`);
-    }
-    else {
-        vars.code(`@sugar.color.remap(primary, ${finalParams.current});`);
-    }
-    if (finalParams.secondary) {
-        vars.code(`@sugar.color.remap(secondary, ${finalParams.secondary});`);
-    }
-    else {
-        vars.code(`@sugar.color.remap(secondary, ${finalParams.current});`);
-    }
-    return vars;
+  if (finalParams.primary) {
+    vars.code(`@sugar.color.remap(primary, ${finalParams.primary});`);
+  } else {
+    vars.code(`@sugar.color.remap(primary, ${finalParams.current});`);
+  }
+  if (finalParams.secondary) {
+    vars.code(`@sugar.color.remap(secondary, ${finalParams.secondary});`);
+  } else {
+    vars.code(`@sugar.color.remap(secondary, ${finalParams.current});`);
+  }
+  return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29sb3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb2xvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRCxNQUFNLHFDQUFzQyxTQUFRLFlBQVk7SUFDNUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsUUFBUTthQUNqQjtZQUNELFNBQVMsRUFBRTtnQkFDUCxJQUFJLEVBQUUsUUFBUTthQUNqQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDRCxPQUFPLEVBQUUscUNBQXFDLElBQUksU0FBUyxFQUFFLENBQUM7QUFnQzlELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLE9BQU8sRUFBRSxFQUFFLEVBQ1gsT0FBTyxFQUFFLFNBQVMsRUFDbEIsU0FBUyxFQUFFLFNBQVMsSUFDakIsTUFBTSxDQUNaLENBQUM7SUFFRix5Q0FBeUM7SUFDekMsdUJBQXVCO0lBQ3ZCLGdHQUFnRztJQUNoRyxTQUFTO0lBQ1QseUNBQXlDO0lBQ3pDLHVCQUF1QjtJQUN2QixnR0FBZ0c7SUFDaEcsU0FBUztJQUNULDZDQUE2QztJQUM3Qyx1QkFBdUI7SUFDdkIsb0dBQW9HO0lBQ3BHLFNBQVM7SUFFVCxNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sQ0FBQztzQ0FDUyxXQUFXLENBQUMsT0FBTyxJQUFJLENBQUMsQ0FBQztJQUUzRCxJQUFJLFdBQVcsQ0FBQyxPQUFPLEVBQUU7UUFDckIsSUFBSSxDQUFDLElBQUksQ0FBQywrQkFBK0IsV0FBVyxDQUFDLE9BQU8sSUFBSSxDQUFDLENBQUM7S0FDckU7U0FBTTtRQUNILElBQUksQ0FBQyxJQUFJLENBQUMsK0JBQStCLFdBQVcsQ0FBQyxPQUFPLElBQUksQ0FBQyxDQUFDO0tBQ3JFO0lBQ0QsSUFBSSxXQUFXLENBQUMsU0FBUyxFQUFFO1FBQ3ZCLElBQUksQ0FBQyxJQUFJLENBQUMsaUNBQWlDLFdBQVcsQ0FBQyxTQUFTLElBQUksQ0FBQyxDQUFDO0tBQ3pFO1NBQU07UUFDSCxJQUFJLENBQUMsSUFBSSxDQUFDLGlDQUFpQyxXQUFXLENBQUMsT0FBTyxJQUFJLENBQUMsQ0FBQztLQUN2RTtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  interface
+});

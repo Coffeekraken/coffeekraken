@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,34 +14,14 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var when_exports = {};
-__export(when_exports, {
-  default: () => when,
-  triggers: () => triggers
-});
-module.exports = __toCommonJS(when_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_whenInViewport = __toESM(require("./whenInViewport"), 1);
-var import_whenNearViewport = __toESM(require("./whenNearViewport"), 1);
-var import_whenOutOfViewport = __toESM(require("./whenOutOfViewport"), 1);
-var import_whenInteract = __toESM(require("./whenInteract"), 1);
-var import_whenDomReady = __toESM(require("./whenDomReady"), 1);
-var import_whenVisible = __toESM(require("./whenVisible"), 1);
-var import_whenStylesheetsReady = __toESM(require("./whenStylesheetsReady"), 1);
+import __SPromise from "@coffeekraken/s-promise";
+import __whenInViewport from "./whenInViewport";
+import __whenNearViewport from "./whenNearViewport";
+import __whenOutOfViewport from "./whenOutOfViewport";
+import __whenInteract from "./whenInteract";
+import __whenDomReady from "./whenDomReady";
+import __whenVisible from "./whenVisible";
+import __whenStylesheetsReady from "./whenStylesheetsReady";
 const triggers = ["direct", "directly", "inViewport", "nearViewport", "outOfViewport", "interact", "visible", "stylesheetsReady"];
 function when($elm, trigger, settings) {
   const finalSettings = __spreadValues({
@@ -56,32 +32,32 @@ function when($elm, trigger, settings) {
     whenVisible: {},
     whenStylesheetsReady: {}
   }, settings != null ? settings : {});
-  return new import_s_promise.default(async ({ resolve, reject }) => {
+  return new __SPromise(async ({ resolve, reject }) => {
     if (!Array.isArray(trigger))
       trigger = trigger.split(",").map((t) => t.trim());
     const promises = [];
     trigger.forEach((t) => {
       switch (t) {
         case "inViewport":
-          promises.push((0, import_whenInViewport.default)($elm, finalSettings.whenInViewport));
+          promises.push(__whenInViewport($elm, finalSettings.whenInViewport));
           break;
         case "nearViewport":
-          promises.push((0, import_whenNearViewport.default)($elm, finalSettings.whenNearViewport));
+          promises.push(__whenNearViewport($elm, finalSettings.whenNearViewport));
           break;
         case "outOfViewport":
-          promises.push((0, import_whenOutOfViewport.default)($elm, finalSettings.whenOutOfViewport));
+          promises.push(__whenOutOfViewport($elm, finalSettings.whenOutOfViewport));
           break;
         case "interact":
-          promises.push((0, import_whenInteract.default)($elm, finalSettings.whenInteract));
+          promises.push(__whenInteract($elm, finalSettings.whenInteract));
           break;
         case "visible":
-          promises.push((0, import_whenVisible.default)($elm, finalSettings.whenVisible));
+          promises.push(__whenVisible($elm, finalSettings.whenVisible));
           break;
         case "domReady":
-          promises.push((0, import_whenDomReady.default)());
+          promises.push(__whenDomReady());
           break;
         case "stylesheetsReady":
-          promises.push((0, import_whenStylesheetsReady.default)($elm ? [$elm] : null));
+          promises.push(__whenStylesheetsReady($elm ? [$elm] : null));
           break;
       }
     });
@@ -93,3 +69,7 @@ function when($elm, trigger, settings) {
     resolve();
   });
 }
+export {
+  when as default,
+  triggers
+};

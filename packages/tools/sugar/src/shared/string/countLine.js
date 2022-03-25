@@ -1,39 +1,14 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var countLine_exports = {};
-__export(countLine_exports, {
-  default: () => countLine_default
-});
-module.exports = __toCommonJS(countLine_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
-var import_strip_ansi = __toESM(require("strip-ansi"), 1);
+import __deepMerge from "../object/deepMerge";
+import __stripAnsi from "strip-ansi";
 function countLine(line, count = {}) {
-  count = (0, import_deepMerge.default)({
+  count = __deepMerge({
     htmlTags: false,
     terminalSpecialChars: false,
     newLineChars: false
   }, count);
   let newLine = line;
   if (count.terminalSpecialChars === false) {
-    newLine = (0, import_strip_ansi.default)(newLine);
+    newLine = __stripAnsi(newLine);
   }
   if (count.htmlTags === false) {
     newLine = newLine.replace(/<\/?[a-zA-Z0-9]+\s?\/?>/g, "");
@@ -44,5 +19,6 @@ function countLine(line, count = {}) {
   return newLine.length;
 }
 var countLine_default = countLine;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  countLine_default as default
+};

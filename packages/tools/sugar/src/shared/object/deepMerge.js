@@ -1,29 +1,4 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var deepMerge_exports = {};
-__export(deepMerge_exports, {
-  default: () => deepMerge_default
-});
-module.exports = __toCommonJS(deepMerge_exports);
-var import_plainObject = __toESM(require("../is/plainObject"), 1);
+import __isPlainObject from "../is/plainObject";
 function deepMerge_default(...args) {
   function merge(firstObj, secondObj) {
     const newObj = {};
@@ -47,7 +22,7 @@ function deepMerge_default(...args) {
       const desc = Object.getOwnPropertyDescriptor(secondObj, key);
       if (desc.set || desc.get) {
         Object.defineProperty(newObj, key, desc);
-      } else if ((0, import_plainObject.default)(newObj[key]) && (0, import_plainObject.default)(secondObj[key])) {
+      } else if (__isPlainObject(newObj[key]) && __isPlainObject(secondObj[key])) {
         newObj[key] = merge(newObj[key], secondObj[key]);
       } else {
         newObj[key] = secondObj[key];
@@ -62,5 +37,6 @@ function deepMerge_default(...args) {
   }
   return currentObj;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  deepMerge_default as default
+};

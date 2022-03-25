@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,30 +14,10 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  interface: () => postcssSugarPluginFontClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_faker = __toESM(require("faker"));
-class postcssSugarPluginFontClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __STheme from "@coffeekraken/s-theme";
+import __faker from "faker";
+class postcssSugarPluginFontClassesInterface extends __SInterface {
   static get _definition() {
     return {};
   }
@@ -54,7 +30,7 @@ function classes_default({
 }) {
   const finalParams = __spreadValues({}, params);
   const vars = new CssVars();
-  const fontsFamiliesObj = import_s_theme.default.config("font.family"), fontSizesObj = import_s_theme.default.config("font.size"), fontStretchProps = [
+  const fontsFamiliesObj = __STheme.config("font.family"), fontSizesObj = __STheme.config("font.size"), fontStretchProps = [
     "ultra-condensed",
     "extra-condensed",
     "condensed",
@@ -101,7 +77,7 @@ function classes_default({
         ${Object.keys(fontsFamiliesObj).map((family) => {
     return ` * <div class="s-mbe:50">
                         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${family}</h3>
-                        *   <p class="s-font:${family} s-font:60">${import_faker.default.lorem.sentence()}</p>
+                        *   <p class="s-font:${family} s-font:60">${__faker.lorem.sentence()}</p>
                         * </div>`;
   }).join("\n")}
         * 
@@ -134,7 +110,7 @@ function classes_default({
         ${Object.keys(fontSizesObj).map((size) => {
     return ` * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${size}</h3>
-            *   <p class="s-font:${size}">${import_faker.default.lorem.sentence()}</p>
+            *   <p class="s-font:${size}">${__faker.lorem.sentence()}</p>
             * </div>`;
   }).join("\n")}
         * 
@@ -164,12 +140,12 @@ function classes_default({
         * @example        html
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Italic</h3>
-        *   <p class="s-font:italic s-mbe:20">${import_faker.default.lorem.sentence()}</p>
+        *   <p class="s-font:italic s-mbe:20">${__faker.lorem.sentence()}</p>
         * </div>
         * 
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Oblique</h3>
-        *   <p class="s-font:oblique s-mbe:20">${import_faker.default.lorem.sentence()}</p>
+        *   <p class="s-font:oblique s-mbe:20">${__faker.lorem.sentence()}</p>
         * </div>
         * 
         * @since      2.0.0
@@ -210,7 +186,7 @@ function classes_default({
         ${fontWeightProps.map((weight) => {
     return ` * <div class="s-mbe:50">
                     *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${weight}</h3>
-                    *   <p class="s-font:${weight}:50">${import_faker.default.lorem.sentence()}</p>
+                    *   <p class="s-font:${weight}:50">${__faker.lorem.sentence()}</p>
                     * </div>`;
   }).join("\n")}
         * 
@@ -247,7 +223,7 @@ function classes_default({
         ${fontStretchProps.map((stretch) => {
     return ` * <div class="s-mbe:50">
                     *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${stretch}</h3>
-                    *   <p class="s-font:${stretch}:50">${import_faker.default.lorem.sentence()}</p>
+                    *   <p class="s-font:${stretch}:50">${__faker.lorem.sentence()}</p>
                     * </div> `;
   }).join("\n")}
         * 
@@ -272,12 +248,12 @@ function classes_default({
         * @example        html
         * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset size</h3>
         * <div class="s-font:60 s-mbe:30">
-        *   ${import_faker.default.name.title()} <span class="s-font:reset-size">${import_faker.default.name.findName()}</span>
+        *   ${__faker.name.title()} <span class="s-font:reset-size">${__faker.name.findName()}</span>
         * </div>
         * 
         * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset family</h3>
         * <div class="s-font:quote s-font:50">
-        *   ${import_faker.default.name.title()} <span class="s-font:reset-family">${import_faker.default.name.findName()}</span>
+        *   ${__faker.name.title()} <span class="s-font:reset-family">${__faker.name.findName()}</span>
         * </div>
         * 
         * @since      2.0.0
@@ -446,7 +422,7 @@ function classes_default({
   });
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  classes_default as default,
+  postcssSugarPluginFontClassesInterface as interface
+};

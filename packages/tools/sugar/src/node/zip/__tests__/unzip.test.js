@@ -1,25 +1,16 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_unzip = __toESM(require("../unzip"), 1);
-var import_systemTmpDir = __toESM(require("../../path/systemTmpDir"), 1);
+import { fileURLToPath } from "url";
+import path from "path";
+var getFilename = () => fileURLToPath(import.meta.url);
+var getDirname = () => path.dirname(getFilename());
+var __dirname = /* @__PURE__ */ getDirname();
+var __filename = /* @__PURE__ */ getFilename();
+import __unzip from "../unzip";
+import __tmpDir from "../../path/systemTmpDir";
 describe("sugar.node.zip.unzip", () => {
   it("Should unzip a simple file correctly at the same destination folder", async () => {
-    const result = await (0, import_unzip.default)(`${__dirname}/data/coffeekraken-new-logo.zip`, {
-      dest: (0, import_systemTmpDir.default)() + "/downloads"
+    const result = await __unzip(`${__dirname}/data/coffeekraken-new-logo.zip`, {
+      dest: __tmpDir() + "/downloads"
     });
-    expect(result.dest).toBe(`${(0, import_systemTmpDir.default)()}/downloads/coffeekraken-new-logo`);
+    expect(result.dest).toBe(`${__tmpDir()}/downloads/coffeekraken-new-logo`);
   });
 });

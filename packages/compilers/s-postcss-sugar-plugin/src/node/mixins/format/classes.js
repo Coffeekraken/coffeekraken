@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,30 +14,10 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  interface: () => postcssSugarPluginFormatClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_faker = __toESM(require("faker"));
-class postcssSugarPluginFormatClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __STheme from "@coffeekraken/s-theme";
+import __faker from "faker";
+class postcssSugarPluginFormatClassesInterface extends __SInterface {
   static get _definition() {
     return {};
   }
@@ -54,11 +30,11 @@ function classes_default({
 }) {
   const finalParams = __spreadValues({}, params);
   const vars = new CssVars();
-  const typoFormatElements = Object.keys(import_s_theme.default.config("typo")).map((typo) => {
+  const typoFormatElements = Object.keys(__STheme.config("typo")).map((typo) => {
     return `${typo}`;
   });
-  const uiFormatElements = Object.keys(import_s_theme.default.config("ui")).filter((ui) => {
-    const uiObj = import_s_theme.default.config("ui")[ui];
+  const uiFormatElements = Object.keys(__STheme.config("ui")).filter((ui) => {
+    const uiObj = __STheme.config("ui")[ui];
     return uiObj.formatText === true;
   }).map((ui) => {
     return `${ui}`;
@@ -97,15 +73,15 @@ function classes_default({
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
         *   <div class="s-format:text s-rhythm:vertical">
-        *       <h1>${import_faker.default.name.findName()}</h1>
-        *       <p>${import_faker.default.lorem.sentence()}</p>
+        *       <h1>${__faker.name.findName()}</h1>
+        *       <p>${__faker.lorem.sentence()}</p>
         *       <ul>
-        *           <li>${import_faker.default.name.findName()}</li>
-        *           <li>${import_faker.default.name.findName()}</li>
-        *           <li>${import_faker.default.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
         *       </ul>
         *       <blockquote>
-        *           ${import_faker.default.lorem.paragraph()}
+        *           ${__faker.lorem.paragraph()}
         *       </blockquote>
         *       <table>
         *           <tr>
@@ -122,17 +98,17 @@ function classes_default({
         *           </tr>
         *       </table>
         *       <ol>
-        *           <li>${import_faker.default.name.findName()}</li>
-        *           <li>${import_faker.default.name.findName()}</li>
-        *           <li>${import_faker.default.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
         *       </ol>
         *       <select>
-        *           <option>${import_faker.default.name.findName()}</option>
-        *           <option>${import_faker.default.name.findName()}</option>
-        *           <option>${import_faker.default.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
         *       </select>
         *       <br />
-        *       <button>${import_faker.default.name.findName()}</button>
+        *       <button>${__faker.name.findName()}</button>
         *   </div>
         * </div>
         * 
@@ -140,14 +116,14 @@ function classes_default({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-  const typoRhythmElements = Object.keys(import_s_theme.default.config("typo")).filter((typo) => {
-    const typoObj = import_s_theme.default.config("typo")[typo];
+  const typoRhythmElements = Object.keys(__STheme.config("typo")).filter((typo) => {
+    const typoObj = __STheme.config("typo")[typo];
     return typoObj.rhythmVertical !== void 0;
   }).map((typo) => {
     return `${typo}`;
   });
-  const uiRhythmElements = Object.keys(import_s_theme.default.config("ui")).filter((ui) => {
-    const uiObj = import_s_theme.default.config("ui")[ui];
+  const uiRhythmElements = Object.keys(__STheme.config("ui")).filter((ui) => {
+    const uiObj = __STheme.config("ui")[ui];
     return uiObj.rhythmVertical !== void 0;
   }).map((ui) => {
     return `${ui}`;
@@ -179,15 +155,15 @@ function classes_default({
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Rhythm vertical</h3>
         *   <div class="s-format:text s-rhythm:vertical">
-        *       <h1>${import_faker.default.name.findName()}</h1>
-        *       <p>${import_faker.default.lorem.sentence()}</p>
+        *       <h1>${__faker.name.findName()}</h1>
+        *       <p>${__faker.lorem.sentence()}</p>
         *       <ul>
-        *           <li>${import_faker.default.name.findName()}</li>
-        *           <li>${import_faker.default.name.findName()}</li>
-        *           <li>${import_faker.default.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
         *       </ul>
         *       <blockquote>
-        *           ${import_faker.default.lorem.paragraph()}
+        *           ${__faker.lorem.paragraph()}
         *       </blockquote>
         *       <table>
         *           <tr>
@@ -204,17 +180,17 @@ function classes_default({
         *           </tr>
         *       </table>
         *       <ol>
-        *           <li>${import_faker.default.name.findName()}</li>
-        *           <li>${import_faker.default.name.findName()}</li>
-        *           <li>${import_faker.default.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
+        *           <li>${__faker.name.findName()}</li>
         *       </ol>
         *       <select>
-        *           <option>${import_faker.default.name.findName()}</option>
-        *           <option>${import_faker.default.name.findName()}</option>
-        *           <option>${import_faker.default.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
+        *           <option>${__faker.name.findName()}</option>
         *       </select>
         *       <br />
-        *       <button>${import_faker.default.name.findName()}</button>
+        *       <button>${__faker.name.findName()}</button>
         *   </div>
         * </div>
         * 
@@ -224,7 +200,7 @@ function classes_default({
     `);
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  classes_default as default,
+  postcssSugarPluginFormatClassesInterface as interface
+};

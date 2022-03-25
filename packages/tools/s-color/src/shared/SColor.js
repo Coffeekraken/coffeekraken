@@ -1,40 +1,15 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SColor_exports = {};
-__export(SColor_exports, {
-  default: () => SColor_default
-});
-module.exports = __toCommonJS(SColor_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_convert = __toESM(require("@coffeekraken/sugar/shared/color/convert"), 1);
-var import_hsla2rgba = __toESM(require("@coffeekraken/sugar/shared/color/hsla2rgba"), 1);
-var import_rgba2hex = __toESM(require("@coffeekraken/sugar/shared/color/rgba2hex"), 1);
-var import_rgba2hsla = __toESM(require("@coffeekraken/sugar/shared/color/rgba2hsla"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_SColorApplyParamsInterface = __toESM(require("./interface/SColorApplyParamsInterface"), 1);
-var import_SColorSettingsInterface = __toESM(require("./interface/SColorSettingsInterface"), 1);
-const _SColor = class extends import_s_class.default {
+import __SClass from "@coffeekraken/s-class";
+import __convert from "@coffeekraken/sugar/shared/color/convert";
+import __hsla2rgba from "@coffeekraken/sugar/shared/color/hsla2rgba";
+import __rgba2hex from "@coffeekraken/sugar/shared/color/rgba2hex";
+import __rgba2hsl from "@coffeekraken/sugar/shared/color/rgba2hsla";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SColorApplyParamsInterface from "./interface/SColorApplyParamsInterface";
+import __SColorSettingsInterface from "./interface/SColorSettingsInterface";
+const _SColor = class extends __SClass {
   constructor(color, settings) {
-    super((0, import_deepMerge.default)({
-      color: import_SColorSettingsInterface.default.defaults()
+    super(__deepMerge({
+      color: __SColorSettingsInterface.defaults()
     }, settings != null ? settings : {}));
     this._originalSColor = null;
     this._r = null;
@@ -55,7 +30,7 @@ const _SColor = class extends import_s_class.default {
     return color;
   }
   _parse(color) {
-    color = (0, import_convert.default)(color, "rgba");
+    color = __convert(color, "rgba");
     this.r = color.r;
     this.g = color.g;
     this.b = color.b;
@@ -75,10 +50,10 @@ const _SColor = class extends import_s_class.default {
         break;
       case "hsla":
       case "hsl":
-        return (0, import_rgba2hsla.default)(this.r, this.g, this.b, this.a);
+        return __rgba2hsl(this.r, this.g, this.b, this.a);
         break;
       case "hex":
-        return (0, import_rgba2hex.default)(this.r, this.g, this.b, this.a);
+        return __rgba2hex(this.r, this.g, this.b, this.a);
         break;
     }
   }
@@ -137,7 +112,7 @@ const _SColor = class extends import_s_class.default {
     value = parseInt(value);
     value = value > 100 ? 100 : value < 0 ? 0 : value;
     hsl.l = value;
-    const rgba = (0, import_hsla2rgba.default)(hsl.h, hsl.s, hsl.l);
+    const rgba = __hsla2rgba(hsl.h, hsl.s, hsl.l);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -150,7 +125,7 @@ const _SColor = class extends import_s_class.default {
     value = parseInt(value);
     value = value > 100 ? 100 : value < 0 ? 0 : value;
     hsl.s = value;
-    const rgba = (0, import_hsla2rgba.default)(hsl.h, hsl.s, hsl.l);
+    const rgba = __hsla2rgba(hsl.h, hsl.s, hsl.l);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -163,7 +138,7 @@ const _SColor = class extends import_s_class.default {
     value = parseInt(value);
     value = value > 360 ? 360 : value < 0 ? 0 : value;
     hsl.h = value;
-    const rgba = (0, import_hsla2rgba.default)(hsl.h, hsl.s, hsl.l);
+    const rgba = __hsla2rgba(hsl.h, hsl.s, hsl.l);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -172,7 +147,7 @@ const _SColor = class extends import_s_class.default {
     this._parse(this._originalSColor);
   }
   apply(params, returnNewInstance = this.colorSettings.returnNewInstance) {
-    const intRes = import_SColorApplyParamsInterface.default.apply(params);
+    const intRes = __SColorApplyParamsInterface.apply(params);
     params = intRes;
     let colorInstance = this;
     if (returnNewInstance) {
@@ -476,5 +451,6 @@ SColor.colors = {
   yellowgreen: "#9acd32"
 };
 var SColor_default = SColor;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SColor_default as default
+};

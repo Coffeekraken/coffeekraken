@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,21 +13,15 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var interface_exports = {};
-__export(interface_exports, {
-  default: () => interfaceTag
-});
-module.exports = __toCommonJS(interface_exports);
-var import_folderPath = __toESM(require("@coffeekraken/sugar/node/fs/folderPath"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_checkPathWithMultipleExtensions = __toESM(require("@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions"), 1);
-var import_filename = __toESM(require("@coffeekraken/sugar/node/fs/filename"), 1);
-var import_deepMap = __toESM(require("@coffeekraken/sugar/shared/object/deepMap"), 1);
+import __folderPath from "@coffeekraken/sugar/node/fs/folderPath";
+import __path from "path";
+import __checkPathWithMultipleExtensions from "@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions";
+import __fileName from "@coffeekraken/sugar/node/fs/filename";
+import __deepMap from "@coffeekraken/sugar/shared/object/deepMap";
 async function interfaceTag(data, blockSettings) {
   let stringArray = [];
   if (data.value === true) {
-    stringArray = [(0, import_filename.default)(blockSettings.filepath), "default"];
+    stringArray = [__fileName(blockSettings.filepath), "default"];
     if (blockSettings.filepath.match(/\.ts$/)) {
       return;
     }
@@ -39,12 +29,12 @@ async function interfaceTag(data, blockSettings) {
     stringArray = data.value.trim().split(/(?<=^\S+)\s/);
   }
   let path = stringArray[0], importName = stringArray[1] ? stringArray[1].trim() : "default";
-  const potentialPath = (0, import_checkPathWithMultipleExtensions.default)(import_path.default.resolve((0, import_folderPath.default)(blockSettings.filepath), path), ["js"]);
+  const potentialPath = __checkPathWithMultipleExtensions(__path.resolve(__folderPath(blockSettings.filepath), path), ["js"]);
   if (!potentialPath)
     return;
   const int = await Promise.resolve().then(() => __toESM(require(potentialPath)));
   const interfaceObj = int[importName].toObject();
-  interfaceObj.definition = (0, import_deepMap.default)(interfaceObj.definition, ({ object, prop, value }) => {
+  interfaceObj.definition = __deepMap(interfaceObj.definition, ({ object, prop, value }) => {
     if (typeof value === "string") {
       const newValue = new String(value);
       newValue.render = true;
@@ -54,5 +44,6 @@ async function interfaceTag(data, blockSettings) {
   });
   return interfaceObj;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  interfaceTag as default
+};

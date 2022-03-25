@@ -1,23 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __decorateClass = (decorators, target, key, kind) => {
   var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
   for (var i = decorators.length - 1, decorator; i >= 0; i--)
@@ -27,26 +9,20 @@ var __decorateClass = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-var SSidePanelComponent_exports = {};
-__export(SSidePanelComponent_exports, {
-  default: () => SSidePanel,
-  define: () => define
-});
-module.exports = __toCommonJS(SSidePanelComponent_exports);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_lit = require("lit");
-var import_decorators = require("lit/decorators.js");
-var import_SSidePanelComponentInterface = __toESM(require("./interface/SSidePanelComponentInterface"), 1);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_hotkey = __toESM(require("@coffeekraken/sugar/js/keyboard/hotkey"), 1);
-var import_s_side_panel = __toESM(require("../css/s-side-panel.css"), 1);
-class SSidePanel extends import_s_lit_component.default {
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import { html, css, unsafeCSS } from "lit";
+import { property } from "lit/decorators.js";
+import __SSidePanelComponentInterface from "./interface/SSidePanelComponentInterface";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import __hotkey from "@coffeekraken/sugar/js/keyboard/hotkey";
+import __css from "../css/s-side-panel.css";
+class SSidePanel extends __SLitComponent {
   static get properties() {
-    return import_s_lit_component.default.properties({}, import_SSidePanelComponentInterface.default);
+    return __SLitComponent.properties({}, __SSidePanelComponentInterface);
   }
   static get styles() {
-    return import_lit.css`
-            ${(0, import_lit.unsafeCSS)(import_s_side_panel.default)}
+    return css`
+            ${unsafeCSS(__css)}
         `;
   }
   set active(value) {
@@ -64,12 +40,12 @@ class SSidePanel extends import_s_lit_component.default {
     return this._active;
   }
   constructor() {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       litComponent: {
         shadowDom: false
       },
       componentUtils: {
-        interface: import_SSidePanelComponentInterface.default
+        interface: __SSidePanelComponentInterface
       }
     }));
     if (this.props.closeOn.indexOf("click") !== -1) {
@@ -83,7 +59,7 @@ class SSidePanel extends import_s_lit_component.default {
       });
     }
     if (this.props.closeOn.indexOf("escape") !== -1) {
-      (0, import_hotkey.default)("escape").on("press", () => {
+      __hotkey("escape").on("press", () => {
         if (this.constructor._activePanels.slice(-1)[0] !== this)
           return;
         this.constructor._activePanels.pop();
@@ -114,17 +90,21 @@ class SSidePanel extends import_s_lit_component.default {
     this.active = false;
   }
   render() {
-    return import_lit.html`
-            ${this.overlay ? import_lit.html` <div class="${this.componentUtils.className("__overlay")}"></div> ` : ""}
+    return html`
+            ${this.overlay ? html` <div class="${this.componentUtils.className("__overlay")}"></div> ` : ""}
             <div class="${this.componentUtils.className("__container")}"></div>
         `;
   }
 }
 SSidePanel._activePanels = [];
 __decorateClass([
-  (0, import_decorators.property)()
+  property()
 ], SSidePanel.prototype, "overlay", 2);
 function define(props = {}, tagName = "s-side-panel") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SSidePanel);
 }
+export {
+  SSidePanel as default,
+  define
+};

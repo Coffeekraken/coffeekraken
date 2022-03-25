@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,35 +14,16 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var scrollTo_exports = {};
-__export(scrollTo_exports, {
-  default: () => scrollTo_default
-});
-module.exports = __toCommonJS(scrollTo_exports);
-var import_easeInOutQuad = __toESM(require("../../../shared/easing/easeInOutQuad"), 1);
-var import_requestAnimationFrame = __toESM(require("../utlls/requestAnimationFrame"), 1);
-var import_userScrolling = __toESM(require("../is/userScrolling"), 1);
+import easeInOutQuad from "../../../shared/easing/easeInOutQuad";
+import requestAnimationFrame from "../utlls/requestAnimationFrame";
+import __isUserScrolling from "../is/userScrolling";
 function scrollTo(target, settings = {}) {
   return new Promise((resolve, reject) => {
     var _a, _b, _c, _d, _e;
     settings = __spreadValues({
       $elm: window,
       duration: 500,
-      easing: import_easeInOutQuad.default,
+      easing: easeInOutQuad,
       offset: 0,
       offsetX: void 0,
       offsetY: void 0,
@@ -126,7 +103,7 @@ function scrollTo(target, settings = {}) {
       startTime: Date.now(),
       step: scrollTo.step
     };
-    (0, import_requestAnimationFrame.default)(obj.step.bind(obj));
+    requestAnimationFrame(obj.step.bind(obj));
   });
 }
 scrollTo.step = function() {
@@ -138,13 +115,16 @@ scrollTo.step = function() {
   const x = this.targetX - (1 - this.easing(t)) * this.deltaX;
   const y = this.targetY - (1 - this.easing(t)) * this.deltaY;
   $scrollElm.scrollTo(x, y);
-  if ((0, import_userScrolling.default)(this.$elm))
+  if (__isUserScrolling(this.$elm))
     return;
   if (t !== 1) {
-    (0, import_requestAnimationFrame.default)(this.step.bind(this));
+    requestAnimationFrame(this.step.bind(this));
   } else {
     if (this.onFinish)
       this.onFinish();
   }
 };
 var scrollTo_default = scrollTo;
+export {
+  scrollTo_default as default
+};

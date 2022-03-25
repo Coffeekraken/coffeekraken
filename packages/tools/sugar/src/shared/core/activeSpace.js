@@ -1,31 +1,6 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var activeSpace_exports = {};
-__export(activeSpace_exports, {
-  default: () => activeSpace_default
-});
-module.exports = __toCommonJS(activeSpace_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
-var import_minimatch = __toESM(require("minimatch"), 1);
-var import_is_glob = __toESM(require("is-glob"), 1);
+import __deepMerge from "../object/deepMerge";
+import __minimatch from "minimatch";
+import __isGlob from "is-glob";
 const _activeSpaceCallbacksStack = {};
 const _activeSpaceStack = [];
 let _activeSpaceCurrent = null;
@@ -34,7 +9,7 @@ const activeSpaceApi = {
     return _activeSpaceCurrent;
   },
   set: (activeSpace, history = true, silent = false) => {
-    if (!silent && (0, import_is_glob.default)(activeSpace)) {
+    if (!silent && __isGlob(activeSpace)) {
       throw new Error(`You try to set as activeSpace this string "${activeSpace}". It seems that this string is a glob pattern and activeSpace does not have to be a glob pattern...`);
     }
     if (_activeSpaceCurrent !== activeSpace && history) {
@@ -46,7 +21,7 @@ const activeSpaceApi = {
   },
   append: (activeSpace, history = true) => {
     const currentActiveSpace = activeSpaceApi.get() || "";
-    if (currentActiveSpace !== "" && (0, import_minimatch.default)(currentActiveSpace, `**.${activeSpace}`))
+    if (currentActiveSpace !== "" && __minimatch(currentActiveSpace, `**.${activeSpace}`))
       return activeSpaceApi.get();
     const currentActiveSpaceArray = currentActiveSpace.split(".");
     const activeSpaceArray = activeSpace.split(".");
@@ -73,10 +48,10 @@ const activeSpaceApi = {
   is: (activeSpaceToCheck, currentActiveSpace = activeSpaceApi.get()) => {
     if (!currentActiveSpace)
       return false;
-    return (0, import_minimatch.default)(currentActiveSpace, activeSpaceToCheck);
+    return __minimatch(currentActiveSpace, activeSpaceToCheck);
   },
   on: (activeSpaceToCheck, callback, settings = {}) => {
-    settings = (0, import_deepMerge.default)({
+    settings = __deepMerge({
       once: false,
       count: -1
     }, settings);
@@ -111,5 +86,6 @@ const activeSpaceApi = {
   }
 };
 var activeSpace_default = activeSpaceApi;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  activeSpace_default as default
+};

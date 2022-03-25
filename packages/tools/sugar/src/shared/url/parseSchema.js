@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,26 +14,7 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var parseSchema_exports = {};
-__export(parseSchema_exports, {
-  default: () => parseSchema_default
-});
-module.exports = __toCommonJS(parseSchema_exports);
-var import_parse = __toESM(require("../string/parse"), 1);
+import __parseString from "../string/parse";
 function parseSchema(url, schema) {
   const rawSchemaString = schema;
   const rawUrlString = url;
@@ -113,21 +90,21 @@ function parseSchema(url, schema) {
     }
     if (schema2.type) {
       const type = schema2.type;
-      if (type !== typeof (0, import_parse.default)(part)) {
+      if (type !== typeof __parseString(part)) {
         match = false;
         const errorObj = {
           type: "type",
           requested: type,
-          passed: typeof (0, import_parse.default)(part),
-          description: `This param "${schema2.name}" has to be a "${type}" but he's a "${typeof (0, import_parse.default)(part)}"...`
+          passed: typeof __parseString(part),
+          description: `This param "${schema2.name}" has to be a "${type}" but he's a "${typeof __parseString(part)}"...`
         };
         errors[schema2.name] = errorObj;
         params[schema2.name].error = errorObj;
-        params[schema2.name].value = (0, import_parse.default)(part);
+        params[schema2.name].value = __parseString(part);
         continue;
       }
     }
-    params[schema2.name].value = (0, import_parse.default)(part);
+    params[schema2.name].value = __parseString(part);
   }
   return {
     errors: !Object.keys(errors).length ? null : errors,
@@ -138,5 +115,6 @@ function parseSchema(url, schema) {
   };
 }
 var parseSchema_default = parseSchema;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  parseSchema_default as default
+};

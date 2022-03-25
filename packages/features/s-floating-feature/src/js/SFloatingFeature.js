@@ -1,40 +1,14 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SFloatingFeature_exports = {};
-__export(SFloatingFeature_exports, {
-  default: () => SFloatingFeature,
-  define: () => define
-});
-module.exports = __toCommonJS(SFloatingFeature_exports);
-var import_s_feature = __toESM(require("@coffeekraken/s-feature"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_s_floating_feature = __toESM(require("../css/s-floating-feature.css"), 1);
-var import_SFloatingFeatureInterface = __toESM(require("./interface/SFloatingFeatureInterface"), 1);
-var import_dom = require("@floating-ui/dom");
-class SFloatingFeature extends import_s_feature.default {
+import __SFeature from "@coffeekraken/s-feature";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __css from "../css/s-floating-feature.css";
+import __SFloatingFeatureInterface from "./interface/SFloatingFeatureInterface";
+import { computePosition, flip, shift, offset, arrow, getScrollParents, autoPlacement, inline } from "@floating-ui/dom";
+class SFloatingFeature extends __SFeature {
   constructor(name, node, settings) {
-    super(name, node, (0, import_deepMerge.default)({
+    super(name, node, __deepMerge({
       componentUtils: {
-        interface: import_SFloatingFeatureInterface.default,
-        style: import_s_floating_feature.default
+        interface: __SFloatingFeatureInterface,
+        style: __css
       }
     }, settings != null ? settings : {}));
     this.node.classList.add("s-floating");
@@ -48,20 +22,20 @@ class SFloatingFeature extends import_s_feature.default {
     if (this.props.offset === void 0 && this.props.arrow) {
       this.props.offset = this.props.arrowSize;
     }
-    const middlewares = [(0, import_dom.offset)(this.props.offset), (0, import_dom.shift)({
+    const middlewares = [offset(this.props.offset), shift({
       padding: this.props.shift
-    }), (0, import_dom.inline)()];
+    }), inline()];
     if (this.props.placement !== "auto") {
-      middlewares.push((0, import_dom.flip)());
+      middlewares.push(flip());
     } else {
-      middlewares.push((0, import_dom.autoPlacement)());
+      middlewares.push(autoPlacement());
     }
     let $arrow;
     if (this.props.arrow) {
       $arrow = document.createElement("div");
       $arrow.classList.add("s-floating__arrow");
       this.node.append($arrow);
-      middlewares.push((0, import_dom.arrow)({
+      middlewares.push(arrow({
         element: $arrow,
         padding: this.props.arrowPadding
       }));
@@ -70,7 +44,7 @@ class SFloatingFeature extends import_s_feature.default {
       this.node.style.setProperty(`--arrow-size`, `${this.props.arrowSize}px`);
     }
     const update = async () => {
-      const { x, y, placement, middlewareData } = await (0, import_dom.computePosition)(this._$ref, this.node, {
+      const { x, y, placement, middlewareData } = await computePosition(this._$ref, this.node, {
         placement: this.props.placement,
         middleware: middlewares
       });
@@ -97,8 +71,8 @@ class SFloatingFeature extends import_s_feature.default {
     };
     update();
     [
-      ...(0, import_dom.getScrollParents)(this._$ref),
-      ...(0, import_dom.getScrollParents)(this.node)
+      ...getScrollParents(this._$ref),
+      ...getScrollParents(this.node)
     ].forEach((el) => {
       el.addEventListener("scroll", update);
       el.addEventListener("resize", update);
@@ -106,5 +80,9 @@ class SFloatingFeature extends import_s_feature.default {
   }
 }
 function define(props = {}, name = "s-floating") {
-  import_s_feature.default.defineFeature(name, SFloatingFeature, props);
+  __SFeature.defineFeature(name, SFloatingFeature, props);
 }
+export {
+  SFloatingFeature as default,
+  define
+};

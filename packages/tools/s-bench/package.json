@@ -2,8 +2,12 @@
     "name": "@coffeekraken/s-bench",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
     "main": "./src/shared/exports.js",
-    "module": "./src/shared/exports.mjs",
+    "exports": {
+        "import": "./src/shared/exports.js",
+        "require": "./src/shared/exports.cjs"
+    },
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",

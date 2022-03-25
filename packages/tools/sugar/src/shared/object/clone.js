@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,36 +14,18 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var clone_exports = {};
-__export(clone_exports, {
-  default: () => clone_default
-});
-module.exports = __toCommonJS(clone_exports);
-var import_lodash = __toESM(require("lodash.clone"), 1);
-var import_lodash2 = __toESM(require("lodash.clonedeep"), 1);
+import __clone from "lodash.clone";
+import __deepClone from "lodash.clonedeep";
 function clone(object, settings = {}) {
   settings = __spreadValues({
     deep: false
   }, settings);
   if (settings.deep) {
-    return (0, import_lodash2.default)(object);
+    return __deepClone(object);
   }
-  return (0, import_lodash.default)(object);
+  return __clone(object);
 }
 var clone_default = clone;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  clone_default as default
+};

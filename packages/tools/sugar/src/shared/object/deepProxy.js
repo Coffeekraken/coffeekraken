@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,33 +14,14 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var deepProxy_exports = {};
-__export(deepProxy_exports, {
-  default: () => deepProxy_default
-});
-module.exports = __toCommonJS(deepProxy_exports);
-var import_proxy = __toESM(require("../array/proxy"), 1);
-var import_deepMap = __toESM(require("../object/deepMap"), 1);
-var import_clone = __toESM(require("../object/clone"), 1);
-var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+import __proxy from "../array/proxy";
+import __deepMap from "../object/deepMap";
+import __clone from "../object/clone";
+import __deepMerge from "../object/deepMerge";
 function deepProxy(object, handlerFn, settings = {}) {
   const preproxy = /* @__PURE__ */ new WeakMap();
   let isRevoked = false;
-  settings = (0, import_deepMerge.default)({
+  settings = __deepMerge({
     deep: true,
     handleSet: true,
     handleGet: false,
@@ -121,7 +98,7 @@ function deepProxy(object, handlerFn, settings = {}) {
     if (settings.deep) {
       for (const key of Object.keys(obj)) {
         if (Array.isArray(obj[key])) {
-          obj[key] = (0, import_proxy.default)(obj[key]);
+          obj[key] = __proxy(obj[key]);
           obj[key].watch(Object.getOwnPropertyNames(Array.prototype), (watchObj) => {
             handlerFn(__spreadValues({
               path: [...path, key].join(".")
@@ -138,16 +115,16 @@ function deepProxy(object, handlerFn, settings = {}) {
       configurable: false,
       enumerable: true,
       value: () => {
-        let __copy = (0, import_clone.default)(p.proxy, { deep: true });
+        let __copy = __clone(p.proxy, { deep: true });
         isRevoked = true;
-        __copy = (0, import_deepMap.default)(__copy, ({ value, prop }) => {
+        __copy = __deepMap(__copy, ({ value, prop }) => {
           if (prop === "revoke" && typeof value === "function") {
             return -1;
           }
           return value;
         });
         setTimeout(() => {
-          (0, import_deepMap.default)(p.proxy, ({ value, prop }) => {
+          __deepMap(p.proxy, ({ value, prop }) => {
             if (prop === "revoke" && typeof value === "function") {
               value();
             }
@@ -169,5 +146,6 @@ function deepProxy(object, handlerFn, settings = {}) {
   return proxify(object, []);
 }
 var deepProxy_default = deepProxy;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  deepProxy_default as default
+};

@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,38 +14,19 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SSliderSlideableBehavior_exports = {};
-__export(SSliderSlideableBehavior_exports, {
-  default: () => SSliderSlideableBehavior
-});
-module.exports = __toCommonJS(SSliderSlideableBehavior_exports);
-var import_slideable = __toESM(require("@coffeekraken/sugar/js/dom/slide/slideable"), 1);
-var import_SSliderBehavior = __toESM(require("../SSliderBehavior"), 1);
-var import_s_slider_slideable_behavior = __toESM(require("../../css/s-slider-slideable-behavior.css"), 1);
-var import_SSliderSlideableBehaviorInterface = __toESM(require("./interface/SSliderSlideableBehaviorInterface"), 1);
-class SSliderSlideableBehavior extends import_SSliderBehavior.default {
+import __slideable from "@coffeekraken/sugar/js/dom/slide/slideable";
+import __SSliderBehavior from "../SSliderBehavior";
+import __css from "../../css/s-slider-slideable-behavior.css";
+import __SSliderSlideableBehaviorInterface from "./interface/SSliderSlideableBehaviorInterface";
+class SSliderSlideableBehavior extends __SSliderBehavior {
   static get properties() {
-    return import_SSliderBehavior.default.properties({}, import_SSliderSlideableBehaviorInterface.default);
+    return __SSliderBehavior.properties({}, __SSliderSlideableBehaviorInterface);
   }
   static get styles() {
-    return import_s_slider_slideable_behavior.default;
+    return __css;
   }
   constructor(settings) {
-    super(__spreadValues(__spreadValues({}, import_SSliderSlideableBehaviorInterface.default.defaults()), settings));
+    super(__spreadValues(__spreadValues({}, __SSliderSlideableBehaviorInterface.defaults()), settings));
   }
   firstUpdated() {
     this._handleSlide();
@@ -59,7 +36,7 @@ class SSliderSlideableBehavior extends import_SSliderBehavior.default {
   }
   _handleSlide() {
     console.log("SSS", this.settings);
-    (0, import_slideable.default)(this.$slider.$slidesWrapper, {
+    __slideable(this.$slider.$slidesWrapper, {
       friction: this.settings.friction,
       direction: this.$slider.props.direction
     }).on("start", () => {
@@ -69,5 +46,8 @@ class SSliderSlideableBehavior extends import_SSliderBehavior.default {
     });
   }
 }
-SSliderSlideableBehavior.interface = import_SSliderSlideableBehaviorInterface.default;
+SSliderSlideableBehavior.interface = __SSliderSlideableBehaviorInterface;
 SSliderSlideableBehavior.id = "slideable";
+export {
+  SSliderSlideableBehavior as default
+};

@@ -1,32 +1,7 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SDatePickerComponentInterface_exports = {};
-__export(SDatePickerComponentInterface_exports, {
-  default: () => SDatePickerComponentInterface
-});
-module.exports = __toCommonJS(SDatePickerComponentInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_node = __toESM(require("@coffeekraken/sugar/shared/is/node"), 1);
-class SDatePickerComponentInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __isNode from "@coffeekraken/sugar/shared/is/node";
+class SDatePickerComponentInterface extends __SInterface {
   static get _definition() {
     var _a, _b, _c;
     return {
@@ -47,7 +22,7 @@ class SDatePickerComponentInterface extends import_s_interface.default {
       format: {
         description: "Specify the format to use for your datepicker",
         type: "String",
-        default: (_a = import_s_sugar_config.default.get("datetime.dateFormat")) != null ? _a : "YYYY-MM-DD"
+        default: (_a = __SSugarConfig.get("datetime.dateFormat")) != null ? _a : "YYYY-MM-DD"
       },
       firstDay: {
         type: "Number",
@@ -82,12 +57,12 @@ class SDatePickerComponentInterface extends import_s_interface.default {
       rtl: {
         type: "Boolean",
         description: "reverse the calendar for right-to-left languages",
-        default: !(0, import_node.default)() ? ((_b = document.querySelector("html")) == null ? void 0 : _b.getAttribute("dir")) === "rtl" : false
+        default: !__isNode() ? ((_b = document.querySelector("html")) == null ? void 0 : _b.getAttribute("dir")) === "rtl" : false
       },
       i18n: {
         type: "String",
         description: "language defaults for month and weekday names",
-        default: (_c = import_s_sugar_config.default.get("datetime.i18n")) != null ? _c : {
+        default: (_c = __SSugarConfig.get("datetime.i18n")) != null ? _c : {
           previousMonth: "Previous Month",
           nextMonth: "Next Month",
           months: [
@@ -161,3 +136,6 @@ class SDatePickerComponentInterface extends import_s_interface.default {
     };
   }
 }
+export {
+  SDatePickerComponentInterface as default
+};

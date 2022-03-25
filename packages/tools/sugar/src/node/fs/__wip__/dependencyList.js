@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,33 +14,14 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var dependencyList_exports = {};
-__export(dependencyList_exports, {
-  default: () => dependencyList
-});
-module.exports = __toCommonJS(dependencyList_exports);
-var import_dependency_tree = __toESM(require("dependency-tree"), 1);
-var import_chokidar = __toESM(require("chokidar"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_folderPath = __toESM(require("../folderPath"), 1);
-var import_minimatch = __toESM(require("minimatch"), 1);
+import __dependencyTree from "dependency-tree";
+import __chokidar from "chokidar";
+import __SPromise from "@coffeekraken/s-promise";
+import __fs from "fs";
+import __folderPath from "../folderPath";
+import __minimatch from "minimatch";
 function dependencyList(filePath, settings) {
-  return new import_s_promise.default(({ resolve, reject, emit }) => {
+  return new __SPromise(({ resolve, reject, emit }) => {
     const set = __spreadValues({
       watch: false,
       includeItself: false,
@@ -52,18 +29,18 @@ function dependencyList(filePath, settings) {
       exclude: []
     }, settings);
     function getList() {
-      const list = import_dependency_tree.default.toList({
+      const list = __dependencyTree.toList({
         filename: filePath,
-        directory: (0, import_folderPath.default)(filePath),
+        directory: __folderPath(filePath),
         filter: (path) => {
-          path = import_fs.default.realpathSync(path);
+          path = __fs.realpathSync(path);
           for (let i = 0; i < set.exclude.length; i++) {
-            if ((0, import_minimatch.default)(path, set.exclude[i]))
+            if (__minimatch(path, set.exclude[i]))
               return false;
           }
           return true;
         }
-      }).map((p) => import_fs.default.realpathSync(p)).filter((path) => {
+      }).map((p) => __fs.realpathSync(p)).filter((path) => {
         if (path === filePath && !set.includeItself)
           return false;
         return true;
@@ -72,11 +49,11 @@ function dependencyList(filePath, settings) {
     }
     if (set.watch) {
       let depWatcher;
-      const watcher = import_chokidar.default.watch(filePath, {}).on("change", () => {
+      const watcher = __chokidar.watch(filePath, {}).on("change", () => {
         const list = getList();
         if (depWatcher)
           depWatcher.close();
-        depWatcher = import_chokidar.default.watch(list, {}).on("change", (path) => {
+        depWatcher = __chokidar.watch(list, {}).on("change", (path) => {
           emit("update", {
             path,
             list
@@ -101,5 +78,6 @@ function dependencyList(filePath, settings) {
     }
   });
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  dependencyList as default
+};

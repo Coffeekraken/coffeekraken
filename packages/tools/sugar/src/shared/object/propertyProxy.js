@@ -1,36 +1,11 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var propertyProxy_exports = {};
-__export(propertyProxy_exports, {
-  default: () => propertyProxy_default
-});
-module.exports = __toCommonJS(propertyProxy_exports);
-var import_get = __toESM(require("lodash/get"), 1);
+import _get from "lodash/get";
 function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
   const objPath = property.split(".").slice(0, -1).join(".");
   if (objPath) {
     property = property.split(".").pop();
-    obj = (0, import_get.default)(obj, objPath);
+    obj = _get(obj, objPath);
   }
-  let val = (0, import_get.default)(obj, property);
+  let val = _get(obj, property);
   const currentDescriptor = Object.getOwnPropertyDescriptor(obj.prototype || obj, property);
   const _set = (value) => {
     if (descriptor.set) {
@@ -70,5 +45,6 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
   return val;
 }
 var propertyProxy_default = propertyProxy;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  propertyProxy_default as default
+};

@@ -1,30 +1,15 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_filename = __toESM(require("../filename"), 1);
+import __fileName from "../filename";
 describe("sugar.node.fs.filename", () => {
   it("Should get the filename from a simple file name", () => {
-    expect((0, import_filename.default)("hello/plop.txt")).toBe("plop.txt");
+    expect(__fileName("hello/plop.txt")).toBe("plop.txt");
   });
   it("Should get the filename without extension from a simple file name", () => {
-    expect((0, import_filename.default)("hello/plop.txt", false)).toBe("plop");
+    expect(__fileName("hello/plop.txt", false)).toBe("plop");
   });
   it("Should get the filename from a more complex file name", () => {
-    expect((0, import_filename.default)("hello/plop.something.txt")).toBe("plop.something.txt");
+    expect(__fileName("hello/plop.something.txt")).toBe("plop.something.txt");
   });
   it("Should get the filename withouth extension from a more complex file name", () => {
-    expect((0, import_filename.default)("hello/plop.something.txt", false)).toBe("plop.something");
+    expect(__fileName("hello/plop.something.txt", false)).toBe("plop.something");
   });
 });

@@ -2,9 +2,17 @@
     "name": "@coffeekraken/s-stdio",
     "version": "2.0.0",
     "description": "",
-    "type": "module",
     "main": "./src/node/exports.js",
-    "browser": "./src/shared/exports.js",
+    "exports": {
+        "browser": {
+            "import": "./src/shared/exports.js",
+            "require": "./src/shared/exports.cjs"
+        },
+        "default": {
+            "import": "./src/node/exports.js",
+            "require": "./src/node/exports.cjs"
+        }
+    },
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",

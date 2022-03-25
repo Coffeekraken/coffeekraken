@@ -1,38 +1,13 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var matchGlob_exports = {};
-__export(matchGlob_exports, {
-  default: () => matchGlob
-});
-module.exports = __toCommonJS(matchGlob_exports);
-var import_fs = __toESM(require("fs"), 1);
-var import_to_regex = __toESM(require("to-regex"), 1);
-var import_minimatch = __toESM(require("minimatch"), 1);
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
-var import_directory = __toESM(require("../is/directory"), 1);
-var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"), 1);
-var import_path = __toESM(require("path"), 1);
+import __fs from "fs";
+import __toRegex from "to-regex";
+import __minimatch from "minimatch";
+import __deepMerge from "../../shared/object/deepMerge";
+import __isDirectory from "../is/directory";
+import __expandGlob from "../../shared/glob/expandGlob";
+import __path from "path";
 function matchGlob(input, glob, settings) {
   var _a, _b;
-  settings = (0, import_deepMerge.default)({
+  settings = __deepMerge({
     cwd: (_a = settings == null ? void 0 : settings.cwd) != null ? _a : process.cwd(),
     symlinks: true,
     nodir: true
@@ -47,28 +22,28 @@ function matchGlob(input, glob, settings) {
   const splits = glob.split(":");
   const pattern = splits[0].replace(`${settings.cwd}/`, "").replace(settings.cwd, "");
   const regex = splits[1];
-  const fullFilePath = import_path.default.resolve((_b = settings.cwd) != null ? _b : "", input);
-  const expandedGlobs = (0, import_expandGlob.default)(pattern);
+  const fullFilePath = __path.resolve((_b = settings.cwd) != null ? _b : "", input);
+  const expandedGlobs = __expandGlob(pattern);
   let hasMatch = false;
   for (let i = 0; i < expandedGlobs.length; i++) {
     const g = expandedGlobs[i];
-    if ((0, import_minimatch.default)(input, g)) {
+    if (__minimatch(input, g)) {
       hasMatch = true;
       break;
     }
   }
   if (!hasMatch)
     return false;
-  if (!import_fs.default.existsSync(fullFilePath))
+  if (!__fs.existsSync(fullFilePath))
     return false;
-  if (settings.nodir && (0, import_directory.default)(fullFilePath))
+  if (settings.nodir && __isDirectory(fullFilePath))
     return false;
   if (regex) {
-    const fileContent = import_fs.default.readFileSync(fullFilePath, "utf8").toString();
+    const fileContent = __fs.readFileSync(fullFilePath, "utf8").toString();
     const regSplits = regex.split("/").splice(1);
     const regString = regSplits[0];
     const flags = regSplits[regSplits.length - 1];
-    const searchReg = (0, import_to_regex.default)(regString, {
+    const searchReg = __toRegex(regString, {
       flags
     });
     if (!fileContent.match(searchReg))
@@ -76,5 +51,6 @@ function matchGlob(input, glob, settings) {
   }
   return true;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  matchGlob as default
+};

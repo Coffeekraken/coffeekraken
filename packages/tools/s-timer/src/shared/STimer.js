@@ -1,32 +1,7 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var STimer_exports = {};
-__export(STimer_exports, {
-  default: () => STimer
-});
-module.exports = __toCommonJS(STimer_exports);
-var import_convert = __toESM(require("@coffeekraken/sugar/shared/time/convert"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-class STimer extends import_s_promise.default {
+import __convert from "@coffeekraken/sugar/shared/time/convert";
+import __SPromise from "@coffeekraken/s-promise";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+class STimer extends __SPromise {
   constructor(duration, settings = {}) {
     super(({ resolve, reject, emit }) => {
       this.duration = duration;
@@ -34,9 +9,9 @@ class STimer extends import_s_promise.default {
         this._tickCount = this._settings.tickCount;
         this._tickInterval = this._duration / this._tickCount;
       } else {
-        this._tickInterval = (0, import_convert.default)(this._settings.tickInterval, "ms");
+        this._tickInterval = __convert(this._settings.tickInterval, "ms");
       }
-    }, (0, import_deepMerge.default)({
+    }, __deepMerge({
       id: "STimer",
       tickInterval: 1e3,
       tickCount: null,
@@ -75,7 +50,7 @@ class STimer extends import_s_promise.default {
     return this._startTime.getTime() + this._duration - Date.now();
   }
   set duration(duration) {
-    duration = (0, import_convert.default)(duration, "ms");
+    duration = __convert(duration, "ms");
     this._duration = duration;
     if (this._tickCount) {
       this._tickInterval = this._duration / this._tickCount;
@@ -157,5 +132,6 @@ class STimer extends import_s_promise.default {
     return this._startTime && !this._pauseTime;
   }
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  STimer as default
+};

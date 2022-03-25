@@ -1,88 +1,72 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_s_activate_feature = require("@coffeekraken/s-activate-feature");
-var import_s_code_example_component = require("@coffeekraken/s-code-example-component");
-var import_s_color_picker_component = require("@coffeekraken/s-color-picker-component");
-var import_s_date_picker_component = require("@coffeekraken/s-date-picker-component");
-var import_s_form_validate_feature = require("@coffeekraken/s-form-validate-feature");
-var import_s_refocus_feature = require("@coffeekraken/s-refocus-feature");
-var import_s_sugar_feature = require("@coffeekraken/s-sugar-feature");
-var import_s_floating_feature = require("@coffeekraken/s-floating-feature");
-var import_s_page_transition_feature = require("@coffeekraken/s-page-transition-feature");
-var import_s_slider_component = require("@coffeekraken/s-slider-component");
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_s_parallax_feature = require("@coffeekraken/s-parallax-feature");
-var import_s_range_component = require("@coffeekraken/s-range-component");
-var import_s_side_panel_component = require("@coffeekraken/s-side-panel-component");
-var import_expandPleasantCssClassnamesLive = __toESM(require("@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive"), 1);
-var import_CkBlob = require("./components/CkBlob");
-var import_CkFallingStars = require("./components/CkFallingStars");
-var import_CKDiscover = require("./components/CKDiscover");
-var import_CKSearch = require("./components/CKSearch");
-var import_CkSettings = require("./components/CkSettings");
-var import_VersionSelector = require("./components/VersionSelector");
-var import_s_conductor = __toESM(require("@coffeekraken/s-conductor"), 1);
-const import_meta = {};
-const viewsRelated = import_meta.globEager("../views/**/*.ts");
-import_s_conductor.default.setup({
+import { define as __sActivateFeature } from "@coffeekraken/s-activate-feature";
+import { define as __SCodeExampleWebcomponent } from "@coffeekraken/s-code-example-component";
+import { define as __SColorPickerWebcomponent } from "@coffeekraken/s-color-picker-component";
+import { define as __SDatePickerWebcomponent } from "@coffeekraken/s-date-picker-component";
+import { define as __sFormValidateFeature } from "@coffeekraken/s-form-validate-feature";
+import { define as __sRefocusFeature } from "@coffeekraken/s-refocus-feature";
+import { define as __sSugarFeature } from "@coffeekraken/s-sugar-feature";
+import { define as __sFloatingFeature } from "@coffeekraken/s-floating-feature";
+import { define as __sPageTransitionFeature } from "@coffeekraken/s-page-transition-feature";
+import { define as __SSliderComponent, SSliderSlideableBehavior } from "@coffeekraken/s-slider-component";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import { define as __sParallaxFeature } from "@coffeekraken/s-parallax-feature";
+import { define as __SRangeWebcomponent } from "@coffeekraken/s-range-component";
+import { define as __SSidePanelWebcomponent } from "@coffeekraken/s-side-panel-component";
+import __expandPleasantCssClassnamesLive from "@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive";
+import { define as __CKBlobComponent } from "./components/CkBlob";
+import { define as __CkFallingStarsComponent } from "./components/CkFallingStars";
+import { define as __CKDiscoverComponent } from "./components/CKDiscover";
+import { define as __CKSearchComponent } from "./components/CKSearch";
+import { define as __CKSettingsComponent } from "./components/CkSettings";
+import { define as __VersionSelector } from "./components/VersionSelector";
+import __SConductor from "@coffeekraken/s-conductor";
+const viewsRelated = import.meta.globEager("../views/**/*.ts");
+__SConductor.setup({
   log: true
 });
 (async () => {
-  import_s_lit_component.default.setDefaultProps("*", {
+  __SLitComponent.setDefaultProps("*", {
     mountWhen: "nearViewport"
   });
-  import_s_lit_component.default.setDefaultProps(["s-side-panel", "ck-settings"], {
+  __SLitComponent.setDefaultProps(["s-side-panel", "ck-settings"], {
     mountWhen: "direct"
   });
-  import_s_lit_component.default.setDefaultProps(["s-code-example"], {
+  __SLitComponent.setDefaultProps(["s-code-example"], {
     scrollToSettings: {
       offset: 100
     }
   });
-  (0, import_expandPleasantCssClassnamesLive.default)();
-  (0, import_s_activate_feature.define)();
-  (0, import_s_page_transition_feature.define)();
-  (0, import_VersionSelector.define)();
-  (0, import_CKSearch.define)();
-  (0, import_CkBlob.define)();
-  (0, import_CkFallingStars.define)();
+  __expandPleasantCssClassnamesLive();
+  __sActivateFeature();
+  __sPageTransitionFeature();
+  __VersionSelector();
+  __CKSearchComponent();
+  __CKBlobComponent();
+  __CkFallingStarsComponent();
   for (let [key, value] of Object.entries(viewsRelated)) {
     if (typeof value.default === "function")
       value.default();
   }
-  (0, import_CKDiscover.define)();
-  (0, import_CkSettings.define)();
-  (0, import_s_code_example_component.define)();
-  (0, import_s_side_panel_component.define)();
-  (0, import_s_color_picker_component.define)();
-  (0, import_s_date_picker_component.define)();
-  (0, import_s_range_component.define)();
-  (0, import_s_slider_component.define)({
+  __CKDiscoverComponent();
+  __CKSettingsComponent();
+  __SCodeExampleWebcomponent();
+  __SSidePanelWebcomponent();
+  __SColorPickerWebcomponent();
+  __SDatePickerWebcomponent();
+  __SRangeWebcomponent();
+  __SSliderComponent({
     availableBehaviors: {
       slideable: {
-        class: import_s_slider_component.SSliderSlideableBehavior,
+        class: SSliderSlideableBehavior,
         settings: {}
       }
     }
   });
-  (0, import_s_sugar_feature.define)();
-  (0, import_s_floating_feature.define)();
-  (0, import_s_refocus_feature.define)();
-  (0, import_s_parallax_feature.define)();
-  (0, import_s_form_validate_feature.define)({
+  __sSugarFeature();
+  __sFloatingFeature();
+  __sRefocusFeature();
+  __sParallaxFeature();
+  __sFormValidateFeature({
     customValidations: {
       coffeekraken: (value, helpers) => {
         if (value === "coffeekraken") {

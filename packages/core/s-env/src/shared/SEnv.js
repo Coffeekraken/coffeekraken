@@ -1,31 +1,6 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SEnv_exports = {};
-__export(SEnv_exports, {
-  default: () => SEnv
-});
-module.exports = __toCommonJS(SEnv_exports);
-var import_node = __toESM(require("@coffeekraken/sugar/shared/is/node"), 1);
-var import_jsonSync = __toESM(require("@coffeekraken/sugar/node/package/jsonSync"), 1);
-if (!(0, import_node.default)() && !window.env) {
+import __isNode from "@coffeekraken/sugar/shared/is/node";
+import __packageJsonSync from "@coffeekraken/sugar/node/package/jsonSync";
+if (!__isNode() && !window.env) {
   window.env = {
     SUGAR: {}
   };
@@ -36,7 +11,7 @@ const _SEnv = class {
     var _a, _b, _c, _d, _e, _f;
     if (this._env)
       return this._env;
-    if ((0, import_node.default)()) {
+    if (__isNode()) {
       this._env = {
         ENVIRONMENT: (_a = process.env.NODE_ENV) != null ? _a : "dev",
         ENV: (_b = process.env.NODE_ENV) != null ? _b : "dev",
@@ -76,6 +51,7 @@ const _SEnv = class {
   }
 };
 let SEnv = _SEnv;
-SEnv.packageJson = (0, import_jsonSync.default)();
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+SEnv.packageJson = __packageJsonSync();
+export {
+  SEnv as default
+};

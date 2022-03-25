@@ -1,11 +1,7 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -21,36 +17,17 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SProcessPipe_exports = {};
-__export(SProcessPipe_exports, {
-  default: () => SProcessPipe_default
-});
-module.exports = __toCommonJS(SProcessPipe_exports);
-var import_class = __toESM(require("@coffeekraken/sugar/shared/is/class"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_s_event_emitter = __toESM(require("@coffeekraken/s-event-emitter"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_typeof = __toESM(require("@coffeekraken/sugar/shared/value/typeof"), 1);
-class SProcessPipe extends import_s_event_emitter.default {
+import __isClass from "@coffeekraken/sugar/shared/is/class";
+import __SPromise from "@coffeekraken/s-promise";
+import __SEventEmitter from "@coffeekraken/s-event-emitter";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __typeof from "@coffeekraken/sugar/shared/value/typeof";
+class SProcessPipe extends __SEventEmitter {
   get processPipeSettings() {
     return this._settings.processPipe;
   }
   constructor(processes, settings = {}) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       processPipe: {
         stdio: "inherit"
       }
@@ -58,15 +35,15 @@ class SProcessPipe extends import_s_event_emitter.default {
     this._processes = processes;
   }
   run(params = {}, settings = {}) {
-    const processPipeSettings = (0, import_deepMerge.default)(this.processPipeSettings, settings);
-    const promise = new import_s_promise.default(async ({ resolve, reject, emit, pipe, pipeTo }) => {
+    const processPipeSettings = __deepMerge(this.processPipeSettings, settings);
+    const promise = new __SPromise(async ({ resolve, reject, emit, pipe, pipeTo }) => {
       if (!Array.isArray(this._processes)) {
-        throw `Sorry but you've passed an "<yellow>${(0, import_typeof.default)(this._processes)}</yellow>" as "<cyan>SProcessManager.pipe</cyan>" argument but it needs to be an <green>Array</green>`;
+        throw `Sorry but you've passed an "<yellow>${__typeof(this._processes)}</yellow>" as "<cyan>SProcessManager.pipe</cyan>" argument but it needs to be an <green>Array</green>`;
       }
       for (let i = 0; i < this._processes.length; i++) {
         const pro = this._processes[i];
         let processInstance, processParams = {}, processSettings = processPipeSettings.processesSettings;
-        if ((0, import_class.default)(pro)) {
+        if (__isClass(pro)) {
           processInstance = new pro(__spreadProps(__spreadValues({}, processPipeSettings.processesSettings || {}), {
             stdio: false
           }));
@@ -81,7 +58,7 @@ class SProcessPipe extends import_s_event_emitter.default {
             });
             continue;
           }
-          if ((0, import_class.default)(pro.process)) {
+          if (__isClass(pro.process)) {
             processInstance = new pro.process(__spreadProps(__spreadValues({}, processSettings), {
               stdio: false
             }));
@@ -103,5 +80,6 @@ class SProcessPipe extends import_s_event_emitter.default {
   }
 }
 var SProcessPipe_default = SProcessPipe;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SProcessPipe_default as default
+};

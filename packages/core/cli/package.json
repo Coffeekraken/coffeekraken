@@ -2,8 +2,11 @@
     "name": "@coffeekraken/cli",
     "version": "2.0.0",
     "description": "",
-    "type": "module",
     "main": "./src/cli/sugar.cli.js",
+    "exports": {
+        "import": "./src/cli/sugar.cli.js",
+        "require": "./src/cli/sugar.cli.cjs"
+    },
     "bin": {
         "sugar": "./src/cli/sugar.cli.js"
     },

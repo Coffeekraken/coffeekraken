@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,32 +14,10 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  dependencies: () => dependencies,
-  interface: () => postcssSugarPluginUiRangeClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_faker = __toESM(require("faker"));
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
-class postcssSugarPluginUiRangeClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __STheme from "@coffeekraken/s-theme";
+import __faker from "faker";
+class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
   static get _definition() {
     return {
       styles: {
@@ -59,12 +33,12 @@ class postcssSugarPluginUiRangeClassesInterface extends import_s_interface.defau
       defaultStyle: {
         type: "String",
         values: ["solid"],
-        default: import_s_theme.default.config("ui.range.defaultStyle")
+        default: __STheme.config("ui.range.defaultStyle")
       },
       defaultShape: {
         type: "String",
         values: ["default", "square", "pill", "circle"],
-        default: import_s_theme.default.config("ui.range.defaultShape")
+        default: __STheme.config("ui.range.defaultShape")
       },
       scope: {
         type: {
@@ -77,9 +51,10 @@ class postcssSugarPluginUiRangeClassesInterface extends import_s_interface.defau
     };
   }
 }
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
 function dependencies() {
   return {
-    files: [`${(0, import_dirname.default)()}/range.js`]
+    files: [`${__dirname()}/range.js`]
   };
 }
 function classes_default({
@@ -125,15 +100,15 @@ function classes_default({
         ${finalParams.styles.map((style) => {
     return ` * @example        html       ${style}
             *   <label class="s-mbe:30 s-label">
-            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${finalParams.defaultStyle === style ? "" : `:${style}`}" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${finalParams.defaultStyle === style ? "" : `:${style}`} s-color:accent" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${finalParams.defaultStyle === style ? "" : `:${style}`} s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
@@ -146,15 +121,15 @@ function classes_default({
         ${finalParams.shapes.map((shape) => {
     return ` * @example        html       ${shape}
             *   <label class="s-mbe:30 s-label">
-            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${finalParams.defaultShape === shape ? "" : `:${shape}`}" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${finalParams.defaultShape === shape ? "" : `:${shape}`} s-color:accent" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${finalParams.defaultShape === shape ? "" : `:${shape}`} s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
@@ -167,37 +142,37 @@ function classes_default({
         * @example        html          Colors (none-exclusive)
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         * 
         * @example      html        RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
@@ -209,19 +184,19 @@ function classes_default({
         * @example        html          Scales
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-scale:08" min="0" max="100" step="10" />
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-scale:12" min="0" max="100" step="10" />
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-scale:14" min="0" max="100" step="10" />
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         * 
         * @since      2.0.0
@@ -302,8 +277,8 @@ function classes_default({
   }
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
+  classes_default as default,
   dependencies,
-  interface
-});
+  postcssSugarPluginUiRangeClassesInterface as interface
+};

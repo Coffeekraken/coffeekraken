@@ -2,9 +2,12 @@
     "name": "@coffeekraken/s-lit-component",
     "version": "2.0.0",
     "description": "",
-    "type": "module",
     "homepage": "https://coffeekraken.io",
     "main": "./src/js/exports.js",
+    "exports": {
+        "import": "./src/js/exports.js",
+        "require": "./src/js/exports.cjs"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },

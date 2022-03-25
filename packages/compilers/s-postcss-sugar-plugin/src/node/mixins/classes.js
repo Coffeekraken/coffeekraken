@@ -1,33 +1,7 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  interface: () => postcssSugarPluginClassesMixinInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_objectHash = __toESM(require("@coffeekraken/sugar/shared/object/objectHash"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-class postcssSugarPluginClassesMixinInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __objectHash from "@coffeekraken/sugar/shared/object/objectHash";
+import __STheme from "@coffeekraken/s-theme";
+class postcssSugarPluginClassesMixinInterface extends __SInterface {
   static get _definition() {
     return {};
   }
@@ -83,14 +57,14 @@ async function classes_default({
     "@sugar.components.classes;",
     "@sugar.whiteSpace.classes;"
   ];
-  const hash = `@sugar.classes.${(0, import_objectHash.default)({
+  const hash = `@sugar.classes.${__objectHash({
     css: cssArray,
-    theme: import_s_theme.default.hash()
+    theme: __STheme.hash()
   })}`;
   const c = cache("@sugar.classes", hash, cssArray);
   return c;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  classes_default as default,
+  postcssSugarPluginClassesMixinInterface as interface
+};

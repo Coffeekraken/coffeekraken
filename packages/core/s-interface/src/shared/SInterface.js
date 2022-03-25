@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,38 +14,19 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SInterface_exports = {};
-__export(SInterface_exports, {
-  default: () => SInterface
-});
-module.exports = __toCommonJS(SInterface_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_descriptor = __toESM(require("@coffeekraken/s-descriptor"), 1);
-var import_parseArgs = __toESM(require("@coffeekraken/sugar/shared/cli/parseArgs"), 1);
-var import_node = __toESM(require("@coffeekraken/sugar/shared/is/node"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_getAvailableInterfaceTypes = __toESM(require("./getAvailableInterfaceTypes"), 1);
-if ((0, import_node.default)())
+import __SClass from "@coffeekraken/s-class";
+import __SDescriptor from "@coffeekraken/s-descriptor";
+import __parseArgs from "@coffeekraken/sugar/shared/cli/parseArgs";
+import __isNode from "@coffeekraken/sugar/shared/is/node";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __getAvailableInterfaceTypes from "./getAvailableInterfaceTypes";
+if (__isNode())
   global._registeredInterfacesTypes = {};
 else
   window._registeredInterfacesTypes = {};
-const _SInterface = class extends import_s_class.default {
+const _SInterface = class extends __SClass {
   constructor(settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       interface: {
         stripUnkown: false
       }
@@ -79,7 +56,7 @@ const _SInterface = class extends import_s_class.default {
     const newInt = new _SInterface();
     ints.forEach((int) => {
       if (int.definition) {
-        newInt.definition = (0, import_deepMerge.default)(newInt.definition, int.definition);
+        newInt.definition = __deepMerge(newInt.definition, int.definition);
       }
     });
     return newInt;
@@ -89,11 +66,11 @@ const _SInterface = class extends import_s_class.default {
     class SInterfaceOverrided extends this {
     }
     SInterfaceOverrided.overridedName = `${_this.name} (overrided)`;
-    SInterfaceOverrided.definition = (0, import_deepMerge.default)(_this.definition, definition);
+    SInterfaceOverrided.definition = __deepMerge(_this.definition, definition);
     return SInterfaceOverrided;
   }
   static getAvailableTypes() {
-    return (0, import_getAvailableInterfaceTypes.default)();
+    return __getAvailableInterfaceTypes();
   }
   static makeAvailableAsType(name = null) {
     const n = (name || this.name).toLowerCase();
@@ -130,7 +107,7 @@ const _SInterface = class extends import_s_class.default {
     return int.apply(objectOrString);
   }
   static render(renderer = "terminal", settings) {
-    const set = (0, import_deepMerge.default)({
+    const set = __deepMerge({
       renderer: "terminal",
       exclude: ["help"]
     }, settings);
@@ -142,10 +119,10 @@ const _SInterface = class extends import_s_class.default {
   }
   apply(objectOrString, settings) {
     var _a;
-    const set = (0, import_deepMerge.default)(this.interfaceSettings, settings != null ? settings : {});
+    const set = __deepMerge(this.interfaceSettings, settings != null ? settings : {});
     let objectOnWhichToApplyInterface = objectOrString;
     if (typeof objectOrString === "string") {
-      objectOnWhichToApplyInterface = (0, import_parseArgs.default)(objectOrString);
+      objectOnWhichToApplyInterface = __parseArgs(objectOrString);
       Object.keys(objectOnWhichToApplyInterface).forEach((argName) => {
         for (let i = 0; i < Object.keys(this._definition).length; i++) {
           const defArgName = Object.keys(this._definition)[i];
@@ -181,14 +158,14 @@ const _SInterface = class extends import_s_class.default {
         }
       });
     }
-    const descriptor = new import_s_descriptor.default({
+    const descriptor = new __SDescriptor({
       descriptor: __spreadValues({
         type: "Object",
         rules: this._definition
       }, (_a = set.descriptor) != null ? _a : {})
     });
     if (set.baseObj) {
-      objectOnWhichToApplyInterface = (0, import_deepMerge.default)(set.baseObj, objectOnWhichToApplyInterface);
+      objectOnWhichToApplyInterface = __deepMerge(set.baseObj, objectOnWhichToApplyInterface);
     }
     const descriptorResult = descriptor.apply(objectOnWhichToApplyInterface);
     if (descriptorResult.hasIssues()) {
@@ -196,7 +173,7 @@ const _SInterface = class extends import_s_class.default {
     }
     let resultObj = descriptorResult.value;
     if (!set.stripUnkown) {
-      resultObj = (0, import_deepMerge.default)(objectOnWhichToApplyInterface, resultObj);
+      resultObj = __deepMerge(objectOnWhichToApplyInterface, resultObj);
     }
     return resultObj;
   }
@@ -204,5 +181,6 @@ const _SInterface = class extends import_s_class.default {
 let SInterface = _SInterface;
 SInterface.description = "";
 SInterface._registeredRenderers = {};
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SInterface as default
+};

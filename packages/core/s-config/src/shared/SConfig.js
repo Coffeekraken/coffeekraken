@@ -1,38 +1,13 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SConfig_exports = {};
-__export(SConfig_exports, {
-  default: () => SConfig
-});
-module.exports = __toCommonJS(SConfig_exports);
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
-var import_s_env = __toESM(require("@coffeekraken/s-env"), 1);
-var import_md5 = __toESM(require("@coffeekraken/sugar/shared/crypt/md5"), 1);
-var import_node = __toESM(require("@coffeekraken/sugar/shared/is/node"), 1);
-var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"), 1);
-var import_deepMap = __toESM(require("@coffeekraken/sugar/shared/object/deepMap"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_get = __toESM(require("@coffeekraken/sugar/shared/object/get"), 1);
-var import_set = __toESM(require("@coffeekraken/sugar/shared/object/set"), 1);
-var import_SConfigAdapter = __toESM(require("./adapters/SConfigAdapter"), 1);
+import __SDuration from "@coffeekraken/s-duration";
+import __SEnv from "@coffeekraken/s-env";
+import __md5 from "@coffeekraken/sugar/shared/crypt/md5";
+import __isNode from "@coffeekraken/sugar/shared/is/node";
+import __isPlainObject from "@coffeekraken/sugar/shared/is/plainObject";
+import __deepMap from "@coffeekraken/sugar/shared/object/deepMap";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __get from "@coffeekraken/sugar/shared/object/get";
+import __set from "@coffeekraken/sugar/shared/object/set";
+import __SConfigAdapter from "./adapters/SConfigAdapter";
 class SConfig {
   constructor(name, settings = {}) {
     this._name = null;
@@ -45,10 +20,10 @@ class SConfig {
       throw new Error(`The name of an SConfig instance can contain only letters like [a-zA-Z0-9_-]...`);
     }
     this.id = name;
-    this._settings = (0, import_deepMerge.default)({
+    this._settings = __deepMerge({
       env: {
-        env: (_a = import_s_env.default.get("env")) != null ? _a : "dev",
-        platform: ((_b = import_s_env.default.get("platform")) != null ? _b : (0, import_node.default)()) ? "node" : "browser"
+        env: (_a = __SEnv.get("env")) != null ? _a : "dev",
+        platform: ((_b = __SEnv.get("platform")) != null ? _b : __isNode()) ? "node" : "browser"
       },
       adapters: [],
       defaultAdapter: null,
@@ -63,7 +38,7 @@ class SConfig {
       resolvers: []
     }, settings);
     this._settings.adapters.forEach((adapter) => {
-      if (!adapter instanceof import_SConfigAdapter.default) {
+      if (!adapter instanceof __SConfigAdapter) {
         throw new Error(`You have specified the adapter "${adapter.name || "unknown"}" as adapter for your "${this.id}" SConfig instance but this adapter does not extends the SConfigAdapter class...`);
       }
       if (!adapter.name) {
@@ -82,7 +57,7 @@ class SConfig {
     function resolveConfig(string, matches, config, path) {
       for (let i = 0; i < matches.length; i++) {
         const match = matches[i];
-        const value = (0, import_get.default)(config, this.resolveDotPath(match, config, path));
+        const value = __get(config, this.resolveDotPath(match, config, path));
         if (value === void 0) {
           throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" config value does not exiats...`);
         }
@@ -106,7 +81,7 @@ class SConfig {
       name: "extends",
       match: /\[extends.[a-zA-Z0-9\.\-_]+\]/gm,
       resolveDotPath(match, config, path) {
-        const ext = (0, import_get.default)(config, path[0] + "._extends");
+        const ext = __get(config, path[0] + "._extends");
         if (!ext)
           return;
         const dotPath = `${ext}.${match.replace("[extends.", "").replace("]", "")}`;
@@ -116,7 +91,7 @@ class SConfig {
         for (let i = 0; i < matches.length; i++) {
           const match = matches[i];
           const dotPath = this.resolveDotPath(match, config, path);
-          let value = (0, import_get.default)(config, dotPath);
+          let value = __get(config, dotPath);
           if (value === void 0) {
             throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" extends config value does not exiats...`);
           }
@@ -154,7 +129,7 @@ class SConfig {
     this._registeredPreprocesses[configId][configKey] = preprocessFn;
   }
   async load(adapter = this._settings.defaultAdapter, isUpdate = false) {
-    const duration = new import_s_duration.default();
+    const duration = new __SDuration();
     if (!this._adapters[adapter]) {
       throw new Error(`You try to load the config from the adapter "${adapter}" but this adapter does not exists...`);
     }
@@ -170,7 +145,7 @@ class SConfig {
     Object.keys(this.config).forEach((configId) => {
       var _a;
       const configObj = this.config[configId];
-      if (((_a = configObj.metas) == null ? void 0 : _a.platform) && configObj.metas.platform.indexOf(import_s_env.default.get("platform")) === -1) {
+      if (((_a = configObj.metas) == null ? void 0 : _a.platform) && configObj.metas.platform.indexOf(__SEnv.get("platform")) === -1) {
         delete this.config[configId];
       }
     });
@@ -181,7 +156,7 @@ class SConfig {
           throw new Error(`<red>[SConfig]</red> You have set an "<yellow>extends</yellow>" property to "<magenta>${extend}</magenta>" inside the "<cyan>${configName}</cyan>" config but this configuration you want to extends does not exists...`);
         }
         const extendsConfig = extendsConfigIfNeeded(Object.assign({}, this.config[extend]), extend);
-        const newExtendedConfig = (0, import_deepMerge.default)(extendsConfig, configToExtends);
+        const newExtendedConfig = __deepMerge(extendsConfig, configToExtends);
         Object.defineProperty(newExtendedConfig, "_extends", {
           enumerable: false,
           value: newExtendedConfig.extends
@@ -192,7 +167,7 @@ class SConfig {
         return configToExtends;
       }
     };
-    (0, import_deepMap.default)(this.config, ({ prop, value, path }) => {
+    __deepMap(this.config, ({ prop, value, path }) => {
       if (typeof value === "string" && value.split("[").length !== value.split("]").length) {
         throw new Error(`<red>[${this.constructor.name}]</red> We think that you've made a mistake in your config file at path "<yellow>${path}</yellow>" with the value "<cyan>${value}</cyan>"`);
       }
@@ -211,8 +186,8 @@ class SConfig {
       this._resolveInternalReferences(resolverObj);
     });
     Object.keys(this._restPaths).forEach((dotPath) => {
-      const actualConfig = (0, import_get.default)(this.config, dotPath), extendsConfig = (0, import_get.default)(this.config, this._restPaths[dotPath]);
-      (0, import_set.default)(this.config, dotPath, (0, import_deepMerge.default)(Object.assign({}, extendsConfig), Object.assign({}, actualConfig)));
+      const actualConfig = __get(this.config, dotPath), extendsConfig = __get(this.config, this._restPaths[dotPath]);
+      __set(this.config, dotPath, __deepMerge(Object.assign({}, extendsConfig), Object.assign({}, actualConfig)));
     });
     if (this.constructor._registeredPostprocess[this.id]) {
       for (let k = 0; k < Object.keys(this.constructor._registeredPostprocess[this.id]).length; k++) {
@@ -222,10 +197,10 @@ class SConfig {
     }
     if (this.config instanceof Promise) {
       throw new Error("Promise based SConfig is not already implemented...");
-    } else if ((0, import_plainObject.default)(this.config)) {
+    } else if (__isPlainObject(this.config)) {
       this._adapters[adapter].config = this.config;
       this._adapters[adapter].config.$ = {
-        hash: import_md5.default.encrypt(this.config),
+        hash: __md5.encrypt(this.config),
         loadedAt: Date.now()
       };
       return this.config;
@@ -249,11 +224,11 @@ class SConfig {
     return true;
   }
   _resolveInternalReferences(resolverObj, path = [], iteration = 0) {
-    let originalValue = (0, import_get.default)(this.config, path.join("."));
+    let originalValue = __get(this.config, path.join("."));
     iteration++;
     if (path.includes("...")) {
       const p = path.slice(0, path.indexOf("..."));
-      const parentObj = (0, import_get.default)(this.config, p.join("."));
+      const parentObj = __get(this.config, p.join("."));
       for (let i = 0; i < this._settings.resolvers.length; i++) {
         const resolver = this._settings.resolvers[i];
         if (!resolver.resolveDotPath)
@@ -268,7 +243,7 @@ class SConfig {
       }
       return;
     }
-    if ((0, import_plainObject.default)(originalValue)) {
+    if (__isPlainObject(originalValue)) {
       Object.keys(originalValue).forEach((key) => {
         this._resolveInternalReferences(resolverObj, [...path, key], iteration);
       });
@@ -281,15 +256,15 @@ class SConfig {
       if (matches && matches.length) {
         let resolvedValue = resolverObj.resolve(originalValue, matches, this.config, path);
         if (resolvedValue !== originalValue) {
-          let parentObj = (0, import_get.default)(this.config, path.slice(0, -1).join("."));
+          let parentObj = __get(this.config, path.slice(0, -1).join("."));
           if (path.slice(-1)[0] === "...") {
-            (0, import_deepMap.default)(Object.assign({}, resolvedValue), ({ object, prop, value, path: localPath }) => {
+            __deepMap(Object.assign({}, resolvedValue), ({ object, prop, value, path: localPath }) => {
               const fullPath = `${path.slice(0, -1).join(".")}.${localPath}`;
-              (0, import_set.default)(this.config, fullPath, value);
+              __set(this.config, fullPath, value);
             });
             delete parentObj["..."];
           } else {
-            (0, import_set.default)(this.config, path.join("."), resolvedValue);
+            __set(this.config, path.join("."), resolvedValue);
             this._resolveInternalReferences(resolverObj, path, iteration);
           }
         }
@@ -297,14 +272,14 @@ class SConfig {
     }
   }
   get(path, adapter = this._settings.defaultAdapter, settings = {}, _level = 0) {
-    settings = (0, import_deepMerge.default)(this._settings, settings);
+    settings = __deepMerge(this._settings, settings);
     if (adapter && !this._adapters[adapter]) {
       throw new Error(`You try to get the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`);
     }
     if (Object.keys(this._adapters[adapter].config).length === 0) {
       throw new Error(`<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async instance function`);
     }
-    const originalValue = (0, import_get.default)(this._adapters[adapter].config, path);
+    const originalValue = __get(this._adapters[adapter].config, path);
     if (settings.throwErrorOnUndefinedConfig && originalValue === void 0) {
       throw new Error(`You try to get the config "${path}" on the "${this.id}" SConfig instance but this config does not exists...`);
     }
@@ -314,14 +289,14 @@ class SConfig {
     if (!this._settings.allowSet) {
       throw new Error(`You try to set a config value on the "${this.id}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`);
     }
-    if (!this._settings.allowNew && (0, import_get.default)(this._adapters[this._settings.defaultAdapter].config, path) === void 0) {
+    if (!this._settings.allowNew && __get(this._adapters[this._settings.defaultAdapter].config, path) === void 0) {
       throw new Error(`You try to set the config "${path}" on the "${this.id}" SConfig instance but this config does not exists and this instance does not allow for new config creation...`);
     }
     adapters.forEach((adapter) => {
       if (adapter && !this._adapters[adapter]) {
         throw new Error(`You try to set the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`);
       }
-      (0, import_set.default)(this._adapters[adapter].config, path, value);
+      __set(this._adapters[adapter].config, path, value);
     });
     if (this._settings.autoSave) {
       return this.save(adapters);
@@ -331,5 +306,6 @@ class SConfig {
 }
 SConfig._registeredPostprocess = {};
 SConfig._registeredPreprocesses = {};
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SConfig as default
+};

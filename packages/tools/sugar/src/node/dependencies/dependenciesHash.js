@@ -18,10 +18,6 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -31,16 +27,10 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var dependenciesHash_exports = {};
-__export(dependenciesHash_exports, {
-  default: () => dependenciesHash
-});
-module.exports = __toCommonJS(dependenciesHash_exports);
-var import_object_hash = __toESM(require("object-hash"), 1);
-var import_fileHash = __toESM(require("../fs/fileHash"), 1);
-var import_sha256 = __toESM(require("../../shared/crypt/sha256"), 1);
-var import_extension = __toESM(require("../fs/extension"), 1);
+import __objectHash from "object-hash";
+import __fileHash from "../fs/fileHash";
+import __sha256 from "../../shared/crypt/sha256";
+import __extension from "../fs/extension";
 async function dependenciesHash(dependenciesObj, settings) {
   settings = __spreadValues({
     recursive: true
@@ -51,7 +41,7 @@ async function dependenciesHash(dependenciesObj, settings) {
       const filePath = dependenciesObj.files[i];
       let fileDepsHash = "";
       if (settings.recursive) {
-        switch ((0, import_extension.default)(filePath)) {
+        switch (__extension(filePath)) {
           case "js":
             const jsFileExports = await Promise.resolve().then(() => __toESM(require(filePath)));
             if (jsFileExports.dependencies) {
@@ -64,14 +54,15 @@ async function dependenciesHash(dependenciesObj, settings) {
             break;
         }
       }
-      const fileHash = await (0, import_fileHash.default)(filePath);
-      filesHashes.push(import_sha256.default.encrypt(`${fileHash}-${fileDepsHash}`));
+      const fileHash = await __fileHash(filePath);
+      filesHashes.push(__sha256.encrypt(`${fileHash}-${fileDepsHash}`));
     }
   }
   if (dependenciesObj.data) {
-    dataHash = (0, import_object_hash.default)(dependenciesObj.data);
+    dataHash = __objectHash(dependenciesObj.data);
   }
-  return import_sha256.default.encrypt(`${dataHash}-${filesHashes.join("-")}`);
+  return __sha256.encrypt(`${dataHash}-${filesHashes.join("-")}`);
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  dependenciesHash as default
+};

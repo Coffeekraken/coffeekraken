@@ -1,38 +1,12 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SParallaxFeature_exports = {};
-__export(SParallaxFeature_exports, {
-  default: () => SParallaxFeature,
-  define: () => define
-});
-module.exports = __toCommonJS(SParallaxFeature_exports);
-var import_s_feature = __toESM(require("@coffeekraken/s-feature"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_SParallaxFeatureInterface = __toESM(require("./interface/SParallaxFeatureInterface"), 1);
-var __rematrix = __toESM(require("rematrix"), 1);
-class SParallaxFeature extends import_s_feature.default {
+import __SFeature from "@coffeekraken/s-feature";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SParallaxFeatureInterface from "./interface/SParallaxFeatureInterface";
+import * as __rematrix from "rematrix";
+class SParallaxFeature extends __SFeature {
   constructor(name, node, settings) {
-    super(name, node, (0, import_deepMerge.default)({
+    super(name, node, __deepMerge({
       componentUtils: {
-        interface: import_SParallaxFeatureInterface.default
+        interface: __SParallaxFeatureInterface
       },
       feature: {}
     }, settings != null ? settings : {}));
@@ -74,5 +48,9 @@ class SParallaxFeature extends import_s_feature.default {
   }
 }
 function define(props = {}, name = "s-parallax") {
-  import_s_feature.default.defineFeature(name, SParallaxFeature, props);
+  __SFeature.defineFeature(name, SParallaxFeature, props);
 }
+export {
+  SParallaxFeature as default,
+  define
+};

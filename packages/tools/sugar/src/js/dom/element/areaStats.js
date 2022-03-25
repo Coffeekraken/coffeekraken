@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,34 +14,15 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var areaStats_exports = {};
-__export(areaStats_exports, {
-  default: () => areaStats
-});
-module.exports = __toCommonJS(areaStats_exports);
-var import_up = __toESM(require("../traverse/up"), 1);
-var import_scrollTop = __toESM(require("../scroll/scrollTop"), 1);
-var import_scrollLeft = __toESM(require("../scroll/scrollLeft"), 1);
+import __traverseUp from "../traverse/up";
+import __scrollTop from "../scroll/scrollTop";
+import __scrollLeft from "../scroll/scrollLeft";
 function areaStats($elm, settings) {
   const finalSettings = __spreadValues({
     relativeTo: "visible"
   }, settings != null ? settings : {});
   if (finalSettings.relativeTo === "visible") {
-    finalSettings.relativeTo = (0, import_up.default)($elm, ($item) => {
+    finalSettings.relativeTo = __traverseUp($elm, ($item) => {
       const style = window.getComputedStyle($item);
       if (style.overflow === "hidden")
         return $item;
@@ -57,8 +34,8 @@ function areaStats($elm, settings) {
     rootBoundingRect = finalSettings == null ? void 0 : finalSettings.relativeTo.getBoundingClientRect();
   } else {
     rootBoundingRect = {
-      top: (0, import_scrollTop.default)(),
-      left: (0, import_scrollLeft.default)(),
+      top: __scrollTop(),
+      left: __scrollLeft(),
       width: Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0),
       height: Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
     };
@@ -106,3 +83,6 @@ function areaStats($elm, settings) {
     relTop: top
   };
 }
+export {
+  areaStats as default
+};

@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,15 +13,9 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var readJson_exports = {};
-__export(readJson_exports, {
-  default: () => readJson
-});
-module.exports = __toCommonJS(readJson_exports);
-var import_fs = __toESM(require("fs"), 1);
+import __fs from "fs";
 function readJson(path) {
-  if (!import_fs.default.existsSync(path)) {
+  if (!__fs.existsSync(path)) {
     throw new Error(`<red>[readJson]</red> Sorry but the passed file path "<cyan>${path}</cyan>" does not exists...`);
   }
   return new Promise(async (resolve, reject) => {
@@ -33,5 +23,6 @@ function readJson(path) {
     resolve(json);
   });
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  readJson as default
+};

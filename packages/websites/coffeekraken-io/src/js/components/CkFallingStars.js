@@ -1,32 +1,6 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var CkFallingStars_exports = {};
-__export(CkFallingStars_exports, {
-  default: () => CKFallingStars,
-  define: () => define
-});
-module.exports = __toCommonJS(CkFallingStars_exports);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_lit = require("lit");
-class CKFallingStars extends import_s_lit_component.default {
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import { html } from "lit";
+class CKFallingStars extends __SLitComponent {
   constructor() {
     super({
       litComponent: {
@@ -84,11 +58,15 @@ class CKFallingStars extends import_s_lit_component.default {
     setTimeout(this.new.bind(this), Math.random() * 3500);
   }
   render() {
-    return import_lit.html`
+    return html`
         `;
   }
 }
 function define(props = {}, tagName = "ck-falling-stars") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, CKFallingStars);
 }
+export {
+  CKFallingStars as default,
+  define
+};

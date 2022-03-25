@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,34 +14,15 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var resolveGlob_exports = {};
-__export(resolveGlob_exports, {
-  default: () => resolveGlob
-});
-module.exports = __toCommonJS(resolveGlob_exports);
-var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_glob = __toESM(require("glob"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"), 1);
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
-var import_excludeGlobs = __toESM(require("../path/excludeGlobs"), 1);
+import __SFile from "@coffeekraken/s-file";
+import __fs from "fs";
+import __glob from "glob";
+import __path from "path";
+import __expandGlob from "../../shared/glob/expandGlob";
+import __deepMerge from "../../shared/object/deepMerge";
+import __excludeGlobs from "../path/excludeGlobs";
 function resolveGlob(globs, settings = {}) {
-  settings = (0, import_deepMerge.default)({
+  settings = __deepMerge({
     cwd: settings.cwd || process.cwd(),
     symlinks: true,
     nodir: true,
@@ -60,9 +37,9 @@ function resolveGlob(globs, settings = {}) {
   for (let i = 0; i < globs.length; i++) {
     const glob = globs[i];
     let cwd = settings.cwd, globPattern, searchReg = settings.contentRegExp;
-    if (import_fs.default.existsSync(glob)) {
+    if (__fs.existsSync(glob)) {
       if (settings.SFile) {
-        const sFile = import_s_file.default.new(glob, {
+        const sFile = __SFile.new(glob, {
           file: {
             cwd
           }
@@ -85,26 +62,26 @@ function resolveGlob(globs, settings = {}) {
       searchReg = new RegExp(innerReg, flags != null ? flags : "");
     }
     globPattern = splits[0];
-    globPattern = import_path.default.resolve(cwd, globPattern);
-    const finalPatterns = (0, import_expandGlob.default)(globPattern);
+    globPattern = __path.resolve(cwd, globPattern);
+    const finalPatterns = __expandGlob(globPattern);
     let pathes = [];
     finalPatterns.forEach((pattern) => {
       var _a;
-      pathes = pathes.concat(import_glob.default.sync(pattern, __spreadValues({
+      pathes = pathes.concat(__glob.sync(pattern, __spreadValues({
         cwd,
         nodir: settings.nodir,
         dot: true,
         follow: settings.symlinks,
         ignore: [
           ...(_a = settings.exclude) != null ? _a : [],
-          ...settings.defaultExcludes ? (0, import_excludeGlobs.default)() : []
+          ...settings.defaultExcludes ? __excludeGlobs() : []
         ]
       }, settings)));
     });
     if (searchReg) {
       pathes = pathes.filter((path) => {
         try {
-          const content = import_fs.default.readFileSync(path, "utf8").toString();
+          const content = __fs.readFileSync(path, "utf8").toString();
           const matches = content.match(searchReg);
           if (matches && matches.length) {
             return true;
@@ -117,7 +94,7 @@ function resolveGlob(globs, settings = {}) {
     }
     pathes.forEach((path) => {
       if (settings.SFile) {
-        const sFile = import_s_file.default.new(path, {
+        const sFile = __SFile.new(path, {
           file: {
             cwd
           }
@@ -130,5 +107,6 @@ function resolveGlob(globs, settings = {}) {
   }
   return filesArray;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  resolveGlob as default
+};

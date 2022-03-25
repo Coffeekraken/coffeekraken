@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,29 +14,9 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  interface: () => postcssSugarPluginTextClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_faker = __toESM(require("faker"));
-class postcssSugarPluginTextClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __faker from "faker";
+class postcssSugarPluginTextClassesInterface extends __SInterface {
   static get _definition() {
     return {};
   }
@@ -85,41 +61,41 @@ function classes_default({
         * 
         * @example        html          Aligns
         *   <div class="s-text:left s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (left) ${import_faker.default.name.findName()}
+        *       (left) ${__faker.name.findName()}
         *   </div>
         *   <div class="s-text:right s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (right) ${import_faker.default.name.findName()}
+        *       (right) ${__faker.name.findName()}
         *   </div>
         *   <div class="s-text:center s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (center) ${import_faker.default.name.findName()}
+        *       (center) ${__faker.name.findName()}
         *   </div>
         *   <div class="s-text:start s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (start) ${import_faker.default.name.findName()}
+        *       (start) ${__faker.name.findName()}
         *   </div>
         *   <div class="s-text:end s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (end) ${import_faker.default.name.findName()}
+        *       (end) ${__faker.name.findName()}
         *   </div>
         * 
         * @example        html          Decorations
         *   <div class="s-text:overline s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (overline) ${import_faker.default.name.findName()}
+        *       (overline) ${__faker.name.findName()}
         *   </div>
         *   <div class="s-text:underline s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (underline) ${import_faker.default.name.findName()}
+        *       (underline) ${__faker.name.findName()}
         *   </div>
         *   <div class="s-text:line-through s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (line-through) ${import_faker.default.name.findName()}
+        *       (line-through) ${__faker.name.findName()}
         *   </div>
         * 
         * @example        html          Transforms
         *   <div class="s-text:lowercase s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (lowercase) ${import_faker.default.name.findName()}
+        *       (lowercase) ${__faker.name.findName()}
         *   </div>
         *   <div class="s-text:uppercase s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (uppercase) ${import_faker.default.name.findName()}
+        *       (uppercase) ${__faker.name.findName()}
         *   </div>
         *   <div class="s-text:capitalize s-bg:main s-p:20 s-mbe:30 s-radius">
-        *       (capitalize) ${import_faker.default.name.findName()}
+        *       (capitalize) ${__faker.name.findName()}
         *   </div>
         * 
         * 
@@ -381,7 +357,7 @@ function classes_default({
         `);
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  classes_default as default,
+  postcssSugarPluginTextClassesInterface as interface
+};

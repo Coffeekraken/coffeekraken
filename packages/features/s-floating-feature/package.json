@@ -4,6 +4,10 @@
     "description": "",
     "type": "module",
     "main": "./src/js/exports.js",
+    "exports": {
+        "import": "./src/js/exports.js",
+        "require": "./src/js/exports.cjs"
+    },
     "scripts": {
         "dev": "sugar frontstack dev",
         "build": "sugar frontstack build",

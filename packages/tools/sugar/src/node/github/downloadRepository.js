@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,32 +14,13 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var downloadRepository_exports = {};
-__export(downloadRepository_exports, {
-  default: () => downloadRepository
-});
-module.exports = __toCommonJS(downloadRepository_exports);
-var import_fs = __toESM(require("fs"), 1);
-var import_https = __toESM(require("https"), 1);
-var import_systemTmpDir = __toESM(require("../path/systemTmpDir"), 1);
-var import_unzip = __toESM(require("../zip/unzip"), 1);
-var import_fs_extra = __toESM(require("fs-extra"), 1);
-var import_filename = __toESM(require("../fs/filename"), 1);
-var import_folderPath = __toESM(require("../fs/folderPath"), 1);
+import __fs from "fs";
+import __https from "https";
+import __tmpDir from "../path/systemTmpDir";
+import __unzip from "../zip/unzip";
+import __fsExtra from "fs-extra";
+import __fileName from "../fs/filename";
+import __folderPath from "../fs/folderPath";
 function downloadRepository(repository, settings) {
   return new Promise((resolve, reject) => {
     settings = __spreadValues({
@@ -52,32 +29,32 @@ function downloadRepository(repository, settings) {
       branch: "master"
     }, settings != null ? settings : {});
     if (!settings.dest) {
-      settings.dest = `${(0, import_systemTmpDir.default)()}/downloads/${repository.replace(/[\/\s]/gm, "-").toLowerCase()}-${settings.branch}.zip`;
+      settings.dest = `${__tmpDir()}/downloads/${repository.replace(/[\/\s]/gm, "-").toLowerCase()}-${settings.branch}.zip`;
     }
     let dest = settings.dest;
     if (!dest.match(/\.g?zip$/)) {
       dest = `${dest}/${repository.replace(/[\/\s]/gm, "-").toLowerCase()}-${settings.branch}.zip`;
     }
-    const folderName = (0, import_filename.default)(dest).replace(/\.g?zip$/, "");
-    import_fs_extra.default.ensureDir((0, import_folderPath.default)(dest));
+    const folderName = __fileName(dest).replace(/\.g?zip$/, "");
+    __fsExtra.ensureDir(__folderPath(dest));
     const url = `https://codeload.github.com/${repository}/zip/${settings.branch}`;
-    const file = import_fs.default.createWriteStream(dest);
-    const request = import_https.default.get(url, function(response) {
+    const file = __fs.createWriteStream(dest);
+    const request = __https.get(url, function(response) {
       response.pipe(file);
       file.on("finish", async () => {
         await file.close();
         if (settings == null ? void 0 : settings.unzip) {
           const newDest = dest.split("/").slice(0, -1).join("/");
           const destFolderPath = dest.replace(/\.g?zip$/, "");
-          import_fs_extra.default.removeSync(destFolderPath);
-          await (0, import_unzip.default)(dest, {
+          __fsExtra.removeSync(destFolderPath);
+          await __unzip(dest, {
             dest: newDest
           });
-          const files = import_fs.default.readdirSync(destFolderPath);
-          import_fs_extra.default.moveSync(`${destFolderPath}/${files[0]}`, `${newDest}/${files[0]}`, { overwrite: true });
-          import_fs_extra.default.removeSync(destFolderPath);
-          import_fs_extra.default.moveSync(`${newDest}/${files[0]}`, `${newDest}/${folderName}`);
-          import_fs_extra.default.removeSync(dest);
+          const files = __fs.readdirSync(destFolderPath);
+          __fsExtra.moveSync(`${destFolderPath}/${files[0]}`, `${newDest}/${files[0]}`, { overwrite: true });
+          __fsExtra.removeSync(destFolderPath);
+          __fsExtra.moveSync(`${newDest}/${files[0]}`, `${newDest}/${folderName}`);
+          __fsExtra.removeSync(dest);
           dest = `${newDest}/${folderName}`;
         }
         resolve({
@@ -86,7 +63,7 @@ function downloadRepository(repository, settings) {
       });
     }).on("error", async (err) => {
       try {
-        import_fs.default.unlinkSync(settings == null ? void 0 : settings.dest);
+        __fs.unlinkSync(settings == null ? void 0 : settings.dest);
       } catch (e) {
       }
       reject({
@@ -95,5 +72,6 @@ function downloadRepository(repository, settings) {
     });
   });
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  downloadRepository as default
+};

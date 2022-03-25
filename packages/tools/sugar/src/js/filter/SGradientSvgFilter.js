@@ -1,30 +1,5 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SGradientSvgFilter_exports = {};
-__export(SGradientSvgFilter_exports, {
-  default: () => SGradientSvgFilter_default
-});
-module.exports = __toCommonJS(SGradientSvgFilter_exports);
-var import_SSvgFilter = __toESM(require("./SSvgFilter"), 1);
-class SGradientSvgFilter extends import_SSvgFilter.default {
+import SSvgFilter from "./SSvgFilter";
+class SGradientSvgFilter extends SSvgFilter {
   constructor() {
     super(`
 			<feImage xlink:href="" x="0" y="0" result="IMAGEFILL" preserveAspectRatio="none" />
@@ -89,3 +64,6 @@ class SGradientSvgFilter extends import_SSvgFilter.default {
   }
 }
 var SGradientSvgFilter_default = SGradientSvgFilter;
+export {
+  SGradientSvgFilter_default as default
+};

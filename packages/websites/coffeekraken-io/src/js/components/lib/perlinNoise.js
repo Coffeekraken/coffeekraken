@@ -1,27 +1,5 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var perlinNoise_exports = {};
-__export(perlinNoise_exports, {
-  default: () => perlinNoise_default
-});
-module.exports = __toCommonJS(perlinNoise_exports);
 function perlinNoise_default() {
-  var module2 = {};
+  var module = {};
   function Grad(x, y, z) {
     this.x = x;
     this.y = y;
@@ -307,7 +285,7 @@ function perlinNoise_default() {
   ];
   var perm = new Array(512);
   var gradP = new Array(512);
-  module2.seed = function(seed) {
+  module.seed = function(seed) {
     if (seed > 0 && seed < 1) {
       seed *= 65536;
     }
@@ -326,12 +304,12 @@ function perlinNoise_default() {
       gradP[i] = gradP[i + 256] = grad3[v % 12];
     }
   };
-  module2.seed(0);
+  module.seed(0);
   var F2 = 0.5 * (Math.sqrt(3) - 1);
   var G2 = (3 - Math.sqrt(3)) / 6;
   var F3 = 1 / 3;
   var G3 = 1 / 6;
-  module2.simplex2 = function(xin, yin) {
+  module.simplex2 = function(xin, yin) {
     var n0, n1, n2;
     var s = (xin + yin) * F2;
     var i = Math.floor(xin + s);
@@ -379,7 +357,7 @@ function perlinNoise_default() {
     }
     return 70 * (n0 + n1 + n2);
   };
-  module2.simplex3 = function(xin, yin, zin) {
+  module.simplex3 = function(xin, yin, zin) {
     var n0, n1, n2, n3;
     var s = (xin + yin + zin) * F3;
     var i = Math.floor(xin + s);
@@ -490,7 +468,7 @@ function perlinNoise_default() {
   function lerp(a, b, t) {
     return (1 - t) * a + t * b;
   }
-  module2.perlin2 = function(x, y) {
+  module.perlin2 = function(x, y) {
     var X = Math.floor(x), Y = Math.floor(y);
     x = x - X;
     y = y - Y;
@@ -503,7 +481,7 @@ function perlinNoise_default() {
     var u = fade(x);
     return lerp(lerp(n00, n10, u), lerp(n01, n11, u), fade(y));
   };
-  module2.perlin3 = function(x, y, z) {
+  module.perlin3 = function(x, y, z) {
     var X = Math.floor(x), Y = Math.floor(y), Z = Math.floor(z);
     x = x - X;
     y = y - Y;
@@ -524,5 +502,8 @@ function perlinNoise_default() {
     var w = fade(z);
     return lerp(lerp(lerp(n000, n100, u), lerp(n001, n101, u), w), lerp(lerp(n010, n110, u), lerp(n011, n111, u), w), v);
   };
-  return module2;
+  return module;
 }
+export {
+  perlinNoise_default as default
+};

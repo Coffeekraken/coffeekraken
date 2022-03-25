@@ -1,11 +1,7 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -21,45 +17,26 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SFile_exports = {};
-__export(SFile_exports, {
-  default: () => SFile_default
-});
-module.exports = __toCommonJS(SFile_exports);
-var import_s_event_emitter = __toESM(require("@coffeekraken/s-event-emitter"), 1);
-var import_ensureDirSync = __toESM(require("@coffeekraken/sugar/node/fs/ensureDirSync"), 1);
-var import_extension = __toESM(require("@coffeekraken/sugar/node/fs/extension"), 1);
-var import_filename = __toESM(require("@coffeekraken/sugar/node/fs/filename"), 1);
-var import_folderPath = __toESM(require("@coffeekraken/sugar/node/fs/folderPath"), 1);
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
-var import_require = __toESM(require("@coffeekraken/sugar/node/esm/require"), 1);
-var import_onProcessExit = __toESM(require("@coffeekraken/sugar/node/process/onProcessExit"), 1);
-var import_md5 = __toESM(require("@coffeekraken/sugar/shared/crypt/md5"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_toString = __toESM(require("@coffeekraken/sugar/shared/string/toString"), 1);
-var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_writeFile = __toESM(require("@coffeekraken/sugar/node/fs/writeFile"), 1);
-var import_writeFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeFileSync"), 1);
-var import_minimatch = __toESM(require("minimatch"), 1);
-var import_path = __toESM(require("path"), 1);
-const _SFile = class extends import_s_event_emitter.default {
+import __SEventEmitter from "@coffeekraken/s-event-emitter";
+import __ensureDirSync from "@coffeekraken/sugar/node/fs/ensureDirSync";
+import __extension from "@coffeekraken/sugar/node/fs/extension";
+import __getFilename from "@coffeekraken/sugar/node/fs/filename";
+import __folderPath from "@coffeekraken/sugar/node/fs/folderPath";
+import __readJsonSync from "@coffeekraken/sugar/node/fs/readJsonSync";
+import __require from "@coffeekraken/sugar/node/esm/require";
+import __onProcessExit from "@coffeekraken/sugar/node/process/onProcessExit";
+import __md5 from "@coffeekraken/sugar/shared/crypt/md5";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __toString from "@coffeekraken/sugar/shared/string/toString";
+import __uniqid from "@coffeekraken/sugar/shared/string/uniqid";
+import __fs from "fs";
+import __writeFile from "@coffeekraken/sugar/node/fs/writeFile";
+import __writeFileSync from "@coffeekraken/sugar/node/fs/writeFileSync";
+import __minimatch from "minimatch";
+import __path from "path";
+const _SFile = class extends __SEventEmitter {
   constructor(filepath, settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       file: {
         checkExistence: true,
         cwd: process.cwd(),
@@ -95,10 +72,10 @@ const _SFile = class extends import_s_event_emitter.default {
       writable: true,
       value: null
     });
-    this.exists = import_fs.default.existsSync(filepath);
+    this.exists = __fs.existsSync(filepath);
     this.cwd = this.fileSettings.cwd;
-    this._name = (0, import_filename.default)(filepath);
-    this.extension = (0, import_extension.default)(this.path).toLowerCase();
+    this._name = __getFilename(filepath);
+    this.extension = __extension(this.path).toLowerCase();
     this._nameWithoutExt = this.name.replace(`.${this.extension}`, "");
     if (this.fileSettings.checkExistence && !this.exists) {
       throw new Error(`The passed filepath "<cyan>${this.path}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`);
@@ -107,7 +84,7 @@ const _SFile = class extends import_s_event_emitter.default {
       this.fileSettings.sourcesExtensions.forEach((ext) => {
         const replaceReg = new RegExp(`.${this.extension}$`);
         const potentialPath = this.path.replace(replaceReg, `.${ext}`);
-        if (import_fs.default.existsSync(potentialPath)) {
+        if (__fs.existsSync(potentialPath)) {
           this.sourcesFiles[ext] = _SFile.new(potentialPath);
         }
       });
@@ -128,10 +105,10 @@ const _SFile = class extends import_s_event_emitter.default {
     });
   }
   static new(path, settings) {
-    const fileName = (0, import_filename.default)(path);
+    const fileName = __getFilename(path);
     for (let i = 0; i < Object.keys(this._registeredClasses).length; i++) {
       const pattern = Object.keys(this._registeredClasses)[i], cls = this._registeredClasses[pattern];
-      if ((0, import_minimatch.default)(fileName, pattern)) {
+      if (__minimatch(fileName, pattern)) {
         return new cls(path, settings);
       }
     }
@@ -145,22 +122,22 @@ const _SFile = class extends import_s_event_emitter.default {
   }
   get path() {
     let path = this._path;
-    if (!import_path.default.isAbsolute(path) && this.fileSettings.cwd && !path.includes(this.fileSettings.cwd)) {
-      path = import_path.default.resolve(this.fileSettings.cwd, path);
+    if (!__path.isAbsolute(path) && this.fileSettings.cwd && !path.includes(this.fileSettings.cwd)) {
+      path = __path.resolve(this.fileSettings.cwd, path);
     }
     return path;
   }
   get relPath() {
-    return import_path.default.relative(this.cwd, this.path);
+    return __path.relative(this.cwd, this.path);
   }
   get dirPath() {
-    return import_path.default.dirname(this.path);
+    return __path.dirname(this.path);
   }
   get fileSettings() {
     return this._settings.file;
   }
   get hash() {
-    return import_md5.default.encrypt(this.content);
+    return __md5.encrypt(this.content);
   }
   get stats() {
     if (!this._stats)
@@ -170,7 +147,7 @@ const _SFile = class extends import_s_event_emitter.default {
   get raw() {
     if (this._raw)
       return this._raw;
-    this._raw = import_fs.default.readFileSync(this.path, "utf8");
+    this._raw = __fs.readFileSync(this.path, "utf8");
     return this._raw;
   }
   get content() {
@@ -209,12 +186,12 @@ const _SFile = class extends import_s_event_emitter.default {
   }
   update() {
     this._content = void 0;
-    this.exists = import_fs.default.existsSync(this.path);
+    this.exists = __fs.existsSync(this.path);
     if (!this.exists) {
       this._stats = null;
       return;
     }
-    const stats = import_fs.default.statSync(this.path);
+    const stats = __fs.statSync(this.path);
     this._stats = stats;
     this._stats.bytes = stats.size;
     this._stats.gbytes = stats.size * 1e-8;
@@ -230,7 +207,7 @@ const _SFile = class extends import_s_event_emitter.default {
   watch() {
     if (this._watcher)
       return;
-    this._watcher = import_fs.default.watchFile(this.path, {
+    this._watcher = __fs.watchFile(this.path, {
       interval: this.fileSettings.watch && this.fileSettings.watch.pollingInterval ? this.fileSettings.watch.pollingInterval : 1e3
     }, (event) => {
       this.update();
@@ -259,21 +236,21 @@ const _SFile = class extends import_s_event_emitter.default {
   duplicateSync(to) {
     let destination = to;
     if (!to) {
-      const __replacePathTokens = (0, import_require.default)("@coffeekraken/sugar/node/path/replacePathTokens").default;
-      destination = __replacePathTokens(`%tmpDir/files/${this.constructor.name}/${this.nameWithoutExt}.${(0, import_uniqid.default)()}.${this.extension}`);
-      (0, import_onProcessExit.default)(() => {
+      const __replacePathTokens = __require("@coffeekraken/sugar/node/path/replacePathTokens").default;
+      destination = __replacePathTokens(`%tmpDir/files/${this.constructor.name}/${this.nameWithoutExt}.${__uniqid()}.${this.extension}`);
+      __onProcessExit(() => {
         try {
-          import_fs.default.unlinkSync(destination);
+          __fs.unlinkSync(destination);
         } catch (e) {
         }
       });
     }
-    destination = import_path.default.resolve(destination);
-    if (import_fs.default.existsSync(destination)) {
+    destination = __path.resolve(destination);
+    if (__fs.existsSync(destination)) {
       throw new Error(`<red>[sugar.node.fs.SFile.duplicate]</red> Sorry but a file already exists at "<cyan>${destination}</cyan>"`);
     }
-    (0, import_ensureDirSync.default)((0, import_folderPath.default)(destination));
-    import_fs.default.copyFileSync(this.path, destination);
+    __ensureDirSync(__folderPath(destination));
+    __fs.copyFileSync(this.path, destination);
     const newFileInstance = new this.constructor(destination, this._settings);
     return newFileInstance;
   }
@@ -302,14 +279,14 @@ const _SFile = class extends import_s_event_emitter.default {
         }
       }
     }
-    import_fs.default.writeFileSync(this.path, toSave);
+    __fs.writeFileSync(this.path, toSave);
     this._commits = [];
     this._content = void 0;
     return this;
   }
   unlink() {
     return new Promise((resolve, reject) => {
-      import_fs.default.unlink(this.path, (error) => {
+      __fs.unlink(this.path, (error) => {
         if (error)
           return reject(error);
         this.update();
@@ -318,7 +295,7 @@ const _SFile = class extends import_s_event_emitter.default {
     });
   }
   unlinkSync() {
-    import_fs.default.unlinkSync(this.path);
+    __fs.unlinkSync(this.path);
     this.update();
     return true;
   }
@@ -328,7 +305,7 @@ const _SFile = class extends import_s_event_emitter.default {
         return reject(`You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`);
       }
       const set = __spreadValues(__spreadValues({}, this.fileSettings.readSettings), settings);
-      import_fs.default.readFile(this.path, {
+      __fs.readFile(this.path, {
         encoding: set.encoding,
         flag: set.flag
       }, (error, data) => {
@@ -349,10 +326,10 @@ const _SFile = class extends import_s_event_emitter.default {
     const set = __spreadValues(__spreadValues({}, this.fileSettings.readSettings), settings);
     let content;
     if (this.extension === "json" && set.cast) {
-      content = (0, import_readJsonSync.default)(this.path);
+      content = __readJsonSync(this.path);
       return content;
     } else {
-      content = import_fs.default.readFileSync(this.path, {
+      content = __fs.readFileSync(this.path, {
         encoding: set.encoding,
         flag: set.flag
       });
@@ -372,11 +349,11 @@ const _SFile = class extends import_s_event_emitter.default {
       const set = __spreadValues(__spreadProps(__spreadValues({}, this.fileSettings.writeSettings), {
         path: this.path
       }), settings);
-      data = (_a = (0, import_toString.default)(data, {
+      data = (_a = __toString(data, {
         beautify: true,
         highlight: false
       })) != null ? _a : "";
-      await (0, import_writeFile.default)(set.path, data);
+      await __writeFile(set.path, data);
       resolve(true);
     });
   }
@@ -385,16 +362,17 @@ const _SFile = class extends import_s_event_emitter.default {
     const set = __spreadValues(__spreadProps(__spreadValues({}, this.fileSettings.writeSettings), {
       path: this.path
     }), settings);
-    data = (_a = (0, import_toString.default)(data, {
+    data = (_a = __toString(data, {
       beautify: true,
       highlight: false
     })) != null ? _a : "";
-    (0, import_writeFileSync.default)(set.path, data);
+    __writeFileSync(set.path, data);
     this.update();
   }
 };
 let SFile = _SFile;
 SFile._registeredClasses = {};
 var SFile_default = SFile;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SFile_default as default
+};

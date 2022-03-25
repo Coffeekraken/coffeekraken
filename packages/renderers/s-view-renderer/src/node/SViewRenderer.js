@@ -21,10 +21,6 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -34,32 +30,26 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SViewRenderer_exports = {};
-__export(SViewRenderer_exports, {
-  default: () => SViewRenderer_default
-});
-module.exports = __toCommonJS(SViewRenderer_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
-var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"), 1);
-var import_unique = __toESM(require("@coffeekraken/sugar/shared/array/unique"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_glob = __toESM(require("glob"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_SViewRendererSettingsInterface = __toESM(require("./interface/SViewRendererSettingsInterface"), 1);
-const _SViewRenderer = class extends import_s_class.default {
+import __SClass from "@coffeekraken/s-class";
+import __SDuration from "@coffeekraken/s-duration";
+import __SFile from "@coffeekraken/s-file";
+import __SPromise from "@coffeekraken/s-promise";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
+import __unique from "@coffeekraken/sugar/shared/array/unique";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __fs from "fs";
+import __glob from "glob";
+import __path from "path";
+import __SViewRendererSettingsInterface from "./interface/SViewRendererSettingsInterface";
+const _SViewRenderer = class extends __SClass {
   constructor(viewPath, settings) {
-    super((0, import_deepMerge.default)({
-      viewRenderer: import_SViewRendererSettingsInterface.default.defaults()
+    super(__deepMerge({
+      viewRenderer: __SViewRendererSettingsInterface.defaults()
     }, settings || {}));
     this._viewPath = "";
     (async () => {
-      const defaultEngines = import_s_sugar_config.default.get("viewRenderer.engines") || [];
+      const defaultEngines = __SSugarConfig.get("viewRenderer.engines") || [];
       for (let i = 0; i < defaultEngines.length; i++) {
         const path = defaultEngines[i];
         const { default: EngineClass } = await Promise.resolve().then(() => __toESM(require(path)));
@@ -67,7 +57,7 @@ const _SViewRenderer = class extends import_s_class.default {
           _SViewRenderer.registerEngine(EngineClass, ext);
         });
       }
-      const defaultDataHandlers = import_s_sugar_config.default.get("viewRenderer.dataHandlers") || [];
+      const defaultDataHandlers = __SSugarConfig.get("viewRenderer.dataHandlers") || [];
       for (let i = 0; i < defaultDataHandlers.length; i++) {
         const path = defaultDataHandlers[i];
         const { default: DataHandlerClass } = await Promise.resolve().then(() => __toESM(require(path)));
@@ -79,15 +69,15 @@ const _SViewRenderer = class extends import_s_class.default {
         viewPath = viewPath.replace(`.${ext}`, "");
       });
       if (viewPath.split(" ").length === 1 && viewPath.trim() === viewPath) {
-        if (import_path.default.isAbsolute(viewPath)) {
-          if (import_fs.default.existsSync(viewPath)) {
+        if (__path.isAbsolute(viewPath)) {
+          if (__fs.existsSync(viewPath)) {
             this._viewPath = viewPath;
           }
         } else if (!viewPath.match(/\//gm)) {
           for (let i = 0; i < this.viewRendererSettings.rootDirs.length; i++) {
             const rootDir = this.viewRendererSettings.rootDirs[i];
             const potentialViewPath = `${rootDir}/${viewPath.split(".").join("/")}.[!data]*`;
-            const matches = import_glob.default.sync(potentialViewPath);
+            const matches = __glob.sync(potentialViewPath);
             if (matches && matches.length) {
               this._viewPath = matches[0];
               break;
@@ -112,7 +102,7 @@ const _SViewRenderer = class extends import_s_class.default {
         Object.keys(_SViewRenderer.dataHandlers).forEach((extension) => {
           if (this._DataHandlerClass)
             return;
-          if (import_fs.default.existsSync(`${viewPathWithoutExtension}.data.${extension}`)) {
+          if (__fs.existsSync(`${viewPathWithoutExtension}.data.${extension}`)) {
             this._dataFilePath = `${viewPathWithoutExtension}.data.${extension}`;
             this._DataHandlerClass = _SViewRenderer.dataHandlers[extension];
           }
@@ -124,20 +114,20 @@ const _SViewRenderer = class extends import_s_class.default {
   }
   static get defaultRootDirs() {
     return [
-      ...import_s_sugar_config.default.get("viewRenderer.rootDirs"),
-      import_path.default.resolve((0, import_dirname.default)(), "../php/views/blade")
+      ...__SSugarConfig.get("viewRenderer.rootDirs"),
+      __path.resolve(__dirname(), "../php/views/blade")
     ];
   }
   static getRootDirs(rootDirs = []) {
-    return (0, import_unique.default)([
+    return __unique([
       ...Array.isArray(rootDirs) ? rootDirs : [rootDirs],
       ..._SViewRenderer.defaultRootDirs
     ]);
   }
   static render(viewPath, data = null, settings) {
-    return new import_s_promise.default(async ({ resolve, reject }) => {
+    return new __SPromise(async ({ resolve, reject }) => {
       var _a, _b;
-      const viewInstance = new _SViewRenderer(viewPath, (0, import_deepMerge.default)({
+      const viewInstance = new _SViewRenderer(viewPath, __deepMerge({
         viewRenderer: {}
       }, settings != null ? settings : {}));
       let resultObj;
@@ -172,22 +162,22 @@ const _SViewRenderer = class extends import_s_class.default {
     });
   }
   static getViewMetas(viewPath) {
-    const viewsDirs = import_s_sugar_config.default.get("viewRenderer.rootDirs");
+    const viewsDirs = __SSugarConfig.get("viewRenderer.rootDirs");
     for (let i = 0; i < viewsDirs.length; i++) {
       const viewsDir = viewsDirs[i];
       let path = `${viewsDir}/${viewPath}`;
-      if (import_path.default.isAbsolute(viewPath)) {
+      if (__path.isAbsolute(viewPath)) {
         path = viewPath;
       }
       let finalViewPath, viewType;
-      if (import_fs.default.existsSync(path)) {
+      if (__fs.existsSync(path)) {
         finalViewPath = path;
         const fileName = path.split("/").slice(-1).join("");
         viewType = fileName.split(".").slice(1).join(".");
       } else {
         for (let i2 = 0; i2 < Object.keys(_SViewRenderer.engines).length; i2++) {
           const engineExt = Object.keys(_SViewRenderer.engines)[i2];
-          if (import_fs.default.existsSync(`${path}.${engineExt}`)) {
+          if (__fs.existsSync(`${path}.${engineExt}`)) {
             finalViewPath = `${path}.${engineExt}`;
             viewType = engineExt;
             break;
@@ -196,7 +186,7 @@ const _SViewRenderer = class extends import_s_class.default {
       }
       if (!finalViewPath)
         continue;
-      const infoObj = import_s_file.default.new(finalViewPath);
+      const infoObj = __SFile.new(finalViewPath);
       return infoObj.toObject();
     }
     return void 0;
@@ -205,17 +195,17 @@ const _SViewRenderer = class extends import_s_class.default {
     return this._settings.viewRenderer;
   }
   render(data = {}, settings) {
-    return new import_s_promise.default(async ({ resolve, reject }) => {
+    return new __SPromise(async ({ resolve, reject }) => {
       var _a, _b, _c;
-      const viewRendererSettings = Object.assign({}, (0, import_deepMerge.default)(this.viewRendererSettings, settings || {}));
-      data = (0, import_deepMerge.default)(viewRendererSettings.defaultData, data);
-      const duration = new import_s_duration.default();
+      const viewRendererSettings = Object.assign({}, __deepMerge(this.viewRendererSettings, settings || {}));
+      data = __deepMerge(viewRendererSettings.defaultData, data);
+      const duration = new __SDuration();
       if (this._DataHandlerClass && this._dataFilePath) {
         const gettedData = await this._DataHandlerClass.handle(this._dataFilePath);
         if (gettedData)
-          data = (0, import_deepMerge.default)(gettedData, data);
+          data = __deepMerge(gettedData, data);
       }
-      const engineSettings = (0, import_deepMerge.default)((_b = (_a = this._EngineClass.interface) == null ? void 0 : _a.defaults()) != null ? _b : {}, (_c = viewRendererSettings.enginesSettings[this._EngineClass.id]) != null ? _c : {});
+      const engineSettings = __deepMerge((_b = (_a = this._EngineClass.interface) == null ? void 0 : _a.defaults()) != null ? _b : {}, (_c = viewRendererSettings.enginesSettings[this._EngineClass.id]) != null ? _c : {});
       if (this._EngineClass) {
         const rendererInstance = new this._EngineClass(engineSettings);
         const renderPromise = rendererInstance.render(this._viewPath, data, viewRendererSettings);
@@ -240,5 +230,6 @@ let SViewRenderer = _SViewRenderer;
 SViewRenderer.engines = {};
 SViewRenderer.dataHandlers = {};
 var SViewRenderer_default = SViewRenderer;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SViewRenderer_default as default
+};

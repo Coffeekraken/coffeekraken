@@ -1,31 +1,6 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var dedupe_exports = {};
-__export(dedupe_exports, {
-  default: () => dedupe_default
-});
-module.exports = __toCommonJS(dedupe_exports);
-var import_to_regex = __toESM(require("to-regex"), 1);
+import __toRegex from "to-regex";
 function dedupe(str, statement) {
-  const reg = (0, import_to_regex.default)(`(${statement})`, {
+  const reg = __toRegex(`(${statement})`, {
     contains: true,
     flags: "g"
   });
@@ -34,5 +9,6 @@ function dedupe(str, statement) {
   }).reverse().join("");
 }
 var dedupe_default = dedupe;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  dedupe_default as default
+};

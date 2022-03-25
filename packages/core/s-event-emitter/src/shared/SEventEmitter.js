@@ -1,11 +1,7 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -21,44 +17,25 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SEventEmitter_exports = {};
-__export(SEventEmitter_exports, {
-  default: () => SEventEmitter_default
-});
-module.exports = __toCommonJS(SEventEmitter_exports);
-var import_minimatch = __toESM(require("minimatch"), 1);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"), 1);
-var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"), 1);
-var import_childProcess = __toESM(require("@coffeekraken/sugar/node/is/childProcess"), 1);
-var import_toString = __toESM(require("@coffeekraken/sugar/shared/string/toString"), 1);
-var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
-var import_class = __toESM(require("@coffeekraken/sugar/shared/is/class"), 1);
-var import_getColorFor = __toESM(require("@coffeekraken/sugar/shared/dev/color/getColorFor"), 1);
-const _SEventEmitter = class extends import_s_class.default {
+import __minimatch from "minimatch";
+import SClass from "@coffeekraken/s-class";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __uniqid from "@coffeekraken/sugar/shared/string/uniqid";
+import __isPlainObject from "@coffeekraken/sugar/shared/is/plainObject";
+import __isChildProcess from "@coffeekraken/sugar/node/is/childProcess";
+import __toString from "@coffeekraken/sugar/shared/string/toString";
+import __SLog from "@coffeekraken/s-log";
+import __isClass from "@coffeekraken/sugar/shared/is/class";
+import __getColorFor from "@coffeekraken/sugar/shared/dev/color/getColorFor";
+const _SEventEmitter = class extends SClass {
   constructor(settings = {}) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       eventEmitter: {
         asyncStart: false,
         bufferTimeout: 1e3,
         defaults: {},
         castByEvent: {
-          log: import_s_log.default
+          log: __SLog
         },
         bind: void 0
       }
@@ -93,8 +70,8 @@ const _SEventEmitter = class extends import_s_class.default {
       if (!metas) {
         return;
       }
-      metas.id = (_c = (_b = metas.id) != null ? _b : (_a = metas.emitter.metas) == null ? void 0 : _a.id) != null ? _c : (0, import_uniqid.default)();
-      metas.color = (_f = (_e = metas.color) != null ? _e : (_d = metas.emitter.metas) == null ? void 0 : _d.color) != null ? _f : (0, import_getColorFor.default)(metas.id);
+      metas.id = (_c = (_b = metas.id) != null ? _b : (_a = metas.emitter.metas) == null ? void 0 : _a.id) != null ? _c : __uniqid();
+      metas.color = (_f = (_e = metas.color) != null ? _e : (_d = metas.emitter.metas) == null ? void 0 : _d.color) != null ? _f : __getColorFor(metas.id);
       if (set.exclude && set.exclude.indexOf(metas.event) !== -1)
         return;
       if (set.filter && !set.filter(value, metas))
@@ -126,9 +103,9 @@ const _SEventEmitter = class extends import_s_class.default {
             emitMetas.emitter = destSEventEmitter;
           }
         }
-        if (destSEventEmitter === process && (0, import_childProcess.default)()) {
+        if (destSEventEmitter === process && __isChildProcess()) {
           if (value.value && value.value instanceof Error) {
-            value.value = (0, import_toString.default)(value.value);
+            value.value = __toString(value.value);
           }
           if (this._ipcInstance) {
             this._ipcInstance.of[`ipc-${process.ppid}`].emit("message", {
@@ -174,7 +151,7 @@ const _SEventEmitter = class extends import_s_class.default {
   }
   _createMetas(event, metas = {}) {
     var _a, _b, _c;
-    return (0, import_deepMerge.default)({
+    return __deepMerge({
       event,
       name: event,
       emitter: (_b = (_a = this.eventEmitterSettings.bind) != null ? _a : metas == null ? void 0 : metas.emitter) != null ? _b : this,
@@ -187,22 +164,22 @@ const _SEventEmitter = class extends import_s_class.default {
     return new Promise(async (resolve, reject) => {
       let metasObj = this._createMetas(event, metas);
       const isFirstLevel = !metasObj.level;
-      if ((0, import_plainObject.default)(value)) {
+      if (__isPlainObject(value)) {
         Object.keys(this.eventEmitterSettings.defaults).forEach((key) => {
           var _a;
           const parts = key.split(",").map((l) => l.trim());
           if (parts.indexOf(event) === -1 && parts.indexOf("*") === -1)
             return;
-          value = (0, import_deepMerge.default)(value, (_a = this.eventEmitterSettings.defaults) == null ? void 0 : _a[key]);
+          value = __deepMerge(value, (_a = this.eventEmitterSettings.defaults) == null ? void 0 : _a[key]);
         });
       }
       const CastClass = this.eventEmitterSettings.castByEvent[event];
-      if (CastClass && (0, import_class.default)(CastClass) && !(value instanceof CastClass) && !value._sEventEmitterPreprocessed) {
+      if (CastClass && __isClass(CastClass) && !(value instanceof CastClass) && !value._sEventEmitterPreprocessed) {
         value = new CastClass(value);
       }
       if (event === "ask") {
         if (isFirstLevel) {
-          metasObj.askId = (0, import_uniqid.default)();
+          metasObj.askId = __uniqid();
         }
       }
       if (!this._asyncStarted && this.eventEmitterSettings.asyncStart) {
@@ -310,7 +287,7 @@ const _SEventEmitter = class extends import_s_class.default {
     Object.keys(this._eventsStacks).forEach((stackName) => {
       if (stackName === event)
         return currentCallbackReturnedValue;
-      if ((0, import_minimatch.default)(event, stackName) && this._eventsStacks[stackName] !== void 0) {
+      if (__minimatch(event, stackName) && this._eventsStacks[stackName] !== void 0) {
         eventStackArray = [
           ...eventStackArray,
           ...this._eventsStacks[stackName].callStack
@@ -369,7 +346,7 @@ const _SEventEmitter = class extends import_s_class.default {
     });
   }
   on(events, callback, settings) {
-    const set = (0, import_deepMerge.default)({
+    const set = __deepMerge({
       filter: void 0,
       processor: void 0,
       id: void 0
@@ -422,5 +399,6 @@ const _SEventEmitter = class extends import_s_class.default {
 let SEventEmitter = _SEventEmitter;
 SEventEmitter.usableAsMixin = true;
 var SEventEmitter_default = SEventEmitter;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SEventEmitter_default as default
+};

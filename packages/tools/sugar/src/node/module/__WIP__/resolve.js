@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,86 +14,66 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var resolve_exports = {};
-__export(resolve_exports, {
-  ResolveSettingsInterface: () => ResolveSettingsInterface,
-  default: () => resolve
-});
-module.exports = __toCommonJS(resolve_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
-var import_checkPathWithMultipleExtensions = __toESM(require("../fs/checkPathWithMultipleExtensions"), 1);
-var import_existsSync = __toESM(require("../fs/existsSync"), 1);
-var import_file = __toESM(require("../is/file"), 1);
-var import_packageRootDir = __toESM(require("../path/packageRootDir"), 1);
-var import_buildInNodeModules = __toESM(require("./buildInNodeModules"), 1);
-var import_exportsMatch = __toESM(require("./exportsMatch"), 1);
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
-class ResolveSettingsInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __fs from "fs";
+import __path from "path";
+import __deepMerge from "../../shared/object/deepMerge";
+import __checkPathWithMultipleExtensions from "../fs/checkPathWithMultipleExtensions";
+import __existsSync from "../fs/existsSync";
+import __isFile from "../is/file";
+import __packageRootDir from "../path/packageRootDir";
+import __builtInNodeModules from "./buildInNodeModules";
+import __exportsMatch from "./exportsMatch";
+import __readJsonSync from "@coffeekraken/sugar/node/fs/readJsonSync";
+class ResolveSettingsInterface extends __SInterface {
   static get _definition() {
     return {
       dirs: {
         type: "Array<String>",
-        default: import_s_sugar_config.default.get("module.resolve.dirs")
+        default: __SSugarConfig.get("module.resolve.dirs")
       },
       extensions: {
         type: "Array<String>",
-        default: import_s_sugar_config.default.get("module.resolve.extensions")
+        default: __SSugarConfig.get("module.resolve.extensions")
       },
       fields: {
         type: "Array<String>",
-        default: import_s_sugar_config.default.get("module.resolve.fields")
+        default: __SSugarConfig.get("module.resolve.fields")
       },
       buildInModules: {
         type: "Boolean",
-        default: import_s_sugar_config.default.get("module.resolve.builtInModules")
+        default: __SSugarConfig.get("module.resolve.builtInModules")
       },
       preferExports: {
         type: "Boolean",
-        default: import_s_sugar_config.default.get("module.resolve.preferExports")
+        default: __SSugarConfig.get("module.resolve.preferExports")
       },
       method: {
         type: "String",
         values: ["import", "require"],
-        default: import_s_sugar_config.default.get("module.resolve.method")
+        default: __SSugarConfig.get("module.resolve.method")
       },
       target: {
         type: "String",
         values: ["node", "default"],
-        default: import_s_sugar_config.default.get("module.resolve.target")
+        default: __SSugarConfig.get("module.resolve.target")
       },
       rootDir: {
         type: "String",
-        default: (0, import_packageRootDir.default)()
+        default: __packageRootDir()
       }
     };
   }
 }
 function resolve(moduleName, settings) {
-  const set = (0, import_deepMerge.default)(__spreadValues({}, ResolveSettingsInterface.defaults()), settings || {});
+  const set = __deepMerge(__spreadValues({}, ResolveSettingsInterface.defaults()), settings || {});
   console.log(set);
-  if (!import_fs.default.existsSync(`${set.rootDir}/package.json`)) {
+  if (!__fs.existsSync(`${set.rootDir}/package.json`)) {
     throw new Error(`[resolve] Sorry but the "<yellow>resolve</yellow>" function can be used only inside a package with a proper "<cyan>package.json</cyan>" file at his root`);
   }
-  const rootPackageJson = (0, import_readJsonSync.default)(`${set.rootDir}/package.json`);
-  const builtInModulesArray = Object.keys(import_buildInNodeModules.default);
+  const rootPackageJson = __readJsonSync(`${set.rootDir}/package.json`);
+  const builtInModulesArray = Object.keys(__builtInNodeModules);
   if (builtInModulesArray.indexOf(moduleName) !== -1 && set.builtInModules)
     return moduleName;
   let requestedModuleDirPath, requestedModuleName, requestedInternalModulePath, absPath, requestedModulePackageJson;
@@ -114,27 +90,27 @@ function resolve(moduleName, settings) {
       const dirPath = set.dirs[i];
       if (!moduleName.match(/^[\.\/]/)) {
         const parts = moduleName.split("/");
-        if (parts.length >= 1 && (0, import_existsSync.default)(import_path.default.resolve(dirPath, parts[0], "package.json"))) {
-          requestedModulePackageJson = (0, import_readJsonSync.default)(import_path.default.resolve(dirPath, parts[0], "package.json"));
+        if (parts.length >= 1 && __existsSync(__path.resolve(dirPath, parts[0], "package.json"))) {
+          requestedModulePackageJson = __readJsonSync(__path.resolve(dirPath, parts[0], "package.json"));
           requestedModuleName = requestedModulePackageJson.name;
-          requestedModuleDirPath = import_path.default.resolve(dirPath, parts[0]);
+          requestedModuleDirPath = __path.resolve(dirPath, parts[0]);
           requestedInternalModulePath = parts.slice(1).join("/");
-        } else if (parts.length >= 2 && (0, import_existsSync.default)(import_path.default.resolve(dirPath, parts[0], parts[1], "package.json"))) {
-          requestedModulePackageJson = (0, import_readJsonSync.default)(import_path.default.resolve(dirPath, parts[0], parts[1], "package.json"));
+        } else if (parts.length >= 2 && __existsSync(__path.resolve(dirPath, parts[0], parts[1], "package.json"))) {
+          requestedModulePackageJson = __readJsonSync(__path.resolve(dirPath, parts[0], parts[1], "package.json"));
           requestedModuleName = requestedModulePackageJson.name;
-          requestedModuleDirPath = import_path.default.resolve(dirPath, parts[0], parts[1]);
+          requestedModuleDirPath = __path.resolve(dirPath, parts[0], parts[1]);
           requestedInternalModulePath = parts.slice(2).join("/");
         }
       } else {
-        const filePath = (0, import_checkPathWithMultipleExtensions.default)(import_path.default.resolve(dirPath, moduleName), set.extensions);
+        const filePath = __checkPathWithMultipleExtensions(__path.resolve(dirPath, moduleName), set.extensions);
         if (filePath)
           return filePath;
-        if ((0, import_existsSync.default)(import_path.default.resolve(dirPath, moduleName, "package.json"))) {
-          requestedModulePackageJson = (0, import_readJsonSync.default)(import_path.default.resolve(dirPath, moduleName, "package.json"));
+        if (__existsSync(__path.resolve(dirPath, moduleName, "package.json"))) {
+          requestedModulePackageJson = __readJsonSync(__path.resolve(dirPath, moduleName, "package.json"));
           requestedModuleName = requestedModulePackageJson.name;
-          requestedModuleDirPath = import_path.default.resolve(dirPath, moduleName);
+          requestedModuleDirPath = __path.resolve(dirPath, moduleName);
         } else {
-          absPath = import_path.default.resolve(dirPath, moduleName);
+          absPath = __path.resolve(dirPath, moduleName);
         }
       }
     }
@@ -142,7 +118,7 @@ function resolve(moduleName, settings) {
   if (!requestedModuleName) {
     throw new Error(`[resolve] Sorry but the requested package "<yellow>${moduleName}</yellow>" se`);
   }
-  if (absPath && (0, import_file.default)(absPath))
+  if (absPath && __isFile(absPath))
     return absPath;
   let depPath;
   if (rootPackageJson.dependencies && rootPackageJson.dependencies[requestedModulePackageJson.name]) {
@@ -152,11 +128,11 @@ function resolve(moduleName, settings) {
     depPath = rootPackageJson.devDependencies[requestedModulePackageJson.name];
   }
   if (depPath && depPath.match(/^file:/)) {
-    requestedModuleDirPath = import_path.default.resolve(set.rootDir, depPath.replace(/^file:/, ""));
+    requestedModuleDirPath = __path.resolve(set.rootDir, depPath.replace(/^file:/, ""));
   }
   if (requestedModulePackageJson && requestedModuleDirPath) {
     let exportsMatch = function() {
-      const matchPath = (0, import_exportsMatch.default)(requestedModuleDirPath, requestedModulePackageJson.exports, requestedInternalModulePath, {
+      const matchPath = __exportsMatch(requestedModuleDirPath, requestedModulePackageJson.exports, requestedInternalModulePath, {
         extensions: set.extensions,
         method: set.method,
         target: set.target
@@ -165,7 +141,7 @@ function resolve(moduleName, settings) {
         return matchPath;
     };
     if (requestedInternalModulePath) {
-      const potentialPath = (0, import_checkPathWithMultipleExtensions.default)(import_path.default.resolve(requestedModuleDirPath, requestedInternalModulePath), set.extensions);
+      const potentialPath = __checkPathWithMultipleExtensions(__path.resolve(requestedModuleDirPath, requestedInternalModulePath), set.extensions);
       if (potentialPath)
         return potentialPath;
     }
@@ -178,8 +154,8 @@ function resolve(moduleName, settings) {
       const field = set.fields[j];
       if (!requestedModulePackageJson[field])
         continue;
-      const filePath = import_path.default.resolve(requestedModuleDirPath, requestedModulePackageJson[field]);
-      if (!(0, import_file.default)(filePath))
+      const filePath = __path.resolve(requestedModuleDirPath, requestedModulePackageJson[field]);
+      if (!__isFile(filePath))
         continue;
       return filePath;
     }
@@ -191,7 +167,7 @@ function resolve(moduleName, settings) {
   }
   throw new Error(`Sorry but the requested module "<yellow>${moduleName}</yellow>" cannot be resolved correctly...`);
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  ResolveSettingsInterface
-});
+export {
+  ResolveSettingsInterface,
+  resolve as default
+};

@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,16 +13,10 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var sRiotjsPluginPostcssPreprocessor_exports = {};
-__export(sRiotjsPluginPostcssPreprocessor_exports, {
-  default: () => sRiotjsPluginPostcssPreprocessor
-});
-module.exports = __toCommonJS(sRiotjsPluginPostcssPreprocessor_exports);
-var import_compiler = require("@riotjs/compiler");
-var import_postcss = __toESM(require("postcss"), 1);
+import { registerPreprocessor } from "@riotjs/compiler";
+import postcss from "postcss";
 function sRiotjsPluginPostcssPreprocessor(postcssPlugins) {
-  (0, import_compiler.registerPreprocessor)("css", "postcss", async function(code) {
+  registerPreprocessor("css", "postcss", async function(code) {
     var _a;
     const plugins = [];
     for (let i = 0; i < postcssPlugins.length; i++) {
@@ -38,7 +28,7 @@ function sRiotjsPluginPostcssPreprocessor(postcssPlugins) {
         plugins.push(p);
       }
     }
-    const result = await (0, import_postcss.default)(plugins).process(code);
+    const result = await postcss(plugins).process(code);
     console.log(result);
     return {
       code: result.css,
@@ -46,5 +36,6 @@ function sRiotjsPluginPostcssPreprocessor(postcssPlugins) {
     };
   });
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  sRiotjsPluginPostcssPreprocessor as default
+};

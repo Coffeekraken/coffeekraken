@@ -1,0 +1,43 @@
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var replaceTokens_exports = {};
+__export(replaceTokens_exports, {
+  default: () => replaceTokens_default
+});
+module.exports = __toCommonJS(replaceTokens_exports);
+var import_deepMerge = __toESM(require("../../node/object/deepMerge"));
+function replaceTokens(string, argsObj, settings = {}) {
+  settings = (0, import_deepMerge.default)({
+    regexp: "\\[([a-zA-Z0-9-_]+)\\]",
+    stripUndefined: true
+  }, settings);
+  let tokens;
+  const reg = new RegExp(settings.regexp, "g");
+  while (tokens = reg.exec(string)) {
+    if (argsObj[tokens[1]] === void 0 && !settings.stripUndefined)
+      return;
+    string = string.replace(tokens[0], argsObj[tokens[1]] || "");
+  }
+  return string;
+}
+var replaceTokens_default = replaceTokens;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {});

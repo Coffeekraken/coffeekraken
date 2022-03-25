@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,34 +14,14 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var fa_exports = {};
-__export(fa_exports, {
-  default: () => fa_default,
-  interface: () => postcssSugarPluginIconFaInterface
-});
-module.exports = __toCommonJS(fa_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
-var import_parseHtml = __toESM(require("@coffeekraken/sugar/shared/console/parseHtml"));
-var import_upperFirst = __toESM(require("@coffeekraken/sugar/shared/string/upperFirst"));
-var __fa = __toESM(require("@fortawesome/fontawesome-svg-core"));
-var import_free_brands_svg_icons = require("@fortawesome/free-brands-svg-icons");
-var import_free_solid_svg_icons = require("@fortawesome/free-solid-svg-icons");
-class postcssSugarPluginIconFaInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __parseHtml from "@coffeekraken/sugar/shared/console/parseHtml";
+import __upperFirst from "@coffeekraken/sugar/shared/string/upperFirst";
+import * as __fa from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+class postcssSugarPluginIconFaInterface extends __SInterface {
   static get _definition() {
     return {
       icon: {
@@ -88,9 +64,9 @@ function fa_default({
     fab: "Brands"
   };
   if (!_isFaInitialised) {
-    __fa.library.add(import_free_solid_svg_icons.fas, import_free_brands_svg_icons.fab);
+    __fa.library.add(fas, fab);
     atRule.root().append(`
-      @import url('${import_s_sugar_config.default.get("icons.fontawesome.url")}');
+      @import url('${__SSugarConfig.get("icons.fontawesome.url")}');
     `);
     _isFaInitialised = true;
   }
@@ -100,7 +76,7 @@ function fa_default({
     iconName: finalParams.icon
   });
   if (!iconDef) {
-    console.log((0, import_parseHtml.default)(`<red>!!!</red> It seems that you don't have access to the icon "<yellow>${finalParams.icon}</<yellow>"...`));
+    console.log(__parseHtml(`<red>!!!</red> It seems that you don't have access to the icon "<yellow>${finalParams.icon}</<yellow>"...`));
     return;
   }
   if (finalParams.style === "solid" || finalParams.style === "fas")
@@ -120,7 +96,7 @@ function fa_default({
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
-    font-family: "Font Awesome 5 ${(0, import_upperFirst.default)(fontNames[prefix])}";
+    font-family: "Font Awesome 5 ${__upperFirst(fontNames[prefix])}";
     font-weight: ${fontWeight[prefix]};
     
     &:before {
@@ -130,7 +106,7 @@ function fa_default({
   `);
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  fa_default as default,
+  postcssSugarPluginIconFaInterface as interface
+};

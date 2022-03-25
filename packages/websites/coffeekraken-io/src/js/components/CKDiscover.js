@@ -1,35 +1,9 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var CKDiscover_exports = {};
-__export(CKDiscover_exports, {
-  default: () => CKDiscover,
-  define: () => define
-});
-module.exports = __toCommonJS(CKDiscover_exports);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_lit = require("lit");
-var import_state = require("../state/state");
-var import_filter = __toESM(require("@coffeekraken/sugar/shared/object/filter"), 1);
-var import_wait = __toESM(require("@coffeekraken/sugar/shared/time/wait"), 1);
-class CKDiscover extends import_s_lit_component.default {
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import { html } from "lit";
+import { loadDocmap } from "../state/state";
+import __filterObject from "@coffeekraken/sugar/shared/object/filter";
+import __wait from "@coffeekraken/sugar/shared/time/wait";
+class CKDiscover extends __SLitComponent {
   constructor() {
     super({
       litComponent: {
@@ -38,14 +12,14 @@ class CKDiscover extends import_s_lit_component.default {
     });
   }
   async firstUpdated() {
-    this._docmap = await (0, import_state.loadDocmap)();
+    this._docmap = await loadDocmap();
     this.grabItem();
   }
   async grabItem() {
     this.item = void 0;
     this.requestUpdate();
-    await (0, import_wait.default)();
-    const newMap = (0, import_filter.default)(this._docmap.map, (key, item) => {
+    await __wait();
+    const newMap = __filterObject(this._docmap.map, (key, item) => {
       if (!item.platform)
         return false;
       if (item.platform[0].name !== this.props.platform)
@@ -61,9 +35,9 @@ class CKDiscover extends import_s_lit_component.default {
     this.requestUpdate();
   }
   render() {
-    return import_lit.html`
+    return html`
             <div class="ck-discover">
-                ${!this.item ? import_lit.html`
+                ${!this.item ? html`
                         <div class="s-code-example-loader">
                             <i class="s-loader:spinner s-color:accent"></i>
                             &nbsp;
@@ -71,14 +45,14 @@ class CKDiscover extends import_s_lit_component.default {
                                 Loading code example. Please wait...
                             </p>
                         </div>
-                    ` : import_lit.html`
+                    ` : html`
                         <a
                             @click="${this.grabItem}"
                             class="s-btn s-radius:100 s-align:abs-top-right s-color:accent s-float:right"
                         >
                             <i class="s-icon:refresh"></i>
                         </a>
-                         ${this.item.async ? import_lit.html`
+                         ${this.item.async ? html`
                                     <span
                                         class="s-badge:outline s-color:accent"
                                         >Async</span
@@ -114,6 +88,10 @@ class CKDiscover extends import_s_lit_component.default {
   }
 }
 function define(props = {}, tagName = "ck-discover") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, CKDiscover);
 }
+export {
+  CKDiscover as default,
+  define
+};

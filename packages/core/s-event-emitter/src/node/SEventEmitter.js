@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,33 +13,27 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SEventEmitter_exports = {};
-__export(SEventEmitter_exports, {
-  default: () => SEventEmitter
-});
-module.exports = __toCommonJS(SEventEmitter_exports);
-var import_childProcess = __toESM(require("@coffeekraken/sugar/node/is/childProcess"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_SEventEmitter = __toESM(require("../shared/SEventEmitter"), 1);
+import __isChildProcess from "@coffeekraken/sugar/node/is/childProcess";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SEventEmitterBase from "../shared/SEventEmitter";
 (async () => {
-  const { default: __nodeIpc } = await Promise.resolve().then(() => __toESM(require("node-ipc"), 1));
-  import_SEventEmitter.default._ipcInstance = new __nodeIpc.IPC();
-  import_SEventEmitter.default._ipcInstance.config.id = `ipc-${process.pid}`;
-  import_SEventEmitter.default._ipcInstance.config.retry = 1500;
-  import_SEventEmitter.default._ipcInstance.config.silent = true;
-  if ((0, import_childProcess.default)()) {
-    import_SEventEmitter.default._ipcInstance.connectTo(`ipc-${process.ppid}`, () => {
-      import_SEventEmitter.default._ipcInstance.of[`ipc-${process.ppid}`].on("connect", () => {
+  const { default: __nodeIpc } = await Promise.resolve().then(() => __toESM(require("node-ipc")));
+  __SEventEmitterBase._ipcInstance = new __nodeIpc.IPC();
+  __SEventEmitterBase._ipcInstance.config.id = `ipc-${process.pid}`;
+  __SEventEmitterBase._ipcInstance.config.retry = 1500;
+  __SEventEmitterBase._ipcInstance.config.silent = true;
+  if (__isChildProcess()) {
+    __SEventEmitterBase._ipcInstance.connectTo(`ipc-${process.ppid}`, () => {
+      __SEventEmitterBase._ipcInstance.of[`ipc-${process.ppid}`].on("connect", () => {
       });
-      import_SEventEmitter.default._ipcInstance.of[`ipc-${process.ppid}`].on("answer", (data) => {
-        import_SEventEmitter.default._ipcInstance.log(data);
-        import_SEventEmitter.default.global.emit(`answer.${data.metas.askId}`, data.value, data.metas);
+      __SEventEmitterBase._ipcInstance.of[`ipc-${process.ppid}`].on("answer", (data) => {
+        __SEventEmitterBase._ipcInstance.log(data);
+        __SEventEmitterBase.global.emit(`answer.${data.metas.askId}`, data.value, data.metas);
       });
     });
   }
 })();
-class SEventEmitter extends import_SEventEmitter.default {
+class SEventEmitter extends __SEventEmitterBase {
   static ipcServer(ipcSettings, eventEmitterSettings) {
     if (this._ipcPromise)
       return this._ipcPromise;
@@ -52,9 +42,9 @@ class SEventEmitter extends import_SEventEmitter.default {
       const eventEmitter = new this({
         eventEmitter: eventEmitterSettings != null ? eventEmitterSettings : {}
       });
-      const { default: __nodeIpc } = await Promise.resolve().then(() => __toESM(require("node-ipc"), 1));
+      const { default: __nodeIpc } = await Promise.resolve().then(() => __toESM(require("node-ipc")));
       const ipcInstance = new __nodeIpc.IPC();
-      ipcInstance.config = (0, import_deepMerge.default)((_a = ipcInstance.config) != null ? _a : {}, {
+      ipcInstance.config = __deepMerge((_a = ipcInstance.config) != null ? _a : {}, {
         id: `ipc-${process.pid}`,
         retry: 1500,
         silent: true
@@ -78,5 +68,6 @@ class SEventEmitter extends import_SEventEmitter.default {
     return this._ipcPromise;
   }
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SEventEmitter as default
+};

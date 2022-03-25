@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,30 +14,11 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var relative_exports = {};
-__export(relative_exports, {
-  default: () => relative_default
-});
-module.exports = __toCommonJS(relative_exports);
-var import_glob = __toESM(require("../../shared/is/glob"), 1);
-var import_path = __toESM(require("../../shared/is/path"), 1);
-var import_path2 = __toESM(require("path"), 1);
-var import_packageRootDir = __toESM(require("./packageRootDir"), 1);
-function relative(path, from = (0, import_packageRootDir.default)(), settings = {}) {
+import __isGlob from "../../shared/is/glob";
+import __isPath from "../../shared/is/path";
+import __path from "path";
+import __packageRootDir from "./packageRootDir";
+function relative(path, from = __packageRootDir(), settings = {}) {
   settings = __spreadValues({
     glob: true,
     absolute: true
@@ -50,16 +27,16 @@ function relative(path, from = (0, import_packageRootDir.default)(), settings = 
   if (!isArray)
     path = [path];
   path = path.map((p) => {
-    if ((0, import_glob.default)(p)) {
+    if (__isGlob(p)) {
       if (settings.glob)
-        return import_path2.default.relative(from, p);
+        return __path.relative(from, p);
       return p;
-    } else if (import_path2.default.isAbsolute(p)) {
+    } else if (__path.isAbsolute(p)) {
       if (settings.absolute)
-        return import_path2.default.relative(from, p);
+        return __path.relative(from, p);
       return p;
-    } else if ((0, import_path.default)(p))
-      return import_path2.default.relative(from, p);
+    } else if (__isPath(p))
+      return __path.relative(from, p);
     return p;
   });
   if (isArray)
@@ -67,5 +44,6 @@ function relative(path, from = (0, import_packageRootDir.default)(), settings = 
   return path[0];
 }
 var relative_default = relative;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  relative_default as default
+};

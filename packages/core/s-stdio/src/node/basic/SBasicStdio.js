@@ -1,11 +1,7 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -21,41 +17,22 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SBasicStdio_exports = {};
-__export(SBasicStdio_exports, {
-  default: () => SBasicStdio_default
-});
-module.exports = __toCommonJS(SBasicStdio_exports);
-var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_countLines = __toESM(require("@coffeekraken/sugar/node/terminal/countLines"), 1);
-var import_parseHtml = __toESM(require("@coffeekraken/sugar/shared/console/parseHtml"), 1);
-var import_getColorFor = __toESM(require("@coffeekraken/sugar/shared/dev/color/getColorFor"), 1);
-var import_clone = __toESM(require("@coffeekraken/sugar/shared/object/clone"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_stripAnsi = __toESM(require("@coffeekraken/sugar/shared/string/stripAnsi"), 1);
-var import_upperFirst = __toESM(require("@coffeekraken/sugar/shared/string/upperFirst"), 1);
-var __Enquirer = __toESM(require("enquirer"), 1);
-var import_SStdio = __toESM(require("../../shared/SStdio"), 1);
-var import_defaultBasicStdioComponent = __toESM(require("./components/defaultBasicStdioComponent"), 1);
-var import_errorBasicStdioComponent = __toESM(require("./components/errorBasicStdioComponent"), 1);
-class SBasicStdio extends import_SStdio.default {
+import __SLog from "@coffeekraken/s-log";
+import __SPromise from "@coffeekraken/s-promise";
+import __countLines from "@coffeekraken/sugar/node/terminal/countLines";
+import __parseHtml from "@coffeekraken/sugar/shared/console/parseHtml";
+import __getColorFor from "@coffeekraken/sugar/shared/dev/color/getColorFor";
+import __clone from "@coffeekraken/sugar/shared/object/clone";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __stripAnsi from "@coffeekraken/sugar/shared/string/stripAnsi";
+import __upperFirst from "@coffeekraken/sugar/shared/string/upperFirst";
+import * as __Enquirer from "enquirer";
+import __SStdio from "../../shared/SStdio";
+import __defaultBasicStdioComponent from "./components/defaultBasicStdioComponent";
+import __errorBasicStdioComponent from "./components/errorBasicStdioComponent";
+class SBasicStdio extends __SStdio {
   constructor(id, sources, settings) {
-    super(id, sources, (0, import_deepMerge.default)({
+    super(id, sources, __deepMerge({
       basicStdio: {}
     }, settings || {}));
     this._currentLogId = "";
@@ -74,9 +51,9 @@ class SBasicStdio extends import_SStdio.default {
     let groupObj = this._loggedGroups[group];
     if (!groupObj || ((_a = this._lastLogObj) == null ? void 0 : _a.group) !== group) {
       groupObj = {
-        color: (0, import_getColorFor.default)(group)
+        color: __getColorFor(group)
       };
-      groupObj.prefix = (0, import_parseHtml.default)(`<${groupObj.color}>\u2588</${groupObj.color}>`);
+      groupObj.prefix = __parseHtml(`<${groupObj.color}>\u2588</${groupObj.color}>`);
       this._loggedGroups[group] = groupObj;
     }
     return groupObj;
@@ -95,10 +72,10 @@ class SBasicStdio extends import_SStdio.default {
     const groupObj = this._getGroupObj(logObj.group);
     if (logObj.group !== ((_a = this._lastLogObj) == null ? void 0 : _a.group)) {
       console.log(groupObj.prefix);
-      console.log(`<bg${(0, import_upperFirst.default)(groupObj.color)}><black> ${logObj.group} </black></bg${(0, import_upperFirst.default)(groupObj.color)}><${groupObj.color}>${"-".repeat(process.stdout.columns - 2 - ((_b = logObj.group) == null ? void 0 : _b.length))}</${groupObj.color}>`);
+      console.log(`<bg${__upperFirst(groupObj.color)}><black> ${logObj.group} </black></bg${__upperFirst(groupObj.color)}><${groupObj.color}>${"-".repeat(process.stdout.columns - 2 - ((_b = logObj.group) == null ? void 0 : _b.length))}</${groupObj.color}>`);
       console.log(groupObj.prefix);
     }
-    if (logObj.clear && ((_c = this._lastLogObj) == null ? void 0 : _c.type) !== import_s_log.default.TYPE_WARN && ((_d = this._lastLogObj) == null ? void 0 : _d.type) !== import_s_log.default.TYPE_ERROR) {
+    if (logObj.clear && ((_c = this._lastLogObj) == null ? void 0 : _c.type) !== __SLog.TYPE_WARN && ((_d = this._lastLogObj) == null ? void 0 : _d.type) !== __SLog.TYPE_ERROR) {
       if (typeof logObj.clear === "number") {
         const toClear = this._lastLogLinesCountStack.slice(logObj.clear * -1).reduce((a, b) => a + b);
         process.stdout.moveCursor(0, toClear * -1);
@@ -115,8 +92,8 @@ class SBasicStdio extends import_SStdio.default {
       }
       logLinesCount += logObj.margin.top;
     }
-    const log = `<${groupObj.color}>\u2588</${groupObj.color}>   ${(0, import_parseHtml.default)(component.render(logObj, this.basicStdioSettings))}`;
-    logLinesCount += (0, import_countLines.default)(log);
+    const log = `<${groupObj.color}>\u2588</${groupObj.color}>   ${__parseHtml(component.render(logObj, this.basicStdioSettings))}`;
+    logLinesCount += __countLines(log);
     console.log(log);
     if ((_f = logObj.margin) == null ? void 0 : _f.bottom) {
       for (let i = 0; i < logObj.margin.bottom; i++) {
@@ -139,17 +116,17 @@ class SBasicStdio extends import_SStdio.default {
             var _a2, _b;
             if (typeof str !== "string")
               return str;
-            return str.replace(`${(0, import_parseHtml.default)(`<${(_a2 = this.options.color) != null ? _a2 : "yellow"}>\u2588</${(_b = this.options.color) != null ? _b : "yellow"}>`)}`, "");
+            return str.replace(`${__parseHtml(`<${(_a2 = this.options.color) != null ? _a2 : "yellow"}>\u2588</${(_b = this.options.color) != null ? _b : "yellow"}>`)}`, "");
           }
         }));
         var _a;
         if (this.options.choices) {
           this.options.choices = (_a = this.options.choices) == null ? void 0 : _a.map((choice) => {
             var _a2, _b;
-            return `${(0, import_parseHtml.default)(`<${(_a2 = this.options.color) != null ? _a2 : "yellow"}>\u2588</${(_b = this.options.color) != null ? _b : "yellow"}>`)} ${choice}`;
+            return `${__parseHtml(`<${(_a2 = this.options.color) != null ? _a2 : "yellow"}>\u2588</${(_b = this.options.color) != null ? _b : "yellow"}>`)} ${choice}`;
           });
         }
-        this.symbols = this.symb((0, import_clone.default)(this.symbols, {
+        this.symbols = this.symb(__clone(this.symbols, {
           deep: true
         }));
       }
@@ -175,17 +152,17 @@ class SBasicStdio extends import_SStdio.default {
             continue;
           }
           if (obj[key].includes("\u2588")) {
-            obj[key] = (0, import_stripAnsi.default)(obj[key]);
+            obj[key] = __stripAnsi(obj[key]);
             obj[key] = obj[key].replace(/█\s?/, "");
           }
-          obj[key] = `${(0, import_parseHtml.default)(`<${(_a = this.options.color) != null ? _a : "yellow"}>\u2588</${(_b = this.options.color) != null ? _b : "yellow"}>`)} ${value}`;
+          obj[key] = `${__parseHtml(`<${(_a = this.options.color) != null ? _a : "yellow"}>\u2588</${(_b = this.options.color) != null ? _b : "yellow"}>`)} ${value}`;
         }
         return obj;
       }
     };
   }
   _ask(askObj) {
-    return new import_s_promise.default(async ({ resolve, reject, emit }) => {
+    return new __SPromise(async ({ resolve, reject, emit }) => {
       let prompt, res;
       if (!askObj.group) {
         if (askObj.metas.id === "SPromise") {
@@ -281,8 +258,9 @@ class SBasicStdio extends import_SStdio.default {
     });
   }
 }
-SBasicStdio.registerComponent(import_defaultBasicStdioComponent.default);
-SBasicStdio.registerComponent(import_errorBasicStdioComponent.default);
+SBasicStdio.registerComponent(__defaultBasicStdioComponent);
+SBasicStdio.registerComponent(__errorBasicStdioComponent);
 var SBasicStdio_default = SBasicStdio;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SBasicStdio_default as default
+};

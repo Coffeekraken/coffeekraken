@@ -1,31 +1,6 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var css_exports = {};
-__export(css_exports, {
-  default: () => css_default
-});
-module.exports = __toCommonJS(css_exports);
-var import_known_css_properties = __toESM(require("known-css-properties"), 1);
-var import_html_tags = __toESM(require("html-tags"), 1);
-var import_void = __toESM(require("html-tags/void"), 1);
+import __knownCssProps from "known-css-properties";
+import __htmlTags from "html-tags";
+import __selfClosingHtmlTags from "html-tags/void";
 const MODES = (hljs) => {
   return {
     IMPORTANT: {
@@ -49,8 +24,8 @@ const MODES = (hljs) => {
   };
 };
 const TAGS = [
-  ...import_html_tags.default,
-  ...import_void.default
+  ...__htmlTags,
+  ...__selfClosingHtmlTags
 ];
 const MEDIA_FEATURES = [
   "any-hover",
@@ -164,7 +139,7 @@ const PSEUDO_ELEMENTS = [
   "slotted",
   "spelling-error"
 ];
-const ATTRIBUTES = import_known_css_properties.default.all.reverse();
+const ATTRIBUTES = __knownCssProps.all.reverse();
 function css(hljs) {
   const modes = MODES(hljs);
   const PSEUDO_ELEMENTS$1 = PSEUDO_ELEMENTS;
@@ -271,3 +246,6 @@ function css(hljs) {
   return ret;
 }
 var css_default = css;
+export {
+  css_default as default
+};

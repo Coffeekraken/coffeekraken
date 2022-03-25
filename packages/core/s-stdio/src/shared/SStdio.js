@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,21 +13,15 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SStdio_exports = {};
-__export(SStdio_exports, {
-  default: () => SStdio
-});
-module.exports = __toCommonJS(SStdio_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_objectHash = __toESM(require("@coffeekraken/sugar/shared/object/objectHash"), 1);
-var import_SStdioSettingsInterface = __toESM(require("./interface/SStdioSettingsInterface"), 1);
-const _SStdio = class extends import_s_class.default {
+import __SClass from "@coffeekraken/s-class";
+import __SLog from "@coffeekraken/s-log";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __objectHash from "@coffeekraken/sugar/shared/object/objectHash";
+import __SStdioSettingsInterface from "./interface/SStdioSettingsInterface";
+const _SStdio = class extends __SClass {
   constructor(id, sources, settings = {}) {
-    super((0, import_deepMerge.default)({
-      stdio: import_SStdioSettingsInterface.default.defaults()
+    super(__deepMerge({
+      stdio: __SStdioSettingsInterface.defaults()
     }, settings));
     this._logsBuffer = [];
     this._isDisplayed = false;
@@ -67,7 +57,7 @@ const _SStdio = class extends import_s_class.default {
   }
   static new(id, sources, stdio, settings = {}) {
     return new Promise(async (resolve) => {
-      const __new = (await Promise.resolve().then(() => __toESM(require("./new"), 1))).default;
+      const __new = (await Promise.resolve().then(() => __toESM(require("./new")))).default;
       return __new(id, sources, stdio, settings);
     });
   }
@@ -91,7 +81,7 @@ const _SStdio = class extends import_s_class.default {
     this._isDisplayed = false;
   }
   registerSource(source, settings) {
-    const set = (0, import_deepMerge.default)(this._settings.stdio || {}, settings != null ? settings : {});
+    const set = __deepMerge(this._settings.stdio || {}, settings != null ? settings : {});
     source.on("ask", async (askObj, metas, answer) => {
       askObj.metas = metas;
       const res = await this.ask(askObj);
@@ -114,7 +104,7 @@ const _SStdio = class extends import_s_class.default {
       if (!log.active)
         continue;
       if (!log.hash) {
-        const hash = (0, import_objectHash.default)({ value: log.value, type: log.type });
+        const hash = __objectHash({ value: log.value, type: log.type });
         log.hash = hash;
       }
       if (this._hashBuffer.includes(log.hash))
@@ -153,12 +143,12 @@ const _SStdio = class extends import_s_class.default {
       let logType = log.type === "log" ? "default" : (_a = log.type) != null ? _a : "default";
       let componentObj = this.constructor.registeredComponents[this.constructor.name][logType];
       if (!componentObj) {
-        if (import_s_log.default.isTypeEnabled([
-          import_s_log.default.TYPE_VERBOSE,
-          import_s_log.default.TYPE_VERBOSER
+        if (__SLog.isTypeEnabled([
+          __SLog.TYPE_VERBOSE,
+          __SLog.TYPE_VERBOSER
         ])) {
           this._log({
-            type: import_s_log.default.TYPE_VERBOSE,
+            type: __SLog.TYPE_VERBOSE,
             metas: {},
             group: this.constructor.name,
             value: `The requested "<yellow>${log.type || "default"}</yellow>" component in the "<cyan>${this.constructor.name}</cyan>" stdio class does not exists...`
@@ -179,7 +169,7 @@ const _SStdio = class extends import_s_class.default {
     }
   }
   async ask(askObj) {
-    let ask = (0, import_deepMerge.default)(this.stdioSettings.defaultAskObj, askObj);
+    let ask = __deepMerge(this.stdioSettings.defaultAskObj, askObj);
     const answer = await this._ask(ask);
     return answer;
   }
@@ -192,5 +182,6 @@ SStdio._instanciatedStdio = {};
 SStdio.registeredComponents = {};
 SStdio.UI_BASIC = -1;
 SStdio.UI_WEBSOCKET = "websocket";
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SStdio as default
+};

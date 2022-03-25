@@ -1,25 +1,3 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var ImprovedNoise_exports = {};
-__export(ImprovedNoise_exports, {
-  ImprovedNoise: () => ImprovedNoise
-});
-module.exports = __toCommonJS(ImprovedNoise_exports);
 const _p = [
   151,
   160,
@@ -305,3 +283,6 @@ class ImprovedNoise {
     return lerp(w, lerp(v, lerp(u, grad(_p[AA], x, y, z), grad(_p[BA], xMinus1, y, z)), lerp(u, grad(_p[AB], x, yMinus1, z), grad(_p[BB], xMinus1, yMinus1, z))), lerp(v, lerp(u, grad(_p[AA + 1], x, y, zMinus1), grad(_p[BA + 1], xMinus1, y, zMinus1)), lerp(u, grad(_p[AB + 1], x, yMinus1, zMinus1), grad(_p[BB + 1], xMinus1, yMinus1, zMinus1))));
   }
 }
+export {
+  ImprovedNoise
+};

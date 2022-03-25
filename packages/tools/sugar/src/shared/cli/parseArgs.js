@@ -1,33 +1,8 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var parseArgs_exports = {};
-__export(parseArgs_exports, {
-  default: () => parseArgs
-});
-module.exports = __toCommonJS(parseArgs_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
-var import_parse = __toESM(require("../string/parse"), 1);
-var import_unquote = __toESM(require("../string/unquote"), 1);
+import __deepMerge from "../object/deepMerge";
+import __parse from "../string/parse";
+import __unquote from "../string/unquote";
 function parseArgs(string, settings = {}) {
-  settings = (0, import_deepMerge.default)({
+  settings = __deepMerge({
     throw: true,
     defaultObj: {},
     cast: true,
@@ -106,7 +81,7 @@ function parseArgs(string, settings = {}) {
     }
     stringArray.push(currentStr.trim());
   }
-  stringArray = stringArray.map((item) => (0, import_unquote.default)(item));
+  stringArray = stringArray.map((item) => __unquote(item));
   const argsObj = {};
   let currentArgName = void 0;
   let currentValue;
@@ -129,7 +104,7 @@ function parseArgs(string, settings = {}) {
           value = parts.slice(1).join(":").trim();
         }
       }
-      currentValue = (0, import_parse.default)(value);
+      currentValue = __parse(value);
       if (typeof currentValue === "string") {
         currentValue = currentValue.replace("--\xA7 ", "");
       }
@@ -156,5 +131,6 @@ function parseArgs(string, settings = {}) {
   });
   return argsObj;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  parseArgs as default
+};

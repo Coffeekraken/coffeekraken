@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,41 +13,35 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SConfigFolderAdapter_exports = {};
-__export(SConfigFolderAdapter_exports, {
-  default: () => SConfigFolderAdapter
-});
-module.exports = __toCommonJS(SConfigFolderAdapter_exports);
-var import_unique = __toESM(require("@coffeekraken/sugar/shared/array/unique"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_SConfigAdapter = __toESM(require("../../shared/adapters/SConfigAdapter"), 1);
-var import_packageRootDir = __toESM(require("@coffeekraken/sugar/node/path/packageRootDir"), 1);
-var import_path = __toESM(require("path"), 1);
-var __chokidar = __toESM(require("chokidar"), 1);
-var import_SConfig = __toESM(require("../../shared/SConfig"), 1);
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"), 1);
-class SConfigFolderAdapter extends import_SConfigAdapter.default {
+import __unique from "@coffeekraken/sugar/shared/array/unique";
+import __fs from "fs";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SConfigAdapter from "../../shared/adapters/SConfigAdapter";
+import __packageRootDir from "@coffeekraken/sugar/node/path/packageRootDir";
+import __path from "path";
+import * as __chokidar from "chokidar";
+import __SConfig from "../../shared/SConfig";
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
+class SConfigFolderAdapter extends __SConfigAdapter {
   constructor(settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       configFolderAdapter: {
         fileName: "[name].config.js",
         folderName: ".sugar",
         scopes: {
           default: [
-            import_path.default.resolve((0, import_dirname.default)(), "../../config")
+            __path.resolve(__dirname(), "../../config")
           ],
           module: [],
           extends: [],
           repo: [
-            `${(0, import_packageRootDir.default)(process.cwd(), true)}/[folderName]`
+            `${__packageRootDir(process.cwd(), true)}/[folderName]`
           ],
           package: [
-            `${(0, import_packageRootDir.default)(process.cwd())}/[folderName]`
+            `${__packageRootDir(process.cwd())}/[folderName]`
           ],
           user: [
-            `${(0, import_packageRootDir.default)(process.cwd())}/.local/[folderName]`
+            `${__packageRootDir(process.cwd())}/.local/[folderName]`
           ]
         },
         savingScope: "user"
@@ -76,7 +66,7 @@ class SConfigFolderAdapter extends import_SConfigAdapter.default {
     Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
       if (this._scopedFoldersPaths[scope]) {
         this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[scope].filter((path) => {
-          if (import_fs.default.existsSync(path) && this._foldersPaths.indexOf(path) === -1) {
+          if (__fs.existsSync(path) && this._foldersPaths.indexOf(path) === -1) {
             watchPaths.push(path);
             this._foldersPaths.push(path);
             return true;
@@ -85,7 +75,7 @@ class SConfigFolderAdapter extends import_SConfigAdapter.default {
         });
       }
     });
-    __chokidar.watch((0, import_unique.default)(watchPaths), {
+    __chokidar.watch(__unique(watchPaths), {
       ignoreInitial: true
     }).on("change", (p) => {
       this.update(p);
@@ -96,10 +86,10 @@ class SConfigFolderAdapter extends import_SConfigAdapter.default {
   }
   async _load(folderPaths, clearCache = false, env, configObj) {
     var _a;
-    folderPaths = (0, import_unique.default)(folderPaths);
+    folderPaths = __unique(folderPaths);
     for (let i = 0; i < folderPaths.length; i++) {
       const path = folderPaths[i];
-      const paths = import_fs.default.readdirSync(path);
+      const paths = __fs.readdirSync(path);
       for (let j = 0; j < paths.length; j++) {
         const file = paths[j];
         if (!file.match(/\.js(on)?$/))
@@ -114,12 +104,12 @@ class SConfigFolderAdapter extends import_SConfigAdapter.default {
           configData = configData(env, configObj != null ? configObj : {});
         }
         const configKey = file.replace(".config.js", "");
-        configObj[configKey] = (0, import_deepMerge.default)((_a = configObj[configKey]) != null ? _a : {}, configData);
+        configObj[configKey] = __deepMerge((_a = configObj[configKey]) != null ? _a : {}, configData);
         if (importedConfig.postprocess && typeof importedConfig.postprocess === "function") {
-          import_SConfig.default.registerPostprocess(this.configAdapterSettings.name, configKey, importedConfig.postprocess);
+          __SConfig.registerPostprocess(this.configAdapterSettings.name, configKey, importedConfig.postprocess);
         }
         if (importedConfig.preprocess && typeof importedConfig.preprocess === "function") {
-          import_SConfig.default.registerPreprocess(this.configAdapterSettings.name, configKey, importedConfig.preprocess);
+          __SConfig.registerPreprocess(this.configAdapterSettings.name, configKey, importedConfig.preprocess);
         }
       }
     }
@@ -139,7 +129,7 @@ class SConfigFolderAdapter extends import_SConfigAdapter.default {
     }
     let resultSettings = {};
     Object.keys(this._scopedSettings).forEach((scope) => {
-      resultSettings = (0, import_deepMerge.default)(resultSettings, this._scopedSettings[scope]);
+      resultSettings = __deepMerge(resultSettings, this._scopedSettings[scope]);
     });
     return resultSettings;
   }
@@ -147,5 +137,6 @@ class SConfigFolderAdapter extends import_SConfigAdapter.default {
     throw new Error(`<red>[${this.constructor.name}.save]</red> Sorry but the save feature has not been implemented yet...`);
   }
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SConfigFolderAdapter as default
+};

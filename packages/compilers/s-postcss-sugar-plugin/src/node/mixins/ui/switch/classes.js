@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,32 +14,10 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  dependencies: () => dependencies,
-  interface: () => postcssSugarPluginUiSwitchClassesMixinInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_faker = __toESM(require("faker"));
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
-class postcssSugarPluginUiSwitchClassesMixinInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __STheme from "@coffeekraken/s-theme";
+import __faker from "faker";
+class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
   static get _definition() {
     var _a;
     return {
@@ -60,12 +34,12 @@ class postcssSugarPluginUiSwitchClassesMixinInterface extends import_s_interface
       defaultStyle: {
         type: "String",
         values: ["solid"],
-        default: (_a = import_s_theme.default.config("ui.switch.defaultStyle")) != null ? _a : "solid"
+        default: (_a = __STheme.config("ui.switch.defaultStyle")) != null ? _a : "solid"
       },
       defaultShape: {
         type: "String",
         values: ["default", "square", "pill"],
-        default: import_s_theme.default.config("ui.switch.defaultShape")
+        default: __STheme.config("ui.switch.defaultShape")
       },
       scope: {
         type: {
@@ -78,9 +52,10 @@ class postcssSugarPluginUiSwitchClassesMixinInterface extends import_s_interface
     };
   }
 }
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
 function dependencies() {
   return {
-    files: [`${(0, import_dirname.default)()}/switch.js`]
+    files: [`${__dirname()}/switch.js`]
   };
 }
 function classes_default({
@@ -128,7 +103,7 @@ function classes_default({
         ${finalParams.styles.map((style) => {
     return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
-            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" class="s-switch${style === finalParams.defaultStyle ? "" : `:${style}`}" />
             *   </label>
                 <label class="s-mbe:30 s-label">
@@ -141,7 +116,7 @@ function classes_default({
         ${finalParams.shapes.map((shape) => {
     return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
-            *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" class="s-switch${shape === finalParams.defaultShape ? "" : `:${shape}`}" />
             *   </label>
                 <label class="s-mbe:30 s-label">
@@ -154,7 +129,7 @@ function classes_default({
         * @example      html            RTL Support
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         * </div>
@@ -162,26 +137,26 @@ function classes_default({
         * @example      html            Colors (non-exhauustive)
         ${["main", "accent", "complementary", "error"].map((color) => `
         *   <label class="s-mbe:30 s-label s-color:${color}">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         `).join("\n")}
         * 
         * @example      html            Scales
         *   <label class="s-mbe:30 s-label s-scale:05">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:10">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:15">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:20">
-        *     ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         * 
@@ -202,7 +177,7 @@ function classes_default({
             * @example        html
             * <label class="s-label">
             *   <input type="checkbox" class="s-switch" />
-            *   ${import_faker.default.name.findName()}
+            *   ${__faker.name.findName()}
             * </label>
             * 
             * @since    2.0.0
@@ -233,7 +208,7 @@ ${style}`;
                 * @example        html
                 * <label class="s-label">
                 *   <input type="checkbox" class="${cls.replace(/\./gm, " ").trim()}" />
-                *   ${import_faker.default.name.findName()}
+                *   ${__faker.name.findName()}
                 * </label>
                 * 
                 * @since    2.0.0
@@ -263,7 +238,7 @@ ${shape}`;
         * @example        html
         * <label class="s-label">
         *   <input type="checkbox" class="${cls.replace(/\./gm, " ").trim()}" />
-        *   ${import_faker.default.name.findName()}
+        *   ${__faker.name.findName()}
         * </label>
         * 
         * @since    2.0.0
@@ -278,8 +253,8 @@ ${shape}`;
   }
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
+  classes_default as default,
   dependencies,
-  interface
-});
+  postcssSugarPluginUiSwitchClassesMixinInterface as interface
+};

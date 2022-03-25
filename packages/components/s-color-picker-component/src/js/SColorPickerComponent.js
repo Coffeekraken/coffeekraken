@@ -1,45 +1,19 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SColorPickerComponent_exports = {};
-__export(SColorPickerComponent_exports, {
-  default: () => SColorPicker,
-  define: () => define
-});
-module.exports = __toCommonJS(SColorPickerComponent_exports);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_pickr = __toESM(require("@simonwep/pickr"), 1);
-var import_nano_min = __toESM(require("@simonwep/pickr/dist/themes/nano.min.css"), 1);
-var import_lit = require("lit");
-var import_s_color_picker = __toESM(require("../css/s-color-picker.css"), 1);
-var import_SColorPickerComponentInterface = __toESM(require("./interface/SColorPickerComponentInterface"), 1);
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"), 1);
-class SColorPicker extends import_s_lit_component.default {
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __Pickr from "@simonwep/pickr";
+import __baseCss from "@simonwep/pickr/dist/themes/nano.min.css";
+import { css, html, unsafeCSS } from "lit";
+import __css from "../css/s-color-picker.css";
+import __SColorPickerComponentInterface from "./interface/SColorPickerComponentInterface";
+import __STheme from "@coffeekraken/s-theme";
+class SColorPicker extends __SLitComponent {
   constructor() {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       litComponent: {
         shadowDom: false
       },
       componentUtils: {
-        interface: import_SColorPickerComponentInterface.default
+        interface: __SColorPickerComponentInterface
       }
     }));
     this._hasInput = false;
@@ -50,13 +24,13 @@ class SColorPicker extends import_s_lit_component.default {
     this._hasButton = this._$button !== null;
   }
   static get properties() {
-    return import_s_lit_component.default.properties({}, import_SColorPickerComponentInterface.default);
+    return __SLitComponent.properties({}, __SColorPickerComponentInterface);
   }
   static get styles() {
-    return import_lit.css`
-            ${(0, import_lit.unsafeCSS)(`
-                ${import_nano_min.default}
-                ${import_s_color_picker.default}
+    return css`
+            ${unsafeCSS(`
+                ${__baseCss}
+                ${__css}
             `)}
         `;
   }
@@ -86,7 +60,7 @@ class SColorPicker extends import_s_lit_component.default {
       this._$button.classList.add(this.componentUtils.className("__button"));
     }
     const value = (_i = (_h = this.props.value) != null ? _h : (_g = this._$input) == null ? void 0 : _g.value) != null ? _i : "#ff0000";
-    const pickr = import_pickr.default.create({
+    const pickr = __Pickr.create({
       el: this.querySelector(`.${this.componentUtils.className("__picker")}`),
       theme: "nano",
       container: this._$root,
@@ -153,7 +127,7 @@ class SColorPicker extends import_s_lit_component.default {
         }
       };
     }
-    import_s_theme.default.applyCurrentColor(value, this._$root);
+    __STheme.applyCurrentColor(value, this._$root);
     pickr.on("change", () => {
       pickr.applyColor();
       const detail = getPickrState();
@@ -161,7 +135,7 @@ class SColorPicker extends import_s_lit_component.default {
         bubbles: true,
         detail
       });
-      import_s_theme.default.applyCurrentColor(detail.hex, this._$root);
+      __STheme.applyCurrentColor(detail.hex, this._$root);
       if (this._$input) {
         this._$input.value = detail.hex;
       }
@@ -205,11 +179,11 @@ class SColorPicker extends import_s_lit_component.default {
     $app == null ? void 0 : $app.classList.add(this.componentUtils.className("__picker"));
   }
   render() {
-    return import_lit.html`
+    return html`
             <div
                 class="${this.componentUtils.className("")} ${this.componentUtils.className("")}--${this.props.position}"
             >
-                ${!this._hasInput && this.props.input ? import_lit.html`
+                ${!this._hasInput && this.props.input ? html`
                           <input
                               ?disabled=${this.props.disabled}
                               type="text"
@@ -219,7 +193,7 @@ class SColorPicker extends import_s_lit_component.default {
                               placeholder="${this.props.placeholder}"
                               class="${this.componentUtils.className("__input", "s-input")}"
                           />
-                      ` : !this._hasInput ? import_lit.html`
+                      ` : !this._hasInput ? html`
                           <input
                               ?disabled=${this.props.disabled}
                               type="hidden"
@@ -227,13 +201,13 @@ class SColorPicker extends import_s_lit_component.default {
                               value="${this.props.value}"
                           />
                       ` : ``}
-                ${!this._hasButton && this.props.button ? import_lit.html`
+                ${!this._hasButton && this.props.button ? html`
                           <button
                               ?disabled=${this.props.disabled}
                               onclick="return false"
                               class="${this.componentUtils.className("__button", "s-btn")}"
                           >
-                              ${this.props.colorIcon ? import_lit.html` ${staticHTML(this.props.colorIcon)} ` : import_lit.html`
+                              ${this.props.colorIcon ? html` ${staticHTML(this.props.colorIcon)} ` : html`
                                         <i class="s-icon s-icon--calendar"></i>
                                     `}
                           </button>
@@ -244,6 +218,10 @@ class SColorPicker extends import_s_lit_component.default {
   }
 }
 function define(props = {}, tagName = "s-color-picker") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SColorPicker);
 }
+export {
+  SColorPicker as default,
+  define
+};

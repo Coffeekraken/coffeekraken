@@ -1,47 +1,21 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SDatePickerComponent_exports = {};
-__export(SDatePickerComponent_exports, {
-  default: () => SDatePicker,
-  define: () => define
-});
-module.exports = __toCommonJS(SDatePickerComponent_exports);
-var import_lit = require("lit");
-var import_static_html = require("lit/static-html.js");
-var import_SDatePickerComponentInterface = __toESM(require("./interface/SDatePickerComponentInterface"), 1);
-var import_pikaday = __toESM(require("pikaday"), 1);
-var import_whenInteract = __toESM(require("@coffeekraken/sugar/js/dom/detect/whenInteract"), 1);
-var import_moment = __toESM(require("moment"), 1);
-var import_s_date_picker = __toESM(require("../css/s-date-picker.css"), 1);
-var import_s_date_picker_theme = __toESM(require("../css/s-date-picker-theme.css"), 1);
-var import_pikaday2 = __toESM(require("pikaday/css/pikaday.css"), 1);
-var import_s_lit_component2 = __toESM(require("@coffeekraken/s-lit-component"), 1);
-class SDatePicker extends import_s_lit_component2.default {
+import { html, css, unsafeCSS } from "lit";
+import { html as staticHTML } from "lit/static-html.js";
+import __SDatePickerComponentInterface from "./interface/SDatePickerComponentInterface";
+import __pikaday from "pikaday";
+import __whenInteract from "@coffeekraken/sugar/js/dom/detect/whenInteract";
+import __moment from "moment";
+import __css from "../css/s-date-picker.css";
+import __themeCss from "../css/s-date-picker-theme.css";
+import __baseCss from "pikaday/css/pikaday.css";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+class SDatePicker extends __SLitComponent {
   constructor() {
     super({
       litComponent: {
         shadowDom: false
       },
       componentUtils: {
-        interface: import_SDatePickerComponentInterface.default
+        interface: __SDatePickerComponentInterface
       }
     });
     this._hasInput = false;
@@ -52,14 +26,14 @@ class SDatePicker extends import_s_lit_component2.default {
     this._hasButton = this._$button !== null;
   }
   static get properties() {
-    return import_s_lit_component2.default.properties({}, import_SDatePickerComponentInterface.default);
+    return __SLitComponent.properties({}, __SDatePickerComponentInterface);
   }
   static get styles() {
-    return import_lit.css`
-            ${(0, import_lit.unsafeCSS)(`
-                ${import_pikaday2.default}
-                ${import_s_date_picker.default}
-                ${import_s_date_picker_theme.default}
+    return css`
+            ${unsafeCSS(`
+                ${__baseCss}
+                ${__css}
+                ${__themeCss}
             `)}
         `;
   }
@@ -88,9 +62,9 @@ class SDatePicker extends import_s_lit_component2.default {
     if (this._$button) {
       this._$button.classList.add(this.componentUtils.className("__button"));
     }
-    await (0, import_whenInteract.default)(this);
+    await __whenInteract(this);
     const _this = this;
-    this._picker = new import_pikaday.default({
+    this._picker = new __pikaday({
       field: this._$input,
       format: this.props.format,
       trigger: this._$button,
@@ -157,10 +131,10 @@ class SDatePicker extends import_s_lit_component2.default {
     });
   }
   parseDate(dateString, format = this.props.format) {
-    return (0, import_moment.default)(dateString, format).toDate();
+    return __moment(dateString, format).toDate();
   }
   dateToString(date, format = this.props.format) {
-    return (0, import_moment.default)(date).format(format);
+    return __moment(date).format(format);
   }
   _dispatchEvent(eventName) {
     const event = new CustomEvent(eventName, {
@@ -172,22 +146,22 @@ class SDatePicker extends import_s_lit_component2.default {
     this.dispatchEvent(event);
   }
   render() {
-    return import_lit.html`
+    return html`
             <div class="${this.componentUtils.className("")}" ${this.props.rtl ? 'dir="rtl"' : ""}>
-                ${!this._hasInput && this.props.input ? import_lit.html`
+                ${!this._hasInput && this.props.input ? html`
                     <input ?disabled=${this.props.disabled} type="text" autocomplete="off" name="${this.props.name}" value="${this.props.value}" placeholder="${this.props.placeholder}" class="${this.componentUtils.className("__input", "s-input")}" />
-                ` : !this._hasInput ? import_lit.html`
+                ` : !this._hasInput ? html`
                     <input ?disabled=${this.props.disabled} type="hidden" name="${this.props.name}" value="${this.props.value}" />
                 ` : ``}
-                ${!this._hasButton && this.props.button ? import_lit.html`
+                ${!this._hasButton && this.props.button ? html`
                           <button
                                 ?disabled=${this.props.disabled}
                               onclick="return false"
                               class="${this.componentUtils.className("__button", "s-btn")}"
                           >
-                              ${this.calendarIcon ? import_lit.html`
-                                ${(0, import_static_html.html)(this.calendarIcon)}
-                              ` : import_lit.html`
+                              ${this.calendarIcon ? html`
+                                ${staticHTML(this.calendarIcon)}
+                              ` : html`
                                 <i class="s-icon s-icon--calendar"></i>
                               `}
                           </button>
@@ -197,6 +171,10 @@ class SDatePicker extends import_s_lit_component2.default {
   }
 }
 function define(props = {}, tagName = "s-date-picker") {
-  import_s_lit_component2.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SDatePicker);
 }
+export {
+  SDatePicker as default,
+  define
+};

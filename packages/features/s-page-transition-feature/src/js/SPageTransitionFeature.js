@@ -1,40 +1,14 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SPageTransitionFeature_exports = {};
-__export(SPageTransitionFeature_exports, {
-  default: () => SPageTransitionFeature,
-  define: () => define
-});
-module.exports = __toCommonJS(SPageTransitionFeature_exports);
-var import_s_feature = __toESM(require("@coffeekraken/s-feature"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_SPageTransitionFeatureInterface = __toESM(require("./interface/SPageTransitionFeatureInterface"), 1);
-var import_s_request = __toESM(require("@coffeekraken/s-request"), 1);
-var import_querySelectorUp = __toESM(require("@coffeekraken/sugar/js/dom/query/querySelectorUp"), 1);
-var import_scrollTo = __toESM(require("@coffeekraken/sugar/js/dom/scroll/scrollTo"), 1);
-class SPageTransitionFeature extends import_s_feature.default {
+import __SFeature from "@coffeekraken/s-feature";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SPageTransitionFeatureInterface from "./interface/SPageTransitionFeatureInterface";
+import __SRequest from "@coffeekraken/s-request";
+import __querySelectorUp from "@coffeekraken/sugar/js/dom/query/querySelectorUp";
+import __scrollTo from "@coffeekraken/sugar/js/dom/scroll/scrollTo";
+class SPageTransitionFeature extends __SFeature {
   constructor(name, node, settings) {
-    super(name, node, (0, import_deepMerge.default)({
+    super(name, node, __deepMerge({
       componentUtils: {
-        interface: import_SPageTransitionFeatureInterface.default
+        interface: __SPageTransitionFeatureInterface
       },
       feature: {}
     }, settings != null ? settings : {}));
@@ -50,10 +24,10 @@ class SPageTransitionFeature extends import_s_feature.default {
         if (!$elm)
           return;
         $elm.innerHTML = e.state.html;
-        (0, import_scrollTo.default)($elm);
+        __scrollTo($elm);
       } else {
         this.node.innerHTML = e.state.html;
-        (0, import_scrollTo.default)(this.node);
+        __scrollTo(this.node);
       }
     });
     window.addEventListener("location.href", (e) => {
@@ -65,7 +39,7 @@ class SPageTransitionFeature extends import_s_feature.default {
         e.preventDefault();
         this.transitionTo($target.getAttribute("href"), $target);
       } else {
-        const $upHrefElm = (0, import_querySelectorUp.default)($target, "a[href]");
+        const $upHrefElm = __querySelectorUp($target, "a[href]");
         if ($upHrefElm) {
           e.preventDefault();
           this.transitionTo($upHrefElm.getAttribute("href"), $upHrefElm);
@@ -94,7 +68,7 @@ class SPageTransitionFeature extends import_s_feature.default {
         url,
         $source
       });
-      const request = new import_s_request.default({
+      const request = new __SRequest({
         url
       });
       const response = await request.send();
@@ -135,7 +109,7 @@ class SPageTransitionFeature extends import_s_feature.default {
       }
       window.history.pushState(newState, document.title, url);
       if (this.props.scrollTop) {
-        (0, import_scrollTo.default)($inPageScopedContainer != null ? $inPageScopedContainer : $inPageContainer);
+        __scrollTo($inPageScopedContainer != null ? $inPageScopedContainer : $inPageContainer);
       }
       document.body.classList.remove("s-page-transition");
       document.body.classList.remove("loading");
@@ -157,5 +131,9 @@ class SPageTransitionFeature extends import_s_feature.default {
   }
 }
 function define(props = {}, name = "s-page-transition") {
-  import_s_feature.default.defineFeature(name, SPageTransitionFeature, props);
+  __SFeature.defineFeature(name, SPageTransitionFeature, props);
 }
+export {
+  SPageTransitionFeature as default,
+  define
+};

@@ -1,31 +1,6 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var inViewportPercentage_exports = {};
-__export(inViewportPercentage_exports, {
-  default: () => inViewportPercentage_default
-});
-module.exports = __toCommonJS(inViewportPercentage_exports);
-var import_isVisible = __toESM(require("../isVisible"), 1);
+import __isVisible from "../isVisible";
 function inViewportPercentage(elm) {
-  if (!(0, import_isVisible.default)(elm))
+  if (!__isVisible(elm))
     return 0;
   const bounding = elm.getBoundingClientRect();
   let percentageWidth = 100, percentageHeight = 100;
@@ -64,3 +39,6 @@ function inViewportPercentage(elm) {
   return Math.round(100 / (100 * 100) * (percentageWidth * percentageHeight));
 }
 var inViewportPercentage_default = inViewportPercentage;
+export {
+  inViewportPercentage_default as default
+};

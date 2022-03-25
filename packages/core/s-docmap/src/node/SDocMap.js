@@ -1,11 +1,7 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -21,62 +17,43 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SDocMap_exports = {};
-__export(SDocMap_exports, {
-  default: () => SDocMap_default
-});
-module.exports = __toCommonJS(SDocMap_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_docblock = __toESM(require("@coffeekraken/s-docblock"), 1);
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
-var import_s_glob = __toESM(require("@coffeekraken/s-glob"), 1);
-var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_copySync = __toESM(require("@coffeekraken/sugar/node/fs/copySync"), 1);
-var import_ensureDirSync = __toESM(require("@coffeekraken/sugar/node/fs/ensureDirSync"), 1);
-var import_filename = __toESM(require("@coffeekraken/sugar/node/fs/filename"), 1);
-var import_folderPath = __toESM(require("@coffeekraken/sugar/node/fs/folderPath"), 1);
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
-var import_removeSync = __toESM(require("@coffeekraken/sugar/node/fs/removeSync"), 1);
-var import_writeFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeFileSync"), 1);
-var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"), 1);
-var import_install = __toESM(require("@coffeekraken/sugar/node/npm/install"), 1);
-var import_jsonSync = __toESM(require("@coffeekraken/sugar/node/package/jsonSync"), 1);
-var import_packageRoot = __toESM(require("@coffeekraken/sugar/node/path/packageRoot"), 1);
-var import_packageRootDir = __toESM(require("@coffeekraken/sugar/node/path/packageRootDir"), 1);
-var import_deepFilter = __toESM(require("@coffeekraken/sugar/shared/object/deepFilter"), 1);
-var import_deepMap = __toESM(require("@coffeekraken/sugar/shared/object/deepMap"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_namespaceCompliant = __toESM(require("@coffeekraken/sugar/shared/string/namespaceCompliant"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_SDocmapBuildParamsInterface = __toESM(require("./interface/SDocmapBuildParamsInterface"), 1);
-var import_SDocmapInstallSnapshotParamsInterface = __toESM(require("./interface/SDocmapInstallSnapshotParamsInterface"), 1);
-var import_SDocMapReadParamsInterface = __toESM(require("./interface/SDocMapReadParamsInterface"), 1);
-var import_SDocmapSnapshotParamsInterface = __toESM(require("./interface/SDocmapSnapshotParamsInterface"), 1);
-var import_chokidar = __toESM(require("chokidar"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_checkPathWithMultipleExtensions = __toESM(require("@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions"), 1);
+import __SClass from "@coffeekraken/s-class";
+import __SDocblock from "@coffeekraken/s-docblock";
+import __SDuration from "@coffeekraken/s-duration";
+import __SGlob from "@coffeekraken/s-glob";
+import __SLog from "@coffeekraken/s-log";
+import __SPromise from "@coffeekraken/s-promise";
+import __copySync from "@coffeekraken/sugar/node/fs/copySync";
+import __ensureDirSync from "@coffeekraken/sugar/node/fs/ensureDirSync";
+import __getFilename from "@coffeekraken/sugar/node/fs/filename";
+import __folderPath from "@coffeekraken/sugar/node/fs/folderPath";
+import __readJsonSync from "@coffeekraken/sugar/node/fs/readJsonSync";
+import __removeSync from "@coffeekraken/sugar/node/fs/removeSync";
+import __writeFileSync from "@coffeekraken/sugar/node/fs/writeFileSync";
+import __writeJsonSync from "@coffeekraken/sugar/node/fs/writeJsonSync";
+import __npmInstall from "@coffeekraken/sugar/node/npm/install";
+import __packageJsonSync from "@coffeekraken/sugar/node/package/jsonSync";
+import __packageRoot from "@coffeekraken/sugar/node/path/packageRoot";
+import __packageRootDir from "@coffeekraken/sugar/node/path/packageRootDir";
+import __deepFilter from "@coffeekraken/sugar/shared/object/deepFilter";
+import __deepMap from "@coffeekraken/sugar/shared/object/deepMap";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __namespaceCompliant from "@coffeekraken/sugar/shared/string/namespaceCompliant";
+import __fs from "fs";
+import __path from "path";
+import __SDocmapBuildParamsInterface from "./interface/SDocmapBuildParamsInterface";
+import __SDocmapInstallSnapshotParamsInterface from "./interface/SDocmapInstallSnapshotParamsInterface";
+import __SDocMapReadParamsInterface from "./interface/SDocMapReadParamsInterface";
+import __SDocmapSnapshotParamsInterface from "./interface/SDocmapSnapshotParamsInterface";
+import __chokidar from "chokidar";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __checkPathWithMultipleExtensions from "@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions";
 function __toLowerCase(l = "") {
   return l.toLowerCase();
 }
-class SDocMap extends import_s_class.default {
+class SDocMap extends __SClass {
   constructor(settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       metas: {
         id: "SDocMap"
       },
@@ -96,7 +73,7 @@ class SDocMap extends import_s_class.default {
     this._entries = {};
     this.docmapSettings.tagsProxy = __spreadValues(__spreadValues({}, this.constructor._registeredTagsProxy), this.docmapSettings.tagsProxy);
     if (!this.constructor.watcher) {
-      this.constructor.watcher = import_chokidar.default.watch(import_s_sugar_config.default.get("docmap.read.input"));
+      this.constructor.watcher = __chokidar.watch(__SSugarConfig.get("docmap.read.input"));
       this.constructor.watcher.on("change", () => {
         delete this.constructor._cachedDocmapJson.current;
       });
@@ -109,21 +86,21 @@ class SDocMap extends import_s_class.default {
     return this._settings.docmap;
   }
   read(params) {
-    return new import_s_promise.default(async ({ resolve, pipe, emit }) => {
+    return new __SPromise(async ({ resolve, pipe, emit }) => {
       var _a;
-      const finalParams = (0, import_deepMerge.default)(import_SDocMapReadParamsInterface.default.defaults(), params != null ? params : {});
+      const finalParams = __deepMerge(__SDocMapReadParamsInterface.defaults(), params != null ? params : {});
       if (finalParams.snapshot) {
-        finalParams.input = import_path.default.resolve(finalParams.snapshotDir, finalParams.snapshot, "docmap.json");
+        finalParams.input = __path.resolve(finalParams.snapshotDir, finalParams.snapshot, "docmap.json");
       }
       let docmapVersion = (_a = finalParams.snapshot) != null ? _a : "current";
       if (this.constructor._cachedDocmapJson[docmapVersion]) {
         return resolve(this.constructor._cachedDocmapJson[docmapVersion]);
       }
-      let docmapRootPath = (0, import_folderPath.default)(finalParams.input);
-      if (!import_fs.default.existsSync(finalParams.input)) {
+      let docmapRootPath = __folderPath(finalParams.input);
+      if (!__fs.existsSync(finalParams.input)) {
         throw new Error(`<red>[${this.constructor.name}.${this.metas.id}]</red> Sorry but the file "<cyan>${finalParams.input}</cyan>" does not exists...`);
       }
-      const packageMonoRoot = (0, import_packageRoot.default)(process.cwd(), true);
+      const packageMonoRoot = __packageRoot(process.cwd(), true);
       const extendedPackages = [];
       const finalDocmapJson = {
         metas: {
@@ -139,16 +116,16 @@ class SDocMap extends import_s_class.default {
         if (extendedPackages.indexOf(packageNameOrPath) !== -1)
           return;
         extendedPackages.push(packageNameOrPath);
-        let currentPathDocmapJsonPath, potentialPackagePath = import_path.default.resolve(docmapRootPath, "node_modules", packageNameOrPath, "docmap.json"), potentialRootPackagePath = import_path.default.resolve(packageMonoRoot, "node_modules", packageNameOrPath, "docmap.json");
-        if (import_fs.default.existsSync(potentialPackagePath)) {
+        let currentPathDocmapJsonPath, potentialPackagePath = __path.resolve(docmapRootPath, "node_modules", packageNameOrPath, "docmap.json"), potentialRootPackagePath = __path.resolve(packageMonoRoot, "node_modules", packageNameOrPath, "docmap.json");
+        if (__fs.existsSync(potentialPackagePath)) {
           currentPathDocmapJsonPath = potentialPackagePath;
-        } else if (import_fs.default.existsSync(`${packageNameOrPath}/docmap.json`)) {
+        } else if (__fs.existsSync(`${packageNameOrPath}/docmap.json`)) {
           currentPathDocmapJsonPath = `${packageNameOrPath}/docmap.json`;
-        } else if (import_fs.default.existsSync(potentialRootPackagePath)) {
+        } else if (__fs.existsSync(potentialRootPackagePath)) {
           currentPathDocmapJsonPath = potentialRootPackagePath;
         } else {
           emit("log", {
-            type: import_s_log.default.TYPE_WARN,
+            type: __SLog.TYPE_WARN,
             value: `<red>[read]</red> Sorry but the references docmap path/package "<yellow>${packageNameOrPath}</yellow>" does not exists`
           });
         }
@@ -156,14 +133,14 @@ class SDocMap extends import_s_class.default {
           return;
         const extendsRootPath = currentPathDocmapJsonPath.replace("/docmap.json", "");
         const packageJsonPath = `${extendsRootPath}/package.json`;
-        if (!import_fs.default.existsSync(packageJsonPath)) {
+        if (!__fs.existsSync(packageJsonPath)) {
           emit("log", {
-            type: import_s_log.default.TYPE_WARN,
+            type: __SLog.TYPE_WARN,
             value: `<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`
           });
         }
-        const currentPackageJson = (0, import_readJsonSync.default)(packageJsonPath);
-        const docmapJson = (0, import_readJsonSync.default)(currentPathDocmapJsonPath);
+        const currentPackageJson = __readJsonSync(packageJsonPath);
+        const docmapJson = __readJsonSync(currentPathDocmapJsonPath);
         Object.keys(docmapJson.map).forEach((namespace) => {
           if (docmapJson.map[namespace]) {
             docmapJson.map[namespace].package = {
@@ -197,9 +174,9 @@ class SDocMap extends import_s_class.default {
         for (let i = 0; i < Object.keys(docmapJson.map).length; i++) {
           const namespace = Object.keys(docmapJson.map)[i];
           const obj = docmapJson.map[namespace];
-          obj.path = import_path.default.resolve(extendsRootPath, obj.relPath);
+          obj.path = __path.resolve(extendsRootPath, obj.relPath);
           let ext = obj.relPath.split(".").pop();
-          obj.path = (_i = (0, import_checkPathWithMultipleExtensions.default)(obj.path, [
+          obj.path = (_i = __checkPathWithMultipleExtensions(obj.path, [
             `dev.${ext}`,
             ext
           ])) != null ? _i : obj.path;
@@ -207,10 +184,10 @@ class SDocMap extends import_s_class.default {
         }
         finalDocmapJson.map = __spreadValues(__spreadValues({}, finalDocmapJson.map), (_j = docmapJson.map) != null ? _j : {});
       };
-      const docmapJsonFolderPath = (0, import_folderPath.default)(finalParams.input);
+      const docmapJsonFolderPath = __folderPath(finalParams.input);
       await loadJson(docmapJsonFolderPath, docmapJsonFolderPath);
-      if (import_fs.default.existsSync(finalParams.snapshotDir)) {
-        const availableSnapshots = import_fs.default.readdirSync(finalParams.snapshotDir);
+      if (__fs.existsSync(finalParams.snapshotDir)) {
+        const availableSnapshots = __fs.readdirSync(finalParams.snapshotDir);
         finalDocmapJson.snapshots = availableSnapshots;
       } else {
         finalDocmapJson.snapshots = [];
@@ -242,7 +219,7 @@ class SDocMap extends import_s_class.default {
       slug: {},
       custom: {}
     };
-    const packageJson = (0, import_jsonSync.default)();
+    const packageJson = __packageJsonSync();
     Object.keys(docmapJsonMenuByPackage).forEach((packageName) => {
       const menuObj = this._extractMenuFromDocmapJsonStack(docmapJsonMenuByPackage[packageName]);
       if (packageName === packageJson.name) {
@@ -254,7 +231,7 @@ class SDocMap extends import_s_class.default {
         });
         finalMenu.packages[packageName] = {
           name: packageName,
-          tree: (0, import_deepMap.default)(menuObj.tree, ({ prop, value }) => {
+          tree: __deepMap(menuObj.tree, ({ prop, value }) => {
             if (prop === "slug")
               return `/${packageName}${value}`;
             return value;
@@ -266,14 +243,14 @@ class SDocMap extends import_s_class.default {
     Object.keys(this.docmapSettings.customMenu).forEach((menuName) => {
       if (!finalMenu.custom[menuName])
         finalMenu.custom[menuName] = {};
-      finalMenu.custom[menuName].tree = (0, import_deepFilter.default)(finalMenu.tree, this.docmapSettings.customMenu[menuName]);
-      finalMenu.custom[menuName].slug = (0, import_deepFilter.default)(finalMenu.slug, this.docmapSettings.customMenu[menuName]);
+      finalMenu.custom[menuName].tree = __deepFilter(finalMenu.tree, this.docmapSettings.customMenu[menuName]);
+      finalMenu.custom[menuName].slug = __deepFilter(finalMenu.slug, this.docmapSettings.customMenu[menuName]);
       Object.keys(finalMenu.packages).forEach((packageName) => {
         const packageObj = finalMenu.packages[packageName];
-        const packageFilteredTree = (0, import_deepFilter.default)(packageObj.tree, this.docmapSettings.customMenu[menuName]);
-        finalMenu.custom[menuName].tree = (0, import_deepMerge.default)(finalMenu.custom[menuName].tree, packageFilteredTree);
-        const packageFilteredSlug = (0, import_deepFilter.default)(packageObj.slug, this.docmapSettings.customMenu[menuName]);
-        finalMenu.custom[menuName].slug = (0, import_deepMerge.default)(finalMenu.custom[menuName].slug, packageFilteredSlug);
+        const packageFilteredTree = __deepFilter(packageObj.tree, this.docmapSettings.customMenu[menuName]);
+        finalMenu.custom[menuName].tree = __deepMerge(finalMenu.custom[menuName].tree, packageFilteredTree);
+        const packageFilteredSlug = __deepFilter(packageObj.slug, this.docmapSettings.customMenu[menuName]);
+        finalMenu.custom[menuName].slug = __deepMerge(finalMenu.custom[menuName].slug, packageFilteredSlug);
       });
     });
     return finalMenu;
@@ -316,8 +293,8 @@ class SDocMap extends import_s_class.default {
     };
   }
   build(params) {
-    const finalParams = (0, import_deepMerge.default)(import_SDocmapBuildParamsInterface.default.defaults(), params);
-    return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
+    const finalParams = __deepMerge(__SDocmapBuildParamsInterface.defaults(), params);
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
       var _a, _b;
       emit("notification", {
         message: `${this.metas.id} build started`
@@ -330,17 +307,17 @@ class SDocMap extends import_s_class.default {
           map: {}
         }
       };
-      const packageRoot = (0, import_packageRootDir.default)();
-      const packageMonoRoot = (0, import_packageRoot.default)(process.cwd(), true);
-      if (import_fs.default.existsSync(`${packageRoot}/docmap.json`)) {
-        const currentDocmapJson = (0, import_readJsonSync.default)(`${packageRoot}/docmap.json`);
+      const packageRoot = __packageRootDir();
+      const packageMonoRoot = __packageRoot(process.cwd(), true);
+      if (__fs.existsSync(`${packageRoot}/docmap.json`)) {
+        const currentDocmapJson = __readJsonSync(`${packageRoot}/docmap.json`);
         docmapJson = currentDocmapJson;
         docmapJson.generated = {
           extends: [],
           map: {}
         };
       }
-      const packageJson = (0, import_jsonSync.default)();
+      const packageJson = __packageJsonSync();
       if (!finalParams.noExtends) {
         emit("log", {
           value: `<yellow>[build]</yellow> Building extends array from existing docmap compliant packages`
@@ -351,7 +328,7 @@ class SDocMap extends import_s_class.default {
         if (packageRoot !== packageMonoRoot) {
           globs.push(`${packageMonoRoot}/node_modules/*{0,2}/docmap.json`);
         }
-        const currentDocmapFiles = import_s_glob.default.resolve(globs, {
+        const currentDocmapFiles = __SGlob.resolve(globs, {
           defaultExcludes: false,
           exclude: (_a = finalParams.exclude) != null ? _a : []
         });
@@ -360,7 +337,7 @@ class SDocMap extends import_s_class.default {
         });
         const extendsArray = [];
         currentDocmapFiles.forEach((file) => {
-          const currentPackageJson = (0, import_readJsonSync.default)(`${file.dirPath}/package.json`);
+          const currentPackageJson = __readJsonSync(`${file.dirPath}/package.json`);
           if (currentPackageJson.name === packageJson.name)
             return;
           extendsArray.push(currentPackageJson.name);
@@ -370,7 +347,7 @@ class SDocMap extends import_s_class.default {
       emit("log", {
         value: `<yellow>[build]</yellow> Building map by searching for files inside the current package`
       });
-      const filesInPackage = import_s_glob.default.resolve(finalParams.globs.map((glob) => {
+      const filesInPackage = __SGlob.resolve(finalParams.globs.map((glob) => {
         return `${glob}:\\*\\s@namespace`;
       }), {
         cwd: packageRoot,
@@ -383,9 +360,9 @@ class SDocMap extends import_s_class.default {
         const file = filesInPackage[i];
         const content = file.raw;
         emit("log", {
-          value: `<yellow>[build]</yellow> Parsing file "<cyan>${import_path.default.relative((0, import_packageRootDir.default)(), file.path)}</cyan>"`
+          value: `<yellow>[build]</yellow> Parsing file "<cyan>${__path.relative(__packageRootDir(), file.path)}</cyan>"`
         });
-        const docblocksInstance = new import_s_docblock.default(content, {
+        const docblocksInstance = new __SDocblock(content, {
           docblock: {
             renderMarkdown: false,
             filepath: file.path
@@ -411,7 +388,7 @@ class SDocMap extends import_s_class.default {
             continue;
           if (docblock.private)
             continue;
-          const filename = (0, import_filename.default)(file.path);
+          const filename = __getFilename(file.path);
           const docblockEntryObj = {};
           for (let l = 0; l < finalParams.tags.length; l++) {
             const tag = finalParams.tags[l];
@@ -425,12 +402,12 @@ class SDocMap extends import_s_class.default {
               docblockEntryObj[tag] = docblock[tag];
             }
           }
-          const namespaceIdCompliant = (0, import_namespaceCompliant.default)(`${docblock.namespace}.${docblock.name}`);
+          const namespaceIdCompliant = __namespaceCompliant(`${docblock.namespace}.${docblock.name}`);
           if (docblock.namespace && !this._entries[namespaceIdCompliant]) {
             docblockObj = __spreadProps(__spreadValues({}, docblockEntryObj), {
               filename,
               extension: filename.split(".").slice(1)[0],
-              relPath: import_path.default.relative((0, import_packageRootDir.default)(), file.path)
+              relPath: __path.relative(__packageRootDir(), file.path)
             });
             this._entries[namespaceIdCompliant] = docblockObj;
           } else if (docblock.name) {
@@ -449,9 +426,9 @@ class SDocMap extends import_s_class.default {
       docmapJson.generated.map = this._entries;
       if (finalParams.save) {
         emit("log", {
-          value: `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${finalParams.outPath.replace((0, import_packageRootDir.default)() + "/", "")}</cyan>"`
+          value: `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${finalParams.outPath.replace(__packageRootDir() + "/", "")}</cyan>"`
         });
-        import_fs.default.writeFileSync(finalParams.outPath, JSON.stringify(docmapJson, null, 4));
+        __fs.writeFileSync(finalParams.outPath, JSON.stringify(docmapJson, null, 4));
       }
       resolve(docmapJson);
     }, {
@@ -461,10 +438,10 @@ class SDocMap extends import_s_class.default {
     });
   }
   installSnapshot(params) {
-    return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
-      const finalParams = (0, import_deepMerge.default)(import_SDocmapInstallSnapshotParamsInterface.default.defaults(), params != null ? params : {});
-      const duration = new import_s_duration.default();
-      const folders = import_s_glob.default.resolve(finalParams.glob, {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+      const finalParams = __deepMerge(__SDocmapInstallSnapshotParamsInterface.defaults(), params != null ? params : {});
+      const duration = new __SDuration();
+      const folders = __SGlob.resolve(finalParams.glob, {
         defaultExcludes: false
       });
       if (!folders.length) {
@@ -476,13 +453,13 @@ class SDocMap extends import_s_class.default {
       for (let i = 0; i < folders.length; i++) {
         const folderPath = folders[i];
         emit("log", {
-          value: `<yellow>[install]</yellow> Installing snapshot <yellow>${import_path.default.relative((0, import_packageRootDir.default)(), folderPath)}</yellow>`
+          value: `<yellow>[install]</yellow> Installing snapshot <yellow>${__path.relative(__packageRootDir(), folderPath)}</yellow>`
         });
-        const packageJson = (0, import_jsonSync.default)();
-        const packageMonoRootPath = (0, import_packageRoot.default)(process.cwd(), true);
+        const packageJson = __packageJsonSync();
+        const packageMonoRootPath = __packageRoot(process.cwd(), true);
         const removedDependencies = {}, removedDevDependencies = {};
-        if (packageMonoRootPath !== (0, import_packageRoot.default)()) {
-          const packageJsonFiles = import_s_glob.default.resolve(`${packageMonoRootPath}/**/package.json`);
+        if (packageMonoRootPath !== __packageRoot()) {
+          const packageJsonFiles = __SGlob.resolve(`${packageMonoRootPath}/**/package.json`);
           packageJsonFiles.forEach((file) => {
             var _a, _b, _c, _d;
             if (file.dirPath === packageMonoRootPath)
@@ -497,20 +474,20 @@ class SDocMap extends import_s_class.default {
               removedDevDependencies[file.content.name] = packageJson.devDependencies[file.content.name];
               delete packageJson.devDependencies[file.content.name];
             }
-            const packageFolderPath = (0, import_folderPath.default)(file.path);
+            const packageFolderPath = __folderPath(file.path);
             const destinationFolderPath = `${folderPath}/node_modules/${file.content.name}`;
-            (0, import_ensureDirSync.default)(destinationFolderPath.split("/").slice(0, -1).join("/"));
+            __ensureDirSync(destinationFolderPath.split("/").slice(0, -1).join("/"));
             try {
-              import_fs.default.unlinkSync(destinationFolderPath);
+              __fs.unlinkSync(destinationFolderPath);
             } catch (e) {
             }
-            import_fs.default.symlinkSync(packageFolderPath, destinationFolderPath);
+            __fs.symlinkSync(packageFolderPath, destinationFolderPath);
           });
         }
         if (Object.keys(removedDependencies).length || Object.keys(removedDevDependencies).length) {
-          (0, import_writeJsonSync.default)(`${folderPath}/package.json`, packageJson);
+          __writeJsonSync(`${folderPath}/package.json`, packageJson);
         }
-        await pipe((0, import_install.default)("", {
+        await pipe(__npmInstall("", {
           cwd: folderPath,
           args: {
             silent: false
@@ -519,10 +496,10 @@ class SDocMap extends import_s_class.default {
         if (Object.keys(removedDependencies).length || Object.keys(removedDevDependencies).length) {
           packageJson.dependencies = __spreadValues(__spreadValues({}, packageJson.dependencies), removedDependencies);
           packageJson.devDependencies = __spreadValues(__spreadValues({}, packageJson.devDependencies), removedDevDependencies);
-          (0, import_writeJsonSync.default)(`${folderPath}/package.json`, packageJson);
+          __writeJsonSync(`${folderPath}/package.json`, packageJson);
         }
         emit("log", {
-          value: `<green>[success]</green> Snapshot "<yellow>${import_path.default.relative((0, import_packageRootDir.default)(), folderPath)}</yellow>" installed <green>successfully</green>`
+          value: `<green>[success]</green> Snapshot "<yellow>${__path.relative(__packageRootDir(), folderPath)}</yellow>" installed <green>successfully</green>`
         });
       }
       emit("log", {
@@ -535,48 +512,48 @@ class SDocMap extends import_s_class.default {
     });
   }
   snapshot(params) {
-    return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
-      const finalParams = (0, import_deepMerge.default)(import_SDocmapSnapshotParamsInterface.default.defaults(), params);
-      const duration = new import_s_duration.default();
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+      const finalParams = __deepMerge(__SDocmapSnapshotParamsInterface.defaults(), params);
+      const duration = new __SDuration();
       emit("log", {
         value: `<yellow>[snapshot]</yellow> Creating a docmap snapshot. This can take some time so please be patient...`
       });
-      if (!import_fs.default.existsSync(`${(0, import_packageRootDir.default)()}/package.json`)) {
+      if (!__fs.existsSync(`${__packageRootDir()}/package.json`)) {
         throw new Error(`<red>[${this.constructor.name}.snapshot]</red> Sorry but a package.json file is required in order to create a snapshot...`);
       }
-      if (!import_fs.default.existsSync(`${(0, import_packageRootDir.default)()}/docmap.json`)) {
+      if (!__fs.existsSync(`${__packageRootDir()}/docmap.json`)) {
         throw new Error(`<red>[${this.constructor.name}.snapshot]</red> Sorry but a docmap.json file is required in order to create a snapshot...`);
       }
-      const packageJson = (0, import_jsonSync.default)();
-      const docmapJson = (0, import_readJsonSync.default)(`${(0, import_packageRootDir.default)()}/docmap.json`);
-      const outDir = import_path.default.resolve(finalParams.outDir, packageJson.version);
-      (0, import_removeSync.default)(outDir);
-      (0, import_ensureDirSync.default)(outDir);
-      (0, import_copySync.default)(`${(0, import_packageRootDir.default)()}/package.json`, `${outDir}/package.json`);
-      (0, import_copySync.default)(`${(0, import_packageRootDir.default)()}/docmap.json`, `${outDir}/docmap.json`);
+      const packageJson = __packageJsonSync();
+      const docmapJson = __readJsonSync(`${__packageRootDir()}/docmap.json`);
+      const outDir = __path.resolve(finalParams.outDir, packageJson.version);
+      __removeSync(outDir);
+      __ensureDirSync(outDir);
+      __copySync(`${__packageRootDir()}/package.json`, `${outDir}/package.json`);
+      __copySync(`${__packageRootDir()}/docmap.json`, `${outDir}/docmap.json`);
       try {
-        (0, import_copySync.default)(`${(0, import_packageRootDir.default)()}/package-lock.json`, `${outDir}/package-lock.json`);
-        (0, import_copySync.default)(`${(0, import_packageRootDir.default)()}/yarn.lock`, `${outDir}/yarn.lock`);
+        __copySync(`${__packageRootDir()}/package-lock.json`, `${outDir}/package-lock.json`);
+        __copySync(`${__packageRootDir()}/yarn.lock`, `${outDir}/yarn.lock`);
       } catch (e) {
       }
       const fullMap = __spreadValues(__spreadValues({}, docmapJson.map), docmapJson.generated.map);
       Object.keys(fullMap).forEach((namespace) => {
         const docmapObj = fullMap[namespace];
-        const path = import_path.default.resolve((0, import_packageRootDir.default)(), docmapObj.relPath);
-        let content = import_fs.default.readFileSync(path, "utf8").toString();
+        const path = __path.resolve(__packageRootDir(), docmapObj.relPath);
+        let content = __fs.readFileSync(path, "utf8").toString();
         if (docmapObj.type === "markdown") {
         } else {
-          const docblock = new import_s_docblock.default(content, {
+          const docblock = new __SDocblock(content, {
             docblock: {
               renderMarkdown: false
             }
           });
           content = docblock.toString();
         }
-        (0, import_writeFileSync.default)(import_path.default.resolve(outDir, docmapObj.relPath), content);
+        __writeFileSync(__path.resolve(outDir, docmapObj.relPath), content);
       });
       emit("log", {
-        value: `<green>[save]</green> Snapshot saved under "<cyan>${import_path.default.relative(process.cwd(), outDir)}</cyan>"`
+        value: `<green>[save]</green> Snapshot saved under "<cyan>${__path.relative(process.cwd(), outDir)}</cyan>"`
       });
       emit("log", {
         value: `<green>[success]</green> Snapshot generated <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`
@@ -593,5 +570,6 @@ SDocMap.interfaces = {};
 SDocMap._cachedDocmapJson = {};
 SDocMap._registeredTagsProxy = {};
 var SDocMap_default = SDocMap;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SDocMap_default as default
+};

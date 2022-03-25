@@ -18,10 +18,6 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -31,15 +27,9 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SApp_exports = {};
-__export(SApp_exports, {
-  default: () => SApp
-});
-module.exports = __toCommonJS(SApp_exports);
-var import_get = __toESM(require("../../shared/object/get"), 1);
-var import_base64 = __toESM(require("../../shared/is/base64"), 1);
-var import_base642 = __toESM(require("../../shared/crypt/base64"), 1);
+import __get from "../../shared/object/get";
+import __isBase64 from "../../shared/is/base64";
+import __base64 from "../../shared/crypt/base64";
 let __decryptedConfig, __decryptedMeta;
 class SApp {
   constructor(settings = {}) {
@@ -55,17 +45,17 @@ class SApp {
   }
   config(path = null) {
     let config = window["_" + this.__settings.name + "Data"].config || {};
-    if ((0, import_base64.default)(config) && !__decryptedConfig) {
-      __decryptedConfig = import_base642.default.decrypt(config);
+    if (__isBase64(config) && !__decryptedConfig) {
+      __decryptedConfig = __base64.decrypt(config);
     }
-    return (0, import_get.default)(__decryptedConfig, path);
+    return __get(__decryptedConfig, path);
   }
   meta(path = null) {
     let meta = window["_" + this.__settings.name + "Data"].meta || {};
-    if ((0, import_base64.default)(meta) && !__decryptedMeta) {
-      __decryptedMeta = import_base642.default.decrypt(meta);
+    if (__isBase64(meta) && !__decryptedMeta) {
+      __decryptedMeta = __base64.decrypt(meta);
     }
-    return (0, import_get.default)(__decryptedMeta, path);
+    return __get(__decryptedMeta, path);
   }
   log(message, type = "info", transports = null) {
     return new Promise((resolve, reject) => {
@@ -75,22 +65,22 @@ class SApp {
           /* webpackChunkName: "log" */
           /* webpackMode: "lazy" */
           "../log/log"
-        ), 1)),
+        ))),
         Promise.resolve().then(() => __toESM(require(
           /* webpackChunkName: "isTransportRegistered" */
           /* webpackMode: "lazy" */
           "../log/isTransportRegistered"
-        ), 1)),
+        ))),
         Promise.resolve().then(() => __toESM(require(
           /* webpackChunkName: "getRegisteredTransports" */
           /* webpackMode: "lazy" */
           "../log/getRegisteredTransports"
-        ), 1)),
+        ))),
         Promise.resolve().then(() => __toESM(require(
           /* webpackChunkName: "registerTransport" */
           /* webpackMode: "lazy" */
           "../log/registerTransport"
-        ), 1))
+        )))
       ]).then((modules) => {
         const __log = modules[0], __isTransportRegistered = modules[1], __getRegisteredTransports = modules[2], __registerTransport = modules[3];
         const configTransports = this.config("log.frontend.transportsByType")[type] ? this.config("log.frontend.transportsByType")[type].split(" ") : [];
@@ -116,3 +106,6 @@ class SApp {
     });
   }
 }
+export {
+  SApp as default
+};

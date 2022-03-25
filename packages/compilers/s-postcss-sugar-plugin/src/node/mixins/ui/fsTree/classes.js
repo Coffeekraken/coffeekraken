@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,32 +14,10 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  dependencies: () => dependencies,
-  interface: () => postcssSugarPluginUiFsTreeClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_faker = __toESM(require("faker"));
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
-class postcssSugarPluginUiFsTreeClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __STheme from "@coffeekraken/s-theme";
+import __faker from "faker";
+class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
   static get _definition() {
     var _a;
     return {
@@ -60,7 +34,7 @@ class postcssSugarPluginUiFsTreeClassesInterface extends import_s_interface.defa
       defaultStyle: {
         type: "String",
         values: ["solid"],
-        default: (_a = import_s_theme.default.config("ui.fsTree.defaultStyle")) != null ? _a : "solid"
+        default: (_a = __STheme.config("ui.fsTree.defaultStyle")) != null ? _a : "solid"
       },
       scope: {
         type: {
@@ -73,9 +47,10 @@ class postcssSugarPluginUiFsTreeClassesInterface extends import_s_interface.defa
     };
   }
 }
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
 function dependencies() {
   return {
-    files: [`${(0, import_dirname.default)()}/fsTree.js`]
+    files: [`${__dirname()}/fsTree.js`]
   };
 }
 function classes_default({
@@ -99,37 +74,37 @@ function classes_default({
             *       <li class="active">
             *           <div>
             *               <i class="s-icon:folder-open"></i>
-            *               <span tabindex="0">${import_faker.default.name.findName()}</span>
+            *               <span tabindex="0">${__faker.name.findName()}</span>
             *           </div>
             *           <ul>
             *               <li>
             *                   <div>
             *                       <i class="s-icon:file"></i>
-            *                       <a tabindex="0">${import_faker.default.name.findName()}</a>
+            *                       <a tabindex="0">${__faker.name.findName()}</a>
             *                   </div>
             *               </li>
             *               <li class="active">
             *                   <div>
             *                       <i class="s-icon:folder-open"></i>
-            *                       <span tabindex="0">${import_faker.default.name.findName()}</span>
+            *                       <span tabindex="0">${__faker.name.findName()}</span>
             *                   </div>
                                 <ul>
                     *               <li>
                     *                   <div>
                     *                       <i class="s-icon:file-pdf"></i>
-                    *                       <a tabindex="0">${import_faker.default.name.findName()}</a>
+                    *                       <a tabindex="0">${__faker.name.findName()}</a>
                     *                   </div>
                     *               </li>
                     *               <li>
                     *                  <div>
                     *                       <i class="s-icon:file-code"></i>
-                    *                       <a tabindex="0">${import_faker.default.name.findName()}</a>
+                    *                       <a tabindex="0">${__faker.name.findName()}</a>
                     *                  </div>
                     *               </li>
                     *              <li>
                     *                   <div>
                     *                       <i class="s-icon:file-image"></i>
-                    *                       <a tabindex="0">${import_faker.default.name.findName()}</a>
+                    *                       <a tabindex="0">${__faker.name.findName()}</a>
                     *                   </div>
                     *               </li>
                     *           </ul>
@@ -137,20 +112,20 @@ function classes_default({
             *              <li>
             *                   <div>
             *                       <i class="s-icon:file-archive"></i>
-            *                       <a tabindex="0">${import_faker.default.name.findName()}</a>
+            *                       <a tabindex="0">${__faker.name.findName()}</a>
             *                   </div>
             *               </li>
             *           </ul>
             *           <li class="s-disabled">
             *               <div>
         *                       <i class="s-icon:file"></i>
-        *                       <a tabindex="0">${import_faker.default.name.findName()}</a>
+        *                       <a tabindex="0">${__faker.name.findName()}</a>
         *                  </div>
         *               </li>
             *           <li>
             *               <div>
         *                       <i class="s-icon:file-code"></i>
-        *                       <a tabindex="0">${import_faker.default.name.findName()}</a>
+        *                       <a tabindex="0">${__faker.name.findName()}</a>
         *                 </div>
         *               </li>
             *       </li>
@@ -208,21 +183,21 @@ function classes_default({
             * @namespace      sugar.css.ui.list
             * @type           CssClass
             * 
-            * This class represent an "<yellow>${import_s_theme.default.config("ui.fsTree.defaultStyle")}</yellow>" filesystem tree
+            * This class represent an "<yellow>${__STheme.config("ui.fsTree.defaultStyle")}</yellow>" filesystem tree
             * 
             * @feature       Support RTL
             * 
             * @example        html
             * <ul class="s-fs-tree">
             *       <li>
-            *          <i class="s-icon:folder"></i> ${import_faker.default.name.findName()}
+            *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
             *          <ul>
-            *               <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-            *               <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-            *              <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
+            *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
             *           </ul>
-            *           <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-            *           <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
+            *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
             *       </li>
             *   </ul>
             * 
@@ -247,14 +222,14 @@ function classes_default({
                 * @example        html
                 * <ul class="s-fs-tree${style === finalParams.defaultStyle ? "" : `:${style}`}">
                 *       <li>
-                *          <i class="s-icon:folder"></i> ${import_faker.default.name.findName()}
+                *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
                 *          <ul>
-                *               <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-                *               <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-                *              <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
+                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
                 *           </ul>
-                *           <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-                *           <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
+                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
                 *       </li>
                 *   </ul>
                 * 
@@ -280,14 +255,14 @@ function classes_default({
                 * @example        html
                 * <ul class="s-fs-tree${shape === finalParams.defaultShape ? "" : `:${shape}`}">
                 *       <li>
-                *          <i class="s-icon:folder"></i> ${import_faker.default.name.findName()}
+                *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
                 *          <ul>
-                *               <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-                *               <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-                *              <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
+                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
                 *           </ul>
-                *           <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-                *           <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
+                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
                 *       </li>
                 *   </ul>
                 * 
@@ -315,14 +290,14 @@ function classes_default({
             * <div class="s-rhythm:vertical">
             *   <ul class="s-fs-tree">
             *       <li>
-            *          <i class="s-icon:folder"></i> ${import_faker.default.name.findName()}
+            *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
             *          <ul>
-            *               <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-            *               <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-            *              <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
+            *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
             *           </ul>
-            *           <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
-            *           <li><i class="s-icon:file"></i> ${import_faker.default.name.findName()}</li>
+            *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
             *       </li>
             *   </ul>
             * </div>
@@ -333,15 +308,15 @@ function classes_default({
        `).code(`
             @sugar.rhythm.vertical {
                 .s-fs-tree {
-                    ${import_s_theme.default.jsObjectToCssProperties(import_s_theme.default.config("ui.fsTree.rhythmVertical"))}
+                    ${__STheme.jsObjectToCssProperties(__STheme.config("ui.fsTree.rhythmVertical"))}
                 } 
             }
         `);
   }
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
+  classes_default as default,
   dependencies,
-  interface
-});
+  postcssSugarPluginUiFsTreeClassesInterface as interface
+};

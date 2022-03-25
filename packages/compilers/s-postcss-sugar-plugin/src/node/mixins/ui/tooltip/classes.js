@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,32 +14,10 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  dependencies: () => dependencies,
-  interface: () => postcssSugarPluginUiTooltipClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_faker = __toESM(require("faker"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
-class postcssSugarPluginUiTooltipClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __faker from "faker";
+import __STheme from "@coffeekraken/s-theme";
+class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {
   static get _definition() {
     return {
       styles: {
@@ -59,12 +33,12 @@ class postcssSugarPluginUiTooltipClassesInterface extends import_s_interface.def
       defaultStyle: {
         type: "String",
         values: ["solid"],
-        default: import_s_theme.default.config("ui.tooltip.defaultStyle")
+        default: __STheme.config("ui.tooltip.defaultStyle")
       },
       defaultShape: {
         type: "String",
         values: ["default", "square", "pill"],
-        default: import_s_theme.default.config("ui.tooltip.defaultShape")
+        default: __STheme.config("ui.tooltip.defaultShape")
       },
       scope: {
         type: {
@@ -77,9 +51,10 @@ class postcssSugarPluginUiTooltipClassesInterface extends import_s_interface.def
     };
   }
 }
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
 function dependencies() {
   return {
-    files: [`${(0, import_dirname.default)()}/tooltip.js`]
+    files: [`${__dirname()}/tooltip.js`]
   };
 }
 function classes_default({
@@ -127,19 +102,19 @@ function classes_default({
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${finalParams.defaultStyle === style ? "" : `:${style}`} s-color:accent" s-floating>
-                *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+                *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${finalParams.defaultStyle === style ? "" : `:${style}`} s-color:complementary" s-floating>
-                *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+                *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${finalParams.defaultStyle === style ? "" : `:${style}`} s-color:info" s-floating>
-                *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+                *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
             `;
@@ -150,19 +125,19 @@ function classes_default({
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${finalParams.defaultShape === shape ? "" : `:${shape}`} s-color:accent" s-floating>
-                *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+                *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${finalParams.defaultShape === shape ? "" : `:${shape}`} s-color:complementary" s-floating>
-                *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+                *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${finalParams.defaultShape === shape ? "" : `:${shape}`} s-color:info" s-floating>
-                *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+                *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
             `;
@@ -172,25 +147,25 @@ function classes_default({
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Block start (default)</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:accent">
-        *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Inline end</a>
         *       <div class="s-tooltip:right s-white-space:nowrap s-color:accent">
-        *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Block end</a>
         *       <div class="s-tooltip:bottom s-white-space:nowrap s-color:accent">
-        *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Inline start</a>
         *       <div class="s-tooltip:left s-white-space:nowrap s-color:accent">
-        *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         * 
@@ -198,25 +173,25 @@ function classes_default({
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Accent</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:accent" s-floating>
-        *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Complementary</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:complementary" s-floating>
-        *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Error</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:error" s-floating>
-        *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Info</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:info" s-floating>
-        *           ${import_faker.default.name.title()} ${import_faker.default.name.findName()}
+        *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         * 
@@ -480,8 +455,8 @@ function classes_default({
     `);
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
+  classes_default as default,
   dependencies,
-  interface
-});
+  postcssSugarPluginUiTooltipClassesInterface as interface
+};

@@ -1,0 +1,37 @@
+{
+    "include": [
+        "src/**/*.ts",
+        "packages/*/*/src/config/**/*.ts",
+        "packages/*/*/src/cli/**/*.ts",
+        "packages/*/*/src/js/**/*.ts",
+        "packages/*/*/src/node/**/*.ts",
+        "packages/*/*/src/shared/**/*.ts",
+        "packages/*/*/.local/.sugar/**/*.ts",
+        "packages/*/*/.sugar/**/*.ts"
+    ],
+    "exclude": [
+        "/**/lib",
+        "/node_modules/**",
+        "/**/__wip__",
+        "/**/__old__",
+        "/**/__tests__.wip"
+    ],
+    "compilerOptions": {
+        "incremental": false,
+        "allowJs": true,
+        "strict": true,
+        "inlineSourceMap": true,
+        "traceResolution": false,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": false,
+        "noImplicitAny": false,
+        "noStrictGenericChecks": false,
+        "allowSyntheticDefaultImports": true,
+        "lib": ["es2020", "DOM"],
+        "target": "es6",
+        "module": "esnext",
+        "moduleResolution": "node"
+    }
+}

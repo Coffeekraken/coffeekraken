@@ -1,39 +1,13 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SActivateFeature_exports = {};
-__export(SActivateFeature_exports, {
-  default: () => SActivateFeature,
-  define: () => define
-});
-module.exports = __toCommonJS(SActivateFeature_exports);
-var import_s_feature = __toESM(require("@coffeekraken/s-feature"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_SActivateFeatureInterface = __toESM(require("./interface/SActivateFeatureInterface"), 1);
-var import_unique = __toESM(require("@coffeekraken/sugar/shared/array/unique"), 1);
-var import_querySelectorLive = __toESM(require("@coffeekraken/sugar/js/dom/query/querySelectorLive"), 1);
-class SActivateFeature extends import_s_feature.default {
+import __SFeature from "@coffeekraken/s-feature";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SActivateFeatureInterface from "./interface/SActivateFeatureInterface";
+import __unique from "@coffeekraken/sugar/shared/array/unique";
+import __querySelectorLive from "@coffeekraken/sugar/js/dom/query/querySelectorLive";
+class SActivateFeature extends __SFeature {
   constructor(name, node, settings) {
-    super(name, node, (0, import_deepMerge.default)({
+    super(name, node, __deepMerge({
       componentUtils: {
-        interface: import_SActivateFeatureInterface.default
+        interface: __SActivateFeatureInterface
       },
       feature: {}
     }, settings != null ? settings : {}));
@@ -61,7 +35,7 @@ class SActivateFeature extends import_s_feature.default {
     else
       this._$targets = [this.node];
     if (this.props.group) {
-      (0, import_querySelectorLive.default)(`[${this.name}][group="${this.props.group}"]`, ($elm) => {
+      __querySelectorLive(`[${this.name}][group="${this.props.group}"]`, ($elm) => {
         var _a, _b;
         if ((_a = this._$groupElements) == null ? void 0 : _a.includes($elm))
           return;
@@ -74,7 +48,7 @@ class SActivateFeature extends import_s_feature.default {
     }
     this._$triggerers.forEach(($triggerer) => {
       const triggererTriggers = $triggerer.hasAttribute("trigger") ? $triggerer.getAttribute("trigger").split(",").map((l) => l.trim()) : [];
-      const triggers = (0, import_unique.default)([...this.props.trigger, ...triggererTriggers]);
+      const triggers = __unique([...this.props.trigger, ...triggererTriggers]);
       triggers.forEach((trigger) => {
         if (trigger.match(/^event:/)) {
           this.node.addEventListener("actual", (e) => {
@@ -232,5 +206,9 @@ class SActivateFeature extends import_s_feature.default {
   }
 }
 function define(props = {}, name = "s-activate") {
-  import_s_feature.default.defineFeature(name, SActivateFeature, props);
+  __SFeature.defineFeature(name, SActivateFeature, props);
 }
+export {
+  SActivateFeature as default,
+  define
+};

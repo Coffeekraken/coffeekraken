@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,27 +14,8 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var get_exports = {};
-__export(get_exports, {
-  default: () => get_default
-});
-module.exports = __toCommonJS(get_exports);
-var import_unquote = __toESM(require("../string/unquote"), 1);
-var import_unique = __toESM(require("@coffeekraken/sugar/shared/array/unique"), 1);
+import __unquote from "../string/unquote";
+import __unique from "@coffeekraken/sugar/shared/array/unique";
 function get(obj, path, settings = {}) {
   settings = __spreadValues({}, settings);
   if (obj[path] !== void 0)
@@ -58,7 +35,7 @@ function get(obj, path, settings = {}) {
       potentialPaths.push([...before, ...after.filter((a) => !a.match(/\?$/))].join("."));
     }
   }
-  potentialPaths = (0, import_unique.default)(potentialPaths.map((s) => s.replace(/\?/gm, "")));
+  potentialPaths = __unique(potentialPaths.map((s) => s.replace(/\?/gm, "")));
   for (let i = 0; i < potentialPaths.length; i++) {
     const path2 = potentialPaths[i];
     const result = __get(obj, path2, settings);
@@ -72,7 +49,7 @@ function __get(obj, path, settings = {}) {
     return obj[path];
   if (!path || path === "" || path === ".")
     return obj;
-  const a = path.split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm).map((p) => (0, import_unquote.default)(p));
+  const a = path.split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm).map((p) => __unquote(p));
   let o = obj;
   while (a.length) {
     const n = a.shift().replace(/\?$/, "");
@@ -84,5 +61,6 @@ function __get(obj, path, settings = {}) {
   return o;
 }
 var get_default = get;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  get_default as default
+};

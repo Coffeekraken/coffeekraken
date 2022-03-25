@@ -1,72 +1,47 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var fonticons_exports = {};
-__export(fonticons_exports, {
-  default: () => fonticons_default
-});
-module.exports = __toCommonJS(fonticons_exports);
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
-var import_extension = __toESM(require("@coffeekraken/sugar/node/fs/extension"));
-var import_ensureDirSync = __toESM(require("@coffeekraken/sugar/node/fs/ensureDirSync"));
-var import_folderHash = __toESM(require("@coffeekraken/sugar/node/fs/folderHash"));
-var import_writeFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeFileSync"));
-var import_packageCacheDir = __toESM(require("@coffeekraken/sugar/node/path/packageCacheDir"));
-var import_srcCssDir = __toESM(require("@coffeekraken/sugar/node/path/srcCssDir"));
-var import_fantasticon = require("fantasticon");
-var import_oslllo_svg_fixer = __toESM(require("oslllo-svg-fixer"));
-var import_fs = __toESM(require("fs"));
-var import_path = __toESM(require("path"));
-var import_postcss = __toESM(require("postcss"));
+import __SDuration from "@coffeekraken/s-duration";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __extension from "@coffeekraken/sugar/node/fs/extension";
+import __ensureDirSync from "@coffeekraken/sugar/node/fs/ensureDirSync";
+import __folderHash from "@coffeekraken/sugar/node/fs/folderHash";
+import __writeFileSync from "@coffeekraken/sugar/node/fs/writeFileSync";
+import __packageCacheDir from "@coffeekraken/sugar/node/path/packageCacheDir";
+import __srcCssDir from "@coffeekraken/sugar/node/path/srcCssDir";
+import { generateFonts } from "fantasticon";
+import __svgFixer from "oslllo-svg-fixer";
+import __fs from "fs";
+import __path from "path";
+import __postcss from "postcss";
 async function fonticons_default({ root, sharedData }) {
-  const duration = new import_s_duration.default();
+  const duration = new __SDuration();
   if (!sharedData.icons || !sharedData.icons.length)
     return;
-  const fantasticonConfig = import_s_sugar_config.default.get("icons.fantasticon");
-  const importFontUrl = import_path.default.relative((0, import_srcCssDir.default)(), fantasticonConfig.outputDir);
-  root.nodes.unshift(import_postcss.default.parse(`
+  const fantasticonConfig = __SSugarConfig.get("icons.fantasticon");
+  const importFontUrl = __path.relative(__srcCssDir(), fantasticonConfig.outputDir);
+  root.nodes.unshift(__postcss.parse(`
         @import url(${importFontUrl}/${fantasticonConfig.name}.css);
     `));
-  const inputDir = `${(0, import_packageCacheDir.default)()}/icons/sugarIcons`;
+  const inputDir = `${__packageCacheDir()}/icons/sugarIcons`;
   try {
-    import_fs.default.rmSync(inputDir, { recursive: true });
+    __fs.rmSync(inputDir, { recursive: true });
   } catch (e) {
   }
-  (0, import_ensureDirSync.default)(inputDir);
-  (0, import_ensureDirSync.default)(fantasticonConfig.outputDir);
+  __ensureDirSync(inputDir);
+  __ensureDirSync(fantasticonConfig.outputDir);
   sharedData.icons.forEach((iconObj) => {
-    import_fs.default.copyFileSync(iconObj.path, `${inputDir}/${iconObj.as}.${(0, import_extension.default)(iconObj.path)}`);
+    __fs.copyFileSync(iconObj.path, `${inputDir}/${iconObj.as}.${__extension(iconObj.path)}`);
   });
-  const folderHash = (0, import_folderHash.default)(inputDir);
-  const hashCacheFilePath = `${(0, import_packageCacheDir.default)()}/postcss/iconsFolderHash.txt`;
-  if (import_fs.default.existsSync(hashCacheFilePath)) {
-    const cachedFolderHash = import_fs.default.readFileSync(hashCacheFilePath, "utf8").toString();
+  const folderHash = __folderHash(inputDir);
+  const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
+  if (__fs.existsSync(hashCacheFilePath)) {
+    const cachedFolderHash = __fs.readFileSync(hashCacheFilePath, "utf8").toString();
     if (cachedFolderHash === folderHash) {
       console.log(`<green>[fonticons]</green> All icon(s) are up to date`);
       return;
     }
   }
   console.log(`<yellow>[fonticons]</yellow> Generate icons font...`);
-  const fixResult = await (0, import_oslllo_svg_fixer.default)(inputDir, inputDir).fix();
-  const result = await (0, import_fantasticon.generateFonts)({
+  const fixResult = await __svgFixer(inputDir, inputDir).fix();
+  const result = await generateFonts({
     inputDir,
     outputDir: fantasticonConfig.outputDir,
     name: fantasticonConfig.name,
@@ -74,7 +49,7 @@ async function fonticons_default({ root, sharedData }) {
     selector: ".s-icon",
     prefix: "--"
   });
-  const iconsFilenames = import_fs.default.readdirSync(inputDir);
+  const iconsFilenames = __fs.readdirSync(inputDir);
   if (!iconsFilenames.length)
     return;
   const iconsSelectorsArrayBefore = [], iconsSelectorsArray = [];
@@ -83,7 +58,7 @@ async function fonticons_default({ root, sharedData }) {
     iconsSelectorsArray.push(`.s-icon--${filename.replace(/\.svg$/, "")}`);
   });
   const cssPath = `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`;
-  let cssStr = import_fs.default.readFileSync(cssPath, "utf8").toString();
+  let cssStr = __fs.readFileSync(cssPath, "utf8").toString();
   cssStr = cssStr.replace(/\.s-icon\.--/gm, ".s-icon-");
   cssStr = cssStr.replace(/\.s-icon:before\s?{/, `${iconsSelectorsArrayBefore.join(",")} {
 position: relative;
@@ -97,9 +72,10 @@ position: relative;
     "vertical-align: middle;",
     "}"
   ].join("\n");
-  import_fs.default.writeFileSync(cssPath, cssStr);
-  (0, import_writeFileSync.default)(hashCacheFilePath, folderHash);
+  __fs.writeFileSync(cssPath, cssStr);
+  __writeFileSync(hashCacheFilePath, folderHash);
   console.log(`<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${duration.end().formatedDuration}</cyan>`);
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  fonticons_default as default
+};

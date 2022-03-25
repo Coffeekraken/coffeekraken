@@ -1,29 +1,4 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var dateTypeDescriptor_exports = {};
-__export(dateTypeDescriptor_exports, {
-  default: () => dateTypeDescriptor_default
-});
-module.exports = __toCommonJS(dateTypeDescriptor_exports);
-var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"), 1);
+import __isPlainObject from "@coffeekraken/sugar/shared/is/plainObject";
 const descriptor = {
   name: "Date",
   id: "date",
@@ -35,7 +10,7 @@ const descriptor = {
     if (typeof value === "number") {
       return new Date(Math.round(value));
     }
-    if ((0, import_plainObject.default)(value)) {
+    if (__isPlainObject(value)) {
       const now = new Date();
       let year = now.getFullYear(), month = 0, day = 1, hours = 0, minutes = 0, seconds = 0, milliseconds = 0;
       if (value.year && typeof value.year === "number") {
@@ -65,5 +40,6 @@ const descriptor = {
   }
 };
 var dateTypeDescriptor_default = descriptor;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  dateTypeDescriptor_default as default
+};

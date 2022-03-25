@@ -21,10 +21,6 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -34,89 +30,83 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SPostcssBuilder_exports = {};
-__export(SPostcssBuilder_exports, {
-  default: () => SPostcssBuilder
-});
-module.exports = __toCommonJS(SPostcssBuilder_exports);
-var import_s_builder = __toESM(require("@coffeekraken/s-builder"), 1);
-var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
-var import_s_glob = __toESM(require("@coffeekraken/s-glob"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_writeFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeFileSync"), 1);
-var import_expandPleasantCssClassnames = __toESM(require("@coffeekraken/sugar/shared/html/expandPleasantCssClassnames"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
-var import_csso = __toESM(require("csso"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_SPostcssBuilderBuildParamsInterface = __toESM(require("./interface/SPostcssBuilderBuildParamsInterface"), 1);
-var import_postcss = __toESM(require("postcss"), 1);
-var import_purgecss = require("purgecss");
-var import_jsonSync = __toESM(require("@coffeekraken/sugar/node/package/jsonSync"), 1);
-var import_resolvePackagePath = __toESM(require("@coffeekraken/sugar/node/esm/resolvePackagePath"), 1);
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
-class SPostcssBuilder extends import_s_builder.default {
+import __SBuilder from "@coffeekraken/s-builder";
+import __SFile from "@coffeekraken/s-file";
+import __SGlob from "@coffeekraken/s-glob";
+import __SPromise from "@coffeekraken/s-promise";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __writeFileSync from "@coffeekraken/sugar/node/fs/writeFileSync";
+import __expandPleasantCssClassnames from "@coffeekraken/sugar/shared/html/expandPleasantCssClassnames";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SLog from "@coffeekraken/s-log";
+import __csso from "csso";
+import __path from "path";
+import __fs from "fs";
+import __SPostcssBuilderBuildParamsInterface from "./interface/SPostcssBuilderBuildParamsInterface";
+import __postcss from "postcss";
+import { PurgeCSS } from "purgecss";
+import __packageJson from "@coffeekraken/sugar/node/package/jsonSync";
+import __resolvePackagePath from "@coffeekraken/sugar/node/esm/resolvePackagePath";
+import __SDuration from "@coffeekraken/s-duration";
+class SPostcssBuilder extends __SBuilder {
   get postcssBuilderSettings() {
     return this._settings.postcssBuilder;
   }
   constructor(settings) {
-    super((0, import_deepMerge.default)({
-      postcssBuilder: __spreadValues({}, import_s_sugar_config.default.get("postcssBuilder"))
+    super(__deepMerge({
+      postcssBuilder: __spreadValues({}, __SSugarConfig.get("postcssBuilder"))
     }, settings != null ? settings : {}));
   }
   _build(params) {
-    return new import_s_promise.default(async ({ resolve, reject, emit }) => {
+    return new __SPromise(async ({ resolve, reject, emit }) => {
       var _a, _b;
       let finalCss;
-      const defaultParams = import_SPostcssBuilderBuildParamsInterface.default.defaults();
+      const defaultParams = __SPostcssBuilderBuildParamsInterface.defaults();
       if (params.prod) {
         params.minify = true;
         params.purge = true;
       }
       let src = params.input, from = void 0;
       try {
-        src = import_fs.default.readFileSync(params.input, "utf8").toString();
+        src = __fs.readFileSync(params.input, "utf8").toString();
         from = params.input;
       } catch (e) {
       }
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: `<yellow>[build]</yellow> Starting Postcss Build`
       });
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: `<yellow>\u25CB</yellow> Environment : ${params.prod ? "<green>production</green>" : "<yellow>development</yellow>"}`
       });
       if (params.output) {
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
-          value: `<yellow>\u25CB</yellow> Output      : <cyan>${import_path.default.relative(process.cwd(), params.output)}</cyan>`
+          type: __SLog.TYPE_INFO,
+          value: `<yellow>\u25CB</yellow> Output      : <cyan>${__path.relative(process.cwd(), params.output)}</cyan>`
         });
       }
       if (params.saveDev && params.output) {
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
-          value: `<yellow>\u25CB</yellow> Output dev  : <cyan>${import_path.default.relative(process.cwd(), params.output.replace(/\.css/, ".dev.css"))}</cyan>`
+          type: __SLog.TYPE_INFO,
+          value: `<yellow>\u25CB</yellow> Output dev  : <cyan>${__path.relative(process.cwd(), params.output.replace(/\.css/, ".dev.css"))}</cyan>`
         });
       }
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: `<yellow>\u25CB</yellow> Minify      : ${params.minify ? "<green>true</green>" : "<red>false</red>"}`
       });
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: `<yellow>\u25CB</yellow> Purge       : ${params.purge ? "<green>true</green>" : "<red>false</red>"}`
       });
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: `<yellow>\u25CB</yellow> Plugins     :`
       });
       this.postcssBuilderSettings.postcss.plugins.forEach((pluginName) => {
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>|------------</yellow> : ${pluginName}`
         });
       });
@@ -134,32 +124,32 @@ class SPostcssBuilder extends import_s_builder.default {
           plugins.push(p);
         }
       }
-      const compileDuration = new import_s_duration.default();
+      const compileDuration = new __SDuration();
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: `<yellow>[postcss]</yellow> Compiling css...`
       });
       let result;
-      result = await (0, import_postcss.default)(plugins).process(src != null ? src : "", {
+      result = await __postcss(plugins).process(src != null ? src : "", {
         from
       });
       if (!result.css) {
         throw new Error(`<red>[${this.constructor.name}.build]</red> Something went wrong...`);
       }
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: `<green>[postcss]</green> Compiling dev css finished <green>successfully</green> in <yellow>${compileDuration.end().formatedDuration}</yellow>`
       });
       finalCss = result.css;
       if (params.saveDev && params.output) {
-        (0, import_writeFileSync.default)(params.output.replace(/\.css$/, ".dev.css"), finalCss);
-        const file = new import_s_file.default(params.output.replace(/\.css$/, ".dev.css"));
+        __writeFileSync(params.output.replace(/\.css$/, ".dev.css"), finalCss);
+        const file = new __SFile(params.output.replace(/\.css$/, ".dev.css"));
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<green>[save]</green> Dev file "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`
         });
       }
-      const purgeDuration = new import_s_duration.default();
+      const purgeDuration = new __SDuration();
       if (params.purge) {
         let mergePurgecssSettings = function(purgecss) {
           if (!purgecss.safelist)
@@ -203,7 +193,7 @@ class SPostcssBuilder extends import_s_builder.default {
           }
         };
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<green>[purge]</green> Purging unused css`
         });
         const purgeCssSettings = __spreadProps(__spreadValues({}, this.postcssBuilderSettings.purgecss), {
@@ -218,20 +208,20 @@ class SPostcssBuilder extends import_s_builder.default {
         const content = [];
         const globs = [];
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>[purge]</yellow> Searching for "<cyan>.spec.js</cyan>" files to grab "<magenta>purgecss</magenta>" special configs`
         });
-        const packageJson = (0, import_jsonSync.default)();
+        const packageJson = __packageJson();
         if (packageJson.dependencies) {
           for (let packageName of Object.keys(packageJson.dependencies)) {
             try {
-              const packagePath = (0, import_resolvePackagePath.default)(packageName);
+              const packagePath = __resolvePackagePath(packageName);
               if (!packagePath)
                 continue;
-              const specsFiles = import_s_glob.default.resolve(`${packagePath}/**/*.spec.js`);
+              const specsFiles = __SGlob.resolve(`${packagePath}/**/*.spec.js`);
               for (let file of specsFiles) {
                 try {
-                  if (!import_fs.default.existsSync(file.path))
+                  if (!__fs.existsSync(file.path))
                     continue;
                   const purgecss = (await Promise.resolve().then(() => __toESM(require(file.path)))).purgecss;
                   mergePurgecssSettings(purgecss);
@@ -242,10 +232,10 @@ class SPostcssBuilder extends import_s_builder.default {
             }
           }
         }
-        const srcJsFiles = import_s_glob.default.resolve(`${import_s_sugar_config.default.get("storage.src.jsDir")}/**/*.spec.js`);
+        const srcJsFiles = __SGlob.resolve(`${__SSugarConfig.get("storage.src.jsDir")}/**/*.spec.js`);
         for (let file of srcJsFiles) {
           try {
-            if (!import_fs.default.existsSync(file.path))
+            if (!__fs.existsSync(file.path))
               continue;
             const purgecss = (await Promise.resolve().then(() => __toESM(require(file.path)))).purgecss;
             mergePurgecssSettings(purgecss);
@@ -257,23 +247,23 @@ class SPostcssBuilder extends import_s_builder.default {
             globs.push(contentObj);
           } else {
             if (contentObj.raw) {
-              contentObj.raw = (0, import_expandPleasantCssClassnames.default)(contentObj.raw);
+              contentObj.raw = __expandPleasantCssClassnames(contentObj.raw);
             }
             content.push(contentObj);
           }
         });
-        const files = import_s_glob.default.resolve(globs);
+        const files = __SGlob.resolve(globs);
         files.forEach((file) => {
           content.push({
             extension: file.extension,
-            raw: (0, import_expandPleasantCssClassnames.default)(file.content)
+            raw: __expandPleasantCssClassnames(file.content)
           });
         });
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>[purge]</yellow> Purging final css...`
         });
-        const purgeCssResult = await new import_purgecss.PurgeCSS().purge(__spreadProps(__spreadValues({}, purgeCssSettings), {
+        const purgeCssResult = await new PurgeCSS().purge(__spreadProps(__spreadValues({}, purgeCssSettings), {
           content,
           css: [
             {
@@ -282,40 +272,40 @@ class SPostcssBuilder extends import_s_builder.default {
           ]
         }));
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<green>[purge]</green> Purging final css finished <green>successfully</green> in <yellow>${purgeDuration.end().formatedDuration}</yellow>`
         });
         finalCss = purgeCssResult[0].css;
       }
       if (params.minify) {
-        const minifyDuration = new import_s_duration.default();
+        const minifyDuration = new __SDuration();
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>[minify]</yellow> Minifiying css...`
         });
-        finalCss = import_csso.default.minify(finalCss, {
+        finalCss = __csso.minify(finalCss, {
           restructure: true
         }).css;
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<green>[minify]</green> Minifiying final css finished <green>successfully</green> in <yellow>${minifyDuration.end().formatedDuration}</yellow>`
         });
       }
       if (params.output) {
-        (0, import_writeFileSync.default)(params.output, finalCss);
-        const file = new import_s_file.default(params.output);
+        __writeFileSync(params.output, finalCss);
+        const file = new __SFile(params.output);
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`
         });
       }
       const res = {
-        outputFile: params.output ? import_s_file.default.new(params.output) : void 0,
+        outputFile: params.output ? __SFile.new(params.output) : void 0,
         css: finalCss,
         map: null
       };
       if (from)
-        res.inputFile = import_s_file.default.new(from);
+        res.inputFile = __SFile.new(from);
       resolve(res);
     }, {
       metas: {
@@ -324,5 +314,6 @@ class SPostcssBuilder extends import_s_builder.default {
     });
   }
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SPostcssBuilder as default
+};

@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,35 +13,28 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var postcssSugarPlugin_exports = {};
-__export(postcssSugarPlugin_exports, {
-  default: () => postcssSugarPlugin_default,
-  postcss: () => postcss
-});
-module.exports = __toCommonJS(postcssSugarPlugin_exports);
-var import_s_bench = __toESM(require("@coffeekraken/s-bench"));
-var import_s_sugar_json = __toESM(require("@coffeekraken/s-sugar-json"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
-var import_packageCacheDir = __toESM(require("@coffeekraken/sugar/node/path/packageCacheDir"));
-var import_packageRoot = __toESM(require("@coffeekraken/sugar/node/path/packageRoot"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"));
-var import_unquote = __toESM(require("@coffeekraken/sugar/shared/string/unquote"));
-var import_fs = __toESM(require("fs"));
-var import_glob = __toESM(require("glob"));
-var import_path = __toESM(require("path"));
-var import_postcss = __toESM(require("postcss"));
-var import_folderHash = __toESM(require("@coffeekraken/sugar/node/fs/folderHash"));
-var import_getRoot = __toESM(require("./utils/getRoot"));
-var import_folderPath = __toESM(require("@coffeekraken/sugar/node/fs/folderPath"));
-var import_fileHash = __toESM(require("@coffeekraken/sugar/node/fs/fileHash"));
-var import_objectHash = __toESM(require("@coffeekraken/sugar/shared/object/objectHash"));
-var import_writeFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeFileSync"));
+import __SBench from "@coffeekraken/s-bench";
+import __SSugarJson from "@coffeekraken/s-sugar-json";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __packageCacheDir from "@coffeekraken/sugar/node/path/packageCacheDir";
+import __packageRoot from "@coffeekraken/sugar/node/path/packageRoot";
+import __STheme from "@coffeekraken/s-theme";
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __unquote from "@coffeekraken/sugar/shared/string/unquote";
+import __fs from "fs";
+import __glob from "glob";
+import __path from "path";
+import __postcss from "postcss";
+import __folderHash from "@coffeekraken/sugar/node/fs/folderHash";
+import __getRoot from "./utils/getRoot";
+import __folderPath from "@coffeekraken/sugar/node/fs/folderPath";
+import __fileHash from "@coffeekraken/sugar/node/fs/fileHash";
+import __objectHash from "@coffeekraken/sugar/shared/object/objectHash";
+import __writeFileSync from "@coffeekraken/sugar/node/fs/writeFileSync";
 let _mixinsPaths;
 const mixinsStack = {}, functionsStack = {};
-let pluginHash = (0, import_folderHash.default)(import_path.default.resolve((0, import_dirname.default)(), "../../.."), {
+let pluginHash = __folderHash(__path.resolve(__dirname(), "../../.."), {
   include: {
     ctime: true
   }
@@ -54,10 +43,10 @@ let loadedPromise, alreadyLoaded = false;
 const _cacheObjById = {};
 pluginHash = "hhh";
 const plugin = (settings = {}) => {
-  settings = (0, import_deepMerge.default)({
+  settings = __deepMerge({
     target: "prod",
     inlineImport: true,
-    cache: import_s_sugar_config.default.get("postcssSugarPlugin.cache")
+    cache: __SSugarConfig.get("postcssSugarPlugin.cache")
   }, settings);
   settings.cache = false;
   if (settings.target !== "vite") {
@@ -91,7 +80,7 @@ const plugin = (settings = {}) => {
     _cacheObjById[id].hash = hash;
     _cacheObjById[id].content = content;
     const cachePath = getCacheFilePath(hash);
-    if (!import_fs.default.existsSync(cachePath)) {
+    if (!__fs.existsSync(cachePath)) {
       console.log(`<yellow>[cache]</yellow> Caching object "<cyan>${id}</cyan>"`);
       const returned = `
                 /* CACHE:${hash} */
@@ -102,7 +91,7 @@ const plugin = (settings = {}) => {
     }
     console.log(`<green>[postcss]</green> Object "<cyan>${id}</cyan>" taken from cache`);
     try {
-      const returned = import_fs.default.readFileSync(cachePath, "utf8").toString();
+      const returned = __fs.readFileSync(cachePath, "utf8").toString();
       _cacheObjById[id].return = returned;
       return returned;
     } catch (e) {
@@ -111,7 +100,7 @@ const plugin = (settings = {}) => {
   }
   function getCacheFilePath(cacheId) {
     const fileName = `${cacheId}.css`;
-    return `${(0, import_packageCacheDir.default)()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
+    return `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
   }
   function applyNoScopes(scopes, fromNode) {
     const noScopeRule = findUp(fromNode, (node) => {
@@ -140,7 +129,7 @@ const plugin = (settings = {}) => {
         if (typeof n === "string") {
           finalNodes = [
             ...finalNodes,
-            ...(_a = import_postcss.default.parse(n).nodes) != null ? _a : []
+            ...(_a = __postcss.parse(n).nodes) != null ? _a : []
           ];
         } else {
           finalNodes.push(n);
@@ -159,7 +148,7 @@ const plugin = (settings = {}) => {
   };
   const postProcessorsRegisteredFn = [];
   async function _loadFolder(folderPath, type) {
-    const paths = import_glob.default.sync(`${folderPath}/**/*.js`, {
+    const paths = __glob.sync(`${folderPath}/**/*.js`, {
       cwd: ""
     });
     for (let i = 0; i < paths.length; i++) {
@@ -251,7 +240,7 @@ const plugin = (settings = {}) => {
       return loadedPromise;
     loadedPromise = new Promise(async (resolve, reject) => {
       var _a, _b, _c, _d;
-      const sugarJsonInstance = new import_s_sugar_json.default();
+      const sugarJsonInstance = new __SSugarJson();
       const sugarJson = await sugarJsonInstance.read();
       for (let i = 0; i < Object.keys(sugarJson).length; i++) {
         const packageName = Object.keys(sugarJson)[i];
@@ -263,7 +252,7 @@ const plugin = (settings = {}) => {
           const folderObj = mixinsFolders[j];
           if (!folderObj.path)
             continue;
-          const finalPath = import_path.default.resolve(packageSugarJson.metas.folderPath, folderObj.path);
+          const finalPath = __path.resolve(packageSugarJson.metas.folderPath, folderObj.path);
           await _loadFolder(finalPath, "mixins");
         }
         const functionsFolders = (_d = (_c = packageSugarJson.postcss.folders) == null ? void 0 : _c.functions) != null ? _d : [];
@@ -271,12 +260,12 @@ const plugin = (settings = {}) => {
           const folderObj = functionsFolders[j];
           if (!folderObj.path)
             continue;
-          const finalPath = import_path.default.resolve(packageSugarJson.metas.folderPath, folderObj.path);
+          const finalPath = __path.resolve(packageSugarJson.metas.folderPath, folderObj.path);
           await _loadFolder(finalPath, "functions");
         }
       }
-      await _loadFolder(`${(0, import_dirname.default)()}/mixins`, "mixins");
-      await _loadFolder(`${(0, import_dirname.default)()}/functions`, "functions");
+      await _loadFolder(`${__dirname()}/mixins`, "mixins");
+      await _loadFolder(`${__dirname()}/functions`, "functions");
       resolve(true);
     });
     return loadedPromise;
@@ -313,20 +302,20 @@ const plugin = (settings = {}) => {
     postcssPlugin: "sugar",
     async Once(root) {
       var _a, _b;
-      import_s_bench.default.start("postcssSugarPlugin");
+      __SBench.start("postcssSugarPlugin");
       await _load();
       if ((_b = (_a = root.source) == null ? void 0 : _a.input) == null ? void 0 : _b.from) {
         if (!rootDir) {
-          rootDir = (0, import_folderPath.default)(root.source.input.from);
+          rootDir = __folderPath(root.source.input.from);
         }
-        const fileHash = (0, import_fileHash.default)(root.source.input.from, {
+        const fileHash = __fileHash(root.source.input.from, {
           include: {
             ctime: true
           }
         });
-        const hash = (0, import_objectHash.default)({
+        const hash = __objectHash({
           fileHash,
-          theme: import_s_theme.default.hash
+          theme: __STheme.hash
         });
       }
     },
@@ -336,12 +325,12 @@ const plugin = (settings = {}) => {
         const fn = postProcessorsRegisteredFn[i];
         await fn(root);
       }
-      const postProcessorsPaths = import_glob.default.sync("**/*.js", {
-        cwd: `${(0, import_dirname.default)()}/postProcessors`
+      const postProcessorsPaths = __glob.sync("**/*.js", {
+        cwd: `${__dirname()}/postProcessors`
       });
       for (let i = 0; i < postProcessorsPaths.length; i++) {
         const path = postProcessorsPaths[i];
-        const { default: processorFn } = await Promise.resolve().then(() => __toESM(require(`${(0, import_dirname.default)()}/postProcessors/${path}`)));
+        const { default: processorFn } = await Promise.resolve().then(() => __toESM(require(`${__dirname()}/postProcessors/${path}`)));
         await processorFn({
           root,
           sharedData
@@ -356,10 +345,10 @@ const plugin = (settings = {}) => {
           return;
         const cachePath = getCacheFilePath(cacheId);
         const toCacheStr = toCache[0].replace(`/* CACHE:${cacheId} */`, "").replace(`/* ENDCACHE:${cacheId} */`, "");
-        (0, import_writeFileSync.default)(cachePath, toCacheStr);
+        __writeFileSync(cachePath, toCacheStr);
       });
-      import_s_bench.default.end("postcssSugarPlugin").log({
-        body: `File: <cyan>${import_path.default.relative((0, import_packageRoot.default)(), (_b = (_a = root.source) == null ? void 0 : _a.input) == null ? void 0 : _b.from)}</cyan>`
+      __SBench.end("postcssSugarPlugin").log({
+        body: `File: <cyan>${__path.relative(__packageRoot(), (_b = (_a = root.source) == null ? void 0 : _a.input) == null ? void 0 : _b.from)}</cyan>`
       });
     },
     async AtRule(atRule, postcssApi) {
@@ -372,8 +361,8 @@ const plugin = (settings = {}) => {
         if (!mixinsStack[mixinId]) {
           throw new Error(`<red>[postcssSugarPlugin]</red> Sorry but the requested sugar mixin "<yellow>${atRule.name}</yellow>" does not exists...`);
         }
-        const root = (0, import_getRoot.default)(atRule);
-        const sourcePath = typeof root.source.input.file === "string" ? import_path.default.dirname(root.source.input.file) : (0, import_dirname.default)();
+        const root = __getRoot(atRule);
+        const sourcePath = typeof root.source.input.file === "string" ? __path.dirname(root.source.input.file) : __dirname();
         const mixinFn = mixinsStack[mixinId].mixin;
         const mixinInterface = mixinsStack[mixinId].interface;
         const processedParams = await _processDeclaration(atRule.params);
@@ -386,7 +375,7 @@ const plugin = (settings = {}) => {
           cache,
           CssVars,
           pluginHash,
-          getRoot: import_getRoot.default,
+          getRoot: __getRoot,
           getCacheFilePath,
           commentsNeeded,
           applyNoScopes(scopes = []) {
@@ -396,11 +385,11 @@ const plugin = (settings = {}) => {
             replaceWith(atRule, nodes);
           },
           atRootStart(css) {
-            const root2 = (0, import_getRoot.default)(atRule);
+            const root2 = __getRoot(atRule);
             root2.prepend(css);
           },
           atRootEnd(css) {
-            const root2 = (0, import_getRoot.default)(atRule);
+            const root2 = __getRoot(atRule);
             root2.append(css);
           },
           postcssApi,
@@ -409,7 +398,7 @@ const plugin = (settings = {}) => {
           registerPostProcessor(fn) {
             postProcessorsRegisteredFn.push(fn);
           },
-          postcss: import_postcss.default,
+          postcss: __postcss,
           settings
         });
         if (result) {
@@ -424,12 +413,12 @@ const plugin = (settings = {}) => {
         if (!((_a = atRule.source) == null ? void 0 : _a.input)) {
           throw new Error(`Make sure to import your stylesheets using the "<cyan>@import url(...);</cyan>" syntax and not the "<red>@import '...';</red>" one...`);
         }
-        const dirName = typeof atRule.source.input.file === "string" ? import_path.default.dirname(atRule.source.input.file) : (0, import_dirname.default)();
-        const path = import_path.default.resolve(dirName, (0, import_unquote.default)(atRule.params));
-        if (!import_fs.default.existsSync(path)) {
+        const dirName = typeof atRule.source.input.file === "string" ? __path.dirname(atRule.source.input.file) : __dirname();
+        const path = __path.resolve(dirName, __unquote(atRule.params));
+        if (!__fs.existsSync(path)) {
           throw new Error(`<red>[postcssSugarPlugin.@import]</red> You try to load the file "<yellow>${path}</yellow>" but this file does not exists`);
         }
-        const contentStr = import_fs.default.readFileSync(path, "utf8").toString();
+        const contentStr = __fs.readFileSync(path, "utf8").toString();
         atRule.after(contentStr);
         atRule.remove();
       }
@@ -444,7 +433,7 @@ const plugin = (settings = {}) => {
 plugin.postcss = true;
 const postcss = true;
 var postcssSugarPlugin_default = plugin;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
+  postcssSugarPlugin_default as default,
   postcss
-});
+};

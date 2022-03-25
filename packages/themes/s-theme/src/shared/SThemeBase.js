@@ -1,11 +1,7 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -21,58 +17,39 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SThemeBase_exports = {};
-__export(SThemeBase_exports, {
-  default: () => SThemeBase
-});
-module.exports = __toCommonJS(SThemeBase_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_color = __toESM(require("@coffeekraken/s-color"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_get = __toESM(require("@coffeekraken/sugar/shared/object/get"), 1);
-var import_flatten = __toESM(require("@coffeekraken/sugar/shared/object/flatten"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_dashCase = __toESM(require("@coffeekraken/sugar/shared/string/dashCase"), 1);
-var import_known_css_properties = __toESM(require("known-css-properties"), 1);
-var import_object_hash = __toESM(require("object-hash"), 1);
-var import_color = __toESM(require("@coffeekraken/sugar/shared/is/color"), 1);
-class SThemeBase extends import_s_class.default {
+import __SClass from "@coffeekraken/s-class";
+import __SColor from "@coffeekraken/s-color";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __get from "@coffeekraken/sugar/shared/object/get";
+import __flatten from "@coffeekraken/sugar/shared/object/flatten";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __dashCase from "@coffeekraken/sugar/shared/string/dashCase";
+import __knownCssProperties from "known-css-properties";
+import __objectHash from "object-hash";
+import __isColor from "@coffeekraken/sugar/shared/is/color";
+class SThemeBase extends __SClass {
   get id() {
     return `${this.name}-${this.variant}`;
   }
   static get theme() {
-    return import_s_sugar_config.default.get("theme.theme");
+    return __SSugarConfig.get("theme.theme");
   }
   static get variant() {
-    return import_s_sugar_config.default.get("theme.variant");
+    return __SSugarConfig.get("theme.variant");
   }
   static get themes() {
-    return Object.keys(import_s_sugar_config.default.get("theme.themes"));
+    return Object.keys(__SSugarConfig.get("theme.themes"));
   }
   static getTheme(theme, variant) {
     if (!theme) {
-      theme = import_s_sugar_config.default.get("theme.theme");
+      theme = __SSugarConfig.get("theme.theme");
     }
     if (!variant) {
-      variant = import_s_sugar_config.default.get("theme.variant");
+      variant = __SSugarConfig.get("theme.variant");
     }
     if (this._instanciatedThemes[`${theme}-${variant}`])
       return this._instanciatedThemes[`${theme}-${variant}`];
-    const themes = import_s_sugar_config.default.get("theme.themes");
+    const themes = __SSugarConfig.get("theme.themes");
     if (!themes[`${theme}-${variant}`])
       throw new Error(`<red>[${this.name}]</red> Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists. Here's the available themes: <green>${Object.keys(themes).join(",")}</green>`);
     this._instanciatedThemes[`${theme}-${variant}`] = new this(theme, variant);
@@ -80,7 +57,7 @@ class SThemeBase extends import_s_class.default {
   }
   static hash(dotPath = "") {
     const config = this.config(dotPath);
-    return (0, import_object_hash.default)(config);
+    return __objectHash(config);
   }
   static cssVar(dotPath, fallback = true) {
     let fb = this.getTheme().config(dotPath);
@@ -166,7 +143,7 @@ class SThemeBase extends import_s_class.default {
     return `@media ${currentQueryList.join(" ")}`;
   }
   static jsObjectToCssProperties(jsObject, settings) {
-    const finalSettings = (0, import_deepMerge.default)({
+    const finalSettings = __deepMerge({
       exclude: [],
       only: []
     }, settings);
@@ -174,10 +151,10 @@ class SThemeBase extends import_s_class.default {
     Object.keys(jsObject).forEach((prop) => {
       if (finalSettings.exclude.indexOf(prop) !== -1)
         return;
-      if (finalSettings.exclude.indexOf((0, import_dashCase.default)(prop)) !== -1)
+      if (finalSettings.exclude.indexOf(__dashCase(prop)) !== -1)
         return;
       const originalProp = prop;
-      prop = (0, import_dashCase.default)(prop).trim();
+      prop = __dashCase(prop).trim();
       if (finalSettings.exclude.length && finalSettings.exclude.indexOf(prop) !== -1)
         return;
       if (finalSettings.only.length && finalSettings.only.indexOf(prop) === -1)
@@ -263,7 +240,7 @@ class SThemeBase extends import_s_class.default {
             propsStack.push(`@sugar.color(${value});`);
             break;
           default:
-            const props = import_known_css_properties.default.all;
+            const props = __knownCssProperties.all;
             if (props.indexOf(prop) === -1)
               return;
             propsStack.push(`${prop}: ${value};`);
@@ -278,8 +255,8 @@ class SThemeBase extends import_s_class.default {
       vars: [],
       properties: {}
     };
-    if ((0, import_color.default)(to)) {
-      const color = new import_s_color.default(to);
+    if (__isColor(to)) {
+      const color = new __SColor(to);
       result.vars = [
         `--s-theme-color-${from}-h: ${color.h};`,
         `--s-theme-color-${from}-s: ${color.s};`,
@@ -369,7 +346,7 @@ class SThemeBase extends import_s_class.default {
     });
     const themeObjWithoutColors = Object.assign({}, themeInstance.config("."));
     delete themeObjWithoutColors.color;
-    const flattenedTheme = (0, import_flatten.default)(themeObjWithoutColors);
+    const flattenedTheme = __flatten(themeObjWithoutColors);
     Object.keys(flattenedTheme).forEach((key) => {
       const value = flattenedTheme[key];
       const varKey = key.replace(/\./gm, "-").replace(/:/gm, "-").replace(/\?/gm, "").replace(/--/gm, "-");
@@ -388,20 +365,20 @@ class SThemeBase extends import_s_class.default {
   }
   constructor(theme, variant) {
     super({});
-    this.name = theme != null ? theme : import_s_sugar_config.default.get("theme.theme");
-    this.variant = variant != null ? variant : import_s_sugar_config.default.get("theme.variant");
-    if (!import_s_sugar_config.default.get(`theme.themes.${this.name}-${this.variant}`)) {
+    this.name = theme != null ? theme : __SSugarConfig.get("theme.theme");
+    this.variant = variant != null ? variant : __SSugarConfig.get("theme.variant");
+    if (!__SSugarConfig.get(`theme.themes.${this.name}-${this.variant}`)) {
       throw new Error(`Sorry but the requested theme "<yellow>${this.name}-${this.variant}</yellow>" does not exists...`);
     }
   }
   get themes() {
-    return import_s_sugar_config.default.get("theme.themes");
+    return __SSugarConfig.get("theme.themes");
   }
   get _config() {
-    return import_s_sugar_config.default.get("theme.themes")[this.id];
+    return __SSugarConfig.get("theme.themes")[this.id];
   }
   config(dotPath) {
-    const value = (0, import_get.default)(this._config, dotPath);
+    const value = __get(this._config, dotPath);
     if (value === void 0) {
       throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the requested "<yellow>${this.id}</yellow>" theme config "<cyan>${dotPath}</cyan>" does not exists...`);
     }
@@ -409,10 +386,10 @@ class SThemeBase extends import_s_class.default {
   }
   hash(dotPath = "") {
     const config = this.config(dotPath);
-    return (0, import_object_hash.default)(config);
+    return __objectHash(config);
   }
   themesConfig() {
-    return import_s_sugar_config.default.get("theme");
+    return __SSugarConfig.get("theme");
   }
   baseColors() {
     const map = {};
@@ -420,7 +397,7 @@ class SThemeBase extends import_s_class.default {
       const colorObj = this._config.color[color];
       if (!colorObj.color)
         return;
-      const c = new import_s_color.default(colorObj.color);
+      const c = new __SColor(colorObj.color);
       map[color] = {
         color: colorObj.color,
         variable: `--s-theme-color-${color}`,
@@ -445,7 +422,7 @@ class SThemeBase extends import_s_class.default {
       if (!colorObj2.color) {
         throw new Error(`Sorry but your color "<yellow>${colorName}</yellow>" does not provide a "<cyan>color</cyan>" property and this is required...`);
       }
-      const c = new import_s_color.default(colorObj2.color);
+      const c = new __SColor(colorObj2.color);
       const _res = callback({
         name: colorName,
         variant: "",
@@ -525,5 +502,6 @@ class SThemeBase extends import_s_class.default {
   }
 }
 SThemeBase._instanciatedThemes = {};
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SThemeBase as default
+};

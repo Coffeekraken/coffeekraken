@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,45 +13,39 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SSitemapBuilder_exports = {};
-__export(SSitemapBuilder_exports, {
-  default: () => SSitemapBuilder
-});
-module.exports = __toCommonJS(SSitemapBuilder_exports);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_SSitemapBuilderBuildParamsInterface = __toESM(require("./interface/SSitemapBuilderBuildParamsInterface"), 1);
-var import_upperFirst = __toESM(require("@coffeekraken/sugar/shared/string/upperFirst"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_class = __toESM(require("@coffeekraken/sugar/shared/is/class"), 1);
-var import_packageRoot = __toESM(require("@coffeekraken/sugar/node/path/packageRoot"), 1);
-var import_extension = __toESM(require("@coffeekraken/sugar/node/fs/extension"), 1);
-var import_writeFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeFileSync"), 1);
-var import_s_builder = __toESM(require("@coffeekraken/s-builder"), 1);
-class SSitemapBuilder extends import_s_builder.default {
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SSitemapBuilderBuildParamsInterface from "./interface/SSitemapBuilderBuildParamsInterface";
+import __upperFirst from "@coffeekraken/sugar/shared/string/upperFirst";
+import __SPromise from "@coffeekraken/s-promise";
+import __SDuration from "@coffeekraken/s-duration";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __path from "path";
+import __isClass from "@coffeekraken/sugar/shared/is/class";
+import __packageRoot from "@coffeekraken/sugar/node/path/packageRoot";
+import __extension from "@coffeekraken/sugar/node/fs/extension";
+import __writeFileSync from "@coffeekraken/sugar/node/fs/writeFileSync";
+import __SBuilder from "@coffeekraken/s-builder";
+class SSitemapBuilder extends __SBuilder {
   get sitemapSettings() {
     var _a;
     return (_a = this._settings.sitemapBuilder) != null ? _a : {};
   }
   constructor(settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       sitemapBuilder: {
         sources: {}
       }
     }, settings != null ? settings : {}));
     var _a;
-    const config = import_s_sugar_config.default.get("sitemapBuilder");
-    this.sitemapSettings.sources = (0, import_deepMerge.default)((_a = config.sources) != null ? _a : {}, this.sitemapSettings.sources);
+    const config = __SSugarConfig.get("sitemapBuilder");
+    this.sitemapSettings.sources = __deepMerge((_a = config.sources) != null ? _a : {}, this.sitemapSettings.sources);
   }
   _build(params = {}) {
-    return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
       var _a, _b, _c;
       let sitemap = [];
-      const finalParams = import_SSitemapBuilderBuildParamsInterface.default.apply(params);
-      const duration = new import_s_duration.default();
+      const finalParams = __SSitemapBuilderBuildParamsInterface.apply(params);
+      const duration = new __SDuration();
       let sourcesId = finalParams.source.length ? finalParams.source : Object.keys(this.sitemapSettings.sources);
       for (let i = 0; i < sourcesId.length; i++) {
         const sourceId = sourcesId[i];
@@ -64,19 +54,19 @@ class SSitemapBuilder extends import_s_builder.default {
         }
         const sourceObj = this.sitemapSettings.sources[sourceId];
         const importedSource = (await Promise.resolve().then(() => __toESM(require(sourceObj.path)))).default;
-        let settingsId = (_a = importedSource.settingsId) != null ? _a : `sitemap${(0, import_upperFirst.default)(sourceId)}Source`;
+        let settingsId = (_a = importedSource.settingsId) != null ? _a : `sitemap${__upperFirst(sourceId)}Source`;
         let buildFn;
-        if ((0, import_class.default)(importedSource)) {
+        if (__isClass(importedSource)) {
           const sourceInstance = new importedSource({
-            [settingsId]: (0, import_deepMerge.default)((_b = sourceObj.settings) != null ? _b : {}, (_c = finalParams.sourcesSettings[sourceId]) != null ? _c : {})
+            [settingsId]: __deepMerge((_b = sourceObj.settings) != null ? _b : {}, (_c = finalParams.sourcesSettings[sourceId]) != null ? _c : {})
           });
           buildFn = sourceInstance.build.bind(sourceInstance);
         } else if (typeof importedSource === "function") {
           buildFn = importedSource;
         }
-        const sourceDuration = new import_s_duration.default();
+        const sourceDuration = new __SDuration();
         const buildResultPromise = buildFn(params);
-        if (buildResultPromise instanceof import_s_promise.default) {
+        if (buildResultPromise instanceof __SPromise) {
           pipe(buildResultPromise);
         }
         const buildResult = await buildResultPromise;
@@ -87,7 +77,7 @@ class SSitemapBuilder extends import_s_builder.default {
       }
       if (finalParams.save) {
         emit("log", {
-          value: `<yellow>[save]</yellow> Saving your sitemap under "<cyan>${import_path.default.relative((0, import_packageRoot.default)(), finalParams.output)}</cyan>"`
+          value: `<yellow>[save]</yellow> Saving your sitemap under "<cyan>${__path.relative(__packageRoot(), finalParams.output)}</cyan>"`
         });
         this.save(sitemap, finalParams.output);
       }
@@ -98,7 +88,7 @@ class SSitemapBuilder extends import_s_builder.default {
     });
   }
   save(items, path) {
-    switch ((0, import_extension.default)(path)) {
+    switch (__extension(path)) {
       case "xml":
       default:
         let xmlStr = [
@@ -125,10 +115,11 @@ class SSitemapBuilder extends import_s_builder.default {
           xmlStr.push(itemStr.join("\n"));
         });
         xmlStr.push("</urlset>");
-        (0, import_writeFileSync.default)(path, xmlStr.join("\n"));
+        __writeFileSync(path, xmlStr.join("\n"));
         break;
     }
   }
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SSitemapBuilder as default
+};

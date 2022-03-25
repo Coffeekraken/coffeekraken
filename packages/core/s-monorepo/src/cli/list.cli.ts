@@ -30,17 +30,21 @@ export default (stringArgs = '') => {
                 const json = __readJsonSync(file.path);
                 version = json.version;
                 name = json.name;
+
+                console.log(file.relPath);
+                if (json.type !== 'module') {
+                }
             }
 
-            emit('log', {
-                value: `<yellow>${
-                    name ?? file.relPath.split('/').pop()
-                }</yellow> (<${
-                    version === rootPackageJson.version ? 'green' : 'red'
-                }>${version}</${
-                    version === rootPackageJson.version ? 'green' : 'red'
-                }>) <cyan>${path}</cyan>`,
-            });
+            // emit('log', {
+            //     value: `<yellow>${
+            //         name ?? file.relPath.split('/').pop()
+            //     }</yellow> (<${
+            //         version === rootPackageJson.version ? 'green' : 'red'
+            //     }>${version}</${
+            //         version === rootPackageJson.version ? 'green' : 'red'
+            //     }>) <cyan>${path}</cyan>`,
+            // });
         });
 
         resolve();

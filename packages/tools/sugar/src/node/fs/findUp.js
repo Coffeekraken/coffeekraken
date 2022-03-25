@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,30 +14,11 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var findUp_exports = {};
-__export(findUp_exports, {
-  default: () => findUp
-});
-module.exports = __toCommonJS(findUp_exports);
-var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_glob = __toESM(require("glob"), 1);
-var import_glob2 = __toESM(require("../../shared/is/glob"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+import __SFile from "@coffeekraken/s-file";
+import __fs from "fs";
+import __glob from "glob";
+import __isGlob from "../../shared/is/glob";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
 function findUp(search, settings) {
   settings = __spreadValues({
     symlinks: true,
@@ -50,14 +27,14 @@ function findUp(search, settings) {
     SFile: true
   }, settings);
   return new Promise(async (resolve) => {
-    await import_s_sugar_config.default.load();
+    await __SSugarConfig.load();
     const cwd = settings.cwd;
     let currentPath = cwd.split("/").filter((p) => p.trim() !== "");
     let foundedFiles = [];
     while (currentPath.length > 0) {
       const path = `/${currentPath.join("/")}`;
-      if ((0, import_glob2.default)(search)) {
-        let files = import_glob.default.sync(search, {
+      if (__isGlob(search)) {
+        let files = __glob.sync(search, {
           cwd: path,
           symlinks: settings.symlinks
         });
@@ -67,7 +44,7 @@ function findUp(search, settings) {
           });
           foundedFiles = [...foundedFiles, ...files];
         }
-      } else if (import_fs.default.existsSync(`${path}/${search}`)) {
+      } else if (__fs.existsSync(`${path}/${search}`)) {
         foundedFiles.push(`${path}/${search}`);
       }
       if (settings.stopWhenFound && foundedFiles.length) {
@@ -77,11 +54,12 @@ function findUp(search, settings) {
     }
     if (settings.SFile === true) {
       foundedFiles = foundedFiles.map((path) => {
-        return new import_s_file.default(path);
+        return new __SFile(path);
       });
     }
     return resolve(foundedFiles);
   });
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  findUp as default
+};

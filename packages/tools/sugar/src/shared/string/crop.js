@@ -1,32 +1,7 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var crop_exports = {};
-__export(crop_exports, {
-  default: () => crop_default
-});
-module.exports = __toCommonJS(crop_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
-var import_countLine = __toESM(require("./countLine"), 1);
+import __deepMerge from "../object/deepMerge";
+import __countLine from "./countLine";
 function crop(text, length, settings = {}) {
-  settings = (0, import_deepMerge.default)({
+  settings = __deepMerge({
     chars: "...",
     splitWords: false
   }, settings);
@@ -59,7 +34,7 @@ function crop(text, length, settings = {}) {
         if (c !== " ") {
           currentWord += c;
         } else {
-          if ((0, import_countLine.default)(result) + (0, import_countLine.default)(currentWord) + (0, import_countLine.default)(settings.chars) <= length) {
+          if (__countLine(result) + __countLine(currentWord) + __countLine(settings.chars) <= length) {
             result += currentWord;
           } else {
             result = result.trim();
@@ -99,5 +74,6 @@ function crop(text, length, settings = {}) {
   return result;
 }
 var crop_default = crop;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  crop_default as default
+};

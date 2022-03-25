@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,22 +13,17 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var registerSFileClasses_exports = {};
-__export(registerSFileClasses_exports, {
-  default: () => registerSFileClasses_default
-});
-module.exports = __toCommonJS(registerSFileClasses_exports);
-var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+import __SFile from "@coffeekraken/s-file";
+import __SugarConfig from "@coffeekraken/s-sugar-config";
 var registerSFileClasses_default = () => {
-  const map = import_s_sugar_config.default.get("fs.sFileClassesMap");
+  const map = __SugarConfig.get("fs.sFileClassesMap");
   Object.keys(map).forEach(async (key) => {
     const { default: cls } = await Promise.resolve().then(() => __toESM(require(map[key])));
     key.split(",").map((l) => l.trim()).forEach((pattern) => {
-      import_s_file.default.registerClass(pattern, cls);
+      __SFile.registerClass(pattern, cls);
     });
   });
 };
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  registerSFileClasses_default as default
+};

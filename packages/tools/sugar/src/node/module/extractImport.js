@@ -1,49 +1,24 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var extractImport_exports = {};
-__export(extractImport_exports, {
-  default: () => extractImport
-});
-module.exports = __toCommonJS(extractImport_exports);
-var import_abstract_syntax_tree = require("abstract-syntax-tree");
-var __acorn = __toESM(require("acorn-loose"), 1);
-var import_astring = require("astring");
-var import_fs = __toESM(require("fs"), 1);
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+import { find as __find } from "abstract-syntax-tree";
+import * as __acorn from "acorn-loose";
+import { generate as __astring } from "astring";
+import __fs from "fs";
+import __deepMerge from "../../shared/object/deepMerge";
 function extractImport(stringOrFilePath, settings) {
-  const set = (0, import_deepMerge.default)({
+  const set = __deepMerge({
     import: true
   }, settings || {});
   let content = stringOrFilePath;
-  if (import_fs.default.existsSync(stringOrFilePath)) {
-    content = import_fs.default.readFileSync(stringOrFilePath);
+  if (__fs.existsSync(stringOrFilePath)) {
+    content = __fs.readFileSync(stringOrFilePath);
   }
   const ast = __acorn.parse(content, {
     ecmaVersion: "latest"
   });
   const finalImportsArray = [];
   if (set.import) {
-    const importsAst = (0, import_abstract_syntax_tree.find)(ast, "ImportDeclaration");
+    const importsAst = __find(ast, "ImportDeclaration");
     importsAst.forEach((importAst) => {
-      const raw = (0, import_astring.generate)(importAst).replace(/await;\n/, "await ");
+      const raw = __astring(importAst).replace(/await;\n/, "await ");
       const importObj = {
         type: "import",
         path: importAst.source.value,
@@ -76,7 +51,7 @@ function extractImport(stringOrFilePath, settings) {
         finalImportsArray.push(importObj);
       }
     });
-    const importExpressions = (0, import_abstract_syntax_tree.find)(ast, "ImportExpression");
+    const importExpressions = __find(ast, "ImportExpression");
     importExpressions.forEach((callObj) => {
       if (!callObj.source.value)
         return;
@@ -88,7 +63,7 @@ function extractImport(stringOrFilePath, settings) {
           exists = true;
       });
       if (!exists) {
-        const raw = (0, import_astring.generate)(ast).replace(/await;\n/, "await ");
+        const raw = __astring(ast).replace(/await;\n/, "await ");
         finalImportsArray.push({
           type: "import",
           path: callObj.source.value,
@@ -101,5 +76,6 @@ function extractImport(stringOrFilePath, settings) {
   }
   return finalImportsArray;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  extractImport as default
+};

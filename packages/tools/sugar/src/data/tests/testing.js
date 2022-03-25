@@ -1,326 +1,211 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", {
-    value: true
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __esm = (fn, res) => function __init() {
+  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+};
+var __commonJS = (cb, mod) => function __require() {
+  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+};
+import { fileURLToPath } from "url";
+import path from "path";
+var getFilename, getDirname, __dirname, __filename;
+var init_esm_shims = __esm({
+  "node_modules/tsup/assets/esm_shims.js"() {
+    getFilename = () => fileURLToPath(import.meta.url);
+    getDirname = () => path.dirname(getFilename());
+    __dirname = /* @__PURE__ */ getDirname();
+    __filename = /* @__PURE__ */ getFilename();
+  }
 });
-exports["default"] = void 0;
-var _SWebComponent = _interopRequireDefault(require("@coffeekraken/sugar/js/core/SWebComponent"));
-var _getTransitionProperties = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/getTransitionProperties"));
-var _scrollTop = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/scrollTop"));
-var _hotkey = _interopRequireDefault(require("@coffeekraken/sugar/js/keyboard/hotkey"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-/**
- * @name 		DrawerWebcomponent
- * @namespace       drawer-webcomponent
- * @type      Class
- * @extends 	SWebComponent
- *
- * Simple webcomponent to create fully customizable drawers.
- * Features:
- * 1. Fully customizable
- * 2. Support all sides (top, right, bottom and left)
- * 3. Support 3 animation types (push, slide and reveal)
- *
- * @example 	scss
- * \@use 'node_modules/@coffeekraken/drawer-webcomponent/index' as drawer-webcomponent;
- * \@include drawer-webcomponent.classes(
- * 	$name : menu,
- * 	$side : right
- * );
- * \@include drawer-webcomponent.element(drawer) {
- * 	background-color: black;
- * 	padding: 20px;
- * }
- * \@include drawer-webcomponent.element(overlay) {
- * 	background-color: rgba(0,0,0,.5);
- * }
- *
- * @author         Olivier Bossel <olivier.bossel@gmail.com>
- */
-var DrawerWebcomponent = /** @class */ (function (_super) {
-    __extends(DrawerWebcomponent, _super);
-    function DrawerWebcomponent() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var require_testing = __commonJS({
+  "packages/tools/sugar/src/data/tests/testing.ts"(exports, module) {
+    init_esm_shims();
+    Object.defineProperty(exports, "__esModule", {
+      value: true
+    });
+    exports.default = void 0;
+    var _SWebComponent = _interopRequireDefault(require("@coffeekraken/sugar/js/core/SWebComponent"));
+    var _getTransitionProperties = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/getTransitionProperties"));
+    var _scrollTop = _interopRequireDefault(require("@coffeekraken/sugar/js/dom/scrollTop"));
+    var _hotkey = _interopRequireDefault(require("@coffeekraken/sugar/js/keyboard/hotkey"));
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : { default: obj };
     }
-    Object.defineProperty(DrawerWebcomponent, "defaultProps", {
-        /**
-         * Default props
-         * @definition 		SWebComponent.defaultProps
-         * @protected
-          * @static
-         */
-        get: function () {
-            return {
-                /**
-                 * Specify the name of the drawer to be able to access it later through the API
-                 * @prop
-                 * @type 		{String}
-                 */
-                name: null,
-                /**
-                 * Close the drawer when click on a link inside it
-                 * @prop
-                 * @type 		{Boolean}
-                 */
-                closeOnLinksClick: false,
-                /**
-                 * Specify is the `escape` key is activated and close the drawer if is opened
-                 * @prop
-                 * @type    {Boolean}
-                 */
-                escapeKey: true,
-                /**
-                 * Specify if need to check the hash to automatically open the drawer if match with the name
-                 * @prop
-                 * @type 		{Boolean}
-                 */
-                handleHash: true,
-                /**
-                 * Prevent the content from scrolling when the drawer is opened.
-                 * This will override your transitions on the content so be aware of that...
-                 * @prop
-                 * @type 	{Boolean}
-                 */
-                preventContentScroll: false
-            };
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrawerWebcomponent, "requiredProps", {
-        /**
-         * Return an array of required props to init the component
-         * @definition      SWebComponent.requiredProps
-         * @protected
-         * @static
-         * @return 		{Array}
-         */
-        get: function () {
-            return ['name'];
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(DrawerWebcomponent, "physicalProps", {
-        /**
-         * Physical props
-         * @definition 		SWebComponent.physicalProps
-         * @protected
-          * @static
-         */
-        get: function () {
-            return ['name'];
-        },
-        enumerable: false,
-        configurable: true
-    });
-    /**
-     * Css
-     * @protected
-      * @static
-     */
-    DrawerWebcomponent.defaultCss = function (componentName, componentNameDash) {
-        return "\n\t\t\t" + componentNameDash + " {\n\t\t\t\tdisplay : block;\n\t\t\t}\n      input[" + componentNameDash + "-toggle] {\n        position: fixed;\n        top:0; left: 0;\n        opacity: 0;\n        pointer-events: none;\n      }\n\t\t";
-    };
-    /**
-     * Mount component
-     * @definition 		SWebComponent.componentMount
-     * @protected
-     */
-    DrawerWebcomponent.prototype.componentMount = function () {
-        var _this = this;
-        _super.prototype.componentMount.call(this);
-        this.contentElm = document.querySelector("[" + this.componentNameDash + "-content]"); // try to find the drawer background
-        this.bkgElm = document.querySelector("[" + this.componentNameDash + "-bkg][for=\"" + this.props.name + "\"]");
+    class DrawerWebcomponent extends _SWebComponent.default {
+      static get defaultProps() {
+        return {
+          name: null,
+          closeOnLinksClick: false,
+          escapeKey: true,
+          handleHash: true,
+          preventContentScroll: false
+        };
+      }
+      static get requiredProps() {
+        return ["name"];
+      }
+      static get physicalProps() {
+        return ["name"];
+      }
+      static defaultCss(componentName, componentNameDash) {
+        return `
+			${componentNameDash} {
+				display : block;
+			}
+      input[${componentNameDash}-toggle] {
+        position: fixed;
+        top:0; left: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+		`;
+      }
+      componentMount() {
+        super.componentMount();
+        this.contentElm = document.querySelector(`[${this.componentNameDash}-content]`);
+        this.bkgElm = document.querySelector(`[${this.componentNameDash}-bkg][for="${this.props.name}"]`);
         if (!this.bkgElm) {
-            this.bkgElm = document.createElement('div');
-            this.mutate(function () {
-                _this.bkgElm.setAttribute(_this.componentNameDash + "-bkg", true);
-                _this.bkgElm.setAttribute('for', _this.props.name); // insert in the page
-                _this.parentElement.insertBefore(_this.bkgElm, _this.parentElement.firstChild);
-            });
-        } // try to find the drawer overlay
-        this.overlayElm = document.querySelector("label[is=\"" + this.componentNameDash + "-overlay\"][for=\"" + this.props.name + "\"]");
-        if (!this.overlayElm) {
-            this.overlayElm = document.createElement('label');
-            this.overlayElm.setAttribute('for', this.props.name);
-            this.overlayElm.setAttribute(this.componentNameDash + "-overlay", true);
-            this.mutate(function () {
-                // insert in the page
-                _this.parentElement.insertBefore(_this.overlayElm, _this.parentElement.firstChild);
-            });
-        } // try to find the toggle
-        this.toggleElm = document.querySelector("input[is=\"" + this.componentNameDash + "-toggle\"][name=\"" + this.props.name + "\"]");
-        if (!this.toggleElm) {
-            this.toggleElm = document.createElement('input');
-            this.toggleElm.setAttribute('name', this.props.name);
-            this.toggleElm.setAttribute('id', this.props.name);
-            this.toggleElm.setAttribute('type', 'checkbox');
-            this.toggleElm.setAttribute(this.componentNameDash + "-toggle", true);
-            this.mutate(function () {
-                // insert into page
-                _this.parentElement.insertBefore(_this.toggleElm, _this.parentElement.firstChild);
-            });
+          this.bkgElm = document.createElement("div");
+          this.mutate(() => {
+            this.bkgElm.setAttribute(`${this.componentNameDash}-bkg`, true);
+            this.bkgElm.setAttribute("for", this.props.name);
+            this.parentElement.insertBefore(this.bkgElm, this.parentElement.firstChild);
+          });
         }
-        this._scrollTop = 0; // listen for change on the toggle
-        this.toggleElm.addEventListener('change', function (e) {
-            var name = e.target.name;
-            _this.mutate(function () {
-                if (e.target.checked) {
-                    _this.open();
-                    document.body.classList.add(_this.componentNameDash + "-" + _this.props.name);
-                    if (_this.props.preventContentScroll) {
-                        _this._scrollTop = (0, _scrollTop["default"])();
-                        _this.contentElm.style.transition = 'none';
-                        _this.mutate(function () {
-                            _this.contentElm.style.transform = "translateY(-" + _this._scrollTop + "px)";
-                            _this.ownerDocument.body.style.position = 'fixed';
-                            _this.ownerDocument.body.style.overflow = 'hidden';
-                            setTimeout(function () {
-                                _this.contentElm.style.transition = '';
-                            });
-                        });
-                    }
-                }
-                else {
-                    _this.close();
-                    document.body.classList.remove(_this.componentNameDash + "-" + _this.props.name);
-                    if (_this.props.preventContentScroll) {
-                        _this.contentElm.style.transition = 'none';
-                        _this.mutate(function () {
-                            _this.contentElm.style.transform = '';
-                            _this.ownerDocument.body.style.position = '';
-                            _this.ownerDocument.body.style.overflow = '';
-                            window.scrollTo(0, _this._scrollTop);
-                            setTimeout(function () {
-                                _this.contentElm.style.transition = '';
-                            });
-                        });
-                    }
-                }
-            });
+        this.overlayElm = document.querySelector(`label[is="${this.componentNameDash}-overlay"][for="${this.props.name}"]`);
+        if (!this.overlayElm) {
+          this.overlayElm = document.createElement("label");
+          this.overlayElm.setAttribute("for", this.props.name);
+          this.overlayElm.setAttribute(`${this.componentNameDash}-overlay`, true);
+          this.mutate(() => {
+            this.parentElement.insertBefore(this.overlayElm, this.parentElement.firstChild);
+          });
+        }
+        this.toggleElm = document.querySelector(`input[is="${this.componentNameDash}-toggle"][name="${this.props.name}"]`);
+        if (!this.toggleElm) {
+          this.toggleElm = document.createElement("input");
+          this.toggleElm.setAttribute("name", this.props.name);
+          this.toggleElm.setAttribute("id", this.props.name);
+          this.toggleElm.setAttribute("type", "checkbox");
+          this.toggleElm.setAttribute(`${this.componentNameDash}-toggle`, true);
+          this.mutate(() => {
+            this.parentElement.insertBefore(this.toggleElm, this.parentElement.firstChild);
+          });
+        }
+        this._scrollTop = 0;
+        this.toggleElm.addEventListener("change", (e) => {
+          let name = e.target.name;
+          this.mutate(() => {
+            if (e.target.checked) {
+              this.open();
+              document.body.classList.add(`${this.componentNameDash}-${this.props.name}`);
+              if (this.props.preventContentScroll) {
+                this._scrollTop = (0, _scrollTop.default)();
+                this.contentElm.style.transition = "none";
+                this.mutate(() => {
+                  this.contentElm.style.transform = `translateY(-${this._scrollTop}px)`;
+                  this.ownerDocument.body.style.position = "fixed";
+                  this.ownerDocument.body.style.overflow = "hidden";
+                  setTimeout(() => {
+                    this.contentElm.style.transition = "";
+                  });
+                });
+              }
+            } else {
+              this.close();
+              document.body.classList.remove(`${this.componentNameDash}-${this.props.name}`);
+              if (this.props.preventContentScroll) {
+                this.contentElm.style.transition = "none";
+                this.mutate(() => {
+                  this.contentElm.style.transform = "";
+                  this.ownerDocument.body.style.position = "";
+                  this.ownerDocument.body.style.overflow = "";
+                  window.scrollTo(0, this._scrollTop);
+                  setTimeout(() => {
+                    this.contentElm.style.transition = "";
+                  });
+                });
+              }
+            }
+          });
         });
         if (this.props.handleHash) {
-            window.addEventListener('hashchange', function (e) {
-                if (document.location.hash.substr(1) === _this.props.name && !_this.isOpen()) {
-                    _this.open();
-                }
-                else if (_this.isOpen() && document.location.hash.substr(1) !== _this.props.name) {
-                    _this.close();
-                }
-            });
+          window.addEventListener("hashchange", (e) => {
+            if (document.location.hash.substr(1) === this.props.name && !this.isOpen()) {
+              this.open();
+            } else if (this.isOpen() && document.location.hash.substr(1) !== this.props.name) {
+              this.close();
+            }
+          });
         }
-        document.body.addEventListener('click', function (e) {
-            if (e.target.hasAttribute(_this.componentNameDash + "-open")) {
-                if (e.target.getAttribute(_this.componentNameDash + "-open") === _this.props.name || e.target.getAttribute('href').substr(1) === _this.props.name) {
-                    _this.open();
-                }
+        document.body.addEventListener("click", (e) => {
+          if (e.target.hasAttribute(`${this.componentNameDash}-open`)) {
+            if (e.target.getAttribute(`${this.componentNameDash}-open`) === this.props.name || e.target.getAttribute("href").substr(1) === this.props.name) {
+              this.open();
             }
-        }); // listen for click on links into the drawer to close it
-        this.addEventListener('click', function (e) {
-            if (e.target.hasAttribute(_this.componentNameDash + "-close")) {
-                _this.close();
-                return;
+          }
+        });
+        this.addEventListener("click", (e) => {
+          if (e.target.hasAttribute(`${this.componentNameDash}-close`)) {
+            this.close();
+            return;
+          }
+          if (this.props.closeOnLinksClick) {
+            if (e.target.tagName.toLowerCase() === "a") {
+              this.close();
             }
-            if (_this.props.closeOnLinksClick) {
-                if (e.target.tagName.toLowerCase() === 'a') {
-                    // close the drawer
-                    _this.close();
-                }
-            }
-        }); // handle esc hotkey
+          }
+        });
         if (this.props.escapeKey) {
-            (0, _hotkey["default"])('esc', function (e) {
-                if (_this.isOpen()) {
-                    _this.close();
-                }
-            });
-        } // if handle hach
-        if (this.props.handleHash) {
-            if (document.location.hash) {
-                var hash = document.location.hash.substr(1);
-                if (hash == this.props.name) {
-                    this.open();
-                }
+          (0, _hotkey.default)("esc", (e) => {
+            if (this.isOpen()) {
+              this.close();
             }
+          });
         }
-    };
-    /**
-      * @name        open
-      * @namespace     drawer-webcomponent
-      * @type      Function
-      *
-     * Open the drawer
-      *
-      * @author         Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    DrawerWebcomponent.prototype.open = function () {
-        var _this = this;
         if (this.props.handleHash) {
-            document.location.hash = "#" + this.props.name;
-        } // check the toggle
-        this.mutate(function () {
-            _this.toggleElm.checked = true;
-            _this.toggleElm.setAttribute('checked', true);
-            document.body.classList.add(_this.componentNameDash + "-" + _this.props.name);
+          if (document.location.hash) {
+            let hash = document.location.hash.substr(1);
+            if (hash == this.props.name) {
+              this.open();
+            }
+          }
+        }
+      }
+      open() {
+        if (this.props.handleHash) {
+          document.location.hash = `#${this.props.name}`;
+        }
+        this.mutate(() => {
+          this.toggleElm.checked = true;
+          this.toggleElm.setAttribute("checked", true);
+          document.body.classList.add(`${this.componentNameDash}-${this.props.name}`);
         });
         return this;
-    };
-    /**
-      * @name      close
-      * @namespace     drawer-webcomponent
-      * @type      Function
-      *
-     * Close the drawer
-      *
-      * @author         Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    DrawerWebcomponent.prototype.close = function () {
-        var _this = this;
-        // uncheck the toggle
-        this.mutate(function () {
-            _this.toggleElm.checked = false;
-            _this.toggleElm.removeAttribute('checked');
-        }); // clear the hash
+      }
+      close() {
+        this.mutate(() => {
+          this.toggleElm.checked = false;
+          this.toggleElm.removeAttribute("checked");
+        });
         if (this.props.handleHash) {
-            document.location.hash = '';
+          document.location.hash = "";
         }
-        var transition = (0, _getTransitionProperties["default"])(this);
-        setTimeout(function () {
-            _this.mutate(function () {
-                document.body.classList.remove(_this.componentNameDash + "-" + _this.props.name);
-            });
+        const transition = (0, _getTransitionProperties.default)(this);
+        setTimeout(() => {
+          this.mutate(() => {
+            document.body.classList.remove(`${this.componentNameDash}-${this.props.name}`);
+          });
         }, transition.totalDuration);
         return this;
-    };
-    /**
-      * @name        isOpen
-      * @namespace     drawer-webcomponent
-      * @type        Function
-      *
-     * Check if is opened
-      *
-     * @return 		{Boolean} 		true if opened, false if not
-      *
-      * @author         Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    DrawerWebcomponent.prototype.isOpen = function () {
+      }
+      isOpen() {
         return this.toggleElm.checked;
-    };
-    return DrawerWebcomponent;
-}(_SWebComponent["default"]));
-exports["default"] = DrawerWebcomponent;
-module.exports = exports["default"];
-//# sourceMappingURL=testing.js.map
+      }
+    }
+    exports.default = DrawerWebcomponent;
+    module.exports = exports.default;
+  }
+});
+"use strict";
+export default require_testing();

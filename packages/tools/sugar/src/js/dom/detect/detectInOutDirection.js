@@ -1,32 +1,7 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var detectInOutDirection_exports = {};
-__export(detectInOutDirection_exports, {
-  default: () => detectInOutDirection_default
-});
-module.exports = __toCommonJS(detectInOutDirection_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+import __SPromise from "@coffeekraken/s-promise";
 function detectInOutDirection($elm) {
   let mouseEnterHandler, mouseLeaveHandler;
-  const promise = new import_s_promise.default(({ resolve, reject, emit }) => {
+  const promise = new __SPromise(({ resolve, reject, emit }) => {
     mouseEnterHandler = (e) => {
       emit("in", direction);
       emit("then", {
@@ -90,3 +65,6 @@ function calculateDirection(e) {
   }
 }
 var detectInOutDirection_default = detectInOutDirection;
+export {
+  detectInOutDirection_default as default
+};

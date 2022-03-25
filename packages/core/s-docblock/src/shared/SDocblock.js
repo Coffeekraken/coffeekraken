@@ -1,39 +1,14 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SDocblock_exports = {};
-__export(SDocblock_exports, {
-  default: () => SDocblock_default
-});
-module.exports = __toCommonJS(SDocblock_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_SDocblockBlock = __toESM(require("./SDocblockBlock"), 1);
-var import_node = __toESM(require("@coffeekraken/sugar/shared/is/node"), 1);
-var import_isPath = __toESM(require("@coffeekraken/sugar/node/fs/isPath"), 1);
-var import_jsonSync = __toESM(require("@coffeekraken/sugar/node/package/jsonSync"), 1);
-var import_require = __toESM(require("@coffeekraken/sugar/node/esm/require"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-class SDocblock extends import_s_class.default {
+import __SClass from "@coffeekraken/s-class";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SDocblockBlock from "./SDocblockBlock";
+import __isNode from "@coffeekraken/sugar/shared/is/node";
+import __isPath from "@coffeekraken/sugar/node/fs/isPath";
+import __packageJsonSync from "@coffeekraken/sugar/node/package/jsonSync";
+import __require from "@coffeekraken/sugar/node/esm/require";
+import __SPromise from "@coffeekraken/s-promise";
+class SDocblock extends __SClass {
   constructor(source, settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       docblock: {
         filter: void 0,
         filterByTag: void 0,
@@ -65,15 +40,15 @@ class SDocblock extends import_s_class.default {
     }, settings || {}));
     this._source = "";
     this._blocks = [];
-    if ((0, import_isPath.default)(source)) {
-      if (!(0, import_node.default)())
+    if (__isPath(source)) {
+      if (!__isNode())
         throw new Error(`Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`);
-      const __fs = (0, import_require.default)("fs");
+      const __fs = __require("fs");
       if (!__fs.existsSync(source))
         throw new Error(`Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`);
       this.docblockSettings.filepath = source;
       this._source = __fs.readFileSync(source, "utf8");
-      this._packageJson = (0, import_jsonSync.default)(source);
+      this._packageJson = __packageJsonSync(source);
     } else {
       this._source = source;
     }
@@ -94,7 +69,7 @@ class SDocblock extends import_s_class.default {
     return this._blocks;
   }
   parse(string = this._source) {
-    return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
       const regDefault = /(['"`\s]+)?(\/\*{2})([\s\S]+?)(\*\/)/g;
       let blocksArrayStr = [];
       let regDefaultMatches = string.match(regDefault);
@@ -168,7 +143,7 @@ class SDocblock extends import_s_class.default {
       }
       for (let i = 0; i < blocksArrayStr.length; i++) {
         const block = blocksArrayStr[i];
-        const docblockBlock = new import_SDocblockBlock.default(block || " ", {
+        const docblockBlock = new __SDocblockBlock(block || " ", {
           docblockBlock: {
             packageJson: this._packageJson,
             filepath: this.docblockSettings.filepath || "",
@@ -203,5 +178,6 @@ class SDocblock extends import_s_class.default {
   }
 }
 var SDocblock_default = SDocblock;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SDocblock_default as default
+};

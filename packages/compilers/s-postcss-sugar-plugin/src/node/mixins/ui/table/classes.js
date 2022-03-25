@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,32 +14,10 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  dependencies: () => dependencies,
-  interface: () => postcssSugarPluginUiTableClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_faker = __toESM(require("faker"));
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
-class postcssSugarPluginUiTableClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __STheme from "@coffeekraken/s-theme";
+import __faker from "faker";
+class postcssSugarPluginUiTableClassesInterface extends __SInterface {
   static get _definition() {
     return {
       styles: {
@@ -58,12 +32,12 @@ class postcssSugarPluginUiTableClassesInterface extends import_s_interface.defau
       defaultStyle: {
         type: "String",
         values: ["solid"],
-        default: import_s_theme.default.config("ui.table.defaultStyle")
+        default: __STheme.config("ui.table.defaultStyle")
       },
       defaultShape: {
         type: "String",
         values: ["default", "square"],
-        default: import_s_theme.default.config("ui.table.defaultShape")
+        default: __STheme.config("ui.table.defaultShape")
       },
       scope: {
         type: {
@@ -76,9 +50,10 @@ class postcssSugarPluginUiTableClassesInterface extends import_s_interface.defau
     };
   }
 }
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
 function dependencies() {
   return {
-    files: [`${(0, import_dirname.default)()}/table.js`]
+    files: [`${__dirname()}/table.js`]
   };
 }
 function classes_default({
@@ -125,19 +100,19 @@ function classes_default({
     return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ""}
             *   <table class="s-table${style === finalParams.defaultStyle ? "" : `:${style}`} s-mbe:30">
             *       <tr>
-            *           <th>${import_faker.default.name.findName()}</th>
-            *           <th>${import_faker.default.name.findName()}</th>
-            *           <th>${import_faker.default.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
             *       </tr>
             *       <tr>
-            *           <td>${import_faker.default.name.findName()}</td>
-            *           <td>${import_faker.default.name.findName()}</td>
-            *           <td>${import_faker.default.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
             *       </tr>
             *       <tr>
-            *           <td>${import_faker.default.name.findName()}</td>
-            *           <td>${import_faker.default.name.findName()}</td>
-            *           <td>${import_faker.default.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
             *       </tr>
             *   </table>
             * `;
@@ -147,19 +122,19 @@ function classes_default({
     return ` * @example        html       ${shape} shape ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ""}
             *   <table class="s-table${shape === finalParams.defaultShape ? "" : `:${shape}`} s-mbe:30">
             *       <tr>
-            *           <th>${import_faker.default.name.findName()}</th>
-            *           <th>${import_faker.default.name.findName()}</th>
-            *           <th>${import_faker.default.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
             *       </tr>
             *       <tr>
-            *           <td>${import_faker.default.name.findName()}</td>
-            *           <td>${import_faker.default.name.findName()}</td>
-            *           <td>${import_faker.default.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
             *       </tr>
             *       <tr>
-            *           <td>${import_faker.default.name.findName()}</td>
-            *           <td>${import_faker.default.name.findName()}</td>
-            *           <td>${import_faker.default.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
             *       </tr>
             *   </table>
             * `;
@@ -169,19 +144,19 @@ function classes_default({
         * <div dir="rtl">
         *   <table class="s-table">
         *       <tr>
-        *           <th>${import_faker.default.name.findName()}</th>
-        *           <th>${import_faker.default.name.findName()}</th>
-        *           <th>${import_faker.default.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
         *       </tr>
         *       <tr>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *       <tr>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
         * </div>
@@ -190,19 +165,19 @@ function classes_default({
         ${["07", "1", "13", "16"].map((scale) => `
         *   <table class="s-table s-scale:${scale}">
         *       <tr>
-        *           <th>${import_faker.default.name.findName()}</th>
-        *           <th>${import_faker.default.name.findName()}</th>
-        *           <th>${import_faker.default.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
         *       </tr>
         *       <tr>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *       <tr>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
         `).join("\n")}
@@ -211,19 +186,19 @@ function classes_default({
         ${["main", "accent", "complementary", "error"].map((color) => `
         *   <table class="s-table s-color:${color}">
         *       <tr>
-        *           <th>${import_faker.default.name.findName()}</th>
-        *           <th>${import_faker.default.name.findName()}</th>
-        *           <th>${import_faker.default.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
         *       </tr>
         *       <tr>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *       <tr>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
-        *           <td>${import_faker.default.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
         `).join("\n")}
@@ -420,14 +395,14 @@ function classes_default({
      `).code(`
         @sugar.rhythm.vertical {
           table, .s-table {
-              ${import_s_theme.default.jsObjectToCssProperties(import_s_theme.default.config("ui.table.rhythmVertical"))}
+              ${__STheme.jsObjectToCssProperties(__STheme.config("ui.table.rhythmVertical"))}
           }
         } 
     `);
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
+  classes_default as default,
   dependencies,
-  interface
-});
+  postcssSugarPluginUiTableClassesInterface as interface
+};

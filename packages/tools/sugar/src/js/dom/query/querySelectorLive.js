@@ -1,35 +1,10 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var querySelectorLive_exports = {};
-__export(querySelectorLive_exports, {
-  default: () => querySelectorLive_default
-});
-module.exports = __toCommonJS(querySelectorLive_exports);
-var import_uniqid = __toESM(require("../../../shared/string/uniqid"), 1);
-var import_matches = __toESM(require("./matches"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+import uniqid from "../../../shared/string/uniqid";
+import matches from "./matches";
+import __SPromise from "@coffeekraken/s-promise";
 let _observer;
 const _selectors = {};
 function querySelectorLive(selector, cb = null, settings = {}) {
-  const id = `${selector} - ${(0, import_uniqid.default)()}`;
+  const id = `${selector} - ${uniqid()}`;
   let _emit;
   settings = Object.assign({}, {
     rootNode: document,
@@ -99,13 +74,13 @@ function querySelectorLive(selector, cb = null, settings = {}) {
   }
   if (!_observer) {
     _observer = new MutationObserver((mutations) => {
-      const mutationId = `mutation-${(0, import_uniqid.default)()}`;
+      const mutationId = `mutation-${uniqid()}`;
       mutations.forEach((mutation) => {
         if (mutation.removedNodes && mutation.removedNodes.length) {
           [].forEach.call(mutation.removedNodes, (node) => {
             const selectors = Object.keys(_selectors);
             selectors.forEach((sel) => {
-              if ((0, import_matches.default)(node, sel)) {
+              if (matches(node, sel)) {
                 removeNode(node, sel, mutationId);
               }
             });
@@ -123,7 +98,7 @@ function querySelectorLive(selector, cb = null, settings = {}) {
           [].forEach.call(mutation.addedNodes, (node) => {
             const selectors = Object.keys(_selectors);
             selectors.forEach((sel) => {
-              if ((0, import_matches.default)(node, sel)) {
+              if (matches(node, sel)) {
                 pushNewNode(node, sel, mutationId);
               }
             });
@@ -139,7 +114,7 @@ function querySelectorLive(selector, cb = null, settings = {}) {
         } else if (mutation.attributeName) {
           const selectors = Object.keys(_selectors);
           selectors.forEach((sel) => {
-            if ((0, import_matches.default)(mutation.target, sel)) {
+            if (matches(mutation.target, sel)) {
               pushNewNode(mutation.target, sel, mutationId);
             }
           });
@@ -156,8 +131,11 @@ function querySelectorLive(selector, cb = null, settings = {}) {
   [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
     pushNewNode(node, selector, "init");
   });
-  return new import_s_promise.default(({ resolve, reject, emit }) => {
+  return new __SPromise(({ resolve, reject, emit }) => {
     _emit = emit;
   });
 }
 var querySelectorLive_default = querySelectorLive;
+export {
+  querySelectorLive_default as default
+};

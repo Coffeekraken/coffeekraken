@@ -1,9 +1,6 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,20 +15,6 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __decorateClass = (decorators, target, key, kind) => {
   var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
   for (var i = decorators.length - 1, decorator; i >= 0; i--)
@@ -41,43 +24,37 @@ var __decorateClass = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-var SCodeExample_exports = {};
-__export(SCodeExample_exports, {
-  default: () => SCodeExample,
-  define: () => define
-});
-module.exports = __toCommonJS(SCodeExample_exports);
-var import_s_clipboard_copy_component = require("@coffeekraken/s-clipboard-copy-component");
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_wait = __toESM(require("@coffeekraken/sugar/shared/time/wait"), 1);
-var import_core = __toESM(require("highlight.js/lib/core"), 1);
-var import_bash = __toESM(require("highlight.js/lib/languages/bash"), 1);
-var import_css = __toESM(require("./languages/css"), 1);
-var import_javascript = __toESM(require("highlight.js/lib/languages/javascript"), 1);
-var import_php = __toESM(require("highlight.js/lib/languages/php"), 1);
-var import_xml = __toESM(require("highlight.js/lib/languages/xml"), 1);
-var import_lit = require("lit");
-var import_unsafe_html = require("lit/directives/unsafe-html.js");
-var import_decorators = require("lit/decorators.js");
-var import_decodeHtmlEntities = __toESM(require("@coffeekraken/sugar/js/html/decodeHtmlEntities"), 1);
-var import_s_code_example = __toESM(require("../css/s-code-example.css"), 1);
-var import_SCodeExampleComponentInterface = __toESM(require("./interface/SCodeExampleComponentInterface"), 1);
-var import_scrollTo = __toESM(require("@coffeekraken/sugar/js/dom/scroll/scrollTo"), 1);
-var import_standalone = __toESM(require("prettier/esm/standalone.mjs"), 1);
-var import_parser_babel = __toESM(require("prettier/esm/parser-babel.mjs"), 1);
-var import_parser_html = __toESM(require("prettier/esm/parser-html.mjs"), 1);
-var import_parser_postcss = __toESM(require("prettier/esm/parser-postcss.mjs"), 1);
-var import_standalone2 = __toESM(require("@prettier/plugin-php/standalone"), 1);
-(0, import_s_clipboard_copy_component.define)();
-class SCodeExample extends import_s_lit_component.default {
+import { define as __SClipboardCopy } from "@coffeekraken/s-clipboard-copy-component";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __wait from "@coffeekraken/sugar/shared/time/wait";
+import __hljs from "highlight.js/lib/core";
+import __langBash from "highlight.js/lib/languages/bash";
+import __langCss from "./languages/css";
+import __langJavascript from "highlight.js/lib/languages/javascript";
+import __langPhp from "highlight.js/lib/languages/php";
+import __langHtml from "highlight.js/lib/languages/xml";
+import { css, html, unsafeCSS } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import { property, query } from "lit/decorators.js";
+import __decodeHtmlEntities from "@coffeekraken/sugar/js/html/decodeHtmlEntities";
+import __css from "../css/s-code-example.css";
+import __SCodeExampleComponentInterface from "./interface/SCodeExampleComponentInterface";
+import __scrollTo from "@coffeekraken/sugar/js/dom/scroll/scrollTo";
+import __prettier from "prettier/esm/standalone.mjs";
+import __prettierJs from "prettier/esm/parser-babel.mjs";
+import __prettierHtml from "prettier/esm/parser-html.mjs";
+import __prettierCss from "prettier/esm/parser-postcss.mjs";
+import __prettierPhp from "@prettier/plugin-php/standalone";
+__SClipboardCopy();
+class SCodeExample extends __SLitComponent {
   constructor() {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       litComponent: {
         shadowDom: false
       },
       componentUtils: {
-        interface: import_SCodeExampleComponentInterface.default
+        interface: __SCodeExampleComponentInterface
       }
     }));
     this._$copy = void 0;
@@ -85,25 +62,25 @@ class SCodeExample extends import_s_lit_component.default {
     this._activeTabId = void 0;
     var _a;
     const languages = __spreadValues({
-      html: import_xml.default,
-      javascript: import_javascript.default,
-      js: import_javascript.default,
-      php: import_php.default,
-      bash: import_bash.default,
-      shell: import_bash.default,
-      css: import_css.default,
-      scss: import_css.default
+      html: __langHtml,
+      javascript: __langJavascript,
+      js: __langJavascript,
+      php: __langPhp,
+      bash: __langBash,
+      shell: __langBash,
+      css: __langCss,
+      scss: __langCss
     }, (_a = this.props.languages) != null ? _a : {});
     Object.keys(languages).forEach((lang) => {
-      import_core.default.registerLanguage(lang, languages[lang]);
+      __hljs.registerLanguage(lang, languages[lang]);
     });
   }
   static get properties() {
-    return import_s_lit_component.default.properties({}, import_SCodeExampleComponentInterface.default);
+    return __SLitComponent.properties({}, __SCodeExampleComponentInterface);
   }
   static get styles() {
-    return import_lit.css`
-            ${(0, import_lit.unsafeCSS)(import_s_code_example.default)}
+    return css`
+            ${unsafeCSS(__css)}
         `;
   }
   async firstUpdated() {
@@ -124,16 +101,16 @@ class SCodeExample extends import_s_lit_component.default {
           parser = "css";
           break;
       }
-      let rawCode = (0, import_decodeHtmlEntities.default)($template.tagName.toLowerCase() === "textarea" && $template.value ? $template.value : $template.innerHTML);
+      let rawCode = __decodeHtmlEntities($template.tagName.toLowerCase() === "textarea" && $template.value ? $template.value : $template.innerHTML);
       let formatedCode = rawCode;
       try {
-        formatedCode = import_standalone.default.format(rawCode, {
+        formatedCode = __prettier.format(rawCode, {
           parser,
           plugins: [
-            import_parser_postcss.default,
-            import_parser_html.default,
-            import_parser_babel.default,
-            import_standalone2.default
+            __prettierCss,
+            __prettierHtml,
+            __prettierJs,
+            __prettierPhp
           ]
         });
       } catch (e) {
@@ -169,7 +146,7 @@ class SCodeExample extends import_s_lit_component.default {
     return this._items.find((i) => i.id === this._activeTabId);
   }
   async setActiveTab(id) {
-    await (0, import_wait.default)();
+    await __wait();
     this._activeTabId = id;
     this.highlight(id);
   }
@@ -185,7 +162,7 @@ class SCodeExample extends import_s_lit_component.default {
     var _a;
     this._more = !this._more;
     this.setMoreClass();
-    (0, import_scrollTo.default)(this, __spreadValues({}, (_a = this.props.scrollToSettings) != null ? _a : {}));
+    __scrollTo(this, __spreadValues({}, (_a = this.props.scrollToSettings) != null ? _a : {}));
   }
   highlight(id) {
     var _a;
@@ -198,8 +175,8 @@ class SCodeExample extends import_s_lit_component.default {
     $content.setAttribute("inited", "true");
     let code;
     try {
-      const codeToHighlight = (0, import_decodeHtmlEntities.default)($content.innerHTML.replace(/(<|&lt;)!\s?--\?lit.*--\s?(>|&gt;)/, ""));
-      code = import_core.default.highlight(codeToHighlight, {
+      const codeToHighlight = __decodeHtmlEntities($content.innerHTML.replace(/(<|&lt;)!\s?--\?lit.*--\s?(>|&gt;)/, ""));
+      code = __hljs.highlight(codeToHighlight, {
         language: $content.getAttribute("lang")
       });
     } catch (e) {
@@ -216,7 +193,7 @@ class SCodeExample extends import_s_lit_component.default {
   render() {
     var _a, _b, _c, _d, _e, _f, _g;
     const currentItem = this.currentItem;
-    return import_lit.html`
+    return html`
             <div
                 class="${this.componentUtils.className()} ${this.props.more ? this.componentUtils.className("more") : ""}"
                 ?lines="${this.lines}"
@@ -231,7 +208,7 @@ class SCodeExample extends import_s_lit_component.default {
                     <div
                         class="${this.componentUtils.className("__tabs", "s-tabs")}"
                     >
-                        ${((_a = this._items) != null ? _a : []).map((item) => import_lit.html`
+                        ${((_a = this._items) != null ? _a : []).map((item) => html`
                                 <div
                                     class="${this.componentUtils.className("__tab")}"
                                     id="${item.id}"
@@ -242,7 +219,7 @@ class SCodeExample extends import_s_lit_component.default {
                                 </div>
                             `)}
                     </div>
-                    ${this.toolbarPosition === "nav" ? import_lit.html`
+                    ${this.toolbarPosition === "nav" ? html`
                                   <div
                                       class="${this.componentUtils.className("__toolbar")}"
                                   >
@@ -256,7 +233,7 @@ class SCodeExample extends import_s_lit_component.default {
                     class="${this.componentUtils.className("__content")}"
                     style="--max-lines: ${(_b = this.props.lines) != null ? _b : 99999999};"
                 >
-                    ${this.toolbarPosition !== "nav" ? import_lit.html`
+                    ${this.toolbarPosition !== "nav" ? html`
                                   <div
                                       class="${this.componentUtils.className("__toolbar")}"
                                   >
@@ -267,38 +244,38 @@ class SCodeExample extends import_s_lit_component.default {
                               ` : ""}
                     ${((_c = this._items) != null ? _c : []).map((item) => {
       var _a2, _b2, _c2;
-      return import_lit.html`
+      return html`
                             <pre
                                 class="${this.componentUtils.className("__code")}"
                                 style="line-height:0;"
                                 id="${(_a2 = item.id) != null ? _a2 : item.lang}"
                                 ?active="${this._activeTabId === ((_b2 = item.id) != null ? _b2 : item.lang)}"
                             >
-                            <code lang="${(_c2 = item.lang) != null ? _c2 : item.id}" class="language-${item.lang} ${item.lang} ${this.props.bare ? "" : "hljs"}">${item.highlightedCode ? (0, import_unsafe_html.unsafeHTML)(item.highlightedCode) : item.code.trim()}</code>
+                            <code lang="${(_c2 = item.lang) != null ? _c2 : item.id}" class="language-${item.lang} ${item.lang} ${this.props.bare ? "" : "hljs"}">${item.highlightedCode ? unsafeHTML(item.highlightedCode) : item.code.trim()}</code>
                         </pre>
                         `;
     })}
-                    ${this.props.lines && currentItem.lines > this.lines ? import_lit.html`
+                    ${this.props.lines && currentItem.lines > this.lines ? html`
                         <div class="${this.componentUtils.className("__more-bar")}">
-                            ${this.moreAction === "toggle" ? import_lit.html`
+                            ${this.moreAction === "toggle" ? html`
                                           <a
                                               class="${this.componentUtils.className("__more-button", "s-btn")}"
                                               @click="${() => this.toggleMore()}"
                                           >
-                                              ${this._more ? import_lit.html`
+                                              ${this._more ? html`
                                                             ${(_d = this.props.lessLabel) != null ? _d : "Show less"}
-                                                        ` : import_lit.html`
+                                                        ` : html`
                                                             ${(_e = this.props.moreLabel) != null ? _e : "Show more"}
                                                         `}
                                           </a>
-                                      ` : import_lit.html`
+                                      ` : html`
                                           <a
                                               class="${this.componentUtils.className("__more-button", "s-btn s-color--accent")}"
                                               href="${this.moreAction}"
                                           >
-                                              ${this._more ? import_lit.html`
+                                              ${this._more ? html`
                                                             ${(_f = this.props.lessLabel) != null ? _f : "Show less"}
-                                                        ` : import_lit.html`
+                                                        ` : html`
                                                             ${(_g = this.props.moreLabel) != null ? _g : "Show more"}
                                                         `}
                                           </a>
@@ -312,26 +289,30 @@ class SCodeExample extends import_s_lit_component.default {
   }
 }
 __decorateClass([
-  (0, import_decorators.property)()
+  property()
 ], SCodeExample.prototype, "_items", 2);
 __decorateClass([
-  (0, import_decorators.property)()
+  property()
 ], SCodeExample.prototype, "_activeTabId", 2);
 __decorateClass([
-  (0, import_decorators.property)({
+  property({
     type: String
   })
 ], SCodeExample.prototype, "active", 2);
 __decorateClass([
-  (0, import_decorators.property)()
+  property()
 ], SCodeExample.prototype, "props", 2);
 __decorateClass([
-  (0, import_decorators.query)("s-clipboard-copy")
+  query("s-clipboard-copy")
 ], SCodeExample.prototype, "$copy", 2);
 __decorateClass([
-  (0, import_decorators.query)(".templates")
+  query(".templates")
 ], SCodeExample.prototype, "$templatesContainer", 2);
 function define(props = {}, tagName = "s-code-example") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SCodeExample);
 }
+export {
+  SCodeExample as default,
+  define
+};

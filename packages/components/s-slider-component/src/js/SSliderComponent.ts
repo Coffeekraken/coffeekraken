@@ -3,7 +3,7 @@
 import __SSliderBehavior from './SSliderBehavior';
 import __SSliderSlideableBehavior from './behaviors/SSliderSlideableBehavior';
 import __SLitComponent, {
-    ISLitComponentDefaultProps
+    ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
 import __SInterface from '@coffeekraken/s-interface';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
@@ -41,15 +41,15 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  * @feature         Custom navigation capabilities built-in
  * @feature         Horizontal and vertical direction built-in
  * @ƒeature         Mousewheel navigation built-in
- * @feature         Swipe navigation built-in 
+ * @feature         Swipe navigation built-in
  * @feature         Loop capability built-in
  * @feature         Timer capability built-in
  * @feature         Custom behavior (extensions) capabilities built-in
  * @feature         Slideable behavior available
- * 
- * @install          bash 
+ *
+ * @install          bash
  * npm i @coffeekraken/s-slider-component
- * 
+ *
  * @install         js
  * import { define, SSliderSlideableBehavior } from '@coffeekraken/s-slider-component';
  * define({
@@ -60,7 +60,7 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  *          }
  *      }
  * });
- * 
+ *
  * @example         html        Simple slider
  * <s-slider controls nav>
  *    <div s-slider-slide class="s-bg--accent">
@@ -80,12 +80,12 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *   </s-slider>
- * 
+ *
  * @example         html        Slideable slider
  * <s-slider behavior="slideable" controls nav>
  *    <div s-slider-slide class="s-bg--accent">
  *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:lead">Click and drag</p>          
+ *           <p class="s-typo:lead">Click and drag</p>
  *       </div>
  *       <div s-slider-slide class="s-bg:complementary">
  *           <h1 class="s-typo:h1">Slide #2</h1>
@@ -100,7 +100,7 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *   </s-slider>
- * 
+ *
  * @example         html        Tight slider
  * <s-slider behavior="slideable" lnf="default-tight" controls nav>
  *    <div s-slider-slide class="s-bg--accent">
@@ -120,7 +120,7 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *   </s-slider>
- * 
+ *
  * @example         html        Contained slider
  * <s-slider behavior="slideable" lnf="default-contained" controls nav>
  *    <div s-slider-slide class="s-bg--accent">
@@ -140,7 +140,7 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *   </s-slider>
- * 
+ *
  * @example         html        Vertical slider
  * <s-slider behavior="slideable" direction="vertical" controls nav>
  *    <div s-slider-slide class="s-bg--accent">
@@ -160,7 +160,7 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *   </s-slider>
- * 
+ *
  * @example         html        Vertical tight slider
  * <s-slider behavior="slideable" direction="vertical" lnf="default-tight" controls nav>
  *    <div s-slider-slide class="s-bg--accent">
@@ -180,7 +180,7 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *   </s-slider>
- * 
+ *
  * @example         html        Vertical contained slider
  * <s-slider behavior="slideable" direction="vertical" lnf="default-contained" controls nav>
  *    <div s-slider-slide class="s-bg--accent">
@@ -200,7 +200,7 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *   </s-slider>
- * 
+ *
  * @example         html        Slider with progressbar
  * <s-slider behavior="slideable" progress controls nav>
  *    <div s-slider-slide class="s-bg--accent">
@@ -220,7 +220,7 @@ import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *   </s-slider>
- * 
+ *
  * @example         html        Slider with progressbar, loop and timer
  * <s-slider behavior="slideable" progress loop controls nav timer="2500">
  *    <div s-slider-slide class="s-bg--accent">
@@ -269,7 +269,7 @@ export interface ISSliderComponentSlide {
     id: string;
     idx: number;
     $slide: HTMLElement;
-    timer: ISSliderComponentTimer
+    timer: ISSliderComponentTimer;
 }
 
 export interface ISSliderComponentTimer {
@@ -303,12 +303,11 @@ export default class SSlider extends __SLitComponent {
     _timer = {
         total: 0,
         current: 0,
-        percentage: 0
+        percentage: 0,
     };
     _playing = true;
 
     constructor() {
-
         console.log('SSS___Y');
 
         super(
@@ -317,20 +316,30 @@ export default class SSlider extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SInterface.mix(__SSliderComponentInterface, __SComponentUtils.getDefaultProps('s-slider').behavior?.interface ?? {}),
+                    interface: __SInterface.mix(
+                        __SSliderComponentInterface,
+                        __SComponentUtils.getDefaultProps('s-slider').behavior
+                            ?.interface ?? {},
+                    ),
                 },
             }),
-        ); 
+        );
     }
     async firstUpdated() {
         // bare elements
-        this.$root = this.querySelector(`.${this.componentUtils.className('')}`);
+        this.$root = this.querySelector(
+            `.${this.componentUtils.className('')}`,
+        );
 
         // slides
-        this.$slidesWrapper = this.querySelector(`.${this.componentUtils.className('__slides-wrapper')}`);
-        this.$slidesContainer = this.querySelector(`.${this.componentUtils.className('__slides')}`);
+        this.$slidesWrapper = this.querySelector(
+            `.${this.componentUtils.className('__slides-wrapper')}`,
+        );
+        this.$slidesContainer = this.querySelector(
+            `.${this.componentUtils.className('__slides')}`,
+        );
         this.$slides = this.querySelectorAll('[s-slider-slide]');
-        this.$slides.forEach($item => {
+        this.$slides.forEach(($item) => {
             // add the item class
             $item.classList.add(this.componentUtils.className('__slide'));
         });
@@ -341,9 +350,10 @@ export default class SSlider extends __SLitComponent {
         // default behavior
         if (this.props.behavior) {
             if (typeof this.props.behavior === 'string') {
-
                 let behavior;
-                for (let [behaviorId, behaviorObj] of Object.entries(this.props.availableBehaviors)) {
+                for (let [behaviorId, behaviorObj] of Object.entries(
+                    this.props.availableBehaviors,
+                )) {
                     const id = behaviorObj.class?.id ?? behaviorObj.id;
                     if (id === this.props.behavior) {
                         behavior = behaviorObj;
@@ -351,10 +361,14 @@ export default class SSlider extends __SLitComponent {
                     }
                 }
                 if (!behavior) {
-                    throw new Error(`The behavior "${this.props.behavior}" is not available`);
+                    throw new Error(
+                        `The behavior "${this.props.behavior}" is not available`,
+                    );
                 }
                 if (!behavior.class) {
-                    throw new Error(`The behavior "${this.props.behavior}" is not valid. You must provide the "<yellow>class</yellow>" property and an optional "<yellow>settings</yellow>" one...`);
+                    throw new Error(
+                        `The behavior "${this.props.behavior}" is not valid. You must provide the "<yellow>class</yellow>" property and an optional "<yellow>settings</yellow>" one...`,
+                    );
                 }
                 this.behavior = new behavior.class(behavior.settings ?? {});
             } else if (__isClass(this.props.behavior)) {
@@ -362,7 +376,9 @@ export default class SSlider extends __SLitComponent {
             } else if (this.props.behavior instanceof __SSliderBehavior) {
                 this.behavior = this.props.behavior;
             } else {
-                throw new Error(`Invalid behavior type, must be a string, an SSliderBehavior extended class or an SSliderBehavior instance`);
+                throw new Error(
+                    `Invalid behavior type, must be a string, an SSliderBehavior extended class or an SSliderBehavior instance`,
+                );
             }
             this.behavior.$slider = this;
             this.behavior.firstUpdated?.();
@@ -414,16 +430,17 @@ export default class SSlider extends __SLitComponent {
      * If the element has a value, it will be treated as a navigation item and will go to the corresponding slide on click.
      */
     _initNavigation() {
-
         // navs
         this.$navs = this.querySelectorAll('[s-slider-nav]');
 
         if (!this.$navs.length && this.props.nav) {
-            Array(this.$slides.length).fill().forEach((v,i) => {
-                const $nav = document.createElement('div');
-                $nav.setAttribute('s-slider-nav', i);
-                this.appendChild($nav);
-            });
+            Array(this.$slides.length)
+                .fill()
+                .forEach((v, i) => {
+                    const $nav = document.createElement('div');
+                    $nav.setAttribute('s-slider-nav', i);
+                    this.appendChild($nav);
+                });
             // navs
             this.$navs = this.querySelectorAll('[s-slider-nav]');
         }
@@ -450,10 +467,10 @@ export default class SSlider extends __SLitComponent {
     _handleClickOnSlide() {
         this.$slidesContainer.addEventListener('click', (e) => {
             for (let [i, $slide] of this.$slides.entries()) {
-                if ($slide.contains(e.target) || $slide === e.target) {
+                if ($slide.contains(e.target) || $slide === e.target) {
                     this.goTo($slide);
                 }
-            }   
+            }
         });
     }
 
@@ -461,14 +478,12 @@ export default class SSlider extends __SLitComponent {
      * This function listen for intersection changes on slides and apply classes depending on this
      */
     _handleIntersections() {
-
-         this.$slides?.forEach($slide => {
-
+        this.$slides?.forEach(($slide) => {
             function buildThresholdList() {
                 let thresholds = [];
                 let numSteps = 10;
-                for (let i=1.0; i<=numSteps; i++) {
-                    let ratio = i/numSteps;
+                for (let i = 1.0; i <= numSteps; i++) {
+                    let ratio = i / numSteps;
                     thresholds.push(ratio);
                 }
                 thresholds.push(0);
@@ -480,28 +495,29 @@ export default class SSlider extends __SLitComponent {
                 entries.forEach((entry) => {
                     if (entry.intersectionRatio > highestRatio) {
                         highestRatio = entry.intersectionRatio;
-                    } 
-                });
-                [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1].forEach((threshold, idx) => {
-                    if (highestRatio >= threshold) {
-                        $slide.classList.add(`in-${threshold*100}`);
-                    } else {
-                        $slide.classList.remove(`in-${threshold*100}`);
                     }
                 });
+                [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1].forEach(
+                    (threshold, idx) => {
+                        if (highestRatio >= threshold) {
+                            $slide.classList.add(`in-${threshold * 100}`);
+                        } else {
+                            $slide.classList.remove(`in-${threshold * 100}`);
+                        }
+                    },
+                );
             }
 
             let observer;
 
             let options = {
                 root: this.$root,
-                rootMargin: "0px",
-                threshold: buildThresholdList()
+                rootMargin: '0px',
+                threshold: buildThresholdList(),
             };
 
             observer = new IntersectionObserver(handleIntersect, options);
             observer.observe($slide);
-
         });
     }
 
@@ -527,13 +543,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        isLast
      * @type        Function
-     * 
+     *
      * This method allows you to check if the actual slide is the last one
-     * 
+     *
      * @return      {Boolean}           true if the actual slide is the last one, false otherwise
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isLast() {
         return this.currentSlideIdx >= this.$slides.length - 1;
@@ -542,13 +558,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        isFirst
      * @type        Function
-     * 
+     *
      * This method allows you to check if the actual slide is the first one
-     * 
+     *
      * @return      {Boolean}           true if the actual slide is the first one, false otherwise
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isFirst() {
         return this.currentSlideIdx <= 0;
@@ -557,13 +573,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getCurrentSlideIdx
      * @type    Function
-     * 
+     *
      * Access the current slide idx. Begin from 0...
-     * 
+     *
      * @return      {Number}        The current slide idx
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getCurrentSlideIdx(): number {
         return this._currentSlideIdx;
@@ -572,30 +588,30 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        setCurrentSlideByIdx
      * @type    Function
-     * 
+     *
      * Set the current slide idx.
-     * 
+     *
      * @param       {Number}        idx         The current slide idx
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setCurrentSlideByIdx(idx: number): void {
         this._currentSlideIdx = idx;
         this.requestUpdate();
     }
 
-     /**
+    /**
      * @name       setCurrentSlide
      * @type        Function
-     * 
+     *
      * This method allows you to get the current clide using an id or an idx.
-     * 
+     *
      * @param       {String|Number|HTMLElement}    idIdxOrElement    The slide id or idx or the slide HTMLElement
      * @return      {SSLiderComponent}              The slider component to maintain chainability
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setCurrentSlide(idIdxOrElement: string | number): SSLiderComponent {
         const slide = this.getSlide(idIdxOrElement);
@@ -606,11 +622,11 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        currentSlideIdx
      * @type        Number
-     * 
+     *
      * Access the current slide idx. Begin from 0...
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get currentSlideIdx(): number {
         return this.getCurrentSlideIdx();
@@ -619,26 +635,26 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getCurrentSlideElement
      * @type    Function
-     * 
+     *
      * Access the current slide item.
-     * 
+     *
      * @return      {HTMLElement}           The current slide element
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getCurrentSlideElement(): HTMLElement {
-        return this.$slides[this._currentSlideIdx]
+        return this.$slides[this._currentSlideIdx];
     }
 
     /**
      * @name        currentSlideElement
      * @type    HTMLElement
-     * 
+     *
      * Access the current slide item.
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get currentSlideElement(): HTMLElement {
         return this.getCurrentSlideElement();
@@ -647,28 +663,29 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getNextSlideIdx
      * @type    HTMLElement
-     * 
+     *
      * Access the next slide idx.
-     * 
+     *
      * @return      {Number}        The next slide idx
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getNextSlideIdx(): number {
         const nextSlideIdx = this._currentSlideIdx + 1;
-        if (nextSlideIdx >= this.$slides.length - 1) return this.$slides.length - 1;
+        if (nextSlideIdx >= this.$slides.length - 1)
+            return this.$slides.length - 1;
         return nextSlideIdx;
     }
 
     /**
      * @name        nextSlideIdx
      * @type    Number
-     * 
+     *
      * Access the next slide idx.
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get nextSlideIdx(): number {
         return this.getNextSlideIdx();
@@ -677,13 +694,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getNextSlideElement
      * @type    Function
-     * 
+     *
      * Access the next slide idx.
-     * 
+     *
      * @return      {HTMLElement}           The next slide element
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getNextSlideElement(): HTMLElement {
         return this.$slides[this.getNextSlideIdx()];
@@ -692,11 +709,11 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        nextSlideElement
      * @type    Function
-     * 
+     *
      * Access the next slide idx.
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get nextSlideElement(): HTMLElement {
         return this.getNextSlideElement();
@@ -705,13 +722,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getPreviousSlideIdx
      * @type    Function
-     * 
+     *
      * Access the previous slide idx.
-     * 
+     *
      * @return      {HTMLElement}           The previous slide idx
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getPreviousSlideIdx(): number {
         const previousSlideIdx = this._currentSlideIdx - 1;
@@ -723,13 +740,13 @@ export default class SSlider extends __SLitComponent {
      * @name        previousSlideIdx
      * @type    Number
      * @get
-     * 
+     *
      * Access the previous slide idx.
-     * 
+     *
      * @return      {HTMLElement}           The previous slide idx
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get previousSlideIdx(): number {
         return this.getPreviousSlideIdx();
@@ -738,13 +755,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getPreviousSlideElement
      * @type    Function
-     * 
+     *
      * Access the previous slide element.
-     * 
+     *
      * @return      {HTMLElement}           The previous slide element
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getPreviousSlideElement(): HTMLElement {
         return this.$slides[this.getPreviousSlideIdx()];
@@ -753,11 +770,11 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        previousSlideElement
      * @type    Function
-     * 
+     *
      * Access the previous slide element.
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get previousSlideItem(): HTMLElement {
         return this.$slides[this.getPreviousSlideIdx()];
@@ -766,17 +783,17 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getSlideIdxById
      * @type        Function
-     * 
+     *
      * This method allows you to get back the slide idx by its id.
-     * 
+     *
      * @param       {String}    id     The slide id
-     * @return      {Number}        The slide idx 
-     * 
+     * @return      {Number}        The slide idx
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getSlideIdxById(id: string): number {
-        for (let i=0; i<this.$slides.length; i++) {
+        for (let i = 0; i < this.$slides.length; i++) {
             if (this.$slides[i].getAttribute('s-slider-slide') === id) return i;
         }
     }
@@ -784,14 +801,14 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getSlideElementByIdx
      * @type        Function
-     * 
+     *
      * This method allows you to get back a slide HTMLElement by its index.
-     * 
+     *
      * @param       {Number}    idx    The slide idx
      * @return      {HTMLElement}        The slide HTMLElement
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getSlideElementByIdx(idx: number): HTMLElement {
         return this.$slides[idx];
@@ -800,13 +817,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getCurrentSlide
      * @type        Function
-     * 
+     *
      * This method allows you to get back the current slide object <ISSliderComponentSlide> either by it's id, or by it's idx.
-     * 
+     *
      * @return      {ISSliderComponentSlide}        The slide object
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getCurrentSlide(): ISSliderComponentSlide {
         return this.getSlide(this.currentSlideIdx);
@@ -815,11 +832,11 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name            currentSlide
      * @type            ISSliderComponentSlide
-     * 
+     *
      * Access the current slide object
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get currentSlide(): ISSliderComponentSlide {
         return this.getCurrentSlide();
@@ -828,21 +845,25 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getSlide
      * @type        Function
-     * 
+     *
      * This method allows you to get back a slide object <ISSliderComponentSlide> either by it's id, or by it's idx.
-     * 
+     *
      * @param       {String|Number}    idIdxOrElement    The slide id or idx
      * @return      {ISSliderComponentSlide}        The slide object
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    getSlide(idIdxOrElement: string | number | HTMLElement): ISSliderComponentSlide {
+    getSlide(
+        idIdxOrElement: string | number | HTMLElement,
+    ): ISSliderComponentSlide {
         let $slide, id, idx, timer;
         if (idIdxOrElement instanceof HTMLElement) {
             const id = idIdxOrElement.getAttribute('s-slider-slide');
             if (id) return this.getSlide(id);
-            return this.getSlide(Array.from(this.$slides).indexOf(idIdxOrElement));
+            return this.getSlide(
+                Array.from(this.$slides).indexOf(idIdxOrElement),
+            );
         } else if (typeof idIdxOrElement === 'number') {
             idx = idIdxOrElement;
             $slide = this.getSlideElementByIdx(idx);
@@ -852,7 +873,7 @@ export default class SSlider extends __SLitComponent {
                 timer = {
                     total: $slide.getAttribute('timer') ?? this.props.timer,
                     current: 0,
-                    percentage: 0
+                    percentage: 0,
                 };
                 $slide._sSliderComponentTimer = timer;
             }
@@ -865,7 +886,7 @@ export default class SSlider extends __SLitComponent {
                 timer = {
                     total: $slide.getAttribute('timer') ?? this.props.timer,
                     current: 0,
-                    percentage: 0
+                    percentage: 0,
                 };
                 $slide._sSliderComponentTimer = timer;
             }
@@ -875,20 +896,20 @@ export default class SSlider extends __SLitComponent {
             id,
             idx,
             $slide,
-            timer
+            timer,
         };
     }
 
     /**
      * @name            getFirstSlide
      * @type           Function
-     * 
+     *
      * This method allows you to get the first slide of the slider
-     * 
+     *
      * @return      {ISSliderComponentSlide}       The first slide object
-     * 
+     *
      * @since      2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getFirstSlide(): ISSliderComponentSlide {
         return this.getSlide(0);
@@ -897,13 +918,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name            getLastSlide
      * @type           Function
-     * 
+     *
      * This method allows you to get the last slide of the slider
-     * 
+     *
      * @return      {ISSliderComponentSlide}       The last slide object
-     * 
+     *
      * @since      2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getLastSlide(): ISSliderComponentSlide {
         return this.getSlide(this.$slides.length - 1);
@@ -912,16 +933,19 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        goTo
      * @type    Function
-     * 
+     *
      * Go to a specific slide.
-     * 
+     *
      * @param       {Number|String}    slideIdIdxOrElement    The slide idx, id or HTMLElement to go to
-     * @return      {SSliderComponent}          The slider element to maintain chainability 
+     * @return      {SSliderComponent}          The slider element to maintain chainability
      *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    async goTo(slideIdIdxOrElement: number | string | HTMLElement, userAction: boolean = true): SSliderComponent {
+    async goTo(
+        slideIdIdxOrElement: number | string | HTMLElement,
+        userAction: boolean = true,
+    ): SSliderComponent {
         const nextSlide = this.getSlide(slideIdIdxOrElement);
         if (!nextSlide || nextSlide.idx === this.currentSlide.idx) return;
         const currentSlide = this.getCurrentSlide();
@@ -929,14 +953,14 @@ export default class SSlider extends __SLitComponent {
 
         this._dispatch('s-slider-goto', {
             currentSlide,
-            nextSlide
+            nextSlide,
         });
 
         await this._transitionHandler(currentSlide.$side, nextSlide.$slide);
 
         this._dispatch('s-slider-goto-end', {
             currentSlide,
-            nextSlide
+            nextSlide,
         });
 
         this.requestUpdate();
@@ -951,13 +975,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        next
      * @type    Function
-     * 
+     *
      * Go to the next slide
-     * 
+     *
      * @return      {SSliderComponent}          The slider element to maintain chainability
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     next(userAction: boolean): SSliderComponent {
         if (this.props.loop && this.isLast()) {
@@ -969,13 +993,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        previous
      * @type    Function
-     * 
+     *
      * Go to the previous slide
-     * 
+     *
      * @return      {SSliderComponent}          The slider element to maintain chainability
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     previous(userAction: boolean): SSliderComponent {
         if (this.props.loop && this.isFirst()) {
@@ -987,18 +1011,21 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        getTimer
      * @type        Function
-     * 
+     *
      * This method allows you to get back the timer object
-     * 
+     *
      * @return      {ISSliderComponentTimer}      The timer object
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    getTimer(slideIdIdxOrElement?: number | string | HTMLElement): ISSliderComponentTimer {
+    getTimer(
+        slideIdIdxOrElement?: number | string | HTMLElement,
+    ): ISSliderComponentTimer {
         // return global timer if no slide is specified
         if (!slideIdIdxOrElement) {
-            let total = 0, current = 0;
+            let total = 0,
+                current = 0;
             for (let i = 0; i < this.$slides.length; i++) {
                 const slide = this.getSlide(i);
                 if (i < this.currentSlideIdx) {
@@ -1006,13 +1033,13 @@ export default class SSlider extends __SLitComponent {
                 } else if (i === this.currentSlideIdx) {
                     current += slide.timer.current;
                 }
-                total+=slide.timer.total ?? 0;
+                total += slide.timer.total ?? 0;
             }
             this._timer.total = total;
             this._timer.current = current;
-            this._timer.percentage = Math.round(100 / total * current);
-            return this._timer
-        };
+            this._timer.percentage = Math.round((100 / total) * current);
+            return this._timer;
+        }
         // get the slide timer
         const slide = this.getSlide(slideIdIdxOrElement);
         return slide.timer;
@@ -1021,13 +1048,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        isPlaying
      * @type    Function
-     * 
+     *
      * This method allows you to know if the slider is currently playing or not
-     * 
+     *
      * @return      {Boolean}           trie if the slider is playing or not
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isPlaying(): boolean {
         if (!this._playing) return false;
@@ -1037,13 +1064,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        play
      * @type    Function
-     * 
+     *
      * This method allows you to play the slider when a `timer` has been defined
-     * 
+     *
      * @return      {SSliderComponent}          The slider element to maintain chainability
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     play(): SSliderComponent {
         if (!this.props.timer) return;
@@ -1055,13 +1082,13 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        stop
      * @type    Function
-     * 
+     *
      * This method allows you to stop the slider
-     * 
+     *
      * @return      {SSliderComponent}          The slider element to maintain chainability
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     stop(): SSliderComponent {
         this._playing = false;
@@ -1071,15 +1098,17 @@ export default class SSlider extends __SLitComponent {
     /**
      * @name        _playSlide
      * @type    Function
-     * 
+     *
      * This method allows you to play a particular slide
-     * 
+     *
      * @return      {SSliderComponent}          The slider element to maintain chainability
-     * 
+     *
      * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _playSlide(idIdxOrElement: number | string | HTMLElement): SSliderComponent {
+    _playSlide(
+        idIdxOrElement: number | string | HTMLElement,
+    ): SSliderComponent {
         const slide = this.getSlide(idIdxOrElement);
         if (!slide || !slide.timer) return;
 
@@ -1090,7 +1119,7 @@ export default class SSlider extends __SLitComponent {
             if (!this.isPlaying()) return;
             elapsed += interval;
             slide.timer.current = elapsed;
-            slide.timer.percentage = 100 / slide.timer.total * elapsed;
+            slide.timer.percentage = (100 / slide.timer.total) * elapsed;
             this.requestUpdate();
             if (elapsed >= slide.timer.total) {
                 clearInterval(slideInterval);
@@ -1103,15 +1132,12 @@ export default class SSlider extends __SLitComponent {
         return this;
     }
 
-
-
     /**
      * Function that is in charge of making the transition happend.
      * It will use the setted behavior if this one support custom transition,
      * of simply changing the current slide.
      */
     _transitionHandler($from, $to) {
-      
         const $slideableItem = this.$slidesWrapper.children[0];
         const translates = __getTranslateProperties($slideableItem);
 
@@ -1126,18 +1152,23 @@ export default class SSlider extends __SLitComponent {
         const deltaX = nextBounds.left - sliderBounds.left,
             deltaY = nextBounds.top - sliderBounds.top;
 
-        __easeInterval(this.props.transitionDuration, (percent) => {
-            if (this.props.direction === 'horizontal') {
-                const computedDelta = translates.x + (deltaX / 100 * percent) * -1;
-                $slideableItem.style.transform = `translateX(${computedDelta}px)`;
-            } else {
-                const computedDelta = translates.y + (deltaY / 100 * percent) * -1;
-                $slideableItem.style.transform = `translateY(${computedDelta}px)`;
-            }
-
-        }, {
-            easing: this.props.transitionEasing
-        });
+        __easeInterval(
+            this.props.transitionDuration,
+            (percent) => {
+                if (this.props.direction === 'horizontal') {
+                    const computedDelta =
+                        translates.x + (deltaX / 100) * percent * -1;
+                    $slideableItem.style.transform = `translateX(${computedDelta}px)`;
+                } else {
+                    const computedDelta =
+                        translates.y + (deltaY / 100) * percent * -1;
+                    $slideableItem.style.transform = `translateY(${computedDelta}px)`;
+                }
+            },
+            {
+                easing: this.props.transitionEasing,
+            },
+        );
 
         this.requestUpdate();
     }
@@ -1145,66 +1176,130 @@ export default class SSlider extends __SLitComponent {
         let slide;
         try {
             slide = this.getCurrentSlide();
-        } catch(e) {}
+        } catch (e) {}
         return html`
-            <div class="${this.componentUtils.className(
-                    '',
-                )}"
+            <div
+                class="${this.componentUtils.className('')}"
                 behavior="${this.props.behavior?.id}"
                 style="
                     --s-slider-slide: ${this.currentSlideIdx};
                     --s-slider-total: ${this.$slides.length};
-                    ${slide ? `
-                        --s-slider-slide-timer-total: ${slide.timer.total / 1000}s;
-                    `: ''}
+                    ${slide
+                    ? `
+                        --s-slider-slide-timer-total: ${
+                            slide.timer.total / 1000
+                        }s;
+                    `
+                    : ''}
                 "
             >
-                    <div class="${this.componentUtils.className('__slides-wrapper')}">
-                        <div class="${this.componentUtils.className('__slides')}">
-                            ${Array.from(this.$slides).map(($slide, idx) => {
-                                return $slide;
-                            })}
-                        </div>
-                    </div>
-                    ${this.props.progress ? html`
-                            <div class="${this.componentUtils.className('__progress')}">
-                                <div class="${this.componentUtils.className('__progress-bar')}"></div>
-                            </div>
-                    ` : ''}
-                    <div class="${this.componentUtils.className('__nav')}">
-                        ${Array.from(this.$navs).map(($nav, idx) => {
-                            if (!$nav._navInited) {
-                                $nav.addEventListener('click', e => {
-                                    e.preventDefault();
-                                    this.goTo(__parse(e.target.getAttribute('s-slider-nav')) ?? idx);
-                                });
-                                $nav._navInited = true;
-                            }
-                            if ($nav.getAttribute('s-slider-nav')) {
-                                const id = __parse($nav.getAttribute('s-slider-nav'));
-                                if (id === this.getCurrentSlide().id || id === this.getCurrentSlide().idx) $nav.classList.add('active');
-                                else $nav.classList.remove('active');
-                            } else {
-                                if (this.currentSlideIdx === idx) $nav.classList.add('active');
-                                else $nav.classList.remove('active');
-                            }
-                            return $nav;
+                <div
+                    class="${this.componentUtils.className('__slides-wrapper')}"
+                >
+                    <div class="${this.componentUtils.className('__slides')}">
+                        ${Array.from(this.$slides).map(($slide, idx) => {
+                            return $slide;
                         })}
                     </div>
-                    ${this.props.controls ? html`
-                        <div class="${this.componentUtils.className('__controls')}">
-                            <div class="${this.componentUtils.className('__controls-previous')} ${this.isFirst() && !this.props.loop ? '' : 'active' }" @click=${() => this.previous()}>
-                                ${this.props.previousIconClass ? html`
-                                    <i class="${this.props.previousIconClass}"></i>
-                                ` : html`<div class="${this.componentUtils.className('__controls-previous-arrow')}"></div>`}
-                            </div>
-                            <div class="${this.componentUtils.className('__controls-next')} ${this.isLast() && !this.props.loop ? '' : 'active' }" @click=${() => this.next()}>
-                                ${this.props.nextIconClass ? html`
-                                    <i class="${this.props.nextIconClass}"></i>
-                                ` : html`<div class="${this.componentUtils.className('__controls-next-arrow')}"></div>`}
-                            </div>
-                        </div>
-                    `:''}
+                </div>
+                ${this.props.progress
+                    ? html`
+                          <div
+                              class="${this.componentUtils.className(
+                                  '__progress',
+                              )}"
+                          >
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__progress-bar',
+                                  )}"
+                              ></div>
+                          </div>
+                      `
+                    : ''}
+                <div class="${this.componentUtils.className('__nav')}">
+                    ${Array.from(this.$navs).map(($nav, idx) => {
+                        if (!$nav._navInited) {
+                            $nav.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                this.goTo(
+                                    __parse(
+                                        e.target.getAttribute('s-slider-nav'),
+                                    ) ?? idx,
+                                );
+                            });
+                            $nav._navInited = true;
+                        }
+                        if ($nav.getAttribute('s-slider-nav')) {
+                            const id = __parse(
+                                $nav.getAttribute('s-slider-nav'),
+                            );
+                            if (
+                                id === this.getCurrentSlide().id ||
+                                id === this.getCurrentSlide().idx
+                            )
+                                $nav.classList.add('active');
+                            else $nav.classList.remove('active');
+                        } else {
+                            if (this.currentSlideIdx === idx)
+                                $nav.classList.add('active');
+                            else $nav.classList.remove('active');
+                        }
+                        return $nav;
+                    })}
+                </div>
+                ${this.props.controls
+                    ? html`
+                          <div
+                              class="${this.componentUtils.className(
+                                  '__controls',
+                              )}"
+                          >
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__controls-previous',
+                                  )} ${this.isFirst() && !this.props.loop
+                                      ? ''
+                                      : 'active'}"
+                                  @click=${() => this.previous()}
+                              >
+                                  ${this.props.previousIconClass
+                                      ? html`
+                                            <i
+                                                class="${this.props
+                                                    .previousIconClass}"
+                                            ></i>
+                                        `
+                                      : html`<div
+                                            class="${this.componentUtils.className(
+                                                '__controls-previous-arrow',
+                                            )}"
+                                        ></div>`}
+                              </div>
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__controls-next',
+                                  )} ${this.isLast() && !this.props.loop
+                                      ? ''
+                                      : 'active'}"
+                                  @click=${() => this.next()}
+                              >
+                                  ${this.props.nextIconClass
+                                      ? html`
+                                            <i
+                                                class="${this.props
+                                                    .nextIconClass}"
+                                            ></i>
+                                        `
+                                      : html`<div
+                                            class="${this.componentUtils.className(
+                                                '__controls-next-arrow',
+                                            )}"
+                                        ></div>`}
+                              </div>
+                          </div>
+                      `
+                    : ''}
             </div>
         `;
     }

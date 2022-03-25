@@ -1,52 +1,26 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SRangeComponent_exports = {};
-__export(SRangeComponent_exports, {
-  default: () => SRange,
-  define: () => define
-});
-module.exports = __toCommonJS(SRangeComponent_exports);
-var import_lit = require("lit");
-var import_SRangeComponentInterface = __toESM(require("./interface/SRangeComponentInterface"), 1);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_s_range = __toESM(require("../css/s-range.css"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-class SRange extends import_s_lit_component.default {
+import { html, css, unsafeCSS } from "lit";
+import __SRangeComponentInterface from "./interface/SRangeComponentInterface";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import __css from "../css/s-range.css";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+class SRange extends __SLitComponent {
   static get properties() {
-    return import_s_lit_component.default.properties({}, import_SRangeComponentInterface.default);
+    return __SLitComponent.properties({}, __SRangeComponentInterface);
   }
   static get styles() {
-    return import_lit.css`
-            ${(0, import_lit.unsafeCSS)(`
-                ${import_s_range.default}
+    return css`
+            ${unsafeCSS(`
+                ${__css}
             `)}
         `;
   }
   constructor() {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       litComponent: {
         shadowDom: false
       },
       componentUtils: {
-        interface: import_SRangeComponentInterface.default
+        interface: __SRangeComponentInterface
       }
     }));
   }
@@ -82,7 +56,7 @@ class SRange extends import_s_lit_component.default {
     this._$tooltip.innerHTML = val;
   }
   render() {
-    return import_lit.html`
+    return html`
             <div
                 class="${this.componentUtils.className("", "s-tooltip-container")}"
             >
@@ -96,7 +70,7 @@ class SRange extends import_s_lit_component.default {
                     max="${this.max}"
                     step="${this.step}"
                 />
-                ${this.props.tooltip ? import_lit.html`
+                ${this.props.tooltip ? html`
                           <div
                               class="${this.componentUtils.className("__tooltip", "s-tooltip")}"
                           ></div>
@@ -106,6 +80,10 @@ class SRange extends import_s_lit_component.default {
   }
 }
 function define(props = {}, tagName = "s-range") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SRange);
 }
+export {
+  SRange as default,
+  define
+};

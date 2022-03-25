@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,40 +14,21 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var install_exports = {};
-__export(install_exports, {
-  default: () => install
-});
-module.exports = __toCommonJS(install_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_commandExists = __toESM(require("../command/commandExists"), 1);
-var import_spawn = __toESM(require("../process/spawn"), 1);
-var import_argsToString = __toESM(require("../../shared/cli/argsToString"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+import __SPromise from "@coffeekraken/s-promise";
+import __commandExists from "../command/commandExists";
+import __spawn from "../process/spawn";
+import __argsToString from "../../shared/cli/argsToString";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
 function install(packageNames = "", settings) {
-  return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
+  return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
     settings = __spreadValues({
       cwd: process.cwd(),
-      manager: import_s_sugar_config.default.get("package.manager"),
+      manager: __SSugarConfig.get("package.manager"),
       args: {}
     }, settings);
     let command;
     if (settings.manager === "yarn") {
-      if (await (0, import_commandExists.default)("yarn")) {
+      if (await __commandExists("yarn")) {
         command = "yarn add";
         emit("log", {
           value: `<yellow>[install]</yellow> Using to "<yellow>yarn</yellow>" to install dependencies`
@@ -63,7 +40,7 @@ function install(packageNames = "", settings) {
       }
     }
     if (!command) {
-      if (await (0, import_commandExists.default)("npm")) {
+      if (await __commandExists("npm")) {
         command = "npm install";
         emit("log", {
           value: `<yellow>[install]</yellow> Using to "<yellow>npm</yellow>" to install dependencies`
@@ -73,12 +50,13 @@ function install(packageNames = "", settings) {
     if (!command) {
       throw new Error(`<red>[install]</red> Sorry but it seems that none of "<yellow>npm</yellow>" or "<yellow>yarn</yellow>" are available...`);
     }
-    command += ` ${packageNames} ${(0, import_argsToString.default)(settings.args)}`.replace(/\s{2,999}/, " ");
-    const result = await pipe((0, import_spawn.default)(command, [], {
+    command += ` ${packageNames} ${__argsToString(settings.args)}`.replace(/\s{2,999}/, " ");
+    const result = await pipe(__spawn(command, [], {
       cwd: settings.cwd
     }));
     resolve(result);
   });
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  install as default
+};

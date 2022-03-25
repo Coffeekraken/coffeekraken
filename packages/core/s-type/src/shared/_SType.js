@@ -1,36 +1,11 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SType_exports = {};
-__export(SType_exports, {
-  default: () => SType_default
-});
-module.exports = __toCommonJS(SType_exports);
-var import_map = __toESM(require("@coffeekraken/sugar/shared/iterable/map"), 1);
-var import_getExtendsStack = __toESM(require("@coffeekraken/sugar/shared/class/utils/getExtendsStack"), 1);
-var import_typeof = __toESM(require("@coffeekraken/sugar/shared/value/typeof"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_parseHtml = __toESM(require("@coffeekraken/sugar/shared/console/parseHtml"), 1);
-var import_parseTypeString = __toESM(require("./utils/parseTypeString"), 1);
-var import_STypeResult = __toESM(require("./STypeResult"), 1);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+import __map from "@coffeekraken/sugar/shared/iterable/map";
+import __getExtendsStack from "@coffeekraken/sugar/shared/class/utils/getExtendsStack";
+import __typeOf from "@coffeekraken/sugar/shared/value/typeof";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __parseHtml from "@coffeekraken/sugar/shared/console/parseHtml";
+import __parseTypeString from "./utils/parseTypeString";
+import __STypeResult from "./STypeResult";
+import __SInterface from "@coffeekraken/s-interface";
 const _SType = class {
   static registerType(type) {
     if (type.id === void 0 || typeof type.id !== "string") {
@@ -43,8 +18,8 @@ const _SType = class {
     typeString = typeString.toLowerCase().trim();
     if (this.constructor._instanciatedTypes[typeString] !== void 0)
       return this.constructor._instanciatedTypes[typeString];
-    this.types = (0, import_parseTypeString.default)(typeString).types;
-    this._settings = (0, import_deepMerge.default)({
+    this.types = __parseTypeString(typeString).types;
+    this._settings = __deepMerge({
       id: this.constructor.name,
       name: this.constructor.name,
       customTypes: true,
@@ -56,12 +31,12 @@ const _SType = class {
     const res = this.check(value, settings);
     if (res === true)
       return true;
-    else if (res instanceof import_STypeResult.default)
+    else if (res instanceof __STypeResult)
       return !res.hasIssues();
     return true;
   }
   check(value, settings = {}) {
-    settings = (0, import_deepMerge.default)(this._settings, settings);
+    settings = __deepMerge(this._settings, settings);
     const issues = {};
     for (let i = 0; i < this.types.length; i++) {
       const typeObj = this.types[i], typeId = typeObj.type;
@@ -69,7 +44,7 @@ const _SType = class {
       if (res2 === true) {
         if (typeObj.of === void 0)
           return true;
-        const typeOf = (0, import_typeof.default)(value);
+        const typeOf = __typeOf(value);
         if (typeOf !== "Array" && typeOf !== "Object" && typeOf !== "Map") {
           throw new Error(`Sorry but you have specified a type string "<yellow>${this.typeString}</yellow>" with some "<...>" definition on a type "<cyan>${typeOf}</cyan>" that does not support "child" value(s)...`);
         }
@@ -88,7 +63,7 @@ const _SType = class {
                   type: typeObj.type
                 },
                 received: {
-                  type: (0, import_typeof.default)(v),
+                  type: __typeOf(v),
                   value: v
                 }
               };
@@ -103,7 +78,7 @@ const _SType = class {
             type: typeObj.type
           },
           received: {
-            type: (0, import_typeof.default)(value),
+            type: __typeOf(value),
             value
           }
         };
@@ -113,14 +88,14 @@ const _SType = class {
         issues[typeObj.type] = issueObj;
       }
     }
-    const res = new import_STypeResult.default({
+    const res = new __STypeResult({
       typeString: this.typeString,
       value,
       expected: {
         type: this.typeString
       },
       received: {
-        type: (0, import_typeof.default)(value)
+        type: __typeOf(value)
       },
       issues,
       settings
@@ -128,18 +103,18 @@ const _SType = class {
     return res;
   }
   _isType(value, type, settings = {}) {
-    settings = (0, import_deepMerge.default)(this._settings, settings);
+    settings = __deepMerge(this._settings, settings);
     if (this.constructor._registeredTypes[type.toLowerCase()] === void 0) {
       if (settings.interfaces === true) {
-        const availableInterfaceTypes = import_s_interface.default.getAvailableTypes();
+        const availableInterfaceTypes = __SInterface.getAvailableTypes();
         if (availableInterfaceTypes[type] !== void 0) {
           const res = availableInterfaceTypes[type].apply(value, {});
           return res;
         }
       }
       if (settings.customTypes === true) {
-        const typeOf = (0, import_typeof.default)(value).toLowerCase();
-        const extendsStack = Object.keys((0, import_getExtendsStack.default)(value)).map((s) => s.toLowerCase());
+        const typeOf = __typeOf(value).toLowerCase();
+        const extendsStack = Object.keys(__getExtendsStack(value)).map((s) => s.toLowerCase());
         if (type === typeOf || extendsStack.indexOf(type) !== -1)
           return true;
       }
@@ -148,7 +123,7 @@ const _SType = class {
     return this.constructor._registeredTypes[type.toLowerCase()].is(value);
   }
   cast(value, params, settings) {
-    settings = (0, import_deepMerge.default)(this._settings, settings);
+    settings = __deepMerge(this._settings, settings);
     const verboseObj = {
       value,
       issues: {},
@@ -177,10 +152,10 @@ const _SType = class {
       }
       if (typeObj.of !== void 0 && this.canHaveChilds(castedValue) === false) {
         const issueStr = `Sorry but the passed type "<yellow>${typeId}</yellow>" has some child(s) dependencies "<green>${typeObj.of.join("|")}</green>" but this type can not have child(s)`;
-        throw new Error((0, import_parseHtml.default)(issueStr));
+        throw new Error(__parseHtml(issueStr));
       } else if (typeObj.of !== void 0) {
         const sTypeInstance = new _SType(typeObj.of.join("|"));
-        castedValue = (0, import_map.default)(castedValue, ({ value: value2 }) => {
+        castedValue = __map(castedValue, ({ value: value2 }) => {
           return sTypeInstance.cast(value2, params, settings);
         });
       }
@@ -193,16 +168,16 @@ const _SType = class {
       verboseObj.issues[typeId] = `Something goes wrong but no details are available... Sorry`;
     }
     const stack = [
-      `Sorry but the value of type "<cyan>${(0, import_typeof.default)(value)}</cyan>" passed to be casted in type "<yellow>${this.typeString}</yellow>" can not be casted correctly. Here's why:
+      `Sorry but the value of type "<cyan>${__typeOf(value)}</cyan>" passed to be casted in type "<yellow>${this.typeString}</yellow>" can not be casted correctly. Here's why:
 `
     ];
     Object.keys(verboseObj.issues).forEach((descriptorId) => {
       stack.push(`- <red>${descriptorId}</red>: ${verboseObj.issues[descriptorId]}`);
     });
-    throw new Error((0, import_parseHtml.default)(stack.join("\n")));
+    throw new Error(__parseHtml(stack.join("\n")));
   }
   canHaveChilds(value) {
-    const type = (0, import_typeof.default)(value);
+    const type = __typeOf(value);
     return type === "Array" || type === "Object" || type === "Map";
   }
   get name() {
@@ -217,5 +192,6 @@ SType._instanciatedTypes = {};
 SType._registeredTypes = {};
 const Cls = SType;
 var SType_default = SType;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SType_default as default
+};

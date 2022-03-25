@@ -2,9 +2,12 @@
     "name": "@coffeekraken/s-filtrable-input-component",
     "version": "2.0.0",
     "description": "",
-    "type": "module",
     "homepage": "https://coffeekraken.io",
-    "main": "./dist/js/lib.es.js",
+    "main": "./src/js/exports.js",
+    "exports": {
+        "import": "./src/js/exports.js",
+        "require": "./src/js/exports.cjs"
+    },
     "scripts": {
         "dev": "sugar frontstack",
         "build": "sugar frontstack build",

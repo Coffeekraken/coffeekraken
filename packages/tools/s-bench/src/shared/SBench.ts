@@ -344,7 +344,7 @@ export default class SBench extends __SPromise {
      * @param       {String}        id              The step id
      * @param       {String}        [description='']   The step description
      * @return  {SBench}                                The instance to maintain chainability
-     * 
+     *
      * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
@@ -387,7 +387,7 @@ export default class SBench extends __SPromise {
      *
      * @param   {Boolean}           [log=false]         Specify if you want to log the result directly or not
      * @return  {SBench}                                The instance to maintain chainability
-     * 
+     *
      * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */

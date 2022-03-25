@@ -1,38 +1,12 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var CKSearch_exports = {};
-__export(CKSearch_exports, {
-  default: () => CKSearch,
-  define: () => define
-});
-module.exports = __toCommonJS(CKSearch_exports);
-var import_s_request = __toESM(require("@coffeekraken/s-request"), 1);
-var import_lit = require("lit");
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_s_filtrable_input_component = require("@coffeekraken/s-filtrable-input-component");
-var import_queryStringToObject = __toESM(require("@coffeekraken/sugar/shared/url/queryStringToObject"), 1);
-var import_hotkey = __toESM(require("@coffeekraken/sugar/js/keyboard/hotkey"), 1);
-var import_querySelectorLive = __toESM(require("@coffeekraken/sugar/js/dom/query/querySelectorLive"), 1);
-var import_cursorToEnd = __toESM(require("@coffeekraken/sugar/js/dom/input/cursorToEnd"), 1);
-(0, import_s_filtrable_input_component.define)({
+import __SRequest from "@coffeekraken/s-request";
+import { html } from "lit";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import { define as __sFiltrableInputDefine } from "@coffeekraken/s-filtrable-input-component";
+import __queryStringToObject from "@coffeekraken/sugar/shared/url/queryStringToObject";
+import __hotkey from "@coffeekraken/sugar/js/keyboard/hotkey";
+import __querySelectorLive from "@coffeekraken/sugar/js/dom/query/querySelectorLive";
+import __cursorToEnd from "@coffeekraken/sugar/js/dom/input/cursorToEnd";
+__sFiltrableInputDefine({
   value: "name",
   label: (item) => {
     return `${item.type} ${item.namespace}`;
@@ -110,7 +84,7 @@ var import_cursorToEnd = __toESM(require("@coffeekraken/sugar/js/dom/input/curso
   },
   items: async ({ value }) => {
     async function fetchItems() {
-      const request = new import_s_request.default({
+      const request = new __SRequest({
         url: "/docmap.json"
       });
       const result = await request.send();
@@ -208,7 +182,7 @@ var import_cursorToEnd = __toESM(require("@coffeekraken/sugar/js/dom/input/curso
     return items;
   }
 }, "ck-search-input");
-class CKSearch extends import_s_lit_component.default {
+class CKSearch extends __SLitComponent {
   constructor() {
     super({
       litComponent: {
@@ -216,9 +190,9 @@ class CKSearch extends import_s_lit_component.default {
       }
     });
     var _a, _b;
-    const queryObj = (0, import_queryStringToObject.default)((_a = document.location.search) != null ? _a : "");
+    const queryObj = __queryStringToObject((_a = document.location.search) != null ? _a : "");
     this._search = (_b = queryObj.search) != null ? _b : "";
-    (0, import_querySelectorLive.default)('[href^="#search="]', ($elm) => {
+    __querySelectorLive('[href^="#search="]', ($elm) => {
       $elm.addEventListener("click", (e) => {
         this._handleAnchor(e.target.href.split("#").pop());
         e.preventDefault();
@@ -236,15 +210,15 @@ class CKSearch extends import_s_lit_component.default {
     if (document.location.hash) {
       this, this._handleAnchor(document.location.hash.replace("#", ""));
     }
-    (0, import_hotkey.default)("ctrl+p").on("press", () => {
-      (0, import_cursorToEnd.default)(this._$input);
+    __hotkey("ctrl+p").on("press", () => {
+      __cursorToEnd(this._$input);
     });
     this.addEventListener("selectItem", (e) => {
       var _a;
       const { item, $elm } = e.detail;
       if (item.type === "category" || item.type === "package") {
         this._$input.value = item.value + " ";
-        (0, import_cursorToEnd.default)(this._$input);
+        __cursorToEnd(this._$input);
       } else {
         if ((_a = item.menu) == null ? void 0 : _a.slug) {
           if (item.package.name !== window.packageJson.name) {
@@ -270,7 +244,7 @@ class CKSearch extends import_s_lit_component.default {
     });
   }
   render() {
-    return import_lit.html`
+    return html`
             <div class="ck-search">
                 <div class="ck-search__background"></div>
                 <div class="ck-search__content s-color:accent">
@@ -300,6 +274,10 @@ class CKSearch extends import_s_lit_component.default {
   }
 }
 function define(props = {}, tagName = "ck-search") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, CKSearch);
 }
+export {
+  CKSearch as default,
+  define
+};

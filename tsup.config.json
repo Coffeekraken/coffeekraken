@@ -1,12 +1,7 @@
 {
-    "entry": "packages/*/*/src/node/**/*.ts",
+    "external": [],
+    "injectStyle": "true",
     "bundle": false,
-    "format": [
-        "esm",
-        "cjs"
-    ],
     "outDir": "packages",
-    "platform": "node",
-    "dts": false,
-    "tsconfig": "my-tsconfig.json"
+    "dts": false
 }

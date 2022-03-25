@@ -1,33 +1,7 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  interface: () => postcssSugarPluginClassesMixinInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_faker = __toESM(require("faker"));
-class postcssSugarPluginClassesMixinInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __STheme from "@coffeekraken/s-theme";
+import __faker from "faker";
+class postcssSugarPluginClassesMixinInterface extends __SInterface {
   static get _definition() {
     return {};
   }
@@ -50,33 +24,33 @@ function classes_default({ params, atRule, CssVars, replaceWith }) {
         * @support      safari          
         * @support      edge           
         * 
-        ${Object.keys(import_s_theme.default.getTheme().baseColors()).map((colorName) => {
+        ${Object.keys(__STheme.getTheme().baseColors()).map((colorName) => {
     return ` * @cssClass            s-color:${colorName}       Apply the ${colorName} color for the "current" color`;
   }).join("\n")}
-        ${Object.keys(import_s_theme.default.getTheme().baseColors()).map((colorName) => {
+        ${Object.keys(__STheme.getTheme().baseColors()).map((colorName) => {
     return ` * @cssClass            s-tc:${colorName}       Apply the ${colorName} text color`;
   }).join("\n")}
-        ${Object.keys(import_s_theme.default.getTheme().baseColors()).map((colorName) => {
+        ${Object.keys(__STheme.getTheme().baseColors()).map((colorName) => {
     return ` * @cssClass            s-bg:${colorName}       Apply the ${colorName} background color`;
   }).join("\n")}
         *
         * @example        html          Text color
-        ${Object.keys(import_s_theme.default.getTheme().baseColors()).map((colorName) => {
+        ${Object.keys(__STheme.getTheme().baseColors()).map((colorName) => {
     return ` * <h4 class="s-typo:h4 s-mbe:20">${colorName}</h4>
-                    * <div class="s-tc:${colorName} s-mb:30">${import_faker.default.name.findName()}</div>`;
+                    * <div class="s-tc:${colorName} s-mb:30">${__faker.name.findName()}</div>`;
   }).join("\n")}
         *
         * @example        html          Background color
-        ${Object.keys(import_s_theme.default.getTheme().baseColors()).map((colorName) => {
+        ${Object.keys(__STheme.getTheme().baseColors()).map((colorName) => {
     return `  * <h4 class="s-typo:h4 s-mbe:20">${colorName}</h4>
-                    * <div class="s-bg:${colorName} s-p:10 s-mb:30 s-radius">${import_faker.default.name.findName()}</div>`;
+                    * <div class="s-bg:${colorName} s-p:10 s-mb:30 s-radius">${__faker.name.findName()}</div>`;
   }).join("\n")}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-  Object.keys(import_s_theme.default.getTheme().baseColors()).forEach((colorName) => {
+  Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
     cssArray.comment(() => `
       /**
        * @name        s-color:${colorName}
@@ -121,7 +95,7 @@ function classes_default({ params, atRule, CssVars, replaceWith }) {
                 }
         `);
   });
-  import_s_theme.default.getTheme().loopOnColors((colorObj) => {
+  __STheme.getTheme().loopOnColors((colorObj) => {
     const colorName = colorObj.name;
     let modifierStr = "";
     if (colorObj.variant)
@@ -213,7 +187,7 @@ function classes_default({ params, atRule, CssVars, replaceWith }) {
     `);
   replaceWith(cssArray);
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  classes_default as default,
+  postcssSugarPluginClassesMixinInterface as interface
+};

@@ -1,11 +1,8 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -21,20 +18,6 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __decorateClass = (decorators, target, key, kind) => {
   var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
   for (var i = decorators.length - 1, decorator; i >= 0; i--)
@@ -44,23 +27,17 @@ var __decorateClass = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-var docNav_exports = {};
-__export(docNav_exports, {
-  default: () => DocNav,
-  define: () => define
-});
-module.exports = __toCommonJS(docNav_exports);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_wait = __toESM(require("@coffeekraken/sugar/shared/time/wait"), 1);
-var import_lit = require("lit");
-var import_decorators = require("lit/decorators.js");
-var import_striptags = __toESM(require("@coffeekraken/sugar/shared/html/striptags"), 1);
-var import_queryStringToObject = __toESM(require("@coffeekraken/sugar/shared/url/queryStringToObject"), 1);
-var import_minisearch = __toESM(require("minisearch"), 1);
-var import_sameItems = __toESM(require("@coffeekraken/sugar/shared/array/sameItems"), 1);
-var import_onScrollEnd = __toESM(require("@coffeekraken/sugar/js/dom/detect/onScrollEnd"), 1);
-var import_state = require("../state/state");
-class DocNav extends import_s_lit_component.default {
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import __wait from "@coffeekraken/sugar/shared/time/wait";
+import { html } from "lit";
+import { property } from "lit/decorators.js";
+import __striptags from "@coffeekraken/sugar/shared/html/striptags";
+import __queryStringToObject from "@coffeekraken/sugar/shared/url/queryStringToObject";
+import __miniSearch from "minisearch";
+import __sameItems from "@coffeekraken/sugar/shared/array/sameItems";
+import __onScrollEnd from "@coffeekraken/sugar/js/dom/detect/onScrollEnd";
+import { loadDocmap, setState, getState } from "../state/state";
+class DocNav extends __SLitComponent {
   constructor() {
     super({
       litComponent: {
@@ -77,21 +54,21 @@ class DocNav extends import_s_lit_component.default {
       types: [],
       statuses: []
     };
-    this._striptags = import_striptags.default;
+    this._striptags = __striptags;
     this._displayItemsCount = 0;
     this._searchTimeout = 0;
     this._renderExample = false;
     (async () => {
-      const docmapJson = await (0, import_state.loadDocmap)();
+      const docmapJson = await loadDocmap();
       this._docmap = docmapJson;
       this._restoreState();
-      const queryStringObj = (0, import_queryStringToObject.default)(document.location.search);
+      const queryStringObj = __queryStringToObject(document.location.search);
       if (queryStringObj.search) {
         this._saved.search = queryStringObj.search;
       }
       this._filterItems();
-      await (0, import_wait.default)();
-      (0, import_onScrollEnd.default)(document.body, () => {
+      await __wait();
+      __onScrollEnd(document.body, () => {
         this._maxItemsToDisplay += this.maxItems;
         this._filterItems({
           reset: false
@@ -152,7 +129,7 @@ class DocNav extends import_s_lit_component.default {
       return i;
     });
     if (this._saved.search) {
-      let miniSearch = new import_minisearch.default({
+      let miniSearch = new __miniSearch({
         fields: [
           "name",
           "namespace",
@@ -174,7 +151,7 @@ class DocNav extends import_s_lit_component.default {
       if (this._saved.platforms.length) {
         if (!docmapObj.platform)
           continue;
-        const samePlatforms = (0, import_sameItems.default)(docmapObj.platform.map((l) => l.name), this._saved.platforms);
+        const samePlatforms = __sameItems(docmapObj.platform.map((l) => l.name), this._saved.platforms);
         if (!samePlatforms.length)
           continue;
       }
@@ -247,12 +224,12 @@ class DocNav extends import_s_lit_component.default {
     this._saveState();
   }
   _saveState() {
-    (0, import_state.setState)({
+    setState({
       docList: this._saved
     });
   }
   async _restoreState() {
-    const state = await (0, import_state.getState)();
+    const state = await getState();
     if (!state.docList)
       return;
     this._saved = state.docList;
@@ -268,7 +245,7 @@ class DocNav extends import_s_lit_component.default {
         });
       });
     }
-    const tpl = import_lit.html`
+    const tpl = html`
             <div class="s-layout:12222">
                 <nav class="__nav">
                     <form name="doc">
@@ -290,7 +267,7 @@ class DocNav extends import_s_lit_component.default {
                             <dl class="s-list s-bg:even">
                                 ${this.availablePlatforms.map((platform) => {
       var _a;
-      return import_lit.html`
+      return html`
                                         <dt
                                             class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background"
                                         >
@@ -321,7 +298,7 @@ class DocNav extends import_s_lit_component.default {
                             <dl class="s-list s-bg:even">
                                 ${this.availableTypes.map((type) => {
       var _a;
-      return import_lit.html`
+      return html`
                                         <dt
                                             class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background"
                                         >
@@ -352,7 +329,7 @@ class DocNav extends import_s_lit_component.default {
                             <dl class="s-list s-bg:even">
                                 ${this.availableStatuses.map((status) => {
       var _a;
-      return import_lit.html`
+      return html`
                                         <dt
                                             class="s-flex s-font:40 s-p:20 s-pie:30 s-bg:ui-background"
                                         >
@@ -380,14 +357,14 @@ class DocNav extends import_s_lit_component.default {
                     </form>
                 </nav>
                 <section class="__list">
-                    ${Object.values(this._filteredItems).map((item) => import_lit.html`
+                    ${Object.values(this._filteredItems).map((item) => html`
                             <div class="__list-item">
                                 <div class="s-p:50">
                                     <div class="">
                                         <div class="s-flex">
                                             <div class="s-flex-item:grow">
                                                 <div>
-                                                    ${item.platform.map((platform) => import_lit.html`
+                                                    ${item.platform.map((platform) => html`
                                                             <i
                                                                 class="s-platform:${platform.name} s-font:80 s-mbe:30 s-mr:10"
                                                             ></i>
@@ -429,9 +406,9 @@ class DocNav extends import_s_lit_component.default {
                                             ${item.description}
                                         </p>
                                     </div>
-                                    ${item.example && item.example.length ? import_lit.html`
+                                    ${item.example && item.example.length ? html`
                                               <div class="__code">
-                                                  ${this._renderExample ? import_lit.html`
+                                                  ${this._renderExample ? html`
                                                             <s-code-example
                                                                 style="max-width:100%;"
                                                                 class="s-depth:50 s-flex-item:grow:shrink"
@@ -472,20 +449,24 @@ class DocNav extends import_s_lit_component.default {
   }
 }
 __decorateClass([
-  (0, import_decorators.property)()
+  property()
 ], DocNav.prototype, "_maxItemsToDisplay", 2);
 __decorateClass([
-  (0, import_decorators.property)()
+  property()
 ], DocNav.prototype, "_filteredItems", 2);
 __decorateClass([
-  (0, import_decorators.property)()
+  property()
 ], DocNav.prototype, "_docmap", 2);
 __decorateClass([
-  (0, import_decorators.property)()
+  property()
 ], DocNav.prototype, "_saved", 2);
 function define(props = {}, tagName = "doc-nav") {
-  import_s_lit_component.default.setDefaultProps(__spreadProps(__spreadValues({}, props), {
+  __SLitComponent.setDefaultProps(__spreadProps(__spreadValues({}, props), {
     mountWhen: "directly"
   }));
   customElements.define(tagName, DocNav);
 }
+export {
+  DocNav as default,
+  define
+};

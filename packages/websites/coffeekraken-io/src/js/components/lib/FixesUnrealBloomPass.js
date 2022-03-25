@@ -1,70 +1,59 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var FixesUnrealBloomPass_exports = {};
-__export(FixesUnrealBloomPass_exports, {
-  UnrealBloomPass: () => TransparentBackgroundFixedUnrealBloomPass
-});
-module.exports = __toCommonJS(FixesUnrealBloomPass_exports);
-var import_three = require("three");
-var import_Pass = require("./three/examples/jsm/postprocessing/Pass");
-var import_Pass2 = require("./three/examples/jsm/postprocessing/Pass");
-var import_CopyShader = require("./three/examples/jsm/shaders/CopyShader.js");
-var import_LuminosityHighPassShader = require("./three/examples/jsm/shaders/LuminosityHighPassShader.js");
-class TransparentBackgroundFixedUnrealBloomPass extends import_Pass.Pass {
+import {
+  AdditiveBlending,
+  Color,
+  LinearFilter,
+  MeshBasicMaterial,
+  RGBAFormat,
+  ShaderMaterial,
+  UniformsUtils,
+  Vector2,
+  Vector3,
+  WebGLRenderTarget
+} from "three";
+import { Pass } from "./three/examples/jsm/postprocessing/Pass";
+import { FullScreenQuad } from "./three/examples/jsm/postprocessing/Pass";
+import { CopyShader } from "./three/examples/jsm/shaders/CopyShader.js";
+import { LuminosityHighPassShader } from "./three/examples/jsm/shaders/LuminosityHighPassShader.js";
+class TransparentBackgroundFixedUnrealBloomPass extends Pass {
   constructor(resolution, strength, radius, threshold) {
     super();
     this.strength = strength !== void 0 ? strength : 1;
     this.radius = radius;
     this.threshold = threshold;
-    this.resolution = resolution !== void 0 ? new import_three.Vector2(resolution.x, resolution.y) : new import_three.Vector2(256, 256);
-    this.clearColor = new import_three.Color(0, 0, 0);
+    this.resolution = resolution !== void 0 ? new Vector2(resolution.x, resolution.y) : new Vector2(256, 256);
+    this.clearColor = new Color(0, 0, 0);
     const pars = {
-      minFilter: import_three.LinearFilter,
-      magFilter: import_three.LinearFilter,
-      format: import_three.RGBAFormat
+      minFilter: LinearFilter,
+      magFilter: LinearFilter,
+      format: RGBAFormat
     };
     this.renderTargetsHorizontal = [];
     this.renderTargetsVertical = [];
     this.nMips = 5;
     let resx = Math.round(this.resolution.x / 2);
     let resy = Math.round(this.resolution.y / 2);
-    this.renderTargetBright = new import_three.WebGLRenderTarget(resx, resy, pars);
+    this.renderTargetBright = new WebGLRenderTarget(resx, resy, pars);
     this.renderTargetBright.texture.name = "UnrealBloomPass.bright";
     this.renderTargetBright.texture.generateMipmaps = false;
     for (let i = 0; i < this.nMips; i++) {
-      const renderTargetHorizonal = new import_three.WebGLRenderTarget(resx, resy, pars);
+      const renderTargetHorizonal = new WebGLRenderTarget(resx, resy, pars);
       renderTargetHorizonal.texture.name = "UnrealBloomPass.h" + i;
       renderTargetHorizonal.texture.generateMipmaps = false;
       this.renderTargetsHorizontal.push(renderTargetHorizonal);
-      const renderTargetVertical = new import_three.WebGLRenderTarget(resx, resy, pars);
+      const renderTargetVertical = new WebGLRenderTarget(resx, resy, pars);
       renderTargetVertical.texture.name = "UnrealBloomPass.v" + i;
       renderTargetVertical.texture.generateMipmaps = false;
       this.renderTargetsVertical.push(renderTargetVertical);
       resx = Math.round(resx / 2);
       resy = Math.round(resy / 2);
     }
-    if (import_LuminosityHighPassShader.LuminosityHighPassShader === void 0)
+    if (LuminosityHighPassShader === void 0)
       console.error("THREE.UnrealBloomPass relies on LuminosityHighPassShader");
-    const highPassShader = import_LuminosityHighPassShader.LuminosityHighPassShader;
-    this.highPassUniforms = import_three.UniformsUtils.clone(highPassShader.uniforms);
+    const highPassShader = LuminosityHighPassShader;
+    this.highPassUniforms = UniformsUtils.clone(highPassShader.uniforms);
     this.highPassUniforms["luminosityThreshold"].value = threshold;
     this.highPassUniforms["smoothWidth"].value = 0.01;
-    this.materialHighPassFilter = new import_three.ShaderMaterial({
+    this.materialHighPassFilter = new ShaderMaterial({
       uniforms: this.highPassUniforms,
       vertexShader: highPassShader.vertexShader,
       fragmentShader: highPassShader.fragmentShader,
@@ -76,7 +65,7 @@ class TransparentBackgroundFixedUnrealBloomPass extends import_Pass.Pass {
     resy = Math.round(this.resolution.y / 2);
     for (let i = 0; i < this.nMips; i++) {
       this.separableBlurMaterials.push(this.getSeperableBlurMaterial(kernelSizeArray[i]));
-      this.separableBlurMaterials[i].uniforms["texSize"].value = new import_three.Vector2(resx, resy);
+      this.separableBlurMaterials[i].uniforms["texSize"].value = new Vector2(resx, resy);
       resx = Math.round(resx / 2);
       resy = Math.round(resy / 2);
     }
@@ -92,34 +81,34 @@ class TransparentBackgroundFixedUnrealBloomPass extends import_Pass.Pass {
     const bloomFactors = [1, 0.8, 0.6, 0.4, 0.2];
     this.compositeMaterial.uniforms["bloomFactors"].value = bloomFactors;
     this.bloomTintColors = [
-      new import_three.Vector3(1, 1, 1),
-      new import_three.Vector3(1, 1, 1),
-      new import_three.Vector3(1, 1, 1),
-      new import_three.Vector3(1, 1, 1),
-      new import_three.Vector3(1, 1, 1)
+      new Vector3(1, 1, 1),
+      new Vector3(1, 1, 1),
+      new Vector3(1, 1, 1),
+      new Vector3(1, 1, 1),
+      new Vector3(1, 1, 1)
     ];
     this.compositeMaterial.uniforms["bloomTintColors"].value = this.bloomTintColors;
-    if (import_CopyShader.CopyShader === void 0) {
+    if (CopyShader === void 0) {
       console.error("THREE.UnrealBloomPass relies on CopyShader");
     }
-    const copyShader = import_CopyShader.CopyShader;
-    this.copyUniforms = import_three.UniformsUtils.clone(copyShader.uniforms);
+    const copyShader = CopyShader;
+    this.copyUniforms = UniformsUtils.clone(copyShader.uniforms);
     this.copyUniforms["opacity"].value = 1;
-    this.materialCopy = new import_three.ShaderMaterial({
+    this.materialCopy = new ShaderMaterial({
       uniforms: this.copyUniforms,
       vertexShader: copyShader.vertexShader,
       fragmentShader: copyShader.fragmentShader,
-      blending: import_three.AdditiveBlending,
+      blending: AdditiveBlending,
       depthTest: false,
       depthWrite: false,
       transparent: true
     });
     this.enabled = true;
     this.needsSwap = false;
-    this._oldClearColor = new import_three.Color();
+    this._oldClearColor = new Color();
     this.oldClearAlpha = 1;
-    this.basic = new import_three.MeshBasicMaterial();
-    this.fsQuad = new import_Pass2.FullScreenQuad(null);
+    this.basic = new MeshBasicMaterial();
+    this.fsQuad = new FullScreenQuad(null);
   }
   dispose() {
     for (let i = 0; i < this.renderTargetsHorizontal.length; i++) {
@@ -137,7 +126,7 @@ class TransparentBackgroundFixedUnrealBloomPass extends import_Pass.Pass {
     for (let i = 0; i < this.nMips; i++) {
       this.renderTargetsHorizontal[i].setSize(resx, resy);
       this.renderTargetsVertical[i].setSize(resx, resy);
-      this.separableBlurMaterials[i].uniforms["texSize"].value = new import_three.Vector2(resx, resy);
+      this.separableBlurMaterials[i].uniforms["texSize"].value = new Vector2(resx, resy);
       resx = Math.round(resx / 2);
       resy = Math.round(resy / 2);
     }
@@ -200,15 +189,15 @@ class TransparentBackgroundFixedUnrealBloomPass extends import_Pass.Pass {
     renderer.autoClear = oldAutoClear;
   }
   getSeperableBlurMaterial(kernelRadius) {
-    return new import_three.ShaderMaterial({
+    return new ShaderMaterial({
       defines: {
         KERNEL_RADIUS: kernelRadius,
         SIGMA: kernelRadius
       },
       uniforms: {
         colorTexture: { value: null },
-        texSize: { value: new import_three.Vector2(0.5, 0.5) },
-        direction: { value: new import_three.Vector2(0.5, 0.5) }
+        texSize: { value: new Vector2(0.5, 0.5) },
+        direction: { value: new Vector2(0.5, 0.5) }
       },
       vertexShader: `varying vec2 vUv;
 				void main() {
@@ -230,7 +219,7 @@ class TransparentBackgroundFixedUnrealBloomPass extends import_Pass.Pass {
     });
   }
   getCompositeMaterial(nMips) {
-    return new import_three.ShaderMaterial({
+    return new ShaderMaterial({
       defines: {
         NUM_MIPS: nMips
       },
@@ -278,5 +267,8 @@ class TransparentBackgroundFixedUnrealBloomPass extends import_Pass.Pass {
     });
   }
 }
-TransparentBackgroundFixedUnrealBloomPass.BlurDirectionX = new import_three.Vector2(1, 0);
-TransparentBackgroundFixedUnrealBloomPass.BlurDirectionY = new import_three.Vector2(0, 1);
+TransparentBackgroundFixedUnrealBloomPass.BlurDirectionX = new Vector2(1, 0);
+TransparentBackgroundFixedUnrealBloomPass.BlurDirectionY = new Vector2(0, 1);
+export {
+  TransparentBackgroundFixedUnrealBloomPass as UnrealBloomPass
+};

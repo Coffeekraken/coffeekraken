@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,53 +13,49 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var sugar_exports = {};
-__export(sugar_exports, {
-  default: () => SSugarConfig
-});
-module.exports = __toCommonJS(sugar_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_config = __toESM(require("@coffeekraken/s-config"), 1);
-var import_s_sugar_json = __toESM(require("@coffeekraken/s-sugar-json"), 1);
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"), 1);
-var import_packageRoot = __toESM(require("@coffeekraken/sugar/node/path/packageRoot"), 1);
-var import_md5 = __toESM(require("@coffeekraken/sugar/shared/crypt/md5"), 1);
-var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_get = __toESM(require("@coffeekraken/sugar/shared/object/get"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_s_docblock = __toESM(require("@coffeekraken/s-docblock"), 1);
-var import_objectHash = __toESM(require("@coffeekraken/sugar/shared/object/objectHash"), 1);
-class SSugarConfig extends import_s_class.default {
+import __SClass from "@coffeekraken/s-class";
+import __SConfig, {
+  SConfigFolderAdapter
+} from "@coffeekraken/s-config";
+import __SSugarJson from "@coffeekraken/s-sugar-json";
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
+import __packageRoot from "@coffeekraken/sugar/node/path/packageRoot";
+import __md5 from "@coffeekraken/sugar/shared/crypt/md5";
+import __isPlainObject from "@coffeekraken/sugar/shared/is/plainObject";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __get from "@coffeekraken/sugar/shared/object/get";
+import __fs from "fs";
+import __path from "path";
+import __SDocblock from "@coffeekraken/s-docblock";
+import __objectHash from "@coffeekraken/sugar/shared/object/objectHash";
+class SSugarConfig extends __SClass {
   static registerFolder(path, scope = "default", packageName) {
     this._registeredConfigFolderPaths.push({
       path,
       scope,
       packageName
     });
-    if (!import_fs.default.existsSync(path))
+    if (!__fs.existsSync(path))
       return;
     this._registeredConfigFilesPaths = [
       ...this._registeredConfigFilesPaths,
-      ...import_fs.default.readdirSync(path).filter((p) => p.match(/\.config\.js$/)).map((p) => {
+      ...__fs.readdirSync(path).filter((p) => p.match(/\.config\.js$/)).map((p) => {
         return `${path}/${p}`;
       })
     ];
   }
   static get filesRealPaths() {
     return this._registeredConfigFilesPaths.filter((f) => {
-      return import_fs.default.existsSync(f);
-    }).map((f) => import_fs.default.realpathSync(f));
+      return __fs.existsSync(f);
+    }).map((f) => __fs.realpathSync(f));
   }
   static get filesPaths() {
     return this._registeredConfigFilesPaths;
   }
   static get foldersRealPaths() {
     return this._registeredConfigFolderPaths.filter((f) => {
-      return import_fs.default.existsSync(f.path);
-    }).map((f) => import_fs.default.realpathSync(f.path));
+      return __fs.existsSync(f.path);
+    }).map((f) => __fs.realpathSync(f.path));
   }
   static get foldersPaths() {
     return this._registeredConfigFolderPaths.map((f) => f.path);
@@ -75,14 +67,14 @@ class SSugarConfig extends import_s_class.default {
     this._loadPromise = new Promise(async (resolve, reject) => {
       id = id != null ? id : typeof envOrId === "string" ? envOrId : void 0;
       if (!id) {
-        if ((0, import_plainObject.default)(envOrId)) {
-          id = import_md5.default.encrypt(envOrId);
+        if (__isPlainObject(envOrId)) {
+          id = __md5.encrypt(envOrId);
         } else {
           id = "default";
         }
       }
       let env;
-      if ((0, import_plainObject.default)(envOrId))
+      if (__isPlainObject(envOrId))
         env = envOrId;
       if (this._sSugarConfigInstances[id]) {
         return resolve({
@@ -121,7 +113,7 @@ class SSugarConfig extends import_s_class.default {
     const results = [];
     for (let i = 0; i < paths.length; i++) {
       const path = paths[i];
-      const docblock = new import_s_docblock.default(path);
+      const docblock = new __SDocblock(path);
       await docblock.parse();
       results.push({
         path,
@@ -132,7 +124,7 @@ class SSugarConfig extends import_s_class.default {
   }
   static hash(dotPath = "") {
     const config = this.get(dotPath);
-    return (0, import_objectHash.default)(config);
+    return __objectHash(config);
   }
   static toObject(target = "node") {
     const config = this.get("");
@@ -157,10 +149,10 @@ class SSugarConfig extends import_s_class.default {
     });
   }
   static async _searchConfigFiles() {
-    const sugarJson = new import_s_sugar_json.default();
+    const sugarJson = new __SSugarJson();
     if (!this._rootSugarJson) {
-      const rootSugarJsonPath = `${(0, import_packageRoot.default)()}/sugar.json`;
-      if (import_fs.default.existsSync(rootSugarJsonPath)) {
+      const rootSugarJsonPath = `${__packageRoot()}/sugar.json`;
+      if (__fs.existsSync(rootSugarJsonPath)) {
         this._rootSugarJson = sugarJson.sanitizeJson(await Promise.resolve().then(() => __toESM(require(rootSugarJsonPath))));
         if (this._rootSugarJson.extends && !Array.isArray(this._rootSugarJson.extends))
           this._rootSugarJson.extends = [this._rootSugarJson.extends];
@@ -172,7 +164,7 @@ class SSugarConfig extends import_s_class.default {
         const jsonObj = this._sugarJson[packageName];
         if (jsonObj.config && jsonObj.config.folders) {
           jsonObj.config.folders.forEach((folderObj) => {
-            this.registerFolder(import_path.default.resolve(jsonObj.metas.folderPath, folderObj.path), folderObj.scope, packageName);
+            this.registerFolder(__path.resolve(jsonObj.metas.folderPath, folderObj.path), folderObj.scope, packageName);
           });
         }
       });
@@ -182,13 +174,13 @@ class SSugarConfig extends import_s_class.default {
     return this._settings.sugarConfig;
   }
   constructor(settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       sugarConfig: {}
     }, settings != null ? settings : {}));
   }
   hash(dotPath = "") {
     const config = this.get(dotPath);
-    return (0, import_objectHash.default)(config);
+    return __objectHash(config);
   }
   get(dotpath) {
     return this._configInstance.get(dotpath);
@@ -203,10 +195,10 @@ class SSugarConfig extends import_s_class.default {
     if (!this.constructor._rootSugarJson || !this.constructor._sugarJson) {
       await this.constructor._searchConfigFiles();
     }
-    this._configInstance = new import_s_config.default("sugar", {
+    this._configInstance = new __SConfig("sugar", {
       env: (_a = this.sugarConfigSettings.env) != null ? _a : {},
       adapters: [
-        new import_s_config.SConfigFolderAdapter({
+        new SConfigFolderAdapter({
           configAdapter: {
             name: "sugar"
           },
@@ -215,7 +207,7 @@ class SSugarConfig extends import_s_class.default {
             fileName: "[name].config.js",
             scopes: {
               default: [
-                import_path.default.resolve((0, import_dirname.default)(), "../../src/config"),
+                __path.resolve(__dirname(), "../../src/config"),
                 ...this.constructor._registeredConfigFolderPaths.filter((obj) => obj.scope === "default").map((obj) => obj.path)
               ],
               module: [
@@ -226,15 +218,15 @@ class SSugarConfig extends import_s_class.default {
                 }).map((obj) => obj.path)
               ],
               repo: [
-                `${(0, import_packageRoot.default)(process.cwd(), true)}/[folderName]`,
+                `${__packageRoot(process.cwd(), true)}/[folderName]`,
                 ...this.constructor._registeredConfigFolderPaths.filter((obj) => obj.scope === "repo").map((obj) => obj.path)
               ],
               package: [
-                `${(0, import_packageRoot.default)(process.cwd())}/[folderName]`,
+                `${__packageRoot(process.cwd())}/[folderName]`,
                 ...this.constructor._registeredConfigFolderPaths.filter((obj) => obj.scope === "package").map((obj) => obj.path)
               ],
               user: [
-                `${(0, import_packageRoot.default)(process.cwd())}/.local/[folderName]`,
+                `${__packageRoot(process.cwd())}/.local/[folderName]`,
                 ...this.constructor._registeredConfigFolderPaths.filter((obj) => obj.scope === "user").map((obj) => obj.path)
               ]
             }
@@ -248,7 +240,7 @@ class SSugarConfig extends import_s_class.default {
             for (let i = 0; i < matches.length; i++) {
               const match = matches[i];
               const valuePath = match.replace("[theme.", "").replace("]", "");
-              const value = (0, import_get.default)(config, `theme.themes.${config.theme.theme}-${config.theme.variant}.${valuePath}`);
+              const value = __get(config, `theme.themes.${config.theme.theme}-${config.theme.variant}.${valuePath}`);
               if (string === match)
                 return value;
               string = string.replace(match, value);
@@ -267,5 +259,6 @@ SSugarConfig._sugarJson = void 0;
 SSugarConfig._rootSugarJson = void 0;
 SSugarConfig._registeredConfigFolderPaths = [];
 SSugarConfig._registeredConfigFilesPaths = [];
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SSugarConfig as default
+};

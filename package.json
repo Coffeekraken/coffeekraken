@@ -2,8 +2,12 @@
     "name": "coffeekraken",
     "version": "2.0.0",
     "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
+    "type": "module",
     "scripts": {
-        "dev": "concurrently \"yarn ts.watch\"",
+        "dev": "concurrently \"npm run tsup\"",
+        "tsup": "concurrently \"npm run tsup.js\" \"npm run tsup.node\"",
+        "tsup.js": "tsup 'packages/*/*/src/js/**/*.ts' --format esm,cjs --platform browser --no-splitting --watch",
+        "tsup.node": "tsup 'packages/*/*/src/!(js)/**/*.ts' --format esm,cjs --platform node --no-splitting --watch",
         "ts": "tsc",
         "ts.watch": "tsc --watch",
         "test": "jest --bail --silent",

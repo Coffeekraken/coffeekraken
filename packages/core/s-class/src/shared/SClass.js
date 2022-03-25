@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,32 +14,13 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SClass_exports = {};
-__export(SClass_exports, {
-  default: () => SClass
-});
-module.exports = __toCommonJS(SClass_exports);
-var import_getExtendsStack = __toESM(require("@coffeekraken/sugar/shared/class/utils/getExtendsStack"), 1);
-var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"), 1);
-var import_deepAssign = __toESM(require("@coffeekraken/sugar/shared/object/deepAssign"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_get = __toESM(require("@coffeekraken/sugar/shared/object/get"), 1);
-var import_getColorFor = __toESM(require("@coffeekraken/sugar/shared/dev/color/getColorFor"), 1);
-var import_toJson = __toESM(require("@coffeekraken/sugar/shared/object/toJson"), 1);
+import __getExtendsStack from "@coffeekraken/sugar/shared/class/utils/getExtendsStack";
+import __isPlain from "@coffeekraken/sugar/shared/is/plainObject";
+import __deepAssign from "@coffeekraken/sugar/shared/object/deepAssign";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __get from "@coffeekraken/sugar/shared/object/get";
+import __getColorFor from "@coffeekraken/sugar/shared/dev/color/getColorFor";
+import __toJson from "@coffeekraken/sugar/shared/object/toJson";
 class SClass {
   constructor(settings = {}) {
     this._settings = {};
@@ -130,7 +107,7 @@ function getMetas(ctx) {
   return metasObj;
 }
 function generateInterfacesStack(ctx) {
-  const extendsStack = (0, import_getExtendsStack.default)(ctx, {
+  const extendsStack = __getExtendsStack(ctx, {
     includeBaseClass: true
   });
   Object.keys(extendsStack).forEach((className) => {
@@ -141,7 +118,7 @@ function generateInterfacesStack(ctx) {
   });
 }
 function expose(ctx, instance, settings) {
-  settings = (0, import_deepMerge.default)({
+  settings = __deepMerge({
     as: void 0,
     props: []
   }, settings);
@@ -159,13 +136,13 @@ function expose(ctx, instance, settings) {
   }
 }
 function getInterfaceObj(ctx, name) {
-  let interfaceObj = (0, import_get.default)(ctx._interfacesStack, name);
+  let interfaceObj = __get(ctx._interfacesStack, name);
   if (!interfaceObj) {
     const keys = Object.keys(ctx._interfacesStack);
     for (let i = 0; i < keys.length; i++) {
       const interfacesObj = ctx._interfacesStack[keys[i]];
       if (interfacesObj[name] !== void 0) {
-        if ((0, import_plainObject.default)(interfacesObj[name])) {
+        if (__isPlain(interfacesObj[name])) {
           interfaceObj = interfacesObj[name];
         } else {
           interfaceObj = {
@@ -187,11 +164,11 @@ function getInterfaceObj(ctx, name) {
   return interfaceObj;
 }
 function toPlainObject(ctx) {
-  return (0, import_toJson.default)(ctx);
+  return __toJson(ctx);
 }
 function getInterface(ctx, name) {
   const interfaceObj = getInterfaceObj(ctx, name);
-  if ((0, import_plainObject.default)(interfaceObj))
+  if (__isPlain(interfaceObj))
     return interfaceObj.class;
   return interfaceObj;
 }
@@ -203,7 +180,7 @@ function applyInterfaces(ctx) {
     Object.keys(interfacesObj).forEach((name) => {
       const interfaceObj = interfacesObj[name];
       let settings;
-      if ((0, import_plainObject.default)(interfaceObj)) {
+      if (__isPlain(interfaceObj)) {
         settings = Object.assign({}, __spreadValues({
           apply: true,
           on: name === "settings" ? "_settings" : name === "this" ? ctx : void 0
@@ -218,7 +195,7 @@ function applyInterfaces(ctx) {
       if (settings.apply !== true)
         return;
       if (settings.on) {
-        if (typeof settings.on === "string" && (0, import_get.default)(ctx, settings.on) !== void 0) {
+        if (typeof settings.on === "string" && __get(ctx, settings.on) !== void 0) {
           applyInterface(ctx, `${className}.${name}`, settings.on);
         } else if (typeof settings.on === "object") {
           applyInterface(ctx, `${className}.${name}`, settings.on);
@@ -242,14 +219,14 @@ function applyInterface(ctx, name, on = null) {
   if (name.includes(".")) {
     name = name.split(".").slice(1).join(".");
   }
-  if ((0, import_plainObject.default)(interfaceObj)) {
+  if (__isPlain(interfaceObj)) {
     let onValue;
     if (interfaceObj.on && typeof interfaceObj.on === "string") {
-      onValue = (0, import_get.default)(ctx, interfaceObj.on);
+      onValue = __get(ctx, interfaceObj.on);
     } else if (interfaceObj.on && typeof interfaceObj.on === "object") {
       onValue = interfaceObj.on;
     } else {
-      onValue = (0, import_get.default)(ctx, name);
+      onValue = __get(ctx, name);
     }
     let applyId = ctx.constructor.name;
     if (ctx.id)
@@ -266,7 +243,7 @@ function applyInterface(ctx, name, on = null) {
         id: applyId,
         throw: true
       });
-      (0, import_deepAssign.default)(ctx, res.value);
+      __deepAssign(ctx, res.value);
       return ctx;
     } else {
       res = interfaceObj.class.apply(onValue, {
@@ -274,10 +251,10 @@ function applyInterface(ctx, name, on = null) {
         throw: true
       });
       if (interfaceObj.on && typeof interfaceObj.on === "object") {
-        const returnValue = (0, import_deepAssign.default)(interfaceObj.on, res);
+        const returnValue = __deepAssign(interfaceObj.on, res);
         return returnValue;
       } else if (interfaceObj.on && typeof interfaceObj.on === "string") {
-        return (0, import_deepAssign.default)((0, import_get.default)(ctx, interfaceObj.on), res);
+        return __deepAssign(__get(ctx, interfaceObj.on), res);
       } else if (ctx[name] !== void 0) {
         return ctx[name];
       } else {
@@ -295,11 +272,12 @@ function setSettings(ctx, settings = {}) {
     ctx._settings.metas.id = ctx.constructor.name;
   if (!ctx.constructor.name.match(/^SConfig/)) {
     if (!ctx._settings.metas.color)
-      ctx._settings.metas.color = (0, import_getColorFor.default)(ctx.constructor.name, {
+      ctx._settings.metas.color = __getColorFor(ctx.constructor.name, {
         scope: "class"
       });
   } else if (!ctx._settings.metas.color)
     ctx._settings.metas.color = "yellow";
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SClass as default
+};

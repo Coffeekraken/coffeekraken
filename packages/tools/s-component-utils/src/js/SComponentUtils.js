@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,39 +14,20 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SComponentUtils_exports = {};
-__export(SComponentUtils_exports, {
-  default: () => SComponent
-});
-module.exports = __toCommonJS(SComponentUtils_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_conductor = __toESM(require("@coffeekraken/s-conductor"), 1);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
-var import_adoptStyleInShadowRoot = __toESM(require("@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot"), 1);
-var import_injectStyle = __toESM(require("@coffeekraken/sugar/js/dom/css/injectStyle"), 1);
-var import_inViewportStatusChange = __toESM(require("@coffeekraken/sugar/js/dom/detect/inViewportStatusChange"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_autoCast = __toESM(require("@coffeekraken/sugar/shared/string/autoCast"), 1);
-var import_camelCase = __toESM(require("@coffeekraken/sugar/shared/string/camelCase"), 1);
-var import_dashCase = __toESM(require("@coffeekraken/sugar/shared/string/dashCase"), 1);
-var import_SComponentUtilsDefaultPropsInterface = __toESM(require("./interface/SComponentUtilsDefaultPropsInterface"), 1);
-class SComponent extends import_s_class.default {
+import __SClass from "@coffeekraken/s-class";
+import __SConductor from "@coffeekraken/s-conductor";
+import __SInterface from "@coffeekraken/s-interface";
+import __adoptStyleInShadowRoot from "@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot";
+import __injectStyle from "@coffeekraken/sugar/js/dom/css/injectStyle";
+import __inViewportStatusChange from "@coffeekraken/sugar/js/dom/detect/inViewportStatusChange";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __autoCast from "@coffeekraken/sugar/shared/string/autoCast";
+import __camelCase from "@coffeekraken/sugar/shared/string/camelCase";
+import __dashCase from "@coffeekraken/sugar/shared/string/dashCase";
+import __SComponentUtilsDefaultPropsInterface from "./interface/SComponentUtilsDefaultPropsInterface";
+class SComponent extends __SClass {
   constructor(node, props, settings = {}) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       componentUtils: {}
     }, settings));
     this.state = "pending";
@@ -63,9 +40,9 @@ class SComponent extends import_s_class.default {
     }).on("leave", () => {
       this._isInViewport = false;
     });
-    let InterfaceToApply = class InlineSComponentUtilsInterface extends import_s_interface.default {
+    let InterfaceToApply = class InlineSComponentUtilsInterface extends __SInterface {
     };
-    InterfaceToApply.definition = __spreadValues(__spreadValues({}, Object.assign({}, import_SComponentUtilsDefaultPropsInterface.default.definition)), (_b = (_a = this.componentUtilsSettings.interface) == null ? void 0 : _a.definition) != null ? _b : {});
+    InterfaceToApply.definition = __spreadValues(__spreadValues({}, Object.assign({}, __SComponentUtilsDefaultPropsInterface.definition)), (_b = (_a = this.componentUtilsSettings.interface) == null ? void 0 : _a.definition) != null ? _b : {});
     this.InterfaceToApply = InterfaceToApply;
     const styleStr = this.componentUtilsSettings.style;
     this.injectStyle(styleStr != null ? styleStr : "");
@@ -91,14 +68,14 @@ class SComponent extends import_s_class.default {
   get inViewportStatusChange() {
     if (this._inViewportStatusChangePromise)
       return this._inViewportStatusChangePromise;
-    this._inViewportStatusChangePromise = (0, import_inViewportStatusChange.default)(this.node);
+    this._inViewportStatusChangePromise = __inViewportStatusChange(this.node);
     return this._inViewportStatusChangePromise;
   }
   waitAndExecute(callback) {
-    return import_s_conductor.default.when(this.node, this.props.mountWhen, callback);
+    return __SConductor.when(this.node, this.props.mountWhen, callback);
   }
   adoptStyleInShadowRoot($shadowRoot, $context) {
-    return (0, import_adoptStyleInShadowRoot.default)($shadowRoot, $context);
+    return __adoptStyleInShadowRoot($shadowRoot, $context);
   }
   get props() {
     if (this._finalProps)
@@ -117,13 +94,13 @@ class SComponent extends import_s_class.default {
         }
         if (!value)
           return;
-        passedProps[(0, import_camelCase.default)((_c = (_b = props[key]) == null ? void 0 : _b.name) != null ? _c : key)] = (0, import_autoCast.default)(value);
+        passedProps[__camelCase((_c = (_b = props[key]) == null ? void 0 : _b.name) != null ? _c : key)] = __autoCast(value);
       });
     } else {
       j;
       passedProps = props;
     }
-    this._finalProps = (0, import_deepMerge.default)(this.defaultProps, this.InterfaceToApply.apply(passedProps, {
+    this._finalProps = __deepMerge(this.defaultProps, this.InterfaceToApply.apply(passedProps, {
       descriptor: {
         defaults: false
       }
@@ -137,9 +114,9 @@ class SComponent extends import_s_class.default {
         const propDef = _this.InterfaceToApply.definition[prop];
         if (propDef == null ? void 0 : propDef.physical) {
           if (value === false || value === void 0 || value === null) {
-            _this.node.removeAttribute((0, import_dashCase.default)(prop));
+            _this.node.removeAttribute(__dashCase(prop));
           } else {
-            _this.node.setAttribute((0, import_dashCase.default)(prop), String(value));
+            _this.node.setAttribute(__dashCase(prop), String(value));
           }
         }
         obj[prop] = value;
@@ -155,15 +132,15 @@ class SComponent extends import_s_class.default {
     var _a, _b, _c;
     if (this._defaultProps)
       return Object.assign({}, this._defaultProps);
-    this._defaultProps = Object.assign({}, (0, import_deepMerge.default)(this.InterfaceToApply.defaults(), (_a = this.componentUtilsSettings.defaultProps) != null ? _a : {}, (_b = this.constructor._defaultProps["*"]) != null ? _b : {}, (_c = this.constructor._defaultProps[this.name]) != null ? _c : {}));
+    this._defaultProps = Object.assign({}, __deepMerge(this.InterfaceToApply.defaults(), (_a = this.componentUtilsSettings.defaultProps) != null ? _a : {}, (_b = this.constructor._defaultProps["*"]) != null ? _b : {}, (_c = this.constructor._defaultProps[this.name]) != null ? _c : {}));
     return this._defaultProps;
   }
   static getFinalInterface(int) {
-    class InlineSComponentUtilsInterface extends import_s_interface.default {
+    class InlineSComponentUtilsInterface extends __SInterface {
     }
-    InlineSComponentUtilsInterface.definition = import_SComponentUtilsDefaultPropsInterface.default.definition;
+    InlineSComponentUtilsInterface.definition = __SComponentUtilsDefaultPropsInterface.definition;
     if (int) {
-      InlineSComponentUtilsInterface.definition = __spreadValues(__spreadValues({}, import_SComponentUtilsDefaultPropsInterface.default.definition), int.definition);
+      InlineSComponentUtilsInterface.definition = __spreadValues(__spreadValues({}, __SComponentUtilsDefaultPropsInterface.definition), int.definition);
     }
     return InlineSComponentUtilsInterface;
   }
@@ -171,7 +148,7 @@ class SComponent extends import_s_class.default {
     if (this.constructor._injectedStyles.indexOf(id) !== -1)
       return;
     this.constructor._injectedStyles.push(id);
-    (0, import_injectStyle.default)(css, id);
+    __injectStyle(css, id);
   }
   exposeApi(apiObj, ctx = this.node) {
     setTimeout(() => {
@@ -199,3 +176,6 @@ class SComponent extends import_s_class.default {
 }
 SComponent._defaultProps = {};
 SComponent._injectedStyles = [];
+export {
+  SComponent as default
+};

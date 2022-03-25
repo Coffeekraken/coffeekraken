@@ -1,11 +1,7 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -21,38 +17,18 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var CkBlob_exports = {};
-__export(CkBlob_exports, {
-  default: () => CKBlob,
-  define: () => define
-});
-module.exports = __toCommonJS(CkBlob_exports);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_OrbitControls = require("https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js");
-var THREE = __toESM(require("three"), 1);
-var import_lit = require("lit");
-var import_perlinNoise = __toESM(require("./lib/perlinNoise"), 1);
-var import_OBJLoader = require("./lib/three/examples/jsm/loaders/OBJLoader.js");
-var import_RGBELoader = require("./lib/three/examples/jsm/loaders/RGBELoader");
-var import_EffectComposer = require("./lib/three/examples/jsm/postprocessing/EffectComposer.js");
-var import_RenderPass = require("./lib/three/examples/jsm/postprocessing/RenderPass.js");
 var _a;
-class CKBlob extends import_s_lit_component.default {
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "three";
+import { html } from "lit";
+import __perlin from "./lib/perlinNoise";
+import { OBJLoader } from "./lib/three/examples/jsm/loaders/OBJLoader.js";
+import { RGBELoader } from "./lib/three/examples/jsm/loaders/RGBELoader";
+import { EffectComposer } from "./lib/three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "./lib/three/examples/jsm/postprocessing/RenderPass.js";
+class CKBlob extends __SLitComponent {
   constructor() {
     super({
       litComponent: {
@@ -63,7 +39,7 @@ class CKBlob extends import_s_lit_component.default {
     this._icons = [];
     this._iconsGroups = [];
     this._start = Date.now();
-    this._perlin = (0, import_perlinNoise.default)();
+    this._perlin = __perlin();
     this._isDark = (_a = document.querySelector("html").getAttribute("theme")) == null ? void 0 : _a.toString().includes("dark");
     this._postprocessing = {};
   }
@@ -169,13 +145,13 @@ class CKBlob extends import_s_lit_component.default {
     wavesBuffer(2, 0.8);
   }
   initPostprocessing() {
-    const renderPass = new import_RenderPass.RenderPass(this._scene, this._camera);
-    const finalComposer = new import_EffectComposer.EffectComposer(this._renderer);
+    const renderPass = new RenderPass(this._scene, this._camera);
+    const finalComposer = new EffectComposer(this._renderer);
     finalComposer.addPass(renderPass);
     this._finalComposer = finalComposer;
   }
   addControls() {
-    this._controls = new import_OrbitControls.OrbitControls(this._camera, this._renderer.domElement);
+    this._controls = new OrbitControls(this._camera, this._renderer.domElement);
     this._controls.autoRotate = true;
     this._controls.autoRotateSpeed = 4;
     this._controls.enableDamping = true;
@@ -187,8 +163,8 @@ class CKBlob extends import_s_lit_component.default {
   async addGrains() {
     const grain = await this.loadCoffeeGrain();
     this._grains = [];
-    const yellowMaterial = await this.createGrainMaterial(`${import_s_sugar_config.default.get("serve.img.url")}/3d/coffeeGrain/grain-yellow.jpg`);
-    const purpleMaterial = await this.createGrainMaterial(`${import_s_sugar_config.default.get("serve.img.url")}/3d/coffeeGrain/grain-purple.jpg`);
+    const yellowMaterial = await this.createGrainMaterial(`${__SSugarConfig.get("serve.img.url")}/3d/coffeeGrain/grain-yellow.jpg`);
+    const purpleMaterial = await this.createGrainMaterial(`${__SSugarConfig.get("serve.img.url")}/3d/coffeeGrain/grain-purple.jpg`);
     const materials = [yellowMaterial, purpleMaterial];
     const colors = [16431875, 16431875, 5308927];
     const count = 12;
@@ -237,14 +213,14 @@ class CKBlob extends import_s_lit_component.default {
     let texture;
     let matSettings;
     if (this._isDark) {
-      texture = await this.loadTexture(`${import_s_sugar_config.default.get("serve.img.url")}/3d/ck-texture.jpg`);
+      texture = await this.loadTexture(`${__SSugarConfig.get("serve.img.url")}/3d/ck-texture.jpg`);
       matSettings = {
         metalness: 0,
         roughness: 0.6,
         color: 16777215
       };
     } else {
-      texture = await this.loadTexture(`${import_s_sugar_config.default.get("serve.img.url")}/3d/ck-texture-light.jpg`);
+      texture = await this.loadTexture(`${__SSugarConfig.get("serve.img.url")}/3d/ck-texture-light.jpg`);
       matSettings = {
         metalness: 0,
         roughness: 0.6,
@@ -360,7 +336,7 @@ class CKBlob extends import_s_lit_component.default {
   createGrainMaterial(texturePath) {
     return new Promise(async (resolve) => {
       const texture = await this.loadTexture(texturePath);
-      const bumpMap = await this.loadTexture(`${import_s_sugar_config.default.get("serve.img.url")}/3d/coffeeGrain/coffeeGrainBumpMap.jpg`);
+      const bumpMap = await this.loadTexture(`${__SSugarConfig.get("serve.img.url")}/3d/coffeeGrain/coffeeGrainBumpMap.jpg`);
       let grainMat = new THREE.MeshStandardMaterial({
         metalness: 0,
         roughness: 1,
@@ -374,7 +350,7 @@ class CKBlob extends import_s_lit_component.default {
   }
   loadCoffeeGrain() {
     return new Promise((resolve) => {
-      new import_OBJLoader.OBJLoader().load(`${import_s_sugar_config.default.get("serve.img.url")}/3d/coffeeGrain/coffeeGrain.obj`, (object) => {
+      new OBJLoader().load(`${__SSugarConfig.get("serve.img.url")}/3d/coffeeGrain/coffeeGrain.obj`, (object) => {
         object.castShadow = true;
         object.scale.set(0.01, 0.01, 0.01);
         object.position.set(0, 0, 0);
@@ -401,7 +377,7 @@ class CKBlob extends import_s_lit_component.default {
   loadEnvMap() {
     return new Promise((resolve) => {
       let envmaploader = new THREE.PMREMGenerator(this._renderer);
-      new import_RGBELoader.RGBELoader().setPath(`${import_s_sugar_config.default.get("serve.img.url")}/3d/`).load("HDRI_STUDIO_vol2_030.hdr", function(hdrmap) {
+      new RGBELoader().setPath(`${__SSugarConfig.get("serve.img.url")}/3d/`).load("HDRI_STUDIO_vol2_030.hdr", function(hdrmap) {
         let envmap = envmaploader.fromCubemap(hdrmap);
         resolve(envmap);
       });
@@ -438,7 +414,7 @@ class CKBlob extends import_s_lit_component.default {
     this._finalComposer.render();
   }
   render() {
-    return import_lit.html`
+    return html`
             <div class="ck-blob">
                 <canvas class="blob-perlin"></canvas>
             </div>
@@ -446,6 +422,10 @@ class CKBlob extends import_s_lit_component.default {
   }
 }
 function define(props = {}, tagName = "ck-blob") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, CKBlob);
 }
+export {
+  CKBlob as default,
+  define
+};

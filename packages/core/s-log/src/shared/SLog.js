@@ -1,29 +1,4 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SLog_exports = {};
-__export(SLog_exports, {
-  default: () => SLog
-});
-module.exports = __toCommonJS(SLog_exports);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
 const _SLog = class {
   static filter(types) {
     this._filteredTypes = types;
@@ -48,7 +23,7 @@ const _SLog = class {
     if (!(logObj == null ? void 0 : logObj.value) && !logObj._logObj) {
       throw new Error(`<red>[${this.constructor.name}]</red> Sorry but you cannot instanciate a new SLog without a "<yellow>value</yellow>" property...`);
     }
-    this._logObj = (0, import_deepMerge.default)({
+    this._logObj = __deepMerge({
       type: _SLog.TYPE_LOG,
       timestamp: Date.now(),
       decorators: true,
@@ -171,5 +146,6 @@ SLog.PRESETS = [
 ];
 SLog._filteredTypes = [];
 SLog._defaultLogObj = {};
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SLog as default
+};

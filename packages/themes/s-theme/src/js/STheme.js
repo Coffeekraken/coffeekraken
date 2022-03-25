@@ -1,35 +1,10 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var STheme_exports = {};
-__export(STheme_exports, {
-  default: () => STheme
-});
-module.exports = __toCommonJS(STheme_exports);
-var import_SThemeBase = __toESM(require("../shared/SThemeBase"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_s_color = __toESM(require("@coffeekraken/s-color"), 1);
-var import_clearTransmations = __toESM(require("@coffeekraken/sugar/js/dom/transmation/clearTransmations"), 1);
-class STheme extends import_SThemeBase.default {
+import __SThemeBase from "../shared/SThemeBase";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __SColor from "@coffeekraken/s-color";
+import __clearTransmations from "@coffeekraken/sugar/js/dom/transmation/clearTransmations";
+class STheme extends __SThemeBase {
   static setTheme(theme, variant, $context = document.querySelector("html")) {
-    (0, import_clearTransmations.default)(document.body, {
+    __clearTransmations(document.body, {
       timeout: 100
     });
     if (theme && variant) {
@@ -46,8 +21,8 @@ class STheme extends import_SThemeBase.default {
   }
   static getCurrentTheme($context = document.body) {
     var _a;
-    const theme = import_s_sugar_config.default.get("theme.theme");
-    const variant = import_s_sugar_config.default.get("theme.variant");
+    const theme = __SSugarConfig.get("theme.theme");
+    const variant = __SSugarConfig.get("theme.variant");
     if (!$context.hasAttribute("theme")) {
       return this.getTheme(theme, variant);
     }
@@ -55,7 +30,7 @@ class STheme extends import_SThemeBase.default {
     if (parts.length === 2) {
       return this.getTheme(parts[0], parts[1]);
     }
-    const themes = import_s_sugar_config.default.get("theme.themes");
+    const themes = __SSugarConfig.get("theme.themes");
     for (let [key, value] of Object.entries(themes)) {
       if (key === `${parts[0]}-${variant}` || key === `${theme}-${parts[0]}`) {
         const p = key.split("-").map((l) => l.trim()), t = p[0], v = p[1];
@@ -75,7 +50,7 @@ class STheme extends import_SThemeBase.default {
     }
   }
   setColor(color, value, $context = document.body) {
-    const colorInstance = new import_s_color.default(value);
+    const colorInstance = new __SColor(value);
     $context.style.setProperty(`--s-theme-color-${color}-h`, colorInstance.h);
     $context.style.setProperty(`--s-theme-color-${color}-s`, colorInstance.s);
     $context.style.setProperty(`--s-theme-color-${color}-l`, colorInstance.l);
@@ -90,8 +65,11 @@ class STheme extends import_SThemeBase.default {
     $wrapper.appendChild($elm);
     $context.appendChild($wrapper);
     const style = getComputedStyle($elm);
-    const color = new import_s_color.default(style.backgroundColor);
+    const color = new __SColor(style.backgroundColor);
     $wrapper.remove();
     return color;
   }
 }
+export {
+  STheme as default
+};

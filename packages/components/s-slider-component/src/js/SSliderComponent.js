@@ -1,53 +1,27 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SSliderComponent_exports = {};
-__export(SSliderComponent_exports, {
-  default: () => SSlider,
-  define: () => define
-});
-module.exports = __toCommonJS(SSliderComponent_exports);
-var import_SSliderBehavior = __toESM(require("./SSliderBehavior"), 1);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
-var import_s_component_utils = __toESM(require("@coffeekraken/s-component-utils"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_lit = require("lit");
-var import_s_slider_component = __toESM(require("../css/s-slider-component.css"), 1);
-var import_SSliderComponentInterface = __toESM(require("./interface/SSliderComponentInterface"), 1);
-var import_getTranslateProperties = __toESM(require("@coffeekraken/sugar/js/dom/style/getTranslateProperties"), 1);
-var import_easeInterval = __toESM(require("@coffeekraken/sugar/shared/function/easeInterval"), 1);
-var import_parse = __toESM(require("@coffeekraken/sugar/shared/string/parse"), 1);
-var import_class = __toESM(require("@coffeekraken/sugar/shared/is/class"), 1);
-var import_onSwipe = __toESM(require("@coffeekraken/sugar/js/dom/detect/onSwipe"), 1);
+import __SSliderBehavior from "./SSliderBehavior";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import __SInterface from "@coffeekraken/s-interface";
+import __SComponentUtils from "@coffeekraken/s-component-utils";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import { css, html, unsafeCSS } from "lit";
+import __css from "../css/s-slider-component.css";
+import __SSliderComponentInterface from "./interface/SSliderComponentInterface";
+import __getTranslateProperties from "@coffeekraken/sugar/js/dom/style/getTranslateProperties";
+import __easeInterval from "@coffeekraken/sugar/shared/function/easeInterval";
+import __parse from "@coffeekraken/sugar/shared/string/parse";
+import __isClass from "@coffeekraken/sugar/shared/is/class";
+import __onSwipe from "@coffeekraken/sugar/js/dom/detect/onSwipe";
 console.log("plop");
-class SSlider extends import_s_lit_component.default {
+class SSlider extends __SLitComponent {
   constructor() {
     var _a, _b;
     console.log("SSS___Y");
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       litComponent: {
         shadowDom: false
       },
       componentUtils: {
-        interface: import_s_interface.default.mix(import_SSliderComponentInterface.default, (_b = (_a = import_s_component_utils.default.getDefaultProps("s-slider").behavior) == null ? void 0 : _a.interface) != null ? _b : {})
+        interface: __SInterface.mix(__SSliderComponentInterface, (_b = (_a = __SComponentUtils.getDefaultProps("s-slider").behavior) == null ? void 0 : _a.interface) != null ? _b : {})
       }
     }));
     this.$slides = [];
@@ -61,12 +35,12 @@ class SSlider extends import_s_lit_component.default {
     this._playing = true;
   }
   static get properties() {
-    return import_s_lit_component.default.properties({}, import_SSliderComponentInterface.default);
+    return __SLitComponent.properties({}, __SSliderComponentInterface);
   }
   static get styles() {
-    return import_lit.css`
-            ${(0, import_lit.unsafeCSS)(`
-                ${import_s_slider_component.default}
+    return css`
+            ${unsafeCSS(`
+                ${__css}
             `)}
         `;
   }
@@ -97,9 +71,9 @@ class SSlider extends import_s_lit_component.default {
           throw new Error(`The behavior "${this.props.behavior}" is not valid. You must provide the "<yellow>class</yellow>" property and an optional "<yellow>settings</yellow>" one...`);
         }
         this.behavior = new behavior.class((_c = behavior.settings) != null ? _c : {});
-      } else if ((0, import_class.default)(this.props.behavior)) {
+      } else if (__isClass(this.props.behavior)) {
         this.behavior = new this.props.behavior({});
-      } else if (this.props.behavior instanceof import_SSliderBehavior.default) {
+      } else if (this.props.behavior instanceof __SSliderBehavior) {
         this.behavior = this.props.behavior;
       } else {
         throw new Error(`Invalid behavior type, must be a string, an SSliderBehavior extended class or an SSliderBehavior instance`);
@@ -116,7 +90,7 @@ class SSlider extends import_s_lit_component.default {
     }
   }
   _handleSwipe() {
-    (0, import_onSwipe.default)(this.$root, (swipe) => {
+    __onSwipe(this.$root, (swipe) => {
       if (this.props.direction === "horizontal") {
         if (swipe.left) {
           this.next();
@@ -386,7 +360,6 @@ class SSlider extends import_s_lit_component.default {
       this._timer.percentage = Math.round(100 / total * current);
       return this._timer;
     }
-    ;
     const slide = this.getSlide(slideIdIdxOrElement);
     return slide.timer;
   }
@@ -430,7 +403,7 @@ class SSlider extends import_s_lit_component.default {
   }
   _transitionHandler($from, $to) {
     const $slideableItem = this.$slidesWrapper.children[0];
-    const translates = (0, import_getTranslateProperties.default)($slideableItem);
+    const translates = __getTranslateProperties($slideableItem);
     if (this.props.transitionHandler) {
       this.props.transitionHandler($from, $to);
       return;
@@ -438,7 +411,7 @@ class SSlider extends import_s_lit_component.default {
     const nextBounds = $to.getBoundingClientRect();
     const sliderBounds = this.$slidesWrapper.getBoundingClientRect();
     const deltaX = nextBounds.left - sliderBounds.left, deltaY = nextBounds.top - sliderBounds.top;
-    (0, import_easeInterval.default)(this.props.transitionDuration, (percent) => {
+    __easeInterval(this.props.transitionDuration, (percent) => {
       if (this.props.direction === "horizontal") {
         const computedDelta = translates.x + deltaX / 100 * percent * -1;
         $slideableItem.style.transform = `translateX(${computedDelta}px)`;
@@ -458,8 +431,9 @@ class SSlider extends import_s_lit_component.default {
       slide = this.getCurrentSlide();
     } catch (e) {
     }
-    return import_lit.html`
-            <div class="${this.componentUtils.className("")}"
+    return html`
+            <div
+                class="${this.componentUtils.className("")}"
                 behavior="${(_a = this.props.behavior) == null ? void 0 : _a.id}"
                 style="
                     --s-slider-slide: ${this.currentSlideIdx};
@@ -469,30 +443,36 @@ class SSlider extends import_s_lit_component.default {
                     ` : ""}
                 "
             >
-                    <div class="${this.componentUtils.className("__slides-wrapper")}">
-                        <div class="${this.componentUtils.className("__slides")}">
-                            ${Array.from(this.$slides).map(($slide, idx) => {
+                <div
+                    class="${this.componentUtils.className("__slides-wrapper")}"
+                >
+                    <div class="${this.componentUtils.className("__slides")}">
+                        ${Array.from(this.$slides).map(($slide, idx) => {
       return $slide;
     })}
-                        </div>
                     </div>
-                    ${this.props.progress ? import_lit.html`
-                            <div class="${this.componentUtils.className("__progress")}">
-                                <div class="${this.componentUtils.className("__progress-bar")}"></div>
-                            </div>
-                    ` : ""}
-                    <div class="${this.componentUtils.className("__nav")}">
-                        ${Array.from(this.$navs).map(($nav, idx) => {
+                </div>
+                ${this.props.progress ? html`
+                          <div
+                              class="${this.componentUtils.className("__progress")}"
+                          >
+                              <div
+                                  class="${this.componentUtils.className("__progress-bar")}"
+                              ></div>
+                          </div>
+                      ` : ""}
+                <div class="${this.componentUtils.className("__nav")}">
+                    ${Array.from(this.$navs).map(($nav, idx) => {
       if (!$nav._navInited) {
         $nav.addEventListener("click", (e) => {
           var _a2;
           e.preventDefault();
-          this.goTo((_a2 = (0, import_parse.default)(e.target.getAttribute("s-slider-nav"))) != null ? _a2 : idx);
+          this.goTo((_a2 = __parse(e.target.getAttribute("s-slider-nav"))) != null ? _a2 : idx);
         });
         $nav._navInited = true;
       }
       if ($nav.getAttribute("s-slider-nav")) {
-        const id = (0, import_parse.default)($nav.getAttribute("s-slider-nav"));
+        const id = __parse($nav.getAttribute("s-slider-nav"));
         if (id === this.getCurrentSlide().id || id === this.getCurrentSlide().idx)
           $nav.classList.add("active");
         else
@@ -505,26 +485,46 @@ class SSlider extends import_s_lit_component.default {
       }
       return $nav;
     })}
-                    </div>
-                    ${this.props.controls ? import_lit.html`
-                        <div class="${this.componentUtils.className("__controls")}">
-                            <div class="${this.componentUtils.className("__controls-previous")} ${this.isFirst() && !this.props.loop ? "" : "active"}" @click=${() => this.previous()}>
-                                ${this.props.previousIconClass ? import_lit.html`
-                                    <i class="${this.props.previousIconClass}"></i>
-                                ` : import_lit.html`<div class="${this.componentUtils.className("__controls-previous-arrow")}"></div>`}
-                            </div>
-                            <div class="${this.componentUtils.className("__controls-next")} ${this.isLast() && !this.props.loop ? "" : "active"}" @click=${() => this.next()}>
-                                ${this.props.nextIconClass ? import_lit.html`
-                                    <i class="${this.props.nextIconClass}"></i>
-                                ` : import_lit.html`<div class="${this.componentUtils.className("__controls-next-arrow")}"></div>`}
-                            </div>
-                        </div>
-                    ` : ""}
+                </div>
+                ${this.props.controls ? html`
+                          <div
+                              class="${this.componentUtils.className("__controls")}"
+                          >
+                              <div
+                                  class="${this.componentUtils.className("__controls-previous")} ${this.isFirst() && !this.props.loop ? "" : "active"}"
+                                  @click=${() => this.previous()}
+                              >
+                                  ${this.props.previousIconClass ? html`
+                                            <i
+                                                class="${this.props.previousIconClass}"
+                                            ></i>
+                                        ` : html`<div
+                                            class="${this.componentUtils.className("__controls-previous-arrow")}"
+                                        ></div>`}
+                              </div>
+                              <div
+                                  class="${this.componentUtils.className("__controls-next")} ${this.isLast() && !this.props.loop ? "" : "active"}"
+                                  @click=${() => this.next()}
+                              >
+                                  ${this.props.nextIconClass ? html`
+                                            <i
+                                                class="${this.props.nextIconClass}"
+                                            ></i>
+                                        ` : html`<div
+                                            class="${this.componentUtils.className("__controls-next-arrow")}"
+                                        ></div>`}
+                              </div>
+                          </div>
+                      ` : ""}
             </div>
         `;
   }
 }
 function define(props = {}, tagName = "s-slider") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SSlider);
 }
+export {
+  SSlider as default,
+  define
+};

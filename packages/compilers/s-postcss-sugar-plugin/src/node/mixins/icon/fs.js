@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,32 +14,12 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var fs_exports = {};
-__export(fs_exports, {
-  default: () => fs_default,
-  interface: () => postcssSugarPluginIconFsMixinInterface
-});
-module.exports = __toCommonJS(fs_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_fs = __toESM(require("fs"));
-var import_path = __toESM(require("path"));
-var import_packageRoot = __toESM(require("@coffeekraken/sugar/node/path/packageRoot"));
-var import_filename = __toESM(require("@coffeekraken/sugar/node/fs/filename"));
-class postcssSugarPluginIconFsMixinInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __fs from "fs";
+import __path from "path";
+import __packageRoot from "@coffeekraken/sugar/node/path/packageRoot";
+import __fileName from "@coffeekraken/sugar/node/fs/filename";
+class postcssSugarPluginIconFsMixinInterface extends __SInterface {
   static get _definition() {
     return {
       path: {
@@ -73,15 +49,15 @@ function fs_default({
   }
   let as = finalParams.as;
   if (!as)
-    as = (0, import_filename.default)(finalParams.path.split(".").slice(0, -1).join("."));
-  const potentialFilePathFromRoot = import_path.default.resolve((0, import_packageRoot.default)(), finalParams.path);
-  const potentialFilePathFromFile = import_path.default.resolve(sourcePath, finalParams.path);
-  if (import_fs.default.existsSync(potentialFilePathFromFile)) {
+    as = __fileName(finalParams.path.split(".").slice(0, -1).join("."));
+  const potentialFilePathFromRoot = __path.resolve(__packageRoot(), finalParams.path);
+  const potentialFilePathFromFile = __path.resolve(sourcePath, finalParams.path);
+  if (__fs.existsSync(potentialFilePathFromFile)) {
     sharedData.icons.push({
       path: potentialFilePathFromFile,
       as
     });
-  } else if (import_fs.default.existsSync(potentialFilePathFromRoot)) {
+  } else if (__fs.existsSync(potentialFilePathFromRoot)) {
     sharedData.icons.push({
       path: potentialFilePathFromRoot,
       as
@@ -91,7 +67,7 @@ function fs_default({
   }
   replaceWith([]);
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  fs_default as default,
+  postcssSugarPluginIconFsMixinInterface as interface
+};

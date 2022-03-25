@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,39 +14,20 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var exportsMatch_exports = {};
-__export(exportsMatch_exports, {
-  default: () => exportsMatch
-});
-module.exports = __toCommonJS(exportsMatch_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_minimatch = __toESM(require("minimatch"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_node = __toESM(require("../../shared/is/node"), 1);
-var import_plainObject = __toESM(require("../../shared/is/plainObject"), 1);
-var import_checkPathWithMultipleExtensions = __toESM(require("../fs/checkPathWithMultipleExtensions"), 1);
-var import_extension = __toESM(require("../fs/extension"), 1);
+import __SugarConfig from "@coffeekraken/s-sugar-config";
+import __fs from "fs";
+import __minimatch from "minimatch";
+import __path from "path";
+import __isNode from "../../shared/is/node";
+import __isPlainObject from "../../shared/is/plainObject";
+import __checkPathWithMultipleExtensions from "../fs/checkPathWithMultipleExtensions";
+import __extension from "../fs/extension";
 function exportsMatch(packageDir, exportsObj, modulePath, settings) {
   let modulesSubpaths = exportsObj;
   const set = __spreadValues({
     method: "import",
-    target: (0, import_node.default)() ? "node" : "default",
-    extensions: import_s_sugar_config.default.get("module.resolve.extensions")
+    target: __isNode() ? "node" : "default",
+    extensions: __SugarConfig.get("module.resolve.extensions")
   }, settings || {});
   const keys = Object.keys(exportsObj);
   if (keys.indexOf("node") !== -1 || keys.indexOf("default") !== -1) {
@@ -77,12 +54,12 @@ function exportsMatch(packageDir, exportsObj, modulePath, settings) {
         modulesSubpaths = modulesSubpaths.require;
       }
     }
-    if ((0, import_plainObject.default)(modulesSubpaths)) {
+    if (__isPlainObject(modulesSubpaths)) {
       for (const key in modulesSubpaths) {
-        if ((0, import_minimatch.default)(modulePath, key.replace(/^\.\//, ""))) {
+        if (__minimatch(modulePath, key.replace(/^\.\//, ""))) {
           const matchStr = key.replace(/^\.\//, "").replace(/\/\*$/, "");
-          const modulePathExt = (0, import_extension.default)(modulePath);
-          const internalPackageSubPathExt = (0, import_extension.default)(modulesSubpaths[key]);
+          const modulePathExt = __extension(modulePath);
+          const internalPackageSubPathExt = __extension(modulesSubpaths[key]);
           if (internalPackageSubPathExt && modulePathExt && internalPackageSubPathExt !== modulePathExt)
             continue;
           const internalPath = modulesSubpaths[key].replace(/^\.\//, "").replace(/\/\*(\.[a-zA-Z0-9]+)?/, "");
@@ -104,27 +81,28 @@ function exportsMatch(packageDir, exportsObj, modulePath, settings) {
             if (realPath && realPath.trim() !== "")
               potentialPathArray.push(realPath);
             potentialPath = potentialPathArray.join("/");
-            potentialPath = (0, import_checkPathWithMultipleExtensions.default)(potentialPath, set.extensions);
+            potentialPath = __checkPathWithMultipleExtensions(potentialPath, set.extensions);
           }
           if (!potentialPath)
             return void 0;
-          if (import_fs.default.existsSync(potentialPath))
+          if (__fs.existsSync(potentialPath))
             return potentialPath;
           modulesSubpaths = matchStr;
           break;
         }
       }
     }
-    if (modulesSubpaths.node === void 0 && modulesSubpaths.default === void 0 && modulesSubpaths.import === void 0 && modulesSubpaths.require === void 0 || !(0, import_plainObject.default)(modulesSubpaths)) {
+    if (modulesSubpaths.node === void 0 && modulesSubpaths.default === void 0 && modulesSubpaths.import === void 0 && modulesSubpaths.require === void 0 || !__isPlainObject(modulesSubpaths)) {
       founded = true;
     }
   }
   if (typeof modulesSubpaths === "string") {
-    const potentialPath = import_path.default.resolve(packageDir, modulesSubpaths);
-    if (import_fs.default.existsSync(potentialPath))
+    const potentialPath = __path.resolve(packageDir, modulesSubpaths);
+    if (__fs.existsSync(potentialPath))
       return potentialPath;
   }
   return void 0;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  exportsMatch as default
+};

@@ -1,44 +1,19 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var new_exports = {};
-__export(new_exports, {
-  default: () => _new
-});
-module.exports = __toCommonJS(new_exports);
-var import_node = __toESM(require("@coffeekraken/sugar/shared/is/node"), 1);
-var import_SBasicStdio = __toESM(require("../node/basic/SBasicStdio"), 1);
-var import_SWebsocketStdio = __toESM(require("../node/websocket/SWebsocketStdio"), 1);
-var import_SStdio = __toESM(require("./SStdio"), 1);
+import __isNode from "@coffeekraken/sugar/shared/is/node";
+import __SBasicStdio from "../node/basic/SBasicStdio";
+import __SWebsocketStdio from "../node/websocket/SWebsocketStdio";
+import __SStdio from "./SStdio";
 async function _new(id, sources, stdio, settings) {
   if (!Array.isArray(sources))
     sources = [sources];
   let stdioInstance;
-  if ((0, import_node.default)()) {
+  if (__isNode()) {
     switch (stdio) {
-      case import_SStdio.default.UI_WEBSOCKET:
-        stdioInstance = new import_SWebsocketStdio.default(id, sources, settings);
+      case __SStdio.UI_WEBSOCKET:
+        stdioInstance = new __SWebsocketStdio(id, sources, settings);
         break;
-      case import_SStdio.default.UI_BASIC:
+      case __SStdio.UI_BASIC:
       default:
-        stdioInstance = new import_SBasicStdio.default(id, sources, settings);
+        stdioInstance = new __SBasicStdio(id, sources, settings);
         break;
     }
   } else {
@@ -46,5 +21,6 @@ async function _new(id, sources, stdio, settings) {
   }
   return stdioInstance;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  _new as default
+};

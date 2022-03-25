@@ -21,10 +21,6 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -34,33 +30,27 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SProcess_exports = {};
-__export(SProcess_exports, {
-  default: () => SProcess_default
-});
-module.exports = __toCommonJS(SProcess_exports);
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
-var import_s_event_emitter = __toESM(require("@coffeekraken/s-event-emitter"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_s_stdio = __toESM(require("@coffeekraken/s-stdio"), 1);
-var import_childProcess = __toESM(require("@coffeekraken/sugar/node/is/childProcess"), 1);
-var import_onProcessExit = __toESM(require("@coffeekraken/sugar/node/process/onProcessExit"), 1);
-var import_spawn = __toESM(require("@coffeekraken/sugar/node/process/spawn"), 1);
-var import_getExtendsStack = __toESM(require("@coffeekraken/sugar/shared/class/utils/getExtendsStack"), 1);
-var import_buildCommandLine = __toESM(require("@coffeekraken/sugar/shared/cli/buildCommandLine"), 1);
-var import_class = __toESM(require("@coffeekraken/sugar/shared/is/class"), 1);
-var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_toString = __toESM(require("@coffeekraken/sugar/shared/string/toString"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_stack_trace = __toESM(require("stack-trace"), 1);
-var import_SProcessSettingsInterface = __toESM(require("./interface/SProcessSettingsInterface"), 1);
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"), 1);
-const _SProcess = class extends import_s_event_emitter.default {
+import __SDuration from "@coffeekraken/s-duration";
+import __SEventEmitter from "@coffeekraken/s-event-emitter";
+import __fs from "fs";
+import __SPromise from "@coffeekraken/s-promise";
+import __SStdio from "@coffeekraken/s-stdio";
+import __isChildProcess from "@coffeekraken/sugar/node/is/childProcess";
+import __onProcessExit from "@coffeekraken/sugar/node/process/onProcessExit";
+import __spawn from "@coffeekraken/sugar/node/process/spawn";
+import __extendsStack from "@coffeekraken/sugar/shared/class/utils/getExtendsStack";
+import __buildCommandLine from "@coffeekraken/sugar/shared/cli/buildCommandLine";
+import __isClass from "@coffeekraken/sugar/shared/is/class";
+import __isPlainObject from "@coffeekraken/sugar/shared/is/plainObject";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __toString from "@coffeekraken/sugar/shared/string/toString";
+import __path from "path";
+import __stackTrace from "stack-trace";
+import __SProcessSettingsInterface from "./interface/SProcessSettingsInterface";
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
+const _SProcess = class extends __SEventEmitter {
   constructor(initialParams, settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       process: {}
     }, settings != null ? settings : {}));
     this.stdio = void 0;
@@ -72,11 +62,11 @@ const _SProcess = class extends import_s_event_emitter.default {
     if (!this.paramsInterface) {
       this.paramsInterface = (_a = this.constructor.interface) != null ? _a : this.getInterface("params");
     }
-    (0, import_onProcessExit.default)(async (state) => {
+    __onProcessExit(async (state) => {
       this.state(state);
     });
     if (!this.processSettings.processPath) {
-      for (const callSite of import_stack_trace.default.get()) {
+      for (const callSite of __stackTrace.get()) {
         if (callSite.getFunctionName() === this.constructor.name) {
           this.processSettings.processPath = callSite.getFileName();
           break;
@@ -95,7 +85,7 @@ const _SProcess = class extends import_s_event_emitter.default {
   }
   static async from(what, settings) {
     var _a, _b;
-    if ((0, import_class.default)(what) && (0, import_getExtendsStack.default)(what)["SProcess"]) {
+    if (__isClass(what) && __extendsStack(what)["SProcess"]) {
       return new what({}, settings);
     }
     if (what instanceof _SProcess) {
@@ -126,13 +116,13 @@ const _SProcess = class extends import_s_event_emitter.default {
       return new SFunctionProcess();
     }
     if (typeof what === "string") {
-      let potentialPath = import_path.default.resolve(what);
+      let potentialPath = __path.resolve(what);
       if (!potentialPath.match(/\.js$/))
         potentialPath += ".js";
-      if (import_fs.default.existsSync(potentialPath)) {
+      if (__fs.existsSync(potentialPath)) {
         const requireValue = (_a = await Promise.resolve().then(() => __toESM(require(potentialPath)))) == null ? void 0 : _a.default;
         if (requireValue) {
-          const pro = await this.from(requireValue, (0, import_deepMerge.default)(settings, {
+          const pro = await this.from(requireValue, __deepMerge(settings, {
             process: {
               processPath: potentialPath
             }
@@ -140,12 +130,12 @@ const _SProcess = class extends import_s_event_emitter.default {
           return pro;
         }
       } else {
-        const __SCommandProcess = (_b = await Promise.resolve().then(() => __toESM(require("./SCommandProcess"), 1))) == null ? void 0 : _b.default;
+        const __SCommandProcess = (_b = await Promise.resolve().then(() => __toESM(require("./SCommandProcess")))) == null ? void 0 : _b.default;
         const commandProcess = new __SCommandProcess({
           command: what
-        }, (0, import_deepMerge.default)(settings, {
+        }, __deepMerge(settings, {
           process: {
-            processPath: import_path.default.resolve("./SCommandProcess.js")
+            processPath: __path.resolve("./SCommandProcess.js")
           }
         }));
         return commandProcess;
@@ -161,7 +151,7 @@ const _SProcess = class extends import_s_event_emitter.default {
     ].join("\n"));
   }
   static async fromCommand(initialParams = {}, settings) {
-    const { default: __SCommandProcess } = await Promise.resolve().then(() => __toESM(require("./SCommandProcess"), 1));
+    const { default: __SCommandProcess } = await Promise.resolve().then(() => __toESM(require("./SCommandProcess")));
     return new __SCommandProcess(initialParams, settings);
   }
   static async run(paramsOrStringArgs = {}, settings = {}) {
@@ -180,17 +170,17 @@ const _SProcess = class extends import_s_event_emitter.default {
   }
   run(paramsOrStringArgs = {}, settings = {}) {
     var _a, _b, _c;
-    const processSettings = (0, import_deepMerge.default)(this.processSettings, settings);
+    const processSettings = __deepMerge(this.processSettings, settings);
     if (this.currentExecutionObj !== void 0) {
       if (processSettings.throw === true) {
         throw new Error(`Sorry but you can not execute multiple process of the "<yellow>${this.metas.name || this.metas.id || this.constructor.name}</yellow>" SProcess instance...`);
       }
       return;
     }
-    if (process.env.NODE_ENV !== "test" && !(0, import_childProcess.default)() && processSettings.stdio && !this.stdio) {
-      this.stdio = import_s_stdio.default.existingOrNew("default", this, processSettings.stdio, {});
+    if (process.env.NODE_ENV !== "test" && !__isChildProcess() && processSettings.stdio && !this.stdio) {
+      this.stdio = __SStdio.existingOrNew("default", this, processSettings.stdio, {});
     }
-    this._duration = new import_s_duration.default();
+    this._duration = new __SDuration();
     this.currentExecutionObj = {
       state: "idle",
       stdout: [],
@@ -202,18 +192,18 @@ const _SProcess = class extends import_s_event_emitter.default {
         if (!this.currentExecutionObj)
           return "";
         return this.currentExecutionObj.stdout.map((item) => {
-          return (0, import_toString.default)(item);
+          return __toString(item);
         }).join("\n");
       };
       this.currentExecutionObj.stderr.toString = () => {
         if (!this.currentExecutionObj)
           return "";
         return this.currentExecutionObj.stderr.map((item) => {
-          return (0, import_toString.default)(item);
+          return __toString(item);
         }).join("\n");
       };
     }
-    let paramsObj = (0, import_plainObject.default)(paramsOrStringArgs) ? paramsOrStringArgs : {};
+    let paramsObj = __isPlainObject(paramsOrStringArgs) ? paramsOrStringArgs : {};
     if (this.paramsInterface) {
       paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
         baseObj: (_a = this.initialParams) != null ? _a : {}
@@ -231,22 +221,22 @@ const _SProcess = class extends import_s_event_emitter.default {
     this.currentExecutionObj.params = Object.assign({}, paramsObj);
     this.state("running");
     (_b = processSettings.before) == null ? void 0 : _b.call(processSettings, this);
-    if (processSettings.runAsChild && !(0, import_childProcess.default)()) {
-      const commandToRun = (0, import_buildCommandLine.default)(`node --experimental-specifier-resolution=node ${import_path.default.resolve((0, import_dirname.default)(), "runAsChild.cli.js")} [arguments]`, __spreadProps(__spreadValues({}, this._params), {
+    if (processSettings.runAsChild && !__isChildProcess()) {
+      const commandToRun = __buildCommandLine(`node --experimental-specifier-resolution=node ${__path.resolve(__dirname(), "runAsChild.cli.js")} [arguments]`, __spreadProps(__spreadValues({}, this._params), {
         _settings: processSettings
       }), {
         keepFalsy: true
       });
-      this._processPromise = (0, import_spawn.default)(commandToRun, [], __spreadValues({}, processSettings.spawnSettings || {}));
+      this._processPromise = __spawn(commandToRun, [], __spreadValues({}, processSettings.spawnSettings || {}));
     } else {
       this._processPromise = this.process(this._params, processSettings);
-      if ((0, import_childProcess.default)() && this._processPromise && this._processPromise.pipeTo) {
+      if (__isChildProcess() && this._processPromise && this._processPromise.pipeTo) {
         this._processPromise.pipeTo(process, {
           exclude: []
         });
       }
     }
-    if (this._processPromise instanceof import_s_promise.default) {
+    if (this._processPromise instanceof __SPromise) {
       this.pipe(this._processPromise, {});
       this._processPromise && this._processPromise.on("log", (data, metas) => {
         if (this.currentExecutionObj) {
@@ -298,7 +288,7 @@ const _SProcess = class extends import_s_event_emitter.default {
     if (this._processPromise instanceof Promise) {
       this._processPromise.catch((e) => {
       });
-      return new import_s_promise.default(({ resolve }) => {
+      return new __SPromise(({ resolve }) => {
         this._processPromise.then((value) => {
           var _a2;
           this.state("success");
@@ -322,7 +312,7 @@ const _SProcess = class extends import_s_event_emitter.default {
     if (!value)
       return this._state;
     if (["idle", "ready", "running", "killed", "error", "success"].indexOf(value) === -1) {
-      throw new Error(`Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${(0, import_toString.default)(value)}</magenta>" of your "<cyan>${this.constructor.name}</cyan>" class can contain only one of these values: ${[
+      throw new Error(`Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${__toString(value)}</magenta>" of your "<cyan>${this.constructor.name}</cyan>" class can contain only one of these values: ${[
         "idle",
         "running",
         "killed",
@@ -402,9 +392,10 @@ let SProcess = _SProcess;
 SProcess.interfaces = {
   settings: {
     on: "_settings.process",
-    class: import_SProcessSettingsInterface.default
+    class: __SProcessSettingsInterface
   }
 };
 var SProcess_default = SProcess;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SProcess_default as default
+};

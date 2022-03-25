@@ -21,10 +21,6 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -34,52 +30,46 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SVite_exports = {};
-__export(SVite_exports, {
-  default: () => SVite
-});
-module.exports = __toCommonJS(SVite_exports);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
-var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_s_riotjs_plugin_postcss_preprocessor = __toESM(require("@coffeekraken/s-riotjs-plugin-postcss-preprocessor"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_writeFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeFileSync"), 1);
-var import_listNodeModulesPackages = __toESM(require("@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_rollup_plugin_analyzer = __toESM(require("rollup-plugin-analyzer"), 1);
-var import_rollup_plugin_uglify = require("rollup-plugin-uglify");
-var import_vite = require("vite");
-var import_internalWatcherReloadPlugin = __toESM(require("./plugins/internalWatcherReloadPlugin"), 1);
-var import_rewritesPlugin = __toESM(require("./plugins/rewritesPlugin"), 1);
-var import_SViteStartParamsInterface = __toESM(require("./interface/SViteStartParamsInterface"), 1);
-var import_kill = __toESM(require("@coffeekraken/sugar/node/process/kill"), 1);
-var import_isPortFree = __toESM(require("@coffeekraken/sugar/node/network/utils/isPortFree"), 1);
-var import_SViteBuildParamsInterface = __toESM(require("./interface/SViteBuildParamsInterface"), 1);
-var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
-class SVite extends import_s_class.default {
+import __SClass from "@coffeekraken/s-class";
+import __SDuration from "@coffeekraken/s-duration";
+import __SFile from "@coffeekraken/s-file";
+import __SPromise from "@coffeekraken/s-promise";
+import __sRiotjsPluginPostcssPreprocessor from "@coffeekraken/s-riotjs-plugin-postcss-preprocessor";
+import __SugarConfig from "@coffeekraken/s-sugar-config";
+import __writeFileSync from "@coffeekraken/sugar/node/fs/writeFileSync";
+import __listNodeModulesPackages from "@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __path from "path";
+import __rollupAnalyzerPlugin from "rollup-plugin-analyzer";
+import { uglify as __uglifyPlugin } from "rollup-plugin-uglify";
+import { build as __viteBuild, createServer as __viteServer } from "vite";
+import __sInternalWatcherReloadVitePlugin from "./plugins/internalWatcherReloadPlugin";
+import __rewritesPlugin from "./plugins/rewritesPlugin";
+import __SViteStartParamsInterface from "./interface/SViteStartParamsInterface";
+import __kill from "@coffeekraken/sugar/node/process/kill";
+import __isPortFree from "@coffeekraken/sugar/node/network/utils/isPortFree";
+import __SViteBuildParamsInterface from "./interface/SViteBuildParamsInterface";
+import __SLog from "@coffeekraken/s-log";
+class SVite extends __SClass {
   get viteSettings() {
     return this._settings.vite;
   }
   constructor(settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       vite: {}
     }, settings != null ? settings : {}));
-    (0, import_s_riotjs_plugin_postcss_preprocessor.default)(import_s_sugar_config.default.get("postcss.plugins"));
+    __sRiotjsPluginPostcssPreprocessor(__SugarConfig.get("postcss.plugins"));
   }
   start(params) {
-    return new import_s_promise.default(async ({ resolve, reject, emit }) => {
+    return new __SPromise(async ({ resolve, reject, emit }) => {
       var _a, _b;
       const config = __spreadValues({
         configFile: false
-      }, import_s_sugar_config.default.get("vite"));
+      }, __SugarConfig.get("vite"));
       if (!config.plugins)
         config.plugins = [];
-      config.plugins.unshift((0, import_rewritesPlugin.default)((_a = config.rewrites) != null ? _a : []));
-      config.plugins.unshift((0, import_internalWatcherReloadPlugin.default)());
+      config.plugins.unshift(__rewritesPlugin((_a = config.rewrites) != null ? _a : []));
+      config.plugins.unshift(__sInternalWatcherReloadVitePlugin());
       const plugins = [];
       for (let i = 0; i < config.plugins.length; i++) {
         const p = config.plugins[i];
@@ -91,14 +81,14 @@ class SVite extends import_s_class.default {
         }
       }
       config.plugins = plugins;
-      if (!await (0, import_isPortFree.default)(config.server.port)) {
+      if (!await __isPortFree(config.server.port)) {
         emit("log", {
-          type: import_s_log.default.TYPE_WARN,
+          type: __SLog.TYPE_WARN,
           value: `Port <yellow>${config.server.port}</yellow> already in use. Try to kill it before continue...`
         });
-        await (0, import_kill.default)(`:${config.server.port}`);
+        await __kill(`:${config.server.port}`);
       }
-      const server = await (0, import_vite.createServer)(config);
+      const server = await __viteServer(config);
       let listen;
       try {
         listen = await server.listen();
@@ -106,13 +96,13 @@ class SVite extends import_s_class.default {
         console.log("ERRROR", e);
       }
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: [
           `<yellow>Vite</yellow> server started <green>successfully</green>`
         ].join("\n")
       });
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: [
           `<yellow>http://${config.server.host}</yellow>:<cyan>${config.server.port}</cyan>`
         ].join("\n")
@@ -124,11 +114,11 @@ class SVite extends import_s_class.default {
     });
   }
   build(params) {
-    return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
       var _a, _b, _c, _d, _e, _f, _g, _h;
-      const viteConfig = import_s_sugar_config.default.get("vite");
-      const duration = new import_s_duration.default();
-      const finalParams = import_SViteBuildParamsInterface.default.apply(params);
+      const viteConfig = __SugarConfig.get("vite");
+      const duration = new __SDuration();
+      const finalParams = __SViteBuildParamsInterface.apply(params);
       const results = {};
       if (finalParams.lib && finalParams.type.indexOf("lib") === -1)
         finalParams.type = ["lib"];
@@ -136,14 +126,14 @@ class SVite extends import_s_class.default {
         finalParams.type = ["bundle"];
       for (let i = 0; i < finalParams.type.length; i++) {
         const buildType = finalParams.type[i];
-        const buildParams = (0, import_deepMerge.default)(Object.assign(finalParams), {});
+        const buildParams = __deepMerge(Object.assign(finalParams), {});
         if (buildType === "lib") {
           buildParams.minify = true;
         }
         if (buildParams.prod) {
           buildParams.minify = true;
         }
-        const config = (0, import_deepMerge.default)(viteConfig, {
+        const config = __deepMerge(viteConfig, {
           logLevel: "silent",
           build: {
             watch: buildParams.watch ? {} : false,
@@ -168,17 +158,17 @@ class SVite extends import_s_class.default {
           delete config.build.lib;
         }
         if (buildParams.minify) {
-          config.build.rollupOptions.plugins.push((0, import_rollup_plugin_uglify.uglify)());
+          config.build.rollupOptions.plugins.push(__uglifyPlugin());
         }
         if (buildParams.analyze) {
-          config.build.rollupOptions.plugins.push((0, import_rollup_plugin_analyzer.default)({
+          config.build.rollupOptions.plugins.push(__rollupAnalyzerPlugin({
             limit: 10,
             summaryOnly: true
           }));
         }
         if (!config.plugins)
           config.plugins = [];
-        config.plugins.unshift((0, import_rewritesPlugin.default)((_b = config.rewrites) != null ? _b : []));
+        config.plugins.unshift(__rewritesPlugin((_b = config.rewrites) != null ? _b : []));
         const plugins = [];
         for (let i2 = 0; i2 < config.plugins.length; i2++) {
           const p = config.plugins[i2];
@@ -203,7 +193,7 @@ class SVite extends import_s_class.default {
         if (buildType.toLowerCase() === "lib") {
           config.build.rollupOptions.external = [
             ...(_g = config.build.rollupOptions.external) != null ? _g : [],
-            ...Object.keys((0, import_listNodeModulesPackages.default)({ monorepo: true })).filter((item) => {
+            ...Object.keys(__listNodeModulesPackages({ monorepo: true })).filter((item) => {
               return !item.match(/^(\/|\.)/);
             }).map((item) => {
               return new RegExp(`^${item}`);
@@ -226,44 +216,44 @@ class SVite extends import_s_class.default {
         let outputsFilenames = [];
         finalFormats.forEach((format) => {
           var _a2;
-          outputs.push((0, import_deepMerge.default)(__spreadValues({
-            dir: import_path.default.resolve(viteConfig.build.outDir),
+          outputs.push(__deepMerge(__spreadValues({
+            dir: __path.resolve(viteConfig.build.outDir),
             format
           }, (_a2 = config.build.rollupOptions.output) != null ? _a2 : {})));
           outputsFilenames.push(`${buildType === "bundle" ? "index" : buildType}.${format}.js`);
         });
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>[build]</yellow> Starting "<magenta>${buildType}</magenta>" build`
         });
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>\u25CB</yellow> Environment : ${buildParams.prod ? "<green>production</green>" : "<yellow>development</yellow>"}`
         });
         outputsFilenames.forEach((filename) => {
           emit("log", {
-            type: import_s_log.default.TYPE_INFO,
-            value: `<yellow>\u25CB</yellow> Output      : <cyan>${import_path.default.relative(process.cwd(), `${import_path.default.resolve(viteConfig.build.outDir)}/${filename}`)}</cyan>`
+            type: __SLog.TYPE_INFO,
+            value: `<yellow>\u25CB</yellow> Output      : <cyan>${__path.relative(process.cwd(), `${__path.resolve(viteConfig.build.outDir)}/${filename}`)}</cyan>`
           });
         });
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>\u25CB</yellow> Type        : ${buildType.toLowerCase()}`
         });
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>\u25CB</yellow> Target      : ${config.build.target}`
         });
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>\u25CB</yellow> Format(s)   : ${finalFormats.join(",")}`
         });
         config.build.rollupOptions.output = outputs;
-        const res = await (0, import_vite.build)(config);
+        const res = await __viteBuild(config);
         if (((_h = res.constructor) == null ? void 0 : _h.name) === "WatchEmitter") {
           res.on("change", async () => {
             emit("log", {
-              type: import_s_log.default.TYPE_INFO,
+              type: __SLog.TYPE_INFO,
               value: `<yellow>[watch]</yellow> Update detected. Re-building...`
             });
             await pipe(this.build(__spreadProps(__spreadValues({}, params), {
@@ -271,7 +261,7 @@ class SVite extends import_s_class.default {
               verbose: false
             })));
             emit("log", {
-              type: import_s_log.default.TYPE_INFO,
+              type: __SLog.TYPE_INFO,
               value: `<cyan>[watch]</cyan> Watching for changes...`
             });
           });
@@ -280,7 +270,7 @@ class SVite extends import_s_class.default {
             verbose: false
           })));
           emit("log", {
-            type: import_s_log.default.TYPE_INFO,
+            type: __SLog.TYPE_INFO,
             value: `<cyan>[watch]</cyan> Watching for changes...`
           });
           return;
@@ -309,17 +299,17 @@ class SVite extends import_s_class.default {
           res.forEach((bundleObj, i2) => {
             const output = bundleObj.output[0];
             const baseOutputConfig = outputs[i2], baseOutputFilenames = outputsFilenames[i2];
-            (0, import_writeFileSync.default)(`${baseOutputConfig.dir}/${baseOutputFilenames}`, output.code);
-            const file = new import_s_file.default(`${baseOutputConfig.dir}/${baseOutputFilenames}`);
+            __writeFileSync(`${baseOutputConfig.dir}/${baseOutputFilenames}`, output.code);
+            const file = new __SFile(`${baseOutputConfig.dir}/${baseOutputFilenames}`);
             emit("log", {
-              type: import_s_log.default.TYPE_INFO,
+              type: __SLog.TYPE_INFO,
               value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`
             });
           });
         }
       }
       emit("log", {
-        type: import_s_log.default.TYPE_INFO,
+        type: __SLog.TYPE_INFO,
         value: `<green>[success]</green> Build completed <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`
       });
       resolve(results);
@@ -331,7 +321,8 @@ class SVite extends import_s_class.default {
   }
 }
 SVite.interfaces = {
-  startParams: import_SViteStartParamsInterface.default
+  startParams: __SViteStartParamsInterface
 };
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SVite as default
+};

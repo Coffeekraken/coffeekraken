@@ -1,11 +1,7 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -21,39 +17,20 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var pool_exports = {};
-__export(pool_exports, {
-  default: () => pool_default
-});
-module.exports = __toCommonJS(pool_exports);
-var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_chokidar = __toESM(require("chokidar"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"), 1);
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
-var import_matchGlob = __toESM(require("../glob/matchGlob"), 1);
+import __SFile from "@coffeekraken/s-file";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __SPromise from "@coffeekraken/s-promise";
+import __chokidar from "chokidar";
+import __fs from "fs";
+import __expandGlob from "../../shared/glob/expandGlob";
+import __deepMerge from "../../shared/object/deepMerge";
+import __matchGlob from "../glob/matchGlob";
 function pool(input, settings) {
   const filesStack = {};
-  return new import_s_promise.default(async ({ resolve, reject, emit, cancel, on }) => {
+  return new __SPromise(async ({ resolve, reject, emit, cancel, on }) => {
     var _a;
-    await import_s_sugar_config.default.load();
-    const set = (0, import_deepMerge.default)({
+    await __SSugarConfig.load();
+    const set = __deepMerge({
       SFile: true,
       cwd: process.cwd(),
       watch: false,
@@ -68,29 +45,29 @@ function pool(input, settings) {
       var _a2;
       return (_a2 = i.path) != null ? _a2 : i;
     });
-    const expandedGlobs = (0, import_expandGlob.default)(input).map((l) => {
+    const expandedGlobs = __expandGlob(input).map((l) => {
       return l.split(":")[0].replace(set.cwd + "/", "").replace(set.cwd, "");
     });
-    const watcher = import_chokidar.default.watch(expandedGlobs, __spreadProps(__spreadValues({}, set.chokidar), {
+    const watcher = __chokidar.watch(expandedGlobs, __spreadProps(__spreadValues({}, set.chokidar), {
       ignored: [...set.ignored, ...(_a = set.exclude) != null ? _a : []]
     }));
     watcher.on("add", (path) => {
-      if (filesStack[path] || !import_fs.default.existsSync(`${set.cwd}/${path}`))
+      if (filesStack[path] || !__fs.existsSync(`${set.cwd}/${path}`))
         return;
       if (!filesStack[path]) {
         if (set.SFile)
-          filesStack[path] = import_s_file.default.new(`${set.cwd}/${path}`);
+          filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
         else
           filesStack[path] = path;
       }
       emit("add", filesStack[path]);
       emit("file", filesStack[path]);
     }).on("change", (path) => {
-      if (!import_fs.default.existsSync(`${set.cwd}/${path}`))
+      if (!__fs.existsSync(`${set.cwd}/${path}`))
         return;
       if (!filesStack[path]) {
         if (set.SFile)
-          filesStack[path] = import_s_file.default.new(`${set.cwd}/${path}`);
+          filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
         else
           filesStack[path] = path;
       }
@@ -114,12 +91,12 @@ function pool(input, settings) {
         });
       });
       filesPaths.filter((filePath) => {
-        return (0, import_matchGlob.default)(filePath, input, {
+        return __matchGlob(filePath, input, {
           cwd: set.cwd
         });
       }).forEach((filePath) => {
         if (set.SFile)
-          finalFiles.push(import_s_file.default.new(`${set.cwd}/${filePath}`));
+          finalFiles.push(__SFile.new(`${set.cwd}/${filePath}`));
         else
           finalFiles.push(filePath);
         emit("file", finalFiles[finalFiles.length - 1]);
@@ -141,5 +118,6 @@ function pool(input, settings) {
   });
 }
 var pool_default = pool;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  pool_default as default
+};

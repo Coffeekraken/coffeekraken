@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,36 +14,17 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SPromise_exports = {};
-__export(SPromise_exports, {
-  default: () => SPromise_default
-});
-module.exports = __toCommonJS(SPromise_exports);
-var import_getMethods = __toESM(require("@coffeekraken/sugar/shared/class/utils/getMethods"), 1);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_event_emitter = __toESM(require("@coffeekraken/s-event-emitter"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/src/shared/object/deepMerge"), 1);
-var import_wait = __toESM(require("@coffeekraken/sugar/shared/time/wait"), 1);
-var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
-var import_treatAsValue = __toESM(require("./treatAsValue"), 1);
-class SPromise extends import_s_class.default.extends(Promise) {
+import __getMethods from "@coffeekraken/sugar/shared/class/utils/getMethods";
+import __SClass from "@coffeekraken/s-class";
+import __SEventEmitter from "@coffeekraken/s-event-emitter";
+import __deepMerge from "@coffeekraken/sugar/src/shared/object/deepMerge";
+import __wait from "@coffeekraken/sugar/shared/time/wait";
+import __SLog from "@coffeekraken/s-log";
+import __treatAsValue from "./treatAsValue";
+class SPromise extends __SClass.extends(Promise) {
   constructor(executorFnOrSettings = {}, settings) {
     let executorFn, _this, resolvers = {};
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       promise: {
         treatCancelAs: "resolve",
         destroyTimeout: 1,
@@ -74,7 +51,7 @@ class SPromise extends import_s_class.default.extends(Promise) {
       });
     });
     this._promiseState = "pending";
-    this._eventEmitter = new import_s_event_emitter.default((0, import_deepMerge.default)({
+    this._eventEmitter = new __SEventEmitter(__deepMerge({
       metas: __spreadValues({}, this.metas),
       eventEmitter: {}
     }, this._settings));
@@ -103,19 +80,19 @@ class SPromise extends import_s_class.default.extends(Promise) {
     executorFn = typeof executorFnOrSettings === "function" ? executorFnOrSettings : null;
     if (executorFn) {
       const api = {};
-      (0, import_getMethods.default)(this).forEach((func) => {
+      __getMethods(this).forEach((func) => {
         if (func.slice(0, 1) === "_")
           return;
         api[func] = this[func].bind(this);
       });
       (async () => {
-        await (0, import_wait.default)(0);
+        await __wait(0);
         try {
           await executorFn(api);
         } catch (e) {
           if (this.promiseSettings.emitLogErrorEventOnThrow) {
             this.emit("log", {
-              type: import_s_log.default.TYPE_ERROR,
+              type: __SLog.TYPE_ERROR,
               value: e
             });
           }
@@ -168,7 +145,7 @@ class SPromise extends import_s_class.default.extends(Promise) {
     });
   }
   static treatAsValue(promise, settings = {}) {
-    return (0, import_treatAsValue.default)(promise, settings);
+    return __treatAsValue(promise, settings);
   }
   get promiseSettings() {
     return this._settings.promise;
@@ -183,7 +160,7 @@ class SPromise extends import_s_class.default.extends(Promise) {
     return this._promiseState;
   }
   treatAsValue(settings = {}) {
-    return (0, import_treatAsValue.default)(this, settings);
+    return __treatAsValue(this, settings);
   }
   registerProxy(point, proxy) {
     const ar = point.split(",").map((l) => l.trim());
@@ -286,5 +263,6 @@ class SPromise extends import_s_class.default.extends(Promise) {
   }
 }
 var SPromise_default = SPromise;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SPromise_default as default
+};

@@ -1,55 +1,30 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var toString_exports = {};
-__export(toString_exports, {
-  default: () => toString_default
-});
-module.exports = __toCommonJS(toString_exports);
-var import_chalk = __toESM(require("chalk"), 1);
-var import_deepMap = __toESM(require("../object/deepMap"), 1);
-var import_map = __toESM(require("../is/map"), 1);
-var import_array = __toESM(require("../is/array"), 1);
-var import_boolean = __toESM(require("../is/boolean"), 1);
-var import_function = __toESM(require("../is/function"), 1);
-var import_json = __toESM(require("../is/json"), 1);
-var import_object = __toESM(require("../is/object"), 1);
-var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
-var import_mapToObject = __toESM(require("../map/mapToObject"), 1);
-var import_json_cyclic = require("json-cyclic");
+import __chalk from "chalk";
+import __deepMap from "../object/deepMap";
+import __isMap from "../is/map";
+import __isArray from "../is/array";
+import __isBoolean from "../is/boolean";
+import __isFunction from "../is/function";
+import __isJson from "../is/json";
+import __isObject from "../is/object";
+import __deepMerge from "../object/deepMerge";
+import __mapToObj from "../map/mapToObject";
+import { decycle } from "json-cyclic";
 function fn(value, settings = {}) {
-  settings = (0, import_deepMerge.default)({
+  settings = __deepMerge({
     beautify: true,
     highlight: true,
     verbose: true,
     theme: {
-      number: import_chalk.default.yellow,
-      default: import_chalk.default.white,
-      keyword: import_chalk.default.blue,
-      regexp: import_chalk.default.red,
-      string: import_chalk.default.whiteBright,
-      class: import_chalk.default.yellow,
-      function: import_chalk.default.yellow,
-      comment: import_chalk.default.gray,
-      variable: import_chalk.default.red,
-      attr: import_chalk.default.green
+      number: __chalk.yellow,
+      default: __chalk.white,
+      keyword: __chalk.blue,
+      regexp: __chalk.red,
+      string: __chalk.whiteBright,
+      class: __chalk.yellow,
+      function: __chalk.yellow,
+      comment: __chalk.gray,
+      variable: __chalk.red,
+      attr: __chalk.green
     }
   }, settings);
   if (typeof value === "string")
@@ -73,17 +48,17 @@ function fn(value, settings = {}) {
     }
     return errorStr;
   }
-  if ((0, import_map.default)(value)) {
-    value = (0, import_mapToObject.default)(value);
+  if (__isMap(value)) {
+    value = __mapToObj(value);
   }
-  if ((0, import_object.default)(value) || (0, import_array.default)(value) || (0, import_json.default)(value)) {
+  if (__isObject(value) || __isArray(value) || __isJson(value)) {
     try {
-      value = (0, import_json_cyclic.decycle)(value);
+      value = decycle(value);
     } catch (e) {
     }
-    value = (0, import_deepMap.default)(value, ({ value: value2 }) => {
+    value = __deepMap(value, ({ value: value2 }) => {
       if (value2 instanceof Map)
-        return (0, import_mapToObject.default)(value2);
+        return __mapToObj(value2);
       return value2;
     });
     let prettyString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
@@ -92,18 +67,18 @@ function fn(value, settings = {}) {
     }
     return prettyString;
   }
-  if ((0, import_boolean.default)(value)) {
+  if (__isBoolean(value)) {
     if (value)
       return "true";
     else
       return "false";
   }
-  if ((0, import_function.default)(value)) {
+  if (__isFunction(value)) {
     return "" + value;
   }
   let returnString = "";
   try {
-    value = (0, import_json_cyclic.decycle)(value);
+    value = decycle(value);
     returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
   } catch (e) {
     try {
@@ -115,5 +90,6 @@ function fn(value, settings = {}) {
   return returnString;
 }
 var toString_default = fn;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  toString_default as default
+};

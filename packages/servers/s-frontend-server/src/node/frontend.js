@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,52 +13,46 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var frontend_exports = {};
-__export(frontend_exports, {
-  default: () => frontend_default
-});
-module.exports = __toCommonJS(frontend_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_express = __toESM(require("express"), 1);
-var import_trimLines = __toESM(require("../../../shared/string/trimLines"), 1);
-var import_extension = __toESM(require("../../fs/extension"), 1);
-var import_packageRootDir = __toESM(require("../../path/packageRootDir"), 1);
+import __SugarConfig from "@coffeekraken/s-sugar-config";
+import __deepMerge from "../../../shared/object/deepMerge";
+import __fs from "fs";
+import __path from "path";
+import __SPromise from "@coffeekraken/s-promise";
+import __express from "express";
+import __trimLines from "../../../shared/string/trimLines";
+import __extension from "../../fs/extension";
+import __packageRootDir from "../../path/packageRootDir";
 const fn = function(args = {}) {
-  const settings = (0, import_deepMerge.default)(import_s_sugar_config.default.get("frontend"), args);
-  const app = (0, import_express.default)();
+  const settings = __deepMerge(__SugarConfig.get("frontend"), args);
+  const app = __express();
   let server;
-  return new import_s_promise.default(async ({ resolve, reject, on, emit, pipe }) => {
+  return new __SPromise(async ({ resolve, reject, on, emit, pipe }) => {
     Object.keys(settings.staticDirs).forEach((path) => {
       const fsPath = settings.staticDirs[path];
       console.log(path, fsPath);
-      app.use(path, import_express.default.static(fsPath));
+      app.use(path, __express.static(fsPath));
     });
     const middlewaresObj = settings.middlewares || {};
     for (const [key, middleware] of Object.entries(middlewaresObj)) {
       if (middleware.path.slice(-3) !== ".js")
         middleware.path += ".js";
-      middleware.path = import_path.default.resolve(middleware.path);
-      if (!import_fs.default.existsSync(middleware.path)) {
+      middleware.path = __path.resolve(middleware.path);
+      if (!__fs.existsSync(middleware.path)) {
         return reject(`The express middleware "<yellow>${key}</yellow>" targeted at "<cyan>${middleware.path}</cyan>" does not exists...`);
       }
       const { default: middlewareData } = await Promise.resolve().then(() => __toESM(require(middleware.path)));
       app.use((middlewareData.default || middlewareData)(middleware.settings || {}));
     }
     Object.keys(settings.handlers).forEach(async (pageName) => {
-      const handlerSettings = (0, import_deepMerge.default)({
+      const handlerSettings = __deepMerge({
         log: true
       }, settings.handlers[pageName]);
       let handlerPath = handlerSettings.handler;
       if (handlerPath.slice(-3) !== ".js")
         handlerPath += ".js";
-      if (!import_fs.default.existsSync(handlerPath)) {
+      if (!__fs.existsSync(handlerPath)) {
         emit("warn", {
-          value: `Frontend handler "<cyan>${import_path.default.relative((0, import_packageRootDir.default)(), handlerPath)}</cyan>" does not exists...`
+          value: `Frontend handler "<cyan>${__path.relative(__packageRootDir(), handlerPath)}</cyan>" does not exists...`
         });
       } else {
         let { default: handlerFn } = await Promise.resolve().then(() => __toESM(require(handlerPath)));
@@ -79,7 +69,7 @@ const fn = function(args = {}) {
           });
         }, 1e3);
         app[method](slug, async (req, res, next) => {
-          const reqPathExtension = (0, import_extension.default)(req.path);
+          const reqPathExtension = __extension(req.path);
           if (extension) {
             if (extension.indexOf(reqPathExtension) === -1 && extension.indexOf("." + reqPathExtension) === -1) {
               return next();
@@ -102,7 +92,7 @@ const fn = function(args = {}) {
         emit("log", {
           type: "heading",
           mb: 1,
-          value: (0, import_trimLines.default)(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
+          value: __trimLines(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
               
                 - Hostname        : <yellow>${settings.hostname}</yellow>
                 - Port            : <yellow>${settings.port}</yellow>
@@ -125,5 +115,6 @@ const fn = function(args = {}) {
   });
 };
 var frontend_default = fn;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  frontend_default as default
+};

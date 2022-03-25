@@ -1,31 +1,6 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var deepAssign_exports = {};
-__export(deepAssign_exports, {
-  default: () => deepAssign
-});
-module.exports = __toCommonJS(deepAssign_exports);
-var import_unique = __toESM(require("../array/unique"), 1);
-var import_plainObject = __toESM(require("../is/plainObject"), 1);
-var import_clone = __toESM(require("./clone"), 1);
+import __unique from "../array/unique";
+import __isPlainObject from "../is/plainObject";
+import __clone from "./clone";
 function deepAssign(referenceObj, ...objects) {
   const settings = {
     array: false,
@@ -35,16 +10,16 @@ function deepAssign(referenceObj, ...objects) {
   function merge(refObj, mixWithObj) {
     for (const key of Object.keys(mixWithObj)) {
       if (settings.array === true && Array.isArray(refObj[key]) && Array.isArray(mixWithObj[key])) {
-        const newArray = (0, import_unique.default)([...refObj[key], ...mixWithObj[key]]);
+        const newArray = __unique([...refObj[key], ...mixWithObj[key]]);
         refObj[key] = newArray;
         continue;
       }
-      if (settings.object === true && (0, import_plainObject.default)(refObj[key]) && (0, import_plainObject.default)(mixWithObj[key])) {
+      if (settings.object === true && __isPlainObject(refObj[key]) && __isPlainObject(mixWithObj[key])) {
         refObj[key] = merge(refObj[key], mixWithObj[key]);
         continue;
       }
-      if ((0, import_plainObject.default)(mixWithObj[key]) && settings.cloneChilds) {
-        refObj[key] = (0, import_clone.default)(mixWithObj[key], {
+      if (__isPlainObject(mixWithObj[key]) && settings.cloneChilds) {
+        refObj[key] = __clone(mixWithObj[key], {
           deep: true
         });
       } else {
@@ -67,5 +42,6 @@ function deepAssign(referenceObj, ...objects) {
   }
   return referenceObj;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  deepAssign as default
+};

@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,29 +14,9 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  interface: () => postcssSugarPluginWrapClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_faker = __toESM(require("faker"));
-class postcssSugarPluginWrapClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __faker from "faker";
+class postcssSugarPluginWrapClassesInterface extends __SInterface {
   static get _definition() {
     return {};
   }
@@ -80,47 +56,47 @@ function classes_default({
         * 
         * @example        html          Wrap
         *   <p class="s-white-space:wrap">
-        *       ${import_faker.default.lorem.paragraph()}
+        *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @example      html            Nowrap
         *   <p class="s-white-space:nowrap">
-        *       ${import_faker.default.lorem.paragraph()}
+        *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @example          html            Break spaces
         *   <p class="s-white-space:break-spaces">
-        *       ${import_faker.default.lorem.paragraph()}
+        *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @example          html                Normal
         *   <p class="s-white-space:normal">
-        *       ${import_faker.default.lorem.paragraph()}
+        *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @example      html            Pre
         *   <p class="s-white-space:pre">
-        *       ${import_faker.default.lorem.paragraph()}
+        *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @example      html            Pre-line
         *   <p class="s-white-space:pre-line">
-        *       ${import_faker.default.lorem.paragraph()}
+        *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @example      html            Pre-wrap
         *   <p class="s-white-space:pre-wrap">
-        *       ${import_faker.default.lorem.paragraph()}
+        *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @example          html            Revert
         *   <p class="s-white-space:revert">
-        *       ${import_faker.default.lorem.paragraph()}
+        *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @example          html                Unset
         *   <p class="s-white-space:unset">
-        *       ${import_faker.default.lorem.paragraph()}
+        *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @since      2.0.0
@@ -148,7 +124,7 @@ function classes_default({
     * This class allows you to apply a "<yellow>${value}</yellow>" white-space style to any HTMLElement
     * 
     * @example        html
-    * <div class="s-white-space:${value}">${import_faker.default.lorem.paragraph()}</div>
+    * <div class="s-white-space:${value}">${__faker.lorem.paragraph()}</div>
     */
     .s-white-space--${value} {
         white-space: ${value};
@@ -156,7 +132,7 @@ function classes_default({
   });
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  classes_default as default,
+  postcssSugarPluginWrapClassesInterface as interface
+};

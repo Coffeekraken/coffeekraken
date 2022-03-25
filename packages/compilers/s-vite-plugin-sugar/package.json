@@ -2,8 +2,11 @@
     "name": "@coffeekraken/s-vite-plugin-sugar",
     "version": "2.0.0",
     "description": "",
-    "type": "module",
     "main": "./src/node/exports.js",
+    "exports": {
+        "import": "./src/node/exports.js",
+        "require": "./src/node/exports.cjs"
+    },
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",

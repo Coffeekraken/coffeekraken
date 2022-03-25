@@ -1,54 +1,32 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SConfigLsAdapter_exports = {};
-__export(SConfigLsAdapter_exports, {
-  default: () => SConfigLsAdapter_default
-});
-module.exports = __toCommonJS(SConfigLsAdapter_exports);
-var import_toString = __toESM(require("@coffeekraken/sugar/shared/string/toString"), 1);
-var import_parse = __toESM(require("@coffeekraken/sugar/shared/string/parse"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_SConfigAdapter = __toESM(require("../../shared/adapters/SConfigAdapter"), 1);
-var import_diff = __toESM(require("@coffeekraken/sugar/shared/object/diff"), 1);
-class SConfigLsAdapter extends import_SConfigAdapter.default {
+import __toString from "@coffeekraken/sugar/shared/string/toString";
+import __parse from "@coffeekraken/sugar/shared/string/parse";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __SConfigAdapter from "../../shared/adapters/SConfigAdapter";
+import __diff from "@coffeekraken/sugar/shared/object/diff";
+class SConfigLsAdapter extends __SConfigAdapter {
   get configLsAdapterSettings() {
     return this.configLsAdapterSettings.configLsAdapter;
   }
   constructor(settings) {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       configLsAdapter: {}
     }, settings || {}));
   }
   load() {
-    const config = (0, import_parse.default)(localStorage.getItem(this.name)) || {};
-    return (0, import_deepMerge.default)(config.default || {}, config.app || {}, config.user || {});
+    const config = __parse(localStorage.getItem(this.name)) || {};
+    return __deepMerge(config.default || {}, config.app || {}, config.user || {});
   }
   save(newConfig = {}) {
-    const baseConfig = (0, import_deepMerge.default)(this.configLsAdapterSettings.defaultConfig, this.configLsAdapterSettings.appConfig);
-    localStorage.setItem(this.name, (0, import_toString.default)({
+    const baseConfig = __deepMerge(this.configLsAdapterSettings.defaultConfig, this.configLsAdapterSettings.appConfig);
+    localStorage.setItem(this.name, __toString({
       default: this.configLsAdapterSettings.defaultConfig,
       app: this.configLsAdapterSettings.appConfig,
-      user: (0, import_diff.default)(baseConfig, newConfig)
+      user: __diff(baseConfig, newConfig)
     }));
     return true;
   }
 }
 var SConfigLsAdapter_default = SConfigLsAdapter;
+export {
+  SConfigLsAdapter_default as default
+};

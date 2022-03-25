@@ -1,63 +1,39 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
+import __SType from "./_SType";
+import __stringTypeDescriptor from "./descriptors/stringTypeDescriptor";
+import __mapTypeDescriptor from "./descriptors/mapTypeDescriptor";
+import __objectTypeDescriptor from "./descriptors/objectTypeDescriptor";
+import __arrayTypeDescriptor from "./descriptors/arrayTypeDescriptor";
+import __integerTypeDescriptor from "./descriptors/integerTypeDescriptor";
+import __numberTypeDescriptor from "./descriptors/numberTypeDescriptor";
+import __booleanTypeDescriptor from "./descriptors/booleanTypeDescriptor";
+import __undefinedTypeDescriptor from "./descriptors/undefinedTypeDescriptor";
+import __nullTypeDescriptor from "./descriptors/nullTypeDescriptor";
+import __symbolTypeDescriptor from "./descriptors/symbolTypeDescriptor";
+import __bigintTypeDescriptor from "./descriptors/bigintTypeDescriptor";
+import __dateTypeDescriptor from "./descriptors/dateTypeDescriptor";
+import __functionTypeDescriptor from "./descriptors/functionTypeDescriptor";
+import __weakmapTypeDescriptor from "./descriptors/weakmapTypeDescriptor";
+import __weaksetTypeDescriptor from "./descriptors/weaksetTypeDescriptor";
+import __setTypeDescriptor from "./descriptors/setTypeDescriptor";
+import __classTypeDescriptor from "./descriptors/classTypeDescriptor";
+__SType.registerType(__stringTypeDescriptor);
+__SType.registerType(__mapTypeDescriptor);
+__SType.registerType(__objectTypeDescriptor);
+__SType.registerType(__arrayTypeDescriptor);
+__SType.registerType(__integerTypeDescriptor);
+__SType.registerType(__numberTypeDescriptor);
+__SType.registerType(__booleanTypeDescriptor);
+__SType.registerType(__undefinedTypeDescriptor);
+__SType.registerType(__nullTypeDescriptor);
+__SType.registerType(__symbolTypeDescriptor);
+__SType.registerType(__bigintTypeDescriptor);
+__SType.registerType(__dateTypeDescriptor);
+__SType.registerType(__functionTypeDescriptor);
+__SType.registerType(__weakmapTypeDescriptor);
+__SType.registerType(__weaksetTypeDescriptor);
+__SType.registerType(__setTypeDescriptor);
+__SType.registerType(__classTypeDescriptor);
+var sTypeRegisterDefaultDescriptors_default = __SType;
+export {
+  sTypeRegisterDefaultDescriptors_default as default
 };
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var sTypeRegisterDefaultDescriptors_exports = {};
-__export(sTypeRegisterDefaultDescriptors_exports, {
-  default: () => sTypeRegisterDefaultDescriptors_default
-});
-module.exports = __toCommonJS(sTypeRegisterDefaultDescriptors_exports);
-var import_SType = __toESM(require("./_SType"), 1);
-var import_stringTypeDescriptor = __toESM(require("./descriptors/stringTypeDescriptor"), 1);
-var import_mapTypeDescriptor = __toESM(require("./descriptors/mapTypeDescriptor"), 1);
-var import_objectTypeDescriptor = __toESM(require("./descriptors/objectTypeDescriptor"), 1);
-var import_arrayTypeDescriptor = __toESM(require("./descriptors/arrayTypeDescriptor"), 1);
-var import_integerTypeDescriptor = __toESM(require("./descriptors/integerTypeDescriptor"), 1);
-var import_numberTypeDescriptor = __toESM(require("./descriptors/numberTypeDescriptor"), 1);
-var import_booleanTypeDescriptor = __toESM(require("./descriptors/booleanTypeDescriptor"), 1);
-var import_undefinedTypeDescriptor = __toESM(require("./descriptors/undefinedTypeDescriptor"), 1);
-var import_nullTypeDescriptor = __toESM(require("./descriptors/nullTypeDescriptor"), 1);
-var import_symbolTypeDescriptor = __toESM(require("./descriptors/symbolTypeDescriptor"), 1);
-var import_bigintTypeDescriptor = __toESM(require("./descriptors/bigintTypeDescriptor"), 1);
-var import_dateTypeDescriptor = __toESM(require("./descriptors/dateTypeDescriptor"), 1);
-var import_functionTypeDescriptor = __toESM(require("./descriptors/functionTypeDescriptor"), 1);
-var import_weakmapTypeDescriptor = __toESM(require("./descriptors/weakmapTypeDescriptor"), 1);
-var import_weaksetTypeDescriptor = __toESM(require("./descriptors/weaksetTypeDescriptor"), 1);
-var import_setTypeDescriptor = __toESM(require("./descriptors/setTypeDescriptor"), 1);
-var import_classTypeDescriptor = __toESM(require("./descriptors/classTypeDescriptor"), 1);
-import_SType.default.registerType(import_stringTypeDescriptor.default);
-import_SType.default.registerType(import_mapTypeDescriptor.default);
-import_SType.default.registerType(import_objectTypeDescriptor.default);
-import_SType.default.registerType(import_arrayTypeDescriptor.default);
-import_SType.default.registerType(import_integerTypeDescriptor.default);
-import_SType.default.registerType(import_numberTypeDescriptor.default);
-import_SType.default.registerType(import_booleanTypeDescriptor.default);
-import_SType.default.registerType(import_undefinedTypeDescriptor.default);
-import_SType.default.registerType(import_nullTypeDescriptor.default);
-import_SType.default.registerType(import_symbolTypeDescriptor.default);
-import_SType.default.registerType(import_bigintTypeDescriptor.default);
-import_SType.default.registerType(import_dateTypeDescriptor.default);
-import_SType.default.registerType(import_functionTypeDescriptor.default);
-import_SType.default.registerType(import_weakmapTypeDescriptor.default);
-import_SType.default.registerType(import_weaksetTypeDescriptor.default);
-import_SType.default.registerType(import_setTypeDescriptor.default);
-import_SType.default.registerType(import_classTypeDescriptor.default);
-var sTypeRegisterDefaultDescriptors_default = import_SType.default;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});

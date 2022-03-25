@@ -1,52 +1,26 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SFiltrableInputComponent_exports = {};
-__export(SFiltrableInputComponent_exports, {
-  default: () => SFiltrableInput,
-  define: () => define
-});
-module.exports = __toCommonJS(SFiltrableInputComponent_exports);
-var import_lit = require("lit");
-var import_unsafe_html = require("lit/directives/unsafe-html.js");
-var import_SFiltrableInputComponentInterface = __toESM(require("./interface/SFiltrableInputComponentInterface"), 1);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"), 1);
-var import_cursorToEnd = __toESM(require("@coffeekraken/sugar/js/dom/input/cursorToEnd"), 1);
-var import_clone = __toESM(require("@coffeekraken/sugar/shared/object/clone"), 1);
-var import_fromElementTopToViewportBottom = __toESM(require("@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportBottom"), 1);
-var import_getStyleProperty = __toESM(require("@coffeekraken/sugar/js/dom/style/getStyleProperty"), 1);
-var import_fromElementTopToViewportTop = __toESM(require("@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportTop"), 1);
-var import_hotkey = __toESM(require("@coffeekraken/sugar/js/keyboard/hotkey"), 1);
-var import_stripTags = __toESM(require("@coffeekraken/sugar/js/dom/manipulate/stripTags"), 1);
-var import_onScrollEnd = __toESM(require("@coffeekraken/sugar/js/dom/detect/onScrollEnd"), 1);
-var import_s_filtrable_input = __toESM(require("../css/s-filtrable-input.css"), 1);
-class SFiltrableInput extends import_s_lit_component.default {
+import { html, css, unsafeCSS } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import __SFiltrableInputComponentInterface from "./interface/SFiltrableInputComponentInterface";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __isPlainObject from "@coffeekraken/sugar/shared/is/plainObject";
+import __cursorToEnd from "@coffeekraken/sugar/js/dom/input/cursorToEnd";
+import __clone from "@coffeekraken/sugar/shared/object/clone";
+import __distanceFromElementTopToViewportBottom from "@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportBottom";
+import __getStyleProperty from "@coffeekraken/sugar/js/dom/style/getStyleProperty";
+import __distanceFromElementTopToViewportTop from "@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportTop";
+import __hotkey from "@coffeekraken/sugar/js/keyboard/hotkey";
+import __stripTags from "@coffeekraken/sugar/js/dom/manipulate/stripTags";
+import __onScrollEnd from "@coffeekraken/sugar/js/dom/detect/onScrollEnd";
+import __css from "../css/s-filtrable-input.css";
+class SFiltrableInput extends __SLitComponent {
   constructor() {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       litComponent: {
         shadowDom: false
       },
       componentUtils: {
-        interface: import_SFiltrableInputComponentInterface.default
+        interface: __SFiltrableInputComponentInterface
       }
     }));
     this._templatesFromHtml = {};
@@ -76,7 +50,7 @@ class SFiltrableInput extends import_s_lit_component.default {
         case "item":
           return html2`
                         <div class="${this.componentUtils.className("__item")}">
-                            ${(0, import_unsafe_html.unsafeHTML)(typeof this.props.label === "function" ? this.props.label({ item }) : item[this.props.label])}
+                            ${unsafeHTML(typeof this.props.label === "function" ? this.props.label({ item }) : item[this.props.label])}
                         </div>
                     `;
           break;
@@ -102,8 +76,8 @@ class SFiltrableInput extends import_s_lit_component.default {
     };
   }
   static get styles() {
-    return import_lit.css`
-            ${(0, import_lit.unsafeCSS)(import_s_filtrable_input.default)}
+    return css`
+            ${unsafeCSS(__css)}
         `;
   }
   async firstUpdated() {
@@ -146,18 +120,18 @@ class SFiltrableInput extends import_s_lit_component.default {
       this._updateListSizeAndPosition();
     });
     this._updateListSizeAndPosition();
-    (0, import_onScrollEnd.default)(this.$list, () => {
+    __onScrollEnd(this.$list, () => {
       var _a2;
       this.state.displayedMaxItems = ((_a2 = this.state.displayedMaxItems) != null ? _a2 : 0) + this.props.maxItems;
       this.filterItems(false);
     });
-    (0, import_hotkey.default)("escape").on("press", (e) => {
+    __hotkey("escape").on("press", (e) => {
       e.preventDefault();
       if (!this.state.isActive)
         return;
       this.close();
     });
-    (0, import_hotkey.default)("up").on("press", (e) => {
+    __hotkey("up").on("press", (e) => {
       e.preventDefault();
       if (!this.state.isActive)
         return;
@@ -166,7 +140,7 @@ class SFiltrableInput extends import_s_lit_component.default {
       const $item = this.$list.children[this.state.preselectedItemIdx];
       $item.focus();
     });
-    (0, import_hotkey.default)("down").on("press", (e) => {
+    __hotkey("down").on("press", (e) => {
       e.preventDefault();
       if (!this.state.isActive)
         return;
@@ -175,14 +149,14 @@ class SFiltrableInput extends import_s_lit_component.default {
       const $item = this.$list.children[this.state.preselectedItemIdx];
       $item.focus();
     });
-    (0, import_hotkey.default)("return").on("press", (e) => {
+    __hotkey("return").on("press", (e) => {
       if (!this.state.isActive)
         return;
       this.validateAndClose();
     });
     if (this.$input.value) {
       this.state.value = this.$input.value;
-      (0, import_cursorToEnd.default)(this.$input);
+      __cursorToEnd(this.$input);
       this.filterItems(true);
     }
   }
@@ -197,19 +171,19 @@ class SFiltrableInput extends import_s_lit_component.default {
     if (this.props.templates) {
       const res = this.props.templates({
         type,
-        html: import_lit.html
+        html
       });
       if (res)
         return res;
     }
     if (this._templatesFromHtml[type]) {
-      return import_lit.html`
-                ${(0, import_unsafe_html.unsafeHTML)(this._templatesFromHtml[type])}
+      return html`
+                ${unsafeHTML(this._templatesFromHtml[type])}
             `;
     }
     return this.state.baseTemplates({
       type,
-      html: import_lit.html
+      html
     });
   }
   get selectedItem() {
@@ -227,9 +201,9 @@ class SFiltrableInput extends import_s_lit_component.default {
     if (this.state.preselectedItemIdx === -1)
       return;
     if (this.preselectedItem) {
-      const itemProps = (0, import_deepMerge.default)(Object.assign({}, this.props), (_a = this.state.preselectedItem.props) != null ? _a : {});
+      const itemProps = __deepMerge(Object.assign({}, this.props), (_a = this.state.preselectedItem.props) != null ? _a : {});
       if (typeof itemProps.value === "string" && ((_b = this.preselectedItem) == null ? void 0 : _b[itemProps.value])) {
-        this.$input.value = (0, import_stripTags.default)(this.preselectedItem[itemProps.value]);
+        this.$input.value = __stripTags(this.preselectedItem[itemProps.value]);
       } else if (typeof itemProps.value === "function") {
         const v = itemProps.value({
           item: this.state.filteredItems[this.state.preselectedItemIdx]
@@ -237,7 +211,7 @@ class SFiltrableInput extends import_s_lit_component.default {
         if (typeof v !== "string") {
           throw new Error(`<red>[s-filtrable-input]</red> Sorry but the returned value "<yellow>${v}</yellow>" has to be a string...`);
         }
-        this.$input.value = (0, import_stripTags.default)(v);
+        this.$input.value = __stripTags(v);
       }
     }
     this.state.selectedItemIdx = this.state.preselectedItemIdx;
@@ -275,7 +249,7 @@ class SFiltrableInput extends import_s_lit_component.default {
     this.$input.value = "";
   }
   close() {
-    (0, import_cursorToEnd.default)(this.$input);
+    __cursorToEnd(this.$input);
     this.$input.blur();
     this.state.isActive = false;
   }
@@ -286,7 +260,7 @@ class SFiltrableInput extends import_s_lit_component.default {
       const items = await this.props.items({
         value: this.$input.value
       });
-      if ((0, import_plainObject.default)(items)) {
+      if (__isPlainObject(items)) {
         this.state.items = Object.values(items);
       } else if (Array.isArray(items)) {
         this.state.items = items;
@@ -304,7 +278,7 @@ class SFiltrableInput extends import_s_lit_component.default {
     if (this.props.searchValuePreprocess) {
       searchValue = this.props.searchValuePreprocess(searchValue);
     }
-    let filteredItems = items.map((item) => (0, import_clone.default)(item));
+    let filteredItems = items.map((item) => __clone(item));
     if (this.props.filterItems) {
       filteredItems = await this.props.filterItems(filteredItems, searchValue, this.state);
     } else {
@@ -372,9 +346,9 @@ class SFiltrableInput extends import_s_lit_component.default {
   _updateListSizeAndPosition() {
     if (!this.state.isActive)
       return;
-    const marginTop = (0, import_getStyleProperty.default)(this.$dropdown, "marginTop"), marginLeft = (0, import_getStyleProperty.default)(this.$dropdown, "marginLeft"), marginRight = (0, import_getStyleProperty.default)(this.$dropdown, "marginRight"), marginBottom = (0, import_getStyleProperty.default)(this.$dropdown, "marginBottom");
-    const distanceTop = (0, import_fromElementTopToViewportTop.default)(this.$input);
-    const distanceBottom = (0, import_fromElementTopToViewportBottom.default)(this.$input) - this.$input.clientHeight;
+    const marginTop = __getStyleProperty(this.$dropdown, "marginTop"), marginLeft = __getStyleProperty(this.$dropdown, "marginLeft"), marginRight = __getStyleProperty(this.$dropdown, "marginRight"), marginBottom = __getStyleProperty(this.$dropdown, "marginBottom");
+    const distanceTop = __distanceFromElementTopToViewportTop(this.$input);
+    const distanceBottom = __distanceFromElementTopToViewportBottom(this.$input) - this.$input.clientHeight;
     let maxHeight;
     if (distanceTop > distanceBottom) {
       this.$container.classList.add("s-filtrable-input--top");
@@ -391,39 +365,39 @@ class SFiltrableInput extends import_s_lit_component.default {
   }
   render() {
     var _a, _b, _c, _d, _e, _f, _g, _h;
-    return import_lit.html`
+    return html`
             <div class="s-filtrable-input__dropdown">
                 <div class="s-filtrable-input__before" tabindex="0">
                     ${this._getTemplate("before")}
                 </div>
                 <ul class="s-filtrable-input__list">
-                    ${this.state.isLoading ? import_lit.html`
+                    ${this.state.isLoading ? html`
                             <li
                                 class="s-filtrable-input__list-item s-filtrable-input__list-loading"
                             >
                                 ${(_c = (_b = (_a = this.props).templates) == null ? void 0 : _b.call(_a, {
       type: "loading",
-      html: import_lit.html
+      html
     })) != null ? _c : this.state.baseTemplates({
       type: "loading",
-      html: import_lit.html
+      html
     })}
                             </li>
-                        ` : !this.state.isLoading && this.state.filteredItems.length <= 0 ? import_lit.html`
+                        ` : !this.state.isLoading && this.state.filteredItems.length <= 0 ? html`
                             <li
                                 class="s-filtrable-input__list-item s-filtrable-input__list-no-item"
                             >
                                 ${(_f = (_e = (_d = this.props).templates) == null ? void 0 : _e.call(_d, {
       type: "empty",
-      html: import_lit.html
+      html
     })) != null ? _f : this.state.baseTemplates({
       type: "empty",
-      html: import_lit.html
+      html
     })}
                             </li>
                         ` : !this.state.isLoading && this.state.filteredItems.length ? this.state.filteredItems.map((item, idx) => {
       var _a2, _b2, _c2;
-      return idx < this.state.displayedMaxItems ? import_lit.html`
+      return idx < this.state.displayedMaxItems ? html`
                                         <li
                                             @click=${() => this.preselectAndValidate(idx)}
                                             @dblclick=${() => this.preselectValidateAndClose(idx)}
@@ -435,14 +409,14 @@ class SFiltrableInput extends import_s_lit_component.default {
                                         >
                                             ${(_c2 = (_b2 = (_a2 = this.props).templates) == null ? void 0 : _b2.call(_a2, {
         type: "item",
-        html: import_lit.html,
-        unsafeHTML: import_unsafe_html.unsafeHTML,
+        html,
+        unsafeHTML,
         item,
         idx
       })) != null ? _c2 : this.state.baseTemplates({
         type: "item",
-        html: import_lit.html,
-        unsafeHTML: import_unsafe_html.unsafeHTML,
+        html,
+        unsafeHTML,
         item,
         idx
       })}
@@ -453,7 +427,7 @@ class SFiltrableInput extends import_s_lit_component.default {
                 <div class="s-filtrable-input__after" tabindex="0">
                     ${(_h = (_g = this.props).templates) == null ? void 0 : _h.call(_g, {
       type: "after",
-      html: import_lit.html
+      html
     })}
                 </div>
             </div>
@@ -461,6 +435,10 @@ class SFiltrableInput extends import_s_lit_component.default {
   }
 }
 function define(props = {}, tagName = "s-filtrable-input") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SFiltrableInput);
 }
+export {
+  SFiltrableInput as default,
+  define
+};

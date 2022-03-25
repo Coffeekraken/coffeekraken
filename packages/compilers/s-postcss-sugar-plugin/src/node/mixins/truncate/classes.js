@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,35 +14,15 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  interface: () => postcssSugarPluginRatioClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_faker = __toESM(require("faker"));
-class postcssSugarPluginRatioClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __STheme from "@coffeekraken/s-theme";
+import __faker from "faker";
+class postcssSugarPluginRatioClassesInterface extends __SInterface {
   static get _definition() {
     return {
       count: {
         type: "Number",
-        default: import_s_theme.default.config("helpers.truncate.count")
+        default: __STheme.config("helpers.truncate.count")
       }
     };
   }
@@ -83,7 +59,7 @@ function classes_default({
         *
         ${[...Array(finalParams.count).keys()].map((i) => {
     return ` * @example          html        ${i + 1} ${i <= 1 ? "line" : "lines"}
-            *   <p class="s-typo:p s-truncate:${i + 1}">${import_faker.default.lorem.lines(finalParams.count + 5).split("\n").join("<br />")}</p>
+            *   <p class="s-typo:p s-truncate:${i + 1}">${__faker.lorem.lines(finalParams.count + 5).split("\n").join("<br />")}</p>
             * `;
   }).join("\n")}
         * 
@@ -102,7 +78,7 @@ function classes_default({
   * This class allows you to apply a "<yellow>${i + 1}</yellow>" line(s) truncate style to any HTMLElement
   * 
   * @example        html
-  * <p class="s-typo:p s-truncate:${i}">${import_faker.default.lorem.lines(finalParams.count + 5).split("\n").join("<br />")}</p>
+  * <p class="s-typo:p s-truncate:${i}">${__faker.lorem.lines(finalParams.count + 5).split("\n").join("<br />")}</p>
   */
  `).code(`
 .s-truncate--${i + 1} {
@@ -111,7 +87,7 @@ function classes_default({
   });
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  classes_default as default,
+  postcssSugarPluginRatioClassesInterface as interface
+};

@@ -18,10 +18,6 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -31,33 +27,27 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SMarkdownBuilder_exports = {};
-__export(SMarkdownBuilder_exports, {
-  default: () => SMarkdownBuilder
-});
-module.exports = __toCommonJS(SMarkdownBuilder_exports);
-var import_s_builder = __toESM(require("@coffeekraken/s-builder"), 1);
-var import_s_docmap = __toESM(require("@coffeekraken/s-docmap"), 1);
-var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
-var import_s_glob = __toESM(require("@coffeekraken/s-glob"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_extension = __toESM(require("@coffeekraken/sugar/node/fs/extension"), 1);
-var import_folderPath = __toESM(require("@coffeekraken/sugar/node/fs/folderPath"), 1);
-var import_writeFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeFileSync"), 1);
-var import_writeTmpFileSync = __toESM(require("@coffeekraken/sugar/node/fs/writeTmpFileSync"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_flatten = __toESM(require("@coffeekraken/sugar/shared/object/flatten"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_handlebars = __toESM(require("handlebars"), 1);
-var import_s_handlebars = require("@coffeekraken/s-handlebars");
-var import_marked = __toESM(require("marked"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_jsonSync = __toESM(require("@coffeekraken/sugar/node/package/jsonSync"), 1);
-var import_SMarkdownBuilderBuildParamsInterface = __toESM(require("./interface/SMarkdownBuilderBuildParamsInterface"), 1);
-var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
-class SMarkdownBuilder extends import_s_builder.default {
+import __SBuilder from "@coffeekraken/s-builder";
+import __SDocmap from "@coffeekraken/s-docmap";
+import __SFile from "@coffeekraken/s-file";
+import __SGlob from "@coffeekraken/s-glob";
+import __SPromise from "@coffeekraken/s-promise";
+import __SSugarConfig from "@coffeekraken/s-sugar-config";
+import __extension from "@coffeekraken/sugar/node/fs/extension";
+import __folderPath from "@coffeekraken/sugar/node/fs/folderPath";
+import __writeFileSync from "@coffeekraken/sugar/node/fs/writeFileSync";
+import __writeTmpFileSync from "@coffeekraken/sugar/node/fs/writeTmpFileSync";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __flatten from "@coffeekraken/sugar/shared/object/flatten";
+import __fs from "fs";
+import __handlebars from "handlebars";
+import { registerHelpers } from "@coffeekraken/s-handlebars";
+import __marked from "marked";
+import __path from "path";
+import __packageJson from "@coffeekraken/sugar/node/package/jsonSync";
+import __SMarkdownBuilderBuildParamsInterface from "./interface/SMarkdownBuilderBuildParamsInterface";
+import __SLog from "@coffeekraken/s-log";
+class SMarkdownBuilder extends __SBuilder {
   static registerTransformer(name, transformerPath) {
     this._registeredTransformers[name] = transformerPath;
   }
@@ -77,10 +67,10 @@ class SMarkdownBuilder extends import_s_builder.default {
     return this._settings.markdownBuilder;
   }
   constructor(settings) {
-    super((0, import_deepMerge.default)({
-      markdownBuilder: __spreadValues({}, import_s_sugar_config.default.get("markdownBuilder"))
+    super(__deepMerge({
+      markdownBuilder: __spreadValues({}, __SSugarConfig.get("markdownBuilder"))
     }, settings != null ? settings : {}));
-    const config = import_s_sugar_config.default.get("markdownBuilder");
+    const config = __SSugarConfig.get("markdownBuilder");
     if (config.transformers) {
       Object.keys(config.transformers).forEach((transformerName) => {
         const transformerPath = config.transformers[transformerName];
@@ -114,15 +104,15 @@ class SMarkdownBuilder extends import_s_builder.default {
   }
   _build(params) {
     if (params.preset && params.preset.length) {
-      return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
+      return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         const buildedPresets = {};
         for (let i = 0; i < params.preset.length; i++) {
           const preset = params.preset[i];
           emit("log", {
-            type: import_s_log.default.TYPE_INFO,
+            type: __SLog.TYPE_INFO,
             value: `<cyan>[preset]</cyan> Start "<yellow>${preset}</yellow>" preset markdown build`
           });
-          const newParams = (0, import_deepMerge.default)(import_SMarkdownBuilderBuildParamsInterface.default.defaults(), import_s_sugar_config.default.get(`markdownBuilder.presets.${preset}`));
+          const newParams = __deepMerge(__SMarkdownBuilderBuildParamsInterface.defaults(), __SSugarConfig.get(`markdownBuilder.presets.${preset}`));
           const buildPromise = this._build(newParams);
           pipe(buildPromise);
           buildedPresets[preset] = await buildPromise;
@@ -130,19 +120,19 @@ class SMarkdownBuilder extends import_s_builder.default {
         resolve(buildedPresets);
       });
     } else {
-      return new import_s_promise.default(async ({ resolve, reject, emit }) => {
+      return new __SPromise(async ({ resolve, reject, emit }) => {
         var _a, _b, _c, _d, _e;
-        const handlebars = import_handlebars.default.create();
-        (0, import_s_handlebars.registerHelpers)(handlebars);
-        const finalParams = (0, import_deepMerge.default)(import_SMarkdownBuilderBuildParamsInterface.default.defaults(), params != null ? params : {});
+        const handlebars = __handlebars.create();
+        registerHelpers(handlebars);
+        const finalParams = __deepMerge(__SMarkdownBuilderBuildParamsInterface.defaults(), params != null ? params : {});
         const buildedFiles = [];
         if (finalParams.inRaw) {
-          finalParams.inPath = (0, import_writeTmpFileSync.default)(finalParams.inRaw);
+          finalParams.inPath = __writeTmpFileSync(finalParams.inRaw);
           delete finalParams.inRaw;
         }
         if (finalParams.inPath) {
-          finalParams.inDir = (0, import_folderPath.default)(finalParams.inPath);
-          finalParams.glob = import_path.default.relative(finalParams.inDir, finalParams.inPath);
+          finalParams.inDir = __folderPath(finalParams.inPath);
+          finalParams.glob = __path.relative(finalParams.inDir, finalParams.inPath);
           delete finalParams.inPath;
         }
         Object.keys((_a = this.constructor._registeredLayouts) != null ? _a : []).forEach((layoutName) => {
@@ -150,7 +140,7 @@ class SMarkdownBuilder extends import_s_builder.default {
           if (!((_a2 = this.constructor._registeredLayouts[layoutName]) == null ? void 0 : _a2[finalParams.target])) {
             throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the requested layout "<yellow>${layoutName}</yellow>" does not have a "<cyan>${finalParams.target}</cyan>" target option...`);
           }
-          const layoutStr = import_fs.default.readFileSync(this.constructor._registeredLayouts[layoutName][finalParams.target], "utf8").toString();
+          const layoutStr = __fs.readFileSync(this.constructor._registeredLayouts[layoutName][finalParams.target], "utf8").toString();
           handlebars.registerPartial(`layout-${layoutName}`, layoutStr);
         });
         Object.keys((_b = this.constructor._registeredSections) != null ? _b : []).forEach((sectionName) => {
@@ -158,7 +148,7 @@ class SMarkdownBuilder extends import_s_builder.default {
           if (!((_a2 = this.constructor._registeredSections[sectionName]) == null ? void 0 : _a2[finalParams.target])) {
             throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the requested section "<yellow>${sectionName}</yellow>" does not have a "<cyan>${finalParams.target}</cyan>" target option...`);
           }
-          const sectionStr = import_fs.default.readFileSync(this.constructor._registeredSections[sectionName][finalParams.target], "utf8").toString();
+          const sectionStr = __fs.readFileSync(this.constructor._registeredSections[sectionName][finalParams.target], "utf8").toString();
           handlebars.registerPartial(`section-${sectionName}`, sectionStr);
         });
         Object.keys((_c = this.constructor._registeredPartials) != null ? _c : []).forEach((partialName) => {
@@ -166,7 +156,7 @@ class SMarkdownBuilder extends import_s_builder.default {
           if (!((_a2 = this.constructor._registeredPartials[partialName]) == null ? void 0 : _a2[finalParams.target])) {
             throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the requested partial "<yellow>${partialName}</yellow>" does not have a "<cyan>${finalParams.target}</cyan>" target option...`);
           }
-          const partialStr = import_fs.default.readFileSync(this.constructor._registeredPartials[partialName][finalParams.target], "utf8").toString();
+          const partialStr = __fs.readFileSync(this.constructor._registeredPartials[partialName][finalParams.target], "utf8").toString();
           handlebars.registerPartial(partialName, partialStr);
         });
         for (let i = 0; i < Object.keys((_d = this.constructor._registeredHelpers) != null ? _d : []).length; i++) {
@@ -192,41 +182,41 @@ class SMarkdownBuilder extends import_s_builder.default {
           outDir: finalParams.outDir,
           outPath: finalParams.outPath
         };
-        if (import_fs.default.existsSync(path)) {
-          sourceObj.inputStr = import_path.default.relative(process.cwd(), path);
+        if (__fs.existsSync(path)) {
+          sourceObj.inputStr = __path.relative(process.cwd(), path);
           sourceObj.files.push(path);
-        } else if (import_s_glob.default.isGlob(path)) {
-          sourceObj.inputStr = import_path.default.relative(process.cwd(), path);
-          sourceObj.files = import_s_glob.default.resolve(path, {
+        } else if (__SGlob.isGlob(path)) {
+          sourceObj.inputStr = __path.relative(process.cwd(), path);
+          sourceObj.files = __SGlob.resolve(path, {
             SFile: false
           });
         } else {
           throw new Error(`<red>[${this.constructor.name}]</red> Sorry but the passed argument "<yellow>${path}</yellow>" does not resolve to any file on your system...`);
         }
         if (sourceObj.outDir) {
-          sourceObj.outputStr = import_path.default.relative(process.cwd(), sourceObj.outDir) || ".";
+          sourceObj.outputStr = __path.relative(process.cwd(), sourceObj.outDir) || ".";
         }
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>[build]</yellow> Starting markdown Build`
         });
         emit("log", {
-          type: import_s_log.default.TYPE_INFO,
+          type: __SLog.TYPE_INFO,
           value: `<yellow>\u25CB</yellow> Input       : <cyan>${sourceObj.inputStr}</cyan>`
         });
         if (sourceObj.outputStr) {
           emit("log", {
-            type: import_s_log.default.TYPE_INFO,
+            type: __SLog.TYPE_INFO,
             value: `<yellow>\u25CB</yellow> Output      : <cyan>${sourceObj.outputStr}</cyan>`
           });
         }
-        const docmap = await new import_s_docmap.default().read();
+        const docmap = await new __SDocmap().read();
         const viewData = {
-          config: import_s_sugar_config.default.get("."),
-          flatConfig: (0, import_flatten.default)(import_s_sugar_config.default.get(".")),
+          config: __SSugarConfig.get("."),
+          flatConfig: __flatten(__SSugarConfig.get(".")),
           settings: this.markdownBuilderSettings,
           params,
-          packageJson: (0, import_jsonSync.default)(finalParams.inDir),
+          packageJson: __packageJson(finalParams.inDir),
           docMenu: docmap.menu,
           docmap,
           time: {
@@ -244,16 +234,16 @@ class SMarkdownBuilder extends import_s_builder.default {
             data: "",
             output: ""
           };
-          if ((0, import_extension.default)(filePath) === "js") {
+          if (__extension(filePath) === "js") {
             const fn = (await Promise.resolve().then(() => __toESM(require(filePath)))).default;
             buildObj.data = fn(viewData);
           } else {
-            buildObj.data = import_fs.default.readFileSync(filePath, "utf8").toString();
+            buildObj.data = __fs.readFileSync(filePath, "utf8").toString();
           }
           if (sourceObj.outPath) {
             buildObj.output = sourceObj.outPath;
           } else if (sourceObj.inDir && sourceObj.outDir) {
-            buildObj.output = `${sourceObj.outDir}/${import_path.default.relative(sourceObj.inDir, filePath)}`;
+            buildObj.output = `${sourceObj.outDir}/${__path.relative(sourceObj.inDir, filePath)}`;
           }
           let currentTransformedString = buildObj.data;
           const tplFn = handlebars.compile(currentTransformedString);
@@ -266,7 +256,7 @@ class SMarkdownBuilder extends import_s_builder.default {
             ];
             if (!matches.length)
               continue;
-            const transformerStr = import_fs.default.readFileSync(transformerObj[finalParams.target], "utf8").toString();
+            const transformerStr = __fs.readFileSync(transformerObj[finalParams.target], "utf8").toString();
             const tplFn2 = handlebars.compile(transformerStr);
             for (let i = 0; i < matches.length; i++) {
               const match = matches[i];
@@ -296,21 +286,21 @@ class SMarkdownBuilder extends import_s_builder.default {
             currentTransformedString = currentTransformedString.replace(match, `{match:${i}}`);
           });
           if (finalParams.target === "html") {
-            currentTransformedString = (0, import_marked.default)(currentTransformedString, {});
+            currentTransformedString = __marked(currentTransformedString, {});
           }
           protectedTagsMatches == null ? void 0 : protectedTagsMatches.forEach((match, i) => {
             currentTransformedString = currentTransformedString.replace(`{match:${i}}`, match);
           });
           if (finalParams.save) {
-            (0, import_writeFileSync.default)(buildObj.output, currentTransformedString);
-            const file = new import_s_file.default(buildObj.output);
+            __writeFileSync(buildObj.output, currentTransformedString);
+            const file = new __SFile(buildObj.output);
             emit("log", {
               value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`
             });
           }
           const res = {
-            inputFile: import_s_file.default.new(filePath),
-            outputFile: finalParams.save ? import_s_file.default.new(buildObj.output) : void 0,
+            inputFile: __SFile.new(filePath),
+            outputFile: finalParams.save ? __SFile.new(buildObj.output) : void 0,
             code: currentTransformedString
           };
           buildedFiles.push(res);
@@ -329,6 +319,7 @@ SMarkdownBuilder._registeredLayouts = {};
 SMarkdownBuilder._registeredPartials = {};
 SMarkdownBuilder._registeredSections = {};
 SMarkdownBuilder._registeredTransformers = {};
-SMarkdownBuilder.marked = import_marked.default;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+SMarkdownBuilder.marked = __marked;
+export {
+  SMarkdownBuilder as default
+};

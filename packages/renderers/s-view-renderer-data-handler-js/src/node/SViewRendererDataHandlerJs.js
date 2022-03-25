@@ -4,10 +4,6 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -17,21 +13,16 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SViewRendererDataHandlerJs_exports = {};
-__export(SViewRendererDataHandlerJs_exports, {
-  default: () => SViewRendererDataHandlerJs
-});
-module.exports = __toCommonJS(SViewRendererDataHandlerJs_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+import __SPromise from "@coffeekraken/s-promise";
 class SViewRendererDataHandlerJs {
   static handle(filePath) {
-    return new import_s_promise.default(async ({ resolve }) => {
+    return new __SPromise(async ({ resolve }) => {
       resolve(await Promise.resolve().then(() => __toESM(require(filePath))));
     });
   }
 }
 SViewRendererDataHandlerJs.extensions = ["js", "json"];
 ;
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SViewRendererDataHandlerJs as default
+};

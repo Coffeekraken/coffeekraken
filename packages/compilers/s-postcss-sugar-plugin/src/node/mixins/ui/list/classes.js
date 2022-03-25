@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,32 +14,10 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  dependencies: () => dependencies,
-  interface: () => postcssSugarPluginUiListClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_theme = __toESM(require("@coffeekraken/s-theme"));
-var import_faker = __toESM(require("faker"));
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
-class postcssSugarPluginUiListClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __STheme from "@coffeekraken/s-theme";
+import __faker from "faker";
+class postcssSugarPluginUiListClassesInterface extends __SInterface {
   static get _definition() {
     var _a;
     return {
@@ -55,7 +29,7 @@ class postcssSugarPluginUiListClassesInterface extends import_s_interface.defaul
       defaultStyle: {
         type: "String",
         values: ["dl", "ul", "ol", "icon"],
-        default: (_a = import_s_theme.default.config("ui.list.defaultStyle")) != null ? _a : "dl"
+        default: (_a = __STheme.config("ui.list.defaultStyle")) != null ? _a : "dl"
       },
       scope: {
         type: {
@@ -68,9 +42,10 @@ class postcssSugarPluginUiListClassesInterface extends import_s_interface.defaul
     };
   }
 }
+import __dirname from "@coffeekraken/sugar/node/fs/dirname";
 function dependencies() {
   return {
-    files: [`${(0, import_dirname.default)()}/list.js`]
+    files: [`${__dirname()}/list.js`]
   };
 }
 function classes_default({
@@ -115,9 +90,9 @@ function classes_default({
         ${finalParams.styles.map((style) => {
     return ` * @example        html       ${style} style ${params.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ""}
             *   <ul class="s-list:${style} ${style === "ol" ? "s-color:accent s-scale:15" : ""}">
-            *     <li>${style === "icon" ? `<i class="s-icon:user"></i>` : ""}${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
-            *     <li>${style === "icon" ? `<i class="s-icon:heart s-color:accent"></i>` : ""}${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
-            *     <li>${style === "icon" ? `<i class="s-icon:fire s-color:error"></i>` : ""}${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+            *     <li>${style === "icon" ? `<i class="s-icon:user"></i>` : ""}${__faker.name.title()} ${__faker.name.findName()}</li>
+            *     <li>${style === "icon" ? `<i class="s-icon:heart s-color:accent"></i>` : ""}${__faker.name.title()} ${__faker.name.findName()}</li>
+            *     <li>${style === "icon" ? `<i class="s-icon:fire s-color:error"></i>` : ""}${__faker.name.title()} ${__faker.name.findName()}</li>
             *   </ul>
             * `;
   }).join("\n")}
@@ -125,24 +100,24 @@ function classes_default({
         * @example        html          RTL Support
         * <div dir="rtl">
         *   <ul class="s-list:ul s-color:accent s-mbe:30">
-        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
-        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
         *   <ul class="s-list:ol s-color:accent s-mbe:30">
-        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
-        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
         *   <ul class="s-list:icon s-color:accent s-mbe:30">
-        *     <li><i class="s-icon:user"></i> ${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
-        *     <li><i class="s-icon:heart s-color:error"></i> ${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+        *     <li><i class="s-icon:user"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li><i class="s-icon:heart s-color:error"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
         * </div>
         * 
         * @example          html         Colors (none-exhaustive)
         *   <ul class="s-list:ol s-color:accent">
-        *     <li>${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
-        *     <li class="s-color:complementary">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
-        *     <li class="s-color:error">${import_faker.default.name.title()} ${import_faker.default.name.findName()}</li>
+        *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li class="s-color:complementary">${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li class="s-color:error">${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
         * 
         * @since      2.0.0
@@ -377,15 +352,15 @@ function classes_default({
             @sugar.rhythm.vertical {
                 ul, .s-list--ul,
                 ol, .s-list--ol {
-                    ${import_s_theme.default.jsObjectToCssProperties(import_s_theme.default.config("ui.list.rhythmVertical"))}
+                    ${__STheme.jsObjectToCssProperties(__STheme.config("ui.list.rhythmVertical"))}
                 } 
             }
         `);
   }
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
+export {
+  classes_default as default,
   dependencies,
-  interface
-});
+  postcssSugarPluginUiListClassesInterface as interface
+};

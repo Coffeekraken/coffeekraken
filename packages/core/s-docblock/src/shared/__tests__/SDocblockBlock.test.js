@@ -1,19 +1,4 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_SDocblockBlock = __toESM(require("../SDocblockBlock"), 1);
+import __SDocblockBlock from "../SDocblockBlock";
 describe("s-docblock.shared.SDocblockBlock", () => {
   it("Should parse a complete docblock correctly", async () => {
     const block = `
@@ -52,7 +37,7 @@ describe("s-docblock.shared.SDocblockBlock", () => {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
         `;
-    const docblock = new import_SDocblockBlock.default(block);
+    const docblock = new __SDocblockBlock(block);
     const obj = await docblock.parse();
     const seializedObj = JSON.parse(JSON.stringify(obj));
     expect(seializedObj).toEqual({

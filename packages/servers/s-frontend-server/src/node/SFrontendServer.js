@@ -18,10 +18,6 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -31,39 +27,33 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SFrontendServer_exports = {};
-__export(SFrontendServer_exports, {
-  default: () => SFrontendServer
-});
-module.exports = __toCommonJS(SFrontendServer_exports);
-var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
-var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
-var import_s_env = __toESM(require("@coffeekraken/s-env"), 1);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_compression = __toESM(require("compression"), 1);
-var import_express = __toESM(require("express"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_isPortFree = __toESM(require("@coffeekraken/sugar/node/network/utils/isPortFree"), 1);
-var import_http_proxy_middleware = require("http-proxy-middleware");
-var import_path = __toESM(require("path"), 1);
-var import_SFrontendServerStartParamsInterface = __toESM(require("./interface/SFrontendServerStartParamsInterface"), 1);
-var import_kill = __toESM(require("@coffeekraken/sugar/node/process/kill"), 1);
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
-var import_onProcessExit = __toESM(require("@coffeekraken/sugar/node/process/onProcessExit"), 1);
-class SFrontendServer extends import_s_class.default {
+import __SLog from "@coffeekraken/s-log";
+import __SClass from "@coffeekraken/s-class";
+import __SEnv from "@coffeekraken/s-env";
+import __SPromise from "@coffeekraken/s-promise";
+import __SugarConfig from "@coffeekraken/s-sugar-config";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __compression from "compression";
+import __express from "express";
+import __fs from "fs";
+import __isPortFree from "@coffeekraken/sugar/node/network/utils/isPortFree";
+import { createProxyMiddleware } from "http-proxy-middleware";
+import __path from "path";
+import __SFrontendServerStartParamsInterface from "./interface/SFrontendServerStartParamsInterface";
+import __kill from "@coffeekraken/sugar/node/process/kill";
+import __SDuration from "@coffeekraken/s-duration";
+import __onProcessExit from "@coffeekraken/sugar/node/process/onProcessExit";
+class SFrontendServer extends __SClass {
   constructor() {
     super();
   }
   start(params) {
-    const finalParams = import_SFrontendServerStartParamsInterface.default.apply(params);
-    return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
+    const finalParams = __SFrontendServerStartParamsInterface.apply(params);
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
       var _a;
-      const express = (0, import_express.default)();
-      if (finalParams.prod || import_s_env.default.is("production")) {
-        express.use((0, import_compression.default)());
+      const express = __express();
+      if (finalParams.prod || __SEnv.is("production")) {
+        express.use(__compression());
       }
       setTimeout(() => {
         emit("info", {
@@ -79,7 +69,7 @@ class SFrontendServer extends import_s_class.default {
         "verbose",
         "silly"
       ].indexOf(finalParams.logLevel);
-      const frontendServerConfig = import_s_sugar_config.default.get("frontendServer");
+      const frontendServerConfig = __SugarConfig.get("frontendServer");
       express.use((req, res, next) => {
         if (req.path.substr(-1) == "/" && req.path.length > 1) {
           const query = req.url.slice(req.path.length);
@@ -92,21 +82,21 @@ class SFrontendServer extends import_s_class.default {
         for (let i = 0; i < Object.keys(frontendServerConfig.modules).length; i++) {
           const moduleId = Object.keys(frontendServerConfig.modules)[i];
           const moduleObj = frontendServerConfig.modules[moduleId];
-          let module2;
+          let module;
           try {
-            module2 = await Promise.resolve().then(() => __toESM(require(moduleObj.path)));
+            module = await Promise.resolve().then(() => __toESM(require(moduleObj.path)));
           } catch (e) {
             console.log(e);
             throw new Error(`<red>${this.constructor.name}</red> Sorry but a module called "<yellow>startServer.${moduleId}</yellow>" has been registered but does not exists under "<cyan>${moduleObj.path}</cyan>"`);
           }
-          await pipe(module2.default(express, moduleObj.settings, frontendServerConfig));
+          await pipe(module.default(express, moduleObj.settings, frontendServerConfig));
         }
       }
       if (frontendServerConfig.proxy) {
         Object.keys(frontendServerConfig.proxy).forEach((proxyId) => {
           var _a2;
           const proxyObj = frontendServerConfig.proxy[proxyId];
-          express.use((0, import_http_proxy_middleware.createProxyMiddleware)(proxyObj.route, __spreadValues({
+          express.use(createProxyMiddleware(proxyObj.route, __spreadValues({
             logLevel: "silent"
           }, (_a2 = proxyObj.settings) != null ? _a2 : {})));
         });
@@ -115,16 +105,16 @@ class SFrontendServer extends import_s_class.default {
         Object.keys(frontendServerConfig.staticDirs).forEach((dir) => {
           const fsPath = frontendServerConfig.staticDirs[dir];
           emit("log", {
-            value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${import_path.default.relative(process.cwd(), fsPath)}</cyan>" behind "<yellow>${dir}</yellow>" url`
+            value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(process.cwd(), fsPath)}</cyan>" behind "<yellow>${dir}</yellow>" url`
           });
-          express.use(dir, import_express.default.static(fsPath));
+          express.use(dir, __express.static(fsPath));
         });
       }
       if (frontendServerConfig.middlewares) {
         for (let i = 0; i < Object.keys(frontendServerConfig.middlewares).length; i++) {
           const middlewareName = Object.keys(frontendServerConfig.middlewares)[i];
           const middlewareObj = frontendServerConfig.middlewares[middlewareName];
-          if (!middlewareObj.path || import_fs.default.existsSync(middlewareObj.path)) {
+          if (!middlewareObj.path || __fs.existsSync(middlewareObj.path)) {
             throw new Error(`<red>[${this.constructor.name}.start]</red> Sorry but the middleware named "<yellow>${middlewareName}</yellow>" seems to not exists or is missconfigured...`);
           }
           const { default: middlewareWrapperFn } = await Promise.resolve().then(() => __toESM(require(middlewareObj.path)));
@@ -136,7 +126,7 @@ class SFrontendServer extends import_s_class.default {
       }
       if (logLevelInt >= 4) {
         express.use((req, res, next) => {
-          const duration = new import_s_duration.default();
+          const duration = new __SDuration();
           function afterResponse() {
             emit("log", {
               value: `<cyan>[request]</cyan> Request on "<cyan>${req.url}</cyan>" served in <yellow>${duration.end().formatedDuration}</yellow>`
@@ -157,17 +147,17 @@ class SFrontendServer extends import_s_class.default {
           const { default: handlerFn } = await Promise.resolve().then(() => __toESM(require(handlerPath)));
           express.get(routeSlug, (req, res, next) => {
             if (routeObj.request) {
-              req = (0, import_deepMerge.default)(req, routeObj.request);
+              req = __deepMerge(req, routeObj.request);
             }
             return pipe(handlerFn(req, res, next));
           });
         });
       }
-      if (!await (0, import_isPortFree.default)(frontendServerConfig.port)) {
+      if (!await __isPortFree(frontendServerConfig.port)) {
         emit("log", {
           value: `Port <yellow>${frontendServerConfig.port}</yellow> already in use. Try to kill it before continue...`
         });
-        await (0, import_kill.default)(`:${frontendServerConfig.port}`);
+        await __kill(`:${frontendServerConfig.port}`);
       }
       const server = express.listen(frontendServerConfig.port, () => {
         emit("log", {
@@ -179,15 +169,15 @@ class SFrontendServer extends import_s_class.default {
           value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`
         });
         emit("log", {
-          type: import_s_log.default.TYPE_VERBOSE,
+          type: __SLog.TYPE_VERBOSE,
           value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`
         });
         emit("log", {
-          type: import_s_log.default.TYPE_VERBOSE,
+          type: __SLog.TYPE_VERBOSE,
           value: `Log level: <yellow>${finalParams.logLevel}</yellow>`
         });
       });
-      (0, import_onProcessExit.default)(() => {
+      __onProcessExit(() => {
         emit("log", {
           value: `<red>[kill]</red> Gracefully killing the frontend server...`
         });
@@ -204,5 +194,6 @@ class SFrontendServer extends import_s_class.default {
     });
   }
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SFrontendServer as default
+};

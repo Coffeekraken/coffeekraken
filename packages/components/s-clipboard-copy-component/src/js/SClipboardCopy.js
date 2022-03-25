@@ -1,23 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __decorateClass = (decorators, target, key, kind) => {
   var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
   for (var i = decorators.length - 1, decorator; i >= 0; i--)
@@ -27,39 +9,33 @@ var __decorateClass = (decorators, target, key, kind) => {
     __defProp(target, key, result);
   return result;
 };
-var SClipboardCopy_exports = {};
-__export(SClipboardCopy_exports, {
-  default: () => SClipboardCopy,
-  define: () => define
-});
-module.exports = __toCommonJS(SClipboardCopy_exports);
-var import_lit = require("lit");
-var import_decorators = require("lit/decorators.js");
-var import_SClipboardCopyComponentInterface = __toESM(require("./interface/SClipboardCopyComponentInterface"), 1);
-var import_s_lit_component = __toESM(require("@coffeekraken/s-lit-component"), 1);
-var import_copy = __toESM(require("@coffeekraken/sugar/js/clipboard/copy"), 1);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
-var import_s_clipboard_copy = __toESM(require("../css/s-clipboard-copy.css"), 1);
-class SClipboardCopy extends import_s_lit_component.default {
+import { html, css, unsafeCSS } from "lit";
+import { property } from "lit/decorators.js";
+import __SClipboardCopyComponentInterface from "./interface/SClipboardCopyComponentInterface";
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import __copy from "@coffeekraken/sugar/js/clipboard/copy";
+import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
+import __css from "../css/s-clipboard-copy.css";
+class SClipboardCopy extends __SLitComponent {
   constructor() {
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       litComponent: {
         shadowDom: false
       },
       componentUtils: {
-        interface: import_SClipboardCopyComponentInterface.default
+        interface: __SClipboardCopyComponentInterface
       }
     }));
     this._state = "pending";
   }
   static get styles() {
-    return import_lit.css`
-            ${(0, import_lit.unsafeCSS)(import_s_clipboard_copy.default)}
+    return css`
+            ${unsafeCSS(__css)}
         `;
   }
   copy(text) {
     this._state = "copy";
-    (0, import_copy.default)(text).then(() => {
+    __copy(text).then(() => {
       this._state = "success";
       setTimeout(() => {
         this._state = "pending";
@@ -72,7 +48,7 @@ class SClipboardCopy extends import_s_lit_component.default {
     });
   }
   render() {
-    return import_lit.html`
+    return html`
             <div
                 class="${this.componentUtils.className("")}"
                 state="${this._state}"
@@ -144,9 +120,13 @@ class SClipboardCopy extends import_s_lit_component.default {
   }
 }
 __decorateClass([
-  (0, import_decorators.property)()
+  property()
 ], SClipboardCopy.prototype, "_state", 2);
 function define(props = {}, tagName = "s-clipboard-copy") {
-  import_s_lit_component.default.setDefaultProps(tagName, props);
+  __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, SClipboardCopy);
 }
+export {
+  SClipboardCopy as default,
+  define
+};

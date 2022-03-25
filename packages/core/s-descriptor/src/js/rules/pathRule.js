@@ -1,30 +1,5 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var pathRule_exports = {};
-__export(pathRule_exports, {
-  default: () => pathRule_default
-});
-module.exports = __toCommonJS(pathRule_exports);
-var import_path = __toESM(require("@coffeekraken/sugar/shared/is/path"), 1);
-var import_glob = __toESM(require("@coffeekraken/sugar/shared/is/glob"), 1);
+import __isPath from "@coffeekraken/sugar/shared/is/path";
+import __isGlob from "@coffeekraken/sugar/shared/is/glob";
 const ruleObj = {
   name: "Path",
   id: "path",
@@ -52,12 +27,12 @@ const ruleObj = {
         case true:
           break;
         case false:
-          if ((0, import_glob.default)(value))
+          if (__isGlob(value))
             return new Error(`The passed path "<cyan>${value}</cyan>" is a glob and this is not authorized`);
           break;
       }
     }
-    if (!(0, import_path.default)(value)) {
+    if (!__isPath(value)) {
       return new Error(`The passed path "<cyan>${value}</cyan>" is not a valid path`);
     }
     if (params.exists) {
@@ -67,3 +42,6 @@ const ruleObj = {
   }
 };
 var pathRule_default = ruleObj;
+export {
+  pathRule_default as default
+};

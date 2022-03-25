@@ -1,9 +1,5 @@
-var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -18,29 +14,9 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var classes_exports = {};
-__export(classes_exports, {
-  default: () => classes_default,
-  interface: () => postcssSugarPluginDisplayClassesInterface
-});
-module.exports = __toCommonJS(classes_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_faker = __toESM(require("faker"));
-class postcssSugarPluginDisplayClassesInterface extends import_s_interface.default {
+import __SInterface from "@coffeekraken/s-interface";
+import __faker from "faker";
+class postcssSugarPluginDisplayClassesInterface extends __SInterface {
   static get _definition() {
     return {};
   }
@@ -81,58 +57,58 @@ function classes_default({
         * 
         * @example    html      Block
         *   <div class="s-display:block">
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
         * 
         * @example    html      Inline-block
         *   <div class="s-display:inline-block">
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
         * 
         * @example   html      Contents
         *   <div class="s-display:contents">
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
         * 
         * @example          html      Flex 
         *   <div class="s-display:flex">
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
         * 
         * @example          html      Grid
         *   <div class="s-display:grid">
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
         * 
         * @example          html      Inline-flex
         *   <div class="s-display:inline-flex">
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
         * 
         * @example         html      Inline-grid
         *   <div class="s-display:inline-grid">
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
         * 
         * @example     html      None
         *   <div class="s-display:none">
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
-        *     <p class="s-typo:p">${import_faker.default.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
+        *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
         * 
         * @since      2.0.0
@@ -326,7 +302,7 @@ function classes_default({
       `);
   return vars;
 }
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  interface
-});
+export {
+  classes_default as default,
+  postcssSugarPluginDisplayClassesInterface as interface
+};

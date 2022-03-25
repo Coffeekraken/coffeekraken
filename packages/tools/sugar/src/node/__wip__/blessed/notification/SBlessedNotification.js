@@ -1,32 +1,7 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SBlessedNotification_exports = {};
-__export(SBlessedNotification_exports, {
-  default: () => SBlessedNotification
-});
-module.exports = __toCommonJS(SBlessedNotification_exports);
-var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"), 1);
-var import_parseHtml = __toESM(require("../../../shared/console/parseHtml"), 1);
-var import_SBlessedComponent = __toESM(require("../SBlessedComponent"), 1);
-const _SBlessedNotification = class extends import_SBlessedComponent.default {
+import __deepMerge from "../../../shared/object/deepMerge";
+import __parseHtml from "../../../shared/console/parseHtml";
+import __SBlessedComponent from "../SBlessedComponent";
+const _SBlessedNotification = class extends __SBlessedComponent {
   static update() {
     let top = 1, bottom = 1;
     const left = 2;
@@ -55,7 +30,7 @@ const _SBlessedNotification = class extends import_SBlessedComponent.default {
     });
   }
   constructor(title, body, settings = {}) {
-    settings = (0, import_deepMerge.default)({
+    settings = __deepMerge({
       onClick: null,
       onTimeout: null,
       position: "tr",
@@ -86,7 +61,7 @@ const _SBlessedNotification = class extends import_SBlessedComponent.default {
     }
     const position = settings.position;
     delete settings.position;
-    super((0, import_deepMerge.default)({
+    super(__deepMerge({
       blessed: {
         width: 30,
         height: 4,
@@ -101,7 +76,7 @@ const _SBlessedNotification = class extends import_SBlessedComponent.default {
           bottom: 0
         },
         clickable: settings.onClick !== null,
-        content: (0, import_parseHtml.default)([`<bold>${title}</bold>`, `${body}`, ""].join("\n"))
+        content: __parseHtml([`<bold>${title}</bold>`, `${body}`, ""].join("\n"))
       }
     }, settings.blessed));
     this.on("attach", () => {
@@ -145,5 +120,6 @@ SBlessedNotification.displayStacks = {
   bl: [],
   br: []
 };
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {});
+export {
+  SBlessedNotification as default
+};

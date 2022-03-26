@@ -1,19 +1,21 @@
 {
-    "name": "@coffeekraken/s-vite-plugin-postcss",
-    "version": "2.0.0",
-    "description": "",
-    "type": "module",
-    "main": "./src/node/exports.js",
-    "exports": {
-        "import": "./src/node/exports.js",
-        "require": "./src/node/exports.cjs"
-    },
-    "scripts": {},
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-    "license": "MIT",
-    "dependencies": {
-        "postcss": "^8.2.15",
-        "@coffeekraken/s-sugar-config": "^2.0.0"
-    },
-    "peerDependencies": {}
+  "name": "@coffeekraken/s-vite-plugin-postcss",
+  "version": "2.0.0",
+  "description": "",
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+  "license": "MIT",
+  "dependencies": {
+    "postcss": "^8.2.15",
+    "@coffeekraken/s-sugar-config": "^2.0.0"
+  },
+  "peerDependencies": {},
+  "main": "dist/pkg/cjs/node/exports.js",
+  "module": "dist/pkg/esm/node/exports.js",
+  "exports": {
+    ".": {
+      "require": "./dist/pkg/cjs/node/exports.js",
+      "import": "./dist/pkg/esm/node/exports.js"
+    }
+  }
 }

@@ -4,8 +4,8 @@
     "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
     "main": "./index.js",
     "exports": {
-        "import": "./index.js",
-        "require": "./index.cjs"
+        "import": "./esm/index.js",
+        "require": "./cjs/index.js"
     },
     "scripts": {},
     "private": true,

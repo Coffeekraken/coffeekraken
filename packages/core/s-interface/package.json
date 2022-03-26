@@ -1,24 +1,25 @@
 {
-    "name": "@coffeekraken/s-interface",
-    "version": "2.0.0",
-    "description": "",
-    "main": "./src/node/exports.js",
-    "exports": {
-        "browser": {
-            "import": "./src/js/exports.js",
-            "require": "./src/js/exports.cjs"
-        },
-        "default": {
-            "import": "./src/node/exports.js",
-            "require": "./src/node/exports.cjs"
-        }
+  "name": "@coffeekraken/s-interface",
+  "version": "2.0.0",
+  "description": "",
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/s-descriptor": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0"
+  },
+  "main": "dist/pkg/cjs/js/exports.js",
+  "module": "dist/pkg/esm/js/exports.js",
+  "exports": {
+    "node": {
+      "require": "./dist/pkg/cjs/node/exports.js",
+      "import": "./dist/pkg/esm/node/exports.js"
     },
-    "scripts": {},
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-    "license": "MIT",
-    "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0",
-        "@coffeekraken/s-descriptor": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0"
+    "default": {
+      "require": "./dist/pkg/cjs/js/exports.js",
+      "import": "./dist/pkg/esm/js/exports.js"
     }
+  }
 }

@@ -1,32 +1,35 @@
 {
-    "name": "@coffeekraken/s-code-example-component",
-    "version": "2.0.0",
-    "description": "",
-    "homepage": "https://coffeekraken.io",
-    "files": [
-        "dist"
-    ],
-    "main": "./src/js/exports.js",
-    "exports": {
-        "import": "./src/js/exports.js",
-        "require": "./src/js/exports.cjs"
-    },
-    "scripts": {
-        "dev": "sugar frontstack dev",
-        "build": "sugar frontstack build",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "MIT",
-    "dependencies": {
-        "@coffeekraken/s-clipboard-copy-component": "^2.0.0",
-        "@coffeekraken/s-lit-component": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0",
-        "@prettier/plugin-php": "^0.17.6",
-        "highlight.js": "^11.1.0",
-        "html-tags": "^3.1.0",
-        "known-css-properties": "^0.24.0",
-        "lit": "^2.0.0-rc.3",
-        "prettier": "^2.4.1"
+  "name": "@coffeekraken/s-code-example-component",
+  "version": "2.0.0",
+  "description": "",
+  "homepage": "https://coffeekraken.io",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "sugar frontstack dev",
+    "build": "sugar frontstack build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-clipboard-copy-component": "^2.0.0",
+    "@coffeekraken/s-lit-component": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
+    "@prettier/plugin-php": "^0.17.6",
+    "highlight.js": "^11.1.0",
+    "html-tags": "^3.1.0",
+    "known-css-properties": "^0.24.0",
+    "lit": "^2.0.0-rc.3",
+    "prettier": "^2.4.1"
+  },
+  "main": "dist/pkg/cjs/js/exports.js",
+  "module": "dist/pkg/esm/js/exports.js",
+  "exports": {
+    ".": {
+      "require": "./dist/pkg/cjs/js/exports.js",
+      "import": "./dist/pkg/esm/js/exports.js"
     }
+  }
 }

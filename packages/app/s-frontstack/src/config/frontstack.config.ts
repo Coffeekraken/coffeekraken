@@ -341,7 +341,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: '%sugar frontendServer.start [arguments]',
+                command: 'sugar frontendServer.start [arguments]',
                 params: {},
                 settings: {
                     processManager: {
@@ -389,14 +389,14 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.postcssBuild
                  * @type            String
-                 * @default        %sugar postcss.build [arguments]
+                 * @default        sugar postcss.build [arguments]
                  *
                  * Specify the postcss build action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: '%sugar postcss.build [arguments]',
+                command: 'sugar postcss.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -439,7 +439,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: '%sugar images.build [arguments]',
+                command: 'sugar images.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -481,7 +481,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: '%sugar vite [arguments]',
+                command: 'sugar vite [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -524,7 +524,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: '%sugar vite.build [arguments]',
+                command: 'sugar vite.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -567,7 +567,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: '%sugar docmap.build [arguments]',
+                command: 'sugar docmap.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -610,7 +610,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: '%sugar sitemap.build [arguments]',
+                command: 'sugar sitemap.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -653,7 +653,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: '%sugar favicon.build [arguments]',
+                command: 'sugar favicon.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},

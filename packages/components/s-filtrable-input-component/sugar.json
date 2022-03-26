@@ -3,7 +3,7 @@
     "config": {
         "folders": [
             {
-                "path": "./src/config"
+                "path": "./dist/pkg/%format/config"
             }
         ]
     },

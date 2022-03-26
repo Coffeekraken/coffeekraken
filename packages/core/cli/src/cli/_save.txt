@@ -25,8 +25,8 @@ import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 import __SLog from '@coffeekraken/s-log';
 import __childProcess from 'child_process';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
+import { Console } from 'console';
 import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface';
-import __replaceCommandTokens from './replaceCommandTokens';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
@@ -95,6 +95,66 @@ export default class SSugarCli {
         endpoints: {},
     };
     _availableInteractiveCli: Record<string, any> = {};
+
+    /**
+     * @name           command
+     * @type            String
+     * @static
+     * @get
+     *
+     * Get the correct sugar or sugard commant depending on the environment in which the cli is running
+     *
+     * @since           2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com>
+     */
+    static get command(): string {
+        const command = process.argv[1];
+        return command.split('/').pop();
+    }
+
+    /**
+     * @name           replaceTokens
+     * @type            Function
+     * @static
+     *
+     * Replace tokens in a passed command like:
+     * - %sugar: Replaced by either "sugar" or "sugard" depending on the environment
+     * - Support all the tokens supported by the "replaceTokens" function of the sugar package
+     *
+     * @param        {String} command The command to replace tokens in
+     * @return       {String} The command with the replaced tokens
+     *
+     * @since           2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com>
+     */
+    static replaceTokens(command: string, params?: any): string {
+        command = command.replace(
+            '[arguments]',
+            params ? __argsToString(params) : '',
+        );
+        command = __replaceTokens(command);
+        command = command.replace(/%sugar/gm, SSugarCli.command);
+        command = this.replaceSugarCommandForDev(command);
+        return command;
+    }
+
+    /**
+     * @name           replaceSugarCommandForDev
+     * @type            Function
+     * @static
+     *
+     * Replace the starting "sugar" by "sugard" in the command line when needed
+     *
+     * @param        {String} command The command to replace "sugar" in
+     * @return       {String} The command with the replaced "sugar"
+     *
+     * @since           2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com>
+     */
+    static replaceSugarCommandForDev(command: string): string {
+        if (!command.match(/^sugar\s/)) return command;
+        return command.replace(/^sugar/, this.command);
+    }
 
     /**
      * @name           constructor
@@ -401,7 +461,7 @@ export default class SSugarCli {
             this._initStdio(true, true);
 
             const promise = __spawn(
-                __replaceCommandTokens(cliObj.command),
+                SSugarCli.replaceTokens(cliObj.command),
                 [],
                 {},
             );
@@ -492,7 +552,7 @@ export default class SSugarCli {
                     let processPath, command;
 
                     if (actionObj.command && !actionObj.process) {
-                        command = __replaceCommandTokens(actionObj.command);
+                        command = SSugarCli.replaceTokens(actionObj.command);
                     } else {
                         processPath = __path.resolve(
                             sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
@@ -764,3 +824,4 @@ export default class SSugarCli {
 if (!global._sugarCli && process.env.NODE_ENV !== 'test') {
     global._sugarCli = new SSugarCli();
 }
+s

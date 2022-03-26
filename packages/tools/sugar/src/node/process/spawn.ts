@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SSugarCli from '@coffeekraken/cli';
 import __SDuration from '@coffeekraken/s-duration';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SLog from '@coffeekraken/s-log';
@@ -83,10 +82,10 @@ export default function spawn(
             stdout = [];
 
         // replace tokens using the SSugarCli replaceTokens function
-        command = __SSugarCli.replaceTokens(command);
+        // command = replaceCommandTokens(command);
         const eventEmitter = await __SEventEmitter.ipcServer();
         pipe(eventEmitter);
-        
+
         childProcess = __spawn(command, [], {
             shell: true,
             stdio: ['pipe', 'pipe', 'pipe'],
@@ -158,12 +157,15 @@ export default function spawn(
             isEnded = true;
 
             // build and parse the value if possible
-            let value = resolveValue ||
-                    rejectValue ||
-                    stdout.length ? stdout.join('\n') : stderr.length ? stderr.join('\n') : '';
+            let value =
+                resolveValue || rejectValue || stdout.length
+                    ? stdout.join('\n')
+                    : stderr.length
+                    ? stderr.join('\n')
+                    : '';
             try {
-                value = JSON.parse(value)
-            } catch(e) {}
+                value = JSON.parse(value);
+            } catch (e) {}
 
             // build the result object
             const resultObj = {
@@ -179,10 +181,9 @@ export default function spawn(
             // closed by this process
             childProcessExitPromiseResolve?.();
 
-            
             // generic close event
             emit('close', resultObj);
-            
+
             // handle resolve and reject
             if (resolveValue) {
                 emit('close.success', resultObj);
@@ -193,7 +194,7 @@ export default function spawn(
                 if (settings.returnValueOnly) return reject(resultObj.value);
                 return reject(resultObj);
             }
-            
+
             // handle other cases
             if (stderr.length) {
                 emit('close.error', resultObj);

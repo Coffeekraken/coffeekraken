@@ -1,36 +1,38 @@
 {
-    "name": "@coffeekraken/cli",
-    "version": "2.0.0",
-    "description": "",
-    "type": "module",
-    "main": "./src/cli/sugar.cli.js",
-    "exports": {
-        "import": "./src/cli/sugar.cli.js",
-        "require": "./src/cli/sugar.cli.cjs"
-    },
-    "bin": {
-        "sugar": "./src/cli/sugar.cli.js"
-    },
-    "scripts": {},
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-    "license": "MIT",
-    "dependencies": {
-        "@coffeekraken/s-frontstack": "^2.0.0",
-        "@coffeekraken/s-bench": "^2.0.0",
-        "@coffeekraken/s-config": "^2.0.0",
-        "@coffeekraken/s-interface": "^2.0.0",
-        "@coffeekraken/s-sugar-config": "^2.0.0",
-        "@coffeekraken/s-stdio": "^2.0.0",
-        "@coffeekraken/s-log": "^2.0.0",
-        "@coffeekraken/s-glob": "^2.0.0",
-        "@coffeekraken/s-postcss-builder": "^2.0.0",
-        "@coffeekraken/s-event-emitter": "^2.0.0",
-        "@coffeekraken/s-sugar-json": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0",
-        "@coffeekraken/s-env": "^2.0.0",
-        "@coffeekraken/s-process": "^2.0.0",
-        "@coffeekraken/s-promise": "^2.0.0",
-        "@coffeekraken/s-monorepo": "^2.0.0",
-        "enquirer": "^2.3.6"
+  "name": "@coffeekraken/cli",
+  "version": "2.0.0",
+  "description": "",
+  "bin": {
+    "sugar": "dist/pkg/esm/cli/exports.js"
+  },
+  "scripts": {},
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-frontstack": "^2.0.0",
+    "@coffeekraken/s-bench": "^2.0.0",
+    "@coffeekraken/s-config": "^2.0.0",
+    "@coffeekraken/s-interface": "^2.0.0",
+    "@coffeekraken/s-sugar-config": "^2.0.0",
+    "@coffeekraken/s-stdio": "^2.0.0",
+    "@coffeekraken/s-log": "^2.0.0",
+    "@coffeekraken/s-glob": "^2.0.0",
+    "@coffeekraken/s-postcss-builder": "^2.0.0",
+    "@coffeekraken/s-event-emitter": "^2.0.0",
+    "@coffeekraken/s-sugar-json": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
+    "@coffeekraken/s-env": "^2.0.0",
+    "@coffeekraken/s-process": "^2.0.0",
+    "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/s-monorepo": "^2.0.0",
+    "enquirer": "^2.3.6"
+  },
+  "main": "dist/pkg/cjs/cli/exports.js",
+  "module": "dist/pkg/esm/cli/exports.js",
+  "exports": {
+    ".": {
+      "require": "./dist/pkg/cjs/cli/exports.js",
+      "import": "./dist/pkg/esm/cli/exports.js"
     }
+  }
 }

@@ -59,7 +59,7 @@ export interface ISSugarJsonFile {
     recipe?: string;
     cli?: ISSugarJsonFileCli;
     config?: ISSugarJsonFileConfig;
-    frontstack?: Record<string, ISFrontstackAction>
+    frontstack?: Record<string, ISFrontstackAction>;
 }
 
 export default class SSugarJson extends __SClass {
@@ -121,7 +121,8 @@ export default class SSugarJson extends __SClass {
 
         // extends
         if (!sugarJson.extends) sugarJson.extends = [];
-        else if (!Array.isArray(sugarJson.extends)) sugarJson.extends = [sugarJson.extends];
+        else if (!Array.isArray(sugarJson.extends))
+            sugarJson.extends = [sugarJson.extends];
 
         return sugarJson;
     }
@@ -137,7 +138,9 @@ export default class SSugarJson extends __SClass {
      * @since             2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    async read(settings?: Partial<ISSugarJsonSettings>): Record<string, ISSugarJsonFile> | ISSugarJsonFile {
+    async read(
+        settings?: Partial<ISSugarJsonSettings>,
+    ): Record<string, ISSugarJsonFile> | ISSugarJsonFile {
         __SBench.start('SSugarJson.read');
 
         // const SSugarJsonSettingsInterface = await import('./interface/SSugarJsonSettingsInterface');
@@ -159,7 +162,11 @@ export default class SSugarJson extends __SClass {
             const json = JSON.parse(jsonStr);
 
             // read the file
-            const packageJson = JSON.parse(__fs.readFileSync(path.replace('sugar.json', 'package.json')).toString());
+            const packageJson = JSON.parse(
+                __fs
+                    .readFileSync(path.replace('sugar.json', 'package.json'))
+                    .toString(),
+            );
 
             const resultJson = this.sanitizeJson({
                 metas: {
@@ -190,7 +197,9 @@ export default class SSugarJson extends __SClass {
      */
     current(): ISSugarJsonFile {
         try {
-            return this.sanitizeJson(__readJsonSync(`${__packageRoot()}/sugar.json`));
+            return this.sanitizeJson(
+                __readJsonSync(`${__packageRoot()}/sugar.json`),
+            );
         } catch (e) {
             return {};
         }
@@ -219,15 +228,24 @@ export default class SSugarJson extends __SClass {
         __SBench.start('SSugarJson.search');
 
         // get global node modules directory path
-        const globalNodeModulesPath = __childProcess.execSync(`npm root -g`).toString().trim();
+        const globalNodeModulesPath = __childProcess
+            .execSync(`npm root -g`)
+            .toString()
+            .trim();
 
-        const packagesArray = typeof finalSettings.packages === 'string' ? finalSettings.packages.split(',') : [];
+        const packagesArray =
+            typeof finalSettings.packages === 'string'
+                ? finalSettings.packages.split(',')
+                : [];
 
         // get local node modules directory path
         const localNodeModulesPath = `${__packageRoot()}/node_modules`;
 
         // get local node modules directory path
-        const topLocalNodeModulesPath = `${__packageRoot(process.cwd(), true)}/node_modules`;
+        const topLocalNodeModulesPath = `${__packageRoot(
+            process.cwd(),
+            true,
+        )}/node_modules`;
 
         // build globs
         const globs: string[] = [];
@@ -266,7 +284,11 @@ export default class SSugarJson extends __SClass {
             }
         }
         // then global
-        if (globalNodeModulesPath && finalSettings.includeModules && finalSettings.includeGlobal) {
+        if (
+            globalNodeModulesPath &&
+            finalSettings.includeModules &&
+            finalSettings.includeGlobal
+        ) {
             // coffeekraken modules are always loaded
             globs.push(`${globalNodeModulesPath}/@coffeekraken/*/sugar.json`);
 
@@ -293,7 +315,10 @@ export default class SSugarJson extends __SClass {
 
         // search for "sugar.json" files
         const files = __glob.sync(globs, {}).filter((path) => {
-            const packageJsonPath = path.replace(/sugar\.json$/, 'package.json');
+            const packageJsonPath = path.replace(
+                /sugar\.json$/,
+                'package.json',
+            );
             if (__fs.existsSync(packageJsonPath)) return true;
             return false;
         });
@@ -304,7 +329,10 @@ export default class SSugarJson extends __SClass {
             files
                 .map((f) => __fs.realpathSync(f))
                 .filter((f) => {
-                    if (f.toLowerCase().split('__wip__').length > 1 || f.toLowerCase().split('__tests__').length > 1) {
+                    if (
+                        f.toLowerCase().split('__wip__').length > 1 ||
+                        f.toLowerCase().split('__tests__').length > 1
+                    ) {
                         return false;
                     }
                     return true;

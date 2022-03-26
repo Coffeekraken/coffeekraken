@@ -278,8 +278,6 @@ export interface ISSliderComponentTimer {
     percentage: number;
 }
 
-console.log('plop');
-
 export default class SSlider extends __SLitComponent {
     static get properties() {
         return __SLitComponent.properties({}, __SSliderComponentInterface);

@@ -410,6 +410,7 @@ export default class SSugarConfig extends __SClass {
 
         if (!this._sugarJson) {
             this._sugarJson = await sugarJson.read();
+
             Object.keys(this._sugarJson).forEach((packageName) => {
                 // @ts-ignore
                 const jsonObj = this._sugarJson[packageName];
@@ -558,7 +559,7 @@ export default class SSugarConfig extends __SClass {
                         fileName: '[name].config.js',
                         scopes: {
                             default: [
-                                __path.resolve(__dirname(), '../../src/config'),
+                                __path.resolve(__dirname(), 'config'),
                                 // @ts-ignore
                                 ...this.constructor._registeredConfigFolderPaths
                                     .filter((obj) => obj.scope === 'default')

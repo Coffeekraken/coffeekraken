@@ -16,7 +16,7 @@
     },
     "private": true,
     "workspaces": [
-        "packages/*/*"
+        "packages/**"
     ],
     "pre-commit": [],
     "repository": {
@@ -43,6 +43,7 @@
     "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
     "dependencies": {
         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "chalk": "^5.0.1",
         "concurrently": "^6.3.0",
         "dependency-check": "^4.1.0",
         "esm": "^3.2.25",

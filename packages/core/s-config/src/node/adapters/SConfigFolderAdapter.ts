@@ -106,27 +106,34 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         );
 
         // handle configs
-        this.configFolderAdapterSettings.folderName =
-            this.configFolderAdapterSettings.folderName.replace(
-                '[name]',
-                this.name,
-            );
+        this.configFolderAdapterSettings.folderName = this.configFolderAdapterSettings.folderName.replace(
+            '[name]',
+            this.name,
+        );
+
+        // determine the running format (cjs|esm)
+        let format = 'cjs';
+        // try {
+        //     if (module !== undefined) format = 'cjs';
+        // } catch (e) {}
 
         // handle each scopes
         Object.keys(this.configFolderAdapterSettings.scopes).forEach(
             (scope) => {
-                let scopeFoldersPathArray =
-                    this.configFolderAdapterSettings.scopes[scope];
+                let scopeFoldersPathArray = this.configFolderAdapterSettings
+                    .scopes[scope];
 
                 if (scopeFoldersPathArray) {
                     if (!Array.isArray(scopeFoldersPathArray))
                         scopeFoldersPathArray = [scopeFoldersPathArray];
                     scopeFoldersPathArray = scopeFoldersPathArray.map(
                         (path) => {
-                            return path.replace(
-                                '[folderName]',
-                                this.configFolderAdapterSettings.folderName,
-                            );
+                            return path
+                                .replace(
+                                    '[folderName]',
+                                    this.configFolderAdapterSettings.folderName,
+                                )
+                                .replace('%format', format);
                         },
                     );
                 }
@@ -200,6 +207,8 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
                 const configFilePath = `${path}/${file}`;
 
+                console.log('ddd', configFilePath);
+
                 // @TODO      check for delete cache with import
                 const importedConfig = await import(configFilePath);
 
@@ -238,6 +247,8 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 }
             }
         }
+
+        console.log(configObj);
 
         return Object.assign({}, configObj);
     }

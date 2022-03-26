@@ -23,7 +23,7 @@ __export(unused_exports, {
   default: () => unused_default
 });
 module.exports = __toCommonJS(unused_exports);
-var import_SNpmUnusedProcess = __toESM(require("@coffeekraken/sugar/node/npm/SNpmUnusedProcess"));
+var import_SNpmUnusedProcess = __toESM(require("@coffeekraken/sugar/node/npm/SNpmUnusedProcess"), 1);
 var unused_default = import_SNpmUnusedProcess.default;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});

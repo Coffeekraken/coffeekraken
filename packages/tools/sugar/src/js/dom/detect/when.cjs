@@ -38,14 +38,14 @@ __export(when_exports, {
   triggers: () => triggers
 });
 module.exports = __toCommonJS(when_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_whenInViewport = __toESM(require("./whenInViewport"));
-var import_whenNearViewport = __toESM(require("./whenNearViewport"));
-var import_whenOutOfViewport = __toESM(require("./whenOutOfViewport"));
-var import_whenInteract = __toESM(require("./whenInteract"));
-var import_whenDomReady = __toESM(require("./whenDomReady"));
-var import_whenVisible = __toESM(require("./whenVisible"));
-var import_whenStylesheetsReady = __toESM(require("./whenStylesheetsReady"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_whenInViewport = __toESM(require("./whenInViewport"), 1);
+var import_whenNearViewport = __toESM(require("./whenNearViewport"), 1);
+var import_whenOutOfViewport = __toESM(require("./whenOutOfViewport"), 1);
+var import_whenInteract = __toESM(require("./whenInteract"), 1);
+var import_whenDomReady = __toESM(require("./whenDomReady"), 1);
+var import_whenVisible = __toESM(require("./whenVisible"), 1);
+var import_whenStylesheetsReady = __toESM(require("./whenStylesheetsReady"), 1);
 const triggers = ["direct", "directly", "inViewport", "nearViewport", "outOfViewport", "interact", "visible", "stylesheetsReady"];
 function when($elm, trigger, settings) {
   const finalSettings = __spreadValues({

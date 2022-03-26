@@ -23,7 +23,7 @@ __export(delete_exports, {
   default: () => delete_default
 });
 module.exports = __toCommonJS(delete_exports);
-var import_set = __toESM(require("./set"));
+var import_set = __toESM(require("./set"), 1);
 function del(object, dotPath) {
   const parentDotPath = dotPath.split(".").slice(0, -1).join(".");
   if (!dotPath || dotPath === "" || dotPath === ".")

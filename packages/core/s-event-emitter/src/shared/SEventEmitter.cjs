@@ -40,16 +40,16 @@ __export(SEventEmitter_exports, {
   default: () => SEventEmitter_default
 });
 module.exports = __toCommonJS(SEventEmitter_exports);
-var import_minimatch = __toESM(require("minimatch"));
-var import_s_class = __toESM(require("@coffeekraken/s-class"));
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"));
-var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"));
-var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"));
-var import_childProcess = __toESM(require("@coffeekraken/sugar/node/is/childProcess"));
-var import_toString = __toESM(require("@coffeekraken/sugar/shared/string/toString"));
-var import_s_log = __toESM(require("@coffeekraken/s-log"));
-var import_class = __toESM(require("@coffeekraken/sugar/shared/is/class"));
-var import_getColorFor = __toESM(require("@coffeekraken/sugar/shared/dev/color/getColorFor"));
+var import_minimatch = __toESM(require("minimatch"), 1);
+var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"), 1);
+var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"), 1);
+var import_childProcess = __toESM(require("@coffeekraken/sugar/node/is/childProcess"), 1);
+var import_toString = __toESM(require("@coffeekraken/sugar/shared/string/toString"), 1);
+var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
+var import_class = __toESM(require("@coffeekraken/sugar/shared/is/class"), 1);
+var import_getColorFor = __toESM(require("@coffeekraken/sugar/shared/dev/color/getColorFor"), 1);
 const _SEventEmitter = class extends import_s_class.default {
   constructor(settings = {}) {
     super((0, import_deepMerge.default)({

@@ -23,9 +23,9 @@ __export(activeSpace_exports, {
   default: () => activeSpace_default
 });
 module.exports = __toCommonJS(activeSpace_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_minimatch = __toESM(require("minimatch"));
-var import_is_glob = __toESM(require("is-glob"));
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_minimatch = __toESM(require("minimatch"), 1);
+var import_is_glob = __toESM(require("is-glob"), 1);
 const _activeSpaceCallbacksStack = {};
 const _activeSpaceStack = [];
 let _activeSpaceCurrent = null;

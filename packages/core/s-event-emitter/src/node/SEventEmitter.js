@@ -17,7 +17,7 @@ import __isChildProcess from "@coffeekraken/sugar/node/is/childProcess";
 import __deepMerge from "@coffeekraken/sugar/shared/object/deepMerge";
 import __SEventEmitterBase from "../shared/SEventEmitter";
 (async () => {
-  const { default: __nodeIpc } = await Promise.resolve().then(() => __toESM(require("node-ipc")));
+  const { default: __nodeIpc } = await Promise.resolve().then(() => __toESM(require("node-ipc"), 1));
   __SEventEmitterBase._ipcInstance = new __nodeIpc.IPC();
   __SEventEmitterBase._ipcInstance.config.id = `ipc-${process.pid}`;
   __SEventEmitterBase._ipcInstance.config.retry = 1500;
@@ -42,7 +42,7 @@ class SEventEmitter extends __SEventEmitterBase {
       const eventEmitter = new this({
         eventEmitter: eventEmitterSettings != null ? eventEmitterSettings : {}
       });
-      const { default: __nodeIpc } = await Promise.resolve().then(() => __toESM(require("node-ipc")));
+      const { default: __nodeIpc } = await Promise.resolve().then(() => __toESM(require("node-ipc"), 1));
       const ipcInstance = new __nodeIpc.IPC();
       ipcInstance.config = __deepMerge((_a = ipcInstance.config) != null ? _a : {}, {
         id: `ipc-${process.pid}`,

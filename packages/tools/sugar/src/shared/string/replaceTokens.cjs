@@ -23,7 +23,7 @@ __export(replaceTokens_exports, {
   default: () => replaceTokens_default
 });
 module.exports = __toCommonJS(replaceTokens_exports);
-var import_deepMerge = __toESM(require("../../node/object/deepMerge"));
+var import_deepMerge = __toESM(require("../../node/object/deepMerge"), 1);
 function replaceTokens(string, argsObj, settings = {}) {
   settings = (0, import_deepMerge.default)({
     regexp: "\\[([a-zA-Z0-9-_]+)\\]",

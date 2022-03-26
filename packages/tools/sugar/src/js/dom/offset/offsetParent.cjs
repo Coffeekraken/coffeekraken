@@ -23,7 +23,7 @@ __export(offsetParent_exports, {
   default: () => offsetParent_default
 });
 module.exports = __toCommonJS(offsetParent_exports);
-var import_offset = __toESM(require("./offset"));
+var import_offset = __toESM(require("./offset"), 1);
 function offsetParent(elm) {
   const parentOffset = (0, import_offset.default)(elm.parentNode);
   const offset = (0, import_offset.default)(elm);

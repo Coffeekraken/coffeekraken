@@ -37,7 +37,7 @@ __export(srcImgDir_exports, {
   default: () => srcImgDir_default
 });
 module.exports = __toCommonJS(srcImgDir_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function srcImgDir_default(settings = {}) {
   settings = __spreadValues({}, settings);
   const srcImgDir = import_s_sugar_config.default.get("storage.src.imgDir");

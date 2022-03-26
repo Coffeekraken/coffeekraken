@@ -23,13 +23,13 @@ __export(bin_cli_exports, {
   default: () => bin
 });
 module.exports = __toCommonJS(bin_cli_exports);
-var import_parseArgs = __toESM(require("../../node/cli/parseArgs"));
-var import_SNpmBinCliInterface = __toESM(require("./interface/SNpmBinCliInterface"));
-var import_child_process = __toESM(require("child_process"));
-var import_packageRootDir = __toESM(require("../../node/path/packageRootDir"));
-var import_fs = __toESM(require("fs"));
-var import_path = __toESM(require("path"));
-var import_findPackages = __toESM(require("../../node/monorepo/findPackages"));
+var import_parseArgs = __toESM(require("../../node/cli/parseArgs"), 1);
+var import_SNpmBinCliInterface = __toESM(require("./interface/SNpmBinCliInterface"), 1);
+var import_child_process = __toESM(require("child_process"), 1);
+var import_packageRootDir = __toESM(require("../../node/path/packageRootDir"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_findPackages = __toESM(require("../../node/monorepo/findPackages"), 1);
 async function bin(stringArgs = "") {
   const argsObj = (0, import_parseArgs.default)(stringArgs, {
     definition: import_SNpmBinCliInterface.default.definition

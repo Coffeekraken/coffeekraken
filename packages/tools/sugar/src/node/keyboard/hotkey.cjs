@@ -25,10 +25,10 @@ __export(hotkey_exports, {
   default: () => hotkey_default
 });
 module.exports = __toCommonJS(hotkey_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_uniqid = __toESM(require("../../shared/string/uniqid"));
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_childProcess = __toESM(require("../is/childProcess"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_uniqid = __toESM(require("../../shared/string/uniqid"), 1);
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+var import_childProcess = __toESM(require("../is/childProcess"), 1);
 const hotkeyStack = {};
 let isListenerAlreadyAdded = false;
 const isSystemWideAlreadyAdded = false;

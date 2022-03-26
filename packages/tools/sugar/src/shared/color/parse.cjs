@@ -23,11 +23,11 @@ __export(parse_exports, {
   default: () => parse_default
 });
 module.exports = __toCommonJS(parse_exports);
-var import_parseRgba = __toESM(require("./parseRgba"));
-var import_parseHsla = __toESM(require("./parseHsla"));
-var import_hsla2rgba = __toESM(require("./hsla2rgba"));
-var import_hex2rgba = __toESM(require("./hex2rgba"));
-var import_rgba2hsla = __toESM(require("./rgba2hsla"));
+var import_parseRgba = __toESM(require("./parseRgba"), 1);
+var import_parseHsla = __toESM(require("./parseHsla"), 1);
+var import_hsla2rgba = __toESM(require("./hsla2rgba"), 1);
+var import_hex2rgba = __toESM(require("./hex2rgba"), 1);
+var import_rgba2hsla = __toESM(require("./rgba2hsla"), 1);
 function parse(color, format = "rgba") {
   color = color.replace(/\s/g, "");
   if (color.indexOf("rgb") != -1) {

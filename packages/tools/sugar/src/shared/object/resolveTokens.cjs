@@ -23,8 +23,8 @@ __export(resolveTokens_exports, {
   default: () => resolveTokens_default
 });
 module.exports = __toCommonJS(resolveTokens_exports);
-var import_deepProxy = __toESM(require("./deepProxy"));
-var import_get = __toESM(require("./get"));
+var import_deepProxy = __toESM(require("./deepProxy"), 1);
+var import_get = __toESM(require("./get"), 1);
 function resolveTokens(object) {
   const proxiedObject = (0, import_deepProxy.default)(object, (getObj) => {
     const rawValue = (0, import_get.default)(getObj.target, getObj.key);

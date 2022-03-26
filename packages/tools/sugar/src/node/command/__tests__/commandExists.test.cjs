@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_commandExists = __toESM(require("../commandExists"));
+var import_commandExists = __toESM(require("../commandExists"), 1);
 describe("sugar.node.command.commandExists", () => {
   it('Should get the "ls" basic system command correctly', async () => {
     const res = await (0, import_commandExists.default)("ls");

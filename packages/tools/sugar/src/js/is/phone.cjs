@@ -23,7 +23,7 @@ __export(phone_exports, {
   default: () => phone_default
 });
 module.exports = __toCommonJS(phone_exports);
-var import_mobile_detect = __toESM(require("mobile-detect"));
+var import_mobile_detect = __toESM(require("mobile-detect"), 1);
 function isPhone(ua = navigator.userAgent) {
   const md = new import_mobile_detect.default(ua);
   return md.phone() !== null;

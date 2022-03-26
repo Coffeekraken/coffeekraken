@@ -23,7 +23,7 @@ __export(inPackage_exports, {
   default: () => inPackage_default
 });
 module.exports = __toCommonJS(inPackage_exports);
-var import_isInPackage = __toESM(require("../path/isInPackage"));
+var import_isInPackage = __toESM(require("../path/isInPackage"), 1);
 function inPackage(name, from = process.cwd(), highest = false) {
   return (0, import_isInPackage.default)(name, from, highest);
 }

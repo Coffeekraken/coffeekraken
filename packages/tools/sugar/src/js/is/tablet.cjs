@@ -23,7 +23,7 @@ __export(tablet_exports, {
   default: () => tablet_default
 });
 module.exports = __toCommonJS(tablet_exports);
-var import_mobile_detect = __toESM(require("mobile-detect"));
+var import_mobile_detect = __toESM(require("mobile-detect"), 1);
 function isTablet(ua = navigator.userAgent) {
   const md = new import_mobile_detect.default(ua);
   return md.tablet() !== null;

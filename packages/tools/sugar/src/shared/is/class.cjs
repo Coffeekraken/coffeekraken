@@ -23,7 +23,7 @@ __export(class_exports, {
   default: () => class_default
 });
 module.exports = __toCommonJS(class_exports);
-var import_is_class = __toESM(require("is-class"));
+var import_is_class = __toESM(require("is-class"), 1);
 function cls(cls2) {
   if (!Array.isArray(cls2))
     cls2 = [cls2];

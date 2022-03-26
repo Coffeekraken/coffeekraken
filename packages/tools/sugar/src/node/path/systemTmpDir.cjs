@@ -23,7 +23,7 @@ __export(systemTmpDir_exports, {
   default: () => systemTmpDir_default
 });
 module.exports = __toCommonJS(systemTmpDir_exports);
-var import_temp_dir = __toESM(require("temp-dir"));
+var import_temp_dir = __toESM(require("temp-dir"), 1);
 function systemTmpDir_default() {
   const tmpDir = import_temp_dir.default;
   return tmpDir;

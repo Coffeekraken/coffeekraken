@@ -23,7 +23,7 @@ __export(onProcessExit_exports, {
   default: () => onProcessExit_default
 });
 module.exports = __toCommonJS(onProcessExit_exports);
-var import_terminal_kit = __toESM(require("terminal-kit"));
+var import_terminal_kit = __toESM(require("terminal-kit"), 1);
 const __onProcessExitCallbacks = [];
 function onProcessExit(callback) {
   if (!__onProcessExitCallbacks.length) {

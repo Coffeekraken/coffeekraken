@@ -23,7 +23,7 @@ __export(camelCase_exports, {
   default: () => camelCase_default
 });
 module.exports = __toCommonJS(camelCase_exports);
-var import_camelize = __toESM(require("./camelize"));
+var import_camelize = __toESM(require("./camelize"), 1);
 function camelCase(text) {
   return (0, import_camelize.default)(text);
 }

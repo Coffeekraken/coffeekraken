@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_require = __toESM(require("../require"));
+var import_require = __toESM(require("../require"), 1);
 describe("sugar.node.esm.require", () => {
   it("Should require correctly the fs package", () => {
     const __fs = (0, import_require.default)("fs");

@@ -13,8 +13,8 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_copy = __toESM(require("../copy"));
-var import_read = __toESM(require("../read"));
+var import_copy = __toESM(require("../copy"), 1);
+var import_read = __toESM(require("../read"), 1);
 describe("sugar.node.clipboad", () => {
   it("Should copy and past a text value correctly", async () => {
     const text = "hello world";

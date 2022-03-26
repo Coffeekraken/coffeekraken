@@ -23,7 +23,7 @@ __export(memoize_exports, {
   default: () => memoize_default
 });
 module.exports = __toCommonJS(memoize_exports);
-var import_memoizee = __toESM(require("memoizee"));
+var import_memoizee = __toESM(require("memoizee"), 1);
 var memoize_default = import_memoizee.default;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});

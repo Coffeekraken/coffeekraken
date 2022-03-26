@@ -13,12 +13,12 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_pool = __toESM(require("../pool"));
-var import_s_file = __toESM(require("@coffeekraken/s-file"));
-var import_removeSync = __toESM(require("../removeSync"));
-var import_packageTmpDir = __toESM(require("../../path/packageTmpDir"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
-var import_wait = __toESM(require("../../../shared/time/wait"));
+var import_pool = __toESM(require("../pool"), 1);
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_removeSync = __toESM(require("../removeSync"), 1);
+var import_packageTmpDir = __toESM(require("../../path/packageTmpDir"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_wait = __toESM(require("../../../shared/time/wait"), 1);
 jest.setTimeout(2e4);
 describe("sugar.node.fs.pool", () => {
   it("Should correctly start a pool and listen for updates, deletion, etc...", () => {

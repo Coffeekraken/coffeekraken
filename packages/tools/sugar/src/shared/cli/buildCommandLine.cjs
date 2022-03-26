@@ -37,7 +37,7 @@ __export(buildCommandLine_exports, {
   default: () => buildCommandLine
 });
 module.exports = __toCommonJS(buildCommandLine_exports);
-var import_argsToString = __toESM(require("./argsToString"));
+var import_argsToString = __toESM(require("./argsToString"), 1);
 function buildCommandLine(command, args = {}, settings) {
   settings = __spreadValues({
     keepFalsy: false

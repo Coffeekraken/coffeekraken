@@ -23,7 +23,7 @@ __export(SEventEmitterPipeSettingsInterface_exports, {
   default: () => SEventEmitterPipeSettingsInterface
 });
 module.exports = __toCommonJS(SEventEmitterPipeSettingsInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
 class SEventEmitterPipeSettingsInterface extends import_s_interface.default {
   static get _definition() {
     return {

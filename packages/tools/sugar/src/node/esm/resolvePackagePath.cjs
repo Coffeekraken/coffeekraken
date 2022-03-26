@@ -23,8 +23,8 @@ __export(resolvePackagePath_exports, {
   default: () => resolvePackagePath
 });
 module.exports = __toCommonJS(resolvePackagePath_exports);
-var import_resolve_package_path = __toESM(require("resolve-package-path"));
-var import_packageRoot = __toESM(require("../path/packageRoot"));
+var import_resolve_package_path = __toESM(require("resolve-package-path"), 1);
+var import_packageRoot = __toESM(require("../path/packageRoot"), 1);
 function resolvePackagePath(pkg, baseDir = `${(0, import_packageRoot.default)()}/node_modules`) {
   var _a;
   return (_a = (0, import_resolve_package_path.default)(pkg, baseDir)) == null ? void 0 : _a.replace(/\/package\.json$/, "");

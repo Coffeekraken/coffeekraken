@@ -24,7 +24,7 @@ __export(exports_exports, {
   default: () => exports_default
 });
 module.exports = __toCommonJS(exports_exports);
-var import_SPromise = __toESM(require("./SPromise"));
+var import_SPromise = __toESM(require("./SPromise"), 1);
 __reExport(exports_exports, require("./SPromise"), module.exports);
 var exports_default = import_SPromise.default;
 // Annotate the CommonJS export names for ESM import in node:

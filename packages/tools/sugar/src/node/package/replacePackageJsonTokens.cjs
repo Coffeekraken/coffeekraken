@@ -37,8 +37,8 @@ __export(replacePackageJsonTokens_exports, {
   default: () => replacePackageJsonTokens
 });
 module.exports = __toCommonJS(replacePackageJsonTokens_exports);
-var import_jsonSync = __toESM(require("./jsonSync"));
-var import_flatten = __toESM(require("../../shared/object/flatten"));
+var import_jsonSync = __toESM(require("./jsonSync"), 1);
+var import_flatten = __toESM(require("../../shared/object/flatten"), 1);
 function replacePackageJsonTokens(string, settings) {
   const set = __spreadValues({}, settings);
   const tokensMatches = string.match(/%packageJson\.[a-zA-Z0-9\.]+;?/gm);

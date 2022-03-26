@@ -23,9 +23,9 @@ __export(SBlessedNotification_exports, {
   default: () => SBlessedNotification
 });
 module.exports = __toCommonJS(SBlessedNotification_exports);
-var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"));
-var import_parseHtml = __toESM(require("../../../shared/console/parseHtml"));
-var import_SBlessedComponent = __toESM(require("../SBlessedComponent"));
+var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"), 1);
+var import_parseHtml = __toESM(require("../../../shared/console/parseHtml"), 1);
+var import_SBlessedComponent = __toESM(require("../SBlessedComponent"), 1);
 const _SBlessedNotification = class extends import_SBlessedComponent.default {
   static update() {
     let top = 1, bottom = 1;

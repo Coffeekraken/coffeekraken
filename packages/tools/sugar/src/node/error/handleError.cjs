@@ -23,9 +23,9 @@ __export(handleError_exports, {
   default: () => handleError_default
 });
 module.exports = __toCommonJS(handleError_exports);
-var import_parseHtml = __toESM(require("../../shared/console/parseHtml"));
-var import_childProcess = __toESM(require("../../node/is/childProcess"));
-var import_toString = __toESM(require("../../shared/string/toString"));
+var import_parseHtml = __toESM(require("../../shared/console/parseHtml"), 1);
+var import_childProcess = __toESM(require("../../node/is/childProcess"), 1);
+var import_toString = __toESM(require("../../shared/string/toString"), 1);
 function handleError() {
   if (process.env.NODE_ENV === "test")
     return;

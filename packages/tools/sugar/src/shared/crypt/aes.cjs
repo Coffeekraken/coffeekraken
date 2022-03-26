@@ -23,10 +23,10 @@ __export(aes_exports, {
   default: () => aes_default
 });
 module.exports = __toCommonJS(aes_exports);
-var import_aes = __toESM(require("crypto-js/aes"));
-var import_enc_utf8 = __toESM(require("crypto-js/enc-utf8"));
-var import_toString = __toESM(require("../string/toString"));
-var import_parse = __toESM(require("../string/parse"));
+var import_aes = __toESM(require("crypto-js/aes"), 1);
+var import_enc_utf8 = __toESM(require("crypto-js/enc-utf8"), 1);
+var import_toString = __toESM(require("../string/toString"), 1);
+var import_parse = __toESM(require("../string/parse"), 1);
 var aes_default = {
   encrypt: function(message, key = "coffeekraken.sugar.crypt.aes") {
     if (typeof message !== "string")

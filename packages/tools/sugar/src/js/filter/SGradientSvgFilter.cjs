@@ -23,7 +23,7 @@ __export(SGradientSvgFilter_exports, {
   default: () => SGradientSvgFilter_default
 });
 module.exports = __toCommonJS(SGradientSvgFilter_exports);
-var import_SSvgFilter = __toESM(require("./SSvgFilter"));
+var import_SSvgFilter = __toESM(require("./SSvgFilter"), 1);
 class SGradientSvgFilter extends import_SSvgFilter.default {
   constructor() {
     super(`

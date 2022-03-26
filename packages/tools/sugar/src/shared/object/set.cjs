@@ -37,8 +37,8 @@ __export(set_exports, {
   default: () => set_default
 });
 module.exports = __toCommonJS(set_exports);
-var import_get = __toESM(require("./get"));
-var import_unquote = __toESM(require("../string/unquote"));
+var import_get = __toESM(require("./get"), 1);
+var import_unquote = __toESM(require("../string/unquote"), 1);
 var set_default = (obj, path, value, settings = {}) => {
   settings = __spreadValues({}, settings);
   if (!path || path === "" || path === ".") {

@@ -23,7 +23,7 @@ __export(addEventListener_exports, {
   default: () => addEventListener_default
 });
 module.exports = __toCommonJS(addEventListener_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function addEventListener($elm, eventNames, callback = null, useCapture = false) {
   if (!Array.isArray(eventNames))
     eventNames = eventNames.split(",").map((e) => e.trim());

@@ -23,7 +23,7 @@ __export(path_exports, {
   default: () => path_default
 });
 module.exports = __toCommonJS(path_exports);
-var import_isPath = __toESM(require("../fs/isPath"));
+var import_isPath = __toESM(require("../fs/isPath"), 1);
 function path(path2, checkExistence = false) {
   return (0, import_isPath.default)(path2, checkExistence);
 }

@@ -37,7 +37,7 @@ __export(inViewportStatusChange_exports, {
   default: () => inViewportStatusChange_default
 });
 module.exports = __toCommonJS(inViewportStatusChange_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function inViewportStatusChange($elm, settings) {
   let status = "out", observer, isInViewport = false;
   settings = __spreadValues({

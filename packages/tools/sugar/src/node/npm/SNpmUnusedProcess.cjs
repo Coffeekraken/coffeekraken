@@ -24,12 +24,12 @@ __export(SNpmUnusedProcess_exports, {
   default: () => SNpmUnusedProcess_default
 });
 module.exports = __toCommonJS(SNpmUnusedProcess_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_process = __toESM(require("@coffeekraken/s-process"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_depcheck = __toESM(require("depcheck"));
-var import_packageRootDir = __toESM(require("../path/packageRootDir"));
-var import_packageJson = __toESM(require("./utils/packageJson"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+var import_s_process = __toESM(require("@coffeekraken/s-process"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_depcheck = __toESM(require("depcheck"), 1);
+var import_packageRootDir = __toESM(require("../path/packageRootDir"), 1);
+var import_packageJson = __toESM(require("./utils/packageJson"), 1);
 class SNpmUnusedParamsInterface extends import_s_interface.default {
   static get _definition() {
     return {

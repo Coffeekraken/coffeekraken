@@ -23,8 +23,8 @@ __export(runChild_cli_exports, {
   default: () => runChild_cli_default
 });
 module.exports = __toCommonJS(runChild_cli_exports);
-var import_parseArgs = __toESM(require("../../shared/cli/parseArgs"));
-var import_s_process = __toESM(require("@coffeekraken/s-process"));
+var import_parseArgs = __toESM(require("../../shared/cli/parseArgs"), 1);
+var import_s_process = __toESM(require("@coffeekraken/s-process"), 1);
 var runChild_cli_default = async (stringArgs = "") => {
   const args = (0, import_parseArgs.default)(stringArgs);
   if (!args.processPath) {

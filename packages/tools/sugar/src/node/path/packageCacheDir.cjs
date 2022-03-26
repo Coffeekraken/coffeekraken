@@ -37,7 +37,7 @@ __export(packageCacheDir_exports, {
   default: () => packageCacheDir_default
 });
 module.exports = __toCommonJS(packageCacheDir_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function packageCacheDir_default(settings = {}) {
   settings = __spreadValues({}, settings);
   const packageCacheDir = import_s_sugar_config.default.get("storage.package.cacheDir");

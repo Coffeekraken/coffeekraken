@@ -37,7 +37,7 @@ __export(exists_exports, {
   default: () => exists
 });
 module.exports = __toCommonJS(exists_exports);
-var import_fs = __toESM(require("fs"));
+var import_fs = __toESM(require("fs"), 1);
 async function exists(path, settings) {
   const set = __spreadValues({
     directory: true,

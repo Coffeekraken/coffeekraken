@@ -23,7 +23,7 @@ __export(kill_exports, {
   default: () => kill
 });
 module.exports = __toCommonJS(kill_exports);
-var import_fkill = __toESM(require("fkill"));
+var import_fkill = __toESM(require("fkill"), 1);
 async function kill(portOrId) {
   return (0, import_fkill.default)(portOrId);
 }

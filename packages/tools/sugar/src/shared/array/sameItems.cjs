@@ -37,9 +37,9 @@ __export(sameItems_exports, {
   default: () => sameItems
 });
 module.exports = __toCommonJS(sameItems_exports);
-var import_md5 = __toESM(require("../crypt/md5"));
-var import_plainObject = __toESM(require("../is/plainObject"));
-var import_unique = __toESM(require("./unique"));
+var import_md5 = __toESM(require("../crypt/md5"), 1);
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
+var import_unique = __toESM(require("./unique"), 1);
 function sameItems(...args) {
   var _a, _b, _c;
   const arrays = args.filter((arg) => Array.isArray(arg));

@@ -23,7 +23,7 @@ __export(excludeGlobs_exports, {
   default: () => excludeGlobs_default
 });
 module.exports = __toCommonJS(excludeGlobs_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function excludeGlobs_default() {
   if (import_s_sugar_config.default.isLoaded()) {
     return import_s_sugar_config.default.get("storage.exclude");

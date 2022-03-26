@@ -23,8 +23,8 @@ __export(fromElementTopToViewportTop_exports, {
   default: () => fromElementTopToViewportTop
 });
 module.exports = __toCommonJS(fromElementTopToViewportTop_exports);
-var import_scrollTop = __toESM(require("../scroll/scrollTop"));
-var import_offset = __toESM(require("../offset/offset"));
+var import_scrollTop = __toESM(require("../scroll/scrollTop"), 1);
+var import_offset = __toESM(require("../offset/offset"), 1);
 function fromElementTopToViewportTop(elm) {
   const offsets = (0, import_offset.default)(elm);
   const scrollTop = (0, import_scrollTop.default)();

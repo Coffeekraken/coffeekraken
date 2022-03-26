@@ -23,7 +23,7 @@ __export(dedupe_exports, {
   default: () => dedupe_default
 });
 module.exports = __toCommonJS(dedupe_exports);
-var import_to_regex = __toESM(require("to-regex"));
+var import_to_regex = __toESM(require("to-regex"), 1);
 function dedupe(str, statement) {
   const reg = (0, import_to_regex.default)(`(${statement})`, {
     contains: true,

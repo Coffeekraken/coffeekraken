@@ -24,10 +24,10 @@ __export(extractImport_exports, {
 });
 module.exports = __toCommonJS(extractImport_exports);
 var import_abstract_syntax_tree = require("abstract-syntax-tree");
-var __acorn = __toESM(require("acorn-loose"));
+var __acorn = __toESM(require("acorn-loose"), 1);
 var import_astring = require("astring");
-var import_fs = __toESM(require("fs"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
+var import_fs = __toESM(require("fs"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
 function extractImport(stringOrFilePath, settings) {
   const set = (0, import_deepMerge.default)({
     import: true

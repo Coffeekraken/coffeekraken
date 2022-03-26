@@ -37,11 +37,11 @@ __export(jsonSync_exports, {
   default: () => jsonSync_default
 });
 module.exports = __toCommonJS(jsonSync_exports);
-var import_rootPath = __toESM(require("./rootPath"));
-var import_fs = __toESM(require("fs"));
-var import_readJsonSync = __toESM(require("../fs/readJsonSync"));
-var import_standardizeJson = __toESM(require("../../shared/npm/utils/standardizeJson"));
-var import_objectHash = __toESM(require("../../shared/object/objectHash"));
+var import_rootPath = __toESM(require("./rootPath"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_readJsonSync = __toESM(require("../fs/readJsonSync"), 1);
+var import_standardizeJson = __toESM(require("../../shared/npm/utils/standardizeJson"), 1);
+var import_objectHash = __toESM(require("../../shared/object/objectHash"), 1);
 let __packageJson = {};
 function jsonSync(from = process.cwd(), settings) {
   const finalSettings = __spreadValues({

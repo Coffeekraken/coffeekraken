@@ -23,8 +23,8 @@ __export(getAnimationProperties_exports, {
   default: () => getAnimationProperties_default
 });
 module.exports = __toCommonJS(getAnimationProperties_exports);
-var import_getStyleProperty = __toESM(require("./getStyleProperty"));
-var import_convert = __toESM(require("../../../shared/time/convert"));
+var import_getStyleProperty = __toESM(require("./getStyleProperty"), 1);
+var import_convert = __toESM(require("../../../shared/time/convert"), 1);
 function getAnimationProperties(elm) {
   const name = (0, import_getStyleProperty.default)(elm, "animation-name") || "";
   const duration = (0, import_getStyleProperty.default)(elm, "animation-duration") || "0s";

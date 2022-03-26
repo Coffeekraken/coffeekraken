@@ -37,7 +37,7 @@ __export(splitLetters_exports, {
   default: () => splitLetters_default
 });
 module.exports = __toCommonJS(splitLetters_exports);
-var import_map = __toESM(require("lodash/map"));
+var import_map = __toESM(require("lodash/map"), 1);
 function _decodeHtml(html) {
   const txt = document.createElement("textarea");
   txt.innerHTML = html;

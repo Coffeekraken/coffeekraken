@@ -37,9 +37,9 @@ __export(scrollTo_exports, {
   default: () => scrollTo_default
 });
 module.exports = __toCommonJS(scrollTo_exports);
-var import_easeInOutQuad = __toESM(require("../../../shared/easing/easeInOutQuad"));
-var import_requestAnimationFrame = __toESM(require("../utlls/requestAnimationFrame"));
-var import_userScrolling = __toESM(require("../is/userScrolling"));
+var import_easeInOutQuad = __toESM(require("../../../shared/easing/easeInOutQuad"), 1);
+var import_requestAnimationFrame = __toESM(require("../utlls/requestAnimationFrame"), 1);
+var import_userScrolling = __toESM(require("../is/userScrolling"), 1);
 function scrollTo(target, settings = {}) {
   return new Promise((resolve, reject) => {
     var _a, _b, _c, _d, _e;

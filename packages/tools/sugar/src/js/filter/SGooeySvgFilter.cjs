@@ -23,7 +23,7 @@ __export(SGooeySvgFilter_exports, {
   default: () => SGooeySvgFilter_default
 });
 module.exports = __toCommonJS(SGooeySvgFilter_exports);
-var import_SSvgFilter = __toESM(require("./SSvgFilter"));
+var import_SSvgFilter = __toESM(require("./SSvgFilter"), 1);
 class SGooeySvgFilter extends import_SSvgFilter.default {
   constructor(amount = 8) {
     super(`

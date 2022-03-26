@@ -37,8 +37,8 @@ __export(splitLines_exports, {
   default: () => splitLines_default
 });
 module.exports = __toCommonJS(splitLines_exports);
-var import_map = __toESM(require("lodash/map"));
-var import_throttle = __toESM(require("../../shared/function/throttle"));
+var import_map = __toESM(require("lodash/map"), 1);
+var import_throttle = __toESM(require("../../shared/function/throttle"), 1);
 function splitLines(elm, settings = {}) {
   settings = __spreadValues({
     tag: "p",

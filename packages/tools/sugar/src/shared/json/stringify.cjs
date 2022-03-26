@@ -23,7 +23,7 @@ __export(stringify_exports, {
   default: () => stringify_default
 });
 module.exports = __toCommonJS(stringify_exports);
-var import_fast_safe_stringify = __toESM(require("fast-safe-stringify"));
+var import_fast_safe_stringify = __toESM(require("fast-safe-stringify"), 1);
 function stringify(obj, replacer = null, space = null) {
   return (0, import_fast_safe_stringify.default)(obj, replacer, space);
 }

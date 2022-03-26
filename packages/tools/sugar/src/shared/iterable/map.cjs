@@ -37,7 +37,7 @@ __export(map_exports, {
   default: () => map_default
 });
 module.exports = __toCommonJS(map_exports);
-var import_typeof = __toESM(require("../value/typeof"));
+var import_typeof = __toESM(require("../value/typeof"), 1);
 const fn = function(stack, callback, settings = {}) {
   settings = __spreadValues({
     newStack: false

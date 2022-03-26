@@ -23,7 +23,7 @@ __export(rootPath_exports, {
   default: () => rootPath_default
 });
 module.exports = __toCommonJS(rootPath_exports);
-var import_packageRootDir = __toESM(require("../path/packageRootDir"));
+var import_packageRootDir = __toESM(require("../path/packageRootDir"), 1);
 function rootPath(from = process.cwd(), highest = false) {
   return (0, import_packageRootDir.default)(from, highest);
 }

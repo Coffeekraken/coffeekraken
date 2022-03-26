@@ -23,7 +23,7 @@ __export(dirname_exports, {
   default: () => dirname_default
 });
 module.exports = __toCommonJS(dirname_exports);
-var import_callsites = __toESM(require("callsites"));
+var import_callsites = __toESM(require("callsites"), 1);
 var import_url = require("url");
 function dirname_default() {
   if (process.env.NODE_ENV === "test") {

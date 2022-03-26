@@ -13,8 +13,8 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_downloadRepository = __toESM(require("../downloadRepository"));
-var import_systemTmpDir = __toESM(require("../../path/systemTmpDir"));
+var import_downloadRepository = __toESM(require("../downloadRepository"), 1);
+var import_systemTmpDir = __toESM(require("../../path/systemTmpDir"), 1);
 describe("sugar.node.github.downloadRepository", () => {
   it("Should download a repository successfully", async () => {
     const repo = await (0, import_downloadRepository.default)("Coffeekraken/download-test-repo", {

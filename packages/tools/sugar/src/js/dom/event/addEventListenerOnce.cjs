@@ -23,8 +23,8 @@ __export(addEventListenerOnce_exports, {
   default: () => addEventListenerOnce_default
 });
 module.exports = __toCommonJS(addEventListenerOnce_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_addEventListener = __toESM(require("./addEventListener"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_addEventListener = __toESM(require("./addEventListener"), 1);
 function addEventListenerOnce($elm, eventNames, callback = null, useCapture = false) {
   if (!Array.isArray(eventNames))
     eventNames = [eventNames];

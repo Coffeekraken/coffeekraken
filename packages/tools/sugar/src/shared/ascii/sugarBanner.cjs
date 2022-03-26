@@ -23,7 +23,7 @@ __export(sugarBanner_exports, {
   default: () => sugarBanner_default
 });
 module.exports = __toCommonJS(sugarBanner_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"));
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
 function sugarBanner(settings = {}) {
   settings = (0, import_deepMerge.default)({
     version: "",

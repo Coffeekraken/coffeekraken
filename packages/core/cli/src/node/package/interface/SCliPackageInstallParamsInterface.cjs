@@ -23,7 +23,7 @@ __export(SCliPackageInstallParamsInterface_exports, {
   default: () => SCliPackageInstallParamsInterface
 });
 module.exports = __toCommonJS(SCliPackageInstallParamsInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
 class SCliPackageInstallParamsInterface extends import_s_interface.default {
   static get _definition() {
     return {};

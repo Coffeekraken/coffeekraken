@@ -23,7 +23,7 @@ __export(SBind_exports, {
   default: () => SBind
 });
 module.exports = __toCommonJS(SBind_exports);
-var import_SWatch = __toESM(require("../../shared/object/SWatch"));
+var import_SWatch = __toESM(require("../../shared/object/SWatch"), 1);
 class SBind {
   constructor() {
     this._bindStack = {

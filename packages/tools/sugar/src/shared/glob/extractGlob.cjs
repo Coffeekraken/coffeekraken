@@ -23,7 +23,7 @@ __export(extractGlob_exports, {
   default: () => extractGlob_default
 });
 module.exports = __toCommonJS(extractGlob_exports);
-var import_glob_parent = __toESM(require("glob-parent"));
+var import_glob_parent = __toESM(require("glob-parent"), 1);
 function extractGlob(string) {
   const parent = (0, import_glob_parent.default)(string);
   let final = string.replace(parent, "");

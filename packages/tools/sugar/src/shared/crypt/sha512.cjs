@@ -23,9 +23,9 @@ __export(sha512_exports, {
   default: () => sha512_default
 });
 module.exports = __toCommonJS(sha512_exports);
-var import_sha512 = __toESM(require("crypto-js/sha512"));
-var import_toString = __toESM(require("../string/toString"));
-var import_parse = __toESM(require("../string/parse"));
+var import_sha512 = __toESM(require("crypto-js/sha512"), 1);
+var import_toString = __toESM(require("../string/toString"), 1);
+var import_parse = __toESM(require("../string/parse"), 1);
 const __encryptedMessages = {};
 var sha512_default = {
   encrypt: function(message) {

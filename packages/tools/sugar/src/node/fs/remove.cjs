@@ -23,7 +23,7 @@ __export(remove_exports, {
   default: () => remove_default
 });
 module.exports = __toCommonJS(remove_exports);
-var import_fs_extra = __toESM(require("fs-extra"));
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function remove(path) {
   return import_fs_extra.default.remove(path);
 }

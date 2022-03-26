@@ -37,11 +37,11 @@ __export(unzip_exports, {
   default: () => unzip
 });
 module.exports = __toCommonJS(unzip_exports);
-var import_fs = __toESM(require("fs"));
-var import_unzipper = __toESM(require("unzipper"));
-var import_folderPath = __toESM(require("../fs/folderPath"));
-var import_filename = __toESM(require("../fs/filename"));
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"));
+var import_fs = __toESM(require("fs"), 1);
+var import_unzipper = __toESM(require("unzipper"), 1);
+var import_folderPath = __toESM(require("../fs/folderPath"), 1);
+var import_filename = __toESM(require("../fs/filename"), 1);
+var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
 function unzip(zipFilePath, settings) {
   return new Promise((resolve, reject) => {
     settings = __spreadValues({}, settings != null ? settings : {});

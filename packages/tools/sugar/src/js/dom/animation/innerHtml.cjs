@@ -37,10 +37,10 @@ __export(innerHtml_exports, {
   default: () => innerHtml_default
 });
 module.exports = __toCommonJS(innerHtml_exports);
-var import_uniqid = __toESM(require("../../../shared/string/uniqid"));
-var import_injectStyle = __toESM(require("../../dom/css/injectStyle"));
-var import_emptyNode = __toESM(require("../manipulate/emptyNode"));
-var import_convert = __toESM(require("../../../shared/time/convert"));
+var import_uniqid = __toESM(require("../../../shared/string/uniqid"), 1);
+var import_injectStyle = __toESM(require("../../dom/css/injectStyle"), 1);
+var import_emptyNode = __toESM(require("../manipulate/emptyNode"), 1);
+var import_convert = __toESM(require("../../../shared/time/convert"), 1);
 function innerHtml(node, content, settings = {}) {
   return new Promise((resolve, reject) => {
     settings = __spreadValues({

@@ -37,7 +37,7 @@ __export(splitWords_exports, {
   default: () => splitWords_default
 });
 module.exports = __toCommonJS(splitWords_exports);
-var import_map = __toESM(require("lodash/map"));
+var import_map = __toESM(require("lodash/map"), 1);
 function splitWords(elm, settings = {}) {
   settings = __spreadValues({
     tag: "span",

@@ -23,8 +23,8 @@ __export(root_cli_exports, {
   default: () => root_cli_default
 });
 module.exports = __toCommonJS(root_cli_exports);
-var import_packageRootDir = __toESM(require("../../node/path/packageRootDir"));
-var import_parseArgs = __toESM(require("../../node/cli/parseArgs"));
+var import_packageRootDir = __toESM(require("../../node/path/packageRootDir"), 1);
+var import_parseArgs = __toESM(require("../../node/cli/parseArgs"), 1);
 var root_cli_default = async (stringArgs = "") => {
   const args = (0, import_parseArgs.default)(stringArgs, {
     definition: {

@@ -23,7 +23,7 @@ __export(folderPath_exports, {
   default: () => folderPath_default
 });
 module.exports = __toCommonJS(folderPath_exports);
-var import_isPath = __toESM(require("./isPath"));
+var import_isPath = __toESM(require("./isPath"), 1);
 function folderPath(path, checkExistence = false) {
   if (checkExistence) {
     if (!(0, import_isPath.default)(path, true))

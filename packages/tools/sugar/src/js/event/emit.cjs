@@ -23,7 +23,7 @@ __export(emit_exports, {
   default: () => emit_default
 });
 module.exports = __toCommonJS(emit_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function emit(name, value) {
   if (!window._sugarEventSPromise)
     window._sugarEventSPromise = new import_s_promise.default({

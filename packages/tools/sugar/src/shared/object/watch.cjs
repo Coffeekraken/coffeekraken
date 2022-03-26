@@ -23,7 +23,7 @@ __export(watch_exports, {
   default: () => watch_default
 });
 module.exports = __toCommonJS(watch_exports);
-var import_SWatch = __toESM(require("./SWatch"));
+var import_SWatch = __toESM(require("./SWatch"), 1);
 function watch(target, settings = {}) {
   const watchedObj = new import_SWatch.default(target, settings);
   return watchedObj;

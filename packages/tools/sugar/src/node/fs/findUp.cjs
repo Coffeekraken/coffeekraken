@@ -37,11 +37,11 @@ __export(findUp_exports, {
   default: () => findUp
 });
 module.exports = __toCommonJS(findUp_exports);
-var import_s_file = __toESM(require("@coffeekraken/s-file"));
-var import_fs = __toESM(require("fs"));
-var import_glob = __toESM(require("glob"));
-var import_glob2 = __toESM(require("../../shared/is/glob"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_glob = __toESM(require("glob"), 1);
+var import_glob2 = __toESM(require("../../shared/is/glob"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function findUp(search, settings) {
   settings = __spreadValues({
     symlinks: true,

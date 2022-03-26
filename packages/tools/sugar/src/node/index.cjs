@@ -13,9 +13,9 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_handleError = __toESM(require("./error/handleError"));
-var import_exitCleanup = __toESM(require("./process/exitCleanup"));
-var import_onProcessExit = __toESM(require("./process/onProcessExit"));
+var import_handleError = __toESM(require("./error/handleError"), 1);
+var import_exitCleanup = __toESM(require("./process/exitCleanup"), 1);
+var import_onProcessExit = __toESM(require("./process/onProcessExit"), 1);
 (0, import_handleError.default)();
 (0, import_onProcessExit.default)(() => {
   return import_exitCleanup.default;

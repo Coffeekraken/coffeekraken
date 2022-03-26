@@ -23,8 +23,8 @@ __export(replaceTokens_exports, {
   default: () => replaceTokens
 });
 module.exports = __toCommonJS(replaceTokens_exports);
-var import_replacePathTokens = __toESM(require("../path/replacePathTokens"));
-var import_replacePackageJsonTokens = __toESM(require("../package/replacePackageJsonTokens"));
+var import_replacePathTokens = __toESM(require("../path/replacePathTokens"), 1);
+var import_replacePackageJsonTokens = __toESM(require("../package/replacePackageJsonTokens"), 1);
 function replaceTokens(string) {
   string = (0, import_replacePathTokens.default)(string);
   string = (0, import_replacePackageJsonTokens.default)(string);

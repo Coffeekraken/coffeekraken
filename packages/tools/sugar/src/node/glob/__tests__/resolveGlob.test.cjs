@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_resolveGlob = __toESM(require("../resolveGlob"));
+var import_resolveGlob = __toESM(require("../resolveGlob"), 1);
 describe("sugar.node.glob.resolveGlob", () => {
   it("Should resolve the passed glob correctly", (done) => {
     const files = (0, import_resolveGlob.default)(`data/**/*`, {

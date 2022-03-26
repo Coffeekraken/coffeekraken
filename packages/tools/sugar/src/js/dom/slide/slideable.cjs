@@ -37,16 +37,16 @@ __export(slideable_exports, {
   default: () => slideable
 });
 module.exports = __toCommonJS(slideable_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_s_sugar_element = __toESM(require("@coffeekraken/s-sugar-element"));
-var import_easeOutQuad = __toESM(require("../../../shared/easing/easeOutQuad"));
-var import_easeInterval = __toESM(require("../../../shared/function/easeInterval"));
-var import_clamp = __toESM(require("../../../shared/math/clamp"));
-var import_easeClamp = __toESM(require("../../../shared/math/easeClamp"));
-var import_uniqid = __toESM(require("../../../shared/string/uniqid"));
-var import_injectStyle = __toESM(require("../css/injectStyle"));
-var import_onDrag = __toESM(require("../detect/onDrag"));
-var import_areaStats = __toESM(require("../element/areaStats"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_s_sugar_element = __toESM(require("@coffeekraken/s-sugar-element"), 1);
+var import_easeOutQuad = __toESM(require("../../../shared/easing/easeOutQuad"), 1);
+var import_easeInterval = __toESM(require("../../../shared/function/easeInterval"), 1);
+var import_clamp = __toESM(require("../../../shared/math/clamp"), 1);
+var import_easeClamp = __toESM(require("../../../shared/math/easeClamp"), 1);
+var import_uniqid = __toESM(require("../../../shared/string/uniqid"), 1);
+var import_injectStyle = __toESM(require("../css/injectStyle"), 1);
+var import_onDrag = __toESM(require("../detect/onDrag"), 1);
+var import_areaStats = __toESM(require("../element/areaStats"), 1);
 function _getMostDisplayedItem($items) {
   var _a;
   let higherSurface = 0, $itemObj;

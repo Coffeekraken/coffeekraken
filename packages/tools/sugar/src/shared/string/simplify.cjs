@@ -23,7 +23,7 @@ __export(simplify_exports, {
   default: () => simplify_default
 });
 module.exports = __toCommonJS(simplify_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"));
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
 function simplify(string, settings = {}) {
   settings = (0, import_deepMerge.default)({
     specialChars: true,

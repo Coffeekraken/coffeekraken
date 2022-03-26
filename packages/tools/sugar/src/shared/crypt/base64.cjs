@@ -23,10 +23,10 @@ __export(base64_exports, {
   default: () => base64_default
 });
 module.exports = __toCommonJS(base64_exports);
-var import_toString = __toESM(require("../string/toString"));
-var import_parse = __toESM(require("../string/parse"));
-var import_btoa = __toESM(require("btoa"));
-var import_atob = __toESM(require("atob"));
+var import_toString = __toESM(require("../string/toString"), 1);
+var import_parse = __toESM(require("../string/parse"), 1);
+var import_btoa = __toESM(require("btoa"), 1);
+var import_atob = __toESM(require("atob"), 1);
 var base64_default = {
   encrypt: function(message) {
     if (typeof message !== "string")

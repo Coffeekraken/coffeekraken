@@ -37,7 +37,7 @@ __export(observeMutations_exports, {
   default: () => observeMutations_default
 });
 module.exports = __toCommonJS(observeMutations_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function observeMutations($target, settings = {}) {
   settings = __spreadValues({
     attributes: true,

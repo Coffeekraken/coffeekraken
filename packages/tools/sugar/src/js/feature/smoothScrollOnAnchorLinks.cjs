@@ -23,10 +23,10 @@ __export(smoothScrollOnAnchorLinks_exports, {
   default: () => smoothScrollOnAnchorLinks_default
 });
 module.exports = __toCommonJS(smoothScrollOnAnchorLinks_exports);
-var import_querySelectorLive = __toESM(require("../dom/query/querySelectorLive"));
-var import_url_parse = __toESM(require("url-parse"));
-var import_scrollTo = __toESM(require("../dom/scroll/scrollTo"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
+var import_querySelectorLive = __toESM(require("../dom/query/querySelectorLive"), 1);
+var import_url_parse = __toESM(require("url-parse"), 1);
+var import_scrollTo = __toESM(require("../dom/scroll/scrollTo"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
 function smoothScrollOnAnchorLinks(settings = {}) {
   settings = (0, import_deepMerge.default)({
     scroll: {},

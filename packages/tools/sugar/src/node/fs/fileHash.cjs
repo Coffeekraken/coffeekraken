@@ -23,10 +23,10 @@ __export(fileHash_exports, {
   default: () => fileHash
 });
 module.exports = __toCommonJS(fileHash_exports);
-var import_crypto = __toESM(require("crypto"));
-var import_fs = __toESM(require("fs"));
+var import_crypto = __toESM(require("crypto"), 1);
+var import_fs = __toESM(require("fs"), 1);
 var import_buffer = require("buffer");
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"));
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
 function fileHash(filePath, settings = {}) {
   var _a;
   settings = (0, import_deepMerge.default)({

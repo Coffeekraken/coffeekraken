@@ -40,7 +40,7 @@ __export(proxy_exports, {
   default: () => proxy_default
 });
 module.exports = __toCommonJS(proxy_exports);
-var import_uniqid = __toESM(require("../string/uniqid"));
+var import_uniqid = __toESM(require("../string/uniqid"), 1);
 function proxy(array) {
   if (array.__$proxied)
     return array;

@@ -23,7 +23,7 @@ __export(querySelectorUp_exports, {
   default: () => querySelectorUp_default
 });
 module.exports = __toCommonJS(querySelectorUp_exports);
-var import_matches = __toESM(require("./matches"));
+var import_matches = __toESM(require("./matches"), 1);
 function querySelectorUp($elm, selector) {
   const originalElm = $elm;
   $elm = $elm.parentNode;

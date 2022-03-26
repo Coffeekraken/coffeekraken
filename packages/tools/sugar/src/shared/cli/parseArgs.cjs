@@ -23,9 +23,9 @@ __export(parseArgs_exports, {
   default: () => parseArgs
 });
 module.exports = __toCommonJS(parseArgs_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_parse = __toESM(require("../string/parse"));
-var import_unquote = __toESM(require("../string/unquote"));
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_parse = __toESM(require("../string/parse"), 1);
+var import_unquote = __toESM(require("../string/unquote"), 1);
 function parseArgs(string, settings = {}) {
   settings = (0, import_deepMerge.default)({
     throw: true,

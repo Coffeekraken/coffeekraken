@@ -23,10 +23,10 @@ __export(commonMediaFileExtensions_exports, {
   default: () => commonMediaFileExtensions
 });
 module.exports = __toCommonJS(commonMediaFileExtensions_exports);
-var import_commonImageFileExtensions = __toESM(require("./commonImageFileExtensions"));
-var import_commonVideoFileExtensions = __toESM(require("./commonVideoFileExtensions"));
-var import_commonAudioFileExtensions = __toESM(require("./commonAudioFileExtensions"));
-var import_unique = __toESM(require("../array/unique"));
+var import_commonImageFileExtensions = __toESM(require("./commonImageFileExtensions"), 1);
+var import_commonVideoFileExtensions = __toESM(require("./commonVideoFileExtensions"), 1);
+var import_commonAudioFileExtensions = __toESM(require("./commonAudioFileExtensions"), 1);
+var import_unique = __toESM(require("../array/unique"), 1);
 function commonMediaFileExtensions(withDot = false) {
   return (0, import_unique.default)([
     ...(0, import_commonImageFileExtensions.default)(false),

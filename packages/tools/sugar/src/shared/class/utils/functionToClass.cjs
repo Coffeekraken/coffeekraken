@@ -23,7 +23,7 @@ __export(functionToClass_exports, {
   default: () => functionToClass_default
 });
 module.exports = __toCommonJS(functionToClass_exports);
-var import_func_to_classes = __toESM(require("func-to-classes"));
+var import_func_to_classes = __toESM(require("func-to-classes"), 1);
 var functionToClass_default = import_func_to_classes.default;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});

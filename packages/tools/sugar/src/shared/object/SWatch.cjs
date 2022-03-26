@@ -23,9 +23,9 @@ __export(SWatch_exports, {
   default: () => SWatch
 });
 module.exports = __toCommonJS(SWatch_exports);
-var import_deepProxy = __toESM(require("./deepProxy"));
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_deepProxy = __toESM(require("./deepProxy"), 1);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 class SWatch {
   constructor(object, settings = {}) {
     this._watchStack = {};

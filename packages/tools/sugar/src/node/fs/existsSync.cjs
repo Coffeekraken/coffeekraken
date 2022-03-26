@@ -37,7 +37,7 @@ __export(existsSync_exports, {
   default: () => existsSync
 });
 module.exports = __toCommonJS(existsSync_exports);
-var import_fs = __toESM(require("fs"));
+var import_fs = __toESM(require("fs"), 1);
 function existsSync(path, settings) {
   const set = __spreadValues({
     directory: true,

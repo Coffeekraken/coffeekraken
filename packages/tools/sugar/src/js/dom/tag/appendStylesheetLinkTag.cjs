@@ -23,7 +23,7 @@ __export(appendStylesheetLinkTag_exports, {
   default: () => appendStylesheetLinkTag_default
 });
 module.exports = __toCommonJS(appendStylesheetLinkTag_exports);
-var import_linkLoaded = __toESM(require("./linkLoaded"));
+var import_linkLoaded = __toESM(require("./linkLoaded"), 1);
 function appendStylesheetLink(href) {
   const $link = document.createElement("link");
   $link.type = "text/css";

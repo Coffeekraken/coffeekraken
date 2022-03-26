@@ -23,7 +23,7 @@ __export(isPortFree_exports, {
   default: () => isPortFree_default
 });
 module.exports = __toCommonJS(isPortFree_exports);
-var import_tcp_port_used = __toESM(require("tcp-port-used"));
+var import_tcp_port_used = __toESM(require("tcp-port-used"), 1);
 function isPortFree(port) {
   return new Promise((resolve) => {
     import_tcp_port_used.default.check(port, "127.0.0.1").then(function(inUse) {

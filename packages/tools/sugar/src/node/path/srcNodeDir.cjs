@@ -37,7 +37,7 @@ __export(srcNodeDir_exports, {
   default: () => srcNodeDir_default
 });
 module.exports = __toCommonJS(srcNodeDir_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function srcNodeDir_default(settings = {}) {
   settings = __spreadValues({}, settings);
   const srcNodeDir = import_s_sugar_config.default.get("storage.src.nodeDir");

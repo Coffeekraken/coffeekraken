@@ -37,9 +37,9 @@ __export(SApp_exports, {
   default: () => SApp
 });
 module.exports = __toCommonJS(SApp_exports);
-var import_get = __toESM(require("../../shared/object/get"));
-var import_base64 = __toESM(require("../../shared/is/base64"));
-var import_base642 = __toESM(require("../../shared/crypt/base64"));
+var import_get = __toESM(require("../../shared/object/get"), 1);
+var import_base64 = __toESM(require("../../shared/is/base64"), 1);
+var import_base642 = __toESM(require("../../shared/crypt/base64"), 1);
 let __decryptedConfig, __decryptedMeta;
 class SApp {
   constructor(settings = {}) {
@@ -75,22 +75,22 @@ class SApp {
           /* webpackChunkName: "log" */
           /* webpackMode: "lazy" */
           "../log/log"
-        ))),
+        ), 1)),
         Promise.resolve().then(() => __toESM(require(
           /* webpackChunkName: "isTransportRegistered" */
           /* webpackMode: "lazy" */
           "../log/isTransportRegistered"
-        ))),
+        ), 1)),
         Promise.resolve().then(() => __toESM(require(
           /* webpackChunkName: "getRegisteredTransports" */
           /* webpackMode: "lazy" */
           "../log/getRegisteredTransports"
-        ))),
+        ), 1)),
         Promise.resolve().then(() => __toESM(require(
           /* webpackChunkName: "registerTransport" */
           /* webpackMode: "lazy" */
           "../log/registerTransport"
-        )))
+        ), 1))
       ]).then((modules) => {
         const __log = modules[0], __isTransportRegistered = modules[1], __getRegisteredTransports = modules[2], __registerTransport = modules[3];
         const configTransports = this.config("log.frontend.transportsByType")[type] ? this.config("log.frontend.transportsByType")[type].split(" ") : [];

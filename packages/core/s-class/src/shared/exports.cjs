@@ -24,7 +24,7 @@ __export(exports_exports, {
   default: () => exports_default
 });
 module.exports = __toCommonJS(exports_exports);
-var import_SClass = __toESM(require("./SClass"));
+var import_SClass = __toESM(require("./SClass"), 1);
 __reExport(exports_exports, require("./SClass"), module.exports);
 var exports_default = import_SClass.default;
 // Annotate the CommonJS export names for ESM import in node:

@@ -37,13 +37,13 @@ __export(downloadRepository_exports, {
   default: () => downloadRepository
 });
 module.exports = __toCommonJS(downloadRepository_exports);
-var import_fs = __toESM(require("fs"));
-var import_https = __toESM(require("https"));
-var import_systemTmpDir = __toESM(require("../path/systemTmpDir"));
-var import_unzip = __toESM(require("../zip/unzip"));
-var import_fs_extra = __toESM(require("fs-extra"));
-var import_filename = __toESM(require("../fs/filename"));
-var import_folderPath = __toESM(require("../fs/folderPath"));
+var import_fs = __toESM(require("fs"), 1);
+var import_https = __toESM(require("https"), 1);
+var import_systemTmpDir = __toESM(require("../path/systemTmpDir"), 1);
+var import_unzip = __toESM(require("../zip/unzip"), 1);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
+var import_filename = __toESM(require("../fs/filename"), 1);
+var import_folderPath = __toESM(require("../fs/folderPath"), 1);
 function downloadRepository(repository, settings) {
   return new Promise((resolve, reject) => {
     settings = __spreadValues({

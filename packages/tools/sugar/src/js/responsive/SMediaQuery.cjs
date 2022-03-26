@@ -23,7 +23,7 @@ __export(SMediaQuery_exports, {
   default: () => SMediaQuery_default
 });
 module.exports = __toCommonJS(SMediaQuery_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 class SMediaQuery extends import_s_promise.default {
   static getActiveMedia() {
     return this._activeMedia;

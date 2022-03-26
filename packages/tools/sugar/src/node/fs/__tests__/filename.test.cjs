@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_filename = __toESM(require("../filename"));
+var import_filename = __toESM(require("../filename"), 1);
 describe("sugar.node.fs.filename", () => {
   it("Should get the filename from a simple file name", () => {
     expect((0, import_filename.default)("hello/plop.txt")).toBe("plop.txt");

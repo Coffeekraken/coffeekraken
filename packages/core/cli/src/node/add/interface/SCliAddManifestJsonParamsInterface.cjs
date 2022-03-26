@@ -23,7 +23,7 @@ __export(SCliAddManifestJsonParamsInterface_exports, {
   default: () => SCliAddManifestJsonParamsInterface
 });
 module.exports = __toCommonJS(SCliAddManifestJsonParamsInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
 class SCliAddManifestJsonParamsInterface extends import_s_interface.default {
   static get _definition() {
     return {};

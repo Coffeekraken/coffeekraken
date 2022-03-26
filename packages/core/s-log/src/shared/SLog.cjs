@@ -23,7 +23,7 @@ __export(SLog_exports, {
   default: () => SLog
 });
 module.exports = __toCommonJS(SLog_exports);
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"));
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
 const _SLog = class {
   static filter(types) {
     this._filteredTypes = types;

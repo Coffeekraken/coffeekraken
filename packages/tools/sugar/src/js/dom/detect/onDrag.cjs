@@ -40,7 +40,7 @@ __export(onDrag_exports, {
   default: () => onDrag
 });
 module.exports = __toCommonJS(onDrag_exports);
-var import_getPositionFromEvent = __toESM(require("../position/getPositionFromEvent"));
+var import_getPositionFromEvent = __toESM(require("../position/getPositionFromEvent"), 1);
 function onDrag($elm, cb, settings) {
   const finalSettings = __spreadValues({
     maxSpeed: 0.01

@@ -23,7 +23,7 @@ __export(glob_exports, {
   default: () => glob_default
 });
 module.exports = __toCommonJS(glob_exports);
-var import_is_glob = __toESM(require("is-glob"));
+var import_is_glob = __toESM(require("is-glob"), 1);
 var glob_default = (string) => {
   return (0, import_is_glob.default)(string);
 };

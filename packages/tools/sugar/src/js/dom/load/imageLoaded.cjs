@@ -23,7 +23,7 @@ __export(imageLoaded_exports, {
   default: () => imageLoaded_default
 });
 module.exports = __toCommonJS(imageLoaded_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function imageLoaded($img, callback = null) {
   let imgLoadedHandler, imgErrorHandler;
   return new import_s_promise.default(({ resolve, reject }) => {

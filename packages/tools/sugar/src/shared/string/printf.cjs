@@ -23,7 +23,7 @@ __export(printf_exports, {
   default: () => printf_default
 });
 module.exports = __toCommonJS(printf_exports);
-var import_sprintf_js = __toESM(require("sprintf-js"));
+var import_sprintf_js = __toESM(require("sprintf-js"), 1);
 function _printf(...args) {
   return import_sprintf_js.default.sprintf.apply(null, args);
 }

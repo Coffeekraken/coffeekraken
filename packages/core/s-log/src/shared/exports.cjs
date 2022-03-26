@@ -26,9 +26,9 @@ __export(exports_exports, {
   default: () => exports_default
 });
 module.exports = __toCommonJS(exports_exports);
-var import_SLog = __toESM(require("./SLog"));
-var import_ISLog = __toESM(require("./ISLog"));
-var import_ISLogAsk = __toESM(require("./ISLogAsk"));
+var import_SLog = __toESM(require("./SLog"), 1);
+var import_ISLog = __toESM(require("./ISLog"), 1);
+var import_ISLogAsk = __toESM(require("./ISLogAsk"), 1);
 __reExport(exports_exports, require("./ISLog"), module.exports);
 var exports_default = import_SLog.default;
 // Annotate the CommonJS export names for ESM import in node:

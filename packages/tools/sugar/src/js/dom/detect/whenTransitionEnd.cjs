@@ -23,7 +23,7 @@ __export(whenTransitionEnd_exports, {
   default: () => whenTransitionEnd_default
 });
 module.exports = __toCommonJS(whenTransitionEnd_exports);
-var import_getTransitionProperties = __toESM(require("./style/getTransitionProperties"));
+var import_getTransitionProperties = __toESM(require("./style/getTransitionProperties"), 1);
 function whenTransitionEnd(elm, cb = null) {
   return new Promise((resolve, reject) => {
     const transition = (0, import_getTransitionProperties.default)(elm);

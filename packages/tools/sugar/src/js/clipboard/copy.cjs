@@ -23,7 +23,7 @@ __export(copy_exports, {
   default: () => copy
 });
 module.exports = __toCommonJS(copy_exports);
-var import_clipboard_copy = __toESM(require("clipboard-copy"));
+var import_clipboard_copy = __toESM(require("clipboard-copy"), 1);
 function copy(text) {
   return (0, import_clipboard_copy.default)(text);
 }

@@ -37,7 +37,7 @@ __export(srcFontsDir_exports, {
   default: () => srcFontsDir_default
 });
 module.exports = __toCommonJS(srcFontsDir_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function srcFontsDir_default(settings = {}) {
   settings = __spreadValues({}, settings);
   const srcFontsDir = import_s_sugar_config.default.get("storage.src.fontsDir");

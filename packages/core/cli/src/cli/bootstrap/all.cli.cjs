@@ -23,7 +23,7 @@ __export(all_cli_exports, {
   default: () => all_cli_default
 });
 module.exports = __toCommonJS(all_cli_exports);
-var import_monorepo = __toESM(require("./monorepo.cli"));
+var import_monorepo = __toESM(require("./monorepo.cli"), 1);
 var all_cli_default = (stringArgs = "") => {
   (0, import_monorepo.default)(stringArgs);
 };

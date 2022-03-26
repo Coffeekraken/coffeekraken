@@ -23,9 +23,9 @@ __export(querySelectorLive_exports, {
   default: () => querySelectorLive_default
 });
 module.exports = __toCommonJS(querySelectorLive_exports);
-var import_uniqid = __toESM(require("../../../shared/string/uniqid"));
-var import_matches = __toESM(require("./matches"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_uniqid = __toESM(require("../../../shared/string/uniqid"), 1);
+var import_matches = __toESM(require("./matches"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 let _observer;
 const _selectors = {};
 function querySelectorLive(selector, cb = null, settings = {}) {

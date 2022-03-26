@@ -23,12 +23,12 @@ __export(copy_cli_exports, {
   default: () => copy_cli_default
 });
 module.exports = __toCommonJS(copy_cli_exports);
-var import_SCliFsCopyParamsInterface = __toESM(require("../../node/fs/interface/SCliFsCopyParamsInterface"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_copySync = __toESM(require("@coffeekraken/sugar/node/fs/copySync"));
-var import_directory = __toESM(require("@coffeekraken/sugar/node/is/directory"));
-var import_s_log = __toESM(require("@coffeekraken/s-log"));
-var import_s_glob = __toESM(require("@coffeekraken/s-glob"));
+var import_SCliFsCopyParamsInterface = __toESM(require("../../node/fs/interface/SCliFsCopyParamsInterface"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_copySync = __toESM(require("@coffeekraken/sugar/node/fs/copySync"), 1);
+var import_directory = __toESM(require("@coffeekraken/sugar/node/is/directory"), 1);
+var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
+var import_s_glob = __toESM(require("@coffeekraken/s-glob"), 1);
 var copy_cli_default = (stringArgs = "") => {
   return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
     const finalParams = import_SCliFsCopyParamsInterface.default.apply(stringArgs);

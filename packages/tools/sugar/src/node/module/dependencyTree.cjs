@@ -23,15 +23,15 @@ __export(dependencyTree_exports, {
   default: () => dependencyTree
 });
 module.exports = __toCommonJS(dependencyTree_exports);
-var import_s_cache = __toESM(require("@coffeekraken/s-cache"));
-var import_s_file = __toESM(require("@coffeekraken/s-file"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_fs = __toESM(require("fs"));
-var import_path = __toESM(require("path"));
-var import_md5 = __toESM(require("../../shared/crypt/md5"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
-var import_packageRootDir = __toESM(require("../path/packageRootDir"));
-var import_extractImport = __toESM(require("./extractImport"));
+var import_s_cache = __toESM(require("@coffeekraken/s-cache"), 1);
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_md5 = __toESM(require("../../shared/crypt/md5"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_packageRootDir = __toESM(require("../path/packageRootDir"), 1);
+var import_extractImport = __toESM(require("./extractImport"), 1);
 function dependencyTree(filePath, settings) {
   return new import_s_promise.default(async ({ resolve, reject, emit }) => {
     const set = (0, import_deepMerge.default)({

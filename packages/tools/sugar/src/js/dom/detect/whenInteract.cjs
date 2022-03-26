@@ -23,7 +23,7 @@ __export(whenInteract_exports, {
   default: () => whenInteract
 });
 module.exports = __toCommonJS(whenInteract_exports);
-var import_WhenInteractSettingsInterface = __toESM(require("./interface/WhenInteractSettingsInterface"));
+var import_WhenInteractSettingsInterface = __toESM(require("./interface/WhenInteractSettingsInterface"), 1);
 function whenInteract(elm, settings) {
   return new Promise((resolve, reject) => {
     settings = import_WhenInteractSettingsInterface.default.apply(settings != null ? settings : {});

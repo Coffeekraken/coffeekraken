@@ -23,7 +23,7 @@ __export(emptyDirSync_exports, {
   default: () => emptyDirSync_default
 });
 module.exports = __toCommonJS(emptyDirSync_exports);
-var import_fs_extra = __toESM(require("fs-extra"));
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function emptyDirSync(dir) {
   import_fs_extra.default.emptyDirSync(dir);
 }

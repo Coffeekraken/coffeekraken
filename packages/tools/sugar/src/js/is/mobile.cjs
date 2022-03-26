@@ -23,7 +23,7 @@ __export(mobile_exports, {
   default: () => mobile_default
 });
 module.exports = __toCommonJS(mobile_exports);
-var import_mobile_detect = __toESM(require("mobile-detect"));
+var import_mobile_detect = __toESM(require("mobile-detect"), 1);
 function isMobile(ua = navigator.userAgent) {
   const md = new import_mobile_detect.default(ua);
   return md.mobile() !== null;

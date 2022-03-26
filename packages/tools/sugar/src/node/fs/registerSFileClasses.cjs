@@ -23,8 +23,8 @@ __export(registerSFileClasses_exports, {
   default: () => registerSFileClasses_default
 });
 module.exports = __toCommonJS(registerSFileClasses_exports);
-var import_s_file = __toESM(require("@coffeekraken/s-file"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 var registerSFileClasses_default = () => {
   const map = import_s_sugar_config.default.get("fs.sFileClassesMap");
   Object.keys(map).forEach(async (key) => {

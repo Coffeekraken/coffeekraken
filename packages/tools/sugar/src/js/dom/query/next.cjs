@@ -23,7 +23,7 @@ __export(next_exports, {
   default: () => next_default
 });
 module.exports = __toCommonJS(next_exports);
-var import_matches = __toESM(require("./matches"));
+var import_matches = __toESM(require("./matches"), 1);
 function next(elm, selector) {
   elm = elm.nextSibling;
   while (elm) {

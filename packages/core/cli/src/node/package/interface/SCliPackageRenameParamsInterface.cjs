@@ -23,7 +23,7 @@ __export(SCliPackageRenameParamsInterface_exports, {
   default: () => SCliPackageRenameParamsInterface
 });
 module.exports = __toCommonJS(SCliPackageRenameParamsInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
 class SCliPackageRenameParamsInterface extends import_s_interface.default {
   static get _definition() {
     return {

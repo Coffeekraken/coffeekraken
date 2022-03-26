@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_px2em = __toESM(require("../px2em"));
+var import_px2em = __toESM(require("../px2em"), 1);
 describe("sugar.js.unit.px2em", () => {
   document.body.innerHTML = `
     <style>

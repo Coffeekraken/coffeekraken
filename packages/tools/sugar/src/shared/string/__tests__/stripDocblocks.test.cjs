@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_stripDocblocks = __toESM(require("../stripDocblocks"));
+var import_stripDocblocks = __toESM(require("../stripDocblocks"), 1);
 describe("sugar.shared.string.stripDocblocks", () => {
   it("Should remove all docblocks correctly", () => {
     const txt = `

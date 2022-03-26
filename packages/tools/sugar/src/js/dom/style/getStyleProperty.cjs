@@ -23,8 +23,8 @@ __export(getStyleProperty_exports, {
   default: () => getStyleProperty_default
 });
 module.exports = __toCommonJS(getStyleProperty_exports);
-var import_camelize = __toESM(require("../../../shared/string/camelize"));
-var import_autoCast = __toESM(require("../../../shared/string/autoCast"));
+var import_camelize = __toESM(require("../../../shared/string/camelize"), 1);
+var import_autoCast = __toESM(require("../../../shared/string/autoCast"), 1);
 function getStyleProperty(elm, property) {
   setTimeout(() => {
     elm._sComputedStyle = null;

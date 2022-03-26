@@ -13,8 +13,8 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_dependenciesHash = __toESM(require("../dependenciesHash"));
-var import_dirname = __toESM(require("../../fs/dirname"));
+var import_dependenciesHash = __toESM(require("../dependenciesHash"), 1);
+var import_dirname = __toESM(require("../../fs/dirname"), 1);
 describe("sugar.node.dependencies.dependenciesHash", () => {
   it("Should generate the same dependency hash for the same dependencies object", async () => {
     const hash1 = await (0, import_dependenciesHash.default)({

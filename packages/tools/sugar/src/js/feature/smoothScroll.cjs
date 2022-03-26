@@ -23,10 +23,10 @@ __export(smoothScroll_exports, {
   default: () => smoothScroll_default
 });
 module.exports = __toCommonJS(smoothScroll_exports);
-var import_smoothScrollOnAnchorLinks = __toESM(require("./smoothScrollOnAnchorLinks"));
-var import_smoothScrollOnPageLoad = __toESM(require("./smoothScrollOnPageLoad"));
-var import_smoothScrollOnHashChange = __toESM(require("./smoothScrollOnHashChange"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
+var import_smoothScrollOnAnchorLinks = __toESM(require("./smoothScrollOnAnchorLinks"), 1);
+var import_smoothScrollOnPageLoad = __toESM(require("./smoothScrollOnPageLoad"), 1);
+var import_smoothScrollOnHashChange = __toESM(require("./smoothScrollOnHashChange"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
 function smoothScroll(settings = {}) {
   settings = (0, import_deepMerge.default)({
     scroll: {}

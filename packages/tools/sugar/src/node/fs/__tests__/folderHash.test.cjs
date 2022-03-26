@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_folderHash = __toESM(require("../folderHash"));
+var import_folderHash = __toESM(require("../folderHash"), 1);
 describe("sugar.node.fs.folderHash", () => {
   it("Should hash correctly a simple folder", () => {
     const hash = (0, import_folderHash.default)(`${__dirname}/data/hashfolder`);

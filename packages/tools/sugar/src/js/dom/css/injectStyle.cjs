@@ -23,7 +23,7 @@ __export(injectStyle_exports, {
   default: () => injectStyle_default
 });
 module.exports = __toCommonJS(injectStyle_exports);
-var import_uniqid = __toESM(require("../../../shared/string/uniqid"));
+var import_uniqid = __toESM(require("../../../shared/string/uniqid"), 1);
 function injectStyle(style, id = `injected-style-${(0, import_uniqid.default)()}`, node = document.head) {
   if (document.querySelector(`#${id}`))
     return;

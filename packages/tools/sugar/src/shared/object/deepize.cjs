@@ -23,7 +23,7 @@ __export(deepize_exports, {
   default: () => deepize_default
 });
 module.exports = __toCommonJS(deepize_exports);
-var import_set = __toESM(require("./set"));
+var import_set = __toESM(require("./set"), 1);
 function deepize(object) {
   const finalObject = {};
   for (const key in object) {

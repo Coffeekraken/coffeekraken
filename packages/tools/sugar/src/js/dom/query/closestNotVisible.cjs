@@ -23,7 +23,7 @@ __export(closestNotVisible_exports, {
   default: () => closestNotVisible_default
 });
 module.exports = __toCommonJS(closestNotVisible_exports);
-var import_visible = __toESM(require("../is/visible"));
+var import_visible = __toESM(require("../is/visible"), 1);
 function closestNotVisible(elm) {
   const originalElm = elm;
   elm = elm.parentNode;

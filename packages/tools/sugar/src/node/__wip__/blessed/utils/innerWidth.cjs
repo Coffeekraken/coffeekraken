@@ -23,7 +23,7 @@ __export(innerWidth_exports, {
   default: () => innerWidth
 });
 module.exports = __toCommonJS(innerWidth_exports);
-var import_blessed = __toESM(require("blessed"));
+var import_blessed = __toESM(require("blessed"), 1);
 function innerWidth(component) {
   var _a, _b;
   if (!(component instanceof import_blessed.default.box))

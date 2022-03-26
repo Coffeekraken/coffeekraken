@@ -37,7 +37,7 @@ __export(parseSchema_exports, {
   default: () => parseSchema_default
 });
 module.exports = __toCommonJS(parseSchema_exports);
-var import_parse = __toESM(require("../string/parse"));
+var import_parse = __toESM(require("../string/parse"), 1);
 function parseSchema(url, schema) {
   const rawSchemaString = schema;
   const rawUrlString = url;

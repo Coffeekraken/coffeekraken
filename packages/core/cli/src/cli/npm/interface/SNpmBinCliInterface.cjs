@@ -23,7 +23,7 @@ __export(SNpmBinCliInterface_exports, {
   default: () => SNpmBinInterface
 });
 module.exports = __toCommonJS(SNpmBinCliInterface_exports);
-var import_SInterface = __toESM(require("../../../node/class/SInterface"));
+var import_SInterface = __toESM(require("../../../node/class/SInterface"), 1);
 class SNpmBinInterface extends import_SInterface.default {
   static get _definition() {
     return {

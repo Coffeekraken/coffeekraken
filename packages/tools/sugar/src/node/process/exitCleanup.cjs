@@ -23,9 +23,9 @@ __export(exitCleanup_exports, {
   default: () => exitCleanup_default
 });
 module.exports = __toCommonJS(exitCleanup_exports);
-var import_ps_list = __toESM(require("ps-list"));
-var import_fkill = __toESM(require("fkill"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
+var import_ps_list = __toESM(require("ps-list"), 1);
+var import_fkill = __toESM(require("fkill"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
 function exitCleanup(settings = {}) {
   return new Promise(({ resolve, reject }) => {
     settings = (0, import_deepMerge.default)({

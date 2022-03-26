@@ -37,10 +37,10 @@ __export(listNodeModulesPackages_exports, {
   default: () => listNodeModulesPackages
 });
 module.exports = __toCommonJS(listNodeModulesPackages_exports);
-var import_packageRootDir = __toESM(require("../../path/packageRootDir"));
-var import_glob_all = __toESM(require("glob-all"));
-var import_fs = __toESM(require("fs"));
-var import_unique = __toESM(require("../../../shared/array/unique"));
+var import_packageRootDir = __toESM(require("../../path/packageRootDir"), 1);
+var import_glob_all = __toESM(require("glob-all"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_unique = __toESM(require("../../../shared/array/unique"), 1);
 function listNodeModulesPackages(settings) {
   const finalSettings = __spreadValues({
     pathes: [`${(0, import_packageRootDir.default)()}/node_modules`],

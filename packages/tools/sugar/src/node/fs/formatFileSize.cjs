@@ -23,7 +23,7 @@ __export(formatFileSize_exports, {
   default: () => formatFileSize_default
 });
 module.exports = __toCommonJS(formatFileSize_exports);
-var import_filesize = __toESM(require("filesize"));
+var import_filesize = __toESM(require("filesize"), 1);
 function formatFileSize(size, settings = {}) {
   return (0, import_filesize.default)(size, settings);
 }

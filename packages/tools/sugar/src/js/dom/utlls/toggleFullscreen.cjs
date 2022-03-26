@@ -23,8 +23,8 @@ __export(toggleFullscreen_exports, {
   default: () => toggleFullscreen_default
 });
 module.exports = __toCommonJS(toggleFullscreen_exports);
-var import_requestFullscreen = __toESM(require("./requestFullscreen"));
-var import_exitFullscreen = __toESM(require("./exitFullscreen"));
+var import_requestFullscreen = __toESM(require("./requestFullscreen"), 1);
+var import_exitFullscreen = __toESM(require("./exitFullscreen"), 1);
 function toggleFullscreen(elm) {
   const fullscreenElm = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
   if (!fullscreenElm || fullscreenElm !== elm) {

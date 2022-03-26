@@ -23,8 +23,8 @@ __export(styleString2Object_exports, {
   default: () => styleString2Object_default
 });
 module.exports = __toCommonJS(styleString2Object_exports);
-var import_camelize = __toESM(require("../../shared/string/camelize"));
-var import_autoCast = __toESM(require("../../shared/string/autoCast"));
+var import_camelize = __toESM(require("../../shared/string/camelize"), 1);
+var import_autoCast = __toESM(require("../../shared/string/autoCast"), 1);
 function styleString2Object(style) {
   if (!style || style === "")
     return {};

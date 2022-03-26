@@ -23,11 +23,11 @@ __export(env_exports, {
   default: () => env_default
 });
 module.exports = __toCommonJS(env_exports);
-var import_node = __toESM(require("../is/node"));
-var import_get = __toESM(require("../object/get"));
-var import_set = __toESM(require("../object/set"));
-var import_delete = __toESM(require("../object/delete"));
-var import_parse = __toESM(require("../string/parse"));
+var import_node = __toESM(require("../is/node"), 1);
+var import_get = __toESM(require("../object/get"), 1);
+var import_set = __toESM(require("../object/set"), 1);
+var import_delete = __toESM(require("../object/delete"), 1);
+var import_parse = __toESM(require("../string/parse"), 1);
 function env(dotPath, value) {
   if (!(0, import_node.default)()) {
     if (!window.process)

@@ -23,7 +23,7 @@ __export(detectInOutDirection_exports, {
   default: () => detectInOutDirection_default
 });
 module.exports = __toCommonJS(detectInOutDirection_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function detectInOutDirection($elm) {
   let mouseEnterHandler, mouseLeaveHandler;
   const promise = new import_s_promise.default(({ resolve, reject, emit }) => {

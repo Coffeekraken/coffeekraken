@@ -23,7 +23,7 @@ __export(object_exports, {
   default: () => object_default
 });
 module.exports = __toCommonJS(object_exports);
-var import_object_encode = __toESM(require("object-encode"));
+var import_object_encode = __toESM(require("object-encode"), 1);
 var object_default = {
   encrypt: function(object, salt = "coffeekraken.sugar.crypt.object") {
     return import_object_encode.default.encode_object(object, "base64", salt);

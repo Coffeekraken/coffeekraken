@@ -23,7 +23,7 @@ __export(SEs6Import_exports, {
   default: () => SEs6Import
 });
 module.exports = __toCommonJS(SEs6Import_exports);
-var import_parse_es6_imports = __toESM(require("parse-es6-imports"));
+var import_parse_es6_imports = __toESM(require("parse-es6-imports"), 1);
 class SEs6Import {
   constructor(statement) {
     this.raw = null;

@@ -23,9 +23,9 @@ __export(isInPackage_exports, {
   default: () => isInPackage_default
 });
 module.exports = __toCommonJS(isInPackage_exports);
-var import_packageRootDir = __toESM(require("./packageRootDir"));
-var import_fs = __toESM(require("fs"));
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"));
+var import_packageRootDir = __toESM(require("./packageRootDir"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
 function isInPackage(name, from = process.cwd(), highest = false) {
   const packageRootDir = (0, import_packageRootDir.default)(from);
   if (!packageRootDir)

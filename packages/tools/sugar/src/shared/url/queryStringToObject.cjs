@@ -23,7 +23,7 @@ __export(queryStringToObject_exports, {
   default: () => queryStringToObject_default
 });
 module.exports = __toCommonJS(queryStringToObject_exports);
-var import_ltrim = __toESM(require("../string/ltrim"));
+var import_ltrim = __toESM(require("../string/ltrim"), 1);
 function queryStringToObject(str) {
   str = (0, import_ltrim.default)(str, "?");
   str = str.replace(/%20/gm, " ");

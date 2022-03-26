@@ -23,11 +23,11 @@ __export(folderHash_exports, {
   default: () => folderHash
 });
 module.exports = __toCommonJS(folderHash_exports);
-var import_fs = __toESM(require("fs"));
-var import_sha256 = __toESM(require("../../shared/crypt/sha256"));
-var import_directory = __toESM(require("../is/directory"));
-var import_fileHash = __toESM(require("./fileHash"));
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"));
+var import_fs = __toESM(require("fs"), 1);
+var import_sha256 = __toESM(require("../../shared/crypt/sha256"), 1);
+var import_directory = __toESM(require("../is/directory"), 1);
+var import_fileHash = __toESM(require("./fileHash"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
 function folderHash(folderPath, settings = {}) {
   settings = (0, import_deepMerge.default)({
     recursive: true,

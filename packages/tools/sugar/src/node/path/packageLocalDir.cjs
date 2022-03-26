@@ -23,7 +23,7 @@ __export(packageLocalDir_exports, {
   default: () => packageLocalDir_default
 });
 module.exports = __toCommonJS(packageLocalDir_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 const fn = function() {
   const path = import_s_sugar_config.default.get("storage.package.localDir");
   return path;

@@ -23,7 +23,7 @@ __export(urlFromString_exports, {
   default: () => urlFromString
 });
 module.exports = __toCommonJS(urlFromString_exports);
-var import_url = __toESM(require("url"));
+var import_url = __toESM(require("url"), 1);
 function urlFromString(string) {
   return string.split("/").map((l) => {
     return (0, import_url.default)(l.trim());

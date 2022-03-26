@@ -37,13 +37,13 @@ __export(resolveGlob_exports, {
   default: () => resolveGlob
 });
 module.exports = __toCommonJS(resolveGlob_exports);
-var import_s_file = __toESM(require("@coffeekraken/s-file"));
-var import_fs = __toESM(require("fs"));
-var import_glob = __toESM(require("glob"));
-var import_path = __toESM(require("path"));
-var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
-var import_excludeGlobs = __toESM(require("../path/excludeGlobs"));
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_glob = __toESM(require("glob"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_excludeGlobs = __toESM(require("../path/excludeGlobs"), 1);
 function resolveGlob(globs, settings = {}) {
   settings = (0, import_deepMerge.default)({
     cwd: settings.cwd || process.cwd(),

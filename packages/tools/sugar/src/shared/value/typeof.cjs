@@ -23,10 +23,10 @@ __export(typeof_exports, {
   default: () => typeof_default
 });
 module.exports = __toCommonJS(typeof_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_integer = __toESM(require("../is/integer"));
-var import_class = __toESM(require("../is/class"));
-var import_upperFirst = __toESM(require("../string/upperFirst"));
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_integer = __toESM(require("../is/integer"), 1);
+var import_class = __toESM(require("../is/class"), 1);
+var import_upperFirst = __toESM(require("../string/upperFirst"), 1);
 function typeOf(value, settings = {}) {
   settings = (0, import_deepMerge.default)({
     of: false,

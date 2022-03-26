@@ -37,8 +37,8 @@ __export(get_exports, {
   default: () => get_default
 });
 module.exports = __toCommonJS(get_exports);
-var import_unquote = __toESM(require("../string/unquote"));
-var import_unique = __toESM(require("@coffeekraken/sugar/shared/array/unique"));
+var import_unquote = __toESM(require("../string/unquote"), 1);
+var import_unique = __toESM(require("@coffeekraken/sugar/shared/array/unique"), 1);
 function get(obj, path, settings = {}) {
   settings = __spreadValues({}, settings);
   if (obj[path] !== void 0)

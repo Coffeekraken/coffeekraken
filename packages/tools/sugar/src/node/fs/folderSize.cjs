@@ -23,8 +23,8 @@ __export(folderSize_exports, {
   default: () => folderSize_default
 });
 module.exports = __toCommonJS(folderSize_exports);
-var import_get_folder_size = __toESM(require("get-folder-size"));
-var import_filesize = __toESM(require("filesize"));
+var import_get_folder_size = __toESM(require("get-folder-size"), 1);
+var import_filesize = __toESM(require("filesize"), 1);
 function folderSize(folderPath, format = {}) {
   return new Promise((resolve, reject) => {
     (0, import_get_folder_size.default)(folderPath, (error, size) => {

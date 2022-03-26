@@ -23,7 +23,7 @@ __export(ensureDir_exports, {
   default: () => ensureDir_default
 });
 module.exports = __toCommonJS(ensureDir_exports);
-var import_fs_extra = __toESM(require("fs-extra"));
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function ensureDir(dir) {
   return import_fs_extra.default.ensureDir(dir);
 }

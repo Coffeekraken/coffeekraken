@@ -37,7 +37,7 @@ __export(distViewsDir_exports, {
   default: () => distViewsDir_default
 });
 module.exports = __toCommonJS(distViewsDir_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function distViewsDir_default(settings = {}) {
   settings = __spreadValues({}, settings);
   const distViewsDir = import_s_sugar_config.default.get("storage.dist.viewsDir");

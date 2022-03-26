@@ -23,8 +23,8 @@ __export(getTransformProperties_exports, {
   default: () => getTransformProperties_default
 });
 module.exports = __toCommonJS(getTransformProperties_exports);
-var import_getTranslateProperties = __toESM(require("./getTranslateProperties"));
-var import_getRotateProperties = __toESM(require("./getRotateProperties"));
+var import_getTranslateProperties = __toESM(require("./getTranslateProperties"), 1);
+var import_getRotateProperties = __toESM(require("./getRotateProperties"), 1);
 function getTransformProperties($elm) {
   const rotates = (0, import_getRotateProperties.default)($elm), translates = (0, import_getTranslateProperties.default)($elm);
   return {

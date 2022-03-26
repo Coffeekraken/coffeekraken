@@ -23,8 +23,8 @@ __export(isPath_exports, {
   default: () => isPath_default
 });
 module.exports = __toCommonJS(isPath_exports);
-var import_is_valid_path = __toESM(require("is-valid-path"));
-var import_fs = __toESM(require("fs"));
+var import_is_valid_path = __toESM(require("is-valid-path"), 1);
+var import_fs = __toESM(require("fs"), 1);
 function isPath(path, checkExistence = false) {
   if (typeof path !== "string")
     return false;

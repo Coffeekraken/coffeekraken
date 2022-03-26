@@ -23,5 +23,5 @@ __export(SEvent_exports, {
   default: () => SEvent_default
 });
 module.exports = __toCommonJS(SEvent_exports);
-var import_custom_event = __toESM(require("custom-event"));
+var import_custom_event = __toESM(require("custom-event"), 1);
 var SEvent_default = import_custom_event.default;

@@ -23,8 +23,8 @@ __export(closestScrollable_exports, {
   default: () => closestScrollable
 });
 module.exports = __toCommonJS(closestScrollable_exports);
-var import_up = __toESM(require("../traverse/up"));
-var import_scrollable = __toESM(require("../is/scrollable"));
+var import_up = __toESM(require("../traverse/up"), 1);
+var import_scrollable = __toESM(require("../is/scrollable"), 1);
 function closestScrollable($elm, selector) {
   return (0, import_up.default)($elm, ($e) => (0, import_scrollable.default)($e));
 }

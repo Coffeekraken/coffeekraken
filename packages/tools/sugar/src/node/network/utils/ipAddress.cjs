@@ -23,7 +23,7 @@ __export(ipAddress_exports, {
   default: () => ipAddress_default
 });
 module.exports = __toCommonJS(ipAddress_exports);
-var import_ip = __toESM(require("ip"));
+var import_ip = __toESM(require("ip"), 1);
 function ipAddress() {
   return import_ip.default.address();
 }

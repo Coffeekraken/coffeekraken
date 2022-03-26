@@ -23,7 +23,7 @@ __export(SOutlineSvgFilter_exports, {
   default: () => SOutlineSvgFilter_default
 });
 module.exports = __toCommonJS(SOutlineSvgFilter_exports);
-var import_SSvgFilter = __toESM(require("./SSvgFilter"));
+var import_SSvgFilter = __toESM(require("./SSvgFilter"), 1);
 class SOutlineSvgFilter extends import_SSvgFilter.default {
   constructor(radius = 8) {
     super(`

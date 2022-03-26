@@ -23,7 +23,7 @@ __export(unescapeHtml_exports, {
   default: () => unescapeHtml
 });
 module.exports = __toCommonJS(unescapeHtml_exports);
-var import_unescape = __toESM(require("unescape"));
+var import_unescape = __toESM(require("unescape"), 1);
 function unescapeHtml(html) {
   return (0, import_unescape.default)(html);
 }

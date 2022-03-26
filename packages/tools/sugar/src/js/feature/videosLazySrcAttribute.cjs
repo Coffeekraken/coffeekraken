@@ -37,8 +37,8 @@ __export(videosLazySrcAttribute_exports, {
   default: () => videosLazySrcAttribute_default
 });
 module.exports = __toCommonJS(videosLazySrcAttribute_exports);
-var import_whenInViewport = __toESM(require("../dom/whenInViewport"));
-var import_querySelectorLive = __toESM(require("../dom/querySelectorLive"));
+var import_whenInViewport = __toESM(require("../dom/whenInViewport"), 1);
+var import_querySelectorLive = __toESM(require("../dom/querySelectorLive"), 1);
 function videoLazySrcAttribute(settings = {}) {
   settings = __spreadValues({
     offset: 50

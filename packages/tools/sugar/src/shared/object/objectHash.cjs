@@ -37,7 +37,7 @@ __export(objectHash_exports, {
   default: () => objectHash
 });
 module.exports = __toCommonJS(objectHash_exports);
-var import_object_hash = __toESM(require("object-hash"));
+var import_object_hash = __toESM(require("object-hash"), 1);
 function objectHash(obj, settings = {}) {
   settings = __spreadValues({}, settings);
   return (0, import_object_hash.default)(obj);

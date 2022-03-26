@@ -37,8 +37,8 @@ __export(inputAdditionalAttributes_exports, {
   default: () => inputAdditionalAttributes_default
 });
 module.exports = __toCommonJS(inputAdditionalAttributes_exports);
-var import_fastdom = __toESM(require("fastdom"));
-var import_querySelectorLive = __toESM(require("../dom/query/querySelectorLive"));
+var import_fastdom = __toESM(require("fastdom"), 1);
+var import_querySelectorLive = __toESM(require("../dom/query/querySelectorLive"), 1);
 function inputAdditionalAttributes(settings = {}) {
   settings = __spreadValues({
     empty: true,

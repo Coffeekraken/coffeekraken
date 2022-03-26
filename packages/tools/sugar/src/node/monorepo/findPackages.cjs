@@ -23,8 +23,8 @@ __export(findPackages_exports, {
   default: () => findPackages
 });
 module.exports = __toCommonJS(findPackages_exports);
-var import_glob = __toESM(require("glob"));
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"));
+var import_glob = __toESM(require("glob"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
 async function findPackages(rootDir = process.cwd()) {
   const packagesObj = {};
   const packagesPaths = import_glob.default.sync("**/package.json", {

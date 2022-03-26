@@ -23,9 +23,9 @@ __export(slide_exports, {
   default: () => slide_default
 });
 module.exports = __toCommonJS(slide_exports);
-var import_uniqid = __toESM(require("../../../shared/string/uniqid"));
-var import_parseArgs = __toESM(require("../../../shared/string/parseArgs"));
-var import_querySelectorLive = __toESM(require("../../dom/querySelectorLive"));
+var import_uniqid = __toESM(require("../../../shared/string/uniqid"), 1);
+var import_parseArgs = __toESM(require("../../../shared/string/parseArgs"), 1);
+var import_querySelectorLive = __toESM(require("../../dom/querySelectorLive"), 1);
 var slide_default = (() => {
   (0, import_querySelectorLive.default)("[slide-in]", ($item) => {
     const uniqClass = `slide-in-${(0, import_uniqid.default)()}`;

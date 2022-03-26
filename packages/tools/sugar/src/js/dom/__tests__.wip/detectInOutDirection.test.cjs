@@ -13,8 +13,8 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_detectInOutDirection = __toESM(require("../detection/detectInOutDirection"));
-var import_dispatchEvent = __toESM(require("../event/dispatchEvent"));
+var import_detectInOutDirection = __toESM(require("../detection/detectInOutDirection"), 1);
+var import_dispatchEvent = __toESM(require("../event/dispatchEvent"), 1);
 describe("sugar.js.dom.detectInOutDirection", () => {
   document.body.innerHTML = `
       <div id="testing">

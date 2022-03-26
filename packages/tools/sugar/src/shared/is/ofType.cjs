@@ -37,7 +37,7 @@ __export(ofType_exports, {
   default: () => ofType_default
 });
 module.exports = __toCommonJS(ofType_exports);
-var import_s_type = __toESM(require("@coffeekraken/s-type"));
+var import_s_type = __toESM(require("@coffeekraken/s-type"), 1);
 function ofType(value, typeString, settings = {}) {
   settings = __spreadValues({
     verbose: false

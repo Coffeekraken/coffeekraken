@@ -37,7 +37,7 @@ __export(deepFilter_exports, {
   default: () => deepFilter_default
 });
 module.exports = __toCommonJS(deepFilter_exports);
-var import_plainObject = __toESM(require("../is/plainObject"));
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
 function processObj(object, filter, settings) {
   const newObj = {}, keys = Object.keys(object);
   for (let i = 0; i < keys.length; i++) {

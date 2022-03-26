@@ -37,9 +37,9 @@ __export(querySelector_exports, {
   default: () => querySelector_default
 });
 module.exports = __toCommonJS(querySelector_exports);
-var import_isVisible = __toESM(require("./isVisible"));
-var import_isInViewport = __toESM(require("./isInViewport"));
-var import_closestNotVisible = __toESM(require("./closestNotVisible"));
+var import_isVisible = __toESM(require("./isVisible"), 1);
+var import_isInViewport = __toESM(require("./isInViewport"), 1);
+var import_closestNotVisible = __toESM(require("./closestNotVisible"), 1);
 function querySelector(selector, settings = {}) {
   settings = __spreadValues({
     visible: null,

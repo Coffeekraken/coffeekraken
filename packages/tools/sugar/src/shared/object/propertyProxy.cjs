@@ -23,7 +23,7 @@ __export(propertyProxy_exports, {
   default: () => propertyProxy_default
 });
 module.exports = __toCommonJS(propertyProxy_exports);
-var import_get = __toESM(require("lodash/get"));
+var import_get = __toESM(require("lodash/get"), 1);
 function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
   const objPath = property.split(".").slice(0, -1).join(".");
   if (objPath) {

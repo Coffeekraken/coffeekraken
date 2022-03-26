@@ -23,7 +23,7 @@ __export(readJson_exports, {
   default: () => readJson
 });
 module.exports = __toCommonJS(readJson_exports);
-var import_fs = __toESM(require("fs"));
+var import_fs = __toESM(require("fs"), 1);
 function readJson(path) {
   if (!import_fs.default.existsSync(path)) {
     throw new Error(`<red>[readJson]</red> Sorry but the passed file path "<cyan>${path}</cyan>" does not exists...`);

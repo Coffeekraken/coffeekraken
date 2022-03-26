@@ -37,7 +37,7 @@ __export(extractCssClassesNames_exports, {
   default: () => extractCssClassesNames
 });
 module.exports = __toCommonJS(extractCssClassesNames_exports);
-var import_expandPleasantCssClassname = __toESM(require("./expandPleasantCssClassname"));
+var import_expandPleasantCssClassname = __toESM(require("./expandPleasantCssClassname"), 1);
 function extractCssClassesNames(html, settings) {
   const finalSettings = __spreadValues({
     expandPleasantCssClassname: true,

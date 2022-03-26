@@ -23,8 +23,8 @@ __export(getHtmlClassFromTagName_exports, {
   default: () => getHtmlClassFromTagName_default
 });
 module.exports = __toCommonJS(getHtmlClassFromTagName_exports);
-var import_upperFirst = __toESM(require("../../shared/string/upperFirst"));
-var import_htmlTagToHtmlClassMap = __toESM(require("./htmlTagToHtmlClassMap"));
+var import_upperFirst = __toESM(require("../../shared/string/upperFirst"), 1);
+var import_htmlTagToHtmlClassMap = __toESM(require("./htmlTagToHtmlClassMap"), 1);
 function getHtmlClassFromTagName(tagName) {
   if (!tagName)
     return HTMLElement;

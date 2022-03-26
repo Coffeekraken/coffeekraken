@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_dirname = __toESM(require("../dirname"));
+var import_dirname = __toESM(require("../dirname"), 1);
 describe("sugar.node.fs.dirname", () => {
   it("Should get the dirname correctly", () => {
     expect((0, import_dirname.default)()).toBe(__dirname);

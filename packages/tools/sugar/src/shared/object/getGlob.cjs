@@ -37,9 +37,9 @@ __export(getGlob_exports, {
   default: () => getGlob
 });
 module.exports = __toCommonJS(getGlob_exports);
-var import_minimatch = __toESM(require("minimatch"));
-var import_flatten = __toESM(require("./flatten"));
-var import_deepize = __toESM(require("./deepize"));
+var import_minimatch = __toESM(require("minimatch"), 1);
+var import_flatten = __toESM(require("./flatten"), 1);
+var import_deepize = __toESM(require("./deepize"), 1);
 function getGlob(obj, glob, settings = {}) {
   settings = __spreadValues({
     deepize: true

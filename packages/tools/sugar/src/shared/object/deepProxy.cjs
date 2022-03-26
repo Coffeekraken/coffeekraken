@@ -37,10 +37,10 @@ __export(deepProxy_exports, {
   default: () => deepProxy_default
 });
 module.exports = __toCommonJS(deepProxy_exports);
-var import_proxy = __toESM(require("../array/proxy"));
-var import_deepMap = __toESM(require("../object/deepMap"));
-var import_clone = __toESM(require("../object/clone"));
-var import_deepMerge = __toESM(require("../object/deepMerge"));
+var import_proxy = __toESM(require("../array/proxy"), 1);
+var import_deepMap = __toESM(require("../object/deepMap"), 1);
+var import_clone = __toESM(require("../object/clone"), 1);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
 function deepProxy(object, handlerFn, settings = {}) {
   const preproxy = /* @__PURE__ */ new WeakMap();
   let isRevoked = false;

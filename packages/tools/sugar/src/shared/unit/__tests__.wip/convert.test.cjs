@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_convert = __toESM(require("../convert"));
+var import_convert = __toESM(require("../convert"), 1);
 describe("sugar.js.unit.convert", () => {
   document.body.innerHTML = `
     <style>

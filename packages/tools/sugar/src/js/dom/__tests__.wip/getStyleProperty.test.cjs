@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_getStyleProperty = __toESM(require("../style/getStyleProperty"));
+var import_getStyleProperty = __toESM(require("../style/getStyleProperty"), 1);
 describe("sugar.js.dom.getStyleProperty", () => {
   document.body.innerHTML = `
       <style>

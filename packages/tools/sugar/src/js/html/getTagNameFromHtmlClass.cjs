@@ -23,7 +23,7 @@ __export(getTagNameFromHtmlClass_exports, {
   default: () => getTagNameFromHtmlClass_default
 });
 module.exports = __toCommonJS(getTagNameFromHtmlClass_exports);
-var import_htmlTagToHtmlClassMap = __toESM(require("./htmlTagToHtmlClassMap"));
+var import_htmlTagToHtmlClassMap = __toESM(require("./htmlTagToHtmlClassMap"), 1);
 function getHtmlhtmlClassFromHtmlClass(htmlClass) {
   if (!htmlClass)
     return false;

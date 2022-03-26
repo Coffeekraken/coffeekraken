@@ -23,7 +23,7 @@ __export(copySync_exports, {
   default: () => copySync_default
 });
 module.exports = __toCommonJS(copySync_exports);
-var import_fs_extra = __toESM(require("fs-extra"));
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function copySync(src, dest) {
   import_fs_extra.default.copySync(src, dest);
 }

@@ -23,8 +23,8 @@ __export(sendForm_exports, {
   default: () => sendForm_default
 });
 module.exports = __toCommonJS(sendForm_exports);
-var import_SAjax = __toESM(require("../http/SAjax"));
-var import_form_serialize = __toESM(require("form-serialize"));
+var import_SAjax = __toESM(require("../http/SAjax"), 1);
+var import_form_serialize = __toESM(require("form-serialize"), 1);
 function sendForm(form) {
   if (!form.tagName || form.tagName.toLowerCase() !== "form") {
     console.error("passed arguments", form);

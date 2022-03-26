@@ -23,8 +23,8 @@ __export(imagesLoaded_exports, {
   default: () => imagesLoaded_default
 });
 module.exports = __toCommonJS(imagesLoaded_exports);
-var import_imageLoaded = __toESM(require("./imageLoaded"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_imageLoaded = __toESM(require("./imageLoaded"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function imagesLoaded($imgs, cb = null) {
   return new import_s_promise.default(({ resolve, reject, emit }) => {
     const promises = [], loadedImages = [];

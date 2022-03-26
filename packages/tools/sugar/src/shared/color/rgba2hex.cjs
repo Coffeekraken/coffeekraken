@@ -23,7 +23,7 @@ __export(rgba2hex_exports, {
   default: () => rgba2hex_default
 });
 module.exports = __toCommonJS(rgba2hex_exports);
-var __convertColors = __toESM(require("colors-convert"));
+var __convertColors = __toESM(require("colors-convert"), 1);
 function rgba2hex(r, g, b, a = 1) {
   if (typeof r === "object") {
     g = r.g;

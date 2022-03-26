@@ -23,8 +23,8 @@ __export(SSugarCliParamsInterface_exports, {
   default: () => SSugarCliParamsInterface
 });
 module.exports = __toCommonJS(SSugarCliParamsInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_log = __toESM(require("@coffeekraken/s-log"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
 class SSugarCliParamsInterface extends import_s_interface.default {
   static get _definition() {
     return {

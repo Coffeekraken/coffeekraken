@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_formatDuration = __toESM(require("../formatDuration"));
+var import_formatDuration = __toESM(require("../formatDuration"), 1);
 describe("sugar.shared.time.formatDuration", () => {
   it("Should format an estimation under 1s correctly", () => {
     const res = (0, import_formatDuration.default)(600);

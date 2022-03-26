@@ -37,11 +37,11 @@ __export(install_exports, {
   default: () => install
 });
 module.exports = __toCommonJS(install_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_commandExists = __toESM(require("../command/commandExists"));
-var import_spawn = __toESM(require("../process/spawn"));
-var import_argsToString = __toESM(require("../../shared/cli/argsToString"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_commandExists = __toESM(require("../command/commandExists"), 1);
+var import_spawn = __toESM(require("../process/spawn"), 1);
+var import_argsToString = __toESM(require("../../shared/cli/argsToString"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function install(packageNames = "", settings) {
   return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
     settings = __spreadValues({

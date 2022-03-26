@@ -23,8 +23,8 @@ __export(getTransitionProperties_exports, {
   default: () => getTransitionProperties_default
 });
 module.exports = __toCommonJS(getTransitionProperties_exports);
-var import_getStyleProperty = __toESM(require("./getStyleProperty"));
-var import_convert = __toESM(require("../../../shared/time/convert"));
+var import_getStyleProperty = __toESM(require("./getStyleProperty"), 1);
+var import_convert = __toESM(require("../../../shared/time/convert"), 1);
 function splitIfNeeded(what, separator) {
   if (what.indexOf(separator) !== -1) {
     return what.split(separator).map((item) => item.trim());

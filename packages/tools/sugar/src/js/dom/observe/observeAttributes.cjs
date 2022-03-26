@@ -37,7 +37,7 @@ __export(observeAttributes_exports, {
   default: () => observeAttributes_default
 });
 module.exports = __toCommonJS(observeAttributes_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function observeAttributes(target, settings = {}) {
   return new import_s_promise.default(({ emit }) => {
     const mutationObserver2 = new MutationObserver((mutations) => {

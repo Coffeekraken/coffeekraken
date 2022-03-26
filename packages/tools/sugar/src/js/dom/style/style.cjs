@@ -37,8 +37,8 @@ __export(style_exports, {
   default: () => style_default
 });
 module.exports = __toCommonJS(style_exports);
-var import_styleString2Object = __toESM(require("../styleString2Object"));
-var import_styleObject2String = __toESM(require("../styleObject2String"));
+var import_styleString2Object = __toESM(require("../styleString2Object"), 1);
+var import_styleObject2String = __toESM(require("../styleObject2String"), 1);
 function style(elm, styleObj) {
   const styleAttr = elm.getAttribute("style");
   if (styleAttr) {

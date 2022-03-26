@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_extractGlob = __toESM(require("../extractGlob"));
+var import_extractGlob = __toESM(require("../extractGlob"), 1);
 describe("sugar.js.glob.extractGlob", () => {
   it("Should extract none glob part correctly", () => {
     expect((0, import_extractGlob.default)("/Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/src/js/**/*.js")).toBe("**/*.js");

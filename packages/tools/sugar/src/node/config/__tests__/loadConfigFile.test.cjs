@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_loadConfigFile = __toESM(require("../loadConfigFile"));
+var import_loadConfigFile = __toESM(require("../loadConfigFile"), 1);
 describe("sugar.node.config.loadConfigFile", () => {
   it("Should load a simple js file correctly", async () => {
     const config = await (0, import_loadConfigFile.default)("config.js", {

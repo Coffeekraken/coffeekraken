@@ -23,7 +23,7 @@ __export(imagesLoadedAttribute_exports, {
   default: () => imagesLoadedAttribute_default
 });
 module.exports = __toCommonJS(imagesLoadedAttribute_exports);
-var import_imageLoaded = __toESM(require("../dom/load/imageLoaded"));
+var import_imageLoaded = __toESM(require("../dom/load/imageLoaded"), 1);
 function imagesLoadedAttribute() {
   document.addEventListener("load", (e) => {
     if (!e.target.tagName)

@@ -23,20 +23,20 @@ __export(commonFileExtensions_exports, {
   default: () => commonFileExtensions
 });
 module.exports = __toCommonJS(commonFileExtensions_exports);
-var import_commonAudioFileExtensions = __toESM(require("./commonAudioFileExtensions"));
-var import_commonCompressedFileExtensions = __toESM(require("./commonCompressedFileExtensions"));
-var import_commonDataFileExtensions = __toESM(require("./commonDataFileExtensions"));
-var import_commonDiscFileExtensions = __toESM(require("./commonDiscFileExtensions"));
-var import_commonEmailFileExtensions = __toESM(require("./commonEmailFileExtensions"));
-var import_commonExecutableFileExtensions = __toESM(require("./commonExecutableFileExtensions"));
-var import_commonFontFileExtensions = __toESM(require("./commonFontFileExtensions"));
-var import_commonImageFileExtensions = __toESM(require("./commonImageFileExtensions"));
-var import_commonMediaFileExtensions = __toESM(require("./commonMediaFileExtensions"));
-var import_commonProgrammingFileExtensions = __toESM(require("./commonProgrammingFileExtensions"));
-var import_commonTextFileExtensions = __toESM(require("./commonTextFileExtensions"));
-var import_commonVideoFileExtensions = __toESM(require("./commonVideoFileExtensions"));
-var import_commonWebFileExtensions = __toESM(require("./commonWebFileExtensions"));
-var import_unique = __toESM(require("../array/unique"));
+var import_commonAudioFileExtensions = __toESM(require("./commonAudioFileExtensions"), 1);
+var import_commonCompressedFileExtensions = __toESM(require("./commonCompressedFileExtensions"), 1);
+var import_commonDataFileExtensions = __toESM(require("./commonDataFileExtensions"), 1);
+var import_commonDiscFileExtensions = __toESM(require("./commonDiscFileExtensions"), 1);
+var import_commonEmailFileExtensions = __toESM(require("./commonEmailFileExtensions"), 1);
+var import_commonExecutableFileExtensions = __toESM(require("./commonExecutableFileExtensions"), 1);
+var import_commonFontFileExtensions = __toESM(require("./commonFontFileExtensions"), 1);
+var import_commonImageFileExtensions = __toESM(require("./commonImageFileExtensions"), 1);
+var import_commonMediaFileExtensions = __toESM(require("./commonMediaFileExtensions"), 1);
+var import_commonProgrammingFileExtensions = __toESM(require("./commonProgrammingFileExtensions"), 1);
+var import_commonTextFileExtensions = __toESM(require("./commonTextFileExtensions"), 1);
+var import_commonVideoFileExtensions = __toESM(require("./commonVideoFileExtensions"), 1);
+var import_commonWebFileExtensions = __toESM(require("./commonWebFileExtensions"), 1);
+var import_unique = __toESM(require("../array/unique"), 1);
 function commonFileExtensions(types = ["audio", "compressed", "data", "disc", "email", "executable", "font", "image", "media", "programming", "text", "video", "web"], withDot = false) {
   return (0, import_unique.default)([
     ...types.includes("audio") ? (0, import_commonAudioFileExtensions.default)(false) : [],

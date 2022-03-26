@@ -37,9 +37,9 @@ __export(deepMap_exports, {
   default: () => deepMap_default
 });
 module.exports = __toCommonJS(deepMap_exports);
-var import_plainObject = __toESM(require("../is/plainObject"));
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_classInstance = __toESM(require("../is/classInstance"));
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_classInstance = __toESM(require("../is/classInstance"), 1);
 function deepMap(objectOrArray, processor, settings = {}, _path = []) {
   settings = (0, import_deepMerge.default)({
     classInstances: false,

@@ -23,8 +23,8 @@ __export(ensureExists_exports, {
   default: () => ensureExists_default
 });
 module.exports = __toCommonJS(ensureExists_exports);
-var import_get = __toESM(require("./get"));
-var import_set = __toESM(require("./set"));
+var import_get = __toESM(require("./get"), 1);
+var import_set = __toESM(require("./set"), 1);
 var ensureExists_default = (obj, path, value = {}) => {
   const v = (0, import_get.default)(obj, path);
   if (v === void 0) {

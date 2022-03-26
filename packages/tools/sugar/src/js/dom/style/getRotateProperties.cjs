@@ -23,7 +23,7 @@ __export(getRotateProperties_exports, {
   default: () => getRotateProperties_default
 });
 module.exports = __toCommonJS(getRotateProperties_exports);
-var rematrix = __toESM(require("rematrix"));
+var rematrix = __toESM(require("rematrix"), 1);
 function getRotateProperties($elm) {
   if (!window.getComputedStyle)
     return;

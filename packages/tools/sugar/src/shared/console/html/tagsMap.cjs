@@ -23,7 +23,7 @@ __export(tagsMap_exports, {
   default: () => tagsMap_default
 });
 module.exports = __toCommonJS(tagsMap_exports);
-var import_chalk = __toESM(require("chalk"));
+var import_chalk = __toESM(require("chalk"), 1);
 import_chalk.default.level = 3;
 const tagsMap = {
   black: (tag, content) => import_chalk.default.black(content),

@@ -23,10 +23,10 @@ __export(convert_exports, {
   default: () => convert_default
 });
 module.exports = __toCommonJS(convert_exports);
-var import_parse = __toESM(require("./parse"));
-var import_hsla2rgba = __toESM(require("./hsla2rgba"));
-var import_rgba2hsla = __toESM(require("./rgba2hsla"));
-var import_rgba2hex = __toESM(require("./rgba2hex"));
+var import_parse = __toESM(require("./parse"), 1);
+var import_hsla2rgba = __toESM(require("./hsla2rgba"), 1);
+var import_rgba2hsla = __toESM(require("./rgba2hsla"), 1);
+var import_rgba2hex = __toESM(require("./rgba2hex"), 1);
 function convert(input, format = "rgba") {
   let rgbaObj = {};
   if (typeof input === "string") {

@@ -40,14 +40,14 @@ __export(spawn_exports, {
   default: () => spawn
 });
 module.exports = __toCommonJS(spawn_exports);
-var import_cli = __toESM(require("@coffeekraken/cli"));
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"));
-var import_s_event_emitter = __toESM(require("@coffeekraken/s-event-emitter"));
-var import_s_log = __toESM(require("@coffeekraken/s-log"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_cli = __toESM(require("@coffeekraken/cli"), 1);
+var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
+var import_s_event_emitter = __toESM(require("@coffeekraken/s-event-emitter"), 1);
+var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 var import_child_process = require("child_process");
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
-var import_onProcessExit = __toESM(require("./onProcessExit"));
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_onProcessExit = __toESM(require("./onProcessExit"), 1);
 function spawn(command, args = [], settings) {
   let childProcess;
   const promise = new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {

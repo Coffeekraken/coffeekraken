@@ -23,9 +23,9 @@ __export(interactiveKill_cli_exports, {
   default: () => interactiveKill
 });
 module.exports = __toCommonJS(interactiveKill_cli_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_spawn = __toESM(require("@coffeekraken/sugar/node/process/spawn"));
-var import_cli = __toESM(require("@coffeekraken/cli"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_spawn = __toESM(require("@coffeekraken/sugar/node/process/spawn"), 1);
+var import_cli = __toESM(require("@coffeekraken/cli"), 1);
 function interactiveKill(params) {
   return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
     let res;

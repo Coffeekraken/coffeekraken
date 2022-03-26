@@ -23,8 +23,8 @@ __export(require_exports, {
   default: () => require2
 });
 module.exports = __toCommonJS(require_exports);
-var import_callsites = __toESM(require("callsites"));
-var import_esm = __toESM(require("esm"));
+var import_callsites = __toESM(require("callsites"), 1);
+var import_esm = __toESM(require("esm"), 1);
 var import_module = require("module");
 function require2(pkg) {
   var _a;

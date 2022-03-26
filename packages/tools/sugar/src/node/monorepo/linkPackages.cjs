@@ -37,13 +37,13 @@ __export(linkPackages_exports, {
   default: () => linkPackages
 });
 module.exports = __toCommonJS(linkPackages_exports);
-var import_path = __toESM(require("path"));
-var import_findPackages = __toESM(require("./findPackages"));
-var import_child_process = __toESM(require("child_process"));
-var import_fs = __toESM(require("fs"));
-var import_chalk = __toESM(require("chalk"));
-var import_packageRootDir = __toESM(require("../path/packageRootDir"));
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"));
+var import_path = __toESM(require("path"), 1);
+var import_findPackages = __toESM(require("./findPackages"), 1);
+var import_child_process = __toESM(require("child_process"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_chalk = __toESM(require("chalk"), 1);
+var import_packageRootDir = __toESM(require("../path/packageRootDir"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
 function linkPackages(params = {}, settings = {}) {
   settings = __spreadValues({
     rootDir: process.cwd()

@@ -37,10 +37,10 @@ __export(loadConfigFile_exports, {
   default: () => loadConfigFile
 });
 module.exports = __toCommonJS(loadConfigFile_exports);
-var import_packageRoot = __toESM(require("../path/packageRoot"));
-var import_path = __toESM(require("path"));
-var import_yaml = __toESM(require("yaml"));
-var import_fs = __toESM(require("fs"));
+var import_packageRoot = __toESM(require("../path/packageRoot"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_yaml = __toESM(require("yaml"), 1);
+var import_fs = __toESM(require("fs"), 1);
 async function loadConfigFile(filePath, settings) {
   const finalSettings = __spreadValues({
     rootDir: (0, import_packageRoot.default)(),

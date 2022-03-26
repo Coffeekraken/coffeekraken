@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_replacePackageJsonTokens = __toESM(require("../replacePackageJsonTokens"));
+var import_replacePackageJsonTokens = __toESM(require("../replacePackageJsonTokens"), 1);
 describe("@coffeekraken.sugar.node.meta.replacePackageJsonTokens", () => {
   it("Should replace tokens correctly", () => {
     const res = (0, import_replacePackageJsonTokens.default)(`

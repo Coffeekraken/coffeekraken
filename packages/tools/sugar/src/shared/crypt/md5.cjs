@@ -23,9 +23,9 @@ __export(md5_exports, {
   default: () => md5_default
 });
 module.exports = __toCommonJS(md5_exports);
-var import_md5 = __toESM(require("crypto-js/md5"));
-var import_toString = __toESM(require("../string/toString"));
-var import_parse = __toESM(require("../string/parse"));
+var import_md5 = __toESM(require("crypto-js/md5"), 1);
+var import_toString = __toESM(require("../string/toString"), 1);
+var import_parse = __toESM(require("../string/parse"), 1);
 const __encryptedMessages = {};
 var md5_default = {
   encrypt: function(message) {

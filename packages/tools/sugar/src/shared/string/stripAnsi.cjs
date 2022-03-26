@@ -23,7 +23,7 @@ __export(stripAnsi_exports, {
   default: () => stripAnsi
 });
 module.exports = __toCommonJS(stripAnsi_exports);
-var import_strip_ansi = __toESM(require("strip-ansi"));
+var import_strip_ansi = __toESM(require("strip-ansi"), 1);
 function stripAnsi(string) {
   return (0, import_strip_ansi.default)(string);
 }

@@ -23,8 +23,8 @@ __export(linksStateAttributes_exports, {
   default: () => linksStateAttributes_default
 });
 module.exports = __toCommonJS(linksStateAttributes_exports);
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
-var import_querySelectorLive = __toESM(require("../dom/query/querySelectorLive"));
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_querySelectorLive = __toESM(require("../dom/query/querySelectorLive"), 1);
 /*! (C) 2017 Andrea Giammarchi - @WebReflection - ISC License */
 document.addEventListener("click", function(t) {
   var e = t.target.shadowRoot ? t.path[0] : t.target, a = (e.closest || function(t2) {

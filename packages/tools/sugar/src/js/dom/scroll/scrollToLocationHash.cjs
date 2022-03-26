@@ -23,8 +23,8 @@ __export(scrollToLocationHash_exports, {
   default: () => scrollToLocationHash_default
 });
 module.exports = __toCommonJS(scrollToLocationHash_exports);
-var import_scrollTo = __toESM(require("./scrollTo"));
-var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"));
+var import_scrollTo = __toESM(require("./scrollTo"), 1);
+var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"), 1);
 function scrollToLocationHash(settings = {}) {
   settings = (0, import_deepMerge.default)({
     scroll: {}

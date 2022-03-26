@@ -23,7 +23,7 @@ __export(getScaleProperty_exports, {
   default: () => getScaleProperty_default
 });
 module.exports = __toCommonJS(getScaleProperty_exports);
-var rematrix = __toESM(require("rematrix"));
+var rematrix = __toESM(require("rematrix"), 1);
 function getScaleProperty($elm) {
   if (!window.getComputedStyle)
     return;

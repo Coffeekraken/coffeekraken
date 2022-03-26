@@ -23,7 +23,7 @@ __export(previous_exports, {
   default: () => previous_default
 });
 module.exports = __toCommonJS(previous_exports);
-var import_matches = __toESM(require("./matches"));
+var import_matches = __toESM(require("./matches"), 1);
 function previous(elm, selector) {
   elm = elm.previousSibling;
   while (elm) {

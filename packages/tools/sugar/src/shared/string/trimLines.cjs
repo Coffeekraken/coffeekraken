@@ -23,7 +23,7 @@ __export(trimLines_exports, {
   default: () => trimLines_default
 });
 module.exports = __toCommonJS(trimLines_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"));
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
 function trimLines(string, settings = {}) {
   settings = (0, import_deepMerge.default)({
     leftPadding: 0,

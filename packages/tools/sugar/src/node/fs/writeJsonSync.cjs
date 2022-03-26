@@ -23,10 +23,10 @@ __export(writeJsonSync_exports, {
   default: () => writeJsonSync_default
 });
 module.exports = __toCommonJS(writeJsonSync_exports);
-var import_folderPath = __toESM(require("./folderPath"));
-var import_ensureDirSync = __toESM(require("./ensureDirSync"));
-var import_fs = __toESM(require("fs"));
-var import_stringify = __toESM(require("../../shared/json/stringify"));
+var import_folderPath = __toESM(require("./folderPath"), 1);
+var import_ensureDirSync = __toESM(require("./ensureDirSync"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_stringify = __toESM(require("../../shared/json/stringify"), 1);
 function writeJsonSync(path, data, options = {}) {
   const folderPath = (0, import_folderPath.default)(path);
   (0, import_ensureDirSync.default)(folderPath);

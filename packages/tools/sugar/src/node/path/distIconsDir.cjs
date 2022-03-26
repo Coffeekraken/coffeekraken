@@ -37,7 +37,7 @@ __export(distIconsDir_exports, {
   default: () => distIconsDir_default
 });
 module.exports = __toCommonJS(distIconsDir_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function distIconsDir_default(settings = {}) {
   settings = __spreadValues({}, settings);
   const distIconsDir = import_s_sugar_config.default.get("storage.dist.iconsDir");

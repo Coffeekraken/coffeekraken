@@ -23,7 +23,7 @@ __export(toDomNodes_exports, {
   default: () => toDomNodes_default
 });
 module.exports = __toCommonJS(toDomNodes_exports);
-var import_strToHtml = __toESM(require("../../shared/string/strToHtml"));
+var import_strToHtml = __toESM(require("../../shared/string/strToHtml"), 1);
 function processString(string) {
   return string.replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&nbsp;/g, " ");
 }

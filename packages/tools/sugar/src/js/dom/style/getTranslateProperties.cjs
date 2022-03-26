@@ -23,7 +23,7 @@ __export(getTranslateProperties_exports, {
   default: () => getTranslateProperties_default
 });
 module.exports = __toCommonJS(getTranslateProperties_exports);
-var __rematrix = __toESM(require("rematrix"));
+var __rematrix = __toESM(require("rematrix"), 1);
 function getTranslateProperties($elm) {
   if (!window.getComputedStyle)
     return {

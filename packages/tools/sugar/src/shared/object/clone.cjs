@@ -37,8 +37,8 @@ __export(clone_exports, {
   default: () => clone_default
 });
 module.exports = __toCommonJS(clone_exports);
-var import_lodash = __toESM(require("lodash.clone"));
-var import_lodash2 = __toESM(require("lodash.clonedeep"));
+var import_lodash = __toESM(require("lodash.clone"), 1);
+var import_lodash2 = __toESM(require("lodash.clonedeep"), 1);
 function clone(object, settings = {}) {
   settings = __spreadValues({
     deep: false

@@ -23,12 +23,12 @@ __export(sugarJson_cli_exports, {
   default: () => sugarJson_cli_default
 });
 module.exports = __toCommonJS(sugarJson_cli_exports);
-var import_s_log = __toESM(require("@coffeekraken/s-log"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_SCliAddSugarJsonParamsInterface = __toESM(require("../../node/add/interface/SCliAddSugarJsonParamsInterface"));
-var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"));
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"));
-var import_fs = __toESM(require("fs"));
+var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_SCliAddSugarJsonParamsInterface = __toESM(require("../../node/add/interface/SCliAddSugarJsonParamsInterface"), 1);
+var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
+var import_fs = __toESM(require("fs"), 1);
 var sugarJson_cli_default = (stringArgs = "") => {
   return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
     const finalParams = import_SCliAddSugarJsonParamsInterface.default.apply(stringArgs);

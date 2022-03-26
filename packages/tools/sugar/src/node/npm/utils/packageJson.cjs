@@ -23,9 +23,9 @@ __export(packageJson_exports, {
   default: () => packageJson
 });
 module.exports = __toCommonJS(packageJson_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
-var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"));
-var import_fs = __toESM(require("fs"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_deepMerge = __toESM(require("../../../shared/object/deepMerge"), 1);
+var import_fs = __toESM(require("fs"), 1);
 function packageJson(name, settings) {
   const set = (0, import_deepMerge.default)({
     rootDir: import_s_sugar_config.default.get("npm.rootDir")

@@ -37,8 +37,8 @@ __export(expandPleasantCssClassnamesLive_exports, {
   default: () => expandPleasantCssClassnamesLive
 });
 module.exports = __toCommonJS(expandPleasantCssClassnamesLive_exports);
-var import_querySelectorLive = __toESM(require("../dom/query/querySelectorLive"));
-var import_expandPleasantCssClassname = __toESM(require("../../shared/html/expandPleasantCssClassname"));
+var import_querySelectorLive = __toESM(require("../dom/query/querySelectorLive"), 1);
+var import_expandPleasantCssClassname = __toESM(require("../../shared/html/expandPleasantCssClassname"), 1);
 function expandPleasantCssClassnamesLive(settings) {
   settings = __spreadValues({
     rootNode: document

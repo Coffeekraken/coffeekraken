@@ -23,7 +23,7 @@ __export(clearTransmations_exports, {
   default: () => clearTransmations
 });
 module.exports = __toCommonJS(clearTransmations_exports);
-var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"));
+var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"), 1);
 function clearTransmations($elm = document.body, settings) {
   const cls = `s-clear-transmations-${(0, import_uniqid.default)()}`;
   $elm.classList.add(cls);

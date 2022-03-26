@@ -37,13 +37,13 @@ __export(SClass_exports, {
   default: () => SClass
 });
 module.exports = __toCommonJS(SClass_exports);
-var import_getExtendsStack = __toESM(require("@coffeekraken/sugar/shared/class/utils/getExtendsStack"));
-var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"));
-var import_deepAssign = __toESM(require("@coffeekraken/sugar/shared/object/deepAssign"));
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"));
-var import_get = __toESM(require("@coffeekraken/sugar/shared/object/get"));
-var import_getColorFor = __toESM(require("@coffeekraken/sugar/shared/dev/color/getColorFor"));
-var import_toJson = __toESM(require("@coffeekraken/sugar/shared/object/toJson"));
+var import_getExtendsStack = __toESM(require("@coffeekraken/sugar/shared/class/utils/getExtendsStack"), 1);
+var import_plainObject = __toESM(require("@coffeekraken/sugar/shared/is/plainObject"), 1);
+var import_deepAssign = __toESM(require("@coffeekraken/sugar/shared/object/deepAssign"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/shared/object/deepMerge"), 1);
+var import_get = __toESM(require("@coffeekraken/sugar/shared/object/get"), 1);
+var import_getColorFor = __toESM(require("@coffeekraken/sugar/shared/dev/color/getColorFor"), 1);
+var import_toJson = __toESM(require("@coffeekraken/sugar/shared/object/toJson"), 1);
 class SClass {
   constructor(settings = {}) {
     this._settings = {};

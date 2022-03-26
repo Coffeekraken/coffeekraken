@@ -37,12 +37,12 @@ __export(dependencyList_exports, {
   default: () => dependencyList
 });
 module.exports = __toCommonJS(dependencyList_exports);
-var import_dependency_tree = __toESM(require("dependency-tree"));
-var import_chokidar = __toESM(require("chokidar"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_fs = __toESM(require("fs"));
-var import_folderPath = __toESM(require("../folderPath"));
-var import_minimatch = __toESM(require("minimatch"));
+var import_dependency_tree = __toESM(require("dependency-tree"), 1);
+var import_chokidar = __toESM(require("chokidar"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_folderPath = __toESM(require("../folderPath"), 1);
+var import_minimatch = __toESM(require("minimatch"), 1);
 function dependencyList(filePath, settings) {
   return new import_s_promise.default(({ resolve, reject, emit }) => {
     const set = __spreadValues({

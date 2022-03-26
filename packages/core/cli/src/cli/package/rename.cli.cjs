@@ -23,10 +23,10 @@ __export(rename_cli_exports, {
   default: () => rename_cli_default
 });
 module.exports = __toCommonJS(rename_cli_exports);
-var import_SCliPackageRenameParamsInterface = __toESM(require("../../node/package/interface/SCliPackageRenameParamsInterface"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_renamePackage = __toESM(require("@coffeekraken/sugar/node/package/renamePackage"));
-var import_fs = __toESM(require("fs"));
+var import_SCliPackageRenameParamsInterface = __toESM(require("../../node/package/interface/SCliPackageRenameParamsInterface"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_renamePackage = __toESM(require("@coffeekraken/sugar/node/package/renamePackage"), 1);
+var import_fs = __toESM(require("fs"), 1);
 var rename_cli_default = (stringArgs = "") => {
   return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
     const finalParams = import_SCliPackageRenameParamsInterface.default.apply(stringArgs);

@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_get = __toESM(require("../get"));
+var import_get = __toESM(require("../get"), 1);
 describe("sugar.js.object.get", () => {
   it("Should get the object property correctly", (done) => {
     const obj1 = {

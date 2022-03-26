@@ -37,13 +37,13 @@ __export(SPromise_exports, {
   default: () => SPromise_default
 });
 module.exports = __toCommonJS(SPromise_exports);
-var import_getMethods = __toESM(require("@coffeekraken/sugar/shared/class/utils/getMethods"));
-var import_s_class = __toESM(require("@coffeekraken/s-class"));
-var import_s_event_emitter = __toESM(require("@coffeekraken/s-event-emitter"));
-var import_deepMerge = __toESM(require("@coffeekraken/sugar/src/shared/object/deepMerge"));
-var import_wait = __toESM(require("@coffeekraken/sugar/shared/time/wait"));
-var import_s_log = __toESM(require("@coffeekraken/s-log"));
-var import_treatAsValue = __toESM(require("./treatAsValue"));
+var import_getMethods = __toESM(require("@coffeekraken/sugar/shared/class/utils/getMethods"), 1);
+var import_s_class = __toESM(require("@coffeekraken/s-class"), 1);
+var import_s_event_emitter = __toESM(require("@coffeekraken/s-event-emitter"), 1);
+var import_deepMerge = __toESM(require("@coffeekraken/sugar/src/shared/object/deepMerge"), 1);
+var import_wait = __toESM(require("@coffeekraken/sugar/shared/time/wait"), 1);
+var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
+var import_treatAsValue = __toESM(require("./treatAsValue"), 1);
 class SPromise extends import_s_class.default.extends(Promise) {
   constructor(executorFnOrSettings = {}, settings) {
     let executorFn, _this, resolvers = {};

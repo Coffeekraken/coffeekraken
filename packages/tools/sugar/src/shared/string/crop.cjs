@@ -23,8 +23,8 @@ __export(crop_exports, {
   default: () => crop_default
 });
 module.exports = __toCommonJS(crop_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_countLine = __toESM(require("./countLine"));
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_countLine = __toESM(require("./countLine"), 1);
 function crop(text, length, settings = {}) {
   settings = (0, import_deepMerge.default)({
     chars: "...",

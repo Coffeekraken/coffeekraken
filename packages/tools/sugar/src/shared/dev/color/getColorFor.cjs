@@ -23,10 +23,10 @@ __export(getColorFor_exports, {
   default: () => getColorFor
 });
 module.exports = __toCommonJS(getColorFor_exports);
-var import_md5 = __toESM(require("../../crypt/md5"));
-var import_availableColors = __toESM(require("./availableColors"));
-var import_pickRandom = __toESM(require("../../array/pickRandom"));
-var import_deepMerge = __toESM(require("../../object/deepMerge"));
+var import_md5 = __toESM(require("../../crypt/md5"), 1);
+var import_availableColors = __toESM(require("./availableColors"), 1);
+var import_pickRandom = __toESM(require("../../array/pickRandom"), 1);
+var import_deepMerge = __toESM(require("../../object/deepMerge"), 1);
 const _colorUsedByScope = {};
 const _colorsStack = {};
 function getColorFor(ref, settings) {

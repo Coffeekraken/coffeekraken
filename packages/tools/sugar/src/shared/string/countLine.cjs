@@ -23,8 +23,8 @@ __export(countLine_exports, {
   default: () => countLine_default
 });
 module.exports = __toCommonJS(countLine_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_strip_ansi = __toESM(require("strip-ansi"));
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_strip_ansi = __toESM(require("strip-ansi"), 1);
 function countLine(line, count = {}) {
   count = (0, import_deepMerge.default)({
     htmlTags: false,

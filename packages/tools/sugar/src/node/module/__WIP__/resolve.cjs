@@ -38,18 +38,18 @@ __export(resolve_exports, {
   default: () => resolve
 });
 module.exports = __toCommonJS(resolve_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
-var import_fs = __toESM(require("fs"));
-var import_path = __toESM(require("path"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
-var import_checkPathWithMultipleExtensions = __toESM(require("../fs/checkPathWithMultipleExtensions"));
-var import_existsSync = __toESM(require("../fs/existsSync"));
-var import_file = __toESM(require("../is/file"));
-var import_packageRootDir = __toESM(require("../path/packageRootDir"));
-var import_buildInNodeModules = __toESM(require("./buildInNodeModules"));
-var import_exportsMatch = __toESM(require("./exportsMatch"));
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_checkPathWithMultipleExtensions = __toESM(require("../fs/checkPathWithMultipleExtensions"), 1);
+var import_existsSync = __toESM(require("../fs/existsSync"), 1);
+var import_file = __toESM(require("../is/file"), 1);
+var import_packageRootDir = __toESM(require("../path/packageRootDir"), 1);
+var import_buildInNodeModules = __toESM(require("./buildInNodeModules"), 1);
+var import_exportsMatch = __toESM(require("./exportsMatch"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
 class ResolveSettingsInterface extends import_s_interface.default {
   static get _definition() {
     return {

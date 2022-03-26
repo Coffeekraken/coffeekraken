@@ -23,7 +23,7 @@ __export(commonTextFileExtensions_exports, {
   default: () => commonTextFileExtensions
 });
 module.exports = __toCommonJS(commonTextFileExtensions_exports);
-var import_commonProgrammingFileExtensions = __toESM(require("./commonProgrammingFileExtensions"));
+var import_commonProgrammingFileExtensions = __toESM(require("./commonProgrammingFileExtensions"), 1);
 function commonTextFileExtensions(withDot = false) {
   return ["txt", "htm", "html", "md", "json", "csv", "rss", "xhtml", ...(0, import_commonProgrammingFileExtensions.default)(withDot)].map((ext) => withDot ? `.${ext}` : ext);
 }

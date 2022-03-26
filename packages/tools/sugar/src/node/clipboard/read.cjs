@@ -23,7 +23,7 @@ __export(read_exports, {
   default: () => read_default
 });
 module.exports = __toCommonJS(read_exports);
-var import_clipboardy = __toESM(require("clipboardy"));
+var import_clipboardy = __toESM(require("clipboardy"), 1);
 function read() {
   return import_clipboardy.default.readSync();
 }

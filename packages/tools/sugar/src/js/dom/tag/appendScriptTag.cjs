@@ -23,7 +23,7 @@ __export(appendScriptTag_exports, {
   default: () => appendScriptTag_default
 });
 module.exports = __toCommonJS(appendScriptTag_exports);
-var import_scriptLoaded = __toESM(require("../scriptLoaded"));
+var import_scriptLoaded = __toESM(require("../scriptLoaded"), 1);
 function appendScriptTag(src, $parent = document.body) {
   const $script = document.createElement("script");
   $script.src = src;

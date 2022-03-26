@@ -23,9 +23,9 @@ __export(dependencyList_exports, {
   default: () => dependencyList
 });
 module.exports = __toCommonJS(dependencyList_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_deepMap = __toESM(require("../../shared/object/deepMap"));
-var import_dependencyTree = __toESM(require("./dependencyTree"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_deepMap = __toESM(require("../../shared/object/deepMap"), 1);
+var import_dependencyTree = __toESM(require("./dependencyTree"), 1);
 function dependencyList(filePath, settings) {
   return new import_s_promise.default(async ({ resolve, pipe }) => {
     const tree = await pipe((0, import_dependencyTree.default)(filePath, settings));

@@ -37,14 +37,14 @@ __export(exportsMatch_exports, {
   default: () => exportsMatch
 });
 module.exports = __toCommonJS(exportsMatch_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
-var import_fs = __toESM(require("fs"));
-var import_minimatch = __toESM(require("minimatch"));
-var import_path = __toESM(require("path"));
-var import_node = __toESM(require("../../shared/is/node"));
-var import_plainObject = __toESM(require("../../shared/is/plainObject"));
-var import_checkPathWithMultipleExtensions = __toESM(require("../fs/checkPathWithMultipleExtensions"));
-var import_extension = __toESM(require("../fs/extension"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_minimatch = __toESM(require("minimatch"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_node = __toESM(require("../../shared/is/node"), 1);
+var import_plainObject = __toESM(require("../../shared/is/plainObject"), 1);
+var import_checkPathWithMultipleExtensions = __toESM(require("../fs/checkPathWithMultipleExtensions"), 1);
+var import_extension = __toESM(require("../fs/extension"), 1);
 function exportsMatch(packageDir, exportsObj, modulePath, settings) {
   let modulesSubpaths = exportsObj;
   const set = __spreadValues({

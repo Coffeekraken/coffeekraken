@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_extractImport = __toESM(require("../extractImport"));
+var import_extractImport = __toESM(require("../extractImport"), 1);
 describe("sugar.node.module.extractImport", () => {
   it("Should extract correctly a very simple import statement", () => {
     const str = 'import lodash from "dependency-tree"';

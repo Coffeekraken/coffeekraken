@@ -13,8 +13,8 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_imageLoaded = __toESM(require("../load/imageLoaded"));
-var import_dispatchEvent = __toESM(require("../event/dispatchEvent"));
+var import_imageLoaded = __toESM(require("../load/imageLoaded"), 1);
+var import_dispatchEvent = __toESM(require("../event/dispatchEvent"), 1);
 describe("sugar.js.dom.imageLoaded", () => {
   document.head.innerHTML = `
     <img src="src/data/tests/testing.jpg" />

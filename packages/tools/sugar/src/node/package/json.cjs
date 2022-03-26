@@ -37,9 +37,9 @@ __export(json_exports, {
   default: () => json_default
 });
 module.exports = __toCommonJS(json_exports);
-var import_rootPath = __toESM(require("./rootPath"));
-var import_fs = __toESM(require("fs"));
-var import_standardizeJson = __toESM(require("../../shared/npm/utils/standardizeJson"));
+var import_rootPath = __toESM(require("./rootPath"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_standardizeJson = __toESM(require("../../shared/npm/utils/standardizeJson"), 1);
 const __packageJson = {};
 function json(from = process.cwd(), settings) {
   return new Promise(async (resolve) => {

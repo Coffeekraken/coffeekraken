@@ -23,7 +23,7 @@ __export(inViewportPercentage_exports, {
   default: () => inViewportPercentage_default
 });
 module.exports = __toCommonJS(inViewportPercentage_exports);
-var import_isVisible = __toESM(require("../isVisible"));
+var import_isVisible = __toESM(require("../isVisible"), 1);
 function inViewportPercentage(elm) {
   if (!(0, import_isVisible.default)(elm))
     return 0;

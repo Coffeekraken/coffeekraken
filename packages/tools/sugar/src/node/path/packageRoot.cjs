@@ -23,8 +23,8 @@ __export(packageRoot_exports, {
   default: () => packageRoot_default
 });
 module.exports = __toCommonJS(packageRoot_exports);
-var import_file = __toESM(require("../is/file"));
-var import_find_package_json = __toESM(require("find-package-json"));
+var import_file = __toESM(require("../is/file"), 1);
+var import_find_package_json = __toESM(require("find-package-json"), 1);
 function packageRoot(from = process.cwd(), highest = false) {
   if ((0, import_file.default)(from))
     from = from.split("/").slice(0, -1).join("/");

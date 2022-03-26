@@ -37,9 +37,9 @@ __export(areaStats_exports, {
   default: () => areaStats
 });
 module.exports = __toCommonJS(areaStats_exports);
-var import_up = __toESM(require("../traverse/up"));
-var import_scrollTop = __toESM(require("../scroll/scrollTop"));
-var import_scrollLeft = __toESM(require("../scroll/scrollLeft"));
+var import_up = __toESM(require("../traverse/up"), 1);
+var import_scrollTop = __toESM(require("../scroll/scrollTop"), 1);
+var import_scrollLeft = __toESM(require("../scroll/scrollLeft"), 1);
 function areaStats($elm, settings) {
   const finalSettings = __spreadValues({
     relativeTo: "visible"

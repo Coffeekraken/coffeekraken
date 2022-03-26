@@ -23,7 +23,7 @@ __export(SSugarCliProcessKillParamsInterface_exports, {
   default: () => SSugarCliProcessKillParamsInterface
 });
 module.exports = __toCommonJS(SSugarCliProcessKillParamsInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
 class SSugarCliProcessKillParamsInterface extends import_s_interface.default {
   static get _definition() {
     return {

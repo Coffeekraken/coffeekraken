@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_getTagNameFromHtmlClass = __toESM(require("../getTagNameFromHtmlClass"));
+var import_getTagNameFromHtmlClass = __toESM(require("../getTagNameFromHtmlClass"), 1);
 describe("sugar.js.html.getTagNameFromHtmlClass", () => {
   it("Should get back the correct tagname from passed classes", (done) => {
     expect((0, import_getTagNameFromHtmlClass.default)(HTMLAnchorElement)).toBe("a");

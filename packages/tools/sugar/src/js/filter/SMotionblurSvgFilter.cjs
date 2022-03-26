@@ -23,10 +23,10 @@ __export(SMotionblurSvgFilter_exports, {
   default: () => SMotionblurSvgFilter
 });
 module.exports = __toCommonJS(SMotionblurSvgFilter_exports);
-var import_offset = __toESM(require("../dom/offset/offset"));
-var import_SSvgFilter = __toESM(require("./SSvgFilter"));
-var import_fastdom = __toESM(require("fastdom"));
-var import_forceRedraw = __toESM(require("../dom/utlls/forceRedraw"));
+var import_offset = __toESM(require("../dom/offset/offset"), 1);
+var import_SSvgFilter = __toESM(require("./SSvgFilter"), 1);
+var import_fastdom = __toESM(require("fastdom"), 1);
+var import_forceRedraw = __toESM(require("../dom/utlls/forceRedraw"), 1);
 class SMotionblurSvgFilter extends import_SSvgFilter.default {
   constructor(amount = 0.5) {
     super(`

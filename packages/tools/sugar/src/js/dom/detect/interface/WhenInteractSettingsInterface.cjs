@@ -23,7 +23,7 @@ __export(WhenInteractSettingsInterface_exports, {
   default: () => WhenInteractSettingsInterface
 });
 module.exports = __toCommonJS(WhenInteractSettingsInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
 class WhenInteractSettingsInterface extends import_s_interface.default {
   static get _definition() {
     return {

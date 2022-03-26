@@ -23,8 +23,8 @@ __export(removeClassOnAnimationEnd_exports, {
   default: () => removeClassOnAnimationEnd_default
 });
 module.exports = __toCommonJS(removeClassOnAnimationEnd_exports);
-var import_addEventListenerOnce = __toESM(require("./addEventListenerOnce"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_addEventListenerOnce = __toESM(require("./addEventListenerOnce"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function removeClassOnAnimationEnd($elm, cls) {
   return new import_s_promise.default(({ resolve }) => {
     (0, import_addEventListenerOnce.default)($elm, "animationend", (e) => {

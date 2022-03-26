@@ -40,8 +40,8 @@ __export(SSocketDom_exports, {
   default: () => SSocketDom_default
 });
 module.exports = __toCommonJS(SSocketDom_exports);
-var import_appendScriptTag = __toESM(require("../dom/appendScriptTag"));
-var import_innerHtml = __toESM(require("../dom/innerHtml"));
+var import_appendScriptTag = __toESM(require("../dom/appendScriptTag"), 1);
+var import_innerHtml = __toESM(require("../dom/innerHtml"), 1);
 class SSocketDom {
   constructor(serverUrl, settings = {}) {
     this._serverUrl = "http://localhost:80";

@@ -37,7 +37,7 @@ __export(idCompliant_exports, {
   default: () => idCompliant
 });
 module.exports = __toCommonJS(idCompliant_exports);
-var import_simplifySpecialChars = __toESM(require("./simplifySpecialChars"));
+var import_simplifySpecialChars = __toESM(require("./simplifySpecialChars"), 1);
 function idCompliant(str, settings) {
   settings = __spreadValues({
     exclude: []

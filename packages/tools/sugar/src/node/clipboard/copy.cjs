@@ -23,9 +23,9 @@ __export(copy_exports, {
   default: () => copy_default
 });
 module.exports = __toCommonJS(copy_exports);
-var import_clipboardy = __toESM(require("clipboardy"));
-var import_toString = __toESM(require("../../shared/string/toString"));
-var import_copy_paste = __toESM(require("copy-paste"));
+var import_clipboardy = __toESM(require("clipboardy"), 1);
+var import_toString = __toESM(require("../../shared/string/toString"), 1);
+var import_copy_paste = __toESM(require("copy-paste"), 1);
 function copy(text) {
   text = (0, import_toString.default)(text);
   try {

@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_striptags = __toESM(require("../striptags"));
+var import_striptags = __toESM(require("../striptags"), 1);
 describe("sugar.shared.html.striptags", () => {
   const html = `<div><bold>Hello world</bold><h1>How are you?</h1></div>`;
   const res = (0, import_striptags.default)(html, "<bold>");

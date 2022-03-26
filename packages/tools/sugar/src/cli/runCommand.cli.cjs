@@ -23,13 +23,13 @@ __export(runCommand_cli_exports, {
   default: () => runCommand
 });
 module.exports = __toCommonJS(runCommand_cli_exports);
-var import_s_glob = __toESM(require("@coffeekraken/s-glob"));
-var import_spawn = __toESM(require("../node/process/spawn"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_path = __toESM(require("path"));
-var import_s_duration = __toESM(require("@coffeekraken/s-duration"));
-var import_formatDuration = __toESM(require("@coffeekraken/sugar/shared/time/formatDuration"));
-var import_SRunCommandParamsInterface = __toESM(require("./interface/SRunCommandParamsInterface"));
+var import_s_glob = __toESM(require("@coffeekraken/s-glob"), 1);
+var import_spawn = __toESM(require("../node/process/spawn"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_s_duration = __toESM(require("@coffeekraken/s-duration"), 1);
+var import_formatDuration = __toESM(require("@coffeekraken/sugar/shared/time/formatDuration"), 1);
+var import_SRunCommandParamsInterface = __toESM(require("./interface/SRunCommandParamsInterface"), 1);
 function runCommand(stringArgs = "") {
   return new import_s_promise.default(async ({ resolve, reject, emit, pipe, pipeErrors }) => {
     const props = import_SRunCommandParamsInterface.default.apply(stringArgs);

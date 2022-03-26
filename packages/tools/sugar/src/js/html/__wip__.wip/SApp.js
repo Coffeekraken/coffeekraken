@@ -65,22 +65,22 @@ class SApp {
           /* webpackChunkName: "log" */
           /* webpackMode: "lazy" */
           "../log/log"
-        ))),
+        ), 1)),
         Promise.resolve().then(() => __toESM(require(
           /* webpackChunkName: "isTransportRegistered" */
           /* webpackMode: "lazy" */
           "../log/isTransportRegistered"
-        ))),
+        ), 1)),
         Promise.resolve().then(() => __toESM(require(
           /* webpackChunkName: "getRegisteredTransports" */
           /* webpackMode: "lazy" */
           "../log/getRegisteredTransports"
-        ))),
+        ), 1)),
         Promise.resolve().then(() => __toESM(require(
           /* webpackChunkName: "registerTransport" */
           /* webpackMode: "lazy" */
           "../log/registerTransport"
-        )))
+        ), 1))
       ]).then((modules) => {
         const __log = modules[0], __isTransportRegistered = modules[1], __getRegisteredTransports = modules[2], __registerTransport = modules[3];
         const configTransports = this.config("log.frontend.transportsByType")[type] ? this.config("log.frontend.transportsByType")[type].split(" ") : [];

@@ -23,8 +23,8 @@ __export(directory_exports, {
   default: () => directory_default
 });
 module.exports = __toCommonJS(directory_exports);
-var import_fs = __toESM(require("fs"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
+var import_fs = __toESM(require("fs"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
 function isDirectory(path, settings = {}) {
   settings = (0, import_deepMerge.default)({
     symlink: true

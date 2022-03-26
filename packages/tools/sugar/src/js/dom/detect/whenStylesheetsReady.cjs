@@ -23,7 +23,7 @@ __export(whenStylesheetsReady_exports, {
   default: () => whenStylesheetsReady
 });
 module.exports = __toCommonJS(whenStylesheetsReady_exports);
-var import_linkLoaded = __toESM(require("../load/linkLoaded"));
+var import_linkLoaded = __toESM(require("../load/linkLoaded"), 1);
 function whenStylesheetsReady(links = null, cb = null) {
   if (!links) {
     links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));

@@ -23,8 +23,8 @@ __export(kill_cli_exports, {
   default: () => kill
 });
 module.exports = __toCommonJS(kill_cli_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_fkill = __toESM(require("fkill"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_fkill = __toESM(require("fkill"), 1);
 function kill(params) {
   return new import_s_promise.default(async ({ resolve, reject, emit }) => {
     if (params.id) {

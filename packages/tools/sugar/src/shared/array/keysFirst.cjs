@@ -23,7 +23,7 @@ __export(keysFirst_exports, {
   default: () => keysFirst_default
 });
 module.exports = __toCommonJS(keysFirst_exports);
-var import_uniq = __toESM(require("lodash/uniq"));
+var import_uniq = __toESM(require("lodash/uniq"), 1);
 function keysFirst(array, keys) {
   keys = keys.filter((key) => {
     return array.indexOf(key) !== -1;

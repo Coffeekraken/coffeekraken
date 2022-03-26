@@ -23,9 +23,9 @@ __export(argsToString_exports, {
   default: () => argsToString_default
 });
 module.exports = __toCommonJS(argsToString_exports);
-var import_toString = __toESM(require("../string/toString"));
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_plainObject = __toESM(require("../is/plainObject"));
+var import_toString = __toESM(require("../string/toString"), 1);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
 function argsToString(args, settings = {}) {
   settings = (0, import_deepMerge.default)({
     valueQuote: '"',

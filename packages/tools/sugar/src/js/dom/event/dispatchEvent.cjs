@@ -23,7 +23,7 @@ __export(dispatchEvent_exports, {
   default: () => dispatchEvent_default
 });
 module.exports = __toCommonJS(dispatchEvent_exports);
-var import_SEvent = __toESM(require("../../event/SEvent"));
+var import_SEvent = __toESM(require("../../event/SEvent"), 1);
 function dispatchEvent($target, name, data = null) {
   const e = new import_SEvent.default(name, {
     detail: data,

@@ -23,7 +23,7 @@ __export(ensureFile_exports, {
   default: () => ensureFile_default
 });
 module.exports = __toCommonJS(ensureFile_exports);
-var import_fs_extra = __toESM(require("fs-extra"));
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function ensureFile(file) {
   return import_fs_extra.default.ensureFile(file);
 }

@@ -37,10 +37,10 @@ __export(relative_exports, {
   default: () => relative_default
 });
 module.exports = __toCommonJS(relative_exports);
-var import_glob = __toESM(require("../../shared/is/glob"));
-var import_path = __toESM(require("../../shared/is/path"));
-var import_path2 = __toESM(require("path"));
-var import_packageRootDir = __toESM(require("./packageRootDir"));
+var import_glob = __toESM(require("../../shared/is/glob"), 1);
+var import_path = __toESM(require("../../shared/is/path"), 1);
+var import_path2 = __toESM(require("path"), 1);
+var import_packageRootDir = __toESM(require("./packageRootDir"), 1);
 function relative(path, from = (0, import_packageRootDir.default)(), settings = {}) {
   settings = __spreadValues({
     glob: true,

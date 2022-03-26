@@ -13,8 +13,8 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_unzip = __toESM(require("../unzip"));
-var import_systemTmpDir = __toESM(require("../../path/systemTmpDir"));
+var import_unzip = __toESM(require("../unzip"), 1);
+var import_systemTmpDir = __toESM(require("../../path/systemTmpDir"), 1);
 describe("sugar.node.zip.unzip", () => {
   it("Should unzip a simple file correctly at the same destination folder", async () => {
     const result = await (0, import_unzip.default)(`${__dirname}/data/coffeekraken-new-logo.zip`, {

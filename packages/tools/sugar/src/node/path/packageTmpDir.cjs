@@ -23,7 +23,7 @@ __export(packageTmpDir_exports, {
   default: () => packageTmpDir_default
 });
 module.exports = __toCommonJS(packageTmpDir_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function packageTmpDir_default() {
   const tmpDir = import_s_sugar_config.default.get("storage.package.tmpDir");
   if (tmpDir !== void 0) {

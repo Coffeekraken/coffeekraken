@@ -13,9 +13,9 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_resolve = __toESM(require("../resolve"));
-var import_path = __toESM(require("path"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_resolve = __toESM(require("../resolve"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 describe("sugar.node.module.resolve", () => {
   const settings = {
     dirs: [`${__dirname}`, `${__dirname}/node_modules`]

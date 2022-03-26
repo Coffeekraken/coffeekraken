@@ -23,7 +23,7 @@ __export(removeSync_exports, {
   default: () => removeSync_default
 });
 module.exports = __toCommonJS(removeSync_exports);
-var import_fs_extra = __toESM(require("fs-extra"));
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function removeSync(path) {
   return import_fs_extra.default.removeSync(path);
 }

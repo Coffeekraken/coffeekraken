@@ -23,8 +23,8 @@ __export(easeClamp_exports, {
   default: () => easeClamp
 });
 module.exports = __toCommonJS(easeClamp_exports);
-var import_easeOutQuad = __toESM(require("../easing/easeOutQuad"));
-var import_clamp = __toESM(require("./clamp"));
+var import_easeOutQuad = __toESM(require("../easing/easeOutQuad"), 1);
+var import_clamp = __toESM(require("./clamp"), 1);
 function easeClamp(num, minEnd, minStart, maxStart, maxEnd) {
   const diffStart = Math.abs(minStart - minEnd), diffEnd = Math.abs(maxStart - maxEnd);
   let computedNum = num;

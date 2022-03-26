@@ -23,7 +23,7 @@ __export(getFreePort_exports, {
   default: () => getFreePort_default
 });
 module.exports = __toCommonJS(getFreePort_exports);
-var import_isPortFree = __toESM(require("./isPortFree"));
+var import_isPortFree = __toESM(require("./isPortFree"), 1);
 function getFreePort(port = null) {
   return new Promise(async (resolve) => {
     if (!port)

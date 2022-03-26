@@ -23,7 +23,7 @@ __export(splitEvery_exports, {
   default: () => splitEvery_default
 });
 module.exports = __toCommonJS(splitEvery_exports);
-var import_countLine = __toESM(require("./countLine"));
+var import_countLine = __toESM(require("./countLine"), 1);
 function splitEvery(text, every, splitWords = false) {
   if (splitWords) {
     const reg = new RegExp(`.{1,${every}}`, "g");

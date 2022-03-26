@@ -23,7 +23,7 @@ __export(countLines_exports, {
   default: () => countLines_default
 });
 module.exports = __toCommonJS(countLines_exports);
-var import_countLine = __toESM(require("../../shared/string/countLine"));
+var import_countLine = __toESM(require("../../shared/string/countLine"), 1);
 function countLines(string) {
   let currentCount = 0;
   let lines = string.split("\n");

@@ -23,9 +23,9 @@ __export(writeFile_exports, {
   default: () => writeFile_default
 });
 module.exports = __toCommonJS(writeFile_exports);
-var import_folderPath = __toESM(require("./folderPath"));
-var import_ensureDirSync = __toESM(require("./ensureDirSync"));
-var import_fs_extra = __toESM(require("fs-extra"));
+var import_folderPath = __toESM(require("./folderPath"), 1);
+var import_ensureDirSync = __toESM(require("./ensureDirSync"), 1);
+var import_fs_extra = __toESM(require("fs-extra"), 1);
 function writeFile(path, data, options = {}) {
   return new Promise(async (resolve) => {
     const folderPath = (0, import_folderPath.default)(path);

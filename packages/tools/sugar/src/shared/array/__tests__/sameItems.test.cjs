@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_sameItems = __toESM(require("../sameItems"));
+var import_sameItems = __toESM(require("../sameItems"), 1);
 describe("@coffeekraken.sugar.shared.array.sameItems", () => {
   it("Should extract same items in simple number array", () => {
     const res = (0, import_sameItems.default)([1, 2, 3, 4, 5, 6], [1, 3, 5, 7]);

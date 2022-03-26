@@ -37,7 +37,7 @@ __export(namespaceCompliant_exports, {
   default: () => namespaceCompliant
 });
 module.exports = __toCommonJS(namespaceCompliant_exports);
-var import_simplifySpecialChars = __toESM(require("./simplifySpecialChars"));
+var import_simplifySpecialChars = __toESM(require("./simplifySpecialChars"), 1);
 function namespaceCompliant(str, settings) {
   settings = __spreadValues({
     exclude: []

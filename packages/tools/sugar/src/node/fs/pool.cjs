@@ -40,14 +40,14 @@ __export(pool_exports, {
   default: () => pool_default
 });
 module.exports = __toCommonJS(pool_exports);
-var import_s_file = __toESM(require("@coffeekraken/s-file"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_chokidar = __toESM(require("chokidar"));
-var import_fs = __toESM(require("fs"));
-var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
-var import_matchGlob = __toESM(require("../glob/matchGlob"));
+var import_s_file = __toESM(require("@coffeekraken/s-file"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_chokidar = __toESM(require("chokidar"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_matchGlob = __toESM(require("../glob/matchGlob"), 1);
 function pool(input, settings) {
   const filesStack = {};
   return new import_s_promise.default(async ({ resolve, reject, emit, cancel, on }) => {

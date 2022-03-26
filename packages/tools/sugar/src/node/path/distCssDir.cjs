@@ -37,7 +37,7 @@ __export(distCssDir_exports, {
   default: () => distCssDir_default
 });
 module.exports = __toCommonJS(distCssDir_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function distCssDir_default(settings = {}) {
   settings = __spreadValues({}, settings);
   const distCssDir = import_s_sugar_config.default.get("storage.dist.cssDir");

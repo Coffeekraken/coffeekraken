@@ -23,8 +23,8 @@ __export(smoothScrollOnHashChange_exports, {
   default: () => smoothScrollOnHashChange_default
 });
 module.exports = __toCommonJS(smoothScrollOnHashChange_exports);
-var import_scrollToLocationHash = __toESM(require("../dom/scroll/scrollToLocationHash"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
+var import_scrollToLocationHash = __toESM(require("../dom/scroll/scrollToLocationHash"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
 function smoothScrollOnHashChange(settings = {}) {
   settings = (0, import_deepMerge.default)({
     scroll: {}

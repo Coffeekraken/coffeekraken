@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_checkPathWithMultipleExtensions = __toESM(require("../checkPathWithMultipleExtensions"));
+var import_checkPathWithMultipleExtensions = __toESM(require("../checkPathWithMultipleExtensions"), 1);
 describe("sugar.node.fs.checkPathWithMultipleExtensions", () => {
   it("Should find a file with multiple extensions given", async () => {
     const filePath = (0, import_checkPathWithMultipleExtensions.default)(`${__dirname}/data/file.mkv`, [

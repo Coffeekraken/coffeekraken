@@ -23,7 +23,7 @@ __export(standardizeJson_exports, {
   default: () => standardizeJson_default
 });
 module.exports = __toCommonJS(standardizeJson_exports);
-var import_parseAuthorString = __toESM(require("./parseAuthorString"));
+var import_parseAuthorString = __toESM(require("./parseAuthorString"), 1);
 function standardizeJson(json) {
   if (json.author && typeof json.author === "string") {
     json.author = (0, import_parseAuthorString.default)(json.author);

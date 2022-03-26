@@ -23,7 +23,7 @@ __export(addAnimationClass_exports, {
   default: () => addAnimationClass_default
 });
 module.exports = __toCommonJS(addAnimationClass_exports);
-var import_removeClassOnAnimationEnd = __toESM(require("./removeClassOnAnimationEnd"));
+var import_removeClassOnAnimationEnd = __toESM(require("./removeClassOnAnimationEnd"), 1);
 function addAnimationClass($elm, cls) {
   if (!Array.isArray(cls))
     cls = [cls];

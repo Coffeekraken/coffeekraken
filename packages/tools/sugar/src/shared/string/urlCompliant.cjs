@@ -37,7 +37,7 @@ __export(urlCompliant_exports, {
   default: () => urlCompliant
 });
 module.exports = __toCommonJS(urlCompliant_exports);
-var import_simplifySpecialChars = __toESM(require("./simplifySpecialChars"));
+var import_simplifySpecialChars = __toESM(require("./simplifySpecialChars"), 1);
 function urlCompliant(str, settings) {
   settings = __spreadValues({
     exclude: []

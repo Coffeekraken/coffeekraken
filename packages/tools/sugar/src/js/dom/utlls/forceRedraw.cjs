@@ -23,7 +23,7 @@ __export(forceRedraw_exports, {
   default: () => forceRedraw_default
 });
 module.exports = __toCommonJS(forceRedraw_exports);
-var import_getStyleProperty = __toESM(require("../style/getStyleProperty"));
+var import_getStyleProperty = __toESM(require("../style/getStyleProperty"), 1);
 function forceRedraw($elm) {
   const display = (0, import_getStyleProperty.default)($elm, "display");
   $elm.style.display = "none";

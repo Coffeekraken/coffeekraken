@@ -37,8 +37,8 @@ __export(inputAdditionalEvents_exports, {
   default: () => inputAdditionalEvents_default
 });
 module.exports = __toCommonJS(inputAdditionalEvents_exports);
-var import_fastdom = __toESM(require("fastdom"));
-var import_dispatchEvent = __toESM(require("../dom/event/dispatchEvent"));
+var import_fastdom = __toESM(require("fastdom"), 1);
+var import_dispatchEvent = __toESM(require("../dom/event/dispatchEvent"), 1);
 function inputAdditionalEvents(settings = {}) {
   settings = __spreadValues({
     enter: true,

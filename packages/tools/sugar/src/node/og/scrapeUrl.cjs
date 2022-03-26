@@ -40,12 +40,12 @@ __export(scrapeUrl_exports, {
   default: () => srapeUrl
 });
 module.exports = __toCommonJS(scrapeUrl_exports);
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
-var import_open_graph_scraper = __toESM(require("open-graph-scraper"));
-var import_packageCacheDir = __toESM(require("@coffeekraken/sugar/node/path/packageCacheDir"));
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"));
-var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"));
-var import_fs = __toESM(require("fs"));
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_open_graph_scraper = __toESM(require("open-graph-scraper"), 1);
+var import_packageCacheDir = __toESM(require("@coffeekraken/sugar/node/path/packageCacheDir"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
+var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"), 1);
+var import_fs = __toESM(require("fs"), 1);
 function srapeUrl(url, settings = {}) {
   return new Promise(async (resolve, reject) => {
     const finalSettings = (0, import_deepMerge.default)({

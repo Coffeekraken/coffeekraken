@@ -23,8 +23,8 @@ __export(checkPathWithMultipleExtensions_exports, {
   default: () => checkPathWithMultipleExtensions
 });
 module.exports = __toCommonJS(checkPathWithMultipleExtensions_exports);
-var import_extension = __toESM(require("./extension"));
-var import_fs = __toESM(require("fs"));
+var import_extension = __toESM(require("./extension"), 1);
+var import_fs = __toESM(require("fs"), 1);
 function checkPathWithMultipleExtensions(path, exts) {
   const extension = (0, import_extension.default)(path) || "";
   const pathWithoutExt = path.replace(`.${extension}`, "");

@@ -23,8 +23,8 @@ __export(stripCssComments_exports, {
   default: () => stripCssComments_default
 });
 module.exports = __toCommonJS(stripCssComments_exports);
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_strip_css_comments = __toESM(require("strip-css-comments"));
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_strip_css_comments = __toESM(require("strip-css-comments"), 1);
 function stripCssComments(css, settings = {}) {
   settings = (0, import_deepMerge.default)({
     block: true,

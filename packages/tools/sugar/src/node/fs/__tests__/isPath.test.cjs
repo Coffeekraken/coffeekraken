@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_isPath = __toESM(require("../isPath"));
+var import_isPath = __toESM(require("../isPath"), 1);
 describe("sugar.node.fs.isPath", () => {
   it("Should detect that a valid path is a valid path", () => {
     expect((0, import_isPath.default)("/my/cool/path.png")).toBe(true);

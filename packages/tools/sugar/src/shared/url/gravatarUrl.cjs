@@ -23,7 +23,7 @@ __export(gravatarUrl_exports, {
   default: () => gravatarUrl_default
 });
 module.exports = __toCommonJS(gravatarUrl_exports);
-var import_md5 = __toESM(require("../crypt/md5"));
+var import_md5 = __toESM(require("../crypt/md5"), 1);
 function gravatarUrl(email, size = 200) {
   return `https://www.gravatar.com/avatar/${import_md5.default.encrypt(email)}?s=${size}`;
 }

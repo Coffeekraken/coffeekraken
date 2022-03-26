@@ -23,7 +23,7 @@ __export(packageRootDir_exports, {
   default: () => packageRootDir_default
 });
 module.exports = __toCommonJS(packageRootDir_exports);
-var import_packageRoot = __toESM(require("./packageRoot"));
+var import_packageRoot = __toESM(require("./packageRoot"), 1);
 global.packageRootDirs = {};
 function packageRootDir_default(from = process.cwd(), highest = false) {
   const storageKey = `${from}-${highest ? "highest" : ""}`;

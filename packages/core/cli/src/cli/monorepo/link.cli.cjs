@@ -23,7 +23,7 @@ __export(link_cli_exports, {
   default: () => link_cli_default
 });
 module.exports = __toCommonJS(link_cli_exports);
-var import_linkPackages = __toESM(require("../../node/monorepo/linkPackages"));
+var import_linkPackages = __toESM(require("../../node/monorepo/linkPackages"), 1);
 var link_cli_default = (stringArgs = "") => {
   let individual = false;
   if (stringArgs.match(/\s?--individual\s?/) || stringArgs.match(/\s?-i\s?/))

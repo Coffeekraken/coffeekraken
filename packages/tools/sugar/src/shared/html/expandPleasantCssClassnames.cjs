@@ -23,7 +23,7 @@ __export(expandPleasantCssClassnames_exports, {
   default: () => expandPleasantCssClassnames
 });
 module.exports = __toCommonJS(expandPleasantCssClassnames_exports);
-var import_expandPleasantCssClassname = __toESM(require("./expandPleasantCssClassname"));
+var import_expandPleasantCssClassname = __toESM(require("./expandPleasantCssClassname"), 1);
 function expandPleasantCssClassnames(html) {
   const reg = /class="[a-zA-Z0-9_\-:@\s]+"/gm;
   const matches = html.match(reg);

@@ -2,6 +2,7 @@
     "name": "@coffeekraken/s-class",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
     "main": "./src/shared/exports.js",
     "exports": {
         "import": "./src/shared/exports.js",

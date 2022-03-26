@@ -23,10 +23,10 @@ __export(namespace_exports, {
   default: () => namespace_default
 });
 module.exports = __toCommonJS(namespace_exports);
-var import_json = __toESM(require("./json"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
-var import_filename = __toESM(require("../fs/filename"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_json = __toESM(require("./json"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_filename = __toESM(require("../fs/filename"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function namespace(path, settings = {}) {
   settings = (0, import_deepMerge.default)(import_s_sugar_config.default.get("core.namespace") || {}, settings);
   const json = (0, import_json.default)(settings.context || process.cwd());

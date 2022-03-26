@@ -37,8 +37,8 @@ __export(diff_exports, {
   default: () => diff_default
 });
 module.exports = __toCommonJS(diff_exports);
-var import_plainObject = __toESM(require("../is/plainObject"));
-var import_is_equal = __toESM(require("is-equal"));
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
+var import_is_equal = __toESM(require("is-equal"), 1);
 function diff(object1, object2, settings = {}) {
   settings = __spreadValues({
     deep: true,

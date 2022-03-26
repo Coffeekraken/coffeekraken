@@ -23,7 +23,7 @@ __export(replaceTags_exports, {
   default: () => replaceTags_default
 });
 module.exports = __toCommonJS(replaceTags_exports);
-var import_toString = __toESM(require("../string/toString"));
+var import_toString = __toESM(require("../string/toString"), 1);
 function replaceTags(text, tags) {
   if (!text)
     text = "";

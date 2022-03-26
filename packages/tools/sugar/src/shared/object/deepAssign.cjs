@@ -23,9 +23,9 @@ __export(deepAssign_exports, {
   default: () => deepAssign
 });
 module.exports = __toCommonJS(deepAssign_exports);
-var import_unique = __toESM(require("../array/unique"));
-var import_plainObject = __toESM(require("../is/plainObject"));
-var import_clone = __toESM(require("./clone"));
+var import_unique = __toESM(require("../array/unique"), 1);
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
+var import_clone = __toESM(require("./clone"), 1);
 function deepAssign(referenceObj, ...objects) {
   const settings = {
     array: false,

@@ -37,10 +37,10 @@ __export(dependenciesHash_exports, {
   default: () => dependenciesHash
 });
 module.exports = __toCommonJS(dependenciesHash_exports);
-var import_object_hash = __toESM(require("object-hash"));
-var import_fileHash = __toESM(require("../fs/fileHash"));
-var import_sha256 = __toESM(require("../../shared/crypt/sha256"));
-var import_extension = __toESM(require("../fs/extension"));
+var import_object_hash = __toESM(require("object-hash"), 1);
+var import_fileHash = __toESM(require("../fs/fileHash"), 1);
+var import_sha256 = __toESM(require("../../shared/crypt/sha256"), 1);
+var import_extension = __toESM(require("../fs/extension"), 1);
 async function dependenciesHash(dependenciesObj, settings) {
   settings = __spreadValues({
     recursive: true

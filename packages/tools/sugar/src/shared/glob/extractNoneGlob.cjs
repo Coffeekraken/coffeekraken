@@ -23,7 +23,7 @@ __export(extractNoneGlob_exports, {
   default: () => extractNoneGlob_default
 });
 module.exports = __toCommonJS(extractNoneGlob_exports);
-var import_glob_parent = __toESM(require("glob-parent"));
+var import_glob_parent = __toESM(require("glob-parent"), 1);
 function extractNoneGlob(string) {
   const parent = (0, import_glob_parent.default)(string);
   return parent;

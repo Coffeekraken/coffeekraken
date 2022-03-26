@@ -23,13 +23,13 @@ __export(matchGlob_exports, {
   default: () => matchGlob
 });
 module.exports = __toCommonJS(matchGlob_exports);
-var import_fs = __toESM(require("fs"));
-var import_to_regex = __toESM(require("to-regex"));
-var import_minimatch = __toESM(require("minimatch"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
-var import_directory = __toESM(require("../is/directory"));
-var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"));
-var import_path = __toESM(require("path"));
+var import_fs = __toESM(require("fs"), 1);
+var import_to_regex = __toESM(require("to-regex"), 1);
+var import_minimatch = __toESM(require("minimatch"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
+var import_directory = __toESM(require("../is/directory"), 1);
+var import_expandGlob = __toESM(require("../../shared/glob/expandGlob"), 1);
+var import_path = __toESM(require("path"), 1);
 function matchGlob(input, glob, settings) {
   var _a, _b;
   settings = (0, import_deepMerge.default)({

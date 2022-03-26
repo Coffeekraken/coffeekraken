@@ -23,7 +23,7 @@ __export(colorValue_exports, {
   default: () => colorValue
 });
 module.exports = __toCommonJS(colorValue_exports);
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
 function colorValue(color) {
   if (!import_s_sugar_config.default.get("dev.colors")[color]) {
     throw new Error(`[sugar.shared.dev.colors.colorValue] Sorry but the color "<yellow>${color}</yellow>" you want to get the value from does not exists... Here's the list of available colors at this time: ${Object.keys(import_s_sugar_config.default.get("dev.colors")).join(",")}`);

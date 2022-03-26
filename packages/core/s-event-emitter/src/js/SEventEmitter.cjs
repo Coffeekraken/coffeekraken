@@ -24,7 +24,7 @@ __export(SEventEmitter_exports, {
   default: () => SEventEmitter
 });
 module.exports = __toCommonJS(SEventEmitter_exports);
-var import_SEventEmitter = __toESM(require("../shared/SEventEmitter"));
+var import_SEventEmitter = __toESM(require("../shared/SEventEmitter"), 1);
 __reExport(SEventEmitter_exports, require("../shared/SEventEmitter"), module.exports);
 class SEventEmitter extends import_SEventEmitter.default {
 }

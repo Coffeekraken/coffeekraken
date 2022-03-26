@@ -23,10 +23,10 @@ __export(renamePackage_exports, {
   default: () => renamePackage
 });
 module.exports = __toCommonJS(renamePackage_exports);
-var import_readJsonSync = __toESM(require("../fs/readJsonSync"));
-var import_writeJsonSync = __toESM(require("../fs/writeJsonSync"));
-var import_fs = __toESM(require("fs"));
-var import_packageRoot = __toESM(require("../path/packageRoot"));
+var import_readJsonSync = __toESM(require("../fs/readJsonSync"), 1);
+var import_writeJsonSync = __toESM(require("../fs/writeJsonSync"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_packageRoot = __toESM(require("../path/packageRoot"), 1);
 function renamePackage(newName, packagePath = (0, import_packageRoot.default)()) {
   if (!newName.match(/^[a-zA-Z0-9\/\@_-]+$/)) {
     throw new Error(`The passed name "<yellow>${newName}</yellow>" is not a valid package name. It has to follow this pattern: <cyan>/^[a-zA-Z0-9/@_-]+$/</cyan>`);

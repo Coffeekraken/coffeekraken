@@ -23,7 +23,7 @@ __export(readJsonSync_exports, {
   default: () => readJsonSync
 });
 module.exports = __toCommonJS(readJsonSync_exports);
-var import_fs = __toESM(require("fs"));
+var import_fs = __toESM(require("fs"), 1);
 const _cache = {};
 function readJsonSync(path) {
   if (_cache[path])

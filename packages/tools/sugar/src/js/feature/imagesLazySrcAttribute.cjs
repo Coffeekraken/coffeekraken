@@ -23,9 +23,9 @@ __export(imagesLazySrcAttribute_exports, {
   default: () => imagesLazySrcAttribute_default
 });
 module.exports = __toCommonJS(imagesLazySrcAttribute_exports);
-var import_whenInViewport = __toESM(require("../dom/whenInViewport"));
-var import_querySelectorLive = __toESM(require("../dom/querySelectorLive"));
-var import_deepMerge = __toESM(require("../../shared/object/deepMerge"));
+var import_whenInViewport = __toESM(require("../dom/whenInViewport"), 1);
+var import_querySelectorLive = __toESM(require("../dom/querySelectorLive"), 1);
+var import_deepMerge = __toESM(require("../../shared/object/deepMerge"), 1);
 function imagesLazySrcAttribute(settings = {}) {
   settings = (0, import_deepMerge.default)({
     offset: 50

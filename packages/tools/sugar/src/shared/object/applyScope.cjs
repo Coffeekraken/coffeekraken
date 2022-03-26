@@ -37,7 +37,7 @@ __export(applyScope_exports, {
   default: () => applyScope
 });
 module.exports = __toCommonJS(applyScope_exports);
-var import_plainObject = __toESM(require("../is/plainObject"));
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
 function applyScope(object, scopes, settings) {
   settings = __spreadValues({
     deep: true,

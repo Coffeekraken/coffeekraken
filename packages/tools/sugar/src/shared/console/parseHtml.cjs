@@ -23,8 +23,8 @@ __export(parseHtml_exports, {
   default: () => parseHtml_default
 });
 module.exports = __toCommonJS(parseHtml_exports);
-var import_tagsMap = __toESM(require("./html/tagsMap"));
-var import_replaceTags = __toESM(require("../html/replaceTags"));
+var import_tagsMap = __toESM(require("./html/tagsMap"), 1);
+var import_replaceTags = __toESM(require("../html/replaceTags"), 1);
 function parseHtml(message) {
   let isArray = false;
   if (Array.isArray(message)) {

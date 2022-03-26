@@ -23,7 +23,7 @@ __export(getExtendsStack_exports, {
   default: () => getExtendsStack_default
 });
 module.exports = __toCommonJS(getExtendsStack_exports);
-var import_class = __toESM(require("../../is/class"));
+var import_class = __toESM(require("../../is/class"), 1);
 const fn = function(cls, settings = {}) {
   const stack = {};
   if (!(0, import_class.default)(cls)) {

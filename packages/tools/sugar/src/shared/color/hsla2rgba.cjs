@@ -23,7 +23,7 @@ __export(hsla2rgba_exports, {
   default: () => hsla2rgba_default
 });
 module.exports = __toCommonJS(hsla2rgba_exports);
-var __convertColors = __toESM(require("colors-convert"));
+var __convertColors = __toESM(require("colors-convert"), 1);
 function hsla2rgba(h, s, l, a = 1) {
   if (typeof h === "object") {
     h = h.h;

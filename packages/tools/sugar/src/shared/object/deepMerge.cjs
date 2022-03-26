@@ -23,7 +23,7 @@ __export(deepMerge_exports, {
   default: () => deepMerge_default
 });
 module.exports = __toCommonJS(deepMerge_exports);
-var import_plainObject = __toESM(require("../is/plainObject"));
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
 function deepMerge_default(...args) {
   function merge(firstObj, secondObj) {
     const newObj = {};

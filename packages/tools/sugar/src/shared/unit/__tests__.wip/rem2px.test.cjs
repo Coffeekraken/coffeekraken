@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_rem2px = __toESM(require("../rem2px"));
+var import_rem2px = __toESM(require("../rem2px"), 1);
 describe("sugar.js.unit.rem2px", () => {
   it("Should convert the passed rem value to px correctly", () => {
     expect((0, import_rem2px.default)(2)).toBe(32);

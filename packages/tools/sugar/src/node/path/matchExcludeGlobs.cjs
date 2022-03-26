@@ -23,8 +23,8 @@ __export(matchExcludeGlobs_exports, {
   default: () => matchExcludeGlobs
 });
 module.exports = __toCommonJS(matchExcludeGlobs_exports);
-var import_minimatch = __toESM(require("minimatch"));
-var import_excludeGlobs = __toESM(require("./excludeGlobs"));
+var import_minimatch = __toESM(require("minimatch"), 1);
+var import_excludeGlobs = __toESM(require("./excludeGlobs"), 1);
 function matchExcludeGlobs(path) {
   const excludeGlobs = (0, import_excludeGlobs.default)();
   for (let i = 0; i < excludeGlobs.length; i++) {

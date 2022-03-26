@@ -23,8 +23,8 @@ __export(toJson_exports, {
   default: () => toJson
 });
 module.exports = __toCommonJS(toJson_exports);
-var import_deepMap = __toESM(require("./deepMap"));
-var import_set = __toESM(require("./set"));
+var import_deepMap = __toESM(require("./deepMap"), 1);
+var import_set = __toESM(require("./set"), 1);
 function toJson(object) {
   const newObj = {};
   (0, import_deepMap.default)(object, ({ value, path }) => {

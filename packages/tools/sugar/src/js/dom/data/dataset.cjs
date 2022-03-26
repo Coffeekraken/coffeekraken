@@ -23,9 +23,9 @@ __export(dataset_exports, {
   default: () => dataset_default
 });
 module.exports = __toCommonJS(dataset_exports);
-var import_uncamelize = __toESM(require("../../../shared/string/uncamelize"));
-var import_autoCast = __toESM(require("../../../shared/string/autoCast"));
-var import_toString = __toESM(require("../../../shared/string/toString"));
+var import_uncamelize = __toESM(require("../../../shared/string/uncamelize"), 1);
+var import_autoCast = __toESM(require("../../../shared/string/autoCast"), 1);
+var import_toString = __toESM(require("../../../shared/string/toString"), 1);
 function dataset($elm, key, value = null) {
   if (!$elm.getAttribute)
     return;

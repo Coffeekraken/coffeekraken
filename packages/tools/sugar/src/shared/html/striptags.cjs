@@ -23,7 +23,7 @@ __export(striptags_exports, {
   default: () => striptags_default
 });
 module.exports = __toCommonJS(striptags_exports);
-var import_striptags = __toESM(require("striptags"));
+var import_striptags = __toESM(require("striptags"), 1);
 function striptags(html, allowedTags = "", tagReplacement = "") {
   return (0, import_striptags.default)(html, allowedTags, tagReplacement);
 }

@@ -23,7 +23,7 @@ __export(multipleExtends_exports, {
   default: () => multipleExtends_default
 });
 module.exports = __toCommonJS(multipleExtends_exports);
-var import_es5 = __toESM(require("aggregation/es5"));
+var import_es5 = __toESM(require("aggregation/es5"), 1);
 var multipleExtends_default = (...classes) => {
   return (0, import_es5.default)(...classes);
 };

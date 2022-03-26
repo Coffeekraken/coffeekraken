@@ -24,7 +24,7 @@ __export(exports_exports, {
   default: () => exports_default
 });
 module.exports = __toCommonJS(exports_exports);
-var import_SEventEmitter = __toESM(require("./SEventEmitter"));
+var import_SEventEmitter = __toESM(require("./SEventEmitter"), 1);
 __reExport(exports_exports, require("./SEventEmitter"), module.exports);
 var exports_default = import_SEventEmitter.default;
 // Annotate the CommonJS export names for ESM import in node:

@@ -23,14 +23,14 @@ __export(manifestJson_cli_exports, {
   default: () => manifestJson_cli_default
 });
 module.exports = __toCommonJS(manifestJson_cli_exports);
-var import_s_log = __toESM(require("@coffeekraken/s-log"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"));
-var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"));
-var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"));
-var import_jsonSync = __toESM(require("@coffeekraken/sugar/node/package/jsonSync"));
-var import_fs = __toESM(require("fs"));
-var import_SCliAddManifestJsonParamsInterface = __toESM(require("../../node/add/interface/SCliAddManifestJsonParamsInterface"));
+var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_dirname = __toESM(require("@coffeekraken/sugar/node/fs/dirname"), 1);
+var import_readJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/readJsonSync"), 1);
+var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"), 1);
+var import_jsonSync = __toESM(require("@coffeekraken/sugar/node/package/jsonSync"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_SCliAddManifestJsonParamsInterface = __toESM(require("../../node/add/interface/SCliAddManifestJsonParamsInterface"), 1);
 var manifestJson_cli_default = (stringArgs = "") => {
   return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
     const finalParams = import_SCliAddManifestJsonParamsInterface.default.apply(stringArgs);

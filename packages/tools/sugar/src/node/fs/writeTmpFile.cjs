@@ -37,10 +37,10 @@ __export(writeTmpFile_exports, {
   default: () => writeTmpFile_default
 });
 module.exports = __toCommonJS(writeTmpFile_exports);
-var import_writeFileSync = __toESM(require("./writeFileSync"));
-var import_path = __toESM(require("path"));
-var import_uniqid = __toESM(require("../../shared/string/uniqid"));
-var import_packageTmpDir = __toESM(require("../path/packageTmpDir"));
+var import_writeFileSync = __toESM(require("./writeFileSync"), 1);
+var import_path = __toESM(require("path"), 1);
+var import_uniqid = __toESM(require("../../shared/string/uniqid"), 1);
+var import_packageTmpDir = __toESM(require("../path/packageTmpDir"), 1);
 function writeTmpFile(data, settings = {}) {
   var _a;
   settings = __spreadValues({

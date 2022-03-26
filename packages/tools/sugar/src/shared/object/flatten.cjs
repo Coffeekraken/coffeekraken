@@ -40,7 +40,7 @@ __export(flatten_exports, {
   default: () => flatten_default
 });
 module.exports = __toCommonJS(flatten_exports);
-var import_plainObject = __toESM(require("../is/plainObject"));
+var import_plainObject = __toESM(require("../is/plainObject"), 1);
 function flatten(object, settings = {}) {
   const toReturn = {};
   if (!Array.isArray(object) && !(0, import_plainObject.default)(object))

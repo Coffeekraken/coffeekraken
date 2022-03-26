@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_folderPath = __toESM(require("../folderPath"));
+var import_folderPath = __toESM(require("../folderPath"), 1);
 describe("sugar.node.fs.folderPath", () => {
   it("Should get a simple folder path correctly", () => {
     const path = (0, import_folderPath.default)(`${__dirname}/data/file.jpg`);

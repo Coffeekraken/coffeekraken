@@ -24,7 +24,7 @@ __export(exports_exports, {
   default: () => exports_default
 });
 module.exports = __toCommonJS(exports_exports);
-var import_sugar_cli = __toESM(require("./sugar.cli.js"));
+var import_sugar_cli = __toESM(require("./sugar.cli.js"), 1);
 __reExport(exports_exports, require("./sugar.cli"), module.exports);
 var exports_default = import_sugar_cli.default;
 // Annotate the CommonJS export names for ESM import in node:

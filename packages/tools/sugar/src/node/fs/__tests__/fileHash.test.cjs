@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_fileHash = __toESM(require("../fileHash"));
+var import_fileHash = __toESM(require("../fileHash"), 1);
 describe("sugar.node.fs.fileHash", () => {
   it("Should a simple file correctly", () => {
     const hash = (0, import_fileHash.default)(`${__dirname}/data/3cb8876846e7c0e13896d23496ff7ac2.gif`);

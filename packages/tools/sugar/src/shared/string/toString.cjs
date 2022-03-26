@@ -23,16 +23,16 @@ __export(toString_exports, {
   default: () => toString_default
 });
 module.exports = __toCommonJS(toString_exports);
-var import_chalk = __toESM(require("chalk"));
-var import_deepMap = __toESM(require("../object/deepMap"));
-var import_map = __toESM(require("../is/map"));
-var import_array = __toESM(require("../is/array"));
-var import_boolean = __toESM(require("../is/boolean"));
-var import_function = __toESM(require("../is/function"));
-var import_json = __toESM(require("../is/json"));
-var import_object = __toESM(require("../is/object"));
-var import_deepMerge = __toESM(require("../object/deepMerge"));
-var import_mapToObject = __toESM(require("../map/mapToObject"));
+var import_chalk = __toESM(require("chalk"), 1);
+var import_deepMap = __toESM(require("../object/deepMap"), 1);
+var import_map = __toESM(require("../is/map"), 1);
+var import_array = __toESM(require("../is/array"), 1);
+var import_boolean = __toESM(require("../is/boolean"), 1);
+var import_function = __toESM(require("../is/function"), 1);
+var import_json = __toESM(require("../is/json"), 1);
+var import_object = __toESM(require("../is/object"), 1);
+var import_deepMerge = __toESM(require("../object/deepMerge"), 1);
+var import_mapToObject = __toESM(require("../map/mapToObject"), 1);
 var import_json_cyclic = require("json-cyclic");
 function fn(value, settings = {}) {
   settings = (0, import_deepMerge.default)({

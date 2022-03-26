@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_folderSize = __toESM(require("../folderSize"));
+var import_folderSize = __toESM(require("../folderSize"), 1);
 describe("sugar.node.fs.folderSize", () => {
   it("Should get a folder size correctly", async () => {
     const size = await (0, import_folderSize.default)(`${__dirname}/data/hashfolder`);

@@ -37,8 +37,8 @@ __export(uid_exports, {
   default: () => uid_default
 });
 module.exports = __toCommonJS(uid_exports);
-var import_object = __toESM(require("../crypt/object"));
-var import_crypto = __toESM(require("crypto"));
+var import_object = __toESM(require("../crypt/object"), 1);
+var import_crypto = __toESM(require("crypto"), 1);
 function uid(obj, settings = {}) {
   settings = __spreadValues({
     format: "sha256",

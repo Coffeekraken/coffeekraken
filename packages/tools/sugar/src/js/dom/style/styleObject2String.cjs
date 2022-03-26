@@ -23,7 +23,7 @@ __export(styleObject2String_exports, {
   default: () => styleObject2String_default
 });
 module.exports = __toCommonJS(styleObject2String_exports);
-var import_uncamelize = __toESM(require("../../shared/string/uncamelize"));
+var import_uncamelize = __toESM(require("../../shared/string/uncamelize"), 1);
 function styleObject2String(styleObj) {
   const propertiesArray = [];
   for (const key in styleObj) {

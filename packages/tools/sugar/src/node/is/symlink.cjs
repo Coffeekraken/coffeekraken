@@ -23,7 +23,7 @@ __export(symlink_exports, {
   default: () => symlink_default
 });
 module.exports = __toCommonJS(symlink_exports);
-var import_fs = __toESM(require("fs"));
+var import_fs = __toESM(require("fs"), 1);
 function isSymlink(path) {
   return import_fs.default.existsSync(path) && import_fs.default.lstatSync(path).isSymbolicLink();
 }

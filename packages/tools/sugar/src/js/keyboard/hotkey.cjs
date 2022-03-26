@@ -37,8 +37,8 @@ __export(hotkey_exports, {
   default: () => hotkey_default
 });
 module.exports = __toCommonJS(hotkey_exports);
-var import_hotkeys = __toESM(require("hotkeys-js/dist/hotkeys.common"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_hotkeys = __toESM(require("hotkeys-js/dist/hotkeys.common"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 import_hotkeys.default.filter = function() {
   return true;
 };

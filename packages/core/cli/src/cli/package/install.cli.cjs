@@ -23,12 +23,12 @@ __export(install_cli_exports, {
   default: () => install_cli_default
 });
 module.exports = __toCommonJS(install_cli_exports);
-var import_s_log = __toESM(require("@coffeekraken/s-log"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
-var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"));
-var import_child_process = __toESM(require("child_process"));
-var import_fs = __toESM(require("fs"));
-var import_SCliPackageInstallParamsInterface = __toESM(require("../../node/package/interface/SCliPackageInstallParamsInterface"));
+var import_s_log = __toESM(require("@coffeekraken/s-log"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
+var import_s_sugar_config = __toESM(require("@coffeekraken/s-sugar-config"), 1);
+var import_child_process = __toESM(require("child_process"), 1);
+var import_fs = __toESM(require("fs"), 1);
+var import_SCliPackageInstallParamsInterface = __toESM(require("../../node/package/interface/SCliPackageInstallParamsInterface"), 1);
 var install_cli_default = (stringArgs = "") => {
   return new import_s_promise.default(async ({ resolve, reject, emit, pipe }) => {
     const finalParams = import_SCliPackageInstallParamsInterface.default.apply(stringArgs);

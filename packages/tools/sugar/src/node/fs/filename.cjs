@@ -23,7 +23,7 @@ __export(filename_exports, {
   default: () => filename_default
 });
 module.exports = __toCommonJS(filename_exports);
-var import_extension = __toESM(require("./extension"));
+var import_extension = __toESM(require("./extension"), 1);
 function filename(path, withExtension = true) {
   let filename2 = path.split("/").pop();
   if (!withExtension) {

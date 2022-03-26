@@ -23,8 +23,8 @@ __export(whenAttribute_exports, {
   default: () => whenAttribute_default
 });
 module.exports = __toCommonJS(whenAttribute_exports);
-var import_autoCast = __toESM(require("../../../shared/string/autoCast"));
-var import_observeAttributes = __toESM(require("../observe/observeAttributes"));
+var import_autoCast = __toESM(require("../../../shared/string/autoCast"), 1);
+var import_observeAttributes = __toESM(require("../observe/observeAttributes"), 1);
 function whenAttribute(elm, attrName, checkFn = null) {
   return new Promise((resolve, reject) => {
     if (elm.hasAttribute(attrName)) {

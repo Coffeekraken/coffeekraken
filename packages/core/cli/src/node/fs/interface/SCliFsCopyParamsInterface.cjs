@@ -23,7 +23,7 @@ __export(SCliFsCopyParamsInterface_exports, {
   default: () => SCliFsCopyParamsInterface
 });
 module.exports = __toCommonJS(SCliFsCopyParamsInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
 class SCliFsCopyParamsInterface extends import_s_interface.default {
   static get _definition() {
     return {

@@ -23,5 +23,5 @@ __export(closest_exports, {
   default: () => closest_default
 });
 module.exports = __toCommonJS(closest_exports);
-var import_querySelectorUp = __toESM(require("./querySelectorUp"));
+var import_querySelectorUp = __toESM(require("./querySelectorUp"), 1);
 var closest_default = import_querySelectorUp.default;

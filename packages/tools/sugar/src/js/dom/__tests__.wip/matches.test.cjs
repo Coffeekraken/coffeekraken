@@ -13,7 +13,7 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var import_matches = __toESM(require("../query/matches"));
+var import_matches = __toESM(require("../query/matches"), 1);
 describe("sugar.js.dom.matches", () => {
   document.body.innerHTML = `
       <div id="testing" class="hello-world coco">

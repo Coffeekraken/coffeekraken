@@ -37,11 +37,11 @@ __export(execPhp_exports, {
   default: () => execPhp
 });
 module.exports = __toCommonJS(execPhp_exports);
-var import_child_process = __toESM(require("child_process"));
-var import_base64 = __toESM(require("@coffeekraken/sugar/shared/crypt/base64"));
-var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"));
-var import_packageTmpDir = __toESM(require("@coffeekraken/sugar/node/path/packageTmpDir"));
-var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"));
+var import_child_process = __toESM(require("child_process"), 1);
+var import_base64 = __toESM(require("@coffeekraken/sugar/shared/crypt/base64"), 1);
+var import_uniqid = __toESM(require("@coffeekraken/sugar/shared/string/uniqid"), 1);
+var import_packageTmpDir = __toESM(require("@coffeekraken/sugar/node/path/packageTmpDir"), 1);
+var import_writeJsonSync = __toESM(require("@coffeekraken/sugar/node/fs/writeJsonSync"), 1);
 function execPhp(scriptPath, params, settings) {
   return new Promise((resolve, reject) => {
     settings = __spreadValues({

@@ -23,7 +23,7 @@ __export(scriptLoaded_exports, {
   default: () => scriptLoaded_default
 });
 module.exports = __toCommonJS(scriptLoaded_exports);
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function loadScript($script, cb = null) {
   return new import_s_promise.default(({ resolve, reject, emit }) => {
     let done = false;

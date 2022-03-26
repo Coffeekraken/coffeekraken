@@ -23,7 +23,7 @@ __export(SSvgFilter_exports, {
   default: () => SSvgFilter
 });
 module.exports = __toCommonJS(SSvgFilter_exports);
-var import_uniqid = __toESM(require("../../shared/string/uniqid"));
+var import_uniqid = __toESM(require("../../shared/string/uniqid"), 1);
 class SSvgFilter {
   constructor(filter_content) {
     this.elms = [];

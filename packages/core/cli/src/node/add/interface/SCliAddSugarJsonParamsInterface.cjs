@@ -23,7 +23,7 @@ __export(SCliAddSugarJsonParamsInterface_exports, {
   default: () => SCliAddSugarJsonParamsInterface
 });
 module.exports = __toCommonJS(SCliAddSugarJsonParamsInterface_exports);
-var import_s_interface = __toESM(require("@coffeekraken/s-interface"));
+var import_s_interface = __toESM(require("@coffeekraken/s-interface"), 1);
 class SCliAddSugarJsonParamsInterface extends import_s_interface.default {
   static get _definition() {
     return {

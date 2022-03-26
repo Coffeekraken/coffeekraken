@@ -23,8 +23,8 @@ __export(whenVisible_exports, {
   default: () => whenVisible_default
 });
 module.exports = __toCommonJS(whenVisible_exports);
-var import_visible = __toESM(require("../is/visible"));
-var import_closestNotVisible = __toESM(require("../query/closestNotVisible"));
+var import_visible = __toESM(require("../is/visible"), 1);
+var import_closestNotVisible = __toESM(require("../query/closestNotVisible"), 1);
 function whenVisible(elm, cb = null) {
   return new Promise((resolve, reject) => {
     let isSelfVisible = false, areParentsVisible = false, closestNotVisible = null, selfObserver = null, parentObserver = null;

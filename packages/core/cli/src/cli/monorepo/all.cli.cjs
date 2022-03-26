@@ -23,7 +23,7 @@ __export(all_cli_exports, {
   default: () => all_cli_default
 });
 module.exports = __toCommonJS(all_cli_exports);
-var import_link = __toESM(require("./link.cli"));
+var import_link = __toESM(require("./link.cli"), 1);
 var all_cli_default = async (stringArgs = "") => {
   await (0, import_link.default)(stringArgs);
 };

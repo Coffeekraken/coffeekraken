@@ -37,8 +37,8 @@ __export(easeInterval_exports, {
   default: () => easeInterval_default
 });
 module.exports = __toCommonJS(easeInterval_exports);
-var import_easeInOutQuart = __toESM(require("../easing/easeInOutQuart"));
-var import_s_promise = __toESM(require("@coffeekraken/s-promise"));
+var import_easeInOutQuart = __toESM(require("../easing/easeInOutQuart"), 1);
+var import_s_promise = __toESM(require("@coffeekraken/s-promise"), 1);
 function easeInterval_default(duration, cb, settings = {}) {
   return new import_s_promise.default(({ resolve, reject, emit, on }) => {
     settings = __spreadValues({

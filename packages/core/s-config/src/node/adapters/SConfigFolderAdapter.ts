@@ -112,10 +112,10 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         );
 
         // determine the running format (cjs|esm)
-        let format = 'cjs';
-        // try {
-        //     if (module !== undefined) format = 'cjs';
-        // } catch (e) {}
+        let format = 'esm';
+        try {
+            if (module !== undefined) format = 'cjs';
+        } catch (e) {}
 
         // handle each scopes
         Object.keys(this.configFolderAdapterSettings.scopes).forEach(
@@ -212,7 +212,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 // @TODO      check for delete cache with import
                 const importedConfig = await import(configFilePath);
 
-                let configData = importedConfig.default;
+                let configData = importedConfig ?? importedConfig.default;
                 if (typeof configData === 'function') {
                     configData = configData(env, configObj ?? {});
                 }

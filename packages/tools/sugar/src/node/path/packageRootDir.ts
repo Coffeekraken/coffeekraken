@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import type { IPackageRootSettings } from './packageRoot';
 import __packageRoot from './packageRoot';
 
 /**
@@ -30,14 +31,14 @@ import __packageRoot from './packageRoot';
 global.packageRootDirs = {};
 export default function (
     from: string = process.cwd(),
-    highest = false,
+    settings: Partial<IPackageRootSettings> = {},
 ): string {
-    const storageKey = `${from}-${highest ? 'highest' : ''}`;
+    const storageKey = `${from}-${settings.highest ? 'highest' : ''}`;
 
     if (!from && global.packageRootDirs[storageKey])
         return global.packageRootDirs[storageKey];
 
-    const path = __packageRoot(from, highest);
+    const path = __packageRoot(from, settings);
     global.packageRootDirs[storageKey] = path;
 
     return path;

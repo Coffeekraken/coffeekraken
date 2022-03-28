@@ -14,7 +14,7 @@
       "actions": {
         "start": {
           "description": "Start a new frontend server process",
-          "process": "./src/node/start.cli.js"
+          "process": "./dist/pkg/esm/node/start.cli.js"
         }
       }
     }

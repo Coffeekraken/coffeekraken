@@ -1,8 +1,8 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { ISSitemapBuilderResultItem } from './SSitemapBuilder';
-import { ISSitemapBuilderBuildParams } from './interface/SSitemapBuilderBuildParamsInterface';
-import { ISSitemapBuilderDocmapSourceCtorSettings } from './sources/SSitemapBuilderDocmapSource';
+import type { ISSitemapBuilderResultItem } from './SSitemapBuilder';
+import type { ISSitemapBuilderBuildParams } from './interface/SSitemapBuilderBuildParamsInterface';
+import type { ISSitemapBuilderDocmapSourceCtorSettings } from './sources/SSitemapBuilderDocmapSource';
 
 /**
  * @name            SSitemapSource

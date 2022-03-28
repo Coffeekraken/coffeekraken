@@ -1,4 +1,7 @@
-import { ISNotificationAdapter, ISNotificationObj } from '../SNotification';
+import type {
+    ISNotificationAdapter,
+    ISNotificationObj,
+} from '../SNotification';
 import __notifier from 'node-notifier';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __SPromise from '@coffeekraken/s-promise';
@@ -21,39 +24,39 @@ import __SPromise from '@coffeekraken/s-promise';
 
 const stack: any = {};
 __notifier.on('click', function (notifierObject, options, event) {
-  if (options.id && stack[options.id]) {
-    stack[options.id].click(options);
-  }
+    if (options.id && stack[options.id]) {
+        stack[options.id].click(options);
+    }
 });
 __notifier.on('timeout', function (notifierObject, options, event) {
-  if (options.id && stack[options.id]) {
-    stack[options.id].timeout(options);
-  }
+    if (options.id && stack[options.id]) {
+        stack[options.id].timeout(options);
+    }
 });
 
 const nodeAdapter: ISNotificationAdapter = {
-  id: 'node',
-  name: 'Node notification adapter',
-  notify: (notificationObj: ISNotificationObj, settings: any) => {
-    return new __SPromise(({ resolve, reject, emit }) => {
-      if (!notificationObj.id) notificationObj.id = __uniqid();
+    id: 'node',
+    name: 'Node notification adapter',
+    notify: (notificationObj: ISNotificationObj, settings: any) => {
+        return new __SPromise(({ resolve, reject, emit }) => {
+            if (!notificationObj.id) notificationObj.id = __uniqid();
 
-      stack[notificationObj.id] = {
-        timeout: () => {
-          emit('timeout');
-          resolve();
-        },
-        click: (options) => {
-          emit('click', options);
-          resolve();
-        }
-      };
+            stack[notificationObj.id] = {
+                timeout: () => {
+                    emit('timeout');
+                    resolve();
+                },
+                click: (options) => {
+                    emit('click', options);
+                    resolve();
+                },
+            };
 
-      if (!notificationObj.contentImage && notificationObj.icon)
-        notificationObj.contentImage = notificationObj.icon;
-      __notifier.notify(notificationObj);
-    }) as Promise<any>;
-  }
+            if (!notificationObj.contentImage && notificationObj.icon)
+                notificationObj.contentImage = notificationObj.icon;
+            __notifier.notify(notificationObj);
+        }) as Promise<any>;
+    },
 };
 
 export default nodeAdapter;

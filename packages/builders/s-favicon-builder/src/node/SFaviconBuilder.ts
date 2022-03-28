@@ -1,6 +1,8 @@
-import __SBuilder, { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
-import __SGlob, { IResolveGlobSettings } from '@coffeekraken/s-glob';
+import type { IResolveGlobSettings } from '@coffeekraken/s-glob';
+import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SFaviconBuilderBuildParamsInterface from './interface/SFaviconBuilderBuildParamsInterface';
@@ -136,34 +138,36 @@ export default class SFaviconBuilder extends __SBuilder {
     ): Promise<ISFaviconBuilderResult> {
         return new __SPromise(
             async ({ resolve, reject, emit }) => {
-
                 // @ts-ignore
                 params = __SFaviconBuilderBuildParamsInterface.apply(
                     params ?? {},
                 );
 
                 const packageJson = __packageSyncJson(process.cwd(), {
-                    standardize: true
+                    standardize: true,
                 });
 
                 const finalSettings = <ISFaviconBuilderSettings>__deepMerge(
                     {
-                        path: `/${__path.relative(__packageRoot(), params.outDir)}`, // Path for overriding default icons path. `string`
+                        path: `/${__path.relative(
+                            __packageRoot(),
+                            params.outDir,
+                        )}`, // Path for overriding default icons path. `string`
                         appName: packageJson.name, // Your application's name. `string`
                         appShortName: packageJson.name, // Your application's short_name. `string`. Optional. If not set, appName will be used
                         appDescription: packageJson.description, // Your application's description. `string`
                         developerName: packageJson.author?.name, // Your (or your developer's) name. `string`
                         developerURL: packageJson.author?.url, // Your (or your developer's) URL. `string`
-                        dir: "auto", // Primary text direction for name, short_name, and description
-                        lang: "en-US", // Primary language for name and short_name
-                        background: "#fff", // Background colour for flattened icons. `string`
-                        theme_color: "#fff", // Theme color user for example in Android's task switcher. `string`
-                        appleStatusBarStyle: "black-translucent", // Style for Apple status bar: "black-translucent", "default", "black". `string`
-                        display: "standalone", // Preferred display mode: "fullscreen", "standalone", "minimal-ui" or "browser". `string`
-                        orientation: "any", // Default orientation: "any", "natural", "portrait" or "landscape". `string`
-                        scope: "/", // set of URLs that the browser considers within your app
-                        start_url: "/?homescreen=1", // Start URL when launching the application from a device. `string`
-                        version: "1.0", // Your application's version string. `string`
+                        dir: 'auto', // Primary text direction for name, short_name, and description
+                        lang: 'en-US', // Primary language for name and short_name
+                        background: '#fff', // Background colour for flattened icons. `string`
+                        theme_color: '#fff', // Theme color user for example in Android's task switcher. `string`
+                        appleStatusBarStyle: 'black-translucent', // Style for Apple status bar: "black-translucent", "default", "black". `string`
+                        display: 'standalone', // Preferred display mode: "fullscreen", "standalone", "minimal-ui" or "browser". `string`
+                        orientation: 'any', // Default orientation: "any", "natural", "portrait" or "landscape". `string`
+                        scope: '/', // set of URLs that the browser considers within your app
+                        start_url: '/?homescreen=1', // Start URL when launching the application from a device. `string`
+                        version: '1.0', // Your application's version string. `string`
                         logging: false, // Print logs to console? `boolean`
                         pixel_art: false, // Keeps pixels "sharp" when scaling up, for pixel art.  Only supported in offline mode.
                         loadManifestWithCredentials: false, // Browsers don't send cookies when fetching a manifest, enable this to fix that. `boolean`
@@ -190,17 +194,19 @@ export default class SFaviconBuilder extends __SBuilder {
                     },
                     this.faviconBuilderSettings,
                     settings ?? {},
-                    params.settings ?? {}
+                    params.settings ?? {},
                 );
 
                 // ensure input file exists
                 if (!__fs.existsSync(params.input)) {
-                    throw new Error(`The input favicon file "<cyan>${params.input}</cyan>" does not exists...`);
+                    throw new Error(
+                        `The input favicon file "<cyan>${params.input}</cyan>" does not exists...`,
+                    );
                 }
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[favicon]</yellow> Start generating your favicon files...`
+                    value: `<yellow>[favicon]</yellow> Start generating your favicon files...`,
                 });
 
                 // generate
@@ -209,30 +215,47 @@ export default class SFaviconBuilder extends __SBuilder {
                         return reject(error.message);
                     }
 
-                    response.images.forEach(imageObj => {
+                    response.images.forEach((imageObj) => {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<yellow>[favicon]</yellow> Saving file "<cyan>${__path.relative(__packageRoot(), params.outDir)}/${imageObj.name}</cyan>"`
+                            value: `<yellow>[favicon]</yellow> Saving file "<cyan>${__path.relative(
+                                __packageRoot(),
+                                params.outDir,
+                            )}/${imageObj.name}</cyan>"`,
                         });
-                        __writeFileSync(`${params.outDir}/${imageObj.name}`, imageObj.contents);
+                        __writeFileSync(
+                            `${params.outDir}/${imageObj.name}`,
+                            imageObj.contents,
+                        );
                     });
 
-                    response.files.forEach(fileObj => {
+                    response.files.forEach((fileObj) => {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<yellow>[favicon]</yellow> Saving file "<cyan>${__path.relative(__packageRoot(), params.outDir)}/${fileObj.name}</cyan>"`
+                            value: `<yellow>[favicon]</yellow> Saving file "<cyan>${__path.relative(
+                                __packageRoot(),
+                                params.outDir,
+                            )}/${fileObj.name}</cyan>"`,
                         });
-                        __writeFileSync(`${params.outDir}/${fileObj.name}`, fileObj.contents);
+                        __writeFileSync(
+                            `${params.outDir}/${fileObj.name}`,
+                            fileObj.contents,
+                        );
                     });
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[favicon]</yellow> Saving file "<cyan>${__path.relative(__packageRoot(), params.outDir)}/favicon.html</cyan>"`
+                        value: `<yellow>[favicon]</yellow> Saving file "<cyan>${__path.relative(
+                            __packageRoot(),
+                            params.outDir,
+                        )}/favicon.html</cyan>"`,
                     });
-                    __writeFileSync(`${params.outDir}/favicon.html`, response.html.join("\n"));
+                    __writeFileSync(
+                        `${params.outDir}/favicon.html`,
+                        response.html.join('\n'),
+                    );
 
                     resolve();
-
                 });
             },
             {

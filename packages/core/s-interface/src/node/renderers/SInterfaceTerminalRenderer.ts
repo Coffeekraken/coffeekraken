@@ -1,7 +1,7 @@
 import __SInterfaceRenderer from './SInterfaceRenderer';
 import __SInterface from '../SInterface';
 
-import { ISInterfaceRendererSettings } from '../../shared/renderers/ISInterfaceRenderer';
+import type { ISInterfaceRendererSettings } from '../../shared/renderers/ISInterfaceRenderer';
 
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
@@ -20,29 +20,29 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SInterfaceTerminalRenderer extends __SInterfaceRenderer {
-  static id = 'terminal';
+    static id = 'terminal';
 
-  /**
-   * @name        constructor
-   * @type          Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  constructor(
-    int: __SInterface,
-    settings?: Partial<ISInterfaceRendererSettings>
-  ) {
-    super(int, {
-      templatesDir: `${__dirname()}/terminal`,
-      ...settings
-    });
-  }
+    /**
+     * @name        constructor
+     * @type          Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    constructor(
+        int: __SInterface,
+        settings?: Partial<ISInterfaceRendererSettings>,
+    ) {
+        super(int, {
+            templatesDir: `${__dirname()}/terminal`,
+            ...settings,
+        });
+    }
 
-  renderType(type) {}
+    renderType(type) {}
 }
 
 export default SInterfaceTerminalRenderer;

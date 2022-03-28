@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              weakmapTypeDescriptor
@@ -22,12 +22,14 @@ import { ISTypeDescriptor } from '../SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'WeakMap',
-  id: 'weakmap',
-  is: (value: any) => value instanceof WeakMap,
-  cast: (value: any) => {
-    return new Error(`Sorry but nothing can be casted to a WeakMap for now`);
-  }
+    name: 'WeakMap',
+    id: 'weakmap',
+    is: (value: any) => value instanceof WeakMap,
+    cast: (value: any) => {
+        return new Error(
+            `Sorry but nothing can be casted to a WeakMap for now`,
+        );
+    },
 };
 
 export default descriptor;

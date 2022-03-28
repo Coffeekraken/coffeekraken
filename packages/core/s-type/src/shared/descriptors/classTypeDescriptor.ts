@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 
 /**
@@ -23,12 +23,12 @@ import __isClass from '@coffeekraken/sugar/shared/is/class';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Class',
-  id: 'class',
-  is: (value: any) => __isClass(value),
-  cast: (value: any) => {
-    return new Error(`Sorry but nothing is castable to a Class`);
-  }
+    name: 'Class',
+    id: 'class',
+    is: (value: any) => __isClass(value),
+    cast: (value: any) => {
+        return new Error(`Sorry but nothing is castable to a Class`);
+    },
 };
 
 export default descriptor;

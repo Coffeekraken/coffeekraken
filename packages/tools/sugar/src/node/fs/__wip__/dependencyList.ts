@@ -1,6 +1,6 @@
 import __dependencyTree from 'dependency-tree';
 import __chokidar from 'chokidar';
-import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
+import __SPromise from '@coffeekraken/s-promise';
 import __fs from 'fs';
 import __folderPath from '../folderPath';
 import __minimatch from 'minimatch';

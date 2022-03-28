@@ -1,4 +1,5 @@
-import __SFeature, { ISFeature } from '@coffeekraken/s-feature';
+import type { ISFeature } from '@coffeekraken/s-feature';
+import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SParallaxFeatureInterface from './interface/SParallaxFeatureInterface';
 import __getTransformProperties from '@coffeekraken/sugar/js/dom/style/getTransformProperties';

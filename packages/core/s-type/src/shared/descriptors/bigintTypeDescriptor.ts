@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              bigintTypeDescriptor
@@ -22,26 +22,26 @@ import { ISTypeDescriptor } from '../SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Bigint',
-  id: 'bigint',
-  is: (value: any) => typeof value === 'bigint',
-  cast: (value: any) => {
-    if (typeof value === 'bigint') return value;
-    if (typeof value !== 'string' && typeof value !== 'number') {
-      return new Error(
-        `Sorry but only <yellow>String</yellow> and <yellow>Number</yellow> can be casted to <green>Bigint</green>`
-      );
-    }
-    let res: any;
-    try {
-      res = BigInt(value);
-    } catch (e) {
-      res = new Error(
-        `It seem's that the passed value "<yellow>${value}</yellow>" can not be casted to a <green>BigInt</green>`
-      );
-    }
-    return res;
-  }
+    name: 'Bigint',
+    id: 'bigint',
+    is: (value: any) => typeof value === 'bigint',
+    cast: (value: any) => {
+        if (typeof value === 'bigint') return value;
+        if (typeof value !== 'string' && typeof value !== 'number') {
+            return new Error(
+                `Sorry but only <yellow>String</yellow> and <yellow>Number</yellow> can be casted to <green>Bigint</green>`,
+            );
+        }
+        let res: any;
+        try {
+            res = BigInt(value);
+        } catch (e) {
+            res = new Error(
+                `It seem's that the passed value "<yellow>${value}</yellow>" can not be casted to a <green>BigInt</green>`,
+            );
+        }
+        return res;
+    },
 };
 
 export default descriptor;

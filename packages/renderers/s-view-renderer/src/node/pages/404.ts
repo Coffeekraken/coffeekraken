@@ -1,4 +1,5 @@
-import __SViewRenderer, { ISViewRendererRenderResult } from '../SViewRenderer';
+import type { ISViewRendererRenderResult } from '../SViewRenderer';
+import __SViewRenderer from '../SViewRenderer';
 
 /**
  * @name           404
@@ -23,16 +24,16 @@ import __SViewRenderer, { ISViewRendererRenderResult } from '../SViewRenderer';
  */
 
 export interface I404Data {
-  title: string;
-  body: string;
+    title: string;
+    body: string;
 }
 
 export default function page404(
-  data: I404Data
+    data: I404Data,
 ): Promise<ISViewRendererRenderResult> {
-  const engine = new __SViewRenderer('pages.error.404', {
-    viewRenderer: {}
-  });
-  const result = engine.render(data);
-  return result;
+    const engine = new __SViewRenderer('pages.error.404', {
+        viewRenderer: {},
+    });
+    const result = engine.render(data);
+    return result;
 }

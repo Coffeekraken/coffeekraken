@@ -3,7 +3,8 @@ import __isPath from '@coffeekraken/sugar/node/is/path';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __SBasicStdio from '../node/basic/SBasicStdio';
 import __SWebsocketStdio from '../node/websocket/SWebsocketStdio';
-import __SStdio, { ISStdioUi } from './SStdio';
+import type { ISStdioUi } from './SStdio';
+import __SStdio from './SStdio';
 
 /**
  * @name            new
@@ -46,14 +47,16 @@ export default async function _new(
         switch (stdio) {
             case __SStdio.UI_WEBSOCKET:
                 stdioInstance = new __SWebsocketStdio(id, sources, settings);
-            break;
+                break;
             case __SStdio.UI_BASIC:
             default:
                 stdioInstance = new __SBasicStdio(id, sources, settings);
                 break;
         }
     } else {
-        throw new Error(`No stdio implementation found for the current "browser" environment...`);
+        throw new Error(
+            `No stdio implementation found for the current "browser" environment...`,
+        );
     }
     return stdioInstance;
 }

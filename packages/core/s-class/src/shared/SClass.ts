@@ -1,5 +1,5 @@
 import __getExtendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';
-import { ISInterface } from '@coffeekraken/s-interface';
+import type { ISInterface } from '@coffeekraken/s-interface';
 import __isPlain from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepAssign from '@coffeekraken/sugar/shared/object/deepAssign';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -261,7 +261,10 @@ function expose(ctx: any, instance: any, settings: ISClassExposeSettings) {
 
     if (settings.props) {
         settings.props.forEach((prop) => {
-            if (instance[prop].bind && typeof instance[prop].bind === 'function') {
+            if (
+                instance[prop].bind &&
+                typeof instance[prop].bind === 'function'
+            ) {
                 ctx[prop] = instance[prop].bind(instance);
             } else {
                 ctx[prop] = instance[prop];
@@ -283,7 +286,12 @@ function getInterfaceObj(ctx: any, name: string): any {
                 } else {
                     interfaceObj = {
                         apply: true,
-                        on: name === 'settings' ? '_settings' : name === 'this' ? ctx : undefined,
+                        on:
+                            name === 'settings'
+                                ? '_settings'
+                                : name === 'this'
+                                ? ctx
+                                : undefined,
                         class: interfacesObj[name],
                     };
                 }
@@ -326,7 +334,12 @@ function applyInterfaces(ctx: any) {
                     {},
                     {
                         apply: true,
-                        on: name === 'settings' ? '_settings' : name === 'this' ? ctx : undefined,
+                        on:
+                            name === 'settings'
+                                ? '_settings'
+                                : name === 'this'
+                                ? ctx
+                                : undefined,
                         ...interfaceObj,
                     },
                 );
@@ -335,7 +348,12 @@ function applyInterfaces(ctx: any) {
                     {},
                     {
                         apply: true,
-                        on: name === 'settings' ? '_settings' : name === 'this' ? ctx : undefined,
+                        on:
+                            name === 'settings'
+                                ? '_settings'
+                                : name === 'this'
+                                ? ctx
+                                : undefined,
                         class: interfaceObj,
                     },
                 );
@@ -344,7 +362,10 @@ function applyInterfaces(ctx: any) {
             if (settings.apply !== true) return;
 
             if (settings.on) {
-                if (typeof settings.on === 'string' && __get(ctx, settings.on) !== undefined) {
+                if (
+                    typeof settings.on === 'string' &&
+                    __get(ctx, settings.on) !== undefined
+                ) {
                     applyInterface(ctx, `${className}.${name}`, settings.on);
                 } else if (typeof settings.on === 'object') {
                     applyInterface(ctx, `${className}.${name}`, settings.on);
@@ -387,8 +408,10 @@ function applyInterface(ctx: any, name: string, on: any = null) {
         let applyId = ctx.constructor.name;
         if (ctx.id) applyId += `(${ctx.id})`;
         if (name) applyId += `.${name}`;
-        if (interfaceObj.on && interfaceObj.on.constructor) applyId += `.${interfaceObj.on.constructor.name}`;
-        if (interfaceObj.on && interfaceObj.on.id) applyId += `(${interfaceObj.on.id})`;
+        if (interfaceObj.on && interfaceObj.on.constructor)
+            applyId += `.${interfaceObj.on.constructor.name}`;
+        if (interfaceObj.on && interfaceObj.on.id)
+            applyId += `(${interfaceObj.on.id})`;
 
         let res;
         if (name === 'this') {

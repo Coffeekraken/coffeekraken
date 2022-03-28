@@ -13,10 +13,9 @@ import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { property, query, queryAssignedNodes } from 'lit/decorators.js';
 import __decodeHtmlEntities from '@coffeekraken/sugar/js/html/decodeHtmlEntities';
-// @ts-ignore
-import __css from '../css/s-code-example.css';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
-import __scrollTo, { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 
 // // @ts-ignore
 import __prettier from 'prettier/esm/standalone.mjs';
@@ -27,6 +26,9 @@ import __prettierHtml from 'prettier/esm/parser-html.mjs';
 // @ts-ignore
 import __prettierCss from 'prettier/esm/parser-postcss.mjs';
 import __prettierPhp from '@prettier/plugin-php/standalone';
+
+// @ts-ignore
+import __css from '../../../../src/css/s-code-example.css'; // relative to /dist/pkg/esm/js
 
 __SClipboardCopy();
 
@@ -41,7 +43,7 @@ export interface ISCodeExampleComponentProps {
     moreAction: 'toggle' | string;
     more: boolean;
     scrollOnMore: boolean;
-    scrollToSettings: Partial<IScrollToSettings>
+    scrollToSettings: Partial<IScrollToSettings>;
 }
 
 /**
@@ -63,10 +65,10 @@ export interface ISCodeExampleComponentProps {
  * @support         firefox
  * @support         safari
  * @support         edge
- * 
+ *
  * @install           shell
  * npm i @coffeekraken/s-code-example-component
- * 
+ *
  * @install           js
  * import { define } from '@coffeekraken/s-code-example-component';
  * define();
@@ -165,7 +167,6 @@ export default class SCodeExample extends __SLitComponent {
         });
     }
     async firstUpdated() {
-
         this.$templates = this.querySelectorAll('template,code');
 
         this.$templates.forEach(($template: HTMLElement) => {
@@ -202,11 +203,10 @@ export default class SCodeExample extends __SLitComponent {
                         __prettierCss,
                         __prettierHtml,
                         __prettierJs,
-                        __prettierPhp
+                        __prettierPhp,
                     ],
                 });
-            } catch (e) {
-            }
+            } catch (e) {}
             this._items = [
                 ...this._items,
                 {
@@ -268,13 +268,11 @@ export default class SCodeExample extends __SLitComponent {
         this._more = !this._more;
         this.setMoreClass();
         __scrollTo(this, {
-            ...this.props.scrollToSettings ?? {}
+            ...(this.props.scrollToSettings ?? {}),
         });
     }
     highlight(id) {
-        const $content = <HTMLElement>(
-            this.querySelector(`pre#${id} code`)
-        );
+        const $content = <HTMLElement>this.querySelector(`pre#${id} code`);
 
         const item = this._items.find((i) => i.id === id);
 
@@ -285,13 +283,15 @@ export default class SCodeExample extends __SLitComponent {
         $content.setAttribute('inited', 'true');
         let code;
         try {
-            const codeToHighlight = __decodeHtmlEntities($content.innerHTML.replace(/(<|&lt;)!\s?--\?lit.*--\s?(>|&gt;)/, ''));
-            code = __hljs.highlight(
-                codeToHighlight,
-                {
-                    language: <string>$content.getAttribute('lang'),
-                },
+            const codeToHighlight = __decodeHtmlEntities(
+                $content.innerHTML.replace(
+                    /(<|&lt;)!\s?--\?lit.*--\s?(>|&gt;)/,
+                    '',
+                ),
             );
+            code = __hljs.highlight(codeToHighlight, {
+                language: <string>$content.getAttribute('lang'),
+            });
         } catch (e) {
             console.log(e);
         }
@@ -312,25 +312,16 @@ export default class SCodeExample extends __SLitComponent {
                 class="${this.componentUtils.className()} ${this.props.more
                     ? this.componentUtils.className('more')
                     : ''}"
-                ?lines="${
-                    // @ts-ignore
-                    this.lines
-                }"
-                ?mounted="${
-                    // @ts-ignore
-                    this.mounted
-                }"
-                ?bare="${
-                    // @ts-ignore
-                    this.bare
-                }"
-                toolbar-position="${
-                    // @ts-ignore
-                    this.toolbarPosition
-                }"
+                ?lines="${// @ts-ignore
+                this.lines}"
+                ?mounted="${// @ts-ignore
+                this.mounted}"
+                ?bare="${// @ts-ignore
+                this.bare}"
+                toolbar-position="${// @ts-ignore
+                this.toolbarPosition}"
             >
-                <div class="templates">
-                </div>
+                <div class="templates"></div>
 
                 <header class="${this.componentUtils.className('__nav')}">
                     <div
@@ -354,43 +345,39 @@ export default class SCodeExample extends __SLitComponent {
                             `,
                         )}
                     </div>
-                    ${
-                        // @ts-ignore
-                        this.toolbarPosition === 'nav'
-                            ? html`
-                                  <div
-                                      class="${this.componentUtils.className(
-                                          '__toolbar',
-                                      )}"
-                                  >
-                                      <s-clipboard-copy
-                                          @click="${this.copy}"
-                                      ></s-clipboard-copy>
-                                  </div>
-                              `
-                            : ''
-                    }
+                    ${// @ts-ignore
+                    this.toolbarPosition === 'nav'
+                        ? html`
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__toolbar',
+                                  )}"
+                              >
+                                  <s-clipboard-copy
+                                      @click="${this.copy}"
+                                  ></s-clipboard-copy>
+                              </div>
+                          `
+                        : ''}
                 </header>
                 <div
                     class="${this.componentUtils.className('__content')}"
                     style="--max-lines: ${this.props.lines ?? 99999999};"
                 >
-                    ${
-                        // @ts-ignore
-                        this.toolbarPosition !== 'nav'
-                            ? html`
-                                  <div
-                                      class="${this.componentUtils.className(
-                                          '__toolbar',
-                                      )}"
-                                  >
-                                      <s-clipboard-copy
-                                          @click="${this.copy}"
-                                      ></s-clipboard-copy>
-                                  </div>
-                              `
-                            : ''
-                    }
+                    ${// @ts-ignore
+                    this.toolbarPosition !== 'nav'
+                        ? html`
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__toolbar',
+                                  )}"
+                              >
+                                  <s-clipboard-copy
+                                      @click="${this.copy}"
+                                  ></s-clipboard-copy>
+                              </div>
+                          `
+                        : ''}
                     ${(this._items ?? []).map(
                         (item) => html`
                             <pre
@@ -406,12 +393,10 @@ export default class SCodeExample extends __SLitComponent {
                             item.id}" class="language-${item.lang} ${item.lang} ${this
                                 .props.bare
                                 ? ''
-                                : 'hljs'}">${
-                                // @ts-ignore
-                                item.highlightedCode
-                                    ? unsafeHTML(item.highlightedCode)
-                                    : item.code.trim()
-                            }</code>
+                                : 'hljs'}">${// @ts-ignore
+                            item.highlightedCode
+                                ? unsafeHTML(item.highlightedCode)
+                                : item.code.trim()}</code>
                         </pre>
                         `,
                     )}
@@ -432,20 +417,18 @@ export default class SCodeExample extends __SLitComponent {
                                               @click="${() =>
                                                   this.toggleMore()}"
                                           >
-                                              ${
-                                                  // @ts-ignore
-                                                  this._more
-                                                      ? html`
-                                                            ${this.props
-                                                                .lessLabel ??
-                                                            'Show less'}
-                                                        `
-                                                      : html`
-                                                            ${this.props
-                                                                .moreLabel ??
-                                                            'Show more'}
-                                                        `
-                                              }
+                                              ${// @ts-ignore
+                                              this._more
+                                                  ? html`
+                                                        ${this.props
+                                                            .lessLabel ??
+                                                        'Show less'}
+                                                    `
+                                                  : html`
+                                                        ${this.props
+                                                            .moreLabel ??
+                                                        'Show more'}
+                                                    `}
                                           </a>
                                       `
                                     : html`
@@ -454,25 +437,21 @@ export default class SCodeExample extends __SLitComponent {
                                                   '__more-button',
                                                   's-btn s-color--accent',
                                               )}"
-                                              href="${
-                                                  // @ts-ignore
-                                                  this.moreAction
-                                              }"
+                                              href="${// @ts-ignore
+                                              this.moreAction}"
                                           >
-                                              ${
-                                                  // @ts-ignore
-                                                  this._more
-                                                      ? html`
-                                                            ${this.props
-                                                                .lessLabel ??
-                                                            'Show less'}
-                                                        `
-                                                      : html`
-                                                            ${this.props
-                                                                .moreLabel ??
-                                                            'Show more'}
-                                                        `
-                                              }
+                                              ${// @ts-ignore
+                                              this._more
+                                                  ? html`
+                                                        ${this.props
+                                                            .lessLabel ??
+                                                        'Show less'}
+                                                    `
+                                                  : html`
+                                                        ${this.props
+                                                            .moreLabel ??
+                                                        'Show more'}
+                                                    `}
                                           </a>
                                       `
                             }                        

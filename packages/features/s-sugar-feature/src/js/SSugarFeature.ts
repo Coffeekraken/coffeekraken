@@ -1,4 +1,5 @@
-import __SFeature, { ISFeature } from '@coffeekraken/s-feature';
+import type { ISFeature } from '@coffeekraken/s-feature';
+import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
@@ -37,7 +38,7 @@ export interface ISSugarFeatureProps {
  * @feature         Additional input attributes like `empty`, `dirty` and `has-value`
  * @feature         Add state attributes to links like `actual` and `actual-child` depending on the document location url
  * @feature         Prevent the scroll restoration behavior on chrome that can usually be anoying
- * 
+ *
  * @support          chromium
  * @support          firefox
  * @support          safari
@@ -45,7 +46,7 @@ export interface ISSugarFeatureProps {
  *
  * @example         html        Simple usage        Simply add the `s-sugar` property on your body tag
  * <bodyTag s-sugar>
- * 
+ *
  * </bodyTag>
  *
  * @since       2.0.0
@@ -76,13 +77,17 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         // vhvar
         if (this.componentUtils.props.vhvar) this._vhvar();
         // resizeTransmations
-        if (this.componentUtils.props.resizeTransmations) this._clearTransmationsOnResize();
+        if (this.componentUtils.props.resizeTransmations)
+            this._clearTransmationsOnResize();
         // inputAdditionalAttributes
-        if (this.componentUtils.props.inputAdditionalAttributes) __inputAdditionalAttributes();
+        if (this.componentUtils.props.inputAdditionalAttributes)
+            __inputAdditionalAttributes();
         // linksStateAttributes
-        if (this.componentUtils.props.linksStateAttributes) __linksStateAttributes();
+        if (this.componentUtils.props.linksStateAttributes)
+            __linksStateAttributes();
         // prevent scroll restoration
-        if (this.componentUtils.props.preventScrollRestoration) __preventScrollRestoration();
+        if (this.componentUtils.props.preventScrollRestoration)
+            __preventScrollRestoration();
     }
     _clearTransmationsOnResizeTimeout;
     _isResizing = false;
@@ -98,7 +103,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
             this._clearTransmationsOnResizeTimeout = setTimeout(() => {
                 this._isResizing = false;
                 resetFn?.();
-            }, 100); 
+            }, 100);
         });
     }
     _scrolled() {

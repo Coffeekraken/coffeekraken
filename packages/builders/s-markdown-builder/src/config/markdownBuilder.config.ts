@@ -1,8 +1,11 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
+
+    const packageRoot = __packageRoot(__dirname());
 
     return {
         default: {
@@ -114,7 +117,7 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            protectedTags: ['template','code'],
+            protectedTags: ['template', 'code'],
         },
         presets: {},
         transformers: {
@@ -141,12 +144,15 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                preprocessor: __path.resolve(__dirname(), '../transformers/og/og'),
+                preprocessor: __path.resolve(
+                    packageRoot,
+                    'src/transformers/og/og',
+                ),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.transformers.og
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../transformers/og/og.md')
+                 * @default         __path.resolve(packageRoot,'src/transformers/og/og.md')
                  *
                  * Specify the "markdown" template to transform this match
                  *
@@ -154,14 +160,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../transformers/og/og.md',
+                    packageRoot,
+                    'src/transformers/og/og.md',
                 ),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.transformers.og
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../transformers/og/og.html')
+                 * @default         __path.resolve(packageRoot,'src/transformers/og/og.html')
                  *
                  * Specify the "html" template to transform this match
                  *
@@ -169,8 +175,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../transformers/og/og.html',
+                    packageRoot,
+                    'src/transformers/og/og.html',
                 ),
             },
             code: {
@@ -190,7 +196,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.transformers.code
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../transformers/code/code.md')
+                 * @default         __path.resolve(packageRoot,'src/transformers/code/code.md')
                  *
                  * Specify the "markdown" template to transform this match
                  *
@@ -198,14 +204,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../transformers/code/code.md',
+                    packageRoot,
+                    'src/transformers/code/code.md',
                 ),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.transformers.code
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../transformers/code/code.html')
+                 * @default         __path.resolve(packageRoot,'src/transformers/code/code.html')
                  *
                  * Specify the "html" template to transform this match
                  *
@@ -213,8 +219,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../transformers/code/code.html',
+                    packageRoot,
+                    'src/transformers/code/code.html',
                 ),
             },
         },
@@ -225,7 +231,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/license/license.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/license/license.md')
                  *
                  * Specify the "markdown" template for this "license" partial
                  *
@@ -233,14 +239,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/license/license.md',
+                    packageRoot,
+                    'src/partials/license/license.md',
                 ),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/license/license.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/license/license.md')
                  *
                  * Specify the "markdown" template for this "license" partial
                  *
@@ -248,8 +254,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/license/license.md',
+                    packageRoot,
+                    'src/partials/license/license.md',
                 ),
             },
             'license-mit': {
@@ -257,7 +263,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license-mit
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseMit/licenseMit.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseMit/licenseMit.md')
                  *
                  * Specify the "markdown" template for this "license-mit" partial
                  *
@@ -265,14 +271,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseMit/licenseMit.md',
+                    packageRoot,
+                    'src/partials/licenseMit/licenseMit.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-mit
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseMit/licenseMit.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseMit/licenseMit.md')
                  *
                  * Specify the "html" template for this "license-mit" partial
                  *
@@ -280,8 +286,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseMit/licenseMit.md',
+                    packageRoot,
+                    'src/partials/licenseMit/licenseMit.md',
                 ),
             },
             'license-gpl': {
@@ -289,7 +295,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license-gpl
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseGpl/licenseGpl.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseGpl/licenseGpl.md')
                  *
                  * Specify the "markdown" template for this "license-gpl" partial
                  *
@@ -297,14 +303,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseGpl/licenseGpl.md',
+                    packageRoot,
+                    'src/partials/licenseGpl/licenseGpl.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-gpl
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseGpl/licenseGpl.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseGpl/licenseGpl.md')
                  *
                  * Specify the "html" template for this "license-gpl" partial
                  *
@@ -312,8 +318,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseGpl/licenseGpl.md',
+                    packageRoot,
+                    'src/partials/licenseGpl/licenseGpl.md',
                 ),
             },
             'license-lgpl': {
@@ -321,7 +327,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license-lgpl
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseLgpl/licenseLgpl.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseLgpl/licenseLgpl.md')
                  *
                  * Specify the "markdown" template for this "license-lgpl" partial
                  *
@@ -329,14 +335,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseLgpl/licenseLgpl.md',
+                    packageRoot,
+                    'src/partials/licenseLgpl/licenseLgpl.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-lgpl
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseLgpl/licenseLgpl.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseLgpl/licenseLgpl.md')
                  *
                  * Specify the "html" template for this "license-lgpl" partial
                  *
@@ -344,8 +350,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseLgpl/licenseLgpl.md',
+                    packageRoot,
+                    'src/partials/licenseLgpl/licenseLgpl.md',
                 ),
             },
             'license-epl-20': {
@@ -353,7 +359,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license-epl-20
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseEpl20/licenseEpl20.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseEpl20/licenseEpl20.md')
                  *
                  * Specify the "markdown" template for this "license-epl-20" partial
                  *
@@ -361,14 +367,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseEpl20/licenseEpl20.md',
+                    packageRoot,
+                    'src/partials/licenseEpl20/licenseEpl20.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-epl-20
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseEpl20/licenseEpl20.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseEpl20/licenseEpl20.md')
                  *
                  * Specify the "html" template for this "license-epl-20" partial
                  *
@@ -376,8 +382,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseEpl20/licenseEpl20.md',
+                    packageRoot,
+                    'src/partials/licenseEpl20/licenseEpl20.md',
                 ),
             },
             'license-mpl-20': {
@@ -385,7 +391,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license-mpl-20
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseMpl20/licenseMpl20.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseMpl20/licenseMpl20.md')
                  *
                  * Specify the "markdown" template for this "license-mpl-20" partial
                  *
@@ -393,14 +399,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseMpl20/licenseMpl20.md',
+                    packageRoot,
+                    'src/partials/licenseMpl20/licenseMpl20.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-mpl-20
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseMpl20/licenseMpl20.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseMpl20/licenseMpl20.md')
                  *
                  * Specify the "html" template for this "license-mpl-20" partial
                  *
@@ -408,8 +414,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseMpl20/licenseMpl20.md',
+                    packageRoot,
+                    'src/partials/licenseMpl20/licenseMpl20.md',
                 ),
             },
             'license-cddl-10': {
@@ -417,7 +423,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license-cddl-10
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseCddl10/licenseCddl10.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseCddl10/licenseCddl10.md')
                  *
                  * Specify the "markdown" template for this "license-cddl-10" partial
                  *
@@ -425,14 +431,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseCddl10/licenseCddl10.md',
+                    packageRoot,
+                    'src/partials/licenseCddl10/licenseCddl10.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-cddl-10
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseCddl10/licenseCddl10.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseCddl10/licenseCddl10.md')
                  *
                  * Specify the "html" template for this "license-cddl-10" partial
                  *
@@ -440,8 +446,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseCddl10/licenseCddl10.md',
+                    packageRoot,
+                    'src/partials/licenseCddl10/licenseCddl10.md',
                 ),
             },
             'license-apache-20': {
@@ -449,7 +455,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license-apache-20
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseApache20/licenseApache20.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseApache20/licenseApache20.md')
                  *
                  * Specify the "markdown" template for this "license-apache-20" partial
                  *
@@ -457,14 +463,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseApache20/licenseApache20.md',
+                    packageRoot,
+                    'src/partials/licenseApache20/licenseApache20.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-apache-20
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseApache20/licenseApache20.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseApache20/licenseApache20.md')
                  *
                  * Specify the "html" template for this "license-apache-20" partial
                  *
@@ -472,8 +478,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseApache20/licenseApache20.md',
+                    packageRoot,
+                    'src/partials/licenseApache20/licenseApache20.md',
                 ),
             },
             'license-bsd-2-clause': {
@@ -481,7 +487,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license-bsd-2-clause
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseBsd2Clause/licenseBsd2Clause.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseBsd2Clause/licenseBsd2Clause.md')
                  *
                  * Specify the "markdown" template for this "license-bsd-2-clause" partial
                  *
@@ -489,14 +495,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseBsd2Clause/licenseBsd2Clause.md',
+                    packageRoot,
+                    'src/partials/licenseBsd2Clause/licenseBsd2Clause.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-bsd-2-clause
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseBsd2Clause/licenseBsd2Clause.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseBsd2Clause/licenseBsd2Clause.md')
                  *
                  * Specify the "html" template for this "license-bsd-2-clause" partial
                  *
@@ -504,8 +510,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseBsd2Clause/licenseBsd2Clause.md',
+                    packageRoot,
+                    'src/partials/licenseBsd2Clause/licenseBsd2Clause.md',
                 ),
             },
             'license-bsd-3-clause': {
@@ -513,7 +519,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license-bsd-3-clause
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseBsd3Clause/licenseBsd3Clause.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseBsd3Clause/licenseBsd3Clause.md')
                  *
                  * Specify the "markdown" template for this "license-bsd-3-clause" partial
                  *
@@ -521,14 +527,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseBsd3Clause/licenseBsd3Clause.md',
+                    packageRoot,
+                    'src/partials/licenseBsd3Clause/licenseBsd3Clause.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-bsd-3-clause
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/licenseBsd3Clause/licenseBsd3Clause.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/licenseBsd3Clause/licenseBsd3Clause.md')
                  *
                  * Specify the "html" template for this "license-bsd-3-clause" partial
                  *
@@ -536,8 +542,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/licenseBsd3Clause/licenseBsd3Clause.md',
+                    packageRoot,
+                    'src/partials/licenseBsd3Clause/licenseBsd3Clause.md',
                 ),
             },
             shields: {
@@ -545,7 +551,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.shields
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/shields/shields.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/shields/shields.md')
                  *
                  * Specify the "markdown" template for this "shields" partial
                  *
@@ -553,14 +559,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/shields/shields.md',
+                    packageRoot,
+                    'src/partials/shields/shields.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.shields
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/shields/shields.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/shields/shields.md')
                  *
                  * Specify the "html" template for this "shields" partial
                  *
@@ -568,8 +574,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/shields/shields.md',
+                    packageRoot,
+                    'src/partials/shields/shields.md',
                 ),
                 /**
                  * @name            data
@@ -589,7 +595,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.interface
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/interface/interface.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/interface/interface.md')
                  *
                  * Specify the "markdown" template for the "interface" partial
                  *
@@ -597,14 +603,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/interface/interface.md',
+                    packageRoot,
+                    'src/partials/interface/interface.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.interface
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/interface/interface.html')
+                 * @default         __path.resolve(packageRoot,'src/partials/interface/interface.html')
                  *
                  * Specify the "html" template for the "interface" partial
                  *
@@ -612,8 +618,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/interface/interface.html',
+                    packageRoot,
+                    'src/partials/interface/interface.html',
                 ),
             },
             configFiles: {
@@ -621,7 +627,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.configFiles
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/configFiles/configFiles.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/configFiles/configFiles.md')
                  *
                  * Specify the "markdown" template for the "configFiles" partial
                  *
@@ -629,14 +635,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/configFiles/configFiles.md',
+                    packageRoot,
+                    'src/partials/configFiles/configFiles.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.configFiles
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/configFiles/configFiles.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/configFiles/configFiles.md')
                  *
                  * Specify the "html" template for the "configFiles" partial
                  *
@@ -644,8 +650,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/configFiles/configFiles.md',
+                    packageRoot,
+                    'src/partials/configFiles/configFiles.md',
                 ),
             },
             config: {
@@ -653,7 +659,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.config
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/config/config.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/config/config.md')
                  *
                  * Specify the "markdown" template for the "config" partial
                  *
@@ -661,14 +667,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/config/config.md',
+                    packageRoot,
+                    'src/partials/config/config.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.config
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/config/config.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/config/config.md')
                  *
                  * Specify the "html" template for the "config" partial
                  *
@@ -676,8 +682,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/config/config.html',
+                    packageRoot,
+                    'src/partials/config/config.html',
                 ),
             },
             recipesList: {
@@ -685,7 +691,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.recipesList
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/recipesList/recipesList.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/recipesList/recipesList.md')
                  *
                  * Specify the "markdown" template for the "recipesList" partial
                  *
@@ -693,14 +699,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/recipesList/recipesList.md',
+                    packageRoot,
+                    'src/partials/recipesList/recipesList.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.recipesList
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/recipesList/recipesList.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/recipesList/recipesList.md')
                  *
                  * Specify the "html" template for the "recipesList" partial
                  *
@@ -708,8 +714,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/recipesList/recipesList.md',
+                    packageRoot,
+                    'src/partials/recipesList/recipesList.md',
                 ),
             },
             recipe: {
@@ -717,7 +723,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.recipe
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/recipe/recipe.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/recipe/recipe.md')
                  *
                  * Specify the "markdown" template for the "recipe" partial
                  *
@@ -725,14 +731,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/recipe/recipe.md',
+                    packageRoot,
+                    'src/partials/recipe/recipe.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.recipe
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/recipe/recipe.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/recipe/recipe.md')
                  *
                  * Specify the "html" template for the "recipe" partial
                  *
@@ -740,8 +746,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/recipe/recipe.md',
+                    packageRoot,
+                    'src/partials/recipe/recipe.md',
                 ),
             },
             docMenu: {
@@ -749,7 +755,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.docMenu
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/docMenu/docMenu.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/docMenu/docMenu.md')
                  *
                  * Specify the "markdown" template for the "docMenu" partial
                  *
@@ -757,14 +763,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../partials/docMenu/docMenu.md',
+                    packageRoot,
+                    'src/partials/docMenu/docMenu.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.docMenu
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../partials/docMenu/docMenu.md')
+                 * @default         __path.resolve(packageRoot,'src/partials/docMenu/docMenu.md')
                  *
                  * Specify the "html" template for the "docMenu" partial
                  *
@@ -772,8 +778,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../partials/docMenu/docMenu.md',
+                    packageRoot,
+                    'src/partials/docMenu/docMenu.md',
                 ),
             },
         },
@@ -783,7 +789,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.layouts.doc
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../layouts/doc/docLayout.md')
+                 * @default         __path.resolve(packageRoot,'src/layouts/doc/docLayout.md')
                  *
                  * Specify the "markdown" template for the "doc" layout
                  *
@@ -791,14 +797,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../layouts/doc/docLayout.md',
+                    packageRoot,
+                    'src/layouts/doc/docLayout.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.layouts.doc
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../layouts/doc/docLayout.md')
+                 * @default         __path.resolve(packageRoot,'src/layouts/doc/docLayout.md')
                  *
                  * Specify the "html" template for the "doc" layout
                  *
@@ -806,8 +812,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../layouts/doc/docLayout.md',
+                    packageRoot,
+                    'src/layouts/doc/docLayout.md',
                 ),
                 /**
                  * @name            data
@@ -827,7 +833,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.layouts.readme
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../layouts/readme/readmeLayout.md')
+                 * @default         __path.resolve(packageRoot,'src/layouts/readme/readmeLayout.md')
                  *
                  * Specify the "markdown" template for the "readme" layout
                  *
@@ -835,14 +841,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../layouts/readme/readmeLayout.md',
+                    packageRoot,
+                    'src/layouts/readme/readmeLayout.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.layouts.readme
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../layouts/readme/readmeLayout.md')
+                 * @default         __path.resolve(packageRoot,'src/layouts/readme/readmeLayout.md')
                  *
                  * Specify the "html" template for the "readme" layout
                  *
@@ -850,8 +856,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../layouts/readme/readmeLayout.md',
+                    packageRoot,
+                    'src/layouts/readme/readmeLayout.md',
                 ),
                 /**
                  * @name            data
@@ -871,7 +877,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.layouts.license
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../layouts/license/licenseLayout.md')
+                 * @default         __path.resolve(packageRoot,'src/layouts/license/licenseLayout.md')
                  *
                  * Specify the "markdown" template for the "license" layout
                  *
@@ -879,14 +885,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../layouts/license/licenseLayout.md',
+                    packageRoot,
+                    'src/layouts/license/licenseLayout.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.layouts.license
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../layouts/license/licenseLayout.md')
+                 * @default         __path.resolve(packageRoot,'src/layouts/license/licenseLayout.md')
                  *
                  * Specify the "html" template for the "license" layout
                  *
@@ -894,8 +900,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../layouts/license/licenseLayout.md',
+                    packageRoot,
+                    'src/layouts/license/licenseLayout.md',
                 ),
                 /**
                  * @name            markdown
@@ -917,7 +923,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.sections.readme-header
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/readmeHeader/readmeHeaderSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/readmeHeader/readmeHeaderSection.md')
                  *
                  * Specify the "markdown" template for the "readme-header" section
                  *
@@ -925,14 +931,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../sections/readmeHeader/readmeHeaderSection.md',
+                    packageRoot,
+                    'src/sections/readmeHeader/readmeHeaderSection.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.readme-header
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/readmeHeader/readmeHeaderSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/readmeHeader/readmeHeaderSection.md')
                  *
                  * Specify the "html" template for the "readme-header" section
                  *
@@ -940,8 +946,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../sections/readmeHeader/readmeHeaderSection.md',
+                    packageRoot,
+                    'src/sections/readmeHeader/readmeHeaderSection.md',
                 ),
             },
             'doc-header': {
@@ -949,7 +955,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.sections.doc-header
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/docHeader/docHeaderSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/docHeader/docHeaderSection.md')
                  *
                  * Specify the "markdown" template for the "doc-header" section
                  *
@@ -957,14 +963,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../sections/docHeader/docHeaderSection.md',
+                    packageRoot,
+                    'src/sections/docHeader/docHeaderSection.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.doc-header
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/docHeader/docHeaderSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/docHeader/docHeaderSection.md')
                  *
                  * Specify the "html" template for the "doc-header" section
                  *
@@ -972,8 +978,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../sections/docHeader/docHeaderSection.md',
+                    packageRoot,
+                    'src/sections/docHeader/docHeaderSection.md',
                 ),
             },
             'doc-menu': {
@@ -981,7 +987,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.sections.doc-menu
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/docMenu/docMenuSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/docMenu/docMenuSection.md')
                  *
                  * Specify the "markdown" template for the "doc-menu" section
                  *
@@ -989,14 +995,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../sections/docMenu/docMenuSection.md',
+                    packageRoot,
+                    'src/sections/docMenu/docMenuSection.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.doc-menu
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/docMenu/docMenuSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/docMenu/docMenuSection.md')
                  *
                  * Specify the "html" template for the "doc-menu" section
                  *
@@ -1004,8 +1010,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../sections/docMenu/docMenuSection.md',
+                    packageRoot,
+                    'src/sections/docMenu/docMenuSection.md',
                 ),
             },
             description: {
@@ -1013,7 +1019,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.sections.description
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/description/descriptionSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/description/descriptionSection.md')
                  *
                  * Specify the "markdown" template for the "description" section
                  *
@@ -1021,14 +1027,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../sections/description/descriptionSection.md',
+                    packageRoot,
+                    'src/sections/description/descriptionSection.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.description
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/description/descriptionSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/description/descriptionSection.md')
                  *
                  * Specify the "html" template for the "description" section
                  *
@@ -1036,8 +1042,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../sections/description/descriptionSection.md',
+                    packageRoot,
+                    'src/sections/description/descriptionSection.md',
                 ),
             },
             install: {
@@ -1045,7 +1051,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.sections.install
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/install/installSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/install/installSection.md')
                  *
                  * Specify the "markdown" template for the "install" section
                  *
@@ -1053,14 +1059,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../sections/install/installSection.md',
+                    packageRoot,
+                    'src/sections/install/installSection.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.install
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/install/installSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/install/installSection.md')
                  *
                  * Specify the "html" template for the "install" section
                  *
@@ -1068,8 +1074,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../sections/install/installSection.md',
+                    packageRoot,
+                    'src/sections/install/installSection.md',
                 ),
             },
             license: {
@@ -1077,7 +1083,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.sections.license
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/license/licenseSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/license/licenseSection.md')
                  *
                  * Specify the "markdown" template for the "license" section
                  *
@@ -1085,14 +1091,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../sections/license/licenseSection.md',
+                    packageRoot,
+                    'src/sections/license/licenseSection.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.license
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/license/licenseSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/license/licenseSection.md')
                  *
                  * Specify the "html" template for the "license" section
                  *
@@ -1100,8 +1106,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../sections/license/licenseSection.md',
+                    packageRoot,
+                    'src/sections/license/licenseSection.md',
                 ),
             },
             contact: {
@@ -1109,7 +1115,7 @@ export default function (env, config) {
                  * @name            markdown
                  * @namespace       config.markdownBuilder.sections.contact
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/contact/contactSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/contact/contactSection.md')
                  *
                  * Specify the "markdown" template for the "contact" section
                  *
@@ -1117,14 +1123,14 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(
-                    __dirname(),
-                    '../sections/contact/contactSection.md',
+                    packageRoot,
+                    'src/sections/contact/contactSection.md',
                 ),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.contact
                  * @type            String
-                 * @default         __path.resolve(__dirname(),'../sections/contact/contactSection.md')
+                 * @default         __path.resolve(packageRoot,'src/sections/contact/contactSection.md')
                  *
                  * Specify the "html" template for the "contact" section
                  *
@@ -1132,8 +1138,8 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(
-                    __dirname(),
-                    '../sections/contact/contactSection.md',
+                    packageRoot,
+                    'src/sections/contact/contactSection.md',
                 ),
             },
         },

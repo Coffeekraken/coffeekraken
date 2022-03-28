@@ -17,7 +17,7 @@ import __SProcess, {
 } from '@coffeekraken/s-process';
 import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
 import __SLog from '@coffeekraken/s-log';
-import __SSugarCli from '@coffeekraken/cli';
+import { replaceCommandTokens as __replaceCommandTokens } from '@coffeekraken/cli';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
 
@@ -234,7 +234,7 @@ export default class SFrontstack extends __SClass {
             pipe(processManager);
             // loop on each actions for this recipe
 
-            const finalCommand = __SSugarCli.replaceTokens(
+            const finalCommand = __replaceCommandTokens(
                 // @ts-ignore
                 actionObj.command ?? actionObj.process,
                 // params
@@ -539,7 +539,7 @@ export default class SFrontstack extends __SClass {
                         (actionObj.command ?? actionObj.process).trim() +
                         ' ' +
                         sharedParamsStr;
-                    finalCommand = __SSugarCli.replaceTokens(
+                    finalCommand = __replaceCommandTokens(
                         finalCommand,
                         finalActionParams,
                     );

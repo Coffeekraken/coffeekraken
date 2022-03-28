@@ -1,12 +1,25 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
-import __whenInViewport, { IWhenInViewportSettings } from './whenInViewport';
-import __whenNearViewport, { IWhenNearViewportSettings } from './whenNearViewport';
-import __whenOutOfViewport, { IWhenOutOfViewportSettings } from './whenOutOfViewport';
-import __whenInteract, { IWhenInteractSettings } from './whenInteract';
+
+import type { IWhenInViewportSettings } from './whenInViewport';
+import __whenInViewport from './whenInViewport';
+
+import type { IWhenNearViewportSettings } from './whenNearViewport';
+import __whenNearViewport from './whenNearViewport';
+
+import type { IWhenOutOfViewportSettings } from './whenOutOfViewport';
+import __whenOutOfViewport from './whenOutOfViewport';
+
+import type { IWhenInteractSettings } from './whenInteract';
+import __whenInteract from './whenInteract';
+
 import __whenDomReady from './whenDomReady';
-import __whenVisible, { IWhenVisibleSettings } from './whenVisible';
-import __whenStylesheetsReady, { IWhenStyleSheetsReadySettings } from './whenStylesheetsReady';
+
+import type { IWhenVisibleSettings } from './whenVisible';
+import __whenVisible from './whenVisible';
+
+import type { IWhenStyleSheetsReadySettings } from './whenStylesheetsReady';
+import __whenStylesheetsReady from './whenStylesheetsReady';
 
 /**
  * @name            when
@@ -47,9 +60,26 @@ export interface IwhenSettings {
     whenStylesheetsReady?: IWhenStyleSheetsReadySettings;
 }
 
-export type TWhenTrigger = 'direct' | 'directly' | 'inViewport' | 'nearViewport' | 'outOfViewport' | 'interact' | 'visible' | 'stylesheetsReady';
+export type TWhenTrigger =
+    | 'direct'
+    | 'directly'
+    | 'inViewport'
+    | 'nearViewport'
+    | 'outOfViewport'
+    | 'interact'
+    | 'visible'
+    | 'stylesheetsReady';
 
-export const triggers = ['direct', 'directly', 'inViewport', 'nearViewport', 'outOfViewport', 'interact', 'visible', 'stylesheetsReady'];
+export const triggers = [
+    'direct',
+    'directly',
+    'inViewport',
+    'nearViewport',
+    'outOfViewport',
+    'interact',
+    'visible',
+    'stylesheetsReady',
+];
 
 export default function when(
     $elm: HTMLElement,
@@ -77,19 +107,35 @@ export default function when(
         trigger.forEach((t) => {
             switch (t) {
                 case 'inViewport':
-                    promises.push(__whenInViewport($elm, finalSettings.whenInViewport));
+                    promises.push(
+                        __whenInViewport($elm, finalSettings.whenInViewport),
+                    );
                     break;
                 case 'nearViewport':
-                    promises.push(__whenNearViewport($elm, finalSettings.whenNearViewport));
+                    promises.push(
+                        __whenNearViewport(
+                            $elm,
+                            finalSettings.whenNearViewport,
+                        ),
+                    );
                     break;
                 case 'outOfViewport':
-                    promises.push(__whenOutOfViewport($elm, finalSettings.whenOutOfViewport));
+                    promises.push(
+                        __whenOutOfViewport(
+                            $elm,
+                            finalSettings.whenOutOfViewport,
+                        ),
+                    );
                     break;
                 case 'interact':
-                    promises.push(__whenInteract($elm, finalSettings.whenInteract));
+                    promises.push(
+                        __whenInteract($elm, finalSettings.whenInteract),
+                    );
                     break;
                 case 'visible':
-                    promises.push(__whenVisible($elm, finalSettings.whenVisible));
+                    promises.push(
+                        __whenVisible($elm, finalSettings.whenVisible),
+                    );
                     break;
                 case 'domReady':
                     promises.push(__whenDomReady());

@@ -7,7 +7,7 @@ import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 // @ts-ignore
-import __css from '../css/s-clipboard-copy.css';
+import __css from '../../../../src/css/s-clipboard-copy.css'; // relative to /dist/pkg/esm/js
 
 export interface ISClipboardCopyComponentProps {
     successTimeout: number;

@@ -14,7 +14,7 @@
             "actions": {
                 "build": {
                     "description": "Build your static website version",
-                    "process": "./src/cli/build.cli.js"
+                    "process": "./dist/pkg/esm/cli/build.cli.js"
                 }
             }
         }

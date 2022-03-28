@@ -3,7 +3,8 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SRefocusFeatureInterface from './interface/SRefocusFeatureInterface';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __closestScrollable from '@coffeekraken/sugar/js/dom/query/closestScrollable';
-import __scrollTo, { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 
 export interface ISRefocusFeatureProps {
     trigger: string[];
@@ -62,21 +63,25 @@ export default class SRefocusFeature extends __SFeature {
     }
     mount() {
         this.props.trigger.forEach((trigger) => {
-            switch(trigger) {
+            switch (trigger) {
                 case 'anchor':
                     setTimeout(() => {
                         if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(document.location.hash);
+                            const $targetElm = this.node.querySelector(
+                                document.location.hash,
+                            );
                             if ($targetElm) {
                                 this._scrollTo($targetElm);
                             }
                         }
                     }, this.props.timeout);
-                break;
+                    break;
                 case 'history':
                     window.addEventListener('hashchange', (e) => {
                         if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(document.location.hash);
+                            const $targetElm = this.node.querySelector(
+                                document.location.hash,
+                            );
                             if ($targetElm) {
                                 this._scrollTo($targetElm);
                             }
@@ -84,13 +89,15 @@ export default class SRefocusFeature extends __SFeature {
                     });
                     window.addEventListener('popstate', (e) => {
                         if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(document.location.hash);
+                            const $targetElm = this.node.querySelector(
+                                document.location.hash,
+                            );
                             if ($targetElm) {
                                 this._scrollTo($targetElm);
                             }
                         }
                     });
-                break;
+                    break;
                 default:
                     if (trigger.match(/^event:/)) {
                         const event = trigger.replace('event:', '').trim();
@@ -98,18 +105,17 @@ export default class SRefocusFeature extends __SFeature {
                             this._scrollTo(e.target);
                         });
                     }
-                break;
+                    break;
             }
         });
     }
     _scrollTo($elm) {
         __scrollTo($elm, {
             $elm: this.node,
-            ...this.props.scrollToSettings ?? {},
-        // @ts-ignore
+            ...(this.props.scrollToSettings ?? {}),
+            // @ts-ignore
         });
     }
-    
 }
 
 export function define(

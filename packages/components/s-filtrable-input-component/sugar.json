@@ -11,7 +11,7 @@
         "folders": {
             "mixins": [
                 {
-                    "path": "./src/node/postcss/mixins"
+                    "path": "./dist/pkg/%format/node/postcss/mixins"
                 }
             ]
         }

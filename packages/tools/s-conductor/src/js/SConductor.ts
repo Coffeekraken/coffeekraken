@@ -1,15 +1,14 @@
 // @ts-nocheck
 
 import __SClass from '@coffeekraken/s-class';
-import __SDuration, { ISDurationObject } from '@coffeekraken/s-duration';
+import type { ISDurationObject } from '@coffeekraken/s-duration';
+import __SDuration from '@coffeekraken/s-duration';
 import __SPromise from '@coffeekraken/s-promise';
 import __when, { TWhenTrigger } from '@coffeekraken/sugar/js/dom/detect/when';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __SConductorSettingsInterface from './interface/SConductorSettingsInterface';
-
-
 
 /**
  * @name                SConductor
@@ -245,9 +244,10 @@ export default class SConductor extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     constructor(settings?: Partial<ISConductorCtorSettings>) {
-        super(__deepMerge(
+        super(
+            __deepMerge(
                 {
-                    conductor: __SConductorSettingsInterface.defaults()
+                    conductor: __SConductorSettingsInterface.defaults(),
                 },
                 settings ?? {},
             ),
@@ -368,7 +368,9 @@ export default class SConductor extends __SClass {
      */
     _elementNeeded($elm = null, time: TSConductorTrigger) {
         if (!$elm) {
-            throw new Error(`To use the "${time}" SConductor.when detector, you MUST pass an HTMLElement...`);
+            throw new Error(
+                `To use the "${time}" SConductor.when detector, you MUST pass an HTMLElement...`,
+            );
         }
     }
 

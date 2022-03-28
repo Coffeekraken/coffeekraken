@@ -8,7 +8,7 @@ import __wrap from '@coffeekraken/sugar/js/dom/manipulate/wrap';
 import __insertAfter from '@coffeekraken/sugar/js/dom/manipulate/insertAfter';
 
 // @ts-ignore
-import __css from '../css/s-form-validate.css';
+import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js
 
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 
@@ -29,11 +29,11 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * @support          firefox
  * @support          safari
  * @support          edge
- * 
- * @install         bash 
+ *
+ * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
- * 
- * @install        js   
+ *
+ * @install        js
  * import { define } from '@coffeekraken/s-form-validate-feature';
  * define();
  *
@@ -42,25 +42,25 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *    Email address
  *    <input type="text" class="s-input s-width:60" placeholder="olivier.bossel@coffeekraken.io" />
  * </label>
- * 
+ *
  * @example         html            Domain field
  * <label class="s-label:responsive" s-form-validate domain>
  *    Domain name
  *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken.io" />
  * </label>
- * 
+ *
  * @example         html        Alphanumeric field
  * <label class="s-label:responsive" s-form-validate alphanum>
  *    Alphanumeric
  *    <input type="text" class="s-input s-width:60" placeholder="a-zA-Z0-9" />
  * </label>
- * 
+ *
  * @example         html       Credit card field
  * <label class="s-label:responsive" s-form-validate credit-card>
  *    Credit card
  *    <input type="text" class="s-input s-width:60" placeholder="340716737808634" />
  * </label>
- * 
+ *
  * @example         html       Min / Max
  * <label class="s-label:responsive" s-form-validate min="3" max="6">
  *    Min and max
@@ -76,7 +76,7 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *        <option value="value 3">Third...</option>
  *    </select>
  * </label>
- * 
+ *
  * @example         html        Select min / max
  * <label class="s-label:responsive" s-form-validate min="2" max="2">
  *    Multiple select
@@ -86,19 +86,19 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *        <option value="value 3">Third...</option>
  *    </select>
  * </label>
- * 
+ *
  * @example         html            ISO date field
  * <label class="s-label:responsive" s-form-validate iso-date>
  *    ISO date
  *    <s-date-picker input button name="my-cool-date" placeholder="2021-09-16" class="s-width:60"></s-date-picker>
  * </label>
- * 
+ *
  * @example         html            Range min / max
  * <label class="s-label:responsive" s-form-validate min="25" max="75">
  *    Value between 25 and 75
  *    <s-range class="s-width:60" min="0" max="100" tooltip></s-range>
  * </label>
- * 
+ *
  * @example        html            Checkboxes min / max
  * <label class="s-label" s-form-validate min="2" max="2">
  *      Choose at least 2 items
@@ -268,7 +268,7 @@ export default class SFormValidateFeature extends __SFeature {
                 });
             }
         });
-        
+
         console.log(this.props);
         // preparing the joi schema
         let schema = __joi[this._validationType]();
@@ -441,14 +441,19 @@ export default class SFormValidateFeature extends __SFeature {
 
             // display error if needed
             if (this.props.displayError) {
-                
                 this._$error = this.node.nextElementSibling;
-                if (!this._$error || !this._$error.hasAttribute('s-form-validate-error')) {
+                if (
+                    !this._$error ||
+                    !this._$error.hasAttribute('s-form-validate-error')
+                ) {
                     this._$error = document.createElement('p');
                     this._$error.setAttribute('s-form-validate-error', 'true');
                     this._$error.classList.add('s-form-validate-error-message');
                     // @ts-ignore
-                    this.node.parentNode.insertBefore(this._$error, this.node.nextSibling);
+                    this.node.parentNode.insertBefore(
+                        this._$error,
+                        this.node.nextSibling,
+                    );
                 }
                 this._$error.innerHTML = res.error.message;
             }
@@ -464,9 +469,7 @@ export default class SFormValidateFeature extends __SFeature {
             this.node.classList.remove(...this.props.errorClass.split(' '));
 
             // unwrap the field
-            if (
-                this._$error?.hasAttribute('s-form-validate-error')
-            ) {
+            if (this._$error?.hasAttribute('s-form-validate-error')) {
                 this._$error?.remove();
             }
         }

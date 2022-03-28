@@ -8,7 +8,7 @@ import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
-import { ISInterfaceRendererSettings } from './renderers/ISInterfaceRenderer';
+import type { ISInterfaceRendererSettings } from './renderers/ISInterfaceRenderer';
 
 export interface ISInterfaceCtorSettings {
     interface: Partial<ISInterfaceSettings>;
@@ -172,11 +172,14 @@ export default class SInterface extends __SClass {
      */
     static mix(...ints: SInterface[]): SInterface {
         const newInt = new SInterface();
-        ints.forEach(int => {
+        ints.forEach((int) => {
             // @ts-ignore
             if (int.definition) {
                 // @ts-ignore
-                newInt.definition = __deepMerge(newInt.definition, int.definition);
+                newInt.definition = __deepMerge(
+                    newInt.definition,
+                    int.definition,
+                );
             }
         });
         return newInt;
@@ -241,14 +244,16 @@ export default class SInterface extends __SClass {
             // @ts-ignore
             global._registeredInterfacesTypes[n] = this;
             // @ts-ignore
-            global._registeredInterfacesTypes[n.replace('interface', '')] =
-                this;
+            global._registeredInterfacesTypes[
+                n.replace('interface', '')
+            ] = this;
         } else if (window !== undefined) {
             // @ts-ignore
             window._registeredInterfacesTypes[n] = this;
             // @ts-ignore
-            window._registeredInterfacesTypes[n.replace('interface', '')] =
-                this;
+            window._registeredInterfacesTypes[
+                n.replace('interface', '')
+            ] = this;
         }
     }
 

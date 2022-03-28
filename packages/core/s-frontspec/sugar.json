@@ -13,8 +13,8 @@
       "actions": {
         "read": {
           "description": "Find the frontspec.json files that are relative to your cwd and read their content",
-          "interface": "./src/node/interface/SFrontspecReadParamsInterface.js",
-          "process": "./src/cli/read.cli.js"
+          "interface": "./dist/pkg/esm/node/interface/SFrontspecReadParamsInterface.js",
+          "process": "./dist/pkg/esm/cli/read.cli.js"
         }
       }
     }

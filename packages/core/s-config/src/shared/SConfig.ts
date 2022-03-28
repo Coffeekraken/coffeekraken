@@ -384,15 +384,11 @@ export default class SConfig {
             return this._adapters[adapter].config;
         }
 
-        console.log('DD');
-
         let loadedConfig = await this._adapters[adapter].instance.load(
             isUpdate,
             this._settings.env,
             this.config,
         );
-
-        console.log('___');
 
         Object.keys(loadedConfig).forEach((configId) => {
             if (!loadedConfig[configId]) return;
@@ -804,8 +800,6 @@ export default class SConfig {
                 `<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async instance function`,
             );
         }
-
-        console.log(this._adapters[adapter].config);
 
         const originalValue = __get(this._adapters[adapter].config, path);
 

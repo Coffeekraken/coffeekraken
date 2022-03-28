@@ -3,7 +3,8 @@
 import __SDuration from '@coffeekraken/s-duration';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SLog from '@coffeekraken/s-log';
-import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
+import type { ISPromise } from '@coffeekraken/s-promise';
+import __SPromise from '@coffeekraken/s-promise';
 import { spawn as __spawn, SpawnOptions } from 'child_process';
 import __deepMerge from '../../shared/object/deepMerge';
 import __onProcessExit from './onProcessExit';

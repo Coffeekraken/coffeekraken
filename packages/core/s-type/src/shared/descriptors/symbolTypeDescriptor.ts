@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              symbolTypeDescriptor
@@ -22,13 +22,13 @@ import { ISTypeDescriptor } from '../SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Symbol',
-  id: 'symbol',
-  is: (value: any) => typeof value === 'symbol',
-  cast: (value: any) => {
-    if (typeof value === 'symbol') return value;
-    return Symbol(value);
-  }
+    name: 'Symbol',
+    id: 'symbol',
+    is: (value: any) => typeof value === 'symbol',
+    cast: (value: any) => {
+        if (typeof value === 'symbol') return value;
+        return Symbol(value);
+    },
 };
 
 export default descriptor;

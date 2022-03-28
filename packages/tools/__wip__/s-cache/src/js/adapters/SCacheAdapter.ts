@@ -2,7 +2,8 @@
 
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SCache, { ISCacheSetSettings } from '../SCache';
+import type { ISCacheSetSettings } from '../SCache';
+import __SCache from '../SCache';
 
 /**
  * @name                                SCacheAdapter

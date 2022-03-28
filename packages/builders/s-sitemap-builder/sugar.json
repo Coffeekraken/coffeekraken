@@ -13,7 +13,7 @@
             "actions": {
                 "build": {
                     "description": "Build your sitemap depending ton configuration file 'sitemap.config.js'",
-                    "process": "./src/cli/build.cli.js"
+                    "process": "./dist/pkg/esm/cli/build.cli.js"
                 }
             }
         }

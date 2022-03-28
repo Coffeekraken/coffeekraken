@@ -6,7 +6,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __convert from '@coffeekraken/sugar/shared/time/convert';
 import __SCacheLsAdapter from '../js/adapters/SCacheLsAdapter';
-import { ISCacheAdapter } from './adapters/SCacheAdapter';
+import type { ISCacheAdapter } from './adapters/SCacheAdapter';
 import __SCacheSettingsInterface from './interface/SCacheSettingsInterface';
 
 /**

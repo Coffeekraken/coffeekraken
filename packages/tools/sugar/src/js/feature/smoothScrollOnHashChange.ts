@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { IScrollToSettings } from '../dom/scroll/scrollTo';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 import __scrollToLocationHash from '../dom/scroll/scrollToLocationHash';
 import __deepMerge from '../../shared/object/deepMerge';
 

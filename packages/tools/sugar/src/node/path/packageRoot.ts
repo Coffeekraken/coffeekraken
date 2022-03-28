@@ -27,29 +27,59 @@ import __fs from 'fs';
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function packageRoot(from = process.cwd(), highest = false) {
+
+export interface IPackageRootSettings {
+    highest: boolean;
+    requiredProperties: string[];
+}
+
+function packageRoot(
+    from = process.cwd(),
+    settings?: Partial<IPackageRootSettings>,
+) {
+    const finalSettings: IPackageRootSettings = {
+        highest: false,
+        requiredProperties: ['name', 'version'],
+        ...(settings ?? {}),
+    };
+
     if (__isFile(from)) from = from.split('/').slice(0, -1).join('/');
 
     const f = __findPkgJson(from);
     let file = f.next();
 
+    let finalFile;
+
+    // no file found
     if (!file || !file.filename) return false;
 
-    if (!highest) {
-        const filename = file.filename || false;
-        if (!filename) return filename;
-        return filename.split('/').slice(0, -1).join('/');
-    }
-
-    let finalFile;
     while (!file.done) {
         if (file.done) break;
-        finalFile = file;
+
+        // treat the not highest case
+        if (!finalSettings.highest) {
+            // required properties
+            if (finalSettings.requiredProperties) {
+                let allProps = true;
+                finalSettings.requiredProperties.forEach((prop) => {
+                    if (!allProps) return;
+                    if (file.value[prop] === undefined) allProps = false;
+                });
+                if (allProps) {
+                    finalFile = file;
+                    break;
+                }
+            } else {
+                finalFile = file;
+                break;
+            }
+        } else {
+            finalFile = file;
+        }
         file = f.next();
     }
-    if (finalFile.filename) {
-        return finalFile.filename.split('/').slice(0, -1).join('/');
-    }
-    return false;
+
+    if (!finalFile) return false;
+    return finalFile.filename.split('/').slice(0, -1).join('/');
 }
 export default packageRoot;

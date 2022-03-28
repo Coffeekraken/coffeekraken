@@ -1,5 +1,6 @@
 import __callsites from 'callsites';
 import { fileURLToPath } from 'url';
+import __isCjs from '../../shared/module/isCjs';
 
 /**
  * @name            dirname
@@ -23,16 +24,9 @@ import { fileURLToPath } from 'url';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function () {
-
-    if (process.env.NODE_ENV === 'test') {
+    if (__isCjs() || process.env.NODE_ENV === 'test') {
         // @ts-ignore
-
-        // const call = __callsites()[1].getFileName();
-        //     console.log('TEDT', __callsites()[1].getFileName());
-        //     console.log(__callsites()[1].getFileName());
-        return __callsites()[1].getFileName().split('/')
-        .slice(0, -1)
-        .join('/');
+        return __callsites()[1].getFileName().split('/').slice(0, -1).join('/');
     }
 
     // @ts-ignore

@@ -1,7 +1,7 @@
 // shared
 
 import __isMap from '@coffeekraken/sugar/shared/is/map';
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 import __SType from '../_SType';
 
 /**
@@ -24,23 +24,27 @@ import __SType from '../_SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Array',
-  id: 'array',
-  is: (value: any) => {
-    // _console.log('CHeck', value, Array.isArray(value));
-    return Array.isArray(value);
-  },
-  cast: (value: any, params: any = {}) => {
+    name: 'Array',
+    id: 'array',
+    is: (value: any) => {
+        // _console.log('CHeck', value, Array.isArray(value));
+        return Array.isArray(value);
+    },
+    cast: (value: any, params: any = {}) => {
+        if (!value) return [];
 
-    if (!value) return [];
+        if (params.splitChars && Array.isArray(params.splitChars)) {
+            value = value
+                .split(new RegExp(`(${params.splitChars.join('|')})`, 'gm'))
+                .filter(
+                    (l) =>
+                        l.trim() !== '' && params.splitChars.indexOf(l) === -1,
+                );
+        }
 
-    if (params.splitChars && Array.isArray(params.splitChars)) {
-      value = value.split(new RegExp(`(${params.splitChars.join('|')})`,'gm')).filter(l => l.trim() !== '' && params.splitChars.indexOf(l) === -1);
-    }
-
-    if (Array.isArray(value)) return value;
-    return [value];
-  }
+        if (Array.isArray(value)) return value;
+        return [value];
+    },
 };
 
 export default descriptor;

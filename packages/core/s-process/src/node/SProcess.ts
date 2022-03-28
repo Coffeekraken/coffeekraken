@@ -4,7 +4,7 @@ import __SEventEmitter, {
     ISEventEmitterConstructorSettings,
 } from '@coffeekraken/s-event-emitter';
 import __fs from 'fs';
-import { ISLog } from '@coffeekraken/s-log';
+import type { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
@@ -458,7 +458,12 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             return;
         }
 
-        if (process.env.NODE_ENV !== 'test' && !__isChildProcess() && processSettings.stdio && !this.stdio) {
+        if (
+            process.env.NODE_ENV !== 'test' &&
+            !__isChildProcess() &&
+            processSettings.stdio &&
+            !this.stdio
+        ) {
             this.stdio = __SStdio.existingOrNew(
                 'default',
                 this,
@@ -531,9 +536,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
         // before callback
         processSettings.before?.(this);
-        
-        if (processSettings.runAsChild && !__isChildProcess()) {
 
+        if (processSettings.runAsChild && !__isChildProcess()) {
             // build the command to run depending on the passed command in the constructor and the params
             const commandToRun = __buildCommandLine(
                 `node --experimental-specifier-resolution=node ${__path.resolve(
@@ -677,7 +681,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                             ],
                             error,
                         });
-                         // after callback
+                        // after callback
                         processSettings.after?.(this);
                     });
             });

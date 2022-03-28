@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import ISDescriptor, { ISDescriptorSettings, ISDescriptorRule } from './SDescriptor';
+import type { ISDescriptorSettings, ISDescriptorRule } from './SDescriptor';
+import ISDescriptor from './SDescriptor';
 
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
@@ -44,7 +45,11 @@ export interface ISDescriptorResultRule {
 }
 
 export interface ISDescriptorResultCtor {
-    new (descriptor: ISDescriptor, value: any, descriptorSettings: ISDescriptorSettings): ISDescriptorResult;
+    new (
+        descriptor: ISDescriptor,
+        value: any,
+        descriptorSettings: ISDescriptorSettings,
+    ): ISDescriptorResult;
 }
 
 export interface ISDescriptorResult {
@@ -129,7 +134,11 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(descriptor: ISDescriptor, value: any, descriptorSettings: ISDescriptorSettings) {
+    constructor(
+        descriptor: ISDescriptor,
+        value: any,
+        descriptorSettings: ISDescriptorSettings,
+    ) {
         super({});
         this._descriptor = descriptor;
         this._descriptorSettings = descriptorSettings;
@@ -226,12 +235,17 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
                 typeof ruleResult.__ruleObj.message === 'function'
             ) {
                 message = ruleResult.__ruleObj.message(ruleResult);
-            } else if (ruleResult.__ruleObj.message !== undefined && typeof ruleResult.__ruleObj.message === 'string') {
+            } else if (
+                ruleResult.__ruleObj.message !== undefined &&
+                typeof ruleResult.__ruleObj.message === 'string'
+            ) {
                 message = ruleResult.__ruleObj.message;
             }
             issuesArray.push(
                 `-${
-                    typeof ruleResult.__propName === 'string' ? ` [<magenta>${ruleResult.__propName}</magenta>]` : ''
+                    typeof ruleResult.__propName === 'string'
+                        ? ` [<magenta>${ruleResult.__propName}</magenta>]`
+                        : ''
                 } <red>${ruleId}</red>: ${message}`,
             );
         });

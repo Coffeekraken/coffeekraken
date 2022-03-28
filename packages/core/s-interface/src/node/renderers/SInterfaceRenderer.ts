@@ -6,7 +6,8 @@ import ISInterfaceRenderer, {
 } from '../../shared/renderers/ISInterfaceRenderer';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import __SInterface, { ISInterfaceDefinitionProperty } from '../SInterface';
+import type { ISInterfaceDefinitionProperty } from '../SInterface';
+import __SInterface from '../SInterface';
 
 /**
  * @name            SInterfaceRenderer
@@ -70,7 +71,10 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(int: __SInterface, settings?: Partial<ISInterfaceRendererSettings>) {
+    constructor(
+        int: __SInterface,
+        settings?: Partial<ISInterfaceRendererSettings>,
+    ) {
         super(__deepMerge({}, settings));
         this._interface = int;
     }
@@ -88,14 +92,20 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    async render(settings?: Partial<ISInterfaceRendererSettings>): Promise<string> {
-        const set = <ISInterfaceRendererSettings>__deepMerge(this._settings, {}, settings);
+    async render(
+        settings?: Partial<ISInterfaceRendererSettings>,
+    ): Promise<string> {
+        const set = <ISInterfaceRendererSettings>(
+            __deepMerge(this._settings, {}, settings)
+        );
 
         const renderedProperties: Record<string, any> = {};
 
         // loop on each interface definition properties
         for (const key in (<any>this._interface).definition) {
-            const propertyObj: ISInterfaceDefinitionProperty = (<any>this._interface).definition[key];
+            const propertyObj: ISInterfaceDefinitionProperty = (<any>(
+                this._interface
+            )).definition[key];
             if (!propertyObj.name) propertyObj.name = key;
 
             renderedProperties[key] = {
@@ -104,7 +114,10 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
 
             // loop on the propery object keys
             for (const propKey in propertyObj) {
-                if (propertyObj[propKey] !== undefined && set.exclude.indexOf(propKey) === -1) {
+                if (
+                    propertyObj[propKey] !== undefined &&
+                    set.exclude.indexOf(propKey) === -1
+                ) {
                     // prepare the object to pass to the renderer function
                     const toRenderObj: ISInterfaceRendererRenderPropertyObj = {
                         value: propertyObj[propKey],
@@ -115,16 +128,26 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
                     //  console.log('s', key, propKey);
 
                     // check if we have a template directory specified and if
-                    if (set.templatesDir && __fs.existsSync(`${set.templatesDir}/${propKey}.js`)) {
+                    if (
+                        set.templatesDir &&
+                        __fs.existsSync(`${set.templatesDir}/${propKey}.js`)
+                    ) {
                         // load the template
-                        const { default: templateFunction } = await import(`${set.templatesDir}/${propKey}.js`);
+                        const { default: templateFunction } = await import(
+                            `${set.templatesDir}/${propKey}.js`
+                        );
                         // execute the template function
-                        renderedProperties[key][propKey] = templateFunction(toRenderObj);
+                        renderedProperties[key][propKey] = templateFunction(
+                            toRenderObj,
+                        );
                     } else if (
                         this[`render${__upperFirst(propKey)}`] &&
-                        typeof this[`render${__upperFirst(propKey)}`] === 'function'
+                        typeof this[`render${__upperFirst(propKey)}`] ===
+                            'function'
                     ) {
-                        renderedProperties[key][propKey] = this[`render${__upperFirst(propKey)}`](toRenderObj);
+                        renderedProperties[key][propKey] = this[
+                            `render${__upperFirst(propKey)}`
+                        ](toRenderObj);
                     }
                 }
             }
@@ -132,9 +155,16 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
 
         // render the template
         let templateFunction: Function | null = null;
-        if (set.templatesDir && __fs.existsSync(`${set.templatesDir}/template.js`)) {
-            templateFunction = (await import(`${set.templatesDir}/template.js`)).default;
-        } else if (this['renderTemplate'] && typeof this['renderTemplate'] === 'function') {
+        if (
+            set.templatesDir &&
+            __fs.existsSync(`${set.templatesDir}/template.js`)
+        ) {
+            templateFunction = (await import(`${set.templatesDir}/template.js`))
+                .default;
+        } else if (
+            this['renderTemplate'] &&
+            typeof this['renderTemplate'] === 'function'
+        ) {
             (templateFunction = this['renderTemplate']).bind(this);
         }
 

@@ -2,7 +2,7 @@
 
 import __isObject from '@coffeekraken/sugar/shared/is/object';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 import __SType from '../_SType';
 
 /**
@@ -25,15 +25,15 @@ import __SType from '../_SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Object',
-  id: 'object',
-  is: (value: any) => __isObject(value),
-  cast: (value: any) => {
-    if (__isObject(value)) return value;
-    return {
-      value
-    };
-  }
+    name: 'Object',
+    id: 'object',
+    is: (value: any) => __isObject(value),
+    cast: (value: any) => {
+        if (__isObject(value)) return value;
+        return {
+            value,
+        };
+    },
 };
 
 export default descriptor;

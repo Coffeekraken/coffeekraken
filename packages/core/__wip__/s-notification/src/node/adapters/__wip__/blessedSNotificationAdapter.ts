@@ -1,4 +1,7 @@
-import { ISNotificationAdapter, ISNotificationObj } from '../../SNotification';
+import type {
+    ISNotificationAdapter,
+    ISNotificationObj,
+} from '../../SNotification';
 import __SBlessedNotification from '@coffeekraken/sugar/node/blessed/notification/SBlessedNotification';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __SPromise from '@coffeekraken/s-promise';
@@ -19,34 +22,34 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const nodeAdapter: ISNotificationAdapter = {
-  id: 'blessed',
-  name: 'Blessed notification adapter',
-  notify: (notificationObj: ISNotificationObj, settings: any) => {
-    return new __SPromise(({ resolve, reject, emit }) => {
-      if (!notificationObj.id) notificationObj.id = __uniqid();
+    id: 'blessed',
+    name: 'Blessed notification adapter',
+    notify: (notificationObj: ISNotificationObj, settings: any) => {
+        return new __SPromise(({ resolve, reject, emit }) => {
+            if (!notificationObj.id) notificationObj.id = __uniqid();
 
-      const notification = new __SBlessedNotification(
-        notificationObj.title,
-        notificationObj.message,
-        {
-          type: notificationObj.type,
-          onTimeout: () => {
-            emit('timeout', notificationObj);
-          },
-          onClick: () => {
-            emit('click', notificationObj);
-          }
-        }
-      );
+            const notification = new __SBlessedNotification(
+                notificationObj.title,
+                notificationObj.message,
+                {
+                    type: notificationObj.type,
+                    onTimeout: () => {
+                        emit('timeout', notificationObj);
+                    },
+                    onClick: () => {
+                        emit('click', notificationObj);
+                    },
+                },
+            );
 
-      if (!(<any>notification).screen)
-        throw new Error(
-          `You try to use the "<yellow>blessed</yellow>" SNotification adapter but you are not in a blessed ready environment`
-        );
+            if (!(<any>notification).screen)
+                throw new Error(
+                    `You try to use the "<yellow>blessed</yellow>" SNotification adapter but you are not in a blessed ready environment`,
+                );
 
-      (<any>notification).screen.append(notification);
-    }) as Promise<any>;
-  }
+            (<any>notification).screen.append(notification);
+        }) as Promise<any>;
+    },
 };
 
 export default nodeAdapter;

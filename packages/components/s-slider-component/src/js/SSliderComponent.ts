@@ -10,13 +10,15 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __slideable from '@coffeekraken/sugar/js/dom/slide/slideable';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
-import __css from '../css/s-slider-component.css';
 import __SSliderComponentInterface from './interface/SSliderComponentInterface';
 import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTranslateProperties';
 import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __parse from '@coffeekraken/sugar/shared/string/parse';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
+
+// @ts-ignore
+import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
 
 /**
  * @name                Slider

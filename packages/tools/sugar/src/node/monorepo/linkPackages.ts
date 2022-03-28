@@ -66,7 +66,9 @@ export default function linkPackages(
             );
         }
 
-        const topPackagePath = `${__packageRootDir(process.cwd(), true)}`;
+        const topPackagePath = `${__packageRootDir(process.cwd(), {
+            highest: true,
+        })}`;
         const topPackageJson = __readJsonSync(`${topPackagePath}/package.json`); // eslint-disable-line
 
         if (!params.individual) {

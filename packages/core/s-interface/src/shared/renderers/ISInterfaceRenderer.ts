@@ -1,4 +1,5 @@
-import __SInterface, { ISInterfaceDefinitionProperty } from '../SInterface';
+import type { ISInterfaceDefinitionProperty } from '../SInterface';
+import __SInterface from '../SInterface';
 
 export interface ISInterfaceRendererRenderPropertyObj {
     value: any;

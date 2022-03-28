@@ -14,7 +14,7 @@
       "actions": {
         "build": {
           "description": "Generate all the favicons files you need from a single source file",
-          "process": "./src/cli/build.cli.js"
+          "process": "./dist/pkg/esm/cli/build.cli.js"
         }
       }
     }

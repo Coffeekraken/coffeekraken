@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              undefinedTypeDescriptor
@@ -22,12 +22,12 @@ import { ISTypeDescriptor } from '../SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Undefined',
-  id: 'undefined',
-  is: (value: any) => value === undefined,
-  cast: (value: any) => {
-    return undefined;
-  }
+    name: 'Undefined',
+    id: 'undefined',
+    is: (value: any) => value === undefined,
+    cast: (value: any) => {
+        return undefined;
+    },
 };
 
 export default descriptor;

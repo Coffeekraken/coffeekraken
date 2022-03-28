@@ -329,7 +329,9 @@ class SDocMap extends __SClass implements ISDocMap {
                     );
                 }
 
-                const packageMonoRoot = __packageRoot(process.cwd(), true);
+                const packageMonoRoot = __packageRoot(process.cwd(), {
+                    highest: true,
+                });
 
                 const extendedPackages: string[] = [];
                 const finalDocmapJson: Partial<ISDocMapObj> = {
@@ -690,7 +692,9 @@ class SDocMap extends __SClass implements ISDocMap {
                 };
 
                 const packageRoot = __packageRootDir();
-                const packageMonoRoot = __packageRoot(process.cwd(), true);
+                const packageMonoRoot = __packageRoot(process.cwd(), {
+                    highest: true,
+                });
 
                 // check if a file already exists
                 if (__fs.existsSync(`${packageRoot}/docmap.json`)) {
@@ -955,10 +959,9 @@ class SDocMap extends __SClass implements ISDocMap {
                     });
 
                     const packageJson = __packageJsonSync();
-                    const packageMonoRootPath = __packageRoot(
-                        process.cwd(),
-                        true,
-                    );
+                    const packageMonoRootPath = __packageRoot(process.cwd(), {
+                        highest: true,
+                    });
 
                     // symlink repos from monorepo
                     const removedDependencies = {},

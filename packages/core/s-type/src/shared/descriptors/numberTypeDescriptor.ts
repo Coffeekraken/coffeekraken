@@ -1,7 +1,7 @@
 // shared
 
 import __isMap from '@coffeekraken/sugar/shared/is/map';
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 import __SType from '../_SType';
 
 /**
@@ -24,20 +24,22 @@ import __SType from '../_SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Number',
-  id: 'number',
-  is: (value: any) => typeof value === 'number',
-  cast: (value: any) => {
-    if (typeof value !== 'string') {
-      return new Error(`Sorry but only strings can be casted to numbers...`);
-    }
-    const res = parseFloat(value);
-    if (isNaN(res))
-      return new Error(
-        `Sorry but the conversion of "<yellow>${value}</yellow>" to a <green>Number</green> does not work...`
-      );
-    return res;
-  }
+    name: 'Number',
+    id: 'number',
+    is: (value: any) => typeof value === 'number',
+    cast: (value: any) => {
+        if (typeof value !== 'string') {
+            return new Error(
+                `Sorry but only strings can be casted to numbers...`,
+            );
+        }
+        const res = parseFloat(value);
+        if (isNaN(res))
+            return new Error(
+                `Sorry but the conversion of "<yellow>${value}</yellow>" to a <green>Number</green> does not work...`,
+            );
+        return res;
+    },
 };
 
 export default descriptor;

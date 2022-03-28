@@ -40,7 +40,9 @@ export default function listNodeModulesPackages(
 
     if (finalSettings.monorepo) {
         finalSettings.pathes.push(
-            `${__packageRootDir(process.cwd(), true)}/node_modules`,
+            `${__packageRootDir(process.cwd(), {
+                highest: true,
+            })}/node_modules`,
         );
     }
 

@@ -14,10 +14,12 @@ import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract';
 
 import __moment from 'moment';
 
-import __css from '../css/s-date-picker.css';
-import __themeCss from '../css/s-date-picker-theme.css';
 import __baseCss from 'pikaday/css/pikaday.css';
 import __SLitComponent from '@coffeekraken/s-lit-component';
+
+// @ts-ignore
+import __css from '../../../../src/css/s-date-picker.css'; // relative to /dist/pkg/esm/js
+import __themeCss from '../../../../src/css/s-date-picker-theme.css'; // relative to /dist/pkg/esm/js
 
 /**
  * @name                Date Picker
@@ -39,10 +41,10 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * @support         firefox
  * @support         safari
  * @support         edge
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-date-picker-component
- * 
+ *
  * @install         js
  * import { define } from '@coffeekraken/s-date-picker-component';
  * define();
@@ -83,7 +85,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *         button
  *     ></s-date-picker>
  * </label>
- * 
+ *
  * @example         html            Disabled
  * <label class="s-label:responsive">
  *      Choose a date
@@ -96,7 +98,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *         button
  *     ></s-date-picker>
  * </label>
- * 
+ *
  * @example         html            Display more than 1 month
  * <label class="s-label:responsive">
  *      Choose a date
@@ -117,7 +119,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *          <input type="text" name="something" placeholder="Choose a date" class="s-width:40" />
  *      </s-date-picker>
  * </label>
- * 
+ *
  * @example         html            With a custom button
  * <label class="s-label:responsive">
  *      Choose a date
@@ -128,7 +130,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *       <button class="s-btn">Choose a date</button>
  *     </s-date-picker>
  * </label>
- * 
+ *
  * @example         html            With a custom input and button
  * <label class="s-label:responsive">
  *      Choose a date
@@ -140,7 +142,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *       <button class="s-btn">Choose a date</button>
  *     </s-date-picker>
  * </label>
- * 
+ *
  * @example         html            Colors (non-exhaustive)
  * <label class="s-label:responsive s-mbe:20">
  *      Choose a date
@@ -182,7 +184,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     >
  *     </s-date-picker>
  * </label>
- * 
+ *
  * @example         html            RTL Support
  * <label class="s-label:responsive" dir="rtl">
  *      Choose a date
@@ -270,7 +272,7 @@ export default class SDatePicker extends __SLitComponent {
         } else {
             this._$root.append(this._$input);
         }
-        
+
         if (!this._$input?.hasAttribute('name')) {
             this._$input?.setAttribute('name', this.props.name);
         }
@@ -383,27 +385,50 @@ export default class SDatePicker extends __SLitComponent {
     }
     render() {
         return html`
-            <div class="${this.componentUtils.className('')}" ${this.props.rtl ? 'dir="rtl"' : ''}>
-                ${!this._hasInput && this.props.input ? html`
-                    <input ?disabled=${this.props.disabled} type="text" autocomplete="off" name="${this.props.name}" value="${this.props.value}" placeholder="${this.props.placeholder}" class="${this.componentUtils.className('__input','s-input')}" />
-                ` : !this._hasInput ? html`
-                    <input ?disabled=${this.props.disabled} type="hidden" name="${this.props.name}" value="${this.props.value}" />
-                ` : ``}
+            <div
+                class="${this.componentUtils.className('')}"
+                ${this.props.rtl ? 'dir="rtl"' : ''}
+            >
+                ${!this._hasInput && this.props.input
+                    ? html`
+                          <input
+                              ?disabled=${this.props.disabled}
+                              type="text"
+                              autocomplete="off"
+                              name="${this.props.name}"
+                              value="${this.props.value}"
+                              placeholder="${this.props.placeholder}"
+                              class="${this.componentUtils.className(
+                                  '__input',
+                                  's-input',
+                              )}"
+                          />
+                      `
+                    : !this._hasInput
+                    ? html`
+                          <input
+                              ?disabled=${this.props.disabled}
+                              type="hidden"
+                              name="${this.props.name}"
+                              value="${this.props.value}"
+                          />
+                      `
+                    : ``}
                 ${!this._hasButton && this.props.button
                     ? html`
                           <button
-                                ?disabled=${this.props.disabled}
+                              ?disabled=${this.props.disabled}
                               onclick="return false"
                               class="${this.componentUtils.className(
                                   '__button',
                                   's-btn',
                               )}"
                           >
-                              ${this.calendarIcon ? html`
-                                ${staticHTML(this.calendarIcon)}
-                              ` : html`
-                                <i class="s-icon s-icon--calendar"></i>
-                              `}
+                              ${this.calendarIcon
+                                  ? html` ${staticHTML(this.calendarIcon)} `
+                                  : html`
+                                        <i class="s-icon s-icon--calendar"></i>
+                                    `}
                           </button>
                       `
                     : ''}

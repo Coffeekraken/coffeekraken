@@ -1,9 +1,9 @@
-import { ISClass } from '@coffeekraken/s-class';
-import { ISLog } from '@coffeekraken/s-log';
-import { ISpawnSettings } from '@coffeekraken/sugar/node/process/spawn';
-import { ISInterface } from '@coffeekraken/s-interface';
-import { ISStdio } from '@coffeekraken/s-stdio';
-import { ISDurationObject } from '@coffeekraken/s-duration';
+import type { ISClass } from '@coffeekraken/s-class';
+import type { ISLog } from '@coffeekraken/s-log';
+import type { ISpawnSettings } from '@coffeekraken/sugar/node/process/spawn';
+import type { ISInterface } from '@coffeekraken/s-interface';
+import type { ISStdio } from '@coffeekraken/s-stdio';
+import type { ISDurationObject } from '@coffeekraken/s-duration';
 
 export interface ISCommandProcessSettings {
     spawnSettings: Partial<ISpawnSettings>;

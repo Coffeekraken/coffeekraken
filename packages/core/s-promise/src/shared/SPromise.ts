@@ -3,7 +3,8 @@
 
 import __getMethods from '@coffeekraken/sugar/shared/class/utils/getMethods';
 import __SClass from '@coffeekraken/s-class';
-import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
+import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SLog from '@coffeekraken/s-log';

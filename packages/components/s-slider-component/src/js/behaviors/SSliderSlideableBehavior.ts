@@ -1,17 +1,20 @@
 import __slideable from '@coffeekraken/sugar/js/dom/slide/slideable';
 import __SSliderBehavior from '../SSliderBehavior';
-// @ts-ignore
-import __css from '../../css/s-slider-slideable-behavior.css';
 import __SSliderSlideableBehaviorInterface from './interface/SSliderSlideableBehaviorInterface';
+
+// @ts-ignore
+import __css from '../../../../../src/css/s-slider-slideable-behavior.css'; // relative to /dist/pkg/esm/js/behaviors
 
 export interface ISSliderBehaviorSettings {
     friction: number;
 }
 
 export default class SSliderSlideableBehavior extends __SSliderBehavior {
-
     static get properties() {
-        return __SSliderBehavior.properties({}, __SSliderSlideableBehaviorInterface);
+        return __SSliderBehavior.properties(
+            {},
+            __SSliderSlideableBehaviorInterface,
+        );
     }
 
     static get styles() {
@@ -28,19 +31,19 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
      * @name            constructor
      * @type        Function
      * @constructor
-     * 
+     *
      * Constructor
-     * 
+     *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: ISSliderBehaviorSettings) {
         super({
             ...__SSliderSlideableBehaviorInterface.defaults(),
-            ...settings
+            ...settings,
         });
     }
-    
+
     firstUpdated() {
         // handle slide
         this._handleSlide();
@@ -48,20 +51,20 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
             // @ts-ignore
             this._$lastGoToSlide = e.detail.$slide;
         });
-
     }
 
     _handleSlide() {
         console.log('SSS', this.settings);
         __slideable(this.$slider.$slidesWrapper, {
             friction: this.settings.friction,
-            direction: this.$slider.props.direction
-        }).on('start', () => {
-            this.$slider.stop();
-        }).on('refocusStart', ($slide) => {
-            // if (this._$lastGoToSlide !== $slide) return;
-            this.$slider.setCurrentSlide($slide)
-        });
+            direction: this.$slider.props.direction,
+        })
+            .on('start', () => {
+                this.$slider.stop();
+            })
+            .on('refocusStart', ($slide) => {
+                // if (this._$lastGoToSlide !== $slide) return;
+                this.$slider.setCurrentSlide($slide);
+            });
     }
-
 }

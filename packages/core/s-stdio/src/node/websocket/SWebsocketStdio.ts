@@ -1,6 +1,7 @@
 // import __inquirer from 'inquirer';
-import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import __SLog, { ISLog } from '@coffeekraken/s-log';
+import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
+import type { ISLog } from '@coffeekraken/s-log';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __countLines from '@coffeekraken/sugar/node/terminal/countLines';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';

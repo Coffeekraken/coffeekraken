@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import __scrollTo, { IScrollToSettings } from './scrollTo';
+import type { IScrollToSettings } from './scrollTo';
+import __scrollTo from './scrollTo';
 import __easing from '../../../shared/easing/easeInOutQuint';
 import __deepMerge from '../../../shared/object/deepMerge';
 

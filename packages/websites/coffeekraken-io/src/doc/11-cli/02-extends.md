@@ -51,7 +51,7 @@ Create the `sugar.jcon` file at your project root and fill it like so:
                 "prettyCommand": {
                     "scope": "global",
                     "description": "Allows to display 'hello world' on screen",
-                    "process": "./src/node/prettyCommand.cli.ts"
+                    "process": "./dist/pkg/esm/node/prettyCommand.cli.ts"
                 }
             }
         }
@@ -132,7 +132,7 @@ For that, simply add the `interface` property inside your `sugar.json` file like
                 "prettyCommand": {
                     "scope": "global",
                     "description": "Allows to display 'hello world' on screen",
-                    "process": "./src/node/prettyCommand.cli.ts",
+                    "process": "./dist/pkg/esm/node/prettyCommand.cli.ts",
                     "interface": "./src/node/prettyCommandInterface.ts"
                 }
             }

@@ -1,4 +1,5 @@
-import __SBuilder, { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SRequest from '@coffeekraken/s-request';
@@ -192,7 +193,9 @@ export default class SStaticBuilder extends __SBuilder {
 
                     try {
                         // failed url file
-                        __removeSync(`${__packageRoot()}/SStaticBuilderFailedUrls.txt`)
+                        __removeSync(
+                            `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
+                        );
                         // remove the existing static directory
                         __removeSync(params.outDir);
                         // remove the cache build dir
@@ -248,7 +251,9 @@ export default class SStaticBuilder extends __SBuilder {
                         }.html`.replace(/\/{2,20}/gm, '/');
 
                     emit('log', {
-                        clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
+                        clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE)
+                            ? false
+                            : logsCount,
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> Reaching the url "<cyan>${urlLoc}</cyan>"...`,
                     });
@@ -291,10 +296,10 @@ export default class SStaticBuilder extends __SBuilder {
                         timeout: params.requestTimeout,
                     });
 
-                    let res, tries = 0;
+                    let res,
+                        tries = 0;
 
                     while (!res && tries < params.requestRetry) {
-
                         if (tries > 0) {
                             await __wait(params.requestRetryTimeout);
                         }
@@ -332,7 +337,9 @@ export default class SStaticBuilder extends __SBuilder {
                     const end = Date.now();
 
                     currentDuration += end - start;
-                    leftDuration = (end - start) * (xml.urlset.url.length - i) - currentDuration;
+                    leftDuration =
+                        (end - start) * (xml.urlset.url.length - i) -
+                        currentDuration;
 
                     // @ts-ignore
                     if (res?.data) {

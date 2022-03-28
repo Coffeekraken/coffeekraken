@@ -14,12 +14,12 @@
             "actions": {
                 "build": {
                     "description": "Build the docmap.json file by searching for source files with a @namespace defined",
-                    "process": "./src/cli/build.cli.js",
-                    "interface": "./src/node/interface/SDocmapBuildParamsInterface.js"
+                    "process": "./dist/pkg/esm/cli/build.cli.js",
+                    "interface": "./dist/pkg/esm/node/interface/SDocmapBuildParamsInterface.js"
                 },
                 "read": {
                     "description": "Get a special docmap entry",
-                    "process": "./src/cli/read.cli.js"
+                    "process": "./dist/pkg/esm/cli/read.cli.js"
                 }
             }
         }

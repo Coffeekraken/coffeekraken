@@ -10,7 +10,8 @@ import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __path from 'path';
 import * as __chokidar from 'chokidar';
-import __SConfig, { ISConfigEnvObj } from '../../shared/SConfig';
+import type { ISConfigEnvObj } from '../../shared/SConfig';
+import __SConfig from '../../shared/SConfig';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
@@ -82,10 +83,9 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                             module: [],
                             extends: [],
                             repo: [
-                                `${__packageRootDir(
-                                    process.cwd(),
-                                    true,
-                                )}/[folderName]`,
+                                `${__packageRootDir(process.cwd(), {
+                                    highest: true,
+                                })}/[folderName]`,
                             ],
                             package: [
                                 `${__packageRootDir(
@@ -207,12 +207,10 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
                 const configFilePath = `${path}/${file}`;
 
-                console.log('ddd', configFilePath);
-
                 // @TODO      check for delete cache with import
                 const importedConfig = await import(configFilePath);
 
-                let configData = importedConfig ?? importedConfig.default;
+                let configData = importedConfig.default;
                 if (typeof configData === 'function') {
                     configData = configData(env, configObj ?? {});
                 }
@@ -247,8 +245,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 }
             }
         }
-
-        console.log(configObj);
 
         return Object.assign({}, configObj);
     }

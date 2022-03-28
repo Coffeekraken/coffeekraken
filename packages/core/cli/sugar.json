@@ -2,7 +2,7 @@
     "config": {
         "folders": [
             {
-                "path": "./dist/pkg/%format/config"
+                "path": "./dist/pkg/esm/config"
             }
         ]
     },
@@ -63,14 +63,14 @@
                 "sugarJson": {
                     "scope": "global",
                     "description": "Add the sugar.json file",
-                    "interface": "./src/node/add/interface/SCliAddSugarJsonParamsInterface.js",
-                    "process": "./src/cli/add/sugarJson.cli.js"
+                    "interface": "./dist/pkg/esm/node/add/interface/SCliAddSugarJsonParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/add/sugarJson.cli.js"
                 },
                 "manifestJson": {
                     "scope": "global",
                     "description": "Add the manifest.json file",
-                    "interface": "./src/node/add/interface/SCliAddManifestJsonParamsInterface.js",
-                    "process": "./src/cli/add/manifestJson.cli.js"
+                    "interface": "./dist/pkg/esm/node/add/interface/SCliAddManifestJsonParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/add/manifestJson.cli.js"
                 }
             }
         },
@@ -82,8 +82,8 @@
                 "copy": {
                     "scope": "global",
                     "description": "Copy a file/directory to a specified destination",
-                    "interface": "./src/node/fs/interface/SCliFsCopyParamsInterface.js",
-                    "process": "./src/cli/fs/copy.cli.js"
+                    "interface": "./dist/pkg/esm/node/fs/interface/SCliFsCopyParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/fs/copy.cli.js"
                 }
             }
         },
@@ -95,14 +95,14 @@
                 "rename": {
                     "scope": "global",
                     "description": "Rename a package (folder, package.json, etc...",
-                    "interface": "./src/node/package/interface/SCliPackageRenameParamsInterface.js",
-                    "process": "./src/cli/package/rename.cli.js"
+                    "interface": "./dist/pkg/esm/node/package/interface/SCliPackageRenameParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/package/rename.cli.js"
                 },
                 "install": {
                     "scope": "global",
                     "description": "Install package dependencies like npm and composer",
-                    "interface": "./src/node/package/interface/SCliPackageInstallParamsInterface.js",
-                    "process": "./src/cli/package/install.cli.js"
+                    "interface": "./dist/pkg/esm/node/package/interface/SCliPackageInstallParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/package/install.cli.js"
                 }
             }
         },
@@ -114,8 +114,8 @@
                     "scope": "global",
                     "title": "Kill a process",
                     "description": "Allows you to kill particular process through parameters like the port on which it runs, etc...",
-                    "interface": "./src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
-                    "process": "./src/cli/process/interactiveKill.cli.js"
+                    "interface": "./dist/pkg/esm/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/process/interactiveKill.cli.js"
                 }
             },
             "defaultAction": "kill",
@@ -123,8 +123,8 @@
                 "kill": {
                     "scope": "global",
                     "description": "Kill a process by it's pid, port and more",
-                    "interface": "./src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
-                    "process": "./src/cli/process/kill.cli.js"
+                    "interface": "./dist/pkg/esm/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/process/kill.cli.js"
                 }
             }
         }

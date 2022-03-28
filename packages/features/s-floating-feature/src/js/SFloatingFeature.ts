@@ -1,11 +1,20 @@
 import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-// @ts-ignore
-import __css from '../css/s-floating-feature.css';
 import __SFloatingFeatureInterface from './interface/SFloatingFeatureInterface';
 
-import {computePosition,flip,shift,offset,arrow,getScrollParents,autoPlacement,inline} from '@floating-ui/dom';
+import {
+    computePosition,
+    flip,
+    shift,
+    offset,
+    arrow,
+    getScrollParents,
+    autoPlacement,
+    inline,
+} from '@floating-ui/dom';
 
+// @ts-ignore
+import __css from '../../../../src/css/s-floating-feature.css'; // relative to /dist/pkg/esm/js
 
 /**
  * @name            SFloatingFeature
@@ -34,11 +43,9 @@ import {computePosition,flip,shift,offset,arrow,getScrollParents,autoPlacement,i
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISFloatingFeatureProps {
-}
+export interface ISFloatingFeatureProps {}
 
 export default class SFloatingFeature extends __SFeature {
-
     _$ref;
 
     // @ts-ignore
@@ -69,16 +76,19 @@ export default class SFloatingFeature extends __SFeature {
     }
 
     mount() {
-        
         // handling offset when an arrow is wanted and no offset specified
         if (this.props.offset === undefined && this.props.arrow) {
-                this.props.offset = this.props.arrowSize;
+            this.props.offset = this.props.arrowSize;
         }
 
         // preparing middlewares
-        const middlewares = [offset(this.props.offset), shift({
-            padding: this.props.shift
-        }), inline()];
+        const middlewares = [
+            offset(this.props.offset),
+            shift({
+                padding: this.props.shift,
+            }),
+            inline(),
+        ];
 
         // check the placement
         if (this.props.placement !== 'auto') {
@@ -93,50 +103,58 @@ export default class SFloatingFeature extends __SFeature {
             $arrow = document.createElement('div');
             $arrow.classList.add('s-floating__arrow');
             this.node.append($arrow);
-            middlewares.push(arrow({
-                element: $arrow,
-                padding: this.props.arrowPadding
-            }));
+            middlewares.push(
+                arrow({
+                    element: $arrow,
+                    padding: this.props.arrowPadding,
+                }),
+            );
         }
 
         // setting the arrow size through a css property
         if (this.props.arrowSize) {
-            this.node.style.setProperty(`--arrow-size`, `${this.props.arrowSize}px`);
+            this.node.style.setProperty(
+                `--arrow-size`,
+                `${this.props.arrowSize}px`,
+            );
         }
 
         // updating routine
         const update = async () => {
-            const {x, y, placement, middlewareData} = await computePosition(this._$ref, this.node, {
-                placement: this.props.placement,
-                middleware: middlewares,
-            });
+            const { x, y, placement, middlewareData } = await computePosition(
+                this._$ref,
+                this.node,
+                {
+                    placement: this.props.placement,
+                    middleware: middlewares,
+                },
+            );
             Object.assign(this.node.style, {
                 left: `${x}px`,
                 top: `${y}px`,
             });
-            
+
             // handle arrow position
             if ($arrow) {
-            
                 // Accessing the data
-                const {x: arrowX, y: arrowY} = middlewareData.arrow;
-                
+                const { x: arrowX, y: arrowY } = middlewareData.arrow;
+
                 const staticSide = {
                     top: 'bottom',
                     right: 'left',
                     bottom: 'top',
                     left: 'right',
                 }[placement.split('-')[0]];
-                
+
                 Object.assign($arrow.style, {
                     left: arrowX != null ? `${arrowX}px` : '',
                     top: arrowY != null ? `${arrowY}px` : '',
                     right: '',
                     bottom: '',
-                    [staticSide]: `${this.props.arrowSize * .5 * -1}px`,
+                    [staticSide]: `${this.props.arrowSize * 0.5 * -1}px`,
                 });
             }
-        }
+        };
 
         // first update
         update();
@@ -149,7 +167,6 @@ export default class SFloatingFeature extends __SFeature {
             el.addEventListener('scroll', update);
             el.addEventListener('resize', update);
         });
-
     }
 }
 

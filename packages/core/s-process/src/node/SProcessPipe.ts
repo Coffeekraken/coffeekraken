@@ -2,7 +2,7 @@
 
 // @to-work
 import __isClass from '@coffeekraken/sugar/shared/is/class';
-import { ISProcess, ISProcessCtor, ISProcessSettings } from './SProcess';
+import type { ISProcess, ISProcessCtor, ISProcessSettings } from './SProcess';
 import __SPromise from '@coffeekraken/s-promise';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -24,10 +24,10 @@ import __typeof from '@coffeekraken/sugar/shared/value/typeof';
  * @param         {ISProcessSettings}               [settings={}]               Some settings to configure your process pipe instance
  *
  * @setting       {String}          something       My cool setting
- * 
+ *
  * @todo        something
  * @todo        SOmething very important      low
- * 
+ *
  * @example         js
  * import SProcess, { SProcessPipe } from '@coffeekraken/s-process';
  * class MyProcess extends SProcess {
@@ -51,175 +51,178 @@ import __typeof from '@coffeekraken/sugar/shared/value/typeof';
  */
 
 export interface ISProcessPipeSettings {
-  processesSettings: ISProcessSettings;
-  stdio: any;
-  [key: string]: any;
+    processesSettings: ISProcessSettings;
+    stdio: any;
+    [key: string]: any;
 }
 
 export interface ISProcessPipeCtorSettings {
-  processPipe?: Partial<ISProcessPipeSettings>;
+    processPipe?: Partial<ISProcessPipeSettings>;
 }
 
 export interface ISProcessPipeObject {
-  settings?: Partial<ISProcessSettings>;
-  params?: any;
-  process: ISProcessCtor;
+    settings?: Partial<ISProcessSettings>;
+    params?: any;
+    process: ISProcessCtor;
 }
 
 export interface ISProcessPipeCtor {
-  new (
-    processes: ISProcessCtor | ISProcessCtor[],
-    settings: Partial<ISProcessPipeSettings>
-  );
+    new (
+        processes: ISProcessCtor | ISProcessCtor[],
+        settings: Partial<ISProcessPipeSettings>,
+    );
 }
 
 export interface ISProcessPipe {
-  _processes?: ISProcessCtor | ISProcessCtor[];
-  stdio?: any;
-  processPipeSettings: ISProcessPipeSettings;
+    _processes?: ISProcessCtor | ISProcessCtor[];
+    stdio?: any;
+    processPipeSettings: ISProcessPipeSettings;
 }
 
 class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
-  /**
-   * @name            _processes
-   * @type            Array<ISProcessPipeObject|ISProcess|Function>
-   * @private
-   *
-   * Store the processes array to execute
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _processes: ISProcessCtor | ISProcessCtor[];
+    /**
+     * @name            _processes
+     * @type            Array<ISProcessPipeObject|ISProcess|Function>
+     * @private
+     *
+     * Store the processes array to execute
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _processes: ISProcessCtor | ISProcessCtor[];
 
-  stdio;
+    stdio;
 
-  /**
-   * @name            processPipeSettings
-   * @type            ISProcessPipeSettings
-   * @get
-   *
-   * Access the process pipe settings
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  public get processPipeSettings() {
-    return (<any>this)._settings.processPipe;
-  }
+    /**
+     * @name            processPipeSettings
+     * @type            ISProcessPipeSettings
+     * @get
+     *
+     * Access the process pipe settings
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public get processPipeSettings() {
+        return (<any>this)._settings.processPipe;
+    }
 
-  /**
-   * @name            constructor
-   * @type            Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  constructor(
-    processes: ISProcessCtor | ISProcessCtor[],
-    settings: ISProcessPipeCtorSettings = {}
-  ) {
-    super(
-      __deepMerge(
-        {
-          processPipe: {
-            stdio: 'inherit'
-          }
-        },
-        settings
-      )
-    );
-    this._processes = processes;
-  }
+    /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    constructor(
+        processes: ISProcessCtor | ISProcessCtor[],
+        settings: ISProcessPipeCtorSettings = {},
+    ) {
+        super(
+            __deepMerge(
+                {
+                    processPipe: {
+                        stdio: 'inherit',
+                    },
+                },
+                settings,
+            ),
+        );
+        this._processes = processes;
+    }
 
-  /**
-   * @name          run
-   * @type          Function
-   * @async
-   *
-   * Execute the processes pipe
-   *
-   * @param         {Object}        [params={}]             The initial params object to pass to the first process
-   * @param         {Object}        [settings={}]           Some settings to override from the one passed in the constructor
-   * @return        {SPromise}                              An SPromise instance through which you can get events piped from processes
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  run(params = {}, settings: Partial<ISProcessPipeSettings> = {}) {
-    // extends settings
-    const processPipeSettings = <ISProcessPipeSettings>(
-      __deepMerge(this.processPipeSettings, settings)
-    );
+    /**
+     * @name          run
+     * @type          Function
+     * @async
+     *
+     * Execute the processes pipe
+     *
+     * @param         {Object}        [params={}]             The initial params object to pass to the first process
+     * @param         {Object}        [settings={}]           Some settings to override from the one passed in the constructor
+     * @return        {SPromise}                              An SPromise instance through which you can get events piped from processes
+     *
+     * @since         2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    run(params = {}, settings: Partial<ISProcessPipeSettings> = {}) {
+        // extends settings
+        const processPipeSettings = <ISProcessPipeSettings>(
+            __deepMerge(this.processPipeSettings, settings)
+        );
 
-    const promise = new __SPromise(
-      async ({ resolve, reject, emit, pipe, pipeTo }) => {
-        if (!Array.isArray(this._processes)) {
-          throw `Sorry but you've passed an "<yellow>${__typeof(
-            this._processes
-          )}</yellow>" as "<cyan>SProcessManager.pipe</cyan>" argument but it needs to be an <green>Array</green>`;
-        }
+        const promise = new __SPromise(
+            async ({ resolve, reject, emit, pipe, pipeTo }) => {
+                if (!Array.isArray(this._processes)) {
+                    throw `Sorry but you've passed an "<yellow>${__typeof(
+                        this._processes,
+                    )}</yellow>" as "<cyan>SProcessManager.pipe</cyan>" argument but it needs to be an <green>Array</green>`;
+                }
 
-        // loop on each processes passed
-        for (let i = 0; i < this._processes.length; i++) {
-          const pro: any = this._processes[i];
+                // loop on each processes passed
+                for (let i = 0; i < this._processes.length; i++) {
+                    const pro: any = this._processes[i];
 
-          let processInstance: ISProcess,
-            processParams: any = {},
-            processSettings: ISProcessSettings =
-              processPipeSettings.processesSettings;
+                    let processInstance: ISProcess,
+                        processParams: any = {},
+                        processSettings: ISProcessSettings =
+                            processPipeSettings.processesSettings;
 
-          // check the type of the process
-          if (__isClass(pro)) {
-            processInstance = new pro({
-              ...(processPipeSettings.processesSettings || {}),
-              stdio: false
-            });
-          } else if (typeof pro === 'function') {
-            params = pro(params);
-          } else if (typeof pro === 'object') {
-            processSettings = pro.settings || {};
-            processParams = pro.params || {};
-            if (!pro.process) {
-              emit('warn', {
-                value: `You have passed an "<yellow>Object</yellow>" as process parameter in the "<cyan>SProcessManager.pipe</cyan>" static method but you don't have specified the "<magenta>process</magenta>" property with either an SProcess instance, or directly the SProcess class you want`
-              });
-              continue;
-            }
-            if (__isClass(pro.process)) {
-              processInstance = new pro.process({
-                ...processSettings,
-                stdio: false
-              });
-            }
-          }
+                    // check the type of the process
+                    if (__isClass(pro)) {
+                        processInstance = new pro({
+                            ...(processPipeSettings.processesSettings || {}),
+                            stdio: false,
+                        });
+                    } else if (typeof pro === 'function') {
+                        params = pro(params);
+                    } else if (typeof pro === 'object') {
+                        processSettings = pro.settings || {};
+                        processParams = pro.params || {};
+                        if (!pro.process) {
+                            emit('warn', {
+                                value: `You have passed an "<yellow>Object</yellow>" as process parameter in the "<cyan>SProcessManager.pipe</cyan>" static method but you don't have specified the "<magenta>process</magenta>" property with either an SProcess instance, or directly the SProcess class you want`,
+                            });
+                            continue;
+                        }
+                        if (__isClass(pro.process)) {
+                            processInstance = new pro.process({
+                                ...processSettings,
+                                stdio: false,
+                            });
+                        }
+                    }
 
-          // execute the process
-          // @ts-ignore
-          if (processInstance) {
-            emit('log', {
-              group: `s-process-pipe-${this.metas.id}`,
-              type: 'heading',
-              value: processInstance.metas.formattedName
-            });
-            const resPromise = processInstance.run(params, processSettings);
-            pipe(resPromise);
-            const res = await resPromise;
-          }
-        }
-      }
-    );
+                    // execute the process
+                    // @ts-ignore
+                    if (processInstance) {
+                        emit('log', {
+                            group: `s-process-pipe-${this.metas.id}`,
+                            type: 'heading',
+                            value: processInstance.metas.formattedName,
+                        });
+                        const resPromise = processInstance.run(
+                            params,
+                            processSettings,
+                        );
+                        pipe(resPromise);
+                        const res = await resPromise;
+                    }
+                }
+            },
+        );
 
-    // @ts-ignore
-    // if (!__isChildProcess() && processPipeSettings.stdio && !this.stdio) {
-    //   this.stdio = __stdio(promise, processPipeSettings.stdio, {});
-    // }
+        // @ts-ignore
+        // if (!__isChildProcess() && processPipeSettings.stdio && !this.stdio) {
+        //   this.stdio = __stdio(promise, processPipeSettings.stdio, {});
+        // }
 
-    return promise;
-  }
+        return promise;
+    }
 }
 
 // const cls: ISProcessPipeCtor = SProcessPipe;

@@ -149,6 +149,14 @@ function processPackage(packageRoot) {
     );
 }
 
+function uuid() {
+    return 'xxxxxxxxxxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        var r = (Math.random() * 16) | 0,
+            v = c == 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+    });
+}
+
 function processPath(path, platform = 'node') {
     const packageRoot = path.split('/').slice(0, 3).join('/');
     const pathRelToPackageRoot = path.split('/').slice(4).join('/');
@@ -161,9 +169,14 @@ function processPath(path, platform = 'node') {
         ),
     );
     const packageJsonOutPath = `${packageRoot}/dist/pkg/${format}/package.json`;
-    const outFilePath = `${outPath}/${__path.basename(path)}`
+
+    // output file
+    let outFilePath = `${outPath}/${__path.basename(path)}`
         .replace('%format', format)
         .replace(/\.ts$/, '.js');
+    // if (path.includes('/tools/sugar/src')) {
+    //     outFilePath = path.replace(/\.ts/, format === 'cjs' ? '.cjs' : '.mjs');
+    // }
 
     // process package if needed
     if (!_processedPkgs.includes(packageRoot)) {
@@ -187,23 +200,30 @@ function processPath(path, platform = 'node') {
             traceResolution: false,
             esModuleInterop: true,
             skipLibCheck: true,
+            declaration: true,
             experimentalDecorators: true,
             forceConsistentCasingInFileNames: false,
             noImplicitAny: false,
             noStrictGenericChecks: false,
-            allowSyntheticDefaultImports: true,
+            allowSyntheticDefaultImports: false,
             lib: platform === 'node' ? ['esnext'] : ['esnext', 'DOM'],
             target: 'ES2015',
             module,
         },
     });
 
+    // if (Object.keys(result).length > 3) {
+    //     console.log(result);
+    // }
+
     if (result.outputText) {
         if (!__fs.existsSync(outPath)) {
             __fs.mkdirSync(outPath, { recursive: true });
         }
-
         __fs.writeFileSync(outFilePath, result.outputText);
+        if (__path.basename(outFilePath) === 'sugar.cli.js') {
+            __fs.chmodSync(outFilePath, 0o755);
+        }
     }
 
     // // esm
@@ -275,7 +295,9 @@ function processPath(path, platform = 'node') {
         __fs.writeFileSync(
             packageJsonOutPath,
             JSON.stringify({
+                name: `@lostInTheDarkNight/${uuid()}`,
                 type: module === 'commonjs' ? 'commonjs' : 'module',
+                private: true,
             }),
         );
     }

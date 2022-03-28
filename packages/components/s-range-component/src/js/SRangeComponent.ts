@@ -6,8 +6,10 @@ import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __css from '../css/s-range.css';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+
+// @ts-ignore
+import __css from '../../../../src/css/s-range.css'; // relative to /dist/pkg/esm/js
 
 /**
  * @name                Range
@@ -31,13 +33,13 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @support         safari
  * @support         edge
  *
- * @install          bash 
+ * @install          bash
  * npm i @coffeekraken/s-range-component
- * 
+ *
  * @install         js
  * import { define } from '@coffeekraken/s-range-component';
  * define();
- * 
+ *
  * @example         html        Simple range
  * <s-range name="myCoolRange" value="90" class="s-color:accent s-mbe:30"></s-range>
  *
@@ -49,7 +51,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  *
  * @example         html        With steps
  * <s-range name="myRangeWithSteps" value="70" class="s-color:complementary s-mbe:30" step="5"></s-range>
- * 
+ *
  * @example         html        Disabled
  * <s-range name="myRangeWithSteps" disabled value="70" class="s-color:complementary s-mbe:30" step="5"></s-range>
  *

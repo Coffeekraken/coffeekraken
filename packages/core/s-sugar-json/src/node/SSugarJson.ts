@@ -16,7 +16,8 @@ import __matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs
 import __SBench from '@coffeekraken/s-bench';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __SFrontstack, { ISFrontstackAction } from '@coffeekraken/s-frontstack';
+import type { ISFrontstackAction } from '@coffeekraken/s-frontstack';
+import __SFrontstack from '@coffeekraken/s-frontstack';
 
 export interface ISSugarJsonSettings {
     packages: string | boolean;
@@ -242,10 +243,9 @@ export default class SSugarJson extends __SClass {
         const localNodeModulesPath = `${__packageRoot()}/node_modules`;
 
         // get local node modules directory path
-        const topLocalNodeModulesPath = `${__packageRoot(
-            process.cwd(),
-            true,
-        )}/node_modules`;
+        const topLocalNodeModulesPath = `${__packageRoot(process.cwd(), {
+            highest: true,
+        })}/node_modules`;
 
         // build globs
         const globs: string[] = [];
@@ -310,7 +310,11 @@ export default class SSugarJson extends __SClass {
             finalSettings.includePackage &&
             finalSettings.includeTop
         ) {
-            globs.push(`${__packageRoot(process.cwd(), true)}/sugar.json`);
+            globs.push(
+                `${__packageRoot(process.cwd(), {
+                    highest: true,
+                })}/sugar.json`,
+            );
         }
 
         // search for "sugar.json" files

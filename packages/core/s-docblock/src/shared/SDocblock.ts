@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
+import type { ISDocblockBlock } from './SDocblockBlock';
+import __SDocblockBlock from './SDocblockBlock';
 // import __markdown from './markdown/index';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPath from '@coffeekraken/sugar/node/fs/isPath';
@@ -9,7 +10,7 @@ import __require from '@coffeekraken/sugar/node/esm/require';
 import __SPromise from '@coffeekraken/s-promise';
 
 /**
- * 
+ *
  * @name                  SDockblock
  * @namespace           shared
  * @type                  Class
@@ -118,7 +119,6 @@ class SDocblock extends __SClass implements ISDocblock {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com>
      */
     constructor(source: string, settings?: ISDocblockCtorSettings) {
-           
         super(
             __deepMerge(
                 {
@@ -171,8 +171,6 @@ class SDocblock extends __SClass implements ISDocblock {
         } else {
             this._source = source;
         }
-
-
     }
 
     /**
@@ -226,8 +224,7 @@ class SDocblock extends __SClass implements ISDocblock {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     parse(string = this._source): Promise<any[]> {
-        return new __SPromise(async ({resolve, reject, emit, pipe}) => {
-    
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             // extract each docblocks
             const regDefault = /(['"`\s]+)?(\/\*{2})([\s\S]+?)(\*\/)/g;
 
@@ -237,12 +234,14 @@ class SDocblock extends __SClass implements ISDocblock {
             // @ts-ignore
             let regDefaultMatches = string.match(regDefault);
             if (regDefaultMatches?.length) {
-                regDefaultMatches = regDefaultMatches.filter(match => {
-                    if (match.trim().match(/^['`"]/)) return false;
-                    return true;
-                }).map(match => {
-                    return match.trim();
-                });
+                regDefaultMatches = regDefaultMatches
+                    .filter((match) => {
+                        if (match.trim().match(/^['`"]/)) return false;
+                        return true;
+                    })
+                    .map((match) => {
+                        return match.trim();
+                    });
                 blocksArrayStr = [...regDefaultMatches];
             }
 
@@ -265,15 +264,19 @@ class SDocblock extends __SClass implements ISDocblock {
                         for (
                             let i = 0;
                             i <
-                            Object.keys(this.docblockSettings.filterByTag).length;
+                            Object.keys(this.docblockSettings.filterByTag)
+                                .length;
                             i++
                         ) {
                             const tagName = Object.keys(
                                 this.docblockSettings.filterByTag,
                             )[i];
-                            const tagFilter =
-                                this.docblockSettings.filterByTag[tagName];
-                            const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
+                            const tagFilter = this.docblockSettings.filterByTag[
+                                tagName
+                            ];
+                            const tagValueReg = new RegExp(
+                                `@${tagName}([^\n]+)`,
+                            );
                             const tagValue = blockStr.match(tagValueReg);
                             const tagFilterArray = Array.isArray(tagFilter)
                                 ? tagFilter
@@ -281,14 +284,20 @@ class SDocblock extends __SClass implements ISDocblock {
                             let isMatchOrCondition = false;
                             if (tagValue && tagValue[1]) {
                                 const tagValueValue = tagValue[1].trim();
-                                for (let j = 0; j < tagFilterArray.length; j++) {
+                                for (
+                                    let j = 0;
+                                    j < tagFilterArray.length;
+                                    j++
+                                ) {
                                     const tagFilterFilter = tagFilterArray[j];
                                     if (typeof tagFilterFilter === 'string') {
                                         if (tagValueValue === tagFilterFilter) {
                                             isMatchOrCondition = true;
                                             break;
                                         }
-                                    } else if (tagFilterFilter instanceof RegExp) {
+                                    } else if (
+                                        tagFilterFilter instanceof RegExp
+                                    ) {
                                         if (
                                             tagValueValue
                                                 .trim()
@@ -300,7 +309,11 @@ class SDocblock extends __SClass implements ISDocblock {
                                     } else if (
                                         typeof tagFilterFilter === 'function'
                                     ) {
-                                        if (tagFilterFilter(tagValueValue.trim())) {
+                                        if (
+                                            tagFilterFilter(
+                                                tagValueValue.trim(),
+                                            )
+                                        ) {
                                             isMatchOrCondition = true;
                                             break;
                                         }
@@ -344,8 +357,11 @@ class SDocblock extends __SClass implements ISDocblock {
                 // @ts-ignore
                 this._blocks = this._blocks.filter((docblockBlock) => {
                     // @ts-ignore
-                    return this.docblockSettings.filter(docblockBlock.toObject(), docblockBlock);
-                });        
+                    return this.docblockSettings.filter(
+                        docblockBlock.toObject(),
+                        docblockBlock,
+                    );
+                });
             }
 
             // sort
@@ -353,7 +369,6 @@ class SDocblock extends __SClass implements ISDocblock {
 
             // return the class instance itself
             resolve(this._blocks);
-
         });
     }
 

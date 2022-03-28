@@ -8,7 +8,8 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 
-import __css from '../css/s-side-panel.css';
+// @ts-ignore
+import __css from '../../../../src/css/s-side-panel.css'; // relative to /dist/pkg/esm/js
 
 export interface SSidePanelComponentProps {
     side: 'top' | 'left' | 'bottom' | 'right';
@@ -65,14 +66,16 @@ export default class SSidePanel extends __SLitComponent {
         if (this.props.closeOn.indexOf('click') !== -1) {
             this.addEventListener('click', (e) => {
                 if (this._$container.contains(e.target)) return;
-                if (this.constructor._activePanels.slice(-1)[0] !== this) return;
+                if (this.constructor._activePanels.slice(-1)[0] !== this)
+                    return;
                 this.constructor._activePanels.pop();
                 this.active = false;
             });
         }
         if (this.props.closeOn.indexOf('escape') !== -1) {
             __hotkey('escape').on('press', () => {
-                if (this.constructor._activePanels.slice(-1)[0] !== this) return;
+                if (this.constructor._activePanels.slice(-1)[0] !== this)
+                    return;
                 this.constructor._activePanels.pop();
                 this.active = false;
             });
@@ -81,7 +84,9 @@ export default class SSidePanel extends __SLitComponent {
         this._$nodes = Array.from(this.children);
 
         if (this.props.triggerer) {
-            const $triggerers = Array.from(document.querySelectorAll(this.props.triggerer));
+            const $triggerers = Array.from(
+                document.querySelectorAll(this.props.triggerer),
+            );
             $triggerers.forEach(($triggerer) => {
                 $triggerer.addEventListener('click', (e) => {
                     this.open();
@@ -104,13 +109,22 @@ export default class SSidePanel extends __SLitComponent {
     }
     render() {
         return html`
-            ${this.overlay ? html` <div class="${this.componentUtils.className('__overlay')}"></div> ` : ''}
+            ${this.overlay
+                ? html`
+                      <div
+                          class="${this.componentUtils.className('__overlay')}"
+                      ></div>
+                  `
+                : ''}
             <div class="${this.componentUtils.className('__container')}"></div>
         `;
     }
 }
 
-export function define(props: Partial<SSidePanelComponentProps> = {}, tagName = 's-side-panel') {
+export function define(
+    props: Partial<SSidePanelComponentProps> = {},
+    tagName = 's-side-panel',
+) {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SSidePanel);
 }

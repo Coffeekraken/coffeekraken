@@ -3,7 +3,8 @@
 import __easing from '../../shared/easing/easeInOutQuint';
 import querySelectorLive from '../dom/query/querySelectorLive';
 import urlParse from 'url-parse';
-import scrollTo, { IScrollToSettings } from '../dom/scroll/scrollTo';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo';
+import scrollTo from '../dom/scroll/scrollTo';
 import __deepMerge from '../../shared/object/deepMerge';
 
 /**

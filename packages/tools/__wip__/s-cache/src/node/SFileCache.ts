@@ -1,6 +1,7 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
-import __SCache, { ISCacheSetSettings } from './SCache';
+import type { ISCacheSetSettings } from './SCache';
+import __SCache from './SCache';
 
 /**
  * @name            SFileCache

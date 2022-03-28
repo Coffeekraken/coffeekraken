@@ -2,7 +2,7 @@
 
 import __isString from '@coffeekraken/sugar/shared/is/string';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 import __SType from '../_SType';
 
 /**
@@ -25,13 +25,13 @@ import __SType from '../_SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'String',
-  id: 'string',
-  is: (value: any) => __isString(value),
-  cast: (value: any) =>
-    __toString(value, {
-      beautify: true
-    })
+    name: 'String',
+    id: 'string',
+    is: (value: any) => __isString(value),
+    cast: (value: any) =>
+        __toString(value, {
+            beautify: true,
+        }),
 };
 
 export default descriptor;

@@ -11,7 +11,9 @@ export default (stringArgs = '') => {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         const finalParams = __SCliMonoListParamsInterface.apply(stringArgs);
 
-        const root = __packageRoot(process.cwd(), true);
+        const root = __packageRoot(process.cwd(), {
+            highest: true,
+        });
 
         const rootPackageJson = __readJsonSync(`${root}/package.json`);
 

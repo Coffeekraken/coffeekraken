@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SPromise, { ISPromiseSettings } from '@coffeekraken/s-promise';
+import type { ISPromiseSettings } from '@coffeekraken/s-promise';
+import __SPromise from '@coffeekraken/s-promise';
 import __utcTime from '@coffeekraken/sugar/shared/date/utcTime';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';

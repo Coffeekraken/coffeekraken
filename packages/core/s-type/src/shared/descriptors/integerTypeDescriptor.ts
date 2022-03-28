@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              integerTypeDescriptor
@@ -22,23 +22,23 @@ import { ISTypeDescriptor } from '../SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Integer',
-  id: 'integer',
-  is: (value: any) => Number.isInteger(value),
-  cast: (value: any) => {
-    if (typeof value !== 'string' && typeof value !== 'number') {
-      return new Error(
-        `Sorry but only strings and numbers can be casted to integers... Passed value: ${value}`
-      );
-    }
-    // @ts-ignore
-    const res = parseInt(value);
-    if (isNaN(res))
-      return new Error(
-        `Sorry but the conversion of "<yellow>${value}</yellow>" to a <green>Integer</green> does not work...`
-      );
-    return res;
-  }
+    name: 'Integer',
+    id: 'integer',
+    is: (value: any) => Number.isInteger(value),
+    cast: (value: any) => {
+        if (typeof value !== 'string' && typeof value !== 'number') {
+            return new Error(
+                `Sorry but only strings and numbers can be casted to integers... Passed value: ${value}`,
+            );
+        }
+        // @ts-ignore
+        const res = parseInt(value);
+        if (isNaN(res))
+            return new Error(
+                `Sorry but the conversion of "<yellow>${value}</yellow>" to a <green>Integer</green> does not work...`,
+            );
+        return res;
+    },
 };
 
 export default descriptor;

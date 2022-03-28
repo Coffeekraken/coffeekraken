@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              mapTypeDescriptor
@@ -22,15 +22,15 @@ import { ISTypeDescriptor } from '../SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Set',
-  id: 'set',
-  is: (value: any) => value instanceof Set,
-  cast: (value: any) => {
-    if (value instanceof Set) return value;
-    const set = new Set();
-    set.add(value);
-    return set;
-  }
+    name: 'Set',
+    id: 'set',
+    is: (value: any) => value instanceof Set,
+    cast: (value: any) => {
+        if (value instanceof Set) return value;
+        const set = new Set();
+        set.add(value);
+        return set;
+    },
 };
 
 export default descriptor;

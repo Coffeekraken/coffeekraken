@@ -1,7 +1,7 @@
 // shared
 
 import __isMap from '@coffeekraken/sugar/shared/is/map';
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 import __SType from '../_SType';
 
 /**
@@ -24,15 +24,15 @@ import __SType from '../_SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Map',
-  id: 'map',
-  is: (value: any) => __isMap(value),
-  cast: (value: any) => {
-    if (__isMap(value)) return value;
-    const map = new Map();
-    map.set('value', value);
-    return map;
-  }
+    name: 'Map',
+    id: 'map',
+    is: (value: any) => __isMap(value),
+    cast: (value: any) => {
+        if (__isMap(value)) return value;
+        const map = new Map();
+        map.set('value', value);
+        return map;
+    },
 };
 
 export default descriptor;

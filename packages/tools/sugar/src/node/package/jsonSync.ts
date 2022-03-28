@@ -36,24 +36,31 @@ export interface IPackageJsonSyncSettings {
 }
 
 let __packageJson = {};
-function jsonSync(from = process.cwd(), settings?: Partial<IPackageJsonSyncSettings>): any {
+function jsonSync(
+    from = process.cwd(),
+    settings?: Partial<IPackageJsonSyncSettings>,
+): any {
     const finalSettings = {
         highest: false,
         standardize: false,
-        ...settings ?? {}
+        ...(settings ?? {}),
     };
 
     const hash = __objectHash({
         from,
-        ...finalSettings
+        ...finalSettings,
     });
 
-    
     if (__packageJson[hash]) {
         return __packageJson[hash];
     }
-    
-    const path = `${__packageRoot(from, finalSettings.highest)}/package.json`;
+
+    const path = `${__packageRoot(
+        from,
+        {
+            highest: finalSettings,
+        }.highest,
+    )}/package.json`;
     if (!__fs.existsSync(path)) return false;
 
     let json = __readJsonSync(path);

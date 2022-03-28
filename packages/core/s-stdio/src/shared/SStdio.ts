@@ -1,7 +1,9 @@
-import __SClass, { ISClass } from '@coffeekraken/s-class';
-import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import __SLog, { ISLog, ISLogAsk } from '@coffeekraken/s-log';
-import { ISPromise } from '@coffeekraken/s-promise';
+import type { ISClass } from '@coffeekraken/s-class';
+import __SClass from '@coffeekraken/s-class';
+import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
+import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
+import __SLog from '@coffeekraken/s-log';
+import type { ISPromise } from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';

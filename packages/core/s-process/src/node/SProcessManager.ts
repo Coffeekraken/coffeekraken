@@ -3,7 +3,8 @@
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SProcess from './SProcess';
-import __SStdio, { ISStdioSettings } from '@coffeekraken/s-stdio';
+import type { ISStdioSettings } from '@coffeekraken/s-stdio';
+import __SStdio from '@coffeekraken/s-stdio';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __SProcessManagerProcessWrapper, {
     ISProcessManagerProcessWrapperSettings,
@@ -112,7 +113,7 @@ class SProcessManager extends __SEventEmitter {
                     processManager: {
                         stdio: 'terminal',
                         stdioSettings: {},
-                        runInParallel: true
+                        runInParallel: true,
                     },
                 },
                 settings ?? {},
@@ -211,13 +212,13 @@ class SProcessManager extends __SEventEmitter {
         this._queuePromise = new Promise((resolve) => {
             clearTimeout(this._parallelRunTimeout);
             this._parallelRunTimeout = setTimeout(() => {
-                __SPromise.queue(this._processesQueue, (processId, promise) => {
-                }).then((results) => {
-                    resolve(results);
-                    this._queuePromise = undefined;
-                });
+                __SPromise
+                    .queue(this._processesQueue, (processId, promise) => {})
+                    .then((results) => {
+                        resolve(results);
+                        this._queuePromise = undefined;
+                    });
             });
-
         });
         return this._queuePromise;
     }
@@ -253,7 +254,12 @@ class SProcessManager extends __SEventEmitter {
         // if don't run in parallel, add this process to the queue
         if (!this.processManagerSettings.runInParallel) {
             this._processesQueue[processId] = () => {
-                return this.pipe(this._processesStack[processId].run(paramsOrStringArgs, settings));
+                return this.pipe(
+                    this._processesStack[processId].run(
+                        paramsOrStringArgs,
+                        settings,
+                    ),
+                );
             };
 
             promise = this.runQueue();
@@ -266,7 +272,9 @@ class SProcessManager extends __SEventEmitter {
 
             this.emit('log', {
                 type: __SLog.TYPE_INFO,
-                value: `<bgYellow><black> Starting process ${processId} </black></bgYellow><yellow>${'-'.repeat(process.stdout.columns - 19 - processId.length)}</yellow>`
+                value: `<bgYellow><black> Starting process ${processId} </black></bgYellow><yellow>${'-'.repeat(
+                    process.stdout.columns - 19 - processId.length,
+                )}</yellow>`,
             });
 
             this.pipe(promise, {

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { IScrollToSettings } from '../dom/scroll/scrollTo';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks';
 import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad';
 import __smoothScrollOnHashChange from './smoothScrollOnHashChange';

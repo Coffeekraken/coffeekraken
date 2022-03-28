@@ -1,4 +1,5 @@
-import __SBuilder, { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
@@ -261,15 +262,22 @@ export default class SPostcssBuilder extends __SBuilder {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<green>[postcss]</green> Compiling dev css finished <green>successfully</green> in <yellow>${compileDuration.end().formatedDuration}</yellow>`,
+                    value: `<green>[postcss]</green> Compiling dev css finished <green>successfully</green> in <yellow>${
+                        compileDuration.end().formatedDuration
+                    }</yellow>`,
                 });
 
                 finalCss = result.css;
 
                 // saveDev
                 if (params.saveDev && params.output) {
-                    __writeFileSync(params.output.replace(/\.css$/,'.dev.css'), finalCss);
-                    const file = new __SFile(params.output.replace(/\.css$/,'.dev.css'));
+                    __writeFileSync(
+                        params.output.replace(/\.css$/, '.dev.css'),
+                        finalCss,
+                    );
+                    const file = new __SFile(
+                        params.output.replace(/\.css$/, '.dev.css'),
+                    );
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<green>[save]</green> Dev file "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
@@ -292,8 +300,8 @@ export default class SPostcssBuilder extends __SBuilder {
                             deep: [],
                             greedy: [],
                             keyframes: [],
-                            variables: []
-                        }
+                            variables: [],
+                        },
                     };
 
                     // get content to use
@@ -306,7 +314,6 @@ export default class SPostcssBuilder extends __SBuilder {
                     });
 
                     function mergePurgecssSettings(purgecss) {
-
                         if (!purgecss.safelist) return;
 
                         if (Array.isArray(purgecss.safelist)) {
@@ -350,27 +357,39 @@ export default class SPostcssBuilder extends __SBuilder {
 
                     const packageJson = __packageJson();
                     if (packageJson.dependencies) {
-                        for (let packageName of Object.keys(packageJson.dependencies)) {
+                        for (let packageName of Object.keys(
+                            packageJson.dependencies,
+                        )) {
                             try {
-                                const packagePath = __resolvePackagePath(packageName);
+                                const packagePath = __resolvePackagePath(
+                                    packageName,
+                                );
                                 if (!packagePath) continue;
-                                const specsFiles = __SGlob.resolve(`${packagePath}/**/*.spec.js`);
-                                for (let file of specsFiles) {                                
+                                const specsFiles = __SGlob.resolve(
+                                    `${packagePath}/**/*.spec.js`,
+                                );
+                                for (let file of specsFiles) {
                                     try {
                                         // @ts-ignore
-                                        if (!__fs.existsSync(file.path)) continue;
+                                        if (!__fs.existsSync(file.path))
+                                            continue;
                                         // @ts-ignore
-                                        const purgecss = (await import(file.path)).purgecss;
+                                        const purgecss = (
+                                            await import(file.path)
+                                        ).purgecss;
                                         // merging
                                         mergePurgecssSettings(purgecss);
-                                    } catch(e) {
-                                    }
+                                    } catch (e) {}
                                 }
-                            } catch(e) {}
+                            } catch (e) {}
                         }
                     }
 
-                    const srcJsFiles = __SGlob.resolve(`${__SSugarConfig.get('storage.src.jsDir')}/**/*.spec.js`);
+                    const srcJsFiles = __SGlob.resolve(
+                        `${__SSugarConfig.get(
+                            'storage.src.jsDir',
+                        )}/**/*.spec.js`,
+                    );
                     for (let file of srcJsFiles) {
                         try {
                             // @ts-ignore
@@ -379,8 +398,7 @@ export default class SPostcssBuilder extends __SBuilder {
                             const purgecss = (await import(file.path)).purgecss;
                             // merging
                             mergePurgecssSettings(purgecss);
-                        } catch(e) {
-                        }
+                        } catch (e) {}
                     }
 
                     this.postcssBuilderSettings.purgecss.content.forEach(
@@ -389,10 +407,9 @@ export default class SPostcssBuilder extends __SBuilder {
                                 globs.push(contentObj);
                             } else {
                                 if (contentObj.raw) {
-                                    contentObj.raw =
-                                        __expandPleasantCssClassnames(
-                                            contentObj.raw,
-                                        );
+                                    contentObj.raw = __expandPleasantCssClassnames(
+                                        contentObj.raw,
+                                    );
                                 }
                                 content.push(contentObj);
                             }
@@ -422,14 +439,15 @@ export default class SPostcssBuilder extends __SBuilder {
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<green>[purge]</green> Purging final css finished <green>successfully</green> in <yellow>${purgeDuration.end().formatedDuration}</yellow>`,
+                        value: `<green>[purge]</green> Purging final css finished <green>successfully</green> in <yellow>${
+                            purgeDuration.end().formatedDuration
+                        }</yellow>`,
                     });
                     finalCss = purgeCssResult[0].css;
                 }
 
                 // minify
                 if (params.minify) {
-
                     const minifyDuration = new __SDuration();
                     emit('log', {
                         type: __SLog.TYPE_INFO,
@@ -442,7 +460,9 @@ export default class SPostcssBuilder extends __SBuilder {
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<green>[minify]</green> Minifiying final css finished <green>successfully</green> in <yellow>${minifyDuration.end().formatedDuration}</yellow>`,
+                        value: `<green>[minify]</green> Minifiying final css finished <green>successfully</green> in <yellow>${
+                            minifyDuration.end().formatedDuration
+                        }</yellow>`,
                     });
                 }
 

@@ -1,6 +1,8 @@
-import __SBuilder, { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
-import __SGlob, { IResolveGlobSettings } from '@coffeekraken/s-glob';
+import type { IResolveGlobSettings } from '@coffeekraken/s-glob';
+import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
@@ -294,11 +296,18 @@ export default class SImagesBuilder extends __SBuilder {
 
                     // check if is a file to compress
                     if (!params.compressExts.includes(file.extension)) {
-
                         emit('log', {
-                            clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : true,
+                            clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE)
+                                ? false
+                                : true,
                             type: __SLog.TYPE_INFO,
-                            value: `<cyan>[copy]</cyan> Copying file "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" under "<magenta>${__path.relative(__packageRoot(), outPath)}</magenta>"`,
+                            value: `<cyan>[copy]</cyan> Copying file "<cyan>${__path.relative(
+                                __packageRoot(),
+                                file.path,
+                            )}</cyan>" under "<magenta>${__path.relative(
+                                __packageRoot(),
+                                outPath,
+                            )}</magenta>"`,
                         });
 
                         const duration = new __SDuration();
@@ -311,24 +320,35 @@ export default class SImagesBuilder extends __SBuilder {
                         __copySync(file.path, outPath);
 
                         emit('log', {
-                            clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : true,
+                            clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE)
+                                ? false
+                                : true,
                             type: __SLog.TYPE_INFO,
-                            value: `<green>[copy]</green> File "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" copied <green>successfully</green> under "<magenta>${__path.relative(__packageRoot(), outPath)}</magenta>" in <yellow>${duration.end().formatedDuration}</yellow>`,
+                            value: `<green>[copy]</green> File "<cyan>${__path.relative(
+                                __packageRoot(),
+                                file.path,
+                            )}</cyan>" copied <green>successfully</green> under "<magenta>${__path.relative(
+                                __packageRoot(),
+                                outPath,
+                            )}</magenta>" in <yellow>${
+                                duration.end().formatedDuration
+                            }</yellow>`,
                         });
 
                         // pass to next file
                         continue;
-
                     } else {
-
                         if (params.specificParams) {
                             for (
                                 let l = 0;
                                 l < Object.keys(params.specificParams).length;
                                 l++
                             ) {
-                                const glob = Object.keys(params.specificParams)[l];
-                                const specificParams = params.specificParams[glob];
+                                const glob = Object.keys(params.specificParams)[
+                                    l
+                                ];
+                                const specificParams =
+                                    params.specificParams[glob];
                                 if (__minimatch(file.relPath, glob)) {
                                     imgParams = <ISImagesBuilderBuildParams>(
                                         __deepMerge(params, specificParams)
@@ -355,7 +375,10 @@ export default class SImagesBuilder extends __SBuilder {
                             }
                         >imageSize;
 
-                        if (imgParams.width && idealSize.width > imgParams.width) {
+                        if (
+                            imgParams.width &&
+                            idealSize.width > imgParams.width
+                        ) {
                             const percent =
                                 (100 / idealSize.width) * imgParams.width;
                             idealSize.width = imgParams.width;
@@ -405,13 +428,27 @@ export default class SImagesBuilder extends __SBuilder {
                             const imgObj = imgsArray[j];
 
                             const outputFn =
-                                file.extension === 'jpg' ? 'jpeg' : file.extension;
+                                file.extension === 'jpg'
+                                    ? 'jpeg'
+                                    : file.extension;
 
                             emit('log', {
-                                clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : true,
+                                clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE)
+                                    ? false
+                                    : true,
                                 type: __SLog.TYPE_INFO,
                                 // @ts-ignore
-                                value: `<yellow>[compress]</yellow> Compressing file "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" under "<magenta>${__path.relative(__packageRoot(), imgObj.outPath)}</magenta>" ${imgParams.specific ? ` with <red>specific parameters</red>` : ''}`,
+                                value: `<yellow>[compress]</yellow> Compressing file "<cyan>${__path.relative(
+                                    __packageRoot(),
+                                    file.path,
+                                )}</cyan>" under "<magenta>${__path.relative(
+                                    __packageRoot(),
+                                    imgObj.outPath,
+                                )}</magenta>" ${
+                                    imgParams.specific
+                                        ? ` with <red>specific parameters</red>`
+                                        : ''
+                                }`,
                             });
 
                             const duration = new __SDuration();
@@ -436,13 +473,22 @@ export default class SImagesBuilder extends __SBuilder {
                             filesStack[path].builded.push(buildedFile);
 
                             emit('log', {
-                                clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : true,
-                               type: __SLog.TYPE_INFO,
-                                value: `<green>[compress]</green> File "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" compressed <green>successfully</green> under "<magenta>${__path.relative(__packageRoot(), imgObj.outPath)}</magenta>" in <yellow>${duration.end().formatedDuration}</yellow>`,
+                                clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE)
+                                    ? false
+                                    : true,
+                                type: __SLog.TYPE_INFO,
+                                value: `<green>[compress]</green> File "<cyan>${__path.relative(
+                                    __packageRoot(),
+                                    file.path,
+                                )}</cyan>" compressed <green>successfully</green> under "<magenta>${__path.relative(
+                                    __packageRoot(),
+                                    imgObj.outPath,
+                                )}</magenta>" in <yellow>${
+                                    duration.end().formatedDuration
+                                }</yellow>`,
                             });
 
                             if (params.webp) {
-
                                 const webpDuration = new __SDuration();
 
                                 const webpOutPath = imgObj.outPath.replace(
@@ -452,7 +498,10 @@ export default class SImagesBuilder extends __SBuilder {
 
                                 emit('log', {
                                     type: __SLog.TYPE_VERBOSER,
-                                    value: `<yellow>[webp]</yellow> Generatating webp version of file "<cyan>${__path.relative(__packageRoot(), imgObj.outPath)}</cyan>"`,
+                                    value: `<yellow>[webp]</yellow> Generatating webp version of file "<cyan>${__path.relative(
+                                        __packageRoot(),
+                                        imgObj.outPath,
+                                    )}</cyan>"`,
                                 });
 
                                 await __sharp(path)
@@ -467,9 +516,13 @@ export default class SImagesBuilder extends __SBuilder {
 
                                 emit('log', {
                                     type: __SLog.TYPE_VERBOSER,
-                                    value: `<green>[webp]</green> Webp generation of file "<cyan>${__path.relative(__packageRoot(), imgObj.outPath)}</cyan>" finished <green>successfully</green> in <yellow>${webpDuration.end().formatedDuration}</yellow>`,
+                                    value: `<green>[webp]</green> Webp generation of file "<cyan>${__path.relative(
+                                        __packageRoot(),
+                                        imgObj.outPath,
+                                    )}</cyan>" finished <green>successfully</green> in <yellow>${
+                                        webpDuration.end().formatedDuration
+                                    }</yellow>`,
                                 });
-
                             }
                         }
                     }

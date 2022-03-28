@@ -87,7 +87,10 @@ function fn(value, settings = {}) {
         //     const __packageRoot = require('../path/packageRootDir').default; // eslint-disable-line
         //     stackStr = stackStr.replace(errorStr, '').trim();
         //     stackStr = stackStr
-        //       .split(`${__packageRoot(process.cwd(), true)}/`)
+        //       .split(`${__packageRoot(process.cwd(), {
+        //         highest: true
+        // }
+        //     })}/`)
         //       .join('');
         //     stackStr = `${stackStr
         //       .split('\n')

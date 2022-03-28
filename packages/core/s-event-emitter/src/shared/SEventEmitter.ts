@@ -1,5 +1,6 @@
 import __minimatch from 'minimatch';
-import SClass, { ISClass, ISClassCtor } from '@coffeekraken/s-class';
+import type { ISClass, ISClassCtor } from '@coffeekraken/s-class';
+import SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';

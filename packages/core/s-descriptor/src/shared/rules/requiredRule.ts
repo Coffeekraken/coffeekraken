@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { ISDescriptorResultObj } from '../SDescriptorResult';
-import { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
+import type { ISDescriptorResultObj } from '../SDescriptorResult';
+import type { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
 
 /**
  * @name          requiredRule
@@ -15,36 +15,36 @@ import { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
 export interface IRuleParams {
-  value: boolean;
+    value: boolean;
 }
 export interface IRuleSettings {
-  when: any[];
+    when: any[];
 }
 
 const ruleObj: ISDescriptorRule = {
-  priority: 1,
-  name: 'Required',
-  id: 'required',
-  settings: {
-    when: [undefined, null]
-  },
-  message: 'This value is required',
-  processParams: (params: boolean) => {
-    return { value: params };
-  },
-  apply: (
-    value: any,
-    params: IRuleParams,
-    ruleSettings: IRuleSettings,
-    settings: ISDescriptorSettings
-  ): ISDescriptorResultObj | true => {
-    if (params.value === true) {
-      if (ruleSettings.when.indexOf(value) !== -1) {
-        return new Error('This property is <yellow>required</yellow>');
-      }
-    }
-    return value;
-  }
+    priority: 1,
+    name: 'Required',
+    id: 'required',
+    settings: {
+        when: [undefined, null],
+    },
+    message: 'This value is required',
+    processParams: (params: boolean) => {
+        return { value: params };
+    },
+    apply: (
+        value: any,
+        params: IRuleParams,
+        ruleSettings: IRuleSettings,
+        settings: ISDescriptorSettings,
+    ): ISDescriptorResultObj | true => {
+        if (params.value === true) {
+            if (ruleSettings.when.indexOf(value) !== -1) {
+                return new Error('This property is <yellow>required</yellow>');
+            }
+        }
+        return value;
+    },
 };
 
 export default ruleObj;

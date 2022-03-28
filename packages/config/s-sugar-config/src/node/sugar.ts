@@ -575,10 +575,9 @@ export default class SSugarConfig extends __SClass {
                                     .map((obj) => obj.path),
                             ],
                             repo: [
-                                `${__packageRoot(
-                                    process.cwd(),
-                                    true,
-                                )}/[folderName]`,
+                                `${__packageRoot(process.cwd(), {
+                                    highest: true,
+                                })}/[folderName]`,
                                 // @ts-ignore
                                 ...this.constructor._registeredConfigFolderPaths
                                     .filter((obj) => obj.scope === 'repo')

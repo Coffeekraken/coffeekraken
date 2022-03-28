@@ -3,6 +3,7 @@ import __path from 'path';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 export async function preprocess(env, rawViteConfig, rawConfig) {
     const config = (await __loadConfigFile('vite.config.js')) ?? {};
@@ -11,6 +12,7 @@ export async function preprocess(env, rawViteConfig, rawConfig) {
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
+
     return {
         /**
          * @name          root
@@ -65,7 +67,6 @@ export default function (env, config) {
         resolve: {
             // preserveSymlinks: true,
             alias: {
-
                 static: '',
 
                 /**
@@ -149,7 +150,7 @@ export default function (env, config) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             // exclude: ['static'],
-             entries: ['index.html']
+            entries: ['index.html'],
         },
         build: {
             lib: {
@@ -241,7 +242,7 @@ export default function (env, config) {
                 //         return path.replace(/\/dist\//, '/src/');
                 //     }
                 // },
-                '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|@fs|__vite_ping|index\.html).)*$': {
+                '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|__vite_ping|index.html).)*$': {
                     target: `http://localhost:8080`,
                     changeOrigin: true,
                     // rewrite: (path) => {
@@ -254,9 +255,9 @@ export default function (env, config) {
                     ws: true,
                     rewrite: (path) => {
                         return path.replace(/\/dist\//, '/src/');
-                    }
-                }
-            }
+                    },
+                },
+            },
         },
         css: {},
         rewrites: [

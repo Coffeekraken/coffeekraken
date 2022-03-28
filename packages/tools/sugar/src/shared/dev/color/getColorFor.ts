@@ -1,5 +1,6 @@
 import __md5 from '../../crypt/md5';
-import __availableColors, { IAvailableColorsSettings } from './availableColors';
+import type { IAvailableColorsSettings } from './availableColors';
+import __availableColors from './availableColors';
 import __pickRandom from '../../array/pickRandom';
 import __deepMerge from '../../object/deepMerge';
 

@@ -1,7 +1,7 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SDocblockRenderer from './SDocblockRenderer';
 
-import { ISDocblock } from '@coffeekraken/s-docblock';
+import type { ISDocblock } from '@coffeekraken/s-docblock';
 
 import classnameHelper from './html/helpers/classname';
 import gravatarHelper from './html/helpers/gravatar';
@@ -58,65 +58,64 @@ import sinceTag from './html/tags/since';
  */
 
 export interface ISDocblockHtmlRendererCtorSettings {
-  docblockHtmlRenderer?: Partial<ISDocblockHtmlRendererSettings>;
+    docblockHtmlRenderer?: Partial<ISDocblockHtmlRendererSettings>;
 }
 export interface ISDocblockHtmlRendererSettings {}
 
 export interface ISDocblockHtmlRenderer {}
 
 // @ts-ignore
-class SDocblockHtmlRenderer
-  extends __SDocblockRenderer
-  implements ISDocblockHtmlRenderer {
-  /**
-   * @name        supportedTags
-   * @type        Array<String>
-   * @static
-   *
-   * Store the list of supported docblock tags
-   *
-   * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  static supportedTags = [
-    '@type',
-    '@namespace',
-    '@name',
-    '@static',
-    '@get',
-    '@set',
-    '@since',
-    '@description',
-    '@param',
-    '@example',
-    '@author'
-  ];
+class SDocblockHtmlRenderer extends __SDocblockRenderer
+    implements ISDocblockHtmlRenderer {
+    /**
+     * @name        supportedTags
+     * @type        Array<String>
+     * @static
+     *
+     * Store the list of supported docblock tags
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static supportedTags = [
+        '@type',
+        '@namespace',
+        '@name',
+        '@static',
+        '@get',
+        '@set',
+        '@since',
+        '@description',
+        '@param',
+        '@example',
+        '@author',
+    ];
 
-  /**
-   * @name        constructor
-   * @type        Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since     2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  constructor(
-    docblockInstance: ISDocblock,
-    settings?: ISDocblockHtmlRendererCtorSettings
-  ) {
-    super(
-      docblockInstance,
-      __deepMerge(
-        {
-          docblockRenderer: {},
-          docblockHtmlRenderer: {}
-        },
-        settings || {}
-      )
-    );
-  }
+    /**
+     * @name        constructor
+     * @type        Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since     2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    constructor(
+        docblockInstance: ISDocblock,
+        settings?: ISDocblockHtmlRendererCtorSettings,
+    ) {
+        super(
+            docblockInstance,
+            __deepMerge(
+                {
+                    docblockRenderer: {},
+                    docblockHtmlRenderer: {},
+                },
+                settings || {},
+            ),
+        );
+    }
 }
 
 SDocblockHtmlRenderer.registerHelper(classnameHelper);

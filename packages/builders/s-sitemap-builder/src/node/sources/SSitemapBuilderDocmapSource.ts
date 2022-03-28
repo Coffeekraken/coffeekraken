@@ -1,7 +1,9 @@
-import __SSitemapBuilderSource, { ISSitemapBuilderSourceResult } from '../SSitemapBuilderSource';
-import { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
+import __SSitemapBuilderSource, {
+    ISSitemapBuilderSourceResult,
+} from '../SSitemapBuilderSource';
+import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
+import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __pad from '@coffeekraken/sugar/shared/number/pad';
@@ -118,7 +120,9 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
             }
 
             // @ts-ignore
-            for (let [packageName, packageObj] of Object.entries(docmap.menu.packages)) {
+            for (let [packageName, packageObj] of Object.entries(
+                docmap.menu.packages,
+            )) {
                 for (let [slug, docmapObj] of Object.entries(packageObj.slug)) {
                     // @ts-ignore
                     const hash = __fileHash(docmapObj.docmap.path);

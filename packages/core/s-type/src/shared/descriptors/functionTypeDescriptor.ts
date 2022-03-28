@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              functionTypeDescriptor
@@ -22,12 +22,12 @@ import { ISTypeDescriptor } from '../SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Function',
-  id: 'function',
-  is: (value: any) => typeof value === 'function',
-  cast: (value: any) => {
-    return new Error(`Sorry but nothing is castable to a Function`);
-  }
+    name: 'Function',
+    id: 'function',
+    is: (value: any) => typeof value === 'function',
+    cast: (value: any) => {
+        return new Error(`Sorry but nothing is castable to a Function`);
+    },
 };
 
 export default descriptor;

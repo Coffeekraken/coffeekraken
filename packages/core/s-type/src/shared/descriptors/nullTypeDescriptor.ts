@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              nullTypeDescriptor
@@ -22,12 +22,12 @@ import { ISTypeDescriptor } from '../SType';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor: ISTypeDescriptor = {
-  name: 'Null',
-  id: 'null',
-  is: (value: any) => value === null,
-  cast: (value: any) => {
-    return null;
-  }
+    name: 'Null',
+    id: 'null',
+    is: (value: any) => value === null,
+    cast: (value: any) => {
+        return null;
+    },
 };
 
 export default descriptor;

@@ -9,12 +9,13 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/sugar": "^1.0.23",
         "install": "^0.13.0",
         "next": "12.1.1",
         "postcss": "^8.4.12",
         "react": "17.0.2",
-        "react-dom": "17.0.2",
-        "@coffeekraken/s-sugar-config": "^2.0.0"
+        "react-dom": "17.0.2"
     },
     "devDependencies": {
         "@types/node": "17.0.23",

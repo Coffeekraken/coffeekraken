@@ -259,7 +259,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: `sugar postcss.installPlugin [arguments]`,
+                command: `sugar postcss.add [arguments]`,
                 params: {},
                 settings: {},
             },

@@ -1,3 +1,6 @@
+/* importing sugar toolkit */
+@import './sugar.css';
+
 html,
 body {
     padding: 0;
@@ -14,12 +17,6 @@ a {
 * {
     box-sizing: border-box;
 }
-
-@sugar.init();
-
-/* @sugar.media.classes('mobile,tablet') { */
-/* @sugar.classes; */
-/* } */
 
 body {
     background: sugar.color(accent);

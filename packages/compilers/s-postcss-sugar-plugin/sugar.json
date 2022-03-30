@@ -11,10 +11,10 @@
             "stack": "postcss",
             "description": "Sugar postcss plugin related commands",
             "actions": {
-                "installPlugin": {
+                "add": {
                     "scope": "package",
                     "description": "Add the sugar postcss plugin into yout project",
-                    "process": "./dist/pkg/esm/cli/installPlugin.cli.js"
+                    "process": "./dist/pkg/esm/cli/add.cli.js"
                 }
             }
         }

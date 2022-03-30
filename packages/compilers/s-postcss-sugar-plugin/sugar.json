@@ -14,7 +14,7 @@
                 "installPlugin": {
                     "scope": "package",
                     "description": "Add the sugar postcss plugin into yout project",
-                    "process": "./src/cli/installPlugin.cli.js"
+                    "process": "./dist/pkg/esm/cli/installPlugin.cli.js"
                 }
             }
         }

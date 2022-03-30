@@ -34,7 +34,7 @@ export default function sVitePluginSugar(settings: any = {}) {
             'browser',
         );
 
-        const browserConfig = __SSugarConfig.toObject('browser');
+        const browserConfig = __SSugarConfig.toObject();
 
         let envJsonStr = JSON.stringify({
             // @ts-ignore

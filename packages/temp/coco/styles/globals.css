@@ -17,6 +17,10 @@ a {
 
 @sugar.init();
 
+/* @sugar.media.classes('mobile,tablet') { */
+/* @sugar.classes; */
+/* } */
+
 body {
     background: sugar.color(accent);
 }

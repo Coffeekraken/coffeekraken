@@ -67,7 +67,12 @@ export interface ISConfigResolverObj {
 
 export interface ISConfigEnvObj {
     platform: 'node' | 'browser';
-    env: 'prod' | 'dev' | 'test';
+    env: 'production' | 'development' | 'test';
+}
+
+export interface ISConfigLoadSettings {
+    adapter: string;
+    isUpdate: boolean;
 }
 
 export interface ISConfigSettings {
@@ -80,6 +85,7 @@ export interface ISConfigSettings {
     allowNew: boolean;
     autoLoad: boolean;
     autoSave: boolean;
+    allowCache: boolean;
     updateTimeout: number;
     throwErrorOnUndefinedConfig: boolean;
     resolvers: ISConfigResolverObj[];
@@ -226,6 +232,7 @@ export default class SConfig {
                 },
                 adapters: [],
                 defaultAdapter: null,
+                allowCache: true,
                 allowSave: true,
                 allowSet: true,
                 allowReset: true,
@@ -347,7 +354,10 @@ export default class SConfig {
                     clearTimeout(timeout);
                     timeout = setTimeout(() => {
                         // load the updated config
-                        this.load(adapterName, true);
+                        this.load({
+                            adapter: adapterName,
+                            isUpdate: true,
+                        });
                     }, this._settings.updateTimeout);
                 };
             }
@@ -368,27 +378,46 @@ export default class SConfig {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    async load(adapter = this._settings.defaultAdapter, isUpdate = false) {
+    async load(settings?: Partial<ISConfigLoadSettings>) {
         const duration = new __SDuration();
 
-        if (!this._adapters[adapter]) {
+        const finalSettings: ISConfigLoadSettings = {
+            adapter: this._settings.defaultAdapter,
+            isUpdate: false,
+            ...(settings ?? {}),
+        };
+
+        if (!this._adapters[finalSettings.adapter]) {
             throw new Error(
-                `You try to load the config from the adapter "${adapter}" but this adapter does not exists...`,
+                `You try to load the config from the adapter "${finalSettings.adapter}" but this adapter does not exists...`,
             );
         }
 
         if (
-            !isUpdate &&
-            Object.keys(this._adapters[adapter].config).length !== 0
+            !finalSettings.isUpdate &&
+            Object.keys(this._adapters[finalSettings.adapter].config).length !==
+                0
         ) {
-            return this._adapters[adapter].config;
+            return this._adapters[finalSettings.adapter].config;
         }
 
-        let loadedConfig = await this._adapters[adapter].instance.load(
-            isUpdate,
-            this._settings.env,
-            this.config,
-        );
+        let loadedConfig;
+
+        // check for cache first
+        if (this._settings.allowCache && !finalSettings.isUpdate) {
+            loadedConfig = await this.fromCache();
+        }
+
+        // normal loading otherwise
+        if (!loadedConfig) {
+            loadedConfig = await this._adapters[
+                finalSettings.adapter
+            ].instance.load(
+                finalSettings.isUpdate,
+                this._settings.env,
+                this.config,
+            );
+        }
 
         Object.keys(loadedConfig).forEach((configId) => {
             if (!loadedConfig[configId]) return;
@@ -585,8 +614,8 @@ export default class SConfig {
                 'Promise based SConfig is not already implemented...',
             );
         } else if (__isPlainObject(this.config)) {
-            this._adapters[adapter].config = this.config;
-            this._adapters[adapter].config.$ = {
+            this._adapters[finalSettings.adapter].config = this.config;
+            this._adapters[finalSettings.adapter].config.$ = {
                 hash: __md5.encrypt(this.config),
                 loadedAt: Date.now(),
             };
@@ -598,6 +627,77 @@ export default class SConfig {
                 }" which is of type "${typeof this.config}"...`,
             );
         }
+    }
+
+    /**
+     * @name                          fromCache
+     * @type                          Function
+     *
+     * Get the config from cache if possible. Otherwise it will resolve to undefined
+     *
+     * @return          {Promise}                                                             A promise resolved once the caching process has been done
+     *
+     * @example           js
+     * await config.fromCache();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    fromCache() {
+        return new Promise(async (resolve, reject) => {
+            // different caching method for node or browser
+            if (__isNode()) {
+                const __fs = await import('fs');
+                const __packageRoot = await import(
+                    '@coffeekraken/sugar/node/path/packageRoot'
+                );
+                const folderPath = `${__packageRoot.default()}/.local/cache/config`;
+                const jsonStr = __fs
+                    .readFileSync(
+                        `${folderPath}/${this.id}.${this._settings.env.env}.${this._settings.env.platform}.json`,
+                    )
+                    .toString();
+                if (!jsonStr) return resolve();
+                resolve(JSON.parse(jsonStr));
+            } else {
+                console.log('COCOCCO');
+            }
+        });
+    }
+
+    /**
+     * @name                          cache
+     * @type                          Function
+     *
+     * Save the config in the cache to load it faster next time
+     *
+     * @return          {Promise}                                                             A promise resolved once the caching process has been done
+     *
+     * @example           js
+     * await config.cache();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    cache() {
+        return new Promise(async (resolve, reject) => {
+            // different caching method for node or browser
+            if (__isNode()) {
+                const __fs = await import('fs');
+                const __packageRoot = await import(
+                    '@coffeekraken/sugar/node/path/packageRoot'
+                );
+
+                const folderPath = `${__packageRoot.default()}/.local/cache/config`;
+                __fs.mkdirSync(folderPath, { recursive: true });
+                __fs.writeFileSync(
+                    `${folderPath}/${this.id}.${this._settings.env.env}.${this._settings.env.platform}.json`,
+                    JSON.stringify(this.toJson(), null, 4),
+                );
+                resolve(
+                    `${folderPath}/${this.id}.${this._settings.env.env}.${this._settings.env.platform}.json`,
+                );
+            } else {
+            }
+        });
     }
 
     _resolveEnvironments() {
@@ -869,5 +969,35 @@ export default class SConfig {
 
         // return true
         return true;
+    }
+
+    /**
+     * @name                                toObject
+     * @type                    Function
+     *
+     * This method allows you to get the config in a simple object format
+     *
+     * @return      {Any}               The configuration in object format
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    toObject() {
+        return {};
+    }
+
+    /**
+     * @name                                toJson
+     * @type                    Function
+     *
+     * This method allows you to get the config in a simple json object format
+     *
+     * @return      {Any}               The configuration in object format
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    toJson() {
+        return JSON.parse(JSON.stringify(this.get('.')));
     }
 }

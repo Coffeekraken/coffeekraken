@@ -19,7 +19,7 @@ export default function (env, config) {
              * @name            include
              * @namespace       config.config.node.include
              * @type            Array<String>
-             * @default         []
+             * @default         [storage.package.cacheDir]/config
              *
              * Specify which configuration you want to include for the "browser". If the array is empty, will include all the configs
              *
@@ -28,5 +28,6 @@ export default function (env, config) {
              */
             include: [],
         },
+        cacheDir: '[config.storage.package.cacheDir]/config',
     };
 }

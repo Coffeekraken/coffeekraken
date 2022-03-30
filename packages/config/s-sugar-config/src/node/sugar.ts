@@ -61,6 +61,13 @@ export interface ISSugarConfigCtorSettings {
 }
 export interface ISSugarConfigCtorSettings {}
 
+export interface ISSugarConfigLoadSettings {
+    id: string;
+    env: 'development' | 'production' | 'test';
+    platform: 'node' | 'browser';
+    cache: boolean;
+}
+
 export default class SSugarConfig extends __SClass {
     static _sSugarConfigInstances: Record<string, __SConfig> = {};
     static _sugarJson = undefined;
@@ -198,51 +205,98 @@ export default class SSugarConfig extends __SClass {
      */
     _loadPromise;
     static load(
-        envOrId?: ISConfigEnvObj | string,
-        id?: string,
+        settings?: Partial<ISSugarConfigLoadSettings>,
     ): ISSugarConfigLoadedObj {
         // singleton promise
         if (this._loadPromise) {
             return this._loadPromise;
         }
 
-        this._loadPromise = new Promise(async (resolve, reject) => {
-            id = id ?? (typeof envOrId === 'string' ? envOrId : undefined);
-            if (!id) {
-                if (__isPlainObject(envOrId)) {
-                    id = __md5.encrypt(envOrId);
-                } else {
-                    id = 'default';
-                }
-            }
-            let env;
-            if (__isPlainObject(envOrId)) env = envOrId;
+        const finalSettings: ISSugarConfigLoadSettings = __deepMerge(
+            {
+                id: 'default',
+                env: 'development',
+                platform: 'node',
+                cache: true,
+            },
+            settings ?? {},
+        );
 
-            if (this._sSugarConfigInstances[id]) {
+        this._loadPromise = new Promise(async (resolve, reject) => {
+            if (this._sSugarConfigInstances[finalSettings.id]) {
                 return resolve({
-                    id,
-                    config: this._sSugarConfigInstances[id].get('.'),
-                    instance: this._sSugarConfigInstances[id],
+                    id: finalSettings.id,
+                    config: this._sSugarConfigInstances[finalSettings.id].get(
+                        '.',
+                    ),
+                    instance: this._sSugarConfigInstances[finalSettings.id],
                 });
             }
 
-            this._sSugarConfigInstances[id] = new this({
+            this._sSugarConfigInstances[finalSettings.id] = new SSugarConfig({
                 metas: {
-                    id,
+                    id: finalSettings.id,
                 },
                 sugarConfig: {
-                    env,
+                    env: {
+                        env: finalSettings.env,
+                        platform: finalSettings.platform,
+                    },
                 },
             });
-            const config = await this._sSugarConfigInstances[id]._load();
+            const config = await this._sSugarConfigInstances[
+                finalSettings.id
+            ]._load();
             resolve({
-                id,
+                id: finalSettings.id,
                 config,
-                instance: this._sSugarConfigInstances[id],
+                instance: this._sSugarConfigInstances[finalSettings.id],
             });
         });
 
         return this._loadPromise;
+    }
+
+    /**
+     * @name            toJson
+     * @type            Function
+     * @async
+     *
+     * This static method allows you to get the config as a json object to store it easily
+     *
+     * @param           {ISConfigEnvObj}        [env={}]        Some environment settings you want to load. By default it takes the environment on which the script is loaded
+     * @param           {String}            [id=null]           A special id for your loaded configuration like "browser", "somethingElse", etc... If not provided, this will be generated depending on the passed ```env``` object
+     * @return          {Any}                A json object representing the config
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static toJson(settings?: Partial<ISSugarConfigLoadSettings>): any {
+        return new Promise(async (resolve) => {
+            const config = await SSugarConfig.load(settings);
+            resolve(config.instance.toJson());
+        });
+    }
+
+    /**
+     * @name            toObject
+     * @type            Function
+     * @async
+     *
+     * This static method allows you to get the config as an object to store it easily
+     *
+     * @param           {ISConfigEnvObj}        [env={}]        Some environment settings you want to load. By default it takes the environment on which the script is loaded
+     * @param           {String}            [id=null]           A special id for your loaded configuration like "browser", "somethingElse", etc... If not provided, this will be generated depending on the passed ```env``` object
+     * @return          {Any}                A json object representing the config
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static toObject(settings?: Partial<ISSugarConfigLoadSettings>): any {
+        return new Promise(async (resolve) => {
+            const config = await SSugarConfig.load(settings);
+            resolve(config.instance.toObject());
+        });
     }
 
     /**
@@ -314,52 +368,6 @@ export default class SSugarConfig extends __SClass {
     static hash(dotPath: string = ''): string {
         const config = this.get(dotPath);
         return __objectHash(config);
-    }
-
-    /**
-     * @name            toObject
-     * @type            function
-     * @static
-     *
-     * This static method allows you to get back the config in a simple object format.
-     * Some configurations can be excluded using the config.config.browser.exclude configuration
-     *
-     * @param       {String}            [target="node"]         Specify the target of the config. Can be "node" or "browser"
-     * @returns     {Any}                                       The configuration object filtered and ready for the asked target
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static toObject(target = 'node'): any {
-        // get the configuration
-        const config = this.get('');
-        const newConfig = {};
-        // include some config
-        const include = this.get(`config.${target}.include`);
-        if (!include || !include.length) return config;
-        include.forEach((configId) => {
-            newConfig[configId] = config[configId];
-        });
-        // return the filtered config
-        return newConfig;
-    }
-
-    /**
-     * @name            toJson
-     * @type            function
-     * @static
-     *
-     * This static method allows you to get back the config in a JSON format.
-     * Some configurations can be included using the config.config.browser.include configuration
-     *
-     * @param       {String}            [target="node"]         Specify the target of the config. Can be "node" or "browser"
-     * @return      {String}                                    The json string
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static toJson(target = 'node'): string {
-        return JSON.stringify(this.toObject(target));
     }
 
     /**
@@ -526,6 +534,56 @@ export default class SSugarConfig extends __SClass {
      */
     toDocblocks(configId: string): any[] {
         return this.constructor.toDocblocks(configId);
+    }
+
+    /**
+     * @name            toJson
+     * @type            Function
+     * @async
+     *
+     * This function returns you the configuration as a json object
+     *
+     * @return      {Any[]}                         An array of docblocks objects
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    toJson(): any[] {
+        return this._configInstance.toJson();
+    }
+
+    /**
+     * @name            toObject
+     * @type            Function
+     * @async
+     *
+     * This function returns you the configuration as an object
+     *
+     * @return      {Any[]}                         An array of docblocks objects
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    toObject(): any[] {
+        return this._configInstance.toObject();
+    }
+
+    /**
+     * @name                          cache
+     * @type                          Function
+     * @async
+     *
+     * Save the config in the cache to load it faster next time
+     *
+     * @return          {Promise}                                                             A promise resolved once the caching process has been done
+     *
+     * @example           js
+     * await config.cache();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    cache(): any[] {
+        return this._configInstance.cache();
     }
 
     /**

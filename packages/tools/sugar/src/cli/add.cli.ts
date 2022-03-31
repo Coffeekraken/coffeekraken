@@ -4,6 +4,8 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __SSugarToolkitParamsInterface from './interface/SSugarToolkitParamsInterface';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
+import __fs from 'fs';
+import __prependToFileSync from '@coffeekraken/sugar/node/fs/prependToFileSync';
 
 export default (stringArgs = '') => {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
@@ -28,6 +30,7 @@ export default (stringArgs = '') => {
             });
         }
 
+        // pleasant css syntax
         if (
             await emit('ask', {
                 type: 'confirm',
@@ -38,7 +41,19 @@ export default (stringArgs = '') => {
             switch (projectType.type) {
                 case 'next':
                     console.log('adding to next');
-                    // adding the
+                    // adding the js needed
+                    __fs.writeFileSync(
+                        `${rootPath}/pages/_sugar.ts`,
+                        [
+                            `import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';`,
+                            `__expandPleasantCssClassnamesLive();`,
+                        ].join('\n'),
+                    );
+                    // adding the import in the _app.tsx file
+                    __prependToFileSync(
+                        `${rootPath}/pages/_app.tsx`,
+                        ["import './_sugar';"].join('\n'),
+                    );
                     break;
             }
         }

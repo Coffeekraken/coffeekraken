@@ -57,11 +57,10 @@ export interface ISugarConfigToDocblocksResult {
 }
 
 export interface ISSugarConfigCtorSettings {
-    sugarConfig: Partial<ISSugarConfigCtorSettings>;
+    sugarConfig: Partial<ISSugarConfigSettings>;
 }
-export interface ISSugarConfigCtorSettings {}
 
-export interface ISSugarConfigLoadSettings {
+export interface ISSugarConfigSettings {
     id: string;
     env: 'development' | 'production' | 'test';
     platform: 'node' | 'browser';
@@ -205,14 +204,14 @@ export default class SSugarConfig extends __SClass {
      */
     _loadPromise;
     static load(
-        settings?: Partial<ISSugarConfigLoadSettings>,
+        settings?: Partial<ISSugarConfigSettings>,
     ): ISSugarConfigLoadedObj {
         // singleton promise
         if (this._loadPromise) {
             return this._loadPromise;
         }
 
-        const finalSettings: ISSugarConfigLoadSettings = __deepMerge(
+        const finalSettings: ISSugarConfigSettings = __deepMerge(
             {
                 id: 'default',
                 env: 'development',
@@ -237,24 +236,19 @@ export default class SSugarConfig extends __SClass {
                 metas: {
                     id: finalSettings.id,
                 },
-                sugarConfig: {
-                    env: {
-                        env: finalSettings.env,
-                        platform: finalSettings.platform,
-                    },
-                },
+                sugarConfig: finalSettings ?? {},
             });
-            const config = await this._sSugarConfigInstances[
+            const config = await SSugarConfig._sSugarConfigInstances[
                 finalSettings.id
-            ]._load();
+            ]._load(finalSettings);
             resolve({
                 id: finalSettings.id,
                 config,
-                instance: this._sSugarConfigInstances[finalSettings.id],
+                instance: SSugarConfig._sSugarConfigInstances[finalSettings.id],
             });
         });
 
-        return this._loadPromise;
+        return SSugarConfig._loadPromise;
     }
 
     /**
@@ -271,7 +265,7 @@ export default class SSugarConfig extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static toJson(settings?: Partial<ISSugarConfigLoadSettings>): any {
+    static toJson(settings?: Partial<ISSugarConfigSettings>): any {
         return new Promise(async (resolve) => {
             const config = await SSugarConfig.load(settings);
             resolve(config.instance.toJson());
@@ -292,7 +286,7 @@ export default class SSugarConfig extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static toObject(settings?: Partial<ISSugarConfigLoadSettings>): any {
+    static toObject(settings?: Partial<ISSugarConfigSettings>): any {
         return new Promise(async (resolve) => {
             const config = await SSugarConfig.load(settings);
             resolve(config.instance.toObject());
@@ -598,69 +592,70 @@ export default class SSugarConfig extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    async _load() {
+    async _load(settings: ISSugarConfigSettings) {
         if (this._configInstance) return this._configInstance.get('.');
 
         if (!this.constructor._rootSugarJson || !this.constructor._sugarJson) {
             await this.constructor._searchConfigFiles();
         }
 
-        this._configInstance = new __SConfig('sugar', {
-            env: this.sugarConfigSettings.env ?? {},
-            adapters: [
-                new SConfigFolderAdapter({
-                    configAdapter: {
-                        name: 'sugar',
-                    },
-                    configFolderAdapter: {
-                        folderName: '.sugar',
-                        fileName: '[name].config.js',
-                        scopes: {
-                            default: [
-                                __path.resolve(__dirname(), 'config'),
-                                // @ts-ignore
-                                ...this.constructor._registeredConfigFolderPaths
-                                    .filter((obj) => obj.scope === 'default')
-                                    .map((obj) => obj.path),
-                            ],
-                            module: [
-                                // @ts-ignore
-                                ...this.constructor._registeredConfigFolderPaths
-                                    .filter((obj) => {
-                                        if (obj.scope === 'module') return true;
-                                        return false;
-                                    })
-                                    .map((obj) => obj.path),
-                            ],
-                            repo: [
-                                `${__packageRoot(process.cwd(), {
-                                    highest: true,
-                                })}/[folderName]`,
-                                // @ts-ignore
-                                ...this.constructor._registeredConfigFolderPaths
-                                    .filter((obj) => obj.scope === 'repo')
-                                    .map((obj) => obj.path),
-                            ],
-                            package: [
-                                `${__packageRoot(process.cwd())}/[folderName]`,
-                                // @ts-ignore
-                                ...this.constructor._registeredConfigFolderPaths
-                                    .filter((obj) => obj.scope === 'package')
-                                    .map((obj) => obj.path),
-                            ],
-                            user: [
-                                `${__packageRoot(
-                                    process.cwd(),
-                                )}/.local/[folderName]`,
-                                // @ts-ignore
-                                ...this.constructor._registeredConfigFolderPaths
-                                    .filter((obj) => obj.scope === 'user')
-                                    .map((obj) => obj.path),
-                            ],
-                        },
-                    },
-                }),
-            ],
+        const configFsAdapter = new SConfigFolderAdapter({
+            configAdapter: {
+                name: 'sugar',
+            },
+            configFolderAdapter: {
+                folderName: '.sugar',
+                fileName: '[name].config.js',
+                scopes: {
+                    default: [
+                        __path.resolve(__dirname(), '../config'),
+                        // @ts-ignore
+                        ...this.constructor._registeredConfigFolderPaths
+                            .filter((obj) => obj.scope === 'default')
+                            .map((obj) => obj.path),
+                    ],
+                    module: [
+                        // @ts-ignore
+                        ...this.constructor._registeredConfigFolderPaths
+                            .filter((obj) => {
+                                if (obj.scope === 'module') return true;
+                                return false;
+                            })
+                            .map((obj) => obj.path),
+                    ],
+                    repo: [
+                        `${__packageRoot(process.cwd(), {
+                            highest: true,
+                        })}/[folderName]`,
+                        // @ts-ignore
+                        ...this.constructor._registeredConfigFolderPaths
+                            .filter((obj) => obj.scope === 'repo')
+                            .map((obj) => obj.path),
+                    ],
+                    package: [
+                        `${__packageRoot(process.cwd())}/[folderName]`,
+                        // @ts-ignore
+                        ...this.constructor._registeredConfigFolderPaths
+                            .filter((obj) => obj.scope === 'package')
+                            .map((obj) => obj.path),
+                    ],
+                    user: [
+                        `${__packageRoot(process.cwd())}/.local/[folderName]`,
+                        // @ts-ignore
+                        ...this.constructor._registeredConfigFolderPaths
+                            .filter((obj) => obj.scope === 'user')
+                            .map((obj) => obj.path),
+                    ],
+                },
+            },
+        });
+
+        this._configInstance = new __SConfig('sugar', configFsAdapter, {
+            env: {
+                env: settings.env,
+                platform: settings.platform,
+            },
+            cache: settings.cache ?? true,
             resolvers: [
                 {
                     match: /\[theme.[a-zA-Z0-9.\-_:]+\]/gm,
@@ -683,7 +678,7 @@ export default class SSugarConfig extends __SClass {
             ],
         });
 
-        const res = await this._configInstance.load();
+        const res = await this._configInstance.load({});
 
         return res;
     }

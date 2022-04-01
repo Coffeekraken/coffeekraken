@@ -1,0 +1,15 @@
+import { createRequire as topLevelCreateRequire } from 'module';
+ const require = topLevelCreateRequire(import.meta.url);
+import linkLoaded from "./linkLoaded";
+function appendStylesheetLink(href) {
+  const $link = document.createElement("link");
+  $link.type = "text/css";
+  $link.rel = "stylesheet";
+  $link.href = href;
+  document.head.appendChild($link);
+  return linkLoaded($link);
+}
+var appendStylesheetLinkTag_default = appendStylesheetLink;
+export {
+  appendStylesheetLinkTag_default as default
+};

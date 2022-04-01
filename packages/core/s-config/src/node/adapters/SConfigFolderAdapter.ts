@@ -13,6 +13,7 @@ import * as __chokidar from 'chokidar';
 import type { ISConfigEnvObj } from '../../shared/SConfig';
 import __SConfig from '../../shared/SConfig';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 
 /**
  * @name                  SConfigFolderAdapter
@@ -133,7 +134,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                                     '[folderName]',
                                     this.configFolderAdapterSettings.folderName,
                                 )
-                                .replace('%format', format);
+                                .replace(/\%format/g, format);
                         },
                     );
                 }
@@ -143,37 +144,59 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
             },
         );
 
-        const watchPaths: string[] = [];
-        Object.keys(this.configFolderAdapterSettings.scopes).forEach(
-            (scope) => {
-                if (this._scopedFoldersPaths[scope]) {
-                    this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[
-                        scope
-                    ].filter((path) => {
-                        if (
-                            __fs.existsSync(path) &&
-                            this._foldersPaths.indexOf(path) === -1
-                        ) {
-                            watchPaths.push(path);
-                            this._foldersPaths.push(path);
-                            return true;
-                        }
-                        return false;
-                    });
-                }
-            },
-        );
+        // const watchPaths: string[] = [];
+        // Object.keys(this.configFolderAdapterSettings.scopes).forEach(
+        //     (scope) => {
+        //         if (this._scopedFoldersPaths[scope]) {
+        //             this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[
+        //                 scope
+        //             ].filter((path) => {
+        //                 if (
+        //                     __fs.existsSync(path) &&
+        //                     this._foldersPaths.indexOf(path) === -1
+        //                 ) {
+        //                     watchPaths.push(path);
+        //                     this._foldersPaths.push(path);
+        //                     return true;
+        //                 }
+        //                 return false;
+        //             });
+        //         }
+        //     },
+        // );
 
-        // watch for changes
-        __chokidar
-            .watch(__unique(watchPaths), {
-                ignoreInitial: true,
-            })
-            .on('change', (p) => {
-                this.update(p);
-            })
-            .on('unlink', (p) => this.update(p))
-            .on('add', (p) => this.update(p));
+        // // watch for changes
+        // __chokidar
+        //     .watch(__unique(watchPaths), {
+        //         ignoreInitial: true,
+        //     })
+        //     .on('change', (p) => {
+        //         this.update(p);
+        //     })
+        //     .on('unlink', (p) => this.update(p))
+        //     .on('add', (p) => this.update(p));
+    }
+
+    async integrity() {
+        let filesAddedTimes = 0;
+        for (let [scope, folderPaths] of Object.entries(
+            this._scopedFoldersPaths,
+        )) {
+            for (let i = 0; i < folderPaths.length; i++) {
+                const folderPath = folderPaths[i];
+                if (!__fs.existsSync(folderPath)) continue;
+                const filesPaths = __fs.readdirSync(folderPath);
+                for (let j = 0; j < filesPaths.length; j++) {
+                    const filePath = `${folderPath}/${filesPaths[j]}`;
+                    try {
+                        const stats = __fs.statSync(filePath);
+                        filesAddedTimes += stats.mtime.getTime();
+                    } catch (e) {}
+                }
+            }
+        }
+        const hash = __sha256.encrypt(`${filesAddedTimes}`);
+        return hash;
     }
 
     async _load(
@@ -186,6 +209,8 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
         for (let i = 0; i < folderPaths.length; i++) {
             const path = folderPaths[i];
+
+            if (!__fs.existsSync(path)) continue;
 
             const paths = __fs.readdirSync(path);
 
@@ -282,37 +307,5 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         });
 
         return resultSettings;
-    }
-
-    save(newConfig = {}) {
-        throw new Error(
-            `<red>[${this.constructor.name}.save]</red> Sorry but the save feature has not been implemented yet...`,
-        );
-
-        // if (!this.configFolderAdapterSettings.userConfigPath) {
-        //   throw new Error(
-        //     `You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`
-        //   );
-        // }
-
-        // const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
-
-        // Object.keys(baseConfig).forEach((name) => {
-        //   const configToSave = __diff(baseConfig[name], newConfig[name] || {});
-
-        //   const newConfigString = `
-        //   module.exports = ${JSON.stringify(configToSave)};
-        // `;
-
-        //   // write the new config file
-        //   __writeFileSync(
-        //     this.configFolderAdapterSettings.userConfigPath +
-        //       '/' +
-        //       this.configFolderAdapterSettings.fileName.replace('[name]', name),
-        //     newConfigString
-        //   );
-        // });
-
-        // return true;
     }
 }

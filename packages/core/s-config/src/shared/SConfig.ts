@@ -32,11 +32,7 @@ import __SConfigAdapter from './adapters/SConfigAdapter';
  *
  * @example             js
  * import SConfig, { SConfigLsAdapter } from '@coffeekraken/s-config';
- * const config = new SConfig({
- *   adapters: [
- *    new SConfigLsAdapter()
- *   ]
- * });
+ * const config = new SConfig('my-config', new SConfigLsAdapter();
  * await config.get('log.frontend.mail.host'); // => gmail.google.com
  * await config.set('log.frontend.mail.host', 'mailchimp.com');
  *
@@ -71,21 +67,12 @@ export interface ISConfigEnvObj {
 }
 
 export interface ISConfigLoadSettings {
-    adapter: string;
     isUpdate: boolean;
 }
 
 export interface ISConfigSettings {
     env: ISConfigEnvObj;
-    adapters: any[]; // @TODO     make an interface for adapter
-    defaultAdapter: string;
-    allowSave: boolean;
-    allowSet: boolean;
-    allowReset: boolean;
-    allowNew: boolean;
-    autoLoad: boolean;
-    autoSave: boolean;
-    allowCache: boolean;
+    cache: boolean;
     updateTimeout: number;
     throwErrorOnUndefinedConfig: boolean;
     resolvers: ISConfigResolverObj[];
@@ -104,15 +91,15 @@ export default class SConfig {
     _name = null;
 
     /**
-     * @name            _adapters
+     * @name            adapter
      * @type            {Object}
      * @private
      *
-     * Save the registered adapters instances
+     * Save the adapter instances
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _adapters = {};
+    adapter;
 
     /**
      * @name             _settings
@@ -135,6 +122,17 @@ export default class SConfig {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     config: any = {};
+
+    /**
+     * @name             integrity
+     * @type            Object
+     *
+     * Store the config integrity
+     *
+     * @since   2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    integrity: string = 'unkown';
 
     /**
      * @name        registerPostprocess
@@ -193,23 +191,20 @@ export default class SConfig {
      * Init the config instance by passing a name and a settings object to configure your instance
      *
      * @param                 {String}                   name                  The name of the config
+     * @param                   {SConfigAdapter}        adapter                 An SConfigAdapter instance to use
      * @param                {Object}                    [settings={}]
      * An object to configure your SConfig instance. See the list above
      * The available settings are:
-     * - adapters ([]) {Array}: An array of adapters instances to use for this SConfig instance
-     * - defaultAdapter (null) {String}: This specify which adapter you want to use as default one. If not set, take the first adapter in the adapters list
-     * - allowSave (true) {Boolean}: Specify if this instance can save the updated configs
-     * - allowSet (true) {Boolean}: Specify if you can change the configs during the process or not
-     * - allowReset (true) {Boolean}: Specify if you can rest the configs during the process or not
-     * - allowNew (false) {Boolean}: Specify you can create new configs with this instance or not
-     * - autoLoad (true) {Boolean}: Specify if you want the config to be loaded automatically at instanciation
-     * - autoSave (true) {Boolean}: Specify if you want the setting to be saved through the adapters directly on "set" action
      * - throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs
      * - resolvers ([]) {ISConfigResolverObj[]}: Specify some resolvers function to handle special values like "[theme.something....]"
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(name, settings: ISConfigSettings = {}) {
+    constructor(
+        name,
+        adapter: __SConfigAdapter,
+        settings: ISConfigSettings = {},
+    ) {
         // store the name
         if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
             throw new Error(
@@ -219,6 +214,8 @@ export default class SConfig {
 
         // save the settings name
         this.id = name;
+
+        this.adapter = adapter;
 
         // save the settings
         this._settings = __deepMerge(
@@ -230,15 +227,7 @@ export default class SConfig {
                             ? 'node'
                             : 'browser',
                 },
-                adapters: [],
-                defaultAdapter: null,
-                allowCache: true,
-                allowSave: true,
-                allowSet: true,
-                allowReset: true,
-                allowNew: false,
-                autoLoad: true,
-                autoSave: true,
+                cache: true,
                 updateTimeout: 500,
                 throwErrorOnUndefinedConfig: true,
                 resolvers: [],
@@ -246,34 +235,10 @@ export default class SConfig {
             settings,
         );
 
-        // init all the adapters if needed
-        this._settings.adapters.forEach((adapter) => {
-            if (!adapter instanceof __SConfigAdapter) {
-                throw new Error(
-                    `You have specified the adapter "${
-                        adapter.name || 'unknown'
-                    }" as adapter for your "${
-                        this.id
-                    }" SConfig instance but this adapter does not extends the SConfigAdapter class...`,
-                );
-            }
-
-            // make sure we have a name for this adapter
-            if (!adapter.name) {
-                adapter.name = this.id + ':' + adapter.constructor.name;
-            } else {
-                adapter.name = this.id + ':' + adapter.name;
-            }
-
-            this._adapters[adapter.name] = {
-                instance: adapter,
-                config: {},
-            };
-        });
-
-        // set the default get adapter if it has not been specified in the settings
-        if (!this._settings.defaultAdapter) {
-            this._settings.defaultAdapter = Object.keys(this._adapters)[0];
+        if (!this.adapter instanceof __SConfigAdapter) {
+            throw new Error(
+                `You have to pass a valid SConfigAdapter instance to use with this SConfig instance`,
+            );
         }
 
         function resolveConfig(string, matches, config, path) {
@@ -345,23 +310,19 @@ export default class SConfig {
             },
         });
 
-        Object.keys(this._adapters).forEach((adapterName) => {
-            const adapterObj = this._adapters[adapterName];
-            let timeout;
-            if (!adapterObj.instance) return;
-            if (!adapterObj.instance._settings.onUpdate) {
-                adapterObj.instance._settings.onUpdate = () => {
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => {
-                        // load the updated config
-                        this.load({
-                            adapter: adapterName,
-                            isUpdate: true,
-                        });
-                    }, this._settings.updateTimeout);
-                };
-            }
-        });
+        // let timeout;
+        // if (!adapterObj.instance._settings.onUpdate) {
+        //     adapterObj.instance._settings.onUpdate = () => {
+        //         clearTimeout(timeout);
+        //         timeout = setTimeout(() => {
+        //             // load the updated config
+        //             this.load({
+        //                 adapter: adapterName,
+        //                 isUpdate: true,
+        //             });
+        //         }, this._settings.updateTimeout);
+        //     };
+        // }
     }
 
     /**
@@ -382,42 +343,28 @@ export default class SConfig {
         const duration = new __SDuration();
 
         const finalSettings: ISConfigLoadSettings = {
-            adapter: this._settings.defaultAdapter,
             isUpdate: false,
             ...(settings ?? {}),
         };
 
-        if (!this._adapters[finalSettings.adapter]) {
-            throw new Error(
-                `You try to load the config from the adapter "${finalSettings.adapter}" but this adapter does not exists...`,
-            );
-        }
-
-        if (
-            !finalSettings.isUpdate &&
-            Object.keys(this._adapters[finalSettings.adapter].config).length !==
-                0
-        ) {
-            return this._adapters[finalSettings.adapter].config;
-        }
-
-        let loadedConfig;
+        // get the config integrity from the adapter
+        this.integrity = await this.adapter.integrity();
 
         // check for cache first
-        if (this._settings.allowCache && !finalSettings.isUpdate) {
-            loadedConfig = await this.fromCache();
+        if (this._settings.cache && !finalSettings.isUpdate) {
+            const cachedConfigObj = await this.fromCache();
+            if (cachedConfigObj?.integrity === this.integrity) {
+                this.config = cachedConfigObj.config;
+                return this.config;
+            }
         }
 
         // normal loading otherwise
-        if (!loadedConfig) {
-            loadedConfig = await this._adapters[
-                finalSettings.adapter
-            ].instance.load(
-                finalSettings.isUpdate,
-                this._settings.env,
-                this.config,
-            );
-        }
+        const loadedConfig = await this.adapter.load(
+            finalSettings.isUpdate,
+            this._settings.env,
+            this.config,
+        );
 
         Object.keys(loadedConfig).forEach((configId) => {
             if (!loadedConfig[configId]) return;
@@ -469,12 +416,6 @@ export default class SConfig {
             }
         };
 
-        // console.log(
-        //     'AAA',
-        //     this.config.theme.themes['default-dark']?.color?.main,
-        //     this.config.theme.themes,
-        // );
-
         // make a simple [] correspondance check
         __deepMap(this.config, ({ prop, value, path }) => {
             if (
@@ -506,8 +447,6 @@ export default class SConfig {
             }
         }
 
-        // console.log('AA', this.config.theme.themes);
-
         // handle the "extends" global property
         Object.keys(this.config).forEach((configName) => {
             this.config[configName] = extendsConfigIfNeeded(
@@ -516,33 +455,12 @@ export default class SConfig {
             );
         });
 
-        // console.log('A', this.config.theme.themes['default-dark']?.color?.main);
-
         // resolve environment properties like @dev
         this._resolveEnvironments();
 
-        // console.log(
-        //     'BBB',
-        //     this.config.theme.themes['default-dark']?.color?.main,
-        //     this.config.theme.themes,
-        // );
-
         this._settings.resolvers.forEach((resolverObj) => {
-            // console.log(resolverObj.match);
             this._resolveInternalReferences(resolverObj);
         });
-        // this._resolveInternalReferences();
-
-        // console.log(
-        //     'BB',
-        //     this.config.theme.themes['default-dark']?.color?.main,
-        // );
-
-        // console.log(__get(this.config, 'theme.themes'), 'DD');
-
-        // console.log(this._restPaths);
-
-        // console.log(this._restPaths);
 
         Object.keys(this._restPaths).forEach((dotPath) => {
             const actualConfig = __get(this.config, dotPath),
@@ -556,39 +474,6 @@ export default class SConfig {
                 ),
             );
         });
-
-        // this._restPaths
-        //     // .sort((first, second) => {
-        //     //     if (first.split('.').length < second.split('.').length) return -1;
-        //     // })
-        //     .forEach((path) => {
-        //         let obj = __get(this.config, path);
-        //         let newObj = {};
-        //         Object.keys(obj).forEach((key) => {
-        //             if (key === '...') {
-        //                 // console.log('FF', obj['...']);
-
-        //                 const value = obj['...'];
-        //                 if (!__isPlainObject(value)) {
-        //                     newObj['...'] = value;
-        //                     return;
-        //                 }
-
-        //                 newObj = {
-        //                     ...newObj,
-        //                     ...obj['...'],
-        //                 };
-        //                 delete obj['...'];
-        //             } else {
-        //                 newObj[key] = obj[key];
-        //             }
-        //         });
-        //         __set(this.config, path, newObj);
-        //     });
-
-        // console.log(this.config.themeLightBase.colorSchemas);
-        // console.log(this.config.themeDefaultLight.color.main);
-        // console.log(__flatten(this.config));
 
         if (this.constructor._registeredPostprocess[this.id]) {
             for (
@@ -614,12 +499,6 @@ export default class SConfig {
                 'Promise based SConfig is not already implemented...',
             );
         } else if (__isPlainObject(this.config)) {
-            this._adapters[finalSettings.adapter].config = this.config;
-            this._adapters[finalSettings.adapter].config.$ = {
-                hash: __md5.encrypt(this.config),
-                loadedAt: Date.now(),
-            };
-            return this.config;
         } else if (this.config !== null && this.config !== undefined) {
             throw new Error(
                 `SConfig: Your "load" method of the "${adapter}" adapter has to return either a plain object, or a Promise resolved with a plain object. The returned value is "${
@@ -627,6 +506,12 @@ export default class SConfig {
                 }" which is of type "${typeof this.config}"...`,
             );
         }
+
+        // cache for later
+        this.cache();
+
+        // return the config
+        return this.config;
     }
 
     /**
@@ -651,6 +536,7 @@ export default class SConfig {
                     '@coffeekraken/sugar/node/path/packageRoot'
                 );
                 const folderPath = `${__packageRoot.default()}/.local/cache/config`;
+                if (!__fs.existsSync(folderPath)) return resolve();
                 const jsonStr = __fs
                     .readFileSync(
                         `${folderPath}/${this.id}.${this._settings.env.env}.${this._settings.env.platform}.json`,
@@ -685,12 +571,21 @@ export default class SConfig {
                 const __packageRoot = await import(
                     '@coffeekraken/sugar/node/path/packageRoot'
                 );
-
                 const folderPath = `${__packageRoot.default()}/.local/cache/config`;
                 __fs.mkdirSync(folderPath, { recursive: true });
                 __fs.writeFileSync(
                     `${folderPath}/${this.id}.${this._settings.env.env}.${this._settings.env.platform}.json`,
-                    JSON.stringify(this.toJson(), null, 4),
+                    JSON.stringify(
+                        {
+                            integrity:
+                                this.integrity ??
+                                this.adapter.integrity?.() ??
+                                'unknown',
+                            config: this.toJson(),
+                        },
+                        null,
+                        4,
+                    ),
                 );
                 resolve(
                     `${folderPath}/${this.id}.${this._settings.env.env}.${this._settings.env.platform}.json`,
@@ -710,45 +605,6 @@ export default class SConfig {
         //         prefix: 'env:'
         //     }
         // );
-    }
-
-    /**
-     * @name                          save
-     * @type                          Function
-     *
-     * Save the config through all the registered adapters or just the one specify in params
-     *
-     * @param           {String|Array}          [adapters=Object.keys(this._adapters)]        The adapters to save the config through
-     * @return          {Promise}                                                             A promise once all the adapters have correctly saved the config
-     *
-     * @example           js
-     * await config.save();
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    save(adapters = Object.keys(this._adapters)) {
-        if (!this._settings.allowSave) {
-            throw new Error(
-                `You try to save the config on the "${this.id}" SConfig instance but this instance does not allow to save configs... Set the "settings.allowSave" property to allow this action...`,
-            );
-        }
-
-        for (let i = 0; i < adapters.length; i++) {
-            const adapter = adapters[i];
-
-            if (adapter && !this._adapters[adapter]) {
-                throw new Error(
-                    `You try to save the config on the "${this.id}" SConfig instance using the adapter "${adapter}" but this adapter does not exists...`,
-                );
-            }
-
-            this._adapters[adapter].instance.save(
-                this._adapters[adapter].config,
-            );
-        }
-
-        // all saved correctly
-        return true;
     }
 
     _restPaths = {};
@@ -881,27 +737,16 @@ export default class SConfig {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get(
-        path,
-        adapter = this._settings.defaultAdapter,
-        settings = {},
-        _level = 0,
-    ) {
+    get(path, settings = {}, _level = 0) {
         settings = __deepMerge(this._settings, settings);
 
-        if (adapter && !this._adapters[adapter]) {
-            throw new Error(
-                `You try to get the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`,
-            );
-        }
-
-        if (Object.keys(this._adapters[adapter].config).length === 0) {
+        if (Object.keys(this.config).length === 0) {
             throw new Error(
                 `<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async instance function`,
             );
         }
 
-        const originalValue = __get(this._adapters[adapter].config, path);
+        const originalValue = __get(this.config, path);
 
         if (
             settings.throwErrorOnUndefinedConfig &&
@@ -916,62 +761,6 @@ export default class SConfig {
     }
 
     /**
-     * @name                                set
-     * @namespace           node.config.SConfig
-     * @type                                Function
-     *
-     * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
-     *
-     * @param                 {String}                     path                 The dotted object path for the value wanted
-     * @param                 {Mixed}                      value                 The value to set
-     * @param                 {String|Array}                      [adapters=Object.keys(this._adapters)]       The adapter you want to use or an array of adapters
-     * @return                {Promise}                                          A promise resolved once the setting has been correctly set (and save depending on your instance config)
-     *
-     * @example               js
-     * config.set('log.frontend.mail.host', 'coffeekraken.io');
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    set(path, value, adapters = Object.keys(this._adapters)) {
-        if (!this._settings.allowSet) {
-            throw new Error(
-                `You try to set a config value on the "${this.id}" SConfig instance but this instance does not allow to set values... Set the "settings.allowSet" property to allow this action...`,
-            );
-        }
-
-        // check if we allow new config or not
-        if (
-            !this._settings.allowNew &&
-            __get(
-                this._adapters[this._settings.defaultAdapter].config,
-                path,
-            ) === undefined
-        ) {
-            throw new Error(
-                `You try to set the config "${path}" on the "${this.id}" SConfig instance but this config does not exists and this instance does not allow for new config creation...`,
-            );
-        }
-
-        adapters.forEach((adapter) => {
-            if (adapter && !this._adapters[adapter]) {
-                throw new Error(
-                    `You try to set the config value "${path}" using the adapter "${adapter}" but this adapter does not exists...`,
-                );
-            }
-
-            __set(this._adapters[adapter].config, path, value);
-        });
-
-        // check if need to autoSave or not
-        if (this._settings.autoSave) {
-            return this.save(adapters);
-        }
-
-        // return true
-        return true;
-    }
-
-    /**
      * @name                                toObject
      * @type                    Function
      *
@@ -983,6 +772,7 @@ export default class SConfig {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toObject() {
+        // @todo        replace with "this.get('.')"
         return {};
     }
 

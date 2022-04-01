@@ -126,25 +126,9 @@ export default class SSugarCli {
             await __wait(10);
 
             // load the sugar config
-            const config = await __SSugarConfig.load();
-            // console.log(
-            //     __SSugarConfig.get(
-            //         'theme.themes.coffeekraken-dark.color.complementary.default',
-            //     ),
-            // );
-
-            // console.log(__SSugarConfig.get('theme.themes.default-light.color.info.default.text'));
-            // return;
-
-            // if (!this.args.params['no-scripts'] && !this.args.action && this.packageJson.scripts?.[this.args.stack]) {
-            //     const scriptCommand = SSugarCli.replaceTokens(this.packageJson.scripts[this.args.stack]);
-            //     console.log('SSS', scriptCommand);
-            //     __childProcess.spawnSync(scriptCommand, [], {
-            //         stdio: 'inherit',
-            //         shell: true
-            //     });
-            //     return;
-            // }
+            const config = await __SSugarConfig.load({
+                cache: true,
+            });
 
             // hook base console functions
             this._proxyConsole();

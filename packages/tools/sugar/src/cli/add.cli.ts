@@ -46,10 +46,12 @@ export default (stringArgs = '') => {
                         `${rootPath}/pages/_sugar.ts`,
                         [
                             `import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';`,
-                            `__expandPleasantCssClassnamesLive();`,
+                            `if (typeof window === 'object') {`,
+                            `   __expandPleasantCssClassnamesLive();`,
+                            `}`,
                         ].join('\n'),
                     );
-                    // adding the import in the _app.tsx file
+                    // adding the≤ import in the _app.tsx file
                     __prependToFileSync(
                         `${rootPath}/pages/_app.tsx`,
                         ["import './_sugar';"].join('\n'),

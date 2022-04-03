@@ -70,23 +70,40 @@ export default async function loadConfigFile(
     } else if (!finalFilePath) return;
 
     const extension = finalFilePath.split('.').pop();
+    let str;
     switch (extension) {
         case 'js':
         case 'json':
             return (
-                await import(
-                    __path.resolve(finalSettings.rootDir, finalFilePath)
-                )
-            ).default;
+                // @ts-ignore
+                (
+                    await import(
+                        __path.resolve(finalSettings.rootDir, finalFilePath)
+                    )
+                ).default
+            );
             break;
         case 'yml':
-            const str = __fs
+            str = __fs
                 .readFileSync(
                     __path.resolve(finalSettings.rootDir, finalFilePath),
                     'utf8',
                 )
                 .toString();
             return __yaml.parse(str);
+            break;
+        default:
+            str = __fs
+                .readFileSync(
+                    __path.resolve(finalSettings.rootDir, finalFilePath),
+                    'utf8',
+                )
+                .toString();
+            // try to pass result in JSON.parse
+            try {
+                str = JSON.parse(str);
+            } catch (e) {}
+            return str;
             break;
     }
 }

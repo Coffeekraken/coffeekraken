@@ -55,6 +55,19 @@ export default function (env, config) {
         formats: ['esm', 'cjs'],
 
         /**
+         * @name            platform
+         * @namespace       config.typescriptBuilder
+         * @type            String[]
+         * @default         'node'
+         *
+         * Specify for which platform you want to build the typescript files. Can be "browser" or "node".
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        platform: 'node',
+
+        /**
          * @name            exclude
          * @namespace       config.typescriptBuilder
          * @type            String[]
@@ -66,5 +79,19 @@ export default function (env, config) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         exclude: ['**/node_modules'],
+
+        /**
+         * @name            tsconfig
+         * @namespace       config.typescriptBuilder
+         * @type            String[]
+         * @default         '[config.ts]'
+         *
+         * Specify some tsconfig configurations.
+         *
+         * @see           https://www.typescriptlang.org/tsconfig
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        tsconfig: '[config.ts]',
     };
 }

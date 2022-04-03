@@ -1,11 +1,17 @@
 import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __chokidar from 'chokidar';
+import __fs from 'fs';
+import __path from 'path';
+import __ts from 'typescript';
+import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
 
 /**
  * @name                STypescriptBuilder
@@ -44,11 +50,39 @@ export interface ISTypescriptBuilderCtorSettings extends ISBuilderCtorSettings {
     typescriptBuilder: Partial<ISTypescriptBuilderSettings>;
 }
 
+export interface ISTypescriptBuilderFileToBuild {
+    cwd: string;
+    relPath: string;
+    path: string;
+    format: 'esm' | 'cjs';
+    platform: 'node' | 'browser';
+}
+
+export interface ISTypescriptBuilderResultFile {
+    input: ISTypescriptBuilderFileToBuild;
+    format: 'esm' | 'cjs';
+    platform: 'node' | 'browser';
+    module:
+        | 'commonjs'
+        | 'amd'
+        | 'umd'
+        | 'es6'
+        | 'es2015'
+        | 'es2020'
+        | 'es2022'
+        | 'esnext'
+        | 'node12'
+        | 'nodenext';
+    file: __SFile;
+}
+
 export interface ISTypescriptBuilderResult {
-    inputFile?: __SFile;
-    outputFile?: __SFile;
-    css: string;
-    map: null;
+    glob: string[];
+    inDir: string;
+    outDir: string;
+    formats: ('esm' | 'cjs')[];
+    platform: 'node' | 'browser';
+    files: ISTypescriptBuilderResultFile[];
 }
 
 export interface ISTypescriptBuilderBuildParams {
@@ -56,6 +90,7 @@ export interface ISTypescriptBuilderBuildParams {
     inDir: string;
     outDir: string;
     formats: ('esm' | 'cjs')[];
+    platform: 'node' | 'browser';
     watch: boolean;
     buildInitial: boolean;
     exclude: string[];
@@ -122,14 +157,41 @@ export default class STypescriptBuilder extends __SBuilder {
         params: ISTypescriptBuilderBuildParams,
     ): Promise<ISTypescriptBuilderResult> {
         return new __SPromise(
-            async ({ resolve, reject, emit }) => {
-                let finalCss;
+            async ({ resolve, reject, emit, pipe }) => {
+                let buildedFiles: ISTypescriptBuilderResultFile[] = [],
+                    watchersReady: any[] = [],
+                    buildPromises: Promise<any>[] = [];
 
+                // @ts-ignore
                 const finalParams: ISTypescriptBuilderBuildParams = __STypescriptBuilderBuildParamsInterface.apply(
                     params,
                 );
 
-                const res = '';
+                const formats = Array.isArray(finalParams.formats)
+                    ? finalParams.formats
+                    : [finalParams.formats];
+
+                // function used only when the finalParams.watch is false
+                // and keeping track on the watchers ready state.
+                // when all the watchers are in ready state, this mean that the
+                // buildPromises array is full of build promises and we can resolve
+                // this process when they are all resolved
+                function onWatcherReady(watcher: any) {
+                    watchersReady.push(watcher);
+                    if (watchersReady.length === finalParams.glob.length) {
+                        // when all promises are resolved, resolve the promise
+                        Promise.all(buildPromises).then(() => {
+                            resolve(<ISTypescriptBuilderResult>{
+                                glob: finalParams.glob,
+                                inDir: finalParams.inDir,
+                                outDir: finalParams.outDir,
+                                formats,
+                                platform: finalParams.platform,
+                                files: buildedFiles,
+                            });
+                        });
+                    }
+                }
 
                 const globs = Array.isArray(finalParams.glob)
                     ? finalParams.glob
@@ -144,14 +206,39 @@ export default class STypescriptBuilder extends __SBuilder {
                         ignoreInitial:
                             finalParams.watch && !finalParams.buildInitial,
                     });
-                    watcher.on('add', this._buildFile.bind(this));
-                    watcher.on('change', this._buildFile.bind(this));
+
+                    // keep track on the watchers ready state
+                    // to know when we can watch for all the buildPromises
+                    // state and resolve the process at them end...
+                    if (!finalParams.watch) {
+                        watcher.on('ready', () => {
+                            onWatcherReady(watcher);
+                        });
+                    }
+
+                    ['add', 'change'].forEach((listener) => {
+                        watcher.on(listener, async (relPath) => {
+                            // generate all the requested formats
+                            formats.forEach(async (format) => {
+                                const pro = pipe(
+                                    this._buildFile({
+                                        cwd: finalParams.inDir,
+                                        relPath,
+                                        path: `${finalParams.inDir}/${relPath}`,
+                                        format,
+                                        platform: finalParams.platform,
+                                    }),
+                                );
+                                buildPromises.push(pro);
+                                const fileResult = await pro;
+                                buildedFiles.push(fileResult);
+                            });
+                        });
+                    });
 
                     // store the watcher for later use
                     this._watchersByGlob[glob] = watcher;
                 });
-
-                resolve(res);
             },
             {
                 metas: {
@@ -161,7 +248,91 @@ export default class STypescriptBuilder extends __SBuilder {
         );
     }
 
-    _buildFile(filePath: string) {
-        console.log('build', filePath);
+    _buildFile(
+        file: ISTypescriptBuilderFileToBuild,
+    ): Promise<ISTypescriptBuilderResultFile> {
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            const packageRoot = __packageRoot();
+            const module = file.format === 'cjs' ? 'commonjs' : 'es6';
+            const outPath = __path.dirname(
+                `${packageRoot}/dist/pkg/%format/${file.relPath}`.replace(
+                    '%format',
+                    file.format,
+                ),
+            );
+            const packageJsonOutPath = `${packageRoot}/dist/pkg/${file.format}/package.json`;
+
+            // output file
+            let outFilePath = `${outPath}/${__path.basename(file.path)}`
+                .replace('%format', file.format)
+                .replace(/\.ts$/, '.js');
+
+            const source = __fs.readFileSync(file.path).toString();
+
+            const tsconfig =
+                __SSugarConfig.get('typescriptBuilder.tsconfig') ?? {};
+
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `Compiling "<cyan>${file.relPath}</cyan>" to <yellow>${
+                    file.format
+                }</yellow> format, <magenta>${
+                    tsconfig.module ?? module
+                }</magenta> module system and <cyan>${
+                    tsconfig.target ?? 'es6'
+                }</cyan> as target...`,
+            });
+
+            let result = __ts.transpileModule(
+                source,
+                __deepMerge(tsconfig, {
+                    compilerOptions: {
+                        lib:
+                            tsconfig.lib ?? file.platform === 'node'
+                                ? ['esnext']
+                                : ['esnext', 'DOM'],
+                        target: tsconfig.target ?? 'es6',
+                        module: tsconfig.module ?? module,
+                    },
+                }),
+            );
+
+            if (result.outputText) {
+                // write the output file
+                if (!__fs.existsSync(outPath)) {
+                    __fs.mkdirSync(outPath, { recursive: true });
+                }
+                __fs.writeFileSync(outFilePath, result.outputText);
+
+                // dirty hash to make the bin file(s) executable
+                if (__path.basename(outFilePath) === 'sugar.cli.js') {
+                    __fs.chmodSync(outFilePath, 0o755);
+                }
+            }
+
+            // package.json
+            const packageJsonOutFolderPath = __path.dirname(packageJsonOutPath);
+            if (!__fs.existsSync(packageJsonOutFolderPath)) {
+                __fs.mkdirSync(packageJsonOutFolderPath, { recursive: true });
+            }
+            if (!__fs.existsSync(packageJsonOutPath)) {
+                __fs.writeFileSync(
+                    packageJsonOutPath,
+                    JSON.stringify({
+                        name: `@lostInTheDarkNight/${__uniqid()}`,
+                        type: file.format === 'cjs' ? 'commonjs' : 'module',
+                        private: true,
+                    }),
+                );
+            }
+
+            resolve({
+                input: file,
+                format: file.format,
+                platform: file.platform,
+                module: tsconfig.module ?? module,
+                file: new __SFile(outFilePath),
+            });
+        });
     }
 }

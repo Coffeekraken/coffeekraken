@@ -3,7 +3,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SCliPackageRenameParamsInterface
+ * @name                SPackageRenameParamsInterface
  * @namespace           node.package.interface
  * @type.                      Class
  * @extends             SInterface
@@ -17,17 +17,17 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SCliPackageRenameParamsInterface extends __SInterface {
+export default class SPackageRenameParamsInterface extends __SInterface {
     static get _definition() {
         return {
             name: {
                 description: 'Specify the new name for your package',
-                type: 'String'
+                type: 'String',
             },
             folder: {
                 description: 'Specify if the folder has to be renames as well',
-                type: 'Boolean'
-            }
+                type: 'Boolean',
+            },
         };
     }
 }

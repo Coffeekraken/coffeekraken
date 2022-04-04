@@ -1,0 +1,36 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%format/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "package",
+            "description": "Package related actions",
+            "defaultAction": "install",
+            "actions": {
+                "rename": {
+                    "scope": "global",
+                    "description": "Rename a package (folder, package.json, etc...",
+                    "interface": "./dist/pkg/esm/node/interface/SPackageRenameParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/rename.cli.js"
+                },
+                "install": {
+                    "scope": "global",
+                    "description": "Install package dependencies like npm and composer",
+                    "interface": "./dist/pkg/esm/node/interface/SPackageInstallParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/install.cli.js"
+                },
+                "exports": {
+                    "scope": "global",
+                    "description": "Generate automatically the 'exports' properties in the package.json file depending on the found 'exports.js' files",
+                    "interface": "./dist/pkg/esm/node/interface/SPackageExportsParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/exports.cli.js"
+                }
+            }
+        }
+    ]
+}

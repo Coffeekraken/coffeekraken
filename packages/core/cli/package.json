@@ -26,6 +26,7 @@
     "@coffeekraken/s-process": "^2.0.0",
     "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/s-monorepo": "^2.0.0",
+    "@coffeekraken/s-package": "^2.0.0",
     "enquirer": "^2.3.6"
   },
   "main": "dist/pkg/cjs/cli/exports.js",

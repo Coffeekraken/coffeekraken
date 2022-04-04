@@ -21,10 +21,12 @@ import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBui
  * @platform            node
  * @status              beta
  *
- * This class represent the postcss builder that you can use to build your postcss files
+ * This class represent the typescript builder that you can use to build your .ts|js files
  * with a simple and efficient API.
  *
- * @feature            Support Sugar postcss plugin out of the boxs low as possible using PurgeCSS.
+ * @feature            Multiple formats (cjs,esm)
+ * @feature             Different output folders using the `%format` and `%platform` token in the `outDir`
+ * @feature             Watch capabilities to work live on your codebase
  *
  * @param           {ISTypescriptBuilderCtorSettings}          [settings={}]           Some settings to configure your builder instance
  *
@@ -56,6 +58,7 @@ export interface ISTypescriptBuilderFileToBuild {
     path: string;
     format: 'esm' | 'cjs';
     platform: 'node' | 'browser';
+    outDir: string;
 }
 
 export interface ISTypescriptBuilderResultFile {
@@ -227,6 +230,7 @@ export default class STypescriptBuilder extends __SBuilder {
                                         path: `${finalParams.inDir}/${relPath}`,
                                         format,
                                         platform: finalParams.platform,
+                                        outDir: finalParams.outDir,
                                     }),
                                 );
                                 buildPromises.push(pro);
@@ -255,11 +259,11 @@ export default class STypescriptBuilder extends __SBuilder {
             const packageRoot = __packageRoot();
             const module = file.format === 'cjs' ? 'commonjs' : 'es6';
             const outPath = __path.dirname(
-                `${packageRoot}/dist/pkg/%format/${file.relPath}`.replace(
-                    '%format',
-                    file.format,
-                ),
+                `${file.outDir}/${file.relPath}`
+                    .replace('%format', file.format)
+                    .replace('%platform', file.platform),
             );
+
             const packageJsonOutPath = `${packageRoot}/dist/pkg/${file.format}/package.json`;
 
             // output file

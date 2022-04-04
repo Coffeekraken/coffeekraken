@@ -88,25 +88,6 @@
             }
         },
         {
-            "stack": "package",
-            "description": "Package related actions",
-            "defaultAction": "rename",
-            "actions": {
-                "rename": {
-                    "scope": "global",
-                    "description": "Rename a package (folder, package.json, etc...",
-                    "interface": "./dist/pkg/esm/node/package/interface/SCliPackageRenameParamsInterface.js",
-                    "process": "./dist/pkg/esm/cli/package/rename.cli.js"
-                },
-                "install": {
-                    "scope": "global",
-                    "description": "Install package dependencies like npm and composer",
-                    "interface": "./dist/pkg/esm/node/package/interface/SCliPackageInstallParamsInterface.js",
-                    "process": "./dist/pkg/esm/cli/package/install.cli.js"
-                }
-            }
-        },
-        {
             "stack": "process",
             "description": "Process related actions",
             "interactive": {

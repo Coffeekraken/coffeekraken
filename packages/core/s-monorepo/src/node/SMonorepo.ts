@@ -20,21 +20,18 @@ import __glob from 'glob';
 import __SClass from '@coffeekraken/s-class';
 
 /**
- * @name                SPackage
+ * @name                SMonorepo
  * @namespace           node
  * @type                Class
  * @extends             SClass
  * @platform            node
  * @status              beta
  *
- * This class represent a package (with a package.json) file. It let you manage some of your package routine easily like exporting in your package.json the files specified in the
- * `package.config.ts` configuration file, renaming your package with ease (folder, package.json, etc...), and more...
+ * This class represent a monorepo with some features like executing a command on all packages, list all the packages, upgrade each package's package.json, etc...
  *
- * @feature            Rename your package easily (folder, package.json, etc...)
- * @feature             Export your packages files in the package.json easily depending on the `package.config.ts` configuration exported file(s)
- * @feature         Install your dependencies easily using the `config.package.manager` configuration
  *
- * @param           {ISPackageCtorSettings}          [settings={}]           Some settings to configure your builder instance
+ *
+ * @param           {ISMonorepoCtorSettings}          [settings={}]           Some settings to configure your builder instance
  *
  * @example         js
  * import SPackage from '@coffeekraken/s-postcss-builder';
@@ -52,21 +49,13 @@ import __SClass from '@coffeekraken/s-class';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISPackageSettings {
+export interface ISMonorepoSettings {
     manager: 'yarn' | 'npm';
 }
 
-export interface ISPackageCtorSettings extends ISBuilderCtorSettings {
-    package: Partial<ISPackageSettings>;
+export interface ISMonorepoCtorSettings {
+    monorepo: Partial<ISMonorepoSettings>;
 }
-
-export interface ISPackageInstallParams {
-    manager: 'npm' | 'yarn';
-}
-
-export interface ISPackageInstallResult {}
-
-export interface ISPackageExportsResult {}
 
 export interface ISPackageExportsParams {
     glob: string[] | string;
@@ -77,8 +66,8 @@ export interface ISPackageExportsParams {
 
 export default class SPackage extends __SClass {
     /**
-     * @name            packageSettings
-     * @type            ISPackageSettings
+     * @name            monorepoSettings
+     * @type            ISMonorepoSettings
      * @get
      *
      * Access the postcss builder settings
@@ -86,8 +75,8 @@ export default class SPackage extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get packageSettings(): ISPackageSettings {
-        return (<any>this)._settings.package;
+    get monorepoSettings(): ISMonorepoSettings {
+        return (<any>this)._settings.monorepo;
     }
 
     /**
@@ -99,7 +88,7 @@ export default class SPackage extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISPackageCtorSettings>) {
+    constructor(settings?: Partial<ISMonorepoCtorSettings>) {
         super(
             __deepMerge(
                 {

@@ -3,6 +3,19 @@ export default function (env, config) {
 
     return {
         /**
+         * @name        rootDir
+         * @namespace   config.monorepo
+         * @type       String
+         * @default     null
+         *
+         * Specify the root of the monorepo. If not set, it will be computed from the current working directory
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        rootDir: null,
+
+        /**
          * @name        packagesGlobs
          * @namespace   config.monorepo
          * @type       string[]

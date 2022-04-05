@@ -1,53 +1,17 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
-import __SCliMonoListParamsInterface from '../node/interface/SCliMonoListParamsInterface';
+import __SMonorepoListParamsInterface from '../node/interface/SMonorepoListParamsInterface';
 import __SGlob from '@coffeekraken/s-glob';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __SMonorepo from '../node/SMonorepo';
 
 export default (stringArgs = '') => {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-        const finalParams = __SCliMonoListParamsInterface.apply(stringArgs);
+        const finalParams = __SMonorepoListParamsInterface.apply(stringArgs);
 
-        const root = __packageRoot(process.cwd(), {
-            highest: true,
-        });
-
-        const rootPackageJson = __readJsonSync(`${root}/package.json`);
-
-        const files = __SGlob.resolve(finalParams.packagesGlobs, {
-            cwd: root,
-        });
-
-        emit('log', {
-            value: `<cyan>${files.length}</cyan> packages found:`,
-        });
-
-        files.forEach((file) => {
-            let version = 'unknown',
-                name,
-                path = file.relPath;
-
-            if (file.relPath.match(/package\.json$/)) {
-                const json = __readJsonSync(file.path);
-                version = json.version;
-                name = json.name;
-
-                console.log(file.relPath);
-                if (json.type !== 'module') {
-                }
-            }
-
-            // emit('log', {
-            //     value: `<yellow>${
-            //         name ?? file.relPath.split('/').pop()
-            //     }</yellow> (<${
-            //         version === rootPackageJson.version ? 'green' : 'red'
-            //     }>${version}</${
-            //         version === rootPackageJson.version ? 'green' : 'red'
-            //     }>) <cyan>${path}</cyan>`,
-            // });
-        });
+        const monorepo = new __SMonorepo();
+        await pipe(monorepo.list(finalParams));
 
         resolve();
     });

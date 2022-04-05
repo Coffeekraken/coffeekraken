@@ -1,23 +1,20 @@
-import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
-import __SBuilder from '@coffeekraken/s-builder';
-import __SFile from '@coffeekraken/s-file';
-import __SGlob from '@coffeekraken/s-glob/src/node/exports';
+import __SClass from '@coffeekraken/s-class';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-import __chokidar from 'chokidar';
-import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __SGlob from '@coffeekraken/s-glob';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __fs from 'fs';
+import __spawn from '@coffeekraken/sugar/node/process/spawn';
+import __SDuration from '@coffeekraken/s-duration';
+import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __path from 'path';
-import __ts from 'typescript';
-import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsInterface';
-import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsInterface';
-import __childProcess from 'child_process';
-import __glob from 'glob';
-import __SClass from '@coffeekraken/s-class';
+
+import __SMonorepoRunParamsInterface from './interface/SMonorepoRunParamsInterface';
+import __SMonorepoListParamsInteface from './interface/SMonorepoListParamsInterface';
 
 /**
  * @name                SMonorepo
@@ -29,20 +26,21 @@ import __SClass from '@coffeekraken/s-class';
  *
  * This class represent a monorepo with some features like executing a command on all packages, list all the packages, upgrade each package's package.json, etc...
  *
+ * @feature         Execute a command in every packages of the monorepo
+ * @feature         List all the packages of the monorepo
+ * @feature         Upgrade each package's package.json depending on the monorepo's one
  *
- *
- * @param           {ISMonorepoCtorSettings}          [settings={}]           Some settings to configure your builder instance
+ * @param           {ISMonorepoCtorSettings}          [settings={}]           Some settings to configure your monorepo instance
  *
  * @example         js
- * import SPackage from '@coffeekraken/s-postcss-builder';
- * const builder = new SPackage({
- *      package: {
+ * import SMonorepo from '@coffeekraken/s-monorepo';
+ * const repo = new SMonorepo({
+ *      monorepo: {
  *          // settings here...
  *      }
  * });
- * await builder.build({
- *      input: 'my-cool-file.css',
- *      output: 'my/cool/file-output.css'
+ * await repo.run({
+ *    command: 'ls -la'
  * });
  *
  * @since           2.0.0
@@ -50,6 +48,9 @@ import __SClass from '@coffeekraken/s-class';
  */
 
 export interface ISMonorepoSettings {
+    rootDir: string;
+    packagesGlobs: string[];
+    filesToUpgrade: string[];
     manager: 'yarn' | 'npm';
 }
 
@@ -57,20 +58,35 @@ export interface ISMonorepoCtorSettings {
     monorepo: Partial<ISMonorepoSettings>;
 }
 
-export interface ISPackageExportsParams {
-    glob: string[] | string;
-    inDir: string;
-    folderModuleMap: Record<string, string>;
-    folderPlatformMap: Record<string, string>;
+export interface ISMonorepoRunParams {
+    command: string;
+    packagesGlobs: string[];
+}
+export interface ISMonorepoRunResult {}
+
+export interface ISMonorepoListParams {
+    packagesGlobs: string[];
+}
+export interface ISMonorepoListResult {
+    name: string;
+    version: string;
+    path: string;
+    relPath: string;
 }
 
-export default class SPackage extends __SClass {
+export interface ISMonorepoUpgradeParams {
+    packagesGlobs: string;
+    filesToUpgrade: string[];
+}
+export interface ISMonorepoUpgradeResult {}
+
+export default class SMonorepo extends __SClass {
     /**
      * @name            monorepoSettings
      * @type            ISMonorepoSettings
      * @get
      *
-     * Access the postcss builder settings
+     * Access the monorepo settings
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -92,156 +108,119 @@ export default class SPackage extends __SClass {
         super(
             __deepMerge(
                 {
-                    package: {
-                        ...__SSugarConfig.get('package'),
+                    monorepo: {
+                        ...__SSugarConfig.get('monorepo'),
                     },
                 },
                 settings ?? {},
             ),
         );
+        // handle root dir if not set
+        if (!this.monorepoSettings.rootDir) {
+            this.monorepoSettings.rootDir = __packageRoot(process.cwd(), {
+                highest: true,
+            });
+        }
     }
 
     /**
-     * @name            exports
+     * @name            run
      * @type            Function
      * @async
      *
-     * This method allows you to search for "exportable" files defined in params and export them in the package.json file.
+     * This method allows you to run a command in every packages of the monorepo
      *
-     * @param       {Partial<ISPackageExportsParams>}          [params={}]         Some params for your exports
-     * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the exports
+     * @param       {Partial<ISMonorepoRunParams>}          [params={}]         Some params for your run process
+     * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the process
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    exports(params: ISPackageExportsParams): Promise<ISPackageExportsResult> {
+    run(params: ISMonorepoRunParams): Promise<ISMonorepoRunResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageExportsParams = __SPackageExportsParamsInterface.apply(
+                const finalParams: ISMonorepoRunParams = __SMonorepoRunParamsInterface.apply(
                     params,
                 );
 
+                const results: ISMonorepoRunResult[] = [];
+
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[exports]</yellow> Searching for exportable files...`,
+                    value: `<yellow>[run]</yellow> Searching for repositories...`,
                 });
 
-                const files = __glob.sync(finalParams.glob[0], {
-                    cwd: finalParams.inDir,
-                });
-
-                const packageRoot = __packageRoot();
-
-                // @ts-ignore
-                let mapedFiles: {
-                    node: Record<string, string>;
-                    browser: Record<string, string>;
-                    default: Record<string, string>;
-                } = {};
-
-                // process each exports
-                files.forEach((fileRelPath) => {
-                    const relPath = `${finalParams.inDir}/${fileRelPath}`.replace(
-                        `${packageRoot}/`,
-                        '',
-                    );
-
-                    for (let [folder, platform] of Object.entries(
-                        finalParams.folderPlatformMap,
-                    )) {
-                        for (let [fold, module] of Object.entries(
-                            finalParams.folderModuleMap,
-                        )) {
-                            if (
-                                `/${relPath}`.includes(`/${fold}/`) &&
-                                `/${relPath}`.includes(`/${folder}/`)
-                            ) {
-                                if (!mapedFiles[platform]) {
-                                    mapedFiles[platform] = {};
-                                }
-                                mapedFiles[platform][module] = `./${relPath}`;
-                            }
-                        }
-                    }
+                // get all the packages
+                const packages = await this.list({
+                    packagesGlobs: finalParams.packagesGlobs,
                 });
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[exports]</yellow> Generating new exports object map...`,
+                    value: `<yellow>[run]</yellow> Executing the command "<magenta>${finalParams.command}</magenta>" in these <cyan>${packages.length}</cyan> repo(s)`,
                 });
 
-                // @ts-ignore
-                const exportsMap: {
-                    main: string;
-                    module: string;
-                    exports: Record<string, string>;
-                } = {};
+                const duration = new __SDuration();
 
-                if (Object.keys(mapedFiles).length === 1) {
-                    if (!exportsMap.exports) exportsMap.exports = {};
-                    exportsMap.exports['.'] =
-                        mapedFiles[Object.keys(mapedFiles)[0]];
-                }
-                if (mapedFiles.default) {
-                    if (mapedFiles.default.require) {
-                        exportsMap.main = mapedFiles.default.require;
-                    }
-                    if (mapedFiles.default.import) {
-                        exportsMap.module = mapedFiles.default.import;
-                    }
-                } else if (mapedFiles.node) {
-                    if (mapedFiles.node.require) {
-                        exportsMap.main = mapedFiles.node.require;
-                    }
-                    if (mapedFiles.node.import) {
-                        exportsMap.module = mapedFiles.node.import;
-                    }
-                } else if (mapedFiles.browser) {
-                    if (mapedFiles.browser.require) {
-                        exportsMap.main = mapedFiles.browser.require;
-                    }
-                    if (mapedFiles.browser.import) {
-                        exportsMap.module = mapedFiles.browser.import;
-                    }
-                }
+                let currentDuration = 0;
 
-                // updading package json
-                let currentPackageJson = {};
-                try {
-                    currentPackageJson = JSON.parse(
-                        __fs
-                            .readFileSync(`${packageRoot}/package.json`)
-                            .toString(),
-                    );
-                } catch (e) {}
+                for (let i = 0; i < packages.length; i++) {
+                    const pack = packages[i];
 
-                const newPackageJson = {
-                    ...currentPackageJson,
-                    ...exportsMap,
-                };
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[exports]</yellow> Updating <cyan>package.json</cyan> file with new exports`,
-                });
-
-                JSON.stringify(exportsMap, null, 2)
-                    .split('\n')
-                    .forEach((line) => {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: line,
-                        });
+                    emit('log', {
+                        value: `<yellow>[run]</yellow> Executing command "<yellow>${finalParams.command}</yellow>" in folder:`,
+                    });
+                    emit('log', {
+                        value: `<yellow>[run]</yellow> <cyan>${pack.relPath}</cyan>`,
                     });
 
-                // writing new file
-                __fs.writeFileSync(
-                    `${packageRoot}/package.json`,
-                    JSON.stringify(newPackageJson, null, 4),
-                );
+                    const start = Date.now();
 
-                resolve();
+                    const command = pipe(
+                        __spawn(finalParams.command, [], {
+                            cwd: pack.path,
+                        }),
+                    );
+                    const commandResult = await command;
+
+                    results.push(commandResult);
+
+                    const end = Date.now();
+                    currentDuration += end - start;
+
+                    const average = currentDuration / i;
+                    const remaining = average * (packages.length - i);
+
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<green>[run]</green> Command executed <green>successfully</green> in <yellow>${commandResult.formatedDuration}</yellow>`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<green>[run]</green> <magenta>${
+                            packages.length - (i + 1)
+                        }</magenta> folder(s), <cyan>~${__formatDuration(
+                            remaining,
+                        )}</cyan> remaining...`,
+                    });
+                    emit('log', {
+                        value: ' ',
+                    });
+                }
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<green>[success]</green> Command "<yellow>${
+                        finalParams.command
+                    }</yellow>" executed <green>successfully</green> in <cyan>${
+                        packages.length
+                    }</cyan> folder(s) in <yellow>${
+                        duration.end().formatedDuration
+                    }</yellow>`,
+                });
+
+                resolve(results);
             },
             {
                 metas: {
@@ -252,115 +231,171 @@ export default class SPackage extends __SClass {
     }
 
     /**
-     * @name            install
+     * @name            list
      * @type            Function
      * @async
      *
-     * This method allows you to install dependencies in a package
+     * This method allows you to list all the repo in the monorepo
      *
-     * @param       {Partial<ISPackageInstallParams>}          [params={}]         Some params for your install
-     * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the install
+     * @param       {Partial<ISMonorepoListParams>}          [params={}]         Some params for your list process
+     * @return      {SPromise<ISMonorepoListResult>}                                                          An SPromise instance that need to be resolved at the end of the process
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    install(params: ISPackageInstallParams): Promise<ISPackageInstallResult> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            // @ts-ignore
-            const finalParams: ISPackageInstallParams = __SPackageInstallParamsInterface.apply(
-                params,
-            );
+    list(params: ISMonorepoListParams): Promise<ISMonorepoListResult[]> {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                // @ts-ignore
+                const finalParams: ISMonorepoListParams = __SMonorepoListParamsInteface.apply(
+                    params,
+                );
 
-            const packageRoot = __packageRoot();
+                const result: ISMonorepoListResult[] = [];
 
-            if (__fs.existsSync(`${packageRoot}/package.json`)) {
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[install]</yellow> Installing the <cyan>node_modules</cyan> dependencies using <cyan>${finalParams.manager}</cyan>...`,
+                    value: `<yellow>[list]</yellow> Searching for repositories...`,
                 });
-                __childProcess.execSync(`${finalParams.manager} install`, {
-                    cwd: packageRoot,
-                });
-            }
 
-            if (__fs.existsSync(`${packageRoot}/composer.json`)) {
+                const rootPackageJson = __readJsonSync(
+                    `${this.monorepoSettings.rootDir}/package.json`,
+                );
+
+                const files = __SGlob.resolve(finalParams.packagesGlobs, {
+                    cwd: this.monorepoSettings.rootDir,
+                });
+
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[install]</yellow> Installing the composer <cyan>vendors</cyan> dependencies...`,
+                    value: `<cyan>${files.length}</cyan> packages found:`,
                 });
-                __childProcess.execSync('composer install', {
-                    cwd: packageRoot,
+
+                files.forEach((file) => {
+                    let version = 'unknown',
+                        name;
+
+                    if (file.relPath.match(/package\.json$/)) {
+                        const json = __readJsonSync(file.path);
+                        version = json.version;
+                        name = json.name;
+                    }
+
+                    result.push({
+                        name,
+                        version,
+                        relPath: __path.dirname(file.relPath),
+                        path: __path.dirname(file.path),
+                    });
+
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>${
+                            name ?? file.relPath.split('/').pop()
+                        }</yellow> (<${
+                            version === rootPackageJson.version
+                                ? 'green'
+                                : 'red'
+                        }>${version}</${
+                            version === rootPackageJson.version
+                                ? 'green'
+                                : 'red'
+                        }>) <cyan>${file.relPath}</cyan>`,
+                    });
                 });
-            }
 
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<green>[install]</green> Dependencies have been installed <green>successfully</green>`,
-            });
-
-            resolve();
-        });
+                resolve(result);
+            },
+            {
+                metas: {
+                    id: this.constructor.name,
+                },
+            },
+        );
     }
 
     /**
-     * @name            rename
+     * @name            upgrade
      * @type            Function
      * @async
      *
-     * This method allows you to rename a package (folder, package.json, composer.json, etc...)
+     * This method allows you to upgrade all the repo in the monorepo. This mean updating the
+     * repositories package.json "version" field using the monorepo package.json version
      *
-     * @param       {Partial<ISPackageRenameParams>}          [params={}]         Some params for your rename
-     * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the rename
+     * @param       {Partial<ISMonorepoUpgradeParams>}          [params={}]         Some params for your list process
+     * @return      {SPromise<ISMonorepoUpgradeResult>}                                                          An SPromise instance that need to be resolved at the end of the process
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    rename(params: ISPackageRenameParams): Promise<ISPackageInstallResult> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            // @ts-ignore
-            const finalParams: ISPackageRenameParams = __SPackageInstallParamsInterface.apply(
-                params,
-            );
+    upgrade(params: ISMonorepoUpgradeParams): Promise<ISMonorepoUpgradeResult> {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                // @ts-ignore
+                const finalParams: ISMonorepoUpgradeParams = __SMonorepoListParamsInteface.apply(
+                    params,
+                );
 
-            if (!finalParams.name) {
-                finalParams.name = await emit('ask', {
-                    type: 'input',
-                    message: 'Please enter the new name for your package',
-                    pattern: '^[a-zA-Z0-9_@/-]+$',
-                });
-            }
+                const result: Record<string, ISMonorepoUpgradeResult> = {};
 
-            if (finalParams.folder === undefined) {
-                finalParams.folder = await emit('ask', {
-                    type: 'confirm',
-                    message: 'Do you want to rename the folder as well ?',
-                    default: true,
-                });
-            }
-
-            // rename package
-            emit('log', {
-                value: `<yellow>[rename]</yellow> Renaming the package with "<cyan>${finalParams.name}</cyan>"`,
-            });
-
-            __renamePackage(finalParams.name);
-
-            if (finalParams.folder) {
-                const folderName = finalParams.name.split('/').pop();
                 emit('log', {
-                    value: `<yellow>[rename]</yellow> Renaming the folder with "<cyan>${folderName}</cyan>"`,
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[list]</yellow> Searching for repositories...`,
                 });
-                const newPath = `${process
-                    .cwd()
-                    .split('/')
-                    .slice(0, -1)
-                    .join('/')}/${folderName}`;
-                __fs.renameSync(process.cwd(), newPath);
-                process.chdir(newPath);
-                emit('chdir', newPath);
-            }
 
-            resolve();
-        });
+                const rootPackageJson = __readJsonSync(
+                    `${this.monorepoSettings.rootDir}/package.json`,
+                );
+
+                const files = __SGlob.resolve(finalParams.packagesGlobs, {
+                    cwd: this.monorepoSettings.rootDir,
+                });
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `Upgrading <cyan>${files.length}</cyan> packages with these informations:`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    marginBottom: 1,
+                    value: [
+                        `- <yellow>Version</yellow>: <cyan>${rootPackageJson.version}</cyan>`,
+                    ].join('\n'),
+                });
+
+                files.forEach((file) => {
+                    finalParams.filesToUpgrade.forEach((fileName) => {
+                        if (!fileName.match(/\.json$/)) {
+                            throw new Error(
+                                `Only json files are supported for the upgrade process for now...`,
+                            );
+                        }
+                        const filePath = `${file.dirPath}/${fileName}`;
+                        if (!__fs.existsSync(filePath)) return;
+                        const json = __readJsonSync(filePath);
+                        if (json.version === rootPackageJson.version) {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<yellow>${json.name}</yellow> <cyan>${fileName}</cyan> already up to date`,
+                            });
+                            return;
+                        }
+                        json.version = rootPackageJson.version;
+                        __writeJsonSync(filePath, json);
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<green>✓</green> <yellow>${json.name}</yellow> <cyan>${fileName}</cyan> upgraded <green>successfully</green>`,
+                        });
+                    });
+                });
+
+                resolve(result);
+            },
+            {
+                metas: {
+                    id: this.constructor.name,
+                },
+            },
+        );
     }
 }

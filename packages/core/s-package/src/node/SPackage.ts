@@ -81,7 +81,7 @@ export default class SPackage extends __SClass {
      * @type            ISPackageSettings
      * @get
      *
-     * Access the postcss builder settings
+     * Access the package settings
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

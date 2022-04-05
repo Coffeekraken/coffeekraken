@@ -12,10 +12,16 @@
             "description": "Mono repository related actions",
             "defaultAction": "list",
             "actions": {
+                "run": {
+                    "scope": "global",
+                    "description": "Run a command in all the packages of the monorepo",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoRunParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/run.cli.js"
+                },
                 "list": {
                     "scope": "global",
                     "description": "List all the repositories that compose the current mono repo",
-                    "interface": "./dist/pkg/esm/node/interface/SCliMonoListParamsInterface.js",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoListParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/list.cli.js"
                 },
                 "upgrade": {

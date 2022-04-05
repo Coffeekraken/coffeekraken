@@ -276,9 +276,14 @@ export default class STypescriptBuilder extends __SBuilder {
             const tsconfig =
                 __SSugarConfig.get('typescriptBuilder.tsconfig') ?? {};
 
+            let filePath = file.relPath;
+            if (process.cwd() !== __packageRoot(file.path)) {
+                filePath = __path.relative(packageRoot, file.path);
+            }
+
             emit('log', {
                 type: __SLog.TYPE_INFO,
-                value: `Compiling "<cyan>${file.relPath}</cyan>" to <yellow>${
+                value: `Compiling "<cyan>${filePath}</cyan>" to <yellow>${
                     file.format
                 }</yellow> format, <magenta>${
                     tsconfig.module ?? module

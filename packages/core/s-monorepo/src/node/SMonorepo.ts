@@ -12,9 +12,15 @@ import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __SDuration from '@coffeekraken/s-duration';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __path from 'path';
+import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
+import __SPackage from '@coffeekraken/s-package';
+
+import __srcDir from '@coffeekraken/sugar/node/path/srcRootDir';
+import __distDir from '@coffeekraken/sugar/node/path/distRootDir';
 
 import __SMonorepoRunParamsInterface from './interface/SMonorepoRunParamsInterface';
 import __SMonorepoListParamsInteface from './interface/SMonorepoListParamsInterface';
+import __SMonorepoDevParamsInterface from './interface/SMonorepoDevParamsInterface';
 
 /**
  * @name                SMonorepo
@@ -73,6 +79,12 @@ export interface ISMonorepoListResult {
     path: string;
     relPath: string;
 }
+
+export interface ISMonorepoDevParams {
+    packagesGlobs: string[];
+    buildInitial: boolean;
+}
+export interface ISMonorepoDevResult {}
 
 export interface ISMonorepoUpgradeParams {
     packagesGlobs: string;
@@ -305,6 +317,92 @@ export default class SMonorepo extends __SClass {
                 });
 
                 resolve(result);
+            },
+            {
+                metas: {
+                    id: this.constructor.name,
+                },
+            },
+        );
+    }
+
+    /**
+     * @name            dev
+     * @type            Function
+     * @async
+     *
+     * This method allows you to launch the dev stack in the monorepo.
+     * This mean principaly transpile the typescript files of each packages
+     *
+     * @param       {Partial<ISMonorepoDevParams>}          [params={}]         Some params for your dev process
+     * @return      {SPromise<ISMonorepoListResult>}                                                          An SPromise instance that need to be resolved at the end of the process
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    dev(params: ISMonorepoDevParams): Promise<ISMonorepoListResult[]> {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                // @ts-ignore
+                const finalParams: ISMonorepoDevParams = __SMonorepoDevParamsInterface.apply(
+                    params,
+                );
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[list]</yellow> Searching for repositories...`,
+                });
+
+                const packages = await this.list(finalParams);
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[list]</yellow> Found <cyan>${packages.length}</cyan> repository(ies)`,
+                });
+
+                const srcRelDir = __path.relative(
+                        this.monorepoSettings.rootDir,
+                        __SSugarConfig.get('typescriptBuilder.inDir'),
+                    ),
+                    distRelDir = __path.relative(
+                        this.monorepoSettings.rootDir,
+                        __SSugarConfig.get('typescriptBuilder.outDir'),
+                    );
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[list]</yellow> Starting the typescript build process...`,
+                });
+
+                packages.forEach((packageObj) => {
+                    // typescript compilation
+                    const inDir = `${packageObj.path}/${srcRelDir}`,
+                        outDir = `${packageObj.path}/${distRelDir}`;
+
+                    const builder = new __STypescriptBuilder();
+                    pipe(
+                        builder.build({
+                            inDir,
+                            outDir,
+                            buildInitial: finalParams.buildInitial,
+                            watch: true,
+                        }),
+                    );
+
+                    // exports
+                    const pack = new __SPackage(packageObj.path);
+                    pipe(
+                        pack.exports({
+                            watch: true,
+                            buildInitial: finalParams.buildInitial,
+                        }),
+                    );
+                });
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[list]</yellow> Watching for changes...`,
+                });
             },
             {
                 metas: {

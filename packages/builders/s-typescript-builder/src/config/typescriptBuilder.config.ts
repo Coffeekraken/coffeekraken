@@ -34,7 +34,8 @@ export default function (env, config) {
          * @type            String
          * @default         [config.storage.dist.rootDir]/pkg/%format
          *
-         * Specify a directory where you want to put the builded files. You can use the %format and %platform token in your value
+         * Specify a directory where you want to put the builded files.
+         * You can use the %format and %platform token in your value
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -58,7 +59,7 @@ export default function (env, config) {
          * @name            platform
          * @namespace       config.typescriptBuilder
          * @type            String[]
-         * @default         'node'
+         * @default         node
          *
          * Specify for which platform you want to build the typescript files. Can be "browser" or "node".
          *
@@ -84,7 +85,7 @@ export default function (env, config) {
          * @name            tsconfig
          * @namespace       config.typescriptBuilder
          * @type            String[]
-         * @default         '[config.ts]'
+         * @default         [config.ts]
          *
          * Specify some tsconfig configurations.
          *

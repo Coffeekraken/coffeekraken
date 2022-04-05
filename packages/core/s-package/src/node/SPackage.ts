@@ -37,16 +37,13 @@ import __SClass from '@coffeekraken/s-class';
  * @param           {ISPackageCtorSettings}          [settings={}]           Some settings to configure your builder instance
  *
  * @example         js
- * import SPackage from '@coffeekraken/s-postcss-builder';
+ * import SPackage from '@coffeekraken/s-package';
  * const builder = new SPackage({
  *      package: {
  *          // settings here...
  *      }
  * });
- * await builder.build({
- *      input: 'my-cool-file.css',
- *      output: 'my/cool/file-output.css'
- * });
+ * await package.exports();
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -54,6 +51,7 @@ import __SClass from '@coffeekraken/s-class';
 
 export interface ISPackageSettings {
     manager: 'yarn' | 'npm';
+    rootDir: string;
 }
 
 export interface ISPackageCtorSettings extends ISBuilderCtorSettings {
@@ -69,8 +67,9 @@ export interface ISPackageInstallResult {}
 export interface ISPackageExportsResult {}
 
 export interface ISPackageExportsParams {
+    watch: boolean;
+    buildInitial: boolean;
     glob: string[] | string;
-    inDir: string;
     folderModuleMap: Record<string, string>;
     folderPlatformMap: Record<string, string>;
 }
@@ -91,6 +90,18 @@ export default class SPackage extends __SClass {
     }
 
     /**
+     * @name        rootDir
+     * @type        String
+     * @default     process.cwd()
+     *
+     * Store the package root directory
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    rootDir: string = process.cwd();
+
+    /**
      * @name            constructor
      * @type            Function
      *
@@ -99,7 +110,10 @@ export default class SPackage extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISPackageCtorSettings>) {
+    constructor(
+        rootDir: string = process.cwd(),
+        settings?: Partial<ISPackageCtorSettings>,
+    ) {
         super(
             __deepMerge(
                 {
@@ -110,6 +124,121 @@ export default class SPackage extends __SClass {
                 settings ?? {},
             ),
         );
+        this.rootDir = rootDir;
+    }
+
+    _exportFiles(
+        files: string[],
+        finalParams: ISPackageExportsParams,
+    ): Promise<void> {
+        return new __SPromise(({ resolve, reject, emit, pipe }) => {
+            // @ts-ignore
+            let mapedFiles: {
+                node: Record<string, string>;
+                browser: Record<string, string>;
+                default: Record<string, string>;
+            } = {};
+
+            // process each exports
+            files.forEach((fileRelPath) => {
+                const relPath = fileRelPath;
+
+                for (let [folder, platform] of Object.entries(
+                    finalParams.folderPlatformMap,
+                )) {
+                    for (let [fold, module] of Object.entries(
+                        finalParams.folderModuleMap,
+                    )) {
+                        if (
+                            `/${relPath}`.includes(`/${fold}/`) &&
+                            `/${relPath}`.includes(`/${folder}/`)
+                        ) {
+                            if (!mapedFiles[platform]) {
+                                mapedFiles[platform] = {};
+                            }
+                            mapedFiles[platform][module] = `./${relPath}`;
+                        }
+                    }
+                }
+            });
+
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>[exports]</yellow> Generating new exports object map...`,
+            });
+
+            // @ts-ignore
+            const exportsMap: {
+                main: string;
+                module: string;
+                exports: Record<string, string>;
+            } = {};
+
+            if (Object.keys(mapedFiles).length === 1) {
+                if (!exportsMap.exports) exportsMap.exports = {};
+                exportsMap.exports['.'] =
+                    mapedFiles[Object.keys(mapedFiles)[0]];
+            }
+            if (mapedFiles.default) {
+                if (mapedFiles.default.require) {
+                    exportsMap.main = mapedFiles.default.require;
+                }
+                if (mapedFiles.default.import) {
+                    exportsMap.module = mapedFiles.default.import;
+                }
+            } else if (mapedFiles.node) {
+                if (mapedFiles.node.require) {
+                    exportsMap.main = mapedFiles.node.require;
+                }
+                if (mapedFiles.node.import) {
+                    exportsMap.module = mapedFiles.node.import;
+                }
+            } else if (mapedFiles.browser) {
+                if (mapedFiles.browser.require) {
+                    exportsMap.main = mapedFiles.browser.require;
+                }
+                if (mapedFiles.browser.import) {
+                    exportsMap.module = mapedFiles.browser.import;
+                }
+            }
+
+            // updading package json
+            let currentPackageJson = {};
+            try {
+                currentPackageJson = JSON.parse(
+                    __fs
+                        .readFileSync(`${this.rootDir}/package.json`)
+                        .toString(),
+                );
+            } catch (e) {}
+
+            const newPackageJson = {
+                ...currentPackageJson,
+                ...exportsMap,
+            };
+
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>[exports]</yellow> Updating <cyan>package.json</cyan> file with new exports`,
+            });
+
+            JSON.stringify(exportsMap, null, 2)
+                .split('\n')
+                .forEach((line) => {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: line,
+                    });
+                });
+
+            // writing new file
+            __fs.writeFileSync(
+                `${this.rootDir}/package.json`,
+                JSON.stringify(newPackageJson, null, 4),
+            );
+
+            resolve();
+        });
     }
 
     /**
@@ -139,120 +268,40 @@ export default class SPackage extends __SClass {
                 });
 
                 const files = __glob.sync(finalParams.glob[0], {
-                    cwd: finalParams.inDir,
+                    cwd: this.rootDir,
                 });
 
-                const packageRoot = __packageRoot();
-
-                // @ts-ignore
-                let mapedFiles: {
-                    node: Record<string, string>;
-                    browser: Record<string, string>;
-                    default: Record<string, string>;
-                } = {};
-
-                // process each exports
-                files.forEach((fileRelPath) => {
-                    const relPath = `${finalParams.inDir}/${fileRelPath}`.replace(
-                        `${packageRoot}/`,
-                        '',
-                    );
-
-                    for (let [folder, platform] of Object.entries(
-                        finalParams.folderPlatformMap,
-                    )) {
-                        for (let [fold, module] of Object.entries(
-                            finalParams.folderModuleMap,
-                        )) {
-                            if (
-                                `/${relPath}`.includes(`/${fold}/`) &&
-                                `/${relPath}`.includes(`/${folder}/`)
-                            ) {
-                                if (!mapedFiles[platform]) {
-                                    mapedFiles[platform] = {};
-                                }
-                                mapedFiles[platform][module] = `./${relPath}`;
-                            }
-                        }
-                    }
-                });
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[exports]</yellow> Generating new exports object map...`,
-                });
-
-                // @ts-ignore
-                const exportsMap: {
-                    main: string;
-                    module: string;
-                    exports: Record<string, string>;
-                } = {};
-
-                if (Object.keys(mapedFiles).length === 1) {
-                    if (!exportsMap.exports) exportsMap.exports = {};
-                    exportsMap.exports['.'] =
-                        mapedFiles[Object.keys(mapedFiles)[0]];
-                }
-                if (mapedFiles.default) {
-                    if (mapedFiles.default.require) {
-                        exportsMap.main = mapedFiles.default.require;
-                    }
-                    if (mapedFiles.default.import) {
-                        exportsMap.module = mapedFiles.default.import;
-                    }
-                } else if (mapedFiles.node) {
-                    if (mapedFiles.node.require) {
-                        exportsMap.main = mapedFiles.node.require;
-                    }
-                    if (mapedFiles.node.import) {
-                        exportsMap.module = mapedFiles.node.import;
-                    }
-                } else if (mapedFiles.browser) {
-                    if (mapedFiles.browser.require) {
-                        exportsMap.main = mapedFiles.browser.require;
-                    }
-                    if (mapedFiles.browser.import) {
-                        exportsMap.module = mapedFiles.browser.import;
-                    }
-                }
-
-                // updading package json
-                let currentPackageJson = {};
-                try {
-                    currentPackageJson = JSON.parse(
-                        __fs
-                            .readFileSync(`${packageRoot}/package.json`)
-                            .toString(),
-                    );
-                } catch (e) {}
-
-                const newPackageJson = {
-                    ...currentPackageJson,
-                    ...exportsMap,
-                };
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[exports]</yellow> Updating <cyan>package.json</cyan> file with new exports`,
-                });
-
-                JSON.stringify(exportsMap, null, 2)
-                    .split('\n')
-                    .forEach((line) => {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: line,
-                        });
+                if (finalParams.watch) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[exports]</yellow> Watching for exportable files changes...`,
                     });
 
-                // writing new file
-                __fs.writeFileSync(
-                    `${packageRoot}/package.json`,
-                    JSON.stringify(newPackageJson, null, 4),
-                );
+                    const watcher = __chokidar.watch(finalParams.glob, {
+                        cwd: this.rootDir,
+                        ignoreInitial: true,
+                    });
+                    const watcherHandler = (filePath: string) => {
+                        if (!files.includes(filePath)) {
+                            files.push(filePath);
+                        }
+                        const pro = this._exportFiles(files, finalParams);
+                        pipe(pro);
+                    };
+                    watcher.on('add', watcherHandler.bind(this));
+                    watcher.on('change', watcherHandler.bind(this));
+                }
 
-                resolve();
+                // export files
+                if (
+                    !finalParams.watch ||
+                    (finalParams.watch && finalParams.buildInitial)
+                ) {
+                    await pipe(this._exportFiles(files, finalParams));
+                }
+
+                // resolve is not watch
+                !finalParams.watch && resolve();
             },
             {
                 metas: {

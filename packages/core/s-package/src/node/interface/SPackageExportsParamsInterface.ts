@@ -27,12 +27,12 @@ export default class SPackageExportsParamsInterface extends __SInterface {
                 default: __SSugarConfig.get('package.exports.glob'),
                 alias: 'g',
             },
-            inDir: {
+            buildInitial: {
                 description:
-                    'Specify a directory from where to search for files to exports',
-                type: 'String',
-                default: __SSugarConfig.get('package.exports.inDir'),
-                alias: 'i',
+                    'Specify if you want to process to the export at start even with the "watch" parameter to true',
+                type: 'Boolean',
+                default: false,
+                alias: 'b',
             },
             folderModuleMap: {
                 description:

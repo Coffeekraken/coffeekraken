@@ -4,11 +4,8 @@
     "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
     "type": "module",
     "scripts": {
-        "dev": "concurrently \"npm run tsup\"",
-        "tsup": "concurrently \"npm run tsup.js\" \"npm run tsup.node\"",
-        "tsup.js": "tsup 'packages/*/*/src/js/**/*.ts' --format esm,cjs --platform browser --no-splitting --watch",
-        "tsup.node": "tsup 'packages/*/*/src/!(js)/**/*.ts' --format esm,cjs --platform node --no-splitting --watch",
-        "ts": "tsc",
+        "dev": "concurrently \"npm run ts\"",
+        "ts": "./src/node/ts/build.js",
         "ts.watch": "tsc --watch",
         "test": "jest --bail --silent",
         "test.watch": "jest --watch --bail --silent",
@@ -56,6 +53,9 @@
     },
     "globalDependencies": {},
     "devDependencies": {
+        "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/s-typescript-builder": "^2.0.0",
+        "@coffeekraken/s-monorepo": "^2.0.0",
         "@babel/core": "^7.15.8",
         "@babel/preset-env": "^7.15.8",
         "@babel/preset-typescript": "^7.15.0",
@@ -68,5 +68,13 @@
         "jest": "^27.0.6",
         "tsup": "^5.12.1",
         "typescript": "^4.6.3"
-    }
+    },
+    "exports": {
+        ".": {
+            "require": "./packages/core/s-log/dist/pkg/cjs/shared/exports.js",
+            "import": "./packages/core/s-log/dist/pkg/esm/shared/exports.js"
+        }
+    },
+    "main": "./packages/core/s-log/dist/pkg/cjs/shared/exports.js",
+    "module": "./packages/core/s-log/dist/pkg/esm/shared/exports.js"
 }

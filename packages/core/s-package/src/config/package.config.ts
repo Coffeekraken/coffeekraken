@@ -16,32 +16,32 @@ export default function (env, config) {
          */
         manager: 'yarn',
 
+        /**
+         * @name            rootDir
+         * @namespace       config.package.exports
+         * @type            String
+         * @default         [config.storage.package.rootDir]
+         *
+         * Specify a directory from where to search for files to exports using the `glob` config
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        rootDir: '[config.storage.package.rootDir]',
+
         exports: {
             /**
              * @name            glob
              * @namespace       config.package.exports
              * @type            String
-             * @default         ['** /exports.js']
+             * @default         ['dist/** /exports.js']
              *
-             * Specify a glob pattern relative to the "inDir" to specify files you want to exports in your package.json
+             * Specify a glob pattern relative to the "rootDir" to specify files you want to exports in your package.json
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            glob: ['**/exports.js'],
-
-            /**
-             * @name            inDir
-             * @namespace       config.package.exports
-             * @type            String
-             * @default         [config.storage.src.rootDir]
-             *
-             * Specify a directory from where to search for files to exports using the `glob` config
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            inDir: '[config.storage.dist.rootDir]',
+            glob: ['dist/**/exports.js'],
 
             /**
              * @name           folderModuleMap

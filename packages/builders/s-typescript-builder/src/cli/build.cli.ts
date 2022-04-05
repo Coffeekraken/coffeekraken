@@ -1,7 +1,7 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
 import __STypescriptBuilderBuildParamsInterface from '../node/interface/STypescriptBuilderBuildParamsInterface';
-import __STypescriptBuilder from '../node/STypesscriptBuilder';
+import __STypescriptBuilder from '../node/STypescriptBuilder';
 
 export default (stringArgs = '') => {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {

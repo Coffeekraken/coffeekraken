@@ -25,6 +25,7 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __stripDocblocks from '@coffeekraken/sugar/shared/string/stripDocblocks';
 import __urlCompliant from '@coffeekraken/sugar/shared/string/urlCompliant';
 import __fileName from '@coffeekraken/sugar/node/fs/filename';
+import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 
 let _mixinsPaths;
 
@@ -186,6 +187,9 @@ const plugin = (settings: any = {}) => {
     const postProcessorsRegisteredFn: Function[] = [];
 
     async function _loadFolder(folderPath, type: 'mixins' | 'functions') {
+        // process some tokens
+        folderPath = __replaceTokens(folderPath);
+
         const paths = __glob.sync(`${folderPath}/**/*.js`, {
             // cwd: __dirname(),
             cwd: '',

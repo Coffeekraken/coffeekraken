@@ -1,7 +1,6 @@
 import __callsites from 'callsites';
 import __esm from 'esm';
 import { createRequire } from 'module';
-import __isCjs from '../../shared/module/isCjs';
 
 /**
  * @name                require
@@ -24,10 +23,6 @@ import __isCjs from '../../shared/module/isCjs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function _require(pkg: string) {
-    if (__isCjs()) {
-        console.log('DOLKSPDOKJSOPDJ');
-    }
-
     // @ts-ignore
     let filePath = __callsites()[1]
         .getFileName()

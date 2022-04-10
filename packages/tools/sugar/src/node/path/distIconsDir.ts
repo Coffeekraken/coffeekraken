@@ -1,8 +1,6 @@
 // @ts-nocheck
 
-import __require from '../esm/require';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __fs from 'fs-extra';
 /**
  * @name                            distIconsDir
  * @namespace            node.path

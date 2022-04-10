@@ -1,10 +1,9 @@
 // @ts-nocheck
 
-import __writeFileSync from './writeFileSync';
-import __require from '../esm/require';
 import __path from 'path';
 import __uniqid from '../../shared/string/uniqid';
 import __packageTmpDir from '../path/packageTmpDir';
+import __writeFileSync from './writeFileSync';
 
 /**
  * @name        writeTmpFileSync

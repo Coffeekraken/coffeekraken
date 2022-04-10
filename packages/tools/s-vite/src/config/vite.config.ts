@@ -200,14 +200,14 @@ export default function (env, config) {
              * @name          host
              * @namespace     config.vite.server
              * @type          String
-             * @default      127.0.0.1
+             * @default      0.0.0.0
              *
              * Specify the hostname for the vite server
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            host: '127.0.0.1',
+            host: '0.0.0.0',
             /**
              * @name          post
              * @namespace     config.vite.server
@@ -234,28 +234,19 @@ export default function (env, config) {
             hostname:
                 'http://[config.vite.server.host]:[config.vite.server.port]',
             proxy: {
-                // '^[^\\.]+\\.(?=css|js|ts|tsx|jsx)(\\?)?(.+)': {
-                //     target: `http://localhost:3000`,
-                //     changeOrigin: true,
-                //     rewrite: (path) => {
-                //         console.log('33pah', path);
-                //         return path.replace(/\/dist\//, '/src/');
-                //     }
-                // },
-                '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|__vite_ping|index.html).)*$': {
+                '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$': {
                     target: `http://localhost:8080`,
                     changeOrigin: true,
                     // rewrite: (path) => {
                     //     return path.replace(/\/dist\//, '/src/');
-                    // }
+                    // },
                 },
-                '/dist': {
-                    target: `http://localhost:3000`,
+                '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|\\@id|__vite_ping|index.html).)*$': {
+                    target: `http://localhost:8080`,
                     changeOrigin: true,
-                    ws: true,
-                    rewrite: (path) => {
-                        return path.replace(/\/dist\//, '/src/');
-                    },
+                    // rewrite: (path) => {
+                    //     return path.replace(/\/dist\//, '/src/');
+                    // },
                 },
             },
         },

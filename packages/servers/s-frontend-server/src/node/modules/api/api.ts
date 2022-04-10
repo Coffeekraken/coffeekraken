@@ -7,32 +7,36 @@ export default async function api(express, settings, config) {
     // register handler
     config.handlers.api = {
         description: 'Handler that display the api documentation',
-        path: `${__dirname()}/apiHandler`
+        path: `${__dirname()}/apiHandler`,
     };
 
-    const docmap = new __SDocmap();
-    const docmapJson = await docmap.read();
+    // const docmap = new __SDocmap();
+    // const docmapJson = await docmap.read();
 
-    const apiMenu = {};
+    // const apiMenu = {};
 
-    Object.keys(docmapJson.map).forEach((namespace) => {
-        const docmapObj = docmapJson.map[namespace];
+    config.routes[settings.slug ?? '/api/*'] = {
+        handler: 'api',
+    };
 
-        const url = `/api/${namespace}`;
+    // Object.keys(docmapJson.map).forEach((namespace) => {
+    //     const docmapObj = docmapJson.map[namespace];
 
-        __set(apiMenu, namespace, {
-            type: docmapObj.type,
-            name: docmapObj.name,
-            namespace,
-            url,
-            path: docmapObj.path,
-            relPath: docmapObj.relPath,
-        });
+    //     const url = `/api/${namespace}`;
 
-        config.routes[url] = {
-            handler: 'api',
-        };
-    });
+    //     __set(apiMenu, namespace, {
+    //         type: docmapObj.type,
+    //         name: docmapObj.name,
+    //         namespace,
+    //         url,
+    //         path: docmapObj.path,
+    //         relPath: docmapObj.relPath,
+    //     });
+
+    //     config.routes[url] = {
+    //         handler: 'api',
+    //     };
+    // });
 
     return true;
 }

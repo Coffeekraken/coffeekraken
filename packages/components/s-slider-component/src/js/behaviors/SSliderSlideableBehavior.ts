@@ -54,7 +54,6 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
     }
 
     _handleSlide() {
-        console.log('SSS', this.settings);
         __slideable(this.$slider.$slidesWrapper, {
             friction: this.settings.friction,
             direction: this.$slider.props.direction,

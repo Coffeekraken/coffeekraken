@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import __fs from 'fs';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 /**
  * @name           platform
@@ -59,19 +60,16 @@ export default function ({
 
     const vars: string[] = [];
 
-    if (
-        !__fs.readFileSync(
-            `${__dirname()}/platforms/${finalParams.platform}.svg`,
-        )
-    ) {
+    const svgPath = `${__packageRoot(__dirname())}/src/img/platforms/${
+        finalParams.platform
+    }.svg`;
+
+    if (!__fs.existsSync(svgPath)) {
         throw new Error(
             `<red>[s-postcss-sugar-plugin]</red> Sorry but the requested platform "<yellow>${finalParams.platform}</yellow>" does not exists...`,
         );
     }
-    const svgStr = __fs.readFileSync(
-        `${__dirname()}/platforms/${finalParams.platform}.svg`,
-        'utf8',
-    );
+    const svgStr = __fs.readFileSync(svgPath, 'utf8');
 
     vars.push(`
     display: inline-block;

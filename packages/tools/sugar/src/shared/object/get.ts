@@ -34,9 +34,15 @@ function get(obj, path, settings = {}) {
     settings = {
         ...settings,
     };
+
+    if (Array.isArray(path)) {
+        return __get(obj, path, settings);
+    }
+
     if (obj[path] !== undefined) return obj[path];
     if (!path || path === '' || path === '.') return obj;
     path = path.replace(/\[(\w+)\]/g, '.$1');
+    path = path.replace(/\\\./g, '_dot_');
     path = path.replace(/^\./, '');
 
     let potentialPaths = [path.replace(/\?/gm, '')];
@@ -67,15 +73,26 @@ function __get(obj, path, settings = {}) {
     settings = {
         ...settings,
     };
-    if (obj[path] !== undefined) return obj[path];
-    if (!path || path === '' || path === '.') return obj;
-    const a = path
-        .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
-        .map((p) => __unquote(p));
-    let o = obj;
+
+    let o = obj,
+        a;
+
+    if (typeof path === 'string') {
+        if (obj[path] !== undefined) return obj[path];
+        if (!path || path === '' || path === '.') return obj;
+        path = path.split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm);
+    }
+
+    a = [...path].map((p) => {
+        if (typeof p === 'string') return __unquote(p);
+        return p;
+    });
 
     while (a.length) {
-        const n = a.shift().replace(/\?$/, '');
+        let n = a.shift();
+        if (typeof n === 'string') {
+            n = n.replace(/\?$/, '');
+        }
         if (typeof o !== 'object' || !(n in o)) {
             return;
         }

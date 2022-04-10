@@ -5,6 +5,7 @@ import __path from 'path';
 import __fs from 'fs';
 import __chalk from 'chalk';
 import __ts from 'typescript';
+import { v4 as __uuid } from 'uuid';
 
 const _processedPkgs = [];
 
@@ -149,22 +150,14 @@ function processPackage(packageRoot) {
     );
 }
 
-function uuid() {
-    return 'xxxxxxxxxxxxxxxxxxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-        var r = (Math.random() * 16) | 0,
-            v = c == 'x' ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-    });
-}
-
 function processPath(path, platform = 'node') {
     const packageRoot = path.split('/').slice(0, 3).join('/');
     const pathRelToPackageRoot = path.split('/').slice(4).join('/');
     const format = platform === 'node' ? 'cjs' : 'esm';
     const module = platform === 'node' ? 'commonjs' : 'ES2020';
     const outPath = __path.dirname(
-        `${packageRoot}/dist/pkg/%format/${pathRelToPackageRoot}`.replace(
-            '%format',
+        `${packageRoot}/dist/pkg/%moduleSystem/${pathRelToPackageRoot}`.replace(
+            '%moduleSystem',
             format,
         ),
     );
@@ -172,7 +165,7 @@ function processPath(path, platform = 'node') {
 
     // output file
     let outFilePath = `${outPath}/${__path.basename(path)}`
-        .replace('%format', format)
+        .replace('%moduleSystem', format)
         .replace(/\.ts$/, '.js');
     // if (path.includes('/tools/sugar/src')) {
     //     outFilePath = path.replace(/\.ts/, format === 'cjs' ? '.cjs' : '.mjs');
@@ -291,16 +284,16 @@ function processPath(path, platform = 'node') {
     if (!__fs.existsSync(packageJsonOutFolderPath)) {
         __fs.mkdirSync(packageJsonOutFolderPath, { recursive: true });
     }
-    if (!__fs.existsSync(packageJsonOutPath)) {
-        __fs.writeFileSync(
-            packageJsonOutPath,
-            JSON.stringify({
-                name: `@lostInTheDarkNight/${uuid()}`,
-                type: module === 'commonjs' ? 'commonjs' : 'module',
-                private: true,
-            }),
-        );
-    }
+    // if (!__fs.existsSync(packageJsonOutPath)) {
+    __fs.writeFileSync(
+        packageJsonOutPath,
+        JSON.stringify({
+            name: `@coffeekraken/internal-${__uuid()}`,
+            type: module === 'commonjs' ? 'commonjs' : 'module',
+            private: true,
+        }),
+    );
+    // }
 }
 
 // js

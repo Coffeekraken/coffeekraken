@@ -14,6 +14,7 @@ import type { ISConfigEnvObj } from '../../shared/SConfig';
 import __SConfig from '../../shared/SConfig';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
+import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
 
 /**
  * @name                  SConfigFolderAdapter
@@ -129,12 +130,13 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                         scopeFoldersPathArray = [scopeFoldersPathArray];
                     scopeFoldersPathArray = scopeFoldersPathArray.map(
                         (path) => {
-                            return path
-                                .replace(
+                            return __replaceTokens(
+                                path.replace(
                                     '[folderName]',
                                     this.configFolderAdapterSettings.folderName,
-                                )
-                                .replace(/\%format/g, format);
+                                ),
+                            );
+                            // .replace(/\%format/g, format);
                         },
                     );
                 }

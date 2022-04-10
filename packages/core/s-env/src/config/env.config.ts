@@ -14,5 +14,5 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     // @ts-ignore
-    env: process?.env?.NODE_ENV ?? window?.env?.ENV ?? 'dev',
+    env: process?.env?.NODE_ENV ?? window?.env?.ENV ?? 'development',
 };

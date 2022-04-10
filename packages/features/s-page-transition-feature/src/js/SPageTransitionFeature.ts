@@ -10,6 +10,7 @@ export interface ISPageTransitionFeatureProps {
     scrollTop: boolean;
     before: Function;
     after: Function;
+    onError: Function;
 }
 
 /**
@@ -31,12 +32,11 @@ export interface ISPageTransitionFeatureProps {
  *
  * @example         html            Simple click activation
  * <div s-page-transition></div>
- * 
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SPageTransitionFeature extends __SFeature {
-
     constructor(name: string, node: HTMLElement, settings: any) {
         super(
             name,
@@ -53,15 +53,21 @@ export default class SPageTransitionFeature extends __SFeature {
         );
 
         // save arrival state
-        window.history.pushState({
-            html: this.node.innerHTML
-        }, document.title, document.location.href);
+        window.history.pushState(
+            {
+                html: this.node.innerHTML,
+            },
+            document.title,
+            document.location.href,
+        );
 
         // handle popstate
         window.addEventListener('popstate', (e) => {
             if (!e.state?.html) return;
             if (e.state.containerId) {
-                const $elm = document.querySelector(`[s-page-transition-container="${e.state.containerId}"]`);
+                const $elm = document.querySelector(
+                    `[s-page-transition-container="${e.state.containerId}"]`,
+                );
                 if (!$elm) return;
                 $elm.innerHTML = e.state.html;
                 __scrollTo(<HTMLElement>$elm);
@@ -73,42 +79,56 @@ export default class SPageTransitionFeature extends __SFeature {
 
         // listen for "location.href" event
         window.addEventListener('location.href', (e) => {
-            this.transitionTo((<CustomEvent>e).detail, e.target);
-        }); 
+            this.transitionTo(
+                (<CustomEvent>e).detail,
+                e.target,
+            ).catch((e) => {});
+        });
 
         // listen for clicks to prevent default behaviors
-        window.addEventListener('click', (e) => {   
-            const $target = <HTMLElement>e.target;  
-            // @ts-ignore          
-            if ($target.hasAttribute('href') && !$target.getAttribute('href').match(/^https?:\/\//) && !$target.hasAttribute('target')) {
+        window.addEventListener('click', (e) => {
+            const $target = <HTMLElement>e.target;
+            // @ts-ignore
+            if (
+                $target.hasAttribute('href') &&
+                // @ts-ignore
+                !$target.getAttribute('href').match(/^https?:\/\//) &&
+                !$target.hasAttribute('target')
+            ) {
                 e.preventDefault();
-                this.transitionTo(<string>$target.getAttribute('href'), $target);
+                this.transitionTo(
+                    <string>$target.getAttribute('href'),
+                    $target,
+                ).catch((e) => {});
             } else {
                 const $upHrefElm = __querySelectorUp($target, 'a[href]');
                 if ($upHrefElm) {
                     e.preventDefault();
-                    this.transitionTo(<string>$upHrefElm.getAttribute('href'), $upHrefElm);
+                    this.transitionTo(
+                        <string>$upHrefElm.getAttribute('href'),
+                        $upHrefElm,
+                    ).catch((e) => {});
                 }
             }
         });
-
     }
     mount() {}
     transitionTo(url: string, $source): Promise<void> {
         return new Promise(async (resolve, reject) => {
-
             // dispatch an event
-            $source.dispatchEvent(new CustomEvent('page-transition-start', {
-                detail: {
-                    url
-                },
-                bubbles: true
-            }));
+            $source.dispatchEvent(
+                new CustomEvent('page-transition-start', {
+                    detail: {
+                        url,
+                    },
+                    bubbles: true,
+                }),
+            );
 
             // add classes
             document.body.classList.add('s-page-transition');
             document.body.classList.add('loading');
-            document.body.setAttribute('loading', true);
+            document.body.setAttribute('loading', 'true');
             $source.classList.add('s-page-transition-source');
             $source.classList.add('loading');
             $source.setAttribute('loading', true);
@@ -116,27 +136,52 @@ export default class SPageTransitionFeature extends __SFeature {
             // before callback
             this.props.before?.({
                 url,
-                $source
+                $source,
             });
 
             const request = new __SRequest({
-                url
+                url,
             });
-            const response = await request.send();
-            console.log(response);
+            let response;
+            try {
+                response = await request.send();
+            } catch (e) {
+                response = e;
+            }
+
+            // handle error
+            if (!response || response.status !== 200) {
+                // after process with success
+                this._onAfter($source, response.status);
+                // stop here and reject
+                return reject(response);
+            }
+
             const domParser = new DOMParser();
-            const dom = domParser.parseFromString(response.data ?? '', 'text/html');
-            
+            const dom = domParser.parseFromString(
+                response.data ?? '',
+                'text/html',
+            );
+
             // get the main containers in each "pages"
-            const $inPageContainer = document.querySelector('[s-page-transition]');
+            const $inPageContainer = document.querySelector(
+                '[s-page-transition]',
+            );
             const $container = dom.querySelector('[s-page-transition]');
-            
+
             // get the scoped containers in each "pages"
-            const $inPageScopedContainer = document.querySelector('[s-page-transition-container]');
-            const $scopedContainer = dom.querySelector('[s-page-transition-container]');
-            
+            const $inPageScopedContainer = document.querySelector(
+                '[s-page-transition-container]',
+            );
+            const $scopedContainer = dom.querySelector(
+                '[s-page-transition-container]',
+            );
+
             // if no container in one of the page, reject
             if (!$container || !$inPageContainer) {
+                // after process with success
+                this._onAfter($source, 500);
+                // reject and stop here
                 return reject();
             }
 
@@ -164,10 +209,19 @@ export default class SPageTransitionFeature extends __SFeature {
 
             // if we have scoped containers in each "pages" and they match each other
             // we remplace only this content
-            if ($inPageScopedContainer && $scopedContainer && $inPageScopedContainer?.getAttribute('s-page-transition-container') === $scopedContainer.getAttribute('s-page-transition-container')) {
+            if (
+                $inPageScopedContainer &&
+                $scopedContainer &&
+                $inPageScopedContainer?.getAttribute(
+                    's-page-transition-container',
+                ) ===
+                    $scopedContainer.getAttribute('s-page-transition-container')
+            ) {
                 $inPageScopedContainer.innerHTML = $scopedContainer.innerHTML;
                 newState.html = $scopedContainer.innerHTML;
-                newState.containerId = $scopedContainer.getAttribute('s-page-transition-container');
+                newState.containerId = $scopedContainer.getAttribute(
+                    's-page-transition-container',
+                );
             } else {
                 // otherwise, we replace the main container
                 $inPageContainer.innerHTML = $container.innerHTML;
@@ -175,37 +229,67 @@ export default class SPageTransitionFeature extends __SFeature {
             }
 
             // push a new state
-            window.history.pushState(newState,document.title, url);
-            
+            window.history.pushState(newState, document.title, url);
+
             // scrolltop if needed
             if (this.props.scrollTop) {
                 // @ts-ignore
                 __scrollTo($inPageScopedContainer ?? $inPageContainer);
             }
 
-            // remove class on body
-            document.body.classList.remove('s-page-transition');
-            document.body.classList.remove('loading');
-            document.body.removeAttribute('loading');
-            $source.classList.remove('s-page-transition-source');
-            $source.classList.remove('loading');
-            $source.removeAttribute('loading');
+            // after process with success
+            this._onAfter($source, 200);
 
-            // before callback
-            this.props.after?.({
-                url,
-                $source
-            });
-
-            // dispatch an event
-            $source.dispatchEvent(new CustomEvent('page-transition-end', {
-                detail: {
-                    url
-                },
-                bubbles: true
-            }));
-
+            // resolve transition
+            resolve();
         });
+    }
+    /**
+     * This function take care of handling the after transition process.
+     * The code passed allows to know if the transition was a success (200) or an error (404|500)
+     */
+    _onAfter($source: HTMLElement, code: number) {
+        // remove class on body
+        document.body.classList.remove('s-page-transition');
+        document.body.classList.remove('loading');
+        document.body.removeAttribute('loading');
+        $source.classList.remove('s-page-transition-source');
+        $source.classList.remove('loading');
+        $source.removeAttribute('loading');
+
+        // before callback
+        this.props.after?.({
+            $source,
+        });
+
+        if (code !== 200) {
+            // before callback
+            this.props.onError?.({
+                $source,
+            });
+        }
+
+        // dispatch an event
+        $source.dispatchEvent(
+            new CustomEvent('page-transition-end', {
+                detail: {
+                    $source,
+                },
+                bubbles: true,
+            }),
+        );
+
+        // dispatch an error event
+        if (code !== 200) {
+            $source.dispatchEvent(
+                new CustomEvent('page-transition-error', {
+                    detail: {
+                        $source,
+                    },
+                    bubbles: true,
+                }),
+            );
+        }
     }
 }
 

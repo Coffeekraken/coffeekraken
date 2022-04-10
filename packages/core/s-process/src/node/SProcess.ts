@@ -3,10 +3,10 @@ import __SEventEmitter, {
     ISEventEmitter,
     ISEventEmitterConstructorSettings,
 } from '@coffeekraken/s-event-emitter';
-import __fs from 'fs';
 import type { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
@@ -16,6 +16,7 @@ import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
+import __fs from 'fs';
 import __path from 'path';
 import __stackTrace from 'stack-trace';
 import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
@@ -29,9 +30,6 @@ import {
     ISProcessResultObject,
     ISProcessSettings,
 } from './ISProcess';
-import __require from '@coffeekraken/sugar/node/esm/require';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __SFeature from '@coffeekraken/s-feature';
 
 /**
  * @name                SProcess

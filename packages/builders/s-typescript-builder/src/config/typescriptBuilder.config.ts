@@ -32,15 +32,15 @@ export default function (env, config) {
          * @name            outDir
          * @namespace       config.typescriptBuilder
          * @type            String
-         * @default         [config.storage.dist.rootDir]/pkg/%format
+         * @default         [config.storage.dist.rootDir]/pkg/%moduleSystem
          *
          * Specify a directory where you want to put the builded files.
-         * You can use the %format and %platform token in your value
+         * You can use the %moduleSystem and %platform token in your value
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        outDir: '[config.storage.dist.rootDir]/pkg/%format',
+        outDir: '[config.storage.dist.rootDir]/pkg/%moduleSystem',
 
         /**
          * @name            formats

@@ -8,15 +8,13 @@ import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __glob from 'glob';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
 import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsInterface';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __require from '@coffeekraken/sugar/node/esm/require';
 
 /**
  * @name          SViewRenderer

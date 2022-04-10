@@ -29,7 +29,7 @@ if (!__isNode() && !window.env) {
  * this.get('something');
  * SEnv.is('prod');
  * SEnv.is('production');
- * SEnv.is('dev');
+ * SEnv.is('development');
  * // etc...
  *
  * @since           2.0.0
@@ -54,16 +54,16 @@ export default class SEnv {
         if (this._env) return this._env;
         if (__isNode()) {
             this._env = {
-                ENVIRONMENT: process.env.NODE_ENV ?? 'dev',
-                ENV: process.env.NODE_ENV ?? 'dev',
+                ENVIRONMENT: process.env.NODE_ENV ?? 'development',
+                ENV: process.env.NODE_ENV ?? 'development',
                 PLATFORM: 'node',
             };
         } else {
             this._env = {
                 // @ts-ignore
-                ENVIRONMENT: window?.env?.ENV ?? 'dev',
+                ENVIRONMENT: window?.env?.ENV ?? 'development',
                 // @ts-ignore
-                ENV: window?.env?.ENV ?? 'dev',
+                ENV: window?.env?.ENV ?? 'development',
                 PLATFORM: 'browser',
             };
         }
@@ -87,9 +87,17 @@ export default class SEnv {
     static is(env: string): boolean {
         env = env.toLowerCase();
         if (env === 'dev' || env === 'development') {
-            if (this.get('environment') === 'dev' || this.get('environment') === 'development') return true;
+            if (
+                this.get('environment') === 'dev' ||
+                this.get('environment') === 'development'
+            )
+                return true;
         } else if (env === 'prod' || env === 'production') {
-            if (this.get('environment') === 'prod' || this.get('environment') === 'production') return true;
+            if (
+                this.get('environment') === 'prod' ||
+                this.get('environment') === 'production'
+            )
+                return true;
         } else {
             return this.get('environment') === env;
         }

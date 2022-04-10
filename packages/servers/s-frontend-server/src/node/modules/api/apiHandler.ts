@@ -57,11 +57,15 @@ export default function api(req, res, settings = {}) {
             docblock: {
                 renderMarkdown: true,
                 filter: (docblock) => {
-                    if (__namespaceCompliant(`${docblock.namespace}.${docblock.name}`) === namespace) {
+                    if (
+                        __namespaceCompliant(
+                            `${docblock.namespace}.${docblock.name}`,
+                        ) === namespace
+                    ) {
                         return true;
                     }
                     return false;
-                }
+                },
             },
         });
         await docblocksInstance.parse();

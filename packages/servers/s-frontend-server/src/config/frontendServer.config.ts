@@ -58,7 +58,11 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         staticDirs: {
-            '/dist': env.env === 'production' ?  `[config.storage.dist.rootDir]` : `[config.storage.src.rootDir]`,
+            '/dist':
+                env.env === 'production'
+                    ? `[config.storage.dist.rootDir]`
+                    : `[config.storage.src.rootDir]`,
+            // '/.local': `[config.storage.package.localDir]`,
             // '/cache': `[config.storage.package.cacheDir]`,
             // '/src': `[config.storage.src.rootDir]`,
         },
@@ -326,7 +330,8 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description: 'This module gives you access to a "docmap" object in the views',
+                description:
+                    'This module gives you access to a "docmap" object in the views',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.docmap
@@ -342,7 +347,7 @@ export default function (env, config) {
                 settings: {},
             },
             redirect: {
-                 /**
+                /**
                  * @name            description
                  * @namespace       config.frontendServer.modules.redirect
                  * @type            String
@@ -352,7 +357,8 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description: 'This module allows you to make redirections depending on requested path',
+                description:
+                    'This module allows you to make redirections depending on requested path',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.redirect
@@ -368,7 +374,7 @@ export default function (env, config) {
                 settings: {},
             },
             styleguide: {
-                 /**
+                /**
                  * @name            description
                  * @namespace       config.frontendServer.modules.styleguide
                  * @type            String
@@ -378,7 +384,8 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description: 'This module handle the /styleguide/... views display',
+                description:
+                    'This module handle the /styleguide/... views display',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.styleguide
@@ -394,7 +401,7 @@ export default function (env, config) {
                 settings: {},
             },
             config: {
-                 /**
+                /**
                  * @name            description
                  * @namespace       config.frontendServer.modules.config
                  * @type            String
@@ -404,7 +411,8 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description: 'This module gives you access to a "config" and a "configFiles" object into the views',
+                description:
+                    'This module gives you access to a "config" and a "configFiles" object into the views',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.config
@@ -420,7 +428,7 @@ export default function (env, config) {
                 settings: {},
             },
             frontspec: {
-                 /**
+                /**
                  * @name            description
                  * @namespace       config.frontendServer.modules.frontspec
                  * @type            String
@@ -430,7 +438,8 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description: 'This module gives you access to a "frontspec" object into the views',
+                description:
+                    'This module gives you access to a "frontspec" object into the views',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.frontspec
@@ -632,7 +641,7 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/handlers/docmap`,
-            }
+            },
         },
     };
 }

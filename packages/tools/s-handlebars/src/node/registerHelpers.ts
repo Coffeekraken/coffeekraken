@@ -1,6 +1,3 @@
-import __fs from 'fs';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __require from '@coffeekraken/sugar/node/esm/require';
 import * as __helpers from './helpers/index';
 
 /**

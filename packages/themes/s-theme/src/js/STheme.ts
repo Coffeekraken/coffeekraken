@@ -47,7 +47,7 @@ export default class STheme extends __SThemeBase {
         $context = document.querySelector('html'),
     ): STheme {
         __clearTransmations(document.body, {
-            timeout: 100
+            timeout: 100,
         });
 
         if (theme && variant) {
@@ -75,7 +75,10 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static setThemeVariant(variant: string, $context = document.querySelector('html')): STheme {
+    static setThemeVariant(
+        variant: string,
+        $context = document.querySelector('html'),
+    ): STheme {
         return this.setTheme(undefined, variant, $context);
     }
 
@@ -92,32 +95,38 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getCurrentTheme($context = document.body): STheme {
-
         const theme = __SSugarConfig.get('theme.theme');
         const variant = __SSugarConfig.get('theme.variant');
-        
+
         if (!$context.hasAttribute('theme')) {
             return <STheme>this.getTheme(theme, variant);
         }
-        
+
         let attr = $context.getAttribute('theme') ?? '',
-        parts = attr.split('-').map(l => l.trim());
+            parts = attr.split('-').map((l) => l.trim());
 
         if (parts.length === 2) {
             return <STheme>this.getTheme(parts[0], parts[1]);
         }
-        
+
         const themes = __SSugarConfig.get('theme.themes');
         for (let [key, value] of Object.entries(themes)) {
-            if (key === `${parts[0]}-${variant}` || key === `${theme}-${parts[0]}`) {
-                const p = key.split('-').map(l => l.trim()),
-                    t = p[0], v = p[1];
-                console.log('AA', t, v);
+            if (
+                key === `${parts[0]}-${variant}` ||
+                key === `${theme}-${parts[0]}`
+            ) {
+                const p = key.split('-').map((l) => l.trim()),
+                    t = p[0],
+                    v = p[1];
                 return <STheme>this.getTheme(t, v);
             }
         }
 
-        throw new Error(`The requested current theme with the "theme" attribute "${$context.getAttribute('theme')}" on the context "${$context}" does not exists...`);
+        throw new Error(
+            `The requested current theme with the "theme" attribute "${$context.getAttribute(
+                'theme',
+            )}" on the context "${$context}" does not exists...`,
+        );
     }
 
     /**
@@ -147,7 +156,7 @@ export default class STheme extends __SThemeBase {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static applyCurrentColor(color: string,  $context = document.body): void {
+    static applyCurrentColor(color: string, $context = document.body): void {
         const vars = this.remapCssColor('current', color);
         for (let [key, value] of Object.entries(vars.properties)) {
             // @ts-ignore
@@ -199,7 +208,11 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    getColor(name: string, variant?: string, $context = document.body): __SColor {
+    getColor(
+        name: string,
+        variant?: string,
+        $context = document.body,
+    ): __SColor {
         const $elm = document.createElement('p');
         $elm.classList.add(`s-bg--${name}${variant ? `-${variant}` : ''}`);
         const $wrapper = document.createElement('div');

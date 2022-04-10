@@ -1,25 +1,22 @@
 import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
+import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __resolvePackagePath from '@coffeekraken/sugar/node/esm/resolvePackagePath';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SLog from '@coffeekraken/s-log';
 import __csso from 'csso';
-import __path from 'path';
 import __fs from 'fs';
-import __SPostcssBuilderBuildParamsInterface from './interface/SPostcssBuilderBuildParamsInterface';
+import __path from 'path';
 import __postcss from 'postcss';
 import { PurgeCSS } from 'purgecss';
-import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
-import __resolvePackagePath from '@coffeekraken/sugar/node/esm/resolvePackagePath';
-import __require from '@coffeekraken/sugar/node/esm/require';
-import __SDuration from '@coffeekraken/s-duration';
-import __extractCssClassesNames from '@coffeekraken/sugar/shared/html/extractCssClassesNames';
-import __purgeCssFromHtml from 'purgecss-from-html';
+import __SPostcssBuilderBuildParamsInterface from './interface/SPostcssBuilderBuildParamsInterface';
 
 /**
  * @name                SPostcssBuilder

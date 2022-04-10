@@ -19,9 +19,9 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 //     RenderPass,
 // } from 'postprocessing';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
-import * as THREE from 'three';
 import { html } from 'lit';
-import __perlin from './lib/perlinNoise';
+import * as THREE from 'three';
+// import __perlin from './lib/perlinNoise';
 // import { RGBELoader } from './lib/RGBELoader';
 import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
 import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
@@ -55,9 +55,13 @@ export default class CKBlob extends __SLitComponent {
 
     _start = Date.now();
 
-    _perlin = __perlin();
+    // _perlin = __perlin();
 
-    _isDark = document.querySelector('html').getAttribute('theme')?.toString().includes('dark');
+    _isDark = document
+        .querySelector('html')
+        .getAttribute('theme')
+        ?.toString()
+        .includes('dark');
 
     _postprocessing = {};
 
@@ -103,7 +107,7 @@ export default class CKBlob extends __SLitComponent {
         // this._renderer.setClearColor(0x000000, 0);
         this._renderer.setRenderTarget(this._renderTarget);
         this._renderer.shadowMap.enabled = true;
-        this._renderer.shadowMap.type = THREE.PCFSoftShadowMap
+        this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         // this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         // this._renderer.toneMapping = THREE.ReinhardToneMapping;
         this.querySelector('.ck-blob').appendChild(this._renderer.domElement);
@@ -145,7 +149,7 @@ export default class CKBlob extends __SLitComponent {
         //Create a plane that receives shadows (but does not cast them)
         const planeGeometry = new THREE.PlaneGeometry(20, 20, 32, 32);
         const planeMaterial = new THREE.ShadowMaterial({
-            opacity: this._isDark ? .2 : .05,
+            opacity: this._isDark ? 0.2 : 0.05,
             // opacity: 1,
             // color: 0xff0000
         });
@@ -182,7 +186,7 @@ export default class CKBlob extends __SLitComponent {
         this._planePoints = this.createPlanePoints(0x212728);
 
         this._planePointsLight = this.createPlanePoints(0x212728, 1, '6.0');
-            this._planePointsLight.rotation.set(Math.PI / 2, 0, Math.PI / 9);
+        this._planePointsLight.rotation.set(Math.PI / 2, 0, Math.PI / 9);
 
         // this._pointSpheres = [pointsSphere1];
 
@@ -207,43 +211,36 @@ export default class CKBlob extends __SLitComponent {
             this._scene.updateMatrixWorld();
         }, 50);
 
-        this._scene.traverse( function( child ) { 
-            if ( child.isMesh ) {
+        this._scene.traverse(function (child) {
+            if (child.isMesh) {
                 child.castShadow = true;
                 child.receiveShadow = true;
             }
         });
 
-
         this.animate();
     }
 
     _updatePlaneWave(object) {
-
         var pos = object.geometry.attributes.position;
-        let center = new THREE.Vector3(0,0,0);
+        let center = new THREE.Vector3(0, 0, 0);
         var vec3 = new THREE.Vector3(); // for re-use
-        
-        function wavesBuffer( waveSize, magnitude ){
-            
-            const theTime = performance.now() * .001;
-            for ( var i = 0, l = pos.count; i < l; i ++ ) {
 
+        function wavesBuffer(waveSize, magnitude) {
+            const theTime = performance.now() * 0.001;
+            for (var i = 0, l = pos.count; i < l; i++) {
                 vec3.fromBufferAttribute(pos, i);
                 vec3.sub(center);
-                
-                var z = Math.sin( vec3.length() /- waveSize + (theTime)) * magnitude;
-            
+
+                var z =
+                    Math.sin(vec3.length() / -waveSize + theTime) * magnitude;
 
                 pos.setZ(i, z);
-
             }
-            pos.needsUpdate = true
-
+            pos.needsUpdate = true;
         }
 
-        wavesBuffer(2, .8);
-
+        wavesBuffer(2, 0.8);
     }
 
     initPostprocessing() {
@@ -280,11 +277,15 @@ export default class CKBlob extends __SLitComponent {
         this._grains = [];
 
         const yellowMaterial = await this.createGrainMaterial(
-            `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/grain-yellow.jpg`
+            `${__SSugarConfig.get(
+                'serve.img.url',
+            )}/3d/coffeeGrain/grain-yellow.jpg`,
         );
 
         const purpleMaterial = await this.createGrainMaterial(
-            `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/grain-purple.jpg`
+            `${__SSugarConfig.get(
+                'serve.img.url',
+            )}/3d/coffeeGrain/grain-purple.jpg`,
         );
 
         const materials = [yellowMaterial, purpleMaterial];
@@ -351,14 +352,20 @@ export default class CKBlob extends __SLitComponent {
         let texture;
         let matSettings;
         if (this._isDark) {
-            texture = await this.loadTexture(`${__SSugarConfig.get('serve.img.url')}/3d/ck-texture.jpg`);
+            texture = await this.loadTexture(
+                `${__SSugarConfig.get('serve.img.url')}/3d/ck-texture.jpg`,
+            );
             matSettings = {
                 metalness: 0,
                 roughness: 0.6,
                 color: 0xffffff,
             };
         } else {
-            texture = await this.loadTexture(`${__SSugarConfig.get('serve.img.url')}/3d/ck-texture-light.jpg`);
+            texture = await this.loadTexture(
+                `${__SSugarConfig.get(
+                    'serve.img.url',
+                )}/3d/ck-texture-light.jpg`,
+            );
             matSettings = {
                 // refractionRatio: 0.2,
                 // flatShading: true,
@@ -398,14 +405,13 @@ export default class CKBlob extends __SLitComponent {
         const plane = new THREE.Mesh(geom, ballMat);
 
         var pos = plane.geometry.attributes.position;
-        let center = new THREE.Vector3(0,0,0);
+        let center = new THREE.Vector3(0, 0, 0);
 
         for (var i = 0; i < numVertices; i++) {
-
             vec3.fromBufferAttribute(pos, i);
             vec3.sub(center);
             const length = 12;
-            let alpha = 1 / length * (length - vec3.length());
+            let alpha = (1 / length) * (length - vec3.length());
 
             if (alphaVariation) {
                 alpha = 0 + Math.random() / 3;
@@ -425,7 +431,7 @@ export default class CKBlob extends __SLitComponent {
         gl_PointSize = ${pointSize};
         gl_Position = projectionMatrix * mvPosition;
         }`,
-                fragmentShader = `uniform vec3 color;
+            fragmentShader = `uniform vec3 color;
         varying float vAlpha;
 
         void main() {
@@ -439,7 +445,9 @@ export default class CKBlob extends __SLitComponent {
         // point cloud material
         var shaderMaterial = new THREE.ShaderMaterial({
             uniforms: {
-                color: { value: new THREE.Color(this._isDark ? color : 0xE7E7E7) },
+                color: {
+                    value: new THREE.Color(this._isDark ? color : 0xe7e7e7),
+                },
             },
             vertexShader,
             fragmentShader,
@@ -451,7 +459,7 @@ export default class CKBlob extends __SLitComponent {
         cloud._object = plane;
         cloud.rotation.set(Math.PI / 2, 0, 0);
         cloud.position.set(0, -10, 0);
-        cloud.scale.set(2,2,1);
+        cloud.scale.set(2, 2, 1);
 
         return cloud;
     }
@@ -551,7 +559,9 @@ export default class CKBlob extends __SLitComponent {
         return new Promise(async (resolve) => {
             const texture = await this.loadTexture(texturePath);
             const bumpMap = await this.loadTexture(
-                `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/coffeeGrainBumpMap.jpg`,
+                `${__SSugarConfig.get(
+                    'serve.img.url',
+                )}/3d/coffeeGrain/coffeeGrainBumpMap.jpg`,
             );
 
             let grainMat = new THREE.MeshStandardMaterial({
@@ -575,7 +585,9 @@ export default class CKBlob extends __SLitComponent {
     loadCoffeeGrain() {
         return new Promise((resolve) => {
             new OBJLoader().load(
-                `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/coffeeGrain.obj`,
+                `${__SSugarConfig.get(
+                    'serve.img.url',
+                )}/3d/coffeeGrain/coffeeGrain.obj`,
                 (object) => {
                     object.castShadow = true;
                     object.scale.set(0.01, 0.01, 0.01);
@@ -586,33 +598,33 @@ export default class CKBlob extends __SLitComponent {
             );
         });
     }
-    updateGeometryOf(object, k = 0.6, amount = 0.0005) {
-        if (object._object) object = object._object;
+    // updateGeometryOf(object, k = 0.6, amount = 0.0005) {
+    //     if (object._object) object = object._object;
 
-        var time = performance.now() * amount;
-        var positions = object.geometry.attributes.position.array;
-        for (var i = 0; i < positions.length; i += 3) {
-            const v = new THREE.Vector3(
-                positions[i],
-                positions[i + 1],
-                positions[i + 2],
-            );
+    //     var time = performance.now() * amount;
+    //     var positions = object.geometry.attributes.position.array;
+    //     for (var i = 0; i < positions.length; i += 3) {
+    //         const v = new THREE.Vector3(
+    //             positions[i],
+    //             positions[i + 1],
+    //             positions[i + 2],
+    //         );
 
-            v.normalize().multiplyScalar(
-                1 +
-                    100 *
-                        this._perlin.perlin3(v.x * k + time, v.y * k, v.z * k),
-            );
+    //         v.normalize().multiplyScalar(
+    //             1 +
+    //                 100 *
+    //                     this._perlin.perlin3(v.x * k + time, v.y * k, v.z * k),
+    //         );
 
-            positions[i] = v.x;
-            positions[i + 1] = v.y;
-            positions[i + 2] = v.z;
-        }
+    //         positions[i] = v.x;
+    //         positions[i + 1] = v.y;
+    //         positions[i + 2] = v.z;
+    //     }
 
-        object.geometry.computeVertexNormals();
-        object.geometry.normalsNeedUpdate = true;
-        object.geometry.verticesNeedUpdate = true;
-    }
+    //     object.geometry.computeVertexNormals();
+    //     object.geometry.normalsNeedUpdate = true;
+    //     object.geometry.verticesNeedUpdate = true;
+    // }
     loadEnvMap() {
         return new Promise((resolve) => {
             let envmaploader = new THREE.PMREMGenerator(this._renderer);

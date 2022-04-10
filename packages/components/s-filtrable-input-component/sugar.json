@@ -3,7 +3,7 @@
     "config": {
         "folders": [
             {
-                "path": "./dist/pkg/%format/config"
+                "path": "./dist/pkg/%moduleSystem/config"
             }
         ]
     },
@@ -11,7 +11,7 @@
         "folders": {
             "mixins": [
                 {
-                    "path": "./dist/pkg/%format/node/postcss/mixins"
+                    "path": "./dist/pkg/%moduleSystem/node/postcss/mixins"
                 }
             ]
         }

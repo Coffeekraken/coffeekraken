@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __fs from 'fs';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 /**
  * @name           classes
@@ -54,7 +55,9 @@ export default function ({
     };
 
     // list all the available platforms in the folder
-    const files = __fs.readdirSync(`${__dirname()}/platforms`);
+    const files = __fs.readdirSync(
+        `${__packageRoot(__dirname())}/src/img/platforms`,
+    );
 
     const vars = new CssVars();
 

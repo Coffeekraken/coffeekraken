@@ -105,7 +105,9 @@ export default class CkSettings extends __SLitComponent {
                                 <input
                                     type="text"
                                     class="s-input"
-                                    value="${this._theme.getColor('main').toHex()}"
+                                    value="${this._theme
+                                        .getColor('main')
+                                        .toHex()}"
                                 />
                             </s-color-picker>
                         </label>

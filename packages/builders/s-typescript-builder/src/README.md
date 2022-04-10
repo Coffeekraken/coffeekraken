@@ -19,7 +19,7 @@
 The main purpose of this package is to transpile your typescript easily with features like multiple formats (esm,cjs), etc...
 
 1. **Multiple formats (cjs,esm)**
-2. **Different output folders using the `%format` and `%platform` token in the `outDir`**
+2. **Different output folders using the `%moduleSystem` and `%platform` token in the `outDir`**
 3. **Watch capabilities to work live on your codebase**
 
 ## Usage

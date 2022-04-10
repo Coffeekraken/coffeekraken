@@ -1,13 +1,13 @@
 import __SClass from '@coffeekraken/s-class';
+import __SPromise from '@coffeekraken/s-promise';
+import __require from '@coffeekraken/sugar/node/esm/require';
+import __isPath from '@coffeekraken/sugar/node/fs/isPath';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+// import __markdown from './markdown/index';
+import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import type { ISDocblockBlock } from './SDocblockBlock';
 import __SDocblockBlock from './SDocblockBlock';
-// import __markdown from './markdown/index';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __isPath from '@coffeekraken/sugar/node/fs/isPath';
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
-import __require from '@coffeekraken/sugar/node/esm/require';
-import __SPromise from '@coffeekraken/s-promise';
 
 /**
  *

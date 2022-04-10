@@ -32,16 +32,47 @@ export default class SRefocusFeatureInterface extends __SInterface {
                 values: ['event:eventName', 'anchor', 'history'],
                 default: [],
             },
-            scrollToSettings: {
-                description: 'Specify some `scrollTo` settings to override the default ones',
-                type: "IScrollToSettings",
-                default: {}
-            },
             timeout: {
-                description: 'Specify a timeout to wait before refocus the element',
+                description:
+                    'Specify a timeout to wait before refocus the element',
                 type: 'Number',
                 default: 500,
-            }
+            },
+            duration: {
+                description: 'Specify the duration of the refocus animation',
+                type: 'Number',
+            },
+            easing: {
+                description:
+                    'Specify the easing function of the refocus animation',
+                type: 'Function',
+            },
+            offset: {
+                description:
+                    'Specify the offset of the refocus animation in px',
+                type: 'Number',
+            },
+            offsetX: {
+                description:
+                    'Specify the offset x of the refocus animation in px',
+                type: 'Number',
+            },
+            offsetY: {
+                description:
+                    'Specify the offset y of the refocus animation in px',
+                type: 'Number',
+            },
+            align: {
+                description: 'Specify the alignment of the refocus animation',
+                type: 'String',
+                values: ['start', 'center', 'end'],
+            },
+            justify: {
+                description:
+                    'Specify the justification of the refocus animation',
+                type: 'String',
+                values: ['start', 'center', 'end'],
+            },
         };
     }
 }

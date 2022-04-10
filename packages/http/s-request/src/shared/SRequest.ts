@@ -9,6 +9,7 @@ import __convert from '@coffeekraken/sugar/shared/time/convert';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SClass from '@coffeekraken/s-class';
 import __SRequestParamsInterface from './interface/SRequestParamsInterface';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name 		                    SRequest
@@ -71,12 +72,12 @@ export interface ISRequestAxiosResonse {
 }
 
 export interface ISRequestResponse {
-   status: number;
+    status: number;
     statusText: string;
     data: any;
     count: number;
-    axiosResponse: ISRequestAxiosResonse,
-    axiosResponses: ISRequestAxiosResonse[], 
+    axiosResponse: ISRequestAxiosResonse;
+    axiosResponses: ISRequestAxiosResonse[];
 }
 
 export default class SRequest extends __SClass {
@@ -135,7 +136,10 @@ export default class SRequest extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(params: Partial<ISRequestParams>, settings?: Partial<ISRequestCtorSettings>) {
+    constructor(
+        params: Partial<ISRequestParams>,
+        settings?: Partial<ISRequestCtorSettings>,
+    ) {
         super(
             __deepMerge(
                 {
@@ -146,11 +150,13 @@ export default class SRequest extends __SClass {
         );
 
         // if the request is not an SRequestConfig, create it
-        this._defaultRequestParams = __SRequestParamsInterface.apply(params ?? {});
+        this._defaultRequestParams = __SRequestParamsInterface.apply(
+            params ?? {},
+        );
     }
 
     /**
-     * @name                      _onSuccess
+     * @name                      _formatSuccessResponse
      * @type                      Function
      * @private
      *
@@ -160,7 +166,7 @@ export default class SRequest extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _onSuccess(response) {
+    _formatSuccessResponse(response) {
         // init the final response
         let finalResponse = response.data;
 
@@ -190,10 +196,10 @@ export default class SRequest extends __SClass {
                 }
             }
         }
-        
+
         try {
             finalResponse = JSON.parse(response.data);
-        } catch(e) {}
+        } catch (e) {}
 
         // save the processed data in the response object
         response.data = finalResponse;
@@ -206,22 +212,22 @@ export default class SRequest extends __SClass {
         // check if it was the last request or not
         if (this._requestsCount >= this._currentRequestSettings.sendCount) {
             // resolve the request session
-            this._resolve({
+            return {
                 status: lastResponse.status,
                 statusText: lastResponse.statusText,
                 data: lastResponse.data,
                 count: this._responsesArray.length,
                 axiosResponse: lastResponse,
                 axiosResponses: this._responsesArray,
-            });
+            };
         } else {
             // send a new request
-            this._send();
+            return this.send();
         }
     }
 
     /**
-     * @name                      _onError
+     * @name                      _formatErrorResponse
      * @type                      Function
      * @private
      *
@@ -231,9 +237,34 @@ export default class SRequest extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _onError(error) {
+    _formatErrorResponse(error) {
+        const lastResponse = this._responsesArray.slice(-1)[0];
+
+        const data = {
+            // status: lastResponse.code ?? 404,
+            // statusText: lastResponse.name,
+            // data: lastResponse.data,
+            count: this._responsesArray.length,
+            axiosResponse: lastResponse,
+            axiosResponses: this._responsesArray,
+        };
+
+        if (error.response) {
+            data.status = error.response.status;
+            data.statusText = error.response.statusText;
+            data.data = error.response.data;
+        } else if (error.request) {
+            data.status = 404;
+            data.statusText = 'Not Found';
+            data.data = null;
+        } else {
+            data.status = 404;
+            data.statusText = 'Not Found';
+            data.data = error.message;
+        }
+
         // something has gone wrong with the request(s) so reject the session
-        this._reject(error);
+        return data;
     }
 
     /**
@@ -248,31 +279,42 @@ export default class SRequest extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _send(requestSettings = {}) {
-        // update request count
-        this._requestsCount++;
+        return new Promise((resolve, reject) => {
+            // update request count
+            this._requestsCount++;
 
-        // process request settings
-        requestSettings = __deepMerge(
-            this._defaultRequestParams,
-            requestSettings,
-            {
-                sendCount: 0
-            }
-        );
-        if (requestSettings.beforeSend) {
-            requestSettings = requestSettings.beforeSend(
+            // process request settings
+            requestSettings = __deepMerge(
+                this._defaultRequestParams,
                 requestSettings,
-                this._requestsCount,
+                {
+                    sendCount: 0,
+                },
             );
-        }
+            if (requestSettings.beforeSend) {
+                requestSettings = requestSettings.beforeSend(
+                    requestSettings,
+                    this._requestsCount,
+                );
+            }
 
-        // save the current request settings
-        this._currentRequestSettings = Object.assign(requestSettings);
+            // save the current request settings
+            this._currentRequestSettings = Object.assign(requestSettings);
 
-        // create the new axios ajax instance
-        __axios(requestSettings)
-            .then(this._onSuccess.bind(this))
-            .catch(this._onError.bind(this));
+            // create the new axios ajax instance
+            __axios({
+                validateStatus: function () {
+                    return true;
+                },
+                ...requestSettings,
+            })
+                .then((response) => {
+                    resolve(this._formatSuccessResponse(response));
+                })
+                .catch((error) => {
+                    resolve(this._formatErrorResponse(error));
+                });
+        });
     }
 
     /**
@@ -329,11 +371,11 @@ export default class SRequest extends __SClass {
             this._responsesArray = [];
 
             // set the resolve and reject callback in the instance
-            this._resolve = resolve;
-            this._reject = reject;
+            // this._resolve = resolve;
+            // this._reject = reject;
 
             // start requests
-            this._send(requestSettings);
+            resolve(this._send(requestSettings));
         });
     }
 }

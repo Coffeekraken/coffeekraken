@@ -72,16 +72,38 @@ function scrollTo(
         if (settings.$elm === document.body) settings.$elm = window;
         if (settings.$elm === document) settings.$elm = window;
 
-        const $scrollElm = settings.$elm === window ? document.body : settings.$elm;
-        
-        let elmHeight = settings.$elm === window ? window.innerHeight : settings.$elm.offsetHeight;
-        let elmWidth = settings.$elm === window ? window.innerWidth : settings.$elm.offsetWidth;
-        
+        const $scrollElm =
+            settings.$elm === window ? document.body : settings.$elm;
+
+        let elmHeight =
+            settings.$elm === window
+                ? window.innerHeight
+                : settings.$elm.offsetHeight;
+        let elmWidth =
+            settings.$elm === window
+                ? window.innerWidth
+                : settings.$elm.offsetWidth;
+
+        let elmTop =
+            settings.$elm === window
+                ? 0
+                : settings.$elm?.getBoundingClientRect().top;
+        let elmLeft =
+            settings.$elm === window
+                ? 0
+                : settings.$elm?.getBoundingClientRect().left;
+
         let maxScrollY = $scrollElm.scrollHeight - elmHeight;
         let maxScrollX = $scrollElm.scrollWidth - elmWidth;
 
-        const currentY = settings.$elm === window ? window.pageYOffset : settings.$elm?.scrollTop;
-        const currentX = settings.$elm === window ? window.pageXOffset : settings.$elm?.scrollLeft;
+        const currentY =
+            settings.$elm === window
+                ? window.pageYOffset
+                : settings.$elm?.scrollTop;
+        const currentX =
+            settings.$elm === window
+                ? window.pageXOffset
+                : settings.$elm?.scrollLeft;
 
         // handle paddings
         if (settings.$elm !== window) {
@@ -92,7 +114,8 @@ function scrollTo(
             maxScrollX += parseInt(computedScrollStyles.paddingRight);
         }
 
-        let targetY = currentY, targetX = currentX;
+        let targetY = currentY,
+            targetX = currentX;
         const targetBounds = target.getBoundingClientRect();
 
         const offsetY = settings.offsetY ?? settings.offset;
@@ -114,8 +137,8 @@ function scrollTo(
         }
 
         targetY = Math.max(Math.min(maxScrollY, targetY), 0);
-        const deltaY = targetY - currentY;
-    
+        const deltaY = targetY - currentY - elmTop;
+
         // x
         if (settings.justify === 'center') {
             targetX += targetBounds.left + targetBounds.width / 2;
@@ -131,7 +154,7 @@ function scrollTo(
             targetX -= offsetX;
         }
         targetX = Math.max(Math.min(maxScrollX, targetX), 0);
-        const deltaX = targetX - currentX;
+        const deltaX = targetX - currentX - elmLeft;
 
         // element position
         if (settings.$elm?.getBoundingClientRect) {
@@ -167,13 +190,14 @@ scrollTo.step = function () {
     const t = Math.min((Date.now() - this.startTime) / this.duration, 1);
 
     let $scrollElm = this.$elm;
-    if (this.$elm === document.body || this.$elm === document) {
+    if (this.$elm === document.body || this.$elm === document) {
         $scrollElm = window;
     }
 
     // Scroll window amount determined by easing
     const x = this.targetX - (1 - this.easing(t)) * this.deltaX;
     const y = this.targetY - (1 - this.easing(t)) * this.deltaY;
+
     $scrollElm.scrollTo(x, y);
 
     if (__isUserScrolling(this.$elm)) return;

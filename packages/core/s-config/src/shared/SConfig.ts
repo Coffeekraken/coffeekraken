@@ -221,7 +221,7 @@ export default class SConfig {
         this._settings = __deepMerge(
             {
                 env: {
-                    env: __SEnv.get('env') ?? 'dev',
+                    env: __SEnv.get('env') ?? 'development',
                     platform:
                         __SEnv.get('platform') ?? __isNode()
                             ? 'node'
@@ -279,7 +279,7 @@ export default class SConfig {
             name: 'extends',
             match: /\[extends.[a-zA-Z0-9\.\-_]+\]/gm,
             resolveDotPath(match, config, path) {
-                const ext = __get(config, path[0] + '._extends');
+                const ext = __get(config, [path[0], '_extends']);
                 if (!ext) return;
                 const dotPath = `${ext}.${match
                     .replace('[extends.', '')
@@ -351,13 +351,13 @@ export default class SConfig {
         this.integrity = await this.adapter.integrity();
 
         // check for cache first
-        if (this._settings.cache && !finalSettings.isUpdate) {
-            const cachedConfigObj = await this.fromCache();
-            if (cachedConfigObj?.integrity === this.integrity) {
-                this.config = cachedConfigObj.config;
-                return this.config;
-            }
-        }
+        // if (this._settings.cache && !finalSettings.isUpdate) {
+        //     const cachedConfigObj = await this.fromCache();
+        //     if (cachedConfigObj?.integrity === this.integrity) {
+        //         this.config = cachedConfigObj.config;
+        //         return this.config;
+        //     }
+        // }
 
         // normal loading otherwise
         const loadedConfig = await this.adapter.load(
@@ -610,13 +610,17 @@ export default class SConfig {
     _restPaths = {};
 
     _resolveInternalReferences(resolverObj, path = [], iteration = 0) {
-        let originalValue = __get(this.config, path.join('.'));
+        let originalValue = __get(this.config, path);
+
+        // if (path.includes('/.local')) {
+        //     console.log(path, originalValue);
+        // }
 
         iteration++;
 
         if (path.includes('...')) {
             const p = path.slice(0, path.indexOf('...'));
-            const parentObj = __get(this.config, p.join('.'));
+            const parentObj = __get(this.config, p);
 
             for (let i = 0; i < this._settings.resolvers.length; i++) {
                 const resolver = this._settings.resolvers[i];
@@ -692,24 +696,22 @@ export default class SConfig {
                 );
 
                 if (resolvedValue !== originalValue) {
-                    let parentObj = __get(
-                        this.config,
-                        path.slice(0, -1).join('.'),
-                    );
+                    let parentObj = __get(this.config, path.slice(0, -1));
 
                     if (path.slice(-1)[0] === '...') {
                         __deepMap(
                             Object.assign({}, resolvedValue),
                             ({ object, prop, value, path: localPath }) => {
-                                const fullPath = `${path
-                                    .slice(0, -1)
-                                    .join('.')}.${localPath}`;
-                                __set(this.config, fullPath, value);
+                                __set(
+                                    this.config,
+                                    [...path.slice(0, -1), localPath],
+                                    value,
+                                );
                             },
                         );
                         delete parentObj['...'];
                     } else {
-                        __set(this.config, path.join('.'), resolvedValue);
+                        __set(this.config, path, resolvedValue);
                         this._resolveInternalReferences(
                             resolverObj,
                             path,
@@ -772,8 +774,7 @@ export default class SConfig {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toObject() {
-        // @todo        replace with "this.get('.')"
-        return {};
+        return this.get('.');
     }
 
     /**

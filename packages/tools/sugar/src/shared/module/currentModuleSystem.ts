@@ -2,7 +2,7 @@ import __isEsm from './isEsm';
 import __isCjs from './isCjs';
 
 /**
- * @name          currentSystem
+ * @name          currentModuleSystem
  * @namespace            shared.module
  * @type          Function
  * @platform          js
@@ -14,7 +14,7 @@ import __isCjs from './isCjs';
  * @return      {('esm'|'cjs')}           The module system the code is running on
  *
  * @example       js
- * import __currentSystem from '@coffeekraken/sugar/shared/module/currentSystem';
+ * import __currentSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';
  * __currentSystem(); // => 'cjs'
  *
  * @since     2.0.0
@@ -22,7 +22,7 @@ import __isCjs from './isCjs';
  */
 export type TCurrentSystem = 'esm' | 'cjs';
 
-export default function currentSystem(): TCurrentSystem {
+export default function currentModuleSystem(): TCurrentSystem {
     if (__isEsm()) return 'esm';
     if (__isCjs()) return 'cjs';
 }

@@ -135,7 +135,7 @@ export default class SVite extends __SClass {
                 let listen;
                 try {
                     listen = await server.listen();
-                } catch(e) {
+                } catch (e) {
                     console.log('ERRROR', e);
                 }
 
@@ -177,8 +177,9 @@ export default class SVite extends __SClass {
                 const viteConfig = __SugarConfig.get('vite');
                 const duration = new __SDuration();
 
-                const finalParams: ISViteBuildParams =
-                    __SViteBuildParamsInterface.apply(params);
+                const finalParams: ISViteBuildParams = __SViteBuildParamsInterface.apply(
+                    params,
+                );
 
                 // if (params.watch) {
                 //   throw new Error('The watch feature is not implemented yet...');
@@ -200,7 +201,10 @@ export default class SVite extends __SClass {
                     const buildType = finalParams.type[i];
 
                     // @ts-ignore
-                    const buildParams: ISViteBuildParams = __deepMerge(Object.assign(finalParams), {});
+                    const buildParams: ISViteBuildParams = __deepMerge(
+                        Object.assign(finalParams),
+                        {},
+                    );
 
                     // shortcuts
                     if (buildType === 'lib') {
@@ -230,6 +234,7 @@ export default class SVite extends __SClass {
                                 },
                             },
                         },
+                        server: {},
                     });
 
                     // library mode
@@ -291,11 +296,13 @@ export default class SVite extends __SClass {
                             ...(config.build.rollupOptions.external ?? []),
                             ...Object.keys(
                                 __listNodeModulesPackages({ monorepo: true }),
-                            ).filter(item => {
-                                return !item.match(/^(\/|\.)/);
-                            }).map(item => {
-                                return new RegExp(`^${item}`);
-                            })
+                            )
+                                .filter((item) => {
+                                    return !item.match(/^(\/|\.)/);
+                                })
+                                .map((item) => {
+                                    return new RegExp(`^${item}`);
+                                }),
                         ];
                     }
 

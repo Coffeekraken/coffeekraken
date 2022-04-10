@@ -308,8 +308,6 @@ export default class SSlider extends __SLitComponent {
     _playing = true;
 
     constructor() {
-        console.log('SSS___Y');
-
         super(
             __deepMerge({
                 litComponent: {

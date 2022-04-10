@@ -23,7 +23,7 @@ To register some new configuration files for your package, you just need to crea
     "config": {
         "folders": [
             {
-                "path": "./dist/pkg/%format/config"
+                "path": "./dist/pkg/%moduleSystem/config"
             }
         ]
     }

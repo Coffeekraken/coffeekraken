@@ -73,8 +73,9 @@ export default class SFrontendServer extends __SClass {
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(params: Partial<ISFrontendServerParams> | string): Promise<any> {
-        const finalParams: ISFrontendServerParams =
-            __SFrontendServerStartParamsInterface.apply(params);
+        const finalParams: ISFrontendServerParams = __SFrontendServerStartParamsInterface.apply(
+            params,
+        );
 
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
@@ -87,9 +88,9 @@ export default class SFrontendServer extends __SClass {
 
                 setTimeout(() => {
                     emit('info', {
-                        value: 'COCO'
+                        value: 'COCO',
                     });
-                }, 3000)
+                }, 3000);
 
                 const logLevelInt = [
                     'silent',
@@ -101,8 +102,9 @@ export default class SFrontendServer extends __SClass {
                     'silly',
                 ].indexOf(finalParams.logLevel);
 
-                const frontendServerConfig =
-                    __SugarConfig.get('frontendServer');
+                const frontendServerConfig = __SugarConfig.get(
+                    'frontendServer',
+                );
 
                 express.use((req, res, next) => {
                     if (req.path.substr(-1) == '/' && req.path.length > 1) {
@@ -170,7 +172,10 @@ export default class SFrontendServer extends __SClass {
                                     fsPath,
                                 )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
                             });
-                            express.use(dir, __express.static(fsPath));
+                            express.use(
+                                dir,
+                                __express.static(fsPath, { dotfiles: 'allow' }),
+                            );
                         },
                     );
                 }
@@ -250,7 +255,7 @@ export default class SFrontendServer extends __SClass {
                                 frontendServerConfig.handlers[routeObj.handler];
                             const handlerPath = handlerObj.path;
                             if (!handlerPath) {
-                                 return;
+                                return;
                             }
 
                             const { default: handlerFn } = await import(

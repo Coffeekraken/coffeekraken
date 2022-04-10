@@ -25,7 +25,7 @@ import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBui
  * with a simple and efficient API.
  *
  * @feature            Multiple formats (cjs,esm)
- * @feature             Different output folders using the `%format` and `%platform` token in the `outDir`
+ * @feature             Different output folders using the `%moduleSystem` and `%platform` token in the `outDir`
  * @feature             Watch capabilities to work live on your codebase
  *
  * @param           {ISTypescriptBuilderCtorSettings}          [settings={}]           Some settings to configure your builder instance
@@ -260,7 +260,7 @@ export default class STypescriptBuilder extends __SBuilder {
             const module = file.format === 'cjs' ? 'commonjs' : 'es6';
             const outPath = __path.dirname(
                 `${file.outDir}/${file.relPath}`
-                    .replace('%format', file.format)
+                    .replace('%moduleSystem', file.format)
                     .replace('%platform', file.platform),
             );
 
@@ -268,7 +268,7 @@ export default class STypescriptBuilder extends __SBuilder {
 
             // output file
             let outFilePath = `${outPath}/${__path.basename(file.path)}`
-                .replace('%format', file.format)
+                .replace('%moduleSystem', file.format)
                 .replace(/\.ts$/, '.js');
 
             const source = __fs.readFileSync(file.path).toString();
@@ -328,7 +328,9 @@ export default class STypescriptBuilder extends __SBuilder {
                 __fs.writeFileSync(
                     packageJsonOutPath,
                     JSON.stringify({
-                        name: `@lostInTheDarkNight/${__uniqid()}`,
+                        name: `@coffeekraken/internal-${__uniqid()}-${
+                            file.format === 'cjs' ? 'commonjs' : 'module'
+                        }`,
                         type: file.format === 'cjs' ? 'commonjs' : 'module',
                         private: true,
                     }),

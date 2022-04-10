@@ -3,12 +3,14 @@ import __SEventEmitter, {
     ISEventEmitter,
     ISEventEmitterConstructorSettings,
 } from '@coffeekraken/s-event-emitter';
+// import __require from '@coffeekraken/sugar/node/esm/require';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __require from '@coffeekraken/sugar/node/esm/require';
+import __writeFile from '@coffeekraken/sugar/node/fs/writeFile';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 // import __replacePathTokens from '@coffeekraken/sugar/node/path/replacePathTokens';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
@@ -16,8 +18,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __fs from 'fs';
-import __writeFile from '@coffeekraken/sugar/node/fs/writeFile';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __minimatch from 'minimatch';
 import __path from 'path';
 
@@ -767,46 +767,41 @@ class SFile extends __SEventEmitter implements ISFile {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     duplicateSync(to?): SFile {
-        let destination = to;
-        if (!to) {
-            const __replacePathTokens = __require(
-                '@coffeekraken/sugar/node/path/replacePathTokens',
-            ).default;
-            destination = __replacePathTokens(
-                `%tmpDir/files/${this.constructor.name}/${
-                    this.nameWithoutExt
-                }.${__uniqid()}.${this.extension}`,
-            );
-            __onProcessExit(() => {
-                try {
-                    __fs.unlinkSync(destination);
-                } catch (e) {}
-            });
-        }
-        destination = __path.resolve(destination);
-
-        // make sure the destination does not exists already
-        if (__fs.existsSync(destination)) {
-            throw new Error(
-                `<red>[sugar.node.fs.SFile.duplicate]</red> Sorry but a file already exists at "<cyan>${destination}</cyan>"`,
-            );
-        }
-
-        // ensure destination directory exists
-        __ensureDirSync(__folderPath(destination));
-
-        // copy the file
-        __fs.copyFileSync(this.path, destination);
-
-        // create a new instance for this new file
-        // @ts-ignore
-        const newFileInstance = new this.constructor(
-            destination,
-            this._settings,
-        );
-
-        // return this new instance
-        return newFileInstance;
+        // let destination = to;
+        // if (!to) {
+        //     const __replacePathTokens = __require(
+        //         '@coffeekraken/sugar/node/path/replacePathTokens',
+        //     ).default;
+        //     destination = __replacePathTokens(
+        //         `%tmpDir/files/${this.constructor.name}/${
+        //             this.nameWithoutExt
+        //         }.${__uniqid()}.${this.extension}`,
+        //     );
+        //     __onProcessExit(() => {
+        //         try {
+        //             __fs.unlinkSync(destination);
+        //         } catch (e) {}
+        //     });
+        // }
+        // destination = __path.resolve(destination);
+        // // make sure the destination does not exists already
+        // if (__fs.existsSync(destination)) {
+        //     throw new Error(
+        //         `<red>[sugar.node.fs.SFile.duplicate]</red> Sorry but a file already exists at "<cyan>${destination}</cyan>"`,
+        //     );
+        // }
+        // // ensure destination directory exists
+        // __ensureDirSync(__folderPath(destination));
+        // // copy the file
+        // __fs.copyFileSync(this.path, destination);
+        // // create a new instance for this new file
+        // // @ts-ignore
+        // const newFileInstance = new this.constructor(
+        //     destination,
+        //     this._settings,
+        // );
+        // // return this new instance
+        // return newFileInstance;
     }
 
     /**

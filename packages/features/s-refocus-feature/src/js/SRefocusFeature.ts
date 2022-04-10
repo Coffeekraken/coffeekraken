@@ -10,6 +10,13 @@ export interface ISRefocusFeatureProps {
     trigger: string[];
     scrollToSettings: Partial<IScrollToSettings>;
     timeout: number;
+    duration: number;
+    easing: Function;
+    offset: number;
+    offsetX: number;
+    offsetY: number;
+    align: 'start' | 'center' | 'end';
+    justify: 'start' | 'center' | 'end';
 }
 
 /**
@@ -110,11 +117,19 @@ export default class SRefocusFeature extends __SFeature {
         });
     }
     _scrollTo($elm) {
-        __scrollTo($elm, {
+        const scrollToSettings = {
             $elm: this.node,
-            ...(this.props.scrollToSettings ?? {}),
-            // @ts-ignore
-        });
+        };
+        if (this.props.duration)
+            scrollToSettings.duration = this.props.duration;
+        if (this.props.easing) scrollToSettings.easing = this.props.easing;
+        if (this.props.offset) scrollToSettings.offset = this.props.offset;
+        if (this.props.offsetX) scrollToSettings.offsetX = this.props.offsetX;
+        if (this.props.offsetY) scrollToSettings.offsetY = this.props.offsetY;
+        if (this.props.align) scrollToSettings.align = this.props.align;
+        if (this.props.justify) scrollToSettings.justify = this.props.justify;
+
+        __scrollTo($elm, scrollToSettings);
     }
 }
 

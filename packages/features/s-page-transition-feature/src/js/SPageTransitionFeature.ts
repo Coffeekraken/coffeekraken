@@ -11,6 +11,9 @@ export interface ISPageTransitionFeatureProps {
     before: Function;
     after: Function;
     onError: Function;
+    autoStyle: boolean;
+    injectErrorIcon: boolean;
+    brokenLinkIcon: string;
 }
 
 /**
@@ -37,6 +40,12 @@ export interface ISPageTransitionFeatureProps {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SPageTransitionFeature extends __SFeature {
+    
+    /**
+     * Store the current page url
+     */
+    _currentUrl: string;
+    
     constructor(name: string, node: HTMLElement, settings: any) {
         super(
             name,
@@ -51,6 +60,9 @@ export default class SPageTransitionFeature extends __SFeature {
                 settings ?? {},
             ),
         );
+
+        // store the current url
+        this._currentUrl = `${document.location.pathname}${document.location.search}`;
 
         // save arrival state
         window.history.pushState(
@@ -117,7 +129,7 @@ export default class SPageTransitionFeature extends __SFeature {
         return new Promise(async (resolve, reject) => {
             // dispatch an event
             $source.dispatchEvent(
-                new CustomEvent('page-transition-start', {
+                new CustomEvent('s-page-transition-start', {
                     detail: {
                         url,
                     },
@@ -152,7 +164,7 @@ export default class SPageTransitionFeature extends __SFeature {
             // handle error
             if (!response || response.status !== 200) {
                 // after process with success
-                this._onAfter($source, response.status);
+                this._onAfter($source, response.status, url);
                 // stop here and reject
                 return reject(response);
             }
@@ -180,7 +192,7 @@ export default class SPageTransitionFeature extends __SFeature {
             // if no container in one of the page, reject
             if (!$container || !$inPageContainer) {
                 // after process with success
-                this._onAfter($source, 500);
+                this._onAfter($source, 500, url);
                 // reject and stop here
                 return reject();
             }
@@ -228,9 +240,6 @@ export default class SPageTransitionFeature extends __SFeature {
                 newState.html = $container.innerHTML;
             }
 
-            // push a new state
-            window.history.pushState(newState, document.title, url);
-
             // scrolltop if needed
             if (this.props.scrollTop) {
                 // @ts-ignore
@@ -238,7 +247,7 @@ export default class SPageTransitionFeature extends __SFeature {
             }
 
             // after process with success
-            this._onAfter($source, 200);
+            this._onAfter($source, 200, url, newState);
 
             // resolve transition
             resolve();
@@ -248,7 +257,7 @@ export default class SPageTransitionFeature extends __SFeature {
      * This function take care of handling the after transition process.
      * The code passed allows to know if the transition was a success (200) or an error (404|500)
      */
-    _onAfter($source: HTMLElement, code: number) {
+    _onAfter($source: HTMLElement, code: number, url?:string; newState?: any) {
         // remove class on body
         document.body.classList.remove('s-page-transition');
         document.body.classList.remove('loading');
@@ -263,33 +272,51 @@ export default class SPageTransitionFeature extends __SFeature {
         });
 
         if (code !== 200) {
+            // restore previous state
+            history.replaceState('', '', this._currentUrl);
+            // add the error class
+            $source.classList.add('s-page-transition-source');
+            $source.classList.add('error');
+            $source.setAttribute('error', '');
+            if (this.props.autoStyle) {
+                $source.classList.add('s-tc:error');
+            }
+            // broken link icon
+            if (this.props.injectBrokenLinkIcon) {
+                $source.innerHTML = `${this.props.brokenLinkIcon}${$source.innerHTML}`;
+            }
+            // dispatch an error event
+            $source.dispatchEvent(
+                new CustomEvent('s-page-transition-error', {
+                    detail: {
+                        code,
+                        $source,
+                    },
+                    bubbles: true,
+                }),
+            );
             // before callback
             this.props.onError?.({
                 $source,
             });
         }
 
+        // push a new state
+        if (code === 200 && newState && url) {
+            window.history.pushState(newState, document.title, url);
+            this._currentUrl = url;
+        }
+
         // dispatch an event
         $source.dispatchEvent(
-            new CustomEvent('page-transition-end', {
+            new CustomEvent('s-page-transition-end', {
                 detail: {
+                    code,
                     $source,
                 },
                 bubbles: true,
             }),
         );
-
-        // dispatch an error event
-        if (code !== 200) {
-            $source.dispatchEvent(
-                new CustomEvent('page-transition-error', {
-                    detail: {
-                        $source,
-                    },
-                    bubbles: true,
-                }),
-            );
-        }
     }
 }
 

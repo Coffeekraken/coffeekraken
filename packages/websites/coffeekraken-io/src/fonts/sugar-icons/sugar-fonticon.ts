@@ -32,6 +32,7 @@ export type SugarFonticonId =
   | "lang-php"
   | "lang-ts"
   | "layout"
+  | "link-broken"
   | "loader"
   | "more"
   | "radius"
@@ -86,6 +87,7 @@ export type SugarFonticonKey =
   | "LangPhp"
   | "LangTs"
   | "Layout"
+  | "LinkBroken"
   | "Loader"
   | "More"
   | "Radius"
@@ -140,6 +142,7 @@ export enum SugarFonticon {
   LangPhp = "lang-php",
   LangTs = "lang-ts",
   Layout = "layout",
+  LinkBroken = "link-broken",
   Loader = "loader",
   More = "more",
   Radius = "radius",
@@ -195,23 +198,24 @@ export const SUGAR_FONTICON_CODEPOINTS: { [key in SugarFonticon]: string } = {
   [SugarFonticon.LangPhp]: "61727",
   [SugarFonticon.LangTs]: "61728",
   [SugarFonticon.Layout]: "61729",
-  [SugarFonticon.Loader]: "61730",
-  [SugarFonticon.More]: "61731",
-  [SugarFonticon.Radius]: "61732",
-  [SugarFonticon.Range]: "61733",
-  [SugarFonticon.Ratio]: "61734",
-  [SugarFonticon.Refresh]: "61735",
-  [SugarFonticon.Scale]: "61736",
-  [SugarFonticon.Space]: "61737",
-  [SugarFonticon.SupportChromium]: "61738",
-  [SugarFonticon.SupportEdge]: "61739",
-  [SugarFonticon.SupportFirefox]: "61740",
-  [SugarFonticon.SupportRtl]: "61741",
-  [SugarFonticon.SupportSafari]: "61742",
-  [SugarFonticon.Switch]: "61743",
-  [SugarFonticon.Theme]: "61744",
-  [SugarFonticon.Tooltip]: "61745",
-  [SugarFonticon.Typography]: "61746",
-  [SugarFonticon.Visibility]: "61747",
-  [SugarFonticon.Vue]: "61748",
+  [SugarFonticon.LinkBroken]: "61730",
+  [SugarFonticon.Loader]: "61731",
+  [SugarFonticon.More]: "61732",
+  [SugarFonticon.Radius]: "61733",
+  [SugarFonticon.Range]: "61734",
+  [SugarFonticon.Ratio]: "61735",
+  [SugarFonticon.Refresh]: "61736",
+  [SugarFonticon.Scale]: "61737",
+  [SugarFonticon.Space]: "61738",
+  [SugarFonticon.SupportChromium]: "61739",
+  [SugarFonticon.SupportEdge]: "61740",
+  [SugarFonticon.SupportFirefox]: "61741",
+  [SugarFonticon.SupportRtl]: "61742",
+  [SugarFonticon.SupportSafari]: "61743",
+  [SugarFonticon.Switch]: "61744",
+  [SugarFonticon.Theme]: "61745",
+  [SugarFonticon.Tooltip]: "61746",
+  [SugarFonticon.Typography]: "61747",
+  [SugarFonticon.Visibility]: "61748",
+  [SugarFonticon.Vue]: "61749",
 };

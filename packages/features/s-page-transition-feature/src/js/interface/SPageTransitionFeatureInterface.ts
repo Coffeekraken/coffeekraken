@@ -23,22 +23,42 @@ export default class SPageTransitionFeatureInterface extends __SInterface {
     static get _definition() {
         return {
             patchBody: {
-                description: 'Specify if you want to patch the body tag with the new page body tag',
+                description:
+                    'Specify if you want to patch the body tag with the new page body tag',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             scrollTop: {
-                description: 'Specify if you want to scroll to the top of the updated element after a transition',
+                description:
+                    'Specify if you want to scroll to the top of the updated element after a transition',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             before: {
                 description: 'Specify a function to run before the transition',
-                type: 'Function'
+                type: 'Function',
             },
             after: {
                 description: 'Specify a function to run after the transition',
-                type: 'Function'
+                type: 'Function',
+            },
+            autoStyle: {
+                description:
+                    'Specify if you want to automatically add classes like "s-tc:error" on the broken links (only the "a" tags)',
+                type: 'Boolean',
+                default: true,
+            },
+            injectBrokenLinkIcon: {
+                description:
+                    'Specify if you want to inject the "error" icon on the broken links',
+                type: 'Boolean',
+                default: true,
+            },
+            brokenLinkIcon: {
+                description:
+                    'Specify the icon you want to inject on the broken links',
+                type: 'String',
+                default: '<i class="s-icon:link-broken"></i>',
             },
         };
     }

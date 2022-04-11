@@ -9,6 +9,7 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
+import __distCssDir from '@coffeekraken/sugar/node/path/distCssDir';
 import __childProcess from 'child_process';
 import { generateFonts } from 'fantasticon';
 import __svgFixer from 'oslllo-svg-fixer';
@@ -61,23 +62,24 @@ export default async function ({ root, sharedData }) {
         const cachedFolderHash = __fs
             .readFileSync(hashCacheFilePath, 'utf8')
             .toString();
-        if (cachedFolderHash === folderHash) {
-            // same icons, nothing to generate again
-            console.log(
-                `<green>[fonticons]</green> All icon(s) are up to date`,
-            );
-            return;
-        }
+        // if (cachedFolderHash === folderHash) {
+        //     // same icons, nothing to generate again
+        //     console.log(
+        //         `<green>[fonticons]</green> All icon(s) are up to date`,
+        //     );
+        //     return;
+        // }
     }
 
     console.log(`<yellow>[fonticons]</yellow> Generate icons font...`);
 
     // fix svg's just to be sure
-    const fixResult = await __svgFixer(inputDir, inputDir).fix();
+    // const fixResult = await __svgFixer(inputDir, inputDir).fix();
 
     const result = await generateFonts({
         inputDir,
         outputDir: fantasticonConfig.outputDir,
+        fontsUrl: '.',
         name: fantasticonConfig.name,
         normalize: true,
         selector: '.s-icon',

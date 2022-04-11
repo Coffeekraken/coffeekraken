@@ -234,19 +234,24 @@ export default function (env, config) {
             hostname:
                 'http://[config.vite.server.host]:[config.vite.server.port]',
             proxy: {
-                '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$': {
-                    target: `http://localhost:8080`,
+                // all files that match /dist/...css|ts|tsx|etc...
+                // have to target the "src" directory
+                '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)$': {
+                    target: `http://localhost:3000`,
                     changeOrigin: true,
-                    // rewrite: (path) => {
-                    //     return path.replace(/\/dist\//, '/src/');
-                    // },
+                    rewrite: (path) => {
+                        return path.replace(/\/dist\//, '/src/');
+                    },
+                },
+                // all none css, js, ts, etc...
+                // have to go to frontend server
+                '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$': {
+                    target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
+                    changeOrigin: true,
                 },
                 '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|\\@id|__vite_ping|index.html).)*$': {
-                    target: `http://localhost:8080`,
+                    target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
                     changeOrigin: true,
-                    // rewrite: (path) => {
-                    //     return path.replace(/\/dist\//, '/src/');
-                    // },
                 },
             },
         },

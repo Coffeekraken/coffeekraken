@@ -1,4 +1,4 @@
-@sugar.import ('./sugar.css', 'mobile');
+@sugar.import ('./sugar.css');
 @sugar.import ('../views/**/*.css');
 @sugar.import ('./generic/**/*.css');
 
@@ -23,8 +23,8 @@ body {
 }
 
 .s-container {
-    @sugar.media(>=wide) {
-        @sugar.layout.container(wide);
+    @sugar.media (>=wide) {
+        @sugar.layout.container (wide);
     }
 }
 
@@ -34,8 +34,7 @@ body {
 }
 
 .sticky {
-
-    @sugar.media(>=desktop) {
+    @sugar.media (>=desktop) {
         position: sticky;
         top: 100px;
     }

@@ -1,4 +1,4 @@
-export default function (env) {
+export default function (env, config) {
     if (env.platform !== 'node') return;
 
     return {
@@ -39,7 +39,7 @@ export default function (env) {
              * @name            outputDir
              * @namespace       config.icons.fantasticon
              * @type            String
-             * @default         [config.storage.dist.fontsDir]/sugar-icons
+             * @default         [config.storage.src.fontsDir]/sugar-icons
              *
              * Specify the output directory to generate fonticon in
              *
@@ -47,6 +47,21 @@ export default function (env) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outputDir: '[config.storage.src.fontsDir]/sugar-icons',
+
+            /**
+             * @name            serveFontsDir
+             * @namespace       config.icons.fantasticon
+             * @type            String
+             * @default         [config.storage.src.fontsDir]/sugar-icons
+             *
+             * Specify the path to the fonts directory to serve
+             *
+             * @since       2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            serveFontsDir() {
+                return `[config.storage.dist.fontsDir]/sugar-icons`;
+            },
         },
     };
 }

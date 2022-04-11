@@ -26,7 +26,6 @@ export default function (env, config) {
          */
         plugins: [
             '@coffeekraken/s-postcss-sugar-plugin',
-            // 'postcss-easy-import',
             'postcss-import',
             'postcss-nested',
             'postcss-atroot',

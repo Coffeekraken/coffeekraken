@@ -85,7 +85,6 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
     );
 
     Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
-
         cssArray.comment(
             () => `
       /**
@@ -131,7 +130,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             ].join('\n'),
         ).code(`
             .s-bg--${colorName} {
-                   background-color: sugar.color(${colorName});
+                   background-color: sugar.color(${colorName}) !important;
                 }
         `);
     });
@@ -166,7 +165,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .s-tc--${colorName}${
             colorObj.variant === 'text' ? '' : modifierStr
         } {
-            color: sugar.color(${colorName}, ${colorObj.variant});
+            color: sugar.color(${colorName}, ${colorObj.variant}) !important;
         }
         `);
 
@@ -189,7 +188,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             ].join('\n'),
         ).code(`
             .s-bg--${colorName}${modifierStr} {
-                   background-color: sugar.color(${colorName}, ${colorObj.variant});
+                   background-color: sugar.color(${colorName}, ${colorObj.variant}) !important;
                 }
         `);
     });

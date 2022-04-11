@@ -1,8 +1,8 @@
 @sugar.init;
 @sugar.theme (dark, null, true);
 
-@sugar.media.classes('mobile,tablet') {
-  @sugar.classes;
+@sugar.media.classes ('mobile,tablet') {
+    @sugar.classes;
 }
 
 @sugar.ui.filtrableinput.classes;
@@ -48,6 +48,7 @@
   fa:file-code
   fa:file-archive
   fa:file
+  fs:src/icons/coffeekraken/link/link-broken.svg
   fs:src/icons/coffeekraken/lang/lang-js.svg
   fs:src/icons/coffeekraken/lang/lang-ts.svg
   fs:src/icons/coffeekraken/lang/lang-css.svg

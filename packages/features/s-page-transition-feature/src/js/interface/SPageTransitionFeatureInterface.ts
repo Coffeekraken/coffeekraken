@@ -58,7 +58,8 @@ export default class SPageTransitionFeatureInterface extends __SInterface {
                 description:
                     'Specify the icon you want to inject on the broken links',
                 type: 'String',
-                default: '<i class="s-icon:link-broken"></i>',
+                default:
+                    '<i class="s-icon:link-broken-solid" alt="Broken link"></i>',
             },
         };
     }

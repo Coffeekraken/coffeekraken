@@ -32,6 +32,7 @@ export type SugarFonticonId =
   | "lang-php"
   | "lang-ts"
   | "layout"
+  | "link-broken-solid"
   | "link-broken"
   | "loader"
   | "more"
@@ -87,6 +88,7 @@ export type SugarFonticonKey =
   | "LangPhp"
   | "LangTs"
   | "Layout"
+  | "LinkBrokenSolid"
   | "LinkBroken"
   | "Loader"
   | "More"
@@ -142,6 +144,7 @@ export enum SugarFonticon {
   LangPhp = "lang-php",
   LangTs = "lang-ts",
   Layout = "layout",
+  LinkBrokenSolid = "link-broken-solid",
   LinkBroken = "link-broken",
   Loader = "loader",
   More = "more",
@@ -198,24 +201,25 @@ export const SUGAR_FONTICON_CODEPOINTS: { [key in SugarFonticon]: string } = {
   [SugarFonticon.LangPhp]: "61727",
   [SugarFonticon.LangTs]: "61728",
   [SugarFonticon.Layout]: "61729",
-  [SugarFonticon.LinkBroken]: "61730",
-  [SugarFonticon.Loader]: "61731",
-  [SugarFonticon.More]: "61732",
-  [SugarFonticon.Radius]: "61733",
-  [SugarFonticon.Range]: "61734",
-  [SugarFonticon.Ratio]: "61735",
-  [SugarFonticon.Refresh]: "61736",
-  [SugarFonticon.Scale]: "61737",
-  [SugarFonticon.Space]: "61738",
-  [SugarFonticon.SupportChromium]: "61739",
-  [SugarFonticon.SupportEdge]: "61740",
-  [SugarFonticon.SupportFirefox]: "61741",
-  [SugarFonticon.SupportRtl]: "61742",
-  [SugarFonticon.SupportSafari]: "61743",
-  [SugarFonticon.Switch]: "61744",
-  [SugarFonticon.Theme]: "61745",
-  [SugarFonticon.Tooltip]: "61746",
-  [SugarFonticon.Typography]: "61747",
-  [SugarFonticon.Visibility]: "61748",
-  [SugarFonticon.Vue]: "61749",
+  [SugarFonticon.LinkBrokenSolid]: "61730",
+  [SugarFonticon.LinkBroken]: "61731",
+  [SugarFonticon.Loader]: "61732",
+  [SugarFonticon.More]: "61733",
+  [SugarFonticon.Radius]: "61734",
+  [SugarFonticon.Range]: "61735",
+  [SugarFonticon.Ratio]: "61736",
+  [SugarFonticon.Refresh]: "61737",
+  [SugarFonticon.Scale]: "61738",
+  [SugarFonticon.Space]: "61739",
+  [SugarFonticon.SupportChromium]: "61740",
+  [SugarFonticon.SupportEdge]: "61741",
+  [SugarFonticon.SupportFirefox]: "61742",
+  [SugarFonticon.SupportRtl]: "61743",
+  [SugarFonticon.SupportSafari]: "61744",
+  [SugarFonticon.Switch]: "61745",
+  [SugarFonticon.Theme]: "61746",
+  [SugarFonticon.Tooltip]: "61747",
+  [SugarFonticon.Typography]: "61748",
+  [SugarFonticon.Visibility]: "61749",
+  [SugarFonticon.Vue]: "61750",
 };

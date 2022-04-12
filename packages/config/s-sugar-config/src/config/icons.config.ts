@@ -52,16 +52,14 @@ export default function (env, config) {
              * @name            serveFontsDir
              * @namespace       config.icons.fantasticon
              * @type            String
-             * @default         [config.storage.src.fontsDir]/sugar-icons
+             * @default         [config.storage.dist.fontsDir]/sugar-icons
              *
              * Specify the path to the fonts directory to serve
              *
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            serveFontsDir() {
-                return `[config.storage.dist.fontsDir]/sugar-icons`;
-            },
+            serveFontsDir: `[config.storage.dist.fontsDir]/sugar-icons`,
         },
     };
 }

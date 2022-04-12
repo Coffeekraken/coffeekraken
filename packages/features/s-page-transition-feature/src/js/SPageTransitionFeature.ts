@@ -5,6 +5,9 @@ import __SRequest from '@coffeekraken/s-request';
 import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp';
 import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 
+// @ts-ignore
+import __css from '../../../../src/css/s-page-transition.css'; // relative to /dist/pkg/esm/js
+
 export interface ISPageTransitionFeatureProps {
     patchBody: boolean;
     scrollTop: boolean;
@@ -45,7 +48,7 @@ export default class SPageTransitionFeature extends __SFeature {
      * Store the current page url
      */
     _currentUrl: string;
-    
+
     constructor(name: string, node: HTMLElement, settings: any) {
         super(
             name,
@@ -54,6 +57,7 @@ export default class SPageTransitionFeature extends __SFeature {
                 {
                     componentUtils: {
                         interface: __SPageTransitionFeatureInterface,
+                        style: __css,
                     },
                     feature: {},
                 },
@@ -283,7 +287,7 @@ export default class SPageTransitionFeature extends __SFeature {
             }
             // broken link icon
             if (this.props.injectBrokenLinkIcon) {
-                $source.innerHTML = `${this.props.brokenLinkIcon}${$source.innerHTML}`;
+                $source.innerHTML = `${$source.innerHTML}${this.props.brokenLinkIcon.replace(/^\<([a-z]+)/, '<$1 s-page-transition-broken-link-icon')}`;
             }
             // dispatch an error event
             $source.dispatchEvent(

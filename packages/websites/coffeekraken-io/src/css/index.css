@@ -9,6 +9,13 @@ body {
     display: block;
     @sugar.theme.when (dark) {
         background-color: sugar.color(main, --darken 30);
+
+        background: radial-gradient(
+            ellipse at top left,
+            sugar.color(main, --darken 25),
+            sugar.color(main, --darken 35)
+        );
+        background-attachment: fixed;
     }
 }
 

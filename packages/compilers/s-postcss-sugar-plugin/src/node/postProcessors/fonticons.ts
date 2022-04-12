@@ -7,7 +7,7 @@ import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
 import __distCssDir from '@coffeekraken/sugar/node/path/distCssDir';
 import __childProcess from 'child_process';
@@ -29,6 +29,7 @@ export default async function ({ root, sharedData }) {
         __srcCssDir(),
         fantasticonConfig.outputDir,
     );
+
     root.nodes.unshift(
         __postcss.parse(`
         @import url(${importFontUrl}/${fantasticonConfig.name}.css);
@@ -79,7 +80,10 @@ export default async function ({ root, sharedData }) {
     const result = await generateFonts({
         inputDir,
         outputDir: fantasticonConfig.outputDir,
-        fontsUrl: '.',
+        fontsUrl: `/${__path.relative(
+            __packageRoot(),
+            fantasticonConfig.serveFontsDir,
+        )}`,
         name: fantasticonConfig.name,
         normalize: true,
         selector: '.s-icon',

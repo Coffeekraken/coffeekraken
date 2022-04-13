@@ -196,7 +196,7 @@
                     <li>
                         <a href="/doc/recipes/built-in/default" title="Coffeekraken generic recipe">
                             <div class="icon-card s-color:accent">
-                                <i class="s-icon:brand-coffeekraken"></i>
+                                <i class="s-icon:logo-coffeekraken"></i>
                                 <p class="s-p">Default (generic)</p>
                             </div>
                         </a>
@@ -204,7 +204,7 @@
                     <li>
                         <a href="/doc/recipes/built-in/litElement" title="Coffeekraken LitElement recipe">
                             <div class="icon-card s-color:complementary">
-                                <i class="s-icon:brand-lit"></i>
+                                <i class="s-icon:logo-lit"></i>
                                 <p class="s-p">LitElement</p>
                             </div>
                         </a>
@@ -212,7 +212,7 @@
                     <li class="s-disabled">
                         <a href="/doc/recipes/built-in/default" title="Coffeekraken NextJs recipe">
                             <div class="icon-card s-color:accent">
-                                <i class="s-icon:brand-nextjs"></i>
+                                <i class="s-icon:logo-nextjs"></i>
                                 <p class="s-p">NextJS<br />coming soom</p>
                             </div>
                         </a>

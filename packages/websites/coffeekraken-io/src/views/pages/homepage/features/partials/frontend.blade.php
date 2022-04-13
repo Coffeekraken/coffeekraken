@@ -92,7 +92,6 @@
             <div class="@mobile s-pbe:50">
                 <div class="sticky">
                     <div class="s-flex:align-center">
-                        {{-- <i class="s-icon:theme s-tc:main s-opacity:20 s-font:90 s-pie:30 @mobile s-display:none"></i> --}}
                         <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                             <span class="s-tc:accent">Theming</span> made<br>
                             As tasty as a donut
@@ -143,8 +142,6 @@
                 <div>
                     <div class="sticky">
                         <div class="s-flex:align-center">
-                            {{-- <i
-                                class="s-icon:layout s-tc:main s-opacity:20 s-font:90 s-pie:30 @mobile s-display:none"></i> --}}
                             <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                                 <span class="s-tc:accent">Layout</span> finally<br>
                                 Nice to work with

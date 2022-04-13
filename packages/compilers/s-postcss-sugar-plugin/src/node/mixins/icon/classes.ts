@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __fileName from '@coffeekraken/sugar/node/fs/filename';
+import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 
 /**
  * @name           classes
@@ -110,7 +111,9 @@ export default function ({
             case 'fs':
                 splits = iconStr.split(':');
                 const path = splits[1];
-                as = splits[2] ?? __fileName(path).split('.')[0];
+                if (!__isGlob(path)) {
+                    as = splits[2] ?? __fileName(path).split('.')[0];
+                }
                 return {
                     str: iconStr,
                     protocol,

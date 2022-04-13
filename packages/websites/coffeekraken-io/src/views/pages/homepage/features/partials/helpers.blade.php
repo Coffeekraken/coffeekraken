@@ -17,7 +17,7 @@
                 <a href="/styleguide/helpers/text" title="Coffeekraken text align helpers">
                     <div class="icon-card s-color:accent"
                         style="background-image: url(/dist/img/previews/preview-helper-text.jpg);">
-                        <i class="s-icon:align"></i>
+                        <i class="s-icon:ui-align"></i>
                         <p class="s-p">Text aligns</p>
                     </div>
                 </a>
@@ -26,7 +26,7 @@
                 <a href="/styleguide/helpers/typography" title="Coffeekraken typography helpers">
                     <div class="icon-card s-color:complementary"
                         style="background-image:url(/dist/img/previews/preview-helper-typo.jpg);">
-                        <i class="s-icon:typography"></i>
+                        <i class="s-icon:ui-typography"></i>
                         <p class="s-p">Typography</p>
                     </div>
                 </a>
@@ -35,7 +35,7 @@
                 <a href="/styleguide/helpers/colors" title="Coffeekraken color helpers">
                     <div class="icon-card s-color:accent"
                         style="background-image: url(/dist/img/previews/preview-helper-colors.jpg);">
-                        <i class="s-icon:colors"></i>
+                        <i class="s-icon:theme-colors"></i>
                         <p class="s-p">Colors</p>
                     </div>
                 </a>
@@ -44,7 +44,7 @@
                 <a href="/styleguide/helpers/flexbox" title="Coffeekraken flexbox helpers">
                     <div class="icon-card s-color:complementary"
                         style="background-image: url(/dist/img/previews/preview-helper-flexbox.jpg);">
-                        <i class="s-icon:flex"></i>
+                        <i class="s-icon:css-flex"></i>
                         <p class="s-p">Flexbox</p>
                     </div>
                 </a>
@@ -53,7 +53,7 @@
                 <a href="/styleguide/helpers/ratio" title="Coffeekraken ratio helpers">
                     <div class="icon-card s-color:accent"
                         style="background-image: url(/dist/img/previews/preview-helper-ratio.jpg);">
-                        <i class="s-icon:ratio"></i>
+                        <i class="s-icon:layout-ratio"></i>
                         <p class="s-p">Ratios</p>
                     </div>
                 </a>
@@ -62,7 +62,7 @@
                 <a href="/styleguide/helpers/radius" title="Coffeekraken radius helpers">
                     <div class="icon-card s-color:complementary"
                         style="background-image: url(/dist/img/previews/preview-helper-radius.jpg);">
-                        <i class="s-icon:radius"></i>
+                        <i class="s-icon:css-radius"></i>
                         <p class="s-p">Radius</p>
                     </div>
                 </a>
@@ -71,7 +71,7 @@
                 <a href="/styleguide/helpers/transition" title="Coffeekraken transition helpers">
                     <div class="icon-card s-color:accent"
                         style="background-image: url(/dist/img/previews/preview-helper-transition.jpg);">
-                        <i class="s-icon:easing"></i>
+                        <i class="s-icon:animation-easing"></i>
                         <p class="s-p">Transitions</p>
                     </div>
                 </a>
@@ -80,7 +80,7 @@
                 <a href="/styleguide/helpers/margin" title="Coffeekraken space helpers">
                     <div class="icon-card s-color:complementary"
                         style="background-image: url(/dist/img/previews/preview-helper-spaces.jpg);">
-                        <i class="s-icon:space"></i>
+                        <i class="s-icon:layout-space"></i>
                         <p class="s-p">Spaces</p>
                     </div>
                 </a>
@@ -89,7 +89,7 @@
                 <a href="/styleguide/helpers/visibility" title="Coffeekraken visibility helpers">
                     <div class="icon-card s-color:accent"
                         style="background-image: url(/dist/img/previews/preview-helper-visibility.jpg);">
-                        <i class="s-icon:visibility"></i>
+                        <i class="s-icon:misc-visibility"></i>
                         <p class="s-p">Visibility</p>
                     </div>
                 </a>
@@ -98,7 +98,7 @@
                 <a href="/styleguide/tools/scale" title="Coffeekraken scale helpers">
                     <div class="icon-card s-color:complementary"
                         style="background-image: url(/dist/img/previews/preview-helper-scale.jpg);">
-                        <i class="s-icon:scale"></i>
+                        <i class="s-icon:layout-scale"></i>
                         <p class="s-p">Scales</p>
                     </div>
                 </a>

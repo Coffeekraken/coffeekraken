@@ -79,11 +79,11 @@
     </div>
     <div class="tools__opensource s-tooltip-container">
         <a class="s-btn:block s-bg:main-surface" title="We love open source!" target="_blank">
-            <i class="s-icon:brand-opensource"></i>
+            <i class="s-icon:logo-opensource"></i>
         </a>
         <div s-floating placement="left" class="s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
-                <i class="s-icon:brand-opensource s-font:100 s-mbe:30"></i>
+                <i class="s-icon:logo-opensource s-font:100 s-mbe:30"></i>
                 <p class="s-typo:p s-font:30 s-mbe:30">
                     All of our codebase can be found on Github. We hope that <span class="s-tc:accent">you may
                         contribute to help us make our

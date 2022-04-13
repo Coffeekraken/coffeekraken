@@ -6,6 +6,8 @@ import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __fileName from '@coffeekraken/sugar/node/fs/filename';
+import __isGlob from '@coffeekraken/sugar/shared/is/glob';
+import __SGlob from '@coffeekraken/s-glob';
 
 class postcssSugarPluginIconFsMixinInterface extends __SInterface {
     static get _definition() {
@@ -16,7 +18,6 @@ class postcssSugarPluginIconFsMixinInterface extends __SInterface {
             },
             as: {
                 type: 'String',
-                required: false,
             },
         };
     }
@@ -52,36 +53,49 @@ export default function ({
         sharedData.icons = [];
     }
 
-    // generating the "as"
-    let as = finalParams.as;
-    if (!as)
-        as = __fileName(finalParams.path.split('.').slice(0, -1).join('.'));
+    let iconsPaths: string[] = [];
 
-    // reading the icon file
-    const potentialFilePathFromRoot = __path.resolve(
-        __packageRoot(),
-        finalParams.path,
-    );
-    const potentialFilePathFromFile = __path.resolve(
-        sourcePath,
-        finalParams.path,
-    );
-
-    if (__fs.existsSync(potentialFilePathFromFile)) {
-        sharedData.icons.push({
-            path: potentialFilePathFromFile,
-            as,
+    // handle globs
+    if (__isGlob(finalParams.path)) {
+        const files = __SGlob.resolve(finalParams.path, {
+            cwd: __packageRoot(),
         });
-    } else if (__fs.existsSync(potentialFilePathFromRoot)) {
-        sharedData.icons.push({
-            path: potentialFilePathFromRoot,
-            as,
+        files.forEach((file: any) => {
+            iconsPaths.push(file.relPath);
         });
     } else {
-        throw new Error(
-            `<red>[sugar.css.mixins.icon.fs]</red> Sorry but it seems that the requested icon "<cyan>${finalParams.path}</cyan>" does not exists on the filesystem`,
-        );
+        iconsPaths.push(finalParams.path);
     }
+
+    iconsPaths.forEach((iconPath) => {
+        let as = finalParams.as;
+        if (!as) {
+            as = __fileName(iconPath.split('.').slice(0, -1).join('.'));
+        }
+
+        // reading the icon file
+        const potentialFilePathFromRoot = __path.resolve(
+            __packageRoot(),
+            iconPath,
+        );
+        const potentialFilePathFromFile = __path.resolve(sourcePath, iconPath);
+
+        if (__fs.existsSync(potentialFilePathFromFile)) {
+            sharedData.icons.push({
+                path: potentialFilePathFromFile,
+                as,
+            });
+        } else if (__fs.existsSync(potentialFilePathFromRoot)) {
+            sharedData.icons.push({
+                path: potentialFilePathFromRoot,
+                as,
+            });
+        } else {
+            throw new Error(
+                `<red>[sugar.css.mixins.icon.fs]</red> Sorry but it seems that the requested icon "<cyan>${finalParams.path}</cyan>" does not exists on the filesystem`,
+            );
+        }
+    });
 
     replaceWith([]);
 }

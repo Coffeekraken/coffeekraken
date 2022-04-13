@@ -48,56 +48,7 @@
   fa:file-code
   fa:file-archive
   fa:file
-  fs:src/icons/coffeekraken/link/link-broken.svg
-  fs:src/icons/coffeekraken/link/link-broken-solid.svg
-  fs:src/icons/coffeekraken/lang/lang-js.svg
-  fs:src/icons/coffeekraken/lang/lang-ts.svg
-  fs:src/icons/coffeekraken/lang/lang-css.svg
-  fs:src/icons/coffeekraken/lang/lang-html.svg
-  fs:src/icons/coffeekraken/lang/lang-php.svg
-  fs:src/icons/coffeekraken/lang/lang-html.svg
-  fs:src/icons/coffeekraken/lang/lang-md.svg
-  fs:src/icons/coffeekraken/file/file-js.svg
-  fs:src/icons/coffeekraken/file/file-ts.svg
-  fs:src/icons/coffeekraken/file/file-css.svg
-  fs:src/icons/coffeekraken/file/file-html.svg
-  fs:src/icons/coffeekraken/file/file-php.svg
-  fs:src/icons/coffeekraken/file/file-html.svg
-  fs:src/icons/coffeekraken/file/file-md.svg
-  fs:src/icons/coffeekraken/etc/more.svg
-  fs:src/icons/coffeekraken/ui/button.svg
-  fs:src/icons/coffeekraken/ui/theme.svg
-  fs:src/icons/coffeekraken/ui/dropdown.svg
-  fs:src/icons/coffeekraken/ui/tooltip.svg
-  fs:src/icons/coffeekraken/ui/switch.svg
-  fs:src/icons/coffeekraken/ui/loader.svg
-  fs:src/icons/coffeekraken/ui/avatar.svg
-  fs:src/icons/coffeekraken/helpers/typography.svg
-  fs:src/icons/coffeekraken/helpers/align.svg
-  fs:src/icons/coffeekraken/helpers/colors.svg
-  fs:src/icons/coffeekraken/helpers/flex.svg
-  fs:src/icons/coffeekraken/helpers/ratio.svg
-  fs:src/icons/coffeekraken/helpers/radius.svg
-  fs:src/icons/coffeekraken/helpers/easing.svg
-  fs:src/icons/coffeekraken/helpers/space.svg
-  fs:src/icons/coffeekraken/helpers/visibility.svg
-  fs:src/icons/coffeekraken/helpers/scale.svg
-  fs:src/icons/coffeekraken/brand/brand-lit.svg
-  fs:src/icons/coffeekraken/brand/brand-coffeekraken.svg
-  fs:src/icons/coffeekraken/brand/brand-opensource.svg
-  fs:src/icons/coffeekraken/brand/brand-nextjs.svg
-  fs:src/icons/coffeekraken/fs/folder.svg
-  fs:src/icons/coffeekraken/tools/helpers.svg
-  fs:src/icons/coffeekraken/html/autocomplete.svg
-  fs:src/icons/coffeekraken/html/layout.svg
-  fs:src/icons/coffeekraken/html/range.svg
-  fs:src/icons/coffeekraken/html/code.svg
-  fs:src/icons/coffeekraken/html/datepicker.svg
-  fs:src/icons/coffeekraken/action/copy.svg
-  fs:src/icons/coffeekraken/action/build.svg
-  fs:src/icons/coffeekraken/action/refresh.svg
-  fs:src/icons/coffeekraken/fs/folder-opened.svg
-  fs:src/icons/coffeekraken/display/display-preview.svg
+  fs:'src/icons/coffeekraken/**/*.svg'
   fs:src/icons/read-direction.svg:support-rtl
   fs:src/icons/edge.svg:support-edge
   fs:src/icons/chrome.svg:support-chromium

@@ -57,7 +57,7 @@
                     <a href="/" title="">
                         <div class="icon-card s-color:accent"
                             style="background-image: url(/dist/img/icon-card/test.gif);">
-                            <i class="s-icon:autocomplete"></i>
+                            <i class="s-icon:ui-autocomplete"></i>
                             <p class="s-p">Filtrable Input</p>
                         </div>
                     </a>
@@ -66,7 +66,7 @@
                     <a href="/" title="">
                         <div class="icon-card s-color:complementary"
                             style="background-image: url(/dist/img/icon-card/test.gif);">
-                            <i class="s-icon:copy"></i>
+                            <i class="s-icon:ui-copy"></i>
                             <p class="s-p">Clipbord copy</p>
                         </div>
                     </a>
@@ -84,7 +84,7 @@
                     <a href="/" title="">
                         <div class="icon-card s-color:complementary"
                             style="background-image: url(/dist/img/icon-card/test.gif);">
-                            <i class="s-icon:code"></i>
+                            <i class="s-icon:ui-code"></i>
                             <p class="s-p">Code Example</p>
                         </div>
                     </a>
@@ -93,7 +93,7 @@
                     <a href="/" title="">
                         <div class="icon-card s-color:accent"
                             style="background-image: url(/dist/img/icon-card/test.gif);">
-                            <i class="s-icon:datepicker"></i>
+                            <i class="s-icon:ui-datepicker"></i>
                             <p class="s-p">Date Picker</p>
                         </div>
                     </a>

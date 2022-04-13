@@ -1,11 +1,11 @@
 @font-face {
     font-family: "sugar-fonticon";
-    src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?1b0c2be6b1872f1c78b6837720463de0#iefix") format("embedded-opentype"),
-url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?1b0c2be6b1872f1c78b6837720463de0") format("woff2"),
-url("/dist/fonts/sugar-icons/sugar-fonticon.woff?1b0c2be6b1872f1c78b6837720463de0") format("woff");
+    src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?00e3ff1c7d59fa51bb0bb8c65182c929#iefix") format("embedded-opentype"),
+url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?00e3ff1c7d59fa51bb0bb8c65182c929") format("woff2"),
+url("/dist/fonts/sugar-icons/sugar-fonticon.woff?00e3ff1c7d59fa51bb0bb8c65182c929") format("woff");
 }
 
-.s-icon--align:before,.s-icon--autocomplete:before,.s-icon--avatar:before,.s-icon--brand-coffeekraken:before,.s-icon--brand-lit:before,.s-icon--brand-nextjs:before,.s-icon--brand-opensource:before,.s-icon--build:before,.s-icon--button:before,.s-icon--code:before,.s-icon--colors:before,.s-icon--copy:before,.s-icon--datepicker:before,.s-icon--display-preview:before,.s-icon--dropdown:before,.s-icon--easing:before,.s-icon--file-css:before,.s-icon--file-html:before,.s-icon--file-js:before,.s-icon--file-md:before,.s-icon--file-php:before,.s-icon--file-ts:before,.s-icon--flex:before,.s-icon--folder-opened:before,.s-icon--folder:before,.s-icon--helpers:before,.s-icon--lang-css:before,.s-icon--lang-html:before,.s-icon--lang-js:before,.s-icon--lang-md:before,.s-icon--lang-php:before,.s-icon--lang-ts:before,.s-icon--layout:before,.s-icon--link-broken-solid:before,.s-icon--link-broken:before,.s-icon--loader:before,.s-icon--more:before,.s-icon--radius:before,.s-icon--range:before,.s-icon--ratio:before,.s-icon--refresh:before,.s-icon--scale:before,.s-icon--space:before,.s-icon--support-chromium:before,.s-icon--support-edge:before,.s-icon--support-firefox:before,.s-icon--support-rtl:before,.s-icon--support-safari:before,.s-icon--switch:before,.s-icon--theme:before,.s-icon--tooltip:before,.s-icon--typography:before,.s-icon--visibility:before,.s-icon--vue:before {
+.s-icon--animation-easing:before,.s-icon--css-flex:before,.s-icon--css-radius:before,.s-icon--file-css:before,.s-icon--file-html:before,.s-icon--file-js:before,.s-icon--file-md:before,.s-icon--file-php:before,.s-icon--file-ts:before,.s-icon--folder-add:before,.s-icon--folder-opened:before,.s-icon--folder-remove:before,.s-icon--folder:before,.s-icon--lang-css-1:before,.s-icon--lang-css:before,.s-icon--lang-html-1:before,.s-icon--lang-html:before,.s-icon--lang-js-1:before,.s-icon--lang-js:before,.s-icon--lang-md-1:before,.s-icon--lang-md:before,.s-icon--lang-node:before,.s-icon--lang-php-1:before,.s-icon--lang-php:before,.s-icon--lang-ts-1:before,.s-icon--lang-ts:before,.s-icon--layout-ratio:before,.s-icon--layout-scale:before,.s-icon--layout-space:before,.s-icon--layout:before,.s-icon--logo-coffeekraken:before,.s-icon--logo-lit-solid:before,.s-icon--logo-lit:before,.s-icon--logo-nextjs-solid:before,.s-icon--logo-nextjs:before,.s-icon--logo-opensource:before,.s-icon--misc-build-solid:before,.s-icon--misc-build:before,.s-icon--misc-eye:before,.s-icon--misc-tools:before,.s-icon--support-chromium:before,.s-icon--support-edge:before,.s-icon--support-firefox:before,.s-icon--support-rtl:before,.s-icon--support-safari:before,.s-icon--theme-colors:before,.s-icon--theme:before,.s-icon--ui-align:before,.s-icon--ui-autocomplete:before,.s-icon--ui-avatar:before,.s-icon--ui-button:before,.s-icon--ui-code:before,.s-icon--ui-copy:before,.s-icon--ui-datepicker:before,.s-icon--ui-display-preview:before,.s-icon--ui-dropdown:before,.s-icon--ui-link-broken-solid:before,.s-icon--ui-link-broken:before,.s-icon--ui-loader-solid:before,.s-icon--ui-loader:before,.s-icon--ui-more-solid:before,.s-icon--ui-more:before,.s-icon--ui-range:before,.s-icon--ui-refresh:before,.s-icon--ui-switch:before,.s-icon--ui-tooltip:before,.s-icon--ui-typography:before,.s-icon--vue:before {
 position: relative;
 
     font-family: sugar-fonticon !important;
@@ -18,169 +18,211 @@ position: relative;
     -moz-osx-font-smoothing: grayscale;
 }
 
-.s-icon--align:before {
+.s-icon--animation-easing:before {
     content: "\f101";
 }
-.s-icon--autocomplete:before {
+.s-icon--css-flex:before {
     content: "\f102";
 }
-.s-icon--avatar:before {
+.s-icon--css-radius:before {
     content: "\f103";
 }
-.s-icon--brand-coffeekraken:before {
+.s-icon--file-css:before {
     content: "\f104";
 }
-.s-icon--brand-lit:before {
+.s-icon--file-html:before {
     content: "\f105";
 }
-.s-icon--brand-nextjs:before {
+.s-icon--file-js:before {
     content: "\f106";
 }
-.s-icon--brand-opensource:before {
+.s-icon--file-md:before {
     content: "\f107";
 }
-.s-icon--build:before {
+.s-icon--file-php:before {
     content: "\f108";
 }
-.s-icon--button:before {
+.s-icon--file-ts:before {
     content: "\f109";
 }
-.s-icon--code:before {
+.s-icon--folder-add:before {
     content: "\f10a";
 }
-.s-icon--colors:before {
+.s-icon--folder-opened:before {
     content: "\f10b";
 }
-.s-icon--copy:before {
+.s-icon--folder-remove:before {
     content: "\f10c";
 }
-.s-icon--datepicker:before {
+.s-icon--folder:before {
     content: "\f10d";
 }
-.s-icon--display-preview:before {
+.s-icon--lang-css-1:before {
     content: "\f10e";
 }
-.s-icon--dropdown:before {
+.s-icon--lang-css:before {
     content: "\f10f";
 }
-.s-icon--easing:before {
+.s-icon--lang-html-1:before {
     content: "\f110";
 }
-.s-icon--file-css:before {
+.s-icon--lang-html:before {
     content: "\f111";
 }
-.s-icon--file-html:before {
+.s-icon--lang-js-1:before {
     content: "\f112";
 }
-.s-icon--file-js:before {
+.s-icon--lang-js:before {
     content: "\f113";
 }
-.s-icon--file-md:before {
+.s-icon--lang-md-1:before {
     content: "\f114";
 }
-.s-icon--file-php:before {
+.s-icon--lang-md:before {
     content: "\f115";
 }
-.s-icon--file-ts:before {
+.s-icon--lang-node:before {
     content: "\f116";
 }
-.s-icon--flex:before {
+.s-icon--lang-php-1:before {
     content: "\f117";
 }
-.s-icon--folder-opened:before {
+.s-icon--lang-php:before {
     content: "\f118";
 }
-.s-icon--folder:before {
+.s-icon--lang-ts-1:before {
     content: "\f119";
 }
-.s-icon--helpers:before {
+.s-icon--lang-ts:before {
     content: "\f11a";
 }
-.s-icon--lang-css:before {
+.s-icon--layout-ratio:before {
     content: "\f11b";
 }
-.s-icon--lang-html:before {
+.s-icon--layout-scale:before {
     content: "\f11c";
 }
-.s-icon--lang-js:before {
+.s-icon--layout-space:before {
     content: "\f11d";
 }
-.s-icon--lang-md:before {
+.s-icon--layout:before {
     content: "\f11e";
 }
-.s-icon--lang-php:before {
+.s-icon--logo-coffeekraken:before {
     content: "\f11f";
 }
-.s-icon--lang-ts:before {
+.s-icon--logo-lit-solid:before {
     content: "\f120";
 }
-.s-icon--layout:before {
+.s-icon--logo-lit:before {
     content: "\f121";
 }
-.s-icon--link-broken-solid:before {
+.s-icon--logo-nextjs-solid:before {
     content: "\f122";
 }
-.s-icon--link-broken:before {
+.s-icon--logo-nextjs:before {
     content: "\f123";
 }
-.s-icon--loader:before {
+.s-icon--logo-opensource:before {
     content: "\f124";
 }
-.s-icon--more:before {
+.s-icon--misc-build-solid:before {
     content: "\f125";
 }
-.s-icon--radius:before {
+.s-icon--misc-build:before {
     content: "\f126";
 }
-.s-icon--range:before {
+.s-icon--misc-eye:before {
     content: "\f127";
 }
-.s-icon--ratio:before {
+.s-icon--misc-tools:before {
     content: "\f128";
 }
-.s-icon--refresh:before {
+.s-icon--support-chromium:before {
     content: "\f129";
 }
-.s-icon--scale:before {
+.s-icon--support-edge:before {
     content: "\f12a";
 }
-.s-icon--space:before {
+.s-icon--support-firefox:before {
     content: "\f12b";
 }
-.s-icon--support-chromium:before {
+.s-icon--support-rtl:before {
     content: "\f12c";
 }
-.s-icon--support-edge:before {
+.s-icon--support-safari:before {
     content: "\f12d";
 }
-.s-icon--support-firefox:before {
+.s-icon--theme-colors:before {
     content: "\f12e";
 }
-.s-icon--support-rtl:before {
+.s-icon--theme:before {
     content: "\f12f";
 }
-.s-icon--support-safari:before {
+.s-icon--ui-align:before {
     content: "\f130";
 }
-.s-icon--switch:before {
+.s-icon--ui-autocomplete:before {
     content: "\f131";
 }
-.s-icon--theme:before {
+.s-icon--ui-avatar:before {
     content: "\f132";
 }
-.s-icon--tooltip:before {
+.s-icon--ui-button:before {
     content: "\f133";
 }
-.s-icon--typography:before {
+.s-icon--ui-code:before {
     content: "\f134";
 }
-.s-icon--visibility:before {
+.s-icon--ui-copy:before {
     content: "\f135";
 }
-.s-icon--vue:before {
+.s-icon--ui-datepicker:before {
     content: "\f136";
 }
-.s-icon--align,.s-icon--autocomplete,.s-icon--avatar,.s-icon--brand-coffeekraken,.s-icon--brand-lit,.s-icon--brand-nextjs,.s-icon--brand-opensource,.s-icon--build,.s-icon--button,.s-icon--code,.s-icon--colors,.s-icon--copy,.s-icon--datepicker,.s-icon--display-preview,.s-icon--dropdown,.s-icon--easing,.s-icon--file-css,.s-icon--file-html,.s-icon--file-js,.s-icon--file-md,.s-icon--file-php,.s-icon--file-ts,.s-icon--flex,.s-icon--folder-opened,.s-icon--folder,.s-icon--helpers,.s-icon--lang-css,.s-icon--lang-html,.s-icon--lang-js,.s-icon--lang-md,.s-icon--lang-php,.s-icon--lang-ts,.s-icon--layout,.s-icon--link-broken-solid,.s-icon--link-broken,.s-icon--loader,.s-icon--more,.s-icon--radius,.s-icon--range,.s-icon--ratio,.s-icon--refresh,.s-icon--scale,.s-icon--space,.s-icon--support-chromium,.s-icon--support-edge,.s-icon--support-firefox,.s-icon--support-rtl,.s-icon--support-safari,.s-icon--switch,.s-icon--theme,.s-icon--tooltip,.s-icon--typography,.s-icon--visibility,.s-icon--vue {
+.s-icon--ui-display-preview:before {
+    content: "\f137";
+}
+.s-icon--ui-dropdown:before {
+    content: "\f138";
+}
+.s-icon--ui-link-broken-solid:before {
+    content: "\f139";
+}
+.s-icon--ui-link-broken:before {
+    content: "\f13a";
+}
+.s-icon--ui-loader-solid:before {
+    content: "\f13b";
+}
+.s-icon--ui-loader:before {
+    content: "\f13c";
+}
+.s-icon--ui-more-solid:before {
+    content: "\f13d";
+}
+.s-icon--ui-more:before {
+    content: "\f13e";
+}
+.s-icon--ui-range:before {
+    content: "\f13f";
+}
+.s-icon--ui-refresh:before {
+    content: "\f140";
+}
+.s-icon--ui-switch:before {
+    content: "\f141";
+}
+.s-icon--ui-tooltip:before {
+    content: "\f142";
+}
+.s-icon--ui-typography:before {
+    content: "\f143";
+}
+.s-icon--vue:before {
+    content: "\f144";
+}
+.s-icon--animation-easing,.s-icon--css-flex,.s-icon--css-radius,.s-icon--file-css,.s-icon--file-html,.s-icon--file-js,.s-icon--file-md,.s-icon--file-php,.s-icon--file-ts,.s-icon--folder-add,.s-icon--folder-opened,.s-icon--folder-remove,.s-icon--folder,.s-icon--lang-css-1,.s-icon--lang-css,.s-icon--lang-html-1,.s-icon--lang-html,.s-icon--lang-js-1,.s-icon--lang-js,.s-icon--lang-md-1,.s-icon--lang-md,.s-icon--lang-node,.s-icon--lang-php-1,.s-icon--lang-php,.s-icon--lang-ts-1,.s-icon--lang-ts,.s-icon--layout-ratio,.s-icon--layout-scale,.s-icon--layout-space,.s-icon--layout,.s-icon--logo-coffeekraken,.s-icon--logo-lit-solid,.s-icon--logo-lit,.s-icon--logo-nextjs-solid,.s-icon--logo-nextjs,.s-icon--logo-opensource,.s-icon--misc-build-solid,.s-icon--misc-build,.s-icon--misc-eye,.s-icon--misc-tools,.s-icon--support-chromium,.s-icon--support-edge,.s-icon--support-firefox,.s-icon--support-rtl,.s-icon--support-safari,.s-icon--theme-colors,.s-icon--theme,.s-icon--ui-align,.s-icon--ui-autocomplete,.s-icon--ui-avatar,.s-icon--ui-button,.s-icon--ui-code,.s-icon--ui-copy,.s-icon--ui-datepicker,.s-icon--ui-display-preview,.s-icon--ui-dropdown,.s-icon--ui-link-broken-solid,.s-icon--ui-link-broken,.s-icon--ui-loader-solid,.s-icon--ui-loader,.s-icon--ui-more-solid,.s-icon--ui-more,.s-icon--ui-range,.s-icon--ui-refresh,.s-icon--ui-switch,.s-icon--ui-tooltip,.s-icon--ui-typography,.s-icon--vue {
 display: inline-block;
 line-height: 1;
 width: 1em;

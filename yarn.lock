@@ -3080,7 +3080,7 @@
 
 "@xmldom/xmldom@^0.7.2":
   version "0.7.5"
-  resolved "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.7.5.tgz"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.5.tgz#09fa51e356d07d0be200642b0e4f91d8e6dd408d"
   integrity sha512-V3BIhmY36fXZ1OtVcI9W+FxQqxVLsPKcNjWigIaa81dLC9IolJl5Mt4Cvhmr0flUnjSpTdrbMTSbXqYqV5dT6A==
 
 abab@^2.0.3, abab@^2.0.5:
@@ -5385,7 +5385,7 @@ csurf@1.10.0:
 
 cubic2quad@^1.2.1:
   version "1.2.1"
-  resolved "https://registry.npmjs.org/cubic2quad/-/cubic2quad-1.2.1.tgz"
+  resolved "https://registry.yarnpkg.com/cubic2quad/-/cubic2quad-1.2.1.tgz#2442260b72c02ee4b6a2fe998fcc1c4073622286"
   integrity sha512-wT5Y7mO8abrV16gnssKdmIhIbA9wSkeMzhh27jAguKrV82i24wER0vL5TGhUJ9dbJNDcigoRZ0IAHFEEEI4THQ==
 
 cumpa@^1.0.1:
@@ -7403,7 +7403,7 @@ faker@^5.5.3:
 
 fantasticon@^1.2.2:
   version "1.2.3"
-  resolved "https://registry.npmjs.org/fantasticon/-/fantasticon-1.2.3.tgz"
+  resolved "https://registry.yarnpkg.com/fantasticon/-/fantasticon-1.2.3.tgz#9082b8bcb38ef6fd63e4f392643b12675c2fb310"
   integrity sha512-VoPXI8+wbLq4qooK2LAFRcqKtOCR20+InF/Io/9I1kLp3IT+LwqJgeFijFvp9a3HRZptfCAxNvazoVHn4kihzQ==
   dependencies:
     change-case "^4.1.2"
@@ -15160,9 +15160,9 @@ slice-ansi@^4.0.0:
     is-fullwidth-code-point "^3.0.0"
 
 slugify@^1.6.0:
-  version "1.6.2"
-  resolved "https://registry.npmjs.org/slugify/-/slugify-1.6.2.tgz"
-  integrity sha512-XMtI8qD84LwCpthLMBHlIhcrj10cgA+U/Ot8G6FD6uFuWZtMfKK75JO7l81nzpFJsPlsW6LT+VKqWQJW3+6New==
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.6.5.tgz#c8f5c072bf2135b80703589b39a3d41451fbe8c8"
+  integrity sha512-8mo9bslnBO3tr5PEVFzMPIWwWnipGS0xVbYf65zxDqfNwmzYn1LpiKNrR6DlClusuvo+hDHd1zKpmfAe83NQSQ==
 
 smart-buffer@^4.1.0:
   version "4.2.0"
@@ -15634,11 +15634,6 @@ strtok3@^6.2.4:
     "@tokenizer/token" "^0.3.0"
     peek-readable "^4.0.1"
 
-style-loader@^3.1.0:
-  version "3.3.1"
-  resolved "https://registry.npmjs.org/style-loader/-/style-loader-3.3.1.tgz"
-  integrity sha512-GPcQ+LDJbrcxHORTRes6Jy2sfvK2kS6hpSfI/fXhPt+spVzxF6LJ1dHLN9zIGmVaaP044YKaIatFaufENRiDoQ==
-
 styled-jsx@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-5.0.1.tgz#78fecbbad2bf95ce6cd981a08918ce4696f5fc80"
@@ -15736,19 +15731,14 @@ svelte-hmr@^0.14.7:
   resolved "https://registry.npmjs.org/svelte-hmr/-/svelte-hmr-0.14.7.tgz"
   integrity sha512-pDrzgcWSoMaK6AJkBWkmgIsecW0GChxYZSZieIYfCP0v2oPyx2CYU/zm7TBIcjLVUPP714WxmViE9Thht4etog==
 
-svelte@^3.38.2:
-  version "3.44.1"
-  resolved "https://registry.npmjs.org/svelte/-/svelte-3.44.1.tgz"
-  integrity sha512-4DrCEJoBvdR689efHNSxIQn2pnFwB7E7j2yLEJtHE/P8hxwZWIphCtJ8are7bjl/iVMlcEf5uh5pJ68IwR09vQ==
-
 svg-pathdata@^6.0.0:
   version "6.0.3"
-  resolved "https://registry.npmjs.org/svg-pathdata/-/svg-pathdata-6.0.3.tgz"
+  resolved "https://registry.yarnpkg.com/svg-pathdata/-/svg-pathdata-6.0.3.tgz#80b0e0283b652ccbafb69ad4f8f73e8d3fbf2cac"
   integrity sha512-qsjeeq5YjBZ5eMdFuUa4ZosMLxgr5RZ+F+Y1OrDhuOCEInRMA3x74XdBtggJcj9kOeInz0WE+LgCPDkZFlBYJw==
 
 svg2ttf@^6.0.3:
   version "6.0.3"
-  resolved "https://registry.npmjs.org/svg2ttf/-/svg2ttf-6.0.3.tgz"
+  resolved "https://registry.yarnpkg.com/svg2ttf/-/svg2ttf-6.0.3.tgz#7b92978ff124b2a583d21e1208b9675e245e56d1"
   integrity sha512-CgqMyZrbOPpc+WqH7aga4JWkDPso23EgypLsbQ6gN3uoPWwwiLjXvzgrwGADBExvCRJrWFzAeK1bSoSpE7ixSQ==
   dependencies:
     "@xmldom/xmldom" "^0.7.2"
@@ -15759,9 +15749,9 @@ svg2ttf@^6.0.3:
     svgpath "^2.1.5"
 
 svgicons2svgfont@^10.0.3:
-  version "10.0.5"
-  resolved "https://registry.npmjs.org/svgicons2svgfont/-/svgicons2svgfont-10.0.5.tgz"
-  integrity sha512-mkP/i0SW5jah4bwIOBpZvrTwJY7rOB3QIIMb/1QwIvJSOScmtAagJTrN3FwHnK1Cu4gw6LgemsefS1Oi0lqkkQ==
+  version "10.0.6"
+  resolved "https://registry.yarnpkg.com/svgicons2svgfont/-/svgicons2svgfont-10.0.6.tgz#2901f9016244049674d3b3178c36471994a30c0a"
+  integrity sha512-fUgQEVg3XwTbOHvlXahHGqCet5Wvfo1bV4DCvbSRvjsOCPCRunYbG4dUJCPegps37BMph3eOrfoobhH5AWuC6A==
   dependencies:
     commander "^7.2.0"
     geometry-interfaces "^1.1.4"
@@ -16338,7 +16328,7 @@ ttf2eot@^2.0.0:
 
 ttf2woff2@^4.0.4:
   version "4.0.4"
-  resolved "https://registry.npmjs.org/ttf2woff2/-/ttf2woff2-4.0.4.tgz"
+  resolved "https://registry.yarnpkg.com/ttf2woff2/-/ttf2woff2-4.0.4.tgz#a995856dc0cc6f4b12ea38c5de7ab289b645ef26"
   integrity sha512-pdt/q89D6VmWToUkiwrUo/OrQtmHGr2iBl3GQriHE6xq0cnteb8gJF8UitOdXmFTX8ajKgb3HMGKpKAsCJM61g==
   dependencies:
     bindings "^1.5.0"
@@ -16348,7 +16338,7 @@ ttf2woff2@^4.0.4:
 
 ttf2woff@^3.0.0:
   version "3.0.0"
-  resolved "https://registry.npmjs.org/ttf2woff/-/ttf2woff-3.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/ttf2woff/-/ttf2woff-3.0.0.tgz#bd0fc0157e428b7a9a30340f78adf72fb741962a"
   integrity sha512-OvmFcj70PhmAsVQKfC15XoKH55cRWuaRzvr2fpTNhTNer6JBpG8n6vOhRrIgxMjcikyYt88xqYXMMVapJ4Rjvg==
   dependencies:
     argparse "^2.0.1"

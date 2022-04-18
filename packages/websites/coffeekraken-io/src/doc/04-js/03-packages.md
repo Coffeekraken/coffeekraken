@@ -39,7 +39,7 @@ Here's a none-exhaustive list of our packages:
 #### JS (Dom)
 
 -   `@coffeekraken/s-date-picker-component`: Nice ans simple date picker using [Pikaday](https://github.com/Pikaday/Pikaday) under the hood
--   `@coffeekraken/s-side-panel-component`: Easy to use (and customizable) side panel component
+-   `@coffeekraken/s-panel-component`: Easy to use (and customizable) panel components like modal, side panel, etc...
 -   `@coffeekraken/s-form-validate-feature`: Easy, customizable and extendable form validation solution
 -   And more...
 

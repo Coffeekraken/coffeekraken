@@ -2,17 +2,21 @@ import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
 import { define as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
+import { define as __SScrollToComponent } from '@coffeekraken/s-scroll-to-component';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
 import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
-import { define as __SSliderComponent, SSliderSlideableBehavior } from '@coffeekraken/s-slider-component';
+import {
+    define as __SSliderComponent,
+    SSliderSlideableBehavior,
+} from '@coffeekraken/s-slider-component';
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
 import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
-import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-side-panel-component';
+import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-panel-component';
 
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
@@ -41,13 +45,13 @@ __SConductor.setup({
     __SLitComponent.setDefaultProps('*', {
         mountWhen: 'nearViewport',
     });
-    __SLitComponent.setDefaultProps(['s-side-panel', 'ck-settings'], {
+    __SLitComponent.setDefaultProps(['s-panel', 'ck-settings'], {
         mountWhen: 'direct',
     });
     __SLitComponent.setDefaultProps(['s-code-example'], {
         scrollToSettings: {
             offset: 100,
-        }
+        },
     });
 
     // layout related
@@ -75,15 +79,16 @@ __SConductor.setup({
     __SCodeExampleWebcomponent();
     __SSidePanelWebcomponent();
     __SColorPickerWebcomponent();
+    __SScrollToComponent();
     __SDatePickerWebcomponent();
     __SRangeWebcomponent();
     __SSliderComponent({
         availableBehaviors: {
             slideable: {
                 class: SSliderSlideableBehavior,
-                settings: {}
-            }
-        }
+                settings: {},
+            },
+        },
     });
 
     // features
@@ -105,5 +110,4 @@ __SConductor.setup({
     });
 
     // __krakenLogo();
-
 })();

@@ -35,23 +35,14 @@ export interface IPostcssSugarPluginUiListClassesParams {
 
 export { postcssSugarPluginUiListClassesInterface as interface };
 
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/list.js`],
-    };
-}
-
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiListClassesParams>;
     atRule: any;
-    applyNoScopes: Function;
     CssVars: any;
     replaceWith: Function;
 }) {
@@ -61,7 +52,6 @@ export default function ({
         scope: [],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars = new CssVars();
 
@@ -97,7 +87,11 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style} style ${params.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${style} style ${
+                    params.defaultStyle === style
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
             *   <ul class="s-list:${style} ${
                     style === 'ol' ? 's-color:accent s-scale:15' : ''
                 }">
@@ -352,6 +346,7 @@ export default function ({
                 } 
             }
         `);
+
         vars.comment(
             () => `/**
             * @name           s-format:text ol
@@ -381,6 +376,7 @@ export default function ({
                     )}');
                 } 
             }
+
         `);
     }
 

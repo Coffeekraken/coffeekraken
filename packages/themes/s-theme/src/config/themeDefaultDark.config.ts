@@ -27,7 +27,6 @@ export default function (env, config) {
         defaultColor: 'main',
 
         color: {
-
             base: {
                 /**
                  * @name                color
@@ -40,7 +39,7 @@ export default function (env, config) {
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                color: 'hsla(206,11,21,1)',
+                color: 'hsla(212,14,50,1)',
                 /**
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.base
@@ -58,8 +57,8 @@ export default function (env, config) {
                         lighten: 30,
                     },
                     surface: {
-                        lighten: 5
-                    }
+                        lighten: 5,
+                    },
                 },
             },
 
@@ -75,7 +74,7 @@ export default function (env, config) {
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                color: 'hsla(198,10,50,1)',
+                color: 'hsla(212,14,50,1)',
                 /**
                  * @name                ...
                  * @namespace            config.themeDefaultDark.color.main

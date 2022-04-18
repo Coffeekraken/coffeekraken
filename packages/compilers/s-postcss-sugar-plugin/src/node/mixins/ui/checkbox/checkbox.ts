@@ -60,12 +60,10 @@ export { postcssSugarPluginUiCheckboxInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiCheckboxParams>;
     atRule: any;
-    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxParams = {
@@ -74,7 +72,6 @@ export default function ({
         scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [``];
 

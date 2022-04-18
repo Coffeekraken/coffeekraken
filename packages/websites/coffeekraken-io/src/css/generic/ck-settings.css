@@ -1,7 +1,7 @@
 .ck-settings {
 }
-#settings .s-side-panel__container {
-     background-color: sugar.color(main, background);
+#settings .s-panel__container {
+    background-color: sugar.color(main, background);
     min-width: 300px;
     width: 33vw;
     max-width: 500px;

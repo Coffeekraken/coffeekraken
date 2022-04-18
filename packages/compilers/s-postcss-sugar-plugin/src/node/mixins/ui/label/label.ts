@@ -60,12 +60,10 @@ export { postcssSugarPluginUiLabelInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiLabelParams>;
     atRule: any;
-    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLabelParams = {
@@ -74,7 +72,6 @@ export default function ({
         scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

@@ -57,13 +57,11 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiSwitchClassesMixinParams>;
     atRule: any;
-    applyNoScopes: Function;
     CssVars: any;
     replaceWith: Function;
 }) {
@@ -75,7 +73,6 @@ export default function ({
         scope: [],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars = new CssVars();
 
@@ -120,14 +117,14 @@ export default function ({
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" class="s-switch${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }" />
+                style === finalParams.defaultStyle ? '' : `:${style}`
+            }" />
             *   </label>
                 <label class="s-mbe:30 s-label">
             *     I'm disabled
             *     <input type="checkbox" disabled class="s-switch${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }" />
+                style === finalParams.defaultStyle ? '' : `:${style}`
+            }" />
             *   </label>
             * `;
             })
@@ -139,14 +136,14 @@ export default function ({
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" class="s-switch${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }" />
+                shape === finalParams.defaultShape ? '' : `:${shape}`
+            }" />
             *   </label>
                 <label class="s-mbe:30 s-label">
             *     I'm disabled
             *     <input type="checkbox" disabled class="s-switch${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }" />
+                shape === finalParams.defaultShape ? '' : `:${shape}`
+            }" />
             *   </label>
             * `;
             })
@@ -161,12 +158,16 @@ export default function ({
         * </div>
         * 
         * @example      html            Colors (non-exhauustive)
-        ${['main','accent','complementary','error'].map(color => `
+        ${['main', 'accent', 'complementary', 'error']
+            .map(
+                (color) => `
         *   <label class="s-mbe:30 s-label s-color:${color}">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" class="s-switch" />
         *   </label>
-        `).join('\n')}
+        `,
+            )
+            .join('\n')}
         * 
         * @example      html            Scales
         *   <label class="s-mbe:30 s-label s-scale\:05">

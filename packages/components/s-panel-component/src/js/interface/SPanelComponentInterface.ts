@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SSidePanelComponentInterface
+ * @name                SPanelComponentInterface
  * @namespace           js.interface
  * @type.                      Class
  * @extends             SInterface
@@ -9,7 +9,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @status              beta
  * @platform             js
  *
- * This class represent the interface that describe parameters of the SSidePanelComponent
+ * This class represent the interface that describe parameters of the SPanelComponent
  *
  * @todo      interface
  * @todo      doc
@@ -19,15 +19,16 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default class SSidePanelComponentInterface extends __SInterface {
+export default class SPanelComponentInterface extends __SInterface {
     static get _definition() {
         return {
-            side: {
+            position: {
                 description:
                     'Specify the side where to display the panel. Can be "top","left","bottom" or "right"',
                 type: 'String',
-                values: ['top', 'left', 'bottom', 'right'],
-                default: 'left',
+                values: ['top', 'left', 'bottom', 'right', 'modal'],
+                default: 'modal',
+                physical: true,
             },
             active: {
                 description: 'Specify the panel initial state',

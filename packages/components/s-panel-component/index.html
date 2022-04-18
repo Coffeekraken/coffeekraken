@@ -9,7 +9,7 @@
     <body>
         <script type="module">
             import __css from './src/css/dev.css';
-            import SClipboardCopy, { define } from './src/js/index.ts';
+            import SClipboardCopy, { define } from './src/js/exports.ts';
 
             define({
                 defaultStyle: true,
@@ -19,7 +19,7 @@
                 document.querySelector('#panel1').active = true;
             }, 2000);
         </script>
-        <s-side-panel id="panel1" side="right" overlay>
+        <s-panel id="panel1" side="right" overlay>
             <p class="s-typo:p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Vestibulum quis odio magna. Phasellus euismod pellentesque risus
@@ -35,11 +35,11 @@
                 gravida lacus interdum ac. Interdum et malesuada fames ac ante
                 ipsum primis in faucibus. Donec vel libero sapien.
             </p>
-        </s-side-panel>
+        </s-panel>
 
         <a id="side-opener">Open panel</a>
 
-        <s-side-panel id="panel2" side="top" triggerer="#side-opener" overlay>
+        <s-panel id="panel2" side="top" triggerer="#side-opener" overlay>
             <p class="s-typo:p">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Vestibulum quis odio magna. Phasellus euismod pellentesque risus
@@ -55,6 +55,6 @@
                 gravida lacus interdum ac. Interdum et malesuada fames ac ante
                 ipsum primis in faucibus. Donec vel libero sapien.
             </p>
-        </s-side-panel>
+        </s-panel>
     </body>
 </html>

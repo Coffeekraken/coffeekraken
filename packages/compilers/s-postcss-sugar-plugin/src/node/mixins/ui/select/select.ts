@@ -61,12 +61,10 @@ export { postcssSugarPluginUiFormSelectInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFormSelectParams>;
     atRule: any;
-    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectParams = {
@@ -75,7 +73,6 @@ export default function ({
         scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

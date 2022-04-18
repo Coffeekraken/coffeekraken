@@ -88,12 +88,10 @@ export { postcssSugarPluginUiTabInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiTabParams>;
     atRule: any;
-    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTabParams = {
@@ -105,7 +103,6 @@ export default function ({
         scope: ['bare', 'lnf', 'grow', 'direction'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

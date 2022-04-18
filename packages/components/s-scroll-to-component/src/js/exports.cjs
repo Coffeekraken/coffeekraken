@@ -1,8 +1,10 @@
 import { createRequire as topLevelCreateRequire } from 'module';
  const require = topLevelCreateRequire(import.meta.url);
+var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __export = (target, all) => {
   for (var name in all)
@@ -16,16 +18,14 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
+var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var SSidePanelComponent_spec_exports = {};
-__export(SSidePanelComponent_spec_exports, {
-  purgecss: () => purgecss
+var exports_exports = {};
+__export(exports_exports, {
+  default: () => exports_default
 });
-module.exports = __toCommonJS(SSidePanelComponent_spec_exports);
-const purgecss = {
-  safelist: [
-    "s-side-panel",
-    "s-side-panel__container",
-    "s-side-panel__overlay"
-  ]
-};
+module.exports = __toCommonJS(exports_exports);
+var import_SRangeComponent = __toESM(require("./SRangeComponent"));
+__reExport(exports_exports, require("./SRangeComponent"), module.exports);
+var exports_default = import_SRangeComponent.default;

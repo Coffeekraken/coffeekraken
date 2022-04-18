@@ -56,13 +56,11 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFormSelectClassesParams>;
     atRule: any;
-    applyNoScopes: Function;
     CssVars: any;
     replaceWith: Function;
 }) {
@@ -74,7 +72,6 @@ export default function ({
         scope: [],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars = new CssVars();
 

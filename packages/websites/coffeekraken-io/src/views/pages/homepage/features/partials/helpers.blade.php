@@ -89,7 +89,7 @@
                 <a href="/styleguide/helpers/visibility" title="Coffeekraken visibility helpers">
                     <div class="icon-card s-color:accent"
                         style="background-image: url(/dist/img/previews/preview-helper-visibility.jpg);">
-                        <i class="s-icon:misc-visibility"></i>
+                        <i class="s-icon:misc-eye"></i>
                         <p class="s-p">Visibility</p>
                     </div>
                 </a>

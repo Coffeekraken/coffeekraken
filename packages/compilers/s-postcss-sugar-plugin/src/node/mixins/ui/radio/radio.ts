@@ -60,12 +60,10 @@ export { postcssSugarPluginUiRadioInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiRadioParams>;
     atRule: any;
-    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRadioParams = {
@@ -74,7 +72,6 @@ export default function ({
         scope: ['bare', 'lnf', 'shape', 'vr'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [
         `

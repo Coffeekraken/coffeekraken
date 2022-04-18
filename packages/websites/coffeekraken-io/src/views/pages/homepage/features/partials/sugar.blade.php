@@ -33,7 +33,7 @@
         </div>
 
         <div class="s-pbs:100">
-            <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="s-layout:221 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
                 <div class="@mobile s-mbe:50">
                     <h5 class="s-typo:h4 s-mbe:30">
                         A coherant <span class="s-tc:accent">CLI</span> with some cool features
@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="s-layout:122 s-gap:column:50 s-pb:50 @mobile s-layout:1_2 s-mbs:50">
+            <div class="s-layout:122 s-gap:column:50 s-pb:80 @mobile s-layout:1_2 s-mbs:50">
                 <div class="@mobile s-mbe:50">
                     <h5 class="s-typo:h4 s-mbe:30">
                         querySelector<span class="s-tc:accent">Live</span>
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="s-layout:221 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
                 <div class="@mobile s-mbe:50">
                     <h5 class="s-typo:h4 s-mbe:30">
                         sha256,<span class="s-tc:accent">base64</span>/etc...
@@ -118,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="s-layout:122 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="s-layout:122 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
                 <div class="@mobile s-mbe:50">
                     <h5 class="s-typo:h4 s-mbe:30">
                         is(<span class="s-tc:accent">Mobile</span>,<span class="s-tc:accent">Color</span>,<span

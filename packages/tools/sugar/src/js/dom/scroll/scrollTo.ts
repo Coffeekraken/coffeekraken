@@ -51,7 +51,7 @@ export interface IScrollToSettings {
 }
 
 function scrollTo(
-    target: HTMLElement,
+    target: HTMLElement | 'top' | 'bottom' | 'left' | 'right',
     settings: Partial<IScrollToSettings> = {},
 ): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -116,10 +116,36 @@ function scrollTo(
 
         let targetY = currentY,
             targetX = currentX;
-        const targetBounds = target.getBoundingClientRect();
+        let targetBounds;
+        try {
+            targetBounds = target.getBoundingClientRect();
+        } catch (e) {
+            targetBounds = {
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+            };
+        }
 
         const offsetY = settings.offsetY ?? settings.offset;
         const offsetX = settings.offsetX ?? settings.offset;
+
+        if (target === 'top') {
+            targetY = 0;
+        } else if (target === 'bottom') {
+            targetY =
+                settings.$elm?.scrollHeight ??
+                document.documentElement.scrollHeight;
+        }
+
+        if (target === 'left') {
+            targetX = 0;
+        } else if (target === 'right') {
+            targetY =
+                settings.$elm?.scrollWidth ??
+                document.documentElement.scrollWidth;
+        }
 
         // y
         if (settings.align === 'center') {

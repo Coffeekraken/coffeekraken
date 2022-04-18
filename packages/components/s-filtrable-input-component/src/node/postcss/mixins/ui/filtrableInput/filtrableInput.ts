@@ -55,13 +55,11 @@ export { postcssUiFiltrableInputInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     sharedData,
     replaceWith,
 }: {
     params: Partial<IPostcssUiFiltrableInputParams>;
     atRule: any;
-    applyNoScopes: Function;
     sharedData: any;
     replaceWith: Function;
 }) {
@@ -71,7 +69,6 @@ export default function ({
         scope: ['bare', 'lnf'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

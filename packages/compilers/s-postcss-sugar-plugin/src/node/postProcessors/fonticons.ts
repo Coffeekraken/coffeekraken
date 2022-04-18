@@ -17,7 +17,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __postcss from 'postcss';
 
-export default async function ({ root, sharedData }) {
+export default async function ({ root, sharedData, settings }) {
     const duration = new __SDuration();
 
     if (!sharedData.icons || !sharedData.icons.length) return;
@@ -57,25 +57,28 @@ export default async function ({ root, sharedData }) {
     // get actual folder hash
     const folderHash = __folderHash(inputDir);
 
-    // handle cached hash
+    // use cache only if the target is  "vite"
     const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
-    if (__fs.existsSync(hashCacheFilePath)) {
-        const cachedFolderHash = __fs
-            .readFileSync(hashCacheFilePath, 'utf8')
-            .toString();
-        // if (cachedFolderHash === folderHash) {
-        //     // same icons, nothing to generate again
-        //     console.log(
-        //         `<green>[fonticons]</green> All icon(s) are up to date`,
-        //     );
-        //     return;
-        // }
+    if (settings.target === 'vite') {
+        // handle cached hash
+        if (__fs.existsSync(hashCacheFilePath)) {
+            const cachedFolderHash = __fs
+                .readFileSync(hashCacheFilePath, 'utf8')
+                .toString();
+            if (cachedFolderHash === folderHash) {
+                // same icons, nothing to generate again
+                // console.log(
+                //     `<green>[fonticons]</green> Fonticons are up to date`,
+                // );
+                return;
+            }
+        }
     }
 
-    console.log(`<yellow>[fonticons]</yellow> Generate icons font...`);
+    console.log(`<yellow>[fonticons]</yellow> Generate fonticons...`);
 
     // fix svg's just to be sure
-    // const fixResult = await __svgFixer(inputDir, inputDir).fix();
+    const fixResult = await __svgFixer(inputDir, inputDir).fix();
 
     const result = await generateFonts({
         inputDir,
@@ -129,10 +132,12 @@ export default async function ({ root, sharedData }) {
     __fs.writeFileSync(cssPath, cssStr);
 
     // saving folder hash
-    __writeFileSync(hashCacheFilePath, folderHash);
+    if (settings.target === 'vite') {
+        __writeFileSync(hashCacheFilePath, folderHash);
+    }
 
     console.log(
-        `<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${
+        `<green>[fonticons]</green> Fonticons generated <green>successfully</green> in <cyan>${
             duration.end().formatedDuration
         }</cyan>`,
     );

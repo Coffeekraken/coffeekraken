@@ -1,5 +1,4 @@
-s-side-panel {
-    display: block;
+s-panel {
     position: fixed;
     top: 0;
     left: 0;
@@ -17,7 +16,14 @@ s-side-panel {
     }
 }
 
-.s-side-panel__overlay {
+.s-panel {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.s-panel__overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -35,7 +41,7 @@ s-side-panel {
     }
 }
 
-.s-side-panel__container {
+.s-panel__container {
     display: none;
     position: absolute;
     z-index: 1;
@@ -48,32 +54,39 @@ s-side-panel {
         transition: sugar.transition(default);
     }
 
-    [side='left'] & {
+    [position='left'] & {
         left: 0;
         top: 0;
         height: 100%;
         transform: translateX(-100%);
     }
-    [side='top'] & {
+    [position='top'] & {
         left: 0;
         top: 0;
         width: 100%;
         min-height: 40px;
         transform: translateY(-100%);
     }
-    [side='right'] & {
+    [position='right'] & {
         right: 0;
         top: 0;
         height: 100%;
         min-width: 40px;
         transform: translateX(100%);
     }
-    [side='bottom'] & {
+    [position='bottom'] & {
         left: 0;
         bottom: 0;
         width: 100%;
         min-height: 40px;
         transform: translateY(100%);
+    }
+    [position='modal'] & {
+        top: 50%;
+        left: 50%;
+        min-width: 50px;
+        min-height: 50px;
+        transform: translate(-50%, -50%);
     }
 
     [active] & {
@@ -81,7 +94,7 @@ s-side-panel {
     }
 }
 
-.s-side-panel {
+.s-panel {
     position: absolute;
     top: 0;
     left: 0;

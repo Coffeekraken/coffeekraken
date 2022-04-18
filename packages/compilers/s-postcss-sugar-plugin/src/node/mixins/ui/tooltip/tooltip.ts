@@ -29,12 +29,7 @@ class postcssSugarPluginUiTooltipInterface extends __SInterface {
         return {
             position: {
                 type: 'String',
-                values: [
-                    'top',
-                    'right',
-                    'bottom',
-                    'left',
-                ],
+                values: ['top', 'right', 'bottom', 'left'],
                 default: 'top',
             },
             interactive: {
@@ -57,11 +52,7 @@ export interface IPostcssSugarPluginUiTooltipParams {
     style: 'solid';
     shape: 'default' | 'square' | 'pill';
     scope: ('bare' | 'lnf' | 'shape' | 'position' | 'interactive' | 'vr')[];
-    position:
-        | 'top'
-        | 'right'
-        | 'bottom'
-        | 'left';
+    position: 'top' | 'right' | 'bottom' | 'left';
     interactive: Boolean;
 }
 
@@ -69,12 +60,10 @@ export { postcssSugarPluginUiTooltipInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiTooltipParams>;
     atRule: any;
-    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipParams = {
@@ -85,7 +74,6 @@ export default function ({
         scope: ['bare', 'lnf', 'shape', 'position', 'interactive'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 
@@ -212,7 +200,7 @@ export default function ({
             `);
                 break;
             case 'top':
-                default:
+            default:
                 vars.push(`  
                 bottom: calc(100% + sugar.theme(ui.tooltip.arrowSize));
                 left: 50%;
@@ -272,7 +260,7 @@ export default function ({
             `);
                 break;
             case 'top':
-                default:
+            default:
                 vars.push(`  
                 &:before {
                   width: 100%;

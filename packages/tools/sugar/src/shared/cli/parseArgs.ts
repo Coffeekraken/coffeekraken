@@ -158,7 +158,7 @@ export default function parseArgs(string, settings = {}) {
         stringArray.push(currentStr.trim());
     }
 
-    stringArray = stringArray.map((item) => __unquote(item));
+    if (stringArray) stringArray = stringArray.map((item) => __unquote(item));
 
     const argsObj = {};
     let currentArgName = undefined;

@@ -2,13 +2,13 @@
     <div class="s-container">
 
         <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Frontend<br><span class="s-tc:accent">Sugar</span></h3>
-        <p class="s-typo:lead s-mbe:50">
+        <p class="s-typo:lead s-mbe:80">
             The goal of Coffeekraken is to help having a <span class="s-tc:complementary">better development
                 experience</span>
             with a <span class="s-tc:accent">production ready quality grade</span>. Here's some areas where we can
             help you: </p>
 
-        <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-display:block">
+        <div class="s-layout:221 s-gap:column:50 s-pb:80 @mobile s-display:block">
             <div class="@mobile s-mbe:50">
                 <div class="sticky">
                     <div class="s-flex:align-center">
@@ -88,7 +88,7 @@
         </div>
 
 
-        <div class="s-layout:122: s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+        <div class="s-layout:122: s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
             <div class="@mobile s-pbe:50">
                 <div class="sticky">
                     <div class="s-flex:align-center">
@@ -137,7 +137,7 @@
 
         </div>
 
-        <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+        <div class="s-layout:221 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
             <div class="@mobile s-mbe:50">
                 <div>
                     <div class="sticky">

@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="s-layout:122 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+        <div class="s-layout:122 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
             <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Speed up</span><br />your process
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+        <div class="s-layout:221 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
             <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h4 s-mbe:30">
                     All the <span class="s-tc:accent">sugar</span> power<br />ready to go!
@@ -88,7 +88,7 @@
             </div>
         </div>
 
-        <div class="s-layout:122 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+        <div class="s-layout:122 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
             <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h4 s-mbe:30">
                     Development<br /><span class="s-tc:accent">server</span>
@@ -116,7 +116,7 @@
         </div>
 
         <div
-            class="s-layout:123 s-gap:column:50 s-p:50 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0">
+            class="s-layout:123 s-gap:column:50 s-p:80 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0">
             <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h5 s-mbe:30">
                     Under<br />
@@ -151,7 +151,7 @@
             </div>
         </div>
 
-        <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+        <div class="s-layout:221 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
             <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Build</span><br />for production
@@ -175,7 +175,7 @@
             </div>
         </div>
 
-        <div class="s-layout:122 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+        <div class="s-layout:122 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
             <div class="@mobile s-mbe:50">
                 <h4 class="s-typo:h4 s-mbe:30">
                     Built-in<br /><span class="s-tc:accent">recipes</span>
@@ -197,7 +197,7 @@
                         <a href="/doc/recipes/built-in/default" title="Coffeekraken generic recipe">
                             <div class="icon-card s-color:accent">
                                 <i class="s-icon:logo-coffeekraken"></i>
-                                <p class="s-p">Default (generic)</p>
+                                <p class="s-p">Generic<br />(default)</p>
                             </div>
                         </a>
                     </li>
@@ -209,18 +209,18 @@
                             </div>
                         </a>
                     </li>
-                    <li class="s-disabled">
-                        <a href="/doc/recipes/built-in/default" title="Coffeekraken NextJs recipe">
+                    <li>
+                        <a href="/doc/recipes/built-in/nextjs" title="Coffeekraken NextJs recipe">
                             <div class="icon-card s-color:accent">
                                 <i class="s-icon:logo-nextjs"></i>
-                                <p class="s-p">NextJS<br />coming soom</p>
+                                <p class="s-p">NextJS</p>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="/doc/recipes/create-your-recipe" title="Create your own recipe">
                             <div class="icon-card">
-                                <i class="s-icon:build"></i>
+                                <i class="s-icon:misc-build"></i>
                                 <p class="s-p">Build your<br />own</p>
                             </div>
                         </a>

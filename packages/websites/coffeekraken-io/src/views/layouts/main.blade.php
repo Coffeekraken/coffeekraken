@@ -29,10 +29,21 @@
 
     @include('generic.tools.tools')
 
-    <s-side-panel id="settings" side="right" triggerer="#settings-opener" overlay>
+    <s-panel id="settings" position="right" triggerer="#settings-opener" overlay>
         <ck-settings mount-when="inViewport"></ck-settings>
-    </s-side-panel>
+    </s-panel>
+
+    <s-panel id="welcome" overlay>
+        <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
+        <p class="s-typo:p">
+            This is the <span class="s-tc:accent">Sugar</span> toolkit.
+        </p>
+    </s-panel>
 
     @include('layouts.footer.footer')
+
+    <s-scroll-to class="scroll-top" href="top">
+        <i class="s-icon:angle-up"></i>
+    </s-scroll-to>
 
 @endsection

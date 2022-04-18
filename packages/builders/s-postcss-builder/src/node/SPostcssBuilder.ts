@@ -248,9 +248,17 @@ export default class SPostcssBuilder extends __SBuilder {
 
                 // build postcss
                 let result;
-                result = await __postcss(plugins).process(src ?? '', {
-                    from,
-                });
+                try {
+                    result = await __postcss(plugins).process(src ?? '', {
+                        from,
+                    });
+                } catch (e) {
+                    emit('log', {
+                        type: __SLog.TYPE_ERROR,
+                        value: e.toString();
+                    });
+                    throw e;
+                }
                 if (!result.css) {
                     throw new Error(
                         `<red>[${this.constructor.name}.build]</red> Something went wrong...`,

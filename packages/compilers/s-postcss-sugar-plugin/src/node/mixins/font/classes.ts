@@ -97,14 +97,12 @@ export default function ({
             })
             .join('\n ')}
         *    
-        * @example        html
         ${Object.keys(fontsFamiliesObj)
-            .map((family) => {
-                return ` * <div class="s-mbe:50">
-                        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${family}</h3>
-                        *   <p class="s-font:${family} s-font:60">${__faker.lorem.sentence()}</p>
-                        * </div>`;
-            })
+            .map(
+                (family) => `
+            * @example        html          Family ${family}
+            * <p class="s-font:${family} s-font:60">${__faker.lorem.sentence()}</p>`,
+            )
             .join('\n')}
         * 
         * @since      2.0.0
@@ -137,14 +135,12 @@ export default function ({
             .join('\n')}
         * 
         *    
-        * @example        html
         ${Object.keys(fontSizesObj)
-            .map((size) => {
-                return ` * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${size}</h3>
-            *   <p class="s-font:${size}">${__faker.lorem.sentence()}</p>
-            * </div>`;
-            })
+            .map(
+                (size) => `
+                * @example        html          Size ${size}
+                *   <p class="s-font:${size}">${__faker.lorem.sentence()}</p>`,
+            )
             .join('\n')}
         * 
         * @since      2.0.0
@@ -173,11 +169,8 @@ export default function ({
         * @cssClass         s-font:italic                   Apply the \`italic\` font-style value
         * @cssClass         s-font:oblique                   Apply the \`oblique\` font-style value
         *    
-        * @example        html
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Italic</h3>
+        * @example        html          Italic
         *   <p class="s-font:italic s-mbe:20">${__faker.lorem.sentence()}</p>
-        * </div>
         * 
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Oblique</h3>
@@ -221,14 +214,12 @@ export default function ({
         * @cssClass         s-font:weight-900                     Apply the \`900\` font-weight value
         * 
         *    
-        * @example        html
         ${fontWeightProps
-            .map((weight) => {
-                return ` * <div class="s-mbe:50">
-                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${weight}</h3>
-                    *   <p class="s-font:${weight}:50">${__faker.lorem.sentence()}</p>
-                    * </div>`;
-            })
+            .map(
+                (weight) => `
+                * @example        html          Weight ${weight}
+                *   <p class="s-font:${weight}:50">${__faker.lorem.sentence()}</p>`,
+            )
             .join('\n')}
         * 
         * @since      2.0.0
@@ -263,14 +254,12 @@ export default function ({
         * @cssClass         s-font:extra-expanded              Apply the \`extra-expanded\` font-stretch value
         * @cssClass         s-font:ultra-expanded              Apply the \`ultra-expanded\` font-stretch value
         *    
-        * @example        html
         ${fontStretchProps
-            .map((stretch) => {
-                return ` * <div class="s-mbe:50">
-                    *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${stretch}</h3>
-                    *   <p class="s-font:${stretch}:50">${__faker.lorem.sentence()}</p>
-                    * </div> `;
-            })
+            .map(
+                (stretch) => `
+                * @example        html          Stretch ${stretch} 
+                *   <p class="s-font:${stretch}:50">${__faker.lorem.sentence()}</p>`,
+            )
             .join('\n')}
         * 
         * @since      2.0.0
@@ -294,16 +283,11 @@ export default function ({
         * @cssClass           s-font:reset-size          Reset the size to 1rem
         * @cssClass           s-font:reset-family        Reset to the default font
         * 
-        * @example        html
-        * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset size</h3>
-        * <div class="s-font:60 s-mbe:30">
+        * @example        html          Reset size
         *   ${__faker.name.title()} <span class="s-font:reset-size">${__faker.name.findName()}</span>
-        * </div>
         * 
-        * <h3 class="s-tc:accent s-font:30 s-mb:20">Reset family</h3>
-        * <div class="s-font:quote s-font:50">
+        * @example          html            Reset family
         *   ${__faker.name.title()} <span class="s-font:reset-family">${__faker.name.findName()}</span>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -323,7 +307,7 @@ export default function ({
         * 
         * This class allows you to apply the font "<yellow>${fontName}</yellow>" to any HTMLElement
         * 
-        * @example        html
+        * @example        html      Font ${fontName}
         * <h1 class="s-font:${fontName}">Hello world</h1>
         * 
         * @since      2.0.0
@@ -348,7 +332,7 @@ export default function ({
   * 
   * This class allows you to apply the font size "<yellow>${sizeName}</yellow>" to any HTMLElement
   * 
-  * @example        html
+  * @example        html     Font size ${sizeName}
   * <h1 class="s-font:${sizeName}">Hello world</h1>
   */
  `,
@@ -369,7 +353,7 @@ export default function ({
   * 
   * This class allows you to reset the font size to 1rem on any HTMLElement
   * 
-  * @example        html
+  * @example        html        Reset size
   * <h1 class="s-font:reset-size">Hello world</h1>
   * 
   * @since      2.0.0
@@ -391,7 +375,7 @@ export default function ({
   * 
   * This class allows you to reset the font family to default on any HTMLElement
   * 
-  * @example        html
+  * @example        html            Reset family
   * <h1 class="s-font:reset-family">Hello world</h1>
   * 
   * @since      2.0.0
@@ -414,7 +398,7 @@ export default function ({
             * 
             * This class allows you to apply the \`font-stretch: ${value}\` value to any HTMLElement
             * 
-            * @example        html
+            * @example        html      Stretch ${value}
             * <h1 class="s-font:${value}">Hello world</h1>
             * 
             * @since      2.0.0
@@ -437,7 +421,7 @@ export default function ({
             * 
             * This class allows you to apply the \`font-style: italic\` css value on any HTMLElement
             * 
-            * @example        html
+            * @example        html          Italic
             * <h1 class="s-font:italic">Hello world</h1>
             * 
             * @since      2.0.0
@@ -459,7 +443,7 @@ export default function ({
             * 
             * This class allows you to apply the \`font-style: oblique\` css value on any HTMLElement
             * 
-            * @example        html
+            * @example        html          Oblique
             * <h1 class="s-font:oblique">Hello world</h1>
             * 
             * @since      2.0.0
@@ -485,7 +469,7 @@ export default function ({
                 '',
             )}\` value to any HTMLElement
             * 
-            * @example        html
+            * @example        html          Weight ${value}
             * <h1 class="s-font:${value.replace(
                 'weight-',
                 '',

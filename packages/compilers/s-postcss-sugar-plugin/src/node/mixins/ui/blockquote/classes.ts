@@ -63,13 +63,11 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiBlockquoteClassesParams>;
     atRule: any;
-    applyNoScopes: Function;
     CssVars: any;
     replaceWith: Function;
 }) {
@@ -81,7 +79,6 @@ export default function ({
         scope: [],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars = new CssVars();
 
@@ -210,7 +207,6 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-
         finalParams.styles.forEach((style) => {
             let cls = `s-blockquote`;
             if (style !== finalParams.defaultStyle) {
@@ -274,11 +270,13 @@ export default function ({
 
     // default color
     if (finalParams.scope.includes('lnf')) {
-        vars.code(() => `
+        vars.code(
+            () => `
             .s-blockquote:not(.s-color) {
                 @sugar.color(${finalParams.defaultColor});
             }
-        `);
+        `,
+        );
     }
 
     if (finalParams.scope.indexOf('tf') !== -1) {
@@ -306,7 +304,7 @@ export default function ({
                 blockquote {
                     @sugar.ui.blockquote($scope: '${finalParams.scope.join(
                         ',',
-                        )}');
+                    )}');
                     @sugar.color(${finalParams.defaultColor});
                 } 
             }

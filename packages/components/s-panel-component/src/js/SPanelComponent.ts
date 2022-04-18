@@ -3,16 +3,16 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { html, css, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators.js';
-import __SSidePanelComponentInterface from './interface/SSidePanelComponentInterface';
+import __SPanelComponentInterface from './interface/SPanelComponentInterface';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 
 // @ts-ignore
-import __css from '../../../../src/css/s-side-panel.css'; // relative to /dist/pkg/esm/js
+import __css from '../../../../src/css/s-panel.css'; // relative to /dist/pkg/esm/js
 
 export interface SSidePanelComponentProps {
-    side: 'top' | 'left' | 'bottom' | 'right';
+    position: 'top' | 'left' | 'bottom' | 'right' | 'modal';
     active: boolean;
     overlay: boolean;
     triggerer: string;
@@ -23,7 +23,7 @@ export default class SSidePanel extends __SLitComponent {
     static _activePanels: SSidePanel[] = [];
 
     static get properties() {
-        return __SLitComponent.properties({}, __SSidePanelComponentInterface);
+        return __SLitComponent.properties({}, __SPanelComponentInterface);
     }
 
     static get styles() {
@@ -58,10 +58,12 @@ export default class SSidePanel extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SSidePanelComponentInterface,
+                    interface: __SPanelComponentInterface,
                 },
             }),
         );
+
+        console.log(this.constructor.properties);
 
         if (this.props.closeOn.indexOf('click') !== -1) {
             this.addEventListener('click', (e) => {
@@ -95,7 +97,7 @@ export default class SSidePanel extends __SLitComponent {
         }
     }
     firstUpdated() {
-        this._$container = this.querySelector('.s-side-panel__container');
+        this._$container = this.querySelector('.s-panel__container');
 
         this._$nodes.forEach(($node) => {
             this._$container?.appendChild($node);
@@ -109,21 +111,31 @@ export default class SSidePanel extends __SLitComponent {
     }
     render() {
         return html`
-            ${this.overlay
-                ? html`
-                      <div
-                          class="${this.componentUtils.className('__overlay')}"
-                      ></div>
-                  `
-                : ''}
-            <div class="${this.componentUtils.className('__container')}"></div>
+            <div
+                class="${this.componentUtils.className(
+                    '',
+                )} ${this.componentUtils.className(`--${this.props.position}`)}"
+            >
+                ${this.props.overlay
+                    ? html`
+                          <div
+                              class="${this.componentUtils.className(
+                                  '__overlay',
+                              )}"
+                          ></div>
+                      `
+                    : ''}
+                <div
+                    class="${this.componentUtils.className('__container')}"
+                ></div>
+            </div>
         `;
     }
 }
 
 export function define(
     props: Partial<SSidePanelComponentProps> = {},
-    tagName = 's-side-panel',
+    tagName = 's-panel',
 ) {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SSidePanel);

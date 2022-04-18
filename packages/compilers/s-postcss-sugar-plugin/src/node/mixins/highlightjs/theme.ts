@@ -45,14 +45,20 @@ export default function ({
     const vars: string[] = [
         `
 .hljs {
+    @sugar.color(main);
+    
     font-size: sugar.scalable(1rem);
     display: block;
     overflow: hidden;
     padding: sugar.theme(ui.code.paddingBlock) sugar.theme(ui.code.paddingInline);
     background-color: sugar.color(current, surface);
     border-radius: sugar.theme(ui.code.borderRadius);
-    color: sugar.color(current, surfaceForeground);
     line-height: 1.5 !important;
+    color: sugar.color(current, text);
+
+    @sugar.theme.when(dark) {
+        color: sugar.color(current, text);
+    }
 
     @sugar.media(mobile) {
         padding: clamp(10px, calc(sugar.theme(ui.code.paddingBlock) * 0.5), 100px) clamp(10px, calc(sugar.theme(ui.code.paddingInline) * 0.5), 100px);
@@ -62,40 +68,68 @@ export default function ({
     }
 
     .hljs-sugar-function {
-        color: sugar.color(accent, --lighten 20);
-        border-bottom: 1px solid sugar.color(accent, --lighten 20);
+        color: sugar.color(accent);
+        border-bottom: 1px solid sugar.color(accent);
         display: inline-block;
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(accent, --lighten 20);
+            border-color: sugar.color(accent, --lighten 20);
+        }
     }
     .hljs-sugar-mixin {
-        color: sugar.color(error, --lighten 20);
-        border-bottom: 1px solid sugar.color(error, --lighten 20);
+        color: sugar.color(error);
+        border-bottom: 1px solid sugar.color(error);
         display: inline-block;
-    }
 
-    &,
-    &.hljs-subst {
-        color: sugar.color(current, surfaceForeground);
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --lighten 20);
+            border-color: sugar.color(error, --lighten 20);
+        }
+
     }
 
     .hljs-selector-tag {
-        color: sugar.color(error, --lighten 20);
+        color: sugar.color(error);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --lighten 20);
+        }
     }
 
     .hljs-selector-id {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
         font-weight: bold;
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
     }
 
     .hljs-selector-class {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
+
     }
 
     .hljs-selector-attr {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
     }
 
     .hljs-selector-pseudo {
-        color: sugar.color(info, --lighten 20 --alpha .6);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20 --alpha 0.6);
+        }
+
     }
 
     .hljs-addition {
@@ -108,41 +142,81 @@ export default function ({
 
     .hljs-built_in,
     .hljs-type {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
     }
 
     .hljs-class {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
     }
 
     .hljs-function {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
+
     }
 
     .hljs-function > .hljs-title {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
+
     }
 
     .hljs-keyword,
     .hljs-literal,
     .hljs-symbol {
-        color: sugar.color(error, --lighten 20);
+        color: sugar.color(error);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --lighten 20);
+        }
     }
 
     .hljs-number {
-        color: sugar.color(accent, --lighten 20);
+        color: sugar.color(accent);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(accent, --lighten 20);
+        }
     }
 
     .hljs-regexp {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
     }
 
     .hljs-string {
-        color: sugar.color(accent, --lighten 20);
+        color: sugar.color(accent);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(accent, --lighten 20);
+        }
+
     }
 
     .hljs-title {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
+
     }
 
     .hljs-params {
@@ -150,11 +224,20 @@ export default function ({
     }
 
     .hljs-bullet {
-        color: sugar.color(accent, --lighten 20);
+        color: sugar.color(accent);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(accent, --lighten 20);
+        }
     }
 
     .hljs-code {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
+
     }
 
     .hljs-emphasis {
@@ -162,7 +245,11 @@ export default function ({
     }
 
     .hljs-formula {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
     }
 
     .hljs-strong {
@@ -174,20 +261,38 @@ export default function ({
     }
 
     .hljs-quote {
-        color: sugar.color(current, 30);
+        color: sugar.color(current);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(current, --lighten 20);
+        }
+
     }
 
     .hljs-comment {
-        color: sugar.color(current, 30);
+        color: sugar.color(current, --alpha 0.5);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(current, --lighten 30 --alpha 0.);
+        }
     }
 
     .hljs-doctag {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
     }
 
     .hljs-meta,
     .hljs-meta-keyword {
-        color: sugar.color(error, --lighten 10 --desaturate 40);
+        color: sugar.color(error, --desaturate 40);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --lighten 10 --desaturate 40);
+        }
+
     }
 
     .hljs-meta-string {
@@ -195,51 +300,105 @@ export default function ({
     }
 
     .hljs-attr {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
+
     }
 
     .hljs-attribute {
-        color: sugar.color(complementary, --lighten 30);
+        color: sugar.color(complementary);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(complementary, --lighten 20);
+        }
     }
 
     .hljs-builtin-name {
-        color: sugar.color(error, --lighten 20);
+        color: sugar.color(error);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --lighten 20);
+        }
+
     }
 
     .hljs-name {
-        color: sugar.color(error, --lighten 20);
+        color: sugar.color(error);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --lighten 20);
+        }
     }
 
     .hljs-section {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
     }
 
     .hljs-tag {
-        color: sugar.color(error, --lighten 20);
+        color: sugar.color(error);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --lighten 20);
+        }
     }
 
     .hljs-variable {
-        color: sugar.color(complementary, --lighten 20);
+        color: sugar.color(complementary);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(complementary, --lighten 20);
+        }
     }
 
     .hljs-template-variable {
-        color: sugar.color(complementary, --lighten 20);
+        color: sugar.color(complementary);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(complementary, --lighten 20);
+        }
+
     }
 
     .hljs-template-tag {
-        color: sugar.color(error, --darken 10 --desaturate 20);
+        color: sugar.color(error, --desaturate 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --darken 10 --desaturate 20);
+        }
+
     }
 
     &.css .hljs-built_in {
-        color: sugar.color(info, --lighten 20);
+        color: sugar.color(info, --darken 20);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(info, --lighten 20);
+        }
     }
 
     &.css .hljs-keyword {
-        color: sugar.color(error, --lighten 20);
+        color: sugar.color(error);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --lighten 20);
+        }
+
     }
 
     &.scss .hljs-keyword {
-        color: sugar.color(error, --lighten 20);
+        color: sugar.color(error);
+
+        @sugar.theme.when(dark) {
+            color: sugar.color(error, --lighten 20);
+        }
+
     }
 }
   `,

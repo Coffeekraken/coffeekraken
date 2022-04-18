@@ -106,6 +106,7 @@ export default class SPageTransitionFeature extends __SFeature {
             const $target = <HTMLElement>e.target;
             // @ts-ignore
             if (
+                $target.tagName === 'A' && 
                 $target.hasAttribute('href') &&
                 // @ts-ignore
                 !$target.getAttribute('href').match(/^https?:\/\//) &&

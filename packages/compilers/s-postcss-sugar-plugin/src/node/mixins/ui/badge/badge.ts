@@ -59,12 +59,10 @@ export { postcssSugarPluginUiBadgeInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiBadgeParams>;
     atRule: any;
-    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBadgeParams = {
@@ -73,7 +71,6 @@ export default function ({
         scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 
@@ -116,7 +113,7 @@ export default function ({
                     pointer-events: none;
                 }
             `);
-            break;
+                break;
             case 'solid':
             default:
                 vars.push(`

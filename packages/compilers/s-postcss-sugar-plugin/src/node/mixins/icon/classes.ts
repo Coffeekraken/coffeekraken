@@ -1,6 +1,9 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __fileName from '@coffeekraken/sugar/node/fs/filename';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
+import __SGlob from '@coffeekraken/s-glob';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __unquote from '@coffeekraken/sugar/shared/string/unquote';
 
 /**
  * @name           classes
@@ -89,9 +92,11 @@ export default function ({
         ...params,
     };
 
-    const icons = finalParams.icons.map((iconStr) => {
+    const iconsObjs: any[] = [];
+
+    finalParams.icons.forEach((iconStr) => {
         const protocol = iconStr.split(':')[0];
-        let splits, name, as;
+        let splits, name, as, path;
         switch (protocol) {
             case 'fa':
             case 'fab':
@@ -101,26 +106,44 @@ export default function ({
                 splits = iconStr.split(':');
                 name = splits[1];
                 as = splits[2] ?? name;
-                return {
+
+                iconsObjs.push({
                     str: iconStr,
                     protocol,
                     name,
                     as,
-                };
+                });
                 break;
             case 'fs':
                 splits = iconStr.split(':');
-                const path = splits[1];
-                if (!__isGlob(path)) {
-                    as = splits[2] ?? __fileName(path).split('.')[0];
+                path = __unquote(splits[1])
+                    .replace(/^('|"|`)/, '')
+                    .replace(/('|"|`)$/, '');
+                as = splits[2];
+
+                const iconsPaths: string[] = [];
+                // handle globs
+                if (__isGlob(path)) {
+                    const files = __SGlob.resolve(path, {
+                        cwd: __packageRoot(),
+                    });
+                    files.forEach((file: any) => {
+                        iconsPaths.push(file.relPath);
+                    });
+                } else {
+                    iconsPaths.push(path);
                 }
-                return {
-                    str: iconStr,
-                    protocol,
-                    path,
-                    name: as,
-                    as: as,
-                };
+
+                iconsPaths.forEach((iconPath) => {
+                    const iconAs = as ?? __fileName(iconPath).split('.')[0];
+                    iconsObjs.push({
+                        str: iconStr,
+                        protocol,
+                        path: iconPath,
+                        name: iconAs,
+                        as: iconAs,
+                    });
+                });
                 break;
         }
     });
@@ -137,8 +160,8 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes represent all the icons that you have listed in your project using the \`@sugar.icon.classes\` mixin.
-        * By using this mixin, your icons will be accessible using the same \`s-icon:{name}\` classes
+        * These classes represent all the icons that you have listed in your project using the @sugar.icon.classes mixin.
+        * By using this mixin, your icons will be accessible using the same s-icon:{name} classes
         * independently of the icon source that can be **Fontawesome** or your **Filesystem**.
         * These providers are the one that we support for now but others can be added if needed.
         * 
@@ -151,16 +174,16 @@ export default function ({
         * @support      safari          
         * @support      edge           
         * 
-        ${icons
+        ${iconsObjs
             .map((iconObj) => {
                 // @ts-ignore
-                return ` * @cssClass      s-icon:${iconObj.as}      Display the \`${iconObj.as}\` icon`;
+                return ` * @cssClass      s-icon:${iconObj.as}      Display the ${iconObj.as} icon`;
             })
             .join('\n')}
         * 
         * @example        html          Used icons in this website
         *   <div class="s-grid:5 @mobile s-grid:2">
-        ${icons
+        ${iconsObjs
             .map((iconObj) => {
                 return ` *
         *   <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
@@ -173,14 +196,14 @@ export default function ({
         *   </div>
         * 
         * @example      css
-        * @sugar.icon.classes(
-        ${icons
+        * @sugar.icon.classes("
+        ${iconsObjs
             .map((iconObj) => {
                 // @ts-ignore
-                return ` *    ${iconObj.str}`;
+                return ` *    ${(iconObj.str.replace(/("|'|`)/gm), '')}`;
             })
             .join('\n')}
-        * );
+        * ");
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -188,7 +211,7 @@ export default function ({
     `,
     );
 
-    icons.forEach((iconObj) => {
+    iconsObjs.forEach((iconObj) => {
         switch (iconObj?.protocol) {
             case 'fa':
             case 'fab':
@@ -204,14 +227,14 @@ export default function ({
                   * @platform       css
                   * @status         beta
                   *
-                  * This class allows you to display the "<yellow>${iconObj.as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
+                  * ef
                   *
                   * @example        html
-                  * <i class="s-icon\:${iconObj.as} s-font\:20"></i>
-                  * <i class="s-icon\:${iconObj.as} s-font\:40"></i>
-                  * <i class="s-icon\:${iconObj.as} s-font\:60"></i>
-                  * <i class="s-icon\:${iconObj.as} s-font\:80"></i>
-                  * <i class="s-icon\:${iconObj.as} s-font\:100"></i>
+                  * <i class="s-icon:${iconObj.as} s-font:20"></i>
+                  * <i class="s-icon:${iconObj.as} s-font:40"></i>
+                  * <i class="s-icon:${iconObj.as} s-font:60"></i>
+                  * <i class="s-icon:${iconObj.as} s-font:80"></i>
+                  * <i class="s-icon:${iconObj.as} s-font:100"></i>
                   * 
                   * @since      2.0.0
                   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -226,31 +249,31 @@ export default function ({
             case 'fs':
                 vars.comment(
                     () => `
-                    /**
-                     * @name        s-icon:${iconObj.as}
-                      * @namespace      sugar.css.icon
-                      * @type           CssClass
-                      * @platform         css
-                      * @status         beta
-                      *
-                      * This class allows you to display the "<yellow>${iconObj.as}</yellow>" icon using the "<cyan>i</cyan>" tag like bellow
-                      *
-                      * @example        html
-                      * <i class="s-icon\:${iconObj.as} s-font\:20"></i>
-                      * <i class="s-icon\:${iconObj.as} s-font\:40"></i>
-                      * <i class="s-icon\:${iconObj.as} s-font\:60"></i>
-                      * <i class="s-icon\:${iconObj.as} s-font\:80"></i>
-                      * <i class="s-icon\:${iconObj.as} s-font\:100"></i>
-                      * 
-                      * @since      2.0.0
-                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                      */
-                    `,
+                        /**
+                         * @name        s-icon:${iconObj.as}
+                         * @namespace      sugar.css.icon
+                         * @type           CssClass
+                         * @platform         css
+                         * @status         beta
+                         *
+                         * efe
+                         *
+                         * @example        html
+                         * <i class="s-icon:${iconObj.as} s-font:20"></i>
+                         * <i class="s-icon:${iconObj.as} s-font:40"></i>
+                         * <i class="s-icon:${iconObj.as} s-font:60"></i>
+                         * <i class="s-icon:${iconObj.as} s-font:80"></i>
+                         * <i class="s-icon:${iconObj.as} s-font:100"></i>
+                         * 
+                         * @since      2.0.0
+                         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                         */
+                        `,
                 ).code(`
-                      .s-icon--${iconObj.as} {
-                        @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
-                      }
-                  `);
+                        .s-icon--${iconObj.as} {
+                            @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
+                        }
+                    `);
                 break;
         }
     });

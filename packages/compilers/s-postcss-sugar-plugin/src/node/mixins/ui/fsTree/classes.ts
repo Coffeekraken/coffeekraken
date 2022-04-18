@@ -52,13 +52,11 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFsTreelassesParams>;
     atRule: any;
-    applyNoScopes: Function;
     CssVars: any;
     replaceWith: Function;
 }) {
@@ -70,14 +68,11 @@ export default function ({
         scope: [],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars = new CssVars();
 
     function _example(classes, isDefault = false) {
-        return `*   <ul class="s-fs-tree${
-                isDefault ? '' : `:${classes}`
-            }">
+        return `*   <ul class="s-fs-tree${isDefault ? '' : `:${classes}`}">
             *       <li class="active">
             *           <div>
             *               <i class="s-icon:folder-open"></i>
@@ -177,14 +172,22 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${style} style ${
+                    finalParams.defaultStyle === style
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
                     ${_example(style, params.defaultStyle === style)}`;
             })
             .join('\n')}
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape} shape ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${shape} shape ${
+                    finalParams.defaultShape === shape
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
                 ${_example(shape, params.defaultShape === shape)}`;
             })
             .join('\n')}

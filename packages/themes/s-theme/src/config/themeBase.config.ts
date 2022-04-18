@@ -15,6 +15,60 @@ export default function (env, config) {
             default: 'cubic-bezier(0.700, 0.000, 0.305, 0.995)',
         },
 
+        scroll: {
+            /**
+             * @name                duration
+             * @namespace           config.themeBase.scroll
+             * @type                String
+             * @default             300
+             *
+             * Specify the scroll duration for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            duration: 300,
+
+            /**
+             * @name                offset
+             * @namespace           config.themeBase.scroll
+             * @type                String
+             * @default             300
+             *
+             * Specify the scroll offset for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            offset: 0,
+
+            /**
+             * @name                offsetX
+             * @namespace           config.themeBase.scroll
+             * @type                String
+             * @default             300
+             *
+             * Specify the scroll offset x for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            offsetX: 0,
+
+            /**
+             * @name                offsetY
+             * @namespace           config.themeBase.scroll
+             * @type                String
+             * @default             300
+             *
+             * Specify the scroll offset y for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            offsetY: 0,
+        },
+
         timing: {
             /**
              * @name                slow
@@ -94,18 +148,18 @@ export default function (env, config) {
         },
 
         helpers: {
-             /**
-              * @name            states
-              * @namespace       config.themeBase.helpers
-              * @type            String[]
-              * @default         ['mounted','active','loading']
-              *
-              * Specify some states for which you want to generate helper classes like `s-when:mounted`, `s-until:loading`, etc...
-              *
-              * @since       2.0.0
-              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-              */
-            states: ['mounted','active','loading'],
+            /**
+             * @name            states
+             * @namespace       config.themeBase.helpers
+             * @type            String[]
+             * @default         ['mounted','active','loading']
+             *
+             * Specify some states for which you want to generate helper classes like `s-when:mounted`, `s-until:loading`, etc...
+             *
+             * @since       2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            states: ['mounted', 'active', 'loading'],
             clearfix: {
                 /**
                  * @name            default
@@ -164,7 +218,7 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 count: 20,
-            }
+            },
         },
 
         layout: {
@@ -775,7 +829,7 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '12_345': '1 2 _ 3 4 5',
-                 /**
+                /**
                  * @name                1_2345
                  * @namespace           config.themeBase.layout.layout
                  * @type                String
@@ -788,7 +842,7 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1_2345': '1 _ 2 3 4 5',
-                 /**
+                /**
                  * @name                1234_5
                  * @namespace           config.themeBase.layout.layout
                  * @type                String
@@ -2281,7 +2335,8 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap',
+                    import:
+                        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap',
                 },
 
                 title: {
@@ -2320,7 +2375,8 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap',
+                    import:
+                        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap',
                 },
 
                 quote: {

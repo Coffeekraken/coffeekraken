@@ -62,13 +62,11 @@ export default function ({
     params,
     atRule,
     atRootStart,
-    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFsTreeParams>;
     atRule: any;
     atRootStart: Function;
-    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreeParams = {
@@ -77,7 +75,6 @@ export default function ({
         scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

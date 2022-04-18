@@ -118,26 +118,26 @@ const plugin = (settings: any = {}) => {
         return `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
     }
 
-    function applyNoScopes(scopes: string[], fromNode): string[] {
-        const noScopeRule = findUp(fromNode, (node) => {
-            if (node?.name === 'sugar.scope.no') return node;
-            return;
-        });
-        if (noScopeRule && noScopeRule.params) {
-            const noScopes = noScopeRule.params
-                .trim()
-                .replace(/^\(/, '')
-                .replace(/\)$/, '')
-                .split(/[,\s]/)
-                .map((l) => l.trim());
+    // function applyNoScopes(scopes: string[], fromNode): string[] {
+    //     const noScopeRule = findUp(fromNode, (node) => {
+    //         if (node?.name === 'sugar.scope.no') return node;
+    //         return;
+    //     });
+    //     if (noScopeRule && noScopeRule.params) {
+    //         const noScopes = noScopeRule.params
+    //             .trim()
+    //             .replace(/^\(/, '')
+    //             .replace(/\)$/, '')
+    //             .split(/[,\s]/)
+    //             .map((l) => l.trim());
 
-            const newScopes = scopes.filter((scope) => {
-                return noScopes.indexOf(scope) === -1;
-            });
-            return newScopes;
-        }
-        return scopes;
-    }
+    //         const newScopes = scopes.filter((scope) => {
+    //             return noScopes.indexOf(scope) === -1;
+    //         });
+    //         return newScopes;
+    //     }
+    //     return scopes;
+    // }
 
     function commentsNeeded() {
         return settings.target !== 'vite';
@@ -444,6 +444,12 @@ const plugin = (settings: any = {}) => {
                     `${__dirname()}/postProcessors/${path}`
                 );
                 await processorFn({
+                    CssVars,
+                    pluginHash,
+                    getRoot: __getRoot,
+                    getCacheFilePath,
+                    commentsNeeded,
+                    settings,
                     root,
                     sharedData,
                 });
@@ -535,6 +541,7 @@ const plugin = (settings: any = {}) => {
                 const processedParams = await _processDeclaration(
                     atRule.params,
                 );
+
                 const params = mixinInterface.apply(processedParams, {});
 
                 delete params.help;
@@ -548,9 +555,6 @@ const plugin = (settings: any = {}) => {
                     getRoot: __getRoot,
                     getCacheFilePath,
                     commentsNeeded,
-                    applyNoScopes(scopes = []) {
-                        return applyNoScopes(scopes, atRule);
-                    },
                     replaceWith(nodes) {
                         replaceWith(atRule, nodes);
                     },

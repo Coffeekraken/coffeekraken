@@ -27,20 +27,19 @@ export default function (env, config) {
         defaultColor: 'main',
 
         color: {
-
             base: {
                 /**
                  * @name                color
                  * @namespace            config.themeDefaultLight.color.base
                  * @type                Color
-                 * @default             hsla(198,0,100,1)
+                 * @default             hsla(212,14,50,1)
                  *
                  * Specify the "base" color value.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                color: 'hsla(198,0,100,1)',
+                color: 'hsla(212,14,50,1)',
                 /**
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.base
@@ -58,8 +57,8 @@ export default function (env, config) {
                         darken: 40,
                     },
                     surface: {
-                        darken: 5
-                    }
+                        darken: 5,
+                    },
                 },
             },
 
@@ -75,7 +74,7 @@ export default function (env, config) {
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                color: 'hsla(198,10,50,1)',
+                color: 'hsla(212,14,50,1)',
                 /**
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.main
@@ -93,8 +92,8 @@ export default function (env, config) {
                         darken: 10,
                     },
                     surface: {
-                        lighten: 48
-                    }
+                        lighten: 48,
+                    },
                 },
             },
 
@@ -266,8 +265,8 @@ export default function (env, config) {
                 default: {
                     text: {
                         darken: 10,
-                    }
-                }
+                    },
+                },
             },
         },
     };

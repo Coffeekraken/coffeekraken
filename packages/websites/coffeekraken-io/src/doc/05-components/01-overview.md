@@ -22,25 +22,27 @@ Component in Coffeekraken is very important part of our vision, and this, even i
 
 We call `component` everything that takes place inside your HTML like a `button`, a form `input`, etc...
 
-Inside the component category, we also include `web`components. These are new custom elements that you can use within your HTML like `s-date-picker`, `s-color-picker`, `s-side-panel`, etc...
+Inside the component category, we also include `web`components. These are new custom elements that you can use within your HTML like `s-date-picker`, `s-color-picker`, `s-panel`, etc...
 
-## Offial components
+## Official components
 
 Here's the list of currently official available components:
 
 {{#each docmap.menu.slug}}
 {{#ifMatch @key 'styleguide\/ui' }}
-- [`{{replace @key '/styleguide/ui/' ''}}`]({{@key}})
-{{/ifMatch}}
-{{/each}}
+
+-   [`{{replace @key '/styleguide/ui/' ''}}`]({{@key}})
+    {{/ifMatch}}
+    {{/each}}
 
 And here's the list of our official `web`components:
 
 {{#each docmap.menu.packages }}
 {{#ifMatch @key '-component$' }}
-- [`{{replace @key '@coffeekraken/' ''}}`](/{{@key}}/doc/readme)
-{{/ifMatch}}
-{{/each}}
+
+-   [`{{replace @key '@coffeekraken/' ''}}`](/{{@key}}/doc/readme)
+    {{/ifMatch}}
+    {{/each}}
 
 ## Components MUST follow some simple rules
 

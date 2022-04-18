@@ -80,12 +80,10 @@ export { postcssSugarPluginUiDropdownInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiDropdownParams>;
     atRule: any;
-    applyNoScopes: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiDropdownParams = {
@@ -95,8 +93,6 @@ export default function ({
         scope: [],
         ...params,
     };
-
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

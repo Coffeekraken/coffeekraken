@@ -61,13 +61,11 @@ export { postcssSugarPluginUiButtonInterface as interface };
 export default function ({
     params,
     atRule,
-    applyNoScopes,
     sharedData,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiButtonParams>;
     atRule: any;
-    applyNoScopes: Function;
     sharedData: any;
     replaceWith: Function;
 }) {
@@ -78,7 +76,6 @@ export default function ({
         scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
-    finalParams.scope = applyNoScopes(finalParams.scope);
 
     const vars: string[] = [];
 

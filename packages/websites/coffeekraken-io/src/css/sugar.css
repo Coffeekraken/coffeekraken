@@ -18,6 +18,7 @@
   fa:angle-down:arrow-down
   fa:angle-up:arrow-up
   fa:box-open:box
+  fa:angle-up
   fa:palette:color
   fa:info:info
   fa:bars:menu
@@ -48,11 +49,11 @@
   fa:file-code
   fa:file-archive
   fa:file
-  fs:'src/icons/coffeekraken/**/*.svg'
   fs:src/icons/read-direction.svg:support-rtl
   fs:src/icons/edge.svg:support-edge
   fs:src/icons/chrome.svg:support-chromium
   fs:src/icons/firefox.svg:support-firefox
   fs:src/icons/safari.svg:support-safari
   fs:src/icons/vuejs.svg:vue
+  fs:'src/icons/coffeekraken/**/*.svg'
 );

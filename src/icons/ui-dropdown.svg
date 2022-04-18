@@ -2,7 +2,7 @@
 <g clip-path="url(#clip0_877_4880)">
 <rect width="64" height="64" fill="white"/>
 <rect x="-0.5" y="-0.5" width="65" height="65" fill="white" stroke="black"/>
-<path d="M58 10C59.1046 10 60 10.8954 60 12V21C60.4203 23.2067 63.5797 23.2067 64 21V10C64 7.79086 62.2091 6 60 6H4C1.79086 6 0 7.79086 0 10V26C0 28.2091 1.79086 30 4 30H19C21.3241 29.6794 21.3241 26.3206 19 26H6C4.89543 26 4 25.1046 4 24V12C4 10.8954 4.89543 10 6 10H58Z" fill="black"/>
+<path d="M58 10C59.1046 10 60 10.8954 60 12V21V21C60.4203 23.2067 63.5797 23.2067 64 21V21V10C64 7.79086 62.2091 6 60 6H4C1.79086 6 0 7.79086 0 10V26C0 28.2091 1.79086 30 4 30H19V30C21.3241 29.6794 21.3241 26.3206 19 26V26H6C4.89543 26 4 25.1046 4 24V12C4 10.8954 4.89543 10 6 10H58Z" fill="black"/>
 <rect x="25" y="27" width="37" height="29" rx="4" stroke="black" stroke-width="4"/>
 <path d="M32.5 34.5H54M32.5 41.5H54M32.5 48.5H54" stroke="black" stroke-width="3" stroke-linecap="round"/>
 <path d="M10 18H31.5" stroke="black" stroke-width="3" stroke-linecap="round"/>

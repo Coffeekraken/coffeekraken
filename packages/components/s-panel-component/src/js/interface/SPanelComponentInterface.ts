@@ -34,6 +34,7 @@ export default class SPanelComponentInterface extends __SInterface {
                 description: 'Specify the panel initial state',
                 type: 'Boolean',
                 default: false,
+                physical: true,
             },
             overlay: {
                 description:

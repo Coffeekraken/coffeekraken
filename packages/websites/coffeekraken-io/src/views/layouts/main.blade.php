@@ -33,13 +33,6 @@
         <ck-settings mount-when="inViewport"></ck-settings>
     </s-panel>
 
-    <s-panel id="welcome" overlay>
-        <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
-        <p class="s-typo:p">
-            This is the <span class="s-tc:accent">Sugar</span> toolkit.
-        </p>
-    </s-panel>
-
     @include('layouts.footer.footer')
 
     <s-scroll-to class="scroll-top" href="top">

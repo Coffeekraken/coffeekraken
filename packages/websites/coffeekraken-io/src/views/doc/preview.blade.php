@@ -29,9 +29,9 @@
                     </div>
                 @endif
                 <s-code-example class="s-mbs:50" lines="5">
-                    <code lang="{{ $example->language }}">
+                    <template lang="{{ $example->language }}">
                         {!! html_entity_decode($example->code, ENT_QUOTES, 'UTF-8') !!}
-                    </code>
+                    </template>
                 </s-code-example>
                 <div class="s-until:sibling:mounted s-code-example-loader">
                     <i class="s-loader:spinner s-color:accent"></i>

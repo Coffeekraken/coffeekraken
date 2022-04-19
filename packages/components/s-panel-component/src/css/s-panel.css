@@ -30,15 +30,6 @@ s-panel {
     z-index: 0;
     width: 100%;
     height: 100%;
-
-    :not([bare]) & {
-        background: sugar.color(main, --alpha 0.3);
-        transition: sugar.transition(default);
-        opacity: 0;
-    }
-    :not([bare])[active] & {
-        opacity: 1;
-    }
 }
 
 .s-panel__container {
@@ -48,10 +39,6 @@ s-panel {
 
     [mounted] & {
         display: block;
-    }
-
-    :not([bare]) & {
-        transition: sugar.transition(default);
     }
 
     [position='left'] & {
@@ -88,6 +75,9 @@ s-panel {
         min-height: 50px;
         transform: translate(-50%, -50%);
     }
+    [active][position='modal'] & {
+        transform: translate(-50%, -50%);
+    }
 
     [active] & {
         transform: translateX(0) translateY(0);
@@ -100,9 +90,27 @@ s-panel {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+}
+
+s-panel[lnf='default'] {
+    .s-panel__overlay {
+        background: sugar.color(main, surface, --alpha 0.6);
+        transition: sugar.transition(default);
+        opacity: 0;
+    }
+
+    .s-panel__container {
+        transition: sugar.transition(default);
+        background: sugar.color(main, background);
+        @sugar.depth (100);
+        @sugar.border.radius;
+        opacity: 0;
+    }
 
     &[active] {
-        pointer-events: all;
+        .s-panel__container,
+        .s-panel__overlay {
+            opacity: 1;
+        }
     }
 }

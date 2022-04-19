@@ -61,7 +61,7 @@ function querySelectorLive(
         {
             rootNode: document,
             once: true,
-            onRemove: null
+            onRemove: null,
         },
         settings,
     );
@@ -92,12 +92,14 @@ function querySelectorLive(
 
         objs.forEach((obj) => {
             // avoid calling multiple times sams callback for the same mutation process
-            if (obj.lastMutationId && obj.lastMutationId === mutationId)
-                return;
+            if (obj.lastMutationId && obj.lastMutationId === mutationId) return;
 
             if (obj.settings.once) {
                 if (!node._querySelectorLive) {
                     node._querySelectorLive = {};
+                }
+                if (node.hasAttribute('s-panel-open')) {
+                    // console.log('ffff', obj.id, node._querySelectorLive);
                 }
                 if (node._querySelectorLive[obj.id]) return;
                 node._querySelectorLive[obj.id] = true;
@@ -118,8 +120,7 @@ function querySelectorLive(
 
         objs.forEach((obj) => {
             // avoid calling multiple times sams callback for the same mutation process
-            if (obj.lastMutationId && obj.lastMutationId === mutationId)
-                return;
+            if (obj.lastMutationId && obj.lastMutationId === mutationId) return;
 
             if (obj.settings.once) {
                 if (!node._querySelectorLive) {
@@ -144,7 +145,6 @@ function querySelectorLive(
             const mutationId = `mutation-${uniqid()}`;
 
             mutations.forEach((mutation) => {
-
                 if (mutation.removedNodes && mutation.removedNodes.length) {
                     [].forEach.call(mutation.removedNodes, (node) => {
                         // get all the selectors registered
@@ -206,12 +206,9 @@ function querySelectorLive(
     }
 
     // first search
-    [].forEach.call(
-        settings.rootNode.querySelectorAll(selector),
-        (node) => {
-            pushNewNode(node, selector, 'init');
-        },
-    );
+    [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
+        pushNewNode(node, selector, 'init');
+    });
 
     return new __SPromise(({ resolve, reject, emit }) => {
         _emit = emit;

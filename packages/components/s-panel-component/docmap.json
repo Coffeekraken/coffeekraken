@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -39,15 +39,20 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -65,8 +70,45 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-side-panel-component.js.interface.sSidePanelComponentInterface": {
-                "name": "SSidePanelComponentInterface",
+            "@coffeekraken.s-panel-component.js.Panel-modal": {
+                "name": "Panel (modal)",
+                "type": "CustomElement",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/s-panel"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a panel that can be opened and closed with positions like \"top\", \"right\", \"bottom\", \"left\" or \"modal\".\nIt has multiple systems to open and close panels depending on your needs and can be programatically manipulated.",
+                "namespace": "@coffeekraken.s-panel-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple panel",
+                        "code": "<s-panel position=\"modal\" id=\"simple-panel-open\">\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1\">Hello world</h1>\n     <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n </div>\n</s-panel>\n<button class=\"s-btn:primary\" s-panel-open=\"simple-panel-open\">Open panel</button>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SPanelComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SPanelComponent.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface": {
+                "name": "SPanelComponentInterface",
                 "type": ".                      Class",
                 "platform": [
                     {
@@ -74,66 +116,18 @@
                         "description": ""
                     }
                 ],
-                "description": "This class represent the interface that describe parameters of the SSidePanelComponent",
-                "namespace": "@coffeekraken.s-side-panel-component.js.interface",
+                "description": "This class represent the interface that describe parameters of the SPanelComponent",
+                "namespace": "@coffeekraken.s-panel-component.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSidePanelComponentInterface",
-                    "description": "",
-                    "definition": {
-                        "side": {
-                            "description": "Specify the side where to display the panel. Can be \"top\",\"left\",\"bottom\" or \"right\"",
-                            "type": "String",
-                            "values": [
-                                "top",
-                                "left",
-                                "bottom",
-                                "right"
-                            ],
-                            "default": "left"
-                        },
-                        "active": {
-                            "description": "Specify the panel initial state",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "overlay": {
-                            "description": "Specify if you want an \"overlay\" between the panel and your content",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "triggerer": {
-                            "description": "Specify a css selector that targets the elements in your UI you want to open the panel on click",
-                            "type": "String"
-                        },
-                        "closeOn": {
-                            "description": "Specify which \"action(s)\" close the panel. Valid values are \"click\" or/and \"escape\"",
-                            "type": {
-                                "type": "Array<String>",
-                                "splitChars": [
-                                    ","
-                                ]
-                            },
-                            "values": [
-                                "click",
-                                "escape"
-                            ],
-                            "default": [
-                                "click",
-                                "escape"
-                            ]
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SSidePanelComponentInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SSidePanelComponentInterface.js",
+                "filename": "SPanelComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SPanelComponentInterface.ts",
                 "children": {}
             }
         }

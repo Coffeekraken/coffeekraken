@@ -29,7 +29,7 @@
 
     @include('generic.tools.tools')
 
-    <s-panel id="settings" position="right" triggerer="#settings-opener" overlay>
+    <s-panel id="settings" position="right" backdrop>
         <ck-settings mount-when="inViewport"></ck-settings>
     </s-panel>
 

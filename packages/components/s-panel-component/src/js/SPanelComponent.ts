@@ -15,7 +15,7 @@ import __css from '../../../../src/css/s-panel.css'; // relative to /dist/pkg/es
 export interface SSidePanelComponentProps {
     position: 'top' | 'left' | 'bottom' | 'right' | 'modal';
     active: boolean;
-    overlay: boolean;
+    backdrop: boolean;
     triggerer: string;
     closeOn: ('click' | 'escape')[];
 }
@@ -40,6 +40,8 @@ export interface SSidePanelComponentProps {
  * @feature         Exteremely customizable
  * @feature         Support multiple positions like "top", "right", "bottom", "left" or "modal"
  * @feature         Easy system to open the modal you want directly from a button, etc...
+ * @feature         Set an id on your modal and use the "s-panel-open" and "s-panel-close" attribute on any HTMLElement to open/close it
+ * @feature         Dispatch some events when the panel is opened or closed
  *
  * @event       panel.open          Dispatched when the panel is opened
  * @event       panel.close         Dispatched when the panel is closed
@@ -51,15 +53,55 @@ export interface SSidePanelComponentProps {
  * import { define } from '@coffeekraken/s-panel-component';
  * define();
  *
- * @example         html        Simple panel
- * <s-panel position="modal" id="simple-panel-open" overlay>
+ * @example         html        Simple top panel
+ * <s-panel position="top" id="simple-top-panel-open" backdrop>
  *  <div class="s-p:50">
  *      <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
  *      <p class="s-typo:p s-mbe:30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>
- *      <button class="s-btn s-color:accent s-mie:10" s-panel-close="simple-panel-open">Close panel</button> or click outside or use the escape key...
+ *      <button class="s-btn s-color:accent s-mie:10" s-panel-close="simple-top-panel-open">Close panel</button> or click outside or use the escape key...
  *  </div>
  * </s-panel>
- * <button class="s-btn s-color:complementary" s-panel-open="simple-panel-open">Open panel</button>
+ * <button class="s-btn s-color:complementary" s-panel-open="simple-top-panel-open">Open top panel</button>
+ *
+ * @example         html        Simple right panel
+ * <s-panel position="right" id="simple-right-panel-open" backdrop>
+ *  <div class="s-p:50">
+ *      <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
+ *      <p class="s-typo:p s-mbe:30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>
+ *      <button class="s-btn s-color:accent s-mie:10" s-panel-close="simple-right-panel-open">Close panel</button> or click outside or use the escape key...
+ *  </div>
+ * </s-panel>
+ * <button class="s-btn s-color:complementary" s-panel-open="simple-right-panel-open">Open right panel</button>
+ *
+ * @example         html        Simple bottom panel
+ * <s-panel position="bottom" id="simple-bottom-panel-open" backdrop>
+ *  <div class="s-p:50">
+ *      <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
+ *      <p class="s-typo:p s-mbe:30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>
+ *      <button class="s-btn s-color:accent s-mie:10" s-panel-close="simple-bottom-panel-open">Close panel</button> or click outside or use the escape key...
+ *  </div>
+ * </s-panel>
+ * <button class="s-btn s-color:complementary" s-panel-open="simple-bottom-panel-open">Open bottom panel</button>
+ *
+ * @example         html        Simple left panel
+ * <s-panel position="left" id="simple-left-panel-open" backdrop>
+ *  <div class="s-p:50">
+ *      <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
+ *      <p class="s-typo:p s-mbe:30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>
+ *      <button class="s-btn s-color:accent s-mie:10" s-panel-close="simple-left-panel-open">Close panel</button> or click outside or use the escape key...
+ *  </div>
+ * </s-panel>
+ * <button class="s-btn s-color:complementary" s-panel-open="simple-left-panel-open">Open left panel</button>
+ *
+ * @example         html        Simple modal panel
+ * <s-panel position="modal" id="simple-modal-panel-open" backdrop>
+ *  <div class="s-p:50">
+ *      <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
+ *      <p class="s-typo:p s-mbe:30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>
+ *      <button class="s-btn s-color:accent s-mie:10" s-panel-close="simple-modal-panel-open">Close panel</button> or click outside or use the escape key...
+ *  </div>
+ * </s-panel>
+ * <button class="s-btn s-color:complementary" s-panel-open="simple-modal-panel-open">Open modal panel</button>
  *
  * @since           2.0.0
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -78,7 +120,7 @@ export default class SSidePanel extends __SLitComponent {
     }
 
     @property()
-    overlay;
+    backdrop;
 
     _$nodes;
 
@@ -94,13 +136,14 @@ export default class SSidePanel extends __SLitComponent {
             }),
         );
 
+        // make sure the panel is in the body tag
+        if (this.parentNode !== document.body) {
+            document.body.appendChild(this);
+        }
+
         // handle active state at start
         if (this.props.active) {
             this.constructor._activePanels.push(this);
-        }
-
-        if (this.id === 'simple-panel-open') {
-            console.log('TT', this);
         }
 
         // closeOn property
@@ -116,7 +159,6 @@ export default class SSidePanel extends __SLitComponent {
         if (this.props.closeOn.indexOf('escape') !== -1) {
             __hotkey('escape').on('press', () => {
                 if (this.constructor._activePanels.slice(-1)[0] === this) {
-                    console.log('close');
                     this.constructor._activePanels.pop();
                     this.close();
                 }
@@ -177,11 +219,7 @@ export default class SSidePanel extends __SLitComponent {
         this.props.active = true;
         this.requestUpdate();
         // dispatch an open event
-        this.dispatchEvent(
-            new CustomEvent('panel.open', {
-                bubbles: true,
-            }),
-        );
+        this.componentUtils.dispatchEvent('open');
     }
     // s-activate support
     activate() {
@@ -191,11 +229,7 @@ export default class SSidePanel extends __SLitComponent {
         this.props.active = false;
         this.requestUpdate();
         // dispatch a close event
-        this.dispatchEvent(
-            new CustomEvent('panel.close', {
-                bubbles: true,
-            }),
-        );
+        this.componentUtils.dispatchEvent('close');
     }
     // s-activate support
     unactivate() {
@@ -208,11 +242,11 @@ export default class SSidePanel extends __SLitComponent {
                     '',
                 )} ${this.componentUtils.className(`--${this.props.position}`)}"
             >
-                ${this.props.overlay
+                ${this.props.backdrop
                     ? html`
                           <div
                               class="${this.componentUtils.className(
-                                  '__overlay',
+                                  '__backdrop',
                               )}"
                           ></div>
                       `

@@ -34,6 +34,7 @@ const descriptor: ISTypeDescriptor = {
         if (!value) return [];
 
         if (params.splitChars && Array.isArray(params.splitChars)) {
+            if (value === true) value = '';
             value = value
                 .split(new RegExp(`(${params.splitChars.join('|')})`, 'gm'))
                 .filter(

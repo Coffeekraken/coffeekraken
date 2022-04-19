@@ -25,6 +25,13 @@ export interface ISComponentUtilsCtorSettings {
     componentUtils: Partial<ISComponentUtilsSettings>;
 }
 
+export interface ISComponentUtilsDispatchSettings {
+    $elm: HTMLElement;
+    bubbles: boolean;
+    cancelable: boolean;
+    detail: any;
+}
+
 export interface ISComponentUtilsDefaultProps {
     id: string;
     mounted: boolean;
@@ -193,7 +200,10 @@ export default class SComponent extends __SClass {
         };
         // @ts-ignore
         InterfaceToApply.definition = {
-            ...Object.assign({}, __SComponentUtilsDefaultPropsInterface.definition),
+            ...Object.assign(
+                {},
+                __SComponentUtilsDefaultPropsInterface.definition,
+            ),
             // @ts-ignore
             ...(this.componentUtilsSettings.interface?.definition ?? {}),
         };
@@ -247,6 +257,64 @@ export default class SComponent extends __SClass {
     }
 
     /**
+     * @name           dispatchEvent
+     * @type            Function
+     * @async
+     *
+     * This method allows you to dispatch some CustomEvents from your component node itself.
+     * 1. An event called "%componentName.%eventName"
+     * 2. An event called "%componentName" with in the detail object a "eventType" property set to the event name
+     * 3. An event called "%eventName" with in the detail object a "eventComponent" property set to the component name
+     *
+     * @param           {String}            eventName     The event name to dispatch
+     * @param           {ISComponentUtilsDispatchSettings}          [settings={}]     The settings to use for the dispatch
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    dispatchEvent(
+        eventName: string,
+        settings?: Partial<ISComponentUtilsDispatchSettings>,
+    ): void {
+        const finalSettings: ISComponentUtilsDispatchSettings = {
+            $elm: this.node,
+            bubbles: true,
+            cancelable: true,
+            detail: {},
+            ...(settings ?? {}),
+        };
+
+        const componentName = this.node.tagName.toLowerCase();
+
+        // %componentName.%eventName
+        finalSettings.$elm.dispatchEvent(
+            new CustomEvent(`${componentName}.${eventName}`, finalSettings),
+        );
+
+        // %componentName
+        finalSettings.$elm.dispatchEvent(
+            new CustomEvent(componentName, {
+                ...finalSettings,
+                detail: {
+                    ...finalSettings.detail,
+                    eventType: eventName,
+                },
+            }),
+        );
+
+        // %eventName
+        finalSettings.$elm.dispatchEvent(
+            new CustomEvent(eventName, {
+                ...finalSettings,
+                detail: {
+                    ...finalSettings.detail,
+                    eventComponent: componentName,
+                },
+            }),
+        );
+    }
+
+    /**
      * @name        adoptStyleInShadowRoot
      * @type        Function
      * @async
@@ -294,8 +362,9 @@ export default class SComponent extends __SClass {
                     else value = props[key].nodeValue;
                 }
                 if (!value) return;
-                passedProps[__camelCase(props[key]?.name ?? key)] =
-                    __autoCast(value);
+                passedProps[__camelCase(props[key]?.name ?? key)] = __autoCast(
+                    value,
+                );
             });
         } else {
             j;
@@ -376,7 +445,8 @@ export default class SComponent extends __SClass {
 
     static getFinalInterface(int?: typeof __SInterface): __SInterface {
         class InlineSComponentUtilsInterface extends __SInterface {
-            static definition = __SComponentUtilsDefaultPropsInterface.definition;
+            static definition =
+                __SComponentUtilsDefaultPropsInterface.definition;
         }
         if (int) {
             InlineSComponentUtilsInterface.definition = {

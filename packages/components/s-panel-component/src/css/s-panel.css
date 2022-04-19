@@ -4,7 +4,7 @@ s-panel {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 99999;
     pointer-events: none;
 
     &[active] {
@@ -23,7 +23,7 @@ s-panel {
     left: 0;
 }
 
-.s-panel__overlay {
+.s-panel__backdrop {
     position: absolute;
     top: 0;
     left: 0;
@@ -93,7 +93,7 @@ s-panel {
 }
 
 s-panel[lnf='default'] {
-    .s-panel__overlay {
+    .s-panel__backdrop {
         background: sugar.color(main, surface, --alpha 0.6);
         transition: sugar.transition(default);
         opacity: 0;
@@ -109,7 +109,7 @@ s-panel[lnf='default'] {
 
     &[active] {
         .s-panel__container,
-        .s-panel__overlay {
+        .s-panel__backdrop {
             opacity: 1;
         }
     }

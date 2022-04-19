@@ -36,9 +36,9 @@ export default class SPanelComponentInterface extends __SInterface {
                 default: false,
                 physical: true,
             },
-            overlay: {
+            backdrop: {
                 description:
-                    'Specify if you want an "overlay" between the panel and your content',
+                    'Specify if you want an "backdrop" between the panel and your content',
                 type: 'Boolean',
                 default: false,
             },

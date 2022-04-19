@@ -126,7 +126,7 @@
                     </a>
                 </div> --}}
                 <div class="s-tooltip-container s-mis:30 @mobile s-mie:30">
-                    <a class="s-cursor:pointer" id="settings-opener">
+                    <a class="s-cursor:pointer" s-panel-open="settings">
                         <i class="s-icon:settings"></i>
                     </a>
                     <div s-floating class="s-tooltip:block-end s-color:accent s-white-space:nowrap s-text:center">

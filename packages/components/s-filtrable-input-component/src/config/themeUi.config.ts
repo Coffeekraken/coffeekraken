@@ -89,14 +89,14 @@ export default (env, config) => {
              * @name          depth
              * @namespace     config.themeUi.filtrableInput
              * @type          String
-             * @default      100
+             * @default      5
              *
              * Specify the default depth for input items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: 100,
+            depth: 5,
             /**
              * @name          outline
              * @namespace     config.themeUi.filtrableInput

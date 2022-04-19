@@ -36,6 +36,14 @@ s-panel {
     display: none;
     position: absolute;
     z-index: 1;
+    overflow: auto;
+    @sugar.scrollbar;
+
+    @sugar.media <=mobile {
+        width: 90vw;
+        min-width: auto;
+        max-width: auto;
+    }
 
     [mounted] & {
         display: block;
@@ -45,6 +53,8 @@ s-panel {
         left: 0;
         top: 0;
         height: 100%;
+        min-width: 40px;
+        max-width: 90vw;
         transform: translateX(-100%);
     }
     [position='top'] & {
@@ -52,6 +62,7 @@ s-panel {
         top: 0;
         width: 100%;
         min-height: 40px;
+        max-height: 90vh;
         transform: translateY(-100%);
     }
     [position='right'] & {
@@ -59,6 +70,7 @@ s-panel {
         top: 0;
         height: 100%;
         min-width: 40px;
+        max-width: 90vw;
         transform: translateX(100%);
     }
     [position='bottom'] & {
@@ -66,14 +78,16 @@ s-panel {
         bottom: 0;
         width: 100%;
         min-height: 40px;
+        max-height: 90vh;
         transform: translateY(100%);
     }
     [position='modal'] & {
+        min-width: clamp(450px, 33vw, 100vw);
+        max-width: 90vw;
+        max-height: 90vh;
         top: 50%;
         left: 50%;
-        min-width: 50px;
-        min-height: 50px;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -40%);
     }
     [active][position='modal'] & {
         transform: translate(-50%, -50%);
@@ -95,15 +109,15 @@ s-panel {
 s-panel[lnf='default'] {
     .s-panel__backdrop {
         background: sugar.color(main, surface, --alpha 0.6);
-        transition: sugar.transition(default);
+        transition: sugar.theme(ui.panel.transition);
         opacity: 0;
     }
 
     .s-panel__container {
-        transition: sugar.transition(default);
+        transition: sugar.theme(ui.panel.transition);
         background: sugar.color(main, background);
-        @sugar.depth (100);
-        @sugar.border.radius;
+        @sugar.depth (sugar.theme.value(ui.panel.depth));
+        @sugar.border.radius (sugar.theme.value(ui.panel.borderRadius));
         opacity: 0;
     }
 

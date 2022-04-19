@@ -1684,6 +1684,23 @@ export default function (env, config) {
              */
             0: '0',
             /**
+             * @name                5
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 5 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            5: `0px 0.6px 0.4px rgba(0, 0, 0, 0.006),
+  0px 1.3px 1px rgba(0, 0, 0, 0.006),
+  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),
+  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),
+  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),
+  0px 10px 10px rgba(0, 0, 0, 0.01)`,
+            /**
              * @name                10
              * @namespace           config.themeBase.depth
              * @type                String

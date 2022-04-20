@@ -137,7 +137,7 @@
 
         </div>
 
-        <div class="s-layout:221 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
+        <div class="s-layout:321 s-gap:column:50 s-pb:80 @mobile s-layout:1_2_3">
             <div class="@mobile s-mbe:50">
                 <div>
                     <div class="sticky">
@@ -172,21 +172,56 @@
 
             </div>
             <div>
+                <div class="s-mbe:30">
+                    @include('generic.code.example', ['examples' => [
+                    'css' => '/* defining some layouts */
+                    .my-layout-2 {
+                    @sugar.layout("1 2 _ 3 3");
+                    }
+                    /* This will gives you:
+                     *
+                     * |------|------|
+                     * | 1    | 2    |
+                     * |------|------|
+                     * | 3           |
+                     * |------|------|
+                     *
+                     */
+                    ',
+                    'html' => '
+                    <!-- using my layout -->
+                    <section class="my-layout-2">
+                        <div>
+                            <!-- content of area 1 -->
+                        </div>
+                        <div>
+                            <!-- content of area 2 -->
+                        </div>
+                        <div>
+                            <!-- content of area 3 -->
+                        </div>
+                        <div>'
+                            ]])
+                </div>
+
+            </div>
+
+            <div>
                 <div class="s-mbe:30 s-mis:-50 @mobile s-mis:0">
                     @include('generic.code.example', ['examples' => [
                     'css' => '/* defining some layouts */
                     .my-layout-1 {
-                    @sugar.layout("1 2 _ 3 3");
-                    }
-                    .my-layout-2 {
                     @sugar.layout("1 2 _ 3 2");
                     }
-                    /* Redefine layout 1 on mobile */
-                    @sugar.media(mobile) {
-                    .my-layout-1 {
-                    @sugar.layout("1 _ 2 _ 3");
-                    }
-                    }
+                    /* This will gives you:
+                     *
+                     * |------|------|
+                     * | 1    | 2    |
+                     * |------|      |
+                     * | 3    |      |
+                     * |------|------|
+                     *
+                     */
                     ',
                     'html' => '
                     <!-- using my layout -->
@@ -202,7 +237,6 @@
                         </div>
                         <div>'
                             ]])
-                        </div>
                 </div>
 
             </div>

@@ -82,7 +82,6 @@ s-panel {
         transform: translateY(100%);
     }
     [position='modal'] & {
-        min-width: clamp(450px, 33vw, 100vw);
         max-width: 90vw;
         max-height: 90vh;
         top: 50%;

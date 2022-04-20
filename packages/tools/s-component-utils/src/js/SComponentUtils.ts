@@ -284,7 +284,7 @@ export default class SComponent extends __SClass {
             ...(settings ?? {}),
         };
 
-        const componentName = this.node.tagName.toLowerCase();
+        const componentName = this.name;
 
         // %componentName.%eventName
         finalSettings.$elm.dispatchEvent(

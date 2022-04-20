@@ -14,16 +14,8 @@
     background: sugar.color(main, --alpha 0);
     transition: all sugar.theme(easing.default) 0.6s;
     @sugar.depth (5);
-    /* background: sugar.color(main, background, --alpha 0.7); */
     border-radius: sugar.border.radius();
     backdrop-filter: blur(10px);
-    /* box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.03); */
-    /* background: linear-gradient(
-        90deg,
-        sugar.color(main, --darken 46),
-        sugar.color(main, --darken 48)
-    );
-     */
     background: sugar.color(main, background, --alpha 0.9);
 
     @sugar.theme.when dark {

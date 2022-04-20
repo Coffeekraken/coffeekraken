@@ -44,15 +44,13 @@ export default class SFormValidateFeatureInterface extends __SInterface {
             errorClass: {
                 description: 'Specify the class to apply when theres an error',
                 type: 'String',
-                default:
-                    's-form-validate--error s-color--error',
+                default: 's-form-validate--error s-color--error',
             },
             validClass: {
                 description:
                     'Specify the class to apply on your s-form-validate element when validation is passed successfully',
                 type: 'String',
-                default:
-                    's-form-validate--valid s-color--success',
+                default: 's-form-validate--valid s-color--success',
             },
             customValidations: {
                 description:
@@ -63,6 +61,11 @@ export default class SFormValidateFeatureInterface extends __SInterface {
             joiOptions: {
                 description:
                     'Specify some [Joi](https://joi.dev/) options to use for your validation',
+                type: 'Object',
+                default: {},
+            },
+            messages: {
+                description: 'Specify some custom messages for your errors',
                 type: 'Object',
                 default: {},
             },

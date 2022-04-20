@@ -97,7 +97,7 @@ export default function ({
                     margin-inline-start: 0;
                   }
 
-                  --delta: 0.1em;
+                  --delta: 0em;
                   --top: sugar.theme(ui.form.paddingBlock);
                   --left: sugar.theme(ui.form.paddingInline);
 
@@ -118,7 +118,7 @@ export default function ({
                       top: calc(var(--top) + 0.2em);
                       left: 0.2em;
                       transform: scale(0.6);
-                      opacity: 0.6;
+                      opacity: 0.8;
                     }
                   }
                   & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + *,
@@ -126,7 +126,7 @@ export default function ({
                     top: calc(var(--top) + 0.2em);
                     left: 0.2em;
                     transform: scale(0.6);
-                    opacity: 0.6;
+                    opacity: 0.8;
                   }
 
                   [dir="rtl"] &,
@@ -141,14 +141,14 @@ export default function ({
                       & > *:not(input):not(textarea):not(select) {
                         left: auto;
                         right: 0.2em;
-                        opacity: 0.6;
+                        opacity: 0.8;
                       }
                     }
                     & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + *,
                     & > textarea:not(:placeholder-shown) + * {
                       left: auto;
                       right: 0.2em;
-                      opacity: 0.6;
+                      opacity: 0.8;
                     }
                   }
 

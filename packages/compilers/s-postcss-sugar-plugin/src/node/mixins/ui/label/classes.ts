@@ -101,8 +101,8 @@ export default function ({
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
         *   <label class="s-mbe:30 s-label${
-        style === finalParams.defaultStyle ? '' : `:${style}`
-    }">
+            style === finalParams.defaultStyle ? '' : `:${style}`
+        }">
     *     <input type="text" disabled class="s-input s-width:40" placeholder="Type something!" />
     *     <span>I'm disabled</span>
     *   </label>
@@ -175,7 +175,7 @@ export default function ({
     });
 
     vars.comment(
-            () => `/**
+        () => `/**
         * @name           s-label:responsive
         * @namespace      sugar.css.ui.input
         * @type           CssClass
@@ -193,10 +193,19 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-        ).code(`
+    ).code(`
         .s-label--responsive {
-            @sugar.media(mobile) {
+
+            > * {
+                max-width: 66.6%;
+            }
+
+            @sugar.media(<=mobile) {
                 @sugar.ui.label($style: block, $scope: bare);
+
+                > * {
+                    max-width: 100%;
+                }    
             }
         }
         `);

@@ -81,9 +81,9 @@ export default function ({
             if (finalParams.scope.indexOf('bare') !== -1) {
                 vars.push(`
                 
-                appearance: none;
-                -moz-appearance: none;
-                -webkit-appearance: none;
+                appearance: none !important;
+                -moz-appearance: none !important;
+                -webkit-appearance: none !important;
                 position: relative;
                 width: 1em;
                 height: 1em;

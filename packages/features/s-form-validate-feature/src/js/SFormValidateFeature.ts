@@ -6,6 +6,7 @@ import __tlds from '@sideway/address/lib/tlds';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __wrap from '@coffeekraken/sugar/js/dom/manipulate/wrap';
 import __insertAfter from '@coffeekraken/sugar/js/dom/manipulate/insertAfter';
+import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js
@@ -30,6 +31,9 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * @support          safari
  * @support          edge
  *
+ * @event           error           Dispatched when a validation error occurs
+ * @event           valid               Dispatched when a validation pass correctly
+ *
  * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
  *
@@ -38,9 +42,9 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * define();
  *
  * @example         html            Email field
- * <label class="s-label:responsive" s-form-validate email>
+ * <label class="s-label:responsive" s-form-validate email email-message="Coco" required-message="PLOP">
  *    Email address
- *    <input type="text" class="s-input s-width:60" placeholder="olivier.bossel@coffeekraken.io" />
+ *    <input type="text" class="s-input s-width:60" required placeholder="olivier.bossel@coffeekraken.io" />
  * </label>
  *
  * @example         html            Domain field
@@ -186,6 +190,7 @@ export default class SFormValidateFeature extends __SFeature {
     private _schema;
 
     private _$field;
+    private _$form;
 
     // the field become dirty when it is in error state
     private _isDirty = false;
@@ -216,6 +221,63 @@ export default class SFormValidateFeature extends __SFeature {
             ),
         );
 
+        // try to get form
+        this._$form = __querySelectorUp(this.node, 'form');
+
+        if (this._$form) {
+            this._$form.addEventListener('submit', (e) => {
+                if (!this._$form._submitHandler) {
+                    this._$form._submitHandler = true;
+
+                    // collect errors during 1 event loop
+                    const collectedErrors: any[] = [];
+                    const errorHandler = (e) => {
+                        collectedErrors.push(e.detail);
+                    };
+                    this._$form.addEventListener(
+                        's-form-validate.error',
+                        errorHandler,
+                    );
+
+                    // prevent form to submit.
+                    // we sill submit it if no errors are collected
+                    e.preventDefault();
+
+                    // if not a custom event, we stop the propagation and we will
+                    // dispatch a "submit" event if their's no errors collected
+                    if (e instanceof CustomEvent) {
+                    } else {
+                        e.stopPropagation();
+                    }
+
+                    setTimeout(() => {
+                        // after 1 event loop, remove the error handler and collector
+                        delete this._$form._submitHandler;
+                        this._$form.removeEventListener(
+                            's-form-validate.error',
+                            errorHandler,
+                        );
+
+                        // check if we have collected errors
+                        if (!collectedErrors.length) {
+                            // no errors, we can submit the form
+                            this._$form.submit();
+                            // dispatch a "submit" event only if the current submit event
+                            // is not a custom event to avoid loops...
+                            if (e instanceof CustomEvent) {
+                            } else {
+                                this._$form.dispatchEvent(
+                                    new CustomEvent('submit', {
+                                        bubbles: true,
+                                    }),
+                                );
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
         // expose the api on node
         this.componentUtils.exposeApi(
             {
@@ -233,6 +295,22 @@ export default class SFormValidateFeature extends __SFeature {
         this._$field = this.node;
         const $insideField = this.node.querySelector('input,textarea,select');
         if ($insideField) this._$field = $insideField;
+
+        // add the "novalidate" attribute on the field cause we take care
+        this._$field.setAttribute('novalidate', 'true');
+
+        // get some validations directly from the $field
+        ['required', 'maxlength', 'minlength', 'max', 'min', 'pattern'].forEach(
+            (type) => {
+                if (this._$field.hasAttribute(type)) {
+                    if (this.props[type]) return;
+                    this.props[type] = this._$field.getAttribute(type);
+                    if (type !== 'maxlength' && type !== 'minlength') {
+                        this._$field.removeAttribute(type);
+                    }
+                }
+            },
+        );
 
         // set the validation type depending on input type etc...
         if (this.props.type) {
@@ -255,6 +333,13 @@ export default class SFormValidateFeature extends __SFeature {
                 });
             } else if (on === 'submit') {
                 this._$field.form?.addEventListener(on, (e) => {
+                    // prevent the submit
+                    e.preventDefault();
+                    // if its an internal event, stop here
+                    if (e instanceof CustomEvent) return;
+                    // otherwise, stop propagation
+                    e.stopPropagation();
+                    // validate the form
                     this.validate(e);
                 });
             } else if (on === 'keyup') {
@@ -269,7 +354,6 @@ export default class SFormValidateFeature extends __SFeature {
             }
         });
 
-        console.log(this.props);
         // preparing the joi schema
         let schema = __joi[this._validationType]();
         let isCustom = false;
@@ -298,6 +382,11 @@ export default class SFormValidateFeature extends __SFeature {
             }
         });
         this._schema = schema;
+
+        // set error messages
+        const errorMessages = {};
+        for (let [key, value] of Object.entries(this.props)) {
+        }
     }
 
     _isValidating = false;
@@ -316,28 +405,43 @@ export default class SFormValidateFeature extends __SFeature {
             this._isValidating = false;
         });
 
-        let resultObj;
+        let schema, value, resultObj;
 
         if (this._$field.type === 'checkbox') {
-            resultObj = this._validateCheckbox();
+            ({ schema, value } = this._validateCheckboxSchema());
         } else if (this._$field.type === 'range') {
-            resultObj = this._validateRange();
+            ({ schema, value } = this._validateRangeSchema());
         } else if (this._$field.tagName.toLowerCase() === 'select') {
-            resultObj = this._validateSelect();
+            ({ schema, value } = this._validateSelectSchema());
         } else {
-            resultObj = this._schema.validate(
-                (<HTMLInputElement>this._$field).value,
-                __deepMerge(
-                    {
-                        errors: {
-                            label: false,
-                            language: this.props.language,
-                        },
-                    },
-                    this.props.joiOptions,
-                ),
-            );
+            schema = this._schema;
+            value = (<HTMLInputElement>this._$field).value;
         }
+
+        resultObj = schema
+            .error((errors) => {
+                errors.forEach((err) => {
+                    let type = err.code.split('.')[0],
+                        code = err.code.split('.').pop();
+
+                    // remap some codes to html attributes
+                    if (code === 'empty') code = 'required';
+
+                    // if our node has the attribute -message, use this
+                    if (this.node.hasAttribute(`${code}-message`)) {
+                        err.message = this.node.getAttribute(`${code}-message`);
+                    }
+
+                    // check in our custom messages
+                    if (this.props.messages[`${type}.${code}`]) {
+                        err.message = this.props.message[`${type}.${code}`];
+                    } else if (this.props.messages[code]) {
+                        err.message = this.props.messages[code];
+                    }
+                });
+                return errors;
+            })
+            .validate(value, this.props.joiOptions);
 
         if (event.type === 'reset') {
             resultObj = {};
@@ -347,7 +451,7 @@ export default class SFormValidateFeature extends __SFeature {
         this._applyResult(resultObj, event);
     }
 
-    _validateCheckbox() {
+    _validateCheckboxSchema() {
         const checkboxesValues = Array.from(
             this.node.querySelectorAll('input[type="checkbox"]:checked'),
         ).map(($item) => (<HTMLInputElement>$item).value);
@@ -358,21 +462,10 @@ export default class SFormValidateFeature extends __SFeature {
         if (this.props.max) {
             schema = schema.max(this.props.max);
         }
-        return schema.validate(
-            checkboxesValues,
-            __deepMerge(
-                {
-                    errors: {
-                        label: false,
-                        language: this.props.language,
-                    },
-                },
-                this.props.joiOptions,
-            ),
-        );
+        return { schema, value: checkboxesValues };
     }
 
-    _validateRange() {
+    _validateRangeSchema() {
         const value = parseFloat(this._$field.value);
         let schema = __joi.number();
         if (this.props.min) {
@@ -381,21 +474,10 @@ export default class SFormValidateFeature extends __SFeature {
         if (this.props.max) {
             schema = schema.max(this.props.max);
         }
-        return schema.validate(
-            value,
-            __deepMerge(
-                {
-                    errors: {
-                        label: false,
-                        language: this.props.language,
-                    },
-                },
-                this.props.joiOptions,
-            ),
-        );
+        return { schema, value };
     }
 
-    _validateSelect() {
+    _validateSelectSchema() {
         // min max
         const selectedItems = Array.from(
             this._$field.querySelectorAll('option'),
@@ -412,18 +494,7 @@ export default class SFormValidateFeature extends __SFeature {
             schema = schema.max(this.props.max);
         }
 
-        return schema.validate(
-            selectedItems,
-            __deepMerge(
-                {
-                    errors: {
-                        label: false,
-                        language: this.props.language,
-                    },
-                },
-                this.props.joiOptions,
-            ),
-        );
+        return { schema, value: selectedItems };
     }
 
     _$error;
@@ -457,6 +528,11 @@ export default class SFormValidateFeature extends __SFeature {
                 }
                 this._$error.innerHTML = res.error.message;
             }
+
+            // dispatch en error event
+            this.componentUtils.dispatchEvent('error', {
+                detail: res,
+            });
         } else if (!res.error) {
             // reset dirty state
             this._isDirty = false;
@@ -472,6 +548,11 @@ export default class SFormValidateFeature extends __SFeature {
             if (this._$error?.hasAttribute('s-form-validate-error')) {
                 this._$error?.remove();
             }
+
+            // dispatch en error event
+            this.componentUtils.dispatchEvent('valid', {
+                detail: res,
+            });
         }
     }
 }

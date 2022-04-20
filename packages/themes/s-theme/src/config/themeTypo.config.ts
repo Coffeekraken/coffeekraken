@@ -21,7 +21,7 @@ export default (env, config) => {
             },
             mobile: {
                 'font-size': 70,
-            }
+            },
         },
         /**
          * @name          h2
@@ -44,7 +44,7 @@ export default (env, config) => {
             },
             mobile: {
                 'font-size': 60,
-            }
+            },
         },
         /**
          * @name          h3
@@ -67,7 +67,7 @@ export default (env, config) => {
             },
             mobile: {
                 'font-size': 50,
-            }
+            },
         },
         /**
          * @name          h4
@@ -90,7 +90,7 @@ export default (env, config) => {
             },
             mobile: {
                 'font-size': 40,
-            }
+            },
         },
         /**
          * @name          h5
@@ -113,7 +113,7 @@ export default (env, config) => {
             },
             mobile: {
                 'font-size': 30,
-            }
+            },
         },
         /**
          * @name          h6
@@ -136,7 +136,7 @@ export default (env, config) => {
             },
             mobile: {
                 'font-size': 30,
-            }
+            },
         },
         /**
          * @name          p
@@ -179,7 +179,7 @@ export default (env, config) => {
             },
             mobile: {
                 'font-size': 40,
-            }
+            },
         },
         /**
          * @name          hr
@@ -256,6 +256,7 @@ export default (env, config) => {
          */
         a: {
             color: 'accent',
+            'text-decoration': 'underline',
         },
         /**
          * @name          quote

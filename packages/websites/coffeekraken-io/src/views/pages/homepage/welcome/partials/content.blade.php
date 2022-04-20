@@ -1,5 +1,5 @@
 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">The frontend toolkit<br>that works for <span
-        class="s-tc:accent">everyone</span><br />Experts, <span class="s-tc:complementary">professionals</span> and
+        class="s-tc:accent">everyone</span>.<br />Experts, <span class="s-tc:complementary">professionals</span> and
     new-comers<br /></h1>
 
 <p class="s-typo:lead s-mbe:60 @mobile s-typo:p">Everything you need like full <span class="s-tc:accent">UI components

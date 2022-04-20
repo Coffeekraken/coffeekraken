@@ -46,7 +46,7 @@ export default function ({
         `
 .hljs {
     @sugar.color(main);
-    
+
     font-size: sugar.scalable(1rem);
     display: block;
     overflow: hidden;
@@ -273,7 +273,7 @@ export default function ({
         color: sugar.color(current, --alpha 0.5);
 
         @sugar.theme.when(dark) {
-            color: sugar.color(current, --lighten 30 --alpha 0.);
+            color: sugar.color(current, --lighten 30 --alpha 0.6);
         }
     }
 

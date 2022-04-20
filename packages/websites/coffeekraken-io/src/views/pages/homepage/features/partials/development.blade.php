@@ -195,33 +195,41 @@
                 <ul class="__recipes-grid s-mbe:30">
                     <li>
                         <a href="/doc/recipes/built-in/default" title="Coffeekraken generic recipe">
-                            <div class="icon-card s-color:accent">
-                                <i class="s-icon:logo-coffeekraken"></i>
-                                <p class="s-p">Generic<br />(default)</p>
+                            <div class="icon-card s-color:accent" style="--image: url(https://media.giphy.com/media/eIm624c8nnNbiG0V3g/giphy.gif);">
+                                <div class="icon-card__content">
+                                    <i class="s-icon:logo-coffeekraken"></i>
+                                    <p class="s-p">Generic<br />(default)</p>
+                                </div>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="/doc/recipes/built-in/litElement" title="Coffeekraken LitElement recipe">
-                            <div class="icon-card s-color:complementary">
-                                <i class="s-icon:logo-lit"></i>
-                                <p class="s-p">LitElement</p>
+                            <div class="icon-card s-color:complementary" style="--image: url(https://media.giphy.com/media/hPTZgtzfRIB5Nfb5rL/giphy-downsized-large.gif);">
+                                <div class="icon-card__content">
+                                    <i class="s-icon:logo-lit"></i>
+                                    <p class="s-p">LitElement</p>
+                                </div>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="/doc/recipes/built-in/nextjs" title="Coffeekraken NextJs recipe">
-                            <div class="icon-card s-color:accent">
-                                <i class="s-icon:logo-nextjs"></i>
-                                <p class="s-p">NextJS</p>
+                            <div class="icon-card s-color:accent" style="--image: url(https://media.giphy.com/media/vfyN4sCz1QBR6/giphy.gif);">
+                                <div class="icon-card__content">
+                                    <i class="s-icon:logo-nextjs"></i>
+                                    <p class="s-p">NextJS</p>
+                                </div>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="/doc/recipes/create-your-recipe" title="Create your own recipe">
-                            <div class="icon-card">
-                                <i class="s-icon:misc-build"></i>
-                                <p class="s-p">Build your<br />own</p>
+                            <div class="icon-card" style="--image: url(https://media.giphy.com/media/9W6X9HzEX73VbjR2WV/giphy.gif);">
+                                <div class="icon-card__content">
+                                    <i class="s-icon:misc-build"></i>
+                                    <p class="s-p">Build your<br />own</p>
+                                </div>
                             </div>
                         </a>
                     </li>

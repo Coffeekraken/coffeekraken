@@ -103,6 +103,40 @@ export interface SSidePanelComponentProps {
  * </s-panel>
  * <button class="s-btn s-color:complementary" s-panel-open="simple-modal-panel-open">Open modal panel</button>
  *
+ * @example         html        Modal panel closable only with button
+ * <s-panel position="modal" id="simple-modal-panel-open-button" backdrop close-on="">
+ *  <div class="s-p:50">
+ *      <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
+ *      <p class="s-typo:p s-mbe:30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>
+ *      <button class="s-btn s-color:accent s-mie:10" s-panel-close="simple-modal-panel-open-button">Close panel</button>
+ *  </div>
+ * </s-panel>
+ * <button class="s-btn s-color:complementary" s-panel-open="simple-modal-panel-open-button">Open modal panel cloable by button</button>
+ *
+ * @example         html        Modal panel closable on event
+ * <s-panel position="modal" id="simple-modal-panel-open-event" backdrop close-on="event:submit">
+ *  <div class="s-p:50" style="width: 400px">
+ *      <h1 class="s-typo:h3">Login</h1>
+ *      <form>
+ *          <label class="s-label:float s-color:accent s-mbs:30" s-form-validate>
+ *              <input class="s-input" type="text" placeholder="John" required />
+ *              <span>Firstname</span>
+ *          </label>
+ *          <label class="s-label:float s-color:accent s-mbs:30" s-form-validate>
+ *              <input class="s-input" type="text" placeholder="Doe" required />
+ *              <span>Lastname</span>
+ *          </label>
+ *          <div class="s-flex:align-center s-mbs:30">
+ *              <span class="s-flex-item:grow">
+ *                  <a href="#" class="s-typo:a">Forgot password?</a>
+ *              </span>
+ *              <input type="submit" class="s-btn s-color:accent" value="Submit" />
+ *         </div>
+ *     </form>
+ *  </div>
+ * </s-panel>
+ * <button class="s-btn s-color:complementary" s-panel-open="simple-modal-panel-open-event">Open fake login modal</button>
+ *
  * @since           2.0.0
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -123,7 +157,6 @@ export default class SSidePanel extends __SLitComponent {
     backdrop;
 
     _$nodes;
-
     constructor() {
         super(
             __deepMerge({
@@ -147,26 +180,33 @@ export default class SSidePanel extends __SLitComponent {
         }
 
         // closeOn property
-        if (this.props.closeOn.indexOf('click') !== -1) {
-            this.addEventListener('click', (e) => {
-                if (this._$container.contains(e.target)) return;
-                if (this.constructor._activePanels.slice(-1)[0] === this) {
-                    this.constructor._activePanels.pop();
+        this.props.closeOn.forEach((what) => {
+            if (what === 'click') {
+                this.addEventListener('click', (e) => {
+                    this.isTopPanel() && this.close();
+                });
+            } else if (what === 'escape') {
+                __hotkey('escape').on('press', () => {
+                    this.isTopPanel() && this.close();
+                });
+            } else if (what.match(/^event\:/)) {
+                const event = what.split(':').pop();
+                this.addEventListener(event, (e) => {
+                    console.log('ENVENT');
                     this.close();
-                }
-            });
-        }
-        if (this.props.closeOn.indexOf('escape') !== -1) {
-            __hotkey('escape').on('press', () => {
-                if (this.constructor._activePanels.slice(-1)[0] === this) {
-                    this.constructor._activePanels.pop();
-                    this.close();
-                }
-            });
-        }
+                });
+            }
+        });
 
         // open attribute
         if (this.id) {
+            const $panels = document.querySelectorAll(`s-panel#${this.id}`);
+            if ($panels.length > 1) {
+                throw new Error(
+                    `[s-panel] Be careful. You have multiple panels with the same "${this.id}" id...`,
+                );
+            }
+
             __querySelectorLive(
                 `[s-panel-open="${this.id}"]`,
                 ($elm) => {
@@ -197,14 +237,17 @@ export default class SSidePanel extends __SLitComponent {
             });
         }
     }
+    isTopPanel() {
+        const stackIdx = this.constructor._activePanels.indexOf(this);
+        return stackIdx === this.constructor._activePanels.length - 1;
+    }
     updated(changedProperties) {
         changedProperties.forEach((oldValue, propName) => {
             if (propName === 'active') {
-                if (
-                    this.props.active &&
-                    this.constructor._activePanels.indexOf(this) === -1
-                ) {
-                    this.constructor._activePanels.push(this);
+                if (this.props.active) {
+                    this.open();
+                } else {
+                    this.close();
                 }
             }
         });
@@ -226,6 +269,11 @@ export default class SSidePanel extends __SLitComponent {
         return this.open();
     }
     close() {
+        const stackIdx = this.constructor._activePanels.indexOf(this);
+        if (stackIdx !== -1) {
+            delete this.constructor._activePanels[stackIdx];
+        }
+
         this.props.active = false;
         this.requestUpdate();
         // dispatch a close event

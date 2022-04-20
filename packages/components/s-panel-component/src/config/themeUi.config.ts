@@ -17,14 +17,14 @@ export default function (env, config) {
              * @name          transition
              * @namespace     config.themeUi.panel
              * @type          String
-             * @default      [theme.ui.default.transition]
+             * @default      [theme.transition.default]
              *
              * Specify the default transition for panel ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            transition: '[theme.transition.default]',
             /**
              * @name          depth
              * @namespace     config.themeUi.panel

@@ -18,7 +18,6 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-
 export default class SPanelComponentInterface extends __SInterface {
     static get _definition() {
         return {
@@ -49,7 +48,7 @@ export default class SPanelComponentInterface extends __SInterface {
             },
             closeOn: {
                 description:
-                    'Specify which "action(s)" close the panel. Valid values are "click" or/and "escape"',
+                    'Specify which "action(s)" close the panel. Valid values are "click" or/and "escape" or/and "event:%eventName',
                 type: {
                     type: 'Array<String>',
                     splitChars: [','],

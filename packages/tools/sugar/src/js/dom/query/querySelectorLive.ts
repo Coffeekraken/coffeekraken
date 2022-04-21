@@ -98,9 +98,6 @@ function querySelectorLive(
                 if (!node._querySelectorLive) {
                     node._querySelectorLive = {};
                 }
-                if (node.hasAttribute('s-panel-open')) {
-                    // console.log('ffff', obj.id, node._querySelectorLive);
-                }
                 if (node._querySelectorLive[obj.id]) return;
                 node._querySelectorLive[obj.id] = true;
             }
@@ -168,6 +165,8 @@ function querySelectorLive(
 
                 if (mutation.addedNodes && mutation.addedNodes.length) {
                     [].forEach.call(mutation.addedNodes, (node) => {
+                        if (!node.querySelectorAll) return;
+
                         // get all the selectors registered
                         const selectors = Object.keys(_selectors);
 
@@ -177,7 +176,6 @@ function querySelectorLive(
                                 pushNewNode(node, sel, mutationId);
                             }
                         });
-                        if (!node.querySelectorAll) return;
                         selectors.forEach((sel) => {
                             const nestedNodes = node.querySelectorAll(sel);
                             [].forEach.call(nestedNodes, (nestedNode) => {
@@ -207,6 +205,7 @@ function querySelectorLive(
 
     // first search
     [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
+        if (!node.querySelectorAll) return;
         pushNewNode(node, selector, 'init');
     });
 

@@ -8,6 +8,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __getTransitionProperties from '@coffeekraken/sugar/js/dom/style/getTransitionProperties';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-panel.css'; // relative to /dist/pkg/esm/js
@@ -157,6 +158,11 @@ export default class SSidePanel extends __SLitComponent {
     backdrop;
 
     _$nodes;
+    _$container;
+    _containerTransitionProps;
+    _$backdrop;
+    _backdropTransitionProps;
+
     constructor() {
         super(
             __deepMerge({
@@ -169,21 +175,67 @@ export default class SSidePanel extends __SLitComponent {
             }),
         );
 
-        // make sure the panel is in the body tag
-        if (this.parentNode !== document.body) {
-            document.body.appendChild(this);
+        // remove all existing panels with the same id
+        if (this.id) {
+            const $panels = document.querySelectorAll(`s-panel#${this.id}`);
+            $panels.forEach(($panel) => $panel !== this && $panel.remove());
         }
+
+        // make sure the panel is in the body tag
+        // if (this.parentNode !== document.body) {
+        //     // document.body.appendChild(this);
+        // }
+
+        // get the initial nodes inside the panel tag
+        this._$nodes = Array.from(this.children);
 
         // handle active state at start
         if (this.props.active) {
             this.constructor._activePanels.push(this);
+        }
+    }
+    isTopPanel() {
+        const stackIdx = this.constructor._activePanels.indexOf(this);
+        return stackIdx === this.constructor._activePanels.length - 1;
+    }
+    updated(changedProperties) {
+        changedProperties.forEach((oldValue, propName) => {
+            if (propName === 'active') {
+                if (this.props.active) {
+                    this.open();
+                } else {
+                    this.close();
+                }
+            }
+        });
+    }
+    firstUpdated() {
+        this._$container = this.querySelector(
+            `.${this.componentUtils.className('__container')}`,
+        );
+        this._$backdrop = this.querySelector(
+            `.${this.componentUtils.className('__backdrop')}`,
+        );
+        this._$nodes.forEach(($node) => {
+            this._$container?.appendChild($node);
+        });
+
+        this._containerTransitionProps = __getTransitionProperties(
+            this._$container,
+        );
+        if (this._$backdrop) {
+            this._backdropTransitionProps = __getTransitionProperties(
+                this._$backdrop,
+            );
         }
 
         // closeOn property
         this.props.closeOn.forEach((what) => {
             if (what === 'click') {
                 this.addEventListener('click', (e) => {
-                    this.isTopPanel() && this.close();
+                    !this._$container.contains(e.target) &&
+                        this.isTopPanel() &&
+                        this.close();
                 });
             } else if (what === 'escape') {
                 __hotkey('escape').on('press', () => {
@@ -192,7 +244,6 @@ export default class SSidePanel extends __SLitComponent {
             } else if (what.match(/^event\:/)) {
                 const event = what.split(':').pop();
                 this.addEventListener(event, (e) => {
-                    console.log('ENVENT');
                     this.close();
                 });
             }
@@ -227,8 +278,6 @@ export default class SSidePanel extends __SLitComponent {
             );
         }
 
-        this._$nodes = Array.from(this.children);
-
         if (this.props.triggerer) {
             __querySelectorLive(this.props.triggerer, ($triggerer) => {
                 $triggerer.addEventListener('click', (e) => {
@@ -237,47 +286,54 @@ export default class SSidePanel extends __SLitComponent {
             });
         }
     }
-    isTopPanel() {
-        const stackIdx = this.constructor._activePanels.indexOf(this);
-        return stackIdx === this.constructor._activePanels.length - 1;
-    }
-    updated(changedProperties) {
-        changedProperties.forEach((oldValue, propName) => {
-            if (propName === 'active') {
-                if (this.props.active) {
-                    this.open();
-                } else {
-                    this.close();
-                }
-            }
-        });
-    }
-    firstUpdated() {
-        this._$container = this.querySelector('.s-panel__container');
-        this._$nodes.forEach(($node) => {
-            this._$container?.appendChild($node);
-        });
-    }
     open() {
-        this.props.active = true;
-        this.requestUpdate();
-        // dispatch an open event
-        this.componentUtils.dispatchEvent('open');
+        if (this.props.active) return;
+
+        // create a ghost div to replace the panel after it's closed
+        if (!this._$ghost) {
+            this._$ghost = document.createElement('div');
+            this._$ghost.setAttribute('s-panel-ghost', 'true');
+            this.parentNode.insertBefore(this._$ghost, this);
+        }
+
+        // put the panel in the body
+        if (this.parentNode !== document.body) {
+            document.body.appendChild(this);
+        }
+
+        setTimeout(() => {
+            this.props.active = true;
+            this.requestUpdate();
+            // dispatch an open event
+            this.componentUtils.dispatchEvent('open');
+        });
     }
     // s-activate support
     activate() {
         return this.open();
     }
     close() {
+        if (!this.props.active) return;
+
         const stackIdx = this.constructor._activePanels.indexOf(this);
         if (stackIdx !== -1) {
             delete this.constructor._activePanels[stackIdx];
         }
-
         this.props.active = false;
         this.requestUpdate();
         // dispatch a close event
         this.componentUtils.dispatchEvent('close');
+
+        let duration = 0;
+        if (this._containerTransitionProps.totalDuration > duration)
+            duration = this._containerTransitionProps.totalDuration;
+        if (this._backdropTransitionProps?.totalDuration > duration)
+            duration = this._backdropTransitionProps?.totalDuration;
+
+        setTimeout(() => {
+            if (!this._$ghost) return;
+            this._$ghost.parentNode.insertBefore(this, this._$ghost);
+        }, duration);
     }
     // s-activate support
     unactivate() {

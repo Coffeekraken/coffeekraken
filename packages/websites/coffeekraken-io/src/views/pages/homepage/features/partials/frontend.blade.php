@@ -200,7 +200,7 @@
                         <div>
                             <!-- content of area 3 -->
                         </div>
-                        <div>'
+                    </section>'
                             ]])
                 </div>
 
@@ -211,15 +211,15 @@
                     @include('generic.code.example', ['examples' => [
                     'css' => '/* defining some layouts */
                     .my-layout-1 {
-                    @sugar.layout("1 2 _ 3 2");
+                    @sugar.layout("1 2 4 _ 3 2 4");
                     }
                     /* This will gives you:
                      *
-                     * |------|------|
-                     * | 1    | 2    |
-                     * |------|      |
-                     * | 3    |      |
-                     * |------|------|
+                     * |------|------|------|
+                     * | 1    | 2    | 4    |
+                     * |------|      |------|
+                     * | 3    |      | 4    |
+                     * |------|------|------|
                      *
                      */
                     ',
@@ -235,7 +235,10 @@
                         <div>
                             <!-- content of area 3 -->
                         </div>
-                        <div>'
+                        <div>
+                            <!-- content of area 4 -->
+                        </div>
+                    <section>'
                             ]])
                 </div>
 

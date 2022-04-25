@@ -8,8 +8,6 @@ if ($nodeModulesVendorsPath) {
 } elseif ($monorepoVendorsPath) {
     require_once $monorepoVendorsPath;
 }
-// use Jenssegers\Blade\Blade;
-use eftec\bladeone\BladeOne;
 
 // require the sugar toolkit
 $nodeModulesSugarPath = realpath(
@@ -34,13 +32,13 @@ if (file_exists($argv[1])) {
 // prepare data to pass it to the template engine
 $data = $params->data;
 // preparing the paths
-$viewName = str_replace('.blade.php', '', $params->viewDotPath);
+$viewName = str_replace('.twig', '', $params->viewDotPath);
 
-$blade = new BladeOne(
-    $params->rootDirs,
-    $params->cacheDir . '/blade',
-    BladeOne::MODE_DEBUG
+$loader = new \Twig\Loader\FilesystemLoader($params->rootDirs);
+$twig = new \Twig\Environment($loader, [
+    'cache' => $params->cacheDir . '/twig',
+]);
+
+print \Sugar\html\expandPleasantCssClassnames(
+    $twig->render($params->viewPath, (array) $data)
 );
-$res = $blade->run($viewName, (array) $data);
-
-print \Sugar\html\expandPleasantCssClassnames($res);

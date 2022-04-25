@@ -488,7 +488,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                     const rootDir = this.viewRendererSettings.rootDirs[i];
                     const potentialViewPath = `${rootDir}/${viewPath
                         .split('.')
-                        .join('/')}.[!data]*`;
+                        .join('/')}.!(data)*`;
                     const matches = __glob.sync(potentialViewPath);
                     if (matches && matches.length) {
                         this._viewPath = matches[0];

@@ -35,16 +35,19 @@ export default function (env, config) {
          * @name          engines
          * @namespace     config.viewRenderer
          * @type          String[]
-         * @default       ['@coffeekraken/s-view-renderer-engine-blade']
+         * @default       ['@coffeekraken/s-view-renderer-engine-blade', '@coffeekraken/s-view-renderer-engine-twig']
          *
          * Store which engines are available for this renderer
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-       engines: ['@coffeekraken/s-view-renderer-engine-blade'],
+        engines: [
+            '@coffeekraken/s-view-renderer-engine-blade',
+            '@coffeekraken/s-view-renderer-engine-twig',
+        ],
 
-       /**
+        /**
          * @name          dataHandlers
          * @namespace     config.viewRenderer
          * @type          String[]

@@ -20,7 +20,7 @@ The views are generated through our `@coffeekraken/s-view-renderer` package and 
 
 This mean that the configurations stands into two configuration files that you can see bellow:
 
-## `views.config.js`
+## `viewRenderer.config.js`
 
 {{> config namespace='@coffeekraken.s-view-renderer.config.viewRenderer'}}
 

@@ -1,5 +1,5 @@
 {
-    "name": "@coffeekraken/s-view-renderer-engine-blade",
+    "name": "coffeekraken/s-view-renderer-engine-blade",
     "require": {
         "eftec/bladeone": "^4.5"
     },

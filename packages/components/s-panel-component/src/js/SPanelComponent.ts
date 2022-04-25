@@ -13,7 +13,7 @@ import __getTransitionProperties from '@coffeekraken/sugar/js/dom/style/getTrans
 // @ts-ignore
 import __css from '../../../../src/css/s-panel.css'; // relative to /dist/pkg/esm/js
 
-export interface SSidePanelComponentProps {
+export interface SPanelComponentProps {
     position: 'top' | 'left' | 'bottom' | 'right' | 'modal';
     active: boolean;
     backdrop: boolean;
@@ -141,8 +141,8 @@ export interface SSidePanelComponentProps {
  * @since           2.0.0
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SSidePanel extends __SLitComponent {
-    static _activePanels: SSidePanel[] = [];
+export default class SPanel extends __SLitComponent {
+    static _activePanels: SPanel[] = [];
 
     static get properties() {
         return __SLitComponent.properties({}, __SPanelComponentInterface);
@@ -364,9 +364,9 @@ export default class SSidePanel extends __SLitComponent {
 }
 
 export function define(
-    props: Partial<SSidePanelComponentProps> = {},
+    props: Partial<SPanelComponentProps> = {},
     tagName = 's-panel',
 ) {
     __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SSidePanel);
+    customElements.define(tagName, SPanel);
 }

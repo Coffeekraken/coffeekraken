@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "concurrently \"npm run ts\"",
-        "ts": "./src/node/ts/build.js",
+        "ts": "node ./src/node/tsup/start.js",
         "ts.watch": "tsc --watch",
         "test": "jest --bail --silent",
         "test.watch": "jest --watch --bail --silent",

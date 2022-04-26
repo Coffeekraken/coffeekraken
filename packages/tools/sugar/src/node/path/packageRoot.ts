@@ -17,7 +17,7 @@ import __fs from 'fs';
  * @feature         Allows you to specify if you want the highest package.json founded using the ```highest``` parameter
  *
  * @param           {String}              [from=process.cwd()]    Specify from where the research has to be done
- * @param           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
+ * @param           {Boolean}             [settings={}]         Some settings to configure the research
  * @return          {String}                                      The finded package path or false if not finded
  *
  * @example         js

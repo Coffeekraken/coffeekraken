@@ -2,7 +2,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
 import __SPromise from '@coffeekraken/s-promise';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __compression from 'compression';
 import __express from 'express';
@@ -16,6 +16,7 @@ import __kill from '@coffeekraken/sugar/node/process/kill';
 import __SBench from '@coffeekraken/s-bench';
 import __SDuration from '@coffeekraken/s-duration';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import __SGlob from '@coffeekraken/s-glob';
 
 /**
  * @name            SFrontendServer
@@ -102,7 +103,7 @@ export default class SFrontendServer extends __SClass {
                     'silly',
                 ].indexOf(finalParams.logLevel);
 
-                const frontendServerConfig = __SugarConfig.get(
+                const frontendServerConfig = __SSugarConfig.get(
                     'frontendServer',
                 );
 
@@ -258,8 +259,8 @@ export default class SFrontendServer extends __SClass {
                                 return;
                             }
 
-                            const { default: handlerFn } = await import(
-                                handlerPath
+                            const handlerFn = await this._getHandlerFn(
+                                routeObj.handler,
                             );
                             express.get(routeSlug, (req, res, next) => {
                                 if (routeObj.request) {
@@ -271,6 +272,9 @@ export default class SFrontendServer extends __SClass {
                         },
                     );
                 }
+
+                // "pages" folder routes
+                pipe(this._registerPagesRoutes(express));
 
                 if (!(await __isPortFree(frontendServerConfig.port))) {
                     emit('log', {
@@ -330,5 +334,91 @@ export default class SFrontendServer extends __SClass {
                 },
             },
         );
+    }
+
+    /**
+     * Get the handler function for the given handler name or directly a path
+     */
+    async _getHandlerFn(handlerNameOrPath: string) {
+        if (__fs.existsSync(handlerNameOrPath)) {
+            return (await import(pageConfig.handler)).default;
+        } else {
+            const handlersInConfig = __SSugarConfig.get(
+                'frontendServer.handlers',
+            );
+            if (!handlersInConfig[handlerNameOrPath]) {
+                throw new Error(
+                    `[SFrontendServer] Sorry but the handler named "<yellow>${handlerNameOrPath}</yellow>" seems to not exists or is missconfigured...`,
+                );
+            }
+            return (await import(handlersInConfig[handlerNameOrPath].path))
+                .default;
+        }
+    }
+
+    /**
+     * This method scrap the "pages" folder and register all the routes found inside.
+     */
+    async _registerPagesRoutes(express) {
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            const pagesFolder = __SSugarConfig.get('storage.src.pagesDir');
+
+            const pagesFiles = __SGlob.resolve(`**/*.js`, {
+                cwd: pagesFolder,
+            });
+
+            for (let [index, pageFile] of pagesFiles.entries()) {
+                const { default: pageConfig } = await import(pageFile.path);
+
+                let handlerFn;
+
+                // generate path
+                let path = `/${pageFile.relPath
+                    .split('/')
+                    .slice(0, -1)
+                    .join('/')
+                    .replace(/\.(t|j)s$/, '')
+                    .replace(/\./g, '/')}`;
+
+                if (pageConfig.params) {
+                    let isOptional = false;
+                    for (let [name, required] of Object.entries(
+                        pageConfig.params,
+                    )) {
+                        if (required) {
+                            if (isOptional) {
+                                throw new Error(
+                                    `[SFrontendServer] You cannot have required params after optional onces in the page ${pageFile.path}`,
+                                );
+                            }
+                            path += `/:${name}`;
+                        } else {
+                            isOptional = true;
+                            path += `/:${name}?`;
+                        }
+                    }
+                }
+
+                // handler
+
+                console.log('PATH', path);
+
+                handlerFn = await this._getHandlerFn(pageConfig.handler);
+
+                express.get(path, (req, res, next) => {
+                    console.log('request');
+                    return pipe(handlerFn(req, res, next));
+                });
+
+                // console.log('pa', path);
+
+                // // views
+                // if (pageConfig.views) {
+                //     for (let [idx, dotPath] of Object.entries(pageConfig.views)) {
+                //         console.log('f', dotPath);
+                //     }
+                // }
+            }
+        });
     }
 }

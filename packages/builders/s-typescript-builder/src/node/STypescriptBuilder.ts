@@ -12,6 +12,9 @@ import __fs from 'fs';
 import __path from 'path';
 import __ts from 'typescript';
 import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
+import __findUp from '@coffeekraken/sugar/node/fs/findUp';
+import __SGlob from '@coffeekraken/s-glob';
+import __monorepoToPackageAbsolutePathDeepMap from '@coffeekraken/sugar/node/monorepo/monorepoToPackageAbsolutePathDeepMap';
 
 /**
  * @name                STypescriptBuilder
@@ -88,14 +91,25 @@ export interface ISTypescriptBuilderResult {
     files: ISTypescriptBuilderResultFile[];
 }
 
+export interface ISTypescriptBuilderCustomSettingsItem {
+    glob: string;
+    settings: ISTypescriptBuilderBuildParams;
+}
+
+export interface ISTypescriptBuilderCustomSettings {
+    [key: string]: ISTypescriptBuilderCustomSettingsItem;
+}
+
 export interface ISTypescriptBuilderBuildParams {
     glob: string[] | string;
     inDir: string;
     outDir: string;
+    packageRoot?: string;
     formats: ('esm' | 'cjs')[];
     platform: 'node' | 'browser';
     watch: boolean;
     buildInitial: boolean;
+    customSettings: ISTypescriptBuilderCustomSettings;
     exclude: string[];
 }
 
@@ -166,11 +180,13 @@ export default class STypescriptBuilder extends __SBuilder {
                     buildPromises: Promise<any>[] = [];
 
                 // @ts-ignore
-                const finalParams: ISTypescriptBuilderBuildParams = __STypescriptBuilderBuildParamsInterface.apply(
-                    params,
+                const finalParams: ISTypescriptBuilderBuildParams = __monorepoToPackageAbsolutePathDeepMap(
+                    __STypescriptBuilderBuildParamsInterface.apply(params),
+                    params.packageRoot ?? process.cwd(),
                 );
 
-                const formats = Array.isArray(finalParams.formats)
+                // this can be overrided by customSettings bellow
+                let formats = Array.isArray(finalParams.formats)
                     ? finalParams.formats
                     : [finalParams.formats];
 
@@ -221,17 +237,72 @@ export default class STypescriptBuilder extends __SBuilder {
 
                     ['add', 'change'].forEach((listener) => {
                         watcher.on(listener, async (relPath) => {
+                            // @TODO     Implement local file settings
+                            // const localConfigFile = await __findUp(
+                            //     'typescriptBuilder.config.js',
+                            //     {
+                            //         cwd: `${finalParams.inDir}/${__path.dirname(
+                            //             relPath,
+                            //         )}`,
+                            //     },
+                            // );
+
+                            // let localConfig = {};
+                            // if (localConfigFile?.length) {
+                            //     localConfig = (
+                            //         await import(localConfigFile[0].path)
+                            //     ).default;
+                            // }
+
+                            let buildParams = Object.assign({}, finalParams);
+
+                            for (let [id, customSettings] of Object.entries(
+                                __SSugarConfig.get(
+                                    'typescriptBuilder.customSettings',
+                                ),
+                            )) {
+                                if (
+                                    __SGlob.match(
+                                        `${finalParams.inDir}/${relPath}`,
+                                        customSettings.glob,
+                                    )
+                                ) {
+                                    formats =
+                                        customSettings.settings?.formats ??
+                                        formats;
+                                    buildParams = __deepMerge(
+                                        buildParams,
+                                        customSettings.settings ?? {},
+                                    );
+                                    break;
+                                }
+                            }
+
+                            // "localize" the file paths to the current package root
+                            buildParams = __monorepoToPackageAbsolutePathDeepMap(
+                                buildParams,
+                                finalParams.packageRoot ?? process.cwd(),
+                            );
+
                             // generate all the requested formats
                             formats.forEach(async (format) => {
                                 const pro = pipe(
-                                    this._buildFile({
-                                        cwd: finalParams.inDir,
-                                        relPath,
-                                        path: `${finalParams.inDir}/${relPath}`,
-                                        format,
-                                        platform: finalParams.platform,
-                                        outDir: finalParams.outDir,
-                                    }),
+                                    this._buildFile(
+                                        __deepMerge(
+                                            {
+                                                cwd: finalParams.inDir,
+                                                relPath,
+                                                path: `${finalParams.inDir}/${relPath}`,
+                                                format,
+                                                platform: finalParams.platform,
+                                                outDir: finalParams.outDir,
+                                            },
+                                            buildParams,
+                                            {
+                                                watch: false,
+                                            },
+                                        ),
+                                    ),
                                 );
                                 buildPromises.push(pro);
                                 const fileResult = await pro;

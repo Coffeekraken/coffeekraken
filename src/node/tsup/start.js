@@ -310,7 +310,7 @@ chokidarJs.on('change', chokidarJsCallback);
 
 // node, shared, etc...
 const chokidarNode = __chokidar.watch(
-    'packages/*/*/src/(node|shared|config|views|cli)/**/*.ts',
+    'packages/*/*/src/(node|shared|config|views|pages|cli)/**/*.ts',
     {
         // ignoreInitial: true,
         ignored: ['**/node_modules'],

@@ -3,6 +3,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __SGlob from '@coffeekraken/s-glob';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
@@ -384,6 +385,7 @@ export default class SMonorepo extends __SClass {
                         builder.build({
                             inDir,
                             outDir,
+                            packageRoot: packageObj.path,
                             buildInitial: finalParams.buildInitial,
                             watch: true,
                         }),

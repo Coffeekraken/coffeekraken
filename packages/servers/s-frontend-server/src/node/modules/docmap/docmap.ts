@@ -14,24 +14,29 @@ export default function docmap(express, settings, config) {
             settings: {},
         };
 
-        // @ts-ignore
-        Object.keys(menu.slug).forEach((slug) => {
-            config.routes[slug] = {
-                handler: 'markdown',
-            };
-        });
+        config.handlers.docmap = {
+            path: `${__dirname()}/docmapHandler`,
+            settings: {},
+        };
 
-        if (menu.packages) {
-            Object.keys(menu.packages).forEach((packageName) => {
-                // @ts-ignore
-                const packageObj = menu.packages[packageName];
-                Object.keys(packageObj?.slug ?? {}).forEach((slug) => {
-                    config.routes[slug] = {
-                        handler: 'markdown',
-                    };
-                });
-            });
-        }
+        // @ts-ignore
+        // Object.keys(menu.slug).forEach((slug) => {
+        //     config.routes[slug] = {
+        //         handler: 'markdown',
+        //     };
+        // });
+
+        // if (menu.packages) {
+        //     Object.keys(menu.packages).forEach((packageName) => {
+        //         // @ts-ignore
+        //         const packageObj = menu.packages[packageName];
+        //         Object.keys(packageObj?.slug ?? {}).forEach((slug) => {
+        //             config.routes[slug] = {
+        //                 handler: 'markdown',
+        //             };
+        //         });
+        //     });
+        // }
 
         resolve(true);
     });

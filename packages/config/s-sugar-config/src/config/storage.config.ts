@@ -209,6 +209,19 @@ export default function (env) {
             imgDir: `[config.storage.src.rootDir]/img`,
 
             /**
+             * @name            pagesDir
+             * @namespace       config.storage.src
+             * @type            String
+             * @default         [config.storage.src.rootDir]/views
+             *
+             * Configure where is located the pages definition source files
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            pagesDir: `[config.storage.src.rootDir]/pages`,
+
+            /**
              * @name            viewsDir
              * @namespace       config.storage.src
              * @type            String
@@ -326,6 +339,19 @@ export default function (env) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             imgDir: `[config.storage.dist.rootDir]/img`,
+
+            /**
+             * @name            pagesDir
+             * @namespace       config.storage.dist
+             * @type            String
+             * @default         [config.storage.dist.rootDir]/views
+             *
+             * Configure where is located the pages definition distribution files
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            pagesDir: `[config.storage.dist.rootDir]/views`,
 
             /**
              * @name            viewsDir

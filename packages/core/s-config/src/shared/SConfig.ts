@@ -507,6 +507,26 @@ export default class SConfig {
             );
         }
 
+        // @TODO        Support prop resolving
+        // __deepMap(this.config, ({ object, prop, value, path }) => {
+        //     if (path.match(/\[.*\]/)) {
+        //         this._settings.resolvers.forEach((resolverObj) => {
+        //             const matches = path.match(resolverObj.match);
+
+        //             if (matches && matches.length) {
+        //                 let resolvedValue = resolverObj.resolve(
+        //                     path,
+        //                     matches,
+        //                     this.config,
+        //                     path,
+        //                 );
+
+        //                 console.log('DDD', path, resolvedValue);
+        //             }
+        //         });
+        //     }
+        // });
+
         // cache for later
         this.cache();
 
@@ -644,31 +664,6 @@ export default class SConfig {
         }
 
         if (__isPlainObject(originalValue)) {
-            // if (originalValue['...']) {
-            //     originalValue._extend = originalValue['...'];
-            //     delete originalValue['...'];
-            //     this._resolveInternalReferences(
-            //         resolverObj,
-            //         [...path, '_extend'],
-            //         iteration,
-            //     );
-
-            //     if (path.includes('complementary')) {
-            //         console.log(originalValue);
-            //     }
-
-            //     Object.keys(originalValue._extend).forEach((key) => {
-            //         if (__isPlainObject(originalValue._extend)) {
-            //             console.log('efef', key);
-            //         }
-            //     });
-
-            //     // originalValue = __deepMerge(
-            //     //     originalValue._extends,
-            //     //     originalValue,
-            //     // );
-            // }
-
             Object.keys(originalValue).forEach((key) => {
                 this._resolveInternalReferences(
                     resolverObj,

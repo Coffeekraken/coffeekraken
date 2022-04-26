@@ -41,6 +41,10 @@ export default class SCliMonoListParamsInterface extends __SInterface {
                 default: __SSugarConfig.get('typescriptBuilder.outDir'),
                 alias: 'o',
             },
+            packageRoot: {
+                description: 'Specify in which package the build is happening',
+                type: 'String',
+            },
             formats: {
                 description:
                     'Specify the formats you want to generate. Can be "esm" or/and "cjs"',
@@ -70,6 +74,13 @@ export default class SCliMonoListParamsInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
                 alias: 'b',
+            },
+            customSettings: {
+                description:
+                    'Specify some custom settings for the typescript builder by passing a glob pattern relative to the inDir, and some custom settings to use for these files',
+                type: 'Object',
+                default: __SSugarConfig.get('typescriptBuilder.customSettings'),
+                alias: 'c',
             },
             exclude: {
                 description:

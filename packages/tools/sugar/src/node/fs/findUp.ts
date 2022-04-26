@@ -58,6 +58,9 @@ export default function findUp(
 
         while (currentPath.length > 0) {
             const path = `/${currentPath.join('/')}`;
+
+            console.log('P', path, search);
+
             if (__isGlob(search)) {
                 let files = __glob.sync(search, {
                     cwd: path,
@@ -70,6 +73,7 @@ export default function findUp(
                     foundedFiles = [...foundedFiles, ...files];
                 }
             } else if (__fs.existsSync(`${path}/${search}`)) {
+                console.log(`${path}/${search}`);
                 foundedFiles.push(`${path}/${search}`);
             }
             // check if we need to stop when found
@@ -79,6 +83,8 @@ export default function findUp(
             // update the currentPath
             currentPath = currentPath.slice(0, -1);
         }
+
+        console.log('F', foundedFiles);
 
         if (settings.SFile === true) {
             // wrap into an SFile

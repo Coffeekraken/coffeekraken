@@ -8,6 +8,7 @@ import __extractNoneGlob from '@coffeekraken/sugar/shared/glob/extractNoneGlob';
 import __SClass from '@coffeekraken/s-class';
 import SFile from '@coffeekraken/s-file';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
+import __micromatch from 'micromatch';
 
 /**
  * @name                SGlob
@@ -94,6 +95,26 @@ export default class SGlob extends __SClass {
         settings: Partial<IResolveGlobSettings> = {},
     ): SFile[] | string[] {
         return __resolveGlob(globs, settings);
+    }
+
+    /**
+     * @name                match
+     * @type                Function
+     * @static
+     *
+     * Check if the passed string match the passed glob pattern(s).
+     * This make use of the AWESOME micromatch library.
+     *
+     * @param       {String}            path            The path to check
+     * @param       {String|Array<String>}          globs        The glob pattern(s) to check files match for
+     * @return          {Boolean}               true if match, false if not
+     *
+     * @see         https://www.npmjs.com/package/micromatch
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static match(path: string, globs: string | string[]): boolean {
+        return __micromatch.isMatch(path, globs);
     }
 
     /**

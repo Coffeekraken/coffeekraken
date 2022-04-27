@@ -26,7 +26,7 @@ import __SBench from '@coffeekraken/s-bench';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default async function view(req, res, settings = {}) {
+export default async function view({ req, res }) {
     let viewPath;
     if (!req.params[0]) viewPath = settings.indexView ?? 'index';
     else viewPath = req.params[0].split('/').join('.');

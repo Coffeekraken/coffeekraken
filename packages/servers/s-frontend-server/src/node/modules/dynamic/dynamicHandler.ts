@@ -14,7 +14,7 @@ import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
 import __SBench from '@coffeekraken/s-bench';
 
 /**
- * @name                docmapHandler
+ * @name                dynamicHandler
  * @namespace           node.modules.docmap
  * @type                Function
  * @status              wip
@@ -32,16 +32,92 @@ import __SBench from '@coffeekraken/s-bench';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function docmap({ req, res }) {
+export default function dynamicHandler({
+    req,
+    res,
+    pageConfig,
+    pageFile,
+    frontendServerConfig,
+}) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-        __SBench.start('handlers.docmap');
+        __SBench.start('handlers.dynamic');
 
-        __SBench.step('handlers.docmap', 'beforeDocmapRead');
+        __SBench.step('handlers.dynamic', 'beforeDocmapRead');
+
+        if (!pageConfig.views) {
+            res.status(200);
+            res.type('text/html');
+            return res.send(
+                `Your page config "${pageFile.relPath}" does not contain any views to render...`,
+            );
+        }
+
+        const renderedViews: string[] = [];
+
+        for (let [idx, viewObj] of pageConfig.views.entries()) {
+            let data = {},
+                viewPath = viewObj.path;
+
+            if (typeof viewObj === 'string') {
+                viewPath = viewObj;
+            }
+
+            // data
+            if (viewObj.data) {
+                let dataFn = () => {};
+                if (__fs.existsSync(viewObj.data)) {
+                    dataFn = (await import(viewObj.data)).default;
+                } else if (frontendServerConfig.data[viewObj.data]) {
+                    dataFn = (
+                        await import(
+                            frontendServerConfig.data[viewObj.data].path
+                        )
+                    ).default;
+                }
+                data = __deepMerge(
+                    data,
+                    await dataFn({
+                        req,
+                        res,
+                        pageConfig,
+                        pageFile,
+                        frontendServerConfig,
+                    }),
+                );
+            }
+
+            // rendering view using data
+            const viewInstance = new __SViewRenderer(viewPath);
+
+            const viewRes = await pipe(
+                viewInstance.render({
+                    ...(res.templateData ?? {}),
+                    ...(data ?? {}),
+                }),
+            );
+            renderedViews.push(viewRes.value);
+        }
+
+        let layoutPath = pageConfig.layout ?? 'layouts.main';
+        // rendering view using data
+        const layoutInstance = new __SViewRenderer(layoutPath);
+
+        const layoutRes = await pipe(
+            layoutInstance.render({
+                ...(res.templateData ?? {}),
+                body: renderedViews.join('\n'),
+            }),
+        );
+
+        res.status(200);
+        res.type('text/html');
+        res.send(layoutRes.value);
+        return resolve(layoutRes.value);
 
         const docmap = new __SDocMap();
         const docmapJson = await docmap.read();
 
-        __SBench.step('handlers.docmap', 'afterDocmapRead');
+        __SBench.step('handlers.dynamic', 'afterDocmapRead');
 
         if (
             !docmapJson.map ||
@@ -58,7 +134,7 @@ export default function docmap({ req, res }) {
             return reject(error.value);
         }
 
-        __SBench.step('handlers.docmap', 'beforeMarkdownBuild');
+        __SBench.step('handlers.dynamic', 'beforeMarkdownBuild');
 
         let html;
 
@@ -78,9 +154,9 @@ export default function docmap({ req, res }) {
 
         html = markdownRes[0].code;
 
-        __SBench.step('handlers.docmap', 'afterMarkdownBuild');
+        __SBench.step('handlers.dynamic', 'afterMarkdownBuild');
 
-        __SBench.step('handlers.docmap', 'beforeViewRendering');
+        __SBench.step('handlers.dynamic', 'beforeViewRendering');
 
         const viewInstance = new __SViewRenderer('pages.markdown.markdown');
 

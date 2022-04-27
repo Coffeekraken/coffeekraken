@@ -32,7 +32,7 @@ import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function api(req, res, settings = {}) {
+export default function api({ req, res }) {
     return new __SPromise(async ({ resolve, reject }) => {
         const docmap = new __SDocMap();
         const docmapJson = await docmap.read();

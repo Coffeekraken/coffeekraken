@@ -292,6 +292,8 @@ export default function (env, config) {
             },
         },
 
+        data: {},
+
         modules: {
             // rootFiles: {
             //     /**
@@ -319,6 +321,33 @@ export default function (env, config) {
             //     path: `${__dirname()}/../node/modules/rootFiles/rootFiles`,
             //     settings: {},
             // },
+            dynamic: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.docmap
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'This module gives you access to the "dynamic" handler that renders dynamically views from your page config',
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.docmap
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/dynamic/dynamic
+                 *
+                 * Specify where to find the "dynamic" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                path: `${__dirname()}/../node/modules/dynamic/dynamic`,
+                settings: {},
+            },
             docmap: {
                 /**
                  * @name            description
@@ -536,20 +565,20 @@ export default function (env, config) {
         },
 
         routes: {
-            '/': {
-                /**
-                 * @name        handler
-                 * @namespace   config.frontendServer.routes.'/'
-                 * @type        String
-                 * @default         view
-                 *
-                 * Specify which handle to use for requests on "/"
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                handler: 'view',
-            },
+            // '/': {
+            //     /**
+            //      * @name        handler
+            //      * @namespace   config.frontendServer.routes.'/'
+            //      * @type        String
+            //      * @default         view
+            //      *
+            //      * Specify which handle to use for requests on "/"
+            //      *
+            //      * @since       2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     handler: 'view',
+            // },
             '/docmap.json': {
                 /**
                  * @name        handler

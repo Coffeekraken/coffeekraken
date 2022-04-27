@@ -24,7 +24,7 @@
     <div class="bkg"></div>
 
     <div s-page-transition class="content">
-        @yield('content')
+        {!! $body !!}
     </div>
 
     @include('generic.tools.tools')

@@ -32,7 +32,7 @@ import __SBench from '@coffeekraken/s-bench';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function styleguide(req, res, settings = {}) {
+export default function styleguide({ req, res }) {
     return new __SPromise(async ({ resolve, reject, emit }) => {
         __SBench.start('handlers.styleguide');
 
@@ -44,7 +44,6 @@ export default function styleguide(req, res, settings = {}) {
 
         __SBench.step('handlers.styleguide', 'afterDocmapRead');
 
-        
         const styleguideObj = styleguideMenu.slug[req.path];
 
         if (!styleguideObj || !__fs.existsSync(styleguideObj.docmap.path)) {
@@ -82,12 +81,14 @@ export default function styleguide(req, res, settings = {}) {
 
         if (docblocks.length) {
             if (docblocks[0].see) {
-                for (let i=0; i<docblocks[0].see.length; i++) {
+                for (let i = 0; i < docblocks[0].see.length; i++) {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[og]</yellow> Scraping opengraph from url "<cyan>${docblocks[0].see[i].url}</cyan>"`
+                        value: `<yellow>[og]</yellow> Scraping opengraph from url "<cyan>${docblocks[0].see[i].url}</cyan>"`,
                     });
-                    docblocks[0].see[i].og = await __scrapeUrl(docblocks[0].see[i].url);
+                    docblocks[0].see[i].og = await __scrapeUrl(
+                        docblocks[0].see[i].url,
+                    );
                 }
             }
         }

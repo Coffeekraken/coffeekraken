@@ -363,6 +363,8 @@ export default class SFrontendServer extends __SClass {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             const pagesFolder = __SSugarConfig.get('storage.src.pagesDir');
 
+            const frontendServerConfig = __SSugarConfig.get('frontendServer');
+
             const pagesFiles = __SGlob.resolve(`**/*.js`, {
                 cwd: pagesFolder,
             });
@@ -403,11 +405,22 @@ export default class SFrontendServer extends __SClass {
 
                 console.log('PATH', path);
 
-                handlerFn = await this._getHandlerFn(pageConfig.handler);
+                handlerFn = await this._getHandlerFn(
+                    pageConfig.handler ?? 'dynamic',
+                );
 
                 express.get(path, (req, res, next) => {
                     console.log('request');
-                    return pipe(handlerFn(req, res, next));
+                    return pipe(
+                        handlerFn({
+                            req,
+                            res,
+                            next,
+                            pageConfig,
+                            pageFile,
+                            frontendServerConfig,
+                        }),
+                    );
                 });
 
                 // console.log('pa', path);

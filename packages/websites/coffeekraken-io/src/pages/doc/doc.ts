@@ -2,6 +2,11 @@ export default {
     params: {
         namespace: true,
     },
-    views: ['pages.markdown.markdown'],
-    handler: 'docmap',
+    views: [
+        {
+            data: 'docmapMarkdown',
+            path: 'pages.markdown.markdown',
+        },
+    ],
+    handler: 'dynamic',
 };

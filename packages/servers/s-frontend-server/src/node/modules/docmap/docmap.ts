@@ -14,6 +14,11 @@ export default function docmap(express, settings, config) {
             settings: {},
         };
 
+        config.data.docmapMarkdown = {
+            path: `${__dirname()}/docmapMarkdownData`,
+            settings: {},
+        };
+
         config.handlers.docmap = {
             path: `${__dirname()}/docmapHandler`,
             settings: {},

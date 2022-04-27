@@ -32,9 +32,9 @@ import __SBench from '@coffeekraken/s-bench';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function redirectHandler(req, res, settings = {}) {
+export default function redirectHandler({ req, res }) {
     return new __SPromise(async ({ resolve, reject, emit }) => {
-        __SBench.start('handlers.redirect');        
+        __SBench.start('handlers.redirect');
         res.redirect(req.redirect);
         resolve(req.redirect);
         __SBench.end('handlers.redirect', {}).log();

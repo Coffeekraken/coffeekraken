@@ -1,62 +1,54 @@
-@extends('layouts.main')
-@section('title', $title)
+<div id="markdown">
 
-@section('content')
+    <section class="s-container markdown">
 
-    <div id="markdown">
+        <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-        <section class="s-container markdown">
+            <nav class="sidemenu s-pb:50 @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
 
-            <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
+                <h5 class="s-typo:h5 s-mbe:20">
+                    Coffeekraken
+                </h5>
 
-                <nav class="sidemenu s-pb:50 @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
+                @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp
+                @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])
 
-                    <h5 class="s-typo:h5 s-mbe:20">
-                        Coffeekraken
+                @if (count(get_object_vars($docmap->menu->packages)))
+
+                    <h5 class="s-typo:h5 s-mbs:50 s-mbe:20">
+                        Packages
                     </h5>
 
-                    @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp
-                    @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])
+                    <ul class="s-fs-tree">
+                        @foreach ((array) $docmap->menu->packages as $package)
+                            @if (!$package->tree->documentation)
+                                @continue
+                            @endif
 
-                    @if (count(get_object_vars($docmap->menu->packages)))
+                            <li id="{{ \Sugar\string\idCompliant($package->name) }}" s-activate
+                                trigger="click,event:actual" href="#{{ \Sugar\string\idCompliant($package->name) }}"
+                                toggle save-state mount-when="direct" trigger="click,event:actual">
+                                <div>
+                                    <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"></i>
+                                    <i class="s-icon:folder"></i>
+                                    {{ str_replace('@coffeekraken/', '', $package->name) }}
+                                </div>
 
-                        <h5 class="s-typo:h5 s-mbs:50 s-mbe:20">
-                            Packages
-                        </h5>
+                                @php $menu = get_object_vars($package->tree->documentation); @endphp
+                                @include('pages.markdown.menu', ['menu' => $menu, 'id' =>
+                                \Sugar\string\idCompliant($package->name)])
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
 
-                        <ul class="s-fs-tree">
-                            @foreach ((array) $docmap->menu->packages as $package)
-                                @if (!$package->tree->documentation)
-                                    @continue
-                                @endif
+            </nav>
 
-                                <li id="{{ \Sugar\string\idCompliant($package->name) }}" s-activate
-                                    trigger="click,event:actual" href="#{{ \Sugar\string\idCompliant($package->name) }}"
-                                    toggle save-state mount-when="direct" trigger="click,event:actual">
-                                    <div>
-                                        <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"></i>
-                                        <i class="s-icon:folder"></i>
-                                        {{ str_replace('@coffeekraken/', '', $package->name) }}
-                                    </div>
-
-                                    @php $menu = get_object_vars($package->tree->documentation); @endphp
-                                    @include('pages.markdown.menu', ['menu' => $menu, 'id' =>
-                                    \Sugar\string\idCompliant($package->name)])
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endif
-
-                </nav>
-
-                <div s-page-transition-container="markdown" class="__content s-pb:50 s-rhythm:vertical s-format:text">
-                    {!! $body !!}
-                </div>
-
+            <div s-page-transition-container="markdown" class="__content s-pb:50 s-rhythm:vertical s-format:text">
+                {!! $body !!}
             </div>
-        </section>
 
-    </div>
+        </div>
+    </section>
 
-
-@endsection
+</div>

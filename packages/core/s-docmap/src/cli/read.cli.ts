@@ -10,7 +10,6 @@ export default (stringArgs = '') => {
         const docmap = new __SDocMap();
         const promise = docmap.read(stringArgs);
         pipe(promise);
-        console.log(await promise);
         resolve(await promise);
     });
 };

@@ -1,41 +1,44 @@
-@extends('layouts.main')
-@section('title', $title)
+@php $firstBlock = $docblocks[0]; @endphp
 
-@section('content')
+@php
+$statusColor = 'info';
+if ($firstBlock->status == 'alpha') {
+    $statusColor = 'error';
+}
+if ($firstBlock->status == 'stable') {
+    $statusColor = 'success';
+}
+if ($firstBlock->status == 'wip') {
+    $statusColor = 'error';
+}
+@endphp
 
-    @php $firstBlock = $docblocks[0]; @endphp
+<div id="styleguide">
 
-    @php
-    $statusColor = 'info';
-    if ($firstBlock->status == 'alpha') {
-        $statusColor = 'error';
-    }
-    if ($firstBlock->status == 'stable') {
-        $statusColor = 'success';
-    }
-    if ($firstBlock->status == 'wip') {
-        $statusColor = 'error';
-    }
-    @endphp
+    <section class="s-container styleguide">
 
-    <div id="styleguide">
+        <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-        <section class="s-container styleguide">
+            <nav class="sidemenu s-pb:50 @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
 
-            <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
+                <h5 class="s-typo:h5 s-mbe:30">
+                    Styleguide
+                </h5>
 
-                <nav class="sidemenu s-pb:50 @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
+                @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
+                @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview'])
 
-                    <h5 class="s-typo:h5 s-mbe:30">
-                        Styleguide
-                    </h5>
+            </nav>
 
-                    @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
-                    @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview'])
+            <div s-page-transition-container="styleguide" class="__content s-pb:50">
 
-                </nav>
+                @if (!count((array) $docblocks))
 
-                <div s-page-transition-container="styleguide" class="__content s-pb:50">
+                    <div class="s-typo:h1 s-mbs:50 s-mbe:30 s-tc:primary">
+                        No documentation found
+                    </div>
+
+                @else
 
                     @foreach ($docblocks as $docblock)
                         @if (!$docblock->private)
@@ -44,11 +47,11 @@
                         @endif
                     @endforeach
 
-                </div>
+                @endif
 
             </div>
-        </section>
 
-    </div>
+        </div>
+    </section>
 
-@endsection
+</div>

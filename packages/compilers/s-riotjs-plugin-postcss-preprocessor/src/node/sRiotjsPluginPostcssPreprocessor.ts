@@ -12,30 +12,27 @@ import postcss from 'postcss';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function sRiotjsPluginPostcssPreprocessor(
-  postcssPlugins: any[]
+    postcssPlugins: any[],
 ) {
-  // @ts-ignore
-  registerPreprocessor('css', 'postcss', async function (code) {
+    // @ts-ignore
+    registerPreprocessor('css', 'postcss', async function (code) {
+        // resolve plugins paths
+        const plugins: any[] = [];
+        for (let i = 0; i < postcssPlugins.length; i++) {
+            const p = postcssPlugins[i];
+            if (typeof p === 'string') {
+                const { default: plug } = await import(p);
+                plugins.push(plug.default ?? plug);
+            } else {
+                plugins.push(p);
+            }
+        }
 
-    // resolve plugins paths
-    const plugins: any[] = [];
-    for (let i=0; i<postcssPlugins.length; i++) {
-      const p = postcssPlugins[i];
-      if (typeof p === 'string') {
-        const { default: plug } = await import(p);
-        plugins.push(plug.default ?? plug);
-      } else {
-        plugins.push(p);
-      }
-    }
+        const result = await postcss(plugins).process(code);
 
-    const result = await postcss(plugins).process(code);
-
-    console.log(result);
-
-    return {
-      code: result.css,
-      map: null
-    };
-  });
+        return {
+            code: result.css,
+            map: null,
+        };
+    });
 }

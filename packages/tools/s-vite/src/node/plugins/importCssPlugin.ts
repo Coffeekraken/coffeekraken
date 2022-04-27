@@ -48,8 +48,6 @@ function importCssPlugin() {
 
             // const matches = src.match(/import\s?\".*\.css\"/gm);
 
-            console.log(src);
-
             // if (matches) {
             //     matches.forEach(match => {
             //         const path = match.replace(/import\s?\"/, '').replace('"','');

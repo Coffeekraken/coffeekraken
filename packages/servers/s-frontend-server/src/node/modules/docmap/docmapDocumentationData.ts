@@ -4,25 +4,38 @@ import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import __SPromise from '@coffeekraken/s-promise';
 import __SDocMap from '@coffeekraken/s-docmap';
 
-export default function docmapMarkdownData({ req, res, pageConfig }) {
+export default function docmapDocumentationData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         let html;
 
-        if (!req.params.namespace) {
+        if (!req.params.path) {
             throw new Error(
-                `[SFrontendServer.docmapMarkdownData] Missing namespace parameter from the url...`,
+                `[SFrontendServer.docmapDocumentationData] Missing "path" parameter from the url...`,
             );
         }
 
+        __SBench.start('data.docmapDocumentationData');
+
+        __SBench.step('data.docmapDocumentationData', 'beforeDocmapRead');
+
         const docmap = new __SDocMap();
         const docmapJson = await docmap.read();
+        const docObj = docmapJson.menu.slug[`/doc/${req.params.path}`];
+
+        if (!docObj) {
+            return reject(
+                `The documentation "${req.path}" you requested does not exists...`,
+            );
+        }
+
+        __SBench.step('data.docmapDocumentationData', 'afterDocmapRead');
 
         const builder = new __SMarkdownBuilder();
 
         const markdownRes = await pipe(
             builder.build({
                 // inRaw: str,
-                inPath: docmapJson.map[req.params.namespace].path,
+                inPath: docObj.path,
                 target: 'html',
                 save: false,
             }),

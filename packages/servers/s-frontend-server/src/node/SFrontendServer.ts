@@ -359,7 +359,7 @@ export default class SFrontendServer extends __SClass {
     /**
      * This method scrap the "pages" folder and register all the routes found inside.
      */
-    async _registerPagesRoutes(express) {
+    _registerPagesRoutes(express) {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             const pagesFolder = __SSugarConfig.get('storage.src.pagesDir');
 
@@ -384,10 +384,12 @@ export default class SFrontendServer extends __SClass {
 
                 if (pageConfig.params) {
                     let isOptional = false;
-                    for (let [name, required] of Object.entries(
+                    for (let [name, requiredOrStr] of Object.entries(
                         pageConfig.params,
                     )) {
-                        if (required) {
+                        if (typeof requiredOrStr === 'string') {
+                            path += `/${requiredOrStr}`;
+                        } else if (requiredOrStr) {
                             if (isOptional) {
                                 throw new Error(
                                     `[SFrontendServer] You cannot have required params after optional onces in the page ${pageFile.path}`,
@@ -402,15 +404,24 @@ export default class SFrontendServer extends __SClass {
                 }
 
                 // handler
-
-                console.log('PATH', path);
-
                 handlerFn = await this._getHandlerFn(
                     pageConfig.handler ?? 'dynamic',
                 );
 
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[route]</yellow> <cyan>${path}</cyan> route registered <green>successfully</green>`,
+                });
+
                 express.get(path, (req, res, next) => {
-                    console.log('request');
+                    for (let [key, value] of Object.entries(req.params)) {
+                        const paramKey = Object.keys(pageConfig.params)[
+                            parseInt(key)
+                        ];
+                        delete req.params[key];
+                        req.params[paramKey] = value;
+                    }
+
                     return pipe(
                         handlerFn({
                             req,
@@ -422,15 +433,6 @@ export default class SFrontendServer extends __SClass {
                         }),
                     );
                 });
-
-                // console.log('pa', path);
-
-                // // views
-                // if (pageConfig.views) {
-                //     for (let [idx, dotPath] of Object.entries(pageConfig.views)) {
-                //         console.log('f', dotPath);
-                //     }
-                // }
             }
         });
     }

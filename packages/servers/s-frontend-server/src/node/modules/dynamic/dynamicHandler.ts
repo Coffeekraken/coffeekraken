@@ -74,16 +74,23 @@ export default function dynamicHandler({
                         )
                     ).default;
                 }
-                data = __deepMerge(
-                    data,
-                    await dataFn({
-                        req,
-                        res,
-                        pageConfig,
-                        pageFile,
-                        frontendServerConfig,
-                    }),
-                );
+
+                const dataFnResult = await dataFn({
+                    req,
+                    res,
+                    pageConfig,
+                    pageFile,
+                    frontendServerConfig,
+                });
+                if (dataFnResult instanceof Error) {
+                    console.log(dataFnResult);
+                    emit('log', {
+                        type: __SLog.TYPE_ERROR,
+                        value: dataFnResult,
+                    });
+                } else {
+                    data = __deepMerge(data, dataFnResult);
+                }
             }
 
             // rendering view using data
@@ -113,63 +120,5 @@ export default function dynamicHandler({
         res.type('text/html');
         res.send(layoutRes.value);
         return resolve(layoutRes.value);
-
-        const docmap = new __SDocMap();
-        const docmapJson = await docmap.read();
-
-        __SBench.step('handlers.dynamic', 'afterDocmapRead');
-
-        if (
-            !docmapJson.map ||
-            !__fs.existsSync(docmapJson.map[req.params.namespace].path)
-        ) {
-            const error = await page404({
-                ...(res.templateData || {}),
-                title: `Docmap "${req.params.namespace}" not found`,
-                body: `The docmap "${req.params.namespace}" you requested does not exists...`,
-            });
-            res.type('text/html');
-            res.status(404);
-            res.send(error.value);
-            return reject(error.value);
-        }
-
-        __SBench.step('handlers.dynamic', 'beforeMarkdownBuild');
-
-        let html;
-
-        const builder = new __SMarkdownBuilder();
-
-        const markdownRes = await pipe(
-            builder.build({
-                // inRaw: str,
-                inPath: docmapJson.map[req.params.namespace].path,
-                target: 'html',
-                save: false,
-            }),
-        );
-        if (markdownRes instanceof Error) {
-            throw markdownRes;
-        }
-
-        html = markdownRes[0].code;
-
-        __SBench.step('handlers.dynamic', 'afterMarkdownBuild');
-
-        __SBench.step('handlers.dynamic', 'beforeViewRendering');
-
-        const viewInstance = new __SViewRenderer('pages.markdown.markdown');
-
-        const viewRes = await pipe(
-            viewInstance.render({
-                ...(res.templateData ?? {}),
-                body: html,
-            }),
-        );
-
-        res.status(200);
-        res.type('text/html');
-        res.send(viewRes.value);
-        resolve(viewRes.value);
     });
 }

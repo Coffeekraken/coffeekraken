@@ -4,8 +4,8 @@ export default {
     },
     views: [
         {
-            data: 'docmapDocumentation',
-            path: 'pages.markdown.markdown',
+            data: 'docmapStyleguide',
+            path: 'pages.styleguide.styleguide',
         },
     ],
     handler: 'dynamic',

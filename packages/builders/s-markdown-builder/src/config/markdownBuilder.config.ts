@@ -146,7 +146,7 @@ export default function (env, config) {
                  */
                 preprocessor: __path.resolve(
                     packageRoot,
-                    'src/transformers/og/og',
+                    'dist/pkg/esm/node/transformers/og',
                 ),
                 /**
                  * @name            markdown

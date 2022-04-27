@@ -91,7 +91,7 @@ export default class SFrontspec extends __SPromise {
             try {
                 frontspecJson = __readJsonSync(frontspecPath);
             } catch (e) {
-                console.log('ER', e);
+                console.log(e);
             }
 
             let res = __deepMerge(

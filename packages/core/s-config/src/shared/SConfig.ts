@@ -565,7 +565,10 @@ export default class SConfig {
                 if (!jsonStr) return resolve();
                 resolve(JSON.parse(jsonStr));
             } else {
-                console.log('COCOCCO');
+                // @TODO            implement browser cache
+                throw new Error(
+                    'Cache is not implemented in the browser for now...',
+                );
             }
         });
     }

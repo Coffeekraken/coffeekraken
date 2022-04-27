@@ -18,11 +18,19 @@ export default function docmap(express, settings, config) {
             path: `${__dirname()}/docmapMarkdownData`,
             settings: {},
         };
-
-        config.handlers.docmap = {
-            path: `${__dirname()}/docmapHandler`,
+        config.data.docmapStyleguide = {
+            path: `${__dirname()}/docmapStyleguideData`,
             settings: {},
         };
+        config.data.docmapDocumentation = {
+            path: `${__dirname()}/docmapDocumentationData`,
+            settings: {},
+        };
+
+        // config.handlers.docmap = {
+        //     path: `${__dirname()}/docmapHandler`,
+        //     settings: {},
+        // };
 
         // @ts-ignore
         // Object.keys(menu.slug).forEach((slug) => {

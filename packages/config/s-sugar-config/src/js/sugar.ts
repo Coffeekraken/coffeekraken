@@ -1,4 +1,4 @@
-import __get from '@coffeekraken/sugar/shared/object/get';
+¨import __get from '@coffeekraken/sugar/shared/object/get';
 
 /**
  * @name                SSugarConfig

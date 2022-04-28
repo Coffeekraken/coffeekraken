@@ -5,7 +5,7 @@ import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 
 /**
  * @name                SDuration
- * @namespace           s-duration
+ * @namespace           shared
  * @type                Class
  * @status              beta
  *
@@ -33,142 +33,139 @@ import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
  */
 
 export interface ISDurationObject {
-  startTime: number;
-  endTime: number;
-  duration: number;
-  formatedDuration: string;
+    startTime: number;
+    endTime: number;
+    duration: number;
+    formatedDuration: string;
 }
 
 export default class SDuration {
-  /**
-   * @name            _settings
-   * @type            Object
-   * @private
-   *
-   * Store the settings
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _settings = {};
+    /**
+     * @name            _settings
+     * @type            Object
+     * @private
+     *
+     * Store the settings
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    _settings = {};
 
-  /**
-   * @name            startTime
-   * @type            Number
-   * @private
-   *
-   * Store the start timestamp
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  startTime = null;
+    /**
+     * @name            startTime
+     * @type            Number
+     * @private
+     *
+     * Store the start timestamp
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    startTime = null;
 
-  /**
-   * @name            endTime
-   * @type            Number
-   * @private
-   *
-   * Store the end timestamp
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  endTime = null;
+    /**
+     * @name            endTime
+     * @type            Number
+     * @private
+     *
+     * Store the end timestamp
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    endTime = null;
 
-  /**
-   * @name            duration
-   * @type            Number
-   * @private
-   *
-   * Store the duration in miliseconds
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  duration = null;
+    /**
+     * @name            duration
+     * @type            Number
+     * @private
+     *
+     * Store the duration in miliseconds
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    duration = null;
 
-  /**
-   * @name            constructor
-   * @type            Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  constructor(settings = {}) {
-    this._settings = __deepMerge(
-      {},
-      settings
-    );
-    this.start();
-  }
+    /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    constructor(settings = {}) {
+        this._settings = __deepMerge({}, settings);
+        this.start();
+    }
 
-  /**
-   * @name      toObject
-   * @type      Function
-   *
-   * This method end the duration if needed and return an object with these properties:
-   * - startTime: the start timestamp
-   * - endTime: the end timestamp
-   * - duration: the duration in miliseconds
-   * - formatedDuration: the duration formated
-   *
-   * @return      {ISDurationObject}        The duration object
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  toObject(settings = {}): ISDurationObject {
-    settings = __deepMerge(this._settings, settings);
+    /**
+     * @name      toObject
+     * @type      Function
+     *
+     * This method end the duration if needed and return an object with these properties:
+     * - startTime: the start timestamp
+     * - endTime: the end timestamp
+     * - duration: the duration in miliseconds
+     * - formatedDuration: the duration formated
+     *
+     * @return      {ISDurationObject}        The duration object
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    toObject(settings = {}): ISDurationObject {
+        settings = __deepMerge(this._settings, settings);
 
-    if (!this.endTime || !this.startTime) this.end();
+        if (!this.endTime || !this.startTime) this.end();
 
-    const durationMs = this.endTime - this.startTime;
-    this.duration = durationMs;
-    const formatedDuration = __formatDuration(durationMs);
+        const durationMs = this.endTime - this.startTime;
+        this.duration = durationMs;
+        const formatedDuration = __formatDuration(durationMs);
 
-    return <ISDurationObject>{
-      startTime: this.startTime || -1,
-      endTime: this.endTime || -1,
-      duration: this.duration || -1,
-      formatedDuration
-    };
-  }
+        return <ISDurationObject>{
+            startTime: this.startTime || -1,
+            endTime: this.endTime || -1,
+            duration: this.duration || -1,
+            formatedDuration,
+        };
+    }
 
-  /**
-   * @name      start
-   * @type      Function
-   *
-   * Start the duration process either with the current timestamp, or with a passed timestamp you prefer
-   *
-   * @param         {Number}            [startTime=null]            Specify the timestamp you want
-   *
-   * @since         2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  start(startTime = null) {
-    this.startTime = startTime || Date.now();
-    return this;
-  }
+    /**
+     * @name      start
+     * @type      Function
+     *
+     * Start the duration process either with the current timestamp, or with a passed timestamp you prefer
+     *
+     * @param         {Number}            [startTime=null]            Specify the timestamp you want
+     *
+     * @since         2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    start(startTime = null) {
+        this.startTime = startTime || Date.now();
+        return this;
+    }
 
-  /**
-   * @name      end
-   * @type      Function
-   *
-   * Stop the duration counter and return the result in the passed format or in the format setted in the settings
-   *
-   * @param       {Object}            [settings={}]           An object of settings to use
-   * @return        {Mixed}                         Return the duration depending on your settings
-   *
-   * @since         2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  end(settings = {}) {
-    settings = __deepMerge(this._settings, settings);
-    this.endTime = Date.now();
-    return this.toObject(settings);
-  }
+    /**
+     * @name      end
+     * @type      Function
+     *
+     * Stop the duration counter and return the result in the passed format or in the format setted in the settings
+     *
+     * @param       {Object}            [settings={}]           An object of settings to use
+     * @return        {Mixed}                         Return the duration depending on your settings
+     *
+     * @since         2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    end(settings = {}) {
+        settings = __deepMerge(this._settings, settings);
+        this.endTime = Date.now();
+        return this.toObject(settings);
+    }
 }

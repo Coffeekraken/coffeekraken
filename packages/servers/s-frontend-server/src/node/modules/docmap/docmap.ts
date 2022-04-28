@@ -26,6 +26,10 @@ export default function docmap(express, settings, config) {
             path: `${__dirname()}/docmapDocumentationData`,
             settings: {},
         };
+        config.data.docmapApi = {
+            path: `${__dirname()}/docmapApiData`,
+            settings: {},
+        };
 
         // config.handlers.docmap = {
         //     path: `${__dirname()}/docmapHandler`,

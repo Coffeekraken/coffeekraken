@@ -59,7 +59,7 @@ __SConductor.setup({
 
     // features
     __sActivateFeature();
-    // __sPageTransitionFeature();
+    __sPageTransitionFeature();
 
     // internal components
     __VersionSelector();

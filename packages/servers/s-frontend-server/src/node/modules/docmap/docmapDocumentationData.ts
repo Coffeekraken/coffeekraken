@@ -18,6 +18,8 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
 
         __SBench.step('data.docmapDocumentationData', 'beforeDocmapRead');
 
+        console.log(req.params);
+
         const docmap = new __SDocMap();
         const docmapJson = await docmap.read();
         const docObj = docmapJson.menu.slug[`/doc/${req.params.path}`];
@@ -35,7 +37,7 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
         const markdownRes = await pipe(
             builder.build({
                 // inRaw: str,
-                inPath: docObj.path,
+                inPath: docObj.docmap.path,
                 target: 'html',
                 save: false,
             }),

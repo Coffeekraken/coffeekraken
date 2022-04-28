@@ -17,6 +17,7 @@ import __SBench from '@coffeekraken/s-bench';
 import __SDuration from '@coffeekraken/s-duration';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __SGlob from '@coffeekraken/s-glob';
+import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 
 /**
  * @name            SFrontendServer
@@ -246,32 +247,33 @@ export default class SFrontendServer extends __SClass {
                 }
 
                 // routes registration
-                if (frontendServerConfig.routes) {
-                    Object.keys(frontendServerConfig.routes).forEach(
-                        async (routeSlug) => {
-                            const routeObj =
-                                frontendServerConfig.routes[routeSlug];
+                // if (frontendServerConfig.routes) {
+                //     Object.keys(frontendServerConfig.routes).forEach(
+                //         async (routeSlug) => {
+                //             const routeObj =
+                //                 frontendServerConfig.routes[routeSlug];
 
-                            const handlerObj =
-                                frontendServerConfig.handlers[routeObj.handler];
-                            const handlerPath = handlerObj.path;
-                            if (!handlerPath) {
-                                return;
-                            }
+                //             const handlerObj =
+                //                 frontendServerConfig.handlers[routeObj.handler];
+                //             const handlerPath = handlerObj.path;
+                //             if (!handlerPath) {
+                //                 return;
+                //             }
 
-                            const handlerFn = await this._getHandlerFn(
-                                routeObj.handler,
-                            );
-                            express.get(routeSlug, (req, res, next) => {
-                                if (routeObj.request) {
-                                    req = __deepMerge(req, routeObj.request);
-                                }
+                //             const handlerFn = await this._getHandlerFn(
+                //                 routeObj.handler,
+                //             );
 
-                                return pipe(handlerFn(req, res, next));
-                            });
-                        },
-                    );
-                }
+                //             express.get(routeSlug, (req, res, next) => {
+                //                 if (routeObj.request) {
+                //                     req = __deepMerge(req, routeObj.request);
+                //                 }
+
+                //                 return pipe(handlerFn(req, res, next));
+                //             });
+                //         },
+                //     );
+                // }
 
                 // "pages" folder routes
                 pipe(this._registerPagesRoutes(express));
@@ -415,6 +417,8 @@ export default class SFrontendServer extends __SClass {
 
                 express.get(path, (req, res, next) => {
                     for (let [key, value] of Object.entries(req.params)) {
+                        // do not process non "number" keys
+                        if (typeof __autoCast(key) !== 'number') continue;
                         const paramKey = Object.keys(pageConfig.params)[
                             parseInt(key)
                         ];

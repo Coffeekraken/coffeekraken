@@ -1,22 +1,22 @@
 {
-  "name": "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-  "version": "2.0.0",
-  "description": "",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@riotjs/compiler": "^5.4.2",
-    "postcss": "^8.2.15",
-    "riot": "^5.4.2"
-  },
-  "peerDependencies": {},
-  "main": "dist/pkg/cjs/node/exports.js",
-  "module": "dist/pkg/esm/node/exports.js",
-  "exports": {
-    ".": {
-      "require": "./dist/pkg/cjs/node/exports.js",
-      "import": "./dist/pkg/esm/node/exports.js"
+    "name": "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+    "version": "2.0.0",
+    "description": "",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@riotjs/compiler": "^5.4.2",
+        "postcss": "^8.2.15",
+        "riot": "^5.4.2"
+    },
+    "peerDependencies": {},
+    "main": "./dist/pkg/cjs/node/exports.js",
+    "module": "./dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        }
     }
-  }
 }

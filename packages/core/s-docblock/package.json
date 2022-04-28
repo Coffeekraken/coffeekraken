@@ -1,30 +1,30 @@
 {
-  "name": "@coffeekraken/s-docblock",
-  "version": "2.0.0",
-  "description": "",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-class": "^2.0.0",
-    "@coffeekraken/sugar": "^2.0.0",
-    "@coffeekraken/s-promise": "^2.0.0",
-    "@coffeekraken/s-log": "^2.0.0",
-    "caniuse-api": "^3.0.0",
-    "find-in-files": "^0.5.0",
-    "github-download-directory": "^2.0.0",
-    "marked": "^3.0.4",
-    "minimatch": "^3.0.4",
-    "open-graph-scraper": "^4.9.0",
-    "open-graph-scraper-lite": "^1.1.1",
-    "promised-handlebars": "^2.0.1"
-  },
-  "main": "dist/pkg/cjs/node/exports.js",
-  "module": "dist/pkg/esm/node/exports.js",
-  "exports": {
-    ".": {
-      "require": "./dist/pkg/cjs/node/exports.js",
-      "import": "./dist/pkg/esm/node/exports.js"
+    "name": "@coffeekraken/s-docblock",
+    "version": "2.0.0",
+    "description": "",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-promise": "^2.0.0",
+        "@coffeekraken/s-log": "^2.0.0",
+        "caniuse-api": "^3.0.0",
+        "find-in-files": "^0.5.0",
+        "github-download-directory": "^2.0.0",
+        "marked": "^3.0.4",
+        "minimatch": "^3.0.4",
+        "open-graph-scraper": "^4.9.0",
+        "open-graph-scraper-lite": "^1.1.1",
+        "promised-handlebars": "^2.0.1"
+    },
+    "main": "./dist/pkg/cjs/shared/exports.js",
+    "module": "./dist/pkg/esm/shared/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        }
     }
-  }
 }

@@ -1,19 +1,19 @@
 {
-  "name": "@coffeekraken/s-duration",
-  "version": "2.0.0",
-  "description": "",
-  "scripts": {},
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/sugar": "^2.0.0"
-  },
-  "main": "dist/pkg/cjs/shared/exports.js",
-  "module": "dist/pkg/esm/shared/exports.js",
-  "exports": {
-    ".": {
-      "require": "./dist/pkg/cjs/shared/exports.js",
-      "import": "./dist/pkg/esm/shared/exports.js"
+    "name": "@coffeekraken/s-duration",
+    "version": "2.0.0",
+    "description": "",
+    "scripts": {},
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/sugar": "^2.0.0"
+    },
+    "main": "./dist/pkg/cjs/shared/exports.js",
+    "module": "./dist/pkg/esm/shared/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/shared/exports.js",
+            "import": "./dist/pkg/esm/shared/exports.js"
+        }
     }
-  }
 }

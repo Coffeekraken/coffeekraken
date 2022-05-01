@@ -61,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -70,6 +71,55 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-panel-component.config.themeUi.panel.borderRadius": {
+                "name": "borderRadius",
+                "type": "String",
+                "default": "[theme.ui.default.borderRadius]",
+                "description": "Specify the default border radius for panel ui",
+                "namespace": "@coffeekraken.s-panel-component.config.themeUi.panel",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-panel-component.config.themeUi.panel.transition": {
+                "name": "transition",
+                "type": "String",
+                "default": "[theme.transition.default]",
+                "description": "Specify the default transition for panel ui",
+                "namespace": "@coffeekraken.s-panel-component.config.themeUi.panel",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-panel-component.config.themeUi.panel.depth": {
+                "name": "depth",
+                "type": "Number",
+                "default": "5",
+                "description": "Specify the default depth for your panel ui",
+                "namespace": "@coffeekraken.s-panel-component.config.themeUi.panel",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-panel-component.js.Panel-modal": {
                 "name": "Panel (modal)",
                 "type": "CustomElement",
@@ -92,8 +142,38 @@
                 "example": [
                     {
                         "language": "html",
-                        "title": "Simple panel",
-                        "code": "<s-panel position=\"modal\" id=\"simple-panel-open\">\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1\">Hello world</h1>\n     <p class=\"s-typo:p\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n </div>\n</s-panel>\n<button class=\"s-btn:primary\" s-panel-open=\"simple-panel-open\">Open panel</button>"
+                        "title": "Simple top panel",
+                        "code": "<s-panel position=\"top\" id=\"simple-top-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-top-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-top-panel-open\">Open top panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Simple right panel",
+                        "code": "<s-panel position=\"right\" id=\"simple-right-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-right-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-right-panel-open\">Open right panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Simple bottom panel",
+                        "code": "<s-panel position=\"bottom\" id=\"simple-bottom-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-bottom-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-bottom-panel-open\">Open bottom panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Simple left panel",
+                        "code": "<s-panel position=\"left\" id=\"simple-left-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-left-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-left-panel-open\">Open left panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Simple modal panel",
+                        "code": "<s-panel position=\"modal\" id=\"simple-modal-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-modal-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-modal-panel-open\">Open modal panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Modal panel closable only with button",
+                        "code": "<s-panel position=\"modal\" id=\"simple-modal-panel-open-button\" backdrop close-on=\"\">\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-modal-panel-open-button\">Close panel</button>\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-modal-panel-open-button\">Open modal panel cloable by button</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Modal panel closable on event",
+                        "code": "<s-panel position=\"modal\" id=\"simple-modal-panel-open-event\" backdrop close-on=\"event:submit\">\n <div class=\"s-p:50\" style=\"width: 400px\">\n     <h1 class=\"s-typo:h3\">Login</h1>\n     <form>\n         <label class=\"s-label:float s-color:accent s-mbs:30\" s-form-validate>\n             <input class=\"s-input\" type=\"text\" placeholder=\"John\" required />\n             <span>Firstname</span>\n         </label>\n         <label class=\"s-label:float s-color:accent s-mbs:30\" s-form-validate>\n             <input class=\"s-input\" type=\"text\" placeholder=\"Doe\" required />\n             <span>Lastname</span>\n         </label>\n         <div class=\"s-flex:align-center s-mbs:30\">\n             <span class=\"s-flex-item:grow\">\n                 <a href=\"#\" class=\"s-typo:a\">Forgot password?</a>\n             </span>\n             <input type=\"submit\" class=\"s-btn s-color:accent\" value=\"Submit\" />\n        </div>\n    </form>\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-modal-panel-open-event\">Open fake login modal</button>"
                     }
                 ],
                 "since": "2.0.0",

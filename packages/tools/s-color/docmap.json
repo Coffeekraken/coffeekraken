@@ -2,7 +2,85 @@
     "map": {},
     "extends": [],
     "generated": {
-        "extends": [],
+        "extends": [
+            "coco",
+            "@coffeekraken/both",
+            "@coffeekraken/cjs",
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/esm",
+            "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer-data-handler-js",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
         "map": {
             "@coffeekraken.s-color.doc.README": {
                 "name": "README",
@@ -25,156 +103,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "README.md",
                 "extension": "md",
                 "relPath": "src/doc/README.md",
-                "children": {}
-            },
-            "@coffeekraken.s-color.shared.interface.SColorApplyParamsInterface": {
-                "name": "SColorApplyParamsInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    },
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe parameters of the SSvelteCompiler",
-                "namespace": "@coffeekraken.s-color.shared.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SColorApplyParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "desaturate": {
-                            "type": "Number",
-                            "default": 0,
-                            "alias": "d",
-                            "description": "Allows you to desaturate the color using a percentage"
-                        },
-                        "saturate": {
-                            "type": "Number",
-                            "default": 0,
-                            "alias": "s",
-                            "description": "Allows you to saturate the color using a percentage"
-                        },
-                        "greyscale": {
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "g",
-                            "description": "Allows you to get back the grayscale version of your color"
-                        },
-                        "spin": {
-                            "type": "Number",
-                            "default": 0,
-                            "description": "Spin the hue on the passed value (max 360)"
-                        },
-                        "transparentize": {
-                            "type": "Number",
-                            "default": 0,
-                            "description": "The amount of transparency to apply between 0-100|0-1"
-                        },
-                        "alpha": {
-                            "type": "Number",
-                            "default": 0,
-                            "alias": "a",
-                            "description": "The new alpha value to apply between 0-100|0-1"
-                        },
-                        "opacity": {
-                            "type": "Number",
-                            "default": 0,
-                            "alias": "o",
-                            "description": "The new alpha value to apply between 0-100|0-1"
-                        },
-                        "opacify": {
-                            "type": "Number",
-                            "default": 0,
-                            "description": "The amount of transparence to remove between 0-100|0-1"
-                        },
-                        "darken": {
-                            "type": "Number",
-                            "default": 0,
-                            "description": "The amount of darkness (of the nightmare of the shadow) to apply between 0-100"
-                        },
-                        "lighten": {
-                            "type": "Number",
-                            "default": 0,
-                            "alias": "l",
-                            "description": "The amount of lightness (of the sky of the angels) to apply between 0-100"
-                        },
-                        "invert": {
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "i",
-                            "description": "Specify if you want to invert the color to keep a good contrast ratio with a background for example"
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SColorApplyParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/shared/interface/SColorApplyParamsInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-color.shared.interface.SColorSettingsInterface": {
-                "name": "SColorSettingsInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    },
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This interface represent the settings of an SColor instance.",
-                "namespace": "@coffeekraken.s-color.shared.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SColorSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "returnNewInstance": {
-                            "description": "Specify if the methods returns by default a new SColor instance or the same",
-                            "type": "boolean",
-                            "default": false
-                        },
-                        "defaultFormat": {
-                            "description": "Specify the default format of the color",
-                            "type": "String",
-                            "values": [
-                                "hex",
-                                "rgb",
-                                "rgba",
-                                "hsl",
-                                "hsla"
-                            ],
-                            "default": "hex"
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SColorSettingsInterface.js",
-                "extension": "js",
-                "relPath": "src/shared/interface/SColorSettingsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-color.shared.SColor": {
@@ -193,7 +126,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SColor.ts",
                 "extension": "ts",
@@ -207,7 +140,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "colorsettings": {
@@ -218,7 +151,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -228,7 +161,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "getcolor": {
@@ -249,7 +182,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "tohsl": {
@@ -265,7 +198,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "tohsla": {
@@ -281,7 +214,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "torgb": {
@@ -297,7 +230,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "torgba": {
@@ -313,7 +246,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "r": {
@@ -329,7 +262,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "g": {
@@ -345,7 +278,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "b": {
@@ -361,7 +294,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "a": {
@@ -377,7 +310,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "l": {
@@ -393,7 +326,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "s": {
@@ -409,7 +342,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "h": {
@@ -425,7 +358,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "reset": {
@@ -441,7 +374,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "apply": {
@@ -452,7 +385,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "desaturate": {
@@ -468,7 +401,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "saturate": {
@@ -484,7 +417,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "grayscale": {
@@ -500,7 +433,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "spin": {
@@ -516,7 +449,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "alpha": {
@@ -532,7 +465,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "darken": {
@@ -548,7 +481,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "lighten": {
@@ -564,7 +497,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "invert": {
@@ -575,7 +508,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "tohexstring": {
@@ -591,7 +524,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "torgbstring": {
@@ -607,7 +540,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "torgbastring": {
@@ -623,7 +556,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "tohslstring": {
@@ -639,7 +572,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "tohslastring": {
@@ -655,7 +588,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "tostring": {
@@ -671,10 +604,64 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-color.shared.interface.SColorApplyParamsInterface": {
+                "name": "SColorApplyParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SSvelteCompiler",
+                "namespace": "@coffeekraken.s-color.shared.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SColorApplyParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/interface/SColorApplyParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-color.shared.interface.SColorSettingsInterface": {
+                "name": "SColorSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the settings of an SColor instance.",
+                "namespace": "@coffeekraken.s-color.shared.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SColorSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/interface/SColorSettingsInterface.ts",
+                "children": {}
             }
         }
     }

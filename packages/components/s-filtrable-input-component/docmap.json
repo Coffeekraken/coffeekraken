@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-form-validate-feature",
@@ -38,16 +38,21 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -56,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -75,11 +81,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingBlock": {
                 "name": "paddingBlock",
@@ -91,11 +97,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderRadius": {
                 "name": "borderRadius",
@@ -107,11 +113,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderWidth": {
                 "name": "borderWidth",
@@ -123,11 +129,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.transition": {
                 "name": "transition",
@@ -139,11 +145,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultColor": {
                 "name": "defaultColor",
@@ -155,11 +161,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultStyle": {
                 "name": "defaultStyle",
@@ -171,27 +177,27 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.depth": {
                 "name": "depth",
                 "type": "String",
-                "default": "[theme.depth.100]",
+                "default": "5",
                 "description": "Specify the default depth for input items",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.outline": {
                 "name": "outline",
@@ -203,11 +209,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.rhythmVertical": {
                 "name": "rhythmVertical",
@@ -219,14 +225,14 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js",
+                "relPath": "src/config/themeUi.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-filtrable-input-component.js.interface.sFiltrableInputComponentInterface": {
+            "@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface": {
                 "name": "SFiltrableInputComponentInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -238,170 +244,20 @@
                 "description": "This class represent the interface that describe parameters of the SFiltrableInputComponent",
                 "namespace": "@coffeekraken.s-filtrable-input-component.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SFiltrableInputComponentInterface",
-                    "description": "",
-                    "definition": {
-                        "items": {
-                            "description": "Specify an array of items to use in your filtrable list. Can be a JSON string, a function that take an object with the \"value\" property and must return an array of items to use",
-                            "type": "String|Function"
-                        },
-                        "value": {
-                            "description": "Specify the attribute in your items to use as a value. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as value",
-                            "type": "String",
-                            "default": "value"
-                        },
-                        "label": {
-                            "description": "Specify the attribute in your items to use as a label. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as label",
-                            "type": "String|Function",
-                            "default": "value"
-                        },
-                        "emptyText": {
-                            "description": "Specify the text to use for the default \"empty\" (no result) state",
-                            "type": "String",
-                            "default": "No item to display"
-                        },
-                        "searchValuePreprocess": {
-                            "description": "Specify a function used to preprocess the value just before actually searching through the items",
-                            "type": "Function"
-                        },
-                        "loadingText": {
-                            "description": "Specify the text to use for the default \"loading\" state",
-                            "type": "String",
-                            "default": "Loading please wait..."
-                        },
-                        "filterItems": {
-                            "description": "Specify a function to use to filter the items. Must return the filtered list of items",
-                            "type": "Function"
-                        },
-                        "filtrable": {
-                            "description": "Specify all the properties of your \"item\" to use as source for the filtrable process",
-                            "type": {
-                                "type": "Array<String>",
-                                "splitChars": [
-                                    ","
-                                ]
-                            },
-                            "default": []
-                        },
-                        "templates": {
-                            "description": "Specify either an object with properties like \"item\", \"empty\" and \"loading\", or a function returning the good template depending on tne \"type\" argument property",
-                            "type": "Object|Function"
-                        },
-                        "closeTimeout": {
-                            "description": "Specify the duration before closing the list when having selected an item",
-                            "type": "Number",
-                            "default": 100
-                        },
-                        "interactive": {
-                            "description": "Specify if your items in the list are interactive or not to let the user click and interact with them",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "notSelectable": {
-                            "description": "Specify if you want the items to be not selectable",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "maxItems": {
-                            "description": "Specify the maximum number of items to display at first in the list",
-                            "type": "Number",
-                            "default": 25
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SFiltrableInputComponentInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SFiltrableInputComponentInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-filtrable-input-component.sugar.css.ui.filtrableInput": {
-                "name": "Filtrable Input",
-                "type": "Styleguide",
-                "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "UI"
-                    ],
-                    "slug": "/styleguide/ui/filtrable-input"
-                },
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "These classes allows you to display an input as filtrable",
-                "namespace": "@coffeekraken.s-filtrable-input-component.sugar.css.ui",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "${finalParams.styles\n.map((style) => {\nreturn `\n<!-- ${style} style -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">${style} style</h3>\n  <a tabindex=\"0\" class=\"s-btn:${style} s-mie:20 s-mbe:20\"><span>Click me!</span></a>\n  <a tabindex=\"0\" class=\"s-btn:${style} s-mie:20 s-mbe:20 s-color:accent\"><span>Click me!</span></a>\n  <a tabindex=\"0\" class=\"s-btn:${style} s-mie:20 s-mbe:20 s-color:complementary\"><span>Click me!</span></a>\n  <a tabindex=\"0\" class=\"s-btn:${style} s-mie:20 s-mbe:20 s-color:info\"><span>Click me!</span></a>\n  <a tabindex=\"0\" class=\"s-btn:${style} s-mie:20 s-mbe:20 s-color:error\"><span>Click me!</span></a>\n  <span class=\"s-btn-group s-mie:20 s-mbe:20\">\n      <a tabindex=\"0\" class=\"s-btn:${style}\"><span>Click me!</span></a>\n      <a tabindex=\"0\" class=\"s-btn:${style}\"><span>+</span></a>\n  </span>\n  <a tabindex=\"0\" disabled class=\"s-btn:${style} s-mie:20 s-mbe:20\"><span>Click me!</span></a>\n</div>\n`;\n})\n.join('\\n')}\n\n<!-- scales -->\n<div class=\"s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Scales</h3>\n  <a tabindex=\"0\" class=\"s-btn s-scale:07 s-mie:20\"><span>Click me!</span></a>\n  <a tabindex=\"0\" class=\"s-btn s-scale:1 s-mie:20\"><span>Click me!</span></a>\n  <a tabindex=\"0\" class=\"s-btn s-scale:13 s-mie:20\"><span>Click me!</span></a>\n</div>\n\n<!-- Rhythm and text format -->\n<div class=\"s-font:30 s-mbe:50\">\n  <h3 class=\"s-tc:accent s-font:30 s-mbe:30\">Vertical rhythm and text formatting</h3>\n  <p class=\"s-typo:p s-mbe:30\">\n      Text format mean that all the \\`button\\` tags inside the \\`s-format:text\\` class scope will be *styled automatically** using the default style and color.\n  </p>\n  <div class=\"s-format:text s-rhythm:vertical\">\n      <button>\n         ${__faker.name.findName()}\n      </button>\n      <br />\n      <button>\n          ${__faker.name.findName()}\n      </button>\n  </div>\n</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "classes.js",
-                "extension": "js",
-                "relPath": "src/node/postcss/mixins/ui/filtrableInput/classes.js"
-            },
-            "@coffeekraken.s-filtrable-input-component.sugar.css.ui.filtrableInput.-cls": {
-                "name": "${cls}",
-                "type": "CssClass",
-                "description": "This class represent a(n) \"<s-color=\"accent\">${style}</s-color>\" filtrable input",
-                "namespace": "@coffeekraken.s-filtrable-input-component.sugar.css.ui.filtrableInput",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<a class=\"${cls.replace(/\\./gm, ' ').trim()}\">I'm a cool button</a>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "classes.js",
-                "extension": "js",
-                "relPath": "src/node/postcss/mixins/ui/filtrableInput/classes.js"
-            },
-            "@coffeekraken.s-filtrable-input-component.sugar.css.ui.filtrableInput.sRhythm-vertical": {
-                "name": "s-rhythm:vertical",
-                "type": "CssClass",
-                "description": "This class represent some filtrable inputs in the s-rhythm:vertical scope",
-                "namespace": "@coffeekraken.s-filtrable-input-component.sugar.css.ui.filtrableInput",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<div class=\"s-rhythm:vertical\">\n  <button class=\"s-btn\">\n      Hello world\n  </button>\n  <br />\n  <button class=\"s-btn\">\n      Hello world\n  </button>\n  <br />\n  <button class=\"s-btn\">\n      Hello world\n  </button>\n</div>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "classes.js",
-                "extension": "js",
-                "relPath": "src/node/postcss/mixins/ui/filtrableInput/classes.js",
+                "filename": "SFiltrableInputComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SFiltrableInputComponentInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-filtrable-input-component.ui.filtrableInput.filtrableInput": {
                 "name": "filtrableInput",
-                "type": "CssMixin",
+                "type": "PostcssMixin",
                 "platform": [
                     {
                         "name": "css",
@@ -421,11 +277,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "filtrableInput.js",
-                "extension": "js",
-                "relPath": "src/node/postcss/mixins/ui/filtrableInput/filtrableInput.js",
+                "filename": "filtrableInput.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/filtrableInput/filtrableInput.ts",
                 "children": {}
             }
         }

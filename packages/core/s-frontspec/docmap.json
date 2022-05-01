@@ -39,6 +39,8 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -48,8 +50,9 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-scroll-to-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -58,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -67,21 +71,21 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-frontspec.config.frontspec.head.@dev.viteClient": {
+            "@coffeekraken.s-frontspec.config.frontspec.head.viteClient": {
                 "name": "viteClient",
                 "type": "Object",
                 "default": "vite client script",
                 "description": "Specify some items you want to integrate to the head tag. It can be everything you want",
-                "namespace": "@coffeekraken.s-frontspec.config.frontspec.head.@dev",
+                "namespace": "@coffeekraken.s-frontspec.config.frontspec.head",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "frontspec.config.js",
+                "filename": "frontspec.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontspec.config.js",
+                "relPath": "src/config/frontspec.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontspec.node.SFrontspec": {
@@ -100,7 +104,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SFrontspec.ts",
                 "extension": "ts",
@@ -114,7 +118,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "read": {
@@ -125,7 +129,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "assetstoserve": {
@@ -137,7 +141,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
@@ -154,25 +158,15 @@
                 "description": "This class represent the interface that describe the minimum requirement\nneeded to build the docMap.json file",
                 "namespace": "@coffeekraken.s-frontspec.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SFrontspecReadParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "env": {
-                            "description": "Specify the environment for which to read the frontspec for",
-                            "type": "String"
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SFrontspecReadParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SFrontspecReadParamsInterface.js",
+                "filename": "SFrontspecReadParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SFrontspecReadParamsInterface.ts",
                 "children": {}
             }
         }

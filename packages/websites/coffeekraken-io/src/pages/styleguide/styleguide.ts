@@ -1,4 +1,5 @@
 export default {
+    slugs: ['/styleguide/*', '/package/:organisation/:package/styleguide/*'],
     params: {
         path: '*',
     },

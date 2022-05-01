@@ -28,6 +28,7 @@
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -39,7 +40,11 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -48,16 +53,19 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-scroll-to-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -88,7 +96,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "README.md",
                 "extension": "md",
@@ -121,46 +129,15 @@
                         "code": "<div class=\"scrollable\" s-refocus trigger=\"event:actual\">\n   <ul>\n      <li>\n         <a href=\"#hello\">Hello</a>\n         <!-- when this element dispatch an \"actual\" event,\n              it will be refocused -->\n      </li>\n      <li>\n         <a href=\"#world\">World</a>\n      </li>\n   </ul>\n</div>"
                     }
                 ],
-                "interface": {
-                    "name": "SRefocusFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "trigger": {
-                            "description": "Specify some trigger(s) on which to refocus a particular element like `event:actual`, `anchor`, `history`, etc...",
-                            "type": {
-                                "type": "Array<String>",
-                                "splitChars": [
-                                    ","
-                                ]
-                            },
-                            "values": [
-                                "event:eventName",
-                                "anchor",
-                                "history"
-                            ],
-                            "default": []
-                        },
-                        "scrollToSettings": {
-                            "description": "Specify some `scrollTo` settings to override the default ones",
-                            "type": "IScrollToSettings",
-                            "default": {}
-                        },
-                        "timeout": {
-                            "description": "Specify a timeout to wait before refocus the element",
-                            "type": "Number",
-                            "default": 500
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SRefocusFeature.js",
-                "extension": "js",
-                "relPath": "src/js/SRefocusFeature.js",
+                "filename": "SRefocusFeature.ts",
+                "extension": "ts",
+                "relPath": "src/js/SRefocusFeature.ts",
                 "children": {}
             },
             "@coffeekraken.s-refocus-feature.js.interface.SRefocusFeatureInterface": {
@@ -175,46 +152,15 @@
                 "description": "This interface represent the attributes of the SRefocusFeature",
                 "namespace": "@coffeekraken.s-refocus-feature.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SRefocusFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "trigger": {
-                            "description": "Specify some trigger(s) on which to refocus a particular element like `event:actual`, `anchor`, `history`, etc...",
-                            "type": {
-                                "type": "Array<String>",
-                                "splitChars": [
-                                    ","
-                                ]
-                            },
-                            "values": [
-                                "event:eventName",
-                                "anchor",
-                                "history"
-                            ],
-                            "default": []
-                        },
-                        "scrollToSettings": {
-                            "description": "Specify some `scrollTo` settings to override the default ones",
-                            "type": "IScrollToSettings",
-                            "default": {}
-                        },
-                        "timeout": {
-                            "description": "Specify a timeout to wait before refocus the element",
-                            "type": "Number",
-                            "default": 500
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SRefocusFeatureInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SRefocusFeatureInterface.js",
+                "filename": "SRefocusFeatureInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SRefocusFeatureInterface.ts",
                 "children": {}
             }
         }

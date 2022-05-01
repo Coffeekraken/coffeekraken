@@ -45,8 +45,6 @@ function docmapMiddleware(settings = {}) {
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
 
-        // console.log(docmapJson);
-
         res.templateData.docmap = docmapJson;
         docmapCache = docmapJson;
 

@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
@@ -38,16 +38,21 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -56,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -75,14 +81,14 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "sFile.config.js",
+                "filename": "sFile.config.ts",
                 "extension": "config",
-                "relPath": "src/config/sFile.config.js",
+                "relPath": "src/config/sFile.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-file.sugar.node.fs.sFile": {
+            "@coffeekraken.s-file.sugar.node.fs.SFile": {
                 "name": "SFile",
                 "type": "Class",
                 "description": "This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,\nand get access to all the nice meta data like:\n- name: The file name\n- path: The full path to the file\n- cwd: The root directory specified through the settings.cwd property\n- relPath: The relative file path from the cwd\n- dirPath: The path to the folder where is the file\n- extension: The file extension\n- stats: An object with file stats like size in mb, kb, etc...\n- exists: true if the file exists on the disk, false otherwise",
@@ -98,13 +104,13 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SFile.ts",
                 "extension": "ts",
                 "relPath": "src/node/SFile.ts",
                 "children": {
-                    "registerClass": {
+                    "registerclass": {
                         "name": "registerClass",
                         "type": "Function",
                         "description": "This method allows you to register an SFile(...) class with an extension\nto allows you to instanciate the best one using the ```new``` static\nmethod.",
@@ -113,10 +119,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "sourcesFiles": {
+                    "sourcesfiles": {
                         "name": "sourcesFiles",
                         "type": "Record<string, SFile>",
                         "description": "Store the sources files found using the specified sourcesExtensions in the settings",
@@ -124,7 +130,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "new": {
@@ -136,7 +142,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "name": {
@@ -147,10 +153,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "nameWithoutExt": {
+                    "namewithoutext": {
                         "name": "nameWithoutExt",
                         "type": "String",
                         "description": "Store the file name without the extension",
@@ -158,7 +164,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "path": {
@@ -169,7 +175,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "cwd": {
@@ -180,7 +186,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "exists": {
@@ -191,10 +197,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "relPath": {
+                    "relpath": {
                         "name": "relPath",
                         "type": "String",
                         "description": "Store the path relative to the ```cwd``` property. To have access to this property, you MUST\nspecify the settings.cwd through the constructor",
@@ -202,10 +208,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "dirPath": {
+                    "dirpath": {
                         "name": "dirPath",
                         "type": "String",
                         "description": "Store the path to the folder where the file lives",
@@ -213,7 +219,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "extension": {
@@ -224,10 +230,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "fileSettings": {
+                    "filesettings": {
                         "name": "fileSettings",
                         "type": "ISFileSettings",
                         "description": "Access the file settings setted in the ```settings.file``` property",
@@ -235,7 +241,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -246,7 +252,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "hash": {
@@ -257,7 +263,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "stats": {
@@ -268,7 +274,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "raw": {
@@ -279,7 +285,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "content": {
@@ -290,7 +296,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "commits": {
@@ -301,10 +307,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "toObject": {
+                    "toobject": {
                         "name": "toObject",
                         "type": "Function",
                         "description": "This method transform this instance into a plain object",
@@ -312,7 +318,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "watch": {
@@ -323,7 +329,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "unwatch": {
@@ -334,10 +340,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "toString": {
+                    "tostring": {
                         "name": "toString",
                         "type": "Function",
                         "description": "Return the string version of the file. Here, the path...",
@@ -345,7 +351,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "duplicate": {
@@ -357,10 +363,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "duplicateSync": {
+                    "duplicatesync": {
                         "name": "duplicateSync",
                         "type": "Function",
                         "description": "This method allows you to make a copy of this file.\nIf you don't specify a \"to\" path, the file will be diplicated\ninto the temp directory",
@@ -368,7 +374,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "save": {
@@ -380,10 +386,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "saveSync": {
+                    "savesync": {
                         "name": "saveSync",
                         "type": "Function",
                         "description": "This method allows you to save the file with the content\nthat you can set by setting the ```content``` property",
@@ -391,7 +397,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "unlink": {
@@ -403,10 +409,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "unlinkSync": {
+                    "unlinksync": {
                         "name": "unlinkSync",
                         "type": "Function",
                         "description": "This method allows you to unlinkSync the file syncronously",
@@ -415,7 +421,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "read": {
@@ -427,10 +433,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "readSync": {
+                    "readsync": {
                         "name": "readSync",
                         "type": "Function",
                         "description": "This method allows you to read the file syncronously",
@@ -438,7 +444,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "write": {
@@ -450,10 +456,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "writeSync": {
+                    "writesync": {
                         "name": "writeSync",
                         "type": "Function",
                         "description": "This method allows you to write the file sycronously",
@@ -461,7 +467,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }

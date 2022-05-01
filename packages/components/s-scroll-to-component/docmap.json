@@ -40,16 +40,19 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -58,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -67,15 +71,15 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-range-component.js.Range": {
-                "name": "Range",
+            "@coffeekraken.s-scroll-to-component.js.Scroll-to": {
+                "name": "Scroll to",
                 "type": "CustomElement",
                 "menu": {
                     "tree": [
                         "Styleguide",
                         "Forms"
                     ],
-                    "slug": "/styleguide/form/s-range"
+                    "slug": "/styleguide/form/s-scroll-to"
                 },
                 "platform": [
                     {
@@ -83,91 +87,18 @@
                         "description": ""
                     }
                 ],
-                "description": "This component specify a range with some additional features than the native one like\ndisplaying the value automatically in tooltip or inline.",
-                "namespace": "@coffeekraken.s-range-component.js",
+                "description": "This component allows you to scroll to a specific element using a css selector or to the top|bottom of the page.",
+                "namespace": "@coffeekraken.s-scroll-to-component.js",
                 "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "title": "Simple range",
-                        "code": "<s-range name=\"myCoolRange\" value=\"90\" class=\"s-color:accent s-mbe:30\"></s-range>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With tooltop",
-                        "code": "<s-range name=\"myOtherRanfe\" class=\"s-mbe:30\" tooltip></s-range>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With tooltop and colored",
-                        "code": "<s-range name=\"myOtherRanfe\" class=\"s-mbe:30 s-color:accent\" tooltip></s-range>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With steps",
-                        "code": "<s-range name=\"myRangeWithSteps\" value=\"70\" class=\"s-color:complementary s-mbe:30\" step=\"5\"></s-range>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "External target input",
-                        "code": "<div class=\"s-flex:align-center s-mbe:30\">\n <s-range name=\"myRangeWithTarget\" value=\"30\" target=\"#my-range-with-target-target\"></s-range>\n <span class=\"s-pis:20\" id=\"my-range-with-target-target\"></span>\n</div>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "Some colors",
-                        "code": "<s-range name=\"myRangeColoredSuccess\" value=\"30\" class=\"s-color:success s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredWarning\" value=\"0\" class=\"s-color:warning s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredError\" value=\"1\" min=\"0\" max=\"10\" class=\"s-color:error s-mbe:30\"></s-range>"
-                    },
-                    {
-                        "language": "js",
-                        "code": "import { define } from '@coffeekraken/s-range-component';\ndefine();"
-                    }
-                ],
-                "interface": {
-                    "name": "SRangeComponentInterface",
-                    "description": "",
-                    "definition": {
-                        "name": {
-                            "type": "String",
-                            "description": "Specify the name to assign to the internal input[type=\"range\"]"
-                        },
-                        "value": {
-                            "type": "String",
-                            "description": "Specify the initial range value"
-                        },
-                        "min": {
-                            "type": "Number",
-                            "description": "Specify the minimal value or the range",
-                            "default": 0
-                        },
-                        "max": {
-                            "type": "Number",
-                            "description": "Specify the maximal value of the range",
-                            "default": 100
-                        },
-                        "step": {
-                            "type": "Number",
-                            "description": "Specify the steps between each values"
-                        },
-                        "target": {
-                            "type": "String",
-                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
-                        },
-                        "tooltip": {
-                            "type": "Boolean",
-                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
-                            "default": false
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SRangeComponent.ts",
+                "filename": "SScrollToComponent.ts",
                 "extension": "ts",
-                "relPath": "src/js/SRangeComponent.ts",
+                "relPath": "src/js/SScrollToComponent.ts",
                 "children": {
                     "webcomponent": {
                         "name": "webcomponent",
@@ -177,13 +108,13 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
             },
-            "@coffeekraken.s-range-component.js.interface.SRangeComponentInterface": {
-                "name": "SRangeComponentInterface",
+            "@coffeekraken.s-scroll-to-component.js.interface.SScrollToComponentInterface": {
+                "name": "SScrollToComponentInterface",
                 "type": ".                      Class",
                 "platform": [
                     {
@@ -191,55 +122,18 @@
                         "description": ""
                     }
                 ],
-                "description": "This class represent the interface that describe parameters of the SRangeComponent",
-                "namespace": "@coffeekraken.s-range-component.js.interface",
+                "description": "This class represent the interface that describe parameters of the SScrollToComponent",
+                "namespace": "@coffeekraken.s-scroll-to-component.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SRangeComponentInterface",
-                    "description": "",
-                    "definition": {
-                        "name": {
-                            "type": "String",
-                            "description": "Specify the name to assign to the internal input[type=\"range\"]"
-                        },
-                        "value": {
-                            "type": "String",
-                            "description": "Specify the initial range value"
-                        },
-                        "min": {
-                            "type": "Number",
-                            "description": "Specify the minimal value or the range",
-                            "default": 0
-                        },
-                        "max": {
-                            "type": "Number",
-                            "description": "Specify the maximal value of the range",
-                            "default": 100
-                        },
-                        "step": {
-                            "type": "Number",
-                            "description": "Specify the steps between each values"
-                        },
-                        "target": {
-                            "type": "String",
-                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
-                        },
-                        "tooltip": {
-                            "type": "Boolean",
-                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
-                            "default": false
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SRangeComponentInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SRangeComponentInterface.js",
+                "filename": "SScrollToComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SScrollToComponentInterface.ts",
                 "children": {}
             }
         }

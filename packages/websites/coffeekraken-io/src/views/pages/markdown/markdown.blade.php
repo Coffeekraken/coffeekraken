@@ -34,6 +34,10 @@
                                     {{ str_replace('@coffeekraken/', '', $package->name) }}
                                 </div>
 
+                                <pre>
+                        {{-- {{ var_dump($package)}} --}}
+                                </pre>
+
                                 @php $menu = get_object_vars($package->tree->documentation); @endphp
                                 @include('pages.markdown.menu', ['menu' => $menu, 'id' =>
                                 \Sugar\string\idCompliant($package->name)])

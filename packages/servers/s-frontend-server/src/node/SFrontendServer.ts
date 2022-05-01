@@ -47,7 +47,31 @@ export interface ISFrontendServerParams {
     prod: boolean;
 }
 
+export interface ISFrontendServerPageViewConfig {
+    data?: string;
+    path?: string;
+}
+
+export interface ISFrontendServerPageConfig {
+    slugs?: string[];
+    views?: ISFrontendServerPageViewConfig[];
+    params?: any;
+    handler?: string;
+}
+
 export default class SFrontendServer extends __SClass {
+    /**
+     * @name            _express
+     * @type            Object
+     * @private
+     *
+     * Store the express server instance
+     *
+     * @since       2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    private _express;
+
     /**
      * @name					constructor
      * @type 					Function
@@ -60,6 +84,9 @@ export default class SFrontendServer extends __SClass {
      */
     constructor() {
         super();
+
+        // instanciate a new express server
+        this._express = __express();
     }
 
     /**
@@ -81,11 +108,9 @@ export default class SFrontendServer extends __SClass {
 
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
-                const express = __express();
-
                 // enable compression if prod
                 if (finalParams.prod || __SEnv.is('production')) {
-                    express.use(__compression());
+                    this._express.use(__compression());
                 }
 
                 setTimeout(() => {
@@ -108,7 +133,7 @@ export default class SFrontendServer extends __SClass {
                     'frontendServer',
                 );
 
-                express.use((req, res, next) => {
+                this._express.use((req, res, next) => {
                     if (req.path.substr(-1) == '/' && req.path.length > 1) {
                         const query = req.url.slice(req.path.length);
                         res.redirect(301, req.path.slice(0, -1) + query);
@@ -140,7 +165,7 @@ export default class SFrontendServer extends __SClass {
                         }
                         await pipe(
                             module.default(
-                                express,
+                                this._express,
                                 moduleObj.settings,
                                 frontendServerConfig,
                             ),
@@ -154,7 +179,7 @@ export default class SFrontendServer extends __SClass {
                             const proxyObj =
                                 frontendServerConfig.proxy[proxyId];
                             // @ts-ignore
-                            express.use(
+                            this._express.use(
                                 createProxyMiddleware(proxyObj.route, {
                                     logLevel: 'silent',
                                     ...(proxyObj.settings ?? {}),
@@ -174,7 +199,7 @@ export default class SFrontendServer extends __SClass {
                                     fsPath,
                                 )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
                             });
-                            express.use(
+                            this._express.use(
                                 dir,
                                 __express.static(fsPath, { dotfiles: 'allow' }),
                             );
@@ -213,7 +238,7 @@ export default class SFrontendServer extends __SClass {
 
                         // register the middleware inside the sails configuration
                         // @ts-ignore
-                        express.use((req, res, next) => {
+                        this._express.use((req, res, next) => {
                             return pipe(middleware(req, res, next));
                         });
                     }
@@ -221,7 +246,7 @@ export default class SFrontendServer extends __SClass {
 
                 // logging requests
                 if (logLevelInt >= 4) {
-                    express.use((req, res, next) => {
+                    this._express.use((req, res, next) => {
                         // emit('log', {
                         //     type: 'detail',
                         //     group: `s-frontend-server-${this.metas.id}`,
@@ -246,37 +271,21 @@ export default class SFrontendServer extends __SClass {
                     });
                 }
 
-                // routes registration
-                // if (frontendServerConfig.routes) {
-                //     Object.keys(frontendServerConfig.routes).forEach(
-                //         async (routeSlug) => {
-                //             const routeObj =
-                //                 frontendServerConfig.routes[routeSlug];
-
-                //             const handlerObj =
-                //                 frontendServerConfig.handlers[routeObj.handler];
-                //             const handlerPath = handlerObj.path;
-                //             if (!handlerPath) {
-                //                 return;
-                //             }
-
-                //             const handlerFn = await this._getHandlerFn(
-                //                 routeObj.handler,
-                //             );
-
-                //             express.get(routeSlug, (req, res, next) => {
-                //                 if (routeObj.request) {
-                //                     req = __deepMerge(req, routeObj.request);
-                //                 }
-
-                //                 return pipe(handlerFn(req, res, next));
-                //             });
-                //         },
-                //     );
-                // }
+                // routes pages from config
+                if (frontendServerConfig.pages) {
+                    for (let [id, pageConfig] of Object.entries(
+                        frontendServerConfig.pages,
+                    )) {
+                        await pipe(
+                            this._registerPageConfig(
+                                <ISFrontendServerPageConfig>pageConfig,
+                            ),
+                        );
+                    }
+                }
 
                 // "pages" folder routes
-                pipe(this._registerPagesRoutes(express));
+                pipe(this._registerPagesRoutes());
 
                 if (!(await __isPortFree(frontendServerConfig.port))) {
                     emit('log', {
@@ -285,38 +294,41 @@ export default class SFrontendServer extends __SClass {
                     await __kill(`:${frontendServerConfig.port}`);
                 }
 
-                const server = express.listen(frontendServerConfig.port, () => {
-                    // server started successfully
-                    emit('log', {
-                        group: `s-frontend-server-${this.metas.id}`,
-                        value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,
-                    });
-                    emit('log', {
-                        group: `s-frontend-server-${this.metas.id}`,
-                        value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_VERBOSE,
-                        // group: `s-frontend-server-${this.metas.id}`,
-                        value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_VERBOSE,
-                        // group: `s-frontend-server-${this.metas.id}`,
-                        value: `Log level: <yellow>${finalParams.logLevel}</yellow>`,
-                    });
+                const server = this._express.listen(
+                    frontendServerConfig.port,
+                    () => {
+                        // server started successfully
+                        emit('log', {
+                            group: `s-frontend-server-${this.metas.id}`,
+                            value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,
+                        });
+                        emit('log', {
+                            group: `s-frontend-server-${this.metas.id}`,
+                            value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
+                        });
+                        emit('log', {
+                            type: __SLog.TYPE_VERBOSE,
+                            // group: `s-frontend-server-${this.metas.id}`,
+                            value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`,
+                        });
+                        emit('log', {
+                            type: __SLog.TYPE_VERBOSE,
+                            // group: `s-frontend-server-${this.metas.id}`,
+                            value: `Log level: <yellow>${finalParams.logLevel}</yellow>`,
+                        });
 
-                    // setTimeout(() => {
-                    //     emit('log', {
-                    //         type: 'summary',
-                    //         value: {
-                    //             status: 'success',
-                    //             value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
-                    //             collapse: true,
-                    //         },
-                    //     });
-                    // }, 2000);
-                });
+                        // setTimeout(() => {
+                        //     emit('log', {
+                        //         type: 'summary',
+                        //         value: {
+                        //             status: 'success',
+                        //             value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
+                        //             collapse: true,
+                        //         },
+                        //     });
+                        // }, 2000);
+                    },
+                );
 
                 __onProcessExit(() => {
                     emit('log', {
@@ -343,6 +355,7 @@ export default class SFrontendServer extends __SClass {
      */
     async _getHandlerFn(handlerNameOrPath: string) {
         if (__fs.existsSync(handlerNameOrPath)) {
+            // @ts-ignore
             return (await import(pageConfig.handler)).default;
         } else {
             const handlersInConfig = __SSugarConfig.get(
@@ -353,6 +366,7 @@ export default class SFrontendServer extends __SClass {
                     `[SFrontendServer] Sorry but the handler named "<yellow>${handlerNameOrPath}</yellow>" seems to not exists or is missconfigured...`,
                 );
             }
+            // @ts-ignore
             return (await import(handlersInConfig[handlerNameOrPath].path))
                 .default;
         }
@@ -361,61 +375,85 @@ export default class SFrontendServer extends __SClass {
     /**
      * This method scrap the "pages" folder and register all the routes found inside.
      */
-    _registerPagesRoutes(express) {
+    _registerPagesRoutes() {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             const pagesFolder = __SSugarConfig.get('storage.src.pagesDir');
-
-            const frontendServerConfig = __SSugarConfig.get('frontendServer');
 
             const pagesFiles = __SGlob.resolve(`**/*.js`, {
                 cwd: pagesFolder,
             });
 
             for (let [index, pageFile] of pagesFiles.entries()) {
+                // @ts-ignore
                 const { default: pageConfig } = await import(pageFile.path);
+                await pipe(this._registerPageConfig(pageConfig, pageFile));
+            }
 
-                let handlerFn;
+            resolve();
+        });
+    }
 
-                // generate path
-                let path = `/${pageFile.relPath
+    /**
+     * This method register the passed pageConfig config object that can be specified
+     * either in the "pages" folder or in the "frontendServer.pages" configuration.
+     */
+    _registerPageConfig(
+        pageConfig: ISFrontendServerPageConfig,
+        pageFile?: any,
+    ): Promise<void> {
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            let handlerFn,
+                slug = '',
+                slugs: string[] = pageConfig.slugs ?? [];
+
+            const frontendServerConfig = __SSugarConfig.get('frontendServer');
+
+            // generate path
+            if (pageFile && !pageConfig.slugs) {
+                slug = `/${pageFile.relPath
                     .split('/')
                     .slice(0, -1)
                     .join('/')
                     .replace(/\.(t|j)s$/, '')
                     .replace(/\./g, '/')}`;
+            }
 
+            if (!pageConfig.slugs) {
                 if (pageConfig.params) {
                     let isOptional = false;
                     for (let [name, requiredOrStr] of Object.entries(
                         pageConfig.params,
                     )) {
                         if (typeof requiredOrStr === 'string') {
-                            path += `/${requiredOrStr}`;
+                            slug += `/${requiredOrStr}`;
                         } else if (requiredOrStr) {
                             if (isOptional) {
                                 throw new Error(
                                     `[SFrontendServer] You cannot have required params after optional onces in the page ${pageFile.path}`,
                                 );
                             }
-                            path += `/:${name}`;
+                            slug += `/:${name}`;
                         } else {
                             isOptional = true;
-                            path += `/:${name}?`;
+                            slug += `/:${name}?`;
                         }
                     }
                 }
+                slugs = [slug];
+            }
 
-                // handler
-                handlerFn = await this._getHandlerFn(
-                    pageConfig.handler ?? 'dynamic',
-                );
+            // handler
+            handlerFn = await this._getHandlerFn(
+                pageConfig.handler ?? 'dynamic',
+            );
 
+            slugs.forEach((slug) => {
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[route]</yellow> <cyan>${path}</cyan> route registered <green>successfully</green>`,
+                    value: `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green>`,
                 });
 
-                express.get(path, (req, res, next) => {
+                this._express.get(slug, (req, res, next) => {
                     for (let [key, value] of Object.entries(req.params)) {
                         // do not process non "number" keys
                         if (typeof __autoCast(key) !== 'number') continue;
@@ -437,7 +475,9 @@ export default class SFrontendServer extends __SClass {
                         }),
                     );
                 });
-            }
+            });
+
+            resolve();
         });
     }
 }

@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -24,6 +23,7 @@
             "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -38,16 +38,21 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -56,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -75,14 +81,14 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "env.config.js",
+                "filename": "env.config.ts",
                 "extension": "config",
-                "relPath": "src/config/env.config.js",
+                "relPath": "src/config/env.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-env.s-env.shared.sEnv": {
+            "@coffeekraken.s-env.s-env.shared.SEnv": {
                 "name": "SEnv",
                 "type": "Class",
                 "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
@@ -90,19 +96,31 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('dev');\n// etc..."
+                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('development');\n// etc..."
                     }
                 ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SEnv.js",
-                "extension": "js",
-                "relPath": "src/shared/SEnv.js",
+                "filename": "SEnv.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SEnv.ts",
                 "children": {
+                    "env": {
+                        "name": "env",
+                        "type": "Object",
+                        "description": "Store the actual environment variables object. In node it will be process.env, in the browser,\nwindow.env",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "is": {
                         "name": "is",
                         "type": "Function",
@@ -112,7 +130,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "get": {
@@ -124,7 +142,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "set": {
@@ -136,7 +154,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "delete": {
@@ -148,10 +166,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "packageJson": {
+                    "packagejson": {
                         "name": "packageJson",
                         "type": "Object",
                         "description": "Access the package.json content from the current package the process\nruns in.",
@@ -160,7 +178,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }

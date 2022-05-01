@@ -18,11 +18,17 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
 
         __SBench.step('data.docmapDocumentationData', 'beforeDocmapRead');
 
-        console.log(req.params);
-
         const docmap = new __SDocMap();
         const docmapJson = await docmap.read();
-        const docObj = docmapJson.menu.slug[`/doc/${req.params.path}`];
+        let docObj = docmapJson.menu.slug[`/doc/${req.params.path}`];
+        if (!docObj) {
+            docObj =
+                docmapJson.menu.packages?.[
+                    `${req.params.organisation}/${req.params.package}`
+                ]?.slug?.[
+                    `/package/${req.params.organisation}/${req.params.package}/doc/${req.params.path}`
+                ];
+        }
 
         if (!docObj) {
             return reject(

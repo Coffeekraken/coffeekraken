@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -38,16 +38,21 @@
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -56,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -65,7 +71,7 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-log.shared.iSLog": {
+            "@coffeekraken.s-log.shared.ISLog": {
                 "name": "ISLog",
                 "type": ".                      Class",
                 "platform": [
@@ -95,14 +101,14 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "ISLog.ts",
                 "extension": "ts",
                 "relPath": "src/shared/ISLog.ts",
                 "children": {}
             },
-            "@coffeekraken.s-log.shared.iSLogAsk": {
+            "@coffeekraken.s-log.shared.ISLogAsk": {
                 "name": "ISLogAsk",
                 "type": ".                      Class",
                 "platform": [
@@ -132,14 +138,14 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "ISLogAsk.js",
-                "extension": "js",
-                "relPath": "src/shared/ISLogAsk.js",
+                "filename": "ISLogAsk.ts",
+                "extension": "ts",
+                "relPath": "src/shared/ISLogAsk.ts",
                 "children": {}
             },
-            "@coffeekraken.s-log.shared.sLog": {
+            "@coffeekraken.s-log.shared.SLog": {
                 "name": "SLog",
                 "type": "Class",
                 "platform": [
@@ -170,7 +176,7 @@
                 "extension": "ts",
                 "relPath": "src/shared/SLog.ts",
                 "children": {
-                    "tYPELOG": {
+                    "type_log": {
                         "name": "TYPE_LOG",
                         "type": "ISLogType[]",
                         "description": "This static constant tells a log that it is of type \"LOG\"",
@@ -179,10 +185,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "tYPEINFO": {
+                    "type_info": {
                         "name": "TYPE_INFO",
                         "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"INFO\"",
@@ -191,10 +197,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "tYPEWARN": {
+                    "type_warn": {
                         "name": "TYPE_WARN",
                         "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"WARN\"",
@@ -203,10 +209,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "tYPEERROR": {
+                    "type_error": {
                         "name": "TYPE_ERROR",
                         "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"ERROR\"",
@@ -215,10 +221,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "tYPEVERBOSE": {
+                    "type_verbose": {
                         "name": "TYPE_VERBOSE",
                         "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"VERBOSE\"",
@@ -227,10 +233,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "tYPEVERBOSER": {
+                    "type_verboser": {
                         "name": "TYPE_VERBOSER",
                         "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"VERBOSER\"",
@@ -239,10 +245,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "tYPEDECORATOR": {
+                    "type_decorator": {
                         "name": "TYPE_DECORATOR",
                         "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"DECORATOR\"",
@@ -251,10 +257,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "tYPESUMMARY": {
+                    "type_summary": {
                         "name": "TYPE_SUMMARY",
                         "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"SUMMARY\"",
@@ -263,10 +269,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "tYPECHILDPROCESS": {
+                    "type_child_process": {
                         "name": "TYPE_CHILD_PROCESS",
                         "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"CHILD_PROCESS\"",
@@ -275,10 +281,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "tYPES": {
+                    "types": {
                         "name": "TYPES",
                         "type": "ISLogType[]",
                         "description": "This static constant store all the log types available",
@@ -287,10 +293,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "pRESETSILENT": {
+                    "preset_silent": {
                         "name": "PRESET_SILENT",
                         "type": "ISLogType[]",
                         "description": "This static constant define a log preset called \"silent\" that display nothing",
@@ -299,10 +305,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "pRESETDEFAULT": {
+                    "preset_default": {
                         "name": "PRESET_DEFAULT",
                         "type": "ISLogType[]",
                         "description": "This static constant define a log preset called \"default\" that display:\n- LOG\n- INFO\n- WARN\n- ERROR\n- DECORATOR\n- SUMMARY",
@@ -311,10 +317,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "pRESETWARN": {
+                    "preset_warn": {
                         "name": "PRESET_WARN",
                         "type": "ISLogType[]",
                         "description": "This static constant define a log preset called \"warn\" that display:\n- WARN\n- ERROR",
@@ -323,10 +329,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "pRESETERROR": {
+                    "preset_error": {
                         "name": "PRESET_ERROR",
                         "type": "ISLogType[]",
                         "description": "This static constant define a log preset called \"error\" that display:\n- ERROR",
@@ -335,10 +341,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "pRESETVERBOSE": {
+                    "preset_verbose": {
                         "name": "PRESET_VERBOSE",
                         "type": "ISLogType[]",
                         "description": "This static constant define a log preset called \"verbose\" that display:\n- LOG\n- INFO\n- WARN\n- ERROR\n- VERBOSE\n- DECORATOR\n- SUMMARY",
@@ -347,10 +353,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "pRESETVERBOSER": {
+                    "preset_verboser": {
                         "name": "PRESET_VERBOSER",
                         "type": "ISLogType[]",
                         "description": "This static constant define a log preset called \"verboser\" that display:\n- LOG\n- INFO\n- WARN\n- ERROR\n- VERBOSE\n- VERBOSER\n- DECORATOR\n- SUMMARY",
@@ -359,10 +365,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "pRESETS": {
+                    "presets": {
                         "name": "PRESETS",
                         "type": "String[]",
                         "description": "This static constant store all the log presets available",
@@ -371,7 +377,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "filter": {
@@ -389,10 +395,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "clearFilters": {
+                    "clearfilters": {
                         "name": "clearFilters",
                         "type": "Function",
                         "description": "This static method allows you to reset all the filters applied",
@@ -401,10 +407,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "setDefaultLogObj": {
+                    "setdefaultlogobj": {
                         "name": "setDefaultLogObj",
                         "type": "Function",
                         "description": "This static method allows you to set a default log object\nabove every others will be extended.",
@@ -413,10 +419,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "isTypeEnabled": {
+                    "istypeenabled": {
                         "name": "isTypeEnabled",
                         "type": "Function",
                         "description": "This static method allows you Check if a particular log type is enabled or not.\nYou can pass as well multiple log types as an array.",
@@ -425,7 +431,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -436,7 +442,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "value": {
@@ -447,7 +453,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "type": {
@@ -458,7 +464,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "active": {
@@ -469,7 +475,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "decorators": {
@@ -480,7 +486,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "time": {
@@ -491,7 +497,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "timestamp": {
@@ -502,7 +508,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "clear": {
@@ -513,7 +519,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "margin": {
@@ -524,7 +530,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "temp": {
@@ -535,7 +541,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "as": {
@@ -546,7 +552,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }

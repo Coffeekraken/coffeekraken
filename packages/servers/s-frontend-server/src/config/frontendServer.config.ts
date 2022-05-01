@@ -402,60 +402,33 @@ export default function (env, config) {
                 path: `${__dirname()}/../node/modules/redirect/redirect`,
                 settings: {},
             },
-            styleguide: {
-                /**
-                 * @name            description
-                 * @namespace       config.frontendServer.modules.styleguide
-                 * @type            String
-                 *
-                 * Specify the module description
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                description:
-                    'This module handle the /styleguide/... views display',
-                /**
-                 * @name            path
-                 * @namespace       config.frontendServer.modules.styleguide
-                 * @type            String
-                 * @default             ${__dirname()}/../node/modules/styleguide/styleguide
-                 *
-                 * Specify where to find the "styleguide" module
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: `${__dirname()}/../node/modules/styleguide/styleguide`,
-                settings: {},
-            },
-            config: {
-                /**
-                 * @name            description
-                 * @namespace       config.frontendServer.modules.config
-                 * @type            String
-                 *
-                 * Specify the module description
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                description:
-                    'This module gives you access to a "config" and a "configFiles" object into the views',
-                /**
-                 * @name            path
-                 * @namespace       config.frontendServer.modules.config
-                 * @type            String
-                 * @default             ${__dirname()}/../node/modules/config/config
-                 *
-                 * Specify where to find the "config" module
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: `${__dirname()}/../node/modules/config/config`,
-                settings: {},
-            },
+            // config: {
+            //     /**
+            //      * @name            description
+            //      * @namespace       config.frontendServer.modules.config
+            //      * @type            String
+            //      *
+            //      * Specify the module description
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     description:
+            //         'This module gives you access to a "config" and a "configFiles" object into the views',
+            //     /**
+            //      * @name            path
+            //      * @namespace       config.frontendServer.modules.config
+            //      * @type            String
+            //      * @default             ${__dirname()}/../node/modules/config/config
+            //      *
+            //      * Specify where to find the "config" module
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     path: `${__dirname()}/../node/modules/config/config`,
+            //     settings: {},
+            // },
             frontspec: {
                 /**
                  * @name            description
@@ -483,194 +456,9 @@ export default function (env, config) {
                 path: `${__dirname()}/../node/modules/frontspec/frontspec`,
                 settings: {},
             },
-            api: {
-                /**
-                 * @name            description
-                 * @namespace       config.frontendServer.modules.frontspec
-                 * @type            String
-                 *
-                 * Specify the module description
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                description: 'This module handle the /api/... views display',
-                /**
-                 * @name            path
-                 * @namespace       config.frontendServer.modules.api
-                 * @type            String
-                 * @default             ${__dirname()}/../node/modules/api/api
-                 *
-                 * Specify where to find the "api" module
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: `${__dirname()}/../node/modules/api/api`,
-                settings: {},
-            },
-            view: {
-                /**
-                 * @name            description
-                 * @namespace       config.frontendServer.modules.view
-                 * @type            String
-                 *
-                 * Specify the module description
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                description: 'This module handle the /view/... views display',
-                /**
-                 * @name            path
-                 * @namespace       config.frontendServer.modules.view
-                 * @type            String
-                 * @default             ${__dirname()}/../node/modules/view/view
-                 *
-                 * Specify where to find the "view" module
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: `${__dirname()}/../node/modules/view/view`,
-
-                settings: {
-                    /**
-                     * @name            slug
-                     * @namespace       config.frontendServer.modules.view.settings
-                     * @type            String
-                     * @default     /view/*
-                     *
-                     * Specify the slug you want that trigger the view handler
-                     *
-                     * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    slug: '/view/*',
-
-                    /**
-                     * @name        indexView
-                     * @namespace       config.frontendServer.modules.view.settings
-                     * @type            String
-                     * @default         index
-                     *
-                     * Specify the dotpath of the view that has to be used as "index" when the path is just "/"
-                     *
-                     * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    indexView: 'index',
-                },
-            },
         },
 
-        routes: {
-            // '/': {
-            //     /**
-            //      * @name        handler
-            //      * @namespace   config.frontendServer.routes.'/'
-            //      * @type        String
-            //      * @default         view
-            //      *
-            //      * Specify which handle to use for requests on "/"
-            //      *
-            //      * @since       2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     handler: 'view',
-            // },
-            '/docmap.json': {
-                /**
-                 * @name        handler
-                 * @namespace   config.frontendServer.routes.'/api/docmap'
-                 * @type        String
-                 * @default         view
-                 *
-                 * Specify which handle to use for requests on "/docmap.json"
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                handler: 'docmap',
-            },
-        },
-
-        handlers: {
-            doc: {
-                /**
-                 * @name            description
-                 * @namespace       config.frontendServer.handlers.doc
-                 * @type            String
-                 *
-                 * Handler description
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                description: `Display some documentation sourced from markdown files`,
-                /**
-                 * @name            path
-                 * @namespace       config.frontendServer.handlers.doc
-                 * @type            String
-                 * @default         ${__dirname()}/../node/handlers/doc
-                 *
-                 * Store all the "doc" configuration access like the route, the title, etc...
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: `${__dirname()}/../node/handlers/doc`,
-            },
-            markdown: {
-                /**
-                 * @name            description
-                 * @namespace       config.frontendServer.handlers.markdown
-                 * @type            String
-                 *
-                 * Handler description
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                description: `Display some documentation sourced from markdown files`,
-                /**
-                 * @name            path
-                 * @namespace       config.frontendServer.handlers.markdown
-                 * @type            String
-                 * @default         ${__dirname()}/../node/handlers/markdown
-                 *
-                 * Store all the "markdown" configuration access like the route, the title, etc...
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: `${__dirname()}/../node/handlers/markdown`,
-            },
-            docmap: {
-                /**
-                 * @name            description
-                 * @namespace       config.frontendServer.handlers.docmap
-                 * @type            String
-                 *
-                 * Handler description
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                description: `Serve some docmap item(s) depending on request`,
-                /**
-                 * @name            path
-                 * @namespace       config.frontendServer.handlers.docmap
-                 * @type            String
-                 * @default         ${__dirname()}/../node/handlers/docmap
-                 *
-                 * Store all the "api doc" configuration access like the route, the title, etc...
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: `${__dirname()}/../node/handlers/docmap`,
-            },
-        },
+        pages: {},
+        handlers: {},
     };
 }

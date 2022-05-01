@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -39,15 +39,22 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -56,6 +63,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -65,146 +73,7 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-process.node.interface.sCommandProcessInterface": {
-                "name": "SCommandProcessInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-process.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SCommandProcessInterface",
-                    "description": "",
-                    "definition": {
-                        "help": {
-                            "description": "Specify if you want to see the help of the process",
-                            "type": "Boolean",
-                            "alias": "h",
-                            "default": false
-                        },
-                        "command": {
-                            "description": "Specify the command to execute",
-                            "type": "String",
-                            "alias": "c",
-                            "required": true
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SCommandProcessInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SCommandProcessInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-process.node.interface.sProcessInterface": {
-                "name": "SProcessInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-process.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SProcessInterface",
-                    "description": "",
-                    "definition": {
-                        "help": {
-                            "description": "Specify if you want to see the help of the process",
-                            "type": "Boolean",
-                            "alias": "h",
-                            "default": false
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SProcessInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SProcessInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-process.node.interface.sProcessSettingsInterface": {
-                "name": "SProcessSettingsInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-process.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SProcessSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "killOnError": {
-                            "description": "Specify if you want to kill the process when an error occurs",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "stdio": {
-                            "description": "Specify the stdio to use for your process",
-                            "type": "String|SStdio|Boolean",
-                            "alias": "s",
-                            "default": "inherit"
-                        },
-                        "throw": {
-                            "description": "Specify if you want to throw error when an error occurs",
-                            "type": "Boolean",
-                            "alias": "t",
-                            "default": true
-                        },
-                        "exitAtEnd": {
-                            "description": "Specify if you want to kill the process at his end",
-                            "type": "Boolean",
-                            "alias": "e",
-                            "default": false
-                        },
-                        "runAsChild": {
-                            "description": "Specify if you want to run your process as a child one",
-                            "type": "Boolean",
-                            "alias": "c",
-                            "default": false
-                        },
-                        "processPath": {
-                            "description": "Specify a path to a process file that exports a process supported type like an SProcess based class, a function, etc...",
-                            "type": "String",
-                            "default": null
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SProcessSettingsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SProcessSettingsInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-process.s-process.sCommandProcess": {
+            "@coffeekraken.s-process.s-process.SCommandProcess": {
                 "name": "SCommandProcess",
                 "type": "Class",
                 "description": "This class represent an SProcess started with a simple bash command like \"ls -la\" or whatever",
@@ -220,12 +89,23 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SCommandProcess.js",
-                "extension": "js",
-                "relPath": "src/node/SCommandProcess.js",
+                "filename": "SCommandProcess.ts",
+                "extension": "ts",
+                "relPath": "src/node/SCommandProcess.ts",
                 "children": {
+                    "commandprocesssettings": {
+                        "name": "commandProcessSettings",
+                        "type": "ISCommandProcessSettings",
+                        "description": "Access the command process settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "constructor": {
                         "name": "constructor",
                         "type": "Function",
@@ -234,18 +114,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "commandProcessSettings": {
-                        "name": "commandProcessSettings",
-                        "type": "ISCommandProcessSettings",
-                        "description": "Access the command process settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "process": {
@@ -257,12 +126,12 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
             },
-            "@coffeekraken.s-process.sugar.node.process.sProcess": {
+            "@coffeekraken.s-process.sugar.node.process.SProcess": {
                 "name": "SProcess",
                 "type": "Class",
                 "description": "This class represent an SProcess run iteration that store things like\nthe value, the startTime, endTime, duration, state, etc...",
@@ -272,21 +141,21 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SProcess.js",
-                "extension": "js",
-                "relPath": "src/node/SProcess.js",
+                "filename": "SProcess.ts",
+                "extension": "ts",
+                "relPath": "src/node/SProcess.ts",
                 "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
+                    "params": {
+                        "name": "params",
+                        "type": "String",
+                        "description": "Access the process params",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "stdio": {
@@ -297,7 +166,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "state": {
@@ -308,10 +177,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "executionsStack": {
+                    "executionsstack": {
                         "name": "executionsStack",
                         "type": "ISProcessProcessObj[]",
                         "description": "This array store each executions informations in separated objects\nthat store the duration, startTime, endTime, state, etc...",
@@ -319,7 +188,29 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "currentexecutionobj": {
+                        "name": "currentExecutionObj",
+                        "type": "ISProcessProcessObj",
+                        "description": "Store the current execution object info like startTime, endTime, duration, state, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "paramsinterface": {
+                        "name": "paramsInterface",
+                        "type": "Object",
+                        "description": "Store the parameters interface to apply on the params object and on the initialParams object.\nCan come from the static ```interfaces.params``` property or the ```settings.interface``` one.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "from": {
@@ -332,10 +223,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "fromCommand": {
+                    "fromcommand": {
                         "name": "fromCommand",
                         "type": "Function",
                         "description": "Initialize an SCommandProcess instance on which you can call the standard \"run\" method\nand execute a command by passing inside the params object the ```command``` prop.",
@@ -345,23 +236,33 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "run": {
                         "name": "run",
                         "type": "Function",
-                        "description": "Static \"run\" function to use as a shortcut of the new, and run call",
+                        "description": "Run the process by calling the ```process``` method implemented on your\nSProcess class (if exists).\nTake care of starting timers for duration tracking, etc...",
                         "async": "true",
-                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "lastExecutionObj": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "lastexecutionobj": {
                         "name": "lastExecutionObj",
                         "type": "ISProcessProcessObj",
                         "description": "Get the last execution object",
@@ -375,7 +276,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "ready": {
@@ -386,7 +287,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "kill": {
@@ -397,7 +298,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "cancel": {
@@ -408,10 +309,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "isRunning": {
+                    "isrunning": {
                         "name": "isRunning",
                         "type": "Function",
                         "description": "This method allows you to check if the process is currently running or not",
@@ -419,10 +320,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "isIdle": {
+                    "isidle": {
                         "name": "isIdle",
                         "type": "Function",
                         "description": "This method allows you to check if the process is currently idle or not",
@@ -430,10 +331,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "isReady": {
+                    "isready": {
                         "name": "isReady",
                         "type": "Function",
                         "description": "This method allows you to check if the process is currently ready or not",
@@ -441,10 +342,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "isKilled": {
+                    "iskilled": {
                         "name": "isKilled",
                         "type": "Function",
                         "description": "This method allows you to check if the process has been killed or not",
@@ -452,10 +353,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "isError": {
+                    "iserror": {
                         "name": "isError",
                         "type": "Function",
                         "description": "This method allows you to check if the process is in error state or not",
@@ -463,10 +364,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "isSuccess": {
+                    "issuccess": {
                         "name": "isSuccess",
                         "type": "Function",
                         "description": "This method allows you to check if the process is in success state or not",
@@ -474,7 +375,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "log": {
@@ -484,7 +385,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "error": {
@@ -494,12 +395,12 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
             },
-            "@coffeekraken.s-process.s-process.sProcessManager": {
+            "@coffeekraken.s-process.s-process.SProcessManager": {
                 "name": "SProcessManager",
                 "type": "Class",
                 "description": "This class represent a process handler class that will fire up some SProcess processes",
@@ -509,13 +410,13 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SProcessManager.ts",
                 "extension": "ts",
                 "relPath": "src/node/SProcessManager.ts",
                 "children": {
-                    "processManageSettings": {
+                    "processmanagesettings": {
                         "name": "processManageSettings",
                         "type": "ISProcessManageSettings",
                         "description": "Access the process manager process settings",
@@ -523,7 +424,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -533,10 +434,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "attachProcess": {
+                    "attachprocess": {
                         "name": "attachProcess",
                         "type": "Function",
                         "description": "This method allows you to attach a process to the manager with\nhis proper settings like restart, etc...",
@@ -544,10 +445,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "detachProcess": {
+                    "detachprocess": {
                         "name": "detachProcess",
                         "type": "Function",
                         "description": "Simple method to detach a process from the manager using his id.",
@@ -555,7 +456,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "run": {
@@ -567,12 +468,12 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
             },
-            "@coffeekraken.s-process.s-process.sProcessManagerProcessWrapper": {
+            "@coffeekraken.s-process.s-process.SProcessManagerProcessWrapper": {
                 "name": "SProcessManagerProcessWrapper",
                 "type": "Class",
                 "description": "This class represent a process manager process wrapper that handle the actual restarting, watch, etc...",
@@ -582,13 +483,13 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SProcessManagerProcessWrapper.ts",
                 "extension": "ts",
                 "relPath": "src/node/SProcessManagerProcessWrapper.ts",
                 "children": {
-                    "initialParams": {
+                    "initialparams": {
                         "name": "initialParams",
                         "type": "Object",
                         "description": "Store the initial params object",
@@ -596,10 +497,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "processInstance": {
+                    "processinstance": {
                         "name": "processInstance",
                         "type": "SProcess",
                         "description": "Store the actual processInstance passed through the constructor",
@@ -607,10 +508,10 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "processManagerProcessSettings": {
+                    "processmanagerprocesssettings": {
                         "name": "processManagerProcessSettings",
                         "type": "ISProcessManagerProcessWrapperSettings",
                         "description": "Access the process manager process settings",
@@ -618,7 +519,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -628,7 +529,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "detach": {
@@ -639,7 +540,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "run": {
@@ -651,12 +552,12 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
             },
-            "@coffeekraken.s-process.sugar.node.process.sProcessPipe": {
+            "@coffeekraken.s-process.sugar.node.process.SProcessPipe": {
                 "name": "SProcessPipe",
                 "type": "Class",
                 "platform": [
@@ -678,13 +579,13 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SProcessPipe.ts",
                 "extension": "ts",
                 "relPath": "src/node/SProcessPipe.ts",
                 "children": {
-                    "processPipeSettings": {
+                    "processpipesettings": {
                         "name": "processPipeSettings",
                         "type": "ISProcessPipeSettings",
                         "description": "Access the process pipe settings",
@@ -692,7 +593,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -703,7 +604,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "run": {
@@ -715,10 +616,79 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-process.node.interface.SCommandProcessInterface": {
+                "name": "SCommandProcessInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
+                "namespace": "@coffeekraken.s-process.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SCommandProcessInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SCommandProcessInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-process.node.interface.SProcessInterface": {
+                "name": "SProcessInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
+                "namespace": "@coffeekraken.s-process.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SProcessInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SProcessInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-process.node.interface.SProcessSettingsInterface": {
+                "name": "SProcessSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
+                "namespace": "@coffeekraken.s-process.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SProcessSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SProcessSettingsInterface.ts",
+                "children": {}
             }
         }
     }

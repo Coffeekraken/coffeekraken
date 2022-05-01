@@ -43,9 +43,16 @@ function configMiddleware(settings = {}) {
             __SFile.new(path).toObject(false),
         );
 
-        if (req.path?.match(/.*\.config\.js$/)) {
+        // get the last item of the request
+        const lastPath = req.path.split('/').pop();
+
+        const requestedConfig = res.templateData.configFiles?.filter((file) => {
+            return file.name === `${lastPath}.config.js`;
+        });
+
+        if (requestedConfig.length) {
             res.templateData.requestedConfig = await __SSugarConfig.toDocblocks(
-                req.path.split('/').pop(),
+                requestedConfig[0].path,
             );
         }
 

@@ -41,6 +41,7 @@
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
             "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -50,7 +51,7 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-scroll-to-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -60,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -81,9 +83,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-slider-component.config.themeUi.button.transition": {
                 "name": "transition",
@@ -97,9 +99,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js"
+                "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-slider-component.config.themeUi.button.depth": {
                 "name": "depth",
@@ -113,9 +115,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "themeUi.config.js",
+                "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.js",
+                "relPath": "src/config/themeUi.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-slider-component.js.Slider": {
@@ -141,94 +143,49 @@
                     {
                         "language": "html",
                         "title": "Simple slider",
-                        "code": "<s-slider controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo--h1\">Slide #1</h1>\n          <p class=\"s-typo s-typo--p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg--complementary\">\n          <h1 class=\"s-typo--h1\">Slide #1</h1>\n          <p class=\"s-typo s-typo--p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg--info\">\n          <h1 class=\"s-typo--h1\">Slide #1</h1>\n          <p class=\"s-typo s-typo--p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg--error\">\n          <h1 class=\"s-typo--h1\">Slide #1</h1>\n          <p class=\"s-typo s-typo--p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                        "code": "<s-slider controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Slideable slider",
+                        "code": "<s-slider behavior=\"slideable\" controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:lead\">Click and drag</p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Tight slider",
+                        "code": "<s-slider behavior=\"slideable\" lnf=\"default-tight\" controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Contained slider",
+                        "code": "<s-slider behavior=\"slideable\" lnf=\"default-contained\" controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Vertical slider",
+                        "code": "<s-slider behavior=\"slideable\" direction=\"vertical\" controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Vertical tight slider",
+                        "code": "<s-slider behavior=\"slideable\" direction=\"vertical\" lnf=\"default-tight\" controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Vertical contained slider",
+                        "code": "<s-slider behavior=\"slideable\" direction=\"vertical\" lnf=\"default-contained\" controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Slider with progressbar",
+                        "code": "<s-slider behavior=\"slideable\" progress controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Slider with progressbar, loop and timer",
+                        "code": "<s-slider behavior=\"slideable\" progress loop controls nav timer=\"2500\">\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
                     }
                 ],
-                "interface": {
-                    "name": "SSliderComponentInterface",
-                    "description": "",
-                    "definition": {
-                        "direction": {
-                            "description": "Specify the slider direction. Can be `horizontal` or `vertical`",
-                            "values": [
-                                "horizontal",
-                                "vertical"
-                            ],
-                            "type": "String",
-                            "physical": true,
-                            "default": "horizontal"
-                        },
-                        "behavior": {
-                            "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
-                            "type": "Object"
-                        },
-                        "nextIconClass": {
-                            "description": "Specify the class of the next icon",
-                            "type": "String"
-                        },
-                        "previousIconClass": {
-                            "description": "Specify the class of the previous icon",
-                            "type": "String"
-                        },
-                        "controls": {
-                            "description": "Specify if you want to display the controls or not. Controls are the previous and next icons",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "nav": {
-                            "description": "Specify if you want to display the nav or not. Nav are the dots",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "mousewheel": {
-                            "description": "Specify if you want to enable the mousewheel event on the slider or not",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "clickOnSlide": {
-                            "description": "Specify if you want to enable the click on the slides to navigate or not",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "loop": {
-                            "description": "Specify if you want to enable the loop behavior or not",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "progress": {
-                            "description": "Specify if you want to display the progress bar or not",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "timer": {
-                            "description": "Specify a timer that will be applied on each slides and go to the next one after the timer is over. For custom timer by slide, specify the `timer=\"1200\"` attribute on the slides you want",
-                            "type": "Number"
-                        },
-                        "autoplay": {
-                            "description": "Specify if you want the slider to auto play itself when some timer(s) has been set",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "intersectionClasses": {
-                            "description": "Specify if you want the classes that describe each slide intersection classes like \"in-10\", \"in-20\", etc...",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "transitionDuration": {
-                            "description": "Specify the transition duration of the slider in ms",
-                            "type": "Number",
-                            "default": 500
-                        },
-                        "transitionEasing": {
-                            "description": "Specify the transition easing of the slider",
-                            "type": "Function"
-                        },
-                        "transitionHandler": {
-                            "description": "Specify a function that will take care of transitioning the slider from the current item to the next/previous",
-                            "type": "Function"
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -254,17 +211,6 @@
                         "name": "isFirst",
                         "type": "Function",
                         "description": "This method allows you to check if the actual slide is the first one",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "currentpageidx": {
-                        "name": "currentPageIdx",
-                        "type": "HTMLElement",
-                        "description": "Access the current page idx. Begin from 0...",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -605,100 +551,15 @@
                 "description": "This class represent the interface that describe parameters of the SSliderComponent",
                 "namespace": "@coffeekraken.s-slider-component.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSliderComponentInterface",
-                    "description": "",
-                    "definition": {
-                        "direction": {
-                            "description": "Specify the slider direction. Can be `horizontal` or `vertical`",
-                            "values": [
-                                "horizontal",
-                                "vertical"
-                            ],
-                            "type": "String",
-                            "physical": true,
-                            "default": "horizontal"
-                        },
-                        "behavior": {
-                            "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
-                            "type": "Object"
-                        },
-                        "nextIconClass": {
-                            "description": "Specify the class of the next icon",
-                            "type": "String"
-                        },
-                        "previousIconClass": {
-                            "description": "Specify the class of the previous icon",
-                            "type": "String"
-                        },
-                        "controls": {
-                            "description": "Specify if you want to display the controls or not. Controls are the previous and next icons",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "nav": {
-                            "description": "Specify if you want to display the nav or not. Nav are the dots",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "mousewheel": {
-                            "description": "Specify if you want to enable the mousewheel event on the slider or not",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "clickOnSlide": {
-                            "description": "Specify if you want to enable the click on the slides to navigate or not",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "loop": {
-                            "description": "Specify if you want to enable the loop behavior or not",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "progress": {
-                            "description": "Specify if you want to display the progress bar or not",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "timer": {
-                            "description": "Specify a timer that will be applied on each slides and go to the next one after the timer is over. For custom timer by slide, specify the `timer=\"1200\"` attribute on the slides you want",
-                            "type": "Number"
-                        },
-                        "autoplay": {
-                            "description": "Specify if you want the slider to auto play itself when some timer(s) has been set",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "intersectionClasses": {
-                            "description": "Specify if you want the classes that describe each slide intersection classes like \"in-10\", \"in-20\", etc...",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "transitionDuration": {
-                            "description": "Specify the transition duration of the slider in ms",
-                            "type": "Number",
-                            "default": 500
-                        },
-                        "transitionEasing": {
-                            "description": "Specify the transition easing of the slider",
-                            "type": "Function"
-                        },
-                        "transitionHandler": {
-                            "description": "Specify a function that will take care of transitioning the slider from the current item to the next/previous",
-                            "type": "Function"
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SSliderComponentInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SSliderComponentInterface.js",
+                "filename": "SSliderComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SSliderComponentInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderSlideableBehaviorInterface": {
@@ -713,26 +574,15 @@
                 "description": "This class represent the interface that describe parameters of the SSliderSlideableBehavior behavior",
                 "namespace": "@coffeekraken.s-slider-component.js.behaviors.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSliderSlideableBehaviorInterface",
-                    "description": "",
-                    "definition": {
-                        "friction": {
-                            "description": "Specify the friction to apply when you release the pointer. 1 mean full friction, 0 mean no friction",
-                            "type": "Number",
-                            "default": 0.5
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SSliderSlideableBehaviorInterface.js",
-                "extension": "js",
-                "relPath": "src/js/behaviors/interface/SSliderSlideableBehaviorInterface.js",
+                "filename": "SSliderSlideableBehaviorInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/behaviors/interface/SSliderSlideableBehaviorInterface.ts",
                 "children": {}
             }
         }

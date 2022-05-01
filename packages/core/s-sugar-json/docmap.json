@@ -39,7 +39,11 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -49,8 +53,9 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -58,6 +63,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -88,7 +94,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "README.md",
                 "extension": "md",
@@ -107,45 +113,15 @@
                 "description": "This class represent the interface that describe SSugarJson settings",
                 "namespace": "@coffeekraken.s-sugar-json.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSugarJsonSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "packages": {
-                            "description": "Specify an array of packages names in which to search for sugar.json file",
-                            "type": "Array<String>"
-                        },
-                        "includePackage": {
-                            "description": "Specify if the current package has to be included in the search",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "includeModules": {
-                            "description": "Specify if the current package \"node_modules\" folder has to be included in the search",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "includeGlobal": {
-                            "description": "Specify if the global \"node_modules\" folder has to be included in the search",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "includeTop": {
-                            "description": "Specify if the root package folder in case of a mono-repo has to be included in the search",
-                            "type": "Boolean",
-                            "default": true
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SSugarJsonSettingsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SSugarJsonSettingsInterface.js",
+                "filename": "SSugarJsonSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SSugarJsonSettingsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-json.node.list.interface.SSugarJsonListParamsInterface": {
@@ -160,20 +136,15 @@
                 "description": "Parameters representation for the 5SSugarJson list command.",
                 "namespace": "@coffeekraken.s-sugar-json.node.list.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSugarJsonListParamsInterface",
-                    "description": "",
-                    "definition": {}
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SSugarJsonListParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/list/interface/SSugarJsonListParamsInterface.js",
+                "filename": "SSugarJsonListParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/list/interface/SSugarJsonListParamsInterface.ts",
                 "children": {}
             }
         }

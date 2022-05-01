@@ -1,0 +1,317 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-monorepo.config.monorepo.rootDir": {
+                "name": "rootDir",
+                "type": "String",
+                "default": "null",
+                "description": "Specify the root of the monorepo. If not set, it will be computed from the current working directory",
+                "namespace": "@coffeekraken.s-monorepo.config.monorepo",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "monorepo.config.ts",
+                "extension": "config",
+                "relPath": "src/config/monorepo.config.ts"
+            },
+            "@coffeekraken.s-monorepo.config.monorepo.packagesGlobs": {
+                "name": "packagesGlobs",
+                "type": "string[]",
+                "default": "['packages/* /",
+                "namespace": "@coffeekraken.s-monorepo.config.monorepo",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "monorepo.config.ts",
+                "extension": "config",
+                "relPath": "src/config/monorepo.config.ts"
+            },
+            "@coffeekraken.s-monorepo.config.monorepo.filesToUpgrade": {
+                "name": "filesToUpgrade",
+                "type": "string[]",
+                "default": "['package.json','composer.json']",
+                "description": "Specify some files to upgrade in each packages when doing a monorepo.upgrade call",
+                "namespace": "@coffeekraken.s-monorepo.config.monorepo",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "monorepo.config.ts",
+                "extension": "config",
+                "relPath": "src/config/monorepo.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-monorepo.node.SMonorepo": {
+                "name": "SMonorepo",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent a monorepo with some features like executing a command on all packages, list all the packages, upgrade each package's package.json, etc...",
+                "namespace": "@coffeekraken.s-monorepo.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SMonorepo from '@coffeekraken/s-monorepo';\nconst repo = new SMonorepo({\n     monorepo: {\n         // settings here...\n     }\n});\nawait repo.run({\n   command: 'ls -la'\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SMonorepo.ts",
+                "extension": "ts",
+                "relPath": "src/node/SMonorepo.ts",
+                "children": {
+                    "monoreposettings": {
+                        "name": "monorepoSettings",
+                        "type": "ISMonorepoSettings",
+                        "description": "Access the monorepo settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "run": {
+                        "name": "run",
+                        "type": "Function",
+                        "description": "This method allows you to run a command in every packages of the monorepo",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "list": {
+                        "name": "list",
+                        "type": "Function",
+                        "description": "This method allows you to list all the repo in the monorepo",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "dev": {
+                        "name": "dev",
+                        "type": "Function",
+                        "description": "This method allows you to launch the dev stack in the monorepo.\nThis mean principaly transpile the typescript files of each packages",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "upgrade": {
+                        "name": "upgrade",
+                        "type": "Function",
+                        "description": "This method allows you to upgrade all the repo in the monorepo. This mean updating the\nrepositories package.json \"version\" field using the monorepo package.json version",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-monorepo.node.interface.SMonorepoDevParamsInterface": {
+                "name": "SMonorepoDevParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar monorepo.dev` command.",
+                "namespace": "@coffeekraken.s-monorepo.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SMonorepoDevParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SMonorepoDevParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-monorepo.node.interface.SMonorepoListParamsInterface": {
+                "name": "SMonorepoListParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar mono.list` command.",
+                "namespace": "@coffeekraken.s-monorepo.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SMonorepoListParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SMonorepoListParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-monorepo.node.interface.SMonorepoRunParamsInterface": {
+                "name": "SMonorepoRunParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar monorepo.run` command.",
+                "namespace": "@coffeekraken.s-monorepo.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SMonorepoRunParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SMonorepoRunParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-monorepo.node.interface.SMonorepoUpgradeParamsInterface": {
+                "name": "SMonorepoUpgradeParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar monorepo.upgrade` command.",
+                "namespace": "@coffeekraken.s-monorepo.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SMonorepoUpgradeParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SMonorepoUpgradeParamsInterface.ts",
+                "children": {}
+            }
+        }
+    }
+}

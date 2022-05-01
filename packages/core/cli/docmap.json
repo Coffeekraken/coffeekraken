@@ -39,6 +39,8 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -48,8 +50,9 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-scroll-to-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -58,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -75,22 +79,12 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "sugar.cli.js",
-                "extension": "cli",
-                "relPath": "src/cli/sugar.cli.js",
+                "filename": "_save.txt",
+                "extension": "txt",
+                "relPath": "src/cli/_save.txt",
                 "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
-                        }
-                    },
                     "command": {
                         "name": "command",
                         "type": "String",
@@ -123,6 +117,16 @@
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com"
                         }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
                     }
                 }
             },
@@ -138,44 +142,15 @@
                 "description": "This class represent the interface that describe parameters of the SSugarCli class",
                 "namespace": "@coffeekraken.cli.cli.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSugarCliParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "bench": {
-                            "type": {
-                                "type": "Array<String> | Boolean",
-                                "splitChars": [
-                                    ","
-                                ]
-                            },
-                            "default": false,
-                            "explicit": true
-                        },
-                        "logPreset": {
-                            "type": "String",
-                            "values": [
-                                "silent",
-                                "default",
-                                "warn",
-                                "error",
-                                "verbose",
-                                "verboser"
-                            ],
-                            "default": "default",
-                            "explicit": true
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SSugarCliParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/cli/interface/SSugarCliParamsInterface.js",
+                "filename": "SSugarCliParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/cli/interface/SSugarCliParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.cli.cli.process.interface.SSugarCliProcessKillParamsInterface": {
@@ -190,31 +165,15 @@
                 "description": "This class represent the interface that describe parameters of the `sugar process.kill` command",
                 "namespace": "@coffeekraken.cli.cli.process.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSugarCliProcessKillParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "id": {
-                            "description": "Specify the process id you want to kill",
-                            "type": "Number",
-                            "alias": "i"
-                        },
-                        "port": {
-                            "description": "Specify the port on which the process you want to kill is binded",
-                            "type": "Number",
-                            "alias": "p"
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SSugarCliProcessKillParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
+                "filename": "SSugarCliProcessKillParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/cli/process/interface/SSugarCliProcessKillParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface": {
@@ -229,20 +188,15 @@
                 "description": "This interface specify the parameters needed to the `sugar add.manifestJson` command.",
                 "namespace": "@coffeekraken.cli.node.add.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SCliAddManifestJsonParamsInterface",
-                    "description": "",
-                    "definition": {}
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SCliAddManifestJsonParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/add/interface/SCliAddManifestJsonParamsInterface.js",
+                "filename": "SCliAddManifestJsonParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/add/interface/SCliAddManifestJsonParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.cli.node.add.interface.SCliAddSugarJsonParamsInterface": {
@@ -257,26 +211,15 @@
                 "description": "This interface specify the parameters needed to the `sugar add.sugarJson` command.",
                 "namespace": "@coffeekraken.cli.node.add.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SCliAddSugarJsonParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "recipe": {
-                            "description": "Specify the recipe to use",
-                            "type": "String",
-                            "required": true
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SCliAddSugarJsonParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/add/interface/SCliAddSugarJsonParamsInterface.js",
+                "filename": "SCliAddSugarJsonParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/add/interface/SCliAddSugarJsonParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface": {
@@ -291,106 +234,15 @@
                 "description": "This interface specify the parameters needed to the `sugar fs.copy` command.",
                 "namespace": "@coffeekraken.cli.node.fs.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SCliFsCopyParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "src": {
-                            "description": "Specify the file/folder to copy",
-                            "type": "String",
-                            "required": true
-                        },
-                        "glob": {
-                            "description": "Specify a glob pattern to search for files inside the specified src\"",
-                            "type": "String"
-                        },
-                        "dest": {
-                            "description": "Specify the destination file/folder",
-                            "type": "String",
-                            "required": true
-                        },
-                        "chdir": {
-                            "description": "Specify if you want the process to change directory inside the destination one or not",
-                            "type": "Boolean",
-                            "default": false
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SCliFsCopyParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/fs/interface/SCliFsCopyParamsInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.cli.node.package.interface.SCliPackageInstallParamsInterface": {
-                "name": "SCliPackageInstallParamsInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This interface specify the parameters needed to the `sugar package.install` command.",
-                "namespace": "@coffeekraken.cli.node.package.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SCliPackageInstallParamsInterface",
-                    "description": "",
-                    "definition": {}
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SCliPackageInstallParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/package/interface/SCliPackageInstallParamsInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.cli.node.package.interface.SCliPackageRenameParamsInterface": {
-                "name": "SCliPackageRenameParamsInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.cli.node.package.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SCliPackageRenameParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "name": {
-                            "description": "Specify the new name for your package",
-                            "type": "String"
-                        },
-                        "folder": {
-                            "description": "Specify if the folder has to be renames as well",
-                            "type": "Boolean",
-                            "default": true
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SCliPackageRenameParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/package/interface/SCliPackageRenameParamsInterface.js",
+                "filename": "SCliFsCopyParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/fs/interface/SCliFsCopyParamsInterface.ts",
                 "children": {}
             }
         }

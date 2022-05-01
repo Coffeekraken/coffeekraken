@@ -21,8 +21,17 @@ export default function docmapStyleguideData({ req, res, pageConfig }) {
         const docmap = new __SDocMap();
         const docmapJson = await docmap.read();
         const styleguideMenu = docmapJson.menu.custom.styleguide;
-        const styleguideObj =
+        let styleguideObj =
             styleguideMenu.slug[`/styleguide/${req.params.path}`];
+
+        if (!styleguideObj) {
+            styleguideObj =
+                docmapJson.menu.packages?.[
+                    `${req.params.organisation}/${req.params.package}`
+                ]?.slug?.[
+                    `/package/${req.params.organisation}/${req.params.package}/styleguide/${req.params.path}`
+                ];
+        }
 
         __SBench.step('data.docmapStyleguideData', 'afterDocmapRead');
 

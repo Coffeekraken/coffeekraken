@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
@@ -38,24 +38,33 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -65,7 +74,7 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-feature.shared.sFeature": {
+            "@coffeekraken.s-feature.shared.SFeature": {
                 "name": "SFeature",
                 "type": "Class",
                 "description": "This class allows you to create \"features\". Feature is like webcomponent but does not provide a\ncustom HTML tag.",
@@ -116,7 +125,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "setDefaultProps": {
+                    "setdefaultprops": {
                         "name": "setDefaultProps",
                         "type": "Function",
                         "description": "This static method allows you to set some default props for some particular\ncomponent(s). You can target components using simple css selectorl like \"my-component#cool\".\nOnce the component is instanciated, it will check if some defaults are specified and\nextends them with the passed props.",
@@ -127,7 +136,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "defineFeature": {
+                    "definefeature": {
                         "name": "defineFeature",
                         "type": "Function",
                         "description": "This static method allows you to register a new feature\nassociated with an HTMLElement attribute like \"s-activate\", etc...",
@@ -138,7 +147,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "featureSettings": {
+                    "featuresettings": {
                         "name": "featureSettings",
                         "type": "ISFeatureSettings",
                         "description": "Access the feature settings",
@@ -158,7 +167,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "beforePropChange": {
+                    "beforepropchange": {
                         "name": "beforePropChange",
                         "type": "Function",
                         "description": "This method allows you to catch a property change before it actually occurs.\nYou can return the value to set it as it is, return another value to set another one\nor returns undefined to prevent the change to be commited.",
@@ -168,7 +177,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "afterPropChanged": {
+                    "afterpropchanged": {
                         "name": "afterPropChanged",
                         "type": "Function",
                         "description": "This method allows you to catch properties updates AFTER it has been commited.",

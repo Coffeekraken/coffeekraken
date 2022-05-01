@@ -40,6 +40,8 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -49,7 +51,8 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -77,11 +80,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "sitemapBuilder.config.js",
+                "filename": "sitemapBuilder.config.ts",
                 "extension": "config",
-                "relPath": "src/config/sitemapBuilder.config.js"
+                "relPath": "src/config/sitemapBuilder.config.ts"
             },
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.active": {
                 "name": "active",
@@ -93,11 +96,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "sitemapBuilder.config.js",
+                "filename": "sitemapBuilder.config.ts",
                 "extension": "config",
-                "relPath": "src/config/sitemapBuilder.config.js"
+                "relPath": "src/config/sitemapBuilder.config.ts"
             },
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.settings": {
                 "name": "settings",
@@ -109,11 +112,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "sitemapBuilder.config.js",
+                "filename": "sitemapBuilder.config.ts",
                 "extension": "config",
-                "relPath": "src/config/sitemapBuilder.config.js"
+                "relPath": "src/config/sitemapBuilder.config.ts"
             },
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.path": {
                 "name": "path",
@@ -125,11 +128,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "sitemapBuilder.config.js",
+                "filename": "sitemapBuilder.config.ts",
                 "extension": "config",
-                "relPath": "src/config/sitemapBuilder.config.js",
+                "relPath": "src/config/sitemapBuilder.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sitemap-builder.doc.README": {
@@ -153,7 +156,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "README.md",
                 "extension": "md",
@@ -180,7 +183,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SSitemapBuilder.ts",
                 "extension": "ts",
@@ -194,7 +197,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -205,7 +208,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "build": {
@@ -217,7 +220,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "save": {
@@ -229,7 +232,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
@@ -254,7 +257,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SSitemapBuilderSource.ts",
                 "extension": "ts",
@@ -268,7 +271,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -279,7 +282,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "build": {
@@ -291,7 +294,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
@@ -308,41 +311,15 @@
                 "description": "This class represent the interface that describe the SSitemapBuilder build params",
                 "namespace": "@coffeekraken.s-sitemap-builder.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSitemapBuilderBuildParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "source": {
-                            "description": "Specify the source(s) you want to build your sitemap. Can be all the configured sources specified under the \"config.sitemap.sources\" config",
-                            "type": "Array<String>",
-                            "default": []
-                        },
-                        "sourcesSettings": {
-                            "description": "Specigy sources settings by passing an object under each source \"id\" property",
-                            "type": "Object",
-                            "default": {}
-                        },
-                        "output": {
-                            "description": "Specify where to save the sitemap in xml format",
-                            "type": "String",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-sitemap-builder/sitemap.xml"
-                        },
-                        "save": {
-                            "description": "Specify if you want to save the sitemap or not",
-                            "type": "Boolean",
-                            "default": true
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SSitemapBuilderBuildParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SSitemapBuilderBuildParamsInterface.js",
+                "filename": "SSitemapBuilderBuildParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SSitemapBuilderBuildParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-sitemap-builder.node.interface.SSitemapBuilderSettingsInterface": {
@@ -357,26 +334,15 @@
                 "description": "This class represent the interface that describe the SSitemapBuilder settings",
                 "namespace": "@coffeekraken.s-sitemap-builder.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSitemapBuilderSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "sources": {
-                            "description": "Specify the sources to use to build the sitemap. A source is a objet with the properties \"active\", \"settings\" and \"path\"",
-                            "type": "Object",
-                            "default": {}
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SSitemapBuilderSettingsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SSitemapBuilderSettingsInterface.js",
+                "filename": "SSitemapBuilderSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SSitemapBuilderSettingsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-sitemap-builder.node.SSitemapBuilderDocmapSource": {
@@ -399,7 +365,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SSitemapBuilderDocmapSource.ts",
                 "extension": "ts",
@@ -414,7 +380,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "sitemapsourcedocmapsettings": {
@@ -425,7 +391,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -436,7 +402,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "build": {
@@ -448,7 +414,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }

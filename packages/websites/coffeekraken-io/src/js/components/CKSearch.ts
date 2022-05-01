@@ -19,7 +19,6 @@ __sFiltrableInputDefine(
         closeOnSelect: true,
         filtrable: ['namespace', 'name', 'type'],
         searchValuePreprocess: (value) => {
-
             // "@" searches
             if (value.match(/^@[a-z_-]+\s.*/)) {
                 return value.replace(/^@[a-z_-]+\s/, '').trim();
@@ -40,10 +39,8 @@ __sFiltrableInputDefine(
             return value;
         },
         templates: ({ type, item, html, unsafeHTML }) => {
-
             if (type === 'item') {
-
-                switch(item.type) {
+                switch (item.type) {
                     case 'category':
                     case 'package':
                         return html`
@@ -59,8 +56,8 @@ __sFiltrableInputDefine(
                                     ${unsafeHTML(item.description ?? '')}
                                 </p>
                             </div>
-                        `
-                    break;
+                        `;
+                        break;
                     default:
                         return html`
                             <div class="ck-search__list-item">
@@ -71,7 +68,7 @@ __sFiltrableInputDefine(
                                         ${unsafeHTML(item.name)}
                                     </h4>
                                     <div>
-                                        ${item.platform.map(
+                                        ${item.platform?.map(
                                             (platform) => html`
                                                 <i
                                                     class="s-platform:${platform.name}"
@@ -80,11 +77,15 @@ __sFiltrableInputDefine(
                                         )}
                                         &nbsp;
                                         <span class="s-badge s-color:main"
-                                            >${unsafeHTML(item.type ?? '')}</span
+                                            >${unsafeHTML(
+                                                item.type ?? '',
+                                            )}</span
                                         >
                                     </div>
                                 </div>
-                                <p class="__namespace s-opacity:50 s-font:20 s-mbe:20">
+                                <p
+                                    class="__namespace s-opacity:50 s-font:20 s-mbe:20"
+                                >
                                     ${unsafeHTML(item.namespace ?? '')}
                                 </p>
                                 <p class="__description s-typo:p s-truncate:2">
@@ -92,12 +93,11 @@ __sFiltrableInputDefine(
                                 </p>
                             </div>
                         `;
-                    break;
+                        break;
                 }
             }
         },
         items: async ({ value }) => {
-
             async function fetchItems() {
                 const request = new __SRequest({
                     url: '/docmap.json',
@@ -130,22 +130,28 @@ __sFiltrableInputDefine(
             }
 
             if (value.match(/^@([a-z_-]+)?$/)) {
-
                 let packageName = value.replace(/^@/, '');
 
                 let packages = {};
                 items.forEach((item) => {
-                    if (item.package.name.includes(`@coffeekraken/${packageName}`)) {
+                    if (
+                        item.package.name.includes(
+                            `@coffeekraken/${packageName}`,
+                        )
+                    ) {
                         if (!packages[item.package.name]) {
                             packages[item.package.name] = {
-                                value: `@${item.package.name.replace('@coffeekraken/', '')}`,
+                                value: `@${item.package.name.replace(
+                                    '@coffeekraken/',
+                                    '',
+                                )}`,
                                 namespace: item.package.name,
                                 type: 'package',
                                 name: item.package.name,
                                 description: item.package.description,
                                 props: {
-                                    value: 'value'
-                                }
+                                    value: 'value',
+                                },
                             };
                         }
                     }
@@ -154,63 +160,72 @@ __sFiltrableInputDefine(
             }
 
             if (value.match(/^\/([a-z]+)?$/)) {
-                return [{
-                    value: '/doc',
-                    namespace: '/doc',
-                    type: 'category',
-                    name: 'Documentation',
-                    description: 'Search through the documentation',
-                    props: {
-                        value: 'value'
-                    }
-                }, {
-                    value: '/styleguide',
-                    namespace: '/styleguide',
-                    type: 'category',
-                    name: 'Styleguide',
-                    description: 'Search through the styleguide',
-                    props: {
-                        value: 'value'
-                    }
-                }, {
-                    value: '/api',
-                    namespace: '/api',
-                    type: 'category',
-                    name: 'API',
-                    description: 'Search through the API',
-                    props: {
-                        value: 'value'
-                    }
-                }];
+                return [
+                    {
+                        value: '/doc',
+                        namespace: '/doc',
+                        type: 'category',
+                        name: 'Documentation',
+                        description: 'Search through the documentation',
+                        props: {
+                            value: 'value',
+                        },
+                    },
+                    {
+                        value: '/styleguide',
+                        namespace: '/styleguide',
+                        type: 'category',
+                        name: 'Styleguide',
+                        description: 'Search through the styleguide',
+                        props: {
+                            value: 'value',
+                        },
+                    },
+                    {
+                        value: '/api',
+                        namespace: '/api',
+                        type: 'category',
+                        name: 'API',
+                        description: 'Search through the API',
+                        props: {
+                            value: 'value',
+                        },
+                    },
+                ];
             }
 
             if (value.match(/^@[a-z_-]+\s.*?/)) {
-                const packageName = `@coffeekraken/${value.replace(/^@/, '').split(' ')[0].trim()}`;
-                return items.filter(item => {
+                const packageName = `@coffeekraken/${value
+                    .replace(/^@/, '')
+                    .split(' ')[0]
+                    .trim()}`;
+                return items.filter((item) => {
                     return item.package.name.startsWith(packageName);
                 });
             }
 
             if (value.match(/^\/[a-z]+.*?/)) {
                 if (value.startsWith('/doc')) {
-                    return items.filter(item => {
+                    return items.filter((item) => {
                         return item.type === 'Markdown';
                     });
                 }
                 if (value.startsWith('/styleguide')) {
-                    return items.filter(item => {
+                    return items.filter((item) => {
                         return item.type === 'Styleguide';
                     });
                 }
                 if (value.startsWith('/api')) {
-                    return items.filter(item => {
-                        return item.type !== 'Markdown' && item.type !== 'Styleguide';
+                    return items.filter((item) => {
+                        return (
+                            item.type !== 'Markdown' &&
+                            item.type !== 'Styleguide'
+                        );
                     });
                 }
             }
 
             return items;
-
         },
     },
     'ck-search-input',
@@ -233,7 +248,6 @@ export default class CKSearch extends __SLitComponent {
                 e.stopPropagation();
             });
         });
-
     }
     _handleAnchor(anchor) {
         const keywords = anchor.replace('search=', '').split('=').pop();
@@ -243,11 +257,10 @@ export default class CKSearch extends __SLitComponent {
     _$input;
     _search;
     firstUpdated() {
-
         this._$input = this.querySelector('input');
 
         if (document.location.hash) {
-            this,this._handleAnchor(document.location.hash.replace('#', ''))
+            this, this._handleAnchor(document.location.hash.replace('#', ''));
         }
 
         __hotkey('ctrl+p').on('press', () => {
@@ -255,34 +268,37 @@ export default class CKSearch extends __SLitComponent {
         });
 
         this.addEventListener('selectItem', (e) => {
-            const {item, $elm} = e.detail;
+            const { item, $elm } = e.detail;
 
-            if (item.type === 'category' || item.type === 'package') {
-
+            if (item.type === 'category' || item.type === 'package') {
                 this._$input.value = item.value + ' ';
                 __cursorToEnd(this._$input);
-
             } else {
-
                 if (item.menu?.slug) {
                     if (item.package.name !== window.packageJson.name) {
-                        $elm.dispatchEvent(new CustomEvent('location.href', {
-                            detail: `/${item.package.name}${item.menu.slug}`,
-                            bubbles: true
-                        }));
+                        $elm.dispatchEvent(
+                            new CustomEvent('location.href', {
+                                detail: `/${item.package.name}${item.menu.slug}`,
+                                bubbles: true,
+                            }),
+                        );
                         // document.location.href = `/${item.package.name}${item.menu.slug}`;
                     } else {
-                        $elm.dispatchEvent(new CustomEvent('location.href', {
-                            detail: item.menu.slug,
-                            bubbles: true
-                        }));
+                        $elm.dispatchEvent(
+                            new CustomEvent('location.href', {
+                                detail: item.menu.slug,
+                                bubbles: true,
+                            }),
+                        );
                         // document.location.href = item.menu.slug;
                     }
                 } else {
-                    $elm.dispatchEvent(new CustomEvent('location.href', {
-                        detail: `/api/${item.fullNamespace}`,
-                        bubbles: true
-                    }));
+                    $elm.dispatchEvent(
+                        new CustomEvent('location.href', {
+                            detail: `/api/${item.fullNamespace}`,
+                            bubbles: true,
+                        }),
+                    );
                     // document.location.href = `/api/${item.fullNamespace}`;
                 }
 
@@ -307,11 +323,28 @@ export default class CKSearch extends __SLitComponent {
                         <template type="before">
                             <div class="s-p:30" id="search-tips">
                                 <p class="s-mbe:20">
-                                    <span class="s-typo:p s-tc:current">Search tips</span>
-                                    <i class="s-icon:close s-float:right" s-activate href="#search-tips"></i>
+                                    <span class="s-typo:p s-tc:current"
+                                        >Search tips</span
+                                    >
+                                    <i
+                                        class="s-icon:close s-float:right"
+                                        s-activate
+                                        href="#search-tips"
+                                    ></i>
                                 </p>
                                 <p class="s-typo:p">
-                                    <span class="s-badge:outline s-mie:10">/...</span> Categories&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-badge:outline s-mie:10">@...</span> Packages&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-badge s-color:complementary s-mie:10">CMD+P</span> Search shortcut
+                                    <span class="s-badge:outline s-mie:10"
+                                        >/...</span
+                                    >
+                                    Categories&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                        class="s-badge:outline s-mie:10"
+                                        >@...</span
+                                    >
+                                    Packages&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                        class="s-badge s-color:complementary s-mie:10"
+                                        >CMD+P</span
+                                    >
+                                    Search shortcut
                                 </p>
                             </div>
                         </template>

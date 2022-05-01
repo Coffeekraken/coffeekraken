@@ -44,9 +44,11 @@ export class ApiNav extends __SLitComponent {
             }
             if (_dispatchTimeout) return;
             _dispatchTimeout = setTimeout(() => {
-                e.target.dispatchEvent(new CustomEvent('actual', {
-                    bubbles: true
-                }));
+                e.target.dispatchEvent(
+                    new CustomEvent('actual', {
+                        bubbles: true,
+                    }),
+                );
             }, 1000);
         });
 
@@ -80,7 +82,7 @@ export class ApiNav extends __SLitComponent {
 
             if (types.indexOf(item.type) === -1) types.push(item.type);
 
-            if (supportedTypes.indexOf(item.type.toLowerCase()) === -1)
+            if (supportedTypes.indexOf(item.type?.toLowerCase()) === -1)
                 return false;
             return true;
         });
@@ -107,8 +109,8 @@ export class ApiNav extends __SLitComponent {
                 opened: true,
             };
         } else {
-            this._menuStates[namespace].opened =
-                !this._menuStates[namespace].opened;
+            this._menuStates[namespace].opened = !this._menuStates[namespace]
+                .opened;
         }
 
         // save state
@@ -122,45 +124,59 @@ export class ApiNav extends __SLitComponent {
 
     _renderList(obj, currentNamespace = '', level = 0) {
         const itemsKeys = Object.keys(obj);
-        const items =itemsKeys.map((itemName) => {
+        const items = itemsKeys.map((itemName) => {
             const itemObj = obj[itemName];
             const itemNamespace = `${
                 currentNamespace ? `${currentNamespace}.` : ''
             }${itemName}`;
 
             if (!this._menuStates[itemNamespace]) {
-                  this._menuStates[itemNamespace] = {
+                this._menuStates[itemNamespace] = {
                     opened: false,
                 };
             }
 
             if (itemObj.name && itemObj.namespace) {
-
                 return html`
                     <li>
                         <div class="s-flex">
-                            <a href="/api/${itemNamespace}" namespace="${itemNamespace}" class="s-link:stretch s-order:2">${itemObj.name}</a>
+                            <a
+                                href="/api/${itemNamespace}"
+                                namespace="${itemNamespace}"
+                                class="s-link:stretch s-order:2"
+                                >${itemObj.name}</a
+                            >
                             <i
                                 class="s-icon:file-${itemObj.extension} s-tc:accent s-until:sibling:loading s-mie:10"
                             ></i>
-                            <div class="s-loader:spinner s-color:accent s-mie:10 s-float:right s-when:siblings:loading"></div>
+                            <div
+                                class="s-loader:spinner s-color:accent s-mie:10 s-float:right s-when:siblings:loading"
+                            ></div>
                         </div>
                     </li>
                 `;
             } else {
                 return html`
-                    <li class="${level === 0 || this._isAcive(itemNamespace) ? 'active' : ''}">
-                        <div @click=${() => {
-                                    this._toggle(itemNamespace);
-                                }}>
-                            <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"></i>
+                    <li
+                        class="${level === 0 || this._isAcive(itemNamespace)
+                            ? 'active'
+                            : ''}"
+                    >
+                        <div
+                            @click=${() => {
+                                this._toggle(itemNamespace);
+                            }}
+                        >
+                            <i
+                                class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"
+                            ></i>
                             <i class="s-icon:folder"></i>
                             ${itemName}
                         </div>
                         ${this._renderList(
                             __get(this._menuStack, itemNamespace),
                             itemNamespace,
-                            level + 1
+                            level + 1,
                         )}
                     </li>
                 `;
@@ -199,4 +215,4 @@ export default () => {
     if (!customElements.get('api-nav')) {
         customElements.define('api-nav', ApiNav);
     }
-}
+};

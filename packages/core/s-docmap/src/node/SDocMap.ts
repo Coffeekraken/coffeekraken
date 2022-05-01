@@ -549,14 +549,17 @@ class SDocMap extends __SClass implements ISDocMap {
             } else {
                 const scopedSlugMenu = {};
                 Object.keys(menuObj.slug).forEach((slug) => {
-                    scopedSlugMenu[`/${packageName}${slug}`] =
-                        menuObj.slug[slug];
+                    scopedSlugMenu[`/package/${packageName}${slug}`] = {
+                        ...menuObj.slug[slug],
+                        slug: `/package/${packageName}${slug}`,
+                    };
                 });
                 // @ts-ignore
                 finalMenu.packages[packageName] = {
                     name: packageName,
                     tree: __deepMap(menuObj.tree, ({ prop, value }) => {
-                        if (prop === 'slug') return `/${packageName}${value}`;
+                        if (prop === 'slug')
+                            return `/package/${packageName}${value}`;
                         return value;
                     }),
                     slug: scopedSlugMenu,

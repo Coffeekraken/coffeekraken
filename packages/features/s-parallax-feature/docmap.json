@@ -28,6 +28,7 @@
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -39,7 +40,11 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -48,16 +53,19 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-scroll-to-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -92,56 +100,15 @@
                         "code": "<div s-parallax amount=\"0.1\">I will move on mousemove</div>\n<div s-parallax amount=\"0.3\">I will move on mousemove</div>\n<div s-parallax amount=\"0.5\">I will move on mousemove</div>"
                     }
                 ],
-                "interface": {
-                    "name": "SParallaxFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "amount": {
-                            "description": "Specify the amount of parallax you want to apply",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountX": {
-                            "description": "Specify the amount of parallax you want for the x axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountY": {
-                            "description": "Specify the amount of parallax you want for the y axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountTranslateX": {
-                            "description": "Specify the amount of parallax you want for the translate x axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountTranslateY": {
-                            "description": "Specify the amount of parallax you want for the translate y axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountRotateX": {
-                            "description": "Specify the amount of parallax you want for the rotate x axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountRotateY": {
-                            "description": "Specify the amount of parallax you want for the rotate y axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SParallaxFeature.js",
-                "extension": "js",
-                "relPath": "src/js/SParallaxFeature.js",
+                "filename": "SParallaxFeature.ts",
+                "extension": "ts",
+                "relPath": "src/js/SParallaxFeature.ts",
                 "children": {}
             },
             "@coffeekraken.s-parallax-feature.js.interface.SParallaxFeatureInterface": {
@@ -156,56 +123,15 @@
                 "description": "This interface represent the attributes of the SParallaxFeature",
                 "namespace": "@coffeekraken.s-parallax-feature.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SParallaxFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "amount": {
-                            "description": "Specify the amount of parallax you want to apply",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountX": {
-                            "description": "Specify the amount of parallax you want for the x axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountY": {
-                            "description": "Specify the amount of parallax you want for the y axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountTranslateX": {
-                            "description": "Specify the amount of parallax you want for the translate x axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountTranslateY": {
-                            "description": "Specify the amount of parallax you want for the translate y axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountRotateX": {
-                            "description": "Specify the amount of parallax you want for the rotate x axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "amountRotateY": {
-                            "description": "Specify the amount of parallax you want for the rotate y axis. This will be applied on top of the global amount",
-                            "type": "Number",
-                            "default": 1
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SParallaxFeatureInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SParallaxFeatureInterface.js",
+                "filename": "SParallaxFeatureInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SParallaxFeatureInterface.ts",
                 "children": {}
             }
         }

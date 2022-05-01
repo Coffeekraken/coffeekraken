@@ -39,7 +39,11 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -49,8 +53,9 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-feature",
@@ -58,6 +63,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -88,7 +94,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "README.md",
                 "extension": "md",
@@ -111,43 +117,46 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SStdio.js",
-                "extension": "js",
-                "relPath": "src/shared/SStdio.js",
+                "filename": "SStdio.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SStdio.ts",
                 "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
+                    "registeredcomponents": {
+                        "name": "registeredComponents",
+                        "type": "ISStdioRegisteredComponents",
+                        "description": "Store the registered stdio components",
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "id": {
-                        "name": "id",
-                        "type": "String",
-                        "description": "Access the stdio id",
+                    "ui_basic": {
+                        "name": "UI_BASIC",
+                        "type": "ISStdioUi",
+                        "description": "Represent the \"basic\" stdio",
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
-                    "log": {
-                        "name": "log",
-                        "type": "Function",
-                        "description": "This method is the one called to log something.\nIt will call the ```_log``` method that each implementation of the\nSStdio class MUST have",
+                    "ui_websocker": {
+                        "name": "UI_WEBSOCKER",
+                        "type": "ISStdioUi",
+                        "description": "Represent the \"websocket\" stdio",
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "registercomponent": {
@@ -159,7 +168,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "existingornew": {
@@ -171,7 +180,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "new": {
@@ -189,7 +198,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "stdiosettings": {
@@ -200,7 +209,29 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "id": {
+                        "name": "id",
+                        "type": "String",
+                        "description": "Access the stdio id",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "display": {
@@ -211,7 +242,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "hide": {
@@ -222,7 +253,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "registersource": {
@@ -232,7 +263,18 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "log": {
+                        "name": "log",
+                        "type": "Function",
+                        "description": "This method is the one called to log something.\nIt will call the ```_log``` method that each implementation of the\nSStdio class MUST have",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "ask": {
@@ -244,7 +286,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "isdisplayed": {
@@ -255,31 +297,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "registeredcomponents": {
-                        "name": "registeredComponents",
-                        "type": "ISStdioRegisteredComponents",
-                        "description": "Store the registered stdio components",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "ui_basic": {
-                        "name": "UI_BASIC",
-                        "type": "ISStdioUi",
-                        "description": "Represent the \"basic\" stdio",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
@@ -299,7 +317,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "SBasicStdio.ts",
                 "extension": "ts",
@@ -313,7 +331,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "constructor": {
@@ -324,7 +342,52 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-stdio.node.basic.SWebsocketStdio": {
+                "name": "SWebsocketStdio",
+                "type": "Class",
+                "description": "This class represent a \"websocket\" in out interface.",
+                "namespace": "@coffeekraken.s-stdio.node.basic",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SWebsocketStdio from '@coffeekraken/s-stdio';\nconst websocket = new SWebsocketStdio(mySource);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SWebsocketStdio.ts",
+                "extension": "ts",
+                "relPath": "src/node/websocket/SWebsocketStdio.ts",
+                "children": {
+                    "websocketstdiosettings": {
+                        "name": "websocketStdioSettings",
+                        "type": "ISWebsocketStdioSettings",
+                        "description": "Access the stdio settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
@@ -341,39 +404,15 @@
                 "description": "This class represent the interface that describe SStdio settings",
                 "namespace": "@coffeekraken.s-stdio.shared.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SStdioSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "filter": {
-                            "description": "Specify a function that will be used to filter the logs. It will take the log object as parameter and MUST return a boolean.",
-                            "type": "Function"
-                        },
-                        "processor": {
-                            "description": "Specify a function that will be used to process the logs. It will take the log object and MUST return it, updated or not...",
-                            "type": "Function"
-                        },
-                        "defaultLogObj": {
-                            "description": "Specify a default log object that will be used as base for each received logs",
-                            "type": "Object",
-                            "default": {}
-                        },
-                        "defaultAskObj": {
-                            "description": "Specify a default ask object that will be used as base for each received questions (ask)",
-                            "type": "Object",
-                            "default": {}
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SStdioSettingsInterface.js",
-                "extension": "js",
-                "relPath": "src/shared/interface/SStdioSettingsInterface.js",
+                "filename": "SStdioSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/interface/SStdioSettingsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-stdio.shared.basic.components.defaultBasicStdioComponent": {
@@ -385,11 +424,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "defaultBasicStdioComponent.js",
-                "extension": "js",
-                "relPath": "src/node/basic/components/defaultBasicStdioComponent.js",
+                "filename": "defaultBasicStdioComponent.ts",
+                "extension": "ts",
+                "relPath": "src/node/basic/components/defaultBasicStdioComponent.ts",
                 "children": {}
             },
             "@coffeekraken.s-stdio.shared.basic.components.errorBasicStdioComponent": {
@@ -401,11 +440,27 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "errorBasicStdioComponent.js",
-                "extension": "js",
-                "relPath": "src/node/basic/components/errorBasicStdioComponent.js",
+                "filename": "errorBasicStdioComponent.ts",
+                "extension": "ts",
+                "relPath": "src/node/basic/components/errorBasicStdioComponent.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.shared.websocket.components.defaultWebsocketComponent": {
+                "name": "defaultWebsocketComponent",
+                "type": "ISStdioComponent",
+                "description": "Websocket default stdio component",
+                "namespace": "@coffeekraken.s-stdio.shared.websocket.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "defaultWebsocketComponent.ts",
+                "extension": "ts",
+                "relPath": "src/node/websocket/components/defaultWebsocketComponent.ts",
                 "children": {}
             }
         }

@@ -39,6 +39,8 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -48,8 +50,9 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-scroll-to-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -58,6 +61,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -88,7 +92,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "README.md",
                 "extension": "md",
@@ -111,11 +115,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "getAvailableInterfaceTypes.js",
-                "extension": "js",
-                "relPath": "src/shared/getAvailableInterfaceTypes.js",
+                "filename": "getAvailableInterfaceTypes.ts",
+                "extension": "ts",
+                "relPath": "src/shared/getAvailableInterfaceTypes.ts",
                 "children": {}
             },
             "@coffeekraken.s-interface.s-interface.shared.SInterface": {
@@ -133,115 +137,22 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SInterface.js",
-                "extension": "js",
-                "relPath": "src/shared/SInterface.js",
+                "filename": "SInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SInterface.ts",
                 "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "interfacesettings": {
-                        "name": "interfaceSettings",
-                        "type": "ISInterfaceSettings",
-                        "description": "Access the interface settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "overrie": {
-                        "name": "overrie",
-                        "type": "Function",
-                        "description": "This static method is usefull to make a duplicate of the base interface with some updates\nin the definition object.",
+                    "definition": {
+                        "name": "definition",
+                        "type": "ISDescriptorRules",
+                        "description": "This property store all the SDescriptor rules that this interface\nimplements for each properties",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "getavailabletypes": {
-                        "name": "getAvailableTypes",
-                        "type": "Function",
-                        "description": "This static method allows you to get the types that have been make widely available\nusing the ```makeAvailableAsType``` method.",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "makeavailableastype": {
-                        "name": "makeAvailableAsType",
-                        "type": "Function",
-                        "description": "This static method allows you to promote your interface at the level where it can be\nused in the \"type\" interface definition property like so \"Object<MyCoolType>\"",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toobject": {
-                        "name": "toObject",
-                        "type": "Function",
-                        "description": "This function allows you to get back a simple object describing the interface",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "defaults": {
-                        "name": "defaults",
-                        "type": "Function",
-                        "description": "This function simply returns you the default interface values in object format",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "apply": {
-                        "name": "apply",
-                        "type": "Function",
-                        "description": "This method allows you to apply the interface on an object instance.\nBy default, if something is wrong in your class implementation, an error with the\ndescription of what's wrong will be thrown. You can change that behavior if you prefer having\ntrue returned when all is ok, or a string describing the current issue by specify the \"settings.throw\" property to false.",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "help": {
-                        "name": "help",
-                        "type": "Function",
-                        "description": "This static method allows you to get back the help using the\npassed renderer. Awailable rendered are for now:\n- terminal (default): The default terminal renderer\n- more to come depending on needs...",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "description": {
@@ -253,7 +164,18 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "interfacesettings": {
+                        "name": "interfaceSettings",
+                        "type": "ISInterfaceSettings",
+                        "description": "Access the interface settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "registerrenderer": {
@@ -265,7 +187,113 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "mix": {
+                        "name": "mix",
+                        "type": "Function",
+                        "description": "This static method allows you to mix multiple interfaces into one",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "overrie": {
+                        "name": "overrie",
+                        "type": "Function",
+                        "description": "This static method is usefull to make a duplicate of the base interface with some updates\nin the definition object.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getavailabletypes": {
+                        "name": "getAvailableTypes",
+                        "type": "Function",
+                        "description": "This static method allows you to get the types that have been make widely available\nusing the ```makeAvailableAsType``` method.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "makeavailableastype": {
+                        "name": "makeAvailableAsType",
+                        "type": "Function",
+                        "description": "This static method allows you to promote your interface at the level where it can be\nused in the \"type\" interface definition property like so \"Object<MyCoolType>\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "toobject": {
+                        "name": "toObject",
+                        "type": "Function",
+                        "description": "This function allows you to get back a simple object describing the interface",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "defaults": {
+                        "name": "defaults",
+                        "type": "Function",
+                        "description": "This function simply returns you the default interface values in object format",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "apply": {
+                        "name": "apply",
+                        "type": "Function",
+                        "description": "This method allows you to apply the interface on an object instance.\nBy default, if something is wrong in your class implementation, an error with the\ndescription of what's wrong will be thrown. You can change that behavior if you prefer having\ntrue returned when all is ok, or a string describing the current issue by specify the \"settings.throw\" property to false.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "help": {
+                        "name": "help",
+                        "type": "Function",
+                        "description": "This static method allows you to get back the help using the\npassed renderer. Awailable rendered are for now:\n- terminal (default): The default terminal renderer\n- more to come depending on needs...",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
@@ -285,12 +313,24 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SInterfaceRenderer.js",
-                "extension": "js",
-                "relPath": "src/node/renderers/SInterfaceRenderer.js",
+                "filename": "SInterfaceRenderer.ts",
+                "extension": "ts",
+                "relPath": "src/node/renderers/SInterfaceRenderer.ts",
                 "children": {
+                    "id": {
+                        "name": "id",
+                        "type": "String",
+                        "description": "Store the id of the renderer.\nThis id has to be used when you call the ```interface.render('{id}', {})``` method of the SInterface instance.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "constructor": {
                         "name": "constructor",
                         "type": "Function",
@@ -299,7 +339,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     },
                     "render": {
@@ -311,19 +351,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "id": {
-                        "name": "id",
-                        "type": "String",
-                        "description": "Store the id of the renderer.\nThis id has to be used when you call the ```interface.render('{id}', {})``` method of the SInterface instance.",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
@@ -337,11 +365,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SInterfaceTerminalRenderer.js",
-                "extension": "js",
-                "relPath": "src/node/renderers/SInterfaceTerminalRenderer.js",
+                "filename": "SInterfaceTerminalRenderer.ts",
+                "extension": "ts",
+                "relPath": "src/node/renderers/SInterfaceTerminalRenderer.ts",
                 "children": {
                     "constructor": {
                         "name": "constructor",
@@ -351,7 +379,7 @@
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
+                            "url": "https://coffeekraken.io"
                         }
                     }
                 }
@@ -364,11 +392,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "alias.js",
-                "extension": "js",
-                "relPath": "src/node/renderers/terminal/alias.js",
+                "filename": "alias.ts",
+                "extension": "ts",
+                "relPath": "src/node/renderers/terminal/alias.ts",
                 "children": {}
             },
             "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.default": {
@@ -380,11 +408,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "default.js",
-                "extension": "js",
-                "relPath": "src/node/renderers/terminal/default.js",
+                "filename": "default.ts",
+                "extension": "ts",
+                "relPath": "src/node/renderers/terminal/default.ts",
                 "children": {}
             },
             "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.layout": {
@@ -396,11 +424,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "template.js",
-                "extension": "js",
-                "relPath": "src/node/renderers/terminal/template.js",
+                "filename": "template.ts",
+                "extension": "ts",
+                "relPath": "src/node/renderers/terminal/template.ts",
                 "children": {}
             },
             "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.type": {
@@ -412,11 +440,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "type.js",
-                "extension": "js",
-                "relPath": "src/node/renderers/terminal/type.js",
+                "filename": "type.ts",
+                "extension": "ts",
+                "relPath": "src/node/renderers/terminal/type.ts",
                 "children": {}
             }
         }

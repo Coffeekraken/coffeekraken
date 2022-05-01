@@ -3,8 +3,12 @@
     "extends": [],
     "generated": {
         "extends": [
+            "coco",
+            "@coffeekraken/both",
+            "@coffeekraken/cjs",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/esm",
             "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
@@ -12,7 +16,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,9 +28,11 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -38,25 +43,37 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer-data-handler-js",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
@@ -65,6 +82,38 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-handlebars.node.registerHelpers": {
+                "name": "registerHelpers",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to register all the helpers provided in this package\ndirectly on your handlebars instance.",
+                "namespace": "@coffeekraken.s-handlebars.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { registerHelpers } from '@coffeekraken/s-handlebars';\nimport __handlebars from 'handlebars';\nregisterHelpers(__handlebard);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "registerHelpers.ts",
+                "extension": "ts",
+                "relPath": "src/node/registerHelpers.ts",
+                "children": {}
+            },
             "@coffeekraken.s-handlebars.node.helpers.configFileNameFromDocmapPath": {
                 "name": "configFileNameFromDocmapPath",
                 "type": "Function",
@@ -86,9 +135,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "configFileNameFromDocmapPath.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/configFileNameFromDocmapPath.js",
+                "filename": "configFileNameFromDocmapPath.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/configFileNameFromDocmapPath.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.configFiles": {
@@ -112,9 +161,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "configFiles.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/configFiles.js",
+                "filename": "configFiles.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/configFiles.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.configFromDocmap": {
@@ -138,9 +187,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "configFromDocmap.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/configFromDocmap.js",
+                "filename": "configFromDocmap.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/configFromDocmap.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.configValue": {
@@ -164,9 +213,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "configValue.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/configValue.js",
+                "filename": "configValue.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/configValue.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.get": {
@@ -190,9 +239,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "get.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/get.js",
+                "filename": "get.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/get.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.ifEqual": {
@@ -221,11 +270,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "ifEqual.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/ifEqual.js",
+                "filename": "ifEqual.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/ifEqual.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.ifMatch": {
@@ -254,11 +303,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "ifMatch.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/ifMatch.js",
+                "filename": "ifMatch.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/ifMatch.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.import": {
@@ -282,9 +331,35 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "import.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/import.js",
+                "filename": "import.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/import.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.includes": {
+                "name": "includes",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to check if the passed value exists in the second value.\nSecond value can be a string or an array.",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "includes.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/includes.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.islicense": {
@@ -308,9 +383,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "isLicense.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/isLicense.js",
+                "filename": "isLicense.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/isLicense.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.jsonStringify": {
@@ -334,9 +409,61 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "jsonStringify.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/jsonStringify.js",
+                "filename": "jsonStringify.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/jsonStringify.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.length": {
+                "name": "length",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to get back either an array length, an object keys length or a string length",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "length.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/length.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.replace": {
+                "name": "replace",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to replace a string with another one in the passed string.",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "replace.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/replace.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.rootRelative": {
@@ -360,9 +487,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "rootRelative.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/rootRelative.js",
+                "filename": "rootRelative.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/rootRelative.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.sfile": {
@@ -386,12 +513,12 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "sfile.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/sfile.js",
+                "filename": "sfile.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/sfile.ts",
                 "children": {}
             },
-            "@coffeekraken.s-handlebars.node.helpers.shieldsioHandlebarsHelper": {
+            "@coffeekraken.s-handlebars.node.helpers.ShieldsioHandlebarsHelper": {
                 "name": "ShieldsioHandlebarsHelper",
                 "type": "Function",
                 "platform": [
@@ -406,43 +533,11 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "shieldsioHandlebarsHelper.ts",
                 "extension": "ts",
                 "relPath": "src/node/helpers/shieldsioHandlebarsHelper.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-handlebars.node.registerHelpers": {
-                "name": "registerHelpers",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function allows you to register all the helpers provided in this package\ndirectly on your handlebars instance.",
-                "namespace": "@coffeekraken.s-handlebars.node",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { registerHelpers } from '@coffeekraken/s-handlebars';\nimport __handlebars from 'handlebars';\nregisterHelpers(__handlebard);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "registerHelpers.js",
-                "extension": "js",
-                "relPath": "src/node/registerHelpers.js",
                 "children": {}
             }
         }

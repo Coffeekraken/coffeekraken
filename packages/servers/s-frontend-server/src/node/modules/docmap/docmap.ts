@@ -5,15 +5,29 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export default function docmap(express, settings, config) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-        const docmap = new __SDocmap();
-        const docmapJson = await pipe(docmap.read());
-        const menu = docmapJson.menu;
-
+        // middlewares
         config.middlewares.docmap = {
             path: `${__dirname()}/docmapMiddleware`,
             settings: {},
         };
 
+        // handlers
+        config.handlers.docmapJson = {
+            path: `${__dirname()}/docmapJsonHandler`,
+            ettings: {},
+        };
+
+        // pages
+        config.pages.docmapJson = {
+            slugs: ['/docmap.json'],
+            handler: 'docmapJson',
+        };
+
+        // data
+        config.data.docmapJson = {
+            path: `${__dirname()}/docmapJsonData`,
+            settings: {},
+        };
         config.data.docmapMarkdown = {
             path: `${__dirname()}/docmapMarkdownData`,
             settings: {},
@@ -30,30 +44,6 @@ export default function docmap(express, settings, config) {
             path: `${__dirname()}/docmapApiData`,
             settings: {},
         };
-
-        // config.handlers.docmap = {
-        //     path: `${__dirname()}/docmapHandler`,
-        //     settings: {},
-        // };
-
-        // @ts-ignore
-        // Object.keys(menu.slug).forEach((slug) => {
-        //     config.routes[slug] = {
-        //         handler: 'markdown',
-        //     };
-        // });
-
-        // if (menu.packages) {
-        //     Object.keys(menu.packages).forEach((packageName) => {
-        //         // @ts-ignore
-        //         const packageObj = menu.packages[packageName];
-        //         Object.keys(packageObj?.slug ?? {}).forEach((slug) => {
-        //             config.routes[slug] = {
-        //                 handler: 'markdown',
-        //             };
-        //         });
-        //     });
-        // }
 
         resolve(true);
     });

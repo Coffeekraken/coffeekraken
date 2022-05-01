@@ -39,7 +39,11 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -48,8 +52,9 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-scroll-to-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -58,6 +63,7 @@
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
@@ -88,7 +94,7 @@
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
                 "filename": "README.md",
                 "extension": "md",
@@ -323,9 +329,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "treatAsValue.js",
-                "extension": "js",
-                "relPath": "src/shared/treatAsValue.js",
+                "filename": "treatAsValue.ts",
+                "extension": "ts",
+                "relPath": "src/shared/treatAsValue.ts",
                 "children": {}
             },
             "@coffeekraken.s-promise.shared.interface.SPromiseSettingsInterface": {
@@ -340,65 +346,15 @@
                 "description": "This class represent the interface that describe SPromise settings",
                 "namespace": "@coffeekraken.s-promise.shared.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SPromiseSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "treatCancelAs": {
-                            "description": "Specify if a \"cancel\" event/call has to be treated like a \"resolve\", or like a \"reject\" a promise level",
-                            "type": "String",
-                            "values": [
-                                "resolve",
-                                "reject"
-                            ],
-                            "default": "resolve"
-                        },
-                        "destroyTimeout": {
-                            "description": "Specify after how many milliseconds the promise will be destroyed after a \"finally\" event",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "preventRejectOnThrow": {
-                            "description": "Specify if you prefer your promise to be \"resolved\" when an underlying error is catched, or if is has to be rejected normally",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "emitLogErrorEventOnThrow": {
-                            "description": "Specify if you want a \"log\" of type \"error\" to be emitted when an underlying error is catched",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "resolveAtResolveEvent": {
-                            "description": "Specify if youw promise has to be resolved when catching a \"resolve\" event from deeper emitter",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "rejectAtRejectEvent": {
-                            "description": "Specify if youw promise has to be rejected when catching a \"reject\" event from deeper emitter",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "resolveProxies": {
-                            "description": "Specify some functions to be called just before resolving the promise. This function will take the current promise resolve value and must return the updated value",
-                            "type": "Array<Function>",
-                            "default": []
-                        },
-                        "rejectProxies": {
-                            "description": "Specify some functions to be called just before rejecting the promise. This function will take the current promise resolve value and must return the updated value",
-                            "type": "Array<Function>",
-                            "default": []
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
+                    "url": "https://coffeekraken.io"
                 },
-                "filename": "SPromiseSettingsInterface.js",
-                "extension": "js",
-                "relPath": "src/shared/interface/SPromiseSettingsInterface.js",
+                "filename": "SPromiseSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/interface/SPromiseSettingsInterface.ts",
                 "children": {}
             }
         }

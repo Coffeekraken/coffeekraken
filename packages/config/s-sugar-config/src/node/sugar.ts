@@ -16,6 +16,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
+import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
 
 /**
  * @name                  SSugarConfig
@@ -97,6 +98,9 @@ export default class SSugarConfig extends __SClass {
         scope?: 'default' | 'module' | 'repo' | 'package' | 'user' = 'default',
         packageName?: string,
     ): void {
+        // handle tokens
+        path = __replaceTokens(path);
+
         this._registeredConfigFolderPaths.push({
             path,
             scope,
@@ -319,17 +323,17 @@ export default class SSugarConfig extends __SClass {
      *
      * This function take a config id as parameter and returns an array of docblocks parsed objects
      *
-     * @param       {String}        configId            The configuration if you want to get docblocks back for
+     * @param       {String}        configIdOrPath            The configuration id or path you want to get docblocks back for
      * @return      {ISugarConfigToDocblocksResult[]}                         An array containing ISugarConfigToDocblocksResult objects
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static async toDocblocks(configId: string): any[] {
+    static async toDocblocks(configIdOrPath: string): any[] {
         // get the file path(s) for this config id
-        configId = configId.replace('.config.js', '');
+        configIdOrPath = configIdOrPath.replace('.config.js', '');
         const paths = this.filesPaths.filter((path) => {
-            return path.includes(`${configId}.config.js`);
+            return path.includes(`${configIdOrPath}.config.js`);
         });
 
         const results = [];

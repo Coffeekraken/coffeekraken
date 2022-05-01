@@ -13,6 +13,7 @@
                         <a href="{{ $item->slug }}" class="s-link:stretch s-order:2">
                             {{ $item->name }}
                         </a>
+
                         <i
                             class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent s-until:sibling:loading s-mie:10"></i>
                         <div class="s-loader:spinner s-color:accent s-mie:10 s-when:siblings:loading">

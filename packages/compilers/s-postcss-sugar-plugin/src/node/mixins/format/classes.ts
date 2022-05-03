@@ -47,15 +47,13 @@ export default function ({
 
     const vars = new CssVars();
 
-    const typoFormatElements = Object.keys(__STheme.config('typo')).map(
-        (typo) => {
-            return `${typo}`;
-        },
-    );
+    const typoFormatElements = Object.keys(__STheme.get('typo')).map((typo) => {
+        return `${typo}`;
+    });
 
-    const uiFormatElements = Object.keys(__STheme.config('ui'))
+    const uiFormatElements = Object.keys(__STheme.get('ui'))
         .filter((ui) => {
-            const uiObj = __STheme.config('ui')[ui];
+            const uiObj = __STheme.get('ui')[ui];
             return uiObj.formatText === true;
         })
         .map((ui) => {
@@ -142,18 +140,18 @@ export default function ({
     `,
     );
 
-    const typoRhythmElements = Object.keys(__STheme.config('typo'))
+    const typoRhythmElements = Object.keys(__STheme.get('typo'))
         .filter((typo) => {
-            const typoObj = __STheme.config('typo')[typo];
+            const typoObj = __STheme.get('typo')[typo];
             return typoObj.rhythmVertical !== undefined;
         })
         .map((typo) => {
             return `${typo}`;
         });
 
-    const uiRhythmElements = Object.keys(__STheme.config('ui'))
+    const uiRhythmElements = Object.keys(__STheme.get('ui'))
         .filter((ui) => {
-            const uiObj = __STheme.config('ui')[ui];
+            const uiObj = __STheme.get('ui')[ui];
             return uiObj.rhythmVertical !== undefined;
         })
         .map((ui) => {

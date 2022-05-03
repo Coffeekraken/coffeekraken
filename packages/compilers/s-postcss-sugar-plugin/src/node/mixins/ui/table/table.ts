@@ -31,12 +31,12 @@ class postcssSugarPluginUiTableInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.table.defaultStyle'),
+                default: __STheme.get('ui.table.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square'],
-                default: __STheme.config('ui.table.defaultShape'),
+                default: __STheme.get('ui.table.defaultShape'),
             },
             scope: {
                 type: {
@@ -91,8 +91,8 @@ export default function ({
         vertical-align: middle;
     }
     td, th {
-        padding-inline: sugar.theme(ui.table.paddingInline);
-      padding-block: sugar.theme(ui.table.paddingBlock);
+        padding-inline: sugar.padding(ui.table.paddingInline);
+      padding-block: sugar.padding(ui.table.paddingBlock);
 
         @sugar.direction.rtl {
             text-align: right;
@@ -138,7 +138,7 @@ export default function ({
                 break;
             default:
                 vars.push(`
-    border-radius: sugar.theme(ui.table.borderRadius);
+    border-radius: sugar.border.radius(ui.table.borderRadius);
         `);
                 break;
         }

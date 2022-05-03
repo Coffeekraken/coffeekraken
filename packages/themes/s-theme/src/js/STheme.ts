@@ -22,6 +22,8 @@ import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTra
  *      // do something...
  * });
  *
+ * @event       s-theme.change          Dispatched when the theme has been changed
+ *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -35,7 +37,7 @@ export default class STheme extends __SThemeBase {
      *
      * @param               {String}            theme           The theme name to apply
      * @param               {String}            variant         The theme variant to apply
-     * @param               {HTMLElement}       [$context=document.body]            The context element on which to apply the theme
+     * @param               {HTMLElement}       [$context=document.querySelector('html')]            The context element on which to apply the theme
      * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
@@ -46,19 +48,30 @@ export default class STheme extends __SThemeBase {
         variant?: string,
         $context = document.querySelector('html'),
     ): STheme {
-        __clearTransmations(document.body, {
+        __clearTransmations(document.querySelector('html'), {
             timeout: 100,
         });
 
         if (theme && variant) {
             $context.setAttribute('theme', `${theme}-${variant}`);
         } else if (theme) {
-            $context.setAttribute('theme', theme);
+            $context.setAttribute('theme', `${theme}-light`);
         } else if (variant) {
-            $context.setAttribute('theme', variant);
+            $context.setAttribute('theme', `default-${variant}`);
         }
 
-        return this.getCurrentTheme($context);
+        const currentTheme = this.getCurrentTheme($context);
+
+        // dispatch a change event
+        document.dispatchEvent(
+            new CustomEvent('s-theme.change', {
+                detail: {
+                    theme: currentTheme,
+                },
+            }),
+        );
+
+        return currentTheme;
     }
 
     /**
@@ -69,7 +82,7 @@ export default class STheme extends __SThemeBase {
      * This method allows you to set the current applied theme variant and get back an STheme instance
      *
      * @param               {String}            variant         The theme variant to apply
-     * @param               {HTMLElement}       [$context=document.body]            The context element on which to apply the theme
+     * @param               {HTMLElement}       [$context=document.querySelector('html')]            The context element on which to apply the theme
      * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
@@ -80,6 +93,22 @@ export default class STheme extends __SThemeBase {
         $context = document.querySelector('html'),
     ): STheme {
         return this.setTheme(undefined, variant, $context);
+    }
+
+    /**
+     * @name            init
+     * @type            Function
+     * @static
+     *
+     * This method allows you to init the your STheme instance, restore savec updated if their some, etc...
+     *
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static init($context = document.querySelector('html')): STheme {
+        return this.getCurrentTheme($context);
     }
 
     /**
@@ -94,7 +123,7 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static getCurrentTheme($context = document.body): STheme {
+    static getCurrentTheme($context = document.querySelector('html')): STheme {
         const theme = __SSugarConfig.get('theme.theme');
         const variant = __SSugarConfig.get('theme.variant');
 
@@ -130,6 +159,30 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
+     * @name            applyCurrentColor
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to apply a color on a particular context
+     *
+     * @param       {String}        color               The color name/code you want to apply
+     * @param       {HTMLElement}       [$context=document.querySelector('html')]        The context on which to apply the color
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static applyCurrentColor(
+        color: string,
+        $context = document.querySelector('html'),
+    ): void {
+        const vars = this.remapCssColor('current', color);
+        for (let [key, value] of Object.entries(vars.properties)) {
+            // @ts-ignore
+            $context.style.setProperty(key, value);
+        }
+    }
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -141,27 +194,10 @@ export default class STheme extends __SThemeBase {
      */
     constructor(theme?: string, variant?: string) {
         super(theme, variant);
-    }
-
-    /**
-     * @name            applyCurrentColor
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to apply a color on a particular context
-     *
-     * @param       {String}        color               The color name/code you want to apply
-     * @param       {HTMLElement}       [$context=document.body]        The context on which to apply the color
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static applyCurrentColor(color: string, $context = document.body): void {
-        const vars = this.remapCssColor('current', color);
-        for (let [key, value] of Object.entries(vars.properties)) {
-            // @ts-ignore
-            $context.style.setProperty(key, value);
-        }
+        // apply the theme on dom element
+        // this.constructor.setTheme(this.theme, this.variant);
+        // restore the theme
+        this.restore();
     }
 
     /**
@@ -172,26 +208,38 @@ export default class STheme extends __SThemeBase {
      *
      * @param           {String}            color                   The color you want to set
      * @param           {String}            value                   The color value you want to set
-     * @param           {HTMLElement}       [$context=document.body]        The context in which to set the color
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    setColor(color: string, value: string, $context = document.body): void {
-        const colorInstance = new __SColor(value);
+    setColor(color: string, value: string): void {
+        // set color in config
+        this.set(`color.${color}.color`, value);
+    }
 
-        $context.style.setProperty(
-            `--s-theme-color-${color}-h`,
-            colorInstance.h,
-        );
-        $context.style.setProperty(
-            `--s-theme-color-${color}-s`,
-            colorInstance.s,
-        );
-        $context.style.setProperty(
-            `--s-theme-color-${color}-l`,
-            colorInstance.l,
-        );
+    /**
+     * @name            set
+     * @type            Function
+     *
+     * This method allows you to set a value of the current theme.
+     * Specify the value you want to set using the dotPath syntax like "color.accent.color", etc...
+     *
+     * @param       {String}        dotPath           The dot path of the config you want to set
+     * @param       {any}           value               The value you want to set
+     * @return      {STheme}                        The current theme instance
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    set(dotPath: string, value: any): SThemeBase {
+        // set in super class
+        super.set(dotPath, value);
+        // apply overrided configs
+        this.applyOverridedConfigs();
+        // save the config
+        this.save();
+        // maintain chainability
+        return this;
     }
 
     /**
@@ -202,7 +250,7 @@ export default class STheme extends __SThemeBase {
      *
      * @param           {String}            name            The color name you want to get
      * @param           {String}            [variant=null]     The color variant you want to get
-     * @param           {HTMLElement}       [$context=document.body]        The context in which to get the color
+     * @param           {HTMLElement}       [$context=document.querySelector('html')]        The context in which to get the color
      * @return          {SColor}                                    An SColor instance that you can make use of
      *
      * @since           2.0.0
@@ -211,13 +259,13 @@ export default class STheme extends __SThemeBase {
     getColor(
         name: string,
         variant?: string,
-        $context = document.body,
+        $context = document.querySelector('html'),
     ): __SColor {
         const $elm = document.createElement('p');
         $elm.classList.add(`s-bg--${name}${variant ? `-${variant}` : ''}`);
         const $wrapper = document.createElement('div');
         $wrapper.setAttribute('hidden', 'true');
-        $wrapper.setAttribute('theme', this.name);
+        $wrapper.setAttribute('theme', this.theme);
         $wrapper.setAttribute('variant', this.variant);
         $wrapper.appendChild($elm);
         $context.appendChild($wrapper);
@@ -225,5 +273,134 @@ export default class STheme extends __SThemeBase {
         const color = new __SColor(style.backgroundColor);
         $wrapper.remove();
         return color;
+    }
+
+    /**
+     * @name            applyOverridedConfigs
+     * @type            Function
+     *
+     * This method allows you to apply the overrided configs on your dom context.
+     *
+     * @param       {HTMLElement}       $context       The dom context on which to apply the overrided configs
+     * @return      {STheme}              The current instance
+     *
+     * @since       2.0.0
+     *
+     */
+    applyOverridedConfigs(
+        $context: HTMLElement = document.querySelector('html'),
+    ): STheme {
+        const properties = __SThemeBase.jsConfigObjectToCssProperties(
+            this.getOverridedConfig(),
+        );
+
+        if (!$context._sThemeOverridedConfigs) {
+            $context._sThemeOverridedConfigs = {};
+        }
+
+        if (!$context._sThemeOverridedConfigs[this.id]) {
+            $context._sThemeOverridedConfigs[this.id] = document.createElement(
+                'style',
+            );
+            $context._sThemeOverridedConfigs[this.id].setAttribute(
+                'id',
+                this.id,
+            );
+            $context.appendChild($context._sThemeOverridedConfigs[this.id]);
+        }
+
+        $context._sThemeOverridedConfigs[this.id].innerHTML = `
+            [theme="${this.theme}-${this.variant}"] {
+                ${properties.join('\n')}
+            }
+        `;
+
+        return this;
+    }
+
+    /**
+     * @name            save
+     * @type            Function
+     *
+     * This method allows you to save locally the current theme with the changes applied using the `set` method.
+     * The theme will be savec in localStorage and restored on page load to apply updates correctly
+     *
+     * @return      {STheme}                                The current theme instance
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _saveTimeout;
+    save(): STheme {
+        clearTimeout(this._saveTimeout);
+        this._saveTimeout = setTimeout(() => {
+            console.log('save');
+
+            // save in localStorage
+            localStorage.setItem(
+                `s-theme-${this.id}`,
+                JSON.stringify(this.getOverridedConfig()),
+            );
+            // emit saved event
+            this.emitSavedEvent();
+        }, 500);
+        // maintain chainability
+        return this;
+    }
+
+    /**
+     * @name            restore
+     * @type            Function
+     *
+     * This method allows you to restore locally the current theme with the changes applied using the `set` method.
+     *
+     * @return      {STheme}                                The current theme instance
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    restore(): STheme {
+        console.log('restore');
+
+        let savedConfigs = {};
+        // get from localStorage
+        try {
+            savedConfigs = JSON.parse(
+                // @ts-ignore
+                localStorage.getItem(`s-theme-${this.id}`),
+            );
+        } catch (e) {}
+
+        console.log(savedConfigs);
+
+        // restore configs
+        super.restore(savedConfigs);
+        // apply the configs
+        this.applyOverridedConfigs();
+        // maintain chainability
+        return this;
+    }
+
+    /**
+     * @name            clear
+     * @type            Function
+     *
+     * This method allows you to clear locally the current theme with the changes applied using the `set` method.
+     *
+     * @return      {STheme}                                The current theme instance
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    clear(): STheme {
+        console.log('clear');
+        // delete the local storage
+        localStorage.removeItem(`s-theme-${this.id}`);
+        // clear in super class
+        super.clear();
+        // apply the configs
+        this.applyOverridedConfigs();
+        // maintain chainability
+        return this;
     }
 }

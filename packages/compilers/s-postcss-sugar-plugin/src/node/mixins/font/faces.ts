@@ -47,7 +47,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const fontsFamiliesObj = __STheme.config('font.family');
+    const fontsFamiliesObj = __STheme.get('font.family');
     Object.keys(fontsFamiliesObj).forEach((fontName) => {
         const fontObj = fontsFamiliesObj[fontName];
 

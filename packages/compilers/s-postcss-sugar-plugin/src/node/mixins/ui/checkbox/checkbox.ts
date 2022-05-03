@@ -31,12 +31,12 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.checkbox.defaultStyle'),
+                default: __STheme.get('ui.checkbox.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'circle'],
-                default: __STheme.config('ui.checkbox.defaultShape'),
+                default: __STheme.get('ui.checkbox.defaultShape'),
             },
             scope: {
                 type: {
@@ -145,7 +145,7 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.checkbox.borderRadius);
+                    border-radius: sugar.border.radius(ui.checkbox.borderRadius);
                 `);
                 break;
         }

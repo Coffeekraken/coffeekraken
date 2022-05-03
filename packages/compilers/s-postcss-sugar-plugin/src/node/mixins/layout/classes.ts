@@ -47,7 +47,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const layoutConfig = __STheme.config('layout');
+    const layoutConfig = __STheme.get('layout');
 
     const containers = layoutConfig.container;
     Object.keys(containers).forEach((containerName) => {
@@ -156,9 +156,9 @@ export default function ({
     //    * @type          CssClass
     //    * @platform      css
     //    * @status      beta
-    //    * 
+    //    *
     //    * This class represent a layout of "<yellow>${layout}</yellow>"
-    //    * 
+    //    *
     //    * @example     html
     //    * <div class="s-container s-layout:${id}">
     //    *    ${Array(colsCount)
@@ -167,7 +167,7 @@ export default function ({
     //        })
     //        .join('\n')}
     //    * </div>
-    //    * 
+    //    *
     //    * @since     2.0.0
     //    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     //    */
@@ -178,7 +178,7 @@ export default function ({
     //   }
     // `);
 
-    const spaces = __STheme.config('space');
+    const spaces = __STheme.get('space');
 
     Object.keys(spaces).forEach((spaceName) => {
         const clsX = `s-layout:gap-x-${spaceName}`.replace('-default', '');

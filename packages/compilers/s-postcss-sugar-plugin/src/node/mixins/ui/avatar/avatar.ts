@@ -41,8 +41,14 @@ class postcssSugarPluginUiAvatarInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'interactive'],
-                default: ['bare', 'lnf', 'shape'],
+                values: [
+                    'bare',
+                    'lnf',
+                    'shape',
+                    'interactive',
+                    'notifications',
+                ],
+                default: ['bare', 'lnf', 'shape', 'notifications'],
             },
         };
     }
@@ -51,7 +57,7 @@ class postcssSugarPluginUiAvatarInterface extends __SInterface {
 export interface IPostcssSugarPluginUiBadgeParams {
     shape: 'default' | 'square' | 'rounded';
     style: 'solid';
-    scope: ('bare' | 'lnf' | 'shape' | 'interactive')[];
+    scope: ('bare' | 'lnf' | 'shape' | 'interactive' | 'notifications')[];
 }
 
 export { postcssSugarPluginUiAvatarInterface as interface };
@@ -78,9 +84,17 @@ export default function ({
         vars.push(`
             position: relative;
             display: inline-block;
-            overflow: hidden;
             width: sugar.scalable(1em);
             height: sugar.scalable(1em);
+
+            img {
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+                overflow: hidden;
+            }
         `);
     }
 
@@ -89,10 +103,13 @@ export default function ({
         switch (finalParams.style) {
             case 'solid':
                 vars.push(`
-                    border-width: sugar.theme(ui.avatar.borderWidth);
-                    border-color: sugar.color(current);
-                    border-style: solid;
-                    @sugar.depth(sugar.theme.value(ui.avatar.depth));
+                    img {
+                        background-color: sugar.color(current);
+                        border-width: sugar.theme(ui.avatar.borderWidth);
+                        border-color: sugar.color(current);
+                        border-style: solid;
+                        @sugar.depth(sugar.theme.value(ui.avatar.depth));
+                    }
                 `);
                 break;
         }
@@ -107,11 +124,45 @@ export default function ({
         switch (finalParams.style) {
             case 'solid':
                 vars.push(`
-                    &:hover {
+                    &:hover img {
                         @sugar.outline($where: element);
+                        position: absolute;
                     }
                 `);
                 break;
+        }
+    }
+
+    // notifications
+    if (finalParams.scope.indexOf('notifications') !== -1) {
+        if (finalParams.scope.includes('bare')) {
+            vars.push(`
+                &[notifications] {
+                    &:after {
+                        content: attr(notifications);
+                        position: absolute;
+                        top: 0.2em; right: 0.2em;
+                        font-size: sugar.scalable(0.15em);
+                        min-width: 1.5em;
+                        min-height: 1.5em;
+                    }
+                }
+            `);
+        }
+
+        if (finalParams.scope.includes('lnf')) {
+            vars.push(`
+                &[notifications] {
+                    &:after {
+                        background: sugar.color(current);
+                        color: sugar.color(current, foreground);
+                        border-radius: 9999px;
+                        padding: 0.33em;
+                        font-weight: bold;
+                        @sugar.depth(sugar.theme.value(ui.avatar.depth));
+                    }
+                }
+            `);
         }
     }
 
@@ -120,18 +171,24 @@ export default function ({
         switch (finalParams.shape) {
             case 'square':
                 vars.push(`
-                    border-radius: 0;
+                    img {
+                        border-radius: 0;
+                    }
                 `);
                 break;
             case 'rounded':
                 vars.push(`
-                    border-radius: sugar.theme(ui.avatar.borderRadius);
+                    img {
+                        border-radius: sugar.border.radius(ui.avatar.borderRadius);
+                    }
                     `);
                 break;
             case 'default':
             default:
                 vars.push(`
-                    border-radius: 0.5em;
+                    img {
+                        border-radius: 0.5em;
+                    }
                 `);
                 break;
         }

@@ -27,7 +27,7 @@ class postcssSugarPluginTransitionFunctionInterface extends __SInterface {
         return {
             name: {
                 type: 'String',
-                values: Object.keys(__STheme.config('transition')),
+                values: Object.keys(__STheme.get('transition')),
                 default: 'default',
                 required: true,
             },
@@ -50,11 +50,11 @@ export default function ({
         ...params,
     };
 
-    if (__STheme.config('transition')[finalParams.name] === undefined)
+    if (__STheme.get('transition')[finalParams.name] === undefined)
         return finalParams.name;
 
     const transitions = finalParams.name.split(' ').map((t) => {
-        const transition = __STheme.config(`transition.${t}`);
+        const transition = __STheme.get(`transition.${t}`);
         if (!transition) return transition;
         return `var(${`--s-theme-transition-${t}`}, ${transition})`;
     });

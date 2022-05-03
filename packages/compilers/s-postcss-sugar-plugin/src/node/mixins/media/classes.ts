@@ -48,7 +48,7 @@ class postcssSugarPluginMediaClassesMixinInterface extends __SInterface {
         return {
             query: {
                 type: 'String',
-                default: Object.keys(__STheme.config('media.queries')).join(',')
+                default: Object.keys(__STheme.get('media.queries')).join(','),
             },
             mediasOnly: {
                 type: 'Boolean',
@@ -87,7 +87,7 @@ export default function ({
         ...params,
     };
 
-    const mediaConfig = __STheme.config('media');
+    const mediaConfig = __STheme.get('media');
 
     const medias = finalParams.query
         ? finalParams.query.split(' ').map((l) => l.trim())
@@ -95,25 +95,36 @@ export default function ({
 
     atRule.replaceWith(`
         /* S-MEDIA-CLASSES:${medias.join(',')} */
-        ${atRule.nodes.map(node => node.toString())}
+        ${atRule.nodes.map((node) => node.toString())}
         /* S-END-MEDIA-CLASSES:${medias.join(',')} */
     `);
 
     registerPostProcessor((root) => {
-
         const mediaNodes: any[] = [];
         let currentMedias = [];
 
         root.nodes.forEach((node, i) => {
-            if (node.type === 'comment' && node.text.includes('S-MEDIA-CLASSES:')) {
-                const medias = node.text.replace('S-MEDIA-CLASSES:', '').split(',').map(l => l.trim());
+            if (
+                node.type === 'comment' &&
+                node.text.includes('S-MEDIA-CLASSES:')
+            ) {
+                const medias = node.text
+                    .replace('S-MEDIA-CLASSES:', '')
+                    .split(',')
+                    .map((l) => l.trim());
                 currentMedias = medias;
                 mediaNodes.push({
                     nodes: [],
-                    medias
+                    medias,
                 });
-            } else if (node.type === 'comment' && node.text.includes('S-END-MEDIA-CLASSES:')) {
-                const medias = node.text.replace('S-END-MEDIA-CLASSES:', '').split(',').map(l => l.trim());
+            } else if (
+                node.type === 'comment' &&
+                node.text.includes('S-END-MEDIA-CLASSES:')
+            ) {
+                const medias = node.text
+                    .replace('S-END-MEDIA-CLASSES:', '')
+                    .split(',')
+                    .map((l) => l.trim());
                 currentMedias = [];
             } else if (currentMedias.length) {
                 const mediaNodeObj = mediaNodes.slice(-1)[0];
@@ -122,30 +133,34 @@ export default function ({
             }
         });
 
-
-        mediaNodes.forEach(mediaObj => {
-
+        mediaNodes.forEach((mediaObj) => {
             mediaObj.medias.forEach((media) => {
-
                 const mediaRule = new postcssApi.AtRule({
                     name: 'media',
-                    params: __STheme.buildMediaQuery(media).replace('@media ', ''),
+                    params: __STheme
+                        .buildMediaQuery(media)
+                        .replace('@media ', ''),
                 });
 
-                mediaObj.nodes.forEach(node => {
+                mediaObj.nodes.forEach((node) => {
                     node = node.clone();
                     if (node.type === 'comment') return;
                     if (node.selector === ':root') return;
                     if (!node.selector) {
                         mediaRule.append(node);
                     } else {
-                        let sels = node.selector.split(',').map(l => l.trim());
-                        sels = sels.map(sel => {
+                        let sels = node.selector
+                            .split(',')
+                            .map((l) => l.trim());
+                        sels = sels.map((sel) => {
                             // sel = sel.replace(/___[a-zA-Z0-9_-]+/gm, '');
                             const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
                             if (!selectors) return sel;
-                            selectors.forEach(selector => {
-                                sel = sel.replace(selector, `${selector}___${media}`);
+                            selectors.forEach((selector) => {
+                                sel = sel.replace(
+                                    selector,
+                                    `${selector}___${media}`,
+                                );
                             });
                             return sel;
                         });

@@ -34,11 +34,11 @@ class postcssSugarPluginUiLoaderSpinnerMixinInterface extends __SInterface {
             },
             duration: {
                 type: 'String',
-                default: __STheme.config('ui.loaderSpinner.duration'),
+                default: __STheme.get('ui.loaderSpinner.duration'),
             },
             easing: {
                 type: 'String',
-                default: __STheme.config('ui.loaderSpinner.easing'),
+                default: __STheme.get('ui.loaderSpinner.easing'),
             },
         };
     }

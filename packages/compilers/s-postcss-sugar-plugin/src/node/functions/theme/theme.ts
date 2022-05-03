@@ -80,9 +80,9 @@ export default function theme({
         }
     } else {
         if (finalParams.scalable) {
-            return `sugar.scalable(${__STheme.config(finalParams.dotPath)})`;
+            return `sugar.scalable(${__STheme.get(finalParams.dotPath)})`;
         } else {
-            return __STheme.config(finalParams.dotPath);
+            return __STheme.get(finalParams.dotPath);
         }
     }
 }

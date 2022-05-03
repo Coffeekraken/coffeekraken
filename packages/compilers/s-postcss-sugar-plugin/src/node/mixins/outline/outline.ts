@@ -78,7 +78,7 @@ export default function ({
             ${
                 finalParams.where !== 'element'
                     ? `
-                border-radius: sugar.theme(ui.outline.borderRadius);
+                border-radius: sugar.border.radius(ui.outline.borderRadius);
                 content: '';
                 position: absolute;
                 top: 0; left: 0;

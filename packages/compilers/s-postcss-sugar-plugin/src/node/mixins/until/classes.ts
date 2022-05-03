@@ -47,13 +47,12 @@ export default function ({
         ...params,
     };
 
-    const queries = __STheme.config('media.queries');
-    const states = __STheme.config('helpers.states');
+    const queries = __STheme.get('media.queries');
+    const states = __STheme.get('helpers.states');
 
     const vars = new CssVars();
 
-    states.forEach(state => {
-
+    states.forEach((state) => {
         vars.comment(
             () => `/**
             * @name          s-until:${state}
@@ -102,7 +101,7 @@ export default function ({
                 display: none;
             }`);
 
-         vars.comment(
+        vars.comment(
             () => `/**
             * @name          s-until:siblings:${state}
             * @namespace          sugar.css.until
@@ -214,11 +213,10 @@ export default function ({
             *.${state} .s-until.s-until--ancestor.s-until--${state} {
                 display: none;
             }`);
-
     });
 
     // Queries
-    Object.keys(queries).forEach(query => {
+    Object.keys(queries).forEach((query) => {
         vars.comment(
             () => `/**
             * @name          s-until:media:${query}

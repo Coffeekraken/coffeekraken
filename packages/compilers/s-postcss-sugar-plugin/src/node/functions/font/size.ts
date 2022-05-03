@@ -26,14 +26,14 @@ import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue'
 class postcssSugarPluginFontSizeInterface extends __SInterface {
     static get _definition() {
         return {
-            name: {
+            size: {
                 type: 'String',
                 required: true,
-                alias: 'n',
+                alias: 's',
             },
             scalable: {
                 type: 'Boolean',
-                default: __STheme.config('scalable.font'),
+                default: __STheme.get('scalable.font'),
             },
         };
     }
@@ -41,7 +41,7 @@ class postcssSugarPluginFontSizeInterface extends __SInterface {
 export { postcssSugarPluginFontSizeInterface as interface };
 
 export interface IPostcssSugarPluginFontSizeParams {
-    name: string;
+    size: string;
     scalable: boolean;
 }
 
@@ -51,17 +51,44 @@ export default function ({
     params: Partial<IPostcssSugarPluginFontSizeParams>;
 }) {
     const finalParams: IPostcssSugarPluginFontSizeParams = {
-        name: '',
+        size: '',
         scalable: false,
         ...params,
     };
 
-    const name = finalParams.name;
+    let sizes = finalParams.size.split(' ').map((s) => {
+        let registeredValue,
+            factor = '';
 
-    if (__isValidUnitValue(name)) {
-        if (finalParams.scalable) return `sugar.scalable(${name})`;
-        return name;
-    }
+        // try to get the padding with the pased
+        try {
+            registeredValue = __STheme.get(`font.size.${s}`);
+        } catch (e) {}
 
-    return `sugar.theme(font.size.${name}, ${finalParams.scalable})`;
+        // default return simply his value
+        if (s === 'default') {
+            // @ts-ignore
+            factor = '1';
+        } else if (registeredValue !== undefined) {
+            // direct value
+            factor = `sugar.theme(font.size.${s}, ${finalParams.scalable})`;
+        } else if (
+            isNaN(parseFloat(s)) &&
+            s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
+        ) {
+            // support dotPath
+            factor = `sugar.theme(${s}, ${finalParams.scalable})`;
+        } else if (!isNaN(parseFloat(s))) {
+            // support simple number
+            factor = `${s}`;
+        } else {
+            throw new Error(
+                `<yellow>[s-postcss-sugar-plugin]</yellow> Font size "<cyan>${s}</cyan>" is not a valid value`,
+            );
+        }
+        // generate css value
+        return `calc(sugar.theme(font.size.default) * ${factor})`;
+    });
+
+    return sizes.join(' ');
 }

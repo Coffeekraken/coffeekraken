@@ -402,33 +402,33 @@ export default function (env, config) {
                 path: `${__dirname()}/../node/modules/redirect/redirect`,
                 settings: {},
             },
-            // config: {
-            //     /**
-            //      * @name            description
-            //      * @namespace       config.frontendServer.modules.config
-            //      * @type            String
-            //      *
-            //      * Specify the module description
-            //      *
-            //      * @since           2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     description:
-            //         'This module gives you access to a "config" and a "configFiles" object into the views',
-            //     /**
-            //      * @name            path
-            //      * @namespace       config.frontendServer.modules.config
-            //      * @type            String
-            //      * @default             ${__dirname()}/../node/modules/config/config
-            //      *
-            //      * Specify where to find the "config" module
-            //      *
-            //      * @since           2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     path: `${__dirname()}/../node/modules/config/config`,
-            //     settings: {},
-            // },
+            config: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.config
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'This module gives you access to a "config" and a "configFiles" object into the views',
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.config
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/config/config
+                 *
+                 * Specify where to find the "config" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                path: `${__dirname()}/../node/modules/config/config`,
+                settings: {},
+            },
             frontspec: {
                 /**
                  * @name            description
@@ -454,6 +454,33 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/frontspec/frontspec`,
+                settings: {},
+            },
+            404: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.docmap
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'This module handle the 404 by rendering either your 404 page configured in the pages or the default 404 page',
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.docmap
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/dynamic/dynamic
+                 *
+                 * Specify where to find the "dynamic" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                path: `${__dirname()}/../node/modules/404/404`,
                 settings: {},
             },
         },

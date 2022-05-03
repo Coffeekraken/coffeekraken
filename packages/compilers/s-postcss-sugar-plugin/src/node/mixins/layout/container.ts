@@ -60,7 +60,7 @@ export default function ({
   `,
     ];
 
-    const containerConfig = __STheme.config(
+    const containerConfig = __STheme.get(
         `layout.container.${finalParams.name}`,
     );
 

@@ -186,6 +186,18 @@ export default class SColorPicker extends __SLitComponent {
             );
         }
 
+        // handle form reset
+        this._$input?.form?.addEventListener('reset', () => {
+            setTimeout(() => {
+                __STheme.applyCurrentColor(this._$input?.value, this._$root);
+            });
+        });
+
+        // apply selected color
+        this._$input?.addEventListener('change', (e) => {
+            __STheme.applyCurrentColor(e.target.value, this._$root);
+        });
+
         const value = this.props.value ?? this._$input?.value ?? '#ff0000';
         const pickr = __Pickr.create({
             el: this.querySelector(
@@ -283,12 +295,12 @@ export default class SColorPicker extends __SLitComponent {
                 detail,
             });
 
-            __STheme.applyCurrentColor(detail.hex, this._$root);
-
             if (this._$input) {
                 this._$input.value = detail.hex;
             }
             this.dispatchEvent(change);
+
+            __STheme.applyCurrentColor(detail.hex, this._$root);
         });
         pickr.on('show', () => {
             const detail = getPickrState();

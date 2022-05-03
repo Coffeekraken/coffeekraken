@@ -45,7 +45,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    const widthObj = __STheme.config('width');
+    const widthObj = __STheme.get('width');
 
     vars.push(`
       /**

@@ -31,12 +31,12 @@ class postcssSugarPluginUiRadioInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.radio.defaultStyle'),
+                default: __STheme.get('ui.radio.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill', 'circle'],
-                default: __STheme.config('ui.radio.defaultShape'),
+                default: __STheme.get('ui.radio.defaultShape'),
             },
             scope: {
                 type: {
@@ -156,9 +156,9 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.radio.borderRadius);
+                    border-radius: sugar.border.radius(ui.radio.borderRadius);
                     &:after {
-                        border-radius: sugar.theme(ui.radio.borderRadius);
+                        border-radius: sugar.border.radius(ui.radio.borderRadius);
                     }
                 `);
                 break;

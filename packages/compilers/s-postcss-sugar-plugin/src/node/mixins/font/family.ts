@@ -28,7 +28,7 @@ class postcssSugarPluginFontFamilyInterface extends __SInterface {
         return {
             font: {
                 type: 'String',
-                values: Object.keys(__STheme.config('font.family')),
+                values: Object.keys(__STheme.get('font.family')),
                 required: true,
             },
         };
@@ -59,7 +59,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const fontFamilyObj = __STheme.config(`font.family.${finalParams.font}`);
+    const fontFamilyObj = __STheme.get(`font.family.${finalParams.font}`);
 
     Object.keys(fontFamilyObj).forEach((prop) => {
         switch (prop) {

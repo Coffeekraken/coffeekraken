@@ -13,12 +13,7 @@
             </div>
             <div class="__logo">
                 <a href="/" title="Coffeekraken.io" class="s-text:center">
-                    <div class="s-until:parent:loading">
-                        @include ('layouts.header.partials.logo')
-                    </div>
-                    <span class="s-when:parent:loading">
-                        <div class="s-loader:spinner s-color:accent s-mie:10"></div>
-                    </span>
+                    @include ('layouts.header.partials.logo')
                 </a>
             </div>
             <nav id="nav" class="__nav s-until:media:mobile">

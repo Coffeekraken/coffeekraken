@@ -31,12 +31,12 @@ class postcssSugarPluginUiFsTreeInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.fsTree.defaultStyle'),
+                default: __STheme.get('ui.fsTree.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.fsTree.defaultShape'),
+                default: __STheme.get('ui.fsTree.defaultShape'),
             },
             scope: {
                 type: {
@@ -136,9 +136,9 @@ export default function ({
                 position: relative;
 
                 > div {
-                    padding-inline: sugar.theme(ui.fsTree.paddingInline);
-                    padding-block: sugar.theme(ui.fsTree.paddingBlock);
-                    border-radius: sugar.theme(ui.fsTree.borderRadius);
+                    padding-inline: sugar.padding(ui.fsTree.paddingInline);
+                    padding-block: sugar.padding(ui.fsTree.paddingBlock);
+                    border-radius: sugar.border.radius(ui.fsTree.borderRadius);
                     text-overflow: ellipsis;
                 }
 
@@ -249,7 +249,7 @@ export default function ({
                 vars.push(`
                     li {
                         & > div {
-                            border-radius: sugar.theme(ui.fsTree.borderRadius);
+                            border-radius: sugar.border.radius(ui.fsTree.borderRadius);
                         }
                     }
                 `);

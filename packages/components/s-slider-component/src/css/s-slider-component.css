@@ -4,28 +4,26 @@ s-slider,
     font-size: sugar.scalable(1rem);
 }
 
-s-slider[lnf^="default"] {
+s-slider[lnf^='default'] {
     position: relative;
 
     &[mounted] {
         display: block;
     }
 
-    &[lnf*="tight"][direction="horizontal"][controls] {
+    &[lnf*='tight'][direction='horizontal'][controls] {
         padding-left: calc(sugar.margin(30) + 1em);
         padding-right: calc(sugar.margin(30) + 1em);
-        
     }
-    &[lnf*="tight"][direction="horizontal"][nav] {
+    &[lnf*='tight'][direction='horizontal'][nav] {
         padding-bottom: calc(sugar.margin(30) + 1em);
     }
 
-    &[lnf*="tight"][direction="vertical"][controls] {
+    &[lnf*='tight'][direction='vertical'][controls] {
         padding-top: calc(sugar.margin(30) + 1em);
         padding-bottom: calc(sugar.margin(30) + 1em);
-        
     }
-    &[lnf*="tight"][direction="vertical"][nav] {
+    &[lnf*='tight'][direction='vertical'][nav] {
         padding-right: calc(sugar.margin(30) + 1em);
     }
 
@@ -36,20 +34,23 @@ s-slider[lnf^="default"] {
 
     .s-slider__slides-wrapper {
         position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
-        border-radius: sugar.theme(ui.slider.borderRadius);
+        border-radius: sugar.border.radius(ui.slider.borderRadius);
     }
 
     .s-slider__slides {
         display: flex;
         flex-basis: 100%;
         user-select: none;
-        width: 100%; height: 100%;
+        width: 100%;
+        height: 100%;
     }
 
-    &[direction="vertical"] .s-slider__slides {
+    &[direction='vertical'] .s-slider__slides {
         flex-direction: column;
     }
 
@@ -61,7 +62,8 @@ s-slider[lnf^="default"] {
 
     .s-slider__nav {
         position: absolute;
-        top: calc(100% + sugar.margin(30)); left: 50%;
+        top: calc(100% + sugar.margin(30));
+        left: 50%;
         transform: translate(-50%);
         display: flex;
         gap: sugar.margin(10);
@@ -84,18 +86,19 @@ s-slider[lnf^="default"] {
             }
         }
     }
-    &[lnf*="contained"] .s-slider__nav {
+    &[lnf*='contained'] .s-slider__nav {
         top: auto;
         bottom: calc(sugar.margin(30) - 0.5em);
         transform: translate(-50%, -100%);
     }
-    &[direction="vertical"] .s-slider__nav {
-        top: 50%; left: calc(100% + sugar.margin(30));
+    &[direction='vertical'] .s-slider__nav {
+        top: 50%;
+        left: calc(100% + sugar.margin(30));
         transform: translate(0, -50%);
         flex-direction: column;
         gap: sugar.margin(10);
     }
-    &[lnf*="contained"][direction="vertical"] .s-slider__nav {
+    &[lnf*='contained'][direction='vertical'] .s-slider__nav {
         bottom: auto;
         left: auto;
         right: calc(sugar.margin(30));
@@ -104,28 +107,33 @@ s-slider[lnf^="default"] {
 
     .s-slider__progress {
         position: absolute;
-        bottom: sugar.margin(30); left: sugar.margin(30);
+        bottom: sugar.margin(30);
+        left: sugar.margin(30);
         right: sugar.margin(30);
         height: 0.5em;
-        border-radius: sugar.theme(ui.slider.borderRadius);
+        border-radius: sugar.border.radius(ui.slider.borderRadius);
         background: sugar.color(current, --alpha 0.3);
     }
     .s-slider__progress-bar {
         position: absolute;
-        top: 0; left: 0;
-        height: 100%; width: calc(100% / (var(--s-slider-total)) * (var(--s-slider-slide) + 1));
-        border-radius: sugar.theme(ui.slider.borderRadius);
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: calc(
+            100% / (var(--s-slider-total)) * (var(--s-slider-slide) + 1)
+        );
+        border-radius: sugar.border.radius(ui.slider.borderRadius);
         background: sugar.color(current);
         transition: sugar.theme(ui.slider.transition);
         /* transition: all var(--s-slider-slide-timer-total) linear; */
     }
 
     .s-slider__controls {
-
     }
     .s-slider__controls-next,
     .s-slider__controls-previous {
-        width: 1em; height: 1em;
+        width: 1em;
+        height: 1em;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -145,49 +153,53 @@ s-slider[lnf^="default"] {
     .s-slider__controls-next {
         left: calc(100% + sugar.margin(30));
     }
-    &[lnf*="contained"] .s-slider__controls-previous {
+    &[lnf*='contained'] .s-slider__controls-previous {
         left: calc(sugar.margin(30));
         transform: translate(0, -50%);
     }
-    &[lnf*="contained"] .s-slider__controls-next {
+    &[lnf*='contained'] .s-slider__controls-next {
         left: auto;
         right: calc(sugar.margin(30));
         transform: translate(0, -50%);
     }
 
-
-    &[direction="vertical"] .s-slider__controls-next {
-        left: 50%; top: calc(100% + sugar.margin(30));
+    &[direction='vertical'] .s-slider__controls-next {
+        left: 50%;
+        top: calc(100% + sugar.margin(30));
         transform: translate(-50%, 0) rotate(90deg);
     }
-    &[direction="vertical"] .s-slider__controls-previous {
-        left: 50%; bottom: calc(100% + sugar.margin(30));
+    &[direction='vertical'] .s-slider__controls-previous {
+        left: 50%;
+        bottom: calc(100% + sugar.margin(30));
         top: auto;
         transform: translate(-50%, 0) rotate(90deg);
     }
-    &[direction="vertical"][lnf*="contained"] .s-slider__controls-previous {
+    &[direction='vertical'][lnf*='contained'] .s-slider__controls-previous {
         top: calc(sugar.margin(30));
     }
-    &[direction="vertical"][lnf*="contained"] .s-slider__controls-next {
+    &[direction='vertical'][lnf*='contained'] .s-slider__controls-next {
         top: auto;
         bottom: calc(sugar.margin(30));
     }
 
-
     .s-slider__controls-next-arrow,
     .s-slider__controls-previous-arrow {
-        width: 1em; height: 1em;
+        width: 1em;
+        height: 1em;
         position: absolute;
-        top: 0; left: 0;
-        
+        top: 0;
+        left: 0;
+
         &:before,
         &:after {
             display: block;
             content: '';
             position: absolute;
-            top: calc(50% - 0.1em); left: 0;
+            top: calc(50% - 0.1em);
+            left: 0;
             background: sugar.color(current);
-            width: 100%; height: 0.2em;
+            width: 100%;
+            height: 0.2em;
         }
         &:before {
             transform-origin: 0 0;
@@ -201,6 +213,4 @@ s-slider[lnf^="default"] {
     .s-slider__controls-next-arrow {
         transform: rotate(180deg);
     }
-
-
 }

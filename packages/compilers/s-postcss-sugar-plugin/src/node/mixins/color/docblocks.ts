@@ -29,7 +29,7 @@ export { postcssSugarPluginDocblockColorsMixinInterface as interface };
 export default function ({ params, atRule, CssVars, replaceWith }) {
     const vars = new CssVars();
 
-    const colorsObj = __STheme.config('color');
+    const colorsObj = __STheme.get('color');
 
     const colors = Object.keys(colorsObj);
     colors.forEach((colorName) => {

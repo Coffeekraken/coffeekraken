@@ -6,13 +6,6 @@ import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
-class postcssSugarPluginClassesMixinInterface extends __SInterface {
-    static get _definition() {
-        return {};
-    }
-}
-export { postcssSugarPluginClassesMixinInterface as interface };
-
 /**
  * @name           classes
  * @namespace      node.mixins.classes
@@ -30,6 +23,26 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+class postcssSugarPluginClassesInterface extends __SInterface {
+    static get _definition() {
+        return {
+            ui: {
+                description:
+                    'Specify if you want the UI classes to be generated or not',
+                type: 'Boolean',
+                default: true,
+            },
+        };
+    }
+}
+
+export interface IPostcssSugarPluginClassesParams {
+    ui: boolean;
+}
+
+export { postcssSugarPluginClassesInterface as interface };
+
 export default async function ({
     params,
     atRule,
@@ -38,9 +51,11 @@ export default async function ({
     toCache,
     replaceWith,
 }) {
+    const finalParams: IPostcssSugarPluginClassesParams = {
+        ...params,
+    };
+
     const cssArray: string[] = [
-        '@sugar.reset;',
-        '@sugar.ui.classes;',
         '@sugar.typo.classes;',
         '@sugar.layout.classes;',
         '@sugar.clearfix.classes;',
@@ -81,7 +96,15 @@ export default async function ({
         '@sugar.components.classes;',
         '@sugar.whiteSpace.classes;',
     ];
+
+    if (finalParams.ui) {
+        cssArray.unshift('@sugar.ui.classes;');
+    }
+
+    cssArray.unshift('@sugar.reset;');
+
     const hash = `@sugar.classes.${__objectHash({
+        finalParams,
         css: cssArray,
         theme: __STheme.hash(),
     })}`;

@@ -32,7 +32,7 @@ class postcssSugarPluginClearfixInterface extends __SInterface {
             clearfix: {
                 type: 'String',
                 values: ['overflow', 'facebook', 'micro', 'after'],
-                default: __STheme.config('helpers.clearfix.default'),
+                default: __STheme.get('helpers.clearfix.default'),
             },
         };
     }

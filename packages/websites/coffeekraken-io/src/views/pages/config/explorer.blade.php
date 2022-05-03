@@ -72,6 +72,16 @@
                     </ol>
                 @endforeach
 
+            @else
+
+                <h1 class="s-typo:h1 s-mbe:30">
+                    No configuration selected
+                </h1>
+
+                <p class="s-typo:lead s-mbe:30">
+                    Please select a configuration from the sidemenu
+                </p>
+
             @endif
 
         </div>

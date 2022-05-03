@@ -34,10 +34,14 @@ if ($firstBlock->status == 'wip') {
 
                 @if (!count((array) $docblocks))
 
-                    <div class="s-typo:h1 s-mbs:50 s-mbe:30 s-tc:primary">
-                        No documentation found
-                    </div>
+                    <h1 class="s-typo:h1 s-mbe:30">
+                        No styleguide selected
+                    </h1>
 
+                    <p class="s-typo:lead s-mbe:30">
+                        Please select a styleguide from the sidemenu
+                    </p>
+                    
                 @else
 
                     @foreach ($docblocks as $docblock)

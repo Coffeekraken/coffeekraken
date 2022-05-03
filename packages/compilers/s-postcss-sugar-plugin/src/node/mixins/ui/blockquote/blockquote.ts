@@ -29,12 +29,12 @@ class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.blockquote.defaultStyle'),
+                default: __STheme.get('ui.blockquote.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square'],
-                default: __STheme.config('ui.blockquote.defaultShape'),
+                default: __STheme.get('ui.blockquote.defaultShape'),
             },
             scope: {
                 type: {
@@ -86,8 +86,8 @@ export default function ({
             if (finalParams.scope.indexOf('bare') !== -1) {
                 vars.push(`
                             display: block;
-                            padding-inline: sugar.theme(ui.blockquote.paddingInline);
-                            padding-block: sugar.theme(ui.blockquote.paddingBlock);
+                            padding-inline: sugar.padding(ui.blockquote.paddingInline);
+                            padding-block: sugar.padding(ui.blockquote.paddingBlock);
                     `);
             }
             if (finalParams.scope.indexOf('lnf') !== -1) {
@@ -113,7 +113,7 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.blockquote.borderRadius);
+                    border-radius: sugar.border.radius(ui.blockquote.borderRadius);
                 `);
                 break;
         }

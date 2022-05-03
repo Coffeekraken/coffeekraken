@@ -34,11 +34,11 @@ class postcssSugarPluginUiLoaderDropMixinInterface extends __SInterface {
             },
             duration: {
                 type: 'String',
-                default: __STheme.config('ui.loaderDrop.duration'),
+                default: __STheme.get('ui.loaderDrop.duration'),
             },
             easing: {
                 type: 'String',
-                default: __STheme.config('ui.loaderDrop.easing'),
+                default: __STheme.get('ui.loaderDrop.easing'),
             },
         };
     }

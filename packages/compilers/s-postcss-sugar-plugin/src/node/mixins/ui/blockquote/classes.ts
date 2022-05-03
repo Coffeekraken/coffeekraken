@@ -18,17 +18,17 @@ class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.blockquote.defaultStyle'),
+                default: __STheme.get('ui.blockquote.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.blockquote.defaultShape'),
+                default: __STheme.get('ui.blockquote.defaultShape'),
             },
             defaultColor: {
                 type: 'String',
-                values: Object.keys(__STheme.config('color')),
-                default: __STheme.config('ui.blockquote.defaultColor'),
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.blockquote.defaultColor'),
             },
             scope: {
                 type: {
@@ -343,7 +343,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 blockquote, .s-blockquote {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.config('ui.blockquote.rhythmVertical'),
+                        __STheme.get('ui.blockquote.rhythmVertical'),
                     )}
                 } 
             }

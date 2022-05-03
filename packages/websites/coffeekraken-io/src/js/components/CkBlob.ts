@@ -27,6 +27,7 @@ import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
 import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
 import { EffectComposer } from './lib/three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from './lib/three/examples/jsm/postprocessing/RenderPass.js';
+import __STheme from '@coffeekraken/s-theme';
 
 interface IFlyingCoffee {
     grain: any;
@@ -65,6 +66,8 @@ export default class CKBlob extends __SLitComponent {
 
     _postprocessing = {};
 
+    _$html = document.querySelector('html');
+
     async firstUpdated() {
         this._scene = new THREE.Scene();
         this._camera = new THREE.PerspectiveCamera(
@@ -74,6 +77,38 @@ export default class CKBlob extends __SLitComponent {
             10000,
         );
         this._camera.position.z = 60;
+
+        // theme change
+        document.addEventListener('s-theme.change', (e) => {
+            const newBlob = new CKBlob();
+            this.after(newBlob);
+            this.remove();
+        });
+
+        setInterval(() => {
+            this._isDark = this._$html
+                .getAttribute('theme')
+                ?.toString()
+                .includes('dark');
+        }, 200);
+
+        this._theme = __STheme.getCurrentTheme();
+        this._colors = {
+            accent: this._theme.getColor('accent').toHex(),
+            complementary: this._theme.getColor('complementary').toHex(),
+        };
+        let saveTimeout;
+        this._theme.on('update', (data) => {
+            if (data.dotPath.includes('color.accent')) {
+                this._colors.accent = data.value;
+            } else if (data.dotPath.includes('color.complementary')) {
+                this._colors.complementary = data.value;
+            }
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                this._theme.save();
+            }, 1000);
+        });
 
         this.ENTIRE_SCENE = 0;
         this.BLOOM_SCENE = 1;
@@ -140,9 +175,6 @@ export default class CKBlob extends __SLitComponent {
         light.shadow.camera.top = 50;
         light.shadow.camera.bottom = -50;
 
-        // sphere
-        const sphere = await this.createSphere();
-
         // grains
         await this.addGrains();
 
@@ -170,19 +202,6 @@ export default class CKBlob extends __SLitComponent {
         //Create a helper for the shadow camera (optional)
         const helper = new THREE.CameraHelper(light.shadow.camera);
 
-        // const pointsSphere1 = this.createPointsSphere(
-        //     this._isDark ? 0xffffff : 0x000000,
-        //     0,
-        //     0.1,
-        // );
-        // pointsSphere1.scale.set(9, 9, 9);
-        // const pointsSphere2 = this.createPointsSphere(0x7043ff, 0, 0.3);
-        // pointsSphere2.scale.set(7.5, 7.5, 7.5);
-        // const pointsSphere3 = this.createPointsSphere(0xffffff, 0, 0.1);
-        // pointsSphere3.scale.set(9, 9, 9);
-
-        // this._oceanWaves();
-
         this._planePoints = this.createPlanePoints(0x212728);
 
         this._planePointsLight = this.createPlanePoints(0x212728, 1, '6.0');
@@ -190,17 +209,12 @@ export default class CKBlob extends __SLitComponent {
 
         // this._pointSpheres = [pointsSphere1];
 
-        if (this._isDark) {
-        }
         this._scene.add(backLight);
         this._scene.add(light);
         this._scene.add(ambientLight);
-        // this._scene.add(sphere);
-        // this._pointSpheres.forEach((s) => this._scene.add(s));
-
         this._scene.add(plane);
         this._scene.add(this._planePoints);
-        this._scene.add(this._planePointsLight);
+        // this._scene.add(this._planePointsLight);
         // this._scene.add(helper);
 
         this.initPostprocessing();
@@ -289,17 +303,12 @@ export default class CKBlob extends __SLitComponent {
         );
 
         const materials = [yellowMaterial, purpleMaterial];
-        const colors = [0xfabb03, 0xfabb03, 0x5101ff];
+        const colors = ['accent', 'complementary'];
 
         const count = 12;
 
         for (let i = 0; i < count; i++) {
-            let material = materials[0];
-            let color = colors[0];
-            if (Math.random() > 0.5) {
-                material = materials[1];
-                color = colors[1];
-            }
+            let material = materials[i % 2];
 
             const newGrain = grain.clone();
             newGrain.position.set(0, -0.6, -0.5);
@@ -309,8 +318,7 @@ export default class CKBlob extends __SLitComponent {
             newGrain.castShadow = true;
             // newGrain.receiveShadow = true;
 
-            let scale = 0.2 + Math.random();
-            // scale = 1;
+            let scale = 0.3 + Math.random();
 
             newGrain.traverse(function (child) {
                 if (child instanceof THREE.Mesh) {
@@ -331,7 +339,7 @@ export default class CKBlob extends __SLitComponent {
                 group,
                 scale,
                 speed,
-                color,
+                color: colors[i % 2],
                 trailLength: 15 + Math.round(Math.random() * 20),
                 localGroup,
                 trail: [],
@@ -347,48 +355,6 @@ export default class CKBlob extends __SLitComponent {
             this._grains.push(grainObj);
             this._scene.add(group);
         }
-    }
-    async createSphere() {
-        let texture;
-        let matSettings;
-        if (this._isDark) {
-            texture = await this.loadTexture(
-                `${__SSugarConfig.get('serve.img.url')}/3d/ck-texture.jpg`,
-            );
-            matSettings = {
-                metalness: 0,
-                roughness: 0.6,
-                color: 0xffffff,
-            };
-        } else {
-            texture = await this.loadTexture(
-                `${__SSugarConfig.get(
-                    'serve.img.url',
-                )}/3d/ck-texture-light.jpg`,
-            );
-            matSettings = {
-                // refractionRatio: 0.2,
-                // flatShading: true,
-                // emissiveIntensity: 1,
-                metalness: 0,
-                roughness: 0.6,
-                color: 0xffffff,
-            };
-        }
-        const ballMaterial = {
-            ...matSettings,
-            map: texture,
-            // envMap: this._envMap.texture,
-        };
-
-        const ballMat = new THREE.MeshStandardMaterial(ballMaterial);
-        const geom = new THREE.SphereGeometry(1, 64, 64);
-
-        this._sphere = new THREE.Mesh(geom, ballMat);
-        this._sphere.castShadow = true;
-        this._sphere.scale.set(4, 4, 4);
-
-        return this._sphere;
     }
 
     createPlanePoints(color, alphaVariation, pointSize = '8.0') {
@@ -454,6 +420,8 @@ export default class CKBlob extends __SLitComponent {
             transparent: true,
         });
 
+        this._pointsShadedMaterial = shaderMaterial;
+
         const cloud = new THREE.Points(plane.geometry, shaderMaterial);
 
         cloud._object = plane;
@@ -464,63 +432,6 @@ export default class CKBlob extends __SLitComponent {
         return cloud;
     }
 
-    createPointsSphere(color, minAlpha = 0, maxAlpha = 1) {
-        const numVertices = this._sphere.geometry.attributes.position.count;
-        var alphas = new Float32Array(numVertices * 1); // 1 values per vertex
-
-        for (var i = 0; i < numVertices; i++) {
-            // set alpha randomly
-            alphas[i] =
-                minAlpha / (this._isDark ? 2 : 5) +
-                (Math.random() * maxAlpha) / (this._isDark ? 2 : 5);
-        }
-
-        const vertexShader = `attribute float alpha;
-    varying float vAlpha;
-
-    void main() {
-      vAlpha = alpha;
-      vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-      gl_PointSize = 2.0;
-      gl_Position = projectionMatrix * mvPosition;
-    }`,
-            fragmentShader = `uniform vec3 color;
-    varying float vAlpha;
-
-    void main() {
-      gl_FragColor = vec4( color, vAlpha );
-    }`;
-
-        const ballMat = new THREE.MeshBasicMaterial({
-            color: this._isDark ? 0xffffff : 0x000000,
-        });
-
-        const geom = new THREE.SphereGeometry(1, 32, 32);
-
-        const sphere = new THREE.Mesh(geom, ballMat);
-
-        sphere.geometry.setAttribute(
-            'alpha',
-            new THREE.BufferAttribute(alphas, 1),
-        );
-        // point cloud material
-        var shaderMaterial = new THREE.ShaderMaterial({
-            uniforms: {
-                color: { value: new THREE.Color(color) },
-            },
-            vertexShader,
-            fragmentShader,
-            transparent: true,
-        });
-
-        const cloud = new THREE.Points(sphere.geometry, shaderMaterial);
-
-        // this._scene.add(sphere);
-
-        cloud._object = sphere;
-
-        return cloud;
-    }
     loadTexture(path) {
         return new Promise((resolve) => {
             new THREE.TextureLoader().load(path, (texture) => {
@@ -564,16 +475,20 @@ export default class CKBlob extends __SLitComponent {
                 )}/3d/coffeeGrain/coffeeGrainBumpMap.jpg`,
             );
 
+            const colors = [0xfabb03, 0xfabb03, 0x5101ff];
+
+            let color = colors[Math.floor(Math.random() * colors.length)];
+
             let grainMat = new THREE.MeshStandardMaterial({
                 metalness: 0,
                 roughness: 1,
-                color: 0xffffff,
+                color,
                 // displacementMap: bumpMap,
                 // normalMap: bumpMap,
                 bumpMap: bumpMap,
                 bumpScale: 0.1,
                 // normalScale: new THREE.Vector2(0.15, 2),
-                map: texture,
+                // map: texture,
                 // emissive: 0xffffff,
                 // emissiveIntensity: 0.5,
                 // envMap: this._envMap.texture,
@@ -598,33 +513,7 @@ export default class CKBlob extends __SLitComponent {
             );
         });
     }
-    // updateGeometryOf(object, k = 0.6, amount = 0.0005) {
-    //     if (object._object) object = object._object;
 
-    //     var time = performance.now() * amount;
-    //     var positions = object.geometry.attributes.position.array;
-    //     for (var i = 0; i < positions.length; i += 3) {
-    //         const v = new THREE.Vector3(
-    //             positions[i],
-    //             positions[i + 1],
-    //             positions[i + 2],
-    //         );
-
-    //         v.normalize().multiplyScalar(
-    //             1 +
-    //                 100 *
-    //                     this._perlin.perlin3(v.x * k + time, v.y * k, v.z * k),
-    //         );
-
-    //         positions[i] = v.x;
-    //         positions[i + 1] = v.y;
-    //         positions[i + 2] = v.z;
-    //     }
-
-    //     object.geometry.computeVertexNormals();
-    //     object.geometry.normalsNeedUpdate = true;
-    //     object.geometry.verticesNeedUpdate = true;
-    // }
     loadEnvMap() {
         return new Promise((resolve) => {
             let envmaploader = new THREE.PMREMGenerator(this._renderer);
@@ -647,19 +536,6 @@ export default class CKBlob extends __SLitComponent {
         this._updatePlaneWave(this._planePoints);
         this._updatePlaneWave(this._planePointsLight);
 
-        // this._pointSpheres.forEach((p) => {
-        //     this.updateGeometryOf(p, 8, 0.0001);
-        //     p.geometry.attributes.alpha.needsUpdate = true;
-        //     p.geometry.attributes.position.needsUpdate = true;
-        //     if (!p._speed) p._speed = Math.random() / 1000 / 8;
-        //     p.rotation.x -= p._speed;
-        //     p.rotation.y -= p._speed;
-        //     p.rotation.z -= p._speed;
-        // });
-        // this._sphere.rotation.x += 0.001;
-        // this._sphere.rotation.y += 0.003;
-        // this._sphere.rotation.z += 0.005;
-
         this._grains.forEach((grainObj) => {
             grainObj.group.rotation.x += grainObj.speed;
             grainObj.group.rotation.y += grainObj.speed;
@@ -667,6 +543,15 @@ export default class CKBlob extends __SLitComponent {
 
             if (!grainObj.localGroup.lastPositions)
                 grainObj.localGroup.lastPositions = [];
+
+            grainObj.grain.traverse((child) => {
+                if (child.material) {
+                    // console.log(grainObj.color);
+                    child.material.color.setHex(
+                        `0x${this._colors[grainObj.color].replace('#', '')}`,
+                    );
+                }
+            });
 
             const originalPosition = new THREE.Vector3();
             const newPosition = new THREE.Vector3();
@@ -686,52 +571,6 @@ export default class CKBlob extends __SLitComponent {
             // grainObj.grain.rotation.y = group.rotation.y;
             // grainObj.grain.rotation.z = group.rotation.z;
         });
-
-        // this._tuniform.time.value += 0.05;
-
-        // this._icons.forEach((icon) => {
-        //     this.updateGeometryOf(icon, 1, 0.001);
-        //     icon.geometry.attributes.position.needsUpdate = true;
-        //     if (!icon._speed) icon._speed = 0.003 + Math.random() / 100;
-        //     icon.rotation.x += icon._speed;
-        //     icon.rotation.y += icon._speed;
-        //     icon.rotation.z += icon._speed;
-        // });
-
-        // this._iconsGroups.forEach((group) => {
-        //     if (!group._speed) group._speed = 0.001 + Math.random() / 100 / 2;
-        //     group.rotation.x += group._speed;
-        //     group.rotation.y += group._speed;
-        //     group.rotation.z += group._speed;
-        // });
-
-        // this._grainsGroup.rotation.x += 0.005;
-        // this._grainsGroup.rotation.y += 0.005;
-        // this._grainsGroup.rotation.z += 0.005;
-
-        // for (let i = 0; i < this._grains.length; i++) {
-        //     const grain = this._grains[i];
-        //     grain.rotation.x += 0.005;
-        //     grain.rotation.y += 0.005;
-        //     grain.rotation.z += 0.005;
-        // }
-
-        // var alphas = this._cloud.geometry.attributes.alpha;
-        // alphas.needsUpdate = true; // important!
-
-        // var alphas1 = this._cloud1.geometry.attributes.alpha;
-        // alphas1.needsUpdate = true; // important!
-
-        // var count = alphas.count;
-        // for (var i = 0; i < count; i++) {
-        //     // dynamically change alphas
-        //     alphas.array[i] *= 0.95;
-        //     if (alphas.array[i] < 0.01) {
-        //         alphas.array[i] = 1.0;
-        //     }
-        // }
-
-        // this._directionalLight.needsUpdate = true;
 
         requestAnimationFrame(this.animate.bind(this));
         this._controls?.update?.();

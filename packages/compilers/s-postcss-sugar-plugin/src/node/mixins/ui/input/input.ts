@@ -31,16 +31,16 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.input.defaultStyle'),
+                default: __STheme.get('ui.input.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.input.defaultShape'),
+                default: __STheme.get('ui.input.defaultShape'),
             },
             outline: {
                 type: 'Boolean',
-                default: __STheme.config('ui.input.outline'),
+                default: __STheme.get('ui.input.outline'),
             },
             scope: {
                 type: {
@@ -137,7 +137,7 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.input.borderRadius);
+                    border-radius: sugar.border.radius(ui.input.borderRadius);
                 `);
                 break;
         }

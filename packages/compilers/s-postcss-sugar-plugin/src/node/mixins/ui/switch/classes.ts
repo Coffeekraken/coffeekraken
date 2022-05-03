@@ -18,12 +18,12 @@ class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.switch.defaultStyle') ?? 'solid',
+                default: __STheme.get('ui.switch.defaultStyle') ?? 'solid',
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.switch.defaultShape'),
+                default: __STheme.get('ui.switch.defaultShape'),
             },
             scope: {
                 type: {

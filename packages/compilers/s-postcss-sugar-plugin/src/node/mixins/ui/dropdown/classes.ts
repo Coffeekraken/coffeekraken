@@ -17,12 +17,12 @@ class postcssSugarPluginUiDropdownClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.dropdown.defaultStyle'),
+                default: __STheme.get('ui.dropdown.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.dropdown.defaultShape'),
+                default: __STheme.get('ui.dropdown.defaultShape'),
             },
             scope: {
                 type: {
@@ -119,7 +119,11 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${style} style ${
+                    finalParams.defaultStyle === style
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
             * <div class="s-dropdown-container">
             *   <button class="s-btn s-color:accent">
             *      Click me!
@@ -135,7 +139,11 @@ export default function ({
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape} style ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${shape} style ${
+                    finalParams.defaultShape === shape
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
             * <div class="s-dropdown-container">
             *   <button class="s-btn s-color:accent">
             *       Click me!

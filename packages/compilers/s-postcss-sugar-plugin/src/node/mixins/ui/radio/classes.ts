@@ -18,12 +18,12 @@ class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.radio.defaultStyle'),
+                default: __STheme.get('ui.radio.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill', 'circle'],
-                default: __STheme.config('ui.radio.defaultShape'),
+                default: __STheme.get('ui.radio.defaultShape'),
             },
             scope: {
                 type: {
@@ -351,7 +351,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 input[type="radio"], .s-radio {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.config('ui.radio.rhythmVertical'),
+                        __STheme.get('ui.radio.rhythmVertical'),
                     )}
                 } 
             }

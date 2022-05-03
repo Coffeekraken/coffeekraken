@@ -26,16 +26,16 @@ s-color-picker {
         left: auto;
     }
 
-    [dir="rtl"] & .pcr-app,
-    &[dir="rtl"] .pcr-app {
+    [dir='rtl'] & .pcr-app,
+    &[dir='rtl'] .pcr-app {
         right: auto;
         left: 0;
     }
-    
+
     .pickr {
         display: none;
     }
-        
+
     &:not([input]):not([button]) .s-color-picker {
         position: relative;
         display: inline-block;
@@ -43,10 +43,9 @@ s-color-picker {
 }
 
 s-color-picker:not([bare]) {
-
     .s-color-picker__button {
-        padding-inline: sugar.theme(ui.colorPicker.paddingInline);
-        padding-block: sugar.theme(ui.colorPicker.paddingBlock);
+        padding-inline: sugar.padding(ui.colorPicker.paddingInline);
+        padding-block: sugar.padding(ui.colorPicker.paddingBlock);
         cursor: pointer;
     }
 
@@ -60,20 +59,27 @@ s-color-picker:not([bare]) {
             border-bottom-left-radius: 0;
         }
     }
-    [dir="rtl"] &[button][input],
-    &[dir="rtl"][button][input] {
+    [dir='rtl'] &[button][input],
+    &[dir='rtl'][button][input] {
         .s-color-picker__button {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
-            border-top-left-radius: sugar.theme(ui.colorPicker.borderRadius);
-            border-bottom-left-radius: sugar.theme(ui.colorPicker.borderRadius);
+            border-top-left-radius: sugar.border.radius(
+                ui.colorPicker.borderRadius
+            );
+            border-bottom-left-radius: sugar.border.radius(
+                ui.colorPicker.borderRadius
+            );
         }
         .s-color-picker__input {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
-            border-top-right-radius: sugar.theme(ui.colorPicker.borderRadius);
-            border-bottom-right-radius: sugar.theme(ui.colorPicker.borderRadius);
+            border-top-right-radius: sugar.border.radius(
+                ui.colorPicker.borderRadius
+            );
+            border-bottom-right-radius: sugar.border.radius(
+                ui.colorPicker.borderRadius
+            );
         }
     }
 }
-

@@ -45,7 +45,9 @@ export default function ({
     const finalParams: IPostcssSugarPluginGapClassesParams = {
         ...params,
     };
-    const spacesKeys = __keysFirst(Object.keys(__STheme.config('space')), ['default']);
+    const spacesKeys = __keysFirst(Object.keys(__STheme.get('space')), [
+        'default',
+    ]);
 
     const vars = new CssVars();
 
@@ -69,11 +71,13 @@ export default function ({
         * @cssClass                 s-gap              Apply the default gap to any HTMLElement
         * @cssClass                s-gap:row          Apply the default row gap to any HTMLElement
         * @cssClass                s-gap:column          Apply the default column gap to any HTMLElement
-        ${spacesKeys.map(space => `
+        ${spacesKeys.map(
+            (space) => `
             * @cssClass                s-gap:${space}          Apply the ${space} gap to any HTMLElement
             * @cssClass                s-gap:row:${space}          Apply the ${space} row gap to any HTMLElement
             * @cssClass                s-gap:column:${space}          Apply the ${space} column gap to any HTMLElement
-        `)}
+        `,
+        )}
         * 
         * @example        html          Simple grid
         * <div class="s-flex s-gap:40">
@@ -87,8 +91,7 @@ export default function ({
     `,
     );
 
-    spacesKeys.forEach(space => {
-
+    spacesKeys.forEach((space) => {
         vars.comment(
             () => `/**
                 * @name          s-gap${space === 'default' ? '' : `:${space}`}
@@ -100,7 +103,9 @@ export default function ({
                 * This class allows you to apply the gap "${space}" styling to any HTMLElement
                 * 
                 * @example        html
-                * <div class="s-flex s-gap${space === 'default' ? '' : `:${space}`}">
+                * <div class="s-flex s-gap${
+                    space === 'default' ? '' : `:${space}`
+                }">
                 *   <div class="s-badge s-color:accent">Hello</div>
                 *   <div class="s-badge s-color:accent">Worl</div>
                 * </div>
@@ -110,13 +115,17 @@ export default function ({
                 */
             `,
         ).code(`
-                .s-gap${space === 'default' ? '' : `--${space}`}:not(.s-gap--column):not(.s-gap--row) {
-                    gap: sugar.space(${space});
+                .s-gap${
+                    space === 'default' ? '' : `--${space}`
+                }:not(.s-gap--column):not(.s-gap--row) {
+                    gap: sugar.margin(${space});
                 }`);
 
         vars.comment(
             () => `/**
-                * @name          s-gap:row${space === 'default' ? '' : `:${space}`}
+                * @name          s-gap:row${
+                    space === 'default' ? '' : `:${space}`
+                }
                 * @namespace          sugar.css.gep
                 * @type               CssClass
                 * @platform           css
@@ -125,7 +134,9 @@ export default function ({
                 * This class allows you to apply the row gap "${space}" styling to any HTMLElement
                 * 
                 * @example        html
-                * <div class="s-flex s-gap:row${space === 'default' ? '' : `:${space}`}">
+                * <div class="s-flex s-gap:row${
+                    space === 'default' ? '' : `:${space}`
+                }">
                 *   <div class="s-badge s-color:accent">Hello</div>
                 *   <div class="s-badge s-color:accent">Worl</div>
                 * </div>
@@ -136,12 +147,14 @@ export default function ({
             `,
         ).code(`
                 .s-gap--row.s-gap${space === 'default' ? '' : `--${space}`} {
-                    row-gap: sugar.space(${space});
+                    row-gap: sugar.margin(${space});
                 }`);
 
         vars.comment(
             () => `/**
-                * @name          s-gap:column${space === 'default' ? '' : `:${space}`}
+                * @name          s-gap:column${
+                    space === 'default' ? '' : `:${space}`
+                }
                 * @namespace          sugar.css.gep
                 * @type               CssClass
                 * @platform           css
@@ -150,7 +163,9 @@ export default function ({
                 * This class allows you to apply the column gap "${space}" styling to any HTMLElement
                 * 
                 * @example        html
-                * <div class="s-flex s-gap:column${space === 'default' ? '' : `:${space}`}">
+                * <div class="s-flex s-gap:column${
+                    space === 'default' ? '' : `:${space}`
+                }">
                 *   <div class="s-badge s-color:accent">Hello</div>
                 *   <div class="s-badge s-color:accent">Worl</div>
                 * </div>
@@ -161,9 +176,8 @@ export default function ({
             `,
         ).code(`
                 .s-gap--column.s-gap${space === 'default' ? '' : `--${space}`} {
-                    column-gap: sugar.space(${space});
+                    column-gap: sugar.margin(${space});
                 }`);
-
     });
 
     return vars;

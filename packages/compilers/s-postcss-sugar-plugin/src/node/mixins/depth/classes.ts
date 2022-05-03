@@ -45,7 +45,7 @@ export default function ({
         ...params,
     };
 
-    const depthsObj = __STheme.config('depth');
+    const depthsObj = __STheme.get('depth');
     const depthsArray = __keysFirst(Object.keys(depthsObj), ['default']);
 
     const vars = new CssVars();
@@ -73,7 +73,7 @@ export default function ({
                 return [
                     ` * @cssClass          s-depth:${depthName}      Apply the depth ${depthName} to any HTMLElement`,
                     ` * @cssClass          s-depth:text:${depthName}      Apply the text depth ${depthName} to any HTMLElement`,
-                    ` * @cssClass          s-depth:box:${depthName}      Apply the depth ${depthName} to any HTMLElement`
+                    ` * @cssClass          s-depth:box:${depthName}      Apply the depth ${depthName} to any HTMLElement`,
                 ].join('\n');
             })
             .join('\n')}
@@ -96,7 +96,9 @@ export default function ({
     depthsArray.forEach((depthName) => {
         vars.comment(
             () => `/**
-                * @name          s-depth:${depthName === 'default' ? '' : depthName}
+                * @name          s-depth:${
+                    depthName === 'default' ? '' : depthName
+                }
                 * @namespace          sugar.css.depth
                 * @type               CssClass
                 * @platform         css
@@ -105,7 +107,9 @@ export default function ({
                 * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any HTMLElement
                 * 
                 * @example        html
-                * <a class="s-btn s-btn--primary s-depth:${depthName === 'default' ? '' : depthName}">I'm a cool depth button</a>
+                * <a class="s-btn s-btn--primary s-depth:${
+                    depthName === 'default' ? '' : depthName
+                }">I'm a cool depth button</a>
                 */
                 `,
         ).code(`
@@ -118,7 +122,9 @@ export default function ({
     depthsArray.forEach((depthName) => {
         vars.comment(
             () => `/**
-                * @name          s-depth:text:${depthName === 'default' ? '' : depthName}
+                * @name          s-depth:text:${
+                    depthName === 'default' ? '' : depthName
+                }
                 * @namespace          sugar.css.depth
                 * @type               CssClass
                 * @platform         css
@@ -127,7 +133,9 @@ export default function ({
                 * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any text
                 * 
                 * @example        html
-                * <a class="s-btn s-btn--primary s-depth:text:${depthName === 'default' ? '' : depthName}">I'm a cool depth button</a>
+                * <a class="s-btn s-btn--primary s-depth:text:${
+                    depthName === 'default' ? '' : depthName
+                }">I'm a cool depth button</a>
                 */
                 `,
         ).code(`

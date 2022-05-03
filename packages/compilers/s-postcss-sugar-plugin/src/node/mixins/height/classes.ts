@@ -45,7 +45,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    const heightObj = __STheme.config('height');
+    const heightObj = __STheme.get('height');
 
     vars.push(`
       /**

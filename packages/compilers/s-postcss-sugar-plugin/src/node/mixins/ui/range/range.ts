@@ -31,12 +31,12 @@ class postcssSugarPluginUiRangeInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.range.defaultStyle'),
+                default: __STheme.get('ui.range.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pull', 'circle'],
-                default: __STheme.config('ui.range.defaultShape'),
+                default: __STheme.get('ui.range.defaultShape'),
             },
             scope: {
                 type: {
@@ -91,7 +91,7 @@ export default function ({
         --track-border-width: sugar.theme(ui.range.borderWidth);
         --track-border-color: sugar.color(current, border);
 
-        --track-radius: sugar.theme(ui.range.borderRadius);
+        --track-radius: sugar.border.radius(ui.range.borderRadius);
         --contrast: 5%;
 
         --ie-bottom-track-color: darken($track-color, $contrast);
@@ -281,8 +281,8 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    --thumb-radius: sugar.theme(ui.range.borderRadius);
-                    --track-radius: sugar.theme(ui.range.borderRadius);
+                    --thumb-radius: sugar.border.radius(ui.range.borderRadius);
+                    --track-radius: sugar.border.radius(ui.range.borderRadius);
                 `);
                 break;
         }

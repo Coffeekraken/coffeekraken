@@ -27,7 +27,7 @@ class postcssSugarPluginFontSizeInterface extends __SInterface {
         return {
             size: {
                 type: 'String|Number',
-                values: Object.keys(__STheme.config('font.size')),
+                values: Object.keys(__STheme.get('font.size')),
                 required: true,
             },
         };

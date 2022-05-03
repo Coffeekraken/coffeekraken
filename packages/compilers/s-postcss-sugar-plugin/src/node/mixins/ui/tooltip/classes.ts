@@ -18,12 +18,12 @@ class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.tooltip.defaultStyle'),
+                default: __STheme.get('ui.tooltip.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.tooltip.defaultShape'),
+                default: __STheme.get('ui.tooltip.defaultShape'),
             },
             scope: {
                 type: {
@@ -491,7 +491,7 @@ export default function ({
         }
     `,
     );
-   
+
     // left
     vars.comment(
         () => `/**

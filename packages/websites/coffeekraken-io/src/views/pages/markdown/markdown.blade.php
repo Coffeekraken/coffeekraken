@@ -48,7 +48,20 @@
 
             </nav>
 
-            <div s-page-transition-container="markdown" class="__content s-pb:50 s-rhythm:vertical s-format:text">
+            <div s-page-transition-container="markdown" class="__content s-pb:50 s-pis:50 s-rhythm:vertical s-format:text">
+                
+                @if (!$body)
+
+                 <h1 class="s-typo:h1 s-mbe:30">
+                    No documentation selected
+                </h1>
+
+                <p class="s-typo:lead s-mbe:30">
+                    Please select a documentation from the sidemenu
+                </p>
+
+                @endif
+                
                 {!! $body !!}
             </div>
 

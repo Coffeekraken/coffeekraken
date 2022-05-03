@@ -2,6 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __get from '@coffeekraken/sugar/shared/object/get';
+import __set from '@coffeekraken/sugar/shared/object/set';
 // import __micromatch from 'micromatch';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -9,12 +10,13 @@ import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
 import __objectHash from 'object-hash';
 import __isColor from '@coffeekraken/sugar/shared/is/color';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 /**
  * @name            SThemeBase
  * @namespace       shared
  * @type            Class
- * @extends         SClass
+ * @extends         SEventEmitter
  *
  * This class represent the sugar theme you've passed the name in the constructor.
  * Once you have an instance of this theme you will have access to a lot of utilities
@@ -168,9 +170,9 @@ export interface ISThemeColor {
     [key: string]: any;
 }
 
-export default class SThemeBase extends __SClass {
+export default class SThemeBase extends __SEventEmitter {
     /**
-     * @name        name
+     * @name        theme
      * @type        String
      *
      * Store the theme name that this instance represent
@@ -178,7 +180,7 @@ export default class SThemeBase extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    name: string;
+    theme: string;
 
     /**
      * @name        variant
@@ -192,6 +194,18 @@ export default class SThemeBase extends __SClass {
     variant: string;
 
     /**
+     * @name        _overridedConfig
+     * @type        Any
+     * @private
+     *
+     * Store the configs that have been overrided by using the `set` method
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    private _overridedConfig: any = {};
+
+    /**
      * @name            id
      * @type            String
      *
@@ -201,7 +215,7 @@ export default class SThemeBase extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get id(): String {
-        return `${this.name}-${this.variant}`;
+        return `${this.theme}-${this.variant}`;
     }
 
     /**
@@ -263,14 +277,13 @@ export default class SThemeBase extends __SClass {
      */
     static _instanciatedThemes: Record<string, SThemeBase> = {};
     static getTheme(theme?: string, variant?: string): SThemeBase {
-
         if (!theme) {
             theme = __SSugarConfig.get('theme.theme');
-        }   
+        }
         if (!variant) {
             variant = __SSugarConfig.get('theme.variant');
         }
-        
+
         if (this._instanciatedThemes[`${theme}-${variant}`])
             return this._instanciatedThemes[`${theme}-${variant}`];
 
@@ -279,7 +292,7 @@ export default class SThemeBase extends __SClass {
         if (!themes[`${theme}-${variant}`])
             throw new Error(
                 `<red>[${
-                    this.name
+                    this.theme
                 }]</red> Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists. Here's the available themes: <green>${Object.keys(
                     themes,
                 ).join(',')}</green>`,
@@ -306,7 +319,7 @@ export default class SThemeBase extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static hash(dotPath: string = ''): string {
-        const config = this.config(dotPath);
+        const config = this.get(dotPath);
         return __objectHash(config);
     }
 
@@ -328,7 +341,7 @@ export default class SThemeBase extends __SClass {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static cssVar(dotPath: string, fallback = true): string {
-        let fb = this.getTheme().config(dotPath);
+        let fb = this.getTheme().get(dotPath);
         if (!fallback || (typeof fb === 'string' && fb.includes(','))) fb = 0;
 
         const v = `var(${`--s-theme-${dotPath
@@ -346,22 +359,24 @@ export default class SThemeBase extends __SClass {
      * @platform            js
      * @platform            node
      * @static
-     * 
+     *
      * This static method allows you to built a media query by passing args like "mobile", ">tablet", etc...
-     * 
+     *
      * @param               {String}    query    The media query you want to build
      * @return              {String}                The builded media query (without brackets)
-     * 
+     *
      * @since               2.0.0
-     * 
+     *
      */
     static buildMediaQuery(queryString: string): string {
-        const currentQueryList: string[] = [this.config('media.defaultQuery'), 'and'];
+        const currentQueryList: string[] = [
+            this.get('media.defaultQuery'),
+            'and',
+        ];
 
-        const queryAr = queryString.split(' ').map(l => l.trim());
+        const queryAr = queryString.split(' ').map((l) => l.trim());
 
         queryAr.forEach((query, i) => {
-
             if (query === 'and' || query === 'or') {
                 currentQueryList.push(query);
                 return;
@@ -370,7 +385,7 @@ export default class SThemeBase extends __SClass {
             const firstChar = query.slice(0, 1);
             const firstTwoChar = query.slice(0, 2);
             const lastChar = query.slice(-1);
-            let action = this.config('media.defaultAction');
+            let action = this.get('media.defaultAction');
             let mediaName = query;
 
             if (lastChar === '-' || lastChar === '|')
@@ -392,11 +407,11 @@ export default class SThemeBase extends __SClass {
                 action = firstChar;
             }
 
-            const mediaQueryConfig = this.config('media.queries')[mediaName];
+            const mediaQueryConfig = this.get('media.queries')[mediaName];
             if (!mediaQueryConfig)
                 throw new Error(
                     `<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
-                        this.config('media.queries'),
+                        this.get('media.queries'),
                     )
                         .map((l) => `<green>${l}</green>`)
                         .join(',')}`,
@@ -417,14 +432,20 @@ export default class SThemeBase extends __SClass {
                     ].indexOf(prop) !== -1
                 ) {
                     if (action === '>') {
-                        if (prop === 'max-width' || prop === 'max-device-width') {
+                        if (
+                            prop === 'max-width' ||
+                            prop === 'max-device-width'
+                        ) {
                             let argName = 'min-width';
                             if (prop.includes('-device'))
                                 argName = 'min-device-width';
                             queryList.push(`(${argName}: ${value + 1}px)`);
                         }
                     } else if (action === '<') {
-                        if (prop === 'min-width' || prop === 'min-device-width') {
+                        if (
+                            prop === 'min-width' ||
+                            prop === 'min-device-width'
+                        ) {
                             let argName = 'max-width';
                             if (prop.includes('-device'))
                                 argName = 'max-device-width';
@@ -433,11 +454,17 @@ export default class SThemeBase extends __SClass {
                     } else if (action === '=') {
                         queryList.push(`(${prop}: ${value}px)`);
                     } else if (action === '>=') {
-                        if (prop === 'min-width' || prop === 'min-device-width') {
+                        if (
+                            prop === 'min-width' ||
+                            prop === 'min-device-width'
+                        ) {
                             queryList.push(`(${prop}: ${value}px)`);
                         }
                     } else if (action === '<=') {
-                        if (prop === 'max-width' || prop === 'max-device-width') {
+                        if (
+                            prop === 'max-width' ||
+                            prop === 'max-device-width'
+                        ) {
                             queryList.push(`(${prop}: ${value}px)`);
                         }
                     } else {
@@ -458,7 +485,6 @@ export default class SThemeBase extends __SClass {
         });
 
         return `@media ${currentQueryList.join(' ')}`;
-
     }
 
     /**
@@ -526,10 +552,12 @@ export default class SThemeBase extends __SClass {
             let color, modifier;
 
             // media queries
-            const medias = Object.keys(this.config('media.queries'));
+            const medias = Object.keys(this.get('media.queries'));
             if (medias.includes(originalProp)) {
                 propsStack.push(`@sugar.media(${prop.replace(/^@/, '')}) {`);
-                propsStack.push(this.jsObjectToCssProperties(value, finalSettings));
+                propsStack.push(
+                    this.jsObjectToCssProperties(value, finalSettings),
+                );
                 propsStack.push(`}`);
             } else {
                 switch (prop) {
@@ -576,7 +604,9 @@ export default class SThemeBase extends __SClass {
                         );
                         break;
                     case 'transition':
-                        propsStack.push(`transition: sugar.transition(${value});`);
+                        propsStack.push(
+                            `transition: sugar.transition(${value});`,
+                        );
                         break;
                     case 'margin-inline':
                     case 'margin-block':
@@ -621,6 +651,35 @@ export default class SThemeBase extends __SClass {
         return propsStack.join('\n');
     }
 
+    static jsConfigObjectToCssProperties(obj: any): string[] {
+        let vars: string[] = [];
+
+        for (let [key, value] of Object.entries(__flatten(obj))) {
+            if (__isColor(value)) {
+                const color = key.match(/^color\.([a-zA-Z0-9]+)\./);
+                if (!color?.[1]) continue;
+                const props = this.remapCssColor(color[1], <string>value);
+                vars = [...vars, ...props.vars];
+            }
+
+            const varKey = key
+                .replace(/\./gm, '-')
+                .replace(/:/gm, '-')
+                .replace(/\?/gm, '')
+                .replace(/--/gm, '-');
+
+            let variable = `--s-theme-${varKey}`;
+
+            if (`${value}`.match(/:/)) {
+                vars.push(`${variable}: "${value}";`);
+            } else {
+                vars.push(`${variable}: ${value};`);
+            }
+        }
+
+        return vars;
+    }
+
     /**
      * @name                remapCssColor
      * @type                Function
@@ -640,7 +699,7 @@ export default class SThemeBase extends __SClass {
     static remapCssColor(from: string, to: string): ISThemeRemapColorResult {
         const result: ISThemeRemapColorResult = {
             vars: [],
-            properties: {}
+            properties: {},
         };
 
         if (__isColor(to)) {
@@ -649,20 +708,20 @@ export default class SThemeBase extends __SClass {
                 `--s-theme-color-${from}-h: ${color.h};`,
                 `--s-theme-color-${from}-s: ${color.s};`,
                 `--s-theme-color-${from}-l: ${color.l};`,
-                `--s-theme-color-${from}-a: ${color.a};`
+                `--s-theme-color-${from}-a: ${color.a};`,
             ];
             result.properties[`--s-theme-color-${from}-h`] = color.h;
             result.properties[`--s-theme-color-${from}-s`] = color.s;
             result.properties[`--s-theme-color-${from}-l`] = color.l;
             result.properties[`--s-theme-color-${from}-a`] = color.a;
         } else {
-
             const toColorName = to.split('-').slice(0, 1)[0],
                 fromColorName = from.split('-').slice(0, 1)[0];
             let toColorVariant = to.split('-').pop(),
                 fromColorVariant = from.split('-').pop();
             if (toColorName === toColorVariant) toColorVariant = undefined;
-            if (fromColorName === fromColorVariant) fromColorVariant = undefined;
+            if (fromColorName === fromColorVariant)
+                fromColorVariant = undefined;
 
             let fromVariable = `--s-theme-color-${fromColorName}`,
                 toVariable = `--s-theme-color-${toColorName}`;
@@ -674,15 +733,21 @@ export default class SThemeBase extends __SClass {
                             result.vars.push(
                                 `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
                             );
-                            result.properties[`${fromVariable}-saturation-offset`] = `var(${toVariable}-${colorObj.variant}-saturation-offset, 0)`;
+                            result.properties[
+                                `${fromVariable}-saturation-offset`
+                            ] = `var(${toVariable}-${colorObj.variant}-saturation-offset, 0)`;
                             result.vars.push(
                                 `${fromVariable}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
                             );
-                            result.properties[`${fromVariable}-lightness-offset`] = `var(${toVariable}-${colorObj.variant}-lightness-offset, 0)`;
+                            result.properties[
+                                `${fromVariable}-lightness-offset`
+                            ] = `var(${toVariable}-${colorObj.variant}-lightness-offset, 0)`;
                             result.vars.push(
                                 `${fromVariable}-a: var(${toVariable}-a, 1);`,
                             );
-                            result.properties[`${fromVariable}-a`] = `var(${toVariable}-a, 1)`;
+                            result.properties[
+                                `${fromVariable}-a`
+                            ] = `var(${toVariable}-a, 1)`;
                         }
                     } else {
                         if (
@@ -690,25 +755,43 @@ export default class SThemeBase extends __SClass {
                             !colorObj.variant &&
                             colorObj.value.color
                         ) {
-                            result.vars.push(`${fromVariable}-h: var(${toVariable}-h);`);
-                            result.properties[`${fromVariable}-h`] = `var(${toVariable}-h)`;
-                            result.vars.push(`${fromVariable}-s: var(${toVariable}-s);`);
-                            result.properties[`${fromVariable}-s`] = `var(${toVariable}-s)`;
-                            result.vars.push(`${fromVariable}-l: var(${toVariable}-l);`);
-                            result.properties[`${fromVariable}-l`] = `var(${toVariable}-l)`;
+                            result.vars.push(
+                                `${fromVariable}-h: var(${toVariable}-h);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-h`
+                            ] = `var(${toVariable}-h)`;
+                            result.vars.push(
+                                `${fromVariable}-s: var(${toVariable}-s);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-s`
+                            ] = `var(${toVariable}-s)`;
+                            result.vars.push(
+                                `${fromVariable}-l: var(${toVariable}-l);`,
+                            );
+                            result.properties[
+                                `${fromVariable}-l`
+                            ] = `var(${toVariable}-l)`;
                         } else if (!colorObj.value.color) {
                             result.vars.push(
                                 `${fromVariable}-${colorObj.variant}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
                             );
-                            result.properties[`${fromVariable}-${colorObj.variant}-saturation-offset`] = `var(${toVariable}-${colorObj.variant}-saturation-offset, 0)`;
+                            result.properties[
+                                `${fromVariable}-${colorObj.variant}-saturation-offset`
+                            ] = `var(${toVariable}-${colorObj.variant}-saturation-offset, 0)`;
                             result.vars.push(
                                 `${fromVariable}-${colorObj.variant}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
                             );
-                            result.properties[`${fromVariable}-${colorObj.variant}-lightness-offset`] = `var(${toVariable}-${colorObj.variant}-lightness-offset, 0)`;
+                            result.properties[
+                                `${fromVariable}-${colorObj.variant}-lightness-offset`
+                            ] = `var(${toVariable}-${colorObj.variant}-lightness-offset, 0)`;
                             result.vars.push(
                                 `${fromVariable}-a: var(${toVariable}-a, 1);`,
                             );
-                            result.properties[`${fromVariable}-a`] = `var(${toVariable}-a, 1)`;
+                            result.properties[
+                                `${fromVariable}-a`
+                            ] = `var(${toVariable}-a, 1)`;
                         }
                     }
                 }
@@ -740,8 +823,6 @@ export default class SThemeBase extends __SClass {
             throw new Error(
                 `Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists...`,
             );
-
-        // const themesConfig = themeInstance.themesConfig();
 
         let vars: string[] = [];
 
@@ -792,10 +873,7 @@ export default class SThemeBase extends __SClass {
         });
 
         // others than colors
-        const themeObjWithoutColors = Object.assign(
-            {},
-            themeInstance.config('.'),
-        );
+        const themeObjWithoutColors = Object.assign({}, themeInstance.get('.'));
         delete themeObjWithoutColors.color;
         const flattenedTheme = __flatten(themeObjWithoutColors);
 
@@ -822,7 +900,7 @@ export default class SThemeBase extends __SClass {
     }
 
     /**
-     * @name            config
+     * @name            get
      * @type            Function
      * @static
      *
@@ -834,9 +912,33 @@ export default class SThemeBase extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static config(dotPath: string, theme?: string, variant?: string): any {
+    static get(dotPath: string, theme?: string, variant?: string): any {
         const instance = this.getTheme(theme, variant);
-        return instance.config(dotPath);
+        return instance.get(dotPath);
+    }
+
+    /**
+     * @name            set
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to set values of the active theme config
+     *
+     * @param       {String}        dotPath           The dot path of the config you want to set
+     * @param       {any}         value             The value you want to set
+     * @return      {STheme}                        The current theme instance
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static set(
+        dotPath: string,
+        value: any,
+        theme?: string,
+        variant?: string,
+    ): any {
+        const instance = this.getTheme(theme, variant);
+        return instance.set(dotPath, value);
     }
 
     /**
@@ -852,12 +954,12 @@ export default class SThemeBase extends __SClass {
     constructor(theme?: string, variant?: string) {
         super({});
 
-        this.name = theme ?? __SSugarConfig.get('theme.theme');
+        this.theme = theme ?? __SSugarConfig.get('theme.theme');
         this.variant = variant ?? __SSugarConfig.get('theme.variant');
 
-        if (!__SSugarConfig.get(`theme.themes.${this.name}-${this.variant}`)) {
+        if (!__SSugarConfig.get(`theme.themes.${this.theme}-${this.variant}`)) {
             throw new Error(
-                `Sorry but the requested theme "<yellow>${this.name}-${this.variant}</yellow>" does not exists...`,
+                `Sorry but the requested theme "<yellow>${this.theme}-${this.variant}</yellow>" does not exists...`,
             );
         }
     }
@@ -877,7 +979,7 @@ export default class SThemeBase extends __SClass {
     }
 
     /**
-     * @name          config
+     * @name          get
      * @type          Function
      *
      * This method allows you to access a value of the current theme
@@ -891,9 +993,15 @@ export default class SThemeBase extends __SClass {
      */
     get _config() {
         // @ts-ignore
-        return __SSugarConfig.get('theme.themes')[this.id];
+        return Object.assign(
+            {},
+            __deepMerge(
+                __SSugarConfig.get('theme.themes')[this.id],
+                this._overridedConfig,
+            ),
+        );
     }
-    config(dotPath): any {
+    get(dotPath): any {
         const value = __get(this._config, dotPath);
         if (value === undefined) {
             throw new Error(
@@ -901,6 +1009,45 @@ export default class SThemeBase extends __SClass {
             );
         }
         return value;
+    }
+
+    /**
+     * @name            getOverridedConfig
+     * @type            any
+     *
+     * This method allows you to get the overrided config of the current theme.
+     * These configs are the ones that are overrided by the use of the `set` method.
+     *
+     * @return         {Any}                           The overrided config of the current theme
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getOverridedConfig(): any {
+        return this._overridedConfig;
+    }
+
+    /**
+     * @name            emitSavedEvent
+     * @type            Function
+     *
+     * This method simply emit a "saved" event on the theme instance with details like the overrifed config.
+     *
+     * @return      {STheme}                        The current theme instance
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    emitSavedEvent(): SThemeBase {
+        // emit event
+        // @ts-ignore
+        this.emit('saved', {
+            theme: this.theme,
+            variant: this.variant,
+            overridedConfig: Object.assign({}, this._overridedConfig),
+        });
+        // maintain chainability
+        return this;
     }
 
     /**
@@ -917,7 +1064,7 @@ export default class SThemeBase extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     hash(dotPath: string = ''): string {
-        const config = this.config(dotPath);
+        const config = this.get(dotPath);
         return __objectHash(config);
     }
 
@@ -934,6 +1081,78 @@ export default class SThemeBase extends __SClass {
      */
     themesConfig(): ISThemesConfig {
         return __SSugarConfig.get('theme');
+    }
+
+    /**
+     * @name            set
+     * @type            Function
+     *
+     * This method allows you to set a value of the current theme.
+     * Specify the value you want to set using the dotPath syntax like "color.accent.color", etc...
+     *
+     * @param       {String}        dotPath           The dot path of the config you want to set
+     * @param       {any}           value               The value you want to set
+     * @return      {STheme}                        The current theme instance
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    set(dotPath: string, value: any): SThemeBase {
+        // set the value in the orverrided config stack
+        __set(this._overridedConfig, dotPath, value);
+        // emit an "update" event
+        // @ts-ignore
+        this.emit('update', {
+            dotPath,
+            value,
+        });
+        // maintain chainability
+        return this;
+    }
+
+    /**
+     * @name            restore
+     * @type            Function
+     *
+     * This method allows you to restore some configs by merging the passed ones with the overrided configs.
+     *
+     * @param       {any}           configs             The configs you want to restore
+     * @return      {STheme}                        The current theme instance
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    restore(configs: any): SThemeBase {
+        // restoring the overrided values
+        this._overridedConfig = __deepMerge(
+            this._overridedConfig,
+            configs ?? {},
+        );
+        // emit an "update" event
+        // @ts-ignore
+        this.emit('restored', {
+            overridedConfigs: Object.assign({}, this._overridedConfig),
+        });
+        // maintain chainability
+        return this;
+    }
+
+    /**
+     * @name            clear
+     * @type            Function
+     *
+     * This method allows you to clear the overrided configs and restore the default ones.
+     *
+     * @return      {STheme}                        The current theme instance
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    clear(): SThemeBase {
+        // restoring the overrided values
+        this._overridedConfig = {};
+        // maintain chainability
+        return this;
     }
 
     /**
@@ -989,11 +1208,10 @@ export default class SThemeBase extends __SClass {
     async loopOnColors(
         callback: ISThemeLoopOnColorsCallback,
     ): Promise<boolean> {
-        const colorsObj = this.config('color');
+        const colorsObj = this.get('color');
         let triggeredStop = false;
 
         for (let [colorName, colorObj] of Object.entries(colorsObj)) {
-
             // if (triggeredStop) return;
             const colorObj = colorsObj[colorName];
 
@@ -1051,12 +1269,10 @@ export default class SThemeBase extends __SClass {
 
                 if (stateName === 'color') {
                 } else if (stateName.match(/^:/)) {
-                    for (let [variant, variantObj] of Object.entries(variantColorObj)) {
-
-                        const newColor = c.apply(
-                            variantObj,
-                            true,
-                        );
+                    for (let [variant, variantObj] of Object.entries(
+                        variantColorObj,
+                    )) {
+                        const newColor = c.apply(variantObj, true);
                         res = callback(<ISThemeLoopOnColorsColor>{
                             name: colorName,
                             state: state === 'default' ? '' : state,

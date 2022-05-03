@@ -48,7 +48,7 @@ export default function ({
         ...params,
     };
 
-    const ratioObj = __STheme.config('ratio');
+    const ratioObj = __STheme.get('ratio');
 
     const vars = new CssVars();
 

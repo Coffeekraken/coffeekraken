@@ -48,14 +48,12 @@ export default function ({
         ...params,
     };
 
-    const queries = __STheme.config('media.queries');
-    const states = __STheme.config('helpers.states');
+    const queries = __STheme.get('media.queries');
+    const states = __STheme.get('helpers.states');
 
     const vars = new CssVars();
 
-
-    states.forEach(state => {
-
+    states.forEach((state) => {
         vars.comment(
             () => `/**
             * @name          s-when:${state}
@@ -285,14 +283,12 @@ export default function ({
         `);
 
     // Queries
-    vars.comment(
-            () => ``,
-        ).code(`
+    vars.comment(() => ``).code(`
             .s-when--media {
                 display: none;
             }`);
 
-    Object.keys(queries).forEach(query => {
+    Object.keys(queries).forEach((query) => {
         vars.comment(
             () => `/**
             * @name          s-when:media:${query}

@@ -35,7 +35,7 @@ export default function ({
 
       @sugar.rhythm.vertical {
         ${__STheme.jsObjectToCssProperties(
-            __STheme.config('ui.terminal.rhythmVertical'),
+            __STheme.get('ui.terminal.rhythmVertical'),
         )}
     } 
 

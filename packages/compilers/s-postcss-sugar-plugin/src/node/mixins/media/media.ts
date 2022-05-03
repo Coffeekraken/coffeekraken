@@ -66,8 +66,7 @@ export default function ({
     postcssApi: any;
     registerPostProcessor: Function;
 }) {
-
-    const mediaConfig = __STheme.config('media');
+    const mediaConfig = __STheme.get('media');
 
     const queries: string[] = [];
 

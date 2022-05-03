@@ -17,11 +17,11 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
             },
             defaultStyle: {
                 type: 'String',
-                default: __STheme.config('ui.input.defaultStyle'),
+                default: __STheme.get('ui.input.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
-                default: __STheme.config('ui.input.defaultShape'),
+                default: __STheme.get('ui.input.defaultShape'),
             },
             scope: {
                 type: {
@@ -137,7 +137,7 @@ export default function ({
             .join('\n')}
         *
         * @example        html       Colors (non-exhaustive)
-        ${['main','accent','complementary','error']
+        ${['main', 'accent', 'complementary', 'error']
             .map((color) => {
                 return ` 
             *   <label class="s-label:responsive s-mbe:30">
@@ -149,7 +149,7 @@ export default function ({
             .join('\n')}
         *
         * @example        html       Scales (non-exhaustive)
-        ${['07','10','13','16']
+        ${['07', '10', '13', '16']
             .map((scale) => {
                 return ` 
             *   <label class="s-label:responsive s-mbe:30">

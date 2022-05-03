@@ -17,12 +17,12 @@ s-date-picker {
 
 .s-date-picker__input {
     flex-grow: 1;
-    padding-inline: sugar.theme(ui.datePicker.paddingInline);
-    padding-block: sugar.theme(ui.datePicker.paddingBlock);
+    padding-inline: sugar.padding(ui.datePicker.paddingInline);
+    padding-block: sugar.padding(ui.datePicker.paddingBlock);
 }
 .s-date-picker__button {
-    padding-inline: sugar.theme(ui.datePicker.paddingInline);
-    padding-block: sugar.theme(ui.datePicker.paddingBlock);
+    padding-inline: sugar.padding(ui.datePicker.paddingInline);
+    padding-block: sugar.padding(ui.datePicker.paddingBlock);
     cursor: pointer;
 }
 
@@ -66,7 +66,7 @@ s-date-picker:not([bare]) {
 }
 
 .s-date-picker__button {
-    @sugar.depth(sugar.theme.value(ui.form.depth));
+    @sugar.depth (sugar.theme.value(ui.form.depth));
 
     i {
         text-shadow: 0px 0px 3px sugar.color(current, --darken 10);

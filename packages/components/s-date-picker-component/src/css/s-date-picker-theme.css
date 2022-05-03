@@ -11,10 +11,10 @@
     background: sugar.color(main, surface);
     /* border: 1px solid sugar.color(current, border); */
     border: none;
-    @sugar.depth(sugar.theme.value(ui.datePicker.borderRadius));
-    border-radius: sugar.theme(ui.datePicker.borderRadius);
-    padding-inline: sugar.theme(ui.datePicker.paddingInline);
-    padding-block: sugar.theme(ui.datePicker.paddingBlock);
+    @sugar.depth (sugar.theme.value(ui.datePicker.depth));
+    border-radius: sugar.border.radius(ui.datePicker.borderRadius);
+    padding-inline: sugar.padding(ui.datePicker.paddingInline);
+    padding-block: sugar.padding(ui.datePicker.paddingBlock);
 }
 
 .s-pikaday .pika-label {
@@ -69,9 +69,9 @@
 
 .s-pikaday .pika-table {
     background: sugar.color(main, background);
-    border-radius: sugar.theme(ui.datePicker.borderRadius);
-    padding-inline: sugar.theme(ui.datePicker.paddingInline);
-    padding-block: sugar.theme(ui.datePicker.paddingBlock);
+    border-radius: sugar.border.radius(ui.datePicker.borderRadius);
+    padding-inline: sugar.padding(ui.datePicker.paddingInline);
+    padding-block: sugar.padding(ui.datePicker.paddingBlock);
 }
 
 .s-pikaday .pika-table th * {
@@ -82,8 +82,8 @@
 .s-pikaday .pika-button {
     background: sugar.color(main, background);
     color: sugar.color(main, text);
-    padding-inline: sugar.theme(ui.datePicker.paddingInline);
-    padding-block: sugar.theme(ui.datePicker.paddingBlock);
+    padding-inline: sugar.padding(ui.datePicker.paddingInline);
+    padding-block: sugar.padding(ui.datePicker.paddingBlock);
 }
 
 .s-pikaday .pika-week {

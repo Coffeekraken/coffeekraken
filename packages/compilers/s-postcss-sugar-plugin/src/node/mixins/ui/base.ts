@@ -47,8 +47,8 @@ export default function ({
         vars.push(`
             font-size: sugar.scalable(1rem);
             display: inline-block;
-            padding-inline: sugar.theme(ui.${finalParams.name}.paddingInline);
-            padding-block: sugar.theme(ui.${finalParams.name}.paddingBlock);
+            padding-inline: sugar.padding(ui.${finalParams.name}.paddingInline);
+            padding-block: sugar.padding(ui.${finalParams.name}.paddingBlock);
         `);
     }
 
@@ -61,9 +61,11 @@ export default function ({
             border: sugar.color(current, --alpha 0.5) solid sugar.theme(ui.${
                 finalParams.name
             }.borderWidth);
-            border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
+            border-radius: sugar.border.radius(ui.${
+                finalParams.name
+            }.borderRadius);
             transition: sugar.theme(ui.${finalParams.name}.transition);
-            @sugar.depth(${__STheme.config(`ui.${finalParams.name}.depth`)});
+            @sugar.depth(${__STheme.get(`ui.${finalParams.name}.depth`)});
             cursor: auto !important;
 
             &::placeholder {

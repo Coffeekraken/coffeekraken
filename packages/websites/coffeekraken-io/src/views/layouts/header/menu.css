@@ -1,12 +1,11 @@
 #header {
-
     .__nav {
         display: flex;
         user-select: none;
         flex-grow: 1;
         justify-content: space-evenly;
         text-align: center;
-            font-size: sugar.font.size(40);
+        font-size: sugar.font.size(40);
 
         .__main-link {
             & > *:first-child {
@@ -60,10 +59,10 @@
             border-radius: sugar.border.radius();
             @sugar.depth (10);
 
-            @sugar.media(>=wide) {
+            @sugar.media (>=wide) {
                 width: 1640px;
             }
-            @sugar.media(<=dwarf) {
+            @sugar.media (<=dwarf) {
                 --max-height: calc(100vh - 200px);
             }
 
@@ -71,7 +70,8 @@
                 width: 100vw;
                 height: 100vh;
                 position: fixed;
-                top: 160px; left: 0;
+                top: 160px;
+                left: 0;
                 transform: none;
                 flex-direction: column;
             }
@@ -100,7 +100,7 @@
             height: var(--max-height);
             padding: sugar.padding(50);
             position: relative;
-            @sugar.scrollbar ();
+            @sugar.scrollbar();
 
             background: linear-gradient(
                 -90deg,
@@ -129,7 +129,7 @@
 
             li {
                 padding: sugar.padding(20) sugar.padding(30);
-                border-radius: sugar.theme(ui.default.borderRadius);
+                border-radius: sugar.border.radius(ui.default.borderRadius);
                 cursor: pointer;
             }
 
@@ -158,7 +158,7 @@
                 transparent
             ) !important;
 
-            @sugar.scrollbar ();
+            @sugar.scrollbar();
 
             /* &:before {
                 content: '';
@@ -184,7 +184,7 @@
 
                 li {
                     padding: sugar.padding(20) sugar.padding(30);
-                    border-radius: sugar.theme(ui.default.borderRadius);
+                    border-radius: sugar.border.radius(ui.default.borderRadius);
                     cursor: pointer;
                     width: 50%;
 
@@ -194,7 +194,10 @@
                     }
 
                     &[actual-parent] {
-                        background-color: sugar.color(complementary, --alpha 0.8);
+                        background-color: sugar.color(
+                            complementary,
+                            --alpha 0.8
+                        );
                     }
                 }
             }
@@ -216,5 +219,4 @@
             @sugar.truncate (3);
         }
     }
-
 }

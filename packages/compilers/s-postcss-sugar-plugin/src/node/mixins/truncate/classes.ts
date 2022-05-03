@@ -26,7 +26,7 @@ class postcssSugarPluginRatioClassesInterface extends __SInterface {
         return {
             count: {
                 type: 'Number',
-                default: __STheme.config('helpers.truncate.count'),
+                default: __STheme.get('helpers.truncate.count'),
             },
         };
     }
@@ -81,7 +81,9 @@ export default function ({
         *
         ${[...Array(finalParams.count).keys()]
             .map((i) => {
-                return ` * @example          html        ${i + 1} ${i <= 1 ? 'line' : 'lines'}
+                return ` * @example          html        ${i + 1} ${
+                    i <= 1 ? 'line' : 'lines'
+                }
             *   <p class="s-typo:p s-truncate:${i + 1}">${__faker.lorem
                     .lines(finalParams.count + 5)
                     .split('\n')

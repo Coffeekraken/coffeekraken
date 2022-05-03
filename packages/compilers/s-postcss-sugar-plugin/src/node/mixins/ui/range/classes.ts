@@ -18,12 +18,12 @@ class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.range.defaultStyle'),
+                default: __STheme.get('ui.range.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill', 'circle'],
-                default: __STheme.config('ui.range.defaultShape'),
+                default: __STheme.get('ui.range.defaultShape'),
             },
             scope: {
                 type: {

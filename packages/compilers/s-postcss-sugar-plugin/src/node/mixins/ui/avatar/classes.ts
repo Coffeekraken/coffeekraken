@@ -38,20 +38,32 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.avatar.defaultStyle'),
+                default: __STheme.get('ui.avatar.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.avatar.defaultShape'),
+                default: __STheme.get('ui.avatar.defaultShape'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: [
+                    'bare',
+                    'lnf',
+                    'shape',
+                    'interactive',
+                    'notifications',
+                ],
+                default: [
+                    'bare',
+                    'lnf',
+                    'shape',
+                    'interactive',
+                    'notifications',
+                ],
             },
         };
     }
@@ -62,7 +74,7 @@ export interface IPostcssSugarPluginUiAvatarClassesParams {
     shapes: ('default' | 'square' | 'pill' | 'circle')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'pill' | 'circle';
-    scope: ('bare' | 'lnf' | 'shape')[];
+    scope: ('bare' | 'lnf' | 'shape' | 'interactive' | 'notifications')[];
 }
 
 export { postcssSugarPluginUiAvatarClassesInterface as interface };
@@ -131,62 +143,164 @@ export default function ({
         * 
         ${finalParams.styles.map((style) => {
             return ` * @example        html         ${style}
-                  *   <img class="s-avatar${
+                  *   <div class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20" src="https://picsum.photos/300/300?v=23" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20">
+                  *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-color:accent" src="https://picsum.photos/300/300?v=24" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20 s-color:accent">
+                  *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-color:complementary" src="https://picsum.photos/300/300?v=26" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20 s-color:complementary">
+                  *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-color:info" src="https://picsum.photos/300/300?v=21" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20 s-color:info">
+                  *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-color:success" src="https://picsum.photos/300/300?v=255" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20 s-color:success">
+                  *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-color:error" src="https://picsum.photos/300/300?v=2121" />`;
+                  } s-font:100 s-mie:20 s-color:error">
+                  *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>`;
         })}
         *
         ${finalParams.shapes.map((shape) => {
             return ` * @example        html         ${shape}
-                  *   <img class="s-avatar${
+                  *   <div class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20" src="https://picsum.photos/300/300?v=23" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20">
+                  *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-color:accent" src="https://picsum.photos/300/300?v=24" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20 s-color:accent">
+                  *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-color:complementary" src="https://picsum.photos/300/300?v=26" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20 s-color:complementary">
+                  *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-color:info" src="https://picsum.photos/300/300?v=21" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20 s-color:info">
+                  *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-color:success" src="https://picsum.photos/300/300?v=255" />
-                  *   <img class="s-avatar${
+                  } s-font:100 s-mie:20 s-color:success">
+                  *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>
+                  *   <div class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-color:error" src="https://picsum.photos/300/300?v=2121" />`;
+                  } s-font:100 s-mie:20 s-color:error">
+                  *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+                      Math.random() * 99999,
+                  )}" />
+                  * </div>`;
         })}
         * 
+        * @example       html         Notifications
+        * <div class="s-avatar s-font:100 s-mie:20" notifications="10">
+        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar s-font:100 s-mie:20 s-color:accent" notifications="10">
+        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar s-font:100 s-mie:20 s-color:complementary" notifications="10">
+        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar s-color:info s-font:100 s-mie:20" notifications>
+        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar s-color:success s-font:100 s-mie:20" notifications>
+        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar s-color:error s-font:100 s-mie:20" notifications>
+        *   <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * 
         * @example       html         Interactive
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20" src="https://picsum.photos/300/300?v=23223434" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:accent" src="https://picsum.photos/300/300?v=2333234234" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:complementary" src="https://picsum.photos/300/300?v=2113111" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:info" src="https://picsum.photos/300/300?v=26663332" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:success" src="https://picsum.photos/300/300?v=288333232" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:error" src="https://picsum.photos/300/300?v=23343222" />
+        * <div class="s-avatar:interactive s-font:100 s-mie:20">
+        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:accent">
+        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:complementary">
+        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:info">
+        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:success">
+        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
+        * <div class="s-avatar:interactive s-font:100 s-mie:20 s-color:error">
+        *    <img src="https://i.pravatar.cc/300?v=${Math.round(
+            Math.random() * 99999,
+        )}" />
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -211,7 +325,7 @@ export default function ({
        `,
         ).code(`
           .s-avatar {
-            @sugar.ui.avatar($scope: bare);
+            @sugar.ui.avatar($scope: 'bare,notifications');
           }
       `);
     }
@@ -238,7 +352,7 @@ export default function ({
             */`,
             ).code(`
             .s-avatar${style === finalParams.defaultStyle ? '' : `--${style}`} {
-                @sugar.ui.avatar($style: ${style}, $scope: lnf);
+                @sugar.ui.avatar($style: ${style}, $scope: 'lnf,notifications');
             }
         `);
         });

@@ -35,13 +35,13 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
                 type: 'String',
                 description: 'Specify the style you want for your tabs',
                 values: ['solid'],
-                default: __STheme.config('ui.tabs.defaultStyle'),
+                default: __STheme.get('ui.tabs.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 description: 'Specify the shape you want for your tabs',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.tabs.defaultShape'),
+                default: __STheme.get('ui.tabs.defaultShape'),
             },
             grow: {
                 type: 'Boolean',
@@ -59,7 +59,7 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
                 type: 'Boolean',
                 description:
                     'Specify if you want your tabs to have an outline on focus',
-                default: __STheme.config('ui.tabs.outline'),
+                default: __STheme.get('ui.tabs.outline'),
             },
             scope: {
                 type: {
@@ -147,8 +147,8 @@ export default function ({
 
           & > * {
             text-align: center;
-            padding-inline: sugar.theme(ui.tabs.paddingInline);
-            padding-block: sugar.theme(ui.tabs.paddingBlock);
+            padding-inline: sugar.padding(ui.tabs.paddingInline);
+            padding-block: sugar.padding(ui.tabs.paddingBlock);
             transition: sugar.theme(ui.tabs.transition);
             cursor: pointer;
             display: block;      
@@ -280,57 +280,57 @@ export default function ({
             default:
                 vars.push(`
 
-                border-radius: sugar.theme(ui.tabs.borderRadius);
+                border-radius: sugar.border.radius(ui.tabs.borderRadius);
 
                 & > *:first-child {
-                  border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
-                  border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius);
+                  border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius);
                   border-top-right-radius: 0;
                   border-bottom-right-radius: 0;
                 }
                 & > *:last-child {
                   border-top-left-radius: 0;
                   border-bottom-left-radius: 0;
-                  border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
-                  border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius);
+                  border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius);
                 }
 
                 [dir="rtl"] & > *:first-child,
                 &[dir="rtl"] > *:first-child {
                   border-top-left-radius: 0;
                   border-bottom-left-radius: 0;
-                  border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
-                  border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius);
+                  border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius);
                 }
                 [dir="rtl"] & > *:last-child,
                 &[dir="rtl"] > *:last-child {
-                  border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
-                  border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius);
+                  border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius);
                   border-top-right-radius: 0;
                   border-bottom-right-radius: 0;
                 }
 
                 & > *:first-child:last-child {
-                  border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
-                  border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
-                  border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
-                  border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                  border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+                  border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+                  border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+                  border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
                 }
               `);
 
                 if (finalParams.direction === 'vertical') {
                     vars.push(`
                     & > *:first-child {
-                      border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                      border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
                       border-bottom-left-radius: 0 !important;
-                      border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                      border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
                       border-bottom-right-radius: 0 !important;
                     }
                     & > *:last-child {
                       border-top-left-radius: 0 !important;
-                      border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                      border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
                       border-top-right-radius: 0 !important;
-                      border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                      border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
                     }
                   `);
                 }

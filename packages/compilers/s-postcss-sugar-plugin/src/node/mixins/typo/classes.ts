@@ -48,7 +48,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const typosObj = __STheme.config('typo');
+    const typosObj = __STheme.get('typo');
 
     vars.comment(
         () => `

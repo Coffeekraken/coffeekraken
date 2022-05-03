@@ -48,7 +48,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const paddingsObj = __STheme.config('padding');
+    const paddingsObj = __STheme.get('padding');
     const paddingsKeys = __keysFirst(Object.keys(paddingsObj), ['default']);
 
     vars.comment(

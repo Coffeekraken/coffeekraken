@@ -27,9 +27,13 @@ class postcssSugarPluginBorderRadiusFunctionInterface extends __SInterface {
         return {
             radius: {
                 type: 'String',
-                values: Object.keys(__STheme.config('border.radius')),
+                values: Object.keys(__STheme.get('border.radius')),
                 default: 'default',
                 required: true,
+            },
+            scalable: {
+                type: 'Boolean',
+                default: __STheme.get('scalable.padding'),
             },
         };
     }
@@ -38,6 +42,7 @@ export { postcssSugarPluginBorderRadiusFunctionInterface as interface };
 
 export interface IPostcssSugarPluginBorderRadiusFunctionParams {
     radius: string;
+    scalable: boolean;
 }
 
 export default function ({
@@ -47,17 +52,41 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginBorderRadiusFunctionParams = {
         radius: '',
+        scalable: true,
         ...params,
     };
 
-    const radius = finalParams.radius;
+    let radiuses = finalParams.radius.split(' ').map((s) => {
+        let registeredValue,
+            factor = '';
 
-    if (__STheme.config('border.radius')[radius] === undefined) return radius;
+        // try to get the padding with the pased
+        try {
+            registeredValue = __STheme.get(`border.radius.${s}`);
+        } catch (e) {}
 
-    const radiuses = radius.split(' ').map((s) => {
-        return `var(${`--s-theme-border-radius-${s}`}) ${
-            finalParams.radius !== 'default' ? '!important' : ''
-        }`;
+        // default return simply his value
+        if (s === 'default') {
+            // @ts-ignore
+            factor = '1';
+        } else if (registeredValue !== undefined) {
+            factor = `sugar.theme(border.radius.${s}, ${finalParams.scalable})`;
+        } else if (
+            isNaN(parseFloat(s)) &&
+            s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
+        ) {
+            // support dotPath
+            factor = `sugar.theme(${s}, ${finalParams.scalable})`;
+        } else if (!isNaN(parseFloat(s))) {
+            // support simple number
+            factor = `${s}`;
+        } else {
+            throw new Error(
+                `<yellow>[s-postcss-sugar-plugin]</yellow> Padding "<cyan>${s}</cyan>" is not a valid value`,
+            );
+        }
+        // generate css value
+        return `calc(sugar.theme(border.radius.default) * ${factor})`;
     });
 
     return radiuses.join(' ');

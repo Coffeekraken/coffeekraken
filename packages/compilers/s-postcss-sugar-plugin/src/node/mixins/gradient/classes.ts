@@ -173,9 +173,9 @@ export default function ({
           .s-gradient--${name} {
               @sugar.gradient(
                   $start: ${name},
-                  $end: ${name}--${__STheme.config('gradient.defaultVariant')},
-                  $type: ${__STheme.config('gradient.defaultType')},
-                  $angle: ${__STheme.config('gradient.defaultAngle')}
+                  $end: ${name}--${__STheme.get('gradient.defaultVariant')},
+                  $type: ${__STheme.get('gradient.defaultType')},
+                  $angle: ${__STheme.get('gradient.defaultAngle')}
               );
           }
       `);

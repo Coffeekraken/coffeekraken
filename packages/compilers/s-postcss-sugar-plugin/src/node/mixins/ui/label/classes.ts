@@ -13,7 +13,7 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['inline', 'block', 'float'],
-                default: __STheme.config('ui.label.defaultStyle'),
+                default: __STheme.get('ui.label.defaultStyle'),
             },
             scope: {
                 type: {

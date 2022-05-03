@@ -7,11 +7,11 @@ class postcssUiFiltrableInputInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid', 'gradient', 'outline', 'text'],
-                default: __STheme.config('ui.button.defaultStyle'),
+                default: __STheme.get('ui.button.defaultStyle'),
             },
             outline: {
                 type: 'Boolean',
-                default: __STheme.config('ui.button.outline'),
+                default: __STheme.get('ui.button.outline'),
             },
             scope: {
                 type: {
@@ -64,7 +64,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiFiltrableInputParams = {
-        style: __STheme.config('ui.button.defaultStyle'),
+        style: __STheme.get('ui.button.defaultStyle'),
         outline: true,
         scope: ['bare', 'lnf'],
         ...params,
@@ -104,13 +104,13 @@ export default function ({
 
                 .s-filtrable-input__dropdown {
                     background-color: sugar.color(secondary, background);
-                    border-radius: sugar.theme(ui.filtrableInput.borderRadius);
+                    border-radius: sugar.border.radius(ui.filtrableInput.borderRadius);
                 }
 
                 .s-filtrable-input__list-item {
                     background-color: sugar.color(secondary, surface);  
-                    padding-inline: sugar.theme(ui.filtrableInput.paddingInline);
-                    padding-block: sugar.theme(ui.filtrableInput.paddingBlock);
+                    padding-inline: sugar.padding(ui.filtrableInput.paddingInline);
+                    padding-block: sugar.padding(ui.filtrableInput.paddingBlock);
                     border-top: 1px solid sugar.color(secondary, surface, --darken 5);
 
                     &:hover,

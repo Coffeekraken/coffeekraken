@@ -17,12 +17,12 @@ class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.select.defaultStyle'),
+                default: __STheme.get('ui.select.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.select.defaultShape'),
+                default: __STheme.get('ui.select.defaultShape'),
             },
             scope: {
                 type: {
@@ -424,7 +424,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 select, .s-select {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.config('ui.select.rhythmVertical'),
+                        __STheme.get('ui.select.rhythmVertical'),
                     )}
                 } 
             }

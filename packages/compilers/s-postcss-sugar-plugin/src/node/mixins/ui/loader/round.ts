@@ -34,11 +34,11 @@ class postcssSugarPluginUiloaderRoundMixinInterface extends __SInterface {
             },
             duration: {
                 type: 'String',
-                default: __STheme.config('ui.loaderRound.duration'),
+                default: __STheme.get('ui.loaderRound.duration'),
             },
             easing: {
                 type: 'String',
-                default: __STheme.config('ui.loaderRound.easing'),
+                default: __STheme.get('ui.loaderRound.easing'),
             },
         };
     }

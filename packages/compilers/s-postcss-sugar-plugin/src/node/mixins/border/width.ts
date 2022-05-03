@@ -31,7 +31,7 @@ class postcssSugarPluginBorderwidthMixinInterface extends __SInterface {
             width: {
                 type: 'Number|String',
                 required: true,
-                default: __STheme.config('border.width.default'),
+                default: __STheme.get('border.width.default'),
             },
         };
     }

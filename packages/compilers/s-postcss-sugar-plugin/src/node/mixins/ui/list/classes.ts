@@ -13,7 +13,7 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['dl', 'ul', 'ol', 'icon'],
-                default: __STheme.config('ui.list.defaultStyle') ?? 'dl',
+                default: __STheme.get('ui.list.defaultStyle') ?? 'dl',
             },
             scope: {
                 type: {
@@ -414,7 +414,7 @@ export default function ({
                 ul, .s-list--ul,
                 ol, .s-list--ol {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.config('ui.list.rhythmVertical'),
+                        __STheme.get('ui.list.rhythmVertical'),
                     )}
                 } 
             }

@@ -31,7 +31,7 @@ class postcssSugarPluginBorderRadiusMixinInterface extends __SInterface {
             radius: {
                 type: 'Number|String',
                 required: true,
-                default: __STheme.config('border.radius.default'),
+                default: __STheme.get('border.radius.default'),
             },
         };
     }

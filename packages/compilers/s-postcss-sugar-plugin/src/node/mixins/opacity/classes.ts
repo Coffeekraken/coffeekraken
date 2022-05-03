@@ -46,7 +46,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const opacityObj = __STheme.config('opacity');
+    const opacityObj = __STheme.get('opacity');
 
     Object.keys(opacityObj).forEach((opacity) => {
         const opacityCls = `s-opacity:${opacity}`;

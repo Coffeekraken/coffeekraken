@@ -30,7 +30,7 @@ class postcssSugarPluginUiListInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['dl', 'ul', 'ol', 'icon'],
-                default: __STheme.config('ui.list.defaultStyle'),
+                default: __STheme.get('ui.list.defaultStyle'),
             },
             scope: {
                 type: {
@@ -151,7 +151,7 @@ export default function ({
                 vars.push(`
                     & > * {
                         ${bulletSelector} {
-                            content: "${__STheme.config('ui.list.bulletChar')}";
+                            content: "${__STheme.get('ui.list.bulletChar')}";
                             margin-top: 0.25em;
                             font-size: 0.7em;
                         }

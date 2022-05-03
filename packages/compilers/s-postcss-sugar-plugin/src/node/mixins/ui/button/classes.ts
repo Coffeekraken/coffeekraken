@@ -18,12 +18,12 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid', 'gradient', 'outline', 'text'],
-                default: __STheme.config('ui.button.defaultStyle') ?? 'solid',
+                default: __STheme.get('ui.button.defaultStyle') ?? 'solid',
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.button.defaultShape'),
+                default: __STheme.get('ui.button.defaultShape'),
             },
             scope: {
                 type: {
@@ -118,7 +118,11 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${style} style ${
+                    finalParams.defaultStyle === style
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20 s-mbe:20"><span>Click me!</span></a>
@@ -151,7 +155,11 @@ export default function ({
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape} shape ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${shape} shape ${
+                    finalParams.defaultShape === shape
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20 s-mbe:20">Click me!</a>
@@ -410,7 +418,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 button, .s-btn {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.config('ui.button.rhythmVertical'),
+                        __STheme.get('ui.button.rhythmVertical'),
                     )}
                 } 
             }

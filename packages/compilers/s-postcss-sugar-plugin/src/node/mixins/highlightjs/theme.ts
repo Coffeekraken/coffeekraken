@@ -50,9 +50,9 @@ export default function ({
     font-size: sugar.scalable(1rem);
     display: block;
     overflow: hidden;
-    padding: sugar.theme(ui.code.paddingBlock) sugar.theme(ui.code.paddingInline);
+    padding: sugar.padding(ui.code.paddingBlock) sugar.padding(ui.code.paddingInline);
     background-color: sugar.color(current, surface);
-    border-radius: sugar.theme(ui.code.borderRadius);
+    border-radius: sugar.border.radius(ui.code.borderRadius);
     line-height: 1.5 !important;
     color: sugar.color(current, text);
 
@@ -61,7 +61,7 @@ export default function ({
     }
 
     @sugar.media(mobile) {
-        padding: clamp(10px, calc(sugar.theme(ui.code.paddingBlock) * 0.5), 100px) clamp(10px, calc(sugar.theme(ui.code.paddingInline) * 0.5), 100px);
+        padding: clamp(10px, calc(sugar.padding(ui.code.paddingBlock) * 0.5), 100px) clamp(10px, calc(sugar.padding(ui.code.paddingInline) * 0.5), 100px);
         overflow: auto !important;
         white-space: pre !important;
         @sugar.scrollbar;

@@ -1,5 +1,5 @@
 .content {
-    padding-top: 60px;
+    padding-top: 80px;
     position: relative;
     z-index: 1;
 }
@@ -22,7 +22,7 @@
     transform: scale(2) translateX(-50%) translateY(-50%);
     overflow: hidden;
     opacity: 0.6;
-    transition: opacity .5s ease-out;
+    transition: opacity 0.5s ease-out;
 
     @sugar.theme.when dark {
         background-image: url('/dist/img/welcome/welcome-bg-dark-01.jpg');
@@ -41,11 +41,11 @@
 .scrolled .bkg {
     opacity: 0.05;
 }
-[s-sugar]:not(#homepage) ,
+[s-sugar]:not(#homepage),
 .scrolled {
     @sugar.theme.when dark {
         .bkg {
             opacity: 0.05;
-    }
+        }
     }
 }

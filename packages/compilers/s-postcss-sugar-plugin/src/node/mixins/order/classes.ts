@@ -45,7 +45,7 @@ export default function ({
         ...params,
     };
 
-    const count = __STheme.config('helpers.order.count');
+    const count = __STheme.get('helpers.order.count');
     const vars = new CssVars();
 
     vars.comment(
@@ -65,9 +65,13 @@ export default function ({
         * @support      safari
         * @support      edge
         * 
-        ${Array.from(Array(count)).map((v,i) => `
+        ${Array.from(Array(count))
+            .map(
+                (v, i) => `
             * @cssClass             s-order-${i}        Apply the order ${i}
-        `).join('\n')}
+        `,
+            )
+            .join('\n')}
         * 
         * @example        html          Simple order
         * <div class="s-flex">
@@ -81,8 +85,7 @@ export default function ({
     `,
     );
 
-    Array.from(Array(count)).forEach((v,i) => {
-
+    Array.from(Array(count)).forEach((v, i) => {
         vars.comment(
             () => `/**
                 * @name          s-order:${i}
@@ -107,7 +110,6 @@ export default function ({
             .s-order--${i} {
                 order: ${i};
             }`);
-
     });
 
     return vars;

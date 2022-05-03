@@ -46,7 +46,7 @@ export default function ({
         ...params,
     };
 
-    const scaleObj = __STheme.config('ui.scrollbar');
+    const scaleObj = __STheme.get('ui.scrollbar');
 
     const vars = new CssVars();
 

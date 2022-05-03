@@ -31,12 +31,12 @@ class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.switch.defaultShape'),
+                default: __STheme.get('ui.switch.defaultShape'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.switch.defaultShape'),
+                default: __STheme.get('ui.switch.defaultShape'),
             },
             scope: {
                 type: {
@@ -247,11 +247,11 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.switch.borderRadius);
+                    border-radius: sugar.border.radius(ui.switch.borderRadius);
 
                     &:after,
                     &:before {
-                        border-radius: sugar.theme(ui.switch.borderRadius);
+                        border-radius: sugar.border.radius(ui.switch.borderRadius);
                     }
                 `);
                 break;

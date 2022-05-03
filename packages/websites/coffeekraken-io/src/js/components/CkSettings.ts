@@ -33,6 +33,7 @@ export default class CkSettings extends __SLitComponent {
         const $complementaryColorPicker = this.querySelector(
             '#setting-complementary-color',
         );
+        const $fontSizeRange = this.querySelector('#setting-font-size');
 
         $mainColorPicker.addEventListener('change', (e) => {
             this._theme.setColor('main', e.detail.hex);
@@ -41,14 +42,16 @@ export default class CkSettings extends __SLitComponent {
             this._theme.setColor('accent', e.detail.hex);
         });
         $complementaryColorPicker.addEventListener('change', (e) => {
-            console.log('com', e.detail.hex);
             this._theme.setColor('complementary', e.detail.hex);
         });
-    }
+        $fontSizeRange.addEventListener('change', (e) => {
+            this._theme.set('scale.default', `${e.target.value}`);
+        });
 
-    // _restoreState() {
-    //     const state = getState();
-    // }
+        // setTimeout(() => {
+        //     this._theme.set('padding.default', '8rem');
+        // }, 3000);
+    }
 
     toggleMode(dark) {
         this._state.darkMode = dark;
@@ -60,11 +63,6 @@ export default class CkSettings extends __SLitComponent {
         }
         setState(this._state);
     }
-    // _saveState() {
-    //     setState({
-    //         ...this._settings,
-    //     });
-    // }
     render() {
         return html`
             <div class="ck-settings">
@@ -77,76 +75,115 @@ export default class CkSettings extends __SLitComponent {
                     </p>
                 </div>
 
-                <ul class="__settings s-bg:odd">
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:40 s-pb:30"
-                            for="theme-switcher"
-                        >
-                            Dark mode
-                            <input
-                                class="s-switch"
-                                type="checkbox"
-                                id="theme-switcher"
-                                ?checked="${this._state.darkMode}"
-                                @change="${(e) => {
-                                    this.toggleMode(e.target.checked);
-                                }}"
-                            />
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:40 s-pb:30"
-                            for="setting-main-color"
-                        >
-                            Main color
-                            <s-color-picker id="setting-main-color">
+                <form>
+                    <ul class="__settings s-bg:odd">
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label s-pi:40 s-pb:30"
+                                for="theme-switcher"
+                            >
+                                Dark mode
                                 <input
-                                    type="text"
-                                    class="s-input"
-                                    value="${this._theme
-                                        .getColor('main')
-                                        .toHex()}"
+                                    class="s-switch s-color:accent"
+                                    type="checkbox"
+                                    id="theme-switcher"
+                                    ?checked="${this._state.darkMode}"
+                                    @change="${(e) => {
+                                        this.toggleMode(e.target.checked);
+                                    }}"
                                 />
-                            </s-color-picker>
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:40 s-pb:30"
-                            for="setting-accent-color"
-                        >
-                            Accent color
-                            <s-color-picker id="setting-accent-color">
-                                <input
-                                    type="text"
-                                    class="s-input"
-                                    value="${this._theme
-                                        .getColor('accent')
-                                        .toHex()}"
-                                />
-                            </s-color-picker>
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:40 s-pb:30"
-                            for="setting-complementary-color"
-                        >
-                            Complementary color
-                            <s-color-picker id="setting-complementary-color">
-                                <input
-                                    type="text"
-                                    class="s-input"
-                                    value="${this._theme
-                                        .getColor('complementary')
-                                        .toHex()}"
-                                />
-                            </s-color-picker>
-                        </label>
-                    </li>
-                </ul>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label s-pi:40 s-pb:30"
+                                for="setting-main-color"
+                            >
+                                Main color
+                                <s-color-picker id="setting-main-color">
+                                    <input
+                                        type="text"
+                                        class="s-input"
+                                        value="${this._theme
+                                            .getColor('main')
+                                            .toHex()}"
+                                    />
+                                </s-color-picker>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label s-pi:40 s-pb:30"
+                                for="setting-accent-color"
+                            >
+                                Accent color
+                                <s-color-picker id="setting-accent-color">
+                                    <input
+                                        type="text"
+                                        class="s-input"
+                                        value="${this._theme
+                                            .getColor('accent')
+                                            .toHex()}"
+                                    />
+                                </s-color-picker>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label s-pi:40 s-pb:30"
+                                for="setting-complementary-color"
+                            >
+                                Complementary color
+                                <s-color-picker
+                                    id="setting-complementary-color"
+                                >
+                                    <input
+                                        type="text"
+                                        class="s-input"
+                                        value="${this._theme
+                                            .getColor('complementary')
+                                            .toHex()}"
+                                    />
+                                </s-color-picker>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label s-pi:40 s-pb:30"
+                                for="setting-font-size"
+                            >
+                                Document font size
+                                <s-range
+                                    class="s-color:accent"
+                                    id="setting-font-size"
+                                    min="0.5"
+                                    max="1.5"
+                                    value="1"
+                                    tooltip
+                                    step="0.1"
+                                >
+                                </s-range>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label s-pi:40 s-pb:30"
+                                for="setting-complementary-color"
+                            >
+                                Restore default settings!
+                                <button
+                                    type="reset"
+                                    class="s-btn s-color:accent"
+                                    @click=${() => {
+                                        this._theme.clear();
+                                    }}
+                                >
+                                    Restore!
+                                </button>
+                            </label>
+                        </li>
+                    </ul>
+                </form>
             </div>
         `;
     }

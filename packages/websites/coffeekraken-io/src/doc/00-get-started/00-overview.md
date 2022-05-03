@@ -1,0 +1,135 @@
+<!--
+/**
+ * @name            Overview
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation / Overview           /doc/get-started/overview
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{{#> layout-doc }}
+
+# What is Coffeekraken
+
+Coffeekraken is an "organisation" that publish packages around web development for things like frontend, backend, etc...
+
+## UI components
+
+First, Coffeekraken gives you access to a bunch of UI components ready to use like basic styling (h1, h2, p, blockquote, list, etc...) and some more advanced ones like **slider**, **form validation**, **panels (modal)**, **range inputs** and more...
+
+{{#each docmap.map}}
+{{#ifEqual (get this 'type') 'CustomElement'}}
+
+-   [**{{this.name}}**]({{this.menu.slug}})
+    -   {{this.description}}
+    -   {{this.menu.tree}}
+        {{/ifEqual}}
+        {{/each}}
+
+> For a more visual discovery of our UI's components, please check out our **styleguide**
+
+## Theming suite
+
+One of the central part of Coffeekraken is our theming suite utilities. These offers you the ability to setup theme related configuration at one place (.config.ts files) and make use of these in your CSS through our [@coffeekraken/s-postcss-sugar-plugin](https://www.npmjs.com/package/@coffeekraken/s-postcss-sugar-plugin) postcss plugin.
+
+This plugin allows you to make use of mixins and functions like these:
+
+```css
+.my-button {
+    padding: sugar.padding(10) sugar.passing(30);
+    font-size: sugar.font.size(30);
+    background-color: sugar.color(accent);
+    color: sugar.color(accent, foreground);
+    /* and a lot more */
+}
+```
+
+In addition to this, you will have access to a lot of helper classes for things like **paddings**, **margin**, **typography**, **flex** and more...
+
+```css
+/* init the theming suite with resets, variables, etc... */
+@sugar.init();
+/* generate the helpers and ui classes */
+@sugar.classes();
+
+/* you can as well generate only the classes you need like so */
+@sugar.padding.classes();
+@sugar.margin.classes();
+@sugar.color.classes();
+/* etc... */
+```
+
+> For more info about using the theming suite, please check out our [theming documentation](/doc/css/theming)
+
+## Development stack
+
+In order to make your daily work experience as smooth as possible, we've built a complete development stack that will scaffold your project folder, install all the needed dependencies and expose simple commands to work with like:
+
+-   `sugar dev`: Start the development environnment
+-   `sugar build`: Generate a production ready package
+-   `sugar prod`: Preview your website using the production generated assets
+
+Our stack is as well modular and can be updated as you want through our [configuration system](/doc/config/overview).
+
+All the different project types like **generic**, **Nextjs**, **litElement**, etc... are builded upon our **recipes** system. This system is mainly a procedural project generator that you can take advantage of by [creating your own recipes](/doc/recipes/what-are-recipes) and speed up your workflow.
+
+#### Built-in recipes
+
+{{> recipesList }}
+
+## Sugar toolkit
+
+Our toolkit named [/package/@coffeekraken/sugar/doc/README](Sugar) regroup in 1 packages a lot of helper functions that we uses every day and that we have usually the habbit to search on google every time like `querySelectorLive`, `deepMerge`, `unique`, `md5`, `sha256`, `easeInterval` and a lot more...
+
+The toolkit covers areas like **js (browser)**, **node**, **shared** as well as some **php** ones for now.
+The goal is to have a toolbox where you have most of the tools you need available at your findertips instead of having to copy/paste code from internet each time...
+
+To start using Coffeekraken tools, the easier way is to install the **@coffeekraken/cli** package like so:
+
+> To start using the Sugar toolkit, check out our [/package/@coffeekraken/sugar/doc/README](@coffeekraken/sugar) package documentation.
+
+## Sugar CLI
+
+Coffeekraken provides a CLI called `sugar` through which you will be able to scaffold new projects that are ready to work out of the box with the power of all our tools as well as helpers in areas like `monorepo`, `images build` and more...
+
+```shell
+# Install the cli globally
+npm install @coffeekraken/cli -g
+# Show the cli help
+sugar -h
+```
+
+> For more info about how to use our CLI, check out our [@coffeekraken/cli](/package/@coffeekraken/cli/doc/README) package documentation.
+
+## Packages
+
+Coffeekraken is built has modular as possible. This mean that you have access to a lot of individual packages like:
+
+-   `@coffeekraken/s-images-builder`
+-   `@coffeekraken/s-typescript-builder`
+-   `@coffeekraken/s-postcss-sugar-plugin`
+-   `@coffeekraken/s-code-example-component`
+-   `@coffeekraken/s-color-picker-component`
+-   `@coffeekraken/s-sugar-config`
+-   `@coffeekraken/s-docblock`
+-   `@coffeekraken/s-interface`
+-   `@coffeekraken/s-file`
+-   `@coffeekraken/s-promise`
+-   `@coffeekraken/s-form-validate-feature`
+-   `@coffeekraken/s-view-renderer`
+-   `@coffeekraken/s-frontend-server`
+-   `@coffeekraken/s-theme`
+-   `@coffeekraken/s-color`
+-   `@coffeekraken/s-duration`
+-   And a lot more...
+
+These packages are the bones of our development suite but they can be used as standelone packages without any issue.
+
+> For more info about our available packages, check out our [packages](/package/@coffeekraken/sugar/doc/readme) documentation.
+
+{{/layout-doc }}

@@ -18,7 +18,7 @@ class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.fsTree.defaultStyle') ?? 'solid',
+                default: __STheme.get('ui.fsTree.defaultStyle') ?? 'solid',
             },
             scope: {
                 type: {
@@ -210,7 +210,7 @@ export default function ({
             * @namespace      sugar.css.ui.list
             * @type           CssClass
             * 
-            * This class represent an "<yellow>${__STheme.config(
+            * This class represent an "<yellow>${__STheme.get(
                 'ui.fsTree.defaultStyle',
             )}</yellow>" filesystem tree
             * 
@@ -360,7 +360,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 .s-fs-tree {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.config('ui.fsTree.rhythmVertical'),
+                        __STheme.get('ui.fsTree.rhythmVertical'),
                     )}
                 } 
             }

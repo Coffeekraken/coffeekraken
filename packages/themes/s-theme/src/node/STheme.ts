@@ -71,21 +71,28 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    getColor(name: string, variant?: string, state: string = 'default'): __SColor {
-        const color = this.config(`color.${name}.color`);
+    getColor(
+        name: string,
+        variant?: string,
+        state: string = 'default',
+    ): __SColor {
+        const color = this.get(`color.${name}.color`);
         if (!color) {
-            throw new Error(`Sorry but the requested "<yellow>${name}</yellow> color does not exists...`);
+            throw new Error(
+                `Sorry but the requested "<yellow>${name}</yellow> color does not exists...`,
+            );
         }
         if (!variant) {
             return new __SColor(color);
         }
-        const variantObj = this.config(`color.${name}.${state}.${variant}`); 
+        const variantObj = this.get(`color.${name}.${state}.${variant}`);
         if (!variantObj) {
-            throw new Error(`Sorry but the requested "<yellow>${name}</yellow>"color, variant "<cyan>${variant}</cyan>" and state "<magenta>${state}</magenta>" does not exists...`);
+            throw new Error(
+                `Sorry but the requested "<yellow>${name}</yellow>"color, variant "<cyan>${variant}</cyan>" and state "<magenta>${state}</magenta>" does not exists...`,
+            );
         }
         const colorInstance = new __SColor(color);
         colorInstance.apply(variantObj);
         return colorInstance;
     }
-
 }

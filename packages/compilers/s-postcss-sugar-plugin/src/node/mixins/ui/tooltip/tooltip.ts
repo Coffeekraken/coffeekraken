@@ -113,8 +113,8 @@ export default function ({
           background-color: sugar.color(current);
           color: sugar.color(current, foreground);
           transition: sugar.theme(ui.tooltip.transition);
-          padding-inline: sugar.theme(ui.tooltip.paddingInline);
-          padding-block: sugar.theme(ui.tooltip.paddingBlock);
+          padding-inline: sugar.padding(ui.tooltip.paddingInline);
+          padding-block: sugar.padding(ui.tooltip.paddingBlock);
           @sugar.depth( sugar.theme.value(ui.tooltip.depth) );
 
             &:not([s-floating]) {
@@ -287,7 +287,7 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.tooltip.borderRadius);
+                    border-radius: sugar.border.radius(ui.tooltip.borderRadius);
                 `);
                 break;
         }

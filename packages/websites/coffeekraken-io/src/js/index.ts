@@ -30,6 +30,7 @@ import { define as __CKSettingsComponent } from './components/CkSettings';
 import { define as __VersionSelector } from './components/VersionSelector';
 
 // others
+import __STheme from '@coffeekraken/s-theme';
 import __SConductor from '@coffeekraken/s-conductor';
 import __krakenLogo from './generic/krakenLogo';
 
@@ -53,6 +54,9 @@ __SConductor.setup({
             offset: 100,
         },
     });
+
+    // init theme
+    __STheme.init();
 
     // layout related
     __expandPleasantCssClassnamesLive();

@@ -7,16 +7,16 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid', 'gradient', 'outline', 'text'],
-                default: __STheme.config('ui.button.defaultStyle'),
+                default: __STheme.get('ui.button.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.button.defaultShape'),
+                default: __STheme.get('ui.button.defaultShape'),
             },
             outline: {
                 type: 'Boolean',
-                default: __STheme.config('ui.button.outline'),
+                default: __STheme.get('ui.button.outline'),
             },
             scope: {
                 type: {
@@ -88,8 +88,8 @@ export default function ({
         cursor: pointer;
         white-space: nowrap;
         vertical-align: middle;
-        padding-inline: sugar.theme(ui.button.paddingInline);
-        padding-block: sugar.theme(ui.button.paddingBlock);
+        padding-inline: sugar.padding(ui.button.paddingInline);
+        padding-block: sugar.padding(ui.button.paddingBlock);
 
         & > * {
           pointer-events: none;
@@ -231,11 +231,11 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.button.borderRadius);
+                    border-radius: sugar.border.radius(ui.button.borderRadius);
 
                     &:before,
                     &:after {
-                      border-radius: sugar.theme(ui.button.borderRadius);
+                      border-radius: sugar.border.radius(ui.button.borderRadius);
                     }
                   `);
                 break;

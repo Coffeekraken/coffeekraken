@@ -18,12 +18,12 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.checkbox.defaultStyle'),
+                default: __STheme.get('ui.checkbox.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill', 'circle'],
-                default: __STheme.config('ui.checkbox.defaultShape'),
+                default: __STheme.get('ui.checkbox.defaultShape'),
             },
             scope: {
                 type: {
@@ -348,7 +348,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 input[type="checkbox"], .s-checkbox {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.config('ui.checkbox.rhythmVertical'),
+                        __STheme.get('ui.checkbox.rhythmVertical'),
                     )}
                 } 
             }

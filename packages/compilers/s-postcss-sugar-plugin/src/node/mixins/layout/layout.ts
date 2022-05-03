@@ -113,9 +113,10 @@ export default function ({
     const colsEndByArea = {};
     const rowsEndByArea = {};
 
-    
-
-    const rows = finalParams.layout.split(/(\n|_)/gm).map((l) => l.trim()).filter(l => l != '_' && l != '');
+    const rows = finalParams.layout
+        .split(/(\n|_)/gm)
+        .map((l) => l.trim())
+        .filter((l) => l != '_' && l != '');
 
     // if (finalParams.layout.includes('1 2 3 4 5')) {
     //     console.log(finalParams.layout, rows);
@@ -239,7 +240,7 @@ export default function ({
               grid-row-end: ${rowsEndByArea[areaId] + 1};
               ${
                   finalParams.gap
-                      ? `padding: sugar.space(${finalParams.gap})`
+                      ? `padding: sugar.margin(${finalParams.gap})`
                       : ''
               }
           }
@@ -251,15 +252,15 @@ export default function ({
         areas.forEach((areaId) => {
             vars.push(`
           .area-${areaId}, & > *:nth-child(${areaId}) {
-            padding: sugar.space(${finalParams.gap});
+            padding: sugar.margin(${finalParams.gap});
           }
       `);
         });
 
         if (finalParams.gapBetween) {
             vars.push(`
-        width: calc(100% + sugar.space(${finalParams.gap}) * 2);
-        margin-left: calc(sugar.space(${finalParams.gap}) * -1);
+        width: calc(100% + sugar.margin(${finalParams.gap}) * 2);
+        margin-left: calc(sugar.margin(${finalParams.gap}) * -1);
       `);
         }
     }

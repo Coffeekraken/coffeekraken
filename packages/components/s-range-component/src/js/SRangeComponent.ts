@@ -123,6 +123,19 @@ export default class SRange extends __SLitComponent {
             );
         }
 
+        // set the value to be sure the display is correct...
+        this._$input.value = this.value;
+
+        // check if a form exists
+        if (this._$input?.form) {
+            this._$input.form.addEventListener('reset', () => {
+                setTimeout(() => {
+                    this._handleTooltip();
+                    this._handleTarget();
+                });
+            });
+        }
+
         // init
         this._handleTooltip();
         this._handleTarget();

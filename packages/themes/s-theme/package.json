@@ -10,6 +10,7 @@
         "@coffeekraken/s-color": "^2.0.0",
         "@coffeekraken/s-sugar-json": "^2.0.0",
         "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/s-event-emitter": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "known-css-properties": "^0.23.0",
         "micromatch": "^4.0.4",

@@ -48,7 +48,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    const componentsObj = __STheme.config('components');
+    const componentsObj = __STheme.get('components');
 
     Object.keys(componentsObj).forEach((selector) => {
         if (finalParams.scope.indexOf('bare') !== -1) {

@@ -24,7 +24,7 @@ class postcssSugarPluginClearfixClassesInterface extends __SInterface {
         return {
             defaultClearfix: {
                 type: 'String',
-                default: __STheme.config('helpers.clearfix.default'),
+                default: __STheme.get('helpers.clearfix.default'),
             },
         };
     }

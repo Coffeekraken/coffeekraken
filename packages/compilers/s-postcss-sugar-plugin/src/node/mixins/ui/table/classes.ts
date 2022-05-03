@@ -17,12 +17,12 @@ class postcssSugarPluginUiTableClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.table.defaultStyle'),
+                default: __STheme.get('ui.table.defaultStyle'),
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square'],
-                default: __STheme.config('ui.table.defaultShape'),
+                default: __STheme.get('ui.table.defaultShape'),
             },
             scope: {
                 type: {
@@ -112,7 +112,11 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${style} style ${
+                    finalParams.defaultStyle === style
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
             *   <table class="s-table${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             } s-mbe:30">
@@ -138,7 +142,11 @@ export default function ({
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape} shape ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${shape} shape ${
+                    finalParams.defaultShape === shape
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
             *   <table class="s-table${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             } s-mbe:30">
@@ -184,7 +192,9 @@ export default function ({
         * </div>
         * 
         * @example      html        Scales
-        ${['07','1','13','16'].map(scale => `
+        ${['07', '1', '13', '16']
+            .map(
+                (scale) => `
         *   <table class="s-table s-scale:${scale}">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
@@ -202,10 +212,14 @@ export default function ({
         *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
-        `).join('\n')}
+        `,
+            )
+            .join('\n')}
         * 
         * @example      html        Colors (non-exhaustive)
-        ${['main','accent','complementary','error'].map(color => `
+        ${['main', 'accent', 'complementary', 'error']
+            .map(
+                (color) => `
         *   <table class="s-table s-color:${color}">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
@@ -223,7 +237,9 @@ export default function ({
         *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
-        `).join('\n')}
+        `,
+            )
+            .join('\n')}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -444,7 +460,7 @@ export default function ({
         @sugar.rhythm.vertical {
           table, .s-table {
               ${__STheme.jsObjectToCssProperties(
-                  __STheme.config('ui.table.rhythmVertical'),
+                  __STheme.get('ui.table.rhythmVertical'),
               )}
           }
         } 

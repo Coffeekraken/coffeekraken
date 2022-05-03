@@ -27,7 +27,7 @@ class postcssSugarPluginBorderWidthFunctionInterface extends __SInterface {
         return {
             width: {
                 type: 'String',
-                values: Object.keys(__STheme.config('border.width')),
+                values: Object.keys(__STheme.get('border.width')),
                 default: 'default',
                 required: true,
             },
@@ -52,10 +52,10 @@ export default function ({
 
     const width = finalParams.width;
 
-    if (__STheme.config('border.width')[width] === undefined) return width;
+    if (__STheme.get('border.width')[width] === undefined) return width;
 
     const widthes = width.split(' ').map((s) => {
-        const width = __STheme.config(`border.width.${s}`);
+        const width = __STheme.get(`border.width.${s}`);
         if (!width) return width;
         return `var(${`--s-theme-border-width-${s}`}) ${
             finalParams.width !== 'default' ? '!important' : ''

@@ -31,12 +31,12 @@ class postcssSugarPluginUiFormSelectInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.select.defaultStyle'),
+                default: __STheme.get('ui.select.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.select.defaultShape'),
+                default: __STheme.get('ui.select.defaultShape'),
             },
             scope: {
                 type: {
@@ -113,9 +113,9 @@ export default function ({
                 }
 
                 &:not([multiple]) {
-                    padding-inline-end: calc(sugar.theme(ui.select.paddingInline) + 1.5em);
+                    padding-inline-end: calc(sugar.padding(ui.select.paddingInline) + 1.5em);
 
-                    --padding-inline: sugar.theme(ui.select.paddingInline);
+                    --padding-inline: sugar.padding(ui.select.paddingInline);
 
                     background-repeat: no-repeat;
                     background-image: linear-gradient(45deg, transparent 50%, sugar.color(current) 50%), linear-gradient(135deg, sugar.color(current) 50%, transparent 50%);
@@ -148,7 +148,7 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.select.borderRadius);
+                    border-radius: sugar.border.radius(ui.select.borderRadius);
                 `);
                 break;
         }

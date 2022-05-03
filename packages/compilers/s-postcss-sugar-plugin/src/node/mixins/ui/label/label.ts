@@ -31,12 +31,12 @@ class postcssSugarPluginUiLabelInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['inline', 'block', 'float'],
-                default: __STheme.config('ui.label.defaultStyle'),
+                default: __STheme.get('ui.label.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.label.defaultShape'),
+                default: __STheme.get('ui.label.defaultShape'),
             },
             scope: {
                 type: {
@@ -67,8 +67,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLabelParams = {
-        style: __STheme.config('ui.label.defaultStyle'),
-        shape: __STheme.config('ui.label.defaultShape'),
+        style: __STheme.get('ui.label.defaultStyle'),
+        shape: __STheme.get('ui.label.defaultShape'),
         scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
@@ -99,12 +99,12 @@ export default function ({
 
                   --delta: 0em;
                   --top: sugar.theme(ui.form.paddingBlock);
-                  --left: sugar.theme(ui.form.paddingInline);
+                  --left: sugar.padding(ui.form.paddingInline);
 
                   & > *:not(input):not(textarea):not(select) {
                     top: calc(var(--top) + 0.6em + var(--delta));
                     left: 0;
-                    padding-inline: sugar.theme(ui.form.paddingInline);
+                    padding-inline: sugar.padding(ui.form.paddingInline);
                     position: absolute;
                     z-index: 1;
                     transform: scale(1);
@@ -157,8 +157,8 @@ export default function ({
                   & > select {
                     width: 100%;
                     margin: 0;
-                    padding-block-start: calc(sugar.theme(ui.form.paddingBlock, true) + 0.35em + var(--delta));
-                    padding-block-end: calc(sugar.theme(ui.form.paddingBlock, true) + 0.35em + var(--delta));
+                    padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) + 0.35em + var(--delta));
+                    padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) + 0.35em + var(--delta));
                     
                   }
 
@@ -167,14 +167,14 @@ export default function ({
                     & > input:not([type="checkbox"]):not([type="radio"]),
                     & > textarea,
                     & > select {
-                      padding-block-start: calc(sugar.theme(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
-                      padding-block-end: sugar.theme(ui.form.paddingBlock, true);
+                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
+                      padding-block-end: sugar.padding(ui.form.paddingBlock, true);
                     }
                   }
                   & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]),
                   & > textarea:not(:placeholder-shown) {
-                    padding-block-start: calc(sugar.theme(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
-                    padding-block-end: sugar.theme(ui.form.paddingBlock, true);
+                    padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
+                    padding-block-end: sugar.padding(ui.form.paddingBlock, true);
                   }
 
                   & > .disabled + *,
@@ -204,6 +204,7 @@ export default function ({
                 vars.push(`
                   display: flex;
                   justify-content: space-between;    
+                  align-items: center;
                   gap: sugar.margin(20);
 
                   & > *:first-child {

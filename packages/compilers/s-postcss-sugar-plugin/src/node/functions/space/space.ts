@@ -27,7 +27,7 @@ class postcssSugarPluginSpaceFunctionInterface extends __SInterface {
         return {
             space: {
                 type: 'String',
-                values: Object.keys(__STheme.config('space')),
+                values: Object.keys(__STheme.get('space')),
                 default: 'default',
                 required: true,
             },
@@ -52,10 +52,10 @@ export default function ({
 
     const space = finalParams.space;
 
-    if (__STheme.config('space')[space] === undefined) return space;
+    if (__STheme.get('space')[space] === undefined) return space;
 
     const spaces = space.split(' ').map((s) => {
-        const size = __STheme.config(`space.${s}`);
+        const size = __STheme.get(`space.${s}`);
         if (!size) return size;
         return `var(${`--s-theme-space-${s}`}, ${size})`;
     });

@@ -279,6 +279,8 @@ export default class SFrontendServer extends __SClass {
                         await pipe(
                             this._registerPageConfig(
                                 <ISFrontendServerPageConfig>pageConfig,
+                                null,
+                                id,
                             ),
                         );
                     }
@@ -383,10 +385,23 @@ export default class SFrontendServer extends __SClass {
                 cwd: pagesFolder,
             });
 
+            let _404PageFile;
+
             for (let [index, pageFile] of pagesFiles.entries()) {
+                // handle 404 at the end
+                if (pageFile.nameWithoutExt === '404') {
+                    _404PageFile = pageFile;
+                    continue;
+                }
                 // @ts-ignore
                 const { default: pageConfig } = await import(pageFile.path);
                 await pipe(this._registerPageConfig(pageConfig, pageFile));
+            }
+
+            if (_404PageFile) {
+                // @ts-ignore
+                const { default: pageConfig } = await import(_404PageFile.path);
+                await pipe(this._registerPageConfig(pageConfig, _404PageFile));
             }
 
             resolve();
@@ -400,6 +415,7 @@ export default class SFrontendServer extends __SClass {
     _registerPageConfig(
         pageConfig: ISFrontendServerPageConfig,
         pageFile?: any,
+        configId?: string,
     ): Promise<void> {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             let handlerFn,
@@ -450,18 +466,24 @@ export default class SFrontendServer extends __SClass {
             slugs.forEach((slug) => {
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green>`,
+                    value: `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
+                        pageFile
+                            ? `<magenta>${pageFile.relPath}</magenta>`
+                            : `<magenta>config.pages.${configId}</magenta>`
+                    }`,
                 });
 
                 this._express.get(slug, (req, res, next) => {
-                    for (let [key, value] of Object.entries(req.params)) {
-                        // do not process non "number" keys
-                        if (typeof __autoCast(key) !== 'number') continue;
-                        const paramKey = Object.keys(pageConfig.params)[
-                            parseInt(key)
-                        ];
-                        delete req.params[key];
-                        req.params[paramKey] = value;
+                    if (pageConfig.params) {
+                        for (let [key, value] of Object.entries(req.params)) {
+                            // do not process non "number" keys
+                            if (typeof __autoCast(key) !== 'number') continue;
+                            const paramKey = Object.keys(pageConfig.params)[
+                                parseInt(key)
+                            ];
+                            delete req.params[key];
+                            req.params[paramKey] = value;
+                        }
                     }
 
                     return pipe(

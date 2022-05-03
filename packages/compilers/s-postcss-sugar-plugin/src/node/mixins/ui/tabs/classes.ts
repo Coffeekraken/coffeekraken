@@ -18,12 +18,12 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.tabs.defaultStyle') ?? 'solid',
+                default: __STheme.get('ui.tabs.defaultStyle') ?? 'solid',
             },
             defaultShape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.tabs.defaultShape'),
+                default: __STheme.get('ui.tabs.defaultShape'),
             },
             scope: {
                 type: {
@@ -113,7 +113,11 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                return ` * @example        html       ${style} style ${
+                    finalParams.defaultStyle === style
+                        ? '<span class="s-badge:outline s-scale:05">default</span>'
+                        : ''
+                }
             *   <ul class="s-tabs${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             } s-color:accent">

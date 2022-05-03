@@ -28,7 +28,7 @@ export default class SRangeComponentInterface extends __SInterface {
                     'Specify the name to assign to the internal input[type="range"]',
             },
             value: {
-                type: 'String',
+                type: 'Number',
                 description: 'Specify the initial range value',
             },
             min: {
@@ -59,8 +59,8 @@ export default class SRangeComponentInterface extends __SInterface {
             disabled: {
                 type: 'Boolean',
                 description: 'Specify if this range is disabled',
-                default: false
-            }
+                default: false,
+            },
         };
     }
 }

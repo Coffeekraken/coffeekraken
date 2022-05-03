@@ -1012,6 +1012,18 @@ export default function (env, config) {
 
         scale: {
             /**
+             * @name                default
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1
+             *
+             * Specify the default scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            default: 1,
+            /**
              * @name                01
              * @namespace           config.themeBase.scale
              * @type                Number
@@ -2135,183 +2147,197 @@ export default function (env, config) {
              * @name          0
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       0.25rem
+             * @default       0.25
              *
-             * Declare the font size "50"
+             * Declare the size "0".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            0: '0.25rem',
+            0: 0.25,
 
             /**
              * @name          5
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       0.5rem
+             * @default       0.5
              *
-             * Declare the font size "50"
+             * Declare the size "50".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            5: '0.5rem',
+            5: '0.5',
 
             /**
              * @name          10
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       0.65rem
+             * @default       0.65
              *
-             * Declare the font size "10"
+             * Declare the size "10".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            10: '0.65rem',
+            10: 0.65,
 
             /**
              * @name          15
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       0.7rem
+             * @default       0.7
              *
-             * Declare the font size "10"
+             * Declare the size "15".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            15: '0.7rem',
+            15: '0.7',
 
             /**
              * @name          20
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       0.75rem
+             * @default       0.75
              *
-             * Declare the font size "20"
+             * Declare the size "20".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            20: '0.75rem',
+            20: 0.75,
 
             /**
              * @name          25
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       0.9rem
+             * @default       0.9
              *
-             * Declare the font size "20"
+             * Declare the size "25".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            25: '0.9rem',
+            25: 0.9,
 
             /**
              * @name          30
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       1.1rem
+             * @default       1.1
              *
-             * Declare the font size "30"
+             * Declare the size "30".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            30: '1.1rem',
+            30: 1.1,
 
             /**
              * @name          40
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       1.25rem
+             * @default       1.25
              *
-             * Declare the font size "40"
+             * Declare the size "40".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            40: '1.25rem',
+            40: 1.25,
 
             /**
              * @name          50
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       1.50rem
+             * @default       1.50
              *
-             * Declare the font size "50"
+             * Declare the size "50".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            50: '1.50em',
+            50: 1.5,
 
             /**
              * @name          60
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       2rem
+             * @default       2
              *
-             * Declare the font size "60"
+             * Declare the size "60".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            60: '2rem',
+            60: 2,
 
             /**
              * @name          70
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       2.5rem
+             * @default       2.5
              *
-             * Declare the font size "70"
+             * Declare the size "70".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            70: '2.5rem',
+            70: 2.5,
 
             /**
              * @name          80
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       3rem
+             * @default       3
              *
-             * Declare the font size "80"
+             * Declare the size "80".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            80: '3rem',
+            80: 3,
 
             /**
              * @name          90
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       4rem
+             * @default       4
              *
-             * Declare the font size "90"
+             * Declare the size "90".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            90: '4rem',
+            90: 4,
 
             /**
              * @name          100
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       5rem
+             * @default       5
              *
-             * Declare the font size "100"
+             * Declare the size "100".
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            100: '5rem',
+            100: 5,
         },
 
         font: {
@@ -2531,7 +2557,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.default]
                  *
-                 * Declare the "default" font size
+                 * Declare the "default" font size.
+                 * MUST be an absolute css value like "3rem".
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2542,14 +2569,15 @@ export default function (env, config) {
                  * @name          0
                  * @namespace     config.themeBase.font.size
                  * @type          String
-                 * @default       [theme.size.0]
+                 * @default       0
                  *
-                 * Declare the "0" font size
+                 * Declare the "0" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                0: '[theme.size.0]',
+                0: 0,
 
                 /**
                  * @name          5
@@ -2557,7 +2585,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.5]
                  *
-                 * Declare the "5" font size
+                 * Declare the "5" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2570,7 +2599,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.10]
                  *
-                 * Declare the "10" font size
+                 * Declare the "10" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2583,7 +2613,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.20]
                  *
-                 * Declare the "20" font size
+                 * Declare the "20" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2596,7 +2627,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.30]
                  *
-                 * Declare the "30" font size
+                 * Declare the "30" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2609,7 +2641,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.40]
                  *
-                 * Declare the "40" font size
+                 * Declare the "40" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2622,7 +2655,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.50]
                  *
-                 * Declare the "50" font size
+                 * Declare the "50" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2635,7 +2669,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.60]
                  *
-                 * Declare the "60" font size
+                 * Declare the "60" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2648,7 +2683,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.70]
                  *
-                 * Declare the "70" font size
+                 * Declare the "70" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2661,7 +2697,8 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.80]
                  *
-                 * Declare the "80" font size
+                 * Declare the "80" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2674,7 +2711,8 @@ export default function (env, config) {
                  * @type          String
                  * @default      [theme.size.90]
                  *
-                 * Declare the "90" font size
+                 * Declare the "90" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2687,7 +2725,8 @@ export default function (env, config) {
                  * @type          String
                  * @default      [theme.size.100]
                  *
-                 * Declare the "100" font size
+                 * Declare the "100" font size.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2862,7 +2901,8 @@ export default function (env, config) {
                  * @type              Number
                  * @default           5px
                  *
-                 * Specify the "default" border radius
+                 * Specify the "default" border radius.
+                 * MUST be an absolute css value like "3rem".
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2875,142 +2915,153 @@ export default function (env, config) {
                  * @type              Number
                  * @default           0
                  *
-                 * Specify the "0" border radius
+                 * Specify the "0" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                0: '0',
+                0: 0,
 
                 /**
                  * @name              10
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           4px
+                 * @default           0.8
                  *
-                 * Specify the "10" border radius
+                 * Specify the "10" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                10: '4px',
+                10: 0.8,
 
                 /**
                  * @name              20
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           8px
+                 * @default           1.6
                  *
-                 * Specify the "20" border radius
+                 * Specify the "20" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                20: '8px',
+                20: 1.6,
 
                 /**
                  * @name              30
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           12px
+                 * @default           2.4
                  *
-                 * Specify the "30" border radius
+                 * Specify the "30" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                30: '12px',
+                30: 2.4,
 
                 /**
                  * @name              40
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           16px
+                 * @default           3.2
                  *
-                 * Specify the "40" border radius
+                 * Specify the "40" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                40: '16px',
+                40: 3.2,
 
                 /**
                  * @name              50
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           20px
+                 * @default           4
                  *
-                 * Specify the "50" border radius
+                 * Specify the "50" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                50: '20px',
+                50: 4,
 
                 /**
                  * @name              60
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           26px
+                 * @default           5.2
                  *
-                 * Specify the "60" border radius
+                 * Specify the "60" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                60: '26px',
+                60: 5.2,
 
                 /**
                  * @name              70
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           32px
+                 * @default           6.4
                  *
-                 * Specify the "70" border radius
+                 * Specify the "70" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                70: '32px',
+                70: 6.4,
 
                 /**
                  * @name              80
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           40px
+                 * @default           8
                  *
-                 * Specify the "80" border radius
+                 * Specify the "80" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                80: '40px',
+                80: 8,
 
                 /**
                  * @name              90
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           50px
+                 * @default           10
                  *
-                 * Specify the "90" border radius
+                 * Specify the "90" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                90: '50px',
+                90: 10,
 
                 /**
                  * @name              100
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           60px
+                 * @default           12
                  *
-                 * Specify the "90" border radius
+                 * Specify the "90" border radius.
+                 * MUST be a scale factor relative to the "default" absolute value specified.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                100: '60px',
+                100: 12,
             },
         },
 
@@ -3021,7 +3072,8 @@ export default function (env, config) {
              * @type            String
              * @default         3rem
              *
-             * Specify the "default" space used for margins and paddings
+             * Specify the "default" space used for margins and paddings.
+             * MUST be an absolute css value like "3rem".
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3034,142 +3086,153 @@ export default function (env, config) {
              * @type            String
              * @default         0
              *
-             * Specify the "0" space used for margins and paddings
+             * Specify the "0" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            0: '0',
+            0: 0,
 
             /**
              * @name            10
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         0.375rem
+             * @default         0.125
              *
-             * Specify the "10" space used for margins and paddings
+             * Specify the "10" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            10: '0.375rem',
+            10: 0.125,
 
             /**
              * @name            20
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         0.75rem
+             * @default         0.25
              *
-             * Specify the "20" space used for margins and paddings
+             * Specify the "20" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            20: '0.75rem',
+            20: 0.25,
 
             /**
              * @name            30
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         1.5rem
+             * @default         0.5
              *
-             * Specify the "30" space used for margins and paddings
+             * Specify the "30" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            30: '1.5rem',
+            30: 0.5,
 
             /**
              * @name            40
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         2.25rem
+             * @default         1.333
              *
-             * Specify the "40" space used for margins and paddings
+             * Specify the "40" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            40: '2.25rem',
+            40: 1.333,
 
             /**
              * @name            50
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         3rem
+             * @default         1
              *
-             * Specify the "50" space used for margins and paddings
+             * Specify the "50" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            50: '3rem',
+            50: 1,
 
             /**
              * @name            60
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         3.75rem
+             * @default         1.25
              *
-             * Specify the "60" space used for margins and paddings
+             * Specify the "60" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            60: '3.75rem',
+            60: 1.25,
 
             /**
              * @name            70
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         4.5rem
+             * @default         1.5
              *
-             * Specify the "70" space used for margins and paddings
+             * Specify the "70" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            70: '4.5rem',
+            70: 1.5,
 
             /**
              * @name            80
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         5.25rem
+             * @default         1.75
              *
-             * Specify the "80" space used for margins and paddings
+             * Specify the "80" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            80: '5.25rem',
+            80: 1.75,
 
             /**
              * @name            90
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         6rem
+             * @default         2
              *
-             * Specify the "90" space used for margins and paddings
+             * Specify the "90" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            90: '6rem',
+            90: 2,
 
             /**
              * @name            100
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         6.75rem
+             * @default         2.25
              *
-             * Specify the "100" space used for margins and paddings
+             * Specify the "100" space used for margins and paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            100: '6.75rem',
+            100: 2.25,
         },
 
         margin: {
@@ -3179,7 +3242,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.default]
              *
-             * Specify the "default" space used for margins
+             * Specify the "default" space used for margins.
+             * MUST be an absolute css value like "3rem", etc...
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3192,7 +3256,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.0]
              *
-             * Specify the "0" space used for margins
+             * Specify the "0" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3205,7 +3270,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.10]
              *
-             * Specify the "10" space used for margins
+             * Specify the "10" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3218,7 +3284,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.20]
              *
-             * Specify the "20" space used for margins
+             * Specify the "20" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3231,7 +3298,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.30]
              *
-             * Specify the "30" space used for margins
+             * Specify the "30" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3244,7 +3312,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.40]
              *
-             * Specify the "40" space used for margins
+             * Specify the "40" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3257,7 +3326,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.50]
              *
-             * Specify the "50" space used for margins
+             * Specify the "50" space used for margins.
+             * .MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3270,7 +3340,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.60]
              *
-             * Specify the "60" space used for margins
+             * Specify the "60" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3283,7 +3354,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.70]
              *
-             * Specify the "70" space used for margins
+             * Specify the "70" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3296,7 +3368,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.80]
              *
-             * Specify the "80" space used for margins
+             * Specify the "80" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3309,7 +3382,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.90]
              *
-             * Specify the "90" space used for margins
+             * Specify the "90" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3322,7 +3396,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.100]
              *
-             * Specify the "100" space used for margins
+             * Specify the "100" space used for margins.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3350,7 +3425,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.0]
              *
-             * Specify the "0" space used for paddings
+             * Specify the "0" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3363,7 +3439,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.10]
              *
-             * Specify the "10" space used for paddings
+             * Specify the "10" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3376,7 +3453,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.20]
              *
-             * Specify the "20" space used for paddings
+             * Specify the "20" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3389,7 +3467,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.30]
              *
-             * Specify the "30" space used for paddings
+             * Specify the "30" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3402,7 +3481,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.40]
              *
-             * Specify the "40" space used for paddings
+             * Specify the "40" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3415,7 +3495,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.50]
              *
-             * Specify the "50" space used for paddings
+             * Specify the "50" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3428,7 +3509,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.60]
              *
-             * Specify the "60" space used for paddings
+             * Specify the "60" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3441,7 +3523,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.70]
              *
-             * Specify the "70" space used for paddings
+             * Specify the "70" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3454,7 +3537,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.80]
              *
-             * Specify the "80" space used for paddings
+             * Specify the "80" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3467,7 +3551,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.90]
              *
-             * Specify the "90" space used for paddings
+             * Specify the "90" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3480,7 +3565,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.90]
              *
-             * Specify the "100" space used for paddings
+             * Specify the "100" space used for paddings.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3508,7 +3594,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.0]
              *
-             * Specify the "0" space used for offsize
+             * Specify the "0" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3521,7 +3608,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.10]
              *
-             * Specify the "10" space used for offsize
+             * Specify the "10" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3534,7 +3622,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.20]
              *
-             * Specify the "20" space used for offsize
+             * Specify the "20" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3547,7 +3636,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.30]
              *
-             * Specify the "30" space used for offsize
+             * Specify the "30" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3560,7 +3650,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.40]
              *
-             * Specify the "40" space used for offsize
+             * Specify the "40" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3573,7 +3664,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.50]
              *
-             * Specify the "50" space used for offsize
+             * Specify the "50" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3586,7 +3678,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.60]
              *
-             * Specify the "60" space used for offsize
+             * Specify the "60" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3599,7 +3692,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.70]
              *
-             * Specify the "70" space used for offsize
+             * Specify the "70" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3612,7 +3706,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.80]
              *
-             * Specify the "80" space used for offsize
+             * Specify the "80" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3625,7 +3720,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.90]
              *
-             * Specify the "90" space used for offsize
+             * Specify the "90" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -3638,7 +3734,8 @@ export default function (env, config) {
              * @type            String
              * @default         [theme.space.100]
              *
-             * Specify the "100" space used for offsize
+             * Specify the "100" space used for offsize.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

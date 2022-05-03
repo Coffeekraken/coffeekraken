@@ -85,8 +85,8 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
             font-size: sugar.scalable(0.75em);
-            padding-inline: sugar.theme(ui.badge.paddingInline);
-            padding-block: sugar.theme(ui.badge.paddingBlock);
+            padding-inline: sugar.padding(ui.badge.paddingInline);
+            padding-block: sugar.padding(ui.badge.paddingBlock);
             vertical-align: baseline;
 
             & > * {

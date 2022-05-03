@@ -15,7 +15,9 @@
     <script>
         const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
         if (state.darkMode) {
-            document.querySelector('html').setAttribute('theme', 'dark');
+            document.querySelector('html').setAttribute('theme', 'default-dark');
+        } else {
+            document.querySelector('html').setAttribute('theme', 'default-light');
         }
     </script>
 
@@ -38,5 +40,7 @@
     <s-scroll-to class="scroll-top" href="top">
         <i class="s-icon:angle-up"></i>
     </s-scroll-to>
+
+    <div class="top-loader"></div>
 
 @endsection

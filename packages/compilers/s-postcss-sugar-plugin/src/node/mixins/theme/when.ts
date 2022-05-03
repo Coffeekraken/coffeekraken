@@ -7,10 +7,10 @@ class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
     static get _definition() {
         return {
             variant: {
-                type: 'String'
+                type: 'String',
             },
             theme: {
-                type: 'String'
+                type: 'String',
             },
         };
     }
@@ -66,8 +66,8 @@ export default function ({
 
     let theme = finalParams.theme,
         variant = finalParams.variant;
-    // if (!theme) theme = __STheme.config('theme.theme');
-    // if (!variant) variant = __STheme.config('theme.variant');
+    // if (!theme) theme = __STheme.get('theme.theme');
+    // if (!variant) variant = __STheme.get('theme.variant');
 
     let container;
 
@@ -75,22 +75,16 @@ export default function ({
         container = new postcssApi.Rule({
             selectors: [
                 `[theme^="${theme}"][theme$="${variant}"] &`,
-                `&[theme^="${theme}"][theme$="${variant}"]`
-            ]
+                `&[theme^="${theme}"][theme$="${variant}"]`,
+            ],
         });
     } else if (theme) {
         container = new postcssApi.Rule({
-            selectors: [
-                `[theme^="${theme}"] &`,
-                `&[theme^="${theme}"]`
-            ]
+            selectors: [`[theme^="${theme}"] &`, `&[theme^="${theme}"]`],
         });
     } else if (variant) {
         container = new postcssApi.Rule({
-            selectors: [
-                `[theme$="${variant}"] &`,
-                `&[theme$="${variant}"]`
-            ]
+            selectors: [`[theme$="${variant}"] &`, `&[theme$="${variant}"]`],
         });
     }
 

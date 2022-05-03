@@ -48,7 +48,7 @@ export default function ({
 
     const vars = new CssVars();
 
-    const marginsObj = __STheme.config('margin');
+    const marginsObj = __STheme.get('margin');
     const marginsKeys = __keysFirst(Object.keys(marginsObj), ['default']);
 
     vars.comment(
@@ -376,7 +376,7 @@ export default function ({
    .${clsMarginLeft.replace(':', '--')} {
         margin-inline-start: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
-   
+
         const clsMarginRight = `s-mie:-${spaceName}`;
         vars.comment(
             () => `/**

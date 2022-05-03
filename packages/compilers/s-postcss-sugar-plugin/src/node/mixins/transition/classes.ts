@@ -46,7 +46,7 @@ export default function ({
         ...params,
     };
 
-    const transitionObj = __STheme.config('transition');
+    const transitionObj = __STheme.get('transition');
 
     const vars = new CssVars();
 

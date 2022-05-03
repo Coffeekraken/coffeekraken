@@ -43,9 +43,9 @@ export default function ({
     const finalParams: IPostcssSugarPluginBorderRadiusClassesMixinParams = {
         ...params,
     };
-    const radiusesObj = __STheme.config('border.radius');
+    const radiusesObj = __STheme.get('border.radius');
     const radiusesKeys = __keysFirst(Object.keys(radiusesObj), ['default']);
-    const widthsObj = __STheme.config('border.width');
+    const widthsObj = __STheme.get('border.width');
     const widthsKeys = __keysFirst(Object.keys(widthsObj), ['default']);
 
     const vars = new CssVars();
@@ -151,7 +151,7 @@ export default function ({
         * @support      edge           
         * 
         ${Object.keys(__STheme.getTheme().baseColors())
-             .map((colorName) => {
+            .map((colorName) => {
                 if (colorName === 'default') return '';
                 return ` * @cssClass      s-bcolor:${colorName}      Apply the border color ${colorName} to any HTMLElement`;
             })
@@ -159,7 +159,7 @@ export default function ({
         *
         * @example             html         Border color
         ${Object.keys(__STheme.getTheme().baseColors())
-             .map((colorName) => {
+            .map((colorName) => {
                 return ` * <div class="s-display:inline-block s-width:20 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bcolor:${colorName} s-bwidth:20">
               *     ${colorName}
               *   </div> 
@@ -223,8 +223,7 @@ export default function ({
         }`);
     });
 
-     Object.keys(__STheme.getTheme().baseColors())
-             .forEach((colorName) => {
+    Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
         const cls = `s-bcolor:${colorName}`.replace(':default', '');
         const clsName = `s-bcolor--${colorName}`.replace('--default', '');
         vars.comment(

@@ -92,7 +92,7 @@ export default function ({
     let startColorVar = finalParams.start,
         endColorVar = finalParams.end;
 
-    const themeColorsObj = __STheme.config('color');
+    const themeColorsObj = __STheme.get('color');
 
     if (
         startColorVar.match(/^[a-zA-Z0-9:_-]+$/) &&

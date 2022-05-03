@@ -47,7 +47,6 @@ export default function ({
     atRule: any;
     replaceWith: Function;
 }) {
-
     const cssArray = [
         '@sugar.reset;',
         `@sugar.theme(${params.variant}, ${params.theme});`,

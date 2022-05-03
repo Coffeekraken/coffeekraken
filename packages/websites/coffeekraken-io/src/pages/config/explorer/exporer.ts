@@ -1,4 +1,5 @@
 export default {
+    slugs: ['/config/explorer', '/config/explorer/*'],
     params: {
         path: '*',
     },

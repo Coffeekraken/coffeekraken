@@ -74,7 +74,7 @@ export default function ({
     };
 
     // @ts-ignore
-    const configObj = __STheme.config(params.dotPath);
+    const configObj = __STheme.get(params.dotPath);
 
     const vars: string[] = [
         __STheme.jsObjectToCssProperties(configObj, {

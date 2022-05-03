@@ -27,13 +27,13 @@ class postcssSugarPluginMarginFunctionInterface extends __SInterface {
         return {
             margin: {
                 type: 'String',
-                values: Object.keys(__STheme.config('margin')),
+                values: Object.keys(__STheme.get('margin')),
                 default: 'default',
                 required: true,
             },
             scalable: {
                 type: 'Boolean',
-                default: __STheme.config('scalable.margin'),
+                default: __STheme.get('scalable.margin'),
             },
         };
     }
@@ -58,9 +58,36 @@ export default function ({
 
     const margin = finalParams.margin;
     let margins = margin.split(' ').map((s) => {
-        if (s === `${parseInt(s)}`)
-            return `sugar.theme(margin.${s}, ${finalParams.scalable})`;
-        return s;
+        let registeredValue,
+            factor = '';
+
+        // try to get the padding with the pased
+        try {
+            registeredValue = __STheme.get(`margin.${s}`);
+        } catch (e) {}
+
+        // default return simply his value
+        if (s === 'default') {
+            // @ts-ignore
+            factor = '1';
+        } else if (registeredValue !== undefined) {
+            factor = `sugar.theme(margin.${s}, ${finalParams.scalable})`;
+        } else if (
+            isNaN(parseFloat(s)) &&
+            s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
+        ) {
+            // support dotPath
+            factor = `sugar.theme(${s}, ${finalParams.scalable})`;
+        } else if (!isNaN(parseFloat(s))) {
+            // support simple number
+            factor = `${s}`;
+        } else {
+            throw new Error(
+                `<yellow>[s-postcss-sugar-plugin]</yellow> Margin "<cyan>${s}</cyan>" is not a valid value`,
+            );
+        }
+        // generate css value
+        return `calc(sugar.theme(margin.default) * ${factor})`;
     });
 
     return margins.join(' ');

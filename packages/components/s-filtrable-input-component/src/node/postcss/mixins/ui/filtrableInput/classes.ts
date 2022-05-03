@@ -12,14 +12,13 @@ class postcssUiFiltrableInputClassesInterface extends __SInterface {
             },
             defaultColor: {
                 type: 'String',
-                default: __STheme.config('ui.filtrableInput.defaultColor'),
+                default: __STheme.get('ui.filtrableInput.defaultColor'),
             },
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
                 default:
-                    __STheme.config('ui.filtrableInput.defaultStyle') ??
-                    'solid',
+                    __STheme.get('ui.filtrableInput.defaultStyle') ?? 'solid',
             },
             scope: {
                 type: {
@@ -194,7 +193,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 .s-filtrable-input {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.config('ui.filtrableInput.rhythmVertical'),
+                        __STheme.get('ui.filtrableInput.rhythmVertical'),
                     )}
                 } 
             }

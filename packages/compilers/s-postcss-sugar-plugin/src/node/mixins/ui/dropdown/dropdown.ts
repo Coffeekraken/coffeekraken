@@ -31,12 +31,12 @@ class postcssSugarPluginUiDropdownInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.dropdown.defaultStyle'),
+                default: __STheme.get('ui.dropdown.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __STheme.config('ui.dropdown.defaultShape'),
+                default: __STheme.get('ui.dropdown.defaultShape'),
             },
             position: {
                 type: 'String',
@@ -124,8 +124,8 @@ export default function ({
             default:
                 vars.push(`
                     background-color: sugar.color(base);
-                    padding-inline: sugar.theme(ui.dropdown.paddingInline);
-                    padding-block: sugar.theme(ui.dropdown.paddingBlock);
+                    padding-inline: sugar.padding(ui.dropdown.paddingInline);
+                    padding-block: sugar.padding(ui.dropdown.paddingBlock);
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
                     @sugar.depth(sugar.theme.value(ui.dropdown.depth));
                     @sugar.transition(fast);
@@ -149,7 +149,7 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.dropdown.borderRadius);
+                    border-radius: sugar.border.radius(ui.dropdown.borderRadius);
                 `);
                 break;
         }

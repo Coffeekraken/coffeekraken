@@ -27,13 +27,13 @@ class postcssSugarPluginPaddingFunctionInterface extends __SInterface {
         return {
             padding: {
                 type: 'String',
-                values: Object.keys(__STheme.config('padding')),
+                values: Object.keys(__STheme.get('padding')),
                 default: 'default',
                 required: true,
             },
             scalable: {
                 type: 'Boolean',
-                default: __STheme.config('scalable.padding'),
+                default: __STheme.get('scalable.padding'),
             },
         };
     }
@@ -58,9 +58,36 @@ export default function ({
 
     const padding = finalParams.padding;
     let paddings = padding.split(' ').map((s) => {
-        if (s === `${parseInt(s)}`)
-            return `sugar.theme(padding.${s}, ${finalParams.scalable})`;
-        return s;
+        let registeredValue,
+            factor = '';
+
+        // try to get the padding with the pased
+        try {
+            registeredValue = __STheme.get(`padding.${s}`);
+        } catch (e) {}
+
+        // default return simply his value
+        if (s === 'default') {
+            // @ts-ignore
+            factor = '1';
+        } else if (registeredValue !== undefined) {
+            factor = `sugar.theme(padding.${s}, ${finalParams.scalable})`;
+        } else if (
+            isNaN(parseFloat(s)) &&
+            s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
+        ) {
+            // support dotPath
+            factor = `sugar.theme(${s}, ${finalParams.scalable})`;
+        } else if (!isNaN(parseFloat(s))) {
+            // support simple number
+            factor = `${s}`;
+        } else {
+            throw new Error(
+                `<yellow>[s-postcss-sugar-plugin]</yellow> Padding "<cyan>${s}</cyan>" is not a valid value`,
+            );
+        }
+        // generate css value
+        return `calc(sugar.theme(padding.default) * ${factor})`;
     });
 
     return paddings.join(' ');

@@ -116,7 +116,7 @@ s-panel[lnf='default'] {
         transition: sugar.theme(ui.panel.transition);
         background: sugar.color(main, background);
         @sugar.depth (sugar.theme.value(ui.panel.depth));
-        @sugar.border.radius (sugar.theme.value(ui.panel.borderRadius));
+        @sugar.border.radius (ui.panel.borderRadius);
         opacity: 0;
     }
 

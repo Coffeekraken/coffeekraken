@@ -60,6 +60,7 @@ export interface ISPackageCtorSettings extends ISBuilderCtorSettings {
 
 export interface ISPackageInstallParams {
     manager: 'npm' | 'yarn';
+    dependencies: any;
 }
 
 export interface ISPackageInstallResult {}
@@ -334,6 +335,25 @@ export default class SPackage extends __SClass {
             const packageRoot = __packageRoot();
 
             if (__fs.existsSync(`${packageRoot}/package.json`)) {
+                const json = JSON.parse(
+                    __fs.readFileSync(`${packageRoot}/package.json`).toString(),
+                );
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[install]</yellow> Adding default dependencies: <magenta>${Object.keys(
+                        finalParams.dependencies ?? {},
+                    ).join('<white>,</white> ')}</magenta>`,
+                });
+                json.dependencies = {
+                    ...json.dependencies,
+                    ...(finalParams.dependencies ?? {}),
+                };
+                __fs.writeFileSync(
+                    `${packageRoot}/package.json`,
+                    JSON.stringify(json, null, 4),
+                );
+
                 emit('log', {
                     type: __SLog.TYPE_INFO,
                     value: `<yellow>[install]</yellow> Installing the <cyan>node_modules</cyan> dependencies using <cyan>${finalParams.manager}</cyan>...`,
@@ -390,13 +410,13 @@ export default class SPackage extends __SClass {
                 });
             }
 
-            if (finalParams.folder === undefined) {
-                finalParams.folder = await emit('ask', {
-                    type: 'confirm',
-                    message: 'Do you want to rename the folder as well ?',
-                    default: true,
-                });
-            }
+            // if (finalParams.folder === undefined) {
+            //     finalParams.folder = await emit('ask', {
+            //         type: 'confirm',
+            //         message: 'Do you want to rename the folder as well ?',
+            //         default: true,
+            //     });
+            // }
 
             // rename package
             emit('log', {

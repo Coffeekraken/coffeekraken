@@ -2,7 +2,7 @@ import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
 import { define as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
-import { define as __SScrollToComponent } from '@coffeekraken/s-scroll-to-component';
+import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
@@ -33,6 +33,8 @@ import { define as __VersionSelector } from './components/VersionSelector';
 import __STheme from '@coffeekraken/s-theme';
 import __SConductor from '@coffeekraken/s-conductor';
 import __krakenLogo from './generic/krakenLogo';
+
+import __SCssAnimate from '@coffeekraken/s-css-animate';
 
 // @ts-ignore
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
@@ -77,13 +79,20 @@ __SConductor.setup({
         if (typeof value.default === 'function') value.default();
     }
 
+    const $illustration = document.querySelector(
+        '#features-opensource .__illustration',
+    );
+    if ($illustration) {
+        const player = new __SCssAnimate($illustration);
+    }
+
     // components
     __CKDiscoverComponent();
     __CKSettingsComponent();
     __SCodeExampleWebcomponent();
     __SSidePanelWebcomponent();
     __SColorPickerWebcomponent();
-    __SScrollToComponent();
+    __SScrollComponent();
     __SDatePickerWebcomponent();
     __SRangeWebcomponent();
     __SSliderComponent({

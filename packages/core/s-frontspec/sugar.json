@@ -15,6 +15,11 @@
           "description": "Find the frontspec.json files that are relative to your cwd and read their content",
           "interface": "./dist/pkg/esm/node/interface/SFrontspecReadParamsInterface.js",
           "process": "./dist/pkg/esm/cli/read.cli.js"
+        },
+        "add": {
+          "description": "Add the default frontspec.json file to the project",
+          "interface": "./dist/pkg/esm/node/interface/SFrontspecAddParamsInterface.js",
+          "process": "./dist/pkg/esm/cli/add.cli.js"
         }
       }
     }

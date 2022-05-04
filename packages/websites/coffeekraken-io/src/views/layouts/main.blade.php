@@ -37,9 +37,9 @@
 
     @include('layouts.footer.footer')
 
-    <s-scroll-to class="scroll-top" href="top">
+    <s-scroll class="scroll-top" to="top">
         <i class="s-icon:angle-up"></i>
-    </s-scroll-to>
+    </s-scroll>
 
     <div class="top-loader"></div>
 

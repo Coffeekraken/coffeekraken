@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SScrollToComponentInterface
+ * @name                SScrollComponentInterface
  * @namespace           js.interface
  * @type.                      Class
  * @extends             SInterface
@@ -19,9 +19,15 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default class SScrollToComponentInterface extends __SInterface {
+export default class SScrollComponentInterface extends __SInterface {
     static get _definition() {
         return {
+            to: {
+                description:
+                    'The target when to scroll. Must be a valid css selector',
+                type: 'String',
+                required: true,
+            },
             duration: {
                 description: 'Specify the duration of the scroll in ms',
                 type: 'number',

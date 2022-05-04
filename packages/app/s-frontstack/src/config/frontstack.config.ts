@@ -12,17 +12,17 @@ export default function (env, config) {
 
         recipes: {
             /**
-             * @name            default
+             * @name            generic
              * @namespace       config.frontstack.recipes
              * @type            String
-             * @default         [config.frontstackRecipeDefault]
+             * @default         [config.frontstackRecipeGeneric]
              *
              * Specify the default recipe
              *
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            default: '[config.frontstackRecipeDefault]',
+            generic: '[config.frontstackRecipeGeneric]',
             /**
              * @name            nextJs
              * @namespace       config.frontstack.recipes
@@ -143,6 +143,46 @@ export default function (env, config) {
                 params: {},
                 settings: {},
             },
+            initNpm: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.initNpm
+                 * @type            String
+                 * @default        Init npm package
+                 *
+                 * Init the npm package
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Init npm package',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.initNpm
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack initNpm action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Init npm package in the project',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.initNpm
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the frontstack initNpm action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `npm init es6 -y`,
+                params: {},
+                settings: {},
+            },
             addSugarJson: {
                 /**
                  * @name            title
@@ -183,6 +223,46 @@ export default function (env, config) {
                 params: {},
                 settings: {},
             },
+            addFrontspecJson: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.addFrontspecJson
+                 * @type            String
+                 * @default        Adding sugar.json file
+                 *
+                 * Add the sugar.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Adding frontspec.json file',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.addFrontspecJson
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addFrontspecJson action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Adding the frontspec.json file to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.addFrontspecJson
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the frontstack addFrontspecJson action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar frontspec.add [arguments]`,
+                params: {},
+                settings: {},
+            },
             addManifestJson: {
                 /**
                  * @name            title
@@ -220,6 +300,86 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: `sugar add.manifestJson [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addFavicon: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.addFavicon
+                 * @type            String
+                 * @default        Adding manifest.json file
+                 *
+                 * Add the manifest.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Adding source favicon file',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.addFavicon
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addFavicon action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Adding the favicon source file to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.addFavicon
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the frontstack addFavicon action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar favicon.add [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addDefaultPages: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.addDefaultPages
+                 * @type            String
+                 * @default        Adding manifest.json file
+                 *
+                 * Add the manifest.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Adding default pages/views file',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.addDefaultPages
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addDefaultPages action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Adding some default pages/views to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.addDefaultPages
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the frontstack addDefaultPages action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar frontendServer.addDefaultPages -y [arguments]`,
                 params: {},
                 settings: {},
             },
@@ -398,6 +558,51 @@ export default function (env, config) {
                  */
                 command: 'sugar postcss.build [arguments]',
                 params: {},
+                settings: {
+                    processManager: {},
+                },
+            },
+            typescriptBuild: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.typescriptBuild
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Specify the typescriptBuilder build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Typescript builder build action',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.typescriptBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the typescriptBuilder build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'Build typescript using the s-typescript-builder package',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.typescriptBuild
+                 * @type            String
+                 * @default        sugar typescriptBuilder.build [arguments]
+                 *
+                 * Specify the typescriptBuilder build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: 'sugar ts.build [arguments]',
+                params: {
+                    watch: true,
+                },
                 settings: {
                     processManager: {},
                 },

@@ -6,10 +6,12 @@ import __fs from 'fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
+import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
 
 import __pickOne from '@coffeekraken/sugar/node/fs/pickOne';
 
@@ -19,7 +21,7 @@ export default (stringArgs = '') => {
             stringArgs,
         );
 
-        const rootPath = __packageRoot(process.cwd());
+        const packageRoot = __packageRoot(process.cwd());
 
         let currentConfig = {};
 
@@ -31,13 +33,13 @@ export default (stringArgs = '') => {
                 'postcss.config.js',
             ],
             {
-                cwd: rootPath,
+                cwd: packageRoot,
             },
         );
 
         let configFilePath =
             configFile?.path ??
-            `${rootPath}/${configFile?.name ?? 'postcss.config.json'}`;
+            `${packageRoot}/${configFile?.name ?? 'postcss.config.json'}`;
 
         // create file if needed
         if (!configFile) {
@@ -118,32 +120,68 @@ export default (stringArgs = '') => {
                 break;
         }
         const thisPackageRoot = __packageRoot(__dirname());
+        const globalCssToAdd = __fs
+            .readFileSync(`${thisPackageRoot}/src/cli/data/index.css`)
+            .toString();
 
-        const globalCssToAdd = `/* importing sugar toolkit */\n@import './sugar.css';`;
         const sugarCss = __fs
             .readFileSync(`${thisPackageRoot}/src/cli/data/sugar.css`)
             .toString();
 
         // detecting the package type (next, generic, etc...)
-        if (__fs.existsSync(`${rootPath}/next.config.js`)) {
-            emit('log', {
-                value:
-                    '<yellow>Nextjs</yellow> project detected. Adding sugar css files...',
-            });
 
-            const globalCss = __fs
-                .readFileSync(`${rootPath}/styles/globals.css`)
-                .toString();
+        let globalCss;
 
-            if (!globalCss.includes(globalCssToAdd)) {
-                __fs.writeFileSync(
-                    `${rootPath}/styles/globals.css`,
-                    [globalCssToAdd, globalCss].join('\n\n'),
-                );
-            }
-            if (!__fs.existsSync(`${rootPath}/styles/sugar.css`)) {
-                __fs.writeFileSync(`${rootPath}/styles/sugar.css`, sugarCss);
-            }
+        switch (__detectProjectType().type) {
+            case 'next':
+                emit('log', {
+                    value:
+                        '<yellow>Nextjs</yellow> project detected. Adding sugar css files...',
+                });
+
+                globalCss = __fs
+                    .readFileSync(`${packageRoot}/styles/globals.css`)
+                    .toString();
+
+                if (!globalCss.includes(globalCssToAdd)) {
+                    __fs.writeFileSync(
+                        `${packageRoot}/styles/globals.css`,
+                        [globalCssToAdd, globalCss].join('\n\n'),
+                    );
+                }
+                if (!__fs.existsSync(`${packageRoot}/styles/sugar.css`)) {
+                    __fs.writeFileSync(
+                        `${packageRoot}/styles/sugar.css`,
+                        sugarCss,
+                    );
+                }
+                break;
+            default:
+                emit('log', {
+                    value:
+                        '<yellow>Generic</yellow> project detected. Adding sugar css files...',
+                });
+
+                const srcCssDir = __SSugarConfig.get('storage.src.cssDir');
+
+                if (!__fs.existsSync(`${srcCssDir}/index.css`)) {
+                    __writeFileSync(`${srcCssDir}/index.css`, '');
+                }
+
+                globalCss = __fs
+                    .readFileSync(`${srcCssDir}/index.css`)
+                    .toString();
+
+                if (!globalCss.includes(globalCssToAdd)) {
+                    __fs.writeFileSync(
+                        `${srcCssDir}/index.css`,
+                        [globalCssToAdd, globalCss].join('\n\n'),
+                    );
+                }
+                if (!__fs.existsSync(`${srcCssDir}/sugar.css`)) {
+                    __fs.writeFileSync(`${srcCssDir}/sugar.css`, sugarCss);
+                }
+                break;
         }
 
         emit('log', {

@@ -278,7 +278,7 @@ export default class CKSearch extends __SLitComponent {
                     if (item.package.name !== window.packageJson.name) {
                         $elm.dispatchEvent(
                             new CustomEvent('location.href', {
-                                detail: `/${item.package.name}${item.menu.slug}`,
+                                detail: `/package/${item.package.name}${item.menu.slug}`,
                                 bubbles: true,
                             }),
                         );
@@ -286,7 +286,7 @@ export default class CKSearch extends __SLitComponent {
                     } else {
                         $elm.dispatchEvent(
                             new CustomEvent('location.href', {
-                                detail: item.menu.slug,
+                                detail: `${item.menu.slug}`,
                                 bubbles: true,
                             }),
                         );

@@ -11,6 +11,7 @@ import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import __path from 'path';
 import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface';
+import __SFrontendServerAddDefaultPagesParamsInterface from './interface/SFrontendServerAddDefaultPagesParamsInterface';
 // import __vhost from 'vhost';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __SBench from '@coffeekraken/s-bench';
@@ -18,6 +19,9 @@ import __SDuration from '@coffeekraken/s-duration';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __SGlob from '@coffeekraken/s-glob';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __recursiveCopy from 'recursive-copy';
 
 /**
  * @name            SFrontendServer
@@ -38,13 +42,20 @@ import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export interface ISFrontendServerParams {
+export interface ISFrontendServerStartParams {
     port: number;
     hostname: string;
     rootDir: string;
     viewsDir: string;
+    pagesDir: string;
     logLevel: string;
     prod: boolean;
+}
+
+export interface ISFrontendServerAddDefaultPagesParams {
+    yes: boolean;
+    pagesDir: string;
+    viewsDir: string;
 }
 
 export interface ISFrontendServerPageViewConfig {
@@ -94,15 +105,15 @@ export default class SFrontendServer extends __SClass {
      * @type           Function
      * @async
      *
-     * This function take as parameter an Partial<ISFrontendServerParams> object,
+     * This function take as parameter an Partial<ISFrontendServerStartParams> object,
      * start a server using these parameters and returns an SPromise instance
      * through which you can subscribe for events, etc...
      *
      * @since       2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    start(params: Partial<ISFrontendServerParams> | string): Promise<any> {
-        const finalParams: ISFrontendServerParams = __SFrontendServerStartParamsInterface.apply(
+    start(params: Partial<ISFrontendServerStartParams> | string): Promise<any> {
+        const finalParams: ISFrontendServerStartParams = __SFrontendServerStartParamsInterface.apply(
             params,
         );
 
@@ -353,6 +364,84 @@ export default class SFrontendServer extends __SClass {
     }
 
     /**
+     * @name        addDefaultPages
+     * @type           Function
+     * @async
+     *
+     * This method will add some default pages to your project with the pages configuration in the "src/pages" folder.
+     *
+     * @since       2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    addDefaultPages(
+        params: Partial<ISFrontendServerStartParams> | string,
+    ): Promise<any> {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                const finalParams: ISFrontendServerAddDefaultPagesParams = __SFrontendServerAddDefaultPagesParamsInterface.apply(
+                    params,
+                );
+
+                // adding default pages/views
+                emit('log', {
+                    value: `<yellow>[add]</yellow> Adding default pages to your project...`,
+                });
+
+                if (!finalParams.yes) {
+                    if (
+                        !(await emit('ask', {
+                            type: 'confirm',
+                            message:
+                                'This process will override your current pages/views if some already exists and match with the default pages/views that will be added. Are you ok with that?',
+                            default: true,
+                        }))
+                    ) {
+                        return resolve();
+                    }
+                }
+
+                // source views folder path
+                const sourceViewsFolderPath = __path.resolve(
+                    __path.resolve(__packageRoot(__dirname())),
+                    'src/views',
+                );
+                // source pages folder path
+                const sourcePagesFolderPath = __path.resolve(
+                    __path.resolve(__packageRoot(__dirname())),
+                    'src/pages',
+                );
+
+                const pagesResult = await __recursiveCopy(
+                    sourcePagesFolderPath,
+                    finalParams.pagesDir,
+                    {
+                        overwrite: true,
+                    },
+                );
+                const viewsResult = await __recursiveCopy(
+                    sourceViewsFolderPath,
+                    finalParams.viewsDir,
+                    {
+                        overwrite: true,
+                    },
+                );
+
+                // adding default pages/views
+                emit('log', {
+                    value: `<green>[add]</green> Default pages added <green>successfully</green>`,
+                });
+
+                resolve();
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
+    }
+
+    /**
      * Get the handler function for the given handler name or directly a path
      */
     async _getHandlerFn(handlerNameOrPath: string) {
@@ -417,89 +506,101 @@ export default class SFrontendServer extends __SClass {
         pageFile?: any,
         configId?: string,
     ): Promise<void> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            let handlerFn,
-                slug = '',
-                slugs: string[] = pageConfig.slugs ?? [];
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                let handlerFn,
+                    slug = '',
+                    slugs: string[] = pageConfig.slugs ?? [];
 
-            const frontendServerConfig = __SSugarConfig.get('frontendServer');
+                const frontendServerConfig = __SSugarConfig.get(
+                    'frontendServer',
+                );
 
-            // generate path
-            if (pageFile && !pageConfig.slugs) {
-                slug = `/${pageFile.relPath
-                    .split('/')
-                    .slice(0, -1)
-                    .join('/')
-                    .replace(/\.(t|j)s$/, '')
-                    .replace(/\./g, '/')}`;
-            }
-
-            if (!pageConfig.slugs) {
-                if (pageConfig.params) {
-                    let isOptional = false;
-                    for (let [name, requiredOrStr] of Object.entries(
-                        pageConfig.params,
-                    )) {
-                        if (typeof requiredOrStr === 'string') {
-                            slug += `/${requiredOrStr}`;
-                        } else if (requiredOrStr) {
-                            if (isOptional) {
-                                throw new Error(
-                                    `[SFrontendServer] You cannot have required params after optional onces in the page ${pageFile.path}`,
-                                );
-                            }
-                            slug += `/:${name}`;
-                        } else {
-                            isOptional = true;
-                            slug += `/:${name}?`;
-                        }
-                    }
+                // generate path
+                if (pageFile && !pageConfig.slugs) {
+                    slug = `/${pageFile.relPath
+                        .split('/')
+                        .slice(0, -1)
+                        .join('/')
+                        .replace(/\.(t|j)s$/, '')
+                        .replace(/\./g, '/')}`;
                 }
-                slugs = [slug];
-            }
 
-            // handler
-            handlerFn = await this._getHandlerFn(
-                pageConfig.handler ?? 'dynamic',
-            );
-
-            slugs.forEach((slug) => {
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
-                        pageFile
-                            ? `<magenta>${pageFile.relPath}</magenta>`
-                            : `<magenta>config.pages.${configId}</magenta>`
-                    }`,
-                });
-
-                this._express.get(slug, (req, res, next) => {
+                if (!pageConfig.slugs) {
                     if (pageConfig.params) {
-                        for (let [key, value] of Object.entries(req.params)) {
-                            // do not process non "number" keys
-                            if (typeof __autoCast(key) !== 'number') continue;
-                            const paramKey = Object.keys(pageConfig.params)[
-                                parseInt(key)
-                            ];
-                            delete req.params[key];
-                            req.params[paramKey] = value;
+                        let isOptional = false;
+                        for (let [name, requiredOrStr] of Object.entries(
+                            pageConfig.params,
+                        )) {
+                            if (typeof requiredOrStr === 'string') {
+                                slug += `/${requiredOrStr}`;
+                            } else if (requiredOrStr) {
+                                if (isOptional) {
+                                    throw new Error(
+                                        `[SFrontendServer] You cannot have required params after optional onces in the page ${pageFile.path}`,
+                                    );
+                                }
+                                slug += `/:${name}`;
+                            } else {
+                                isOptional = true;
+                                slug += `/:${name}?`;
+                            }
                         }
                     }
+                    slugs = [slug];
+                }
 
-                    return pipe(
-                        handlerFn({
-                            req,
-                            res,
-                            next,
-                            pageConfig,
-                            pageFile,
-                            frontendServerConfig,
-                        }),
-                    );
+                // handler
+                handlerFn = await this._getHandlerFn(
+                    pageConfig.handler ?? 'dynamic',
+                );
+
+                slugs.forEach((slug) => {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
+                            pageFile
+                                ? `<magenta>${pageFile.relPath}</magenta>`
+                                : `<magenta>config.pages.${configId}</magenta>`
+                        }`,
+                    });
+
+                    this._express.get(slug, (req, res, next) => {
+                        if (pageConfig.params) {
+                            for (let [key, value] of Object.entries(
+                                req.params,
+                            )) {
+                                // do not process non "number" keys
+                                if (typeof __autoCast(key) !== 'number')
+                                    continue;
+                                const paramKey = Object.keys(pageConfig.params)[
+                                    parseInt(key)
+                                ];
+                                delete req.params[key];
+                                req.params[paramKey] = value;
+                            }
+                        }
+
+                        return pipe(
+                            handlerFn({
+                                req,
+                                res,
+                                next,
+                                pageConfig,
+                                pageFile,
+                                frontendServerConfig,
+                            }),
+                        );
+                    });
                 });
-            });
 
-            resolve();
-        });
+                resolve();
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
     }
 }

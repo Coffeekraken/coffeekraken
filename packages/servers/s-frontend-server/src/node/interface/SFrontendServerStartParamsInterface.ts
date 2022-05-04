@@ -44,17 +44,18 @@ export default class SFrontendServerStartParamsInterface extends __SInterface {
             rootDir: {
                 description: 'Server root directory',
                 type: 'String',
-                default:
-                    __SSugarConfig.get('frontendServer.rootDir') ||
-                    __packageRoot(process.cwd()),
+                default: __SSugarConfig.get('frontendServer.rootDir'),
                 level: 1,
             },
             viewsDir: {
                 description: 'Server views directory',
                 type: 'String',
-                default:
-                    __SSugarConfig.get('frontendServer.viewsDir') ||
-                    __packageRoot(process.cwd()) + '/views',
+                default: __SSugarConfig.get('frontendServer.viewsDir'),
+            },
+            pagesDir: {
+                description: 'Server pages directory',
+                type: 'String',
+                default: __SSugarConfig.get('frontendServer.pagesDir'),
             },
             logLevel: {
                 description: 'Specify the log level you want for your server',

@@ -18,7 +18,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        title: 'Default',
+        title: 'Generic',
         /**
          * @name            description
          * @namespace       config.frontstackRecipeDefault
@@ -30,7 +30,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        description: 'Default s-frontstack recipe ',
+        description: 'Generic s-frontstack recipe ',
         /**
          * @name            templateDir
          * @namespace       config.frontstackRecipeDefault
@@ -85,27 +85,39 @@ export default function (env, config) {
                 description: 'Init a new project with this recipe',
                 actions: {
                     /**
-                     * @name            copy
+                     * @name            createApp
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
                      * @type            String
                      *
-                     * Specify the recipe init stack copy action
+                     * Specify the recipe init stack createApp action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    copy: {
-                        extends: 'copy',
-                        title: 'Copy default template',
-                        description: 'Copy the default template files',
-                        params: {
-                            src: __path.resolve(
-                                __dirname(),
-                                `../templates/default/.`,
-                            ),
-                            dest: `${process.cwd()}/default`,
-                            chdir: true,
+                    createApp: {
+                        title: 'Creating app directory',
+                        description: 'Creating the app directory',
+                        command: `mkdir generic`,
+                        after() {
+                            process.chdir(`${process.cwd()}/generic`);
                         },
+                        params: {},
+                        settings: {},
+                    },
+                    /**
+                     * @name            initNpm
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack initNpm action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    initNpm: {
+                        extends: 'initNpm',
+                        params: {},
+                        settings: {},
                     },
                     /**
                      * @name            rename
@@ -119,9 +131,9 @@ export default function (env, config) {
                      */
                     rename: {
                         extends: 'rename',
-                        title: 'Rename default template package',
+                        title: 'Rename generic template package',
                         description:
-                            'Renamt the default template package with the user input',
+                            'Renamt the generic template package with the user input',
                         params: {},
                     },
                     /**
@@ -139,8 +151,38 @@ export default function (env, config) {
                         title: 'Add the sugar.json file',
                         description: 'Add the sugar.json file',
                         params: {
-                            recipe: 'default',
+                            recipe: 'generic',
                         },
+                    },
+                    /**
+                     * @name            addFrontspecJson
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addFrontspecJson action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addFrontspecJson: {
+                        extends: 'addFrontspecJson',
+                        title: 'Add frontspec.json file',
+                        description:
+                            'Add the frontspec.json default file in your project',
+                        params: {},
+                    },
+                    /**
+                     * @name            addDefaultPages
+                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addDefaultPages action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addDefaultPages: {
+                        extends: 'addDefaultPages',
                     },
                     /**
                      * @name            addManifestJson
@@ -159,6 +201,32 @@ export default function (env, config) {
                         params: {},
                     },
                     /**
+                     * @name            addSugarPostcss
+                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addSugarPostcss action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addSugarPostcss: {
+                        extends: 'addSugarPostcss',
+                    },
+                    /**
+                     * @name            addFavicon
+                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addFavicon action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addFavicon: {
+                        extends: 'addFavicon',
+                    },
+                    /**
                      * @name            installDependencies
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
                      * @type            String
@@ -168,13 +236,13 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    installDependencies: {
-                        extends: 'installDependencies',
-                        title: 'Install the dependencies',
-                        description:
-                            'Install the package dependencies (npm,composer)',
-                        params: {},
-                    },
+                    // installDependencies: {
+                    //     extends: 'installDependencies',
+                    //     title: 'Install the dependencies',
+                    //     description:
+                    //         'Install the package dependencies (npm,composer)',
+                    //     params: {},
+                    // },
                 },
             },
             dev: {
@@ -192,6 +260,19 @@ export default function (env, config) {
                 description: 'Start the development stack',
                 runInParallel: true,
                 actions: {
+                    /**
+                     * @name            typescriptBuild
+                     * @namespace       config.frontstackRecipeDefault.stacks.dev.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.typescriptBuild]
+                     *
+                     * Specify the recipe dev stack frontendServer action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    typescriptBuild:
+                        '[config.frontstack.actions.typescriptBuild]',
                     /**
                      * @name            frontendServer
                      * @namespace       config.frontstackRecipeDefault.stacks.dev.actions

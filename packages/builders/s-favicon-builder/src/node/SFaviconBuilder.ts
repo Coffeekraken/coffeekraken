@@ -3,9 +3,12 @@ import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import type { IResolveGlobSettings } from '@coffeekraken/s-glob';
 import __SGlob from '@coffeekraken/s-glob';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SFaviconBuilderBuildParamsInterface from './interface/SFaviconBuilderBuildParamsInterface';
+import __SFaviconBuilderAddParamsInterface from './interface/SFaviconBuilderAddParamsInterface';
 import __favicons from 'favicons';
 import __fs from 'fs';
 import __SLog from '@coffeekraken/s-log';
@@ -264,5 +267,38 @@ export default class SFaviconBuilder extends __SBuilder {
                 },
             },
         );
+    }
+
+    /**
+     * @name            add
+     * @type            Function
+     * @private
+     * @async
+     *
+     * This method allows you to add the source favicon file into your project
+     *
+     * @param       {ISFaviconBuilderAddParams}              params            The parameters to add the favicon correctly.
+     * @return      {SPromise<void>}        A promise resolved once the file has been added
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    add(params: ISFaviconBuilderAddParams): Promise<void> {
+        return new Promise((resolve, reject) => {
+            // @ts-ignore
+            params = __SFaviconBuilderAddParamsInterface.apply(params ?? {});
+
+            // source file path
+            const sourceFilePath = __path.resolve(
+                __packageRoot(__dirname()),
+                `src/favicon/favicon.png`,
+            );
+
+            // copy the file to his destination
+            __copySync(sourceFilePath, params.output);
+
+            // resolve the process
+            resolve();
+        });
     }
 }

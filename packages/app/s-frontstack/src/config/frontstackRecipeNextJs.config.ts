@@ -83,7 +83,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    createApp: __deepMerge(config.frontstack.actions.copy, {
+                    createApp: __deepMerge({
                         title: 'Create the app',
                         description:
                             'Create the app using the create-next-app utility',

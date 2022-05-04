@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { html, css, unsafeCSS } from 'lit';
-import __SScrollToComponentInterface from './interface/SScrollToComponentInterface';
+import __SScrollComponentInterface from './interface/SScrollComponentInterface';
 import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
@@ -11,14 +11,14 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 
 // @ts-ignore
-import __css from '../../../../src/css/s-scroll-to.css'; // relative to /dist/pkg/esm/js
+import __css from '../../../../src/css/s-scroll.css'; // relative to /dist/pkg/esm/js
 
 /**
  * @name                Scroll to
  * @namespace           js
  * @type                CustomElement
- * @interface           ./interface/SScrollToComponentInterface.js
- * @menu                Styleguide / Forms              /styleguide/form/s-scroll-to
+ * @interface           ./interface/SScrollComponentInterface.js
+ * @menu                Styleguide / Tools              /styleguide/tool/s-scroll
  * @platform            html
  * @status              beta
  *
@@ -35,10 +35,10 @@ import __css from '../../../../src/css/s-scroll-to.css'; // relative to /dist/pk
  * @support         edge
  *
  * @install          bash
- * npm i @coffeekraken/s-scroll-to-component
+ * npm i @coffeekraken/s-scroll-component
  *
  * @install         js
- * import { define } from '@coffeekraken/s-scroll-to-component';
+ * import { define } from '@coffeekraken/s-scroll-component';
  * define();
  *
  * @see             https://github.com/darlanrod/input-range-scss
@@ -46,16 +46,17 @@ import __css from '../../../../src/css/s-scroll-to.css'; // relative to /dist/pk
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISScrollToComponentProps extends ISLitComponentDefaultProps {
+export interface ISScrollComponentProps extends ISLitComponentDefaultProps {
+    to: string;
     duration: number;
     offset: number;
     offsetX: number;
     offsetY: number;
 }
 
-export default class SScrollToComponent extends __SLitComponent {
+export default class SScrollComponent extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.properties({}, __SScrollToComponentInterface);
+        return __SLitComponent.properties({}, __SScrollComponentInterface);
     }
 
     static get styles() {
@@ -73,7 +74,7 @@ export default class SScrollToComponent extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SScrollToComponentInterface,
+                    interface: __SScrollComponentInterface,
                 },
             }),
         );
@@ -81,7 +82,7 @@ export default class SScrollToComponent extends __SLitComponent {
     async firstUpdated() {
         this.addEventListener('click', (e) => {
             e.preventDefault();
-            this._scrollTo(this.getAttribute('href'));
+            this._scrollTo(this.props.to);
         });
     }
     _scrollTo(target: string) {
@@ -141,9 +142,9 @@ export default class SScrollToComponent extends __SLitComponent {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export function define(
-    props: Partial<ISScrollToComponentProps> = {},
-    tagName = 's-scroll-to',
+    props: Partial<ISScrollComponentProps> = {},
+    tagName = 's-scroll',
 ) {
     __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SScrollToComponent);
+    customElements.define(tagName, SScrollComponent);
 }

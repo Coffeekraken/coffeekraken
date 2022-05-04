@@ -270,12 +270,12 @@ class SProcessManager extends __SEventEmitter {
                 settings,
             );
 
-            this.emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<bgYellow><black> Starting process ${processId} </black></bgYellow><yellow>${'-'.repeat(
-                    process.stdout.columns - 19 - processId.length,
-                )}</yellow>`,
-            });
+            // this.emit('log', {
+            //     type: __SLog.TYPE_INFO,
+            //     value: `<bgYellow><black> Starting process ${processId} </black></bgYellow><yellow>${'-'.repeat(
+            //         process.stdout.columns - 19 - processId.length,
+            //     )}</yellow>`,
+            // });
 
             this.pipe(promise, {
                 overrideEmitter: true,

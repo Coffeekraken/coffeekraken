@@ -5,13 +5,18 @@ import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __delete from '@coffeekraken/sugar/shared/object/delete';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
+import __SLog from '@coffeekraken/s-log';
+import __SFrontspecAddParamsInterface from './interface/SFrontspecAddParamsInterface';
 
 /**
  * @name                SFrontspec
@@ -40,6 +45,8 @@ import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+export interface ISFrontspecAddParams {}
 
 export interface ISFrontspecAssetToServe {}
 
@@ -87,6 +94,10 @@ export default class SFrontspec extends __SPromise {
         return new __SPromise(async ({ resolve, pipe, emit }) => {
             const frontspecPath = `${__packageRootDir()}/frontspec.json`;
 
+            if (!__fs.existsSync(frontspecPath)) {
+                return resolve({});
+            }
+
             let frontspecJson = {};
             try {
                 frontspecJson = __readJsonSync(frontspecPath);
@@ -117,6 +128,48 @@ export default class SFrontspec extends __SPromise {
             }
 
             resolve(res);
+        });
+    }
+
+    /**
+     * @name          add
+     * @type          Function
+     *
+     * This method allows you to add a new frontspec.json file to your project.
+     *
+     * @param       {Partial<ISFrontspecAddParams>}          params={}         Some params for your process
+     * @return      {SPromise}                          An SPromise instance that will be resolved once the frontspec.json file has been correctly read
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    add(params: Partial<ISFrontspecAddParams>) {
+        return new __SPromise(async ({ resolve, pipe, emit }) => {
+            // @ts-ignore
+            const finalParams: ISFrontspecAddParams = __SFrontspecAddParamsInterface.apply(
+                params,
+            );
+
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>[add]</yellow> Adding default <cyan>frontspec.json</cyan> file...`,
+            });
+
+            const frontspecPath = `${__packageRootDir()}/frontspec.json`;
+            const sourceJsonPath = __path.resolve(
+                __packageRoot(__dirname()),
+                'src/data/frontspec.json',
+            );
+
+            // copy the file to the project root
+            __copySync(sourceJsonPath, frontspecPath);
+
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<green>[add]</green> Default <cyan>frontspec.json</cyan> file addedd <green>successfully</green>`,
+            });
+
+            resolve();
         });
     }
 

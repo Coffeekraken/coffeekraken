@@ -71,14 +71,27 @@ export default function (env, config) {
          * @name            viewsDir
          * @namespace       config.frontendServer
          * @type            String
-         * @default         [config.storage.src.rootDir]/views
+         * @default         [config.storage.src.viewsDir]
          *
          * Specify the views directory path
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        viewsDir: `[config.storage.src.rootDir]/views`,
+        viewsDir: `[config.storage.src.viewsDir]`,
+
+        /**
+         * @name            pagesDir
+         * @namespace       config.frontendServer
+         * @type            String
+         * @default         [config.storage.src.pagesDir]
+         *
+         * Specify the views directory path
+         *
+         * @since         2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        pagesDir: `[config.storage.src.pagesDir]`,
 
         /**
          * @name          logLevel

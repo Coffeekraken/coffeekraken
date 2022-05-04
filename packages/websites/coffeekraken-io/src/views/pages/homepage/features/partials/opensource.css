@@ -1,4 +1,22 @@
+@keyframes opensource-animation {
+    0% {
+        opacity: 1;
+        transform: translate(-150px, 0);
+    }
+    50% {
+        opacity: 0.2;
+        transform: translate(0, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-150px, 0);
+    }
+}
+
 #features-opensource {
+    .__illustration {
+        animation: 3s opensource-animation infinite;
+    }
 
     .__box {
         position: relative;
@@ -7,8 +25,10 @@
         &:before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('/dist/img/welcome/welcome-bg-light-01.jpg');
             background-repeat: repeat-x;
             background-size: cover;

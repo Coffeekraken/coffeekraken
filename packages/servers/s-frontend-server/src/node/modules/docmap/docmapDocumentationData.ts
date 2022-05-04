@@ -8,6 +8,8 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         let html;
 
+        console.log(req.params);
+
         if (!req.params.path) {
             throw new Error(
                 `[SFrontendServer.docmapDocumentationData] Missing "path" parameter from the url...`,

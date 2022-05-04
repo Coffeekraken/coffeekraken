@@ -59,6 +59,9 @@ function getAnimationProperties(elm: HTMLElement) {
         __getStyleProperty(elm, 'animation-iteration-count') || 1;
     const direction =
         __getStyleProperty(elm, 'animation-direction') || 'normal';
+    const fillMode = __getStyleProperty(elm, 'animation-fill-mode') || 'none';
+    const playState =
+        __getStyleProperty(elm, 'animation-play-state') || 'running';
 
     // return the animation object
     const props = {
@@ -68,6 +71,8 @@ function getAnimationProperties(elm: HTMLElement) {
         timingFunction: timingFunction.split(','),
         iterationCount: `${iterationCount}`.split(','),
         direction: direction.split(','),
+        fillMode: fillMode.split(','),
+        playState: playState.split(','),
     };
     let totalDuration = 0;
     const i = 0;

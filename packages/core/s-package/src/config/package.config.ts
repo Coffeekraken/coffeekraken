@@ -29,6 +29,22 @@ export default function (env, config) {
          */
         rootDir: '[config.storage.package.rootDir]',
 
+        /**
+         * @name            defaultDependencies
+         * @namespace       config.package.exports
+         * @type            Object
+         * @default
+         *
+         * Specify some default packages you want to install when you run `sugar package.install`
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        defaultDependencies: {
+            '@coffeekraken/sugar': '^2.0.0',
+            '@coffeekraken/s-typescript-builder': '^2.0.0',
+        },
+
         exports: {
             /**
              * @name            glob

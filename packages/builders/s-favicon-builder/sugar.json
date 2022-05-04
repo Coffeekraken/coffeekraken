@@ -15,6 +15,10 @@
         "build": {
           "description": "Generate all the favicons files you need from a single source file",
           "process": "./dist/pkg/esm/cli/build.cli.js"
+        },
+        "add": {
+          "description": "Add the source favicon image into your project",
+          "process": "./dist/pkg/esm/cli/add.cli.js"
         }
       }
     }

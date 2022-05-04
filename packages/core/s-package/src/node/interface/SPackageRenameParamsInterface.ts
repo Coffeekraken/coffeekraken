@@ -23,11 +23,11 @@ export default class SPackageRenameParamsInterface extends __SInterface {
             name: {
                 description: 'Specify the new name for your package',
                 type: 'String',
-                required: true,
             },
             folder: {
                 description: 'Specify if the folder has to be renames as well',
                 type: 'Boolean',
+                default: true,
             },
         };
     }

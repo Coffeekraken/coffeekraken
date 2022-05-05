@@ -11,7 +11,7 @@ import __getCssDeclarations from './getCssDeclarations';
  *
  * @param       {string}            animationName        CSS animationName to search KeyFrameRule declarations for
  * @param       {array}              rules               Array of CSSRules to search
- * @return      {array}              Array of matching KeyFrameRules
+ * @return      {CSSKeyframeRule}              Array of matching KeyFrameRules
  *
  * @todo      refactore
  * @todo      interface
@@ -26,7 +26,10 @@ import __getCssDeclarations from './getCssDeclarations';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function getKeyframesDeclarations(animationName, rules): any[] {
+export default function getKeyframesDeclarations(
+    animationName,
+    rules,
+): CSSKeyframeRule[] {
     const keyframesNames: string[] = [];
     return __getCssDeclarations('keyframes', rules, (rule) => {
         if (keyframesNames.includes(rule.name)) return false;

@@ -41,7 +41,6 @@ export interface IParseTransformRuleResult {
     skew: string | number;
     skewX: string | number;
     skewY: string | number;
-    skewZ: string | number;
 }
 
 export default function parseTransformRule(
@@ -50,10 +49,10 @@ export default function parseTransformRule(
     const transforms = transformStr.trim().split(/\) |\)/);
 
     const result: IParseTransformRuleResult = {
-        scale: 0,
-        scaleX: 0,
-        scaleY: 0,
-        scaleZ: 0,
+        scale: 1,
+        scaleX: 1,
+        scaleY: 1,
+        scaleZ: 1,
         translateX: 0,
         translateY: 0,
         translateZ: 0,
@@ -64,7 +63,6 @@ export default function parseTransformRule(
         skew: 0,
         skewX: 0,
         skewY: 0,
-        skewZ: 0,
     };
 
     transforms.forEach((transStr) => {
@@ -80,12 +78,17 @@ export default function parseTransformRule(
             result[prop] = __autoCast(value);
         } else {
             const vals = value.split(',').map((v) => __autoCast(v.trim()));
-            ['X', 'Y', 'Z'].forEach((axis, i) => {
-                if (!vals[i]) {
-                    return;
-                }
-                result[`${prop}${axis}`] = vals[i];
-            });
+
+            if (vals.length === 1 && prop === 'scale') {
+                result.scale = parseFloat(value);
+            } else {
+                ['X', 'Y', 'Z'].forEach((axis, i) => {
+                    if (!vals[i]) {
+                        return;
+                    }
+                    result[`${prop}${axis}`] = vals[i];
+                });
+            }
         }
     });
 

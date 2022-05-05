@@ -3,6 +3,7 @@ import __camelCase from '../../../shared/string/camelCase';
 import __parseKeyframeKey from './parseKeyframeKey';
 import __getDefinedStyles from './getDefinedStyles';
 import __removeVendorPrefix from './removeVendorPrefix';
+import { number } from 'yargs';
 
 /**
  * @name      transformKeyframesDeclarations
@@ -29,11 +30,19 @@ import __removeVendorPrefix from './removeVendorPrefix';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ITransformedKeyframeDeclaration {
+    percentage: number;
+    offset: number;
+    rules: Record<string, any>;
+}
+
 function normalizePropertyName(propertyName) {
     return __camelCase(__removeVendorPrefix(propertyName));
 }
 
-export default function transformKeyframeDeclaration(keyFrameRule) {
+export default function transformKeyframeDeclaration(
+    keyFrameRule,
+): ITransformedKeyframeDeclaration[] {
     // Convert keyFrame.keyText to integers holding percentage of keyframe
     const percentages = __parseKeyframeKey(keyFrameRule.keyText);
     const style = __getDefinedStyles(keyFrameRule.style);
@@ -50,6 +59,7 @@ export default function transformKeyframeDeclaration(keyFrameRule) {
 
     return percentages.map((percentage) => {
         return {
+            percentage,
             // Convert percentage to fraction of 1 for webanimation compat
             offset: percentage / 100,
             // Mixin with extracted keyframe styling

@@ -1,15 +1,17 @@
 @keyframes opensource-animation {
     0% {
+        padding: 20px 10px;
         opacity: 1;
-        transform: translate(-150px, 0);
+        transform: translate(150px, 0) rotateZ(10deg) scale(1);
     }
     50% {
         opacity: 0.2;
-        transform: translate(0, 0);
+        transform: translate(50px, 0) scale(1.2);
     }
     100% {
-        opacity: 1;
-        transform: translate(-150px, 0);
+        padding: 20px 30px;
+        opacity: 0;
+        transform: translate(-150px, 0) rotateZ(-180deg) scale(0.5);
     }
 }
 

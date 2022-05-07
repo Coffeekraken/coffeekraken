@@ -41,8 +41,8 @@ import __SLog from '@coffeekraken/s-log';
  *      }
  * });
  * await builder.build({
- *      input: 'my-cool-file.md',
- *      output: 'my/cool/file-output.md'
+ *      inPath: 'my-cool-file.md',
+ *      outPath: 'my/cool/file-output.md'
  * });
  *
  * @since           2.0.0
@@ -99,18 +99,19 @@ export default class SMarkdownBuilder extends __SBuilder {
     static _registeredTransformers: any = {};
 
     /**
-     * @name              registerTransformer
+     * @name              _registerTransformer
      * @type                Function
      * @static
+     * @private
      *
      * This static method allows you to register a new transformer
      *
-     * @param           {Function<ISMarkdownBuilderToken>>}         token           A token function that returns an ISMarkdownBuilderToken object
+     * @todo        Doc
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static registerTransformer(name: string, transformerPath: string): void {
+    static _registerTransformer(name: string, transformerPath: string): void {
         // @ts-ignore
         this._registeredTransformers[name] = transformerPath;
     }
@@ -123,7 +124,8 @@ export default class SMarkdownBuilder extends __SBuilder {
      * This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object
      * used to transform your passed markdown
      *
-     * @param           {Function<ISMarkdownBuilderToken>>}         token           A token function that returns an ISMarkdownBuilderToken object
+     * @param           {String}         name           A name for your helper
+     * @param           {String}                   helperPath                    The path to your helper file that MUST export a simple js function similar to [handlebars custom helper function](https://handlebarsjs.com/guide/#custom-helpers)
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -141,18 +143,22 @@ export default class SMarkdownBuilder extends __SBuilder {
      * This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object
      * used to transform your passed markdown
      *
-     * @param           {Function<ISMarkdownBuilderToken>>}         token           A token function that returns an ISMarkdownBuilderToken object
+     * @param           {String}         name           A name for your layout
+     * @param           { Record<'markdown' | 'html', string>}                   paths                    An object with your layout paths for "markdown" and/or "html"
+     * @param           {Any}           data            An object with your layout data
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerLayout(
         name: string,
-        layout: Record<'markdown' | 'html', string>,
+        paths: Record<'markdown' | 'html', string>,
+        data: any,
     ): void {
         // @ts-ignore
         this._registeredLayouts[name] = {
-            ...layout,
+            ...paths,
+            data,
         };
     }
 
@@ -202,16 +208,17 @@ export default class SMarkdownBuilder extends __SBuilder {
     }
 
     /**
-     * @name            marked
+     * @name            _marked
      * @type            Object
      * @static
+     * @private
      *
      * Access the marked object through this property
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static marked = __marked;
+    static _marked = __marked;
 
     /**
      * @name            markdownBuilderSettings
@@ -254,7 +261,7 @@ export default class SMarkdownBuilder extends __SBuilder {
             Object.keys(config.transformers).forEach((transformerName) => {
                 const transformerPath = config.transformers[transformerName];
                 // @ts-ignore
-                this.constructor.registerTransformer(
+                this.constructor._registerTransformer(
                     transformerName,
                     transformerPath,
                 );
@@ -299,7 +306,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * It will be called by the SBuilder class with the final params
      * for the build
      *
-     * @param       {Partial<ISMarkdownBuilderBuildParams>}          [params={}]         Some params for your build
+     * @param       {dist/pkg/%moduleSystem/node/interface/SMarkdownBuilderBuildParamsInterface.js}          [params={}]         Some params for your build
      * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the build
      *
      * @since           2.0.0
@@ -546,7 +553,11 @@ export default class SMarkdownBuilder extends __SBuilder {
                             `<red>[${this.constructor.name}]</red> Sorry but the passed argument "<yellow>${path}</yellow>" does not resolve to any file on your system...`,
                         );
                     }
-                    if (sourceObj.outDir) {
+                    if (sourceObj.outPath) {
+                        sourceObj.outputStr =
+                            __path.relative(process.cwd(), sourceObj.outPath) ||
+                            '.';
+                    } else if (sourceObj.outDir) {
                         sourceObj.outputStr =
                             __path.relative(process.cwd(), sourceObj.outDir) ||
                             '.';

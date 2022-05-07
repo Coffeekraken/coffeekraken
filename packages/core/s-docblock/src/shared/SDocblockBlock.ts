@@ -60,7 +60,7 @@ export interface ISDocblockBlockTagsMap {
 }
 
 export interface ISDocblockBlockSettings {
-    filepath?: string;
+    filePath?: string;
     packageJson: any;
     renderMarkdown: boolean;
     markedOptions: any;
@@ -164,7 +164,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
             __deepMerge(
                 {
                     docblockBlock: {
-                        filepath: null,
+                        filePath: null,
                         packageJson: null,
                         renderMarkdown: false,
                         markedOptions: {},
@@ -233,7 +233,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     parse(): Promise<any> {
-        return new __SPromise(async ({resolve, reject, emit}) => {
+        return new __SPromise(async ({ resolve, reject, emit }) => {
             // some variables
             let currentTag: string;
             let currentContent: string[] = [];
@@ -316,7 +316,9 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
             add();
 
             if (this.docblockBlockSettings.renderMarkdown) {
-                __marked.setOptions(this.docblockBlockSettings.markedOptions ?? {});
+                __marked.setOptions(
+                    this.docblockBlockSettings.markedOptions ?? {},
+                );
             }
 
             for (let i = 0; i < Object.keys(docblockObj).length; i++) {
@@ -325,24 +327,24 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
 
                 // do not process two times the same property
                 if (finalDocblockObj[prop]) continue;
-                
+
                 // private props
                 if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_')
                     continue;
 
                 // process with tags
                 if (this.docblockBlockSettings.tags[prop] && prop !== 'src') {
-                    
                     let res;
                     try {
-                        res = await this.docblockBlockSettings.tags[
-                            prop
-                        ](value, this.docblockBlockSettings);
-                    } catch(e) {
+                        res = await this.docblockBlockSettings.tags[prop](
+                            value,
+                            this.docblockBlockSettings,
+                        );
+                    } catch (e) {
                         emit('log', {
                             type: __SLog.TYPE_WARN,
-                            value: `<red>[SDocblockBlock]</red> An error occured during the parsing of the docblock bellow on the tag <yellow>${prop}</yellow>:\n\n${this._source}\n\n${e.stack}`
-                        });  
+                            value: `<red>[SDocblockBlock]</red> An error occured during the parsing of the docblock bellow on the tag <yellow>${prop}</yellow>:\n\n${this._source}\n\n${e.stack}`,
+                        });
                     }
                     if (res !== undefined) {
                         finalDocblockObj[prop] = res;
@@ -355,31 +357,28 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
                 }
 
                 if (this.docblockBlockSettings.renderMarkdown) {
-
                     function renderMarkdown(data: any): any {
                         if (
                             data instanceof String &&
                             (<any>data).render === true
                         ) {
-                            return __marked.parseInline(
-                                data.toString(),
-                            );
+                            return __marked.parseInline(data.toString());
                         } else if (Array.isArray(data)) {
                             return data.map((item) => {
                                 return renderMarkdown(item);
                             });
                         } else if (__isPlainObject(data)) {
-                            return __deepMap(data, ({ prop, value: v }) => {
-                                return renderMarkdown(v);
+                            Object.keys(data).forEach((key) => {
+                                data[key] = renderMarkdown(data[key]);
                             });
+                            return data;
                         } else {
                             return data;
                         }
                     }
-
-                    finalDocblockObj[prop] = renderMarkdown(finalDocblockObj[prop]);
-
-                    
+                    finalDocblockObj[prop] = renderMarkdown(
+                        finalDocblockObj[prop],
+                    );
                 }
             }
 

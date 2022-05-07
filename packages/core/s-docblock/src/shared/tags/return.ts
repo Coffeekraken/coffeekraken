@@ -22,8 +22,8 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function returnTag(data, blockSettings) {
-    const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
-    
+    const stringArray = data.value.split(/\s{2,20000}/).map((l) => l.trim());
+
     let type =
         stringArray && stringArray[0]
             ? __upperFirst(stringArray[0].replace('{', '').replace('}', ''))

@@ -28,7 +28,9 @@
         @include('doc.example', ['block' => $block, 'lines' => 10])
     @endif
     @include('doc.cssClass', ['block' => $block])
-    @include('doc.interface', ['block' => $block])
+    @if ($block->interface)
+        @include('doc.interface', ['interface' => $block->interface])
+    @endif
     @include('doc.param', ['block' => $block])
     @include('doc.return', ['block' => $block])
     @include('doc.setting', ['block' => $block])

@@ -18,7 +18,7 @@ export default function (env, config) {
 
         /**
          * @name            rootDir
-         * @namespace       config.package.exports
+         * @namespace       config.package
          * @type            String
          * @default         [config.storage.package.rootDir]
          *
@@ -28,6 +28,21 @@ export default function (env, config) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         rootDir: '[config.storage.package.rootDir]',
+
+        readme: {
+            /**
+             * @name            path
+             * @namespace       config.package.readme
+             * @type            String
+             * @default         [config.storage.package.rootDir]/README.md
+             *
+             * Specify the path to the README file
+             *
+             * @since       2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            path: '[config.storage.package.rootDir]/README.md',
+        },
 
         /**
          * @name            defaultDependencies

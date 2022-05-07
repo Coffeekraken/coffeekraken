@@ -11,6 +11,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __packageJson from 
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';

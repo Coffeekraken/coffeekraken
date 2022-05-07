@@ -542,6 +542,7 @@ export default function ({
             .s-dropdown-container {
                 position: relative;
                 display: inline-block;
+                cursor: pointer;
 
                 & > .s-dropdown {
                     opacity: 0;

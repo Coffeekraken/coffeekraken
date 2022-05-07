@@ -19,8 +19,8 @@
     "module": "./dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
-            "import": "./dist/pkg/esm/js/exports.js",
-            "require": "./dist/pkg/cjs/js/exports.js"
+            "require": "./dist/pkg/cjs/js/exports.js",
+            "import": "./dist/pkg/esm/js/exports.js"
         }
     }
 }

@@ -1,11 +1,11 @@
-import __packageRootDir from '../../path/packageRootDir';
+import __packageRootDir from '../path/packageRootDir';
 import __glob from 'glob-all';
 import __fs from 'fs';
-import __unique from '../../../shared/array/unique';
+import __unique from '../../shared/array/unique';
 
 /**
  * @name        listNodeModulesPackages
- * @namespace     node.npm.utils
+ * @namespace     node.npm
  * @type        Function
  * @platform        node
  * @status          beta
@@ -18,7 +18,7 @@ import __unique from '../../../shared/array/unique';
  * @return      {Record<string, IPackageJson}            An object containing each modules under the module name as key
  *
  * @example         js
- * import listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';
+ * import listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
  * listNodeModulesPackages();
  *
  * @since       2.0.0

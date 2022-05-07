@@ -12,7 +12,7 @@
                     </div>
                     <div>
                         <div class="s-typo:code">
-                            {{ \Sugar\string\toString($param->default) }}
+                            {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($param->default)) }}
                         </div>
                     </div>
                     <div class="s-typo:bold s-p:30 s-tc:info">
@@ -20,6 +20,13 @@
                     </div>
                 </header>
                 <p class="s-typo:p s-format:text s-pi:30 s-pb:20">{!! \Sugar\markdown\toHtml($param->description) !!}</p>
+
+                @if ($param->metas)
+                    <section class="__toggle-content">
+                        @include('doc.interfaceDefinition', ['interface' => $param->metas])
+                        </section>
+                @endif
+
             </li>
         @endforeach
     </ol>

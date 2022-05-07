@@ -6,7 +6,7 @@ import __SProcess, {
 import __SPromise from '@coffeekraken/s-promise';
 import __depCheck from 'depcheck';
 import __packageRootDir from '../path/packageRootDir';
-import __packageJson from './utils/packageJson';
+import __packageJson from './packageJson';
 
 /**
  * @name            SNpmUnusedProcess

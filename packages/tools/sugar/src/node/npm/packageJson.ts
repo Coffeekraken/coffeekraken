@@ -1,11 +1,11 @@
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __deepMerge from '../../../shared/object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __path from 'path';
 import __fs from 'fs';
 
 /**
  * @name                packageJson
- * @namespace            node.npm.utils
+ * @namespace            node.npm
  * @type                Function
  * @platform        node
  * @status          beta
@@ -18,7 +18,7 @@ import __fs from 'fs';
  * @return      {JSON}                      The package.json content
  *
  * @example         js
- * import packageJson from '@coffeekraken/sugar/node/npm/utils/packageJson`;
+ * import packageJson from '@coffeekraken/sugar/node/npm/packageJson`;
  * packagrJson('lodash');
  *
  * @since       2.0.0

@@ -2,6 +2,11 @@
 
 import __parse from '@coffeekraken/sugar/shared/string/parse';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
+import __path from 'path';
+import __SFaviconBuilder from '../../../../../builders/s-favicon-builder/src/node/exports';
+import __fs from 'fs';
+import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 /**
  * @name              param
@@ -22,12 +27,12 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function param(data, blockSettings) {
+async function param(data, blockSettings) {
     if (!Array.isArray(data)) data = [data];
 
     const res = {};
 
-    data.forEach((param) => {
+    for (let [i, param] of Object.entries(data)) {
         if (
             typeof param !== 'object' ||
             !param.value ||
@@ -37,7 +42,7 @@ function param(data, blockSettings) {
         const parts = param.value.split(/\s{2,20000}/).map((l) => l.trim());
         let type =
             parts && parts[0]
-                ? __upperFirst(parts[0].replace('{', '').replace('}', ''))
+                ? parts[0].replace('{', '').replace('}', '')
                 : null;
         const variable = parts && parts[1] ? parts[1] : null;
         const description = new String(parts && parts[2] ? parts[2] : null);
@@ -46,6 +51,7 @@ function param(data, blockSettings) {
         let defaultValue = undefined;
         let defaultValueStr = '';
         let variableMatch = null;
+        let metas;
 
         if (variable && typeof variable === 'string')
             variableMatch = variable.match(/^\[(.*)\]$/);
@@ -56,24 +62,56 @@ function param(data, blockSettings) {
             type = [type];
         }
 
+        // references interface file
+        for (let [idx, t] of Object.entries(type)) {
+            // resolve tokens
+            t = __replaceTokens(t);
+
+            if (blockSettings.filePath) {
+                let potentialTypeFilePath;
+
+                if (t.match(/^(\.|\/)/)) {
+                    potentialTypeFilePath = __path.resolve(
+                        __path.dirname(blockSettings.filePath),
+                        t,
+                    );
+                } else {
+                    potentialTypeFilePath = __path.resolve(
+                        __packageRoot(__path.dirname(blockSettings.filePath)),
+                        t,
+                    );
+                }
+
+                if (__fs.existsSync(potentialTypeFilePath)) {
+                    const typeData = (await import(potentialTypeFilePath))
+                        .default;
+                    type = [typeData.name] ?? type;
+                    // save data into the "metas" property on the string directly
+                    metas = typeData.toObject?.() ?? typeData;
+                }
+            }
+        }
+
         if (variableMatch) {
             const variableParts = variableMatch[1].split('=');
+
             if (variableParts.length === 2) {
                 name = variableParts[0].trim();
                 defaultValueStr = variableParts[1].trim();
                 defaultValue = __parse(variableParts[1].trim());
             }
         }
-
         res[name] = {
             name,
             type,
+            metas,
             description,
             default: defaultValue,
             defaultStr: defaultValueStr,
         };
         if (param.content) res[name].content = param.content.join('\n');
-    });
+    }
+
     return res;
 }
 export default param;

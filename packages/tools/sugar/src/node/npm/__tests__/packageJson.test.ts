@@ -1,5 +1,5 @@
 import __packageJson from '../packageJson';
-import __packageRoot from '../../../path/packageRoot';
+import __packageRoot from '../../path/packageRoot';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 describe('sugar.node.npm.utils.packageJson', () => {

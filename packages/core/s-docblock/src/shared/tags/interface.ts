@@ -28,23 +28,22 @@ import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 export default async function interfaceTag(data, blockSettings) {
-
     let stringArray: string[] = [];
 
     if (data.value === true) {
-        stringArray = [__fileName(blockSettings.filepath),'default'];
-        if (blockSettings.filepath.match(/\.ts$/)) {
+        stringArray = [__fileName(blockSettings.filePath), 'default'];
+        if (blockSettings.filePath.match(/\.ts$/)) {
             return;
         }
     } else {
-       stringArray = data.value.trim().split(/(?<=^\S+)\s/);
+        stringArray = data.value.trim().split(/(?<=^\S+)\s/);
     }
 
     let path = stringArray[0],
         importName = stringArray[1] ? stringArray[1].trim() : 'default';
 
     const potentialPath = __checkPathWithMultipleExtensions(
-        __path.resolve(__folderPath(blockSettings.filepath), path),
+        __path.resolve(__folderPath(blockSettings.filePath), path),
         ['js'],
     );
 
@@ -52,18 +51,20 @@ export default async function interfaceTag(data, blockSettings) {
 
     const int = await import(potentialPath);
 
-
     const interfaceObj = int[importName].toObject();
 
-    interfaceObj.definition = __deepMap(interfaceObj.definition, ({object, prop, value}) => {
-        if (typeof value === 'string') {
-            const newValue = new String(value);
-            // @ts-ignore
-            newValue.render = true;
-            return newValue;
-        }
-        return value;
-    });
+    interfaceObj.definition = __deepMap(
+        interfaceObj.definition,
+        ({ object, prop, value }) => {
+            if (typeof value === 'string') {
+                const newValue = new String(value);
+                // @ts-ignore
+                newValue.render = true;
+                return newValue;
+            }
+            return value;
+        },
+    );
 
     return interfaceObj;
 }

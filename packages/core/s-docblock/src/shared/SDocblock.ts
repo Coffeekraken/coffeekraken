@@ -21,7 +21,7 @@ import __SDocblockBlock from './SDocblockBlock';
  * This is the main class that expose the methods like "parse", etc...
  * You have to instanciate it by passing a settings object. Here's the available options:
  *
- * @param       {String|Object}     source        The docblock source. Can be either a string to parse or a filepath
+ * @param       {String|Object}     source        The docblock source. Can be either a string to parse or a filePath
  * @param       {Object}      [settings={}]       An object of settings to configure the SDocblock instance:
  * - tags ({}) {Object}: An object representing the functions used to parse each tags. The object format is ```{ tagName: parseFn }```
  *
@@ -43,7 +43,7 @@ export interface ISDocblockSortFnSetting {
     (a: any, b: any);
 }
 export interface ISDocblockSettings {
-    filepath?: string;
+    filePath?: string;
     filter?: Function;
     filterByTag: Record<string, any>;
     renderMarkdown: boolean;
@@ -143,7 +143,7 @@ class SDocblock extends __SClass implements ISDocblock {
                             if (bObj.name?.length > aObj.name?.length) res += 1;
                             return res;
                         },
-                        filepath: null,
+                        filePath: null,
                         renderMarkdown: false,
                         markedOptions: {},
                         to: {
@@ -165,7 +165,7 @@ class SDocblock extends __SClass implements ISDocblock {
                 throw new Error(
                     `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,
                 );
-            this.docblockSettings.filepath = source;
+            this.docblockSettings.filePath = source;
             this._source = __fs.readFileSync(source, 'utf8');
             this._packageJson = __packageJsonSync(source);
         } else {
@@ -339,7 +339,7 @@ class SDocblock extends __SClass implements ISDocblock {
                 const docblockBlock = new __SDocblockBlock(block || ' ', {
                     docblockBlock: {
                         packageJson: this._packageJson,
-                        filepath: this.docblockSettings.filepath || '',
+                        filePath: this.docblockSettings.filePath || '',
                         renderMarkdown: this.docblockSettings.renderMarkdown,
                         markedOptions: this.docblockSettings.markedOptions,
                     },

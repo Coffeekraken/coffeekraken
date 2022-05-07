@@ -5,6 +5,8 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 export default function docmapApiData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
@@ -34,14 +36,9 @@ export default function docmapApiData({ req, res, pageConfig }) {
             docblock: {
                 renderMarkdown: true,
                 filter: (docblock) => {
-                    if (
-                        __namespaceCompliant(
-                            `${docblock.namespace}.${docblock.name}`,
-                        ) === req.params.namespace
-                    ) {
-                        return true;
-                    }
-                    return false;
+                    if (docblock.private) return false;
+                    // if (docblock.name.match(/^_/)) return false;
+                    return true;
                 },
             },
         });
@@ -67,6 +64,8 @@ export default function docmapApiData({ req, res, pageConfig }) {
 
         resolve({
             docblocks,
+            packageJson: __packageJsonSync(),
+            packageRoot: __packageRoot(),
         });
     });
 }

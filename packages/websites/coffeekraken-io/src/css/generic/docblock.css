@@ -1,5 +1,4 @@
 .docblock {
-
     &:not(.first) {
         border-left: 1px solid sugar.color(accent);
         border-radius: sugar.border.radius();
@@ -25,7 +24,6 @@
         background: sugar.color(main, surface);
         border-radius: sugar.border.radius();
         margin-block-start: sugar.margin(20);
-        @sugar.depth(100);
         transition: sugar.transition(fast);
 
         &:hover,
@@ -35,7 +33,6 @@
     }
 
     &.active .__section-title {
-            background: sugar.color(accent, surface) !important;
-        }
-
+        background: sugar.color(accent, surface) !important;
+    }
 }

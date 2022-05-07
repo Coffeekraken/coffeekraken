@@ -123,12 +123,25 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
-                    background-color: sugar.color(base);
-                    padding-inline: sugar.padding(ui.dropdown.paddingInline);
-                    padding-block: sugar.padding(ui.dropdown.paddingBlock);
+                    background-color: sugar.color(current);
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
+                    @sugar.border.radius(sugar.theme.value(ui.dropdown.borderRadius));
                     @sugar.depth(sugar.theme.value(ui.dropdown.depth));
                     @sugar.transition(fast);
+
+                    &__item {
+                        padding-inline: sugar.padding(ui.dropdown.paddingInline);
+                        padding-block: sugar.padding(ui.dropdown.paddingBlock);
+                        background-color: sugar.color(current, --alpha: 0);
+                        @sugar.border.radius(sugar.theme.value(ui.dropdown.borderRadius));
+                        @sugar.transition(fast);
+
+                        &:hover, &:focus {
+                            background-color: sugar.color(current, --alpha 1 --darken 10%);
+                        }
+
+                    }
+
                 `);
 
                 break;

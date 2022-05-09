@@ -19,7 +19,7 @@ export { postcssSugarPluginAlignInterface as interface };
 
 /**
  * @name          abs
- * @namespace     sugar.postcss.mixin.lnf
+ * @namespace     node.mixin.align
  * @type          PostcssMixin
  * @platform      postcss
  * @status        beta

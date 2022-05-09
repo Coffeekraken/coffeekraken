@@ -10,7 +10,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           import
- * @namespace      node.mixins.import
+ * @namespace      node.mixin.import
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -21,7 +21,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @param         {String}        path        The file path you want to import relative to the file you're in
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.import('./my-cool-file.css');
  * \@sugar.import('../views/** /*.css');
  *
@@ -37,8 +37,8 @@ class postcssSugarPluginImportInterface extends __SInterface {
                 required: true,
             },
             media: {
-                type: 'String'
-            }
+                type: 'String',
+            },
         };
     }
 }
@@ -119,10 +119,9 @@ export default function ({
         });
     }
 
-    
     const commentRule = postcss.parse(`/* S */`);
     atRule.parent.insertAfter(atRule, commentRule);
-        
+
     files.forEach((file) => {
         let newRule = postcss.parse(`@import "${file.relPath}";`);
         if (settings.target === 'vite') {

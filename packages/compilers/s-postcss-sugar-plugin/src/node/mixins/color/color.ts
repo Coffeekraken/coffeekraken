@@ -20,7 +20,7 @@ export { postcssSugarPluginColorMixinInterface as interface };
 
 /**
  * @name           color
- * @namespace      node.mixins.colors
+ * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -33,7 +33,7 @@ export { postcssSugarPluginColorMixinInterface as interface };
  * @param       {String}        [secondary=null]             The new color you want for the "secondary" one
  * @return      {Css}                     The generated remap css
  *
- * @example         postcss
+ * @example        css
  * .my-section {
  *      @sugar.color(accent, complementary, success);
  * }

@@ -5,7 +5,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 /**
  * @name           classes
- * @namespace      node.mixins.platform
+ * @namespace      node.mixin.platform
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -15,7 +15,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.platform.classes;
  *
  * @since       2.0.0

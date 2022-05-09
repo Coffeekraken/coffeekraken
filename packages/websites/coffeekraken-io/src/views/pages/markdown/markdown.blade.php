@@ -7,7 +7,7 @@
             <nav class="sidemenu s-pb:50 @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
 
                 <h5 class="s-typo:h5 s-mbe:20">
-                    Coffeekraken
+                    Coffeekraken {{ $coco }}
                 </h5>
 
                 @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp

@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           sugar
- * @namespace      node.mixins.reset
+ * @namespace      node.mixin.reset
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -16,10 +16,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @feature     Set the webkit highlight color to transparent color
  * @feature     Remote outline on every elements
  * @feature     Set the max-width to 100% for images
- * 
+ *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.reset.sugar;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
@@ -52,7 +52,8 @@ export default function ({
 
     const vars = new CssVars();
 
-    vars.comment(() => `/**
+    vars.comment(
+        () => `/**
         * @name          Sugar reset
         * @namespace          sugar.css.resets
         * @type               Styleguide
@@ -75,12 +76,13 @@ export default function ({
         * @support      safari
         * @support      edge
         * 
-        * @example        postcss
+        * @example        css
         * \@sugar.reset.sugar;
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`).code(`
+        */`,
+    ).code(`
             /* purgecss start ignore */
 
 

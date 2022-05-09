@@ -3,16 +3,16 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           noise
- * @namespace      node.mixins.filter
+ * @namespace      node.mixin.filter
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to apply a noise effect on any HTMLElement using the svg turbulence filter.
  *
- * @return        {Css}         The generated css for all the classes in the toolkit
+ * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-element {
  *    \@sugar.filter.noise(20);
  * }

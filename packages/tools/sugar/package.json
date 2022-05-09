@@ -132,6 +132,7 @@
         "rematrix": "^0.7.2",
         "resolve": "^1.20.0",
         "resolve-package-path": "^4.0.3",
+        "semver": "^7.3.7",
         "sprintf-js": "^1.1.2",
         "strip-ansi": "^6.0.0",
         "strip-css-comments": "^4.1.0",

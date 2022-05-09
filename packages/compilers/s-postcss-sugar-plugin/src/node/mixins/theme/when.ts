@@ -24,7 +24,7 @@ export interface postcssSugarPluginThemeWhenMixinParams {
 
 /**
  * @name           when
- * @namespace      node.mixins.rhythm
+ * @namespace      node.mixin.rhythm
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -35,7 +35,7 @@ export interface postcssSugarPluginThemeWhenMixinParams {
  *
  * @return      {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-cool-element {
  *    \@sugar.theme.when(dark) {
  *      margin-bottom: 50px;

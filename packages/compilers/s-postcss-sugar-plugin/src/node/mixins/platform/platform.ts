@@ -6,7 +6,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 /**
  * @name           platform
- * @namespace      node.mixins.platform
+ * @namespace      node.mixin.platform
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -17,7 +17,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  * @param         {IPostcssSugarPluginAssetPlatformParams}    params      The parameters object
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-platform {
  *    \@sugar.platform(css);
  * }

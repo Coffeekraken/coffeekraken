@@ -4,7 +4,7 @@ import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue'
 
 /**
  * @name          radius
- * @namespace     node.function.border
+ * @namespace     node.function.font
  * @type          PostcssFunction
  * @platform      postcss
  * @status        beta

@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
- * @namespace      node.mixins.until
+ * @namespace      node.mixin.until
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -15,7 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.until.classes;
  *
  * @since       2.0.0

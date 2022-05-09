@@ -3,16 +3,16 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           disabled
- * @namespace      node.mixins.disabled
+ * @namespace      node.mixin.disabled
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to apply a the disabled styling to any HTMLElement.
  *
- * @return        {Css}         The generated css for all the classes in the toolkit
+ * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-element {
  *    \@sugar.disabled();
  * }

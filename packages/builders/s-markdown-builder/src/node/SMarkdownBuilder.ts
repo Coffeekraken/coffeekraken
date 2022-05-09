@@ -19,6 +19,8 @@ import __path from 'path';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
 import __SLog from '@coffeekraken/s-log';
+import __getCoffeekrakenMetas from '@coffeekraken/sugar/node/coffeekraken/getCoffeekrakenMetas';
+import __SDataHandlerGeneric from '@coffeekraken/s-data-handler-generic';
 
 /**
  * @name                SMarkdownBuilder
@@ -297,8 +299,14 @@ export default class SMarkdownBuilder extends __SBuilder {
         }
     }
 
+    _loaded = false;
+    async _load() {
+        if (this._loaded) return;
+        this._loaded = true;
+    }
+
     /**
-     * @name            _build
+     * @name            build
      * @type            Function
      * @async
      *
@@ -327,13 +335,10 @@ export default class SMarkdownBuilder extends __SBuilder {
                         value: `<cyan>[preset]</cyan> Start "<yellow>${preset}</yellow>" preset markdown build`,
                     });
 
-                    const newParams = <ISMarkdownBuilderBuildParams>(
-                        __deepMerge(
-                            __SMarkdownBuilderBuildParamsInterface.defaults(),
-                            __SSugarConfig.get(
-                                `markdownBuilder.presets.${preset}`,
-                            ),
-                        )
+                    const newParams = <ISMarkdownBuilderBuildParams>__deepMerge(
+                        // @ts-ignore
+                        __SMarkdownBuilderBuildParamsInterface.defaults(),
+                        __SSugarConfig.get(`markdownBuilder.presets.${preset}`),
                     );
 
                     const buildPromise = this._build(newParams);
@@ -348,10 +353,14 @@ export default class SMarkdownBuilder extends __SBuilder {
                 async ({ resolve, reject, emit }) => {
                     const handlebars = __handlebars.create();
 
+                    // load
+                    await this._load();
+
                     // helpers
                     registerHelpers(handlebars);
 
                     const finalParams: ISMarkdownBuilderBuildParams = __deepMerge(
+                        // @ts-ignore
                         __SMarkdownBuilderBuildParamsInterface.defaults(),
                         params ?? {},
                     );
@@ -588,9 +597,10 @@ export default class SMarkdownBuilder extends __SBuilder {
                         flatConfig: __flatten(__SSugarConfig.get('.')),
                         settings: this.markdownBuilderSettings,
                         params,
-                        packageJson: __packageJson(finalParams.inDir),
+                        packageJson: __packageJson(),
                         docMenu: docmap.menu,
                         docmap,
+                        ck: __getCoffeekrakenMetas(),
                         time: {
                             year: new Date().getFullYear(),
                             month: new Date().getMonth(),
@@ -603,16 +613,26 @@ export default class SMarkdownBuilder extends __SBuilder {
                     }
 
                     for (let j = 0; j < sourceObj.files.length; j++) {
-                        const filePath = sourceObj.files[j];
+                        const filePath = <string>sourceObj.files[j];
 
                         const buildObj = {
                             data: '',
                             output: '',
                         };
 
+                        const dataHandlerData = await __SDataHandlerGeneric.handle(
+                            filePath,
+                        );
+
+                        const finalViewData = __deepMerge(
+                            Object.assign({}, viewData),
+                            dataHandlerData,
+                        );
+
                         if (__extension(filePath) === 'js') {
+                            // @ts-ignore
                             const fn = (await import(filePath)).default;
-                            buildObj.data = fn(viewData);
+                            buildObj.data = fn(finalViewData);
                         } else {
                             buildObj.data = __fs
                                 .readFileSync(filePath, 'utf8')
@@ -629,10 +649,12 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                         let currentTransformedString = buildObj.data;
 
+                        // compile template
                         const tplFn = handlebars.compile(
                             currentTransformedString,
                         );
-                        currentTransformedString = tplFn(viewData);
+
+                        currentTransformedString = tplFn(finalViewData);
 
                         // processing transformers
                         // @ts-ignore
@@ -702,7 +724,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                                 ];
                             }
                         });
-
                         protectedTagsMatches?.forEach((match, i) => {
                             currentTransformedString = currentTransformedString.replace(
                                 match,

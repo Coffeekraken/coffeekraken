@@ -14,7 +14,7 @@ export { postcssSugarPluginColorCurrentMixinInterface as interface };
 
 /**
  * @name           current
- * @namespace      node.mixins.colors
+ * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -24,7 +24,7 @@ export { postcssSugarPluginColorCurrentMixinInterface as interface };
  * @param       {String}        color           The color you want to map on another one
  * @return      {Css}                     The generated remap css
  *
- * @example         postcss
+ * @example        css
  * .my-section {
  *      @sugar.color.current(accent);
  * }

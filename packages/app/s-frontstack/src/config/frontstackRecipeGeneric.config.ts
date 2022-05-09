@@ -137,6 +137,20 @@ export default function (env, config) {
                         params: {},
                     },
                     /**
+                     * @name            rename
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack applyDefaultPackageJson action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    applyDefaultPackageJson: {
+                        extends: 'applyDefaultPackageJson',
+                    },
+
+                    /**
                      * @name            addSugarJson
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
                      * @type            String

@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
- * @namespace      node.mixins.link
+ * @namespace      node.mixin.link
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -12,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.link.classes;
  *
  * @since       2.0.0
@@ -46,7 +46,8 @@ export default function ({
 
     const vars = new CssVars();
 
-    vars.comment(() => `
+    vars.comment(
+        () => `
         /**
         * @name          Link
         * @namespace          sugar.css.helpers
@@ -72,9 +73,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-    `);
+    `,
+    );
 
-    vars.comment(() => `/**
+    vars.comment(
+        () => `/**
         * @name            s-link:stretch
         * @namespace        sugar.css.link
         * @type             CssClass
@@ -91,12 +94,14 @@ export default function ({
         * @since        2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-    `).code(() => `
+    `,
+    ).code(
+        () => `
         .s-link--stretch {
             @sugar.link.stretch;
         }
-    `);
-
+    `,
+    );
 
     return vars;
 }

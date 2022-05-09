@@ -12,7 +12,7 @@ export interface postcssSugarPluginStateFocusMixinParams {}
 
 /**
  * @name           focus
- * @namespace      node.mixins.state
+ * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -23,7 +23,7 @@ export interface postcssSugarPluginStateFocusMixinParams {}
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @example         postcss
+ * @example        css
  * .myCoolItem {
  *  \@sugar.state.focus {
  *      // ...

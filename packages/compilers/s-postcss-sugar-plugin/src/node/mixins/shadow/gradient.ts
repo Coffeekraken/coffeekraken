@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           shadow
- * @namespace      node.mixins.shadow
+ * @namespace      node.mixin.shadow
  * @type           PostcssMixin
  * @platform        css
  * @status        beta
@@ -12,7 +12,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}           The generated css
  *
- * @example         postcss
+ * @example        css
  * .myCoolElement {
  *    @sugar.shadow.gradient(0, 10px, 10px, 0, sugar.color(accent), sugar.color(complementary));
  * }

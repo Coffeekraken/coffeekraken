@@ -12,7 +12,7 @@ export interface postcssSugarPluginStateActiveMixinParams {}
 
 /**
  * @name           focus
- * @namespace      node.mixins.state
+ * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -24,7 +24,7 @@ export interface postcssSugarPluginStateActiveMixinParams {}
  *
  * @return      {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .myCoolItem {
  *  \@sugar.state.active {
  *      // ...

@@ -5,7 +5,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 /**
  * @name           classes
- * @namespace      node.mixins.offsize
+ * @namespace      node.mixin.offsize
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -14,7 +14,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.offsize.classes;
  *
  * @since       2.0.0

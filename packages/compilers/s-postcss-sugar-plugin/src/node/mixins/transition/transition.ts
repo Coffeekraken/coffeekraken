@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           transition
- * @namespace      node.mixins.transition
+ * @namespace      node.mixin.transition
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -12,7 +12,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.platform.classes;
  *
  * @since       2.0.0
@@ -46,7 +46,7 @@ export interface postcssSugarPluginTransitionMixinParams {
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @example         postcss
+ * @example        css
  * .my-cool-element {
  *    \@sugar.transition(fast);
  * }

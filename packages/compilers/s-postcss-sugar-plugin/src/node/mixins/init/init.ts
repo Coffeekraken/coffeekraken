@@ -19,7 +19,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
 
 /**
  * @name           init
- * @namespace      node.mixins.init
+ * @namespace      node.mixin.init
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -32,7 +32,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @example         postcss
+ * @example        css
  * \@sugar.init;
  *
  * @since       2.0.0

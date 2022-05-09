@@ -45,7 +45,7 @@ export default function (env, config) {
         },
 
         /**
-         * @name            defaultDependencies
+         * @name            defaultPackageJson
          * @namespace       config.package.exports
          * @type            Object
          * @default
@@ -55,9 +55,16 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        defaultDependencies: {
-            '@coffeekraken/sugar': '^2.0.0',
-            '@coffeekraken/s-typescript-builder': '^2.0.0',
+        defaultPackageJson: {
+            scripts: {
+                dev: 'sugar dev',
+                prod: 'sugar prod',
+                build: 'sugar build',
+            },
+            dependencies: {
+                '@coffeekraken/sugar': '^2.0.0',
+                '@coffeekraken/s-typescript-builder': '^2.0.0',
+            },
         },
 
         exports: {

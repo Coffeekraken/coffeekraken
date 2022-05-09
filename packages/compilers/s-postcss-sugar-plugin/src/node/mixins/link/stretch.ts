@@ -2,14 +2,14 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name            stretch
- * @namespace       node.mixins.link
+ * @namespace       node.mixin.link
  * @type            PostcssMixin
  * @platform        css
  * @status          beta
  *
  * This mixin allows you to stretch a link clickable area without having to change the actual link css.
  * It uses the `after` pseudo class to create a new clickable area that will spend until it reach an element that as a position specified.
- * 
+ *
  *
  * @return          {Css}                                   The generated css
  *
@@ -24,8 +24,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginLinkStretchInterface extends __SInterface {
     static get _definition() {
-        return {
-        };
+        return {};
     }
 }
 
@@ -55,8 +54,11 @@ export default function ({
 
     const vars = new CssVars();
 
-    vars.comment(() => `
-    `).code(() => `
+    vars.comment(
+        () => `
+    `,
+    ).code(
+        () => `
         &:after {
             position: absolute;
             top: 0;
@@ -68,7 +70,8 @@ export default function ({
             content: '';
             background-color: rgba(0, 0, 0, 0);
         }
-    `);
+    `,
+    );
 
     return vars;
 }

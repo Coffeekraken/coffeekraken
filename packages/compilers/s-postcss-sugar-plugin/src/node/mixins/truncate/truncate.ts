@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           truncate
- * @namespace      node.mixins.truncate
+ * @namespace      node.mixin.truncate
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -11,7 +11,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-cool-element {
  *    \@sugar.truncate(2);
  * }

@@ -25,6 +25,7 @@ This `SMarkdownBuilder` package allows you to easily build markdown files using 
     -   `params`: The markdown builder `build` parameters
     -   `packageJson`: The package.json object
     -   `docmap`: The [SDocmap](/package/@coffeekraken/s-docmap) object
+    -   `ck`: The coffeekraken metas grabed using the [getCoffeekrakenMetas](/api/@coffeekraken.sugar.node.coffeekraken.getCoffeekrakenMetas) function
     -   `time`: A simple time object with `year`, `month` and `day` values
 -   Access to all the [@coffeekraken/s-handlebars](/packages/@coffeekraken/s-handlebars) helpers
 -   And more...

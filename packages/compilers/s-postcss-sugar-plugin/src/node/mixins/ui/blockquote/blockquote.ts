@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          blockquote
- * @namespace     node.mixins.ui.blockquote
+ * @namespace     node.mixin.ui.blockquote
  * @type          PostcssMixin
  * @platform      postcss
  * @status        beta

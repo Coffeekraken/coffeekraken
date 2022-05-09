@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           theme
- * @namespace      node.mixins.theme
+ * @namespace      node.mixin.theme
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -15,7 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.theme(light);
  * .my-cool-element {
  *    \@sugar.theme(dark);
@@ -43,8 +43,8 @@ class postcssSugarPluginThemeinInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginThemeParams {
-    variant: string|undefined;
-    theme: string|undefined;
+    variant: string | undefined;
+    theme: string | undefined;
     scope: boolean;
 }
 
@@ -69,14 +69,17 @@ export default function ({
 
     const selectors: string[] = [];
     if (finalParams.theme) selectors.push(`[theme^="${finalParams.theme}"]`);
-    if (finalParams.variant) selectors.push(`[theme$="${finalParams.variant}"]`);
+    if (finalParams.variant)
+        selectors.push(`[theme$="${finalParams.variant}"]`);
 
-    
     if (finalParams.scope) {
-        vars.unshift(`${
-            selectors.length === 2 ? `${selectors[0]}${selectors[1]}` :
-            selectors.join(',')
-        } {`);
+        vars.unshift(
+            `${
+                selectors.length === 2
+                    ? `${selectors[0]}${selectors[1]}`
+                    : selectors.join(',')
+            } {`,
+        );
         vars.push(`@sugar.lnf.base;`);
         vars.push('}');
     } else if (atRule.parent.type === 'root') {

@@ -19,14 +19,14 @@ export { postcssSugarPluginComponentsClassesInterface as interface };
 
 /**
  * @name           classes
- * @namespace      node.mixins.components
+ * @namespace      node.mixin.component
  * @type           PostcssMixin
  * @platform        postcss
  * @status        beta
  *
  * This mixin allows you to print all the ui classes for listed in the theme config components
  *
- * @example         postcss
+ * @example        css
  * \@sugar.components.classes;
  *
  * @since       2.0.0

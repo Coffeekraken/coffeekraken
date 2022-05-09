@@ -303,6 +303,47 @@ export default function (env, config) {
                 params: {},
                 settings: {},
             },
+            applyDefaultPackageJson: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.applyDefaultPackageJson
+                 * @type            String
+                 * @default        Adding manifest.json file
+                 *
+                 * Apply the config.package.defaultPackageJson object on the package.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Apply default package.json',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.applyDefaultPackageJson
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Apply the config.package.defaultPackageJson object on the package.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'Apply the config.package.defaultPackageJson object on the package.json file',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.applyDefaultPackageJson
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Apply the config.package.defaultPackageJson object on the package.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar add.applyDefaultPackageJson [arguments]`,
+                params: {},
+                settings: {},
+            },
             addFavicon: {
                 /**
                  * @name            title

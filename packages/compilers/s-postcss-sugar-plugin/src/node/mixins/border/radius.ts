@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          radius
- * @namespace     node.mixins.border
+ * @namespace     node.mixin.border
  * @type          PostcssMixin
  * @platform      postcss
  * @status        beta

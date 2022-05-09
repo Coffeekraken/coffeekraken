@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           clearfix
- * @namespace      node.mixins.clearfix
+ * @namespace      node.mixin.clearfix
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -15,9 +15,9 @@ import __STheme from '@coffeekraken/s-theme';
  * - micro
  * - after
  *
- * @return        {Css}         The generated css for all the classes in the toolkit
+ * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-element {
  *    \@sugar.clearfix();
  * }

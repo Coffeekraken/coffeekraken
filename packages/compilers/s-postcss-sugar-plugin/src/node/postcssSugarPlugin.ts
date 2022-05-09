@@ -26,6 +26,7 @@ import __stripDocblocks from '@coffeekraken/sugar/shared/string/stripDocblocks';
 import __urlCompliant from '@coffeekraken/sugar/shared/string/urlCompliant';
 import __fileName from '@coffeekraken/sugar/node/fs/filename';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
+import __SDocblock from '@coffeekraken/s-docblock';
 
 let _mixinsPaths;
 
@@ -43,6 +44,42 @@ let loadedPromise,
 const _cacheObjById = {};
 
 pluginHash = 'hhh';
+
+export function getFunctionsList() {
+    return getMixinsOrFunctionsList('functions');
+}
+export function getMixinsList() {
+    return getMixinsOrFunctionsList('mixins');
+}
+
+export function getMixinsOrFunctionsList(what: 'mixins' | 'functions') {
+    // process some tokens
+    const folderPath = __replaceTokens(`${__dirname()}/${what}`);
+
+    const paths = __glob
+        .sync(`${folderPath}/**/*.js`, {
+            cwd: '',
+        })
+        .map((path) => {
+            const relativePath = __path.relative(folderPath, path);
+            let dotPath = relativePath
+                .replace(/\//g, '.')
+                .split('.')
+                .slice(0, -1)
+                .join('.');
+            const parts = dotPath.split('.');
+            if (parts[0] === parts[1]) {
+                dotPath = parts[0];
+            }
+
+            return {
+                path,
+                dotPath,
+            };
+        });
+
+    return paths;
+}
 
 const plugin = (settings: any = {}) => {
     settings = __deepMerge(

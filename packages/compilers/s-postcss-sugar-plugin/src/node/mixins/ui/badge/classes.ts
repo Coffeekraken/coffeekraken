@@ -1,6 +1,29 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.badge
+ * @type          PostcssMixin
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to generate the "badge" UI component classes.
+ *
+ * @param       {('solid'|'outline')[]}                           [styles=['solid'|'outline']]         The style(s) you want to generate
+ * @param       {('default'|'square'|'pill')[]}             [shape=['default'|'square'|'pill']]         The shape(s) you want to generate
+ * @param       {'solid'|'outline'}                [defaultStyle='theme.ui.badge.defaultStyle']           The default style you want
+ * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.badge.defaultShape']           The default shape you want
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * \@sugar.ui.badge.classes();
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
     static get _definition() {
         return {

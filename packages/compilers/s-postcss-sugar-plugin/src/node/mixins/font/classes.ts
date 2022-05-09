@@ -4,7 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @namespace      node.mixins.font
+ * @namespace      node.mixin.font
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -13,7 +13,7 @@ import __faker from 'faker';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.font.classes;
  *
  * @since       2.0.0

@@ -10,7 +10,7 @@ export { postcssSugarPluginDocblockColorsMixinInterface as interface };
 
 /**
  * @name           docblocks
- * @namespace      node.mixins.color
+ * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -20,7 +20,7 @@ export { postcssSugarPluginDocblockColorsMixinInterface as interface };
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @example         postcss
+ * @example        css
  * \@sugar.color.docblocks;
  *
  * @since       2.0.0

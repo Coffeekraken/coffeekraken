@@ -3,7 +3,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
  * @name           reset
- * @namespace      node.mixins.reset
+ * @namespace      node.mixin.reset
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -16,7 +16,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.ratio.classes;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
@@ -57,7 +57,8 @@ export default function ({
 
     const vars = new CssVars();
 
-    vars.comment(() => `
+    vars.comment(
+        () => `
         /**
         * @name          Global reset
         * @namespace          sugar.css.resets
@@ -84,7 +85,8 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-        `).code(`
+        `,
+    ).code(`
       @sugar.reset.destyle;
       @sugar.reset.sugar;
   `);

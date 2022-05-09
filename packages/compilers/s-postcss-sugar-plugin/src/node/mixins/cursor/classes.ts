@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
- * @namespace      node.mixins.cursor
+ * @namespace      node.mixin.cursor
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -13,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.cursor.classes;
  *
  * @since       2.0.0
@@ -47,7 +47,44 @@ export default function ({
 
     const vars = new CssVars();
 
-    const cursors = ['auto','default','none','context-menu','help','pointer','progress','wait','cell','crosshair','text','vertical-text','alias','copy','move','no-drop','not-allowed','e-resize','n-resize','ne-resize','nw-resize','s-resize','se-resize','sw-resize','w-resize','ew-resize','ns-resize','nesw-resize','nwse-resize','col-resize','row-resize','all-scroll','zoom-in','zoom-out','grab','grabbing'];
+    const cursors = [
+        'auto',
+        'default',
+        'none',
+        'context-menu',
+        'help',
+        'pointer',
+        'progress',
+        'wait',
+        'cell',
+        'crosshair',
+        'text',
+        'vertical-text',
+        'alias',
+        'copy',
+        'move',
+        'no-drop',
+        'not-allowed',
+        'e-resize',
+        'n-resize',
+        'ne-resize',
+        'nw-resize',
+        's-resize',
+        'se-resize',
+        'sw-resize',
+        'w-resize',
+        'ew-resize',
+        'ns-resize',
+        'nesw-resize',
+        'nwse-resize',
+        'col-resize',
+        'row-resize',
+        'all-scroll',
+        'zoom-in',
+        'zoom-out',
+        'grab',
+        'grabbing',
+    ];
 
     vars.comment(
         () => `
@@ -90,8 +127,7 @@ export default function ({
     `,
     );
 
-    cursors.forEach(cursor => {
-
+    cursors.forEach((cursor) => {
         vars.comment(
             () => `/**
         * @name          s-cursor:${cursor}
@@ -115,7 +151,6 @@ export default function ({
         .s-cursor--${cursor} {
             cursor: ${cursor};
         }`);
-
     });
 
     return vars;

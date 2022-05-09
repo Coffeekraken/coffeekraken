@@ -8,16 +8,16 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
  * @name           classes
- * @namespace      node.mixins.classes
+ * @namespace      node.mixin.classes
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...
  *
- * @return        {Css}         The generated css for all the classes in the toolkit
+ * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.classes;
  *
  * @since       2.0.0

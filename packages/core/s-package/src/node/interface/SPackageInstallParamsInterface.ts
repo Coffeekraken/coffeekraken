@@ -27,12 +27,6 @@ export default class SPackageInstallParamsInterface extends __SInterface {
                 values: ['npm', 'yarn'],
                 default: __SSugarConfig.get('package.manager'),
             },
-            dependencies: {
-                description:
-                    'Specify some dependencies to install (separated by a comma)',
-                type: 'Object',
-                default: __SSugarConfig.get('package.defaultDependencies'),
-            },
         };
     }
 }

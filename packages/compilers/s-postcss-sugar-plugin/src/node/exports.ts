@@ -1,4 +1,5 @@
 import postcssSugarPlugin from './postcssSugarPlugin';
+export * from './postcssSugarPlugin';
 export const postcss = true;
 export default postcssSugarPlugin;
 

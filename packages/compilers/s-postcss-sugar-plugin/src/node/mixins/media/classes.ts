@@ -4,7 +4,7 @@ import __fs from 'fs';
 
 /**
  * @name           classes
- * @namespace      node.mixins.media
+ * @namespace      node.mixin.media
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta

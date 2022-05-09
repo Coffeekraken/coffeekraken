@@ -5,7 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
- * @namespace      node.mixins.gradient
+ * @namespace      node.mixin.gradient
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -14,7 +14,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.gradient.classes;
  *
  * @since       2.0.0

@@ -12,7 +12,7 @@ export interface postcssSugarPluginDirectionRtlMixinParams {}
 
 /**
  * @name           rtl
- * @namespace      node.mixins.direction
+ * @namespace      node.mixin.direction
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -21,7 +21,7 @@ export interface postcssSugarPluginDirectionRtlMixinParams {}
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @example         postcss
+ * @example        css
  * .myCoolItem {
  *  \@sugar.direction.rtl {
  *      // ...

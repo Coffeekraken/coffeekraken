@@ -3,16 +3,16 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           noise
- * @namespace      node.functions.filter
+ * @namespace      node.function.filter
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
  * This function allows you to get a noise effect image back.
  *
- * @return        {Css}         The generated css for all the classes in the toolkit
+ * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-element {
  *    filter: sugar.filter.noise();
  * }

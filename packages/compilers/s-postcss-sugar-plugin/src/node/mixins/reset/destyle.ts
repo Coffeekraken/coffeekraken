@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           destyle
- * @namespace      node.mixins.reset
+ * @namespace      node.mixin.reset
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -13,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.reset.destyle;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
@@ -48,7 +48,8 @@ export default function ({
 
     const vars = new CssVars();
 
-    vars.comment(() => `
+    vars.comment(
+        () => `
        /**
         * @name          Destyle reset
         * @namespace          sugar.css.resets
@@ -74,14 +75,15 @@ export default function ({
         * @support      safari
         * @support      edge
         * 
-        * @example        postcss
+        * @example        css
         * \@sugar.reset.destyle;
         * 
         * @see          https://github.com/nicolas-cusan/destyle.css
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-    `).code(`/* purgecss start ignore */
+    `,
+    ).code(`/* purgecss start ignore */
 
    /*! destyle.css v2.0.2 | MIT License | https://github.com/nicolas-cusan/destyle.css */
 

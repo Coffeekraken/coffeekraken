@@ -4,7 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @namespace      node.mixins.truncate
+ * @namespace      node.mixin.truncate
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -14,7 +14,7 @@ import __faker from 'faker';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.truncate.classes;
  *
  * @since       2.0.0

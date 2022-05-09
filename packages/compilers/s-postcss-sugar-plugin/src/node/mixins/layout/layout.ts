@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           layout
- * @namespace      node.mixins.layout
+ * @namespace      node.mixin.layout
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -24,7 +24,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {String}        layout      The layout you want to generate
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-element {
  *    \@sugar.layout(
  *      1 1 1 2 2

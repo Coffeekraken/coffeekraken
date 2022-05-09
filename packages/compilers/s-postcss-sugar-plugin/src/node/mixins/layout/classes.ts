@@ -4,7 +4,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
 
 /**
  * @name           classes
- * @namespace      node.mixins.layout
+ * @namespace      node.mixin.layout
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -13,7 +13,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.layout.classes;
  *
  * @since       2.0.0

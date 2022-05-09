@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           active
- * @namespace      node.mixins.when
+ * @namespace      node.mixin.when
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .myElement {
  *      display: none;
  *
@@ -38,9 +38,9 @@ class postcssSugarPluginmountedMixinInterface extends __SInterface {
             },
             context: {
                 type: 'String',
-                values: ['self' ,'sibling' ,'parent' , 'ancestor', 'theme'],
+                values: ['self', 'sibling', 'parent', 'ancestor', 'theme'],
                 default: 'self',
-                required: true
+                required: true,
             },
         };
     }
@@ -48,8 +48,8 @@ class postcssSugarPluginmountedMixinInterface extends __SInterface {
 export { postcssSugarPluginmountedMixinInterface as interface };
 
 export interface postcssSugarPluginmountedMixinParams {
-    state: 'mounted' | 'active' | 'dark' | 'light';
-    context: 'self' | 'sibling' | 'parent' | 'ancestor' | 'theme';
+    state: 'mounted' | 'active' | 'dark' | 'light';
+    context: 'self' | 'sibling' | 'parent' | 'ancestor' | 'theme';
 }
 export default function ({
     params,
@@ -93,10 +93,10 @@ export default function ({
             break;
         case 'dark':
             selector = `@media (prefers-color-scheme: dark)`;
-        break;
+            break;
         case 'light':
             selector = `@media (prefers-color-scheme: light)`;
-        break;
+            break;
     }
 
     const wrapperRule = new postcssApi.Rule({

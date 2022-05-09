@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
- * @namespace      node.mixins.visually
+ * @namespace      node.mixin.visually
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -11,7 +11,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.visually.classes;
  *
  * @since       2.0.0

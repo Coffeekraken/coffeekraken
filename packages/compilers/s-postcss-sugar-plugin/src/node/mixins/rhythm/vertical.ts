@@ -12,7 +12,7 @@ export interface postcssSugarPluginRhythmVerticalMixinParams {}
 
 /**
  * @name           vertical
- * @namespace      node.mixins.rhythm
+ * @namespace      node.mixin.rhythm
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -22,7 +22,7 @@ export interface postcssSugarPluginRhythmVerticalMixinParams {}
  *
  * @return      {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-cool-element {
  *    \@sugar.rhythm.vertical {
  *      margin-bottom: 50px;

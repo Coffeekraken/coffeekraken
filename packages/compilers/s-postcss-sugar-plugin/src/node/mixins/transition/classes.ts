@@ -4,7 +4,7 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 
 /**
  * @name           classes
- * @namespace      node.mixins.transition
+ * @namespace      node.mixin.transition
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -14,7 +14,7 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.transition.classes;
  *
  * @since       2.0.0

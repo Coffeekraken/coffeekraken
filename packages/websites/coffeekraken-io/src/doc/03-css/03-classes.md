@@ -26,7 +26,7 @@ To generate all these classes, you can simply add this to your css file:
 /* generate ALL the classes */
 @sugar.classes();
 /* or generate only the classes you need */
-@sugar.position.classes(); 
+@sugar.position.classes();
 @sugar.ui.avatar.classes();
 ```
 

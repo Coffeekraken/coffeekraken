@@ -19,7 +19,7 @@ export interface postcssSugarPluginStateOutlineMixinParams {
 
 /**
  * @name           outline
- * @namespace      node.mixins.outline
+ * @namespace      node.mixin.outline
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -31,7 +31,7 @@ export interface postcssSugarPluginStateOutlineMixinParams {
  *
  * @return      {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .myCoolItem {
  *      @sugar.outline();
  * }

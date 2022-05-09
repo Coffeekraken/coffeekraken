@@ -7,7 +7,7 @@ import __unquote from '@coffeekraken/sugar/shared/string/unquote';
 
 /**
  * @name           classes
- * @namespace      node.mixins.icon
+ * @namespace      node.mixin.icon
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -41,7 +41,7 @@ import __unquote from '@coffeekraken/sugar/shared/string/unquote';
  * @param       {String}       icons        The icons you want. Each line define a new icon
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.icon.classes(
  *    fa:user:user
  *    fa:heart:heart

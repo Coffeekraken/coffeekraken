@@ -11,7 +11,7 @@ export interface postcssSugarPluginFormatTextMixinParams {}
 
 /**
  * @name           text
- * @namespace      node.mixins.format
+ * @namespace      node.mixin.format
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -21,7 +21,7 @@ export interface postcssSugarPluginFormatTextMixinParams {}
  *
  * @return      {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-cool-element {
  *    \@sugar.format.text {
  *      font-size: 20px;

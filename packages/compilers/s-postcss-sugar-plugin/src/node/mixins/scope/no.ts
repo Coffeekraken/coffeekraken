@@ -22,7 +22,7 @@ export interface postcssSugarPluginScopeNoMixinParams {
 
 /**
  * @name           no
- * @namespace      node.mixins.scope
+ * @namespace      node.mixin.scope
  * @type           PostcssMixin
  * @platform        css
  * @status        beta
@@ -34,7 +34,7 @@ export interface postcssSugarPluginScopeNoMixinParams {
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @example         postcss
+ * @example        css
  * \@sugar.scope.no(lnf) {
  *      // ...
  * }

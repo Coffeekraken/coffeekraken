@@ -24,9 +24,14 @@
     },
     "contributors": [],
     "scripts": {
-        "dev": "",
-        "test": ""
+        "dev": "sugar dev",
+        "test": "",
+        "prod": "sugar prod",
+        "build": "sugar build"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-typescript-builder": "^2.0.0"
+    },
     "devDependencies": {}
 }

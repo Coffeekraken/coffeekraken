@@ -11,7 +11,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
 
 /**
  * @name           classes
- * @namespace      node.mixins.colors
+ * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -20,7 +20,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  *
  * @return    {Css}         The generated css for color classes
  *
- * @example         postcss
+ * @example        css
  * \@sugar.color;
  *
  * @since       2.0.0

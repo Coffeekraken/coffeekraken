@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           gradient
- * @namespace      node.mixins.gradient
+ * @namespace      node.mixin.gradient
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -12,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-cool-element {
  *    \@sugar.gradient(accent, secondary, radial);
  * }

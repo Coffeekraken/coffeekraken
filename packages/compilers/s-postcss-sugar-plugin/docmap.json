@@ -3,8 +3,12 @@
     "extends": [],
     "generated": {
         "extends": [
+            "coco",
+            "@coffeekraken/both",
+            "@coffeekraken/cjs",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/esm",
             "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
@@ -17,6 +21,8 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-data-handler-generic",
+            "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -28,6 +34,7 @@
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -39,7 +46,9 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
@@ -50,12 +59,13 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
@@ -63,6 +73,8 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
@@ -111,7 +123,7 @@
                 "relPath": "src/cli/interface/SCliSugarPostcssPluginAddParamsInterface.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.classes.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -121,11 +133,11 @@
                     }
                 ],
                 "description": "This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.classes",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.classes;"
                     }
                 ],
@@ -287,7 +299,7 @@
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-element {\n   filter: sugar.filter.noise();\n}"
                     }
                 ],
@@ -650,7 +662,7 @@
                 "relPath": "src/node/mixins/align/abs.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -660,7 +672,7 @@
                     }
                 ],
                 "description": "This mixin generate the borders helpers like s-radius:20, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border",
                 "status": "beta",
                 "example": [],
                 "since": "2.0.0",
@@ -674,7 +686,7 @@
                 "relPath": "src/node/mixins/border/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border.radius": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.radius": {
                 "name": "radius",
                 "type": "PostcssMixin",
                 "platform": [
@@ -684,7 +696,7 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a border radius with a value coming\nfrom the config.theme.border.radius stack like 10, 20, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border",
                 "status": "beta",
                 "example": [
                     {
@@ -703,7 +715,7 @@
                 "relPath": "src/node/mixins/border/radius.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border.width": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.width": {
                 "name": "width",
                 "type": "PostcssMixin",
                 "platform": [
@@ -713,7 +725,7 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a border width with a value coming\nfrom the config.theme.border.width stack like 10, 20, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border",
                 "status": "beta",
                 "example": [
                     {
@@ -732,7 +744,7 @@
                 "relPath": "src/node/mixins/border/width.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.clearfix.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -742,11 +754,11 @@
                     }
                 ],
                 "description": "This mixin allows you to generate all the clearfix helper classes like s-clearfix:micro, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.clearfix",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.clearfix.classes;"
                     }
                 ],
@@ -761,7 +773,7 @@
                 "relPath": "src/node/mixins/clearfix/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.clearfix.clearfix": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.clearfix": {
                 "name": "clearfix",
                 "type": "PostcssMixin",
                 "platform": [
@@ -771,11 +783,11 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:\n- overflow (default)\n- facebook\n- float\n- micro\n- after",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.clearfix",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-element {\n   @sugar.clearfix();\n}"
                     }
                 ],
@@ -790,7 +802,7 @@
                 "relPath": "src/node/mixins/clearfix/clearfix.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -800,11 +812,11 @@
                     }
                 ],
                 "description": "This mixin allows you to generate all the colors helpers classes like s-tc:accent, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.color;"
                     }
                 ],
@@ -819,7 +831,7 @@
                 "relPath": "src/node/mixins/color/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.color": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors.color": {
                 "name": "color",
                 "type": "PostcssMixin",
                 "platform": [
@@ -829,11 +841,11 @@
                     }
                 ],
                 "description": "This mixin allows you to (re)map the \"current\", \"primary\" and \"secondary\" color to any other colors you want like \"accent\", \"success, \"etc...\"\"\nNote that is you don't specify any \"primary\" and \"secondary\" color, these once will be set to the passed \"current\" color.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-section {\n     @sugar.color(accent, complementary, success);\n}"
                     }
                 ],
@@ -848,7 +860,7 @@
                 "relPath": "src/node/mixins/color/color.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.current": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors.current": {
                 "name": "current",
                 "type": "PostcssMixin",
                 "platform": [
@@ -858,11 +870,11 @@
                     }
                 ],
                 "description": "This mixin allows you to (re)map the \"current\" color to another one you want like \"accent\", \"success\", etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-section {\n     @sugar.color.current(accent);\n}"
                     }
                 ],
@@ -877,7 +889,7 @@
                 "relPath": "src/node/mixins/color/current.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.color.docblocks": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.docblocks": {
                 "name": "docblocks",
                 "type": "PostcssMixin",
                 "platform": [
@@ -887,11 +899,11 @@
                     }
                 ],
                 "description": "This mixin print the documentation docblocks for the colors\ninto your final css.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.color",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.color.docblocks;"
                     }
                 ],
@@ -906,7 +918,7 @@
                 "relPath": "src/node/mixins/color/docblocks.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.primary": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors.primary": {
                 "name": "primary",
                 "type": "PostcssMixin",
                 "platform": [
@@ -916,11 +928,11 @@
                     }
                 ],
                 "description": "This mixin allows you to (re)map the \"primary\" virtual color to another like \"complementary\", \"accent\", etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-section {\n     @sugar.color.primary(success);\n}"
                     }
                 ],
@@ -935,7 +947,7 @@
                 "relPath": "src/node/mixins/color/primary.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.remap": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors.remap": {
                 "name": "remap",
                 "type": "PostcssMixin",
                 "platform": [
@@ -945,11 +957,11 @@
                     }
                 ],
                 "description": "This mixin allows you to (re)map a color to another one like saying you want the \"warning\" color as the \"primary\" one",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.colors",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-section {\n     @sugar.color.remap(warning, primary);\n}"
                     }
                 ],
@@ -964,7 +976,7 @@
                 "relPath": "src/node/mixins/color/remap.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.components.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.components.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -974,11 +986,11 @@
                     }
                 ],
                 "description": "This mixin allows you to print all the ui classes for listed in the theme config components",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.components",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.components",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.components.classes;"
                     }
                 ],
@@ -993,7 +1005,7 @@
                 "relPath": "src/node/mixins/components/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.cursor.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.cursor.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1003,11 +1015,11 @@
                     }
                 ],
                 "description": "This mixin generate all the cusros helper classes like `.s-cursor:pointer` etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.cursor",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.cursor",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.cursor.classes;"
                     }
                 ],
@@ -1022,7 +1034,7 @@
                 "relPath": "src/node/mixins/cursor/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.depth.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1032,11 +1044,11 @@
                     }
                 ],
                 "description": "This mixin allows you to generate all the depth helper classes like s-depth:20, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.depth",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.depth.classes;"
                     }
                 ],
@@ -1051,7 +1063,7 @@
                 "relPath": "src/node/mixins/depth/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.depth.depth": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.depth": {
                 "name": "depth",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1061,11 +1073,11 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a certain depth that are defined\nin the config.theme.depth stack like 10, 20, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.depth",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-element {\n   @sugar.depth(20);\n}"
                     }
                 ],
@@ -1080,7 +1092,7 @@
                 "relPath": "src/node/mixins/depth/depth.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.direction.rtl": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.direction.rtl": {
                 "name": "rtl",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1090,11 +1102,11 @@
                     }
                 ],
                 "description": "This mixin allows you to style an element when it is in an rtl scope",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.direction",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.direction",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".myCoolItem {\n @sugar.direction.rtl {\n     // ...\n }\n}"
                     }
                 ],
@@ -1109,7 +1121,7 @@
                 "relPath": "src/node/mixins/direction/rtl.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.disabled.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1119,11 +1131,11 @@
                     }
                 ],
                 "description": "This mixin allows you to generate all the disabled helper classes like s-disabled",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.disabled",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.disabled.classes;"
                     }
                 ],
@@ -1138,7 +1150,7 @@
                 "relPath": "src/node/mixins/disabled/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.disabled.disabled": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.disabled": {
                 "name": "disabled",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1148,11 +1160,11 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a the disabled styling to any HTMLElement.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.disabled",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-element {\n   @sugar.disabled();\n}"
                     }
                 ],
@@ -1167,7 +1179,7 @@
                 "relPath": "src/node/mixins/disabled/disabled.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.display.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.display.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1177,11 +1189,11 @@
                     }
                 ],
                 "description": "This mixin generate all the display helper classes like s-display:block, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.display",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.display",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.display.classes;"
                     }
                 ],
@@ -1196,7 +1208,7 @@
                 "relPath": "src/node/mixins/display/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.filter.noise": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.filter.noise": {
                 "name": "noise",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1206,11 +1218,11 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a noise effect on any HTMLElement using the svg turbulence filter.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.filter",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.filter",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-element {\n   @sugar.filter.noise(20);\n}"
                     }
                 ],
@@ -1225,7 +1237,7 @@
                 "relPath": "src/node/mixins/filter/noise.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.fit.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1235,11 +1247,11 @@
                     }
                 ],
                 "description": "This mixin allows you to generate all the clearfix helper classes like s-clearfix:micro, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.fit",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.clearfix.classes;"
                     }
                 ],
@@ -1254,7 +1266,7 @@
                 "relPath": "src/node/mixins/fit/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.fit.depth": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.depth": {
                 "name": "depth",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1264,11 +1276,11 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a certain depth that are defined\nin the config.theme.depth stack like 10, 20, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.fit",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-element {\n   @sugar.depth(20);\n}"
                     }
                 ],
@@ -1283,7 +1295,7 @@
                 "relPath": "src/node/mixins/fit/fit.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.flex.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.flex.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1293,11 +1305,11 @@
                     }
                 ],
                 "description": "This mixin generate all the flex helper classes like s-flex, s-flex:align-top, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.flex",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.flex",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.flex.classes;"
                     }
                 ],
@@ -1312,7 +1324,7 @@
                 "relPath": "src/node/mixins/flex/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.float.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.float.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1322,11 +1334,11 @@
                     }
                 ],
                 "description": "This mixin generate all the float helper classes like ```.s-float:left```, ```.s-float:right```, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.float",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.float",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.float.classes;"
                     }
                 ],
@@ -1341,7 +1353,7 @@
                 "relPath": "src/node/mixins/float/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1351,11 +1363,11 @@
                     }
                 ],
                 "description": "This mixin generate font helper classes like s-font:title, s-font:20, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.font.classes;"
                     }
                 ],
@@ -1370,7 +1382,7 @@
                 "relPath": "src/node/mixins/font/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font.faces": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.faces": {
                 "name": "faces",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1380,11 +1392,11 @@
                     }
                 ],
                 "description": "This mixin generate all the @font-face needed depending on the declared\nfonts in the config.theme.font.family stack",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.font.faces;"
                     }
                 ],
@@ -1399,7 +1411,7 @@
                 "relPath": "src/node/mixins/font/faces.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font.family": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.family": {
                 "name": "family",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1409,11 +1421,11 @@
                     }
                 ],
                 "description": "This mixin generate the css needed to apply a particular font in your css.\nThe font parameter accept any defined font family from the\nconfig.theme.font.family stack",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-element {\n   @sugar.font.family(title);\n}"
                     }
                 ],
@@ -1428,7 +1440,7 @@
                 "relPath": "src/node/mixins/font/family.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font.size": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.size": {
                 "name": "size",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1438,11 +1450,11 @@
                     }
                 ],
                 "description": "This mixin generate the css needed to apply a font-size depending on the font sizes\ndefines in the config.theme.font.size stack",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-element {\n   @sugar.font.size(20);\n}"
                     }
                 ],
@@ -1457,7 +1469,7 @@
                 "relPath": "src/node/mixins/font/size.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.format.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1467,11 +1479,11 @@
                     }
                 ],
                 "description": "This mixin generate the documentation for the usage of the .s-format:... classes",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.format",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.format.classes;"
                     }
                 ],
@@ -1486,7 +1498,7 @@
                 "relPath": "src/node/mixins/format/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.format.text": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.text": {
                 "name": "text",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1496,11 +1508,11 @@
                     }
                 ],
                 "description": "This mixin allows you to scope some css that you want to apply only in text format context.\nYour css will be scoped inside the \"s-format:text\" class.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.format",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-element {\n   @sugar.format.text {\n     font-size: 20px;\n     margin-bottom: 50px;\n   }\n}"
                     },
                     {
@@ -1519,7 +1531,7 @@
                 "relPath": "src/node/mixins/format/text.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gap.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gap.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1529,11 +1541,11 @@
                     }
                 ],
                 "description": "This mixin generate all the gap helper classes like s-gap, s-gap:row, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gap",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gap",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.gap.classes;"
                     }
                 ],
@@ -1548,7 +1560,7 @@
                 "relPath": "src/node/mixins/gap/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gradient.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1558,11 +1570,11 @@
                     }
                 ],
                 "description": "This mixin generate all the gradient helper classes like s-gradient:accent, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gradient",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.gradient.classes;"
                     }
                 ],
@@ -1577,7 +1589,7 @@
                 "relPath": "src/node/mixins/gradient/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gradient.gradient": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.gradient": {
                 "name": "gradient",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1587,11 +1599,11 @@
                     }
                 ],
                 "description": "This mixin generate all the css needed to apply a gradient on your elements",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gradient",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-element {\n   @sugar.gradient(accent, secondary, radial);\n}"
                     }
                 ],
@@ -1606,7 +1618,7 @@
                 "relPath": "src/node/mixins/gradient/gradient.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.height.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.height.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1616,11 +1628,11 @@
                     }
                 ],
                 "description": "This mixin generate all the height helper classes like s-height:20, s-height:50, etc...\nIt will generate all the height defined in the config.theme.height configuration stack",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.height",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.height",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.height.classes;"
                     }
                 ],
@@ -1635,7 +1647,7 @@
                 "relPath": "src/node/mixins/height/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.highlightjs.theme": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.highlightjs.theme": {
                 "name": "theme",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1645,11 +1657,11 @@
                     }
                 ],
                 "description": "This mixin generate all the css needed to skin \"Prism js\"\nwith the theme colors",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.highlightjs",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.highlightjs",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.highlightjs.theme;"
                     }
                 ],
@@ -1664,7 +1676,7 @@
                 "relPath": "src/node/mixins/highlightjs/theme.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.icon.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.icon.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1674,11 +1686,11 @@
                     }
                 ],
                 "description": "This mixin generate all the classes needed to display the icons you've\npassed as parameter.\nThe icons parameter define all the icons you want. Each line define a new icon and you can use these\ndifferent \"adapters\" to specify your icons:\n\n- Line syntax: {adapter}:{name}:{nameYouWant}\n\nAvailable adapters are:\n\n- Filesystem:\nHere's some example of filesystem icons declarations:",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.icon",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.icon",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.icon.classes(\n   fa:user:user\n   fa:heart:heart\n   fs:src/icons/vuejs.svg:vue\n   fa:fire:fire\n   fa:copy:copy\n   fa:box-open:box\n);"
                     }
                 ],
@@ -1693,7 +1705,7 @@
                 "relPath": "src/node/mixins/icon/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.import.import": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.import.import": {
                 "name": "import",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1703,11 +1715,11 @@
                     }
                 ],
                 "description": "This mixin allows you to import other files just like the @import statement does.\nIt add the feature to specify a glob pattern to import multiple files at once.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.import",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.import",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.import('./my-cool-file.css');\n\\@sugar.import('../views /.css');"
                     }
                 ],
@@ -1743,7 +1755,7 @@
                 "relPath": "src/node/mixins/import/import.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.init.init": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.init.init": {
                 "name": "init",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1753,11 +1765,11 @@
                     }
                 ],
                 "description": "This mixin is the one you usually call first in your css.\nHis job is to:\n- Apply a reset.css to standardize the display across browser\n- Generate the base theme variables like colors, etc...\n- Generate all the font-faces needed",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.init",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.init",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.init;"
                     }
                 ],
@@ -1772,7 +1784,7 @@
                 "relPath": "src/node/mixins/init/init.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1782,11 +1794,11 @@
                     }
                 ],
                 "description": "This mixin generate all the layout helper classes like s-layout:12, s-container, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.layout.classes;"
                     }
                 ],
@@ -1801,7 +1813,7 @@
                 "relPath": "src/node/mixins/layout/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout.container": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.container": {
                 "name": "container",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1811,11 +1823,11 @@
                     }
                 ],
                 "description": "This mixin generate all the css needed for a container depending\non the config.theme.layout.container configuration stack",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-container {\n   @sugar.layout.container;\n}"
                     }
                 ],
@@ -1830,7 +1842,7 @@
                 "relPath": "src/node/mixins/layout/container.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout.layout": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.layout": {
                 "name": "layout",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1840,11 +1852,11 @@
                     }
                 ],
                 "description": "This mixin allows you to generate all the css needed for complex grids with multiple\ncolumns and rows like:\n\n|-|----|-|\n|--|--|--|\n|-----|--|\n\nThe mixin accept 1 parameter called layout. Here's some simple layouts to\nillustrate how it works:\n\n- layout 1: <span class=\"s-color-accent\">'1 2 3 4 5 6'</span> : This describe a simple 6 columns layout\n- layout 2: <span class=\"s-color-accent\">'1 1 2'</span>: This describe a two columns layout with the first columns taking 2/3 of the space and the second one taking 1/3 of it\n- layout 3: <span class=\"s-color-accent\">'1 2 _ 3 3'</span>: This describe 2 rows with the first having two columns and the second just one",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-element {\n   @sugar.layout(\n     1 1 1 2 2\n     3 3 4 4 4\n   );\n}"
                     },
                     {
@@ -1863,7 +1875,7 @@
                 "relPath": "src/node/mixins/layout/layout.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.link.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1873,11 +1885,11 @@
                     }
                 ],
                 "description": "This mixin generate all the height helper classes like s-link:stretch, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.link",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.link.classes;"
                     }
                 ],
@@ -1892,7 +1904,7 @@
                 "relPath": "src/node/mixins/link/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.link.stretch": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.stretch": {
                 "name": "stretch",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1902,7 +1914,7 @@
                     }
                 ],
                 "description": "This mixin allows you to stretch a link clickable area without having to change the actual link css.\nIt uses the `after` pseudo class to create a new clickable area that will spend until it reach an element that as a position specified.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.link",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link",
                 "status": "beta",
                 "example": [
                     {
@@ -1979,7 +1991,7 @@
                 "relPath": "src/node/mixins/lnf/selection.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.margin.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.margin.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1989,11 +2001,11 @@
                     }
                 ],
                 "description": "This mixin generate all the margin helper classes like s-mie10, s-mis:40, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.margin",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.margin",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.margin.classes;"
                     }
                 ],
@@ -2008,7 +2020,7 @@
                 "relPath": "src/node/mixins/margin/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.media.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2018,7 +2030,7 @@
                     }
                 ],
                 "description": "This mixin allows you to automatically generate the requested media query as well\nas updating all the direct child classnames so you will have classes that applies\nonly for these media queries.\n\nTake this as an example:\n\n```css\n\\@sugar.media.classes {\n.my-cool-element {\ncolor: green;\n}\n}\n```\n\nThis wil generate these two classes:\n- .my-cool-element: Always available\n- .my-cool-element___mobile: Available only in the mobile media query context\n- etc...\n\nNote that you can use the @sugar.media mixin parameters syntax here in the first argument.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.media",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media",
                 "status": "beta",
                 "example": [
                     {
@@ -2037,7 +2049,7 @@
                 "relPath": "src/node/mixins/media/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.media.media": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.media": {
                 "name": "media",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2047,11 +2059,11 @@
                     }
                 ],
                 "description": "This mixin allows you to apply any media queries that are defined\nin the config.theme.media.queries configuration stack like \"tablet\", \"mobile\", etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.media",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.media >=desktop {\n     // ...\n}\n\\@sugar.media tablet {\n     // ...\n}"
                     }
                 ],
@@ -2066,7 +2078,7 @@
                 "relPath": "src/node/mixins/media/media.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.offsize.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.offsize.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2076,11 +2088,11 @@
                     }
                 ],
                 "description": "This mixin generate all the offwidt helper classes like s-os:30, s-osi:40, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.offsize",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.offsize",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.offsize.classes;"
                     }
                 ],
@@ -2095,7 +2107,7 @@
                 "relPath": "src/node/mixins/offsize/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.opacity.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.opacity.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2105,11 +2117,11 @@
                     }
                 ],
                 "description": "This mixin generate all the margin helper classes like s-opacity:10, s-opacity:40, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.opacity",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.opacity",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.margin.classes;"
                     }
                 ],
@@ -2124,7 +2136,7 @@
                 "relPath": "src/node/mixins/opacity/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.order.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.order.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2134,11 +2146,11 @@
                     }
                 ],
                 "description": "This mixin generate all the order helper classes like s-order:1, s-order:2, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.order",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.order",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.order.classes;"
                     }
                 ],
@@ -2153,7 +2165,7 @@
                 "relPath": "src/node/mixins/order/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.outline.outline": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.outline.outline": {
                 "name": "outline",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2163,11 +2175,11 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a nice outline on any HTMLElement.\nThis outline will be display on hover and focus by default but can be displayed\nalways by passing the `on` parameter to `always` like so `@sugar.outline(always)`",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.outline",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.outline",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".myCoolItem {\n     @sugar.outline();\n}"
                     }
                 ],
@@ -2182,7 +2194,7 @@
                 "relPath": "src/node/mixins/outline/outline.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.overflow.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.overflow.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2192,11 +2204,11 @@
                     }
                 ],
                 "description": "This mixin generate all the overflow helper classes like ```.s-overflow:hidden```, ```.s-overflow:auto```, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.overflow",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.overflow",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.overflow.classes;"
                     }
                 ],
@@ -2211,7 +2223,7 @@
                 "relPath": "src/node/mixins/overflow/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.padding.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.padding.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2221,11 +2233,11 @@
                     }
                 ],
                 "description": "This mixin generate all the padding helper classes like s-p:10, s-pie:40, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.padding",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.padding",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.padding.classes;"
                     }
                 ],
@@ -2240,7 +2252,7 @@
                 "relPath": "src/node/mixins/padding/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.platform.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2250,11 +2262,11 @@
                     }
                 ],
                 "description": "This mixin generate all the \"platforms\" css classes like s-platform:css, etc...\n\"Platforms\" are some kind of \"icons\" of platforms like \"css\", \"node\", \"js\", \"php\", etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.platform",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.platform.classes;"
                     }
                 ],
@@ -2269,7 +2281,7 @@
                 "relPath": "src/node/mixins/platform/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.platform.platform": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.platform": {
                 "name": "platform",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2279,11 +2291,11 @@
                     }
                 ],
                 "description": "This mixin generate all the css needed to display correctly a \"platform\" icon like\ncss, node, js, php, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.platform",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-platform {\n   @sugar.platform(css);\n}"
                     }
                 ],
@@ -2298,7 +2310,7 @@
                 "relPath": "src/node/mixins/platform/platform.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.pointer.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.pointer.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2308,11 +2320,11 @@
                     }
                 ],
                 "description": "This mixin generate all the pointer helper classes like ```.s-pointer-events:none```, ```.s-pointer-events:all```, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.pointer",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.pointer",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.pointer.classes;"
                     }
                 ],
@@ -2327,7 +2339,7 @@
                 "relPath": "src/node/mixins/pointer/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.position.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.position.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2337,11 +2349,11 @@
                     }
                 ],
                 "description": "This mixin generate all the position helper classes like s-position:absolute, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.position",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.position",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.position.classes;"
                     }
                 ],
@@ -2356,7 +2368,7 @@
                 "relPath": "src/node/mixins/position/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ratio.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2366,11 +2378,11 @@
                     }
                 ],
                 "description": "This mixin generate all the ratio helper classes like s-ratio:16-9, s-ratio:1, etc.\nThe generated ratios are specified in the config.theme.ratio configuration stack",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ratio",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.ratio.classes;"
                     }
                 ],
@@ -2385,7 +2397,7 @@
                 "relPath": "src/node/mixins/ratio/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ratio.ratio": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.ratio": {
                 "name": "ratio",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2395,11 +2407,11 @@
                     }
                 ],
                 "description": "This mixin generate all the css needed to apply a ratio on any HTMLElement.\nIt uses the :before technique.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ratio",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-element {\n   @sugar.ratio(16/9);\n}"
                     }
                 ],
@@ -2414,7 +2426,7 @@
                 "relPath": "src/node/mixins/ratio/ratio.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset.destyle": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.destyle": {
                 "name": "destyle",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2424,11 +2436,11 @@
                     }
                 ],
                 "description": "This mixin print the destyle css reset\n\n@ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.reset.destyle;"
                     }
                 ],
@@ -2443,7 +2455,7 @@
                 "relPath": "src/node/mixins/reset/destyle.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset.reset": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.reset": {
                 "name": "reset",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2453,11 +2465,11 @@
                     }
                 ],
                 "description": "This mixin generate all the reset css needed to standardize display\non all browsers.\n\n@ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.ratio.classes;"
                     }
                 ],
@@ -2472,7 +2484,7 @@
                 "relPath": "src/node/mixins/reset/reset.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset.sugar": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.sugar": {
                 "name": "sugar",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2482,11 +2494,11 @@
                     }
                 ],
                 "description": "This mixin print the sugar css reset that makes:",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.reset.sugar;"
                     }
                 ],
@@ -2501,7 +2513,7 @@
                 "relPath": "src/node/mixins/reset/sugar.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.rhythm.vertical": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.vertical": {
                 "name": "vertical",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2511,11 +2523,11 @@
                     }
                 ],
                 "description": "This mixin allows you to scope some css that you want to apply only in vertical rhythm context.\nYour css will be scoped inside the \"s-rhythm:vertical\" class.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.rhythm",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-element {\n   @sugar.rhythm.vertical {\n     margin-bottom: 50px;\n   }\n}"
                     },
                     {
@@ -2534,7 +2546,7 @@
                 "relPath": "src/node/mixins/rhythm/vertical.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scale.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2544,11 +2556,11 @@
                     }
                 ],
                 "description": "This mixin generate all the scale helper classes like s-scale:01, s-scale:12, etc.\nThe generated scales are specified in the config.theme.scale configuration stack",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scale",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.scale.classes;"
                     }
                 ],
@@ -2563,7 +2575,7 @@
                 "relPath": "src/node/mixins/scale/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scope.no": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope.no": {
                 "name": "no",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2573,11 +2585,11 @@
                     }
                 ],
                 "description": "This mixin allows you to exclude some scope(s) from the generated css.\nScopes are usually \"bare\" or/and \"lnf\" (look and feel).\nThis is usefull for example if you want all the classes to apply bare styling\nwithout any look and feel that you handle by yourself.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scope",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.scope.no(lnf) {\n     // ...\n}"
                     }
                 ],
@@ -2592,7 +2604,7 @@
                 "relPath": "src/node/mixins/scope/no.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scrollbar.scrollbar": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar.scrollbar": {
                 "name": "scrollbar",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2602,11 +2614,11 @@
                     }
                 ],
                 "description": "This mixin allows you to skin your scrollbar easily by applying a color and\na width to it.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scrollbar",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "body {\n   @sugar.scrollbar(accent, 5px);\n}"
                     }
                 ],
@@ -2621,7 +2633,7 @@
                 "relPath": "src/node/mixins/scrollbar/scrollbar.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.shadow.shadow": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.shadow.shadow": {
                 "name": "shadow",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2631,11 +2643,11 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a linear gradient shadow to any HTMLElement.\nNote that this mixin make use of the :before pseudo class.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.shadow",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.shadow",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".myCoolElement {\n   @sugar.shadow.gradient(0, 10px, 10px, 0, sugar.color(accent), sugar.color(complementary));\n}"
                     }
                 ],
@@ -2650,7 +2662,7 @@
                 "relPath": "src/node/mixins/shadow/gradient.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state.focus": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.focus": {
                 "name": "focus",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2660,11 +2672,11 @@
                     }
                 ],
                 "description": "This mixin allows you to target some active items to apply some styling on it.\nHere's the selector generated by this mixin:\n- &:active:not(:hover), &.active, &[active]",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".myCoolItem {\n @sugar.state.active {\n     // ...\n }\n}"
                     }
                 ],
@@ -2679,7 +2691,7 @@
                 "relPath": "src/node/mixins/state/active.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state.disabled": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.disabled": {
                 "name": "disabled",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2689,11 +2701,11 @@
                     }
                 ],
                 "description": "This mixin allows you to target some disabled items to apply some styling.\nHere's the generated selector:\n- &:disabled",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".myCoolItem {\n @sugar.state.disabled {\n     // ...\n }\n}"
                     }
                 ],
@@ -2708,7 +2720,7 @@
                 "relPath": "src/node/mixins/state/disabled.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state.hover": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.hover": {
                 "name": "hover",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2718,11 +2730,11 @@
                     }
                 ],
                 "description": "This mixin allows you to target some hover item to apply some styling on it.\nHere's the generated selector:\n- &:hover",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".myCoolItem {\n @sugar.state.hover {\n     // ...\n }\n}"
                     }
                 ],
@@ -2737,7 +2749,7 @@
                 "relPath": "src/node/mixins/state/hover.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.text.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.text.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2747,11 +2759,11 @@
                     }
                 ],
                 "description": "This mixin generate all the text helper classes like s-text:center, s-text:left, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.text",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.text",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.text.classes;"
                     }
                 ],
@@ -2766,7 +2778,7 @@
                 "relPath": "src/node/mixins/text/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.theme.theme": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.theme.theme": {
                 "name": "theme",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2776,11 +2788,11 @@
                     }
                 ],
                 "description": "This mixin simply generate all the css needed for a theme to be applied\nin any scope. It will print all the theme variables like colors, etc, as well\nas set the correct font style and some other small things...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.theme",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.theme",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.theme(light);\n.my-cool-element {\n   \\@sugar.theme(dark);\n}"
                     }
                 ],
@@ -2795,7 +2807,7 @@
                 "relPath": "src/node/mixins/theme/theme.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.rhythm.when": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.when": {
                 "name": "when",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2805,11 +2817,11 @@
                     }
                 ],
                 "description": "This mixin allows you to scope some css for a particular theme.\nThis will mainly scope your css under a class named ```.s-theme:{name}``` but it's\nnice to use this mixin to make this easier and more modulable",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.rhythm",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-element {\n   @sugar.theme.when(dark) {\n     margin-bottom: 50px;\n   }\n}"
                     },
                     {
@@ -2828,7 +2840,7 @@
                 "relPath": "src/node/mixins/theme/when.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.transition.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2838,11 +2850,11 @@
                     }
                 ],
                 "description": "This mixin generate all the transition helper classes like s-transition:slow, etc.\nThe generated transitions are specified in the config.theme.transition configuration stack",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.transition",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.transition.classes;"
                     }
                 ],
@@ -2857,7 +2869,7 @@
                 "relPath": "src/node/mixins/transition/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.transition.transition": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.transition": {
                 "name": "transition",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2867,11 +2879,11 @@
                     }
                 ],
                 "description": "This mixin generate all the needed css to apply a transition setted in\nthe config.theme.transition configuration stack like \"slow\", \"default\" and \"fast\"",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.transition",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.platform.classes;"
                     }
                 ],
@@ -2893,7 +2905,7 @@
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-element {\n   @sugar.transition(fast);\n}"
                     },
                     {
@@ -2912,7 +2924,7 @@
                 "relPath": "src/node/mixins/transition/transition.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.truncate.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2922,11 +2934,11 @@
                     }
                 ],
                 "description": "This mixin generate all the truncate classes like s-truncate, s-truncate:2, etc...\nThe number of truncate classes generated is defined in the theme.helpers.truncate.count settings",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.truncate",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.truncate.classes;"
                     }
                 ],
@@ -2941,7 +2953,7 @@
                 "relPath": "src/node/mixins/truncate/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.truncate.truncate": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.truncate": {
                 "name": "truncate",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2951,11 +2963,11 @@
                     }
                 ],
                 "description": "This mixin allows you to truncate some text to a number of lines",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.truncate",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-cool-element {\n   @sugar.truncate(2);\n}"
                     }
                 ],
@@ -2970,7 +2982,7 @@
                 "relPath": "src/node/mixins/truncate/truncate.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.typo.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.typo.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2980,11 +2992,11 @@
                     }
                 ],
                 "description": "This mixin generate all the typo helper classes like s-typo:h1, s-typo:p, and all the typo\nelements that are defined in the config.theme.typo configuration stack.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.typo",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.typo",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.typo.classes;"
                     }
                 ],
@@ -3007,7 +3019,7 @@
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.ui.classes;"
                     }
                 ],
@@ -3022,7 +3034,7 @@
                 "relPath": "src/node/mixins/ui/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.until.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3032,11 +3044,11 @@
                     }
                 ],
                 "description": "This mixin generate all the \"until\" classes that allows you to apply some display\nstyles like \"hide\", etc... only until a certain state is reached.\nSupported states are:\n- mounted: Apply only until the state of a webcomponent for example has been reached",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.until",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.until.classes;"
                     }
                 ],
@@ -3051,7 +3063,7 @@
                 "relPath": "src/node/mixins/until/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.until.mounted": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.mounted": {
                 "name": "mounted",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3061,11 +3073,11 @@
                     }
                 ],
                 "description": "This mixin allows you to set some css applied only UNTIL a specific \"state\" has been\nreached.\nSupported states are:\n- mounted: When a sugar webcomponent has the \"mounted\" attribute",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.until",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".myElement {\n     display: block;\n\n     @sugar.until.mounted {\n         display: none;\n     }\n}"
                     }
                 ],
@@ -3080,7 +3092,7 @@
                 "relPath": "src/node/mixins/until/mounted.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.userSelect.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.userSelect.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3090,11 +3102,11 @@
                     }
                 ],
                 "description": "This mixin generate all the user-select helper classes like ```.s-user-select:none```, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.userSelect",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.userSelect",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.userSelect.classes;"
                     }
                 ],
@@ -3109,7 +3121,7 @@
                 "relPath": "src/node/mixins/userSelect/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.utils.configToCss": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.utils.configToCss": {
                 "name": "configToCss",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3119,7 +3131,7 @@
                     }
                 ],
                 "description": "This mixin allows you to pass a theme config dot path that point to an object\nand to print out the result as css properties.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.utils",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.utils",
                 "status": "beta",
                 "example": [
                     {
@@ -3138,7 +3150,7 @@
                 "relPath": "src/node/mixins/utils/configToCss.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visibility.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visibility.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3148,11 +3160,11 @@
                     }
                 ],
                 "description": "This mixin generate all the overflow helper classes like ```.s-visibility:hidden```, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visibility",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visibility",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.visibility.classes;"
                     }
                 ],
@@ -3167,7 +3179,7 @@
                 "relPath": "src/node/mixins/visibility/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visually.hidden": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.hidden": {
                 "name": "hidden",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3177,11 +3189,11 @@
                     }
                 ],
                 "description": "This mixin allows you to apply a css that make the element visually hidden but not really\nhidden like when make use of `display: none;`.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visually",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".my-element {\n @sugar.visually.hidden;\n}"
                     }
                 ],
@@ -3203,7 +3215,7 @@
                         "status": "beta",
                         "example": [
                             {
-                                "language": "postcss",
+                                "language": "css",
                                 "code": ".my-cool-element {\n   @sugar.transition(fast);\n}"
                             },
                             {
@@ -3220,7 +3232,7 @@
                     }
                 }
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visually.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3230,11 +3242,11 @@
                     }
                 ],
                 "description": "This mixin generate all the overflow helper classes like ```.s-visually:hidden```, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visually",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.visually.classes;"
                     }
                 ],
@@ -3249,7 +3261,7 @@
                 "relPath": "src/node/mixins/visually/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.when.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3259,11 +3271,11 @@
                     }
                 ],
                 "description": "This mixin generate all the \"when\" classes that allows you to apply some display\nstyles like \"hide\", etc... only when a certain state is reached.\nSupported states are:\n- mounted: Apply only when the state of a webcomponent for example has been reached\n- active: When the element has the \"active\" class or the \"active\" attribute",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.when",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.when.classes;"
                     }
                 ],
@@ -3278,7 +3290,7 @@
                 "relPath": "src/node/mixins/when/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.when.active": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.active": {
                 "name": "active",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3288,11 +3300,11 @@
                     }
                 ],
                 "description": "This mixin allows you to set some css applied only WHEN a specific \"state\" has been\nreached.\nSupported states are:\n- mounted: When a sugar webcomponent has the \"mounted\" attribute\n- active: When the element has the \"active\" class or the \"active\" attribute",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.when",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": ".myElement {\n     display: none;\n\n     @sugar.when.mounted {\n         display: block;\n     }\n}"
                     }
                 ],
@@ -3307,7 +3319,7 @@
                 "relPath": "src/node/mixins/when/when.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.width.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.width.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3317,11 +3329,11 @@
                     }
                 ],
                 "description": "This mixin generate all the width helper classes like s-width:20, s-width:50, etc...\nIt will generate all the width defined in the config.theme.width configuration stack",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.width",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.width",
                 "status": "beta",
                 "example": [
                     {
-                        "language": "postcss",
+                        "language": "css",
                         "code": "@sugar.width.classes;"
                     }
                 ],
@@ -3336,7 +3348,7 @@
                 "relPath": "src/node/mixins/width/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.avatar.avatar": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.avatar": {
                 "name": "avatar",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3346,7 +3358,7 @@
                     }
                 ],
                 "description": "This mixin allows you to generate the \"avatar\" UI component css.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.avatar",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar",
                 "status": "beta",
                 "example": [
                     {
@@ -3365,7 +3377,7 @@
                 "relPath": "src/node/mixins/ui/avatar/avatar.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.avatar.classes": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.classes": {
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3375,7 +3387,7 @@
                     }
                 ],
                 "description": "This mixin allows you to generate the \"avatar\" UI component classes.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.avatar",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar",
                 "status": "beta",
                 "example": [
                     {
@@ -3394,7 +3406,7 @@
                 "relPath": "src/node/mixins/ui/avatar/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.badge.badge": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge.badge": {
                 "name": "badge",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3404,7 +3416,7 @@
                     }
                 ],
                 "description": "This mixin allows you to generate the \"badge\" UI component css.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.badge",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge",
                 "status": "beta",
                 "example": [
                     {
@@ -3423,7 +3435,7 @@
                 "relPath": "src/node/mixins/ui/badge/badge.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.blockquote.blockquote": {
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote.blockquote": {
                 "name": "blockquote",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3433,7 +3445,7 @@
                     }
                 ],
                 "description": "This mixin allows you to generate the \"blockquote\" UI component css.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.blockquote",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote",
                 "status": "beta",
                 "example": [
                     {

@@ -5,7 +5,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 /**
  * @name           classes
- * @namespace      node.mixins.padding
+ * @namespace      node.mixin.padding
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -14,7 +14,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.padding.classes;
  *
  * @since       2.0.0

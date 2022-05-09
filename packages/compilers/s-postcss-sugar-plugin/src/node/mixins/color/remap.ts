@@ -19,7 +19,7 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
 
 /**
  * @name           remap
- * @namespace      node.mixins.colors
+ * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -30,7 +30,7 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
  * @param       {String}        toColor         THe color you want to override with the previous one
  * @return      {Css}                     The generated remap css
  *
- * @example         postcss
+ * @example        css
  * .my-section {
  *      @sugar.color.remap(warning, primary);
  * }

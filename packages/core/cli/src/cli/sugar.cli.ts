@@ -29,6 +29,8 @@ import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface';
 import __replaceCommandTokens from './replaceCommandTokens';
 
+import __parseSemverString from '@coffeekraken/sugar/shared/semver/parseSemverString';
+
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
     description: string;

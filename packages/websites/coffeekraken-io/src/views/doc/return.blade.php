@@ -3,7 +3,7 @@
         <i class="s-icon:return s-tc:accent"></i>&nbsp;&nbsp;Return
     </h4>
 
-    <header class="s-flex s-bg:main-surface s-radius s-depth:100 s-mbe:20">
+    <header class="s-flex s-bg:main-surface s-radius s-mbe:20">
         <div class="s-flex-item:grow s-format:text s-tc:accent s-p:30 s-color:complementary">
             {!! \Sugar\markdown\toHtml($block->return->description) !!}
         </div>

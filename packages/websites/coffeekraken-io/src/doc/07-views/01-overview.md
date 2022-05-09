@@ -16,6 +16,8 @@
 
 # Views support overview
 
+> Note that this documentation is related to the [@coffeekraken/s-frontend-server](/package/@coffeekraken/s-frontend-server/doc/README) and [@coffeekraken/s-view-renderer](/package/@coffeekraken/s-view-renderer) packages.
+
 Coffeekraken has a built-in server that support multiple views types like:
 
 -   `.blade.php`

@@ -51,13 +51,13 @@ export default function (env, config) {
          * @name          dataHandlers
          * @namespace     config.viewRenderer
          * @type          String[]
-         * @default       ['@coffeekraken/s-view-renderer-data-handler-json']
+         * @default       ['@coffeekraken/s-handler-js']
          *
          * Store which data handlers are available for this renderer
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        dataHandlers: ['@coffeekraken/s-view-renderer-data-handler-js'],
+        dataHandlers: ['@coffeekraken/s-data-handler-js'],
     };
 }

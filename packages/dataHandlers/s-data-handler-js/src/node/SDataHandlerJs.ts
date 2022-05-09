@@ -4,7 +4,7 @@ import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name          js
- * @namespace     s-view.dataHandlers
+ * @namespace     node
  * @type          Function
  * @status              beta
  *
@@ -21,12 +21,13 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default {
-  name: 'JsDataHandler',
-  extensions: ['js', 'json'],
-  handle(filePath) {
-    return new __SPromise(async ({ resolve }) => {
-      resolve(await import(filePath));
-    });
-  }
-};
+export default class SDataHandlerJs {
+    static extensions = ['js', 'json'];
+    static handle(filePath) {
+        return new __SPromise(async ({ resolve }) => {
+            let data = (await import(filePath)).default;
+            if (typeof data === 'function') data = await data();
+            resolve(data);
+        });
+    }
+}

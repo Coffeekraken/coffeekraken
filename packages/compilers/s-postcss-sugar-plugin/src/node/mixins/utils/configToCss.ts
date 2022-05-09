@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name            configToCss
- * @namespace       node.mixins.utils
+ * @namespace       node.mixin.utils
  * @type            PostcssMixin
  * @platform        css
  * @status          beta

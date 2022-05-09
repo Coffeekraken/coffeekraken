@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           hidden
- * @namespace      node.mixins.visually
+ * @namespace      node.mixin.visually
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -12,7 +12,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * .my-element {
  *  \@sugar.visually.hidden;
  * }
@@ -40,7 +40,7 @@ export interface postcssSugarPluginVisuallyHiddenMixinParams {}
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
- * @example         postcss
+ * @example        css
  * .my-cool-element {
  *    \@sugar.transition(fast);
  * }

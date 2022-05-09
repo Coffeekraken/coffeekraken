@@ -14,7 +14,7 @@ export { postcssSugarPluginColorPrimaryMixinInterface as interface };
 
 /**
  * @name           primary
- * @namespace      node.mixins.colors
+ * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -24,7 +24,7 @@ export { postcssSugarPluginColorPrimaryMixinInterface as interface };
  * @param       {String}        color           The color you want to map on the primary one
  * @return      {Css}                     The generated remap css
  *
- * @example         postcss
+ * @example        css
  * .my-section {
  *      @sugar.color.primary(success);
  * }

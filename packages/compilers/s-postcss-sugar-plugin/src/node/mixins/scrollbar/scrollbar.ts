@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           scrollbar
- * @namespace      node.mixins.scrollbar
+ * @namespace      node.mixin.scrollbar
  * @type           PostcssMixin
  * @platform        css
  * @status        beta
@@ -13,7 +13,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}           The generated css
  *
- * @example         postcss
+ * @example        css
  * body {
  *    @sugar.scrollbar(accent, 5px);
  * }

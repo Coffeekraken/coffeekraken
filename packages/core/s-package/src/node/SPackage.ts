@@ -16,6 +16,7 @@ import __ts from 'typescript';
 import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsInterface';
 import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsInterface';
 import __SPackageAddReadmeParamsInterface from './interface/SPackageAddReadmeParamsInterface';
+import __SPackageAddDefaultScriptsParamsInterface from './interface/SPackageApplyDefaultPackageJsonParamsInterface';
 import __childProcess from 'child_process';
 import __glob from 'glob';
 import __SClass from '@coffeekraken/s-class';
@@ -73,6 +74,9 @@ export interface ISPackageAddReadmeParams {
 export interface ISPackageAddReadmeResult {
     file: __SFile;
 }
+
+export interface ISPackageAddDefaultPackageJsonParams {}
+export interface ISPackageAddDefaultPackageJsonResult {}
 
 export interface ISPackageExportsParams {
     watch: boolean;
@@ -504,10 +508,6 @@ export default class SPackage extends __SClass {
                     params,
                 );
 
-                // if (finalParams.folder === undefined) {
-
-                // }
-
                 const packageRoot = __packageRoot();
 
                 if (
@@ -544,6 +544,68 @@ export default class SPackage extends __SClass {
                 resolve({
                     file: __SFile.new(finalParams.path),
                 });
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
+    }
+
+    /**
+     * @name            applyDefaultPackageJson
+     * @type            Function
+     * @async
+     *
+     * This method allows you to apply the default package.json to your package.
+     *
+     * @param       {Partial<ISPackageAddDefaultPackageJsonParams>}          [params={}]         Some params for your add default package json process
+     * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the rename
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    applyDefaultPackageJson(
+        params: ISPackageAddDefaultPackageJsonParams,
+    ): Promise<ISPackageAddDefaultPackageJsonResult> {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                // @ts-ignore
+                const finalParams: ISPackageAddDefaultPackageJsonParams = __SPackageAddDefaultScriptsParamsInterface.apply(
+                    params,
+                );
+
+                const packageRoot = __packageRoot();
+
+                if (!__fs.existsSync(`${packageRoot}/package.json`)) {
+                    throw new Error(
+                        `[applyDefaultPackageJson] No package.json file found in the package root`,
+                    );
+                }
+
+                // Adding README
+                emit('log', {
+                    value: `<yellow>[applyDefaultPackageJson]</yellow> Applying <cyan>config.package.defaultPackageJson</cyan> to the package.json file`,
+                });
+
+                let json = JSON.parse(
+                    __fs.readFileSync(`${packageRoot}/package.json`).toString(),
+                );
+                json = __deepMerge(
+                    json,
+                    __SSugarConfig.get('package.defaultPackageJson') ?? {},
+                );
+                __fs.writeFileSync(
+                    `${packageRoot}/package.json`,
+                    JSON.stringify(json, null, 2),
+                );
+
+                emit('log', {
+                    value: `<green>[applyDefaultPackageJson]</green> <cyan>config.package.defaultPackageJson</cyan> applied <green>successfully</green>`,
+                });
+
+                resolve({});
             },
             {
                 eventEmitter: {

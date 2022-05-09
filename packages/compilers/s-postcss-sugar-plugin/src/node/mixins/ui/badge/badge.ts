@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          badge
- * @namespace     node.mixins.ui.badge
+ * @namespace     node.mixin.ui.badge
  * @type          PostcssMixin
  * @platform      postcss
  * @status        beta

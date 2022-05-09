@@ -4,7 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
- * @namespace      node.mixins.userSelect
+ * @namespace      node.mixin.userSelect
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -13,7 +13,7 @@ import __faker from 'faker';
  *
  * @return        {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.userSelect.classes;
  *
  * @since       2.0.0
@@ -91,9 +91,7 @@ export default function ({
         */
     `);
 
-    [
-        'all','auto','none','text'
-    ].forEach((value) => {
+    ['all', 'auto', 'none', 'text'].forEach((value) => {
         vars.push(`/**
     * @name          s-user-select:${value}
     * @namespace          sugar.css.whiteSpace

@@ -33,7 +33,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
 
 /**
  * @name           media
- * @namespace      node.mixins.media
+ * @namespace      node.mixin.media
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
@@ -44,7 +44,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  * @return      {Css}         The generated css
  *
- * @example         postcss
+ * @example        css
  * \@sugar.media >=desktop {
  *      // ...
  * }

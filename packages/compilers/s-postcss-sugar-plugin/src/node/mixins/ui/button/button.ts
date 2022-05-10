@@ -1,6 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          blockquote
+ * @namespace     node.mixin.ui.button
+ * @type          PostcssMixin
+ * @interface     ./button
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to generate the "button" UI component css.
+ *
+ * @param       {'solid'|'gradient'|'outline'|'text'}                           [style='theme.ui.button.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.button.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *      \@sugar.ui.button();
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiButtonInterface extends __SInterface {
     static get _definition() {
         return {
@@ -13,10 +37,6 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
                 default: __STheme.get('ui.button.defaultShape'),
-            },
-            outline: {
-                type: 'Boolean',
-                default: __STheme.get('ui.button.outline'),
             },
             scope: {
                 type: {
@@ -33,7 +53,6 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
 export interface IPostcssSugarPluginUiButtonParams {
     style: 'solid' | 'gradient' | 'outline' | 'text';
     shape: 'default' | 'square' | 'pill';
-    outline: boolean;
     scope: ('bare' | 'lnf' | 'shape')[];
 }
 
@@ -72,7 +91,6 @@ export default function ({
     const finalParams: IPostcssSugarPluginUiButtonParams = {
         style: 'solid',
         shape: 'default',
-        outline: true,
         scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
@@ -198,13 +216,13 @@ export default function ({
         `);
                 break;
         }
-        if (finalParams.outline) {
-            vars.push(`
+
+        // outline
+        vars.push(`
               &:focus:not(:hover) {
                 @sugar.outline;
               }
           `);
-        }
     }
 
     if (finalParams.scope.includes('shape')) {

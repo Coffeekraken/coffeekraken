@@ -5,13 +5,15 @@ import __STheme from '@coffeekraken/s-theme';
  * @name          blockquote
  * @namespace     node.mixin.ui.blockquote
  * @type          PostcssMixin
+ * @interface     ./blockquote
  * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate the "blockquote" UI component css.
  *
- * @param       {'solid'}                           [style='solid']         The style you want your blockquote to have
- * @param       {('bare'|'lnf'|'shape'|'interactive')[]}        [scope=['bare','lnf','shape']]      The scope you want to generate
+ * @param       {'solid'}                           [style'theme.ui.blockquote.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.blockquote.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css

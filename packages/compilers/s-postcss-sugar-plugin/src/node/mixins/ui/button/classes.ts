@@ -2,6 +2,31 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.button
+ * @type          PostcssMixin
+ * @interface       ./classes
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to generate the "button" UI component classes.
+ *
+ * @param       {('solid'|'gradient'|'outline'|'text')[]}                           [styles=['solid','gradient','outline','text']]         The style(s) you want to generate
+ * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
+ * @param       {'solid'|'gradient'|'outline'|'text'}                [defaultStyle='theme.ui.button.defaultStyle']           The default style you want
+ * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.button.defaultShape']           The default shape you want
+ * @param       {String}                       [defaultColor='theme.ui.button.defaultColor']           The default color you want
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * \@sugar.ui.button.classes();
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
     static get _definition() {
         return {

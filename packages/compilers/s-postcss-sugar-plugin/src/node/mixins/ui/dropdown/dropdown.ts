@@ -11,9 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the dropdown style to any element
  *
- * @param       {'solid'}           [style='theme.ui.dropdown.defaultStyle']        The style you want for your dropdown
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.dropdown.defaultShape]      The shape you want for your dropdown
- * @param       {('bare'|'lnf'|'shape'|'position')[]}      [scope=['bare','lnf','shape','position']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.dropdown.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.dropdown.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

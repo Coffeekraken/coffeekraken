@@ -11,9 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the fsTree style to any element
  *
- * @param       {'solid'}           [style='theme.ui.fsTree.defaultStyle']        The style you want for your fsTree
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.fsTree.defaultShape]      The shape you want for your fsTree
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.fsTree.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.fsTree.defaultStyle']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

@@ -5,15 +5,15 @@ import __STheme from '@coffeekraken/s-theme';
  * @name          input
  * @namespace     ui.input
  * @type               PostcssMixin
- * @interface     ./text          interface
+ * @interface       ./input
  * @platform      postcss
  * @status        beta
  *
  * Apply the input style to any element
  *
- * @param       {'solid'}           [style='theme.ui.input.defaultStyle']        The style you want for your input
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.input.defaultShape]      The shape you want for your input
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.input.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.input.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

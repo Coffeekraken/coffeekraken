@@ -5,13 +5,14 @@ import __STheme from '@coffeekraken/s-theme';
  * @name          classes
  * @namespace     node.mixin.ui.badge
  * @type          PostcssMixin
+ * @interface       ./classes
  * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate the "badge" UI component classes.
  *
- * @param       {('solid'|'outline')[]}                           [styles=['solid'|'outline']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default'|'square'|'pill']]         The shape(s) you want to generate
+ * @param       {('solid'|'outline')[]}                           [styles=['solid','outline']]         The style(s) you want to generate
+ * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
  * @param       {'solid'|'outline'}                [defaultStyle='theme.ui.badge.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.badge.defaultShape']           The default shape you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate

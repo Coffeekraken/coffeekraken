@@ -2,6 +2,31 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.blockquote
+ * @type          PostcssMixin
+ * @interface       ./classes
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to generate the "blockquote" UI component classes.
+ *
+ * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
+ * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
+ * @param       {'solid'|'outline'}                [defaultStyle='theme.ui.bolckquote.defaultStyle']           The default style you want
+ * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.bolckquote.defaultShape']           The default shape you want
+ * @param       {String}                       [defaultColor='theme.ui.bolckquote.defaultColor']           The default color you want
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * \@sugar.ui.blockquote.classes();
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
     static get _definition() {
         return {

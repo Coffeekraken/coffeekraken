@@ -1,18 +1,20 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name          badge
  * @namespace     node.mixin.ui.badge
  * @type          PostcssMixin
+ * @interface       ./badge
  * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate the "badge" UI component css.
  *
- * @param       {'default'|'square'|'rounded'}          [shape='default']       The shape you want your avatar to have
- * @param       {'solid'|'outline'}                           [style='solid']         The style you want your badge to have
- * @param       {('bare'|'lnf'|'shape'|'interactive')[]}        [scope=['bare','lnf','shape']]      The scope you want to generate
+ * @param       {'solid'|'outline'}                           [style='theme.ui.badge.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.badge.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css
@@ -30,12 +32,12 @@ class postcssSugarPluginUiBadgeInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid', 'outline'],
-                default: 'solid',
+                default: __SSugarConfig.get('ui.badge.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: 'default',
+                default: __SSugarConfig.get('ui.badge.defaultShape'),
             },
             scope: {
                 type: {

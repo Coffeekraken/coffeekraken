@@ -5,13 +5,14 @@ import __STheme from '@coffeekraken/s-theme';
  * @name          classes
  * @namespace     node.mixin.ui.avatar
  * @type          PostcssMixin
+ * @interface     ./classes
  * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate the "avatar" UI component classes.
  *
  * @param       {('solid')[]}                                                [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill'|'circle')[]}                 [shape=['default'|'square'|'pill'|'circle']]         The shape(s) you want to generate
+ * @param       {('default'|'square'|'pill'|'circle')[]}                 [shape=['default'|'square','pill','circle']]         The shape(s) you want to generate
  * @param       {'solid''}                                                  [defaultStyle='theme.ui.avatar.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'pill'}                                     [defaultShape='theme.ui.avatar.defaultShape']           The default shape you want
  * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate

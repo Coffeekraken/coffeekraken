@@ -2,6 +2,30 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.checkbox
+ * @type          PostcssMixin
+ * @interface       ./classes
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to generate the "checkbox" UI component classes.
+ *
+ * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
+ * @param       {('default'|'square'|'circle')[]}             [shape=['default','square','circle']]         The shape(s) you want to generate
+ * @param       {'solid'}                [defaultStyle='theme.ui.button.defaultStyle']           The default style you want
+ * @param       {'default'|'square'|'circle'}        [defaultShape='theme.ui.button.defaultShape']           The default shape you want
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * \@sugar.ui.checkbox.classes();
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
     static get _definition() {
         return {
@@ -12,8 +36,8 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
             },
             shapes: {
                 type: 'String[]',
-                values: ['default', 'square', 'pill', 'circle'],
-                default: ['default', 'square', 'pill', 'circle'],
+                values: ['default', 'square', 'circle'],
+                default: ['default', 'square', 'circle'],
             },
             defaultStyle: {
                 type: 'String',
@@ -22,7 +46,7 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
             },
             defaultShape: {
                 type: 'String',
-                values: ['default', 'square', 'pill', 'circle'],
+                values: ['default', 'square', 'circle'],
                 default: __STheme.get('ui.checkbox.defaultShape'),
             },
             scope: {
@@ -39,9 +63,9 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiCheckboxClassesParams {
     styles: 'solid'[];
-    shapes: ('default' | 'square' | 'pill' | 'circle')[];
+    shapes: ('default' | 'square' | 'circle')[];
     defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill' | 'circle';
+    defaultShape: 'default' | 'square' | 'circle';
     scope: ('bare' | 'lnf' | 'shape' | 'tf' | 'vr')[];
 }
 
@@ -67,7 +91,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxClassesParams = {
         styles: ['solid'],
-        shapes: ['default', 'square', 'pill', 'circle'],
+        shapes: ['default', 'square', 'circle'],
         defaultStyle: 'solid',
         defaultShape: 'default',
         scope: [],

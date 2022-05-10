@@ -1,17 +1,19 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name          avatar
  * @namespace     node.mixin.ui.avatar
  * @type          PostcssMixin
+ * @interface       ./avatar
  * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate the "avatar" UI component css.
  *
- * @param       {'solid'}                           [style='solid']         The style you want your avatar to have
- * @param       {'default'|'square'|'rounded'}          [shape='default']       The shape you want your badge to have
- * @param       {('bare'|'lnf'|'shape'|'interactive')[]}        [scope=['bare','lnf','shape']]      The scope you want to generate
+ * @param       {'solid'}                                                [style='theme.ui.avatar.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'|'circle'}                 [shape='theme.ui.avatar.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css
@@ -29,12 +31,12 @@ class postcssSugarPluginUiAvatarInterface extends __SInterface {
             style: {
                 type: 'String',
                 value: ['solid'],
-                default: 'solid',
+                default: __SSugarConfig.get('ui.avatar.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'rounded'],
-                default: 'default',
+                default: __SSugarConfig.get('ui.avatar.defaultShape'),
             },
             scope: {
                 type: {

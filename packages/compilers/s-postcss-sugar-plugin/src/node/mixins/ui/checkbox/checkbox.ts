@@ -11,9 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the checkbox style to any element
  *
- * @param       {'solid'}           [style='theme.ui.checkbox.defaultStyle']        The style you want for your checkbox
- * @param       {'default'|'square'|'circle'}     [shape=theme.ui.checkbox.defaultShape]      The shape you want for your checkbox
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.checkbox.defaultStyle']         The style(s) you want to generate
+ * @param       {'default'|'square'|'circle'}             [shape='theme.ui.checkbox.defaultShape']         The shape you want to generate
+ * @param       {'bare'|'lnf'|'shape'}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

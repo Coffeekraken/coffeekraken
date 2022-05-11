@@ -17,6 +17,7 @@
         "@coffeekraken/s-stdio": "^2.0.0",
         "@coffeekraken/s-log": "^2.0.0",
         "@coffeekraken/s-glob": "^2.0.0",
+        "@coffeekraken/s-jest-tester": "^2.0.0",
         "@coffeekraken/s-postcss-builder": "^2.0.0",
         "@coffeekraken/s-typescript-builder": "^2.0.0",
         "@coffeekraken/s-event-emitter": "^2.0.0",

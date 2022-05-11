@@ -15,6 +15,7 @@ import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __path from 'path';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __SPackage from '@coffeekraken/s-package';
+import __SJestTester from '@coffeekraken/s-jest-tester';
 
 import __srcDir from '@coffeekraken/sugar/node/path/srcRootDir';
 import __distDir from '@coffeekraken/sugar/node/path/distRootDir';
@@ -84,6 +85,8 @@ export interface ISMonorepoListResult {
 export interface ISMonorepoDevParams {
     packagesGlobs: string[];
     buildInitial: boolean;
+    tests: boolean;
+    testInitial: boolean;
 }
 export interface ISMonorepoDevResult {}
 
@@ -390,6 +393,19 @@ export default class SMonorepo extends __SClass {
                             watch: true,
                         }),
                     );
+
+                    // tests
+                    if (finalParams.tests) {
+                        const jestTester = new __SJestTester();
+                        pipe(
+                            jestTester.start({
+                                inDir,
+                                packageRoot: packageObj.path,
+                                testInitial: finalParams.testInitial,
+                                watch: true,
+                            }),
+                        );
+                    }
 
                     // exports
                     const pack = new __SPackage(packageObj.path);

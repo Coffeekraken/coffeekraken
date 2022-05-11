@@ -222,8 +222,7 @@ export default class STypescriptBuilder extends __SBuilder {
                     const watcher = __chokidar.watch(glob, {
                         cwd: finalParams.inDir,
                         ignored: finalParams.exclude,
-                        ignoreInitial:
-                            finalParams.watch && !finalParams.buildInitial,
+                        ignoreInitial: !finalParams.buildInitial,
                     });
 
                     // keep track on the watchers ready state

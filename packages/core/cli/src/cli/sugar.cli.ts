@@ -718,7 +718,7 @@ export default class SSugarCli {
 
                 this.log(
                     `  <magenta>${action}</magenta>${' '.repeat(
-                        20 - action.length,
+                        20 - action.length >= 0 ? 20 - action.length : 2,
                     )}: ${actionObj.description}`,
                 );
             });

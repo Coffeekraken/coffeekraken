@@ -34,6 +34,19 @@ export default class SMonorepoDevParamsInterface extends __SInterface {
                 default: false,
                 alias: 'b',
             },
+            tests: {
+                description:
+                    'Specify if you want to run the tests on saved files or not',
+                type: 'Boolean',
+                default: true,
+                alias: 't',
+            },
+            testInitial: {
+                description:
+                    'Specify if you want to test the files at launch before the watch process take care of the rest',
+                type: 'Boolean',
+                default: false,
+            },
         };
     }
 }

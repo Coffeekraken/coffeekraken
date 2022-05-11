@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          range
- * @namespace     ui.range
+ * @namespace     node.mixin.ui.range
  * @type               PostcssMixin
  * @interface     ./range          interface
  * @platform      postcss
@@ -11,9 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the range style to any HTMLInputElement
  *
- * @param       {'solid'}           [style='theme.ui.range.defaultStyle']        The style you want for your range
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.range.defaultShape]      The shape you want for your range
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.range.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'|'circle'}             [shape='ui.range.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

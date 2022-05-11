@@ -5,6 +5,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @namespace     node.function.scalable
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./scalable
  * @status        beta
  *
  * This function allows you to get value that will be scaled using the "--s-scale" variable.

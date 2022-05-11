@@ -8,12 +8,13 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.theme
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./var
  * @status        beta
  *
  * This function allows you to get a theme value using dot path like "font.family.default.font-family", etc...
  * Usually the best way to access theme config is to use dedicated functions/mixins like "sugar.margin", "sugar.font.family", etc...
  * This function make the same as using the `sugar.theme` one with the parameter `return`set to "var"
- * 
+ *
  * @param       {String}        dotPath      The dot path to the theme config value you want back
  * @param       {Boolean}       [scalable=false]        Specify if you want to value back to be scalable. Work only for number config as well
  * @param       {Any}           [fallback=null]         Specify a fallback in case the variable does not resolve to any value

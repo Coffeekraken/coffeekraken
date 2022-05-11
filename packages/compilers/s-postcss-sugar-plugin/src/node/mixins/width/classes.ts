@@ -6,6 +6,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace      node.mixin.width
  * @type           PostcssMixin
  * @platform      postcss
+ * @interface     ./classes
  * @status        beta
  *
  * This mixin generate all the width helper classes like s-width:20, s-width:50, etc...

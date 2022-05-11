@@ -269,6 +269,7 @@ export default class SFormValidateFeature extends __SFeature {
                                 this._$form.dispatchEvent(
                                     new CustomEvent('submit', {
                                         bubbles: true,
+                                        cancelable: true,
                                     }),
                                 );
                             }

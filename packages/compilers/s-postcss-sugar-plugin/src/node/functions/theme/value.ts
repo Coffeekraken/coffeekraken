@@ -8,6 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.theme
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./value
  * @status        beta
  *
  * This function allows you to get a theme value using dot path like "font.family.default.font-family", etc...

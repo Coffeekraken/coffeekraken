@@ -10,7 +10,7 @@ import __faker from 'faker';
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to generate the "button" UI component classes.
+ * Generate the button classes
  *
  * @param       {('solid'|'gradient'|'outline'|'text')[]}                           [styles=['solid','gradient','outline','text']]         The style(s) you want to generate
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate

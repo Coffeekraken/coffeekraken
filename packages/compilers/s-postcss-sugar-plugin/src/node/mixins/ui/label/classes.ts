@@ -2,6 +2,28 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.label
+ * @type               PostcssMixin
+ * @interface     ./classes          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Generate the label classes
+ *
+ * @param       {('inline'|'block'|'float')[]}                           [styles=['inline','block','float']]         The style(s) you want to generate
+ * @param       {'inline'|'block'|'float'}                [defaultStyle='theme.ui.label.defaultStyle']           The default style you want
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * @sugar.ui.input.classes;
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
     static get _definition() {
         return {

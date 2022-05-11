@@ -6,6 +6,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixin.userSelect
  * @type           PostcssMixin
+ * @interface   ./classes
  * @platform      postcss
  * @status        beta
  *

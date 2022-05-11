@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          spinner
- * @namespace     ui.loader
+ * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./spinner          interface
  * @platform      postcss

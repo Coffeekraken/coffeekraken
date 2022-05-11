@@ -9,7 +9,7 @@ export { postcssSugarPluginUiClassesInterface as interface };
 
 /**
  * @name           classes
- * @namespace      mixins.ui
+ * @namespace      node.mixin.ui
  * @type           Mixin
  * @status        beta
  *

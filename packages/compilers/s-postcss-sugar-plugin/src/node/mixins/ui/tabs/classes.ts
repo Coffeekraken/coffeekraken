@@ -2,6 +2,30 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.tabs
+ * @type               PostcssMixin
+ * @interface     ./classes          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Generate the tabs classes
+ *
+ * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
+ * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
+ * @param       {'solid'}                [defaultStyle='theme.ui.tabs.defaultStyle']           The default style you want
+ * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.tabs.defaultShape']           The default shape you want
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * @sugar.ui.tabs.classes;
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
     static get _definition() {
         return {

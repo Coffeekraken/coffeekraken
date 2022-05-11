@@ -2,6 +2,30 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.range
+ * @type               PostcssMixin
+ * @interface     ./classes          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Generate the range classes
+ *
+ * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
+ * @param       {('default'|'square'|'pill'|'circle')[]}             [shape=['default','square','pill','circle']]         The shape(s) you want to generate
+ * @param       {'solid'}                [defaultStyle='theme.ui.range.defaultStyle']           The default style you want
+ * @param       {'default'|'square'|'pill'|'circle'}        [defaultShape='theme.ui.range.defaultShape']           The default shape you want
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * @sugar.ui.range.classes;
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
     static get _definition() {
         return {
@@ -46,13 +70,6 @@ export interface IPostcssSugarPluginUiRangeClassesParams {
 }
 
 export { postcssSugarPluginUiRangeClassesInterface as interface };
-
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/range.js`],
-    };
-}
 
 export default function ({
     params,

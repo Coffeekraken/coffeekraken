@@ -6,6 +6,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.border
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./transition
  * @status        beta
  *
  * This function allows you to get a transition value depending on your theme config

@@ -4,6 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           hidden
  * @namespace      node.mixin.visually
  * @type           PostcssMixin
+ * @interface      ./hidden
  * @platform      postcss
  * @status        beta
  *

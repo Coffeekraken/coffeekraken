@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          checkbox
- * @namespace     ui.checkbox
+ * @namespace     node.mixin.ui.checkbox
  * @type               PostcssMixin
  * @interface     ./checkbox          interface
  * @platform      postcss

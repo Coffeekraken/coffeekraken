@@ -4,14 +4,14 @@ import __faker from 'faker';
 import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 /**
- * @name          input
- * @namespace     ui.input
+ * @name          classes
+ * @namespace     node.mixin.ui.input
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
  * @status        beta
  *
- * Apply the input style to any element
+ * Generate the input classes
  *
  * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate

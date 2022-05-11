@@ -6,6 +6,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.border
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./width
  * @status        beta
  *
  * This function allows you to get a border width value depending on your theme config

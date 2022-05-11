@@ -5,6 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name            configToCss
  * @namespace       node.mixin.utils
  * @type            PostcssMixin
+ * @interface       ./configToCss
  * @platform        css
  * @status          beta
  *

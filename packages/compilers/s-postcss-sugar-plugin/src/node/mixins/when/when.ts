@@ -5,6 +5,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @namespace      node.mixin.when
  * @type           PostcssMixin
  * @platform      postcss
+ * @interface       ./when
  * @status        beta
  *
  * This mixin allows you to set some css applied only WHEN a specific "state" has been

@@ -1,12 +1,44 @@
 import __SInterface from '@coffeekraken/s-interface';
 
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.loader
+ * @type               PostcssMixin
+ * @interface     ./classes          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Generate the loader classes
+ *
+ * @param       {('spinner'|'round'|'drop')}                [loaders=['spinner','round','drop']]         The loader(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * @sugar.ui.loader.classes;
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiLoaderClassesClassesInterface extends __SInterface {
     static get _definition() {
-        return {};
+        return {
+            loaders: {
+                description: 'Specify the loaders you want to generate',
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['spinner', 'round', 'drop'],
+                default: ['spinner', 'round', 'drop'],
+            },
+        };
     }
 }
 
-export interface IPostcssSugarPluginUiLoaderClassesParams {}
+export interface IPostcssSugarPluginUiLoaderClassesParams {
+    loaders: ('spinner' | 'round' | 'drop')[];
+}
 
 export { postcssSugarPluginUiLoaderClassesClassesInterface as interface };
 
@@ -22,11 +54,11 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLoaderClassesParams = {
+        loaders: ['spinner', 'round', 'drop'],
         ...params,
     };
 
     const vars = new CssVars();
-    const loaders = ['spinner','round','drop'];
 
     vars.comment(
         () => `
@@ -45,11 +77,17 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${loaders.map(loaderName => `
+        ${finalParams.loaders
+            .map(
+                (loaderName) => `
             * @cssClass         s-loader:${loaderName}            Display a ${loaderName} loader
-        `).join('\n')}
+        `,
+            )
+            .join('\n')}
         * 
-        ${loaders.map(loaderName => `
+        ${finalParams.loaders
+            .map(
+                (loaderName) => `
             * @example        html      ${loaderName} loader
             *   <div class="s-grid:5">
             *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
@@ -68,7 +106,9 @@ export default function ({
             *           <div class="s-loader:${loaderName} s-scale:20 s-color:error"></div>
             *       </div>
             *   </div>
-        `).join('\n')}
+        `,
+            )
+            .join('\n')}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -76,8 +116,7 @@ export default function ({
     `,
     );
 
-
-    loaders.forEach(loaderName => {
+    finalParams.loaders.forEach((loaderName) => {
         vars.comment(
             () => `/**
             * @name           s-loader:${loaderName}

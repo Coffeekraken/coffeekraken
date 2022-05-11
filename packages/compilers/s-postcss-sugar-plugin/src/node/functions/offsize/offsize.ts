@@ -6,11 +6,13 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.offsize
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./offsize
  * @status        beta
  *
  * This function allows you to get an offsize value depending on your theme config
  *
  * @param       {String}        offsize      The offsize to get
+ * @param       {Boolean}       [scalable='theme.scalable.offsize']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
  * @example       css

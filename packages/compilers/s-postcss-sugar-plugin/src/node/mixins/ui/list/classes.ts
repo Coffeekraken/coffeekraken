@@ -2,6 +2,28 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.list
+ * @type               PostcssMixin
+ * @interface     ./classes          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ *Generate the list classes
+ *
+ * @param       {('dl'|'ul'|'ol'|'icon')[]}                           [styles=['dl','ul','ol','icon']]         The style(s) you want to generate
+ * @param       {'dl'|'ul'|'ol'|'icon'}                [defaultStyle='theme.ui.list.defaultStyle']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * @sugar.ui.list.classes;
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
     static get _definition() {
         return {

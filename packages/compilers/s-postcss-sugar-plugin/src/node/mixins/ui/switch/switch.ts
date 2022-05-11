@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          switch
- * @namespace     ui.switch
+ * @namespace     node.mixin.ui.switch
  * @type               PostcssMixin
  * @interface     ./switch          interface
  * @platform      postcss
@@ -11,9 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the switch style to any element
  *
- * @param       {'solid'}           [style='theme.ui.switch.defaultStyle']        The style you want for your switch
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.switch.defaultShape]      The shape you want for your switch
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.switch.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.switch.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

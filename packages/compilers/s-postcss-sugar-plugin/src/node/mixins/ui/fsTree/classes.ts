@@ -3,14 +3,14 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
- * @name          fsTree
- * @namespace     ui.fsTree
+ * @name          classes
+ * @namespace     node.mixin.ui.fsTree
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
  * @status        beta
  *
- * Apply the fsTree style to any element
+ * Generate the fsTree classes
  *
  * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate

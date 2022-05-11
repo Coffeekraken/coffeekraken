@@ -8,6 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.depth
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./depth
  * @status        beta
  *
  * This function allows you to get a depth (box-shadow) value depending on your theme config
@@ -53,6 +54,6 @@ export default function depth({
     // if (typeof finalParams.depth !== 'number' && finalParams.depth !== 'default') {
     //     return finalParams.depth;
     // } else {
-        return __STheme.cssVar(`depth.${finalParams.depth}`, false);
+    return __STheme.cssVar(`depth.${finalParams.depth}`, false);
     // }
 }

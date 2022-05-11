@@ -1,8 +1,9 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          tooltip
- * @namespace     ui.tooltip
+ * @namespace     node.mixin.ui.tooltip
  * @type               PostcssMixin
  * @interface     ./tooltip          interface
  * @platform      postcss
@@ -10,9 +11,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Apply the tooltip style to any element
  *
- * @param       {'solid'}           [style='theme.ui.tooltip.defaultStyle']        The style you want for your tooltip
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.tooltip.defaultShape]      The shape you want for your tooltip
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.tooltip.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.tooltip.defaultShape']         The shape you want to generate
+ * @param       {''top'|'right'|'bottom'|'left'}            [position='theme.ui.tooltip.defaultPosition']         The position you want to generate
+ * @param      {Boolean}                                [interactive=false]                 Specify if the tooltip is interactive or not
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -27,6 +30,16 @@ import __SInterface from '@coffeekraken/s-interface';
 class postcssSugarPluginUiTooltipInterface extends __SInterface {
     static get _definition() {
         return {
+            style: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.get('ui.tooltip.defaultShape'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.get('ui.tooltip.defaultShape'),
+            },
             position: {
                 type: 'String',
                 values: ['top', 'right', 'bottom', 'left'],

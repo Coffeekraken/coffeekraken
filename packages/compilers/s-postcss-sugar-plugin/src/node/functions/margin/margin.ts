@@ -6,11 +6,13 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.margin
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./margin
  * @status        beta
  *
  * This function allows you to get a margin value depending on your theme config
  *
  * @param       {String}        margin      The margin to get
+ * @param       {Boolean}       [scalable='theme.scalable.margin']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
  * @example       css

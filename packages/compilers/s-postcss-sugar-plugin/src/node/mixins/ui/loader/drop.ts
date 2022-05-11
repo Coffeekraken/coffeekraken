@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          drop
- * @namespace     ui.loader
+ * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./drop          interface
  * @platform      postcss

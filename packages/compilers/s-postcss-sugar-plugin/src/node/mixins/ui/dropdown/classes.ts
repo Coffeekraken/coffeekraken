@@ -3,14 +3,14 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
- * @name          dropdown
- * @namespace     ui.dropdown
+ * @name          classes
+ * @namespace     node.mixin.ui.dropdown
  * @type               PostcssMixin
  * @interface     ./classes          interface
  * @platform      postcss
  * @status        beta
  *
- * Apply the dropdown style to any element
+ * Generate the dropdown classes
  *
  * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate

@@ -9,6 +9,7 @@ import __isColor from '@coffeekraken/sugar/shared/is/color';
  * @namespace     node.function.color
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./color
  * @status        beta
  *
  * This function allows you to get a color value depending on your theme config.

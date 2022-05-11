@@ -9,7 +9,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to generate the "avatar" UI component classes.
+ * Generate the avatar classes
  *
  * @param       {('solid')[]}                                                [styles=['solid']]         The style(s) you want to generate
  * @param       {('default'|'square'|'pill'|'circle')[]}                 [shape=['default'|'square','pill','circle']]         The shape(s) you want to generate

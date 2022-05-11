@@ -6,10 +6,14 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace      node.function.filter
  * @type           PostcssMixin
  * @platform      postcss
+ * @interface       ./noise
  * @status        beta
  *
  * This function allows you to get a noise effect image back.
  *
+ * @param       {Number}        [frequency=0.65]      The frequency of the noise
+ * @param       {String}        [width='5000px']        The width of the noise
+ * @param       {String}        [height='5000px']       The height of the noise
  * @return        {Css}         The generated css
  *
  * @example        css

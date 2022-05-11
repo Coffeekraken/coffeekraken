@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          table
- * @namespace     ui.table
+ * @namespace     node.mixin.ui.table
  * @type               PostcssMixin
  * @interface     ./table          interface
  * @platform      postcss
@@ -11,9 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the table style to any element
  *
- * @param       {'solid'}           [style='theme.ui.table.defaultStyle']        The style you want for your table
- * @param       {'default'|'square'}     [shape=theme.ui.table.defaultShape]      The shape you want for your table
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.table.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'}             [shape='theme.ui.table.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

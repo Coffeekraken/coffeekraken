@@ -6,6 +6,7 @@ import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue'
  * @namespace     node.function.font
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface      ./family
  * @status        beta
  *
  * This function allows you to get a font family value depending on your theme config

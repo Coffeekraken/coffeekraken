@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          fsTree
- * @namespace     ui.fsTree
+ * @namespace    node.mixin.ui.fsTree
  * @type               PostcssMixin
  * @interface     ./fsTree          interface
  * @platform      postcss

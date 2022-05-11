@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          tabs
- * @namespace     ui.tabs
+ * @namespace     node.mixin.ui.tabs
  * @type               PostcssMixin
  * @interface     ./tabs          interface
  * @platform      postcss

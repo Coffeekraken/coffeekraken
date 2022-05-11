@@ -7,11 +7,13 @@ import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue'
  * @namespace     node.function.font
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface     ./size
  * @status        beta
  *
  * This function allows you to get a border size value depending on your theme config
  *
  * @param       {Number}        size      The radius to get
+ * @param       {Boolean}       [scalable='theme.scalable.font']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
  * @example       css

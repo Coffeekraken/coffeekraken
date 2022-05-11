@@ -9,7 +9,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to generate the "badge" UI component classes.
+ * Generate the badge classes
  *
  * @param       {('solid'|'outline')[]}                           [styles=['solid','outline']]         The style(s) you want to generate
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate

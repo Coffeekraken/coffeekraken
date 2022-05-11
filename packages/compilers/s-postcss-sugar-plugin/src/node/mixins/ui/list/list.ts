@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          list
- * @namespace     ui.list
+ * @namespace     node.mixin.ui.list
  * @type               PostcssMixin
  * @interface     ./list          interface
  * @platform      postcss
@@ -11,8 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the list style to any element
  *
- * @param       {'dl'|'ul'|'ol'|'icon'}           [style='theme.ui.list.defaultStyle']        The style you want for your list
- * @param       {('bare'|'lnf')[]}      [scope=['bare','lnf']]                      The scope(s) you want to generate
+ * @param       {('dl'|'ul'|'ol'|'icon')[]}                           [style='ui.list.defaultStyle']         The style you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

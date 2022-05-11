@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          select
- * @namespace     ui.select
+ * @namespace     node.mixin.ui.select
  * @type               PostcssMixin
  * @interface     ./select          interface
  * @platform      postcss
@@ -11,9 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the select style to any HTMLSelectElement
  *
- * @param       {'solid'}           [style='theme.ui.select.defaultStyle']        The style you want for your select
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.select.defaultShape]      The shape you want for your select
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.select.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.select.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

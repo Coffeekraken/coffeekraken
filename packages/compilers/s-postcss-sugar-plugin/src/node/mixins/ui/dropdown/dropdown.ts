@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          dropdown
- * @namespace     ui.dropdown
+ * @namespace     node.mixin.ui.dropdown
  * @type               PostcssMixin
  * @interface     ./dropdown          interface
  * @platform      postcss

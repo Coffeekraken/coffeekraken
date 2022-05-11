@@ -4,6 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           mounted
  * @namespace      node.mixin.until
  * @type           PostcssMixin
+ * @interface   ./mounted
  * @platform      postcss
  * @status        beta
  *

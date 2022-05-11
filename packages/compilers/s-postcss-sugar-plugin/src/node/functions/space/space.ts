@@ -6,6 +6,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.space
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface    ./space
  * @status        beta
  *
  * This function allows you to get a space value depending on your theme config

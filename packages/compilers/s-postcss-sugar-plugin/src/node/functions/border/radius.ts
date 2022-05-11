@@ -6,11 +6,13 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.border
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./radius
  * @status        beta
  *
  * This function allows you to get a border radius value depending on your theme config
  *
  * @param       {String}        radius      The radius to get
+ * @param       {Boolean}       [scalable='theme.scalable.padding']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
  * @example       css

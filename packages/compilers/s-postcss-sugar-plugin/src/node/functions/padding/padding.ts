@@ -6,11 +6,13 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.padding
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface       ./padding
  * @status        beta
  *
  * This function allows you to get a padding value depending on your theme config
  *
  * @param       {String}        padding      The padding to get
+ * @param       {Boolean}       [scalable='theme.scalable.padding']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
  * @example       css

@@ -6,6 +6,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.opacity
  * @type          PostcssFunction
  * @platform      postcss
+ * @interface     ./opacity
  * @status        beta
  *
  * This function allows you to get an opacity value depending on your theme config

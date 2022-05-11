@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          label
- * @namespace     ui.label
+ * @namespace     node.mixin.ui.label
  * @type               PostcssMixin
  * @interface     ./label          interface
  * @platform      postcss
@@ -11,9 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the label style to any element
  *
- * @param       {'inline'|'block'|'float'}           [style='theme.ui.label.defaultStyle']        The style you want for your label
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.label.defaultShape]      The shape you want for your label
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'inline'|'block'|'float'}                           [style='theme.ui.label.defaultStyle']         The style you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -33,18 +32,13 @@ class postcssSugarPluginUiLabelInterface extends __SInterface {
                 values: ['inline', 'block', 'float'],
                 default: __STheme.get('ui.label.defaultStyle'),
             },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.label.defaultShape'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
@@ -52,8 +46,7 @@ class postcssSugarPluginUiLabelInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiLabelParams {
     style: 'inline' | 'block' | 'float';
-    shape: 'default' | 'square' | 'pill';
-    scope: ('bare' | 'lnf' | 'shape')[];
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiLabelInterface as interface };
@@ -68,8 +61,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiLabelParams = {
         style: __STheme.get('ui.label.defaultStyle'),
-        shape: __STheme.get('ui.label.defaultShape'),
-        scope: ['bare', 'lnf', 'shape'],
+        scope: ['bare', 'lnf'],
         ...params,
     };
 

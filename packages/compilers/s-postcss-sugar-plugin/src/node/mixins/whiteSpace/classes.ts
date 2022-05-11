@@ -7,6 +7,7 @@ import __faker from 'faker';
  * @namespace      node.mixin.visibility
  * @type           PostcssMixin
  * @platform      postcss
+ * @interface       ./classes
  * @status        beta
  *
  * This mixin generate all the overflow helper classes like ```.s-visibility:hidden```, etc...

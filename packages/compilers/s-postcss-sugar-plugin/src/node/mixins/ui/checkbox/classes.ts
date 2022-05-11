@@ -10,7 +10,7 @@ import __faker from 'faker';
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to generate the "checkbox" UI component classes.
+ * Generate the checkbox classes
  *
  * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
  * @param       {('default'|'square'|'circle')[]}             [shape=['default','square','circle']]         The shape(s) you want to generate

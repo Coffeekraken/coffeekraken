@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          radio
- * @namespace     ui.radio
+ * @namespace     node.mixin.ui.radio
  * @type               PostcssMixin
  * @interface     ./radio          interface
  * @platform      postcss
@@ -11,9 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the radio style to any element
  *
- * @param       {'solid'}           [style='theme.ui.radio.defaultStyle']        The style you want for your radio
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.radio.defaultShape]      The shape you want for your radio
- * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @param       {'solid'}                           [style='theme.ui.radio.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'|'circle'}             [shape='theme.ui.radio.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css

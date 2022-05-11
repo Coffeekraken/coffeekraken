@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          round
- * @namespace     ui.loader
+ * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./round          interface
  * @platform      postcss

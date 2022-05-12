@@ -57,6 +57,7 @@ export interface ISSugarCliAvailableCli {
 const cliParams = __SSugarCliParamsInterface.apply(
     process.argv.slice(2).join(' '),
 );
+
 if (cliParams.bench) {
     __SBench.filter(cliParams.bench === true ? '*' : cliParams.bench);
 }
@@ -117,7 +118,8 @@ export default class SSugarCli {
             process.env.TREAT_AS_MAIN = false;
         }
 
-        this.packageJson = __packageJson();
+        this.packageJson = __SEnv.packageJson;
+
         this.args = this._parseArgs(process.argv);
 
         this._setNodeEnv();

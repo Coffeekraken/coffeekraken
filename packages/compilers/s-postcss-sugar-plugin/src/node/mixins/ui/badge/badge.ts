@@ -32,12 +32,12 @@ class postcssSugarPluginUiBadgeInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid', 'outline'],
-                default: __SSugarConfig.get('ui.badge.defaultStyle'),
+                default: __STheme.get('ui.badge.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
-                default: __SSugarConfig.get('ui.badge.defaultShape'),
+                default: __STheme.get('ui.badge.defaultShape'),
             },
             scope: {
                 type: {

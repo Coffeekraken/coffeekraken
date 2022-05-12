@@ -45,9 +45,11 @@ function autoCast(string) {
     }
 
     // avoid getting item from the window object
-    if (window[string]) {
-        return string;
-    }
+    try {
+        if (window[string]) {
+            return string;
+        }
+    } catch (e) {}
 
     // try to eval the passed string
     // if no exception, mean that it's a valid

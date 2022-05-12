@@ -7,6 +7,7 @@ import __SFaviconBuilder from '../../../../../builders/s-favicon-builder/src/nod
 import __fs from 'fs';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __parseTypeString from '@coffeekraken/sugar/shared/type/parseTypeString';
 
 /**
  * @name              param
@@ -40,10 +41,7 @@ async function param(data, blockSettings) {
         )
             return;
         const parts = param.value.split(/\s{2,20000}/).map((l) => l.trim());
-        let type =
-            parts && parts[0]
-                ? parts[0].replace('{', '').replace('}', '')
-                : null;
+        let typeStr = parts && parts[0] ? parts[0] : null;
         const variable = parts && parts[1] ? parts[1] : null;
         const description = new String(parts && parts[2] ? parts[2] : null);
         description.render = true;
@@ -51,34 +49,36 @@ async function param(data, blockSettings) {
         let defaultValue = undefined;
         let defaultValueStr = '';
         let variableMatch = null;
-        let metas;
+        let interf;
+        let type = {
+            str: typeStr,
+            types: [],
+        };
 
         if (variable && typeof variable === 'string')
             variableMatch = variable.match(/^\[(.*)\]$/);
 
-        if (type && type.includes('|')) {
-            type = type.split('|').map((l) => __upperFirst(l.trim()));
-        } else {
-            type = [type];
-        }
-
-        // references interface file
-        for (let [idx, t] of Object.entries(type)) {
+        // regular types
+        if (typeStr.match(/^\{.*\}$/)) {
+            const types = __parseTypeString(typeStr);
+            type.types = types;
+            // path type
+        } else if (typeStr.match(/^(\.|\/|[a-zA-Z0-9])/)) {
             // resolve tokens
-            t = __replaceTokens(t);
+            const path = __replaceTokens(typeStr);
 
             if (blockSettings.filePath) {
                 let potentialTypeFilePath;
 
-                if (t.match(/^(\.|\/)/)) {
+                if (typeStr.match(/^(\.|\/)/)) {
                     potentialTypeFilePath = __path.resolve(
                         __path.dirname(blockSettings.filePath),
-                        t,
+                        path,
                     );
                 } else {
                     potentialTypeFilePath = __path.resolve(
                         __packageRoot(__path.dirname(blockSettings.filePath)),
-                        t,
+                        path,
                     );
                 }
 
@@ -87,7 +87,7 @@ async function param(data, blockSettings) {
                         .default;
                     type = [typeData.name] ?? type;
                     // save data into the "metas" property on the string directly
-                    metas = typeData.toObject?.() ?? typeData;
+                    interf = typeData.toObject?.() ?? typeData;
                 }
             }
         }
@@ -104,13 +104,16 @@ async function param(data, blockSettings) {
         res[name] = {
             name,
             type,
-            metas,
+            interface: interf,
             description,
             default: defaultValue,
             defaultStr: defaultValueStr,
         };
+
         if (param.content) res[name].content = param.content.join('\n');
     }
+
+    console.log(res);
 
     return res;
 }

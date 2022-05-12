@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          avatar
@@ -31,12 +32,12 @@ class postcssSugarPluginUiAvatarInterface extends __SInterface {
             style: {
                 type: 'String',
                 value: ['solid'],
-                default: __SSugarConfig.get('ui.avatar.defaultStyle'),
+                default: __STheme.get('ui.avatar.defaultStyle'),
             },
             shape: {
                 type: 'String',
                 values: ['default', 'square', 'rounded'],
-                default: __SSugarConfig.get('ui.avatar.defaultShape'),
+                default: __STheme.get('ui.avatar.defaultShape'),
             },
             scope: {
                 type: {

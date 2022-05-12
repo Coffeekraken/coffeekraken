@@ -102,6 +102,7 @@
         "glob": "^7.1.6",
         "glob-all": "^3.2.1",
         "glob-parent": "^5.1.2",
+        "hash-obj": "^4.0.0",
         "hotkeys-js": "^3.8.1",
         "in-view": "^0.6.1",
         "in-viewport": "^3.6.0",

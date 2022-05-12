@@ -314,7 +314,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * It will be called by the SBuilder class with the final params
      * for the build
      *
-     * @param       {dist/pkg/%moduleSystem/node/interface/SMarkdownBuilderBuildParamsInterface.js}          [params={}]         Some params for your build
+     * @param       dist/pkg/%moduleSystem/node/interface/SMarkdownBuilderBuildParamsInterface.js          [params={}]         Some params for your build
      * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the build
      *
      * @since           2.0.0

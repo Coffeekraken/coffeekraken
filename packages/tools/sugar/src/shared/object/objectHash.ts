@@ -1,4 +1,8 @@
 import __objectHash from 'object-hash';
+// import __objectHash from 'hash-obj';
+
+import __isPlainObject from '../is/plainObject';
+import __deepMap from '../object/deepMap';
 
 /**
  * @name            objectHash

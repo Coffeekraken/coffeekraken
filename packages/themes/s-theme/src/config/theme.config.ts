@@ -36,10 +36,9 @@ export function preprocess(env, rawThemeConfig, rawConfig) {
 export function postprocess(env, themeConfig, config) {
     const themes = themeConfig.themes;
 
-    // console.log(themes['default-light']);
-
     Object.keys(themes).forEach((themeName) => {
         const themeObj = themes[themeName];
+
         if (!themeObj.color.current) {
             if (themeObj.defaultColor) {
                 themeObj.color.current = Object.assign(

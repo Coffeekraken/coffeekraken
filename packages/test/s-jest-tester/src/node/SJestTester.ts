@@ -168,10 +168,11 @@ export default class SJestTester extends __SClass {
      */
     start(params: ISJestTesterStartParams): Promise<ISJestTesterStartResult> {
         return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
+            async ({ resolve, reject, emit, pipe, on }) => {
                 let testsResults: any[] = [],
                     watchersReady: any[] = [],
-                    testPromises: Promise<any>[] = [];
+                    testPromises: Promise<any>[] = [],
+                    watchers: any[] = [];
 
                 // @ts-ignore
                 const finalParams: ISJestTesterStartParams = __monorepoToPackageAbsolutePathDeepMap(
@@ -222,6 +223,7 @@ export default class SJestTester extends __SClass {
                         ignoreInitial:
                             finalParams.watch && !finalParams.testInitial,
                     });
+                    watchers.push(watcher);
 
                     // keep track on the watchers ready state
                     // to know when we can watch for all the testPromises
@@ -268,6 +270,15 @@ export default class SJestTester extends __SClass {
                     // store the watcher for later use
                     this._watchersByGlob[glob] = watcher;
                 });
+
+                // cancel
+                on('cancel', () => {
+                    watchers.forEach((watcher) => {
+                        watcher.close();
+                    });
+                    this._testsStack = [];
+                    this._currentTestPromise?.cancel?.();
+                });
             },
             {
                 metas: {
@@ -295,7 +306,7 @@ export default class SJestTester extends __SClass {
      */
     _runJestOn(relPath: string, testParams: any, configFilePath) {
         return new __SPromise(
-            ({ resolve, reject, emit, pipe }) => {
+            ({ resolve, reject, emit, pipe, on }) => {
                 // check if a test file exists
                 const absPath = __path.resolve(testParams.inDir, relPath),
                     folderAbsPath = __path.dirname(absPath),
@@ -311,9 +322,14 @@ export default class SJestTester extends __SClass {
                         __packageRoot(),
                         absPath,
                     );
+                let testFilePath;
 
-                // if not test file, do nothing
-                if (!__fs.existsSync(potentialTestPath)) {
+                // test file directly
+                if (relPath.match(/\.test\.\w+$/)) {
+                    testFilePath = __path.resolve(testParams.inDir, relPath);
+                } else if (__fs.existsSync(potentialTestPath)) {
+                    testFilePath = potentialTestPath;
+                } else {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[run]</yellow> No test file for "<magenta>${packageRootRelPath}</magenta>"`,
@@ -335,12 +351,12 @@ export default class SJestTester extends __SClass {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[run]</yellow> Running test for "<cyan>${packageRootRelPath}</cyan>" file`,
+                    value: `<yellow>[run]</yellow> Running test for "<cyan>${testFilePath}</cyan>" file`,
                 });
 
                 // run the test
                 const pro = __childProcess.spawn(
-                    `jest --runTestsByPath "${potentialTestPath}" --config "${configFilePath}"`,
+                    `jest --runTestsByPath "${testFilePath}" --config "${configFilePath}"`,
                     [],
                     {
                         stdio: 'inherit',
@@ -351,6 +367,11 @@ export default class SJestTester extends __SClass {
 
                 pro.on('close', (e) => {
                     resolve();
+                });
+
+                // cancel
+                on('cancel', () => {
+                    pro.kill?.();
                 });
             },
             {

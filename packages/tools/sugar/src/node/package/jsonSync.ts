@@ -48,7 +48,7 @@ function jsonSync(
 
     const hash = __objectHash({
         from,
-        ...finalSettings,
+        ...(settings ?? {}),
     });
 
     if (__packageJson[hash]) {

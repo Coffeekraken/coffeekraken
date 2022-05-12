@@ -24,7 +24,7 @@ export default class SSugarCliParamsInterface extends __SInterface {
         return {
             bench: {
                 type: {
-                    type: 'Array<String> | Boolean',
+                    type: 'Array<String>|Boolean',
                     splitChars: [','],
                 },
                 default: false,

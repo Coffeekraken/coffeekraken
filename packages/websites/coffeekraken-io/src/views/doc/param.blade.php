@@ -15,8 +15,11 @@
                             {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($param->default)) }}
                         </div>
                     </div>
-                    <div class="s-typo:bold s-p:30 s-tc:info">
-                        {{ implode($param->type, '|') }}
+                    <div>
+                        {{-- {{ implode($param->type, '|') }} --}}
+
+                        @include('doc.partials.paramType', ['type' => $param->type])
+
                     </div>
                 </header>
                 <p class="s-typo:p s-format:text s-pi:30 s-pb:20">{!! \Sugar\markdown\toHtml($param->description) !!}</p>

@@ -1,13 +1,13 @@
-import __SSitemapBuilderSource, {
-    ISSitemapBuilderSourceResult,
-} from '../SSitemapBuilderSource';
-import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
-import __SPromise from '@coffeekraken/s-promise';
 import __SDocmap from '@coffeekraken/s-docmap';
-import __pad from '@coffeekraken/sugar/shared/number/pad';
+import __SLog from '@coffeekraken/s-log';
+import __SPromise from '@coffeekraken/s-promise';
 import __fileHash from '@coffeekraken/sugar/node/fs/fileHash';
+import __pad from '@coffeekraken/sugar/shared/number/pad';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __fs from 'fs';
+import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
+import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
+import __SSitemapBuilderSource from '../SSitemapBuilderSource';
 
 /**
  * @name            SSitemapBuilderDocmapSource
@@ -31,17 +31,15 @@ export interface ISSitemapBuilderDocmapSourceSettings {}
 
 export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource {
     /**
-     * @name            id
+     * @name            settingsId
      * @type            String
      * @static
      *
-     * Store the source id
+     * Store the source settings id
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static id = 'docmap';
-
     static settingsId = 'sitemapDocmapSource';
 
     /**
@@ -55,7 +53,8 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sitemapDocmapSourceSettings(): ISSitemapBuilderDocmapSourceSettings {
-        return (<any>this._settings).sitemapDocmapSource ?? {};
+        // @ts-ignore
+        return (<any>this)._settings[this.constructor.settingsId] ?? {};
     }
 
     /**
@@ -70,7 +69,6 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      */
     constructor(settings?: Partial<ISSitemapBuilderDocmapSourceCtorSettings>) {
         super(
-            'docmap',
             __deepMerge(
                 {
                     sitemapDocmapSource: {},
@@ -95,46 +93,76 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      */
     build(
         params: Partial<ISSitemapBuilderBuildParams> = {},
-    ): Promise<ISSitemapBuilderSourceResult> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const docmapInstance = new __SDocmap();
-            const docmap = await docmapInstance.read();
+    ): Promise<ISSitemapBuilderResultItem[]> {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                const docmapInstance = new __SDocmap();
+                const docmap = await docmapInstance.read();
 
-            const items: ISSitemapBuilderResultItem[] = [];
+                const items: ISSitemapBuilderResultItem[] = [];
 
-            const date = new Date();
-            const lastmod = `${date.getFullYear()}-${__pad(
-                date.getMonth(),
-                2,
-            )}-${__pad(date.getDate(), 2)}`;
+                const date = new Date();
+                const lastmod = `${date.getFullYear()}-${__pad(
+                    date.getMonth(),
+                    2,
+                )}-${__pad(date.getDate(), 2)}`;
 
-            // @ts-ignore
-            for (let [slug, docmapObj] of Object.entries(docmap.menu.slug)) {
                 // @ts-ignore
-                const hash = __fileHash(docmapObj.docmap.path);
-                items.push({
-                    loc: slug,
-                    lastmod,
-                    integrity: hash,
-                });
-            }
-
-            // @ts-ignore
-            for (let [packageName, packageObj] of Object.entries(
-                docmap.menu.packages,
-            )) {
-                for (let [slug, docmapObj] of Object.entries(packageObj.slug)) {
+                for (let [slug, docmapObj] of Object.entries(
+                    docmap.menu.slug,
+                )) {
                     // @ts-ignore
-                    const hash = __fileHash(docmapObj.docmap.path);
-                    items.push({
-                        loc: slug,
-                        lastmod,
-                        integrity: hash,
-                    });
+                    if (!__fs.existsSync(docmapObj.docmap.path)) {
+                        emit('log', {
+                            type: __SLog.TYPE_WARNING,
+                            // @ts-ignore
+                            value: `<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`,
+                        });
+                    } else {
+                        // @ts-ignore
+                        const hash = __fileHash(docmapObj.docmap.path);
+                        items.push({
+                            loc: slug,
+                            lastmod,
+                            integrity: hash,
+                        });
+                    }
                 }
-            }
 
-            resolve(items);
-        });
+                // @ts-ignore
+                for (let [packageName, packageObj] of Object.entries(
+                    docmap.menu.packages,
+                )) {
+                    for (let [slug, docmapObj] of Object.entries(
+                        // @ts-ignore
+                        packageObj.slug,
+                    )) {
+                        // @ts-ignore
+                        if (!__fs.existsSync(docmapObj.docmap.path)) {
+                            emit('log', {
+                                type: __SLog.TYPE_WARNING,
+                                // @ts-ignore
+                                value: `<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`,
+                            });
+                        } else {
+                            // @ts-ignore
+                            const hash = __fileHash(docmapObj.docmap.path);
+                            items.push({
+                                loc: slug,
+                                lastmod,
+                                integrity: hash,
+                            });
+                        }
+                    }
+                }
+
+                resolve(items);
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
     }
 }

@@ -1,17 +1,16 @@
-import __SClass from '@coffeekraken/s-class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SSitemapBuilderSource from './SSitemapBuilderSource';
-import __SSitemapBuilderBuildParamsInterface from './interface/SSitemapBuilderBuildParamsInterface';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import __SPromise from '@coffeekraken/s-promise';
+import __SBuilder from '@coffeekraken/s-builder';
 import __SDuration from '@coffeekraken/s-duration';
+import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __path from 'path';
-import __isClass from '@coffeekraken/sugar/shared/is/class';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __SBuilder from '@coffeekraken/s-builder';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __isClass from '@coffeekraken/sugar/shared/is/class';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
+import __path from 'path';
+import __SSitemapBuilderBuildParamsInterface from './interface/SSitemapBuilderBuildParamsInterface';
+import __SSitemapBuilderSource from './SSitemapBuilderSource';
 
 /**
  * @name            SSitemapBuilder
@@ -88,7 +87,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sitemapSettings(): ISSitemapBuilderSettings {
-        return (<any>this._settings).sitemapBuilder ?? {};
+        return (<any>this)._settings.sitemapBuilder ?? {};
     }
 
     /**
@@ -106,7 +105,7 @@ export default class SSitemapBuilder extends __SBuilder {
             __deepMerge(
                 {
                     sitemapBuilder: {
-                        sources: {}
+                        sources: {},
                     },
                 },
                 settings ?? {},
@@ -137,88 +136,103 @@ export default class SSitemapBuilder extends __SBuilder {
     _build(
         params: Partial<ISSitemapBuilderBuildParams> = {},
     ): Promise<ISSitemapBuilderBuildResult> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            let sitemap: ISSitemapBuilderResultItem[] = [];
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                let sitemap: ISSitemapBuilderResultItem[] = [];
 
-            const finalParams = __SSitemapBuilderBuildParamsInterface.apply(params);
+                // @ts-ignore
+                const finalParams: ISSitemapBuilderBuildParams = __SSitemapBuilderBuildParamsInterface.apply(
+                    params,
+                );
 
-            const duration = new __SDuration();
+                const duration = new __SDuration();
 
-            let sourcesId = finalParams.source.length
-                ? finalParams.source
-                : Object.keys(this.sitemapSettings.sources);
+                let sourcesId = finalParams.source.length
+                    ? finalParams.source
+                    : Object.keys(this.sitemapSettings.sources);
 
-            for (let i = 0; i < sourcesId.length; i++) {
-                const sourceId = sourcesId[i];
+                for (let i = 0; i < sourcesId.length; i++) {
+                    const sourceId = sourcesId[i];
 
-                if (!this.sitemapSettings.sources[sourceId]) {
-                    throw new Error(
-                        `Sorry but the source "<yellow>${sourceId}</yellow>" is not available. Here's the sources you can use: ${Object.keys(
-                            this.sitemapSettings.sources,
-                        ).join(',')}`,
-                    );
-                }
+                    if (!this.sitemapSettings.sources[sourceId]) {
+                        throw new Error(
+                            `Sorry but the source "<yellow>${sourceId}</yellow>" is not available. Here's the sources you can use: ${Object.keys(
+                                this.sitemapSettings.sources,
+                            ).join(',')}`,
+                        );
+                    }
 
-                const sourceObj = this.sitemapSettings.sources[sourceId];
+                    const sourceObj = this.sitemapSettings.sources[sourceId];
 
-                // load source
-                const importedSource = (await import(sourceObj.path)).default;
+                    // skip inactive sources
+                    if (!sourceObj.active) continue;
 
-                let settingsId =
-                    importedSource.settingsId ??
-                    `sitemap${__upperFirst(sourceId)}Source`;
+                    // load source
+                    // @ts-ignore
+                    const importedSource = (await import(sourceObj.path))
+                        .default;
 
-                let buildFn;
+                    let settingsId =
+                        importedSource.settingsId ??
+                        `sitemap${__upperFirst(sourceId)}Source`;
 
-                if (__isClass(importedSource)) {
-                    // instanciate new source
-                    const sourceInstance = new importedSource({
-                        [settingsId]: __deepMerge(
-                            sourceObj.settings ?? {},
-                            finalParams.sourcesSettings[sourceId] ?? {},
-                        ),
+                    let buildFn;
+
+                    if (__isClass(importedSource)) {
+                        // instanciate new source
+                        const sourceInstance = new importedSource({
+                            [settingsId]: __deepMerge(
+                                sourceObj.settings ?? {},
+                                finalParams.sourcesSettings[sourceId] ?? {},
+                            ),
+                        });
+                        buildFn = sourceInstance.build.bind(sourceInstance);
+                    } else if (typeof importedSource === 'function') {
+                        buildFn = importedSource;
+                    }
+
+                    const sourceDuration = new __SDuration();
+                    // build
+                    const buildResultPromise = buildFn(finalParams);
+                    if (buildResultPromise instanceof __SPromise) {
+                        pipe(buildResultPromise);
+                    }
+                    const buildResult = await buildResultPromise;
+                    sitemap = [...sitemap, ...(buildResult ?? [])];
+                    emit('log', {
+                        value: `<yellow>[build]</yellow> "<magenta>${sourceId}</magenta>" sitemap builded with <magenta>${
+                            buildResult.length
+                        }</magenta> item(s) <green>successfully</green> in <yellow>${
+                            sourceDuration.end().formatedDuration
+                        }</yellow>`,
                     });
-                    buildFn = sourceInstance.build.bind(sourceInstance);
-                } else if (typeof importedSource === 'function') {
-                    buildFn = importedSource;
                 }
 
-                const sourceDuration = new __SDuration();
-                // build
-                const buildResultPromise = buildFn(params);
-                if (buildResultPromise instanceof __SPromise) {
-                    pipe(buildResultPromise);
+                if (finalParams.save) {
+                    emit('log', {
+                        value: `<yellow>[save]</yellow> Saving your sitemap under "<cyan>${__path.relative(
+                            __packageRoot(),
+                            finalParams.output,
+                        )}</cyan>"`,
+                    });
+                    this.save(sitemap, finalParams.output);
                 }
-                const buildResult = await buildResultPromise;
-                sitemap = [...sitemap, ...(buildResult ?? [])];
+
                 emit('log', {
-                    value: `<yellow>[build]</yellow> "<magenta>${sourceId}</magenta>" sitemap builded with <magenta>${
-                        buildResult.length
-                    }</magenta> item(s) <green>successfully</green> in <yellow>${
-                        sourceDuration.end().formatedDuration
+                    value: `<yellow>[build]</yellow> Sitemap builded <green>successfully</green> in <yellow>${
+                        duration.end().formatedDuration
                     }</yellow>`,
                 });
-            }
 
-            if (finalParams.save) {
-                emit('log', {
-                    value: `<yellow>[save]</yellow> Saving your sitemap under "<cyan>${__path.relative(
-                        __packageRoot(),
-                        finalParams.output,
-                    )}</cyan>"`,
-                });
-                this.save(sitemap, finalParams.output);
-            }
-
-            emit('log', {
-                value: `<yellow>[build]</yellow> Sitemap builded <green>successfully</green> in <yellow>${
-                    duration.end().formatedDuration
-                }</yellow>`,
-            });
-
-            // resolve the build
-            resolve(sitemap);
-        });
+                // resolve the build
+                resolve(sitemap);
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
     }
 
     /**

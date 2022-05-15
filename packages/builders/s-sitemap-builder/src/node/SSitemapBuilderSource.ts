@@ -5,7 +5,7 @@ import type { ISSitemapBuilderBuildParams } from './interface/SSitemapBuilderBui
 import type { ISSitemapBuilderDocmapSourceCtorSettings } from './sources/SSitemapBuilderDocmapSource';
 
 /**
- * @name            SSitemapSource
+ * @name            SSitemapBuilderSource
  * @namespace       node
  * @type            Class
  * @platform        js
@@ -18,19 +18,19 @@ import type { ISSitemapBuilderDocmapSourceCtorSettings } from './sources/SSitema
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISSitemapSourceCtorSettings
+export interface ISSitemapBuilderSourceCtorSettings
     extends ISSitemapBuilderDocmapSourceCtorSettings {
-    source: Partial<ISSitemapSourceSettings>;
+    source: Partial<ISSitemapBuilderSourceSettings>;
 }
 
-export interface ISSitemapSourceSettings {}
+export interface ISSitemapBuilderSourceSettings {}
 
-export type ISSitemapSourceResult = ISSitemapBuilderResultItem[];
+export type ISSitemapBuilderSourceResult = ISSitemapBuilderResultItem[];
 
-export default class SSitemapSource extends __SClass {
+export default class SSitemapBuilderSource extends __SClass {
     /**
      * @name            sitemapSourceSettings
-     * @type            ISSitemapSourceSettings
+     * @type            ISSitemapBuilderSourceSettings
      * @get
      *
      * Access the sitemap source settings
@@ -38,8 +38,8 @@ export default class SSitemapSource extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get sitemapSourceSettings(): ISSitemapSourceSettings {
-        return (<any>this._settings).sitemapSource ?? {};
+    get sitemapSourceSettings(): ISSitemapBuilderSourceSettings {
+        return (<any>this)._settings.sitemapSource ?? {};
     }
 
     /**
@@ -52,13 +52,10 @@ export default class SSitemapSource extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(id: string, settings?: Partial<ISSitemapSourceCtorSettings>) {
+    constructor(settings?: Partial<ISSitemapBuilderSourceCtorSettings>) {
         super(
             __deepMerge(
                 {
-                    metas: {
-                        id,
-                    },
                     sitemapSource: {},
                 },
                 settings ?? {},
@@ -72,17 +69,17 @@ export default class SSitemapSource extends __SClass {
      * @async
      *
      * This method MUST be implemented in your child class to build your particular sitemap.
-     * Is has to return a Promise and resolve it with an ISSitemapSourceBuildResult object type
+     * Is has to return a Promise and resolve it with an ISSitemapBuilderSourceBuildResult object type
      *
      * @param           {ISSitemapBuilderBuildParams}          [params={}]         Some params passed to the build method
-     * @return          {Promise<ISSitemapSourceBuildResult>}               A promise resolved when the sitemap has been successfully generated
+     * @return          {Promise<ISSitemapBuilderSourceBuildResult>}               A promise resolved when the sitemap has been successfully generated
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(
         params: Partial<ISSitemapBuilderBuildParams> = {},
-    ): Promise<ISSitemapSourceResult> {
+    ): Promise<ISSitemapBuilderSourceResult> {
         throw new Error(
             `This "<yellow>build</yellow>" method must be overrided by your SitemapSource class implementation...`,
         );

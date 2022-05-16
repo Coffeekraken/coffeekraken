@@ -54,7 +54,7 @@ export default function ({
         () => `
       /**
         * @name          Transitions
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/transition
         * @platform       css
@@ -101,7 +101,7 @@ export default function ({
         vars.comment(
             () => `/**
   * @name          s-ratio:${transitionName.replace('/', '-')}
-  * @namespace          sugar.css.transition
+  * @namespace          sugar.style.transition
   * @type               CssClass
   * @platform             css
   * @status             beta

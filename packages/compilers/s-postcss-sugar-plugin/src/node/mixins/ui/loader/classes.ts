@@ -64,7 +64,7 @@ export default function ({
         () => `
       /**
         * @name          Loaders
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/loaders
         * @platform       css
@@ -120,7 +120,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-loader:${loaderName}
-            * @namespace      sugar.css.ui.range
+            * @namespace          sugar.style.ui.range
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">${loaderName}</s-color>" loader

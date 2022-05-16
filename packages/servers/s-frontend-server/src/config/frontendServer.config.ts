@@ -308,32 +308,33 @@ export default function (env, config) {
         data: {},
 
         modules: {
-            // rootFiles: {
-            //     /**
-            //      * @name            description
-            //      * @namespace       config.frontendServer.modules.rootFiles
-            //      * @type            String
-            //      *
-            //      * Specify the module description
-            //      *
-            //      * @since           2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     description: 'This module allows you to serve files from the root directory',
-            //     /**
-            //      * @name            path
-            //      * @namespace       config.frontendServer.modules.rootFiles
-            //      * @type            String
-            //      * @default             ${__dirname()}/../node/modules/rootFiles/rootFiles
-            //      *
-            //      * Specify where to find the "rootFiles" module
-            //      *
-            //      * @since           2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     path: `${__dirname()}/../node/modules/rootFiles/rootFiles`,
-            //     settings: {},
-            // },
+            publicDir: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.publicDir
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'This module allows you to serve files from the root directory',
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.publicDir
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/publicDir/publicDir
+                 *
+                 * Specify where to find the "publicDir" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                path: `${__dirname()}/../node/modules/publicDir/publicDir`,
+                settings: {},
+            },
             dynamic: {
                 /**
                  * @name            description

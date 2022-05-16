@@ -49,7 +49,7 @@ export default function ({
     vars.push(`
       /**
         * @name          User select
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/user-select
         * @platform       css
@@ -95,7 +95,7 @@ export default function ({
     ['all', 'auto', 'none', 'text'].forEach((value) => {
         vars.push(`/**
     * @name          s-user-select:${value}
-    * @namespace          sugar.css.whiteSpace
+    * @namespace          sugar.style.whiteSpace
     * @type               CssClass
     * @platform             css
     * @status             beta

@@ -57,7 +57,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-until:${state}
-            * @namespace          sugar.css.until
+            * @namespace          sugar.style.until
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -79,7 +79,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-until:sibling:${state}
-            * @namespace          sugar.css.until
+            * @namespace          sugar.style.until
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -105,7 +105,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-until:siblings:${state}
-            * @namespace          sugar.css.until
+            * @namespace          sugar.style.until
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -131,7 +131,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-until:parent:${state}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -160,7 +160,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-until:grandparent:${state}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -189,7 +189,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-until:ancestor:${state}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -221,7 +221,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-until:media:${query}
-            * @namespace          sugar.css.until
+            * @namespace          sugar.style.until
             * @type               CssClass
             * @platform             css
             * @status             beta

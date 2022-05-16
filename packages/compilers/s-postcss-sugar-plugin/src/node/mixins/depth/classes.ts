@@ -54,7 +54,7 @@ export default function ({
         () => `
       /**
         * @name          Depth
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/depth
         * @platform       css
@@ -99,7 +99,7 @@ export default function ({
                 * @name          s-depth:${
                     depthName === 'default' ? '' : depthName
                 }
-                * @namespace          sugar.css.depth
+                * @namespace          sugar.style.depth
                 * @type               CssClass
                 * @platform         css
                 * @status           beta
@@ -125,7 +125,7 @@ export default function ({
                 * @name          s-depth:text:${
                     depthName === 'default' ? '' : depthName
                 }
-                * @namespace          sugar.css.depth
+                * @namespace          sugar.style.depth
                 * @type               CssClass
                 * @platform         css
                 * @status           beta

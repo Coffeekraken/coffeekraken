@@ -55,7 +55,7 @@ export default function ({
         () => `
       /**
         * @name          Offsize
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/offsize
         * @platform       css
@@ -120,7 +120,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMargin}
-    * @namespace        sugar.css.offsize
+    * @namespace          sugar.style.offsize
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -153,7 +153,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginTop}
-    * @namespace        sugar.css.offsize
+    * @namespace          sugar.style.offsize
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -177,7 +177,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginBottom}
-    * @namespace        sugar.css.offsize
+    * @namespace          sugar.style.offsize
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -201,7 +201,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginLeft}
-    * @namespace        sugar.css.offsize
+    * @namespace          sugar.style.offsize
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -230,7 +230,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            .${clsMarginRight}
-    * @namespace        sugar.css.offsize
+    * @namespace          sugar.style.offsize
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -259,7 +259,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginX}
-    * @namespace        sugar.css.offsize
+    * @namespace          sugar.style.offsize
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -283,7 +283,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginY}
-    * @namespace        sugar.css.offsize
+    * @namespace          sugar.style.offsize
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -308,7 +308,7 @@ export default function ({
     //     vars.comment(
     //         () => `/**
     //     * @name            s-m:auto
-    //     * @namespace        sugar.css.offsize
+    //     * @namespace          sugar.style.offsize
     //     * @type             CssClass
     //     * @platform             css
     //     * @status               beta
@@ -330,7 +330,7 @@ export default function ({
     //     vars.comment(
     //         () => `/**
     //     * @name            s-mbs:auto
-    //     * @namespace        sugar.css.offsize
+    //     * @namespace          sugar.style.offsize
     //     * @type             CssClass
     //     * @platform             css
     //     * @status               beta
@@ -352,7 +352,7 @@ export default function ({
     //     vars.comment(
     //         () => `/**
     //     * @name            s-mie:auto
-    //     * @namespace        sugar.css.offsize
+    //     * @namespace          sugar.style.offsize
     //     * @type             CssClass
     //     * @platform             css
     //     * @status               beta
@@ -374,7 +374,7 @@ export default function ({
     //     vars.comment(
     //         () => `/**
     //     * @name            s-mbe:auto
-    //     * @namespace        sugar.css.offsize
+    //     * @namespace          sugar.style.offsize
     //     * @type             CssClass
     //     * @platform             css
     //     * @status               beta
@@ -396,7 +396,7 @@ export default function ({
     //     vars.comment(
     //         () => `/**
     //     * @name            s-mis:auto
-    //     * @namespace        sugar.css.offsize
+    //     * @namespace          sugar.style.offsize
     //     * @type             CssClass
     //     * @platform             css
     //     * @status               beta
@@ -418,7 +418,7 @@ export default function ({
     //     vars.comment(
     //         () => `/**
     //     * @name            s-mi:auto
-    //     * @namespace        sugar.css.offsize
+    //     * @namespace          sugar.style.offsize
     //     * @type             CssClass
     //     * @platform             css
     //     * @status               beta
@@ -441,7 +441,7 @@ export default function ({
     //     vars.comment(
     //         () => `/**
     //     * @name            s-mb:auto
-    //     * @namespace        sugar.css.offsize
+    //     * @namespace          sugar.style.offsize
     //     * @type             CssClass
     //     * @platform             css
     //     * @status               beta

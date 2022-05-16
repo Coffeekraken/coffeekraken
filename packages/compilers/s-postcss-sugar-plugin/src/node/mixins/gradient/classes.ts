@@ -68,7 +68,7 @@ export default function ({
     if (finalParams.types.indexOf('linear') !== -1) {
         vars.comment(`/**
         * @name             s-gradient:linear
-        * @namespace          sugar.css.gradient
+        * @namespace          sugar.style.gradient
         * @type                 CssClass
         * @platform         css
         * @status           beta
@@ -93,7 +93,7 @@ export default function ({
     if (finalParams.types.indexOf('radial') !== -1) {
         vars.comment(`/**
         * @name             s-gradient:radial
-        * @namespace          sugar.css.gradient
+        * @namespace          sugar.style.gradient
         * @type                 CssClass
         * @platform       css
         * @status         beta
@@ -120,7 +120,7 @@ export default function ({
             vars.comment(`
         /**
          * @name        .s-gradient:${angle}deg
-         * @namespace       sugar.css.gradient
+         * @namespace          sugar.style.gradient
          * @type            CssClass
          * @platform        css
          * @status          beta
@@ -151,7 +151,7 @@ export default function ({
             vars.comment(`
           /**
            * @name        .s-gradient:${name}
-           * @namespace   sugar.css.gradient
+           * @namespace          sugar.style.gradient
            * @type            CssClass
            * @platform        css
            * @status          beta
@@ -187,7 +187,7 @@ export default function ({
         }`;
         vars.comment(`/**
         * @name          ${startColorClassName}
-        * @namespace          sugar.css.gradient
+        * @namespace          sugar.style.gradient
         * @type               CssClass
         * @platform           css
         * @status           beta
@@ -215,7 +215,7 @@ export default function ({
         }`;
         vars.comment(`/**
       * @name          ${endColorClassName}
-      * @namespace          sugar.css.gradient
+      * @namespace          sugar.style.gradient
       * @type               CssClass
       * @platform         css
       * @status           beta

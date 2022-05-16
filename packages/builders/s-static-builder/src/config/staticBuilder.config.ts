@@ -5,14 +5,14 @@ export default function (env, config) {
          * @name            input
          * @namespace       config.staticBuilder
          * @type            String
-         * @default         [config.storage.package.rootDir]/sitemap.xml
+         * @default         [config.storage.src.publicDir]/sitemap.xml
          *
          * Specify the input sitemap file to use for building your static website
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        input: '[config.storage.package.rootDir]/sitemap.xml',
+        input: '[config.storage.src.publicDir]/sitemap.xml',
         /**
          * @name            outDir
          * @namespace       config.staticBuilder
@@ -36,7 +36,8 @@ export default function (env, config) {
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        host: 'http://[config.frontendServer.hostname]:[config.frontendServer.port]',
+        host:
+            'http://[config.frontendServer.hostname]:[config.frontendServer.port]',
         /**
          * @name            failAfter
          * @namespace       config.staticBuilder
@@ -142,83 +143,43 @@ export default function (env, config) {
                  */
                 to: '[config.staticBuilder.outDir]/docmap.json',
             },
-            manifest: {
+            public: {
                 /**
                  * @name            from
-                 * @namespace       config.staticBuilder.assets.manifest
+                 * @namespace       config.staticBuilder.assets.public
                  * @type            String
-                 * @default         [config.storage.package.rootDir]/manifest.json
+                 * @default         [config.storage.src.publicDir]
                  *
-                 * Specify the directory/file to copy
+                 * Specify the directory/file/url from which to get the asset to copy
                  *
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                from: '[config.storage.package.rootDir]/manifest.json',
+                from: '[config.storage.src.publicDir]',
+                /**
+                 * @name            glob
+                 * @namespace       config.staticBuilder.assets.public
+                 * @type            String
+                 * @default         ** /*
+                 *
+                 * Specify the directory/file/url from which to get the asset to copy
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                glob: '**/*',
                 /**
                  * @name            to
-                 * @namespace       config.staticBuilder.assets.manifest
+                 * @namespace       config.staticBuilder.assets.docmap
                  * @type            String
-                 * @default         [config.staticBuilder.outDir]/manifest.json
+                 * @default         [config.staticBuilder.outDir]
                  *
                  * Specify the directory where you want to paste the asset(s)
                  *
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                to: '[config.staticBuilder.outDir]/manifest.json',
-            },
-            sitemap: {
-                /**
-                 * @name            from
-                 * @namespace       config.staticBuilder.assets.sitemap
-                 * @type            String
-                 * @default         [config.storage.package.rootDir]/sitemap.xml
-                 *
-                 * Specify the directory/file to copy
-                 *
-                 * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                from: '[config.storage.package.rootDir]/sitemap.xml',
-                /**
-                 * @name            to
-                 * @namespace       config.staticBuilder.assets.sitemap
-                 * @type            String
-                 * @default         [config.staticBuilder.outDir]/sitemap.xml
-                 *
-                 * Specify the directory where you want to paste the asset(s)
-                 *
-                 * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                to: '[config.staticBuilder.outDir]/sitemap.xml',
-            },
-            favicon: {
-                /**
-                 * @name            from
-                 * @namespace       config.staticBuilder.assets.favicon
-                 * @type            String
-                 * @default         [config.storage.package.rootDir]/favicon.ico
-                 *
-                 * Specify the directory/file to copy
-                 *
-                 * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                from: '[config.storage.package.rootDir]/favicon.ico',
-                /**
-                 * @name            to
-                 * @namespace       config.staticBuilder.assets.favicon
-                 * @type            String
-                 * @default         [config.staticBuilder.outDir]/favicon.ico
-                 *
-                 * Specify the directory where you want to paste the asset(s)
-                 *
-                 * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                to: '[config.staticBuilder.outDir]/favicon.ico',
+                to: '[config.staticBuilder.outDir]',
             },
             dist: {
                 /**
@@ -234,17 +195,29 @@ export default function (env, config) {
                  */
                 from: '[config.storage.dist.rootDir]',
                 /**
+                 * @name            glob
+                 * @namespace       config.staticBuilder.assets.dist
+                 * @type            String
+                 * @default         ** /*
+                 *
+                 * Specify the directory/file/url from which to get the asset to copy
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                glob: '**/*',
+                /**
                  * @name            to
                  * @namespace       config.staticBuilder.assets.dist
                  * @type            String
-                 * @default         [config.staticBuilder.outDir]
+                 * @default         [config.staticBuilder.outDir]/dist
                  *
                  * Specify the directory where you want to paste the asset(s)
                  *
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                to: '[config.staticBuilder.outDir]',
+                to: '[config.staticBuilder.outDir]/dist',
             },
         },
     };

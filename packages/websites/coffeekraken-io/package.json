@@ -34,7 +34,7 @@
         "@coffeekraken/s-docblock": "^2.0.0",
         "@coffeekraken/s-docmap": "^2.0.0",
         "@coffeekraken/s-duration": "^2.0.0",
-        "@coffeekraken/s-css-animate": "^2.0.0",
+        "@coffeekraken/s-css-animation": "^2.0.0",
         "@coffeekraken/s-scroll-component": "^2.0.0",
         "@coffeekraken/s-env": "^2.0.0",
         "@coffeekraken/s-event-emitter": "^2.0.0",

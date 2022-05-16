@@ -81,7 +81,7 @@ export default function ({
         () => `
       /**
         * @name          Lists
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/lists
         * @platform       css
@@ -168,7 +168,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-list
-            * @namespace      sugar.css.ui.list
+            * @namespace          sugar.style.ui.list
             * @type           CssClass
             * 
             * This class represent an "<yellow>bare</yellow>" list
@@ -199,7 +199,7 @@ export default function ({
                 * @name           s-list${
                     finalParams.defaultStyle === style ? '' : `:${style}`
                 }
-                * @namespace      sugar.css.ui.list
+                * @namespace          sugar.style.ui.list
                 * @type           CssClass
                 * 
                 * This class represent an "<yellow>${style}</yellow>" list
@@ -230,7 +230,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-list--ul
-        * @namespace      sugar.css.ui.list
+        * @namespace          sugar.style.ui.list
         * @type           CssClass
         * 
         * This class represent an "<yellow>ul</yellow>" list
@@ -257,7 +257,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-list--icon
-        * @namespace      sugar.css.ui.list
+        * @namespace          sugar.style.ui.list
         * @type           CssClass
         * 
         * This class represent an "<yellow>ul</yellow>" list with some "<cyan>icon</cyan>" instead of the default bullet
@@ -287,7 +287,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-list--ol
-        * @namespace      sugar.css.ui.list
+        * @namespace          sugar.style.ui.list
         * @type           CssClass
         * 
         * This class represent an "<yellow>ol</yellow>" list
@@ -314,7 +314,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-list--dl
-        * @namespace      sugar.css.ui.list
+        * @namespace          sugar.style.ui.list
         * @type           CssClass
         * 
         * This class represent an "<yellow>dl</yellow>" list
@@ -341,7 +341,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-format:text ul
-            * @namespace      sugar.css.ui.list
+            * @namespace          sugar.style.ui.list
             * @type           CssClass
             * 
             * This class represent a simple ul tag in the s-format:text scope
@@ -372,7 +372,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-format:text ol
-            * @namespace      sugar.css.ui.list
+            * @namespace          sugar.style.ui.list
             * @type           CssClass
             * 
             * This class represent a simple ol tag in the s-format:text scope
@@ -406,7 +406,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-rhythm:vertical
-            * @namespace      sugar.css.ui.list
+            * @namespace          sugar.style.ui.list
             * @type           CssClass
             * 
             * This class represent some lists in the s-rhythm:vertical scope

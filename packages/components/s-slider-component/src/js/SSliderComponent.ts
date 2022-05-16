@@ -1,24 +1,21 @@
 // @ts-nocheck
 
-import __SSliderBehavior from './SSliderBehavior';
-import __SSliderSlideableBehavior from './behaviors/SSliderSlideableBehavior';
+import __SComponentUtils from '@coffeekraken/s-component-utils';
+import __SInterface from '@coffeekraken/s-interface';
 import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
-import __SInterface from '@coffeekraken/s-interface';
-import __SComponentUtils from '@coffeekraken/s-component-utils';
-import __slideable from '@coffeekraken/sugar/js/dom/slide/slideable';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { css, html, unsafeCSS } from 'lit';
-import __SSliderComponentInterface from './interface/SSliderComponentInterface';
+import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
 import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTranslateProperties';
 import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
-import __parse from '@coffeekraken/sugar/shared/string/parse';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
-import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
-
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __parse from '@coffeekraken/sugar/shared/string/parse';
+import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
+import __SSliderComponentInterface from './interface/SSliderComponentInterface';
+import __SSliderBehavior from './SSliderBehavior';
 
 /**
  * @name                Slider
@@ -62,6 +59,26 @@ import __css from '../../../../src/css/s-slider-component.css'; // relative to /
  *          }
  *      }
  * });
+ *
+ * @e1s         html        CSS animation behavior
+ * <s-slider controls nav lnf="cards" behavior="cssAnimation">
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:complementary active">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
  *
  * @example         html        Simple slider
  * <s-slider controls nav>
@@ -346,6 +363,9 @@ export default class SSlider extends __SLitComponent {
         this._initNavigation();
 
         // default behavior
+
+        console.log(this.props);
+
         if (this.props.behavior) {
             if (typeof this.props.behavior === 'string') {
                 let behavior;

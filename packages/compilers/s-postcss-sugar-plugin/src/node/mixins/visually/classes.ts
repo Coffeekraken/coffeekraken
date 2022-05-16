@@ -47,7 +47,7 @@ export default function ({
     vars.push(`
       /**
         * @name          Visually
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/visually
         * @platform       css
@@ -76,7 +76,7 @@ export default function ({
 
     vars.push(`/**
     * @name          s-visually:hidden
-    * @namespace          sugar.css.visually
+    * @namespace          sugar.style.visually
     * @type               CssClass
     * @platform             css
     * @status             beta

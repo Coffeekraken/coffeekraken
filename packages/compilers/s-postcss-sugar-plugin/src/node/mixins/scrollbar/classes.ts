@@ -54,7 +54,7 @@ export default function ({
         () => `
       /**
         * @name          Scrollbar
-        * @namespace          sugar.css.tools
+        * @namespace          sugar.style.tools
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/scrollbar
         * @platform       css
@@ -90,7 +90,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-scrollbar
-            * @namespace          sugar.css.scrollbar
+            * @namespace          sugar.style.scrollbar
             * @type               CssClass
             * @platform             css
             * @status             beta

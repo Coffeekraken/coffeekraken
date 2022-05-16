@@ -17,10 +17,10 @@ import __SClass from '@coffeekraken/s-class';
 import __cssEasingStrToJsFunction from '@coffeekraken/sugar/js/dom/style/cssEasingStrToJsFunction';
 
 /**
- * @name            SCssAnimate
+ * @name            SCssAnimation
  * @namespace       js
  * @type            Class
- * @interface       ./interface/SCssKeyframesControllerInterface.js
+ * @interface       ./interface/SCssAnimationInterface.js
  * @platform        js
  * @status          beta
  *
@@ -34,9 +34,9 @@ import __cssEasingStrToJsFunction from '@coffeekraken/sugar/js/dom/style/cssEasi
  * @support          edge
  *
  * @example         js
- * import __SCssAnimate from '@coffeekraken/s-css-animate';
- * const $elm = new __SCssKeyframesController(document.querySelector('#my-element'));
- * const player = new __SCssAnimate($elm);
+ * import __SCssAnimation from '@coffeekraken/s-css-animation';
+ * const $elm = new __SCssAnimation(document.querySelector('#my-element'));
+ * const player = new __SCssAnimation($elm);
  * player.play();
  *
  * @example         html
@@ -48,41 +48,32 @@ import __cssEasingStrToJsFunction from '@coffeekraken/sugar/js/dom/style/cssEasi
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-
-export interface ISugarElementTranslates {
-    x: number;
-    y: number;
-    z: number;
-}
-export interface ISugarElementRotates {
-    x: number;
-    y: number;
-    z: number;
-}
-export interface ISugarElementTransforms {
-    translateX: number;
-    translateY: number;
-    translateZ: number;
-    rotateX: number;
-    rotateY: number;
-    rotateZ: number;
-}
-
 export interface INearestKeyframes {
     before?: IKeyframe;
     after?: IKeyframe;
     current?: IKeyframe;
 }
 
-export interface ISCssKeyframesControllerCtorSettings {
-    cssKeyframesController: Partial<ISCssKeyframesControllerSettings>;
+export interface ISCssAnimationPlaySettings {
+    easing: string | Function;
+    duration: number;
+    iterations: number;
+    yoyo: boolean;
 }
 
-export interface ISCssKeyframesControllerSettings {
+export interface ISCssAnimationCtorSettings {
+    cssAnimation: Partial<ISCssAnimationSettings>;
+}
+
+export interface ISCssAnimationSettings {
     debug: boolean;
+    easing: string | Function;
+    duration: number;
+    iterations: number;
+    yoyo: boolean;
 }
 
-export default class SCssKeyframesController extends __SClass {
+export default class SCssAnimation extends __SClass {
     /**
      * @name        $elm
      * @type    HTMLElement
@@ -135,18 +126,21 @@ export default class SCssKeyframesController extends __SClass {
     }
 
     /**
-     * @name        cssKeyframesControllerSettings
-     * @type        ISCssKeyframesControllerSettings
+     * @name        cssAnimationSettings
+     * @type        ISCssAnimationSettings
      * @get
      *
-     * Access the cssKeyframesController settings
+     * Access the cssAnimation settings
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get cssKeyframesControllerSettings(): ISCssKeyframesControllerSettings {
-        return (<any>this)._settings.cssKeyframesController;
+    get cssAnimationSettings(): ISCssAnimationSettings {
+        return (<any>this)._settings.cssAnimation;
     }
+
+    _currentYoyoTimeout;
+    _currentEaseInterval;
 
     /**
      * @name        constructor
@@ -160,13 +154,17 @@ export default class SCssKeyframesController extends __SClass {
      */
     constructor(
         $elm: HTMLElement,
-        settings: Partial<ISCssKeyframesControllerCtorSettings>,
+        settings: Partial<ISCssAnimationCtorSettings>,
     ) {
         super(
             __deepMerge(
                 {
-                    cssKeyframesController: {
+                    cssAnimation: {
                         debug: false,
+                        easing: undefined,
+                        duration: undefined,
+                        iterations: undefined,
+                        yoyo: undefined,
                     },
                 },
                 settings ?? {},
@@ -206,31 +204,113 @@ export default class SCssKeyframesController extends __SClass {
             this.seekTo(parseFloat(e.target?.value));
         });
 
-        // console.log('FD', this._animations);
-
         // start at 0
         this.seekTo(0);
 
-        const easingFn = __cssEasingStrToJsFunction(
-            'cubic-bezier(.72,-0.01,.42,.99)',
-        );
+        // handle easing from settings
+        const easingFn =
+            typeof this.cssAnimationSettings.easing === 'string'
+                ? __cssEasingStrToJsFunction('cubic-bezier(.72,-0.01,.42,.99)')
+                : this.cssAnimationSettings.easing;
 
-        setInterval(() => {
-            __easeInterval(
-                2400,
-                (p) => {
-                    this.seekTo(p);
-                },
+        // setInterval(() => {
+        //     __easeInterval(
+        //         2400,
+        //         (p) => {
+        //             this.seekTo(p);
+        //         },
+        //         {
+        //             easing: easingFn,
+        //         },
+        //     );
+        //     setTimeout(() => {
+        //         __easeInterval(2400, (p) => {
+        //             this.seekTo(100 - p);
+        //         });
+        //     }, 2400);
+        // }, 5000);
+
+        // setTimeout(() => {
+        //     this.play({
+        //         yoyo: true,
+        //     });
+        //     setTimeout(() => {
+        //         this.stop();
+        //     }, 1700);
+        // }, 3000);
+    }
+
+    /**
+     * @name        play
+     * @type        Function
+     *
+     * This method allows you to play the animation
+     *
+     * @param       {ISCssAnimationPlaySettings}        [settings={}]       Some settings to play your animation
+     * @param       {String}        [animationName=this._animations[0]?.name]       The name of the animation you want to play
+     * @return       {SCssAnimation}                     Return the SCssAnimation instance to maintain chainability
+     *
+     * @setting         {String|Function}       easing       The easing to use for the animation. If not set, take the css defined property
+     * @setting         {Number}                duration         The duration of the animation. If not set, take the css defined property
+     * @setting         {Number}                iterations         The number of iterations of the animation. If not set, take the css defined property
+     * @setting         {Boolean}               [yoyo=false]        If set to true, the animation will be played in forwards AND backwards in each iteration(s)
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    play(
+        settings: Partial<ISCssAnimationPlaySettings> = {},
+        animationName = this._animations[0]?.name,
+    ): Promise<SCssAnimation> {
+        return new Promise((resolve) => {
+            const animationObj = this.getAnimationByName(animationName);
+
+            const finalSettings = this._applyAnimationSettingsTo(
+                animationObj,
+                settings,
+            );
+
+            this._currentEaseInterval = __easeInterval(
+                finalSettings.duration / (finalSettings.yoyo ? 2 : 1),
+                (p) => this.seekTo(p),
                 {
-                    easing: easingFn,
+                    easing: finalSettings.easing,
                 },
             );
-            setTimeout(() => {
-                __easeInterval(2400, (p) => {
-                    this.seekTo(100 - p);
-                });
-            }, 2400);
-        }, 5000);
+            if (finalSettings.yoyo) {
+                this._currentYoyoTimeout = setTimeout(() => {
+                    this._currentEaseInterval = __easeInterval(
+                        finalSettings.duration / 2,
+                        (p) => {
+                            this.seekTo(100 - p);
+                        },
+                        {
+                            easing: finalSettings.easing,
+                        },
+                    );
+                }, finalSettings.duration / 2);
+            }
+        });
+    }
+
+    /**
+     * @name        stop
+     * @type        Function
+     *
+     * This method allows you to stop the current animation if their's one and seek to 0.
+     *
+     * @return       {SCssAnimation}                     Return the SCssAnimation instance to maintain chainability
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    stop(): SCssAnimation {
+        this._currentEaseInterval?.cancel?.();
+        clearTimeout(this._currentYoyoTimeout);
+        setTimeout(() => {
+            this.seekTo(0);
+        }, 20);
+        return this;
     }
 
     /**
@@ -240,6 +320,8 @@ export default class SCssKeyframesController extends __SClass {
      * This method allows you to seek to a specific percentage of the animation
      *
      * @param       {Number}        percentage      The percentage you want to go in the animation
+     * @param       {String}        [animationName=this._animations[0]?.name]       The name of the animation you want to seek to
+     * @return       {SCssAnimation}                     Return the SCssAnimation instance to maintain chainability
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -247,10 +329,12 @@ export default class SCssKeyframesController extends __SClass {
     seekTo(
         percentage: number,
         animationName = this._animations[0]?.name,
-    ): void {
+    ): SCssAnimation {
         const animationObj = this.getAnimationByName(animationName);
 
         const newRules = {};
+
+        console.log('seek', animationObj, animationName);
 
         for (let [animatedProperty, animatedPropertyObj] of Object.entries(
             animationObj.animatedProperties,
@@ -359,10 +443,61 @@ export default class SCssKeyframesController extends __SClass {
 
         // console.log('new', newRules);
 
+        console.log('SET', newRules);
         Object.assign(newRules, objStrs);
         for (let [key, value] of Object.entries(newRules)) {
             this.$elm.style[key] = value;
         }
+
+        return this;
+    }
+
+    /**
+     * This method simply take an ISAnimationCssPlaySettings object and apply either the css animation defined settings or the instance level
+     * ones to this object and returns it
+     */
+    _applyAnimationSettingsTo(
+        animationObj: any,
+        settings: Partial<ISCssAnimationPlaySettings>,
+    ): ISCssAnimationPlaySettings {
+        let easingFn;
+        if (animationObj.timingFunction) {
+            easingFn =
+                typeof animationObj.timingFunction === 'string'
+                    ? __cssEasingStrToJsFunction(animationObj.timingFunction)
+                    : animationObj.timingFunction;
+        } else if (settings.easing) {
+            easingFn =
+                typeof settings.easing === 'string'
+                    ? __cssEasingStrToJsFunction(settings.easing)
+                    : settings.easing;
+        } else if (this.cssAnimationSettings.easing) {
+            easingFn =
+                typeof this.cssAnimationSettings.easing === 'string'
+                    ? __cssEasingStrToJsFunction(
+                          this.cssAnimationSettings.easing,
+                      )
+                    : this.cssAnimationSettings.easing;
+        } else {
+            easingFn = __cssEasingStrToJsFunction('linear');
+        }
+        const duration =
+                animationObj.duration ??
+                settings.duration ??
+                this.cssAnimationSettings.duration,
+            iterations =
+                animationObj.iterations ??
+                settings.iterations ??
+                this.cssAnimationSettings.iterations ??
+                1,
+            yoyo = settings.yoyo ?? this.cssAnimationSettings.yoyo ?? false;
+
+        return {
+            easing: easingFn,
+            duration,
+            iterations,
+            yoyo,
+        };
     }
 
     /**

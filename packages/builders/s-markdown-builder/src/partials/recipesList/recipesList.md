@@ -1,3 +1,4 @@
 {{#each config.frontstack.recipes }}
-- **{{@key}}**: {{this.description}}
-{{/each}}
+
+-   [**{{@key}}**](/doc/recipes/built-in/{{@key}}): {{this.description}}
+    {{/each}}

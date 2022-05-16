@@ -104,7 +104,7 @@ export default function ({
         () => `
       /**
         * @name          Radio
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/radio
         * @platform       css
@@ -223,7 +223,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-radio
-            * @namespace      sugar.css.ui.radio
+            * @namespace          sugar.style.ui.radio
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">bare</s-color>" radio
@@ -254,7 +254,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           ${cls}
-            * @namespace      sugar.css.ui.radio
+            * @namespace          sugar.style.ui.radio
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">${style}</s-color>" radio
@@ -292,7 +292,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           ${cls}
-            * @namespace      sugar.css.ui.radio
+            * @namespace          sugar.style.ui.radio
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">${shape}</s-color>" radio
@@ -324,7 +324,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-format:text input[type="radio"]
-            * @namespace      sugar.css.ui.radio
+            * @namespace          sugar.style.ui.radio
             * @type           CssClass
             * 
             * This class represent a simple input[type="radio"] tag in the s-format:text scope
@@ -353,7 +353,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-rhythm:vertical
-            * @namespace      sugar.css.ui.radio
+            * @namespace          sugar.style.ui.radio
             * @type           CssClass
             * 
             * This class represent some input[type="radio"] in the s-rhythm:vertical scope

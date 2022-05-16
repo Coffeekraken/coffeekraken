@@ -58,7 +58,7 @@ export default function ({
         () => `
       /**
         * @name          Fit Sizes
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/fit-sizes
         * @platform       css
@@ -99,7 +99,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name          s-fit:${fitSizeName}
-                * @namespace          sugar.css.fit
+                * @namespace          sugar.style.fit
                 * @type               CssClass
                 * @platform         css
                 * @status           beta

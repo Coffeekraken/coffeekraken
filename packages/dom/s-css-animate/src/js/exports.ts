@@ -1,3 +1,3 @@
-import __SCssAnimate from './SCssAnimate';
-export * from './SCssAnimate';
-export default __SCssAnimate;
+import __SCssAnimation from './SCssAnimation';
+export * from './SCssAnimation';
+export default __SCssAnimation;

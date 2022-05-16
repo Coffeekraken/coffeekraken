@@ -29,7 +29,7 @@
                     <img class="__illustration" src="/dist/img/illustrations/opensource.png"
                         alt="Coffeekraken open source" title="Coffeekraken believe in open source" />
 
-                    <input type="range" class="s-range s-color:accent" min="0" max="100" value="0" />
+                    {{-- <input type="range" class="s-range s-color:accent" min="0" max="100" value="0" /> --}}
 
                 </div>
             </div>

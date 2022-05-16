@@ -164,7 +164,7 @@ export default class SMonorepo extends __SClass {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[run]</yellow> Searching for repositories...`,
+                    value: `<yellow>[run]</yellow> Searching for packages...`,
                 });
 
                 // get all the packages
@@ -174,7 +174,7 @@ export default class SMonorepo extends __SClass {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[run]</yellow> Executing the command "<magenta>${finalParams.command}</magenta>" in these <cyan>${packages.length}</cyan> repo(s)`,
+                    value: `<yellow>[run]</yellow> Executing the command "<magenta>${finalParams.command}</magenta>" in these <cyan>${packages.length}</cyan> package(s)`,
                 });
 
                 const duration = new __SDuration();
@@ -271,7 +271,7 @@ export default class SMonorepo extends __SClass {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Searching for repositories...`,
+                    value: `<yellow>[list]</yellow> Searching for packages...`,
                 });
 
                 const rootPackageJson = __readJsonSync(
@@ -354,14 +354,14 @@ export default class SMonorepo extends __SClass {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Searching for repositories...`,
+                    value: `<yellow>[list]</yellow> Searching for packages...`,
                 });
 
                 const packages = await this.list(finalParams);
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Found <cyan>${packages.length}</cyan> repository(ies)`,
+                    value: `<yellow>[list]</yellow> Found <cyan>${packages.length}</cyan> package(s)`,
                 });
 
                 const srcRelDir = __path.relative(
@@ -456,7 +456,7 @@ export default class SMonorepo extends __SClass {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Searching for repositories...`,
+                    value: `<yellow>[list]</yellow> Searching for packages...`,
                 });
 
                 const rootPackageJson = __readJsonSync(

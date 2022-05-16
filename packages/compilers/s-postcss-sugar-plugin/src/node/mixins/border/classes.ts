@@ -54,7 +54,7 @@ export default function ({
         () => `
       /**
         * @name          Radius
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/radius
         * @platform       css
@@ -96,7 +96,7 @@ export default function ({
         () => `
       /**
         * @name          Border width
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/border-width
         * @platform       css
@@ -137,7 +137,7 @@ export default function ({
         () => `
       /**
         * @name          Border color
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/border-color
         * @platform       css
@@ -178,7 +178,7 @@ export default function ({
         const clsName = `s-radius:${radiusName}`.replace(':default', '');
         const radiusCss = `/**
             * @name               ${clsName}
-            * @namespace          sugar.css.border
+            * @namespace          sugar.style.border
             * @type               CssClass
             * @platform         css
             * @status           beta
@@ -204,7 +204,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name               ${cls}
-                * @namespace          sugar.css.border
+                * @namespace          sugar.style.border
                 * @type               CssClass
                 * @platform         css
                 * @status           beta
@@ -229,7 +229,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name               ${cls}
-                * @namespace          sugar.css.border
+                * @namespace          sugar.style.border
                 * @type               CssClass
                 * @platform         css
                 * @status           beta

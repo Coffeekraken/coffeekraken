@@ -51,7 +51,7 @@ export default function ({
     vars.push(`
       /**
         * @name          Widths
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/widths
         * @platform       css
@@ -85,7 +85,7 @@ export default function ({
 
     vars.push(`/**
     * @name            s-width:viewport
-    * @namespace        sugar.css.width
+    * @namespace          sugar.style.width
     * @type             CssClass
     * @platform         css
     * @status         beta
@@ -113,7 +113,7 @@ export default function ({
     Object.keys(widthObj).forEach((name) => {
         vars.push(`/**
         * @name            s-width:${name}
-        * @namespace        sugar.css.width
+        * @namespace          sugar.style.width
         * @type             CssClass
         * @platform         css
         * @status           beta

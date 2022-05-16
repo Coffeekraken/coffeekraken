@@ -90,7 +90,7 @@ export default function ({
         () => `
       /**
         * @name          Cursor
-        * @namespace          sugar.css.cursor
+        * @namespace          sugar.style.cursor
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/cursor
         * @platform       css
@@ -131,7 +131,7 @@ export default function ({
         vars.comment(
             () => `/**
         * @name          s-cursor:${cursor}
-        * @namespace          sugar.css.cursor
+        * @namespace          sugar.style.cursor
         * @type               CssClass
         * @platform             css
         * @status             beta

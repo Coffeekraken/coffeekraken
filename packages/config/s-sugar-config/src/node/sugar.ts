@@ -218,7 +218,7 @@ export default class SSugarConfig extends __SClass {
         const finalSettings: ISSugarConfigSettings = __deepMerge(
             {
                 id: 'default',
-                env: 'development',
+                env: process.env.NODE_ENV,
                 platform: 'node',
                 cache: true,
             },

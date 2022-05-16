@@ -32,13 +32,35 @@ export default function docmapApiData({ req, res, pageConfig }) {
 
         __SBench.step('data.docmapApiData', 'afterDocmapRead');
 
+        let firstBlockWithNamespace, nextBlockWithNamespace;
+
         const docblocksInstance = new __SDocblock(docObj.path, {
             docblock: {
                 renderMarkdown: true,
                 filter: (docblock) => {
                     if (docblock.private) return false;
-                    // if (docblock.name.match(/^_/)) return false;
-                    return true;
+                    console.log(docblock, req.params.namespace);
+                    if (docblock.namespace === req.params.namespace) {
+                        console.log('BLOCK', docblock.name);
+                        firstBlockWithNamespace = docblock;
+                        return true;
+                    }
+                    if (
+                        firstBlockWithNamespace &&
+                        !nextBlockWithNamespace &&
+                        !docblock.namespace
+                    ) {
+                        return true;
+                    }
+                    if (
+                        firstBlockWithNamespace &&
+                        !nextBlockWithNamespace &&
+                        docblock.namespace
+                    ) {
+                        nextBlockWithNamespace = docblock;
+                        return false;
+                    }
+                    return false;
                 },
             },
         });

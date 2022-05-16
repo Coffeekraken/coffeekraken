@@ -3,6 +3,7 @@ import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SRequest from '@coffeekraken/s-request';
+import __SGlob from '@coffeekraken/s-glob';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __remove from '@coffeekraken/sugar/node/fs/remove';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
@@ -77,6 +78,7 @@ export interface ISStaticBuilderAssets {
 
 export interface ISStaticBuilderAsset {
     from: string;
+    glob: string;
     to: string;
 }
 
@@ -235,6 +237,11 @@ export default class SStaticBuilder extends __SBuilder {
 
                 let logsCount = 0;
 
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[build]</yellow> Scraping pages using the sitemap.xml...`,
+                });
+
                 // loop on each urls to get his content
                 for (let i = 0; i < xml.urlset.url.length; i++) {
                     const url = xml.urlset.url[i],
@@ -366,6 +373,10 @@ export default class SStaticBuilder extends __SBuilder {
 
                 // assets
                 if (params.assets) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[build]</yellow> Copying assets:`,
+                    });
                     for (
                         let i = 0;
                         i < Object.keys(params.assets).length;
@@ -374,32 +385,25 @@ export default class SStaticBuilder extends __SBuilder {
                         const assetObj =
                             params.assets[Object.keys(params.assets)[i]];
 
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[build]</yellow> - <cyan>${__path.relative(
+                                __packageRoot(),
+                                assetObj.from,
+                            )}${
+                                assetObj.glob ? `/${assetObj.glob}` : ''
+                            }</cyan> to <magenta>${__path.relative(
+                                __packageRoot(),
+                                assetObj.to,
+                            )}</magenta>`,
+                        });
+
                         // filesystem
                         if (assetObj.from.match(/^\//)) {
-                            const to = `${assetObj.to}/${
-                                assetObj.from.split('/').slice(-1)[0]
-                            }`;
-                            if (!__fs.existsSync(assetObj.from)) {
-                                emit('log', {
-                                    type: __SLog.TYPE_INFO,
-                                    value: `<yellow>[assets]</yellow> No "<yellow>${__path.relative(
-                                        __packageRoot(),
-                                        assetObj.from,
-                                    )}</yellow>" file to copy...`,
-                                });
-                            } else {
-                                emit('log', {
-                                    type: __SLog.TYPE_INFO,
-                                    value: `<yellow>[assets]</yellow> Copying asset "<yellow>${__path.relative(
-                                        __packageRoot(),
-                                        assetObj.from,
-                                    )}</yellow>" to "<cyan>${__path.relative(
-                                        __packageRoot(),
-                                        assetObj.to,
-                                    )}</cyan>"`,
-                                });
-                                await __copy(assetObj.from, to);
-                            }
+                            // copy files
+                            __SGlob.copySync(assetObj.glob ?? '', assetObj.to, {
+                                cwd: assetObj.from,
+                            });
                             // url
                         } else if (assetObj.from.match(/^https?:\/\//)) {
                             const req = new __SRequest({

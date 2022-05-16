@@ -41,7 +41,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                     `/**`,
                     ` * @name 		    ${colorName}`,
                     ` * @modifier        ${modifier}`,
-                    ` * @namespace       sugar.css.theme.${__STheme.name}.colors`,
+                    ` * @namespace          sugar.style.theme.${__STheme.name}.colors`,
                     ` * @type            color`,
                     ` * @platform       css`,
                     ` * @status         stable`,

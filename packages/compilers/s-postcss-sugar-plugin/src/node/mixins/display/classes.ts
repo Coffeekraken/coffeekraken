@@ -50,7 +50,7 @@ export default function ({
         () => `
       /**
         * @name          Display
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/display
         * @platform       css
@@ -140,7 +140,7 @@ export default function ({
         
       /**
        * @name            s-display:block
-       * @namespace       sugar.css.display
+       * @namespace          sugar.style.display
        * @type            CssClass
        * @platform        css
        * @status          beta
@@ -166,7 +166,7 @@ export default function ({
         () => `
       /**
        * @name            s-display:inline-block
-       * @namespace       sugar.css.display
+       * @namespace          sugar.style.display
        * @type            CssClass
        * @platform           css
        * @status               beta
@@ -192,7 +192,7 @@ export default function ({
         () => `
         /**
          * @name            s-display:contents
-         * @namespace       sugar.css.display
+         * @namespace          sugar.style.display
          * @type            CssClass
          * @platform           css
          * @status               beta
@@ -218,7 +218,7 @@ export default function ({
         () => `
         /**
          * @name            s-display:flex
-         * @namespace       sugar.css.display
+         * @namespace          sugar.style.display
          * @type            CssClass
          * @platform           css
          * @status               beta
@@ -244,7 +244,7 @@ export default function ({
         () => `
       /**
        * @name            s-display:grid
-       * @namespace       sugar.css.display
+       * @namespace          sugar.style.display
        * @type            CssClass
        * @platform           css
        * @status               beta
@@ -270,7 +270,7 @@ export default function ({
         () => `
         /**
          * @name            s-display:inline-flex
-         * @namespace       sugar.css.display
+         * @namespace          sugar.style.display
          * @type            CssClass
          * @platform           css
          * @status               beta
@@ -296,7 +296,7 @@ export default function ({
         () => `
         /**
          * @name            s-display:inline-grid
-         * @namespace       sugar.css.display
+         * @namespace          sugar.style.display
          * @type            CssClass
          * @platform           css
          * @status               beta
@@ -322,7 +322,7 @@ export default function ({
         () => `
         /**
          * @name            s-display:none
-         * @namespace       sugar.css.display
+         * @namespace          sugar.style.display
          * @type            CssClass
          * @platform           css
          * @status               beta

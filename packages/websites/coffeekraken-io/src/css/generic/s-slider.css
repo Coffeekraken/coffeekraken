@@ -1,5 +1,4 @@
 .preview-html {
-
     .s-slider__slide {
         color: #fff;
         display: flex;
@@ -10,12 +9,62 @@
 }
 
 s-slider {
-    @sugar.theme.when(dark) {
-        @sugar.color.current(#ffffff);
+    @sugar.theme.when (dark) {
+        @sugar.color.current (#ffffff);
     }
 }
 
-s-slider[lnf*="contained"],
+s-slider[lnf*='contained'],
 .s-slider__progress {
-    @sugar.color.current(#ffffff);
+    @sugar.color.current (#ffffff);
 }
+
+/* @keyframes slider-cards-out-left {
+    0% {
+        transform: translateX(0) rotateZ(0);
+        z-index: 100;
+    }
+    50% {
+        transform: translateX(-500px) rotateZ(-5deg);
+        z-index: 100;
+    }
+    50.1% {
+        z-index: 0;
+    }
+    100% {
+        transform: translateX(-10px) rotateZ(-2deg);
+        z-index: 0;
+    }
+} */
+/* 
+s-slider[lnf='cards'] {
+    .s-slider__slides {
+        position: relative;
+        height: 50vh;
+        aspect-ratio: 1/1.2;
+    }
+    .s-slider__slide {
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-origin: 50% 100%;
+        pointer-events: none;
+        animation: slider-cards-out-left 2s ease-in-out forwards paused;
+
+        &.active {
+            transform: translateX(0) rotateZ(0);
+            pointer-events: all;
+            z-index: 100;
+
+            & + .s-slider__slide {
+                transform: translateX(10px) rotateZ(2deg);
+            }
+        }
+    }
+}
+
+s-slider[behavior='cssAnimation'] {
+} */

@@ -115,7 +115,7 @@ export default function ({
         () => `
       /**
         * @name          Avatar
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/avatar
         * @platform       css
@@ -312,7 +312,7 @@ export default function ({
         vars.comment(
             () => `/**
           * @name           s-avatar
-          * @namespace      sugar.css.ui.avatar
+          * @namespace          sugar.style.ui.avatar
           * @type           CssClass
           * 
           * This class represent a(n) "<s-color="accent">bare</s-color>" avatar
@@ -340,7 +340,7 @@ export default function ({
             * @name           s-avatar${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }
-            * @namespace      sugar.css.ui.avatar
+            * @namespace          sugar.style.ui.avatar
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">default</s-color>" avatar
@@ -368,7 +368,7 @@ export default function ({
           * @name           s-avatar${
               shape === finalParams.defaultShape ? '' : `:${shape}`
           }
-          * @namespace      sugar.css.ui.avatar
+          * @namespace          sugar.style.ui.avatar
           * @type           CssClass
           * 
           * This class represent a(n) "<s-color="accent">default</s-color>" avatar
@@ -392,7 +392,7 @@ export default function ({
     vars.comment(
         () => `/**
           * @name           s-avatar:interactive
-          * @namespace      sugar.css.ui.avatar
+          * @namespace          sugar.style.ui.avatar
           * @type           CssClass
           * 
           * This class represent a(n) "<s-color="accent">interactive</s-color>" avatar

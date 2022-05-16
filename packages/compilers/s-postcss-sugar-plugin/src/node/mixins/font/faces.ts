@@ -55,7 +55,7 @@ export default function ({
             vars.comment(
                 () => `/**
         * @name               ${fontName}
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssFontFace
         * @platform           css
         * @status             beta

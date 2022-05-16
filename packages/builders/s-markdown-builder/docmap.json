@@ -4,11 +4,8 @@
     "generated": {
         "extends": [
             "coco",
-            "@coffeekraken/both",
-            "@coffeekraken/cjs",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/esm",
             "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
@@ -21,6 +18,8 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-data-handler-generic",
+            "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -41,6 +40,7 @@
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-monorepo",
@@ -71,7 +71,6 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
-            "@coffeekraken/s-view-renderer-data-handler-js",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
@@ -1256,7 +1255,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SMarkdownBuilder from '@coffeekraken/s-postcss-builder';\nconst builder = new SMarkdownBuilder({\n     markdownBuilder: {\n         // settings here...\n     }\n});\nawait builder.build({\n     input: 'my-cool-file.md',\n     output: 'my/cool/file-output.md'\n});"
+                        "code": "import SMarkdownBuilder from '@coffeekraken/s-postcss-builder';\nconst builder = new SMarkdownBuilder({\n     markdownBuilder: {\n         // settings here...\n     }\n});\nawait builder.build({\n     inPath: 'my-cool-file.md',\n     outPath: 'my/cool/file-output.md'\n});"
                     }
                 ],
                 "since": "2.0.0",
@@ -1269,18 +1268,6 @@
                 "extension": "ts",
                 "relPath": "src/node/SMarkdownBuilder.ts",
                 "children": {
-                    "registertransformer": {
-                        "name": "registerTransformer",
-                        "type": "Function",
-                        "description": "This static method allows you to register a new transformer",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "registerhelper": {
                         "name": "registerHelper",
                         "type": "Function",
@@ -1329,18 +1316,6 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "marked": {
-                        "name": "marked",
-                        "type": "Object",
-                        "description": "Access the marked object through this property",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "markdownbuildersettings": {
                         "name": "markdownBuilderSettings",
                         "type": "ISMarkdownBuilderSettings",
@@ -1356,6 +1331,18 @@
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "build": {
+                        "name": "build",
+                        "type": "Function",
+                        "description": "This method is the internal builder _build one.\nIt will be called by the SBuilder class with the final params\nfor the build",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

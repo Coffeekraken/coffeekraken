@@ -111,7 +111,7 @@ export default function ({
         () => `
       /**
         * @name          Blockquote
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/blockquote
         * @platform       css
@@ -211,7 +211,7 @@ export default function ({
         vars.comment(
             () => `/**
         * @name           s-blockquote
-        * @namespace      sugar.css.ui.blockquote
+        * @namespace          sugar.style.ui.blockquote
         * @type           CssClass
         * 
         * This class represent a <span class="s-tc:accent">bare</span> blockquote
@@ -241,7 +241,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           ${cls}
-            * @namespace      sugar.css.ui.blockquote
+            * @namespace          sugar.style.ui.blockquote
             * @type           CssClass
             * 
             * This class represent a <span class="s-tc:accent">${style}</span> blockquote
@@ -272,7 +272,7 @@ export default function ({
             vars.comment(
                 () => `/**
         * @name           ${cls}
-        * @namespace      sugar.css.ui.blockquote
+        * @namespace          sugar.style.ui.blockquote
         * @type           CssClass
         * 
         * This class represent a <span class="s-tc:accent">${shape}</span> blockquote
@@ -308,7 +308,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-format:text bloquote
-            * @namespace      sugar.css.ui.blockquote
+            * @namespace          sugar.style.ui.blockquote
             * @type           CssClass
             * 
             * This class represent a simple blockquote tag in the s-format:text scope
@@ -340,7 +340,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-rhythm:vertical
-            * @namespace      sugar.css.ui.blockquote
+            * @namespace          sugar.style.ui.blockquote
             * @type           CssClass
             * 
             * This class represent some blockquotes in the s-rhythm:vertical scope

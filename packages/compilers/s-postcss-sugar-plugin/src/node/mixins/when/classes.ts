@@ -58,7 +58,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-when:${state}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -84,7 +84,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-when:sibling:${state}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -113,7 +113,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-when:siblings:${state}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -142,7 +142,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-when:parent:${state}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -171,7 +171,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-when:grandparent:${state}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -200,7 +200,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-when:ancestor:${state}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -230,7 +230,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name          s-when:dark
-        * @namespace          sugar.css.when
+        * @namespace          sugar.style.when
         * @type               CssClass
         * @platform             css
         * @status             beta
@@ -260,7 +260,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name          s-when:light
-        * @namespace          sugar.css.when
+        * @namespace          sugar.style.when
         * @type               CssClass
         * @platform             css
         * @status             beta
@@ -293,7 +293,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-when:media:${query}
-            * @namespace          sugar.css.when
+            * @namespace          sugar.style.when
             * @type               CssClass
             * @platform             css
             * @status             beta

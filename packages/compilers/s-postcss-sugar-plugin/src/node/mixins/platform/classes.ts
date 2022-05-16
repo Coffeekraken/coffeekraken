@@ -75,7 +75,7 @@ export default function ({
         
         /**
          * @name            s-platform:${name}
-         * @namespace       sugar.css.platform
+         * @namespace          sugar.style.platform
          * @type            CssClass
          * @platform          css
          * @status          beta

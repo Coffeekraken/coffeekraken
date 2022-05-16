@@ -48,7 +48,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-overflow:auto
-    * @namespace          sugar.css.overflow
+    * @namespace          sugar.style.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -69,7 +69,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-overflow:hidden
-    * @namespace          sugar.css.overflow
+    * @namespace          sugar.style.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -90,7 +90,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-overflow:inherit
-    * @namespace          sugar.css.overflow
+    * @namespace          sugar.style.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -111,7 +111,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-overflow:initial
-    * @namespace          sugar.css.overflow
+    * @namespace          sugar.style.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -132,7 +132,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-overflow:overlay
-    * @namespace          sugar.css.overflow
+    * @namespace          sugar.style.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -153,7 +153,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-overflow:revert
-    * @namespace          sugar.css.overflow
+    * @namespace          sugar.style.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -174,7 +174,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-overflow:scroll
-    * @namespace          sugar.css.overflow
+    * @namespace          sugar.style.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -195,7 +195,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-overflow:visible
-    * @namespace          sugar.css.overflow
+    * @namespace          sugar.style.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -216,7 +216,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-overflow:unset
-    * @namespace          sugar.css.overflow
+    * @namespace          sugar.style.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta

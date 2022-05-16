@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -17,6 +18,9 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-data-handler-generic",
+            "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -36,6 +40,7 @@
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +58,7 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
@@ -67,7 +72,6 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
-            "@coffeekraken/s-view-renderer-data-handler-js",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
@@ -145,7 +149,23 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.viewsDir": {
                 "name": "viewsDir",
                 "type": "String",
-                "default": "[config.storage.src.rootDir]/views",
+                "default": "[config.storage.src.viewsDir]",
+                "description": "Specify the views directory path",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
+            "@coffeekraken.s-frontend-server.config.frontendServer.pagesDir": {
+                "name": "pagesDir",
+                "type": "String",
+                "default": "[config.storage.src.pagesDir]",
                 "description": "Specify the views directory path",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
                 "since": "2.0.0",
@@ -285,6 +305,37 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts"
             },
+            "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir.description": {
+                "name": "description",
+                "type": "String",
+                "description": "Specify the module description",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
+            "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir.path": {
+                "name": "path",
+                "type": "String",
+                "default": "${__dirname()}/../node/modules/publicDir/publicDir",
+                "description": "Specify where to find the \"publicDir\" module",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap.description": {
                 "name": "description",
                 "type": "String",
@@ -337,37 +388,6 @@
                 "default": "${__dirname()}/../node/modules/redirect/redirect",
                 "description": "Specify where to find the \"redirect\" module",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.redirect",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.styleguide.description": {
-                "name": "description",
-                "type": "String",
-                "description": "Specify the module description",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.styleguide",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.styleguide.path": {
-                "name": "path",
-                "type": "String",
-                "default": "${__dirname()}/../node/modules/styleguide/styleguide",
-                "description": "Specify where to find the \"styleguide\" module",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.styleguide",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -438,201 +458,13 @@
                 },
                 "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.api.path": {
-                "name": "path",
-                "type": "String",
-                "default": "${__dirname()}/../node/modules/api/api",
-                "description": "Specify where to find the \"api\" module",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.api",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.view.description": {
-                "name": "description",
-                "type": "String",
-                "description": "Specify the module description",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.view",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.view.path": {
-                "name": "path",
-                "type": "String",
-                "default": "${__dirname()}/../node/modules/view/view",
-                "description": "Specify where to find the \"view\" module",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.view",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.view.settings.slug": {
-                "name": "slug",
-                "type": "String",
-                "default": "/view/*",
-                "description": "Specify the slug you want that trigger the view handler",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.view.settings",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.view.settings.indexView": {
-                "name": "indexView",
-                "type": "String",
-                "default": "index",
-                "description": "Specify the dotpath of the view that has to be used as \"index\" when the path is just \"/\"",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.view.settings",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.api.docmap.handler": {
-                "name": "handler",
-                "type": "String",
-                "default": "view",
-                "description": "Specify which handle to use for requests on \"/docmap.json\"",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.api.docmap",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.handlers.doc.description": {
-                "name": "description",
-                "type": "String",
-                "description": "Handler description",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.handlers.doc",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.handlers.doc.path": {
-                "name": "path",
-                "type": "String",
-                "default": "${__dirname()}/../node/handlers/doc",
-                "description": "Store all the \"doc\" configuration access like the route, the title, etc...",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.handlers.doc",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.handlers.markdown.description": {
-                "name": "description",
-                "type": "String",
-                "description": "Handler description",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.handlers.markdown",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.handlers.markdown.path": {
-                "name": "path",
-                "type": "String",
-                "default": "${__dirname()}/../node/handlers/markdown",
-                "description": "Store all the \"markdown\" configuration access like the route, the title, etc...",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.handlers.markdown",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.handlers.docmap.description": {
-                "name": "description",
-                "type": "String",
-                "description": "Handler description",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.handlers.docmap",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.ts"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.handlers.docmap.path": {
-                "name": "path",
-                "type": "String",
-                "default": "${__dirname()}/../node/handlers/docmap",
-                "description": "Store all the \"api doc\" configuration access like the route, the title, etc...",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.handlers.docmap",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontendServer.config.ts",
-                "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts",
                 "children": {
                     "description": {
                         "name": "description",
                         "type": "String",
                         "description": "Specify the module description",
-                        "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.frontspec",
+                        "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -643,8 +475,8 @@
                     "path": {
                         "name": "path",
                         "type": "String",
-                        "default": "${__dirname()}/../node/modules/docmap/docmap",
-                        "description": "Specify where to find the \"docmap\" module",
+                        "default": "${__dirname()}/../node/modules/dynamic/dynamic",
+                        "description": "Specify where to find the \"dynamic\" module",
                         "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap",
                         "since": "2.0.0",
                         "author": {
@@ -740,7 +572,19 @@
                     "start": {
                         "name": "start",
                         "type": "Function",
-                        "description": "This function take as parameter an Partial<ISFrontendServerParams> object,\nstart a server using these parameters and returns an SPromise instance\nthrough which you can subscribe for events, etc...",
+                        "description": "This function take as parameter an Partial<ISFrontendServerStartParams> object,\nstart a server using these parameters and returns an SPromise instance\nthrough which you can subscribe for events, etc...",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "adddefaultpages": {
+                        "name": "addDefaultPages",
+                        "type": "Function",
+                        "description": "This method will add some default pages to your project with the pages configuration in the \"src/pages\" folder.",
                         "async": "true",
                         "since": "2.0.0",
                         "author": {
@@ -1184,6 +1028,29 @@
                 "relPath": "src/node/handlers/markdown.ts",
                 "children": {}
             },
+            "@coffeekraken.s-frontend-server.node.interface.SFrontendServerAddDefaultPagesParamsInterface": {
+                "name": "SFrontendServerAddDefaultPagesParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a frontend server adding default pages process.",
+                "namespace": "@coffeekraken.s-frontend-server.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFrontendServerAddDefaultPagesParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SFrontendServerAddDefaultPagesParamsInterface.ts",
+                "children": {}
+            },
             "@coffeekraken.s-frontend-server.node.interface.SFrontendServerStartParamsInterface": {
                 "name": "SFrontendServerStartParamsInterface",
                 "type": ".                      Class",
@@ -1345,23 +1212,6 @@
                 "relPath": "src/node/pages/error.js",
                 "children": {}
             },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.styleguide.apiHandler": {
-                "name": "apiHandler",
-                "type": "Function",
-                "description": "This function is responsible of responding to express requests made on the api pages",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.styleguide",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "apiHandler.ts",
-                "extension": "ts",
-                "relPath": "src/node/modules/api/apiHandler.ts",
-                "children": {}
-            },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.configMiddleware": {
                 "name": "configMiddleware",
                 "type": "Function",
@@ -1383,23 +1233,6 @@
                 "filename": "configMiddleware.ts",
                 "extension": "ts",
                 "relPath": "src/node/modules/config/configMiddleware.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.node.modules.docmap.docmapHandler": {
-                "name": "docmapHandler",
-                "type": "Function",
-                "description": "This function is responsible of responding to express requests made on the doc pages",
-                "namespace": "@coffeekraken.s-frontend-server.node.modules.docmap",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "docmapHandler.ts",
-                "extension": "ts",
-                "relPath": "src/node/modules/docmap/docmapHandler.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.docmapMiddleware": {
@@ -1480,40 +1313,6 @@
                 "filename": "redirectHandler.ts",
                 "extension": "ts",
                 "relPath": "src/node/modules/redirect/redirectHandler.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.styleguide.styleguideHandler": {
-                "name": "styleguideHandler",
-                "type": "Function",
-                "description": "This function is responsible of responding to express requests made on the doc pages",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.styleguide",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "styleguideHandler.ts",
-                "extension": "ts",
-                "relPath": "src/node/modules/styleguide/styleguideHandler.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.node.modules.view.views": {
-                "name": "views",
-                "type": "Function",
-                "description": "This function is responsible of responding to express requests made on the \"views\" section",
-                "namespace": "@coffeekraken.s-frontend-server.node.modules.view",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "viewHandler.ts",
-                "extension": "ts",
-                "relPath": "src/node/modules/view/viewHandler.ts",
                 "children": {}
             }
         }

@@ -103,7 +103,7 @@ export default function ({
         () => `
       /**
         * @name          Table
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/table
         * @platform       css
@@ -275,7 +275,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-table
-            * @namespace      sugar.css.ui.table
+            * @namespace          sugar.style.ui.table
             * @type           CssClass
             * 
             * This class represent a(n) "<yellow>bare</yellow>" table
@@ -318,7 +318,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           s-table${isDefaultStyle ? '' : `:${style}`}
-            * @namespace      sugar.css.ui.table
+            * @namespace          sugar.style.ui.table
             * @type           CssClass
             * 
             * This class represent a(n) "<yellow>${style}</yellow>" table
@@ -362,7 +362,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           s-table${isDefaultShape ? '' : `:${shape}`}
-            * @namespace      sugar.css.ui.table
+            * @namespace          sugar.style.ui.table
             * @type           CssClass
             * 
             * This class represent a(n) "<yellow>${shape}</yellow>" table
@@ -399,7 +399,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-format:text
-        * @namespace      sugar.css.ui.table
+        * @namespace          sugar.style.ui.table
         * @type           CssClass
         * 
         * This class represent a simple table tag in the s-format:text scope
@@ -437,7 +437,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-rhythm:vertical
-        * @namespace      sugar.css.ui.table
+        * @namespace          sugar.style.ui.table
         * @type           CssClass
         * 
         * This class represent some tables in the s-rhythm:vertical scope

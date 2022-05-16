@@ -287,7 +287,8 @@ export default class SPageTransitionFeature extends __SFeature {
                 $source.classList.add('s-tc:error');
             }
             // broken link icon
-            if (this.props.injectBrokenLinkIcon) {
+            // @ts-ignore
+            if (this.props.injectBrokenLinkIcon && !$source.querySelector('[s-page-transition-broken-link-icon]')) {
                 $source.innerHTML = `${$source.innerHTML}${this.props.brokenLinkIcon.replace(/^\<([a-z]+)/, '<$1 s-page-transition-broken-link-icon')}`;
             }
             // dispatch an error event

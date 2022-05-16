@@ -63,7 +63,7 @@ export default function ({
     vars.push(`
       /**
         * @name          Filtrable Input
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/filtrable-input
         * @platform       css
@@ -148,7 +148,7 @@ export default function ({
 
         vars.push(`/**
         * @name           ${cls}
-        * @namespace      sugar.css.ui.filtrableInput
+        * @namespace          sugar.style.ui.filtrableInput
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">${style}</s-color>" filtrable input
@@ -167,7 +167,7 @@ export default function ({
     if (finalParams.scope.indexOf('vr') !== -1) {
         vars.push(`/**
             * @name           s-rhythm:vertical
-            * @namespace      sugar.css.ui.filtrableInput
+            * @namespace          sugar.style.ui.filtrableInput
             * @type           CssClass
             * 
             * This class represent some filtrable inputs in the s-rhythm:vertical scope

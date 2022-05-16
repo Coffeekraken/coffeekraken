@@ -53,7 +53,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${opacityCls}
-    * @namespace        sugar.css.opacity
+    * @namespace          sugar.style.opacity
     * @type             CssClass
     * @platform             css
     * @status               beta

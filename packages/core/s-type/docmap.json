@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -17,6 +18,8 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-data-handler-generic",
+            "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -28,6 +31,7 @@
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -36,6 +40,7 @@
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,18 +58,21 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
@@ -120,6 +128,17 @@
                         "name": "registerType",
                         "type": "Function",
                         "description": "This static method allows you to register a new rule\nby passing a valid ISDescriptorRule object",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "parsetypestring": {
+                        "name": "parseTypeString",
+                        "type": "Function",
+                        "description": "This static method allows you to parse a type string using the `@coffeekraken/sugar/shared/type/parseTypeString` function.",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -677,27 +696,6 @@
                 "filename": "weaksetTypeDescriptor.ts",
                 "extension": "ts",
                 "relPath": "src/shared/descriptors/weaksetTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.shared.utils.parseTypeString": {
-                "name": "parseTypeString",
-                "type": "Function",
-                "description": "This method simply parse the passed typeString like \"string | number\", or \"string & path\", etc... and return\nan object defining this type string",
-                "namespace": "@coffeekraken.s-type.shared.utils",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { parseTypeString } from '@coffeekraken/s-type';\nparseTypeString('string | path');\n// {\n//   raw: 'string | path',\n//   types: [SType('string'), SType('path')],\n// }"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "parseTypeString.ts",
-                "extension": "ts",
-                "relPath": "src/shared/utils/parseTypeString.ts",
                 "children": {}
             }
         }

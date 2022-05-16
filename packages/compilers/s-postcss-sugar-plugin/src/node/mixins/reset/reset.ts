@@ -61,7 +61,7 @@ export default function ({
         () => `
         /**
         * @name          Global reset
-        * @namespace          sugar.css.resets
+        * @namespace          sugar.style.resets
         * @type               Styleguide
         * @menu           Styleguide / Resets        /styleguide/resets/global
         * @platform       css

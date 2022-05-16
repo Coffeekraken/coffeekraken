@@ -63,18 +63,20 @@ export function getMixinsOrFunctionsList(what: 'mixins' | 'functions') {
         .map((path) => {
             const relativePath = __path.relative(folderPath, path);
             let dotPath = relativePath
-                .replace(/\//g, '.')
-                .split('.')
-                .slice(0, -1)
-                .join('.');
+                    .replace(/\//g, '.')
+                    .split('.')
+                    .slice(0, -1)
+                    .join('.'),
+                dotCall = dotPath;
             const parts = dotPath.split('.');
             if (parts[0] === parts[1]) {
-                dotPath = parts[0];
+                dotCall = parts[0];
             }
 
             return {
                 path,
                 dotPath,
+                dotCall,
             };
         });
 

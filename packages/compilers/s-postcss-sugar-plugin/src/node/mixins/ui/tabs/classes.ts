@@ -104,7 +104,7 @@ export default function ({
         () => `
       /**
         * @name          Tabs
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/tabs
         * @platform       css
@@ -208,7 +208,7 @@ export default function ({
             () => `
             /**
               * @name           s-tabs
-              * @namespace      sugar.css.ui.tabs
+              * @namespace          sugar.style.ui.tabs
               * @type           CssClass
               * 
               * This class represent a "<yellow>bare</yellow>" tabs
@@ -234,7 +234,7 @@ export default function ({
               * @name           s-tabs${
                   finalParams.defaultStyle === style ? '' : `:${style}`
               }
-              * @namespace      sugar.css.ui.tabs
+              * @namespace          sugar.style.ui.tabs
               * @type           CssClass
               * 
               * This class represent a "<yellow>${style}</yellow>" tabs
@@ -263,7 +263,7 @@ export default function ({
             * @name           s-tabs${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             }
-            * @namespace      sugar.css.ui.tabs
+            * @namespace          sugar.style.ui.tabs
             * @type           CssClass
             * 
             * This class represent a "<yellow>${shape}</yellow>" tabs
@@ -292,7 +292,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-tabs--grow
-        * @namespace      sugar.css.ui.tabs
+        * @namespace          sugar.style.ui.tabs
         * @type           CssClass
         * 
         * This class represent a "<yellow>grow</yellow>" tabs
@@ -313,7 +313,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-tabs--vertical
-        * @namespace      sugar.css.ui.tabs
+        * @namespace          sugar.style.ui.tabs
         * @type           CssClass
         * 
         * This class represent a "<yellow>vertical</yellow>" tabs

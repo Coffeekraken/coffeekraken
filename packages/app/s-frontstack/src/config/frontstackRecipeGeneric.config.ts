@@ -457,6 +457,24 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     sitemapBuild: '[config.frontstack.actions.sitemapBuild]',
+                    /**
+                     * @name            copyAssets
+                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @type            String
+                     *
+                     * Specify the recipe build stack copyAssets action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    copyAssets: {
+                        extends: 'copy',
+                        params: {
+                            src: 'src',
+                            glob: '+(fonts|doc)',
+                            dest: 'dist',
+                        },
+                    },
                 },
             },
         },

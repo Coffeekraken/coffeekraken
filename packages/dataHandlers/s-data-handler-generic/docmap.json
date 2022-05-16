@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -17,6 +18,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -37,6 +39,7 @@
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -54,7 +57,7 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
@@ -68,6 +71,8 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
@@ -76,11 +81,11 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-view-renderer-data-handler-js.s-view.dataHandlers.js": {
-                "name": "js",
+            "@coffeekraken.s-data-handler-generic.node.SDataHandlerGeneric": {
+                "name": "SDataHandlerGeneric",
                 "type": "Function",
                 "description": "This function simply take the .data.js file path and return\nthe resulting object",
-                "namespace": "@coffeekraken.s-view-renderer-data-handler-js.s-view.dataHandlers",
+                "namespace": "@coffeekraken.s-data-handler-generic.node",
                 "status": "beta",
                 "since": "2.0.0",
                 "author": {
@@ -88,9 +93,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SViewRendererDataHandlerJs.ts",
+                "filename": "SDataHandlerGeneric.ts",
                 "extension": "ts",
-                "relPath": "src/node/SViewRendererDataHandlerJs.ts",
+                "relPath": "src/node/SDataHandlerGeneric.ts",
                 "children": {}
             }
         }

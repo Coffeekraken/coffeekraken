@@ -33,7 +33,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         () => `
       /**
         * @name          Colors
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/colors
         * @platform       css
@@ -89,7 +89,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             () => `
       /**
        * @name        s-color:${colorName}
-       * @namespace     sugar.css.ui.label
+       * @namespace          sugar.style.ui.label
        * @type          CssClass
        * 
        * This class allows you to apply the "<span class="s-color:${colorName}">${colorName}</span>" text color to any ui element.
@@ -115,7 +115,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             [
                 `/**`,
                 ` * @name           s-bg:${colorName}`,
-                ` * @namespace      sugar.css.color.bg.${colorName}`,
+                ` * @namespace          sugar.style.color.bg.${colorName}`,
                 ` * @type           CssClass`,
                 ` * @platform       css`,
                 ` * @status         beta`,
@@ -146,7 +146,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                 ` * @name           s-tc:${colorName}${
                     colorObj.variant === 'text' ? '' : modifierStr
                 }`,
-                ` * @namespace      sugar.css.color.${colorName}.${colorObj.variant}`,
+                ` * @namespace          sugar.style.color.${colorName}.${colorObj.variant}`,
                 ` * @type           CssClass`,
                 ` * @platform       css`,
                 ` * @status         beta`,
@@ -173,7 +173,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             [
                 `/**`,
                 ` * @name           s-bg:${colorName}${modifierStr}`,
-                ` * @namespace      sugar.css.color.bg.${colorName}.${colorObj.variant}`,
+                ` * @namespace          sugar.style.color.bg.${colorName}.${colorObj.variant}`,
                 ` * @type           CssClass`,
                 ` * @platform       css`,
                 ` * @status         beta`,
@@ -197,7 +197,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         [
             `/**`,
             ` * @name           s-bg:odd`,
-            ` * @namespace      sugar.css.bg.classes`,
+            ` * @namespace          sugar.style.bg.classes`,
             ` * @type           CssClass`,
             ` * @platform       css`,
             ` * @status         beta`,
@@ -221,7 +221,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         [
             `/**`,
             ` * @name           s-bg:even`,
-            ` * @namespace      sugar.css.color`,
+            ` * @namespace          sugar.style.color`,
             ` * @type           CssClass`,
             ` * @platform       css`,
             ` * @status         beta`,

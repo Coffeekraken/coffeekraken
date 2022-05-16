@@ -22,9 +22,11 @@ It can be to access theme values like `padding`, `margin`, etc... as well as col
 
 ### Available functions
 
+> Note that each mixin has his own documentation accessible by clicking or it...
+
 {{#each functions}}
 
--   `sugar.{{this.dotPath}}(...);`
+-   [`sugar.{{this.dotCall}}(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.function.{{this.dotPath}})
     {{/each}}
 
 {{/layout-doc }}

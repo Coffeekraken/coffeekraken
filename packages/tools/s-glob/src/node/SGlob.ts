@@ -9,6 +9,7 @@ import __SClass from '@coffeekraken/s-class';
 import SFile from '@coffeekraken/s-file';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 import __micromatch from 'micromatch';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 
 /**
  * @name                SGlob
@@ -41,7 +42,6 @@ export interface ISGlobCtorSettings {
     glob: Partial<ISGlobSettings>;
 }
 export interface ISGlobSettings {
-    resolve: Partial<IResolveGlobSettings>;
 }
 
 export { IResolveGlobSettings };
@@ -95,6 +95,33 @@ export default class SGlob extends __SClass {
         settings: Partial<IResolveGlobSettings> = {},
     ): SFile[] | string[] {
         return __resolveGlob(globs, settings);
+    }
+
+    /**
+     * @name                copySync
+     * @type                Function
+     * @static
+     *
+     * This static method allows you to specify a glob to select files as well as an output directory where to put these files in.
+     * Note that the settings.cwd will be used to create the relative to outDir pathes.
+     *
+     * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for
+     * @param       {String}                        outDir      The output directory where to put the files
+     * @param       {Partial<IResolveGlobSettings>}            [settings={}]           An object of settings to configure your glob process
+     * @return      {SFile[]|string[]}                                An array of SFile instances or string if is a directory
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static copySync(
+        globs: string | string[],
+        outDir: string,
+        settings: Partial<IResolveGlobSettings> = {},
+    ): SFile[] | string[] {
+        const sGlob = new SGlob(globs, {
+            glob: settings
+        });
+        return sGlob.copySync(outDir);
     }
 
     /**
@@ -169,7 +196,6 @@ export default class SGlob extends __SClass {
             __deepMerge(
                 {
                     glob: {
-                        resolve: {},
                     },
                 },
                 settings,
@@ -193,8 +219,43 @@ export default class SGlob extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     resolve(settings: Partial<IResolveGlobSettings> = {}): SFile[] | string[] {
-        settings = __deepMerge(this._settings.glob.resolve, {}, settings);
+        settings = __deepMerge(this._settings.glob, settings);
         return SGlob.resolve(this._globs, settings);
+    }
+
+    /**
+     * @name                copySync
+     * @type                Function
+     * @static
+     *
+     * This method allows you to specify a glob to select files as well as an output directory where to put these files in.
+     * Note that the settings.cwd will be used to create the relative to outDir pathes.
+     *
+     * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for
+     * @param       {String}                        outDir      The output directory where to put the files
+     * @param       {Partial<IResolveGlobSettings>}            [settings={}]           An object of settings to configure your glob process
+     * @return      {SFile[]|string[]}                                An array of SFile instances or string if is a directory
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    copySync(
+        outDir: string;
+        settings: Partial<IResolveGlobSettings> = {},
+    ): SFile[] | string[] {
+        settings = __deepMerge(this._settings.glob, {}, settings);
+        const files = this.resolve(this._globs, settings);
+        const copiedFiles: SFile | string[] = [];
+        for (let [key, file] of Object.entries(files)) {
+            const outPath = `${outDir}/${file.relPath}`;
+            __copySync(file.path, outPath);
+            if (settings.SFile) {
+                copiedFiles.push(SFile.new(outPath));
+            } else {
+                copiedFiles.push(`${outDir}/${file.relPath}`);
+            }
+        }
+        return copiedFiles;
     }
 
     /**

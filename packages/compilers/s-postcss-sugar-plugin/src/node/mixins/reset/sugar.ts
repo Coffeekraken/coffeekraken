@@ -55,7 +55,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name          Sugar reset
-        * @namespace          sugar.css.resets
+        * @namespace          sugar.style.resets
         * @type               Styleguide
         * @menu           Styleguide / Resets        /styleguide/resets/sugar
         * @platform       css

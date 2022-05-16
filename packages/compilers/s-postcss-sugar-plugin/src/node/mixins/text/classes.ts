@@ -53,7 +53,7 @@ export default function ({
         () => `
       /**
         * @name          Text
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/text
         * @platform       css
@@ -131,7 +131,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:left
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -155,7 +155,7 @@ export default function ({
         () => `
        /**
          * @name            s-text:right
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -179,7 +179,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:center
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -203,7 +203,7 @@ export default function ({
         () => `
            /**
          * @name            s-text:start
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -227,7 +227,7 @@ export default function ({
         () => `
           /**
          * @name            s-text:end
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -251,7 +251,7 @@ export default function ({
         () => `
          /**
          * @name            s-text:justify
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -275,7 +275,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:overline
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -299,7 +299,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:underline
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -323,7 +323,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:line-through
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -347,7 +347,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:lowercase
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -371,7 +371,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:uppercase
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -395,7 +395,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:capitalize
-         * @namespace       sugar.css.mixins.text
+         * @namespace          sugar.style.mixins.text
          * @type            CssClass
          * @platform      css
          * @status        beta

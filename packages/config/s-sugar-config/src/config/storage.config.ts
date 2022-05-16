@@ -222,6 +222,19 @@ export default function (env) {
             pagesDir: `[config.storage.src.rootDir]/pages`,
 
             /**
+             * @name            publicDir
+             * @namespace       config.storage.src
+             * @type            String
+             * @default         [config.storage.src.rootDir]/public
+             *
+             * Configure where is located the public source files
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            publicDir: `[config.storage.src.rootDir]/public`,
+
+            /**
              * @name            viewsDir
              * @namespace       config.storage.src
              * @type            String

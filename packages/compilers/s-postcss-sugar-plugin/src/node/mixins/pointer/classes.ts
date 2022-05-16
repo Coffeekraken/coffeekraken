@@ -50,7 +50,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-pointer-events:none
-    * @namespace          sugar.css.pointer
+    * @namespace          sugar.style.pointer
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -71,7 +71,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-pointer-events:all
-    * @namespace          sugar.css.pointer
+    * @namespace          sugar.style.pointer
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -92,7 +92,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-pointer-events:auto
-    * @namespace          sugar.css.pointer
+    * @namespace          sugar.style.pointer
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -113,7 +113,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-pointer-events:fill
-    * @namespace          sugar.css.pointer
+    * @namespace          sugar.style.pointer
     * @type               CssClass
     * @platform             css
     * @status             beta

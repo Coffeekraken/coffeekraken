@@ -49,7 +49,7 @@ export default function ({
     vars.push(`
       /**
         * @name          White space
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/white-space
         * @platform       css
@@ -135,7 +135,7 @@ export default function ({
     ].forEach((value) => {
         vars.push(`/**
     * @name          s-white-space:${value}
-    * @namespace          sugar.css.whiteSpace
+    * @namespace          sugar.style.whiteSpace
     * @type               CssClass
     * @platform             css
     * @status             beta

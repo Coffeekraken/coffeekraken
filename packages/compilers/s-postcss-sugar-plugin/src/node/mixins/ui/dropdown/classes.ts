@@ -103,7 +103,7 @@ export default function ({
         () => `
       /**
         * @name          Dropdown
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/dropdown
         * @platform       css
@@ -276,7 +276,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-dropdown
-            * @namespace      sugar.css.ui.dropdown
+            * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
             * 
             * This class represent a(n) "<yellow>bare</yellow>" dropdown
@@ -308,7 +308,7 @@ export default function ({
             * @name           s-dropdown${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             }
-            * @namespace      sugar.css.ui.dropdown
+            * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
             * 
             * This class represent a(n) "<yellow>${style}</yellow>" dropdown
@@ -345,7 +345,7 @@ export default function ({
         * @name           s-dropdown${
             finalParams.defaultShape === shape ? '' : `:${shape}`
         }
-        * @namespace      sugar.css.ui.dropdown
+        * @namespace          sugar.style.ui.dropdown
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>${shape}</yellow>" dropdown
@@ -376,7 +376,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-dropdown
-        * @namespace      sugar.css.ui.dropdown
+        * @namespace          sugar.style.ui.dropdown
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>bottom (center)</yellow>" aligned dropdown
@@ -404,7 +404,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-dropdown:bottom-start
-        * @namespace      sugar.css.ui.dropdown
+        * @namespace          sugar.style.ui.dropdown
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>bottom start</yellow>" aligned dropdown
@@ -432,7 +432,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-dropdown:bottom-end
-        * @namespace      sugar.css.ui.dropdown
+        * @namespace          sugar.style.ui.dropdown
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>bottom end</yellow>" aligned dropdown
@@ -460,7 +460,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-dropdown:top
-        * @namespace      sugar.css.ui.dropdown
+        * @namespace          sugar.style.ui.dropdown
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>top</yellow>" aligned dropdown
@@ -488,7 +488,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-dropdown:top-start
-        * @namespace      sugar.css.ui.dropdown
+        * @namespace          sugar.style.ui.dropdown
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>top-start</yellow>" aligned dropdown
@@ -516,7 +516,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-dropdown:top-end
-        * @namespace      sugar.css.ui.dropdown
+        * @namespace          sugar.style.ui.dropdown
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>top-end</yellow>" aligned dropdown
@@ -545,7 +545,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-dropdown-container
-            * @namespace      sugar.css.ui.tooltip
+            * @namespace          sugar.style.ui.tooltip
             * @type           CssClass
             * 
             * This class represent the tooltip container in which you have to put your actual .s-tooltip element
@@ -587,7 +587,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-dropdown-container:active
-            * @namespace      sugar.css.ui.dropdown
+            * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
             * 
             * This class allows you to display a dropdown inside a dropdown container without needing hover by the user

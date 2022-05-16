@@ -64,7 +64,7 @@ export default function ({
         () => `
       /**
         * @name          Format text
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssClass
         * @menu           Styleguide / Tools        /styleguide/tools/format-text
         * @platform       css
@@ -162,7 +162,7 @@ export default function ({
         () => `
       /**
         * @name          Rhythm vertical
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssClass
         * @menu           Styleguide / Tools        /styleguide/tools/rhythm-vertical
         * @platform       css

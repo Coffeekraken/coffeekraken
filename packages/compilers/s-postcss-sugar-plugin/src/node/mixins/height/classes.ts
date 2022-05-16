@@ -50,7 +50,7 @@ export default function ({
     vars.push(`
       /**
         * @name          Heights
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/heights
         * @platform       css
@@ -84,7 +84,7 @@ export default function ({
 
     vars.push(`/**
     * @name            s-height:viewport
-    * @namespace        sugar.css.width
+    * @namespace          sugar.style.width
     * @type             CssClass
     * @platform         css
     * @status         beta
@@ -112,7 +112,7 @@ export default function ({
     Object.keys(heightObj).forEach((name) => {
         vars.push(`/**
         * @name            s-height:${name}
-        * @namespace        sugar.css.width
+        * @namespace          sugar.style.width
         * @type             CssClass
         * @platform         css
         * @status           beta

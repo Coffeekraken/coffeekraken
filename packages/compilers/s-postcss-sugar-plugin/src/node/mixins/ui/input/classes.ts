@@ -102,7 +102,7 @@ export default function ({
         () => `
       /**
         * @name          Text Input
-        * @namespace          sugar.css.ui.input
+        * @namespace          sugar.style.ui.input
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/text-input
         * @platform       css
@@ -194,7 +194,7 @@ export default function ({
         vars.comment(
             () => `/**
         * @name           s-input
-        * @namespace      sugar.css.ui.input
+        * @namespace          sugar.style.ui.input
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>bare</yellow>" input
@@ -223,7 +223,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           ${cls}
-            * @namespace      sugar.css.ui.input
+            * @namespace          sugar.style.ui.input
             * @type           CssClass
             * 
             * This class represent a(n) "<yellow>${style}</yellow>" input
@@ -254,7 +254,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           ${cls}
-            * @namespace      sugar.css.ui.input
+            * @namespace          sugar.style.ui.input
             * @type           CssClass
             * 
             * This class represent a(n) "<yellow>${shape}</yellow>" input

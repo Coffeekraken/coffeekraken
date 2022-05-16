@@ -11,6 +11,7 @@ import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transit
 import {
     define as __SSliderComponent,
     SSliderSlideableBehavior,
+    SSliderCssAnimationBehavior,
 } from '@coffeekraken/s-slider-component';
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
@@ -34,7 +35,7 @@ import __STheme from '@coffeekraken/s-theme';
 import __SConductor from '@coffeekraken/s-conductor';
 import __krakenLogo from './generic/krakenLogo';
 
-import __SCssAnimate from '@coffeekraken/s-css-animate';
+import __SCssAnimation from '@coffeekraken/s-css-animation';
 
 // @ts-ignore
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
@@ -79,12 +80,12 @@ __SConductor.setup({
         if (typeof value.default === 'function') value.default();
     }
 
-    const $illustration = document.querySelector(
-        '#features-opensource .__illustration',
-    );
-    if ($illustration) {
-        const player = new __SCssAnimate($illustration);
-    }
+    // const $illustration = document.querySelector(
+    //     '#features-opensource .__illustration',
+    // );
+    // if ($illustration) {
+    //     const player = new __SCssAnimation($illustration);
+    // }
 
     // components
     __CKDiscoverComponent();
@@ -99,6 +100,10 @@ __SConductor.setup({
         availableBehaviors: {
             slideable: {
                 class: SSliderSlideableBehavior,
+                settings: {},
+            },
+            cssAnimation: {
+                class: SSliderCssAnimationBehavior,
                 settings: {},
             },
         },

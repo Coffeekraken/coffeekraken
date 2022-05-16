@@ -104,7 +104,7 @@ export default function ({
         () => `
       /**
         * @name          Checkbox
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/checkbox
         * @platform       css
@@ -220,7 +220,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-checkbox
-            * @namespace      sugar.css.ui.checkbox
+            * @namespace          sugar.style.ui.checkbox
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">bare</s-color>" checkbox
@@ -250,7 +250,7 @@ export default function ({
         vars.comment(
             () => `/**
         * @name           ${cls}
-        * @namespace      sugar.css.ui.checkbox
+        * @namespace          sugar.style.ui.checkbox
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">${style}</s-color>" checkbox
@@ -287,7 +287,7 @@ export default function ({
             vars.comment(
                 () => `/**
                 * @name           ${cls}
-                * @namespace      sugar.css.ui.checkbox
+                * @namespace          sugar.style.ui.checkbox
                 * @type           CssClass
                 * 
                 * This class represent a(n) "<s-color="accent">${shape}</s-color>" checkbox
@@ -319,7 +319,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-format:text
-            * @namespace      sugar.css.ui.checkbox
+            * @namespace          sugar.style.ui.checkbox
             * @type           CssClass
             * 
             * This class represent a simple input[type="checkbox"] tag in the s-format:text scope
@@ -350,7 +350,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-rhythm:vertical
-            * @namespace      sugar.css.ui.checkbox
+            * @namespace          sugar.style.ui.checkbox
             * @type           CssClass
             * 
             * This class represent some input[type="checkbox"] in the s-rhythm:vertical scope

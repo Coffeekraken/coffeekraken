@@ -104,7 +104,7 @@ export default function ({
         () => `
       /**
         * @name          Switch
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/form/switch
         * @platform       css
@@ -221,7 +221,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-switch
-            * @namespace      sugar.css.ui.switch
+            * @namespace          sugar.style.ui.switch
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">bare</s-color>" switch
@@ -255,7 +255,7 @@ export default function ({
             vars.comment(
                 () => `/**
                 * @name           ${cls}
-                * @namespace      sugar.css.ui.switch
+                * @namespace          sugar.style.ui.switch
                 * @type           CssClass
                 * 
                 * This class represent a(n) "<s-color="accent">${style}</s-color>" switch
@@ -292,7 +292,7 @@ export default function ({
             vars.comment(
                 () => `/**
         * @name           ${cls}
-        * @namespace      sugar.css.ui.switch
+        * @namespace          sugar.style.ui.switch
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">${shape}</s-color>" switch

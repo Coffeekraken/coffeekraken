@@ -16,9 +16,9 @@
 }
 
 #features-opensource {
-    .__illustration {
+    /* .__illustration {
         animation: 3s opensource-animation infinite;
-    }
+    } */
 
     .__box {
         position: relative;

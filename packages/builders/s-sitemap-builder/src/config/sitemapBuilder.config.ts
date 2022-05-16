@@ -9,14 +9,14 @@ export default (env, config) => {
              * @name            output
              * @namespace       config.sitemapBuilder.build
              * @type            String
-             * @default         [config.storage.package.rootDir]/sitemap.xml
+             * @default         [config.storage.src.publicDir]/sitemap.xml
              *
              * Specify if you want to use the docmap.json as a sitemap source
              *
              * @since           2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            output: `[config.storage.package.rootDir]/sitemap.xml`,
+            output: `[config.storage.src.publicDir]/sitemap.xml`,
         },
         sources: {
             file: {

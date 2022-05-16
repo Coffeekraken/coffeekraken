@@ -78,7 +78,7 @@ export default function ({
         () => `
       /**
         * @name          Families
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/families
         * @platform       css
@@ -115,7 +115,7 @@ export default function ({
         () => `
       /**
         * @name          Sizes
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/sizes
         * @platform       css
@@ -153,7 +153,7 @@ export default function ({
         () => `
       /**
         * @name          Styles
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/styles
         * @platform       css
@@ -187,7 +187,7 @@ export default function ({
         () => `
       /**
         * @name          Weights
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/weights
         * @platform       css
@@ -232,7 +232,7 @@ export default function ({
         () => `
       /**
         * @name          Stretches
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/stretches
         * @platform       css
@@ -272,7 +272,7 @@ export default function ({
         () => `
       /**
         * @name          Resets
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/resets
         * @platform       css
@@ -300,7 +300,7 @@ export default function ({
             () => `
         /**
         * @name          s-font:${fontName}
-        * @namespace          sugar.css.font
+        * @namespace          sugar.style.font
         * @type               CssClass
         * @platform       css
         * @status       beta
@@ -325,7 +325,7 @@ export default function ({
         vars.comment(
             () => `/**
   * @name          s-font:${sizeName}
-  * @namespace          sugar.css.mixins.font
+  * @namespace          sugar.style.mixins.font
   * @type               CssClass
   * @platform         css
   * @status           beta
@@ -346,7 +346,7 @@ export default function ({
     vars.comment(
         () => `/**
   * @name          s-font:reset-size
-  * @namespace          sugar.css.mixins.font
+  * @namespace          sugar.style.mixins.font
   * @type               CssClass
   * @platform         css
   * @status           beta
@@ -368,7 +368,7 @@ export default function ({
     vars.comment(
         () => `/**
   * @name          s-font:reset-family
-  * @namespace          sugar.css.mixins.font
+  * @namespace          sugar.style.mixins.font
   * @type               CssClass
   * @platform         css
   * @status           beta
@@ -391,7 +391,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-font:${value}
-            * @namespace          sugar.css.mixins.font
+            * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
             * @status           beta
@@ -414,7 +414,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-font:italic
-            * @namespace          sugar.css.mixins.font
+            * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
             * @status           beta
@@ -436,7 +436,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-font:oblique
-            * @namespace          sugar.css.mixins.font
+            * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
             * @status           beta
@@ -459,7 +459,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name          s-font:${value}
-            * @namespace          sugar.css.mixins.font
+            * @namespace          sugar.style.mixins.font
             * @type               CssClass
             * @platform         css
             * @status           beta

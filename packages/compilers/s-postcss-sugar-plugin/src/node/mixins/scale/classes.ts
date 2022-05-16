@@ -54,7 +54,7 @@ export default function ({
         () => `
       /**
         * @name          Scale
-        * @namespace          sugar.css.tools
+        * @namespace          sugar.style.tools
         * @type               Styleguide
         * @menu           Styleguide / Tools        /styleguide/tools/scale
         * @platform       css
@@ -103,7 +103,7 @@ export default function ({
         vars.comment(
             () => `/**
   * @name          s-scale:${scaleName}
-  * @namespace          sugar.css.scale
+  * @namespace          sugar.style.scale
   * @type               CssClass
   * @platform             css
   * @status             beta

@@ -56,7 +56,7 @@ export default function ({
         () => `
       /**
         * @name          Ratio
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/ratio
         * @platform       css
@@ -98,7 +98,7 @@ export default function ({
         vars.comment(
             () => `/**
   * @name          s-ratio:${ratioName.replace('/', '-')}
-  * @namespace          sugar.css.ratio
+  * @namespace          sugar.style.ratio
   * @type               CssClass
   * @platform             css
   * @status             beta

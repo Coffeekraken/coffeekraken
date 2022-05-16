@@ -49,7 +49,7 @@ export default function ({
         () => `
       /**
         * @name          Disabled
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/disabled
         * @platform       css
@@ -77,7 +77,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-disabled,[disabled]
-            * @namespace          sugar.css.disabled
+            * @namespace          sugar.style.disabled
             * @type               CssClass
             * @platform         css
             * @status           beta

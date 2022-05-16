@@ -470,9 +470,14 @@ export default class SFrontendServer extends __SClass {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             const pagesFolder = __SSugarConfig.get('storage.src.pagesDir');
 
-            const pagesFiles = __SGlob.resolve(`**/*.js`, {
-                cwd: pagesFolder,
-            });
+            const pagesFiles = __SGlob
+                .resolve(`**/*.js`, {
+                    cwd: pagesFolder,
+                })
+                .filter((file) => {
+                    if (file.name.split('.').length > 2) return false;
+                    return true;
+                });
 
             let _404PageFile;
 

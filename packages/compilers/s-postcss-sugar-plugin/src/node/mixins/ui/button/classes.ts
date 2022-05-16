@@ -105,7 +105,7 @@ export default function ({
         () => `
       /**
         * @name          Buttons
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/button
         * @platform       css
@@ -231,7 +231,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-btn
-            * @namespace      sugar.css.ui.button
+            * @namespace          sugar.style.ui.button
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">bare</s-color>" button
@@ -259,7 +259,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           ${cls}
-            * @namespace      sugar.css.ui.button
+            * @namespace          sugar.style.ui.button
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">${style}</s-color>" button
@@ -290,7 +290,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           ${cls}
-            * @namespace      sugar.css.ui.button
+            * @namespace          sugar.style.ui.button
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">${shape}</s-color>" button
@@ -314,7 +314,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-btn--block
-        * @namespace      sugar.css.ui.button
+        * @namespace          sugar.style.ui.button
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">block</s-color>" button
@@ -334,7 +334,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-btn-group
-        * @namespace      sugar.css.ui.button
+        * @namespace          sugar.style.ui.button
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">group</s-color>" of buttons
@@ -386,7 +386,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-format:text button
-            * @namespace      sugar.css.ui.button
+            * @namespace          sugar.style.ui.button
             * @type           CssClass
             * 
             * This class represent a simple button tag in the s-format:text scope
@@ -415,7 +415,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-rhythm:vertical
-            * @namespace      sugar.css.ui.button
+            * @namespace          sugar.style.ui.button
             * @type           CssClass
             * 
             * This class represent some buttons in the s-rhythm:vertical scope

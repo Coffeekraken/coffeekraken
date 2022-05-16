@@ -154,7 +154,7 @@ export default function ({
         () => `
       /**
         * @name          Icons
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/icons
         * @platform       css
@@ -222,7 +222,7 @@ export default function ({
                     () => `
                 /**
                  * @name        s-icon:${iconObj.as}
-                  * @namespace      sugar.css.icon
+                  * @namespace          sugar.style.icon
                   * @type           CssClass
                   * @platform       css
                   * @status         beta
@@ -251,7 +251,7 @@ export default function ({
                     () => `
                         /**
                          * @name        s-icon:${iconObj.as}
-                         * @namespace      sugar.css.icon
+                         * @namespace          sugar.style.icon
                          * @type           CssClass
                          * @platform         css
                          * @status         beta

@@ -104,7 +104,7 @@ export default function ({
         () => `
       /**
         * @name          Tooltips
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/tooltip
         * @platform       css
@@ -269,7 +269,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-toolip-container
-            * @namespace      sugar.css.ui.tooltip
+            * @namespace          sugar.style.ui.tooltip
             * @type           CssClass
             * 
             * This class represent the tooltip container in which you have to put your actual .s-tooltip element
@@ -316,7 +316,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-toolip-container:active
-            * @namespace      sugar.css.ui.tooltip
+            * @namespace          sugar.style.ui.tooltip
             * @type           CssClass
             * 
             * This class allows you to display a tooltip inside a tooltip container without needing hover by the user
@@ -338,7 +338,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-tooltip
-            * @namespace      sugar.css.ui.tooltip
+            * @namespace          sugar.style.ui.tooltip
             * @type           CssClass
             * 
             * This class represent a simple tooltip
@@ -369,7 +369,7 @@ export default function ({
                 * @name           s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
                 }
-                * @namespace      sugar.css.ui.tooltip
+                * @namespace          sugar.style.ui.tooltip
                 * @type           CssClass
                 * 
                 * This class represent a ${style} tooltip
@@ -405,7 +405,7 @@ export default function ({
                 * @name           s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
                 }
-                * @namespace      sugar.css.ui.tooltip
+                * @namespace          sugar.style.ui.tooltip
                 * @type           CssClass
                 * 
                 * This class represent a ${shape} tooltip
@@ -438,7 +438,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-tooltip--interactive
-        * @namespace      sugar.css.ui.tooltip
+        * @namespace          sugar.style.ui.tooltip
         * @type           CssClass
         * 
         * This class make a tooltip interactive. This mean that the user can hover the tooltip,
@@ -466,7 +466,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-tooltip
-        * @namespace      sugar.css.ui.tooltip
+        * @namespace          sugar.style.ui.tooltip
         * @type           CssClass
         * 
         * This class represent a simple block start (top) tooltip
@@ -493,7 +493,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-tooltip:right
-        * @namespace      sugar.css.ui.tooltip
+        * @namespace          sugar.style.ui.tooltip
         * @type           CssClass
         * 
         * This class represent a simple inline end (right) tooltip
@@ -520,7 +520,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-tooltip:left
-        * @namespace      sugar.css.ui.tooltip
+        * @namespace          sugar.style.ui.tooltip
         * @type           CssClass
         * 
         * This class represent a simple left tooltip
@@ -547,7 +547,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-tooltip:bottom
-        * @namespace      sugar.css.ui.tooltip
+        * @namespace          sugar.style.ui.tooltip
         * @type           CssClass
         * 
         * This class represent a simple block end (bottom) tooltip

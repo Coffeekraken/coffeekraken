@@ -37,7 +37,7 @@ import __convert from '../../../shared/time/convert';
  */
 
 function splitIfNeeded(what, separator) {
-    if (what.indexOf(separator) !== -1) {
+    if (what.includes?.(separator)) {
         return what.split(separator).map((item) => item.trim());
     }
     return [what];

@@ -45,22 +45,9 @@ This behavior will happen to all properties supported by the [postcssSugarPlugin
 
 Some classes will be generated from your theme configuration like these:
 
--   `s-typo:h{1,6}`
--   `s-typo:p`
--   `s-typo:lead`
--   `s-typo:hr`
--   `s-typo:pre`
--   `s-typo:code`
--   `s-typo:a`
--   `s-typo:quote`
--   `s-typo:b`
--   `s-typo:bold`
--   `s-typo:strong`
--   `s-typo:i`
--   `s-typo:italic`
--   `s-typo:em`
--   `s-typo:small`
--   For complete list, check the [styleguide typography documentation](/styleguide/helpers/typography)
--   etc...
+{{#each typos}}
+
+-   **s-typo:{{@key}}**
+    {{/each}}
 
 {{/layout-doc }}

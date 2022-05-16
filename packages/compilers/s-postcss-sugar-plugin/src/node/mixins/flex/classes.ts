@@ -50,7 +50,7 @@ export default function ({
         () => `
       /**
         * @name          Flexbox
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/flexbox
         * @platform       css
@@ -136,7 +136,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -155,7 +155,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:row
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -174,7 +174,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:row-reverse
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -193,7 +193,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:column
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -212,7 +212,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:column-reverse
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -231,7 +231,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:nowrap
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -250,7 +250,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:wrap
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -269,7 +269,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:wrap-reverse
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -288,7 +288,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:justify-start
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -307,7 +307,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:justify-flex-start
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -326,7 +326,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:justify-end
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -345,7 +345,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:justify-flex-end
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -364,7 +364,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:justify-center
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -383,7 +383,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:justify-space-between
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -402,7 +402,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:justify-space-around
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -421,7 +421,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:justify-space-evenly
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -440,7 +440,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:justify-stretch
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -459,7 +459,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:align-start
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -478,7 +478,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:align-flex-start
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -497,7 +497,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:align-end
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -516,7 +516,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:align-flex-end
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -535,7 +535,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:align-center
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -554,7 +554,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex:align-baseline
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -573,7 +573,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name          s-flex-item:grow
-        * @namespace          sugar.css.flex
+        * @namespace          sugar.style.flex
         * @type               CssClass
         * @platform           css
         * @status               beta
@@ -594,7 +594,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name          s-flex-item:shrink
-        * @namespace          sugar.css.flex
+        * @namespace          sugar.style.flex
         * @type               CssClass
         * @platform           css
         * @status               beta
@@ -616,7 +616,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name          s-flex-item:order-${i}
-                * @namespace          sugar.css.flex
+                * @namespace          sugar.style.flex
                 * @type               CssClass
                 * @platform           css
                 * @status               beta
@@ -639,7 +639,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name          s-flex-item:grow-${i}
-                * @namespace          sugar.css.flex
+                * @namespace          sugar.style.flex
                 * @type               CssClass
                 * @platform           css
                 * @status               beta
@@ -662,7 +662,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name          s-flex-item:shrink-${i}
-                * @namespace          sugar.css.flex
+                * @namespace          sugar.style.flex
                 * @type               CssClass
                 * @platform           css
                 * @status               beta
@@ -684,7 +684,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex-item:align-flex-start
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -705,7 +705,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex-item:align-flex-end
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -726,7 +726,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex-item:align-center
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -747,7 +747,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex-item:align-baseline
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta
@@ -768,7 +768,7 @@ export default function ({
     vars.comment(
         () => `/**
             * @name          s-flex-item:align-stretch
-            * @namespace          sugar.css.flex
+            * @namespace          sugar.style.flex
             * @type               CssClass
             * @platform           css
             * @status               beta

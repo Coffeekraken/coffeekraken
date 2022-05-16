@@ -54,7 +54,7 @@ export default function ({
         () => `
       /**
         * @name          Typography
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/typography
         * @platform       css
@@ -103,7 +103,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name            ${cls}
-            * @namespace        sugar.css.typo
+            * @namespace          sugar.style.typo
             * @type             CssClass
             * @platform         css
             * @status           beta
@@ -125,7 +125,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name            s-format:text ${typoName}
-            * @namespace        sugar.css.typo
+            * @namespace          sugar.style.typo
             * @type             CssClass
             * @platform         css
             * @status           beta
@@ -150,7 +150,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name            s-rhythm:vertical .${typoName}, s-rhythm:vertical ${typoName}
-            * @namespace        sugar.css.typo
+            * @namespace          sugar.style.typo
             * @type             CssClass
             * @platform         css
             * @status           beta

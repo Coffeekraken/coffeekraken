@@ -3,11 +3,8 @@
     "generated": {
         "extends": [
             "coco",
-            "@coffeekraken/both",
-            "@coffeekraken/cjs",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/esm",
             "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
@@ -20,6 +17,9 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-data-handler-generic",
+            "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -40,6 +40,7 @@
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -57,7 +58,7 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-scroll-to-component",
+            "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
@@ -71,7 +72,6 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
-            "@coffeekraken/s-view-renderer-data-handler-js",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
@@ -1644,6 +1644,36 @@
                 "filename": "read.ts",
                 "extension": "ts",
                 "relPath": "src/node/clipboard/read.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.node.coffeekraken.getCoffeekrakenMetas": {
+                "name": "getCoffeekrakenMetas",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function will returns you the coffeekraken metas object containing things like:\n- version: The version of the coffeekraken stack used",
+                "namespace": "@coffeekraken.sugar.node.coffeekraken",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __getCoffeekrakenMetas from '@coffeekraken/sugar/node/coffeekraken/getCoffeekrakenMetas';\nawait __getCoffeekrakenMetas();"
+                    }
+                ],
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getCoffeekrakenMetas.ts",
+                "extension": "ts",
+                "relPath": "src/node/coffeekraken/getCoffeekrakenMetas.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.command.commandExists": {
@@ -3467,6 +3497,64 @@
                 "filename": "install.ts",
                 "extension": "ts",
                 "relPath": "src/node/npm/install.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.node.npm.listNodeModulesPackages": {
+                "name": "listNodeModulesPackages",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function list all the packages that are installed in the node_modules folder(s).\nYou can specify that you want either the current package node_modules folder listed,\nand the root node_modules folder for monorepo as well.",
+                "namespace": "@coffeekraken.sugar.node.npm",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';\nlistNodeModulesPackages();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "listNodeModulesPackages.ts",
+                "extension": "ts",
+                "relPath": "src/node/npm/listNodeModulesPackages.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.node.npm.packageJson": {
+                "name": "packageJson",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function simply take a package name as parameter, and return the corresponding\npackage.json JSON content",
+                "namespace": "@coffeekraken.sugar.node.npm",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import packageJson from '@coffeekraken/sugar/node/npm/packageJson`;\npackagrJson('lodash');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "packageJson.ts",
+                "extension": "ts",
+                "relPath": "src/node/npm/packageJson.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.npm.SNpmUnusedProcess": {
@@ -10464,6 +10552,39 @@
                 "relPath": "src/shared/object/watch.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.semver.parseSemverString": {
+                "name": "parseSemverString",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Parse a semver string and return a semver object using the nice [semver](https://github.com/npm/node-semver) parser.",
+                "namespace": "@coffeekraken.sugar.js.semver",
+                "status": "stable",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __parseSemverString from '@coffeekraken/sugar/shared/semver/parseSemverString';\n__parseSemverString('2.3.1);\n// {\n//    options: {},\n//    loose: false,\n//    includePrerelease: false,\n//    raw: '2.3.1',\n//    major: 2,\n//    minor: 3,\n//    patch: 1,\n//    prerelease: [],\n//    build: [],\n//    version: '2.3.1',\n// }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "parseSemverString.ts",
+                "extension": "ts",
+                "relPath": "src/shared/semver/parseSemverString.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.string.autoCast": {
                 "name": "autoCast",
                 "type": "Function",
@@ -11682,6 +11803,27 @@
                 "relPath": "src/shared/token/replaceTokens.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.shared.utils.parseTypeString": {
+                "name": "parseTypeString",
+                "type": "Function",
+                "description": "This method simply parse the passed typeString like \"string | number\", or \"string & path\", etc... and return\nan object defining this type string",
+                "namespace": "@coffeekraken.sugar.shared.utils",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __parseTypeString from '@coffeekraken/sugar/shared/type/parseTypeString';\nparseTypeString('string|number');\n//[{\n//   type: 'string',\n//   of: undefined,\n//}, {\n//   type: 'number',\n//   of: undefined,\n//}]"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "parseTypeString.ts",
+                "extension": "ts",
+                "relPath": "src/shared/type/parseTypeString.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.unit.convert": {
                 "name": "convert",
                 "type": "Function",
@@ -12508,42 +12650,6 @@
                         "code": "import whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract'\nawait whenInteract(myCoolElement, {});"
                     }
                 ],
-                "interface": {
-                    "name": "WhenInteractSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "mouseover": {
-                            "description": "Specify if the mouseover event has to be used",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "mouseout": {
-                            "description": "Specify if the mouseout event has to be used",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "click": {
-                            "description": "Specify if the click event has to be used",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "touchstart": {
-                            "description": "Specify if the touchstart event has to be used",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "touchend": {
-                            "description": "Specify if the touchend event has to be used",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "focus": {
-                            "description": "Specify if the focus event has to be used",
-                            "type": "Boolean",
-                            "default": true
-                        }
-                    }
-                },
                 "async": "true",
                 "since": "1.0.0",
                 "author": {
@@ -14221,6 +14327,35 @@
                 "relPath": "src/js/dom/slide/slideable.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.dom.style.cssEasingStrToJsFunction": {
+                "name": "cssEasingStrToJsFunction",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Convert a css easing string line \"cubic-bezier(.17,.67,.83,.67)\" to a js easing function",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import cssEasingStrToJsFunction from '@coffeekraken/sugar/js/dom/cssEasingStrToJsFunction'\nconst fn = cssEasingStrToJsFunction('cubic-bezier(.17,.67,.83,.67)');\nfn(0.5);\nfn(0.34);"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "cssEasingStrToJsFunction.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/cssEasingStrToJsFunction.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.dom.style.getAnimationProperties": {
                 "name": "getAnimationProperties",
                 "type": "Function",
@@ -14248,6 +14383,151 @@
                 "filename": "getAnimationProperties.ts",
                 "extension": "ts",
                 "relPath": "src/js/dom/style/getAnimationProperties.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.style.getAnimationsFromElement": {
+                "name": "getAnimationsFromElement",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Get the animations applied to the passed element.",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import getAnimationsFromElement from '@coffeekraken/sugar/js/dom/getAnimationsFromElement'\nconst props = getAnimationsFromElement(myCoolHTMLElement);\n// output format\n// [{\n//   name : 'animation1',\n// \tduration : 200,\n// \tdelay : 0,\n// \ttimingFunction : 'linear',\n// \titerationCount : 1,\n// \tdirection : 'forward',\n//   playState: 'running',\n//   fillMode: 'none'\n// }]"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getAnimationsFromElement.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/getAnimationsFromElement.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.style.getCssDeclarations": {
+                "name": "getCssDeclarations",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Get all the CSSRules of the passed type",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __getCssDeclarations from '@coffeekraken/sugar/js/dom/style/getCssDeclarations';\n__getCssDeclarations('style', [myCoolCssRules]);"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getCssDeclarations.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/getCssDeclarations.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.style.getCssRulesFromStylesheet": {
+                "name": "getCssRulesFromStylesheet",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Get all the CSSRules of the passed stylesheet",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __getCssRulesFromStylesheet from '@coffeekraken/sugar/js/dom/style/getCssRulesFromStylesheet';\n__getCssRulesFromStylesheet(myStylesheet);"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getCssRulesFromStylesheet.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/getCssRulesFromStylesheet.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.style.getDefinedStyles": {
+                "name": "getDefinedStyles",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Gets map of defined styles from CSS2Properties object",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __getDefinedStyles from '@coffeekraken/sugar/js/dom/style/getDefinedStyles';"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getDefinedStyles.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/getDefinedStyles.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.style.getKeyframesDeclarations": {
+                "name": "getKeyframesDeclarations",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Get all the keyframes declarations from the passed rules",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __getKeyframesDeclarations from '@coffeekraken/sugar/js/dom/style/getKeyframesDeclarations';\n__getKeyframesDeclarations('myCoolAnimation', [myCoolCssRules]);"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getKeyframesDeclarations.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/getKeyframesDeclarations.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getRotateProperties": {
@@ -14424,6 +14704,93 @@
                 "relPath": "src/js/dom/style/getTranslateProperties.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.dom.style.parseKeyframeKey": {
+                "name": "parseKeyframeKey",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Parses KeyFrameRule.keyText to an array of integers holding keyframe percentages",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __parseKeyframeKey from '@coffeekraken/sugar/js/dom/style/parseKeyframeKey';\n__parseKeyframeKey('from');"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "parseKeyframeKey.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/parseKeyframeKey.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.style.parseTransformRule": {
+                "name": "parseTransformRule",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Parse the transform rule of an element and returns a simple object with each properties separated.",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __parseTransformRule from '@coffeekraken/sugar/js/dom/style/parseTransformRule';\n__parseTransformRule('translate(-100px, 200rem));"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "parseTransformRule.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/parseTransformRule.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.style.removeVendorPrefix": {
+                "name": "removeVendorPrefix",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Remove vendor prefixes from CSSPropertyNames",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __removeVendorPrefix from '@coffeekraken/sugar/js/dom/style/removeVendorPrefix';\n__removeVendorPrefix('moz-something'); // 'something'"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "removeVendorPrefix.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/removeVendorPrefix.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.dom.style.style": {
                 "name": "style",
                 "type": "Function",
@@ -14509,6 +14876,35 @@
                 "filename": "styleString2Object.ts",
                 "extension": "ts",
                 "relPath": "src/js/dom/style/styleString2Object.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.style.transformKeyframesDeclarations": {
+                "name": "transformKeyframesDeclarations",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Transforms KeyFrameRule to array of web animation compatible keyframes",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __transformKeyframesDeclarations from '@coffeekraken/sugar/js/dom/style/transformKeyframesDeclarations';"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "transformKeyframesDeclarations.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/transformKeyframesDeclarations.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.tag.appendScriptTag": {
@@ -15293,64 +15689,6 @@
                 "filename": "isPortFree.ts",
                 "extension": "ts",
                 "relPath": "src/node/network/utils/isPortFree.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.node.npm.utils.listNodeModulesPackages": {
-                "name": "listNodeModulesPackages",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function list all the packages that are installed in the node_modules folder(s).\nYou can specify that you want either the current package node_modules folder listed,\nand the root node_modules folder for monorepo as well.",
-                "namespace": "@coffeekraken.sugar.node.npm.utils",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import listNodeModulesPackages from '@coffeekraken/sugar/node/npm/utils/listNodeModulesPackages';\nlistNodeModulesPackages();"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "listNodeModulesPackages.ts",
-                "extension": "ts",
-                "relPath": "src/node/npm/utils/listNodeModulesPackages.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.node.npm.utils.packageJson": {
-                "name": "packageJson",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function simply take a package name as parameter, and return the corresponding\npackage.json JSON content",
-                "namespace": "@coffeekraken.sugar.node.npm.utils",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import packageJson from '@coffeekraken/sugar/node/npm/utils/packageJson`;\npackagrJson('lodash');"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "packageJson.ts",
-                "extension": "ts",
-                "relPath": "src/node/npm/utils/packageJson.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.class.utils.functionToClass": {

@@ -68,7 +68,10 @@ function getAnimationProperties(elm: HTMLElement) {
         name: name.split(','),
         duration: duration.split(',').map((value) => __convert(value, 'ms')),
         delay: `${delay}`.split(',').map((value) => __convert(value, 'ms')),
-        timingFunction: timingFunction.split(','),
+        timingFunction:
+            timingFunction.split?.(',') ?? timingFunction.name
+                ? [timingFunction.name]
+                : ['linear'],
         iterationCount: `${iterationCount}`.split(','),
         direction: direction.split(','),
         fillMode: fillMode.split(','),

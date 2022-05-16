@@ -109,27 +109,6 @@ Some out of the box variants are available through the `themeLightBase.config.ts
 -   `border`: Used for borders
 -   `gradientStart`: Used for gradients as the start color
 -   `gradientEnd`: Used for gradients as the end color
--   `0`: Color palette 0
--   `5`: Color palette 5
--   `10`: Color palette 10
--   `15`: Color palette 15
--   `20`: Color palette 20
--   `25`: Color palette 25
--   `30`: Color palette 30
--   `35`: Color palette 35
--   `40`: Color palette 40
--   `45`: Color palette 45
--   `50`: Color palette 50
--   `55`: Color palette 55
--   `60`: Color palette 60
--   `65`: Color palette 65
--   `70`: Color palette 70
--   `75`: Color palette 75
--   `80`: Color palette 80
--   `85`: Color palette 85
--   `90`: Color palette 90
--   `95`: Color palette 95
--   `100`: Color palette 100
 
 ## `current` color
 

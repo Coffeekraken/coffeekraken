@@ -47,7 +47,7 @@ export default function ({
     vars.push(`
       /**
         * @name          Visibility
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/visibility
         * @platform       css
@@ -77,7 +77,7 @@ export default function ({
 
     vars.push(`/**
     * @name          s-visibility:hidden
-    * @namespace          sugar.css.visibility
+    * @namespace          sugar.style.visibility
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -93,7 +93,7 @@ export default function ({
 
     vars.push(`/**
     * @name          s-visibility:visible
-    * @namespace          sugar.css.visibility
+    * @namespace          sugar.style.visibility
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -109,7 +109,7 @@ export default function ({
 
     vars.push(`/**
     * @name          s-visibility:collapse
-    * @namespace          sugar.css.visibility
+    * @namespace          sugar.style.visibility
     * @type               CssClass
     * @platform             css
     * @status             beta

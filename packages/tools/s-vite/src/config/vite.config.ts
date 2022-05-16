@@ -248,10 +248,16 @@ export default function (env, config) {
                 '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$': {
                     target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
                     changeOrigin: true,
+                    rewrite: (path) => {
+                        return path;
+                    },
                 },
                 '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|\\@id|__vite_ping|index.html).)*$': {
                     target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
                     changeOrigin: true,
+                    rewrite: (path) => {
+                        return path;
+                    },
                 },
             },
         },

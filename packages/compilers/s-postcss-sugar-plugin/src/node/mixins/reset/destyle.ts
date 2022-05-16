@@ -52,7 +52,7 @@ export default function ({
         () => `
        /**
         * @name          Destyle reset
-        * @namespace          sugar.css.resets
+        * @namespace          sugar.style.resets
         * @type               Styleguide
         * @menu           Styleguide / Resets        /styleguide/resets/destyle
         * @platform       css

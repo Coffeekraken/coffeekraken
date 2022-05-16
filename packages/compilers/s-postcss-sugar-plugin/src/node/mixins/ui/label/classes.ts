@@ -90,7 +90,7 @@ export default function ({
         () => `
       /**
         * @name          Labels
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/labels
         * @platform       css
@@ -159,7 +159,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name           ${cls}
-                * @namespace      sugar.css.ui.label
+                * @namespace          sugar.style.ui.label
                 * @type           CssClass
                 * 
                 * This class represent a(n) "<s-color="accent">${style}</s-color>" label
@@ -199,7 +199,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name           s-label:responsive
-        * @namespace      sugar.css.ui.input
+        * @namespace          sugar.style.ui.input
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>responsive</yellow>" label.

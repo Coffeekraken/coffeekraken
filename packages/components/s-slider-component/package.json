@@ -13,6 +13,7 @@
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/s-css-animation": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "lit": "^2.0.0-rc.3",
         "swiper": "^8.0.6"

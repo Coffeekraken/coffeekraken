@@ -848,13 +848,13 @@ class SDocMap extends __SClass implements ISDocMap {
                             }
                         }
 
-                        const namespaceIdCompliant = __namespaceCompliant(
-                            `${docblock.namespace}.${docblock.name}`,
-                        );
+                        // const namespaceIdCompliant = __namespaceCompliant(
+                        //     `${docblock.namespace}.${docblock.name}`,
+                        // );
 
                         if (
-                            docblock.namespace &&
-                            !this._entries[namespaceIdCompliant]
+                            docblock.dotPath &&
+                            !this._entries[docblock.dotPath]
                         ) {
                             docblockObj = {
                                 ...docblockEntryObj,
@@ -865,7 +865,7 @@ class SDocMap extends __SClass implements ISDocMap {
                                     (<__SFile>file).path,
                                 ),
                             };
-                            this._entries[namespaceIdCompliant] = docblockObj;
+                            this._entries[docblock.dotPath] = docblockObj;
                         } else if (docblock.name) {
                             children[
                                 __toLowerCase(docblock.name)

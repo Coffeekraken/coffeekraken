@@ -97,7 +97,7 @@ export default function ({
         () => `
       /**
         * @name          Range
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/range
         * @platform       css
@@ -260,7 +260,7 @@ export default function ({
         vars.comment(
             () => `/**
         * @name           s-range
-        * @namespace      sugar.css.ui.range
+        * @namespace          sugar.style.ui.range
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">bare</s-color>" range
@@ -289,7 +289,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           ${cls}
-            * @namespace      sugar.css.ui.range
+            * @namespace          sugar.style.ui.range
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">${style}</s-color>" range
@@ -321,7 +321,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           ${cls}
-            * @namespace      sugar.css.ui.range
+            * @namespace          sugar.style.ui.range
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">${shape}</s-color>" range

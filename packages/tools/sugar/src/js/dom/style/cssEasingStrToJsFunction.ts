@@ -59,5 +59,6 @@ export default function cssEasingStrToJsFunction(
                 .map((v) => parseFloat(v));
             break;
     }
+    // @ts-ignore
     return __bezierEasing(...params);
 }

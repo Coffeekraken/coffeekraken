@@ -163,7 +163,7 @@ export default function ({
         () => `
       /**
         * @name          Fs Tree
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/fs-tree
         * @platform       css
@@ -231,7 +231,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-fs-tree
-            * @namespace      sugar.css.ui.list
+            * @namespace          sugar.style.ui.list
             * @type           CssClass
             * 
             * This class represent an "<yellow>${__STheme.get(
@@ -272,7 +272,7 @@ export default function ({
                 * @name           s-fs-tree${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 }
-                * @namespace      sugar.css.ui.list
+                * @namespace          sugar.style.ui.list
                 * @type           CssClass
                 * 
                 * This class represent an "<yellow>${style}</yellow>" filesystem tree
@@ -314,7 +314,7 @@ export default function ({
                 * @name           s-fs-tree${
                     shape === finalParams.defaultShape ? '' : `:${shape}`
                 }
-                * @namespace      sugar.css.ui.list
+                * @namespace          sugar.style.ui.list
                 * @type           CssClass
                 * 
                 * This class represent an "<yellow>${shape}</yellow>" filesystem tree
@@ -353,7 +353,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-rhythm:vertical
-            * @namespace      sugar.css.ui.list
+            * @namespace          sugar.style.ui.list
             * @type           CssClass
             * 
             * This class represent some lists in the s-rhythm:vertical scope

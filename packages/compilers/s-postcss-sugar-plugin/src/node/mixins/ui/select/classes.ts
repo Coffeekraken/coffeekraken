@@ -103,7 +103,7 @@ export default function ({
         () => `
       /**
         * @name          Select
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/select
         * @platform       css
@@ -288,7 +288,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-select
-            * @namespace      sugar.css.ui.select
+            * @namespace          sugar.style.ui.select
             * @type           CssClass
             * 
             * This class represent a(n) "<yellow>bare</yellow>" select
@@ -321,7 +321,7 @@ export default function ({
             vars.comment(
                 () => `/**
             * @name           s-select${isDefaultStyle ? '' : `:${style}`}
-            * @namespace      sugar.css.ui.select
+            * @namespace          sugar.style.ui.select
             * @type           CssClass
             * 
             * This class represent a(n) "<yellow>${style}</yellow>" select
@@ -355,7 +355,7 @@ export default function ({
             vars.comment(
                 () => `/**
         * @name           s-select${isDefaultShape ? '' : `:${shape}`}
-        * @namespace      sugar.css.ui.select
+        * @namespace          sugar.style.ui.select
         * @type           CssClass
         * 
         * This class represent a(n) "<yellow>${shape}</yellow>" select
@@ -383,7 +383,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-format:text select
-            * @namespace      sugar.css.ui.select
+            * @namespace          sugar.style.ui.select
             * @type           CssClass
             * 
             * This class represent a simple select tag in the s-format:text scope
@@ -414,7 +414,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-rhythm:vertical
-            * @namespace      sugar.css.ui.select
+            * @namespace          sugar.style.ui.select
             * @type           CssClass
             * 
             * This class represent some select in the s-rhythm:vertical scope

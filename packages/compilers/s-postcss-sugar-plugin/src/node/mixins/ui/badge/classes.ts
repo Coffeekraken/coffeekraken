@@ -103,7 +103,7 @@ export default function ({
         () => `
       /**
         * @name          Badges
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/badges
         * @platform       css
@@ -184,7 +184,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-badge
-            * @namespace      sugar.css.ui.badge
+            * @namespace          sugar.style.ui.badge
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">bare</s-color>" badge
@@ -209,7 +209,7 @@ export default function ({
             * @name           s-badge${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             }
-            * @namespace      sugar.css.ui.badge
+            * @namespace          sugar.style.ui.badge
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">outline</s-color>" badge
@@ -237,7 +237,7 @@ export default function ({
         * @name           s-badge${
             finalParams.defaultShape === shape ? '' : `:${shape}`
         }
-        * @namespace      sugar.css.ui.badge
+        * @namespace          sugar.style.ui.badge
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">outline</s-color>" badge

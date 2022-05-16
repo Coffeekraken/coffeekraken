@@ -51,7 +51,7 @@ export default function ({
         () => `
       /**
         * @name          Positions
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/positions
         * @platform       css
@@ -123,7 +123,7 @@ export default function ({
         
       /**
        * @name            s-position:absolute
-       * @namespace       sugar.css.position
+       * @namespace          sugar.style.position
        * @type            CssClass
        * @platform      css
        * @status        stable
@@ -150,7 +150,7 @@ export default function ({
 
           /**
            * @name            s-position:relative
-           * @namespace       sugar.css.position
+           * @namespace          sugar.style.position
            * @type            CssClass
            * @platform        css
            * @status          stable
@@ -176,7 +176,7 @@ export default function ({
         () => `
           /**
            * @name            s-position:fixed
-           * @namespace       sugar.css.position
+           * @namespace          sugar.style.position
            * @type            CssClass
            * @platform        css
            * @status          stable
@@ -202,7 +202,7 @@ export default function ({
         () => `
         /**
          * @name            s-position::sticky
-         * @namespace       sugar.css.mixins.position
+         * @namespace          sugar.style.mixins.position
          * @type            CssClass
          * @platform        css
          * @status          stable
@@ -228,7 +228,7 @@ export default function ({
         () => `
         /**
          * @name            s-position:top
-         * @namespace       sugar.css.position
+         * @namespace          sugar.style.position
          * @type            CssClass
          * @platform        css
          * @status          stable
@@ -254,7 +254,7 @@ export default function ({
         () => `
         /**
          * @name            s-position:left
-         * @namespace       sugar.css.position
+         * @namespace          sugar.style.position
          * @type            CssClass
          * @platform        css
          * @status          stable
@@ -280,7 +280,7 @@ export default function ({
         () => `
         /**
          * @name            s-position:bottom
-         * @namespace       sugar.css.position
+         * @namespace          sugar.style.position
          * @type            CssClass
          * @platform        css
          * @status          stable
@@ -306,7 +306,7 @@ export default function ({
         () => `
       /**
          * @name            s-position:right
-         * @namespace       sugar.css.position
+         * @namespace          sugar.style.position
          * @type            CssClass
          * @platform        css
          * @status          stable
@@ -332,7 +332,7 @@ export default function ({
         () => `
       /**
          * @name            s-position:center
-         * @namespace       sugar.css.position
+         * @namespace          sugar.style.position
          * @type            CssClass
          * @platform        css
          * @status          stable

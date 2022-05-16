@@ -64,7 +64,7 @@ export default function ({
         () => `
       /**
         * @name          Clearfix
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.style.helpers
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/clearfix
         * @platform       css
@@ -115,7 +115,7 @@ export default function ({
                         ? ''
                         : `:${clearfixName}`
                 }
-                * @namespace          sugar.css.clearfix
+                * @namespace          sugar.style.clearfix
                 * @type               CssClass
                 * @platform         css
                 * @status           beta

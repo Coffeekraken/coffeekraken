@@ -39,7 +39,7 @@
         "rollup-plugin-uglify": "^6.0.4",
         "rollup-plugin-vue": "^6.0.0",
         "url-parse": "^1.5.1",
-        "vite": "^2.9.1",
+        "vite": "^2.9.9",
         "vite-plugin-imagemin": "^0.3.2",
         "vite-plugin-singlefile": "^0.5.1"
     },

@@ -37,7 +37,6 @@ export interface ISComponentUtilsDefaultProps {
     mounted: boolean;
     mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
-    bare: boolean;
 }
 
 export default class SComponent extends __SClass {
@@ -513,7 +512,7 @@ export default class SComponent extends __SClass {
             )
             .join(' ');
 
-        if (style && !this.props.bare) {
+        if (style) {
             clsString += ` ${style}`;
         }
 

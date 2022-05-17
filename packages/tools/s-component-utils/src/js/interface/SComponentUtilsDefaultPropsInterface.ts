@@ -41,17 +41,19 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 default: 'direct',
             },
             adoptStyle: {
-                description: 'Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element',
+                description:
+                    'Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element',
                 type: 'Boolean',
                 default: true,
                 physical: true,
             },
             lnf: {
-                description: 'Specify the lnf (look-and-feel) of your component. This is used by the css to style your component',
+                description:
+                    'Specify the lnf (look-and-feel) of your component. This is used by the css to style your component',
                 type: 'String',
                 default: 'default',
-                physical: true
-            }
+                physical: true,
+            },
         };
     }
 }

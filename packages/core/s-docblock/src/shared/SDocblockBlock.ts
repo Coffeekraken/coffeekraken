@@ -8,6 +8,7 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __SPromise from '@coffeekraken/s-promise';
 import __SLog from '@coffeekraken/s-log';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
+import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 
 import __installTag from './tags/install';
 import __authorTag from './tags/author';
@@ -389,11 +390,17 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
             // save into internal property
             this._blockObj = finalDocblockObj;
 
-            // dotPath
-            if (finalDocblockObj.namespace && finalDocblockObj.name) {
-                finalDocblockObj.dotPath = __namespaceCompliant(
-                    `${finalDocblockObj.namespace}.${finalDocblockObj.name}`,
-                );
+            // id
+            if (!finalDocblockObj.id) {
+                if (finalDocblockObj.namespace && finalDocblockObj.name) {
+                    finalDocblockObj.id = __namespaceCompliant(
+                        `${finalDocblockObj.namespace}.${finalDocblockObj.name}`,
+                    );
+                } else {
+                    finalDocblockObj.id = __sha256.encrypt(
+                        finalDocblockObj.raw,
+                    );
+                }
             }
 
             // return the parsed docblock object

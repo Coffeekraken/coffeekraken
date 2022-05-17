@@ -94,7 +94,7 @@ export default async function ({
         '@sugar.when.classes;',
         '@sugar.scrollbar.classes;',
         '@sugar.width.classes;',
-        '@sugar.components.classes;',
+        // '@sugar.components.classes;',
         '@sugar.whiteSpace.classes;',
     ];
 

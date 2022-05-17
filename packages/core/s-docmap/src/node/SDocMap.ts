@@ -853,8 +853,9 @@ class SDocMap extends __SClass implements ISDocMap {
                         // );
 
                         if (
-                            docblock.dotPath &&
-                            !this._entries[docblock.dotPath]
+                            docblock.namespace &&
+                            docblock.id &&
+                            !this._entries[docblock.id]
                         ) {
                             docblockObj = {
                                 ...docblockEntryObj,
@@ -865,7 +866,7 @@ class SDocMap extends __SClass implements ISDocMap {
                                     (<__SFile>file).path,
                                 ),
                             };
-                            this._entries[docblock.dotPath] = docblockObj;
+                            this._entries[docblock.id] = docblockObj;
                         } else if (docblock.name) {
                             children[
                                 __toLowerCase(docblock.name)

@@ -2,16 +2,17 @@
 
 import __parse from '@coffeekraken/sugar/shared/string/parse';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import __path from 'path';
+import __path, { resolve } from 'path';
 import __SFaviconBuilder from '../../../../../builders/s-favicon-builder/src/node/exports';
 import __fs from 'fs';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __parseTypeString from '@coffeekraken/sugar/shared/type/parseTypeString';
+import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString';
 
 /**
  * @name              param
- * @namespace           shared.tags
+ * @namespace           node.tags
  * @type              Function
  * @platform            node
  * @status              beta
@@ -49,48 +50,13 @@ async function param(data, blockSettings) {
         let defaultValue = undefined;
         let defaultValueStr = '';
         let variableMatch = null;
-        let interf;
-        let type = {
-            str: typeStr,
-            types: [],
-        };
+        let type;
 
         if (variable && typeof variable === 'string')
             variableMatch = variable.match(/^\[(.*)\]$/);
 
-        // regular types
-        if (typeStr.match(/^\{.*\}$/)) {
-            const types = __parseTypeString(typeStr);
-            type.types = types;
-            // path type
-        } else if (typeStr.match(/^(\.|\/|[a-zA-Z0-9])/)) {
-            // resolve tokens
-            const path = __replaceTokens(typeStr);
-
-            if (blockSettings.filePath) {
-                let potentialTypeFilePath;
-
-                if (typeStr.match(/^(\.|\/)/)) {
-                    potentialTypeFilePath = __path.resolve(
-                        __path.dirname(blockSettings.filePath),
-                        path,
-                    );
-                } else {
-                    potentialTypeFilePath = __path.resolve(
-                        __packageRoot(__path.dirname(blockSettings.filePath)),
-                        path,
-                    );
-                }
-
-                if (__fs.existsSync(potentialTypeFilePath)) {
-                    const typeData = (await import(potentialTypeFilePath))
-                        .default;
-                    type = [typeData.name] ?? type;
-                    // save data into the "metas" property on the string directly
-                    interf = typeData.toObject?.() ?? typeData;
-                }
-            }
-        }
+        // resolve type string
+        type = await __resolveTypeString(typeStr);
 
         if (variableMatch) {
             const variableParts = variableMatch[1].split('=');
@@ -104,7 +70,6 @@ async function param(data, blockSettings) {
         res[name] = {
             name,
             type,
-            interface: interf,
             description,
             default: defaultValue,
             defaultStr: defaultValueStr,
@@ -112,8 +77,6 @@ async function param(data, blockSettings) {
 
         if (param.content) res[name].content = param.content.join('\n');
     }
-
-    console.log(res);
 
     return res;
 }

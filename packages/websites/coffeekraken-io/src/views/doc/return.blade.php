@@ -3,12 +3,13 @@
         <i class="s-icon:return s-tc:accent"></i>&nbsp;&nbsp;Return
     </h4>
 
-    <header class="s-flex s-bg:main-surface s-radius s-mbe:20">
+    <header class="s-flex s-bg:main-surface s-radius s-font:40 s-mbe:20">
         <div class="s-flex-item:grow s-format:text s-tc:accent s-p:30 s-color:complementary">
             {!! \Sugar\markdown\toHtml($block->return->description) !!}
         </div>
-        <div class="s-typo:bold s-p:30 s-tc:info">
-            {{ implode($block->return->type, '|') }}
+
+        <div>
+            @include('doc.partials.paramType', ['type' => $block->return->type])
         </div>
     </header>
     @if ($block->return->default != null)
@@ -17,6 +18,11 @@
                 {{ \Sugar\string\toString($block->return->default) }}
             </div>
         </div>
+    @endif
+    @if ($block->return->type->interface)
+        <section class="__toggle-content">
+            @include('doc.interfaceDefinition', ['interface' => $block->return->type->interface])
+            </section>
     @endif
 
 @endif

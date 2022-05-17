@@ -44,14 +44,14 @@ export default function (env, config) {
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.base
                  * @type                Color
-                 * @default             [extends.colorSchemas]
+                 * @default             [extends.colorSchema]
                  *
-                 * Extends the colorSchemas from the extended theme
+                 * Extends the colorSchema from the extended theme
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                '...': '[extends.colorSchemas]',
+                '...': '[extends.colorSchema]',
                 default: {
                     text: {
                         darken: 40,
@@ -79,14 +79,14 @@ export default function (env, config) {
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.main
                  * @type                Color
-                 * @default             [extends.colorSchemas]
+                 * @default             [extends.colorSchema]
                  *
-                 * Extends the colorSchemas from the extended theme
+                 * Extends the colorSchema from the extended theme
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                '...': '[extends.colorSchemas]',
+                '...': '[extends.colorSchema]',
                 default: {
                     text: {
                         darken: 10,
@@ -114,14 +114,14 @@ export default function (env, config) {
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.accent
                  * @type                Color
-                 * @default             [extends.colorSchemas]
+                 * @default             [extends.colorSchema]
                  *
-                 * Extends the colorSchemas from the extended theme
+                 * Extends the colorSchema from the extended theme
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                '...': '[extends.colorSchemas]',
+                '...': '[extends.colorSchema]',
             },
 
             complementary: {
@@ -141,14 +141,14 @@ export default function (env, config) {
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.complementary
                  * @type                Color
-                 * @default             [extends.colorSchemas]
+                 * @default             [extends.colorSchema]
                  *
-                 * Extends the colorSchemas from the extended theme
+                 * Extends the colorSchema from the extended theme
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                '...': '[extends.colorSchemas]',
+                '...': '[extends.colorSchema]',
             },
 
             success: {
@@ -168,14 +168,14 @@ export default function (env, config) {
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.success
                  * @type                Color
-                 * @default             [extends.colorSchemas]
+                 * @default             [extends.colorSchema]
                  *
-                 * Extends the colorSchemas from the extended theme
+                 * Extends the colorSchema from the extended theme
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                '...': '[extends.colorSchemas]',
+                '...': '[extends.colorSchema]',
                 default: {
                     foreground: {
                         darken: 20,
@@ -200,14 +200,14 @@ export default function (env, config) {
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.warning
                  * @type                Color
-                 * @default             [extends.colorSchemas]
+                 * @default             [extends.colorSchema]
                  *
-                 * Extends the colorSchemas from the extended theme
+                 * Extends the colorSchema from the extended theme
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                '...': '[extends.colorSchemas]',
+                '...': '[extends.colorSchema]',
             },
 
             error: {
@@ -227,14 +227,14 @@ export default function (env, config) {
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.error
                  * @type                Color
-                 * @default             [extends.colorSchemas]
+                 * @default             [extends.colorSchema]
                  *
-                 * Extends the colorSchemas from the extended theme
+                 * Extends the colorSchema from the extended theme
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                '...': '[extends.colorSchemas]',
+                '...': '[extends.colorSchema]',
             },
 
             info: {
@@ -254,14 +254,14 @@ export default function (env, config) {
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.info
                  * @type                Color
-                 * @default             [extends.colorSchemas]
+                 * @default             [extends.colorSchema]
                  *
-                 * Extends the colorSchemas from the extended theme
+                 * Extends the colorSchema from the extended theme
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                '...': '[extends.colorSchemas]',
+                '...': '[extends.colorSchema]',
                 default: {
                     text: {
                         darken: 10,

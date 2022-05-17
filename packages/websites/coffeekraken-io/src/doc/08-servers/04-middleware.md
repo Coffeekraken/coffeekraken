@@ -33,7 +33,7 @@ export default function myModule(express, settings, config) {
 }
 ```
 
-## Handler scaffold
+## Middleware scaffold
 
 Here's some base code that you can use for your handler:
 

@@ -11,9 +11,11 @@
 
     @if (count($htmlExamples))
 
-        {{-- <h4 id="preview-{{ $block->name }}" class="s-typo:h4 s-mb:50">
-            <i class="s-icon:preview s-tc:accent"></i>&nbsp;&nbsp;Preview
-        </h4> --}}
+        @if ($block->type == 'CssClass')
+            <h4 id="preview-{{ $block->name }}" class="s-typo:h4 s-mb:50">
+                <i class="s-icon:preview s-tc:accent"></i>&nbsp;&nbsp;Preview
+            </h4>
+        @endif
 
         <div class="s-format:none s-rhythm:none preview s-mbe:50">
             @foreach ($block->example as $example)

@@ -17,14 +17,14 @@
     @include('doc.description', ['block' => $block])
     @if ($isFirst)
         @include('doc.status', ['block' => $block])
-        @if ($isStyleguide)
+        {{-- @if ($isStyleguide) --}}
             @include('doc.preview', ['block' => $block])
-        @endif
+        {{-- @endif --}}
         @include('doc.feature', ['block' => $block])
         @include('doc.import', ['block' => $block])
         @include('doc.install', ['block' => $block])
     @endif
-    @if (!$isStyleguide)
+    @if (!$isStyleguide && $block->type !== 'CssClass')
         @include('doc.example', ['block' => $block, 'lines' => 10])
     @endif
     @include('doc.cssClass', ['block' => $block])

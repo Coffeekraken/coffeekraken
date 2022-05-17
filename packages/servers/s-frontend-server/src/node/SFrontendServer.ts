@@ -10,6 +10,7 @@ import __fs from 'fs';
 import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import __path from 'path';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface';
 import __SFrontendServerAddDefaultPagesParamsInterface from './interface/SFrontendServerAddDefaultPagesParamsInterface';
 // import __vhost from 'vhost';
@@ -309,7 +310,8 @@ export default class SFrontendServer extends __SClass {
 
                 const server = this._express.listen(
                     frontendServerConfig.port,
-                    () => {
+                    async () => {
+                        await __wait(100);
                         // server started successfully
                         emit('log', {
                             group: `s-frontend-server-${this.metas.id}`,

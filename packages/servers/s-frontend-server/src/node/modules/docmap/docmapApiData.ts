@@ -39,9 +39,7 @@ export default function docmapApiData({ req, res, pageConfig }) {
                 renderMarkdown: true,
                 filter: (docblock) => {
                     if (docblock.private) return false;
-                    console.log(docblock, req.params.namespace);
-                    if (docblock.namespace === req.params.namespace) {
-                        console.log('BLOCK', docblock.name);
+                    if (docblock.id === req.params.namespace) {
                         firstBlockWithNamespace = docblock;
                         return true;
                     }

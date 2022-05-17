@@ -40,7 +40,7 @@ s-date-picker[rtl] .s-pikaday {
     bottom: auto;
 }
 
-s-date-picker:not([bare]) {
+s-date-picker[lnf='default'] {
     &:not([rtl])[button][input] {
         .s-date-picker__input {
             border-top-right-radius: 0;

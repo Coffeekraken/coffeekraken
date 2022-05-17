@@ -82,28 +82,28 @@ First possibility to apply layouts using this technique is to use the `@sugar.la
 
 Second possibility is to use auto-generated layout classes. These layouts are defined in your theme configuration like so:
 
+Here's the built-in layout classes:
+
+{{#each layouts}}
+
+-   **s-layout:{{@key}}**
+    {{/each}}
+
+These classes are generated depending on your `theme.layout.layout` configuration.
+
 ```js
 {
-    themePath...: {
+    layout: {
         layout: {
-            layout: {
-                12: '1 2',
-                123: '1 2 3',
-                112: '1 1 2',
-                // etc...
-            }
+            12: '1 2',
+            123: '1 2 3',
+            112: '1 1 2',
+            // etc...
         }
     }
 }
 ```
 
-This will generate these classes:
-
--   `.s-layout:12`
--   `.s-layout:123`
--   `.s-layout:112`
--   etc...
-
-> Note that the `themeBase.config.ts` configuration file provide already some generic layouts. To check more on that, take a look at our [configuration explorer](/doc/config/explorer)
+> Note that the `themeLayout.config.ts` configuration file provide already some generic layouts. To check more on that, take a look at our [configuration explorer](/doc/config/explorer)
 
 {{/layout-doc }}

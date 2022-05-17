@@ -37,31 +37,13 @@ Ok ok... Nice but what is this `mobile` keyword and from where is it popping fro
 
 This(ese) "breakpoints" comes from your theme configuration as all other settings in the toolkit. Here's a sample of media configuration:
 
+`themeMedia.config.ts`
+
 ```js
-{
-    themePath...: {
-        media: {
-            defaultAction: '>=', // mobile first
-            queries: {
-                mobile: {
-                    'min-width': 0,
-                    'max-width': 639,
-                },
-                tablet: {
-                    'min-width': 640,
-                    'max-width': 1279,
-                },
-                desktop: {
-                    'min-width': 1280,
-                    'max-width': null,
-                },
-            }
-        }
-    }
-}
+{{toString media}}
 ```
 
-These settings gives us a "mobile first" approach and 3 breakpoints that are `mobile`, `tablet`and `desktop`. The role of the `defaultAction` property will be more obvious right bellow.
+These settings gives us a "mobile first" approach and 5 breakpoints that are `mobile`, `tablet`, `desktop`, `wide` and `dwarf`. The role of the `defaultAction` property will be more obvious right bellow.
 
 Here's some more "complex" queries to explain the role of the `defaultAction` property:
 

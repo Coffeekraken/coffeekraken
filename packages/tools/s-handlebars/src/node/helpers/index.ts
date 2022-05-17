@@ -16,6 +16,8 @@ import sanitizeValue from './sanitizeValue';
 import sfile from './sfile';
 import shieldsioHandlebarsHelper from './shieldsioHandlebarsHelper';
 import length from './length';
+import join from './join';
+import toString from './toString';
 
 export {
     configFileNameFromDocmapPath,
@@ -32,6 +34,8 @@ export {
     isSectionWanted,
     jsonStringify,
     length,
+    join,
+    toString,
     rootRelative,
     sanitizeValue,
     sfile,

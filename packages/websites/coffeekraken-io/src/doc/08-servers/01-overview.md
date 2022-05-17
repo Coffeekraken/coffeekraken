@@ -23,9 +23,10 @@ You certainly can update their configurations to match you needs if wanted. Here
 
 This server if the one that handle the most of the requests made during development process. It handle:
 
-1. Templates compilation (twig, blade, etc...)
-2. Automatical routing to your views like `/view/my-cool-view`
-3. Custom routing for `docmap`, `styleguide`, `config` and `api` doc pages
+1. Views compilation (twig, blade, etc...).
+2. Easy to use routing system based on **folder structure**.
+3. Simple views data providing system.
+4. And more...
 
 > For more information on the SFrontendServer, please take a look at [this README](/@coffeekraken/s-frontend-server/README)
 

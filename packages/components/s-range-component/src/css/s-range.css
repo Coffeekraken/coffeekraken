@@ -9,7 +9,6 @@ s-range {
     &[disabled] {
         pointer-events: none;
     }
-
 }
 .s-range {
     display: flex;
@@ -28,7 +27,4 @@ s-range {
 
 .s-range__tooltip {
     transition: none;
-}
-
-s-range:not([bare]) {
 }

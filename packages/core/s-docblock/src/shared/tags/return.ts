@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
+import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString';
 
 /**
  * @name              return
@@ -21,18 +22,12 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-function returnTag(data, blockSettings) {
+async function returnTag(data, blockSettings) {
     const stringArray = data.value.split(/\s{2,20000}/).map((l) => l.trim());
 
-    let type =
-        stringArray && stringArray[0]
-            ? __upperFirst(stringArray[0].replace('{', '').replace('}', ''))
-            : null;
-    if (type && type.includes('|')) {
-        type = type.split('|').map((l) => __upperFirst(l.trim()));
-    } else {
-        type = [type];
-    }
+    let type = stringArray && stringArray[0] ? stringArray[0] : null;
+
+    type = await __resolveTypeString(type);
 
     const description = new String(stringArray[1] ? stringArray[1].trim() : '');
     description.render = true;

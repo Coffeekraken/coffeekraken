@@ -64,25 +64,25 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         mode: 'development',
-        resolve: {
-            // preserveSymlinks: true,
-            alias: {
-                static: '',
+        // resolve: {
+        //     // preserveSymlinks: true,
+        //     alias: {
+        //         static: '',
 
-                /**
-                 * @name          vue
-                 * @namespace     config.vite.resolve.alias
-                 * @type          String
-                 * @default      vue/dist/vue.esm-bundler.js
-                 *
-                 * Specify the esm builder alias resolution path
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                vue: 'vue/dist/vue.esm-bundler.js',
-            },
-        },
+        //         /**
+        //          * @name          vue
+        //          * @namespace     config.vite.resolve.alias
+        //          * @type          String
+        //          * @default      vue/dist/vue.esm-bundler.js
+        //          *
+        //          * Specify the esm builder alias resolution path
+        //          *
+        //          * @since       2.0.0
+        //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        //          */
+        //         vue: 'vue/dist/vue.esm-bundler.js',
+        //     },
+        // },
         /**
          * @name          plugins
          * @namespace     config.vite
@@ -243,6 +243,14 @@ export default function (env, config) {
                         return path.replace(/\/dist\//, '/src/');
                     },
                 },
+                '^.*\\.(js(?!on)|css)(?!.map)(?!\\?)(.+){1,99999}$': {
+                    target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
+                    changeOrigin: true,
+                    rewrite: (path) => {
+                        console.log('AAAAAA', path);
+                        return path;
+                    },
+                },
                 // all none css, js, ts, etc...
                 // have to go to frontend server
                 '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$': {
@@ -261,7 +269,6 @@ export default function (env, config) {
                 },
             },
         },
-        css: {},
         rewrites: [
             __path.resolve(`${__dirname()}/../node/rewrites/handlebars`),
         ],

@@ -16,17 +16,13 @@
                         </div>
                     </div>
                     <div>
-                        {{-- {{ implode($param->type, '|') }} --}}
-
                         @include('doc.partials.paramType', ['type' => $param->type])
-
                     </div>
                 </header>
                 <p class="s-typo:p s-format:text s-pi:30 s-pb:20">{!! \Sugar\markdown\toHtml($param->description) !!}</p>
-
-                @if ($param->metas)
+                @if ($param->type->interface)
                     <section class="__toggle-content">
-                        @include('doc.interfaceDefinition', ['interface' => $param->metas])
+                        @include('doc.interfaceDefinition', ['interface' => $param->type->interface])
                         </section>
                 @endif
 

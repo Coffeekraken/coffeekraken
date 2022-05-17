@@ -23,8 +23,9 @@ The SFrontendServer is based on the AMAZING [ExpressJs](https://expressjs.com/) 
 Our server comes with some built-in modules. Here's the list:
 
 {{#each config.frontendServer.modules}}
-- `{{@key}}`: {{this.description}}
-{{/each}}
+
+-   `{{@key}}`: {{this.description}}
+    {{/each}}
 
 ## Create your module
 

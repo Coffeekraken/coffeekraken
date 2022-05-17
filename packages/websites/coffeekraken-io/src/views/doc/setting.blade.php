@@ -3,7 +3,7 @@
         <i class="s-icon:setting s-tc:accent"></i>&nbsp;&nbsp;Settings
     </h4>
 
-    <ol class="">
+    <ol>
         @foreach ($block->setting as $setting)
             <li class="s-font:40 s-mbe:30">
                 <header class="s-flex:align-center s-bg:main-surface s-radius s-mbe:20">
@@ -15,11 +15,16 @@
                             {{ \Sugar\string\toString($setting->default) }}
                         </div>
                     </div>
-                    <div class="s-typo:bold s-p:30 s-tc:info">
-                        {{ implode($setting->type, '|') }}
+                    <div>
+                        @include('doc.partials.paramType', ['type' => $setting->type])
                     </div>
                 </header>
                 <p class="s-typo:p s-format:text s-pi:30 s-pb:20">{!! \Sugar\markdown\toHtml($setting->description) !!}</p>
+                @if ($setting->type->interface)
+                    <section class="__toggle-content">
+                        @include('doc.interfaceDefinition', ['interface' => $setting->type->interface])
+                        </section>
+                @endif
             </li>
         @endforeach
     </ol>

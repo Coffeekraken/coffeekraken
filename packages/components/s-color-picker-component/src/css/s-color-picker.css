@@ -42,7 +42,7 @@ s-color-picker {
     }
 }
 
-s-color-picker:not([bare]) {
+s-color-picker[lnf='default'] {
     .s-color-picker__button {
         padding-inline: sugar.padding(ui.colorPicker.paddingInline);
         padding-block: sugar.padding(ui.colorPicker.paddingBlock);

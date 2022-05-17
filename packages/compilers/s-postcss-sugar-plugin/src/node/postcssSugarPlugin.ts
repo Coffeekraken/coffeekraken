@@ -69,8 +69,9 @@ export function getMixinsOrFunctionsList(what: 'mixins' | 'functions') {
                     .join('.'),
                 dotCall = dotPath;
             const parts = dotPath.split('.');
-            if (parts[0] === parts[1]) {
-                dotCall = parts[0];
+
+            if (parts.slice(-2)[0] === parts.slice(-1)[0]) {
+                dotCall = parts.slice(0, -1).join('.');
             }
 
             return {

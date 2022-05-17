@@ -55,8 +55,8 @@
                                             {{ $dotpath }}
                                         </span>
                                     </div>
-                                    <div class="s-typo:bold s-p:30 s-tc:info">
-                                        {{ $docblock->type }}
+                                    <div>
+                                        @include('doc.partials.paramType', ['type' => $docblock->type])
                                     </div>
                                 </header>
                                 @if ($docblock->default != null or $docblock->default == 0)

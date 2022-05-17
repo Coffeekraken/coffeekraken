@@ -1,14 +1,24 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __astNodesToString from '../../utils/astNodesToString';
+import __STheme from '@coffeekraken/s-theme';
+import __postcss from 'postcss';
 
 class postcssSugarPluginRhythmVerticalMixinInterface extends __SInterface {
     static get _definition() {
-        return {};
+        return {
+            themePath: {
+                description:
+                    'Specify a dot theme path where to get an object to apply for the vertical rhythm',
+                type: 'String',
+            },
+        };
     }
 }
 export { postcssSugarPluginRhythmVerticalMixinInterface as interface };
 
-export interface postcssSugarPluginRhythmVerticalMixinParams {}
+export interface postcssSugarPluginRhythmVerticalMixinParams {
+    themePath?: string;
+}
 
 /**
  * @name           vertical
@@ -54,19 +64,30 @@ export default function ({
     //     selectors: [`.s-rhythm--vertical`],
     // });
 
-    atRule.nodes?.forEach((node) => {
-        if (!node.selector) return;
-        node.selector = node.selector
-            .split(',')
-            .map((sel) => {
-                return `.s-rhythm--vertical > ${sel}`;
-            })
-            .join(',');
-    });
-    atRule.replaceWith(atRule.nodes);
+    let generatedCss;
 
-    // atRule.nodes.forEach((n) => {
-    //     container.append(n.clone());
-    // });
-    // atRule.replaceWith(container);
+    if (params.themePath) {
+        generatedCss = __STheme.jsObjectToCssProperties(
+            __STheme.get(params.themePath) ?? {},
+        );
+    }
+
+    if (atRule.nodes?.length) {
+        atRule.nodes?.forEach((node) => {
+            if (!node.selector) return;
+            node.selector = node.selector
+                .split(',')
+                .map((sel) => {
+                    return `.s-rhythm--vertical > ${sel}`;
+                })
+                .join(',');
+        });
+    }
+
+    // append the generated css from the theme dot path object
+    if (generatedCss) {
+        atRule.append(generatedCss);
+    }
+
+    atRule.replaceWith(atRule.nodes);
 }

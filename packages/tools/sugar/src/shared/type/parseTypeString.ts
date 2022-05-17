@@ -2,8 +2,11 @@ import __autoCast from '../string/autoCast';
 
 /**
  * @name            parseTypeString
- * @namespace       shared.utils
+ * @namespace       shared.type
  * @type            Function
+ * @platform        js
+ * @platform        node
+ * @status          beta
  *
  * This method simply parse the passed typeString like "string | number", or "string & path", etc... and return
  * an object defining this type string
@@ -68,9 +71,9 @@ function parseSingleTypeString(typeString: string): ITypeStringObject {
     }
     // handle the "of" part
     // @ts-ignore
-    ofTypes = ofStr !== '' ? [ofStr.toLowerCase()] : undefined;
+    ofTypes = ofStr !== '' ? [ofStr] : undefined;
     if (ofStr !== undefined && ofStr.includes('|')) {
-        ofTypes = ofStr.split('|').map((t) => t.trim().toLowerCase());
+        ofTypes = ofStr.split('|').map((t) => t.trim());
     }
 
     // values in "of"
@@ -98,7 +101,7 @@ export default function parseTypeString(
 ): ITypeStringObject[] {
     const originalTypeString = typeString;
 
-    typeString = typeString.toLowerCase().trim();
+    typeString = typeString.trim();
 
     // remove starting { and ending }
     typeString = typeString.replace(/^\{/, '').replace(/\}$/, '');

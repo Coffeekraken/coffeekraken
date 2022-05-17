@@ -18,7 +18,7 @@ import __writeFileSync from './writeFileSync';
  *
  * @param       {String}              data          The data to write in the file
  * @param       {IWriteTmpFileSettings}         [settings={}]           Some settings to customize your temp file creation
- * @return      {Promise}                           A promise that will be resolved when the writeTmpFile is completed with the path to it
+ * @return      {Promise<String>}                           A promise that will be resolved when the writeTmpFile is completed with the path to it
  *
  * @setting         {String}            [path=null]         A path relative to the temp folder to store your file
  *
@@ -38,7 +38,10 @@ export interface IWriteTmpFileSettings {
     path: string;
 }
 
-function writeTmpFile(data, settings: Partial<IWriteTmpFileSettings> = {}) {
+function writeTmpFile(
+    data,
+    settings: Partial<IWriteTmpFileSettings> = {},
+): Promise<String> {
     settings = {
         path: undefined,
         ...settings,

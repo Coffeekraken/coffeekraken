@@ -2,7 +2,6 @@
     "map": {},
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -136,6 +135,28 @@
                 "description": "This class represent the interface that describe parameters of the `sugar command.run` command",
                 "namespace": "@coffeekraken.sugar.cli.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SRunCommandParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "command": {
+                            "type": "String",
+                            "description": "Specify the command you want to execute",
+                            "alias": "c"
+                        },
+                        "directory": {
+                            "type": "String",
+                            "description": "Specify where you want to execute this command. Can be a glob to execute command into multiple directories at once",
+                            "alias": "d"
+                        },
+                        "verbose": {
+                            "type": "Boolean",
+                            "description": "Specify if you want each process to log or not",
+                            "default": false,
+                            "alias": "v"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -159,6 +180,11 @@
                 "description": "This class represent the interface that describe parameters of the `sugar toolkit.add` command",
                 "namespace": "@coffeekraken.sugar.cli.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SSugarToolkitParamsInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4912,6 +4938,35 @@
                 "filename": "replaceTokens.ts",
                 "extension": "ts",
                 "relPath": "src/node/token/replaceTokens.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.node.type.resolveTypeString": {
+                "name": "resolveTypeString",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This method simply parse the passed typeString like \"string | number\", or \"string & path\", etc... and return\nan object defining the resolved type with interface if defined, etc...",
+                "namespace": "@coffeekraken.sugar.node.type",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __resolveTypeString from '@coffeekraken/sugar/shared/type/resolveTypeString';\nresolveTypeString('string');\n// {\n//    types: [{\n//       type: 'string',\n//       of: undefined,\n//       value: undefined\n//    }],\n//    interface: undefine\n// }"
+                    }
+                ],
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "resolveTypeString.ts",
+                "extension": "ts",
+                "relPath": "src/node/type/resolveTypeString.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.zip.unzip": {
@@ -11803,11 +11858,22 @@
                 "relPath": "src/shared/token/replaceTokens.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.utils.parseTypeString": {
+            "@coffeekraken.sugar.shared.type.parseTypeString": {
                 "name": "parseTypeString",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This method simply parse the passed typeString like \"string | number\", or \"string & path\", etc... and return\nan object defining this type string",
-                "namespace": "@coffeekraken.sugar.shared.utils",
+                "namespace": "@coffeekraken.sugar.shared.type",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -12650,6 +12716,42 @@
                         "code": "import whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract'\nawait whenInteract(myCoolElement, {});"
                     }
                 ],
+                "interface": {
+                    "name": "WhenInteractSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "mouseover": {
+                            "description": "Specify if the mouseover event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "mouseout": {
+                            "description": "Specify if the mouseout event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "click": {
+                            "description": "Specify if the click event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "touchstart": {
+                            "description": "Specify if the touchstart event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "touchend": {
+                            "description": "Specify if the touchend event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "focus": {
+                            "description": "Specify if the focus event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "async": "true",
                 "since": "1.0.0",
                 "author": {
@@ -16119,6 +16221,42 @@
                 "description": "This interface represent the `whenInteract` settings.",
                 "namespace": "@coffeekraken.sugar.js.dom.detect.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "WhenInteractSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "mouseover": {
+                            "description": "Specify if the mouseover event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "mouseout": {
+                            "description": "Specify if the mouseout event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "click": {
+                            "description": "Specify if the click event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "touchstart": {
+                            "description": "Specify if the touchstart event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "touchend": {
+                            "description": "Specify if the touchend event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "focus": {
+                            "description": "Specify if the focus event has to be used",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

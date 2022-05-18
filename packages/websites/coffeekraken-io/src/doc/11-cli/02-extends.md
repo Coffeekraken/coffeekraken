@@ -49,9 +49,8 @@ Create the `sugar.jcon` file at your project root and fill it like so:
             "defaultAction": "prettyCommand",
             "actions": {
                 "prettyCommand": {
-                    "scope": "global",
                     "description": "Allows to display 'hello world' on screen",
-                    "process": "./dist/pkg/esm/node/prettyCommand.cli.ts"
+                    "process": "./src/node/prettyCommand.cli.js"
                 }
             }
         }
@@ -63,7 +62,7 @@ This will tell the CLI that a `mySoCool` stack exists with a command(s) `prettyC
 
 #### Second
 
-Then you need to create the `src/node/prettyCommand.cli.ts` file with this content:
+Then you need to create the `src/node/prettyCommand.cli.js` file with this content:
 
 ```js
 export default function prettyCommand(stringArgs = '') {
@@ -91,7 +90,7 @@ export default function prettyCommand(stringArgs = '') {
 }
 ```
 
-This make use of the `SPromise` class that is an extension of the `Promise` one and works exactly the same with some additional feature.
+This make use of the [@coffeekraken/s-promise](/package/@coffeekraken/s-promise/doc/readme) class that is an extension of the `Promise` one and works exactly the same with some additional feature.
 
 One of these features is the `emit` function that you can use to dispatch an event. Here the `log` one. This event will be catched by the CLI and transferred to the `SStdio` instance to display your log as best as possible.
 
@@ -130,7 +129,6 @@ For that, simply add the `interface` property inside your `sugar.json` file like
             "defaultAction": "prettyCommand",
             "actions": {
                 "prettyCommand": {
-                    "scope": "global",
                     "description": "Allows to display 'hello world' on screen",
                     "process": "./dist/pkg/esm/node/prettyCommand.cli.ts",
                     "interface": "./src/node/prettyCommandInterface.ts"
@@ -160,11 +158,11 @@ export default class SActivateFeatureInterface extends __SInterface {
 }
 ```
 
-This make use of the `@coffeekraken/s-interface` package that let you define interfaces to describe things like a parameter object, etc...
+This make use of the [@coffeekraken/s-interface](/package/@coffeekraken/s-interface/doc/readme) package that let you define interfaces to describe things like a parameter object, etc...
 
 Note that this `SInterface` class can be used as well for other things and works very well with our `SProcess` class from the `@coffeekraken/s-process` package.
 
-> I let you check the `@coffeekraken/s-interface` documentation inside his own package.
+> I let you check the [@coffeekraken/s-interface](/package/@coffeekraken/s-interface/doc/readme) documentation inside his own package.
 
 Now when you launch your command with `sugar mySoCool.prettyCommand --help` you will have a nicely displayed documentation.
 

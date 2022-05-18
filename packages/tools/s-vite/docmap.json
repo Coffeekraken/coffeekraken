@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -136,22 +135,6 @@
                 "default": "development",
                 "description": "Specify the mode to work with. Can be \"development\" or \"production\"",
                 "namespace": "@coffeekraken.s-vite.config.vite",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.resolve.alias.vue": {
-                "name": "vue",
-                "type": "String",
-                "default": "vue/dist/vue.esm-bundler.js",
-                "description": "Specify the esm builder alias resolution path",
-                "namespace": "@coffeekraken.s-vite.config.vite.resolve.alias",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -379,6 +362,106 @@
                 "description": "This class represent the interface that describe parameters of the SFrontstackViteProcess",
                 "namespace": "@coffeekraken.s-vite.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SViteBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "input": {
+                            "description": "Specify the input js/ts file to use for the build",
+                            "type": "String",
+                            "path": {
+                                "exists": true,
+                                "absolute": true
+                            },
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-vite/src/js/index.ts",
+                            "required": true
+                        },
+                        "type": {
+                            "description": "Specify the type(s) of build you want. Can be \"lib\", \"bundle\" or \"module\"",
+                            "type": "Array<String>",
+                            "values": [
+                                "lib",
+                                "bundle",
+                                "module"
+                            ],
+                            "default": [
+                                "bundle",
+                                "module"
+                            ],
+                            "alias": "t"
+                        },
+                        "format": {
+                            "description": "Specify the format(s) of the output build. Can be \"es\",\"umd\",\"cjs\" or \"iife\"",
+                            "type": "Array<String>",
+                            "values": [
+                                "es",
+                                "umd",
+                                "cjs",
+                                "iife"
+                            ],
+                            "default": [],
+                            "alias": "f"
+                        },
+                        "target": {
+                            "description": "Specify the target you want for your build. Can be \"modules\",\"esnext\",\"es2015\",\"es2016\" or \"es2020\"",
+                            "type": "String",
+                            "values": [
+                                "modules",
+                                "esnext",
+                                "es2015",
+                                "es2016",
+                                "es2020"
+                            ]
+                        },
+                        "watch": {
+                            "description": "Specify if you want the process to watch for updates and rebuild automatically",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "w"
+                        },
+                        "lib": {
+                            "description": "Specify if your build type is \"lib\". Same as setting the \"type\" argument to \"lib\"",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "l"
+                        },
+                        "bundle": {
+                            "description": "Specify if your build type is \"bundle\". Same as setting the \"type\" argument to \"bundle\"",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "b"
+                        },
+                        "noWrite": {
+                            "description": "Specify if you want to ust build but not write file(s) to the filesystem",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "prod": {
+                            "description": "Specify if your build is made for production environment or not. This will automatically minify and optimize your build",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "p"
+                        },
+                        "chunks": {
+                            "description": "Specify if you allow your build to be separated into multiple chunks or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "c"
+                        },
+                        "minify": {
+                            "description": "Specify if you want to minify your build or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "m"
+                        },
+                        "analyze": {
+                            "description": "Specify if you want an analyze report of your build. This use the rollup analyze plugin under the hood",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "a"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -402,6 +485,11 @@
                 "description": "This class represent the interface that describe parameters of the SFrontstackViteProcess",
                 "namespace": "@coffeekraken.s-vite.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SViteStartParamsInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

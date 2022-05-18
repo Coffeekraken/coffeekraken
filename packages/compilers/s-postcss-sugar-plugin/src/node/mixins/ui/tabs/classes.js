@@ -1,81 +1,78 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-import __SInterface from "@coffeekraken/s-interface";
-import __STheme from "@coffeekraken/s-theme";
-import __faker from "faker";
+import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+import __faker from 'faker';
+/**
+ * @name          classes
+ * @namespace     node.mixin.ui.tabs
+ * @type               PostcssMixin
+ * @interface     ./classes          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Generate the tabs classes
+ *
+ * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
+ * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
+ * @param       {'solid'}                [defaultStyle='theme.ui.tabs.defaultStyle']           The default style you want
+ * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.tabs.defaultShape']           The default shape you want
+ * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * @sugar.ui.tabs.classes;
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
-  static get _definition() {
-    var _a;
+    static get _definition() {
+        var _a;
+        return {
+            styles: {
+                type: 'String[]',
+                values: ['solid'],
+                default: ['solid'],
+            },
+            shapes: {
+                type: 'String[]',
+                values: ['default', 'square', 'pill'],
+                default: ['default', 'square', 'pill'],
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['solid'],
+                default: (_a = __STheme.get('ui.tabs.defaultStyle')) !== null && _a !== void 0 ? _a : 'solid',
+            },
+            defaultShape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.get('ui.tabs.defaultShape'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+            },
+        };
+    }
+}
+export { postcssSugarPluginUiListClassesInterface as interface };
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+export function dependencies() {
     return {
-      styles: {
-        type: "String[]",
-        values: ["solid"],
-        default: ["solid"]
-      },
-      shapes: {
-        type: "String[]",
-        values: ["default", "square", "pill"],
-        default: ["default", "square", "pill"]
-      },
-      defaultStyle: {
-        type: "String",
-        values: ["solid"],
-        default: (_a = __STheme.config("ui.tabs.defaultStyle")) != null ? _a : "solid"
-      },
-      defaultShape: {
-        type: "String",
-        values: ["default", "square", "pill"],
-        default: __STheme.config("ui.tabs.defaultShape")
-      },
-      scope: {
-        type: {
-          type: "Array<String>",
-          splitChars: [",", " "]
-        },
-        values: ["bare", "lnf", "shape", "vr", "tf"],
-        default: ["bare", "lnf", "shape", "vr", "tf"]
-      }
+        files: [`${__dirname()}/tabs.js`],
     };
-  }
 }
-import __dirname from "@coffeekraken/sugar/node/fs/dirname";
-function dependencies() {
-  return {
-    files: [`${__dirname()}/tabs.js`]
-  };
-}
-function classes_default({
-  params,
-  atRule,
-  CssVars,
-  replaceWith
-}) {
-  const finalParams = __spreadValues({
-    styles: [],
-    shapes: [],
-    defaultStyle: "solid",
-    defaultShape: "default",
-    scope: []
-  }, params);
-  const vars = new CssVars();
-  vars.comment(() => `
+export default function ({ params, atRule, CssVars, replaceWith, }) {
+    const finalParams = Object.assign({ styles: [], shapes: [], defaultStyle: 'solid', defaultShape: 'default', scope: [] }, params);
+    const vars = new CssVars();
+    vars.comment(() => `
       /**
         * @name          Tabs
-        * @namespace          sugar.css.ui
+        * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/tabs
         * @platform       css
@@ -89,34 +86,44 @@ function classes_default({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles.map((style) => {
-    return ` * @cssClass     s-tabs${style === finalParams.defaultStyle ? "" : `:${style}`}           Apply the ${style} tabs style`;
-  }).join("\n")}
-        ${finalParams.shapes.map((shape) => {
-    return ` * @cssClass     s-tabs${shape === finalParams.defaultShape ? "" : `:${shape}`}           Apply the ${shape} tabs shape`;
-  }).join("\n")}
+        ${finalParams.styles
+        .map((style) => {
+        return ` * @cssClass     s-tabs${style === finalParams.defaultStyle ? '' : `:${style}`}           Apply the ${style} tabs style`;
+    })
+        .join('\n')}
+        ${finalParams.shapes
+        .map((shape) => {
+        return ` * @cssClass     s-tabs${shape === finalParams.defaultShape ? '' : `:${shape}`}           Apply the ${shape} tabs shape`;
+    })
+        .join('\n')}
         * @cssClass       s-tabs:grow        Make the tabs items grow and take the available space
         * @cssClass       s-tabs:vertical    Display the tabs horizontally
         * 
-        ${finalParams.styles.map((style) => {
-    return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ""}
-            *   <ul class="s-tabs${style === finalParams.defaultStyle ? "" : `:${style}`} s-color:accent">
+        ${finalParams.styles
+        .map((style) => {
+        return ` * @example        html       ${style} style ${finalParams.defaultStyle === style
+            ? '<span class="s-badge:outline s-scale:05">default</span>'
+            : ''}
+            *   <ul class="s-tabs${style === finalParams.defaultStyle ? '' : `:${style}`} s-color:accent">
             *     <li tabindex="0" active>${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *   </ul>
             * `;
-  }).join("\n")}
+    })
+        .join('\n')}
         *
-        ${finalParams.shapes.map((shape) => {
-    return ` * @example        html       ${shape}
-            *   <ul class="s-tabs${shape === finalParams.defaultShape ? "" : `:${shape}`} s-color:accent">
+        ${finalParams.shapes
+        .map((shape) => {
+        return ` * @example        html       ${shape}
+            *   <ul class="s-tabs${shape === finalParams.defaultShape ? '' : `:${shape}`} s-color:accent">
             *     <li tabindex="0" active>${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *   </ul>
             * `;
-  }).join("\n")}
+    })
+        .join('\n')}
         * 
         * @example        html       Grow
         *   <ul class="s-tabs:grow">
@@ -152,11 +159,11 @@ function classes_default({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
-  if (finalParams.scope.includes("bare")) {
-    vars.comment(() => `
+    if (finalParams.scope.includes('bare')) {
+        vars.comment(() => `
             /**
               * @name           s-tabs
-              * @namespace      sugar.css.ui.tabs
+              * @namespace          sugar.style.ui.tabs
               * @type           CssClass
               * 
               * This class represent a "<yellow>bare</yellow>" tabs
@@ -172,46 +179,46 @@ function classes_default({
             @sugar.ui.tabs($scope: bare);
           }
           `);
-  }
-  if (finalParams.scope.includes("lnf")) {
-    finalParams.styles.forEach((style) => {
-      vars.comment(() => `/**
-              * @name           s-tabs${finalParams.defaultStyle === style ? "" : `:${style}`}
-              * @namespace      sugar.css.ui.tabs
+    }
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            vars.comment(() => `/**
+              * @name           s-tabs${finalParams.defaultStyle === style ? '' : `:${style}`}
+              * @namespace          sugar.style.ui.tabs
               * @type           CssClass
               * 
               * This class represent a "<yellow>${style}</yellow>" tabs
               * 
               * @example        html
-              * <div class="s-tabs${finalParams.defaultStyle === style ? "" : `:${style}`}">
+              * <div class="s-tabs${finalParams.defaultStyle === style ? '' : `:${style}`}">
               *    <div class="active">An active tab</div>
               *    <div>A tab</div>
               * </div>
             */
            `).code(`
-          .s-tabs${finalParams.defaultStyle === style ? "" : `--${style}`} {
+          .s-tabs${finalParams.defaultStyle === style ? '' : `--${style}`} {
             @sugar.ui.tabs($style: ${style}, $scope: lnf);
           }
         `);
-    });
-  }
-  if (finalParams.scope.includes("shape")) {
-    finalParams.shapes.forEach((shape) => {
-      vars.comment(() => `/**
-            * @name           s-tabs${finalParams.defaultShape === shape ? "" : `:${shape}`}
-            * @namespace      sugar.css.ui.tabs
+        });
+    }
+    if (finalParams.scope.includes('shape')) {
+        finalParams.shapes.forEach((shape) => {
+            vars.comment(() => `/**
+            * @name           s-tabs${finalParams.defaultShape === shape ? '' : `:${shape}`}
+            * @namespace          sugar.style.ui.tabs
             * @type           CssClass
             * 
             * This class represent a "<yellow>${shape}</yellow>" tabs
             * 
             * @example        html
-            * <div class="s-tabs${finalParams.defaultShape === shape ? "" : `:${shape}`}">
+            * <div class="s-tabs${finalParams.defaultShape === shape ? '' : `:${shape}`}">
             *    <div class="active">An active tab</div>
             *    <div>A tab</div>
             * </div>
           */
          `).code(`
-        .s-tabs${finalParams.defaultShape === shape ? "" : `--${shape}`} {
+        .s-tabs${finalParams.defaultShape === shape ? '' : `--${shape}`} {
           @sugar.ui.tabs($shape: ${shape}, $scope: shape);
 
           &.s-tabs--vertical {
@@ -219,11 +226,11 @@ function classes_default({
             }
         }
       `);
-    });
-  }
-  vars.comment(() => `/**
+        });
+    }
+    vars.comment(() => `/**
         * @name           s-tabs--grow
-        * @namespace      sugar.css.ui.tabs
+        * @namespace          sugar.style.ui.tabs
         * @type           CssClass
         * 
         * This class represent a "<yellow>grow</yellow>" tabs
@@ -239,9 +246,9 @@ function classes_default({
       @sugar.ui.tabs($grow: true, $scope: grow);
     }
   `);
-  vars.comment(() => `/**
+    vars.comment(() => `/**
         * @name           s-tabs--vertical
-        * @namespace      sugar.css.ui.tabs
+        * @namespace          sugar.style.ui.tabs
         * @type           CssClass
         * 
         * This class represent a "<yellow>vertical</yellow>" tabs
@@ -257,10 +264,6 @@ function classes_default({
       @sugar.ui.tabs($direction: vertical, $scope: 'direction');
     }
   `);
-  return vars;
+    return vars;
 }
-export {
-  classes_default as default,
-  dependencies,
-  postcssSugarPluginUiListClassesInterface as interface
-};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sT0FBTyxNQUFNLE9BQU8sQ0FBQztBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUVILE1BQU0sd0NBQXlDLFNBQVEsWUFBWTtJQUMvRCxNQUFNLEtBQUssV0FBVzs7UUFDbEIsT0FBTztZQUNILE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUUsVUFBVTtnQkFDaEIsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsQ0FBQyxPQUFPLENBQUM7YUFDckI7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBRSxRQUFRLEVBQUUsTUFBTSxDQUFDO2dCQUNyQyxPQUFPLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQzthQUN6QztZQUNELFlBQVksRUFBRTtnQkFDVixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxPQUFPLENBQUM7Z0JBQ2pCLE9BQU8sRUFBRSxNQUFBLFFBQVEsQ0FBQyxHQUFHLENBQUMsc0JBQXNCLENBQUMsbUNBQUksT0FBTzthQUMzRDtZQUNELFlBQVksRUFBRTtnQkFDVixJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQztnQkFDckMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxHQUFHLENBQUMsc0JBQXNCLENBQUM7YUFDaEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUs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

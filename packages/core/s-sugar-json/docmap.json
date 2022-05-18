@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -121,6 +121,36 @@
                 "description": "This class represent the interface that describe SSugarJson settings",
                 "namespace": "@coffeekraken.s-sugar-json.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SSugarJsonSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "packages": {
+                            "description": "Specify an array of packages names in which to search for sugar.json file",
+                            "type": "Array<String>"
+                        },
+                        "includePackage": {
+                            "description": "Specify if the current package has to be included in the search",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "includeModules": {
+                            "description": "Specify if the current package \"node_modules\" folder has to be included in the search",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "includeGlobal": {
+                            "description": "Specify if the global \"node_modules\" folder has to be included in the search",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "includeTop": {
+                            "description": "Specify if the root package folder in case of a mono-repo has to be included in the search",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -144,6 +174,11 @@
                 "description": "Parameters representation for the 5SSugarJson list command.",
                 "namespace": "@coffeekraken.s-sugar-json.node.list.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SSugarJsonListParamsInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

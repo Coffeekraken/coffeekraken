@@ -14,10 +14,6 @@ if ($firstBlock->status == 'wip') {
 }
 @endphp
 
-{{-- <pre>
-    {{ var_dump($docblocks) }}
-</pre> --}}
-
 <div id="api">
 
     <section class="s-container markdown">

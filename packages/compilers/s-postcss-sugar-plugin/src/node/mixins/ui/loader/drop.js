@@ -1,51 +1,51 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-import __SInterface from "@coffeekraken/s-interface";
-import __STheme from "@coffeekraken/s-theme";
+import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+/**
+ * @name          drop
+ * @namespace     node.mixin.ui.loader
+ * @type               PostcssMixin
+ * @interface     ./drop          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the drop style to any element
+ *
+ * @param        {String}           [name='s-loader-drop']               A name for your drop
+ * @param       {String}            [duration='theme.ui.loaderDrop.duration']        The duration of your drop animation
+ * @param        {String}           [easing='theme.ui.loaderDrop.easing']            The easing you want for your drop animation
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-drop {
+ *    @sugar.ui.loader.drop;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 class postcssSugarPluginUiLoaderDropMixinInterface extends __SInterface {
-  static get _definition() {
-    return {
-      name: {
-        type: "String",
-        default: "s-loader-drop"
-      },
-      duration: {
-        type: "String",
-        default: __STheme.config("ui.loaderDrop.duration")
-      },
-      easing: {
-        type: "String",
-        default: __STheme.config("ui.loaderDrop.easing")
-      }
-    };
-  }
+    static get _definition() {
+        return {
+            name: {
+                type: 'String',
+                default: 's-loader-drop',
+            },
+            duration: {
+                type: 'String',
+                default: __STheme.get('ui.loaderDrop.duration'),
+            },
+            easing: {
+                type: 'String',
+                default: __STheme.get('ui.loaderDrop.easing'),
+            },
+        };
+    }
 }
-function drop_default({
-  params,
-  atRule,
-  replaceWith
-}) {
-  const finalParams = __spreadValues({
-    name: "",
-    duration: "",
-    easing: ""
-  }, params);
-  const vars = [];
-  vars.push(`
+export { postcssSugarPluginUiLoaderDropMixinInterface as interface };
+export default function ({ params, atRule, replaceWith, }) {
+    const finalParams = Object.assign({ name: '', duration: '', easing: '' }, params);
+    const vars = [];
+    vars.push(`
     position: relative;
     display: inline-block;
     pointer-events: none;
@@ -82,9 +82,6 @@ function drop_default({
         }
     }
   `);
-  return vars;
+    return vars;
 }
-export {
-  drop_default as default,
-  postcssSugarPluginUiLoaderDropMixinInterface as interface
-};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBRUgsTUFBTSw0Q0FBNkMsU0FBUSxZQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLGVBQWU7YUFDM0I7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFFBQVEsQ0FBQyxHQUFHLENBQUMsd0JBQXdCLENBQUM7YUFDbEQ7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLFFBQVEsQ0FBQyxHQUFHLENBQUMsc0JBQXNCLENBQUM7YUFDaEQ7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUUQsT0FBTyxFQUFFLDRDQUE0QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRXJFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLEVBQUUsRUFDUixRQUFRLEVBQUUsRUFBRSxFQUNaLE1BQU0sRUFBRSxFQUFFLElBQ1AsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7cUJBb0JPLFdBQVcsQ0FBQyxJQUFJLElBQUksV0FBVyxDQUFDLFFBQVEsSUFBSSxXQUFXLENBQUMsTUFBTTs7O3FCQUc5RCxXQUFXLENBQUMsSUFBSSxJQUFJLFdBQVcsQ0FBQyxRQUFRLElBQUksV0FBVyxDQUFDLE1BQU07OztpQkFHbEUsV0FBVyxDQUFDLElBQUk7Ozs7Ozs7Ozs7R0FVOUIsQ0FBQyxDQUFDO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9

@@ -2,6 +2,7 @@
     "name": "@coffeekraken/cli",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
     "bin": {
         "sugar": "dist/pkg/esm/cli/exports.js"
     },

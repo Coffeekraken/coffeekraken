@@ -1,66 +1,65 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-import __SInterface from "@coffeekraken/s-interface";
-import __STheme from "@coffeekraken/s-theme";
+import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+/**
+ * @name          checkbox
+ * @namespace     node.mixin.ui.checkbox
+ * @type               PostcssMixin
+ * @interface     ./checkbox          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the checkbox style to any element
+ *
+ * @param       {'solid'}                           [style='theme.ui.checkbox.defaultStyle']         The style(s) you want to generate
+ * @param       {'default'|'square'|'circle'}             [shape='theme.ui.checkbox.defaultShape']         The shape you want to generate
+ * @param       {'bare'|'lnf'|'shape'}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-checkbox {
+ *    @sugar.ui.checkbox;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 class postcssSugarPluginUiCheckboxInterface extends __SInterface {
-  static get _definition() {
-    return {
-      style: {
-        type: "String",
-        values: ["solid"],
-        default: __STheme.config("ui.checkbox.defaultStyle")
-      },
-      shape: {
-        type: "String",
-        values: ["default", "square", "circle"],
-        default: __STheme.config("ui.checkbox.defaultShape")
-      },
-      scope: {
-        type: {
-          type: "Array<String>",
-          splitChars: [",", " "]
-        },
-        values: ["bare", "lnf", "shape"],
-        default: ["bare", "lnf", "shape"]
-      }
-    };
-  }
+    static get _definition() {
+        return {
+            style: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.get('ui.checkbox.defaultStyle'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'circle'],
+                default: __STheme.get('ui.checkbox.defaultShape'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
+            },
+        };
+    }
 }
-function checkbox_default({
-  params,
-  atRule,
-  applyNoScopes,
-  replaceWith
-}) {
-  const finalParams = __spreadValues({
-    style: "solid",
-    shape: "default",
-    scope: ["bare", "lnf", "shape"]
-  }, params);
-  finalParams.scope = applyNoScopes(finalParams.scope);
-  const vars = [``];
-  switch (finalParams.style) {
-    case "solid":
-      if (finalParams.scope.indexOf("bare") !== -1) {
-        vars.push(`
+export { postcssSugarPluginUiCheckboxInterface as interface };
+export default function ({ params, atRule, replaceWith, }) {
+    const finalParams = Object.assign({ style: 'solid', shape: 'default', scope: ['bare', 'lnf', 'shape'] }, params);
+    const vars = [``];
+    switch (finalParams.style) {
+        case 'solid':
+            // bare
+            if (finalParams.scope.indexOf('bare') !== -1) {
+                vars.push(`
                 
-                appearance: none;
-                -moz-appearance: none;
-                -webkit-appearance: none;
+                appearance: none !important;
+                -moz-appearance: none !important;
+                -webkit-appearance: none !important;
                 position: relative;
                 width: 1em;
                 height: 1em;
@@ -70,9 +69,10 @@ function checkbox_default({
                     @sugar.disabled;
                 }
             `);
-      }
-      if (finalParams.scope.indexOf("lnf") !== -1) {
-        vars.push(`
+            }
+            // lnf
+            if (finalParams.scope.indexOf('lnf') !== -1) {
+                vars.push(`
                 
                     transition: sugar.theme(ui.checkbox.transition);
                     border: sugar.theme(ui.checkbox.borderWidth) solid sugar.color(current);
@@ -103,30 +103,27 @@ function checkbox_default({
                     }
  
         `);
-      }
-  }
-  if (finalParams.scope.includes("shape")) {
-    switch (finalParams.shape) {
-      case "square":
-        vars.push(`
+            }
+    }
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
                     border-radius: 0;
                 `);
-        break;
-      case "circle":
-        vars.push(`
+                break;
+            case 'circle':
+                vars.push(`
                     border-radius: 9999px;
                 `);
-        break;
-      default:
-        vars.push(`
-                    border-radius: sugar.theme(ui.checkbox.borderRadius);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.border.radius(ui.checkbox.borderRadius);
                 `);
-        break;
+                break;
+        }
     }
-  }
-  return vars;
+    return vars;
 }
-export {
-  checkbox_default as default,
-  postcssSugarPluginUiCheckboxInterface as interface
-};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBRUgsTUFBTSxxQ0FBc0MsU0FBUSxZQUFZO0lBQzVELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsUUFBUSxDQUFDLEdBQUcsQ0FBQywwQkFBMEIsQ0FBQzthQUNwRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLFFBQVEsQ0FBQztnQkFDdkMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxHQUFHLENBQUMsMEJBQTBCLENBQUM7YUFDcEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQztnQkFDaEMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLENBQUM7YUFDcEM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUUQsT0FBTyxFQUFFLHFDQUFxQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBQzlELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLE9BQU8sRUFDZCxLQUFLLEVBQUUsU0FBUyxFQUNoQixLQUFLLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQyxJQUM1QixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLENBQUMsRUFBRSxDQUFDLENBQUM7SUFFNUIsUUFBUSxXQUFXLENBQUMsS0FBSyxFQUFFO1FBQ3ZCLEtBQUssT0FBTztZQUNSLE9BQU87WUFDUCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO2dCQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7O2FBYWIsQ0FBQyxDQUFDO2FBQ0Y7WUFFRCxNQUFNO1lBQ04sSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtnQkFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBOEJqQixDQUFDLENBQUM7YUFDRTtLQUNSO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsRUFBRTtRQUNyQyxRQUFRLFdBQVcsQ0FBQyxLQUFLLEVBQUU7WUFDdkIsS0FBSyxRQUFRO2dCQUNULElBQUksQ0FBQyxJQUFJLENBQUM7O2lCQUVULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1YsS0FBSyxRQUFRO2dCQUNULElBQUksQ0FBQyxJQUFJLENBQUM7O2lCQUVULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1Y7Z0JBQ0ksSUFBSSxDQUFDLElBQUksQ0FBQzs7aUJBRVQsQ0FBQyxDQUFDO2dCQUNILE1BQU07U0FDYjtLQUNKO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9

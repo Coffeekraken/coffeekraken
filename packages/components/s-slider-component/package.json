@@ -2,6 +2,7 @@
     "name": "@coffeekraken/s-slider-component",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
     "homepage": "https://coffeekraken.io",
     "scripts": {
         "dev": "sugar frontstack",

@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -241,6 +241,37 @@
                 "description": "This interface specify the parameters needed to the `sugar monorepo.dev` command.",
                 "namespace": "@coffeekraken.s-monorepo.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SMonorepoDevParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "packagesGlobs": {
+                            "description": "Specify some globs to search for packages relative to the monorepo root directory",
+                            "type": "Array<String>",
+                            "default": [
+                                "packages/*/*/package.json"
+                            ],
+                            "alias": "p"
+                        },
+                        "buildInitial": {
+                            "description": "Specify if you want to build the files at launch before the watch process take care of the rest",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "b"
+                        },
+                        "tests": {
+                            "description": "Specify if you want to run the tests on saved files or not",
+                            "type": "Boolean",
+                            "default": true,
+                            "alias": "t"
+                        },
+                        "testInitial": {
+                            "description": "Specify if you want to test the files at launch before the watch process take care of the rest",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -264,6 +295,19 @@
                 "description": "This interface specify the parameters needed to the `sugar mono.list` command.",
                 "namespace": "@coffeekraken.s-monorepo.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SMonorepoListParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "packagesGlobs": {
+                            "description": "Specify some globs to search for packages relative to the monorepo root directory",
+                            "type": "Array<String>",
+                            "default": [
+                                "packages/*/*/package.json"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -287,6 +331,24 @@
                 "description": "This interface specify the parameters needed to the `sugar monorepo.run` command.",
                 "namespace": "@coffeekraken.s-monorepo.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SMonorepoRunParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "command": {
+                            "description": "Specify the command you want to run on the monorepo",
+                            "type": "String",
+                            "required": true
+                        },
+                        "packagesGlobs": {
+                            "description": "Specify some globs to search for packages relative to the monorepo root directory",
+                            "type": "Array<String>",
+                            "default": [
+                                "packages/*/*/package.json"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -310,6 +372,27 @@
                 "description": "This interface specify the parameters needed to the `sugar monorepo.upgrade` command.",
                 "namespace": "@coffeekraken.s-monorepo.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SMonorepoUpgradeParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "packagesGlobs": {
+                            "description": "Specify some globs to search for packages relative to the monorepo root directory",
+                            "type": "Array<String>",
+                            "default": [
+                                "packages/*/*/package.json"
+                            ]
+                        },
+                        "filesToUpgrade": {
+                            "description": "Specify some files to upgrade in each packages when doing a monorepo.upgrade call",
+                            "type": "Array<String>",
+                            "default": [
+                                "package.json",
+                                "composer.json"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

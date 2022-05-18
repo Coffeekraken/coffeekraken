@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -136,6 +135,70 @@
                         "code": "<div class=\"scrollable\" s-refocus trigger=\"event:actual\">\n   <ul>\n      <li>\n         <a href=\"#hello\">Hello</a>\n         <!-- when this element dispatch an \"actual\" event,\n              it will be refocused -->\n      </li>\n      <li>\n         <a href=\"#world\">World</a>\n      </li>\n   </ul>\n</div>"
                     }
                 ],
+                "interface": {
+                    "name": "SRefocusFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "trigger": {
+                            "description": "Specify some trigger(s) on which to refocus a particular element like `event:actual`, `anchor`, `history`, etc...",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "event:eventName",
+                                "anchor",
+                                "history"
+                            ],
+                            "default": []
+                        },
+                        "timeout": {
+                            "description": "Specify a timeout to wait before refocus the element",
+                            "type": "Number",
+                            "default": 500
+                        },
+                        "duration": {
+                            "description": "Specify the duration of the refocus animation",
+                            "type": "Number"
+                        },
+                        "easing": {
+                            "description": "Specify the easing function of the refocus animation",
+                            "type": "Function"
+                        },
+                        "offset": {
+                            "description": "Specify the offset of the refocus animation in px",
+                            "type": "Number"
+                        },
+                        "offsetX": {
+                            "description": "Specify the offset x of the refocus animation in px",
+                            "type": "Number"
+                        },
+                        "offsetY": {
+                            "description": "Specify the offset y of the refocus animation in px",
+                            "type": "Number"
+                        },
+                        "align": {
+                            "description": "Specify the alignment of the refocus animation",
+                            "type": "String",
+                            "values": [
+                                "start",
+                                "center",
+                                "end"
+                            ]
+                        },
+                        "justify": {
+                            "description": "Specify the justification of the refocus animation",
+                            "type": "String",
+                            "values": [
+                                "start",
+                                "center",
+                                "end"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -159,6 +222,70 @@
                 "description": "This interface represent the attributes of the SRefocusFeature",
                 "namespace": "@coffeekraken.s-refocus-feature.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SRefocusFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "trigger": {
+                            "description": "Specify some trigger(s) on which to refocus a particular element like `event:actual`, `anchor`, `history`, etc...",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "event:eventName",
+                                "anchor",
+                                "history"
+                            ],
+                            "default": []
+                        },
+                        "timeout": {
+                            "description": "Specify a timeout to wait before refocus the element",
+                            "type": "Number",
+                            "default": 500
+                        },
+                        "duration": {
+                            "description": "Specify the duration of the refocus animation",
+                            "type": "Number"
+                        },
+                        "easing": {
+                            "description": "Specify the easing function of the refocus animation",
+                            "type": "Function"
+                        },
+                        "offset": {
+                            "description": "Specify the offset of the refocus animation in px",
+                            "type": "Number"
+                        },
+                        "offsetX": {
+                            "description": "Specify the offset x of the refocus animation in px",
+                            "type": "Number"
+                        },
+                        "offsetY": {
+                            "description": "Specify the offset y of the refocus animation in px",
+                            "type": "Number"
+                        },
+                        "align": {
+                            "description": "Specify the alignment of the refocus animation",
+                            "type": "String",
+                            "values": [
+                                "start",
+                                "center",
+                                "end"
+                            ]
+                        },
+                        "justify": {
+                            "description": "Specify the justification of the refocus animation",
+                            "type": "String",
+                            "values": [
+                                "start",
+                                "center",
+                                "end"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

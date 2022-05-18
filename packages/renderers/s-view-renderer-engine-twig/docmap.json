@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -110,6 +109,11 @@
                 "description": "This interface represent the settings of the SViewRendererEngineBlade engine",
                 "namespace": "@coffeekraken.s-view-renderer-engine-twig.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SViewRendererEngineTwigSettingsInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

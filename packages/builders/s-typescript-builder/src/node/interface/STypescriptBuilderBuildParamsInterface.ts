@@ -17,7 +17,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SCliMonoListParamsInterface extends __SInterface {
+export default class STypescriptBuilderBuildParamsInterface extends __SInterface {
     static get _definition() {
         return {
             glob: {
@@ -88,6 +88,13 @@ export default class SCliMonoListParamsInterface extends __SInterface {
                 type: 'Array<String>',
                 default: __SSugarConfig.get('typescriptBuilder.exclude'),
                 alias: 'e',
+            },
+            save: {
+                description:
+                    'Specify if you want to save the result of the build in a file or not',
+                type: 'Boolean',
+                default: true,
+                alias: 's',
             },
         };
     }

@@ -18,13 +18,13 @@ import __SLog from '@coffeekraken/s-log';
  * @param           {Object}                        [settings={}]       Specify an object of settings to configure your compilation process
  *
  * @example         js
- * import SBuilder from '@coffeekraken/sugar/node/builder/SBuilder';
+ * import SBuilder from '@coffeekraken/s-builder';
  * import SPromise from '@coffeekraken/s-promise';
  * class MyBuilder extends SBuilder {
  *      constructor(settings = {}) {
  *          super(settings);
  *      }
- *      _build(input, settings) {
+ *      _build(params, settings) {
  *          return new SPromise(({resolve, reject, emit}) => {
  *              // compilation logic
  *          });
@@ -59,7 +59,7 @@ class SBuilder extends __SClass implements ISBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get builderSettings(): any {
-        return (<any>this._settings).builder;
+        return (<any>this)._settings.builder;
     }
 
     /**
@@ -107,6 +107,13 @@ class SBuilder extends __SClass implements ISBuilder {
         let finalParams = params;
         if (settings.interface) {
             finalParams = settings.interface.apply(params);
+        }
+
+        // @ts-ignore
+        if (!this._build) {
+            throw new Error(
+                `<yellow>[SBuilder]</yellow> Your "<yellow>${this.constructor.name}</yellow>" MUST have a "<magenta>_build</magenta>" method...`,
+            );
         }
 
         // @ts-ignore

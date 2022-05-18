@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -402,6 +402,32 @@
                 "description": "This class represent the interface that describe the SSitemapBuilder build params",
                 "namespace": "@coffeekraken.s-sitemap-builder.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SSitemapBuilderBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "source": {
+                            "description": "Specify the source(s) you want to build your sitemap. Can be all the configured sources specified under the \"config.sitemap.sources\" config",
+                            "type": "Array<String>",
+                            "default": []
+                        },
+                        "sourcesSettings": {
+                            "description": "Specigy sources settings by passing an object under each source \"id\" property",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "output": {
+                            "description": "Specify where to save the sitemap in xml format",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-sitemap-builder/src/public/sitemap.xml"
+                        },
+                        "save": {
+                            "description": "Specify if you want to save the sitemap or not",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -425,6 +451,17 @@
                 "description": "This class represent the interface that describe the SSitemapBuilder settings",
                 "namespace": "@coffeekraken.s-sitemap-builder.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SSitemapBuilderSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "sources": {
+                            "description": "Specify the sources to use to build the sitemap. A source is a objet with the properties \"active\", \"settings\" and \"path\"",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

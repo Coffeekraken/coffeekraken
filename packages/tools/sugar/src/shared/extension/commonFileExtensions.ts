@@ -21,7 +21,7 @@ import __unique from '../array/unique';
  * @platform       node
  * @platform        js
  * @status         beta
- * 
+ *
  * This function allows you to get an array of common file extensions with or without the dot.
  * You can filter extensions by types:
  * - audio
@@ -37,34 +37,104 @@ import __unique from '../array/unique';
  * - text
  * - video
  * - web
- * 
+ *
  * @param       {Boolean}           withDot          If true, the dot will be added to the extension
- * @return     {Array<String>}                           The array of extensions    
- * 
+ * @return     {Array<String>}                           The array of extensions
+ *
  * @example         js
  * import __commonFileExtensions from '@coffeekraken/sugar/shared/extension/commonFileExtensions';
  * const extensions = __commonFileExtensions(); // => ['avi','mp3',...]
- * 
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export type Types = ('audio' | 'compressed' | 'data' | 'disc' | 'email' | 'executable' | 'font' | 'image' | 'media' | 'programming' | 'text' | 'video' | 'web')[];
+export type Types = (
+    | 'audio'
+    | 'compressed'
+    | 'data'
+    | 'disc'
+    | 'email'
+    | 'executable'
+    | 'font'
+    | 'image'
+    | 'media'
+    | 'programming'
+    | 'text'
+    | 'video'
+    | 'web'
+)[];
 
-export default function commonFileExtensions(types: Types = ['audio','compressed','data','disc','email','executable','font','image','media','programming','text','video','web'], withDot = false): string[] {
+export interface ICommonFileExtensionsSettings {
+    dot: boolean;
+    exclude: string[];
+}
+
+export default function commonFileExtensions(
+    types: Types = [
+        'audio',
+        'compressed',
+        'data',
+        'disc',
+        'email',
+        'executable',
+        'font',
+        'image',
+        'media',
+        'programming',
+        'text',
+        'video',
+        'web',
+    ],
+    settings: Partial<ICommonFileExtensionsSettings> = {},
+): string[] {
+    const finalSettings: ICommonFileExtensionsSettings = {
+        dot: false,
+        exclude: [],
+        ...settings,
+    };
+
     return __unique([
-        ...(types.includes('audio') ? __commonAudioFileExtensions(false) : []),
-        ...(types.includes('compressed') ? __commonCompressedFileExtensions(false) : []),
-        ...(types.includes('data') ? __commonDataFileExtensions(false) : []),
-        ...(types.includes('disc') ? __commonDiscFileExtensions(false) : []),
-        ...(types.includes('email') ? __commonEmailFileExtensions(false) : []),
-        ...(types.includes('executable') ? __commonExecutableFileExtensions(false) : []),
-        ...(types.includes('font') ? __commonFontFileExtensions(false) : []),
-        ...(types.includes('image') ? __commonImageFileExtensions(false) : []),
-        ...(types.includes('media') ? __commonMediaFileExtensions(false) : []),
-        ...(types.includes('programming') ? __commonProgrammingFileExtensions(false) : []),
-        ...(types.includes('text') ? __commonTextFileExtensions(false) : []),
-        ...(types.includes('video') ? __commonVideoFileExtensions(false) : []),
-        ...(types.includes('web') ? __commonWebFileExtensions(false) : []),
-    ]).map(ext => withDot ? `.${ext}` : ext);
+        ...(types.includes('audio')
+            ? __commonAudioFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('compressed')
+            ? __commonCompressedFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('data')
+            ? __commonDataFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('disc')
+            ? __commonDiscFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('email')
+            ? __commonEmailFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('executable')
+            ? __commonExecutableFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('font')
+            ? __commonFontFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('image')
+            ? __commonImageFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('media')
+            ? __commonMediaFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('programming')
+            ? __commonProgrammingFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('text')
+            ? __commonTextFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('video')
+            ? __commonVideoFileExtensions(finalSettings)
+            : []),
+        ...(types.includes('web')
+            ? __commonWebFileExtensions(finalSettings)
+            : []),
+    ])
+        .filter((ext) => !finalSettings.exclude.includes(ext))
+        .map((ext) => (finalSettings.dot ? `.${ext}` : ext));
 }

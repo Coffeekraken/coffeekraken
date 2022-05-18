@@ -1,60 +1,58 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-import __SInterface from "@coffeekraken/s-interface";
-import __STheme from "@coffeekraken/s-theme";
+import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+/**
+ * @name          select
+ * @namespace     node.mixin.ui.select
+ * @type               PostcssMixin
+ * @interface     ./select          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the select style to any HTMLSelectElement
+ *
+ * @param       {'solid'}                           [style='theme.ui.select.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.select.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-select {
+ *    @sugar.ui.select;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 class postcssSugarPluginUiFormSelectInterface extends __SInterface {
-  static get _definition() {
-    return {
-      style: {
-        type: "String",
-        values: ["solid"],
-        default: __STheme.config("ui.select.defaultStyle")
-      },
-      shape: {
-        type: "String",
-        values: ["default", "square", "pill"],
-        default: __STheme.config("ui.select.defaultShape")
-      },
-      scope: {
-        type: {
-          type: "Array<String>",
-          splitChars: [",", " "]
-        },
-        values: ["bare", "lnf", "shape"],
-        default: ["bare", "lnf", "shape"]
-      }
-    };
-  }
+    static get _definition() {
+        return {
+            style: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.get('ui.select.defaultStyle'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.get('ui.select.defaultShape'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
+            },
+        };
+    }
 }
-function select_default({
-  params,
-  atRule,
-  applyNoScopes,
-  replaceWith
-}) {
-  const finalParams = __spreadValues({
-    style: "solid",
-    shape: "default",
-    scope: ["bare", "lnf", "shape"]
-  }, params);
-  finalParams.scope = applyNoScopes(finalParams.scope);
-  const vars = [];
-  if (finalParams.scope.indexOf("bare") !== -1) {
-    vars.push(`
+export { postcssSugarPluginUiFormSelectInterface as interface };
+export default function ({ params, atRule, replaceWith, }) {
+    const finalParams = Object.assign({ style: 'solid', shape: 'default', scope: ['bare', 'lnf', 'shape'] }, params);
+    const vars = [];
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
             @sugar.ui.base(select, $scope: bare);
           position: relative;
           -webkit-appearance: none;
@@ -62,12 +60,12 @@ function select_default({
           line-height: 1;
           outline: 0;
       `);
-  }
-  switch (finalParams.style) {
-    case "solid":
-    default:
-      if (finalParams.scope.indexOf("lnf") !== -1) {
-        vars.push(`
+    }
+    switch (finalParams.style) {
+        case 'solid':
+        default:
+            if (finalParams.scope.indexOf('lnf') !== -1) {
+                vars.push(`
                 @sugar.ui.base(select, $scope: lnf);
                 overflow: hidden;
 
@@ -89,9 +87,9 @@ function select_default({
                 }
 
                 &:not([multiple]) {
-                    padding-inline-end: calc(sugar.theme(ui.select.paddingInline) + 1.5em);
+                    padding-inline-end: calc(sugar.padding(ui.select.paddingInline) + 1.5em);
 
-                    --padding-inline: sugar.theme(ui.select.paddingInline);
+                    --padding-inline: sugar.padding(ui.select.paddingInline);
 
                     background-repeat: no-repeat;
                     background-image: linear-gradient(45deg, transparent 50%, sugar.color(current) 50%), linear-gradient(135deg, sugar.color(current) 50%, transparent 50%);
@@ -105,31 +103,28 @@ function select_default({
                 }
 
                 `);
-        break;
-      }
-  }
-  if (finalParams.scope.includes("shape")) {
-    switch (finalParams.shape) {
-      case "square":
-        vars.push(`
+                break;
+            }
+    }
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
                     border-radius: 0;
                 `);
-        break;
-      case "pill":
-        vars.push(`
+                break;
+            case 'pill':
+                vars.push(`
                     border-radius: 9999px;
                 `);
-        break;
-      default:
-        vars.push(`
-                    border-radius: sugar.theme(ui.select.borderRadius);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.border.radius(ui.select.borderRadius);
                 `);
-        break;
+                break;
+        }
     }
-  }
-  return vars;
+    return vars;
 }
-export {
-  select_default as default,
-  postcssSugarPluginUiFormSelectInterface as interface
-};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBRUgsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZO0lBQzlELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsUUFBUSxDQUFDLEdBQUcsQ0FBQyx3QkFBd0IsQ0FBQzthQUNsRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQztnQkFDckMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxHQUFHLENBQUMsd0JBQXdCLENBQUM7YUFDbEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQztnQkFDaEMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLENBQUM7YUFDcEM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUUQsT0FBTyxFQUFFLHVDQUF1QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWhFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLE9BQU8sRUFDZCxLQUFLLEVBQUUsU0FBUyxFQUNoQixLQUFLLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQyxJQUM1QixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7T0FPWCxDQUFDLENBQUM7S0FDSjtJQUVELFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtRQUN2QixLQUFLLE9BQU8sQ0FBQztRQUNiO1lBQ0ksSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtnQkFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkFxQ1QsQ0FBQyxDQUFDO2dCQUVILE1BQU07YUFDVDtLQUNSO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsRUFBRTtRQUNyQyxRQUFRLFdBQVcsQ0FBQyxLQUFLLEVBQUU7WUFDdkIsS0FBSyxRQUFRO2dCQUNULElBQUksQ0FBQyxJQUFJLENBQUM7O2lCQUVULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1YsS0FBSyxNQUFNO2dCQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7O2lCQUVULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1Y7Z0JBQ0ksSUFBSSxDQUFDLElBQUksQ0FBQzs7aUJBRVQsQ0FBQyxDQUFDO2dCQUNILE1BQU07U0FDYjtLQUNKO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9

@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -1040,6 +1039,28 @@
                 "description": "This class represent the interface that describe the minimum requirement\nneeded for a frontend server adding default pages process.",
                 "namespace": "@coffeekraken.s-frontend-server.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SFrontendServerAddDefaultPagesParamsIn",
+                    "description": "",
+                    "definition": {
+                        "yes": {
+                            "description": "Answer yes to all the potential questions",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "y"
+                        },
+                        "viewsDir": {
+                            "description": "Server views directory",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/src/views"
+                        },
+                        "pagesDir": {
+                            "description": "Server pages directory",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/src/pages"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -1063,6 +1084,61 @@
                 "description": "This class represent the interface that describe the minimum requirement\nneeded for a frontend server process.",
                 "namespace": "@coffeekraken.s-frontend-server.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SFrontendServerStartParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "hostname": {
+                            "description": "Server hostname",
+                            "type": "String",
+                            "alias": "o",
+                            "required": true,
+                            "default": "127.0.0.1"
+                        },
+                        "port": {
+                            "description": "Server port",
+                            "type": "Number",
+                            "alias": "p",
+                            "default": 8080,
+                            "level": 1
+                        },
+                        "rootDir": {
+                            "description": "Server root directory",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server",
+                            "level": 1
+                        },
+                        "viewsDir": {
+                            "description": "Server views directory",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/src/views"
+                        },
+                        "pagesDir": {
+                            "description": "Server pages directory",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/src/pages"
+                        },
+                        "logLevel": {
+                            "description": "Specify the log level you want for your server",
+                            "type": "String",
+                            "values": [
+                                "silent",
+                                "error",
+                                "warn",
+                                "debug",
+                                "info",
+                                "verbose",
+                                "silly"
+                            ],
+                            "default": "info"
+                        },
+                        "prod": {
+                            "description": "Specify that we want the server to act \"like\" a production one with compression etc...",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

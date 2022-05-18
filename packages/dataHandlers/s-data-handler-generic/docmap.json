@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",

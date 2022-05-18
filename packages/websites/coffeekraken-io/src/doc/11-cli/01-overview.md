@@ -52,15 +52,17 @@ Then you will have access to the `sugar` command that you can use first like so:
 
 These are the main entry points with the ones you can discover and try our features
 
-## Main commands
+## Available commands
 
-To start quickly and code as soon as possible, here's some commands that you can use:
+Here's a list of the available commands:
 
-1. `sugar new`: Create a new project based on a template that you can choose interactively
-2. `cd myProject`: Change directory to your newly created project
-3. `sugar dev`: Launch the development environment and start coding
-4. `sugar build`: Build your files (JS/TS, CSS, images, etc...) for production
+{{#each availableCli.endpoints}}
 
-That's all you need to start working as soon as possible. These commands are totally independent of the chosen template so you don't need to think again and again how to build, start developing, etc...
+-   `sugar {{@key}} [arguments]`
+    -   {{this.description}}
+
+{{/each}}
+
+> For more information about these commands, simply use the `sugar -h` command, or the `sugar docmap.build -h` to have more insights about a particular one...
 
 {{/layout-doc }}

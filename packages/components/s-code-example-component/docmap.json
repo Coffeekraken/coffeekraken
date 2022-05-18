@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -17,6 +16,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -81,6 +81,151 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingInline": {
+                "name": "paddingInline",
+                "type": "String",
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding inline for code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingBlock": {
+                "name": "paddingBlock",
+                "type": "String",
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding block for code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderRadius": {
+                "name": "borderRadius",
+                "type": "String",
+                "default": "[theme.ui.default.borderRadius]",
+                "description": "Specify the default border radius for code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderWidth": {
+                "name": "borderWidth",
+                "type": "String",
+                "default": "[theme.ui.default.borderWidth]",
+                "description": "Specify the default border width for code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.transition": {
+                "name": "transition",
+                "type": "String",
+                "default": "[theme.ui.default.transition]",
+                "description": "Specify the default transition for code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultColor": {
+                "name": "defaultColor",
+                "type": "String",
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default color for code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultStyle": {
+                "name": "defaultStyle",
+                "type": "Number",
+                "default": "[theme.ui.default.defaultStyle]",
+                "description": "Specify the default style for your code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.depth": {
+                "name": "depth",
+                "type": "String",
+                "default": "[theme.ui.default.depth]",
+                "description": "Specify the default depth for code items",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.rhythmVertical": {
+                "name": "rhythmVertical",
+                "type": "Object",
+                "default": "[theme.ui.default.rhythmVertical]",
+                "description": "Specify the default vertical rhythm for your code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-code-example-component.js.Code-Example": {
                 "name": "Code Example",
                 "type": "CustomElement",
@@ -110,6 +255,73 @@
                         "code": "import { define } from '@coffeekraken/s-code-example-component';\ndefine();"
                     }
                 ],
+                "interface": {
+                    "name": "SCodeExampleComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "active": {
+                            "description": "Specify which \"tab\" is active in case of multiple languages examples",
+                            "type": "String"
+                        },
+                        "toolbar": {
+                            "description": "Specify what you want in the toolbar. Currently available item is \"copy\"",
+                            "type": "Array<String>",
+                            "values": [
+                                "copy"
+                            ],
+                            "default": [
+                                "copy"
+                            ]
+                        },
+                        "toolbarPosition": {
+                            "description": "Specify the toolbar position. Can be \"content\" or \"nav\"",
+                            "type": "String",
+                            "values": [
+                                "content",
+                                "nav"
+                            ],
+                            "default": "nav"
+                        },
+                        "languages": {
+                            "description": "Specify some languages that you want to support. Must be \"[key]: language\" object syntax. See [highlight.js doc](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) for supported languages",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "lines": {
+                            "description": "Specify how many lines to display at max",
+                            "type": "Number"
+                        },
+                        "moreLabel": {
+                            "description": "Specify the \"show more\" button label",
+                            "type": "String",
+                            "default": "Show more"
+                        },
+                        "lessLabel": {
+                            "description": "Specigy the \"show less\" button label",
+                            "type": "String",
+                            "default": "Show less"
+                        },
+                        "moreAction": {
+                            "type": "String",
+                            "default": "toggle"
+                        },
+                        "more": {
+                            "description": "Specify if you want to expand the more feature at start or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "scrollOnMore": {
+                            "description": "Specify if you want to scroll to the code when clicking on the \"show more/less\" button",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "scrollToSettings": {
+                            "description": "Specify some scrollTo settings",
+                            "type": "IScrollToSettings",
+                            "default": {}
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -133,6 +345,73 @@
                 "description": "This class represent the interface that describe parameters of the SCodeExampleComponent",
                 "namespace": "@coffeekraken.s-code-example-component.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SCodeExampleComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "active": {
+                            "description": "Specify which \"tab\" is active in case of multiple languages examples",
+                            "type": "String"
+                        },
+                        "toolbar": {
+                            "description": "Specify what you want in the toolbar. Currently available item is \"copy\"",
+                            "type": "Array<String>",
+                            "values": [
+                                "copy"
+                            ],
+                            "default": [
+                                "copy"
+                            ]
+                        },
+                        "toolbarPosition": {
+                            "description": "Specify the toolbar position. Can be \"content\" or \"nav\"",
+                            "type": "String",
+                            "values": [
+                                "content",
+                                "nav"
+                            ],
+                            "default": "nav"
+                        },
+                        "languages": {
+                            "description": "Specify some languages that you want to support. Must be \"[key]: language\" object syntax. See [highlight.js doc](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) for supported languages",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "lines": {
+                            "description": "Specify how many lines to display at max",
+                            "type": "Number"
+                        },
+                        "moreLabel": {
+                            "description": "Specify the \"show more\" button label",
+                            "type": "String",
+                            "default": "Show more"
+                        },
+                        "lessLabel": {
+                            "description": "Specigy the \"show less\" button label",
+                            "type": "String",
+                            "default": "Show less"
+                        },
+                        "moreAction": {
+                            "type": "String",
+                            "default": "toggle"
+                        },
+                        "more": {
+                            "description": "Specify if you want to expand the more feature at start or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "scrollOnMore": {
+                            "description": "Specify if you want to scroll to the code when clicking on the \"show more/less\" button",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "scrollToSettings": {
+                            "description": "Specify some scrollTo settings",
+                            "type": "IScrollToSettings",
+                            "default": {}
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

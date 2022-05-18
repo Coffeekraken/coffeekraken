@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -1364,6 +1364,79 @@
                 "description": "This class represent the interface that describe parameters of the SMarkdownBuilder.build method",
                 "namespace": "@coffeekraken.s-markdown-builder.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SMarkdownBuilderBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "glob": {
+                            "description": "Specify a glob pattern to target all the markdown files you want to build. This is relative the the \"inDir\" parameter",
+                            "type": "String",
+                            "required": true,
+                            "alias": "g",
+                            "default": "**/+(README|LICENSE|*.md)"
+                        },
+                        "inDir": {
+                            "description": "Specify the input directory where your source files are standing",
+                            "type": "String",
+                            "required": true,
+                            "alias": "d",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-markdown-builder/src"
+                        },
+                        "inPath": {
+                            "description": "Specify a direct path to a markdown file to build",
+                            "type": "String",
+                            "alias": "p",
+                            "default": null
+                        },
+                        "inRaw": {
+                            "description": "Specify a raw markkdown string to build",
+                            "type": "String",
+                            "alias": "r",
+                            "default": null
+                        },
+                        "outDir": {
+                            "description": "Specify the directory where you want to save your builded files",
+                            "type": "String",
+                            "alias": "o",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-markdown-builder/dist"
+                        },
+                        "outPath": {
+                            "description": "Specify a path to the output file when you make use of the \"inPath\" parameter",
+                            "type": "String",
+                            "default": null
+                        },
+                        "save": {
+                            "description": "Specify if you want to save the builded files or not",
+                            "type": "Boolean",
+                            "alias": "s",
+                            "default": true
+                        },
+                        "target": {
+                            "description": "Specify the target format of the build. Supported values are \"html\" and \"markdown\"",
+                            "type": "String",
+                            "values": [
+                                "html",
+                                "markdown"
+                            ],
+                            "alias": "t",
+                            "default": "markdown"
+                        },
+                        "preset": {
+                            "description": "Specify some preset(s) to use for your build. Presets are defined in the config.markdownBuilder.presets configuration path",
+                            "type": "Array<String>",
+                            "values": [],
+                            "alias": "p"
+                        },
+                        "protectedTags": {
+                            "description": "Specify some tags that should be protected from the markdown transformations like \"template\" or \"code\"...",
+                            "type": "Array<String>",
+                            "default": [
+                                "template",
+                                "code"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

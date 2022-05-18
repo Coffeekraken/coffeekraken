@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -329,6 +328,34 @@
                 "description": "This class represent the interface that describe SViewRenderer settings",
                 "namespace": "@coffeekraken.s-view-renderer.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SViewRendererSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "rootDirs": {
+                            "description": "Specify some folder paths where to search for views",
+                            "type": "String",
+                            "default": [
+                                "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/renderers/s-view-renderer/src/views"
+                            ]
+                        },
+                        "cacheDir": {
+                            "description": "Specigy the folder to store the engines cache",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/renderers/s-view-renderer/.local/cache/views"
+                        },
+                        "enginesSettings": {
+                            "description": "Specify some engines settings. Object must contain each engine settings under his own property. For blade, the property name is \"blade\"",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "defaultData": {
+                            "description": "Specify some default data to pass to the view",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

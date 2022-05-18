@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -244,6 +244,47 @@
                 "description": "This class represent the interface that describe parameters of the SPostcssBuilder.build method",
                 "namespace": "@coffeekraken.s-postcss-builder.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SPostcssBuilderBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "input": {
+                            "description": "Specify the input css file for your build",
+                            "type": "String",
+                            "required": true,
+                            "alias": "i",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/src/css/index.css"
+                        },
+                        "output": {
+                            "description": "Specify the output file path you want to save your build",
+                            "type": "String",
+                            "alias": "o",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/dist/css/index.css"
+                        },
+                        "prod": {
+                            "description": "Shorthand to set a production ready build",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "p"
+                        },
+                        "minify": {
+                            "description": "Specify if you want to minify your output css",
+                            "type": "Boolean",
+                            "alias": "m",
+                            "default": false
+                        },
+                        "purge": {
+                            "description": "Specify if you want to purge your output css. See the config.purgecss configuration file for more control",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "saveDev": {
+                            "description": "Specify if you want to save a .dev.css file that will not be purged or minified",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

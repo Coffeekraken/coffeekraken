@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -197,6 +196,27 @@
                 "description": "This interface represent the SConductor settings.",
                 "namespace": "@coffeekraken.s-conductor.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SConductorSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "idleTimeout": {
+                            "description": "Specify after how many milliseconds of inactity the SConductor has to be considered as idle ",
+                            "type": "Number",
+                            "default": 500
+                        },
+                        "logTimeout": {
+                            "description": "Specify after how many milliseconds of inactity the SConductor has to log the small analysis",
+                            "type": "Number",
+                            "default": 2000
+                        },
+                        "log": {
+                            "description": "Specify if you want to log the small analysis when the SConductor is idle",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

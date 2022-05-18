@@ -69,8 +69,11 @@ export default function (env, config) {
              */
             globs: [
                 '*',
-                `src/!(css)/*{0,4}/*.+(${__commonTextFileExtensions(false).join('|')})`,
-                `dist/+(css)/*`
+                // 'dist/pkg/esm/**/*.js',
+                `src/!(css)/*{0,4}/*.+(${__commonTextFileExtensions({}).join(
+                    '|',
+                )})`,
+                `dist/+(css)/*`,
             ],
 
             /**

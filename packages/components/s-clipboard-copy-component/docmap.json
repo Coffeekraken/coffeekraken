@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -17,6 +16,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -93,6 +93,22 @@
                 "description": "This class represent the interface that describe parameters of the SClipboardCopyComponent",
                 "namespace": "@coffeekraken.s-clipboard-copy-component.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SClipboardCopyComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "successTimeout": {
+                            "description": "Specify the duration for displaying the \"success\" icon",
+                            "type": "Number",
+                            "default": 1500
+                        },
+                        "errorTimeout": {
+                            "description": "Specify the duration for displaying the \"error\" icon",
+                            "type": "Number",
+                            "default": 3000
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

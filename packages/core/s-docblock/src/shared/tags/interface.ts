@@ -6,6 +6,7 @@ import __path from 'path';
 import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
 import __fileName from '@coffeekraken/sugar/node/fs/filename';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
+import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 
 /**
  * @name              interface
@@ -32,9 +33,6 @@ export default async function interfaceTag(data, blockSettings) {
 
     if (data.value === true) {
         stringArray = [__fileName(blockSettings.filePath), 'default'];
-        if (blockSettings.filePath.match(/\.ts$/)) {
-            return;
-        }
     } else {
         stringArray = data.value.trim().split(/(?<=^\S+)\s/);
     }
@@ -44,15 +42,34 @@ export default async function interfaceTag(data, blockSettings) {
 
     const potentialPath = __checkPathWithMultipleExtensions(
         __path.resolve(__folderPath(blockSettings.filePath), path),
-        ['js'],
+        ['ts', 'js'],
     );
 
     if (!potentialPath) return;
 
-    const int = await import(potentialPath);
+    let interf;
 
-    const interfaceObj = int[importName].toObject();
+    if (potentialPath.match(/\.ts$/)) {
+        const typescriptBuilder = new __STypescriptBuilder();
+        const result = await typescriptBuilder.build({
+            glob: __path.basename(potentialPath),
+            inDir: __path.dirname(potentialPath),
+            outDir: __path.dirname(potentialPath),
+            formats: ['esm'],
+            save: true,
+        });
+        // @ts-ignore
+        interf = await import(potentialPath.replace(/\.ts$/, '.js'));
+        interf = interf.default;
+        try {
+            __fs.unlinkSync(potentialPath.replace(/\.ts$/, '.js'));
+        } catch (e) {}
+    } else {
+        // @ts-ignore
+        interf = (await import(potentialPath))[importName];
+    }
 
+    const interfaceObj = interf.toObject();
     interfaceObj.definition = __deepMap(
         interfaceObj.definition,
         ({ object, prop, value }) => {

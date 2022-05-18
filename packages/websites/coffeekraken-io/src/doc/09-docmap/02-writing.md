@@ -20,8 +20,8 @@ To write your documentation as best as possible, you can use pretty much all the
 
 However, to generate the docmap, we only take these specifics tags:
 
--   `name`: The name of your function/class/etc...
--   `namespace`: A namespace under which to store this doc element in the docmap **!important**
+-   `name`: The name of your function/class/etc... **required**
+-   `namespace`: A namespace under which to store this doc element in the docmap **required**
 -   `type`: The type of what you are documenting like "function", "class", "string", etc...
 -   `menu`: A special tag to create menus inside the docmap. This is documented in [this documentation](/doc/docmap/menu)
 -   `default`: The default value of what you are documenting like "true", "something", etc...

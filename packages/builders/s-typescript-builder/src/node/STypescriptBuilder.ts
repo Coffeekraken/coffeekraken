@@ -1,9 +1,12 @@
 import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
+import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __monorepoToPackageAbsolutePathDeepMap from '@coffeekraken/sugar/node/monorepo/monorepoToPackageAbsolutePathDeepMap';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
@@ -11,10 +14,7 @@ import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __path from 'path';
 import __ts from 'typescript';
-import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
-import __findUp from '@coffeekraken/sugar/node/fs/findUp';
-import __SGlob from '@coffeekraken/s-glob';
-import __monorepoToPackageAbsolutePathDeepMap from '@coffeekraken/sugar/node/monorepo/monorepoToPackageAbsolutePathDeepMap';
+// import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
 
 /**
  * @name                STypescriptBuilder
@@ -111,6 +111,7 @@ export interface ISTypescriptBuilderBuildParams {
     buildInitial: boolean;
     customSettings: ISTypescriptBuilderCustomSettings;
     exclude: string[];
+    save: boolean;
 }
 
 export default class STypescriptBuilder extends __SBuilder {
@@ -179,6 +180,13 @@ export default class STypescriptBuilder extends __SBuilder {
                     watchersReady: any[] = [],
                     buildPromises: Promise<any>[] = [];
 
+                const {
+                    default: __STypescriptBuilderBuildParamsInterface,
+                    // @ts-ignore
+                } = await import(
+                    `${__dirname()}/interface/STypescriptBuilderBuildParamsInterface`
+                );
+
                 // @ts-ignore
                 const finalParams: ISTypescriptBuilderBuildParams = __monorepoToPackageAbsolutePathDeepMap(
                     __STypescriptBuilderBuildParamsInterface.apply(params),
@@ -222,7 +230,8 @@ export default class STypescriptBuilder extends __SBuilder {
                     const watcher = __chokidar.watch(glob, {
                         cwd: finalParams.inDir,
                         ignored: finalParams.exclude,
-                        ignoreInitial: !finalParams.buildInitial,
+                        ignoreInitial:
+                            finalParams.watch && !finalParams.buildInitial,
                     });
 
                     // keep track on the watchers ready state
@@ -301,6 +310,7 @@ export default class STypescriptBuilder extends __SBuilder {
                                                 watch: false,
                                             },
                                         ),
+                                        finalParams,
                                     ),
                                 );
                                 buildPromises.push(pro);
@@ -324,6 +334,7 @@ export default class STypescriptBuilder extends __SBuilder {
 
     _buildFile(
         file: ISTypescriptBuilderFileToBuild,
+        params: ISTypescriptBuilderBuildParams,
     ): Promise<ISTypescriptBuilderResultFile> {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             const packageRoot = __packageRoot();
@@ -376,7 +387,7 @@ export default class STypescriptBuilder extends __SBuilder {
                 }),
             );
 
-            if (result.outputText) {
+            if (params.save && result.outputText) {
                 // write the output file
                 if (!__fs.existsSync(outPath)) {
                     __fs.mkdirSync(outPath, { recursive: true });
@@ -390,21 +401,27 @@ export default class STypescriptBuilder extends __SBuilder {
             }
 
             // package.json
-            const packageJsonOutFolderPath = __path.dirname(packageJsonOutPath);
-            if (!__fs.existsSync(packageJsonOutFolderPath)) {
-                __fs.mkdirSync(packageJsonOutFolderPath, { recursive: true });
-            }
-            if (!__fs.existsSync(packageJsonOutPath)) {
-                __fs.writeFileSync(
+            if (params.save) {
+                const packageJsonOutFolderPath = __path.dirname(
                     packageJsonOutPath,
-                    JSON.stringify({
-                        name: `@coffeekraken/internal-${__uniqid()}-${
-                            file.format === 'cjs' ? 'commonjs' : 'module'
-                        }`,
-                        type: file.format === 'cjs' ? 'commonjs' : 'module',
-                        private: true,
-                    }),
                 );
+                if (!__fs.existsSync(packageJsonOutFolderPath)) {
+                    __fs.mkdirSync(packageJsonOutFolderPath, {
+                        recursive: true,
+                    });
+                }
+                if (!__fs.existsSync(packageJsonOutPath)) {
+                    __fs.writeFileSync(
+                        packageJsonOutPath,
+                        JSON.stringify({
+                            name: `@coffeekraken/internal-${__uniqid()}-${
+                                file.format === 'cjs' ? 'commonjs' : 'module'
+                            }`,
+                            type: file.format === 'cjs' ? 'commonjs' : 'module',
+                            private: true,
+                        }),
+                    );
+                }
             }
 
             resolve({
@@ -412,7 +429,8 @@ export default class STypescriptBuilder extends __SBuilder {
                 format: file.format,
                 platform: file.platform,
                 module: tsconfig.module ?? module,
-                file: new __SFile(outFilePath),
+                js: result.outputText,
+                file: params.save ? new __SFile(outFilePath) : undefined,
             });
         });
     }

@@ -24,7 +24,6 @@ export default function get(
     resolveDots = true,
     insidePath = null,
 ) {
-
     if (typeof insidePath !== 'string') insidePath = null;
 
     let res;

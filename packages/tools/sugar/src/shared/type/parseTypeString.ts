@@ -51,11 +51,12 @@ function parseSingleTypeString(typeString: string): ITypeStringObject {
         };
     }
     // number value
-    if (typeof __autoCast(typeStr) === 'number') {
+    const autoCastedValue = __autoCast(typeStr);
+    if (typeof autoCastedValue === 'number') {
         return {
             type: 'number',
             of: undefined,
-            value: __autoCast(typeStr),
+            value: autoCastedValue,
         };
     }
 
@@ -77,11 +78,11 @@ function parseSingleTypeString(typeString: string): ITypeStringObject {
     }
 
     // values in "of"
-    ofStr.split('|').forEach((of) => {
-        if (typeof __autoCast(of) !== 'string') {
-            console.log('NO string', of);
-        }
-    });
+    // ofStr.split('|').forEach((of) => {
+    //     if (typeof __autoCast(of) !== 'string') {
+    //         console.log('NO string', of);
+    //     }
+    // });
     // values = typeString.split(/\|/).map((v) => __autoCast(v));
 
     const result = {

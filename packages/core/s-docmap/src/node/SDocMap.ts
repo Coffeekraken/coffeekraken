@@ -458,10 +458,29 @@ class SDocMap extends __SClass implements ISDocMap {
                         docmapJson.map[namespace] = obj;
                     }
 
-                    finalDocmapJson.map = {
-                        ...finalDocmapJson.map,
-                        ...(docmapJson.map ?? {}),
-                    };
+                    for (let [namespace, docmapObj] of Object.entries(
+                        docmapJson.map,
+                    )) {
+                        let blockId = namespace;
+                        if (
+                            !blockId.startsWith(
+                                packageNameOrPath.replace(/\//gm, '.'),
+                            )
+                        ) {
+                            blockId = `${packageNameOrPath.replace(
+                                /\//gm,
+                                '.',
+                            )}.${namespace}`;
+                        }
+                        console.log(blockId);
+                        if (!finalDocmapJson.map[blockId]) {
+                            // assigning an id to the block.
+                            // This id is the string used as map property to store the block
+                            docmapObj.id = blockId;
+                            // saving the block into our final docmap map
+                            finalDocmapJson.map[blockId] = docmapObj;
+                        }
+                    }
                 };
 
                 const docmapJsonFolderPath = __folderPath(finalParams.input);
@@ -494,6 +513,11 @@ class SDocMap extends __SClass implements ISDocMap {
             {
                 metas: {
                     id: `read`,
+                },
+            },
+            {
+                eventEmitter: {
+                    bind: this,
                 },
             },
         );
@@ -784,7 +808,7 @@ class SDocMap extends __SClass implements ISDocMap {
                         )}</cyan>"`,
                     });
 
-                    const docblocksInstance = new __SDocblock(content, {
+                    const docblocksInstance = new __SDocblock(file.path, {
                         docblock: {
                             renderMarkdown: false,
                             filepath: (<__SFile>file).path,
@@ -831,11 +855,6 @@ class SDocMap extends __SClass implements ISDocMap {
                         for (let l = 0; l < finalParams.tags.length; l++) {
                             const tag = finalParams.tags[l];
                             if (docblock[tag] === undefined) continue;
-                            if (tag === 'namespace')
-                                docblock[tag] = `${packageJson.name.replace(
-                                    '/',
-                                    '.',
-                                )}.${docblock[tag]}`;
                             // props proxy
                             if (this.docmapSettings.tagsProxy[tag]) {
                                 docblockEntryObj[
@@ -848,15 +867,11 @@ class SDocMap extends __SClass implements ISDocMap {
                             }
                         }
 
-                        // const namespaceIdCompliant = __namespaceCompliant(
-                        //     `${docblock.namespace}.${docblock.name}`,
-                        // );
+                        const dotPath = __namespaceCompliant(
+                            `${docblock.namespace}.${docblock.name}`,
+                        );
 
-                        if (
-                            docblock.namespace &&
-                            docblock.id &&
-                            !this._entries[docblock.id]
-                        ) {
+                        if (docblock.namespace && !this._entries[dotPath]) {
                             docblockObj = {
                                 ...docblockEntryObj,
                                 filename,
@@ -866,7 +881,7 @@ class SDocMap extends __SClass implements ISDocMap {
                                     (<__SFile>file).path,
                                 ),
                             };
-                            this._entries[docblock.id] = docblockObj;
+                            this._entries[dotPath] = docblockObj;
                         } else if (docblock.name) {
                             children[
                                 __toLowerCase(docblock.name)
@@ -908,6 +923,11 @@ class SDocMap extends __SClass implements ISDocMap {
             {
                 metas: {
                     id: `build`,
+                },
+            },
+            {
+                eventEmitter: {
+                    bind: this,
                 },
             },
         );

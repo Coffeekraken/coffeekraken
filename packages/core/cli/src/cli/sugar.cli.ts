@@ -86,31 +86,40 @@ export interface ISSugarCliArgs {
 }
 
 export default class SSugarCli {
-    _stdio: ISStdio;
-    _websocketStdio: ISStdio;
-    _eventEmitter: __SEventEmitter;
-    _treatAsMain: boolean;
-    _sugarJsons: any;
+    static _stdio: ISStdio;
+    static _websocketStdio: ISStdio;
+    static _eventEmitter: __SEventEmitter;
+    static _treatAsMain: boolean;
+    static _sugarJsons: any;
 
-    args: ISSugarCliArgs;
+    static args: ISSugarCliArgs;
 
-    _availableCli: ISSugarCliAvailableCli = {
+    static _availableCli: ISSugarCliAvailableCli = {
         defaultByStack: {},
         endpoints: {},
     };
-    _availableInteractiveCli: Record<string, any> = {};
+    static _availableInteractiveCli: Record<string, any> = {};
+
+    static async getAvailableCli() {
+        const cli = await SSugarCli.init();
+        return cli._availableCli;
+    }
 
     /**
-     * @name           constructor
+     * @name           init
      * @type            Function
-     * @constructor
+     * @static
      *
-     * Constructor
+     * Init cli
      *
      * @since       2.0.0
      * @author      Olivier Bossel <olivier.bossel@gmail.com>
      */
-    constructor() {
+    static async init() {
+        // singleton
+        if (global._sugarCli) return global._sugarCli;
+        global._sugarCli = SSugarCli;
+
         __SBench.start('sugar.cli');
 
         if (process.env.TREAT_AS_MAIN) {
@@ -124,86 +133,82 @@ export default class SSugarCli {
 
         this._setNodeEnv();
 
-        (async () => {
-            __SBench.step('sugar.cli', 'beforeLoadConfig');
+        __SBench.step('sugar.cli', 'beforeLoadConfig');
 
-            await __wait(10);
+        await __wait(10);
 
-            // load the sugar config
-            const config = await __SSugarConfig.load({
-                cache: true,
-            });
-            // console.log(__SSugarConfig.get('theme.themes.default-dark'));
-            // return;
+        // load the sugar config
+        const config = await __SSugarConfig.load({
+            cache: true,
+        });
+        // console.log(__SSugarConfig.get('theme.themes.default-dark'));
+        // return;
 
-            // hook base console functions
-            this._proxyConsole();
+        // hook base console functions
+        this._proxyConsole();
 
-            __SBench.step('sugar.cli', 'afterLoadConfig');
+        __SBench.step('sugar.cli', 'afterLoadConfig');
 
-            __SBench.step('sugar.cli', 'beforeClearTmpDir');
-            // clean som folders like tmp, etc...
-            __fsExtra.emptyDirSync(
-                __SSugarConfig.get('storage.package.tmpDir'),
-            );
-            __SBench.step('sugar.cli', 'afterClearTmpDir');
+        __SBench.step('sugar.cli', 'beforeClearTmpDir');
+        // clean som folders like tmp, etc...
+        __fsExtra.emptyDirSync(__SSugarConfig.get('storage.package.tmpDir'));
+        __SBench.step('sugar.cli', 'afterClearTmpDir');
 
-            // init stdio and event emitter
-            this._eventEmitter = new __SEventEmitter({
-                metas: {
-                    id: 'Sugar',
-                },
-            });
+        // init stdio and event emitter
+        this._eventEmitter = new __SEventEmitter({
+            metas: {
+                id: 'Sugar',
+            },
+        });
 
-            if (__isChildProcess()) {
-                this._eventEmitter.pipeTo(process);
-            }
+        if (__isChildProcess()) {
+            this._eventEmitter.pipeTo(process);
+        }
 
-            // writeLog event
-            this._eventEmitter.on('writeLog', (logObj) => {
-                this.writeLog(logObj.value);
-            });
+        // writeLog event
+        this._eventEmitter.on('writeLog', (logObj) => {
+            this.writeLog(logObj.value);
+        });
 
-            __SBench.step('sugar.cli', 'beforeLoadSugarJson');
+        __SBench.step('sugar.cli', 'beforeLoadSugarJson');
 
-            // reading sugarJsons
-            const sugarJsonInstance = new __SSugarJson();
-            this._sugarJsons = await sugarJsonInstance.read();
+        // reading sugarJsons
+        const sugarJsonInstance = new __SSugarJson();
+        this._sugarJsons = await sugarJsonInstance.read();
 
-            __SBench.step('sugar.cli', 'afterLoadSugarJson');
+        __SBench.step('sugar.cli', 'afterLoadSugarJson');
 
-            __SBench.step('sugar.cli', 'beforeLoadAvailableCli');
+        __SBench.step('sugar.cli', 'beforeLoadAvailableCli');
 
-            // init available cli
-            await this._getAvailableCli();
+        // init available cli
+        await this._getAvailableCli();
 
-            __SBench.step('sugar.cli', 'afterLoadAvailableCli');
+        __SBench.step('sugar.cli', 'afterLoadAvailableCli');
 
-            // help
-            if (this.args.isHelp) {
-                this._displayHelp(this.args.stack, this.args.action);
-                return;
-            }
+        // help
+        if (this.args.isHelp) {
+            this._displayHelp(this.args.stack, this.args.action);
+            return;
+        }
 
-            // interactive
-            if (!this.args.stack && !this.args.action && !this.args.params) {
-                this._interactivePrompt();
-                return;
-            }
+        // interactive
+        if (!this.args.stack && !this.args.action && !this.args.params) {
+            this._interactivePrompt();
+            return;
+        }
 
-            __SBench.step('sugar.cli', 'beforeProcess');
-            __SBench.end('sugar.cli', {
-                log: true,
-            });
+        __SBench.step('sugar.cli', 'beforeProcess');
+        __SBench.end('sugar.cli', {
+            log: true,
+        });
 
-            // normal process
-            await this._process();
+        // normal process
+        await this._process();
 
-            __SBench.step('sugar.cli', 'afterProcess');
-        })();
+        __SBench.step('sugar.cli', 'afterProcess');
     }
 
-    _setNodeEnv() {
+    static _setNodeEnv() {
         // do not touch if is jest
         if (process.env.JEST_WORKER_ID) return;
         if (this.args.params.env) {
@@ -230,7 +235,7 @@ export default class SSugarCli {
         }
     }
 
-    _parseArgs(argv = process.argv): ISSugarCliArgs {
+    static _parseArgs(argv = process.argv): ISSugarCliArgs {
         const args: ISSugarCliArgs = {};
 
         args.command = argv && argv[2] ? argv[2].split(' ')[0] : '';
@@ -268,7 +273,7 @@ export default class SSugarCli {
         return args;
     }
 
-    _proxyConsole() {
+    static _proxyConsole() {
         // do not proxy text environment
         if (process.env.NODE_ENV === 'test') return;
         // hooking the consoles methods to parse html at output
@@ -287,7 +292,7 @@ export default class SSugarCli {
         });
     }
 
-    _initStdio(def = true, websocket = true) {
+    static _initStdio(def = true, websocket = true) {
         if (this._isStdioNeeded()) {
             if (def) {
                 this._stdio = __SStdio.existingOrNew(
@@ -307,11 +312,11 @@ export default class SSugarCli {
         }
     }
 
-    _isStdioNeeded() {
+    static _isStdioNeeded() {
         return !__isChildProcess() || this._treatAsMain;
     }
 
-    _getCliObj() {
+    static _getCliObj() {
         const defaultStackAction = this._availableCli.defaultByStack[
             this.args.stack
         ];
@@ -331,7 +336,7 @@ export default class SSugarCli {
         return cliObj;
     }
 
-    async _process() {
+    static async _process() {
         // get cli object for current args
         let cliObj = this._getCliObj();
 
@@ -404,7 +409,7 @@ export default class SSugarCli {
         }
     }
 
-    async _getAvailableCli() {
+    static async _getAvailableCli() {
         // loop on each filtered files to build the this._availableCli stack
         for (let i = 0; i < Object.keys(this._sugarJsons).length; i++) {
             const packageName = Object.keys(this._sugarJsons)[i];
@@ -527,14 +532,14 @@ export default class SSugarCli {
             });
         }
 
-        return true;
+        return this._availableCli;
     }
 
-    ask(askObj: ISLogAsk): Promise<any> {
+    static ask(askObj: ISLogAsk): Promise<any> {
         return this._eventEmitter.emit('ask', askObj);
     }
 
-    log(log) {
+    static log(log) {
         if (typeof log === 'string') {
             this._eventEmitter.emit('log', {
                 // type: __SLog.TYPE_INFO,
@@ -549,7 +554,7 @@ export default class SSugarCli {
         });
     }
 
-    async _run(command: string): string {
+    static async _run(command: string): string {
         const promise = __spawn(command, [], {
             shell: true,
         });
@@ -561,10 +566,10 @@ export default class SSugarCli {
         return res;
     }
 
-    _newStep() {
+    static _newStep() {
         const packageJson = this.packageJson;
 
-        const logStr = [
+        [
             ...__sugarBanner({
                 borders: false,
                 marginLeft: 1,
@@ -596,7 +601,7 @@ export default class SSugarCli {
             });
     }
 
-    writeLog(log: string) {
+    static writeLog(log: string) {
         let currentLog = '';
         if (__fs.existsSync(`${process.cwd()}/sugar.log`)) {
             currentLog = __fs
@@ -608,7 +613,7 @@ export default class SSugarCli {
         __fs.writeFileSync(`${process.cwd()}/sugar.log`, currentLog);
     }
 
-    safeExec(command: string, settings: any): Promise<any> {
+    static safeExec(command: string, settings: any): Promise<any> {
         const promise = __spawn(command, [], {
             shell: true,
             ...(settings ?? {}),
@@ -616,7 +621,7 @@ export default class SSugarCli {
         return promise;
     }
 
-    exec(command: string, settings: any): Promise<any> {
+    static exec(command: string, settings: any): Promise<any> {
         const promise = __spawn(command, [], {
             shell: true,
             ...(settings ?? {}),
@@ -625,7 +630,7 @@ export default class SSugarCli {
         return promise;
     }
 
-    async _displayHelp() {
+    static async _displayHelp() {
         // init stdop
         this._initStdio(true, false);
 
@@ -735,7 +740,7 @@ export default class SSugarCli {
         // }
     }
 
-    _displayHelpAfterError() {
+    static _displayHelpAfterError() {
         const logArray: string[] = [];
         logArray.push(
             `<red>Sorry</red> but the requested "<cyan>${this.args.stack}.${
@@ -752,6 +757,6 @@ export default class SSugarCli {
 }
 
 // instanciate the cli only once and not for test environment
-if (!global._sugarCli && process.env.NODE_ENV !== 'test') {
-    global._sugarCli = new SSugarCli();
+if (process.env.NODE_ENV !== 'test') {
+    SSugarCli.init();
 }

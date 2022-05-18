@@ -1,73 +1,70 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-import __SInterface from "@coffeekraken/s-interface";
-import __STheme from "@coffeekraken/s-theme";
+import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+/**
+ * @name          dropdown
+ * @namespace     node.mixin.ui.dropdown
+ * @type               PostcssMixin
+ * @interface     ./dropdown          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the dropdown style to any element
+ *
+ * @param       {'solid'}                           [style='theme.ui.dropdown.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.dropdown.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-dropdown {
+ *    @sugar.ui.dropdown;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 class postcssSugarPluginUiDropdownInterface extends __SInterface {
-  static get _definition() {
-    return {
-      style: {
-        type: "String",
-        values: ["solid"],
-        default: __STheme.config("ui.dropdown.defaultStyle")
-      },
-      shape: {
-        type: "String",
-        values: ["default", "square", "pill"],
-        default: __STheme.config("ui.dropdown.defaultShape")
-      },
-      position: {
-        type: "String",
-        values: [
-          "top",
-          "top-start",
-          "top-end",
-          "bottom",
-          "bottom-start",
-          "bottom-end"
-        ],
-        default: "bottom"
-      },
-      scope: {
-        type: {
-          type: "Array<String>",
-          splitChars: [",", " "]
-        },
-        values: ["bare", "lnf", "shape", "position"],
-        default: ["bare", "lnf", "shape", "position"]
-      }
-    };
-  }
+    static get _definition() {
+        return {
+            style: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.get('ui.dropdown.defaultStyle'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.get('ui.dropdown.defaultShape'),
+            },
+            position: {
+                type: 'String',
+                values: [
+                    'top',
+                    'top-start',
+                    'top-end',
+                    'bottom',
+                    'bottom-start',
+                    'bottom-end',
+                ],
+                default: 'bottom',
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape', 'position'],
+                default: ['bare', 'lnf', 'shape', 'position'],
+            },
+        };
+    }
 }
-function dropdown_default({
-  params,
-  atRule,
-  applyNoScopes,
-  replaceWith
-}) {
-  const finalParams = __spreadValues({
-    style: "solid",
-    shape: "default",
-    position: "bottom",
-    scope: []
-  }, params);
-  finalParams.scope = applyNoScopes(finalParams.scope);
-  const vars = [];
-  if (finalParams.scope.indexOf("bare") !== -1) {
-    vars.push(`
+export { postcssSugarPluginUiDropdownInterface as interface };
+export default function ({ params, atRule, replaceWith, }) {
+    const finalParams = Object.assign({ style: 'solid', shape: 'default', position: 'bottom', scope: [] }, params);
+    const vars = [];
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
             font-size: sugar.scalable(1rem);
           position: absolute;
           -webkit-appearance: none;
@@ -83,55 +80,68 @@ function dropdown_default({
                 opacity: 0 !important;
             }
       `);
-  }
-  if (finalParams.scope.indexOf("lnf") !== -1) {
-    vars.push(`
-        `);
-    switch (finalParams.style) {
-      case "solid":
-      default:
+    }
+    if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-                    background-color: sugar.color(base);
-                    padding-inline: sugar.theme(ui.dropdown.paddingInline);
-                    padding-block: sugar.theme(ui.dropdown.paddingBlock);
+        `);
+        switch (finalParams.style) {
+            case 'solid':
+            default:
+                vars.push(`
+                    background-color: sugar.color(current);
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
+                    @sugar.border.radius(sugar.theme.value(ui.dropdown.borderRadius));
                     @sugar.depth(sugar.theme.value(ui.dropdown.depth));
                     @sugar.transition(fast);
+
+                    &__item {
+                        padding-inline: sugar.padding(ui.dropdown.paddingInline);
+                        padding-block: sugar.padding(ui.dropdown.paddingBlock);
+                        background-color: sugar.color(current, --alpha: 0);
+                        @sugar.border.radius(sugar.theme.value(ui.dropdown.borderRadius));
+                        @sugar.transition(fast);
+
+                        &:hover, &:focus {
+                            background-color: sugar.color(current, --alpha 1 --darken 10%);
+                        }
+
+                    }
+
                 `);
-        break;
+                break;
+        }
     }
-  }
-  if (finalParams.scope.includes("shape")) {
-    switch (finalParams.shape) {
-      case "square":
-        vars.push(`
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
                     border-radius: 0;
                 `);
-        break;
-      case "pill":
-        vars.push(`
+                break;
+            case 'pill':
+                vars.push(`
                     border-radius: 9999px;
                 `);
-        break;
-      default:
-        vars.push(`
-                    border-radius: sugar.theme(ui.dropdown.borderRadius);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.border.radius(ui.dropdown.borderRadius);
                 `);
-        break;
+                break;
+        }
     }
-  }
-  if (finalParams.scope.indexOf("position") !== -1) {
-    switch (finalParams.position) {
-      case "top":
-        vars.push(`
+    if (finalParams.scope.indexOf('position') !== -1) {
+        switch (finalParams.position) {
+            case 'top':
+                vars.push(`
                     bottom: 100%;
                     top: auto;
                     left: 50%;
                     transform: translateX(-50%);
                 `);
-        break;
-      case "top-end":
-        vars.push(`
+                break;
+            case 'top-end':
+                vars.push(`
                     bottom: 100%;
                     top: auto;
                     left: auto;
@@ -145,9 +155,9 @@ function dropdown_default({
                     }
 
                 `);
-        break;
-      case "top-start":
-        vars.push(`
+                break;
+            case 'top-start':
+                vars.push(`
                     bottom: 100%;
                     top: auto;
                     left: 0;
@@ -159,9 +169,9 @@ function dropdown_default({
                         left: auto;
                     }
                 `);
-        break;
-      case "bottom-start":
-        vars.push(`
+                break;
+            case 'bottom-start':
+                vars.push(`
                     top: 100%;
                     left: 0;
                     transform: none;
@@ -172,9 +182,9 @@ function dropdown_default({
                         left: auto;
                     }
                 `);
-        break;
-      case "bottom-end":
-        vars.push(`
+                break;
+            case 'bottom-end':
+                vars.push(`
                     top: 100%;
                     right: 0;
                     left: auto;
@@ -186,20 +196,17 @@ function dropdown_default({
                         left: 0;
                     }
                 `);
-        break;
-      case "bottom":
-      default:
-        vars.push(`
+                break;
+            case 'bottom':
+            default:
+                vars.push(`
                     top: 100%;
                     left: 50%;
                     transform: translateX(-50%);
                 `);
-        break;
+                break;
+        }
     }
-  }
-  return vars;
+    return vars;
 }
-export {
-  dropdown_default as default,
-  postcssSugarPluginUiDropdownInterface as interface
-};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBRUgsTUFBTSxxQ0FBc0MsU0FBUSxZQUFZO0lBQzVELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsUUFBUSxDQUFDLEdBQUcsQ0FBQywwQkFBMEIsQ0FBQzthQUNwRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQztnQkFDckMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxHQUFHLENBQUMsMEJBQTBCLENBQUM7YUFDcEQ7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFO29CQUNKLEtBQUs7b0JBQ0wsV0FBVztvQkFDWCxTQUFTO29CQUNULFFBQVE7b0JBQ1IsY0FBYztvQkFDZCxZQUFZO2lCQUNmO2dCQUNELE9BQU8sRUFBRSxRQUFRO2FBQ3BCO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLEVBQUUsVUFBVSxDQUFDO2dCQUM1QyxPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sRUFBRSxVQUFVLENBQUM7YUFDaEQ7U0FD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

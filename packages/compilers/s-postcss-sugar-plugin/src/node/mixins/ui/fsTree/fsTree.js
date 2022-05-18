@@ -1,66 +1,63 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-import __SInterface from "@coffeekraken/s-interface";
-import __STheme from "@coffeekraken/s-theme";
+import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+/**
+ * @name          fsTree
+ * @namespace    node.mixin.ui.fsTree
+ * @type               PostcssMixin
+ * @interface     ./fsTree          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the fsTree style to any element
+ *
+ * @param       {'solid'}                           [style='theme.ui.fsTree.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.fsTree.defaultStyle']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-fsTree {
+ *    @sugar.ui.fsTree;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 class postcssSugarPluginUiFsTreeInterface extends __SInterface {
-  static get _definition() {
-    return {
-      style: {
-        type: "String",
-        values: ["solid"],
-        default: __STheme.config("ui.fsTree.defaultStyle")
-      },
-      shape: {
-        type: "String",
-        values: ["default", "square", "pill"],
-        default: __STheme.config("ui.fsTree.defaultShape")
-      },
-      scope: {
-        type: {
-          type: "Array<String>",
-          splitChars: [",", " "]
-        },
-        values: ["bare", "lnf", "shape"],
-        default: ["bare", "lnf", "shape"]
-      }
-    };
-  }
+    static get _definition() {
+        return {
+            style: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.get('ui.fsTree.defaultStyle'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.get('ui.fsTree.defaultShape'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
+            },
+        };
+    }
 }
-function fsTree_default({
-  params,
-  atRule,
-  atRootStart,
-  applyNoScopes,
-  replaceWith
-}) {
-  const finalParams = __spreadValues({
-    style: "solid",
-    shape: "default",
-    scope: ["bare", "lnf", "shape"]
-  }, params);
-  finalParams.scope = applyNoScopes(finalParams.scope);
-  const vars = [];
-  atRootStart(`
+export { postcssSugarPluginUiFsTreeInterface as interface };
+export default function ({ params, atRule, atRootStart, replaceWith, }) {
+    const finalParams = Object.assign({ style: 'solid', shape: 'default', scope: ['bare', 'lnf', 'shape'] }, params);
+    const vars = [];
+    atRootStart(`
          :root {
             --s-fs-tree-inline-space-ratio: 1;
         }
     `);
-  if (finalParams.scope.indexOf("bare") !== -1) {
-    vars.push(`
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
             font-size: sugar.font.size(30);
             user-select: none;
 
@@ -111,9 +108,9 @@ function fsTree_default({
                 position: relative;
 
                 > div {
-                    padding-inline: sugar.theme(ui.fsTree.paddingInline);
-                    padding-block: sugar.theme(ui.fsTree.paddingBlock);
-                    border-radius: sugar.theme(ui.fsTree.borderRadius);
+                    padding-inline: sugar.padding(ui.fsTree.paddingInline);
+                    padding-block: sugar.padding(ui.fsTree.paddingBlock);
+                    border-radius: sugar.border.radius(ui.fsTree.borderRadius);
                     text-overflow: ellipsis;
                 }
 
@@ -179,58 +176,55 @@ function fsTree_default({
             }
 
         `);
-  }
-  if (finalParams.scope.indexOf("lnf") !== -1) {
-    vars.push(`
+    }
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        vars.push(`
             
         `);
-    switch (finalParams.style) {
-      case "solid":
-      default:
-        vars.push(`
+        switch (finalParams.style) {
+            case 'solid':
+            default:
+                vars.push(`
                     li:not(.s-disabled) {
                         > div:hover {
                             background-color: sugar.color(current, surface);
                         }
                     }
                 `);
-        break;
+                break;
+        }
     }
-  }
-  if (finalParams.scope.includes("shape")) {
-    switch (finalParams.shape) {
-      case "square":
-        vars.push(`
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
                     li {
                         & > div {
                             border-radius: 0;
                         }
                     }
                 `);
-        break;
-      case "pill":
-        vars.push(`
+                break;
+            case 'pill':
+                vars.push(`
                     li {
                         & > div {
                             border-radius: 9999px;
                         }
                     }
                 `);
-        break;
-      default:
-        vars.push(`
+                break;
+            default:
+                vars.push(`
                     li {
                         & > div {
-                            border-radius: sugar.theme(ui.fsTree.borderRadius);
+                            border-radius: sugar.border.radius(ui.fsTree.borderRadius);
                         }
                     }
                 `);
-        break;
+                break;
+        }
     }
-  }
-  return vars;
+    return vars;
 }
-export {
-  fsTree_default as default,
-  postcssSugarPluginUiFsTreeInterface as interface
-};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBRUgsTUFBTSxtQ0FBb0MsU0FBUSxZQUFZO0lBQzFELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsUUFBUSxDQUFDLEdBQUcsQ0FBQyx3QkFBd0IsQ0FBQzthQUNsRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQztnQkFDckMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxHQUFHLENBQUMsd0JBQXdCLENBQUM7YUFDbEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQztnQkFDaEMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLENBQUM7YUFDcEM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUUQsT0FBTyxFQUFFLG1DQUFtQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEVBQ1gsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxPQUFPLEVBQ2QsS0FBSyxFQUFFLFNBQVMsRUFDaEIsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLENBQUMsSUFDNUIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsV0FBVyxDQUFDOzs7O0tBSVgsQ0FBQyxDQUFDO0lBRUgsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUMxQyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBc0hULENBQUMsQ0FBQztLQUNOO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN6QyxJQUFJLENBQUMsSUFBSSxDQUFDOztTQUVULENBQUMsQ0FBQztRQUVILFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN2QixLQUFLLE9BQU8sQ0FBQztZQUNiO2dCQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtTQUNiO0tBQ0o7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ3JDLFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN2QixLQUFLLFFBQVE7Z0JBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O2lCQU1ULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1YsS0FBSyxNQUFNO2dCQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtZQUNWO2dCQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtTQUNiO0tBQ0o7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=

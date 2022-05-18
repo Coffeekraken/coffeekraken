@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -625,6 +624,74 @@
                 "description": "This class represent the interface that describe parameters of the SSvelteCompiler",
                 "namespace": "@coffeekraken.s-color.shared.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SColorApplyParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "desaturate": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "d",
+                            "description": "Allows you to desaturate the color using a percentage"
+                        },
+                        "saturate": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "s",
+                            "description": "Allows you to saturate the color using a percentage"
+                        },
+                        "greyscale": {
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "g",
+                            "description": "Allows you to get back the grayscale version of your color"
+                        },
+                        "spin": {
+                            "type": "Number",
+                            "default": 0,
+                            "description": "Spin the hue on the passed value (max 360)"
+                        },
+                        "transparentize": {
+                            "type": "Number",
+                            "default": 0,
+                            "description": "The amount of transparency to apply between 0-100|0-1"
+                        },
+                        "alpha": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "a",
+                            "description": "The new alpha value to apply between 0-100|0-1"
+                        },
+                        "opacity": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "o",
+                            "description": "The new alpha value to apply between 0-100|0-1"
+                        },
+                        "opacify": {
+                            "type": "Number",
+                            "default": 0,
+                            "description": "The amount of transparence to remove between 0-100|0-1"
+                        },
+                        "darken": {
+                            "type": "Number",
+                            "default": 0,
+                            "description": "The amount of darkness (of the nightmare of the shadow) to apply between 0-100"
+                        },
+                        "lighten": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "l",
+                            "description": "The amount of lightness (of the sky of the angels) to apply between 0-100"
+                        },
+                        "invert": {
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "i",
+                            "description": "Specify if you want to invert the color to keep a good contrast ratio with a background for example"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -652,6 +719,29 @@
                 "description": "This interface represent the settings of an SColor instance.",
                 "namespace": "@coffeekraken.s-color.shared.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SColorSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "returnNewInstance": {
+                            "description": "Specify if the methods returns by default a new SColor instance or the same",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "defaultFormat": {
+                            "description": "Specify the default format of the color",
+                            "type": "String",
+                            "values": [
+                                "hex",
+                                "rgb",
+                                "rgba",
+                                "hsl",
+                                "hsla"
+                            ],
+                            "default": "hex"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

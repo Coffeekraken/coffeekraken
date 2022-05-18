@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -137,6 +137,48 @@
                         "code": "<s-range name=\"myRangeColoredSuccess\" value=\"30\" class=\"s-color:success s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredWarning\" value=\"0\" class=\"s-color:warning s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredError\" value=\"1\" min=\"0\" max=\"10\" class=\"s-color:error s-mbe:30\"></s-range>"
                     }
                 ],
+                "interface": {
+                    "name": "SRangeComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "description": "Specify the name to assign to the internal input[type=\"range\"]"
+                        },
+                        "value": {
+                            "type": "Number",
+                            "description": "Specify the initial range value"
+                        },
+                        "min": {
+                            "type": "Number",
+                            "description": "Specify the minimal value or the range",
+                            "default": 0
+                        },
+                        "max": {
+                            "type": "Number",
+                            "description": "Specify the maximal value of the range",
+                            "default": 100
+                        },
+                        "step": {
+                            "type": "Number",
+                            "description": "Specify the steps between each values"
+                        },
+                        "target": {
+                            "type": "String",
+                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
+                        },
+                        "tooltip": {
+                            "type": "Boolean",
+                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
+                            "default": false
+                        },
+                        "disabled": {
+                            "type": "Boolean",
+                            "description": "Specify if this range is disabled",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -172,6 +214,48 @@
                 "description": "This class represent the interface that describe parameters of the SRangeComponent",
                 "namespace": "@coffeekraken.s-range-component.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SRangeComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "description": "Specify the name to assign to the internal input[type=\"range\"]"
+                        },
+                        "value": {
+                            "type": "Number",
+                            "description": "Specify the initial range value"
+                        },
+                        "min": {
+                            "type": "Number",
+                            "description": "Specify the minimal value or the range",
+                            "default": 0
+                        },
+                        "max": {
+                            "type": "Number",
+                            "description": "Specify the maximal value of the range",
+                            "default": 100
+                        },
+                        "step": {
+                            "type": "Number",
+                            "description": "Specify the steps between each values"
+                        },
+                        "target": {
+                            "type": "String",
+                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
+                        },
+                        "tooltip": {
+                            "type": "Boolean",
+                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
+                            "default": false
+                        },
+                        "disabled": {
+                            "type": "Boolean",
+                            "description": "Specify if this range is disabled",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

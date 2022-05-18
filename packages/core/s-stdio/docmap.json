@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -412,6 +412,30 @@
                 "description": "This class represent the interface that describe SStdio settings",
                 "namespace": "@coffeekraken.s-stdio.shared.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SStdioSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "filter": {
+                            "description": "Specify a function that will be used to filter the logs. It will take the log object as parameter and MUST return a boolean.",
+                            "type": "Function"
+                        },
+                        "processor": {
+                            "description": "Specify a function that will be used to process the logs. It will take the log object and MUST return it, updated or not...",
+                            "type": "Function"
+                        },
+                        "defaultLogObj": {
+                            "description": "Specify a default log object that will be used as base for each received logs",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "defaultAskObj": {
+                            "description": "Specify a default ask object that will be used as base for each received questions (ask)",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

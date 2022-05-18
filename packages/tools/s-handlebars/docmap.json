@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -388,6 +387,32 @@
                 "relPath": "src/node/helpers/isLicense.ts",
                 "children": {}
             },
+            "@coffeekraken.s-handlebars.node.helpers.join": {
+                "name": "join",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to to join an array of values with a separator",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "join.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/join.ts",
+                "children": {}
+            },
             "@coffeekraken.s-handlebars.node.helpers.jsonStringify": {
                 "name": "jsonStringify",
                 "type": "Function",
@@ -538,6 +563,32 @@
                 "filename": "shieldsioHandlebarsHelper.ts",
                 "extension": "ts",
                 "relPath": "src/node/helpers/shieldsioHandlebarsHelper.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.toString": {
+                "name": "toString",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to apply the `toString` coffeekraken function on the passed value",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "toString.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/toString.ts",
                 "children": {}
             }
         }

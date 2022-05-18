@@ -1,4 +1,4 @@
-{{#with (get docmap.map namespace)}}
+{{#with (get docmap.map namespace false)}}
 <span class="s-typo:code">{{this.interface.name}}</span> {{/with}} {{#if (length
 (get docmap.map namespace false 'interface.definition'))}}
 <dl>

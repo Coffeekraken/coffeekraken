@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -2276,6 +2276,22 @@
                 "description": "This class represent the interface that describe parameters of the SFrontstack.action method",
                 "namespace": "@coffeekraken.s-frontstack.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SFrontstackActionInterface",
+                    "description": "",
+                    "definition": {
+                        "action": {
+                            "description": "Specify the action you want to launch",
+                            "type": "String",
+                            "requried": true
+                        },
+                        "params": {
+                            "description": "Specify the action parameters using the cli \"--param value\" syntax",
+                            "type": "String",
+                            "alias": "p"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -2299,6 +2315,15 @@
                 "description": "This class represent the interface that describe parameters of the SFrontstack.list method",
                 "namespace": "@coffeekraken.s-frontstack.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SFrontstackListParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "recipe": {
+                            "type": "String"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -2322,6 +2347,11 @@
                 "description": "This class represent the interface that describe parameters of the SFrontstack.new method",
                 "namespace": "@coffeekraken.s-frontstack.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SFrontstackNewParamsInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -2345,6 +2375,31 @@
                 "description": "This class represent the interface that describe parameters of the SFrontstack.action method",
                 "namespace": "@coffeekraken.s-frontstack.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SFrontstackRecipeParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "stack": {
+                            "description": "Specify the stack you want to execute like \"dev\", \"build\", etc...",
+                            "type": "String",
+                            "alias": "s"
+                        },
+                        "recipe": {
+                            "description": "Specify the recipe you want to execute the stack from",
+                            "type": "String",
+                            "alias": "r"
+                        },
+                        "runInParallel": {
+                            "description": "Specify if you want the recipe actions to run in parallel of not",
+                            "type": "Boolean",
+                            "alias": "p"
+                        },
+                        "env": {
+                            "description": "Specify the environment in which to execute your recipe",
+                            "type": "String"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -2368,6 +2423,27 @@
                 "description": "This class represent the interface that describe parameters of the \"copy\" action",
                 "namespace": "@coffeekraken.s-frontstack.node.actions.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SFrontstackCopyActionParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "src": {
+                            "description": "Specify what to copy",
+                            "type": "String",
+                            "required": true
+                        },
+                        "dest": {
+                            "description": "Specify where to paste",
+                            "type": "String",
+                            "required": true
+                        },
+                        "chdir": {
+                            "description": "Specify if need to change the cwd to the pasted folder location",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

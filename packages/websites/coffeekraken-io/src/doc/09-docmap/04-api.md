@@ -39,10 +39,6 @@ From the `read` method of the `SDocmap` class, you will get back an object that 
 
 ```js
 {
-    metas: {
-        type: 'current|snapshot', // current = simple read of current package docmap / snapshot = result of a snapshot read. See @coffeekraken/s-docmap package documentation for more infos
-        snapshot: '' // if it's a snapshot read result
-    },
     map: {
         '@coffeekraken.sugar.js.dom.query.querySelectorLive': {
             // all the docblock tags for this item

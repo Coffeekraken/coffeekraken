@@ -1,74 +1,85 @@
-var __defProp = Object.defineProperty;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-import __SInterface from "@coffeekraken/s-interface";
-import __STheme from "@coffeekraken/s-theme";
+import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+/**
+ * @name          blockquote
+ * @namespace     node.mixin.ui.button
+ * @type          PostcssMixin
+ * @interface     ./button
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to generate the "button" UI component css.
+ *
+ * @param       {'solid'|'gradient'|'outline'|'text'}                           [style='theme.ui.button.defaultStyle']         The style you want to generate
+ * @param       {'default'|'square'|'pill'}             [shape='theme.ui.button.defaultShape']         The shape you want to generate
+ * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *      \@sugar.ui.button();
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 class postcssSugarPluginUiButtonInterface extends __SInterface {
-  static get _definition() {
-    return {
-      style: {
-        type: "String",
-        values: ["solid", "gradient", "outline", "text"],
-        default: __STheme.config("ui.button.defaultStyle")
-      },
-      shape: {
-        type: "String",
-        values: ["default", "square", "pill"],
-        default: __STheme.config("ui.button.defaultShape")
-      },
-      outline: {
-        type: "Boolean",
-        default: __STheme.config("ui.button.outline")
-      },
-      scope: {
-        type: {
-          type: "Array<String>",
-          splitChars: [",", " "]
-        },
-        values: ["bare", "lnf", "shape"],
-        default: ["bare", "lnf", "shape"]
-      }
-    };
-  }
+    static get _definition() {
+        return {
+            style: {
+                type: 'String',
+                values: ['solid', 'gradient', 'outline', 'text'],
+                default: __STheme.get('ui.button.defaultStyle'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.get('ui.button.defaultShape'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
+            },
+        };
+    }
 }
-function button_default({
-  params,
-  atRule,
-  applyNoScopes,
-  sharedData,
-  replaceWith
-}) {
-  const finalParams = __spreadValues({
-    style: "solid",
-    shape: "default",
-    outline: true,
-    scope: ["bare", "lnf", "shape"]
-  }, params);
-  finalParams.scope = applyNoScopes(finalParams.scope);
-  const vars = [];
-  if (finalParams.scope.indexOf("bare") !== -1) {
-    vars.push(`
+export { postcssSugarPluginUiButtonInterface as interface };
+/**
+ * @name          button
+ * @namespace     ui.button
+ * @type               PostcssMixin
+ * @interface     ./button          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the button style to any element
+ *
+ * @example     css
+ * .my-button {
+ *    @sugar.ui.button;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+export default function ({ params, atRule, sharedData, replaceWith, }) {
+    const finalParams = Object.assign({ style: 'solid', shape: 'default', scope: ['bare', 'lnf', 'shape'] }, params);
+    const vars = [];
+    // bare
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        vars.push(`
         font-size: sugar.scalable(1rem);
         position: relative;
         display: inline-block;
         cursor: pointer;
         white-space: nowrap;
         vertical-align: middle;
-        padding-inline: sugar.theme(ui.button.paddingInline);
-        padding-block: sugar.theme(ui.button.paddingBlock);
+        padding-inline: sugar.padding(ui.button.paddingInline);
+        padding-block: sugar.padding(ui.button.paddingBlock);
 
         & > * {
           pointer-events: none;
@@ -78,14 +89,15 @@ function button_default({
           font-size: 1em;
         }
     `);
-  }
-  if (finalParams.scope.indexOf("lnf") !== -1) {
-    vars.push(`
+    }
+    // lnf
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        vars.push(`
           font-size: sugar.scalable(1rem);
         `);
-    switch (finalParams.style) {
-      case "gradient":
-        vars.push(`
+        switch (finalParams.style) {
+            case 'gradient':
+                vars.push(`
                     background: none !important;
                     color: sugar.color(current, foreground);
                     transition: sugar.theme(ui.button.transition);
@@ -129,9 +141,9 @@ function button_default({
                       }
                     }
                 `);
-        break;
-      case "outline":
-        vars.push(`
+                break;
+            case 'outline':
+                vars.push(`
                 background-color: sugar.color(current, --alpha 0);
                 border: sugar.color(current) solid sugar.theme(ui.button.borderWidth);
                 color: sugar.color(current);
@@ -141,9 +153,9 @@ function button_default({
                   color: sugar.color(current, foreground);
                 }
               `);
-        break;
-      case "text":
-        vars.push(`
+                break;
+            case 'text':
+                vars.push(`
                   background: none !important;
                   border: rgba(0,0,0,0) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current);
@@ -158,10 +170,10 @@ function button_default({
                     transform: scale(1) !important;
                   }
                 `);
-        break;
-      case "solid":
-      default:
-        vars.push(`
+                break;
+            case 'solid':
+            default:
+                vars.push(`
                   background-color: sugar.color(current);
                   border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current, foreground);
@@ -171,20 +183,19 @@ function button_default({
                     color: sugar.color(current, foreground);
                   }
         `);
-        break;
-    }
-    if (finalParams.outline) {
-      vars.push(`
+                break;
+        }
+        // outline
+        vars.push(`
               &:focus:not(:hover) {
                 @sugar.outline;
               }
           `);
     }
-  }
-  if (finalParams.scope.includes("shape")) {
-    switch (finalParams.shape) {
-      case "square":
-        vars.push(`
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
                     border-radius: 0;
 
                     &:before,
@@ -192,9 +203,9 @@ function button_default({
                       border-radius: 0;
                     }
                   `);
-        break;
-      case "pill":
-        vars.push(`
+                break;
+            case 'pill':
+                vars.push(`
                     border-radius: 9999px;
 
                     &:before,
@@ -202,22 +213,19 @@ function button_default({
                       border-radius: 9999px;
                     }
                   `);
-        break;
-      default:
-        vars.push(`
-                    border-radius: sugar.theme(ui.button.borderRadius);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.border.radius(ui.button.borderRadius);
 
                     &:before,
                     &:after {
-                      border-radius: sugar.theme(ui.button.borderRadius);
+                      border-radius: sugar.border.radius(ui.button.borderRadius);
                     }
                   `);
-        break;
+                break;
+        }
     }
-  }
-  return vars;
+    return vars;
 }
-export {
-  button_default as default,
-  postcssSugarPluginUiButtonInterface as interface
-};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBRUgsTUFBTSxtQ0FBb0MsU0FBUSxZQUFZO0lBQzFELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFVBQVUsRUFBRSxTQUFTLEVBQUUsTUFBTSxDQUFDO2dCQUNoRCxPQUFPLEVBQUUsUUFBUSxDQUFDLEdBQUcsQ0FBQyx3QkFBd0IsQ0FBQzthQUNsRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQztnQkFDckMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxHQUFHLENBQUMsd0JBQXdCLENBQUM7YUFDbEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQztnQkFDaEMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLENBQUM7YUFDcEM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUUQsT0FBTyxFQUFFLG1DQUFtQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTVEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEVBQ1YsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxPQUFPLEVBQ2QsS0FBSyxFQUFFLFNBQVMsRUFDaEIsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLENBQUMsSUFDNUIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7S0FpQmIsQ0FBQyxDQUFDO0tBQ0Y7SUFFRCxNQUFNO0lBQ04sSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN6QyxJQUFJLENBQUMsSUFBSSxDQUFDOztTQUVULENBQUMsQ0FBQztRQUVILFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN2QixLQUFLLFVBQVU7Z0JBQ1gsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztpQkEyQ1QsQ0FBQyxDQUFDO2dCQUVILE1BQU07WUFDVixLQUFLLFNBQVM7Z0JBQ1YsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7O2VBU1gsQ0FBQyxDQUFDO2dCQUNELE1BQU07WUFDVixLQUFLLE1BQU07Z0JBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7aUJBY1QsQ0FBQyxDQUFDO2dCQUNILE1BQU07WUFDVixLQUFLLE9BQU8sQ0FBQztZQUNiO2dCQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7OztTQVNqQixDQUFDLENBQUM7Z0JBQ0ssTUFBTTtTQUNiO1FBRUQsVUFBVTtRQUNWLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7V0FJUCxDQUFDLENBQUM7S0FDUjtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLEVBQUU7UUFDckMsUUFBUSxXQUFXLENBQUMsS0FBSyxFQUFFO1lBQ3ZCLEtBQUssUUFBUTtnQkFDVCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7O21CQU9QLENBQUMsQ0FBQztnQkFDTCxNQUFNO1lBQ1YsS0FBSyxNQUFNO2dCQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7bUJBT1AsQ0FBQyxDQUFDO2dCQUNMLE1BQU07WUFDVjtnQkFDSSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7O21CQU9QLENBQUMsQ0FBQztnQkFDTCxNQUFNO1NBQ2I7S0FDSjtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==

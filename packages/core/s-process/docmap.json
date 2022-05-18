@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -18,6 +17,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -664,6 +664,18 @@
                 "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
                 "namespace": "@coffeekraken.s-process.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SProcessInterface",
+                    "description": "",
+                    "definition": {
+                        "help": {
+                            "description": "Specify if you want to see the help of the process",
+                            "type": "Boolean",
+                            "alias": "h",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -687,6 +699,46 @@
                 "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
                 "namespace": "@coffeekraken.s-process.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SProcessSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "killOnError": {
+                            "description": "Specify if you want to kill the process when an error occurs",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "stdio": {
+                            "description": "Specify the stdio to use for your process",
+                            "type": "String|SStdio|Boolean",
+                            "alias": "s",
+                            "default": "inherit"
+                        },
+                        "throw": {
+                            "description": "Specify if you want to throw error when an error occurs",
+                            "type": "Boolean",
+                            "alias": "t",
+                            "default": true
+                        },
+                        "exitAtEnd": {
+                            "description": "Specify if you want to kill the process at his end",
+                            "type": "Boolean",
+                            "alias": "e",
+                            "default": false
+                        },
+                        "runAsChild": {
+                            "description": "Specify if you want to run your process as a child one",
+                            "type": "Boolean",
+                            "alias": "c",
+                            "default": false
+                        },
+                        "processPath": {
+                            "description": "Specify a path to a process file that exports a process supported type like an SProcess based class, a function, etc...",
+                            "type": "String",
+                            "default": null
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -207,6 +206,51 @@
                 "description": "This interface specify the parameters needed to the `sugar jest.start` command.",
                 "namespace": "@coffeekraken.s-jest-tester.node.mono.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SJestTesterStartParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "glob": {
+                            "description": "Sppecify some globs relative to the inDir to find the files you want to build",
+                            "type": "Array<String>",
+                            "default": [
+                                "**/*.ts"
+                            ],
+                            "alias": "g"
+                        },
+                        "inDir": {
+                            "description": "Specify a directory from where to search for ts and js files to build",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/test/s-jest-tester/src",
+                            "alias": "i"
+                        },
+                        "packageRoot": {
+                            "description": "Specify in which package the build is happening",
+                            "type": "String"
+                        },
+                        "watch": {
+                            "description": "Specify if the files have to be build again at each update",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "w"
+                        },
+                        "testInitial": {
+                            "description": "Specify if you want to build the files at start when using the \"watch\" flag",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "t"
+                        },
+                        "exclude": {
+                            "description": "Specify some glob patterns for files/folders you want to exclude of the build process",
+                            "type": "Array<String>",
+                            "default": [
+                                "**/node_modules",
+                                "**/__tests__"
+                            ],
+                            "alias": "e"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

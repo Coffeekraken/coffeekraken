@@ -3,7 +3,6 @@
     "extends": [],
     "generated": {
         "extends": [
-            "coco",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
@@ -17,6 +16,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -81,6 +81,34 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-builder.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-builder.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-builder.node.SBuilder": {
                 "name": "SBuilder",
                 "type": "Class",
@@ -90,7 +118,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SBuilder from '@coffeekraken/sugar/node/builder/SBuilder';\nimport SPromise from '@coffeekraken/s-promise';\nclass MyBuilder extends SBuilder {\n     constructor(settings = {}) {\n         super(settings);\n     }\n     _build(input, settings) {\n         return new SPromise(({resolve, reject, emit}) => {\n             // compilation logic\n         });\n     }\n}"
+                        "code": "import SBuilder from '@coffeekraken/s-builder';\nimport SPromise from '@coffeekraken/s-promise';\nclass MyBuilder extends SBuilder {\n     constructor(settings = {}) {\n         super(settings);\n     }\n     _build(params, settings) {\n         return new SPromise(({resolve, reject, emit}) => {\n             // compilation logic\n         });\n     }\n}"
                     }
                 ],
                 "since": "2.0.0",

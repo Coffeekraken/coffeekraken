@@ -1,14 +1,13 @@
 {
-    "name": "@coffeekraken/s-vite-plugin-riotjs",
+    "name": "@coffeekraken/s-vite-postcss-plugin",
     "version": "2.0.0",
     "description": "",
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-riotjs-plugin-postcss-preprocessor": "^2.0.0",
-        "@riotjs/compiler": "^5.4.2",
-        "riot": "^5.4.2"
+        "postcss": "^8.2.15",
+        "@coffeekraken/s-sugar-config": "^2.0.0"
     },
     "peerDependencies": {},
     "main": "./dist/pkg/cjs/node/exports.js",

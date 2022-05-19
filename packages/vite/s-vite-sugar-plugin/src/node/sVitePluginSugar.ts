@@ -53,7 +53,7 @@ export default function sVitePluginSugar(settings: any = {}) {
     }
 
     return {
-        name: 's-vite-plugin-sugar',
+        name: 's-vite-sugar-plugin',
         configResolved(resolvedConfig) {
             // store the resolved config
             config = resolvedConfig;

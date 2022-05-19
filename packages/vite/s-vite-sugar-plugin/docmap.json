@@ -75,7 +75,7 @@
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
-            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-postcss-plugin",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"

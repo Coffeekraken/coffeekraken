@@ -59,9 +59,9 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
-            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-postcss-plugin",
             "@coffeekraken/s-vite-plugin-riotjs",
-            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],

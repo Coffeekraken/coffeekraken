@@ -2,7 +2,6 @@ import __SClass from '@coffeekraken/s-class';
 import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
-import __sRiotjsPluginPostcssPreprocessor from '@coffeekraken/s-riotjs-plugin-postcss-preprocessor';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
@@ -79,11 +78,6 @@ export default class SVite extends __SClass {
                 },
                 settings ?? {},
             ),
-        );
-
-        // register some riotjs preprocessors
-        __sRiotjsPluginPostcssPreprocessor(
-            __SugarConfig.get('postcss.plugins'),
         );
     }
 

@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-floating-feature.js.SFloatingFeature": {
+                "id": "@coffeekraken.s-floating-feature.js.SFloatingFeature",
                 "name": "SFloatingFeature",
                 "type": "Feature",
                 "menu": {
@@ -173,6 +174,7 @@
                 "children": {}
             },
             "@coffeekraken.s-floating-feature.js.interface.SFloatingFeatureInterface": {
+                "id": "@coffeekraken.s-floating-feature.js.interface.SFloatingFeatureInterface",
                 "name": "SFloatingFeatureInterface",
                 "type": ".                      Class",
                 "platform": [

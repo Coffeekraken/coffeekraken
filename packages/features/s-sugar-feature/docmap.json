@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-sugar-feature.js.SSugarFeature": {
+                "id": "@coffeekraken.s-sugar-feature.js.SSugarFeature",
                 "name": "SSugarFeature",
                 "type": "Feature",
                 "menu": {
@@ -161,6 +162,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-feature.js.interface.SSugarFeatureInterface": {
+                "id": "@coffeekraken.s-sugar-feature.js.interface.SSugarFeatureInterface",
                 "name": "SSugarFeatureInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -225,6 +227,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-feature.sugar.css.font.default": {
+                "id": "@coffeekraken.s-sugar-feature.sugar.css.font.default",
                 "name": "default",
                 "type": "CssFontFace",
                 "platform": [
@@ -247,6 +250,7 @@
                 "relPath": "dist/css/index.css"
             },
             "@coffeekraken.s-sugar-feature.sugar.css.font.title": {
+                "id": "@coffeekraken.s-sugar-feature.sugar.css.font.title",
                 "name": "title",
                 "type": "CssFontFace",
                 "platform": [

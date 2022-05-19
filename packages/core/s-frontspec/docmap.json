@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-frontspec.config.frontspec.head.viteClient": {
+                "id": "@coffeekraken.s-frontspec.config.frontspec.head.viteClient",
                 "name": "viteClient",
                 "type": "Object",
                 "default": "vite client script",
@@ -99,6 +100,7 @@
                 "children": {}
             },
             "@coffeekraken.s-frontspec.node.SFrontspec": {
+                "id": "@coffeekraken.s-frontspec.node.SFrontspec",
                 "name": "SFrontspec",
                 "type": "Class",
                 "description": "This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))\nand save it inside a directory you choose.",
@@ -121,6 +123,7 @@
                 "relPath": "src/node/SFrontspec.ts",
                 "children": {
                     "constructor": {
+                        "id": "fa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -132,6 +135,7 @@
                         }
                     },
                     "read": {
+                        "id": "5c71875c10b2f372dfe91a7886fc60dae13fe34514cd6052ccaff2ab39a1ca1e",
                         "name": "read",
                         "type": "Function",
                         "description": "This static method allows you to search for frontspec.json files and read them to get\nback the content of them in one call.",
@@ -143,6 +147,7 @@
                         }
                     },
                     "add": {
+                        "id": "7a021a39d0bcf29878650cbca00dfc5316d62ecc64dd9e4de3c52aae552d052d",
                         "name": "add",
                         "type": "Function",
                         "description": "This method allows you to add a new frontspec.json file to your project.",
@@ -154,6 +159,7 @@
                         }
                     },
                     "assetstoserve": {
+                        "id": "6d86cf1924ed434cc4c18743bd0ca39395b29f596193136f86bfb9fa897e83f1",
                         "name": "assetsToServe",
                         "type": "Function",
                         "description": "This method will returns all the files that need to be served using a web server\nthat are defined in the frontspec.json files like some css, js etc...",
@@ -168,6 +174,7 @@
                 }
             },
             "@coffeekraken.s-frontspec.node.interface.SFrontspecAddParamsInterface": {
+                "id": "@coffeekraken.s-frontspec.node.interface.SFrontspecAddParamsInterface",
                 "name": "SFrontspecAddParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -196,6 +203,7 @@
                 "children": {}
             },
             "@coffeekraken.s-frontspec.node.interface.SFrontspecReadParamsInterface": {
+                "id": "@coffeekraken.s-frontspec.node.interface.SFrontspecReadParamsInterface",
                 "name": "SFrontspecReadParamsInterface",
                 "type": ".                      Class",
                 "platform": [

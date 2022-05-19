@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-env.config.env.env": {
+                "id": "@coffeekraken.s-env.config.env.env",
                 "name": "env",
                 "type": "String",
                 "default": "process.env.NODE_ENV ?? window.env.ENV ?? 'dev`",
@@ -99,6 +100,7 @@
                 "children": {}
             },
             "@coffeekraken.s-env.s-env.shared.SEnv": {
+                "id": "@coffeekraken.s-env.s-env.shared.SEnv",
                 "name": "SEnv",
                 "type": "Class",
                 "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
@@ -120,6 +122,7 @@
                 "relPath": "src/shared/SEnv.ts",
                 "children": {
                     "env": {
+                        "id": "b05307df78d01dd8102117e4a76317be6135c47649f20daf83efa526dba5f26b",
                         "name": "env",
                         "type": "Object",
                         "description": "Store the actual environment variables object. In node it will be process.env, in the browser,\nwindow.env",
@@ -132,6 +135,7 @@
                         }
                     },
                     "is": {
+                        "id": "c357a00a09108492292733809ec56df14e55c2978e2c9a558fda1dfc19f11441",
                         "name": "is",
                         "type": "Function",
                         "description": "This static method allows you to check if the environment\nis \"dev\", \"development\", \"prod\" or \"production\"",
@@ -144,6 +148,7 @@
                         }
                     },
                     "get": {
+                        "id": "863b0c53622da90d13800cca8b98a09cad4b3c06e24f8b62484c4b9d11e227a0",
                         "name": "get",
                         "type": "Function",
                         "description": "This static method allows you to access an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
@@ -156,6 +161,7 @@
                         }
                     },
                     "set": {
+                        "id": "3238cad0a4de2ae08a869eb13d976429eeb7b8431293a218aeab84660fa16510",
                         "name": "set",
                         "type": "Function",
                         "description": "This static method allows you to set an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
@@ -168,6 +174,7 @@
                         }
                     },
                     "delete": {
+                        "id": "97f8f0f76311c34699d5fcbdac6092a7f8532ce564afee6fb15e9ba281e31c6f",
                         "name": "delete",
                         "type": "Function",
                         "description": "This static method allows you to delete an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
@@ -180,6 +187,7 @@
                         }
                     },
                     "packagejson": {
+                        "id": "d76e233b83378e16222bb382a1318b5cabcd6b9f8043a9dca26d3e254adceaec",
                         "name": "packageJson",
                         "type": "Object",
                         "description": "Access the package.json content from the current package the process\nruns in.",

@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-bench.doc.README": {
+                "id": "@coffeekraken.s-bench.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-bench.shared.SBench": {
+                "id": "@coffeekraken.s-bench.shared.SBench",
                 "name": "SBench",
                 "type": "Class",
                 "platform": [
@@ -142,12 +144,14 @@
                 "relPath": "src/shared/SBench.ts",
                 "children": {
                     "benchenv": {
+                        "id": "5425ea7b97275a1ef8849982413d8f8bdbe28ea869632fe299ee304340ac4255",
                         "name": "benchEnv",
                         "type": "Function",
                         "description": "This static method allows you to get the current bench environment\nthe process is running in. The bench environment",
                         "static": "true"
                     },
                     "filter": {
+                        "id": "cacf45682e3993d97dcddf47dd4528ee5d295d48adb30faeadaf1a38bf2743ad",
                         "name": "filter",
                         "type": "Function",
                         "description": "This method allows you to activate a list of bench id(s).\nYou can specify \"\" for wildcard",
@@ -160,6 +164,7 @@
                         }
                     },
                     "filtered": {
+                        "id": "ff9cf7419b22c3e1886bd53af1efcd428626c7b1010e0818e04f5e18f839be29",
                         "name": "filtered",
                         "type": "Function",
                         "description": "This method allows you to get back the list of activated bench(s)",
@@ -172,6 +177,7 @@
                         }
                     },
                     "isbenchactive": {
+                        "id": "a55912c499d056277984f608ff4fafe8fbd4cb41294d7a4ab78986f0eaa8cdfb",
                         "name": "isBenchActive",
                         "type": "Function",
                         "description": "This method allows you to check if a particular bench id is active",
@@ -184,6 +190,7 @@
                         }
                     },
                     "getbenchinstancebyid": {
+                        "id": "e81bdaf6e9fe2f5727fee876731216c5774344fb9a3444c5200c7ed0bd642f90",
                         "name": "getBenchInstanceById",
                         "type": "Function",
                         "description": "This static method allows you to get back a current SBench instance by it's id,\nor get back a new instance that you can use directly",
@@ -196,6 +203,7 @@
                         }
                     },
                     "start": {
+                        "id": "777b9fe936b64d701c334963db757d47f226befe0cd585074215bedd7ba5c468",
                         "name": "start",
                         "type": "Function",
                         "description": "This method allows you to start a new bench \"session\"",
@@ -207,6 +215,7 @@
                         }
                     },
                     "step": {
+                        "id": "66e8d4a5802fd2f4377f5c540192514bd3fd68581775037239e640e5b5c40bf7",
                         "name": "step",
                         "type": "Function",
                         "description": "This method allows you to declare a new step in your bench.\nA step is simple a point in your code like \"after compilation\", etc.\nIt will keep track of each steps and display the time it has taken\nfrom the last step.",
@@ -218,6 +227,7 @@
                         }
                     },
                     "end": {
+                        "id": "b0661d5010e2cf2461989e330d4870be9da2dcd4a24933d56d7f3955114532b4",
                         "name": "end",
                         "type": "Function",
                         "description": "This method allows you to end a bencvh \"session\"",
@@ -229,6 +239,7 @@
                         }
                     },
                     "log": {
+                        "id": "d34a8ed2222cc6708fd966e4a4cf6453dd246c8dc4bb2a6a3abb3e6ada960ad4",
                         "name": "log",
                         "type": "Function",
                         "description": "This method allows you to log the summary if this bench is active",
@@ -240,6 +251,7 @@
                         }
                     },
                     "benchsettings": {
+                        "id": "7a2a41cb34a6c8e89e22efbecf19b593608e07673cd03a6a343693ca2194d0e4",
                         "name": "benchSettings",
                         "type": "ISBenchSettings",
                         "description": "Access the bench settings",
@@ -251,6 +263,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "bb1735b97f3fba675df35746468b8f603c66eda322c124ca0dde9e338924e3e9",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -262,6 +275,7 @@
                         }
                     },
                     "isactive": {
+                        "id": "a2bfc3f9582507e0f5c56520826c61676737768e093fde2931eb43d815d62bd6",
                         "name": "isActive",
                         "type": "Function",
                         "description": "This method allows you to check if the current bench is active or not.",
@@ -273,6 +287,7 @@
                         }
                     },
                     "tostring": {
+                        "id": "6c223293a615820244213740345b08f62662f9b6599a6c89a4ae2ccf25969b46",
                         "name": "toString",
                         "type": "Function",
                         "description": "This method allows you to print the bench in string format",
@@ -286,6 +301,7 @@
                 }
             },
             "@coffeekraken.s-bench.shared.interface.SBenchSettingsInterface": {
+                "id": "@coffeekraken.s-bench.shared.interface.SBenchSettingsInterface",
                 "name": "SBenchSettingsInterface",
                 "type": ".                      Class",
                 "platform": [

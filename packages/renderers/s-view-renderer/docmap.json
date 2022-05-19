@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-view-renderer.config.viewRenderer.rootDirs": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.rootDirs",
                 "name": "rootDirs",
                 "type": "string[]",
                 "default": "['[config.storage.src.rootDir]/views']",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/viewRenderer.config.ts"
             },
             "@coffeekraken.s-view-renderer.config.viewRenderer.cacheDir": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.cacheDir",
                 "name": "cacheDir",
                 "type": "String",
                 "default": "[config.storage.package.cacheDir]",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/viewRenderer.config.ts"
             },
             "@coffeekraken.s-view-renderer.config.viewRenderer.engines": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.engines",
                 "name": "engines",
                 "type": "String[]",
                 "default": "['@coffeekraken/s-view-renderer-engine-blade', '@coffeekraken/s-view-renderer-engine-twig']",
@@ -130,6 +133,7 @@
                 "relPath": "src/config/viewRenderer.config.ts"
             },
             "@coffeekraken.s-view-renderer.config.viewRenderer.dataHandlers": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.dataHandlers",
                 "name": "dataHandlers",
                 "type": "String[]",
                 "default": "['@coffeekraken/s-handler-js']",
@@ -147,6 +151,7 @@
                 "children": {}
             },
             "@coffeekraken.s-view-renderer.doc.README": {
+                "id": "@coffeekraken.s-view-renderer.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -175,6 +180,7 @@
                 "children": {}
             },
             "@coffeekraken.s-view-renderer.node.SViewRenderer": {
+                "id": "@coffeekraken.s-view-renderer.node.SViewRenderer",
                 "name": "SViewRenderer",
                 "type": "Class",
                 "description": "This class represent a template that can be rendered using all the supported render engines listed in the features bellow.",
@@ -197,6 +203,7 @@
                 "relPath": "src/node/SViewRenderer.ts",
                 "children": {
                     "engines": {
+                        "id": "30b5bd2dbe3077e9672994041194723a311fe6bb8120750f2e757518dffa7a19",
                         "name": "engines",
                         "type": "Object",
                         "description": "Store the registered engines using the ```registerEngine``` static method",
@@ -209,6 +216,7 @@
                         }
                     },
                     "datahandlers": {
+                        "id": "48a360a468c75fbac8f7cb3953981c449c802f0fe21c9e35bd9ff11a2e307c40",
                         "name": "dataHandlers",
                         "type": "Object",
                         "description": "Store the registered dataHandlers using the ```registerDataHandler``` static method",
@@ -221,6 +229,7 @@
                         }
                     },
                     "defaultrootdirs": {
+                        "id": "b73f3ce9a45e6273da810cae5daa3e334b44207c90ad2dec52075899366164d3",
                         "name": "defaultRootDirs",
                         "type": "Array",
                         "description": "This static property store the default root directories where the class\nwill search for views to render",
@@ -233,6 +242,7 @@
                         }
                     },
                     "getrootdirs": {
+                        "id": "12724f8e1d8e5a03a8971c0dd780139b043e8ed2f8579cb0245c960624151b92",
                         "name": "getRootDirs",
                         "type": "Function",
                         "description": "This function accept an array of root directories\nand return the final array with the default root directories\nadded correctly",
@@ -245,6 +255,7 @@
                         }
                     },
                     "render": {
+                        "id": "d2bd1baa4c89043287ec97d259ce188e286133f4b77c20d7733a562f181c797e",
                         "name": "render",
                         "type": "Function",
                         "description": "Main method to render your view by passing it an object of data to use as well as an object of settings to override the default passed onces",
@@ -257,6 +268,7 @@
                         }
                     },
                     "registerengine": {
+                        "id": "debc4f2f8e14dd19d4abe7335256b1f78a9dfc92345211467d13009c1bfb5f51",
                         "name": "registerEngine",
                         "type": "Function",
                         "description": "This static method can be used to register a compatible __SViewEngine engine class\ninto the available SViews engines.",
@@ -269,6 +281,7 @@
                         }
                     },
                     "registerdatahandler": {
+                        "id": "e1881762d983bd3dfb1dcdfae750e6d1ddf652ad877c31f4cb1fbbc79b2c4e05",
                         "name": "registerDataHandler",
                         "type": "Function",
                         "description": "This static method can be used to register a compatible __SViewEngine engine class\ninto the available SViews engines.",
@@ -281,6 +294,7 @@
                         }
                     },
                     "getviewmetas": {
+                        "id": "7cc5b6e44a25f9a4092f5a14330fef24321bd0c3618051f27dac4a2ef4510d3d",
                         "name": "getViewMetas",
                         "type": "Function",
                         "description": "This static method allows you to give a \"potential\" view path (with or without the extension) and get\nback an object that describe the view with infos like \"type\", \"path\", \"extension\", etc...\nIf nothing is found, you will get ```false``` back.",
@@ -293,6 +307,7 @@
                         }
                     },
                     "viewrenderersettings": {
+                        "id": "3e6c219485bba438e49bcd0a0c2fe0b6f24ddbfde15221dd1616190fbd613a98",
                         "name": "viewRendererSettings",
                         "type": "ISViewRendererSettings",
                         "description": "Access the template settings",
@@ -304,6 +319,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "ea1d71c951c0f396e0a8848fdace207bd0312608d7bc1e7a991b3072dcaceedd",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -317,6 +333,7 @@
                 }
             },
             "@coffeekraken.s-view-renderer.node.interface.SViewRendererSettingsInterface": {
+                "id": "@coffeekraken.s-view-renderer.node.interface.SViewRendererSettingsInterface",
                 "name": "SViewRendererSettingsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -368,6 +385,7 @@
                 "children": {}
             },
             "@coffeekraken.s-view-renderer.s-view.pages.404": {
+                "id": "@coffeekraken.s-view-renderer.s-view.pages.404",
                 "name": "404",
                 "type": "Function",
                 "description": "This function simply take a data object and render a clean 404 page",

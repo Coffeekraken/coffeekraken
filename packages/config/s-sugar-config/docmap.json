@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-sugar-config.config.config.browser.include.include": {
+                "id": "@coffeekraken.s-sugar-config.config.config.browser.include.include",
                 "name": "include",
                 "type": "Array<String>",
                 "default": "['contact', 'datetime', 'log', 'serve', 'env', 'theme']",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/config.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.config.node.include.include": {
+                "id": "@coffeekraken.s-sugar-config.config.config.node.include.include",
                 "name": "include",
                 "type": "Array<String>",
                 "default": "[storage.package.cacheDir]/config",
@@ -115,6 +117,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.contact.discord.url": {
+                "id": "@coffeekraken.s-sugar-config.config.contact.discord.url",
                 "name": "url",
                 "type": "String",
                 "default": "[config.discord.server.url]",
@@ -131,6 +134,7 @@
                 "relPath": "src/config/contact.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.contact.email.url": {
+                "id": "@coffeekraken.s-sugar-config.config.contact.email.url",
                 "name": "url",
                 "type": "String",
                 "default": "config?.packageJson?.author?.email ?? config?.git?.user?.email",
@@ -147,6 +151,7 @@
                 "relPath": "src/config/contact.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.contact.email.shield": {
+                "id": "@coffeekraken.s-sugar-config.config.contact.email.shield",
                 "name": "shield",
                 "type": "String",
                 "default": "[config.discord.server.url]",
@@ -163,6 +168,7 @@
                 "relPath": "src/config/contact.config.ts",
                 "children": {
                     "url": {
+                        "id": "@coffeekraken.s-sugar-config.config.contact.discord.url",
                         "name": "url",
                         "type": "String",
                         "default": "https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&logo=discord",
@@ -178,6 +184,7 @@
                 }
             },
             "@coffeekraken.s-sugar-config.config.core.namespace.pattern": {
+                "id": "@coffeekraken.s-sugar-config.config.core.namespace.pattern",
                 "name": "pattern",
                 "type": "String",
                 "default": "{path}",
@@ -194,6 +201,7 @@
                 "relPath": "src/config/core.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.core.namespace.context": {
+                "id": "@coffeekraken.s-sugar-config.config.core.namespace.context",
                 "name": "context",
                 "type": "String",
                 "default": "__packageRoot()",
@@ -211,6 +219,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.datetime.dateFormat": {
+                "id": "@coffeekraken.s-sugar-config.config.datetime.dateFormat",
                 "name": "dateFormat",
                 "type": "String",
                 "default": "YYYY-MM-DD",
@@ -227,6 +236,7 @@
                 "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.timeFormat": {
+                "id": "@coffeekraken.s-sugar-config.config.datetime.timeFormat",
                 "name": "timeFormat",
                 "type": "String",
                 "default": "h:mm:ss",
@@ -243,6 +253,7 @@
                 "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.previousMonth": {
+                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.previousMonth",
                 "name": "previousMonth",
                 "type": "String",
                 "default": "Previous Month",
@@ -259,6 +270,7 @@
                 "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.nextMonth": {
+                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.nextMonth",
                 "name": "nextMonth",
                 "type": "String",
                 "default": "Next Month",
@@ -275,6 +287,7 @@
                 "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.months": {
+                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.months",
                 "name": "months",
                 "type": "String",
                 "default": "['January','February','March','April','May','June','July','August','September','October','November','December']",
@@ -291,6 +304,7 @@
                 "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdays": {
+                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdays",
                 "name": "weekdays",
                 "type": "String",
                 "default": "['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']",
@@ -307,6 +321,7 @@
                 "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdaysShort": {
+                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdaysShort",
                 "name": "weekdaysShort",
                 "type": "String",
                 "default": "['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']",
@@ -324,6 +339,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.yellow": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.yellow",
                 "name": "yellow",
                 "type": "Color",
                 "default": "#ffdc89",
@@ -340,6 +356,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.cyan": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.cyan",
                 "name": "cyan",
                 "type": "Color",
                 "default": "#65c1cd",
@@ -356,6 +373,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.green": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.green",
                 "name": "green",
                 "type": "Color",
                 "default": "#a7cb8b",
@@ -372,6 +390,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.magenta": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.magenta",
                 "name": "magenta",
                 "type": "Color",
                 "default": "#d190e3",
@@ -388,6 +407,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.red": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.red",
                 "name": "red",
                 "type": "Color",
                 "default": "#e78287",
@@ -404,6 +424,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.blue": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.blue",
                 "name": "blue",
                 "type": "Color",
                 "default": "#71bdf2",
@@ -420,6 +441,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.primary": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.primary",
                 "name": "primary",
                 "type": "Color",
                 "default": "#ffdc89",
@@ -436,6 +458,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.secondary": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.secondary",
                 "name": "secondary",
                 "type": "Color",
                 "default": "#65c1cd",
@@ -452,6 +475,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.grey": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.grey",
                 "name": "grey",
                 "type": "Color",
                 "default": "#e2e5e9",
@@ -468,6 +492,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.gray": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.gray",
                 "name": "gray",
                 "type": "Color",
                 "default": "#e2e5e9",
@@ -484,6 +509,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.black": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.black",
                 "name": "black",
                 "type": "Color",
                 "default": "#343a43",
@@ -500,6 +526,7 @@
                 "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.white": {
+                "id": "@coffeekraken.s-sugar-config.config.dev.colors.white",
                 "name": "white",
                 "type": "Color",
                 "default": "#e2e5e9",
@@ -517,6 +544,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.discord.server.id": {
+                "id": "@coffeekraken.s-sugar-config.config.discord.server.id",
                 "name": "id",
                 "type": "String",
                 "default": "Coffeekraken",
@@ -533,6 +561,7 @@
                 "relPath": "src/config/discord.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.discord.server.url": {
+                "id": "@coffeekraken.s-sugar-config.config.discord.server.url",
                 "name": "url",
                 "type": "String",
                 "default": "https://discord.gg/ERsX54UE",
@@ -550,6 +579,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.git.user.name": {
+                "id": "@coffeekraken.s-sugar-config.config.git.user.name",
                 "name": "name",
                 "type": "String",
                 "default": "undefined",
@@ -566,6 +596,7 @@
                 "relPath": "src/config/git.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.git.user.email": {
+                "id": "@coffeekraken.s-sugar-config.config.git.user.email",
                 "name": "email",
                 "type": "String",
                 "default": "undefined",
@@ -582,6 +613,7 @@
                 "relPath": "src/config/git.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.git.repo.url": {
+                "id": "@coffeekraken.s-sugar-config.config.git.repo.url",
                 "name": "url",
                 "type": "String",
                 "default": "undefined",
@@ -599,6 +631,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.icons.fontawesome.url": {
+                "id": "@coffeekraken.s-sugar-config.config.icons.fontawesome.url",
                 "name": "url",
                 "type": "String",
                 "default": "https://use.fontawesome.com/releases/v5.15.3/css/all.css",
@@ -615,6 +648,7 @@
                 "relPath": "src/config/icons.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.icons.fantasticon.name": {
+                "id": "@coffeekraken.s-sugar-config.config.icons.fantasticon.name",
                 "name": "name",
                 "type": "String",
                 "default": "sugar-fonticon",
@@ -631,6 +665,7 @@
                 "relPath": "src/config/icons.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.icons.fantasticon.outputDir": {
+                "id": "@coffeekraken.s-sugar-config.config.icons.fantasticon.outputDir",
                 "name": "outputDir",
                 "type": "String",
                 "default": "[config.storage.src.fontsDir]/sugar-icons",
@@ -647,6 +682,7 @@
                 "relPath": "src/config/icons.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.icons.fantasticon.serveFontsDir": {
+                "id": "@coffeekraken.s-sugar-config.config.icons.fantasticon.serveFontsDir",
                 "name": "serveFontsDir",
                 "type": "String",
                 "default": "[config.storage.dist.fontsDir]/sugar-icons",
@@ -664,6 +700,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.license.layout.headerImageUrl": {
+                "id": "@coffeekraken.s-sugar-config.config.license.layout.headerImageUrl",
                 "name": "headerImageUrl",
                 "type": "String",
                 "default": "[config.serve.img.url]/doc/licenseHeader.jpg",
@@ -681,6 +718,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.log.types": {
+                "id": "@coffeekraken.s-sugar-config.config.log.types",
                 "name": "types",
                 "type": "String[]",
                 "default": "['info','warning','error']",
@@ -698,6 +736,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.npm.rootDir": {
+                "id": "@coffeekraken.s-sugar-config.config.npm.rootDir",
                 "name": "rootDir",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]/node_modules",
@@ -715,6 +754,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.process.killOnError": {
+                "id": "@coffeekraken.s-sugar-config.config.process.killOnError",
                 "name": "killOnError",
                 "type": "Boolean",
                 "default": "true",
@@ -731,6 +771,7 @@
                 "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.stdio": {
+                "id": "@coffeekraken.s-sugar-config.config.process.stdio",
                 "name": "stdio",
                 "type": "String",
                 "default": "inherit",
@@ -747,6 +788,7 @@
                 "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.throw": {
+                "id": "@coffeekraken.s-sugar-config.config.process.throw",
                 "name": "throw",
                 "type": "Boolean",
                 "default": "true",
@@ -763,6 +805,7 @@
                 "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.exitAtEnd": {
+                "id": "@coffeekraken.s-sugar-config.config.process.exitAtEnd",
                 "name": "exitAtEnd",
                 "type": "Boolean",
                 "default": "false",
@@ -779,6 +822,7 @@
                 "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.runAsChild": {
+                "id": "@coffeekraken.s-sugar-config.config.process.runAsChild",
                 "name": "runAsChild",
                 "type": "Boolean",
                 "default": "true",
@@ -795,6 +839,7 @@
                 "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.processPath": {
+                "id": "@coffeekraken.s-sugar-config.config.process.processPath",
                 "name": "processPath",
                 "type": "String",
                 "default": "null",
@@ -812,6 +857,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.readme.layout.headerImageUrl": {
+                "id": "@coffeekraken.s-sugar-config.config.readme.layout.headerImageUrl",
                 "name": "headerImageUrl",
                 "type": "String",
                 "default": "[config.serve.img.url]/img/doc/readmeHeader.jpg",
@@ -828,6 +874,7 @@
                 "relPath": "src/config/readme.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.readme.shields": {
+                "id": "@coffeekraken.s-sugar-config.config.readme.shields",
                 "name": "shields",
                 "type": "Object",
                 "default": "[config.shieldsio.shields]",
@@ -845,6 +892,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.serve.img.url": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.img.url",
                 "name": "url",
                 "type": "String",
                 "default": "/dist/img",
@@ -861,6 +909,7 @@
                 "relPath": "src/config/serve.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.serve.js.url": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.js.url",
                 "name": "url",
                 "type": "String",
                 "default": "/dist/js",
@@ -877,6 +926,7 @@
                 "relPath": "src/config/serve.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.serve.css.url": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.css.url",
                 "name": "url",
                 "type": "String",
                 "default": "/dist/css",
@@ -893,6 +943,7 @@
                 "relPath": "src/config/serve.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.serve.icons.url": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.icons.url",
                 "name": "url",
                 "type": "String",
                 "default": "/dist/icons",
@@ -909,6 +960,7 @@
                 "relPath": "src/config/serve.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.serve.fonts.url": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.fonts.url",
                 "name": "url",
                 "type": "String",
                 "default": "/dist/fonts",
@@ -925,6 +977,7 @@
                 "relPath": "src/config/serve.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.serve.cache.url": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.cache.url",
                 "name": "url",
                 "type": "String",
                 "default": "/cache",
@@ -942,6 +995,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.style": {
+                "id": "@coffeekraken.s-sugar-config.config.shieldsio.style",
                 "name": "style",
                 "type": "String",
                 "default": "for-the-badge",
@@ -958,6 +1012,7 @@
                 "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.size.url": {
+                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.size.url",
                 "name": "url",
                 "type": "String",
                 "default": "https://shields.io/bundlephobia/min/[packageJson.name]?style=[config.shieldsio.style]",
@@ -974,6 +1029,7 @@
                 "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.href.href": {
+                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.href.href",
                 "name": "href",
                 "type": "String",
                 "default": "https://www.npmjs.com/package/[packageJson.name]",
@@ -990,6 +1046,7 @@
                 "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.url": {
+                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.url",
                 "name": "url",
                 "type": "String",
                 "default": "https://shields.io/npm/dm/[packageJson.name]?style=[config.shieldsio.style]",
@@ -1006,6 +1063,7 @@
                 "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.href": {
+                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.href",
                 "name": "href",
                 "type": "String",
                 "default": "https://www.npmjs.com/package/[packageJson.name]",
@@ -1022,6 +1080,7 @@
                 "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.url": {
+                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.url",
                 "name": "url",
                 "type": "String",
                 "default": "https://shields.io/npm/l/[packageJson.name]?style=[config.shieldsio.style]",
@@ -1038,6 +1097,7 @@
                 "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.href": {
+                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.href",
                 "name": "href",
                 "type": "String",
                 "default": "./LICENSE",
@@ -1054,6 +1114,7 @@
                 "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.discord.url": {
+                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.discord.url",
                 "name": "url",
                 "type": "String",
                 "default": "https://shields.io/discord/[config.discord.server.id]?style=[config.shieldsio.style]",
@@ -1070,6 +1131,7 @@
                 "relPath": "src/config/shieldsio.config.ts",
                 "children": {
                     "href": {
+                        "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.href",
                         "name": "href",
                         "type": "String",
                         "default": "[config.discord.server.url]",
@@ -1085,6 +1147,7 @@
                 }
             },
             "@coffeekraken.s-sugar-config.config.storage.system.tmpDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.system.tmpDir",
                 "name": "tmpDir",
                 "type": "String",
                 "default": "__systemTmpDir()",
@@ -1101,6 +1164,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.rootDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.rootDir",
                 "name": "rootDir",
                 "type": "String",
                 "default": "${__packageRoot()}",
@@ -1117,6 +1181,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.package.localDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.package.localDir",
                 "name": "localDir",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]/.local",
@@ -1133,6 +1198,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.package.cacheDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.package.cacheDir",
                 "name": "cacheDir",
                 "type": "String",
                 "default": "[config.storage.package.localDir]/cache",
@@ -1149,6 +1215,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.package.tmpDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.package.tmpDir",
                 "name": "tmpDir",
                 "type": "String",
                 "default": "[config.storage.package.localDir]/cache",
@@ -1165,6 +1232,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.package.nodeModulesDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.package.nodeModulesDir",
                 "name": "nodeModulesDir",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]/node_modules",
@@ -1181,6 +1249,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.rootDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.rootDir",
                 "name": "rootDir",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]/src",
@@ -1197,6 +1266,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.jsDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.jsDir",
                 "name": "jsDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/js",
@@ -1213,6 +1283,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.nodeDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.nodeDir",
                 "name": "nodeDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/node",
@@ -1229,6 +1300,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.cssDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.cssDir",
                 "name": "cssDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/css",
@@ -1245,6 +1317,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.docDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.docDir",
                 "name": "docDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/doc",
@@ -1261,6 +1334,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.fontsDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.fontsDir",
                 "name": "fontsDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/fonts",
@@ -1277,6 +1351,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.iconsDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.iconsDir",
                 "name": "iconsDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/icons",
@@ -1293,6 +1368,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.imgDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.imgDir",
                 "name": "imgDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/img",
@@ -1309,6 +1385,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.pagesDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.pagesDir",
                 "name": "pagesDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/views",
@@ -1325,6 +1402,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.publicDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.publicDir",
                 "name": "publicDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/public",
@@ -1341,6 +1419,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.viewsDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.viewsDir",
                 "name": "viewsDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/views",
@@ -1357,6 +1436,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.rootDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.rootDir",
                 "name": "rootDir",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]/dist",
@@ -1373,6 +1453,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.jsDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.jsDir",
                 "name": "jsDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/js",
@@ -1389,6 +1470,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.nodeDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.nodeDir",
                 "name": "nodeDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/node",
@@ -1405,6 +1487,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.cssDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.cssDir",
                 "name": "cssDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/css",
@@ -1421,6 +1504,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.docDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.docDir",
                 "name": "docDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/doc",
@@ -1437,6 +1521,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.fontsDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.fontsDir",
                 "name": "fontsDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/fonts",
@@ -1453,6 +1538,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.iconsDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.iconsDir",
                 "name": "iconsDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/icons",
@@ -1469,6 +1555,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.imgDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.imgDir",
                 "name": "imgDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/img",
@@ -1485,6 +1572,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.pagesDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.pagesDir",
                 "name": "pagesDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/views",
@@ -1501,6 +1589,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.viewsDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.dist.viewsDir",
                 "name": "viewsDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/views",
@@ -1517,6 +1606,7 @@
                 "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.exclude": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.exclude",
                 "name": "exclude",
                 "type": "Array<String>",
                 "description": "Specify which file(s) or directory(ies) you want to exclude from the major part of the functions\nlike resolveGlob, SSugarJson.search, etc...\nThis accept globs.",
@@ -1532,6 +1622,7 @@
                 "relPath": "src/config/storage.config.ts",
                 "children": {
                     "rootdir": {
+                        "id": "@coffeekraken.s-sugar-config.config.storage.rootDir",
                         "name": "rootDir",
                         "type": "String",
                         "default": "${__packageRoot(__dirname())}",
@@ -1547,6 +1638,7 @@
                 }
             },
             "@coffeekraken.s-sugar-config.js.SSugarConfig": {
+                "id": "@coffeekraken.s-sugar-config.js.SSugarConfig",
                 "name": "SSugarConfig",
                 "type": "Class",
                 "platform": [
@@ -1575,6 +1667,7 @@
                 "relPath": "src/js/sugar.ts",
                 "children": {
                     "get": {
+                        "id": "e0121c7e61a22d7d81e8b655ab943ce5728eeb37a2955e52539ec25bd570c03c",
                         "name": "get",
                         "type": "Function",
                         "description": "This static method allows you to access your configurations",
@@ -1589,6 +1682,7 @@
                 }
             },
             "@coffeekraken.s-sugar-config.node.SSugarConfig": {
+                "id": "@coffeekraken.s-sugar-config.node.SSugarConfig",
                 "name": "SSugarConfig",
                 "type": "Class",
                 "description": "This function allows you to access easily the configurations stored in the ```sugar.config.js```.\nThe returned configuration is the result of the default sugar config stored in the toolkit and the\napp defined config stored in current application root folder",
@@ -1611,6 +1705,7 @@
                 "relPath": "src/node/sugar.ts"
             },
             "@coffeekraken.s-sugar-config.shared.registerFolder": {
+                "id": "@coffeekraken.s-sugar-config.shared.registerFolder",
                 "name": "registerFolder",
                 "type": "Function",
                 "description": "This function allows you to register some folders to be taken in consideration\nwhen accessing the config using the ```sugar``` function",
@@ -1633,6 +1728,7 @@
                 "relPath": "src/node/sugar.ts",
                 "children": {
                     "filesrealpaths": {
+                        "id": "84baa66c57b5603b5250e08b768b51f80de4373dc5b287dae2a99644fa79a1cf",
                         "name": "filesRealPaths",
                         "type": "String[]",
                         "description": "Access the config files real paths",
@@ -1645,6 +1741,7 @@
                         }
                     },
                     "filespaths": {
+                        "id": "8f110cd8d059392e29ad0474e1325401bf28f92aac73a328490b3921751db4bd",
                         "name": "filesPaths",
                         "type": "String[]",
                         "description": "Access the config files paths",
@@ -1657,6 +1754,7 @@
                         }
                     },
                     "foldersrealpaths": {
+                        "id": "62e71375a7f4cb33c376b95b4ecc8095714d758e9f6484d8e435dd430127e01e",
                         "name": "foldersRealPaths",
                         "type": "String[]",
                         "description": "Access the config registered folders real pathes",
@@ -1669,6 +1767,7 @@
                         }
                     },
                     "folderspaths": {
+                        "id": "ef4604e32cdc4c437ccf935997770902e7a7c39cbac60497f9320e7fafec8fc2",
                         "name": "foldersPaths",
                         "type": "String[]",
                         "description": "Access the config folders pathes",
@@ -1681,6 +1780,7 @@
                         }
                     },
                     "load": {
+                        "id": "4d32c6224b44b9ac7c0311704b2138992291e3b529e8b67dfbefcc82242e4d8c",
                         "name": "load",
                         "type": "Function",
                         "description": "This method is responsible to load the config depending on the passed ```sugarConfig.env``` setting",
@@ -1693,6 +1793,7 @@
                         }
                     },
                     "tojson": {
+                        "id": "d4ac9db4e955ccbb114e51d51af04ee11c3ea58ca06ff60ede2a811d1256bd31",
                         "name": "toJson",
                         "type": "Function",
                         "description": "This function returns you the configuration as a json object",
@@ -1705,6 +1806,7 @@
                         }
                     },
                     "toobject": {
+                        "id": "35cc4b3f70b715bc6d68ae431128b3023a5e9ff661bfaf1500bf0bfa2053147d",
                         "name": "toObject",
                         "type": "Function",
                         "description": "This function returns you the configuration as an object",
@@ -1717,6 +1819,7 @@
                         }
                     },
                     "isloaded": {
+                        "id": "d17866bb971a75d04ecf92da69a983980d36a5b018fb265fd71186e0bab85d17",
                         "name": "isLoaded",
                         "type": "Function",
                         "description": "This static method allows you to test if the default or a particular configuration\nis loaded or not",
@@ -1728,6 +1831,7 @@
                         }
                     },
                     "todocblocks": {
+                        "id": "65337ecbdca7ad719b7f3bab7454ed372965edd2baeba47d3c749100d8d412cd",
                         "name": "toDocblocks",
                         "type": "Function",
                         "description": "This function take a config id as parameter and returns an array of docblocks parsed objects",
@@ -1740,6 +1844,7 @@
                         }
                     },
                     "hash": {
+                        "id": "b4c3fb39b12817a1dd0984f90c618e2a4d2ec7b658f5989e91bfd576dedada89",
                         "name": "hash",
                         "type": "String",
                         "description": "This hash function gives you access to the actual configuration hash.\nYou can specify a dot path to get the hash of a sub configuration",
@@ -1751,6 +1856,7 @@
                         }
                     },
                     "get": {
+                        "id": "9781ce7ca2d4e6b347a063d15dba42d870f648ca89bd3f0dedfee9f75184cb6b",
                         "name": "get",
                         "type": "Function",
                         "description": "This method allows you to get a configuration back by passing a dotpath like \"something.else\"",
@@ -1762,6 +1868,7 @@
                         }
                     },
                     "sugarconfigsettings": {
+                        "id": "a4f9c354e8d302ada5cb7b88fd02cb3e0c43c42684f3e9f1945849d709c130bc",
                         "name": "sugarConfigSettings",
                         "type": "ISSugarConfigSettings",
                         "description": "Access the sugar config settings",
@@ -1773,6 +1880,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "09feb13fbf800b029997c33291f9c79ae5f7c3590345d954d51b8d7fb0ead5e4",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -1784,6 +1892,7 @@
                         }
                     },
                     "cache": {
+                        "id": "a70abc4d15479711ef0d4260546bed350e24df9ef65f3a0a78bb80b246a80b1e",
                         "name": "cache",
                         "type": "Function",
                         "description": "Save the config in the cache to load it faster next time",
@@ -1803,6 +1912,7 @@
                 }
             },
             "@coffeekraken.s-sugar-config.node.mono.interface.SCliConfigCacheParamsInterface": {
+                "id": "@coffeekraken.s-sugar-config.node.mono.interface.SCliConfigCacheParamsInterface",
                 "name": "SCliConfigCacheParamsInterface",
                 "type": ".                      Class",
                 "platform": [

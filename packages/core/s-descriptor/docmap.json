@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-descriptor.s-descriptor.shared.SDescriptor": {
+                "id": "@coffeekraken.s-descriptor.s-descriptor.shared.SDescriptor",
                 "name": "SDescriptor",
                 "type": "Class",
                 "description": "Make a description...",
@@ -104,6 +105,7 @@
                 "relPath": "src/shared/_SDescriptor.ts",
                 "children": {
                     "rules": {
+                        "id": "2f0a3a23bc4509bfae6ffdf4e30b001ef40916077bfb95609e9345a7b19790f9",
                         "name": "rules",
                         "type": "Object",
                         "description": "Store the registered rules into a simple object",
@@ -115,6 +117,7 @@
                         }
                     },
                     "type": {
+                        "id": "795529aae9c7105c94769245f3cf7b5c847095ec4de44b4aad9ae086a8737e49",
                         "name": "type",
                         "type": "String",
                         "default": "Object",
@@ -127,6 +130,7 @@
                         }
                     },
                     "registerrule": {
+                        "id": "0f19bc366d576bac7277c20e03e814ff4dc8496159a6ca364b5138cb12d0b8ad",
                         "name": "registerRule",
                         "type": "Function",
                         "description": "This static method allows you to register a new rule\nby passing a valid ISDescriptorRule object",
@@ -138,6 +142,7 @@
                         }
                     },
                     "descriptorsettings": {
+                        "id": "94391d67d54c817f64649a6e186210eb4052e96960b43f75acefa9d0fef2b7b0",
                         "name": "descriptorSettings",
                         "type": "ISDescriptorSettings",
                         "description": "Access the descriptor settings",
@@ -149,6 +154,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "ea1d71c951c0f396e0a8848fdace207bd0312608d7bc1e7a991b3072dcaceedd",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -160,6 +166,7 @@
                         }
                     },
                     "apply": {
+                        "id": "8ca9f191eb2958ddacc4ac2aa58973ed3044099da9372961803a7474d734f850",
                         "name": "apply",
                         "type": "Function",
                         "description": "This method simply apply the descriptor instance on the passed value.\nThe value can be anything depending on the descriptor you use.\nWhen you pass an Array, by default it will apply the descriptor on\neach array items. If you don't want this behavior and the Array passed has to be\ntreated as a single value, pass the \"arrayAsValue\" setting to true",
@@ -173,6 +180,7 @@
                 }
             },
             "@coffeekraken.s-descriptor.sugar.js.descriptor.SDescriptorResult": {
+                "id": "@coffeekraken.s-descriptor.sugar.js.descriptor.SDescriptorResult",
                 "name": "SDescriptorResult",
                 "type": "Class",
                 "description": "This class is the main one that MUST be used as parent one\nwhen creating any descriptor like object, string, etc...",
@@ -194,6 +202,7 @@
                 "relPath": "src/shared/SDescriptorResult.ts",
                 "children": {
                     "constructor": {
+                        "id": "ea1d71c951c0f396e0a8848fdace207bd0312608d7bc1e7a991b3072dcaceedd",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -205,6 +214,7 @@
                         }
                     },
                     "hasissues": {
+                        "id": "b0728b5a57d9985bcfca291e30fc89942096142a52ef1b8d71f52e407533bf71",
                         "name": "hasIssues",
                         "type": "Function",
                         "description": "This method return true if theirs no issues, false if not",
@@ -216,6 +226,7 @@
                         }
                     },
                     "add": {
+                        "id": "6fa0e0f434e40e0c80424f27fbebdc0a2a78eb6add3c01bb38dc2005903ba71c",
                         "name": "add",
                         "type": "Function",
                         "description": "This method is used to add a rule result to the global descriptor result.",
@@ -227,6 +238,7 @@
                         }
                     },
                     "tostring": {
+                        "id": "20d47debd57c8e99ee211282a17bfa53762a1dff7e6014453a682361c65538a4",
                         "name": "toString",
                         "type": "Functio n",
                         "description": "This method return a string terminal compatible of this result object",
@@ -238,6 +250,7 @@
                         }
                     },
                     "toconsole": {
+                        "id": "6ae29eaf7fcac13bb227d4c10b16cef4e7dbc2893a32c57c789d3367a3fa54fe",
                         "name": "toConsole",
                         "type": "Function",
                         "description": "This method return a string terminal compatible of this result object",
@@ -251,6 +264,7 @@
                 }
             },
             "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.pathRule": {
+                "id": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.pathRule",
                 "name": "pathRule",
                 "type": "ISDescriptorRule",
                 "description": "This rule allows you to make sure a value is not under a certain value",
@@ -267,6 +281,7 @@
                 "children": {}
             },
             "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.maxRule": {
+                "id": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.maxRule",
                 "name": "maxRule",
                 "type": "ISDescriptorRule",
                 "description": "This rule allows you to make sure a value is not under a certain value",
@@ -282,6 +297,7 @@
                 "children": {}
             },
             "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.minRule": {
+                "id": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.minRule",
                 "name": "minRule",
                 "type": "ISDescriptorRule",
                 "description": "This rule allows you to make sure a value is not under a certain value",
@@ -297,6 +313,7 @@
                 "children": {}
             },
             "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.requiredRule": {
+                "id": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.requiredRule",
                 "name": "requiredRule",
                 "type": "ISDescriptorRule",
                 "description": "This rule allows you to make sure that your value is not ```undefined```\nor a nullish value like ```null``` or ```''```.",
@@ -312,6 +329,7 @@
                 "children": {}
             },
             "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.typeRule": {
+                "id": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.typeRule",
                 "name": "typeRule",
                 "type": "ISDescriptorRule",
                 "description": "This rule allows you to make sure a value does match the passed type like:\n- String | Array<String>\n- Boolean\n- Number\n- etc...",

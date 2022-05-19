@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-monorepo.config.monorepo.rootDir": {
+                "id": "@coffeekraken.s-monorepo.config.monorepo.rootDir",
                 "name": "rootDir",
                 "type": "String",
                 "default": "null",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/monorepo.config.ts"
             },
             "@coffeekraken.s-monorepo.config.monorepo.packagesGlobs": {
+                "id": "@coffeekraken.s-monorepo.config.monorepo.packagesGlobs",
                 "name": "packagesGlobs",
                 "type": "string[]",
                 "default": "['packages/* /",
@@ -113,6 +115,7 @@
                 "relPath": "src/config/monorepo.config.ts"
             },
             "@coffeekraken.s-monorepo.config.monorepo.filesToUpgrade": {
+                "id": "@coffeekraken.s-monorepo.config.monorepo.filesToUpgrade",
                 "name": "filesToUpgrade",
                 "type": "string[]",
                 "default": "['package.json','composer.json']",
@@ -130,6 +133,7 @@
                 "children": {}
             },
             "@coffeekraken.s-monorepo.node.SMonorepo": {
+                "id": "@coffeekraken.s-monorepo.node.SMonorepo",
                 "name": "SMonorepo",
                 "type": "Class",
                 "platform": [
@@ -158,6 +162,7 @@
                 "relPath": "src/node/SMonorepo.ts",
                 "children": {
                     "monoreposettings": {
+                        "id": "edbe2de1fe91af150d92b0014a34476b59d53a2a81c35a07ced5f9439b8cb6b1",
                         "name": "monorepoSettings",
                         "type": "ISMonorepoSettings",
                         "description": "Access the monorepo settings",
@@ -169,6 +174,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -180,6 +186,7 @@
                         }
                     },
                     "run": {
+                        "id": "abd5208a6fa3f96cddc32891ce5324a1354cd63225778b73b3d3e331bcd8cc54",
                         "name": "run",
                         "type": "Function",
                         "description": "This method allows you to run a command in every packages of the monorepo",
@@ -192,6 +199,7 @@
                         }
                     },
                     "list": {
+                        "id": "d95c81cc06a30a2829afcea45da572c40d3dc095b621724d97be318c3efcb82d",
                         "name": "list",
                         "type": "Function",
                         "description": "This method allows you to list all the repo in the monorepo",
@@ -204,6 +212,7 @@
                         }
                     },
                     "dev": {
+                        "id": "a579840aa98bfb71b6d4b9310bc05e943268734730163df820456fe5dad2a8ec",
                         "name": "dev",
                         "type": "Function",
                         "description": "This method allows you to launch the dev stack in the monorepo.\nThis mean principaly transpile the typescript files of each packages",
@@ -216,6 +225,7 @@
                         }
                     },
                     "upgrade": {
+                        "id": "a6f0366cbf64fbad694c236d096d5fcf6b61e3a0e98b051dafef5f5a3a892b99",
                         "name": "upgrade",
                         "type": "Function",
                         "description": "This method allows you to upgrade all the repo in the monorepo. This mean updating the\nrepositories package.json \"version\" field using the monorepo package.json version",
@@ -230,6 +240,7 @@
                 }
             },
             "@coffeekraken.s-monorepo.node.interface.SMonorepoDevParamsInterface": {
+                "id": "@coffeekraken.s-monorepo.node.interface.SMonorepoDevParamsInterface",
                 "name": "SMonorepoDevParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -284,6 +295,7 @@
                 "children": {}
             },
             "@coffeekraken.s-monorepo.node.interface.SMonorepoListParamsInterface": {
+                "id": "@coffeekraken.s-monorepo.node.interface.SMonorepoListParamsInterface",
                 "name": "SMonorepoListParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -320,6 +332,7 @@
                 "children": {}
             },
             "@coffeekraken.s-monorepo.node.interface.SMonorepoRunParamsInterface": {
+                "id": "@coffeekraken.s-monorepo.node.interface.SMonorepoRunParamsInterface",
                 "name": "SMonorepoRunParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -361,6 +374,7 @@
                 "children": {}
             },
             "@coffeekraken.s-monorepo.node.interface.SMonorepoUpgradeParamsInterface": {
+                "id": "@coffeekraken.s-monorepo.node.interface.SMonorepoUpgradeParamsInterface",
                 "name": "SMonorepoUpgradeParamsInterface",
                 "type": ".                      Class",
                 "platform": [

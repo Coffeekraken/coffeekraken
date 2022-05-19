@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-data-handler-js.node.js": {
+                "id": "@coffeekraken.s-data-handler-js.node.js",
                 "name": "js",
                 "type": "Function",
                 "description": "This function simply take the .data.js file path and return\nthe resulting object",

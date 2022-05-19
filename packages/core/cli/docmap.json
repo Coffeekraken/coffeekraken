@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.cli.cli.sugar.cli": {
+                "id": "@coffeekraken.cli.cli.sugar.cli",
                 "name": "sugar.cli",
                 "type": "File",
                 "description": "This is the main sugar cli file that split the commands\nby calling the proper files with the parsed cli args",
@@ -96,6 +97,7 @@
                 "relPath": "src/cli/_save.txt",
                 "children": {
                     "command": {
+                        "id": "5b149a76592aad0818663b90731d0b9d7fd984a4048f0c587969069028644cbc",
                         "name": "command",
                         "type": "String",
                         "description": "Get the correct sugar or sugard commant depending on the environment in which the cli is running",
@@ -107,6 +109,7 @@
                         }
                     },
                     "replacetokens": {
+                        "id": "4b45b4d201007578dd946447866057773083f8dbc88207dd3b38bf98b35dec75",
                         "name": "replaceTokens",
                         "type": "Function",
                         "description": "Replace tokens in a passed command like:\n- %sugar: Replaced by either \"sugar\" or \"sugard\" depending on the environment\n- Support all the tokens supported by the \"replaceTokens\" function of the sugar package",
@@ -118,6 +121,7 @@
                         }
                     },
                     "replacesugarcommandfordev": {
+                        "id": "5b1a5c1d1361f7cdfffd959a0db8d642e8b8cd8e0ee6694a3ed26b3da9f7e65a",
                         "name": "replaceSugarCommandForDev",
                         "type": "Function",
                         "description": "Replace the starting \"sugar\" by \"sugard\" in the command line when needed",
@@ -129,6 +133,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "5d9a55a8985e7967210a2c844fa002e4aa3eb1d74dca4689797842fd7e6e230d",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -141,6 +146,7 @@
                 }
             },
             "@coffeekraken.cli.cli.interface.SSugarCliParamsInterface": {
+                "id": "@coffeekraken.cli.cli.interface.SSugarCliParamsInterface",
                 "name": "SSugarCliParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -193,6 +199,7 @@
                 "children": {}
             },
             "@coffeekraken.cli.cli.process.interface.SSugarCliProcessKillParamsInterface": {
+                "id": "@coffeekraken.cli.cli.process.interface.SSugarCliProcessKillParamsInterface",
                 "name": "SSugarCliProcessKillParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -232,6 +239,7 @@
                 "children": {}
             },
             "@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface": {
+                "id": "@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface",
                 "name": "SCliAddManifestJsonParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -260,6 +268,7 @@
                 "children": {}
             },
             "@coffeekraken.cli.node.add.interface.SCliAddSugarJsonParamsInterface": {
+                "id": "@coffeekraken.cli.node.add.interface.SCliAddSugarJsonParamsInterface",
                 "name": "SCliAddSugarJsonParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -294,6 +303,7 @@
                 "children": {}
             },
             "@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface": {
+                "id": "@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface",
                 "name": "SCliFsCopyParamsInterface",
                 "type": ".                      Class",
                 "platform": [

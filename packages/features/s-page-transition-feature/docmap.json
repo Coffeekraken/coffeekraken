@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-page-transition-feature.js.SPageTransitionFeature": {
+                "id": "@coffeekraken.s-page-transition-feature.js.SPageTransitionFeature",
                 "name": "SPageTransitionFeature",
                 "type": "Feature",
                 "menu": {
@@ -158,6 +159,7 @@
                 "children": {}
             },
             "@coffeekraken.s-page-transition-feature.js.interface.SPageTransitionFeatureInterface": {
+                "id": "@coffeekraken.s-page-transition-feature.js.interface.SPageTransitionFeatureInterface",
                 "name": "SPageTransitionFeatureInterface",
                 "type": ".                      Class",
                 "platform": [

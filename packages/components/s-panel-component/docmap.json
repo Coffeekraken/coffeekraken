@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-panel-component.config.themeUi.panel.borderRadius": {
+                "id": "@coffeekraken.s-panel-component.config.themeUi.panel.borderRadius",
                 "name": "borderRadius",
                 "type": "String",
                 "default": "[theme.ui.default.borderRadius]",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-panel-component.config.themeUi.panel.transition": {
+                "id": "@coffeekraken.s-panel-component.config.themeUi.panel.transition",
                 "name": "transition",
                 "type": "String",
                 "default": "[theme.transition.default]",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-panel-component.config.themeUi.panel.depth": {
+                "id": "@coffeekraken.s-panel-component.config.themeUi.panel.depth",
                 "name": "depth",
                 "type": "Number",
                 "default": "5",
@@ -131,6 +134,7 @@
                 "children": {}
             },
             "@coffeekraken.s-panel-component.js.Panel-modal": {
+                "id": "@coffeekraken.s-panel-component.js.Panel-modal",
                 "name": "Panel (modal)",
                 "type": "CustomElement",
                 "menu": {
@@ -249,6 +253,7 @@
                 "children": {}
             },
             "@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface": {
+                "id": "@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface",
                 "name": "SPanelComponentInterface",
                 "type": ".                      Class",
                 "platform": [

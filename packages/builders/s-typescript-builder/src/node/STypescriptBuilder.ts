@@ -14,6 +14,7 @@ import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __path from 'path';
 import __ts from 'typescript';
+// import __STypescriptBuilderSettingsInterface from './interface/STypescriptBuilderSettingsInterface';
 // import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
 
 /**
@@ -147,9 +148,10 @@ export default class STypescriptBuilder extends __SBuilder {
         super(
             __deepMerge(
                 {
-                    typescriptBuilder: {
-                        ...__SSugarConfig.get('typescriptBuilder'),
-                    },
+                    // @ts-ignore
+                    // @TODO        integrate the settings interface
+                    // typescriptBuilder: __STypescriptBuilderSettingsInterface.default(),
+                    typescriptBuilder: {},
                 },
                 settings ?? {},
             ),

@@ -17,6 +17,7 @@ import __fs from 'fs';
 import __sharp from 'sharp';
 import __SLog from '@coffeekraken/s-log';
 import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuildParamsInterface';
+import __SImagesBuilderSettingsInterface from './interface/SImagesBuilderSettingsInterface';
 import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 
 /**
@@ -107,7 +108,7 @@ export default class SImagesBuilder extends __SBuilder {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get imagesBuilderSettings(): ISImagesBuilderSettings {
-        return (<any>this._settings).imagesBuilder;
+        return (<any>this)._settings.imagesBuilder;
     }
 
     /**
@@ -124,7 +125,8 @@ export default class SImagesBuilder extends __SBuilder {
         super(
             __deepMerge(
                 {
-                    imagesBuilder: {},
+                    // @ts-ignore
+                    imagesBuilder: __SImagesBuilderSettingsInterface.default(),
                 },
                 settings ?? {},
             ),
@@ -154,12 +156,8 @@ export default class SImagesBuilder extends __SBuilder {
     ): Promise<ISImagesBuilderResult> {
         return new __SPromise(
             async ({ resolve, reject, emit }) => {
-                const finalSettings = <ISImagesBuilderSettings>__deepMerge(
-                    {
-                        resolveGlob: {},
-                    },
-                    this.imagesBuilderSettings,
-                    settings ?? {},
+                const finalSettings = <ISImagesBuilderSettings>(
+                    __deepMerge(this.imagesBuilderSettings, settings ?? {})
                 );
 
                 // @ts-ignore

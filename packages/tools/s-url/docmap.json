@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-url.sugar.js.url.SUrl": {
+                "id": "@coffeekraken.s-url.sugar.js.url.SUrl",
                 "name": "SUrl",
                 "type": "Class",
                 "description": "Simple class that is useful to parse a URL (or the current browser URL) and gives you back\nan instance that has all these values availables as well as functions to modify the instancied URL:\n- protocol: The protocol scheme of the URL (e.g. http:).\n- slashes: A boolean which indicates whether the protocol is followed by two forward slashes (//).\n- auth: Authentication information portion (e.g. username:password).\n- username: Username of basic authentication.\n- password: Password of basic authentication.\n- host: Host name with port number.\n- hostname: Host name without port number.\n- port: Optional port number.\n- pathname: URL path.\n- query: Parsed object containing query string\n- queryString: Origin query string from the URL\n- hash: The \"fragment\" portion of the URL including the pound-sign (#).\n- href: The full URL.\n- origin: The origin of the URL.\n- schema: The schema property gives you access to an object containing these properties (only if you have provided the settings.schema setting):\n- match (true) {Boolean}: Tells you if your current url match the passed schema\n- errors (null) {Object}: Gives you access to which param(s) is/are in error\n- params (null) {Object}: Gives you access to each params specified in the schema with their values, etc...\n\nThis class use internally the `url-parse` npm module that you can find here: https://www.npmjs.com/package/url-parse",
@@ -103,6 +104,7 @@
                 "relPath": "src/shared/SUrl.ts",
                 "children": {
                     "constructor": {
+                        "id": "65706db752773ec13b7ada3f99d86d6ad09edb2bf17f4bdafd85ac739932f4a0",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -112,6 +114,7 @@
                         }
                     },
                     "schema": {
+                        "id": "c70fee17d0593eb5a37b2ea07c81205c8d25c17c7c76007a9af07a3786e1de2c",
                         "name": "schema",
                         "type": "Object",
                         "description": "Access the schema parsing result if the settings.schema has been provided.\nThis object contain these properties:\n- params ({}) {Object}: Store the path params found like /{client}/{name}\n- errors ({}) {Object}: Store the parsing errors if has some\n- match (true) {Boolean}: Store if the current url match with the provided schema",
@@ -121,6 +124,7 @@
                         }
                     },
                     "protocol": {
+                        "id": "88cb0ee0a8cbfd2d317c46005b1c92dbb7627a9f51e29259a506b17ded208e3e",
                         "name": "protocol",
                         "type": "String",
                         "description": "Get/set the protocol",
@@ -130,6 +134,7 @@
                         }
                     },
                     "slashes": {
+                        "id": "23853a7412c5e8b7b11279ea970d92f747ae15d0202686998bd6cb528c14fe3a",
                         "name": "slashes",
                         "type": "Boolean",
                         "description": "A boolean which indicates whether the protocol is followed by two forward slashes (//).",
@@ -139,6 +144,7 @@
                         }
                     },
                     "auth": {
+                        "id": "9c33187a8e75c4024dba5ad9436680113083e9637c2922d1d415f8f3455f3b82",
                         "name": "auth",
                         "type": "String",
                         "description": "Authentication information portion (e.g. username:password).",
@@ -148,6 +154,7 @@
                         }
                     },
                     "username": {
+                        "id": "be48382fca38925a389e4bb9b45b625956e04ba58320e1654b085502150cc346",
                         "name": "username",
                         "type": "String",
                         "description": "Get/set username of basic authentication",
@@ -157,6 +164,7 @@
                         }
                     },
                     "password": {
+                        "id": "597a2fa25dabf8e4d3c76d63d94e78ca3e30af85c98c3b80acf5030b95e02068",
                         "name": "password",
                         "type": "String",
                         "description": "Get/set password of basic authentication",
@@ -166,6 +174,7 @@
                         }
                     },
                     "host": {
+                        "id": "7eabfe7d1337576fbf3f9bf31c235db2a016c6e85e69b0c3f68d8c5d4d86b76e",
                         "name": "host",
                         "type": "String",
                         "description": "Get/set Host name with port number",
@@ -175,6 +184,7 @@
                         }
                     },
                     "hostname": {
+                        "id": "1afae8d39620378b054234079c0f65f183f32df0c4db6ddfcaf30f3dda06ccfa",
                         "name": "hostname",
                         "type": "String",
                         "description": "Get/set host name without port number",
@@ -184,6 +194,7 @@
                         }
                     },
                     "port": {
+                        "id": "27515e1a63520167e4c617bb2b527723f771d5d35ed2287770aee8f716622def",
                         "name": "port",
                         "type": "Number",
                         "description": "Optional port number",
@@ -193,6 +204,7 @@
                         }
                     },
                     "pathname": {
+                        "id": "d1d4901c21121766ee500d2b710de1e2d31a8f1dea0f7ff998807f270c243fc3",
                         "name": "pathname",
                         "type": "String",
                         "description": "URL path",
@@ -202,6 +214,7 @@
                         }
                     },
                     "pathnamearray": {
+                        "id": "13b90a1e37c15c87d3e4b36cca323793bfbe40eeae8db2f34912f719cfc33c3d",
                         "name": "pathnameArray",
                         "type": "Array",
                         "description": "URL path in array format",
@@ -211,6 +224,7 @@
                         }
                     },
                     "query": {
+                        "id": "ca866ce2ec9529b58d3a44dd6f8277edccc873351e5a071c05500477c5f8a2ab",
                         "name": "query",
                         "type": "String",
                         "description": "Parsed object containing query string",
@@ -220,6 +234,7 @@
                         }
                     },
                     "querystring": {
+                        "id": "c14a0cd5b759925f6cc8411fd44e1e8b53f292f1857c2bc9ea156cc16f5f62b2",
                         "name": "queryString",
                         "type": "String",
                         "description": "Origin query string from the URL",
@@ -229,6 +244,7 @@
                         }
                     },
                     "hash": {
+                        "id": "073634f3bc8423ed2caefb025d6c17408c85f139a5eac9973722c68bac8c1d77",
                         "name": "hash",
                         "type": "String",
                         "description": "The \"fragment\" portion of the URL including the pound-sign (#)",
@@ -238,6 +254,7 @@
                         }
                     },
                     "href": {
+                        "id": "9ade5198849b94c267fd1e78322c43e68e755a7af87fbf9c044c72a8efeb306f",
                         "name": "href",
                         "type": "String",
                         "description": "The full URL",
@@ -247,6 +264,7 @@
                         }
                     },
                     "origin": {
+                        "id": "15fb826d54352ef10220604a42c2ecdf5e13ccdac9e82bfc7c22dff45e3b7c96",
                         "name": "origin",
                         "type": "String",
                         "description": "The origin of the URL",
@@ -256,6 +274,7 @@
                         }
                     },
                     "tostring": {
+                        "id": "b99271ae7c51e9fdb0033d1db7d67889d6b59286f26cb7569199f1260670e374",
                         "name": "toString",
                         "type": "Function",
                         "description": "Return the full URL in string format",

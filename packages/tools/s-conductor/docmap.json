@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-conductor.doc.README": {
+                "id": "@coffeekraken.s-conductor.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-conductor.s-duration.SConductor": {
+                "id": "@coffeekraken.s-conductor.s-duration.SConductor",
                 "name": "SConductor",
                 "type": "Class",
                 "description": "This class represent the conductor for your UI. With it you can register some \"task\" to execute\nat a specific time. The \"times\" available are these ones:\n\n- direct: Execute directly the task\n- directly: Execute directly the task\n- inViewport: Execute when the element enter the viewport\n- nearViewport: Execute when the element is near the viewport\n- outOfViewport: Execute when the element is out of the viewport\n- domReady: Execute when the DOM is ready\n- visible: Execute when the element became visible\n- stylesheetsReady: Execute when the stylesheets are ready\n- interact: Execute when the user interact with the element. See the [whenInteract API documentation](/api/@coffeekraken.sugar.js.dom.detect.whenInteract).\n- idle: Execute when no other task is running",
@@ -131,6 +133,7 @@
                 "relPath": "src/js/SConductor.ts",
                 "children": {
                     "defaultinstance": {
+                        "id": "d4753324c04ebfc11accfcb933686eb53450005586f36e55df25a4a8980c0b2d",
                         "name": "defaultInstance",
                         "type": "SConductor",
                         "description": "Access the default instance of the SConductor class",
@@ -142,6 +145,7 @@
                         }
                     },
                     "when": {
+                        "id": "a4b11b8e7fc3f44262c1682d31dfcb89392351bef1e5d2534837da0c504f9eea",
                         "name": "when",
                         "type": "Function",
                         "description": "This method allows you to register a task to execute at a specific time in the \"default\" conductor instance.",
@@ -152,6 +156,7 @@
                         }
                     },
                     "setup": {
+                        "id": "00cbff23860494ccb84bee1e23571dec3b5067ed43d8f307bf1c4a8b6e9d968a",
                         "name": "setup",
                         "type": "Function",
                         "description": "This static method allows you to setup the \"default\" SConductor instance created when you use the static methods like \"when\", etc...",
@@ -163,6 +168,7 @@
                         }
                     },
                     "conductorsettings": {
+                        "id": "419fb2bb62d17be083a4070419533de423665a2c4c550c8b7a2e610493787e85",
                         "name": "conductorSettings",
                         "type": "ISConductorSettings",
                         "description": "Access the settings of the conductor",
@@ -173,6 +179,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -185,6 +192,7 @@
                 }
             },
             "@coffeekraken.s-conductor.js.interface.SConductorSettingsInterface": {
+                "id": "@coffeekraken.s-conductor.js.interface.SConductorSettingsInterface",
                 "name": "SConductorSettingsInterface",
                 "type": ".                      Class",
                 "platform": [

@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-refocus-feature.doc.README": {
+                "id": "@coffeekraken.s-refocus-feature.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-refocus-feature.js.SRefocusFeature": {
+                "id": "@coffeekraken.s-refocus-feature.js.SRefocusFeature",
                 "name": "SRefocusFeature",
                 "type": "Feature",
                 "menu": {
@@ -211,6 +213,7 @@
                 "children": {}
             },
             "@coffeekraken.s-refocus-feature.js.interface.SRefocusFeatureInterface": {
+                "id": "@coffeekraken.s-refocus-feature.js.interface.SRefocusFeatureInterface",
                 "name": "SRefocusFeatureInterface",
                 "type": ".                      Class",
                 "platform": [

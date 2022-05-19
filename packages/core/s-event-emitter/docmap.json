@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-event-emitter.doc.README": {
+                "id": "@coffeekraken.s-event-emitter.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-event-emitter.sugar.js.event.SEventEmitter": {
+                "id": "@coffeekraken.s-event-emitter.sugar.js.event.SEventEmitter",
                 "name": "SEventEmitter",
                 "type": "Class",
                 "namespace": "@coffeekraken.s-event-emitter.sugar.js.event",
@@ -130,6 +132,7 @@
                 "relPath": "src/shared/SEventEmitter.ts",
                 "children": {
                     "global": {
+                        "id": "b87454041a358fd3462a266b2fa2d370a45d3d5c6156fe60c77d702b4197d914",
                         "name": "global",
                         "type": "SEventEmitter",
                         "description": "This static property store a global event emitter instance that you can use to\ncommunicate between processes with ease or simply into a same process\nbetween all of your running things",
@@ -137,6 +140,7 @@
                         "since": "2.0.0"
                     },
                     "pipe": {
+                        "id": "2ec81abd9b243cf2b39447d137afc26424b2b00630407c03c4203f6746409de2",
                         "name": "pipe",
                         "type": "Function",
                         "description": "This method is the same as the ```pipe```and ```pipeFrom``` one but it's just act as the inverse.\nHere you specify whenre you want to pipe this instance events and not from which you want to pipe them here...",
@@ -147,6 +151,7 @@
                         }
                     },
                     "eventemittersettings": {
+                        "id": "f925df42040feb9d7d4dffa3d2595f66497485d79591e5e0015efc863c25976c",
                         "name": "eventEmitterSettings",
                         "type": "ISEventEmitterSettings",
                         "description": "Access the event emitter settings",
@@ -157,6 +162,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "3d98fac23aa320e2fd3553e4c27de61b2b55848a5c925e1407a92f4bedbf8466",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -172,6 +178,7 @@
                         }
                     },
                     "bind": {
+                        "id": "ef537e46683b13b619c3a3dc82a2b8d92e784ef0874438cb2821e6ac496c158d",
                         "name": "bind",
                         "type": "Function",
                         "description": "This method allows you to bind another object as the emitter.",
@@ -182,6 +189,7 @@
                         }
                     },
                     "pipeerrors": {
+                        "id": "4283df1c23b4bd1a5fd0f9b48e45646323c4bca37db93339da028b674b6dc42a",
                         "name": "pipeErrors",
                         "type": "Function",
                         "description": "This is the exact same as the original ```pipe``` method. It's just pipe only the errors.",
@@ -192,6 +200,7 @@
                         }
                     },
                     "pipefrom": {
+                        "id": "eafde1c534959fb4c9be20410255d01ccc38d98744dc9d20a3851c7fce93941e",
                         "name": "pipeFrom",
                         "type": "Function",
                         "description": "This is the exacte same as the original ```pipe``` method. It's just an aliasw.",
@@ -202,6 +211,7 @@
                         }
                     },
                     "start": {
+                        "id": "f6580f0283a84e03291d61846d836a08b5b493d5874dd74a768bb08bdf37f15f",
                         "name": "start",
                         "type": "Function",
                         "description": "This method has to be called when you want to start the event emissions.\nThis is usefull only if you set the setting ```asyncStart``` to true.\nUntill you call this method, all the emitted events\nare store in memory and emitted after.",
@@ -212,6 +222,7 @@
                         }
                     },
                     "emit": {
+                        "id": "9b4335bfcca269f0eb0951055b453166d35aad98b334124190a1eb1d2f167f5b",
                         "name": "emit",
                         "type": "Function",
                         "description": "This is the method that allows you to emit the callbacks like \"catch\", \"finally\", etc... without actually resolving the Promise itself",
@@ -223,6 +234,7 @@
                         }
                     },
                     "on": {
+                        "id": "9243d9613701cb5572d7ab68d81278b7969ce3947220a8d9fb826e6f5bde5576",
                         "name": "on",
                         "type": "Function",
                         "description": "This method allows the SEventEmitter user to register a function that will be called every time the \"resolve\" one is called in the executor\nThe context of the callback will be the SEventEmitter instance itself so you can call all the methods available like \"resolve\", \"release\", \"on\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SEventEmitter instance through the last parameter like so \"(value, SEventEmitterInstance) => { ... }\".",
@@ -233,6 +245,7 @@
                         }
                     },
                     "off": {
+                        "id": "8e6fe8675c51e057e83570b2415aea7786dfd0229663ab481d8bf61de6346f64",
                         "name": "off",
                         "type": "Function",
                         "description": "This method allows you to unsubscribe to an event by passing the event name an optionally the callback function.\nIf you don't pass the callback function, all the subscribed events the same as the passed one will be unsubscribed.",
@@ -243,6 +256,7 @@
                         }
                     },
                     "destroy": {
+                        "id": "3366167084bd81ba7a6e4c863aec31d40d9d53c2db959569eb3cd87a1e2660fe",
                         "name": "destroy",
                         "type": "Function",
                         "description": "Destroying the SEventEmitter instance by unregister all the callbacks, etc...",
@@ -254,6 +268,7 @@
                 }
             },
             "@coffeekraken.s-event-emitter.shared.interface.SEventEmitterPipeSettingsInterface": {
+                "id": "@coffeekraken.s-event-emitter.shared.interface.SEventEmitterPipeSettingsInterface",
                 "name": "SEventEmitterPipeSettingsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -312,6 +327,7 @@
                 "children": {}
             },
             "@coffeekraken.s-event-emitter.shared.interface.SEventEmitterSettingsInterface": {
+                "id": "@coffeekraken.s-event-emitter.shared.interface.SEventEmitterSettingsInterface",
                 "name": "SEventEmitterSettingsInterface",
                 "type": ".                      Class",
                 "platform": [

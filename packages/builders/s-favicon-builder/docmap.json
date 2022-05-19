@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-favicon-builder.config.favicon.input": {
+                "id": "@coffeekraken.s-favicon-builder.config.favicon.input",
                 "name": "input",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/favicon/favicon.png",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/faviconBuilder.config.ts"
             },
             "@coffeekraken.s-favicon-builder.config.favicon.outDir": {
+                "id": "@coffeekraken.s-favicon-builder.config.favicon.outDir",
                 "name": "outDir",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]/favicon",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/faviconBuilder.config.ts"
             },
             "@coffeekraken.s-favicon-builder.config.favicon.settings": {
+                "id": "@coffeekraken.s-favicon-builder.config.favicon.settings",
                 "name": "settings",
                 "type": "String",
                 "default": "{}",
@@ -131,6 +134,7 @@
                 "children": {}
             },
             "@coffeekraken.s-favicon-builder.doc.README": {
+                "id": "@coffeekraken.s-favicon-builder.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -159,6 +163,7 @@
                 "children": {}
             },
             "@coffeekraken.s-favicon-builder.node.SFaviconBuilder": {
+                "id": "@coffeekraken.s-favicon-builder.node.SFaviconBuilder",
                 "name": "SFaviconBuilder",
                 "type": "Class",
                 "platform": [
@@ -210,6 +215,7 @@
                 "relPath": "src/node/SFaviconBuilder.ts",
                 "children": {
                     "faviconbuildersettings": {
+                        "id": "08569a71bf84a8dfd14fa18e8a0c6d2c615cbdb7eca29f02dc5b9a9c32623c89",
                         "name": "faviconBuilderSettings",
                         "type": "ISFaviconBuilderSettings",
                         "description": "Access the favicon builder settings",
@@ -221,6 +227,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "fa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -234,6 +241,7 @@
                 }
             },
             "@coffeekraken.s-favicon-builder.node.interface.SFaviconBuilderAddParamsInterface": {
+                "id": "@coffeekraken.s-favicon-builder.node.interface.SFaviconBuilderAddParamsInterface",
                 "name": "SFaviconBuilderAddParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -269,6 +277,7 @@
                 "children": {}
             },
             "@coffeekraken.s-favicon-builder.node.interface.SFaviconBuilderBuildParamsInterface": {
+                "id": "@coffeekraken.s-favicon-builder.node.interface.SFaviconBuilderBuildParamsInterface",
                 "name": "SFaviconBuilderBuildParamsInterface",
                 "type": ".                      Class",
                 "platform": [

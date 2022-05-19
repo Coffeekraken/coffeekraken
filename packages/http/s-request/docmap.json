@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-request.doc.README": {
+                "id": "@coffeekraken.s-request.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-request.shared.SRequest": {
+                "id": "@coffeekraken.s-request.shared.SRequest",
                 "name": "SRequest",
                 "type": "Class",
                 "description": "Class that allows to simply handle ajax requests with ease.\nThis class give some useful features like :\n- Promise support\n- Recursive requests",
@@ -132,6 +134,7 @@
                 "relPath": "src/shared/SRequest.ts",
                 "children": {
                     "requestsettings": {
+                        "id": "84beeab042b4eacc52b248609d1097822ca02388995a128e9cf76f4ca83745ae",
                         "name": "requestSettings",
                         "type": "ISRequestSettings",
                         "description": "Access the request settings",
@@ -143,6 +146,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "1f0e7617423d60fb61f00e50607b33ede0ef9e8f011a554128aa3e9098a3c69a",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -153,6 +157,7 @@
                         }
                     },
                     "retry": {
+                        "id": "ca4748dd750676a84bfe06c0989c334a5071c9764dbdab8b6cfa1e8d0d1475e7",
                         "name": "retry",
                         "type": "Function",
                         "description": "Reset the request settings variables and relaunch the request",
@@ -169,6 +174,7 @@
                         }
                     },
                     "send": {
+                        "id": "08fe3388a893a5c928e05f2c623174c0f57a380ebabf4cb6e2a8926924b03255",
                         "name": "send",
                         "type": "Function",
                         "description": "Send the request and return a promise that will be resolved once all the requests\nhave been made or rejected if one of the requests has returned an error...",
@@ -187,6 +193,7 @@
                 }
             },
             "@coffeekraken.s-request.shared.interface.SRequestParamsInterface": {
+                "id": "@coffeekraken.s-request.shared.interface.SRequestParamsInterface",
                 "name": "SRequestParamsInterface",
                 "type": ".                      Class",
                 "platform": [

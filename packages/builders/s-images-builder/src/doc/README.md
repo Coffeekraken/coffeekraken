@@ -58,8 +58,16 @@ const builder = new __SImagesBuilder();
 await builder.build({});
 ```
 
-#### Parameters
+#### Build parameters
 
 {{> interface namespace='@coffeekraken.s-images-builder.node.interface.SImagesBuilderBuildParamsInterface' }}
+
+#### Settings
+
+{{> interface namespace='@coffeekraken.s-images-builder.node.interface.SImagesBuilderSettingsInterface' }}
+
+#### API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-images-builder.node.SImagesBuilder)
 
 {{/ layout-readme }}

@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.cache": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.cache",
                 "name": "cache",
                 "type": "Boolean",
                 "default": "true",
@@ -99,6 +100,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.cli.interface.SCliSugarPostcssPluginAddParamsInterface": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.cli.interface.SCliSugarPostcssPluginAddParamsInterface",
                 "name": "SCliSugarPostcssPluginAddParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -116,12 +118,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SCliSugarPostcssPluginAddParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/cli/interface/SCliSugarPostcssPluginAddParamsInterface.ts",
+                "filename": "SCliSugarPostcssPluginAddParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/cli/interface/SCliSugarPostcssPluginAddParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -145,12 +148,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.utils.astNodesToString": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.utils.astNodesToString",
                 "name": "astNodesToString",
                 "type": "Function",
                 "description": "This function just take an AST nodes array and returns the string version of it\nwith \";\" when needed, etc...",
@@ -168,6 +172,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.border.radius": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.border.radius",
                 "name": "radius",
                 "type": "PostcssFunction",
                 "platform": [
@@ -191,12 +196,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "radius.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/border/radius.ts",
+                "filename": "radius.js",
+                "extension": "js",
+                "relPath": "src/node/functions/border/radius.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.border.width": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.border.width",
                 "name": "width",
                 "type": "PostcssFunction",
                 "platform": [
@@ -220,12 +226,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "width.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/border/width.ts",
+                "filename": "width.js",
+                "extension": "js",
+                "relPath": "src/node/functions/border/width.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.color.color": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.color.color",
                 "name": "color",
                 "type": "PostcssFunction",
                 "platform": [
@@ -249,12 +256,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "color.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/color/color.ts",
+                "filename": "color.js",
+                "extension": "js",
+                "relPath": "src/node/functions/color/color.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.depth.depth": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.depth.depth",
                 "name": "depth",
                 "type": "PostcssFunction",
                 "platform": [
@@ -278,12 +286,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "depth.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/depth/depth.ts",
+                "filename": "depth.js",
+                "extension": "js",
+                "relPath": "src/node/functions/depth/depth.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.filter.noise": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.filter.noise",
                 "name": "noise",
                 "type": "PostcssMixin",
                 "platform": [
@@ -307,12 +316,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "noise.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/filter/noise.ts",
+                "filename": "noise.js",
+                "extension": "js",
+                "relPath": "src/node/functions/filter/noise.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.font.family": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.font.family",
                 "name": "family",
                 "type": "PostcssFunction",
                 "platform": [
@@ -336,12 +346,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "family.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/font/family.ts",
+                "filename": "family.js",
+                "extension": "js",
+                "relPath": "src/node/functions/font/family.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.font.radius": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.font.radius",
                 "name": "radius",
                 "type": "PostcssFunction",
                 "platform": [
@@ -365,12 +376,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "size.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/font/size.ts",
+                "filename": "size.js",
+                "extension": "js",
+                "relPath": "src/node/functions/font/size.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.margin.margin": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.margin.margin",
                 "name": "margin",
                 "type": "PostcssFunction",
                 "platform": [
@@ -394,12 +406,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "margin.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/margin/margin.ts",
+                "filename": "margin.js",
+                "extension": "js",
+                "relPath": "src/node/functions/margin/margin.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.offsize.offsize": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.offsize.offsize",
                 "name": "offsize",
                 "type": "PostcssFunction",
                 "platform": [
@@ -423,12 +436,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "offsize.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/offsize/offsize.ts",
+                "filename": "offsize.js",
+                "extension": "js",
+                "relPath": "src/node/functions/offsize/offsize.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity.opacity": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity.opacity",
                 "name": "opacity",
                 "type": "PostcssFunction",
                 "platform": [
@@ -452,12 +466,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "opacity.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/opacity/opacity.ts",
+                "filename": "opacity.js",
+                "extension": "js",
+                "relPath": "src/node/functions/opacity/opacity.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.padding.padding": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.padding.padding",
                 "name": "padding",
                 "type": "PostcssFunction",
                 "platform": [
@@ -481,12 +496,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "padding.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/padding/padding.ts",
+                "filename": "padding.js",
+                "extension": "js",
+                "relPath": "src/node/functions/padding/padding.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.scalable.scalable": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.scalable.scalable",
                 "name": "scalable",
                 "type": "PostcssFunction",
                 "platform": [
@@ -510,12 +526,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "scalable.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/scalable/scalable.ts",
+                "filename": "scalable.js",
+                "extension": "js",
+                "relPath": "src/node/functions/scalable/scalable.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.space.space": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.space.space",
                 "name": "space",
                 "type": "PostcssFunction",
                 "platform": [
@@ -539,12 +556,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "space.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/space/space.ts",
+                "filename": "space.js",
+                "extension": "js",
+                "relPath": "src/node/functions/space/space.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.theme": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.theme",
                 "name": "theme",
                 "type": "PostcssFunction",
                 "platform": [
@@ -568,12 +586,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "theme.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/theme/theme.ts",
+                "filename": "theme.js",
+                "extension": "js",
+                "relPath": "src/node/functions/theme/theme.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.value": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.value",
                 "name": "value",
                 "type": "PostcssFunction",
                 "platform": [
@@ -597,12 +616,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "value.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/theme/value.ts",
+                "filename": "value.js",
+                "extension": "js",
+                "relPath": "src/node/functions/theme/value.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.var": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.var",
                 "name": "var",
                 "type": "PostcssFunction",
                 "platform": [
@@ -626,12 +646,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "var.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/theme/var.ts",
+                "filename": "var.js",
+                "extension": "js",
+                "relPath": "src/node/functions/theme/var.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.border.transition": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.border.transition",
                 "name": "transition",
                 "type": "PostcssFunction",
                 "platform": [
@@ -655,12 +676,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "transition.ts",
-                "extension": "ts",
-                "relPath": "src/node/functions/transition/transition.ts",
+                "filename": "transition.js",
+                "extension": "js",
+                "relPath": "src/node/functions/transition/transition.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.align.abs": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.align.abs",
                 "name": "abs",
                 "type": "PostcssMixin",
                 "platform": [
@@ -690,6 +712,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -714,6 +737,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.radius": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.radius",
                 "name": "radius",
                 "type": "PostcssMixin",
                 "platform": [
@@ -743,6 +767,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.width": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.width",
                 "name": "width",
                 "type": "PostcssMixin",
                 "platform": [
@@ -772,6 +797,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -801,6 +827,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.clearfix": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.clearfix",
                 "name": "clearfix",
                 "type": "PostcssMixin",
                 "platform": [
@@ -830,6 +857,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -859,6 +887,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.color": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.color",
                 "name": "color",
                 "type": "PostcssMixin",
                 "platform": [
@@ -888,6 +917,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.current": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.current",
                 "name": "current",
                 "type": "PostcssMixin",
                 "platform": [
@@ -917,6 +947,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.docblocks": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.docblocks",
                 "name": "docblocks",
                 "type": "PostcssMixin",
                 "platform": [
@@ -946,6 +977,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.primary": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.primary",
                 "name": "primary",
                 "type": "PostcssMixin",
                 "platform": [
@@ -975,6 +1007,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.remap": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.remap",
                 "name": "remap",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1004,6 +1037,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.component.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.component.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1033,6 +1067,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.cursor.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.cursor.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1062,6 +1097,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1091,6 +1127,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.depth": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.depth",
                 "name": "depth",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1120,6 +1157,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.direction.rtl": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.direction.rtl",
                 "name": "rtl",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1149,6 +1187,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1178,6 +1217,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.disabled": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.disabled",
                 "name": "disabled",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1207,6 +1247,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.display.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.display.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1236,6 +1277,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.filter.noise": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.filter.noise",
                 "name": "noise",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1265,6 +1307,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1294,6 +1337,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.depth": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.depth",
                 "name": "depth",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1323,6 +1367,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.flex.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.flex.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1352,6 +1397,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.float.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.float.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1381,6 +1427,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1410,6 +1457,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.faces": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.faces",
                 "name": "faces",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1439,6 +1487,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.family": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.family",
                 "name": "family",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1468,6 +1517,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.size": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.size",
                 "name": "size",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1497,6 +1547,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1526,6 +1577,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.text": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.text",
                 "name": "text",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1559,6 +1611,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gap.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gap.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1588,6 +1641,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1617,6 +1671,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.gradient": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.gradient",
                 "name": "gradient",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1646,6 +1701,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.height.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.height.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1675,6 +1731,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.highlightjs.theme": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.highlightjs.theme",
                 "name": "theme",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1704,6 +1761,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.icon.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.icon.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1733,6 +1791,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.import.import": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.import.import",
                 "name": "import",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1761,6 +1820,7 @@
                 "relPath": "src/node/mixins/import/import.ts"
             },
             "@coffeekraken.s-postcss-sugar-plugin.sugar.postcss.mixin.import.import": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.sugar.postcss.mixin.import.import",
                 "name": "import",
                 "type": "PostcssMixin",
                 "description": "This mixin allows you to import files as default import statement does but add the glob support like \"something/*\n/.css\"",
@@ -1783,6 +1843,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.init.init": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.init.init",
                 "name": "init",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1812,6 +1873,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1841,6 +1903,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.container": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.container",
                 "name": "container",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1870,6 +1933,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.layout": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.layout",
                 "name": "layout",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1903,6 +1967,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1932,6 +1997,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.stretch": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.stretch",
                 "name": "stretch",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1961,6 +2027,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.base": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.base",
                 "name": "base",
                 "type": "PostcssMixin",
                 "platform": [
@@ -1990,6 +2057,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.selection": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.selection",
                 "name": "selection",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2019,6 +2087,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.margin.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.margin.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2048,6 +2117,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2077,6 +2147,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.media": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.media",
                 "name": "media",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2106,6 +2177,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.offsize.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.offsize.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2135,6 +2207,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.opacity.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.opacity.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2164,6 +2237,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.order.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.order.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2193,6 +2267,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.outline.outline": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.outline.outline",
                 "name": "outline",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2222,6 +2297,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.overflow.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.overflow.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2251,6 +2327,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.padding.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.padding.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2280,6 +2357,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2309,6 +2387,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.platform": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.platform",
                 "name": "platform",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2338,6 +2417,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.pointer.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.pointer.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2367,6 +2447,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.position.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.position.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2396,6 +2477,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2425,6 +2507,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.ratio": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.ratio",
                 "name": "ratio",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2454,6 +2537,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.destyle": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.destyle",
                 "name": "destyle",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2483,6 +2567,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.reset": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.reset",
                 "name": "reset",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2512,6 +2597,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.sugar": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.sugar",
                 "name": "sugar",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2541,6 +2627,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.vertical": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.vertical",
                 "name": "vertical",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2574,6 +2661,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2603,6 +2691,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope.no": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope.no",
                 "name": "no",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2632,6 +2721,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar.scrollbar": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar.scrollbar",
                 "name": "scrollbar",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2661,6 +2751,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.shadow.shadow": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.shadow.shadow",
                 "name": "shadow",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2690,6 +2781,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.focus": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.focus",
                 "name": "focus",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2719,6 +2811,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.disabled": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.disabled",
                 "name": "disabled",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2748,6 +2841,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.hover": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.hover",
                 "name": "hover",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2777,6 +2871,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.text.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.text.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2806,6 +2901,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.theme.theme": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.theme.theme",
                 "name": "theme",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2835,6 +2931,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.when": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.when",
                 "name": "when",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2868,6 +2965,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2897,6 +2995,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.transition": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.transition",
                 "name": "transition",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2925,6 +3024,7 @@
                 "relPath": "src/node/mixins/transition/transition.ts"
             },
             "@coffeekraken.s-postcss-sugar-plugin.mixins.transition.transition": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.mixins.transition.transition",
                 "name": "transition",
                 "type": "Mixin",
                 "description": "This mixin allows apply a transition specified in the theme config like \"fast\", \"slow\" and \"slow\" or others you've been defined",
@@ -2952,6 +3052,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -2981,6 +3082,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.truncate": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.truncate",
                 "name": "truncate",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3010,6 +3112,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.typo.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.typo.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3039,6 +3142,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.classes",
                 "name": "classes",
                 "type": "Mixin",
                 "description": "This mixin allows you to print all the ui classes like button, form, etc...",
@@ -3062,6 +3166,7 @@
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3085,12 +3190,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/until/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/until/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.mounted": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.mounted",
                 "name": "mounted",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3114,12 +3220,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "mounted.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/until/mounted.ts",
+                "filename": "mounted.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/until/mounted.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.userSelect.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.userSelect.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3143,12 +3250,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/userSelect/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/userSelect/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.utils.configToCss": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.utils.configToCss",
                 "name": "configToCss",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3172,12 +3280,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "configToCss.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/utils/configToCss.ts",
+                "filename": "configToCss.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/utils/configToCss.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visibility.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visibility.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3201,12 +3310,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/visibility/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/visibility/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.hidden": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.hidden",
                 "name": "hidden",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3230,11 +3340,12 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "hidden.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/visibility/hidden.ts",
+                "filename": "hidden.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/visibility/hidden.js",
                 "children": {
                     "transition": {
+                        "id": "@coffeekraken.s-postcss-sugar-plugin.mixins.transition.transition",
                         "name": "transition",
                         "type": "Mixin",
                         "description": "This mixin allows apply a transition specified in the theme config like \"fast\", \"slow\" and \"slow\" or others you've been defined",
@@ -3260,6 +3371,7 @@
                 }
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3283,12 +3395,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/visually/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/visually/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3312,12 +3425,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/when/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/when/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.active": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.active",
                 "name": "active",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3341,12 +3455,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "when.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/when/when.ts",
+                "filename": "when.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/when/when.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.width.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.width.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3370,12 +3485,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/width/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/width/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.avatar": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.avatar",
                 "name": "avatar",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3399,12 +3515,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "avatar.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/avatar/avatar.ts",
+                "filename": "avatar.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/avatar/avatar.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3428,12 +3545,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/avatar/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/avatar/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge.badge": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge.badge",
                 "name": "badge",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3457,12 +3575,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "badge.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/badge/badge.ts",
+                "filename": "badge.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/badge/badge.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3486,12 +3605,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/badge/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/badge/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote.blockquote": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote.blockquote",
                 "name": "blockquote",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3515,12 +3635,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "blockquote.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/blockquote/blockquote.ts",
+                "filename": "blockquote.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/blockquote/blockquote.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3544,12 +3665,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/blockquote/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/blockquote/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.blockquote": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.blockquote",
                 "name": "blockquote",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3573,11 +3695,12 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "button.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/button/button.ts"
+                "filename": "button.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/button/button.js"
             },
             "@coffeekraken.s-postcss-sugar-plugin.ui.button.button": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.ui.button.button",
                 "name": "button",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3601,12 +3724,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "button.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/button/button.ts",
+                "filename": "button.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/button/button.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3630,12 +3754,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/button/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/button/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.checkbox": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.checkbox",
                 "name": "checkbox",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3659,12 +3784,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "checkbox.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/checkbox/checkbox.ts",
+                "filename": "checkbox.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/checkbox/checkbox.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3688,12 +3814,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/checkbox/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/checkbox/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3712,12 +3839,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/dropdown/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/dropdown/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown.dropdown": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown.dropdown",
                 "name": "dropdown",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3741,12 +3869,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "dropdown.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/dropdown/dropdown.ts",
+                "filename": "dropdown.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/dropdown/dropdown.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3765,12 +3894,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/fsTree/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/fsTree/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.fsTree": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.fsTree",
                 "name": "fsTree",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3794,12 +3924,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "fsTree.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/fsTree/fsTree.ts",
+                "filename": "fsTree.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/fsTree/fsTree.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.input.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.input.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3818,12 +3949,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/input/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/input/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.input.input": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.input.input",
                 "name": "input",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3847,12 +3979,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "input.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/input/input.ts",
+                "filename": "input.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/input/input.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3871,12 +4004,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/label/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/label/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.label": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.label",
                 "name": "label",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3900,12 +4034,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "label.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/label/label.ts",
+                "filename": "label.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/label/label.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3923,12 +4058,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/list/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/list/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list.list": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list.list",
                 "name": "list",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3952,12 +4088,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "list.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/list/list.ts",
+                "filename": "list.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/list/list.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -3976,12 +4113,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/loader/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/loader/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.drop": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.drop",
                 "name": "drop",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4005,12 +4143,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "drop.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/loader/drop.ts",
+                "filename": "drop.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/loader/drop.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.round": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.round",
                 "name": "round",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4034,12 +4173,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "round.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/loader/round.ts",
+                "filename": "round.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/loader/round.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.spinner": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.spinner",
                 "name": "spinner",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4063,12 +4203,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "spinner.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/loader/spinner.ts",
+                "filename": "spinner.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/loader/spinner.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4087,12 +4228,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/radio/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/radio/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.radio": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.radio",
                 "name": "radio",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4116,12 +4258,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "radio.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/radio/radio.ts",
+                "filename": "radio.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/radio/radio.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.range.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.range.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4140,12 +4283,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/range/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/range/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.range.range": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.range.range",
                 "name": "range",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4169,12 +4313,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "range.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/range/range.ts",
+                "filename": "range.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/range/range.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.select.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.select.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4193,12 +4338,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/select/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/select/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.select.select": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.select.select",
                 "name": "select",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4222,12 +4368,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "select.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/select/select.ts",
+                "filename": "select.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/select/select.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4246,12 +4393,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/switch/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/switch/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.switch": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.switch",
                 "name": "switch",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4275,12 +4423,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "switch.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/switch/switch.ts",
+                "filename": "switch.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/switch/switch.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.table.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.table.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4299,12 +4448,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/table/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/table/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.table.table": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.table.table",
                 "name": "table",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4328,12 +4478,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "table.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/table/table.ts",
+                "filename": "table.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/table/table.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tabs.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tabs.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4352,12 +4503,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/tabs/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/tabs/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tabs.tabs": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tabs.tabs",
                 "name": "tabs",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4381,12 +4533,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "tabs.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/tabs/tabs.ts",
+                "filename": "tabs.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/tabs/tabs.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.classes",
                 "name": "classes",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4405,12 +4558,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/tooltip/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/tooltip/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.tooltip": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.tooltip",
                 "name": "tooltip",
                 "type": "PostcssMixin",
                 "platform": [
@@ -4434,9 +4588,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "tooltip.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/tooltip/tooltip.ts",
+                "filename": "tooltip.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/tooltip/tooltip.js",
                 "children": {}
             }
         }

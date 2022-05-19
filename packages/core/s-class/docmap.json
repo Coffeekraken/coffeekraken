@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-class.sugar.js.class.SClass": {
+                "id": "@coffeekraken.s-class.sugar.js.class.SClass",
                 "name": "SClass",
                 "type": "Class",
                 "description": "This class is a simple and effective one that manage the ```_settings``` property\nand some others features that will be documented asap",
@@ -104,6 +105,7 @@
                 "relPath": "src/shared/SClass.ts",
                 "children": {
                     "metas": {
+                        "id": "eeaef74cf3436c5f04f485796b23c30a6d76ef479de207cd7d8cafb216111348",
                         "name": "metas",
                         "type": "String",
                         "description": "Access the metas in the ```_settings.metas```",
@@ -115,6 +117,7 @@
                         }
                     },
                     "formattedname": {
+                        "id": "5b72f59f0a6ed8ce2bc98803b694f292d3f4d02a96294097faf3d2a7b14fde43",
                         "name": "formattedName",
                         "type": "String",
                         "description": "Access the process name and (not the same as a node process name)",
@@ -126,6 +129,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "c72b45495ed2e078a7ff0cb878f99dd464591d4809a83731c128a996648bf3fa",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",

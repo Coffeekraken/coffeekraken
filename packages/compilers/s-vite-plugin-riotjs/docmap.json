@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-vite-plugin-riotjs.node.sVitePluginRiotjs": {
+                "id": "@coffeekraken.s-vite-plugin-riotjs.node.sVitePluginRiotjs",
                 "name": "sVitePluginRiotjs",
                 "type": "Function",
                 "description": "This plugin allows you to use the awesome RiotJs library\nto build your webcomponent using vite frontend development stack.",

@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-static-builder.config.staticBuilder.input": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.input",
                 "name": "input",
                 "type": "String",
                 "default": "[config.storage.src.publicDir]/sitemap.xml",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.outDir": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.outDir",
                 "name": "outDir",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]/static",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.host": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.host",
                 "name": "host",
                 "type": "String",
                 "default": "http://[config.frontendServer.hostname]:[config.frontendServer.port]",
@@ -130,6 +133,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.failAfter": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.failAfter",
                 "name": "failAfter",
                 "type": "Number",
                 "default": "-1",
@@ -146,6 +150,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.requestTimeout": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.requestTimeout",
                 "name": "requestTimeout",
                 "type": "Number",
                 "default": "5000",
@@ -162,6 +167,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.requestRetry": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.requestRetry",
                 "name": "requestRetry",
                 "type": "Number",
                 "default": "5",
@@ -178,6 +184,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.requestRetryTimeout": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.requestRetryTimeout",
                 "name": "requestRetryTimeout",
                 "type": "Number",
                 "default": "1000",
@@ -194,6 +201,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.clean": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.clean",
                 "name": "clean",
                 "type": "Boolean",
                 "default": "false",
@@ -210,6 +218,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.incremental": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.incremental",
                 "name": "incremental",
                 "type": "Boolean",
                 "default": "true",
@@ -226,6 +235,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.from": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.from",
                 "name": "from",
                 "type": "String",
                 "default": "[config.staticBuilder.host]/docmap.json",
@@ -242,6 +252,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.to": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.to",
                 "name": "to",
                 "type": "String",
                 "default": "[config.staticBuilder.outDir]/docmap.json",
@@ -258,6 +269,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.public.from": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.public.from",
                 "name": "from",
                 "type": "String",
                 "default": "[config.storage.src.publicDir]",
@@ -274,6 +286,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.public.glob": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.public.glob",
                 "name": "glob",
                 "type": "String",
                 "default": "** /*",
@@ -290,6 +303,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.from": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.from",
                 "name": "from",
                 "type": "String",
                 "default": "[config.storage.dist.rootDir]",
@@ -306,6 +320,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.glob": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.glob",
                 "name": "glob",
                 "type": "String",
                 "default": "** /*",
@@ -322,6 +337,7 @@
                 "relPath": "src/config/staticBuilder.config.ts"
             },
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.to": {
+                "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.to",
                 "name": "to",
                 "type": "String",
                 "default": "[config.staticBuilder.outDir]/dist",
@@ -338,6 +354,7 @@
                 "relPath": "src/config/staticBuilder.config.ts",
                 "children": {
                     "to": {
+                        "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.to",
                         "name": "to",
                         "type": "String",
                         "default": "[config.staticBuilder.outDir]",
@@ -352,7 +369,37 @@
                     }
                 }
             },
+            "@coffeekraken.s-static-builder.doc.README": {
+                "id": "@coffeekraken.s-static-builder.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-static-builder.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-static-builder.node.SStaticBuilder": {
+                "id": "@coffeekraken.s-static-builder.node.SStaticBuilder",
                 "name": "SStaticBuilder",
                 "type": "Class",
                 "platform": [
@@ -381,6 +428,7 @@
                 "relPath": "src/node/SStaticBuilder.ts",
                 "children": {
                     "staticbuildersettings": {
+                        "id": "328a35cde769720b5d1a4e2aecae8c5822c562956c2d89278d420b085a8fee57",
                         "name": "staticBuilderSettings",
                         "type": "ISStaticBuilderSettings",
                         "description": "Access the postcss builder settings",
@@ -392,6 +440,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -405,6 +454,7 @@
                 }
             },
             "@coffeekraken.s-static-builder.node.interface.SStaticBuilderBuildParamsInterface": {
+                "id": "@coffeekraken.s-static-builder.node.interface.SStaticBuilderBuildParamsInterface",
                 "name": "SStaticBuilderBuildParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -517,6 +567,43 @@
                 "filename": "SStaticBuilderBuildParamsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/node/interface/SStaticBuilderBuildParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-static-builder.node.interface.SStaticBuilderSettingsInterface": {
+                "id": "@coffeekraken.s-static-builder.node.interface.SStaticBuilderSettingsInterface",
+                "name": "SStaticBuilderSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe settings of the SStaticBuilder class",
+                "namespace": "@coffeekraken.s-static-builder.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SStaticBuilderSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "input": {
+                            "description": "Specify the path to the input sitemap.xml file",
+                            "type": "String",
+                            "required": true,
+                            "alias": "i",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-static-builder/src/public/sitemap.xml"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SStaticBuilderSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SStaticBuilderSettingsInterface.ts",
                 "children": {}
             }
         }

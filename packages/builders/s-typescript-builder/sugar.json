@@ -8,7 +8,7 @@
     },
     "cli": [
         {
-            "stack": "ts",
+            "stack": "typescript",
             "description": "Typescript (js) related actions",
             "defaultAction": "build",
             "actions": {

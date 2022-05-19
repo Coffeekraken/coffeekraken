@@ -89,6 +89,7 @@ export class ApiNav extends __SLitComponent {
 
         this._menuStack = {};
         Object.keys(res.data.map).forEach((namespace) => {
+            if (!namespace.match(/^@coffeekraken/)) return;
             __set(this._menuStack, namespace, res.data.map[namespace]);
         });
 
@@ -123,6 +124,8 @@ export class ApiNav extends __SLitComponent {
     }
 
     _renderList(obj, currentNamespace = '', level = 0) {
+        if (!obj) return '';
+
         const itemsKeys = Object.keys(obj);
         const items = itemsKeys.map((itemName) => {
             const itemObj = obj[itemName];

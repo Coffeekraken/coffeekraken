@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-form-validate-feature.js.SFormValidateFeature": {
+                "id": "@coffeekraken.s-form-validate-feature.js.SFormValidateFeature",
                 "name": "SFormValidateFeature",
                 "type": "Feature",
                 "menu": {
@@ -391,6 +392,7 @@
                 "children": {}
             },
             "@coffeekraken.s-form-validate-feature.js.interface.SFormValidateFeatureInterface": {
+                "id": "@coffeekraken.s-form-validate-feature.js.interface.SFormValidateFeatureInterface",
                 "name": "SFormValidateFeatureInterface",
                 "type": ".                      Class",
                 "platform": [

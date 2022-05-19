@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-vite-plugin-sugar.node.sVitePluginSugar": {
+                "id": "@coffeekraken.s-vite-plugin-sugar.node.sVitePluginSugar",
                 "name": "sVitePluginSugar",
                 "type": "Function",
                 "description": "This plugin allows you to automate some things like injecting\nenvironment variables in the js, etc...",

@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-vite.config.vite.root": {
+                "id": "@coffeekraken.s-vite.config.vite.root",
                 "name": "root",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.base": {
+                "id": "@coffeekraken.s-vite.config.vite.base",
                 "name": "base",
                 "type": "String",
                 "default": "/",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.logLevel": {
+                "id": "@coffeekraken.s-vite.config.vite.logLevel",
                 "name": "logLevel",
                 "type": "String",
                 "default": "error",
@@ -130,6 +133,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.mode": {
+                "id": "@coffeekraken.s-vite.config.vite.mode",
                 "name": "mode",
                 "type": "String",
                 "default": "development",
@@ -146,6 +150,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.plugins": {
+                "id": "@coffeekraken.s-vite.config.vite.plugins",
                 "name": "plugins",
                 "type": "String[]",
                 "default": "[__path.resolve(`${__dirname()}/../node/plugins/sugarPlugin`), __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`)]",
@@ -162,6 +167,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.publicDir": {
+                "id": "@coffeekraken.s-vite.config.vite.publicDir",
                 "name": "publicDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/public",
@@ -178,6 +184,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.cacheDir": {
+                "id": "@coffeekraken.s-vite.config.vite.cacheDir",
                 "name": "cacheDir",
                 "type": "String",
                 "default": "[config.storage.package.cacheDir]/vite'",
@@ -194,6 +201,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.clearScreen": {
+                "id": "@coffeekraken.s-vite.config.vite.clearScreen",
                 "name": "clearScreen",
                 "type": "Boolean",
                 "default": "false",
@@ -210,6 +218,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.optimizeDeps.exclude": {
+                "id": "@coffeekraken.s-vite.config.vite.optimizeDeps.exclude",
                 "name": "exclude",
                 "type": "String[]",
                 "default": "false",
@@ -226,6 +235,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.build.lib.entry": {
+                "id": "@coffeekraken.s-vite.config.vite.build.lib.entry",
                 "name": "entry",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]/js/index.ts",
@@ -242,6 +252,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.build.lib.name": {
+                "id": "@coffeekraken.s-vite.config.vite.build.lib.name",
                 "name": "name",
                 "type": "String",
                 "default": "index",
@@ -258,6 +269,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.build.outDir": {
+                "id": "@coffeekraken.s-vite.config.vite.build.outDir",
                 "name": "outDir",
                 "type": "String",
                 "default": "[config.storage.dist.jsDir]",
@@ -274,6 +286,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.server.host": {
+                "id": "@coffeekraken.s-vite.config.vite.server.host",
                 "name": "host",
                 "type": "String",
                 "default": "0.0.0.0",
@@ -290,6 +303,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.server.post": {
+                "id": "@coffeekraken.s-vite.config.vite.server.post",
                 "name": "post",
                 "type": "Number",
                 "default": "3000",
@@ -306,6 +320,7 @@
                 "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.server.hostname": {
+                "id": "@coffeekraken.s-vite.config.vite.server.hostname",
                 "name": "hostname",
                 "type": "String",
                 "default": "http://[config.vite.server.host]:[config.vite.server.port]",
@@ -323,6 +338,7 @@
                 "children": {}
             },
             "@coffeekraken.s-vite.doc.README": {
+                "id": "@coffeekraken.s-vite.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -351,6 +367,7 @@
                 "children": {}
             },
             "@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface": {
+                "id": "@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface",
                 "name": "SViteBuildParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -474,6 +491,7 @@
                 "children": {}
             },
             "@coffeekraken.s-vite.node.interface.SViteStartParamsInterface": {
+                "id": "@coffeekraken.s-vite.node.interface.SViteStartParamsInterface",
                 "name": "SViteStartParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -502,6 +520,7 @@
                 "children": {}
             },
             "@coffeekraken.s-vite.node.plugins.importCssPlugin": {
+                "id": "@coffeekraken.s-vite.node.plugins.importCssPlugin",
                 "name": "importCssPlugin",
                 "type": "Function",
                 "description": "This vite plugin allows you to rewrite some code simply by specifying\nwhich files have to be touched using the ```match``` property and\na ```rewrite``` function that has to return the new code to be used.",
@@ -524,6 +543,7 @@
                 "children": {}
             },
             "@coffeekraken.s-vite.node.plugins.rewritesPlugin": {
+                "id": "@coffeekraken.s-vite.node.plugins.rewritesPlugin",
                 "name": "rewritesPlugin",
                 "type": "Function",
                 "description": "This vite plugin allows you to rewrite some code simply by specifying\nwhich files have to be touched using the ```match``` property and\na ```rewrite``` function that has to return the new code to be used.",

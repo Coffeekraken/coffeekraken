@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-images-builder.config.imagesBuilder.glob": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.glob",
                 "name": "glob",
                 "type": "String",
                 "default": "[config.imagesBuilder.inDir]/** /*",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.compressExts": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.compressExts",
                 "name": "compressExts",
                 "type": "String",
                 "default": "['jpg', 'jpeg', 'png', 'svg', 'webp']",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.inDir": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.inDir",
                 "name": "inDir",
                 "type": "String",
                 "default": "[config.storage.src.imgDir]",
@@ -130,6 +133,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.outDir": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.outDir",
                 "name": "outDir",
                 "type": "String",
                 "default": "[config.storage.dist.imgDir]",
@@ -146,6 +150,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.quality": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.quality",
                 "name": "quality",
                 "type": "Number",
                 "default": "80",
@@ -162,6 +167,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.webp": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.webp",
                 "name": "webp",
                 "type": "Boolean",
                 "default": "true",
@@ -178,6 +184,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.width": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.width",
                 "name": "width",
                 "type": "Number",
                 "default": "null",
@@ -194,6 +201,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.height": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.height",
                 "name": "height",
                 "type": "Number",
                 "default": "null",
@@ -210,6 +218,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.resolution": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.resolution",
                 "name": "resolution",
                 "type": "Array<Integer>",
                 "default": "[1,2]",
@@ -226,6 +235,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.clear": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.clear",
                 "name": "clear",
                 "type": "Boolean",
                 "default": "true",
@@ -242,6 +252,7 @@
                 "relPath": "src/config/imagesBuilder.config.ts"
             },
             "@coffeekraken.s-images-builder.config.imagesBuilder.specificParams": {
+                "id": "@coffeekraken.s-images-builder.config.imagesBuilder.specificParams",
                 "name": "specificParams",
                 "type": "Record<string, ISimagesBuilderCompressParams>",
                 "default": "{}",
@@ -265,6 +276,7 @@
                 "children": {}
             },
             "@coffeekraken.s-images-builder.doc.README": {
+                "id": "@coffeekraken.s-images-builder.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -293,6 +305,7 @@
                 "children": {}
             },
             "@coffeekraken.s-images-builder.node.SImagesBuilder": {
+                "id": "@coffeekraken.s-images-builder.node.SImagesBuilder",
                 "name": "SImagesBuilder",
                 "type": "Class",
                 "platform": [
@@ -404,6 +417,7 @@
                 "relPath": "src/node/SImagesBuilder.ts",
                 "children": {
                     "imagesbuildersettings": {
+                        "id": "7be7236f232b5b347848557755d0e525cc74bfa81aa3b792eb6a1664af7e880f",
                         "name": "imagesBuilderSettings",
                         "type": "ISImagesBuilderSettings",
                         "description": "Access the images compressor settings",
@@ -415,6 +429,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "fa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -428,6 +443,7 @@
                 }
             },
             "@coffeekraken.s-images-builder.node.interface.SImagesBuilderBuildParamsInterface": {
+                "id": "@coffeekraken.s-images-builder.node.interface.SImagesBuilderBuildParamsInterface",
                 "name": "SImagesBuilderBuildParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -531,6 +547,41 @@
                 "filename": "SImagesBuilderBuildParamsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/node/interface/SImagesBuilderBuildParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-images-builder.node.interface.SImagesBuilderSettingsInterface": {
+                "id": "@coffeekraken.s-images-builder.node.interface.SImagesBuilderSettingsInterface",
+                "name": "SImagesBuilderSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe settings of the SImagesBuilder",
+                "namespace": "@coffeekraken.s-images-builder.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SImagesBuilderSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "resolveGlob": {
+                            "description": "Specify some settings to use for the [resolveGlob function](/api/@coffeekraken.sugar.node.glob.resolveGlob)",
+                            "type": "IResolveGlobSettings",
+                            "default": {}
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SImagesBuilderSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SImagesBuilderSettingsInterface.ts",
                 "children": {}
             }
         }

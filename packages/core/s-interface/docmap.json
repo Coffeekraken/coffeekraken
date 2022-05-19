@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-interface.doc.README": {
+                "id": "@coffeekraken.s-interface.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-interface.s-interface.shared.getAvailableInterfaceTypes": {
+                "id": "@coffeekraken.s-interface.s-interface.shared.getAvailableInterfaceTypes",
                 "name": "getAvailableInterfaceTypes",
                 "type": "Function",
                 "description": "This function simply return an object with all the promoted as types interfaces.",
@@ -133,6 +135,7 @@
                 "children": {}
             },
             "@coffeekraken.s-interface.s-interface.shared.SInterface": {
+                "id": "@coffeekraken.s-interface.s-interface.shared.SInterface",
                 "name": "SInterface",
                 "type": "Class",
                 "description": "This class allows you to define some rules that some object or instance\nhave to follow. You will be able to apply these rules and see what\ndoes not fit correctly.",
@@ -154,6 +157,7 @@
                 "relPath": "src/shared/SInterface.ts",
                 "children": {
                     "definition": {
+                        "id": "8c6aa16ef6e4f80ac71b1970711dd608a8f2c52fc882040dd46b698ab18e7d2c",
                         "name": "definition",
                         "type": "ISDescriptorRules",
                         "description": "This property store all the SDescriptor rules that this interface\nimplements for each properties",
@@ -166,6 +170,7 @@
                         }
                     },
                     "description": {
+                        "id": "4051479b5f6bbcfd998492b664f2e2fb0ba3d4e201131c2b9b99d453bf512ab7",
                         "name": "description",
                         "type": "String",
                         "description": "Store the interface description",
@@ -178,6 +183,7 @@
                         }
                     },
                     "interfacesettings": {
+                        "id": "9de15f327c9ccbfee2acba3ae485d2d9b3fd603ffbe2f5ceeab3c357188349ea",
                         "name": "interfaceSettings",
                         "type": "ISInterfaceSettings",
                         "description": "Access the interface settings",
@@ -189,6 +195,7 @@
                         }
                     },
                     "registerrenderer": {
+                        "id": "59fad9a4a2639dd0433c8eaa641435e689e26feb37e9a5779234de2421b2cedf",
                         "name": "registerRenderer",
                         "type": "Function",
                         "description": "This static method allows you to register a renderer that you can then\nuse through the ```interface.render('{rendererId}')``` interface method",
@@ -201,6 +208,7 @@
                         }
                     },
                     "mix": {
+                        "id": "96f4c0986116ad5562643e493411dd9bd27a15da017685c9468bdb9e4661d8b3",
                         "name": "mix",
                         "type": "Function",
                         "description": "This static method allows you to mix multiple interfaces into one",
@@ -213,6 +221,7 @@
                         }
                     },
                     "overrie": {
+                        "id": "ee6fab12c0ae37bd156acb5f873f958a552b76e100ef39f4d576bd5d07a7af05",
                         "name": "overrie",
                         "type": "Function",
                         "description": "This static method is usefull to make a duplicate of the base interface with some updates\nin the definition object.",
@@ -225,6 +234,7 @@
                         }
                     },
                     "getavailabletypes": {
+                        "id": "7b4b6d6ebb14444123869591c4b69f1f1af80c6c56ff5cb9ec4ef1c53ffd6861",
                         "name": "getAvailableTypes",
                         "type": "Function",
                         "description": "This static method allows you to get the types that have been make widely available\nusing the ```makeAvailableAsType``` method.",
@@ -237,6 +247,7 @@
                         }
                     },
                     "makeavailableastype": {
+                        "id": "c206e984b80432853f63428acacbc936d98418e60be77e6f5dfd22bdd2b92cef",
                         "name": "makeAvailableAsType",
                         "type": "Function",
                         "description": "This static method allows you to promote your interface at the level where it can be\nused in the \"type\" interface definition property like so \"Object<MyCoolType>\"",
@@ -249,6 +260,7 @@
                         }
                     },
                     "toobject": {
+                        "id": "b500a2f11aba67c65166cc2ed34c91bddffdd51826136d4122ad40f164b6cf06",
                         "name": "toObject",
                         "type": "Function",
                         "description": "This function allows you to get back a simple object describing the interface",
@@ -261,6 +273,7 @@
                         }
                     },
                     "defaults": {
+                        "id": "9456fc0f6c33a85bd11cdfe02648316f974dc30bf49a4a92824289a8d7179607",
                         "name": "defaults",
                         "type": "Function",
                         "description": "This function simply returns you the default interface values in object format",
@@ -273,6 +286,7 @@
                         }
                     },
                     "apply": {
+                        "id": "fa70cc69fc773b30a2d88df48cc5dc360e1e4f1e75aeb88b93d4e915e4fe446d",
                         "name": "apply",
                         "type": "Function",
                         "description": "This method allows you to apply the interface on an object instance.\nBy default, if something is wrong in your class implementation, an error with the\ndescription of what's wrong will be thrown. You can change that behavior if you prefer having\ntrue returned when all is ok, or a string describing the current issue by specify the \"settings.throw\" property to false.",
@@ -284,6 +298,7 @@
                         }
                     },
                     "help": {
+                        "id": "156a65dbc100a0107378b396219e3995024112f3a9c0ddb7fb3c60987aeec84e",
                         "name": "help",
                         "type": "Function",
                         "description": "This static method allows you to get back the help using the\npassed renderer. Awailable rendered are for now:\n- terminal (default): The default terminal renderer\n- more to come depending on needs...",
@@ -296,6 +311,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "b32698080cb1e49b56ec668fed7af28d0fa7a252251a5eb80799aa500c70c75c",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -309,6 +325,7 @@
                 }
             },
             "@coffeekraken.s-interface.sugar.node.interface.renderers.SInterfaceRenderer": {
+                "id": "@coffeekraken.s-interface.sugar.node.interface.renderers.SInterfaceRenderer",
                 "name": "SInterfaceRenderer",
                 "type": "Class",
                 "description": "This class represent the base for every interface renderers.\nIt handle things like registering types templates, properties to exclude, etc...",
@@ -330,6 +347,7 @@
                 "relPath": "src/node/renderers/SInterfaceRenderer.ts",
                 "children": {
                     "id": {
+                        "id": "d41b68d4c75f5ad45fff51205ec0355196aa624bc8f32f6b7f6716c727227cd8",
                         "name": "id",
                         "type": "String",
                         "description": "Store the id of the renderer.\nThis id has to be used when you call the ```interface.render('{id}', {})``` method of the SInterface instance.",
@@ -342,6 +360,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "bdd5862734dce30a7ea2c768db607336b8c8fae865e3555a92d532ad17fabf45",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -353,6 +372,7 @@
                         }
                     },
                     "render": {
+                        "id": "62f2b2d6cbe3f08e6f8fc73f05c10da32e886e738925f077ed84cc37ca7c84eb",
                         "name": "render",
                         "type": "Function",
                         "description": "This method simply render the passed interface",
@@ -367,6 +387,7 @@
                 }
             },
             "@coffeekraken.s-interface.sugar.node.interface.renderers.SInterfaceTerminalRenderer": {
+                "id": "@coffeekraken.s-interface.sugar.node.interface.renderers.SInterfaceTerminalRenderer",
                 "name": "SInterfaceTerminalRenderer",
                 "type": "Class",
                 "description": "This class represent the terminal interface renderer",
@@ -382,6 +403,7 @@
                 "relPath": "src/node/renderers/SInterfaceTerminalRenderer.ts",
                 "children": {
                     "constructor": {
+                        "id": "bdd5862734dce30a7ea2c768db607336b8c8fae865e3555a92d532ad17fabf45",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -395,6 +417,7 @@
                 }
             },
             "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.undefined": {
+                "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.undefined",
                 "name": "undefined",
                 "description": "Render the \"alias\" field.",
                 "namespace": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal",
@@ -410,6 +433,7 @@
                 "children": {}
             },
             "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.default": {
+                "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.default",
                 "name": "default",
                 "default": "Function",
                 "description": "Render the \"default\" field.",
@@ -426,6 +450,7 @@
                 "children": {}
             },
             "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.layout": {
+                "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.layout",
                 "name": "layout",
                 "type": "Function",
                 "description": "Return the layout you want for the \"terminal\" renderer.\nYou can use tokens like these:\n- %type : Will be replaced with the \"type\" field rendered string\n- %default : Same but for the \"default\" field\n- etc...",
@@ -442,6 +467,7 @@
                 "children": {}
             },
             "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.type": {
+                "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.type",
                 "name": "type",
                 "type": "Function",
                 "description": "Render the \"type\" field.",

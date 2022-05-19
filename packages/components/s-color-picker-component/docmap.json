@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-color-picker-component.js.Color-Picker": {
+                "id": "@coffeekraken.s-color-picker-component.js.Color-Picker",
                 "name": "Color Picker",
                 "type": "CustomElement",
                 "menu": {
@@ -213,6 +214,7 @@
                 "children": {}
             },
             "@coffeekraken.s-color-picker-component.js.interface.SColorPickerComponentInterface": {
+                "id": "@coffeekraken.s-color-picker-component.js.interface.SColorPickerComponentInterface",
                 "name": "SColorPickerComponentInterface",
                 "type": ".                      Class",
                 "platform": [

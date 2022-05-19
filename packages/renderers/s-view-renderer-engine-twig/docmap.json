@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-view-renderer-engine-twig.node.SViewRendererEngineTwig": {
+                "id": "@coffeekraken.s-view-renderer-engine-twig.node.SViewRendererEngineTwig",
                 "name": "SViewRendererEngineTwig",
                 "type": "Class",
                 "description": "This class is the blade.php view engine that allows you\nto render .twig views.",
@@ -98,6 +99,7 @@
                 "children": {}
             },
             "@coffeekraken.s-view-renderer-engine-twig.node.interface.SViewRendererEngineTwigSettingsInterface": {
+                "id": "@coffeekraken.s-view-renderer-engine-twig.node.interface.SViewRendererEngineTwigSettingsInterface",
                 "name": "SViewRendererEngineTwigSettingsInterface",
                 "type": ".                      Class",
                 "platform": [

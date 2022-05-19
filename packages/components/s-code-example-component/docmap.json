@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingInline": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingInline",
                 "name": "paddingInline",
                 "type": "String",
                 "default": "[theme.padding.50]",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingBlock": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingBlock",
                 "name": "paddingBlock",
                 "type": "String",
                 "default": "[theme.padding.50]",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderRadius": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderRadius",
                 "name": "borderRadius",
                 "type": "String",
                 "default": "[theme.ui.default.borderRadius]",
@@ -130,6 +133,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderWidth": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderWidth",
                 "name": "borderWidth",
                 "type": "String",
                 "default": "[theme.ui.default.borderWidth]",
@@ -146,6 +150,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.transition": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.transition",
                 "name": "transition",
                 "type": "String",
                 "default": "[theme.ui.default.transition]",
@@ -162,6 +167,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultColor": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultColor",
                 "name": "defaultColor",
                 "type": "String",
                 "default": "[theme.ui.default.defaultColor]",
@@ -178,6 +184,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultStyle": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultStyle",
                 "name": "defaultStyle",
                 "type": "Number",
                 "default": "[theme.ui.default.defaultStyle]",
@@ -194,6 +201,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.depth": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.depth",
                 "name": "depth",
                 "type": "String",
                 "default": "[theme.ui.default.depth]",
@@ -210,6 +218,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.rhythmVertical": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.rhythmVertical",
                 "name": "rhythmVertical",
                 "type": "Object",
                 "default": "[theme.ui.default.rhythmVertical]",
@@ -227,6 +236,7 @@
                 "children": {}
             },
             "@coffeekraken.s-code-example-component.js.Code-Example": {
+                "id": "@coffeekraken.s-code-example-component.js.Code-Example",
                 "name": "Code Example",
                 "type": "CustomElement",
                 "menu": {
@@ -334,6 +344,7 @@
                 "children": {}
             },
             "@coffeekraken.s-code-example-component.js.interface.SCodeExampleComponentInterface": {
+                "id": "@coffeekraken.s-code-example-component.js.interface.SCodeExampleComponentInterface",
                 "name": "SCodeExampleComponentInterface",
                 "type": ".                      Class",
                 "platform": [

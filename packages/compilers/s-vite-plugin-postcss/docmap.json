@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-vite-plugin-postcss.node.sVitePluginPostcss": {
+                "id": "@coffeekraken.s-vite-plugin-postcss.node.sVitePluginPostcss",
                 "name": "sVitePluginPostcss",
                 "type": "Function",
                 "description": "This plugin allows you to use the awesome RiotJs library\nto build your webcomponent using vite frontend development stack.",

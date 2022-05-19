@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-jest-tester.config.jestTester.glob": {
+                "id": "@coffeekraken.s-jest-tester.config.jestTester.glob",
                 "name": "glob",
                 "type": "String",
                 "default": "['** /*.{ts,js}']",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/jestTester.config.ts"
             },
             "@coffeekraken.s-jest-tester.config.jestTester.inDir": {
+                "id": "@coffeekraken.s-jest-tester.config.jestTester.inDir",
                 "name": "inDir",
                 "type": "String",
                 "default": "[config.storage.src.rootDir]",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/jestTester.config.ts"
             },
             "@coffeekraken.s-jest-tester.config.jestTester.exclude": {
+                "id": "@coffeekraken.s-jest-tester.config.jestTester.exclude",
                 "name": "exclude",
                 "type": "String[]",
                 "default": "['** /node_module']",
@@ -131,6 +134,7 @@
                 "children": {}
             },
             "@coffeekraken.s-jest-tester.node.SJestTester": {
+                "id": "@coffeekraken.s-jest-tester.node.SJestTester",
                 "name": "SJestTester",
                 "type": "Class",
                 "platform": [
@@ -159,6 +163,7 @@
                 "relPath": "src/node/SJestTester.ts",
                 "children": {
                     "jesttestersettings": {
+                        "id": "76ff6ea908994f399a18ff1d15f70a6f856272542c12c65184458d84668d6b2b",
                         "name": "jestTesterSettings",
                         "type": "ISJestTesterSettings",
                         "description": "Access the jest tester settings",
@@ -170,6 +175,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -181,6 +187,7 @@
                         }
                     },
                     "start": {
+                        "id": "b334981e0b8ddf8ecb8e57c082db191aa3c9a0f6c099d33996f21127b76fdaac",
                         "name": "start",
                         "type": "Function",
                         "description": "This method is the internal builder start one.\nIt will be called by the SBuilder class with the final params\nfor the build",
@@ -195,6 +202,7 @@
                 }
             },
             "@coffeekraken.s-jest-tester.node.mono.interface.SJestTesterStartParamsInterface": {
+                "id": "@coffeekraken.s-jest-tester.node.mono.interface.SJestTesterStartParamsInterface",
                 "name": "SJestTesterStartParamsInterface",
                 "type": ".                      Class",
                 "platform": [

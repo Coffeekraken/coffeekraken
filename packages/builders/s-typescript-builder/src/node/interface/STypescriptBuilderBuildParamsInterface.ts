@@ -4,8 +4,8 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
- * @name                SCliMonoListParamsInterface
- * @namespace           node.mono.interface
+ * @name                STypescriptBuilderBuildParamsInterface
+ * @namespace           node.interface
  * @type.                      Class
  * @extends             SInterface
  * @interface
@@ -36,7 +36,7 @@ export default class STypescriptBuilderBuildParamsInterface extends __SInterface
             },
             outDir: {
                 description:
-                    'Specify a directory where you want to put the builded files',
+                    'Specify a directory where you want to put the builded files. Support the %moduleSystem and %platform token.',
                 type: 'String',
                 default: __SSugarConfig.get('typescriptBuilder.outDir'),
                 alias: 'o',

@@ -640,7 +640,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: 'sugar ts.build [arguments]',
+                command: 'sugar typescript.build [arguments]',
                 params: {
                     watch: true,
                 },

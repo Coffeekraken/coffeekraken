@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-component-utils.doc.README": {
+                "id": "@coffeekraken.s-component-utils.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface": {
+                "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface",
                 "name": "SComponentUtilsDefaultPropsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -177,6 +179,7 @@
                 "children": {}
             },
             "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface": {
+                "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface",
                 "name": "SComponentUtilsSettingsInterface",
                 "type": ".                      Class",
                 "platform": [

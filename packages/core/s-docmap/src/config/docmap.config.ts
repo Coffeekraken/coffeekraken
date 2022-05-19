@@ -140,6 +140,7 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             tags: [
+                'id',
                 'name',
                 'type',
                 'menu',

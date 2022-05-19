@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-sugar-json.doc.README": {
+                "id": "@coffeekraken.s-sugar-json.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-json.node.interface.SSugarJsonSettingsInterface": {
+                "id": "@coffeekraken.s-sugar-json.node.interface.SSugarJsonSettingsInterface",
                 "name": "SSugarJsonSettingsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -163,6 +165,7 @@
                 "children": {}
             },
             "@coffeekraken.s-sugar-json.node.list.interface.SSugarJsonListParamsInterface": {
+                "id": "@coffeekraken.s-sugar-json.node.list.interface.SSugarJsonListParamsInterface",
                 "name": "SSugarJsonListParamsInterface",
                 "type": ".                      Class",
                 "platform": [

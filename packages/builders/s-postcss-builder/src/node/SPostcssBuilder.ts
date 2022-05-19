@@ -17,6 +17,7 @@ import __path from 'path';
 import __postcss from 'postcss';
 import { PurgeCSS } from 'purgecss';
 import __SPostcssBuilderBuildParamsInterface from './interface/SPostcssBuilderBuildParamsInterface';
+import __SPostcssBuilderSettingsInterface from './interface/SPostcssBuilderSettingsInterface';
 
 /**
  * @name                SPostcssBuilder
@@ -106,9 +107,8 @@ export default class SPostcssBuilder extends __SBuilder {
         super(
             __deepMerge(
                 {
-                    postcssBuilder: {
-                        ...__SSugarConfig.get('postcssBuilder'),
-                    },
+                    // @ts-ignore
+                    postcssBuilder: __SPostcssBuilderSettingsInterface.defaults(),
                 },
                 settings ?? {},
             ),

@@ -387,6 +387,19 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
             // save the raw string
             finalDocblockObj.raw = this._source.toString();
 
+            // docblock id
+            if (!finalDocblockObj.id) {
+                if (finalDocblockObj.namespace && finalDocblockObj.name) {
+                    finalDocblockObj.id = __namespaceCompliant(
+                        `${finalDocblockObj.namespace}.${finalDocblockObj.name}`,
+                    );
+                } else {
+                    finalDocblockObj.id = __sha256.encrypt(
+                        finalDocblockObj.raw,
+                    );
+                }
+            }
+
             // save into internal property
             this._blockObj = finalDocblockObj;
 

@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-glob.doc.README": {
+                "id": "@coffeekraken.s-glob.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-glob.node.SGlob": {
+                "id": "@coffeekraken.s-glob.node.SGlob",
                 "name": "SGlob",
                 "type": "Class",
                 "platform": [
@@ -138,6 +140,7 @@
                 "relPath": "src/node/SGlob.ts",
                 "children": {
                     "isglob": {
+                        "id": "de6e05078aec017404e88212aff29b40c2c2e82c5b8cce378ec61d0d17de497b",
                         "name": "isGlob",
                         "type": "Function",
                         "description": "Alias to the ```isGlob``` function available in sugar under \"shared.is.isGlob\" namespace",
@@ -150,6 +153,7 @@
                         }
                     },
                     "resolve": {
+                        "id": "9d27a017574baf7205e04e370aa88ec0e35913dcfacb517e3ebe0fff3ae5b539",
                         "name": "resolve",
                         "type": "Function",
                         "description": "Alias to the ```resolveGlob``` function available in sugar under \"node.glob.resolveGlob\"",
@@ -162,6 +166,7 @@
                         }
                     },
                     "copysync": {
+                        "id": "097ea08023efbeb4ce727143e54af86c205543b131efe72aa7c6a33e8e0733b5",
                         "name": "copySync",
                         "type": "Function",
                         "description": "This method allows you to specify a glob to select files as well as an output directory where to put these files in.\nNote that the settings.cwd will be used to create the relative to outDir pathes.",
@@ -174,6 +179,7 @@
                         }
                     },
                     "match": {
+                        "id": "c04905de910ff220fce7ce07a3a8075e3336f3ad63c8d2ebf430e471d7d82788",
                         "name": "match",
                         "type": "Function",
                         "description": "Check if the passed string match the passed glob pattern(s).\nThis make use of the AWESOME micromatch library.",
@@ -186,6 +192,7 @@
                         }
                     },
                     "extractglob": {
+                        "id": "198e1f226d9aace091b607c1160adad88c535f2aefc389c359816a3b0c133bfb",
                         "name": "extractGlob",
                         "type": "Function",
                         "description": "This function simply return you the glob part of the glob(s) passed in constructor",
@@ -197,6 +204,7 @@
                         }
                     },
                     "extractnoneglob": {
+                        "id": "e3494853154b40ff4f4d7cbde2ae7ed2f59e0949769f89a4ba4112c0cf8d6a2f",
                         "name": "extractNoneGlob",
                         "type": "Function",
                         "description": "This function simply return you the none glob part of the glob(s) passed in constructor",
@@ -208,6 +216,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "6edaeab4bf2880ab2804fef643fb12db70440d0576022006290e585721be66e2",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -221,6 +230,7 @@
                 }
             },
             "@coffeekraken.s-glob.node.interface.SGlobSettingsInterface": {
+                "id": "@coffeekraken.s-glob.node.interface.SGlobSettingsInterface",
                 "name": "SGlobSettingsInterface",
                 "type": ".                      Class",
                 "platform": [

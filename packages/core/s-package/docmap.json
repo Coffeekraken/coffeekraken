@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-package.config.package.manager": {
+                "id": "@coffeekraken.s-package.config.package.manager",
                 "name": "manager",
                 "type": "String",
                 "default": "yarn",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/package.config.ts"
             },
             "@coffeekraken.s-package.config.package.rootDir": {
+                "id": "@coffeekraken.s-package.config.package.rootDir",
                 "name": "rootDir",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/package.config.ts"
             },
             "@coffeekraken.s-package.config.package.readme.path": {
+                "id": "@coffeekraken.s-package.config.package.readme.path",
                 "name": "path",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]/README.md",
@@ -130,6 +133,7 @@
                 "relPath": "src/config/package.config.ts"
             },
             "@coffeekraken.s-package.config.package.exports.defaultPackageJson": {
+                "id": "@coffeekraken.s-package.config.package.exports.defaultPackageJson",
                 "name": "defaultPackageJson",
                 "type": "Object",
                 "default": "true",
@@ -146,6 +150,7 @@
                 "relPath": "src/config/package.config.ts"
             },
             "@coffeekraken.s-package.config.package.exports.glob": {
+                "id": "@coffeekraken.s-package.config.package.exports.glob",
                 "name": "glob",
                 "type": "String",
                 "default": "['dist/** /exports.js']",
@@ -162,6 +167,7 @@
                 "relPath": "src/config/package.config.ts"
             },
             "@coffeekraken.s-package.config.package.exports.folderModuleMap": {
+                "id": "@coffeekraken.s-package.config.package.exports.folderModuleMap",
                 "name": "folderModuleMap",
                 "type": "String",
                 "default": "['esm']",
@@ -178,6 +184,7 @@
                 "relPath": "src/config/package.config.ts"
             },
             "@coffeekraken.s-package.config.package.exports.folderPlatformMap": {
+                "id": "@coffeekraken.s-package.config.package.exports.folderPlatformMap",
                 "name": "folderPlatformMap",
                 "type": "String",
                 "default": "['esm']",
@@ -195,6 +202,7 @@
                 "children": {}
             },
             "@coffeekraken.s-package.node.SPackage": {
+                "id": "@coffeekraken.s-package.node.SPackage",
                 "name": "SPackage",
                 "type": "Class",
                 "platform": [
@@ -223,6 +231,7 @@
                 "relPath": "src/node/SPackage.ts",
                 "children": {
                     "packagesettings": {
+                        "id": "2ea96b7857d81879c58a289e011d0eb795a7698f28b22b11b364a681d00572ff",
                         "name": "packageSettings",
                         "type": "ISPackageSettings",
                         "description": "Access the package settings",
@@ -234,6 +243,7 @@
                         }
                     },
                     "rootdir": {
+                        "id": "f72fa8cfcdb35c87cd086d302da1922b0feaac4b11668876a2b0ed883a7bff7b",
                         "name": "rootDir",
                         "type": "String",
                         "default": "process.cwd()",
@@ -246,6 +256,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -257,6 +268,7 @@
                         }
                     },
                     "exports": {
+                        "id": "5c9b8b86f02e8c69012a14957004c7a9a0273764f645084847320b00f0d76f19",
                         "name": "exports",
                         "type": "Function",
                         "description": "This method allows you to search for \"exportable\" files defined in params and export them in the package.json file.",
@@ -269,6 +281,7 @@
                         }
                     },
                     "install": {
+                        "id": "6915f05ed01f072aad13901c8b6ec159a2bdeea3ba3df0809fb94f3e63177bc7",
                         "name": "install",
                         "type": "Function",
                         "description": "This method allows you to install dependencies in a package",
@@ -281,6 +294,7 @@
                         }
                     },
                     "rename": {
+                        "id": "013f97eea9cac1d459956256c2500f37d9a05a20d9537919d897f48e9ed17f6e",
                         "name": "rename",
                         "type": "Function",
                         "description": "This method allows you to rename a package (folder, package.json, composer.json, etc...)",
@@ -293,6 +307,7 @@
                         }
                     },
                     "addreadme": {
+                        "id": "0efd93c508ded24ef1bc89b1a79fea5c963ab77a05e7ed596ddc0074cd062aee",
                         "name": "addReadme",
                         "type": "Function",
                         "description": "This method allows you to add a readme to your package with informations about the coffeekraken\nversion used, etc...",
@@ -305,6 +320,7 @@
                         }
                     },
                     "applydefaultpackagejson": {
+                        "id": "a70117b5902fc1a0b3f06821e6ed9c025d72f4cb8897a9adeb2e0ee3aa73967c",
                         "name": "applyDefaultPackageJson",
                         "type": "Function",
                         "description": "This method allows you to apply the default package.json to your package.",
@@ -319,6 +335,7 @@
                 }
             },
             "@coffeekraken.s-package.node.package.interface.SPackageAddReadmeParamsInterface": {
+                "id": "@coffeekraken.s-package.node.package.interface.SPackageAddReadmeParamsInterface",
                 "name": "SPackageAddReadmeParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -353,6 +370,7 @@
                 "children": {}
             },
             "@coffeekraken.s-package.node.package.interface.SPackageApplyDefaultPackageJsonParamsInterface": {
+                "id": "@coffeekraken.s-package.node.package.interface.SPackageApplyDefaultPackageJsonParamsInterface",
                 "name": "SPackageApplyDefaultPackageJsonParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -381,6 +399,7 @@
                 "children": {}
             },
             "@coffeekraken.s-package.node.interface.SPackageExportsParamsInterface": {
+                "id": "@coffeekraken.s-package.node.interface.SPackageExportsParamsInterface",
                 "name": "SPackageExportsParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -444,6 +463,7 @@
                 "children": {}
             },
             "@coffeekraken.s-package.node.package.interface.SPackageInstallParamsInterface": {
+                "id": "@coffeekraken.s-package.node.package.interface.SPackageInstallParamsInterface",
                 "name": "SPackageInstallParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -482,6 +502,7 @@
                 "children": {}
             },
             "@coffeekraken.s-package.node.package.interface.SPackageRenameParamsInterface": {
+                "id": "@coffeekraken.s-package.node.package.interface.SPackageRenameParamsInterface",
                 "name": "SPackageRenameParamsInterface",
                 "type": ".                      Class",
                 "platform": [

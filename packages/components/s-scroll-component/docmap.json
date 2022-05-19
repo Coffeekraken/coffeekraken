@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-scroll-component.js.Scroll-to": {
+                "id": "@coffeekraken.s-scroll-component.js.Scroll-to",
                 "name": "Scroll to",
                 "type": "CustomElement",
                 "menu": {
@@ -111,6 +112,7 @@
                 "relPath": "src/js/SScrollComponent.ts",
                 "children": {
                     "webcomponent": {
+                        "id": "c13098f28fc63079b0848fdc11c469c6032a39f07a54f8315345e8e762556218",
                         "name": "webcomponent",
                         "type": "Function",
                         "description": "This function allows you to define (register) your webcomponent with some default\nprops if needed.",
@@ -124,6 +126,7 @@
                 }
             },
             "@coffeekraken.s-scroll-component.js.interface.SScrollComponentInterface": {
+                "id": "@coffeekraken.s-scroll-component.js.interface.SScrollComponentInterface",
                 "name": "SScrollComponentInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -141,9 +144,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SScrollComponentInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SScrollComponentInterface.ts",
+                "filename": "SScrollComponentInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SScrollComponentInterface.js",
                 "children": {}
             }
         }

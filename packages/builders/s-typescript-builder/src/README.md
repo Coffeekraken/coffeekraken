@@ -30,13 +30,13 @@ Two different possibilities are offered to make use of this package:
 
 ```sh
 # Build your files stored in src/(js|shared|node|config)
-sugar ts.build
+sugar typescript.build
 
 # Start the watch and build process
-sugar ts.build -w
+sugar typescript.build -w
 
 # Display help for this command
-sugar ts.build -h
+sugar typescript.build -h
 ```
 
 ### Using typescript

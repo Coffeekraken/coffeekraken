@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface": {
+                "id": "@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface",
                 "name": "SClipboardCopyComponentInterface",
                 "type": ".                      Class",
                 "platform": [

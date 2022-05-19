@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-builder.doc.README": {
+                "id": "@coffeekraken.s-builder.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-builder.node.SBuilder": {
+                "id": "@coffeekraken.s-builder.node.SBuilder",
                 "name": "SBuilder",
                 "type": "Class",
                 "description": "This represent the main builder class that has to be extended for builders like typescript, scss, etc...\nHis main goal is to provide basic features like storing the inputs, settings, etc...",
@@ -132,6 +134,7 @@
                 "relPath": "src/node/SBuilder.ts",
                 "children": {
                     "buildersettings": {
+                        "id": "a2fa1e7f982b3184ce2f7b64678fa2701289ea6481c5a2f16d3537099e106431",
                         "name": "builderSettings",
                         "type": "any",
                         "description": "Access the builder settings",
@@ -143,6 +146,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -154,6 +158,7 @@
                         }
                     },
                     "build": {
+                        "id": "26af01add86af5148ea7c707f0a3a5e5004c02af5debe854c1067dce6edd6271",
                         "name": "build",
                         "type": "Function",
                         "description": "This method is the one you have to call when you want to launch a compilation process.\nIt will call the ```_build``` one which MUST return an instance of the SPromise class.",

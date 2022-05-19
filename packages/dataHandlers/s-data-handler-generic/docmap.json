@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-data-handler-generic.node.SDataHandlerGeneric": {
+                "id": "@coffeekraken.s-data-handler-generic.node.SDataHandlerGeneric",
                 "name": "SDataHandlerGeneric",
                 "type": "Function",
                 "description": "This function simply take the .data.js file path and return\nthe resulting object",

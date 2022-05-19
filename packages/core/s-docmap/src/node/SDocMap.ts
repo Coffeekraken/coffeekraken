@@ -472,7 +472,6 @@ class SDocMap extends __SClass implements ISDocMap {
                                 '.',
                             )}.${namespace}`;
                         }
-                        console.log(blockId);
                         if (!finalDocmapJson.map[blockId]) {
                             // assigning an id to the block.
                             // This id is the string used as map property to store the block

@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-parallax-feature.js.SParallaxFeature": {
+                "id": "@coffeekraken.s-parallax-feature.js.SParallaxFeature",
                 "name": "SParallaxFeature",
                 "type": "Feature",
                 "menu": {
@@ -159,6 +160,7 @@
                 "children": {}
             },
             "@coffeekraken.s-parallax-feature.js.interface.SParallaxFeatureInterface": {
+                "id": "@coffeekraken.s-parallax-feature.js.interface.SParallaxFeatureInterface",
                 "name": "SParallaxFeatureInterface",
                 "type": ".                      Class",
                 "platform": [

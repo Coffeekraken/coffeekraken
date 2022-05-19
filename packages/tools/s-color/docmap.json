@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-color.doc.README": {
+                "id": "@coffeekraken.s-color.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -110,6 +111,7 @@
                 "children": {}
             },
             "@coffeekraken.s-color.shared.SColor": {
+                "id": "@coffeekraken.s-color.shared.SColor",
                 "name": "SColor",
                 "type": "Class",
                 "description": "Class that provide complete and simple to use color manupilation capabilities like:\n- Modifiers\n- lighten\n- darken\n- saturate\n- desaturate\n- spin (change hue)\n- alpha\n- opacity\n- grayscale\n- Conversions\n- rgb\n- rgba\n- hsl\n- hsla\n- hex\n- Print out formats\n- toRgbString\n- toRgbaString\n- toHslString\n- toHslaString\n- toHexString\n- toString(format = null)",
@@ -132,6 +134,7 @@
                 "relPath": "src/shared/SColor.ts",
                 "children": {
                     "colors": {
+                        "id": "415f31fa5abb7edf566f3eaa506f70b863609f8fff87f1b35c2582f73b5eab8e",
                         "name": "colors",
                         "type": "Object",
                         "description": "Static color names map",
@@ -143,6 +146,7 @@
                         }
                     },
                     "colorsettings": {
+                        "id": "631c871f3993bc7b8835b69319fc4e94d05c86c82374cc5510afbe670cfddbd2",
                         "name": "colorSettings",
                         "type": "ISColorSettings",
                         "description": "Access the color settings",
@@ -154,6 +158,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "14e74cee3634da63f4bdd3155f8a5cadf8759448c7e099f08cef79b98bc9999d",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -164,11 +169,13 @@
                         }
                     },
                     "getcolor": {
+                        "id": "a5e2ad31111e38f77a1272446a2c8c2f8a6b393c4dfab58cafa21e4c7e7f7e77",
                         "name": "getColor",
                         "type": "Function",
                         "description": "This method take as parameter the passed color to the constructor and has to return the\nactual real color like color from the static colors listed in the SColor class or maybe\nfrom the Sugar configured colors"
                     },
                     "tohex": {
+                        "id": "a8d2e0621539b578dc5a959dba501ec6a5bb074cf0aa89828c48ba17ad5aa573",
                         "name": "toHex",
                         "type": "Function",
                         "description": "To hex",
@@ -185,6 +192,7 @@
                         }
                     },
                     "tohsl": {
+                        "id": "1ae59c29e28d81c89d4e79ae1ec9c18e2a3011d6e6300d9a2709379af19bbdef",
                         "name": "toHsl",
                         "type": "Function",
                         "description": "To hsl",
@@ -201,6 +209,7 @@
                         }
                     },
                     "tohsla": {
+                        "id": "de93fa602de480e1d36d14bc26d2ffac48b13af376516c6e1415a225c7c1ef37",
                         "name": "toHsla",
                         "type": "Function",
                         "description": "To hsla",
@@ -217,6 +226,7 @@
                         }
                     },
                     "torgb": {
+                        "id": "a287d90d58b4f0989b0878013d0bb843c456c75531375caf86b54d2141d55bee",
                         "name": "toRgb",
                         "type": "Function",
                         "description": "To rgb",
@@ -233,6 +243,7 @@
                         }
                     },
                     "torgba": {
+                        "id": "0ce46f82fc33ca738f9cc3fc84300ae442121aa8fda926a8c461fe9816f084ec",
                         "name": "toRgba",
                         "type": "Function",
                         "description": "To rgba",
@@ -249,6 +260,7 @@
                         }
                     },
                     "r": {
+                        "id": "236d4ab4c6f4024d73916fe94414535c2c33ccff1b06356d462f099c6e1d37cf",
                         "name": "r",
                         "type": "Number",
                         "description": "Get/set the red value",
@@ -265,6 +277,7 @@
                         }
                     },
                     "g": {
+                        "id": "7ed10f2a68e2697369e374711a115994c19d7321c547b073126e2696c38027ed",
                         "name": "g",
                         "type": "Number",
                         "description": "Get/set the green value",
@@ -281,6 +294,7 @@
                         }
                     },
                     "b": {
+                        "id": "2f75d2cbb1370c7d872f13ea5b42746b4a973734ac80ea471b390eb411ad0a09",
                         "name": "b",
                         "type": "Number",
                         "description": "Get/set the blue value",
@@ -297,6 +311,7 @@
                         }
                     },
                     "a": {
+                        "id": "967e75bf2f7404f575ce43f0ff6ac363524699fb7186876180b761c0d2e9d87b",
                         "name": "a",
                         "type": "Number",
                         "description": "Get/set the alpha value",
@@ -313,6 +328,7 @@
                         }
                     },
                     "l": {
+                        "id": "8d776cee1010aaf906ffffff523b016dc943722edaa10765e6ecc0618fb9979a",
                         "name": "l",
                         "type": "Number",
                         "description": "The luminence value",
@@ -329,6 +345,7 @@
                         }
                     },
                     "s": {
+                        "id": "b0ae91a7d9524be2ded8d1d8ff8f81639b05f512598227be26e28d7ef2a4e248",
                         "name": "s",
                         "type": "Number",
                         "description": "The saturation value",
@@ -345,6 +362,7 @@
                         }
                     },
                     "h": {
+                        "id": "73c9a59b1d67b42cdd5cb4c244de1562f16e5f6f2ac73576d10d2109eae7d783",
                         "name": "h",
                         "type": "Number",
                         "description": "Get/set the hue",
@@ -361,6 +379,7 @@
                         }
                     },
                     "reset": {
+                        "id": "d3b8f2e29d173088a4ce13e44e03ad2d9df5a17325eef7422b60184d332f03a8",
                         "name": "reset",
                         "type": "Function",
                         "description": "Reset to the original color",
@@ -377,6 +396,7 @@
                         }
                     },
                     "apply": {
+                        "id": "a77f58c7cab0fb324188d4d172677a86001a00b8feb76e46abb9dd1999986260",
                         "name": "apply",
                         "type": "Function",
                         "description": "This method allows you to apply some updated to your color\nusing the parameters defined in the SColorApplyInterface like\nfor example \"saturate\", \"desaturate\", etc...",
@@ -388,6 +408,7 @@
                         }
                     },
                     "desaturate": {
+                        "id": "887f6a0cbdf1137e88b8f7727770ab12aab4dea040d1e46ae3d2ae0be0efd120",
                         "name": "desaturate",
                         "type": "Function",
                         "description": "Desaturate",
@@ -404,6 +425,7 @@
                         }
                     },
                     "saturate": {
+                        "id": "0c8c4f33a4af9351788da6cdae3704005901b4a9d6df05f3497bf4a29b64e653",
                         "name": "saturate",
                         "type": "Function",
                         "description": "Saturate",
@@ -420,6 +442,7 @@
                         }
                     },
                     "grayscale": {
+                        "id": "c03f24733199ebf689d8cc82bff90f4fb8c280bc44176e5311974503e6163bc9",
                         "name": "grayscale",
                         "type": "Function",
                         "description": "Return a new SColor instance of the color to grayscale",
@@ -436,6 +459,7 @@
                         }
                     },
                     "spin": {
+                        "id": "82fede1455c1d81159afcea957fe8ac555edc9d0479e7e3a624f4d4be2fe02d9",
                         "name": "spin",
                         "type": "Function",
                         "description": "Spin the hue on the passed value (max 360)",
@@ -452,6 +476,7 @@
                         }
                     },
                     "alpha": {
+                        "id": "b641b9b7c1c5e8a4879e0fd8f23acab391d048be803f80a660e263459887a599",
                         "name": "alpha",
                         "type": "Function",
                         "description": "Set the alpha",
@@ -468,6 +493,7 @@
                         }
                     },
                     "darken": {
+                        "id": "671e6088abfc4ec6b625e6f724452d2f62020de40b291ad84b4928bbd854bbb0",
                         "name": "darken",
                         "type": "Function",
                         "description": "Darken",
@@ -484,6 +510,7 @@
                         }
                     },
                     "lighten": {
+                        "id": "c75837ac6fa983fa01651e5cb5c8332e1d3d2945ed4c741175deadfeaa0c5f19",
                         "name": "lighten",
                         "type": "Function",
                         "description": "Lighten",
@@ -500,6 +527,7 @@
                         }
                     },
                     "invert": {
+                        "id": "9158ae6b898b8ba9b52ac4c03dc6fb4c61a93609069c7e11be38ac81fbd46f90",
                         "name": "invert",
                         "type": "Function",
                         "description": "Calculate the best color value that will have the best contrast ratio",
@@ -511,6 +539,7 @@
                         }
                     },
                     "tohexstring": {
+                        "id": "bf3ece1a57acfa15ab372f8f2433bfff0c7d89c4908dbda64cb9abf554bbd80d",
                         "name": "toHexString",
                         "type": "Function",
                         "description": "To hex string",
@@ -527,6 +556,7 @@
                         }
                     },
                     "torgbstring": {
+                        "id": "9328bd8af59a21b6e1d7fffaa122ee49759edbe608c60286b13c30a282c539d1",
                         "name": "toRgbString",
                         "type": "Function",
                         "description": "To rgb string",
@@ -543,6 +573,7 @@
                         }
                     },
                     "torgbastring": {
+                        "id": "53c6d8c90faa821181efd92d42b9b1bf079f71666b6400c7a81a1a393b35b375",
                         "name": "toRgbaString",
                         "type": "Function",
                         "description": "To rgba string",
@@ -559,6 +590,7 @@
                         }
                     },
                     "tohslstring": {
+                        "id": "82a241e37536cca2015fd8e88d99576f4f05c13db0092eed6170eaa811a9397f",
                         "name": "toHslString",
                         "type": "Function",
                         "description": "To hsl string",
@@ -575,6 +607,7 @@
                         }
                     },
                     "tohslastring": {
+                        "id": "ffa8fdfe4aae9bf6a6c1be3ebcda85e33c9c8a73fe94c46603eec6e25b0089da",
                         "name": "toHslaString",
                         "type": "Function",
                         "description": "To hsla string",
@@ -591,6 +624,7 @@
                         }
                     },
                     "tostring": {
+                        "id": "ab4a2d8839eefe6029f0e089421480c0d4d02cf2755f73b83e474edbf295994e",
                         "name": "toString",
                         "type": "Function",
                         "description": "To string",
@@ -609,6 +643,7 @@
                 }
             },
             "@coffeekraken.s-color.shared.interface.SColorApplyParamsInterface": {
+                "id": "@coffeekraken.s-color.shared.interface.SColorApplyParamsInterface",
                 "name": "SColorApplyParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -704,6 +739,7 @@
                 "children": {}
             },
             "@coffeekraken.s-color.shared.interface.SColorSettingsInterface": {
+                "id": "@coffeekraken.s-color.shared.interface.SColorSettingsInterface",
                 "name": "SColorSettingsInterface",
                 "type": ".                      Class",
                 "platform": [

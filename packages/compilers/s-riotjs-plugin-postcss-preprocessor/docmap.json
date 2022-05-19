@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-riotjs-plugin-postcss-preprocessor.node.sRiotjsPluginPostcssPreprocessor": {
+                "id": "@coffeekraken.s-riotjs-plugin-postcss-preprocessor.node.sRiotjsPluginPostcssPreprocessor",
                 "name": "sRiotjsPluginPostcssPreprocessor",
                 "type": "Function",
                 "description": "This riot preprocessor allows you to use postcss inside your component",

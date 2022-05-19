@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingInline": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingInline",
                 "name": "paddingInline",
                 "type": "String",
                 "default": "[theme.ui.default.paddingInline]",
@@ -98,6 +99,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingBlock": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingBlock",
                 "name": "paddingBlock",
                 "type": "String",
                 "default": "[theme.ui.default.paddingBlock]",
@@ -114,6 +116,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderRadius": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderRadius",
                 "name": "borderRadius",
                 "type": "String",
                 "default": "[theme.ui.default.borderRadius]",
@@ -130,6 +133,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderWidth": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderWidth",
                 "name": "borderWidth",
                 "type": "String",
                 "default": "[theme.ui.default.borderWidth]",
@@ -146,6 +150,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.transition": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.transition",
                 "name": "transition",
                 "type": "String",
                 "default": "[theme.ui.default.transition]",
@@ -162,6 +167,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultColor": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultColor",
                 "name": "defaultColor",
                 "type": "String",
                 "default": "[theme.ui.default.defaultColor]",
@@ -178,6 +184,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultStyle": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultStyle",
                 "name": "defaultStyle",
                 "type": "Number",
                 "default": "[theme.ui.default.defaultStyle]",
@@ -194,6 +201,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.depth": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.depth",
                 "name": "depth",
                 "type": "String",
                 "default": "5",
@@ -210,6 +218,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.outline": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.outline",
                 "name": "outline",
                 "type": "Object",
                 "default": "[theme.ui.outline.active]",
@@ -226,6 +235,7 @@
                 "relPath": "src/config/themeUi.config.ts"
             },
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.rhythmVertical": {
+                "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.rhythmVertical",
                 "name": "rhythmVertical",
                 "type": "Object",
                 "default": "[theme.ui.default.rhythmVertical]",
@@ -243,6 +253,7 @@
                 "children": {}
             },
             "@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface": {
+                "id": "@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface",
                 "name": "SFiltrableInputComponentInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -343,6 +354,7 @@
                 "children": {}
             },
             "@coffeekraken.s-filtrable-input-component.ui.filtrableInput.filtrableInput": {
+                "id": "@coffeekraken.s-filtrable-input-component.ui.filtrableInput.filtrableInput",
                 "name": "filtrableInput",
                 "type": "PostcssMixin",
                 "platform": [

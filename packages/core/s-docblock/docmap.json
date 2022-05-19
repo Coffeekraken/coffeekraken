@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-docblock.shared.SDockblock": {
+                "id": "@coffeekraken.s-docblock.shared.SDockblock",
                 "name": "SDockblock",
                 "type": "Class",
                 "platform": [
@@ -109,6 +110,7 @@
                 "relPath": "src/shared/SDocblock.ts",
                 "children": {
                     "docblocksettings": {
+                        "id": "12a829f31c1763f81fd91de14256a3f0a1b6d3ede90f19fafbb65b3f86b4d766",
                         "name": "docblockSettings",
                         "type": "ISDocblockSettings",
                         "description": "Access the docblock settings",
@@ -119,6 +121,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "3d033f2641efbab7f69d5284859ab6e4ad3d86e2c3ce857966a95e251d7ce6f1",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -128,6 +131,7 @@
                         }
                     },
                     "sort": {
+                        "id": "d05640eade32fa3a43f2d533a64a38af4d04258563faa16e5b956a9491ea3c04",
                         "name": "sort",
                         "type": "Function",
                         "description": "This method allows you to set the order in which you want to get the\nblocks back when using the methods like get blocks, etc...",
@@ -138,6 +142,7 @@
                         }
                     },
                     "blocks": {
+                        "id": "94a7a1894488eb864c6a9a43466598aeed2429689e2c2aaaf5559c41c76fbf9c",
                         "name": "blocks",
                         "type": "Array",
                         "description": "Access the parsed blocks array",
@@ -147,6 +152,7 @@
                         }
                     },
                     "parse": {
+                        "id": "753af43840a53f14584f91c0329d1f82c9321cd4a7b102e747b020a5531b46e4",
                         "name": "parse",
                         "type": "Function",
                         "description": "This method is the principal one. Use it to parse a string\nand get back the object version of it",
@@ -159,6 +165,7 @@
                         }
                     },
                     "toobject": {
+                        "id": "6297e85d6769045aeb96664e99464b7784c0a9ffd4adf2c44afbbdaf670a7cd5",
                         "name": "toObject",
                         "type": "Function",
                         "description": "This method convert the parsed docblocks to a simple object",
@@ -170,6 +177,7 @@
                         }
                     },
                     "tostring": {
+                        "id": "37a2cb68c7e1b9058c43b357ff2dad7782a96057f4c4a98cb8a2a8ac439192e7",
                         "name": "toString",
                         "type": "Function",
                         "description": "This method allows you to get the string version of the docblock(s)",
@@ -183,6 +191,7 @@
                 }
             },
             "@coffeekraken.s-docblock.shared.SDocblockBlock": {
+                "id": "@coffeekraken.s-docblock.shared.SDocblockBlock",
                 "name": "SDocblockBlock",
                 "type": "Class",
                 "platform": [
@@ -210,6 +219,7 @@
                 "relPath": "src/shared/SDocblockBlock.ts",
                 "children": {
                     "tagsmap": {
+                        "id": "fe18ee7639e5a18bffd66b02c4a771c9db3d86383bab3a03a0181a7383a4c2ad",
                         "name": "tagsMap",
                         "type": "Object",
                         "description": "Store the default tags mapping to their parsing functions",
@@ -220,6 +230,7 @@
                         }
                     },
                     "registertag": {
+                        "id": "2b849c20d1d5ab8a0d6f436922de492af6ca5cd47c805b2fac492a0f2fba6d4c",
                         "name": "registerTag",
                         "type": "Function",
                         "description": "This static method allows you to register a new tag that will\nbe recognized by the SDocblockBlock class.",
@@ -228,6 +239,7 @@
                         "author": null
                     },
                     "docblockblocksettings": {
+                        "id": "067cc5b32ab91213ed04d4cda3504cde3ff740c3e65b8b2d95c8610bbfe43f5c",
                         "name": "docblockBlockSettings",
                         "type": "ISDocblockBlockSettings",
                         "description": "Access the docblockBlock settings",
@@ -239,6 +251,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "bf03b7be556d97452b19db9108ae8d38a7f29e3916ea332dca0b41ab2bd4913a",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -249,6 +262,7 @@
                         }
                     },
                     "tostring": {
+                        "id": "d43ac8cd15b076f313d03fb352aae5a85086e4a4a237437cd91f9b9949ffd580",
                         "name": "toString",
                         "type": "Function",
                         "description": "This method return the passed source string",
@@ -259,6 +273,7 @@
                         }
                     },
                     "toobject": {
+                        "id": "392d6f6941ff340e210e813d063eeacd1eb2bb0a37cd1029190cdbca32ea9595",
                         "name": "toObject",
                         "type": "Function",
                         "description": "This method return the parsed docblock object",
@@ -271,6 +286,7 @@
                 }
             },
             "@coffeekraken.s-docblock.sugar.node.docblock.firstDocblockWithNamespaceInFolder": {
+                "id": "@coffeekraken.s-docblock.sugar.node.docblock.firstDocblockWithNamespaceInFolder",
                 "name": "firstDocblockWithNamespaceInFolder",
                 "type": "Function",
                 "description": "This function search in the passed folder for files containing a \"@namespace\" tag (and an \"@name\" optional one)\nand generate a SNav instance with all these founded files as sources...",
@@ -295,6 +311,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.author": {
+                "id": "@coffeekraken.s-docblock.shared.tags.author",
                 "name": "author",
                 "type": "Function",
                 "platform": [
@@ -317,6 +334,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.contributor": {
+                "id": "@coffeekraken.s-docblock.shared.tags.contributor",
                 "name": "contributor",
                 "type": "Function",
                 "platform": [
@@ -335,6 +353,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.cssClass": {
+                "id": "@coffeekraken.s-docblock.shared.tags.cssClass",
                 "name": "cssClass",
                 "type": "Function",
                 "platform": [
@@ -357,6 +376,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.description": {
+                "id": "@coffeekraken.s-docblock.shared.tags.description",
                 "name": "description",
                 "type": "Function",
                 "platform": [
@@ -379,6 +399,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.example": {
+                "id": "@coffeekraken.s-docblock.shared.tags.example",
                 "name": "example",
                 "type": "Function",
                 "platform": [
@@ -402,6 +423,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.install": {
+                "id": "@coffeekraken.s-docblock.shared.tags.install",
                 "name": "install",
                 "type": "Function",
                 "platform": [
@@ -425,6 +447,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.interface": {
+                "id": "@coffeekraken.s-docblock.shared.tags.interface",
                 "name": "interface",
                 "type": "Function",
                 "platform": [
@@ -448,6 +471,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.menuTag": {
+                "id": "@coffeekraken.s-docblock.shared.tags.menuTag",
                 "name": "menuTag",
                 "type": "Function",
                 "platform": [
@@ -470,6 +494,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.node.tags.param": {
+                "id": "@coffeekraken.s-docblock.node.tags.param",
                 "name": "param",
                 "type": "Function",
                 "platform": [
@@ -492,6 +517,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.param": {
+                "id": "@coffeekraken.s-docblock.shared.tags.param",
                 "name": "param",
                 "type": "Function",
                 "platform": [
@@ -514,6 +540,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.return": {
+                "id": "@coffeekraken.s-docblock.shared.tags.return",
                 "name": "return",
                 "type": "Function",
                 "platform": [
@@ -536,6 +563,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.see": {
+                "id": "@coffeekraken.s-docblock.shared.tags.see",
                 "name": "see",
                 "type": "Function",
                 "platform": [
@@ -558,6 +586,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.simpleRepeatableValue": {
+                "id": "@coffeekraken.s-docblock.shared.tags.simpleRepeatableValue",
                 "name": "simpleRepeatableValue",
                 "type": "Function",
                 "platform": [
@@ -580,6 +609,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.simpleValue": {
+                "id": "@coffeekraken.s-docblock.shared.tags.simpleValue",
                 "name": "simpleValue",
                 "type": "Function",
                 "platform": [
@@ -602,6 +632,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.snippet": {
+                "id": "@coffeekraken.s-docblock.shared.tags.snippet",
                 "name": "snippet",
                 "type": "Function",
                 "platform": [
@@ -624,6 +655,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.support": {
+                "id": "@coffeekraken.s-docblock.shared.tags.support",
                 "name": "support",
                 "type": "Function",
                 "platform": [
@@ -646,6 +678,7 @@
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.todo": {
+                "id": "@coffeekraken.s-docblock.shared.tags.todo",
                 "name": "todo",
                 "type": "Function",
                 "platform": [

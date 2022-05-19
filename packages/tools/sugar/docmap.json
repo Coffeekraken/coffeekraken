@@ -81,6 +81,7 @@
         ],
         "map": {
             "@coffeekraken.sugar.doc.README": {
+                "id": "@coffeekraken.sugar.doc.README",
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
@@ -109,6 +110,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.index": {
+                "id": "@coffeekraken.sugar.node.index",
                 "name": "index",
                 "description": "This file is the \"initialisation\" one for the sugar node toolkit.\nIt's optional to include it but if you do, you will get these features \"for free\":\n- Logging: Get the powerfull options of the SLog class without any change in your codebase",
                 "namespace": "@coffeekraken.sugar.node",
@@ -124,6 +126,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.cli.interface.SRunCommandParamsInterface": {
+                "id": "@coffeekraken.sugar.cli.interface.SRunCommandParamsInterface",
                 "name": "SRunCommandParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -163,12 +166,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SRunCommandParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/cli/interface/SRunCommandParamsInterface.js",
+                "filename": "SRunCommandParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/cli/interface/SRunCommandParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.cli.interface.SSugarToolkitParamsInterface": {
+                "id": "@coffeekraken.sugar.cli.interface.SSugarToolkitParamsInterface",
                 "name": "SSugarToolkitParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -197,6 +201,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.drawer-webcomponent.DrawerWebcomponent": {
+                "id": "@coffeekraken.sugar.drawer-webcomponent.DrawerWebcomponent",
                 "name": "DrawerWebcomponent",
                 "type": "Class",
                 "description": "Simple webcomponent to create fully customizable drawers.\nFeatures:\n1. Fully customizable\n2. Support all sides (top, right, bottom and left)\n3. Support 3 animation types (push, slide and reveal)",
@@ -216,6 +221,7 @@
                 "relPath": "src/data/tests/testing.ts"
             },
             "@coffeekraken.sugar.drawer-webcomponent.open": {
+                "id": "@coffeekraken.sugar.drawer-webcomponent.open",
                 "name": "open",
                 "type": "Function",
                 "description": "Open the drawer",
@@ -229,6 +235,7 @@
                 "relPath": "src/data/tests/testing.ts"
             },
             "@coffeekraken.sugar.drawer-webcomponent.close": {
+                "id": "@coffeekraken.sugar.drawer-webcomponent.close",
                 "name": "close",
                 "type": "Function",
                 "description": "Close the drawer",
@@ -242,6 +249,7 @@
                 "relPath": "src/data/tests/testing.ts"
             },
             "@coffeekraken.sugar.drawer-webcomponent.isOpen": {
+                "id": "@coffeekraken.sugar.drawer-webcomponent.isOpen",
                 "name": "isOpen",
                 "type": "Function",
                 "description": "Check if is opened",
@@ -256,6 +264,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.clipboard.copy": {
+                "id": "@coffeekraken.sugar.js.clipboard.copy",
                 "name": "copy",
                 "type": "Function",
                 "platform": [
@@ -286,6 +295,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.clipboard.read": {
+                "id": "@coffeekraken.sugar.js.clipboard.read",
                 "name": "read",
                 "type": "Function",
                 "platform": [
@@ -316,6 +326,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.event.emit": {
+                "id": "@coffeekraken.sugar.js.event.emit",
                 "name": "emit",
                 "type": "Function",
                 "platform": [
@@ -345,6 +356,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.event.on": {
+                "id": "@coffeekraken.sugar.js.event.on",
                 "name": "on",
                 "type": "Function",
                 "platform": [
@@ -374,6 +386,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.event.SEvent": {
+                "id": "@coffeekraken.sugar.js.event.SEvent",
                 "name": "SEvent",
                 "type": "Class",
                 "platform": [
@@ -402,6 +415,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.feature.imagesLazySrcAttribute": {
+                "id": "@coffeekraken.sugar.js.feature.imagesLazySrcAttribute",
                 "name": "imagesLazySrcAttribute",
                 "type": "Feature",
                 "platform": [
@@ -435,6 +449,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.feature.imagesLoadedAttribute": {
+                "id": "@coffeekraken.sugar.js.feature.imagesLoadedAttribute",
                 "name": "imagesLoadedAttribute",
                 "type": "Feature",
                 "platform": [
@@ -464,6 +479,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.feature.handleInputAttributes": {
+                "id": "@coffeekraken.sugar.js.feature.handleInputAttributes",
                 "name": "handleInputAttributes",
                 "type": "Feature",
                 "platform": [
@@ -493,6 +509,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.feature.linksStateAttributes": {
+                "id": "@coffeekraken.sugar.js.feature.linksStateAttributes",
                 "name": "linksStateAttributes",
                 "type": "Feature",
                 "platform": [
@@ -526,6 +543,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.feature.smoothScroll": {
+                "id": "@coffeekraken.sugar.js.feature.smoothScroll",
                 "name": "smoothScroll",
                 "type": "Function",
                 "platform": [
@@ -555,6 +573,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.feature.smoothScrollOnAnchorLinks": {
+                "id": "@coffeekraken.sugar.js.feature.smoothScrollOnAnchorLinks",
                 "name": "smoothScrollOnAnchorLinks",
                 "type": "Function",
                 "platform": [
@@ -584,6 +603,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.feature.smoothScrollOnHashChange": {
+                "id": "@coffeekraken.sugar.js.feature.smoothScrollOnHashChange",
                 "name": "smoothScrollOnHashChange",
                 "type": "Function",
                 "platform": [
@@ -613,6 +633,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.feature.smoothScrollOnPageLoad": {
+                "id": "@coffeekraken.sugar.js.feature.smoothScrollOnPageLoad",
                 "name": "smoothScrollOnPageLoad",
                 "type": "Function",
                 "platform": [
@@ -642,6 +663,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.feature.videoLazySrcAttribute": {
+                "id": "@coffeekraken.sugar.js.feature.videoLazySrcAttribute",
                 "name": "videoLazySrcAttribute",
                 "type": "Feature",
                 "platform": [
@@ -674,6 +696,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.filter.SGooeySvgFilter": {
+                "id": "@coffeekraken.sugar.js.filter.SGooeySvgFilter",
                 "name": "SGooeySvgFilter",
                 "type": "Class",
                 "platform": [
@@ -702,6 +725,7 @@
                 "relPath": "src/js/filter/SGooeySvgFilter.ts",
                 "children": {
                     "constructor": {
+                        "id": "a90f73c83b45182b9c76cf0825f7733d81f803d608ad8ce68d9e162df3063f2d",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -712,6 +736,7 @@
                         }
                     },
                     "blur": {
+                        "id": "0d008e859a70a22b17be44fb38bed951dd5e596af2278d116ed5e2be30846eb2",
                         "name": "blur",
                         "type": "Number",
                         "description": "Get/Set the blur amount to produce the effect",
@@ -722,6 +747,7 @@
                         }
                     },
                     "contrast": {
+                        "id": "80a5d16c651bc68586610e848dec1c352d5196cd14ae2c471b56d145ed19eadf",
                         "name": "contrast",
                         "type": "Number",
                         "description": "Get the contrast amount to produce the effect",
@@ -732,6 +758,7 @@
                         }
                     },
                     "shrink": {
+                        "id": "fb928f5cadd62df1e0a0368d952412af22fdccdf89689afc85b8216410659f20",
                         "name": "shrink",
                         "type": "Number",
                         "description": "Get the shrink amount to produce the effect",
@@ -742,6 +769,7 @@
                         }
                     },
                     "amount": {
+                        "id": "da0d9383b7c5913604d6a26ef43618cf0360a6703d12097ff06a2479c7d7bd1b",
                         "name": "amount",
                         "type": "Number",
                         "description": "Set the overall amount of effect to produce",
@@ -754,6 +782,7 @@
                 }
             },
             "@coffeekraken.sugar.js.filter.SGradientSvgFilter": {
+                "id": "@coffeekraken.sugar.js.filter.SGradientSvgFilter",
                 "name": "SGradientSvgFilter",
                 "type": "Class",
                 "platform": [
@@ -781,6 +810,7 @@
                 "relPath": "src/js/filter/SGradientSvgFilter.ts",
                 "children": {
                     "constructor": {
+                        "id": "bde39a062f8f6f8f587d2fa1efddd894e1baee24b66dc5f6bc45e94887d33d06",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -791,6 +821,7 @@
                         }
                     },
                     "linear": {
+                        "id": "63df70cf78ea753612f39c4194d91751ca7685a5996024bf8b4440c8d470bdf8",
                         "name": "linear",
                         "type": "Function",
                         "description": "Linear gradient",
@@ -801,6 +832,7 @@
                         }
                     },
                     "radial": {
+                        "id": "fdfdb1649d2822fc01d64de4ef9f4797b59717dc46006d92b7eefe23866c2bc3",
                         "name": "radial",
                         "type": "Function",
                         "description": "Radial gradient",
@@ -817,6 +849,7 @@
                         }
                     },
                     "applyto": {
+                        "id": "456910ceb469d20527899df61566fdd8dbb677efe6835065c4d59fb6472fb823",
                         "name": "applyTo",
                         "type": "Function",
                         "description": "Apply the filter to element",
@@ -827,6 +860,7 @@
                         }
                     },
                     "unapplyfrom": {
+                        "id": "827a5ae30e282d21e2512db7a80f6b08171891bd66937b3e6a7097a4228388c3",
                         "name": "unapplyFrom",
                         "type": "Function",
                         "description": "Remove the filter from element",
@@ -839,6 +873,7 @@
                 }
             },
             "@coffeekraken.sugar.js.filter.SMotionblurSvgFilter": {
+                "id": "@coffeekraken.sugar.js.filter.SMotionblurSvgFilter",
                 "name": "SMotionblurSvgFilter",
                 "type": "Class",
                 "platform": [
@@ -867,6 +902,7 @@
                 "relPath": "src/js/filter/SMotionblurSvgFilter.ts",
                 "children": {
                     "amount": {
+                        "id": "c1b472d89210eb4478b79ca26cf81e2c9c36bd835bcb497472ee6824aab12cf1",
                         "name": "amount",
                         "type": "Number",
                         "default": "0.5",
@@ -878,6 +914,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "47963561d60c468541e3726665c0e8ab0759b7b26f53c6679f678fd46d72c2a7",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -888,6 +925,7 @@
                         }
                     },
                     "applyto": {
+                        "id": "b297d47ff7fdf6d6dcbde2652b04bee6b70617d57bea161d06e0ee5e145b8012",
                         "name": "applyTo",
                         "type": "Function",
                         "description": "Apply the filter to element",
@@ -898,6 +936,7 @@
                         }
                     },
                     "unapplyfrom": {
+                        "id": "827a5ae30e282d21e2512db7a80f6b08171891bd66937b3e6a7097a4228388c3",
                         "name": "unapplyFrom",
                         "type": "Function",
                         "description": "Remove the filter from element",
@@ -908,6 +947,7 @@
                         }
                     },
                     "destroy": {
+                        "id": "32d651541de4b05ecf376ec4060b8db764a3bba3c1b866c345538c73a14b6f6b",
                         "name": "destroy",
                         "type": "Function",
                         "description": "Destroy the filter",
@@ -920,6 +960,7 @@
                 }
             },
             "@coffeekraken.sugar.js.filter.SOutlineSvgFilter": {
+                "id": "@coffeekraken.sugar.js.filter.SOutlineSvgFilter",
                 "name": "SOutlineSvgFilter",
                 "type": "Class",
                 "platform": [
@@ -948,6 +989,7 @@
                 "relPath": "src/js/filter/SOutlineSvgFilter.ts",
                 "children": {
                     "constructor": {
+                        "id": "d100d105b5c71371fb0307992d19a0f43e52c4316db3feb60a316416c7d51880",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -958,6 +1000,7 @@
                         }
                     },
                     "radius": {
+                        "id": "06ee447bf68df948c08015f7a9e7bb8946e94d0c867f90cfeaa90e44eba349dd",
                         "name": "radius",
                         "type": "Number",
                         "description": "Get/Set the radius to produce the effect",
@@ -970,6 +1013,7 @@
                 }
             },
             "@coffeekraken.sugar.js.string.decodeHtmlEntities": {
+                "id": "@coffeekraken.sugar.js.string.decodeHtmlEntities",
                 "name": "decodeHtmlEntities",
                 "type": "Function",
                 "platform": [
@@ -999,6 +1043,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.html.expandPleasantCssClassnamesLive": {
+                "id": "@coffeekraken.sugar.js.html.expandPleasantCssClassnamesLive",
                 "name": "expandPleasantCssClassnamesLive",
                 "type": "Function",
                 "platform": [
@@ -1028,6 +1073,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.html.getHtmlClassFromTagName": {
+                "id": "@coffeekraken.sugar.js.html.getHtmlClassFromTagName",
                 "name": "getHtmlClassFromTagName",
                 "type": "Function",
                 "platform": [
@@ -1057,6 +1103,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.html.getHtmlhtmlClassFromHtmlClass": {
+                "id": "@coffeekraken.sugar.js.html.getHtmlhtmlClassFromHtmlClass",
                 "name": "getHtmlhtmlClassFromHtmlClass",
                 "type": "Function",
                 "platform": [
@@ -1086,6 +1133,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.html.HtmlTagToHtmlClassMap": {
+                "id": "@coffeekraken.sugar.js.html.HtmlTagToHtmlClassMap",
                 "name": "HtmlTagToHtmlClassMap",
                 "type": "Object",
                 "platform": [
@@ -1115,6 +1163,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.html.strToHtml": {
+                "id": "@coffeekraken.sugar.js.html.strToHtml",
                 "name": "strToHtml",
                 "type": "Function",
                 "platform": [
@@ -1144,6 +1193,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.html.toString": {
+                "id": "@coffeekraken.sugar.js.html.toString",
                 "name": "toString",
                 "type": "Function",
                 "platform": [
@@ -1173,6 +1223,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isChrome": {
+                "id": "@coffeekraken.sugar.js.is.isChrome",
                 "name": "isChrome",
                 "type": "Function",
                 "platform": [
@@ -1202,6 +1253,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isEdge": {
+                "id": "@coffeekraken.sugar.js.is.isEdge",
                 "name": "isEdge",
                 "type": "Function",
                 "platform": [
@@ -1231,6 +1283,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isFirefox": {
+                "id": "@coffeekraken.sugar.js.is.isFirefox",
                 "name": "isFirefox",
                 "type": "Function",
                 "platform": [
@@ -1260,6 +1313,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isIe": {
+                "id": "@coffeekraken.sugar.js.is.isIe",
                 "name": "isIe",
                 "type": "Function",
                 "platform": [
@@ -1289,6 +1343,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isMobile": {
+                "id": "@coffeekraken.sugar.js.is.isMobile",
                 "name": "isMobile",
                 "type": "Function",
                 "platform": [
@@ -1318,6 +1373,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isOpera": {
+                "id": "@coffeekraken.sugar.js.is.isOpera",
                 "name": "isOpera",
                 "type": "Function",
                 "platform": [
@@ -1347,6 +1403,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isPhone": {
+                "id": "@coffeekraken.sugar.js.is.isPhone",
                 "name": "isPhone",
                 "type": "Function",
                 "platform": [
@@ -1376,6 +1433,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isSafari": {
+                "id": "@coffeekraken.sugar.js.is.isSafari",
                 "name": "isSafari",
                 "type": "Function",
                 "platform": [
@@ -1405,6 +1463,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isSamsumgBrowser": {
+                "id": "@coffeekraken.sugar.js.is.isSamsumgBrowser",
                 "name": "isSamsumgBrowser",
                 "type": "Function",
                 "platform": [
@@ -1434,6 +1493,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isTablet": {
+                "id": "@coffeekraken.sugar.js.is.isTablet",
                 "name": "isTablet",
                 "type": "Function",
                 "platform": [
@@ -1463,6 +1523,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isUcBrowser": {
+                "id": "@coffeekraken.sugar.js.is.isUcBrowser",
                 "name": "isUcBrowser",
                 "type": "Function",
                 "platform": [
@@ -1492,6 +1553,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.keyboard.hotkey": {
+                "id": "@coffeekraken.sugar.js.keyboard.hotkey",
                 "name": "hotkey",
                 "type": "Function",
                 "platform": [
@@ -1521,6 +1583,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.responsive.SMediaQuery": {
+                "id": "@coffeekraken.sugar.js.responsive.SMediaQuery",
                 "name": "SMediaQuery",
                 "type": "Class",
                 "platform": [
@@ -1549,6 +1612,7 @@
                 "relPath": "src/js/responsive/SMediaQuery.ts",
                 "children": {
                     "this._activemedia": {
+                        "id": "23ab789004e0c173961c2aa490674a7686bf3eee0330c5dbf9f9cc8354ac3d3d",
                         "name": "this._activeMedia",
                         "type": "String",
                         "description": "Store the active media name",
@@ -1561,6 +1625,7 @@
                         }
                     },
                     "startlistener": {
+                        "id": "ad50fc16c73108fb8a4e0b58cd12369c980d54f9fad873df391eb3ff3767167e",
                         "name": "startListener",
                         "type": "Function",
                         "description": "Add the global listener based on the \"init-body-media-queries\" scss mixin",
@@ -1573,6 +1638,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "76c4901ce586f4c22fce1a43df75596833e3a093042170c682cf3d4346df80d6",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -1586,6 +1652,7 @@
                 }
             },
             "@coffeekraken.sugar.js.token.replaceTokens": {
+                "id": "@coffeekraken.sugar.js.token.replaceTokens",
                 "name": "replaceTokens",
                 "type": "Function",
                 "platform": [
@@ -1615,6 +1682,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.clipboard.copy": {
+                "id": "@coffeekraken.sugar.node.clipboard.copy",
                 "name": "copy",
                 "type": "Function",
                 "platform": [
@@ -1644,6 +1712,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.clipboard.read": {
+                "id": "@coffeekraken.sugar.node.clipboard.read",
                 "name": "read",
                 "type": "Function",
                 "platform": [
@@ -1673,6 +1742,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.coffeekraken.getCoffeekrakenMetas": {
+                "id": "@coffeekraken.sugar.node.coffeekraken.getCoffeekrakenMetas",
                 "name": "getCoffeekrakenMetas",
                 "type": "Function",
                 "platform": [
@@ -1703,6 +1773,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.command.commandExists": {
+                "id": "@coffeekraken.sugar.node.command.commandExists",
                 "name": "commandExists",
                 "type": "Function",
                 "platform": [
@@ -1733,6 +1804,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.config.loadConfigFile": {
+                "id": "@coffeekraken.sugar.node.config.loadConfigFile",
                 "name": "loadConfigFile",
                 "type": "Function",
                 "platform": [
@@ -1767,6 +1839,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.dependencies.dependenciesHash": {
+                "id": "@coffeekraken.sugar.node.dependencies.dependenciesHash",
                 "name": "dependenciesHash",
                 "type": "Function",
                 "platform": [
@@ -1801,6 +1874,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.error.handleError": {
+                "id": "@coffeekraken.sugar.node.error.handleError",
                 "name": "handleError",
                 "type": "Function",
                 "platform": [
@@ -1830,6 +1904,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.esm.require": {
+                "id": "@coffeekraken.sugar.node.esm.require",
                 "name": "require",
                 "type": "Function",
                 "platform": [
@@ -1859,6 +1934,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.esm.resolvePackagePath": {
+                "id": "@coffeekraken.sugar.node.esm.resolvePackagePath",
                 "name": "resolvePackagePath",
                 "type": "Function",
                 "platform": [
@@ -1888,6 +1964,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.appendToFileSync": {
+                "id": "@coffeekraken.sugar.node.fs.appendToFileSync",
                 "name": "appendToFileSync",
                 "type": "Function",
                 "platform": [
@@ -1917,6 +1994,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.checkPathWithMultipleExtensions": {
+                "id": "@coffeekraken.sugar.node.fs.checkPathWithMultipleExtensions",
                 "name": "checkPathWithMultipleExtensions",
                 "type": "Function",
                 "platform": [
@@ -1946,6 +2024,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.copy": {
+                "id": "@coffeekraken.sugar.node.fs.copy",
                 "name": "copy",
                 "type": "Function",
                 "platform": [
@@ -1976,6 +2055,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.copySync": {
+                "id": "@coffeekraken.sugar.node.fs.copySync",
                 "name": "copySync",
                 "type": "Function",
                 "platform": [
@@ -2005,6 +2085,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.dirname": {
+                "id": "@coffeekraken.sugar.node.fs.dirname",
                 "name": "dirname",
                 "type": "Function",
                 "platform": [
@@ -2034,6 +2115,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.emptyDir": {
+                "id": "@coffeekraken.sugar.node.fs.emptyDir",
                 "name": "emptyDir",
                 "type": "Function",
                 "platform": [
@@ -2064,6 +2146,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.emptyDirSync": {
+                "id": "@coffeekraken.sugar.node.fs.emptyDirSync",
                 "name": "emptyDirSync",
                 "type": "Function",
                 "platform": [
@@ -2093,6 +2176,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.ensureDir": {
+                "id": "@coffeekraken.sugar.node.fs.ensureDir",
                 "name": "ensureDir",
                 "type": "Function",
                 "platform": [
@@ -2123,6 +2207,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.ensureDirSync": {
+                "id": "@coffeekraken.sugar.node.fs.ensureDirSync",
                 "name": "ensureDirSync",
                 "type": "Function",
                 "platform": [
@@ -2152,6 +2237,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.ensureFile": {
+                "id": "@coffeekraken.sugar.node.fs.ensureFile",
                 "name": "ensureFile",
                 "type": "Function",
                 "platform": [
@@ -2182,6 +2268,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.ensureFileSync": {
+                "id": "@coffeekraken.sugar.node.fs.ensureFileSync",
                 "name": "ensureFileSync",
                 "type": "Function",
                 "platform": [
@@ -2211,6 +2298,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.exists": {
+                "id": "@coffeekraken.sugar.node.fs.exists",
                 "name": "exists",
                 "type": "Function",
                 "platform": [
@@ -2241,6 +2329,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.existsSync": {
+                "id": "@coffeekraken.sugar.node.fs.existsSync",
                 "name": "existsSync",
                 "type": "Function",
                 "platform": [
@@ -2270,6 +2359,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.extension": {
+                "id": "@coffeekraken.sugar.node.fs.extension",
                 "name": "extension",
                 "type": "Function",
                 "platform": [
@@ -2299,6 +2389,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.fileHash": {
+                "id": "@coffeekraken.sugar.node.fs.fileHash",
                 "name": "fileHash",
                 "type": "Function",
                 "platform": [
@@ -2332,6 +2423,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.filename": {
+                "id": "@coffeekraken.sugar.node.fs.filename",
                 "name": "filename",
                 "type": "Function",
                 "platform": [
@@ -2361,6 +2453,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.findUp": {
+                "id": "@coffeekraken.sugar.node.fs.findUp",
                 "name": "findUp",
                 "type": "Function",
                 "platform": [
@@ -2391,6 +2484,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.folderHash": {
+                "id": "@coffeekraken.sugar.node.fs.folderHash",
                 "name": "folderHash",
                 "type": "Function",
                 "platform": [
@@ -2424,6 +2518,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.folderPath": {
+                "id": "@coffeekraken.sugar.node.fs.folderPath",
                 "name": "folderPath",
                 "type": "Function",
                 "platform": [
@@ -2453,6 +2548,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.folderSize": {
+                "id": "@coffeekraken.sugar.node.fs.folderSize",
                 "name": "folderSize",
                 "type": "Function",
                 "platform": [
@@ -2483,6 +2579,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.formatFileSize": {
+                "id": "@coffeekraken.sugar.node.fs.formatFileSize",
                 "name": "formatFileSize",
                 "type": "Function",
                 "platform": [
@@ -2512,6 +2609,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.isPath": {
+                "id": "@coffeekraken.sugar.node.fs.isPath",
                 "name": "isPath",
                 "type": "Function",
                 "platform": [
@@ -2541,6 +2639,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.move": {
+                "id": "@coffeekraken.sugar.node.fs.move",
                 "name": "move",
                 "type": "Function",
                 "platform": [
@@ -2570,6 +2669,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.moveSync": {
+                "id": "@coffeekraken.sugar.node.fs.moveSync",
                 "name": "moveSync",
                 "type": "Function",
                 "platform": [
@@ -2599,6 +2699,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.pickOne": {
+                "id": "@coffeekraken.sugar.node.fs.pickOne",
                 "name": "pickOne",
                 "type": "Function",
                 "platform": [
@@ -2628,6 +2729,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.pool": {
+                "id": "@coffeekraken.sugar.node.fs.pool",
                 "name": "pool",
                 "type": "Function",
                 "platform": [
@@ -2658,6 +2760,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.prependToFileSync": {
+                "id": "@coffeekraken.sugar.node.fs.prependToFileSync",
                 "name": "prependToFileSync",
                 "type": "Function",
                 "platform": [
@@ -2687,6 +2790,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.readJson": {
+                "id": "@coffeekraken.sugar.node.fs.readJson",
                 "name": "readJson",
                 "type": "Function",
                 "platform": [
@@ -2716,6 +2820,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.readJsonSync": {
+                "id": "@coffeekraken.sugar.node.fs.readJsonSync",
                 "name": "readJsonSync",
                 "type": "Function",
                 "platform": [
@@ -2745,6 +2850,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.registerSFileClasses": {
+                "id": "@coffeekraken.sugar.node.fs.registerSFileClasses",
                 "name": "registerSFileClasses",
                 "type": "Function",
                 "platform": [
@@ -2763,6 +2869,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.remove": {
+                "id": "@coffeekraken.sugar.node.fs.remove",
                 "name": "remove",
                 "type": "Function",
                 "platform": [
@@ -2792,6 +2899,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.removeSync": {
+                "id": "@coffeekraken.sugar.node.fs.removeSync",
                 "name": "removeSync",
                 "type": "Function",
                 "platform": [
@@ -2821,6 +2929,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.writeFile": {
+                "id": "@coffeekraken.sugar.node.fs.writeFile",
                 "name": "writeFile",
                 "type": "Function",
                 "platform": [
@@ -2851,6 +2960,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.writeFileSync": {
+                "id": "@coffeekraken.sugar.node.fs.writeFileSync",
                 "name": "writeFileSync",
                 "type": "Function",
                 "platform": [
@@ -2880,6 +2990,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.writeJson": {
+                "id": "@coffeekraken.sugar.node.fs.writeJson",
                 "name": "writeJson",
                 "type": "Function",
                 "platform": [
@@ -2910,6 +3021,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.writeJsonSync": {
+                "id": "@coffeekraken.sugar.node.fs.writeJsonSync",
                 "name": "writeJsonSync",
                 "type": "Function",
                 "platform": [
@@ -2939,6 +3051,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.writeTmpFile": {
+                "id": "@coffeekraken.sugar.node.fs.writeTmpFile",
                 "name": "writeTmpFile",
                 "type": "Function",
                 "platform": [
@@ -2969,6 +3082,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.writeTmpFileSync": {
+                "id": "@coffeekraken.sugar.node.fs.writeTmpFileSync",
                 "name": "writeTmpFileSync",
                 "type": "Function",
                 "platform": [
@@ -2999,6 +3113,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.github.downloadRepository": {
+                "id": "@coffeekraken.sugar.node.github.downloadRepository",
                 "name": "downloadRepository",
                 "type": "Function",
                 "platform": [
@@ -3029,6 +3144,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.glob.matchGlob": {
+                "id": "@coffeekraken.sugar.node.glob.matchGlob",
                 "name": "matchGlob",
                 "type": "Function",
                 "platform": [
@@ -3058,6 +3174,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.glob.resolveGlob": {
+                "id": "@coffeekraken.sugar.node.glob.resolveGlob",
                 "name": "resolveGlob",
                 "type": "Function",
                 "platform": [
@@ -3087,6 +3204,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.is.childProcess": {
+                "id": "@coffeekraken.sugar.node.is.childProcess",
                 "name": "childProcess",
                 "type": "Function",
                 "platform": [
@@ -3116,6 +3234,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.is.directory": {
+                "id": "@coffeekraken.sugar.node.is.directory",
                 "name": "directory",
                 "type": "Function",
                 "platform": [
@@ -3145,6 +3264,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.is.file": {
+                "id": "@coffeekraken.sugar.node.is.file",
                 "name": "file",
                 "type": "Function",
                 "platform": [
@@ -3174,6 +3294,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.is.folder": {
+                "id": "@coffeekraken.sugar.node.is.folder",
                 "name": "folder",
                 "type": "Function",
                 "platform": [
@@ -3203,6 +3324,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.is.inPackage": {
+                "id": "@coffeekraken.sugar.node.is.inPackage",
                 "name": "inPackage",
                 "type": "Function",
                 "platform": [
@@ -3231,6 +3353,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.is.path": {
+                "id": "@coffeekraken.sugar.node.is.path",
                 "name": "path",
                 "type": "Function",
                 "platform": [
@@ -3260,6 +3383,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.is.symlink": {
+                "id": "@coffeekraken.sugar.node.is.symlink",
                 "name": "symlink",
                 "type": "Function",
                 "platform": [
@@ -3289,6 +3413,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.keyboard.hotkey": {
+                "id": "@coffeekraken.sugar.node.keyboard.hotkey",
                 "name": "hotkey",
                 "type": "Function",
                 "platform": [
@@ -3318,6 +3443,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.module.buildInNodeModules": {
+                "id": "@coffeekraken.sugar.node.module.buildInNodeModules",
                 "name": "buildInNodeModules",
                 "type": "Object",
                 "platform": [
@@ -3347,6 +3473,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.module.dependencyList": {
+                "id": "@coffeekraken.sugar.node.module.dependencyList",
                 "name": "dependencyList",
                 "type": "Function",
                 "platform": [
@@ -3377,6 +3504,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.module.dependencyTree": {
+                "id": "@coffeekraken.sugar.node.module.dependencyTree",
                 "name": "dependencyTree",
                 "type": "Function",
                 "platform": [
@@ -3407,6 +3535,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.module.extractImport": {
+                "id": "@coffeekraken.sugar.node.module.extractImport",
                 "name": "extractImport",
                 "type": "Function",
                 "platform": [
@@ -3436,6 +3565,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.monorepo.findPackages": {
+                "id": "@coffeekraken.sugar.node.monorepo.findPackages",
                 "name": "findPackages",
                 "type": "Function",
                 "platform": [
@@ -3466,6 +3596,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.monorepo.linkPackages": {
+                "id": "@coffeekraken.sugar.node.monorepo.linkPackages",
                 "name": "linkPackages",
                 "type": "Function",
                 "platform": [
@@ -3496,6 +3627,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.npm.install": {
+                "id": "@coffeekraken.sugar.node.npm.install",
                 "name": "install",
                 "type": "Function",
                 "platform": [
@@ -3526,6 +3658,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.npm.listNodeModulesPackages": {
+                "id": "@coffeekraken.sugar.node.npm.listNodeModulesPackages",
                 "name": "listNodeModulesPackages",
                 "type": "Function",
                 "platform": [
@@ -3555,6 +3688,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.npm.packageJson": {
+                "id": "@coffeekraken.sugar.node.npm.packageJson",
                 "name": "packageJson",
                 "type": "Function",
                 "platform": [
@@ -3584,6 +3718,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.npm.SNpmUnusedProcess": {
+                "id": "@coffeekraken.sugar.node.npm.SNpmUnusedProcess",
                 "name": "SNpmUnusedProcess",
                 "type": "Class",
                 "platform": [
@@ -3606,6 +3741,7 @@
                 "relPath": "src/node/npm/SNpmUnusedProcess.ts",
                 "children": {
                     "constructor": {
+                        "id": "90d95c4d6f0f0d206be3f8b6fe5297c7be7416c68b1b0cf54128a67bf660e1da",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -3617,6 +3753,7 @@
                         }
                     },
                     "process": {
+                        "id": "c6185374c6a3262920cb75092413d59d709304b1c4de574a1086cad6f713975a",
                         "name": "process",
                         "type": "Function",
                         "description": "Actual process execution",
@@ -3630,6 +3767,7 @@
                 }
             },
             "@coffeekraken.sugar.node.og.scrapeUrl": {
+                "id": "@coffeekraken.sugar.node.og.scrapeUrl",
                 "name": "scrapeUrl",
                 "type": "Function",
                 "platform": [
@@ -3660,6 +3798,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.package.json": {
+                "id": "@coffeekraken.sugar.node.package.json",
                 "name": "json",
                 "type": "Function",
                 "platform": [
@@ -3689,6 +3828,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.package.jsonSync": {
+                "id": "@coffeekraken.sugar.node.package.jsonSync",
                 "name": "jsonSync",
                 "type": "Function",
                 "platform": [
@@ -3717,6 +3857,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.package.namespace": {
+                "id": "@coffeekraken.sugar.node.package.namespace",
                 "name": "namespace",
                 "type": "Function",
                 "platform": [
@@ -3745,6 +3886,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.package.renamePackage": {
+                "id": "@coffeekraken.sugar.node.package.renamePackage",
                 "name": "renamePackage",
                 "type": "Function",
                 "platform": [
@@ -3773,6 +3915,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.replacePackageJsonTokens": {
+                "id": "@coffeekraken.sugar.node.path.replacePackageJsonTokens",
                 "name": "replacePackageJsonTokens",
                 "type": "Function",
                 "platform": [
@@ -3802,6 +3945,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.package.rootPath": {
+                "id": "@coffeekraken.sugar.node.package.rootPath",
                 "name": "rootPath",
                 "type": "Function",
                 "platform": [
@@ -3830,6 +3974,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.absolute": {
+                "id": "@coffeekraken.sugar.node.path.absolute",
                 "name": "absolute",
                 "type": "Function",
                 "platform": [
@@ -3855,6 +4000,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.distCssDir": {
+                "id": "@coffeekraken.sugar.node.path.distCssDir",
                 "name": "distCssDir",
                 "type": "Function",
                 "platform": [
@@ -3884,6 +4030,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.distDocDir": {
+                "id": "@coffeekraken.sugar.node.path.distDocDir",
                 "name": "distDocDir",
                 "type": "Function",
                 "platform": [
@@ -3913,6 +4060,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.distFontsDir": {
+                "id": "@coffeekraken.sugar.node.path.distFontsDir",
                 "name": "distFontsDir",
                 "type": "Function",
                 "platform": [
@@ -3942,6 +4090,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.distIconsDir": {
+                "id": "@coffeekraken.sugar.node.path.distIconsDir",
                 "name": "distIconsDir",
                 "type": "Function",
                 "platform": [
@@ -3971,6 +4120,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.distImgDir": {
+                "id": "@coffeekraken.sugar.node.path.distImgDir",
                 "name": "distImgDir",
                 "type": "Function",
                 "platform": [
@@ -4000,6 +4150,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.distJsDir": {
+                "id": "@coffeekraken.sugar.node.path.distJsDir",
                 "name": "distJsDir",
                 "type": "Function",
                 "platform": [
@@ -4029,6 +4180,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.distNodeDir": {
+                "id": "@coffeekraken.sugar.node.path.distNodeDir",
                 "name": "distNodeDir",
                 "type": "Function",
                 "platform": [
@@ -4058,6 +4210,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.distRootDir": {
+                "id": "@coffeekraken.sugar.node.path.distRootDir",
                 "name": "distRootDir",
                 "type": "Function",
                 "platform": [
@@ -4087,6 +4240,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.distViewsDir": {
+                "id": "@coffeekraken.sugar.node.path.distViewsDir",
                 "name": "distViewsDir",
                 "type": "Function",
                 "platform": [
@@ -4116,6 +4270,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.excludeGlobs": {
+                "id": "@coffeekraken.sugar.node.path.excludeGlobs",
                 "name": "excludeGlobs",
                 "type": "Function",
                 "platform": [
@@ -4145,6 +4300,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.isInPackage": {
+                "id": "@coffeekraken.sugar.node.path.isInPackage",
                 "name": "isInPackage",
                 "type": "Function",
                 "platform": [
@@ -4173,6 +4329,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.matchExcludeGlobs": {
+                "id": "@coffeekraken.sugar.node.path.matchExcludeGlobs",
                 "name": "matchExcludeGlobs",
                 "type": "Function",
                 "platform": [
@@ -4202,6 +4359,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.packageCacheDir": {
+                "id": "@coffeekraken.sugar.node.path.packageCacheDir",
                 "name": "packageCacheDir",
                 "type": "Function",
                 "platform": [
@@ -4231,6 +4389,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.packageLocalDir": {
+                "id": "@coffeekraken.sugar.node.fs.packageLocalDir",
                 "name": "packageLocalDir",
                 "type": "Function",
                 "platform": [
@@ -4260,6 +4419,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.packageRoot": {
+                "id": "@coffeekraken.sugar.node.path.packageRoot",
                 "name": "packageRoot",
                 "type": "Function",
                 "platform": [
@@ -4288,6 +4448,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.packageRootDir": {
+                "id": "@coffeekraken.sugar.node.path.packageRootDir",
                 "name": "packageRootDir",
                 "type": "Function",
                 "platform": [
@@ -4317,6 +4478,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.packageTmpDir": {
+                "id": "@coffeekraken.sugar.node.path.packageTmpDir",
                 "name": "packageTmpDir",
                 "type": "Function",
                 "platform": [
@@ -4346,6 +4508,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.relative": {
+                "id": "@coffeekraken.sugar.node.path.relative",
                 "name": "relative",
                 "type": "Function",
                 "platform": [
@@ -4371,6 +4534,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.replacePathTokens": {
+                "id": "@coffeekraken.sugar.node.path.replacePathTokens",
                 "name": "replacePathTokens",
                 "type": "Function",
                 "platform": [
@@ -4400,6 +4564,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.srcCssDir": {
+                "id": "@coffeekraken.sugar.node.path.srcCssDir",
                 "name": "srcCssDir",
                 "type": "Function",
                 "platform": [
@@ -4429,6 +4594,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.srcDocDir": {
+                "id": "@coffeekraken.sugar.node.path.srcDocDir",
                 "name": "srcDocDir",
                 "type": "Function",
                 "platform": [
@@ -4458,6 +4624,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.srcFontsDir": {
+                "id": "@coffeekraken.sugar.node.path.srcFontsDir",
                 "name": "srcFontsDir",
                 "type": "Function",
                 "platform": [
@@ -4487,6 +4654,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.srcIconsDir": {
+                "id": "@coffeekraken.sugar.node.path.srcIconsDir",
                 "name": "srcIconsDir",
                 "type": "Function",
                 "platform": [
@@ -4516,6 +4684,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.srcImgDir": {
+                "id": "@coffeekraken.sugar.node.path.srcImgDir",
                 "name": "srcImgDir",
                 "type": "Function",
                 "platform": [
@@ -4545,6 +4714,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.srcJsDir": {
+                "id": "@coffeekraken.sugar.node.path.srcJsDir",
                 "name": "srcJsDir",
                 "type": "Function",
                 "platform": [
@@ -4574,6 +4744,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.srcNodeDir": {
+                "id": "@coffeekraken.sugar.node.path.srcNodeDir",
                 "name": "srcNodeDir",
                 "type": "Function",
                 "platform": [
@@ -4603,6 +4774,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.srcRootDir": {
+                "id": "@coffeekraken.sugar.node.path.srcRootDir",
                 "name": "srcRootDir",
                 "type": "Function",
                 "platform": [
@@ -4632,6 +4804,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.srcViewsDir": {
+                "id": "@coffeekraken.sugar.node.path.srcViewsDir",
                 "name": "srcViewsDir",
                 "type": "Function",
                 "platform": [
@@ -4661,6 +4834,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.sugarRootDir": {
+                "id": "@coffeekraken.sugar.node.path.sugarRootDir",
                 "name": "sugarRootDir",
                 "type": "Function",
                 "platform": [
@@ -4690,6 +4864,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.path.systemTmpDir": {
+                "id": "@coffeekraken.sugar.node.path.systemTmpDir",
                 "name": "systemTmpDir",
                 "type": "Function",
                 "platform": [
@@ -4719,6 +4894,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.php.execPhp": {
+                "id": "@coffeekraken.sugar.node.php.execPhp",
                 "name": "execPhp",
                 "type": "Function",
                 "platform": [
@@ -4742,6 +4918,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.process.exitCleanup": {
+                "id": "@coffeekraken.sugar.node.process.exitCleanup",
                 "name": "exitCleanup",
                 "type": "Function",
                 "platform": [
@@ -4772,6 +4949,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.process.kill": {
+                "id": "@coffeekraken.sugar.node.process.kill",
                 "name": "kill",
                 "type": "Function",
                 "platform": [
@@ -4802,6 +4980,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.process.onProcessExit222": {
+                "id": "@coffeekraken.sugar.node.process.onProcessExit222",
                 "name": "onProcessExit222",
                 "type": "Function",
                 "platform": [
@@ -4830,6 +5009,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.process.spawn": {
+                "id": "@coffeekraken.sugar.node.process.spawn",
                 "name": "spawn",
                 "type": "Function",
                 "platform": [
@@ -4860,6 +5040,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.php.detectType": {
+                "id": "@coffeekraken.sugar.node.php.detectType",
                 "name": "detectType",
                 "type": "Function",
                 "platform": [
@@ -4883,6 +5064,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.terminal.countLine": {
+                "id": "@coffeekraken.sugar.node.terminal.countLine",
                 "name": "countLine",
                 "type": "Function",
                 "platform": [
@@ -4912,6 +5094,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.token.replaceTokens": {
+                "id": "@coffeekraken.sugar.node.token.replaceTokens",
                 "name": "replaceTokens",
                 "type": "Function",
                 "platform": [
@@ -4941,6 +5124,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.type.resolveTypeString": {
+                "id": "@coffeekraken.sugar.node.type.resolveTypeString",
                 "name": "resolveTypeString",
                 "type": "Function",
                 "platform": [
@@ -4970,6 +5154,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.zip.unzip": {
+                "id": "@coffeekraken.sugar.node.zip.unzip",
                 "name": "unzip",
                 "type": "Function",
                 "platform": [
@@ -5000,6 +5185,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.array.deepMerge": {
+                "id": "@coffeekraken.sugar.php.array.deepMerge",
                 "name": "deepMerge",
                 "type": "Function",
                 "platform": [
@@ -5029,6 +5215,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.array.pickRandom": {
+                "id": "@coffeekraken.sugar.php.array.pickRandom",
                 "name": "pickRandom",
                 "type": "Function",
                 "platform": [
@@ -5058,6 +5245,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.gravatar.url": {
+                "id": "@coffeekraken.sugar.php.gravatar.url",
                 "name": "url",
                 "type": "Function",
                 "platform": [
@@ -5087,6 +5275,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.html.expandPleasantCssClassnames": {
+                "id": "@coffeekraken.sugar.php.html.expandPleasantCssClassnames",
                 "name": "expandPleasantCssClassnames",
                 "type": "Function",
                 "platform": [
@@ -5116,6 +5305,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.is.absolutePath": {
+                "id": "@coffeekraken.sugar.php.is.absolutePath",
                 "name": "absolutePath",
                 "type": "Function",
                 "platform": [
@@ -5145,6 +5335,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.is.url": {
+                "id": "@coffeekraken.sugar.php.is.url",
                 "name": "url",
                 "type": "Function",
                 "platform": [
@@ -5174,6 +5365,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.markdown.toHtml": {
+                "id": "@coffeekraken.sugar.php.markdown.toHtml",
                 "name": "toHtml",
                 "type": "Function",
                 "platform": [
@@ -5203,6 +5395,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.network.ipAddress": {
+                "id": "@coffeekraken.sugar.php.network.ipAddress",
                 "name": "ipAddress",
                 "type": "Function",
                 "platform": [
@@ -5232,6 +5425,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.string.generateRandomString": {
+                "id": "@coffeekraken.sugar.php.string.generateRandomString",
                 "name": "generateRandomString",
                 "type": "Function",
                 "platform": [
@@ -5261,6 +5455,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.string.idCompliant": {
+                "id": "@coffeekraken.sugar.php.string.idCompliant",
                 "name": "idCompliant",
                 "type": "Function",
                 "platform": [
@@ -5290,6 +5485,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.string.replaceTokens": {
+                "id": "@coffeekraken.sugar.php.string.replaceTokens",
                 "name": "replaceTokens",
                 "type": "Function",
                 "platform": [
@@ -5319,6 +5515,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.string.simplifySpecialChars": {
+                "id": "@coffeekraken.sugar.php.string.simplifySpecialChars",
                 "name": "simplifySpecialChars",
                 "type": "Function",
                 "platform": [
@@ -5348,6 +5545,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.string.toString": {
+                "id": "@coffeekraken.sugar.php.string.toString",
                 "name": "toString",
                 "type": "Function",
                 "platform": [
@@ -5377,6 +5575,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.php.url.currentUrl": {
+                "id": "@coffeekraken.sugar.php.url.currentUrl",
                 "name": "currentUrl",
                 "type": "Function",
                 "platform": [
@@ -5406,6 +5605,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.array.asyncForEach": {
+                "id": "@coffeekraken.sugar.js.array.asyncForEach",
                 "name": "asyncForEach",
                 "type": "Function",
                 "platform": [
@@ -5438,6 +5638,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.array.keysFirst": {
+                "id": "@coffeekraken.sugar.js.array.keysFirst",
                 "name": "keysFirst",
                 "type": "Function",
                 "platform": [
@@ -5470,6 +5671,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.array.keysLast": {
+                "id": "@coffeekraken.sugar.js.array.keysLast",
                 "name": "keysLast",
                 "type": "Function",
                 "platform": [
@@ -5502,6 +5704,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.array.pickRandom": {
+                "id": "@coffeekraken.sugar.shared.array.pickRandom",
                 "name": "pickRandom",
                 "type": "Function",
                 "platform": [
@@ -5535,6 +5738,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.array.proxy": {
+                "id": "@coffeekraken.sugar.js.array.proxy",
                 "name": "proxy",
                 "type": "Function",
                 "platform": [
@@ -5566,6 +5770,7 @@
                 "relPath": "src/shared/array/proxy.ts",
                 "children": {
                     "watch": {
+                        "id": "323286e361e32ea507e04012c332677d59ce3eea2473cfcb64d9bb2a7488d748",
                         "name": "watch",
                         "type": "Function",
                         "description": "This method allows you to specify which Array methods you want to watch by passing an array of methods names like ['push','pop'].\nYou can also specify the handler function that will be called on each array updates, etc...",
@@ -5582,6 +5787,7 @@
                         }
                     },
                     "unwatch": {
+                        "id": "56ee2c06d624f8982e804645af5ec02bf435c1d8af4240a5b4f409159855139c",
                         "name": "unwatch",
                         "type": "Function",
                         "description": "This methods allows you to unwatch a process started with the \"watch\" method.\nYou have to pass as parameter the watchId that the \"watch\" method has returned you.",
@@ -5600,6 +5806,7 @@
                 }
             },
             "@coffeekraken.sugar.shared.array.sameItems": {
+                "id": "@coffeekraken.sugar.shared.array.sameItems",
                 "name": "sameItems",
                 "type": "Function",
                 "description": "This function take two arrays and return all the items that are the same.\nYou can specify if you want only comparing by reference for object, etc... or if\nyou want to transform items in hashes and compare that instead.",
@@ -5622,6 +5829,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.array.splitEvery": {
+                "id": "@coffeekraken.sugar.js.array.splitEvery",
                 "name": "splitEvery",
                 "type": "Function",
                 "platform": [
@@ -5654,6 +5862,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.array.unique": {
+                "id": "@coffeekraken.sugar.js.array.unique",
                 "name": "unique",
                 "type": "Function",
                 "platform": [
@@ -5687,6 +5896,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.ascii.sugarBanner": {
+                "id": "@coffeekraken.sugar.shared.ascii.sugarBanner",
                 "name": "sugarBanner",
                 "type": "Function",
                 "platform": [
@@ -5720,6 +5930,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.cli.argsToString": {
+                "id": "@coffeekraken.sugar.js.cli.argsToString",
                 "name": "argsToString",
                 "type": "Function",
                 "platform": [
@@ -5753,6 +5964,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.cli.buildCommandLine": {
+                "id": "@coffeekraken.sugar.js.cli.buildCommandLine",
                 "name": "buildCommandLine",
                 "type": "Function",
                 "platform": [
@@ -5786,6 +5998,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.cli.parseArgs": {
+                "id": "@coffeekraken.sugar.js.cli.parseArgs",
                 "name": "parseArgs",
                 "type": "Function",
                 "platform": [
@@ -5819,6 +6032,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.convert": {
+                "id": "@coffeekraken.sugar.js.color.convert",
                 "name": "convert",
                 "type": "Function",
                 "platform": [
@@ -5852,6 +6066,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.hex2rgba": {
+                "id": "@coffeekraken.sugar.js.color.hex2rgba",
                 "name": "hex2rgba",
                 "type": "Function",
                 "platform": [
@@ -5885,6 +6100,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.hsl2rgba": {
+                "id": "@coffeekraken.sugar.js.color.hsl2rgba",
                 "name": "hsl2rgba",
                 "type": "Function",
                 "platform": [
@@ -5918,6 +6134,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.parseHsla": {
+                "id": "@coffeekraken.sugar.js.color.parseHsla",
                 "name": "parseHsla",
                 "type": "Function",
                 "platform": [
@@ -5951,6 +6168,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.parseRgba": {
+                "id": "@coffeekraken.sugar.js.color.parseRgba",
                 "name": "parseRgba",
                 "type": "Function",
                 "platform": [
@@ -5984,6 +6202,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.rgba2hex": {
+                "id": "@coffeekraken.sugar.js.color.rgba2hex",
                 "name": "rgba2hex",
                 "type": "Function",
                 "platform": [
@@ -6017,6 +6236,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.rgba2hsla": {
+                "id": "@coffeekraken.sugar.js.color.rgba2hsla",
                 "name": "rgba2hsla",
                 "type": "Function",
                 "platform": [
@@ -6050,6 +6270,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.console.parseHtml": {
+                "id": "@coffeekraken.sugar.js.console.parseHtml",
                 "name": "parseHtml",
                 "type": "Function",
                 "platform": [
@@ -6077,6 +6298,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.core.activeSpace": {
+                "id": "@coffeekraken.sugar.js.core.activeSpace",
                 "name": "activeSpace",
                 "type": "Object",
                 "platform": [
@@ -6109,6 +6331,7 @@
                 "relPath": "src/shared/core/activeSpace.ts",
                 "children": {
                     "get": {
+                        "id": "8bc6c7c0cc031bd56bf9aee85032353a29445a956caa8225fa9bb0d7d5bb4d9c",
                         "name": "get",
                         "type": "Function",
                         "description": "This function allows you to get the current active space",
@@ -6120,6 +6343,7 @@
                         }
                     },
                     "set": {
+                        "id": "f6e538fc9bf6d8594e2fec49023883a5b98365e7737ce257463022149ce377f1",
                         "name": "set",
                         "type": "Function",
                         "description": "This function allows you to set the current active space",
@@ -6131,6 +6355,7 @@
                         }
                     },
                     "append": {
+                        "id": "406c51962d62763053591fd2c0aee50c805479bea4ea38c9d80880331262dc58",
                         "name": "append",
                         "type": "Function",
                         "description": "This function take the current activeSpace string and add the passed one to set the new activeSpace string",
@@ -6142,6 +6367,7 @@
                         }
                     },
                     "remove": {
+                        "id": "1e5ee55bbffd541c7ee179785b1e79a5e7fd499f3d65615b93b77202fe00ef9d",
                         "name": "remove",
                         "type": "Function",
                         "description": "This function simply remove the passed string from the activeSpace stack",
@@ -6153,6 +6379,7 @@
                         }
                     },
                     "previous": {
+                        "id": "86d7c56f4bad6f7556b78471bbf159aed746b190909bd8979256308c9c6316a9",
                         "name": "previous",
                         "type": "Function",
                         "description": "This function simply go back by 1 in the activeSpace stack",
@@ -6164,6 +6391,7 @@
                         }
                     },
                     "is": {
+                        "id": "f7b905a3cf4031838fb1baa241b3a28b63680e119c415425faa1c03a8c12af26",
                         "name": "is",
                         "type": "Function",
                         "description": "This function allows you to check if the active space string that you pass match with the current active space or not.\nThe checking process is done using the \"minimatch\" package that let you use cool features like \"\", \"**\", etc...",
@@ -6175,6 +6403,7 @@
                         }
                     },
                     "on": {
+                        "id": "cab4d85175b8a34c4df67127cbf3744c1140457f3d0978bb8016a37b3e32ef55",
                         "name": "on",
                         "type": "Function",
                         "description": "This function allows you to register a callback linked with an activeSpace string\nthat will be called once the activeSpace is matched",
@@ -6188,6 +6417,7 @@
                 }
             },
             "@coffeekraken.sugar.js.crypt.aes": {
+                "id": "@coffeekraken.sugar.js.crypt.aes",
                 "name": "aes",
                 "type": "Object",
                 "platform": [
@@ -6214,6 +6444,7 @@
                 "relPath": "src/shared/crypt/aes.ts",
                 "children": {
                     "encrypt": {
+                        "id": "cc0a549152c7bf2403b6f1dfc9fedef380bf164b152cef70196670981ed03f11",
                         "name": "encrypt",
                         "type": "Function",
                         "description": "Encrypt",
@@ -6224,6 +6455,7 @@
                         }
                     },
                     "decrypt": {
+                        "id": "3cd6280bcd24b0d3d03fc023e80f0e4f7bce5650116038075b99c5d5e41b40b4",
                         "name": "decrypt",
                         "type": "Function",
                         "description": "Decrypt",
@@ -6236,6 +6468,7 @@
                 }
             },
             "@coffeekraken.sugar.js.crypt.base64": {
+                "id": "@coffeekraken.sugar.js.crypt.base64",
                 "name": "base64",
                 "type": "Object",
                 "platform": [
@@ -6262,6 +6495,7 @@
                 "relPath": "src/shared/crypt/base64.ts",
                 "children": {
                     "encrypt": {
+                        "id": "c783e86de6e337100507b99c3a4aaed0943ed1cc305ad66fedeed75c6bca8725",
                         "name": "encrypt",
                         "type": "Function",
                         "description": "Encrypt",
@@ -6273,6 +6507,7 @@
                         }
                     },
                     "decrypt": {
+                        "id": "62623d72c1185072541b07dbefdb419ac3938bd540e91c218bb074c7fbe6d4ba",
                         "name": "decrypt",
                         "type": "Function",
                         "description": "Decrypt",
@@ -6286,6 +6521,7 @@
                 }
             },
             "@coffeekraken.sugar.js.crypt.md5": {
+                "id": "@coffeekraken.sugar.js.crypt.md5",
                 "name": "md5",
                 "type": "Object",
                 "platform": [
@@ -6312,6 +6548,7 @@
                 "relPath": "src/shared/crypt/md5.ts",
                 "children": {
                     "encrypt": {
+                        "id": "4ac7787e432691a98148698f2c45e6fb66ecd40724de239512e647434b8971be",
                         "name": "encrypt",
                         "type": "Function",
                         "description": "Encrypt",
@@ -6322,6 +6559,7 @@
                         }
                     },
                     "decrypt": {
+                        "id": "9893ce4e78964c19b9570c8ae76b5c4395195d06a5cd5278b2a96dc6df13cca0",
                         "name": "decrypt",
                         "type": "Function",
                         "description": "Decrypt",
@@ -6334,6 +6572,7 @@
                 }
             },
             "@coffeekraken.sugar.js.crypt.object": {
+                "id": "@coffeekraken.sugar.js.crypt.object",
                 "name": "object",
                 "type": "Object",
                 "platform": [
@@ -6360,6 +6599,7 @@
                 "relPath": "src/shared/crypt/object.ts",
                 "children": {
                     "encrypt": {
+                        "id": "957358f634c84e7b8a4f0f7b4f8ed3904a3ab1b550389e57ef8e8c31edabe5d7",
                         "name": "encrypt",
                         "type": "Function",
                         "description": "Encrypt",
@@ -6370,6 +6610,7 @@
                         }
                     },
                     "decrypt": {
+                        "id": "201ab1edf5eb7afc6c33b354c361a57a3bec9c3301d58996ed3af40d34cb2bd1",
                         "name": "decrypt",
                         "type": "Function",
                         "description": "Decrypt",
@@ -6382,6 +6623,7 @@
                 }
             },
             "@coffeekraken.sugar.js.crypt.sha256": {
+                "id": "@coffeekraken.sugar.js.crypt.sha256",
                 "name": "sha256",
                 "type": "Object",
                 "platform": [
@@ -6408,6 +6650,7 @@
                 "relPath": "src/shared/crypt/sha256.ts",
                 "children": {
                     "encrypt": {
+                        "id": "4ac7787e432691a98148698f2c45e6fb66ecd40724de239512e647434b8971be",
                         "name": "encrypt",
                         "type": "Function",
                         "description": "Encrypt",
@@ -6418,6 +6661,7 @@
                         }
                     },
                     "decrypt": {
+                        "id": "9893ce4e78964c19b9570c8ae76b5c4395195d06a5cd5278b2a96dc6df13cca0",
                         "name": "decrypt",
                         "type": "Function",
                         "description": "Decrypt",
@@ -6430,6 +6674,7 @@
                 }
             },
             "@coffeekraken.sugar.js.crypt.sha512": {
+                "id": "@coffeekraken.sugar.js.crypt.sha512",
                 "name": "sha512",
                 "type": "Object",
                 "platform": [
@@ -6456,6 +6701,7 @@
                 "relPath": "src/shared/crypt/sha512.ts",
                 "children": {
                     "encrypt": {
+                        "id": "4ac7787e432691a98148698f2c45e6fb66ecd40724de239512e647434b8971be",
                         "name": "encrypt",
                         "type": "Function",
                         "description": "Encrypt",
@@ -6466,6 +6712,7 @@
                         }
                     },
                     "decrypt": {
+                        "id": "9893ce4e78964c19b9570c8ae76b5c4395195d06a5cd5278b2a96dc6df13cca0",
                         "name": "decrypt",
                         "type": "Function",
                         "description": "Decrypt",
@@ -6478,6 +6725,7 @@
                 }
             },
             "@coffeekraken.sugar.shared.css.isValidUnitValue": {
+                "id": "@coffeekraken.sugar.shared.css.isValidUnitValue",
                 "name": "isValidUnitValue",
                 "type": "Function",
                 "platform": [
@@ -6511,6 +6759,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.css.stripCssComments": {
+                "id": "@coffeekraken.sugar.js.css.stripCssComments",
                 "name": "stripCssComments",
                 "type": "Function",
                 "platform": [
@@ -6544,6 +6793,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.date.utcTime": {
+                "id": "@coffeekraken.sugar.shared.date.utcTime",
                 "name": "utcTime",
                 "type": "Function",
                 "platform": [
@@ -6577,6 +6827,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.availableEasingsArray": {
+                "id": "@coffeekraken.sugar.js.easing.availableEasingsArray",
                 "name": "availableEasingsArray",
                 "type": "Function",
                 "platform": [
@@ -6604,6 +6855,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeInCubic": {
+                "id": "@coffeekraken.sugar.js.easing.easeInCubic",
                 "name": "easeInCubic",
                 "type": "Function",
                 "platform": [
@@ -6631,6 +6883,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeInOutCubic": {
+                "id": "@coffeekraken.sugar.js.easing.easeInOutCubic",
                 "name": "easeInOutCubic",
                 "type": "Function",
                 "platform": [
@@ -6658,6 +6911,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeInOutQuad": {
+                "id": "@coffeekraken.sugar.js.easing.easeInOutQuad",
                 "name": "easeInOutQuad",
                 "type": "Function",
                 "platform": [
@@ -6685,6 +6939,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeInOutQuart": {
+                "id": "@coffeekraken.sugar.js.easing.easeInOutQuart",
                 "name": "easeInOutQuart",
                 "type": "Function",
                 "platform": [
@@ -6712,6 +6967,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeInOutQuint": {
+                "id": "@coffeekraken.sugar.js.easing.easeInOutQuint",
                 "name": "easeInOutQuint",
                 "type": "Function",
                 "platform": [
@@ -6739,6 +6995,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeInQuad": {
+                "id": "@coffeekraken.sugar.js.easing.easeInQuad",
                 "name": "easeInQuad",
                 "type": "Function",
                 "platform": [
@@ -6766,6 +7023,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeInQuart": {
+                "id": "@coffeekraken.sugar.js.easing.easeInQuart",
                 "name": "easeInQuart",
                 "type": "Function",
                 "platform": [
@@ -6793,6 +7051,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeInQuint": {
+                "id": "@coffeekraken.sugar.js.easing.easeInQuint",
                 "name": "easeInQuint",
                 "type": "Function",
                 "platform": [
@@ -6820,6 +7079,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeOutCubic": {
+                "id": "@coffeekraken.sugar.js.easing.easeOutCubic",
                 "name": "easeOutCubic",
                 "type": "Function",
                 "platform": [
@@ -6847,6 +7107,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeOutQuad": {
+                "id": "@coffeekraken.sugar.js.easing.easeOutQuad",
                 "name": "easeOutQuad",
                 "type": "Function",
                 "platform": [
@@ -6874,6 +7135,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeOutQuart": {
+                "id": "@coffeekraken.sugar.js.easing.easeOutQuart",
                 "name": "easeOutQuart",
                 "type": "Function",
                 "platform": [
@@ -6901,6 +7163,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.easeOutQuint": {
+                "id": "@coffeekraken.sugar.js.easing.easeOutQuint",
                 "name": "easeOutQuint",
                 "type": "Function",
                 "platform": [
@@ -6928,6 +7191,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.easing.linear": {
+                "id": "@coffeekraken.sugar.js.easing.linear",
                 "name": "linear",
                 "type": "Function",
                 "platform": [
@@ -6955,6 +7219,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.env.env": {
+                "id": "@coffeekraken.sugar.js.env.env",
                 "name": "env",
                 "type": "Function",
                 "platform": [
@@ -6988,6 +7253,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.es6.SEs6Import": {
+                "id": "@coffeekraken.sugar.js.es6.SEs6Import",
                 "name": "SEs6Import",
                 "type": "Class",
                 "platform": [
@@ -7019,6 +7285,7 @@
                 "relPath": "src/shared/es6/SEs6Import.ts",
                 "children": {
                     "parsecode": {
+                        "id": "a1595353b7cfd5b2e6112b388ab667c49bf19d36f412978688360565dc533e21",
                         "name": "parseCode",
                         "type": "Function",
                         "description": "This function simply parse the passed code and return an array of all the\nfounded es6 imports",
@@ -7030,6 +7297,7 @@
                         }
                     },
                     "raw": {
+                        "id": "d6d289cf5f575f018b7b5f20257521b0136abe65991183d6098644f52de35f2a",
                         "name": "raw",
                         "type": "String",
                         "description": "Store the raw statement string",
@@ -7040,6 +7308,7 @@
                         }
                     },
                     "path": {
+                        "id": "411cc4c44c0b359823b49754ce8d9f0dbbc5f36712a4b35ce8e1d0917ebd6ce3",
                         "name": "path",
                         "type": "String",
                         "description": "Store the statement path",
@@ -7050,6 +7319,7 @@
                         }
                     },
                     "default": {
+                        "id": "01ceea9b7b08bb98da426d773364fa367742799492646436e720d3c05ab3c7b1",
                         "name": "default",
                         "type": "String",
                         "description": "Store the statement default import name",
@@ -7060,6 +7330,7 @@
                         }
                     },
                     "star": {
+                        "id": "fff9e1bc79978e8a74e36830cc2dad2e858d25a5d2f599b6976c55441b17b102",
                         "name": "star",
                         "type": "String",
                         "description": "Store the statement star name like \"import\nas coco from ...\"",
@@ -7070,6 +7341,7 @@
                         }
                     },
                     "named": {
+                        "id": "c70583a79be2b73a86db0bb0a83907ff76bcfc5125a7179a1533815e94e5f6a2",
                         "name": "named",
                         "type": "Array<Object>",
                         "description": "Store the statement named imports with these properties:\n- name {String}: The import name\n- as {String}: The import as alias",
@@ -7080,6 +7352,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "6aa2402964c1da24bb7f1ec0626e955bd10531337af52b852142f53f51ecb420",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -7090,6 +7363,7 @@
                         }
                     },
                     "tostring": {
+                        "id": "284cf311059f9a860cb590a0c043e4f8bd6dc27fe6fd36613f98bae29f9f35dd",
                         "name": "toString",
                         "type": "Function",
                         "description": "Return the builded version of the import",
@@ -7102,6 +7376,7 @@
                 }
             },
             "@coffeekraken.sugar.shared.extension.commonAudioFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonAudioFileExtensions",
                 "name": "commonAudioFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7135,6 +7410,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonCompressedFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonCompressedFileExtensions",
                 "name": "commonCompressedFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7168,6 +7444,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonDataFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonDataFileExtensions",
                 "name": "commonDataFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7201,6 +7478,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonDiscFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonDiscFileExtensions",
                 "name": "commonDiscFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7234,6 +7512,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonEmailFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonEmailFileExtensions",
                 "name": "commonEmailFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7267,6 +7546,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonExecutableFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonExecutableFileExtensions",
                 "name": "commonExecutableFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7300,6 +7580,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonFileExtensions",
                 "name": "commonFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7333,6 +7614,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonFontFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonFontFileExtensions",
                 "name": "commonFontFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7366,6 +7648,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonImageFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonImageFileExtensions",
                 "name": "commonImageFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7399,6 +7682,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonMediaFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonMediaFileExtensions",
                 "name": "commonMediaFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7432,6 +7716,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonProgrammingFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonProgrammingFileExtensions",
                 "name": "commonProgrammingFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7465,6 +7750,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonTextFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonTextFileExtensions",
                 "name": "commonTextFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7498,6 +7784,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.extension.commonWebFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonWebFileExtensions",
                 "name": "commonWebFileExtensions",
                 "type": "Function",
                 "platform": [
@@ -7531,6 +7818,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.function.debounce": {
+                "id": "@coffeekraken.sugar.js.function.debounce",
                 "name": "debounce",
                 "type": "Function",
                 "platform": [
@@ -7564,6 +7852,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.function.easeInterval": {
+                "id": "@coffeekraken.sugar.shared.function.easeInterval",
                 "name": "easeInterval",
                 "type": "Function",
                 "platform": [
@@ -7593,6 +7882,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.function.getArgsNames": {
+                "id": "@coffeekraken.sugar.shared.function.getArgsNames",
                 "name": "getArgsNames",
                 "type": "Function",
                 "platform": [
@@ -7626,6 +7916,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.function.memoize": {
+                "id": "@coffeekraken.sugar.shared.function.memoize",
                 "name": "memoize",
                 "type": "Function",
                 "platform": [
@@ -7659,6 +7950,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.function.setRecursiveTimeout": {
+                "id": "@coffeekraken.sugar.js.function.setRecursiveTimeout",
                 "name": "setRecursiveTimeout",
                 "type": "Function",
                 "platform": [
@@ -7692,6 +7984,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.function.sleep": {
+                "id": "@coffeekraken.sugar.js.function.sleep",
                 "name": "sleep",
                 "type": "Function",
                 "platform": [
@@ -7725,6 +8018,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.function.throttle": {
+                "id": "@coffeekraken.sugar.js.function.throttle",
                 "name": "throttle",
                 "type": "Function",
                 "platform": [
@@ -7758,6 +8052,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.geom.2d.circleConstrain": {
+                "id": "@coffeekraken.sugar.js.geom.2d.circleConstrain",
                 "name": "circleConstrain",
                 "type": "Function",
                 "platform": [
@@ -7791,6 +8086,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.geom.2d.distanceBetween": {
+                "id": "@coffeekraken.sugar.js.geom.2d.distanceBetween",
                 "name": "distanceBetween",
                 "type": "Function",
                 "platform": [
@@ -7824,6 +8120,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.glob.expandGlob": {
+                "id": "@coffeekraken.sugar.js.glob.expandGlob",
                 "name": "expandGlob",
                 "type": "Function",
                 "platform": [
@@ -7857,6 +8154,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.glob.extractGlob": {
+                "id": "@coffeekraken.sugar.js.glob.extractGlob",
                 "name": "extractGlob",
                 "type": "Function",
                 "platform": [
@@ -7890,6 +8188,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.glob.extractNoneGlob": {
+                "id": "@coffeekraken.sugar.js.glob.extractNoneGlob",
                 "name": "extractNoneGlob",
                 "type": "Function",
                 "platform": [
@@ -7923,6 +8222,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.html.expandPleasantCssClassname": {
+                "id": "@coffeekraken.sugar.shared.html.expandPleasantCssClassname",
                 "name": "expandPleasantCssClassname",
                 "type": "Function",
                 "platform": [
@@ -7956,6 +8256,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.html.expandPleasantCssClassnames": {
+                "id": "@coffeekraken.sugar.shared.html.expandPleasantCssClassnames",
                 "name": "expandPleasantCssClassnames",
                 "type": "Function",
                 "platform": [
@@ -7989,6 +8290,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.html.extractCssClassesNames": {
+                "id": "@coffeekraken.sugar.shared.html.extractCssClassesNames",
                 "name": "extractCssClassesNames",
                 "type": "Function",
                 "platform": [
@@ -8022,6 +8324,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.html.replaceTags": {
+                "id": "@coffeekraken.sugar.js.html.replaceTags",
                 "name": "replaceTags",
                 "type": "Function",
                 "platform": [
@@ -8055,6 +8358,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.html.striptags": {
+                "id": "@coffeekraken.sugar.js.html.striptags",
                 "name": "striptags",
                 "type": "Function",
                 "platform": [
@@ -8088,6 +8392,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.html.unescapeHtml": {
+                "id": "@coffeekraken.sugar.shared.html.unescapeHtml",
                 "name": "unescapeHtml",
                 "type": "Function",
                 "platform": [
@@ -8121,6 +8426,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isArray": {
+                "id": "@coffeekraken.sugar.js.is.isArray",
                 "name": "isArray",
                 "type": "Function",
                 "platform": [
@@ -8154,6 +8460,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isBase64": {
+                "id": "@coffeekraken.sugar.js.is.isBase64",
                 "name": "isBase64",
                 "type": "Function",
                 "platform": [
@@ -8187,6 +8494,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isBoolean": {
+                "id": "@coffeekraken.sugar.js.is.isBoolean",
                 "name": "isBoolean",
                 "type": "Function",
                 "platform": [
@@ -8220,6 +8528,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isBrowser": {
+                "id": "@coffeekraken.sugar.js.is.isBrowser",
                 "name": "isBrowser",
                 "type": "Function",
                 "platform": [
@@ -8253,6 +8562,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.class": {
+                "id": "@coffeekraken.sugar.js.is.class",
                 "name": "class",
                 "type": "Function",
                 "platform": [
@@ -8286,6 +8596,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.is.isClassInstance": {
+                "id": "@coffeekraken.sugar.shared.is.isClassInstance",
                 "name": "isClassInstance",
                 "type": "Function",
                 "platform": [
@@ -8319,6 +8630,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isColor": {
+                "id": "@coffeekraken.sugar.js.is.isColor",
                 "name": "isColor",
                 "type": "Function",
                 "platform": [
@@ -8352,6 +8664,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isDdmmyyyyDate": {
+                "id": "@coffeekraken.sugar.js.is.isDdmmyyyyDate",
                 "name": "isDdmmyyyyDate",
                 "type": "Function",
                 "platform": [
@@ -8385,6 +8698,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isEmail": {
+                "id": "@coffeekraken.sugar.js.is.isEmail",
                 "name": "isEmail",
                 "type": "Function",
                 "platform": [
@@ -8418,6 +8732,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isEven": {
+                "id": "@coffeekraken.sugar.js.is.isEven",
                 "name": "isEven",
                 "type": "Function",
                 "platform": [
@@ -8451,6 +8766,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isFunction": {
+                "id": "@coffeekraken.sugar.js.is.isFunction",
                 "name": "isFunction",
                 "type": "Function",
                 "platform": [
@@ -8484,6 +8800,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isGlob": {
+                "id": "@coffeekraken.sugar.js.is.isGlob",
                 "name": "isGlob",
                 "type": "Function",
                 "platform": [
@@ -8517,6 +8834,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isInteger": {
+                "id": "@coffeekraken.sugar.js.is.isInteger",
                 "name": "isInteger",
                 "type": "Function",
                 "platform": [
@@ -8550,6 +8868,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isJs": {
+                "id": "@coffeekraken.sugar.js.is.isJs",
                 "name": "isJs",
                 "type": "Function",
                 "platform": [
@@ -8583,6 +8902,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isJson": {
+                "id": "@coffeekraken.sugar.js.is.isJson",
                 "name": "isJson",
                 "type": "Function",
                 "platform": [
@@ -8616,6 +8936,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.linux": {
+                "id": "@coffeekraken.sugar.js.is.linux",
                 "name": "linux",
                 "type": "Function",
                 "platform": [
@@ -8649,6 +8970,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isMap": {
+                "id": "@coffeekraken.sugar.js.is.isMap",
                 "name": "isMap",
                 "type": "Function",
                 "platform": [
@@ -8682,6 +9004,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isMmddyyyyDate": {
+                "id": "@coffeekraken.sugar.js.is.isMmddyyyyDate",
                 "name": "isMmddyyyyDate",
                 "type": "Function",
                 "platform": [
@@ -8715,6 +9038,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isNode": {
+                "id": "@coffeekraken.sugar.js.is.isNode",
                 "name": "isNode",
                 "type": "Function",
                 "platform": [
@@ -8748,6 +9072,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isNumber": {
+                "id": "@coffeekraken.sugar.js.is.isNumber",
                 "name": "isNumber",
                 "type": "Function",
                 "platform": [
@@ -8781,6 +9106,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isObject": {
+                "id": "@coffeekraken.sugar.js.is.isObject",
                 "name": "isObject",
                 "type": "Function",
                 "platform": [
@@ -8814,6 +9140,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isOdd": {
+                "id": "@coffeekraken.sugar.js.is.isOdd",
                 "name": "isOdd",
                 "type": "Function",
                 "platform": [
@@ -8847,6 +9174,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.ofType": {
+                "id": "@coffeekraken.sugar.js.is.ofType",
                 "name": "ofType",
                 "type": "Function",
                 "platform": [
@@ -8880,6 +9208,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.osx": {
+                "id": "@coffeekraken.sugar.js.is.osx",
                 "name": "osx",
                 "type": "Function",
                 "platform": [
@@ -8913,6 +9242,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.plainObject": {
+                "id": "@coffeekraken.sugar.js.is.plainObject",
                 "name": "plainObject",
                 "type": "Function",
                 "platform": [
@@ -8946,6 +9276,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isRegexp": {
+                "id": "@coffeekraken.sugar.js.is.isRegexp",
                 "name": "isRegexp",
                 "type": "Function",
                 "platform": [
@@ -8979,6 +9310,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isString": {
+                "id": "@coffeekraken.sugar.js.is.isString",
                 "name": "isString",
                 "type": "Function",
                 "platform": [
@@ -9012,6 +9344,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isTerminal": {
+                "id": "@coffeekraken.sugar.js.is.isTerminal",
                 "name": "isTerminal",
                 "type": "Function",
                 "platform": [
@@ -9045,6 +9378,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.testEnv": {
+                "id": "@coffeekraken.sugar.js.is.testEnv",
                 "name": "testEnv",
                 "type": "Function",
                 "platform": [
@@ -9078,6 +9412,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isUrl": {
+                "id": "@coffeekraken.sugar.js.is.isUrl",
                 "name": "isUrl",
                 "type": "Function",
                 "platform": [
@@ -9111,6 +9446,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.windows": {
+                "id": "@coffeekraken.sugar.js.is.windows",
                 "name": "windows",
                 "type": "Function",
                 "platform": [
@@ -9144,6 +9480,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.is.isYyyymmddDate": {
+                "id": "@coffeekraken.sugar.js.is.isYyyymmddDate",
                 "name": "isYyyymmddDate",
                 "type": "Function",
                 "platform": [
@@ -9177,6 +9514,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.iterable.map": {
+                "id": "@coffeekraken.sugar.js.iterable.map",
                 "name": "map",
                 "type": "Function",
                 "platform": [
@@ -9210,6 +9548,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.json.sanitizeJsonString": {
+                "id": "@coffeekraken.sugar.shared.json.sanitizeJsonString",
                 "name": "sanitizeJsonString",
                 "type": "Function",
                 "platform": [
@@ -9243,6 +9582,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.json.stringify": {
+                "id": "@coffeekraken.sugar.js.json.stringify",
                 "name": "stringify",
                 "type": "Function",
                 "platform": [
@@ -9276,6 +9616,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.map.mapToObject": {
+                "id": "@coffeekraken.sugar.js.map.mapToObject",
                 "name": "mapToObject",
                 "type": "Function",
                 "platform": [
@@ -9309,6 +9650,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.math.clamp": {
+                "id": "@coffeekraken.sugar.js.math.clamp",
                 "name": "clamp",
                 "type": "Function",
                 "platform": [
@@ -9342,6 +9684,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.math.easeClamp": {
+                "id": "@coffeekraken.sugar.js.math.easeClamp",
                 "name": "easeClamp",
                 "type": "Function",
                 "platform": [
@@ -9375,6 +9718,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.sugar.shared.math.roundWithSign": {
+                "id": "@coffeekraken.sugar.sugar.shared.math.roundWithSign",
                 "name": "roundWithSign",
                 "type": "Function",
                 "platform": [
@@ -9408,6 +9752,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.module.currentModuleSystem": {
+                "id": "@coffeekraken.sugar.shared.module.currentModuleSystem",
                 "name": "currentModuleSystem",
                 "type": "Function",
                 "platform": [
@@ -9441,6 +9786,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.module.isCjs": {
+                "id": "@coffeekraken.sugar.shared.module.isCjs",
                 "name": "isCjs",
                 "type": "Function",
                 "platform": [
@@ -9474,6 +9820,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.module.isEsm": {
+                "id": "@coffeekraken.sugar.shared.module.isEsm",
                 "name": "isEsm",
                 "type": "Function",
                 "platform": [
@@ -9507,6 +9854,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.module.isSystem": {
+                "id": "@coffeekraken.sugar.shared.module.isSystem",
                 "name": "isSystem",
                 "type": "Function",
                 "platform": [
@@ -9540,6 +9888,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.number.constrain": {
+                "id": "@coffeekraken.sugar.js.number.constrain",
                 "name": "constrain",
                 "type": "Function",
                 "platform": [
@@ -9573,6 +9922,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.number.pad": {
+                "id": "@coffeekraken.sugar.js.number.pad",
                 "name": "pad",
                 "type": "Function",
                 "platform": [
@@ -9606,6 +9956,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.object.applyScope": {
+                "id": "@coffeekraken.sugar.shared.object.applyScope",
                 "name": "applyScope",
                 "type": "Function",
                 "platform": [
@@ -9639,6 +9990,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.clone": {
+                "id": "@coffeekraken.sugar.js.object.clone",
                 "name": "clone",
                 "type": "Function",
                 "platform": [
@@ -9672,6 +10024,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.constructorName": {
+                "id": "@coffeekraken.sugar.js.object.constructorName",
                 "name": "constructorName",
                 "type": "Function",
                 "platform": [
@@ -9705,6 +10058,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.decycle": {
+                "id": "@coffeekraken.sugar.js.object.decycle",
                 "name": "decycle",
                 "type": "Function",
                 "platform": [
@@ -9738,6 +10092,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.deepAssign": {
+                "id": "@coffeekraken.sugar.js.object.deepAssign",
                 "name": "deepAssign",
                 "type": "Function",
                 "platform": [
@@ -9771,6 +10126,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.deepFilter": {
+                "id": "@coffeekraken.sugar.js.object.deepFilter",
                 "name": "deepFilter",
                 "type": "Function",
                 "platform": [
@@ -9804,6 +10160,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.deepize": {
+                "id": "@coffeekraken.sugar.js.object.deepize",
                 "name": "deepize",
                 "type": "Function",
                 "platform": [
@@ -9837,6 +10194,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.deepMap": {
+                "id": "@coffeekraken.sugar.js.object.deepMap",
                 "name": "deepMap",
                 "type": "Function",
                 "platform": [
@@ -9870,6 +10228,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.deepMerge": {
+                "id": "@coffeekraken.sugar.js.object.deepMerge",
                 "name": "deepMerge",
                 "type": "Function",
                 "platform": [
@@ -9903,6 +10262,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.deepProxy": {
+                "id": "@coffeekraken.sugar.js.object.deepProxy",
                 "name": "deepProxy",
                 "type": "Function",
                 "platform": [
@@ -9936,6 +10296,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.delete": {
+                "id": "@coffeekraken.sugar.js.object.delete",
                 "name": "delete",
                 "type": "Function",
                 "platform": [
@@ -9969,6 +10330,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.diff": {
+                "id": "@coffeekraken.sugar.js.object.diff",
                 "name": "diff",
                 "type": "Function",
                 "platform": [
@@ -10002,6 +10364,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.ensureExists": {
+                "id": "@coffeekraken.sugar.js.object.ensureExists",
                 "name": "ensureExists",
                 "type": "Function",
                 "platform": [
@@ -10035,6 +10398,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.extractValues": {
+                "id": "@coffeekraken.sugar.js.object.extractValues",
                 "name": "extractValues",
                 "type": "Function",
                 "platform": [
@@ -10068,6 +10432,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.filter": {
+                "id": "@coffeekraken.sugar.js.object.filter",
                 "name": "filter",
                 "type": "Function",
                 "platform": [
@@ -10101,6 +10466,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.flatten": {
+                "id": "@coffeekraken.sugar.js.object.flatten",
                 "name": "flatten",
                 "type": "Function",
                 "platform": [
@@ -10134,6 +10500,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.get": {
+                "id": "@coffeekraken.sugar.js.object.get",
                 "name": "get",
                 "type": "Function",
                 "platform": [
@@ -10167,6 +10534,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.getGlob": {
+                "id": "@coffeekraken.sugar.js.object.getGlob",
                 "name": "getGlob",
                 "type": "Function",
                 "platform": [
@@ -10200,6 +10568,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.getKeyByValue": {
+                "id": "@coffeekraken.sugar.js.object.getKeyByValue",
                 "name": "getKeyByValue",
                 "type": "Function",
                 "platform": [
@@ -10233,6 +10602,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.map": {
+                "id": "@coffeekraken.sugar.js.object.map",
                 "name": "map",
                 "type": "Function",
                 "platform": [
@@ -10267,6 +10637,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.objectHash": {
+                "id": "@coffeekraken.sugar.node.fs.objectHash",
                 "name": "objectHash",
                 "type": "Function",
                 "platform": [
@@ -10300,6 +10671,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.propertyProxy": {
+                "id": "@coffeekraken.sugar.js.object.propertyProxy",
                 "name": "propertyProxy",
                 "type": "Function",
                 "platform": [
@@ -10333,6 +10705,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.resolveTokens": {
+                "id": "@coffeekraken.sugar.js.object.resolveTokens",
                 "name": "resolveTokens",
                 "type": "Function",
                 "platform": [
@@ -10366,6 +10739,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.set": {
+                "id": "@coffeekraken.sugar.js.object.set",
                 "name": "set",
                 "type": "Function",
                 "platform": [
@@ -10399,6 +10773,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.sort": {
+                "id": "@coffeekraken.sugar.js.object.sort",
                 "name": "sort",
                 "type": "Function",
                 "platform": [
@@ -10432,6 +10807,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.SWatch": {
+                "id": "@coffeekraken.sugar.js.object.SWatch",
                 "name": "SWatch",
                 "type": "Class",
                 "platform": [
@@ -10464,6 +10840,7 @@
                 "relPath": "src/shared/object/SWatch.ts",
                 "children": {
                     "constructor": {
+                        "id": "bb4096191682acfb00b334aa57ac1e906fe979daca49e21205eaafa04df3593b",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Constructor",
@@ -10476,6 +10853,7 @@
                 }
             },
             "@coffeekraken.sugar.shared.object.toJson": {
+                "id": "@coffeekraken.sugar.shared.object.toJson",
                 "name": "toJson",
                 "type": "Function",
                 "platform": [
@@ -10509,6 +10887,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.toQueryString": {
+                "id": "@coffeekraken.sugar.js.object.toQueryString",
                 "name": "toQueryString",
                 "type": "Function",
                 "platform": [
@@ -10542,6 +10921,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.object.uid": {
+                "id": "@coffeekraken.sugar.node.object.uid",
                 "name": "uid",
                 "type": "Function",
                 "platform": [
@@ -10575,6 +10955,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.watch": {
+                "id": "@coffeekraken.sugar.js.object.watch",
                 "name": "watch",
                 "type": "Function",
                 "platform": [
@@ -10608,6 +10989,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.semver.parseSemverString": {
+                "id": "@coffeekraken.sugar.js.semver.parseSemverString",
                 "name": "parseSemverString",
                 "type": "Function",
                 "platform": [
@@ -10641,6 +11023,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.autoCast": {
+                "id": "@coffeekraken.sugar.js.string.autoCast",
                 "name": "autoCast",
                 "type": "Function",
                 "platform": [
@@ -10674,6 +11057,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.camelCase": {
+                "id": "@coffeekraken.sugar.js.string.camelCase",
                 "name": "camelCase",
                 "type": "Function",
                 "platform": [
@@ -10707,6 +11091,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.camelize": {
+                "id": "@coffeekraken.sugar.js.string.camelize",
                 "name": "camelize",
                 "type": "Function",
                 "platform": [
@@ -10740,6 +11125,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.countLine": {
+                "id": "@coffeekraken.sugar.js.string.countLine",
                 "name": "countLine",
                 "type": "Function",
                 "platform": [
@@ -10773,6 +11159,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.crop": {
+                "id": "@coffeekraken.sugar.js.string.crop",
                 "name": "crop",
                 "type": "Function",
                 "platform": [
@@ -10806,6 +11193,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.dashCase": {
+                "id": "@coffeekraken.sugar.js.string.dashCase",
                 "name": "dashCase",
                 "type": "Function",
                 "platform": [
@@ -10839,6 +11227,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.dedupe": {
+                "id": "@coffeekraken.sugar.js.string.dedupe",
                 "name": "dedupe",
                 "type": "Function",
                 "platform": [
@@ -10872,6 +11261,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.extractSame": {
+                "id": "@coffeekraken.sugar.js.string.extractSame",
                 "name": "extractSame",
                 "type": "Function",
                 "platform": [
@@ -10905,6 +11295,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.string.idCompliant": {
+                "id": "@coffeekraken.sugar.shared.string.idCompliant",
                 "name": "idCompliant",
                 "type": "Function",
                 "platform": [
@@ -10938,6 +11329,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.includes": {
+                "id": "@coffeekraken.sugar.js.string.includes",
                 "name": "includes",
                 "type": "Function",
                 "platform": [
@@ -10971,6 +11363,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.lowerFirst": {
+                "id": "@coffeekraken.sugar.js.string.lowerFirst",
                 "name": "lowerFirst",
                 "type": "Function",
                 "platform": [
@@ -11004,6 +11397,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.ltrim": {
+                "id": "@coffeekraken.sugar.js.string.ltrim",
                 "name": "ltrim",
                 "type": "Function",
                 "platform": [
@@ -11037,6 +11431,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.string.namespaceCompliant": {
+                "id": "@coffeekraken.sugar.shared.string.namespaceCompliant",
                 "name": "namespaceCompliant",
                 "type": "Function",
                 "platform": [
@@ -11070,6 +11465,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.paramCase": {
+                "id": "@coffeekraken.sugar.js.string.paramCase",
                 "name": "paramCase",
                 "type": "Function",
                 "platform": [
@@ -11103,6 +11499,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.parse": {
+                "id": "@coffeekraken.sugar.js.string.parse",
                 "name": "parse",
                 "type": "Function",
                 "platform": [
@@ -11136,6 +11533,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.printf": {
+                "id": "@coffeekraken.sugar.js.string.printf",
                 "name": "printf",
                 "type": "Function",
                 "platform": [
@@ -11169,6 +11567,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.replaceTokens": {
+                "id": "@coffeekraken.sugar.js.string.replaceTokens",
                 "name": "replaceTokens",
                 "type": "Function",
                 "platform": [
@@ -11202,6 +11601,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.rtrim": {
+                "id": "@coffeekraken.sugar.js.string.rtrim",
                 "name": "rtrim",
                 "type": "Function",
                 "platform": [
@@ -11235,6 +11635,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.simply": {
+                "id": "@coffeekraken.sugar.js.string.simply",
                 "name": "simply",
                 "type": "Function",
                 "platform": [
@@ -11267,6 +11668,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.string.simplifySpecialChars": {
+                "id": "@coffeekraken.sugar.shared.string.simplifySpecialChars",
                 "name": "simplifySpecialChars",
                 "type": "Function",
                 "platform": [
@@ -11300,6 +11702,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.splitEvery": {
+                "id": "@coffeekraken.sugar.js.string.splitEvery",
                 "name": "splitEvery",
                 "type": "Function",
                 "platform": [
@@ -11333,6 +11736,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.sprintf": {
+                "id": "@coffeekraken.sugar.js.string.sprintf",
                 "name": "sprintf",
                 "type": "Function",
                 "platform": [
@@ -11366,6 +11770,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.stripAnsi": {
+                "id": "@coffeekraken.sugar.js.string.stripAnsi",
                 "name": "stripAnsi",
                 "type": "Function",
                 "platform": [
@@ -11399,6 +11804,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.string.stripDocblocks": {
+                "id": "@coffeekraken.sugar.shared.string.stripDocblocks",
                 "name": "stripDocblocks",
                 "type": "Function",
                 "platform": [
@@ -11432,6 +11838,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.string.stripSourcemap": {
+                "id": "@coffeekraken.sugar.shared.string.stripSourcemap",
                 "name": "stripSourcemap",
                 "type": "Function",
                 "platform": [
@@ -11465,6 +11872,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.toString": {
+                "id": "@coffeekraken.sugar.js.string.toString",
                 "name": "toString",
                 "type": "Function",
                 "platform": [
@@ -11498,6 +11906,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.trimLines": {
+                "id": "@coffeekraken.sugar.js.string.trimLines",
                 "name": "trimLines",
                 "type": "Function",
                 "platform": [
@@ -11531,6 +11940,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.uncamelize": {
+                "id": "@coffeekraken.sugar.js.string.uncamelize",
                 "name": "uncamelize",
                 "type": "Function",
                 "platform": [
@@ -11564,6 +11974,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.uniqid": {
+                "id": "@coffeekraken.sugar.js.string.uniqid",
                 "name": "uniqid",
                 "type": "Function",
                 "platform": [
@@ -11597,6 +12008,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.unquote": {
+                "id": "@coffeekraken.sugar.js.string.unquote",
                 "name": "unquote",
                 "type": "Function",
                 "platform": [
@@ -11630,6 +12042,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.string.upperFirst": {
+                "id": "@coffeekraken.sugar.js.string.upperFirst",
                 "name": "upperFirst",
                 "type": "Function",
                 "platform": [
@@ -11663,6 +12076,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.string.urlCompliant": {
+                "id": "@coffeekraken.sugar.shared.string.urlCompliant",
                 "name": "urlCompliant",
                 "type": "Function",
                 "platform": [
@@ -11696,6 +12110,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.sugar.sanitizeSugarJson": {
+                "id": "@coffeekraken.sugar.node.sugar.sanitizeSugarJson",
                 "name": "sanitizeSugarJson",
                 "type": "Function",
                 "platform": [
@@ -11729,6 +12144,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.time.convert": {
+                "id": "@coffeekraken.sugar.js.time.convert",
                 "name": "convert",
                 "type": "Function",
                 "platform": [
@@ -11762,6 +12178,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.time.formatDuration": {
+                "id": "@coffeekraken.sugar.shared.time.formatDuration",
                 "name": "formatDuration",
                 "type": "Function",
                 "platform": [
@@ -11796,6 +12213,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.time.wait": {
+                "id": "@coffeekraken.sugar.js.time.wait",
                 "name": "wait",
                 "type": "Function",
                 "platform": [
@@ -11830,6 +12248,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.token.replaceTokens": {
+                "id": "@coffeekraken.sugar.shared.token.replaceTokens",
                 "name": "replaceTokens",
                 "type": "Function",
                 "platform": [
@@ -11859,6 +12278,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.type.parseTypeString": {
+                "id": "@coffeekraken.sugar.shared.type.parseTypeString",
                 "name": "parseTypeString",
                 "type": "Function",
                 "platform": [
@@ -11891,6 +12311,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.unit.convert": {
+                "id": "@coffeekraken.sugar.js.unit.convert",
                 "name": "convert",
                 "type": "Function",
                 "platform": [
@@ -11924,6 +12345,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.unit.em2px": {
+                "id": "@coffeekraken.sugar.js.unit.em2px",
                 "name": "em2px",
                 "type": "Function",
                 "platform": [
@@ -11957,6 +12379,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.unit.px2em": {
+                "id": "@coffeekraken.sugar.js.unit.px2em",
                 "name": "px2em",
                 "type": "Function",
                 "platform": [
@@ -11990,6 +12413,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.unit.px2rem": {
+                "id": "@coffeekraken.sugar.js.unit.px2rem",
                 "name": "px2rem",
                 "type": "Function",
                 "platform": [
@@ -12023,6 +12447,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.unit.rem2px": {
+                "id": "@coffeekraken.sugar.js.unit.rem2px",
                 "name": "rem2px",
                 "type": "Function",
                 "platform": [
@@ -12056,6 +12481,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.url.gravatarUrl": {
+                "id": "@coffeekraken.sugar.js.url.gravatarUrl",
                 "name": "gravatarUrl",
                 "type": "Function",
                 "platform": [
@@ -12089,6 +12515,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.url.parseSchema": {
+                "id": "@coffeekraken.sugar.js.url.parseSchema",
                 "name": "parseSchema",
                 "type": "Function",
                 "platform": [
@@ -12121,6 +12548,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.url.queryStringToObject": {
+                "id": "@coffeekraken.sugar.js.url.queryStringToObject",
                 "name": "queryStringToObject",
                 "type": "Function",
                 "platform": [
@@ -12154,6 +12582,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.url.urlFromString": {
+                "id": "@coffeekraken.sugar.shared.url.urlFromString",
                 "name": "urlFromString",
                 "type": "Function",
                 "platform": [
@@ -12191,6 +12620,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.value.typeDefinitionArrayObjectToString": {
+                "id": "@coffeekraken.sugar.js.value.typeDefinitionArrayObjectToString",
                 "name": "typeDefinitionArrayObjectToString",
                 "type": "Function",
                 "platform": [
@@ -12224,6 +12654,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.value.typeof": {
+                "id": "@coffeekraken.sugar.js.value.typeof",
                 "name": "typeof",
                 "type": "Function",
                 "platform": [
@@ -12257,6 +12688,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.animation.innerHtml": {
+                "id": "@coffeekraken.sugar.js.dom.animation.innerHtml",
                 "name": "innerHtml",
                 "type": "Function",
                 "platform": [
@@ -12286,6 +12718,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.class.addAnimationClass": {
+                "id": "@coffeekraken.sugar.js.dom.class.addAnimationClass",
                 "name": "addAnimationClass",
                 "type": "Function",
                 "platform": [
@@ -12315,6 +12748,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.class.removeClassOnAnimationEnd": {
+                "id": "@coffeekraken.sugar.js.dom.class.removeClassOnAnimationEnd",
                 "name": "removeClassOnAnimationEnd",
                 "type": "Function",
                 "platform": [
@@ -12344,6 +12778,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.css.adoptStyleInShadowRoot": {
+                "id": "@coffeekraken.sugar.js.css.adoptStyleInShadowRoot",
                 "name": "adoptStyleInShadowRoot",
                 "type": "Function",
                 "platform": [
@@ -12372,6 +12807,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.css.injectStyle": {
+                "id": "@coffeekraken.sugar.js.css.injectStyle",
                 "name": "injectStyle",
                 "type": "Function",
                 "platform": [
@@ -12401,6 +12837,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.css.stylesheetToString": {
+                "id": "@coffeekraken.sugar.js.css.stylesheetToString",
                 "name": "stylesheetToString",
                 "type": "Function",
                 "platform": [
@@ -12430,6 +12867,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.data.dataset": {
+                "id": "@coffeekraken.sugar.js.dom.data.dataset",
                 "name": "dataset",
                 "type": "Function",
                 "platform": [
@@ -12459,6 +12897,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detection.detectInOutDirection": {
+                "id": "@coffeekraken.sugar.js.dom.detection.detectInOutDirection",
                 "name": "detectInOutDirection",
                 "type": "Function",
                 "platform": [
@@ -12489,6 +12928,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.inViewportStatusChange": {
+                "id": "@coffeekraken.sugar.js.dom.detect.inViewportStatusChange",
                 "name": "inViewportStatusChange",
                 "type": "Function",
                 "platform": [
@@ -12519,6 +12959,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.onDrag": {
+                "id": "@coffeekraken.sugar.js.dom.detect.onDrag",
                 "name": "onDrag",
                 "type": "Function",
                 "platform": [
@@ -12549,6 +12990,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.onScrollEnd": {
+                "id": "@coffeekraken.sugar.js.dom.detect.onScrollEnd",
                 "name": "onScrollEnd",
                 "type": "Function",
                 "platform": [
@@ -12579,6 +13021,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.onSwipe": {
+                "id": "@coffeekraken.sugar.js.dom.detect.onSwipe",
                 "name": "onSwipe",
                 "type": "Function",
                 "platform": [
@@ -12609,6 +13052,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.when": {
+                "id": "@coffeekraken.sugar.js.dom.detect.when",
                 "name": "when",
                 "type": "Function",
                 "platform": [
@@ -12639,6 +13083,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenAttribute": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenAttribute",
                 "name": "whenAttribute",
                 "type": "Function",
                 "platform": [
@@ -12669,6 +13114,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenDomReady": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenDomReady",
                 "name": "whenDomReady",
                 "type": "Function",
                 "platform": [
@@ -12699,6 +13145,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenInteract": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenInteract",
                 "name": "whenInteract",
                 "type": "Function",
                 "platform": [
@@ -12765,6 +13212,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenInViewport": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenInViewport",
                 "name": "whenInViewport",
                 "type": "Function",
                 "platform": [
@@ -12795,6 +13243,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenNearViewport": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenNearViewport",
                 "name": "whenNearViewport",
                 "type": "Function",
                 "platform": [
@@ -12825,6 +13274,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenOutOfViewport": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenOutOfViewport",
                 "name": "whenOutOfViewport",
                 "type": "Function",
                 "platform": [
@@ -12855,6 +13305,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenStylesheetsReady": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenStylesheetsReady",
                 "name": "whenStylesheetsReady",
                 "type": "Function",
                 "platform": [
@@ -12885,6 +13336,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenTransitionEnd": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenTransitionEnd",
                 "name": "whenTransitionEnd",
                 "type": "Function",
                 "platform": [
@@ -12915,6 +13367,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenVisible": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenVisible",
                 "name": "whenVisible",
                 "type": "Function",
                 "platform": [
@@ -12945,6 +13398,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.distance.fromElementTopToViewportBottom": {
+                "id": "@coffeekraken.sugar.js.dom.distance.fromElementTopToViewportBottom",
                 "name": "fromElementTopToViewportBottom",
                 "type": "Function",
                 "platform": [
@@ -12974,6 +13428,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.distance.fromElementTopToViewportTop": {
+                "id": "@coffeekraken.sugar.js.dom.distance.fromElementTopToViewportTop",
                 "name": "fromElementTopToViewportTop",
                 "type": "Function",
                 "platform": [
@@ -13003,6 +13458,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.distance.scrollLeft": {
+                "id": "@coffeekraken.sugar.js.dom.distance.scrollLeft",
                 "name": "scrollLeft",
                 "type": "Function",
                 "platform": [
@@ -13032,6 +13488,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.element.areaStats": {
+                "id": "@coffeekraken.sugar.js.dom.element.areaStats",
                 "name": "areaStats",
                 "type": "Function",
                 "platform": [
@@ -13061,6 +13518,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.event.addEventListener": {
+                "id": "@coffeekraken.sugar.js.dom.event.addEventListener",
                 "name": "addEventListener",
                 "type": "Function",
                 "platform": [
@@ -13090,6 +13548,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.event.addEventListenerOnce": {
+                "id": "@coffeekraken.sugar.js.dom.event.addEventListenerOnce",
                 "name": "addEventListenerOnce",
                 "type": "Function",
                 "platform": [
@@ -13119,6 +13578,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.event.dispatchEvent": {
+                "id": "@coffeekraken.sugar.js.dom.event.dispatchEvent",
                 "name": "dispatchEvent",
                 "type": "Function",
                 "platform": [
@@ -13148,6 +13608,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.form.sendForm": {
+                "id": "@coffeekraken.sugar.js.dom.form.sendForm",
                 "name": "sendForm",
                 "type": "Function",
                 "platform": [
@@ -13177,6 +13638,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.input.cursorToEnd": {
+                "id": "@coffeekraken.sugar.js.dom.input.cursorToEnd",
                 "name": "cursorToEnd",
                 "type": "Function",
                 "platform": [
@@ -13206,6 +13668,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.is.focus": {
+                "id": "@coffeekraken.sugar.js.dom.is.focus",
                 "name": "focus",
                 "type": "Function",
                 "platform": [
@@ -13235,6 +13698,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.is.focusWithin": {
+                "id": "@coffeekraken.sugar.js.dom.is.focusWithin",
                 "name": "focusWithin",
                 "type": "Function",
                 "platform": [
@@ -13264,6 +13728,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.is.hover": {
+                "id": "@coffeekraken.sugar.js.dom.is.hover",
                 "name": "hover",
                 "type": "Function",
                 "platform": [
@@ -13293,6 +13758,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.is.inIframe": {
+                "id": "@coffeekraken.sugar.js.dom.is.inIframe",
                 "name": "inIframe",
                 "type": "Function",
                 "platform": [
@@ -13322,6 +13788,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.is.inViewport": {
+                "id": "@coffeekraken.sugar.js.dom.is.inViewport",
                 "name": "inViewport",
                 "type": "Function",
                 "platform": [
@@ -13352,6 +13819,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.is.scrollable": {
+                "id": "@coffeekraken.sugar.js.dom.is.scrollable",
                 "name": "scrollable",
                 "type": "Function",
                 "platform": [
@@ -13381,6 +13849,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.is.userScrolling": {
+                "id": "@coffeekraken.sugar.js.dom.is.userScrolling",
                 "name": "userScrolling",
                 "type": "Function",
                 "platform": [
@@ -13411,6 +13880,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.is.visible": {
+                "id": "@coffeekraken.sugar.js.dom.is.visible",
                 "name": "visible",
                 "type": "Function",
                 "platform": [
@@ -13440,6 +13910,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.load.backgroundImageLoaded": {
+                "id": "@coffeekraken.sugar.js.dom.load.backgroundImageLoaded",
                 "name": "backgroundImageLoaded",
                 "type": "Function",
                 "platform": [
@@ -13469,6 +13940,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.load.imageLoaded": {
+                "id": "@coffeekraken.sugar.js.dom.load.imageLoaded",
                 "name": "imageLoaded",
                 "type": "Function",
                 "platform": [
@@ -13498,6 +13970,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.load.imagesLoaded": {
+                "id": "@coffeekraken.sugar.js.dom.load.imagesLoaded",
                 "name": "imagesLoaded",
                 "type": "Function",
                 "platform": [
@@ -13527,6 +14000,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.load.linkLoaded": {
+                "id": "@coffeekraken.sugar.js.dom.load.linkLoaded",
                 "name": "linkLoaded",
                 "type": "Function",
                 "platform": [
@@ -13556,6 +14030,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.load.scriptLoaded": {
+                "id": "@coffeekraken.sugar.js.dom.load.scriptLoaded",
                 "name": "scriptLoaded",
                 "type": "Function",
                 "platform": [
@@ -13585,6 +14060,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.manipulate.emptyNode": {
+                "id": "@coffeekraken.sugar.js.dom.manipulate.emptyNode",
                 "name": "emptyNode",
                 "type": "Function",
                 "platform": [
@@ -13609,6 +14085,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.manipulate.insertAfter": {
+                "id": "@coffeekraken.sugar.js.dom.manipulate.insertAfter",
                 "name": "insertAfter",
                 "type": "Function",
                 "platform": [
@@ -13638,6 +14115,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.manipulate.prependChild": {
+                "id": "@coffeekraken.sugar.js.dom.manipulate.prependChild",
                 "name": "prependChild",
                 "type": "Function",
                 "platform": [
@@ -13667,6 +14145,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.manipulate.stripTags": {
+                "id": "@coffeekraken.sugar.js.dom.manipulate.stripTags",
                 "name": "stripTags",
                 "type": "Function",
                 "platform": [
@@ -13696,6 +14175,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.manipulate.toDomNodes": {
+                "id": "@coffeekraken.sugar.js.dom.manipulate.toDomNodes",
                 "name": "toDomNodes",
                 "type": "Function",
                 "platform": [
@@ -13725,6 +14205,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.manipulate.wrap": {
+                "id": "@coffeekraken.sugar.js.dom.manipulate.wrap",
                 "name": "wrap",
                 "type": "Function",
                 "platform": [
@@ -13754,6 +14235,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.manipulate.wrapInner": {
+                "id": "@coffeekraken.sugar.js.dom.manipulate.wrapInner",
                 "name": "wrapInner",
                 "type": "Function",
                 "platform": [
@@ -13783,6 +14265,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.observe.observeAttributes": {
+                "id": "@coffeekraken.sugar.js.dom.observe.observeAttributes",
                 "name": "observeAttributes",
                 "type": "Function",
                 "platform": [
@@ -13812,6 +14295,7 @@
                 "relPath": "src/js/dom/observe/observeAttributes.ts",
                 "children": {
                     "attributes": {
+                        "id": "9376d0731aaef00b88f0a3a51c44b6e1d40662a80bc92e1ad646b54a4fc54c06",
                         "name": "attributes",
                         "type": "{Array}",
                         "default": "null",
@@ -13820,6 +14304,7 @@
                 }
             },
             "@coffeekraken.sugar.js.dom.observe.observeMutations": {
+                "id": "@coffeekraken.sugar.js.dom.observe.observeMutations",
                 "name": "observeMutations",
                 "type": "Function",
                 "platform": [
@@ -13849,6 +14334,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.offset.offset": {
+                "id": "@coffeekraken.sugar.js.dom.offset.offset",
                 "name": "offset",
                 "type": "Function",
                 "platform": [
@@ -13878,6 +14364,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.offset.offsetParent": {
+                "id": "@coffeekraken.sugar.js.dom.offset.offsetParent",
                 "name": "offsetParent",
                 "type": "Function",
                 "platform": [
@@ -13907,6 +14394,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.position.getPositionFromEvent": {
+                "id": "@coffeekraken.sugar.js.dom.position.getPositionFromEvent",
                 "name": "getPositionFromEvent",
                 "type": "Function",
                 "platform": [
@@ -13936,6 +14424,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.closest": {
+                "id": "@coffeekraken.sugar.js.dom.query.closest",
                 "name": "closest",
                 "type": "Function",
                 "platform": [
@@ -13965,6 +14454,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.closestNotVisible": {
+                "id": "@coffeekraken.sugar.js.dom.query.closestNotVisible",
                 "name": "closestNotVisible",
                 "type": "Function",
                 "platform": [
@@ -13994,6 +14484,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.closestScrollable": {
+                "id": "@coffeekraken.sugar.js.dom.query.closestScrollable",
                 "name": "closestScrollable",
                 "type": "Function",
                 "platform": [
@@ -14023,6 +14514,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.matches": {
+                "id": "@coffeekraken.sugar.js.dom.query.matches",
                 "name": "matches",
                 "type": "Function",
                 "platform": [
@@ -14052,6 +14544,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.next": {
+                "id": "@coffeekraken.sugar.js.dom.query.next",
                 "name": "next",
                 "type": "Function",
                 "platform": [
@@ -14081,6 +14574,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.previous": {
+                "id": "@coffeekraken.sugar.js.dom.query.previous",
                 "name": "previous",
                 "type": "Function",
                 "platform": [
@@ -14110,6 +14604,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.querySelector": {
+                "id": "@coffeekraken.sugar.js.dom.query.querySelector",
                 "name": "querySelector",
                 "type": "Function",
                 "platform": [
@@ -14139,6 +14634,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.querySelectorAll": {
+                "id": "@coffeekraken.sugar.js.dom.query.querySelectorAll",
                 "name": "querySelectorAll",
                 "type": "Function",
                 "platform": [
@@ -14168,6 +14664,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.querySelectorLive": {
+                "id": "@coffeekraken.sugar.js.dom.query.querySelectorLive",
                 "name": "querySelectorLive",
                 "type": "Function",
                 "platform": [
@@ -14197,6 +14694,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.query.querySelectorUp": {
+                "id": "@coffeekraken.sugar.js.dom.query.querySelectorUp",
                 "name": "querySelectorUp",
                 "type": "Function",
                 "platform": [
@@ -14226,6 +14724,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.scroll.preventScrollRestoration": {
+                "id": "@coffeekraken.sugar.js.dom.scroll.preventScrollRestoration",
                 "name": "preventScrollRestoration",
                 "type": "Function",
                 "platform": [
@@ -14255,6 +14754,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.scroll.scrollLeft": {
+                "id": "@coffeekraken.sugar.js.dom.scroll.scrollLeft",
                 "name": "scrollLeft",
                 "type": "Function",
                 "platform": [
@@ -14284,6 +14784,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.scroll.scrollTo": {
+                "id": "@coffeekraken.sugar.js.dom.scroll.scrollTo",
                 "name": "scrollTo",
                 "type": "Function",
                 "platform": [
@@ -14313,6 +14814,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.scroll.scrollToLocationHash": {
+                "id": "@coffeekraken.sugar.js.dom.scroll.scrollToLocationHash",
                 "name": "scrollToLocationHash",
                 "type": "Function",
                 "platform": [
@@ -14342,6 +14844,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.scroll.scrollTop": {
+                "id": "@coffeekraken.sugar.js.dom.scroll.scrollTop",
                 "name": "scrollTop",
                 "type": "Function",
                 "platform": [
@@ -14371,6 +14874,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.size.realHeight": {
+                "id": "@coffeekraken.sugar.js.dom.size.realHeight",
                 "name": "realHeight",
                 "type": "Function",
                 "platform": [
@@ -14400,6 +14904,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.drag.slideable": {
+                "id": "@coffeekraken.sugar.js.dom.drag.slideable",
                 "name": "slideable",
                 "type": "Function",
                 "platform": [
@@ -14430,6 +14935,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.cssEasingStrToJsFunction": {
+                "id": "@coffeekraken.sugar.js.dom.style.cssEasingStrToJsFunction",
                 "name": "cssEasingStrToJsFunction",
                 "type": "Function",
                 "platform": [
@@ -14459,6 +14965,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getAnimationProperties": {
+                "id": "@coffeekraken.sugar.js.dom.style.getAnimationProperties",
                 "name": "getAnimationProperties",
                 "type": "Function",
                 "platform": [
@@ -14488,6 +14995,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getAnimationsFromElement": {
+                "id": "@coffeekraken.sugar.js.dom.style.getAnimationsFromElement",
                 "name": "getAnimationsFromElement",
                 "type": "Function",
                 "platform": [
@@ -14517,6 +15025,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getCssDeclarations": {
+                "id": "@coffeekraken.sugar.js.dom.style.getCssDeclarations",
                 "name": "getCssDeclarations",
                 "type": "Function",
                 "platform": [
@@ -14546,6 +15055,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getCssRulesFromStylesheet": {
+                "id": "@coffeekraken.sugar.js.dom.style.getCssRulesFromStylesheet",
                 "name": "getCssRulesFromStylesheet",
                 "type": "Function",
                 "platform": [
@@ -14575,6 +15085,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getDefinedStyles": {
+                "id": "@coffeekraken.sugar.js.dom.style.getDefinedStyles",
                 "name": "getDefinedStyles",
                 "type": "Function",
                 "platform": [
@@ -14604,6 +15115,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getKeyframesDeclarations": {
+                "id": "@coffeekraken.sugar.js.dom.style.getKeyframesDeclarations",
                 "name": "getKeyframesDeclarations",
                 "type": "Function",
                 "platform": [
@@ -14633,6 +15145,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getRotateProperties": {
+                "id": "@coffeekraken.sugar.js.dom.style.getRotateProperties",
                 "name": "getRotateProperties",
                 "type": "Function",
                 "platform": [
@@ -14662,6 +15175,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getScaleProperty": {
+                "id": "@coffeekraken.sugar.js.dom.style.getScaleProperty",
                 "name": "getScaleProperty",
                 "type": "Function",
                 "platform": [
@@ -14691,6 +15205,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getStyleProperty": {
+                "id": "@coffeekraken.sugar.js.dom.style.getStyleProperty",
                 "name": "getStyleProperty",
                 "type": "Function",
                 "platform": [
@@ -14720,6 +15235,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getTransformProperties": {
+                "id": "@coffeekraken.sugar.js.dom.style.getTransformProperties",
                 "name": "getTransformProperties",
                 "type": "Function",
                 "platform": [
@@ -14749,6 +15265,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getTransitionProperties": {
+                "id": "@coffeekraken.sugar.js.dom.style.getTransitionProperties",
                 "name": "getTransitionProperties",
                 "type": "Function",
                 "platform": [
@@ -14778,6 +15295,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.getTranslateProperties": {
+                "id": "@coffeekraken.sugar.js.dom.style.getTranslateProperties",
                 "name": "getTranslateProperties",
                 "type": "Function",
                 "platform": [
@@ -14807,6 +15325,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.parseKeyframeKey": {
+                "id": "@coffeekraken.sugar.js.dom.style.parseKeyframeKey",
                 "name": "parseKeyframeKey",
                 "type": "Function",
                 "platform": [
@@ -14836,6 +15355,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.parseTransformRule": {
+                "id": "@coffeekraken.sugar.js.dom.style.parseTransformRule",
                 "name": "parseTransformRule",
                 "type": "Function",
                 "platform": [
@@ -14865,6 +15385,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.removeVendorPrefix": {
+                "id": "@coffeekraken.sugar.js.dom.style.removeVendorPrefix",
                 "name": "removeVendorPrefix",
                 "type": "Function",
                 "platform": [
@@ -14894,6 +15415,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.style": {
+                "id": "@coffeekraken.sugar.js.dom.style.style",
                 "name": "style",
                 "type": "Function",
                 "platform": [
@@ -14923,6 +15445,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.styleObject2String": {
+                "id": "@coffeekraken.sugar.js.dom.style.styleObject2String",
                 "name": "styleObject2String",
                 "type": "Function",
                 "platform": [
@@ -14952,6 +15475,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.styleString2Object": {
+                "id": "@coffeekraken.sugar.js.dom.style.styleString2Object",
                 "name": "styleString2Object",
                 "type": "Function",
                 "platform": [
@@ -14981,6 +15505,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.style.transformKeyframesDeclarations": {
+                "id": "@coffeekraken.sugar.js.dom.style.transformKeyframesDeclarations",
                 "name": "transformKeyframesDeclarations",
                 "type": "Function",
                 "platform": [
@@ -15010,6 +15535,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.tag.appendScriptTag": {
+                "id": "@coffeekraken.sugar.js.dom.tag.appendScriptTag",
                 "name": "appendScriptTag",
                 "type": "Function",
                 "platform": [
@@ -15039,6 +15565,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.tag.appendStylesheetLinkTag": {
+                "id": "@coffeekraken.sugar.js.dom.tag.appendStylesheetLinkTag",
                 "name": "appendStylesheetLinkTag",
                 "type": "Function",
                 "platform": [
@@ -15068,6 +15595,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.appendStyleTag": {
+                "id": "@coffeekraken.sugar.js.dom.appendStyleTag",
                 "name": "appendStyleTag",
                 "type": "Function",
                 "platform": [
@@ -15097,6 +15625,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.transmation.clearTransmations": {
+                "id": "@coffeekraken.sugar.js.dom.transmation.clearTransmations",
                 "name": "clearTransmations",
                 "type": "Function",
                 "platform": [
@@ -15126,6 +15655,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.traverse.up": {
+                "id": "@coffeekraken.sugar.js.dom.traverse.up",
                 "name": "up",
                 "type": "Function",
                 "platform": [
@@ -15155,6 +15685,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.canHaveChildren": {
+                "id": "@coffeekraken.sugar.js.dom.utils.canHaveChildren",
                 "name": "canHaveChildren",
                 "type": "Function",
                 "platform": [
@@ -15184,6 +15715,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.exitFullscreen": {
+                "id": "@coffeekraken.sugar.js.dom.utils.exitFullscreen",
                 "name": "exitFullscreen",
                 "type": "Function",
                 "platform": [
@@ -15213,6 +15745,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.forceRedraw": {
+                "id": "@coffeekraken.sugar.js.dom.utils.forceRedraw",
                 "name": "forceRedraw",
                 "type": "Function",
                 "platform": [
@@ -15242,6 +15775,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.inViewportPercentage": {
+                "id": "@coffeekraken.sugar.js.dom.utils.inViewportPercentage",
                 "name": "inViewportPercentage",
                 "type": "Function",
                 "platform": [
@@ -15271,6 +15805,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.nodeIndex": {
+                "id": "@coffeekraken.sugar.js.dom.utils.nodeIndex",
                 "name": "nodeIndex",
                 "type": "Function",
                 "platform": [
@@ -15300,6 +15835,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.requestAnimationFrame": {
+                "id": "@coffeekraken.sugar.js.dom.utils.requestAnimationFrame",
                 "name": "requestAnimationFrame",
                 "type": "Function",
                 "platform": [
@@ -15324,6 +15860,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.requestFullscreen": {
+                "id": "@coffeekraken.sugar.js.dom.utils.requestFullscreen",
                 "name": "requestFullscreen",
                 "type": "Function",
                 "platform": [
@@ -15353,6 +15890,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.splitLetters": {
+                "id": "@coffeekraken.sugar.js.dom.utils.splitLetters",
                 "name": "splitLetters",
                 "type": "Function",
                 "platform": [
@@ -15382,6 +15920,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.splitLines": {
+                "id": "@coffeekraken.sugar.js.dom.utils.splitLines",
                 "name": "splitLines",
                 "type": "Function",
                 "platform": [
@@ -15411,6 +15950,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.splitWords": {
+                "id": "@coffeekraken.sugar.js.dom.utils.splitWords",
                 "name": "splitWords",
                 "type": "Function",
                 "platform": [
@@ -15440,6 +15980,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.textWidth": {
+                "id": "@coffeekraken.sugar.js.dom.utils.textWidth",
                 "name": "textWidth",
                 "type": "Function",
                 "platform": [
@@ -15469,6 +16010,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.toggleFullscreen": {
+                "id": "@coffeekraken.sugar.js.dom.utils.toggleFullscreen",
                 "name": "toggleFullscreen",
                 "type": "Function",
                 "platform": [
@@ -15498,6 +16040,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.class.SApp": {
+                "id": "@coffeekraken.sugar.js.class.SApp",
                 "name": "SApp",
                 "type": "Class",
                 "description": "This class represent an application route class. This mean that you can create an application class that extend this one\nand your instance will have access to a whole package of data like the application name taken from the package.json file, the version,\nthe description, the author(s), the contributor(s), etc...",
@@ -15518,6 +16061,7 @@
                 "relPath": "src/js/html/__wip__.wip/SApp.ts"
             },
             "@coffeekraken.sugar.js.class.SApp.config": {
+                "id": "@coffeekraken.sugar.js.class.SApp.config",
                 "name": "config",
                 "type": "Function",
                 "description": "Get a configuration value from the backend using an ajax call",
@@ -15538,6 +16082,7 @@
                 "relPath": "src/js/html/__wip__.wip/SApp.ts"
             },
             "@coffeekraken.sugar.js.class.SApp.meta": {
+                "id": "@coffeekraken.sugar.js.class.SApp.meta",
                 "name": "meta",
                 "type": "Function",
                 "description": "Usefull function that give you back an application meta taken depending on your passed dotted object path",
@@ -15558,6 +16103,7 @@
                 "relPath": "src/js/html/__wip__.wip/SApp.ts"
             },
             "@coffeekraken.sugar.squid.js.log.log": {
+                "id": "@coffeekraken.sugar.squid.js.log.log",
                 "name": "log",
                 "type": "Function",
                 "description": "Log a message using the transports log system.",
@@ -15579,6 +16125,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.class.SBind": {
+                "id": "@coffeekraken.sugar.js.class.SBind",
                 "name": "SBind",
                 "type": "Class",
                 "description": "This class allows to bind properties between objects, object to HTMLElement attribute and vice versa.",
@@ -15598,6 +16145,7 @@
                 "relPath": "src/js/html/__wip__.wip/SBind.ts",
                 "children": {
                     "bind": {
+                        "id": "bb8c4c6d83bb9c6d61f2e7518c756c0de931727ff5b9b34f19d630b3884f1f02",
                         "name": "bind",
                         "type": "Function",
                         "description": "This method allows you to bind an Object|HTMLElement property to another Object|HTMLElement property\nThis mean that when the property of the first passed element is updated, the same property on the second\nelement will be updated as well",
@@ -15609,6 +16157,7 @@
                 }
             },
             "@coffeekraken.sugar.js.class.SLocalStorageFonts": {
+                "id": "@coffeekraken.sugar.js.class.SLocalStorageFonts",
                 "name": "SLocalStorageFonts",
                 "type": "Class",
                 "description": "This class allows to easily store and load custom fonts from the localStorage",
@@ -15629,6 +16178,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.socket.syncDom": {
+                "id": "@coffeekraken.sugar.js.socket.syncDom",
                 "name": "syncDom",
                 "type": "Function",
                 "description": "Simply connect to a backend socket.io server and listen for specifics messages from it to refresh automatically the DOM.\nThe messages that are listened are:\n- 'SSocketDom.html': Used to send some html to \"inject/replace\" in the current page HTML\n- 'SSocketDom.script': Used to add a script tag to the page\n- 'SSocketDom.style': Used to add a style tag to the page",
@@ -15639,6 +16189,7 @@
                 "relPath": "src/js/html/__wip__.wip/SSocketDom.ts"
             },
             "@coffeekraken.sugar.js.class.settings.node": {
+                "id": "@coffeekraken.sugar.js.class.settings.node",
                 "name": "settings.node",
                 "type": "HTMLElement",
                 "default": "document.body",
@@ -15649,6 +16200,7 @@
                 "relPath": "src/js/html/__wip__.wip/SSocketDom.ts"
             },
             "@coffeekraken.sugar.js-class.settings.action": {
+                "id": "@coffeekraken.sugar.js-class.settings.action",
                 "name": "settings.action",
                 "type": "String",
                 "default": "'replace'",
@@ -15659,6 +16211,7 @@
                 "relPath": "src/js/html/__wip__.wip/SSocketDom.ts"
             },
             "@coffeekraken.sugar.js.class.settings.events": {
+                "id": "@coffeekraken.sugar.js.class.settings.events",
                 "name": "settings.events",
                 "type": "Object",
                 "default": "{}",
@@ -15669,6 +16222,7 @@
                 "relPath": "src/js/html/__wip__.wip/SSocketDom.ts"
             },
             "@coffeekraken.sugar.js.class.emit": {
+                "id": "@coffeekraken.sugar.js.class.emit",
                 "name": "emit",
                 "type": "Function",
                 "description": "Emit an event with an object containing some values to pass to the server",
@@ -15688,6 +16242,7 @@
                 "relPath": "src/js/html/__wip__.wip/SSocketDom.ts"
             },
             "@coffeekraken.sugar.js.class.registerEvent": {
+                "id": "@coffeekraken.sugar.js.class.registerEvent",
                 "name": "registerEvent",
                 "type": "Function",
                 "description": "Register a new event with an handler function that will handle the event content",
@@ -15708,6 +16263,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.http.getFreePort": {
+                "id": "@coffeekraken.sugar.node.http.getFreePort",
                 "name": "getFreePort",
                 "type": "Function",
                 "platform": [
@@ -15737,6 +16293,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.network.ipAddress": {
+                "id": "@coffeekraken.sugar.node.network.ipAddress",
                 "name": "ipAddress",
                 "type": "Function",
                 "platform": [
@@ -15765,6 +16322,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.node.http.isPortFree": {
+                "id": "@coffeekraken.sugar.node.http.isPortFree",
                 "name": "isPortFree",
                 "type": "Function",
                 "platform": [
@@ -15794,6 +16352,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.class.utils.functionToClass": {
+                "id": "@coffeekraken.sugar.js.class.utils.functionToClass",
                 "name": "functionToClass",
                 "type": "Function",
                 "platform": [
@@ -15827,6 +16386,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.class.utils.getExtendsStack": {
+                "id": "@coffeekraken.sugar.shared.class.utils.getExtendsStack",
                 "name": "getExtendsStack",
                 "type": "Function",
                 "platform": [
@@ -15860,6 +16420,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.class.getMethods": {
+                "id": "@coffeekraken.sugar.js.class.getMethods",
                 "name": "getMethods",
                 "type": "Function",
                 "platform": [
@@ -15893,6 +16454,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.class.utils.methodExists": {
+                "id": "@coffeekraken.sugar.js.class.utils.methodExists",
                 "name": "methodExists",
                 "type": "Function",
                 "platform": [
@@ -15926,6 +16488,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.class.utils.multipleExtends": {
+                "id": "@coffeekraken.sugar.shared.class.utils.multipleExtends",
                 "name": "multipleExtends",
                 "type": "Function",
                 "platform": [
@@ -15959,6 +16522,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.class.utils.toPlainObject": {
+                "id": "@coffeekraken.sugar.shared.class.utils.toPlainObject",
                 "name": "toPlainObject",
                 "type": "Function",
                 "platform": [
@@ -15991,6 +16555,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.console.html.tagsMap": {
+                "id": "@coffeekraken.sugar.js.console.html.tagsMap",
                 "name": "tagsMap",
                 "type": "Object",
                 "platform": [
@@ -16018,6 +16583,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.dev.colors.availableColors": {
+                "id": "@coffeekraken.sugar.shared.dev.colors.availableColors",
                 "name": "availableColors",
                 "type": "Function",
                 "platform": [
@@ -16051,6 +16617,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.dev.colors.colorValue": {
+                "id": "@coffeekraken.sugar.shared.dev.colors.colorValue",
                 "name": "colorValue",
                 "type": "Function",
                 "platform": [
@@ -16084,6 +16651,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.dev.color.getColorFor": {
+                "id": "@coffeekraken.sugar.shared.dev.color.getColorFor",
                 "name": "getColorFor",
                 "type": "Function",
                 "platform": [
@@ -16117,6 +16685,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.shared.dev.types.dataTypesArray": {
+                "id": "@coffeekraken.sugar.shared.dev.types.dataTypesArray",
                 "name": "dataTypesArray",
                 "type": "Array",
                 "platform": [
@@ -16144,6 +16713,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.npm.parseAuthorString": {
+                "id": "@coffeekraken.sugar.js.npm.parseAuthorString",
                 "name": "parseAuthorString",
                 "type": "Function",
                 "platform": [
@@ -16177,6 +16747,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.npm.standardizeJson": {
+                "id": "@coffeekraken.sugar.js.npm.standardizeJson",
                 "name": "standardizeJson",
                 "type": "Function",
                 "platform": [
@@ -16210,6 +16781,7 @@
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.interface.WhenInteractSettingsInterface": {
+                "id": "@coffeekraken.sugar.js.dom.detect.interface.WhenInteractSettingsInterface",
                 "name": "WhenInteractSettingsInterface",
                 "type": ".                      Class",
                 "platform": [

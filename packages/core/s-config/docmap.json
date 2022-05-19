@@ -82,6 +82,7 @@
         ],
         "map": {
             "@coffeekraken.s-config.s-config.shared.config": {
+                "id": "@coffeekraken.s-config.s-config.shared.config",
                 "name": "config",
                 "type": "Class",
                 "description": "This class allows you to quickly access/update some configuration depending on the data adapters specified.\nThe base available data adapters are:\n- For node:\n- File system adapter: @coffeekraken/s-config/src/node/adapters/SConfigFsAdapter\n- For js:\n- Localstorage adapter: @coffeekraken/s-config/src/js/adapters/SConfigLsAdapter",
@@ -104,6 +105,7 @@
                 "relPath": "src/shared/SConfig.ts",
                 "children": {
                     "config": {
+                        "id": "0a25e0ca85420552d6a8cc01e1caa1c8d72f383e9af3cf246494a4754b10a9d1",
                         "name": "config",
                         "type": "Object",
                         "description": "Store the loaded config obect",
@@ -115,6 +117,7 @@
                         }
                     },
                     "integrity": {
+                        "id": "26377c32f5f2c628777938cb6284c9ff7c4ecb2d9afadaaac10a0ff5d8822cab",
                         "name": "integrity",
                         "type": "Object",
                         "description": "Store the config integrity",
@@ -126,6 +129,7 @@
                         }
                     },
                     "registerpostprocess": {
+                        "id": "45bce6330f90c6dbd845b5fc864c8312167023f597069667087490c8956d5db1",
                         "name": "registerPostprocess",
                         "type": "Function",
                         "description": "This method allows you to register a postprocess function that will be fired once the config is ready so you can make updates as needed",
@@ -138,6 +142,7 @@
                         }
                     },
                     "registerpreprocess": {
+                        "id": "c22897389c8b46946f3277db162f3bfd825dfe560e7e6141d1f2ebf85d180fb0",
                         "name": "registerPreprocess",
                         "type": "Function",
                         "description": "This method allows you to register a preprocess function that will be fired once the config is ready so you can make updates as needed",
@@ -150,6 +155,7 @@
                         }
                     },
                     "constructor": {
+                        "id": "b2c69ba197a49e1d8db57960cb20caa4e1bc89eddd667b58dd45dd693302ed81",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Init the config instance by passing a name and a settings object to configure your instance",
@@ -160,6 +166,7 @@
                         }
                     },
                     "load": {
+                        "id": "0bba223515e24c6d949bc9c9321e4f70e41d3f94eff7d29858a3b01f81a4d862",
                         "name": "load",
                         "type": "Function",
                         "description": "Load the config from the default adapter or from the passed adapter",
@@ -176,6 +183,7 @@
                         }
                     },
                     "fromcache": {
+                        "id": "03372ba5234a0a345cd2257897513cd9bf5a236ee638569e06e4caef873d6409",
                         "name": "fromCache",
                         "type": "Function",
                         "description": "Get the config from cache if possible. Otherwise it will resolve to undefined",
@@ -192,6 +200,7 @@
                         }
                     },
                     "cache": {
+                        "id": "f0ae931d48b43701bc440a49e8775e611f40c069075459ac475b32c1378919de",
                         "name": "cache",
                         "type": "Function",
                         "description": "Save the config in the cache to load it faster next time",
@@ -208,6 +217,7 @@
                         }
                     },
                     "get": {
+                        "id": "a27150f392252f84209b4f157ae3bb3656a46f74a830029a3320419695dcc8fa",
                         "name": "get",
                         "type": "Function",
                         "description": "Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one",
@@ -224,6 +234,7 @@
                         }
                     },
                     "toobject": {
+                        "id": "dfaccdb2d7865e94937b7209d1daf824b613940a7eece250c67a0df53e1c387a",
                         "name": "toObject",
                         "type": "Function",
                         "description": "This method allows you to get the config in a simple object format",
@@ -235,6 +246,7 @@
                         }
                     },
                     "tojson": {
+                        "id": "d85a3bbbacddb5fe8012241fe6ee25dd8fb2e2cda63a8e134f90f8ac4f9bc259",
                         "name": "toJson",
                         "type": "Function",
                         "description": "This method allows you to get the config in a simple json object format",
@@ -248,6 +260,7 @@
                 }
             },
             "@coffeekraken.s-config.sugar.js.config.adapters.SConfigLsAdapter": {
+                "id": "@coffeekraken.s-config.sugar.js.config.adapters.SConfigLsAdapter",
                 "name": "SConfigLsAdapter",
                 "type": "Class",
                 "description": "This Local Storage adapter for the SConfig class let you define a name for your config and then you can just\nlet the SConfig class do the work for you...",
@@ -263,6 +276,7 @@
                 "children": {}
             },
             "@coffeekraken.s-config.s-config.node.adapters.SConfigFolderAdapter": {
+                "id": "@coffeekraken.s-config.s-config.node.adapters.SConfigFolderAdapter",
                 "name": "SConfigFolderAdapter",
                 "type": "Class",
                 "description": "This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.\nEach file in the folder will be the first level of the final config object like for example the file \"colors.config.js\" will be stored\nin the final object under ```{ colors: ... }```.",
@@ -280,6 +294,7 @@
                 "children": {}
             },
             "@coffeekraken.s-config.s-config.shared.adapters.SConfigAdapter": {
+                "id": "@coffeekraken.s-config.s-config.shared.adapters.SConfigAdapter",
                 "name": "SConfigAdapter",
                 "type": "Class",
                 "description": "Base class for SCache adapters",
@@ -302,6 +317,7 @@
                 "relPath": "src/shared/adapters/SConfigAdapter.ts",
                 "children": {
                     "constructor": {
+                        "id": "0de462e530b026c4774d8bf09f6272c52396c3dd2cae57f2c7160ac02d0b3063",
                         "name": "constructor",
                         "type": "Function",
                         "description": "Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.",
@@ -312,6 +328,7 @@
                         }
                     },
                     "update": {
+                        "id": "81787eac2d77912a929c5bfc67228eca3ba85c1f7ad7f2520a13de9d8bd9959f",
                         "name": "update",
                         "type": "Function",
                         "description": "Function that you have to call with the new config when it has been updated",
@@ -323,6 +340,7 @@
                         }
                     },
                     "name": {
+                        "id": "04e80b98c8dec86fc1687fdd1ca1c704c57f9c060a9808b2c60c5a219e3d0dd9",
                         "name": "name",
                         "type": "String",
                         "description": "Access the adapter setted name",

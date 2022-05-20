@@ -100,6 +100,7 @@ export default function (env, config) {
             // __path.resolve(`${__dirname()}/../node/plugins/vuejsPlugin`),
             // __path.resolve(`${__dirname()}/../node/plugins/riotjsPlugin`),
             __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`),
+            __path.resolve(`${__dirname()}/../node/plugins/plainTextPlugin`),
         ],
         /**
          * @name          publicDir

@@ -138,7 +138,7 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: 0.25,
+            paddingInline: 0.5,
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.form
@@ -150,7 +150,7 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: 0.16,
+            paddingBlock: 0.25,
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.form

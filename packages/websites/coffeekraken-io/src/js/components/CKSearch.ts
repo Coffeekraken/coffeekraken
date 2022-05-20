@@ -318,7 +318,7 @@ export default class CKSearch extends __SLitComponent {
                             type="text"
                             name="search"
                             value="${this._search}"
-                            class="s-input s-color:accent"
+                            class="s-input s-color:accent s-scale:08"
                         />
                         <template type="before">
                             <div class="s-p:30" id="search-tips">

@@ -31,6 +31,7 @@ import { define as __CKSettingsComponent } from './components/CkSettings';
 import { define as __VersionSelector } from './components/VersionSelector';
 
 // others
+import __SDashboard from '@coffeekraken/s-dashboard';
 import __STheme from '@coffeekraken/s-theme';
 import __SConductor from '@coffeekraken/s-conductor';
 import __krakenLogo from './generic/krakenLogo';
@@ -126,6 +127,10 @@ __SConductor.setup({
             },
         },
     });
+
+    // dashboard
+    const dashboard = new __SDashboard({});
+    dashboard.open();
 
     // __krakenLogo();
 })();

@@ -705,6 +705,7 @@ class SDocMap extends __SClass implements ISDocMap {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 emit('notification', {
+                    // @ts-ignore
                     message: `${this.metas.id} build started`,
                 });
 
@@ -824,6 +825,7 @@ class SDocMap extends __SClass implements ISDocMap {
                     const children: any = {};
                     for (let j = 0; j < docblocks.length; j++) {
                         const docblock = docblocks[j];
+
                         for (
                             let k = 0;
                             // @ts-ignore

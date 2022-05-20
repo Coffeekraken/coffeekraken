@@ -1,0 +1,18 @@
+.s-dashboard-iframe {
+    position: fixed;
+    z-index: 9999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    opacity: 0;
+    backdrop-filter: blur(15px);
+    @sugar.transition (fast);
+
+    &.active {
+        pointer-events: all;
+        opacity: 1;
+    }
+}

@@ -115,7 +115,7 @@ export default function (env, config) {
                  * @default       /#\{.*\}/gm
                  *
                  * Specify some regex to apply on different docblock properties
-                 * to exclude some files from the buildd docmap json
+                 * to exclude some files from the builded docmap json
                  *
                  * @example     js
                  * {
@@ -132,7 +132,7 @@ export default function (env, config) {
              * @name        tags
              * @namespace     config.docmap.build
              * @type        Array<String>
-             * @default     ['name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']
+             * @default     ['id','name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']
              *
              * Specify which docblock tags you want to integrate to your docmap.json items
              *

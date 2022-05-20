@@ -40,7 +40,8 @@
         "url-parse": "^1.5.1",
         "vite": "^2.9.9",
         "vite-plugin-imagemin": "^0.3.2",
-        "vite-plugin-singlefile": "^0.5.1"
+        "vite-plugin-singlefile": "^0.5.1",
+        "vite-plugin-virtual-plain-text": "^1.2.2"
     },
     "peerDependencies": {
         "postcss": "^7 || ^8"

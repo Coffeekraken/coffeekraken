@@ -1,12 +1,12 @@
 .footer {
     background-color: sugar.color(main, surface);
-    padding-block: sugar.padding(50);
+    padding-block: sugar.padding(100);
 
     padding-inline: sugar.padding(50);
 
     svg {
         height: 60px;
-        width:140px;
+        width: 140px;
         margin-block-end: sugar.margin(30);
     }
     svg .main {
@@ -16,7 +16,7 @@
         fill: sugar.color(accent);
     }
 
-    @sugar.theme.when(dark) {
+    @sugar.theme.when (dark) {
         svg .main {
             fill: sugar.color(main, text);
         }

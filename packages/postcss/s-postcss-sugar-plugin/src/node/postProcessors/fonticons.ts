@@ -59,21 +59,19 @@ export default async function ({ root, sharedData, settings }) {
 
     // use cache only if the target is  "vite"
     const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
-    if (settings.target === 'vite') {
-        // handle cached hash
-        if (__fs.existsSync(hashCacheFilePath)) {
-            const cachedFolderHash = __fs
-                .readFileSync(hashCacheFilePath, 'utf8')
-                .toString();
-            if (cachedFolderHash === folderHash) {
-                // same icons, nothing to generate again
-                // console.log(
-                //     `<green>[fonticons]</green> Fonticons are up to date`,
-                // );
-                return;
-            }
+    // if (settings.target === 'vite') {
+    // handle cached hash
+    if (__fs.existsSync(hashCacheFilePath)) {
+        const cachedFolderHash = __fs
+            .readFileSync(hashCacheFilePath, 'utf8')
+            .toString();
+        if (cachedFolderHash === folderHash) {
+            // same icons, nothing to generate again
+            console.log(`<green>[fonticons]</green> Fonticons are up to date`);
+            return;
         }
     }
+    // }
 
     console.log(`<yellow>[fonticons]</yellow> Generate fonticons...`);
 

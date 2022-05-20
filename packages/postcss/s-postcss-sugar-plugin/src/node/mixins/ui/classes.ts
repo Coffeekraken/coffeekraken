@@ -39,6 +39,7 @@ export default function ({
         '@sugar.ui.dropdown.classes;',
         '@sugar.ui.fsTree.classes;',
         '@sugar.ui.input.classes;',
+        '@sugar.ui.inputContainer.classes;',
         '@sugar.ui.label.classes;',
         '@sugar.ui.list.classes;',
         '@sugar.ui.loader.classes;',

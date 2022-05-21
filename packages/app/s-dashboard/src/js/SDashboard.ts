@@ -93,11 +93,27 @@ export default class SDashboard extends __SClass {
         this._$iframe.classList.add(`s-dashboard-iframe`);
 
         __hotkey('ctrl+s').on('press', () => {
-            this._$iframe.classList.add('active');
+            this.open();
         });
         __hotkey('escape').on('press', () => {
-            this._$iframe.classList.remove('active');
+            this.close();
         });
+    }
+
+    /**
+     * @name            open
+     * @type            Function
+     *
+     * Open the dashboard
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    close() {
+        // handle class
+        this._$iframe.classList.remove('active');
+        // overflow
+        this.document.querySelector('html').style.removeProperty('overflow');
     }
 
     /**
@@ -111,20 +127,40 @@ export default class SDashboard extends __SClass {
      */
     open() {
         if (!this._$iframe.parentElement) {
+            console.log('OPDOPOD');
             document.body.appendChild(this._$iframe);
+            this._$iframe.contentWindow.document.open();
+            this._$iframe.contentWindow.document.write(`
+                <html>
+                <head>
+                <script>
+                var $document = document;
+                if (window.parent) {
+                    $document = window.parent.document;
+                }
+                var $html = $document.querySelector('html');
+                var $dashboardHtml = document.querySelector('html');
+                var theme = $html.getAttribute('theme');
+                var isDark = theme.match(/dark$/);
+                if (isDark && window.parent) {
+                    $dashboardHtml.setAttribute('theme', 'default-dark');
+                }
+                </script>
+                <script src="${'http://localhost:3000/@fs/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/app/s-dashboard/dist/pkg/esm/js/index.js'}" type="module" defer"></script>
+                </head>
+                <body>
+                        <s-dashboard></s-dashboard>
+                    </body>
+                </html>
+            `);
+            this._$iframe.contentWindow.document.close();
+            console.log('____DEDEDED');
         }
 
-        this._$iframe.contentWindow.document.open();
-        this._$iframe.contentWindow.document.write(`
-            <html>
-            <head></head>
-            <script src="${'http://localhost:3000/@fs/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/app/s-dashboard/dist/pkg/esm/js/index.js'}" type="module" defer"></script>
-            <body>
-                Hello
-                <s-dashboard></s-dashboard>
-            </body>
-            </html>
-        `);
-        this._$iframe.contentWindow.document.close();
+        // handle class
+        this._$iframe.classList.add('active');
+
+        // overflow
+        this.document.querySelector('html').style.overflow = 'hidden';
     }
 }

@@ -1,0 +1,7 @@
+@import './sugar.css';
+
+@import './partials/header.css';
+
+body {
+    overflow: hidden;
+}

@@ -1,7 +1,7 @@
 import __path from 'path';
 import __fs from 'fs';
 
-const defaultVirtualNamespace = 'plainText:';
+const defaultVirtualNamespace = 'raw:';
 const getResolvedVirtualNamespace = () => `@resolved${virtualNamespace}`;
 
 /**
@@ -14,7 +14,7 @@ function plainTextPlugin(virtualNamespace = defaultVirtualNamespace) {
     const resolvedVirtualModuleId = `@resolved${virtualNamespace}`;
 
     return {
-        name: 'plain-text-plugin', // required, will show up in warnings and errors
+        name: 'raw-plugin', // required, will show up in warnings and errors
         resolveId(id: string, fromPath: string) {
             if (id.indexOf(virtualNamespace) === 0) {
                 const path = id.slice(virtualNamespace.length);
@@ -67,6 +67,7 @@ function plainTextPlugin(virtualNamespace = defaultVirtualNamespace) {
                 const content = await __fs.promises.readFile(filePath, {
                     encoding: 'utf-8',
                 });
+                console.log('content', content);
                 return `export default ${JSON.stringify(content)}`;
             }
         },

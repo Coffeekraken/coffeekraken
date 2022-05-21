@@ -262,24 +262,9 @@ export default class SSitemapBuilder extends __SBuilder {
                 items.forEach((item) => {
                     const itemStr: string[] = [];
                     itemStr.push(`  <url>`);
-                    if (item.loc)
-                        itemStr.push(`        <loc>${item.loc}</loc>`);
-                    if (item.lastmod)
-                        itemStr.push(
-                            `      <lastmod>${item.lastmod}</lastmod>`,
-                        );
-                    if (item.changefreq)
-                        itemStr.push(
-                            `       <changefreq>${item.changefreq}</changefreq>`,
-                        );
-                    if (item.priority)
-                        itemStr.push(
-                            `      <priority>${item.priority}</priority>`,
-                        );
-                    if (item.integrity)
-                        itemStr.push(
-                            `       <integrity>${item.integrity}</integrity>`,
-                        );
+                    for (let [key, value] of Object.entries(item)) {
+                        itemStr.push(`<${key}>${value}</${key}>`);
+                    }
                     itemStr.push('  </url>');
                     xmlStr.push(itemStr.join('\n'));
                 });

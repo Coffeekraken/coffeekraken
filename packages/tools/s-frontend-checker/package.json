@@ -1,26 +1,25 @@
 {
-    "name": "@coffeekraken/s-dashboard",
+    "name": "@coffeekraken/s-frontend-checker",
     "version": "2.0.0",
     "description": "",
     "type": "module",
+    "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-class": "^2.0.0",
-        "@coffeekraken/s-filtrable-input-component": "^2.0.0",
-        "@coffeekraken/s-interface": "^2.0.0",
-        "@coffeekraken/s-lit-component": "^2.0.0",
+        "@coffeekraken/s-file": "^2.0.0",
         "@coffeekraken/s-promise": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
-        "@coffeekraken/s-frontend-checker": "^2.0.0",
-        "web-vitals": "^2.1.4"
+        "micromatch": "^4.0.5"
     },
     "main": "./dist/pkg/cjs/js/exports.js",
     "module": "./dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
-            "require": "./dist/pkg/cjs/js/exports.js",
-            "import": "./dist/pkg/esm/js/exports.js"
+            "import": "./dist/pkg/esm/js/exports.js",
+            "require": "./dist/pkg/cjs/js/exports.js"
         }
     }
 }

@@ -156,7 +156,7 @@ export default class SFiltrableInput extends __SLitComponent {
         // @ts-ignore
         this.$form = this.$input.form;
         // prevent from sending form if search is opened
-        this.$form.addEventListener('submit', (e) => {
+        this.$form?.addEventListener('submit', (e) => {
             if (this.state.isActive) {
                 e.preventDefault();
             }

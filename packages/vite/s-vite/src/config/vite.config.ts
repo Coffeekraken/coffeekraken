@@ -248,7 +248,6 @@ export default function (env, config) {
                     target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
                     changeOrigin: true,
                     rewrite: (path) => {
-                        console.log('AAAAAA', path);
                         return path;
                     },
                 },

@@ -1,0 +1,7 @@
+.s-dashboard-pages {
+    .s-highlight {
+        background: sugar.color(accent);
+        color: black;
+        border-radius: sugar.border.radius(10);
+    }
+}

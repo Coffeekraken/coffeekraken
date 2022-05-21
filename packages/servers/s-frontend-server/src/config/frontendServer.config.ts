@@ -389,6 +389,33 @@ export default function (env, config) {
                 path: `${__dirname()}/../node/modules/docmap/docmap`,
                 settings: {},
             },
+            // sitemap: {
+            //     /**
+            //      * @name            description
+            //      * @namespace       config.frontendServer.modules.sitemap
+            //      * @type            String
+            //      *
+            //      * Specify the module description
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     description:
+            //         'This module gives you access to a "sitemap" object in the views',
+            //     /**
+            //      * @name            path
+            //      * @namespace       config.frontendServer.modules.sitemap
+            //      * @type            String
+            //      * @default             ${__dirname()}/../node/modules/sitemap/sitemap
+            //      *
+            //      * Specify where to find the "sitemap" module
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     path: `${__dirname()}/../node/modules/sitemap/sitemap`,
+            //     settings: {},
+            // },
             redirect: {
                 /**
                  * @name            description

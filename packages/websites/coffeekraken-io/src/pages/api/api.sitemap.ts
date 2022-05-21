@@ -34,6 +34,7 @@ export default function apiSitemap() {
             }
 
             items.push({
+                title: docmapObj.name,
                 loc: `/api/${namespace}`,
                 // @ts-ignore
                 integrity: hash,

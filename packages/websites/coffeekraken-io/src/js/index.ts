@@ -130,7 +130,6 @@ __SConductor.setup({
 
     // dashboard
     const dashboard = new __SDashboard({});
-    dashboard.open();
 
     // __krakenLogo();
 })();

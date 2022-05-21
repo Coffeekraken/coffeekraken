@@ -23,6 +23,7 @@ export default function apiSitemap() {
             if (configIds.includes(configId)) return;
             configIds.push(configId);
             items.push({
+                title: `${configId}.config.ts`,
                 loc: `/config/explorer/${configId}`,
             });
         });

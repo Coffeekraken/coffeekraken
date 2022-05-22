@@ -46,7 +46,8 @@ export default class SFiltrableInputComponentInterface extends __SInterface {
                 default: 'No item to display',
             },
             searchValuePreprocess: {
-                description: 'Specify a function used to preprocess the value just before actually searching through the items',
+                description:
+                    'Specify a function used to preprocess the value just before actually searching through the items',
                 type: 'Function',
             },
             loadingText: {
@@ -56,8 +57,9 @@ export default class SFiltrableInputComponentInterface extends __SInterface {
                 default: 'Loading please wait...',
             },
             filterItems: {
-                description: 'Specify a function to use to filter the items. Must return the filtered list of items',
-                type: 'Function'
+                description:
+                    'Specify a function to use to filter the items. Must return the filtered list of items',
+                type: 'Function',
             },
             filtrable: {
                 description:
@@ -86,9 +88,10 @@ export default class SFiltrableInputComponentInterface extends __SInterface {
                 default: false,
             },
             closeOnSelect: {
-                description: 'Specify if you wantr to close the list when selecting an item',
+                description:
+                    'Specify if you wantr to close the list when selecting an item',
                 type: 'Boolean',
-                default: false
+                default: false,
             },
             notSelectable: {
                 description:
@@ -101,6 +104,19 @@ export default class SFiltrableInputComponentInterface extends __SInterface {
                     'Specify the maximum number of items to display at first in the list',
                 type: 'Number',
                 default: 25,
+            },
+            classes: {
+                description:
+                    'Specify some additional classes to add to the component elements',
+                type: 'Object',
+                default: {},
+            },
+            inline: {
+                description:
+                    'Specify if you want the filterable input list to be always displayed and inline in the html',
+                type: 'Boolean',
+                default: false,
+                physical: true,
             },
         };
     }

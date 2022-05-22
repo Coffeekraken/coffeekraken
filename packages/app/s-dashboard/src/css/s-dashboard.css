@@ -1,5 +1,9 @@
 @import './sugar.css';
 
+@import './generic/count.css';
+@import './generic/panel.css';
+@import './generic/list.css';
+
 @import './partials/header.css';
 
 body {

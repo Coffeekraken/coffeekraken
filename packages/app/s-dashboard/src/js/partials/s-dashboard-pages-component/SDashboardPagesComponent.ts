@@ -16,9 +16,15 @@ import '../../../../../../src/js/partials/s-dashboard-pages-component/s-dashboar
 
 __sFiltrableInputDefine(
     {
+        inline: true,
         value: 'loc',
         label: (item) => {
             return `${item.type} ${item.namespace}`;
+        },
+        classes: {
+            container: 'ck-panel',
+            list: 'ck-list',
+            listItem: 'ck-list__item',
         },
         closeOnSelect: true,
         filtrable: ['title', 'loc'],
@@ -79,9 +85,17 @@ export default class SDashboardPages extends __SLitComponent {
             },
         });
     }
+    _$filtrableInput;
     _$input;
     firstUpdated() {
         this._$input = this.querySelector('input');
+        this._$filtrableInput = this.querySelector(
+            's-dashboard-pages-internal',
+        );
+
+        this.addEventListener('s-filtrable-input.items', (e) => {
+            this.requestUpdate();
+        });
 
         // __hotkey('ctrl+p').on('press', () => {
         //     __cursorToEnd(this._$input);
@@ -132,12 +146,19 @@ export default class SDashboardPages extends __SLitComponent {
     render() {
         return html`
             <div class="s-dashboard-pages s-width:100">
+                <h2 class="s-typo:h6 s-mbe:30">
+                    Pages
+                    <span class="ck-count"
+                        >${this._$filtrableInput?.state.items.length}</span
+                    >
+                </h2>
+
                 <s-dashboard-pages-internal class="s-width:100">
                     <input
                         placeholder="Change page..."
                         type="text"
                         name="page"
-                        class="s-input s-scale:08 s-color:accent s-width:100"
+                        class="s-input s-color:accent s-width:100"
                     />
                 </s-dashboard-pages-internal>
             </div>

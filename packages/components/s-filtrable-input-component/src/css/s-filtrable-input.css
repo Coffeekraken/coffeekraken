@@ -1,6 +1,7 @@
 .s-filtrable-input {
     font-size: sugar.scalable(1rem);
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
     position: relative;
 
     .s-filtrable-input__input {
@@ -20,6 +21,7 @@
         max-width: calc(100vw - 100px);
         pointer-events: none;
         margin: 20px 0;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
     }
@@ -58,5 +60,15 @@
         * {
             pointer-events: none;
         }
+    }
+}
+
+.s-filtrable-input[inline] {
+    .s-filtrable-input__dropdown {
+        position: static;
+        margin: 0;
+        max-width: 100%;
+        pointer-events: all;
+        opacity: 1;
     }
 }

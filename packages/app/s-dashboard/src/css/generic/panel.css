@@ -1,0 +1,6 @@
+.ck-panel {
+    background: sugar.color(base, background, --alpha 0.7);
+    padding: sugar.padding(20);
+    @sugar.border.radius (10);
+    @sugar.depth (100);
+}

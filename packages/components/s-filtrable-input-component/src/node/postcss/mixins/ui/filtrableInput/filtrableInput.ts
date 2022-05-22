@@ -83,7 +83,6 @@ export default function ({
         vars.push(`
         
             .s-filtrable-input__dropdown {
-                overflow: hidden;
                 @sugar.depth(sugar.theme.value(ui.filtrableInput.depth));
                 transition: sugar.theme(ui.filtrableInput.transition);
             }

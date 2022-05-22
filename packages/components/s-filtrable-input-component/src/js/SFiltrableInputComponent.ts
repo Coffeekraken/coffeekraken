@@ -38,6 +38,8 @@ export interface ISFiltrableInputComponentProps {
     closeOnSelect: boolean;
     notSelectable: boolean;
     maxItems: number;
+    classes: Record<string, string>;
+    inline: boolean;
 }
 
 export interface ISFiltrableInputState {
@@ -107,6 +109,14 @@ export default class SFiltrableInput extends __SLitComponent {
             if ($itemsElm) {
                 this.state.items = JSON.parse($itemsElm.innerHTML);
                 this.requestUpdate();
+                this.dispatchEvent(
+                    new CustomEvent('s-filtrable-input.items', {
+                        bubbles: true,
+                        detail: {
+                            items: this.state.items,
+                        },
+                    }),
+                );
             }
         }
 
@@ -190,10 +200,16 @@ export default class SFiltrableInput extends __SLitComponent {
 
         // @ts-ignore
         this.$input.classList.add(this.componentUtils.className('__input'));
+        if (this.props.classes.input) {
+            this.$input.classList.add(this.props.classes.input);
+        }
 
         this.$container = this;
         this.$container.classList.add('s-filtrable-input');
         this.$container.classList.add(this.componentUtils.className());
+        if (this.props.classes.container) {
+            this.$container.classList.add(this.props.classes.container);
+        }
         // @ts-ignore
         this.$list = this.querySelector('ul');
         // @ts-ignore
@@ -284,7 +300,6 @@ export default class SFiltrableInput extends __SLitComponent {
             html,
         });
     }
-
     get selectedItem() {
         if (this.state.selectedItemIdx === -1) return;
         return this.state.filteredItems[this.state.selectedItemIdx];
@@ -387,6 +402,15 @@ export default class SFiltrableInput extends __SLitComponent {
             } else {
                 throw new Error(`Sorry but the "items" MUST be an Array...`);
             }
+            // @ts-ignore
+            this.dispatchEvent(
+                new CustomEvent('s-filtrable-input.items', {
+                    bubbles: true,
+                    detail: {
+                        items: this.state.items,
+                    },
+                }),
+            );
         }
     }
     async filterItems(needUpdate = true) {
@@ -498,7 +522,7 @@ export default class SFiltrableInput extends __SLitComponent {
     }
     _updateListSizeAndPosition() {
         //   if (!__isFocus(this.$input)) return;
-        if (!this.state.isActive) return;
+        if (!this.state.isActive || this.props.inline) return;
 
         const marginTop = __getStyleProperty(this.$dropdown, 'marginTop'),
             marginLeft = __getStyleProperty(this.$dropdown, 'marginLeft'),
@@ -527,15 +551,24 @@ export default class SFiltrableInput extends __SLitComponent {
 
     render() {
         return html`
-            <div class="s-filtrable-input__dropdown">
-                <div class="s-filtrable-input__before" tabindex="0">
+            <div
+                class="s-filtrable-input__dropdown ${this.props.classes
+                    .dropdown}"
+            >
+                <div
+                    class="s-filtrable-input__before ${this.props.classes
+                        .before}"
+                    tabindex="0"
+                >
                     ${this._getTemplate('before')}
                 </div>
-                <ul class="s-filtrable-input__list">
+                <ul class="s-filtrable-input__list ${this.props.classes.list}">
                     ${this.state.isLoading
                         ? html`
                               <li
-                                  class="s-filtrable-input__list-item s-filtrable-input__list-loading"
+                                  class="s-filtrable-input__list-item ${this
+                                      .props.classes
+                                      .listItem} s-filtrable-input__list-loading"
                               >
                                   ${this.props.templates?.({
                                       type: 'loading',
@@ -552,7 +585,9 @@ export default class SFiltrableInput extends __SLitComponent {
                           this.state.filteredItems.length <= 0
                         ? html`
                               <li
-                                  class="s-filtrable-input__list-item s-filtrable-input__list-no-item"
+                                  class="s-filtrable-input__list-item ${this
+                                      .props.classes
+                                      .listItem} s-filtrable-input__list-no-item"
                               >
                                   ${this.props.templates?.({
                                       type: 'empty',
@@ -584,6 +619,7 @@ export default class SFiltrableInput extends __SLitComponent {
                                             style="z-index: ${999999999 - idx}"
                                             tabindex="0"
                                             class="s-filtrable-input__list-item ${this
+                                                .props.classes.listItem} ${this
                                                 .state.selectedItemIdx === idx
                                                 ? 'active'
                                                 : ''}"
@@ -610,7 +646,10 @@ export default class SFiltrableInput extends __SLitComponent {
                           )
                         : ''}
                 </ul>
-                <div class="s-filtrable-input__after" tabindex="0">
+                <div
+                    class="s-filtrable-input__after ${this.props.classes.after}"
+                    tabindex="0"
+                >
                     ${this.props.templates?.({
                         type: 'after',
                         html,

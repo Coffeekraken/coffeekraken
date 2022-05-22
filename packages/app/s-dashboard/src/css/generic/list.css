@@ -1,0 +1,22 @@
+.ck-list {
+    &__item {
+        /* border-inline-start: 1px solid sugar.color(accent); */
+        padding: sugar.padding(20) sugar.padding(20);
+        border-color: sugar.color(current);
+        @sugar.border.radius (10);
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+            /* background-color: sugar.color(current, --alpha 0.1);  */
+            background-color: sugar.color(accent, background);
+        }
+        &:focus-within {
+            background-color: sugar.color(
+                accent,
+                background,
+                --lighten 20 --alpha 1
+            );
+        }
+    }
+}

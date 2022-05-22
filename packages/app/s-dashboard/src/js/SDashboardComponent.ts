@@ -154,7 +154,6 @@ export default class SDashboardComponent extends __SLitComponent {
                             </div>
                             <h1 class="s-typo:h5">Dashboard</h1>
                             <div class="__grow"></div>
-                            <s-dashboard-pages></s-dashboard-pages>
                         </div>
                     </div>
                 </header>
@@ -162,7 +161,7 @@ export default class SDashboardComponent extends __SLitComponent {
                     <div class="s-container:wide">
                         <div class="s-layout:123 s-gap:30">
                             <div>
-                                <s-dashboard-frontend-checker></s-dashboard-frontend-checker>
+                                <s-dashboard-pages></s-dashboard-pages>
                             </div>
                             <div>
                                 <s-dashboard-frontend-checker></s-dashboard-frontend-checker>

@@ -1,4 +1,15 @@
 .s-dashboard-pages {
+    .s-filtrable-input {
+        max-height: calc(100vh - 200px);
+
+        &__dropdown {
+            margin-block-start: sugar.margin(20);
+        }
+        &__list {
+            @sugar.scrollbar();
+        }
+    }
+
     .s-highlight {
         background: sugar.color(accent);
         color: black;

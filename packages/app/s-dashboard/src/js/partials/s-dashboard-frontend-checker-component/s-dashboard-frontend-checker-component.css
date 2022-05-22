@@ -1,33 +1,32 @@
 .s-dashboard-frontend-checker {
-    .__list {
-        background: sugar.color(base, background, --alpha 0.7);
-        padding: sugar.padding(20);
+    .__filters {
+        background: sugar.color(base, background);
+        display: flex;
+        padding: sugar.padding(10);
         @sugar.border.radius (10);
-        @sugar.depth (100);
+        margin-block-end: sugar.margin(20);
     }
-    .__list-item {
-        /* border-inline-start: 1px solid sugar.color(accent); */
+    .__filter {
         padding: sugar.padding(20) sugar.padding(20);
-        border-color: sugar.color(current);
-        @sugar.border.radius (10);
+        flex-grow: 1;
+        width: 33.3%;
         cursor: pointer;
-        user-select: none;
+        @sugar.border.radius (10);
+        opacity: 0.5;
 
-        &:hover {
-            /* background-color: sugar.color(current, --alpha 0.1);  */
-            background-color: sugar.color(accent, background, --alpha 0.6);
+        &.active {
+            opacity: 1;
         }
-        &:focus-within {
-            background-color: sugar.color(
-                accent,
-                background,
-                --lighten 20 --alpha 1
-            );
+        &:hover {
+            background-color: sugar.color(accent, background);
         }
     }
 
     .__details {
         display: none;
+    }
+    .ck-list__item:focus-within .__details {
+        display: block;
     }
 
     .s-typo--code {

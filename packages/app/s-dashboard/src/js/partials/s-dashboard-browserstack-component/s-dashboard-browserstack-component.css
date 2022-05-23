@@ -1,0 +1,12 @@
+.s-dashboard-browserstack {
+    .__browsers {
+        display: flex;
+        justify-content: space-between;
+        gap: sugar.margin(20);
+    }
+
+    .__browser-svg {
+        width: 32px;
+        height: 32px;
+    }
+}

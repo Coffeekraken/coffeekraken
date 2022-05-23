@@ -1,5 +1,3 @@
-import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
-
 /**
  * @name            doctype
  * @namespace       js.checks
@@ -13,25 +11,23 @@ import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default async function doctype(
-    $context: HTMLElement,
-): Promise<ISFrontendCheckerCheckResult> {
-    const resultObj = {
-        name: 'Doctype',
-        description: 'The document must contain a valid doctype declaration',
-    };
-    // @ts-ignore
-    if (!$context.doctype) {
+export default {
+    id: 'doctype',
+    name: 'Doctype',
+    description: 'The document must contain a valid doctype declaration',
+    level: 0,
+    check({ $context }) {
+        // @ts-ignore
+        if (!$context.doctype) {
+            return {
+                status: 'error',
+                message: 'The document is missing a doctype',
+                example: '<!DOCTYPE html>',
+                moreLink: 'https://www.w3schools.com/tags/tag_doctype.asp',
+            };
+        }
         return {
-            ...resultObj,
-            status: 'error',
-            message: 'The document is missing a doctype',
-            example: '<!DOCTYPE html>',
-            moreLink: 'https://www.w3schools.com/tags/tag_doctype.asp',
+            status: 'success',
         };
-    }
-    return {
-        ...resultObj,
-        status: 'success',
-    };
-}
+    },
+};

@@ -1,0 +1,161 @@
+== Info:   Trying 104.19.163.75...
+== Info: TCP_NODELAY set
+== Info: Connected to www.browserstack.com (104.19.163.75) port 443 (#0)
+== Info: ALPN, offering h2
+== Info: ALPN, offering http/1.1
+== Info: successfully set certificate verify locations:
+== Info:   CAfile: /etc/ssl/cert.pem
+  CApath: none
+== Info: TLSv1.2 (OUT), TLS handshake, Client hello (1):
+=> Send SSL data, 234 bytes (0xea)
+0000: .......M-n..-tO......hU...L..[..Z.`.Pb..\.0.,.(.$.......k.9.....
+0040: ............=.5...../.+.'.#.......g.3...E...<./...A.............
+0080: ........a.........www.browserstack.com..........................
+00c0: ...............................h2.http/1.1
+== Info: TLSv1.2 (IN), TLS handshake, Server hello (2):
+<= Recv SSL data, 100 bytes (0x64)
+0000: ...`..b.....l+.P.G&..9;`.B.."DOWNGRD. .....Y...G:.9....#.......
+0040: ..H...;...........................h2
+== Info: TLSv1.2 (IN), TLS handshake, Certificate (11):
+<= Recv SSL data, 2307 bytes (0x903)
+0000: .........%0..!0............VqH.+:&./.....0...*.H.=...0J1.0...U..
+0040: ..US1.0...U....Cloudflare, Inc.1 0...U....Cloudflare Inc ECC CA-
+0080: 30...220120000000Z..230119235959Z0p1.0...U....US1.0...U....Calif
+00c0: ornia1.0...U....San Francisco1.0...U....Cloudflare, Inc.1.0...U.
+0100: ...browserstack.com0Y0...*.H.=....*.H.=....B...`l....^.rz...N..
+0140: .....C...r.....fBn4+).K..h.......%L..".....~4....h0..d0...U.#..0
+0180: .....7...u..g..E..$....0...U......a.~.......%.5...!.5.0/..U...(0
+01c0: &..*.browserstack.com..browserstack.com0...U...........0...U.%..
+0200: 0...+.........+.......0{..U...t0r07.5.3.1http://crl3.digicert.co
+0240: m/CloudflareIncECCCA-3.crl07.5.3.1http://crl4.digicert.com/Cloud
+0280: flareIncECCCA-3.crl0>..U. .70503..g.....0)0'..+.........http://w
+02c0: ww.digicert.com/CPS0v..+........j0h0$..+.....0...http://ocsp.dig
+0300: icert.com0@..+.....0..4http://cacerts.digicert.com/CloudflareInc
+0340: ECCCA-3.crt0...U.......0.0..}..+.....y......m...i.g.v.....|.....
+0380: =..>.j.g)]...$...4.......~x.^......G0E. hR7.9....,4..._:.0.N?.K.
+03c0: .......X.!..sT.>6.+...J..+....t-....H....%.u.5.....lW...LmB...'
+0400:  &Q.?.*....;.L...~x.^*.....F0D. w.......}..r....F.k..&.G.u...k.2
+0440: . 2N..v..E.?..P...S.\..>d;$..4p4.p.v..sw...P.c.......Jy-.g......
+0480: .y6.....~x.^M.....G0E. M..*g.Z3$!..{...5....-..*..r.....!..,...I
+04c0: ..B...J....d...A.r....g.@.0...*.H.=....G.0D. E7.x...|.I.@Cw.....
+0500: Da...../...R|. V5i .1.(.z...f.g.....{w..p...I.i...0...0.........
+0540: ..7.d^_.."N.....<0...*.H........0Z1.0...U....IE1.0...U....Baltim
+0580: ore1.0...U....CyberTrust1"0 ..U....Baltimore CyberTrust Root0...
+05c0: 200127124808Z..241231235959Z0J1.0...U....US1.0...U....Cloudflare
+0600: , Inc.1 0...U....Cloudflare Inc ECC CA-30Y0...*.H.=....*.H.=....
+0640: B....Mf...F....*P..../4.}-...8.._...M.aF..s.$O....l.Qq/j.L..w.rb
+0680: ......h0..d0...U........7...u..g..E..$....0...U.#..0.....Y0.GX..
+06c0: ..T6.{:..M.0...U...........0...U.%..0...+.........+.......0...U.
+0700: ......0.......04..+........(0&0$..+.....0...http://ocsp.digicert
+0740: .com0:..U...3010/.-.+.)http://crl3.digicert.com/Omniroot2025.crl
+0780: 0m..U. .f0d07..`.H...l..0*0(..+.........https://www.digicert.com
+07c0: /CPS0...`.H...l..0...g.....0...g.....0...g.....0...*.H..........
+0800: ....$....*.....9M^kW..W...1.W.e...D8Zw....B.....E'..G,h.V.ST...@
+0840: .......8HlP,I..[d...H0.....I"....^..... .Vl....z..7..I..+.t9....
+0880: ..WX`O.....F{41>MG..:...]..M.n...$.2%].xQ.=.5#./eo...C....1gY'.k
+08c0: .u...$$..)..#...r?...$DSz..ae.L..H..uc..pER....E...1.~....>..<^t
+0900: ...
+== Info: TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+<= Recv SSL data, 116 bytes (0x74)
+0000: ...p... #+.>..y,....y.......6.....~f.......H0F.!....._H...F...=W
+0040: ?"...b)X~I?...tC..!....'.....|....}....).....T..y...
+== Info: TLSv1.2 (IN), TLS handshake, Server finished (14):
+<= Recv SSL data, 4 bytes (0x4)
+0000: ....
+== Info: TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+=> Send SSL data, 37 bytes (0x25)
+0000: ...! ..KAe.T..&.3.{.....{<b....R.....
+== Info: TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+=> Send SSL data, 1 bytes (0x1)
+0000: .
+== Info: TLSv1.2 (OUT), TLS handshake, Finished (20):
+=> Send SSL data, 16 bytes (0x10)
+0000: ......!Y.^..[.."
+== Info: TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+<= Recv SSL data, 1 bytes (0x1)
+0000: .
+== Info: TLSv1.2 (IN), TLS handshake, Finished (20):
+<= Recv SSL data, 16 bytes (0x10)
+0000: ....u.........9;
+== Info: SSL connection using TLSv1.2 / ECDHE-ECDSA-CHACHA20-POLY1305
+== Info: ALPN, server accepted to use h2
+== Info: Server certificate:
+== Info:  subject: C=US; ST=California; L=San Francisco; O=Cloudflare, Inc.; CN=browserstack.com
+== Info:  start date: Jan 20 00:00:00 2022 GMT
+== Info:  expire date: Jan 19 23:59:59 2023 GMT
+== Info:  subjectAltName: host "www.browserstack.com" matched cert's "*.browserstack.com"
+== Info:  issuer: C=US; O=Cloudflare, Inc.; CN=Cloudflare Inc ECC CA-3
+== Info:  SSL certificate verify ok.
+== Info: Using HTTP2, server supports multi-use
+== Info: Connection state changed (HTTP/2 confirmed)
+== Info: Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+== Info: Server auth using Basic with user 'olivierbossel'
+== Info: Using Stream ID: 1 (easy handle 0x7fced080d600)
+=> Send header, 231 bytes (0xe7)
+0000: POST /screenshots HTTP/2
+001a: Host: www.browserstack.com
+0036: Authorization: Basic b2xpdmllcmJvc3NlbDp5T0JYT2ZIeWFzZG9GVXFxSFZ
+0076: Ocw==
+007d: User-Agent: curl/7.64.1
+0096: Content-Type: application/json
+00b6: Accept: application/json
+00d0: Content-Length: 123
+00e5: 
+== Info: Connection state changed (MAX_CONCURRENT_STREAMS == 256)!
+=> Send data, 123 bytes (0x7b)
+0000: {"browsers": [{"os": "Windows", "os_version": "7", "browser_vers
+0040: ion": "8.0", "browser": "ie"}], "url": "http://google.com"}
+== Info: We are completely uploaded and fine
+<= Recv header, 13 bytes (0xd)
+0000: HTTP/2 406 
+<= Recv header, 37 bytes (0x25)
+0000: date: Mon, 23 May 2022 14:48:02 GMT
+<= Recv header, 41 bytes (0x29)
+0000: content-type: text/plain; charset=utf-8
+<= Recv header, 25 bytes (0x19)
+0000: cache-control: no-cache
+<= Recv header, 135 bytes (0x87)
+0000: set-cookie: tracking_id=21d066d5-854f-472e-90f3-c5a3e7f98bf2; do
+0040: main=.browserstack.com; path=/; expires=Sun, 23 May 2027 14:48:0
+0080: 2 GMT
+<= Recv header, 28 bytes (0x1c)
+0000: status: 406 Not Acceptable
+<= Recv header, 14 bytes (0xe)
+0000: vary: Origin
+<= Recv header, 29 bytes (0x1d)
+0000: x-frame-options: SAMEORIGIN
+<= Recv header, 33 bytes (0x21)
+0000: x-powered-by: Phusion Passenger
+<= Recv header, 52 bytes (0x34)
+0000: x-request-id: b4eda036-1898-4151-b941-4260fc44313c
+<= Recv header, 21 bytes (0x15)
+0000: x-runtime: 0.083657
+<= Recv header, 35 bytes (0x23)
+0000: x-ua-compatible: IE=Edge,chrome=1
+<= Recv header, 26 bytes (0x1a)
+0000: cf-cache-status: DYNAMIC
+<= Recv header, 100 bytes (0x64)
+0000: expect-ct: max-age=604800, report-uri="https://report-uri.cloudf
+0040: lare.com/cdn-cgi/beacon/expect-ct"
+<= Recv header, 146 bytes (0x92)
+0000: set-cookie: _session=b3ff94d05c1f118332d798d47c1c3af9; domain=.b
+0040: rowserstack.com; path=/; expires=Tue, 23 Aug 2022 14:48:02 GMT; 
+0080: secure; HttpOnly
+<= Recv header, 271 bytes (0x10f)
+0000: set-cookie: __cf_bm=AAPN6hCpztT1.oCYxewQa8OhiL9C2_8tesuPgrKUDfM-
+0040: 1653317282-0-AaEcH4Ez1MrQpdGJlvPtcaalHs0wrL/K89c81V0BM0LyTBe0lrl
+0080: AWmM4lpDSOy/Lv3Jf9jbzg2cWNcxLo5Vwe2c=; path=/; expires=Mon, 23-M
+00c0: ay-22 15:18:02 GMT; domain=.browserstack.com; HttpOnly; Secure; 
+0100: SameSite=None
+<= Recv header, 141 bytes (0x8d)
+0000: set-cookie: __cfruid=ec0f0577681104da74fb5e98dd72f8a784ff494d-16
+0040: 53317282; path=/; domain=.browserstack.com; HttpOnly; Secure; Sa
+0080: meSite=None
+<= Recv header, 20 bytes (0x14)
+0000: server: cloudflare
+<= Recv header, 30 bytes (0x1e)
+0000: cf-ray: 70fe9718de8023af-ZRH
+<= Recv header, 2 bytes (0x2)
+0000: 
+<= Recv data, 0 bytes (0x0)
+== Info: Connection #0 to host www.browserstack.com left intact

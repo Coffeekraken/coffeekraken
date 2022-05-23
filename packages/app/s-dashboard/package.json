@@ -8,11 +8,12 @@
     "dependencies": {
         "@coffeekraken/s-class": "^2.0.0",
         "@coffeekraken/s-filtrable-input-component": "^2.0.0",
+        "@coffeekraken/s-frontend-checker": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/s-lit-component": "^2.0.0",
         "@coffeekraken/s-promise": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
-        "@coffeekraken/s-frontend-checker": "^2.0.0",
+        "browserstack": "^1.6.1",
         "web-vitals": "^2.1.4"
     },
     "main": "./dist/pkg/cjs/js/exports.js",

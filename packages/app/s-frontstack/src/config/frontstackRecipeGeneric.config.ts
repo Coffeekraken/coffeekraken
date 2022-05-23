@@ -301,6 +301,18 @@ export default function (env, config) {
                     frontendServer:
                         '[config.frontstack.actions.frontendServer]',
                     /**
+                     * @name            corsProxy
+                     * @namespace       config.frontstackRecipeDefault.stacks.dev.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.corsProxy]
+                     *
+                     * Specify the recipe prod stack corsProxy action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    corsProxy: '[config.frontstack.actions.corsProxy]',
+                    /**
                      * @name            vite
                      * @namespace       config.frontstackRecipeDefault.stacks.dev.actions
                      * @type            String
@@ -355,6 +367,18 @@ export default function (env, config) {
                      */
                     frontendServer:
                         '[config.frontstack.actions.frontendServer]',
+                    /**
+                     * @name            corsProxy
+                     * @namespace       config.frontstackRecipeDefault.stacks.prod.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.corsProxy]
+                     *
+                     * Specify the recipe prod stack corsProxy action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    corsProxy: '[config.frontstack.actions.corsProxy]',
                 },
             },
             build: {

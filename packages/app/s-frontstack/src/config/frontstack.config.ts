@@ -561,6 +561,62 @@ export default function (env, config) {
                     },
                 },
             },
+            corsProxy: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.corsProxy
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Specify the cors proxy server action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Cors Proxy',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.corsProxy
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the cors proxy server action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'Frontend cors proxy server using the @coffeekraken/s-frontend-server package',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.corsProxy
+                 * @type            String
+                 * @default        sugar corsProxy.start [arguments]
+                 *
+                 * Specify the frontend server action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: 'sugar frontendServer.corsProxy [arguments]',
+                params: {},
+                settings: {
+                    processManager: {
+                        /**
+                         * @name            restart
+                         * @namespace       config.frontstack.actions.corsProxy.settings.processManager
+                         * @type            String
+                         * @default        true
+                         *
+                         * Specify the frontend server action restart behavior
+                         *
+                         * @since       2.0.0
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                         */
+                        restart: true,
+                    },
+                },
+            },
             postcssBuild: {
                 /**
                  * @name            title

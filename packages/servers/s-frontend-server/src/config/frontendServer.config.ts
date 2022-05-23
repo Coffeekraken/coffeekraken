@@ -107,6 +107,60 @@ export default function (env, config) {
          */
         logLevel: 'info',
 
+        corsProxy: {
+            /**
+             * @name              port
+             * @namespace         config.frontendServer.corsProxy
+             * @type              Number
+             * @default           9999
+             *
+             * Specify the port to use for the frontend server cors proxy
+             *
+             * @since             2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            port: 9999,
+
+            /**
+             * @name              url
+             * @namespace         config.frontendServer.corsProxy
+             * @type              Number
+             * @default           http://127.0.0.1:[config.frontendServer.corsProxy.port]
+             *
+             * Specify the url to call to pass by the server cors proxy
+             *
+             * @since             2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            url: 'http://127.0.0.1:[config.frontendServer.corsProxy.port]',
+
+            /**
+             * @name              targetUrlHeaderName
+             * @namespace         config.frontendServer.corsProxy
+             * @type              Number
+             * @default           TargetUrl
+             *
+             * Specify the header name to use to pass the target url to the proxy
+             *
+             * @since             2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            targetUrlHeaderName: 'TargetUrl',
+
+            /**
+             * @name              limit
+             * @namespace         config.frontendServer.corsProxy
+             * @type              Number
+             * @default           12mb
+             *
+             * Specify the limit of requests proxy size
+             *
+             * @since             2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            limit: '12mb',
+        },
+
         proxy: {
             // vitePing: {
             //     /**

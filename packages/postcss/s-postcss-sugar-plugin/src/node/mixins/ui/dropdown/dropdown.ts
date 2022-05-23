@@ -123,7 +123,7 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
-                    background-color: sugar.color(current);
+                    background-color: sugar.color(base, background);
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
                     @sugar.border.radius(sugar.theme.value(ui.dropdown.borderRadius));
                     @sugar.depth(sugar.theme.value(ui.dropdown.depth));

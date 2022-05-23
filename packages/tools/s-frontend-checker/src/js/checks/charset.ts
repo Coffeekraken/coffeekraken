@@ -1,4 +1,6 @@
-import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
+import __SFrontendChecker, {
+    ISFrontendCheckerCheckResult,
+} from '../SFrontendChecker';
 
 /**
  * @name            charset
@@ -13,25 +15,23 @@ import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default async function charset(
-    $context: HTMLElement,
-): Promise<ISFrontendCheckerCheckResult> {
-    const resultObj = {
-        name: 'Charset',
-        description: 'The document must contain a valid charset declaration',
-    };
-    // @ts-ignore
-    if (!$context.characterSet) {
+export default {
+    id: 'charset',
+    name: 'Charset',
+    description: 'The document must contain a valid charset declaration',
+    level: 0,
+    check({ $context }) {
+        // @ts-ignore
+        if (!$context.characterSet) {
+            return {
+                status: 'error',
+                message: 'The document is missing a charset',
+                example: '<meta charset="utf-8">',
+                moreLink: 'https://www.w3schools.com/html/html_charset.asp',
+            };
+        }
         return {
-            ...resultObj,
-            status: 'error',
-            message: 'The document is missing a charset',
-            example: '<meta charset="utf-8">',
-            moreLink: 'https://www.w3schools.com/html/html_charset.asp',
+            status: 'success',
         };
-    }
-    return {
-        ...resultObj,
-        status: 'success',
-    };
-}
+    },
+};

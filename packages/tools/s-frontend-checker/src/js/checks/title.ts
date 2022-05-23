@@ -1,4 +1,6 @@
-import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
+import __SFrontendChecker, {
+    ISFrontendCheckerCheckResult,
+} from '../SFrontendChecker';
 
 /**
  * @name            title
@@ -13,24 +15,24 @@ import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default async function title(
-    $context: HTMLElement,
-): Promise<ISFrontendCheckerCheckResult> {
-    const resultObj = {
-        name: 'Title',
-        description: 'The document must have a title specified',
-    };
-    if (!$context.title) {
+
+export default {
+    id: 'title',
+    name: 'Title',
+    description: 'The document must contain a valid title declaration',
+    level: 0,
+    check({ $context }) {
+        // @ts-ignore
+        if (!$context.title) {
+            return {
+                status: 'error',
+                message: 'The document is missing the title',
+                example: '<title>My awesome title</title>',
+                moreLink: 'https://www.w3schools.com/tags/tag_title.asp',
+            };
+        }
         return {
-            ...resultObj,
-            status: 'error',
-            message: 'The document is missing the title',
-            example: '<title>My awesome title</title>',
-            moreLink: 'https://www.w3schools.com/tags/tag_title.asp',
+            status: 'success',
         };
-    }
-    return {
-        ...resultObj,
-        status: 'success',
-    };
-}
+    },
+};

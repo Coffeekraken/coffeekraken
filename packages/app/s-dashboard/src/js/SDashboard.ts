@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';
 import '../../../../src/css/index.css';
@@ -30,7 +31,9 @@ import '../../../../src/css/index.css';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISDashboardSettings {}
+export interface ISDashboardSettings {
+    layout: any[];
+}
 
 export interface ISDashboardCtorSettings {
     dashboard: Partial<ISDashboardSettings>;
@@ -146,7 +149,7 @@ export default class SDashboard extends __SClass {
                     $dashboardHtml.setAttribute('theme', 'default-dark');
                 }
                 </script>
-                <script src="${'http://localhost:3000/@fs/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/app/s-dashboard/dist/pkg/esm/js/index.js'}" type="module" defer"></script>
+                <script src="${'http://localhost:3000/@fs/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/app/s-dashboard/src/js/index.ts'}" type="module" defer"></script>
                 </head>
                 <body>
                         <s-dashboard></s-dashboard>

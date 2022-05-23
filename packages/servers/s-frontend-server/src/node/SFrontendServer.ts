@@ -13,6 +13,7 @@ import __path from 'path';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface';
 import __SFrontendServerAddDefaultPagesParamsInterface from './interface/SFrontendServerAddDefaultPagesParamsInterface';
+import __SFrontendServerCorsProxyParamsInterface from './interface/SFrontendServerCorsProxyParamsInterface';
 // import __vhost from 'vhost';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __SBench from '@coffeekraken/s-bench';
@@ -23,6 +24,9 @@ import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __recursiveCopy from 'recursive-copy';
+
+import __request from 'request';
+import __bodyParser from 'body-parser';
 
 /**
  * @name            SFrontendServer
@@ -57,6 +61,12 @@ export interface ISFrontendServerAddDefaultPagesParams {
     yes: boolean;
     pagesDir: string;
     viewsDir: string;
+}
+
+export interface ISFrontendServerCorsProxyParams {
+    port: number;
+    targetUrlHeaderName: string;
+    limit: string;
 }
 
 export interface ISFrontendServerPageViewConfig {
@@ -354,6 +364,94 @@ export default class SFrontendServer extends __SClass {
                             // @ts-ignore
                             resolve();
                         });
+                    });
+                });
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
+    }
+
+    corsProxy(
+        params: Partial<ISFrontendServerCorsProxyParams> | string,
+    ): Promise<any> {
+        const finalParams: ISFrontendServerCorsProxyParams = __SFrontendServerCorsProxyParamsInterface.apply(
+            params,
+        );
+
+        return new __SPromise(
+            ({ resolve, reject, emit, pipe }) => {
+                const app = __express();
+
+                var myLimit = __SSugarConfig.get(
+                    'frontendServer.corsProxy.limit',
+                );
+
+                app.use(__bodyParser.json({ limit: myLimit }));
+
+                app.all('*', function (req, res, next) {
+                    // Set CORS headers: allow all origins, methods, and headers: you may want to lock this down in a production environment
+                    res.header('Access-Control-Allow-Origin', '*');
+                    res.header(
+                        'Access-Control-Allow-Methods',
+                        'GET, PUT, PATCH, POST, DELETE',
+                    );
+                    res.header(
+                        'Access-Control-Allow-Headers',
+                        req.header('access-control-request-headers'),
+                    );
+
+                    if (req.method === 'OPTIONS') {
+                        // CORS Preflight
+                        res.send();
+                    } else {
+                        var targetURL = req.header(
+                            finalParams.targetUrlHeaderName,
+                        );
+                        if (!targetURL) {
+                            res.send(500, {
+                                error: `There is no "${finalParams.targetUrlHeaderName}" header in the request`,
+                            });
+                            return;
+                        }
+                        __request(
+                            {
+                                url: targetURL + req.url,
+                                method: req.method,
+                                json: req.body,
+                                headers: {
+                                    Authorization: req.header('Authorization'),
+                                },
+                            },
+                            function (error, response, body) {
+                                if (error) {
+                                    emit('log', {
+                                        type: __SLog.TYPE_ERROR,
+                                        value: error,
+                                    });
+                                }
+                            },
+                        ).pipe(res);
+                    }
+                });
+
+                app.set('port', finalParams.port);
+
+                app.listen(app.get('port'), function () {
+                    emit('log', {
+                        value: `<yellow>[corsProxy]</yellow> Cors proxy server running on port <cyan>${app.get(
+                            'port',
+                        )}</cyan>...`,
+                    });
+                    emit('log', {
+                        value: `<yellow>[corsProxy]</yellow> Call "<cyan>http://${__SSugarConfig.get(
+                            'frontendServer.hostname',
+                        )}:${finalParams.port}</cyan>" with the "<magenta>${
+                            finalParams.targetUrlHeaderName
+                        }</magenta>" header to use it...`,
                     });
                 });
             },

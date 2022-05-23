@@ -12,7 +12,7 @@ import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 import __xmlToJson from '@coffeekraken/sugar/shared/convert/xmlToJson';
 import __localStorage from '@coffeekraken/sugar/js/storage/localStorage';
 
-import '../../../../../../src/js/partials/s-dashboard-pages-component/s-dashboard-pages-component.css';
+import './s-dashboard-pages-component.css';
 
 __sFiltrableInputDefine(
     {
@@ -52,6 +52,7 @@ __sFiltrableInputDefine(
         },
         items: async ({ value }) => {
             async function fetchItems() {
+                console.log('fetch', value);
                 const request = new __SRequest({
                     url: '/sitemap.xml',
                 });
@@ -64,13 +65,14 @@ __sFiltrableInputDefine(
             }
 
             let items;
-            const cached = await __localStorage.getItem('s-dashboard-pages');
-            if (!cached) {
-                items = await fetchItems();
-            } else {
-                fetchItems();
-                items = cached;
-            }
+            // const cached = await __localStorage.getItem('s-dashboard-pages');
+            // console.log('CACH', cached);
+            // if (!cached) {
+            items = await fetchItems();
+            // } else {
+            //     fetchItems();
+            //     items = cached;
+            // }
             return items;
         },
     },

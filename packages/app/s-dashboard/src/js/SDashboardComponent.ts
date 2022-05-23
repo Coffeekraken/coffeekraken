@@ -4,18 +4,21 @@ import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { property } from 'lit/decorators.js';
 // @ts-ignore
-import __css from '../../../../src/css/s-dashboard.css'; // relative to /dist/pkg/esm/js
+import __css from '../css/s-dashboard.css'; // relative to /dist/pkg/esm/js
 import __SDashboardComponentInterface from './interface/SDashboardComponentInterface';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 import { define as __SDashboardPagesComponent } from './partials/s-dashboard-pages-component/SDashboardPagesComponent';
 import { define as __SDashboardFrontendCheckerComponent } from './partials/s-dashboard-frontend-checker-component/SDashboardFrontendCheckerComponent';
+import { define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent';
 
 import __logoSvg from './partials/logo';
 
 // external components
 __SDashboardPagesComponent();
 __SDashboardFrontendCheckerComponent();
+__SDashboardBrowserstackComponent();
 
 export interface ISDashboardComponentProps {}
 
@@ -41,6 +44,8 @@ export default class SDashboardComponent extends __SLitComponent {
         return window.parent?.document ?? document;
     }
 
+    dashboardConfig;
+
     constructor() {
         super(
             __deepMerge({
@@ -58,6 +63,8 @@ export default class SDashboardComponent extends __SLitComponent {
 
         // inject web vitals if needed
         // this._injectWebVitals();
+
+        this.dashboardConfig = __SSugarConfig.get('dashboard');
     }
 
     /**
@@ -159,16 +166,28 @@ export default class SDashboardComponent extends __SLitComponent {
                 </header>
                 <section class="content">
                     <div class="s-container:wide">
-                        <div class="s-layout:123 s-gap:30">
-                            <div>
-                                <s-dashboard-pages></s-dashboard-pages>
-                            </div>
-                            <div>
-                                <s-dashboard-frontend-checker></s-dashboard-frontend-checker>
-                            </div>
-                            <div>
-                                <s-dashboard-frontend-checker></s-dashboard-frontend-checker>
-                            </div>
+                        <div
+                            class="s-layout:${[
+                                ...Array(
+                                    this.dashboardConfig.layout.length + 1,
+                                ).keys(),
+                            ]
+                                .filter((n) => n !== 0)
+                                .join('')} s-gap:30"
+                        >
+                            ${this.dashboardConfig.layout.map(
+                                (column) => html`
+                                    <div>
+                                        ${column.map(
+                                            (component) => html`
+                                                ${unsafeHTML(
+                                                    `<${component}></${component}>`,
+                                                )}
+                                            `,
+                                        )}
+                                    </div>
+                                `,
+                            )}
                         </div>
                     </div>
                 </section>

@@ -45,8 +45,8 @@ export default function sVitePluginSugar(settings: any = {}) {
 
         const code = [
             `// sugar variables`,
-            `if (!window.env) window.env = {SUGAR:{}};`,
-            `window.env.SUGAR = JSON.parse(\`${envJsonStr}\`);`,
+            `if (!document.env) document.env = {SUGAR:{}};`,
+            `document.env.SUGAR = JSON.parse(\`${envJsonStr}\`);`,
         ];
 
         return [code.join('\n'), src].join('\n');
@@ -60,21 +60,24 @@ export default function sVitePluginSugar(settings: any = {}) {
         },
         async transform(src, id) {
             if (jsReg.test(id)) {
-                if (
-                    id.includes(packageRoot) &&
-                    (id === config.build.rollupOptions?.input ||
-                        id === config.build.lib?.entry)
-                ) {
-                    // build
-                    if (config.build.rollupOptions?.input) {
-                        if (!config.build.lib) {
-                            src = await _injectEnvVars(src, id);
-                        }
-                    } else {
-                        // live dev environment
+                // if (
+                //     id.includes(packageRoot)
+                //     // (id === config.build.rollupOptions?.input ||
+                //     //     id === config.build.lib?.entry)
+                // ) {
+                // if (id.includes('index.ts')) {
+                //     console.log('SIN', id);
+                // }
+                // build
+                if (config.build.rollupOptions?.input) {
+                    if (!config.build.lib) {
                         src = await _injectEnvVars(src, id);
                     }
+                } else {
+                    // live dev environment
+                    src = await _injectEnvVars(src, id);
                 }
+                // }
 
                 return {
                     code: src,

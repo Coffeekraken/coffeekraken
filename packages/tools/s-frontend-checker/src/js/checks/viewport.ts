@@ -1,4 +1,6 @@
-import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
+import __SFrontendChecker, {
+    ISFrontendCheckerCheckResult,
+} from '../SFrontendChecker';
 
 /**
  * @name            viewport
@@ -13,25 +15,24 @@ import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default async function viewport(
-    $context: HTMLElement,
-): Promise<ISFrontendCheckerCheckResult> {
-    const resultObj = {
-        name: 'Viewport',
-        description: 'The document must contain a valid viewport declaration',
-    };
-    if (true || !$context.querySelector('meta[name="viewport"]')) {
+export default {
+    id: 'viewport',
+    name: 'Viewport',
+    description: 'The document must contain a valid viewport declaration',
+    level: 0,
+    check({ $context }) {
+        // @ts-ignore
+        if (true || !$context.querySelector('meta[name="viewport"]')) {
+            return {
+                status: 'error',
+                message: 'The document is missing a viewport',
+                example:
+                    '<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">',
+                moreLink: 'https://www.w3schools.com/css/css_rwd_viewport.asp',
+            };
+        }
         return {
-            ...resultObj,
-            status: 'error',
-            message: 'The document is missing a viewport',
-            example:
-                '<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">',
-            moreLink: 'https://www.w3schools.com/css/css_rwd_viewport.asp',
+            status: 'success',
         };
-    }
-    return {
-        ...resultObj,
-        status: 'success',
-    };
-}
+    },
+};

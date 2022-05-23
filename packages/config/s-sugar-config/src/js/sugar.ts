@@ -33,6 +33,6 @@ export default class SSugarConfig {
      */
     static get(dotpath: string): any {
         // @ts-ignore
-        return __get(window.env?.SUGAR?.config ?? {}, dotpath);
+        return __get((window.env ?? document.env).SUGAR?.config ?? {}, dotpath);
     }
 }

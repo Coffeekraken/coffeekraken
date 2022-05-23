@@ -1,0 +1,22 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "dashboard",
+            "description": "Dashboard API",
+            "defaultAction": "browserstackScreenshotService",
+            "actions": {
+                "browserstackScreenshotService": {
+                    "description": "Make screenshots using the browserstack api",
+                    "process": "./dist/pkg/esm/cli/browserstackScreenshotService.cli.js"
+                }
+            }
+        }
+    ]
+}

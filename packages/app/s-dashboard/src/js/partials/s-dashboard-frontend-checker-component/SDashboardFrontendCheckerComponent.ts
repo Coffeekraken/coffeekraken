@@ -2,7 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
-import '../../../../../../src/js/partials/s-dashboard-frontend-checker-component/s-dashboard-frontend-checker-component.css';
+import './s-dashboard-frontend-checker-component.css';
 
 import __SFrontendChecker, {
     ISFrontendCheckerCheckResult,
@@ -59,7 +59,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                         Success
                         <span class="ck-count"
                             >${this._checkResults.filter(
-                                (r) => r.status === 'success',
+                                (r) => r.result.status === 'success',
                             ).length}</span
                         >
                     </div>
@@ -75,7 +75,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                         Warning
                         <span class="ck-count"
                             >${this._checkResults.filter(
-                                (r) => r.status === 'warning',
+                                (r) => r.result.status === 'warning',
                             ).length}</span
                         >
                     </div>
@@ -89,7 +89,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                         Error
                         <span class="ck-count"
                             >${this._checkResults.filter(
-                                (r) => r.status === 'error',
+                                (r) => r.result.status === 'error',
                             ).length}</span
                         >
                     </div>
@@ -99,32 +99,38 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                     <ul class="ck-list">
                         ${this._checkResults
                             .filter((check) =>
-                                this._displayStatus.includes(check.status),
+                                this._displayStatus.includes(
+                                    check.result.status,
+                                ),
                             )
                             .map(
-                                (checkResult) => html`
+                                (check) => html`
                                     <li
-                                        class="ck-list__item s-color:${checkResult.status}"
+                                        class="ck-list__item s-color:${check
+                                            .result.status}"
                                         tabindex="-1"
                                     >
                                         <h2 class="s-typo:p:bold">
                                             <i
-                                                class="s-icon:${checkResult.status} s-mie:10 s-tc:${checkResult.status}"
+                                                class="s-icon:${check.result
+                                                    .status} s-mie:10 s-tc:${check
+                                                    .result.status}"
                                             ></i>
-                                            ${checkResult.name}
+                                            ${check.name}
                                         </h2>
                                         <div class="__details">
                                             <p
                                                 class="__description s-typo:p s-mbs:10"
                                             >
-                                                ${checkResult.description}
+                                                ${check.description}
                                             </p>
-                                            ${checkResult.example
+                                            ${check.result.example
                                                 ? html`
                                                       <p
                                                           class="s-typo:code s-mbs:10"
                                                       >
-                                                          ${checkResult.example}
+                                                          ${check.result
+                                                              .example}
                                                       </p>
                                                   `
                                                 : ''}

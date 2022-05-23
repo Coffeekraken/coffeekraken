@@ -44,9 +44,23 @@ export interface ISFrontendCheckerCtorSettings {
 }
 export interface ISFrontendCheckerSettings {}
 
-export interface ISFrontendCheckerCheckResult {
+export interface ISFrontendCheckerCheckObj {
+    id: string;
     name: string;
     description: string;
+    level: number;
+    check: Function;
+}
+
+export interface ISFrontendCheckerCheckResultObj {
+    id: string;
+    name: string;
+    description: string;
+    level: number;
+    result: ISFrontendCheckerCheckResult;
+}
+
+export interface ISFrontendCheckerCheckResult {
     status: 'success' | 'warning' | 'error';
     message?: string;
     example?: string;
@@ -64,6 +78,78 @@ export default class SFrontendCheckeer extends __SClass {
     static _registeredChecks: { [key: string]: ISFrontendCheckerCheckFn } = {};
 
     /**
+     * @name        LEVEL_LOW
+     * @type        Number
+     * @static
+     *
+     * Store the "low" level id
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static LEVEL_LOW = 0;
+
+    /**
+     * @name        LEVEL_MEDIUM
+     * @type        Number
+     * @static
+     *
+     * Store the "medium" level id
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static LEVEL_MEDIUM = 1;
+
+    /**
+     * @name        LEVEL_HIGH
+     * @type        Number
+     * @static
+     *
+     * Store the "high" level id
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static LEVEL_HIGH = 2;
+
+    /**
+     * @name        STATUS_SUCCESS
+     * @type        Number
+     * @static
+     *
+     * Store the "success" status
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static STATUS_SUCCESS = 'success';
+
+    /**
+     * @name        STATUS_WARNING
+     * @type        Number
+     * @static
+     *
+     * Store the "warning" status
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static STATUS_WARNING = 'warning';
+
+    /**
+     * @name        STATUS_ERROR
+     * @type        Number
+     * @static
+     *
+     * Store the "error" status
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static STATUS_ERROR = 'error';
+
+    /**
      * @name          registerCheck
      * @type          Function
      * @static
@@ -75,8 +161,8 @@ export default class SFrontendCheckeer extends __SClass {
      * @since          2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static registerCheck(checkFn: ISFrontendCheckerCheckFn) {
-        this._registeredChecks[checkFn.name] = checkFn;
+    static registerCheck(checkObj: ISFrontendCheckerCheckObj) {
+        this._registeredChecks[checkObj.id] = checkObj;
     }
 
     /**
@@ -118,10 +204,13 @@ export default class SFrontendCheckeer extends __SClass {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             for (let i = 0; i < checks.length; i++) {
                 const checkId = checks[i];
-                const checkFn = SFrontendCheckeer._registeredChecks[checkId];
-                const checkResult = await checkFn($context);
-                emit('check', checkResult);
-                results.push(checkResult);
+                const checkObj = SFrontendCheckeer._registeredChecks[checkId];
+                const checkResult = await checkObj.check({ $context });
+                const checkResultObj = Object.assign({}, checkObj);
+                delete checkResultObj.check;
+                checkResultObj.result = checkResult;
+                emit('check', checkResultObj);
+                results.push(checkResultObj);
             }
             resolve(results);
         });

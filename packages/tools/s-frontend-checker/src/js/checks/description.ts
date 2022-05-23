@@ -1,4 +1,6 @@
-import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
+import __SFrontendChecker, {
+    ISFrontendCheckerCheckResult,
+} from '../SFrontendChecker';
 
 /**
  * @name            description
@@ -13,25 +15,25 @@ import { ISFrontendCheckerCheckResult } from '../SFrontendChecker';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default async function description(
-    $context: HTMLElement,
-): Promise<ISFrontendCheckerCheckResult> {
-    const resultObj = {
-        name: 'Description',
-        description: 'The document must have a description specified',
-    };
-    if (!$context.querySelector('head meta[name="description"]')) {
+
+export default {
+    id: 'description',
+    name: 'Description',
+    description: 'The document must contain a valid description declaration',
+    level: 1,
+    check({ $context }) {
+        // @ts-ignore
+        if (!$context.querySelector('head meta[name="description"]')) {
+            return {
+                status: 'error',
+                message: 'The document is missing the description',
+                example:
+                    '<meta name="description" content="My awesome description">',
+                moreLink: 'https://www.w3schools.com/tags/tag_meta.asp',
+            };
+        }
         return {
-            ...resultObj,
-            status: 'error',
-            message: 'The document is missing the description',
-            example:
-                '<meta name="description" content="My awesome description">',
-            moreLink: 'https://www.w3schools.com/tags/tag_meta.asp',
+            status: 'success',
         };
-    }
-    return {
-        ...resultObj,
-        status: 'success',
-    };
-}
+    },
+};

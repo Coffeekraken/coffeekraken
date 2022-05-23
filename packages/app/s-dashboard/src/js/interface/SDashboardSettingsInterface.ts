@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name                SDashboardSettingsInterface
@@ -20,7 +21,14 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 class SDashboardSettingsInterface extends __SInterface {
     static get _definition() {
-        return {};
+        return {
+            layout: {
+                description:
+                    'Specify the layout of the dashboard with the components you want to display in which column',
+                type: 'Array',
+                default: __SSugarConfig.get('dashboard.layout'),
+            },
+        };
     }
 }
 

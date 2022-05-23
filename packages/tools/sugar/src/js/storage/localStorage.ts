@@ -83,8 +83,10 @@ export default {
             const store = tx.objectStore('store');
             // query db
             const getKey = store.get(key);
+            return;
             // on success, resolve
-            getKey.onsuccess = function () {
+            getKey.onsuccess = function (...args) {
+                console.log('AARES', getKey.result, args);
                 resolve(getKey.result.value);
             };
         });

@@ -39,7 +39,7 @@ import __unquote from '@coffeekraken/sugar/shared/string/unquote';
  * );
  *
  * @param       {String}       icons        The icons you want. Each line define a new icon
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.icon.classes(

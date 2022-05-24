@@ -11,7 +11,7 @@ import __faker from 'faker';
  *
  * This mixin generate font helper classes like s-font:title, s-font:20, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.font.classes;

@@ -1,0 +1,39 @@
+import __SFrontendChecker, {
+    ISFrontendCheckerCheckResult,
+} from '../SFrontendChecker';
+
+/**
+ * @name            language
+ * @namespace       js.checks
+ * @type            Function
+ * @platform        js
+ * @status          beta
+ * @async
+ *
+ * Check if the language is well defined
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
+export default {
+    id: 'language',
+    name: 'Language',
+    description: 'The document must contain a valid langage declaration',
+    level: 0,
+    check({ $context }) {
+        // @ts-ignore
+        if (!$context.querySelector('html')?.hasAttribute('lang')) {
+            return {
+                status: 'error',
+                message: 'The document is missing the language',
+                example: '<html lang="en">',
+                moreLink:
+                    'https://www.w3.org/International/questions/qa-html-language-declarations',
+            };
+        }
+        return {
+            status: 'success',
+        };
+    },
+};

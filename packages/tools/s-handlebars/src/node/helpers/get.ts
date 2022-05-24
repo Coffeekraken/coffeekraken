@@ -10,10 +10,10 @@ import __get from '@coffeekraken/sugar/shared/object/get';
  *
  * This helper allows you to get get a value deep into the passed object using dotpath syntax
  *
- * @param       {Object}        object          The object you want to get a value from
- * @param      {String}        path             The dotpath to the value you want to get
+ * @param       {Object}        object          The object you want to get a value from
+ * @param      {String}        path             The dotpath to the value you want to get
  * @param       {Boolean}       [resolveDots=true]      Specify if you want to resolve the passed dotpath or treat it as a property
- * @param       {String}        [insidePath=null]       Gives you the ability to take a subvalue if you have set the "resolveDots" to false
+ * @param       {String}        [insidePath=null]       Gives you the ability to take a subvalue if you have set the "resolveDots" to false
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>

@@ -12,7 +12,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  *
  * This mixin generate all the offwidt helper classes like s-os:30, s-osi:40, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.offsize.classes;

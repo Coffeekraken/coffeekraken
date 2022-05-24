@@ -22,7 +22,7 @@ export interface postcssSugarPluginStateActiveMixinParams {}
  * - &:active:not(:hover), &.active, &[active]
  *
  *
- * @return      {Css}         The generated css
+ * @return      {Css}         The generated css
  *
  * @example        css
  * .myCoolItem {

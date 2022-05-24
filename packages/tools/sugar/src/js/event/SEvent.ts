@@ -15,7 +15,7 @@
  * @setting         {Boolean}           [bubbles=true]          Specify if the event has to bubble or not
  * @setting             {Any}            [detail=null]           Specify some data to emit with the event
  *
- * @param           {String}            name            The event name
+ * @param           {String}            name            The event name
  * @param           {ISEventSettings}           [settings={}]           Some settings to tweak the event behavior
  *
  * @todo            interface

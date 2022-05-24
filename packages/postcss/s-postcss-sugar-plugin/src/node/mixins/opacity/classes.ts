@@ -10,7 +10,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin generate all the margin helper classes like s-opacity:10, s-opacity:40, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.margin.classes;

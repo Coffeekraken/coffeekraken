@@ -11,7 +11,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * This mixin allows you to apply a css that make the element visually hidden but not really
  * hidden like when make use of `display: none;`.
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-element {

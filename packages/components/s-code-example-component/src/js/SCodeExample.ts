@@ -70,7 +70,7 @@ export interface ISCodeExampleComponentProps {
  * npm i @coffeekraken/s-code-example-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-code-example-component';
+ * import { define } from '@coffeekraken/s-code-example-component';
  * define();
  *
  * @example         html

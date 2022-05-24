@@ -172,7 +172,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object
      * used to transform your passed markdown
      *
-     * @param           {String}            name            The name of your partial
+     * @param           {String}            name            The name of your partial
      * @param           {Record<'markdown'|'html',string>}      partial     The partial object with the targets properties like markdown and html that point to their proper handlebar syntax files
      *
      * @since           2.0.0
@@ -193,7 +193,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      *
      * This static method allows you to register a new section
      *
-     * @param               {String}            name            The section name that will be used inside the templates
+     * @param               {String}            name            The section name that will be used inside the templates
      * @param               {Record<'markdown'|'html', string>}     sectionObj          The section object with the targets properties like markdown and html that point to their proper handlebar syntax files
      *
      * @since           2.0.0

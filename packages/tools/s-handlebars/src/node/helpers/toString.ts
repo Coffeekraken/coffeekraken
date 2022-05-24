@@ -10,7 +10,7 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
  *
  * This helper allows you to apply the `toString` coffeekraken function on the passed value
  *
- * @param       {Any}        value            The value to convert to string
+ * @param       {Any}        value            The value to convert to string
  * @return      {String}                           The converted value
  *
  * @since           2.0.0

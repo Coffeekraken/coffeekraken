@@ -21,8 +21,8 @@ import __SInterface from '@coffeekraken/s-interface';
  * - layout 2: <span class="s-color-accent">'1 1 2'</span>: This describe a two columns layout with the first columns taking 2/3 of the space and the second one taking 1/3 of it
  * - layout 3: <span class="s-color-accent">'1 2 _ 3 3'</span>: This describe 2 rows with the first having two columns and the second just one
  *
- * @param       {String}        layout      The layout you want to generate
- * @return        {Css}         The generated css
+ * @param       {String}        layout      The layout you want to generate
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-element {

@@ -11,7 +11,7 @@ import __isCjs from './isCjs';
  *
  * Return the current module system the code is running on like "cjs" or "esm".
  *
- * @return      {('esm'|'cjs')}           The module system the code is running on
+ * @return      {('esm'|'cjs')}           The module system the code is running on
  *
  * @example       js
  * import __currentSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';

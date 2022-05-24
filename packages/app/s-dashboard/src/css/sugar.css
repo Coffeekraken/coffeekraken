@@ -1,16 +1,21 @@
 @sugar.init;
 @sugar.theme (dark, null, true);
 
-@sugar.media.classes ('mobile,tablet') {
-    @sugar.classes;
-}
+/* @sugar.media.classes ('mobile,tablet') { */
+@sugar.classes;
+/* } */
 
 /* @sugar.ui.filtrableinput.classes; */
 
 @sugar.icon.classes (
   fa:check:success
-  fa:xmark:error
+  fa:exclamation:error
   fa:exclamation:warning
+  fa:mobile-screen:mobile
+  fa:tablet-screen-button:tablet
+  fa:desktop:desktop
+  fa:arrows-left-right:wide
+  fa:equals:dwarf
 );
 
 /* fa:user:user

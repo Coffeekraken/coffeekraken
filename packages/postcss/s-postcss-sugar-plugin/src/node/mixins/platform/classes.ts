@@ -13,7 +13,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  * This mixin generate all the "platforms" css classes like s-platform:css, etc...
  * "Platforms" are some kind of "icons" of platforms like "css", "node", "js", "php", etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.platform.classes;

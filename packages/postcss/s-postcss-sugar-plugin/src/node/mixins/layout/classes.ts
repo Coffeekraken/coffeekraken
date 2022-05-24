@@ -11,7 +11,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  *
  * This mixin generate all the layout helper classes like s-layout:12, s-container, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.layout.classes;

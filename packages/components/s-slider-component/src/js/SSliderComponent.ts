@@ -609,7 +609,7 @@ export default class SSlider extends __SLitComponent {
      *
      * Set the current slide idx.
      *
-     * @param       {Number}        idx         The current slide idx
+     * @param       {Number}        idx         The current slide idx
      *
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -955,7 +955,7 @@ export default class SSlider extends __SLitComponent {
      * Go to a specific slide.
      *
      * @param       {Number|String}    slideIdIdxOrElement    The slide idx, id or HTMLElement to go to
-     * @return      {SSliderComponent}          The slider element to maintain chainability
+     * @return      {SSliderComponent}          The slider element to maintain chainability
      *
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -996,7 +996,7 @@ export default class SSlider extends __SLitComponent {
      *
      * Go to the next slide
      *
-     * @return      {SSliderComponent}          The slider element to maintain chainability
+     * @return      {SSliderComponent}          The slider element to maintain chainability
      *
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -1014,7 +1014,7 @@ export default class SSlider extends __SLitComponent {
      *
      * Go to the previous slide
      *
-     * @return      {SSliderComponent}          The slider element to maintain chainability
+     * @return      {SSliderComponent}          The slider element to maintain chainability
      *
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -1069,7 +1069,7 @@ export default class SSlider extends __SLitComponent {
      *
      * This method allows you to know if the slider is currently playing or not
      *
-     * @return      {Boolean}           trie if the slider is playing or not
+     * @return      {Boolean}           trie if the slider is playing or not
      *
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -1085,7 +1085,7 @@ export default class SSlider extends __SLitComponent {
      *
      * This method allows you to play the slider when a `timer` has been defined
      *
-     * @return      {SSliderComponent}          The slider element to maintain chainability
+     * @return      {SSliderComponent}          The slider element to maintain chainability
      *
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -1103,7 +1103,7 @@ export default class SSlider extends __SLitComponent {
      *
      * This method allows you to stop the slider
      *
-     * @return      {SSliderComponent}          The slider element to maintain chainability
+     * @return      {SSliderComponent}          The slider element to maintain chainability
      *
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -1119,7 +1119,7 @@ export default class SSlider extends __SLitComponent {
      *
      * This method allows you to play a particular slide
      *
-     * @return      {SSliderComponent}          The slider element to maintain chainability
+     * @return      {SSliderComponent}          The slider element to maintain chainability
      *
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

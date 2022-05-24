@@ -12,7 +12,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  *
  * This mixin generate all the padding helper classes like s-p:10, s-pie:40, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.padding.classes;

@@ -20,8 +20,8 @@ import __path from 'path';
  * @feature         Support extended glob syntax like "something/*{1,4}/*"
  * @feature         Support content regex syntax like "something/*:/.+namespace.+/gm"
  *
- * @param       {String}        input            The file path to check
- * @param       {String|String[]}        glob                The glob pattern to check
+ * @param       {String}        input            The file path to check
+ * @param       {String|String[]}        glob                The glob pattern to check
  * @return      {Boolean}               true if match, false if not
  *
  * @example         js

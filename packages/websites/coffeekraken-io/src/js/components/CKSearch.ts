@@ -263,7 +263,7 @@ export default class CKSearch extends __SLitComponent {
             this, this._handleAnchor(document.location.hash.replace('#', ''));
         }
 
-        __hotkey('ctrl+p').on('press', () => {
+        __hotkey('ctrl+f').on('press', () => {
             __cursorToEnd(this._$input);
         });
 
@@ -342,7 +342,7 @@ export default class CKSearch extends __SLitComponent {
                                     >
                                     Packages&nbsp;&nbsp;&nbsp;&nbsp;<span
                                         class="s-badge s-color:complementary s-mie:10"
-                                        >CMD+P</span
+                                        >CTRL+F</span
                                     >
                                     Search shortcut
                                 </p>

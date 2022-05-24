@@ -14,7 +14,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  * @ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css
  * @feature      Body height on desktop and IOS using "fill-available" technique
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.ratio.classes;

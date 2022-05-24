@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  * This mixin generate all the ratio helper classes like s-ratio:16-9, s-ratio:1, etc.
  * The generated ratios are specified in the config.theme.ratio configuration stack
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.ratio.classes;

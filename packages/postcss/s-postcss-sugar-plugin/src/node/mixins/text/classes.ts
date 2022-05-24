@@ -12,7 +12,7 @@ import __faker from 'faker';
  *
  * This mixin generate all the text helper classes like s-text:center, s-text:left, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.text.classes;

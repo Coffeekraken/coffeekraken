@@ -200,7 +200,7 @@ export default class SSugarConfig extends __SClass {
      * configs.
      *
      * @param           {ISConfigEnvObj}        [env={}]        Some environment settings you want to load. By default it takes the environment on which the script is loaded
-     * @param           {String}            [id=null]           A special id for your loaded configuration like "browser", "somethingElse", etc... If not provided, this will be generated depending on the passed ```env``` object
+     * @param           {String}            [id=null]           A special id for your loaded configuration like "browser", "somethingElse", etc... If not provided, this will be generated depending on the passed ```env``` object
      * @return          {ISSugarConfigLoadedObj}                An object containing your configuration, the SSugarConfig instance used behind and the assigned id
      *
      * @since           2.0.0
@@ -263,7 +263,7 @@ export default class SSugarConfig extends __SClass {
      * This static method allows you to get the config as a json object to store it easily
      *
      * @param           {ISConfigEnvObj}        [env={}]        Some environment settings you want to load. By default it takes the environment on which the script is loaded
-     * @param           {String}            [id=null]           A special id for your loaded configuration like "browser", "somethingElse", etc... If not provided, this will be generated depending on the passed ```env``` object
+     * @param           {String}            [id=null]           A special id for your loaded configuration like "browser", "somethingElse", etc... If not provided, this will be generated depending on the passed ```env``` object
      * @return          {Any}                A json object representing the config
      *
      * @since       2.0.0
@@ -284,7 +284,7 @@ export default class SSugarConfig extends __SClass {
      * This static method allows you to get the config as an object to store it easily
      *
      * @param           {ISConfigEnvObj}        [env={}]        Some environment settings you want to load. By default it takes the environment on which the script is loaded
-     * @param           {String}            [id=null]           A special id for your loaded configuration like "browser", "somethingElse", etc... If not provided, this will be generated depending on the passed ```env``` object
+     * @param           {String}            [id=null]           A special id for your loaded configuration like "browser", "somethingElse", etc... If not provided, this will be generated depending on the passed ```env``` object
      * @return          {Any}                A json object representing the config
      *
      * @since       2.0.0
@@ -323,7 +323,7 @@ export default class SSugarConfig extends __SClass {
      *
      * This function take a config id as parameter and returns an array of docblocks parsed objects
      *
-     * @param       {String}        configIdOrPath            The configuration id or path you want to get docblocks back for
+     * @param       {String}        configIdOrPath            The configuration id or path you want to get docblocks back for
      * @return      {ISugarConfigToDocblocksResult[]}                         An array containing ISugarConfigToDocblocksResult objects
      *
      * @since           2.0.0
@@ -357,8 +357,8 @@ export default class SSugarConfig extends __SClass {
      * This hash accessor gives you access to the actual configuration hash.
      * You can specify a dot path to get the hash of a sub configuration
      *
-     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
-     * @return          {String}                                    The generated hash for this config
+     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @return          {String}                                    The generated hash for this config
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -490,8 +490,8 @@ export default class SSugarConfig extends __SClass {
      * This hash function gives you access to the actual configuration hash.
      * You can specify a dot path to get the hash of a sub configuration
      *
-     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
-     * @return          {String}                                    The generated hash for this config
+     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @return          {String}                                    The generated hash for this config
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -508,7 +508,7 @@ export default class SSugarConfig extends __SClass {
      * This method allows you to get a configuration back by passing a dotpath like "something.else"
      *
      * @param       {String}        dotpath         The dotpath that specify the config you want to get back
-     * @return      {any}                           The getted configuration
+     * @return      {any}                           The getted configuration
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -524,7 +524,7 @@ export default class SSugarConfig extends __SClass {
      *
      * This function take a config id as parameter and returns an array of docblocks parsed objects
      *
-     * @param       {String}        configId            The configuration if you want to get docblocks back for
+     * @param       {String}        configId            The configuration if you want to get docblocks back for
      * @return      {Any[]}                         An array of docblocks objects
      *
      * @since           2.0.0

@@ -7,10 +7,10 @@
  * @status        stable
  *
  * Clamp a number between two values
- * 
+ *
  * @param       {Number}       num             The number to clamp
- * @param       {Number}       min             The minimum value
- * @param       {Number}       max             The maximum value
+ * @param       {Number}       min             The minimum value
+ * @param       {Number}       max             The maximum value
  * @return      {Number}                The clamped number
  *
  * @example       js
@@ -24,12 +24,11 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function clamp(num, min, max) {
-
     // console.log('NUM', num, 'MIN', min, 'MAX', max);
 
     // if (num < min) num = min;
     // else if (num > max) num = max;
     // return num;
 
-    return  Math.min(Math.max(num, min), max);
+    return Math.min(Math.max(num, min), max);
 }

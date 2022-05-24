@@ -19,7 +19,7 @@ import __fs from 'fs';
  * @feature         Promise based API
  * @feature         Caching strategy
  *
- * @setting        {String}         [id=undefined]          Specify an id used for the cache
+ * @setting        {String}         [id=undefined]          Specify an id used for the cache
  * @setting        {Any}            [scraper={}]            Specify settings for the sraper. See https://www.npmjs.com/package/open-graph-scraper for more infos
  * @setting         {ISCacheSettings}       [cache={}]      Specify some settings for the caching behavior. Default ttl set to 1 week
  *

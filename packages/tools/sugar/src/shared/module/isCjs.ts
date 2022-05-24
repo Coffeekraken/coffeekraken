@@ -8,7 +8,7 @@
  *
  * Check if the current module system the code runs on "esm" module system.
  *
- * @return      {Boolean}           true if the current system is esm
+ * @return      {Boolean}           true if the current system is esm
  *
  * @example       js
  * import __isCjs from '@coffeekraken/sugar/shared/module/isCjs';

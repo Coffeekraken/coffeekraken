@@ -12,7 +12,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  *
  * This mixin generate all the gap helper classes like s-gap, s-gap:row, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.gap.classes;

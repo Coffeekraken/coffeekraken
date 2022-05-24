@@ -2,7 +2,6 @@
     "name": "@coffeekraken/s-jest-tester",
     "version": "2.0.0",
     "description": "",
-    "type": "module",
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",

@@ -11,7 +11,7 @@ import __faker from 'faker';
  *
  * This mixin generate the documentation for the usage of the .s-format:... classes
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.format.classes;

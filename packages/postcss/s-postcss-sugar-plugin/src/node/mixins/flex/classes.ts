@@ -10,7 +10,7 @@ import __faker from 'faker';
  *
  * This mixin generate all the flex helper classes like s-flex, s-flex:align-top, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.flex.classes;

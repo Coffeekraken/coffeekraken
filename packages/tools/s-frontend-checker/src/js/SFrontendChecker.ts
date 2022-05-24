@@ -12,6 +12,14 @@ import __title from './checks/title';
 import __description from './checks/description';
 import __keywords from './checks/keywords';
 import __author from './checks/author';
+import __direction from './checks/direction';
+import __language from './checks/language';
+import __cssOrder from './checks/cssOrder';
+import __opengraph from './checks/opengraph';
+import __twitterCard from './checks/twitterCard';
+import __noopener from './checks/noopener';
+import __comments from './checks/comments';
+import __w3c from './checks/w3c';
 
 /**
  * @name                SFrontendCheckeer
@@ -60,10 +68,16 @@ export interface ISFrontendCheckerCheckResultObj {
     result: ISFrontendCheckerCheckResult;
 }
 
+export interface ISFrontendCheckerCheckResultAction {
+    label: string;
+    handler: Function;
+}
+
 export interface ISFrontendCheckerCheckResult {
     status: 'success' | 'warning' | 'error';
     message?: string;
     example?: string;
+    action?: ISFrontendCheckerCheckResultAction;
     moreLink?: string;
 }
 
@@ -225,3 +239,11 @@ SFrontendCheckeer.registerCheck(__title);
 SFrontendCheckeer.registerCheck(__description);
 SFrontendCheckeer.registerCheck(__keywords);
 SFrontendCheckeer.registerCheck(__author);
+SFrontendCheckeer.registerCheck(__direction);
+SFrontendCheckeer.registerCheck(__language);
+SFrontendCheckeer.registerCheck(__cssOrder);
+SFrontendCheckeer.registerCheck(__opengraph);
+SFrontendCheckeer.registerCheck(__twitterCard);
+SFrontendCheckeer.registerCheck(__noopener);
+SFrontendCheckeer.registerCheck(__comments);
+SFrontendCheckeer.registerCheck(__w3c);

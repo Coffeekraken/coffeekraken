@@ -40,15 +40,18 @@ export interface IOnDragSettings {
     maxSpeed: number;
 }
 
-export default function onDrag($elm: HTMLElement, cb: Function, settings?: Partial<IOnDragSettings>): void {
-
+export default function onDrag(
+    $elm: HTMLElement,
+    cb: Function,
+    settings?: Partial<IOnDragSettings>,
+): void {
     const finalSettings = <IOnDragSettings>{
         maxSpeed: 0.01,
-        ...settings ?? {}
+        ...(settings ?? {}),
     };
 
     let isMouseDown = false;
-    
+
     let startPos, $target;
 
     let track: IOnDragTrackItem[] = [];
@@ -56,12 +59,12 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
     let lastCapturedTime;
 
     function buildTrackPoint(e) {
-        const { x, y } = __getPositionFromEvent(e);
+        const { x, y } = __getPositionFromEvent(e);
         const deltaX = x - startPos.x,
             deltaY = y - startPos.y,
-            time = (Date.now() - lastCapturedTime);
+            time = Date.now() - lastCapturedTime;
 
-        const secondPercentage = 100 / 1000 * time;
+        const secondPercentage = (100 / 1000) * time;
 
         const lastTrackPoint = track[track.length - 1];
 
@@ -70,7 +73,7 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
 
         let speedX = lastDeltaX / time || 0,
             speedY = lastDeltaY / time || 0;
-        
+
         if (Math.abs(speedX) > finalSettings.maxSpeed) {
             speedX = finalSettings.maxSpeed * (speedX < 0 ? -1 : 1);
         }
@@ -83,8 +86,8 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
             y,
             deltaX,
             deltaY,
-            speedX: lastDeltaX / secondPercentage * 100,
-            speedY: lastDeltaY / secondPercentage * 100
+            speedX: (lastDeltaX / secondPercentage) * 100,
+            speedY: (lastDeltaY / secondPercentage) * 100,
         };
         return point;
     }
@@ -94,7 +97,7 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
 
         $target = e.target;
 
-        const { x, y } = __getPositionFromEvent(e);
+        const { x, y } = __getPositionFromEvent(e);
 
         // set the start position
         startPos = {
@@ -102,21 +105,23 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
             y,
         };
         // set the first tracked point
-        track = [{
-            x: startPos.x,
-            y: startPos.y,
-            deltaX: 0,
-            deltaY: 0,
-            speedX: 0,
-            speedY: 0
-        }];
+        track = [
+            {
+                x: startPos.x,
+                y: startPos.y,
+                deltaX: 0,
+                deltaY: 0,
+                speedX: 0,
+                speedY: 0,
+            },
+        ];
         lastCapturedTime = Date.now();
         // update status
         isMouseDown = true;
     }
     document.addEventListener('mousedown', down);
     document.addEventListener('touchstart', down);
-    
+
     function move(e) {
         if (!isMouseDown) return;
 
@@ -124,7 +129,7 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
         if (track.length === 1) {
             cb?.({
                 type: 'start',
-                track: track[0]
+                track: track[0],
             });
         }
 
@@ -135,7 +140,7 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
         cb?.({
             type: 'track',
             ...point,
-            track
+            track,
         });
         lastCapturedTime = Date.now();
     }
@@ -154,7 +159,7 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
             cb?.({
                 type: 'end',
                 ...track[track.length - 1],
-                track
+                track,
             });
         }
     }

@@ -10,7 +10,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin generate all the overflow helper classes like ```.s-visibility:hidden```, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.visibility.classes;

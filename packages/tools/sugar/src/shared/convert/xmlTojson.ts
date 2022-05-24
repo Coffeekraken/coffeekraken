@@ -11,8 +11,8 @@ import { XMLParser } from 'fast-xml-parser';
  * This function take a xml string as input and return a json object.
  * Used under the hood the AMAZING [xml2json](https://www.npmjs.com/package/xml2json) package.
  *
- * @param       {String}            xml             The xml string to convert
- * @return      {Object}                            The corresponding json object
+ * @param       {String}            xml             The xml string to convert
+ * @return      {Object}                            The corresponding json object
  *
  * @todo        interface
  * @todo        doc

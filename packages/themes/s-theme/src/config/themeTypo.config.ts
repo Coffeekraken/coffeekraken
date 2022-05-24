@@ -238,6 +238,7 @@ export default (env, config) => {
             display: 'inline-block',
             'font-family': 'code',
             color: ['main', 'text'],
+            'line-height': 1.1,
             'background-color': ['accent', 'surface'],
             borderRadius: 10,
             paddingInline: 10,

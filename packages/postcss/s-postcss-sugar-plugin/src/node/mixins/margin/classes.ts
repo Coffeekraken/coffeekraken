@@ -12,7 +12,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  *
  * This mixin generate all the margin helper classes like s-mie10, s-mis:40, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.margin.classes;

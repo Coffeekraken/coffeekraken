@@ -17,7 +17,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @feature     Remote outline on every elements
  * @feature     Set the max-width to 100% for images
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.reset.sugar;

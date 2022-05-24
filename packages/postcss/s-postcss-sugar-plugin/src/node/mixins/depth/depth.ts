@@ -10,7 +10,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * This mixin allows you to apply a certain depth that are defined
  * in the config.theme.depth stack like 10, 20, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-element {

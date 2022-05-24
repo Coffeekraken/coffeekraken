@@ -10,7 +10,7 @@ import __semverParser from 'semver/functions/parse';
  *
  * Parse a semver string and return a semver object using the nice [semver](https://github.com/npm/node-semver) parser.
  *
- * @param       {String}       semverString      The semver string to parse
+ * @param       {String}       semverString      The semver string to parse
  * @return      {ISemverObject}          The parsed semver object
  *
  * @example       js

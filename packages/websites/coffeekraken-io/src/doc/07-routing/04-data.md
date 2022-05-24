@@ -20,7 +20,7 @@ To render a view, you certainly need some data. This is handled by the `%viewNam
 
 > These data files are handled under the hood by the [@coffeekraken/s-data-handler-generic](/package/@coffeekraken/s-data-handler-generic/doc/readme) package.
 
-## Simple example
+## Simple example
 
 Assume that you have a view stored here: `src/views/hello/hello.blade.php` (it can be a twig as well).
 
@@ -38,7 +38,7 @@ export default async function ({ req, res, pageConfig }) {
 This will provide the `hello` variable to your view. You can use it like so:
 
 ```html
-<h1>&lcub;&lcub; $hello &rcub;&rcub;</h1>
+<h1>&lcub;&lcub; $hello &rcub;&rcub;</h1>
 ```
 
 ## Passing parameters

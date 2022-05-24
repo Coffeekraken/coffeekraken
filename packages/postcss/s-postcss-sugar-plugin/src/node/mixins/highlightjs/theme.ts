@@ -10,7 +10,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * This mixin generate all the css needed to skin "Prism js"
  * with the theme colors
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.highlightjs.theme;

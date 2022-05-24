@@ -11,7 +11,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  *
  * This mixin generate all the position helper classes like s-position:absolute, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.position.classes;

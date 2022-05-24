@@ -17,7 +17,7 @@ import __SDuration from '@coffeekraken/s-duration';
  * to a particular destination.
  * Note that the zip filename will be used as folder name
  *
- * @param       {String}        zipFilePath         The zip file path to unzip
+ * @param       {String}        zipFilePath         The zip file path to unzip
  * @param       {IUnzipSettings}        [settings={}]       Some settings to configure your unzip process
  * @return      {Promise<IUnzipResult>}                A promise that will be resolved once the file has been unzipped successfully with a result object
  *

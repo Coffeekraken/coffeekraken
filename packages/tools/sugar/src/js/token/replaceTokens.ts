@@ -10,8 +10,8 @@ import __sharedReplaceTokens from '../../shared/token/replaceTokens';
  * This function take as input a string and replace some tokens using these functions:
  * -
  *
- * @param       {String}            string          The string you want to process
- * @return      {String}                            The processed string
+ * @param       {String}            string          The string you want to process
+ * @return      {String}                            The processed string
  *
  * @example         js
  * import replaceTokens from '@coffeekraken/sugar/js/token/replaceTokens';

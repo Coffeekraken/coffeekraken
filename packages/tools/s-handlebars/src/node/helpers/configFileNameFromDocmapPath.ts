@@ -8,8 +8,8 @@
  *
  * This helper allows you to get the .config file name from a passed docmap path
  *
- * @param       {String}        path            The dotpath to the config you want to get the filename from
- * @return      {String}                    The .config.js filename
+ * @param       {String}        path            The dotpath to the config you want to get the filename from
+ * @return      {String}                    The .config.js filename
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>

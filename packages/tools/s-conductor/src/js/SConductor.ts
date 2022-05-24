@@ -121,9 +121,9 @@ export default class SConductor extends __SClass {
      *
      * This static method allows you to register a task to execute at a specific time in the "default" conductor instance.
      *
-     * @param       {TSConductorTrigger[]}     trigger            The trigger when to execute the task. Can be multiple times and the first reached will be the one used
-     * @param       {HTMLElement}       [$elm=null]            The element to watch
-     * @param       {Function}           task           The task function to execute
+     * @param       {TSConductorTrigger[]}     trigger            The trigger when to execute the task. Can be multiple times and the first reached will be the one used
+     * @param       {HTMLElement}       [$elm=null]            The element to watch
+     * @param       {Function}           task           The task function to execute
      * @return      {SPromise}                          An SPromise instance resolved when one of the passed time(s) is/are reached
      *
      * @since      2.0.0
@@ -361,7 +361,7 @@ export default class SConductor extends __SClass {
      * This method simply check if the element parameter has been passed or not.
      * If not, throw an error
      *
-     * @param       {HTMLElement}       [$elm=null]            The element that has been passed
+     * @param       {HTMLElement}       [$elm=null]            The element that has been passed
      *
      * @since      2.0.0
      * @author      Olivier Bossel <olivier.bossel@gmail.com>
@@ -380,9 +380,9 @@ export default class SConductor extends __SClass {
      *
      * This method allows you to register a task to execute at a specific time in the "default" conductor instance.
      *
-     * @param       {TSConductorTrigger[]}     time            The time to execute the task. Can be multiple times and the first reached will be the one used
-     * @param       {HTMLElement}       [$elm=null]            The element to watch. Optional depending on the time listened
-     * @param       {Function}           task           The task function to execute
+     * @param       {TSConductorTrigger[]}     time            The time to execute the task. Can be multiple times and the first reached will be the one used
+     * @param       {HTMLElement}       [$elm=null]            The element to watch. Optional depending on the time listened
+     * @param       {Function}           task           The task function to execute
      * @return      {SPromise}                          An SPromise instance resolved when one of the passed time(s) is/are reached
      *
      * @since      2.0.0

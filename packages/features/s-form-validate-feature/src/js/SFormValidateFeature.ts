@@ -166,7 +166,7 @@ export interface ISFormValidateFeatureProps {
 export default class SFormValidateFeature extends __SFeature {
     /**
      * @name        _validationType
-     * @type        'string' | 'date' | 'number' | 'boolean'
+     * @type        'string' | 'date' | 'number' | 'boolean'
      * @default      'string'
      *
      * Store the type of validation to do using joi
@@ -179,7 +179,7 @@ export default class SFormValidateFeature extends __SFeature {
 
     /**
      * @name        _schema
-     * @type        'string' | 'date' | 'number' | 'boolean'
+     * @type        'string' | 'date' | 'number' | 'boolean'
      * @default      'string'
      *
      * Store the joi validation schema

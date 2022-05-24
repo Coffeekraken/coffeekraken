@@ -11,9 +11,9 @@ import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
  *
  * This helper allows you to extract from the passed docmap some config
  *
- * @param       {Any}           docmap          The source docmap
- * @param       {String}        path            The dotpath to the config you want to extract
- * @return      {Any}                           THe object representing each configs docmap object
+ * @param       {Any}           docmap          The source docmap
+ * @param       {String}        path            The dotpath to the config you want to extract
+ * @return      {Any}                           THe object representing each configs docmap object
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>

@@ -24,7 +24,6 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
         const checker = new __SFrontendChecker();
         const pro = checker.check(window.parent?.document ?? document);
         pro.on('check', (checkResult: ISFrontendCheckerCheckResult) => {
-            console.log('_C', checkResult);
             this._checkResults.push(checkResult);
             this.requestUpdate();
         });
@@ -44,7 +43,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
     render() {
         return html`
             <div class="s-dashboard-frontend-checker s-width:100">
-                <h2 class="s-typo:h6 s-mbe:30">Frontend checker</h2>
+                <h2 class="s-typo:h6 s-mbe:20">Frontend checker</h2>
 
                 <div class="__filters">
                     <div
@@ -134,6 +133,52 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                       </p>
                                                   `
                                                 : ''}
+                                            <div
+                                                class="s-flex:align-center ${check
+                                                    .result.moreLink ||
+                                                check.result.action
+                                                    ? 's-mbs:20'
+                                                    : ''}"
+                                            >
+                                                <div class="s-flex-item:grow">
+                                                    ${check.result.moreLink
+                                                        ? html`
+                                                              <a
+                                                                  href="${check
+                                                                      .result
+                                                                      .moreLink}"
+                                                                  alt="More info"
+                                                                  class="__more-link"
+                                                                  target="_blank"
+                                                                  rel="noopener"
+                                                                  >More info</a
+                                                              >
+                                                          `
+                                                        : ''}
+                                                </div>
+                                                ${check.result.action
+                                                    ? html`
+                                                          <div>
+                                                              <button
+                                                                  class="s-btn s-color:complementary"
+                                                                  @click=${() =>
+                                                                      check.result.action.handler()}
+                                                              >
+                                                                  ${typeof check
+                                                                      .result
+                                                                      .action
+                                                                      .label ===
+                                                                  'function'
+                                                                      ? check.result.action.label()
+                                                                      : check
+                                                                            .result
+                                                                            .action
+                                                                            .label}
+                                                              </button>
+                                                          </div>
+                                                      `
+                                                    : ''}
+                                            </div>
                                         </div>
                                     </li>
                                 `,

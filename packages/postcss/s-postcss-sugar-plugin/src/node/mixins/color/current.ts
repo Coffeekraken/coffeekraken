@@ -22,7 +22,7 @@ export { postcssSugarPluginColorCurrentMixinInterface as interface };
  * This mixin allows you to (re)map the "current" color to another one you want like "accent", "success", etc...
  *
  * @param       {String}        color           The color you want to map on another one
- * @return      {Css}                     The generated remap css
+ * @return      {Css}                     The generated remap css
  *
  * @example        css
  * .my-section {

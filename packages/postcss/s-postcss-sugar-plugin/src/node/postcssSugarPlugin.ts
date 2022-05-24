@@ -480,6 +480,7 @@ const plugin = (settings: any = {}) => {
 
             for (let i = 0; i < postProcessorsPaths.length; i++) {
                 const path = postProcessorsPaths[i];
+
                 const { default: processorFn } = await import(
                     `${__dirname()}/postProcessors/${path}`
                 );

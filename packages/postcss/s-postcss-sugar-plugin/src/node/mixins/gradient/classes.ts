@@ -12,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin generate all the gradient helper classes like s-gradient:accent, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.gradient.classes;

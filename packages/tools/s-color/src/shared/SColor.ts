@@ -908,7 +908,7 @@ class SColor extends __SClass {
      * Calculate the best color value that will have the best contrast ratio
      *
      * @param       {Boolean}       [returnNewInstance=this.colorSettings.returnNewInstance]      Specify if you want a new SColor instance back or update the current one
-     * @return      {SColor}              The SColor instance that represent this new color
+     * @return      {SColor}              The SColor instance that represent this new color
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

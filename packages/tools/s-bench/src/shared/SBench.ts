@@ -132,7 +132,7 @@ export default class SBench extends __SPromise {
      *
      * This method allows you to check if a particular bench id is active
      *
-     * @param        {String}               benchId             The bench id to check
+     * @param        {String}               benchId             The bench id to check
      * @return      {Boolean}           true if is active, false if not
      *
      * @since       2.0.0
@@ -343,7 +343,7 @@ export default class SBench extends __SPromise {
      * from the last step.
      *
      * @param       {String}        id              The step id
-     * @param       {String}        [description='']   The step description
+     * @param       {String}        [description='']   The step description
      * @return  {SBench}                                The instance to maintain chainability
      *
      * @since           2.0.0

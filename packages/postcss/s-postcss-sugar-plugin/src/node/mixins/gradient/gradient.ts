@@ -10,7 +10,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin generate all the css needed to apply a gradient on your elements
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-cool-element {
@@ -46,7 +46,7 @@ class postcssSugarPluginGradientInterface extends __SInterface {
                 type: 'String',
             },
             angle: {
-                type: 'Number | String',
+                type: 'Number | String',
                 default: 0,
             },
             size: {

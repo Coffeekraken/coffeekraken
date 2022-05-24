@@ -3,6 +3,7 @@ import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __copy from '@coffeekraken/sugar/node/clipboard/copy';
 import __sanitizeJsonString from '@coffeekraken/sugar/shared/json/sanitizeJsonString';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name            sVitePluginSugar
@@ -34,10 +35,8 @@ export default function sVitePluginSugar(settings: any = {}) {
 
         let envJsonStr = JSON.stringify({
             // @ts-ignore
-            ...{
-                platform: 'browser',
-                env: 'development',
-            },
+            platform: 'browser',
+            env: 'development',
             config: browserConfig,
         });
 

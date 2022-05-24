@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  * This mixin generate all the @font-face needed depending on the declared
  * fonts in the config.theme.font.family stack
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.font.faces;

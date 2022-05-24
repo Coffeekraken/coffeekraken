@@ -2,9 +2,9 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import * as __fa from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import __fab from './fa/brands';
+import __fas from './fa/solid';
+import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 
 class postcssSugarPluginIconFaInterface extends __SInterface {
     static get _definition() {
@@ -29,16 +29,16 @@ export interface IPostcssSugarPluginIconFaParams {
 
 export { postcssSugarPluginIconFaInterface as interface };
 
-let _isFaInitialised = false;
-
 export default function ({
     params,
     atRule,
     replaceWith,
+    sharedData,
 }: {
     params: Partial<IPostcssSugarPluginIconFaParams>;
     atRule: any;
     replaceWith: Function;
+    sharedData: any;
 }) {
     const finalParams: IPostcssSugarPluginIconFaParams = {
         icon: '',
@@ -64,24 +64,15 @@ export default function ({
         fab: 'Brands',
     };
 
-    // register icons if first call
-    if (!_isFaInitialised) {
-        __fa.library.add(fas, fab);
-        atRule.root().append(`
-      @import url('${__SSugarConfig.get('icons.fontawesome.url')}');
-    `);
-        _isFaInitialised = true;
-    }
+    sharedData.isFontawesomeNeeded = true;
 
-    const prefix = prefixes[finalParams.style] ?? finalParams.style;
+    const faId = __camelCase(`fa-${finalParams.icon}`);
+    let iconObj = {
+        ...__fas,
+        ...__fab,
+    }[faId];
 
-    const iconDef = __fa.findIconDefinition({
-        prefix,
-        // @ts-ignore
-        iconName: finalParams.icon,
-    });
-
-    if (!iconDef) {
+    if (!iconObj) {
         console.log(
             __parseHtml(
                 `<red>!!!</red> It seems that you don't have access to the icon "<yellow>${finalParams.icon}</<yellow>"...`,
@@ -89,6 +80,8 @@ export default function ({
         );
         return;
     }
+
+    const prefix = iconObj.prefix;
 
     if (finalParams.style === 'solid' || finalParams.style === 'fas')
         finalParams.style = 'free';
@@ -110,11 +103,11 @@ export default function ({
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
-    font-family: "Font Awesome 5 ${__upperFirst(fontNames[prefix])}";
+    font-family: "Font Awesome 6 ${__upperFirst(fontNames[prefix])}";
     font-weight: ${fontWeight[prefix]};
     
     &:before {
-      content: "\\${iconDef.icon[3]}";
+      content: "\\${iconObj.icon[3]}";
       display: inline-block;
     }
   `);

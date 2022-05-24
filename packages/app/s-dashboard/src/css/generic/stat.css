@@ -1,0 +1,14 @@
+.ck-stat {
+    .ck-stat__label {
+        font-size: 16px;
+        color: sugar.color(accent);
+    }
+    .ck-stat__value {
+        font-size: 30px;
+        margin-block-start: sugar.margin(10);
+
+        &-code {
+            font-family: sugar.font.family(code);
+        }
+    }
+}

@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  * This mixin generate all the css needed for a container depending
  * on the config.theme.layout.container configuration stack
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-cool-container {

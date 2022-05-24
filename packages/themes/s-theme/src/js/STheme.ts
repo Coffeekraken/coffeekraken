@@ -13,7 +13,7 @@ import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTra
  * Once you have an instance of this theme you will have access to a lot of utilities
  * methods like "loopOnColors", etc...
  *
- * @param       {String}        [theme=undefined]        The name of the theme you want to instanciate utilities for. If not specified, will take either the "default" theme, or the theme defined in the sugar.json file
+ * @param       {String}        [theme=undefined]        The name of the theme you want to instanciate utilities for. If not specified, will take either the "default" theme, or the theme defined in the sugar.json file
  *
  * @example         js
  * import STheme from '@coffeekraken/s-theme';
@@ -38,7 +38,7 @@ export default class STheme extends __SThemeBase {
      * @param               {String}            theme           The theme name to apply
      * @param               {String}            variant         The theme variant to apply
      * @param               {HTMLElement}       [$context=document.querySelector('html')]            The context element on which to apply the theme
-     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -83,7 +83,7 @@ export default class STheme extends __SThemeBase {
      *
      * @param               {String}            variant         The theme variant to apply
      * @param               {HTMLElement}       [$context=document.querySelector('html')]            The context element on which to apply the theme
-     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -102,13 +102,17 @@ export default class STheme extends __SThemeBase {
      *
      * This method allows you to init the your STheme instance, restore savec updated if their some, etc...
      *
-     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static init($context = document.querySelector('html')): STheme {
-        return this.getCurrentTheme($context);
+        const theme = this.getCurrentTheme($context);
+        if (!document.env) document.env = {};
+        if (!document.env.SUGAR) document.env.SUGAR = {};
+        document.env.SUGAR.theme = theme;
+        return theme;
     }
 
     /**
@@ -118,7 +122,7 @@ export default class STheme extends __SThemeBase {
      *
      * This method allows you to get the current applied theme STheme instance
      *
-     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -165,7 +169,7 @@ export default class STheme extends __SThemeBase {
      *
      * This static method allows you to apply a color on a particular context
      *
-     * @param       {String}        color               The color name/code you want to apply
+     * @param       {String}        color               The color name/code you want to apply
      * @param       {HTMLElement}       [$context=document.querySelector('html')]        The context on which to apply the color
      *
      * @since       2.0.0
@@ -206,7 +210,7 @@ export default class STheme extends __SThemeBase {
      *
      * THis method allows you to set a color for the theme that represent this instance
      *
-     * @param           {String}            color                   The color you want to set
+     * @param           {String}            color                   The color you want to set
      * @param           {String}            value                   The color value you want to set
      *
      * @since           2.0.0
@@ -225,7 +229,7 @@ export default class STheme extends __SThemeBase {
      * Specify the value you want to set using the dotPath syntax like "color.accent.color", etc...
      *
      * @param       {String}        dotPath           The dot path of the config you want to set
-     * @param       {any}           value               The value you want to set
+     * @param       {any}           value               The value you want to set
      * @return      {STheme}                        The current theme instance
      *
      * @since       2.0.0
@@ -248,10 +252,10 @@ export default class STheme extends __SThemeBase {
      *
      * THis method allows you to access a particular theme color in a particular context
      *
-     * @param           {String}            name            The color name you want to get
+     * @param           {String}            name            The color name you want to get
      * @param           {String}            [variant=null]     The color variant you want to get
      * @param           {HTMLElement}       [$context=document.querySelector('html')]        The context in which to get the color
-     * @return          {SColor}                                    An SColor instance that you can make use of
+     * @return          {SColor}                                    An SColor instance that you can make use of
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

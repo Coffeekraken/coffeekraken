@@ -31,7 +31,7 @@ export { postcssSugarPluginColorMixinInterface as interface };
  * @param       {String}        current             The new color you want for the "current" one
  * @param       {String}        [primary=null]             The new color you want for the "primary" one
  * @param       {String}        [secondary=null]             The new color you want for the "secondary" one
- * @return      {Css}                     The generated remap css
+ * @return      {Css}                     The generated remap css
  *
  * @example        css
  * .my-section {

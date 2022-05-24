@@ -14,7 +14,12 @@ export default function (env, config) {
          */
         layout: [
             ['s-dashboard-pages'],
-            ['s-dashboard-browserstack'],
+            [
+                's-dashboard-browserstack',
+                's-dashboard-google',
+                's-dashboard-web-vitals',
+                's-dashboard-responsive',
+            ],
             ['s-dashboard-frontend-checker'],
         ],
     };

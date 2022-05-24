@@ -6,7 +6,7 @@ export default function (env, config) {
          * @name            manager
          * @namespace       config.package
          * @type            String
-         * @values          npm | yarn
+         * @values          npm | yarn
          * @default         yarn
          *
          * Specify the package manager you want to use. Can be "npm" or "yarn"

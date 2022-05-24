@@ -9,7 +9,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin generate all the overflow helper classes like ```.s-overflow:hidden```, ```.s-overflow:auto```, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.overflow.classes;

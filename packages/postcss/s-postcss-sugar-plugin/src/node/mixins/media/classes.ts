@@ -31,7 +31,7 @@ import __fs from 'fs';
  * Note that you can use the @sugar.media mixin parameters syntax here in the first argument.
  *
  * @param         {String}      query
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example         css
  * \@sugar.media.classes {

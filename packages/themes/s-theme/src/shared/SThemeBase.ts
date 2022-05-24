@@ -22,7 +22,7 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
  * Once you have an instance of this theme you will have access to a lot of utilities
  * methods like "loopOnColors", etc...
  *
- * @param       {String}        [theme=undefined]        The name of the theme you want to instanciate utilities for. If not specified, will take either the "default" theme, or the theme defined in the sugar.json file
+ * @param       {String}        [theme=undefined]        The name of the theme you want to instanciate utilities for. If not specified, will take either the "default" theme, or the theme defined in the sugar.json file
  *
  * @example         js
  * import STheme from '@coffeekraken/s-theme';
@@ -312,8 +312,8 @@ export default class SThemeBase extends __SEventEmitter {
      * This hash accessor gives you access to the actual theme configuration hash.
      * You can specify a dot path to get the hash of a sub configuration
      *
-     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
-     * @return          {String}                                    The generated hash for this config
+     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @return          {String}                                    The generated hash for this config
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -369,12 +369,12 @@ export default class SThemeBase extends __SEventEmitter {
      *
      */
     static buildMediaQuery(queryString: string): string {
-        const currentQueryList: string[] = [
-            this.get('media.defaultQuery'),
-            'and',
-        ];
+        let currentQueryList: string[] = [];
 
-        const queryAr = queryString.split(' ').map((l) => l.trim());
+        const queryAr = queryString
+            .split(' ')
+            .map((l) => l.trim())
+            .filter((l) => l !== '');
 
         queryAr.forEach((query, i) => {
             if (query === 'and' || query === 'or') {
@@ -484,6 +484,13 @@ export default class SThemeBase extends __SEventEmitter {
             currentQueryList.push(queryList.join(' and '));
         });
 
+        currentQueryList = currentQueryList.filter((l) => l.trim() !== '');
+
+        if (currentQueryList.length) {
+            currentQueryList.unshift('and');
+        }
+        currentQueryList.unshift(this.get('media.defaultQuery'));
+
         return `@media ${currentQueryList.join(' ')}`;
     }
 
@@ -510,7 +517,7 @@ export default class SThemeBase extends __SEventEmitter {
      * - `default-color`: Apply the default color using `@sugar.color` mixin
      *
      * @param           {Object}        jsObject        An object to convert to css string
-     * @return          {String}                            The processed css string
+     * @return          {String}                            The processed css string
      *
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -691,7 +698,7 @@ export default class SThemeBase extends __SEventEmitter {
      *
      * @param           {String}            from            The color name you want to remap
      * @param           {String}            to              The color you want to assign
-     * @return          {String}                            The generated css variables string
+     * @return          {String}                            The generated css variables string
      *
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -808,9 +815,9 @@ export default class SThemeBase extends __SEventEmitter {
      *
      * This static method allows you to transform a theme/variant into css variables
      *
-     * @param       {String}        theme           The theme name you want to transform
+     * @param       {String}        theme           The theme name you want to transform
      * @param       {String}        variant         The theme variant you want to transform
-     * @return      {String}                        The converted css variables string
+     * @return      {String}                        The converted css variables string
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -906,8 +913,8 @@ export default class SThemeBase extends __SEventEmitter {
      *
      * This static method allows you to access the active theme config
      *
-     * @param       {String}        dotPath           The dot path of the config you want
-     * @return      {any}                        The getted theme config
+     * @param       {String}        dotPath           The dot path of the config you want
+     * @return      {any}                        The getted theme config
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -924,7 +931,7 @@ export default class SThemeBase extends __SEventEmitter {
      *
      * This static method allows you to set values of the active theme config
      *
-     * @param       {String}        dotPath           The dot path of the config you want to set
+     * @param       {String}        dotPath           The dot path of the config you want to set
      * @param       {any}         value             The value you want to set
      * @return      {STheme}                        The current theme instance
      *
@@ -985,7 +992,7 @@ export default class SThemeBase extends __SEventEmitter {
      * This method allows you to access a value of the current theme
      * using a dot path like "color.primary.default", etc...
      *
-     * @param         {String}        dotPath         The dot path of the config you want to get
+     * @param         {String}        dotPath         The dot path of the config you want to get
      * @return        {Any}                           The value of the getted configuration
      *
      * @since         2.0.0
@@ -1033,7 +1040,7 @@ export default class SThemeBase extends __SEventEmitter {
      *
      * This method simply emit a "saved" event on the theme instance with details like the overrifed config.
      *
-     * @return      {STheme}                        The current theme instance
+     * @return      {STheme}                        The current theme instance
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -1057,8 +1064,8 @@ export default class SThemeBase extends __SEventEmitter {
      * This hash accessor gives you access to the actual theme configuration hash.
      * You can specify a dot path to get the hash of a sub configuration
      *
-     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
-     * @return          {String}                                    The generated hash for this config
+     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @return          {String}                                    The generated hash for this config
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -1091,7 +1098,7 @@ export default class SThemeBase extends __SEventEmitter {
      * Specify the value you want to set using the dotPath syntax like "color.accent.color", etc...
      *
      * @param       {String}        dotPath           The dot path of the config you want to set
-     * @param       {any}           value               The value you want to set
+     * @param       {any}           value               The value you want to set
      * @return      {STheme}                        The current theme instance
      *
      * @since       2.0.0
@@ -1116,7 +1123,7 @@ export default class SThemeBase extends __SEventEmitter {
      *
      * This method allows you to restore some configs by merging the passed ones with the overrided configs.
      *
-     * @param       {any}           configs             The configs you want to restore
+     * @param       {any}           configs             The configs you want to restore
      * @return      {STheme}                        The current theme instance
      *
      * @since       2.0.0
@@ -1197,10 +1204,10 @@ export default class SThemeBase extends __SEventEmitter {
      * theme colors and their's modifiers defined
      *
      * @param       {Function}      callback            Specify the callback that will be called for each color with an object containing these properties:
-     * - name       {String}        The name of the color like "primary", "secondary", etc...
+     * - name       {String}        The name of the color like "primary", "secondary", etc...
      * - variant    {String}        The name of the variant like "background", "surface", etc...
      * - state      {String}        The name of the state like "hover", "active", etc...
-     * - value      {ISThemeColor | ISThemeColorModifiers}        The actual color object
+     * - value      {ISThemeColor | ISThemeColorModifiers}        The actual color object
      *
      * @since             2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

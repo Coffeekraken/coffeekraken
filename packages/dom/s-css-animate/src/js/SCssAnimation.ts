@@ -319,7 +319,7 @@ export default class SCssAnimation extends __SClass {
      *
      * This method allows you to seek to a specific percentage of the animation
      *
-     * @param       {Number}        percentage      The percentage you want to go in the animation
+     * @param       {Number}        percentage      The percentage you want to go in the animation
      * @param       {String}        [animationName=this._animations[0]?.name]       The name of the animation you want to seek to
      * @return       {SCssAnimation}                     Return the SCssAnimation instance to maintain chainability
      *
@@ -638,7 +638,7 @@ export default class SCssAnimation extends __SClass {
      *
      * This method allows you to get an animation object by it's name
      *
-     * @param       {String}        name        The name of the animation to get
+     * @param       {String}        name        The name of the animation to get
      * @return      {IGetAnimationsFromElementResult}       The animation corresponding to the passed name
      *
      * @since       2.0.0

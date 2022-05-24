@@ -11,7 +11,7 @@
  *
  * @param 		{HTMLElement} 				elm  		The element to insert
  * @param 		{HTMLElement} 				refElm 		The element after which to insert the passed element
- * @return    {HTMLElement}               The inserted node
+ * @return    {HTMLElement}               The inserted node
  *
  * @todo      interface
  * @todo      doc

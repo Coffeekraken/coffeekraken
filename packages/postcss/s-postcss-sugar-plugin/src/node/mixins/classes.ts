@@ -16,7 +16,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  *
  * This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.classes;

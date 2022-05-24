@@ -16,7 +16,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * on your settings.
  *
  * @param       {INpmInstallSettings}           [settings={}]           Some settings to configure your installation
- * @return      {Promise}               A promise resolved or rejected depending on the install command status...
+ * @return      {Promise}               A promise resolved or rejected depending on the install command status...
  *
  * @setting         {String}        [cwd=process.cwd()]         The directory where you want to execute the install
  * @setting         {Boolean}        [yarn=true]                Use yarn in priority over npm. Fallback to npm if not available

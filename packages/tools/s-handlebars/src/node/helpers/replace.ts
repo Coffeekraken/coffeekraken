@@ -13,7 +13,7 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
  * @param       {String}        str            The string in which to replace the second passed one
  * @param       {String}        replace         The string to replace
  * @param       {String}        with            The string to replace with
- * @return      {String}        The resulting string
+ * @return      {String}        The resulting string
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>

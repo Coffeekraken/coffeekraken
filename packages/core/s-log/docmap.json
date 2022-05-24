@@ -105,7 +105,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { ISLog } from '@coffeekraken/s-log';\nfunction myCoolFunction(log: ISLog): void {\n   // do something...\n}"
+                        "code": "import { ISLog } from '@coffeekraken/s-log';\nfunction myCoolFunction(log: ISLog): void {\n   // do something...\n}"
                     }
                 ],
                 "since": "2.0.0",
@@ -143,7 +143,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { ISLogAsk } from '@coffeekraken/s-log';\nfunction myCoolFunction(ask: ISLogAsk): void {\n   // do something...\n}"
+                        "code": "import { ISLogAsk } from '@coffeekraken/s-log';\nfunction myCoolFunction(ask: ISLogAsk): void {\n   // do something...\n}"
                     }
                 ],
                 "since": "2.0.0",

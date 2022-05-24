@@ -12,7 +12,7 @@ import __faker from 'faker';
  * This mixin generate all the typo helper classes like s-typo:h1, s-typo:p, and all the typo
  * elements that are defined in the config.theme.typo configuration stack.
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.typo.classes;

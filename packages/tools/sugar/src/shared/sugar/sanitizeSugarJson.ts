@@ -10,7 +10,7 @@
  * the same structure everytime
  *
  * @param       {JSON}          sugarJson           The sugar.json JSON to sanitize
- * @return      {JSON}                              Sanitizes sugarJson
+ * @return      {JSON}                              Sanitizes sugarJson
  *
  * @example         js
  * import sanitizeSugarJson from '@coffeekraken/sugar/node/sugar/sanitizeSugarJson';

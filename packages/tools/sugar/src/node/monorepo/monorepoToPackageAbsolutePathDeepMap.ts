@@ -11,8 +11,8 @@ import __deepMap from '../../shared/object/deepMap';
  * This uses the `monorepoToPackageAbsolutePath` method to make all the paths in the passed object
  * absolute to the package root path.
  *
- * @param      {Object}           obj      The object in which to make all the paths absolute to the current package root path
- * @param       {String}           [packageRootPath=__packageRoot()]  The package root path
+ * @param      {Object}           obj      The object in which to make all the paths absolute to the current package root path
+ * @param       {String}           [packageRootPath=__packageRoot()]  The package root path
  * @return     {Object}}       The absolute path object to the passed package root path
  *
  * @since       2.0.0

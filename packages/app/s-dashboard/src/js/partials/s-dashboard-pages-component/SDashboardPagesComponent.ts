@@ -103,6 +103,11 @@ export default class SDashboardPages extends __SLitComponent {
         //     __cursorToEnd(this._$input);
         // });
 
+        document.addEventListener('dashboard.changePage', () => {
+            console.log('C___');
+            this._$input.focus();
+        });
+
         this.addEventListener('selectItem', (e) => {
             const { item, $elm } = e.detail;
 
@@ -144,11 +149,18 @@ export default class SDashboardPages extends __SLitComponent {
             //     this._$input.blur();
             // }
         });
+
+        if (document.isChangePageWanted) {
+            console.log('CHANGE');
+            setTimeout(() => {
+                this._$input.focus();
+            });
+        }
     }
     render() {
         return html`
             <div class="s-dashboard-pages s-width:100">
-                <h2 class="s-typo:h6 s-mbe:30">
+                <h2 class="s-typo:h6 s-mbe:20">
                     Pages
                     <span class="ck-count"
                         >${this._$filtrableInput?.state.items.length}</span

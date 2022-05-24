@@ -9,4 +9,8 @@
         width: 32px;
         height: 32px;
     }
+
+    .ck-list__item {
+        padding: sugar.padding(20);
+    }
 }

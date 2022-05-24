@@ -19,7 +19,7 @@ import __SLog from './SLog';
  * @todo      tests
  *
  * @example               js
- * import { ISLog } from '@coffeekraken/s-log';
+ * import { ISLog } from '@coffeekraken/s-log';
  * function myCoolFunction(log: ISLog): void {
  *    // do something...
  * }

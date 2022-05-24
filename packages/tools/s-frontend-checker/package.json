@@ -2,7 +2,6 @@
     "name": "@coffeekraken/s-frontend-checker",
     "version": "2.0.0",
     "description": "",
-    "type": "module",
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
@@ -18,8 +17,8 @@
     "module": "./dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
-            "import": "./dist/pkg/esm/js/exports.js",
-            "require": "./dist/pkg/cjs/js/exports.js"
+            "require": "./dist/pkg/cjs/js/exports.js",
+            "import": "./dist/pkg/esm/js/exports.js"
         }
     }
 }

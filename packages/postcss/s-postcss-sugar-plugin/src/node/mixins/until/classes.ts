@@ -14,7 +14,7 @@ import __STheme from '@coffeekraken/s-theme';
  * Supported states are:
  * - mounted: Apply only until the state of a webcomponent for example has been reached
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.until.classes;
@@ -123,7 +123,7 @@ export default function ({
             */
         `,
         ).code(`
-            *.${state} ~  .s-until.s-until--siblings.s-until--${state},
+            *.${state} ~  .s-until.s-until--siblings.s-until--${state},
             *[${state}] ~ .s-until.s-until--siblings.s-until--${state} {
                 display: none;
             }`);

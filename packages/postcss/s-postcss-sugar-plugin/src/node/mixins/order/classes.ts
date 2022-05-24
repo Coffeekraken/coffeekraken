@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin generate all the order helper classes like s-order:1, s-order:2, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.order.classes;

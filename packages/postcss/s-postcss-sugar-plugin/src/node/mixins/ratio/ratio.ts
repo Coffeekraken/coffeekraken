@@ -10,7 +10,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * This mixin generate all the css needed to apply a ratio on any HTMLElement.
  * It uses the :before technique.
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-cool-element {

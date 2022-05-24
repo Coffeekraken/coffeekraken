@@ -9,7 +9,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin generate all the float helper classes like ```.s-float:left```, ```.s-float:right```, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.float.classes;

@@ -8,7 +8,7 @@
  *
  * This function allows you to read the content of the clipboard
  *
- * @return      {Promise}                          A promise fullfilled when the content has been read correctly
+ * @return      {Promise}                          A promise fullfilled when the content has been read correctly
  *
  * @example         js
  * import __read from '@coffeekraken/sugar/js/clipboard/read';

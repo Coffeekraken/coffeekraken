@@ -20,7 +20,7 @@ import __minimatch from 'minimatch';
  *
  * @param       {String}        filePath        The file path from which you want the dependencies tree
  * @param       {IDependencyListSettings}       [settings={}]       Some settings to configure your process
- * @return      {SPromise}                          An SPromise instance that will be resolved once the list has been getted and through which you can subscribe to some events if you want to watch these dependencies
+ * @return      {SPromise}                          An SPromise instance that will be resolved once the list has been getted and through which you can subscribe to some events if you want to watch these dependencies
  *
  * @example         js
  * import dependencyList from '@coffeekraken/sugar/node/fs/dependencyList';

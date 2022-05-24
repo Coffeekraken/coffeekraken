@@ -1,4 +1,3 @@
-
 import __offset from '../offset/offset';
 import __querySelectorUp from '../query/querySelectorUp';
 import __traverseUp from '../traverse/up';
@@ -13,17 +12,17 @@ import __scrollLeft from '../scroll/scrollLeft';
  * @status          betas
  *
  * This function returns you an object with informations about the visible surface of the element like the `percentage`, `percentageX`, etc...
- * 
- * @param       {HTMLElement}       elm             The element you want to enhance
+ *
+ * @param       {HTMLElement}       elm             The element you want to enhance
  * @return      {HTMLElement}                  The enhanced element
  *
  * @setting         {HTMLElement|'visible'}     [relativeTo='visible']         The element to calculate the visible surface relative to
- * 
+ *
  * @example         js
  * import areaStats from '@coffeekraken/sugar/js/dom/element/areaStats';
  * const $myElement = document.querySelector('#my-element');
  * const data = areaStats($myElement);
- * 
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -43,15 +42,17 @@ export interface IAreaStatsSettings {
     relativeTo?: HTMLElement | 'visible';
 }
 
-export default function areaStats($elm: HTMLElement, settings?: IAreaStatsSettings): IAreaStatsResult {
-
+export default function areaStats(
+    $elm: HTMLElement,
+    settings?: IAreaStatsSettings,
+): IAreaStatsResult {
     const finalSettings = <IAreaStatsSettings>{
         relativeTo: 'visible',
-        ...settings ?? {}
+        ...(settings ?? {}),
     };
 
     if (finalSettings.relativeTo === 'visible') {
-        finalSettings.relativeTo = <HTMLElement>__traverseUp($elm, $item => {
+        finalSettings.relativeTo = <HTMLElement>__traverseUp($elm, ($item) => {
             const style = window.getComputedStyle($item);
             if (style.overflow === 'hidden') return $item;
             return false;
@@ -59,17 +60,26 @@ export default function areaStats($elm: HTMLElement, settings?: IAreaStatsSettin
     }
 
     let rootBoundingRect;
-    if (finalSettings?.relativeTo && finalSettings.relativeTo instanceof HTMLElement) {
+    if (
+        finalSettings?.relativeTo &&
+        finalSettings.relativeTo instanceof HTMLElement
+    ) {
         rootBoundingRect = finalSettings?.relativeTo.getBoundingClientRect();
     } else {
         rootBoundingRect = {
             top: __scrollTop(),
             left: __scrollLeft(),
-            width: Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0),
-            height: Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-        }
+            width: Math.max(
+                document.documentElement.clientWidth || 0,
+                window.innerWidth || 0,
+            ),
+            height: Math.max(
+                document.documentElement.clientHeight || 0,
+                window.innerHeight || 0,
+            ),
+        };
     }
-    
+
     const boundingRect = $elm.getBoundingClientRect();
 
     const left = boundingRect.left - rootBoundingRect.left,
@@ -81,49 +91,103 @@ export default function areaStats($elm: HTMLElement, settings?: IAreaStatsSettin
     if (boundingRect.left + boundingRect.width < rootBoundingRect.left) {
         // fully out on left
         percentageX = 0;
-    } else if (boundingRect.left > rootBoundingRect.left + rootBoundingRect.width) {
+    } else if (
+        boundingRect.left >
+        rootBoundingRect.left + rootBoundingRect.width
+    ) {
         // fully out on right
         percentageX = 0;
-    } else if (boundingRect.left >= rootBoundingRect.left && boundingRect.left + boundingRect.width <= rootBoundingRect.left + rootBoundingRect.width) {
+    } else if (
+        boundingRect.left >= rootBoundingRect.left &&
+        boundingRect.left + boundingRect.width <=
+            rootBoundingRect.left + rootBoundingRect.width
+    ) {
         // fully inside
         percentageX = 100;
-    } else if (boundingRect.left < rootBoundingRect.left && boundingRect.left + boundingRect.width > rootBoundingRect.left + rootBoundingRect.width)  {
+    } else if (
+        boundingRect.left < rootBoundingRect.left &&
+        boundingRect.left + boundingRect.width >
+            rootBoundingRect.left + rootBoundingRect.width
+    ) {
         // partially outside on left and right
-        percentageX = 100 / boundingRect.width * rootBoundingRect.width;
-    } else if (boundingRect.left < rootBoundingRect.left && boundingRect.left + boundingRect.width <= rootBoundingRect.left + rootBoundingRect.width) {
+        percentageX = (100 / boundingRect.width) * rootBoundingRect.width;
+    } else if (
+        boundingRect.left < rootBoundingRect.left &&
+        boundingRect.left + boundingRect.width <=
+            rootBoundingRect.left + rootBoundingRect.width
+    ) {
         // partially inside on left
-        percentageX = 100 / boundingRect.width * (boundingRect.left + boundingRect.width - rootBoundingRect.left);
-    } else if (boundingRect.left < rootBoundingRect.left + rootBoundingRect.width && boundingRect.left + boundingRect.width > rootBoundingRect.left + rootBoundingRect.width) {
+        percentageX =
+            (100 / boundingRect.width) *
+            (boundingRect.left + boundingRect.width - rootBoundingRect.left);
+    } else if (
+        boundingRect.left < rootBoundingRect.left + rootBoundingRect.width &&
+        boundingRect.left + boundingRect.width >
+            rootBoundingRect.left + rootBoundingRect.width
+    ) {
         // partially inside on right
-        percentageX = 100 / boundingRect.width * ( boundingRect.width - ((boundingRect.left + boundingRect.width) - (rootBoundingRect.left + rootBoundingRect.width)));
+        percentageX =
+            (100 / boundingRect.width) *
+            (boundingRect.width -
+                (boundingRect.left +
+                    boundingRect.width -
+                    (rootBoundingRect.left + rootBoundingRect.width)));
     }
 
     // percentageY
     if (boundingRect.left + boundingRect.height < rootBoundingRect.top) {
         // fully out on top
         percentageY = 0;
-    } else if (boundingRect.top > rootBoundingRect.top + rootBoundingRect.height) {
+    } else if (
+        boundingRect.top >
+        rootBoundingRect.top + rootBoundingRect.height
+    ) {
         // fully out on bottom
         percentageY = 0;
-    } else if (boundingRect.top >= rootBoundingRect.top && boundingRect.top + boundingRect.height <= rootBoundingRect.top + rootBoundingRect.height) {
+    } else if (
+        boundingRect.top >= rootBoundingRect.top &&
+        boundingRect.top + boundingRect.height <=
+            rootBoundingRect.top + rootBoundingRect.height
+    ) {
         // fully inside
         percentageY = 100;
-    } else if (boundingRect.top < rootBoundingRect.top && boundingRect.top + boundingRect.height > rootBoundingRect.top + rootBoundingRect.height)  {
+    } else if (
+        boundingRect.top < rootBoundingRect.top &&
+        boundingRect.top + boundingRect.height >
+            rootBoundingRect.top + rootBoundingRect.height
+    ) {
         // partially outside on top and bottom
-        percentageY = 100 / boundingRect.height * rootBoundingRect.height;
-    } else if (boundingRect.top < rootBoundingRect.top && boundingRect.top + boundingRect.height <= rootBoundingRect.top + rootBoundingRect.height) {
+        percentageY = (100 / boundingRect.height) * rootBoundingRect.height;
+    } else if (
+        boundingRect.top < rootBoundingRect.top &&
+        boundingRect.top + boundingRect.height <=
+            rootBoundingRect.top + rootBoundingRect.height
+    ) {
         // partially inside on top
-        percentageY = 100 / boundingRect.height * (boundingRect.top + boundingRect.height - rootBoundingRect.top);
-    } else if (boundingRect.top < rootBoundingRect.top + rootBoundingRect.height && boundingRect.top + boundingRect.height > rootBoundingRect.top + rootBoundingRect.height) {
+        percentageY =
+            (100 / boundingRect.height) *
+            (boundingRect.top + boundingRect.height - rootBoundingRect.top);
+    } else if (
+        boundingRect.top < rootBoundingRect.top + rootBoundingRect.height &&
+        boundingRect.top + boundingRect.height >
+            rootBoundingRect.top + rootBoundingRect.height
+    ) {
         // partially inside on bottom
-        percentageY = 100 / boundingRect.height * ( boundingRect.height - ((boundingRect.top + boundingRect.height) - (rootBoundingRect.top + rootBoundingRect.height)));
+        percentageY =
+            (100 / boundingRect.height) *
+            (boundingRect.height -
+                (boundingRect.top +
+                    boundingRect.height -
+                    (rootBoundingRect.top + rootBoundingRect.height)));
     }
 
+    const surfaceX = (boundingRect.width / 100) * percentageX,
+        surfaceY = (boundingRect.height / 100) * percentageY;
 
-    const surfaceX = boundingRect.width / 100 * percentageX,
-        surfaceY = boundingRect.height / 100 * percentageY;
-
-    const percentage = percentageX > 0 && percentageY > 0 ? 100 / 200 * (percentageX + percentageY) : 0;
+    const percentage =
+        percentageX > 0 && percentageY > 0
+            ? (100 / 200) * (percentageX + percentageY)
+            : 0;
 
     return {
         percentage,
@@ -134,6 +198,6 @@ export default function areaStats($elm: HTMLElement, settings?: IAreaStatsSettin
         left: boundingRect.left,
         relLeft: left,
         top: boundingRect.top,
-        relTop: top
+        relTop: top,
     };
 }

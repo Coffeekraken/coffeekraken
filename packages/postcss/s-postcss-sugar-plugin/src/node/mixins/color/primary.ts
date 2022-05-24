@@ -22,7 +22,7 @@ export { postcssSugarPluginColorPrimaryMixinInterface as interface };
  * This mixin allows you to (re)map the "primary" virtual color to another like "complementary", "accent", etc...
  *
  * @param       {String}        color           The color you want to map on the primary one
- * @return      {Css}                     The generated remap css
+ * @return      {Css}                     The generated remap css
  *
  * @example        css
  * .my-section {

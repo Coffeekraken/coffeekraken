@@ -94,7 +94,7 @@ export default function ({
             .map((style) => {
                 return ` * <!-- ${style} style -->
             * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
             *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
             *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
             *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>

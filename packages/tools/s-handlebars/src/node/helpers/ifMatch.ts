@@ -14,7 +14,7 @@ import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
  * This represent the `match` handlebars helper that allows you to execute a passed regex on the passed string
  *
  * @param       {String}        str             The string on which to apply our regex
- * @param       {String}        regex           The regex you want to apply
+ * @param       {String}        regex           The regex you want to apply
  * @return      {Boolean}                       true if match, false if not
  *
  * @example         html

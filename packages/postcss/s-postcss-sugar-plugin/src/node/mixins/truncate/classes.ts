@@ -12,7 +12,7 @@ import __faker from 'faker';
  * This mixin generate all the truncate classes like s-truncate, s-truncate:2, etc...
  * The number of truncate classes generated is defined in the theme.helpers.truncate.count settings
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.truncate.classes;

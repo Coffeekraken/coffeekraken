@@ -13,8 +13,8 @@ import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
  *
  * This helper allows you to get the SFile object representation of each config files that correspond to the passed configId
  *
- * @param       {String}        configId            The config id like "frontendServer", etc...
- * @return      {String}                    The .config.js filename
+ * @param       {String}        configId            The config id like "frontendServer", etc...
+ * @return      {String}                    The .config.js filename
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>

@@ -12,7 +12,7 @@ namespace thorin;
  *
  * @param    {Array}    $array    The array to inspect
  * @param    {Array}    ...$values    The values to exclude
- * @return    {Array}    The new array of filtered values
+ * @return    {Array}    The new array of filtered values
  *
  * @example    php
  * Thorin::array_difference([2, 1], [2, 3]);
@@ -21,6 +21,7 @@ namespace thorin;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/difference.php
  */
-function array_difference(array $array, array ...$values): array {
+function array_difference(array $array, array ...$values): array
+{
     return \array_values(\array_diff($array, ...$values));
 }

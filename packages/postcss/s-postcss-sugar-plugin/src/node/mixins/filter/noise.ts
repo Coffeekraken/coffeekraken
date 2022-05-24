@@ -10,7 +10,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin allows you to apply a noise effect on any HTMLElement using the svg turbulence filter.
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-element {

@@ -29,7 +29,7 @@ export interface postcssSugarPluginStateOutlineWhenMixinParams {
  * always by passing the `on` parameter to `always` like so `@sugar.outline(always)`
  *
  *
- * @return      {Css}         The generated css
+ * @return      {Css}         The generated css
  *
  * @example        css
  * .myCoolItem {

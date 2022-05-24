@@ -17,6 +17,8 @@ import __samsumgSvg from './svg/samsung.svg';
 import __yandexSvg from './svg/yandex.svg';
 
 export default class SDashboardBrowserstackComponent extends __SLitComponent {
+    _maxVersions = 10;
+
     _credentials = {
         username: 'operations@buzzbrothers.ch',
         password: 'flatcar-naples-upwards-AVIONIC-naughty',
@@ -122,7 +124,9 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
                     });
                     for (let i = keys.length - 1; i >= 0; i--) {
                         finalBrowsers[browser].push(browserData[keys[i]]);
-                        if (finalBrowsers[browser].length >= 2) {
+                        if (
+                            finalBrowsers[browser].length >= this._maxVersions
+                        ) {
                             break;
                         }
                     }
@@ -140,7 +144,7 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
     render() {
         return html`
             <div class="s-dashboard-browserstack s-width:100">
-                <h2 class="s-typo:h6 s-mbe:30">Browserstack</h2>
+                <h2 class="s-typo:h6 s-mbe:20">Browserstack</h2>
 
                 <div class="__browsers ck-panel">
                     ${Object.keys(this._browsers).length
@@ -182,7 +186,11 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
                                   `,
                               )}
                           `
-                        : ''}
+                        : html`
+                              <div
+                                  class="s-loader:spinner s-color:accent"
+                              ></div>
+                          `}
                 </div>
             </div>
         `;

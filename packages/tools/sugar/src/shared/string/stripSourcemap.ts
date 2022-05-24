@@ -10,8 +10,8 @@
  *
  * @feature        Support sourcemap like `//# sourceMappingURL=...`
  *
- * @param       {String}            str         The string to process
- * @return      {String}                        The processed string
+ * @param       {String}            str         The string to process
+ * @return      {String}                        The processed string
  *
  * @example         js
  * import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';

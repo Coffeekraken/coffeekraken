@@ -18,7 +18,8 @@ export default function (env, config) {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: 'https://use.fontawesome.com/releases/v5.15.3/css/all.css',
+            url:
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
         },
 
         fantasticon: {

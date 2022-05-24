@@ -44,6 +44,7 @@ export default class SDashboard extends __SClass {
      * Store the iframe of the dashboard
      */
     _$iframe: HTMLIFrameElement;
+    _$focusItem: HTMLDivElement;
 
     /**
      * @name        dashboardSettings
@@ -91,9 +92,20 @@ export default class SDashboard extends __SClass {
             }),
         );
 
+        // expose the dashboard on document to be able to access it from the iframe
+        // @ts-ignore
+        document.dashboard = this;
+
         // create the iframe
         this._$iframe = document.createElement('iframe');
         this._$iframe.classList.add(`s-dashboard-iframe`);
+
+        this._$focusItem = document.createElement('div');
+        this._$focusItem.setAttribute('tabindex', '-1');
+        this._$focusItem.style.position = 'fixed';
+        this._$focusItem.style.top = '0';
+        this._$focusItem.style.left = '0';
+        document.body.appendChild(this._$focusItem);
 
         __hotkey('ctrl+s').on('press', () => {
             this.open();
@@ -101,6 +113,86 @@ export default class SDashboard extends __SClass {
         __hotkey('escape').on('press', () => {
             this.close();
         });
+        __hotkey('ctrl+p').on('press', () => {
+            this.changePage();
+        });
+
+        this._injectWebVitals();
+    }
+
+    /**
+     * @name           _injectWebVitals
+     * @type            Function
+     * @private
+     *
+     * Inject the webvitals in the document
+     *
+     * @since           2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _webVitalsInjected = false;
+    _injectWebVitals() {
+        if (this._webVitalsInjected) return;
+        this._webVitalsInjected = true;
+        const $script = document.createElement('script');
+        $script.setAttribute('type', 'module');
+        $script.text = `
+            import {getCLS, getFID, getLCP, getFCP, getTTFB} from 'https://unpkg.com/web-vitals?module';
+            getCLS(function(res) {
+                document.webVitals.cls = res;
+                document.dispatchEvent(new CustomEvent('webVitals', {
+                    detail: document.webVitals
+                }));
+            });
+            getFID(function(res) {
+                document.webVitals.fid = res;
+                document.dispatchEvent(new CustomEvent('webVitals', {
+                    detail: document.webVitals
+                }));
+            });
+            getLCP(function(res) {
+                document.webVitals.lcp = res;
+                document.dispatchEvent(new CustomEvent('webVitals', {
+                    detail: document.webVitals
+                }));
+            });
+            getFCP(function(res) {
+                document.webVitals.fcp = res;
+                document.dispatchEvent(new CustomEvent('webVitals', {
+                    detail: document.webVitals
+                }));
+            });
+            getTTFB(function(res) {
+                document.webVitals.ttfb = res;
+                document.dispatchEvent(new CustomEvent('webVitals', {
+                    detail: document.webVitals
+                }));
+            });
+        `;
+        // create a "webVitals" property on document to store results
+        // @ts-ignore
+        document.webVitals = {};
+        this.document.body.appendChild($script);
+    }
+
+    /**
+     * @name            changePage
+     * @type            Function
+     *
+     * Open the dashboard with the pages component selected
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    changePage() {
+        // open the dashboard
+        this.open();
+        // @ts-ignore
+        this._$iframe.contentDocument?.dispatchEvent(
+            new CustomEvent('dashboard.changePage', {}),
+        );
+        // @ts-ignore
+        this._$iframe.contentDocument.isChangePageWanted = true;
     }
 
     /**
@@ -117,6 +209,10 @@ export default class SDashboard extends __SClass {
         this._$iframe.classList.remove('active');
         // overflow
         this.document.querySelector('html').style.removeProperty('overflow');
+        // get focus back
+        setTimeout(() => {
+            this._$focusItem.focus();
+        }, 100);
     }
 
     /**
@@ -130,7 +226,6 @@ export default class SDashboard extends __SClass {
      */
     open() {
         if (!this._$iframe.parentElement) {
-            console.log('OPDOPOD');
             document.body.appendChild(this._$iframe);
             this._$iframe.contentWindow.document.open();
             this._$iframe.contentWindow.document.write(`

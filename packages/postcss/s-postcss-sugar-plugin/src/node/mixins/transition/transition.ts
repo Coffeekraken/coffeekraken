@@ -10,7 +10,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * This mixin generate all the needed css to apply a transition setted in
  * the config.theme.transition configuration stack like "slow", "default" and "fast"
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.platform.classes;

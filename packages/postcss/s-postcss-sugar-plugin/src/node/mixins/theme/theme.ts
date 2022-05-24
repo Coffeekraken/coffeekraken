@@ -13,7 +13,7 @@ import __STheme from '@coffeekraken/s-theme';
  * in any scope. It will print all the theme variables like colors, etc, as well
  * as set the correct font style and some other small things...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.theme(light);

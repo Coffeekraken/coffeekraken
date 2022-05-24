@@ -11,7 +11,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.reset.destyle;

@@ -11,7 +11,7 @@
  * @todo        tests
  *
  * @param       {StyleSheet|StyleSheet[]}        stalesheet      The StyleSheet instance to convert
- * @return      {String}                            The css string
+ * @return      {String}                            The css string
  *
  * @example         js
  * import stylesheetToString from '@coffeekraken/sugar/js/dom/css/stylesheetToString';

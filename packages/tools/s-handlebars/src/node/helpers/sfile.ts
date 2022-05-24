@@ -10,7 +10,7 @@ import __SFile from '@coffeekraken/s-file';
  *
  * This helper allows you to get an SFile instance back from the passed file path
  *
- * @param       {String}        path                The path of the file
+ * @param       {String}        path                The path of the file
  * @return      {SFile}                         The SFile instance
  *
  * @since           2.0.0

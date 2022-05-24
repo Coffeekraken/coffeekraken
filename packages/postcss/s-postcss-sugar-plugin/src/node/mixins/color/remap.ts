@@ -27,8 +27,8 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
  * This mixin allows you to (re)map a color to another one like saying you want the "warning" color as the "primary" one
  *
  * @param       {String}        color           The color you want to map on another one
- * @param       {String}        toColor         THe color you want to override with the previous one
- * @return      {Css}                     The generated remap css
+ * @param       {String}        toColor         THe color you want to override with the previous one
+ * @return      {Css}                     The generated remap css
  *
  * @example        css
  * .my-section {

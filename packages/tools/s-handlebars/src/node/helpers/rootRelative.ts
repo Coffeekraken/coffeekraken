@@ -10,8 +10,8 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  *
  * This helper allows you to remove in a path the absolute part and get only the relative part of it
  *
- * @param       {String}        path            The path you want to process
- * @return      {String}                    The processed path
+ * @param       {String}        path            The path you want to process
+ * @return      {String}                    The processed path
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>

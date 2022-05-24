@@ -9,8 +9,8 @@ import __packageRoot from '../path/packageRoot';
  * It will check if the passed package is in a monorepo, and relace the monorepo root path with the passed
  * package root path.
  *
- * @param      {String}           path      The path to make absolute from the passed package root
- * @param       {String}           [packageRootPath=__packageRoot()]  The package root path
+ * @param      {String}           path      The path to make absolute from the passed package root
+ * @param       {String}           [packageRootPath=__packageRoot()]  The package root path
  * @return     {string}}       The absolute path to the passed package root path
  *
  * @since       2.0.0

@@ -191,7 +191,7 @@ class SProcessManager extends __SEventEmitter {
      *
      * Simple method to detach a process from the manager using his id.
      *
-     * @param       {String}      id        The process id to detach
+     * @param       {String}      id        The process id to detach
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

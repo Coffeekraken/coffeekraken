@@ -10,7 +10,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  *
  * This helper allows you to "sanitize" some configuration values makes absolute paths to relative, etc...
  *
- * @param       {Any}        value            The value to sanitize
+ * @param       {Any}        value            The value to sanitize
  * @return      {Any}                           The sanitized value
  *
  * @since           2.0.0

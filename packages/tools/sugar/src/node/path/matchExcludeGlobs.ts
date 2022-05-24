@@ -12,8 +12,8 @@ import __excludeGlobs from './excludeGlobs';
  *
  * This function check if the passed path match one or more exclude globs specified in the config "storage.exclude"
  *
- * @param           {String}            path            The path to check
- * @return          {Boolean}                           true if the path match at least 1 exclude glob, false if not
+ * @param           {String}            path            The path to check
+ * @return          {Boolean}                           true if the path match at least 1 exclude glob, false if not
  *
  * @example         js
  * import matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs';

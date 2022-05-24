@@ -10,7 +10,7 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
  *
  * This helper allows you to get back either an array length, an object keys length or a string length
  *
- * @param       {Any}        value            The value to count
+ * @param       {Any}        value            The value to count
  * @return      {Number}                           The passed value length
  *
  * @since           2.0.0

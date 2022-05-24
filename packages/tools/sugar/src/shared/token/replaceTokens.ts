@@ -10,8 +10,8 @@ import __currentModuleSystem from '../module/currentModuleSystem';
  * This function take as input a string and replace some tokens like:
  * - %moduleSystem: The current module system like "esm" or "cjs"
  *
- * @param       {String}            string          The string you want to process
- * @return      {String}                            The processed string
+ * @param       {String}            string          The string you want to process
+ * @return      {String}                            The processed string
  *
  * @example         js
  * import replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';

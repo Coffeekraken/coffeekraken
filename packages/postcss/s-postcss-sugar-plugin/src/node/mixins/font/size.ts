@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  * This mixin generate the css needed to apply a font-size depending on the font sizes
  * defines in the config.theme.font.size stack
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-cool-element {

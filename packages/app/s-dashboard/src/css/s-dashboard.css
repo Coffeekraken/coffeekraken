@@ -3,9 +3,19 @@
 @import './generic/count.css';
 @import './generic/panel.css';
 @import './generic/list.css';
+@import './generic/stat.css';
 
 @import './partials/header.css';
 
 body {
     overflow: hidden;
+}
+
+.s-layout > * > *:not(:first-child) {
+    display: block;
+    margin-block-start: sugar.margin(30);
+}
+.s-layout > * > * h2.s-typo--h6 {
+    padding-inline-start: sugar.padding(30);
+    opacity: 0.6;
 }

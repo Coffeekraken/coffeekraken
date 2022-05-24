@@ -15,7 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  * - micro
  * - after
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-element {

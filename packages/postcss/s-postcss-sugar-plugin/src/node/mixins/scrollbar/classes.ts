@@ -12,7 +12,7 @@ import __faker from 'faker';
  * This mixin generate all the scale helper classes like s-scale:01, s-scale:12, etc.
  * The generated scales are specified in the config.theme.scale configuration stack
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.scale.classes;

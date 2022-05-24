@@ -12,7 +12,7 @@ import __SColor from '@coffeekraken/s-color';
  * Once you have an instance of this theme you will have access to a lot of utilities
  * methods like "loopOnColors", etc...
  *
- * @param       {String}        [theme=undefined]        The name of the theme you want to instanciate utilities for. If not specified, will take either the "default" theme, or the theme defined in the sugar.json file
+ * @param       {String}        [theme=undefined]        The name of the theme you want to instanciate utilities for. If not specified, will take either the "default" theme, or the theme defined in the sugar.json file
  *
  * @example         js
  * import STheme from '@coffeekraken/s-theme';
@@ -46,7 +46,7 @@ export default class STheme extends __SThemeBase {
      *
      * This method allows you to get the current applied theme STheme instance
      *
-     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -62,11 +62,11 @@ export default class STheme extends __SThemeBase {
      *
      * THis method allows you to access a particular theme color
      *
-     * @param           {String}            name            The color name you want to get
+     * @param           {String}            name            The color name you want to get
      * @param           {String}            [variant=null]     The color variant you want to get
      * @param           {String}           [state='default']    The state in which to get the color back
      * @param           {HTMLElement}       [$context=document.body]        The context in which to get the color
-     * @return          {SColor}                                    An SColor instance that you can make use of
+     * @return          {SColor}                                    An SColor instance that you can make use of
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

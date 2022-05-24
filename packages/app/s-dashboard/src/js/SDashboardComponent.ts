@@ -12,6 +12,9 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { define as __SDashboardPagesComponent } from './partials/s-dashboard-pages-component/SDashboardPagesComponent';
 import { define as __SDashboardFrontendCheckerComponent } from './partials/s-dashboard-frontend-checker-component/SDashboardFrontendCheckerComponent';
 import { define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent';
+import { define as __SDashboardGoogleComponent } from './partials/s-dashboard-google-component/SDashboardGoogleComponent';
+import { define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent';
+import { define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent';
 
 import __logoSvg from './partials/logo';
 
@@ -19,6 +22,9 @@ import __logoSvg from './partials/logo';
 __SDashboardPagesComponent();
 __SDashboardFrontendCheckerComponent();
 __SDashboardBrowserstackComponent();
+__SDashboardGoogleComponent();
+__SDashboardWebVitalsComponent();
+__SDashboardResponsiveComponent();
 
 export interface ISDashboardComponentProps {}
 
@@ -73,81 +79,14 @@ export default class SDashboardComponent extends __SLitComponent {
     _listenShortcuts() {
         // ctrl+s
         __hotkey('ctrl+s').on('press', () => {
-            this.open();
+            // @ts-ignore
+            this.document.dashboard?.open();
         });
         // escape
         __hotkey('escape').on('press', () => {
-            this.close();
+            // @ts-ignore
+            this.document.dashboard?.close();
         });
-    }
-
-    /**
-     * @name            close
-     * @type        Function
-     *
-     * Close the dashboard
-     *
-     * @since           2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    close() {
-        if (window.parent) {
-            window.parent.document
-                .querySelector('.s-dashboard-iframe')
-                ?.classList.remove('active');
-        } else {
-            this.classList.remove('active');
-        }
-        // overflow
-        this.document.querySelector('html').style.removeProperty('overflow');
-    }
-
-    /**
-     * @name            open
-     * @type        Function
-     *
-     * Close the dashboard
-     *
-     * @since           2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    open() {
-        if (window.parent) {
-            window.parent.document
-                .querySelector('.s-dashboard-iframe')
-                ?.classList.add('active');
-        } else {
-            this.classList.add('active');
-        }
-
-        // overflow
-        this.document.querySelector('html').style.overflow = 'hidden';
-    }
-
-    /**
-     * @name           _injectWebVitals
-     * @type            Function
-     * @private
-     *
-     * Inject the webvitals in the document
-     *
-     * @since           2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    _webVitalsInjected = false;
-    _injectWebVitals() {
-        if (this._webVitalsInjected) return;
-        this._webVitalsInjected = true;
-        const $script = document.createElement('script');
-        $script.setAttribute('type', 'module');
-        $script.text = `
-            import {getCLS, getFID, getLCP} from 'https://unpkg.com/web-vitals?module';
-            getCLS(console.log, true);
-            getFID(console.log, true);
-            getLCP(console.log, true);
-        `;
-        console.log('APPEND', $script);
-        this.document.body.appendChild($script);
     }
 
     render() {

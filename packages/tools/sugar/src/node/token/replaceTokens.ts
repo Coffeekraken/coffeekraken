@@ -14,8 +14,8 @@ import __sharedReplaceTokens from '../../shared/token/replaceTokens';
  * - replacePathTokens: Replace path tokens like %packageRootDir, %distJsDir, etc...
  * - replacePackageJsonTokens: Replace tokens like %packageJson.name, %packageJson.version, etc... with package.json values
  *
- * @param       {String}            string          The string you want to process
- * @return      {String}                            The processed string
+ * @param       {String}            string          The string you want to process
+ * @return      {String}                            The processed string
  *
  * @example         js
  * import replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';

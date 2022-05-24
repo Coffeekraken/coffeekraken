@@ -766,7 +766,7 @@ export default class SConfig {
      *
      * This method allows you to get the config in a simple object format
      *
-     * @return      {Any}               The configuration in object format
+     * @return      {Any}               The configuration in object format
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -781,7 +781,7 @@ export default class SConfig {
      *
      * This method allows you to get the config in a simple json object format
      *
-     * @return      {Any}               The configuration in object format
+     * @return      {Any}               The configuration in object format
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

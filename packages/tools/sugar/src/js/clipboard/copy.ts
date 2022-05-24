@@ -10,8 +10,8 @@ import __copy from 'clipboard-copy';
  *
  * This function allows you to copy to the clipboard the passed text
  *
- * @param       {String}            text            The text to copy
- * @return      {Promise}                          A promise fullfilled when the copy has been made correctly
+ * @param       {String}            text            The text to copy
+ * @return      {Promise}                          A promise fullfilled when the copy has been made correctly
  *
  * @todo        doc
  * @todo        tests

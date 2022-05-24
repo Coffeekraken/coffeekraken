@@ -246,7 +246,7 @@ export default class SComponent extends __SClass {
      * his "mount" state. This state depends fully on the "mountWhen" property.
      * When the state has been reached, the passed callback will be executed.
      *
-     * @return          {Promise}           A promise fullfilled when the component (node) has reached his "mount" state
+     * @return          {Promise}           A promise fullfilled when the component (node) has reached his "mount" state
      *
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -265,7 +265,7 @@ export default class SComponent extends __SClass {
      * 2. An event called "%componentName" with in the detail object a "eventType" property set to the event name
      * 3. An event called "%eventName" with in the detail object a "eventComponent" property set to the component name
      *
-     * @param           {String}            eventName     The event name to dispatch
+     * @param           {String}            eventName     The event name to dispatch
      * @param           {ISComponentUtilsDispatchSettings}          [settings={}]     The settings to use for the dispatch
      *
      * @since       2.0.0
@@ -525,7 +525,7 @@ export default class SComponent extends __SClass {
      *
      * This method returns true if the component is mounted, false if not
      *
-     * @return    {Boolean}       true if is mounted, false if not
+     * @return    {Boolean}       true if is mounted, false if not
      *
      * @since   2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>

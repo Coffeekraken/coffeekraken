@@ -9,7 +9,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin allows you to truncate some text to a number of lines
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-cool-element {

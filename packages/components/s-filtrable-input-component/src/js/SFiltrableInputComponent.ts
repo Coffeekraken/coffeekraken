@@ -668,7 +668,7 @@ export default class SFiltrableInput extends __SLitComponent {
  * props if needed.
  *
  * @param           {any}           [props={}]              Some default props you want to set for your custom element
- * @param           {String}        [tagName='s-filtrable-input']       The tagName associated to this custom element
+ * @param           {String}        [tagName='s-filtrable-input']       The tagName associated to this custom element
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

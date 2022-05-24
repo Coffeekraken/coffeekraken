@@ -6,9 +6,9 @@ namespace thorin;
  * This method is like `Thorin::array_from_pairs` except that it accepts two arrays,
  * one of property identifiers and one of corresponding values.
  *
- * @param    {Array}    $props    The property identifiers
+ * @param    {Array}    $props    The property identifiers
  * @param    {Array}    $values    The property values
- * @return    {Object}    The new object
+ * @return    {Object}    The new object
  *
  * @example    php
  * Thorin::array_zip_object(['a', 'b'], [1, 2]);
@@ -21,6 +21,7 @@ namespace thorin;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/zipObject.php
  */
-function array_zip_object(array $props = [], array $values = []) {
-	return \_::zipObject($props, $values);
+function array_zip_object(array $props = [], array $values = [])
+{
+    return \_::zipObject($props, $values);
 }

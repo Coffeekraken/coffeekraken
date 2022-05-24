@@ -19,7 +19,7 @@ import __fs from 'fs';
  * - `.json`: Simple JSON files
  * - `.yml`: Yaml files
  *
- * @param       {String}         filePath           The file path relative to your project root directory
+ * @param       {String}         filePath           The file path relative to your project root directory
  * @param       {ILoadConfigFileSettings}       [settings={}]       Some settings to configure your file load
  * @return          {Any}                       Return the config js object or undefined
  *

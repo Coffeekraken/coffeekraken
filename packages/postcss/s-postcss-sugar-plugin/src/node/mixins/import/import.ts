@@ -19,7 +19,7 @@ import __STheme from '@coffeekraken/s-theme';
  * It add the feature to specify a glob pattern to import multiple files at once.
  *
  * @param         {String}        path        The file path you want to import relative to the file you're in
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.import('./my-cool-file.css');

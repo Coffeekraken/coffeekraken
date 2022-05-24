@@ -7,7 +7,7 @@ namespace thorin;
  *
  * @param    {Array}    $array    The array to process
  * @param    {Integer}    $start    The start position
- * @param    {Integer}    $end    The end position
+ * @param    {Integer}    $end    The end position
  *
  * @example    php
  * $array = [1,2,3,4,5];
@@ -17,6 +17,7 @@ namespace thorin;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/slice.php
  */
-function array_slice(array $array, int $start, int $end = null): array {
-	return \_::slice($array, $start, $end);
+function array_slice(array $array, int $start, int $end = null): array
+{
+    return \_::slice($array, $start, $end);
 }

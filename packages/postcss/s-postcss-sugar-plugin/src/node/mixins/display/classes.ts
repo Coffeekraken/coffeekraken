@@ -10,7 +10,7 @@ import __faker from 'faker';
  *
  * This mixin generate all the display helper classes like s-display:block, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.display.classes;

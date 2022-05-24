@@ -20,6 +20,15 @@ import __postcss from 'postcss';
 export default async function ({ root, sharedData, settings }) {
     const duration = new __SDuration();
 
+    // fontawesome
+    if (sharedData.isFontawesomeNeeded) {
+        root.nodes.unshift(
+            __postcss.parse(`
+                @import url('${__SSugarConfig.get('icons.fontawesome.url')}');
+            `),
+        );
+    }
+
     if (!sharedData.icons || !sharedData.icons.length) return;
 
     const fantasticonConfig = __SSugarConfig.get('icons.fantasticon');

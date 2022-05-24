@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * - mounted: When a sugar webcomponent has the "mounted" attribute
  * - active: When the element has the "active" class or the "active" attribute
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .myElement {

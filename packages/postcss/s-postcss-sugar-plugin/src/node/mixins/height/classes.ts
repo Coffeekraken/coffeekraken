@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  * This mixin generate all the height helper classes like s-height:20, s-height:50, etc...
  * It will generate all the height defined in the config.theme.height configuration stack
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.height.classes;

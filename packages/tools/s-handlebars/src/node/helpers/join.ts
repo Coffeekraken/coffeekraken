@@ -8,8 +8,8 @@
  *
  * This helper allows you to to join an array of values with a separator
  *
- * @param       {String[]}        value            The value to count
- * @param       {String}        separator        The separator to use
+ * @param       {String[]}        value            The value to count
+ * @param       {String}        separator        The separator to use
  * @return      {String}                    The joined value
  *
  * @since           2.0.0

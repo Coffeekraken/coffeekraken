@@ -12,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  * The font parameter accept any defined font family from the
  * config.theme.font.family stack
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-cool-element {

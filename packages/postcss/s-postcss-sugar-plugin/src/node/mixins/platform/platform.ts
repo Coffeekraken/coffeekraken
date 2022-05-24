@@ -15,7 +15,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  * css, node, js, php, etc...
  *
  * @param         {IPostcssSugarPluginAssetPlatformParams}    params      The parameters object
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .my-platform {

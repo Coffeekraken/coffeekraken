@@ -8,8 +8,8 @@
  *
  * This function simply take a string and get rid of all docblocks
  *
- * @param       {String}            str         The string to process
- * @return      {String}                        The processed string
+ * @param       {String}            str         The string to process
+ * @return      {String}                        The processed string
  *
  * @example         js
  * import __stripDocblocks from '@coffeekraken/sugar/shared/string/stripDocblocks';

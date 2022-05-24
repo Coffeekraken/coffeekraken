@@ -1,6 +1,6 @@
 # {{ packageJson.name }}
 
-{{ packageJson.description }}
+{{ packageJson.description }}
 
 ## Scripts
 

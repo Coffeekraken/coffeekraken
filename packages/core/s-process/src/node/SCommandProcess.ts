@@ -2,8 +2,10 @@ import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SCommandProcessInterface from './interface/SCommandProcessInterface';
 import {
-  ISCommandProcessCtorSettings,
-  ISCommandProcessParams, ISCommandProcessSettings, ISProcessResultObject
+    ISCommandProcessCtorSettings,
+    ISCommandProcessParams,
+    ISCommandProcessSettings,
+    ISProcessResultObject,
 } from './ISProcess';
 import __SProcess from './SProcess';
 
@@ -29,79 +31,79 @@ import __SProcess from './SProcess';
 
 // @ts-ignore
 export default class SCommandProcess extends __SProcess {
-  static interfaces = {
-    params: __SCommandProcessInterface
-  };
+    static interfaces = {
+        params: __SCommandProcessInterface,
+    };
 
-  /**
-   * @name        commandProcessSettings
-   * @type          ISCommandProcessSettings
-   * @get
-   *
-   * Access the command process settings
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get commandProcessSettings(): ISCommandProcessSettings {
-    return (<any>this)._settings.commandProcess;
-  }
+    /**
+     * @name        commandProcessSettings
+     * @type          ISCommandProcessSettings
+     * @get
+     *
+     * Access the command process settings
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get commandProcessSettings(): ISCommandProcessSettings {
+        return (<any>this)._settings.commandProcess;
+    }
 
-  /**
-   * @name        constructor
-   * @type        Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  constructor(
-    initialParams?: Partial<ISCommandProcessParams>,
-    settings?: Partial<ISCommandProcessCtorSettings>
-  ) {
-    super(
-      initialParams ?? {},
-      __deepMerge(
-        {
-          commandProcess: {}
-        },
-        settings ?? {},
-        {
-          process: {
-            runAsChild: false
-          }
-        }
-      )
-    );
-  }
+    /**
+     * @name        constructor
+     * @type        Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    constructor(
+        initialParams?: Partial<ISCommandProcessParams>,
+        settings?: Partial<ISCommandProcessCtorSettings>,
+    ) {
+        super(
+            initialParams ?? {},
+            __deepMerge(
+                {
+                    commandProcess: {},
+                },
+                settings ?? {},
+                {
+                    process: {
+                        runAsChild: false,
+                    },
+                },
+            ),
+        );
+    }
 
-  /**
-   * @name          process
-   * @type          Function
-   * @async
-   *
-   * Run the actual command through a ```spawn``` call.
-   * The spawn function used here is the sugar one stored in "sugar.node.process.spawn"
-   *
-   * @param         {String}        command         The command you want to execute
-   * @param         {ISCommandProcessSettings}      [settings={}]       Some command process settings you want to override
-   * @return        {SPromise}                  An SPromise through which you can subscribe for some ```log``` and that will be resolved once the command has ended
-   *
-   * @since		2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  process(
-    params: any,
-    settings?: Partial<ISCommandProcessSettings>
-  ): Promise<ISProcessResultObject> {
-    const set = <ISCommandProcessSettings>(
-      __deepMerge(this.commandProcessSettings, settings ?? {})
-    );
-    return __spawn(params.command, [], {
-      returnValueOnly: true,
-      ...set.spawnSettings
-    });
-  }
+    /**
+     * @name          process
+     * @type          Function
+     * @async
+     *
+     * Run the actual command through a ```spawn``` call.
+     * The spawn function used here is the sugar one stored in "sugar.node.process.spawn"
+     *
+     * @param         {String}        command         The command you want to execute
+     * @param         {ISCommandProcessSettings}      [settings={}]       Some command process settings you want to override
+     * @return        {SPromise}                  An SPromise through which you can subscribe for some ```log``` and that will be resolved once the command has ended
+     *
+     * @since		2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    process(
+        params: any,
+        settings?: Partial<ISCommandProcessSettings>,
+    ): Promise<ISProcessResultObject> {
+        const set = <ISCommandProcessSettings>(
+            __deepMerge(this.commandProcessSettings, settings ?? {})
+        );
+        return __spawn(params.command, [], {
+            returnValueOnly: true,
+            ...set.spawnSettings,
+        });
+    }
 }

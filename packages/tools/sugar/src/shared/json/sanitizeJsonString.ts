@@ -10,8 +10,8 @@
  * to pass through ```JSON.parse``` function for example.
  * If your string is really messy, if may not work. It take care for things like double quotes in double quotes, etc...
  *
- * @param       {String}            jsonString          The json string to sanitize
- * @return      {String}                                The sanitized string
+ * @param       {String}            jsonString          The json string to sanitize
+ * @return      {String}                                The sanitized string
  *
  * @todo            tests
  *

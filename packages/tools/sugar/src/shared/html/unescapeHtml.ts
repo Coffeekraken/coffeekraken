@@ -10,7 +10,7 @@ import __unescape from 'unescape';
  *
  * This function allows you to unescape some html characters like &lt;, etc...
  *
- * @param       {String}            html            The html to unescape
+ * @param       {String}            html            The html to unescape
  * @return      {String}                            The unescaped html
  *
  * @example         js

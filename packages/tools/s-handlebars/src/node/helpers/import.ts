@@ -9,7 +9,7 @@
  * This helper allows you to import a file just like a regular "import" in javascript.
  *
  * @param       {String}      filePath          The path to the file you want to import
- * @return      {any}                           The imported result
+ * @return      {any}                           The imported result
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>

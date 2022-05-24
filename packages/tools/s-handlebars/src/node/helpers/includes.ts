@@ -12,10 +12,10 @@
  * @param       {String}        value           The value to check
  * @param       {String|Array}          in      The value in which to check
  * @return      {Boolean}                       true if exists, false if not
- * 
+ *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default function(value: string, inValue: string | string[]): boolean {
+export default function (value: string, inValue: string | string[]): boolean {
     return inValue.includes(value);
 }

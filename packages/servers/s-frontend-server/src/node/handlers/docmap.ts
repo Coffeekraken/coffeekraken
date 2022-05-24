@@ -11,9 +11,9 @@ import __SDocMap from '@coffeekraken/s-docmap';
  *
  * This function is responsible of responding to express requests made on the docMap url
  *
- * @param         {Object}          req             The express request object
- * @param         {Object}          res             The express response object
- * @param         {Object}         [settings={}]    The handler settings
+ * @param         {Object}          req             The express request object
+ * @param         {Object}          res             The express response object
+ * @param         {Object}         [settings={}]    The handler settings
  *
  * @todo      interface
  * @todo      doc

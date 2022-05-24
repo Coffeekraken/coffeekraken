@@ -12,7 +12,7 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  * This mixin generate all the transition helper classes like s-transition:slow, etc.
  * The generated transitions are specified in the config.theme.transition configuration stack
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.transition.classes;

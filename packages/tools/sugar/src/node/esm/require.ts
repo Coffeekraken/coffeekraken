@@ -13,7 +13,7 @@ import { createRequire } from 'module';
  * an ESM context.
  *
  * @param       {String}            package         The package you want to require
- * @return      {Function}                  The "require" cjs fully functional function
+ * @return      {Function}                  The "require" cjs fully functional function
  *
  * @example         js
  * import require from '@coffeekraken/sugar/node/esm/require';

@@ -18,7 +18,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  *
  * This mixin allows you to generate all the colors helpers classes like s-tc:accent, etc...
  *
- * @return    {Css}         The generated css for color classes
+ * @return    {Css}         The generated css for color classes
  *
  * @example        css
  * \@sugar.color;

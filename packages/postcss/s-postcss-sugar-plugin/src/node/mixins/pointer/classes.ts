@@ -11,7 +11,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @feature         Support these values (for now): none, all, auto and fill
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.pointer.classes;

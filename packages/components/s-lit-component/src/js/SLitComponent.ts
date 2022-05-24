@@ -174,8 +174,7 @@ export default class SLitComponent extends LitElement {
     static properties(properties: any, ...ints: typeof __SInterface): any {
         const propertiesObj = {};
 
-        ints.forEach(int => {
-
+        ints.forEach((int) => {
             const InterfaceToApply = __SComponentUtils.getFinalInterface(int);
             // @ts-ignore
             Object.keys(InterfaceToApply.definition).forEach((prop) => {
@@ -194,7 +193,12 @@ export default class SLitComponent extends LitElement {
                     propertiesObj[prop].attribute = __dashCase(prop);
                     propertiesObj[prop].converter = {
                         toAttribute(value) {
-                            if (value === 'false' || value === false || value === null) return null;
+                            if (
+                                value === 'false' ||
+                                value === false ||
+                                value === null
+                            )
+                                return null;
                             return String(value);
                         },
                     };

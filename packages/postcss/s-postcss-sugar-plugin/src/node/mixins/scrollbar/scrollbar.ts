@@ -73,10 +73,29 @@ export default function ({
           height: ${finalParams.size};
       }
       &::-webkit-scrollbar-track {
-          background-color: sugar.color(${finalParams.background}, --alpha 0.1);
+            ${
+                finalParams.background.match(/^sugar\.color/) ??
+                finalParams.background.match(/^(var|hsla?|rgba?)\(/)
+                    ? `
+                background-color: ${finalParams.background};
+            `
+                    : `
+                background-color: sugar.color(${finalParams.background}, --alpha 0.1);
+            `
+            }
+
       }
       &::-webkit-scrollbar-thumb {
-          background-color: sugar.color(${finalParams.color});
+          ${
+              finalParams.color.match(/^sugar\.color/) ||
+              finalParams.color.match(/^(var|hsla?|rgba?)\(/)
+                  ? `
+                background-color: ${finalParams.color};
+          `
+                  : `
+            background-color: sugar.color(${finalParams.color});
+          `
+          }
       }
   `);
 

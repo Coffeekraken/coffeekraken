@@ -15,4 +15,14 @@ export default {
      */
     // @ts-ignore
     env: process?.env?.NODE_ENV ?? window?.env?.ENV ?? 'development',
+
+    git: {
+        template: {
+            name: 'Template',
+            commit: {
+                id: undefined,
+                time: undefined,
+            },
+        },
+    },
 };

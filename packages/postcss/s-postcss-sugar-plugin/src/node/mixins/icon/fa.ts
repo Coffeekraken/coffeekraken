@@ -15,8 +15,8 @@ class postcssSugarPluginIconFaInterface extends __SInterface {
             },
             style: {
                 type: 'String',
-                values: ['solid', 'regular', 'light', 'duotone', 'brands'],
-                default: 'solid',
+                values: ['fa', 'fas', 'far', 'fab', 'fal', 'fad'],
+                default: 'fas',
             },
         };
     }
@@ -42,37 +42,19 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginIconFaParams = {
         icon: '',
-        style: 'solid',
+        style: 'fas',
         ...params,
     };
 
     if (finalParams.style === 'fa') finalParams.style = 'fas';
 
-    const prefixes = {
-        solid: 'fas',
-        regular: 'far',
-        light: 'fal',
-        duotone: 'fad',
-        brand: 'fab',
+    let availableIcons = {
+        fas: __fas,
+        fab: __fab,
     };
-
-    const fontNames = {
-        fas: 'Free',
-        far: 'Free',
-        fal: 'Free',
-        fad: 'Free',
-        fab: 'Brands',
-    };
-
-    sharedData.isFontawesomeNeeded = true;
-
     const faId = __camelCase(`fa-${finalParams.icon}`);
-    let iconObj = {
-        ...__fas,
-        ...__fab,
-    }[faId];
 
-    if (!iconObj) {
+    if (!availableIcons[finalParams.style]?.[faId]) {
         console.log(
             __parseHtml(
                 `<red>!!!</red> It seems that you don't have access to the icon "<yellow>${finalParams.icon}</<yellow>"...`,
@@ -81,20 +63,26 @@ export default function ({
         return;
     }
 
-    const prefix = iconObj.prefix;
+    sharedData.isFontawesomeNeeded = true;
 
-    if (finalParams.style === 'solid' || finalParams.style === 'fas')
-        finalParams.style = 'free';
+    let iconObj = availableIcons[finalParams.style][faId];
 
     const vars: string[] = [];
 
-    const fontWeight = {
-        fas: 900,
-        far: 400,
-        fal: 300,
-        fad: 900,
-        fab: 400,
-    };
+    const fontNames = {
+            fas: 'Free',
+            far: 'Free',
+            fal: 'Free',
+            fad: 'Free',
+            fab: 'Brands',
+        },
+        fontWeight = {
+            fas: 900,
+            far: 400,
+            fal: 300,
+            fad: 900,
+            fab: 400,
+        };
 
     vars.push(`
     -webkit-font-smoothing: antialiased;
@@ -103,8 +91,8 @@ export default function ({
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
-    font-family: "Font Awesome 6 ${__upperFirst(fontNames[prefix])}";
-    font-weight: ${fontWeight[prefix]};
+    font-family: "Font Awesome 6 ${__upperFirst(fontNames[finalParams.style])}";
+    font-weight: ${fontWeight[finalParams.style]};
     
     &:before {
       content: "\\${iconObj.icon[3]}";

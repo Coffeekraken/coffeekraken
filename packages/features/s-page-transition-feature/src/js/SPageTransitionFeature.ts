@@ -94,7 +94,7 @@ export default class SPageTransitionFeature extends __SFeature {
         });
 
         // listen for "location.href" event
-        window.addEventListener('location.href', (e) => {
+        document.addEventListener('location.href', (e) => {
             this.transitionTo(
                 (<CustomEvent>e).detail,
                 e.target,
@@ -102,7 +102,7 @@ export default class SPageTransitionFeature extends __SFeature {
         });
 
         // listen for clicks to prevent default behaviors
-        window.addEventListener('click', (e) => {
+        document.addEventListener('click', (e) => {
             const $target = <HTMLElement>e.target;
             // @ts-ignore
             if (

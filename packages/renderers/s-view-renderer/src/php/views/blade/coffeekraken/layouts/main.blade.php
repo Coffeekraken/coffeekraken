@@ -11,11 +11,13 @@
 <?php
 $settings = $settings ? json_decode($settings) : null;
 $package = $package ? json_decode($package) : null;
-$metasOg = ($frontspec->metas->og ? $frontspec->metas->og : $frontspec->metas->og) ? $frontspec->metas->og : null;
+$metasOg = ($metas->og) ? $metas->og : ($frontspec->metas->og ? $frontspec->metas->og : $frontspec->metas->og) ? $frontspec->metas->og : null;
 ?>
 <!doctype html>
 <html
-    lang="{{ ($frontspec->metas->lang? $frontspec->metas->lang: $frontspec->metas->lang)? $frontspec->metas->lang: 'en' }}">
+    lang="{{ ($metas->lang) ? $metas->lang : ($frontspec->metas->lang) ? $frontspec->metas->lang : 'en' }}"
+    dir="{{ ($metas->dir) ? $metas->dir : ($frontspec->metas->dir) ? $frontspec->metas->dir : 'ltr' }}"
+    >
 
 <head>
     <meta charset="utf-8">
@@ -86,13 +88,11 @@ $metasOg = ($frontspec->metas->og ? $frontspec->metas->og : $frontspec->metas->o
     @yield('head')
 
     @if ($config->google->gtm)
-        <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{ $config->google->gtm }}');</script>
-        <!-- End Google Tag Manager -->
     @endif
 
 </head>
@@ -102,12 +102,15 @@ $metasOg = ($frontspec->metas->og ? $frontspec->metas->og : $frontspec->metas->o
     @endif>
 
     @if ($config->google->gtm)
-        <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ $config->google->gtm }}"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
     @endif
 
+    @if ($SUGAR)
+        <script>
+            window.SUGAR = {!! json_encode($SUGAR) !!}
+        </script>
+    @endif
 
     @yield('body')
 

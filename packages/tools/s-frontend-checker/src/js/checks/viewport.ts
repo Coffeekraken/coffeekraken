@@ -22,7 +22,7 @@ export default {
     level: 0,
     check({ $context }) {
         // @ts-ignore
-        if (true || !$context.querySelector('meta[name="viewport"]')) {
+        if (!$context.querySelector('meta[name="viewport"]')) {
             return {
                 status: 'error',
                 message: 'The document is missing a viewport',

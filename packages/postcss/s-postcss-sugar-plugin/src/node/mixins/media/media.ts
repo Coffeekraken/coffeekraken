@@ -77,10 +77,10 @@ export default function ({
         });
     });
 
-    const fullQueriesList: string[] = [];
+    let fullQueriesList: string[] = [];
 
     queries.forEach((query) => {
-        const currentQueryList: string[] = [mediaConfig.defaultQuery, 'and'];
+        const currentQueryList: string[] = [];
 
         if (query === 'and' || query === 'or') {
             currentQueryList.push(query);
@@ -178,6 +178,13 @@ export default function ({
 
         fullQueriesList.push(currentQueryList.join(' '));
     });
+
+    fullQueriesList = fullQueriesList.filter((l) => l.trim() !== '');
+
+    if (fullQueriesList.length) {
+        fullQueriesList.unshift('and');
+    }
+    fullQueriesList.unshift(mediaConfig.defaultQuery);
 
     const mediaRule = new postcssApi.AtRule({
         name: 'media',

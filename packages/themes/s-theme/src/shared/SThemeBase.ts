@@ -386,6 +386,7 @@ export default class SThemeBase extends __SEventEmitter {
             const firstTwoChar = query.slice(0, 2);
             const lastChar = query.slice(-1);
             let action = this.get('media.defaultAction');
+
             let mediaName = query;
 
             if (lastChar === '-' || lastChar === '|')

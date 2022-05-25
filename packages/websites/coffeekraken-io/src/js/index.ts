@@ -129,7 +129,17 @@ __SConductor.setup({
     });
 
     // dashboard
-    const dashboard = new __SDashboard({});
+    new __SDashboard({
+        dashboard: {
+            components: {
+                's-dashboard-pages': {
+                    onSelect: (page) => {
+                        document.location.href = page.item.loc;
+                    },
+                },
+            },
+        },
+    });
 
     // __krakenLogo();
 })();

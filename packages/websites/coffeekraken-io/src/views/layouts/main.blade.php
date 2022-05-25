@@ -9,10 +9,6 @@
 @section('body')
 
     <script>
-        window.packageJson = {!! json_encode($packageJson) !!};
-    </script>
-
-    <script>
         const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
         if (state.darkMode) {
             document.querySelector('html').setAttribute('theme', 'default-dark');

@@ -99,6 +99,7 @@ export default function ({
         let splits, name, as, path;
         switch (protocol) {
             case 'fa':
+            case 'fas':
             case 'fab':
             case 'far':
             case 'fal':

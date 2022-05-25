@@ -9,6 +9,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __packageJson from 
@@ -56,6 +57,7 @@ export interface ISViewRendererSettings {
     cacheDir: string;
     enginesSettings?: any;
     defaultData?: any;
+    sharedData?: string[];
 }
 export interface ISViewCtorSettings {
     viewRenderer?: Partial<ISViewRendererSettings>;
@@ -590,6 +592,23 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             data = __deepMerge(viewRendererSettings.defaultData, data);
 
             const duration = new __SDuration();
+
+            // shared data
+            if (this.viewRendererSettings.sharedData) {
+                for (let i=0; i<this.viewRendererSettings.sharedData.length; i++) {
+                    const dataFilePath = this.viewRendererSettings.sharedData[i];
+                    const extension = __extension(dataFilePath);
+                    if (!SViewRenderer.dataHandlers[extension]) {
+                        throw new Error(
+                            `<red>[render]</red> The extension "${extension}" is not registered as a data handler`,
+                        );
+                    }
+                    const sharedData = await SViewRenderer.dataHandlers[extension].handle(dataFilePath);
+                    if (sharedData) {
+                        data = __deepMerge(sharedData, data);
+                    }
+                }
+            }
 
             if (this._DataHandlerClass && this._dataFilePath) {
                 const gettedData = await this._DataHandlerClass.handle(

@@ -15,10 +15,19 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                 shadowDom: false,
             },
         });
+        this._level = parseInt(
+            window.localStorage.getItem('ck-dashboard-level') || 2,
+        );
+        this._displayStatus = JSON.parse(
+            window.localStorage.getItem(
+                'ck-dashboard-frontend-checker-display-status',
+            ) || `["warning","error"]`,
+        );
     }
 
     _checkResults: ISFrontendCheckerCheckResult[] = [];
     _displayStatus: ('success' | 'warning' | 'error')[] = ['warning', 'error'];
+    _level = 1;
 
     firstUpdated() {
         const checker = new __SFrontendChecker();
@@ -29,6 +38,12 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
         });
     }
 
+    _chooseLevel(level: number) {
+        this._level = level;
+        window.localStorage.setItem('ck-dashboard-level', level.toString());
+        this.requestUpdate();
+    }
+
     _toggleStatus(status: 'success' | 'warning' | 'error') {
         if (this._displayStatus.includes(status)) {
             this._displayStatus = this._displayStatus.filter(
@@ -37,6 +52,10 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
         } else {
             this._displayStatus.push(status);
         }
+        window.localStorage.setItem(
+            'ck-dashboard-frontend-checker-display-status',
+            JSON.stringify(this._displayStatus),
+        );
         this.requestUpdate();
     }
 
@@ -45,62 +64,92 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
             <div class="s-dashboard-frontend-checker s-width:100">
                 <h2 class="s-typo:h6 s-mbe:20">Frontend checker</h2>
 
-                <div class="__filters">
-                    <div
-                        class="__filter ${this._displayStatus.includes(
-                            'success',
-                        )
-                            ? 'active'
-                            : ''}"
-                        @click=${() => this._toggleStatus('success')}
-                    >
-                        <i class="s-icon:success s-tc:success"></i>
-                        Success
-                        <span class="ck-count"
-                            >${this._checkResults.filter(
-                                (r) => r.result.status === 'success',
-                            ).length}</span
-                        >
-                    </div>
-                    <div
-                        class="__filter ${this._displayStatus.includes(
-                            'warning',
-                        )
-                            ? 'active'
-                            : ''}"
-                        @click=${() => this._toggleStatus('warning')}
-                    >
-                        <i class="s-icon:warning s-tc:warning"></i>
-                        Warning
-                        <span class="ck-count"
-                            >${this._checkResults.filter(
-                                (r) => r.result.status === 'warning',
-                            ).length}</span
-                        >
-                    </div>
-                    <div
-                        class="__filter ${this._displayStatus.includes('error')
-                            ? 'active'
-                            : ''}"
-                        @click=${() => this._toggleStatus('error')}
-                    >
-                        <i class="s-icon:error s-tc:error"></i>
-                        Error
-                        <span class="ck-count"
-                            >${this._checkResults.filter(
-                                (r) => r.result.status === 'error',
-                            ).length}</span
-                        >
-                    </div>
-                </div>
-
                 <div class="ck-panel">
+                    <div class="__levels">
+                        <div
+                            class="__level ${this._level === 0 ? 'active' : ''}"
+                            @click=${() => this._chooseLevel(0)}
+                        >
+                            <i class="s-icon:low"></i> Low
+                        </div>
+                        <div
+                            class="__level ${this._level === 1 ? 'active' : ''}"
+                            @click=${() => this._chooseLevel(1)}
+                        >
+                            <i class="s-icon:medium"></i> Medium
+                        </div>
+                        <div
+                            class="__level ${this._level === 2 ? 'active' : ''}"
+                            @click=${() => this._chooseLevel(2)}
+                        >
+                            <i class="s-icon:high"></i> High
+                        </div>
+                    </div>
+                    <div class="__filters">
+                        <div
+                            class="__filter ${this._displayStatus.includes(
+                                'success',
+                            )
+                                ? 'active'
+                                : ''}"
+                            @click=${() => this._toggleStatus('success')}
+                        >
+                            <i class="s-icon:success s-tc:success"></i>
+                            Success
+                            <span class="ck-count"
+                                >${this._checkResults.filter(
+                                    (r) =>
+                                        r.level <= this._level &&
+                                        r.result.status === 'success',
+                                ).length}</span
+                            >
+                        </div>
+                        <div
+                            class="__filter ${this._displayStatus.includes(
+                                'warning',
+                            )
+                                ? 'active'
+                                : ''}"
+                            @click=${() => this._toggleStatus('warning')}
+                        >
+                            <i class="s-icon:warning s-tc:warning"></i>
+                            Warning
+                            <span class="ck-count"
+                                >${this._checkResults.filter(
+                                    (r) =>
+                                        r.level <= this._level &&
+                                        r.result.status === 'warning',
+                                ).length}</span
+                            >
+                        </div>
+                        <div
+                            class="__filter ${this._displayStatus.includes(
+                                'error',
+                            )
+                                ? 'active'
+                                : ''}"
+                            @click=${() => this._toggleStatus('error')}
+                        >
+                            <i class="s-icon:error s-tc:error"></i>
+                            Error
+                            <span class="ck-count"
+                                >${this._checkResults.filter(
+                                    (r) =>
+                                        r.level <= this._level &&
+                                        r.result.status === 'error',
+                                ).length}</span
+                            >
+                        </div>
+                    </div>
+
                     <ul class="ck-list">
                         ${this._checkResults
-                            .filter((check) =>
-                                this._displayStatus.includes(
-                                    check.result.status,
-                                ),
+                            .filter(
+                                (check) =>
+                                    check.level <= this._level &&
+                                    this._displayStatus.includes(
+                                        check.result.status,
+                                    ),
                             )
                             .map(
                                 (check) => html`

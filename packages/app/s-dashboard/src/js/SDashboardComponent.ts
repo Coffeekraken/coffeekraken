@@ -9,12 +9,16 @@ import __SDashboardComponentInterface from './interface/SDashboardComponentInter
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
-import { define as __SDashboardPagesComponent } from './partials/s-dashboard-pages-component/SDashboardPagesComponent';
+import {
+    define as __SDashboardPagesComponent,
+    events as __SDashboardPagesComponentEvents,
+} from './partials/s-dashboard-pages-component/SDashboardPagesComponent';
 import { define as __SDashboardFrontendCheckerComponent } from './partials/s-dashboard-frontend-checker-component/SDashboardFrontendCheckerComponent';
 import { define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent';
 import { define as __SDashboardGoogleComponent } from './partials/s-dashboard-google-component/SDashboardGoogleComponent';
 import { define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent';
 import { define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent';
+import { define as __SDashboardProjectComponent } from './partials/s-dashboard-project-component/SDashboardProjectComponent';
 
 import __logoSvg from './partials/logo';
 
@@ -25,6 +29,7 @@ __SDashboardBrowserstackComponent();
 __SDashboardGoogleComponent();
 __SDashboardWebVitalsComponent();
 __SDashboardResponsiveComponent();
+__SDashboardProjectComponent();
 
 export interface ISDashboardComponentProps {}
 
@@ -50,7 +55,11 @@ export default class SDashboardComponent extends __SLitComponent {
         return window.parent?.document ?? document;
     }
 
-    dashboardConfig;
+    _pipedEvents = [...__SDashboardPagesComponentEvents];
+
+    // @ts-ignore
+    _dashboardSettings = this.document.dashboard.dashboardSettings;
+    _dashboardConfig;
 
     constructor() {
         super(
@@ -67,10 +76,26 @@ export default class SDashboardComponent extends __SLitComponent {
         // listen shortcuts
         this._listenShortcuts();
 
-        // inject web vitals if needed
-        // this._injectWebVitals();
+        // pipe events
+        this._pipeEvents();
 
-        this.dashboardConfig = __SSugarConfig.get('dashboard');
+        this._dashboardConfig = __SSugarConfig.get('dashboard');
+    }
+
+    /**
+     * Pipe events
+     */
+    _pipeEvents() {
+        this._pipedEvents.forEach((event) => {
+            // @ts-ignore
+            this.addEventListener(event, (e) => {
+                this.document.dispatchEvent(
+                    new CustomEvent(e.type, {
+                        detail: e.detail,
+                    }),
+                );
+            });
+        });
     }
 
     /**
@@ -108,21 +133,39 @@ export default class SDashboardComponent extends __SLitComponent {
                         <div
                             class="s-layout:${[
                                 ...Array(
-                                    this.dashboardConfig.layout.length + 1,
+                                    this._dashboardConfig.layout.length + 1,
                                 ).keys(),
                             ]
                                 .filter((n) => n !== 0)
                                 .join('')} s-gap:30"
                         >
-                            ${this.dashboardConfig.layout.map(
+                            ${this._dashboardConfig.layout.map(
                                 (column) => html`
-                                    <div>
-                                        ${column.map(
-                                            (component) => html`
-                                                ${unsafeHTML(
-                                                    `<${component}></${component}>`,
-                                                )}
-                                            `,
+                                    <div
+                                        class="__column __column-${column.length}"
+                                    >
+                                        ${column.map((component) =>
+                                            component === 's-dashboard-pages'
+                                                ? html`
+                                                      <s-dashboard-pages
+                                                          .settings=${this
+                                                              ._dashboardSettings
+                                                              .components[
+                                                              component
+                                                          ]}
+                                                      ></s-dashboard-pages>
+                                                  `
+                                                : html`
+                                                      ${unsafeHTML(
+                                                          `<${component} settings="${JSON.stringify(
+                                                              this
+                                                                  ._dashboardSettings
+                                                                  .components[
+                                                                  component
+                                                              ] ?? {},
+                                                          )}"></${component}>`,
+                                                      )}
+                                                  `,
                                         )}
                                     </div>
                                 `,

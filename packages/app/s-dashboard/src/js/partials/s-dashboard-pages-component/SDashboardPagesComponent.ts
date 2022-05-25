@@ -2,6 +2,7 @@
 
 import __SRequest from '@coffeekraken/s-request';
 import { html } from 'lit';
+import { property } from 'lit/decorators.js';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
@@ -11,6 +12,8 @@ import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorL
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 import __xmlToJson from '@coffeekraken/sugar/shared/convert/xmlToJson';
 import __localStorage from '@coffeekraken/sugar/js/storage/localStorage';
+
+import __SDashboardPagesComponentAttrsInterface from './interface/SDashboardPagesComponentAttrsInterface';
 
 import './s-dashboard-pages-component.css';
 
@@ -52,7 +55,6 @@ __sFiltrableInputDefine(
         },
         items: async ({ value }) => {
             async function fetchItems() {
-                console.log('fetch', value);
                 const request = new __SRequest({
                     url: '/sitemap.xml',
                 });
@@ -79,14 +81,35 @@ __sFiltrableInputDefine(
     's-dashboard-pages-internal',
 );
 
+export const events = ['s-dashboard-pages.selectItem'];
+
 export default class SDashboardPages extends __SLitComponent {
+    /**
+     * @name            document
+     * @type            Document
+     * @get
+     *
+     * Access the document that the dashboard is using.
+     * If in an iframe, take the parent document, otherwise, the document itself
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get document(): Document {
+        return window.parent?.document ?? document;
+    }
+
     constructor() {
         super({
             litComponent: {
                 shadowDom: false,
             },
+            componentUtils: {
+                interface: __SDashboardPagesComponentAttrsInterface,
+            },
         });
     }
+
     _$filtrableInput;
     _$input;
     firstUpdated() {
@@ -94,6 +117,8 @@ export default class SDashboardPages extends __SLitComponent {
         this._$filtrableInput = this.querySelector(
             's-dashboard-pages-internal',
         );
+
+        console.log('POPROP', this.settings);
 
         this.addEventListener('s-filtrable-input.items', (e) => {
             this.requestUpdate();
@@ -104,56 +129,38 @@ export default class SDashboardPages extends __SLitComponent {
         // });
 
         document.addEventListener('dashboard.changePage', () => {
-            console.log('C___');
             this._$input.focus();
+            setTimeout(() => {
+                this._$input.select();
+            }, 200);
         });
 
         this.addEventListener('selectItem', (e) => {
             const { item, $elm } = e.detail;
 
-            console.log('SEleected', item, $elm);
+            this.dispatchEvent(
+                new CustomEvent('s-dashboard-pages.selectItem', {
+                    bubbles: true,
+                    detail: {
+                        item,
+                        $elm,
+                    },
+                }),
+            );
 
-            // if (item.type === 'category' || item.type === 'package') {
-            //     this._$input.value = item.value + ' ';
-            //     __cursorToEnd(this._$input);
-            // } else {
-            //     if (item.menu?.slug) {
-            //         if (item.package.name !== window.packageJson.name) {
-            //             $elm.dispatchEvent(
-            //                 new CustomEvent('location.href', {
-            //                     detail: `/package/${item.package.name}${item.menu.slug}`,
-            //                     bubbles: true,
-            //                 }),
-            //             );
-            //             // document.location.href = `/${item.package.name}${item.menu.slug}`;
-            //         } else {
-            //             $elm.dispatchEvent(
-            //                 new CustomEvent('location.href', {
-            //                     detail: `${item.menu.slug}`,
-            //                     bubbles: true,
-            //                 }),
-            //             );
-            //             // document.location.href = item.menu.slug;
-            //         }
-            //     } else {
-            //         $elm.dispatchEvent(
-            //             new CustomEvent('location.href', {
-            //                 detail: `/api/${item.fullNamespace}`,
-            //                 bubbles: true,
-            //             }),
-            //         );
-            //         // document.location.href = `/api/${item.fullNamespace}`;
-            //     }
-
-            //     this._$input.value = '';
-            //     this._$input.blur();
-            // }
+            if (this.settings.onSelect) {
+                this.settings.onSelect({ item, $elm });
+            } else {
+                this.document.location.href = item.loc;
+            }
         });
 
         if (document.isChangePageWanted) {
-            console.log('CHANGE');
             setTimeout(() => {
                 this._$input.focus();
+                setTimeout(() => {
+                    this._$input.select();
+                }, 200);
             });
         }
     }

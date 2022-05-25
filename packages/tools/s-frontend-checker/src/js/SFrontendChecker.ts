@@ -20,6 +20,10 @@ import __twitterCard from './checks/twitterCard';
 import __noopener from './checks/noopener';
 import __comments from './checks/comments';
 import __w3c from './checks/w3c';
+import __printStylesheet from './checks/printStylesheet';
+import __uniqueIds from './checks/uniqueIds';
+import __webpImages from './checks/webpImages';
+import __imagesAlt from './checks/imagesAlt';
 
 /**
  * @name                SFrontendCheckeer
@@ -247,3 +251,7 @@ SFrontendCheckeer.registerCheck(__twitterCard);
 SFrontendCheckeer.registerCheck(__noopener);
 SFrontendCheckeer.registerCheck(__comments);
 SFrontendCheckeer.registerCheck(__w3c);
+SFrontendCheckeer.registerCheck(__printStylesheet);
+SFrontendCheckeer.registerCheck(__uniqueIds);
+SFrontendCheckeer.registerCheck(__webpImages);
+SFrontendCheckeer.registerCheck(__imagesAlt);

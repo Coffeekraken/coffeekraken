@@ -1,6 +1,10 @@
+s-dashboard-pages {
+    flex-grow: 1;
+}
+
 .s-dashboard-pages {
     .s-filtrable-input {
-        max-height: calc(100vh - 200px);
+        height: calc(100% - 40px);
 
         &__dropdown {
             margin-block-start: sugar.margin(20);

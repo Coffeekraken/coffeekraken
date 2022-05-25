@@ -33,6 +33,7 @@ import '../../../../src/css/index.css';
 
 export interface ISDashboardSettings {
     layout: any[];
+    components: Record<string, any>;
 }
 
 export interface ISDashboardCtorSettings {
@@ -88,7 +89,10 @@ export default class SDashboard extends __SClass {
         super(
             __deepMerge({
                 // @ts-ignore
-                dashboard: __SDashboardSettingsInterface.defaults(),
+                dashboard: {
+                    ...__SDashboardSettingsInterface.defaults(),
+                },
+                ...(settings ?? {}),
             }),
         );
 
@@ -252,7 +256,6 @@ export default class SDashboard extends __SClass {
                 </html>
             `);
             this._$iframe.contentWindow.document.close();
-            console.log('____DEDEDED');
         }
 
         // handle class

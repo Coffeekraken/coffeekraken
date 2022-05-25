@@ -15,6 +15,9 @@ import __SConfig from '../../shared/SConfig';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
+import __grabFirstExisting from '@coffeekraken/sugar/node/fs/grabFirstExisting';
+import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
+import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmp';
 
 /**
  * @name                  SConfigFolderAdapter
@@ -217,12 +220,33 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
             const paths = __fs.readdirSync(path);
 
             for (let j = 0; j < paths.length; j++) {
-                const file = paths[j];
+                let file = paths[j],
+                    filePath = `${path}/${file}`,
+                    deleteAfterLoad = false;
 
-                if (!file.match(/\.js(on)?$/)) continue;
+                if (!filePath.match(/\.(j|t)s(on)?$/)) continue;
 
                 if (
-                    !file.includes(
+                    filePath.match(/\.js$/) &&
+                    __fs.existsSync(filePath.replace(/\.js$/, '.ts'))
+                ) {
+                    continue;
+                }
+
+                if (filePath.match(/\.ts$/)) {
+                    const builder = new __STypescriptBuilder();
+                    const res = await builder.build({
+                        inDir: __path.dirname(filePath),
+                        glob: __path.basename(filePath),
+                        outDir: __path.dirname(filePath),
+                        formats: ['esm'],
+                    });
+                    deleteAfterLoad = true;
+                    filePath = res.files[0].file.path;
+                }
+
+                if (
+                    !filePath.includes(
                         this.configFolderAdapterSettings.fileName.replace(
                             '[name]',
                             '',
@@ -232,17 +256,25 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     continue;
                 }
 
-                const configFilePath = `${path}/${file}`;
-
                 // @TODO      check for delete cache with import
-                const importedConfig = await import(configFilePath);
+                const importedConfig = await import(filePath);
+
+                if (deleteAfterLoad) {
+                    setTimeout(() => {
+                        try {
+                            __fs.unlinkSync(filePath);
+                        } catch (e) {}
+                    }, 200);
+                }
 
                 let configData = importedConfig.default;
                 if (typeof configData === 'function') {
                     configData = configData(env, configObj ?? {});
                 }
 
-                const configKey = file.replace('.config.js', '');
+                const configKey = __path.basename(
+                    filePath.replace(/\.config\.(j|t)s$/, ''),
+                );
 
                 configObj[configKey] = __deepMerge(
                     configObj[configKey] ?? {},
@@ -286,7 +318,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 const scope = Object.keys(this._scopedFoldersPaths)[i];
 
                 const scopedFoldersPaths = this._scopedFoldersPaths[scope];
-
                 if (scopedFoldersPaths && scopedFoldersPaths.length) {
                     this._scopedSettings[scope] = await this._load(
                         scopedFoldersPaths,

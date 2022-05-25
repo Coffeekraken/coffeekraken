@@ -48,6 +48,19 @@ export default function (env, config) {
         ],
 
         /**
+         * @name          sharedData
+         * @namespace     config.viewRenderer
+         * @type          String[]
+         * @default       ['[config.storage.src.rootDir]/views/shared.data.js']
+         *
+         * Store paths to shared data files that will be loaded by the proper dataHandler
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        sharedData: ['[config.storage.src.rootDir]/views/shared.data.js'],
+
+        /**
          * @name          dataHandlers
          * @namespace     config.viewRenderer
          * @type          String[]

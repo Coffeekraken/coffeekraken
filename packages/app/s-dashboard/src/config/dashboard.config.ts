@@ -20,7 +20,7 @@ export default function (env, config) {
                 's-dashboard-web-vitals',
                 's-dashboard-responsive',
             ],
-            ['s-dashboard-frontend-checker'],
+            ['s-dashboard-project', 's-dashboard-frontend-checker'],
         ],
     };
 }

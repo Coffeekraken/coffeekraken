@@ -44,8 +44,28 @@ export default function sVitePluginSugar(settings: any = {}) {
 
         const code = [
             `// sugar variables`,
+            `
+                function ___isObject(item) {
+                    return (item && typeof item === 'object' && !Array.isArray(item));
+                }
+                function ___deepMerge(target, ...sources) {
+                    if (!sources.length) return target;
+                    var source = sources.shift();
+                    if (___isObject(target) && ___isObject(source)) {
+                        for (const key in source) {
+                        if (___isObject(source[key])) {
+                            if (!target[key]) Object.assign(target, { [key]: {} });
+                            ___deepMerge(target[key], source[key]);
+                        } else {
+                            Object.assign(target, { [key]: source[key] });
+                        }
+                        }
+                    }
+                    return ___deepMerge(target, ...sources);
+                }
+            `.replace('\n', ''),
             `if (!document.env) document.env = {SUGAR:{}};`,
-            `document.env.SUGAR = JSON.parse(\`${envJsonStr}\`);`,
+            `document.env.SUGAR = ___deepMerge(JSON.parse(\`${envJsonStr}\`), window.SUGAR ?? {});`,
         ];
 
         return [code.join('\n'), src].join('\n');

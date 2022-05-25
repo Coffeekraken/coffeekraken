@@ -141,7 +141,7 @@ export default class SSugarCli {
         const config = await __SSugarConfig.load({
             cache: true,
         });
-        // console.log(__SSugarConfig.get('theme.themes.default-dark'));
+        // console.log(__SSugarConfig.get('themeMedia'));
         // return;
 
         // hook base console functions

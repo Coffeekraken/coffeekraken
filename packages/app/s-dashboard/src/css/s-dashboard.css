@@ -1,5 +1,6 @@
 @import './sugar.css';
 
+@import './generic/branch.css';
 @import './generic/count.css';
 @import './generic/panel.css';
 @import './generic/list.css';
@@ -9,6 +10,13 @@
 
 body {
     overflow: hidden;
+}
+
+.s-layout .__column {
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding-block-start: sugar.padding(50);
+    @sugar.scrollbar (sugar.color(accent, --alpha 0.3));
 }
 
 .s-layout > * > *:not(:first-child) {

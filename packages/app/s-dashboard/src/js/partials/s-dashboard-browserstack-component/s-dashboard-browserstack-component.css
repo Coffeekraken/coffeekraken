@@ -11,7 +11,7 @@
     }
 
     .ck-list__item {
-        text-align: right;
+        text-align: center;
         padding: sugar.padding(30);
     }
 }

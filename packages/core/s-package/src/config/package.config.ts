@@ -67,6 +67,25 @@ export default function (env, config) {
             },
         },
 
+        checkDependencies: {
+            /**
+             * @name            dirs
+             * @namespace       config.package.checkDependencies
+             * @type            String
+             * @default         ['dist/** /exports.js']
+             *
+             * Specify some directories in which to check for dependencies issues, etc...
+             *
+             * @since           2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            dirs: [
+                '[config.storage.src.jsDir]',
+                '[config.storage.src.nodeDir]',
+                '[config.storage.src.pagesDir]',
+            ],
+        },
+
         exports: {
             /**
              * @name            glob

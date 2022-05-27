@@ -17,11 +17,13 @@ import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsI
 import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsInterface';
 import __SPackageAddReadmeParamsInterface from './interface/SPackageAddReadmeParamsInterface';
 import __SPackageAddDefaultScriptsParamsInterface from './interface/SPackageApplyDefaultPackageJsonParamsInterface';
+import __SPackageCheckDependenciesParamsInterface from './interface/SPackageCheckDependenciesParamsInterface';
 import __childProcess from 'child_process';
 import __glob from 'glob';
 import __SClass from '@coffeekraken/s-class';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { cruise, IReporterOutput } from 'dependency-cruiser';
 
 /**
  * @name                SPackage
@@ -49,6 +51,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  * });
  * await package.exports();
  *
+ * @see         https://www.npmjs.com/package/dependency-cruiser
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -67,6 +70,12 @@ export interface ISPackageInstallParams {
     dependencies: any;
 }
 export interface ISPackageInstallResult {}
+
+export interface ISPackageCheckDependenciesParams {
+    dirs: string[];
+    installMissing: boolean | undefined;
+}
+export interface ISPackageCheckDependenciesResult {}
 
 export interface ISPackageAddReadmeParams {
     path: string;
@@ -349,7 +358,9 @@ export default class SPackage extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    install(params: ISPackageInstallParams): Promise<ISPackageInstallResult> {
+    install(
+        params: Partial<ISPackageInstallParams>,
+    ): Promise<ISPackageInstallResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
@@ -416,6 +427,149 @@ export default class SPackage extends __SClass {
     }
 
     /**
+     * @name            checkDependencies
+     * @type            Function
+     * @async
+     *
+     * This method allows you to check unused, missing dependencies in a package
+     *
+     * @param       {Partial<ISPackageCheckDependenciesParams>}          [params={}]         Some params for your check
+     * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the check
+     *
+     * @see         https://www.npmjs.com/package/dependency-cruiser
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    checkDependencies(
+        params: Partial<ISPackageCheckDependenciesParams>,
+    ): Promise<ISPackageCheckDependenciesResult> {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                // @ts-ignore
+                const finalParams: ISPackageCheckDependenciesParams = __SPackageCheckDependenciesParamsInterface.apply(
+                    params,
+                );
+
+                const missingModules: string[] = [];
+
+                const packageRoot = __packageRoot();
+
+                if (!__fs.existsSync(`${packageRoot}/package.json`)) {
+                    emit('log', {
+                        type: __SLog.TYPE_ERROR,
+                        value: `<red>[checkDependencies]</red> No <cyan>package.json</cyan> file found in the root of your package`,
+                    });
+                    return reject();
+                }
+
+                const packageJson = JSON.parse(
+                    __fs.readFileSync(`${packageRoot}/package.json`).toString(),
+                );
+
+                const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] = finalParams.dirs.map(
+                    (d) => __path.relative(packageRoot, d),
+                );
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[checkDependencies]</yellow> Checking dependencies in these directories:`,
+                });
+                ARRAY_OF_FILES_AND_DIRS_TO_CRUISE.forEach((dirPath) => {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[checkDependencies]</yellow> - <cyan>${dirPath}</cyan>`,
+                    });
+                });
+
+                const cruiseResult = cruise(
+                    ARRAY_OF_FILES_AND_DIRS_TO_CRUISE,
+                    {},
+                );
+
+                for (
+                    let i = 0;
+                    // @ts-ignore
+                    i < cruiseResult.output.modules.length;
+                    i++
+                ) {
+                    // filter
+                    // @ts-ignore
+                    const module = cruiseResult.output.modules[i];
+                    if (module.source.match(/^node_modules/)) continue;
+                    if (!module.source.match(/^[a-zA-Z0-9@]+/)) continue;
+                    if (!module.dependencies.length) continue;
+
+                    // handle dependencies
+                    for (let j = 0; j < module.dependencies.length; j++) {
+                        const dependency = module.dependencies[j];
+
+                        if (dependency.coreModule) continue;
+                        if (dependency.module.match(/^\./)) continue;
+                        let moduleName = dependency.module;
+                        if (moduleName.match(/^@/)) {
+                            moduleName = moduleName
+                                .split('/')
+                                .slice(0, 2)
+                                .join('/');
+                        } else {
+                            moduleName = moduleName.split('/')[0];
+                        }
+                        // check if the dependency is well defines in the package.json file
+                        if (
+                            !packageJson.dependencies?.[moduleName] &&
+                            !packageJson.devDependencies?.[moduleName]
+                        ) {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<red>[checkDependencies]</red> Missing module "<magenta>${moduleName}</magenta>" in package.json used in "<cyan>${module.source}</cyan>"`,
+                            });
+                            if (!missingModules.includes(moduleName)) {
+                                missingModules.push(moduleName);
+                            }
+                        }
+                    }
+                }
+
+                if (
+                    missingModules.length &&
+                    finalParams.installMissing !== false
+                ) {
+                    if (
+                        finalParams.installMissing === undefined &&
+                        (await emit('ask', {
+                            type: 'confirm',
+                            message: `${missingModules.length} package(s) is/are missing. Would you like to install is/them?`,
+                            default: true,
+                        }))
+                    ) {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[checkDependencies]</yellow> Installing missing modules...`,
+                        });
+                        await pipe(
+                            this.install({
+                                dependencies: missingModules,
+                            }),
+                        );
+                    }
+                }
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<green>[checkDependencies]</green> Dependencies have been checked <green>successfully</green>`,
+                });
+
+                resolve();
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
+    }
+
+    /**
      * @name            rename
      * @type            Function
      * @async
@@ -428,7 +582,9 @@ export default class SPackage extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    rename(params: ISPackageRenameParams): Promise<ISPackageInstallResult> {
+    rename(
+        params: Partial<ISPackageRenameParams>,
+    ): Promise<ISPackageInstallResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
@@ -499,7 +655,7 @@ export default class SPackage extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     addReadme(
-        params: ISPackageAddReadmeParams,
+        params: Partial<ISPackageAddReadmeParams>,
     ): Promise<ISPackageAddReadmeResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
@@ -567,7 +723,7 @@ export default class SPackage extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     applyDefaultPackageJson(
-        params: ISPackageAddDefaultPackageJsonParams,
+        params: Partial<ISPackageAddDefaultPackageJsonParams>,
     ): Promise<ISPackageAddDefaultPackageJsonResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {

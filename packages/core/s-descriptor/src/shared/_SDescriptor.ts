@@ -1,16 +1,15 @@
 import __SClass from '@coffeekraken/s-class';
+import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 import __isOfType from '@coffeekraken/sugar/shared/is/ofType';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __get from '@coffeekraken/sugar/shared/object/get';
+import __set from '@coffeekraken/sugar/shared/object/set';
 import __typeof from '@coffeekraken/sugar/shared/value/typeof';
 import __SDescriptorResult, {
     ISDescriptorResult,
     ISDescriptorResultObj,
     ISDescriptorResultRule,
 } from './SDescriptorResult';
-import __get from '@coffeekraken/sugar/shared/object/get';
-import __isGlob from '@coffeekraken/sugar/shared/is/glob';
-import __set from '@coffeekraken/sugar/shared/object/set';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __sortObject from '@coffeekraken/sugar/shared/object/sort';
 
 /**
  * @name                SDescriptor

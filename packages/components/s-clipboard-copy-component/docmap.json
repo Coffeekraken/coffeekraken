@@ -17,6 +17,7 @@
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -56,7 +57,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,12 +75,117 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-clipboard-copy-component.doc.README": {
+                "id": "@coffeekraken.s-clipboard-copy-component.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-clipboard-copy-component.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-clipboard-copy-component.js.SClipboardCopyComponent": {
+                "id": "@coffeekraken.s-clipboard-copy-component.js.SClipboardCopyComponent",
+                "name": "SClipboardCopyComponent",
+                "as": "Clipboard copy",
+                "type": "CustomElement",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/s-clipboard-copy"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component represent a simple \"copy to clipboard\" component that will copy a \"from\" target when clicked.",
+                "namespace": "@coffeekraken.s-clipboard-copy-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Copy from an input",
+                        "code": "<div class=\"s-flex:align-center\">\n     <input class=\"s-input s-width:30\" type=\"text\" value=\"Hello world\" id=\"my-input\" />\n     <s-clipboard-copy class=\"s-mis:20\" from=\"my-input\"></s-clipboard-copy>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Copy from a paragraph",
+                        "code": "<div class=\"s-flex:align-center\">\n     <p class=\"s-typo:p\" id=\"my-paragraph\">Hello world</p>\n     <s-clipboard-copy class=\"s-mis:20\" from=\"my-paragraph\"></s-clipboard-copy>\n</div>"
+                    }
+                ],
+                "interface": {
+                    "name": "SClipboardCopyComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "from": {
+                            "description": "Specify the element you want to copy from with a simple css selector. Try to get \"value\" first, then \"innerHTML\"",
+                            "type": "String"
+                        },
+                        "successTimeout": {
+                            "description": "Specify the duration for displaying the \"success\" icon",
+                            "type": "Number",
+                            "default": 1500
+                        },
+                        "errorTimeout": {
+                            "description": "Specify the duration for displaying the \"error\" icon",
+                            "type": "Number",
+                            "default": 3000
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SClipboardCopy.ts",
+                "extension": "ts",
+                "relPath": "src/js/SClipboardCopy.ts",
+                "children": {
+                    "copy": {
+                        "id": "eb5dd602e6679ef6f956baf4212635c550fbc42068cfb04c11cae6c755d333ad",
+                        "name": "copy",
+                        "type": "Function",
+                        "description": "This method allows you to copy some text through the s-clipboard-copy component that will\nupdate itself to display the copy state.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface": {
                 "id": "@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface",
                 "name": "SClipboardCopyComponentInterface",
@@ -98,6 +203,10 @@
                     "name": "SClipboardCopyComponentInterface",
                     "description": "",
                     "definition": {
+                        "from": {
+                            "description": "Specify the element you want to copy from with a simple css selector. Try to get \"value\" first, then \"innerHTML\"",
+                            "type": "String"
+                        },
                         "successTimeout": {
                             "description": "Specify the duration for displaying the \"success\" icon",
                             "type": "Number",

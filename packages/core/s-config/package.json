@@ -8,7 +8,8 @@
     "dependencies": {
         "@coffeekraken/sugar": "^2.0.0",
         "@coffeekraken/s-env": "^2.0.0",
-        "@coffeekraken/s-typescript-builder": "^2.0.0"
+        "@coffeekraken/s-typescript-builder": "^2.0.0",
+        "@coffeekraken/s-duration": "^2.0.0"
     },
     "devDependencies": {},
     "main": "./dist/pkg/cjs/shared/exports.js",

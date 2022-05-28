@@ -34,6 +34,14 @@ export default class SPackageCheckDependenciesParamsInterface extends __SInterfa
                 default: undefined,
                 alias: 'i',
             },
+            packagesMap: {
+                description:
+                    'Specify some package name patterns to add in package.json without installin them. Usefull for monorepo with packages that are not published yet.',
+                type: 'Object',
+                default: __SSugarConfig.get(
+                    'package.checkDependencies.packagesMap',
+                ),
+            },
         };
     }
 }

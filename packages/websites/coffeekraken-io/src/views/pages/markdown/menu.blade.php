@@ -11,7 +11,7 @@
                 <li>
                     <div class="s-flex">
                         <a href="{{ $item->slug }}" class="s-link:stretch s-order:2">
-                            {{ $item->name }}
+                            {{ $item->as ? $item->as : $item->name }}
                         </a>
 
                         <i

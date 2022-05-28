@@ -25,7 +25,7 @@
  *    lolo: { weight: 2 },
  *    plop: { weight: 5 }
  * }, (a, b) => {
- *   return a.weight - b.weight;
+ *   return a.value.weight - b.value.weight;
  * });
  * // {
  * //   lolo: { weight: 2 },
@@ -43,7 +43,7 @@ function sort(object, sort) {
     // sort the keys
     const sortedKeys = keys.sort((a, b) => {
         // call the sort function passed as parameter
-        return sort(object[a], object[b]);
+        return sort({ key: a, value: object[a] }, { key: b, value: object[b] });
     });
 
     // create the new sorted object

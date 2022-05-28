@@ -21,9 +21,10 @@ export interface ISRefocusFeatureProps {
 
 /**
  * @name            SRefocusFeature
+ * @as              Refocus
  * @namespace       js
  * @type            Feature
- * @interface       ./interface/SRefocusFeatureInterface.js
+ * @interface       ./interface/SRefocusFeatureInterface.ts
  * @menu            Styleguide / Features               /styleguide/feature/s-activate-feature
  * @platform        js
  * @status          beta

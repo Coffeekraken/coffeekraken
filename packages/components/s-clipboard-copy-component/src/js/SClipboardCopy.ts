@@ -10,9 +10,54 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __css from '../../../../src/css/s-clipboard-copy.css'; // relative to /dist/pkg/esm/js
 
 export interface ISClipboardCopyComponentProps {
+    from: string;
     successTimeout: number;
     errorTimeout: number;
 }
+
+/**
+ * @name                SClipboardCopyComponent
+ * @as                  Clipboard copy
+ * @namespace           js
+ * @type                CustomElement
+ * @interface           ./interface/SClipboardCopyComponentInterface.ts
+ * @menu                Styleguide / UI              /styleguide/ui/s-clipboard-copy
+ * @platform            html
+ * @status              beta
+ *
+ * This component represent a simple "copy to clipboard" component that will copy a "from" target when clicked.
+ *
+ * @feature           Copy to clipboard
+ * @feature           Specify a "from" target to copy using a simple css selector
+ * @feature           Default icons for "copy", "copied" and "error"
+ *
+ * @support         chromium
+ * @support         firefox
+ * @support         safari
+ * @support         edge
+ *
+ * @install           shell
+ * npm i @coffeekraken/s-clipboard-copy-component
+ *
+ * @install           js
+ * import { define } from '@coffeekraken/s-clipboard-copy-component';
+ * define();
+ *
+ * @example         html        Copy from an input
+ * <div class="s-flex:align-center">
+ *      <input class="s-input s-width:30" type="text" value="Hello world" id="my-input" />
+ *      <s-clipboard-copy class="s-mis:20" from="my-input"></s-clipboard-copy>
+ * </div>
+ *
+ * @example         html        Copy from a paragraph
+ * <div class="s-flex:align-center">
+ *      <p class="s-typo:p" id="my-paragraph">Hello world</p>
+ *      <s-clipboard-copy class="s-mis:20" from="my-paragraph"></s-clipboard-copy>
+ * </div>
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 
 export default class SClipboardCopy extends __SLitComponent {
     static get styles() {
@@ -35,6 +80,21 @@ export default class SClipboardCopy extends __SLitComponent {
                 },
             }),
         );
+    }
+
+    _copyFromTarget() {
+        let $elm = document.querySelector(this.props.from);
+        if (!$elm) {
+            $elm = document.querySelector(`#${this.props.from}`);
+        }
+
+        if (!$elm) {
+            throw new Error(
+                `[SClipboardCopy] The target element "${this.props.from}" does not exist`,
+            );
+        }
+        const text = $elm.value ?? $elm.innerHTML;
+        this.copy(text);
     }
 
     /**
@@ -68,6 +128,7 @@ export default class SClipboardCopy extends __SLitComponent {
     render() {
         return html`
             <div
+                @click=${() => this._copyFromTarget()}
                 class="${this.componentUtils.className('')}"
                 state="${this._state}"
             >

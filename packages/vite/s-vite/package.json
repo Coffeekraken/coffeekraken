@@ -40,7 +40,9 @@
         "vite": "^2.9.9",
         "vite-plugin-imagemin": "^0.3.2",
         "vite-plugin-singlefile": "^0.5.1",
-        "vite-plugin-virtual-plain-text": "^1.2.2"
+        "vite-plugin-virtual-plain-text": "^1.2.2",
+        "@coffeekraken/s-log": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0"
     },
     "peerDependencies": {
         "postcss": "^7 || ^8"

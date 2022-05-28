@@ -19,9 +19,10 @@ export interface ISActivateFeatureProps {
 
 /**
  * @name            SActivateFeature
+ * @as              Activate feature
  * @namespace       js
  * @type            Feature
- * @interface       ./interface/SActivateFeatureInterface.js
+ * @interface       ./interface/SActivateFeatureInterface.ts
  * @menu            Styleguide / Features               /styleguide/feature/s-activate-feature
  * @platform        js
  * @status          beta
@@ -59,14 +60,14 @@ export interface ISActivateFeatureProps {
  * <style>
  *    [id^="my-grouped-element-"].active { background: green; }
  * </style>
- * 
+ *
  * @example         html            Toggle mode
  * <a class="s-btn s-color:accent" href="#my-element-toggle" s-activate toggle>Click me!</a>
  * <div id="my-element-toggle">I will be toggled on click</div>
  * <style>
  *    #my-element-toggle.active { background: green; }
  * </style>
- * 
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -93,7 +94,9 @@ export default class SActivateFeature extends __SFeature {
         );
 
         if (this.props.triggerer) {
-            this._$triggerers = Array.from(document.querySelectorAll(this.props.triggerer));
+            this._$triggerers = Array.from(
+                document.querySelectorAll(this.props.triggerer),
+            );
         } else {
             this._$triggerers = [this.node];
         }
@@ -109,7 +112,6 @@ export default class SActivateFeature extends __SFeature {
         );
     }
     mount() {
-
         if (this.props.href) {
             this._hrefSelector = this.props.href;
         }
@@ -121,37 +123,47 @@ export default class SActivateFeature extends __SFeature {
         else this._$targets = [this.node];
 
         if (this.props.group) {
-            __querySelectorLive(`[${this.name}][group="${this.props.group}"]`, ($elm) => {
-                if (this._$groupElements?.includes($elm)) return;
-                this._$groupElements?.push($elm);
-            }, {
-                onRemove($removedElm) {
-                    console.log('remobve', $removedElm);
-                }
-            });
+            __querySelectorLive(
+                `[${this.name}][group="${this.props.group}"]`,
+                ($elm) => {
+                    if (this._$groupElements?.includes($elm)) return;
+                    this._$groupElements?.push($elm);
+                },
+                {
+                    onRemove($removedElm) {
+                        console.log('remobve', $removedElm);
+                    },
+                },
+            );
         }
 
-        this._$triggerers.forEach($triggerer => {
-
+        this._$triggerers.forEach(($triggerer) => {
             // @ts-ignore
-            const triggererTriggers = $triggerer.hasAttribute('trigger') ? $triggerer.getAttribute('trigger').split(',').map(l => l.trim()) : [];
-            const triggers = __unique([...this.props.trigger, ...triggererTriggers]);
+            const triggererTriggers = $triggerer.hasAttribute('trigger')
+                ? $triggerer
+                      .getAttribute('trigger')
+                      .split(',')
+                      .map((l) => l.trim())
+                : [];
+            const triggers = __unique([
+                ...this.props.trigger,
+                ...triggererTriggers,
+            ]);
 
             triggers.forEach((trigger) => {
-
                 if (trigger.match(/^event:/)) {
                     this.node.addEventListener('actual', (e) => {
                         this.activate();
                     });
                 } else {
-
                     switch (trigger) {
                         case 'click':
                             $triggerer.addEventListener('click', (e) => {
                                 // only direct child(s) of the triggerer can trigger the activation
                                 if (e.target !== $triggerer) {
                                     // @ts-ignore
-                                    if (e.target.parentElement !== $triggerer) return;
+                                    if (e.target.parentElement !== $triggerer)
+                                        return;
                                     if (e.currentTarget !== $triggerer) return;
                                 }
                                 e.preventDefault();
@@ -180,7 +192,10 @@ export default class SActivateFeature extends __SFeature {
                                 this.activate();
                             }
                             window.addEventListener('hashchange', (e) => {
-                                if (document.location.hash === this._hrefSelector) {
+                                if (
+                                    document.location.hash ===
+                                    this._hrefSelector
+                                ) {
                                     this.activate();
                                 }
                             });
@@ -207,7 +222,6 @@ export default class SActivateFeature extends __SFeature {
 
         // restore the state
         this._restoreState();
-
     }
     get saveStateId(): string {
         // @ts-ignore

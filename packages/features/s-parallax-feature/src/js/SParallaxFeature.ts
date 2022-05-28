@@ -12,9 +12,10 @@ export interface ISParallaxFeatureProps {
 
 /**
  * @name            SParallaxFeature
+ * @as              Parallax
  * @namespace       js
  * @type            Feature
- * @interface       ./interface/SParallaxFeatureInterface.js
+ * @interface       ./interface/SParallaxFeatureInterface.ts
  * @menu            Styleguide / Features               /styleguide/feature/s-parallax-feature
  * @platform        js
  * @status          beta

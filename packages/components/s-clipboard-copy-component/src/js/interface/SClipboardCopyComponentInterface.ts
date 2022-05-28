@@ -22,6 +22,11 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SClipboardCopyComponentInterface extends __SInterface {
     static get _definition() {
         return {
+            from: {
+                description:
+                    'Specify the element you want to copy from with a simple css selector. Try to get "value" first, then "innerHTML"',
+                type: 'String',
+            },
             successTimeout: {
                 description:
                     'Specify the duration for displaying the "success" icon',

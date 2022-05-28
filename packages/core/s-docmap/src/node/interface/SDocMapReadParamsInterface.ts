@@ -28,6 +28,18 @@ class SDocMapReadParamsInterface extends __SInterface {
                 default: __SSugarConfig.get('docmap.read.input'),
                 alias: 'i',
             },
+            sort: {
+                description:
+                    'Specify which of the docmap entries has to be sorted alphabetically.',
+                type: 'String[]',
+                default: __SSugarConfig.get('docmap.read.sort'),
+            },
+            sortDeep: {
+                description:
+                    'Specify which of the docmap entries has to be sorted alphabetically AND deeply.',
+                type: 'String[]',
+                default: __SSugarConfig.get('docmap.read.sortDeep'),
+            },
             // snapshot: {
             //     type: 'String',
             //     alias: 's',

@@ -83,7 +83,24 @@ export default function (env, config) {
                 '[config.storage.src.jsDir]',
                 '[config.storage.src.nodeDir]',
                 '[config.storage.src.pagesDir]',
+                '[config.storage.src.configDir]',
             ],
+
+            /**
+             * @name            packagesMap
+             * @namespace       config.package.checkDependencies
+             * @type            String
+             * @default         {'^@coffeekraken/'}
+             *
+             * Specify some patterns for packages you want to add in package.json without installing them.
+             * This is usefull for monorepo.
+             *
+             * @since           2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            packagesMap: {
+                '^@coffeekraken/': '^2.0.0',
+            },
         },
 
         exports: {

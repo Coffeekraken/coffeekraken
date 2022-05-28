@@ -19,6 +19,7 @@ import __SPackageAddReadmeParamsInterface from './interface/SPackageAddReadmePar
 import __SPackageAddDefaultScriptsParamsInterface from './interface/SPackageApplyDefaultPackageJsonParamsInterface';
 import __SPackageCheckDependenciesParamsInterface from './interface/SPackageCheckDependenciesParamsInterface';
 import __childProcess from 'child_process';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __glob from 'glob';
 import __SClass from '@coffeekraken/s-class';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
@@ -67,13 +68,14 @@ export interface ISPackageCtorSettings extends ISBuilderCtorSettings {
 
 export interface ISPackageInstallParams {
     manager: 'npm' | 'yarn';
-    dependencies: any;
+    dependencies: Record<string, string> | string[];
 }
 export interface ISPackageInstallResult {}
 
 export interface ISPackageCheckDependenciesParams {
     dirs: string[];
     installMissing: boolean | undefined;
+    packagesMap: { [key: string]: string };
 }
 export interface ISPackageCheckDependenciesResult {}
 
@@ -377,28 +379,46 @@ export default class SPackage extends __SClass {
                             .toString(),
                     );
 
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[install]</yellow> Adding default dependencies: <magenta>${Object.keys(
-                            finalParams.dependencies ?? {},
-                        ).join('<white>,</white> ')}</magenta>`,
-                    });
-                    json.dependencies = {
-                        ...json.dependencies,
-                        ...(finalParams.dependencies ?? {}),
-                    };
-                    __fs.writeFileSync(
-                        `${packageRoot}/package.json`,
-                        JSON.stringify(json, null, 4),
-                    );
+                    if (Array.isArray(finalParams.dependencies)) {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[install]</yellow> Adding default dependencies: <magenta>${finalParams.dependencies.join(
+                                '<white>,</white> ',
+                            )}</magenta>`,
+                        });
+                    } else {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[install]</yellow> Adding default dependencies: <magenta>${Object.keys(
+                                finalParams.dependencies ?? {},
+                            ).join('<white>,</white> ')}</magenta>`,
+                        });
+                        json.dependencies = {
+                            ...json.dependencies,
+                            ...(finalParams.dependencies ?? {}),
+                        };
+                        __fs.writeFileSync(
+                            `${packageRoot}/package.json`,
+                            JSON.stringify(json, null, 4),
+                        );
+                    }
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[install]</yellow> Installing the <cyan>node_modules</cyan> dependencies using <cyan>${finalParams.manager}</cyan>...`,
                     });
-                    __childProcess.execSync(`${finalParams.manager} install`, {
-                        cwd: packageRoot,
-                    });
+                    __childProcess.execSync(
+                        `${finalParams.manager} ${
+                            finalParams.manager === 'yarn' ? 'add' : 'install'
+                        } ${
+                            Array.isArray(finalParams.dependencies)
+                                ? finalParams.dependencies.join(' ')
+                                : ''
+                        }`,
+                        {
+                            cwd: packageRoot,
+                        },
+                    );
                 }
 
                 if (__fs.existsSync(`${packageRoot}/composer.json`)) {
@@ -449,6 +469,8 @@ export default class SPackage extends __SClass {
                 const finalParams: ISPackageCheckDependenciesParams = __SPackageCheckDependenciesParamsInterface.apply(
                     params,
                 );
+
+                let needJsonWrite = false;
 
                 const missingModules: string[] = [];
 
@@ -519,6 +541,46 @@ export default class SPackage extends __SClass {
                             !packageJson.dependencies?.[moduleName] &&
                             !packageJson.devDependencies?.[moduleName]
                         ) {
+                            let addedFromPackagesMap = false;
+
+                            // check packages map
+                            for (let [pattern, version] of Object.entries(
+                                finalParams.packagesMap,
+                            )) {
+                                if (
+                                    pattern.match(/^\^/) &&
+                                    moduleName.startsWith(pattern.slice(1))
+                                ) {
+                                    packageJson.dependencies[
+                                        moduleName
+                                    ] = version;
+                                    addedFromPackagesMap = true;
+                                } else if (
+                                    pattern.match(/\$$/) &&
+                                    moduleName.endsWith(pattern.slice(0, -1))
+                                ) {
+                                    packageJson.dependencies[
+                                        moduleName
+                                    ] = version;
+                                    addedFromPackagesMap = true;
+                                } else if (pattern === moduleName) {
+                                    packageJson.dependencies[
+                                        moduleName
+                                    ] = version;
+                                    addedFromPackagesMap = true;
+                                }
+                            }
+
+                            //
+                            if (addedFromPackagesMap) {
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<yellow>[checkDependencies]</yellow> <magenta>${moduleName}</magenta> added from packages map`,
+                                });
+                                needJsonWrite = true;
+                                continue;
+                            }
+
                             emit('log', {
                                 type: __SLog.TYPE_INFO,
                                 value: `<red>[checkDependencies]</red> Missing module "<magenta>${moduleName}</magenta>" in package.json used in "<cyan>${module.source}</cyan>"`,
@@ -530,17 +592,29 @@ export default class SPackage extends __SClass {
                     }
                 }
 
+                // rewrite json
+                if (needJsonWrite) {
+                    __writeJsonSync(`${packageRoot}/package.json`, packageJson);
+                }
+
                 if (
                     missingModules.length &&
                     finalParams.installMissing !== false
                 ) {
                     if (
-                        finalParams.installMissing === undefined &&
-                        (await emit('ask', {
-                            type: 'confirm',
-                            message: `${missingModules.length} package(s) is/are missing. Would you like to install is/them?`,
-                            default: true,
-                        }))
+                        finalParams.installMissing === true ||
+                        (finalParams.installMissing === undefined &&
+                            (await emit('ask', {
+                                type: 'confirm',
+                                message: `${missingModules.length} package${
+                                    missingModules.length > 1 ? 's' : ''
+                                } ${
+                                    missingModules.length > 1 ? 'are' : 'is'
+                                } missing. Would you like to install ${
+                                    missingModules.length > 1 ? 'them' : 'it'
+                                }?`,
+                                default: true,
+                            })))
                     ) {
                         emit('log', {
                             type: __SLog.TYPE_INFO,

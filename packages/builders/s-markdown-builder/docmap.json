@@ -18,6 +18,7 @@
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -56,7 +57,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,7 +75,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -1368,7 +1367,7 @@
                         }
                     },
                     "registerpartial": {
-                        "id": "da9c09633b643d1f99e42878a5b261ba9d138527fb67c261ead70176ad598481",
+                        "id": "5b085c312471f86be30db5c5e272b30a01ad82c2a83532196d56bf6afff9b260",
                         "name": "registerPartial",
                         "type": "Function",
                         "description": "This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object\nused to transform your passed markdown",
@@ -1381,7 +1380,7 @@
                         }
                     },
                     "registersection": {
-                        "id": "f4121005aed579683481c2d68e52aab01977d2431f47be0bd149552adb3805f4",
+                        "id": "0f6e7eda24a3dfc3920fa907827c7fed3bf91857504532b88963a39aa8d39755",
                         "name": "registerSection",
                         "type": "Function",
                         "description": "This static method allows you to register a new section",

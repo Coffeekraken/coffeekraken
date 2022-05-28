@@ -1,7 +1,7 @@
 <span s-activate class="__main-link s-display:inline-block" href="body" trigger="mouseover,mouseout"
     active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150"
     unactivate-on="page-transition-end">
-    <span class="s-depth:text:100">{{ $menuItem->name }}</span>
+    <span class="s-depth:text:100">{{ $menuItem->as ? $menuItem->as : $menuItem->name }}</span>
 
     <div class="__subnav {{ $class }}">
 
@@ -15,7 +15,7 @@
                             group="subnav-{{ \Sugar\string\idCompliant($menuItem->name) }}">
                             <i class="s-icon:folder s-mie:10 s-until:parent:active"></i>
                             <i class="s-icon:folder-opened s-mie:10 s-when:parent:active"></i>
-                            {{ $item->name }}
+                            {{ $item->as ? $item->as : $item->name }}
                         </li>
                     @endif
                 @endforeach
@@ -33,9 +33,9 @@
                                     @foreach ($item as $subItem)
                                         @if ($subItem->slug)
                                             <li class="s-position:relative s-flex">
-                                                <a href="{{ $subItem->slug }}" title="{{ $subItem->name }}"
+                                                <a href="{{ $subItem->slug }}" title="{{ $subItem->as ? $subItem->as : $subItem->name }}"
                                                     class="s-link:stretch s-order:2">
-                                                    {!! str_replace('@coffeekraken/', '', $subItem->name) !!}
+                                                    {!! str_replace('@coffeekraken/', '', $subItem->as ? $subItem->as : $subItem->name) !!}
                                                 </a>
                                                 <i
                                                     class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent s-until:sibling:loading s-mie:10"></i>

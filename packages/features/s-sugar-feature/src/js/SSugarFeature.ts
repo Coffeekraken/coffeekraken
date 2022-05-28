@@ -18,9 +18,10 @@ export interface ISSugarFeatureProps {
 
 /**
  * @name            SSugarFeature
+ * @as              Sugar features
  * @namespace       js
  * @type            Feature
- * @interface       ./interface/SSugarFeatureInterface.js
+ * @interface       ./interface/SSugarFeatureInterface.ts
  * @menu            Styleguide / Features               /styleguide/feature/s-sugar-feature
  * @platform        js
  * @status          beta

@@ -62,8 +62,8 @@ await builder.build({
 
 For more information about the API of this class, please check [our API documentation](/api/@coffeekraken.s-markdown-builder.node.SMarkdownBuilder)
 
-#### Settings
+#### Build parameters
 
-{{> interface namespace='@coffeekraken.s-markdown-builder.node.interface.SGlobSettingsInterface' }}
+{{> interface namespace='@coffeekraken.s-markdown-builder.node.interface.SMarkdownBuilderBuildParamsInterface' }}
 
 {{/ layout-readme }}

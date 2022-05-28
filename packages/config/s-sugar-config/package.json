@@ -9,7 +9,8 @@
         "@coffeekraken/s-class": "^2.0.0",
         "@coffeekraken/s-config": "^2.0.0",
         "@coffeekraken/s-docblock": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0"
+        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-sugar-json": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/js/exports.js",
     "module": "./dist/pkg/esm/js/exports.js",

@@ -118,8 +118,6 @@ export default class SVite extends __SClass {
                 }
                 config.plugins = plugins;
 
-                console.log(config.plugins);
-
                 if (!(await __isPortFree(config.server.port))) {
                     emit('log', {
                         type: __SLog.TYPE_WARN,

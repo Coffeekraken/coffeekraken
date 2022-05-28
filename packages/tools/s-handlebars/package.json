@@ -7,7 +7,9 @@
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-promise": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0"
+        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-file": "^2.0.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/node/exports.js",
     "module": "./dist/pkg/esm/node/exports.js",

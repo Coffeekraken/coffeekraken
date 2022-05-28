@@ -54,7 +54,7 @@ const builder = new __SFaviconBuilder();
 await builder.build({});
 ```
 
-#### Parameters
+#### Build parameters
 
 {{> interface namespace='@coffeekraken.s-favicon-builder.node.interface.SFaviconBuilderBuildParamsInterface' }}
 

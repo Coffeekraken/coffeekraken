@@ -18,9 +18,10 @@ import __css from '../../../../src/css/s-floating-feature.css'; // relative to /
 
 /**
  * @name            SFloatingFeature
+ * @as              Floating elements
  * @namespace       js
  * @type            Feature
- * @interface       ./interface/SFloatingFeatureInterface.js
+ * @interface       ./interface/SFloatingFeatureInterface.ts
  * @menu            Styleguide / Features               /styleguide/feature/s-floating-feature
  * @platform        js
  * @status          beta

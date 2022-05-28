@@ -18,7 +18,11 @@
         "@coffeekraken/s-postcss-builder": "^2.0.0",
         "@coffeekraken/cli": "^2.0.0",
         "@coffeekraken/s-vite": "^2.0.0",
-        "enquirer": "^2.3.6"
+        "enquirer": "^2.3.6",
+        "@coffeekraken/s-duration": "^2.0.0",
+        "@coffeekraken/s-log": "^2.0.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/node/exports.js",
     "module": "./dist/pkg/esm/node/exports.js",

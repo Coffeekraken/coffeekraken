@@ -21,9 +21,10 @@ export interface ISPageTransitionFeatureProps {
 
 /**
  * @name            SPageTransitionFeature
+ * @as              Page transition
  * @namespace       js
  * @type            Feature
- * @interface       ./interface/SPageTransitionFeatureInterface.js
+ * @interface       ./interface/SPageTransitionFeatureInterface.ts
  * @menu            Styleguide / Features               /styleguide/feature/s-page-transition-feature
  * @platform        js
  * @status          beta

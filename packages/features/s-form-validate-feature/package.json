@@ -2,6 +2,7 @@
     "name": "@coffeekraken/s-form-validate-feature",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
     "scripts": {
         "dev": "sugar frontstack dev",
         "build": "sugar frontstack build",
@@ -15,7 +16,8 @@
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "@sideway/address": "^4.1.2",
-        "joi": "^17.4.2"
+        "joi": "^17.4.2",
+        "@coffeekraken/s-component-utils": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/js/exports.js",
     "module": "./dist/pkg/esm/js/exports.js",

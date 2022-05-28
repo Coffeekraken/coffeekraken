@@ -14,7 +14,6 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "0": "@coffeekraken/s-interface",
         "@coffeekraken/s-clipboard-copy-component": "^2.0.0",
         "@coffeekraken/s-lit-component": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
@@ -23,7 +22,8 @@
         "html-tags": "^3.1.0",
         "known-css-properties": "^0.24.0",
         "lit": "^2.0.0-rc.3",
-        "prettier": "^2.4.1"
+        "prettier": "^2.4.1",
+        "@coffeekraken/s-interface": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/js/exports.js",
     "module": "./dist/pkg/esm/js/exports.js",

@@ -14,7 +14,9 @@
         "@coffeekraken/s-stdio": "^2.0.0",
         "@coffeekraken/s-log": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
-        "stack-trace": "0.0.10"
+        "stack-trace": "0.0.10",
+        "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/s-process": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/node/exports.js",
     "module": "./dist/pkg/esm/node/exports.js",

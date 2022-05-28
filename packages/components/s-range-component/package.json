@@ -14,7 +14,8 @@
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
-        "lit": "^2.0.0-rc.3"
+        "lit": "^2.0.0-rc.3",
+        "@coffeekraken/s-lit-component": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/js/exports.js",
     "module": "./dist/pkg/esm/js/exports.js",

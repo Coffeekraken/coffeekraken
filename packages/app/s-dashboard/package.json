@@ -2,6 +2,7 @@
     "name": "@coffeekraken/s-dashboard",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
@@ -11,8 +12,11 @@
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/s-lit-component": "^2.0.0",
         "@coffeekraken/s-promise": "^2.0.0",
+        "@coffeekraken/s-request": "^2.0.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "browserstack": "^1.6.1",
+        "lit": "^2.2.5",
         "web-vitals": "^2.1.4"
     },
     "main": "./dist/pkg/cjs/js/exports.js",

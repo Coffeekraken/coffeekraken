@@ -15,7 +15,8 @@
         "@coffeekraken/sugar": "^2.0.0",
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/s-glob": "^2.0.0",
-        "@coffeekraken/s-jest-tester": "^2.0.0"
+        "@coffeekraken/s-jest-tester": "^2.0.0",
+        "@coffeekraken/s-promise": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/node/exports.js",
     "module": "./dist/pkg/esm/node/exports.js",

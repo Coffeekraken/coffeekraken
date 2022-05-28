@@ -18,6 +18,7 @@
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -56,7 +57,6 @@
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,7 +75,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -113,6 +112,7 @@
             "@coffeekraken.s-refocus-feature.js.SRefocusFeature": {
                 "id": "@coffeekraken.s-refocus-feature.js.SRefocusFeature",
                 "name": "SRefocusFeature",
+                "as": "Refocus",
                 "type": "Feature",
                 "menu": {
                     "tree": [

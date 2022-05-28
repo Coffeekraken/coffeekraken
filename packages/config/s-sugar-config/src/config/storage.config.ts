@@ -157,6 +157,19 @@ export default function (env) {
             cssDir: `[config.storage.src.rootDir]/css`,
 
             /**
+             * @name            configDir
+             * @namespace       config.storage.src
+             * @type            String
+             * @default         [config.storage.src.rootDir]/config
+             *
+             * Configure where is located the config source files
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            configDir: `[config.storage.src.rootDir]/config`,
+
+            /**
              * @name            docDir
              * @namespace       config.storage.src
              * @type            String

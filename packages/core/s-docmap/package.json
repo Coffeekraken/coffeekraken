@@ -16,7 +16,9 @@
         "@coffeekraken/s-stdio": "^2.0.0",
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
-        "chokidar": "^3.5.2"
+        "chokidar": "^3.5.2",
+        "@coffeekraken/s-docblock": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/node/exports.js",
     "module": "./dist/pkg/esm/node/exports.js",

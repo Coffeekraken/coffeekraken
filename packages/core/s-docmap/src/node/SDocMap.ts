@@ -22,6 +22,8 @@ import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 import __fs from 'fs';
+import __get from '@coffeekraken/sugar/shared/object/get';
+import __set from '@coffeekraken/sugar/shared/object/set';
 import __path from 'path';
 import __SDocmapBuildParamsInterface from './interface/SDocmapBuildParamsInterface';
 import __SDocmapInstallSnapshotParamsInterface from './interface/SDocmapInstallSnapshotParamsInterface';
@@ -30,6 +32,8 @@ import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsI
 import __chokidar from 'chokidar';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
+import __sortObject from '@coffeekraken/sugar/shared/object/sort';
+import __sortObjectDeep from '@coffeekraken/sugar/shared/object/sortDeep';
 
 function __toLowerCase(l = '') {
     return l.toLowerCase();
@@ -83,8 +87,10 @@ export interface ISDocmapInstallSnapshotsParams {
 
 export interface ISDocMapReadParams {
     input: string;
-    snapshot: string;
-    snapshotDir: string;
+    sort: string[];
+    sortDeep: string[];
+    // snapshot: string;
+    // snapshotDir: string;
 }
 
 export interface ISDocMapTagProxyFn {
@@ -498,6 +504,7 @@ class SDocMap extends __SClass implements ISDocMap {
                 // save the docmap json
                 this._docmapJson = finalDocmapJson;
 
+                // extract the menu
                 finalDocmapJson.menu = this._extractMenu(finalDocmapJson);
 
                 // cache it in memory
@@ -505,6 +512,30 @@ class SDocMap extends __SClass implements ISDocMap {
                 this.constructor._cachedDocmapJson[
                     docmapVersion
                 ] = finalDocmapJson;
+
+                // sorting
+                finalParams.sort.forEach((dotPath) => {
+                    const toSort = __get(finalDocmapJson, dotPath);
+                    if (!toSort) return;
+                    __set(
+                        finalDocmapJson,
+                        dotPath,
+                        __sortObject(toSort, (a, b) => {
+                            return a.key.localeCompare(b.key);
+                        }),
+                    );
+                });
+                finalParams.sortDeep.forEach((dotPath) => {
+                    const toSort = __get(finalDocmapJson, dotPath);
+                    if (!toSort) return;
+                    __set(
+                        finalDocmapJson,
+                        dotPath,
+                        __sortObjectDeep(toSort, (a, b) => {
+                            return a.key.localeCompare(b.key);
+                        }),
+                    );
+                });
 
                 // return the final docmap
                 resolve(finalDocmapJson);
@@ -663,12 +694,14 @@ class SDocMap extends __SClass implements ISDocMap {
                 if (i >= dotPath.split('.').length - 1) {
                     currentObj[part][docmapObj.name] = {
                         name: docmapObj.name,
+                        as: docmapObj.as,
                         slug: docmapObj.menu.slug,
                         tree: docmapObj.menu.tree,
                         // docmap: docmapObj
                     };
                     menuObjBySlug[docmapObj.menu.slug] = {
                         name: docmapObj.name,
+                        as: docmapObj.as,
                         slug: docmapObj.menu.slug,
                         tree: docmapObj.menu.tree,
                         docmap: docmapObj,

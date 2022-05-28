@@ -2,6 +2,7 @@
     "name": "@coffeekraken/s-postcss-builder",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
@@ -28,7 +29,8 @@
         "postcss-property-lookup": "^3.0.0",
         "purgecss": "^4.0.3",
         "purgecss-from-html": "^4.1.1",
-        "shorter": "^0.3.1"
+        "shorter": "^0.3.1",
+        "@coffeekraken/s-duration": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/node/exports.js",
     "module": "./dist/pkg/esm/node/exports.js",

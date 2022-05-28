@@ -10,7 +10,8 @@
         "@coffeekraken/s-data-handler-js": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
-        "exec-php": "^0.0.5"
+        "exec-php": "^0.0.5",
+        "@coffeekraken/s-promise": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/node/exports.js",
     "module": "./dist/pkg/esm/node/exports.js",

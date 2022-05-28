@@ -455,6 +455,7 @@ SDocblockBlock.registerTag('memberof', __simpleValueTag);
 SDocblockBlock.registerTag('mixes', __simpleValueTag);
 SDocblockBlock.registerTag('module', __simpleValueTag);
 SDocblockBlock.registerTag('name', __simpleValueTag);
+SDocblockBlock.registerTag('as', __simpleValueTag);
 SDocblockBlock.registerTag('package', __simpleValueTag);
 SDocblockBlock.registerTag('private', __simpleValueTag);
 SDocblockBlock.registerTag('protected', __simpleValueTag);

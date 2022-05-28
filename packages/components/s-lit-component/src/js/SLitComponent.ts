@@ -166,9 +166,9 @@ export default class SLitComponent extends LitElement {
             return this._shouldUpdate;
         };
 
-        (async () => {
+        setTimeout(async () => {
             await this.componentUtils.waitAndExecute(this.mount.bind(this));
-        })();
+        });
     }
 
     static properties(properties: any, ...ints: typeof __SInterface): any {

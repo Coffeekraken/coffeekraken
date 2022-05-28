@@ -19,6 +19,34 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             input: `${__packageRoot()}/docmap.json`,
+
+            /**
+             * @name          sort
+             * @namespace     config.docmap.read
+             * @type          String
+             * @default
+             *
+             * Specify which of the docmap entries has to be sorted alphabetically.
+             * These array values has to be a dotPath like 'menu.documentation'
+             *
+             * @since       2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            sort: ['menu.packages'],
+
+            /**
+             * @name          sortDeep
+             * @namespace     config.docmap.read
+             * @type          String
+             * @default
+             *
+             * Specify which of the docmap entries has to be sorted alphabetically and deeply.
+             * These array values has to be a dotPath like 'menu.documentation'
+             *
+             * @since       2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            sortDeep: ['menu.custom.styleguide'],
         },
 
         snapshot: {
@@ -142,6 +170,7 @@ export default function (env, config) {
             tags: [
                 'id',
                 'name',
+                'as',
                 'type',
                 'menu',
                 'default',

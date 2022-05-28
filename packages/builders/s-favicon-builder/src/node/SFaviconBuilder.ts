@@ -21,7 +21,7 @@ import __packageSyncJson from '@coffeekraken/sugar/node/package/jsonSync';
  * @name            SFaviconBuilder
  * @namespace       node
  * @type            Class
- * @interface       ./interface/SFaviconBuilderBuildParamsInterface
+ * @interface       ./interface/SFaviconBuilderBuildParamsInterface.ts
  * @extends         SBuilder
  * @platform        node
  * @status          beta

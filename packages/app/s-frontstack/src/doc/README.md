@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -18,12 +18,41 @@
 
 Our `SFrontstack` class allows you to create and execute some **recipes** of **stacks** of **actions** with ease.
 
-**Recipes** are kind of "templates" for some kind of project like "React", "Next", "Nuxt", etc...
-**Stacks** are like "pipelines" for your project like "dev", "build", etc...
-**Actions** are like "processes" that are executed in your **stacks** either in parallels or one after the others...
+-   **Recipes**
+    -   kind of "templates" for some kind of project like "React", "Next", "Nuxt", etc...
+-   **Stacks**
+    -   like "pipelines" for your project like "dev", "build", etc...
+-   **Actions**
+    -   like "processes" that are executed in your **stacks** either in parallels or one after the others...
 
 ## Usage
 
 The usage of this package is mainly through the `frontstack.config.js` file and the `sugar` CLI like described bellow:
+
+```shell
+# Create a new project
+sugar frontstack.new
+# Run the "dev" recipe
+sugar frontstack.recipe dev
+# etc...
+```
+
+> Note that no recipe is specified in these commands. The "recipe" is usually defined in the `sugar.json` file at the root of your project.
+
+## List the available "recipes"
+
+To list the available recipes, simply execute this command:
+
+```shell
+sugar frontstack.list
+```
+
+## Create your recipe
+
+To create a new recipe, simply follow [this documentation](/doc/recipes/create-your-recipe)
+
+## Understand and create an action
+
+To understand and create your own action, simply follow [this documentation](/doc/recipes/create-your-recipe4)
 
 {{/ layout-readme }}

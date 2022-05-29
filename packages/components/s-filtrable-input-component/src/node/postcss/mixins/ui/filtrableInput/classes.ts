@@ -60,85 +60,85 @@ export default function ({
 
     const vars: string[] = [];
 
-    vars.push(`
-      /**
-        * @name          Filtrable Input
-        * @namespace          sugar.style.ui
-        * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/ui/filtrable-input
-        * @platform       css
-        * @status       beta
-        * 
-        * These classes allows you to display an input as filtrable
-        * 
-        * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
-        * @feature          Support for scaling through the \`s-scale:...\` class
-        * @feature          Support for colorizing through the \`s-color:...\` class
-        * 
-        * @support          chromium
-        * @support          firefox
-        * @support          safari
-        * @support          edge
-        * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @cssClass     s-filtrable-input${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} filtrable input style`;
-            })
-            .join('\n')}
-        * @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped filtered input(s)
-        * 
-        * @example        html
-        ${finalParams.styles
-            .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
-            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:info"><span>Click me!</span></a>
-            *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
-            *   <span class="s-btn-group s-mie:20 s-mbe:20">
-            *       <a tabindex="0" class="s-btn:${style}"><span>Click me!</span></a>
-            *       <a tabindex="0" class="s-btn:${style}"><span>+</span></a>
-            *   </span>
-            *   <a tabindex="0" disabled class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
-            * </div>
-            * `;
-            })
-            .join('\n')}
-        *
-        * <!-- scales -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scales</h3>
-        *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20"><span>Click me!</span></a>
-        * </div>
-        * 
-        * <!-- Rhythm and text format -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
-        *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the \`button\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
-        *   </p>
-        *   <div class="s-format:text s-rhythm:vertical">
-        *       <button>
-        *          ${__faker.name.findName()}
-        *       </button>
-        *       <br />
-        *       <button>
-        *           ${__faker.name.findName()}
-        *       </button>
-        *   </div>
-        * </div>
-        * 
-        * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-    `);
+    // vars.push(`
+    //   /**
+    //     * @name          Filtrable Input
+    //     * @namespace          sugar.style.ui
+    //     * @type               Styleguide
+    //     * @menu           Styleguide / UI        /styleguide/ui/filtrable-input
+    //     * @platform       css
+    //     * @status       beta
+    //     *
+    //     * These classes allows you to display an input as filtrable
+    //     *
+    //     * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
+    //     * @feature          Support for scaling through the \`s-scale:...\` class
+    //     * @feature          Support for colorizing through the \`s-color:...\` class
+    //     *
+    //     * @support          chromium
+    //     * @support          firefox
+    //     * @support          safari
+    //     * @support          edge
+    //     *
+    //     ${finalParams.styles
+    //         .map((style) => {
+    //             return ` * @cssClass     s-filtrable-input${
+    //                 style === finalParams.defaultStyle ? '' : `:${style}`
+    //             }           Apply the ${style} filtrable input style`;
+    //         })
+    //         .join('\n')}
+    //     * @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped filtered input(s)
+    //     *
+    //     * @example        html
+    //     ${finalParams.styles
+    //         .map((style) => {
+    //             return ` * <!-- ${style} style -->
+    //         * <div class="s-mbe:50">
+    //         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
+    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
+    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>
+    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:info"><span>Click me!</span></a>
+    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
+    //         *   <span class="s-btn-group s-mie:20 s-mbe:20">
+    //         *       <a tabindex="0" class="s-btn:${style}"><span>Click me!</span></a>
+    //         *       <a tabindex="0" class="s-btn:${style}"><span>+</span></a>
+    //         *   </span>
+    //         *   <a tabindex="0" disabled class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
+    //         * </div>
+    //         * `;
+    //         })
+    //         .join('\n')}
+    //     *
+    //     * <!-- scales -->
+    //     * <div class="s-mbe:50">
+    //     *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scales</h3>
+    //     *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20"><span>Click me!</span></a>
+    //     *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20"><span>Click me!</span></a>
+    //     *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20"><span>Click me!</span></a>
+    //     * </div>
+    //     *
+    //     * <!-- Rhythm and text format -->
+    //     * <div class="s-font:30 s-mbe:50">
+    //     *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
+    //     *   <p class="s-typo:p s-mbe:30">
+    //     *       Text format mean that all the \`button\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
+    //     *   </p>
+    //     *   <div class="s-format:text s-rhythm:vertical">
+    //     *       <button>
+    //     *          ${__faker.name.findName()}
+    //     *       </button>
+    //     *       <br />
+    //     *       <button>
+    //     *           ${__faker.name.findName()}
+    //     *       </button>
+    //     *   </div>
+    //     * </div>
+    //     *
+    //     * @since      2.0.0
+    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+    //     */
+    // `);
 
     finalParams.styles.forEach((style) => {
         let cls = `s-filtrable-input`;

@@ -15,10 +15,12 @@
 
     .s-filtrable-input__dropdown {
         position: absolute;
+        z-index: 10;
         top: 100%;
         left: 0;
         opacity: 0;
         max-width: calc(100vw - 100px);
+        width: 100%;
         pointer-events: none;
         margin: 20px 0;
         overflow: hidden;

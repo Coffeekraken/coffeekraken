@@ -10,7 +10,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
-import __extendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';
+import __extendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
 import __buildCommandLine from '@coffeekraken/sugar/shared/cli/buildCommandLine';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';

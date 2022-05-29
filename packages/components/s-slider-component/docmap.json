@@ -12,15 +12,14 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -57,7 +56,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
@@ -75,7 +73,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -133,9 +130,39 @@
                 "relPath": "src/config/themeUi.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-slider-component.js.Slider": {
-                "id": "@coffeekraken.s-slider-component.js.Slider",
-                "name": "Slider",
+            "@coffeekraken.s-slider-component.doc.README": {
+                "id": "@coffeekraken.s-slider-component.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-slider-component.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-slider-component.js.SSliderComponent": {
+                "id": "@coffeekraken.s-slider-component.js.SSliderComponent",
+                "name": "SSliderComponent",
+                "as": "Slider",
                 "type": "CustomElement",
                 "menu": {
                     "tree": [
@@ -214,7 +241,7 @@
                             "physical": true,
                             "default": "horizontal"
                         },
-                        "availableBehaviors": {
+                        "behaviors": {
                             "description": "Specify the available behaviors for the slider",
                             "type": "Array<Object>"
                         },
@@ -341,7 +368,7 @@
                         }
                     },
                     "setcurrentslidebyidx": {
-                        "id": "9622f0555cfa7660fb13acdff105ac9a311bcd77bb68ddef878b07d53f0fa722",
+                        "id": "a6df6d95f6b757f3c6b529076f8d06f61ab8079e4be7bef809550dd27dcbd279",
                         "name": "setCurrentSlideByIdx",
                         "type": "Function",
                         "description": "Set the current slide idx.",
@@ -581,7 +608,7 @@
                         }
                     },
                     "goto": {
-                        "id": "4b8f120cd30c314007712a373d7a8319ba23c16047220d924b85a6d0ce62dc0c",
+                        "id": "d44fb896f9684392446a6c6fbfd0b0f2250188dd4e4b928bc6e4363773d640df",
                         "name": "goTo",
                         "type": "Function",
                         "description": "Go to a specific slide.",
@@ -593,7 +620,7 @@
                         }
                     },
                     "next": {
-                        "id": "cd766485613a695eb0b1ad73b8b60c8354d2ddaf9b584c166dbcd91bc3cc7829",
+                        "id": "7f637cfbbd47a4a9d1c63b717a5d2a2e9b8c7165f4a7790689d7657bac945d8b",
                         "name": "next",
                         "type": "Function",
                         "description": "Go to the next slide",
@@ -605,7 +632,7 @@
                         }
                     },
                     "previous": {
-                        "id": "0ff3286fe086622b4fa917ce3d70421ad026a6fc7649cd2c51d73a0af2c8256b",
+                        "id": "6a4c680a3d34af7277397399052d5303ae0ee681906c07bda78d98daf80d2af7",
                         "name": "previous",
                         "type": "Function",
                         "description": "Go to the previous slide",
@@ -629,7 +656,7 @@
                         }
                     },
                     "isplaying": {
-                        "id": "6ca225ce0133b08e1ae586de6ae1766aeddbfae2fa8f67345048a7c46b31d99d",
+                        "id": "476979830cf69536075eb6aeec47389a63b801ca14ac7531544fbebfae0b53ba",
                         "name": "isPlaying",
                         "type": "Function",
                         "description": "This method allows you to know if the slider is currently playing or not",
@@ -641,7 +668,7 @@
                         }
                     },
                     "play": {
-                        "id": "733ebe041b6a4b8c858ff353d3a53e02a133b66f21ba9e6d41e62c5eb30077c0",
+                        "id": "cdd4456eb6a9cc3ef870aed59ef8434df19e3b596a68bc091045c20c3ff32303",
                         "name": "play",
                         "type": "Function",
                         "description": "This method allows you to play the slider when a `timer` has been defined",
@@ -653,7 +680,7 @@
                         }
                     },
                     "stop": {
-                        "id": "62e05bbef82743813f08670fba87b2d5253977d420e6d534be98f25afbe93459",
+                        "id": "af76815fe860bd6454110a606a65ccb77e46ee9f023cace05fa8b4f7bdfd6a6f",
                         "name": "stop",
                         "type": "Function",
                         "description": "This method allows you to stop the slider",
@@ -705,7 +732,7 @@
                             "physical": true,
                             "default": "horizontal"
                         },
-                        "availableBehaviors": {
+                        "behaviors": {
                             "description": "Specify the available behaviors for the slider",
                             "type": "Array<Object>"
                         },

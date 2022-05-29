@@ -2,7 +2,7 @@
 
 /**
  * @name                                    methodExists
- * @namespace            js.class.utils
+ * @namespace            js.class
  * @type                                    Function
  * @platform          js
  * @platform          node
@@ -22,7 +22,7 @@
  * class Coco {
  *    hello() {}
  * }
- * import methodExists from '@coffeekraken/sugar/node/class/utils/methodExists';
+ * import methodExists from '@coffeekraken/sugar/node/class/methodExists';
  * const myInstance = new Coco();
  * methodExists(myInstance, 'hello', 'world'); // => ['world'];
  *

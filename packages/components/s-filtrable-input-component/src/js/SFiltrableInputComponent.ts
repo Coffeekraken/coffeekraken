@@ -6,6 +6,7 @@ import __copy from '@coffeekraken/sugar/js/clipboard/copy';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __cloneClass from '@coffeekraken/sugar/shared/class/cloneClass';
 
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 
@@ -44,10 +45,8 @@ export interface ISFiltrableInputComponentProps {
 
 export interface ISFiltrableInputState {
     baseTemplates: Record<string, Function>;
-    preselectedItem: any;
-    preselectedItemIdx: number;
-    selectedItem: any;
-    selectedItemIdx: number;
+    preselectedItems: any[];
+    selectedItems: any[];
     displayedMaxItems: number;
     value: string;
     isActive: boolean;
@@ -56,6 +55,90 @@ export interface ISFiltrableInputState {
     filteredItems: any[];
 }
 
+/**
+ * @name                SFiltrableInputComponent
+ * @as                  Filtrable input
+ * @namespace           js
+ * @type                CustomElement
+ * @interface           ./interface/SFiltrableInputComponentInterface.ts
+ * @menu                Styleguide / UI              /styleguide/ui/s-filtrable-einput
+ * @platform            html
+ * @status              beta
+ *
+ * This component represent a filtrable input to display and filter a list of items easily.
+ *
+ * @feature           Framework agnostic. Simply webcomponent.
+ * @feature           Fully customizable
+ * @feature           Built-in search
+ *
+ * @support         chromium
+ * @support         firefox
+ * @support         safari
+ * @support         edge
+ *
+ * @install           shell
+ * npm i @coffeekraken/s-filtrable-input-component
+ *
+ * @install           js
+ * import { define } from '@coffeekraken/s-filtrable-input-component';
+ * define();
+ *
+ * @example         html            Simple example
+ * <template id="items">
+ *   [{"title":"Hello","value":"hello"},{"title":"world","value":"world"}]
+ * </template>
+ * <s-filtrable-input items="#items" label="title" filtrable="title">
+ *   <input type="text" class="s-input" placeholder="Type something..." />
+ * </s-filtrable-input>
+ *
+ * @example         js
+ * import { define } from '@coffeekraken/s-filtrable-input-component';
+ * define();
+ *
+ * @example         html        Custom templates and items
+ * <my-cool-filtrable-input>
+ *    <input type="text" class="s-input" placeholder="Type something..." />
+ * </my-cool-filtrable-input>
+ *
+ * @example         js
+ * import { define } from '@coffeekraken/s-filtrable-input-component';
+ * define({
+ *     items: async () => {
+ *         // you can get your items however you want
+ *         // const request = await fetch('...');
+ *         // const items = await request.json();
+ *         return [{title: 'Hello', value: 'World'},{title: 'Plop', value:'Yop}];
+ *     },
+ *     templates: ({ type, html }) => {
+ *         switch (type) {
+ *             case 'item':
+ *                 return html`
+ *                     <li class="__item">
+ *                         My title: ${item.title}
+ *                     </li>
+ *                 `;
+ *                 break;
+ *             case 'loading':
+ *                 return html`
+ *                     <li class="__loading">
+ *                         Loading, please wait...
+ *                     </li>
+ *                 `;
+ *                 break;
+ *             case 'empty':
+ *                 return html`
+ *                     <li class="__empty">
+ *                         No items found...
+ *                     </li>
+ *                 `;
+ *                 break;
+ *         }
+ *     },
+ * }, 'my-cool-filtrable-input');
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 export default class SFiltrableInput extends __SLitComponent {
     static get styles() {
         return css`
@@ -78,10 +161,8 @@ export default class SFiltrableInput extends __SLitComponent {
 
     state: ISFiltrableInputState = {
         baseTemplates: {},
-        preselectedItem: {},
-        preselectedItemIdx: -1,
-        selectedItemIdx: -1,
-        selectedItem: {},
+        preselectedItems: [],
+        selectedItems: [],
         displayedMaxItems: 0,
         value: '',
         isActive: false,
@@ -105,19 +186,24 @@ export default class SFiltrableInput extends __SLitComponent {
         this.state.displayedMaxItems = this.props.maxItems;
 
         if (this.props.items && typeof this.props.items === 'string') {
-            const $itemsElm = document.querySelector(this.props.items);
-            if ($itemsElm) {
-                this.state.items = JSON.parse($itemsElm.innerHTML);
-                this.requestUpdate();
-                this.dispatchEvent(
-                    new CustomEvent('s-filtrable-input.items', {
-                        bubbles: true,
-                        detail: {
-                            items: this.state.items,
-                        },
-                    }),
-                );
+            try {
+                this.state.items = JSON.parse(this.props.items);
+            } catch (e) {
+                const $itemsElm = document.querySelector(this.props.items);
+                if ($itemsElm) {
+                    this.state.items = JSON.parse($itemsElm.innerHTML.trim());
+                }
             }
+
+            this.requestUpdate();
+            this.dispatchEvent(
+                new CustomEvent('s-filtrable-input.items', {
+                    bubbles: true,
+                    detail: {
+                        items: this.state.items,
+                    },
+                }),
+            );
         }
 
         // @ts-ignore
@@ -234,28 +320,73 @@ export default class SFiltrableInput extends __SLitComponent {
             if (!this.state.isActive) return;
             this.close();
         });
-        __hotkey('up').on('press', (e) => {
+        __hotkey('up').on('press', async (e) => {
             e.preventDefault();
+
+            await __wait();
+
             if (!this.state.isActive) return;
-            this.state.preselectedItemIdx =
-                this.state.preselectedItemIdx > 0
-                    ? this.state.preselectedItemIdx - 1
-                    : 0;
+            if (!this.state.filteredItems.length) return;
+
+            if (!this.state.preselectedItems.length) {
+                this.state.preselectedItems.push(
+                    this.state.filteredItems[
+                        this.state.filteredItems.length - 1
+                    ],
+                );
+            } else {
+                const currentIdx = this.state.filteredItems.indexOf(
+                    this.state.preselectedItems[0],
+                );
+                if (currentIdx === -1) {
+                    return;
+                }
+                const newIdx = currentIdx - 1;
+                if (newIdx < 0) return;
+                this.state.preselectedItems = [];
+                this.state.preselectedItems.push(
+                    this.state.filteredItems[newIdx],
+                );
+            }
             this.requestUpdate();
-            const $item = this.$list.children[this.state.preselectedItemIdx];
+
+            const $item = this.$list.children[
+                this.state.filteredItems.indexOf(this.state.preselectedItems[0])
+            ];
             // @ts-ignore
             $item.focus();
         });
-        __hotkey('down').on('press', (e) => {
+        __hotkey('down').on('press', async (e) => {
             e.preventDefault();
+
+            await __wait();
+
             if (!this.state.isActive) return;
-            this.state.preselectedItemIdx =
-                this.state.preselectedItemIdx >=
-                this.state.filteredItems.length - 1
-                    ? this.state.filteredItems.length - 1
-                    : this.state.preselectedItemIdx + 1;
+            if (!this.state.filteredItems.length) return;
+
+            if (!this.state.preselectedItems.length) {
+                this.state.preselectedItems.push(this.state.filteredItems[0]);
+            } else {
+                const currentIdx = this.state.filteredItems.indexOf(
+                    this.state.preselectedItems[0],
+                );
+                if (currentIdx === -1) {
+                    return;
+                }
+                const newIdx = currentIdx + 1;
+                console.log(newIdx);
+                if (newIdx > this.state.filteredItems.length - 1) return;
+                this.state.preselectedItems = [];
+                this.state.preselectedItems.push(
+                    this.state.filteredItems[newIdx],
+                );
+            }
+
             this.requestUpdate();
-            const $item = this.$list.children[this.state.preselectedItemIdx];
+
+            const $item = this.$list.children[
+                this.state.filteredItems.indexOf(this.state.preselectedItems[0])
+            ];
             // @ts-ignore
             $item.focus();
         });
@@ -300,56 +431,55 @@ export default class SFiltrableInput extends __SLitComponent {
             html,
         });
     }
-    get selectedItem() {
-        if (this.state.selectedItemIdx === -1) return;
-        return this.state.filteredItems[this.state.selectedItemIdx];
+    get selectedItems() {
+        return this.state.selectedItems;
     }
-    get preselectedItem() {
-        if (this.state.preselectedItemIdx === -1) return;
-        return this.state.filteredItems[this.state.preselectedItemIdx];
+    get preselectedItems() {
+        return this.state.preselectedItems;
     }
     validate() {
+        this.state.selectedItems = this.state.preselectedItems;
+        this.state.preselectedItems = [];
+
         // protect against not selected item
-        if (this.state.preselectedItemIdx === -1) return;
+        if (!this.state.selectedItems.length) return;
+
+        // temp thing cause we need to support multiple items selected at once
+        const item = this.state.selectedItems[0];
+
         // set the value in the input
-        if (this.preselectedItem) {
-            const itemProps: Partial<ISFiltrableInputComponentProps> = __deepMerge(
-                Object.assign({}, this.props),
-                this.state.preselectedItem.props ?? {},
-            );
+        const itemProps: Partial<ISFiltrableInputComponentProps> = __deepMerge(
+            Object.assign({}, this.props),
+            item.props ?? {},
+        );
 
-            if (
-                typeof itemProps.value === 'string' &&
-                this.preselectedItem?.[itemProps.value]
-            ) {
-                (<HTMLInputElement>this.$input).value = __stripTags(
-                    // @ts-ignore
-                    this.preselectedItem[itemProps.value],
-                );
-            } else if (typeof itemProps.value === 'function') {
+        if (typeof itemProps.value === 'string' && item[itemProps.value]) {
+            (<HTMLInputElement>this.$input).value = __stripTags(
                 // @ts-ignore
-                const v = itemProps.value({
-                    item: this.state.filteredItems[
-                        this.state.preselectedItemIdx
-                    ],
-                });
-                if (typeof v !== 'string') {
-                    throw new Error(
-                        `<red>[s-filtrable-input]</red> Sorry but the returned value "<yellow>${v}</yellow>" has to be a string...`,
-                    );
-                }
-                (<HTMLInputElement>this.$input).value = __stripTags(v);
+                item[itemProps.value],
+            );
+        } else if (typeof itemProps.value === 'function') {
+            // @ts-ignore
+            const v = itemProps.value({
+                items: [item],
+            });
+            if (typeof v !== 'string') {
+                throw new Error(
+                    `<red>[s-filtrable-input]</red> Sorry but the returned value "<yellow>${v}</yellow>" has to be a string...`,
+                );
             }
+            (<HTMLInputElement>this.$input).value = __stripTags(v);
         }
-        this.state.selectedItemIdx = this.state.preselectedItemIdx;
 
-        const $selectedItem = this.$list.children[this.state.selectedItemIdx];
+        const $selectedItem = this.$list.children[
+            this.state.filteredItems.indexOf(item)
+        ];
 
         // dispatch an event
         const event = new CustomEvent('selectItem', {
             bubbles: true,
             detail: {
-                item: this.selectedItem,
+                items: this.state.selectedItems,
                 $elm: $selectedItem,
             },
         });
@@ -357,6 +487,7 @@ export default class SFiltrableInput extends __SLitComponent {
         this.dispatchEvent(event);
         // @ts-ignore
         this.state.value = this.$input.value;
+        // @ts-ignore
         this.requestUpdate();
         // close on select if needed
         if (this.props.closeOnSelect) {
@@ -373,10 +504,8 @@ export default class SFiltrableInput extends __SLitComponent {
         }, this.props.closeTimeout);
     }
     resetSelected() {
-        this.state.preselectedItemIdx = -1;
-        this.state.preselectedItem = {};
-        this.state.selectedItemIdx = -1;
-        this.state.selectedItem = {};
+        this.state.preselectedItems = [];
+        this.state.selectedItems = [];
     }
     reset() {
         this.resetSelected();
@@ -426,7 +555,8 @@ export default class SFiltrableInput extends __SLitComponent {
             searchValue = this.props.searchValuePreprocess(searchValue);
         }
 
-        let filteredItems = items.map((item) => __clone(item));
+        // let filteredItems = items.map((item) => __clone(item));
+        let filteredItems = items;
 
         // custom function
         if (this.props.filterItems) {
@@ -488,36 +618,26 @@ export default class SFiltrableInput extends __SLitComponent {
         // @ts-ignore
         this.state.filteredItems = filteredItems;
         this.state.isLoading = false;
+        // @ts-ignore
         this.requestUpdate();
     }
-    select(idx) {
-        // set the selected idx
-        this._setPreselectedItemByIdx(idx);
-    }
-    preselectAndValidate(idx) {
-        // set the selected idx
-        this._setPreselectedItemByIdx(idx);
+    preselectAndValidate(item) {
+        this._setPreselectedItem(item);
         // validate
         this.validate();
     }
-    preselectValidateAndClose(idx) {
+    preselectValidateAndClose(item) {
         // set the selected idx
-        this._setPreselectedItemByIdx(idx);
+        this._setPreselectedItem(item);
         // validate
         this.validateAndClose();
     }
-    _setSelectedItemByIdx(idx) {
+    _setPreselectedItem(item) {
         // check if the component is in not selectable mode
         if (this.props.notSelectable) return;
-        this.state.selectedItemIdx = idx;
-        this.state.selectedItem = this.selectedItem;
-        this.requestUpdate();
-    }
-    _setPreselectedItemByIdx(idx) {
-        // check if the component is in not selectable mode
-        if (this.props.notSelectable) return;
-        this.state.preselectedItemIdx = idx;
-        this.state.preselectedItem = this.preselectedItem;
+        !this.state.preselectedItems.includes(item) &&
+            this.state.preselectedItems.push(item);
+        // @ts-ignore
         this.requestUpdate();
     }
     _updateListSizeAndPosition() {
@@ -607,20 +727,20 @@ export default class SFiltrableInput extends __SLitComponent {
                                   ? html`
                                         <li
                                             @click=${() =>
-                                                this.preselectAndValidate(idx)}
+                                                this.preselectAndValidate(item)}
                                             @dblclick=${() =>
                                                 this.preselectValidateAndClose(
-                                                    idx,
+                                                    item,
                                                 )}
                                             @focus=${() =>
-                                                this._setPreselectedItemByIdx(
-                                                    idx,
-                                                )}
+                                                this._setPreselectedItem(item)}
                                             style="z-index: ${999999999 - idx}"
                                             tabindex="0"
                                             class="s-filtrable-input__list-item ${this
-                                                .props.classes.listItem} ${this
-                                                .state.selectedItemIdx === idx
+                                                .props.classes
+                                                .listItem} ${this.state.selectedItems.includes(
+                                                item,
+                                            )
                                                 ? 'active'
                                                 : ''}"
                                             hoverable
@@ -678,6 +798,9 @@ export function define(
     tagName = 's-filtrable-input',
 ) {
     __SLitComponent.setDefaultProps(tagName, props);
-    // @ts-ignore
-    customElements.define(tagName, SFiltrableInput);
+    if (!customElements.get(tagName)) {
+        class SFiltrableInputComponent extends SFiltrableInput {}
+        // @ts-ignore
+        customElements.define(tagName, SFiltrableInputComponent);
+    }
 }

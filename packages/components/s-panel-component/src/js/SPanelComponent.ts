@@ -22,10 +22,11 @@ export interface SPanelComponentProps {
 }
 
 /**
- * @name                Panel (modal)
+ * @name                SPanelComponent
+ * @as                Panel (modal)
  * @namespace           js
  * @type                CustomElement
- * @interface           ./interface/SPanelComponentInterface.js
+ * @interface           ./interface/SPanelComponentInterface.ts
  * @menu                Styleguide / UI              /styleguide/ui/s-panel
  * @platform            html
  * @status              beta

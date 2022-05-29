@@ -158,13 +158,31 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                             .result.status}"
                                         tabindex="-1"
                                     >
-                                        <h2 class="s-typo:p:bold">
-                                            <i
-                                                class="s-icon:${check.result
-                                                    .status} s-mie:10 s-tc:${check
-                                                    .result.status}"
-                                            ></i>
-                                            ${check.name}
+                                        <h2
+                                            class="s-typo:p:bold s-flex:align:center"
+                                        >
+                                            <span class="s-flex:align-center">
+                                                <i
+                                                    class="s-icon:${check.result
+                                                        .status} s-mie:10 s-tc:${check
+                                                        .result.status}"
+                                                ></i>
+                                            </span>
+                                            <span class="s-flex-item:grow">
+                                                ${check.name}
+                                            </span>
+                                            <span
+                                                class="s-badge:outline s-scale:08 s-color:${check.level ==
+                                                0
+                                                    ? 'main'
+                                                    : 'main'}"
+                                            >
+                                                ${check.level === 0
+                                                    ? 'LOW'
+                                                    : check.level === 1
+                                                    ? 'MEDIUM'
+                                                    : 'HIGH'}
+                                            </span>
                                         </h2>
                                         <div class="__details">
                                             <p

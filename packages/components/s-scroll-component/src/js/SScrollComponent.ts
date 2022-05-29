@@ -14,10 +14,11 @@ import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 import __css from '../../../../src/css/s-scroll.css'; // relative to /dist/pkg/esm/js
 
 /**
- * @name                Scroll to
+ * @name            SScrollComponent
+ * @as                Scroll to
  * @namespace           js
  * @type                CustomElement
- * @interface           ./interface/SScrollComponentInterface.js
+ * @interface           ./interface/SScrollComponentInterface.ts
  * @menu                Styleguide / Tools              /styleguide/tool/s-scroll
  * @platform            html
  * @status              beta
@@ -41,13 +42,17 @@ import __css from '../../../../src/css/s-scroll.css'; // relative to /dist/pkg/e
  * import { define } from '@coffeekraken/s-scroll-component';
  * define();
  *
- * @see             https://github.com/darlanrod/input-range-scss
+ * @example         html        Scroll to top
+ * <s-scroll class="s-btn s-color:accent" to="top">
+ *     <i class="s-icon:angle-up s-mie:20"></i> Scroll to top
+ * </s-scroll>
+ *
  * @since           2.0.0
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISScrollComponentProps extends ISLitComponentDefaultProps {
-    to: string;
+    to: 'top' | 'bottom' | string;
     duration: number;
     offset: number;
     offsetX: number;

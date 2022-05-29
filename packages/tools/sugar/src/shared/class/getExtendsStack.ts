@@ -1,8 +1,8 @@
-import __isClass from '../../is/class';
+import __isClass from '../is/class';
 
 /**
  * @name            getExtendsStack
- * @namespace       shared.class.utils
+ * @namespace       shared.class
  * @type            Function
  * @platform          js
  * @platform          node
@@ -21,7 +21,7 @@ import __isClass from '../../is/class';
  * @todo      tests
  *
  * @example         js
- * import getExtendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';
+ * import getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
  * class Coco extends Error {}
  * class Plop extends Coco {}
  * getExtendsStack(Plop); // => {Coco: [class ...], Error: [class ...]};

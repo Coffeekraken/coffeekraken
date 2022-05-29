@@ -26,10 +26,11 @@ export interface ISColorPickerComponentProps {
 }
 
 /**
- * @name                Color Picker
- * @namespace           js
+ * @name                SColorPickerComponent
+ * @as                Color Picker
+ * @WIP-namespace           js
  * @type                CustomElement
- * @interface           ./interface/SColorPickerComponentInterface.js
+ * @interface           ./interface/SColorPickerComponentInterface.ts
  * @menu                Styleguide / Forms              /styleguide/form/s-color-picker
  * @platform            html
  * @status              beta

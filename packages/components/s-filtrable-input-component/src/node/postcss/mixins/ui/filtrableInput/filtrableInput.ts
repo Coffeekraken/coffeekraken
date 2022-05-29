@@ -102,33 +102,32 @@ export default function ({
                 vars.push(`
 
                 .s-filtrable-input__dropdown {
-                    background-color: sugar.color(secondary, background);
+                    background-color: sugar.color(base, background);
                     border-radius: sugar.border.radius(ui.filtrableInput.borderRadius);
                 }
 
                 .s-filtrable-input__list-item {
-                    background-color: sugar.color(secondary, surface);  
                     padding-inline: sugar.padding(ui.filtrableInput.paddingInline);
                     padding-block: sugar.padding(ui.filtrableInput.paddingBlock);
-                    border-top: 1px solid sugar.color(secondary, surface, --darken 5);
+                    border-top: 1px solid sugar.color(base, background, --lighten 5);
 
                     &:hover,
                     &:focus,
                     &:focus:not(.active),
                     &:focus:not(:active) {
                         &:not(.s-filtrable-input__list-no-item):not(.s-filtrable-input__list-loading) {
-                            border-top: 1px solid sugar.color(secondary, --alpha 0);
-                            background-color: sugar.color(secondary, --alpha 0.6);
-                            color: sugar.color(secondary, foreground);
+                            border-top: 1px solid sugar.color(base, --alpha 0);
+                            background-color: sugar.color(base, --alpha 0.6);
+                            color: sugar.color(base, foreground);
                         }
                     }
 
                     &.active,
                     &:active {
                         &:not(.s-filtrable-input__list-no-item):not(.s-filtrable-input__list-loading) {
-                            border-top: 1px solid sugar.color(primary) !important;
-                            background-color: sugar.color(primary) !important;
-                            color: sugar.color(primary, foreground) !important;
+                            border-top: 1px solid sugar.color(accent) !important;
+                            background-color: sugar.color(accent) !important;
+                            color: sugar.color(accent, foreground) !important;
                         }
                     }
                 }

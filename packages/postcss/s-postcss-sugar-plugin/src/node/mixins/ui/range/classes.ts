@@ -96,7 +96,7 @@ export default function ({
     vars.comment(
         () => `
       /**
-        * @name          Range
+        * @name          Range 
         * @namespace          sugar.style.ui
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/range
@@ -131,25 +131,25 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @example        html       ${style}
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             }" min="0" max="100" step="10" />
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-color:accent" min="0" max="100" step="10" />
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-color:complementary" min="0" max="100" step="10" />
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     I'm disabled
             *     <input type="range" disabled class="s-range${
                 finalParams.defaultStyle === style ? '' : `:${style}`
@@ -162,25 +162,25 @@ export default function ({
         ${finalParams.shapes
             .map((shape) => {
                 return ` * @example        html       ${shape}
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             }" min="0" max="100" step="10" />
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-color:accent" min="0" max="100" step="10" />
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="range" class="s-range${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-color:complementary" min="0" max="100" step="10" />
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     I'm disabled
             *     <input type="range" disabled class="s-range${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
@@ -191,61 +191,61 @@ export default function ({
             .join('\n')}
         * 
         * @example        html          Colors (none-exclusive)
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         * 
         * @example      html        RTL
         * <div dir="rtl">
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     I'm disabled
         *     <input type="range" disabled class="s-range s-color:error" disabled min="0" max="100" step="10" />
         *   </label>
         * </div>
         *
         * @example        html          Scales
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-scale:08" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-scale:12" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     <input type="range" class="s-range s-scale:14" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>

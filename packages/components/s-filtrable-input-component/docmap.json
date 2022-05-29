@@ -12,15 +12,14 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -56,7 +55,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,7 +73,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -252,6 +249,178 @@
                 "relPath": "src/config/themeUi.config.ts",
                 "children": {}
             },
+            "@coffeekraken.s-filtrable-input-component.doc.README": {
+                "id": "@coffeekraken.s-filtrable-input-component.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-filtrable-input-component.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-filtrable-input-component.js.SFiltrableInputComponent": {
+                "id": "@coffeekraken.s-filtrable-input-component.js.SFiltrableInputComponent",
+                "name": "SFiltrableInputComponent",
+                "as": "Filtrable input",
+                "type": "CustomElement",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/s-filtrable-einput"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component represent a filtrable input to display and filter a list of items easily.",
+                "namespace": "@coffeekraken.s-filtrable-input-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<s-filtrable-input items=\"[{title:'Hello',value:'hello'},{title:'world',value:'world'}]\">\n  <input type=\"text\" class=\"s-input\" />\n</s-filtrable-input>"
+                    },
+                    {
+                        "language": "js",
+                        "code": "import { define } from '@coffeekraken/s-filtrable-input-component';\ndefine();"
+                    }
+                ],
+                "interface": {
+                    "name": "SFiltrableInputComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "items": {
+                            "description": "Specify an array of items to use in your filtrable list. Can be a JSON string, a function that take an object with the \"value\" property and must return an array of items to use",
+                            "type": "String|Function"
+                        },
+                        "value": {
+                            "description": "Specify the attribute in your items to use as a value. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as value",
+                            "type": "String",
+                            "default": "value"
+                        },
+                        "label": {
+                            "description": "Specify the attribute in your items to use as a label. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as label",
+                            "type": "String|Function",
+                            "default": "value"
+                        },
+                        "emptyText": {
+                            "description": "Specify the text to use for the default \"empty\" (no result) state",
+                            "type": "String",
+                            "default": "No item to display"
+                        },
+                        "searchValuePreprocess": {
+                            "description": "Specify a function used to preprocess the value just before actually searching through the items",
+                            "type": "Function"
+                        },
+                        "loadingText": {
+                            "description": "Specify the text to use for the default \"loading\" state",
+                            "type": "String",
+                            "default": "Loading please wait..."
+                        },
+                        "filterItems": {
+                            "description": "Specify a function to use to filter the items. Must return the filtered list of items",
+                            "type": "Function"
+                        },
+                        "filtrable": {
+                            "description": "Specify all the properties of your \"item\" to use as source for the filtrable process",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "default": []
+                        },
+                        "templates": {
+                            "description": "Specify either an object with properties like \"item\", \"empty\" and \"loading\", or a function returning the good template depending on tne \"type\" argument property",
+                            "type": "Object|Function"
+                        },
+                        "closeTimeout": {
+                            "description": "Specify the duration before closing the list when having selected an item",
+                            "type": "Number",
+                            "default": 100
+                        },
+                        "interactive": {
+                            "description": "Specify if your items in the list are interactive or not to let the user click and interact with them",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "closeOnSelect": {
+                            "description": "Specify if you wantr to close the list when selecting an item",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "notSelectable": {
+                            "description": "Specify if you want the items to be not selectable",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "maxItems": {
+                            "description": "Specify the maximum number of items to display at first in the list",
+                            "type": "Number",
+                            "default": 25
+                        },
+                        "classes": {
+                            "description": "Specify some additional classes to add to the component elements",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "inline": {
+                            "description": "Specify if you want the filterable input list to be always displayed and inline in the html",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFiltrableInputComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SFiltrableInputComponent.ts",
+                "children": {
+                    "define": {
+                        "id": "5d7cf0c1b1fbc3f0d412c1fbf086814555863147510fa00426539708e5634760",
+                        "name": "define",
+                        "type": "Function",
+                        "description": "This function allows you to define (register) your custom element with some default\nprops if needed.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface": {
                 "id": "@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface",
                 "name": "SFiltrableInputComponentInterface",
@@ -339,6 +508,17 @@
                             "description": "Specify the maximum number of items to display at first in the list",
                             "type": "Number",
                             "default": 25
+                        },
+                        "classes": {
+                            "description": "Specify some additional classes to add to the component elements",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "inline": {
+                            "description": "Specify if you want the filterable input list to be always displayed and inline in the html",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
                         }
                     }
                 },

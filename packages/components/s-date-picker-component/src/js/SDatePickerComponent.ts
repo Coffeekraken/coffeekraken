@@ -22,7 +22,8 @@ import __css from '../../../../src/css/s-date-picker.css'; // relative to /dist/
 import __themeCss from '../../../../src/css/s-date-picker-theme.css'; // relative to /dist/pkg/esm/js
 
 /**
- * @name                Date Picker
+ * @name                SDatePickerComponent
+ * @as                Date Picker
  * @namespace           js
  * @type                CustomElement
  * @interface           ./interface/SDatePickerComponentInterface.js

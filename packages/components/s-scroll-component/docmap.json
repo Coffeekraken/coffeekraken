@@ -12,15 +12,14 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -57,7 +56,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-static-builder",
@@ -75,15 +73,44 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-scroll-component.js.Scroll-to": {
-                "id": "@coffeekraken.s-scroll-component.js.Scroll-to",
-                "name": "Scroll to",
+            "@coffeekraken.s-scroll-component.doc.README": {
+                "id": "@coffeekraken.s-scroll-component.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-scroll-component.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-scroll-component.js.SScrollComponent": {
+                "id": "@coffeekraken.s-scroll-component.js.SScrollComponent",
+                "name": "SScrollComponent",
+                "as": "Scroll to",
                 "type": "CustomElement",
                 "menu": {
                     "tree": [
@@ -101,6 +128,44 @@
                 "description": "This component allows you to scroll to a specific element using a css selector or to the top|bottom of the page.",
                 "namespace": "@coffeekraken.s-scroll-component.js",
                 "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Scroll to top",
+                        "code": "<s-scroll class=\"scroll-top\" to=\"top\">\n    <i class=\"s-icon:angle-up\"></i>\n</s-scroll>"
+                    }
+                ],
+                "interface": {
+                    "name": "SScrollComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "to": {
+                            "description": "The target when to scroll. Must be a valid css selector",
+                            "type": "String",
+                            "required": true
+                        },
+                        "duration": {
+                            "description": "Specify the duration of the scroll in ms",
+                            "type": "number",
+                            "default": 300
+                        },
+                        "offset": {
+                            "description": "Specify the offset of the scroll in px. Usefull if you have a sticky header, etc...",
+                            "type": "number",
+                            "default": 0
+                        },
+                        "offsetX": {
+                            "description": "Specify the offset of the scroll x in px. Usefull if you have a sticky header, etc...",
+                            "type": "number",
+                            "default": 0
+                        },
+                        "offsetY": {
+                            "description": "Specify the offset of the scroll y in px. Usefull if you have a sticky header, etc...",
+                            "type": "number",
+                            "default": 0
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -138,15 +203,46 @@
                 "description": "This class represent the interface that describe parameters of the SScrollToComponent",
                 "namespace": "@coffeekraken.s-scroll-component.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SScrollComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "to": {
+                            "description": "The target when to scroll. Must be a valid css selector",
+                            "type": "String",
+                            "required": true
+                        },
+                        "duration": {
+                            "description": "Specify the duration of the scroll in ms",
+                            "type": "number",
+                            "default": 300
+                        },
+                        "offset": {
+                            "description": "Specify the offset of the scroll in px. Usefull if you have a sticky header, etc...",
+                            "type": "number",
+                            "default": 0
+                        },
+                        "offsetX": {
+                            "description": "Specify the offset of the scroll x in px. Usefull if you have a sticky header, etc...",
+                            "type": "number",
+                            "default": 0
+                        },
+                        "offsetY": {
+                            "description": "Specify the offset of the scroll y in px. Usefull if you have a sticky header, etc...",
+                            "type": "number",
+                            "default": 0
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SScrollComponentInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SScrollComponentInterface.js",
+                "filename": "SScrollComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SScrollComponentInterface.ts",
                 "children": {}
             }
         }

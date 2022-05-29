@@ -17,6 +17,7 @@
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
             "@coffeekraken/s-date-picker-component",
@@ -56,7 +57,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,7 +75,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -235,9 +234,39 @@
                 "relPath": "src/config/themeUi.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-code-example-component.js.Code-Example": {
-                "id": "@coffeekraken.s-code-example-component.js.Code-Example",
-                "name": "Code Example",
+            "@coffeekraken.s-code-example-component.doc.README": {
+                "id": "@coffeekraken.s-code-example-component.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-code-example-component.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-code-example-component.js.SCodeExampleComponent": {
+                "id": "@coffeekraken.s-code-example-component.js.SCodeExampleComponent",
+                "name": "SCodeExampleComponent",
+                "as": "Code example",
                 "type": "CustomElement",
                 "menu": {
                     "tree": [

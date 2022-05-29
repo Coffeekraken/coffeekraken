@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name                SScrollComponentInterface
@@ -31,25 +32,25 @@ export default class SScrollComponentInterface extends __SInterface {
             duration: {
                 description: 'Specify the duration of the scroll in ms',
                 type: 'number',
-                default: 300,
+                default: __STheme.get('scroll.duration'),
             },
             offset: {
                 description:
                     'Specify the offset of the scroll in px. Usefull if you have a sticky header, etc...',
                 type: 'number',
-                default: 0,
+                default: __STheme.get('scroll.offset'),
             },
             offsetX: {
                 description:
                     'Specify the offset of the scroll x in px. Usefull if you have a sticky header, etc...',
                 type: 'number',
-                default: 0,
+                default: __STheme.get('scroll.offsetX'),
             },
             offsetY: {
                 description:
                     'Specify the offset of the scroll y in px. Usefull if you have a sticky header, etc...',
                 type: 'number',
-                default: 0,
+                default: __STheme.get('scroll.offsetY'),
             },
         };
     }

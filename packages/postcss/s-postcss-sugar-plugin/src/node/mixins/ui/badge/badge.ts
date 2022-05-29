@@ -78,7 +78,8 @@ export default function ({
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`   
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
         white-space: nowrap;
         user-select: none;
     `);

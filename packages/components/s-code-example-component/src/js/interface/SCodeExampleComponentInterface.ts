@@ -62,6 +62,9 @@ export default class SCodeExampleComponentInterface extends __SInterface {
                 default: 'Show less',
             },
             moreAction: {
+                description:
+                    'Specify the action to execute when click on the "more" button. Currently available action is "toggle"',
+                values: ['toggle'],
                 type: 'String',
                 default: 'toggle',
             },
@@ -72,15 +75,16 @@ export default class SCodeExampleComponentInterface extends __SInterface {
                 default: false,
             },
             scrollOnMore: {
-                description: 'Specify if you want to scroll to the code when clicking on the "show more/less" button',
+                description:
+                    'Specify if you want to scroll to the code when clicking on the "show more/less" button',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             scrollToSettings: {
                 description: 'Specify some scrollTo settings',
                 type: 'IScrollToSettings',
-                default: {}
-            }
+                default: {},
+            },
         };
     }
 }

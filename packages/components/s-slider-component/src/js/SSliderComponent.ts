@@ -18,10 +18,11 @@ import __SSliderComponentInterface from './interface/SSliderComponentInterface';
 import __SSliderBehavior from './SSliderBehavior';
 
 /**
- * @name                Slider
+ * @name                SSliderComponent
+ * @as                  Slider
  * @namespace           js
  * @type                CustomElement
- * @interface           ./interface/SSliderComponentInterface.js
+ * @interface           ./interface/SSliderComponentInterface.ts
  * @menu                Styleguide / UI              /styleguide/ui/s-slider
  * @platform            html
  * @status              beta
@@ -52,7 +53,7 @@ import __SSliderBehavior from './SSliderBehavior';
  * @install         js
  * import { define, SSliderSlideableBehavior } from '@coffeekraken/s-slider-component';
  * define({
- *      availableBehaviors: {
+ *      behaviors: {
  *          slideable: {
  *              class: SSliderSlideableBehavior
  *              settings: {}
@@ -266,7 +267,7 @@ import __SSliderBehavior from './SSliderBehavior';
 
 export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
-    availableBehaviors: __SSliderBehavior[];
+    behaviors: __SSliderBehavior[];
     behavior: __SSliderBehavior | string;
     controls: boolean;
     nav: boolean;
@@ -370,7 +371,7 @@ export default class SSlider extends __SLitComponent {
             if (typeof this.props.behavior === 'string') {
                 let behavior;
                 for (let [behaviorId, behaviorObj] of Object.entries(
-                    this.props.availableBehaviors,
+                    this.props.behaviors,
                 )) {
                     const id = behaviorObj.class?.id ?? behaviorObj.id;
                     if (id === this.props.behavior) {

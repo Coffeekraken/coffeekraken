@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __map from '@coffeekraken/sugar/shared/iterable/map';
-import __getExtendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';
+import __getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
 import __typeOf from '@coffeekraken/sugar/shared/value/typeof';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';

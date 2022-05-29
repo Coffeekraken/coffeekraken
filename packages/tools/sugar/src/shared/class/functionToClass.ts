@@ -4,7 +4,7 @@ import __funcToClass from 'func-to-classes';
 
 /**
  * @name            functionToClass
- * @namespace            js.class.utils
+ * @namespace            js.class
  * @type            Function
  * @platform          js
  * @platform          node

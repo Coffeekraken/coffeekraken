@@ -2,7 +2,7 @@
 
 /**
  * @name                          toPlainObject
- * @namespace          shared.class.utils
+ * @namespace          shared.class
  * @type                          Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example             js
- * import toPlainObject from '@coffeekraken/sugar/shared/class/utils/toPlainObject';
+ * import toPlainObject from '@coffeekraken/sugar/shared/class/toPlainObject';
  * class Coco {
  *    constructor() {
  *      this.hello = 'world';

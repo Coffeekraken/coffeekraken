@@ -12,10 +12,11 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __css from '../../../../src/css/s-range.css'; // relative to /dist/pkg/esm/js
 
 /**
- * @name                Range
+ * @name                SRangeComponent
+ * @as                  Range (component)
  * @namespace           js
  * @type                CustomElement
- * @interface           ./interface/SRangeComponentInterface.js
+ * @interface           ./interface/SRangeComponentInterface.ts
  * @menu                Styleguide / Forms              /styleguide/form/s-range
  * @platform            html
  * @status              beta

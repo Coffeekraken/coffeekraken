@@ -1,6 +1,7 @@
 import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
 import { define as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
+import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
 import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
 import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
@@ -40,6 +41,8 @@ import __SCssAnimation from '@coffeekraken/s-css-animation';
 
 // @ts-ignore
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
+// @ts-ignore
+const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
 // setup conductor
 __SConductor.setup({
@@ -80,6 +83,11 @@ __SConductor.setup({
         // @ts-ignore
         if (typeof value.default === 'function') value.default();
     }
+    // forDoc related
+    for (let [key, value] of Object.entries(forDocRelated)) {
+        // @ts-ignore
+        if (typeof value.default === 'function') value.default();
+    }
 
     // const $illustration = document.querySelector(
     //     '#features-opensource .__illustration',
@@ -92,13 +100,14 @@ __SConductor.setup({
     __CKDiscoverComponent();
     __CKSettingsComponent();
     __SCodeExampleWebcomponent();
+    __SFiltrableInputComponent();
     __SSidePanelWebcomponent();
     __SColorPickerWebcomponent();
     __SScrollComponent();
     __SDatePickerWebcomponent();
     __SRangeWebcomponent();
     __SSliderComponent({
-        availableBehaviors: {
+        behaviors: {
             slideable: {
                 class: SSliderSlideableBehavior,
                 settings: {},

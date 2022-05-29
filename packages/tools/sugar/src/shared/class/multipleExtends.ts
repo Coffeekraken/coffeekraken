@@ -4,7 +4,7 @@ import __aggregation from 'aggregation/es5';
 
 /**
  * @name                multipleExtends
- * @namespace           shared.class.utils
+ * @namespace           shared.class
  * @type                Function
  * @platform          js
  * @platform          node
@@ -19,7 +19,7 @@ import __aggregation from 'aggregation/es5';
  * @todo      tests
  *
  * @example         js
- * import multipleExtends from '@coffeekraken/sugar/shared/class/utils/multipleExtends';
+ * import multipleExtends from '@coffeekraken/sugar/shared/class/multipleExtends';
  * class MyCoolClass extends multipleExtends(Another, AnotherOne) {
  * }
  *

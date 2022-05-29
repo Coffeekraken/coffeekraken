@@ -47,10 +47,11 @@ export interface ISCodeExampleComponentProps {
 }
 
 /**
- * @name                Code Example
+ * @name                SCodeExampleComponent
+ * @as                  Code example
  * @namespace           js
  * @type                CustomElement
- * @interface           ./interface/SCodeExampleComponentInterface.js
+ * @interface           ./interface/SCodeExampleComponentInterface.ts
  * @menu                Styleguide / UI              /styleguide/ui/s-code-example
  * @platform            html
  * @status              beta

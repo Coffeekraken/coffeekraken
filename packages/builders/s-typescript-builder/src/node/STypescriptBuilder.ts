@@ -127,7 +127,7 @@ export default class STypescriptBuilder extends __SBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get typescriptBuilderSettings(): ISTypescriptBuilderSettings {
-        return (<any>this)._settings.typescriptBuilder;
+        return (<any>this).settings.typescriptBuilder;
     }
 
     /**

@@ -203,7 +203,7 @@ class SPromise extends __SClass.extends(Promise)
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get promiseSettings(): ISPromiseSettings {
-        return (<any>this)._settings.promise;
+        return (<any>this).settings.promise;
     }
 
     /**
@@ -279,7 +279,7 @@ class SPromise extends __SClass.extends(Promise)
                     },
                     eventEmitter: {},
                 },
-                this._settings,
+                this.settings,
             ),
         );
 
@@ -301,13 +301,12 @@ class SPromise extends __SClass.extends(Promise)
         this._resolvers = <ISPromiseResolvers>resolvers;
 
         if (
-            (<ISPromiseCtorSettings>this._settings).promise.destroyTimeout !==
-            -1
+            (<ISPromiseCtorSettings>this.settings).promise.destroyTimeout !== -1
         ) {
             this.on('finally', (v, m) => {
                 setTimeout(() => {
                     this.destroy();
-                }, (<ISPromiseCtorSettings>this._settings).promise.destroyTimeout);
+                }, (<ISPromiseCtorSettings>this.settings).promise.destroyTimeout);
             });
         }
 
@@ -423,9 +422,9 @@ class SPromise extends __SClass.extends(Promise)
         const ar = point.split(',').map((l) => l.trim());
         ar.forEach((a) => {
             if (a === 'resolve') {
-                this._settings.promise.resolveProxies.push(proxy);
+                this.settings.promise.resolveProxies.push(proxy);
             } else if (a === 'reject') {
-                this._settings.promise.rejectProxies.push(proxy);
+                this.settings.promise.rejectProxies.push(proxy);
             }
         });
     }
@@ -559,7 +558,7 @@ class SPromise extends __SClass.extends(Promise)
             arg = await this.eventEmitter.emit(stack, arg);
         }
         // execute proxies
-        for (const proxyFn of this._settings.promise.resolveProxies || []) {
+        for (const proxyFn of this.settings.promise.resolveProxies || []) {
             arg = await proxyFn(arg);
         }
         // resolve the master promise
@@ -612,7 +611,7 @@ class SPromise extends __SClass.extends(Promise)
             arg = await this.eventEmitter.emit(stack, arg);
         }
         // execute proxies
-        for (const proxyFn of this._settings.promise.rejectProxies || []) {
+        for (const proxyFn of this.settings.promise.rejectProxies || []) {
             arg = await proxyFn(arg);
         }
         // resolve the master promise
@@ -665,7 +664,7 @@ class SPromise extends __SClass.extends(Promise)
                 arg = await this.eventEmitter.emit(stack, arg);
             }
             // resolve the master promise
-            if (this._settings.promise.treatCancelAs === 'reject') {
+            if (this.settings.promise.treatCancelAs === 'reject') {
                 this._resolvers.reject(arg);
             } else {
                 this._resolvers.resolve(arg);

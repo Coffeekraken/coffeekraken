@@ -15,6 +15,7 @@ import rootRelative from './rootRelative';
 import sanitizeValue from './sanitizeValue';
 import sfile from './sfile';
 import shieldsioHandlebarsHelper from './shieldsioHandlebarsHelper';
+import sort from './sort';
 import length from './length';
 import join from './join';
 import toString from './toString';
@@ -40,4 +41,5 @@ export {
     sanitizeValue,
     sfile,
     shieldsioHandlebarsHelper,
+    sort,
 };

@@ -31,10 +31,6 @@ import __SProcess from './SProcess';
 
 // @ts-ignore
 export default class SCommandProcess extends __SProcess {
-    static interfaces = {
-        params: __SCommandProcessInterface,
-    };
-
     /**
      * @name        commandProcessSettings
      * @type          ISCommandProcessSettings
@@ -46,7 +42,7 @@ export default class SCommandProcess extends __SProcess {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get commandProcessSettings(): ISCommandProcessSettings {
-        return (<any>this)._settings.commandProcess;
+        return (<any>this).settings.commandProcess;
     }
 
     /**
@@ -95,13 +91,19 @@ export default class SCommandProcess extends __SProcess {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     process(
-        params: any,
+        params: Partial<ISCommandProcessParams>,
         settings?: Partial<ISCommandProcessSettings>,
     ): Promise<ISProcessResultObject> {
         const set = <ISCommandProcessSettings>(
             __deepMerge(this.commandProcessSettings, settings ?? {})
         );
-        return __spawn(params.command, [], {
+
+        // @ts-ignore
+        const finalParams: ISCommandProcessParams = __SCommandProcessInterface.apply(
+            params,
+        );
+
+        return __spawn(finalParams.command, [], {
             returnValueOnly: true,
             ...set.spawnSettings,
         });

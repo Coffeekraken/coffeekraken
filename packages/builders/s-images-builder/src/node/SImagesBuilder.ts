@@ -108,7 +108,7 @@ export default class SImagesBuilder extends __SBuilder {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get imagesBuilderSettings(): ISImagesBuilderSettings {
-        return (<any>this)._settings.imagesBuilder;
+        return (<any>this).settings.imagesBuilder;
     }
 
     /**

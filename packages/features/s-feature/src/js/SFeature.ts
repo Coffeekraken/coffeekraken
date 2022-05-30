@@ -155,7 +155,7 @@ export default class SFeature extends __SClass implements ISFeature {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get featureSettings(): ISFeatureSettings {
-        return (<any>this._settings).feature;
+        return (<any>this.settings).feature;
     }
 
     /**
@@ -185,7 +185,7 @@ export default class SFeature extends __SClass implements ISFeature {
 
         this.componentUtils = new __SComponentUtils(node, node.attributes, {
             componentUtils: {
-                ...(this._settings.componentUtils ?? {}),
+                ...(this.settings.componentUtils ?? {}),
                 name,
             },
         });

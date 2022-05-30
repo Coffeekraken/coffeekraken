@@ -59,7 +59,7 @@ export default class SWatch {
     _watchStack = {};
 
     /**
-     * @name            _settings
+     * @name            settings
      * @type            Object
      * @private
      *
@@ -68,7 +68,7 @@ export default class SWatch {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _settings = {};
+    settings = {};
 
     /**
      * @name                      constructor
@@ -82,7 +82,7 @@ export default class SWatch {
         // check if the passed object is already an SWatch instance
         if (object.__$SWatch) return object;
 
-        this._settings = __deepMerge(
+        this.settings = __deepMerge(
             {
                 deep: true,
             },
@@ -125,7 +125,7 @@ export default class SWatch {
                 });
             },
             {
-                deep: this._settings.deep,
+                deep: this.settings.deep,
             },
         );
 

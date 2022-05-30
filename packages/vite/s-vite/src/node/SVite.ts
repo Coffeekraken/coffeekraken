@@ -42,10 +42,6 @@ export interface ISViteBuildParams {
 }
 
 export default class SVite extends __SClass {
-    static interfaces = {
-        startParams: __SViteStartParamsInterface,
-    };
-
     /**
      * @name            viteSettings
      * @type            ISViteSettings
@@ -57,7 +53,7 @@ export default class SVite extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get viteSettings(): ISViteSettings {
-        return (<any>this)._settings.vite;
+        return (<any>this).settings.vite;
     }
 
     /**
@@ -92,9 +88,11 @@ export default class SVite extends __SClass {
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    start(params: ISViteStartParams) {
+    start(params: Partial<ISViteStartParams>) {
         return new __SPromise(
             async ({ resolve, reject, emit }) => {
+                const finalParams = __SViteStartParamsInterface.apply(params);
+
                 const config = {
                     configFile: false,
                     // logLevel: 'silent',
@@ -172,13 +170,10 @@ export default class SVite extends __SClass {
                 const viteConfig = __SugarConfig.get('vite');
                 const duration = new __SDuration();
 
+                // @ts-ignore
                 const finalParams: ISViteBuildParams = __SViteBuildParamsInterface.apply(
                     params,
                 );
-
-                // if (params.watch) {
-                //   throw new Error('The watch feature is not implemented yet...');
-                // }
 
                 // object to store results of each "type"
                 const results = {};

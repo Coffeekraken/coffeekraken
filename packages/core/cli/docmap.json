@@ -11,15 +11,14 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -56,7 +55,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,7 +73,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -145,6 +142,35 @@
                     }
                 }
             },
+            "@coffeekraken.cli.doc.README": {
+                "id": "@coffeekraken.cli.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.cli.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.cli.cli.interface.SSugarCliParamsInterface": {
                 "id": "@coffeekraken.cli.cli.interface.SSugarCliParamsInterface",
                 "name": "SSugarCliParamsInterface",
@@ -193,9 +219,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SSugarCliParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/cli/interface/SSugarCliParamsInterface.ts",
+                "filename": "SSugarCliParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/cli/interface/SSugarCliParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.cli.cli.process.interface.SSugarCliProcessKillParamsInterface": {
@@ -233,9 +259,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SSugarCliProcessKillParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/cli/process/interface/SSugarCliProcessKillParamsInterface.ts",
+                "filename": "SSugarCliProcessKillParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface": {
@@ -262,9 +288,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SCliAddManifestJsonParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/add/interface/SCliAddManifestJsonParamsInterface.ts",
+                "filename": "SCliAddManifestJsonParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/add/interface/SCliAddManifestJsonParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.cli.node.add.interface.SCliAddSugarJsonParamsInterface": {
@@ -297,9 +323,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SCliAddSugarJsonParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/add/interface/SCliAddSugarJsonParamsInterface.ts",
+                "filename": "SCliAddSugarJsonParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/add/interface/SCliAddSugarJsonParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface": {
@@ -346,9 +372,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SCliFsCopyParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/fs/interface/SCliFsCopyParamsInterface.ts",
+                "filename": "SCliFsCopyParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/fs/interface/SCliFsCopyParamsInterface.js",
                 "children": {}
             }
         }

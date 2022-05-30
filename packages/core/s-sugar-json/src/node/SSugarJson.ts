@@ -75,7 +75,7 @@ export default class SSugarJson extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sugarJsonSettings(): ISSugarJsonSettings {
-        return (<any>this)._settings.sugarJson;
+        return (<any>this).settings.sugarJson;
     }
 
     /**

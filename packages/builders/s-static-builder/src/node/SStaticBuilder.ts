@@ -109,7 +109,7 @@ export default class SStaticBuilder extends __SBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get staticBuilderSettings(): ISStaticBuilderSettings {
-        return (<any>this)._settings.staticBuilder;
+        return (<any>this).settings.staticBuilder;
     }
 
     /**

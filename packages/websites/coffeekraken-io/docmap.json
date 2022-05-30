@@ -14,6 +14,8 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
@@ -1098,6 +1100,36 @@
                 "relPath": "src/doc/05-components/04-create.md",
                 "children": {}
             },
+            "@coffeekraken.coffeekraken-io.doc.components.Responsive": {
+                "id": "@coffeekraken.coffeekraken-io.doc.components.Responsive",
+                "name": "Responsive",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Components"
+                    ],
+                    "slug": "/doc/components/responsive"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.coffeekraken-io.doc.components",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "05-responsive.md",
+                "extension": "md",
+                "relPath": "src/doc/05-components/05-responsive.md",
+                "children": {}
+            },
             "@coffeekraken.coffeekraken-io.doc.components.Scopes": {
                 "id": "@coffeekraken.coffeekraken-io.doc.components.Scopes",
                 "name": "Scopes",
@@ -1123,9 +1155,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "05-scopes.md",
+                "filename": "06-scopes.md",
                 "extension": "md",
-                "relPath": "src/doc/05-components/05-scopes.md",
+                "relPath": "src/doc/05-components/06-scopes.md",
                 "children": {}
             },
             "@coffeekraken.coffeekraken-io.doc.images.Overview": {

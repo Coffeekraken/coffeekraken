@@ -22,7 +22,7 @@ import __SCache from '../SCache';
  * class SCacheCoolAdapter extends SCacheAdapter {
  *    constructor(settings = {}) {
  *      super(settings);
- *      // settings are accessible through this._settings
+ *      // settings are accessible through this.settings
  *    }
  *    async set(name, value, settings = {}) {
  *      const objectToSave = this.processItem(name, value, settings);

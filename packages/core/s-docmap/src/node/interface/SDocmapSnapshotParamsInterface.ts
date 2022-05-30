@@ -4,7 +4,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SDocMapSnapshotParamsInterface
+ * @name                SDocmapSnapshotParamsInterface
  * @namespace           node.interface
  * @type.                      Class
  * @extends             SInterface

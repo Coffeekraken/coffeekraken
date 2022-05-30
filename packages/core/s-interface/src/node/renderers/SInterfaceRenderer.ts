@@ -96,7 +96,7 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
         settings?: Partial<ISInterfaceRendererSettings>,
     ): Promise<string> {
         const set = <ISInterfaceRendererSettings>(
-            __deepMerge(this._settings, {}, settings)
+            __deepMerge(this.settings, {}, settings)
         );
 
         const renderedProperties: Record<string, any> = {};

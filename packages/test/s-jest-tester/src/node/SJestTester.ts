@@ -78,7 +78,7 @@ export default class SJestTester extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get jestTesterSettings(): ISJestTesterSettings {
-        return (<any>this)._settings.jestTester;
+        return (<any>this).settings.jestTester;
     }
 
     /**

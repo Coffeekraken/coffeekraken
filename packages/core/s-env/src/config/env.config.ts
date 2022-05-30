@@ -1,12 +1,12 @@
 // @ts-ignore
-if (global && !global.window) global.window = {};
+if (global && !global.document) global.document = {};
 
 export default {
     /**
      * @name            env
      * @type            String
      * @namespace       config.env
-     * @default         process.env.NODE_ENV ?? window.env.ENV ?? 'dev`
+     * @default         process.env.NODE_ENV ?? document.env.ENV ?? 'dev`
      *
      * Specify the environment env. This is usually "production" or "dev" as value.
      *
@@ -14,7 +14,7 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     // @ts-ignore
-    env: process?.env?.NODE_ENV ?? window?.env?.ENV ?? 'development',
+    env: process?.env?.NODE_ENV ?? document?.env?.ENV ?? 'development',
 
     git: {
         template: {

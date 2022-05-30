@@ -51,7 +51,7 @@
 
 // class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
 //   /**
-//    * @name                  _settings
+//    * @name                  settings
 //    * @type                  ISBlessedComponentSettings
 //    * @private
 //    *
@@ -59,7 +59,7 @@
 //    *
 //    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
-//   _settings: ISBlessedComponentSettings = {};
+//   settings: ISBlessedComponentSettings = {};
 
 //   /**
 //    * @name              getScreen
@@ -179,7 +179,7 @@
 //     // extends parent
 //     super(settings.blessed || {});
 
-//     this._settings = settings;
+//     this.settings = settings;
 //     this._promise = new __SPromise();
 
 //     // save screen reference
@@ -207,7 +207,7 @@
 //       this.setFramerate(settings.framerate);
 //     }
 
-//     if (this._settings.attach === true && SBlessedComponent.screen) {
+//     if (this.settings.attach === true && SBlessedComponent.screen) {
 //       SBlessedComponent.screen.append(this);
 //     }
 

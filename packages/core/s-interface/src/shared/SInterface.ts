@@ -131,7 +131,7 @@ export default class SInterface extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get interfaceSettings(): ISInterfaceSettings {
-        return (<any>this)._settings.interface;
+        return (<any>this).settings.interface;
     }
 
     /**

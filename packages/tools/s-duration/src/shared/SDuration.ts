@@ -41,7 +41,7 @@ export interface ISDurationObject {
 
 export default class SDuration {
     /**
-     * @name            _settings
+     * @name            settings
      * @type            Object
      * @private
      *
@@ -50,7 +50,7 @@ export default class SDuration {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _settings = {};
+    settings = {};
 
     /**
      * @name            startTime
@@ -99,7 +99,7 @@ export default class SDuration {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     constructor(settings = {}) {
-        this._settings = __deepMerge({}, settings);
+        this.settings = __deepMerge({}, settings);
         this.start();
     }
 
@@ -119,7 +119,7 @@ export default class SDuration {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     toObject(settings = {}): ISDurationObject {
-        settings = __deepMerge(this._settings, settings);
+        settings = __deepMerge(this.settings, settings);
 
         if (!this.endTime || !this.startTime) this.end();
 
@@ -164,7 +164,7 @@ export default class SDuration {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     end(settings = {}) {
-        settings = __deepMerge(this._settings, settings);
+        settings = __deepMerge(this.settings, settings);
         this.endTime = Date.now();
         return this.toObject(settings);
     }

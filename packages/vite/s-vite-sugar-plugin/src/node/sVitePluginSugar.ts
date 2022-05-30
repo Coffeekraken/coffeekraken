@@ -65,7 +65,7 @@ export default function sVitePluginSugar(settings: any = {}) {
                 }
             `.replace('\n', ''),
             `if (!document.env) document.env = {SUGAR:{}};`,
-            `document.env.SUGAR = ___deepMerge(JSON.parse(\`${envJsonStr}\`), window.SUGAR ?? {});`,
+            `document.env.SUGAR = ___deepMerge(JSON.parse(\`${envJsonStr}\`), document.SUGAR ?? {});`,
         ];
 
         return [code.join('\n'), src].join('\n');

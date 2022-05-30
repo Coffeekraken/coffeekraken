@@ -12,15 +12,16 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-duration",
@@ -56,7 +57,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,7 +75,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -87,6 +86,40 @@
                 "type": "String",
                 "default": "${__packageRoot()}/docmap.json",
                 "description": "Specify the path of the docmap.json source file to read",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.read",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.read.sort": {
+                "id": "@coffeekraken.s-docmap.config.docmap.read.sort",
+                "name": "sort",
+                "type": "String",
+                "default": "true",
+                "description": "Specify which of the docmap entries has to be sorted alphabetically.\nThese array values has to be a dotPath like 'menu.documentation'",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.read",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.read.sortDeep": {
+                "id": "@coffeekraken.s-docmap.config.docmap.read.sortDeep",
+                "name": "sortDeep",
+                "type": "String",
+                "default": "true",
+                "description": "Specify which of the docmap entries has to be sorted alphabetically and deeply.\nThese array values has to be a dotPath like 'menu.documentation'",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.read",
                 "since": "2.0.0",
                 "author": {
@@ -188,7 +221,7 @@
                 "name": "namespace",
                 "type": "Object<String>",
                 "default": "/#\\{.*\\}/gm",
-                "description": "Specify some regex to apply on different docblock properties\nto exclude some files from the buildd docmap json",
+                "description": "Specify some regex to apply on different docblock properties\nto exclude some files from the builded docmap json",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.build.filters",
                 "example": [
                     {
@@ -210,7 +243,7 @@
                 "id": "@coffeekraken.s-docmap.config.docmap.build.tags",
                 "name": "tags",
                 "type": "Array<String>",
-                "default": "['name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']",
+                "default": "['id','name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']",
                 "description": "Specify which docblock tags you want to integrate to your docmap.json items",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.build",
                 "since": "2.0.0",
@@ -256,6 +289,35 @@
                 "filename": "docmap.config.ts",
                 "extension": "config",
                 "relPath": "src/config/docmap.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-docmap.doc.README": {
+                "id": "@coffeekraken.s-docmap.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-docmap.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
                 "children": {}
             },
             "@coffeekraken.s-docmap.node.SDocmap": {
@@ -413,6 +475,7 @@
                             "default": [
                                 "id",
                                 "name",
+                                "as",
                                 "type",
                                 "menu",
                                 "default",
@@ -463,9 +526,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SDocMapBuildParamsInterface.ts",
+                "filename": "SDocmapBuildParamsInterface.ts",
                 "extension": "ts",
-                "relPath": "src/node/interface/SDocMapBuildParamsInterface.ts",
+                "relPath": "src/node/interface/SDocmapBuildParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-docmap.node.interface.SDocmapInstallSnapshotParamsInterface": {
@@ -503,9 +566,9 @@
                 "relPath": "src/node/interface/SDocmapInstallSnapshotParamsInterface.ts",
                 "children": {}
             },
-            "@coffeekraken.s-docmap.node.interface.SDocMapReadParamsInterface": {
-                "id": "@coffeekraken.s-docmap.node.interface.SDocMapReadParamsInterface",
-                "name": "SDocMapReadParamsInterface",
+            "@coffeekraken.s-docmap.node.interface.SDocmapReadParamsInterface": {
+                "id": "@coffeekraken.s-docmap.node.interface.SDocmapReadParamsInterface",
+                "name": "SDocmapReadParamsInterface",
                 "type": ".                      Class",
                 "platform": [
                     {
@@ -525,6 +588,20 @@
                             "type": "String",
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-docmap/docmap.json",
                             "alias": "i"
+                        },
+                        "sort": {
+                            "description": "Specify which of the docmap entries has to be sorted alphabetically.",
+                            "type": "String[]",
+                            "default": [
+                                "menu.packages"
+                            ]
+                        },
+                        "sortDeep": {
+                            "description": "Specify which of the docmap entries has to be sorted alphabetically AND deeply.",
+                            "type": "String[]",
+                            "default": [
+                                "menu.custom.styleguide"
+                            ]
                         }
                     }
                 },
@@ -534,14 +611,54 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SDocMapReadParamsInterface.ts",
+                "filename": "SDocmapReadParamsInterface.ts",
                 "extension": "ts",
-                "relPath": "src/node/interface/SDocMapReadParamsInterface.ts",
+                "relPath": "src/node/interface/SDocmapReadParamsInterface.ts",
                 "children": {}
             },
-            "@coffeekraken.s-docmap.node.interface.SDocMapSnapshotParamsInterface": {
-                "id": "@coffeekraken.s-docmap.node.interface.SDocMapSnapshotParamsInterface",
-                "name": "SDocMapSnapshotParamsInterface",
+            "@coffeekraken.s-docmap.node.interface.SDocmapSettingsInterface": {
+                "id": "@coffeekraken.s-docmap.node.interface.SDocmapSettingsInterface",
+                "name": "SDocmapSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe SDocmap settings",
+                "namespace": "@coffeekraken.s-docmap.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SDocmapSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "customMenu": {
+                            "description": "Specify some custom menu to generate for the docmap.",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "tagsProxy": {
+                            "description": "Specify some proxy by tags. A proxy is a function that will be called with the corresponding tag data and return new data for the docmap.json file.",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDocmapSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SDocmapSettingsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-docmap.node.interface.SDocmapSnapshotParamsInterface": {
+                "id": "@coffeekraken.s-docmap.node.interface.SDocmapSnapshotParamsInterface",
+                "name": "SDocmapSnapshotParamsInterface",
                 "type": ".                      Class",
                 "platform": [
                     {

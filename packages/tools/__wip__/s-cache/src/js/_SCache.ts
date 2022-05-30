@@ -58,14 +58,6 @@ export interface ISCacheSettings {
 export interface ISCache {}
 
 class SCache extends __SClass implements ISCache {
-    static interfaces = {
-        settings: {
-            apply: true,
-            on: '_settings.cache',
-            class: __SCacheSettingsInterface,
-        },
-    };
-
     /**
      * @name        id
      * @type      String
@@ -100,7 +92,7 @@ class SCache extends __SClass implements ISCache {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get cacheSettings(): ISCacheSettings {
-        return (<any>this._settings).cache;
+        return (<any>this.settings).cache;
     }
 
     /**
@@ -142,6 +134,8 @@ class SCache extends __SClass implements ISCache {
     constructor(id, settings = {}) {
         super(
             __deepMerge(
+                // @ts-ignore
+                __SCacheSettingsInterface.defaults(),
                 {
                     cache: {
                         clearOnExit: false,

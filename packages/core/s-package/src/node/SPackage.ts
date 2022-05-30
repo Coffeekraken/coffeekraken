@@ -110,7 +110,7 @@ export default class SPackage extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get packageSettings(): ISPackageSettings {
-        return (<any>this)._settings.package;
+        return (<any>this).settings.package;
     }
 
     /**

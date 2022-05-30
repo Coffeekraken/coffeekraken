@@ -24,6 +24,7 @@ This package expose a simple `SRangeComponent` custom element that you can defin
 -   Fully customizable
 -   Support for tooltip
 -   Support steps
+-   Responsive props [see more](/doc/components/responsive)
 -   And more...
 
 ## Usage
@@ -74,11 +75,11 @@ Make use of it in your pages:
 </div>
 ```
 
-#### Attributes
+## Attributes
 
 {{> interface namespace='@coffeekraken.s-range-component.js.interface.SRangeComponentInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-range-component.js.SRangeComponent)
 

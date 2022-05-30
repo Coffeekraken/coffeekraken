@@ -108,7 +108,7 @@ export default class SMonorepo extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get monorepoSettings(): ISMonorepoSettings {
-        return (<any>this)._settings.monorepo;
+        return (<any>this).settings.monorepo;
     }
 
     /**

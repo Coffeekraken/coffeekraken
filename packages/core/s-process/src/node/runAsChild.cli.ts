@@ -23,15 +23,15 @@ interface IProcessRunChildOptions {
             .join(' ') || '';
     const args: IProcessRunChildOptions = __parseArgs(stringArgs);
     delete args[-1];
-    if (!args._settings.processPath) {
+    if (!args.settings.processPath) {
         throw `Sorry but to use this endpoint you have to specify at least a "--processPath" parameter...`;
     }
 
-    const settings = Object.assign({}, args._settings);
+    const settings = Object.assign({}, args.settings);
     const processPath = settings.processPath;
     delete settings.processPath;
     delete args['0'];
-    delete args._settings;
+    delete args.settings;
 
     const pro = await __SProcess.from(processPath, {
         process: {
@@ -46,7 +46,7 @@ interface IProcessRunChildOptions {
 
         try {
             console.log(JSON.stringify(res.value));
-        } catch(e) {
+        } catch (e) {
             console.log(res.value?.toString?.() ?? res.value);
         }
 

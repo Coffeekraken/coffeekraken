@@ -29,6 +29,7 @@ This package expose a simple `SSliderComponent` custom element that you can defi
 -   Controls (previous, next arrows)
 -   Navigation (dots or whatever)
 -   Default styles (tight, contained)
+-   Responsive props [see more](/doc/components/responsive)
 -   And more...
 
 ## Usage
@@ -91,11 +92,11 @@ Make use of it in your pages:
 </s-slider>
 ```
 
-#### Attributes
+## Attributes
 
 {{> interface namespace='@coffeekraken.s-slider-component.js.interface.SSliderComponentInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-slider-component.js.SSliderComponent)
 

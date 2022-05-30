@@ -12,14 +12,13 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -56,7 +55,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,12 +73,40 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-config.doc.README": {
+                "id": "@coffeekraken.s-config.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-config.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-config.s-config.shared.config": {
                 "id": "@coffeekraken.s-config.s-config.shared.config",
                 "name": "config",
@@ -166,7 +192,7 @@
                         }
                     },
                     "load": {
-                        "id": "0bba223515e24c6d949bc9c9321e4f70e41d3f94eff7d29858a3b01f81a4d862",
+                        "id": "f738fac06f43d402c1f304c3772b69eeef7380e34467993199924663ddc3992f",
                         "name": "load",
                         "type": "Function",
                         "description": "Load the config from the default adapter or from the passed adapter",
@@ -234,7 +260,7 @@
                         }
                     },
                     "toobject": {
-                        "id": "dfaccdb2d7865e94937b7209d1daf824b613940a7eece250c67a0df53e1c387a",
+                        "id": "5e3c3f9f095253afbb25d09c0ea7f66d3f25e07900648690273ae9fd8f7548a0",
                         "name": "toObject",
                         "type": "Function",
                         "description": "This method allows you to get the config in a simple object format",
@@ -246,7 +272,7 @@
                         }
                     },
                     "tojson": {
-                        "id": "d85a3bbbacddb5fe8012241fe6ee25dd8fb2e2cda63a8e134f90f8ac4f9bc259",
+                        "id": "03799b036127f6528075fb73f35f77402c6877ca674050dbb08a96374f1e7a4c",
                         "name": "toJson",
                         "type": "Function",
                         "description": "This method allows you to get the config in a simple json object format",
@@ -274,83 +300,6 @@
                 "extension": "ts",
                 "relPath": "src/js/adapters/SConfigLsAdapter.ts",
                 "children": {}
-            },
-            "@coffeekraken.s-config.s-config.node.adapters.SConfigFolderAdapter": {
-                "id": "@coffeekraken.s-config.s-config.node.adapters.SConfigFolderAdapter",
-                "name": "SConfigFolderAdapter",
-                "type": "Class",
-                "description": "This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.\nEach file in the folder will be the first level of the final config object like for example the file \"colors.config.js\" will be stored\nin the final object under ```{ colors: ... }```.",
-                "namespace": "@coffeekraken.s-config.s-config.node.adapters",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SConfigFolderAdapter.ts",
-                "extension": "ts",
-                "relPath": "src/node/adapters/SConfigFolderAdapter.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-config.s-config.shared.adapters.SConfigAdapter": {
-                "id": "@coffeekraken.s-config.s-config.shared.adapters.SConfigAdapter",
-                "name": "SConfigAdapter",
-                "type": "Class",
-                "description": "Base class for SCache adapters",
-                "namespace": "@coffeekraken.s-config.s-config.shared.adapters",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "class SConfigCoolAdapter extends SConfigAdapter {\n   constructor(settings = {}) {\n     super(settings);\n     // settings are accessible through this._settings\n   }\n   async load() {\n     // load the config the way you want and return it in Object format\n     return {};\n   }\n   async save(newConfig) {\n     // save the newConfig object the way you want and return true when all it ok\n     return true;\n   }\n}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SConfigAdapter.ts",
-                "extension": "ts",
-                "relPath": "src/shared/adapters/SConfigAdapter.ts",
-                "children": {
-                    "constructor": {
-                        "id": "0de462e530b026c4774d8bf09f6272c52396c3dd2cae57f2c7160ac02d0b3063",
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "update": {
-                        "id": "81787eac2d77912a929c5bfc67228eca3ba85c1f7ad7f2520a13de9d8bd9959f",
-                        "name": "update",
-                        "type": "Function",
-                        "description": "Function that you have to call with the new config when it has been updated",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "name": {
-                        "id": "04e80b98c8dec86fc1687fdd1ca1c704c57f9c060a9808b2c60c5a219e3d0dd9",
-                        "name": "name",
-                        "type": "String",
-                        "description": "Access the adapter setted name",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    }
-                }
             }
         }
     }

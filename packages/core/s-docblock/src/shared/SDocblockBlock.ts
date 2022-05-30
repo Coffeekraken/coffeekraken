@@ -149,7 +149,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get docblockBlockSettings(): ISDocblockBlockSettings {
-        return (<any>this._settings).docblockBlock;
+        return (<any>this.settings).docblockBlock;
     }
 
     /**

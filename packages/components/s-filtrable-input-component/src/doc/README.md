@@ -23,6 +23,7 @@ This package expose a simple `SFiltrableInputComponent` custom element that you 
 -   Framework agnostic. Simply webcomponent.
 -   Fully customizable
 -   Built-in search
+-   Responsive props [see more](/doc/components/responsive)
 -   And more...
 
 ## Usage
@@ -109,11 +110,11 @@ Use it then in your html:
 
 > Note that the provided `html` function came from the AMAZING [lit-element](https://lit.dev) library used under the hood as template engine.
 
-#### Attributes
+## Attributes
 
 {{> interface namespace='@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-filtrable-input-component.js.SFiltrableInputComponent)
 

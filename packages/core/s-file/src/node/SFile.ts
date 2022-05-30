@@ -23,7 +23,7 @@ import __path from 'path';
 
 /**
  * @name            SFile
- * @namespace       sugar.node.fs
+ * @namespace       node.fs
  * @type            Class
  * @implements      SFileInterface
  * @extends         SPromise
@@ -179,15 +179,6 @@ export interface ISFile extends ISEventEmitter {
 
 // @ts-ignore
 class SFile extends __SEventEmitter implements ISFile {
-    // static interfaces = {
-    //   // settings: {
-    //   //   apply: true,
-    //   //   on: '_settings.file',
-    //   //   class: SFileSettingsInterface
-    //   //   // class: SFileCtorSettingsInterface
-    //   // }
-    // };
-
     /**
      * @name        _registeredClasses
      * @type        Record<string, SFile>
@@ -413,7 +404,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get fileSettings(): ISFileSettings {
-        return (<any>this)._settings.file;
+        return (<any>this).settings.file;
     }
 
     /**
@@ -434,9 +425,7 @@ class SFile extends __SEventEmitter implements ISFile {
                         checkExistence: true,
                         cwd: process.cwd(),
                         shrinkSizesTo: 4,
-                        watch: {
-                            pollingInterval: 500,
-                        },
+                        watch: false,
                         writeSettings: {
                             encoding: 'utf8',
                             flag: undefined,
@@ -498,7 +487,7 @@ class SFile extends __SEventEmitter implements ISFile {
             });
         }
 
-        if (this.fileSettings.watch !== false) {
+        if (this.fileSettings.watch) {
             this.watch();
         }
     }
@@ -668,27 +657,22 @@ class SFile extends __SEventEmitter implements ISFile {
      *
      * This method allows you to start watching the file for events like "update", etc...
      *
+     * @param       {Function}    callback    The callback to call when the file is updated
+     *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _watcher: any;
-    watch() {
+    watch(callback?: Function) {
         if (this._watcher) return;
         this._watcher = __fs.watchFile(
             this.path,
             {
-                interval:
-                    // @ts-ignore
-                    this.fileSettings.watch &&
-                    // @ts-ignore
-                    this.fileSettings.watch.pollingInterval
-                        ? // @ts-ignore
-                          this.fileSettings.watch.pollingInterval
-                        : 1000,
+                interval: 500,
             },
             (event) => {
                 this.update();
-                // @weird:ts-compilation-issue
+                callback?.(this);
                 (<any>this).emit('update', this);
             },
         );
@@ -798,7 +782,7 @@ class SFile extends __SEventEmitter implements ISFile {
         // // @ts-ignore
         // const newFileInstance = new this.constructor(
         //     destination,
-        //     this._settings,
+        //     this.settings,
         // );
         // // return this new instance
         // return newFileInstance;
@@ -1013,18 +997,13 @@ class SFile extends __SEventEmitter implements ISFile {
         settings: Partial<ISFileWriteSettings> = {},
     ): Promise<any> {
         return new Promise(async (resolve, reject) => {
-            const set: ISFileWriteSettings = {
-                ...this.fileSettings.writeSettings,
-                path: this.path,
-                ...settings,
-            };
             data =
                 __toString(data, {
                     beautify: true,
                     highlight: false,
                 }) ?? '';
 
-            await __writeFile(set.path, data);
+            await __writeFile(this.path, data, settings);
             resolve(true);
         });
     }
@@ -1043,17 +1022,12 @@ class SFile extends __SEventEmitter implements ISFile {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     writeSync(data: string, settings: Partial<ISFileWriteSettings> = {}): any {
-        const set: ISFileWriteSettings = {
-            ...this.fileSettings.writeSettings,
-            path: this.path,
-            ...settings,
-        };
         data =
             __toString(data, {
                 beautify: true,
                 highlight: false,
             }) ?? '';
-        __writeFileSync(set.path, data);
+        __writeFileSync(this.path, data, settings);
         this.update();
     }
 }

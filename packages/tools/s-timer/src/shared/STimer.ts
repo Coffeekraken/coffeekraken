@@ -50,414 +50,418 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class STimer extends __SPromise {
-  /**
-   * @name          _duration
-   * @type          Number
-   * @private
-   *
-   * Store the timer duration wanted
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _duration = 0;
+    /**
+     * @name          _duration
+     * @type          Number
+     * @private
+     *
+     * Store the timer duration wanted
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _duration = 0;
 
-  /**
-   * @name        _remaining
-   * @type        Number
-   * @private
-   *
-   * Store the remaining time
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _remaining = 0;
+    /**
+     * @name        _remaining
+     * @type        Number
+     * @private
+     *
+     * Store the remaining time
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _remaining = 0;
 
-  /**
-   * @name            _tickCount
-   * @type            Number
-   * @private
-   *
-   * How many ticks wanted during the timeout
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _tickCount = null;
+    /**
+     * @name            _tickCount
+     * @type            Number
+     * @private
+     *
+     * How many ticks wanted during the timeout
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _tickCount = null;
 
-  /**
-   * @name          _tickInterval
-   * @type          Number
-   * @private
-   *
-   * Computed value depending on the settings
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _tickInterval = 1000;
+    /**
+     * @name          _tickInterval
+     * @type          Number
+     * @private
+     *
+     * Computed value depending on the settings
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _tickInterval = 1000;
 
-  /**
-   * @name          _tickSetTimeout
-   * @type          Numbee
-   * @private
-   *
-   * Store the setInterval instance
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _tickSetTimeout = null;
+    /**
+     * @name          _tickSetTimeout
+     * @type          Numbee
+     * @private
+     *
+     * Store the setInterval instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _tickSetTimeout = null;
 
-  /**
-   * @name            _startTime
-   * @type            Date
-   * @private
-   *
-   * Store the time when the timer is started
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _startTime = null;
+    /**
+     * @name            _startTime
+     * @type            Date
+     * @private
+     *
+     * Store the time when the timer is started
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _startTime = null;
 
-  /**
-   * @name          _tickTime
-   * @type          Date
-   * @private
-   *
-   * Store the last tick time
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _tickTime = null;
+    /**
+     * @name          _tickTime
+     * @type          Date
+     * @private
+     *
+     * Store the last tick time
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _tickTime = null;
 
-  /**
-   * @name          _pauseTime
-   * @type          Date
-   * @private
-   *
-   * Store the pause time
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _pauseTime = null;
+    /**
+     * @name          _pauseTime
+     * @type          Date
+     * @private
+     *
+     * Store the pause time
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _pauseTime = null;
 
-  /**
-   * @name          constructor
-   * @type          Function
-   *
-   * Constructor
-   *
-   * @param 	{number} 	[duration=1000] 		The duration of the timer. Can be a number of milliseconds of a string time like '1s', '2m', etc...
-   * @param 	{Object} 	settings 		The settings for the timer
-   *
-   * @example         js
-   * import STimer from '@coffeekraken/s-timer';
-   * const timer = new STimer('2m');
-   * timer.onTick(() => {
-   *    // do something...
-   * });
-   * timer.start();
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  constructor(duration, settings = {}) {
-    super(
-      ({ resolve, reject, emit }) => {
-        this.duration = duration;
+    /**
+     * @name          constructor
+     * @type          Function
+     *
+     * Constructor
+     *
+     * @param 	{number} 	[duration=1000] 		The duration of the timer. Can be a number of milliseconds of a string time like '1s', '2m', etc...
+     * @param 	{Object} 	settings 		The settings for the timer
+     *
+     * @example         js
+     * import STimer from '@coffeekraken/s-timer';
+     * const timer = new STimer('2m');
+     * timer.onTick(() => {
+     *    // do something...
+     * });
+     * timer.start();
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    constructor(duration, settings = {}) {
+        super(
+            ({ resolve, reject, emit }) => {
+                this.duration = duration;
 
-        // calculate the tickInterval
-        if (this._settings.tickCount) {
-          this._tickCount = this._settings.tickCount;
-          this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
+                // calculate the tickInterval
+                if (this.settings.tickCount) {
+                    this._tickCount = this.settings.tickCount;
+                    this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
+                } else {
+                    this._tickInterval = __convert(
+                        this.settings.tickInterval,
+                        'ms',
+                    );
+                }
+            },
+            __deepMerge(
+                {
+                    id: 'STimer',
+                    tickInterval: 1000,
+                    tickCount: null,
+                    loop: false,
+                },
+                settings,
+            ),
+        );
+    }
+
+    /**
+     * @name          _tick
+     * @type          Function
+     * @private
+     *
+     * Internal tick function
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _tick() {
+        // save the remaining timeout
+        this._tickTime = new Date();
+
+        // update remaing
+        this._remaining -= this._tickInterval;
+
+        // if we are at the end of the timer
+        if (this.remaining <= 0) {
+            // stop the timer
+            this.stop();
+            // check if need to loop
+            if (this.settings.loop) {
+                this.start();
+            }
+            // loop on each completes functions
+            this.emit('complete', this);
         } else {
-          this._tickInterval = __convert(this._settings.tickInterval, 'ms');
+            // launch another tick
+            clearTimeout(this._tickSetTimeout);
+            this._tickSetTimeout = setTimeout(() => {
+                this._tick();
+            }, this._tickInterval);
         }
-      },
-      __deepMerge(
-        {
-          id: 'STimer',
-          tickInterval: 1000,
-          tickCount: null,
-          loop: false
-        },
-        settings
-      )
-    );
-  }
 
-  /**
-   * @name          _tick
-   * @type          Function
-   * @private
-   *
-   * Internal tick function
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _tick() {
-    // save the remaining timeout
-    this._tickTime = new Date();
-
-    // update remaing
-    this._remaining -= this._tickInterval;
-
-    // if we are at the end of the timer
-    if (this.remaining <= 0) {
-      // stop the timer
-      this.stop();
-      // check if need to loop
-      if (this._settings.loop) {
-        this.start();
-      }
-      // loop on each completes functions
-      this.emit('complete', this);
-    } else {
-      // launch another tick
-      clearTimeout(this._tickSetTimeout);
-      this._tickSetTimeout = setTimeout(() => {
-        this._tick();
-      }, this._tickInterval);
+        // loop on each ticks functions
+        if (this.isStarted()) this.emit('tick', this);
     }
 
-    // loop on each ticks functions
-    if (this.isStarted()) this.emit('tick', this);
-  }
-
-  /**
-   * @name            remaing
-   * @type            Number
-   * @get
-   *
-   * Get the remaining time in ms
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get remaining() {
-    if (!this._startTime) return 0;
-    return this._startTime.getTime() + this._duration - Date.now();
-  }
-
-  /**
-   * @name              duration
-   * @type              Number
-   * @get
-   * @set
-   *
-   * Set or get the duration. Can be a number in milliseconds, or a time string like '1m', '2s', etc...
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  set duration(duration) {
-    duration = __convert(duration, 'ms');
-    this._duration = duration;
-    if (this._tickCount) {
-      this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
-    }
-    // loop on each change duration functions
-    this.emit('duration', this);
-  }
-  get duration() {
-    return this._duration;
-  }
-
-  /**
-   * @name          tickCount
-   * @type          Number
-   * @get
-   * @set
-   *
-   * Set of get the tickCount
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  set tickCount(tickCount) {
-    this._tickCount = tickCount;
-    this._tickInterval = this._duration / this._tickCount;
-
-    // loop on each change tick count functions
-    this.emit('tickCount', this);
-  }
-  get tickCount() {
-    return this._tickCount;
-  }
-
-  /**
-   * @name              percentage
-   * @type              Number
-   * @get
-   *
-   * Get the current timer advancement percentage
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get percentage() {
-    if (!this.isStarted()) return 0;
-    return (100 / this.duration) * (this.duration - this.remaining);
-  }
-
-  /**
-   * @name              reset
-   * @type              Function
-   *
-   * Reset the timer
-   *
-   * @param 	{Boolean} 	start 	If the timer has to start after reseting or not
-   * @return 	{STimer}            The STimer instance
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  reset(start = false) {
-    // stop the timeout
-    clearTimeout(this._tickSetTimeout);
-
-    // reset the different timer elements
-    this._pauseTime = null;
-    this._startTime = null;
-    this._remaining = this._duration;
-
-    // check if need to start again
-    if (start) this.start();
-
-    // loop on each resets functions
-    this.emit('reset', this);
-
-    // maintain chainability
-    return this;
-  }
-
-  /**
-   * @name            start
-   * @type            Function
-   *
-   * Start the timer
-   *
-   * @param         {Number}          [duration=null]           An optional duration for the timer session
-   * @return 	{STimer}      The STimer instance
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  start(duration = null) {
-    // clear the timeout to be sure
-    clearTimeout(this._tickSetTimeout);
-
-    // set the duration
-    if (duration) this.duration = duration;
-
-    // if no tick time
-    if (!this._tickTime) {
-      this._tickTime = new Date();
+    /**
+     * @name            remaing
+     * @type            Number
+     * @get
+     *
+     * Get the remaining time in ms
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get remaining() {
+        if (!this._startTime) return 0;
+        return this._startTime.getTime() + this._duration - Date.now();
     }
 
-    // if is a pausetime
-    // mean that we resume the timer
-    if (this._pauseTime) {
-      // calculate time before new tick
-      const elapsed = this._pauseTime.getTime() - this._tickTime.getTime();
-      const remaining = this._tickInterval - elapsed;
-      clearTimeout(this._tickSetTimeout);
-      this._tickSetTimeout = setTimeout(() => {
-        this._tick();
-      }, remaining);
-
-      // set the start time
-      this._startTime = new Date();
-
-      // reset pauseTime
-      this._pauseTime = null;
-    } else {
-      // save the start time
-      this._startTime = new Date();
-      this._remaining = this._duration;
-
-      // first time tick
-      clearTimeout(this._tickSetTimeout);
-      this._tickSetTimeout = setTimeout(() => {
-        this._tick();
-      }, this._tickInterval);
+    /**
+     * @name              duration
+     * @type              Number
+     * @get
+     * @set
+     *
+     * Set or get the duration. Can be a number in milliseconds, or a time string like '1m', '2s', etc...
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    set duration(duration) {
+        duration = __convert(duration, 'ms');
+        this._duration = duration;
+        if (this._tickCount) {
+            this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
+        }
+        // loop on each change duration functions
+        this.emit('duration', this);
+    }
+    get duration() {
+        return this._duration;
     }
 
-    // loop on each start functions
-    this.emit('start', this);
+    /**
+     * @name          tickCount
+     * @type          Number
+     * @get
+     * @set
+     *
+     * Set of get the tickCount
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    set tickCount(tickCount) {
+        this._tickCount = tickCount;
+        this._tickInterval = this._duration / this._tickCount;
 
-    // maintain chainability
-    return this;
-  }
+        // loop on each change tick count functions
+        this.emit('tickCount', this);
+    }
+    get tickCount() {
+        return this._tickCount;
+    }
 
-  /**
-   * @name            pause
-   * @type            Function
-   *
-   * Pause the timer
-   *
-   * @return 	{STimer}        The STimer instance
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  pause() {
-    // set the pauseTime
-    this._pauseTime = new Date();
+    /**
+     * @name              percentage
+     * @type              Number
+     * @get
+     *
+     * Get the current timer advancement percentage
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get percentage() {
+        if (!this.isStarted()) return 0;
+        return (100 / this.duration) * (this.duration - this.remaining);
+    }
 
-    // clean the interval
-    clearTimeout(this._tickSetTimeout);
+    /**
+     * @name              reset
+     * @type              Function
+     *
+     * Reset the timer
+     *
+     * @param 	{Boolean} 	start 	If the timer has to start after reseting or not
+     * @return 	{STimer}            The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    reset(start = false) {
+        // stop the timeout
+        clearTimeout(this._tickSetTimeout);
 
-    // loop on each pause functions
-    this.emit('pause', this);
+        // reset the different timer elements
+        this._pauseTime = null;
+        this._startTime = null;
+        this._remaining = this._duration;
 
-    // maintain chainability
-    return this;
-  }
+        // check if need to start again
+        if (start) this.start();
 
-  /**
-   * @name              stop
-   * @type              Function
-   *
-   * Stop the timer
-   *
-   * @return 	{STimer}      The STimer instance
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  stop() {
-    // reset
-    this.reset();
+        // loop on each resets functions
+        this.emit('reset', this);
 
-    // loop on each stop functions
-    this.emit('stop', this);
+        // maintain chainability
+        return this;
+    }
 
-    // maintain chainability
-    return this;
-  }
+    /**
+     * @name            start
+     * @type            Function
+     *
+     * Start the timer
+     *
+     * @param         {Number}          [duration=null]           An optional duration for the timer session
+     * @return 	{STimer}      The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    start(duration = null) {
+        // clear the timeout to be sure
+        clearTimeout(this._tickSetTimeout);
 
-  /**
-   * @name            destroy
-   * @type            Function
-   *
-   * Destroy the timer
-   *
-   * @return        {STimer}            The STimer instance
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  destroy() {
-    this.stop();
-    this._completesCallbacks = [];
-    this._ticksCallbacks = [];
+        // set the duration
+        if (duration) this.duration = duration;
 
-    // loop on each destroy functions
-    this.emit('destroy', this);
+        // if no tick time
+        if (!this._tickTime) {
+            this._tickTime = new Date();
+        }
 
-    // maintain chainability
-    return this;
-  }
+        // if is a pausetime
+        // mean that we resume the timer
+        if (this._pauseTime) {
+            // calculate time before new tick
+            const elapsed =
+                this._pauseTime.getTime() - this._tickTime.getTime();
+            const remaining = this._tickInterval - elapsed;
+            clearTimeout(this._tickSetTimeout);
+            this._tickSetTimeout = setTimeout(() => {
+                this._tick();
+            }, remaining);
 
-  /**
-   * @name              isStarted
-   * @type              Function
-   *
-   * Check if the timer is started
-   *
-   * @return          {Boolean}         true if started, false if not
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  isStarted() {
-    return this._startTime && !this._pauseTime;
-  }
+            // set the start time
+            this._startTime = new Date();
+
+            // reset pauseTime
+            this._pauseTime = null;
+        } else {
+            // save the start time
+            this._startTime = new Date();
+            this._remaining = this._duration;
+
+            // first time tick
+            clearTimeout(this._tickSetTimeout);
+            this._tickSetTimeout = setTimeout(() => {
+                this._tick();
+            }, this._tickInterval);
+        }
+
+        // loop on each start functions
+        this.emit('start', this);
+
+        // maintain chainability
+        return this;
+    }
+
+    /**
+     * @name            pause
+     * @type            Function
+     *
+     * Pause the timer
+     *
+     * @return 	{STimer}        The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    pause() {
+        // set the pauseTime
+        this._pauseTime = new Date();
+
+        // clean the interval
+        clearTimeout(this._tickSetTimeout);
+
+        // loop on each pause functions
+        this.emit('pause', this);
+
+        // maintain chainability
+        return this;
+    }
+
+    /**
+     * @name              stop
+     * @type              Function
+     *
+     * Stop the timer
+     *
+     * @return 	{STimer}      The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    stop() {
+        // reset
+        this.reset();
+
+        // loop on each stop functions
+        this.emit('stop', this);
+
+        // maintain chainability
+        return this;
+    }
+
+    /**
+     * @name            destroy
+     * @type            Function
+     *
+     * Destroy the timer
+     *
+     * @return        {STimer}            The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    destroy() {
+        this.stop();
+        this._completesCallbacks = [];
+        this._ticksCallbacks = [];
+
+        // loop on each destroy functions
+        this.emit('destroy', this);
+
+        // maintain chainability
+        return this;
+    }
+
+    /**
+     * @name              isStarted
+     * @type              Function
+     *
+     * Check if the timer is started
+     *
+     * @return          {Boolean}         true if started, false if not
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    isStarted() {
+        return this._startTime && !this._pauseTime;
+    }
 }

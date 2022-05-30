@@ -219,7 +219,7 @@ export default class SGlob extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     resolve(settings: Partial<IResolveGlobSettings> = {}): SFile[] | string[] {
-        settings = __deepMerge(this._settings.glob, settings);
+        settings = __deepMerge(this.settings.glob, settings);
         return SGlob.resolve(this._globs, settings);
     }
 
@@ -243,7 +243,7 @@ export default class SGlob extends __SClass {
         outDir: string;
         settings: Partial<IResolveGlobSettings> = {},
     ): SFile[] | string[] {
-        settings = __deepMerge(this._settings.glob, {}, settings);
+        settings = __deepMerge(this.settings.glob, {}, settings);
         const files = this.resolve(this._globs, settings);
         const copiedFiles: SFile | string[] = [];
         for (let [key, file] of Object.entries(files)) {

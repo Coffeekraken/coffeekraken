@@ -91,7 +91,7 @@ export default class SPostcssBuilder extends __SBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get postcssBuilderSettings(): ISPostcssBuilderSettings {
-        return (<any>this)._settings.postcssBuilder;
+        return (<any>this).settings.postcssBuilder;
     }
 
     /**

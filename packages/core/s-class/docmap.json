@@ -11,15 +11,14 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -56,7 +55,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,17 +73,45 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-class.doc.README": {
+                "id": "@coffeekraken.s-class.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-class.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-class.sugar.js.class.SClass": {
                 "id": "@coffeekraken.s-class.sugar.js.class.SClass",
                 "name": "SClass",
                 "type": "Class",
-                "description": "This class is a simple and effective one that manage the ```_settings``` property\nand some others features that will be documented asap",
+                "description": "This class is a simple and effective one that manage the ```settings``` property\nand some others features that will be documented asap",
                 "namespace": "@coffeekraken.s-class.sugar.js.class",
                 "status": "beta",
                 "example": [
@@ -105,22 +131,10 @@
                 "relPath": "src/shared/SClass.ts",
                 "children": {
                     "metas": {
-                        "id": "eeaef74cf3436c5f04f485796b23c30a6d76ef479de207cd7d8cafb216111348",
+                        "id": "0604db087884d62c853f7cd630289a8be9ade2bea2b3f7fa3f36855e4102b7a3",
                         "name": "metas",
                         "type": "String",
-                        "description": "Access the metas in the ```_settings.metas```",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "formattedname": {
-                        "id": "5b72f59f0a6ed8ce2bc98803b694f292d3f4d02a96294097faf3d2a7b14fde43",
-                        "name": "formattedName",
-                        "type": "String",
-                        "description": "Access the process name and (not the same as a node process name)",
+                        "description": "Access the metas in the ```settings.metas```",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

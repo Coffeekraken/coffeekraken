@@ -108,7 +108,7 @@ $metasOg = ($metas->og) ? $metas->og : ($frontspec->metas->og ? $frontspec->meta
 
     @if ($SUGAR)
         <script>
-            window.SUGAR = {!! json_encode($SUGAR) !!}
+            document.SUGAR = {!! json_encode($SUGAR) !!}
         </script>
     @endif
 

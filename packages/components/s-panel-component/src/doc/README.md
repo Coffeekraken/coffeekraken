@@ -23,6 +23,7 @@ This package expose a simple `SPanelComponent` custom element that you can defin
 -   Framework agnostic. Simply webcomponent.
 -   Fully customizable
 -   Support sides `top`, `right`, `bottom` and `left` as well as `modal`
+-   Responsive props [see more](/doc/components/responsive)
 -   And more...
 
 ## Usage
@@ -67,11 +68,11 @@ Make use of it in your pages:
 </button>
 ```
 
-#### Attributes
+## Attributes
 
 {{> interface namespace='@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-panel-component.js.SPanelComponent)
 

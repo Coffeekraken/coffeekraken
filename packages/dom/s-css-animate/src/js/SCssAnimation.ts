@@ -136,7 +136,7 @@ export default class SCssAnimation extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get cssAnimationSettings(): ISCssAnimationSettings {
-        return (<any>this)._settings.cssAnimation;
+        return (<any>this).settings.cssAnimation;
     }
 
     _currentYoyoTimeout;

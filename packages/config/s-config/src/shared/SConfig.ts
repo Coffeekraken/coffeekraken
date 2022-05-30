@@ -102,7 +102,7 @@ export default class SConfig {
     adapter;
 
     /**
-     * @name             _settings
+     * @name             settings
      * @type              {Object}
      * @private
      *
@@ -110,7 +110,7 @@ export default class SConfig {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _settings = {};
+    settings = {};
 
     /**
      * @name             config
@@ -218,7 +218,7 @@ export default class SConfig {
         this.adapter = adapter;
 
         // save the settings
-        this._settings = __deepMerge(
+        this.settings = __deepMerge(
             {
                 env: {
                     env: __SEnv.get('env') ?? 'development',
@@ -264,7 +264,7 @@ export default class SConfig {
         }
 
         // register the default resolver "[config...]"
-        this._settings.resolvers.unshift({
+        this.settings.resolvers.unshift({
             match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
             resolveDotPath(match, config, path) {
                 if (!match.match(/^\[config\./)) return;
@@ -275,7 +275,7 @@ export default class SConfig {
         });
 
         // register the default resolver "[extends...]"
-        this._settings.resolvers.unshift({
+        this.settings.resolvers.unshift({
             name: 'extends',
             match: /\[extends.[a-zA-Z0-9\.\-_]+\]/gm,
             resolveDotPath(match, config, path) {
@@ -310,19 +310,18 @@ export default class SConfig {
             },
         });
 
-        // let timeout;
-        // if (!adapterObj.instance._settings.onUpdate) {
-        //     adapterObj.instance._settings.onUpdate = () => {
-        //         clearTimeout(timeout);
-        //         timeout = setTimeout(() => {
-        //             // load the updated config
-        //             this.load({
-        //                 adapter: adapterName,
-        //                 isUpdate: true,
-        //             });
-        //         }, this._settings.updateTimeout);
-        //     };
-        // }
+        let timeout;
+        if (!this.adapter.settings.onUpdate) {
+            this.adapter.settings.onUpdate = () => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    // load the updated config
+                    this.load({
+                        isUpdate: true,
+                    });
+                }, this.settings.updateTimeout);
+            };
+        }
     }
 
     /**
@@ -331,7 +330,7 @@ export default class SConfig {
      *
      * Load the config from the default adapter or from the passed adapter
      *
-     * @param           {String}            [adapter=this._settings.defaultAdapter]         The adapter to use to load the config
+     * @param           {String}            [adapter=this.settings.defaultAdapter]         The adapter to use to load the config
      * @return          {Promise}                                                           A promise that will be resolved with the loaded config
      *
      * @example           js
@@ -351,7 +350,7 @@ export default class SConfig {
         this.integrity = await this.adapter.integrity();
 
         // check for cache first
-        // if (this._settings.cache && !finalSettings.isUpdate) {
+        // if (this.settings.cache && !finalSettings.isUpdate) {
         //     const cachedConfigObj = await this.fromCache();
         //     if (cachedConfigObj?.integrity === this.integrity) {
         //         this.config = cachedConfigObj.config;
@@ -360,11 +359,11 @@ export default class SConfig {
         // }
 
         // normal loading otherwise
-        const loadedConfig = await this.adapter.load(
-            finalSettings.isUpdate,
-            this._settings.env,
-            this.config,
-        );
+        const loadedConfig = await this.adapter.load({
+            clearCache: finalSettings.isUpdate,
+            env: this.settings.env,
+            config: this.config,
+        });
 
         Object.keys(loadedConfig).forEach((configId) => {
             if (!loadedConfig[configId]) return;
@@ -443,7 +442,7 @@ export default class SConfig {
                     configKey
                 ] = await this.constructor._registeredPreprocesses[this.id][
                     configKey
-                ](this._settings.env, this.config[configKey], this.config);
+                ](this.settings.env, this.config[configKey], this.config);
             }
         }
 
@@ -458,7 +457,7 @@ export default class SConfig {
         // resolve environment properties like @dev
         this._resolveEnvironments();
 
-        this._settings.resolvers.forEach((resolverObj) => {
+        this.settings.resolvers.forEach((resolverObj) => {
             this._resolveInternalReferences(resolverObj);
         });
 
@@ -490,7 +489,7 @@ export default class SConfig {
                     configKey
                 ] = await this.constructor._registeredPostprocess[this.id][
                     configKey
-                ](this._settings.env, this.config[configKey], this.config);
+                ](this.settings.env, this.config[configKey], this.config);
             }
         }
 
@@ -510,7 +509,7 @@ export default class SConfig {
         // @TODO        Support prop resolving
         // __deepMap(this.config, ({ object, prop, value, path }) => {
         //     if (path.match(/\[.*\]/)) {
-        //         this._settings.resolvers.forEach((resolverObj) => {
+        //         this.settings.resolvers.forEach((resolverObj) => {
         //             const matches = path.match(resolverObj.match);
 
         //             if (matches && matches.length) {
@@ -559,7 +558,7 @@ export default class SConfig {
                 if (!__fs.existsSync(folderPath)) return resolve();
                 const jsonStr = __fs
                     .readFileSync(
-                        `${folderPath}/${this.id}.${this._settings.env.env}.${this._settings.env.platform}.json`,
+                        `${folderPath}/${this.id}.${this.settings.env.env}.${this.settings.env.platform}.json`,
                     )
                     .toString();
                 if (!jsonStr) return resolve();
@@ -597,7 +596,7 @@ export default class SConfig {
                 const folderPath = `${__packageRoot.default()}/.local/cache/config`;
                 __fs.mkdirSync(folderPath, { recursive: true });
                 __fs.writeFileSync(
-                    `${folderPath}/${this.id}.${this._settings.env.env}.${this._settings.env.platform}.json`,
+                    `${folderPath}/${this.id}.${this.settings.env.env}.${this.settings.env.platform}.json`,
                     JSON.stringify(
                         {
                             integrity:
@@ -611,7 +610,7 @@ export default class SConfig {
                     ),
                 );
                 resolve(
-                    `${folderPath}/${this.id}.${this._settings.env.env}.${this._settings.env.platform}.json`,
+                    `${folderPath}/${this.id}.${this.settings.env.env}.${this.settings.env.platform}.json`,
                 );
             } else {
             }
@@ -645,8 +644,8 @@ export default class SConfig {
             const p = path.slice(0, path.indexOf('...'));
             const parentObj = __get(this.config, p);
 
-            for (let i = 0; i < this._settings.resolvers.length; i++) {
-                const resolver = this._settings.resolvers[i];
+            for (let i = 0; i < this.settings.resolvers.length; i++) {
+                const resolver = this.settings.resolvers[i];
                 if (!resolver.resolveDotPath) continue;
                 const dotPath = resolver.resolveDotPath(
                     parentObj['...'],
@@ -738,7 +737,7 @@ export default class SConfig {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get(path, settings = {}, _level = 0) {
-        settings = __deepMerge(this._settings, settings);
+        settings = __deepMerge(this.settings, settings);
 
         if (Object.keys(this.config).length === 0) {
             throw new Error(

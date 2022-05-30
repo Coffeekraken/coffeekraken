@@ -58,7 +58,7 @@ export default class SDashboard extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get dashboardSettings(): ISDashboardSettings {
-        return (<any>this)._settings.dashboard;
+        return (<any>this).settings.dashboard;
     }
 
     /**

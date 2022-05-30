@@ -27,7 +27,7 @@ import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/check
 export default class SDataHandlerGeneric {
     static extensions = ['js', 'json'];
     static handle(filePath) {
-        return new __SPromise(({ resolve, reject }) => {
+        return new __SPromise(async ({ resolve, reject }) => {
             const extension = __extension(filePath),
                 filePathWithoutExtension = filePath.replace(
                     `.${extension}`,
@@ -42,7 +42,8 @@ export default class SDataHandlerGeneric {
             switch (__extension(dataFilePath)) {
                 case 'js':
                 case 'json':
-                    return resolve(__SDataHandlerJs.handle(dataFilePath));
+                    const res = await __SDataHandlerJs.handle(dataFilePath);
+                    return resolve(res);
                     break;
             }
 

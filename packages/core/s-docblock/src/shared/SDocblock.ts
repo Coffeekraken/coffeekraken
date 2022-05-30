@@ -107,7 +107,7 @@ class SDocblock extends __SClass implements ISDocblock {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com>
      */
     get docblockSettings(): ISDocblockSettings {
-        return (<any>this._settings).docblock;
+        return (<any>this.settings).docblock;
     }
 
     /**
@@ -146,9 +146,6 @@ class SDocblock extends __SClass implements ISDocblock {
                         filePath: null,
                         renderMarkdown: false,
                         markedOptions: {},
-                        to: {
-                            // markdown: __markdown
-                        },
                     },
                 },
                 settings || {},

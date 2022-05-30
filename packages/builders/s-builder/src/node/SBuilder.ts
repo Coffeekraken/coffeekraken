@@ -59,7 +59,7 @@ class SBuilder extends __SClass implements ISBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get builderSettings(): any {
-        return (<any>this)._settings.builder;
+        return (<any>this).settings.builder;
     }
 
     /**

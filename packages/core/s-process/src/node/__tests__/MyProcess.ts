@@ -30,10 +30,6 @@ class MyInterface extends __SInterface {
 
 // @ts-ignore
 export default class MyProcess extends __SProcess {
-    static interfaces = {
-        params: MyInterface,
-    };
-
     constructor(initialParams?, settings = {}) {
         super(initialParams, settings);
     }

@@ -6,12 +6,12 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __diff from '@coffeekraken/sugar/shared/object/diff';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
-import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
+import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __path from 'path';
 import * as __chokidar from 'chokidar';
-import type { ISConfigEnvObj } from '../../shared/SConfig';
-import __SConfig from '../../shared/SConfig';
+import type { ISConfigEnvObj } from '@coffeekraken/s-config';
+import __SConfig from '@coffeekraken/s-config';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
@@ -21,7 +21,7 @@ import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmp';
 
 /**
  * @name                  SConfigFolderAdapter
- * @namespace           s-config.node.adapters
+ * @namespace           node
  * @type                  Class
  * @status              beta
  *
@@ -31,7 +31,7 @@ import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmp';
  *
  * @param                   {Object}                   [settings={}]         The adapter settings that let you work with the good data storage solution...
  * - name (null) {String}: This specify the config name that you want to use.
- * - fileName ('[name].config.js') {String}: Specify the fileName to use for the file that will store the configs
+ * - fileName ('%name.config.js') {String}: Specify the fileName to use for the file that will store the configs
  * - defaultConfigPath (null) {String}: This specify the path to the "default" config file.
  * - repoConfigPath (${process.cwd()}/[fileName]) {String}: This specify the path to the "app" config file
  * - userConfigPath (${__localDir()}/[fileName]) {String}: This specify the path to the "user" config file
@@ -48,7 +48,6 @@ import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmp';
 export interface ISConfigFolderAdapterScopesSettings {
     default: string[];
     module: string[];
-    extends: string[];
     repo: string[];
     package: string[];
     user: string[];
@@ -67,7 +66,7 @@ export interface ISConfigFolderAdapterCtorSettings {
 
 export default class SConfigFolderAdapter extends __SConfigAdapter {
     get configFolderAdapterSettings(): ISConfigFolderAdapterSettings {
-        return (<any>this)._settings.configFolderAdapter;
+        return (<any>this).settings.configFolderAdapter;
     }
 
     _scopedSettings: any = {};
@@ -79,28 +78,27 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
             __deepMerge(
                 {
                     configFolderAdapter: {
-                        fileName: '[name].config.js',
+                        fileName: '%name.config.js',
                         folderName: '.sugar',
                         scopes: {
                             default: [
                                 __path.resolve(__dirname(), '../../config'),
                             ],
                             module: [],
-                            extends: [],
                             repo: [
                                 `${__packageRootDir(process.cwd(), {
                                     highest: true,
-                                })}/[folderName]`,
+                                })}/%folderName`,
                             ],
                             package: [
                                 `${__packageRootDir(
                                     process.cwd(),
-                                )}/[folderName]`,
+                                )}/%folderName`,
                             ],
                             user: [
                                 `${__packageRootDir(
                                     process.cwd(),
-                                )}/.local/[folderName]`,
+                                )}/.local/%folderName`,
                             ],
                         },
                         savingScope: 'user',
@@ -108,12 +106,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 },
                 settings || {},
             ),
-        );
-
-        // handle configs
-        this.configFolderAdapterSettings.folderName = this.configFolderAdapterSettings.folderName.replace(
-            '[name]',
-            this.name,
         );
 
         // determine the running format (cjs|esm)
@@ -135,7 +127,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                         (path) => {
                             return __replaceTokens(
                                 path.replace(
-                                    '[folderName]',
+                                    '%folderName',
                                     this.configFolderAdapterSettings.folderName,
                                 ),
                             );
@@ -248,7 +240,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 if (
                     !filePath.includes(
                         this.configFolderAdapterSettings.fileName.replace(
-                            '[name]',
+                            '%name',
                             '',
                         ),
                     )
@@ -286,7 +278,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     typeof importedConfig.postprocess === 'function'
                 ) {
                     __SConfig.registerPostprocess(
-                        this.configAdapterSettings.name,
+                        this.name,
                         configKey,
                         importedConfig.postprocess,
                     );
@@ -297,7 +289,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     typeof importedConfig.preprocess === 'function'
                 ) {
                     __SConfig.registerPreprocess(
-                        this.configAdapterSettings.name,
+                        this.name,
                         configKey,
                         importedConfig.preprocess,
                     );
@@ -308,7 +300,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         return Object.assign({}, configObj);
     }
 
-    async load(clearCache = false, env: ISConfigEnvObj, configObj) {
+    async load({ clearCache, env, config }) {
         try {
             for (
                 let i = 0;
@@ -323,7 +315,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                         scopedFoldersPaths,
                         clearCache,
                         env,
-                        configObj,
+                        config,
                     );
                 }
             }

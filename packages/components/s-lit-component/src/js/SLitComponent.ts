@@ -89,7 +89,7 @@ export default class SLitComponent extends LitElement {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get litComponentSettings(): ISLitComponentSettings {
-        return (<any>this._settings).litComponent;
+        return (<any>this.settings).litComponent;
     }
 
     /**
@@ -105,7 +105,7 @@ export default class SLitComponent extends LitElement {
     constructor(settings: Partial<ISLitComponentCtorSettings> = {}) {
         super();
 
-        this._settings = __deepMerge(
+        this.settings = __deepMerge(
             {
                 componentUtils: {},
                 litComponent: {
@@ -120,10 +120,10 @@ export default class SLitComponent extends LitElement {
 
         this.componentUtils = new __SComponentUtils(this, this.attributes, {
             componentUtils: {
-                ...(this._settings.componentUtils ?? {}),
+                ...(this.settings.componentUtils ?? {}),
                 style:
                     this.constructor.styles?.cssText ??
-                    this._settings.componentUtils?.style ??
+                    this.settings.componentUtils?.style ??
                     '',
             },
         });

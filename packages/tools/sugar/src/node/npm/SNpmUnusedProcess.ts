@@ -61,12 +61,6 @@ export class SNpmUnusedParamsInterface extends _SInterface {
 
 // @ts-ignore
 class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
-    static interfaces = {
-        params: {
-            class: SNpmUnusedParamsInterface,
-        },
-    };
-
     /**
      * @name        constructor
      * @type         Function
@@ -97,14 +91,16 @@ class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     process(
-        params?: ISNpmUnusedProcessParams,
+        params?: Partial<ISNpmUnusedProcessParams>,
         settings?: Partial<ISNpmUnusedProcessSettings>,
     ) {
         return new __SPromise(async ({ resolve, reject, emit }) => {
+            const finalParams = SNpmUnusedParamsInterface.apply(params);
+
             // starting dependencies checking
             const unusedDepJson = await __depCheck(__packageRootDir(), {
                 // @ts-ignore
-                skipMissing: params.skipMissing,
+                skipMissing: finalParams.skipMissing,
             });
 
             // Listing the unused deps
@@ -124,7 +120,7 @@ class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
             }
 
             // @ts-ignore
-            if (!params.skipDev && unusedDepJson.devDependencies) {
+            if (!finalParams.skipDev && unusedDepJson.devDependencies) {
                 unusedDepJson.devDependencies.forEach((dep) => {
                     // get package json
                     const packageJson = __packageJson(dep);

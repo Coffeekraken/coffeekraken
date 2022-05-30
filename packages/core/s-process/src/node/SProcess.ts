@@ -50,13 +50,6 @@ import {
  */
 
 class SProcess extends __SEventEmitter implements ISProcessInternal {
-    static interfaces = {
-        settings: {
-            on: '_settings.process',
-            class: __SProcessSettingsInterface,
-        },
-    };
-
     /**
      * @name      params
      * @type      String
@@ -154,7 +147,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     _processPromise?: __SPromise;
 
     get processSettings(): ISProcessSettings {
-        return (<any>this)._settings.process;
+        return (<any>this).settings.process;
     }
 
     /**
@@ -336,7 +329,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         super(
             <ISEventEmitterConstructorSettings>__deepMerge(
                 {
-                    process: {},
+                    // @ts-ignore
+                    process: __SProcessSettingsInterface.defaults(),
                 },
                 settings ?? {},
             ),
@@ -346,12 +340,12 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         this.initialParams = Object.assign({}, initialParams ?? {});
 
         // get the definition from interface or settings
-        this.paramsInterface = this.processSettings.interface;
-        if (!this.paramsInterface) {
-            this.paramsInterface =
-                (<any>this).constructor.interface ??
-                this.getInterface('params');
-        }
+        // this.paramsInterface = this.processSettings.interface;
+        // if (!this.paramsInterface) {
+        //     this.paramsInterface =
+        //         (<any>this).constructor.interface ??
+        //         this.getInterface('params');
+        // }
 
         // handle process exit
         __onProcessExit(async (state) => {
@@ -506,28 +500,31 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             ? paramsOrStringArgs
             : {};
 
-        if (this.paramsInterface) {
-            paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
-                baseObj: this.initialParams ?? {},
-            });
-        }
+        // if (this.paramsInterface) {
+        //     paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
+        //         baseObj: this.initialParams ?? {},
+        //     });
+        // }
 
         // check if asking for the help
-        if (paramsObj.help === true && this.paramsInterface !== undefined) {
-            const helpString = this.paramsInterface.render();
-            this.emit('log', {
-                group: `s-process-${this.metas.id}`,
-                value: helpString,
-            });
-            return;
-        }
+        // if (paramsObj.help === true && this.paramsInterface !== undefined) {
+        //     const helpString = this.paramsInterface.render();
+        //     this.emit('log', {
+        //         group: `s-process-${this.metas.id}`,
+        //         value: helpString,
+        //     });
+        //     return;
+        // }
 
         // save current process params
-        this._params = Object.assign({}, paramsObj);
+        this._params = Object.assign(
+            {},
+            __deepMerge(this.initialParams ?? {}, paramsObj),
+        );
 
         // add params in the current execution object
         // @ts-ignore
-        this.currentExecutionObj.params = Object.assign({}, paramsObj);
+        this.currentExecutionObj.params = Object.assign({}, this._params);
 
         // update state
         this.state('running');
@@ -544,12 +541,13 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                 )} [arguments]`,
                 {
                     ...this._params,
-                    _settings: processSettings,
+                    settings: processSettings,
                 },
                 {
                     keepFalsy: true,
                 },
             );
+
             // run child process
             this._processPromise = __spawn(commandToRun, [], {
                 ...(processSettings.spawnSettings || {}),

@@ -105,7 +105,7 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     public get processPipeSettings() {
-        return (<any>this)._settings.processPipe;
+        return (<any>this).settings.processPipe;
     }
 
     /**

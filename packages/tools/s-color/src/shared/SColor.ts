@@ -287,7 +287,7 @@ class SColor extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get colorSettings(): ISColorSettings {
-        return (<any>this)._settings.color;
+        return (<any>this).settings.color;
     }
 
     /**

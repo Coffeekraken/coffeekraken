@@ -121,7 +121,7 @@ export interface ISEventEmitterSettings {
 
 export interface ISEventEmitterCtor {}
 export interface ISEventEmitter extends ISClass {
-    _settings: ISEventEmitterInstanceSettings;
+    settings: ISEventEmitterInstanceSettings;
     _buffer: ISEventEmitterEventObj[];
     _eventsStacks: ISEventEmitterEventsStacks;
     eventEmitterSettings: ISEventEmitterSettings;
@@ -353,7 +353,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     _onStackById: any = {};
 
     // @ts-ignore
-    _settings: ISEventEmitterConstructorSettings;
+    settings: ISEventEmitterConstructorSettings;
 
     /**
      * @name            eventEmitterSettings
@@ -366,7 +366,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get eventEmitterSettings(): ISEventEmitterSettings {
-        return (<any>this)._settings.eventEmitter;
+        return (<any>this).settings.eventEmitter;
     }
 
     /**

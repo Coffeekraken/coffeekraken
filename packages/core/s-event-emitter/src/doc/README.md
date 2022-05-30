@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -18,13 +18,13 @@
 
 This package gives you access to a simple and powerful **events system** class. This events system gives you features like:
 
-- **Emit** events
-- **Subscribe** to events
-- **Filter** events
-- **Inter process events** using [node-ipc](https://www.npmjs.com/package/node-ipc)
-- **Pipe** events to another emitter capable instance
-- **Miniatch** event name subscription
-- And more...
+-   **Emit** events
+-   **Subscribe** to events
+-   **Filter** events
+-   **Inter process events** using [node-ipc](https://www.npmjs.com/package/node-ipc)
+-   **Pipe** events to another emitter capable instance
+-   **Miniatch** event name subscription
+-   And more...
 
 ## Usage
 

@@ -125,7 +125,7 @@ export default class SRequest extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get requestSettings(): ISRequestSettings {
-        return (<any>this)._settings.request;
+        return (<any>this).settings.request;
     }
 
     /**
@@ -356,8 +356,8 @@ export default class SRequest extends __SClass {
         // return a promise
         return new Promise((resolve, reject) => {
             // // check if a cache exist and if we have the content
-            // if (this._settings.cache) {
-            //   const response = this._settings.cache.get(this._defaultRequestParams.url);
+            // if (this.settings.cache) {
+            //   const response = this.settings.cache.get(this._defaultRequestParams.url);
             //   if (response) {
             //     resolve(response);
             //     return;

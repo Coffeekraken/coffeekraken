@@ -254,7 +254,7 @@ export default class SBench extends __SPromise {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get benchSettings(): ISBenchSettings {
-        return (<any>this._settings).bench;
+        return (<any>this.settings).bench;
     }
 
     /**

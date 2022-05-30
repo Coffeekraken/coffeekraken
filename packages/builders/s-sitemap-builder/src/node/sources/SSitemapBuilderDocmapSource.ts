@@ -54,7 +54,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      */
     get sitemapDocmapSourceSettings(): ISSitemapBuilderDocmapSourceSettings {
         // @ts-ignore
-        return (<any>this)._settings[this.constructor.settingsId] ?? {};
+        return (<any>this).settings[this.constructor.settingsId] ?? {};
     }
 
     /**

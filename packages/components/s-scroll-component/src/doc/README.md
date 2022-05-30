@@ -23,6 +23,7 @@ This package expose a simple `SScrollComponent` custom element that you can defi
 -   Framework agnostic. Simply webcomponent.
 -   Fully customizable
 -   Support `top`, `bottom` and css selector to scroll to any element in the page
+-   Responsive props [see more](/doc/components/responsive)
 -   And more...
 
 ## Usage
@@ -42,11 +43,11 @@ Make use of it in your pages:
 </s-scroll>
 ```
 
-#### Attributes
+## Attributes
 
 {{> interface namespace='@coffeekraken.s-scroll-component.js.interface.SScrollComponentInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-scroll-component.js.SScrollComponent)
 

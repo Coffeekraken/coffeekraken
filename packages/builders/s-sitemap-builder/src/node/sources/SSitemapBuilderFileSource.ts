@@ -55,7 +55,7 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
      */
     get sitemapFileSourceSettings(): ISSitemapBuilderFileSourceSettings {
         // @ts-ignore
-        return (<any>this)._settings[this.constructor.settingsId] ?? {};
+        return (<any>this).settings[this.constructor.settingsId] ?? {};
     }
 
     /**

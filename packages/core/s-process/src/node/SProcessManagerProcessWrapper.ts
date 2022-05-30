@@ -68,7 +68,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get initialParams() {
-        return Object.assign({}, this._settings.initialParams);
+        return Object.assign({}, this.settings.initialParams);
     }
 
     /**
@@ -93,7 +93,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get processManagerProcessSettings(): ISProcessManagerProcessWrapperSettings {
-        return (<any>this)._settings.processManagerProcess;
+        return (<any>this).settings.processManagerProcess;
     }
 
     _isDetached = false;

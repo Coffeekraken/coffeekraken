@@ -23,6 +23,8 @@ This package expose a simple `SClipboardCopyComponent` custom element that you c
 -   Framework agnostic. Simply webcomponent.
 -   Set a "from" target that will be copied in the clipboard on click
 -   Default icons for "copy", "copied", and "error"
+-   Responsive props [see more](/doc/components/responsive)
+-   And more...
 
 ## Usage
 
@@ -40,11 +42,11 @@ Make use of it in your pages:
 <s-clipboard-copy from="my-input"></s-clipboard-copy>
 ```
 
-#### Attributes
+## Attributes
 
 {{> interface namespace='@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-clipboard-copy-component.js.SClipboardCopyComponent)
 

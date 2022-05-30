@@ -94,7 +94,7 @@ class SProcessManager extends __SEventEmitter {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get processManagerSettings(): ISProcessManageSettings {
-        return (<any>this)._settings.processManager;
+        return (<any>this).settings.processManager;
     }
 
     /**

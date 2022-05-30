@@ -286,7 +286,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get stdioSettings(): ISStdioSettings {
-        return (<any>this)._settings.stdio;
+        return (<any>this).settings.stdio;
     }
 
     /**
@@ -411,7 +411,7 @@ export default class SStdio extends __SClass implements ISStdio {
      */
     registerSource(source, settings?: Partial<ISStdioSettings>) {
         const set = (<ISStdioSettings>(
-            __deepMerge(this._settings.stdio || {}, settings ?? {})
+            __deepMerge(this.settings.stdio || {}, settings ?? {})
         )) as ISStdioSettings;
         // subscribe to data
 

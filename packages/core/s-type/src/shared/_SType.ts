@@ -98,7 +98,7 @@ export interface ISTypeCtor {
     registerType: ISTypeRegisterStaticFn;
 }
 export interface ISType {
-    _settings: ISTypeSettings;
+    settings: ISTypeSettings;
     typeString: string;
     types: IParseTypeStringResultObj[];
     name: string;
@@ -108,7 +108,7 @@ export interface ISType {
 
 class SType implements ISType {
     /**
-     * @name        _settings
+     * @name        settings
      * @type        ISTypeSettings
      * @private
      *
@@ -117,7 +117,7 @@ class SType implements ISType {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _settings: ISTypeSettings;
+    settings: ISTypeSettings;
 
     /**
      * @name      typeString
@@ -225,7 +225,7 @@ class SType implements ISType {
         // parse the typeString
         this.types = __parseTypeString(typeString);
         // save the settings
-        this._settings = __deepMerge(
+        this.settings = __deepMerge(
             {
                 id: this.constructor.name,
                 name: this.constructor.name,
@@ -278,7 +278,7 @@ class SType implements ISType {
      * @author    Olivier Bossel <olivier.bossel@gmail.com>
      */
     check(value: any, settings: ISTypeSettings = {}): boolean | __STypeResult {
-        settings = __deepMerge(this._settings, settings);
+        settings = __deepMerge(this.settings, settings);
 
         const issues = {};
 
@@ -398,7 +398,7 @@ class SType implements ISType {
      * @author    Olivier Bossel <olivier.bossel@gmail.com>
      */
     _isType(value: any, type: string, settings: ISTypeSettings = {}): boolean {
-        settings = __deepMerge(this._settings, settings);
+        settings = __deepMerge(this.settings, settings);
 
         // console.log('type', type, settings);
 
@@ -446,7 +446,7 @@ class SType implements ISType {
      * @author    Olivier Bossel <olivier.bossel@gmail.com>
      */
     cast(value: any, params: any, settings: ISTypeSettings): any {
-        settings = __deepMerge(this._settings, settings);
+        settings = __deepMerge(this.settings, settings);
         // store exceptions coming from descriptors
         const verboseObj = {
             value,
@@ -564,7 +564,7 @@ class SType implements ISType {
      * @author    Olivier Bossel <olivier.bossel@gmail.com>
      */
     get name(): string {
-        return this._settings.name;
+        return this.settings.name;
     }
 
     /**
@@ -578,7 +578,7 @@ class SType implements ISType {
      * @author    Olivier Bossel <olivier.bossel@gmail.com>
      */
     get id(): string {
-        return this._settings.id;
+        return this.settings.id;
     }
 }
 

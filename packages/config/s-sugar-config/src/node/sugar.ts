@@ -1,10 +1,8 @@
 // @ts-nocheck
 
 import __SClass from '@coffeekraken/s-class';
-import __SConfig, {
-    ISConfigEnvObj,
-    SConfigFolderAdapter,
-} from '@coffeekraken/s-config';
+import __SConfig, { ISConfigEnvObj } from '@coffeekraken/s-config';
+import __SConfigFolderAdapter from '@coffeekraken/s-config-folder-adapter';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
@@ -459,7 +457,7 @@ export default class SSugarConfig extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sugarConfigSettings(): ISSugarConfigSettings {
-        return this._settings.sugarConfig;
+        return this.settings.sugarConfig;
     }
 
     /**
@@ -603,13 +601,13 @@ export default class SSugarConfig extends __SClass {
             await this.constructor._searchConfigFiles();
         }
 
-        const configFsAdapter = new SConfigFolderAdapter({
+        const configFolderAdapter = new __SConfigFolderAdapter({
             configAdapter: {
                 name: 'sugar',
             },
             configFolderAdapter: {
                 folderName: '.sugar',
-                fileName: '[name].config.js',
+                fileName: '%name.config.js',
                 scopes: {
                     default: [
                         __path.resolve(__dirname(), '../config'),
@@ -630,21 +628,21 @@ export default class SSugarConfig extends __SClass {
                     repo: [
                         `${__packageRoot(process.cwd(), {
                             highest: true,
-                        })}/[folderName]`,
+                        })}/%folderName`,
                         // @ts-ignore
                         ...this.constructor._registeredConfigFolderPaths
                             .filter((obj) => obj.scope === 'repo')
                             .map((obj) => obj.path),
                     ],
                     package: [
-                        `${__packageRoot(process.cwd())}/[folderName]`,
+                        `${__packageRoot(process.cwd())}/%folderName`,
                         // @ts-ignore
                         ...this.constructor._registeredConfigFolderPaths
                             .filter((obj) => obj.scope === 'package')
                             .map((obj) => obj.path),
                     ],
                     user: [
-                        `${__packageRoot(process.cwd())}/.local/[folderName]`,
+                        `${__packageRoot(process.cwd())}/.local/%folderName`,
                         // @ts-ignore
                         ...this.constructor._registeredConfigFolderPaths
                             .filter((obj) => obj.scope === 'user')
@@ -654,7 +652,7 @@ export default class SSugarConfig extends __SClass {
             },
         });
 
-        this._configInstance = new __SConfig('sugar', configFsAdapter, {
+        this._configInstance = new __SConfig('sugar', configFolderAdapter, {
             env: {
                 env: settings.env,
                 platform: settings.platform,

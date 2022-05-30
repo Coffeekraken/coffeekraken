@@ -410,7 +410,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get viewRendererSettings(): ISViewRendererSettings {
-        return (<any>this)._settings.viewRenderer;
+        return (<any>this).settings.viewRenderer;
     }
 
     /**

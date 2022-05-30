@@ -56,7 +56,7 @@ class SWebsocketStdio extends __SStdio implements ISWebsocketStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get websocketStdioSettings(): ISWebsocketStdioSettings {
-        return (<any>this)._settings.websocketStdio;
+        return (<any>this).settings.websocketStdio;
     }
 
     /**

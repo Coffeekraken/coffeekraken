@@ -233,7 +233,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get markdownBuilderSettings(): ISMarkdownBuilderSettings {
-        return (<any>this)._settings.markdownBuilder;
+        return (<any>this).settings.markdownBuilder;
     }
 
     /**

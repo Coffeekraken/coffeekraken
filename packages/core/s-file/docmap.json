@@ -12,15 +12,16 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -56,7 +57,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,7 +75,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -99,12 +98,41 @@
                 "relPath": "src/config/sFile.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-file.sugar.node.fs.SFile": {
-                "id": "@coffeekraken.s-file.sugar.node.fs.SFile",
+            "@coffeekraken.s-file.doc.README": {
+                "id": "@coffeekraken.s-file.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-file.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-file.node.fs.SFile": {
+                "id": "@coffeekraken.s-file.node.fs.SFile",
                 "name": "SFile",
                 "type": "Class",
                 "description": "This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,\nand get access to all the nice meta data like:\n- name: The file name\n- path: The full path to the file\n- cwd: The root directory specified through the settings.cwd property\n- relPath: The relative file path from the cwd\n- dirPath: The path to the folder where is the file\n- extension: The file extension\n- stats: An object with file stats like size in mb, kb, etc...\n- exists: true if the file exists on the disk, false otherwise",
-                "namespace": "@coffeekraken.s-file.sugar.node.fs",
+                "namespace": "@coffeekraken.s-file.node.fs",
                 "status": "beta",
                 "example": [
                     {
@@ -353,7 +381,7 @@
                         }
                     },
                     "watch": {
-                        "id": "2d2c6f534f8a9bb4539707f5af49e6a465fd8b6354352b295c06c63b622c6d3b",
+                        "id": "d5576b0e990adf444d926f41f8f566a64df5d3988edbf6e7b44b23950d76fc6e",
                         "name": "watch",
                         "type": "Function",
                         "description": "This method allows you to start watching the file for events like \"update\", etc...",
@@ -515,6 +543,81 @@
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-file.node.interface.SFileSettingsInterface": {
+                "id": "@coffeekraken.s-file.node.interface.SFileSettingsInterface",
+                "name": "SFileSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe SFile settings",
+                "namespace": "@coffeekraken.s-file.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SFileSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "checkExistence": {
+                            "description": "Specify if the file must exists on the filesystem at the instanciation",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "cwd": {
+                            "description": "Specify the current working directory",
+                            "type": "string",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-file"
+                        },
+                        "shrinkSizeTo": {
+                            "description": "Specify how many decimals to keep for the size",
+                            "type": "number",
+                            "default": 4
+                        },
+                        "watch": {
+                            "description": "Specify if you want to watch the file for changes or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "writeSettings": {
+                            "description": "Specify the write settings (https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options)",
+                            "type": "Object",
+                            "default": {
+                                "encoding": "utf8",
+                                "mode": 1638,
+                                "cast": true
+                            }
+                        },
+                        "readSettings": {
+                            "description": "Specify the read settings (https://nodejs.org/api/fs.html#filehandlereadfileoptions)",
+                            "type": "Object",
+                            "default": {
+                                "encoding": "utf8",
+                                "cast": true
+                            }
+                        },
+                        "processors": {
+                            "description": "Specify some functions to execute on the file content before accessing the \"content\", and saving it \"save\". Each \"content\" and \"save\" property stores an Array of functions that will be executed once after the other",
+                            "type": "Object",
+                            "default": {
+                                "content": [],
+                                "save": []
+                            }
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFileSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SFileSettingsInterface.js",
+                "children": {}
             }
         }
     }

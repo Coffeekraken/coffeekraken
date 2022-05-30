@@ -54,6 +54,12 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 default: 'default',
                 physical: true,
             },
+            responsive: {
+                description:
+                    'Specify some responsive properties. A "media" property is required and has to be either a media query, or a media query name defined in the config.themeMedia.queries theme setting',
+                type: 'Object',
+                default: {},
+            },
         };
     }
 }

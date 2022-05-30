@@ -87,7 +87,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sitemapSettings(): ISSitemapBuilderSettings {
-        return (<any>this)._settings.sitemapBuilder ?? {};
+        return (<any>this).settings.sitemapBuilder ?? {};
     }
 
     /**

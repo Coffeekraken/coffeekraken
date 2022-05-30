@@ -193,7 +193,7 @@ export default class SConductor extends __SClass {
      * @author      Olivier Bossel <olivier.bossel@gmail.com>
      */
     get conductorSettings(): ISConductorSettings {
-        return (this as any)._settings.conductor;
+        return (this as any).settings.conductor;
     }
 
     /**

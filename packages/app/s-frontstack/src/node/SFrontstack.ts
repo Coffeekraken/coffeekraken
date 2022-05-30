@@ -91,10 +91,6 @@ export interface ISFrontstackListParams {
 }
 
 export default class SFrontstack extends __SClass {
-    static interfaces = {
-        startParams: __SFrontstackActionInterface,
-    };
-
     /**
      * @name            frontstackSettings
      * @type            ISFrontstackSettings
@@ -106,7 +102,7 @@ export default class SFrontstack extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get frontstackSettings(): ISFrontstackSettings {
-        return (<any>this)._settings.frontstack;
+        return (<any>this).settings.frontstack;
     }
 
     /**

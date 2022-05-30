@@ -39,7 +39,7 @@ export default class SSitemapBuilderSource extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sitemapSourceSettings(): ISSitemapBuilderSourceSettings {
-        return (<any>this)._settings.sitemapSource ?? {};
+        return (<any>this).settings.sitemapSource ?? {};
     }
 
     /**

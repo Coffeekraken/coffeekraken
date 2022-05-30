@@ -183,7 +183,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get descriptorSettings(): ISDescriptorSettings {
-        return (<any>this)._settings.descriptor;
+        return (<any>this).settings.descriptor;
     }
 
     /**

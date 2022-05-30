@@ -27,8 +27,9 @@ import __set from '@coffeekraken/sugar/shared/object/set';
 import __path from 'path';
 import __SDocmapBuildParamsInterface from './interface/SDocmapBuildParamsInterface';
 import __SDocmapInstallSnapshotParamsInterface from './interface/SDocmapInstallSnapshotParamsInterface';
-import __SDocMapReadParamsInterface from './interface/SDocMapReadParamsInterface';
+import __SDocMapReadParamsInterface from './interface/SDocmapReadParamsInterface';
 import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsInterface';
+import __SDocmapSettingsInterface from './interface/SDocmapSettingsInterface';
 import __chokidar from 'chokidar';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
@@ -162,8 +163,6 @@ export interface ISDocMap {
 }
 
 class SDocMap extends __SClass implements ISDocMap {
-    static interfaces = {};
-
     static _cachedDocmapJson = {};
 
     static _registeredTagsProxy = {};
@@ -219,7 +218,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get docmapSettings(): ISDocMapSettings {
-        return (<any>this._settings).docmap;
+        return (<any>this.settings).docmap;
     }
 
     /**
@@ -239,7 +238,7 @@ class SDocMap extends __SClass implements ISDocMap {
                     metas: {
                         id: 'SDocMap',
                     },
-                    docmap: {
+                    docmap: __SDocmapSettingsInterface.apply({
                         tagsProxy: {},
                         customMenu: {
                             styleguide({ key, value, isObject }) {
@@ -254,7 +253,7 @@ class SDocMap extends __SClass implements ISDocMap {
                                 return false;
                             },
                         },
-                    },
+                    }),
                 },
                 settings || {},
             ),

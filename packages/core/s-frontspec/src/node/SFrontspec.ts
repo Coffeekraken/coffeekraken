@@ -37,9 +37,7 @@ import __SFrontspecAddParamsInterface from './interface/SFrontspecAddParamsInter
  *
  * @example             js
  * import SFrontspec from '@coffeekraken/s-frontspec';
- * const frontspec = new SFrontspec({
- *  outputDir: '/my/cool/directory'
- * });
+ * const frontspec = new SFrontspec();
  * const result = await frontspec.read();
  *
  * @since           2.0.0

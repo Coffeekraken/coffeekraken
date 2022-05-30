@@ -12,15 +12,14 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -57,7 +56,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,7 +73,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -1316,6 +1313,23 @@
                 "extension": "config",
                 "relPath": "src/config/storage.config.ts"
             },
+            "@coffeekraken.s-sugar-config.config.storage.src.configDir": {
+                "id": "@coffeekraken.s-sugar-config.config.storage.src.configDir",
+                "name": "configDir",
+                "type": "String",
+                "default": "[config.storage.src.rootDir]/config",
+                "description": "Configure where is located the config source files",
+                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "storage.config.ts",
+                "extension": "config",
+                "relPath": "src/config/storage.config.ts"
+            },
             "@coffeekraken.s-sugar-config.config.storage.src.docDir": {
                 "id": "@coffeekraken.s-sugar-config.config.storage.src.docDir",
                 "name": "docDir",
@@ -1637,6 +1651,35 @@
                     }
                 }
             },
+            "@coffeekraken.s-sugar-config.doc.README": {
+                "id": "@coffeekraken.s-sugar-config.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-sugar-config.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-sugar-config.js.SSugarConfig": {
                 "id": "@coffeekraken.s-sugar-config.js.SSugarConfig",
                 "name": "SSugarConfig",
@@ -1667,7 +1710,7 @@
                 "relPath": "src/js/sugar.ts",
                 "children": {
                     "get": {
-                        "id": "e0121c7e61a22d7d81e8b655ab943ce5728eeb37a2955e52539ec25bd570c03c",
+                        "id": "723f7a70f501f7dfab142f312460bc2190f491f23e1129dd062b05c0e7207122",
                         "name": "get",
                         "type": "Function",
                         "description": "This static method allows you to access your configurations",
@@ -1831,7 +1874,7 @@
                         }
                     },
                     "todocblocks": {
-                        "id": "65337ecbdca7ad719b7f3bab7454ed372965edd2baeba47d3c749100d8d412cd",
+                        "id": "4b35fb3635749b3650359c1102cc2ba5dec0dbeb8094c77cc8db4bb752e6301a",
                         "name": "toDocblocks",
                         "type": "Function",
                         "description": "This function take a config id as parameter and returns an array of docblocks parsed objects",
@@ -1844,7 +1887,7 @@
                         }
                     },
                     "hash": {
-                        "id": "b4c3fb39b12817a1dd0984f90c618e2a4d2ec7b658f5989e91bfd576dedada89",
+                        "id": "fe2aa035d00035d95409f5766dcd824e09e5cf2947c70edf152889d17249f1f2",
                         "name": "hash",
                         "type": "String",
                         "description": "This hash function gives you access to the actual configuration hash.\nYou can specify a dot path to get the hash of a sub configuration",
@@ -1856,7 +1899,7 @@
                         }
                     },
                     "get": {
-                        "id": "9781ce7ca2d4e6b347a063d15dba42d870f648ca89bd3f0dedfee9f75184cb6b",
+                        "id": "7eeb95172d92394b57bd174a18e88ee00364eeddbe6b179c2b7169efcdf0e8f4",
                         "name": "get",
                         "type": "Function",
                         "description": "This method allows you to get a configuration back by passing a dotpath like \"something.else\"",
@@ -1946,9 +1989,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SCliConfigCacheParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/cli/interface/SCliConfigCacheParamsInterface.ts",
+                "filename": "SCliConfigCacheParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/cli/interface/SCliConfigCacheParamsInterface.js",
                 "children": {}
             }
         }

@@ -14,6 +14,8 @@ import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
+import __STheme from '@coffeekraken/s-theme';
+import __debounce from '@coffeekraken/sugar/shared/function/debounce';
 
 export interface ISComponentUtilsSettings {
     interface?: typeof __SInterface;
@@ -37,6 +39,7 @@ export interface ISComponentUtilsDefaultProps {
     mounted: boolean;
     mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
+    responsive: any;
 }
 
 export default class SComponent extends __SClass {
@@ -49,7 +52,6 @@ export default class SComponent extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    props: any;
 
     /**
      * @name            node
@@ -150,7 +152,7 @@ export default class SComponent extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get componentUtilsSettings(): ISComponentUtilsSettings {
-        return (<any>this._settings).componentUtils;
+        return (<any>this.settings).componentUtils;
     }
 
     _whenMountPromise;
@@ -212,6 +214,69 @@ export default class SComponent extends __SClass {
         // @ts-ignore
         const styleStr = this.componentUtilsSettings.style;
         this.injectStyle(styleStr ?? '');
+
+        // init responsive props
+        this._initResponsiveProps();
+    }
+
+    /**
+     * Check if some <responsive> tags are defined in the component, or if a "responsive" prop exists
+     * to adapt properties depending on the viewport size.
+     */
+    _desktopProps = {};
+    _initResponsiveProps() {
+        if (!Object.keys(this.props.responsive).length) {
+            return;
+        }
+
+        // save the "default" props for reset
+        this._desktopProps = Object.assign({}, this.props);
+
+        // apply on resize
+        window.addEventListener(
+            'resize',
+            __debounce(this._applyResponsiveProps.bind(this), 100),
+        );
+
+        // first apply
+        this._applyResponsiveProps();
+    }
+    _mediaQueries = {};
+    _applyResponsiveProps() {
+        let matchedMedia = [],
+            newProps = {};
+        // search for the good media
+        for (let [media, props] of Object.entries(this.props.responsive)) {
+            // media query name
+            const queries = __STheme.get(`media.queries`),
+                nudeMedia = media.replace(/(<|>|=|\|)/gm, '');
+
+            if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
+                let mediaQuery = this._mediaQueries[media];
+                if (!mediaQuery) {
+                    this._mediaQueries[media] = __STheme.buildMediaQuery(media);
+                    mediaQuery = this._mediaQueries[media];
+                }
+                if (
+                    window.matchMedia(mediaQuery.replace(/^@media\s/, ''))
+                        .matches
+                ) {
+                    Object.assign(newProps, this.props.responsive[media]);
+                    matchedMedia.push(media);
+                }
+            } else {
+                if (window.matchMedia(media).matches) {
+                    Object.assign(newProps, this.props.responsive[media]);
+                    matchedMedia.push(media);
+                }
+            }
+        }
+        // reset props if needed
+        if (!matchedMedia.length) {
+            Object.assign(this.props, this._desktopProps);
+        } else {
+            Object.assign(this.props, newProps);
+        }
     }
 
     /**
@@ -352,7 +417,9 @@ export default class SComponent extends __SClass {
         if (this._finalProps) return this._finalProps;
 
         const props = this._props;
-        let passedProps = {};
+        let passedProps = {
+            responsive: {},
+        };
         if (props.constructor.name === 'NamedNodeMap') {
             Object.keys(props).forEach((key) => {
                 let value;
@@ -368,6 +435,40 @@ export default class SComponent extends __SClass {
         } else {
             j;
             passedProps = props;
+        }
+
+        // check for "<responsive>" tags
+        const $responsives = Array.from(this.node.children).filter(
+            ($child) => $child.tagName === 'RESPONSIVE',
+        );
+        if ($responsives.length) {
+            $responsives.forEach(($responsive) => {
+                const attrs = $responsive.attributes,
+                    responsiveProps = {};
+                let media;
+
+                Object.keys(attrs).forEach((key) => {
+                    let value;
+                    if (attrs[key]?.nodeValue !== undefined) {
+                        if (attrs[key].nodeValue === '') value = true;
+                        else value = attrs[key].nodeValue;
+                    }
+                    if (!value) return;
+
+                    const propName = attrs[key]?.name ?? key;
+                    if (propName === 'media') {
+                        media = value;
+                    } else {
+                        responsiveProps[propName] = value;
+                    }
+                });
+                if (media) {
+                    if (!passedProps.responsive[media]) {
+                        passedProps.responsive[media] = {};
+                    }
+                    passedProps.responsive[media] = responsiveProps;
+                }
+            });
         }
 
         this._finalProps = __deepMerge(

@@ -82,7 +82,7 @@ import __SSliderBehavior from './SSliderBehavior';
  *   </s-slider>
  *
  * @example         html        Simple slider
- * <s-slider controls nav>
+ * <s-slider controls nav responsive='{"mobile":{"lnf":"default-contained"}}'>
  *    <div s-slider-slide class="s-bg--accent">
  *           <h1 class="s-typo:h1">Slide #1</h1>
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
@@ -103,6 +103,7 @@ import __SSliderBehavior from './SSliderBehavior';
  *
  * @example         html        Slideable slider
  * <s-slider behavior="slideable" controls nav>
+ *      <responsive media="tablet" lnf="default-contained"></responsive>
  *    <div s-slider-slide class="s-bg--accent">
  *           <h1 class="s-typo:h1">Slide #1</h1>
  *           <p class="s-typo:lead">Click and drag</p>

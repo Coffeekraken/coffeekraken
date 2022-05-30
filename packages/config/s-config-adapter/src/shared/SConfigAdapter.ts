@@ -1,14 +1,14 @@
-// @ts-nocheck
-
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import type { ISConfigEnvObj } from '@coffeekraken/s-config';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 
 /**
  * @name                                SConfigAdapter
- * @namespace           s-config.shared.adapters
+ * @namespace           shared
  * @type                                Class
  * @status              beta
  *
- * Base class for SCache adapters
+ * Base class for SConfig adapters
  *
  * @todo      interface
  * @todo      doc
@@ -18,15 +18,11 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * class SConfigCoolAdapter extends SConfigAdapter {
  *    constructor(settings = {}) {
  *      super(settings);
- *      // settings are accessible through this._settings
+ *      // settings are accessible through this.settings
  *    }
  *    async load() {
  *      // load the config the way you want and return it in Object format
  *      return {};
- *    }
- *    async save(newConfig) {
- *      // save the newConfig object the way you want and return true when all it ok
- *      return true;
  *    }
  * }
  *
@@ -34,14 +30,32 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ISConfigAdapterCtorSettings {
+    configAdapter: Partial<ISConfigAdapterSettings>;
+}
+
 export interface ISConfigAdapterSettings {
     name: string;
     onUpdate: typeof Function;
 }
 
+export interface ISConfigAdapterLoadParams {
+    clearCache: boolean;
+    env: ISConfigEnvObj;
+    config: any;
+}
+
+export interface ISConfigAdapterLoadFn {
+    (params: ISConfigAdapterLoadParams): Promise<any>;
+}
+
+export interface ISConfigAdapter {
+    load: ISConfigAdapterLoadFn;
+}
+
 export default class SConfigAdapter {
     /**
-     * @name        _settings
+     * @name        settings
      * @type          ISConfigAdapterSettings
      *
      * Access the config adapter settings
@@ -49,10 +63,24 @@ export default class SConfigAdapter {
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _settings: ISConfigAdapterSettings;
+    settings: ISConfigAdapterSettings;
 
     get configAdapterSettings(): ISConfigAdapterSettings {
-        return (<any>this)._settings.configAdapter;
+        return (<any>this).settings.configAdapter;
+    }
+
+    /**
+     * @name            name
+     * @type            String
+     * @get
+     *
+     * Access the adapter name. You can specify it through settings.configAdapter.name, otherwise it will be a randon string generated
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get name(): string {
+        return this.configAdapterSettings.name;
     }
 
     /**
@@ -68,12 +96,14 @@ export default class SConfigAdapter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings: Partial<ISConfigAdapterCtorSettings>) {
-        this._settings = __deepMerge(settings || {});
-        if (settings.name && !/^[a-zA-Z0-9_\-:]+$/.test(settings.name)) {
-            throw new Error(
-                `The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`,
-            );
-        }
+        this.settings = __deepMerge(
+            {
+                configAdapter: {
+                    name: `s-config-adapter-${__uniqid()}`,
+                },
+            },
+            settings ?? {},
+        );
     }
 
     /**
@@ -87,34 +117,27 @@ export default class SConfigAdapter {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _updatesTimeoutsStack = {};
-    update(identifier: string): void {
+    _updateTimeout;
+    update(): void {
         // calling the "onUpdate" setting callback if exists
-        clearTimeout(this._updatesTimeoutsStack[identifier]);
-        this._updatesTimeoutsStack[identifier] = setTimeout(() => {
-            if (!this._settings.onUpdate) return;
-            this._settings.onUpdate();
+        clearTimeout(this._updateTimeout);
+        this._updateTimeout = setTimeout(() => {
+            this.settings.onUpdate?.();
         }, 50);
     }
 
     /**
-     * @name                  name
-     * @type                  String
-     * @get
+     * @name        load
+     * @type        Function
      *
-     * Access the adapter setted name
+     * Function that you have to override in your own adapter to load the configurations
      *
+     * @param      {ISConfigAdapterLoadParams}         params           The parameters passed by the SConfig instance
+     *
+     * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get name() {
-        return this._settings.name;
-    }
-    set name(value) {
-        if (!/^[a-zA-Z0-9_\-:]+$/.test(value)) {
-            throw new Error(
-                `The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`,
-            );
-        }
-        this._settings.name = value;
+    async load(params: ISConfigAdapterLoadParams): Promise<any> {
+        return {};
     }
 }

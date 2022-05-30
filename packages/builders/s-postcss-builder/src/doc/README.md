@@ -68,7 +68,7 @@ await builder.build({
 
 {{> interface namespace='@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderSettingsInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-postcss-builder.node.SPostcssBuilder)
 

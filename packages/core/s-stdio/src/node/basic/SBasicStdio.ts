@@ -57,7 +57,7 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get basicStdioSettings(): ISBasicStdioSettings {
-        return (<any>this)._settings.basicStdio;
+        return (<any>this).settings.basicStdio;
     }
 
     /**

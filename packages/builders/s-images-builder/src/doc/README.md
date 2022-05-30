@@ -66,7 +66,7 @@ await builder.build({});
 
 {{> interface namespace='@coffeekraken.s-images-builder.node.interface.SImagesBuilderSettingsInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-images-builder.node.SImagesBuilder)
 

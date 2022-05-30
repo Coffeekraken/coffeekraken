@@ -25,6 +25,7 @@ This package expose a simple `SCodeExampleComponent` custom element that you can
 -   Out of the box support for `js`, `html`, `css`, `scss`, `php` and `shell`
 -   Possibility to register new languages easily
 -   Support tabs
+-   Responsive props [see more](/doc/components/responsive)
 -   And more...
 
 ## Usage
@@ -47,11 +48,11 @@ Make use of it in your pages:
 </s-code-example>
 ```
 
-#### Attributes
+## Attributes
 
 {{> interface namespace='@coffeekraken.s-code-example-component.js.interface.SCodeExampleComponentInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-code-example-component.js.SCodeExampleComponent)
 

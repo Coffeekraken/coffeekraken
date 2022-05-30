@@ -67,7 +67,7 @@ await builder.build({
 
 {{> interface namespace='@coffeekraken.s-static-builder.node.interface.SStaticBuilderSettingsInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-static-builder.node.SStaticBuilder)
 

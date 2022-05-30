@@ -129,7 +129,6 @@ function processPackage(packageRoot) {
     delete currentJson.main;
     delete currentJson.module;
     delete currentJson.exports;
-    delete currentJson.type;
 
     // merge the json
     const newJson = { ...currentJson, ...json };

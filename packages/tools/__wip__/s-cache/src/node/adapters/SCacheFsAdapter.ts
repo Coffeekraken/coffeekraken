@@ -43,7 +43,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get fsCacheAdapterSettings(): any {
-        return (<any>this)._settings.fsCacheAdapter;
+        return (<any>this).settings.fsCacheAdapter;
     }
 
     /**

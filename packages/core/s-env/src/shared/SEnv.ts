@@ -3,9 +3,9 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 
 // @ts-ignore
-if (!__isNode() && !window.env) {
+if (!__isNode() && !document.env) {
     // @ts-ignore
-    window.env = {
+    document.env = {
         SUGAR: {},
     };
 } else process.env.SUGAR = JSON.stringify({});
@@ -44,7 +44,7 @@ export default class SEnv {
      * @static
      *
      * Store the actual environment variables object. In node it will be process.env, in the browser,
-     * window.env
+     * document.env
      *
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -61,9 +61,9 @@ export default class SEnv {
         } else {
             this._env = {
                 // @ts-ignore
-                ENVIRONMENT: window?.env?.ENV ?? 'development',
+                ENVIRONMENT: document?.env?.ENV ?? 'development',
                 // @ts-ignore
-                ENV: window?.env?.ENV ?? 'development',
+                ENV: document?.env?.ENV ?? 'development',
                 PLATFORM: 'browser',
             };
         }

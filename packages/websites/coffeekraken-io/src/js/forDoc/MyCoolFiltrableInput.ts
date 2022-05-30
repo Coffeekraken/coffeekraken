@@ -10,7 +10,6 @@ export default function () {
                 { title: 'Plop', value: 'Yop' },
             ];
         },
-        onSele
         templates: ({ type, item, html }) => {
             switch (type) {
                 case 'item':

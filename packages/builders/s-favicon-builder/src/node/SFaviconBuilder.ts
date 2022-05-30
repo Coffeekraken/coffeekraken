@@ -96,7 +96,7 @@ export default class SFaviconBuilder extends __SBuilder {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get faviconBuilderSettings(): ISFaviconBuilderSettings {
-        return (<any>this._settings).faviconBuilder;
+        return (<any>this.settings).faviconBuilder;
     }
 
     /**

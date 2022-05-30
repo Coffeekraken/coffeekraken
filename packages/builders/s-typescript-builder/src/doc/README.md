@@ -70,7 +70,7 @@ await builder.build({
 
 {{> interface namespace='@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderSettingsInterface' }}
 
-#### API
+## API
 
 For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-typescript-builder.node.STypescriptBuilder)
 

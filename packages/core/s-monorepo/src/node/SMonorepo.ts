@@ -23,6 +23,7 @@ import __distDir from '@coffeekraken/sugar/node/path/distRootDir';
 import __SMonorepoRunParamsInterface from './interface/SMonorepoRunParamsInterface';
 import __SMonorepoListParamsInteface from './interface/SMonorepoListParamsInterface';
 import __SMonorepoDevParamsInterface from './interface/SMonorepoDevParamsInterface';
+import __SMonorepoSettingsInterface from './interface/SMonorepoSettingsInterface';
 
 /**
  * @name                SMonorepo
@@ -58,8 +59,6 @@ import __SMonorepoDevParamsInterface from './interface/SMonorepoDevParamsInterfa
 export interface ISMonorepoSettings {
     rootDir: string;
     packagesGlobs: string[];
-    filesToUpgrade: string[];
-    manager: 'yarn' | 'npm';
 }
 
 export interface ISMonorepoCtorSettings {
@@ -92,7 +91,8 @@ export interface ISMonorepoDevResult {}
 
 export interface ISMonorepoUpgradeParams {
     packagesGlobs: string;
-    filesToUpgrade: string[];
+    files: string[];
+    fields: string[];
 }
 export interface ISMonorepoUpgradeResult {}
 
@@ -124,9 +124,8 @@ export default class SMonorepo extends __SClass {
         super(
             __deepMerge(
                 {
-                    monorepo: {
-                        ...__SSugarConfig.get('monorepo'),
-                    },
+                    // @ts-ignore
+                    monorepo: __SMonorepoSettingsInterface.defaults(),
                 },
                 settings ?? {},
             ),
@@ -408,7 +407,11 @@ export default class SMonorepo extends __SClass {
                     }
 
                     // exports
-                    const pack = new __SPackage(packageObj.path);
+                    const pack = new __SPackage({
+                        package: {
+                            rootDir: packageObj.path,
+                        },
+                    });
                     pipe(
                         pack.exports({
                             watch: true,
@@ -471,16 +474,19 @@ export default class SMonorepo extends __SClass {
                     type: __SLog.TYPE_INFO,
                     value: `Upgrading <cyan>${files.length}</cyan> packages with these informations:`,
                 });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    marginBottom: 1,
-                    value: [
-                        `- <yellow>Version</yellow>: <cyan>${rootPackageJson.version}</cyan>`,
-                    ].join('\n'),
+
+                finalParams.fields.forEach((field) => {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        marginBottom: 1,
+                        value: [
+                            `- <yellow>${field}</yellow>: <cyan>${rootPackageJson[field]}</cyan>`,
+                        ].join('\n'),
+                    });
                 });
 
                 files.forEach((file) => {
-                    finalParams.filesToUpgrade.forEach((fileName) => {
+                    finalParams.files.forEach((fileName) => {
                         if (!fileName.match(/\.json$/)) {
                             throw new Error(
                                 `Only json files are supported for the upgrade process for now...`,
@@ -489,14 +495,18 @@ export default class SMonorepo extends __SClass {
                         const filePath = `${file.dirPath}/${fileName}`;
                         if (!__fs.existsSync(filePath)) return;
                         const json = __readJsonSync(filePath);
-                        if (json.version === rootPackageJson.version) {
-                            emit('log', {
-                                type: __SLog.TYPE_INFO,
-                                value: `<yellow>${json.name}</yellow> <cyan>${fileName}</cyan> already up to date`,
-                            });
-                            return;
-                        }
-                        json.version = rootPackageJson.version;
+
+                        finalParams.fields.forEach((field) => {
+                            if (json[field] === rootPackageJson[field]) {
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<yellow>${json.name}</yellow> <cyan>${field}</cyan> field already up to date`,
+                                });
+                                return;
+                            }
+                            json[field] = rootPackageJson[field];
+                        });
+
                         __writeJsonSync(filePath, json);
                         emit('log', {
                             type: __SLog.TYPE_INFO,

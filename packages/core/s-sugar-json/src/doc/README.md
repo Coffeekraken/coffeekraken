@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -26,15 +26,16 @@ Here's how to use our implementation:
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 const sugarJson = new __SSugarJson({});
 const filesContents = await sugarJson.read();
+const current = await sugarJson.current();
 const files = await sugarJson.search();
 ```
+
+## Settings
+
+{{> interface namespace='@coffeekraken.s-sugar-json.node.interface.SSugarJsonSettingsInterface' }}
 
 ## API
 
 For more information about the API of this class, please check [our API documentation](/api/@coffeekraken.s-sugar-json.node.SSugarJson)
-
-#### Settings
-
-{{> interface namespace='@coffeekraken.s-sugar-json.node.interface.SSugarJsonSettingsInterface' }}
 
 {{/ layout-readme }}

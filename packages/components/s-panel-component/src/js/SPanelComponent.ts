@@ -189,7 +189,8 @@ export default class SPanel extends __SLitComponent {
 
         // get the initial nodes inside the panel tag
         this._$nodes = Array.from(this.children);
-
+    }
+    async mount() {
         // handle active state at start
         if (this.props.active) {
             this.constructor._activePanels.push(this);

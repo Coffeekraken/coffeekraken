@@ -152,7 +152,7 @@ export default class CkSettings extends __SLitComponent {
                                 class="s-label s-pi:40 s-pb:30"
                                 for="setting-font-size"
                             >
-                                Document font size
+                                Document scale
                                 <s-range
                                     class="s-color:accent"
                                     id="setting-font-size"

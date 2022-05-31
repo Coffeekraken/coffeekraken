@@ -1,0 +1,41 @@
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          wip
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{{#> layout-readme }}
+
+## SDataFileJs
+
+This package expose a simple `SDataFileJs` class that allows you to load data from different file types like `js` and `json`.
+
+## Features
+
+-   Supported file types:
+    -   `.js`: A js file that export a function or directly some data
+    -   `.json`: Simple json file
+-   Nothing more, nothing less...
+
+## Usage
+
+Here's a simple example how to use the SDataFileJs class:
+
+```js
+import __SDataFileJs from '@coffeekraken/s-data-file-js';
+const dataFromJson = await __SDataFileJs.load('/my/cool/file.json');
+```
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-data-file-js.node.SDataFileJs)
+
+{{/ layout-readme }}

@@ -182,7 +182,8 @@ export default class SFiltrableInput extends __SLitComponent {
                 },
             }),
         );
-
+    }
+    async mount() {
         this.state.displayedMaxItems = this.props.maxItems;
 
         if (this.props.items && typeof this.props.items === 'string') {

@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -18,10 +18,10 @@
 
 This `SPromise` class workds like a normal `Promise` but add the `SEventEmitter` capabilities like:
 
-- `emit`: emitting events
-- `on`: subscribe to events
-- `pipe`: pipe events to another `SEventEmitter` instance
-- And more... 
+-   `emit`: emitting events
+-   `on`: subscribe to events
+-   `pipe`: pipe events to another `SEventEmitter` instance
+-   And more...
 
 ## Usage
 
@@ -31,16 +31,16 @@ Here's how to use our implementation:
 import __SPromise from '@coffeekraken/s-promise';
 
 function myInternalProcess() {
-    return new __SPromise(({resolve, reject, emit}) => {
+    return new __SPromise(({ resolve, reject, emit }) => {
         // emitting a log event
         emit('log', {
-            value: 'Something cool'
+            value: 'Something cool',
         });
         resolve();
     });
 }
 function myStartingProcess() {
-    return new __SPromise(async ({resolve, reject, emit, pipe}) => {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         // start internal process AND pipe his events higher
         const promise = pipe(myInternalProcess());
         // listen for logs. Can be any event name you want as well...
@@ -57,12 +57,12 @@ promise.on('log', () => {});
 // etc...
 ```
 
+## Settings
+
+{{> interface namespace='@coffeekraken.s-promise.shared.interface.SPromiseSettingsInterface' }}
+
 ## API
 
 For more information about the API of this class, please check [our API documentation](/api/@coffeekraken.s-promise.shared.SPromise)
-
-#### Settings
-
-{{> interface namespace='@coffeekraken.s-promise.shared.interface.SPromiseSettingsInterface' }}
 
 {{/ layout-readme }}

@@ -12,15 +12,16 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -56,7 +57,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,12 +75,40 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-log.doc.README": {
+                "id": "@coffeekraken.s-log.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-log.doc",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-log.shared.ISLog": {
                 "id": "@coffeekraken.s-log.shared.ISLog",
                 "name": "ISLog",
@@ -177,7 +205,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import __SLog from '@coffeekraken/s-log';\nconst myLog = new __SLog({\n   value: 'Hello world',\n   type: __SLog.TYPE_WARN\n});\n\n// Or thgouth an SPromise emit\nimport __SPromise from '@coffeekraken/s-promise';\nnew __SPromise(({resolve, reject, emit}) => {\n     emit('log', {\n         value: 'Hello world',\n         type: __SLog.TYPE_ERROR\n     });\n});"
+                        "code": "import __SLog from '@coffeekraken/s-log';\nconst myLog = new __SLog({\n   value: 'Hello world',\n   type: __SLog.TYPE_WARN\n});\n\n// Or thgouth an SPromise emit\nimport __SPromise from '@coffeekraken/s-promise';\nnew __SPromise(({resolve, reject, emit}) => {\n     emit('log', {\n         type: __SLog.TYPE_ERROR,\n         value: 'Hello world'\n     });\n});"
                     }
                 ],
                 "since": "2.0.0",

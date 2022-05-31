@@ -19,14 +19,23 @@ if ($firstBlock->status == 'wip') {
 
         <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-            <nav class="sidemenu s-pb:50 @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
+            <nav class="sidemenu @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
 
-                <h5 class="s-typo:h5 s-mbe:30">
-                    Styleguide
-                </h5>
+                <div class="sidemenu-sub">
+                    <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
+                    <div class="s-loader:spinner s-color:accent s-until:sibling:active"></div>
+                </div>
 
-                @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
-                @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview'])
+                <div class="sidemenu-main">
+
+                    <h5 class="s-typo:h5 s-mbe:30">
+                        Styleguide
+                    </h5>
+
+                    @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
+                    @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview'])
+
+                </div>
 
             </nav>
 
@@ -50,6 +59,8 @@ if ($firstBlock->status == 'wip') {
                             $loop->first])
                         @endif
                     @endforeach
+
+                    <ck-doc-sub-nav></ck-doc-sub-nav>
 
                 @endif
 

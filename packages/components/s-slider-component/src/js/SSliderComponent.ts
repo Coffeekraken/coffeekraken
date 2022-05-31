@@ -365,9 +365,6 @@ export default class SSlider extends __SLitComponent {
         this._initNavigation();
 
         // default behavior
-
-        console.log(this.props);
-
         if (this.props.behavior) {
             if (typeof this.props.behavior === 'string') {
                 let behavior;

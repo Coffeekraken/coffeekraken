@@ -127,16 +127,16 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     private _viewExt;
 
     /**
-     * @name      _DataHandlerClass
+     * @name      _DataFileClass
      * @type      String
      * @private
      *
-     * Store the data handler class that fit with the current view
+     * Store the data files class that fit with the current view
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    private _DataHandlerClass;
+    private _DataFileClass;
 
     /**
      * @name      _EngineClass
@@ -176,16 +176,16 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     static engines = {};
 
     /**
-     * @name       dataHandlers
+     * @name       dataFiles
      * @type      Object
      * @static
      *
-     * Store the registered dataHandlers using the ```registerDataHandler``` static method
+     * Store the registered dataFiles using the ```registerDataFiles``` static method
      *
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static dataHandlers = {};
+    static dataFiles = {};
 
     /**
      * @name      defaultRootDirs
@@ -312,20 +312,19 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     }
 
     /**
-     * @name      registerDataHandler
+     * @name      registerDataFiles
      * @type      Function
      * @static
      *
-     * This static method can be used to register a compatible __SViewEngine engine class
-     * into the available SViews engines.
+     * This static method can be used to register some SDataFiles classes
      *
-     * @param       {Class}        DataHandlerClass      The absolute path to the engine class file
+     * @param       {Class}        DataFileClass      The data file class
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static registerDataHandler(
-        DataHandlerClass: string,
+    static registerDataFiles(
+        DataFileClass: string,
         extensions: string | string[],
     ): void {
         // register the engine under each names
@@ -333,9 +332,9 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             ? extensions
             : extensions.split(',').map((l) => l.trim());
         exts.forEach((extension) => {
-            if (SViewRenderer.dataHandlers[extension]) return;
+            if (SViewRenderer.dataFiles[extension]) return;
             // register the engine in the stack
-            SViewRenderer.dataHandlers[extension] = DataHandlerClass;
+            SViewRenderer.dataFiles[extension] = DataFileClass;
         });
     }
 
@@ -455,13 +454,13 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         }
 
         const defaultDataHandlers =
-            __SSugarConfig.get('viewRenderer.dataHandlers') || [];
+            __SSugarConfig.get('viewRenderer.dataFiles') || [];
         for (let i = 0; i < defaultDataHandlers.length; i++) {
             const path = defaultDataHandlers[i];
             // @ts-ignore
-            const { default: DataHandlerClass } = await import(path);
-            DataHandlerClass.extensions.forEach((ext) => {
-                SViewRenderer.registerDataHandler(DataHandlerClass, ext);
+            const { default: DataFileClass } = await import(path);
+            DataFileClass.extensions.forEach((ext) => {
+                SViewRenderer.registerDataFiles(DataFileClass, ext);
             });
         }
 
@@ -529,17 +528,17 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 '',
             );
 
-            // loop on each dataHandlers available
-            Object.keys(SViewRenderer.dataHandlers).forEach((extension) => {
-                if (this._DataHandlerClass) return;
+            // loop on each dataFiles available
+            Object.keys(SViewRenderer.dataFiles).forEach((extension) => {
+                if (this._DataFileClass) return;
                 if (
                     __fs.existsSync(
                         `${viewPathWithoutExtension}.data.${extension}`,
                     )
                 ) {
                     this._dataFilePath = `${viewPathWithoutExtension}.data.${extension}`;
-                    this._DataHandlerClass =
-                        SViewRenderer.dataHandlers[extension];
+                    this._DataFileClass =
+                        SViewRenderer.dataFiles[extension];
                 }
             });
         }
@@ -598,20 +597,20 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 for (let i=0; i<this.viewRendererSettings.sharedData.length; i++) {
                     const dataFilePath = this.viewRendererSettings.sharedData[i];
                     const extension = __extension(dataFilePath);
-                    if (!SViewRenderer.dataHandlers[extension]) {
+                    if (!SViewRenderer.dataFiles[extension]) {
                         throw new Error(
-                            `<red>[render]</red> The extension "${extension}" is not registered as a data handler`,
+                            `<red>[render]</red> The extension "${extension}" is not registered as a data file handler`,
                         );
                     }
-                    const sharedData = await SViewRenderer.dataHandlers[extension].handle(dataFilePath);
+                    const sharedData = await SViewRenderer.dataFiles[extension].load(dataFilePath);
                     if (sharedData) {
                         data = __deepMerge(sharedData, data);
                     }
                 }
             }
 
-            if (this._DataHandlerClass && this._dataFilePath) {
-                const gettedData = await this._DataHandlerClass.handle(
+            if (this._DataFileClass && this._dataFilePath) {
+                const gettedData = await this._DataFileClass.load(
                     this._dataFilePath,
                 );
                 if (gettedData) data = __deepMerge(gettedData, data);

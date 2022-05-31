@@ -18,6 +18,7 @@ import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsI
 import __SPackageAddReadmeParamsInterface from './interface/SPackageAddReadmeParamsInterface';
 import __SPackageAddDefaultScriptsParamsInterface from './interface/SPackageApplyDefaultPackageJsonParamsInterface';
 import __SPackageCheckDependenciesParamsInterface from './interface/SPackageCheckDependenciesParamsInterface';
+import __SPackageSettingsInterface from './interface/SPackageSettingsInterface';
 import __childProcess from 'child_process';
 import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __glob from 'glob';
@@ -114,18 +115,6 @@ export default class SPackage extends __SClass {
     }
 
     /**
-     * @name        rootDir
-     * @type        String
-     * @default     process.cwd()
-     *
-     * Store the package root directory
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    rootDir: string = process.cwd();
-
-    /**
      * @name            constructor
      * @type            Function
      *
@@ -134,21 +123,16 @@ export default class SPackage extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(
-        rootDir: string = process.cwd(),
-        settings?: Partial<ISPackageCtorSettings>,
-    ) {
+    constructor(settings?: Partial<ISPackageCtorSettings>) {
         super(
             __deepMerge(
                 {
-                    package: {
-                        ...__SSugarConfig.get('package'),
-                    },
+                    // @ts-ignore
+                    package: __SPackageSettingsInterface.defaults(),
                 },
                 settings ?? {},
             ),
         );
-        this.rootDir = rootDir;
     }
 
     _exportFiles(
@@ -232,7 +216,9 @@ export default class SPackage extends __SClass {
                 try {
                     currentPackageJson = JSON.parse(
                         __fs
-                            .readFileSync(`${this.rootDir}/package.json`)
+                            .readFileSync(
+                                `${this.packageSettings.rootDir}/package.json`,
+                            )
                             .toString(),
                     );
                 } catch (e) {}
@@ -258,7 +244,7 @@ export default class SPackage extends __SClass {
 
                 // writing new file
                 __fs.writeFileSync(
-                    `${this.rootDir}/package.json`,
+                    `${this.packageSettings.rootDir}/package.json`,
                     JSON.stringify(newPackageJson, null, 4),
                 );
 
@@ -299,7 +285,7 @@ export default class SPackage extends __SClass {
                 });
 
                 const files = __glob.sync(finalParams.glob[0], {
-                    cwd: this.rootDir,
+                    cwd: this.packageSettings.rootDir,
                 });
 
                 if (finalParams.watch) {
@@ -309,7 +295,7 @@ export default class SPackage extends __SClass {
                     });
 
                     const watcher = __chokidar.watch(finalParams.glob, {
-                        cwd: this.rootDir,
+                        cwd: this.packageSettings.rootDir,
                         ignoreInitial: true,
                     });
                     const watcherHandler = (filePath: string) => {
@@ -370,7 +356,7 @@ export default class SPackage extends __SClass {
                     params,
                 );
 
-                const packageRoot = __packageRoot();
+                const packageRoot = this.packageSettings.rootDir;
 
                 if (__fs.existsSync(`${packageRoot}/package.json`)) {
                     const json = JSON.parse(

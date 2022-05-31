@@ -46,6 +46,8 @@ if ($firstBlock->status == 'wip') {
                         @endif
                     @endforeach
 
+                    <ck-doc-sub-nav></ck-doc-sub-nav>
+
                 @endif
 
             </div>

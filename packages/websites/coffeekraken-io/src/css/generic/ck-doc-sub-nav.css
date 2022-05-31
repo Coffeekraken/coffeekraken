@@ -1,0 +1,61 @@
+ck-doc-sub-nav {
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    height: 0;
+    position: absolute;
+
+    &.active {
+        position: relative;
+        opacity: 1;
+        pointer-events: all;
+        overflow: unset;
+        height: auto;
+    }
+}
+
+.ck-doc-sub-nav {
+    border-right: 1px solid sugar.color(accent, --alpha 0.1);
+    padding: sugar.padding(30) sugar.padding(30);
+    background: sugar.color(main, background, --alpha 0.5);
+    /* background: linear-gradient(
+        -75deg,
+        sugar.color(main, background, --alpha 0.7),
+        sugar.color(main, background, --alpha 0.1)
+    ); */
+    @sugar.border.radius (10);
+
+    .__list {
+    }
+    .__list-item {
+        position: relative;
+        padding: sugar.padding(20) sugar.padding(30);
+        display: flex;
+        @sugar.border.radius (10);
+
+        &:hover {
+            background: sugar.color(accent, background);
+            color: sugar.color(accent, foreground);
+        }
+    }
+
+    .__index {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .__title {
+        text-transform: uppercase;
+        line-height: 1.5;
+        flex-grow: 1;
+        display: block;
+        max-width: 35ch;
+        padding-inline-start: sugar.padding(20);
+    }
+
+    /* background: linear-gradient(
+        to bottom,
+        sugar.color(base, background, --darken 20),
+        sugar.color(base, background, --alpha 0 --darken 20)
+    ); */
+}

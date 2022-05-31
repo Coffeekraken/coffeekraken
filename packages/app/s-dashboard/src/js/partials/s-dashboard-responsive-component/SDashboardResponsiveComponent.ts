@@ -20,6 +20,7 @@ export default class SDashboardResponsiveComponent extends __SLitComponent {
         return window.parent?.document ?? document;
     }
 
+    _displayType = 'sugar';
     _mediaConfig;
     _theme;
     _activeQuery;
@@ -75,11 +76,33 @@ export default class SDashboardResponsiveComponent extends __SLitComponent {
                         )}
                     </div>
                     <div class="__details">
-                        <p class="s-typo:code">
-                            ${this._theme.constructor.buildMediaQuery(
-                                this._activeQuery,
-                            )}
-                        </p>
+                        ${this._displayType !== 'sugar'
+                            ? html`
+                                  <p class="s-typo:code">
+                                      ${this._theme.constructor.buildMediaQuery(
+                                          this._activeQuery,
+                                      )}
+                                      {...}
+                                  </p>
+                              `
+                            : html`
+                                  <p class="s-typo:code">
+                                      @sugar.media ${this._activeQuery} {...}
+                                  </p>
+                              `}
+                        <button
+                            class="__switch"
+                            @click=${() => {
+                                if (this._displayType === 'sugar') {
+                                    this._displayType = '';
+                                } else {
+                                    this._displayType = 'sugar';
+                                }
+                                this.requestUpdate();
+                            }}
+                        >
+                            <i class="s-icon:switch"></i>
+                        </button>
                     </div>
                 </div>
             </div>

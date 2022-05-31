@@ -1,0 +1,75 @@
+// @ts-nocheck
+
+import __SPromise from '@coffeekraken/s-promise';
+import __SDataFileJs from '@coffeekraken/s-data-file-js';
+import __extension from '@coffeekraken/sugar/node/fs/extension';
+import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
+
+/**
+ * @name          SDataFileGeneric
+ * @namespace     node
+ * @type          Class
+ * @status              beta
+ *
+ * This class represent the generic data file loader.
+ * It actually regroup all the other data file loader into one single for convinience.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+export default class SDataHandlerGeneric {
+    /**
+     * @name          extensions
+     * @type          String[]
+     * @default         ['js', 'json']
+     * @static
+     *
+     * This static property allow you to define the extensions that the data file loader
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static extensions = ['js', 'json'];
+
+    /**
+     * @name          load
+     * @type          Function
+     * @static
+     *
+     * This static method allows you to actually load a data file
+     *
+     * @param       {String}      filePath      The file path to take care
+     * @return      {SPromise}                  An SPromise instance that will be resolved with the resulting object
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static load(filePath) {
+        return new __SPromise(async ({ resolve, reject }) => {
+            const extension = __extension(filePath),
+                filePathWithoutExtension = filePath.replace(
+                    `.${extension}`,
+                    '',
+                );
+
+            const dataFilePath = __checkPathWithMultipleExtensions(
+                `${filePathWithoutExtension}.${extension}`,
+                SDataHandlerGeneric.extensions,
+            );
+
+            switch (__extension(dataFilePath)) {
+                case 'js':
+                case 'json':
+                    const res = await __SDataFileJs.load(dataFilePath);
+                    return resolve(res);
+                    break;
+            }
+
+            resolve({});
+        });
+    }
+}

@@ -44,8 +44,6 @@ This CLI is the main entry point in the Coffeekraken ecosystem.
 
 ## Usage
 
-## How to start using it?
-
 The main thing is to install it like so:
 
 ```shell

@@ -28,17 +28,32 @@ export default function (env, config) {
          */
         packagesGlobs: ['packages/*/*/package.json'],
 
-        /**
-         * @name        filesToUpgrade
-         * @namespace   config.monorepo
-         * @type       string[]
-         * @default     ['package.json','composer.json']
-         *
-         * Specify some files to upgrade in each packages when doing a monorepo.upgrade call
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        filesToUpgrade: ['package.json', 'composer.json'],
+        upgrade: {
+            /**
+             * @name        files
+             * @namespace   config.monorepo.upgrade
+             * @type       string[]
+             * @default     ['package.json','composer.json']
+             *
+             * Specify some files to upgrade in each packages when doing a monorepo.upgrade call
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            files: ['package.json', 'composer.json'],
+
+            /**
+             * @name        fields
+             * @namespace   config.monorepo.upgrade
+             * @type       string[]
+             * @default     ['package.json','composer.json']
+             *
+             * Specify some files to upgrade in each packages when doing a monorepo.upgrade call
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            fields: ['package.json', 'composer.json'],
+        },
     };
 }

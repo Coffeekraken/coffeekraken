@@ -150,7 +150,8 @@ export default class SCodeExample extends __SLitComponent {
                 },
             }),
         );
-
+    }
+    async mount() {
         const languages = {
             html: __langHtml,
             javascript: __langJavascript,
@@ -168,6 +169,7 @@ export default class SCodeExample extends __SLitComponent {
         });
     }
     async firstUpdated() {
+        // @ts-ignore
         this.$templates = this.querySelectorAll('template,code');
 
         this.$templates.forEach(($template: HTMLElement) => {

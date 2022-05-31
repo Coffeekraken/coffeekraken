@@ -23,13 +23,14 @@ import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-panel-compon
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 
-// features
+// Components
 import { define as __CKBlobComponent } from './components/CkBlob';
 import { define as __CkFallingStarsComponent } from './components/CkFallingStars';
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
 import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
 import { define as __VersionSelector } from './components/VersionSelector';
+import { define as __CKDocSubNavComponent } from './components/CKDocSubNav/CKDocSubNav';
 
 // others
 import __SDashboard from '@coffeekraken/s-dashboard';
@@ -99,6 +100,7 @@ __SConductor.setup({
     // components
     __CKDiscoverComponent();
     __CKSettingsComponent();
+    __CKDocSubNavComponent();
     __SCodeExampleWebcomponent();
     __SFiltrableInputComponent();
     __SSidePanelWebcomponent();

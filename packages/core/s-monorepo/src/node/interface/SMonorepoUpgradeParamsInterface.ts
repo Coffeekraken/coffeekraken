@@ -26,11 +26,17 @@ export default class SMonorepoUpgradeParamsInterface extends __SInterface {
                 type: 'Array<String>',
                 default: __SSugarConfig.get('monorepo.packagesGlobs'),
             },
-            filesToUpgrade: {
+            files: {
                 description:
-                    'Specify some files to upgrade in each packages when doing a monorepo.upgrade call',
-                type: 'Array<String>',
-                default: __SSugarConfig.get('monorepo.filesToUpgrade'),
+                    'Specify the files to upgrade when doing a monorepo.upgrade call.',
+                type: 'String[]',
+                default: __SSugarConfig.get('monorepo.upgrade.files'),
+            },
+            fields: {
+                description:
+                    'Specify the fields to upgrade when doing a monorepo.upgrade call.',
+                type: 'String[]',
+                default: __SSugarConfig.get('monorepo.upgrade.fields'),
             },
         };
     }

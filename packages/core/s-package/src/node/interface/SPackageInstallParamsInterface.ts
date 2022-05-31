@@ -5,7 +5,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name                SPackageInstallParamsInterface
- * @namespace           node.package.interface
+ * @namespace           node.interface
  * @type.                      Class
  * @extends             SInterface
  * @interface

@@ -91,8 +91,9 @@ export default class SActivateFeatureInterface extends __SInterface {
                 default: 0,
             },
             triggerer: {
-                description: 'Specify an element selector that will be used as the triggerer instead of this current element',
-                type: 'String'
+                description:
+                    'Specify an element selector that will be used as the triggerer instead of this current element',
+                type: 'String',
             },
             trigger: {
                 description:
@@ -112,9 +113,10 @@ export default class SActivateFeatureInterface extends __SInterface {
                 default: ['click'],
             },
             unactivateOn: {
-                description: 'Specify some event(s) catched on the body tag that will unactivate the target(s)',
-                type: 'Array<String>'
-            }
+                description:
+                    'Specify some event(s) catched on the body tag that will unactivate the target(s)',
+                type: 'Array<String>',
+            },
         };
     }
 }

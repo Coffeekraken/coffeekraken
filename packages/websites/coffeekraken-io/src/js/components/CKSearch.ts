@@ -259,9 +259,9 @@ export default class CKSearch extends __SLitComponent {
     firstUpdated() {
         this._$input = this.querySelector('input');
 
-        if (document.location.hash) {
-            this, this._handleAnchor(document.location.hash.replace('#', ''));
-        }
+        // if (document.location.hash) {
+        //     this._handleAnchor(document.location.hash.replace('#', ''));
+        // }
 
         __hotkey('ctrl+f').on('press', () => {
             __cursorToEnd(this._$input);

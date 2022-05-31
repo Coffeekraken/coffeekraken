@@ -61,7 +61,7 @@ __sFiltrableInputDefine(
                 const result = await request.send();
                 const json = __xmlToJson(result.data);
 
-                __localStorage.setItem('s-dashboard-pages', json.urlset.url);
+                // __localStorage.setItem('s-dashboard-pages', json.urlset.url);
 
                 return json.urlset.url;
             }
@@ -117,8 +117,6 @@ export default class SDashboardPages extends __SLitComponent {
         this._$filtrableInput = this.querySelector(
             's-dashboard-pages-internal',
         );
-
-        console.log('POPROP', this.settings);
 
         this.addEventListener('s-filtrable-input.items', (e) => {
             this.requestUpdate();

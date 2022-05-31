@@ -27,11 +27,33 @@
         }
     }
 
+    .__details {
+        position: relative;
+    }
+
     .__details .s-typo--code {
         dispaly: block;
         width: 100%;
         line-height: 1.5;
         padding: sugar.padding(30);
         margin-block-start: sugar.margin(20);
+        padding-inline-end: sugar.padding(100);
+    }
+
+    .__switch {
+        position: absolute !important;
+        top: sugar.margin(30);
+        right: sugar.margin(20);
+        padding: 16px;
+        background: sugar.color(base, background);
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @sugar.border.radius (10);
+
+        &:hover {
+            background: sugar.color(accent);
+        }
     }
 }

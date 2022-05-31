@@ -1,0 +1,74 @@
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          wip
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{{#> layout-readme }}
+
+## SLog
+
+This package expose a simple `SLog` class that represent a log message.
+
+## Features
+
+-   Well defined properties like `value`, `type`, `active`, `decorators`, `time`, `timestamp`, etc...
+-   Filter capabilities that specify the `active` property of each logs
+-   Presets for filter like `__SLog.PRESET_ERROR`, etc...
+-   And more...
+
+## Usage
+
+Here's a simple example how to use the SLog class:
+
+```js
+import __SLog from '@coffeekraken/s-log';
+import __SPromise from '@coffeekraken/s-promise';
+
+// create a log instance
+const log = new __SLog({
+    type: __SLog.TYPE_WARN,
+    value: 'Something weird happend...',
+});
+
+// or through the `SPromise` emit method
+new __SPromise(({ resolve, reject, emit }) => {
+    emit('log', {
+        type: __SLog.TYPE_ERROR,
+        value: 'Something goes wrong...',
+    });
+});
+```
+
+## Structure of an SLog object
+
+```js
+export default interface ISLog {
+    hash?: string;
+    decorators?: boolean;
+    time?: boolean;
+    clear?: boolean;
+    temp?: boolean;
+    timestamp?: number;
+    group?: string;
+    margin?: Partial<ISLogMargin>;
+    type?: ISLogType;
+    as?: string;
+    value: any;
+    active?: boolean;
+}
+```
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-log.shared.SLog)
+
+{{/ layout-readme }}

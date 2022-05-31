@@ -12,15 +12,16 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -56,7 +57,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,12 +75,40 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-process.doc.README": {
+                "id": "@coffeekraken.s-process.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-process.doc",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-process.s-process.SCommandProcess": {
                 "id": "@coffeekraken.s-process.s-process.SCommandProcess",
                 "name": "SCommandProcess",
@@ -129,7 +157,7 @@
                         }
                     },
                     "process": {
-                        "id": "97dd4d7cd0d038a578fa621a9d6c81c87b0fcb645464eb842b642064c8eaf2ca",
+                        "id": "13cd0dab8867cbdba89eb5474cea3f9a9fb493de4438700039953074dc63402c",
                         "name": "process",
                         "type": "Function",
                         "description": "Run the actual command through a ```spawn``` call.\nThe spawn function used here is the sugar one stored in \"sugar.node.process.spawn\"",
@@ -489,7 +517,7 @@
                         }
                     },
                     "detachprocess": {
-                        "id": "f26f423038c05e745b0527803c21c80bb0e9a8901f1941f00cc56bb9adae75fc",
+                        "id": "af7059c72fa84b0c7dd53d9dadbb4e134927f5d28656f3123da12f88d81dbdfa",
                         "name": "detachProcess",
                         "type": "Function",
                         "description": "Simple method to detach a process from the manager using his id.",
@@ -606,74 +634,6 @@
                     }
                 }
             },
-            "@coffeekraken.s-process.sugar.node.process.SProcessPipe": {
-                "id": "@coffeekraken.s-process.sugar.node.process.SProcessPipe",
-                "name": "SProcessPipe",
-                "type": "Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allowddffffs you to handle easily some process pipes.\nA process pipe is simply multiple processes that will execute one after\nthe other by passing the params to one after the other\nand will be resolved once all the processes have been executed correctly",
-                "namespace": "@coffeekraken.s-process.sugar.node.process",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SProcess, { SProcessPipe } from '@coffeekraken/s-process';\nclass MyProcess extends SProcess {\n constructor(settings = {}) {\n     super(settings);\n }\n}\nconst processPipe = new SProcessPipe([\n   (params) => {\n     // update params to pass to the next process\n     return params;\n   },\n   new MyProcess()\n]);\nconst res = await processPipe.run({\n   something: 'coco'\n});"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SProcessPipe.ts",
-                "extension": "ts",
-                "relPath": "src/node/SProcessPipe.ts",
-                "children": {
-                    "processpipesettings": {
-                        "id": "959b0fa4e9cf270a0797102fb491478b5cbfa51d5f8cf19d1dcfd28ed1f59d63",
-                        "name": "processPipeSettings",
-                        "type": "ISProcessPipeSettings",
-                        "description": "Access the process pipe settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "constructor": {
-                        "id": "57c2ede804332c79d7556f5b9ab1a8e5245066fb344f1312a76148536c48c40a",
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "run": {
-                        "id": "43788536b2d1905aa5b9c6193ed943132842dde6e47057bf07cc8b30700e8e08",
-                        "name": "run",
-                        "type": "Function",
-                        "description": "Execute the processes pipe",
-                        "async": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    }
-                }
-            },
             "@coffeekraken.s-process.node.interface.SCommandProcessInterface": {
                 "id": "@coffeekraken.s-process.node.interface.SCommandProcessInterface",
                 "name": "SCommandProcessInterface",
@@ -687,39 +647,15 @@
                 "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
                 "namespace": "@coffeekraken.s-process.node.interface",
                 "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SCommandProcessInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SCommandProcessInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-process.node.interface.SProcessInterface": {
-                "id": "@coffeekraken.s-process.node.interface.SProcessInterface",
-                "name": "SProcessInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-process.node.interface",
-                "status": "beta",
                 "interface": {
-                    "name": "SProcessInterface",
+                    "name": "SCommandProcessInterface",
                     "description": "",
                     "definition": {
-                        "help": {
-                            "description": "Specify if you want to see the help of the process",
-                            "type": "Boolean",
-                            "alias": "h",
-                            "default": false
+                        "command": {
+                            "description": "Specify the command to execute",
+                            "type": "String",
+                            "alias": "c",
+                            "required": true
                         }
                     }
                 },
@@ -729,9 +665,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SProcessInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SProcessInterface.ts",
+                "filename": "SCommandProcessInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SCommandProcessInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-process.node.interface.SProcessSettingsInterface": {

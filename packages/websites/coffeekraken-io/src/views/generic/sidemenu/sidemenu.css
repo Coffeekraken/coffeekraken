@@ -1,9 +1,19 @@
 .sidemenu {
     position: sticky;
-    overflow: auto;
     top: 80px;
     max-height: calc(100vh - 80px);
-    @sugar.scrollbar();
+    display: flex;
+    flex-direction: column;
+
+    .sidemenu-main {
+        flex-grow: 1;
+        overflow: auto;
+        padding: sugar.padding(30);
+        @sugar.scrollbar();
+    }
+
+    .sidemenu-sub {
+    }
 
     [actual] {
         font-weight: bold;

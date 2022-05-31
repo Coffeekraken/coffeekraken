@@ -128,19 +128,12 @@ export default class SLitComponent extends LitElement {
             },
         });
 
-        this.props = this.componentUtils.props;
-
         // shadow handler
         if (this.litComponentSettings.shadowDom === false) {
             this.createRenderRoot = () => {
                 return this;
             };
         }
-
-        // set each props on the node
-        Object.keys(this.componentUtils.props).forEach((prop) => {
-            this[prop] = this.componentUtils.props[prop];
-        });
 
         // @ts-ignore
         const nodeFirstUpdated = this.firstUpdated?.bind(this);
@@ -167,7 +160,14 @@ export default class SLitComponent extends LitElement {
         };
 
         setTimeout(async () => {
-            await this.componentUtils.waitAndExecute(this.mount.bind(this));
+            this.props = this.componentUtils.props;
+
+            // set each props on the node
+            Object.keys(this.componentUtils.props).forEach((prop) => {
+                this[prop] = this.componentUtils.props[prop];
+            });
+
+            await this.componentUtils.waitAndExecute(this._mount.bind(this));
         });
     }
 
@@ -183,6 +183,7 @@ export default class SLitComponent extends LitElement {
                 propertiesObj[prop] = {
                     ...(definition.lit ?? {}),
                 };
+
                 // const type = definition.type?.type ?? definition.type ?? 'string';
                 if (
                     definition.physical ||
@@ -225,7 +226,11 @@ export default class SLitComponent extends LitElement {
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    async mount() {
+    async _mount() {
+        if (this.mount && typeof this.mount === 'function') {
+            await this.mount();
+        }
+
         // set the not as updatable
         this._shouldUpdate = true;
         // @ts-ignore

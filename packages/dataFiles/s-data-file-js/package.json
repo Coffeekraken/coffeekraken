@@ -1,7 +1,8 @@
 {
-    "name": "@coffeekraken/s-data-handler-js",
+    "name": "@coffeekraken/s-data-file-js",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",

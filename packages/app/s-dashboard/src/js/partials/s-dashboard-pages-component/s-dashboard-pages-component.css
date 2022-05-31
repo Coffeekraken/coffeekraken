@@ -4,7 +4,7 @@ s-dashboard-pages {
 
 .s-dashboard-pages {
     .s-filtrable-input {
-        height: calc(100% - 40px);
+        height: calc(100% - 80px);
 
         &__dropdown {
             margin-block-start: sugar.margin(20);
@@ -18,5 +18,9 @@ s-dashboard-pages {
         background: sugar.color(accent);
         color: black;
         border-radius: sugar.border.radius(10);
+    }
+
+    .__description {
+        font-size: 14px;
     }
 }

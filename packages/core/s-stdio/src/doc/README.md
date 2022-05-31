@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -19,12 +19,11 @@
 This package allows you to display processes/webpages logs with ease.
 Here's some of the features available:
 
-- `SBasicStdio`: Nice IO interface for terminal
-- `SConsoleStdio`: Nive IO interface for browser (coming soon...)
-- **Event** based log system
-- **Filtrable output** depending on log `type`
-- **Extensible** IO system for things like websockets, etc...
-- And more...
+-   `SBasicStdio`: Nice IO interface for terminal
+-   **Event** based log system
+-   **Filtrable output** depending on log `type`
+-   **Extensible** IO system for things like websockets, etc...
+-   And more...
 
 ## Usage
 
@@ -34,7 +33,7 @@ Here's how to use our implementation:
 import __SStdio from '@coffeekraken/s-stdio';
 import spawn from '@coffeekraken/sugar/node/process/spawn';
 const proc = spawn('ls -la');
-__SStdio.new('default', proc);
+__SStdio.new(__SStdio.UI_BASIC, proc);
 ```
 
 ## How it works
@@ -50,11 +49,11 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SLog from '@coffeekraken/s-log';
 
 export default function myProcess() {
-    return new __SPromise(({resolve, reject, emit}) => {
+    return new __SPromise(({ resolve, reject, emit }) => {
         // do something...
         emit('log', {
             type: __SLog.TYPE_INFO,
-            value: 'Hello world from my cool process'
+            value: 'Hello world from my cool process',
         });
         // do something...
         resolve();
@@ -64,12 +63,12 @@ export default function myProcess() {
 
 > Note that the `SPromise` class extends the `SEventEmitter` one.
 
+## Settings
+
+{{> interface namespace='@coffeekraken.s-stdio.shared.interface.SStdioSettingsInterface' }}
+
 ## API
 
 For more information about the API of this class, please check [our API documentation](/api/@coffeekraken.s-stdio.shared.SStdio)
-
-#### Settings
-
-{{> interface namespace='@coffeekraken.s-stdio.shared.interface.SStdioSettingsInterface' }}
 
 {{/ layout-readme }}

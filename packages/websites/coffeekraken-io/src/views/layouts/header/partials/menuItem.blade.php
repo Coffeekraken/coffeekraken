@@ -1,6 +1,6 @@
 <span s-activate class="__main-link s-display:inline-block" href="body" trigger="mouseover,mouseout"
     active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150"
-    unactivate-on="page-transition-end">
+    unactivate-on="s-page-transition.start">
     <span class="s-depth:text:100">{{ $menuItem->as ? $menuItem->as : $menuItem->name }}</span>
 
     <div class="__subnav {{ $class }}">

@@ -32,6 +32,10 @@ export interface ISPageTransitionFeatureProps {
  * This feature allows you to add page transition to your size by using ajax requests and configurable
  * transition effects.
  *
+ * @event           s-page-transition.start             Dispatched when a transition starts
+ * @event           s-page-transition.end               Dispatch when a transition ends
+ * @event           s-page-transition.error             Dispatch when an error occurs
+ * 
  * @support          chromium
  * @support          firefox
  * @support          safari
@@ -105,12 +109,15 @@ export default class SPageTransitionFeature extends __SFeature {
         // listen for clicks to prevent default behaviors
         document.addEventListener('click', (e) => {
             const $target = <HTMLElement>e.target;
+
             // @ts-ignore
             if (
                 $target.tagName === 'A' && 
                 $target.hasAttribute('href') &&
                 // @ts-ignore
                 !$target.getAttribute('href').match(/^https?:\/\//) &&
+                // @ts-ignore
+                !$target.getAttribute('href').match(/^#/) &&
                 !$target.hasAttribute('target')
             ) {
                 e.preventDefault();
@@ -133,9 +140,10 @@ export default class SPageTransitionFeature extends __SFeature {
     mount() {}
     transitionTo(url: string, $source): Promise<void> {
         return new Promise(async (resolve, reject) => {
+
             // dispatch an event
             $source.dispatchEvent(
-                new CustomEvent('s-page-transition-start', {
+                new CustomEvent('s-page-transition.start', {
                     detail: {
                         url,
                     },
@@ -152,6 +160,7 @@ export default class SPageTransitionFeature extends __SFeature {
             $source.setAttribute('loading', true);
 
             // before callback
+            // @ts-ignore
             this.props.before?.({
                 url,
                 $source,
@@ -294,7 +303,7 @@ export default class SPageTransitionFeature extends __SFeature {
             }
             // dispatch an error event
             $source.dispatchEvent(
-                new CustomEvent('s-page-transition-error', {
+                new CustomEvent('s-page-transition.error', {
                     detail: {
                         code,
                         $source,
@@ -316,7 +325,7 @@ export default class SPageTransitionFeature extends __SFeature {
 
         // dispatch an event
         $source.dispatchEvent(
-            new CustomEvent('s-page-transition-end', {
+            new CustomEvent('s-page-transition.end', {
                 detail: {
                     code,
                     $source,

@@ -7,7 +7,7 @@
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-class": "^2.0.0",
-        "@coffeekraken/s-data-handler-js": "^2.0.0",
+        "@coffeekraken/s-data-file-generic": "^2.0.0",
         "@coffeekraken/s-duration": "^2.0.0",
         "@coffeekraken/s-file": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",

@@ -1,13 +1,14 @@
 {
-    "name": "@coffeekraken/s-data-handler-generic",
+    "name": "@coffeekraken/s-data-file-generic",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-sugar-config": "^2.0.0",
-        "@coffeekraken/s-data-handler-js": "^2.0.0",
+        "@coffeekraken/s-data-file-js": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "exec-php": "^0.0.5",

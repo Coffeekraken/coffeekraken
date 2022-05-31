@@ -1,6 +1,6 @@
 @if ($block->props)
     <h4 id="properties-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
-        <i class="s-icon:list-ul s-tc:accent"></i>&nbsp;&nbsp;properties
+        <i class="s-icon:list-ul s-tc:accent"></i>&nbsp;&nbsp;Properties
     </h4>
 
     <ol class="">

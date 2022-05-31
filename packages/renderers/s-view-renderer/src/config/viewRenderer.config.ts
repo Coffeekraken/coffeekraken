@@ -61,16 +61,16 @@ export default function (env, config) {
         sharedData: ['[config.storage.src.rootDir]/views/shared.data.js'],
 
         /**
-         * @name          dataHandlers
+         * @name          dataFiles
          * @namespace     config.viewRenderer
          * @type          String[]
-         * @default       ['@coffeekraken/s-handler-js']
+         * @default       ['@coffeekraken/s-data-file-generic']
          *
          * Store which data handlers are available for this renderer
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        dataHandlers: ['@coffeekraken/s-data-handler-js'],
+        dataFiles: ['@coffeekraken/s-data-file-generic'],
     };
 }

@@ -216,68 +216,68 @@ export default class SComponent extends __SClass {
         this.injectStyle(styleStr ?? '');
 
         // init responsive props
-        this._initResponsiveProps();
+        // this._initResponsiveProps();
     }
 
-    /**
-     * Check if some <responsive> tags are defined in the component, or if a "responsive" prop exists
-     * to adapt properties depending on the viewport size.
-     */
-    _desktopProps = {};
-    _initResponsiveProps() {
-        if (!Object.keys(this.props.responsive).length) {
-            return;
-        }
+    // /**
+    //  * Check if some <responsive> tags are defined in the component, or if a "responsive" prop exists
+    //  * to adapt properties depending on the viewport size.
+    //  */
+    // _desktopProps = {};
+    // _initResponsiveProps() {
+    //     if (!Object.keys(this.props.responsive).length) {
+    //         return;
+    //     }
 
-        // save the "default" props for reset
-        this._desktopProps = Object.assign({}, this.props);
+    //     // save the "default" props for reset
+    //     this._desktopProps = Object.assign({}, this.props);
 
-        // apply on resize
-        window.addEventListener(
-            'resize',
-            __debounce(this._applyResponsiveProps.bind(this), 100),
-        );
+    //     // apply on resize
+    //     window.addEventListener(
+    //         'resize',
+    //         __debounce(this._applyResponsiveProps.bind(this), 100),
+    //     );
 
-        // first apply
-        this._applyResponsiveProps();
-    }
-    _mediaQueries = {};
-    _applyResponsiveProps() {
-        let matchedMedia = [],
-            newProps = {};
-        // search for the good media
-        for (let [media, props] of Object.entries(this.props.responsive)) {
-            // media query name
-            const queries = __STheme.get(`media.queries`),
-                nudeMedia = media.replace(/(<|>|=|\|)/gm, '');
+    //     // first apply
+    //     this._applyResponsiveProps();
+    // }
+    // _mediaQueries = {};
+    // _applyResponsiveProps() {
+    //     let matchedMedia = [],
+    //         newProps = {};
+    //     // search for the good media
+    //     for (let [media, props] of Object.entries(this.props.responsive)) {
+    //         // media query name
+    //         const queries = __STheme.get(`media.queries`),
+    //             nudeMedia = media.replace(/(<|>|=|\|)/gm, '');
 
-            if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
-                let mediaQuery = this._mediaQueries[media];
-                if (!mediaQuery) {
-                    this._mediaQueries[media] = __STheme.buildMediaQuery(media);
-                    mediaQuery = this._mediaQueries[media];
-                }
-                if (
-                    window.matchMedia(mediaQuery.replace(/^@media\s/, ''))
-                        .matches
-                ) {
-                    Object.assign(newProps, this.props.responsive[media]);
-                    matchedMedia.push(media);
-                }
-            } else {
-                if (window.matchMedia(media).matches) {
-                    Object.assign(newProps, this.props.responsive[media]);
-                    matchedMedia.push(media);
-                }
-            }
-        }
-        // reset props if needed
-        if (!matchedMedia.length) {
-            Object.assign(this.props, this._desktopProps);
-        } else {
-            Object.assign(this.props, newProps);
-        }
-    }
+    //         if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
+    //             let mediaQuery = this._mediaQueries[media];
+    //             if (!mediaQuery) {
+    //                 this._mediaQueries[media] = __STheme.buildMediaQuery(media);
+    //                 mediaQuery = this._mediaQueries[media];
+    //             }
+    //             if (
+    //                 window.matchMedia(mediaQuery.replace(/^@media\s/, ''))
+    //                     .matches
+    //             ) {
+    //                 Object.assign(newProps, this.props.responsive[media]);
+    //                 matchedMedia.push(media);
+    //             }
+    //         } else {
+    //             if (window.matchMedia(media).matches) {
+    //                 Object.assign(newProps, this.props.responsive[media]);
+    //                 matchedMedia.push(media);
+    //             }
+    //         }
+    //     }
+    //     // reset props if needed
+    //     if (!matchedMedia.length) {
+    //         Object.assign(this.props, this._desktopProps);
+    //     } else {
+    //         Object.assign(this.props, newProps);
+    //     }
+    // }
 
     /**
      * @name           inViewportStatusChange
@@ -421,19 +421,17 @@ export default class SComponent extends __SClass {
             responsive: {},
         };
         if (props.constructor.name === 'NamedNodeMap') {
-            Object.keys(props).forEach((key) => {
+            for (let i = 0; i < props.length; i++) {
+                const attr = props[i];
                 let value;
-                if (props[key]?.nodeValue !== undefined) {
-                    if (props[key].nodeValue === '') value = true;
-                    else value = props[key].nodeValue;
+                if (attr.value !== undefined) {
+                    if (attr.value === '') value = true;
+                    else value = attr.value;
                 }
-                if (!value) return;
-                passedProps[__camelCase(props[key]?.name ?? key)] = __autoCast(
-                    value,
-                );
-            });
+                if (!value) continue;
+                passedProps[__camelCase(attr.name)] = __autoCast(value);
+            }
         } else {
-            j;
             passedProps = props;
         }
 
@@ -506,6 +504,7 @@ export default class SComponent extends __SClass {
             },
         });
 
+        // reassign each props to make the Proxy apply physical props, etc...
         Object.keys(this._finalProps).forEach((prop) => {
             this._finalProps[prop] = this._finalProps[prop];
         });

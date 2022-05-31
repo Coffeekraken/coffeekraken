@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
-import __SProcessInterface from './SProcessInterface';
 
 /**
  * @name                SCommandProcessInterface
@@ -22,7 +21,6 @@ export default class SCommandProcessInterface extends __SInterface {
     // static extendsArray = ['SProcess', 'SPromise'];
     static get _definition() {
         return {
-            ...__SProcessInterface.definition,
             command: {
                 description: 'Specify the command to execute',
                 type: 'String',

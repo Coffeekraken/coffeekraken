@@ -32,33 +32,14 @@ import ISLog from './ISLog';
  * import __SPromise from '@coffeekraken/s-promise';
  * new __SPromise(({resolve, reject, emit}) => {
  *      emit('log', {
- *          value: 'Hello world',
- *          type: __SLog.TYPE_ERROR
+ *          type: __SLog.TYPE_ERROR,
+ *          value: 'Hello world'
  *      });
  * });
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-
-export interface ISLogFilterObj {
-    decorators: boolean;
-    time: boolean;
-    clear: boolean;
-    temp: boolean;
-    type: (
-        | 'log'
-        | 'info'
-        | 'warn'
-        | 'error'
-        | 'verbose'
-        | 'verboser'
-        | 'decorator'
-        | 'summary'
-        | 'child_process'
-    )[];
-    as: string | string[];
-}
 
 export default class SLog {
     /**
@@ -351,15 +332,10 @@ export default class SLog {
      * These filters will have as consequence to set the "active" property of each logs to
      * true or false.
      *
-     * @param       {ISLogFilterObj}            filterObj       The filter object you want to apply
-     * @param       {String}                [name="default"]        The name of your filter to be able to remove it later
+     * @param       {ISLogType[]}           types               The types you want to keep
      *
      * @example         js
-     * SLog.filter({
-     *      type: [SLog.WARN, SLog.ERROR], // display only the warnings and the errors
-     *      decorators: false           // only the logs that does not want decorators
-     *      // etc...
-     * });
+     * SLog.filter([SLog.TYPE_WARN, SLog.TYPE_ERROR]);
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

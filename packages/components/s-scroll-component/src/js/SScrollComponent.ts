@@ -117,6 +117,9 @@ export default class SScrollComponent extends __SLitComponent {
             default:
                 // grab the element to scroll to
                 const $target = document.querySelector(target);
+
+                console.log('SCRO', target, $target);
+
                 if (!$target) return;
 
                 __scrollTo($target, {

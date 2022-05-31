@@ -20,7 +20,7 @@ import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
 import __SLog from '@coffeekraken/s-log';
 import __getCoffeekrakenMetas from '@coffeekraken/sugar/node/coffeekraken/getCoffeekrakenMetas';
-import __SDataHandlerGeneric from '@coffeekraken/s-data-handler-generic';
+import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 
 /**
  * @name                SMarkdownBuilder
@@ -620,7 +620,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                             output: '',
                         };
 
-                        const dataHandlerData = await __SDataHandlerGeneric.handle(
+                        const dataHandlerData = await __SDataFileGeneric.load(
                             filePath,
                         );
 

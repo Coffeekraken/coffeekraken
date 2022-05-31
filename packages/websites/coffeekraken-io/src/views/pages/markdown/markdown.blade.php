@@ -4,43 +4,51 @@
 
         <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-            <nav class="sidemenu s-pb:50 @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
+            <nav class="sidemenu @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
 
-                <h5 class="s-typo:h5 s-mbe:20">
-                    Coffeekraken {{ $coco }}
-                </h5>
+                <div class="sidemenu-sub">
+                    <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
+                </div>
 
-                @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp
-                @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])
+                <div class="sidemenu-main">
 
-                @if (count(get_object_vars($docmap->menu->packages)))
-
-                    <h5 class="s-typo:h5 s-mbs:50 s-mbe:20">
-                        Packages
+                    <h5 class="s-typo:h5 s-mbe:20">
+                        Coffeekraken {{ $coco }}
                     </h5>
 
-                    <ul class="s-fs-tree">
-                        @foreach ((array) $docmap->menu->packages as $package)
-                            @if (!$package->tree->documentation)
-                                @continue
-                            @endif
+                    @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp
+                    @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])
 
-                            <li id="{{ \Sugar\string\idCompliant($package->name) }}" s-activate
-                                trigger="click,event:actual" href="#{{ \Sugar\string\idCompliant($package->name) }}"
-                                toggle save-state mount-when="direct" trigger="click,event:actual">
-                                <div>
-                                    <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"></i>
-                                    <i class="s-icon:folder"></i>
-                                    {{ str_replace('@coffeekraken/', '', $package->name) }}
-                                </div>
+                    @if (count(get_object_vars($docmap->menu->packages)))
 
-                                @php $menu = get_object_vars($package->tree->documentation); @endphp
-                                @include('pages.markdown.menu', ['menu' => $menu, 'id' =>
-                                \Sugar\string\idCompliant($package->name)])
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
+                        <h5 class="s-typo:h5 s-mbs:50 s-mbe:20">
+                            Packages
+                        </h5>
+
+                        <ul class="s-fs-tree">
+                            @foreach ((array) $docmap->menu->packages as $package)
+                                @if (!$package->tree->documentation)
+                                    @continue
+                                @endif
+
+                                <li id="{{ \Sugar\string\idCompliant($package->name) }}" s-activate
+                                    trigger="click,event:actual" href="#{{ \Sugar\string\idCompliant($package->name) }}"
+                                    toggle save-state mount-when="direct" trigger="click,event:actual">
+                                    <div>
+                                        <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"></i>
+                                        <i class="s-icon:folder"></i>
+                                        {{ str_replace('@coffeekraken/', '', $package->name) }}
+                                    </div>
+
+                                    @php $menu = get_object_vars($package->tree->documentation); @endphp
+                                    @include('pages.markdown.menu', ['menu' => $menu, 'id' =>
+                                    \Sugar\string\idCompliant($package->name)])
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+
+                </div>
 
             </nav>
 
@@ -56,9 +64,11 @@
                     Please select a documentation from the sidemenu
                 </p>
 
-                @endif
+                @else
                 
-                {!! $body !!}
+                    {!! $body !!}
+
+                @endif
             </div>
 
         </div>

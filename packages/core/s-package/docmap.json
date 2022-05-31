@@ -12,15 +12,16 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-handler-generic",
             "@coffeekraken/s-data-handler-js",
-            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -56,7 +57,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -75,7 +75,6 @@
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -149,6 +148,40 @@
                 "extension": "config",
                 "relPath": "src/config/package.config.ts"
             },
+            "@coffeekraken.s-package.config.package.checkDependencies.dirs": {
+                "id": "@coffeekraken.s-package.config.package.checkDependencies.dirs",
+                "name": "dirs",
+                "type": "String",
+                "default": "['dist/** /exports.js']",
+                "description": "Specify some directories in which to check for dependencies issues, etc...",
+                "namespace": "@coffeekraken.s-package.config.package.checkDependencies",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
+            "@coffeekraken.s-package.config.package.checkDependencies.packagesMap": {
+                "id": "@coffeekraken.s-package.config.package.checkDependencies.packagesMap",
+                "name": "packagesMap",
+                "type": "String",
+                "default": "{'^@coffeekraken/'}",
+                "description": "Specify some patterns for packages you want to add in package.json without installing them.\nThis is usefull for monorepo.",
+                "namespace": "@coffeekraken.s-package.config.package.checkDependencies",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
             "@coffeekraken.s-package.config.package.exports.glob": {
                 "id": "@coffeekraken.s-package.config.package.exports.glob",
                 "name": "glob",
@@ -201,6 +234,35 @@
                 "relPath": "src/config/package.config.ts",
                 "children": {}
             },
+            "@coffeekraken.s-package.doc.README": {
+                "id": "@coffeekraken.s-package.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-package.doc",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-package.node.SPackage": {
                 "id": "@coffeekraken.s-package.node.SPackage",
                 "name": "SPackage",
@@ -242,19 +304,6 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "rootdir": {
-                        "id": "f72fa8cfcdb35c87cd086d302da1922b0feaac4b11668876a2b0ed883a7bff7b",
-                        "name": "rootDir",
-                        "type": "String",
-                        "default": "process.cwd()",
-                        "description": "Store the package root directory",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
@@ -285,6 +334,19 @@
                         "name": "install",
                         "type": "Function",
                         "description": "This method allows you to install dependencies in a package",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "checkdependencies": {
+                        "id": "4dacd7e9838efb59964700de6d35533b3521026a150c96065e2a7e4b07c47c94",
+                        "name": "checkDependencies",
+                        "type": "Function",
+                        "description": "This method allows you to check unused, missing dependencies in a package",
                         "async": "true",
                         "since": "2.0.0",
                         "author": {
@@ -334,8 +396,8 @@
                     }
                 }
             },
-            "@coffeekraken.s-package.node.package.interface.SPackageAddReadmeParamsInterface": {
-                "id": "@coffeekraken.s-package.node.package.interface.SPackageAddReadmeParamsInterface",
+            "@coffeekraken.s-package.node.interface.SPackageAddReadmeParamsInterface": {
+                "id": "@coffeekraken.s-package.node.interface.SPackageAddReadmeParamsInterface",
                 "name": "SPackageAddReadmeParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -345,7 +407,7 @@
                     }
                 ],
                 "description": "This interface specify the parameters needed to the `sugar package.addReadme` command.",
-                "namespace": "@coffeekraken.s-package.node.package.interface",
+                "namespace": "@coffeekraken.s-package.node.interface",
                 "status": "beta",
                 "interface": {
                     "name": "SPackageAddReadmeParamsInterface",
@@ -369,8 +431,8 @@
                 "relPath": "src/node/interface/SPackageAddReadmeParamsInterface.ts",
                 "children": {}
             },
-            "@coffeekraken.s-package.node.package.interface.SPackageApplyDefaultPackageJsonParamsInterface": {
-                "id": "@coffeekraken.s-package.node.package.interface.SPackageApplyDefaultPackageJsonParamsInterface",
+            "@coffeekraken.s-package.node.interface.SPackageApplyDefaultPackageJsonParamsInterface": {
+                "id": "@coffeekraken.s-package.node.interface.SPackageApplyDefaultPackageJsonParamsInterface",
                 "name": "SPackageApplyDefaultPackageJsonParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -380,7 +442,7 @@
                     }
                 ],
                 "description": "This interface specify the parameters needed to the `sugar package.applyDefaultPackageJson` command.",
-                "namespace": "@coffeekraken.s-package.node.package.interface",
+                "namespace": "@coffeekraken.s-package.node.interface",
                 "status": "beta",
                 "interface": {
                     "name": "SPackageApplyDefaultPackageJsonParamsInterface",
@@ -396,6 +458,59 @@
                 "filename": "SPackageApplyDefaultPackageJsonParamsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/node/interface/SPackageApplyDefaultPackageJsonParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-package.node.interface.SPackageCheckDependenciesParamsInterface": {
+                "id": "@coffeekraken.s-package.node.interface.SPackageCheckDependenciesParamsInterface",
+                "name": "SPackageCheckDependenciesParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar package.checkDependencies` command.",
+                "namespace": "@coffeekraken.s-package.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SPackageCheckDependenciesParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "dirs": {
+                            "description": "Specify the directories in which to check for dependencies issues, etc...",
+                            "type": "String[]",
+                            "default": [
+                                "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-package/src/js",
+                                "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-package/src/node",
+                                "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-package/src/pages",
+                                "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-package/src/config"
+                            ],
+                            "alias": "d"
+                        },
+                        "installMissing": {
+                            "description": "Specify if you would like to install missing dependencies.",
+                            "type": "Boolean",
+                            "alias": "i"
+                        },
+                        "packagesMap": {
+                            "description": "Specify some package name patterns to add in package.json without installin them. Usefull for monorepo with packages that are not published yet.",
+                            "type": "Object",
+                            "default": {
+                                "^@coffeekraken/": "^2.0.0"
+                            }
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SPackageCheckDependenciesParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SPackageCheckDependenciesParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-package.node.interface.SPackageExportsParamsInterface": {
@@ -462,8 +577,8 @@
                 "relPath": "src/node/interface/SPackageExportsParamsInterface.ts",
                 "children": {}
             },
-            "@coffeekraken.s-package.node.package.interface.SPackageInstallParamsInterface": {
-                "id": "@coffeekraken.s-package.node.package.interface.SPackageInstallParamsInterface",
+            "@coffeekraken.s-package.node.interface.SPackageInstallParamsInterface": {
+                "id": "@coffeekraken.s-package.node.interface.SPackageInstallParamsInterface",
                 "name": "SPackageInstallParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -473,7 +588,7 @@
                     }
                 ],
                 "description": "This interface specify the parameters needed to the `sugar package.install` command.",
-                "namespace": "@coffeekraken.s-package.node.package.interface",
+                "namespace": "@coffeekraken.s-package.node.interface",
                 "status": "beta",
                 "interface": {
                     "name": "SPackageInstallParamsInterface",
@@ -501,8 +616,8 @@
                 "relPath": "src/node/interface/SPackageInstallParamsInterface.ts",
                 "children": {}
             },
-            "@coffeekraken.s-package.node.package.interface.SPackageRenameParamsInterface": {
-                "id": "@coffeekraken.s-package.node.package.interface.SPackageRenameParamsInterface",
+            "@coffeekraken.s-package.node.interface.SPackageRenameParamsInterface": {
+                "id": "@coffeekraken.s-package.node.interface.SPackageRenameParamsInterface",
                 "name": "SPackageRenameParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -512,7 +627,7 @@
                     }
                 ],
                 "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-package.node.package.interface",
+                "namespace": "@coffeekraken.s-package.node.interface",
                 "status": "beta",
                 "interface": {
                     "name": "SPackageRenameParamsInterface",
@@ -538,6 +653,50 @@
                 "filename": "SPackageRenameParamsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/node/interface/SPackageRenameParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-package.node.interface.SPackageSettingsInterface": {
+                "id": "@coffeekraken.s-package.node.interface.SPackageSettingsInterface",
+                "name": "SPackageSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the SPackage settings",
+                "namespace": "@coffeekraken.s-package.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SPackageSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "rootDir": {
+                            "description": "Specify the root directory of your package",
+                            "type": "string",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-package"
+                        },
+                        "manager": {
+                            "description": "Specify th package manager to use",
+                            "type": "String",
+                            "values": [
+                                "yarn",
+                                "npm"
+                            ],
+                            "default": "yarn"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SPackageSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SPackageSettingsInterface.ts",
                 "children": {}
             }
         }

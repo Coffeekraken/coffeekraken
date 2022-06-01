@@ -146,7 +146,7 @@ export default class SPanel extends __SLitComponent {
     static _activePanels: SPanel[] = [];
 
     static get properties() {
-        return __SLitComponent.properties({}, __SPanelComponentInterface);
+        return __SLitComponent.createProperties({}, __SPanelComponentInterface);
     }
 
     static get styles() {

@@ -119,7 +119,10 @@ export interface ISColorPickerComponentProps {
  */
 export default class SColorPicker extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.properties({}, __SColorPickerComponentInterface);
+        return __SLitComponent.createProperties(
+            {},
+            __SColorPickerComponentInterface,
+        );
     }
 
     static get styles() {

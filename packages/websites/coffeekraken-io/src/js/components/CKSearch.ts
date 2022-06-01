@@ -308,6 +308,7 @@ export default class CKSearch extends __SLitComponent {
         });
     }
     render() {
+        console.log('REN');
         return html`
             <div class="ck-search">
                 <div class="ck-search__background"></div>

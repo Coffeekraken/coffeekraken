@@ -61,7 +61,10 @@ export interface ISScrollComponentProps extends ISLitComponentDefaultProps {
 
 export default class SScrollComponent extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.properties({}, __SScrollComponentInterface);
+        return __SLitComponent.createProperties(
+            {},
+            __SScrollComponentInterface,
+        );
     }
 
     static get styles() {

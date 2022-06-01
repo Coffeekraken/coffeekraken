@@ -301,7 +301,10 @@ export interface ISSliderComponentTimer {
 
 export default class SSlider extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.properties({}, __SSliderComponentInterface);
+        return __SLitComponent.createProperties(
+            {},
+            __SSliderComponentInterface,
+        );
     }
 
     static get styles() {

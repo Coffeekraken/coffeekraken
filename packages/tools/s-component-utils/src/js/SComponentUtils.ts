@@ -317,7 +317,12 @@ export default class SComponent extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     waitAndExecute(callback: Function): Promise<any> {
-        return __SConductor.when(this.node, this.props.mountWhen, callback);
+        let props = this.props;
+        if (this.node.tagName === 'CK-SEARCH-INPUT') {
+            props = this._props;
+            console.log('COCO', props);
+        }
+        return __SConductor.when(this.node, props.mountWhen, callback);
     }
 
     /**
@@ -415,6 +420,11 @@ export default class SComponent extends __SClass {
     get props(): any {
         // if props already builded
         if (this._finalProps) return this._finalProps;
+
+        if (this.node.tagName === 'CK-SEARCH-INPUT') {
+            this._finalProps = {};
+            return {};
+        }
 
         const props = this._props;
         let passedProps = {

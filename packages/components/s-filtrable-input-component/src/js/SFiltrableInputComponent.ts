@@ -145,6 +145,12 @@ export default class SFiltrableInput extends __SLitComponent {
             ${unsafeCSS(__css)}
         `;
     }
+    static get properties() {
+        return __SLitComponent.createProperties(
+            {},
+            __SFiltrableInputComponentInterface,
+        );
+    }
 
     // @ts-ignore
     $container: HTMLElement;

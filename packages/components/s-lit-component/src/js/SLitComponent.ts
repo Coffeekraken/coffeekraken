@@ -118,15 +118,17 @@ export default class SLitComponent extends LitElement {
             settings,
         );
 
-        this.componentUtils = new __SComponentUtils(this, this.attributes, {
-            componentUtils: {
-                ...(this.settings.componentUtils ?? {}),
-                style:
-                    this.constructor.styles?.cssText ??
-                    this.settings.componentUtils?.style ??
-                    '',
-            },
-        });
+        if (this.tagName !== 'CK-SEARCH-INPUT') {
+            this.componentUtils = new __SComponentUtils(this, this.attributes, {
+                componentUtils: {
+                    ...(this.settings.componentUtils ?? {}),
+                    style:
+                        this.constructor.styles?.cssText ??
+                        this.settings.componentUtils?.style ??
+                        '',
+                },
+            });
+        }
 
         // shadow handler
         if (this.litComponentSettings.shadowDom === false) {
@@ -160,20 +162,55 @@ export default class SLitComponent extends LitElement {
         };
 
         setTimeout(async () => {
-            this.props = this.componentUtils.props;
+            if (this.tagName === 'CK-SEARCH-INPUT') {
+                this.props = {};
 
-            // set each props on the node
-            Object.keys(this.componentUtils.props).forEach((prop) => {
-                this[prop] = this.componentUtils.props[prop];
-            });
+                for (let [prop, obj] of Object.entries(
+                    this.constructor.properties ?? {},
+                )) {
+                    const _this = this;
+                    Object.defineProperty(this.props, prop, {
+                        enumerable: true,
+                        get() {
+                            return _this[prop];
+                        },
+                        set(value) {
+                            _this[prop] = value;
+                        },
+                    });
+
+                    if (this[prop] === undefined && obj.default !== undefined) {
+                        this[prop] = obj.default;
+                    }
+                }
+
+                this.componentUtils = new __SComponentUtils(this, this.props, {
+                    componentUtils: {
+                        ...(this.settings.componentUtils ?? {}),
+                        style:
+                            this.constructor.styles?.cssText ??
+                            this.settings.componentUtils?.style ??
+                            '',
+                    },
+                });
+            } else {
+                this.props = this.componentUtils.props;
+
+                // set each props on the node
+                Object.keys(this.componentUtils.props).forEach((prop) => {
+                    this[prop] = this.componentUtils.props[prop];
+                });
+            }
 
             await this.componentUtils.waitAndExecute(this._mount.bind(this));
         });
     }
 
-    static properties(properties: any, ...ints: typeof __SInterface): any {
+    static createProperties(
+        properties: any,
+        ...ints: typeof __SInterface
+    ): any {
         const propertiesObj = {};
-
         ints.forEach((int) => {
             const InterfaceToApply = __SComponentUtils.getFinalInterface(int);
             // @ts-ignore
@@ -184,7 +221,34 @@ export default class SLitComponent extends LitElement {
                     ...(definition.lit ?? {}),
                 };
 
+                let type = String,
+                    typeStr = definition.type?.type ?? definition.type;
+                switch (typeStr.toLowerCase()) {
+                    case 'boolean':
+                        type = Boolean;
+                        break;
+                    case 'object':
+                        type = Object;
+                        break;
+                    case 'number':
+                        type = Number;
+                        break;
+                    default:
+                        if (typeStr.match(/\[\]$/)) {
+                            type = Array;
+                        }
+                        break;
+                }
+
                 // const type = definition.type?.type ?? definition.type ?? 'string';
+
+                // set the type
+                propertiesObj[prop].type = type;
+
+                // set the default value
+                propertiesObj[prop].default = definition.default;
+
+                // handle physical and boolean attributes
                 if (
                     definition.physical ||
                     definition.type?.toLowerCase?.() === 'boolean' ||
@@ -193,13 +257,18 @@ export default class SLitComponent extends LitElement {
                     propertiesObj[prop].reflect = true;
                     propertiesObj[prop].attribute = __dashCase(prop);
                     propertiesObj[prop].converter = {
+                        fromAttribute: (value, type) => {
+                            if (value === 'true' || value === '') return true;
+                            return value;
+                        },
                         toAttribute(value) {
                             if (
                                 value === 'false' ||
                                 value === false ||
                                 value === null
-                            )
+                            ) {
                                 return null;
+                            }
                             return String(value);
                         },
                     };
@@ -227,6 +296,19 @@ export default class SLitComponent extends LitElement {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     async _mount() {
+        // if (this.tagName === 'CK-SEARCH-INPUT') {
+        //     console.log('A', this);
+        //     for (let [prop, obj] of Object.entries(
+        //         this.constructor.properties ?? {},
+        //     )) {
+        //         console.log('SSS', prop);
+        //         if (this[prop] === undefined && obj.default !== undefined) {
+        //             console.log('DEF', prop, this[prop]);
+        //             this[prop] = obj.default;
+        //         }
+        //     }
+        // }
+
         if (this.mount && typeof this.mount === 'function') {
             await this.mount();
         }

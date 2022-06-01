@@ -56,7 +56,7 @@ export default class SFiltrableInputComponentInterface extends __SInterface {
                 type: 'String',
                 default: 'Loading please wait...',
             },
-            filterItems: {
+            filter: {
                 description:
                     'Specify a function to use to filter the items. Must return the filtered list of items',
                 type: 'Function',

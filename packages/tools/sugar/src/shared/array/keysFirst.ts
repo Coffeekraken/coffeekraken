@@ -1,6 +1,5 @@
 // @ts-nocheck
-
-import uniq from 'lodash/uniq';
+import __unique from './unique';
 
 /**
  * @name        keysFirst
@@ -33,7 +32,7 @@ function keysFirst(array: any[], keys: any[]): any[] {
     const empty: any[] = [];
     let res = empty.concat(keys).concat(array);
     // remove double items
-    res = uniq(res);
+    res = __unique(res);
     // return the result
     return res;
 }

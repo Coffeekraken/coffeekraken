@@ -10,7 +10,9 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __SComponentUtils from '@coffeekraken/s-component-utils';
+import __SComponentUtils, {
+    SComponentUtilsDefaultPropsInterface,
+} from '@coffeekraken/s-component-utils';
 import { LitElement } from 'lit';
 
 export interface ISLitComponentSettings {
@@ -118,18 +120,6 @@ export default class SLitComponent extends LitElement {
             settings,
         );
 
-        if (this.tagName !== 'CK-SEARCH-INPUT') {
-            this.componentUtils = new __SComponentUtils(this, this.attributes, {
-                componentUtils: {
-                    ...(this.settings.componentUtils ?? {}),
-                    style:
-                        this.constructor.styles?.cssText ??
-                        this.settings.componentUtils?.style ??
-                        '',
-                },
-            });
-        }
-
         // shadow handler
         if (this.litComponentSettings.shadowDom === false) {
             this.createRenderRoot = () => {
@@ -162,118 +152,138 @@ export default class SLitComponent extends LitElement {
         };
 
         setTimeout(async () => {
-            if (this.tagName === 'CK-SEARCH-INPUT') {
-                this.props = {};
+            const _this = this,
+                default
+                defaultProps = __SComponentUtils.getDefaultProps(
+                    this.tagName.toLowerCase(),
+                );
 
-                for (let [prop, obj] of Object.entries(
-                    this.constructor.properties ?? {},
-                )) {
-                    const _this = this;
-                    Object.defineProperty(this.props, prop, {
-                        enumerable: true,
-                        get() {
-                            return _this[prop];
-                        },
-                        set(value) {
-                            _this[prop] = value;
-                        },
-                    });
+            let properties = this.constructor.properties;
+            if (!properties) {
+                properties = this.constructor.createProperties();
+            }
 
-                    if (this[prop] === undefined && obj.default !== undefined) {
-                        this[prop] = obj.default;
-                    }
-                }
-
-                this.componentUtils = new __SComponentUtils(this, this.props, {
-                    componentUtils: {
-                        ...(this.settings.componentUtils ?? {}),
-                        style:
-                            this.constructor.styles?.cssText ??
-                            this.settings.componentUtils?.style ??
-                            '',
+            // this.props stack
+            this.props = {};
+            for (let [prop, obj] of Object.entries(properties)) {
+                Object.defineProperty(this.props, prop, {
+                    enumerable: true,
+                    get() {
+                        return _this[prop];
+                    },
+                    set(value) {
+                        _this[prop] = value;
                     },
                 });
-            } else {
-                this.props = this.componentUtils.props;
 
-                // set each props on the node
-                Object.keys(this.componentUtils.props).forEach((prop) => {
-                    this[prop] = this.componentUtils.props[prop];
+                // default props
+                if (this[prop] === undefined) {
+                    this[prop] = defaultProps[prop] ?? obj.default;
+                }
+            }
+
+            // this.state stack
+            this._state = Object.assign({}, this.state ?? {});
+            this.state = {};
+            for (let [prop, value] of Object.entries(this._state)) {
+                Object.defineProperty(this.state, prop, {
+                    get() {
+                        return _this._state[prop];
+                    },
+                    set(value) {
+                        _this._state[prop] = value;
+                        _this.requestUpdate();
+                    },
                 });
             }
 
-            await this.componentUtils.waitAndExecute(this._mount.bind(this));
+            this.componentUtils = new __SComponentUtils(this, {
+                componentUtils: {
+                    ...(this.settings.componentUtils ?? {}),
+                    style:
+                        this.constructor.styles?.cssText ??
+                        this.settings.componentUtils?.style ??
+                        '',
+                },
+            });
+
+            await this.componentUtils.waitAndExecute(
+                this.props.mountWhen,
+                this._mount.bind(this),
+            );
         });
     }
 
-    static createProperties(
-        properties: any,
-        ...ints: typeof __SInterface
-    ): any {
+    static createProperties(properties: any, int: __SInterface): any {
         const propertiesObj = {};
-        ints.forEach((int) => {
-            const InterfaceToApply = __SComponentUtils.getFinalInterface(int);
+
+        class SLitComponentPropsInterface extends SComponentUtilsDefaultPropsInterface {}
+
+        SLitComponentPropsInterface.definition = {
+            ...SLitComponentPropsInterface.definition,
+            ...(int?.definition ?? {}),
+        };
+
+        // @ts-ignore
+        Object.keys(SLitComponentPropsInterface.definition).forEach((prop) => {
             // @ts-ignore
-            Object.keys(InterfaceToApply.definition).forEach((prop) => {
-                // @ts-ignore
-                const definition = InterfaceToApply.definition[prop];
-                propertiesObj[prop] = {
-                    ...(definition.lit ?? {}),
-                };
+            const definition = SLitComponentPropsInterface.definition[prop];
+            propertiesObj[prop] = {
+                ...(definition.lit ?? {}),
+            };
 
-                let type = String,
-                    typeStr = definition.type?.type ?? definition.type;
-                switch (typeStr.toLowerCase()) {
-                    case 'boolean':
-                        type = Boolean;
-                        break;
-                    case 'object':
-                        type = Object;
-                        break;
-                    case 'number':
-                        type = Number;
-                        break;
-                    default:
-                        if (typeStr.match(/\[\]$/)) {
-                            type = Array;
+            let type = String,
+                typeStr = definition.type?.type ?? definition.type;
+            switch (typeStr.toLowerCase()) {
+                case 'boolean':
+                    type = Boolean;
+                    break;
+                case 'object':
+                    type = Object;
+                    break;
+                case 'number':
+                    type = Number;
+                    break;
+                default:
+                    if (typeStr.match(/\[\]$/)) {
+                        type = Array;
+                    }
+                    break;
+            }
+
+            // const type = definition.type?.type ?? definition.type ?? 'string';
+
+            // set the type
+            propertiesObj[prop].type = type;
+
+            // set the default value
+            propertiesObj[prop].default = definition.default;
+
+            // handle physical and boolean attributes
+            if (
+                definition.physical ||
+                definition.type?.toLowerCase?.() === 'boolean' ||
+                definition.type?.type?.toLowerCase?.() === 'boolean'
+            ) {
+                propertiesObj[prop].reflect = true;
+                propertiesObj[prop].attribute = __dashCase(prop);
+                propertiesObj[prop].converter = {
+                    fromAttribute: (value, type) => {
+                        if (value === 'true' || value === '') return true;
+                        return value;
+                    },
+                    toAttribute(value) {
+                        if (
+                            value === 'false' ||
+                            value === false ||
+                            value === null
+                        ) {
+                            return null;
                         }
-                        break;
-                }
-
-                // const type = definition.type?.type ?? definition.type ?? 'string';
-
-                // set the type
-                propertiesObj[prop].type = type;
-
-                // set the default value
-                propertiesObj[prop].default = definition.default;
-
-                // handle physical and boolean attributes
-                if (
-                    definition.physical ||
-                    definition.type?.toLowerCase?.() === 'boolean' ||
-                    definition.type?.type?.toLowerCase?.() === 'boolean'
-                ) {
-                    propertiesObj[prop].reflect = true;
-                    propertiesObj[prop].attribute = __dashCase(prop);
-                    propertiesObj[prop].converter = {
-                        fromAttribute: (value, type) => {
-                            if (value === 'true' || value === '') return true;
-                            return value;
-                        },
-                        toAttribute(value) {
-                            if (
-                                value === 'false' ||
-                                value === false ||
-                                value === null
-                            ) {
-                                return null;
-                            }
-                            return String(value);
-                        },
-                    };
-                }
-            });
+                        return String(value);
+                    },
+                };
+            }
         });
 
         const props = {
@@ -296,19 +306,6 @@ export default class SLitComponent extends LitElement {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     async _mount() {
-        // if (this.tagName === 'CK-SEARCH-INPUT') {
-        //     console.log('A', this);
-        //     for (let [prop, obj] of Object.entries(
-        //         this.constructor.properties ?? {},
-        //     )) {
-        //         console.log('SSS', prop);
-        //         if (this[prop] === undefined && obj.default !== undefined) {
-        //             console.log('DEF', prop, this[prop]);
-        //             this[prop] = obj.default;
-        //         }
-        //     }
-        // }
-
         if (this.mount && typeof this.mount === 'function') {
             await this.mount();
         }
@@ -323,7 +320,7 @@ export default class SLitComponent extends LitElement {
             this.tagName,
         );
         await __wait();
-        if (this.componentUtils.props.adoptStyle && this.shadowRoot) {
+        if (this.props.adoptStyle && this.shadowRoot) {
             await this.componentUtils.adoptStyleInShadowRoot(this.shadowRoot);
         }
         return true;

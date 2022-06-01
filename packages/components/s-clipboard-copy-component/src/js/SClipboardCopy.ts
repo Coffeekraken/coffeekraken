@@ -60,14 +60,22 @@ export interface ISClipboardCopyComponentProps {
  */
 
 export default class SClipboardCopy extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.createProperties(
+            {},
+            __SClipboardCopyComponentInterface,
+        );
+    }
+
     static get styles() {
         return css`
             ${unsafeCSS(__css)}
         `;
     }
 
-    @property()
-    _state = 'pending';
+    state = {
+        state: 'pending',
+    };
 
     constructor() {
         super(
@@ -76,13 +84,15 @@ export default class SClipboardCopy extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SClipboardCopyComponentInterface,
+                    name: 's-clipboard-copy',
                 },
             }),
         );
     }
 
     _copyFromTarget() {
+        if (!this.props.from) return;
+
         let $elm = document.querySelector(this.props.from);
         if (!$elm) {
             $elm = document.querySelector(`#${this.props.from}`);
@@ -110,18 +120,18 @@ export default class SClipboardCopy extends __SLitComponent {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     copy(text) {
-        this._state = 'copy';
+        this.state.state = 'copy';
         __copy(text)
             .then(() => {
-                this._state = 'success';
+                this.state.state = 'success';
                 setTimeout(() => {
-                    this._state = 'pending';
+                    this.state.state = 'pending';
                 }, this.props.successTimeout);
             })
             .catch((e) => {
-                this._state = 'error';
+                this.state.state = 'error';
                 setTimeout(() => {
-                    this._state = 'pending';
+                    this.state.state = 'pending';
                 }, this.props.errorTimeout);
             });
     }
@@ -130,7 +140,7 @@ export default class SClipboardCopy extends __SLitComponent {
             <div
                 @click=${() => this._copyFromTarget()}
                 class="${this.componentUtils.className('')}"
-                state="${this._state}"
+                state="${this.state.state}"
             >
                 <svg
                     ref="svg"

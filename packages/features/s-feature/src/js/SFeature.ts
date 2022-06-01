@@ -183,12 +183,14 @@ export default class SFeature extends __SClass implements ISFeature {
             ),
         );
 
-        this.componentUtils = new __SComponentUtils(node, node.attributes, {
+        this.componentUtils = new __SComponentUtils(node, {
             componentUtils: {
                 ...(this.settings.componentUtils ?? {}),
                 name,
             },
         });
+
+        // assign props
         this.props = this.componentUtils.props;
 
         // name
@@ -199,7 +201,10 @@ export default class SFeature extends __SClass implements ISFeature {
 
         (async () => {
             // @ts-ignore
-            this.componentUtils.waitAndExecute(this.mount?.bind(this));
+            this.componentUtils.waitAndExecute(
+                this.props.mountWhen,
+                this.mount?.bind(this),
+            );
         })();
     }
 

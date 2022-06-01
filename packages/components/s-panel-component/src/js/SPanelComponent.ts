@@ -155,9 +155,6 @@ export default class SPanel extends __SLitComponent {
         `;
     }
 
-    @property()
-    backdrop;
-
     _$nodes;
     _$container;
     _containerTransitionProps;
@@ -171,7 +168,7 @@ export default class SPanel extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SPanelComponentInterface,
+                    name: 's-panel',
                 },
             }),
         );
@@ -181,11 +178,6 @@ export default class SPanel extends __SLitComponent {
             const $panels = document.querySelectorAll(`s-panel#${this.id}`);
             $panels.forEach(($panel) => $panel !== this && $panel.remove());
         }
-
-        // make sure the panel is in the body tag
-        // if (this.parentNode !== document.body) {
-        //     // document.body.appendChild(this);
-        // }
 
         // get the initial nodes inside the panel tag
         this._$nodes = Array.from(this.children);

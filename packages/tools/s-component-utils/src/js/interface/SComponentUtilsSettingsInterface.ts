@@ -23,17 +23,25 @@ export default class SComponentUtilsSettingsInterface extends __SInterface {
     static get _definition() {
         return {
             interface: {
-                description: 'Specify an SInterface class to use as our properties definition',
+                description:
+                    'Specify an SInterface class to use as our properties definition',
                 type: 'SInterface',
             },
+            props: {
+                description:
+                    'Specify a properties object to use as our properties definition',
+                type: 'Object',
+            },
             style: {
-                description: 'Specify a style string to use as style to inject for our component',
-                type: 'String'
+                description:
+                    'Specify a style string to use as style to inject for our component',
+                type: 'String',
             },
             defaultProps: {
-                description: 'Pass an object that act as the default properties value for our component',
-                type: 'Object'
-            }
+                description:
+                    'Pass an object that act as the default properties value for our component',
+                type: 'Object',
+            },
         };
     }
 }

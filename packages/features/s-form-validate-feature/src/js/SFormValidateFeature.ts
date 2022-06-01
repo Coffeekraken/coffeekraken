@@ -1,7 +1,7 @@
 import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
-import __joi from 'joi';
+// import __joi from 'joi';
 import __tlds from '@sideway/address/lib/tlds';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __wrap from '@coffeekraken/sugar/js/dom/manipulate/wrap';

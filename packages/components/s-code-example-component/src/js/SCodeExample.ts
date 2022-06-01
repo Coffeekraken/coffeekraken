@@ -38,6 +38,7 @@ export interface ISCodeExampleComponentProps {
     toolbar: 'copy'[];
     toolbarPosition: 'content' | 'nav';
     lines: number;
+    items: any[];
     moreLabel: string;
     lessLabel: string;
     moreAction: 'toggle' | string;
@@ -117,27 +118,17 @@ export default class SCodeExample extends __SLitComponent {
     _$root;
     _$pre;
     _$content;
-    _more;
-
-    @property()
-    _items: HTMLElement[] = [];
-
-    @property()
-    _activeTabId = undefined;
-
-    @property({
-        type: String,
-    })
-    active;
-
-    @property()
-    props;
 
     @query('s-clipboard-copy')
     $copy;
 
     @query('.templates')
     $templatesContainer;
+
+    state = {
+        activeTabId: undefined,
+        more: false,
+    };
 
     // @queryAssignedNodes()
     $templates;
@@ -149,7 +140,7 @@ export default class SCodeExample extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SCodeExampleComponentInterface,
+                    name: 's-code-example',
                 },
             }),
         );
@@ -213,8 +204,8 @@ export default class SCodeExample extends __SLitComponent {
                     ],
                 });
             } catch (e) {}
-            this._items = [
-                ...this._items,
+            this.props.items = [
+                ...this.props.items,
                 {
                     id:
                         $template.getAttribute('id') ??
@@ -234,11 +225,11 @@ export default class SCodeExample extends __SLitComponent {
         });
 
         // active idx
-        if (this.active) {
-            this.setActiveTab(this.active);
+        if (this.props.active) {
+            this.setActiveTab(this.props.active);
         } else {
-            if (this._items[0]) {
-                this.setActiveTab(this._items[0].id);
+            if (this.props.items[0]) {
+                this.setActiveTab(this.props.items[0].id);
             }
         }
 
@@ -254,24 +245,23 @@ export default class SCodeExample extends __SLitComponent {
         this.setActiveTab(e.target.id);
     }
     get currentItem() {
-        if (!this._activeTabId) return {};
-        return this._items.find((i) => i.id === this._activeTabId);
+        if (!this.state.activeTabId) return {};
+        return this.props.items.find((i) => i.id === this.state.activeTabId);
     }
     async setActiveTab(id) {
         await __wait();
-        this._activeTabId = id;
+        this.state.activeTabId = id;
         this.highlight(id);
     }
     async setMoreClass() {
-        if (this._more) {
+        if (this.state.more) {
             this._$root.classList.add('s-code-example--more');
         } else {
             this._$root.classList.remove('s-code-example--more');
         }
-        this.requestUpdate();
     }
     toggleMore() {
-        this._more = !this._more;
+        this.state.more = !this.state.more;
         this.setMoreClass();
         __scrollTo(this, {
             ...(this.props.scrollToSettings ?? {}),
@@ -280,7 +270,7 @@ export default class SCodeExample extends __SLitComponent {
     highlight(id) {
         const $content = <HTMLElement>this.querySelector(`pre#${id} code`);
 
-        const item = this._items.find((i) => i.id === id);
+        const item = this.props.items.find((i) => i.id === id);
 
         if ($content.hasAttribute('inited')) {
             this.setMoreClass();
@@ -306,26 +296,27 @@ export default class SCodeExample extends __SLitComponent {
         this.setMoreClass();
     }
     copy() {
-        const id = this._activeTabId;
-        const item = this._items.filter((i) => i.id === id)[0];
+        const id = this.state.activeTabId;
+        const item = this.props.items.filter((i) => i.id === id)[0];
         // @ts-ignore
         this.$copy.copy(item.code);
     }
     render() {
         const currentItem = this.currentItem;
+
         return html`
             <div
                 class="${this.componentUtils.className()} ${this.props.more
                     ? this.componentUtils.className('more')
                     : ''}"
                 ?lines="${// @ts-ignore
-                this.lines}"
+                this.props.lines}"
                 ?mounted="${// @ts-ignore
                 this.mounted}"
                 ?bare="${// @ts-ignore
-                this.bare}"
+                this.props.bare}"
                 toolbar-position="${// @ts-ignore
-                this.toolbarPosition}"
+                this.props.toolbarPosition}"
             >
                 <div class="templates"></div>
 
@@ -336,14 +327,15 @@ export default class SCodeExample extends __SLitComponent {
                             's-tabs',
                         )}"
                     >
-                        ${(this._items ?? []).map(
+                        ${(this.props.items ?? []).map(
                             (item) => html`
                                 <div
                                     class="${this.componentUtils.className(
                                         '__tab',
                                     )}"
                                     id="${item.id}"
-                                    ?active="${this._activeTabId === item.id}"
+                                    ?active="${this.state.activeTabId ===
+                                    item.id}"
                                     @click="${this.setActiveTabByTab}"
                                 >
                                     ${item.lang}
@@ -384,7 +376,7 @@ export default class SCodeExample extends __SLitComponent {
                               </div>
                           `
                         : ''}
-                    ${(this._items ?? []).map(
+                    ${(this.props.items ?? []).map(
                         (item) => html`
                             <pre
                                 class="${this.componentUtils.className(
@@ -392,7 +384,7 @@ export default class SCodeExample extends __SLitComponent {
                                 )}"
                                 style="line-height:0;"
                                 id="${item.id ?? item.lang}"
-                                ?active="${this._activeTabId ===
+                                ?active="${this.state.activeTabId ===
                                 (item.id ?? item.lang)}"
                             >
                             <code lang="${item.lang ??
@@ -406,7 +398,7 @@ export default class SCodeExample extends __SLitComponent {
                         </pre>
                         `,
                     )}
-                    ${this.props.lines && currentItem.lines > this.lines
+                    ${this.props.lines && currentItem.lines > this.props.lines
                         ? html`
                         <div class="${this.componentUtils.className(
                             '__more-bar',
@@ -424,7 +416,7 @@ export default class SCodeExample extends __SLitComponent {
                                                   this.toggleMore()}"
                                           >
                                               ${// @ts-ignore
-                                              this._more
+                                              this.state.more
                                                   ? html`
                                                         ${this.props
                                                             .lessLabel ??
@@ -447,7 +439,7 @@ export default class SCodeExample extends __SLitComponent {
                                               this.moreAction}"
                                           >
                                               ${// @ts-ignore
-                                              this._more
+                                              this.state.more
                                                   ? html`
                                                         ${this.props
                                                             .lessLabel ??

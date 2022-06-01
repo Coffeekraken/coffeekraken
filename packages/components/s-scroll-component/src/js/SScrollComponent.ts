@@ -82,7 +82,7 @@ export default class SScrollComponent extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SScrollComponentInterface,
+                    name: 's-scroll',
                 },
             }),
         );

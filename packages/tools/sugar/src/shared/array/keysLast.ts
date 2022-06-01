@@ -1,6 +1,5 @@
 // @ts-nocheck
-
-import uniq from 'lodash/uniq';
+import __unique from './unique';
 
 /**
  * @name        keysLast
@@ -33,7 +32,7 @@ function keysLast(array, keys) {
     // reverse the array
     res = res.reverse();
     // remove double items
-    res = uniq(res);
+    res = __unique(res);
     // reverse back the array
     res = res.reverse();
     // return the result

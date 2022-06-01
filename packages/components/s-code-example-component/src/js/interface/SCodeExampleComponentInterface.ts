@@ -47,6 +47,11 @@ export default class SCodeExampleComponentInterface extends __SInterface {
                 type: 'Object',
                 default: {},
             },
+            items: {
+                description: 'Specify the items to put in your code example',
+                type: 'Object[]',
+                default: [],
+            },
             lines: {
                 description: 'Specify how many lines to display at max',
                 type: 'Number',

@@ -103,7 +103,7 @@ export default class SRange extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SRangeComponentInterface,
+                    name: 's-range',
                 },
             }),
         );
@@ -125,7 +125,7 @@ export default class SRange extends __SLitComponent {
         }
 
         // set the value to be sure the display is correct...
-        this._$input.value = this.value;
+        this._$input.value = this.props.value;
 
         // check if a form exists
         if (this._$input?.form) {
@@ -174,11 +174,11 @@ export default class SRange extends __SLitComponent {
                     )}"
                     type="range"
                     ?disabled="${this.props.disabled}"
-                    name="${this.name}"
-                    value="${this.value}"
-                    min="${this.min}"
-                    max="${this.max}"
-                    step="${this.step}"
+                    name="${this.props.name}"
+                    value="${this.props.value}"
+                    min="${this.props.min}"
+                    max="${this.props.max}"
+                    step="${this.props.step}"
                 />
                 ${this.props.tooltip
                     ? html`

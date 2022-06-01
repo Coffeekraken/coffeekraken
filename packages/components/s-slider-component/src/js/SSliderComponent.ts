@@ -321,13 +321,15 @@ export default class SSlider extends __SLitComponent {
     $slidesContainer: HTMLElement;
     $slidesWrapper: HTMLElement;
 
-    _currentSlideIdx = 0;
+    state = {
+        currentSlideIdx: 0,
+        playing: true,
+    };
     _timer = {
         total: 0,
         current: 0,
         percentage: 0,
     };
-    _playing = true;
 
     constructor() {
         super(
@@ -336,14 +338,17 @@ export default class SSlider extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SInterface.mix(
-                        __SSliderComponentInterface,
-                        __SComponentUtils.getDefaultProps('s-slider').behavior
-                            ?.interface ?? {},
-                    ),
+                    name: 's-slider',
                 },
             }),
         );
+    }
+    async mount() {
+        this.$slides = this.querySelectorAll('[s-slider-slide]');
+        this.$slides.forEach(($item) => {
+            // add the item class
+            $item.classList.add(this.componentUtils.className('__slide'));
+        });
     }
     async firstUpdated() {
         // bare elements
@@ -358,11 +363,6 @@ export default class SSlider extends __SLitComponent {
         this.$slidesContainer = this.querySelector(
             `.${this.componentUtils.className('__slides')}`,
         );
-        this.$slides = this.querySelectorAll('[s-slider-slide]');
-        this.$slides.forEach(($item) => {
-            // add the item class
-            $item.classList.add(this.componentUtils.className('__slide'));
-        });
 
         // handle navigation
         this._initNavigation();
@@ -464,8 +464,6 @@ export default class SSlider extends __SLitComponent {
             // navs
             this.$navs = this.querySelectorAll('[s-slider-nav]');
         }
-
-        this.requestUpdate();
     }
 
     /**
@@ -551,14 +549,15 @@ export default class SSlider extends __SLitComponent {
     /**
      * This function simply apply the current state of the slider
      */
-    requestUpdate() {
-        super.requestUpdate();
-        // update slides classes
-        this.$slides?.forEach(($slide, i) => {
-            if (i === this.currentSlideIdx) $slide.classList.add('active');
-            else $slide.classList.remove('active');
-        });
-    }
+    // requestUpdate() {
+    //     super.requestUpdate();
+    //     // update slides classes
+    //     this.$slides?.forEach(($slide, i) => {
+    //         if (i === this.state.currentSlideIdx)
+    //             $slide.classList.add('active');
+    //         else $slide.classList.remove('active');
+    //     });
+    // }
 
     /**
      * @name        isLast
@@ -572,7 +571,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isLast() {
-        return this.currentSlideIdx >= this.$slides.length - 1;
+        return this.state.currentSlideIdx >= this.$slides.length - 1;
     }
 
     /**
@@ -587,7 +586,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isFirst() {
-        return this.currentSlideIdx <= 0;
+        return this.state.currentSlideIdx <= 0;
     }
 
     /**
@@ -602,7 +601,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getCurrentSlideIdx(): number {
-        return this._currentSlideIdx;
+        return this.state.currentSlideIdx;
     }
 
     /**
@@ -617,8 +616,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setCurrentSlideByIdx(idx: number): void {
-        this._currentSlideIdx = idx;
-        this.requestUpdate();
+        this.state.currentSlideIdx = idx;
     }
 
     /**
@@ -664,7 +662,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getCurrentSlideElement(): HTMLElement {
-        return this.$slides[this._currentSlideIdx];
+        return this.$slides[this.state.currentSlideIdx];
     }
 
     /**
@@ -692,7 +690,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getNextSlideIdx(): number {
-        const nextSlideIdx = this._currentSlideIdx + 1;
+        const nextSlideIdx = this.state.currentSlideIdx + 1;
         if (nextSlideIdx >= this.$slides.length - 1)
             return this.$slides.length - 1;
         return nextSlideIdx;
@@ -751,7 +749,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getPreviousSlideIdx(): number {
-        const previousSlideIdx = this._currentSlideIdx - 1;
+        const previousSlideIdx = this.state.currentSlideIdx - 1;
         if (previousSlideIdx <= 0) return 0;
         return previousSlideIdx;
     }
@@ -846,7 +844,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getCurrentSlide(): ISSliderComponentSlide {
-        return this.getSlide(this.currentSlideIdx);
+        return this.getSlide(this.state.currentSlideIdx);
     }
 
     /**
@@ -969,7 +967,7 @@ export default class SSlider extends __SLitComponent {
         const nextSlide = this.getSlide(slideIdIdxOrElement);
         if (!nextSlide || nextSlide.idx === this.currentSlide.idx) return;
         const currentSlide = this.getCurrentSlide();
-        this._currentSlideIdx = nextSlide.idx;
+        this.state.currentSlideIdx = nextSlide.idx;
 
         this._dispatch('s-slider-goto', {
             currentSlide,
@@ -983,10 +981,8 @@ export default class SSlider extends __SLitComponent {
             nextSlide,
         });
 
-        this.requestUpdate();
-
         if (this.isPlaying()) {
-            this._playSlide(this.currentSlideIdx);
+            this._playSlide(this.state.currentSlideIdx);
         }
 
         return this;
@@ -1048,9 +1044,9 @@ export default class SSlider extends __SLitComponent {
                 current = 0;
             for (let i = 0; i < this.$slides.length; i++) {
                 const slide = this.getSlide(i);
-                if (i < this.currentSlideIdx) {
+                if (i < this.state.currentSlideIdx) {
                     current += slide.timer.total;
-                } else if (i === this.currentSlideIdx) {
+                } else if (i === this.state.currentSlideIdx) {
                     current += slide.timer.current;
                 }
                 total += slide.timer.total ?? 0;
@@ -1077,7 +1073,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isPlaying(): boolean {
-        if (!this._playing) return false;
+        if (!this.state.playing) return false;
         return this.props.timer !== undefined;
     }
 
@@ -1094,7 +1090,7 @@ export default class SSlider extends __SLitComponent {
      */
     play(): SSliderComponent {
         if (!this.props.timer) return;
-        this._playing = true;
+        this.state.playing = true;
         this._playSlide(this.currentSlide.idx);
         return this;
     }
@@ -1111,7 +1107,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     stop(): SSliderComponent {
-        this._playing = false;
+        this.state.playing = false;
         return this;
     }
 
@@ -1140,7 +1136,6 @@ export default class SSlider extends __SLitComponent {
             elapsed += interval;
             slide.timer.current = elapsed;
             slide.timer.percentage = (100 / slide.timer.total) * elapsed;
-            this.requestUpdate();
             if (elapsed >= slide.timer.total) {
                 clearInterval(slideInterval);
                 slide.timer.current = 0;
@@ -1189,20 +1184,17 @@ export default class SSlider extends __SLitComponent {
                 easing: this.props.transitionEasing,
             },
         );
-
-        this.requestUpdate();
     }
     render() {
-        let slide;
-        try {
-            slide = this.getCurrentSlide();
-        } catch (e) {}
+        if (!this.$slides.length) return;
+        const curentSlide = this.getCurrentSlide();
+        let slide = this.getCurrentSlide();
         return html`
             <div
                 class="${this.componentUtils.className('')}"
                 behavior="${this.props.behavior?.id}"
                 style="
-                    --s-slider-slide: ${this.currentSlideIdx};
+                    --s-slider-slide: ${this.state.currentSlideIdx};
                     --s-slider-total: ${this.$slides.length};
                     ${slide
                     ? `
@@ -1254,14 +1246,11 @@ export default class SSlider extends __SLitComponent {
                             const id = __parse(
                                 $nav.getAttribute('s-slider-nav'),
                             );
-                            if (
-                                id === this.getCurrentSlide().id ||
-                                id === this.getCurrentSlide().idx
-                            )
+                            if (id === curentSlide.id || id === curentSlide.idx)
                                 $nav.classList.add('active');
                             else $nav.classList.remove('active');
                         } else {
-                            if (this.currentSlideIdx === idx)
+                            if (this.state.currentSlideIdx === idx)
                                 $nav.classList.add('active');
                             else $nav.classList.remove('active');
                         }

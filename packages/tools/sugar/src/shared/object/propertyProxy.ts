@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import _get from 'lodash/get';
+import ___get from './get';
+
 /**
  * @name        propertyProxy
  * @namespace            js.object
@@ -48,11 +49,11 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
     const objPath = property.split('.').slice(0, -1).join('.');
     if (objPath) {
         property = property.split('.').pop();
-        obj = _get(obj, objPath);
+        obj = __get(obj, objPath);
     }
 
     // store the current value
-    let val = _get(obj, property);
+    let val = __get(obj, property);
     const currentDescriptor = Object.getOwnPropertyDescriptor(
         obj.prototype || obj,
         property,

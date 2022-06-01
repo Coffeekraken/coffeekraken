@@ -14,10 +14,12 @@ import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
+import __SComponentUtilsSettingsInterface from './interface/SComponentUtilsSettingsInterface';
 import __STheme from '@coffeekraken/s-theme';
 import __debounce from '@coffeekraken/sugar/shared/function/debounce';
 
 export interface ISComponentUtilsSettings {
+    name: string;
     interface?: typeof __SInterface;
     style: string;
     defaultProps?: any;
@@ -42,7 +44,7 @@ export interface ISComponentUtilsDefaultProps {
     responsive: any;
 }
 
-export default class SComponent extends __SClass {
+export default class SComponentUtils extends __SClass {
     /**
      * @name            props
      * @type            Object
@@ -95,7 +97,8 @@ export default class SComponent extends __SClass {
      */
     state = 'pending';
 
-    InterfaceToApply: __SInterface;
+    DefaultPropsInterface: __SInterface = __SComponentUtilsDefaultPropsInterface;
+    PropsInterface: __SInterface;
 
     /**
      * @name            setDefaultProps
@@ -138,7 +141,10 @@ export default class SComponent extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     static getDefaultProps(selector: string): any {
-        return this._defaultProps[selector] ?? {};
+        return {
+            ...(this._defaultProps['*'] ?? {}),
+            ...(this._defaultProps[selector] ?? {}),
+        };
     }
 
     /**
@@ -171,20 +177,20 @@ export default class SComponent extends __SClass {
      */
     constructor(
         node: HTMLElement,
-        props: any,
         settings: Partial<ISComponentUtilsCtorSettings> = {},
     ) {
         super(
             __deepMerge(
                 {
-                    componentUtils: {},
+                    componentUtils: __SComponentUtilsSettingsInterface.apply(
+                        {},
+                    ),
                 },
                 settings,
             ),
         );
 
         this.node = node;
-        this._props = props;
 
         // listen viewport status update
         this.inViewportStatusChange
@@ -196,11 +202,11 @@ export default class SComponent extends __SClass {
             });
 
         // build the final interface class to apply on props
-        let InterfaceToApply = class InlineSComponentUtilsInterface extends __SInterface {
+        let PropsInterface = class InlineSComponentUtilsInterface extends __SInterface {
             // static definition = {};
         };
         // @ts-ignore
-        InterfaceToApply.definition = {
+        PropsInterface.definition = {
             ...Object.assign(
                 {},
                 __SComponentUtilsDefaultPropsInterface.definition,
@@ -209,7 +215,11 @@ export default class SComponent extends __SClass {
             ...(this.componentUtilsSettings.interface?.definition ?? {}),
         };
         // @ts-ignore
-        this.InterfaceToApply = InterfaceToApply;
+        this.PropsInterface = PropsInterface;
+
+        if (this.componentUtilsSettings.interface) {
+            this.props = this.initProps();
+        }
 
         // @ts-ignore
         const styleStr = this.componentUtilsSettings.style;
@@ -311,18 +321,15 @@ export default class SComponent extends __SClass {
      * his "mount" state. This state depends fully on the "mountWhen" property.
      * When the state has been reached, the passed callback will be executed.
      *
+     * @param       {String}            when            When you want to execute the callback. Can be "direct", "inViewport", "nearViewport", "outOfViewport", "interact", "visible" or "stylesheetReady"
+     * @param       {Function}          callback            The callback to execute
      * @return          {Promise}           A promise fullfilled when the component (node) has reached his "mount" state
      *
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    waitAndExecute(callback: Function): Promise<any> {
-        let props = this.props;
-        if (this.node.tagName === 'CK-SEARCH-INPUT') {
-            props = this._props;
-            console.log('COCO', props);
-        }
-        return __SConductor.when(this.node, props.mountWhen, callback);
+    waitAndExecute(when: string, callback: Function): Promise<any> {
+        return __SConductor.when(this.node, when, callback);
     }
 
     /**
@@ -416,17 +423,10 @@ export default class SComponent extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _finalProps;
-    get props(): any {
-        // if props already builded
-        if (this._finalProps) return this._finalProps;
+    initProps(): any {
+        let _finalProps = {};
 
-        if (this.node.tagName === 'CK-SEARCH-INPUT') {
-            this._finalProps = {};
-            return {};
-        }
-
-        const props = this._props;
+        const props = this.componentUtilsSettings.props ?? this.node.attributes;
         let passedProps = {
             responsive: {},
         };
@@ -446,42 +446,42 @@ export default class SComponent extends __SClass {
         }
 
         // check for "<responsive>" tags
-        const $responsives = Array.from(this.node.children).filter(
-            ($child) => $child.tagName === 'RESPONSIVE',
-        );
-        if ($responsives.length) {
-            $responsives.forEach(($responsive) => {
-                const attrs = $responsive.attributes,
-                    responsiveProps = {};
-                let media;
+        // const $responsives = Array.from(this.node.children).filter(
+        //     ($child) => $child.tagName === 'RESPONSIVE',
+        // );
+        // if ($responsives.length) {
+        //     $responsives.forEach(($responsive) => {
+        //         const attrs = $responsive.attributes,
+        //             responsiveProps = {};
+        //         let media;
 
-                Object.keys(attrs).forEach((key) => {
-                    let value;
-                    if (attrs[key]?.nodeValue !== undefined) {
-                        if (attrs[key].nodeValue === '') value = true;
-                        else value = attrs[key].nodeValue;
-                    }
-                    if (!value) return;
+        //         Object.keys(attrs).forEach((key) => {
+        //             let value;
+        //             if (attrs[key]?.nodeValue !== undefined) {
+        //                 if (attrs[key].nodeValue === '') value = true;
+        //                 else value = attrs[key].nodeValue;
+        //             }
+        //             if (!value) return;
 
-                    const propName = attrs[key]?.name ?? key;
-                    if (propName === 'media') {
-                        media = value;
-                    } else {
-                        responsiveProps[propName] = value;
-                    }
-                });
-                if (media) {
-                    if (!passedProps.responsive[media]) {
-                        passedProps.responsive[media] = {};
-                    }
-                    passedProps.responsive[media] = responsiveProps;
-                }
-            });
-        }
+        //             const propName = attrs[key]?.name ?? key;
+        //             if (propName === 'media') {
+        //                 media = value;
+        //             } else {
+        //                 responsiveProps[propName] = value;
+        //             }
+        //         });
+        //         if (media) {
+        //             if (!passedProps.responsive[media]) {
+        //                 passedProps.responsive[media] = {};
+        //             }
+        //             passedProps.responsive[media] = responsiveProps;
+        //         }
+        //     });
+        // }
 
-        this._finalProps = __deepMerge(
+        _finalProps = __deepMerge(
             this.defaultProps,
-            this.InterfaceToApply.apply(passedProps, {
+            this.PropsInterface.apply(passedProps, {
                 descriptor: {
                     defaults: false,
                 },
@@ -489,12 +489,12 @@ export default class SComponent extends __SClass {
         );
 
         const _this = this;
-        this._finalProps = new Proxy(this._finalProps, {
+        const finalProps = new Proxy(_finalProps, {
             get(target, prop, receiver) {
                 return target[prop];
             },
             set(obj, prop, value) {
-                const propDef = _this.InterfaceToApply.definition[prop];
+                const propDef = _this.PropsInterface.definition[prop];
                 if (propDef?.physical) {
                     if (
                         value === false ||
@@ -515,11 +515,11 @@ export default class SComponent extends __SClass {
         });
 
         // reassign each props to make the Proxy apply physical props, etc...
-        Object.keys(this._finalProps).forEach((prop) => {
-            this._finalProps[prop] = this._finalProps[prop];
+        Object.keys(finalProps).forEach((prop) => {
+            finalProps[prop] = finalProps[prop];
         });
 
-        return this._finalProps;
+        return finalProps;
     }
 
     /**
@@ -542,7 +542,7 @@ export default class SComponent extends __SClass {
             {},
             __deepMerge(
                 // @ts-ignore
-                this.InterfaceToApply.defaults(),
+                this.PropsInterface.defaults(),
                 this.componentUtilsSettings.defaultProps ?? {},
                 (<any>this.constructor)._defaultProps['*'] ?? {},
                 (<any>this.constructor)._defaultProps[this.name] ?? {},
@@ -550,22 +550,6 @@ export default class SComponent extends __SClass {
         );
 
         return this._defaultProps;
-    }
-
-    static getFinalInterface(int?: typeof __SInterface): __SInterface {
-        class InlineSComponentUtilsInterface extends __SInterface {
-            static definition =
-                __SComponentUtilsDefaultPropsInterface.definition;
-        }
-        if (int) {
-            InlineSComponentUtilsInterface.definition = {
-                ...__SComponentUtilsDefaultPropsInterface.definition,
-                // @ts-ignore
-                ...int.definition,
-            };
-        }
-        // @ts-ignore
-        return InlineSComponentUtilsInterface;
     }
 
     static _injectedStyles: string[] = [];
@@ -614,12 +598,28 @@ export default class SComponent extends __SClass {
     className(cls = '', style = '') {
         let clsString = cls
             .split(' ')
-            .map(
-                (clsName) =>
+            .map((clsName) => {
+                const clses: string[] = [];
+                // class from the component tagname
+                clses.push(
                     `${this.node.tagName.toLowerCase()}${
                         clsName && !clsName.match(/^__/) ? '-' : ''
                     }${clsName}`,
-            )
+                );
+                // class from the passed "name" in the settings
+                if (
+                    this.componentUtilsSettings.name &&
+                    this.node.tagName.toLowerCase() !==
+                        this.componentUtilsSettings.name
+                ) {
+                    clses.push(
+                        `${this.componentUtilsSettings.name.toLowerCase()}${
+                            clsName && !clsName.match(/^__/) ? '-' : ''
+                        }${clsName}`,
+                    );
+                }
+                return clses.join(' ');
+            })
             .join(' ');
 
         if (style) {

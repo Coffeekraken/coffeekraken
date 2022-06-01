@@ -184,7 +184,7 @@ export default class SFiltrableInput extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SFiltrableInputComponentInterface,
+                    name: 's-filtrable-input',
                 },
             }),
         );
@@ -292,14 +292,18 @@ export default class SFiltrableInput extends __SLitComponent {
         });
 
         // @ts-ignore
-        this.$input.classList.add(this.componentUtils.className('__input'));
+        this.$input.classList.add(
+            ...this.componentUtils.className('__input').split(' '),
+        );
         if (this.props.classes.input) {
             this.$input.classList.add(this.props.classes.input);
         }
 
         this.$container = this;
         this.$container.classList.add('s-filtrable-input');
-        this.$container.classList.add(this.componentUtils.className());
+        this.$container.classList.add(
+            ...this.componentUtils.className().split(' '),
+        );
         if (this.props.classes.container) {
             this.$container.classList.add(this.props.classes.container);
         }
@@ -381,7 +385,6 @@ export default class SFiltrableInput extends __SLitComponent {
                     return;
                 }
                 const newIdx = currentIdx + 1;
-                console.log(newIdx);
                 if (newIdx > this.state.filteredItems.length - 1) return;
                 this.state.preselectedItems = [];
                 this.state.preselectedItems.push(
@@ -566,8 +569,8 @@ export default class SFiltrableInput extends __SLitComponent {
         let filteredItems = items;
 
         // custom function
-        if (this.props.filterItems) {
-            filteredItems = await this.props.filterItems(
+        if (this.props.filter) {
+            filteredItems = await this.props.filter(
                 filteredItems,
                 searchValue,
                 this.state,
@@ -679,23 +682,29 @@ export default class SFiltrableInput extends __SLitComponent {
     render() {
         return html`
             <div
-                class="s-filtrable-input__dropdown ${this.props.classes
-                    .dropdown}"
+                class="${this.componentUtils.className('__dropdown')} ${this
+                    .props.classes.dropdown}"
             >
                 <div
-                    class="s-filtrable-input__before ${this.props.classes
-                        .before}"
+                    class="${this.componentUtils.className('__before')} ${this
+                        .props.classes.before}"
                     tabindex="0"
                 >
                     ${this._getTemplate('before')}
                 </div>
-                <ul class="s-filtrable-input__list ${this.props.classes.list}">
+                <ul
+                    class="${this.componentUtils.className('__list')} ${this
+                        .props.classes.list}"
+                >
                     ${this.state.isLoading
                         ? html`
                               <li
-                                  class="s-filtrable-input__list-item ${this
-                                      .props.classes
-                                      .listItem} s-filtrable-input__list-loading"
+                                  class="${this.componentUtils.className(
+                                      '__list-item',
+                                  )} ${this.props.classes
+                                      .listItem} ${this.componentUtils.className(
+                                      '__list-loading',
+                                  )}"
                               >
                                   ${this.props.templates?.({
                                       type: 'loading',
@@ -712,9 +721,12 @@ export default class SFiltrableInput extends __SLitComponent {
                           this.state.filteredItems.length <= 0
                         ? html`
                               <li
-                                  class="s-filtrable-input__list-item ${this
-                                      .props.classes
-                                      .listItem} s-filtrable-input__list-no-item"
+                                  class="${this.componentUtils.className(
+                                      '__list-item',
+                                  )} ${this.props.classes
+                                      .listItem} ${this.componentUtils.className(
+                                      '__list-no-item',
+                                  )}"
                               >
                                   ${this.props.templates?.({
                                       type: 'empty',
@@ -743,8 +755,9 @@ export default class SFiltrableInput extends __SLitComponent {
                                                 this._setPreselectedItem(item)}
                                             style="z-index: ${999999999 - idx}"
                                             tabindex="0"
-                                            class="s-filtrable-input__list-item ${this
-                                                .props.classes
+                                            class="${this.componentUtils.className(
+                                                '__list-item',
+                                            )} ${this.props.classes
                                                 .listItem} ${this.state.selectedItems.includes(
                                                 item,
                                             )
@@ -774,7 +787,8 @@ export default class SFiltrableInput extends __SLitComponent {
                         : ''}
                 </ul>
                 <div
-                    class="s-filtrable-input__after ${this.props.classes.after}"
+                    class="${this.componentUtils.className('__after')} ${this
+                        .props.classes.after}"
                     tabindex="0"
                 >
                     ${this.props.templates?.({

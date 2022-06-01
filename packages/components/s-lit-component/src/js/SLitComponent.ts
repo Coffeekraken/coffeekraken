@@ -153,7 +153,6 @@ export default class SLitComponent extends LitElement {
 
         setTimeout(async () => {
             const _this = this,
-                default
                 defaultProps = __SComponentUtils.getDefaultProps(
                     this.tagName.toLowerCase(),
                 );

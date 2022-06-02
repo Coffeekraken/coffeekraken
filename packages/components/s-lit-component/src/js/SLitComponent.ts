@@ -1,18 +1,13 @@
 // @ts-nocheck
 // @TODO            check how to override private static methods
 
-// import __mustache from 'mustache';
-import __SInterface from '@coffeekraken/s-interface';
-import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot';
-import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
-import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
-import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SComponentUtils, {
     SComponentUtilsDefaultPropsInterface,
 } from '@coffeekraken/s-component-utils';
+import __SInterface from '@coffeekraken/s-interface';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { LitElement } from 'lit';
 
 export interface ISLitComponentSettings {

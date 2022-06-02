@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import fastdom from 'fastdom';
 import __dispatchEvent from '../dom/event/dispatchEvent';
 
 /**
@@ -52,30 +51,28 @@ function inputAdditionalEvents(
         switch (field.tagName) {
             case 'INPUT':
             case 'TEXTAREA':
-                fastdom.mutate(() => {
-                    if (e.keyCode) {
-                        switch (e.keyCode) {
-                            case 13: // enter
-                                if (
-                                    settings.enter &&
-                                    field.hasAttribute('onenter')
-                                ) {
-                                    eval(field.getAttribute('onenter'));
-                                    __dispatchEvent(field, 'enter');
-                                }
-                                break;
-                            case 27: // escape
-                                if (
-                                    settings.escape &&
-                                    field.hasAttribute('onescape')
-                                ) {
-                                    eval(field.getAttribute('onescape'));
-                                    __dispatchEvent(field, 'escape');
-                                }
-                                break;
-                        }
+                if (e.keyCode) {
+                    switch (e.keyCode) {
+                        case 13: // enter
+                            if (
+                                settings.enter &&
+                                field.hasAttribute('onenter')
+                            ) {
+                                eval(field.getAttribute('onenter'));
+                                __dispatchEvent(field, 'enter');
+                            }
+                            break;
+                        case 27: // escape
+                            if (
+                                settings.escape &&
+                                field.hasAttribute('onescape')
+                            ) {
+                                eval(field.getAttribute('onescape'));
+                                __dispatchEvent(field, 'escape');
+                            }
+                            break;
                     }
-                });
+                }
                 break;
         }
     }

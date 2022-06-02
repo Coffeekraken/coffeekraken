@@ -45,6 +45,7 @@ export default function (env, config) {
         engines: [
             '@coffeekraken/s-view-renderer-engine-blade',
             '@coffeekraken/s-view-renderer-engine-twig',
+            '@coffeekraken/s-view-renderer-engine-lit',
         ],
 
         /**

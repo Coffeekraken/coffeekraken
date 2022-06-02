@@ -1,8 +1,6 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SClass from '@coffeekraken/s-class';
-// import __mustache from 'mustache';
 import __SInterface from '@coffeekraken/s-interface';
-// import __handlebars from 'handlebars';
 import __striptags from '@coffeekraken/sugar/shared/html/striptags';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';

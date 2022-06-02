@@ -1,5 +1,6 @@
 import __querySelectorLive from '../dom/query/querySelectorLive';
 import __expandPleasantCssClassname from '../../shared/html/expandPleasantCssClassname';
+import __fastdom from 'fastdom';
 
 /**
  * @name            expandPleasantCssClassnamesLive
@@ -37,7 +38,9 @@ export default function expandPleasantCssClassnamesLive(
         ($elm) => {
             const classesStr = $elm.getAttribute('class');
             const newClassesStr = __expandPleasantCssClassname(classesStr);
-            $elm.setAttribute('class', newClassesStr);
+            __fastdom.mutate(() => {
+                $elm.setAttribute('class', newClassesStr);
+            });
         },
         {
             rootNode: settings?.rootNode,

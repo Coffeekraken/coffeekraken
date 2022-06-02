@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import _map from 'lodash/map';
-
 /**
  * @name      splitWords
  * @namespace            js.dom.utils
@@ -72,9 +70,11 @@ function _splitWords(elm, settings) {
     let words = string.match(
         /<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g,
     );
-    words = _map(words, (word) => {
-        return `<${settings.tag} class="${settings.class}__word">${word}</${settings.tag}>`;
-    }).join(' ');
+    words = words
+        .map((word) => {
+            return `<${settings.tag} class="${settings.class}__word">${word}</${settings.tag}>`;
+        })
+        .join(' ');
     elm.innerHTML = words;
 }
 export default splitWords;

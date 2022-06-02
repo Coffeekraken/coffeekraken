@@ -41,7 +41,7 @@ import __krakenLogo from './generic/krakenLogo';
 import __SCssAnimation from '@coffeekraken/s-css-animation';
 
 // @ts-ignore
-const viewsRelated = import.meta.globEager('../views/**/*.ts');
+// const viewsRelated = import.meta.globEager('../views/**/*.ts');
 // @ts-ignore
 const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
@@ -80,10 +80,10 @@ __SConductor.setup({
     __CkFallingStarsComponent();
 
     // views related
-    for (let [key, value] of Object.entries(viewsRelated)) {
-        // @ts-ignore
-        if (typeof value.default === 'function') value.default();
-    }
+    // for (let [key, value] of Object.entries(viewsRelated)) {
+    //     // @ts-ignore
+    //     if (typeof value.default === 'function') value.default();
+    // }
     // forDoc related
     for (let [key, value] of Object.entries(forDocRelated)) {
         // @ts-ignore
@@ -104,9 +104,9 @@ __SConductor.setup({
     __SCodeExampleWebcomponent();
     __SFiltrableInputComponent();
     __SSidePanelWebcomponent();
-    __SColorPickerWebcomponent();
+    // __SColorPickerWebcomponent();
     __SScrollComponent();
-    __SDatePickerWebcomponent();
+    // __SDatePickerWebcomponent();
     __SRangeWebcomponent();
     __SSliderComponent({
         behaviors: {

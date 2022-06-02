@@ -1970,12 +1970,36 @@
   resolved "https://registry.npmjs.org/@kristoferbaxter/estree-walker/-/estree-walker-2.0.2.tgz"
   integrity sha512-aPFon+UXJ0758piFg/sp0tKr67675UWR9ssa39gN0ynJAY5wDQ8u57H0Z0uaeu0z1gEvLnLF8T1/rLrCZ4gFIg==
 
+"@lit-labs/ssr-client@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@lit-labs/ssr-client/-/ssr-client-1.0.1.tgz#b97e121184aa201bbe6f165f3a7dc919f67129a2"
+  integrity sha512-rr/UVhxbKWNUr+3qRyvZk+glC7v7ph8Gk/W0z96YG64COJKf9ilnWY6JGW77TRqhrRMmS2nsvAXOyQgcF+4jrA==
+  dependencies:
+    "@lit/reactive-element" "^1.0.0"
+    lit "^2.0.0"
+    lit-html "^2.0.0"
+
+"@lit-labs/ssr@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@lit-labs/ssr/-/ssr-2.2.0.tgz#f1c9922f4f6af487fd8a621790c18ba2f3eb9532"
+  integrity sha512-XL8Iur+i7mSnBwou8MOezOayawNKklaer9F3PvrN0PhwhI/ZQGngWiYDdgGOUxoSJCmBN8ss/zlQ3GHXkbilkw==
+  dependencies:
+    "@lit-labs/ssr-client" "^1.0.0"
+    "@lit/reactive-element" "^1.1.0"
+    "@types/node" "^16.0.0"
+    lit "^2.1.0"
+    lit-element "^3.1.0"
+    lit-html "^2.1.0"
+    node-fetch "^2.6.0"
+    parse5 "^6.0.1"
+    resolve "^1.10.1"
+
 "@lit/reactive-element@^1.0.0":
   version "1.0.1"
   resolved "https://registry.npmjs.org/@lit/reactive-element/-/reactive-element-1.0.1.tgz"
   integrity sha512-nSD5AA2AZkKuXuvGs8IK7K5ZczLAogfDd26zT9l6S7WzvqALdVWcW5vMUiTnZyj5SPcNwNNANj0koeV1ieqTFQ==
 
-"@lit/reactive-element@^1.3.0":
+"@lit/reactive-element@^1.1.0", "@lit/reactive-element@^1.3.0":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.3.2.tgz#43e470537b6ec2c23510c07812616d5aa27a17cd"
   integrity sha512-A2e18XzPMrIh35nhIdE4uoqRzoIpEU5vZYuQN4S3Ee1zkGdYC27DP12pewbw/RLgPHzaE4kx/YqxMzebOpm0dA==
@@ -2531,6 +2555,11 @@
   version "14.17.33"
   resolved "https://registry.npmjs.org/@types/node/-/node-14.17.33.tgz"
   integrity sha512-noEeJ06zbn3lOh4gqe2v7NMGS33jrulfNqYFDjjEbhpDEHR5VTxgYNQSBqBlJIsBJW3uEYDgD6kvMnrrhGzq8g==
+
+"@types/node@^16.0.0":
+  version "16.11.38"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.38.tgz#be0edd097b23eace6c471c525a74b3f98803017f"
+  integrity sha512-hjO/0K140An3GWDw2HJfq7gko3wWeznbjXgg+rzPdVzhe198hp4x2i1dgveAOEiFKd8sOilAxzoSJiVv5P/CUg==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -10204,7 +10233,7 @@ lit-element@^3.0.0:
     "@lit/reactive-element" "^1.0.0"
     lit-html "^2.0.0"
 
-lit-element@^3.2.0:
+lit-element@^3.1.0, lit-element@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-3.2.0.tgz#9c981c55dfd9a8f124dc863edb62cc529d434db7"
   integrity sha512-HbE7yt2SnUtg5DCrWt028oaU4D5F4k/1cntAFHTkzY8ZIa8N0Wmu92PxSxucsQSOXlODFrICkQ5x/tEshKi13g==
@@ -10224,12 +10253,21 @@ lit-html@^2.0.0:
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
-lit-html@^2.2.0:
+lit-html@^2.1.0, lit-html@^2.2.0:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.2.5.tgz#e2b4fbdb3b57e38a3bce23c8473d72ba0e652ed8"
   integrity sha512-e56Y9V+RNA+SGYsWP2DGb/wad5Ccd3xUZYjmcmbeZcnc0wP4zFQRXeXn7W3bbfBekmHDK2dOnuYNYkg0bQjh/w==
   dependencies:
     "@types/trusted-types" "^2.0.2"
+
+lit@^2.0.0, lit@^2.1.0, lit@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/lit/-/lit-2.2.5.tgz#60e8dd5b751fe31f849c64f74f1784a88235d664"
+  integrity sha512-Ln463c0xJZfzVxBcHddNvFQQ8Z22NK7KgNmrzwFF1iESHUud412RRExzepj18wpTbusgwoTnOYuoTpo9uyNBaQ==
+  dependencies:
+    "@lit/reactive-element" "^1.3.0"
+    lit-element "^3.2.0"
+    lit-html "^2.2.0"
 
 lit@^2.0.0-rc.3:
   version "2.0.2"
@@ -10239,15 +10277,6 @@ lit@^2.0.0-rc.3:
     "@lit/reactive-element" "^1.0.0"
     lit-element "^3.0.0"
     lit-html "^2.0.0"
-
-lit@^2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/lit/-/lit-2.2.5.tgz#60e8dd5b751fe31f849c64f74f1784a88235d664"
-  integrity sha512-Ln463c0xJZfzVxBcHddNvFQQ8Z22NK7KgNmrzwFF1iESHUud412RRExzepj18wpTbusgwoTnOYuoTpo9uyNBaQ==
-  dependencies:
-    "@lit/reactive-element" "^1.3.0"
-    lit-element "^3.2.0"
-    lit-html "^2.2.0"
 
 load-bmfont@^1.2.3, load-bmfont@^1.3.1, load-bmfont@^1.4.0:
   version "1.4.1"
@@ -11235,6 +11264,13 @@ node-fetch@3.0.0-beta.9:
   dependencies:
     data-uri-to-buffer "^3.0.1"
     fetch-blob "^2.1.1"
+
+node-fetch@^2.6.0:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
+  dependencies:
+    whatwg-url "^5.0.0"
 
 node-fetch@^2.6.1, node-fetch@^2.6.5:
   version "2.6.6"
@@ -13724,7 +13760,7 @@ resolve@^1.1.7, resolve@^1.10.0, resolve@^1.14.2, resolve@^1.18.1, resolve@^1.19
     is-core-module "^2.2.0"
     path-parse "^1.0.6"
 
-resolve@^1.22.0:
+resolve@^1.10.1, resolve@^1.22.0:
   version "1.22.0"
   resolved "https://registry.npmjs.org/resolve/-/resolve-1.22.0.tgz"
   integrity sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw==

@@ -1,18 +1,15 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
+import __sameItems from '@coffeekraken/sugar/shared/array/sameItems';
+import __striptags from '@coffeekraken/sugar/shared/html/striptags';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
-import __SRequest from '@coffeekraken/s-request';
-import __striptags from '@coffeekraken/sugar/shared/html/striptags';
-import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
 import __miniSearch from 'minisearch';
-import __sameItems from '@coffeekraken/sugar/shared/array/sameItems';
-import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
-import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
-
-import { loadDocmap, setState, getState } from '../state/state';
+import { getState, loadDocmap, setState } from '../state/state';
 
 export default class DocNav extends __SLitComponent {
     maxItems = 10;

@@ -81,7 +81,7 @@ export default function (env, config) {
          */
         customSettings: {
             pages: {
-                glob: '**/pages/**/*.ts',
+                glob: '**/(pages|views)/**/*.ts',
                 settings: {
                     outDir: '[config.storage.src.rootDir]',
                     formats: ['esm'],

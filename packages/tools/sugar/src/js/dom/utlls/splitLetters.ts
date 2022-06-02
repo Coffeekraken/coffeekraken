@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import _map from 'lodash/map';
-
 function _decodeHtml(html) {
     const txt = document.createElement('textarea');
     txt.innerHTML = html;
@@ -106,14 +104,16 @@ function splitLetters(
     );
 
     // split words
-    words = _map(words, (word) => {
-        return `<${settings.tag} style="white-space:nowrap">${word}</${settings.tag}>`;
-    }).join(' ');
+    words = words
+        .map((word) => {
+            return `<${settings.tag} style="white-space:nowrap">${word}</${settings.tag}>`;
+        })
+        .join(' ');
 
     let letters = _decodeHtml(words).split('');
 
     let hasTagOpened = false;
-    letters = _map(letters, (letter) => {
+    letters = letters.map((letter) => {
         // check if a tag has started
         if (letter === '<') hasTagOpened = true;
         else if (letter === '>') {

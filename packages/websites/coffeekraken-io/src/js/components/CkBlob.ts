@@ -2,32 +2,14 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-// import { TextureLoader } from './lib/three/examples/jsm/loaders/TextureLoader.js';
-// import {
-//     BloomEffect,
-//     EffectComposer,
-//     EffectPass,
-//     DotScreenEffect,
-//     GodRaysEffect,
-//     BlendFunction,
-//     ShockWaveEffect,
-//     NoiseEffect,
-//     OutlineEffect,
-//     GlitchEffect,
-//     DepthOfFieldEffect,
-//     PixelationEffect,
-//     RenderPass,
-// } from 'postprocessing';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
+import __STheme from '@coffeekraken/s-theme';
+// import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
 import { html } from 'lit';
 import * as THREE from 'three';
-// import __perlin from './lib/perlinNoise';
-// import { RGBELoader } from './lib/RGBELoader';
 import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
-import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
+// import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
 import { EffectComposer } from './lib/three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from './lib/three/examples/jsm/postprocessing/RenderPass.js';
-import __STheme from '@coffeekraken/s-theme';
 
 interface IFlyingCoffee {
     grain: any;
@@ -514,17 +496,17 @@ export default class CKBlob extends __SLitComponent {
         });
     }
 
-    loadEnvMap() {
-        return new Promise((resolve) => {
-            let envmaploader = new THREE.PMREMGenerator(this._renderer);
-            new RGBELoader()
-                .setPath(`${__SSugarConfig.get('serve.img.url')}/3d/`)
-                .load('HDRI_STUDIO_vol2_030.hdr', function (hdrmap) {
-                    let envmap = envmaploader.fromCubemap(hdrmap);
-                    resolve(envmap);
-                });
-        });
-    }
+    // loadEnvMap() {
+    //     return new Promise((resolve) => {
+    //         let envmaploader = new THREE.PMREMGenerator(this._renderer);
+    //         new RGBELoader()
+    //             .setPath(`${__SSugarConfig.get('serve.img.url')}/3d/`)
+    //             .load('HDRI_STUDIO_vol2_030.hdr', function (hdrmap) {
+    //                 let envmap = envmaploader.fromCubemap(hdrmap);
+    //                 resolve(envmap);
+    //             });
+    //     });
+    // }
     animate() {
         if (!this.componentUtils.isInViewport()) {
             setTimeout(() => {

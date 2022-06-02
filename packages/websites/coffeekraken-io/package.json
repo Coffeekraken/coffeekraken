@@ -8,7 +8,7 @@
         "dev": "sugar frontstack dev",
         "prod": "sugar frontstack prod",
         "build": "sugar frontstack build",
-        "deploy.bogdanov": "rsync -avzh --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"
+        "deploy.bogdanov": "rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"
     },
     "repository": {
         "type": "git",

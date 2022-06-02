@@ -20,7 +20,7 @@ import __isVisible from '../is/visible';
  * @todo      tests
  *
  * @example  	js
- * import closestNotVisible from 'sugarcss/js/dom/query/closestNotVisible'
+ * import closestNotVisible from '@coffeekraken/sugar/js/dom/query/closestNotVisible'
  * const closestElm = closestNotVisible(myCoolElement);
  * if (closestElm) {
  * 		// we have found en element that is not visible

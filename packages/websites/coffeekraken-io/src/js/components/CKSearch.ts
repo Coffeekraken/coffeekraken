@@ -111,23 +111,23 @@ __sFiltrableInputDefine(
                     items.push(item);
                 });
 
-                window.localStorage.setItem(
-                    'ck-search-items',
-                    JSON.stringify(items),
-                );
+                // window.localStorage.setItem(
+                //     'ck-search-items',
+                //     JSON.stringify(items),
+                // );
 
                 return items;
             }
 
             let items;
 
-            const cached = window.localStorage.getItem('ck-search-items');
-            if (!cached) {
-                items = await fetchItems();
-            } else {
-                fetchItems();
-                items = JSON.parse(cached);
-            }
+            // const cached = window.localStorage.getItem('ck-search-items');
+            // if (!cached) {
+            items = await fetchItems();
+            // } else {
+            //     fetchItems();
+            //     items = JSON.parse(cached);
+            // }
 
             if (value.match(/^@([a-z_-]+)?$/)) {
                 let packageName = value.replace(/^@/, '');
@@ -267,8 +267,10 @@ export default class CKSearch extends __SLitComponent {
             __cursorToEnd(this._$input);
         });
 
-        this.addEventListener('selectItem', (e) => {
+        this.addEventListener('s-filtrable-input.select', (e) => {
             const { item, $elm } = e.detail;
+
+            console.log(e);
 
             if (item.type === 'category' || item.type === 'package') {
                 this._$input.value = item.value + ' ';

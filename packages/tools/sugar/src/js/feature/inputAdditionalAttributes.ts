@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import fastdom from 'fastdom';
 import __querySelectorLive from '../dom/query/querySelectorLive';
 
 /**
@@ -58,40 +57,38 @@ function inputAdditionalAttributes(
             case 'INPUT':
             case 'TEXTAREA':
             case 'SELECT':
-                fastdom.mutate(() => {
-                    if (
-                        field.type &&
-                        (field.type === 'checkbox' || field.type === 'radio')
-                    )
-                        return;
-                    if (field.value && !field.hasAttribute('has-value')) {
-                        if (settings.hasValue) {
-                            field.setAttribute('has-value', true);
-                        }
-                        if (settings.empty) {
-                            field.removeAttribute('empty');
-                        }
-                    } else if (
-                        field.value === undefined ||
-                        field.value === null ||
-                        field.value === ''
-                    ) {
-                        if (settings.hasValue) {
-                            field.removeAttribute('has-value');
-                        }
-                        field.removeAttribute('value');
-                        if (settings.empty) {
-                            if (!field.hasAttribute('empty')) {
-                                field.setAttribute('empty', true);
-                            }
+                if (
+                    field.type &&
+                    (field.type === 'checkbox' || field.type === 'radio')
+                )
+                    return;
+                if (field.value && !field.hasAttribute('has-value')) {
+                    if (settings.hasValue) {
+                        field.setAttribute('has-value', true);
+                    }
+                    if (settings.empty) {
+                        field.removeAttribute('empty');
+                    }
+                } else if (
+                    field.value === undefined ||
+                    field.value === null ||
+                    field.value === ''
+                ) {
+                    if (settings.hasValue) {
+                        field.removeAttribute('has-value');
+                    }
+                    field.removeAttribute('value');
+                    if (settings.empty) {
+                        if (!field.hasAttribute('empty')) {
+                            field.setAttribute('empty', true);
                         }
                     }
-                    if (settings.dirty) {
-                        if (!field.hasAttribute('dirty') && field.value) {
-                            field.setAttribute('dirty', true);
-                        }
+                }
+                if (settings.dirty) {
+                    if (!field.hasAttribute('dirty') && field.value) {
+                        field.setAttribute('dirty', true);
                     }
-                });
+                }
                 break;
         }
     }
@@ -104,9 +101,7 @@ function inputAdditionalAttributes(
             // stop here if is a submit
             if (e.type === 'submit') return;
             // remove dirty attribute
-            fastdom.mutate(() => {
-                field.removeAttribute('dirty');
-            });
+            field.removeAttribute('dirty');
         });
     }
 

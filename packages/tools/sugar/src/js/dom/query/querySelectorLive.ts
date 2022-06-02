@@ -51,7 +51,7 @@ function querySelectorLive(
     cb: Function<HTMLElement> = null,
     settings: Partial<IQuerySelectorLiveSettings> = {},
 ): __SPromise<HTMLElement> {
-    const id = `${selector} - ${uniqid()}`;
+    // const id = `${selector} - ${uniqid()}`;
 
     let _emit;
 
@@ -66,147 +66,45 @@ function querySelectorLive(
         settings,
     );
 
-    if (!_selectors[selector]) {
-        _selectors[selector] = [
-            {
-                id: id,
-                selector: selector,
-                cb: cb,
-                lastMutationId: null,
-                settings: settings,
-            },
-        ];
-    } else {
-        _selectors[selector].push({
-            id: id,
-            selector: selector,
-            cb: cb,
-            lastMutationId: null,
-            settings: settings,
-        });
-    }
-
-    function pushNewNode(node, sel, mutationId) {
-        const objs = _selectors[sel];
-        if (!objs) return;
-
-        objs.forEach((obj) => {
-            // avoid calling multiple times sams callback for the same mutation process
-            if (obj.lastMutationId && obj.lastMutationId === mutationId) return;
-
-            if (obj.settings.once) {
-                if (!node._querySelectorLive) {
-                    node._querySelectorLive = {};
-                }
-                if (node._querySelectorLive[obj.id]) return;
-                node._querySelectorLive[obj.id] = true;
-            }
-
-            _emit?.('node', node);
-
-            obj.cb &&
-                obj.cb(node, () => {
-                    delete _selectors[obj.selector];
-                });
-        });
-    }
-
-    function removeNode(node, sel, mutationId) {
-        const objs = _selectors[sel];
-        if (!objs) return;
-
-        objs.forEach((obj) => {
-            // avoid calling multiple times sams callback for the same mutation process
-            if (obj.lastMutationId && obj.lastMutationId === mutationId) return;
-
-            if (obj.settings.once) {
-                if (!node._querySelectorLive) {
-                    node._querySelectorLive = {};
-                }
-                if (node._querySelectorLive[obj.id]) return;
-                node._querySelectorLive[obj.id] = true;
-            }
-
-            _emit?.('removedNode', node);
-
-            obj.settings.onRemove &&
-                obj.settings.onRemove(node, () => {
-                    delete _selectors[obj.selector];
-                });
-        });
-    }
-
     // listen for updates in document
-    if (!_observer) {
-        _observer = new MutationObserver((mutations) => {
-            const mutationId = `mutation-${uniqid()}`;
-
-            mutations.forEach((mutation) => {
-                if (mutation.removedNodes && mutation.removedNodes.length) {
-                    [].forEach.call(mutation.removedNodes, (node) => {
-                        // get all the selectors registered
-                        const selectors = Object.keys(_selectors);
-
-                        // loop on each selectors
-                        selectors.forEach((sel) => {
-                            if (matches(node, sel)) {
-                                removeNode(node, sel, mutationId);
-                            }
-                        });
-                        if (!node.querySelectorAll) return;
-                        selectors.forEach((sel) => {
-                            const nestedNodes = node.querySelectorAll(sel);
-                            [].forEach.call(nestedNodes, (nestedNode) => {
-                                removeNode(nestedNode, sel, mutationId);
-                            });
-                        });
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.addedNodes && mutation.addedNodes.length) {
+                [].forEach.call(mutation.addedNodes, (node) => {
+                    if (!node.querySelectorAll) return;
+                    if (node.matches(selector)) {
+                        if (settings.once) observer.disconnect();
+                        cb(node);
+                        _emit?.('node', node);
+                    }
+                    const nestedNodes = node.querySelectorAll(selector);
+                    [].forEach.call(nestedNodes, (nestedNode) => {
+                        cb(nestedNode);
+                        _emit?.('node', nestedNode);
                     });
+                });
+            } else if (mutation.attributeName) {
+                if (mutation.target.matches(selector)) {
+                    if (settings.once) observer.disconnect();
+                    cb(mutation.target);
+                    _emit?.('node', mutation.target);
                 }
-
-                if (mutation.addedNodes && mutation.addedNodes.length) {
-                    [].forEach.call(mutation.addedNodes, (node) => {
-                        if (!node.querySelectorAll) return;
-
-                        // get all the selectors registered
-                        const selectors = Object.keys(_selectors);
-
-                        // loop on each selectors
-                        selectors.forEach((sel) => {
-                            if (matches(node, sel)) {
-                                pushNewNode(node, sel, mutationId);
-                            }
-                        });
-                        selectors.forEach((sel) => {
-                            const nestedNodes = node.querySelectorAll(sel);
-                            [].forEach.call(nestedNodes, (nestedNode) => {
-                                pushNewNode(nestedNode, sel, mutationId);
-                            });
-                        });
-                    });
-                } else if (mutation.attributeName) {
-                    // get all the selectors registered
-                    const selectors = Object.keys(_selectors);
-                    // loop on each selectors
-                    selectors.forEach((sel) => {
-                        if (matches(mutation.target, sel)) {
-                            pushNewNode(mutation.target, sel, mutationId);
-                        }
-                    });
-                }
-            });
+            }
         });
-        _observer.observe(settings.rootNode, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ['class', 'id'],
-        });
-    }
+    });
+    observer.observe(settings.rootNode, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'id'],
+    });
 
     // first search
     [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
         if (!node.querySelectorAll) return;
-        pushNewNode(node, selector, 'init');
+        // pushNewNode(node, selector, 'init');
+        cb(node);
+        _emit?.('node', node);
     });
 
     return new __SPromise(({ resolve, reject, emit }) => {

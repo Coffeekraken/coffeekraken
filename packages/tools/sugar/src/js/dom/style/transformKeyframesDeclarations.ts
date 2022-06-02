@@ -1,9 +1,7 @@
 import __camelCase from '../../../shared/string/camelCase';
-
-import __parseKeyframeKey from './parseKeyframeKey';
 import __getDefinedStyles from './getDefinedStyles';
+import __parseKeyframeKey from './parseKeyframeKey';
 import __removeVendorPrefix from './removeVendorPrefix';
-import { number } from 'yargs';
 
 /**
  * @name      transformKeyframesDeclarations

@@ -1,7 +1,6 @@
 // @ts-nocheck
 // @TODO            check how to override private static methods
 
-// import __mustache from 'mustache';
 import __SClass from '@coffeekraken/s-class';
 import __SConductor from '@coffeekraken/s-conductor';
 import __SInterface from '@coffeekraken/s-interface';
@@ -15,8 +14,6 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
 import __SComponentUtilsSettingsInterface from './interface/SComponentUtilsSettingsInterface';
-import __STheme from '@coffeekraken/s-theme';
-import __debounce from '@coffeekraken/sugar/shared/function/debounce';
 
 export interface ISComponentUtilsSettings {
     name: string;

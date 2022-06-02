@@ -126,7 +126,7 @@ export default class SImagesBuilder extends __SBuilder {
             __deepMerge(
                 {
                     // @ts-ignore
-                    imagesBuilder: __SImagesBuilderSettingsInterface.default(),
+                    imagesBuilder: __SImagesBuilderSettingsInterface.defaults(),
                 },
                 settings ?? {},
             ),

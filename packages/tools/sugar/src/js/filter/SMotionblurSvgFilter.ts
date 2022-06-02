@@ -1,9 +1,8 @@
 // @ts-nocheck
 
 import __offset from '../dom/offset/offset';
-import SSvgFilter from './SSvgFilter';
-import fastdom from 'fastdom';
 import forceRedraw from '../dom/utlls/forceRedraw';
+import SSvgFilter from './SSvgFilter';
 
 /**
  * @name 		SMotionblurSvgFilter
@@ -166,12 +165,10 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
         if (!this._isMoving) return;
         // update is moving status
         this._isMoving = false;
-        fastdom.mutate(() => {
-            // set the blur
-            this._blur.setAttribute('stdDeviation', 0 + ',' + 0);
-            // redraw the element to ensure proper display
-            forceRedraw(this.elms[0]);
-        });
+        // set the blur
+        this._blur.setAttribute('stdDeviation', 0 + ',' + 0);
+        // redraw the element to ensure proper display
+        forceRedraw(this.elms[0]);
     }
 
     /**

@@ -486,9 +486,10 @@ export default class SFiltrableInput extends __SLitComponent {
         ];
 
         // dispatch an event
-        const event = new CustomEvent('selectItem', {
+        const event = new CustomEvent('s-filtrable-input.select', {
             bubbles: true,
             detail: {
+                item: this.state.selectedItems[0],
                 items: this.state.selectedItems,
                 $elm: $selectedItem,
             },

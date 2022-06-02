@@ -21,7 +21,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @todo      tests
  *
  * @example  	js
- * import observeAttributes from 'sugarcss/js/dom/observeAttributes'
+ * import observeAttributes from '@coffeekraken/sugar/js/dom/observeAttributes'
  * const observer = observeAttributes(myCoolHTMLElement).then(mutation => {
  * 		// do something with the mutation
  * });

@@ -1,6 +1,3 @@
-import __splitEvery from '../../shared/string/splitEvery';
-import __jsStringCompression from 'js-string-compression';
-
 /**
  * @name        localStorage
  * @namespace   js.storage

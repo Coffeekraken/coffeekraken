@@ -16,11 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -34,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -72,6 +77,7 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
@@ -109,47 +115,6 @@
                         "code": "<bodyTag s-sugar>\n\n</bodyTag>"
                     }
                 ],
-                "interface": {
-                    "name": "SSugarFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "scrolled": {
-                            "description": "Specify if you want the `scrolled` class to be applied on the `body` element when the page has been scrolled",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "scrolledDelta": {
-                            "description": "Specify after how many scroll the scrolled class will be applied",
-                            "type": "Number",
-                            "default": 10
-                        },
-                        "vhvar": {
-                            "description": "Specify if you want the `--vh` css variable to be computed and available",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "inputAdditionalAttributes": {
-                            "description": "Specify if you want to have the additional attributes on inputs like \"has-value\", \"empty\" and \"dirty\" or not",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "resizeTransmations": {
-                            "description": "Specify if you want all the transitions and animations cleared during window resize",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "linksStateAttributes": {
-                            "description": "Specify if you want to have the state attributes on links like \"actual\" and \"actual-child\" or not",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "preventScrollRestoration": {
-                            "description": "Specify if you want to prevent the scroll restoration behavior on chrome that can usually be anoying",
-                            "type": "Boolean",
-                            "default": true
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -174,56 +139,15 @@
                 "description": "This interface represent the attributes of the SSugarFeature",
                 "namespace": "@coffeekraken.s-sugar-feature.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSugarFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "scrolled": {
-                            "description": "Specify if you want the `scrolled` class to be applied on the `body` element when the page has been scrolled",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "scrolledDelta": {
-                            "description": "Specify after how many scroll the scrolled class will be applied",
-                            "type": "Number",
-                            "default": 10
-                        },
-                        "vhvar": {
-                            "description": "Specify if you want the `--vh` css variable to be computed and available",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "inputAdditionalAttributes": {
-                            "description": "Specify if you want to have the additional attributes on inputs like \"has-value\", \"empty\" and \"dirty\" or not",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "resizeTransmations": {
-                            "description": "Specify if you want all the transitions and animations cleared during window resize",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "linksStateAttributes": {
-                            "description": "Specify if you want to have the state attributes on links like \"actual\" and \"actual-child\" or not",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "preventScrollRestoration": {
-                            "description": "Specify if you want to prevent the scroll restoration behavior on chrome that can usually be anoying",
-                            "type": "Boolean",
-                            "default": true
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SSugarFeatureInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SSugarFeatureInterface.ts",
+                "filename": "SSugarFeatureInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SSugarFeatureInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-sugar-feature.sugar.css.font.default": {

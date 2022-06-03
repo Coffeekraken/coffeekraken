@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  * This mixin generate all the width helper classes like s-width:20, s-width:50, etc...
  * It will generate all the width defined in the config.theme.width configuration stack
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.width.classes;

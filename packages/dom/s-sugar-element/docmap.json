@@ -16,10 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -33,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -57,7 +63,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -211,7 +216,7 @@
                         }
                     },
                     "settranslate": {
-                        "id": "2b4fc609a2c2b821866b8631ababddc5856a3d44ea72c86dccd35800a3e28822",
+                        "id": "c396100ca6c469936269777f130c210fd44005a9f4b1b96f6371deb6bd4f3544",
                         "name": "setTranslate",
                         "type": "Function",
                         "description": "Allows you to set the translate of an HTMLElement by setting his transformation properties.\nThis will override the previous matrix translates. If you want to \"add\" a translation, use the `translate` method instead;",
@@ -223,7 +228,7 @@
                         }
                     },
                     "translate": {
-                        "id": "505a65c80e51bf75673856eaf7f1610e90206a58160e00a7a92896c0036629fa",
+                        "id": "dea9bc1545d3ac4cfdd939dd76e9badc714635911dc185aa427aefaa8881f5de",
                         "name": "translate",
                         "type": "Function",
                         "description": "Allows you to translate an HTMLElement by setting his transformation properties",
@@ -235,7 +240,7 @@
                         }
                     },
                     "rotate": {
-                        "id": "e18e03d0f0e632684989cd994797fdad18a889366e6e3173960c74b205178761",
+                        "id": "05f8e93b14229b86b4747d0988a1e5f0f8e2a9f62b7df9726547f7b580b61666",
                         "name": "rotate",
                         "type": "Function",
                         "description": "Allows you to rotate an HTMLElement by setting his transformation properties",
@@ -247,7 +252,7 @@
                         }
                     },
                     "setrotates": {
-                        "id": "d87ce30a380f842ce416eecaebe9248f74ac8495d0333ae90ef0ac764c309d4d",
+                        "id": "b0656b3316ab22fd678d6da4c0a725e7f9f29453a33182b57c98f9c2d432a74c",
                         "name": "setRotates",
                         "type": "Function",
                         "description": "Allows you to set the rotates of any HTMLElement by setting his transformation properties",

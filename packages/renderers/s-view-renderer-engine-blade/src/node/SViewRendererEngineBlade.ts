@@ -8,6 +8,7 @@ import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
 import __SViewRendererBladeEngineSettingsInterface from './interface/SViewRendererEngineBladeSettingsInterface';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name            SViewRendererEngineBlade
@@ -47,6 +48,13 @@ export default class SViewRendererEngineBlade {
                     );
                 }
 
+                __SBench.start('SViewRendererEngineBlade.render');
+
+                __SBench.step(
+                    'SViewRendererEngineBlade.render',
+                    `beforeRender.${viewPath}`,
+                );
+
                 if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
                     __fs.mkdirSync(viewRendererSettings.cacheDir, {
                         recursive: true,
@@ -81,6 +89,13 @@ export default class SViewRendererEngineBlade {
                         },
                     ),
                 );
+
+                __SBench.step(
+                    'SViewRendererEngineBlade.render',
+                    `afterRender.${viewPath}`,
+                );
+
+                __SBench.end('SViewRendererEngineBlade.render').log();
             },
             {
                 eventEmitter: {

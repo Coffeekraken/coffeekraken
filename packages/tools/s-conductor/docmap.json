@@ -15,10 +15,15 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -32,6 +37,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -56,7 +62,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -145,7 +150,7 @@
                         }
                     },
                     "when": {
-                        "id": "a4b11b8e7fc3f44262c1682d31dfcb89392351bef1e5d2534837da0c504f9eea",
+                        "id": "ae51a70ccb6af68ef4cf5d3ceb17f336c722b2c6176ad284b634319447b36950",
                         "name": "when",
                         "type": "Function",
                         "description": "This method allows you to register a task to execute at a specific time in the \"default\" conductor instance.",
@@ -204,36 +209,15 @@
                 "description": "This interface represent the SConductor settings.",
                 "namespace": "@coffeekraken.s-conductor.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SConductorSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "idleTimeout": {
-                            "description": "Specify after how many milliseconds of inactity the SConductor has to be considered as idle ",
-                            "type": "Number",
-                            "default": 500
-                        },
-                        "logTimeout": {
-                            "description": "Specify after how many milliseconds of inactity the SConductor has to log the small analysis",
-                            "type": "Number",
-                            "default": 2000
-                        },
-                        "log": {
-                            "description": "Specify if you want to log the small analysis when the SConductor is idle",
-                            "type": "Boolean",
-                            "default": false
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SConductorSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SConductorSettingsInterface.ts",
+                "filename": "SConductorSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SConductorSettingsInterface.js",
                 "children": {}
             }
         }

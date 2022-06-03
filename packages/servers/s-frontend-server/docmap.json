@@ -16,10 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -33,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
             "@coffeekraken/s-glob",
@@ -56,7 +62,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -190,6 +195,74 @@
                 "default": "info",
                 "description": "Specify which log level you want for your server.",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
+            "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.port": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.port",
+                "name": "port",
+                "type": "Number",
+                "default": "9999",
+                "description": "Specify the port to use for the frontend server cors proxy",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
+            "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.url": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.url",
+                "name": "url",
+                "type": "Number",
+                "default": "http://127.0.0.1:[config.frontendServer.corsProxy.port]",
+                "description": "Specify the url to call to pass by the server cors proxy",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
+            "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.targetUrlHeaderName": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.targetUrlHeaderName",
+                "name": "targetUrlHeaderName",
+                "type": "Number",
+                "default": "TargetUrl",
+                "description": "Specify the header name to use to pass the target url to the proxy",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
+            "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.limit": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.limit",
+                "name": "limit",
+                "type": "Number",
+                "default": "12mb",
+                "description": "Specify the limit of requests proxy size",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -1121,6 +1194,51 @@
                 "filename": "SFrontendServerAddDefaultPagesParamsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/node/interface/SFrontendServerAddDefaultPagesParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-server.node.interface.SFrontendServerCorsProxyParamsInterface": {
+                "id": "@coffeekraken.s-frontend-server.node.interface.SFrontendServerCorsProxyParamsInterface",
+                "name": "SFrontendServerCorsProxyParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a frontend cors proxy server process.",
+                "namespace": "@coffeekraken.s-frontend-server.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SFrontendServerCorsProxyParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "port": {
+                            "description": "Specify the port on which to run the proxy",
+                            "type": "Number",
+                            "default": 9999
+                        },
+                        "targetUrlHeaderName": {
+                            "description": "Specifyheader name to use as the target url",
+                            "type": "String",
+                            "default": "TargetUrl"
+                        },
+                        "limit": {
+                            "description": "Specify the limit request size to process",
+                            "type": "String",
+                            "default": "12mb"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFrontendServerCorsProxyParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SFrontendServerCorsProxyParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.node.interface.SFrontendServerStartParamsInterface": {

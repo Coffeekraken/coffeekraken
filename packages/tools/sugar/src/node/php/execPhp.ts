@@ -6,6 +6,8 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
 import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 
+import __zlib from 'zlib';
+
 /**
  * @name            execPhp
  * @namespace       node.php
@@ -34,31 +36,45 @@ export default function execPhp(
 ) {
     return new Promise((resolve, reject) => {
         settings = {
-            encryptParams: false,
             paramsThroughFile: false,
             ...(settings ?? {}),
         };
         let paramsFilePath, paramsStr;
 
-        if (settings.encryptParams) {
-            paramsStr = __base64.encrypt(paramsStr);
-        } else if (settings.paramsThroughFile) {
+        if (settings.paramsThroughFile) {
             paramsFilePath = `${__packageTmpDir()}/exec-php-${__uniqid()}.json`;
             __writeJsonSync(paramsFilePath, params);
+        } else {
+            paramsStr = JSON.stringify(params);
+            paramsStr = paramsStr
+                .replace(/\\n/g, '\\n')
+                .replace(/\\'/g, "\\'")
+                .replace(/\\"/g, '\\"')
+                .replace(/\\&/g, '\\&')
+                .replace(/\\r/g, '\\r')
+                .replace(/\\t/g, '\\t')
+                .replace(/\\b/g, '\\b')
+                .replace(/\\f/g, '\\f');
         }
 
-        const result = __childProcess.spawnSync(
-            `php ${scriptPath} '${paramsFilePath ?? paramsStr}'`,
-            [],
-            {
-                shell: true,
-            },
+        // const result = __childProcess.spawnSync(
+        //     `php ${scriptPath} '${paramsFilePath ?? paramsStr}'`,
+        //     [],
+        //     {
+        //         shell: true,
+        //     },
+        // );
+
+        // quicker with execSync than spawnSync
+        const result = __childProcess.execSync(
+            `php ${scriptPath} "${paramsFilePath ?? paramsStr}"`,
         );
 
-        if (result.stderr.toString()) {
-            return reject(result.stderr.toString());
-        }
+        // if (result.stderr.toString()) {
+        //     return reject(result.stderr.toString());
+        // }
 
-        resolve(result.stdout.toString());
+        // resolve(`php ${scriptPath} "${paramsFilePath ?? paramsStr}"`);
+        resolve(result.toString());
     });
 }

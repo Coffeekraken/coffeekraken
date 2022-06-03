@@ -14,7 +14,7 @@ import __isColor from '@coffeekraken/sugar/shared/is/color';
  *
  * @param       {String}        color      The color to get
  * @param       {String}        [variant=null]      The color variant to get
- * @param       {String}        [modifier=null]     A color modifier like "--alpha 0.3 --saturate 20", etc...
+ * @param       {String}        [modifier=null]     A color modifier like "--alpha 0.3 --saturate 20", etc...
  * @return      {Css}                   The corresponding css
  *
  * @example       css

@@ -2,6 +2,7 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import __SDataFileJs from '@coffeekraken/s-data-file-js';
+import __SDataFilePhp from '@coffeekraken/s-data-file-php';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
 
@@ -62,10 +63,12 @@ export default class SDataHandlerGeneric {
             );
 
             switch (__extension(dataFilePath)) {
+                case 'php':
+                    return resolve(await __SDataFilePhp.load(dataFilePath));
+                    break;
                 case 'js':
                 case 'json':
-                    const res = await __SDataFileJs.load(dataFilePath);
-                    return resolve(res);
+                    return resolve(await __SDataFileJs.load(dataFilePath));
                     break;
             }
 

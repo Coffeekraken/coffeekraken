@@ -15,10 +15,15 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -32,6 +37,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -56,7 +62,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -123,59 +128,15 @@
                 "description": "This class represent the interface that describe parameters of a basic SComponent",
                 "namespace": "@coffeekraken.s-component-utils.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SComponentUtilsDefaultPropsInterface",
-                    "description": "",
-                    "definition": {
-                        "id": {
-                            "description": "Specify an id for your component",
-                            "type": "String",
-                            "physical": true
-                        },
-                        "mounted": {
-                            "description": "Specify if your component is mounted or not",
-                            "type": "Boolean",
-                            "default": false,
-                            "physical": true
-                        },
-                        "mountWhen": {
-                            "description": "Specify when your component will be mounted",
-                            "type": "String",
-                            "values": [
-                                "direct",
-                                "directly",
-                                "inViewport",
-                                "nearViewport",
-                                "outOfViewport",
-                                "interact",
-                                "visible",
-                                "stylesheetsReady"
-                            ],
-                            "default": "direct"
-                        },
-                        "adoptStyle": {
-                            "description": "Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element",
-                            "type": "Boolean",
-                            "default": true,
-                            "physical": true
-                        },
-                        "lnf": {
-                            "description": "Specify the lnf (look-and-feel) of your component. This is used by the css to style your component",
-                            "type": "String",
-                            "default": "default",
-                            "physical": true
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SComponentUtilsDefaultPropsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SComponentUtilsDefaultPropsInterface.ts",
+                "filename": "SComponentUtilsDefaultPropsInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SComponentUtilsDefaultPropsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface": {
@@ -191,33 +152,15 @@
                 "description": "This class represent the interface that describe SComponentUtils settings",
                 "namespace": "@coffeekraken.s-component-utils.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SComponentUtilsSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "interface": {
-                            "description": "Specify an SInterface class to use as our properties definition",
-                            "type": "SInterface"
-                        },
-                        "style": {
-                            "description": "Specify a style string to use as style to inject for our component",
-                            "type": "String"
-                        },
-                        "defaultProps": {
-                            "description": "Pass an object that act as the default properties value for our component",
-                            "type": "Object"
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SComponentUtilsSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SComponentUtilsSettingsInterface.ts",
+                "filename": "SComponentUtilsSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SComponentUtilsSettingsInterface.js",
                 "children": {}
             }
         }

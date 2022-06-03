@@ -1,0 +1,736 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-jest-tester",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-frontend-checker.js.SFrontendCheckeer": {
+                "id": "@coffeekraken.s-frontend-checker.js.SFrontendCheckeer",
+                "name": "SFrontendCheckeer",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent a glob pattern and can be used to resolve some globs and get back\nan array of SFile instances or to extract some part of the pattern, etc...",
+                "namespace": "@coffeekraken.s-frontend-checker.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SFrontendCheckeer from '@coffeekraken/s-frontend-checker';\nconst checker = new SFrontendCheckeer();\nconst insights = await checker.check();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFrontendChecker.ts",
+                "extension": "ts",
+                "relPath": "src/js/SFrontendChecker.ts",
+                "children": {
+                    "level_low": {
+                        "id": "5ebac42d7d0eb05aa3f7a57b2c539c090de0344c06d10c14205d4f899f5b7e9e",
+                        "name": "LEVEL_LOW",
+                        "type": "Number",
+                        "description": "Store the \"low\" level id",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "level_medium": {
+                        "id": "4f9d49229ea30d64d1959e3a5159d966cdbf9b088ea6042bc2edb2d0eeebdcb1",
+                        "name": "LEVEL_MEDIUM",
+                        "type": "Number",
+                        "description": "Store the \"medium\" level id",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "level_high": {
+                        "id": "761de26a2bc3ad8bf117159db733b68e9fb644041c332311cce65f3c05f588ef",
+                        "name": "LEVEL_HIGH",
+                        "type": "Number",
+                        "description": "Store the \"high\" level id",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "status_success": {
+                        "id": "88ca5b7d217e4b9b92a49dbc5d152c6070cac44b618116b3b068e1dd86b57ee8",
+                        "name": "STATUS_SUCCESS",
+                        "type": "Number",
+                        "description": "Store the \"success\" status",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "status_warning": {
+                        "id": "2b95fd5230e3e91077fa9e2a903f3f050bde47fd4efb1fad78053037cb16e562",
+                        "name": "STATUS_WARNING",
+                        "type": "Number",
+                        "description": "Store the \"warning\" status",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "status_error": {
+                        "id": "64c735c38133f9013ea021d872b65bfbe7bb5745b051574f2b11f9d84e08b56e",
+                        "name": "STATUS_ERROR",
+                        "type": "Number",
+                        "description": "Store the \"error\" status",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "registercheck": {
+                        "id": "a169de0839bf7470723a11dac3fadc234770941b31b538cdb65bd944be33bd3c",
+                        "name": "registerCheck",
+                        "type": "Function",
+                        "description": "This method allows you to register a new check to the SFrontendChecker class.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "id": "6edaeab4bf2880ab2804fef643fb12db70440d0576022006290e585721be66e2",
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "check": {
+                        "id": "7d2d0f911933b4036ed9912c2485a571923dd3d819dcf439cb8efc21a87a0f41",
+                        "name": "check",
+                        "type": "Function",
+                        "description": "Check the passed context and returns some insights about what is good and what's not.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.author": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.author",
+                "name": "author",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the author is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "author.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/author.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.charset": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.charset",
+                "name": "charset",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the charset is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "charset.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/charset.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.comments": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.comments",
+                "name": "comments",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check that we don't have any comments in the code",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "comments.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/comments.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.cssOrder": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.cssOrder",
+                "name": "cssOrder",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the cssOrder is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "cssOrder.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/cssOrder.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.description": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.description",
+                "name": "description",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the description is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "description.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/description.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.direction": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.direction",
+                "name": "direction",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the direction is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "direction.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/direction.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.doctype": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.doctype",
+                "name": "doctype",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the doctype is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "doctype.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/doctype.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.imagesAlt": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.imagesAlt",
+                "name": "imagesAlt",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if all images have an \"alt\" attribute",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "imagesAlt.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/imagesAlt.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.keywords": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.keywords",
+                "name": "keywords",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the keywords is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "keywords.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/keywords.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.language": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.language",
+                "name": "language",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the language is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "language.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/language.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.noopener": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.noopener",
+                "name": "noopener",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the noopener is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "noopener.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/noopener.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.opengraph": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.opengraph",
+                "name": "opengraph",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the opengraph metas are well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "opengraph.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/opengraph.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.printStylesheet": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.printStylesheet",
+                "name": "printStylesheet",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if a print stylesheet is defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "printStylesheet.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/printStylesheet.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.title": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.title",
+                "name": "title",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the title is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "title.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/title.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.twitterCard": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.twitterCard",
+                "name": "twitterCard",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the twitterCard metas are well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "twitterCard.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/twitterCard.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.uniqueIds": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.uniqueIds",
+                "name": "uniqueIds",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if multiple ids's have the same value",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "uniqueIds.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/uniqueIds.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.viewport": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.viewport",
+                "name": "viewport",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the viewport is well defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewport.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/viewport.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.w3c": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.w3c",
+                "name": "w3c",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check that our html is w3c compliant",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "w3c.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/w3c.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.checks.webpImages": {
+                "id": "@coffeekraken.s-frontend-checker.js.checks.webpImages",
+                "name": "webpImages",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if a print stylesheet is defined",
+                "namespace": "@coffeekraken.s-frontend-checker.js.checks",
+                "status": "beta",
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "webpImages.ts",
+                "extension": "ts",
+                "relPath": "src/js/checks/webpImages.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.interface.SFrontendCheckerSettingsInterface": {
+                "id": "@coffeekraken.s-frontend-checker.js.interface.SFrontendCheckerSettingsInterface",
+                "name": "SFrontendCheckerSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe settings of the SFrontendChecker class",
+                "namespace": "@coffeekraken.s-frontend-checker.js.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFrontendCheckerSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SFrontendCheckerSettingsInterface.js",
+                "children": {}
+            }
+        }
+    }
+}

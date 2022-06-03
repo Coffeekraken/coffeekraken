@@ -16,11 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -34,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -72,6 +77,7 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
@@ -108,45 +114,6 @@
                         "code": "<div s-page-transition></div>"
                     }
                 ],
-                "interface": {
-                    "name": "SPageTransitionFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "patchBody": {
-                            "description": "Specify if you want to patch the body tag with the new page body tag",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "scrollTop": {
-                            "description": "Specify if you want to scroll to the top of the updated element after a transition",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "before": {
-                            "description": "Specify a function to run before the transition",
-                            "type": "Function"
-                        },
-                        "after": {
-                            "description": "Specify a function to run after the transition",
-                            "type": "Function"
-                        },
-                        "autoStyle": {
-                            "description": "Specify if you want to automatically add classes like \"s-tc:error\" on the broken links (only the \"a\" tags)",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "injectBrokenLinkIcon": {
-                            "description": "Specify if you want to inject the \"error\" icon on the broken links",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "brokenLinkIcon": {
-                            "description": "Specify the icon you want to inject on the broken links",
-                            "type": "String",
-                            "default": "<i class=\"s-icon:link-broken-solid\" alt=\"Broken link\"></i>"
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -171,54 +138,15 @@
                 "description": "This interface represent the attributes of the SPageTransitionFeature",
                 "namespace": "@coffeekraken.s-page-transition-feature.js.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SPageTransitionFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "patchBody": {
-                            "description": "Specify if you want to patch the body tag with the new page body tag",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "scrollTop": {
-                            "description": "Specify if you want to scroll to the top of the updated element after a transition",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "before": {
-                            "description": "Specify a function to run before the transition",
-                            "type": "Function"
-                        },
-                        "after": {
-                            "description": "Specify a function to run after the transition",
-                            "type": "Function"
-                        },
-                        "autoStyle": {
-                            "description": "Specify if you want to automatically add classes like \"s-tc:error\" on the broken links (only the \"a\" tags)",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "injectBrokenLinkIcon": {
-                            "description": "Specify if you want to inject the \"error\" icon on the broken links",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "brokenLinkIcon": {
-                            "description": "Specify the icon you want to inject on the broken links",
-                            "type": "String",
-                            "default": "<i class=\"s-icon:link-broken-solid\" alt=\"Broken link\"></i>"
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SPageTransitionFeatureInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SPageTransitionFeatureInterface.ts",
+                "filename": "SPageTransitionFeatureInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SPageTransitionFeatureInterface.js",
                 "children": {}
             }
         }

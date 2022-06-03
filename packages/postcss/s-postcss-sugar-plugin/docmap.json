@@ -16,10 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -33,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -56,7 +62,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -3982,6 +3987,61 @@
                 "filename": "input.js",
                 "extension": "js",
                 "relPath": "src/node/mixins/ui/input/input.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer.classes",
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Generate the input container classes",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer",
+                "status": "beta",
+                "example": [],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/inputContainer/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer.inputContainer": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer.inputContainer",
+                "name": "inputContainer",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply an input container style like \"button\", \"addon\", etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-input-container {\n   @sugar.ui.inputContainer(group);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "inputContainer.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/ui/inputContainer/inputContainer.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.classes": {

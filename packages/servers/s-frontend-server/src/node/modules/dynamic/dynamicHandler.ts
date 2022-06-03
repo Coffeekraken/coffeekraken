@@ -40,10 +40,6 @@ export default function dynamicHandler({
     frontendServerConfig,
 }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-        __SBench.start('handlers.dynamic');
-
-        __SBench.step('handlers.dynamic', 'beforeDocmapRead');
-
         if (!pageConfig.views) {
             res.status(200);
             res.type('text/html');
@@ -51,6 +47,17 @@ export default function dynamicHandler({
                 `Your page config "${pageFile.relPath}" does not contain any views to render...`,
             );
         }
+
+        // if we refer to a file with an extension, stop here...
+        if (req.url.match(/.*\.[a-z]{1,4}$/)) {
+            res.status(404);
+            res.send(null);
+            return resolve();
+        }
+
+        __SBench.start('handlers.dynamic');
+
+        __SBench.step('handlers.dynamic', 'beforeViewsRendering');
 
         const renderedViews: string[] = [];
 
@@ -61,6 +68,11 @@ export default function dynamicHandler({
             if (typeof viewObj === 'string') {
                 viewPath = viewObj;
             }
+
+            __SBench.step(
+                `handlers.dynamic`,
+                `beforeViewRendering.${viewPath}`,
+            );
 
             // data
             if (viewObj.data) {
@@ -102,8 +114,15 @@ export default function dynamicHandler({
                     ...(data ?? {}),
                 }),
             );
+
+            __SBench.step(`handlers.dynamic`, `afterViewRendering.${viewPath}`);
+
             renderedViews.push(viewRes.value);
         }
+
+        __SBench.step('handlers.dynamic', 'afterViewsRendering');
+
+        __SBench.step('handlers.dynamic', 'beforeLayoutRendering');
 
         let layoutPath = pageConfig.layout ?? 'layouts.main';
         // rendering view using data
@@ -115,6 +134,10 @@ export default function dynamicHandler({
                 body: renderedViews.join('\n'),
             }),
         );
+
+        __SBench.step('handlers.dynamic', 'afterLayoutRendering');
+
+        __SBench.end('handlers.dynamic').log();
 
         res.status(200);
         res.type('text/html');

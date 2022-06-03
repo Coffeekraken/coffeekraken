@@ -12,7 +12,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * Supported states are:
  * - mounted: When a sugar webcomponent has the "mounted" attribute
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * .myElement {

@@ -15,10 +15,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -32,6 +37,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -56,7 +62,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite"
         ],
@@ -1651,6 +1656,36 @@
                     }
                 }
             },
+            "@coffeekraken.sugar.js.storage.localStorage": {
+                "id": "@coffeekraken.sugar.js.storage.localStorage",
+                "name": "localStorage",
+                "type": "Object",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This localStorage replacement gived you the ability to store large amount of data in indexDB with a similar api that the localStorage one.\nThe only difference is that you can store more data that the localStorage, as well as store directly objects, arrays, etc...\nNote that this API is async due to the nature of indexDB.",
+                "namespace": "@coffeekraken.sugar.js.storage",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __localStorage from '@coffeekraken/sugar/js/storage/localStorage';\nawait __localStorage.setItem('my-item', 'wefwef.wef.......');\nawait __localStorage.getItem('my-item');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "localStorage.ts",
+                "extension": "ts",
+                "relPath": "src/js/storage/localStorage.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.token.replaceTokens": {
                 "id": "@coffeekraken.sugar.js.token.replaceTokens",
                 "name": "replaceTokens",
@@ -2608,6 +2643,36 @@
                 "relPath": "src/node/fs/formatFileSize.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.fs.grabFirstExisting": {
+                "id": "@coffeekraken.sugar.node.fs.grabFirstExisting",
+                "name": "grabFirstExisting",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Check every passed paths and return the first existing one.",
+                "namespace": "@coffeekraken.sugar.node.fs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __grabFirstExisting from '@coffeekraken/sugar/node/fs/grabFirstExisting';\n__grabFirstExisting([\n 'file/1.txt',\n 'file/2.txt\n]); // => 'file/2.txt'\n'"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "grabFirstExisting.ts",
+                "extension": "ts",
+                "relPath": "src/node/fs/grabFirstExisting.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.fs.isPath": {
                 "id": "@coffeekraken.sugar.node.fs.isPath",
                 "name": "isPath",
@@ -2847,6 +2912,36 @@
                 "filename": "readJsonSync.ts",
                 "extension": "ts",
                 "relPath": "src/node/fs/readJsonSync.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.node.fs.readXmlSync": {
+                "id": "@coffeekraken.sugar.node.fs.readXmlSync",
+                "name": "readXmlSync",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to read an xml file and get his content back as JSON",
+                "namespace": "@coffeekraken.sugar.node.fs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import readXmlSync from '@coffeekraken/sugar/node/fs/readXmlSync';\nreadXmlSync('my-cool-xml/file.xml');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "readXmlSync.ts",
+                "extension": "ts",
+                "relPath": "src/node/fs/readXmlSync.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.registerSFileClasses": {
@@ -5929,6 +6024,243 @@
                 "relPath": "src/shared/ascii/sugarBanner.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.class.cloneClass": {
+                "id": "@coffeekraken.sugar.js.class.cloneClass",
+                "name": "cloneClass",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Clone ES6 Classes",
+                "namespace": "@coffeekraken.sugar.js.class",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __cloneClass from '@coffeekraken/sugar/js/class/cloneClass';\nconst NewClass = __closeClass(class MyClass() {});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "cloneClass.ts",
+                "extension": "ts",
+                "relPath": "src/shared/class/cloneClass.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.class.functionToClass": {
+                "id": "@coffeekraken.sugar.js.class.functionToClass",
+                "name": "functionToClass",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Transform ES5 Functions to ES6 Classes",
+                "namespace": "@coffeekraken.sugar.js.class",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import functionToClass from '@coffeekraken/sugar/js/class/functionToClass';\nfunctionToClass(function coco() {});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "functionToClass.ts",
+                "extension": "ts",
+                "relPath": "src/shared/class/functionToClass.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.class.getExtendsStack": {
+                "id": "@coffeekraken.sugar.shared.class.getExtendsStack",
+                "name": "getExtendsStack",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a class as parameter and return an array of all the class names used to extends this one...",
+                "namespace": "@coffeekraken.sugar.shared.class",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';\nclass Coco extends Error {}\nclass Plop extends Coco {}\ngetExtendsStack(Plop); // => {Coco: [class ...], Error: [class ...]};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getExtendsStack.ts",
+                "extension": "ts",
+                "relPath": "src/shared/class/getExtendsStack.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.class.getMethods": {
+                "id": "@coffeekraken.sugar.js.class.getMethods",
+                "name": "getMethods",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take an instance as parameter and return all the methods in array format",
+                "namespace": "@coffeekraken.sugar.js.class",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import getMethods from '@coffeekraken/sugar/js/class/getMethods';\nmyClass {\n constructor() {}\n hello() {}\n world() {}\n}\nconst myInstance = new myClass();\ngetMethods(myInstance); // => ['hello','world']"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getMethods.ts",
+                "extension": "ts",
+                "relPath": "src/shared/class/getMethods.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.class.methodExists": {
+                "id": "@coffeekraken.sugar.js.class.methodExists",
+                "name": "methodExists",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if one or more methods exists on a class instance",
+                "namespace": "@coffeekraken.sugar.js.class",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "class Coco {\n   hello() {}\n}\nimport methodExists from '@coffeekraken/sugar/node/class/methodExists';\nconst myInstance = new Coco();\nmethodExists(myInstance, 'hello', 'world'); // => ['world'];"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "methodExists.ts",
+                "extension": "ts",
+                "relPath": "src/shared/class/methodExists.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.class.multipleExtends": {
+                "id": "@coffeekraken.sugar.shared.class.multipleExtends",
+                "name": "multipleExtends",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to extends your class with multiple other ones.",
+                "namespace": "@coffeekraken.sugar.shared.class",
+                "status": "alpha",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import multipleExtends from '@coffeekraken/sugar/shared/class/multipleExtends';\nclass MyCoolClass extends multipleExtends(Another, AnotherOne) {\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "multipleExtends.ts",
+                "extension": "ts",
+                "relPath": "src/shared/class/multipleExtends.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.class.toPlainObject": {
+                "id": "@coffeekraken.sugar.shared.class.toPlainObject",
+                "name": "toPlainObject",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a instance as parameter and return a plain object of it",
+                "namespace": "@coffeekraken.sugar.shared.class",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import toPlainObject from '@coffeekraken/sugar/shared/class/toPlainObject';\nclass Coco {\n   constructor() {\n     this.hello = 'world';\n   }\n}\ntoPlainObject(new Coco()); // => { hello: 'world' }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "toPlainObject.ts",
+                "extension": "ts",
+                "relPath": "src/shared/class/toPlainObject.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.cli.argsToString": {
                 "id": "@coffeekraken.sugar.js.cli.argsToString",
                 "name": "argsToString",
@@ -6295,6 +6627,34 @@
                 "filename": "parseHtml.ts",
                 "extension": "ts",
                 "relPath": "src/shared/console/parseHtml.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.convert.xmlToJson": {
+                "id": "@coffeekraken.sugar.js.convert.xmlToJson",
+                "name": "xmlToJson",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a xml string as input and return a json object.\nUsed under the hood the AMAZING [xml2json](https://www.npmjs.com/package/xml2json) package.",
+                "namespace": "@coffeekraken.sugar.js.convert",
+                "status": "beta",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "xmlTojson.ts",
+                "extension": "ts",
+                "relPath": "src/shared/convert/xmlTojson.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.core.activeSpace": {
@@ -10792,7 +11152,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import sortObject from '@coffeekraken/sugar/js/object/sort';\nsortObject({\n   coco: { weight: 10 },\n   lolo: { weight: 2 },\n   plop: { weight: 5 }\n}, (a, b) => {\n  return a.weight - b.weight;\n});\n// {\n//   lolo: { weight: 2 },\n//   plop: { weight: 5 },\n//   coco: { weight: 10 }\n// }"
+                        "code": "import sortObject from '@coffeekraken/sugar/js/object/sort';\nsortObject({\n   coco: { weight: 10 },\n   lolo: { weight: 2 },\n   plop: { weight: 5 }\n}, (a, b) => {\n  return a.value.weight - b.value.weight;\n});\n// {\n//   lolo: { weight: 2 },\n//   plop: { weight: 5 },\n//   coco: { weight: 10 }\n// }"
                     }
                 ],
                 "since": "2.0.0",
@@ -10804,6 +11164,40 @@
                 "filename": "sort.ts",
                 "extension": "ts",
                 "relPath": "src/shared/object/sort.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.object.sortDeep": {
+                "id": "@coffeekraken.sugar.js.object.sortDeep",
+                "name": "sortDeep",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Sort an object properties the same way as the Array.sort do it but will do it recusrively to sort the object deeply.",
+                "namespace": "@coffeekraken.sugar.js.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import sortObject from '@coffeekraken/sugar/js/object/sort';\nsortObject({\n   lolo: { weight: 2 },\n   coco: { weight: 10 },\n   plop: { weight: 5 },\n   aha: {\n     hello: 'world',\n     coco: 'plop'\n   }\n}, (a, b) => {\n   return a.key.localeCompare(b.key);\n});\n// {\n//   aha: {\n//      coco: 'plop',\n//      hello: 'world'\n//   }\n//   coco: { weight: 10 }\n//   lolo: { weight: 2 },\n//   plop: { weight: 5 },\n// }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sortDeep.ts",
+                "extension": "ts",
+                "relPath": "src/shared/object/sortDeep.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.object.SWatch": {
@@ -11721,7 +12115,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import splitEvery from '@coffeekraken/node/string/splitEvery';\nsplitEvery('Hello World', 2, true); // => ['He','ll','o ','Wo','rl','d']"
+                        "code": "import splitEvery from '@coffeekraken/node/string/splitEvery';\nsplitEvery('Hello World', 2, {\n   splitWords: true\n}); // => ['He','ll','o ','Wo','rl','d']"
                     }
                 ],
                 "since": "2.0.0",
@@ -14280,7 +14674,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import observeAttributes from 'sugarcss/js/dom/observeAttributes'\nconst observer = observeAttributes(myCoolHTMLElement).then(mutation => {\n\t\t// do something with the mutation\n});\n/ the observer\nobserve();"
+                        "code": "import observeAttributes from '@coffeekraken/sugar/js/dom/observeAttributes'\nconst observer = observeAttributes(myCoolHTMLElement).then(mutation => {\n\t\t// do something with the mutation\n});\n/ the observer\nobserve();"
                     }
                 ],
                 "async": "true",
@@ -14469,7 +14863,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import closestNotVisible from 'sugarcss/js/dom/query/closestNotVisible'\nconst closestElm = closestNotVisible(myCoolElement);\nif (closestElm) {\n\t\t// we have found en element that is not visible\n}"
+                        "code": "import closestNotVisible from '@coffeekraken/sugar/js/dom/query/closestNotVisible'\nconst closestElm = closestNotVisible(myCoolElement);\nif (closestElm) {\n\t\t// we have found en element that is not visible\n}"
                     }
                 ],
                 "since": "1.0.0",
@@ -16349,209 +16743,6 @@
                 "filename": "isPortFree.ts",
                 "extension": "ts",
                 "relPath": "src/node/network/utils/isPortFree.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.class.utils.functionToClass": {
-                "id": "@coffeekraken.sugar.js.class.utils.functionToClass",
-                "name": "functionToClass",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "Transform ES5 Functions to ES6 Classes",
-                "namespace": "@coffeekraken.sugar.js.class.utils",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import functionToClass from '@coffeekraken/sugar/js/class/functionToClass';\nfunctionToClass(function coco() {});"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "functionToClass.ts",
-                "extension": "ts",
-                "relPath": "src/shared/class/utils/functionToClass.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.shared.class.utils.getExtendsStack": {
-                "id": "@coffeekraken.sugar.shared.class.utils.getExtendsStack",
-                "name": "getExtendsStack",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function take a class as parameter and return an array of all the class names used to extends this one...",
-                "namespace": "@coffeekraken.sugar.shared.class.utils",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import getExtendsStack from '@coffeekraken/sugar/shared/class/utils/getExtendsStack';\nclass Coco extends Error {}\nclass Plop extends Coco {}\ngetExtendsStack(Plop); // => {Coco: [class ...], Error: [class ...]};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "getExtendsStack.ts",
-                "extension": "ts",
-                "relPath": "src/shared/class/utils/getExtendsStack.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.class.getMethods": {
-                "id": "@coffeekraken.sugar.js.class.getMethods",
-                "name": "getMethods",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function take an instance as parameter and return all the methods in array format",
-                "namespace": "@coffeekraken.sugar.js.class",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import getMethods from '@coffeekraken/sugar/js/class/getMethods';\nmyClass {\n constructor() {}\n hello() {}\n world() {}\n}\nconst myInstance = new myClass();\ngetMethods(myInstance); // => ['hello','world']"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "getMethods.ts",
-                "extension": "ts",
-                "relPath": "src/shared/class/utils/getMethods.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.class.utils.methodExists": {
-                "id": "@coffeekraken.sugar.js.class.utils.methodExists",
-                "name": "methodExists",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "Check if one or more methods exists on a class instance",
-                "namespace": "@coffeekraken.sugar.js.class.utils",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "class Coco {\n   hello() {}\n}\nimport methodExists from '@coffeekraken/sugar/node/class/utils/methodExists';\nconst myInstance = new Coco();\nmethodExists(myInstance, 'hello', 'world'); // => ['world'];"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "methodExists.ts",
-                "extension": "ts",
-                "relPath": "src/shared/class/utils/methodExists.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.shared.class.utils.multipleExtends": {
-                "id": "@coffeekraken.sugar.shared.class.utils.multipleExtends",
-                "name": "multipleExtends",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function allows you to extends your class with multiple other ones.",
-                "namespace": "@coffeekraken.sugar.shared.class.utils",
-                "status": "alpha",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import multipleExtends from '@coffeekraken/sugar/shared/class/utils/multipleExtends';\nclass MyCoolClass extends multipleExtends(Another, AnotherOne) {\n}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "multipleExtends.ts",
-                "extension": "ts",
-                "relPath": "src/shared/class/utils/multipleExtends.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.shared.class.utils.toPlainObject": {
-                "id": "@coffeekraken.sugar.shared.class.utils.toPlainObject",
-                "name": "toPlainObject",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function take a instance as parameter and return a plain object of it",
-                "namespace": "@coffeekraken.sugar.shared.class.utils",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import toPlainObject from '@coffeekraken/sugar/shared/class/utils/toPlainObject';\nclass Coco {\n   constructor() {\n     this.hello = 'world';\n   }\n}\ntoPlainObject(new Coco()); // => { hello: 'world' }"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "toPlainObject.ts",
-                "extension": "ts",
-                "relPath": "src/shared/class/utils/toPlainObject.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.console.html.tagsMap": {

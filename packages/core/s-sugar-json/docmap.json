@@ -16,10 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -33,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -57,7 +63,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -123,45 +128,15 @@
                 "description": "This class represent the interface that describe SSugarJson settings",
                 "namespace": "@coffeekraken.s-sugar-json.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSugarJsonSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "packages": {
-                            "description": "Specify an array of packages names in which to search for sugar.json file",
-                            "type": "Array<String>"
-                        },
-                        "includePackage": {
-                            "description": "Specify if the current package has to be included in the search",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "includeModules": {
-                            "description": "Specify if the current package \"node_modules\" folder has to be included in the search",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "includeGlobal": {
-                            "description": "Specify if the global \"node_modules\" folder has to be included in the search",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "includeTop": {
-                            "description": "Specify if the root package folder in case of a mono-repo has to be included in the search",
-                            "type": "Boolean",
-                            "default": true
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SSugarJsonSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SSugarJsonSettingsInterface.ts",
+                "filename": "SSugarJsonSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SSugarJsonSettingsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-sugar-json.node.list.interface.SSugarJsonListParamsInterface": {
@@ -177,20 +152,15 @@
                 "description": "Parameters representation for the 5SSugarJson list command.",
                 "namespace": "@coffeekraken.s-sugar-json.node.list.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SSugarJsonListParamsInterface",
-                    "description": "",
-                    "definition": {}
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SSugarJsonListParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/list/interface/SSugarJsonListParamsInterface.ts",
+                "filename": "SSugarJsonListParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/list/interface/SSugarJsonListParamsInterface.js",
                 "children": {}
             }
         }

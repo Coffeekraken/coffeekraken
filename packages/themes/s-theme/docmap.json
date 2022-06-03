@@ -16,10 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -33,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -57,7 +63,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -10655,7 +10660,7 @@
                 "relPath": "src/js/STheme.ts",
                 "children": {
                     "settheme": {
-                        "id": "f6fdb1fb356c2e8a30a469ad3804538388628e8c3665025afca0e00f25265b69",
+                        "id": "3bcc8465312cc4e468a5ccc7bea2b2f99e4121475b49620c865665c6824c172f",
                         "name": "setTheme",
                         "type": "Function",
                         "description": "This method allows you to set the current applied theme and get back an STheme instance",
@@ -10668,7 +10673,7 @@
                         }
                     },
                     "setthemevariant": {
-                        "id": "72300312086ba98b6d6171b3dcfd9c4ecc9636d77d8113cc1ba0c001df77bc50",
+                        "id": "e805e1df31cf4864ddb1718241cb6ac17889dde836a93200f98e49b78e03d57f",
                         "name": "setThemeVariant",
                         "type": "Function",
                         "description": "This method allows you to set the current applied theme variant and get back an STheme instance",
@@ -10681,7 +10686,7 @@
                         }
                     },
                     "init": {
-                        "id": "4be58407ca947761a823779c806a8284750a952341a35e260a5328d0cca17493",
+                        "id": "db7a7adf4cc46e68e366ba9a37fb5d7e7029fad5b76b67f246e2ca770a1da5b9",
                         "name": "init",
                         "type": "Function",
                         "description": "This method allows you to init the your STheme instance, restore savec updated if their some, etc...",
@@ -10694,7 +10699,7 @@
                         }
                     },
                     "getcurrenttheme": {
-                        "id": "52cfdab29d76413a651a5c55354e4d2eef914b9c0502655ef9e1e45ede685492",
+                        "id": "7b718d0a60ae8153e84fec379f1da7781c169de96c2d888609143849072be3f9",
                         "name": "getCurrentTheme",
                         "type": "Function",
                         "description": "This method allows you to get the current applied theme STheme instance",
@@ -10707,7 +10712,7 @@
                         }
                     },
                     "applycurrentcolor": {
-                        "id": "67eb39a35ff637dad2de0c7d5bf5865df69402c94740d7ef0d6d38d0b915046a",
+                        "id": "fdbc3385b1ad67b00075c5ffff9019cad1da9a16798f3b4cc0c8cbc668ab4185",
                         "name": "applyCurrentColor",
                         "type": "Function",
                         "description": "This static method allows you to apply a color on a particular context",
@@ -10732,7 +10737,7 @@
                         }
                     },
                     "setcolor": {
-                        "id": "243d94122600d4f979ca1ca5d8d5c935587446ea78c063b2a2cf34e15af0b2bf",
+                        "id": "8d2c19e732386b85c381a30ef71727a3d081693285940a440efcdb05d825e6e7",
                         "name": "setColor",
                         "type": "Function",
                         "description": "THis method allows you to set a color for the theme that represent this instance",
@@ -10744,7 +10749,7 @@
                         }
                     },
                     "set": {
-                        "id": "e0f3836738c0f5106e00fc79a2312e969327d2ad262c26ca92ba1338e9e0d327",
+                        "id": "cea655914916a6bf0eb01a1c3c622432e9c13570bc4e7083a81d94cba12d0d04",
                         "name": "set",
                         "type": "Function",
                         "description": "This method allows you to set a value of the current theme.\nSpecify the value you want to set using the dotPath syntax like \"color.accent.color\", etc...",
@@ -10756,7 +10761,7 @@
                         }
                     },
                     "getcolor": {
-                        "id": "ea83eac49338e4c270b002d50070a757d37d9d5d652bfd5e5371b382389874dc",
+                        "id": "33b2fb3de154a4f583283b129d3e23db92f708f9083bd98c5f41b46ee6804c23",
                         "name": "getColor",
                         "type": "Function",
                         "description": "THis method allows you to access a particular theme color in a particular context",
@@ -10847,7 +10852,7 @@
                         }
                     },
                     "getcurrenttheme": {
-                        "id": "52cfdab29d76413a651a5c55354e4d2eef914b9c0502655ef9e1e45ede685492",
+                        "id": "7b718d0a60ae8153e84fec379f1da7781c169de96c2d888609143849072be3f9",
                         "name": "getCurrentTheme",
                         "type": "Function",
                         "description": "This method allows you to get the current applied theme STheme instance",
@@ -10860,7 +10865,7 @@
                         }
                     },
                     "getcolor": {
-                        "id": "c7d7193869cdfeebb369b3b6efd04c50b40609db9f08aaec4ec64ab02c26320f",
+                        "id": "3846e71bbafffc0bb3a52b70ebaa63921d77b968d9ba1b3df9e640c848b239ad",
                         "name": "getColor",
                         "type": "Function",
                         "description": "THis method allows you to access a particular theme color",
@@ -10959,7 +10964,7 @@
                         }
                     },
                     "hash": {
-                        "id": "e27148fd311cbee14421dca78c01f59956bf21e2cbd906a5835e1cd0341b5abc",
+                        "id": "aec745d878bdd3c6e73cccc42f4c6d9b34c9b6d3bc90f12fd7fc17074b47c141",
                         "name": "hash",
                         "type": "String",
                         "description": "This hash accessor gives you access to the actual theme configuration hash.\nYou can specify a dot path to get the hash of a sub configuration",
@@ -11008,7 +11013,7 @@
                         "since": "2.0.0"
                     },
                     "jsobjecttocssproperties": {
-                        "id": "dcc6461812b486ce7ba78888322516dc835ae12191e51a0c20787ac29b20666b",
+                        "id": "f7707ca037a95ea3d70f52641bf86bd1d95eb49772278e78b43be15deb32bf04",
                         "name": "jsObjectToCssProperties",
                         "type": "Function",
                         "description": "This static method allows you to pass a javascript object that contain css properties\nand it will returns the processed css string. Some properties can accept internal theme configuration\nsettings like `font-size`, `color`, etc...:\n\n- `font-family`\n- `font-size`\n- `color`\n- `background-color`\n- `border-radius`: And all border-radius properties like `border-top-left-radius`, etc...\n- `border-width`\n- `transition`\n- `margin`: And all the margins properties like `margin-inline`, etc...\n- `padding`: And all the paddings properties like `padding-block`, etc...\n- `depth`: Special property that will apply nice shadows depending on your theme configuration\n- `default-color`: Apply the default color using `@sugar.color` mixin",
@@ -11022,7 +11027,7 @@
                         }
                     },
                     "remapcsscolor": {
-                        "id": "dd562eea421c42df0f861a3492514066ab6cc999f1b0290ae2d7b89b54c164c0",
+                        "id": "b18a3a3253e2fd31245b038a315c4d03ab356da04f230e72c8dd6d560fbf6b2d",
                         "name": "remapCssColor",
                         "type": "Function",
                         "description": "This static method allows you to remap a color to another and returns the needed css\nvariables string.",
@@ -11036,7 +11041,7 @@
                         }
                     },
                     "tocssvars": {
-                        "id": "58d1b3a9194c736d1704a34ff5ac7ed6766261d5d8c34fc2a27a8f70d422cc9c",
+                        "id": "3c9c3dcf8925dfeb2ffffa710b95c2213b1b7edfa6cbf2179085d59b68237f36",
                         "name": "toCssVars",
                         "type": "Function",
                         "description": "This static method allows you to transform a theme/variant into css variables",
@@ -11049,7 +11054,7 @@
                         }
                     },
                     "get": {
-                        "id": "dbb2c53a5d31f6858f688fda0f476e0c1d5907562d39a088bf575de4058d6d38",
+                        "id": "62b327a1851de4b8adff4bb5d284552253696888b890d49ea10d1d347a9ae6e4",
                         "name": "get",
                         "type": "Function",
                         "description": "This method allows you to access a value of the current theme\nusing a dot path like \"color.primary.default\", etc...",
@@ -11061,7 +11066,7 @@
                         }
                     },
                     "set": {
-                        "id": "e0f3836738c0f5106e00fc79a2312e969327d2ad262c26ca92ba1338e9e0d327",
+                        "id": "cea655914916a6bf0eb01a1c3c622432e9c13570bc4e7083a81d94cba12d0d04",
                         "name": "set",
                         "type": "Function",
                         "description": "This method allows you to set a value of the current theme.\nSpecify the value you want to set using the dotPath syntax like \"color.accent.color\", etc...",
@@ -11097,7 +11102,7 @@
                         }
                     },
                     "emitsavedevent": {
-                        "id": "617a40090dac68456c632b9569f07d4e85dea8777c0939be852e1db08d39bd56",
+                        "id": "3a065e0d051ed887f0ed3e23d2138fc679a27bcb6e4e0482898c1381bfc84e97",
                         "name": "emitSavedEvent",
                         "type": "Function",
                         "description": "This method simply emit a \"saved\" event on the theme instance with details like the overrifed config.",
@@ -11121,7 +11126,7 @@
                         }
                     },
                     "restore": {
-                        "id": "6c622b5c1577c8f83c5fd3831c2d241a102b574d2c161b39b2f22ac744d1e64f",
+                        "id": "e0ef94faa0df20986a4959835c2351c0e18a2ea56dd096e71a3cc0d287d0b38f",
                         "name": "restore",
                         "type": "Function",
                         "description": "This method allows you to restore some configs by merging the passed ones with the overrided configs.",
@@ -11157,7 +11162,7 @@
                         }
                     },
                     "looponcolors": {
-                        "id": "c8c393b3fb2f7e46f1fba6356d0c1c4d751df162ac109010ec8e1a2c2fae64a5",
+                        "id": "681c8b471fdebb84bed83367ed07125455b4342d804d7e13cd38975fcfdd4bf1",
                         "name": "loopOnColors",
                         "type": "Function",
                         "description": "This utility function allows you to loop quickly and efficiently on\ntheme colors and their's modifiers defined",

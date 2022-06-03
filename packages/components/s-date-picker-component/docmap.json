@@ -1,0 +1,488 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-jest-tester",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-date-picker-component.js.SDatePickerComponent": {
+                "id": "@coffeekraken.s-date-picker-component.js.SDatePickerComponent",
+                "name": "SDatePickerComponent",
+                "as": "Date Picker",
+                "type": "CustomElement",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/form/s-date-picker"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a date picker. It uses under the hood the **AMAZING pikaday library** with some additional features like\nsugar theming support as well as some events and more.\nAlmost all the pikaday options are available through properties. Check out the api documentation for more details...",
+                "namespace": "@coffeekraken.s-date-picker-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Min and max dates",
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a date\n     <s-date-picker\n         placeholder=\"Choose a date\"\n         class=\"s-width:40\"\n         min-date=\"2021-08-10\"\n         max-date=\"2021-08-20\"\n         name=\"myDatePicker2\"\n         input\n     ></s-date-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Disable weekends",
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        class=\"s-width:40\"\n        name=\"myDatePicker3\"\n        disable-weekends\n        input\n    ></s-date-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a button",
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        class=\"s-width:40\"\n        name=\"myDatePicker4\"\n        input\n        button\n    ></s-date-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Disabled",
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        class=\"s-width:40\"\n        name=\"myDatePicker4\"\n         disabled\n        input\n        button\n    ></s-date-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Display more than 1 month",
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        class=\"s-width:40\"\n        name=\"myDatePicker4\"\n        number-of-months=\"2\"\n         input\n         button\n    ></s-date-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With custom input",
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a date\n     <s-date-picker name=\"something\">\n         <input type=\"text\" name=\"something\" placeholder=\"Choose a date\" class=\"s-width:40\" />\n     </s-date-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a custom button",
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        name=\"myDatePicker5\"\n    >\n      <button class=\"s-btn\">Choose a date</button>\n    </s-date-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a custom input and button",
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        name=\"myDatePicker5\"\n    >\n      <input type=\"text\" name=\"something\" placeholder=\"Choose a date\" class=\"s-width:40\" />\n      <button class=\"s-btn\">Choose a date</button>\n    </s-date-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Colors (non-exhaustive)",
+                        "code": "<label class=\"s-label:responsive s-mbe:20\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        name=\"myDatePicker5\"\n         input\n        button\n    >\n    </s-date-picker>\n</label>\n<label class=\"s-label:responsive s-mbe:20 s-color:accent\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        name=\"myDatePicker5\"\n         input\n        button\n    >\n    </s-date-picker>\n</label>\n<label class=\"s-label:responsive s-mbe:20 s-color:complementary\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        name=\"myDatePicker5\"\n         input\n        button\n    >\n    </s-date-picker>\n</label>\n<label class=\"s-label:responsive s-mbe:20 s-color:error\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        name=\"myDatePicker5\"\n         input\n        button\n    >\n    </s-date-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "RTL Support",
+                        "code": "<label class=\"s-label:responsive\" dir=\"rtl\">\n     Choose a date\n    <s-date-picker\n        placeholder=\"Choose a date\"\n        class=\"s-width:40\"\n        min-date=\"2021-08-10\"\n        name=\"myDatePicker1\"\n        input\n        rtl\n    ></s-date-picker>\n</label>"
+                    }
+                ],
+                "interface": {
+                    "name": "SDatePickerComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "descrition": "Specify the name for your input name",
+                            "type": "String",
+                            "required": true
+                        },
+                        "value": {
+                            "description": "Specify the initial value",
+                            "type": "String"
+                        },
+                        "placeholder": {
+                            "description": "Specify a placeholder for your input",
+                            "type": "String",
+                            "default": "Select a date"
+                        },
+                        "format": {
+                            "description": "Specify the format to use for your datepicker",
+                            "type": "String",
+                            "default": "YYYY-MM-DD"
+                        },
+                        "firstDay": {
+                            "type": "Number",
+                            "description": "Specify the first day of the week. 0 is sunday, 1 monday, etc...",
+                            "default": 1
+                        },
+                        "minDate": {
+                            "type": "String",
+                            "description": "the minimum/earliest date that can be selected (this should be a native Date object - e.g. new Date() or moment().toDate())"
+                        },
+                        "maxDate": {
+                            "type": "String",
+                            "description": "the maximum/latest date that can be selected (this should be a native Date object - e.g. new Date() or moment().toDate())"
+                        },
+                        "disableWeekends": {
+                            "type": "Boolean",
+                            "description": "disallow selection of Saturdays or Sundays",
+                            "default": false
+                        },
+                        "disabled": {
+                            "type": "Boolean",
+                            "description": "Specify if your date picker is disabled",
+                            "default": false
+                        },
+                        "yearRange": {
+                            "type": {
+                                "type": "Array<Number>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "description": "number of years either side (e.g. 10) or array of upper/lower range (e.g. [1900,2015])"
+                        },
+                        "rtl": {
+                            "type": "Boolean",
+                            "description": "reverse the calendar for right-to-left languages",
+                            "default": false
+                        },
+                        "i18n": {
+                            "type": "String",
+                            "description": "language defaults for month and weekday names",
+                            "default": {
+                                "previousMonth": "Previous Month",
+                                "nextMonth": "Next Month",
+                                "months": [
+                                    "January",
+                                    "February",
+                                    "March",
+                                    "April",
+                                    "May",
+                                    "June",
+                                    "July",
+                                    "August",
+                                    "September",
+                                    "October",
+                                    "November",
+                                    "December"
+                                ],
+                                "weekdays": [
+                                    "Sunday",
+                                    "Monday",
+                                    "Tuesday",
+                                    "Wednesday",
+                                    "Thursday",
+                                    "Friday",
+                                    "Saturday"
+                                ],
+                                "weekdaysShort": [
+                                    "Sun",
+                                    "Mon",
+                                    "Tue",
+                                    "Wed",
+                                    "Thu",
+                                    "Fri",
+                                    "Sat"
+                                ]
+                            }
+                        },
+                        "numberOfMonths": {
+                            "type": "Number",
+                            "description": "number of visible calendars",
+                            "default": 1
+                        },
+                        "events": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "description": "array of dates that you would like to differentiate from regular days (e.g. ['Sat Jun 28 2017', 'Sun Jun 29 2017', 'Tue Jul 01 2017',])",
+                            "default": []
+                        },
+                        "input": {
+                            "description": "Specify if you want a visible input injected if you don't have specified yours.",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "button": {
+                            "description": "Specify if you want a button attached to your input or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "arrowIcon": {
+                            "description": "Specify the svg code for the arrow used across the datepicker",
+                            "type": "String",
+                            "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z\"/></svg>"
+                        },
+                        "calendarIcon": {
+                            "description": "Specify the svg code for the calendar icon used in the button",
+                            "type": "String"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDatePickerComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SDatePickerComponent.ts",
+                "children": {
+                    "webcomponent": {
+                        "id": "c13098f28fc63079b0848fdc11c469c6032a39f07a54f8315345e8e762556218",
+                        "name": "webcomponent",
+                        "type": "Function",
+                        "description": "This function allows you to define (register) your webcomponent with some default\nprops if needed.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-date-picker-component.js.interface.SDatePickerComponentInterface": {
+                "id": "@coffeekraken.s-date-picker-component.js.interface.SDatePickerComponentInterface",
+                "name": "SDatePickerComponentInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SDatePickerComponent",
+                "namespace": "@coffeekraken.s-date-picker-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SDatePickerComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "descrition": "Specify the name for your input name",
+                            "type": "String",
+                            "required": true
+                        },
+                        "value": {
+                            "description": "Specify the initial value",
+                            "type": "String"
+                        },
+                        "placeholder": {
+                            "description": "Specify a placeholder for your input",
+                            "type": "String",
+                            "default": "Select a date"
+                        },
+                        "format": {
+                            "description": "Specify the format to use for your datepicker",
+                            "type": "String",
+                            "default": "YYYY-MM-DD"
+                        },
+                        "firstDay": {
+                            "type": "Number",
+                            "description": "Specify the first day of the week. 0 is sunday, 1 monday, etc...",
+                            "default": 1
+                        },
+                        "minDate": {
+                            "type": "String",
+                            "description": "the minimum/earliest date that can be selected (this should be a native Date object - e.g. new Date() or moment().toDate())"
+                        },
+                        "maxDate": {
+                            "type": "String",
+                            "description": "the maximum/latest date that can be selected (this should be a native Date object - e.g. new Date() or moment().toDate())"
+                        },
+                        "disableWeekends": {
+                            "type": "Boolean",
+                            "description": "disallow selection of Saturdays or Sundays",
+                            "default": false
+                        },
+                        "disabled": {
+                            "type": "Boolean",
+                            "description": "Specify if your date picker is disabled",
+                            "default": false
+                        },
+                        "yearRange": {
+                            "type": {
+                                "type": "Array<Number>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "description": "number of years either side (e.g. 10) or array of upper/lower range (e.g. [1900,2015])"
+                        },
+                        "rtl": {
+                            "type": "Boolean",
+                            "description": "reverse the calendar for right-to-left languages",
+                            "default": false
+                        },
+                        "i18n": {
+                            "type": "String",
+                            "description": "language defaults for month and weekday names",
+                            "default": {
+                                "previousMonth": "Previous Month",
+                                "nextMonth": "Next Month",
+                                "months": [
+                                    "January",
+                                    "February",
+                                    "March",
+                                    "April",
+                                    "May",
+                                    "June",
+                                    "July",
+                                    "August",
+                                    "September",
+                                    "October",
+                                    "November",
+                                    "December"
+                                ],
+                                "weekdays": [
+                                    "Sunday",
+                                    "Monday",
+                                    "Tuesday",
+                                    "Wednesday",
+                                    "Thursday",
+                                    "Friday",
+                                    "Saturday"
+                                ],
+                                "weekdaysShort": [
+                                    "Sun",
+                                    "Mon",
+                                    "Tue",
+                                    "Wed",
+                                    "Thu",
+                                    "Fri",
+                                    "Sat"
+                                ]
+                            }
+                        },
+                        "numberOfMonths": {
+                            "type": "Number",
+                            "description": "number of visible calendars",
+                            "default": 1
+                        },
+                        "events": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "description": "array of dates that you would like to differentiate from regular days (e.g. ['Sat Jun 28 2017', 'Sun Jun 29 2017', 'Tue Jul 01 2017',])",
+                            "default": []
+                        },
+                        "input": {
+                            "description": "Specify if you want a visible input injected if you don't have specified yours.",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "button": {
+                            "description": "Specify if you want a button attached to your input or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "arrowIcon": {
+                            "description": "Specify the svg code for the arrow used across the datepicker",
+                            "type": "String",
+                            "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z\"/></svg>"
+                        },
+                        "calendarIcon": {
+                            "description": "Specify the svg code for the calendar icon used in the button",
+                            "type": "String"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDatePickerComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SDatePickerComponentInterface.ts",
+                "children": {}
+            }
+        }
+    }
+}

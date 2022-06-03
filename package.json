@@ -77,5 +77,6 @@
         }
     },
     "main": "./packages/core/s-log/dist/pkg/cjs/shared/exports.js",
-    "module": "./packages/core/s-log/dist/pkg/esm/shared/exports.js"
+    "module": "./packages/core/s-log/dist/pkg/esm/shared/exports.js",
+    "packageManager": "yarn@3.2.1"
 }

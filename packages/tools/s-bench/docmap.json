@@ -15,10 +15,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -32,6 +37,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -56,7 +62,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -177,7 +182,7 @@
                         }
                     },
                     "isbenchactive": {
-                        "id": "a55912c499d056277984f608ff4fafe8fbd4cb41294d7a4ab78986f0eaa8cdfb",
+                        "id": "fad422daf2d1e48d207e378372b48fcce395ea995846f96013b41ae8e6096bc9",
                         "name": "isBenchActive",
                         "type": "Function",
                         "description": "This method allows you to check if a particular bench id is active",
@@ -215,7 +220,7 @@
                         }
                     },
                     "step": {
-                        "id": "66e8d4a5802fd2f4377f5c540192514bd3fd68581775037239e640e5b5c40bf7",
+                        "id": "a307a7f5f26e08f0236cefcc8bbff68bb2e01bc261613598cbc63a29de0c97a4",
                         "name": "step",
                         "type": "Function",
                         "description": "This method allows you to declare a new step in your bench.\nA step is simple a point in your code like \"after compilation\", etc.\nIt will keep track of each steps and display the time it has taken\nfrom the last step.",
@@ -317,29 +322,15 @@
                 "description": "This interface represent the SBench settings.",
                 "namespace": "@coffeekraken.s-bench.shared.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SBenchSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "title": {
-                            "description": "Specify a title for your bench that will be used in the log",
-                            "type": "String"
-                        },
-                        "body": {
-                            "description": "Specify a body for your bench that will be used in the log",
-                            "type": "String"
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SBenchSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/shared/interface/SBenchSettingsInterface.ts",
+                "filename": "SBenchSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/interface/SBenchSettingsInterface.js",
                 "children": {}
             }
         }

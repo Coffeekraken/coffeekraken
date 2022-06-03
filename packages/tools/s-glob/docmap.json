@@ -16,10 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -33,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -56,7 +62,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -140,7 +145,7 @@
                 "relPath": "src/node/SGlob.ts",
                 "children": {
                     "isglob": {
-                        "id": "de6e05078aec017404e88212aff29b40c2c2e82c5b8cce378ec61d0d17de497b",
+                        "id": "c1db74b08afff2ba0a29b89320c73f0999f6af1cc4b535d2ab79e6fd705427ff",
                         "name": "isGlob",
                         "type": "Function",
                         "description": "Alias to the ```isGlob``` function available in sugar under \"shared.is.isGlob\" namespace",
@@ -179,7 +184,7 @@
                         }
                     },
                     "match": {
-                        "id": "c04905de910ff220fce7ce07a3a8075e3336f3ad63c8d2ebf430e471d7d82788",
+                        "id": "541191c4da37da242bf469776a9c10ef6e11281681d71c57aa4a8db2b56fb61c",
                         "name": "match",
                         "type": "Function",
                         "description": "Check if the passed string match the passed glob pattern(s).\nThis make use of the AWESOME micromatch library.",
@@ -242,55 +247,15 @@
                 "description": "This interface represent the SGlob settings.",
                 "namespace": "@coffeekraken.s-glob.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SGlobSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "cwd": {
-                            "description": "Specify the working directory to run the command in.",
-                            "type": "String",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-glob"
-                        },
-                        "symlinks": {
-                            "description": "Specify if you want to follow symlinks or not",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "nodir": {
-                            "description": "Specify if you want to ignore directories or not",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "contentRegExp": {
-                            "description": "Specify a regex to use on the file content to filter resolved files",
-                            "type": "RegExp"
-                        },
-                        "SFile": {
-                            "description": "Specify if you want back some SFile instances or simple string path",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "exclude": {
-                            "description": "Specify some paths or patterns you want to exclude from your resolve process",
-                            "type": "Array<String>",
-                            "default": []
-                        },
-                        "defaultExcludes": {
-                            "description": "Specfy if you want to use the default excludes globs setted under the config.storage.exclude configuration",
-                            "type": "Boolean",
-                            "default": true
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SGlobSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SGlobSettingsInterface.ts",
+                "filename": "SGlobSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SGlobSettingsInterface.js",
                 "children": {}
             }
         }

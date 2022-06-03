@@ -32,7 +32,6 @@ export default function apiSitemap() {
                     hashesByPath[docmapObj.path] = hash;
                 }
             }
-
             items.push({
                 title: docmapObj.name,
                 loc: `/api/${namespace}`,

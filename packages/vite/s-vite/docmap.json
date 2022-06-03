@@ -16,10 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -33,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -57,7 +63,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -73,10 +78,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/sugar"
         ],
@@ -379,115 +384,15 @@
                 "description": "This class represent the interface that describe parameters of the SFrontstackViteProcess",
                 "namespace": "@coffeekraken.s-vite.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SViteBuildParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "input": {
-                            "description": "Specify the input js/ts file to use for the build",
-                            "type": "String",
-                            "path": {
-                                "exists": true,
-                                "absolute": true
-                            },
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-vite/src/js/index.ts",
-                            "required": true
-                        },
-                        "type": {
-                            "description": "Specify the type(s) of build you want. Can be \"lib\", \"bundle\" or \"module\"",
-                            "type": "Array<String>",
-                            "values": [
-                                "lib",
-                                "bundle",
-                                "module"
-                            ],
-                            "default": [
-                                "bundle",
-                                "module"
-                            ],
-                            "alias": "t"
-                        },
-                        "format": {
-                            "description": "Specify the format(s) of the output build. Can be \"es\",\"umd\",\"cjs\" or \"iife\"",
-                            "type": "Array<String>",
-                            "values": [
-                                "es",
-                                "umd",
-                                "cjs",
-                                "iife"
-                            ],
-                            "default": [],
-                            "alias": "f"
-                        },
-                        "target": {
-                            "description": "Specify the target you want for your build. Can be \"modules\",\"esnext\",\"es2015\",\"es2016\" or \"es2020\"",
-                            "type": "String",
-                            "values": [
-                                "modules",
-                                "esnext",
-                                "es2015",
-                                "es2016",
-                                "es2020"
-                            ]
-                        },
-                        "watch": {
-                            "description": "Specify if you want the process to watch for updates and rebuild automatically",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "w"
-                        },
-                        "lib": {
-                            "description": "Specify if your build type is \"lib\". Same as setting the \"type\" argument to \"lib\"",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "l"
-                        },
-                        "bundle": {
-                            "description": "Specify if your build type is \"bundle\". Same as setting the \"type\" argument to \"bundle\"",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "b"
-                        },
-                        "noWrite": {
-                            "description": "Specify if you want to ust build but not write file(s) to the filesystem",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "prod": {
-                            "description": "Specify if your build is made for production environment or not. This will automatically minify and optimize your build",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "p"
-                        },
-                        "chunks": {
-                            "description": "Specify if you allow your build to be separated into multiple chunks or not",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "c"
-                        },
-                        "minify": {
-                            "description": "Specify if you want to minify your build or not",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "m"
-                        },
-                        "analyze": {
-                            "description": "Specify if you want an analyze report of your build. This use the rollup analyze plugin under the hood",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "a"
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SViteBuildParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SViteBuildParamsInterface.ts",
+                "filename": "SViteBuildParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SViteBuildParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-vite.node.interface.SViteStartParamsInterface": {
@@ -503,20 +408,15 @@
                 "description": "This class represent the interface that describe parameters of the SFrontstackViteProcess",
                 "namespace": "@coffeekraken.s-vite.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SViteStartParamsInterface",
-                    "description": "",
-                    "definition": {}
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SViteStartParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SViteStartParamsInterface.ts",
+                "filename": "SViteStartParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SViteStartParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-vite.node.plugins.importCssPlugin": {

@@ -10,7 +10,7 @@ import __faker from 'faker';
  *
  * This mixin generate all the user-select helper classes like ```.s-user-select:none```, etc...
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.userSelect.classes;

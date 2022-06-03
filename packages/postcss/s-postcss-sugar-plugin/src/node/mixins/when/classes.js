@@ -14,7 +14,7 @@ import __STheme from '@coffeekraken/s-theme';
  * - mounted: Apply only when the state of a webcomponent for example has been reached
  * - active: When the element has the "active" class or the "active" attribute
  *
- * @return        {Css}         The generated css
+ * @return        {Css}         The generated css
  *
  * @example        css
  * \@sugar.when.classes;

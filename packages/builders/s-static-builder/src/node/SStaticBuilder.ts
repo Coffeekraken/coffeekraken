@@ -230,15 +230,15 @@ export default class SStaticBuilder extends __SBuilder {
                 // parsing xml
                 let xml = await parseStringPromise(xmlStr);
 
-                xml = {
-                    urlset: {
-                        url: [
-                            {
-                                loc: '/',
-                            },
-                        ],
-                    },
-                };
+                // xml = {
+                //     urlset: {
+                //         url: [
+                //             {
+                //                 loc: '/',
+                //             },
+                //         ],
+                //     },
+                // };
 
                 let failsCount = 0,
                     failedUrls: string[] = [],
@@ -266,8 +266,6 @@ export default class SStaticBuilder extends __SBuilder {
                         cacheOutPath = `${cacheBuildDir}/${
                             urlLoc === '/' ? 'index' : urlLoc
                         }.html`.replace(/\/{2,20}/gm, '/');
-
-                    console.log('OUT', outPath);
 
                     emit('log', {
                         clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE)

@@ -16,10 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -33,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -57,7 +63,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -73,9 +78,9 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -132,11 +137,28 @@
                 "extension": "config",
                 "relPath": "src/config/viewRenderer.config.ts"
             },
-            "@coffeekraken.s-view-renderer.config.viewRenderer.dataHandlers": {
-                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.dataHandlers",
-                "name": "dataHandlers",
+            "@coffeekraken.s-view-renderer.config.viewRenderer.sharedData": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.sharedData",
+                "name": "sharedData",
                 "type": "String[]",
-                "default": "['@coffeekraken/s-handler-js']",
+                "default": "['[config.storage.src.rootDir]/views/shared.data.js']",
+                "description": "Store paths to shared data files that will be loaded by the proper dataHandler",
+                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts"
+            },
+            "@coffeekraken.s-view-renderer.config.viewRenderer.dataFiles": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.dataFiles",
+                "name": "dataFiles",
+                "type": "String[]",
+                "default": "['@coffeekraken/s-data-file-generic']",
                 "description": "Store which data handlers are available for this renderer",
                 "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
                 "since": "2.0.0",
@@ -215,11 +237,11 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "datahandlers": {
-                        "id": "48a360a468c75fbac8f7cb3953981c449c802f0fe21c9e35bd9ff11a2e307c40",
-                        "name": "dataHandlers",
+                    "datafiles": {
+                        "id": "c11b142040935529ae1c0b2564646e6a1c3678af0b37996e52d545713763df52",
+                        "name": "dataFiles",
                         "type": "Object",
-                        "description": "Store the registered dataHandlers using the ```registerDataHandler``` static method",
+                        "description": "Store the registered dataFiles using the ```registerDataFiles``` static method",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -280,11 +302,11 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "registerdatahandler": {
-                        "id": "e1881762d983bd3dfb1dcdfae750e6d1ddf652ad877c31f4cb1fbbc79b2c4e05",
-                        "name": "registerDataHandler",
+                    "registerdatafiles": {
+                        "id": "b38ac9cb9b8e005b6cf67e0560706eaa5ac8f363baaea07286d8094c64719bc3",
+                        "name": "registerDataFiles",
                         "type": "Function",
-                        "description": "This static method can be used to register a compatible __SViewEngine engine class\ninto the available SViews engines.",
+                        "description": "This static method can be used to register some SDataFiles classes",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -345,43 +367,15 @@
                 "description": "This class represent the interface that describe SViewRenderer settings",
                 "namespace": "@coffeekraken.s-view-renderer.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SViewRendererSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "rootDirs": {
-                            "description": "Specify some folder paths where to search for views",
-                            "type": "String",
-                            "default": [
-                                "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/renderers/s-view-renderer/src/views"
-                            ]
-                        },
-                        "cacheDir": {
-                            "description": "Specigy the folder to store the engines cache",
-                            "type": "String",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/renderers/s-view-renderer/.local/cache/views"
-                        },
-                        "enginesSettings": {
-                            "description": "Specify some engines settings. Object must contain each engine settings under his own property. For blade, the property name is \"blade\"",
-                            "type": "Object",
-                            "default": {}
-                        },
-                        "defaultData": {
-                            "description": "Specify some default data to pass to the view",
-                            "type": "Object",
-                            "default": {}
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SViewRendererSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SViewRendererSettingsInterface.ts",
+                "filename": "SViewRendererSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SViewRendererSettingsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-view-renderer.s-view.pages.404": {

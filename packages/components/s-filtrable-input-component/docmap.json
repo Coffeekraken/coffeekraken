@@ -12,14 +12,20 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -31,6 +37,7 @@
             "@coffeekraken/s-file",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
@@ -70,6 +77,7 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
@@ -302,11 +310,21 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<s-filtrable-input items=\"[{title:'Hello',value:'hello'},{title:'world',value:'world'}]\">\n  <input type=\"text\" class=\"s-input\" />\n</s-filtrable-input>"
+                        "title": "Simple example",
+                        "code": "<template id=\"items\">\n  [{\"title\":\"Hello\",\"value\":\"hello\"},{\"title\":\"world\",\"value\":\"world\"}]\n</template>\n<s-filtrable-input items=\"#items\" label=\"title\" filtrable=\"title\">\n  <input type=\"text\" class=\"s-input\" placeholder=\"Type something...\" />\n</s-filtrable-input>"
                     },
                     {
                         "language": "js",
                         "code": "import { define } from '@coffeekraken/s-filtrable-input-component';\ndefine();"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Custom templates and items",
+                        "code": "<my-cool-filtrable-input>\n   <input type=\"text\" class=\"s-input\" placeholder=\"Type something...\" />\n</my-cool-filtrable-input>"
+                    },
+                    {
+                        "language": "js",
+                        "code": "import { define } from '@coffeekraken/s-filtrable-input-component';\ndefine({\n    items: async () => {\n        // you can get your items however you want\n        // const request = await fetch('...');\n        // const items = await request.json();\n        return [{title: 'Hello', value: 'World'},{title: 'Plop', value:'Yop}];\n    },\n    templates: ({ type, html }) => {\n        switch (type) {\n            case 'item':\n                return html`\n                    <li class=\"__item\">\n                        My title: ${item.title}\n                    </li>\n                `;\n                break;\n            case 'loading':\n                return html`\n                    <li class=\"__loading\">\n                        Loading, please wait...\n                    </li>\n                `;\n                break;\n            case 'empty':\n                return html`\n                    <li class=\"__empty\">\n                        No items found...\n                    </li>\n                `;\n                break;\n        }\n    },\n}, 'my-cool-filtrable-input');"
                     }
                 ],
                 "interface": {
@@ -341,7 +359,7 @@
                             "type": "String",
                             "default": "Loading please wait..."
                         },
-                        "filterItems": {
+                        "filter": {
                             "description": "Specify a function to use to filter the items. Must return the filtered list of items",
                             "type": "Function"
                         },
@@ -466,7 +484,7 @@
                             "type": "String",
                             "default": "Loading please wait..."
                         },
-                        "filterItems": {
+                        "filter": {
                             "description": "Specify a function to use to filter the items. Must return the filtered list of items",
                             "type": "Function"
                         },

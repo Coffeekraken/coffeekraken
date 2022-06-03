@@ -16,10 +16,15 @@
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
@@ -33,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
@@ -56,7 +62,6 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
@@ -72,10 +77,10 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-sugar-plugin",
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
@@ -768,6 +773,74 @@
                 "default": "true",
                 "description": "Specify the frontend server action restart behavior",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.settings.processManager",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontstack.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.ts"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.title": {
+                "id": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.title",
+                "name": "title",
+                "type": "String",
+                "default": "Frontend server",
+                "description": "Specify the cors proxy server action title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontstack.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.ts"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.description": {
+                "id": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.description",
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the cors proxy server action description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontstack.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.ts"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.command": {
+                "id": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.command",
+                "name": "command",
+                "type": "String",
+                "default": "sugar corsProxy.start [arguments]",
+                "description": "Specify the frontend server action command",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontstack.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.ts"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.settings.processManager.restart": {
+                "id": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.settings.processManager.restart",
+                "name": "restart",
+                "type": "String",
+                "default": "true",
+                "description": "Specify the frontend server action restart behavior",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.settings.processManager",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -1632,6 +1705,23 @@
                 "extension": "config",
                 "relPath": "src/config/frontstackRecipeGeneric.config.ts"
             },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.corsProxy": {
+                "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.corsProxy",
+                "name": "corsProxy",
+                "type": "String",
+                "default": "[config.frontstack.actions.corsProxy]",
+                "description": "Specify the recipe prod stack corsProxy action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontstackRecipeGeneric.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeGeneric.config.ts"
+            },
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.vite": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.vite",
                 "name": "vite",
@@ -1689,6 +1779,23 @@
                 "type": "String",
                 "default": "[config.frontstack.actions.frontendServer]",
                 "description": "Specify the recipe prod stack frontendServer action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontstackRecipeGeneric.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeGeneric.config.ts"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions.corsProxy": {
+                "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions.corsProxy",
+                "name": "corsProxy",
+                "type": "String",
+                "default": "[config.frontstack.actions.corsProxy]",
+                "description": "Specify the recipe prod stack corsProxy action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions",
                 "since": "2.0.0",
                 "author": {

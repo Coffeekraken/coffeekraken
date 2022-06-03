@@ -12,16 +12,20 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
             "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
-            "@coffeekraken/s-data-handler-generic",
-            "@coffeekraken/s-data-handler-js",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -34,6 +38,7 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontstack",
             "@coffeekraken/s-glob",
@@ -72,6 +77,7 @@
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-postcss-plugin",
@@ -115,7 +121,7 @@
                     }
                 ],
                 "namespace": "@coffeekraken.s-frontspec.doc",
-                "status": "stable",
+                "status": "wip",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -225,9 +231,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SFrontspecAddParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SFrontspecAddParamsInterface.js",
+                "filename": "SFrontspecAddParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SFrontspecAddParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontspec.node.interface.SFrontspecReadParamsInterface": {
@@ -259,9 +265,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SFrontspecReadParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SFrontspecReadParamsInterface.js",
+                "filename": "SFrontspecReadParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SFrontspecReadParamsInterface.ts",
                 "children": {}
             }
         }

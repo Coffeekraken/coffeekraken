@@ -1,0 +1,40 @@
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          wip
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{{#> layout-readme }}
+
+## SDataFilePhp
+
+This package expose a simple `SDataFilePhp` class that allows you to load data `.php` files.
+
+## Features
+
+-   Supported file types:
+    -   `.php`: A php file that return some data
+-   Nothing more, nothing less...
+
+## Usage
+
+Here's a simple example how to use the SDataFilePhp class:
+
+```js
+import __SDataFilePhp from '@coffeekraken/s-data-file-php';
+const dataFromPhp = await __SDataFilePhp.load('/my/cool/file.php');
+```
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-data-file-php.node.SDataFilePhp)
+
+{{/ layout-readme }}

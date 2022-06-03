@@ -467,16 +467,6 @@ class SDocMap extends __SClass implements ISDocMap {
                         docmapJson.map,
                     )) {
                         let blockId = namespace;
-                        if (
-                            !blockId.startsWith(
-                                packageNameOrPath.replace(/\//gm, '.'),
-                            )
-                        ) {
-                            blockId = `${packageNameOrPath.replace(
-                                /\//gm,
-                                '.',
-                            )}.${namespace}`;
-                        }
                         if (!finalDocmapJson.map[blockId]) {
                             // assigning an id to the block.
                             // This id is the string used as map property to store the block

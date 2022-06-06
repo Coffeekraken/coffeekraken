@@ -19,7 +19,12 @@ export interface ISComponentUtilsSettings {
     name: string;
     interface?: typeof __SInterface;
     style: string;
+    state: ISComponentUtilsStateSettings;
     defaultProps?: any;
+}
+
+export interface ISComponentUtilsStateSettings {
+    save: boolean;
 }
 
 export interface ISComponentUtilsCtorSettings {
@@ -224,6 +229,66 @@ export default class SComponentUtils extends __SClass {
 
         // init responsive props
         // this._initResponsiveProps();
+    }
+
+    /**
+     * This method to handle the state object passed in the settings.
+     * It will check if the state need to be saved, restored, etc...
+     */
+    handleState(
+        state: any,
+        settings?: Partial<ISComponentUtilsStateSettings>,
+    ): void {
+        const finalStateSettings: ISComponentUtilsStateSettings = {
+            ...(this.componentUtilsSettings.state ?? {}),
+            ...(settings ?? {}),
+        };
+
+        // make sure we have an id
+        if (finalStateSettings.save && !this.node.id) {
+            console.log('HTMLElement', this.node);
+            throw new Error(
+                `To save the state, the HTMLElement must have an id...`,
+            );
+        }
+
+        if (finalStateSettings.save) {
+            let saveTimeout;
+            let _state = Object.assign({}, state);
+            const _this = this;
+            for (let [key, value] of Object.entries(state)) {
+                Object.defineProperty(state, key, {
+                    enumerable: true,
+                    get() {
+                        return _state[key];
+                    },
+                    set(value) {
+                        _state[key] = value;
+                        if (finalStateSettings.save) {
+                            clearTimeout(saveTimeout);
+                            saveTimeout = setTimeout(() => {
+                                localStorage.setItem(
+                                    `s-component-utils-state-${_this.node.id}`,
+                                    JSON.stringify(_state),
+                                );
+                                console.log('save', _state, _this.node);
+                            }, 10);
+                        }
+                    },
+                });
+            }
+
+            // restoring state
+            const savedState = localStorage.getItem(
+                `s-component-utils-state-${this.node.id}`,
+            );
+            if (savedState) {
+                _state = Object.assign(_state, JSON.parse(savedState));
+                if (this.node.id === 'header-subnav-item-Forms') {
+                    console.log(this.node, _state);
+                }
+            }
+        }
     }
 
     // /**

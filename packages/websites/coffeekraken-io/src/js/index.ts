@@ -40,6 +40,8 @@ import __krakenLogo from './generic/krakenLogo';
 
 import __SCssAnimation from '@coffeekraken/s-css-animation';
 
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+
 // @ts-ignore
 // const viewsRelated = import.meta.globEager('../views/**/*.ts');
 // @ts-ignore

@@ -39,6 +39,8 @@ function configMiddleware(settings = {}) {
 
         if (!res.templateData) res.templateData = {};
         res.templateData.config = configJson;
+        res.templateData.config._sViewRendererShared = true; // for the SViewRenderer to avoid saving multiple times the same data at each view rendering
+
         res.templateData.configFiles = __SSugarConfig.filesPaths.map((path) =>
             __SFile.new(path).toObject(false),
         );

@@ -39,13 +39,18 @@ export default class SFrontendServerStartParamsInterface extends __SInterface {
                 type: 'Number',
                 alias: 'p',
                 default: __SSugarConfig.get('frontendServer.port') || 3000,
-                level: 1,
+            },
+            listen: {
+                description:
+                    'Specify if you want the server to listen on specified hostname and port for requests or not',
+                type: 'Boolean',
+                alias: 'l',
+                default: true,
             },
             rootDir: {
                 description: 'Server root directory',
                 type: 'String',
                 default: __SSugarConfig.get('frontendServer.rootDir'),
-                level: 1,
             },
             viewsDir: {
                 description: 'Server views directory',

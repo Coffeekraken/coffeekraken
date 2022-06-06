@@ -1,17 +1,10 @@
 // @ts-nocheck
 
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SDocMap from '@coffeekraken/s-docmap';
-import __SDocblock from '@coffeekraken/s-docblock';
-import __SPromise from '@coffeekraken/s-promise';
-import __marked from 'marked';
-import __fs from 'fs';
-import __SLog from '@coffeekraken/s-log';
-import __SViewRenderer from '@coffeekraken/s-view-renderer';
-import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
-import { page404 } from '@coffeekraken/s-view-renderer';
-import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
 import __SBench from '@coffeekraken/s-bench';
+import __SLog from '@coffeekraken/s-log';
+import __SPromise from '@coffeekraken/s-promise';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __fs from 'fs';
 
 /**
  * @name                dynamicHandler
@@ -32,6 +25,7 @@ import __SBench from '@coffeekraken/s-bench';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
 export default function dynamicHandler({
     req,
     res,
@@ -95,7 +89,6 @@ export default function dynamicHandler({
                     frontendServerConfig,
                 });
                 if (dataFnResult instanceof Error) {
-                    console.log(dataFnResult);
                     emit('log', {
                         type: __SLog.TYPE_ERROR,
                         value: dataFnResult,
@@ -106,12 +99,9 @@ export default function dynamicHandler({
             }
 
             // rendering view using data
-            const viewInstance = new __SViewRenderer(viewPath);
-
             const viewRes = await pipe(
-                viewInstance.render({
-                    ...(res.templateData ?? {}),
-                    ...(data ?? {}),
+                res.viewRenderer.render(viewPath, {
+                    ...data,
                 }),
             );
 
@@ -126,11 +116,8 @@ export default function dynamicHandler({
 
         let layoutPath = pageConfig.layout ?? 'layouts.main';
         // rendering view using data
-        const layoutInstance = new __SViewRenderer(layoutPath);
-
         const layoutRes = await pipe(
-            layoutInstance.render({
-                ...(res.templateData ?? {}),
+            res.viewRenderer.render(layoutPath, {
                 body: renderedViews.join('\n'),
             }),
         );

@@ -9,10 +9,10 @@
             <ul class="__subnav-chapters">
                 @foreach ($menuItem as $item)
                     @if ($item->name)
-                        <li s-activate href="#subnav-{{ \Sugar\string\idCompliant($item->name) }}"
-                            {!! $loop->index == 1 ? 'active="true"' : '' !!} id="subnav-item-{{ \Sugar\string\idCompliant($item->name) }}"
+                        <li s-activate href="#header-subnav-{{ \Sugar\string\idCompliant($item->name) }}"
+                            {!! $loop->index == 1 ? 'active="true"' : '' !!} id="header-subnav-item-{{ \Sugar\string\idCompliant($item->name) }}"
                             save-state trigger="click" mount-when="direct"
-                            group="subnav-{{ \Sugar\string\idCompliant($menuItem->name) }}">
+                            group="header-subnav-{{ \Sugar\string\idCompliant($menuItem->name) }}">
                             <i class="s-icon:folder s-mie:10 s-until:parent:active"></i>
                             <i class="s-icon:folder-opened s-mie:10 s-when:parent:active"></i>
                             {{ $item->as ? $item->as : $item->name }}
@@ -23,7 +23,7 @@
             <div class="__subnav-stories">
                 @foreach ($menuItem as $item)
                     @if (is_object($item))
-                        <div class="__subnav-story" id="subnav-{{ \Sugar\string\idCompliant($item->name) }}">
+                        <div class="__subnav-story" id="header-subnav-{{ \Sugar\string\idCompliant($item->name) }}">
                             @if ($item->content)
                                 {!! $item->content !!}
                             @elseif ($item->include)

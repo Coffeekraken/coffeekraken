@@ -26,11 +26,17 @@ $params = [];
 
 if (file_exists($argv[1])) {
     $params = json_decode(file_get_contents($argv[1]));
-    unlink($argv[1]);
 }
 
 // prepare data to pass it to the template engine
 $data = $params->data;
+
+// shared data file path
+if ($data->_sharedDataFilePath) {
+    $sharedData = json_decode(file_get_contents($data->_sharedDataFilePath));
+    $data = array_merge_recursive((array) $sharedData, (array) $data);
+}
+
 // preparing the paths
 $viewName = str_replace('.twig', '', $params->viewDotPath);
 

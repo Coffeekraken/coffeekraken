@@ -38,14 +38,20 @@ function docmapMiddleware(settings = {}) {
         if (!res.templateData) res.templateData = {};
 
         if (docmapCache) {
-            res.templateData.docmap = docmapCache;
+            res.templateData.docmap = {
+                ...docmapCache,
+                _sViewRendererShared: true, // for the SViewRenderer to avoid saving multiple times the same data at each view rendering
+            };
             return next();
         }
 
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
 
-        res.templateData.docmap = docmapJson;
+        res.templateData.docmap = {
+            ...docmapJson,
+            _sViewRendererShared: true, // for the SViewRenderer to avoid saving multiple times the same data at each view rendering
+        };
         docmapCache = docmapJson;
 
         __SBench.step('request', 'docmapMiddleware');

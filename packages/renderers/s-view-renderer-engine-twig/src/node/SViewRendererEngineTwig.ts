@@ -38,6 +38,7 @@ export default class SViewRendererEngineTwig {
     render(
         viewPath: string,
         data: any = {},
+        sharedDataFilePath: string,
         viewRendererSettings: ISViewRendererSettings,
     ) {
         return new __SPromise(
@@ -57,6 +58,10 @@ export default class SViewRendererEngineTwig {
                 __unique([...viewRendererSettings.rootDirs]).forEach((path) => {
                     viewPath = viewPath.replace(`${path}/`, '');
                 });
+
+                // pass the shared data file path through the data
+                data._sharedDataFilePath = sharedDataFilePath;
+
                 resolve(
                     __execPhp(
                         __path.resolve(

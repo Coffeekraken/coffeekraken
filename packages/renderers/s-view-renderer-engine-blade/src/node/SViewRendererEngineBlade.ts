@@ -38,6 +38,7 @@ export default class SViewRendererEngineBlade {
     render(
         viewPath: string,
         data: any = {},
+        sharedDataFilePath: string,
         viewRendererSettings: ISViewRendererSettings,
     ) {
         return new __SPromise(
@@ -47,7 +48,6 @@ export default class SViewRendererEngineBlade {
                         `It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`,
                     );
                 }
-
                 __SBench.start('SViewRendererEngineBlade.render');
 
                 __SBench.step(
@@ -69,6 +69,11 @@ export default class SViewRendererEngineBlade {
                     .split('/')
                     .join('.')
                     .replace('.blade.php', '');
+
+                // console.log('DA', data, sharedDataFilePath);
+
+                // pass the shared data file path through the data
+                data._sharedDataFilePath = sharedDataFilePath;
 
                 resolve(
                     __execPhp(

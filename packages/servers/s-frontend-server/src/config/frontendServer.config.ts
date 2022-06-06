@@ -254,7 +254,7 @@ export default function (env, config) {
             bench: {
                 /**
                  * @name            description
-                 * @namespace       config.frontendServer.modules.bench
+                 * @namespace       config.frontendServer.middlewares.bench
                  * @type            String
                  *
                  * Middleware description
@@ -265,7 +265,7 @@ export default function (env, config) {
                 description: `Track how many times take a request`,
                 /**
                  * @name            path
-                 * @namespace       config.frontendServer.modules.bench
+                 * @namespace       config.frontendServer.middlewares.bench
                  * @type            String
                  * @default             ${__dirname()}/../node/middleware/benchMiddleware
                  *
@@ -280,7 +280,7 @@ export default function (env, config) {
             request: {
                 /**
                  * @name            description
-                 * @namespace       config.frontendServer.modules.bench
+                 * @namespace       config.frontendServer.middlewares.request
                  * @type            String
                  *
                  * Middleware description
@@ -291,7 +291,7 @@ export default function (env, config) {
                 description: `Inject the "request" object for views`,
                 /**
                  * @name            path
-                 * @namespace       config.frontendServer.modules.request
+                 * @namespace       config.frontendServer.middlewares.request
                  * @type            String
                  * @default             ${__dirname()}/../node/middleware/requestMiddleware
                  *
@@ -306,9 +306,8 @@ export default function (env, config) {
             env: {
                 /**
                  * @name            description
-                 * @namespace       config.frontendServer.modules.env
+                 * @namespace       config.frontendServer.middlewares.env
                  * @type            String
-                 * @default             ${__dirname()}/../node/middleware/benchMiddleware
                  *
                  * Middleware description
                  *
@@ -318,7 +317,7 @@ export default function (env, config) {
                 description: `Inject an "env" object for the views`,
                 /**
                  * @name            path
-                 * @namespace       config.frontendServer.modules.env
+                 * @namespace       config.frontendServer.middlewares.env
                  * @type            String
                  * @default             ${__dirname()}/../node/middleware/envMiddleware
                  *
@@ -333,9 +332,8 @@ export default function (env, config) {
             packageJson: {
                 /**
                  * @name            description
-                 * @namespace       config.frontendServer.modules.packageJson
+                 * @namespace       config.frontendServer.middlewares.packageJson
                  * @type            String
-                 * @default             ${__dirname()}/../node/middleware/benchMiddleware
                  *
                  * Middleware description
                  *
@@ -345,7 +343,7 @@ export default function (env, config) {
                 description: `Inject a "packageJson" object for the views`,
                 /**
                  * @name            path
-                 * @namespace       config.frontendServer.modules.packageJson
+                 * @namespace       config.frontendServer.middlewares.packageJson
                  * @type            String
                  * @default             ${__dirname()}/../node/middleware/packageJsonMiddleware
                  *

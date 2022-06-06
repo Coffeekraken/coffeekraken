@@ -25,6 +25,9 @@ import __SPromise from '@coffeekraken/s-promise';
  * @param 	    {Object} 		[settings={}] 	An optional settings object to specify things like the rootNode to monitor, etc...
  * @return      {SPromise<HTMLElement>}         An SPromise instance on which to listen for nodes using the "node" event
  *
+ * @setting         {HTMLElement}           [rootNode=document]         The root node from where to observe childs
+ * @setting         {Boolean}              [once=true]                If true, each observed nodes will be handled only once even if they are removed and reinjected in the dom
+ *
  * @example 	js
  * import querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive'
  * querySelectorLive('.my-cool-item', (node, clearFn) => {
@@ -37,13 +40,9 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-let _observer;
-const _selectors = {};
-
 export interface IQuerySelectorLiveSettings {
     rootNode: HTMLElement;
     once: boolean;
-    onRemove: Function;
 }
 
 function querySelectorLive(
@@ -51,9 +50,9 @@ function querySelectorLive(
     cb: Function<HTMLElement> = null,
     settings: Partial<IQuerySelectorLiveSettings> = {},
 ): __SPromise<HTMLElement> {
-    // const id = `${selector} - ${uniqid()}`;
-
     let _emit;
+
+    const observerId = `s-query-selector-live-${uniqid()}`;
 
     // extend settings
     settings = Object.assign(
@@ -61,31 +60,61 @@ function querySelectorLive(
         {
             rootNode: document,
             once: true,
-            onRemove: null,
         },
         settings,
     );
+
+    function _isNodeAlreadyHandledWhenSettingsOnceIsSet($node) {
+        if (settings.once) {
+            if (!$node._querySelectorLiveOverversIds) {
+                $node._querySelectorLiveOverversIds = {};
+            }
+
+            if ($node._querySelectorLiveOverversIds[observerId]) {
+                return true;
+            }
+            $node._querySelectorLiveOverversIds[observerId] = true;
+        }
+        return false;
+    }
 
     // listen for updates in document
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.addedNodes && mutation.addedNodes.length) {
                 [].forEach.call(mutation.addedNodes, (node) => {
-                    if (!node.querySelectorAll) return;
+                    if (!node.matches) return;
                     if (node.matches(selector)) {
-                        if (settings.once) observer.disconnect();
+                        // if (settings.once) observer.disconnect();
+                        if (_isNodeAlreadyHandledWhenSettingsOnceIsSet(node)) {
+                            return;
+                        }
                         cb(node);
                         _emit?.('node', node);
                     }
                     const nestedNodes = node.querySelectorAll(selector);
                     [].forEach.call(nestedNodes, (nestedNode) => {
+                        if (
+                            _isNodeAlreadyHandledWhenSettingsOnceIsSet(
+                                nestedNode,
+                            )
+                        ) {
+                            return;
+                        }
                         cb(nestedNode);
                         _emit?.('node', nestedNode);
                     });
                 });
             } else if (mutation.attributeName) {
                 if (mutation.target.matches(selector)) {
-                    if (settings.once) observer.disconnect();
+                    // if (settings.once) observer.disconnect();
+                    if (
+                        _isNodeAlreadyHandledWhenSettingsOnceIsSet(
+                            mutation.target,
+                        )
+                    ) {
+                        return;
+                    }
                     cb(mutation.target);
                     _emit?.('node', mutation.target);
                 }
@@ -101,8 +130,10 @@ function querySelectorLive(
 
     // first search
     [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
-        if (!node.querySelectorAll) return;
-        // pushNewNode(node, selector, 'init');
+        if (!node.matches) return;
+        if (_isNodeAlreadyHandledWhenSettingsOnceIsSet(node)) {
+            return;
+        }
         cb(node);
         _emit?.('node', node);
     });

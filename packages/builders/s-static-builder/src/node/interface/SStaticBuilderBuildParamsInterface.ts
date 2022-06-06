@@ -42,6 +42,13 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
                 alias: 'h',
                 default: __SSugarConfig.get('staticBuilder.host'),
             },
+            useFrontendServer: {
+                description:
+                    'Specify if the server is an SFrontendServer one so we can bypass the http requests and make use of the `server.request` method to speed things up',
+                type: 'Boolean',
+                alias: 'f',
+                default: false,
+            },
             clean: {
                 description:
                     'Specify if you want to clean the past builds before rebuilding. THis would do the same as setting the "incremental" option to false',
@@ -70,14 +77,18 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
                 default: __SSugarConfig.get('staticBuilder.requestTimeout'),
             },
             requestRetry: {
-                description: 'Specify the number of retry to do by request before considering it as failed',
+                description:
+                    'Specify the number of retry to do by request before considering it as failed',
                 type: 'Number',
-                default: __SSugarConfig.get('staticBuilder.requestRetry')
+                default: __SSugarConfig.get('staticBuilder.requestRetry'),
             },
             requestRetryTimeout: {
-                description: 'Specify how many long the builder has to wait between tries',
+                description:
+                    'Specify how many long the builder has to wait between tries',
                 type: 'Number',
-                default: __SSugarConfig.get('staticBuilder.requestRetryTimeout')
+                default: __SSugarConfig.get(
+                    'staticBuilder.requestRetryTimeout',
+                ),
             },
             assets: {
                 description:

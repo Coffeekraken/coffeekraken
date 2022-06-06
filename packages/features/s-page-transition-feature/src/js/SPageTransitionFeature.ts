@@ -250,6 +250,9 @@ export default class SPageTransitionFeature extends __SFeature {
                     's-page-transition-container',
                 );
             } else {
+
+                console.log('REMPLACE');
+
                 // otherwise, we replace the main container
                 $inPageContainer.innerHTML = $container.innerHTML;
                 newState.html = $container.innerHTML;

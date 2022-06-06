@@ -24,6 +24,9 @@ import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __recursiveCopy from 'recursive-copy';
+import __runMiddleware from 'run-middleware';
+
+import __viewRendererMiddleware from './middleware/viewRendererMiddleware';
 
 import __request from 'request';
 import __bodyParser from 'body-parser';
@@ -50,6 +53,7 @@ import __bodyParser from 'body-parser';
 export interface ISFrontendServerStartParams {
     port: number;
     hostname: string;
+    listen: boolean;
     rootDir: string;
     viewsDir: string;
     pagesDir: string;
@@ -109,6 +113,8 @@ export default class SFrontendServer extends __SClass {
 
         // instanciate a new express server
         this._express = __express();
+
+        __runMiddleware(this._express);
     }
 
     /**
@@ -266,6 +272,11 @@ export default class SFrontendServer extends __SClass {
                     }
                 }
 
+                // viewRendererMiddleware
+                this._express.use((req, res, next) => {
+                    return pipe(__viewRendererMiddleware()(req, res, next));
+                });
+
                 // logging requests
                 if (logLevelInt >= 4) {
                     this._express.use((req, res, next) => {
@@ -318,54 +329,64 @@ export default class SFrontendServer extends __SClass {
                     await __kill(`:${frontendServerConfig.port}`);
                 }
 
-                const server = this._express.listen(
-                    frontendServerConfig.port,
-                    async () => {
-                        await __wait(100);
-                        // server started successfully
-                        emit('log', {
-                            group: `s-frontend-server-${this.metas.id}`,
-                            value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,
-                        });
-                        emit('log', {
-                            group: `s-frontend-server-${this.metas.id}`,
-                            value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
-                        });
-                        emit('log', {
-                            type: __SLog.TYPE_VERBOSE,
-                            // group: `s-frontend-server-${this.metas.id}`,
-                            value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`,
-                        });
-                        emit('log', {
-                            type: __SLog.TYPE_VERBOSE,
-                            // group: `s-frontend-server-${this.metas.id}`,
-                            value: `Log level: <yellow>${finalParams.logLevel}</yellow>`,
-                        });
-
-                        // setTimeout(() => {
-                        //     emit('log', {
-                        //         type: 'summary',
-                        //         value: {
-                        //             status: 'success',
-                        //             value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
-                        //             collapse: true,
-                        //         },
-                        //     });
-                        // }, 2000);
-                    },
-                );
-
-                __onProcessExit(() => {
+                if (!finalParams.listen) {
+                    // server started successfully
                     emit('log', {
-                        value: `<red>[kill]</red> Gracefully killing the frontend server...`,
+                        group: `s-frontend-server-${this.metas.id}`,
+                        value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,
                     });
-                    return new Promise((resolve) => {
-                        server.close(() => {
-                            // @ts-ignore
-                            resolve();
+                    // when no listen, we just resolve the promise to say that the server has started
+                    resolve();
+                } else {
+                    const server = this._express.listen(
+                        frontendServerConfig.port,
+                        async () => {
+                            await __wait(100);
+                            // server started successfully
+                            emit('log', {
+                                group: `s-frontend-server-${this.metas.id}`,
+                                value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,
+                            });
+                            emit('log', {
+                                group: `s-frontend-server-${this.metas.id}`,
+                                value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
+                            });
+                            emit('log', {
+                                type: __SLog.TYPE_VERBOSE,
+                                // group: `s-frontend-server-${this.metas.id}`,
+                                value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`,
+                            });
+                            emit('log', {
+                                type: __SLog.TYPE_VERBOSE,
+                                // group: `s-frontend-server-${this.metas.id}`,
+                                value: `Log level: <yellow>${finalParams.logLevel}</yellow>`,
+                            });
+
+                            // setTimeout(() => {
+                            //     emit('log', {
+                            //         type: 'summary',
+                            //         value: {
+                            //             status: 'success',
+                            //             value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
+                            //             collapse: true,
+                            //         },
+                            //     });
+                            // }, 2000);
+                        },
+                    );
+
+                    __onProcessExit(() => {
+                        emit('log', {
+                            value: `<red>[kill]</red> Gracefully killing the frontend server...`,
+                        });
+                        return new Promise((resolve) => {
+                            server.close(() => {
+                                // @ts-ignore
+                                resolve();
+                            });
                         });
                     });
-                });
+                }
             },
             {
                 eventEmitter: {
@@ -373,6 +394,17 @@ export default class SFrontendServer extends __SClass {
                 },
             },
         );
+    }
+
+    request(url: string) {
+        return new __SPromise(({ resolve, reject }) => {
+            this._express.runMiddleware(url, (code, body, headers) => {
+                // console.log('RESULT', code, body);
+                resolve({
+                    data: body,
+                });
+            });
+        });
     }
 
     corsProxy(

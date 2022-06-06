@@ -4,12 +4,8 @@ import __SViewRenderer from '@coffeekraken/s-view-renderer';
 export default function _404Handler({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         // rendering view using data
-        const _404Instance = new __SViewRenderer('pages.error.404');
-
         const _404Res = await pipe(
-            _404Instance.render({
-                ...(res.templateData ?? {}),
-            }),
+            res.viewRenderer.render('pages.error.404', {}),
         );
 
         res.status(200);

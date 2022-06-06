@@ -38,8 +38,6 @@ export default class SViewRendererEngineLit {
     ) {
         return new __SPromise(
             async ({ resolve, reject, emit }) => {
-                console.log('VIEW', viewPath);
-
                 if (!__fs.existsSync(viewPath)) {
                     return reject(
                         `It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`,

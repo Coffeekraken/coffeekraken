@@ -78,6 +78,11 @@ export default class SActivateFeature extends __SFeature {
     _$groupElements?: HTMLElement[] = [];
     _unactivateTimeout;
 
+    state = {
+        active: undefined,
+        groupActiveId: undefined,
+    };
+
     constructor(name: string, node: HTMLElement, settings: any) {
         super(
             name,
@@ -92,6 +97,14 @@ export default class SActivateFeature extends __SFeature {
                 settings ?? {},
             ),
         );
+        this.componentUtils.handleState(this.state, {
+            save: this.props.saveState,
+        });
+
+        // if (this.state.active) {
+        //     console.log('AC');
+        //     console.log(this.state);
+        // }
 
         if (this.props.triggerer) {
             this._$triggerers = Array.from(
@@ -99,6 +112,10 @@ export default class SActivateFeature extends __SFeature {
             );
         } else {
             this._$triggerers = [this.node];
+        }
+
+        if (this.node.id === 'main-Configuration') {
+            console.log('Hello ');
         }
 
         // expose the api on node
@@ -129,11 +146,7 @@ export default class SActivateFeature extends __SFeature {
                     if (this._$groupElements?.includes($elm)) return;
                     this._$groupElements?.push($elm);
                 },
-                {
-                    onRemove($removedElm) {
-                        console.log('remobve', $removedElm);
-                    },
-                },
+                {},
             );
         }
 
@@ -153,7 +166,7 @@ export default class SActivateFeature extends __SFeature {
             triggers.forEach((trigger) => {
                 if (trigger.match(/^event:/)) {
                     this.node.addEventListener('actual', (e) => {
-                        this.activate();
+                        // this.activate();
                     });
                 } else {
                     switch (trigger) {
@@ -171,32 +184,32 @@ export default class SActivateFeature extends __SFeature {
                                 if (this.isActive() && this.props.toggle) {
                                     this.unactivate();
                                 } else {
-                                    this.activate();
+                                    // this.activate();
                                 }
                             });
                             break;
                         case 'mousenter':
                         case 'mouseover':
                             $triggerer.addEventListener('mouseover', (e) => {
-                                this.activate();
+                                // this.activate();
                             });
                             break;
                         case 'mouseout':
                         case 'mouseleave':
                             $triggerer.addEventListener('mouseleave', (e) => {
-                                this.unactivate();
+                                // this.unactivate();
                             });
                             break;
                         case 'anchor':
                             if (document.location.hash === this._hrefSelector) {
-                                this.activate();
+                                // this.activate();
                             }
                             window.addEventListener('hashchange', (e) => {
                                 if (
                                     document.location.hash ===
                                     this._hrefSelector
                                 ) {
-                                    this.activate();
+                                    // this.activate();
                                 }
                             });
 
@@ -216,16 +229,16 @@ export default class SActivateFeature extends __SFeature {
         }
 
         // activate if has the "active" attribute
-        if (this.props.active) {
+        if (this.props.active && this.state.active === undefined) {
             this.activate(true);
         }
 
+        if (this.node.id === 'header-subnav-item-Forms') {
+            console.log('CLOOP', this.state);
+        }
+
         // restore the state
-        this._restoreState();
-    }
-    get saveStateId(): string {
-        // @ts-ignore
-        return this.props.group ? `group-${this.props.group}` : this.props.id;
+        this.props.saveState && this._restoreState();
     }
 
     /**
@@ -238,64 +251,15 @@ export default class SActivateFeature extends __SFeature {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     isActive() {
-        return this.node.hasAttribute('active');
+        return this.state.active;
     }
 
     _restoreState() {
-        // save state
-        if (this.props.saveState) {
-            // @ts-ignore
-            if (!this.props.id)
-                throw new Error(
-                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
-                );
-            // @ts-ignore
-
-            if (this.props.group) {
-                const groupState = JSON.parse(
-                    localStorage.getItem(
-                        `s-activate-group-state-${this.props.group}`,
-                    ) ?? '{}',
-                );
-
-                if (groupState.activeId === this.props.id) {
-                    this.activate(true);
-                } else if (!groupState.activeId && this.props.active) {
-                    this.activate(true);
-                }
-            } else if (
-                localStorage.getItem(`s-activate-state-${this.saveStateId}`) ===
-                this.props.id
-            ) {
-                this.activate(true);
-            } else {
-                // this.props.active = false;
+        if (this.state.active) {
+            if (this.node.id === 'header-subnav-item-Forms') {
+                console.log('ARESO', Math.random());
             }
-        }
-    }
-
-    _saveState() {
-        // save state
-        if (this.props.saveState) {
-            // @ts-ignore
-            if (!this.props.id)
-                throw new Error(
-                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
-                );
-            // @ts-ignore
-            if (this.props.group) {
-                localStorage.setItem(
-                    `s-activate-group-state-${this.props.group}`,
-                    JSON.stringify({
-                        activeId: this.props.id,
-                    }),
-                );
-            } else {
-                localStorage.setItem(
-                    `s-activate-state-${this.saveStateId}`,
-                    this.props.id,
-                );
-            }
+            this.activate(true);
         }
     }
 
@@ -313,13 +277,14 @@ export default class SActivateFeature extends __SFeature {
         // clear the unactivate timeout
         clearTimeout(this._unactivateTimeout);
 
+        if ((this.node.id = 'header-subnav-item-Forms')) {
+            console.trace('ACTI');
+        }
+
         // protect from activating multiple times
         if (!force && this.isActive()) return;
 
         setTimeout(() => {
-            // save state
-            this._saveState();
-
             // history
             if (this.props.history && this._hrefSelector) {
                 document.location.hash = this._hrefSelector;
@@ -329,18 +294,18 @@ export default class SActivateFeature extends __SFeature {
             if (this._$groupElements) {
                 // @ts-ignore
                 this._$groupElements.forEach(($element: HTMLElement) => {
-                    if ($element === this.node) return;
-                    try {
-                        // @ts-ignore
-                        $element.unactivate?.();
-                    } catch (e) {
-                        console.log('eee', e);
+                    if ($element === this.node) {
+                        console.log('ME', $element);
+                        return;
                     }
+                    // @ts-ignore
+                    // $element.unactivate?.();
                 });
             }
 
             // add the "active" attribute to the component
             // @ts-ignore
+            this.state.active = true;
             this.props.active = true;
 
             // loop on targets to activate them
@@ -373,17 +338,14 @@ export default class SActivateFeature extends __SFeature {
      */
     async unactivate() {
         // protect from unactivating multiple times
+
+        if ((this.node.id = 'header-subnav-item-Forms')) {
+            console.log('Unactivate');
+        }
         if (!this.isActive()) return;
 
         this._unactivateTimeout = setTimeout(() => {
-            // save state
-            if (this.props.saveState) {
-                if (!this.props.id)
-                    throw new Error(
-                        `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
-                    );
-                localStorage.removeItem(`s-activate-state-${this.props.id}`);
-            }
+            this.state.active = false;
 
             // remove the "active" attribute to the component
             this.node.removeAttribute('active');

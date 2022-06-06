@@ -45,10 +45,10 @@ export default class SViewRendererSettingsInterface extends __SInterface {
                 type: 'Object',
                 default: {},
             },
-            sharedData: {
+            sharedDataFiles: {
                 description: 'Specify some shared data files to load',
                 type: 'String[]',
-                default: __SSugarConfig.get('viewRenderer.sharedData'),
+                default: __SSugarConfig.get('viewRenderer.sharedDataFiles'),
             },
         };
     }

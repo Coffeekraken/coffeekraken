@@ -138,6 +138,9 @@ export default class SFeature extends __SClass implements ISFeature {
     ) {
         this.setDefaultProps(name, defaultProps);
         __querySelectorLive(`[${name}]`, ($elm) => {
+            if ($elm.id === 'main-Configuration') {
+                console.log('INIT', $elm);
+            }
             new feature(name, $elm, __SComponentUtils.getDefaultProps(name));
         });
     }

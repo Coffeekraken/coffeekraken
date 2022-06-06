@@ -24,19 +24,16 @@ import __SBench from '@coffeekraken/s-bench';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function doc(req, res, settings = {}) {
-  return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
+    return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
+        // render the proper template
+        const pageHtml = await res.viewRenderer.render({
+            body: 'Hello world',
+        });
 
-    // render the proper template
-    const indexView = new __SViewRenderer('index');
-    const pageHtml = await indexView.render({
-      ...(res.templateData || {}),
-      body: 'Hello world'
+        // _console.log(req);
+        res.type('text/html');
+        res.status(200);
+        res.send(pageHtml.value);
+        resolve(pageHtml.value);
     });
-
-    // _console.log(req);
-    res.type('text/html');
-    res.status(200);
-    res.send(pageHtml.value);
-    resolve(pageHtml.value);
-  });
 }

@@ -49,7 +49,7 @@ export default function (env, config) {
         ],
 
         /**
-         * @name          sharedData
+         * @name          sharedDataFiles
          * @namespace     config.viewRenderer
          * @type          String[]
          * @default       ['[config.storage.src.rootDir]/views/shared.data.js']
@@ -59,7 +59,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        sharedData: ['[config.storage.src.rootDir]/views/shared.data.js'],
+        sharedDataFiles: ['[config.storage.src.rootDir]/views/shared.data.js'],
 
         /**
          * @name          dataFiles

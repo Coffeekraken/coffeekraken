@@ -5,8 +5,9 @@
     "type": "module",
     "main": "./src/node/exports.js",
     "exports": {
-        "import": "./src/node/exports.js",
-        "require": "./src/node/exports.cjs"
+        ".": {
+            "import": "./dist/pkg/esm/node/exports.js"
+        }
     },
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
@@ -40,8 +41,10 @@
         "minimatch": "^3.0.4",
         "recursive-copy": "^2.0.14",
         "request": "^2.88.2",
+        "run-middleware": "^0.9.10",
         "sails": "^1.4.2",
         "serve-static": "^1.14.1",
         "vhost": "^3.0.2"
-    }
+    },
+    "module": "./dist/pkg/esm/node/exports.js"
 }

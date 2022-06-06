@@ -1,5 +1,4 @@
 import type { ISViewRendererRenderResult } from '../SViewRenderer';
-import __SViewRenderer from '../SViewRenderer';
 
 /**
  * @name           404
@@ -14,7 +13,7 @@ import __SViewRenderer from '../SViewRenderer';
  *
  * @example         js
  * import page404 from '@coffeekraken/sugar/node/engines/pages/404';
- * const html = await page404({
+ * const html = await page404(renderer, {
  *      title: 'Not found',
  *      body: 'The page you want does not exists...'
  * });
@@ -29,11 +28,9 @@ export interface I404Data {
 }
 
 export default function page404(
+    renderer: any,
     data: I404Data,
 ): Promise<ISViewRendererRenderResult> {
-    const engine = new __SViewRenderer('pages.error.404', {
-        viewRenderer: {},
-    });
-    const result = engine.render(data);
+    const result = renderer.render('pages.error.404', data);
     return result;
 }

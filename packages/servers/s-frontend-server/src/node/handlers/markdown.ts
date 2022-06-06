@@ -79,12 +79,12 @@ export default function markdown(req, res, settings = {}) {
             return reject(error.value);
         }
 
-        const viewInstance = new __SViewRenderer('pages.markdown.markdown');
-
-        const result = await viewInstance.render({
-            ...(res.templateData ?? {}),
-            body: html,
-        });
+        const result = await res.viewRenderer.render(
+            'pages.markdown.markdown',
+            {
+                body: html,
+            },
+        );
 
         res.status(200);
         res.type('text/html');

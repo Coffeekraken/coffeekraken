@@ -17,6 +17,7 @@
         "@coffeekraken/s-promise": "^2.0.0",
         "@coffeekraken/s-request": "^2.0.0",
         "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/s-frontend-server": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "@fullhuman/postcss-purgecss": "^4.0.3",
         "autoprefixer": "^10.2.6",

@@ -49,7 +49,10 @@ export default function doc(req, res, settings = {}) {
         }
 
         // generate the docblocks
-        const docblocksInstance = new __SDocblock(_docmapJson.map[requestedNamespace].path, {});
+        const docblocksInstance = new __SDocblock(
+            _docmapJson.map[requestedNamespace].path,
+            {},
+        );
         await docblocksInstance.parse();
         const docblocks = docblocksInstance.toObject();
 
@@ -99,9 +102,7 @@ export default function doc(req, res, settings = {}) {
         });
 
         // render the proper template
-        const docView = new __SViewRenderer('pages.doc.doc');
-        const pageHtml = await docView.render({
-            ...(res.templateData || {}),
+        const pageHtml = await res.viewRenderer.render('pages.doc.doc', {
             docblocks,
         });
 

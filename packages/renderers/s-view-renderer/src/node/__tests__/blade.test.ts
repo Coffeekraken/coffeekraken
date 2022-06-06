@@ -5,13 +5,13 @@ describe('s-view.blade', () => {
     it('Should compile the passed blade view correctly', async () => {
         await __SSugarConfig.load();
 
-        const view = new __SViewRenderer('default', {
+        const view = new __SViewRenderer({
             viewRenderer: {
                 rootDirs: [`${__dirname}/views`],
             },
         });
 
-        const res = await view.render({});
+        const res = await view.render('default', {});
 
         expect(res.value).not.toBeUndefined();
         expect(res.value.includes('<title>Smoth</title>')).toBe(true);

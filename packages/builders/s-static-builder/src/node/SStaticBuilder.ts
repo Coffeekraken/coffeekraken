@@ -23,6 +23,8 @@ import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __SFrontendServer from '@coffeekraken/s-frontend-server';
+import __SDuration from '@coffeekraken/s-duration';
 
 /**
  * @name                SStaticBuilder
@@ -86,6 +88,7 @@ export interface ISStaticBuilderBuildParams {
     input: string;
     outDir: string;
     host: string;
+    useFrontendServer: boolean;
     clean: boolean;
     incremental: boolean;
     assets: ISStaticBuilderAssets;
@@ -151,7 +154,7 @@ export default class SStaticBuilder extends __SBuilder {
      */
     _build(params: ISStaticBuilderBuildParams): Promise<ISStaticBuilderResult> {
         return new __SPromise(
-            async ({ resolve, reject, emit }) => {
+            async ({ resolve, reject, pipe, emit }) => {
                 emit('log', {
                     type: __SLog.TYPE_INFO,
                     value: `<yellow>[build]</yellow> Start building your static website`,
@@ -166,6 +169,17 @@ export default class SStaticBuilder extends __SBuilder {
                     __packageCacheDir(),
                     's-static-builder/incremental-cache.json',
                 );
+
+                // make use of frontend server
+                let frontendServer;
+                if (params.useFrontendServer) {
+                    frontendServer = new __SFrontendServer();
+                    await pipe(
+                        frontendServer.start({
+                            listen: false,
+                        }),
+                    );
+                }
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
@@ -252,6 +266,8 @@ export default class SStaticBuilder extends __SBuilder {
                     value: `<yellow>[build]</yellow> Scraping pages using the sitemap.xml...`,
                 });
 
+                let genDuration;
+
                 // loop on each urls to get his content
                 for (let i = 0; i < xml.urlset.url.length; i++) {
                     const url = xml.urlset.url[i],
@@ -286,6 +302,16 @@ export default class SStaticBuilder extends __SBuilder {
                     });
                     logsCount++;
 
+                    if (genDuration) {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[build]</yellow> Last page generated in <yellow>${
+                                genDuration.end().formatedDuration
+                            }</yellow>`,
+                        });
+                        logsCount++;
+                    }
+
                     // incremental build
                     if (params.incremental) {
                         if (
@@ -308,10 +334,7 @@ export default class SStaticBuilder extends __SBuilder {
 
                     const start = Date.now();
 
-                    const request = new __SRequest({
-                        url: `${params.host}${urlLoc}`,
-                        timeout: params.requestTimeout,
-                    });
+                    genDuration = new __SDuration();
 
                     let res,
                         tries = 0;
@@ -321,34 +344,57 @@ export default class SStaticBuilder extends __SBuilder {
                             await __wait(params.requestRetryTimeout);
                         }
 
-                        res = await request.send().catch((e) => {
-                            emit('log', {
-                                // clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
-                                type: __SLog.TYPE_INFO,
-                                value: `<red>[error]</red> The url "<cyan>${urlLoc}</cyan>" cannot be reached...`,
+                        if (params.useFrontendServer) {
+                            // emit('log', {
+                            //     type: __SLog.TYPE_INFO,
+                            //     value: `<yellow>[build]</yellow> Page `,
+                            // });
+                            // logsCount++;
+
+                            res = await pipe(frontendServer.request(urlLoc));
+
+                            // emit('log', {
+                            //     type: __SLog.TYPE_INFO,
+                            //     value: `<green>[build]</green> Page "<cyan>${urlLoc}</cyan>" generated <green>successfully</green> in <yellow>${
+                            //         genDuration.end().formatedDuration
+                            //     }</yellow>`,
+                            // });
+                            // logsCount++;
+                        } else {
+                            const request = new __SRequest({
+                                url: `${params.host}${urlLoc}`,
+                                timeout: params.requestTimeout,
                             });
-                            tries++;
 
-                            if (tries >= params.requestRetry) {
-                                logsCount = 0;
-                                failsCount++;
-                                failedUrls.push(urlLoc);
+                            res = await request.send().catch((e) => {
+                                emit('log', {
+                                    // clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<red>[error]</red> The url "<cyan>${urlLoc}</cyan>" cannot be reached...`,
+                                });
+                                tries++;
 
-                                __writeFileSync(
-                                    `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
-                                    failedUrls.join('\n'),
-                                );
+                                // if (tries >= params.requestRetry) {
+                                //     logsCount = 0;
+                                //     failsCount++;
+                                //     failedUrls.push(urlLoc);
 
-                                if (
-                                    params.failAfter !== -1 &&
-                                    failsCount >= params.failAfter
-                                ) {
-                                    throw new Error(
-                                        `<red>[error]</red> The static builder has reached the available issues which is set using the "<yellow>failAfter</yellow>" param that is set to <magenta>${params.failAfter}</magenta>`,
-                                    );
-                                }
-                            }
-                        });
+                                //     __writeFileSync(
+                                //         `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
+                                //         failedUrls.join('\n'),
+                                //     );
+
+                                //     if (
+                                //         params.failAfter !== -1 &&
+                                //         failsCount >= params.failAfter
+                                //     ) {
+                                //         throw new Error(
+                                //             `<red>[error]</red> The static builder has reached the available issues which is set using the "<yellow>failAfter</yellow>" param that is set to <magenta>${params.failAfter}</magenta>`,
+                                //         );
+                                //     }
+                                // }
+                            });
+                        }
                     }
 
                     const end = Date.now();
@@ -361,11 +407,11 @@ export default class SStaticBuilder extends __SBuilder {
                     // @ts-ignore
                     if (res?.data) {
                         // saving file
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<green>[build]</green> Saving the page from url "<cyan>${urlLoc}</cyan>"...`,
-                        });
-                        logsCount++;
+                        // emit('log', {
+                        //     type: __SLog.TYPE_INFO,
+                        //     value: `<green>[build]</green> Saving the page from url "<cyan>${urlLoc}</cyan>"...`,
+                        // });
+                        // logsCount++;
                         // @ts-ignore
                         __writeFileSync(cacheOutPath, res.data);
                         __writeFileSync(outPath, res.data);

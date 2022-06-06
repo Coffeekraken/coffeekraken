@@ -42,7 +42,9 @@ export default function execPhp(
         let paramsFilePath, paramsStr;
 
         if (settings.paramsThroughFile) {
-            paramsFilePath = `${__packageTmpDir()}/exec-php-${__uniqid()}.json`;
+            paramsFilePath = `${__packageTmpDir()}/exec-php/${__uniqid()}-${Math.round(
+                Math.random() * 99999999999,
+            )}.json`;
             __writeJsonSync(paramsFilePath, params);
         } else {
             paramsStr = JSON.stringify(params);
@@ -57,24 +59,23 @@ export default function execPhp(
                 .replace(/\\f/g, '\\f');
         }
 
-        // const result = __childProcess.spawnSync(
-        //     `php ${scriptPath} '${paramsFilePath ?? paramsStr}'`,
-        //     [],
-        //     {
-        //         shell: true,
-        //     },
-        // );
-
         // quicker with execSync than spawnSync
-        const result = __childProcess.execSync(
-            `php ${scriptPath} "${paramsFilePath ?? paramsStr}"`,
-        );
+        let result;
+        try {
+            result = __childProcess.execSync(
+                `php ${scriptPath} "${paramsFilePath ?? paramsStr}"`,
+            );
+        } catch (e) {
+            return reject(e);
+        }
 
-        // if (result.stderr.toString()) {
-        //     return reject(result.stderr.toString());
-        // }
+        if (paramsFilePath) {
+            try {
+                __fs.unlinkSync(paramsFilePath);
+            } catch (e) {}
+        }
 
         // resolve(`php ${scriptPath} "${paramsFilePath ?? paramsStr}"`);
-        resolve(result.toString());
+        resolve(result.toString?.() ?? result);
     });
 }

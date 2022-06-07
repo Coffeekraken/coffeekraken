@@ -90,7 +90,13 @@
                 "id": "@coffeekraken.s-page-transition-feature.js.SPageTransitionFeature",
                 "name": "SPageTransitionFeature",
                 "as": "Page transition",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -128,7 +134,13 @@
             "@coffeekraken.s-page-transition-feature.js.interface.SPageTransitionFeatureInterface": {
                 "id": "@coffeekraken.s-page-transition-feature.js.interface.SPageTransitionFeatureInterface",
                 "name": "SPageTransitionFeatureInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

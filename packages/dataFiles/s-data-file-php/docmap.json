@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-data-file-php.doc.README": {
                 "id": "@coffeekraken.s-data-file-php.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-data-file-php.node.SDataFilePhp": {
                 "id": "@coffeekraken.s-data-file-php.node.SDataFilePhp",
                 "name": "SDataFilePhp",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class represent the php data file loader",
                 "namespace": "@coffeekraken.s-data-file-php.node",
                 "status": "beta",
@@ -135,7 +146,16 @@
                     "extensions": {
                         "id": "6d00930f46848afe6dab63284344bc30c85ddaf33f355c687b9e9dd718792efd",
                         "name": "extensions",
-                        "type": "String[]",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "String"
+                                    ]
+                                }
+                            ]
+                        },
                         "default": "['php']",
                         "description": "This static property allow you to define the extensions that the data file loader",
                         "static": "true",
@@ -149,7 +169,13 @@
                     "load": {
                         "id": "9cdf58ce73f21adfd98936b3dbd2dff0350881dd7e3001ecf11fcdc18af63fac",
                         "name": "load",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to actually load a data file",
                         "static": "true",
                         "since": "2.0.0",

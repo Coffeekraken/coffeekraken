@@ -36,12 +36,11 @@ function frontspecMiddleware(settings = {}) {
     return async function (req, res, next) {
         const frontspec = new __SFrontspec();
         if (!res.templateData) res.templateData = {};
-        if (!res.templateData.frontspec) res.templateData.frontspec = {};
+        if (!res.templateData.shared) res.templateData.shared = {};
 
-        res.templateData.frontspec = {
+        res.templateData.shared.frontspec = {
             ...(await frontspec.read()),
-            ...res.templateData.frontspec,
-            _sViewRendererShared: true, // for the SViewRenderer to avoid saving multiple times the same data at each view rendering
+            ...(res.templateData.shared.frontspec ?? {}),
         };
 
         __SBench.step('request', 'frontspecMiddleware');

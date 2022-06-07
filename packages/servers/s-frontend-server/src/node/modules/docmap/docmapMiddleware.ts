@@ -36,11 +36,11 @@ let docmapCache;
 function docmapMiddleware(settings = {}) {
     return async function (req, res, next) {
         if (!res.templateData) res.templateData = {};
+        if (!res.templateData.shared) res.templateData.shared = {};
 
         if (docmapCache) {
-            res.templateData.docmap = {
+            res.templateData.shared.docmap = {
                 ...docmapCache,
-                _sViewRendererShared: true, // for the SViewRenderer to avoid saving multiple times the same data at each view rendering
             };
             return next();
         }
@@ -48,9 +48,8 @@ function docmapMiddleware(settings = {}) {
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
 
-        res.templateData.docmap = {
+        res.templateData.shared.docmap = {
             ...docmapJson,
-            _sViewRendererShared: true, // for the SViewRenderer to avoid saving multiple times the same data at each view rendering
         };
         docmapCache = docmapJson;
 

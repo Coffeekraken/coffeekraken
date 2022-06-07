@@ -1,5 +1,4 @@
 <ul class="s-fs-tree">
-
     @foreach ($menu as $item)
 
         @php

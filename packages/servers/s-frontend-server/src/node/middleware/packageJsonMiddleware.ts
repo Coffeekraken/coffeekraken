@@ -34,22 +34,22 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function packageJsonMiddleware(settings = {}) {
-  return function (req, res, next) {
+    return function (req, res, next) {
+        const packageJsonPath = `${__packageRootDir()}/package.json`;
+        let pkg;
+        if (!__fs.existsSync(packageJsonPath)) {
+        } else {
+            pkg = __readJsonSync(packageJsonPath);
+            if (!res.templateData) res.templateData = {};
+            if (!res.templateData.shared) res.templateData.shared = {};
+            res.templateData.shared.packageJson = {
+                ...__standardizeJson(pkg),
+            };
+        }
 
-    const packageJsonPath = `${__packageRootDir()}/package.json`;
-    let pkg;
-    if (!__fs.existsSync(packageJsonPath)) {
-    } else {
-      pkg = __readJsonSync(packageJsonPath);
-      res.templateData = {
-        ...(res.templateData || {}),
-        packageJson: __standardizeJson(pkg)
-      };
-    }
+        __SBench.step('request', 'packageJsonMiddleware');
 
-    __SBench.step('request', 'packageJsonMiddleware');
-
-    return next();
-  };
+        return next();
+    };
 }
 export default packageJsonMiddleware;

@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-vite-sugar-plugin.node.sVitePluginSugar": {
                 "id": "@coffeekraken.s-vite-sugar-plugin.node.sVitePluginSugar",
                 "name": "sVitePluginSugar",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This plugin allows you to automate some things like injecting\nenvironment variables in the js, etc...",
                 "namespace": "@coffeekraken.s-vite-sugar-plugin.node",
                 "since": "2.0.0",

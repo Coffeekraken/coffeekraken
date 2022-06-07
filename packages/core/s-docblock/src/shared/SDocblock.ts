@@ -135,10 +135,11 @@ class SDocblock extends __SClass implements ISDocblock {
 
                             // if (.object.namespace && !aObj.namespace) res -= 1;
                             if (bObj.namespace) res += 1;
-                            if (bObj.type?.toLowerCase() === 'class') res += 1;
+                            if (bObj.type?.toLowerCase?.() === 'class')
+                                res += 1;
                             if (bObj.constructor) res += 1;
                             if (bObj.private) res += 1;
-                            if (bObj.type?.toLowerCase() === 'function')
+                            if (bObj.type?.toLowerCase?.() === 'function')
                                 res += 1;
                             if (bObj.name?.length > aObj.name?.length) res += 1;
                             return res;

@@ -38,24 +38,33 @@ function configMiddleware(settings = {}) {
         const configJson = __SSugarConfig.get('');
 
         if (!res.templateData) res.templateData = {};
-        res.templateData.config = configJson;
-        res.templateData.config._sViewRendererShared = true; // for the SViewRenderer to avoid saving multiple times the same data at each view rendering
+        if (!res.templateData.shared) res.templateData.shared = {};
+        res.templateData.shared.config = configJson;
 
-        res.templateData.configFiles = __SSugarConfig.filesPaths.map((path) =>
-            __SFile.new(path).toObject(false),
-        );
+        res.templateData.shared.configFiles = __SSugarConfig.filesPaths
+            .map((path) => __SFile.new(path).toObject(false))
+            .sort((a, b) => {
+                return a.name.localeCompare(b.name);
+            });
 
         // get the last item of the request
         const lastPath = req.path.split('/').pop();
 
-        const requestedConfig = res.templateData.configFiles?.filter((file) => {
-            return file.name === `${lastPath}.config.js`;
-        });
+        const requestedConfig = res.templateData.shared.configFiles?.filter(
+            (file) => {
+                return file.name === `${lastPath}.config.js`;
+            },
+        );
 
+        res.templateData.requestedConfig = [];
         if (requestedConfig.length) {
-            res.templateData.requestedConfig = await __SSugarConfig.toDocblocks(
-                requestedConfig[0].path,
+            const data = await __SSugarConfig.toDocblocks(
+                `${lastPath}.config.js`,
             );
+            res.templateData.requestedConfig = [
+                ...res.templateData.requestedConfig,
+                ...data,
+            ];
         }
 
         __SBench.step('request', 'configMiddleware');

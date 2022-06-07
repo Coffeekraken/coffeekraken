@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-postcss-builder.config.postcss.plugins": {
                 "id": "@coffeekraken.s-postcss-builder.config.postcss.plugins",
                 "name": "plugins",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "['@coffeekraken/s-postcss-sugar-plugin','postcss-nested','postcss-atroot','postcss-extend-rule','postcss-property-lookup','autoprefixer']",
                 "description": "Specify the plugins to use with the postcss process",
                 "namespace": "@coffeekraken.s-postcss-builder.config.postcss",
@@ -107,7 +112,13 @@
             "@coffeekraken.s-postcss-builder.config.postcssBuilder.input": {
                 "id": "@coffeekraken.s-postcss-builder.config.postcssBuilder.input",
                 "name": "input",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.src.cssDir]/index.css",
                 "description": "Specify the input file to use for building your postcss",
                 "namespace": "@coffeekraken.s-postcss-builder.config.postcssBuilder",
@@ -124,7 +135,13 @@
             "@coffeekraken.s-postcss-builder.config.postcssBuilder.output": {
                 "id": "@coffeekraken.s-postcss-builder.config.postcssBuilder.output",
                 "name": "output",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.dist.cssDir]/index.css",
                 "description": "Specify the output file to save your builded postcss",
                 "namespace": "@coffeekraken.s-postcss-builder.config.postcssBuilder",
@@ -141,7 +158,13 @@
             "@coffeekraken.s-postcss-builder.config.postcssBuilder.postcss": {
                 "id": "@coffeekraken.s-postcss-builder.config.postcssBuilder.postcss",
                 "name": "postcss",
-                "type": "Object",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ]
+                },
                 "default": "[config.postcss]",
                 "description": "Specify the postcss compiler configuration",
                 "namespace": "@coffeekraken.s-postcss-builder.config.postcssBuilder",
@@ -158,7 +181,13 @@
             "@coffeekraken.s-postcss-builder.config.postcssBuilder.purgecss": {
                 "id": "@coffeekraken.s-postcss-builder.config.postcssBuilder.purgecss",
                 "name": "purgecss",
-                "type": "Object",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ]
+                },
                 "default": "[config.purgecss]",
                 "description": "Specify the purgecss compiler configuration",
                 "namespace": "@coffeekraken.s-postcss-builder.config.postcssBuilder",
@@ -176,7 +205,16 @@
             "@coffeekraken.s-postcss-builder.config.purgecss.content": {
                 "id": "@coffeekraken.s-postcss-builder.config.purgecss.content",
                 "name": "content",
-                "type": "String[]",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ]
+                },
                 "default": "['index.html','[config.storage.src.rootDir]/ ** / *.js','[config.storage.src.rootDir]/ ** / *.jsx','[config.storage.src.rootDir]/ ** / *.html','[config.storage.src.rootDir]/ ** / *.vue','[config.storage.src.rootDir]/ ** / *.riot','[config.storage.src.rootDir]/ ** / *.svelte','[config.storage.src.rootDir]/ ** / *.blade.php','[config.storage.src.rootDir]/ ** / *.twig']",
                 "description": "Specify the content files to take in consideration to purge your css",
                 "namespace": "@coffeekraken.s-postcss-builder.config.purgecss",
@@ -194,7 +232,13 @@
             "@coffeekraken.s-postcss-builder.doc.README": {
                 "id": "@coffeekraken.s-postcss-builder.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -223,7 +267,13 @@
             "@coffeekraken.s-postcss-builder.node.SPostcssBuilder": {
                 "id": "@coffeekraken.s-postcss-builder.node.SPostcssBuilder",
                 "name": "SPostcssBuilder",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -252,7 +302,13 @@
                     "postcssbuildersettings": {
                         "id": "10d81d6ee667b7b6ad95fa23d401da7106e9d3c16d851d9d6977c7bccfeaa680",
                         "name": "postcssBuilderSettings",
-                        "type": "ISPostcssBuilderSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISPostcssBuilderSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the postcss builder settings",
                         "since": "2.0.0",
                         "author": {
@@ -264,7 +320,13 @@
                     "constructor": {
                         "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -278,7 +340,13 @@
             "@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderBuildParamsInterface": {
                 "id": "@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderBuildParamsInterface",
                 "name": "SPostcssBuilderBuildParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -343,7 +411,13 @@
             "@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderSettingsInterface": {
                 "id": "@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderSettingsInterface",
                 "name": "SPostcssBuilderSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",

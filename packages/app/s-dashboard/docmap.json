@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,16 @@
             "@coffeekraken.s-dashboard.config.dashboard.layout": {
                 "id": "@coffeekraken.s-dashboard.config.dashboard.layout",
                 "name": "layout",
-                "type": "Array<String[]>",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Array",
+                            "of": [
+                                "String[]"
+                            ]
+                        }
+                    ]
+                },
                 "default": "[['s-dashboard-pages'], [], ['s-dashboard-frontend-checker']],",
                 "description": "Specify the layout you want for your dashboard.\nFirst level defined the columns, second level defined the components in each column.",
                 "namespace": "@coffeekraken.s-dashboard.config.dashboard",
@@ -107,7 +115,13 @@
             "@coffeekraken.s-dashboard.doc.README": {
                 "id": "@coffeekraken.s-dashboard.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -136,7 +150,13 @@
             "@coffeekraken.s-dashboard.node.SDashboard": {
                 "id": "@coffeekraken.s-dashboard.node.SDashboard",
                 "name": "SDashboard",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -165,7 +185,13 @@
                     "dashboardsettings": {
                         "id": "0875c76e4ce53f36bd338f1b41c6065a6e5369de97352a48fe51494657f9131e",
                         "name": "dashboardSettings",
-                        "type": "ISDashboardSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDashboardSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the dashboard settings",
                         "since": "2.0.0",
                         "author": {
@@ -177,7 +203,13 @@
                     "document": {
                         "id": "74bea4002e5b553028eb712b10bab0fc54fb97260e32ef7e1b4a5d498e1153c9",
                         "name": "document",
-                        "type": "Document",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Document"
+                                }
+                            ]
+                        },
                         "description": "Access the document that the dashboard is using.\nIf in an iframe, take the parent document, otherwise, the document itself",
                         "since": "2.0.0",
                         "author": {
@@ -189,7 +221,13 @@
                     "constructor": {
                         "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -201,7 +239,13 @@
                     "changepage": {
                         "id": "16ba0399b3433f8a56913a123270075579c231dd9690e5e757dcf66e83fda6d9",
                         "name": "changePage",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Open the dashboard with the pages component selected",
                         "since": "2.0.0",
                         "author": {
@@ -213,7 +257,13 @@
                     "open": {
                         "id": "aeefbc3b390342d1fdb8bbe0477d855c4e65871980ce2fed0bb46245ebd494e6",
                         "name": "open",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Open the dashboard",
                         "since": "2.0.0",
                         "author": {
@@ -227,7 +277,13 @@
             "@coffeekraken.s-dashboard.js.interface.SDashboardComponentInterface": {
                 "id": "@coffeekraken.s-dashboard.js.interface.SDashboardComponentInterface",
                 "name": "SDashboardComponentInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -256,7 +312,13 @@
             "@coffeekraken.s-dashboard.js.interface.SDashboardSettingsInterface": {
                 "id": "@coffeekraken.s-dashboard.js.interface.SDashboardSettingsInterface",
                 "name": "SDashboardSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -305,7 +367,13 @@
             "@coffeekraken.s-dashboard.js.partials.s-dashboard-pages-component.interface.SDashboardPagesComponentAttrsInterface": {
                 "id": "@coffeekraken.s-dashboard.js.partials.s-dashboard-pages-component.interface.SDashboardPagesComponentAttrsInterface",
                 "name": "SDashboardPagesComponentAttrsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",

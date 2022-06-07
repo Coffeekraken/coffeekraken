@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-glob.doc.README": {
                 "id": "@coffeekraken.s-glob.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-glob.node.SGlob": {
                 "id": "@coffeekraken.s-glob.node.SGlob",
                 "name": "SGlob",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -147,7 +158,13 @@
                     "isglob": {
                         "id": "c1db74b08afff2ba0a29b89320c73f0999f6af1cc4b535d2ab79e6fd705427ff",
                         "name": "isGlob",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Alias to the ```isGlob``` function available in sugar under \"shared.is.isGlob\" namespace",
                         "static": "true",
                         "since": "2.0.0",
@@ -160,7 +177,13 @@
                     "resolve": {
                         "id": "9d27a017574baf7205e04e370aa88ec0e35913dcfacb517e3ebe0fff3ae5b539",
                         "name": "resolve",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Alias to the ```resolveGlob``` function available in sugar under \"node.glob.resolveGlob\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -173,7 +196,13 @@
                     "copysync": {
                         "id": "097ea08023efbeb4ce727143e54af86c205543b131efe72aa7c6a33e8e0733b5",
                         "name": "copySync",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to specify a glob to select files as well as an output directory where to put these files in.\nNote that the settings.cwd will be used to create the relative to outDir pathes.",
                         "static": "true",
                         "since": "2.0.0",
@@ -186,7 +215,13 @@
                     "match": {
                         "id": "541191c4da37da242bf469776a9c10ef6e11281681d71c57aa4a8db2b56fb61c",
                         "name": "match",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Check if the passed string match the passed glob pattern(s).\nThis make use of the AWESOME micromatch library.",
                         "static": "true",
                         "since": "2.0.0",
@@ -199,7 +234,13 @@
                     "extractglob": {
                         "id": "198e1f226d9aace091b607c1160adad88c535f2aefc389c359816a3b0c133bfb",
                         "name": "extractGlob",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This function simply return you the glob part of the glob(s) passed in constructor",
                         "since": "2.0.0",
                         "author": {
@@ -211,7 +252,13 @@
                     "extractnoneglob": {
                         "id": "e3494853154b40ff4f4d7cbde2ae7ed2f59e0949769f89a4ba4112c0cf8d6a2f",
                         "name": "extractNoneGlob",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This function simply return you the none glob part of the glob(s) passed in constructor",
                         "since": "2.0.0",
                         "author": {
@@ -223,7 +270,13 @@
                     "constructor": {
                         "id": "6edaeab4bf2880ab2804fef643fb12db70440d0576022006290e585721be66e2",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -237,7 +290,13 @@
             "@coffeekraken.s-glob.node.interface.SGlobSettingsInterface": {
                 "id": "@coffeekraken.s-glob.node.interface.SGlobSettingsInterface",
                 "name": "SGlobSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -247,6 +306,46 @@
                 "description": "This interface represent the SGlob settings.",
                 "namespace": "@coffeekraken.s-glob.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SGlobSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "cwd": {
+                            "description": "Specify the working directory to run the command in.",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-glob"
+                        },
+                        "symlinks": {
+                            "description": "Specify if you want to follow symlinks or not",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "nodir": {
+                            "description": "Specify if you want to ignore directories or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "contentRegExp": {
+                            "description": "Specify a regex to use on the file content to filter resolved files",
+                            "type": "RegExp"
+                        },
+                        "SFile": {
+                            "description": "Specify if you want back some SFile instances or simple string path",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "exclude": {
+                            "description": "Specify some paths or patterns you want to exclude from your resolve process",
+                            "type": "Array<String>",
+                            "default": []
+                        },
+                        "defaultExcludes": {
+                            "description": "Specfy if you want to use the default excludes globs setted under the config.storage.exclude configuration",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

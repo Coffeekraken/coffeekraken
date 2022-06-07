@@ -3,24 +3,36 @@
 
     <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-        <nav class="sidemenu s-pb:50 @mobile s-display:none">
+        <nav class="sidemenu @mobile s-display:none">
+
+            <div class="sidemenu-main">
 
             <h5 class="s-typo:h5 s-mbe:30">
                 Configs
             </h5>
 
-            <ul class="s-fs-tree">
+                <ul class="s-fs-tree">
+                    @php
+                        $listed = [];
+                    @endphp
+                    @foreach ($configFiles as $file)
+                        @if (!in_array($file->name, $listed))
+                            <li id="{{ $subId }}">
+                                <div class="s-flex">
+                                    <a class="s-link:stretch s-order:2"
+                                        href="/config/explorer/{{ str_replace('.config.js', '', $file->name) }}">{{ str_replace('.config.js', '', $file->name) }}</a>
+                                    <i class="s-icon:file-js }} s-tc:accent s-until:sibling:loading s-mie:10"></i>
+                                    <div class="s-loader:spinner s-color:accent s-mie:10 s-when:siblings:loading">
+                                    </div>
+                            </li>
+                            @php
+                                array_push($listed, $file->name);
+                            @endphp
+                        @endif
+                    @endforeach
+                </ul>
 
-                @foreach ($configFiles as $file)
-                    <li id="{{ $subId }}">
-                        <div class="s-flex">
-                            <a class="s-link:stretch s-order:2"
-                                href="/config/explorer/{{ str_replace('.config.js', '', $file->name) }}">{{ str_replace('.config.js', '', $file->name) }}</a>
-                            <i class="s-icon:file-js }} s-tc:accent s-until:sibling:loading s-mie:10"></i>
-                            <div class="s-loader:spinner s-color:accent s-mie:10 s-when:siblings:loading">
-                            </div>
-                    </li>
-                @endforeach
+            </div>
 
         </nav>
 
@@ -42,6 +54,12 @@
 
                 @foreach ($requestedConfig as $configObj)
                     <ol>
+                        {{-- <pre>
+                        @php
+                        print_r($configObj);
+                        @endphp
+                        </pre> --}}
+                        
                         @foreach ($configObj->docblocks as $docblock)
                             <li class="s-font:40 s-mbe:30">
                                 <header class="s-flex s-bg:main-surface s-radius">
@@ -49,23 +67,20 @@
 
                                         @php
                                             $dotpath = end(explode($configId . '.', $docblock->namespace . '.' . $docblock->name));
-                                            
                                         @endphp
                                         <span class="s-font:code">
                                             {{ $dotpath }}
                                         </span>
                                     </div>
+                                    <div class="s-p:30">
+                                        <div class="s-typo:code">
+                                            {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($docblock->default)) }}
+                                        </div>
+                                    </div>
                                     <div>
                                         @include('doc.partials.paramType', ['type' => $docblock->type])
                                     </div>
                                 </header>
-                                @if ($docblock->default != null or $docblock->default == 0)
-                                    <div class="s-pi:30 s-mbs:40">
-                                        <div class="s-typo:code">
-                                            {{ $docblock->default }}
-                                        </div>
-                                    </div>
-                                @endif
                                 <p class="s-typo:p s-p:30">{!! $docblock->description !!}</p>
                             </li>
                         @endforeach

@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-range-component.doc.README": {
                 "id": "@coffeekraken.s-range-component.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -119,7 +124,13 @@
                 "id": "@coffeekraken.s-range-component.js.SRangeComponent",
                 "name": "SRangeComponent",
                 "as": "Range (component)",
-                "type": "CustomElement",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -228,7 +239,13 @@
                     "webcomponent": {
                         "id": "c13098f28fc63079b0848fdc11c469c6032a39f07a54f8315345e8e762556218",
                         "name": "webcomponent",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This function allows you to define (register) your webcomponent with some default\nprops if needed.",
                         "since": "2.0.0",
                         "author": {
@@ -242,7 +259,13 @@
             "@coffeekraken.s-range-component.js.interface.SRangeComponentInterface": {
                 "id": "@coffeekraken.s-range-component.js.interface.SRangeComponentInterface",
                 "name": "SRangeComponentInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

@@ -157,25 +157,6 @@ export default class SLitComponent extends LitElement {
                 properties = this.constructor.createProperties();
             }
 
-            // this.props stack
-            this.props = {};
-            for (let [prop, obj] of Object.entries(properties)) {
-                Object.defineProperty(this.props, prop, {
-                    enumerable: true,
-                    get() {
-                        return _this[prop];
-                    },
-                    set(value) {
-                        _this[prop] = value;
-                    },
-                });
-
-                // default props
-                if (this[prop] === undefined) {
-                    this[prop] = defaultProps[prop] ?? obj.default;
-                }
-            }
-
             // this.state stack
             this._state = Object.assign({}, this.state ?? {});
             this.state = {};
@@ -200,6 +181,27 @@ export default class SLitComponent extends LitElement {
                         '',
                 },
             });
+
+            // this.props stack
+            this.props = {};
+            for (let [prop, obj] of Object.entries(properties)) {
+                Object.defineProperty(this.props, prop, {
+                    enumerable: true,
+                    get() {
+                        return _this[prop];
+                    },
+                    set(value) {
+                        _this[prop] = value;
+                    },
+                });
+
+                // default props
+                if (this[prop] === undefined) {
+                    this[prop] = defaultProps[prop] ?? obj.default;
+                }
+            }
+            // make props responsive
+            this.componentUtils.makePropsResponsive(this.props);
 
             await this.componentUtils.waitAndExecute(
                 this.props.mountWhen,

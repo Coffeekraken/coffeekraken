@@ -61,26 +61,6 @@ import __SSliderBehavior from './SSliderBehavior';
  *      }
  * });
  *
- * @e1s         html        CSS animation behavior
- * <s-slider controls nav lnf="cards" behavior="cssAnimation">
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *       <div s-slider-slide class="s-bg:complementary active">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
- *
  * @example         html        Simple slider
  * <s-slider controls nav responsive='{"mobile":{"lnf":"default-contained"}}'>
  *    <div s-slider-slide class="s-bg--accent">
@@ -102,7 +82,7 @@ import __SSliderBehavior from './SSliderBehavior';
  *   </s-slider>
  *
  * @example         html        Slideable slider
- * <s-slider behavior="slideable" controls nav>
+ * <s-slider behavior="slideable" controls nav id="coco">
  *      <responsive media="tablet" lnf="default-contained"></responsive>
  *    <div s-slider-slide class="s-bg--accent">
  *           <h1 class="s-typo:h1">Slide #1</h1>

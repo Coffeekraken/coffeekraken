@@ -1,5 +1,5 @@
 <section class="docblock {{ $isFirst ? 'first' : '' }}"
-    id="{{ \Sugar\string\idCompliant($block->type . '-' . $block->name) }}">
+    id="{{ \Sugar\string\idCompliant($block->namespace) }}">
 
     @if ($isFirst)
         @include('doc.title', ['block' => $block])

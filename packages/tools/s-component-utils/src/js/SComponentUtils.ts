@@ -14,6 +14,8 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
 import __SComponentUtilsSettingsInterface from './interface/SComponentUtilsSettingsInterface';
+import __debounce from '@coffeekraken/sugar/shared/function/debounce';
+import __STheme from '@coffeekraken/s-theme';
 
 export interface ISComponentUtilsSettings {
     name: string;
@@ -25,6 +27,12 @@ export interface ISComponentUtilsSettings {
 
 export interface ISComponentUtilsStateSettings {
     save: boolean;
+    id: string;
+}
+
+export interface ISComponentUtilsPropsSettings {
+    interface: typeof __SInterface;
+    reflectAttributes: boolean;
 }
 
 export interface ISComponentUtilsCtorSettings {
@@ -100,7 +108,6 @@ export default class SComponentUtils extends __SClass {
     state = 'pending';
 
     DefaultPropsInterface: __SInterface = __SComponentUtilsDefaultPropsInterface;
-    PropsInterface: __SInterface;
 
     /**
      * @name            setDefaultProps
@@ -203,32 +210,104 @@ export default class SComponentUtils extends __SClass {
                 this._isInViewport = false;
             });
 
-        // build the final interface class to apply on props
-        let PropsInterface = class InlineSComponentUtilsInterface extends __SInterface {
-            // static definition = {};
-        };
-        // @ts-ignore
-        PropsInterface.definition = {
-            ...Object.assign(
-                {},
-                __SComponentUtilsDefaultPropsInterface.definition,
-            ),
-            // @ts-ignore
-            ...(this.componentUtilsSettings.interface?.definition ?? {}),
-        };
-        // @ts-ignore
-        this.PropsInterface = PropsInterface;
-
-        if (this.componentUtilsSettings.interface) {
-            this.props = this.initProps();
-        }
-
         // @ts-ignore
         const styleStr = this.componentUtilsSettings.style;
         this.injectStyle(styleStr ?? '');
+    }
+
+    /**
+     * @name           props
+     * @type            Any
+     *
+     * This property allows you to get back the current props object
+     *
+     * @return      {Any}           The current props object
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    initProps(props: any, settings: ISComponentUtilsPropsSettings): any {
+        let finalProps = {},
+            PropsInterface = this.PropsInterface(settings.interface);
+
+        for (let [prop, definition] of Object.entries(
+            PropsInterface.definition,
+        )) {
+            if (this.node.getAttribute(__dashCase(prop)) !== null) {
+                let rawValue = this.node.getAttribute(__dashCase(prop)),
+                    value = rawValue;
+                if (rawValue === null || rawValue.trim() === '') {
+                    value = true;
+                } else {
+                    value = value;
+                }
+                finalProps[prop] = value;
+            } else {
+                finalProps[__camelCase(prop)] = definition.default;
+            }
+        }
+
+        finalProps = PropsInterface.apply(finalProps);
+
+        const _this = this;
+
+        const _props = Object.assign({}, finalProps);
+        for (let [prop, value] of Object.entries(finalProps)) {
+            Object.defineProperty(finalProps, prop, {
+                enumarable: true,
+                get() {
+                    return _props[prop];
+                },
+                set(value) {
+                    if (settings.reflectAttributes) {
+                        const propDef = PropsInterface.definition[prop];
+                        if (propDef?.physical) {
+                            if (
+                                value === false ||
+                                value === undefined ||
+                                value === null
+                            ) {
+                                _this.node.removeAttribute(__dashCase(prop));
+                            } else {
+                                _this.node.setAttribute(
+                                    __dashCase(prop),
+                                    String(value),
+                                );
+                            }
+                        }
+                    }
+                    _props[prop] = value;
+                },
+            });
+            finalProps[prop] = value;
+        }
+
+        return finalProps;
+    }
+
+    /**
+     * This method handle the passed props object and apply some behaviors
+     * like the responsive props, etc...
+     */
+    handleProps(
+        props: any,
+        settings?: Partial<ISComponentUtilsPropsSettings>,
+    ): void {
+        const finalSettings: ISComponentUtilsPropsSettings = {
+            reflectAttributes: true,
+            responsive: false,
+            ...(settings ?? {}),
+        };
+
+        // init props
+        props = this.initProps(props, finalSettings);
 
         // init responsive props
-        // this._initResponsiveProps();
+        if (finalSettings.responsive) {
+            this.makePropsResponsive(props);
+        }
+
+        return props;
     }
 
     /**
@@ -240,12 +319,23 @@ export default class SComponentUtils extends __SClass {
         settings?: Partial<ISComponentUtilsStateSettings>,
     ): void {
         const finalStateSettings: ISComponentUtilsStateSettings = {
+            id: this.node.id,
             ...(this.componentUtilsSettings.state ?? {}),
             ...(settings ?? {}),
         };
 
+        let preventSave = false;
+        Object.defineProperty(state, 'preventSave', {
+            enumerable: false,
+            get() {
+                return () => {
+                    preventSave = true;
+                };
+            },
+        });
+
         // make sure we have an id
-        if (finalStateSettings.save && !this.node.id) {
+        if (finalStateSettings.save && !finalStateSettings.id) {
             console.log('HTMLElement', this.node);
             throw new Error(
                 `To save the state, the HTMLElement must have an id...`,
@@ -255,7 +345,6 @@ export default class SComponentUtils extends __SClass {
         if (finalStateSettings.save) {
             let saveTimeout;
             let _state = Object.assign({}, state);
-            const _this = this;
             for (let [key, value] of Object.entries(state)) {
                 Object.defineProperty(state, key, {
                     enumerable: true,
@@ -263,16 +352,23 @@ export default class SComponentUtils extends __SClass {
                         return _state[key];
                     },
                     set(value) {
-                        _state[key] = value;
-                        if (finalStateSettings.save) {
-                            clearTimeout(saveTimeout);
-                            saveTimeout = setTimeout(() => {
-                                localStorage.setItem(
-                                    `s-component-utils-state-${_this.node.id}`,
-                                    JSON.stringify(_state),
-                                );
-                                console.log('save', _state, _this.node);
-                            }, 10);
+                        if (_state[key] !== value) {
+                            _state[key] = value;
+
+                            if (preventSave) {
+                                preventSave = false;
+                                return;
+                            }
+
+                            if (finalStateSettings.save) {
+                                clearTimeout(saveTimeout);
+                                saveTimeout = setTimeout(() => {
+                                    localStorage.setItem(
+                                        `s-component-utils-state-${finalStateSettings.id}`,
+                                        JSON.stringify(_state),
+                                    );
+                                });
+                            }
                         }
                     },
                 });
@@ -280,76 +376,126 @@ export default class SComponentUtils extends __SClass {
 
             // restoring state
             const savedState = localStorage.getItem(
-                `s-component-utils-state-${this.node.id}`,
+                `s-component-utils-state-${finalStateSettings.id}`,
             );
             if (savedState) {
                 _state = Object.assign(_state, JSON.parse(savedState));
-                if (this.node.id === 'header-subnav-item-Forms') {
-                    console.log(this.node, _state);
-                }
             }
         }
     }
 
-    // /**
-    //  * Check if some <responsive> tags are defined in the component, or if a "responsive" prop exists
-    //  * to adapt properties depending on the viewport size.
-    //  */
-    // _desktopProps = {};
-    // _initResponsiveProps() {
-    //     if (!Object.keys(this.props.responsive).length) {
-    //         return;
-    //     }
+    /**
+     * Check if some <responsive> tags are defined in the component, or if a "responsive" prop exists
+     * to adapt properties depending on the viewport size.
+     */
+    makePropsResponsive(props: any) {
+        // ensure we have a responsive object
+        props.responsive = __deepMerge(
+            {
+                original: Object.assign({}, props),
+            },
+            props.responsive ?? {},
+        );
+        // check for "<responsive>" tags
+        const $responsives = Array.from(this.node.children).filter(
+            ($child) => $child.tagName === 'RESPONSIVE',
+        );
+        if ($responsives.length) {
+            $responsives.forEach(($responsive) => {
+                const attrs = $responsive.attributes,
+                    responsiveProps = {};
+                let media;
 
-    //     // save the "default" props for reset
-    //     this._desktopProps = Object.assign({}, this.props);
+                Object.keys(attrs).forEach((key) => {
+                    let value;
+                    if (attrs[key]?.nodeValue !== undefined) {
+                        if (attrs[key].nodeValue === '') value = true;
+                        else value = attrs[key].nodeValue;
+                    }
+                    if (!value) return;
 
-    //     // apply on resize
-    //     window.addEventListener(
-    //         'resize',
-    //         __debounce(this._applyResponsiveProps.bind(this), 100),
-    //     );
+                    const propName = attrs[key]?.name ?? key;
+                    if (propName === 'media') {
+                        media = value;
+                    } else {
+                        responsiveProps[propName] = value;
+                    }
+                });
+                if (media) {
+                    if (!props.responsive[media]) {
+                        props.responsive[media] = {};
+                    }
+                    props.responsive[media] = responsiveProps;
+                }
+            });
+        }
 
-    //     // first apply
-    //     this._applyResponsiveProps();
-    // }
-    // _mediaQueries = {};
-    // _applyResponsiveProps() {
-    //     let matchedMedia = [],
-    //         newProps = {};
-    //     // search for the good media
-    //     for (let [media, props] of Object.entries(this.props.responsive)) {
-    //         // media query name
-    //         const queries = __STheme.get(`media.queries`),
-    //             nudeMedia = media.replace(/(<|>|=|\|)/gm, '');
+        if (
+            Object.keys(props.responsive).length === 1 &&
+            props.responsive.original
+        ) {
+            return;
+        }
 
-    //         if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
-    //             let mediaQuery = this._mediaQueries[media];
-    //             if (!mediaQuery) {
-    //                 this._mediaQueries[media] = __STheme.buildMediaQuery(media);
-    //                 mediaQuery = this._mediaQueries[media];
-    //             }
-    //             if (
-    //                 window.matchMedia(mediaQuery.replace(/^@media\s/, ''))
-    //                     .matches
-    //             ) {
-    //                 Object.assign(newProps, this.props.responsive[media]);
-    //                 matchedMedia.push(media);
-    //             }
-    //         } else {
-    //             if (window.matchMedia(media).matches) {
-    //                 Object.assign(newProps, this.props.responsive[media]);
-    //                 matchedMedia.push(media);
-    //             }
-    //         }
-    //     }
-    //     // reset props if needed
-    //     if (!matchedMedia.length) {
-    //         Object.assign(this.props, this._desktopProps);
-    //     } else {
-    //         Object.assign(this.props, newProps);
-    //     }
-    // }
+        // apply on resize
+        window.addEventListener(
+            'resize',
+            __debounce(() => {
+                this._applyResponsiveProps(props);
+            }, 100),
+        );
+
+        // first apply
+        this._applyResponsiveProps(props);
+    }
+    _mediaQueries = {};
+    _applyResponsiveProps(props: any) {
+        let matchedMedia = [],
+            newProps = {};
+
+        const responsiveObj = Object.assign({}, props.responsive);
+
+        // search for the good media
+        for (let [media, responsiveProps] of Object.entries(props.responsive)) {
+            // media query name
+            const queries = __STheme.get(`media.queries`),
+                nudeMedia = media.replace(/(<|>|=|\|)/gm, '');
+
+            if (media === 'original') {
+                continue;
+            }
+
+            if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
+                let mediaQuery = this._mediaQueries[media];
+                if (!mediaQuery) {
+                    this._mediaQueries[media] = __STheme.buildMediaQuery(media);
+                    mediaQuery = this._mediaQueries[media];
+                }
+                if (
+                    window.matchMedia(mediaQuery.replace(/^@media\s/, ''))
+                        .matches
+                ) {
+                    Object.assign(newProps, responsiveProps);
+                    matchedMedia.push(media);
+                }
+            } else {
+                if (window.matchMedia(media).matches) {
+                    Object.assign(newProps, responsiveProps);
+                    matchedMedia.push(media);
+                }
+            }
+        }
+
+        // reset props if needed
+        if (!matchedMedia.length) {
+            Object.assign(props, props.responsive?.original ?? {});
+        } else {
+            Object.assign(props, newProps);
+        }
+
+        // ensure we keep the responsive object intact
+        props.responsive = responsiveObj;
+    }
 
     /**
      * @name           inViewportStatusChange
@@ -475,122 +621,10 @@ export default class SComponentUtils extends __SClass {
     }
 
     /**
-     * @name           props
-     * @type            Any
-     *
-     * This property allows you to get back the current props object
-     *
-     * @return      {Any}           The current props object
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    initProps(): any {
-        let _finalProps = {};
-
-        const props = this.componentUtilsSettings.props ?? this.node.attributes;
-        let passedProps = {
-            responsive: {},
-        };
-        if (props.constructor.name === 'NamedNodeMap') {
-            for (let i = 0; i < props.length; i++) {
-                const attr = props[i];
-                let value;
-                if (attr.value !== undefined) {
-                    if (attr.value === '') value = true;
-                    else value = attr.value;
-                }
-                if (!value) continue;
-                passedProps[__camelCase(attr.name)] = __autoCast(value);
-            }
-        } else {
-            passedProps = props;
-        }
-
-        // check for "<responsive>" tags
-        // const $responsives = Array.from(this.node.children).filter(
-        //     ($child) => $child.tagName === 'RESPONSIVE',
-        // );
-        // if ($responsives.length) {
-        //     $responsives.forEach(($responsive) => {
-        //         const attrs = $responsive.attributes,
-        //             responsiveProps = {};
-        //         let media;
-
-        //         Object.keys(attrs).forEach((key) => {
-        //             let value;
-        //             if (attrs[key]?.nodeValue !== undefined) {
-        //                 if (attrs[key].nodeValue === '') value = true;
-        //                 else value = attrs[key].nodeValue;
-        //             }
-        //             if (!value) return;
-
-        //             const propName = attrs[key]?.name ?? key;
-        //             if (propName === 'media') {
-        //                 media = value;
-        //             } else {
-        //                 responsiveProps[propName] = value;
-        //             }
-        //         });
-        //         if (media) {
-        //             if (!passedProps.responsive[media]) {
-        //                 passedProps.responsive[media] = {};
-        //             }
-        //             passedProps.responsive[media] = responsiveProps;
-        //         }
-        //     });
-        // }
-
-        _finalProps = __deepMerge(
-            this.defaultProps,
-            this.PropsInterface.apply(passedProps, {
-                descriptor: {
-                    defaults: false,
-                },
-            }),
-        );
-
-        const _this = this;
-        const finalProps = new Proxy(_finalProps, {
-            get(target, prop, receiver) {
-                return target[prop];
-            },
-            set(obj, prop, value) {
-                const propDef = _this.PropsInterface.definition[prop];
-                if (propDef?.physical) {
-                    if (
-                        value === false ||
-                        value === undefined ||
-                        value === null
-                    ) {
-                        _this.node.removeAttribute(__dashCase(prop));
-                    } else {
-                        _this.node.setAttribute(
-                            __dashCase(prop),
-                            String(value),
-                        );
-                    }
-                }
-                obj[prop] = value;
-                return true;
-            },
-        });
-
-        // reassign each props to make the Proxy apply physical props, etc...
-        Object.keys(finalProps).forEach((prop) => {
-            finalProps[prop] = finalProps[prop];
-        });
-
-        return finalProps;
-    }
-
-    /**
      * @name           defaultProps
      * @type            Any
      *
-     * This property allows you to get back the default props object
-     * that has been build using the SComponentUtilsDefaultProps interface
-     * and the one you passed in the sComponent.interface setting
+     * This allows you to get back the default props object
      *
      * @return      {Any}           The props object with all the default values
      *
@@ -598,20 +632,44 @@ export default class SComponentUtils extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     _defaultProps;
-    get defaultProps(): any {
+    defaultProps(interf?: typeof __SInterface): any {
         if (this._defaultProps) return Object.assign({}, this._defaultProps);
         this._defaultProps = Object.assign(
             {},
             __deepMerge(
                 // @ts-ignore
-                this.PropsInterface.defaults(),
+                __SComponentUtilsDefaultPropsInterface.defaults(),
                 this.componentUtilsSettings.defaultProps ?? {},
                 (<any>this.constructor)._defaultProps['*'] ?? {},
                 (<any>this.constructor)._defaultProps[this.name] ?? {},
+                interf?.defaults() ?? {},
             ),
         );
 
         return this._defaultProps;
+    }
+
+    /**
+     * @name           PropsInterface
+     * @type            Any
+     *
+     * This allows you to get back the default props class interface
+     *
+     * @return      {SInterface}           The props object with all the default values
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    _PropsInterface;
+    PropsInterface(interf?: typeof __SInterface): any {
+        if (this._PropsInterface) return this._PropsInterface;
+        class PropsInterface extends __SInterface {}
+        PropsInterface.definition = __deepMerge(
+            __SComponentUtilsDefaultPropsInterface.definition ?? {},
+            interf?.definition ?? {},
+        );
+        this._PropsInterface = PropsInterface;
+        return this._PropsInterface;
     }
 
     static _injectedStyles: string[] = [];

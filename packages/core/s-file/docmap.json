@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,16 @@
             "@coffeekraken.s-file.config.sFile.classesMap": {
                 "id": "@coffeekraken.s-file.config.sFile.classesMap",
                 "name": "classesMap",
-                "type": "Record<string, string>",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Record",
+                            "of": [
+                                "string, string"
+                            ]
+                        }
+                    ]
+                },
                 "default": "{}",
                 "description": "Map some SFile classes path using minimatch patterns like so:\n{\n'.scss,*.sass': `${__packageRoot(__dirname)}/src/node/scss/SScssFile`\n}",
                 "namespace": "@coffeekraken.s-file.config.sFile",
@@ -107,7 +115,13 @@
             "@coffeekraken.s-file.doc.README": {
                 "id": "@coffeekraken.s-file.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -136,7 +150,13 @@
             "@coffeekraken.s-file.node.fs.SFile": {
                 "id": "@coffeekraken.s-file.node.fs.SFile",
                 "name": "SFile",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,\nand get access to all the nice meta data like:\n- name: The file name\n- path: The full path to the file\n- cwd: The root directory specified through the settings.cwd property\n- relPath: The relative file path from the cwd\n- dirPath: The path to the folder where is the file\n- extension: The file extension\n- stats: An object with file stats like size in mb, kb, etc...\n- exists: true if the file exists on the disk, false otherwise",
                 "namespace": "@coffeekraken.s-file.node.fs",
                 "status": "beta",
@@ -159,7 +179,13 @@
                     "registerclass": {
                         "id": "1b1aa5a775fcdeaad69cef2aa5a181f9ceb9960a846c7b1ee20eeed0fd476674",
                         "name": "registerClass",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to register an SFile(...) class with an extension\nto allows you to instanciate the best one using the ```new``` static\nmethod.",
                         "static": "true",
                         "since": "2.0.0",
@@ -172,7 +198,16 @@
                     "sourcesfiles": {
                         "id": "9c938689a2add151678eb6fa7cb54ad5bdbe90bae7792ed37844b403a1878871",
                         "name": "sourcesFiles",
-                        "type": "Record<string, SFile>",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Record",
+                                    "of": [
+                                        "string, SFile"
+                                    ]
+                                }
+                            ]
+                        },
                         "description": "Store the sources files found using the specified sourcesExtensions in the settings",
                         "since": "2.0.0",
                         "author": {
@@ -184,7 +219,13 @@
                     "new": {
                         "id": "0450c8f82a34eddca40b37fde2a9f67cc56c5d5ef6f235c24da0c3ed9b93a320",
                         "name": "new",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This function take as parameter a file path and an object of settings\nto instanciate the proper SFile(...) class depending on the file extension.\nIf the extension does not correspond to any registered SFile(...) class,\nthe file will be instanciated using the SFile class itself.\n\nTo register a new SFile(...) class mapping, use the ```registerClass``` static\nmethod.",
                         "static": "true",
                         "since": "2.0.0",
@@ -197,7 +238,13 @@
                     "name": {
                         "id": "7d42718d5891e5346e5b9feb559087307815d007a4c3843e5cd552b68cd31cdf",
                         "name": "name",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Store the full file name",
                         "since": "2.0.0",
                         "author": {
@@ -209,7 +256,13 @@
                     "namewithoutext": {
                         "id": "977012730ecabe4503f6f957b75f8491afb25b07b1fddaf3e2fdc2450511046d",
                         "name": "nameWithoutExt",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Store the file name without the extension",
                         "since": "2.0.0",
                         "author": {
@@ -221,7 +274,13 @@
                     "path": {
                         "id": "7fa1f7b88aa86d8a23481fcb691728e058bb2e4cb731bd23ac0c95255b5748c2",
                         "name": "path",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Store the full file path\nSome tokens can be used in the file path like:\n- %packageTmpDir: return the absolute path to the package tmp directory\n- %packageLocalDir: return the absolute path to the package .local directory\n- %packageCacheDir: return the absolute path to the package cache directory\n- %packageRootDir: return the absolute path to the package root directory\n\n- %srcRootDir: return the absolute path to the source root directory\n- %srcJsDir: return the absolute path to the source js directory\n- %srcCssDir: return the absolute path to the source css directory\n- %srcIconsDir: return the absolute path to the source icons directory\n- %srcImgDir: return the absolute path to the source images directory\n- %srcNodeDir: return the absolute path to the source node directory\n- %srcViewsDir: return the absolute path to the source views directory\n\n- %distRootDir: return the absolute path to the dist root directory\n- %distJsDir: return the absolute path to the dist js directory\n- %distCssDir: return the absolute path to the dist css directory\n- %distIconsDir: return the absolute path to the dist icons directory\n- %distImgDir: return the absolute path to the dist images directory\n- %distNodeDir: return the absolute path to the dist node directory\n- %distViewsDir: return the absolute path to the dist views directory",
                         "since": "2.0.0",
                         "author": {
@@ -233,7 +292,13 @@
                     "cwd": {
                         "id": "042a13d387872d559ebfc355f223b68d58a3530e80b6e8a5978b1262fd879a9f",
                         "name": "cwd",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Store the root directory where the file actually lives.\nThe root directory can be for example ```src/js``` for a file that lives under ```/my/cool/path/src/js/array/sort.js```.\nTo set this property, you need to pass the ```cwd``` setting through the constructor...",
                         "since": "2.0.0",
                         "author": {
@@ -245,7 +310,13 @@
                     "exists": {
                         "id": "29f2992b05434b7b616dd28e2047dd63e211532ac932f98283b57344ee535aec",
                         "name": "exists",
-                        "type": "Boolean",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ]
+                        },
                         "description": "Specify if the file exists on the filesystem or not",
                         "since": "2.0.0",
                         "author": {
@@ -257,7 +328,13 @@
                     "relpath": {
                         "id": "9f409732094ea477e6abb7285375769a293b0b9d0b9f884bd3faeba19ca38b37",
                         "name": "relPath",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Store the path relative to the ```cwd``` property. To have access to this property, you MUST\nspecify the settings.cwd through the constructor",
                         "since": "2.0.0",
                         "author": {
@@ -269,7 +346,13 @@
                     "dirpath": {
                         "id": "2216bb4c4bdb4b21b593736fab416ab7b5d58c9f6d63335a366dea0ac6e0d480",
                         "name": "dirPath",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Store the path to the folder where the file lives",
                         "since": "2.0.0",
                         "author": {
@@ -281,7 +364,13 @@
                     "extension": {
                         "id": "6550e11611a3988053e57f0a2313285dee3dc2d3402f723fabf18dac922b50a3",
                         "name": "extension",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Store the file extension",
                         "since": "2.0.0",
                         "author": {
@@ -293,7 +382,13 @@
                     "filesettings": {
                         "id": "bab59e77674b95eb1798ded7c71d45ef09c9826ee1c369735458279ebb850484",
                         "name": "fileSettings",
-                        "type": "ISFileSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISFileSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the file settings setted in the ```settings.file``` property",
                         "since": "2.0.0",
                         "author": {
@@ -305,7 +400,13 @@
                     "constructor": {
                         "id": "ea507995df12b70c1c9cb9ce7339f7eb4f12f4fdfbe71c8d4410d021e6ce091c",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -317,7 +418,13 @@
                     "hash": {
                         "id": "d4a6e20137c015af954ecc952a1db2c870bdad7e0620729e6bb1d1fc0023566c",
                         "name": "hash",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Get the file `md5` hash",
                         "since": "2.0.0",
                         "author": {
@@ -329,7 +436,13 @@
                     "stats": {
                         "id": "d9d8a4164f7563d46982cc36e0132ceca992d0df1f81d799a4db764db3f93816",
                         "name": "stats",
-                        "type": "Object",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ]
+                        },
                         "description": "Access the file stats like the updated timestamp, sizes, etc...",
                         "since": "2.0.0",
                         "author": {
@@ -341,7 +454,13 @@
                     "raw": {
                         "id": "6b4159b6a317a966c850756c0389a5843c28560be9667063eede343f522cff62",
                         "name": "raw",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Access the raw file content in string format",
                         "since": "2.0.0",
                         "author": {
@@ -353,7 +472,13 @@
                     "content": {
                         "id": "b8f0b34890dca3d9abf3df30ed373d21fbb2cb25515ebbf11b573697b569aa14",
                         "name": "content",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Access the file content",
                         "since": "2.0.0",
                         "author": {
@@ -365,7 +490,16 @@
                     "commits": {
                         "id": "6f8bec7be3601b17eb4b48c10103f3cc9a286e7e892ee4ec08760037915bb410",
                         "name": "commits",
-                        "type": "Array<String>",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array",
+                                    "of": [
+                                        "String"
+                                    ]
+                                }
+                            ]
+                        },
                         "description": "Store all the commits made before saving the file",
                         "since": "2.0.0",
                         "author": {
@@ -377,7 +511,13 @@
                     "toobject": {
                         "id": "94c01b5ff34e054ef5046aa7ee263f9a13fe1dbf42deeefbe73cbf9e6803eacd",
                         "name": "toObject",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method transform this instance into a plain object",
                         "since": "2.0.0",
                         "author": {
@@ -389,7 +529,13 @@
                     "watch": {
                         "id": "d5576b0e990adf444d926f41f8f566a64df5d3988edbf6e7b44b23950d76fc6e",
                         "name": "watch",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to start watching the file for events like \"update\", etc...",
                         "since": "2.0.0",
                         "author": {
@@ -401,7 +547,13 @@
                     "unwatch": {
                         "id": "19a39eb6e512e2abac04f8011a0fdb15d6f76a0d0eecfe3e61ed79be19554c8e",
                         "name": "unwatch",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to stop the watching process of the file",
                         "since": "2.0.0",
                         "author": {
@@ -413,7 +565,13 @@
                     "tostring": {
                         "id": "ed3987af692dd1dc38c85d85a9a0693c3f2f7460a402c8e7cf18c4fd98ecd507",
                         "name": "toString",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Return the string version of the file. Here, the path...",
                         "since": "2.0.0",
                         "author": {
@@ -425,7 +583,13 @@
                     "duplicate": {
                         "id": "e856777e305adebb98b9850b988d96c9e3e644fc5967e01a93c96d9db741e08e",
                         "name": "duplicate",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to make a copy of this file.\nIf you don't specify a \"to\" path, the file will be diplicated\ninto the temp directory",
                         "async": "true",
                         "since": "2.0.0",
@@ -438,7 +602,13 @@
                     "duplicatesync": {
                         "id": "9b522a4cc99ac23abe629bb0abdd9342c863994d8c9ddca2b536086243cacd7e",
                         "name": "duplicateSync",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to make a copy of this file.\nIf you don't specify a \"to\" path, the file will be diplicated\ninto the temp directory",
                         "since": "2.0.0",
                         "author": {
@@ -450,7 +620,13 @@
                     "save": {
                         "id": "652fe97fd6f7fa95b7131624954e59f6344b28fec6e0b0551560e238323998b6",
                         "name": "save",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to save the file with the content\nthat you can set by setting the ```content``` property",
                         "async": "true",
                         "since": "2.0.0",
@@ -463,7 +639,13 @@
                     "savesync": {
                         "id": "72d405296c59f3ec48a3dfbe211440aa8829f2a4e2d7f7ab28582a1d29f0992a",
                         "name": "saveSync",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to save the file with the content\nthat you can set by setting the ```content``` property",
                         "since": "2.0.0",
                         "author": {
@@ -475,7 +657,13 @@
                     "unlink": {
                         "id": "1bc021331d84fbf999aab0a3cdc26c2336d0a7b6a0f074c4e6bda4cdb80bc823",
                         "name": "unlink",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to unlink the file asyncronously",
                         "async": "true",
                         "since": "2.0.0",
@@ -488,7 +676,13 @@
                     "unlinksync": {
                         "id": "871de4b574266c637006875606f7fec2a73f1c2e6b4bafde382bc70bdb56ff1f",
                         "name": "unlinkSync",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to unlinkSync the file syncronously",
                         "async": "true",
                         "since": "2.0.0",
@@ -501,7 +695,13 @@
                     "read": {
                         "id": "c78756ce256468c5544f68db78064d3a79c89a00e6790dd2d18c4806d4cece1a",
                         "name": "read",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to read the file asycronously",
                         "async": "true",
                         "since": "2.0.0",
@@ -514,7 +714,13 @@
                     "readsync": {
                         "id": "a3a8b97679f76c2a82c0baf06a0a8ee46dcd4e6cb561d235920c8445042eb7f5",
                         "name": "readSync",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to read the file syncronously",
                         "since": "2.0.0",
                         "author": {
@@ -526,7 +732,13 @@
                     "write": {
                         "id": "63b6f116cf6acb0fab1e5ff05ae1188e60f9406a65078c9ec768cd0987d38180",
                         "name": "write",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to write the file asycronously",
                         "async": "true",
                         "since": "2.0.0",
@@ -539,7 +751,13 @@
                     "writesync": {
                         "id": "44fb1f3962cea5d9e924eed251e30d58c0ee60641cecbf33977163225207bca0",
                         "name": "writeSync",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to write the file sycronously",
                         "since": "2.0.0",
                         "author": {
@@ -553,7 +771,13 @@
             "@coffeekraken.s-file.node.interface.SFileSettingsInterface": {
                 "id": "@coffeekraken.s-file.node.interface.SFileSettingsInterface",
                 "name": "SFileSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

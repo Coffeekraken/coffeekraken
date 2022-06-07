@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-class.doc.README": {
                 "id": "@coffeekraken.s-class.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-class.sugar.js.class.SClass": {
                 "id": "@coffeekraken.s-class.sugar.js.class.SClass",
                 "name": "SClass",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class is a simple and effective one that manage the ```settings``` property\nand some others features that will be documented asap",
                 "namespace": "@coffeekraken.s-class.sugar.js.class",
                 "status": "beta",
@@ -141,7 +152,13 @@
                     "metas": {
                         "id": "0604db087884d62c853f7cd630289a8be9ade2bea2b3f7fa3f36855e4102b7a3",
                         "name": "metas",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Access the metas in the ```settings.metas```",
                         "since": "2.0.0",
                         "author": {
@@ -153,7 +170,13 @@
                     "constructor": {
                         "id": "c72b45495ed2e078a7ff0cb878f99dd464591d4809a83731c128a996648bf3fa",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {

@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-stdio.doc.README": {
                 "id": "@coffeekraken.s-stdio.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-stdio.sugar.node.stdio.SStdio": {
                 "id": "@coffeekraken.s-stdio.sugar.node.stdio.SStdio",
                 "name": "SStdio",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class represent the base one for all the \"Stdio\"\ncompatible setting.",
                 "namespace": "@coffeekraken.s-stdio.sugar.node.stdio",
                 "status": "wip",
@@ -141,7 +152,13 @@
                     "registeredcomponents": {
                         "id": "1e5f06dddc7df6bf28dd2b7817c1b3b55745cb29c6086aab694f10e5032fef93",
                         "name": "registeredComponents",
-                        "type": "ISStdioRegisteredComponents",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISStdioRegisteredComponents"
+                                }
+                            ]
+                        },
                         "description": "Store the registered stdio components",
                         "static": "true",
                         "since": "2.0.0",
@@ -154,7 +171,13 @@
                     "ui_basic": {
                         "id": "b588c6cc9cc428335b167fe927204ad99184779651815efae947c6cebe2abefb",
                         "name": "UI_BASIC",
-                        "type": "ISStdioUi",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISStdioUi"
+                                }
+                            ]
+                        },
                         "description": "Represent the \"basic\" stdio",
                         "static": "true",
                         "since": "2.0.0",
@@ -167,7 +190,13 @@
                     "ui_websocker": {
                         "id": "828924c2bb98cdffca91051ea1b6dc2e28bfd1329737a425da039ad3ecf43a27",
                         "name": "UI_WEBSOCKER",
-                        "type": "ISStdioUi",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISStdioUi"
+                                }
+                            ]
+                        },
                         "description": "Represent the \"websocket\" stdio",
                         "static": "true",
                         "since": "2.0.0",
@@ -180,7 +209,13 @@
                     "registercomponent": {
                         "id": "3f10f6e8c902e8f7b118d6c7705279d8666d0614184ef2ff323c9c6116afdb98",
                         "name": "registerComponent",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to register a new Stdio component\nthat you will be able to use then through the \"type\" property of\nthe logObj passed to the STerminalStdio instance.",
                         "static": "true",
                         "since": "2.0.0",
@@ -193,7 +228,13 @@
                     "existingornew": {
                         "id": "0188ebb98a18f3a8ab64d387653eb60aebed502c804ae2c333f589c30ee29680",
                         "name": "existingOrNew",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to get back either an existing stdio instance or a new one",
                         "async": "true",
                         "since": "2.0.0",
@@ -206,7 +247,13 @@
                     "new": {
                         "id": "6436ebbd0560d283bfa0a01bf919620cd59e164614c097d7f753faf69c95accc",
                         "name": "new",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method is a sugar to instanciate an stdio by specifying some sources,\nand either a path to a SStdio class, an SStdio class directly or a pre-registered\nstdio id like:\n- inherit: If is in node context, will fallback to STerminalStdio, if in browser, in SConsoleStdio\n-\n- terminal: STerminalStdio (node only)\n- console: SConsoleStdio (browser only)",
                         "example": [
                             {
@@ -225,7 +272,13 @@
                     "stdiosettings": {
                         "id": "d5b5a6e7b9a8c8cced08edd5145ea4e2bdb21b7fad6d4c51771b18b064cf8adf",
                         "name": "stdioSettings",
-                        "type": "ISStdioSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISStdioSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the stdio settings",
                         "since": "2.0.0",
                         "author": {
@@ -237,7 +290,13 @@
                     "id": {
                         "id": "aaf72a674563c5914dff7b19c2aef707032816c56f7def3fdf9bae394a14303c",
                         "name": "id",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Access the stdio id",
                         "since": "2.0.0",
                         "author": {
@@ -249,7 +308,13 @@
                     "constructor": {
                         "id": "2a18a91810a2967c4c3f68d3fff37dd6b64f7a342ee8f07a7f5a775103631987",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -261,7 +326,13 @@
                     "display": {
                         "id": "64e1b6868137b9690aaeae778fbc94f9fb9d427b8e0deb288040eb58b5176f43",
                         "name": "display",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method tells the stdio instance that it has been showned.",
                         "since": "2.0.0",
                         "author": {
@@ -273,7 +344,13 @@
                     "hide": {
                         "id": "a5929108aa87bcca2f1f82508b781fa32cf0ae3431ddb75efdff09476923f0df",
                         "name": "hide",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method tells the stdio instance that it has been hided",
                         "since": "2.0.0",
                         "author": {
@@ -285,7 +362,13 @@
                     "registersource": {
                         "id": "71293a1e32fdd289ee38a2ae2fb0f648f095d53af95a2f26e4d216b195ed34b7",
                         "name": "registerSource",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method simply listen to the process and log the values getted\nfrom it into the panel",
                         "author": {
                             "name": "Olivier Bossel",
@@ -296,7 +379,13 @@
                     "log": {
                         "id": "bdbfa8e35fc473aa98edc8441bb540438de9115653e33e811599b05a26606832",
                         "name": "log",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method is the one called to log something.\nIt will call the ```_log``` method that each implementation of the\nSStdio class MUST have",
                         "since": "2.0.0",
                         "author": {
@@ -308,7 +397,13 @@
                     "ask": {
                         "id": "c0105a80a165891c49ececa858dc53a57816cac54f76caa8aa17d05364eab76f",
                         "name": "ask",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method is the one called to ask something.\nIt will call the ```_ask``` method that each implementation of the\nSStdio class MUST have",
                         "async": "true",
                         "since": "2.0.0",
@@ -321,7 +416,13 @@
                     "isdisplayed": {
                         "id": "6c94c6e48d2748fe2d92dc96c478301884d72a0abeb170f23d888a19aaef1e89",
                         "name": "isDisplayed",
-                        "type": "Boolean",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ]
+                        },
                         "description": "true if the stdio if actually displayed, false if not",
                         "since": "2.0.0",
                         "author": {
@@ -335,7 +436,13 @@
             "@coffeekraken.s-stdio.node.basic.SBasicStdio": {
                 "id": "@coffeekraken.s-stdio.node.basic.SBasicStdio",
                 "name": "SBasicStdio",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class represent a \"basic\" terminal strandard in out interface.",
                 "namespace": "@coffeekraken.s-stdio.node.basic",
                 "example": [
@@ -357,7 +464,13 @@
                     "basicstdiosettings": {
                         "id": "fa5b521e6e899b94a1cdb8d49a6021fba6b3b0c3bb66fefad92fc0574e516bd9",
                         "name": "basicStdioSettings",
-                        "type": "ISBasicStdioSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISBasicStdioSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the stdio settings",
                         "since": "2.0.0",
                         "author": {
@@ -369,7 +482,13 @@
                     "constructor": {
                         "id": "fa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -383,7 +502,13 @@
             "@coffeekraken.s-stdio.node.basic.SWebsocketStdio": {
                 "id": "@coffeekraken.s-stdio.node.basic.SWebsocketStdio",
                 "name": "SWebsocketStdio",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class represent a \"websocket\" in out interface.",
                 "namespace": "@coffeekraken.s-stdio.node.basic",
                 "example": [
@@ -405,7 +530,13 @@
                     "websocketstdiosettings": {
                         "id": "4216315c6534652ddb8710a207936260d21daf0f5133c3f490f6f42276e23997",
                         "name": "websocketStdioSettings",
-                        "type": "ISWebsocketStdioSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISWebsocketStdioSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the stdio settings",
                         "since": "2.0.0",
                         "author": {
@@ -417,7 +548,13 @@
                     "constructor": {
                         "id": "fa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -431,7 +568,13 @@
             "@coffeekraken.s-stdio.shared.interface.SStdioSettingsInterface": {
                 "id": "@coffeekraken.s-stdio.shared.interface.SStdioSettingsInterface",
                 "name": "SStdioSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -479,7 +622,13 @@
             "@coffeekraken.s-stdio.shared.basic.components.defaultBasicStdioComponent": {
                 "id": "@coffeekraken.s-stdio.shared.basic.components.defaultBasicStdioComponent",
                 "name": "defaultBasicStdioComponent",
-                "type": "ISStdioComponent",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISStdioComponent"
+                        }
+                    ]
+                },
                 "description": "Basic stdio component",
                 "namespace": "@coffeekraken.s-stdio.shared.basic.components",
                 "since": "2.0.0",
@@ -496,7 +645,13 @@
             "@coffeekraken.s-stdio.shared.basic.components.errorBasicStdioComponent": {
                 "id": "@coffeekraken.s-stdio.shared.basic.components.errorBasicStdioComponent",
                 "name": "errorBasicStdioComponent",
-                "type": "ISStdioComponent",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISStdioComponent"
+                        }
+                    ]
+                },
                 "description": "Basic stdio error component",
                 "namespace": "@coffeekraken.s-stdio.shared.basic.components",
                 "since": "2.0.0",
@@ -513,7 +668,13 @@
             "@coffeekraken.s-stdio.shared.websocket.components.defaultWebsocketComponent": {
                 "id": "@coffeekraken.s-stdio.shared.websocket.components.defaultWebsocketComponent",
                 "name": "defaultWebsocketComponent",
-                "type": "ISStdioComponent",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISStdioComponent"
+                        }
+                    ]
+                },
                 "description": "Websocket default stdio component",
                 "namespace": "@coffeekraken.s-stdio.shared.websocket.components",
                 "since": "2.0.0",

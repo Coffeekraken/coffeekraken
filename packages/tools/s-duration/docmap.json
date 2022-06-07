@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-duration.doc.README": {
                 "id": "@coffeekraken.s-duration.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-duration.shared.SDuration": {
                 "id": "@coffeekraken.s-duration.shared.SDuration",
                 "name": "SDuration",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class represent a duration tracking process. Simply instanciate it,\nthen call the ```instance.get()``` method and you will get back\nthe duration between the instanciation and the ```get``` method call",
                 "namespace": "@coffeekraken.s-duration.shared",
                 "status": "beta",
@@ -140,7 +151,13 @@
                     "constructor": {
                         "id": "2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -151,7 +168,13 @@
                     "toobject": {
                         "id": "f1f1785a5e85c13e7eab62cdcda463f5093e6f806920dc6ff3d0f1e28409cc50",
                         "name": "toObject",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method end the duration if needed and return an object with these properties:\n- startTime: the start timestamp\n- endTime: the end timestamp\n- duration: the duration in miliseconds\n- formatedDuration: the duration formated",
                         "since": "2.0.0",
                         "author": {
@@ -162,7 +185,13 @@
                     "start": {
                         "id": "2c0f8b705da7ba90f858d3c71488e652e5588d7a68104037bcef8b270f7fdc18",
                         "name": "start",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Start the duration process either with the current timestamp, or with a passed timestamp you prefer",
                         "since": "2.0.0",
                         "author": {
@@ -173,7 +202,13 @@
                     "end": {
                         "id": "a9a6b0f31be678f77bbfd81970d67d81c7ae8c403e1ec229d31348a7a9d45a2d",
                         "name": "end",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Stop the duration counter and return the result in the passed format or in the format setted in the settings",
                         "since": "2.0.0",
                         "author": {

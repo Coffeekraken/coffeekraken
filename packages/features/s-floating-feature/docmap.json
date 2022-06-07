@@ -90,7 +90,13 @@
                 "id": "@coffeekraken.s-floating-feature.js.SFloatingFeature",
                 "name": "SFloatingFeature",
                 "as": "Floating elements",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -128,7 +134,13 @@
             "@coffeekraken.s-floating-feature.js.interface.SFloatingFeatureInterface": {
                 "id": "@coffeekraken.s-floating-feature.js.interface.SFloatingFeatureInterface",
                 "name": "SFloatingFeatureInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

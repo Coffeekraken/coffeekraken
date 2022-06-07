@@ -74,21 +74,17 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
     }
     mount() {
         // scrolled
-        if (this.componentUtils.props.scrolled) this._scrolled();
+        if (this.props.scrolled) this._scrolled();
         // vhvar
-        if (this.componentUtils.props.vhvar) this._vhvar();
+        if (this.props.vhvar) this._vhvar();
         // resizeTransmations
-        if (this.componentUtils.props.resizeTransmations)
-            this._clearTransmationsOnResize();
+        if (this.props.resizeTransmations) this._clearTransmationsOnResize();
         // inputAdditionalAttributes
-        if (this.componentUtils.props.inputAdditionalAttributes)
-            __inputAdditionalAttributes();
+        if (this.props.inputAdditionalAttributes) __inputAdditionalAttributes();
         // linksStateAttributes
-        if (this.componentUtils.props.linksStateAttributes)
-            __linksStateAttributes();
+        if (this.props.linksStateAttributes) __linksStateAttributes();
         // prevent scroll restoration
-        if (this.componentUtils.props.preventScrollRestoration)
-            __preventScrollRestoration();
+        if (this.props.preventScrollRestoration) __preventScrollRestoration();
     }
     _clearTransmationsOnResizeTimeout;
     _isResizing = false;
@@ -109,7 +105,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
     }
     _scrolled() {
         document.addEventListener('scroll', (e) => {
-            if (window.scrollY >= this.componentUtils.props.scrolledDelta) {
+            if (window.scrollY >= this.props.scrolledDelta) {
                 document.body.classList.add('scrolled');
             } else {
                 document.body.classList.remove('scrolled');

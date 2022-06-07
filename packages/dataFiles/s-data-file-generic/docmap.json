@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-data-file-generic.doc.README": {
                 "id": "@coffeekraken.s-data-file-generic.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-data-file-generic.node.SDataFileGeneric": {
                 "id": "@coffeekraken.s-data-file-generic.node.SDataFileGeneric",
                 "name": "SDataFileGeneric",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class represent the generic data file loader.\nIt actually regroup all the other data file loader into one single for convinience.",
                 "namespace": "@coffeekraken.s-data-file-generic.node",
                 "status": "beta",
@@ -135,7 +146,16 @@
                     "extensions": {
                         "id": "bdfe9313edc0797dd45e7d80a7a9e8c32d839bf8743f5a37a394be779c82441c",
                         "name": "extensions",
-                        "type": "String[]",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "String"
+                                    ]
+                                }
+                            ]
+                        },
                         "default": "['js', 'json']",
                         "description": "This static property allow you to define the extensions that the data file loader",
                         "static": "true",
@@ -149,7 +169,13 @@
                     "load": {
                         "id": "9cdf58ce73f21adfd98936b3dbd2dff0350881dd7e3001ecf11fcdc18af63fac",
                         "name": "load",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to actually load a data file",
                         "static": "true",
                         "since": "2.0.0",

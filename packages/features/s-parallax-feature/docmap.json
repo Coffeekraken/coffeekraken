@@ -90,7 +90,13 @@
                 "id": "@coffeekraken.s-parallax-feature.js.SParallaxFeature",
                 "name": "SParallaxFeature",
                 "as": "Parallax",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -127,7 +133,13 @@
             "@coffeekraken.s-parallax-feature.js.interface.SParallaxFeatureInterface": {
                 "id": "@coffeekraken.s-parallax-feature.js.interface.SParallaxFeatureInterface",
                 "name": "SParallaxFeatureInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

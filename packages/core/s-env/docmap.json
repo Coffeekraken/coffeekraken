@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-env.config.env.env": {
                 "id": "@coffeekraken.s-env.config.env.env",
                 "name": "env",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "process.env.NODE_ENV ?? document.env.ENV ?? 'dev`",
                 "description": "Specify the environment env. This is usually \"production\" or \"dev\" as value.",
                 "namespace": "@coffeekraken.s-env.config.env",
@@ -107,7 +112,13 @@
             "@coffeekraken.s-env.doc.README": {
                 "id": "@coffeekraken.s-env.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -136,7 +147,13 @@
             "@coffeekraken.s-env.s-env.shared.SEnv": {
                 "id": "@coffeekraken.s-env.s-env.shared.SEnv",
                 "name": "SEnv",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
                 "namespace": "@coffeekraken.s-env.s-env.shared",
                 "example": [
@@ -158,7 +175,13 @@
                     "env": {
                         "id": "3c882527536778ebe3cda2c893232e50953fd4db23e2eafe4b5eca1b2cf49ecb",
                         "name": "env",
-                        "type": "Object",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ]
+                        },
                         "description": "Store the actual environment variables object. In node it will be process.env, in the browser,\ndocument.env",
                         "static": "true",
                         "since": "2.0.0",
@@ -171,7 +194,13 @@
                     "is": {
                         "id": "c357a00a09108492292733809ec56df14e55c2978e2c9a558fda1dfc19f11441",
                         "name": "is",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to check if the environment\nis \"dev\", \"development\", \"prod\" or \"production\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -184,7 +213,13 @@
                     "get": {
                         "id": "863b0c53622da90d13800cca8b98a09cad4b3c06e24f8b62484c4b9d11e227a0",
                         "name": "get",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to access an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
                         "static": "true",
                         "since": "2.0.0",
@@ -197,7 +232,13 @@
                     "set": {
                         "id": "3238cad0a4de2ae08a869eb13d976429eeb7b8431293a218aeab84660fa16510",
                         "name": "set",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to set an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
                         "static": "true",
                         "since": "2.0.0",
@@ -210,7 +251,13 @@
                     "delete": {
                         "id": "97f8f0f76311c34699d5fcbdac6092a7f8532ce564afee6fb15e9ba281e31c6f",
                         "name": "delete",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to delete an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
                         "static": "true",
                         "since": "2.0.0",
@@ -223,7 +270,13 @@
                     "packagejson": {
                         "id": "d76e233b83378e16222bb382a1318b5cabcd6b9f8043a9dca26d3e254adceaec",
                         "name": "packageJson",
-                        "type": "Object",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ]
+                        },
                         "description": "Access the package.json content from the current package the process\nruns in.",
                         "static": "true",
                         "since": "2.0.0",

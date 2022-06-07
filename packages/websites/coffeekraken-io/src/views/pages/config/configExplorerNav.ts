@@ -49,33 +49,13 @@ export class ConfigExplorerNav extends __SLitComponent {
         }
 
         const res = await request.send();
-        const types = [];
+        const listed = [];
         res.data.map = __filter(res.data.map, (key, item) => {
-            if (key.includes('imagesBuilder')) console.log('S', key);
-
             if (!key.match(/[a-zA-Z0-9]+\.config\.[a-zA-Z0-9]+/)) return false;
-
-            const configId = key.replace(/.*\.config\./, '');
-            // console.log(configId, key);
-
+            if (listed.includes(key)) return false;
+            listed.push(key);
             return true;
         });
-
-        return;
-
-        this._menuStack = {};
-        Object.keys(res.data.map).forEach((namespace) => {
-            __set(this._menuStack, namespace, res.data.map[namespace]);
-        });
-
-        // save new nav
-        window.localStorage.setItem(
-            'ConfigExplorerNav',
-            JSON.stringify(this._menuStack),
-        );
-        this._loaded = true;
-
-        this.requestUpdate();
     }
 
     _isAcive(namespace) {
@@ -88,8 +68,8 @@ export class ConfigExplorerNav extends __SLitComponent {
                 opened: true,
             };
         } else {
-            this._menuStates[namespace].opened =
-                !this._menuStates[namespace].opened;
+            this._menuStates[namespace].opened = !this._menuStates[namespace]
+                .opened;
         }
 
         // save state
@@ -178,4 +158,4 @@ export default () => {
     if (!customElements.get('config-explorer-nav')) {
         customElements.define('config-explorer-nav', ConfigExplorerNav);
     }
-}
+};

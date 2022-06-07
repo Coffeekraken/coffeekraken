@@ -9,7 +9,7 @@ export default function (env) {
     return {
         /**
          * @name            input
-         * @namespace       config.favicon
+         * @namespace       config.faviconBuilder
          * @type            String
          * @default         [config.storage.src.rootDir]/favicon/favicon.png
          *
@@ -22,7 +22,7 @@ export default function (env) {
 
         /**
          * @name            outDir
-         * @namespace       config.favicon
+         * @namespace       config.faviconBuilder
          * @type            String
          * @default         [config.storage.dist.rootDir]/favicon
          *
@@ -35,7 +35,7 @@ export default function (env) {
 
         /**
          * @name            settings
-         * @namespace       config.favicon
+         * @namespace       config.faviconBuilder
          * @type            String
          * @default         {}
          *
@@ -44,6 +44,6 @@ export default function (env) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        settings: {}
+        settings: {},
     };
 }

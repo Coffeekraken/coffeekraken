@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-feature.shared.SFeature": {
                 "id": "@coffeekraken.s-feature.shared.SFeature",
                 "name": "SFeature",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class allows you to create \"features\". Feature is like webcomponent but does not provide a\ncustom HTML tag.",
                 "namespace": "@coffeekraken.s-feature.shared",
                 "status": "beta",
@@ -111,7 +116,13 @@
                     "name": {
                         "id": "e7e78df2166e7195f152267200b29d0243f3fe08045d8a2efd0be7b88f3511a5",
                         "name": "name",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Store the feature name",
                         "since": "2.0.0",
                         "author": {
@@ -122,7 +133,13 @@
                     "node": {
                         "id": "df262925215f93e339186d394b4a774aa6f60e8ce63e5f24f8140c0b2f96ad71",
                         "name": "node",
-                        "type": "HTMLElement",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ]
+                        },
                         "description": "Store the component node",
                         "since": "2.0.0",
                         "author": {
@@ -133,7 +150,13 @@
                     "props": {
                         "id": "9ebb834b48dd51aa56ae3d735a8702a7c7d41d04887cb3fbeba89279b5f52d79",
                         "name": "props",
-                        "type": "Object",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ]
+                        },
                         "description": "Store the component props",
                         "since": "2.0.0",
                         "author": {
@@ -144,7 +167,13 @@
                     "setdefaultprops": {
                         "id": "1a20c35a87063cd50d2548b56ff04506cf5ece09ace63d14a2babb418a709ac4",
                         "name": "setDefaultProps",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to set some default props for some particular\ncomponent(s). You can target components using simple css selectorl like \"my-component#cool\".\nOnce the component is instanciated, it will check if some defaults are specified and\nextends them with the passed props.",
                         "static": "true",
                         "since": "2.0.0",
@@ -156,7 +185,13 @@
                     "definefeature": {
                         "id": "b14787f92dc259aad3ff9d777d3e7f721f3ca637436fa0e755629418b47f69f3",
                         "name": "defineFeature",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to register a new feature\nassociated with an HTMLElement attribute like \"s-activate\", etc...",
                         "static": "true",
                         "since": "2.0.0",
@@ -168,7 +203,13 @@
                     "featuresettings": {
                         "id": "827235e8dfeb7a9d27f1dd04ff31d764053631f9ef694b97efcd3ff4780d8462",
                         "name": "featureSettings",
-                        "type": "ISFeatureSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISFeatureSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the feature settings",
                         "since": "2.0.0",
                         "author": {
@@ -179,7 +220,13 @@
                     "constructor": {
                         "id": "2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -190,7 +237,13 @@
                     "beforepropchange": {
                         "id": "71d126a4ce49d1e0db163350525e256270a784d4ba817a0edaaf5f1f0ebe6633",
                         "name": "beforePropChange",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to catch a property change before it actually occurs.\nYou can return the value to set it as it is, return another value to set another one\nor returns undefined to prevent the change to be commited.",
                         "since": "2.0.0",
                         "author": {
@@ -201,7 +254,13 @@
                     "afterpropchanged": {
                         "id": "c8b7e2755dfed65d016ffada8d8c82e86befa17008df6ffd166ae8c81fdc7526",
                         "name": "afterPropChanged",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to catch properties updates AFTER it has been commited.",
                         "since": "2.0.0",
                         "author": {
@@ -212,7 +271,13 @@
                     "mount": {
                         "id": "495f9428f7bc280f8f206241d94f17373d47972cdf1a31e9535f6f1b131b403f",
                         "name": "mount",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to actually mount your feature behavior.\nIt will be called depending on the \"mountWhen\" setting setted.",
                         "async": "true",
                         "since": "2.0.0",

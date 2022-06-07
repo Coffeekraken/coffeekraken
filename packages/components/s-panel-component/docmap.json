@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-panel-component.config.themeUi.panel.borderRadius": {
                 "id": "@coffeekraken.s-panel-component.config.themeUi.panel.borderRadius",
                 "name": "borderRadius",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.borderRadius]",
                 "description": "Specify the default border radius for panel ui",
                 "namespace": "@coffeekraken.s-panel-component.config.themeUi.panel",
@@ -106,7 +111,13 @@
             "@coffeekraken.s-panel-component.config.themeUi.panel.transition": {
                 "id": "@coffeekraken.s-panel-component.config.themeUi.panel.transition",
                 "name": "transition",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.transition.default]",
                 "description": "Specify the default transition for panel ui",
                 "namespace": "@coffeekraken.s-panel-component.config.themeUi.panel",
@@ -123,7 +134,13 @@
             "@coffeekraken.s-panel-component.config.themeUi.panel.depth": {
                 "id": "@coffeekraken.s-panel-component.config.themeUi.panel.depth",
                 "name": "depth",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "5",
                 "description": "Specify the default depth for your panel ui",
                 "namespace": "@coffeekraken.s-panel-component.config.themeUi.panel",
@@ -141,7 +158,13 @@
             "@coffeekraken.s-panel-component.doc.README": {
                 "id": "@coffeekraken.s-panel-component.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -171,7 +194,13 @@
                 "id": "@coffeekraken.s-panel-component.js.SPanelComponent",
                 "name": "SPanelComponent",
                 "as": "Panel (modal)",
-                "type": "CustomElement",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -290,7 +319,13 @@
             "@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface": {
                 "id": "@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface",
                 "name": "SPanelComponentInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

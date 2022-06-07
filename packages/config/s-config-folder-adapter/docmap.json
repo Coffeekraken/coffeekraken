@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-config-folder-adapter.doc.README": {
                 "id": "@coffeekraken.s-config-folder-adapter.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-config-folder-adapter.node.SConfigFolderAdapter": {
                 "id": "@coffeekraken.s-config-folder-adapter.node.SConfigFolderAdapter",
                 "name": "SConfigFolderAdapter",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.\nEach file in the folder will be the first level of the final config object like for example the file \"colors.config.js\" will be stored\nin the final object under ```{ colors: ... }```.",
                 "namespace": "@coffeekraken.s-config-folder-adapter.node",
                 "status": "beta",

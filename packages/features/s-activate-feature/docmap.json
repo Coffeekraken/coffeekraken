@@ -90,7 +90,13 @@
                 "id": "@coffeekraken.s-activate-feature.js.SActivateFeature",
                 "name": "SActivateFeature",
                 "as": "Activate feature",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -137,7 +143,13 @@
                     "isactive": {
                         "id": "5996f2f954ff83c2e00976caa9e0a65091b196af233d9b57d11eb941faa377f0",
                         "name": "isActive",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to know if this particular s-activate node is active or not",
                         "since": "2.0.0",
                         "author": {
@@ -148,7 +160,13 @@
                     "activate": {
                         "id": "4d2bcb37a9f506b581ac2f5d6f96f79b3be4c3c149de825d758ff75c57bfcbe1",
                         "name": "activate",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This async method allows you to activate this particular s-activate node",
                         "async": "true",
                         "since": "2.0.0",
@@ -160,7 +178,13 @@
                     "unactivate": {
                         "id": "2f5cc4c7a725cd122d0eaa04042183b813df33521c81afd84a5c3ac7086127c8",
                         "name": "unactivate",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This async method allows you to unactivate this particular s-activate node",
                         "async": "true",
                         "since": "2.0.0",
@@ -174,7 +198,13 @@
             "@coffeekraken.s-activate-feature.js.interface.SActivateFeatureInterface": {
                 "id": "@coffeekraken.s-activate-feature.js.interface.SActivateFeatureInterface",
                 "name": "SActivateFeatureInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

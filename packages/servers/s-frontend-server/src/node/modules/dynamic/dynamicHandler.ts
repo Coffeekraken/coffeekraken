@@ -5,6 +5,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
+import __filterObject from '@coffeekraken/sugar/shared/object/filter';
 
 /**
  * @name                dynamicHandler
@@ -56,8 +57,11 @@ export default function dynamicHandler({
         const renderedViews: string[] = [];
 
         for (let [idx, viewObj] of pageConfig.views.entries()) {
-            let data = {},
+            let data = Object.assign({}, res.templateData ?? {}),
                 viewPath = viewObj.path;
+
+            // remove the shared data
+            delete data.shared;
 
             if (typeof viewObj === 'string') {
                 viewPath = viewObj;
@@ -94,16 +98,12 @@ export default function dynamicHandler({
                         value: dataFnResult,
                     });
                 } else {
-                    data = __deepMerge(data, dataFnResult);
+                    data = __deepMerge(data ?? {}, dataFnResult ?? {});
                 }
             }
 
             // rendering view using data
-            const viewRes = await pipe(
-                res.viewRenderer.render(viewPath, {
-                    ...data,
-                }),
-            );
+            const viewRes = await pipe(res.viewRenderer.render(viewPath, data));
 
             __SBench.step(`handlers.dynamic`, `afterViewRendering.${viewPath}`);
 
@@ -115,9 +115,14 @@ export default function dynamicHandler({
         __SBench.step('handlers.dynamic', 'beforeLayoutRendering');
 
         let layoutPath = pageConfig.layout ?? 'layouts.main';
+
+        const layoutData = Object.assign({}, res.templateData ?? {});
+        delete layoutData.shared;
+
         // rendering view using data
         const layoutRes = await pipe(
             res.viewRenderer.render(layoutPath, {
+                ...layoutData,
                 body: renderedViews.join('\n'),
             }),
         );

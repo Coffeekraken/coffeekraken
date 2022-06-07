@@ -1,5 +1,7 @@
-import __autoCast from '../../shared/string/autoCast
-import __parseTypeString, { ITypeStringObject } from '../../shared/type/parseTypeString';
+import __autoCast from '../../shared/string/autoCast';
+import __parseTypeString, {
+    ITypeStringObject,
+} from '../../shared/type/parseTypeString';
 import __SInterface from '@coffeekraken/s-interface';
 import __replaceTokens from '../../shared/token/replaceTokens';
 import __path from 'path';
@@ -22,7 +24,7 @@ import __packageRoot from '../path/packageRoot';
  * @return    {Promise<IResolveTypeStringResult>}             A promise resolved once the type string has been resolved
  *
  * @setting         {String}       [cwd=process.cwd()]          The cwd to use to resolve the type string when they are path
- * 
+ *
  * @example       js
  * import __resolveTypeString from '@coffeekraken/sugar/shared/type/resolveTypeString';
  * resolveTypeString('string');
@@ -59,38 +61,36 @@ export default async function resolveTypeString(
 
     let types, interf;
 
-    // regular types
-    if (typeString.match(/^\{.*\}$/)) {
-        types = __parseTypeString(typeString);
-        // path type
-    } else if (typeString.match(/^(\.|\/|[a-zA-Z0-9])/)) {
+    if (typeString.match(/^(\.|\/)/)) {
         // resolve tokens
         const path = __replaceTokens(typeString);
 
         let potentialTypeFilePath;
 
-            if (typeString.match(/^(\.|\/)/)) {
-                potentialTypeFilePath = __path.resolve(
-                    finalSettings.cwd,
-                    path,
-                );
-            } else {
-                potentialTypeFilePath = __path.resolve(
-                    __packageRoot(finalSettings.cwd),
-                    path,
-                );
-            }
+        if (typeString.match(/^(\.|\/)/)) {
+            potentialTypeFilePath = __path.resolve(finalSettings.cwd, path);
+        } else {
+            potentialTypeFilePath = __path.resolve(
+                __packageRoot(finalSettings.cwd),
+                path,
+            );
+        }
 
-            if (__fs.existsSync(potentialTypeFilePath)) {
-                const typeData = (await import(potentialTypeFilePath)).default;
-                types = [{
+        if (__fs.existsSync(potentialTypeFilePath)) {
+            const typeData = (await import(potentialTypeFilePath)).default;
+            types = [
+                {
                     type: typeData.name ?? types,
                     of: undefined,
-                    value: undefined
-                }];
-                // save data into the "metas" property on the string directly
-                interf = typeData.toObject?.() ?? typeData;
-            }
+                    value: undefined,
+                },
+            ];
+            // save data into the "metas" property on the string directly
+            interf = typeData.toObject?.() ?? typeData;
+        }
+        // regular types
+    } else {
+        types = __parseTypeString(typeString);
     }
 
     return {

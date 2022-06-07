@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-component-utils.doc.README": {
                 "id": "@coffeekraken.s-component-utils.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface": {
                 "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface",
                 "name": "SComponentUtilsDefaultPropsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -142,7 +153,13 @@
             "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface": {
                 "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface",
                 "name": "SComponentUtilsSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -152,6 +169,28 @@
                 "description": "This class represent the interface that describe SComponentUtils settings",
                 "namespace": "@coffeekraken.s-component-utils.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SComponentUtilsSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "interface": {
+                            "description": "Specify an SInterface class to use as our properties definition",
+                            "type": "SInterface"
+                        },
+                        "props": {
+                            "description": "Specify a properties object to use as our properties definition",
+                            "type": "Object"
+                        },
+                        "style": {
+                            "description": "Specify a style string to use as style to inject for our component",
+                            "type": "String"
+                        },
+                        "defaultProps": {
+                            "description": "Pass an object that act as the default properties value for our component",
+                            "type": "Object"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

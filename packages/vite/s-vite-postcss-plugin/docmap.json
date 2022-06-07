@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-vite-postcss-plugin.node.sVitePluginPostcss": {
                 "id": "@coffeekraken.s-vite-postcss-plugin.node.sVitePluginPostcss",
                 "name": "sVitePluginPostcss",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This plugin allows you to use the awesome RiotJs library\nto build your webcomponent using vite frontend development stack.",
                 "namespace": "@coffeekraken.s-vite-postcss-plugin.node",
                 "since": "2.0.0",

@@ -90,7 +90,13 @@
                 "id": "@coffeekraken.s-form-validate-feature.js.SFormValidateFeature",
                 "name": "SFormValidateFeature",
                 "as": "Form validate feature",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -183,7 +189,13 @@
             "@coffeekraken.s-form-validate-feature.js.interface.SFormValidateFeatureInterface": {
                 "id": "@coffeekraken.s-form-validate-feature.js.interface.SFormValidateFeatureInterface",
                 "name": "SFormValidateFeatureInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

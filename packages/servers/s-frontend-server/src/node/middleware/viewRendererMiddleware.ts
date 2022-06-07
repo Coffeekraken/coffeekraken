@@ -36,21 +36,11 @@ import __SViewRenderer from '@coffeekraken/s-view-renderer';
 let _viewRenderer, _sharedData;
 function viewRendererMiddleware(settings = {}) {
     return async function (req, res, next) {
-        // extract shared datas
-        if (!_sharedData) {
-            _sharedData = {};
-            for (let [key, value] of Object.entries(res.templateData ?? {})) {
-                if (value._sViewRendererShared) {
-                    _sharedData[key] = res.templateData[key];
-                }
-            }
-        }
-
         // renderer
         if (!_viewRenderer) {
             _viewRenderer = new __SViewRenderer({
                 viewRenderer: {
-                    sharedData: _sharedData,
+                    sharedData: res.templateData.shared ?? {},
                 },
             });
         }

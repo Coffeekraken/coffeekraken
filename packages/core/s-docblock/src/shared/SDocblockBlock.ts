@@ -26,6 +26,7 @@ import __namespaceTag from './tags/namespace';
 import __todoTag from './tags/todo';
 import __menuTag from './tags/menu';
 import __cssClass from './tags/cssClass';
+import __typeTag from './tags/type';
 import __interfaceTag from './tags/interface';
 import __supportTag from './tags/support';
 
@@ -483,6 +484,7 @@ SDocblockBlock.registerTag('desc', __descriptionTag);
 SDocblockBlock.registerTag('see', __seeTag);
 SDocblockBlock.registerTag('interface', __interfaceTag);
 SDocblockBlock.registerTag('return', __returnTag);
+SDocblockBlock.registerTag('type', __typeTag);
 SDocblockBlock.registerTag('param', __paramTag);
 SDocblockBlock.registerTag('property', __paramTag);
 SDocblockBlock.registerTag('prop', __paramTag);

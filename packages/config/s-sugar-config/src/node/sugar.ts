@@ -344,6 +344,7 @@ export default class SSugarConfig extends __SClass {
                 docblocks: docblock.toObject(),
             });
         }
+
         return results;
     }
 

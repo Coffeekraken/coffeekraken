@@ -1,5 +1,5 @@
 <ol class="">
-    @foreach ((array) $interface->definition as $key => $param)
+    @foreach ((array) $definition as $key => $param)
         <li class="s-font:40 s-mbe:30">
             <header class="s-flex:align-center s-bg:main-surface s-radius s-mbe:20">
                 <div class="s-flex-item:grow s-tc:accent s-p:30">

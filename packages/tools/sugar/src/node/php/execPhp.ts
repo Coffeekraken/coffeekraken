@@ -61,6 +61,7 @@ export default function execPhp(
 
         // quicker with execSync than spawnSync
         let result;
+
         try {
             result = __childProcess.execSync(
                 `php ${scriptPath} "${paramsFilePath ?? paramsStr}"`,

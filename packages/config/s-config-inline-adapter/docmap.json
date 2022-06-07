@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-config-inline-adapter.doc.README": {
                 "id": "@coffeekraken.s-config-inline-adapter.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-config-inline-adapter.node.SConfigInlineAdapter": {
                 "id": "@coffeekraken.s-config-inline-adapter.node.SConfigInlineAdapter",
                 "name": "SConfigInlineAdapter",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This adapter let you pass directly an object to the SConfig instance",
                 "namespace": "@coffeekraken.s-config-inline-adapter.node",
                 "status": "beta",

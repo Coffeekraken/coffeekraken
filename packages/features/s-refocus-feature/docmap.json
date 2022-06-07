@@ -89,7 +89,13 @@
             "@coffeekraken.s-refocus-feature.doc.README": {
                 "id": "@coffeekraken.s-refocus-feature.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -119,7 +125,13 @@
                 "id": "@coffeekraken.s-refocus-feature.js.SRefocusFeature",
                 "name": "SRefocusFeature",
                 "as": "Refocus",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -157,7 +169,13 @@
             "@coffeekraken.s-refocus-feature.js.interface.SRefocusFeatureInterface": {
                 "id": "@coffeekraken.s-refocus-feature.js.interface.SRefocusFeatureInterface",
                 "name": "SRefocusFeatureInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

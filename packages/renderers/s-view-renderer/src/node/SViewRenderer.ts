@@ -608,7 +608,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
             const renderPromise = rendererInstance.render(
                 finalViewPath,
-                data,
+                Object.assign({}, data),
                 this._sharedDataFilePath,
                 viewRendererSettings,
             );

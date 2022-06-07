@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-config-adapter.doc.README": {
                 "id": "@coffeekraken.s-config-adapter.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-config-adapter.shared.SConfigAdapter": {
                 "id": "@coffeekraken.s-config-adapter.shared.SConfigAdapter",
                 "name": "SConfigAdapter",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "Base class for SConfig adapters",
                 "namespace": "@coffeekraken.s-config-adapter.shared",
                 "status": "beta",
@@ -141,7 +152,13 @@
                     "settings": {
                         "id": "84eb2c65d79d661d9d9871bf3d7ea3bd2d5a556c345fbf8dda5389788f3fd026",
                         "name": "settings",
-                        "type": "ISConfigAdapterSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISConfigAdapterSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the config adapter settings",
                         "since": "2.0.0",
                         "author": {
@@ -153,7 +170,13 @@
                     "name": {
                         "id": "059955f571a99ff18055a3c6ddb04e56d3528bb0bc5011ea8d11c602fdb22895",
                         "name": "name",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Access the adapter name. You can specify it through settings.configAdapter.name, otherwise it will be a randon string generated",
                         "since": "2.0.0",
                         "author": {
@@ -165,7 +188,13 @@
                     "constructor": {
                         "id": "0de462e530b026c4774d8bf09f6272c52396c3dd2cae57f2c7160ac02d0b3063",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.",
                         "author": {
                             "name": "Olivier Bossel",
@@ -176,7 +205,13 @@
                     "update": {
                         "id": "81787eac2d77912a929c5bfc67228eca3ba85c1f7ad7f2520a13de9d8bd9959f",
                         "name": "update",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Function that you have to call with the new config when it has been updated",
                         "since": "2.0.0",
                         "author": {
@@ -188,7 +223,13 @@
                     "load": {
                         "id": "cbf72d89505be49886790953eadd6a259784ed335b3ff8f812812a812a3c8696",
                         "name": "load",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Function that you have to override in your own adapter to load the configurations",
                         "since": "2.0.0",
                         "author": {

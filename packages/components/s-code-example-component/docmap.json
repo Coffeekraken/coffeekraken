@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingInline": {
                 "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingInline",
                 "name": "paddingInline",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.padding.50]",
                 "description": "Specify the default padding inline for code ui",
                 "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
@@ -106,7 +111,13 @@
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingBlock": {
                 "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingBlock",
                 "name": "paddingBlock",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.padding.50]",
                 "description": "Specify the default padding block for code ui",
                 "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
@@ -123,7 +134,13 @@
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderRadius": {
                 "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderRadius",
                 "name": "borderRadius",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.borderRadius]",
                 "description": "Specify the default border radius for code ui",
                 "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
@@ -140,7 +157,13 @@
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderWidth": {
                 "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderWidth",
                 "name": "borderWidth",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.borderWidth]",
                 "description": "Specify the default border width for code ui",
                 "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
@@ -157,7 +180,13 @@
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.transition": {
                 "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.transition",
                 "name": "transition",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.transition]",
                 "description": "Specify the default transition for code ui",
                 "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
@@ -174,7 +203,13 @@
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultColor": {
                 "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultColor",
                 "name": "defaultColor",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.defaultColor]",
                 "description": "Specify the default color for code ui",
                 "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
@@ -191,7 +226,13 @@
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultStyle": {
                 "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultStyle",
                 "name": "defaultStyle",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.defaultStyle]",
                 "description": "Specify the default style for your code ui",
                 "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
@@ -208,7 +249,13 @@
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.depth": {
                 "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.depth",
                 "name": "depth",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.depth]",
                 "description": "Specify the default depth for code items",
                 "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
@@ -225,7 +272,13 @@
             "@coffeekraken.s-code-example-component.config.themeUi.codeExample.rhythmVertical": {
                 "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.rhythmVertical",
                 "name": "rhythmVertical",
-                "type": "Object",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.rhythmVertical]",
                 "description": "Specify the default vertical rhythm for your code ui",
                 "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
@@ -243,7 +296,13 @@
             "@coffeekraken.s-code-example-component.doc.README": {
                 "id": "@coffeekraken.s-code-example-component.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -273,7 +332,13 @@
                 "id": "@coffeekraken.s-code-example-component.js.SCodeExampleComponent",
                 "name": "SCodeExampleComponent",
                 "as": "Code example",
-                "type": "CustomElement",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -390,7 +455,13 @@
             "@coffeekraken.s-code-example-component.js.interface.SCodeExampleComponentInterface": {
                 "id": "@coffeekraken.s-code-example-component.js.interface.SCodeExampleComponentInterface",
                 "name": "SCodeExampleComponentInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

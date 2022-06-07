@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-package.config.package.manager": {
                 "id": "@coffeekraken.s-package.config.package.manager",
                 "name": "manager",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "yarn",
                 "description": "Specify the package manager you want to use. Can be \"npm\" or \"yarn\"",
                 "namespace": "@coffeekraken.s-package.config.package",
@@ -106,7 +111,13 @@
             "@coffeekraken.s-package.config.package.rootDir": {
                 "id": "@coffeekraken.s-package.config.package.rootDir",
                 "name": "rootDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.package.rootDir]",
                 "description": "Specify a directory from where to search for files to exports using the `glob` config",
                 "namespace": "@coffeekraken.s-package.config.package",
@@ -123,7 +134,13 @@
             "@coffeekraken.s-package.config.package.readme.path": {
                 "id": "@coffeekraken.s-package.config.package.readme.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.package.rootDir]/README.md",
                 "description": "Specify the path to the README file",
                 "namespace": "@coffeekraken.s-package.config.package.readme",
@@ -140,7 +157,13 @@
             "@coffeekraken.s-package.config.package.exports.defaultPackageJson": {
                 "id": "@coffeekraken.s-package.config.package.exports.defaultPackageJson",
                 "name": "defaultPackageJson",
-                "type": "Object",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ]
+                },
                 "default": "true",
                 "description": "Specify some default packages you want to install when you run `sugar package.install`",
                 "namespace": "@coffeekraken.s-package.config.package.exports",
@@ -157,7 +180,13 @@
             "@coffeekraken.s-package.config.package.checkDependencies.dirs": {
                 "id": "@coffeekraken.s-package.config.package.checkDependencies.dirs",
                 "name": "dirs",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "['dist/** /exports.js']",
                 "description": "Specify some directories in which to check for dependencies issues, etc...",
                 "namespace": "@coffeekraken.s-package.config.package.checkDependencies",
@@ -174,7 +203,13 @@
             "@coffeekraken.s-package.config.package.checkDependencies.packagesMap": {
                 "id": "@coffeekraken.s-package.config.package.checkDependencies.packagesMap",
                 "name": "packagesMap",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "{'^@coffeekraken/'}",
                 "description": "Specify some patterns for packages you want to add in package.json without installing them.\nThis is usefull for monorepo.",
                 "namespace": "@coffeekraken.s-package.config.package.checkDependencies",
@@ -191,7 +226,13 @@
             "@coffeekraken.s-package.config.package.exports.glob": {
                 "id": "@coffeekraken.s-package.config.package.exports.glob",
                 "name": "glob",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "['dist/** /exports.js']",
                 "description": "Specify a glob pattern relative to the \"rootDir\" to specify files you want to exports in your package.json",
                 "namespace": "@coffeekraken.s-package.config.package.exports",
@@ -208,7 +249,13 @@
             "@coffeekraken.s-package.config.package.exports.folderModuleMap": {
                 "id": "@coffeekraken.s-package.config.package.exports.folderModuleMap",
                 "name": "folderModuleMap",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "['esm']",
                 "description": "Specify some folders you want to map to a specific package type like \"import\" or \"require\".",
                 "namespace": "@coffeekraken.s-package.config.package.exports",
@@ -225,7 +272,13 @@
             "@coffeekraken.s-package.config.package.exports.folderPlatformMap": {
                 "id": "@coffeekraken.s-package.config.package.exports.folderPlatformMap",
                 "name": "folderPlatformMap",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "['esm']",
                 "description": "Specify some folders you want to map to a specific platform like \"node\" or \"browser\", etc...",
                 "namespace": "@coffeekraken.s-package.config.package.exports",
@@ -243,7 +296,13 @@
             "@coffeekraken.s-package.doc.README": {
                 "id": "@coffeekraken.s-package.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -272,7 +331,13 @@
             "@coffeekraken.s-package.node.SPackage": {
                 "id": "@coffeekraken.s-package.node.SPackage",
                 "name": "SPackage",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -301,7 +366,13 @@
                     "packagesettings": {
                         "id": "2ea96b7857d81879c58a289e011d0eb795a7698f28b22b11b364a681d00572ff",
                         "name": "packageSettings",
-                        "type": "ISPackageSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISPackageSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the package settings",
                         "since": "2.0.0",
                         "author": {
@@ -313,7 +384,13 @@
                     "constructor": {
                         "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -325,7 +402,13 @@
                     "exports": {
                         "id": "5c9b8b86f02e8c69012a14957004c7a9a0273764f645084847320b00f0d76f19",
                         "name": "exports",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to search for \"exportable\" files defined in params and export them in the package.json file.",
                         "async": "true",
                         "since": "2.0.0",
@@ -338,7 +421,13 @@
                     "install": {
                         "id": "6915f05ed01f072aad13901c8b6ec159a2bdeea3ba3df0809fb94f3e63177bc7",
                         "name": "install",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to install dependencies in a package",
                         "async": "true",
                         "since": "2.0.0",
@@ -351,7 +440,13 @@
                     "checkdependencies": {
                         "id": "4dacd7e9838efb59964700de6d35533b3521026a150c96065e2a7e4b07c47c94",
                         "name": "checkDependencies",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to check unused, missing dependencies in a package",
                         "async": "true",
                         "since": "2.0.0",
@@ -364,7 +459,13 @@
                     "rename": {
                         "id": "013f97eea9cac1d459956256c2500f37d9a05a20d9537919d897f48e9ed17f6e",
                         "name": "rename",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to rename a package (folder, package.json, composer.json, etc...)",
                         "async": "true",
                         "since": "2.0.0",
@@ -377,7 +478,13 @@
                     "addreadme": {
                         "id": "0efd93c508ded24ef1bc89b1a79fea5c963ab77a05e7ed596ddc0074cd062aee",
                         "name": "addReadme",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to add a readme to your package with informations about the coffeekraken\nversion used, etc...",
                         "async": "true",
                         "since": "2.0.0",
@@ -390,7 +497,13 @@
                     "applydefaultpackagejson": {
                         "id": "a70117b5902fc1a0b3f06821e6ed9c025d72f4cb8897a9adeb2e0ee3aa73967c",
                         "name": "applyDefaultPackageJson",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to apply the default package.json to your package.",
                         "async": "true",
                         "since": "2.0.0",
@@ -405,7 +518,13 @@
             "@coffeekraken.s-package.node.interface.SPackageAddReadmeParamsInterface": {
                 "id": "@coffeekraken.s-package.node.interface.SPackageAddReadmeParamsInterface",
                 "name": "SPackageAddReadmeParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -440,7 +559,13 @@
             "@coffeekraken.s-package.node.interface.SPackageApplyDefaultPackageJsonParamsInterface": {
                 "id": "@coffeekraken.s-package.node.interface.SPackageApplyDefaultPackageJsonParamsInterface",
                 "name": "SPackageApplyDefaultPackageJsonParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -469,7 +594,13 @@
             "@coffeekraken.s-package.node.interface.SPackageCheckDependenciesParamsInterface": {
                 "id": "@coffeekraken.s-package.node.interface.SPackageCheckDependenciesParamsInterface",
                 "name": "SPackageCheckDependenciesParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -522,7 +653,13 @@
             "@coffeekraken.s-package.node.interface.SPackageExportsParamsInterface": {
                 "id": "@coffeekraken.s-package.node.interface.SPackageExportsParamsInterface",
                 "name": "SPackageExportsParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -586,7 +723,13 @@
             "@coffeekraken.s-package.node.interface.SPackageInstallParamsInterface": {
                 "id": "@coffeekraken.s-package.node.interface.SPackageInstallParamsInterface",
                 "name": "SPackageInstallParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -625,7 +768,13 @@
             "@coffeekraken.s-package.node.interface.SPackageRenameParamsInterface": {
                 "id": "@coffeekraken.s-package.node.interface.SPackageRenameParamsInterface",
                 "name": "SPackageRenameParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -664,7 +813,13 @@
             "@coffeekraken.s-package.node.interface.SPackageSettingsInterface": {
                 "id": "@coffeekraken.s-package.node.interface.SPackageSettingsInterface",
                 "name": "SPackageSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",

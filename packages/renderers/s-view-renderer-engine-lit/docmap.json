@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-view-renderer-engine-lit.node.SViewRendererEngineLit": {
                 "id": "@coffeekraken.s-view-renderer-engine-lit.node.SViewRendererEngineLit",
                 "name": "SViewRendererEngineLit",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class is the blade.php view engine that allows you\nto render .blade.php views.",
                 "namespace": "@coffeekraken.s-view-renderer-engine-lit.node",
                 "since": "2.0.0",
@@ -106,7 +111,13 @@
             "@coffeekraken.s-view-renderer-engine-lit.node.interface.SViewRendererEngineLitSettingsInterface": {
                 "id": "@coffeekraken.s-view-renderer-engine-lit.node.interface.SViewRendererEngineLitSettingsInterface",
                 "name": "SViewRendererEngineLitSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -116,6 +127,11 @@
                 "description": "This interface represent the settings of the SViewRendererEngineLit engine",
                 "namespace": "@coffeekraken.s-view-renderer-engine-lit.node.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SViewRendererEngineLitSettingsInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

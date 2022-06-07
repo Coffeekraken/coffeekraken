@@ -32,9 +32,10 @@ import __SEnv from '@coffeekraken/s-env';
  */
 function envMiddleware(settings = {}) {
     return function (req, res, next) {
-        res.templateData = {
-            ...(res.templateData || {}),
-            env: __SEnv.env,
+        if (!res.templateData) res.templateData = {};
+        if (!res.templateData.shared) res.templateData.shared = {};
+        res.templateData.shared.env = {
+            ...__SEnv.env,
         };
 
         __SBench.step('request', 'envMiddleware');

@@ -17,6 +17,11 @@ export interface ISActivateFeatureProps {
     unactivateOn: string[];
 }
 
+export interface ISActivateActivateParams {
+    force: boolean;
+    preventSave: boolean;
+}
+
 /**
  * @name            SActivateFeature
  * @as              Activate feature
@@ -80,7 +85,9 @@ export default class SActivateFeature extends __SFeature {
 
     state = {
         active: undefined,
-        groupActiveId: undefined,
+    };
+    groupState = {
+        activeId: undefined,
     };
 
     constructor(name: string, node: HTMLElement, settings: any) {
@@ -100,11 +107,10 @@ export default class SActivateFeature extends __SFeature {
         this.componentUtils.handleState(this.state, {
             save: this.props.saveState,
         });
-
-        // if (this.state.active) {
-        //     console.log('AC');
-        //     console.log(this.state);
-        // }
+        this.componentUtils.handleState(this.groupState, {
+            save: this.props.saveState,
+            id: `s-activate-feature-group-${this.props.group}`,
+        });
 
         if (this.props.triggerer) {
             this._$triggerers = Array.from(
@@ -112,10 +118,6 @@ export default class SActivateFeature extends __SFeature {
             );
         } else {
             this._$triggerers = [this.node];
-        }
-
-        if (this.node.id === 'main-Configuration') {
-            console.log('Hello ');
         }
 
         // expose the api on node
@@ -132,7 +134,6 @@ export default class SActivateFeature extends __SFeature {
         if (this.props.href) {
             this._hrefSelector = this.props.href;
         }
-
         let targets;
         if (this._hrefSelector)
             targets = Array.from(document.querySelectorAll(this._hrefSelector));
@@ -166,7 +167,9 @@ export default class SActivateFeature extends __SFeature {
             triggers.forEach((trigger) => {
                 if (trigger.match(/^event:/)) {
                     this.node.addEventListener('actual', (e) => {
-                        // this.activate();
+                        this.activate({
+                            preventSave: true,
+                        });
                     });
                 } else {
                     switch (trigger) {
@@ -184,32 +187,32 @@ export default class SActivateFeature extends __SFeature {
                                 if (this.isActive() && this.props.toggle) {
                                     this.unactivate();
                                 } else {
-                                    // this.activate();
+                                    this.activate();
                                 }
                             });
                             break;
                         case 'mousenter':
                         case 'mouseover':
                             $triggerer.addEventListener('mouseover', (e) => {
-                                // this.activate();
+                                this.activate();
                             });
                             break;
                         case 'mouseout':
                         case 'mouseleave':
                             $triggerer.addEventListener('mouseleave', (e) => {
-                                // this.unactivate();
+                                this.unactivate();
                             });
                             break;
                         case 'anchor':
                             if (document.location.hash === this._hrefSelector) {
-                                // this.activate();
+                                this.activate();
                             }
                             window.addEventListener('hashchange', (e) => {
                                 if (
                                     document.location.hash ===
                                     this._hrefSelector
                                 ) {
-                                    // this.activate();
+                                    this.activate();
                                 }
                             });
 
@@ -228,17 +231,12 @@ export default class SActivateFeature extends __SFeature {
             });
         }
 
-        // activate if has the "active" attribute
-        if (this.props.active && this.state.active === undefined) {
-            this.activate(true);
-        }
-
-        if (this.node.id === 'header-subnav-item-Forms') {
-            console.log('CLOOP', this.state);
-        }
-
         // restore the state
-        this.props.saveState && this._restoreState();
+        if (this.props.saveState) {
+            this._restoreState();
+        } else if (this.props.active) {
+            this.activate();
+        }
     }
 
     /**
@@ -255,12 +253,30 @@ export default class SActivateFeature extends __SFeature {
     }
 
     _restoreState() {
-        if (this.state.active) {
-            if (this.node.id === 'header-subnav-item-Forms') {
-                console.log('ARESO', Math.random());
-            }
-            this.activate(true);
+        if (this.groupState.activeId === this.node.id) {
+            return this.activate({
+                force: true,
+            });
         }
+
+        if (
+            this.groupState.activeId &&
+            this.groupState.activeId !== this.node.id
+        ) {
+            return this.unactivate({
+                force: true,
+            });
+        }
+
+        if (this.state.active === undefined && this.props.active) {
+            return this.activate({
+                force: true,
+            });
+        }
+
+        return this.unactivate({
+            force: true,
+        });
     }
 
     /**
@@ -273,16 +289,18 @@ export default class SActivateFeature extends __SFeature {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    async activate(force = false) {
+    async activate(params?: Partial<ISActivateActivateParams>) {
+        const finalParams: ISActivateActivateParams = {
+            force: false,
+            preventSave: false,
+            ...(params ?? {}),
+        };
+
         // clear the unactivate timeout
         clearTimeout(this._unactivateTimeout);
 
-        if ((this.node.id = 'header-subnav-item-Forms')) {
-            console.trace('ACTI');
-        }
-
         // protect from activating multiple times
-        if (!force && this.isActive()) return;
+        if (!finalParams.force && this.isActive()) return;
 
         setTimeout(() => {
             // history
@@ -292,15 +310,22 @@ export default class SActivateFeature extends __SFeature {
 
             // check if we have some elements in the group
             if (this._$groupElements) {
+                // update the group state
+                this.groupState.activeId = this.node.id;
                 // @ts-ignore
                 this._$groupElements.forEach(($element: HTMLElement) => {
                     if ($element === this.node) {
-                        console.log('ME', $element);
                         return;
                     }
                     // @ts-ignore
-                    // $element.unactivate?.();
+                    $element.unactivate?.();
                 });
+            }
+
+            // prevent save
+            if (finalParams.preventSave) {
+                // @ts-ignore
+                this.state.preventSave();
             }
 
             // add the "active" attribute to the component
@@ -336,19 +361,19 @@ export default class SActivateFeature extends __SFeature {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    async unactivate() {
-        // protect from unactivating multiple times
+    async unactivate(params?: Partial<ISActivateUnactivateParams>) {
+        const finalParams: ISActivateActivateParams = {
+            force: false,
+            preventSave: false,
+            ...(params ?? {}),
+        };
 
-        if ((this.node.id = 'header-subnav-item-Forms')) {
-            console.log('Unactivate');
-        }
-        if (!this.isActive()) return;
+        // protect from unactivating multiple times
+        if (!finalParams.force && !this.isActive()) return;
 
         this._unactivateTimeout = setTimeout(() => {
             this.state.active = false;
-
-            // remove the "active" attribute to the component
-            this.node.removeAttribute('active');
+            this.props.active = false;
 
             // loop on targets to unactivate them
             if (this._$targets) {

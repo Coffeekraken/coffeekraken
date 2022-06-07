@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-handlebars.node.registerHelpers": {
                 "id": "@coffeekraken.s-handlebars.node.registerHelpers",
                 "name": "registerHelpers",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -122,7 +127,13 @@
             "@coffeekraken.s-handlebars.node.helpers.configFileNameFromDocmapPath": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.configFileNameFromDocmapPath",
                 "name": "configFileNameFromDocmapPath",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -149,7 +160,13 @@
             "@coffeekraken.s-handlebars.node.helpers.configFiles": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.configFiles",
                 "name": "configFiles",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -176,7 +193,13 @@
             "@coffeekraken.s-handlebars.node.helpers.configFromDocmap": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.configFromDocmap",
                 "name": "configFromDocmap",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -203,7 +226,13 @@
             "@coffeekraken.s-handlebars.node.helpers.configValue": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.configValue",
                 "name": "configValue",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -230,7 +259,13 @@
             "@coffeekraken.s-handlebars.node.helpers.get": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.get",
                 "name": "get",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -257,7 +292,13 @@
             "@coffeekraken.s-handlebars.node.helpers.ifEqual": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.ifEqual",
                 "name": "ifEqual",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -291,7 +332,13 @@
             "@coffeekraken.s-handlebars.node.helpers.ifMatch": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.ifMatch",
                 "name": "ifMatch",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -325,7 +372,13 @@
             "@coffeekraken.s-handlebars.node.helpers.import": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.import",
                 "name": "import",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -352,7 +405,13 @@
             "@coffeekraken.s-handlebars.node.helpers.includes": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.includes",
                 "name": "includes",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -379,7 +438,13 @@
             "@coffeekraken.s-handlebars.node.helpers.islicense": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.islicense",
                 "name": "islicense",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -406,7 +471,13 @@
             "@coffeekraken.s-handlebars.node.helpers.join": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.join",
                 "name": "join",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -433,7 +504,13 @@
             "@coffeekraken.s-handlebars.node.helpers.jsonStringify": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.jsonStringify",
                 "name": "jsonStringify",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -460,7 +537,13 @@
             "@coffeekraken.s-handlebars.node.helpers.length": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.length",
                 "name": "length",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -487,7 +570,13 @@
             "@coffeekraken.s-handlebars.node.helpers.replace": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.replace",
                 "name": "replace",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -514,7 +603,13 @@
             "@coffeekraken.s-handlebars.node.helpers.rootRelative": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.rootRelative",
                 "name": "rootRelative",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -541,7 +636,13 @@
             "@coffeekraken.s-handlebars.node.helpers.sfile": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.sfile",
                 "name": "sfile",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -568,7 +669,13 @@
             "@coffeekraken.s-handlebars.node.helpers.ShieldsioHandlebarsHelper": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.ShieldsioHandlebarsHelper",
                 "name": "ShieldsioHandlebarsHelper",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -591,7 +698,13 @@
             "@coffeekraken.s-handlebars.node.helpers.sort": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.sort",
                 "name": "sort",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -618,7 +731,13 @@
             "@coffeekraken.s-handlebars.node.helpers.toString": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.toString",
                 "name": "toString",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

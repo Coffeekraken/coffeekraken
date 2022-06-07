@@ -90,7 +90,13 @@
                 "id": "@coffeekraken.s-sugar-feature.js.SSugarFeature",
                 "name": "SSugarFeature",
                 "as": "Sugar features",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -129,7 +135,13 @@
             "@coffeekraken.s-sugar-feature.js.interface.SSugarFeatureInterface": {
                 "id": "@coffeekraken.s-sugar-feature.js.interface.SSugarFeatureInterface",
                 "name": "SSugarFeatureInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -153,7 +165,13 @@
             "@coffeekraken.s-sugar-feature.sugar.css.font.default": {
                 "id": "@coffeekraken.s-sugar-feature.sugar.css.font.default",
                 "name": "default",
-                "type": "CssFontFace",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CssFontFace"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "css",
@@ -176,7 +194,13 @@
             "@coffeekraken.s-sugar-feature.sugar.css.font.title": {
                 "id": "@coffeekraken.s-sugar-feature.sugar.css.font.title",
                 "name": "title",
-                "type": "CssFontFace",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CssFontFace"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "css",

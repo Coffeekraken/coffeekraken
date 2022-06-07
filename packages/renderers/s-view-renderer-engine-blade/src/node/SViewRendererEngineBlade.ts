@@ -70,8 +70,6 @@ export default class SViewRendererEngineBlade {
                     .join('.')
                     .replace('.blade.php', '');
 
-                // console.log('DA', data, sharedDataFilePath);
-
                 // pass the shared data file path through the data
                 data._sharedDataFilePath = sharedDataFilePath;
 

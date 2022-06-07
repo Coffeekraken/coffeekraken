@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-slider-component.config.themeUi.button.borderRadius": {
                 "id": "@coffeekraken.s-slider-component.config.themeUi.button.borderRadius",
                 "name": "borderRadius",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.borderRadius]",
                 "description": "Specify the default border radius for button ui",
                 "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
@@ -106,7 +111,13 @@
             "@coffeekraken.s-slider-component.config.themeUi.button.transition": {
                 "id": "@coffeekraken.s-slider-component.config.themeUi.button.transition",
                 "name": "transition",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "all .5s ease-in-out",
                 "description": "Specify the default transition for button ui",
                 "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
@@ -123,7 +134,13 @@
             "@coffeekraken.s-slider-component.config.themeUi.button.depth": {
                 "id": "@coffeekraken.s-slider-component.config.themeUi.button.depth",
                 "name": "depth",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "[theme.ui.default.depth]",
                 "description": "Specify the default depth for your button ui",
                 "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
@@ -141,7 +158,13 @@
             "@coffeekraken.s-slider-component.doc.README": {
                 "id": "@coffeekraken.s-slider-component.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -171,7 +194,13 @@
                 "id": "@coffeekraken.s-slider-component.js.SSliderComponent",
                 "name": "SSliderComponent",
                 "as": "Slider",
-                "type": "CustomElement",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -197,7 +226,7 @@
                     {
                         "language": "html",
                         "title": "Slideable slider",
-                        "code": "<s-slider behavior=\"slideable\" controls nav>\n     <responsive media=\"tablet\" lnf=\"default-contained\"></responsive>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:lead\">Click and drag</p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                        "code": "<s-slider behavior=\"slideable\" controls nav id=\"coco\">\n     <responsive media=\"tablet\" lnf=\"default-contained\"></responsive>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo:h1\">Slide #1</h1>\n          <p class=\"s-typo:lead\">Click and drag</p>\n      </div>\n      <div s-slider-slide class=\"s-bg:complementary\">\n          <h1 class=\"s-typo:h1\">Slide #2</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:info\">\n          <h1 class=\"s-typo:h1\">Slide #3</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg:error\">\n          <h1 class=\"s-typo:h1\">Slide #4</h1>\n          <p class=\"s-typo:p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
                     },
                     {
                         "language": "html",
@@ -342,7 +371,13 @@
                     "islast": {
                         "id": "c68c13129f95c336c467707b3778dc2d1c3deac9c41d4e25c78691f2a91d8cb5",
                         "name": "isLast",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to check if the actual slide is the last one",
                         "since": "2.0.0",
                         "author": {
@@ -354,7 +389,13 @@
                     "isfirst": {
                         "id": "afd46ecc88c7cfe3d8f2479198d5bd5c44297c546f4a90475dfe6a436f55cbc3",
                         "name": "isFirst",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to check if the actual slide is the first one",
                         "since": "2.0.0",
                         "author": {
@@ -366,7 +407,13 @@
                     "getcurrentslideidx": {
                         "id": "1b7be55999f358f068089ac63f4af1cf05df914a84155f595e6065d2ddfef5be",
                         "name": "getCurrentSlideIdx",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Access the current slide idx. Begin from 0...",
                         "since": "2.0.0",
                         "author": {
@@ -378,7 +425,13 @@
                     "setcurrentslidebyidx": {
                         "id": "a6df6d95f6b757f3c6b529076f8d06f61ab8079e4be7bef809550dd27dcbd279",
                         "name": "setCurrentSlideByIdx",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Set the current slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -390,7 +443,13 @@
                     "setcurrentslide": {
                         "id": "3fa0a655e5b3084a45c227fe266ac12c4ed0e3bf0275d1edab13f9e0a83f13ca",
                         "name": "setCurrentSlide",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to get the current clide using an id or an idx.",
                         "since": "2.0.0",
                         "author": {
@@ -402,7 +461,13 @@
                     "currentslideidx": {
                         "id": "5a35bba8f0f8fb925cabfdea553bad553580724097a31e80222d960239fa0d83",
                         "name": "currentSlideIdx",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ]
+                        },
                         "description": "Access the current slide idx. Begin from 0...",
                         "since": "2.0.0",
                         "author": {
@@ -414,7 +479,13 @@
                     "getcurrentslideelement": {
                         "id": "f7f0e42d24e9e924bb8ce4a4ac690112970e0c738919cd74320d9ff4718bf097",
                         "name": "getCurrentSlideElement",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Access the current slide item.",
                         "since": "2.0.0",
                         "author": {
@@ -426,7 +497,13 @@
                     "currentslideelement": {
                         "id": "3adf55793e3c7ca63750d50031e5d9c0b3368b895cb5dad051fb587023daf665",
                         "name": "currentSlideElement",
-                        "type": "HTMLElement",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ]
+                        },
                         "description": "Access the current slide item.",
                         "since": "2.0.0",
                         "author": {
@@ -438,7 +515,13 @@
                     "getnextslideidx": {
                         "id": "e3459f4572f09da24970e83214eefd635b2d8eee95d1a3a98e1076bcc6840640",
                         "name": "getNextSlideIdx",
-                        "type": "HTMLElement",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ]
+                        },
                         "description": "Access the next slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -450,7 +533,13 @@
                     "nextslideidx": {
                         "id": "269e32160d6c146f28dac10cd0935e06368bb9639e7e271ff27bebb2a0adf1d6",
                         "name": "nextSlideIdx",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ]
+                        },
                         "description": "Access the next slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -462,7 +551,13 @@
                     "getnextslideelement": {
                         "id": "e6e30709a2cab373aa0d2718aa895ec0a524b02873d3379d542d47d8f862063d",
                         "name": "getNextSlideElement",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Access the next slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -474,7 +569,13 @@
                     "nextslideelement": {
                         "id": "48a187aed0a9f97253458e956faa97f09c98717ca7ad6a1e063e6c9f73c90454",
                         "name": "nextSlideElement",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Access the next slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -486,7 +587,13 @@
                     "getpreviousslideidx": {
                         "id": "9d63ea053caf36cd21aeb7dc264761578cbc61f21dd640c3ec475c0b02c30342",
                         "name": "getPreviousSlideIdx",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Access the previous slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -498,7 +605,13 @@
                     "previousslideidx": {
                         "id": "6a3c5839cdaacc71e4be276b354f6df944cb3e4d0326efa86cf772c4d370339d",
                         "name": "previousSlideIdx",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ]
+                        },
                         "description": "Access the previous slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -510,7 +623,13 @@
                     "getpreviousslideelement": {
                         "id": "2c2f6cb44fa6c3c8376565c2b5b1d8ecd311978517f096d1f63424377aacca10",
                         "name": "getPreviousSlideElement",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Access the previous slide element.",
                         "since": "2.0.0",
                         "author": {
@@ -522,7 +641,13 @@
                     "previousslideelement": {
                         "id": "4847709d7518eb365b49332f83ee728791f75d91238715b4b01ec84d4a67050f",
                         "name": "previousSlideElement",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Access the previous slide element.",
                         "since": "2.0.0",
                         "author": {
@@ -534,7 +659,13 @@
                     "getslideidxbyid": {
                         "id": "1eda9c7379f20a13c30841b68af291cbd3ea2af61277041627efe436bb193a6c",
                         "name": "getSlideIdxById",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to get back the slide idx by its id.",
                         "since": "2.0.0",
                         "author": {
@@ -546,7 +677,13 @@
                     "getslideelementbyidx": {
                         "id": "31fa48552336714c2cbc79c0fcba25e14a1be74e3974713826fbc949e8955e05",
                         "name": "getSlideElementByIdx",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to get back a slide HTMLElement by its index.",
                         "since": "2.0.0",
                         "author": {
@@ -558,7 +695,13 @@
                     "getcurrentslide": {
                         "id": "58b7f3494ef434e897fc68109fd2d78508a5a3fbd18a78a9a0c1d3db79310332",
                         "name": "getCurrentSlide",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to get back the current slide object <ISSliderComponentSlide> either by it's id, or by it's idx.",
                         "since": "2.0.0",
                         "author": {
@@ -570,7 +713,13 @@
                     "currentslide": {
                         "id": "0e0aad57ad6668f5e71455757937e9f3ebdc01a249dfbabbd971c1282c6b8c0a",
                         "name": "currentSlide",
-                        "type": "ISSliderComponentSlide",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISSliderComponentSlide"
+                                }
+                            ]
+                        },
                         "description": "Access the current slide object",
                         "since": "2.0.0",
                         "author": {
@@ -582,7 +731,13 @@
                     "getslide": {
                         "id": "2a9a76f0113c0856ffbabff5ad4b82174347d5a995161d0f023b2cb2c043f07e",
                         "name": "getSlide",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to get back a slide object <ISSliderComponentSlide> either by it's id, or by it's idx.",
                         "since": "2.0.0",
                         "author": {
@@ -594,7 +749,13 @@
                     "getfirstslide": {
                         "id": "488ff067b1936c92f993413ff9b34257272a826ff53b9f64671b58362fe9be3d",
                         "name": "getFirstSlide",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to get the first slide of the slider",
                         "since": "2.0.0",
                         "author": {
@@ -606,7 +767,13 @@
                     "getlastslide": {
                         "id": "e052e8099796663e97ab91230410ff1215355a731e2b47b26ce343d6699b66a6",
                         "name": "getLastSlide",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to get the last slide of the slider",
                         "since": "2.0.0",
                         "author": {
@@ -618,7 +785,13 @@
                     "goto": {
                         "id": "d44fb896f9684392446a6c6fbfd0b0f2250188dd4e4b928bc6e4363773d640df",
                         "name": "goTo",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Go to a specific slide.",
                         "since": "2.0.0",
                         "author": {
@@ -630,7 +803,13 @@
                     "next": {
                         "id": "7f637cfbbd47a4a9d1c63b717a5d2a2e9b8c7165f4a7790689d7657bac945d8b",
                         "name": "next",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Go to the next slide",
                         "since": "2.0.0",
                         "author": {
@@ -642,7 +821,13 @@
                     "previous": {
                         "id": "6a4c680a3d34af7277397399052d5303ae0ee681906c07bda78d98daf80d2af7",
                         "name": "previous",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Go to the previous slide",
                         "since": "2.0.0",
                         "author": {
@@ -654,7 +839,13 @@
                     "gettimer": {
                         "id": "803f34010df9994dba7f1aa59157151ce7332853fbb2d416c34a7faf89b0f563",
                         "name": "getTimer",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to get back the timer object",
                         "since": "2.0.0",
                         "author": {
@@ -666,7 +857,13 @@
                     "isplaying": {
                         "id": "476979830cf69536075eb6aeec47389a63b801ca14ac7531544fbebfae0b53ba",
                         "name": "isPlaying",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to know if the slider is currently playing or not",
                         "since": "2.0.0",
                         "author": {
@@ -678,7 +875,13 @@
                     "play": {
                         "id": "cdd4456eb6a9cc3ef870aed59ef8434df19e3b596a68bc091045c20c3ff32303",
                         "name": "play",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to play the slider when a `timer` has been defined",
                         "since": "2.0.0",
                         "author": {
@@ -690,7 +893,13 @@
                     "stop": {
                         "id": "af76815fe860bd6454110a606a65ccb77e46ee9f023cace05fa8b4f7bdfd6a6f",
                         "name": "stop",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to stop the slider",
                         "since": "2.0.0",
                         "author": {
@@ -702,7 +911,13 @@
                     "webcomponent": {
                         "id": "c13098f28fc63079b0848fdc11c469c6032a39f07a54f8315345e8e762556218",
                         "name": "webcomponent",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This function allows you to define (register) your webcomponent with some default\nprops if needed.",
                         "since": "2.0.0",
                         "author": {
@@ -716,7 +931,13 @@
             "@coffeekraken.s-slider-component.js.interface.SSliderComponentInterface": {
                 "id": "@coffeekraken.s-slider-component.js.interface.SSliderComponentInterface",
                 "name": "SSliderComponentInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -834,7 +1055,13 @@
             "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderCssAnimationBehaviorInterface": {
                 "id": "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderCssAnimationBehaviorInterface",
                 "name": "SSliderCssAnimationBehaviorInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -863,7 +1090,13 @@
             "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderSlideableBehaviorInterface": {
                 "id": "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderSlideableBehaviorInterface",
                 "name": "SSliderSlideableBehaviorInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

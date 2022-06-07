@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.cache": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.cache",
                 "name": "cache",
-                "type": "Boolean",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ]
+                },
                 "default": "true",
                 "description": "Specify if you want to use the internal cache to speed up your compilations or not",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin",
@@ -107,7 +112,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.cli.interface.SCliSugarPostcssPluginAddParamsInterface": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.cli.interface.SCliSugarPostcssPluginAddParamsInterface",
                 "name": "SCliSugarPostcssPluginAddParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -117,6 +128,17 @@
                 "description": "This interface specify the parameters needed to the `sugar postcss.add` command.",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.cli.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SCliSugarPostcssPluginAddParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "install": {
+                            "description": "Specify if you want to install the postcss plugins automatcally",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -131,7 +153,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -161,7 +189,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.utils.astNodesToString": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.utils.astNodesToString",
                 "name": "astNodesToString",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function just take an AST nodes array and returns the string version of it\nwith \";\" when needed, etc...",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.utils",
                 "status": "beta",
@@ -179,7 +213,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.border.radius": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.border.radius",
                 "name": "radius",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -209,7 +249,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.border.width": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.border.width",
                 "name": "width",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -239,7 +285,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.color.color": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.color.color",
                 "name": "color",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -269,7 +321,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.depth.depth": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.depth.depth",
                 "name": "depth",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -299,7 +357,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.filter.noise": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.filter.noise",
                 "name": "noise",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -329,7 +393,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.font.family": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.font.family",
                 "name": "family",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -359,7 +429,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.font.radius": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.font.radius",
                 "name": "radius",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -389,7 +465,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.margin.margin": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.margin.margin",
                 "name": "margin",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -419,7 +501,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.offsize.offsize": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.offsize.offsize",
                 "name": "offsize",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -449,7 +537,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity.opacity": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity.opacity",
                 "name": "opacity",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -479,7 +573,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.padding.padding": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.padding.padding",
                 "name": "padding",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -509,7 +609,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.scalable.scalable": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.scalable.scalable",
                 "name": "scalable",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -539,7 +645,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.space.space": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.space.space",
                 "name": "space",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -569,7 +681,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.theme": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.theme",
                 "name": "theme",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -599,7 +717,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.value": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.value",
                 "name": "value",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -629,7 +753,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.var": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.var",
                 "name": "var",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -659,7 +789,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.function.border.transition": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.border.transition",
                 "name": "transition",
-                "type": "PostcssFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -689,7 +825,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.align.abs": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.align.abs",
                 "name": "abs",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -719,7 +861,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -744,7 +892,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.radius": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.radius",
                 "name": "radius",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -774,7 +928,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.width": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.width",
                 "name": "width",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -804,7 +964,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -834,7 +1000,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.clearfix": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.clearfix",
                 "name": "clearfix",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -864,7 +1036,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -894,7 +1072,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.color": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.color",
                 "name": "color",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -924,7 +1108,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.current": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.current",
                 "name": "current",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -954,7 +1144,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.docblocks": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.docblocks",
                 "name": "docblocks",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -984,7 +1180,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.primary": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.primary",
                 "name": "primary",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1014,7 +1216,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.remap": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.remap",
                 "name": "remap",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1044,7 +1252,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.component.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.component.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1074,7 +1288,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.cursor.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.cursor.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1104,7 +1324,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1134,7 +1360,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.depth": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.depth.depth",
                 "name": "depth",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1164,7 +1396,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.direction.rtl": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.direction.rtl",
                 "name": "rtl",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1194,7 +1432,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1224,7 +1468,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.disabled": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.disabled.disabled",
                 "name": "disabled",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1254,7 +1504,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.display.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.display.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1284,7 +1540,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.filter.noise": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.filter.noise",
                 "name": "noise",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1314,7 +1576,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1344,7 +1612,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.depth": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.fit.depth",
                 "name": "depth",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1374,7 +1648,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.flex.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.flex.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1404,7 +1684,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.float.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.float.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1434,7 +1720,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1464,7 +1756,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.faces": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.faces",
                 "name": "faces",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1494,7 +1792,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.family": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.family",
                 "name": "family",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1524,7 +1828,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.size": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.font.size",
                 "name": "size",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1554,7 +1864,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1584,7 +1900,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.text": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.format.text",
                 "name": "text",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1618,7 +1940,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gap.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gap.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1648,7 +1976,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1678,7 +2012,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.gradient": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.gradient",
                 "name": "gradient",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1708,7 +2048,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.height.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.height.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1738,7 +2084,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.highlightjs.theme": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.highlightjs.theme",
                 "name": "theme",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1768,7 +2120,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.icon.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.icon.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1798,7 +2156,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.import.import": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.import.import",
                 "name": "import",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1827,7 +2191,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.sugar.postcss.mixin.import.import": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.sugar.postcss.mixin.import.import",
                 "name": "import",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "description": "This mixin allows you to import files as default import statement does but add the glob support like \"something/*\n/.css\"",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.sugar.postcss.mixin.import",
                 "example": [
@@ -1850,7 +2220,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.init.init": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.init.init",
                 "name": "init",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1880,7 +2256,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1910,7 +2292,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.container": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.container",
                 "name": "container",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1940,7 +2328,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.layout": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.layout.layout",
                 "name": "layout",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -1974,7 +2368,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2004,7 +2404,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.stretch": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.link.stretch",
                 "name": "stretch",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "css",
@@ -2034,7 +2440,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.base": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.base",
                 "name": "base",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2064,7 +2476,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.selection": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.selection",
                 "name": "selection",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2094,7 +2512,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.margin.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.margin.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2124,7 +2548,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2154,7 +2584,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.media": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.media.media",
                 "name": "media",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2184,7 +2620,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.offsize.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.offsize.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2214,7 +2656,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.opacity.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.opacity.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2244,7 +2692,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.order.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.order.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2274,7 +2728,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.outline.outline": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.outline.outline",
                 "name": "outline",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2304,7 +2764,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.overflow.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.overflow.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2334,7 +2800,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.padding.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.padding.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2364,7 +2836,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2394,7 +2872,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.platform": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.platform",
                 "name": "platform",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2424,7 +2908,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.pointer.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.pointer.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2454,7 +2944,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.position.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.position.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2484,7 +2980,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2514,7 +3016,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.ratio": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ratio.ratio",
                 "name": "ratio",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2544,7 +3052,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.destyle": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.destyle",
                 "name": "destyle",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2574,7 +3088,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.reset": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.reset",
                 "name": "reset",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2604,7 +3124,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.sugar": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.sugar",
                 "name": "sugar",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2634,7 +3160,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.vertical": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.vertical",
                 "name": "vertical",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2668,7 +3200,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2698,7 +3236,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope.no": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope.no",
                 "name": "no",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "css",
@@ -2728,7 +3272,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar.scrollbar": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar.scrollbar",
                 "name": "scrollbar",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "css",
@@ -2758,7 +3308,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.shadow.shadow": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.shadow.shadow",
                 "name": "shadow",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "css",
@@ -2788,7 +3344,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.focus": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.focus",
                 "name": "focus",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2818,7 +3380,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.disabled": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.disabled",
                 "name": "disabled",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2848,7 +3416,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.hover": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.hover",
                 "name": "hover",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2878,7 +3452,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.text.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.text.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2908,7 +3488,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.theme.theme": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.theme.theme",
                 "name": "theme",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2938,7 +3524,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.when": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.when",
                 "name": "when",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -2972,7 +3564,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3002,7 +3600,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.transition": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.transition.transition",
                 "name": "transition",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3031,7 +3635,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.mixins.transition.transition": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.mixins.transition.transition",
                 "name": "transition",
-                "type": "Mixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Mixin"
+                        }
+                    ]
+                },
                 "description": "This mixin allows apply a transition specified in the theme config like \"fast\", \"slow\" and \"slow\" or others you've been defined",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.mixins.transition",
                 "status": "beta",
@@ -3059,7 +3669,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3089,7 +3705,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.truncate": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.truncate.truncate",
                 "name": "truncate",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3119,7 +3741,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.typo.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.typo.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3149,7 +3777,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.classes",
                 "name": "classes",
-                "type": "Mixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Mixin"
+                        }
+                    ]
+                },
                 "description": "This mixin allows you to print all the ui classes like button, form, etc...",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui",
                 "status": "beta",
@@ -3173,7 +3807,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3203,7 +3843,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.mounted": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.until.mounted",
                 "name": "mounted",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3233,7 +3879,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.userSelect.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.userSelect.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3263,7 +3915,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.utils.configToCss": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.utils.configToCss",
                 "name": "configToCss",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "css",
@@ -3293,7 +3951,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visibility.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visibility.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3323,7 +3987,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.hidden": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.hidden",
                 "name": "hidden",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3352,7 +4022,13 @@
                     "transition": {
                         "id": "@coffeekraken.s-postcss-sugar-plugin.mixins.transition.transition",
                         "name": "transition",
-                        "type": "Mixin",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Mixin"
+                                }
+                            ]
+                        },
                         "description": "This mixin allows apply a transition specified in the theme config like \"fast\", \"slow\" and \"slow\" or others you've been defined",
                         "namespace": "@coffeekraken.s-postcss-sugar-plugin.mixins.transition",
                         "status": "beta",
@@ -3378,7 +4054,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visually.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3408,7 +4090,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3438,7 +4126,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.active": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.when.active",
                 "name": "active",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3468,7 +4162,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.width.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.width.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3498,7 +4198,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.avatar": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.avatar",
                 "name": "avatar",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3528,7 +4234,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3558,7 +4270,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge.badge": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge.badge",
                 "name": "badge",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3588,7 +4306,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.badge.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3618,7 +4342,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote.blockquote": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote.blockquote",
                 "name": "blockquote",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3648,7 +4378,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.blockquote.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3678,7 +4414,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.blockquote": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.blockquote",
                 "name": "blockquote",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3707,7 +4449,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.ui.button.button": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.ui.button.button",
                 "name": "button",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3737,7 +4485,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3767,7 +4521,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.checkbox": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.checkbox",
                 "name": "checkbox",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3797,7 +4557,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3827,7 +4593,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3852,7 +4624,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown.dropdown": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown.dropdown",
                 "name": "dropdown",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3882,7 +4660,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3907,7 +4691,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.fsTree": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.fsTree",
                 "name": "fsTree",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3937,7 +4727,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.input.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.input.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3962,7 +4758,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.input.input": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.input.input",
                 "name": "input",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -3992,7 +4794,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4017,7 +4825,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer.inputContainer": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer.inputContainer",
                 "name": "inputContainer",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4047,7 +4861,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4072,7 +4892,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.label": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.label",
                 "name": "label",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4102,7 +4928,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4126,7 +4958,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list.list": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list.list",
                 "name": "list",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4156,7 +4994,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4181,7 +5025,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.drop": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.drop",
                 "name": "drop",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4211,7 +5061,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.round": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.round",
                 "name": "round",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4241,7 +5097,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.spinner": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.spinner",
                 "name": "spinner",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4271,7 +5133,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4296,7 +5164,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.radio": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.radio",
                 "name": "radio",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4326,7 +5200,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.range.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.range.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4351,7 +5231,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.range.range": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.range.range",
                 "name": "range",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4381,7 +5267,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.select.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.select.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4406,7 +5298,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.select.select": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.select.select",
                 "name": "select",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4436,7 +5334,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4461,7 +5365,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.switch": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.switch",
                 "name": "switch",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4491,7 +5401,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.table.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.table.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4516,7 +5432,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.table.table": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.table.table",
                 "name": "table",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4546,7 +5468,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tabs.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tabs.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4571,7 +5499,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tabs.tabs": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tabs.tabs",
                 "name": "tabs",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4601,7 +5535,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.classes",
                 "name": "classes",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",
@@ -4626,7 +5566,13 @@
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.tooltip": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.tooltip",
                 "name": "tooltip",
-                "type": "PostcssMixin",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "postcss",

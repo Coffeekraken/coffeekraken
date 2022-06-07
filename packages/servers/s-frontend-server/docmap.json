@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.port": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.port",
                 "name": "port",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "env.env === 'production' ? 8889 : 8888",
                 "description": "Specify the port to use for the frontend server",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
@@ -106,7 +111,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.hostname": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.hostname",
                 "name": "hostname",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "127.0.0.1",
                 "description": "Specify the hostname to use for the frontend server",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
@@ -123,7 +134,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.rootDir": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.rootDir",
                 "name": "rootDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.package.rootDir]",
                 "description": "Specify the root directory to use for the frontend server",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
@@ -140,7 +157,16 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.staticDirs": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.staticDirs",
                 "name": "staticDirs",
-                "type": "Object<String>",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ]
+                },
                 "default": "{ '/dist': '[config.storage.dist.rootDir]' }",
                 "description": "Specify a directory that will be served as static files",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
@@ -157,7 +183,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.viewsDir": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.viewsDir",
                 "name": "viewsDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.src.viewsDir]",
                 "description": "Specify the views directory path",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
@@ -174,7 +206,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.pagesDir": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.pagesDir",
                 "name": "pagesDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.src.pagesDir]",
                 "description": "Specify the views directory path",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
@@ -191,7 +229,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.logLevel": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.logLevel",
                 "name": "logLevel",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "info",
                 "description": "Specify which log level you want for your server.",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
@@ -208,7 +252,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.port": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.port",
                 "name": "port",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "9999",
                 "description": "Specify the port to use for the frontend server cors proxy",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy",
@@ -225,7 +275,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.url": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.url",
                 "name": "url",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "http://127.0.0.1:[config.frontendServer.corsProxy.port]",
                 "description": "Specify the url to call to pass by the server cors proxy",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy",
@@ -242,7 +298,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.targetUrlHeaderName": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.targetUrlHeaderName",
                 "name": "targetUrlHeaderName",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "TargetUrl",
                 "description": "Specify the header name to use to pass the target url to the proxy",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy",
@@ -259,7 +321,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.limit": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy.limit",
                 "name": "limit",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "12mb",
                 "description": "Specify the limit of requests proxy size",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.corsProxy",
@@ -273,12 +341,18 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts"
             },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.bench.description": {
-                "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.bench.description",
+            "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.bench.description": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.bench.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Middleware description",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.bench",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.bench",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -289,13 +363,19 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts"
             },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.bench.path": {
-                "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.bench.path",
+            "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.bench.path": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.bench.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "${__dirname()}/../node/middleware/benchMiddleware",
                 "description": "Specify where to find the \"bench\" middleware",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.bench",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.bench",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -306,13 +386,41 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts"
             },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.request.path": {
-                "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.request.path",
+            "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.request.description": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.request.description",
+                "name": "description",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
+                "description": "Middleware description",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.request",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
+            "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.request.path": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.request.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "${__dirname()}/../node/middleware/requestMiddleware",
                 "description": "Specify where to find the \"request\" middleware",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.request",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.request",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -323,13 +431,18 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts"
             },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.env.description": {
-                "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.env.description",
+            "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.env.description": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.env.description",
                 "name": "description",
-                "type": "String",
-                "default": "${__dirname()}/../node/middleware/benchMiddleware",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Middleware description",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.env",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.env",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -340,13 +453,19 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts"
             },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.env.path": {
-                "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.env.path",
+            "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.env.path": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.env.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "${__dirname()}/../node/middleware/envMiddleware",
                 "description": "Specify where to find the \"env\" middleware",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.env",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.env",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -357,13 +476,18 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts"
             },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.packageJson.description": {
-                "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.packageJson.description",
+            "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.packageJson.description": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.packageJson.description",
                 "name": "description",
-                "type": "String",
-                "default": "${__dirname()}/../node/middleware/benchMiddleware",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Middleware description",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.packageJson",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.packageJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -374,13 +498,19 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts"
             },
-            "@coffeekraken.s-frontend-server.config.frontendServer.modules.packageJson.path": {
-                "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.packageJson.path",
+            "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.packageJson.path": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.packageJson.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "${__dirname()}/../node/middleware/packageJsonMiddleware",
                 "description": "Specify where to find the \"packageJson\" middleware",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.packageJson",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.middlewares.packageJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -394,7 +524,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir.description": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the module description",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir",
                 "since": "2.0.0",
@@ -410,7 +546,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir.path": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "${__dirname()}/../node/modules/publicDir/publicDir",
                 "description": "Specify where to find the \"publicDir\" module",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.publicDir",
@@ -427,7 +569,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap.description": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the module description",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap",
                 "since": "2.0.0",
@@ -443,7 +591,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap.path": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "${__dirname()}/../node/modules/dynamic/dynamic",
                 "description": "Specify where to find the \"dynamic\" module",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap",
@@ -460,7 +614,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.redirect.description": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.redirect.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the module description",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.redirect",
                 "since": "2.0.0",
@@ -476,7 +636,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.redirect.path": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.redirect.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "${__dirname()}/../node/modules/redirect/redirect",
                 "description": "Specify where to find the \"redirect\" module",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.redirect",
@@ -493,7 +659,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.config.description": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.config.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the module description",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.config",
                 "since": "2.0.0",
@@ -509,7 +681,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.config.path": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.config.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "${__dirname()}/../node/modules/config/config",
                 "description": "Specify where to find the \"config\" module",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.config",
@@ -526,7 +704,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.frontspec.description": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.frontspec.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the module description",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.frontspec",
                 "since": "2.0.0",
@@ -542,7 +726,13 @@
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.frontspec.path": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.frontspec.path",
                 "name": "path",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "${__dirname()}/../node/modules/frontspec/frontspec",
                 "description": "Specify where to find the \"frontspec\" module",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.frontspec",
@@ -559,7 +749,13 @@
                     "description": {
                         "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap.description",
                         "name": "description",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Specify the module description",
                         "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap",
                         "since": "2.0.0",
@@ -572,7 +768,13 @@
                     "path": {
                         "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap.path",
                         "name": "path",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "default": "${__dirname()}/../node/modules/dynamic/dynamic",
                         "description": "Specify where to find the \"dynamic\" module",
                         "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap",
@@ -588,7 +790,13 @@
             "@coffeekraken.s-frontend-server.doc.README": {
                 "id": "@coffeekraken.s-frontend-server.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -617,7 +825,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.express": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.express",
                 "name": "express",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function take care of starting a frontend express based server",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend",
                 "status": "wip",
@@ -640,7 +854,13 @@
             "@coffeekraken.s-frontend-server.s-frontend-server.SFrontendServer": {
                 "id": "@coffeekraken.s-frontend-server.s-frontend-server.SFrontendServer",
                 "name": "SFrontendServer",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "description": "This class represent a frontend server that handle features like documentation, views rendering,\nfrontspec reading middleware, packageJson middleware and more...",
                 "namespace": "@coffeekraken.s-frontend-server.s-frontend-server",
                 "example": [
@@ -662,7 +882,13 @@
                     "constructor": {
                         "id": "b726d20e6a7b725793ce78a74478dfdba9c2fdb48e57024f815089b2368d3432",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -674,7 +900,13 @@
                     "start": {
                         "id": "90a369ad445dc4988778b0ed5dc1b1b8e77be43e21b6255e5611a716939d5bfe",
                         "name": "start",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This function take as parameter an Partial<ISFrontendServerStartParams> object,\nstart a server using these parameters and returns an SPromise instance\nthrough which you can subscribe for events, etc...",
                         "async": "true",
                         "since": "2.0.0",
@@ -687,7 +919,13 @@
                     "adddefaultpages": {
                         "id": "d0d67757786655fd06561ead506abc02ae41e7c14b4ac03831a6647f366e6cd8",
                         "name": "addDefaultPages",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method will add some default pages to your project with the pages configuration in the \"src/pages\" folder.",
                         "async": "true",
                         "since": "2.0.0",
@@ -702,7 +940,13 @@
             "@coffeekraken.s-frontend-server.doc.handlers.Handlers": {
                 "id": "@coffeekraken.s-frontend-server.doc.handlers.Handlers",
                 "name": "Handlers",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -732,7 +976,13 @@
             "@coffeekraken.s-frontend-server.doc.Api": {
                 "id": "@coffeekraken.s-frontend-server.doc.Api",
                 "name": "Api",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -762,7 +1012,13 @@
             "@coffeekraken.s-frontend-server.doc.Markdown": {
                 "id": "@coffeekraken.s-frontend-server.doc.Markdown",
                 "name": "Markdown",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -792,7 +1048,13 @@
             "@coffeekraken.s-frontend-server.doc.Styleguide": {
                 "id": "@coffeekraken.s-frontend-server.doc.Styleguide",
                 "name": "Styleguide",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -822,7 +1084,13 @@
             "@coffeekraken.s-frontend-server.doc.View": {
                 "id": "@coffeekraken.s-frontend-server.doc.View",
                 "name": "View",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -852,7 +1120,13 @@
             "@coffeekraken.s-frontend-server.doc.middlewares.Middlewares": {
                 "id": "@coffeekraken.s-frontend-server.doc.middlewares.Middlewares",
                 "name": "Middlewares",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -882,7 +1156,13 @@
             "@coffeekraken.s-frontend-server.doc.modules.Overview": {
                 "id": "@coffeekraken.s-frontend-server.doc.modules.Overview",
                 "name": "Overview",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -920,7 +1200,13 @@
                     "api": {
                         "id": "@coffeekraken.s-frontend-server.doc.Api",
                         "name": "Api",
-                        "type": "Markdown",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Markdown"
+                                }
+                            ]
+                        },
                         "menu": {
                             "tree": [
                                 "Documentation",
@@ -948,7 +1234,13 @@
             "@coffeekraken.s-frontend-server.doc.Config": {
                 "id": "@coffeekraken.s-frontend-server.doc.Config",
                 "name": "Config",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -978,7 +1270,13 @@
             "@coffeekraken.s-frontend-server.doc.Docmap": {
                 "id": "@coffeekraken.s-frontend-server.doc.Docmap",
                 "name": "Docmap",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -1021,7 +1319,13 @@
             "@coffeekraken.s-frontend-server.doc.Frontspec": {
                 "id": "@coffeekraken.s-frontend-server.doc.Frontspec",
                 "name": "Frontspec",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -1051,7 +1355,13 @@
             "@coffeekraken.s-frontend-server.doc.Root-Files": {
                 "id": "@coffeekraken.s-frontend-server.doc.Root-Files",
                 "name": "Root Files",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation",
@@ -1081,7 +1391,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.doc": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.doc",
                 "name": "doc",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function is responsible of responding to express requests made on the doc pages",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers",
                 "status": "wip",
@@ -1099,7 +1415,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.docMap": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.docMap",
                 "name": "docMap",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function is responsible of responding to express requests made on the docMap url",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers",
                 "status": "wip",
@@ -1117,7 +1439,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.index": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.index",
                 "name": "index",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function is responsible of responding to express requests made on the index pages",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers",
                 "status": "wip",
@@ -1135,7 +1463,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.markdown": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.markdown",
                 "name": "markdown",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function is responsible of responding to express requests made on the doc pages",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers",
                 "status": "wip",
@@ -1153,7 +1487,13 @@
             "@coffeekraken.s-frontend-server.node.interface.SFrontendServerAddDefaultPagesParamsInterface": {
                 "id": "@coffeekraken.s-frontend-server.node.interface.SFrontendServerAddDefaultPagesParamsInterface",
                 "name": "SFrontendServerAddDefaultPagesParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -1199,7 +1539,13 @@
             "@coffeekraken.s-frontend-server.node.interface.SFrontendServerCorsProxyParamsInterface": {
                 "id": "@coffeekraken.s-frontend-server.node.interface.SFrontendServerCorsProxyParamsInterface",
                 "name": "SFrontendServerCorsProxyParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -1244,7 +1590,13 @@
             "@coffeekraken.s-frontend-server.node.interface.SFrontendServerStartParamsInterface": {
                 "id": "@coffeekraken.s-frontend-server.node.interface.SFrontendServerStartParamsInterface",
                 "name": "SFrontendServerStartParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -1269,14 +1621,18 @@
                             "description": "Server port",
                             "type": "Number",
                             "alias": "p",
-                            "default": 8080,
-                            "level": 1
+                            "default": 8080
+                        },
+                        "listen": {
+                            "description": "Specify if you want the server to listen on specified hostname and port for requests or not",
+                            "type": "Boolean",
+                            "alias": "l",
+                            "default": true
                         },
                         "rootDir": {
                             "description": "Server root directory",
                             "type": "String",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server",
-                            "level": 1
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server"
                         },
                         "viewsDir": {
                             "description": "Server views directory",
@@ -1323,7 +1679,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.benchEndMiddleware": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.benchEndMiddleware",
                 "name": "benchEndMiddleware",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "SMall middleware to end the request benchmark",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
                 "status": "beta",
@@ -1347,7 +1709,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.envMiddleware": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.envMiddleware",
                 "name": "envMiddleware",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function describe the middleware that will add the \"env\" property to the ```res.templateData``` object",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
                 "status": "beta",
@@ -1371,7 +1739,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.packageJsonMiddleware": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.packageJsonMiddleware",
                 "name": "packageJsonMiddleware",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function describe the middleware that will fetch the ```package.json``` file at the root of\nyour server directory and add it to the template data sended to the rendered view",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
                 "status": "beta",
@@ -1395,7 +1769,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.requestMiddleware": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.requestMiddleware",
                 "name": "requestMiddleware",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function describe the middleware will fill the templateData.request object with the\nactual express one",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
                 "status": "wip",
@@ -1419,7 +1799,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.resolveExtensionFreePath": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.resolveExtensionFreePath",
                 "name": "resolveExtensionFreePath",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function will try to resolve extension free requests like node modules, etc...",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
                 "status": "wip",
@@ -1440,10 +1826,46 @@
                 "relPath": "src/node/middleware/resolveExtensionFreePath.ts",
                 "children": {}
             },
+            "@coffeekraken.s-frontend-server.node.middleware.viewRendererMiddleware": {
+                "id": "@coffeekraken.s-frontend-server.node.middleware.viewRendererMiddleware",
+                "name": "viewRendererMiddleware",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "description": "This middleware will gives you access down the tree to a \"viewRenerer\" propery on the \"res\" object that you can use to render your views.\nIt's juar an SViewRenderer instance instanciates with all the shared data passed from the server",
+                "namespace": "@coffeekraken.s-frontend-server.node.middleware",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import express from 'express';\nimport viewRendererMiddleware from '@coffeekraken/sugar/server/frontend/middleware/viewRendererMiddleware';\nconst server = express();\nserver.use(viewRendererMiddleware);\nserver.listen(3000);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRendererMiddleware.ts",
+                "extension": "ts",
+                "relPath": "src/node/middleware/viewRendererMiddleware.ts",
+                "children": {}
+            },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages.error": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages.error",
                 "name": "error",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function simply return the 404 page content to send to the user\nwith the passed data object described here:",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages",
                 "status": "wip",
@@ -1467,7 +1889,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.configMiddleware": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.configMiddleware",
                 "name": "configMiddleware",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function describe the middleware that will expose the config and config files add it to the template data sended to the rendered view",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
                 "status": "wip",
@@ -1491,7 +1919,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.docmapMiddleware": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.docmapMiddleware",
                 "name": "docmapMiddleware",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function describe the middleware that will fetch the ```docmap.json``` file at the root of\nyour server directory and add it to the template data sended to the rendered view",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
                 "status": "wip",
@@ -1515,7 +1949,13 @@
             "@coffeekraken.s-frontend-server.node.modules.docmap.dynamicHandler": {
                 "id": "@coffeekraken.s-frontend-server.node.modules.docmap.dynamicHandler",
                 "name": "dynamicHandler",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function is responsible of responding to express requests made on the doc pages",
                 "namespace": "@coffeekraken.s-frontend-server.node.modules.docmap",
                 "status": "wip",
@@ -1533,7 +1973,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.frontspecMiddleware": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.frontspecMiddleware",
                 "name": "frontspecMiddleware",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function describe the middleware that will fetch the ```frontspec.json``` file at the root of\nyour server directory and add it to the template data sended to the rendered view",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
                 "status": "wip",
@@ -1557,7 +2003,13 @@
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.redirect.redirectHandler": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.redirect.redirectHandler",
                 "name": "redirectHandler",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
                 "description": "This function is responsible of responding to express requests made on the  pages",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.redirect",
                 "status": "wip",

@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-bench.doc.README": {
                 "id": "@coffeekraken.s-bench.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,7 +123,13 @@
             "@coffeekraken.s-bench.shared.SBench": {
                 "id": "@coffeekraken.s-bench.shared.SBench",
                 "name": "SBench",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -151,14 +162,26 @@
                     "benchenv": {
                         "id": "5425ea7b97275a1ef8849982413d8f8bdbe28ea869632fe299ee304340ac4255",
                         "name": "benchEnv",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to get the current bench environment\nthe process is running in. The bench environment",
                         "static": "true"
                     },
                     "filter": {
                         "id": "cacf45682e3993d97dcddf47dd4528ee5d295d48adb30faeadaf1a38bf2743ad",
                         "name": "filter",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to activate a list of bench id(s).\nYou can specify \"\" for wildcard",
                         "static": "true",
                         "since": "2.0.0",
@@ -171,7 +194,13 @@
                     "filtered": {
                         "id": "ff9cf7419b22c3e1886bd53af1efcd428626c7b1010e0818e04f5e18f839be29",
                         "name": "filtered",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to get back the list of activated bench(s)",
                         "static": "true",
                         "since": "2.0.0",
@@ -184,7 +213,13 @@
                     "isbenchactive": {
                         "id": "fad422daf2d1e48d207e378372b48fcce395ea995846f96013b41ae8e6096bc9",
                         "name": "isBenchActive",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to check if a particular bench id is active",
                         "static": "true",
                         "since": "2.0.0",
@@ -197,7 +232,13 @@
                     "getbenchinstancebyid": {
                         "id": "e81bdaf6e9fe2f5727fee876731216c5774344fb9a3444c5200c7ed0bd642f90",
                         "name": "getBenchInstanceById",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This static method allows you to get back a current SBench instance by it's id,\nor get back a new instance that you can use directly",
                         "static": "true",
                         "since": "2.0.0",
@@ -210,7 +251,13 @@
                     "start": {
                         "id": "777b9fe936b64d701c334963db757d47f226befe0cd585074215bedd7ba5c468",
                         "name": "start",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to start a new bench \"session\"",
                         "since": "2.0.0",
                         "author": {
@@ -222,7 +269,13 @@
                     "step": {
                         "id": "a307a7f5f26e08f0236cefcc8bbff68bb2e01bc261613598cbc63a29de0c97a4",
                         "name": "step",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to declare a new step in your bench.\nA step is simple a point in your code like \"after compilation\", etc.\nIt will keep track of each steps and display the time it has taken\nfrom the last step.",
                         "since": "2.0.0",
                         "author": {
@@ -234,7 +287,13 @@
                     "end": {
                         "id": "b0661d5010e2cf2461989e330d4870be9da2dcd4a24933d56d7f3955114532b4",
                         "name": "end",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to end a bencvh \"session\"",
                         "since": "2.0.0",
                         "author": {
@@ -246,7 +305,13 @@
                     "log": {
                         "id": "d34a8ed2222cc6708fd966e4a4cf6453dd246c8dc4bb2a6a3abb3e6ada960ad4",
                         "name": "log",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to log the summary if this bench is active",
                         "since": "2.0.0",
                         "author": {
@@ -258,7 +323,13 @@
                     "benchsettings": {
                         "id": "7a2a41cb34a6c8e89e22efbecf19b593608e07673cd03a6a343693ca2194d0e4",
                         "name": "benchSettings",
-                        "type": "ISBenchSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISBenchSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the bench settings",
                         "since": "2.0.0",
                         "author": {
@@ -270,7 +341,13 @@
                     "constructor": {
                         "id": "bb1735b97f3fba675df35746468b8f603c66eda322c124ca0dde9e338924e3e9",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -282,7 +359,13 @@
                     "isactive": {
                         "id": "a2bfc3f9582507e0f5c56520826c61676737768e093fde2931eb43d815d62bd6",
                         "name": "isActive",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to check if the current bench is active or not.",
                         "since": "2.0.0",
                         "author": {
@@ -294,7 +377,13 @@
                     "tostring": {
                         "id": "6c223293a615820244213740345b08f62662f9b6599a6c89a4ae2ccf25969b46",
                         "name": "toString",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to print the bench in string format",
                         "since": "2.0.0",
                         "author": {
@@ -308,7 +397,13 @@
             "@coffeekraken.s-bench.shared.interface.SBenchSettingsInterface": {
                 "id": "@coffeekraken.s-bench.shared.interface.SBenchSettingsInterface",
                 "name": "SBenchSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -322,6 +417,20 @@
                 "description": "This interface represent the SBench settings.",
                 "namespace": "@coffeekraken.s-bench.shared.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SBenchSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "title": {
+                            "description": "Specify a title for your bench that will be used in the log",
+                            "type": "String"
+                        },
+                        "body": {
+                            "description": "Specify a body for your bench that will be used in the log",
+                            "type": "String"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

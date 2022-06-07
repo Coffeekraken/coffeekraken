@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-clipboard-copy-component.doc.README": {
                 "id": "@coffeekraken.s-clipboard-copy-component.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -119,7 +124,13 @@
                 "id": "@coffeekraken.s-clipboard-copy-component.js.SClipboardCopyComponent",
                 "name": "SClipboardCopyComponent",
                 "as": "Clipboard copy",
-                "type": "CustomElement",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -181,7 +192,13 @@
                     "copy": {
                         "id": "eb5dd602e6679ef6f956baf4212635c550fbc42068cfb04c11cae6c755d333ad",
                         "name": "copy",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method allows you to copy some text through the s-clipboard-copy component that will\nupdate itself to display the copy state.",
                         "since": "2.0.0",
                         "author": {
@@ -195,7 +212,13 @@
             "@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface": {
                 "id": "@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface",
                 "name": "SClipboardCopyComponentInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "js",

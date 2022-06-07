@@ -1,6 +1,6 @@
 @extends('coffeekraken.layouts.main', [
 'bodyAttributes' => [
-'id' => $request->path != '/' ? \Sugar\string\idCompliant($request->path) : 'homepage',
+'id' => ($request->path != '/' and $request->path != '') ? \Sugar\string\idCompliant($request->path) : 'homepage',
 's-sugar' => true
 ]
 ])

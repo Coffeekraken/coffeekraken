@@ -31,12 +31,12 @@ if (file_exists($argv[1])) {
 }
 
 // prepare data to pass it to the template engine
-$data = $params->data;
+$data = (object) $params->data;
 
 // shared data file path
 if ($data->_sharedDataFilePath) {
     $sharedData = json_decode(file_get_contents($data->_sharedDataFilePath));
-    $data = array_merge_recursive((array) $sharedData, (array) $data);
+    $data = array_merge((array) $sharedData, (array) $data);
 }
 
 // preparing the paths
@@ -47,6 +47,10 @@ $blade = new BladeOne(
     $params->cacheDir . '/blade',
     BladeOne::MODE_DEBUG
 );
-$res = $blade->run($viewName, (array) $data);
 
-print \Sugar\html\expandPleasantCssClassnames($res);
+try {
+    $res = $blade->run($viewName, (array) $data);
+    print \Sugar\html\expandPleasantCssClassnames($res);
+} catch (Exception $e) {
+    print $e;
+}

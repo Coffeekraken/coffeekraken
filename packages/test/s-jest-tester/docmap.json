@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-jest-tester.config.jestTester.glob": {
                 "id": "@coffeekraken.s-jest-tester.config.jestTester.glob",
                 "name": "glob",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "['** /*.{ts,js}']",
                 "description": "Specify a glob pattern relative to the \"inDir\" to specify files you want to compress",
                 "namespace": "@coffeekraken.s-jest-tester.config.jestTester",
@@ -106,7 +111,13 @@
             "@coffeekraken.s-jest-tester.config.jestTester.inDir": {
                 "id": "@coffeekraken.s-jest-tester.config.jestTester.inDir",
                 "name": "inDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.src.rootDir]",
                 "description": "Specify a directory from where to search for ts and js files to build",
                 "namespace": "@coffeekraken.s-jest-tester.config.jestTester",
@@ -123,7 +134,16 @@
             "@coffeekraken.s-jest-tester.config.jestTester.exclude": {
                 "id": "@coffeekraken.s-jest-tester.config.jestTester.exclude",
                 "name": "exclude",
-                "type": "String[]",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ]
+                },
                 "default": "['** /node_module']",
                 "description": "Specify some glob patterns for files/folders you want to exclude of the build process",
                 "namespace": "@coffeekraken.s-jest-tester.config.jestTester",
@@ -141,7 +161,13 @@
             "@coffeekraken.s-jest-tester.node.SJestTester": {
                 "id": "@coffeekraken.s-jest-tester.node.SJestTester",
                 "name": "SJestTester",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -170,7 +196,13 @@
                     "jesttestersettings": {
                         "id": "76ff6ea908994f399a18ff1d15f70a6f856272542c12c65184458d84668d6b2b",
                         "name": "jestTesterSettings",
-                        "type": "ISJestTesterSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISJestTesterSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the jest tester settings",
                         "since": "2.0.0",
                         "author": {
@@ -182,7 +214,13 @@
                     "constructor": {
                         "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -194,7 +232,13 @@
                     "start": {
                         "id": "b334981e0b8ddf8ecb8e57c082db191aa3c9a0f6c099d33996f21127b76fdaac",
                         "name": "start",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "This method is the internal builder start one.\nIt will be called by the SBuilder class with the final params\nfor the build",
                         "async": "true",
                         "since": "2.0.0",
@@ -209,7 +253,13 @@
             "@coffeekraken.s-jest-tester.node.mono.interface.SJestTesterStartParamsInterface": {
                 "id": "@coffeekraken.s-jest-tester.node.mono.interface.SJestTesterStartParamsInterface",
                 "name": "SJestTesterStartParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -219,6 +269,51 @@
                 "description": "This interface specify the parameters needed to the `sugar jest.start` command.",
                 "namespace": "@coffeekraken.s-jest-tester.node.mono.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SJestTesterStartParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "glob": {
+                            "description": "Sppecify some globs relative to the inDir to find the files you want to build",
+                            "type": "Array<String>",
+                            "default": [
+                                "**/*.ts"
+                            ],
+                            "alias": "g"
+                        },
+                        "inDir": {
+                            "description": "Specify a directory from where to search for ts and js files to build",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/test/s-jest-tester/src",
+                            "alias": "i"
+                        },
+                        "packageRoot": {
+                            "description": "Specify in which package the build is happening",
+                            "type": "String"
+                        },
+                        "watch": {
+                            "description": "Specify if the files have to be build again at each update",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "w"
+                        },
+                        "testInitial": {
+                            "description": "Specify if you want to build the files at start when using the \"watch\" flag",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "t"
+                        },
+                        "exclude": {
+                            "description": "Specify some glob patterns for files/folders you want to exclude of the build process",
+                            "type": "Array<String>",
+                            "default": [
+                                "**/node_modules",
+                                "**/__tests__"
+                            ],
+                            "alias": "e"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

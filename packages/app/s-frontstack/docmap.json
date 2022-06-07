@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.recipes.generic": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.recipes.generic",
                 "name": "generic",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstackRecipeGeneric]",
                 "description": "Specify the default recipe",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.recipes",
@@ -106,7 +111,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.recipes.nextJs": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.recipes.nextJs",
                 "name": "nextJs",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstackRecipeNextJs]",
                 "description": "Specify the next.js recipe",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.recipes",
@@ -123,7 +134,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.recipes.litElement": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.recipes.litElement",
                 "name": "litElement",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstackRecipeLitElement]",
                 "description": "Specify the litElement recipe",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.recipes",
@@ -140,7 +157,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.recipes.feature": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.recipes.feature",
                 "name": "feature",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstackRecipeFeature]",
                 "description": "Specify the feature recipe",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.recipes",
@@ -157,7 +180,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.copy.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.copy.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Frontend server",
                 "description": "Specify the frontend server action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.copy",
@@ -174,7 +203,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.copy.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.copy.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontend server action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.copy",
@@ -191,7 +226,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.copy.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.copy.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontend server action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.copy",
@@ -208,7 +249,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.rename.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.rename.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Frontend server",
                 "description": "Rename a project (folder, package.json, etc...)",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.rename",
@@ -225,7 +272,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.rename.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.rename.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontstack rename action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.rename",
@@ -242,7 +295,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.rename.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.rename.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontstack rename action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.rename",
@@ -259,7 +318,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.initNpm.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.initNpm.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Init npm package",
                 "description": "Init the npm package",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.initNpm",
@@ -276,7 +341,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.initNpm.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.initNpm.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontstack initNpm action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.initNpm",
@@ -293,7 +364,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.initNpm.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.initNpm.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontstack initNpm action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.initNpm",
@@ -310,7 +387,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarJson.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarJson.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Adding sugar.json file",
                 "description": "Add the sugar.json file",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarJson",
@@ -327,7 +410,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarJson.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarJson.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontstack addSugarJson action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarJson",
@@ -344,7 +433,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarJson.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarJson.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontstack addSugarJson action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarJson",
@@ -361,7 +456,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addFrontspecJson.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addFrontspecJson.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Adding sugar.json file",
                 "description": "Add the sugar.json file",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addFrontspecJson",
@@ -378,7 +479,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addFrontspecJson.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addFrontspecJson.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontstack addFrontspecJson action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addFrontspecJson",
@@ -395,7 +502,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addFrontspecJson.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addFrontspecJson.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontstack addFrontspecJson action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addFrontspecJson",
@@ -412,7 +525,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addManifestJson.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addManifestJson.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Adding manifest.json file",
                 "description": "Add the manifest.json file",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addManifestJson",
@@ -429,7 +548,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addManifestJson.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addManifestJson.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontstack addManifestJson action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addManifestJson",
@@ -446,7 +571,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addManifestJson.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addManifestJson.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontstack addManifestJson action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addManifestJson",
@@ -463,7 +594,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.applyDefaultPackageJson.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.applyDefaultPackageJson.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Adding manifest.json file",
                 "description": "Apply the config.package.defaultPackageJson object on the package.json file",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.applyDefaultPackageJson",
@@ -480,7 +617,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.applyDefaultPackageJson.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.applyDefaultPackageJson.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Apply the config.package.defaultPackageJson object on the package.json file",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.applyDefaultPackageJson",
@@ -497,7 +640,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.applyDefaultPackageJson.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.applyDefaultPackageJson.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Apply the config.package.defaultPackageJson object on the package.json file",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.applyDefaultPackageJson",
@@ -514,7 +663,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addFavicon.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addFavicon.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Adding manifest.json file",
                 "description": "Add the manifest.json file",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addFavicon",
@@ -531,7 +686,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addFavicon.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addFavicon.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontstack addFavicon action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addFavicon",
@@ -548,7 +709,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addFavicon.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addFavicon.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontstack addFavicon action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addFavicon",
@@ -565,7 +732,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addDefaultPages.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addDefaultPages.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Adding manifest.json file",
                 "description": "Add the manifest.json file",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addDefaultPages",
@@ -582,7 +755,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addDefaultPages.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addDefaultPages.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontstack addDefaultPages action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addDefaultPages",
@@ -599,7 +778,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addDefaultPages.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addDefaultPages.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontstack addDefaultPages action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addDefaultPages",
@@ -616,7 +801,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarPostcss.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarPostcss.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Adding manifest.json file",
                 "description": "Add the manifest.json file",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarPostcss",
@@ -633,7 +824,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarPostcss.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarPostcss.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontstack addSugarPostcss action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarPostcss",
@@ -650,7 +847,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarPostcss.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarPostcss.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontstack addSugarPostcss action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.addSugarPostcss",
@@ -667,7 +870,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.installDependencies.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.installDependencies.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Install dependencies",
                 "description": "Install dependencies like node_modules and composer if exists",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.installDependencies",
@@ -684,7 +893,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.installDependencies.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.installDependencies.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontstack addManifestJson action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.installDependencies",
@@ -701,7 +916,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.installDependencies.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.installDependencies.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar",
                 "description": "Specify the frontstack addManifestJson action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.installDependencies",
@@ -718,7 +939,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Frontend server",
                 "description": "Specify the frontend server action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer",
@@ -735,7 +962,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the frontend server action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer",
@@ -752,7 +985,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar frontendServer.start [arguments]",
                 "description": "Specify the frontend server action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer",
@@ -769,7 +1008,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.settings.processManager.restart": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.settings.processManager.restart",
                 "name": "restart",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "true",
                 "description": "Specify the frontend server action restart behavior",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.settings.processManager",
@@ -786,7 +1031,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Frontend server",
                 "description": "Specify the cors proxy server action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy",
@@ -803,7 +1054,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the cors proxy server action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy",
@@ -820,7 +1077,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar corsProxy.start [arguments]",
                 "description": "Specify the frontend server action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy",
@@ -837,7 +1100,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.settings.processManager.restart": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.settings.processManager.restart",
                 "name": "restart",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "true",
                 "description": "Specify the frontend server action restart behavior",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.corsProxy.settings.processManager",
@@ -854,7 +1123,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Frontend server",
                 "description": "Specify the postcss build action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild",
@@ -871,7 +1146,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the postcss build action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild",
@@ -888,7 +1169,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar postcss.build [arguments]",
                 "description": "Specify the postcss build action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild",
@@ -905,7 +1192,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.typescriptBuild.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.typescriptBuild.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Frontend server",
                 "description": "Specify the typescriptBuilder build action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.typescriptBuild",
@@ -922,7 +1215,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.typescriptBuild.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.typescriptBuild.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the typescriptBuilder build action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.typescriptBuild",
@@ -939,7 +1238,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.typescriptBuild.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.typescriptBuild.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar typescriptBuilder.build [arguments]",
                 "description": "Specify the typescriptBuilder build action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.typescriptBuild",
@@ -956,7 +1261,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Frontend server",
                 "description": "Specify the images build action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild",
@@ -973,7 +1284,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the images build action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild",
@@ -990,7 +1307,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar images.build [arguments]",
                 "description": "Specify the images build action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild",
@@ -1007,7 +1330,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.vite.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.vite.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Vite development stack",
                 "description": "Specify the vite action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.vite",
@@ -1024,7 +1353,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.vite.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.vite.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the vite action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.vite",
@@ -1041,7 +1376,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.vite.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.vite.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar vite [arguments]",
                 "description": "Specify the vite action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.vite",
@@ -1058,7 +1399,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Vite build stasck",
                 "description": "Specify the vite build action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild",
@@ -1075,7 +1422,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the vite build action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild",
@@ -1092,7 +1445,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar vite.build [arguments]",
                 "description": "Specify the vite build action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild",
@@ -1109,7 +1468,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the doc build action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild",
@@ -1126,7 +1491,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the doc build action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild",
@@ -1143,7 +1514,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.command": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.command",
                 "name": "command",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "sugar docmap.build [arguments]",
                 "description": "Specify the doc build action command",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild",
@@ -1160,7 +1537,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.sitemapBuild.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.sitemapBuild.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the doc build action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.sitemapBuild",
@@ -1177,7 +1560,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.faviconBuild.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.faviconBuild.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the doc build action title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.faviconBuild",
@@ -1194,7 +1583,13 @@
             "@coffeekraken.s-frontstack.config.frontstack.actions.faviconBuild.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstack.actions.faviconBuild.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the favicon build action description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.faviconBuild",
@@ -1211,7 +1606,13 @@
                     "description": {
                         "id": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.description",
                         "name": "description",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "default": "...",
                         "description": "Specify the doc build action description",
                         "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild",
@@ -1225,7 +1626,13 @@
                     "command": {
                         "id": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.command",
                         "name": "command",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "default": "sugar favicon.build [arguments]",
                         "description": "Specify the doc build action command",
                         "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild",
@@ -1241,7 +1648,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "LitElement component",
                 "description": "Specify the recipe title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature",
@@ -1258,7 +1671,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature",
@@ -1275,7 +1694,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.templateDir": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.templateDir",
                 "name": "templateDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "__path.resolve(`${__dirname()}/../templates/feature`)",
                 "description": "Specify the recipe template directory",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature",
@@ -1292,7 +1717,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.defaultStack": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.defaultStack",
                 "name": "defaultStack",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "dev",
                 "description": "Specify the recipe default stack",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature",
@@ -1309,7 +1740,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe dev stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev",
@@ -1326,7 +1763,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev.actions.vite": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev.actions.vite",
                 "name": "vite",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.vite]",
                 "description": "Specify the recipe dev stack vite action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev.actions",
@@ -1343,7 +1786,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe build stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions",
@@ -1360,7 +1809,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild.action": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild.action",
                 "name": "action",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.viteBuild]",
                 "description": "Specify the recipe build stack viteBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild",
@@ -1377,7 +1832,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild.params.lib": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild.params.lib",
                 "name": "lib",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "true",
                 "description": "Specify the recipe build stack viteBuild action lib param",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild.params",
@@ -1395,7 +1856,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Default",
                 "description": "Specify the recipe name",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault",
@@ -1412,7 +1879,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Default s-frontstack recipe",
                 "description": "Specify the recipe description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault",
@@ -1429,7 +1902,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.templateDir": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.templateDir",
                 "name": "templateDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "__path.resolve(`${__dirname()}/../templates/default`)e",
                 "description": "Specify the recipe template directory",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault",
@@ -1446,7 +1925,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.requirements": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.requirements",
                 "name": "requirements",
-                "type": "Object",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ]
+                },
                 "default": "dev",
                 "description": "Specify some requirements for this recipe like commands (npm, composer, etc...)",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault",
@@ -1463,7 +1948,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.defaultStack": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.defaultStack",
                 "name": "defaultStack",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "dev",
                 "description": "Specify the recipe default stack",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault",
@@ -1480,7 +1971,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.init.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.init.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Init a new project with this recipe",
                 "description": "Specify the recipe init stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.init",
@@ -1497,7 +1994,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.createApp": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.createApp",
                 "name": "createApp",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack createApp action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions",
                 "since": "2.0.0",
@@ -1513,7 +2016,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.initNpm": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.initNpm",
                 "name": "initNpm",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack initNpm action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions",
                 "since": "2.0.0",
@@ -1529,7 +2038,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.rename": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.rename",
                 "name": "rename",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack rename action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions",
                 "since": "2.0.0",
@@ -1545,7 +2060,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.addSugarJson": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.addSugarJson",
                 "name": "addSugarJson",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack addSugarJson action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions",
                 "since": "2.0.0",
@@ -1561,7 +2082,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.addFrontspecJson": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.addFrontspecJson",
                 "name": "addFrontspecJson",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack addFrontspecJson action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions",
                 "since": "2.0.0",
@@ -1577,7 +2104,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addDefaultPages": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addDefaultPages",
                 "name": "addDefaultPages",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack addDefaultPages action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions",
                 "since": "2.0.0",
@@ -1593,7 +2126,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.addManifestJson": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.addManifestJson",
                 "name": "addManifestJson",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack addManifestJson action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions",
                 "since": "2.0.0",
@@ -1609,7 +2148,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addSugarPostcss": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addSugarPostcss",
                 "name": "addSugarPostcss",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack addSugarPostcss action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions",
                 "since": "2.0.0",
@@ -1625,7 +2170,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addFavicon": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addFavicon",
                 "name": "addFavicon",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack addFavicon action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions",
                 "since": "2.0.0",
@@ -1641,7 +2192,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.installDependencies": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.installDependencies",
                 "name": "installDependencies",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack installDependencies action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions",
                 "since": "2.0.0",
@@ -1657,7 +2214,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Start the development stack",
                 "description": "Specify the recipe dev stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev",
@@ -1674,7 +2237,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.typescriptBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.typescriptBuild",
                 "name": "typescriptBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.typescriptBuild]",
                 "description": "Specify the recipe dev stack frontendServer action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions",
@@ -1691,7 +2260,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.frontendServer": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.frontendServer",
                 "name": "frontendServer",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.frontendServer]",
                 "description": "Specify the recipe dev stack frontendServer action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions",
@@ -1708,7 +2283,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.corsProxy": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.corsProxy",
                 "name": "corsProxy",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.corsProxy]",
                 "description": "Specify the recipe prod stack corsProxy action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions",
@@ -1725,7 +2306,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.vite": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.vite",
                 "name": "vite",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.vite]",
                 "description": "Specify the recipe dev stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions",
@@ -1742,7 +2329,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe prod stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod",
@@ -1759,7 +2352,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.sharedParams.env": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.sharedParams.env",
                 "name": "env",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "production",
                 "description": "Specify the recipe prod stack env shared param",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.sharedParams",
@@ -1776,7 +2375,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions.frontendServer": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions.frontendServer",
                 "name": "frontendServer",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.frontendServer]",
                 "description": "Specify the recipe prod stack frontendServer action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions",
@@ -1793,7 +2398,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions.corsProxy": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions.corsProxy",
                 "name": "corsProxy",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.corsProxy]",
                 "description": "Specify the recipe prod stack corsProxy action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions",
@@ -1810,7 +2421,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe build stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build",
@@ -1827,7 +2444,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.sharedParams.prod": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.sharedParams.prod",
                 "name": "prod",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "true",
                 "description": "Specify that the build is made for production",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.sharedParams",
@@ -1844,7 +2467,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.postcssBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.postcssBuild",
                 "name": "postcssBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.postcssBuild]",
                 "description": "Specify the recipe build stack postcssBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
@@ -1861,7 +2490,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.viteBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.viteBuild",
                 "name": "viteBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.viteBuild]",
                 "description": "Specify the recipe build stack viteBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
@@ -1878,7 +2513,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.imagesBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.imagesBuild",
                 "name": "imagesBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.imagesBuild]",
                 "description": "Specify the recipe build stack imagesBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
@@ -1895,7 +2536,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.faviconBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.faviconBuild",
                 "name": "faviconBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.faviconBuild]",
                 "description": "Specify the recipe build stack faviconBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
@@ -1912,7 +2559,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.docmapBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.docmapBuild",
                 "name": "docmapBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.docmapBuild]",
                 "description": "Specify the recipe build stack docmapBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
@@ -1929,7 +2582,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.sitemapBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.sitemapBuild",
                 "name": "sitemapBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.sitemapBuild]",
                 "description": "Specify the recipe build stack sitemapBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
@@ -1946,7 +2605,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.copyAssets": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.copyAssets",
                 "name": "copyAssets",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe build stack copyAssets action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
                 "since": "2.0.0",
@@ -1962,7 +2627,13 @@
                     "rename": {
                         "id": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions.rename",
                         "name": "rename",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Specify the recipe init stack applyDefaultPackageJson action",
                         "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.new.actions",
                         "since": "2.0.0",
@@ -1977,7 +2648,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "LitElement component",
                 "description": "Specify the recipe title",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement",
@@ -1994,7 +2671,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement",
@@ -2011,7 +2694,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.templateDir": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.templateDir",
                 "name": "templateDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "__path.resolve(`${__dirname()}/../templates/litElement`)",
                 "description": "Specify the recipe template directory",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement",
@@ -2028,7 +2717,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.defaultStack": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.defaultStack",
                 "name": "defaultStack",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "dev",
                 "description": "Specify the recipe default stack",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement",
@@ -2045,7 +2740,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe dev stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev",
@@ -2062,7 +2763,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev.actions.vite": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev.actions.vite",
                 "name": "vite",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.vite]",
                 "description": "Specify the recipe dev stack vite action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev.actions",
@@ -2079,7 +2786,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe build stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions",
@@ -2096,7 +2809,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild.action": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild.action",
                 "name": "action",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.viteBuild]",
                 "description": "Specify the recipe build stack viteBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild",
@@ -2113,7 +2832,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild.params.lib": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild.params.lib",
                 "name": "lib",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "true",
                 "description": "Specify the recipe build stack viteBuild action lib param",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild.params",
@@ -2131,7 +2856,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.title": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.title",
                 "name": "title",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Default",
                 "description": "Specify the recipe name",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs",
@@ -2148,7 +2879,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Default s-frontstack recipe",
                 "description": "Specify the recipe description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs",
@@ -2165,7 +2902,16 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.requirements": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.requirements",
                 "name": "requirements",
-                "type": "String[]",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ]
+                },
                 "default": "['[config.package.manager]']",
                 "description": "Specify some requirements for this recipe like commands (npm, composer, etc...)",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs",
@@ -2182,7 +2928,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.defaultStack": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.defaultStack",
                 "name": "defaultStack",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "dev",
                 "description": "Specify the recipe default stack",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs",
@@ -2199,7 +2951,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.init.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.init.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Init a new project with this recipe",
                 "description": "Specify the recipe init stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.init",
@@ -2216,7 +2974,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.createApp": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.createApp",
                 "name": "createApp",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack copy action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions",
                 "since": "2.0.0",
@@ -2232,7 +2996,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.rename": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.rename",
                 "name": "rename",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack rename action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions",
                 "since": "2.0.0",
@@ -2248,7 +3018,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addSugarJson": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addSugarJson",
                 "name": "addSugarJson",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack addSugarJson action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions",
                 "since": "2.0.0",
@@ -2264,7 +3040,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addManifestJson": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addManifestJson",
                 "name": "addManifestJson",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "description": "Specify the recipe init stack addManifestJson action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions",
                 "since": "2.0.0",
@@ -2280,7 +3062,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.dev.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.dev.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "Start the development stack",
                 "description": "Specify the recipe dev stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.dev",
@@ -2297,7 +3085,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.dev.actions.frontendServer": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.dev.actions.frontendServer",
                 "name": "frontendServer",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.frontendServer]",
                 "description": "Specify the recipe dev stack frontendServer action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.dev.actions",
@@ -2314,7 +3108,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.dev.actions.vite": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.dev.actions.vite",
                 "name": "vite",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.vite]",
                 "description": "Specify the recipe dev stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.dev.actions",
@@ -2331,7 +3131,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.prod.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.prod.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe prod stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.prod",
@@ -2348,7 +3154,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.prod.sharedParams.env": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.prod.sharedParams.env",
                 "name": "env",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "production",
                 "description": "Specify the recipe prod stack env shared param",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.prod.sharedParams",
@@ -2365,7 +3177,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.prod.actions.frontendServer": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.prod.actions.frontendServer",
                 "name": "frontendServer",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.frontendServer]",
                 "description": "Specify the recipe prod stack frontendServer action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.prod.actions",
@@ -2382,7 +3200,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.description": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.description",
                 "name": "description",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "...",
                 "description": "Specify the recipe build stack description",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build",
@@ -2399,7 +3223,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.sharedParams.prod": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.sharedParams.prod",
                 "name": "prod",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "true",
                 "description": "Specify that the build is made for production",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.sharedParams",
@@ -2416,7 +3246,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.actions.postcssBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.actions.postcssBuild",
                 "name": "postcssBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.postcssBuild]",
                 "description": "Specify the recipe build stack postcssBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.actions",
@@ -2433,7 +3269,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.actions.viteBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.actions.viteBuild",
                 "name": "viteBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.viteBuild]",
                 "description": "Specify the recipe build stack viteBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.actions",
@@ -2450,7 +3292,13 @@
             "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.actions.imagesBuild": {
                 "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.actions.imagesBuild",
                 "name": "imagesBuild",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.frontstack.actions.imagesBuild]",
                 "description": "Specify the recipe build stack imagesBuild action",
                 "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.build.actions",
@@ -2467,7 +3315,13 @@
                     "addsugarpostcss": {
                         "id": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions.addSugarPostcss",
                         "name": "addSugarPostcss",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "description": "Specify the recipe init stack addSugarPostcss action",
                         "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeNextJs.stacks.new.actions",
                         "since": "2.0.0",
@@ -2482,7 +3336,13 @@
             "@coffeekraken.s-frontstack.doc.README": {
                 "id": "@coffeekraken.s-frontstack.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -2511,7 +3371,13 @@
             "@coffeekraken.s-frontstack.node.interface.SFrontstackActionInterface": {
                 "id": "@coffeekraken.s-frontstack.node.interface.SFrontstackActionInterface",
                 "name": "SFrontstackActionInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -2551,7 +3417,13 @@
             "@coffeekraken.s-frontstack.node.interface.SFrontstackListParamsInterface": {
                 "id": "@coffeekraken.s-frontstack.node.interface.SFrontstackListParamsInterface",
                 "name": "SFrontstackListParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -2584,7 +3456,13 @@
             "@coffeekraken.s-frontstack.node.interface.SFrontstackNewParamsInterface": {
                 "id": "@coffeekraken.s-frontstack.node.interface.SFrontstackNewParamsInterface",
                 "name": "SFrontstackNewParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -2613,7 +3491,13 @@
             "@coffeekraken.s-frontstack.node.interface.SFrontstackRecipeParamsInterface": {
                 "id": "@coffeekraken.s-frontstack.node.interface.SFrontstackRecipeParamsInterface",
                 "name": "SFrontstackRecipeParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -2662,7 +3546,13 @@
             "@coffeekraken.s-frontstack.node.actions.interface.SFrontstackCopyActionParamsInterface": {
                 "id": "@coffeekraken.s-frontstack.node.actions.interface.SFrontstackCopyActionParamsInterface",
                 "name": "SFrontstackCopyActionParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",

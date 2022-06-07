@@ -13,7 +13,7 @@
                 <div class="sidemenu-main">
 
                     <h5 class="s-typo:h5 s-mbe:20">
-                        Coffeekraken {{ $coco }}
+                        Coffeekraken
                     </h5>
 
                     @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp

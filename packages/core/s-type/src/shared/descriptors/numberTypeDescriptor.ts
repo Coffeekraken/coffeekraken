@@ -29,6 +29,8 @@ const descriptor: ISTypeDescriptor = {
     is: (value: any) => typeof value === 'number',
     cast: (value: any) => {
         if (typeof value !== 'string') {
+            console.log('vv', value, typeof value);
+
             return new Error(
                 `Sorry but only strings can be casted to numbers...`,
             );

@@ -2,4 +2,4 @@
         <i class="s-icon:list-ul s-tc:accent"></i>&nbsp;&nbsp;Interface
     </h4>
 
-    @include('.doc.interfaceDefinition', ['interface' => $interface])
+    @include('.doc.propsDefinition', ['definition' => $interface->definition])

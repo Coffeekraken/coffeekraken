@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -89,7 +88,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.input": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.input",
                 "name": "input",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.src.publicDir]/sitemap.xml",
                 "description": "Specify the input sitemap file to use for building your static website",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
@@ -106,7 +111,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.outDir": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.outDir",
                 "name": "outDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.package.rootDir]/static",
                 "description": "Specify the outDir folder path to save your builded website",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
@@ -123,7 +134,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.host": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.host",
                 "name": "host",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "http://[config.frontendServer.hostname]:[config.frontendServer.port]",
                 "description": "Specify the host on which to make requests to",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
@@ -140,7 +157,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.failAfter": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.failAfter",
                 "name": "failAfter",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "-1",
                 "description": "Specify the number of failures after which the build is considered as rejected. -1 to disable this feature",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
@@ -157,7 +180,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.requestTimeout": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.requestTimeout",
                 "name": "requestTimeout",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "5000",
                 "description": "Specify after how many ms a request has to be considered as failed",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
@@ -174,7 +203,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.requestRetry": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.requestRetry",
                 "name": "requestRetry",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "5",
                 "description": "Specify the number of retry to do by request before considering it as failed",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
@@ -191,7 +226,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.requestRetryTimeout": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.requestRetryTimeout",
                 "name": "requestRetryTimeout",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ]
+                },
                 "default": "1000",
                 "description": "Specify how many long the builder has to wait between tries",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
@@ -208,7 +249,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.clean": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.clean",
                 "name": "clean",
-                "type": "Boolean",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ]
+                },
                 "default": "false",
                 "description": "Specify if you want to clean the past builds before rebuilding. THis would do the same as setting the \"incremental\" option to false",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
@@ -225,7 +272,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.incremental": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.incremental",
                 "name": "incremental",
-                "type": "Boolean",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ]
+                },
                 "default": "true",
                 "description": "Specify if you want to use incremental build",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
@@ -242,7 +295,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.from": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.from",
                 "name": "from",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.staticBuilder.host]/docmap.json",
                 "description": "Specify the directory/file/url from which to get the asset to copy",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap",
@@ -259,7 +318,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.to": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.to",
                 "name": "to",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.staticBuilder.outDir]/docmap.json",
                 "description": "Specify the directory where you want to paste the asset(s)",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap",
@@ -276,7 +341,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.public.from": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.public.from",
                 "name": "from",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.src.publicDir]",
                 "description": "Specify the directory/file/url from which to get the asset to copy",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.public",
@@ -293,7 +364,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.public.glob": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.public.glob",
                 "name": "glob",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "** /*",
                 "description": "Specify the directory/file/url from which to get the asset to copy",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.public",
@@ -310,7 +387,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.from": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.from",
                 "name": "from",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.storage.dist.rootDir]",
                 "description": "Specify the directory/file to copy",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist",
@@ -327,7 +410,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.glob": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.glob",
                 "name": "glob",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "** /*",
                 "description": "Specify the directory/file/url from which to get the asset to copy",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist",
@@ -344,7 +433,13 @@
             "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.to": {
                 "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.to",
                 "name": "to",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ]
+                },
                 "default": "[config.staticBuilder.outDir]/dist",
                 "description": "Specify the directory where you want to paste the asset(s)",
                 "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist",
@@ -361,7 +456,13 @@
                     "to": {
                         "id": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.to",
                         "name": "to",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ]
+                        },
                         "default": "[config.staticBuilder.outDir]",
                         "description": "Specify the directory where you want to paste the asset(s)",
                         "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap",
@@ -377,7 +478,13 @@
             "@coffeekraken.s-static-builder.doc.README": {
                 "id": "@coffeekraken.s-static-builder.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -406,7 +513,13 @@
             "@coffeekraken.s-static-builder.node.SStaticBuilder": {
                 "id": "@coffeekraken.s-static-builder.node.SStaticBuilder",
                 "name": "SStaticBuilder",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -435,7 +548,13 @@
                     "staticbuildersettings": {
                         "id": "328a35cde769720b5d1a4e2aecae8c5822c562956c2d89278d420b085a8fee57",
                         "name": "staticBuilderSettings",
-                        "type": "ISStaticBuilderSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISStaticBuilderSettings"
+                                }
+                            ]
+                        },
                         "description": "Access the postcss builder settings",
                         "since": "2.0.0",
                         "author": {
@@ -447,7 +566,13 @@
                     "constructor": {
                         "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -461,7 +586,13 @@
             "@coffeekraken.s-static-builder.node.interface.SStaticBuilderBuildParamsInterface": {
                 "id": "@coffeekraken.s-static-builder.node.interface.SStaticBuilderBuildParamsInterface",
                 "name": "SStaticBuilderBuildParamsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -493,6 +624,12 @@
                             "type": "String",
                             "alias": "h",
                             "default": "http://127.0.0.1:8080"
+                        },
+                        "useFrontendServer": {
+                            "description": "Specify if the server is an SFrontendServer one so we can bypass the http requests and make use of the `server.request` method to speed things up",
+                            "type": "Boolean",
+                            "alias": "f",
+                            "default": false
                         },
                         "clean": {
                             "description": "Specify if you want to clean the past builds before rebuilding. THis would do the same as setting the \"incremental\" option to false",
@@ -577,7 +714,13 @@
             "@coffeekraken.s-static-builder.node.interface.SStaticBuilderSettingsInterface": {
                 "id": "@coffeekraken.s-static-builder.node.interface.SStaticBuilderSettingsInterface",
                 "name": "SStaticBuilderSettingsInterface",
-                "type": ".                      Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
                 "platform": [
                     {
                         "name": "node",

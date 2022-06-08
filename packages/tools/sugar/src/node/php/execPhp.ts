@@ -62,21 +62,26 @@ export default function execPhp(
         // quicker with execSync than spawnSync
         let result;
 
-        try {
-            result = __childProcess.execSync(
-                `php ${scriptPath} "${paramsFilePath ?? paramsStr}"`,
-            );
-        } catch (e) {
-            return reject(e);
-        }
+        result = __childProcess.exec(
+            `php ${scriptPath} "${paramsFilePath ?? paramsStr}"`,
+            (error, stdout, stderr) => {
+                if (paramsFilePath) {
+                    try {
+                        // __fs.unlinkSync(paramsFilePath);
+                    } catch (e) {}
+                }
 
-        if (paramsFilePath) {
-            try {
-                __fs.unlinkSync(paramsFilePath);
-            } catch (e) {}
-        }
-
-        // resolve(`php ${scriptPath} "${paramsFilePath ?? paramsStr}"`);
-        resolve(result.toString?.() ?? result);
+                if (error) {
+                    return reject(
+                        [
+                            stdout.split('\n').slice(-10).join('\n'),
+                            error,
+                            stderr,
+                        ].join('\n'),
+                    );
+                }
+                resolve(stdout);
+            },
+        );
     });
 }

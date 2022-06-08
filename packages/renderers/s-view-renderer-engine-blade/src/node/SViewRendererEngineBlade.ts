@@ -9,6 +9,7 @@ import __SViewRendererBladeEngineSettingsInterface from './interface/SViewRender
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __SBench from '@coffeekraken/s-bench';
+import __SLog from '@coffeekraken/s-log';
 
 /**
  * @name            SViewRendererEngineBlade
@@ -73,32 +74,56 @@ export default class SViewRendererEngineBlade {
                 // pass the shared data file path through the data
                 data._sharedDataFilePath = sharedDataFilePath;
 
-                resolve(
-                    __execPhp(
-                        __path.resolve(
-                            __packageRoot(__dirname()),
-                            'src/php/compile.php',
-                        ),
-                        {
-                            rootDirs: __unique([
-                                ...viewRendererSettings.rootDirs,
-                            ]),
-                            viewDotPath,
-                            data,
-                            cacheDir: viewRendererSettings.cacheDir,
-                        },
-                        {
-                            paramsThroughFile: true,
-                        },
+                const resPro = __execPhp(
+                    __path.resolve(
+                        __packageRoot(__dirname()),
+                        'src/php/compile.php',
                     ),
+                    {
+                        rootDirs: __unique([...viewRendererSettings.rootDirs]),
+                        viewDotPath,
+                        data,
+                        cacheDir: viewRendererSettings.cacheDir,
+                    },
+                    {
+                        paramsThroughFile: true,
+                    },
                 );
 
-                __SBench.step(
-                    'SViewRendererEngineBlade.render',
-                    `afterRender.${viewPath}`,
-                );
+                resPro.then(
+                    (res) => {
+                        resolve({
+                            value: res,
+                        });
 
-                __SBench.end('SViewRendererEngineBlade.render').log();
+                        // if (res.match(//))
+
+                        __SBench.step(
+                            'SViewRendererEngineBlade.render',
+                            `afterRender.${viewPath}`,
+                        );
+
+                        __SBench.end('SViewRendererEngineBlade.render').log();
+                    },
+                    (e) => {
+                        // @TODO            make the 'log' event displayed on the terminal
+                        emit('log', {
+                            type: __SLog.TYPE_ERROR,
+                            value: e,
+                        });
+
+                        resolve({
+                            error: e,
+                        });
+
+                        __SBench.step(
+                            'SViewRendererEngineBlade.render',
+                            `afterRender.${viewPath}`,
+                        );
+
+                        __SBench.end('SViewRendererEngineBlade.render').log();
+                    },
+                );
             },
             {
                 eventEmitter: {

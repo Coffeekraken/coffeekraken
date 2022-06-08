@@ -1,7 +1,7 @@
 import { define } from '@coffeekraken/s-filtrable-input-component';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 
-export default function () {
+(() => {
     define({
         items: async () => {
             await __wait(1000);
@@ -36,4 +36,4 @@ export default function () {
             }
         },
     }, 'my-cool-filtrable-input');
-}
+})();

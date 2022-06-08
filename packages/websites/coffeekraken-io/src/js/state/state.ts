@@ -7,6 +7,7 @@ export function getState(): any {
     const state = JSON.parse(
         window.localStorage.getItem('coffeekrakenio') ?? '{}',
     );
+    console.log('___S', state);
     return state;
 }
 
@@ -29,5 +30,6 @@ export async function loadDocmap(): Promise<any> {
     const promise = request.send();
     _docmapPromise = promise;
     _docmap = (await promise).data;
+
     return _docmap;
 }

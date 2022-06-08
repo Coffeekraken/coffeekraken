@@ -88,6 +88,7 @@ export interface ISStaticBuilderBuildParams {
     input: string;
     outDir: string;
     host: string;
+    fromErrors: boolean;
     useFrontendServer: boolean;
     clean: boolean;
     incremental: boolean;
@@ -162,6 +163,13 @@ export default class SStaticBuilder extends __SBuilder {
 
                 // create the temp build directory
                 const cacheBuildDir = `${__packageCacheDir()}/s-static-builder/build`;
+
+                const errorFilePath = `${params.outDir}/errors.json`;
+
+                let errors: any[] = [];
+                if (__fs.existsSync(errorFilePath)) {
+                    errors = __readJsonSync(errorFilePath);
+                }
 
                 // init incremental cache
                 let incrementalCache = {};
@@ -244,11 +252,27 @@ export default class SStaticBuilder extends __SBuilder {
                 // parsing xml
                 let xml = await parseStringPromise(xmlStr);
 
+                // override input xml if want to build from listed errors
+                if (params.fromErrors) {
+                    const errorsList = __readJsonSync(errorFilePath);
+                    xml = {
+                        urlset: {
+                            url: [],
+                        },
+                    };
+                    errorsList.forEach((urlLoc) => {
+                        xml.urlset.url.push({
+                            loc: urlLoc,
+                        });
+                    });
+                }
+
                 // xml = {
                 //     urlset: {
                 //         url: [
                 //             {
-                //                 loc: '/',
+                //                 loc:
+                //                     '/api/@coffeekraken.sugar.js.feature.smoothScroll',
                 //             },
                 //         ],
                 //     },
@@ -271,12 +295,16 @@ export default class SStaticBuilder extends __SBuilder {
                 // loop on each urls to get his content
                 for (let i = 0; i < xml.urlset.url.length; i++) {
                     const url = xml.urlset.url[i],
-                        urlIntegrity = url.integrity?.[0],
-                        urlLoc = url.loc?.[0],
-                        urlLastMod = url.lastmod?.[0];
+                        urlIntegrity = Array.isArray(url.integrity)
+                            ? url.integrity[0]
+                            : url.integrity,
+                        urlLoc = Array.isArray(url.loc) ? url.loc[0] : url.loc,
+                        urlLastMod = Array.isArray(url.lastmod)
+                            ? url.lastmod[0]
+                            : url.lastmod;
 
                     // generating the output path for the current file
-                    const outPath = `${params.outDir}/${
+                    let outPath = `${params.outDir}/${
                             urlLoc === '/' ? 'index' : urlLoc
                         }.html`.replace(/\/{2,20}/gm, '/'),
                         cacheOutPath = `${cacheBuildDir}/${
@@ -345,55 +373,72 @@ export default class SStaticBuilder extends __SBuilder {
                         }
 
                         if (params.useFrontendServer) {
-                            // emit('log', {
-                            //     type: __SLog.TYPE_INFO,
-                            //     value: `<yellow>[build]</yellow> Page `,
-                            // });
-                            // logsCount++;
-
-                            res = await pipe(frontendServer.request(urlLoc));
-
-                            // emit('log', {
-                            //     type: __SLog.TYPE_INFO,
-                            //     value: `<green>[build]</green> Page "<cyan>${urlLoc}</cyan>" generated <green>successfully</green> in <yellow>${
-                            //         genDuration.end().formatedDuration
-                            //     }</yellow>`,
-                            // });
-                            // logsCount++;
+                            const reqPromise = frontendServer.request(
+                                urlLoc,
+                                {},
+                            );
+                            res = await reqPromise;
                         } else {
                             const request = new __SRequest({
                                 url: `${params.host}${urlLoc}`,
                                 timeout: params.requestTimeout,
                             });
 
-                            res = await request.send().catch((e) => {
-                                emit('log', {
-                                    // clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
-                                    type: __SLog.TYPE_INFO,
-                                    value: `<red>[error]</red> The url "<cyan>${urlLoc}</cyan>" cannot be reached...`,
-                                });
-                                tries++;
+                            res = await request.send();
 
-                                // if (tries >= params.requestRetry) {
-                                //     logsCount = 0;
-                                //     failsCount++;
-                                //     failedUrls.push(urlLoc);
+                            // .catch((e) => {
+                            //     emit('log', {
+                            //         // clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
+                            //         type: __SLog.TYPE_INFO,
+                            //         value: `<red>[error]</red> The url "<cyan>${urlLoc}</cyan>" cannot be reached...`,
+                            //     });
+                            //     logsCount++;
+                            //     tries++;
 
-                                //     __writeFileSync(
-                                //         `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
-                                //         failedUrls.join('\n'),
-                                //     );
+                            //     // if (tries >= params.requestRetry) {
+                            //     //     logsCount = 0;
+                            //     //     failsCount++;
+                            //     //     failedUrls.push(urlLoc);
 
-                                //     if (
-                                //         params.failAfter !== -1 &&
-                                //         failsCount >= params.failAfter
-                                //     ) {
-                                //         throw new Error(
-                                //             `<red>[error]</red> The static builder has reached the available issues which is set using the "<yellow>failAfter</yellow>" param that is set to <magenta>${params.failAfter}</magenta>`,
-                                //         );
-                                //     }
-                                // }
-                            });
+                            //     //     __writeFileSync(
+                            //     //         `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
+                            //     //         failedUrls.join('\n'),
+                            //     //     );
+
+                            //     //     if (
+                            //     //         params.failAfter !== -1 &&
+                            //     //         failsCount >= params.failAfter
+                            //     //     ) {
+                            //     //         throw new Error(
+                            //     //             `<red>[error]</red> The static builder has reached the available issues which is set using the "<yellow>failAfter</yellow>" param that is set to <magenta>${params.failAfter}</magenta>`,
+                            //     //         );
+                            //     //     }
+                            //     // }
+                            // });
+                        }
+                    }
+
+                    try {
+                        const json = JSON.parse(res.data);
+                        outPath = outPath.replace(/\.html$/, '.json');
+                        if (!errors.includes(urlLoc)) {
+                            errors.push(urlLoc);
+                        }
+
+                        emit('log', {
+                            type: __SLog.TYPE_ERROR,
+                            value: `<red>[error]</red> Something goes wrong while rendering the "<cyan>${urlLoc}</cyan>" url. Check out the "<magenta>${
+                                urlLoc === '/' ? 'index' : urlLoc
+                            }.json</magenta>" file for more infos...`,
+                        });
+                        logsCount++;
+
+                        __writeJsonSync(errorFilePath, errors);
+                    } catch (e) {
+                        // remove the item from the list if rendered correctly
+                        if (params.fromErrors) {
+                            errors = errors.filter((e) => e !== urlLoc);
+                            __writeJsonSync(errorFilePath, errors);
                         }
                     }
 
@@ -413,6 +458,7 @@ export default class SStaticBuilder extends __SBuilder {
                         // });
                         // logsCount++;
                         // @ts-ignore
+
                         __writeFileSync(cacheOutPath, res.data);
                         __writeFileSync(outPath, res.data);
 

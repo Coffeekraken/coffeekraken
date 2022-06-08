@@ -78,7 +78,8 @@ __sFiltrableInputDefine(
                                         &nbsp;
                                         <span class="s-badge s-color:main"
                                             >${unsafeHTML(
-                                                item.type ?? '',
+                                                item.type?.types?.[0].type ??
+                                                    '',
                                             )}</span
                                         >
                                     </div>
@@ -269,8 +270,6 @@ export default class CKSearch extends __SLitComponent {
 
         this.addEventListener('s-filtrable-input.select', (e) => {
             const { item, $elm } = e.detail;
-
-            console.log(e);
 
             if (item.type === 'category' || item.type === 'package') {
                 this._$input.value = item.value + ' ';

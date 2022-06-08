@@ -28,6 +28,8 @@ import __childProcess from 'child_process';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface';
 import __replaceCommandTokens from './replaceCommandTokens';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 
 import __parseSemverString from '@coffeekraken/sugar/shared/semver/parseSemverString';
 
@@ -99,10 +101,25 @@ export default class SSugarCli {
         endpoints: {},
     };
     static _availableInteractiveCli: Record<string, any> = {};
+    static _lockFilePath: string;
 
     static async getAvailableCli() {
         const cli = await SSugarCli.init();
         return cli._availableCli;
+    }
+
+    static isLocked() {
+        try {
+            const processId = parseInt(
+                __fs.readFileSync(this._lockFilePath).toString(),
+            );
+            if (processId !== process.pid) {
+                return true;
+            }
+            return false;
+        } catch (e) {
+            return false;
+        }
     }
 
     /**
@@ -144,14 +161,27 @@ export default class SSugarCli {
         // console.log(__SSugarConfig.get('frontendServer.public'));
         // return;
 
+        // check the "sugar.lock" file in the tmp folder
+        this._lockFilePath = `${__SSugarConfig.get(
+            'storage.package.tmpDir',
+        )}/sugar.lock`;
+        if (!__fs.existsSync(this._lockFilePath)) {
+            __writeFileSync(this._lockFilePath, `${process.pid}`);
+            __onProcessExit(() => {
+                if (!this.isLocked()) {
+                    __fsExtra.emptyDirSync(
+                        __SSugarConfig.get('storage.package.tmpDir'),
+                    );
+                }
+            });
+        }
+
         // hook base console functions
         this._proxyConsole();
 
         __SBench.step('sugar.cli', 'afterLoadConfig');
 
         __SBench.step('sugar.cli', 'beforeClearTmpDir');
-        // clean som folders like tmp, etc...
-        __fsExtra.emptyDirSync(__SSugarConfig.get('storage.package.tmpDir'));
         __SBench.step('sugar.cli', 'afterClearTmpDir');
 
         // init stdio and event emitter

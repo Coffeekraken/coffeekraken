@@ -112,13 +112,7 @@ export default class SPageTransitionFeature extends __SFeature {
 
             // @ts-ignore
             if (
-                $target.tagName === 'A' && 
-                $target.hasAttribute('href') &&
-                // @ts-ignore
-                !$target.getAttribute('href').match(/^https?:\/\//) &&
-                // @ts-ignore
-                !$target.getAttribute('href').match(/^#/) &&
-                !$target.hasAttribute('target')
+               this._isEligibleLink($target)
             ) {
                 e.preventDefault();
                 this.transitionTo(
@@ -127,7 +121,7 @@ export default class SPageTransitionFeature extends __SFeature {
                 ).catch((e) => {});
             } else {
                 const $upHrefElm = __querySelectorUp($target, 'a[href]');
-                if ($upHrefElm) {
+                if ($upHrefElm && this._isEligibleLink($upHrefElm)) {
                     e.preventDefault();
                     this.transitionTo(
                         <string>$upHrefElm.getAttribute('href'),
@@ -138,6 +132,14 @@ export default class SPageTransitionFeature extends __SFeature {
         });
     }
     mount() {}
+    _isEligibleLink($link: HTMLElement): boolean {
+        return ($link.tagName === 'A' && $link.hasAttribute('href') &&
+                // @ts-ignore
+            !$link.getAttribute('href').match(/^https?:\/\//) &&
+            // @ts-ignore
+            !$link.getAttribute('href').match(/^#/) &&
+            !$link.hasAttribute('target'));
+    }
     transitionTo(url: string, $source): Promise<void> {
         return new Promise(async (resolve, reject) => {
 

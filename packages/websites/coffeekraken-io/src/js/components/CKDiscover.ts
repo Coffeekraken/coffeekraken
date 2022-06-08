@@ -5,9 +5,24 @@ import { html } from 'lit';
 import { loadDocmap } from '../state/state';
 import __filterObject from '@coffeekraken/sugar/shared/object/filter';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-
+import __SInterface from '@coffeekraken/s-interface';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
+
+class SCKDiscoverPropsInterface extends __SInterface {
+    static get _definition() {
+        return {
+            platform: {
+                type: 'String',
+            },
+        };
+    }
+}
+
 export default class CKDiscover extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.createProperties({}, SCKDiscoverPropsInterface);
+    }
+
     constructor() {
         super({
             litComponent: {
@@ -18,6 +33,7 @@ export default class CKDiscover extends __SLitComponent {
 
     _docmap;
     item;
+    timeout;
 
     async firstUpdated() {
         this._docmap = await loadDocmap();
@@ -25,23 +41,28 @@ export default class CKDiscover extends __SLitComponent {
     }
 
     async grabItem() {
-        this.item = undefined;
-        this.requestUpdate();
-
-        await __wait();
+        // this.item = undefined;
+        // this.timeout = undefined;
+        // this.requestUpdate();
 
         const newMap = __filterObject(this._docmap.map, (key, item) => {
             if (!item.platform) return false;
+            if (!item.example?.[0]?.code) return false;
             if (item.platform[0].name !== this.props.platform) return false;
-            if (!item.example) return false;
             return true;
         });
+
         const mapCount = Object.keys(newMap).length;
         const mapKeys = Object.keys(newMap);
         const itemIdx = Math.floor(Math.random() * mapCount);
 
         this.item = newMap[mapKeys[itemIdx]];
         this.requestUpdate();
+
+        this.timeout = setTimeout(() => {
+            this.timeout = undefined;
+            this.requestUpdate();
+        }, 200);
     }
 
     render() {
@@ -72,7 +93,7 @@ export default class CKDiscover extends __SLitComponent {
                                 `
                               : ''}
                           <span class="s-badge s-color:complementary"
-                              >${this.item.type}</span
+                              >${this.item.type?.types?.[0]?.type}</span
                           >
                           <br />
                           <br />
@@ -82,18 +103,24 @@ export default class CKDiscover extends __SLitComponent {
                           <p class="s-typo:p s-mbe:30">
                               ${this.item.description}
                           </p>
-                          <s-code-example>
-                              <code
-                                  lang="${this.props.platform === 'ts' ||
-                                  this.props.platform === 'node'
-                                      ? 'js'
-                                      : this.props.platform === 'postcss'
-                                      ? 'css'
-                                      : this.props.platform}"
-                              >
-                                  ${this.item.example[0].code}
-                              </code>
-                          </s-code-example>
+                          ${!this.timeout
+                              ? html`
+                                    <s-code-example>
+                                        <code
+                                            lang="${this.props.platform ===
+                                                'ts' ||
+                                            this.props.platform === 'node'
+                                                ? 'js'
+                                                : this.props.platform ===
+                                                  'postcss'
+                                                ? 'css'
+                                                : this.props.platform}"
+                                        >
+                                            ${this.item.example[0].code}
+                                        </code>
+                                    </s-code-example>
+                                `
+                              : ''}
                           <div
                               class="s-until:sibling:mounted s-code-example-loader"
                           >

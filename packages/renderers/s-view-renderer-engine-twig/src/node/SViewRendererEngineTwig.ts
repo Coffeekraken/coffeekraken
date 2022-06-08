@@ -9,6 +9,7 @@ import __SViewRendererTwigEngineSettingsInterface from './interface/SViewRendere
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+import __SLog from '@coffeekraken/s-log';
 
 /**
  * @name            SViewRendererEngineTwig
@@ -42,7 +43,7 @@ export default class SViewRendererEngineTwig {
         viewRendererSettings: ISViewRendererSettings,
     ) {
         return new __SPromise(
-            ({ resolve, reject, emit }) => {
+            async ({ resolve, reject, emit }) => {
                 if (!__fs.existsSync(viewPath)) {
                     return reject(
                         `It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`,
@@ -62,25 +63,40 @@ export default class SViewRendererEngineTwig {
                 // pass the shared data file path through the data
                 data._sharedDataFilePath = sharedDataFilePath;
 
-                resolve(
-                    __execPhp(
-                        __path.resolve(
-                            __packageRoot(__dirname()),
-                            'src/php/compile.php',
-                        ),
-                        {
-                            rootDirs: __unique([
-                                ...viewRendererSettings.rootDirs,
-                            ]),
-                            viewPath,
-                            data,
-                            cacheDir: viewRendererSettings.cacheDir,
-                        },
-                        {
-                            paramsThroughFile: true,
-                        },
+                const resPro = __execPhp(
+                    __path.resolve(
+                        __packageRoot(__dirname()),
+                        'src/php/compile.php',
                     ),
+                    {
+                        rootDirs: __unique([...viewRendererSettings.rootDirs]),
+                        viewPath,
+                        data,
+                        cacheDir: viewRendererSettings.cacheDir,
+                    },
+                    {
+                        paramsThroughFile: true,
+                    },
                 );
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: 'ehheineij',
+                });
+
+                resPro.catch((e) => {
+                    // @TODO            make the 'log' event displayed on the terminal
+                    console.log(e, {
+                        viewPath,
+                        data,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_ERROR,
+                        value: e,
+                    });
+                });
+                const res = await resPro;
+                resolve(res);
             },
             {
                 eventEmitter: {

@@ -42,15 +42,12 @@ if ($data->_sharedDataFilePath) {
 // preparing the paths
 $viewName = str_replace('.blade.php', '', $params->viewDotPath);
 
+// print $params->cacheDir;
+
 $blade = new BladeOne(
     $params->rootDirs,
-    $params->cacheDir . '/blade',
-    BladeOne::MODE_DEBUG
+    $params->cacheDir . '/blade'
+    // BladeOne::MODE_DEBUG
 );
-
-try {
-    $res = $blade->run($viewName, (array) $data);
-    print \Sugar\html\expandPleasantCssClassnames($res);
-} catch (Exception $e) {
-    print $e;
-}
+// $blade->setMode(BladeOne::MODE_DEBUG);
+print $blade->run($viewName, (array) $data);

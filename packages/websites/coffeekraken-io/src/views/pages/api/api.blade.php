@@ -20,13 +20,21 @@ if ($firstBlock->status == 'wip') {
 
         <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-            <nav class="sidemenu s-pb:50 @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
+            <nav class="sidemenu @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
 
-                <h5 class="s-typo:h5 s-mbe:30">
-                    API
-                </h5>
+                <div class="sidemenu-sub">
+                    <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
+                </div>
 
-                <api-nav></api-nav>
+                <div class="sidemenu-main">
+
+                    <h5 class="s-typo:h5 s-mbe:30">
+                        API
+                    </h5>
+
+                    <api-nav></api-nav>
+
+                </div>
 
             </nav>
 

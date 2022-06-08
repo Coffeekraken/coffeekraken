@@ -4,7 +4,9 @@
     @if ($isFirst)
         @include('doc.title', ['block' => $block])
     @else
-        @include('doc.sectionTitle', ['block' => $block])
+        @if ($block->name)
+            @include('doc.sectionTitle', ['block' => $block])
+        @endif
     @endif
 
     @if (!$isFirst)
@@ -24,7 +26,7 @@
         @include('doc.import', ['block' => $block])
         @include('doc.install', ['block' => $block])
     @endif
-    @if (!$isStyleguide && $block->type !== 'CssClass')
+    @if (!$isStyleguide && $block->type->types[0]->type !== 'CssClass')
         @include('doc.example', ['block' => $block, 'lines' => 10])
     @endif
     @include('doc.cssClass', ['block' => $block])

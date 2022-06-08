@@ -67,6 +67,7 @@ export class ApiNav extends __SLitComponent {
 
         const res = await request.send();
         const types = [];
+
         res.data.map = __filter(res.data.map, (key, item) => {
             const supportedTypes = [
                 'function',
@@ -80,9 +81,16 @@ export class ApiNav extends __SLitComponent {
                 'feature',
             ];
 
-            if (types.indexOf(item.type) === -1) types.push(item.type);
+            if (!item.type) return false;
 
-            if (supportedTypes.indexOf(item.type?.toLowerCase()) === -1)
+            if (types.indexOf(item.type.types[0].type) === -1)
+                types.push(item.type.types[0].type);
+
+            if (
+                supportedTypes.indexOf(
+                    item.type.types[0]?.type?.toLowerCase(),
+                ) === -1
+            )
                 return false;
             return true;
         });
@@ -214,8 +222,8 @@ export class ApiNav extends __SLitComponent {
     }
 }
 
-export default () => {
+(() => {
     if (!customElements.get('api-nav')) {
         customElements.define('api-nav', ApiNav);
     }
-};
+})();

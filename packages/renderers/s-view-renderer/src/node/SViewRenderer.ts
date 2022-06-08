@@ -172,7 +172,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         data: any = null,
         settings: Partial<ISViewCtorSettings>,
     ) {
-        return new __SPromise(async ({ resolve, reject }) => {
+        return new __SPromise(async ({ resolve, reject, pipe }) => {
             const viewInstance = new SViewRenderer(
                 __deepMerge(
                     {
@@ -181,34 +181,49 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                     settings ?? {},
                 ),
             );
-            let resultObj;
-            try {
-                resultObj = await viewInstance.render(
-                    viewPath,
-                    data,
-                    settings?.viewRenderer ?? {},
-                );
-                resultObj.status = 200;
-                return resolve({
-                    ...resultObj,
-                });
-            } catch (e) {
-                const errorViewInstance = new SViewRenderer({
-                    ...settings,
-                });
-                resultObj = await errorViewInstance.render(
-                    'pages.501',
-                    {
-                        ...data,
-                        error: e,
-                    },
-                    settings?.viewRenderer ?? {},
-                );
-                resultObj.status = 501;
-                return reject({
-                    ...resultObj,
-                });
-            }
+
+            let resPromise;
+
+            console.log('WWW', viewPath);
+
+            resPromise = await viewInstance.render(
+                viewPath,
+                data,
+                settings?.viewRenderer ?? {},
+            );
+
+            console.log('rr', resPromise);
+            pipe(resPromise);
+
+            // resPromise.catch(async (e) => {
+            //     console.log('SOMEHTING', 'va');
+
+            //     const errorViewInstance = new SViewRenderer({
+            //         ...settings,
+            //     });
+
+            //     console.log('ERROR', e);
+
+            //     const errorRes = await pipe(
+            //         errorViewInstance.render(
+            //             'pages.501',
+            //             {
+            //                 ...data,
+            //                 error: e,
+            //             },
+            //             settings?.viewRenderer ?? {},
+            //         ),
+            //     );
+            //     errorRes.status = 501;
+            //     console.log('E', errorRes);
+            //     reject(errorRes);
+            // });
+
+            // resPromise.then((res) => {
+            //     res.status = 200;
+            //     console.log('RES', res);
+            //     resolve(res);
+            // });
         });
     }
 
@@ -555,7 +570,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         data = {},
         settings?: Partial<ISViewRendererSettings>,
     ): Promise<ISViewRendererRenderResult> {
-        return new __SPromise(async ({ resolve, reject }) => {
+        return new __SPromise(async ({ resolve, reject, pipe }) => {
             // ensure all is loaded
             await this._load();
 
@@ -606,28 +621,24 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
             const rendererInstance = new RendererEngineClass(engineSettings);
 
-            const renderPromise = rendererInstance.render(
+            let renderPromise, result, error;
+
+            renderPromise = rendererInstance.render(
                 finalViewPath,
                 Object.assign({}, data),
                 this._sharedDataFilePath,
                 viewRendererSettings,
             );
-            const result = await renderPromise;
-
-            if (renderPromise.isRejected()) {
-                const resObj: Partial<ISViewRendererRenderResult> = {
-                    view: SViewRenderer.getViewMetas(finalViewPath),
-                    ...duration.end(),
-                };
-                return reject(resObj);
-            }
+            pipe(renderPromise);
+            result = await renderPromise;
 
             // resolve the render process
             const resObj: Partial<ISViewRendererRenderResult> = {
                 // engine: this._engineInstance.engineMetas,
                 view: SViewRenderer.getViewMetas(finalViewPath),
                 ...duration.end(),
-                value: result,
+                value: result.value,
+                error: result.error,
             };
             resolve(resObj);
         });

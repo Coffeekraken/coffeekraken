@@ -42,6 +42,13 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
                 alias: 'h',
                 default: __SSugarConfig.get('staticBuilder.host'),
             },
+            fromErrors: {
+                description:
+                    'Specify if you want to build from the listed errors location in the errors.json file',
+                type: 'Boolean',
+                alias: 'e',
+                default: false,
+            },
             useFrontendServer: {
                 description:
                     'Specify if the server is an SFrontendServer one so we can bypass the http requests and make use of the `server.request` method to speed things up',

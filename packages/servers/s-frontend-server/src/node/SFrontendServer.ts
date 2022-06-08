@@ -115,6 +115,16 @@ export default class SFrontendServer extends __SClass {
         this._express = __express();
 
         __runMiddleware(this._express);
+
+        // const originalRunMiddleware = this._express.runMiddleware;
+        // this._express.runMiddleware = (...args) => {
+        //     try {
+        //         console.log('eororor', args);
+        //         originalRunMiddleware(...args);
+        //     } catch (e) {
+        //         console.log('EEEEE');
+        //     }
+        // };
     }
 
     /**
@@ -135,7 +145,7 @@ export default class SFrontendServer extends __SClass {
         );
 
         return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
+            async ({ resolve, reject, emit, pipe, on }) => {
                 // enable compression if prod
                 if (finalParams.prod || __SEnv.is('production')) {
                     this._express.use(__compression());
@@ -264,7 +274,7 @@ export default class SFrontendServer extends __SClass {
                             middlewareObj.settings ?? {},
                         );
 
-                        // register the middleware inside the sails configuration
+                        // register the middleware inside the express configuration
                         // @ts-ignore
                         this._express.use((req, res, next) => {
                             return pipe(middleware(req, res, next));
@@ -399,7 +409,6 @@ export default class SFrontendServer extends __SClass {
     request(url: string) {
         return new __SPromise(({ resolve, reject }) => {
             this._express.runMiddleware(url, (code, body, headers) => {
-                // console.log('RESULT', code, body);
                 resolve({
                     data: body,
                 });
@@ -718,16 +727,15 @@ export default class SFrontendServer extends __SClass {
                             }
                         }
 
-                        return pipe(
-                            handlerFn({
-                                req,
-                                res,
-                                next,
-                                pageConfig,
-                                pageFile,
-                                frontendServerConfig,
-                            }),
-                        );
+                        const handlerPro = handlerFn({
+                            req,
+                            res,
+                            next,
+                            pageConfig,
+                            pageFile,
+                            frontendServerConfig,
+                        });
+                        pipe(handlerPro);
                     });
                 });
 

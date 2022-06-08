@@ -86,7 +86,6 @@ export default class SViewRendererEngineLit {
 
                 setTimeout(async () => {
                     const str = await readableToString2(resultStr);
-                    console.log('S', str);
                     resolve(str);
                 }, 5000);
             },

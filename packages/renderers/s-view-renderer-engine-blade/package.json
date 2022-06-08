@@ -10,6 +10,7 @@
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-log": "^2.0.0",
         "@coffeekraken/s-bench": "^2.0.0",
         "exec-php": "^0.0.5",
         "@coffeekraken/s-promise": "^2.0.0"

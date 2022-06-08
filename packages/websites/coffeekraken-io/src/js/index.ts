@@ -36,14 +36,13 @@ import { define as __CKDocSubNavComponent } from './components/CKDocSubNav/CKDoc
 import __SDashboard from '@coffeekraken/s-dashboard';
 import __STheme from '@coffeekraken/s-theme';
 import __SConductor from '@coffeekraken/s-conductor';
-import __krakenLogo from './generic/krakenLogo';
 
-import __SCssAnimation from '@coffeekraken/s-css-animation';
+// import __SCssAnimation from '@coffeekraken/s-css-animation';
 
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 
 // @ts-ignore
-// const viewsRelated = import.meta.globEager('../views/**/*.ts');
+const viewsRelated = import.meta.globEager('../views/**/*.ts');
 // @ts-ignore
 const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
@@ -80,24 +79,6 @@ __SConductor.setup({
     __CKSearchComponent();
     __CKBlobComponent();
     __CkFallingStarsComponent();
-
-    // views related
-    // for (let [key, value] of Object.entries(viewsRelated)) {
-    //     // @ts-ignore
-    //     if (typeof value.default === 'function') value.default();
-    // }
-    // forDoc related
-    for (let [key, value] of Object.entries(forDocRelated)) {
-        // @ts-ignore
-        if (typeof value.default === 'function') value.default();
-    }
-
-    // const $illustration = document.querySelector(
-    //     '#features-opensource .__illustration',
-    // );
-    // if ($illustration) {
-    //     const player = new __SCssAnimation($illustration);
-    // }
 
     // components
     __CKDiscoverComponent();
@@ -153,6 +134,4 @@ __SConductor.setup({
             },
         },
     });
-
-    // __krakenLogo();
 })();

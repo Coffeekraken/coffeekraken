@@ -17,14 +17,15 @@ export default class CkSettings extends __SLitComponent {
         },
     };
 
+    _theme = __STheme.getCurrentTheme();
+    state = getState();
+
     constructor() {
         super({
             litComponent: {
                 shadowDom: false,
             },
         });
-        this._state = getState();
-        this._theme = __STheme.getCurrentTheme();
     }
 
     async firstUpdated() {
@@ -47,21 +48,17 @@ export default class CkSettings extends __SLitComponent {
         $fontSizeRange.addEventListener('change', (e) => {
             this._theme.set('scale.default', `${e.target.value}`);
         });
-
-        // setTimeout(() => {
-        //     this._theme.set('padding.default', '8rem');
-        // }, 3000);
     }
 
     toggleMode(dark) {
-        this._state.darkMode = dark;
+        this.state.darkMode = dark;
 
         if (dark) {
             this._theme = __STheme.setThemeVariant('dark');
         } else {
             this._theme = __STheme.setThemeVariant('light');
         }
-        setState(this._state);
+        setState(this.state);
     }
     render() {
         return html`
@@ -87,7 +84,7 @@ export default class CkSettings extends __SLitComponent {
                                     class="s-switch s-color:accent"
                                     type="checkbox"
                                     id="theme-switcher"
-                                    ?checked="${this._state.darkMode}"
+                                    ?checked="${this.state.darkMode}"
                                     @change="${(e) => {
                                         this.toggleMode(e.target.checked);
                                     }}"

@@ -7,13 +7,15 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __env from '@coffeekraken/sugar/shared/env/env';
 import __minimatch from 'minimatch';
+import __SClass from '@coffeekraken/s-class';
+
 // import __SBenchSettingsInterface from './interface/SBenchSettingsInterface';
 
 /**
  * @name            SBench
  * @namespace       shared
  * @type            Class
- * @extends         SPromise
+ * @extends         SClass
  * @platform        js
  * @platform        node
  * @status          alpha
@@ -56,7 +58,7 @@ export interface ISBenchStep {
     logs: string[];
 }
 
-export default class SBench extends __SPromise {
+export default class SBench extends __SClass {
     /**
      * @name        _stepsTime
      * @type        ISBenchStep[]

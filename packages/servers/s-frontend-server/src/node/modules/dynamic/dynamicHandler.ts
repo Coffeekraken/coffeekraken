@@ -43,6 +43,12 @@ export default function dynamicHandler({
             );
         }
 
+        const errors = {
+            pageConfig,
+            views: [],
+            layout: undefined,
+        };
+
         // if we refer to a file with an extension, stop here...
         if (req.url.match(/.*\.[a-z]{1,4}$/)) {
             res.status(404);
@@ -103,11 +109,20 @@ export default function dynamicHandler({
             }
 
             // rendering view using data
-            const viewRes = await pipe(res.viewRenderer.render(viewPath, data));
+            const viewResPro = res.viewRenderer.render(viewPath, data);
+            pipe(viewResPro);
+            let viewRes = await viewResPro;
+            if (viewRes.error) {
+                errors.views.push({
+                    viewPath,
+                    data,
+                    error: viewRes.error,
+                });
+            } else {
+                renderedViews.push(viewRes.value);
+            }
 
             __SBench.step(`handlers.dynamic`, `afterViewRendering.${viewPath}`);
-
-            renderedViews.push(viewRes.value);
         }
 
         __SBench.step('handlers.dynamic', 'afterViewsRendering');
@@ -119,21 +134,42 @@ export default function dynamicHandler({
         const layoutData = Object.assign({}, res.templateData ?? {});
         delete layoutData.shared;
 
+        let finalResult;
+
         // rendering view using data
-        const layoutRes = await pipe(
-            res.viewRenderer.render(layoutPath, {
+        try {
+            const layoutPromise = res.viewRenderer.render(layoutPath, {
                 ...layoutData,
                 body: renderedViews.join('\n'),
-            }),
-        );
+            });
+            pipe(layoutPromise);
+            const layoutRes = await layoutPromise;
+
+            if (layoutRes.error) {
+                errors.layout = {
+                    layoutPath,
+                    error: layoutRes.error,
+                };
+            } else {
+                finalResult = layoutRes.value;
+            }
+        } catch (e) {}
+
+        if (errors.views.length || errors.layout) {
+            finalResult = JSON.stringify(errors, null, 4);
+        }
 
         __SBench.step('handlers.dynamic', 'afterLayoutRendering');
 
         __SBench.end('handlers.dynamic').log();
 
         res.status(200);
-        res.type('text/html');
-        res.send(layoutRes.value);
-        return resolve(layoutRes.value);
+        res.type(
+            errors.views.length || errors.layout
+                ? 'application/json'
+                : 'text/html',
+        );
+        res.send(finalResult);
+        return resolve(finalResult);
     });
 }

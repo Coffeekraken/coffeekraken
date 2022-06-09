@@ -1,6 +1,6 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SDocblock from '@coffeekraken/s-docblock';
-import __SDocMap from '@coffeekraken/s-docmap';
+import __SDocmap from '@coffeekraken/s-docmap';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
@@ -20,7 +20,7 @@ export default function docmapApiData({ req, res, pageConfig }) {
 
         __SBench.step('data.docmapApiData', 'beforeDocmapRead');
 
-        const docmap = new __SDocMap();
+        const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
         const docObj = docmapJson.map[req.params.namespace];
 

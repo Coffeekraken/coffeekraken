@@ -65,11 +65,11 @@ export default function execPhp(
         result = __childProcess.exec(
             `php ${scriptPath} "${paramsFilePath ?? paramsStr}"`,
             (error, stdout, stderr) => {
-                if (paramsFilePath) {
-                    try {
-                        // __fs.unlinkSync(paramsFilePath);
-                    } catch (e) {}
-                }
+                // if (paramsFilePath) {
+                //     try {
+                //         // __fs.unlinkSync(paramsFilePath);
+                //     } catch (e) {}
+                // }
 
                 if (error) {
                     return reject(

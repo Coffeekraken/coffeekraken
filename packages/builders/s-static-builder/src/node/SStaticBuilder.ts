@@ -272,23 +272,34 @@ export default class SStaticBuilder extends __SBuilder {
                 //         url: [
                 //             {
                 //                 loc:
-                //                     '/api/@coffeekraken.sugar.js.feature.smoothScroll',
+                //                     '/api/@coffeekraken.sugar.shared.module.isSystem',
                 //             },
                 //         ],
                 //     },
                 // };
 
-                let failsCount = 0,
-                    failedUrls: string[] = [],
-                    leftDuration = 0,
+                let leftDuration = 0,
                     currentDuration = 0;
 
                 let logsCount = 0;
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[build]</yellow> Scraping pages using the sitemap.xml...`,
-                });
+                if (params.fromErrors) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[build]</yellow> Scraping pages using the <cyan>${__path.relative(
+                            __packageRoot(),
+                            errorFilePath,
+                        )}</cyan>...`,
+                    });
+                } else {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[build]</yellow> Scraping pages using the <cyan>${__path.relative(
+                            __packageRoot(),
+                            params.input,
+                        )}</cyan>...`,
+                    });
+                }
 
                 let genDuration;
 
@@ -318,7 +329,7 @@ export default class SStaticBuilder extends __SBuilder {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> Reaching the url "<cyan>${urlLoc}</cyan>"...`,
                     });
-                    logsCount = 1;
+                    logsCount = 0;
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
@@ -385,45 +396,22 @@ export default class SStaticBuilder extends __SBuilder {
                             });
 
                             res = await request.send();
-
-                            // .catch((e) => {
-                            //     emit('log', {
-                            //         // clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
-                            //         type: __SLog.TYPE_INFO,
-                            //         value: `<red>[error]</red> The url "<cyan>${urlLoc}</cyan>" cannot be reached...`,
-                            //     });
-                            //     logsCount++;
-                            //     tries++;
-
-                            //     // if (tries >= params.requestRetry) {
-                            //     //     logsCount = 0;
-                            //     //     failsCount++;
-                            //     //     failedUrls.push(urlLoc);
-
-                            //     //     __writeFileSync(
-                            //     //         `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
-                            //     //         failedUrls.join('\n'),
-                            //     //     );
-
-                            //     //     if (
-                            //     //         params.failAfter !== -1 &&
-                            //     //         failsCount >= params.failAfter
-                            //     //     ) {
-                            //     //         throw new Error(
-                            //     //             `<red>[error]</red> The static builder has reached the available issues which is set using the "<yellow>failAfter</yellow>" param that is set to <magenta>${params.failAfter}</magenta>`,
-                            //     //         );
-                            //     //     }
-                            //     // }
-                            // });
                         }
                     }
 
+                    let isErrors = typeof res.data !== 'string',
+                        jsonErrors = res.data;
                     try {
-                        const json = JSON.parse(res.data);
-                        outPath = outPath.replace(/\.html$/, '.json');
+                        jsonErrors = JSON.parse(res.data);
+                        isErrors = true;
+                    } catch (e) {}
+
+                    if (isErrors) {
                         if (!errors.includes(urlLoc)) {
                             errors.push(urlLoc);
                         }
+
+                        outPath = outPath.replace(/\.html$/, '.json');
 
                         emit('log', {
                             type: __SLog.TYPE_ERROR,
@@ -433,13 +421,17 @@ export default class SStaticBuilder extends __SBuilder {
                         });
                         logsCount++;
 
+                        __writeJsonSync(outPath, jsonErrors);
                         __writeJsonSync(errorFilePath, errors);
-                    } catch (e) {
+                    } else {
                         // remove the item from the list if rendered correctly
-                        if (params.fromErrors) {
-                            errors = errors.filter((e) => e !== urlLoc);
-                            __writeJsonSync(errorFilePath, errors);
-                        }
+                        errors = errors.filter((e) => e !== urlLoc);
+                        try {
+                            __fs.unlinkSync(
+                                outPath.replace(/\.html$/, '.json'),
+                            );
+                        } catch (e) {}
+                        __writeJsonSync(errorFilePath, errors);
                     }
 
                     const end = Date.now();
@@ -450,15 +442,7 @@ export default class SStaticBuilder extends __SBuilder {
                         currentDuration;
 
                     // @ts-ignore
-                    if (res?.data) {
-                        // saving file
-                        // emit('log', {
-                        //     type: __SLog.TYPE_INFO,
-                        //     value: `<green>[build]</green> Saving the page from url "<cyan>${urlLoc}</cyan>"...`,
-                        // });
-                        // logsCount++;
-                        // @ts-ignore
-
+                    if (!isErrors && res?.data) {
                         __writeFileSync(cacheOutPath, res.data);
                         __writeFileSync(outPath, res.data);
 

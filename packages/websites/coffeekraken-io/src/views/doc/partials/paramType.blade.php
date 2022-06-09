@@ -1,9 +1,28 @@
+@php
+ if (!$typeOfToString) {
+    $typeOfToString = function($of) {
+        $types = [];
+        foreach ($of as $type) {
+            if ($type->value) {
+                array_push($types, $type->value);
+            } else {
+                array_push($types, $type->type);
+            }
+        }
+        return implode('|', $types);
+    };
+ }
+@endphp
+
 @if (count($type->types) > 0)
     
     <div class="s-dropdown-container" tabindex="-1">
 
         <div class="s-typo:bold s-p:30 s-tc:info">
-            {{ $type->types[0]->type }}@if ($type->types[0]->of and count($type->types[0]->of))<span class="s-tc:accent">&lt;{{ implode('|', $type->types[0]->of) }}&gt;</span>@endif
+            {{ $type->types[0]->type }}
+            @if ($type->types[0]->of and count($type->types[0]->of))
+                <span class="s-tc:accent">&lt;{{ $typeOfToString($type->types[0]->of) }}&gt;</span>
+            @endif
             @if (count($type->types) > 1)
                 <i class="s-icon:arrow-down"></i>
             @endif

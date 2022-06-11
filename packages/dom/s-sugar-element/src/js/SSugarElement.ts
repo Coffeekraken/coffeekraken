@@ -7,7 +7,7 @@ export interface ISActivateFeatureProps {}
  * @name            SActivateFeature
  * @namespace       js
  * @type            Class
- * @interface       ./interface/SSugarElementInterface.js
+ * @interface       ./interface/SSugarElementInterface.ts
  * @platform        js
  * @status          beta
  *

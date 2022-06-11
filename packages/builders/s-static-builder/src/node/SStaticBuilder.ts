@@ -215,11 +215,10 @@ export default class SStaticBuilder extends __SBuilder {
                         value: `<yellow>[build]</yellow> Cleaning the static builder internal cache (incremental, etc...))`,
                     });
 
+                    // reset errors
+                    errors = [];
+
                     try {
-                        // failed url file
-                        __removeSync(
-                            `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
-                        );
                         // remove the existing static directory
                         __removeSync(params.outDir);
                         // remove the cache build dir
@@ -378,34 +377,56 @@ export default class SStaticBuilder extends __SBuilder {
                     let res,
                         tries = 0;
 
-                    while (!res && tries < params.requestRetry) {
+                    function castResponse(res) {
+                        let json;
+                        if (!res.data) {
+                            return {
+                                status: 404,
+                            };
+                        }
+                        try {
+                            json = JSON.parse(res.data);
+                            return json;
+                        } catch (e) {
+                            return res.data;
+                        }
+                    }
+
+                    while (
+                        typeof res !== 'string' &&
+                        tries < params.requestRetry
+                    ) {
+                        if (res && res.status === 404) {
+                            break;
+                        }
                         if (tries > 0) {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<yellow>[build]</yellow> Retry the url <cyan>${urlLoc}</cyan> for the <magenta>${tries}</magenta> time${
+                                    tries > 1 ? 's' : ''
+                                }...`,
+                            });
+                            logsCount++;
                             await __wait(params.requestRetryTimeout);
                         }
+                        tries++;
 
                         if (params.useFrontendServer) {
                             const reqPromise = frontendServer.request(
                                 urlLoc,
                                 {},
                             );
-                            res = await reqPromise;
+                            res = castResponse(await reqPromise);
                         } else {
                             const request = new __SRequest({
                                 url: `${params.host}${urlLoc}`,
                                 timeout: params.requestTimeout,
                             });
-
-                            res = await request.send();
+                            res = castResponse(await request.send());
                         }
                     }
 
-                    let isErrors = typeof res.data !== 'string',
-                        jsonErrors = res.data;
-                    try {
-                        jsonErrors = JSON.parse(res.data);
-                        isErrors = true;
-                    } catch (e) {}
-
+                    let isErrors = typeof res !== 'string';
                     if (isErrors) {
                         if (!errors.includes(urlLoc)) {
                             errors.push(urlLoc);
@@ -421,7 +442,7 @@ export default class SStaticBuilder extends __SBuilder {
                         });
                         logsCount++;
 
-                        __writeJsonSync(outPath, jsonErrors);
+                        __writeJsonSync(outPath, res);
                         __writeJsonSync(errorFilePath, errors);
                     } else {
                         // remove the item from the list if rendered correctly
@@ -442,9 +463,9 @@ export default class SStaticBuilder extends __SBuilder {
                         currentDuration;
 
                     // @ts-ignore
-                    if (!isErrors && res?.data) {
-                        __writeFileSync(cacheOutPath, res.data);
-                        __writeFileSync(outPath, res.data);
+                    if (!isErrors) {
+                        __writeFileSync(cacheOutPath, res);
+                        __writeFileSync(outPath, res);
 
                         // saving the integrity
                         if (urlIntegrity) {

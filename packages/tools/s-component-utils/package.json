@@ -1,28 +1,28 @@
 {
-    "name": "@coffeekraken/s-component-utils",
-    "version": "2.0.0",
-    "description": "",
-    "type": "module",
-    "homepage": "https://coffeekraken.io",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "MIT",
-    "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0",
-        "@coffeekraken/s-promise": "^2.0.0",
-        "@coffeekraken/s-conductor": "^2.0.0",
-        "@coffeekraken/s-class": "^2.0.0",
-        "@coffeekraken/s-theme": "^2.0.0"
-    },
-    "main": "./dist/pkg/cjs/js/exports.js",
-    "module": "./dist/pkg/esm/js/exports.js",
-    "exports": {
-        ".": {
-            "require": "./dist/pkg/cjs/js/exports.js",
-            "import": "./dist/pkg/esm/js/exports.js"
-        }
+  "name": "@coffeekraken/s-component-utils",
+  "version": "2.0.0",
+  "description": "",
+  "type": "module",
+  "homepage": "https://coffeekraken.io",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-interface": "^2.0.0",
+    "@coffeekraken/sugar": "^2.0.0",
+    "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/s-conductor": "^2.0.0",
+    "@coffeekraken/s-class": "^2.0.0",
+    "@coffeekraken/s-theme": "^2.0.0"
+  },
+  "main": "dist/pkg/cjs/js/exports.js",
+  "module": "dist/pkg/esm/js/exports.js",
+  "exports": {
+    ".": {
+      "require": "./dist/pkg/cjs/js/exports.js",
+      "import": "./dist/pkg/esm/js/exports.js"
     }
+  }
 }

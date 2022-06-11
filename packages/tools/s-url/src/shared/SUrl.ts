@@ -8,7 +8,7 @@ import __SClass from '@coffeekraken/s-class';
 
 /**
  * @name            SUrl
- * @namespace           sugar.js.url
+ * @namespace           shated
  * @type            Class
  * @extends       SClass
  * @status              wip

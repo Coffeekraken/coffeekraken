@@ -3,10 +3,7 @@
 
 import __getMethods from '@coffeekraken/sugar/shared/class/getMethods';
 import __SClass from '@coffeekraken/s-class';
-import type {
-    ISEventEmitter,
-    ISEventEmitterSettings,
-} from '@coffeekraken/s-event-emitter';
+import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
@@ -74,7 +71,6 @@ export interface ISPromiseSettings {
     resolveProxies: Function[];
     rejectProxies: Function[];
     [key: string]: any;
-    eventEmitter: Partial<ISEventEmitterSettings>;
 }
 
 export interface ISPromiseCtorSettings {
@@ -116,7 +112,8 @@ export interface ISPromise extends Promise, ISEventEmitter {
     finally(...args: any): ISPromise;
 }
 
-class SPromise extends Promise implements ISPromise, ISEventEmitter {
+class SPromise extends __SClass.extends(Promise)
+    implements ISPromise, ISEventEmitter {
     /**
      * @name        queue
      * @type        Function
@@ -206,7 +203,7 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get promiseSettings(): ISPromiseSettings {
-        return (<any>this).settings;
+        return (<any>this).settings.promise;
     }
 
     /**
@@ -238,70 +235,78 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
             _this,
             resolvers: any = {};
 
-        super((resolve, reject) => {
-            resolvers.resolve = resolve;
-            resolvers.reject = reject;
-            // resolvers.reject = (...args) => {
-            //     reject(...args);
-            // };
-
-            // new Promise((rejectPromiseResolve, rejectPromiseReject) => {
-            //     resolvers.reject = (...args) => {
-            //         rejectPromiseReject(...args);
-            //         if (this.promiseSettings.preventRejectOnThrow) {
-            //             console.log('PROPROPR');
-            //             reject(...args);
-            //         } else {
-            //             console.log('PROPROPR__erwjwxr');
-            //             reject(...args);
-            //         }
-            //     };
-            // });
-        });
-
-        this.settings = __deepMerge(
-            {
-                treatCancelAs: 'resolve',
-                destroyTimeout: 1,
-                preventRejectOnThrow: false,
-                emitLogErrorEventOnThrow: true,
-                resolveAtResolveEvent: false,
-                rejectAtRejectEvent: false,
-                resolveProxies: [],
-                rejectProxies: [],
-            },
-            typeof executorFnOrSettings === 'object'
-                ? executorFnOrSettings
-                : {},
-            settings ?? {},
-        );
-
-        this.eventEmitter = new __SEventEmitter(
-            __deepMerge({
-                metas: {
-                    ...this.metas,
+        super(
+            __deepMerge(
+                {
+                    promise: {
+                        treatCancelAs: 'resolve',
+                        destroyTimeout: 1,
+                        preventRejectOnThrow: true,
+                        emitLogErrorEventOnThrow: true,
+                        resolveAtResolveEvent: false,
+                        rejectAtRejectEvent: false,
+                        resolveProxies: [],
+                        rejectProxies: [],
+                    },
                 },
-                eventEmitter: this.promiseSettings.eventEmitter ?? {},
-            }),
+                typeof executorFnOrSettings === 'object'
+                    ? executorFnOrSettings
+                    : {},
+                settings ?? {},
+            ),
+            (resolve, reject) => {
+                resolvers.resolve = resolve;
+                new Promise((rejectPromiseResolve, rejectPromiseReject) => {
+                    resolvers.reject = (...args) => {
+                        rejectPromiseReject(...args);
+                        if (this.promiseSettings.preventRejectOnThrow) {
+                            resolve(...args);
+                        } else {
+                            reject(...args);
+                        }
+                    };
+                }).catch((e) => {
+                    this.emit('catch', e);
+                });
+            },
         );
 
-        this.on = this.eventEmitter.on.bind(this.eventEmitter);
-        this.off = this.eventEmitter.off.bind(this.eventEmitter);
-        this.emit = this.eventEmitter.emit.bind(this.eventEmitter);
-        this.pipe = this.eventEmitter.pipe.bind(this.eventEmitter);
-        this.pipeErrors = this.eventEmitter.pipeErrors.bind(this.eventEmitter);
-        this.pipeFrom = this.eventEmitter.pipeFrom.bind(this.eventEmitter);
-        this.pipeTo = this.eventEmitter.pipeTo.bind(this.eventEmitter);
-        this.eventEmitterSettings = this.eventEmitter.eventEmitterSettings;
-        this.bind = this.eventEmitter.bind.bind(this);
+        this._eventEmitter = new __SEventEmitter(
+            __deepMerge(
+                {
+                    metas: {
+                        ...this.metas,
+                    },
+                    eventEmitter: {},
+                },
+                this.settings,
+            ),
+        );
+
+        this.expose(this._eventEmitter, {
+            as: 'eventEmitter',
+            props: [
+                'on',
+                'off',
+                'emit',
+                'pipe',
+                'pipeErrors',
+                'pipeFrom',
+                'pipeTo',
+                'eventEmitterSettings',
+            ],
+        });
+        this.bind = this._eventEmitter.bind.bind(this);
 
         this._resolvers = <ISPromiseResolvers>resolvers;
 
-        if ((<ISPromiseCtorSettings>this.settings).destroyTimeout !== -1) {
+        if (
+            (<ISPromiseCtorSettings>this.settings).promise.destroyTimeout !== -1
+        ) {
             this.on('finally', (v, m) => {
                 setTimeout(() => {
                     this.destroy();
-                }, (<ISPromiseCtorSettings>this.settings).destroyTimeout);
+                }, (<ISPromiseCtorSettings>this.settings).promise.destroyTimeout);
             });
         }
 
@@ -317,22 +322,20 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
                 if (func.slice(0, 1) === '_') return;
                 api[func] = this[func].bind(this);
             });
-            executorFn(api);
-
-            // (async () => {
-            //     await __wait(0);
-            //     try {
-            //         await executorFn(api);
-            //     } catch (e) {
-            //         if (this.promiseSettings.emitLogErrorEventOnThrow) {
-            //             this.emit('log', {
-            //                 type: __SLog.TYPE_ERROR,
-            //                 value: e,
-            //             });
-            //         }
-            //         this.reject(e);
-            //     }
-            // })();
+            (async () => {
+                await __wait(0);
+                try {
+                    await executorFn(api);
+                } catch (e) {
+                    if (this.promiseSettings.emitLogErrorEventOnThrow) {
+                        this.emit('log', {
+                            type: __SLog.TYPE_ERROR,
+                            value: e,
+                        });
+                    }
+                    this.reject(e);
+                }
+            })();
         }
 
         if (this.promiseSettings.resolveAtResolveEvent) {
@@ -347,9 +350,7 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
         }
 
         // this.catch((e) => {
-        //     if (!this.promiseSettings.preventRejectOnThrow) {
-        //         // throw new Error(e);
-        //     }
+        //     console.log('____e', e);
         // });
     }
 
@@ -421,9 +422,9 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
         const ar = point.split(',').map((l) => l.trim());
         ar.forEach((a) => {
             if (a === 'resolve') {
-                this.settings.resolveProxies.push(proxy);
+                this.settings.promise.resolveProxies.push(proxy);
             } else if (a === 'reject') {
-                this.settings.rejectProxies.push(proxy);
+                this.settings.promise.rejectProxies.push(proxy);
             }
         });
     }
@@ -557,7 +558,7 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
             arg = await this.eventEmitter.emit(stack, arg);
         }
         // execute proxies
-        for (const proxyFn of this.settings.resolveProxies || []) {
+        for (const proxyFn of this.settings.promise.resolveProxies || []) {
             arg = await proxyFn(arg);
         }
         // resolve the master promise
@@ -565,6 +566,8 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
         // return the stack result
         return arg;
     }
+
+    then<R, E2 = E>(f: (r: T) => R): Promisish<R, E>;
 
     /**
      * @name          reject
@@ -597,23 +600,22 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _reject(arg, stacksOrder = `catch,reject,finally`) {
+    async _reject(arg, stacksOrder = `catch,reject,finally`) {
         if (this._promiseState === 'destroyed') return;
         // update the status
         this._promiseState = 'rejected';
         // exec the wanted stacks
         const stacksOrderArray = stacksOrder.split(',').map((l) => l.trim());
-        // for (let i = 0; i < stacksOrderArray.length; i++) {
-        //     const stack = stacksOrderArray[i];
-        //     arg = await this.eventEmitter.emit(stack, arg);
-        // }
-        // // execute proxies
-        // for (const proxyFn of this.settings.rejectProxies || []) {
-        //     arg = await proxyFn(arg);
-        // }
-
+        for (let i = 0; i < stacksOrderArray.length; i++) {
+            const stack = stacksOrderArray[i];
+            arg = await this.eventEmitter.emit(stack, arg);
+        }
+        // execute proxies
+        for (const proxyFn of this.settings.promise.rejectProxies || []) {
+            arg = await proxyFn(arg);
+        }
         // resolve the master promise
-        return this._resolvers.reject(arg);
+        this._resolvers.reject(arg);
         return arg;
     }
 
@@ -662,7 +664,7 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
                 arg = await this.eventEmitter.emit(stack, arg);
             }
             // resolve the master promise
-            if (this.settings.treatCancelAs === 'reject') {
+            if (this.settings.promise.treatCancelAs === 'reject') {
                 this._resolvers.reject(arg);
             } else {
                 this._resolvers.resolve(arg);
@@ -697,10 +699,10 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    // catch(...args) {
-    //     super.catch(...args);
-    //     return this.on('catch', ...args);
-    // }
+    catch(...args) {
+        super.catch(...args);
+        return this.on('catch', ...args);
+    }
 
     /**
      * @name                finally
@@ -738,7 +740,7 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
      */
     destroy() {
         // destroy the event emitter
-        this.eventEmitter.destroy();
+        this._eventEmitter.destroy();
         // update the status
         this._promiseState = 'destroyed';
     }

@@ -20,7 +20,7 @@ import __cssEasingStrToJsFunction from '@coffeekraken/sugar/js/dom/style/cssEasi
  * @name            SCssAnimation
  * @namespace       js
  * @type            Class
- * @interface       ./interface/SCssAnimationInterface.js
+ * @interface       ./interface/SCssAnimationInterface.ts
  * @platform        js
  * @status          beta
  *

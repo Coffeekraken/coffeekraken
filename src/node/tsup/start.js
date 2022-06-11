@@ -296,10 +296,14 @@ function processPath(path, platform = 'node') {
 }
 
 // js
-const chokidarJs = __chokidar.watch('packages/*/*/src/js/**/*.ts', {
-    // ignoreInitial: true,
-    ignored: ['**/node_modules'],
-});
+const chokidarJs = __chokidar.watch(
+    // 'packages/*/*/src/js/**/*.ts'
+    'packages/*/*/src/js/**/SMochaTesterStartParamsInterface.ts',
+    {
+        // ignoreInitial: true,
+        ignored: ['**/node_modules'],
+    },
+);
 function chokidarJsCallback(path) {
     // processPath(path, 'node');
     processPath(path, 'browser');
@@ -309,7 +313,8 @@ chokidarJs.on('change', chokidarJsCallback);
 
 // node, shared, etc...
 const chokidarNode = __chokidar.watch(
-    'packages/*/*/src/(node|shared|config|views|pages|cli)/**/*.ts',
+    // 'packages/*/*/src/(node|shared|config|views|pages|cli)/**/*.ts',
+    'packages/*/*/src/(node|shared|config|views|pages|cli)/**/SMochaTesterStartParamsInterface.ts',
     {
         // ignoreInitial: true,
         ignored: ['**/node_modules'],

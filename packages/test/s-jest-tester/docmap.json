@@ -320,9 +320,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SJestTesterStartParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SJestTesterStartParamsInterface.js",
+                "filename": "SJestTesterStartParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SJestTesterStartParamsInterface.ts",
                 "children": {}
             }
         }

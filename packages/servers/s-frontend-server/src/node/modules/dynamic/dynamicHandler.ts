@@ -49,12 +49,12 @@ export default function dynamicHandler({
             layout: undefined,
         };
 
-        // if we refer to a file with an extension, stop here...
-        if (req.url.match(/.*\.[a-z]{1,4}$/)) {
-            res.status(404);
-            res.send(null);
-            return resolve();
-        }
+        // // if we refer to a file with an extension, stop here...
+        // if (req.url.match(/.*\.[a-z]{1,4}$/)) {
+        //     res.status(404);
+        //     res.send(null);
+        //     return resolve();
+        // }
 
         __SBench.start('handlers.dynamic');
 

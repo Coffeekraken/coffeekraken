@@ -1,0 +1,24 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "mocha",
+            "description": "Mocha tester related actions",
+            "defaultAction": "start",
+            "actions": {
+                "start": {
+                    "scope": "global",
+                    "description": "Start the tests in the current package",
+                    "interface": "./dist/pkg/esm/node/interface/SMochaTesterStartParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/start.cli.js"
+                }
+            }
+        }
+    ]
+}

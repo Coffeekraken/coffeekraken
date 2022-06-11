@@ -625,6 +625,12 @@
                             "alias": "h",
                             "default": "http://127.0.0.1:8080"
                         },
+                        "fromErrors": {
+                            "description": "Specify if you want to build from the listed errors location in the errors.json file",
+                            "type": "Boolean",
+                            "alias": "e",
+                            "default": false
+                        },
                         "useFrontendServer": {
                             "description": "Specify if the server is an SFrontendServer one so we can bypass the http requests and make use of the `server.request` method to speed things up",
                             "type": "Boolean",

@@ -3,12 +3,6 @@
     "version": "2.0.0",
     "description": "",
     "type": "module",
-    "main": "./src/node/exports.js",
-    "exports": {
-        ".": {
-            "import": "./dist/pkg/esm/node/exports.js"
-        }
-    },
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
@@ -46,5 +40,12 @@
         "serve-static": "^1.14.1",
         "vhost": "^3.0.2"
     },
-    "module": "./dist/pkg/esm/node/exports.js"
+    "main": "./dist/pkg/cjs/node/exports.js",
+    "module": "./dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        }
+    }
 }

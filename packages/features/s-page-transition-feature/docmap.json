@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -120,6 +119,45 @@
                         "code": "<div s-page-transition></div>"
                     }
                 ],
+                "interface": {
+                    "name": "SPageTransitionFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "patchBody": {
+                            "description": "Specify if you want to patch the body tag with the new page body tag",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "scrollTop": {
+                            "description": "Specify if you want to scroll to the top of the updated element after a transition",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "before": {
+                            "description": "Specify a function to run before the transition",
+                            "type": "Function"
+                        },
+                        "after": {
+                            "description": "Specify a function to run after the transition",
+                            "type": "Function"
+                        },
+                        "autoStyle": {
+                            "description": "Specify if you want to automatically add classes like \"s-tc:error\" on the broken links (only the \"a\" tags)",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "injectBrokenLinkIcon": {
+                            "description": "Specify if you want to inject the \"error\" icon on the broken links",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "brokenLinkIcon": {
+                            "description": "Specify the icon you want to inject on the broken links",
+                            "type": "String",
+                            "default": "<i class=\"s-icon:link-broken-solid\" alt=\"Broken link\"></i>"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -150,15 +188,54 @@
                 "description": "This interface represent the attributes of the SPageTransitionFeature",
                 "namespace": "@coffeekraken.s-page-transition-feature.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SPageTransitionFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "patchBody": {
+                            "description": "Specify if you want to patch the body tag with the new page body tag",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "scrollTop": {
+                            "description": "Specify if you want to scroll to the top of the updated element after a transition",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "before": {
+                            "description": "Specify a function to run before the transition",
+                            "type": "Function"
+                        },
+                        "after": {
+                            "description": "Specify a function to run after the transition",
+                            "type": "Function"
+                        },
+                        "autoStyle": {
+                            "description": "Specify if you want to automatically add classes like \"s-tc:error\" on the broken links (only the \"a\" tags)",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "injectBrokenLinkIcon": {
+                            "description": "Specify if you want to inject the \"error\" icon on the broken links",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "brokenLinkIcon": {
+                            "description": "Specify the icon you want to inject on the broken links",
+                            "type": "String",
+                            "default": "<i class=\"s-icon:link-broken-solid\" alt=\"Broken link\"></i>"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SPageTransitionFeatureInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SPageTransitionFeatureInterface.js",
+                "filename": "SPageTransitionFeatureInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SPageTransitionFeatureInterface.ts",
                 "children": {}
             }
         }

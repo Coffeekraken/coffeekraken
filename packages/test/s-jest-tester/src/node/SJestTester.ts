@@ -133,11 +133,17 @@ export default class SJestTester extends __SClass {
                 baseConfig = (await import(jestConfigFilePath)).default;
             }
             const finalConfig = __deepMerge(baseConfig, {
-                preset: 'ts-jest',
+                preset: 'ts-jest/presets/default-esm',
                 globals: {
                     'ts-jest': {
+                        useESM: true,
                         isolatedModules: true,
                     },
+                },
+                // resolver: '<rootDir>/resolver.cjs',
+                extensionsToTreatAsEsm: ['.ts'],
+                moduleNameMapper: {
+                    '^(\\.{1,2}/.*)\\.js$': '$1',
                 },
             });
             // save the config file
@@ -354,9 +360,11 @@ export default class SJestTester extends __SClass {
                     value: `<yellow>[run]</yellow> Running test for "<cyan>${testFilePath}</cyan>" file`,
                 });
 
+                const jestCommand = `node --experimental-vm-modules ${__packageRoot()}/node_modules/jest/bin/jest.js`;
+
                 // run the test
                 const pro = __childProcess.spawn(
-                    `jest --runTestsByPath "${testFilePath}" --config "${configFilePath}"`,
+                    `${jestCommand} --runTestsByPath "${testFilePath}" --config "${configFilePath}"`,
                     [],
                     {
                         stdio: 'inherit',

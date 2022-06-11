@@ -7,7 +7,7 @@ import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInt
  * @name      whenInteract
  * @namespace            js.dom.detect
  * @type      Function
- * @interface       ./interface/WhenInteractSettingsInterface.js
+ * @interface       ./interface/WhenInteractSettingsInterface.ts
  * @async
  * @platform          js
  * @status           beta
@@ -44,8 +44,9 @@ export default function whenInteract(
     settings?: Partial<IWhenInteractSettings>,
 ): Promise<any> {
     return new Promise((resolve, reject) => {
-
-        settings = <IWhenInteractSettings>__WhenInteractSettingsInterface.apply(settings ?? {});
+        settings = <IWhenInteractSettings>(
+            __WhenInteractSettingsInterface.apply(settings ?? {})
+        );
 
         function interacted(interaction) {
             // resolving the promise

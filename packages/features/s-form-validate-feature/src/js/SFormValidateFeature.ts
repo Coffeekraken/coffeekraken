@@ -4,7 +4,7 @@ import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp'
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 // @ts-ignore
-import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js
+import __css from '../css/s-form-validate.css'; // relative to /dist/pkg/esm/js
 import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
 
 /**
@@ -193,7 +193,7 @@ export default class SFormValidateFeature extends __SFeature {
     // @ts-ignore
     constructor(name: string, node: HTMLElement, settings: any) {
         Object.keys(
-            __SComponentUtils.getDefaultProps(name)?.customValidations,
+            __SComponentUtils.getDefaultProps(name)?.customValidations ?? {},
         ).forEach((validationName) => {
             if (__SFormValidateFeatureInterface.definition[validationName])
                 return;

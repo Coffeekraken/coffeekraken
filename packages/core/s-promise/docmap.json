@@ -144,9 +144,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "SPromise.ts",
-                "extension": "ts",
-                "relPath": "src/shared/SPromise.ts",
+                "filename": "SPromise.old.ts",
+                "extension": "old",
+                "relPath": "src/shared/SPromise.old.ts",
                 "children": {
                     "queue": {
                         "id": "ff567a761ffc0e7b41dbf47dc90045ed0d8ff1dac05dcfae4b5cf9fb6fcd5b8b",

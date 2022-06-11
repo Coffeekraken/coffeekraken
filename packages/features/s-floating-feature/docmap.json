@@ -5,7 +5,6 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -120,6 +119,60 @@
                         "code": "<label class=\"s-label\" s-form-validate email>\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"olivier.bossel@coffeekraken.io\" />\n   Email address\n</label>"
                     }
                 ],
+                "interface": {
+                    "name": "SFloatingFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "ref": {
+                            "description": "Specify the reference HTMLElement from which to position the floating one. If not specified, will take the previous element in the DOM",
+                            "type": "String"
+                        },
+                        "placement": {
+                            "description": "Specify the placement of your floating element. By default it will try to be placed as good as possible.",
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "right",
+                                "bottom",
+                                "left",
+                                "top-start",
+                                "top-end",
+                                "right-start",
+                                "right-end",
+                                "bottom-start",
+                                "bottom-end",
+                                "left-start",
+                                "left-end",
+                                "auto"
+                            ],
+                            "default": "top"
+                        },
+                        "shift": {
+                            "description": "Specify a space between the floating element and the viewport side to respect",
+                            "type": "Number",
+                            "default": 10
+                        },
+                        "offset": {
+                            "description": "Specify a space between the floating element and the reference one to respect",
+                            "type": "Number"
+                        },
+                        "arrow": {
+                            "description": "Specify if you want an arrow or not",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "arrowSize": {
+                            "description": "Specify the size of the arrow in px",
+                            "type": "Number",
+                            "default": 15
+                        },
+                        "arrowPadding": {
+                            "description": "Specify the padding of the arrow in px",
+                            "type": "Number",
+                            "default": 10
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -150,15 +203,69 @@
                 "description": "This interface represent the attributes of the SFloatingFeature",
                 "namespace": "@coffeekraken.s-floating-feature.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SFloatingFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "ref": {
+                            "description": "Specify the reference HTMLElement from which to position the floating one. If not specified, will take the previous element in the DOM",
+                            "type": "String"
+                        },
+                        "placement": {
+                            "description": "Specify the placement of your floating element. By default it will try to be placed as good as possible.",
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "right",
+                                "bottom",
+                                "left",
+                                "top-start",
+                                "top-end",
+                                "right-start",
+                                "right-end",
+                                "bottom-start",
+                                "bottom-end",
+                                "left-start",
+                                "left-end",
+                                "auto"
+                            ],
+                            "default": "top"
+                        },
+                        "shift": {
+                            "description": "Specify a space between the floating element and the viewport side to respect",
+                            "type": "Number",
+                            "default": 10
+                        },
+                        "offset": {
+                            "description": "Specify a space between the floating element and the reference one to respect",
+                            "type": "Number"
+                        },
+                        "arrow": {
+                            "description": "Specify if you want an arrow or not",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "arrowSize": {
+                            "description": "Specify the size of the arrow in px",
+                            "type": "Number",
+                            "default": 15
+                        },
+                        "arrowPadding": {
+                            "description": "Specify the padding of the arrow in px",
+                            "type": "Number",
+                            "default": 10
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SFloatingFeatureInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SFloatingFeatureInterface.js",
+                "filename": "SFloatingFeatureInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SFloatingFeatureInterface.ts",
                 "children": {}
             }
         }

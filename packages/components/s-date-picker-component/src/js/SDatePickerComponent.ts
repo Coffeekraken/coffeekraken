@@ -26,7 +26,7 @@ import __themeCss from '../../../../src/css/s-date-picker-theme.css'; // relativ
  * @as                Date Picker
  * @namespace           js
  * @type                CustomElement
- * @interface           ./interface/SDatePickerComponentInterface.js
+ * @interface           ./interface/SDatePickerComponentInterface.ts
  * @menu                Styleguide / Forms              /styleguide/form/s-date-picker
  * @platform            html
  * @status              beta

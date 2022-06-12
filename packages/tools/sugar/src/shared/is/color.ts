@@ -2,7 +2,7 @@
 
 /**
  * @name        isColor
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example 	js
- * import isColor from '@coffeekraken/sugar/js/is/color';
+ * import isColor from '@coffeekraken/sugar/shared/is/color';
  * isColor('red') => true
  * isColor('#fff') => true
  * isColor('hello') => false

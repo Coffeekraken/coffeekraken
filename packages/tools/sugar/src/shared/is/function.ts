@@ -2,7 +2,7 @@
 
 /**
  * @name        isFunction
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isFunction from '@coffeekraken/sugar/js/is/function'
+ * import isFunction from '@coffeekraken/sugar/shared/is/function'
  * if (isFunction(function() {})) {
  *   // do something
  * }

@@ -2,7 +2,7 @@
 
 /**
  * @name        isBoolean
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isBoolean from '@coffeekraken/sugar/js/is/boolean'
+ * import isBoolean from '@coffeekraken/sugar/shared/is/boolean'
  * if (isBoolean(true) {
  *   // do something
  * }

@@ -4,7 +4,7 @@
 
 /**
  * @name                            linux
- * @namespace            js.is
+ * @namespace            shared.is
  * @type                            Function
  * @platform          js
  * @platform          node
@@ -19,7 +19,7 @@
  * @todo      tests
  *
  * @example       js
- * import isLinux from '@coffeekraken/sugar/js/is/linux';
+ * import isLinux from '@coffeekraken/sugar/shared/is/linux';
  * isLinux(); // => true
  *
  * @since         1.0.0

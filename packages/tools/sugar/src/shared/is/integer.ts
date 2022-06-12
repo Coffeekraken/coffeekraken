@@ -2,7 +2,7 @@
 
 /**
  * @name        isInteger
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example 	js
- * import isInteger from '@coffeekraken/sugar/js/is/integer';
+ * import isInteger from '@coffeekraken/sugar/shared/is/integer';
  * isInteger(10) => true
  * isInteger('hello') => false
  *

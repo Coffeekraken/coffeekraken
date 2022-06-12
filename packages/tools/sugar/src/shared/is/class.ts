@@ -4,7 +4,7 @@ import __isClass from 'is-class';
 
 /**
  * @name                      class
- * @namespace            js.is
+ * @namespace            shared.is
  * @type                      Function
  * @platform          js
  * @platform          node
@@ -20,7 +20,7 @@ import __isClass from 'is-class';
  * @todo      tests
  *
  * @example           js
- * import isClass = from '@coffeekraken/sugar/js/is/class';
+ * import isClass = from '@coffeekraken/sugar/shared/is/class';
  * isClass({ hello: 'world'}); // => false
  * const myCoolClass = class Coco{};
  * isClass(myCoolClass); // => true

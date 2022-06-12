@@ -2,7 +2,7 @@
 
 /**
  * @name        isRegexp
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isRegexp from '@coffeekraken/sugar/js/is/regexp'
+ * import isRegexp from '@coffeekraken/sugar/shared/is/regexp'
  * if (isRegexp(/^hello$/g) {
  *   // do something
  * }

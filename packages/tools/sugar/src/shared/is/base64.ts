@@ -2,7 +2,7 @@
 
 /**
  * @name        isBase64
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isBase64 from '@coffeekraken/sugar/js/is/base64'
+ * import isBase64 from '@coffeekraken/sugar/shared/is/base64'
  * if (isBase64(true) {
  *   // do something
  * }
@@ -29,8 +29,7 @@
 function isBase64(value) {
     if (typeof value !== 'string') return false;
     if (value === '' || value.trim() === '') return false;
-    const reg =
-        /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+    const reg = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
     return reg.test(value);
 }
 export default isBase64;

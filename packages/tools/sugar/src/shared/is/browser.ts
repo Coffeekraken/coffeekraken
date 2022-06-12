@@ -2,7 +2,7 @@
 
 /**
  * @name        isBrowser
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -17,7 +17,7 @@
  * @todo      tests
  *
  * @example    js
- * import isBrowser from '@coffeekraken/sugar/js/is/browser'
+ * import isBrowser from '@coffeekraken/sugar/shared/is/browser'
  * if (isBrowser() {
  *   // do something
  * }

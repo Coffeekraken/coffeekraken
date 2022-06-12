@@ -6,6 +6,7 @@ import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 // @ts-ignore
 import __css from '../css/s-form-validate.css'; // relative to /dist/pkg/esm/js
 import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
+import __SValidator from '@coffeekraken/s-validator';
 
 /**
  * @name            SFormValidateFeature
@@ -350,39 +351,48 @@ export default class SFormValidateFeature extends __SFeature {
             }
         });
 
-        // preparing the joi schema
-        let schema = __joi[this._validationType]();
-        let isCustom = false;
-        Object.keys(this.props).forEach((prop) => {
-            if (isCustom) return;
-            // custom validations
-            if (this.props.customValidations[prop]) {
-                isCustom = true;
-                schema = schema.custom(
-                    this.props.customValidations[prop],
-                    prop,
-                );
-            } else {
-                const propValue = this.props[prop];
-                if (propValue === true && typeof schema[prop] === 'function') {
-                    let options = {};
-                    if (prop === 'email' || prop === 'domain') {
-                        options = {
-                            tlds: false,
-                        };
-                    }
-                    schema = schema[prop](options);
-                } else if (typeof schema[prop] === 'function') {
-                    schema = schema[prop](__autoCast(propValue));
-                }
-            }
-        });
-        this._schema = schema;
+        const validator = new __SValidator();
 
-        // set error messages
-        const errorMessages = {};
-        for (let [key, value] of Object.entries(this.props)) {
-        }
+        console.log(
+            validator.validate('2008.12', {
+                integer: true,
+                pattern: '[a-z]{1,5}',
+            }),
+        );
+
+        // preparing the joi schema
+        // let schema = __joi[this._validationType]();
+        // let isCustom = false;
+        // Object.keys(this.props).forEach((prop) => {
+        //     if (isCustom) return;
+        //     // custom validations
+        //     if (this.props.customValidations[prop]) {
+        //         isCustom = true;
+        //         schema = schema.custom(
+        //             this.props.customValidations[prop],
+        //             prop,
+        //         );
+        //     } else {
+        //         const propValue = this.props[prop];
+        //         if (propValue === true && typeof schema[prop] === 'function') {
+        //             let options = {};
+        //             if (prop === 'email' || prop === 'domain') {
+        //                 options = {
+        //                     tlds: false,
+        //                 };
+        //             }
+        //             schema = schema[prop](options);
+        //         } else if (typeof schema[prop] === 'function') {
+        //             schema = schema[prop](__autoCast(propValue));
+        //         }
+        //     }
+        // });
+        // this._schema = schema;
+
+        // // set error messages
+        // const errorMessages = {};
+        // for (let [key, value] of Object.entries(this.props)) {
+        // }
     }
 
     _isValidating = false;
@@ -401,96 +411,95 @@ export default class SFormValidateFeature extends __SFeature {
             this._isValidating = false;
         });
 
-        let schema, value, resultObj;
+        const validator = new __SValidator();
 
-        if (this._$field.type === 'checkbox') {
-            ({ schema, value } = this._validateCheckboxSchema());
-        } else if (this._$field.type === 'range') {
-            ({ schema, value } = this._validateRangeSchema());
-        } else if (this._$field.tagName.toLowerCase() === 'select') {
-            ({ schema, value } = this._validateSelectSchema());
-        } else {
-            schema = this._schema;
-            value = (<HTMLInputElement>this._$field).value;
-        }
+        // let schema, value, resultObj;
 
-        resultObj = schema
-            .error((errors) => {
-                errors.forEach((err) => {
-                    let type = err.code.split('.')[0],
-                        code = err.code.split('.').pop();
+        // if (this._$field.type === 'checkbox') {
+        //     ({ schema, value } = this._validateCheckboxSchema());
+        // } else if (this._$field.type === 'range') {
+        //     ({ schema, value } = this._validateRangeSchema());
+        // } else if (this._$field.tagName.toLowerCase() === 'select') {
+        //     ({ schema, value } = this._validateSelectSchema());
+        // } else {
+        //     schema = this._schema;
+        //     value = (<HTMLInputElement>this._$field).value;
+        // }
 
-                    // remap some codes to html attributes
-                    if (code === 'empty') code = 'required';
+        // resultObj = schema
+        //     .error((errors) => {
+        //         errors.forEach((err) => {
+        //             let type = err.code.split('.')[0],
+        //                 code = err.code.split('.').pop();
 
-                    // if our node has the attribute -message, use this
-                    if (this.node.hasAttribute(`${code}-message`)) {
-                        err.message = this.node.getAttribute(`${code}-message`);
-                    }
+        //             // remap some codes to html attributes
+        //             if (code === 'empty') code = 'required';
 
-                    // check in our custom messages
-                    if (this.props.messages[`${type}.${code}`]) {
-                        err.message = this.props.message[`${type}.${code}`];
-                    } else if (this.props.messages[code]) {
-                        err.message = this.props.messages[code];
-                    }
-                });
-                return errors;
-            })
-            .validate(value, this.props.joiOptions);
+        //             // if our node has the attribute -message, use this
+        //             if (this.node.hasAttribute(`${code}-message`)) {
+        //                 err.message = this.node.getAttribute(`${code}-message`);
+        //             }
 
-        if (event.type === 'reset') {
-            resultObj = {};
-        }
+        //             // check in our custom messages
+        //             if (this.props.messages[`${type}.${code}`]) {
+        //                 err.message = this.props.message[`${type}.${code}`];
+        //             } else if (this.props.messages[code]) {
+        //                 err.message = this.props.messages[code];
+        //             }
+        //         });
+        //         return errors;
+        //     })
+        //     .validate(value, this.props.joiOptions);
 
-        // apply result
-        this._applyResult(resultObj, event);
+        // if (event.type === 'reset') {
+        //     resultObj = {};
+        // }
+
+        // // apply result
+        // this._applyResult(resultObj, event);
     }
 
     _validateCheckboxSchema() {
-        const checkboxesValues = Array.from(
-            this.node.querySelectorAll('input[type="checkbox"]:checked'),
-        ).map(($item) => (<HTMLInputElement>$item).value);
-        let schema = __joi.array();
-        if (this.props.min) {
-            schema = schema.min(this.props.min);
-        }
-        if (this.props.max) {
-            schema = schema.max(this.props.max);
-        }
-        return { schema, value: checkboxesValues };
+        // const checkboxesValues = Array.from(
+        //     this.node.querySelectorAll('input[type="checkbox"]:checked'),
+        // ).map(($item) => (<HTMLInputElement>$item).value);
+        // let schema = __joi.array();
+        // if (this.props.min) {
+        //     schema = schema.min(this.props.min);
+        // }
+        // if (this.props.max) {
+        //     schema = schema.max(this.props.max);
+        // }
+        // return { schema, value: checkboxesValues };
     }
 
     _validateRangeSchema() {
-        const value = parseFloat(this._$field.value);
-        let schema = __joi.number();
-        if (this.props.min) {
-            schema = schema.min(this.props.min);
-        }
-        if (this.props.max) {
-            schema = schema.max(this.props.max);
-        }
-        return { schema, value };
+        // const value = parseFloat(this._$field.value);
+        // let schema = __joi.number();
+        // if (this.props.min) {
+        //     schema = schema.min(this.props.min);
+        // }
+        // if (this.props.max) {
+        //     schema = schema.max(this.props.max);
+        // }
+        // return { schema, value };
     }
 
     _validateSelectSchema() {
-        // min max
-        const selectedItems = Array.from(
-            this._$field.querySelectorAll('option'),
-        )
-            .filter(($item) => (<HTMLOptionElement>$item).selected)
-            .map(($item) => (<HTMLOptionElement>$item).value);
-
-        let schema = __joi.array();
-
-        if (this.props.min) {
-            schema = schema.min(this.props.min);
-        }
-        if (this.props.max) {
-            schema = schema.max(this.props.max);
-        }
-
-        return { schema, value: selectedItems };
+        // // min max
+        // const selectedItems = Array.from(
+        //     this._$field.querySelectorAll('option'),
+        // )
+        //     .filter(($item) => (<HTMLOptionElement>$item).selected)
+        //     .map(($item) => (<HTMLOptionElement>$item).value);
+        // let schema = __joi.array();
+        // if (this.props.min) {
+        //     schema = schema.min(this.props.min);
+        // }
+        // if (this.props.max) {
+        //     schema = schema.max(this.props.max);
+        // }
+        // return { schema, value: selectedItems };
     }
 
     _$error;

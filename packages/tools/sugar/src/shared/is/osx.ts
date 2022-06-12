@@ -4,7 +4,7 @@
 
 /**
  * @name                            osx
- * @namespace            js.is
+ * @namespace            shared.is
  * @type                            Function
  * @platform          js
  * @platform          node
@@ -19,7 +19,7 @@
  * @todo      tests
  *
  * @example       js
- * import isOsx from '@coffeekraken/sugar/js/is/osx';
+ * import isOsx from '@coffeekraken/sugar/shared/is/osx';
  * isOsx(); // => true
  *
  * @since         1.0.0

@@ -2,7 +2,7 @@
 
 /**
  * @name        isYyyymmddDate
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -19,7 +19,7 @@
  * @todo      tests
  *
  * @example    js
- * import isYyyymmddDate from '@coffeekraken/sugar/js/is/yyyymmddDate'
+ * import isYyyymmddDate from '@coffeekraken/sugar/shared/is/yyyymmddDate'
  * if (isYyyymmddDate('2018.12.25')) {
  *     // do something cool
  * }

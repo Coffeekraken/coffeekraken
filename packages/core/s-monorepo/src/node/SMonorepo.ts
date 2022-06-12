@@ -16,7 +16,6 @@ import __path from 'path';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __SPackage from '@coffeekraken/s-package';
 import __SJestTester from '@coffeekraken/s-jest-tester';
-import __SMochaTester from '@coffeekraken/s-mocha-tester';
 
 import __srcDir from '@coffeekraken/sugar/node/path/srcRootDir';
 import __distDir from '@coffeekraken/sugar/node/path/distRootDir';
@@ -396,7 +395,7 @@ export default class SMonorepo extends __SClass {
 
                     // tests
                     if (finalParams.tests) {
-                        const mochaTester = new __SMochaTester();
+                        const mochaTester = new __SJestTester();
                         pipe(
                             mochaTester.start({
                                 inDir,

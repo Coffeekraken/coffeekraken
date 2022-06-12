@@ -1,7 +1,7 @@
 // @ts-nocheck
 /**
  * @name          testEnv
- * @namespace            js.is
+ * @namespace            shared.is
  * @type          Function
  * @platform          js
  * @platform          node
@@ -16,7 +16,7 @@
  * @todo      tests
  *
  * @example       js
- * import isTest from '@coffeekraken/sugar/js/is/testEnv';
+ * import isTest from '@coffeekraken/sugar/shared/is/testEnv';
  * isTest(); // => true
  *
  * @since     2.0.0

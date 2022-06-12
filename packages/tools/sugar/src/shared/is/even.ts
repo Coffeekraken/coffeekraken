@@ -2,7 +2,7 @@
 
 /**
  * @name        isEven
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isEven from '@coffeekraken/sugar/js/is/even'
+ * import isEven from '@coffeekraken/sugar/shared/is/even'
  * isEven(1) // false
  * isEven(2) // true
  *

@@ -4,7 +4,7 @@ import __isGlob from 'is-glob';
 
 /**
  * @name                                      isGlob
- * @namespace            js.is
+ * @namespace            shared.is
  * @type                                      Function
  * @platform          js
  * @platform          node
@@ -20,7 +20,7 @@ import __isGlob from 'is-glob';
  * @todo      tests
  *
  * @example               js
- * import isGlob from '@coffeekraken/sugar/js/is/js';
+ * import isGlob from '@coffeekraken/sugar/shared/is/js';
  * isGlob('something/*.js); // => true
  *
  * @see       https://www.npmjs.com/package/is-glob

@@ -2,7 +2,7 @@
 
 /**
  * @name        isNumber
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example 	js
- * import isNumber from '@coffeekraken/sugar/js/is/number';
+ * import isNumber from '@coffeekraken/sugar/shared/is/number';
  * isNumber(12) => true
  * isNumber(22.3) => true
  * isNumber('20') => false

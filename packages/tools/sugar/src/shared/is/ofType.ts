@@ -4,7 +4,7 @@ import __SType from '@coffeekraken/s-type';
 
 /**
  * @name              ofType
- * @namespace            js.is
+ * @namespace            shared.is
  * @type              Function
  * @platform          js
  * @platform          node
@@ -25,7 +25,7 @@ import __SType from '@coffeekraken/s-type';
  * @todo      tests
  *
  * @example       js
- * import isOfType from '@coffeekraken/sugar/js/is/ofType';
+ * import isOfType from '@coffeekraken/sugar/shared/is/ofType';
  * ifOfType(true, 'Boolean'); // => true
  * isOfType(12, 'String|Number'); // => true
  * isOfType(['hello',true], 'Array<String>'); // => { expected: { type: 'Array<String>' }, received: { type: 'Array<String|Boolean>' }}

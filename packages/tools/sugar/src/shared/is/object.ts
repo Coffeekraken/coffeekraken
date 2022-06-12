@@ -2,7 +2,7 @@
 
 /**
  * @name        isObject
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isObject from '@coffeekraken/sugar/js/is/object'
+ * import isObject from '@coffeekraken/sugar/shared/is/object'
  * if (isObject({}) {
  *   // do something
  * }

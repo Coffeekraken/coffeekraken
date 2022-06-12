@@ -2,7 +2,7 @@
 
 /**
  * @name        isArray
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isArray from '@coffeekraken/sugar/js/is/array'
+ * import isArray from '@coffeekraken/sugar/shared/is/array'
  * if (isArray([]) {
  *   // do something
  * }

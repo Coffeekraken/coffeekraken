@@ -101,7 +101,7 @@ export default class SInterface extends __SClass {
     static _cachedDefinition: ISDescriptorRules;
     static get definition() {
         if (this._cachedDefinition) return this._cachedDefinition;
-        this._cachedDefinition = this._definition;
+        this._cachedDefinition = this._definition ?? {};
         return this._cachedDefinition;
     }
     static set definition(value) {

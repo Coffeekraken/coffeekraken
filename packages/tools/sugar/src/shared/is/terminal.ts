@@ -1,6 +1,6 @@
 /**
  * @name            isTerminal
- * @namespace            js.is
+ * @namespace            shared.is
  * @type            Function
  * @platform          js
  * @platform          node
@@ -11,7 +11,7 @@
  * @return      {Boolean}           true if is in the terminal, false if not
  *
  * @example         js
- * import isTerminal from '@coffeekraken/sugar/js/is/terminal';
+ * import isTerminal from '@coffeekraken/sugar/shared/is/terminal';
  * isTerminal(); // => true
  *
  * @since       2.0.0

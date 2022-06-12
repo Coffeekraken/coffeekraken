@@ -2,7 +2,7 @@
 
 /**
  * @name        isUrl
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example 	js
- * import isUrl from '@coffeekraken/sugar/js/is/url';
+ * import isUrl from '@coffeekraken/sugar/shared/is/url';
  * isUrl('http://google.com') => true
  * isUrl('ftp://web.coco.com:2222') => true
  * isUrl('hello') => false

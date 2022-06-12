@@ -2,7 +2,7 @@
 
 /**
  * @name                      plainObject
- * @namespace            js.is
+ * @namespace            shared.is
  * @type                      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example           js
- * import isPlainObject from '@coffeekraken/sugar/js/is/plainObject';
+ * import isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
  * isPlainObject({ hello: 'world'}); // => true
  *
  * @since       1.0.0

@@ -2,7 +2,7 @@
 
 /**
  * @name        isOdd
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isOdd from '@coffeekraken/sugar/js/is/odd'
+ * import isOdd from '@coffeekraken/sugar/shared/is/odd'
  * isOdd(1) // true
  * isOdd(2) // false
  *

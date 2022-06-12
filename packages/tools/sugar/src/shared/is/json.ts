@@ -2,7 +2,7 @@
 
 /**
  * @name        isJson
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isJson from '@coffeekraken/sugar/js/is/json'
+ * import isJson from '@coffeekraken/sugar/shared/is/json'
  * if (isJson('[{id:10}]')) {
  *   // do something
  * }

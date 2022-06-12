@@ -2,7 +2,7 @@
 
 /**
  * @name        isMap
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isMap from '@coffeekraken/sugar/js/is/map'
+ * import isMap from '@coffeekraken/sugar/shared/is/map'
  * const map = new Map();
  * if (isMap(map) {
  *   // do something

@@ -2,7 +2,7 @@
 
 /**
  * @name                            windows
- * @namespace            js.is
+ * @namespace            shared.is
  * @type                            Function
  * @platform          js
  * @platform          node
@@ -17,7 +17,7 @@
  * @todo      tests
  *
  * @example       js
- * import isOsx from '@coffeekraken/sugar/js/is/windows';
+ * import isOsx from '@coffeekraken/sugar/shared/is/windows';
  * isWindows(); // => true
  *
  * @since       1.0.0

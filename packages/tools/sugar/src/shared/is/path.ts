@@ -20,7 +20,7 @@ import __isValidPath from 'is-valid-path';
  * @todo      tests
  *
  * @example       js
- * import isPath from '@coffeekraken/sugar/js/is/path';
+ * import isPath from '@coffeekraken/sugar/shared/is/path';
  * isPath('hello/world'); // => true
  *
  * @since           1.0.0

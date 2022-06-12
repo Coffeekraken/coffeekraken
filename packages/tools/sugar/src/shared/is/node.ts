@@ -2,7 +2,7 @@
 
 /**
  * @name                                      isNode
- * @namespace            js.is
+ * @namespace            shared.is
  * @type                                      Function
  * @platform          js
  * @platform          node
@@ -17,7 +17,7 @@
  * @todo      tests
  *
  * @example               js
- * import isNode from '@coffeekraken/sugar/js/is/node';
+ * import isNode from '@coffeekraken/sugar/shared/is/node';
  * isNode(); // => true
  *
  * @since       1.0.0

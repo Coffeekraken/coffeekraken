@@ -2,7 +2,7 @@
 
 /**
  * @name        isString
- * @namespace            js.is
+ * @namespace            shared.is
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example    js
- * import isString from '@coffeekraken/sugar/js/is/String'
+ * import isString from '@coffeekraken/sugar/shared/is/String'
  * if (isString({}) {
  *   // do something
  * }

@@ -1,0 +1,46 @@
+.diagonal-section {
+    background: sugar.color(base, surface, --alpha 0.01);
+    position: relative;
+
+    @sugar.theme.when dark {
+        background: sugar.color(base, surface, --alpha 0.05);
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        width: 100%;
+        height: 500px;
+        background: sugar.color(base, surface, --alpha 0.01);
+        clip-path: polygon(0 100%, 100% 0, 100% 100%, 0 100%);
+        z-index: -1;
+    }
+    @sugar.theme.when dark {
+        &:before {
+            background: sugar.color(base, surface, --alpha 0.05);
+        }
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 500px;
+        background: sugar.color(base, surface, --alpha 0.01);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+        z-index: -1;
+    }
+    @sugar.theme.when dark {
+        &:after {
+            background: sugar.color(base, surface, --alpha 0.05);
+        }
+    }
+
+    &--no-after:after {
+        display: none;
+    }
+}

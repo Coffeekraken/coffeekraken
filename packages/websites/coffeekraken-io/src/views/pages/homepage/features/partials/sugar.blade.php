@@ -1,4 +1,4 @@
-<section id="features-sugar" class="s-pb:100 @mobile s-pi:30">
+<section id="features-sugar" class="diagonal-section s-pb:100 @mobile s-pi:30">
 
     <div class="s-container">
 

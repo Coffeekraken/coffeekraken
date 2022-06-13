@@ -23,6 +23,12 @@
     .__box {
         position: relative;
         overflow: hidden;
+        margin-top: -300px;
+        @sugar.depth (100);
+
+        @sugar.media mobile {
+            margin-top: 0;
+        }
 
         &:before {
             content: '';

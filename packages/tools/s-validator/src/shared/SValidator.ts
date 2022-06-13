@@ -41,6 +41,18 @@ import __positiveValidator, {
 import __patternValidator, {
     definition as __patternValidatorDefinition,
 } from './validators/pattern';
+import __alphanumValidator, {
+    definition as __alphanumValidatorDefinition,
+} from './validators/alphanum';
+import __creditCardValidator, {
+    definition as __creditCardValidatorDefinition,
+} from './validators/creditCard';
+import __colorValidator, {
+    definition as __colorValidatorDefinition,
+} from './validators/color';
+import __hexValidator, {
+    definition as __hexValidatorDefinition,
+} from './validators/hex';
 
 /**
  * @name            SValidation
@@ -112,7 +124,8 @@ export interface ISValidatorValidateResultMessages {
 
 export interface ISValidatorValidateResult {
     valid: boolean;
-    messages: ISValidatorValidateResultMessages;
+    rules: Record<string, ISValidatorRule>;
+    messages: string[];
 }
 
 export interface ISValidatorRegisterSettingsDefinition {
@@ -189,25 +202,24 @@ export default class SValidator extends __SClass {
     }
 
     /**
-     * @name         getValidatorInterface
+     * @name         getValidatorsDefinition
      * @type        Function
      * @static
      *
-     * Get back an SInterface based class respresenting the registered validators in the SValidator class
+     * Get back an definition of the validators in the SValidator class
      *
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    static getValidatorInterface(): __SInteface {
-        class SValidatorInterface extends __SInterface {}
+    static getValidatorsDefinition(): any {
+        const definition = {};
         for (let [name, validatorObj] of Object.entries(
             SValidator._validators,
         )) {
             if (!validatorObj.settings.definition) continue;
-            SValidatorInterface.definition[name] =
-                validatorObj.settings.definition;
+            definition[name] = validatorObj.settings.definition;
         }
-        return SValidatorInterface;
+        return definition;
     }
 
     /**
@@ -286,7 +298,8 @@ export default class SValidator extends __SClass {
     ): ISValidatorValidateResult {
         let result: ISValidatorValidateResult = {
             valid: true,
-            messages: {},
+            rules: {},
+            messages: [],
         };
 
         let rules = rulesOrPreset;
@@ -330,8 +343,14 @@ export default class SValidator extends __SClass {
             }
 
             if (!res.valid) {
+                // replace tokens in message
+                res.message = res.message
+                    .replace('%value', value)
+                    .replace('%validator', validator);
+
                 result.valid = false;
-                result.messages[validator] = res.message;
+                result.rules[validator] = res;
+                result.messages.push(res.message);
             }
         }
 
@@ -376,4 +395,16 @@ SValidator.registerValidator('positive', __positiveValidator, {
 });
 SValidator.registerValidator('pattern', __patternValidator, {
     definition: __patternValidatorDefinition,
+});
+SValidator.registerValidator('alphanum', __alphanumValidator, {
+    definition: __alphanumValidatorDefinition,
+});
+SValidator.registerValidator('creditCard', __creditCardValidator, {
+    definition: __creditCardValidatorDefinition,
+});
+SValidator.registerValidator('color', __colorValidator, {
+    definition: __colorValidatorDefinition,
+});
+SValidator.registerValidator('hex', __hexValidator, {
+    definition: __hexValidatorDefinition,
 });

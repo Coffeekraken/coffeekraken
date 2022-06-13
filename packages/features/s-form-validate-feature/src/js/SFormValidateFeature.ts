@@ -4,9 +4,10 @@ import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp'
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 // @ts-ignore
-import __css from '../css/s-form-validate.css'; // relative to /dist/pkg/esm/js
+import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js
 import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
 import __SValidator from '@coffeekraken/s-validator';
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 
 /**
  * @name            SFormValidateFeature
@@ -41,12 +42,6 @@ import __SValidator from '@coffeekraken/s-validator';
  * <label class="s-label:responsive" s-form-validate email email-message="Coco" required-message="PLOP">
  *    Email address
  *    <input type="text" class="s-input s-width:60" required placeholder="olivier.bossel@coffeekraken.io" />
- * </label>
- *
- * @example         html            Domain field
- * <label class="s-label:responsive" s-form-validate domain>
- *    Domain name
- *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken.io" />
  * </label>
  *
  * @example         html        Alphanumeric field
@@ -118,12 +113,6 @@ import __SValidator from '@coffeekraken/s-validator';
  *      </div>
  * </label>
  *
- * @example             html           Custom validation
- * <label class="s-label:responsive" s-form-validate coffeekraken>
- *    Try taping "coffeekraken"
- *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken" />
- * </label>
- *
  * @example            html           Submit / Reset
  * <form>
  * <label class="s-label:responsive" s-form-validate min="3" max="6">
@@ -144,49 +133,20 @@ import __SValidator from '@coffeekraken/s-validator';
  * </div>
  * </form>
  *
- * @see         https://github.com/sideway/joi
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISFormValidateFeatureProps {
-    alphanum: boolean;
-    base64: boolean;
-    case: 'upper' | 'lower';
-    creditCard: boolean;
-    dataUri: boolean;
-    domain: boolean | string;
+    errorContainerAttr: string;
     [key: string]: any;
 }
 
 export default class SFormValidateFeature extends __SFeature {
-    /**
-     * @name        _validationType
-     * @type        'string' | 'date' | 'number' | 'boolean'
-     * @default      'string'
-     *
-     * Store the type of validation to do using joi
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    private _validationType: 'string' | 'date' | 'number' | 'boolean' =
-        'string';
-
-    /**
-     * @name        _schema
-     * @type        'string' | 'date' | 'number' | 'boolean'
-     * @default      'string'
-     *
-     * Store the joi validation schema
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    private _schema;
-
     private _$field;
     private _$form;
+
+    private _validator;
 
     // the field become dirty when it is in error state
     private _isDirty = false;
@@ -216,6 +176,9 @@ export default class SFormValidateFeature extends __SFeature {
                 settings ?? {},
             ),
         );
+
+        // init a new SValidator instance
+        this._validator = new __SValidator();
 
         // try to get form
         this._$form = __querySelectorUp(this.node, 'form');
@@ -289,6 +252,26 @@ export default class SFormValidateFeature extends __SFeature {
     mount() {
         // get the field. Used if the actual field is inside the node
         // marked as s-form-validate
+        __querySelectorLive(
+            'input,textarea,select',
+            ($field) => {
+                this._initField($field);
+            },
+            {
+                rootNode: this.node,
+            },
+        );
+
+        // set the validation type depending on input type etc...
+        if (this.props.type) {
+            if (this.props.type === 'text') this._validationType = 'string';
+            else this._validationType = this.props.type;
+        }
+    }
+
+    _initField($field) {
+        this._$field = $field;
+
         this._$field = this.node;
         const $insideField = this.node.querySelector('input,textarea,select');
         if ($insideField) this._$field = $insideField;
@@ -308,12 +291,6 @@ export default class SFormValidateFeature extends __SFeature {
                 }
             },
         );
-
-        // set the validation type depending on input type etc...
-        if (this.props.type) {
-            if (this.props.type === 'text') this._validationType = 'string';
-            else this._validationType = this.props.type;
-        }
 
         // listen for events
         this.props.on.forEach((on) => {
@@ -350,53 +327,14 @@ export default class SFormValidateFeature extends __SFeature {
                 });
             }
         });
-
-        const validator = new __SValidator();
-
-        console.log(
-            validator.validate('2008.12', {
-                integer: true,
-                pattern: '[a-z]{1,5}',
-            }),
-        );
-
-        // preparing the joi schema
-        // let schema = __joi[this._validationType]();
-        // let isCustom = false;
-        // Object.keys(this.props).forEach((prop) => {
-        //     if (isCustom) return;
-        //     // custom validations
-        //     if (this.props.customValidations[prop]) {
-        //         isCustom = true;
-        //         schema = schema.custom(
-        //             this.props.customValidations[prop],
-        //             prop,
-        //         );
-        //     } else {
-        //         const propValue = this.props[prop];
-        //         if (propValue === true && typeof schema[prop] === 'function') {
-        //             let options = {};
-        //             if (prop === 'email' || prop === 'domain') {
-        //                 options = {
-        //                     tlds: false,
-        //                 };
-        //             }
-        //             schema = schema[prop](options);
-        //         } else if (typeof schema[prop] === 'function') {
-        //             schema = schema[prop](__autoCast(propValue));
-        //         }
-        //     }
-        // });
-        // this._schema = schema;
-
-        // // set error messages
-        // const errorMessages = {};
-        // for (let [key, value] of Object.entries(this.props)) {
-        // }
     }
 
     _isValidating = false;
     validate(event?) {
+        if (!this._$field) {
+            throw new Error(`No $field has been found to be validated...`);
+        }
+
         // stop form send action
         if (
             event?.currentTarget?.tagName.toLowerCase() === 'form' &&
@@ -411,101 +349,75 @@ export default class SFormValidateFeature extends __SFeature {
             this._isValidating = false;
         });
 
-        const validator = new __SValidator();
+        let resultObj;
 
-        // let schema, value, resultObj;
+        // build the validator rules object
+        const validatorRules = {};
+        for (let [validator, definition] of Object.entries(
+            __SValidator.getValidatorsDefinition(),
+        )) {
+            if (this.props[validator] !== undefined) {
+                validatorRules[validator] = this.props[validator];
+            }
+        }
 
-        // if (this._$field.type === 'checkbox') {
-        //     ({ schema, value } = this._validateCheckboxSchema());
-        // } else if (this._$field.type === 'range') {
-        //     ({ schema, value } = this._validateRangeSchema());
-        // } else if (this._$field.tagName.toLowerCase() === 'select') {
-        //     ({ schema, value } = this._validateSelectSchema());
-        // } else {
-        //     schema = this._schema;
-        //     value = (<HTMLInputElement>this._$field).value;
-        // }
+        // grab the value from the field (select, checkbox, etc...)
+        const value = this._getFieldValue();
 
-        // resultObj = schema
-        //     .error((errors) => {
-        //         errors.forEach((err) => {
-        //             let type = err.code.split('.')[0],
-        //                 code = err.code.split('.').pop();
+        // validate our value with the SValidator class
+        resultObj = this._validator.validate(value, validatorRules);
 
-        //             // remap some codes to html attributes
-        //             if (code === 'empty') code = 'required';
+        // handle reset event
+        if (event.type === 'reset') {
+            resultObj = {
+                valid: true,
+            };
+        }
 
-        //             // if our node has the attribute -message, use this
-        //             if (this.node.hasAttribute(`${code}-message`)) {
-        //                 err.message = this.node.getAttribute(`${code}-message`);
-        //             }
-
-        //             // check in our custom messages
-        //             if (this.props.messages[`${type}.${code}`]) {
-        //                 err.message = this.props.message[`${type}.${code}`];
-        //             } else if (this.props.messages[code]) {
-        //                 err.message = this.props.messages[code];
-        //             }
-        //         });
-        //         return errors;
-        //     })
-        //     .validate(value, this.props.joiOptions);
-
-        // if (event.type === 'reset') {
-        //     resultObj = {};
-        // }
-
-        // // apply result
-        // this._applyResult(resultObj, event);
+        // apply result
+        this._applyResult(resultObj, event);
     }
 
-    _validateCheckboxSchema() {
-        // const checkboxesValues = Array.from(
-        //     this.node.querySelectorAll('input[type="checkbox"]:checked'),
-        // ).map(($item) => (<HTMLInputElement>$item).value);
-        // let schema = __joi.array();
-        // if (this.props.min) {
-        //     schema = schema.min(this.props.min);
-        // }
-        // if (this.props.max) {
-        //     schema = schema.max(this.props.max);
-        // }
-        // return { schema, value: checkboxesValues };
+    _getFieldValue() {
+        switch (true) {
+            case this._$field.type === 'checkbox':
+                return this._getCheckboxValues();
+            case this._$field.type === 'range':
+                return this._getRangeValue();
+            case this._$field.tagName.toLowerCase() === 'select':
+                return this._getSelectValues();
+            case this._$field.type === 'radio':
+                return this._getRadioValue();
+            default:
+                return this._$field.value;
+        }
     }
 
-    _validateRangeSchema() {
-        // const value = parseFloat(this._$field.value);
-        // let schema = __joi.number();
-        // if (this.props.min) {
-        //     schema = schema.min(this.props.min);
-        // }
-        // if (this.props.max) {
-        //     schema = schema.max(this.props.max);
-        // }
-        // return { schema, value };
+    _getCheckboxValues() {
+        return Array.from(
+            // @ts-ignore
+            this.node.querySelectorAll('input[type="checkbox"]:checked'),
+        ).map(($item) => (<HTMLInputElement>$item).value);
+    }
+    _getRadioValue() {
+        // @ts-ignore
+        return this.node.querySelector('input[type="radio"]:checked').value;
     }
 
-    _validateSelectSchema() {
-        // // min max
-        // const selectedItems = Array.from(
-        //     this._$field.querySelectorAll('option'),
-        // )
-        //     .filter(($item) => (<HTMLOptionElement>$item).selected)
-        //     .map(($item) => (<HTMLOptionElement>$item).value);
-        // let schema = __joi.array();
-        // if (this.props.min) {
-        //     schema = schema.min(this.props.min);
-        // }
-        // if (this.props.max) {
-        //     schema = schema.max(this.props.max);
-        // }
-        // return { schema, value: selectedItems };
+    _getRangeValue() {
+        return parseFloat(this._$field.value);
+    }
+
+    _getSelectValues() {
+        return Array.from(this._$field.querySelectorAll('option'))
+            .filter(($item) => (<HTMLOptionElement>$item).selected)
+            .map(($item) => (<HTMLOptionElement>$item).value);
     }
 
     _$error;
     _applyResult(res, event) {
         // @ts-ignore
-        if (res.error) {
+        if (!res.valid) {
             // set the field as dirty
             this._isDirty = true;
 
@@ -515,9 +427,19 @@ export default class SFormValidateFeature extends __SFeature {
             // remove valid class on the node itself
             this.node.classList.remove(...this.props.validClass.split(' '));
 
+            const firstInvalidValidator = Object.keys(res.rules)[0];
+
+            // grab the first error message from the validator or the attribute
+            const finalMessage =
+                this.props[`${firstInvalidValidator}Message`] ||
+                res.messages[0];
+
             // display error if needed
             if (this.props.displayError) {
-                this._$error = this.node.nextElementSibling;
+                this._$error =
+                    this.node.querySelector(
+                        `[${this.props.errorContainerAttr}]`,
+                    ) ?? this.node.nextElementSibling;
                 if (
                     !this._$error ||
                     !this._$error.hasAttribute('s-form-validate-error')
@@ -531,14 +453,15 @@ export default class SFormValidateFeature extends __SFeature {
                         this.node.nextSibling,
                     );
                 }
-                this._$error.innerHTML = res.error.message;
+                this._$error.innerHTML = finalMessage;
             }
 
             // dispatch en error event
+            // @ts-ignore
             this.componentUtils.dispatchEvent('error', {
                 detail: res,
             });
-        } else if (!res.error) {
+        } else {
             // reset dirty state
             this._isDirty = false;
             // reset the field state

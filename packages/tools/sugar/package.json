@@ -52,6 +52,7 @@
         "@coffeekraken/s-sugar-element": "^2.0.0",
         "@coffeekraken/s-sugar-json": "^2.0.0",
         "@coffeekraken/s-view-renderer": "^2.0.0",
+        "@coffeekraken/s-validator": "^2.0.0",
         "@coffeekraken/s-vite": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "@csstools/convert-colors": "^2.0.0",

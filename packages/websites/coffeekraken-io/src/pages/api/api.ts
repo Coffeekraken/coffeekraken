@@ -8,5 +8,4 @@ export default {
             path: 'pages.api.api',
         },
     ],
-    handler: 'dynamic',
 };

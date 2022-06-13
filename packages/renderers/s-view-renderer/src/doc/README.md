@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -14,7 +14,7 @@
 
 {{#> layout-readme }}
 
-## Render views (blade, twig) with ease
+## SViewRenderer
 
 This package allows you to render views using template engines like `blade`, `twig` and more to come.
 
@@ -26,7 +26,7 @@ Here's how to use our implementation:
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 const renderer = new __SViewRenderer('my.cool.view');
 const result = await renderer.render({
-    hello: 'world'
+    hello: 'world',
 });
 ```
 

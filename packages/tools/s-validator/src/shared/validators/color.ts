@@ -5,21 +5,20 @@ import type {
     ISValidatorValidatorSettings,
 } from '../SValidator';
 import __en from '../i18n/en';
-import __isEmail from '@coffeekraken/sugar/shared/is/pattern';
+import __isColor from '@coffeekraken/sugar/shared/is/color';
 
 /**
- * @name            pattern
+ * @name            color
  * @namespace            shared.validators
  * @type            Function
  * @platform          js
  * @platform          node
  * @status        beta
  *
- * Validate a value using a regex.
+ * Validate using the "color" rule.
  *
  * @param           {any}               value        The value to validate
- * @param           {String}            pattern      The regex pattern to use
- * @param          {IValidatorPatternSettings}         [settings={}]          Some settings to configure your validation
+ * @param          {IValidatorMaxSettings}         [settings={}]          Some settings to configure your validation
  * @return          {ISValidatorResult}                       The result object
  *
  * @todo      interface
@@ -27,38 +26,36 @@ import __isEmail from '@coffeekraken/sugar/shared/is/pattern';
  * @todo      tests
  *
  * @example       js
- * import __maxValidator from '@coffeekraken/s-validator/validators/max
- * __maxValidator('hello world', 10);
+ * import __colorValidator from '@coffeekraken/s-validator/validators/color
+ * __colorValidator('hello world');
+ * __colorValidator('#fff');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISValidatorPattern18nSettings {
+export interface IValidatorColorI18nSettings {
     string: string;
 }
 
-export interface IValidatorPatternSettings
-    extends ISValidatorValidatorSettings {
-    i18n: ISValidatorPattern18nSettings;
+export interface IValidatorColorSettings extends ISValidatorValidatorSettings {
     trim: boolean;
 }
 
 export const definition = {
-    description: 'Validate a string using a regex pattern',
+    description: 'Validate a color string',
     type: 'String',
 };
 
-export default function pattern(
+export default function color(
     value: any,
-    pattern: string,
-    settings?: Partial<IValidatorPatternSettings>,
+    settings?: Partial<IValidatorColorSettings>,
 ): ISValidatorResult {
     let message, valid;
 
-    const finalSettings: IValidatorPatternSettings = __deepMerge(
+    const finalSettings: IValidatorColorSettings = __deepMerge(
         {
-            i18n: __en.pattern,
+            i18n: __en.color,
             trim: true,
         },
         settings ?? {},
@@ -66,7 +63,7 @@ export default function pattern(
 
     if (typeof value !== 'string') {
         throw new Error(
-            `Sorry but the "pattern" validation only works with string`,
+            `Sorry but the "color" validation only works with string`,
         );
     }
 
@@ -74,11 +71,10 @@ export default function pattern(
         value = value.trim();
     }
 
-    const reg = new RegExp(pattern);
-    valid = reg.test(value);
+    valid = __isColor(value);
 
     if (!valid) {
-        message = finalSettings.i18n?.string.replace('%pattern', pattern);
+        message = finalSettings.i18n?.string;
     }
 
     return {

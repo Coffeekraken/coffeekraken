@@ -1,0 +1,986 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-jest-tester",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-validator.doc.README": {
+                "id": "@coffeekraken.s-validator.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-validator.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.SValidation": {
+                "id": "@coffeekraken.s-validator.shared.SValidation",
+                "name": "SValidation",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ]
+                },
+                "description": "This class allows you to validate a lot of data with a lot of validators like \"email\", \"url\", \"min\", \"max\", etc...",
+                "namespace": "@coffeekraken.s-validator.shared",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __SValidator from '@coffeekraken/s-validation';\nconst validator = new __SValidator();\nvalidator.validate('Hello World Plop', {\n   min: 2,\n   max: 10\n});\n// {\n//   valid: false,\n//   messages: [\n//       'This must have at max 10 characters'\n//   ]\n// }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SValidator.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SValidator.ts",
+                "children": {
+                    "registervalidator": {
+                        "id": "97de59a21a2c9612cc10611bca92c07d908db20c55e7253d2e506d4b65154d5d",
+                        "name": "registerValidator",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
+                        "description": "This static method allows you to register a new validator",
+                        "static": "true"
+                    },
+                    "registerpreset": {
+                        "id": "6e92834fd4acb059458e2f772cea883c9381ec7b7fb5aa994b402b9a4828fbdd",
+                        "name": "registerPreset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
+                        "description": "This static method allows you to register a new validator",
+                        "static": "true"
+                    },
+                    "getvalidatorsdefinition": {
+                        "id": "3a575d15a73fb7431366df8bde3e086d76c5711084d07b692e4a501b32b2c62f",
+                        "name": "getValidatorsDefinition",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
+                        "description": "Get back an definition of the validators in the SValidator class",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "constructor": {
+                        "id": "3db3c09a20b0a6df60b2528243493d91df69e75da9f5ee18c392ed0280061acb",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "validate": {
+                        "id": "a0f8d00b8a4d202ea6634b65c53c7f8e2bb8c0562686e808e673595b417d9672",
+                        "name": "validate",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ]
+                        },
+                        "description": "This method allows you to validate any data using a lot of validators like \"email\", \"url\", \"min\", \"max\", etc...\nThe passed rules have to be an object with one or multiple properties representing the validations you want to make on your passed value.",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "import __SValidator from '@coffeekraken/s-validation';\nconst validator = new __SValidator();\n\n// min 2\nvalidator.validate('Hello World Plop', {\n     min: 2\n});\n\n// email\nvalidator.validate('plop', {\n    email: true\n});\n\n// with some custom settings\nvalidator.validate('Hello World Plop', {\n   min: {\n      value: 2,\n      settings: {\n         i18n: {\n            string: 'Something goes wrong'\n         }\n      }\n   },\n});\n\n// multiple rules\nvalidator.validate('Hello World Plop', {\n     min: 2,\n     max: 10,\n    email: true\n});"
+                            }
+                        ],
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-validator.shared.i18n.en": {
+                "id": "@coffeekraken.s-validator.shared.i18n.en",
+                "name": "en",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Store all the validations messages in a single big object for quick and easy translation",
+                "namespace": "@coffeekraken.s-validator.shared.i18n",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "en.ts",
+                "extension": "ts",
+                "relPath": "src/shared/i18n/en.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.interface.SValidatorSettingsInterface": {
+                "id": "@coffeekraken.s-validator.shared.interface.SValidatorSettingsInterface",
+                "name": "SValidatorSettingsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe all the SValidator class settings",
+                "namespace": "@coffeekraken.s-validator.shared.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SValidatorSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "i18n": {
+                            "description": "Specify the i18n translation object. See the README for more informations.",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SValidatorSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/interface/SValidatorSettingsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.interface.SValidatorValidatorsInterface": {
+                "id": "@coffeekraken.s-validator.shared.interface.SValidatorValidatorsInterface",
+                "name": "SValidatorValidatorsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe all the available validators of the SValidator class",
+                "namespace": "@coffeekraken.s-validator.shared.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SValidatorValidatorsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/interface/SValidatorValidatorsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.alphanum": {
+                "id": "@coffeekraken.s-validator.shared.validators.alphanum",
+                "name": "alphanum",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate using the \"alphanum\" rule.",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __alphanumValidator from '@coffeekraken/s-validator/validators/alphanum\n__alphanumValidator('hello world');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "alphanum.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/alphanum.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.color": {
+                "id": "@coffeekraken.s-validator.shared.validators.color",
+                "name": "color",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate using the \"color\" rule.",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __colorValidator from '@coffeekraken/s-validator/validators/color\n__colorValidator('hello world');\n__colorValidator('#fff');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "color.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/color.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.creditCard": {
+                "id": "@coffeekraken.s-validator.shared.validators.creditCard",
+                "name": "creditCard",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate using the \"creditCard\" rule.",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __creditCardValidator from '@coffeekraken/s-validator/validators/creditCard\n__creditCardValidator('hello world');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "creditCard.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/creditCard.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.email": {
+                "id": "@coffeekraken.s-validator.shared.validators.email",
+                "name": "email",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate using the \"email\" rule.",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __maxValidator from '@coffeekraken/s-validator/validators/max\n__maxValidator('hello world', 10);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "email.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/email.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.hex": {
+                "id": "@coffeekraken.s-validator.shared.validators.hex",
+                "name": "hex",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate using the \"hex\" rule.",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __hexValidator from '@coffeekraken/s-validator/validators/hex\n__hexValidator('hello world');\n__hexValidator('#fff');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "hex.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/hex.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.integer": {
+                "id": "@coffeekraken.s-validator.shared.validators.integer",
+                "name": "integer",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate passed value is a correct integer",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __integerValidator from '@coffeekraken/s-validator/validators/integer\n__integerValidator('2017-09-22');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "integer.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/integer.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.isoDate": {
+                "id": "@coffeekraken.s-validator.shared.validators.isoDate",
+                "name": "isoDate",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate string date to match the iso format like \"2017-09-22\"",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __isoDateValidator from '@coffeekraken/s-validator/validators/isoDate\n__isoDateValidator('2017-09-22');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "isoDate.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/isoDate.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.isoDateTime": {
+                "id": "@coffeekraken.s-validator.shared.validators.isoDateTime",
+                "name": "isoDateTime",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate string date to match the iso format like \"2008-08-30 17:21:59\"",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __isoDateTimeValidator from '@coffeekraken/s-validator/validators/isoDateTime\n__isoDateTimeValidator('2008-08-30 17:21:59');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "isoDateTime.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/isoDateTime.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.isoTime": {
+                "id": "@coffeekraken.s-validator.shared.validators.isoTime",
+                "name": "isoTime",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate string time to match the iso format like \"12:18:00\"",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __isoTimeValidator from '@coffeekraken/s-validator/validators/isoTime\n__isoTimeValidator('2017-09-22');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "isoTime.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/isoTime.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.max": {
+                "id": "@coffeekraken.s-validator.shared.validators.max",
+                "name": "max",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate using the \"max\" rule.\nHere's the rules depending on the passed value type:\n\n- String: Has to have at max n characters\n- Number: Has to be greater than n\n- Array: Has to have at max n elements\n- Object: Has to have at max n properties",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __maxValidator from '@coffeekraken/s-validator/validators/max\n__maxValidator('hello world', 10);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "max.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/max.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.min": {
+                "id": "@coffeekraken.s-validator.shared.validators.min",
+                "name": "min",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate using the \"min\" rule.\nHere's the rules depending on the passed value type:\n\n- String: Has to have at least n characters\n- Number: Has to be greater than n\n- Array: Has to have at least n elements\n- Object: Has to have at least n properties",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __minValidator from '@coffeekraken/s-validator/validators/min\n__minValidator('hello world', 2);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "min.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/min.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.negative": {
+                "id": "@coffeekraken.s-validator.shared.validators.negative",
+                "name": "negative",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate passed value is a correct negative number",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __negativeValidator from '@coffeekraken/s-validator/validators/negative\n__negativeValidator(-2017.12);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "negative.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/negative.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.number": {
+                "id": "@coffeekraken.s-validator.shared.validators.number",
+                "name": "number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate passed value is a correct number",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __numberValidator from '@coffeekraken/s-validator/validators/number\n__numberValidator('2017.12');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "number.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/number.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.pattern": {
+                "id": "@coffeekraken.s-validator.shared.validators.pattern",
+                "name": "pattern",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate a value using a regex.",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __maxValidator from '@coffeekraken/s-validator/validators/max\n__maxValidator('hello world', 10);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "pattern.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/pattern.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.positive": {
+                "id": "@coffeekraken.s-validator.shared.validators.positive",
+                "name": "positive",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate passed value is a correct positive number",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __positiveValidator from '@coffeekraken/s-validator/validators/positive\n__positiveValidator(-2017.12);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "positive.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/positive.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.validators.required": {
+                "id": "@coffeekraken.s-validator.shared.validators.required",
+                "name": "required",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ]
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Make sure a value has been provided.",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __requiredValidator from '@coffeekraken/s-validator/validators/required\n__requiredValidator('hello');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "required.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/required.ts",
+                "children": {}
+            }
+        }
+    }
+}

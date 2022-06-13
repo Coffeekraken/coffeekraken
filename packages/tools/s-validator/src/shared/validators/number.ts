@@ -83,7 +83,7 @@ export default function number(
     }
 
     if (!valid) {
-        message = finalSettings.i18n?.string?.replace('%value', value);
+        message = finalSettings.i18n?.string;
     }
 
     return {

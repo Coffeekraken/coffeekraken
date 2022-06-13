@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -14,14 +14,14 @@
 
 {{#> layout-readme }}
 
-## Bench with ease some parts of your processes, etc...
+## SBench
 
 This `SBench` class allows you to know how many time take a certain part of your processes, with a concept of "steps" to split this even more when needed. Here's the features availables:
 
-- Track the time used by a portion of script
-- Display a summary of tracked times
-- Split your tracked portion into "steps" for more precision
-- Let the `SBench` related statements into your code and filter out which bench(s) you want to be active and which not
+-   Track the time used by a portion of script
+-   Display a summary of tracked times
+-   Split your tracked portion into "steps" for more precision
+-   Let the `SBench` related statements into your code and filter out which bench(s) you want to be active and which not
 
 ## Usage
 

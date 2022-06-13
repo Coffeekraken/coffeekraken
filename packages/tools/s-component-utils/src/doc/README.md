@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -14,7 +14,7 @@
 
 {{#> layout-readme }}
 
-## Utilities to help working with customElements
+## SComponentUtils
 
 This class gives you access to some utilities to help you working with customElement like accessing props (attributes), specify when you want to "mount" your component, etc...
 
@@ -33,14 +33,14 @@ class MyInterface extends __SInterface {
             prop1: {
                 description: 'My cool property',
                 type: 'String',
-                required: true
+                required: true,
             },
             prop2: {
                 description: 'My other property',
                 type: 'String',
-                default: 'world'
-            }
-        }
+                default: 'world',
+            },
+        };
     }
 }
 
@@ -48,14 +48,18 @@ class MyInterface extends __SInterface {
 const $myComponent = document.querySelector('my-component');
 
 // initiating out component utils instance with our dom element, props and settings
-const componentUtils = new __SComponentUtils($myComponent, {
-    prop1: 'Hello',
-    mountWhen: 'inViewport'
-}, {
-    componentUtils: {
-        interface: MyInterface
-    }
-});
+const componentUtils = new __SComponentUtils(
+    $myComponent,
+    {
+        prop1: 'Hello',
+        mountWhen: 'inViewport',
+    },
+    {
+        componentUtils: {
+            interface: MyInterface,
+        },
+    },
+);
 
 // wait until the "mountWhen" is reached
 await componentUtils.waitAndExecute();

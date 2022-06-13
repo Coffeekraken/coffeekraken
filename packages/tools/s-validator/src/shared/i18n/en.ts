@@ -13,45 +13,57 @@
  */
 export default {
     min: {
-        string: 'This must have at least %n characters',
-        object: 'This must have at least %n properties',
-        number: 'This must be greater than %n',
-        array: 'This must have at least %n items',
+        string: 'Must have at least %n characters',
+        object: 'Must have at least %n properties',
+        number: 'Must be greater than %n',
+        array: 'Must have at least %n items',
     },
     max: {
-        string: 'This must have at max %n characters',
-        object: 'This must have at max %n properties',
-        number: 'This must be lower than %n',
-        array: 'This must have at max %n items',
+        string: 'Must have at max %n characters',
+        object: 'Must have at max %n properties',
+        number: 'Must be lower than %n',
+        array: 'Must have at max %n items',
     },
     email: {
-        string: 'This must be a valid email',
+        string: 'Must be a valid email address',
     },
     required: {
         default: 'This is required',
     },
     isoDate: {
-        string: 'This must be a valid ISO date',
+        string: 'Must be a valid ISO date',
     },
     isoTime: {
-        string: 'This must be a valid ISO time',
+        string: 'Must be a valid ISO time',
     },
     isoDateTime: {
-        string: 'This must be a valid ISO date time',
+        string: 'Must be a valid ISO date time',
     },
     integer: {
-        string: 'This must be an integer',
+        string: 'Must be an integer',
     },
     number: {
-        string: 'This must be an number',
+        string: 'Must be an number',
     },
     negative: {
-        string: 'This must be a negative number',
+        string: 'Must be a negative number',
     },
     positive: {
-        string: 'This must be a positive number',
+        string: 'Must be a positive number',
     },
     pattern: {
-        string: 'This must match the pattern %pattern',
+        string: 'Must match the pattern %pattern',
+    },
+    alphanum: {
+        string: 'Must contain only alphanumeric characters',
+    },
+    creditCard: {
+        string: 'Must be a valid credit card number',
+    },
+    color: {
+        string: 'Must be a valid color (hex, rgb, rgba, hsl, hsla)',
+    },
+    hex: {
+        string: 'Must be a valid hex color',
     },
 };

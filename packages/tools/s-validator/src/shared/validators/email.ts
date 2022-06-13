@@ -73,7 +73,7 @@ export default function email(
     valid = __isEmail(value);
 
     if (!valid) {
-        message = finalSettings.i18n?.string?.replace('%email', value);
+        message = finalSettings.i18n?.string;
     }
 
     return {

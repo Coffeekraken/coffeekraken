@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -14,7 +14,7 @@
 
 {{#> layout-readme }}
 
-## Simply and powerful development server
+## SFrontendServer
 
 This package represent the development server used to serve things like php views (`blade`, `twig`, etc...) and provide simple `routing system` and template data providing like `docmap`, `packageJson`, and more...
 
@@ -39,31 +39,57 @@ This server is using the AMAZING [Express](https://expressjs.com/) package to ha
 
 All the server is structured around `modules`. A module is simply a function that will take as parameter the `express` app instance and hook the Express server with new middlewares, routes, etc...
 
-[More on modules](/@coffeekraken/s-frontend-server/doc/modules/overview)
+{{#each config.frontendServer.modules}} - **{{@key}}**: {{this.description}}
+{{/each}}
 
-### Built-in modules
-
-By default, the server comes with some built-in modules that handles common stuffs like rendering a `view`, etc. Here's the list of these modules:
-
-- [Root files](/@coffeekraken/s-frontend-server/doc/modules/rootFiles)
-- [Docmap](/@coffeekraken/s-frontend-server/doc/modules/docmap)
-- [View](/@coffeekraken/s-frontend-server/doc/modules/view)
-- [Styleguide](/@coffeekraken/s-frontend-server/doc/modules/styleguide)
-- [Config](/@coffeekraken/s-frontend-server/doc/modules/config)
-- [Frontspec](/@coffeekraken/s-frontend-server/doc/modules/frontspec)
-- [Api](/@coffeekraken/s-frontend-server/doc/modules/api)
+[More on modules](/doc/servers/modules)
 
 ## Handlers
 
 Handlers are `controllers` for specific routes. This mean that when you call for example the route `/something/cool`, you must have an handler registered to take care of this request.
 
-[More on handlers](/@coffeekraken/s-frontend-server/doc/handlers/overview)
+{{#each config.frontendServer.handlers}} - **{{@key}}**: {{this.description}}
+{{/each}}
+
+[More on handlers](/doc/servers/handlers)
 
 ## Middlewares
 
 Middlewares are functions that will be executed between the incoming request and the response sending to client. For more information about middlewares, I let you check the [express.js middleware documentation](https://expressjs.com/en/guide/using-middleware.html).
 
-[More on middlewares](/@coffeekraken/s-frontend-server/doc/middlewares/overview)
+{{#each config.frontendServer.middlewares}} - **{{@key}}**: {{this.description}}
+{{/each}}
+
+[More on middlewares](/doc/servers/middlewares)
+
+## Routing
+
+The routing of this server is pretty simple and stands on the `src/pages` folder structure.
+
+Admit that we have this folder structure:
+
+```shell
+|
+| src
+|---| pages
+|   |---| hello
+|       |---| hello.ts
+|---| views
+|   |---| hello.twig
+|
+```
+
+And that the `hello.ts` file contains:
+
+```js
+export default {
+    views: ['hello'],
+};
+```
+
+This will render the view stored under `src/views/hello.twig` when you reach the `/hello` url.
+
+[More on routing](/doc/routing/overview)
 
 ## API
 

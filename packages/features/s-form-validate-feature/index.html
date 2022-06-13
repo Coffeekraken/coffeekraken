@@ -11,33 +11,170 @@
         <script type="module">
             import { define } from './src/js/exports.ts';
 
+            import expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
+            expandPleasantCssClassnamesLive();
+
             define();
         </script>
 
-        <form action="/something">
-            <!-- <div alphanum s-form-validate>
-                <input class="s-input" type="text" name="input" />
-            </div>
-
-            <label class="s-label" s-form-validate alphanum>
-                <input class="s-input" type="text" name="input" />
-                Hello world
+        <div class="s-container">
+            <label class="s-label:responsive" s-form-validate domain>
+                Domain name
+                <input
+                    type="text"
+                    class="s-input s-width:60"
+                    placeholder="coffeekraken.io"
+                />
             </label>
 
-            <label class="s-label" s-form-validate domain>
-                <input class="s-input" type="text" name="input" />
-                Domain
+            <label class="s-label:responsive" s-form-validate domain>
+                Domain name
+                <input
+                    type="text"
+                    class="s-input s-width:60"
+                    placeholder="coffeekraken.io"
+                />
             </label>
 
-            <label class="s-label" s-form-validate email>
-                <input class="s-input" type="text" name="input" />
-                Email
-            </label> -->
-
-            <label class="s-label" s-form-validate email wrap="false">
-                <input class="s-input" type="text" name="input" />
-                Email
+            <label class="s-label:responsive" s-form-validate alphanum>
+                Alphanumeric
+                <input
+                    type="text"
+                    class="s-input s-width:60"
+                    placeholder="a-zA-Z0-9"
+                />
             </label>
-        </form>
+
+            <label class="s-label:responsive" s-form-validate credit-card>
+                Credit card
+                <input
+                    type="text"
+                    class="s-input s-width:60"
+                    placeholder="340716737808634"
+                />
+            </label>
+
+            <label class="s-label:responsive" s-form-validate min="3" max="6">
+                Min and max
+                <input
+                    type="text"
+                    class="s-input s-width:60"
+                    placeholder="3 to 6"
+                />
+                <div s-form-validate-error></div>
+            </label>
+
+            <label class="s-label:responsive" s-form-validate>
+                Select
+                <select class="s-select s-width:60">
+                    <option value="value 1">This is the first option...</option>
+                    <option value="value 2">This is the second...</option>
+                    <option value="value 3">Third...</option>
+                </select>
+            </label>
+
+            <label class="s-label:responsive" s-form-validate min="2" max="2">
+                Multiple select
+                <select multiple class="s-select s-width:60">
+                    <option value="value 1">This is the first option...</option>
+                    <option value="value 2">This is the second...</option>
+                    <option value="value 3">Third...</option>
+                </select>
+            </label>
+
+            <label class="s-label:responsive" s-form-validate iso-date>
+                ISO date
+                <s-date-picker
+                    input
+                    button
+                    name="my-cool-date"
+                    placeholder="2021-09-16"
+                    class="s-width:60"
+                ></s-date-picker>
+            </label>
+
+            <label class="s-label:responsive" s-form-validate min="25" max="75">
+                Value between 25 and 75
+                <s-range class="s-width:60" min="0" max="100" tooltip></s-range>
+            </label>
+
+            <label class="s-label" s-form-validate min="2" max="2">
+                Choose at least 2 items
+                <div class="">
+                    <label class="s-label s-mb:20">
+                        Item 1
+                        <input
+                            type="checkbox"
+                            class="s-checkbox"
+                            value="value 1"
+                        />
+                    </label>
+                    <label class="s-label s-mb:20">
+                        Item 1
+                        <input
+                            type="checkbox"
+                            class="s-checkbox"
+                            value="value 2"
+                        />
+                    </label>
+                    <label class="s-label s-mb:20">
+                        Item 1
+                        <input
+                            type="checkbox"
+                            class="s-checkbox"
+                            value="value 3"
+                        />
+                    </label>
+                </div>
+            </label>
+
+            <label class="s-label:responsive" s-form-validate coffeekraken>
+                Try taping "coffeekraken"
+                <input
+                    type="text"
+                    class="s-input s-width:60"
+                    placeholder="coffeekraken"
+                />
+            </label>
+
+            <form>
+                <label
+                    class="s-label:responsive"
+                    s-form-validate
+                    min="3"
+                    max="6"
+                >
+                    Min and max
+                    <input
+                        type="text"
+                        class="s-input s-width:60"
+                        placeholder="3 to 6"
+                    />
+                </label>
+                <label
+                    class="s-label:responsive s-mbs:30"
+                    s-form-validate
+                    min="2"
+                    max="2"
+                >
+                    Multiple select
+                    <select multiple class="s-select s-width:60">
+                        <option value="value 1"
+                            >This is the first option...</option
+                        >
+                        <option value="value 2">This is the second...</option>
+                        <option value="value 3">Third...</option>
+                    </select>
+                </label>
+                <div class="s-text:end s-mbs:30">
+                    <input type="reset" class="s-btn" value="Reset!" />
+                    <input
+                        type="submit"
+                        class="s-btn s-color:complementary s-ml:20"
+                        value="Submit!"
+                    />
+                </div>
+            </form>
+        </div>
     </body>
 </html>

@@ -1,25 +1,23 @@
 // @ts-nocheck
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __en from '../i18n/en';
 import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator';
-import __en from '../i18n/en';
-import __isEmail from '@coffeekraken/sugar/shared/is/pattern';
 
 /**
- * @name            pattern
+ * @name            hex
  * @namespace            shared.validators
  * @type            Function
  * @platform          js
  * @platform          node
  * @status        beta
  *
- * Validate a value using a regex.
+ * Validate using the "hex" rule.
  *
  * @param           {any}               value        The value to validate
- * @param           {String}            pattern      The regex pattern to use
- * @param          {IValidatorPatternSettings}         [settings={}]          Some settings to configure your validation
+ * @param          {IValidatorHexSettings}         [settings={}]          Some settings to configure your validation
  * @return          {ISValidatorResult}                       The result object
  *
  * @todo      interface
@@ -27,38 +25,36 @@ import __isEmail from '@coffeekraken/sugar/shared/is/pattern';
  * @todo      tests
  *
  * @example       js
- * import __maxValidator from '@coffeekraken/s-validator/validators/max
- * __maxValidator('hello world', 10);
+ * import __hexValidator from '@coffeekraken/s-validator/validators/hex
+ * __hexValidator('hello world');
+ * __hexValidator('#fff');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISValidatorPattern18nSettings {
+export interface IValidatorHexI18nSettings {
     string: string;
 }
 
-export interface IValidatorPatternSettings
-    extends ISValidatorValidatorSettings {
-    i18n: ISValidatorPattern18nSettings;
+export interface IValidatorHexSettings extends ISValidatorValidatorSettings {
     trim: boolean;
 }
 
 export const definition = {
-    description: 'Validate a string using a regex pattern',
+    description: 'Validate a hexadecimal string',
     type: 'String',
 };
 
-export default function pattern(
+export default function hex(
     value: any,
-    pattern: string,
-    settings?: Partial<IValidatorPatternSettings>,
+    settings?: Partial<IValidatorHexSettings>,
 ): ISValidatorResult {
     let message, valid;
 
-    const finalSettings: IValidatorPatternSettings = __deepMerge(
+    const finalSettings: IValidatorHexSettings = __deepMerge(
         {
-            i18n: __en.pattern,
+            i18n: __en.hex,
             trim: true,
         },
         settings ?? {},
@@ -66,7 +62,7 @@ export default function pattern(
 
     if (typeof value !== 'string') {
         throw new Error(
-            `Sorry but the "pattern" validation only works with string`,
+            `Sorry but the "hex" validation only works with string`,
         );
     }
 
@@ -74,11 +70,10 @@ export default function pattern(
         value = value.trim();
     }
 
-    const reg = new RegExp(pattern);
-    valid = reg.test(value);
+    valid = value.match(/^#[a-zA-Z0-9]{3,6}$/);
 
     if (!valid) {
-        message = finalSettings.i18n?.string.replace('%pattern', pattern);
+        message = finalSettings.i18n?.string;
     }
 
     return {

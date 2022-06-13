@@ -372,7 +372,7 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description:
-                    'This module allows you to serve files from the root directory',
+                    'This module allows you to serve files from the public directory',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.publicDir
@@ -387,10 +387,10 @@ export default function (env, config) {
                 path: `${__dirname()}/../node/modules/publicDir/publicDir`,
                 settings: {},
             },
-            dynamic: {
+            generic: {
                 /**
                  * @name            description
-                 * @namespace       config.frontendServer.modules.docmap
+                 * @namespace       config.frontendServer.modules.generic
                  * @type            String
                  *
                  * Specify the module description
@@ -399,19 +399,19 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description:
-                    'This module gives you access to the "dynamic" handler that renders dynamically views from your page config',
+                    'This module gives you access to the "generic" handler that renders dynamically views from your page config',
                 /**
                  * @name            path
-                 * @namespace       config.frontendServer.modules.docmap
+                 * @namespace       config.frontendServer.modules.generic
                  * @type            String
-                 * @default             ${__dirname()}/../node/modules/dynamic/dynamic
+                 * @default             ${__dirname()}/../node/modules/generic/generic
                  *
-                 * Specify where to find the "dynamic" module
+                 * Specify where to find the "generic" module
                  *
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname()}/../node/modules/dynamic/dynamic`,
+                path: `${__dirname()}/../node/modules/generic/generic`,
                 settings: {},
             },
             docmap: {
@@ -566,9 +566,9 @@ export default function (env, config) {
                  * @name            path
                  * @namespace       config.frontendServer.modules.docmap
                  * @type            String
-                 * @default             ${__dirname()}/../node/modules/dynamic/dynamic
+                 * @default             ${__dirname()}/../node/modules/404/404
                  *
-                 * Specify where to find the "dynamic" module
+                 * Specify where to find the "404" module
                  *
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -75,6 +75,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -107,6 +108,41 @@
                 "filename": "postcssSugarPlugin.config.ts",
                 "extension": "config",
                 "relPath": "src/config/postcssSugarPlugin.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.doc.README": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ]
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.doc",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.cli.interface.SCliSugarPostcssPluginAddParamsInterface": {
@@ -175,6 +211,17 @@
                         "code": "@sugar.classes;"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "ui": {
+                            "description": "Specify if you want the UI classes to be generated or not",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -235,6 +282,35 @@
                         "code": ".my-element {\n   border-radius: sugar.border.radius(30);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginBorderRadiusFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "radius": {
+                            "type": "String",
+                            "values": [
+                                "0",
+                                "10",
+                                "20",
+                                "30",
+                                "40",
+                                "50",
+                                "60",
+                                "70",
+                                "80",
+                                "90",
+                                "100",
+                                "default"
+                            ],
+                            "default": "default",
+                            "required": true
+                        },
+                        "scalable": {
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -271,6 +347,31 @@
                         "code": ".my-element {\n   border-width: sugar.border.width(50);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginBorderWidthFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "width": {
+                            "type": "String",
+                            "values": [
+                                "0",
+                                "10",
+                                "20",
+                                "30",
+                                "40",
+                                "50",
+                                "60",
+                                "70",
+                                "80",
+                                "90",
+                                "100",
+                                "default"
+                            ],
+                            "default": "default",
+                            "required": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -307,6 +408,24 @@
                         "code": ".my-element {\n   color: sugar.color(accent);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginColorInterface",
+                    "description": "",
+                    "definition": {
+                        "color": {
+                            "type": "String",
+                            "alias": "c"
+                        },
+                        "variant": {
+                            "type": "String",
+                            "alias": "v"
+                        },
+                        "modifier": {
+                            "type": "String",
+                            "alias": "m"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -343,6 +462,16 @@
                         "code": ".my-element {\n   box-shadow: sugar.depth(20);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginDepthFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "depth": {
+                            "type": "Number|String",
+                            "required": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -379,6 +508,27 @@
                         "code": ".my-element {\n   filter: sugar.filter.noise();\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginDisabledInterface",
+                    "description": "",
+                    "definition": {
+                        "frequency": {
+                            "type": "Number",
+                            "required": true,
+                            "default": 0.65
+                        },
+                        "width": {
+                            "type": "String",
+                            "required": true,
+                            "default": "5000px"
+                        },
+                        "height": {
+                            "type": "String",
+                            "required": true,
+                            "default": "5000px"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -415,6 +565,17 @@
                         "code": ".my-element {\n     font-family: sugar.font.family(code);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginFontFamilyInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "required": true,
+                            "alias": "n"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -451,6 +612,21 @@
                         "code": ".my-element {\n   font-size: sugar.font.size(20);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginFontSizeInterface",
+                    "description": "",
+                    "definition": {
+                        "size": {
+                            "type": "String",
+                            "required": true,
+                            "alias": "s"
+                        },
+                        "scalable": {
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -487,6 +663,35 @@
                         "code": ".my-element {\n     margin-top: sugar.margin(20);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginMarginFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "margin": {
+                            "type": "String",
+                            "values": [
+                                "0",
+                                "10",
+                                "20",
+                                "30",
+                                "40",
+                                "50",
+                                "60",
+                                "70",
+                                "80",
+                                "90",
+                                "100",
+                                "default"
+                            ],
+                            "default": "default",
+                            "required": true
+                        },
+                        "scalable": {
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -523,6 +728,35 @@
                         "code": ".my-element {\n     margin-top: sugar.offsize(20);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginOffsizeFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "offsize": {
+                            "type": "String",
+                            "values": [
+                                "0",
+                                "10",
+                                "20",
+                                "30",
+                                "40",
+                                "50",
+                                "60",
+                                "70",
+                                "80",
+                                "90",
+                                "100",
+                                "default"
+                            ],
+                            "default": "default",
+                            "required": true
+                        },
+                        "scalable": {
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -559,6 +793,30 @@
                         "code": ".my-element {\n     opacity: sugar.opacity(20);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginOpacityFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "opacity": {
+                            "type": "String",
+                            "values": [
+                                "0",
+                                "10",
+                                "20",
+                                "30",
+                                "40",
+                                "50",
+                                "60",
+                                "70",
+                                "80",
+                                "90",
+                                "100"
+                            ],
+                            "default": "100",
+                            "required": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -595,6 +853,35 @@
                         "code": ".my-element {\n     padding-top: sugar.padding(30);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginPaddingFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "padding": {
+                            "type": "String",
+                            "values": [
+                                "0",
+                                "10",
+                                "20",
+                                "30",
+                                "40",
+                                "50",
+                                "60",
+                                "70",
+                                "80",
+                                "90",
+                                "100",
+                                "default"
+                            ],
+                            "default": "default",
+                            "required": true
+                        },
+                        "scalable": {
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -631,6 +918,16 @@
                         "code": ".my-element {\n   padding: sugar.scalable(20px);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginScalableFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "value": {
+                            "type": "String|Number",
+                            "required": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -667,6 +964,31 @@
                         "code": ".my-element {\n   padding: sugar.space(20);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginSpaceFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "space": {
+                            "type": "String",
+                            "values": [
+                                "0",
+                                "10",
+                                "20",
+                                "30",
+                                "40",
+                                "50",
+                                "60",
+                                "70",
+                                "80",
+                                "90",
+                                "100",
+                                "default"
+                            ],
+                            "default": "default",
+                            "required": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -703,6 +1025,32 @@
                         "code": ".my-element {\n   font-family: sugar.theme(font.family.default.font-family);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginThemeInterface",
+                    "description": "",
+                    "definition": {
+                        "dotPath": {
+                            "type": "String",
+                            "required": true
+                        },
+                        "scalable": {
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "return": {
+                            "type": "String",
+                            "values": [
+                                "var",
+                                "value"
+                            ],
+                            "default": "var"
+                        },
+                        "fallback": {
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -739,6 +1087,24 @@
                         "code": ".my-element {\n   font-family: sugar.theme.value(font.family.default.font-family);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginThemeInterface",
+                    "description": "",
+                    "definition": {
+                        "dotPath": {
+                            "type": "String",
+                            "required": true
+                        },
+                        "scalable": {
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "fallback": {
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -775,6 +1141,24 @@
                         "code": ".my-element {\n   font-family: sugar.theme(font.family.default.font-family);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginThemeInterface",
+                    "description": "",
+                    "definition": {
+                        "dotPath": {
+                            "type": "String",
+                            "required": true
+                        },
+                        "scalable": {
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "fallback": {
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -811,6 +1195,22 @@
                         "code": ".my-element {\n     transition: sugar.transition(fast);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginTransitionFunctionInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "values": [
+                                "slow",
+                                "default",
+                                "fast"
+                            ],
+                            "default": "default",
+                            "required": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -3829,6 +4229,11 @@
                         "code": "@sugar.until.classes;"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUntilClassesInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -3865,6 +4270,23 @@
                         "code": ".myElement {\n     display: block;\n\n     @sugar.until.mounted {\n         display: none;\n     }\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginmountedMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "state": {
+                            "type": "String",
+                            "values": [
+                                "mounted"
+                            ],
+                            "required": true
+                        },
+                        "sibling": {
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -3901,6 +4323,11 @@
                         "code": "@sugar.userSelect.classes;"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUserSelectClassesInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -3937,6 +4364,22 @@
                         "code": ".my-cool-element {\n     @sugar.utils.configToCss(ui.code);\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUtilsConfigToCssInterface",
+                    "description": "",
+                    "definition": {
+                        "dotPath": {
+                            "type": "String",
+                            "required": true
+                        },
+                        "exclude": {
+                            "type": "Array<String>"
+                        },
+                        "only": {
+                            "type": "Array<String>"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -3973,6 +4416,11 @@
                         "code": "@sugar.visibility.classes;"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginOverflowClassesInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4009,6 +4457,11 @@
                         "code": ".my-element {\n @sugar.visually.hidden;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginVisuallyHiddenMixinInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4076,6 +4529,11 @@
                         "code": "@sugar.visually.classes;"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginOverflowClassesInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4112,6 +4570,11 @@
                         "code": "@sugar.when.classes;"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginActiveClassesInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4148,6 +4611,34 @@
                         "code": ".myElement {\n     display: none;\n\n     @sugar.when.mounted {\n         display: block;\n     }\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginmountedMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "state": {
+                            "type": "String",
+                            "values": [
+                                "mounted",
+                                "active",
+                                "dark",
+                                "light"
+                            ],
+                            "required": true
+                        },
+                        "context": {
+                            "type": "String",
+                            "values": [
+                                "self",
+                                "sibling",
+                                "parent",
+                                "ancestor",
+                                "theme"
+                            ],
+                            "default": "self",
+                            "required": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4184,6 +4675,11 @@
                         "code": "@sugar.width.classes;"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginWidthClassesMixinInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4220,6 +4716,50 @@
                         "code": ".my-element {\n     @sugar.ui.badge();\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiAvatarInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "value": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "rounded"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "interactive",
+                                "notifications"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "notifications"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4256,6 +4796,75 @@
                         "code": "@sugar.ui.avatar.classes();"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiAvatarClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill",
+                                "circle"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill",
+                                "circle"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "interactive",
+                                "notifications"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "interactive",
+                                "notifications"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4292,6 +4901,48 @@
                         "code": ".my-element {\n     @sugar.ui.badge();\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiBadgeInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid",
+                                "outline"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4328,6 +4979,76 @@
                         "code": "@sugar.ui.badge.classes();"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiBadgeClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid",
+                                "outline"
+                            ],
+                            "default": [
+                                "solid",
+                                "outline"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid",
+                                "outline"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4364,6 +5085,46 @@
                         "code": ".my-element {\n     @sugar.ui.badge();\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiBlockquoteInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4400,6 +5161,90 @@
                         "code": "@sugar.ui.blockquote.classes();"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiBlockquoteClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info",
+                                "current",
+                                "primary",
+                                "secondary"
+                            ],
+                            "default": "accent"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4436,6 +5281,50 @@
                         "code": ".my-element {\n     @sugar.ui.button();\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiButtonInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid",
+                                "gradient",
+                                "outline",
+                                "text"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4471,6 +5360,50 @@
                         "code": ".my-button {\n   @sugar.ui.button;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiButtonInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid",
+                                "gradient",
+                                "outline",
+                                "text"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4507,6 +5440,82 @@
                         "code": "@sugar.ui.button.classes();"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiButtonClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid",
+                                "gradient",
+                                "outline",
+                                "text"
+                            ],
+                            "default": [
+                                "solid",
+                                "gradient",
+                                "outline",
+                                "text"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid",
+                                "gradient",
+                                "outline",
+                                "text"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf",
+                                "vr"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf",
+                                "vr"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4543,6 +5552,47 @@
                         "code": ".my-checkbox {\n   @sugar.ui.checkbox;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiCheckboxInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "circle"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4579,6 +5629,73 @@
                         "code": "@sugar.ui.checkbox.classes();"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiCheckboxClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "circle"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "circle"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "circle"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf",
+                                "vr"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf",
+                                "vr"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4610,6 +5727,70 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiDropdownClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shape": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4646,6 +5827,61 @@
                         "code": ".my-dropdown {\n   @sugar.ui.dropdown;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiDropdownInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "position": {
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "top-start",
+                                "top-end",
+                                "bottom",
+                                "bottom-start",
+                                "bottom-end"
+                            ],
+                            "default": "bottom"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "position"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "position"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4677,6 +5913,64 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiFsTreeClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf",
+                                "vr"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf",
+                                "vr"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4713,6 +6007,47 @@
                         "code": ".my-fsTree {\n   @sugar.ui.fsTree;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiFsTreeInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4744,6 +6079,62 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.input",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiFormClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4780,6 +6171,51 @@
                         "code": ".my-input {\n   @sugar.ui.input;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiFormInputInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "outline": {
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4811,6 +6247,44 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.inputContainer",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiFormClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "default": [
+                                "group",
+                                "addon"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "default": "group"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4878,6 +6352,57 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiLabelClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "inline",
+                                "block",
+                                "float"
+                            ],
+                            "default": [
+                                "inline",
+                                "block",
+                                "float"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "inline",
+                                "block",
+                                "float"
+                            ],
+                            "default": "inline"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4914,6 +6439,38 @@
                         "code": ".my-label {\n   @sugar.ui.label;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiLabelInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "inline",
+                                "block",
+                                "float"
+                            ],
+                            "default": "inline"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4944,6 +6501,58 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiListClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "dl",
+                                "ul",
+                                "ol",
+                                "icon"
+                            ],
+                            "default": [
+                                "dl",
+                                "ul",
+                                "ol",
+                                "icon"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "dl",
+                                "ul",
+                                "ol",
+                                "icon"
+                            ],
+                            "default": "dl"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "tf",
+                                "vr"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "tf",
+                                "vr"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4980,6 +6589,39 @@
                         "code": ".my-list {\n   @sugar.ui.list;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiListInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "dl",
+                                "ul",
+                                "ol",
+                                "icon"
+                            ],
+                            "default": "dl"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5011,6 +6653,32 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiLoaderClassesClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "loaders": {
+                            "description": "Specify the loaders you want to generate",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "spinner",
+                                "round",
+                                "drop"
+                            ],
+                            "default": [
+                                "spinner",
+                                "round",
+                                "drop"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5047,6 +6715,24 @@
                         "code": ".my-drop {\n   @sugar.ui.loader.drop;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiLoaderDropMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "default": "s-loader-drop"
+                        },
+                        "duration": {
+                            "type": "String",
+                            "default": "1s"
+                        },
+                        "easing": {
+                            "type": "String",
+                            "default": "linear"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5083,6 +6769,24 @@
                         "code": ".my-round {\n   @sugar.ui.loader.round;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiloaderRoundMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "default": "s-loader-round"
+                        },
+                        "duration": {
+                            "type": "String",
+                            "default": "1s"
+                        },
+                        "easing": {
+                            "type": "String",
+                            "default": "linear"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5119,6 +6823,24 @@
                         "code": ".my-spinner {\n   @sugar.ui.loader.spinner;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiLoaderSpinnerMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "default": "s-loader-spinner"
+                        },
+                        "duration": {
+                            "type": "String",
+                            "default": "1s"
+                        },
+                        "easing": {
+                            "type": "String",
+                            "default": "linear"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5150,6 +6872,73 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiRadioClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "circle"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "circle"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "circle"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5186,6 +6975,50 @@
                         "code": ".my-radio {\n   @sugar.ui.radio;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiRadioInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill",
+                                "circle"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5217,6 +7050,76 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.range",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiRangeClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill",
+                                "circle"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill",
+                                "circle"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill",
+                                "circle"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5253,6 +7156,48 @@
                         "code": ".my-range {\n   @sugar.ui.range;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiRangeInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pull",
+                                "circle"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5284,6 +7229,70 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.select",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiFormSelectClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5320,6 +7329,47 @@
                         "code": ".my-select {\n   @sugar.ui.select;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiFormSelectInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5351,6 +7401,71 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiSwitchClassesMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5387,6 +7502,47 @@
                         "code": ".my-switch {\n   @sugar.ui.switch;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiSwitchMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "default"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5418,6 +7574,67 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.table",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiTableClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square"
+                            ],
+                            "default": [
+                                "default",
+                                "square"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf",
+                                "vr"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "tf",
+                                "vr"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5454,6 +7671,48 @@
                         "code": ".my-table {\n   @sugar.ui.table;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiTableInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5485,6 +7744,73 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tabs",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiListClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5521,15 +7847,82 @@
                         "code": ".my-tabs {\n   @sugar.ui.tabs;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiTabInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "description": "Specify the style you want for your tabs",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "description": "Specify the shape you want for your tabs",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "grow": {
+                            "type": "Boolean",
+                            "description": "Specify if you want your tabs to take all the available place of not",
+                            "default": false
+                        },
+                        "direction": {
+                            "type": "String",
+                            "description": "Specigy the direction of your tabs",
+                            "values": [
+                                "vertical",
+                                "horizontal"
+                            ],
+                            "default": "horizontal"
+                        },
+                        "outline": {
+                            "type": "Boolean",
+                            "description": "Specify if you want your tabs to have an outline on focus",
+                            "default": true
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "description": "Specify the scope(s) you want to generate",
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "grow",
+                                "direction"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "grow",
+                                "direction"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "tabs.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/tabs/tabs.ts",
+                "filename": "tabs.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/tabs/tabs.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.classes": {
@@ -5552,6 +7945,73 @@
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip",
                 "status": "beta",
                 "example": [],
+                "interface": {
+                    "name": "postcssSugarPluginUiTooltipClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "styles": {
+                            "type": "String[]",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": [
+                                "solid"
+                            ]
+                        },
+                        "shapes": {
+                            "type": "String[]",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": [
+                                "default",
+                                "square",
+                                "pill"
+                            ]
+                        },
+                        "defaultStyle": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "defaultShape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr",
+                                "tf"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -5588,6 +8048,65 @@
                         "code": ".my-tooltip {\n   @sugar.ui.tooltip;\n}"
                     }
                 ],
+                "interface": {
+                    "name": "postcssSugarPluginUiTooltipInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "default"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "position": {
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "right",
+                                "bottom",
+                                "left"
+                            ],
+                            "default": "top"
+                        },
+                        "interactive": {
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "position",
+                                "interactive"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "position",
+                                "interactive"
+                            ]
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

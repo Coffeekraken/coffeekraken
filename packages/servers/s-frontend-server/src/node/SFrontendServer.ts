@@ -698,7 +698,7 @@ export default class SFrontendServer extends __SClass {
 
                 // handler
                 handlerFn = await this._getHandlerFn(
-                    pageConfig.handler ?? 'dynamic',
+                    pageConfig.handler ?? 'generic',
                 );
 
                 slugs.forEach((slug) => {

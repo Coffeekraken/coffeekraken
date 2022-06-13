@@ -84,7 +84,7 @@ export default function integer(
     }
 
     if (!valid) {
-        message = finalSettings.i18n?.string?.replace('%value', value);
+        message = finalSettings.i18n?.string;
     }
 
     return {

@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -14,18 +14,18 @@
 
 {{#> layout-readme }}
 
-## Glob under steroids
+## SGlob
 
 This `SGlob` class allows you mainly to resolve glob patterns. It uses under the hood the [glob](https://www.npmjs.com/package/glob) package and add some nice features to it like:
 
-- Additional syntax to be more precise in your globs
-- Support for array of glob patterns
-- Possibility to specify some `regex` to search into the files
-- Return an array of [SFile](/@coffeekraken/s-glob/doc/readme)
-- Check if a string is a glob or not
-- Extract from a string the glob part
-- Extract from a string the none glob part
-- More to come...
+-   Additional syntax to be more precise in your globs
+-   Support for array of glob patterns
+-   Possibility to specify some `regex` to search into the files
+-   Return an array of [SFile](/@coffeekraken/s-glob/doc/readme)
+-   Check if a string is a glob or not
+-   Extract from a string the glob part
+-   Extract from a string the none glob part
+-   More to come...
 
 ## Usage
 

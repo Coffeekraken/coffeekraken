@@ -14,7 +14,7 @@
 
 {{#> layout-readme }}
 
-## Manipulate and convert colors with ease
+## SColor
 
 This `SColor` class allows you to manipulate and convert colors with ease. Here's some of the features supported:
 

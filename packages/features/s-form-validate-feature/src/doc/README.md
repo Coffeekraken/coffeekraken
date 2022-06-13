@@ -20,7 +20,11 @@ This package expose a simple `SFormValidateFeature` class that allows you to val
 
 ## Features
 
--
+-   Validate your field and display an error message if needed
+-   Prevent your form to be submited when an error occurs
+-   Built-in validators like `email`, `min`, `max`, `pattern`, etc...
+-   Support custom validators through the [@coffeekraken/s-validator](/package/@coffeekraken/s-validator/doc/readme) package
+-   Custom inline error message support
 -   And more...
 
 ## Usage
@@ -28,37 +32,51 @@ This package expose a simple `SFormValidateFeature` class that allows you to val
 Here's how to import and make use of this feature:
 
 ```js
-import { define } from '@coffeekraken/s-activate-feature';
+import { define } from '@coffeekraken/s-form-validate-feature';
 define({
     // some default props...
 });
 ```
 
-#### Simple tabs
+#### Simple email validation
 
 ```html
-<nav>
-    <a s-activate href="#tab-1" group="my-tabs">Activate tab 1</a>
-    <a s-activate href="#tab-2" group="my-tabs">Activate tab 2</a>
-    <a s-activate href="#tab-3" group="my-tabs">Activate tab 3</a>
-</nav>
-<div id="tab-1">Hello</div>
-<div id="tab-2">World</div>
-<div id="tab-3">Plop</div>
+<label class="s-label:responsive" s-form-validate email>
+    Email address
+    <input
+        type="text"
+        class="s-input s-width:60"
+        placeholder="olivier.bossel@coffeekraken.io"
+    />
+</label>
 ```
 
-#### Simple toggle button
+#### Inline message
 
-<a href="#my-content" toggle>Toggle content display</a>
-
-<div id="my-content">Hello world</div>
+```html
+<label
+    class="s-label:responsive"
+    s-form-validate
+    email
+    email-message="Something goes wrong"
+>
+    Email address
+    <input
+        type="text"
+        class="s-input s-width:60"
+        placeholder="olivier.bossel@coffeekraken.io"
+    />
+</label>
+```
 
 ## Properties
 
-{{> interface namespace='@coffeekraken.s-activate-feature.js.interface.SFormValidateFeatureInterface' }}
+{{> interface namespace='@coffeekraken.s-form-validate-feature.js.interface.SFormValidateFeatureInterface' }}
+
+> Note that to pass properties using html attributes, you must use the `dashCase` case...
 
 ## API
 
-For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-activate-feature.js.SFormValidateFeature)
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-form-validate-feature.js.SFormValidateFeature)
 
 {{/ layout-readme }}

@@ -9,5 +9,4 @@ export default {
             path: 'pages.markdown.markdown',
         },
     ],
-    handler: 'dynamic',
 };

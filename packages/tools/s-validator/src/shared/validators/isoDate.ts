@@ -75,7 +75,7 @@ export default function isoDate(
     valid = __isIsoDate(value);
 
     if (!valid) {
-        message = finalSettings.i18n?.string?.replace('%date', value);
+        message = finalSettings.i18n?.string;
     }
 
     return {

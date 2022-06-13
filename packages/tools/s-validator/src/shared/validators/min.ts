@@ -77,19 +77,19 @@ export default function min(
                 value = value.trim();
             }
             valid = value.length >= n;
-            message = finalSettings.i18n?.string?.replace('%n', n);
+            message = finalSettings.i18n?.string.replace('%n', n);
             break;
         case typeof value === 'number':
             valid = value >= n;
-            message = finalSettings.i18n?.number?.replace('%n', n);
+            message = finalSettings.i18n?.number.replace('%n', n);
             break;
         case Array.isArray(value):
             valid = value.length >= n;
-            message = finalSettings.i18n?.array?.replace('%n', n);
+            message = finalSettings.i18n?.array.replace('%n', n);
             break;
         case typeof value === 'object':
             valid = Object.keys(value).length >= n;
-            message = finalSettings.i18n?.object?.replace('%n', n);
+            message = finalSettings.i18n?.object.replace('%n', n);
             break;
         default:
             throw new Error(

@@ -34,7 +34,7 @@ export default class SDataHandlerGeneric {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static extensions = ['js', 'json'];
+    static extensions = ['php', 'js', 'json'];
 
     /**
      * @name          load
@@ -58,9 +58,13 @@ export default class SDataHandlerGeneric {
                 );
 
             const dataFilePath = __checkPathWithMultipleExtensions(
-                `${filePathWithoutExtension}.${extension}`,
+                `${filePathWithoutExtension}.data.${extension}`,
                 SDataHandlerGeneric.extensions,
             );
+
+            if (!dataFilePath) {
+                return resolve({});
+            }
 
             switch (__extension(dataFilePath)) {
                 case 'php':

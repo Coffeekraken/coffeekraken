@@ -75,6 +75,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",

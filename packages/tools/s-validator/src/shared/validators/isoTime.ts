@@ -75,7 +75,7 @@ export default function isoTime(
     valid = __isIsoTime(value);
 
     if (!valid) {
-        message = finalSettings.i18n?.string?.replace('%time', value);
+        message = finalSettings.i18n?.string;
     }
 
     return {

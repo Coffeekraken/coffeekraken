@@ -9,5 +9,4 @@ export default {
             path: 'pages.styleguide.styleguide',
         },
     ],
-    handler: 'dynamic',
 };

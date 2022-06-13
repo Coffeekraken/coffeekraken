@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -14,12 +14,12 @@
 
 {{#> layout-readme }}
 
-## Calcul and display durations with ease
+## SDuration
 
 This `SDuration` class allows you to calculate and display for example a process duration with ease. Here's some features
 
-- Calculate with ease durations
-- Display formated duration like `2m33s`
+-   Calculate with ease durations
+-   Display formated duration like `2m33s`
 
 ## Usage
 
@@ -28,7 +28,7 @@ Here's how to use our implementation:
 ```js
 import __SDuration from '@coffeekraken/s-duration';
 
-const duration = new __SDuration();;
+const duration = new __SDuration();
 
 // do something here...
 

@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -14,9 +14,9 @@
 
 {{#> layout-readme }}
 
-## Handle theme stuffs with ease
+## STheme
 
-This class allows you to access and manipulate all theme things like accessing configutations, override some, changing theme, etc...
+This class allows you to access and manipulate all theme things like accessing configurations, override some, changing theme, etc...
 
 ## Usage
 
@@ -61,9 +61,9 @@ __STheme.loopOnColors((colorObj) => {
 
 This package has two distinct API. One for the `browser` platform, and the other for the `node` one.
 
-- Check out [this doc](/api/@coffeekraken.s-theme.js.STheme) for `browser` integration
-- Check out [this doc](/api/@coffeekraken.s-theme.node.STheme) for `node` integration
-- Check out [this doc](/api/@coffeekraken.s-theme.shared.SThemeBase) for `shared` integration
+-   Check out [this doc](/api/@coffeekraken.s-theme.js.STheme) for `browser` integration
+-   Check out [this doc](/api/@coffeekraken.s-theme.node.STheme) for `node` integration
+-   Check out [this doc](/api/@coffeekraken.s-theme.shared.SThemeBase) for `shared` integration
 
 For more information about the API of this class, please check [our API documentation](/api/@coffeekraken.s-component-utils.js.SComponentUtils)
 

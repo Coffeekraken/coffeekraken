@@ -60,16 +60,20 @@ export default async function interfaceTag(data, blockSettings) {
         });
         // @ts-ignore
         interf = await import(potentialPath.replace(/\.ts$/, '.js'));
-        interf = interf.default;
         try {
             __fs.unlinkSync(potentialPath.replace(/\.ts$/, '.js'));
         } catch (e) {}
     } else {
         // @ts-ignore
-        interf = (await import(potentialPath))[importName];
+        interf = await import(potentialPath);
     }
 
-    const interfaceObj = interf.toObject();
+    // take at first the "interface" export
+    if (interf.interface) interf = interf.interface;
+    // otherwise, take the default one
+    else interf = interf.default;
+
+    const interfaceObj = interf.toObject?.() ?? interf;
     interfaceObj.definition = __deepMap(
         interfaceObj.definition,
         ({ object, prop, value }) => {

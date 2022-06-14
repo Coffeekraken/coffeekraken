@@ -11,9 +11,7 @@ import __SFrontendChecker, {
 export default class SDashboardFrontendCheckerComponent extends __SLitComponent {
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
         this._level = parseInt(
             window.localStorage.getItem('ck-dashboard-level') || 2,

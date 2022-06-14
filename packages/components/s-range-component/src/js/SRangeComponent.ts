@@ -99,12 +99,8 @@ export default class SRange extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                litComponent: {
-                    shadowDom: false,
-                },
-                componentUtils: {
-                    name: 's-range',
-                },
+                name: 's-range',
+                shadowDom: false,
             }),
         );
     }

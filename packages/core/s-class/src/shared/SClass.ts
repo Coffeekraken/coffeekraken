@@ -62,7 +62,7 @@ export interface ISClassExposeSettings {
 }
 
 export interface ISClass {
-    // settings: ISClassSettings;
+    settings: ISClassSettings;
     metas: ISClassMetas;
 }
 
@@ -77,19 +77,7 @@ export default class SClass {
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    settings: ISClassSettings = {};
-
-    /**
-     * @name            _interfacesStack
-     * @type            Object
-     * @private
-     *
-     * Store the interfaces objects by class
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    public _interfacesStack: any = {};
+    public settings: ISClassSettings = {};
 
     /**
      * @name            metas

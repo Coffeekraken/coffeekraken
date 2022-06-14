@@ -103,10 +103,6 @@ export interface ISEventEmitterEventObj {
     reject: Function;
 }
 
-export interface ISEventEmitterConstructorSettings {
-    eventEmitter?: Partial<ISEventEmitterSettings>;
-    [key: string]: any;
-}
 export interface ISEventEmitterInstanceSettings {
     eventEmitter: ISEventEmitterSettings;
 }
@@ -124,7 +120,7 @@ export interface ISEventEmitter extends ISClass {
     settings: ISEventEmitterInstanceSettings;
     _buffer: ISEventEmitterEventObj[];
     _eventsStacks: ISEventEmitterEventsStacks;
-    eventEmitterSettings: ISEventEmitterSettings;
+    settings: ISEventEmitterSettings;
     on(stack: string, callback: ISEventEmitterCallbackFn): ISEventEmitter;
     emit(
         stack: string,
@@ -259,10 +255,9 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 if (destSEventEmitter instanceof SEventEmitter) {
                     if (
                         !set.overrideEmitter &&
-                        destSEventEmitter.eventEmitterSettings.bind
+                        destSEventEmitter.settings.bind
                     ) {
-                        emitMetas.emitter =
-                            destSEventEmitter.eventEmitterSettings.bind;
+                        emitMetas.emitter = destSEventEmitter.settings.bind;
                     } else if (set.overrideEmitter === true) {
                         emitMetas.emitter = destSEventEmitter;
                     }
@@ -353,21 +348,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     _onStackById: any = {};
 
     // @ts-ignore
-    settings: ISEventEmitterConstructorSettings;
-
-    /**
-     * @name            eventEmitterSettings
-     * @type            ISEventEmitterSettings
-     * @get
-     *
-     * Access the event emitter settings
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    get eventEmitterSettings(): ISEventEmitterSettings {
-        return (<any>this).settings.eventEmitter;
-    }
+    settings: ISEventEmitterSettings;
 
     /**
      * @name                  constructor
@@ -389,21 +370,19 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(settings: ISEventEmitterConstructorSettings = {}) {
+    constructor(settings?: Partial<ISEventEmitterSettings>) {
         super(
             __deepMerge(
                 {
-                    eventEmitter: {
-                        asyncStart: false,
-                        bufferTimeout: 1000,
-                        defaults: {},
-                        castByEvent: {
-                            log: __SLog,
-                        },
-                        bind: undefined,
+                    asyncStart: false,
+                    bufferTimeout: 1000,
+                    defaults: {},
+                    castByEvent: {
+                        log: __SLog,
                     },
+                    bind: undefined,
                 },
-                settings || {},
+                settings ?? {},
             ),
         );
     }
@@ -418,7 +397,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     bind(obj: any) {
-        this.eventEmitterSettings.bind = obj;
+        this.settings.bind = obj;
         return this;
     }
 
@@ -506,7 +485,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     start() {
-        if (!this.eventEmitterSettings.asyncStart) return;
+        if (!this.settings.asyncStart) return;
         // update the asyncStarted status
         this._asyncStarted = true;
         // process the buffer
@@ -536,8 +515,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             {
                 event: event,
                 name: event,
-                emitter:
-                    this.eventEmitterSettings.bind ?? metas?.emitter ?? this,
+                emitter: this.settings.bind ?? metas?.emitter ?? this,
                 originalEmitter: metas?.originalEmitter ?? this,
                 time: Date.now(),
                 level: 0,
@@ -554,23 +532,18 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             // defaults
             if (__isPlainObject(value)) {
                 // get the default object to extends
-                Object.keys(this.eventEmitterSettings.defaults).forEach(
-                    (key) => {
-                        const parts = key.split(',').map((l) => l.trim());
-                        if (
-                            parts.indexOf(event) === -1 &&
-                            parts.indexOf('*') === -1
-                        )
-                            return;
-                        value = __deepMerge(
-                            value,
-                            this.eventEmitterSettings.defaults?.[key],
-                        );
-                    },
-                );
+                Object.keys(this.settings.defaults).forEach((key) => {
+                    const parts = key.split(',').map((l) => l.trim());
+                    if (
+                        parts.indexOf(event) === -1 &&
+                        parts.indexOf('*') === -1
+                    )
+                        return;
+                    value = __deepMerge(value, this.settings.defaults?.[key]);
+                });
             }
 
-            const CastClass = this.eventEmitterSettings.castByEvent[event];
+            const CastClass = this.settings.castByEvent[event];
             if (
                 CastClass &&
                 __isClass(CastClass) &&
@@ -592,7 +565,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             }
 
             // check async start
-            if (!this._asyncStarted && this.eventEmitterSettings.asyncStart) {
+            if (!this._asyncStarted && this.settings.asyncStart) {
                 this._buffer.push({
                     event,
                     value,
@@ -755,7 +728,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                     return false;
                 });
                 // @ts-ignore
-            }, this.eventEmitterSettings.bufferTimeout);
+            }, this.settings.bufferTimeout);
         }
     }
 

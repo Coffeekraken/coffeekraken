@@ -1,4 +1,4 @@
-import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SFile from '@coffeekraken/s-file';
@@ -33,7 +33,7 @@ import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
  * This class represent the markdown builder that helps you create and maintain multiple README for example
  * with a common style and some common sections like footer, etc...
  *
- * @param           {ISMarkdownBuilderCtorSettings}          [settings={}]           Some settings to configure your builder instance
+ * @param           {ISMarkdownBuilderSettings}          [settings={}]           Some settings to configure your builder instance
  *
  * @example         js
  * import SMarkdownBuilder from '@coffeekraken/s-postcss-builder';
@@ -51,11 +51,7 @@ import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISMarkdownBuilderSettings {}
-
-export interface ISMarkdownBuilderCtorSettings extends ISBuilderCtorSettings {
-    markdownBuilder: Partial<ISMarkdownBuilderSettings>;
-}
+export interface ISMarkdownBuilderSettings extends ISBuilderSettings {}
 
 export interface ISMarkdownBuilderResult {
     inputFile?: __SFile;
@@ -223,20 +219,6 @@ export default class SMarkdownBuilder extends __SBuilder {
     static _marked = __marked;
 
     /**
-     * @name            markdownBuilderSettings
-     * @type            ISMarkdownBuilderSettings
-     * @get
-     *
-     * Access the postcss builder settings
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get markdownBuilderSettings(): ISMarkdownBuilderSettings {
-        return (<any>this).settings.markdownBuilder;
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      *
@@ -245,16 +227,9 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISMarkdownBuilderCtorSettings>) {
+    constructor(settings?: Partial<ISMarkdownBuilderSettings>) {
         super(
-            __deepMerge(
-                {
-                    markdownBuilder: {
-                        ...__SSugarConfig.get('markdownBuilder'),
-                    },
-                },
-                settings ?? {},
-            ),
+            __deepMerge(__SSugarConfig.get('markdownBuilder'), settings ?? {}),
         );
 
         // register layouts from config
@@ -494,7 +469,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                             this.constructor._registeredHelpers ?? [],
                         )[i];
                         // @ts-ignore
-                        const helperFn = (
+                        const helperFn = ( // @ts-ignore
                             await import(
                                 // @ts-ignore
                                 this.constructor._registeredHelpers[helperName]
@@ -595,7 +570,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                     const viewData = {
                         config: __SSugarConfig.get('.'),
                         flatConfig: __flatten(__SSugarConfig.get('.')),
-                        settings: this.markdownBuilderSettings,
+                        settings: this.settings,
                         params,
                         packageJson: __packageJson(),
                         docMenu: docmap.menu,

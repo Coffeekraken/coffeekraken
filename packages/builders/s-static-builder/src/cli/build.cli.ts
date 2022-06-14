@@ -5,9 +5,7 @@ import __SStaticBuilderBuildParamsInterface from '../node/interface/SStaticBuild
 export default function build(stringArgs = '') {
     return new __SPromise(async ({ resolve, reject, pipe }) => {
         const builder = new __SStaticBuilder({
-            builder: {
-                interface: __SStaticBuilderBuildParamsInterface,
-            },
+            interface: __SStaticBuilderBuildParamsInterface,
         });
         await pipe(builder.build(stringArgs));
         resolve();

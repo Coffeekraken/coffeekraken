@@ -73,15 +73,8 @@ export interface ISDocblockBlockCtorSettings {
     docblockBlock?: Partial<ISDocblockBlockSettings>;
 }
 
-export interface ISDocblockBlock {
-    new (source: string, settings: ISDocblockBlockCtorSettings);
-    _source: string;
-    _blockObj: any;
-    toObject(): any;
-}
-
 // @ts-ignore
-class SDocblockBlock extends __SClass implements ISDocblockBlock {
+class SDocblockBlock extends __SClass {
     /**
      * @name            tagsMap
      * @type            Object
@@ -140,20 +133,6 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
     }
 
     /**
-     * @name        docblockBlockSettings
-     * @type        ISDocblockBlockSettings
-     * @get
-     *
-     * Access the docblockBlock settings
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get docblockBlockSettings(): ISDocblockBlockSettings {
-        return (<any>this.settings).docblockBlock;
-    }
-
-    /**
      * @name          constructor
      * @type          Function
      * @contructor
@@ -162,17 +141,15 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(source, settings = {}) {
+    constructor(source, settings?: Partial<ISDocblockBlockSettings>) {
         super(
             __deepMerge(
                 {
-                    docblockBlock: {
-                        filePath: null,
-                        packageJson: null,
-                        renderMarkdown: false,
-                        markedOptions: {},
-                        tags: SDocblockBlock.tagsMap,
-                    },
+                    filePath: null,
+                    packageJson: null,
+                    renderMarkdown: false,
+                    markedOptions: {},
+                    tags: SDocblockBlock.tagsMap,
                 },
                 settings,
             ),
@@ -318,10 +295,8 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
 
             add();
 
-            if (this.docblockBlockSettings.renderMarkdown) {
-                __marked.setOptions(
-                    this.docblockBlockSettings.markedOptions ?? {},
-                );
+            if (this.settings.renderMarkdown) {
+                __marked.setOptions(this.settings.markedOptions ?? {});
             }
 
             for (let i = 0; i < Object.keys(docblockObj).length; i++) {
@@ -336,12 +311,12 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
                     continue;
 
                 // process with tags
-                if (this.docblockBlockSettings.tags[prop] && prop !== 'src') {
+                if (this.settings.tags[prop] && prop !== 'src') {
                     let res;
                     try {
-                        res = await this.docblockBlockSettings.tags[prop](
+                        res = await this.settings.tags[prop](
                             value,
-                            this.docblockBlockSettings,
+                            this.settings,
                         );
                     } catch (e) {
                         emit('log', {
@@ -355,11 +330,11 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
                 } else {
                     finalDocblockObj[prop] = __simpleValueTag(
                         value,
-                        this.docblockBlockSettings,
+                        this.settings,
                     );
                 }
 
-                if (this.docblockBlockSettings.renderMarkdown) {
+                if (this.settings.renderMarkdown) {
                     function renderMarkdown(data: any): any {
                         if (
                             data instanceof String &&

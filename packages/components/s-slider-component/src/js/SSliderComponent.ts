@@ -314,12 +314,8 @@ export default class SSlider extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                litComponent: {
-                    shadowDom: false,
-                },
-                componentUtils: {
-                    name: 's-slider',
-                },
+                name: 's-slider',
+                shadowDom: false,
             }),
         );
     }

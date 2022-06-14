@@ -58,18 +58,14 @@ export default class SDashboardComponent extends __SLitComponent {
     _pipedEvents = [...__SDashboardPagesComponentEvents];
 
     // @ts-ignore
-    _dashboardSettings = this.document.dashboard.dashboardSettings;
+    _dashboardSettings = this.document.dashboard.settings.dashboard;
     _dashboardConfig;
 
     constructor() {
         super(
             __deepMerge({
-                litComponent: {
-                    shadowDom: false,
-                },
-                componentUtils: {
-                    interface: __SDashboardComponentInterface,
-                },
+                interface: __SDashboardComponentInterface,
+                shadowDom: false,
             }),
         );
 

@@ -96,10 +96,7 @@ export default class SActivateFeature extends __SFeature {
             node,
             __deepMerge(
                 {
-                    componentUtils: {
-                        interface: __SActivateFeatureInterface,
-                    },
-                    feature: {},
+                    interface: __SActivateFeatureInterface,
                 },
                 settings ?? {},
             ),

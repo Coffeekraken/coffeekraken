@@ -36,30 +36,12 @@ export interface ISDashboardSettings {
     components: Record<string, any>;
 }
 
-export interface ISDashboardCtorSettings {
-    dashboard: Partial<ISDashboardSettings>;
-}
-
 export default class SDashboard extends __SClass {
     /**
      * Store the iframe of the dashboard
      */
     _$iframe: HTMLIFrameElement;
     _$focusItem: HTMLDivElement;
-
-    /**
-     * @name        dashboardSettings
-     * @type        ISDashboardSettings
-     * @get
-     *
-     * Access the dashboard settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get dashboardSettings(): ISDashboardSettings {
-        return (<any>this).settings.dashboard;
-    }
 
     /**
      * @name            document
@@ -85,20 +67,20 @@ export default class SDashboard extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISDashboardCtorSettings>) {
+    constructor(settings?: Partial<ISDashboardSettings>) {
         super(
-            __deepMerge({
+            __deepMerge(
                 // @ts-ignore
-                dashboard: {
-                    ...__SDashboardSettingsInterface.defaults(),
-                },
-                ...(settings ?? {}),
-            }),
+                __SDashboardSettingsInterface.defaults(),
+                settings ?? {},
+            ),
         );
 
         // expose the dashboard on document to be able to access it from the iframe
         // @ts-ignore
         document.dashboard = this;
+
+        console.log(this.settings);
 
         // create the iframe
         this._$iframe = document.createElement('iframe');

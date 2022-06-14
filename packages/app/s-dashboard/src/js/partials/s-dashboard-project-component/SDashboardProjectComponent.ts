@@ -26,9 +26,7 @@ export default class SDashboardProjectComponent extends __SLitComponent {
 
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
 
         this._project = this.document.env.SUGAR.config.project;

@@ -6,10 +6,8 @@ describe('@coffeekraken.s-postcss-builder', () => {
         await __SSugarConfig.load();
 
         const builder = new __SPostcssBuilder({
-            postcssBuilder: {
-                purgecss: {
-                    content: [`${__dirname}/__data__/index.html`],
-                },
+            purgecss: {
+                content: [`${__dirname}/__data__/index.html`],
             },
         });
 

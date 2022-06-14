@@ -52,10 +52,6 @@ export interface ISConductorSettings {
     log: boolean;
 }
 
-export interface ISConductorCtorSettings {
-    conductor: Partial<ISConductorSettings>;
-}
-
 export type TSConductorTrigger = TWhenTrigger | 'idle';
 
 export interface ISConductorTaskObj extends ISDurationObject {
@@ -183,20 +179,6 @@ export default class SConductor extends __SClass {
     _runningTasksStack: Record<string, ISConductorTaskObj> = {};
 
     /**
-     * @name        conductorSettings
-     * @type        ISConductorSettings
-     * @get
-     *
-     * Access the settings of the conductor
-     *
-     * @since       2.0.0
-     * @author      Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    get conductorSettings(): ISConductorSettings {
-        return (this as any).settings.conductor;
-    }
-
-    /**
      * @name        _logTimeout
      * @type        number
      * @private
@@ -243,19 +225,18 @@ export default class SConductor extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(settings?: Partial<ISConductorCtorSettings>) {
+    constructor(settings?: Partial<ISConductorSettings>) {
         super(
             __deepMerge(
-                {
-                    conductor: __SConductorSettingsInterface.defaults(),
-                },
+                // @ts-ignore
+                __SConductorSettingsInterface.defaults(),
                 settings ?? {},
             ),
         );
 
         this._idleInterval = setInterval(() => {
             this._checkIdle();
-        }, this.conductorSettings.idleInterval);
+        }, this.settings.idleInterval);
     }
 
     /**
@@ -283,18 +264,16 @@ export default class SConductor extends __SClass {
 
         if (taskToExecute) {
             this._executeTask(taskToExecute);
-        } else if (!this._logTimeout && this.conductorSettings.log) {
+        } else if (!this._logTimeout && this.settings.log) {
             this._logTimeout = setTimeout(() => {
                 console.log(
                     `[SConductor] The conductor "${
                         this.metas.id
                     }" has been executed tasks during ${__formatDuration(
-                        Date.now() -
-                            this._startTime -
-                            this.conductorSettings.logTimeout,
+                        Date.now() - this._startTime - this.settings.logTimeout,
                     )}`,
                 );
-            }, this.conductorSettings.logTimeout);
+            }, this.settings.logTimeout);
         }
     }
 
@@ -347,7 +326,7 @@ export default class SConductor extends __SClass {
             this._checkIdle();
             this._idleInterval = setInterval(() => {
                 this._checkIdle();
-            }, this.conductorSettings.idleTimeout);
+            }, this.settings.idleTimeout);
         }, 100);
 
         // return the task object

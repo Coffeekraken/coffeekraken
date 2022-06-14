@@ -115,16 +115,6 @@ export default class SFrontendServer extends __SClass {
         this._express = __express();
 
         __runMiddleware(this._express);
-
-        // const originalRunMiddleware = this._express.runMiddleware;
-        // this._express.runMiddleware = (...args) => {
-        //     try {
-        //         console.log('eororor', args);
-        //         originalRunMiddleware(...args);
-        //     } catch (e) {
-        //         console.log('EEEEE');
-        //     }
-        // };
     }
 
     /**
@@ -267,6 +257,7 @@ export default class SFrontendServer extends __SClass {
                             );
                         }
 
+                        // @ts-ignore
                         const { default: middlewareWrapperFn } = await import(
                             middlewareObj.path
                         ); // eslint-disable-line

@@ -56,10 +56,8 @@ export default class SFloatingFeature extends __SFeature {
             node,
             __deepMerge(
                 {
-                    componentUtils: {
-                        interface: __SFloatingFeatureInterface,
-                        style: __css,
-                    },
+                    interface: __SFloatingFeatureInterface,
+                    style: __css,
                 },
                 settings ?? {},
             ),

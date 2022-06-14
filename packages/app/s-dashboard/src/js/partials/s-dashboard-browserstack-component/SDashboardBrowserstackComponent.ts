@@ -40,9 +40,7 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
 
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
 
         let headers = new Headers();

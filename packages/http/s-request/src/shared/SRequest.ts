@@ -47,9 +47,6 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISRequestCtorSettings {
-    request: Partial<ISRequestSettings>;
-}
 export interface ISRequestSettings {}
 
 export interface ISRequestParams {
@@ -115,20 +112,6 @@ export default class SRequest extends __SClass {
     _requestsCount = 0;
 
     /**
-     * @name          requestSettings
-     * @type          ISRequestSettings
-     * @get
-     *
-     * Access the request settings
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get requestSettings(): ISRequestSettings {
-        return (<any>this).settings.request;
-    }
-
-    /**
      * @name                              constructor
      * @type                              Function
      *
@@ -138,16 +121,9 @@ export default class SRequest extends __SClass {
      */
     constructor(
         params: Partial<ISRequestParams>,
-        settings?: Partial<ISRequestCtorSettings>,
+        settings?: Partial<ISRequestSettings>,
     ) {
-        super(
-            __deepMerge(
-                {
-                    request: {},
-                },
-                settings ?? {},
-            ),
-        );
+        super(__deepMerge({}, settings ?? {}));
 
         // if the request is not an SRequestConfig, create it
         this._defaultRequestParams = __SRequestParamsInterface.apply(

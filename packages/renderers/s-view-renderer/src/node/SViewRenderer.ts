@@ -173,14 +173,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         settings: Partial<ISViewCtorSettings>,
     ) {
         return new __SPromise(async ({ resolve, reject, pipe }) => {
-            const viewInstance = new SViewRenderer(
-                __deepMerge(
-                    {
-                        viewRenderer: {},
-                    },
-                    settings ?? {},
-                ),
-            );
+            const viewInstance = new SViewRenderer(__deepMerge(settings ?? {}));
 
             let resPromise;
 
@@ -369,20 +362,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     private _sharedData: any;
 
     /**
-     * @name      viewRendererSettings
-     * @type      ISViewRendererSettings
-     * @get
-     *
-     * Access the template settings
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get viewRendererSettings(): ISViewRendererSettings {
-        return (<any>this).settings.viewRenderer;
-    }
-
-    /**
      * @name      constructor
      * @type      Function
      * @constructor
@@ -396,17 +375,15 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         // save the settings
         super(
             __deepMerge(
-                {
-                    // @ts-ignore
-                    viewRenderer: __SViewRendererSettingsInterface.defaults(),
-                },
+                // @ts-ignore
+                __SViewRendererSettingsInterface.defaults(),
                 settings || {},
             ),
         );
 
-        this.viewRendererSettings.rootDirs = (<any>(
-            this.constructor
-        )).getRootDirs(this.viewRendererSettings.rootDirs || []);
+        this.settings.rootDirs = (<any>this.constructor).getRootDirs(
+            this.settings.rootDirs || [],
+        );
 
         // create a shared data file path to store shared data
         this._sharedDataFilePath = `${__packageTmpDir()}/viewRenderer/sharedData-${__uniqid()}.json`;
@@ -437,18 +414,12 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         }
 
         // track the shared data
-        let sharedData = this.viewRendererSettings.sharedData ?? {};
+        let sharedData = this.settings.sharedData ?? {};
 
         // shared data
-        if (this.viewRendererSettings.sharedDataFiles) {
-            for (
-                let i = 0;
-                i < this.viewRendererSettings.sharedDataFiles.length;
-                i++
-            ) {
-                const dataFilePath = this.viewRendererSettings.sharedDataFiles[
-                    i
-                ];
+        if (this.settings.sharedDataFiles) {
+            for (let i = 0; i < this.settings.sharedDataFiles.length; i++) {
+                const dataFilePath = this.settings.sharedDataFiles[i];
                 const extension = __extension(dataFilePath);
                 if (!SViewRenderer.dataFiles[extension]) {
                     throw new Error(
@@ -524,12 +495,8 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 }
             } else if (!viewDotPath.match(/\//gm)) {
                 // doted path
-                for (
-                    let i = 0;
-                    i < this.viewRendererSettings.rootDirs.length;
-                    i++
-                ) {
-                    const rootDir = this.viewRendererSettings.rootDirs[i];
+                for (let i = 0; i < this.settings.rootDirs.length; i++) {
+                    const rootDir = this.settings.rootDirs[i];
                     const potentialViewPath = `${rootDir}/${viewDotPath
                         .split('.')
                         .join('/')}.!(data)*`;
@@ -600,7 +567,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             const viewRendererSettings = Object.assign(
                 {},
                 <ISViewRendererSettings>(
-                    __deepMerge(this.viewRendererSettings, settings || {})
+                    __deepMerge(this.settings, settings || {})
                 ),
             );
 

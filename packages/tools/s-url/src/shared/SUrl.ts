@@ -60,10 +60,6 @@ import __SClass from '@coffeekraken/s-class';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-
-export interface ISUrlCtorSettings {
-    url: Partial<ISUrlSettings>;
-}
 export interface ISUrlSettings {}
 
 export default class SUrl extends __SClass {
@@ -111,15 +107,13 @@ export default class SUrl extends __SClass {
      */
     constructor(
         url: string = window.document.location.href,
-        settings?: Partial<ISUrlCtorSettings>,
+        settings?: Partial<ISUrlSettings>,
     ) {
         // save the settings
         super(
             __deepMerge(
                 {
-                    url: {
-                        schema: null,
-                    },
+                    schema: null,
                 },
                 settings ?? {},
             ),

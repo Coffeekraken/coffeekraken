@@ -180,12 +180,8 @@ export default class SFiltrableInput extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                litComponent: {
-                    shadowDom: false,
-                },
-                componentUtils: {
-                    name: 's-filtrable-input',
-                },
+                name: 's-filtrable-input',
+                shadowDom: false,
             }),
         );
     }

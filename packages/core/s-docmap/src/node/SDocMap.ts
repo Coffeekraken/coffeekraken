@@ -27,7 +27,7 @@ import __set from '@coffeekraken/sugar/shared/object/set';
 import __path from 'path';
 import __SDocmapBuildParamsInterface from './interface/SDocmapBuildParamsInterface';
 import __SDocmapInstallSnapshotParamsInterface from './interface/SDocmapInstallSnapshotParamsInterface';
-import __SDocMapReadParamsInterface from './interface/SDocmapReadParamsInterface';
+import __SDocmapReadParamsInterface from './interface/SDocmapReadParamsInterface';
 import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsInterface';
 import __SDocmapSettingsInterface from './interface/SDocmapSettingsInterface';
 import __chokidar from 'chokidar';
@@ -67,7 +67,7 @@ function __toLowerCase(l = '') {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISDocMapBuildParams {
+export interface ISDocmapBuildParams {
     watch: boolean;
     globs: string[];
     exclude: string[];
@@ -78,7 +78,7 @@ export interface ISDocMapBuildParams {
     outPath: string;
 }
 
-export interface ISDocMapSnapshotParams {
+export interface ISDocmapSnapshotParams {
     outDir: string;
 }
 
@@ -86,32 +86,28 @@ export interface ISDocmapInstallSnapshotsParams {
     glob: string;
 }
 
-export interface ISDocMapReadParams {
+export interface ISDocmapReadParams {
     input: string;
     sort: string[];
     sortDeep: string[];
-    // snapshot: string;
-    // snapshotDir: string;
+    snapshot: string;
+    snapshotDir: string;
 }
 
-export interface ISDocMapTagProxyFn {
+export interface ISDocmapTagProxyFn {
     (data: any): any;
 }
 
-export interface ISDocMapCustomMenuSettingFn {
+export interface ISDocmapCustomMenuSettingFn {
     (menuItem: ISDocmapMenuObjItem): boolean;
 }
 
-export interface ISDocMapSettings {
-    customMenu: Record<string, ISDocMapCustomMenuSettingFn>;
-    tagsProxy: Record<string, ISDocMapTagProxyFn>;
+export interface ISDocmapSettings {
+    customMenu: Record<string, ISDocmapCustomMenuSettingFn>;
+    tagsProxy: Record<string, ISDocmapTagProxyFn>;
 }
 
-export interface ISDocMapCtorSettings {
-    docmap: Partial<ISDocMapSettings>;
-}
-
-export interface ISDocMapEntry {
+export interface ISDocmapEntry {
     path?: string;
     name?: string;
     namespace?: string;
@@ -129,8 +125,8 @@ export interface ISDocMapEntry {
     package?: any;
     menu?: any;
 }
-export interface ISDocMapEntries {
-    [key: string]: ISDocMapEntry;
+export interface ISDocmapEntries {
+    [key: string]: ISDocmapEntry;
 }
 
 export interface ISDocmapMenuObjItem {
@@ -151,18 +147,18 @@ export interface ISDocmapMetasObj {
     snapshot?: string;
 }
 
-export interface ISDocMapObj {
+export interface ISDocmapObj {
     metas: ISDocmapMetasObj;
-    map: ISDocMapEntries;
+    map: ISDocmapEntries;
     menu: Partial<ISDocmapMenuObj>;
     snapshots: string[];
 }
 
-export interface ISDocMap {
-    _entries: ISDocMapEntries;
+export interface ISDocmap {
+    _entries: ISDocmapEntries;
 }
 
-class SDocMap extends __SClass implements ISDocMap {
+class SDocMap extends __SClass implements ISDocmap {
     static _cachedDocmapJson = {};
 
     static _registeredTagsProxy = {};
@@ -174,18 +170,18 @@ class SDocMap extends __SClass implements ISDocMap {
      * This static method allows you to register a tag proxy for all the SDocMap instances
      *
      * @param               {String}            tag           The tag you want to proxy
-     * @param               {ISDocMapTagProxyFn}      processor       The processor function
+     * @param               {ISDocmapTagProxyFn}      processor       The processor function
      *
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static registerTagProxy(tag: string, processor: ISDocMapTagProxyFn): any {
+    static registerTagProxy(tag: string, processor: ISDocmapTagProxyFn): any {
         this._registeredTagsProxy[tag] = processor;
     }
 
     /**
      * @name          _entries
-     * @type           ISDocMapEntries
+     * @type           ISDocmapEntries
      * @private
      *
      * This store the docMap.json entries
@@ -193,7 +189,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _entries: ISDocMapEntries = {};
+    _entries: ISDocmapEntries = {};
 
     /**
      * @name    _docmapJson
@@ -208,20 +204,6 @@ class SDocMap extends __SClass implements ISDocMap {
     _docmapJson: any;
 
     /**
-     * @name        docmapSettings
-     * @type            ISDocMapSettings
-     * @get
-     *
-     * Access the docmap settings
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get docmapSettings(): ISDocMapSettings {
-        return (<any>this.settings).docmap;
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -231,38 +213,36 @@ class SDocMap extends __SClass implements ISDocMap {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISDocMapCtorSettings>) {
+    constructor(settings?: Partial<ISDocmapSettings>) {
         super(
             __deepMerge(
                 {
                     metas: {
                         id: 'SDocMap',
                     },
-                    docmap: __SDocmapSettingsInterface.apply({
-                        tagsProxy: {},
-                        customMenu: {
-                            styleguide({ key, value, isObject }) {
-                                if (
-                                    key.split('/').length > 1 &&
-                                    key.match(
-                                        /^([a-zA-Z0-9-_@\/]+)?\/styleguide\//,
-                                    )
-                                )
-                                    return true;
-                                if (key === 'styleguide') return true;
-                                return false;
-                            },
-                        },
-                    }),
                 },
+                __SDocmapSettingsInterface.apply({
+                    tagsProxy: {},
+                    customMenu: {
+                        styleguide({ key, value, isObject }) {
+                            if (
+                                key.split('/').length > 1 &&
+                                key.match(/^([a-zA-Z0-9-_@\/]+)?\/styleguide\//)
+                            )
+                                return true;
+                            if (key === 'styleguide') return true;
+                            return false;
+                        },
+                    },
+                }),
                 settings || {},
             ),
         );
         // @ts-ignore
-        this.docmapSettings.tagsProxy = {
+        this.settings.tagsProxy = {
             // @ts-ignore
             ...this.constructor._registeredTagsProxy,
-            ...this.docmapSettings.tagsProxy,
+            ...this.settings.tagsProxy,
         };
 
         // watch file
@@ -292,17 +272,17 @@ class SDocMap extends __SClass implements ISDocMap {
      * @todo      integrate the "cache" feature
      *
      * @param       {Object}        [settings={}]       A settings object to override the instance level ones
-     * @return      {SPromise<ISDocMapObj>}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
+     * @return      {SPromise<ISDocmapObj>}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    read(params?: Partial<ISDocMapReadParams>): Promise<ISDocMapObj> {
+    read(params?: Partial<ISDocmapReadParams>): Promise<ISDocmapObj> {
         return new __SPromise(
             async ({ resolve, pipe, emit }) => {
-                const finalParams = <ISDocMapReadParams>(
+                const finalParams = <ISDocmapReadParams>(
                     __deepMerge(
-                        __SDocMapReadParamsInterface.defaults(),
+                        __SDocmapReadParamsInterface.defaults(),
                         params ?? {},
                     )
                 );
@@ -339,7 +319,7 @@ class SDocMap extends __SClass implements ISDocMap {
                 });
 
                 const extendedPackages: string[] = [];
-                const finalDocmapJson: Partial<ISDocMapObj> = {
+                const finalDocmapJson: Partial<ISDocmapObj> = {
                     metas: {
                         type: finalParams.snapshot ? 'snapshot' : 'current',
                         snapshot: finalParams.snapshot,
@@ -555,7 +535,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _extractMenu(
-        docmapJson: Partial<ISDocMapObj> = this._docmapJson,
+        docmapJson: Partial<ISDocmapObj> = this._docmapJson,
     ): ISDocmapMenuObj {
         const docmapJsonMenuByPackage = {};
 
@@ -610,19 +590,19 @@ class SDocMap extends __SClass implements ISDocMap {
             }
         });
 
-        Object.keys(this.docmapSettings.customMenu).forEach((menuName) => {
+        Object.keys(this.settings.customMenu).forEach((menuName) => {
             if (!finalMenu.custom[menuName]) finalMenu.custom[menuName] = {};
             // @ts-ignore
             finalMenu.custom[menuName].tree = __deepFilter(
                 finalMenu.tree,
                 // @ts-ignore
-                this.docmapSettings.customMenu[menuName],
+                this.settings.customMenu[menuName],
             );
             // @ts-ignore
             finalMenu.custom[menuName].slug = __deepFilter(
                 finalMenu.slug,
                 // @ts-ignore
-                this.docmapSettings.customMenu[menuName],
+                this.settings.customMenu[menuName],
             );
 
             Object.keys(finalMenu.packages).forEach((packageName) => {
@@ -631,7 +611,7 @@ class SDocMap extends __SClass implements ISDocMap {
                 const packageFilteredTree = __deepFilter(
                     packageObj.tree,
                     // @ts-ignore
-                    this.docmapSettings.customMenu[menuName],
+                    this.settings.customMenu[menuName],
                 );
                 finalMenu.custom[menuName].tree = __deepMerge(
                     finalMenu.custom[menuName].tree,
@@ -641,7 +621,7 @@ class SDocMap extends __SClass implements ISDocMap {
                 const packageFilteredSlug = __deepFilter(
                     packageObj.slug,
                     // @ts-ignore
-                    this.docmapSettings.customMenu[menuName],
+                    this.settings.customMenu[menuName],
                 );
                 finalMenu.custom[menuName].slug = __deepMerge(
                     finalMenu.custom[menuName].slug,
@@ -714,14 +694,14 @@ class SDocMap extends __SClass implements ISDocMap {
      * This method allows you to specify one or more glob patterns to scan files for "@namespace" docblock tags
      * and extract all the necessary informations to build the docmap.json file
      *
-     * @param         {Partial<ISDocMapBuildParams>}          params        The params to use to build your docmap
+     * @param         {Partial<ISDocmapBuildParams>}          params        The params to use to build your docmap
      * @return        {SPromise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    build(params: Partial<ISDocMapBuildParams>): Promise<any> {
-        const finalParams = <ISDocMapBuildParams>(
+    build(params: Partial<ISDocmapBuildParams>): Promise<any> {
+        const finalParams = <ISDocmapBuildParams>(
             __deepMerge(__SDocmapBuildParamsInterface.defaults(), params)
         );
         return new __SPromise(
@@ -831,10 +811,8 @@ class SDocMap extends __SClass implements ISDocMap {
                     });
 
                     const docblocksInstance = new __SDocblock(file.path, {
-                        docblock: {
-                            renderMarkdown: false,
-                            filepath: (<__SFile>file).path,
-                        },
+                        renderMarkdown: false,
+                        filepath: (<__SFile>file).path,
                     });
 
                     await pipe(docblocksInstance.parse());
@@ -873,16 +851,16 @@ class SDocMap extends __SClass implements ISDocMap {
                         // const path = __path.relative(outputDir, filepath);
                         const filename = __getFilename((<__SFile>file).path);
 
-                        const docblockEntryObj: ISDocMapEntry = {};
+                        const docblockEntryObj: ISDocmapEntry = {};
 
                         for (let l = 0; l < finalParams.tags.length; l++) {
                             const tag = finalParams.tags[l];
                             if (docblock[tag] === undefined) continue;
                             // props proxy
-                            if (this.docmapSettings.tagsProxy[tag]) {
+                            if (this.settings.tagsProxy[tag]) {
                                 docblockEntryObj[
                                     tag
-                                ] = await this.docmapSettings.tagsProxy[tag](
+                                ] = await this.settings.tagsProxy[tag](
                                     docblock[tag],
                                 );
                             } else {
@@ -1135,16 +1113,16 @@ class SDocMap extends __SClass implements ISDocMap {
      * This method allows you to make a snapshot of your project doc in the docmap.json format
      * and store it to have access later. It is usefull to make versions backup for example.
      *
-     * @param         {Partial<ISDocMapSnapshotParams>}          params       THe params you want to make your snapshot
+     * @param         {Partial<ISDocmapSnapshotParams>}          params       THe params you want to make your snapshot
      * @return        {SPromise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    snapshot(params: Partial<ISDocMapSnapshotParams>): Promise<any> {
+    snapshot(params: Partial<ISDocmapSnapshotParams>): Promise<any> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
-                const finalParams = <ISDocMapSnapshotParams>(
+                const finalParams = <ISDocmapSnapshotParams>(
                     __deepMerge(
                         __SDocmapSnapshotParamsInterface.defaults(),
                         params,
@@ -1216,9 +1194,7 @@ class SDocMap extends __SClass implements ISDocMap {
                     if (docmapObj.type === 'markdown') {
                     } else {
                         const docblock = new __SDocblock(content, {
-                            docblock: {
-                                renderMarkdown: false,
-                            },
+                            renderMarkdown: false,
                         });
                         content = docblock.toString();
                     }

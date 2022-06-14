@@ -1,4 +1,4 @@
-import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
@@ -36,7 +36,7 @@ import __SPostcssBuilderSettingsInterface from './interface/SPostcssBuilderSetti
  * @feature            Threeshaking capabilities to compact your bundles as low as possible using PurgeCSS.
  * @feature            Support sugar "pleasant" css syntax in your views
  *
- * @param           {ISPostcssBuilderCtorSettings}          [settings={}]           Some settings to configure your builder instance
+ * @param           {ISPostcssBuilderSettings}          [settings={}]           Some settings to configure your builder instance
  *
  * @example         js
  * import SPostcssBuilder from '@coffeekraken/s-postcss-builder';
@@ -54,13 +54,9 @@ import __SPostcssBuilderSettingsInterface from './interface/SPostcssBuilderSetti
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISPostcssBuilderSettings {
+export interface ISPostcssBuilderSettings extends ISBuilderSettings {
     postcss: any;
     purgecss: any;
-}
-
-export interface ISPostcssBuilderCtorSettings extends ISBuilderCtorSettings {
-    postcssBuilder: Partial<ISPostcssBuilderSettings>;
 }
 
 export interface ISPostcssBuilderResult {
@@ -80,19 +76,6 @@ export interface ISPostcssBuilderBuildParams {
 }
 
 export default class SPostcssBuilder extends __SBuilder {
-    /**
-     * @name            postcssBuilderSettings
-     * @type            ISPostcssBuilderSettings
-     * @get
-     *
-     * Access the postcss builder settings
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get postcssBuilderSettings(): ISPostcssBuilderSettings {
-        return (<any>this).settings.postcssBuilder;
-    }
 
     /**
      * @name            constructor
@@ -103,13 +86,11 @@ export default class SPostcssBuilder extends __SBuilder {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISPostcssBuilderCtorSettings>) {
+    constructor(settings?: Partial<ISPostcssBuilderSettings>) {
         super(
             __deepMerge(
-                {
-                    // @ts-ignore
-                    postcssBuilder: __SPostcssBuilderSettingsInterface.defaults(),
-                },
+                // @ts-ignore
+                __SPostcssBuilderSettingsInterface.defaults(),
                 settings ?? {},
             ),
         );
@@ -138,6 +119,7 @@ export default class SPostcssBuilder extends __SBuilder {
                 let finalCss;
 
                 const defaultParams = <ISPostcssBuilderBuildParams>(
+                    // @ts-ignore
                     __SPostcssBuilderBuildParamsInterface.defaults()
                 );
 
@@ -205,7 +187,7 @@ export default class SPostcssBuilder extends __SBuilder {
                     type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Plugins     :`,
                 });
-                this.postcssBuilderSettings.postcss.plugins.forEach(
+                this.settings.postcss.plugins.forEach(
                     (pluginName) => {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
@@ -218,15 +200,15 @@ export default class SPostcssBuilder extends __SBuilder {
                 const plugins: any[] = [];
                 for (
                     let i = 0;
-                    i < this.postcssBuilderSettings.postcss.plugins.length;
+                    i < this.settings.postcss.plugins.length;
                     i++
                 ) {
-                    const p = this.postcssBuilderSettings.postcss.plugins[i];
+                    const p = this.settings.postcss.plugins[i];
                     if (typeof p === 'string') {
                         const { default: plugin } = await import(p);
                         const fn = plugin.default ?? plugin;
                         const options =
-                            this.postcssBuilderSettings.postcss.pluginsOptions[
+                            this.settings.postcss.pluginsOptions[
                                 p
                             ] ?? {};
                         plugins.push(
@@ -299,7 +281,7 @@ export default class SPostcssBuilder extends __SBuilder {
                     });
 
                     const purgeCssSettings = {
-                        ...this.postcssBuilderSettings.purgecss,
+                        ...this.settings.purgecss,
                         safelist: {
                             standard: [],
                             deep: [],
@@ -406,7 +388,7 @@ export default class SPostcssBuilder extends __SBuilder {
                         } catch (e) {}
                     }
 
-                    this.postcssBuilderSettings.purgecss.content.forEach(
+                    this.settings.purgecss.content.forEach(
                         (contentObj) => {
                             if (typeof contentObj === 'string') {
                                 globs.push(contentObj);

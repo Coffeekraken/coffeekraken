@@ -281,7 +281,7 @@ class SPromise extends Promise implements ISPromise, ISEventEmitter {
                 metas: {
                     ...this.metas,
                 },
-                eventEmitter: this.promiseSettings.eventEmitter ?? {},
+                ...(this.promiseSettings.eventEmitter ?? {}),
             }),
         );
 

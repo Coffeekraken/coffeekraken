@@ -20,9 +20,7 @@ interface IFlyingCoffee {
 export default class CKBlob extends __SLitComponent {
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
     }
 

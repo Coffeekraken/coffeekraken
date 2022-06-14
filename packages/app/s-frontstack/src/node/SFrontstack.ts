@@ -25,9 +25,6 @@ import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 export interface ISFrontstackSettings {}
-export interface ISFrontstackCtorSettings {
-    frontstack: Partial<ISFrontstackSettings>;
-}
 
 export interface ISFrontstackNewParams {}
 
@@ -92,20 +89,6 @@ export interface ISFrontstackListParams {
 
 export default class SFrontstack extends __SClass {
     /**
-     * @name            frontstackSettings
-     * @type            ISFrontstackSettings
-     * @get
-     *
-     * Access the frontstack settings
-     *
-     * @since           2.0.09
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get frontstackSettings(): ISFrontstackSettings {
-        return (<any>this).settings.frontstack;
-    }
-
-    /**
      * @name            constructor
      * @type              Function
      * @constructor
@@ -115,15 +98,8 @@ export default class SFrontstack extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: ISFrontstackCtorSettings) {
-        super(
-            __deepMerge(
-                {
-                    frontstack: {},
-                },
-                settings ?? {},
-            ),
-        );
+    constructor(settings?: Partial<ISFrontstackSettings>) {
+        super(__deepMerge({}, settings ?? {}));
     }
 
     /**

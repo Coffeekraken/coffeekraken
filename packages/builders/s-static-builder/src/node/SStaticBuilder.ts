@@ -1,4 +1,4 @@
-import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
@@ -43,7 +43,7 @@ import __SDuration from '@coffeekraken/s-duration';
  * @feature            Threeshaking capabilities to compact your bundles as low as possible using PurgeCSS.
  * @feature            Support sugar "pleasant" css syntax in your views
  *
- * @param           {ISStaticBuilderCtorSettings}          [settings={}]           Some settings to configure your builder instance
+ * @param           {ISStaticBuilderSettings}          [settings={}]           Some settings to configure your builder instance
  *
  * @example         js
  * import SStaticBuilder from '@coffeekraken/s-static-builder';
@@ -61,11 +61,7 @@ import __SDuration from '@coffeekraken/s-duration';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISStaticBuilderSettings {}
-
-export interface ISStaticBuilderCtorSettings extends ISBuilderCtorSettings {
-    staticBuilder: Partial<ISStaticBuilderSettings>;
-}
+export interface ISStaticBuilderSettings extends ISBuilderSettings {}
 
 export interface ISStaticBuilderResult {
     input?: __SFile;
@@ -103,20 +99,6 @@ export interface ISStaticBuilderBuildParams {
 
 export default class SStaticBuilder extends __SBuilder {
     /**
-     * @name            staticBuilderSettings
-     * @type            ISStaticBuilderSettings
-     * @get
-     *
-     * Access the postcss builder settings
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get staticBuilderSettings(): ISStaticBuilderSettings {
-        return (<any>this).settings.staticBuilder;
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      *
@@ -125,13 +107,11 @@ export default class SStaticBuilder extends __SBuilder {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISStaticBuilderCtorSettings>) {
+    constructor(settings?: Partial<ISStaticBuilderSettings>) {
         super(
             __deepMerge(
                 {
-                    staticBuilder: {
-                        ...__SSugarConfig.get('staticBuilder'),
-                    },
+                    ...__SSugarConfig.get('staticBuilder'),
                 },
                 settings ?? {},
             ),

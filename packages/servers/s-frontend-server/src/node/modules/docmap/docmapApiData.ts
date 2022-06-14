@@ -35,31 +35,29 @@ export default function docmapApiData({ req, res, pageConfig }) {
         let firstBlockWithNamespace, nextBlockWithNamespace;
 
         const docblocksInstance = new __SDocblock(docObj.path, {
-            docblock: {
-                renderMarkdown: true,
-                filter: (docblock) => {
-                    if (docblock.private) return false;
-                    if (docblock.id === req.params.namespace) {
-                        firstBlockWithNamespace = docblock;
-                        return true;
-                    }
-                    if (
-                        firstBlockWithNamespace &&
-                        !nextBlockWithNamespace &&
-                        !docblock.namespace
-                    ) {
-                        return true;
-                    }
-                    if (
-                        firstBlockWithNamespace &&
-                        !nextBlockWithNamespace &&
-                        docblock.namespace
-                    ) {
-                        nextBlockWithNamespace = docblock;
-                        return false;
-                    }
+            renderMarkdown: true,
+            filter: (docblock) => {
+                if (docblock.private) return false;
+                if (docblock.id === req.params.namespace) {
+                    firstBlockWithNamespace = docblock;
+                    return true;
+                }
+                if (
+                    firstBlockWithNamespace &&
+                    !nextBlockWithNamespace &&
+                    !docblock.namespace
+                ) {
+                    return true;
+                }
+                if (
+                    firstBlockWithNamespace &&
+                    !nextBlockWithNamespace &&
+                    docblock.namespace
+                ) {
+                    nextBlockWithNamespace = docblock;
                     return false;
-                },
+                }
+                return false;
             },
         });
 

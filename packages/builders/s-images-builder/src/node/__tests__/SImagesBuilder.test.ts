@@ -9,10 +9,8 @@ describe('@coffeekraken.s-images-builder.SImagesBuilder', () => {
         const outDir = `${__packageTmpDir()}/SImagesBuilder/tests`;
 
         const builder = new __SImagesBuilder({
-            imagesBuilder: {
-                resolveGlob: {
-                    defaultExcludes: false,
-                },
+            resolveGlob: {
+                defaultExcludes: false,
             },
         });
 

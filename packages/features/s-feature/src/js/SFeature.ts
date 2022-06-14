@@ -11,6 +11,7 @@ import __cloneClass from '@coffeekraken/sugar/shared/class/cloneClass';
 import __clone from '@coffeekraken/sugar/shared/object/clone';
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
+import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
 
 /**
  * @name                SFeature
@@ -39,13 +40,9 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
-export interface ISFeatureSettings {
+export interface ISFeatureSettings extends ISComponentUtilsSettings {
     interface?: typeof __SInterface;
     defaultProps?: any;
-}
-
-export interface ISFeatureCtorSettings {
-    feature: Partial<ISFeatureSettings>;
 }
 
 export interface ISFeatureDefaultProps {
@@ -143,20 +140,6 @@ export default class SFeature extends __SClass implements ISFeature {
     }
 
     /**
-     * @name        featureSettings
-     * @type        ISFeatureSettings
-     * @get
-     *
-     * Access the feature settings
-     *
-     * @since           2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    get featureSettings(): ISFeatureSettings {
-        return (<any>this.settings).feature;
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -169,23 +152,14 @@ export default class SFeature extends __SClass implements ISFeature {
     constructor(
         name: string,
         node: HTMLElement,
-        settings: Partial<ISFeatureCtorSettings> = {},
+        settings?: Partial<ISFeatureSettings>,
     ) {
-        super(
-            __deepMerge(
-                {
-                    componentUtils: {},
-                    feature: {},
-                },
-                settings,
-            ),
-        );
+        super(__deepMerge({}, settings));
 
         this.componentUtils = new __SComponentUtils(node, {
-            componentUtils: {
-                ...(this.settings.componentUtils ?? {}),
-                name,
-            },
+            ...(this.settings ?? {}),
+            ...(this.settings.componentUtils ?? {}),
+            name,
         });
 
         // name
@@ -197,7 +171,7 @@ export default class SFeature extends __SClass implements ISFeature {
         // assign props
         this.props = this.componentUtils.handleProps(this.node.attributes, {
             interface:
-                this.featureSettings.interface ??
+                this.settings.interface ??
                 this.settings.componentUtils?.interface,
         });
 
@@ -205,6 +179,7 @@ export default class SFeature extends __SClass implements ISFeature {
             // @ts-ignore
             this.componentUtils.waitAndExecute(
                 this.props.mountWhen,
+                // @ts-ignore
                 this.mount?.bind(this),
             );
         })();

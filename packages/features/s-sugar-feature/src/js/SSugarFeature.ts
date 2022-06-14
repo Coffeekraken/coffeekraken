@@ -63,10 +63,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
             node,
             __deepMerge(
                 {
-                    componentUtils: {
-                        interface: __SSugarFeatureInterface,
-                    },
-                    feature: {},
+                    interface: __SSugarFeatureInterface,
                 },
                 settings ?? {},
             ),

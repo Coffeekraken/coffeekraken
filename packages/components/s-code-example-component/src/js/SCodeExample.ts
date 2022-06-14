@@ -136,12 +136,8 @@ export default class SCodeExample extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                litComponent: {
-                    shadowDom: false,
-                },
-                componentUtils: {
-                    name: 's-code-example',
-                },
+                name: 's-code-example',
+                shadowDom: false,
             }),
         );
     }

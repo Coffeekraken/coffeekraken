@@ -22,9 +22,7 @@ export default class CkSettings extends __SLitComponent {
 
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
     }
 

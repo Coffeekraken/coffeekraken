@@ -40,10 +40,6 @@ import __SDescriptorResult, {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISDescriptorCtorSettings {
-    descriptor?: Partial<ISDescriptorSettings>;
-}
-
 export interface ISDescriptorSettings {
     type: string;
     arrayAsValue: boolean;
@@ -93,7 +89,6 @@ export interface ISDescriptorCtor {
 }
 
 export interface ISDescriptor {
-    descriptorSettings: ISDescriptorSettings;
     apply(instance: any, settings?: Partial<ISDescriptorSettings>);
 }
 // @ts-ignore
@@ -173,20 +168,6 @@ class SDescriptor extends __SClass implements ISDescriptor {
     }
 
     /**
-     * @name      descriptorSettings
-     * @type      ISDescriptorSettings
-     * @get
-     *
-     * Access the descriptor settings
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get descriptorSettings(): ISDescriptorSettings {
-        return (<any>this).settings.descriptor;
-    }
-
-    /**
      * @name      constructor
      * @type      Function
      * @constructor
@@ -196,18 +177,16 @@ class SDescriptor extends __SClass implements ISDescriptor {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: ISDescriptorCtorSettings) {
+    constructor(settings?: Partial<ISDescriptorSettings>) {
         // save the settings
         super(
             __deepMerge(
                 {
-                    descriptor: {
-                        rules: {},
-                        type: 'Object',
-                        arrayAsValue: false,
-                        throwOnMissingRule: false,
-                        defaults: true,
-                    },
+                    rules: {},
+                    type: 'Object',
+                    arrayAsValue: false,
+                    throwOnMissingRule: false,
+                    defaults: true,
                 },
                 settings ?? {},
             ),
@@ -237,7 +216,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
     ): ISDescriptorResult {
         // handle settings
         const set = <ISDescriptorSettings>(
-            __deepMerge(this.descriptorSettings, settings || {})
+            __deepMerge(this.settings, settings || {})
         );
 
         // ensure we can apply the descriptor

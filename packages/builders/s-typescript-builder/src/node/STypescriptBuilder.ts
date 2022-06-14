@@ -1,4 +1,4 @@
-import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
@@ -32,14 +32,12 @@ import __ts from 'typescript';
  * @feature             Different output folders using the `%moduleSystem` and `%platform` token in the `outDir`
  * @feature             Watch capabilities to work live on your codebase
  *
- * @param           {ISTypescriptBuilderCtorSettings}          [settings={}]           Some settings to configure your builder instance
+ * @param           {ISTypescriptBuilderSettings}          [settings={}]           Some settings to configure your builder instance
  *
  * @example         js
  * import STypescriptBuilder from '@coffeekraken/s-postcss-builder';
  * const builder = new STypescriptBuilder({
- *      typescriptBuilder: {
- *          // settings here...
- *      }
+ *     // settings here...
  * });
  * await builder.build({
  *      input: 'my-cool-file.css',
@@ -50,11 +48,7 @@ import __ts from 'typescript';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISTypescriptBuilderSettings {}
-
-export interface ISTypescriptBuilderCtorSettings extends ISBuilderCtorSettings {
-    typescriptBuilder: Partial<ISTypescriptBuilderSettings>;
-}
+export interface ISTypescriptBuilderSettings extends ISBuilderSettings {}
 
 export interface ISTypescriptBuilderFileToBuild {
     cwd: string;
@@ -81,6 +75,11 @@ export interface ISTypescriptBuilderResultFile {
         | 'node12'
         | 'nodenext';
     file: __SFile;
+}
+
+export interface ISTypescriptBuildTemporaryResult {
+    path: string;
+    remove: Function;
 }
 
 export interface ISTypescriptBuilderResult {
@@ -117,23 +116,57 @@ export interface ISTypescriptBuilderBuildParams {
 
 export default class STypescriptBuilder extends __SBuilder {
     /**
-     * @name            typescriptBuilderSettings
-     * @type            ISTypescriptBuilderSettings
-     * @get
-     *
-     * Access the postcss builder settings
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get typescriptBuilderSettings(): ISTypescriptBuilderSettings {
-        return (<any>this).settings.typescriptBuilder;
-    }
-
-    /**
      * Store the chokidar watchers in an object where the key is the glob
      */
     _watchersByGlob: Record<string, any> = {};
+
+    /**
+     * @name            buildTemporary
+     * @type            Function
+     * @async
+     * @static
+     *
+     * This static method allows you to build a file for and remove it after calling the returned callback.
+     * This is usefull to compile a typescript file like tests, execute your test and deleting the compiled file.
+     *
+     * @param       {String}            path        The file path to build
+     * @param      {Partial<ISTypescriptBuilderSettings>}       [settings={}]           Some settings to configure your builder instance
+     * @return     {Promise<ISTypescriptBuildTemporaryResult>}          The result of the build with the compiled file path AND the delete callback function
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static buildTemporary(
+        path: string,
+        params?: Partial<ISTypescriptBuilderBuildParams>,
+        settings?: Partial<ISTypescriptBuilderSettings>,
+    ): Promise<ISTypescriptBuildTemporaryResult> {
+        return new Promise(async (resolve, reject) => {
+            if (path.match(/\.ts$/)) {
+                const builder = new STypescriptBuilder(settings ?? {});
+                // @ts-ignore
+                const res = await builder.build({
+                    inDir: __path.dirname(path),
+                    glob: __path.basename(path),
+                    outDir: __path.dirname(path),
+                    formats: ['esm'],
+                    ...(params ?? {}),
+                });
+                resolve({
+                    path: res.files[0].file.path,
+                    remove() {
+                        try {
+                            __fs.unlinkSync(res.files[0].file.path);
+                        } catch (e) {}
+                    },
+                });
+            }
+            resolve({
+                path,
+                remove() {},
+            });
+        });
+    }
 
     /**
      * @name            constructor
@@ -144,14 +177,13 @@ export default class STypescriptBuilder extends __SBuilder {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISTypescriptBuilderCtorSettings>) {
+    constructor(settings?: Partial<ISTypescriptBuilderSettings>) {
         super(
             __deepMerge(
                 {
                     // @ts-ignore
                     // @TODO        integrate the settings interface
-                    // typescriptBuilder: __STypescriptBuilderSettingsInterface.default(),
-                    typescriptBuilder: {},
+                    // __STypescriptBuilderSettingsInterface.default(),
                 },
                 settings ?? {},
             ),

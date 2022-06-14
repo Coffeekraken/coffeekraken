@@ -28,14 +28,12 @@ import __SClass from '@coffeekraken/s-class';
  *
  * This class represent the jest tester that can run tests on your project with a simple and efficient API.
  *
- * @param           {ISJestTesterCtorSettings}          [settings={}]           Some settings to configure your tester instance
+ * @param           {ISJestTesterSettings}          [settings={}]           Some settings to configure your tester instance
  *
  * @example         js
  * import SJestTester from '@coffeekraken/s-postcss-builder';
  * const builder = new SJestTester({
- *      jestTester: {
- *          // settings here...
- *      }
+ *      // settings here...
  * });
  * await builder.build({
  *      input: 'my-cool-file.css',
@@ -47,10 +45,6 @@ import __SClass from '@coffeekraken/s-class';
  */
 
 export interface ISJestTesterSettings {}
-
-export interface ISJestTesterCtorSettings {
-    jestTester: Partial<ISJestTesterSettings>;
-}
 
 export interface ISJestTesterStartResult {
     glob: string[];
@@ -67,20 +61,6 @@ export interface ISJestTesterStartParams {
 }
 
 export default class SJestTester extends __SClass {
-    /**
-     * @name            jestTesterSettings
-     * @type            ISJestTesterSettings
-     * @get
-     *
-     * Access the jest tester settings
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get jestTesterSettings(): ISJestTesterSettings {
-        return (<any>this).settings.jestTester;
-    }
-
     /**
      * Store the chokidar watchers in an object where the key is the glob
      */
@@ -103,13 +83,11 @@ export default class SJestTester extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISJestTesterCtorSettings>) {
+    constructor(settings?: Partial<ISJestTesterSettings>) {
         super(
             __deepMerge(
                 {
-                    jestTester: {
-                        ...__SSugarConfig.get('jestTester'),
-                    },
+                    ...__SSugarConfig.get('jestTester'),
                 },
                 settings ?? {},
             ),

@@ -4,6 +4,7 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __parse from '@coffeekraken/sugar/shared/string/parse';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
+import type { ISConfigAdapterSettings } from '../../shared/adapters/SConfigAdapter';
 import __diff from '@coffeekraken/sugar/shared/object/diff';
 
 /**
@@ -24,54 +25,44 @@ import __diff from '@coffeekraken/sugar/shared/object/diff';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISConfigLsAdapterSettings {}
-export interface ISConfigLsAdapterCtorSettings {
-  configLsAdapter?: Partial<ISConfigLsAdapterSettings>;
-}
+export interface ISConfigLsAdapterSettings extends ISConfigAdapterSettings {}
 
 class SConfigLsAdapter extends __SConfigAdapter {
-  get configLsAdapterSettings(): ISConfigLsAdapterSettings {
-    return (<any>this.configLsAdapterSettings).configLsAdapter;
-  }
+    get configLsAdapterSettings(): ISConfigLsAdapterSettings {
+        return (<any>this.settings).configLsAdapter;
+    }
 
-  constructor(settings: ISConfigLsAdapterCtorSettings) {
-    super(
-      __deepMerge(
-        {
-          configLsAdapter: {}
-        },
-        settings || {}
-      )
-    );
-  }
+    constructor(settings: ISConfigLsAdapterCtorSettings) {
+        super(__deepMerge({}, settings || {}));
+    }
 
-  load() {
-    // try to get the config from the localstorage
-    const config = __parse(localStorage.getItem(this.name)) || {};
+    load() {
+        // try to get the config from the localstorage
+        const config = __parse(localStorage.getItem(this.name)) || {};
 
-    // mix the configs and save them in the instance
-    return __deepMerge(
-      config.default || {},
-      config.app || {},
-      config.user || {}
-    );
-  }
+        // mix the configs and save them in the instance
+        return __deepMerge(
+            config.default || {},
+            config.app || {},
+            config.user || {},
+        );
+    }
 
-  save(newConfig = {}) {
-    const baseConfig = __deepMerge(
-      this.configLsAdapterSettings.defaultConfig,
-      this.configLsAdapterSettings.appConfig
-    );
-    localStorage.setItem(
-      this.name,
-      __toString({
-        default: this.configLsAdapterSettings.defaultConfig,
-        app: this.configLsAdapterSettings.appConfig,
-        user: __diff(baseConfig, newConfig)
-      })
-    );
-    return true;
-  }
+    save(newConfig = {}) {
+        const baseConfig = __deepMerge(
+            this.settings.defaultConfig,
+            this.settings.appConfig,
+        );
+        localStorage.setItem(
+            this.name,
+            __toString({
+                default: this.settings.defaultConfig,
+                app: this.settings.appConfig,
+                user: __diff(baseConfig, newConfig),
+            }),
+        );
+        return true;
+    }
 }
 
 export default SConfigLsAdapter;

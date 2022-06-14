@@ -59,9 +59,6 @@ import __SColorSettingsInterface from './interface/SColorSettingsInterface';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISColorCtorSettings {
-    color: Partial<ISColorSettings>;
-}
 export interface ISColorSettings {
     returnNewInstance: boolean;
     defaultFormat: 'hex' | 'rgb' | 'rgba' | 'hsl' | 'hsla';
@@ -277,20 +274,6 @@ class SColor extends __SClass {
     _a = 1;
 
     /**
-     * @name          colorSettings
-     * @type          ISColorSettings
-     * @get
-     *
-     * Access the color settings
-     *
-     * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get colorSettings(): ISColorSettings {
-        return (<any>this).settings.color;
-    }
-
-    /**
      * @name                  constructor
      * @type                  Function
      *
@@ -298,13 +281,12 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(color: string, settings?: Partial<ISColorCtorSettings>) {
+    constructor(color: string, settings?: Partial<ISColorSettings>) {
         // save the instance settings
         super(
             __deepMerge(
-                {
-                    color: __SColorSettingsInterface.defaults(),
-                },
+                // @ts-ignore
+                __SColorSettingsInterface.defaults(),
                 settings ?? {},
             ),
         );
@@ -672,7 +654,7 @@ class SColor extends __SClass {
      * for example "saturate", "desaturate", etc...
      *
      * @param         {String|ISColorApplyParams}          params       The parameters you want to apply
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @param           {Boolean}           [returnNewInstance=this.settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
      * @return        {SColor}                    Returns you either the same instance or a new one depending on the settings ```returnNewInstance```
      *
      * @since         2.0.0
@@ -680,7 +662,7 @@ class SColor extends __SClass {
      */
     apply(
         params: string | ISColorApplyParams,
-        returnNewInstance = this.colorSettings.returnNewInstance,
+        returnNewInstance = this.settings.returnNewInstance,
     ): SColor {
         // process params
         const intRes = __SColorApplyParamsInterface.apply(params);
@@ -716,7 +698,7 @@ class SColor extends __SClass {
      * Desaturate
      *
      * @param         	{Number} 	          amount 	        	The amount of desaturation wanted between 0-100
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @param           {Boolean}           [returnNewInstance=this.settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
      * @return 	        {SColor} 			                      	A new SColor instance or the actual one
      *
      * @example           js
@@ -724,10 +706,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    desaturate(
-        amount,
-        returnNewInstance = this.colorSettings.returnNewInstance,
-    ) {
+    desaturate(amount, returnNewInstance = this.settings.returnNewInstance) {
         amount = parseInt(amount);
         if (returnNewInstance) {
             const n = new SColor(this.toHex());
@@ -745,7 +724,7 @@ class SColor extends __SClass {
      * Saturate
      *
      * @param         	{Number}        	amount 	            	The amount of saturation wanted between 0-100
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @param           {Boolean}           [returnNewInstance=this.settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
      * @return 	        {SColor} 			                         	A new SColor instance or the actual one
      *
      * @example         js
@@ -753,7 +732,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    saturate(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
+    saturate(amount, returnNewInstance = this.settings.returnNewInstance) {
         amount = parseInt(amount);
         if (returnNewInstance) {
             const n = new SColor(this.toHex());
@@ -770,7 +749,7 @@ class SColor extends __SClass {
      *
      * Return a new SColor instance of the color to grayscale
      *
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @param           {Boolean}           [returnNewInstance=this.settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
      * @return 	{SColor} 			A new SColor instance or the actual one
      *
      * @example           js
@@ -778,7 +757,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    grayscale(returnNewInstance = this.colorSettings.returnNewInstance) {
+    grayscale(returnNewInstance = this.settings.returnNewInstance) {
         if (returnNewInstance) {
             const n = new SColor(this.toHex());
             n.s = 0;
@@ -795,7 +774,7 @@ class SColor extends __SClass {
      * Spin the hue on the passed value (max 360)
      *
      * @param             	{Number}            	amount 		          	The amount of hue spin wanted between 0-360
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @param           {Boolean}           [returnNewInstance=this.settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
      * @return 	            {SColor} 				                          	A new SColor instance or the actual one
      *
      * @example           js
@@ -803,7 +782,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    spin(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
+    spin(amount, returnNewInstance = this.settings.returnNewInstance) {
         amount = parseInt(amount);
         const hue = this.h;
         let newHue = hue + amount;
@@ -826,7 +805,7 @@ class SColor extends __SClass {
      * Set the alpha
      *
      * @param           	{Number} 	            alpha 		            	The new alpha value to apply between 0-100|0-1
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @param           {Boolean}           [returnNewInstance=this.settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
      * @return          	{SColor} 					                            A new SColor instance or the actual one
      *
      * @example           js
@@ -834,7 +813,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    alpha(alpha, returnNewInstance = this.colorSettings.returnNewInstance) {
+    alpha(alpha, returnNewInstance = this.settings.returnNewInstance) {
         alpha = parseFloat(alpha);
         if (returnNewInstance) {
             const n = new SColor(this.toHex());
@@ -852,7 +831,7 @@ class SColor extends __SClass {
      * Darken
      *
      * @param                 	{Number} 	                amount 	                	The amount of darkness (of the nightmare of the shadow) to apply between 0-100
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @param           {Boolean}           [returnNewInstance=this.settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
      * @return                	{SColor} 				                                    A new SColor instance or the actual one
      *
      * @example             js
@@ -860,7 +839,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    darken(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
+    darken(amount, returnNewInstance = this.settings.returnNewInstance) {
         amount = parseInt(amount);
         if (returnNewInstance) {
             const n = new SColor(this.toHex());
@@ -880,7 +859,7 @@ class SColor extends __SClass {
      * Lighten
      *
      * @param 	              {Number} 	              amount 	                	The amount of lightness (of the sky of the angels) to apply between 0-100
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
+     * @param           {Boolean}           [returnNewInstance=this.settings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
      * @return                	{SColor} 			                                  	A new SColor instance or the actual one
      *
      * @example             js
@@ -888,7 +867,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    lighten(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
+    lighten(amount, returnNewInstance = this.settings.returnNewInstance) {
         amount = parseInt(amount);
         if (returnNewInstance) {
             const n = new SColor(this.toHex());
@@ -907,13 +886,13 @@ class SColor extends __SClass {
      *
      * Calculate the best color value that will have the best contrast ratio
      *
-     * @param       {Boolean}       [returnNewInstance=this.colorSettings.returnNewInstance]      Specify if you want a new SColor instance back or update the current one
+     * @param       {Boolean}       [returnNewInstance=this.settings.returnNewInstance]      Specify if you want a new SColor instance back or update the current one
      * @return      {SColor}              The SColor instance that represent this new color
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    invert(returnNewInstance = this.colorSettings.returnNewInstance): SColor {
+    invert(returnNewInstance = this.settings.returnNewInstance): SColor {
         let lightness = this.l;
         if (this.l >= 50) {
             lightness -= 50;
@@ -1028,7 +1007,7 @@ class SColor extends __SClass {
      *
      * To string
      *
-     * @param       {String}              [format=this.colorSettings.defaultFormat]                The format you want back
+     * @param       {String}              [format=this.settings.defaultFormat]                The format you want back
      * @values        hex,hsl,rgba
      * @return 	      {string} 		                                                      The rgba string representation of the color
      *
@@ -1037,7 +1016,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    toString(format = this.colorSettings.defaultFormat) {
+    toString(format = this.settings.defaultFormat) {
         switch (format) {
             case 'hex':
                 return this.toHexString();

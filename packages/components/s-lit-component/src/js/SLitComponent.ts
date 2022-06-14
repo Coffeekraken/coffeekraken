@@ -4,21 +4,19 @@
 import __SComponentUtils, {
     SComponentUtilsDefaultPropsInterface,
 } from '@coffeekraken/s-component-utils';
+import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { LitElement } from 'lit';
 
-export interface ISLitComponentSettings {
+export interface ISLitComponentSettings extends ISComponentUtilsSettings {
     interface?: typeof __SInterface;
     rootNode?: HTMLElement;
     shadowDom?: boolean;
     defaultProps?: any;
-}
-
-export interface ISLitComponentCtorSettings {
-    litComponent: Partial<ISLitComponentSettings>;
+    componentUtils: Partial<ISComponentUtilsSettings>;
 }
 
 export interface ISLitComponentDefaultProps {
@@ -76,20 +74,6 @@ export default class SLitComponent extends LitElement {
     }
 
     /**
-     * @name        litComponentSettings
-     * @type        ISLitComponentSettings
-     * @get
-     *
-     * Access the component utils sertings
-     *
-     * @since           2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    get litComponentSettings(): ISLitComponentSettings {
-        return (<any>this.settings).litComponent;
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -99,24 +83,22 @@ export default class SLitComponent extends LitElement {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(settings: Partial<ISLitComponentCtorSettings> = {}) {
+    constructor(settings: Partial<ISLitComponentSettings> = {}) {
         super();
 
         this.settings = __deepMerge(
             {
                 componentUtils: {},
-                litComponent: {
-                    shadowDom: true,
-                    get rootNode() {
-                        return this.shadowRoot?.querySelector('*:first-child');
-                    },
+                shadowDom: true,
+                get rootNode() {
+                    return this.shadowRoot?.querySelector('*:first-child');
                 },
             },
             settings,
         );
 
         // shadow handler
-        if (this.litComponentSettings.shadowDom === false) {
+        if (this.settings.shadowDom === false) {
             this.createRenderRoot = () => {
                 return this;
             };
@@ -173,13 +155,13 @@ export default class SLitComponent extends LitElement {
             }
 
             this.componentUtils = new __SComponentUtils(this, {
-                componentUtils: {
-                    ...(this.settings.componentUtils ?? {}),
-                    style:
-                        this.constructor.styles?.cssText ??
-                        this.settings.componentUtils?.style ??
-                        '',
-                },
+                ...(this.settings ?? {}),
+                ...(this.settings.componentUtils ?? {}),
+                style:
+                    this.constructor.styles?.cssText ??
+                    this.settings.style ??
+                    this.settings.componentUtils?.style ??
+                    '',
             });
 
             // this.props stack

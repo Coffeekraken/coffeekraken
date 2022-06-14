@@ -497,11 +497,9 @@ export default class SInterface extends __SClass {
         }
 
         const descriptor = new __SDescriptor({
-            descriptor: {
-                type: 'Object',
-                rules: this._definition,
-                ...(set.descriptor ?? {}),
-            },
+            type: 'Object',
+            rules: this._definition,
+            ...(set.descriptor ?? {}),
         });
 
         // handle base obj

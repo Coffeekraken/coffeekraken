@@ -39,9 +39,7 @@ function viewRendererMiddleware(settings = {}) {
         // renderer
         if (!_viewRenderer) {
             _viewRenderer = new __SViewRenderer({
-                viewRenderer: {
-                    sharedData: res.templateData.shared ?? {},
-                },
+                sharedData: res.templateData.shared ?? {},
             });
         }
 

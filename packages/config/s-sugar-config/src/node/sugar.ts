@@ -55,10 +55,6 @@ export interface ISugarConfigToDocblocksResult {
     docblocks: any[];
 }
 
-export interface ISSugarConfigCtorSettings {
-    sugarConfig: Partial<ISSugarConfigSettings>;
-}
-
 export interface ISSugarConfigSettings {
     id: string;
     env: 'development' | 'production' | 'test';
@@ -448,20 +444,6 @@ export default class SSugarConfig extends __SClass {
     private _configInstance;
 
     /**
-     * @name            sugarConfigSettings
-     * @type            ISSugarConfigSettings
-     * @get
-     *
-     * Access the sugar config settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get sugarConfigSettings(): ISSugarConfigSettings {
-        return this.settings.sugarConfig;
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -471,15 +453,8 @@ export default class SSugarConfig extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISSugarConfigCtorSettings>) {
-        super(
-            __deepMerge(
-                {
-                    sugarConfig: {},
-                },
-                settings ?? {},
-            ),
-        );
+    constructor(settings?: Partial<ISSugarConfigSettings>) {
+        super(__deepMerge({}, settings ?? {}));
     }
 
     /**
@@ -603,53 +578,49 @@ export default class SSugarConfig extends __SClass {
         }
 
         const configFolderAdapter = new __SConfigFolderAdapter({
-            configAdapter: {
-                name: 'sugar',
-            },
-            configFolderAdapter: {
-                folderName: '.sugar',
-                fileName: '%name.config.js',
-                scopes: {
-                    default: [
-                        __path.resolve(__dirname(), '../config'),
-                        // @ts-ignore
-                        ...this.constructor._registeredConfigFolderPaths
-                            .filter((obj) => obj.scope === 'default')
-                            .map((obj) => obj.path),
-                    ],
-                    module: [
-                        // @ts-ignore
-                        ...this.constructor._registeredConfigFolderPaths
-                            .filter((obj) => {
-                                if (obj.scope === 'module') return true;
-                                return false;
-                            })
-                            .map((obj) => obj.path),
-                    ],
-                    repo: [
-                        `${__packageRoot(process.cwd(), {
-                            highest: true,
-                        })}/%folderName`,
-                        // @ts-ignore
-                        ...this.constructor._registeredConfigFolderPaths
-                            .filter((obj) => obj.scope === 'repo')
-                            .map((obj) => obj.path),
-                    ],
-                    package: [
-                        `${__packageRoot(process.cwd())}/%folderName`,
-                        // @ts-ignore
-                        ...this.constructor._registeredConfigFolderPaths
-                            .filter((obj) => obj.scope === 'package')
-                            .map((obj) => obj.path),
-                    ],
-                    user: [
-                        `${__packageRoot(process.cwd())}/.local/%folderName`,
-                        // @ts-ignore
-                        ...this.constructor._registeredConfigFolderPaths
-                            .filter((obj) => obj.scope === 'user')
-                            .map((obj) => obj.path),
-                    ],
-                },
+            name: 'sugar',
+            folderName: '.sugar',
+            fileName: '%name.config.js',
+            scopes: {
+                default: [
+                    __path.resolve(__dirname(), '../config'),
+                    // @ts-ignore
+                    ...this.constructor._registeredConfigFolderPaths
+                        .filter((obj) => obj.scope === 'default')
+                        .map((obj) => obj.path),
+                ],
+                module: [
+                    // @ts-ignore
+                    ...this.constructor._registeredConfigFolderPaths
+                        .filter((obj) => {
+                            if (obj.scope === 'module') return true;
+                            return false;
+                        })
+                        .map((obj) => obj.path),
+                ],
+                repo: [
+                    `${__packageRoot(process.cwd(), {
+                        highest: true,
+                    })}/%folderName`,
+                    // @ts-ignore
+                    ...this.constructor._registeredConfigFolderPaths
+                        .filter((obj) => obj.scope === 'repo')
+                        .map((obj) => obj.path),
+                ],
+                package: [
+                    `${__packageRoot(process.cwd())}/%folderName`,
+                    // @ts-ignore
+                    ...this.constructor._registeredConfigFolderPaths
+                        .filter((obj) => obj.scope === 'package')
+                        .map((obj) => obj.path),
+                ],
+                user: [
+                    `${__packageRoot(process.cwd())}/.local/%folderName`,
+                    // @ts-ignore
+                    ...this.constructor._registeredConfigFolderPaths
+                        .filter((obj) => obj.scope === 'user')
+                        .map((obj) => obj.path),
+                ],
             },
         });
 

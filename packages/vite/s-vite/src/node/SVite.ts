@@ -20,9 +20,6 @@ import __SViteBuildParamsInterface from './interface/SViteBuildParamsInterface';
 import __SLog from '@coffeekraken/s-log';
 
 export interface ISViteSettings {}
-export interface ISViteCtorSettings {
-    vite: Partial<ISViteSettings>;
-}
 
 export interface ISViteStartParams {}
 export interface ISViteBuildParams {
@@ -43,20 +40,6 @@ export interface ISViteBuildParams {
 
 export default class SVite extends __SClass {
     /**
-     * @name            viteSettings
-     * @type            ISViteSettings
-     * @get
-     *
-     * Access the vite settings
-     *
-     * @since           2.0.09
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get viteSettings(): ISViteSettings {
-        return (<any>this).settings.vite;
-    }
-
-    /**
      * @name            constructor
      * @type              Function
      * @constructor
@@ -66,15 +49,8 @@ export default class SVite extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: ISViteCtorSettings) {
-        super(
-            __deepMerge(
-                {
-                    vite: {},
-                },
-                settings ?? {},
-            ),
-        );
+    constructor(settings?: ISViteSettings) {
+        super(__deepMerge({}, settings ?? {}));
     }
 
     /**

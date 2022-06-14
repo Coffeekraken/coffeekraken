@@ -78,12 +78,8 @@ export default class SScrollComponent extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                litComponent: {
-                    shadowDom: false,
-                },
-                componentUtils: {
-                    name: 's-scroll',
-                },
+                name: 's-scroll',
+                shadowDom: false,
             }),
         );
     }

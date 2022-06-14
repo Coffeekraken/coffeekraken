@@ -1,4 +1,5 @@
 import __SBuilder from '@coffeekraken/s-builder';
+import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SDuration from '@coffeekraken/s-duration';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
@@ -34,10 +35,6 @@ export interface ISSitemapBuilderSources {
     [key: string]: __SSitemapBuilderSource;
 }
 
-export interface ISSitemapBuilderCtopSettings {
-    sitemapBuilder: Partial<ISSitemapBuilderSettings>;
-}
-
 export interface ISSitemapBuilderBuildParams {
     source: string[];
     sourcesSettings: any;
@@ -71,25 +68,11 @@ export interface ISSitemapBuilderSourceSettings {
     path: string;
 }
 
-export interface ISSitemapBuilderSettings {
+export interface ISSitemapBuilderSettings extends ISBuilderSettings {
     sources: ISSitemapBuilderSourcesSettings;
 }
 
 export default class SSitemapBuilder extends __SBuilder {
-    /**
-     * @name            sitemapSettings
-     * @type            ISSitemapBuilderSettings
-     * @get
-     *
-     * Access the sitemap settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get sitemapSettings(): ISSitemapBuilderSettings {
-        return (<any>this).settings.sitemapBuilder ?? {};
-    }
-
     /**
      * @name            constructor
      * @type            Function
@@ -100,22 +83,20 @@ export default class SSitemapBuilder extends __SBuilder {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISSitemapBuilderCtopSettings>) {
+    constructor(settings?: Partial<ISSitemapBuilderSettings>) {
         super(
             __deepMerge(
                 {
-                    sitemapBuilder: {
-                        sources: {},
-                    },
+                    sources: {},
                 },
                 settings ?? {},
             ),
         );
 
         const config = __SSugarConfig.get('sitemapBuilder');
-        this.sitemapSettings.sources = __deepMerge(
+        this.settings.sources = __deepMerge(
             config.sources ?? {},
-            this.sitemapSettings.sources,
+            this.settings.sources,
         );
     }
 
@@ -149,20 +130,20 @@ export default class SSitemapBuilder extends __SBuilder {
 
                 let sourcesId = finalParams.source.length
                     ? finalParams.source
-                    : Object.keys(this.sitemapSettings.sources);
+                    : Object.keys(this.settings.sources);
 
                 for (let i = 0; i < sourcesId.length; i++) {
                     const sourceId = sourcesId[i];
 
-                    if (!this.sitemapSettings.sources[sourceId]) {
+                    if (!this.settings.sources[sourceId]) {
                         throw new Error(
                             `Sorry but the source "<yellow>${sourceId}</yellow>" is not available. Here's the sources you can use: ${Object.keys(
-                                this.sitemapSettings.sources,
+                                this.settings.sources,
                             ).join(',')}`,
                         );
                     }
 
-                    const sourceObj = this.sitemapSettings.sources[sourceId];
+                    const sourceObj = this.settings.sources[sourceId];
 
                     // skip inactive sources
                     if (!sourceObj.active) continue;

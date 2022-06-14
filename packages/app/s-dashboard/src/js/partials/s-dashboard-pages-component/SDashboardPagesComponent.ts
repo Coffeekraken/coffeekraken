@@ -101,12 +101,8 @@ export default class SDashboardPages extends __SLitComponent {
 
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
-            componentUtils: {
-                interface: __SDashboardPagesComponentAttrsInterface,
-            },
+            shadowDom: false,
+            interface: __SDashboardPagesComponentAttrsInterface,
         });
     }
 

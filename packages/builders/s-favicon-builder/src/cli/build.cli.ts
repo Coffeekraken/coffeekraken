@@ -7,9 +7,7 @@ import __SPromise from '@coffeekraken/s-promise';
 export default function build(stringArgs = '') {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         const builder = new __SFaviconBuilder({
-            builder: {
-                interface: __SFaviconBuilderBuildParamsInterface,
-            },
+            interface: __SFaviconBuilderBuildParamsInterface,
         });
         const promise = builder.build(stringArgs);
         pipe(promise);

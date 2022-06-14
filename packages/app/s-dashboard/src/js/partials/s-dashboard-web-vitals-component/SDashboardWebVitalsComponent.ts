@@ -28,9 +28,7 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
 
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
 
         this.document.addEventListener('webVitals', (e) => {

@@ -27,9 +27,7 @@ export default class SDashboardResponsiveComponent extends __SLitComponent {
 
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
 
         this._mediaConfig = this.document.env?.SUGAR?.theme.get('media');

@@ -38,9 +38,6 @@ import __copySync from '@coffeekraken/sugar/node/fs/copySync';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISGlobCtorSettings {
-    glob: Partial<ISGlobSettings>;
-}
 export interface ISGlobSettings {
 }
 
@@ -190,14 +187,11 @@ export default class SGlob extends __SClass {
      */
     constructor(
         globs: string | string[],
-        settings: Partial<ISGlobCtorSettings> = {},
+        settings: Partial<ISGlobSettings> = {},
     ) {
         super(
             __deepMerge(
-                {
-                    glob: {
-                    },
-                },
+                {},
                 settings,
             ),
         );
@@ -219,7 +213,7 @@ export default class SGlob extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     resolve(settings: Partial<IResolveGlobSettings> = {}): SFile[] | string[] {
-        settings = __deepMerge(this.settings.glob, settings);
+        settings = __deepMerge(this.settings, settings);
         return SGlob.resolve(this._globs, settings);
     }
 
@@ -243,7 +237,7 @@ export default class SGlob extends __SClass {
         outDir: string;
         settings: Partial<IResolveGlobSettings> = {},
     ): SFile[] | string[] {
-        settings = __deepMerge(this.settings.glob, {}, settings);
+        settings = __deepMerge(this.settings, {}, settings);
         const files = this.resolve(this._globs, settings);
         const copiedFiles: SFile | string[] = [];
         for (let [key, file] of Object.entries(files)) {

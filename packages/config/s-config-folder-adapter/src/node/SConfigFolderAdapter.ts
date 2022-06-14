@@ -7,6 +7,7 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __diff from '@coffeekraken/sugar/shared/object/diff';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __SConfigAdapter from '@coffeekraken/s-config-adapter';
+import type { ISConfigAdapterSettings } from '@coffeekraken/s-config-adapter';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __path from 'path';
 import * as __chokidar from 'chokidar';
@@ -53,56 +54,42 @@ export interface ISConfigFolderAdapterScopesSettings {
     user: string[];
 }
 
-export interface ISConfigFolderAdapterSettings {
+export interface ISConfigFolderAdapterSettings extends ISConfigAdapterSettings {
     fileName: string;
     folderName: string;
     scopes: ISConfigFolderAdapterScopesSettings;
     savingScope: string;
 }
-export interface ISConfigFolderAdapterCtorSettings {
-    configFolderAdapter?: Partial<ISConfigFolderAdapterSettings>;
-    configAdapter?: any;
-}
 
 export default class SConfigFolderAdapter extends __SConfigAdapter {
-    get configFolderAdapterSettings(): ISConfigFolderAdapterSettings {
-        return (<any>this).settings.configFolderAdapter;
-    }
-
     _scopedSettings: any = {};
     _scopedFoldersPaths: any = {};
     _foldersPaths: string[] = [];
 
-    constructor(settings: Partial<ISConfigFolderAdapterCtorSettings>) {
+    constructor(settings: Partial<ISConfigFolderAdapterSettings>) {
         super(
             __deepMerge(
                 {
-                    configFolderAdapter: {
-                        fileName: '%name.config.js',
-                        folderName: '.sugar',
-                        scopes: {
-                            default: [
-                                __path.resolve(__dirname(), '../../config'),
-                            ],
-                            module: [],
-                            repo: [
-                                `${__packageRootDir(process.cwd(), {
-                                    highest: true,
-                                })}/%folderName`,
-                            ],
-                            package: [
-                                `${__packageRootDir(
-                                    process.cwd(),
-                                )}/%folderName`,
-                            ],
-                            user: [
-                                `${__packageRootDir(
-                                    process.cwd(),
-                                )}/.local/%folderName`,
-                            ],
-                        },
-                        savingScope: 'user',
+                    fileName: '%name.config.js',
+                    folderName: '.sugar',
+                    scopes: {
+                        default: [__path.resolve(__dirname(), '../../config')],
+                        module: [],
+                        repo: [
+                            `${__packageRootDir(process.cwd(), {
+                                highest: true,
+                            })}/%folderName`,
+                        ],
+                        package: [
+                            `${__packageRootDir(process.cwd())}/%folderName`,
+                        ],
+                        user: [
+                            `${__packageRootDir(
+                                process.cwd(),
+                            )}/.local/%folderName`,
+                        ],
                     },
+                    savingScope: 'user',
                 },
                 settings || {},
             ),
@@ -115,34 +102,26 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         } catch (e) {}
 
         // handle each scopes
-        Object.keys(this.configFolderAdapterSettings.scopes).forEach(
-            (scope) => {
-                let scopeFoldersPathArray = this.configFolderAdapterSettings
-                    .scopes[scope];
+        Object.keys(this.settings.scopes).forEach((scope) => {
+            let scopeFoldersPathArray = this.settings.scopes[scope];
 
-                if (scopeFoldersPathArray) {
-                    if (!Array.isArray(scopeFoldersPathArray))
-                        scopeFoldersPathArray = [scopeFoldersPathArray];
-                    scopeFoldersPathArray = scopeFoldersPathArray.map(
-                        (path) => {
-                            return __replaceTokens(
-                                path.replace(
-                                    '%folderName',
-                                    this.configFolderAdapterSettings.folderName,
-                                ),
-                            );
-                            // .replace(/\%format/g, format);
-                        },
+            if (scopeFoldersPathArray) {
+                if (!Array.isArray(scopeFoldersPathArray))
+                    scopeFoldersPathArray = [scopeFoldersPathArray];
+                scopeFoldersPathArray = scopeFoldersPathArray.map((path) => {
+                    return __replaceTokens(
+                        path.replace('%folderName', this.settings.folderName),
                     );
-                }
+                    // .replace(/\%format/g, format);
+                });
+            }
 
-                // append to the scoped folders path array
-                this._scopedFoldersPaths[scope] = scopeFoldersPathArray;
-            },
-        );
+            // append to the scoped folders path array
+            this._scopedFoldersPaths[scope] = scopeFoldersPathArray;
+        });
 
         // const watchPaths: string[] = [];
-        // Object.keys(this.configFolderAdapterSettings.scopes).forEach(
+        // Object.keys(this.settings.scopes).forEach(
         //     (scope) => {
         //         if (this._scopedFoldersPaths[scope]) {
         //             this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[
@@ -239,10 +218,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
                 if (
                     !filePath.includes(
-                        this.configFolderAdapterSettings.fileName.replace(
-                            '%name',
-                            '',
-                        ),
+                        this.settings.fileName.replace('%name', ''),
                     )
                 ) {
                     continue;

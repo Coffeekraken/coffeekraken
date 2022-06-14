@@ -3,7 +3,10 @@
 
 import __getMethods from '@coffeekraken/sugar/shared/class/getMethods';
 import __SClass from '@coffeekraken/s-class';
-import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
+import type {
+    ISEventEmitter,
+    ISEmitterSettings,
+} from '@coffeekraken/s-event-emitter';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
@@ -70,12 +73,8 @@ export interface ISPromiseSettings {
     rejectAtRejectEvent: boolean;
     resolveProxies: Function[];
     rejectProxies: Function[];
+    eventEmitter: Partial<ISEmitterSettings>;
     [key: string]: any;
-}
-
-export interface ISPromiseCtorSettings {
-    [key: string]: any;
-    promise: Partial<ISPromiseSettings>;
 }
 
 export interface ISPromiseResolveFn {
@@ -203,7 +202,7 @@ class SPromise extends __SClass.extends(Promise)
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get promiseSettings(): ISPromiseSettings {
-        return (<any>this).settings.promise;
+        return (<any>this).settings.promise ?? (<any>this).settings;
     }
 
     /**
@@ -228,7 +227,7 @@ class SPromise extends __SClass.extends(Promise)
      */
     constructor(
         executorFnOrSettings = {},
-        settings?: Partial<ISPromiseCtorSettings>,
+        settings?: Partial<ISPromiseSettings>,
     ) {
         // @ts-ignore
         let executorFn,
@@ -277,9 +276,8 @@ class SPromise extends __SClass.extends(Promise)
                     metas: {
                         ...this.metas,
                     },
-                    eventEmitter: {},
                 },
-                this.settings,
+                this.settings.eventEmitter ?? {},
             ),
         );
 
@@ -300,13 +298,11 @@ class SPromise extends __SClass.extends(Promise)
 
         this._resolvers = <ISPromiseResolvers>resolvers;
 
-        if (
-            (<ISPromiseCtorSettings>this.settings).promise.destroyTimeout !== -1
-        ) {
+        if (this.promiseSettings.destroyTimeout !== -1) {
             this.on('finally', (v, m) => {
                 setTimeout(() => {
                     this.destroy();
-                }, (<ISPromiseCtorSettings>this.settings).promise.destroyTimeout);
+                }, this.promiseSettings.destroyTimeout);
             });
         }
 

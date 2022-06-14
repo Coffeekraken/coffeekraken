@@ -29,11 +29,6 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-
-export interface ISConfigAdapterCtorSettings {
-    configAdapter: Partial<ISConfigAdapterSettings>;
-}
-
 export interface ISConfigAdapterSettings {
     name: string;
     onUpdate: typeof Function;
@@ -65,10 +60,6 @@ export default class SConfigAdapter {
      */
     settings: ISConfigAdapterSettings;
 
-    get configAdapterSettings(): ISConfigAdapterSettings {
-        return (<any>this).settings.configAdapter;
-    }
-
     /**
      * @name            name
      * @type            String
@@ -80,7 +71,7 @@ export default class SConfigAdapter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get name(): string {
-        return this.configAdapterSettings.name;
+        return this.settings.name;
     }
 
     /**
@@ -95,12 +86,10 @@ export default class SConfigAdapter {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings: Partial<ISConfigAdapterCtorSettings>) {
+    constructor(settings: Partial<ISConfigAdapterSettings>) {
         this.settings = __deepMerge(
             {
-                configAdapter: {
-                    name: `s-config-adapter-${__uniqid()}`,
-                },
+                name: `s-config-adapter-${__uniqid()}`,
             },
             settings ?? {},
         );

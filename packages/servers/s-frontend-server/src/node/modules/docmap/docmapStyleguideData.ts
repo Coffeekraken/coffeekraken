@@ -46,16 +46,14 @@ export default function docmapStyleguideData({ req, res, pageConfig }) {
         __SBench.step('data.docmapStyleguideData', 'beforeDocblockParsing');
 
         const docblocksInstance = new __SDocblock(styleguideObj.docmap.path, {
-            docblock: {
-                renderMarkdown: false,
-                filterByTag: {
-                    menu: (value) => {
-                        if (!value || typeof value !== 'string') return false;
-                        const parts = value.split(/\s{2,99999999}/);
-                        if (parts.length >= 2 && parts[1] === finalReqPath)
-                            return true;
-                        return false;
-                    },
+            renderMarkdown: false,
+            filterByTag: {
+                menu: (value) => {
+                    if (!value || typeof value !== 'string') return false;
+                    const parts = value.split(/\s{2,99999999}/);
+                    if (parts.length >= 2 && parts[1] === finalReqPath)
+                        return true;
+                    return false;
                 },
             },
         });

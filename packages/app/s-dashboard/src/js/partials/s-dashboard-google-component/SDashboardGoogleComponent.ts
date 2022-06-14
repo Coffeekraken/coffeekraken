@@ -28,9 +28,7 @@ export default class SDashboardGoogleComponent extends __SLitComponent {
 
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
     }
 

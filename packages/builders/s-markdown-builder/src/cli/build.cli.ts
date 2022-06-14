@@ -6,9 +6,7 @@ import __SPromise from '@coffeekraken/s-promise';
 export default function build(stringArgs = '') {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         const builder = new __SMarkdownBuilder({
-            builder: {
-                interface: __SMarkdownBuilderBuildParamsInterface,
-            },
+            interface: __SMarkdownBuilderBuildParamsInterface,
         });
 
         const promise = builder.build(stringArgs);

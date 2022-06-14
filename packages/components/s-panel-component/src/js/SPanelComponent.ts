@@ -164,12 +164,8 @@ export default class SPanel extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                litComponent: {
-                    shadowDom: false,
-                },
-                componentUtils: {
-                    name: 's-panel',
-                },
+                name: 's-panel',
+                shadowDom: false,
             }),
         );
 

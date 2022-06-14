@@ -60,11 +60,8 @@ export default class SPageTransitionFeature extends __SFeature {
             node,
             __deepMerge(
                 {
-                    componentUtils: {
-                        interface: __SPageTransitionFeatureInterface,
-                        style: __css,
-                    },
-                    feature: {},
+                    interface: __SPageTransitionFeatureInterface,
+                    style: __css,
                 },
                 settings ?? {},
             ),

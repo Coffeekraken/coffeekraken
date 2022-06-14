@@ -1,4 +1,4 @@
-import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
+import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import type { IResolveGlobSettings } from '@coffeekraken/s-glob';
@@ -32,7 +32,7 @@ import __copySync from '@coffeekraken/sugar/node/fs/copySync';
  * This class allows you to compress the more popular images formats like
  * "png", "jpg", "svg", "gif", etc... using the WONDERFULL sharp library.
  *
- * @param           {ISImagesBuilderCtorSettings}         [settings={}]           Some settings to configure your image compression process
+ * @param           {ISImagesBuilderSettings}         [settings={}]           Some settings to configure your image compression process
  *
  * @example         js
  * import SImagesBuilder from '@coffeekraken/s-image-builder';
@@ -48,7 +48,7 @@ import __copySync from '@coffeekraken/sugar/node/fs/copySync';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISImagesBuilderSettings {
+export interface ISImagesBuilderSettings extends ISBuilderSettings {
     resolveGlob: Partial<IResolveGlobSettings>;
 }
 
@@ -64,10 +64,6 @@ export interface ISImagesBuilderBuildParams {
     resolution: number[];
     clear: boolean;
     specificParams: Record<string, ISImagesBuilderBuildParams>;
-}
-
-export interface ISImagesBuilderCtorSettings extends ISBuilderCtorSettings {
-    imagesBuilder: Partial<ISImagesBuilderSettings>;
 }
 
 export interface ISImagesBuilderImageResult {
@@ -98,20 +94,6 @@ export interface ISImagesBuilderResult {
 
 export default class SImagesBuilder extends __SBuilder {
     /**
-     * @name            imagesBuilderSettings
-     * @type            ISImagesBuilderSettings
-     * @get
-     *
-     * Access the images compressor settings
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get imagesBuilderSettings(): ISImagesBuilderSettings {
-        return (<any>this).settings.imagesBuilder;
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -121,13 +103,11 @@ export default class SImagesBuilder extends __SBuilder {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISImagesBuilderCtorSettings>) {
+    constructor(settings?: Partial<ISImagesBuilderSettings>) {
         super(
             __deepMerge(
-                {
-                    // @ts-ignore
-                    imagesBuilder: __SImagesBuilderSettingsInterface.defaults(),
-                },
+                // @ts-ignore
+                __SImagesBuilderSettingsInterface.defaults(),
                 settings ?? {},
             ),
         );
@@ -157,7 +137,7 @@ export default class SImagesBuilder extends __SBuilder {
         return new __SPromise(
             async ({ resolve, reject, emit }) => {
                 const finalSettings = <ISImagesBuilderSettings>(
-                    __deepMerge(this.imagesBuilderSettings, settings ?? {})
+                    __deepMerge(this.settings, settings ?? {})
                 );
 
                 // @ts-ignore

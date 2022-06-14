@@ -7,9 +7,7 @@ import __SPromise from '@coffeekraken/s-promise';
 export default function build(stringArgs = '') {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         const builder = new __SImagesBuilder({
-            builder: {
-                interface: __SImagesBuilderBuildParamsInterface,
-            },
+            interface: __SImagesBuilderBuildParamsInterface,
         });
         const promise = builder.build(stringArgs);
         pipe(promise);

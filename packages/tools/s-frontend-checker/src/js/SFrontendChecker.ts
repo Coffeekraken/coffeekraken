@@ -51,9 +51,6 @@ import __imagesAlt from './checks/imagesAlt';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISFrontendCheckerCtorSettings {
-    frontendChecker: Partial<ISFrontendCheckerSettings>;
-}
 export interface ISFrontendCheckerSettings {}
 
 export interface ISFrontendCheckerCheckObj {
@@ -193,12 +190,11 @@ export default class SFrontendCheckeer extends __SClass {
      * @since          2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings: Partial<ISFrontendCheckerCtorSettings> = {}) {
+    constructor(settings: Partial<ISFrontendCheckerSettings> = {}) {
         super(
             __deepMerge(
-                {
-                    frontendChecker: __SFrontendCheckerSettingsInterface.defaults(),
-                },
+                // @ts-ignore
+                __SFrontendCheckerSettingsInterface.defaults(),
                 settings,
             ),
         );

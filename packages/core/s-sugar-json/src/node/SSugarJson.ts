@@ -33,10 +33,6 @@ export interface ISSugarJsonFileCliAction {
     command?: string;
 }
 
-export interface ISSugarJsonCtorSettings {
-    sugarJson: Partial<ISSugarJsonSettings>;
-}
-
 export interface ISSugarJsonFileCli {
     stack: string;
     description: string;
@@ -65,20 +61,6 @@ export interface ISSugarJsonFile {
 
 export default class SSugarJson extends __SClass {
     /**
-     * @name            sugarJsonSettings
-     * @type            ISSugarJsonSettings
-     * @get
-     *
-     * Access the sugarJson settings
-     *
-     * @since           2.0.09
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get sugarJsonSettings(): ISSugarJsonSettings {
-        return (<any>this).settings.sugarJson;
-    }
-
-    /**
      * @name            constructor
      * @type              Function
      * @constructor
@@ -88,16 +70,14 @@ export default class SSugarJson extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: ISSugarJsonCtorSettings) {
+    constructor(settings?: ISSugarJsonSettings) {
         super(
             __deepMerge(
                 {
-                    sugarJson: {
-                        includePackage: true,
-                        includeModules: true,
-                        includeGlobal: true,
-                        includeTop: true,
-                    },
+                    includePackage: true,
+                    includeModules: true,
+                    includeGlobal: true,
+                    includeTop: true,
                 },
                 settings ?? {},
             ),
@@ -147,7 +127,7 @@ export default class SSugarJson extends __SClass {
         // const SSugarJsonSettingsInterface = await import('./interface/SSugarJsonSettingsInterface');
         const finalSettings = <ISSugarJsonSettings>{
             // ...SSugarJsonSettingsInterface.default.defaults(),
-            ...this.sugarJsonSettings,
+            ...this.settings,
             ...settings,
         };
 
@@ -222,7 +202,7 @@ export default class SSugarJson extends __SClass {
      */
     async search(settings?: ISSugarJsonSettings): string[] {
         const finalSettings = <ISSugarJsonSettings>{
-            ...this.sugarJsonSettings,
+            ...this.settings,
             ...(settings ?? {}),
         };
 

@@ -1,5 +1,6 @@
 import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
+import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import type { IResolveGlobSettings } from '@coffeekraken/s-glob';
 import __SGlob from '@coffeekraken/s-glob';
@@ -44,7 +45,7 @@ import __packageSyncJson from '@coffeekraken/sugar/node/package/jsonSync';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISFaviconBuilderSettings {
+export interface ISFaviconBuilderSettings extends ISBuilderSettings {
     resolveGlob: Partial<IResolveGlobSettings>;
 }
 
@@ -52,10 +53,6 @@ export interface ISFaviconBuilderBuildParams {
     input: string;
     outDir: string;
     settings: any;
-}
-
-export interface ISFaviconBuilderCtorSettings extends ISBuilderCtorSettings {
-    faviconBuilder: Partial<ISFaviconBuilderSettings>;
 }
 
 export interface ISFaviconBuilderImageResult {
@@ -67,6 +64,10 @@ export interface ISFaviconBuilderImageResult {
 export interface ISFaviconBuilderResultItem extends ISFaviconBuilderStats {
     fromSourceGain?: ISFaviconBuilderStats;
     fromBuildedGain?: ISFaviconBuilderStats;
+}
+
+export interface ISFaviconBuilderAddParams {
+    output: string;
 }
 
 export interface ISFaviconBuilderStats {
@@ -86,20 +87,6 @@ export interface ISFaviconBuilderResult {
 
 export default class SFaviconBuilder extends __SBuilder {
     /**
-     * @name            faviconBuilderSettings
-     * @type            ISFaviconBuilderSettings
-     * @get
-     *
-     * Access the favicon builder settings
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get faviconBuilderSettings(): ISFaviconBuilderSettings {
-        return (<any>this.settings).faviconBuilder;
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -109,15 +96,8 @@ export default class SFaviconBuilder extends __SBuilder {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISFaviconBuilderCtorSettings>) {
-        super(
-            __deepMerge(
-                {
-                    faviconBuilder: {},
-                },
-                settings ?? {},
-            ),
-        );
+    constructor(settings?: Partial<ISFaviconBuilderSettings>) {
+        super(__deepMerge({}, settings ?? {}));
     }
 
     /**
@@ -195,7 +175,7 @@ export default class SFaviconBuilder extends __SBuilder {
                             yandex: true, // Create Yandex browser icon. `boolean` or `{ offset, background, mask, overlayGlow, overlayShadow }` or an array of sources
                         },
                     },
-                    this.faviconBuilderSettings,
+                    this.settings,
                     settings ?? {},
                     params.settings ?? {},
                 );

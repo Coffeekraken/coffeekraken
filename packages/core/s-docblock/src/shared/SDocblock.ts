@@ -50,12 +50,9 @@ export interface ISDocblockSettings {
     markedOptions: any;
     sortFunction?: ISDocblockSortFnSetting;
 }
-export interface ISDocblockCtorSettings {
-    docblock?: Partial<ISDocblockSettings>;
-}
 
 export interface ISDocblock {
-    // new (source: string, settings?: ISDocblockCtorSettings);
+    // new (source: string, settings?: ISDocblockSettings);
     _source: string;
     blocks: ISDocblockBlock[];
     toObject(): any;
@@ -97,20 +94,6 @@ class SDocblock extends __SClass implements ISDocblock {
     _blocks: any[] = [];
 
     /**
-     * @name          docblockSettings
-     * @type          ISDocblockSettings
-     * @get
-     *
-     * Access the docblock settings
-     *
-     * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-     */
-    get docblockSettings(): ISDocblockSettings {
-        return (<any>this.settings).docblock;
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      *
@@ -118,36 +101,32 @@ class SDocblock extends __SClass implements ISDocblock {
      *
      * @author 	Olivier Bossel <olivier.bossel@gmail.com>
      */
-    constructor(source: string, settings?: ISDocblockCtorSettings) {
+    constructor(source: string, settings?: Partial<ISDocblockSettings>) {
         super(
             __deepMerge(
                 {
-                    docblock: {
-                        filter: undefined,
-                        filterByTag: undefined,
-                        sortFunction: (a, b) => {
-                            let res = 0;
+                    filter: undefined,
+                    filterByTag: undefined,
+                    sortFunction: (a, b) => {
+                        let res = 0;
 
-                            if (!b || !a) return res;
+                        if (!b || !a) return res;
 
-                            const aObj = a.toObject(),
-                                bObj = b.toObject();
+                        const aObj = a.toObject(),
+                            bObj = b.toObject();
 
-                            // if (.object.namespace && !aObj.namespace) res -= 1;
-                            if (bObj.namespace) res += 1;
-                            if (bObj.type?.toLowerCase?.() === 'class')
-                                res += 1;
-                            if (bObj.constructor) res += 1;
-                            if (bObj.private) res += 1;
-                            if (bObj.type?.toLowerCase?.() === 'function')
-                                res += 1;
-                            if (bObj.name?.length > aObj.name?.length) res += 1;
-                            return res;
-                        },
-                        filePath: null,
-                        renderMarkdown: false,
-                        markedOptions: {},
+                        // if (.object.namespace && !aObj.namespace) res -= 1;
+                        if (bObj.namespace) res += 1;
+                        if (bObj.type?.toLowerCase?.() === 'class') res += 1;
+                        if (bObj.constructor) res += 1;
+                        if (bObj.private) res += 1;
+                        if (bObj.type?.toLowerCase?.() === 'function') res += 1;
+                        if (bObj.name?.length > aObj.name?.length) res += 1;
+                        return res;
                     },
+                    filePath: null,
+                    renderMarkdown: false,
+                    markedOptions: {},
                 },
                 settings || {},
             ),
@@ -163,7 +142,7 @@ class SDocblock extends __SClass implements ISDocblock {
                 throw new Error(
                     `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,
                 );
-            this.docblockSettings.filePath = source;
+            this.settings.filePath = source;
             this._source = __fs.readFileSync(source, 'utf8');
             this._packageJson = __packageJsonSync(source);
         } else {
@@ -185,7 +164,7 @@ class SDocblock extends __SClass implements ISDocblock {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com>
      */
     sort(sortFunction?: ISDocblockSortFnSetting) {
-        if (!sortFunction) sortFunction = this.docblockSettings.sortFunction;
+        if (!sortFunction) sortFunction = this.settings.sortFunction;
         this._blocks = this._blocks.sort(sortFunction);
         return this;
     }
@@ -257,19 +236,17 @@ class SDocblock extends __SClass implements ISDocblock {
                         if (line.trim().slice(0, 2) === '//') return false;
                     }
 
-                    if (this.docblockSettings.filterByTag) {
+                    if (this.settings.filterByTag) {
                         let isBlockMatchFilter = true;
                         for (
                             let i = 0;
-                            i <
-                            Object.keys(this.docblockSettings.filterByTag)
-                                .length;
+                            i < Object.keys(this.settings.filterByTag).length;
                             i++
                         ) {
                             const tagName = Object.keys(
-                                this.docblockSettings.filterByTag,
+                                this.settings.filterByTag,
                             )[i];
-                            const tagFilter = this.docblockSettings.filterByTag[
+                            const tagFilter = this.settings.filterByTag[
                                 tagName
                             ];
                             const tagValueReg = new RegExp(
@@ -335,12 +312,10 @@ class SDocblock extends __SClass implements ISDocblock {
             for (let i = 0; i < blocksArrayStr.length; i++) {
                 const block = blocksArrayStr[i];
                 const docblockBlock = new __SDocblockBlock(block || ' ', {
-                    docblockBlock: {
-                        packageJson: this._packageJson,
-                        filePath: this.docblockSettings.filePath || '',
-                        renderMarkdown: this.docblockSettings.renderMarkdown,
-                        markedOptions: this.docblockSettings.markedOptions,
-                    },
+                    packageJson: this._packageJson,
+                    filePath: this.settings.filePath || '',
+                    renderMarkdown: this.settings.renderMarkdown,
+                    markedOptions: this.settings.markedOptions,
                 });
 
                 await pipe(docblockBlock.parse());
@@ -351,11 +326,11 @@ class SDocblock extends __SClass implements ISDocblock {
                 this._blocks = blocks;
             }
 
-            if (typeof this.docblockSettings.filter === 'function') {
+            if (typeof this.settings.filter === 'function') {
                 // @ts-ignore
                 this._blocks = this._blocks.filter((docblockBlock) => {
                     // @ts-ignore
-                    return this.docblockSettings.filter(
+                    return this.settings.filter(
                         docblockBlock.toObject(),
                         docblockBlock,
                     );

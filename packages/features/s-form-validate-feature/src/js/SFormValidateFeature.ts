@@ -168,10 +168,8 @@ export default class SFormValidateFeature extends __SFeature {
             node,
             __deepMerge(
                 {
-                    componentUtils: {
-                        interface: __SFormValidateFeatureInterface,
-                        style: __css,
-                    },
+                    interface: __SFormValidateFeatureInterface,
+                    style: __css,
                 },
                 settings ?? {},
             ),

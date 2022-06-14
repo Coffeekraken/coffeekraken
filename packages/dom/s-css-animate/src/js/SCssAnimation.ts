@@ -61,10 +61,6 @@ export interface ISCssAnimationPlaySettings {
     yoyo: boolean;
 }
 
-export interface ISCssAnimationCtorSettings {
-    cssAnimation: Partial<ISCssAnimationSettings>;
-}
-
 export interface ISCssAnimationSettings {
     debug: boolean;
     easing: string | Function;
@@ -125,20 +121,6 @@ export default class SCssAnimation extends __SClass {
         return window.getComputedStyle(this.$elm).transform;
     }
 
-    /**
-     * @name        cssAnimationSettings
-     * @type        ISCssAnimationSettings
-     * @get
-     *
-     * Access the cssAnimation settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get cssAnimationSettings(): ISCssAnimationSettings {
-        return (<any>this).settings.cssAnimation;
-    }
-
     _currentYoyoTimeout;
     _currentEaseInterval;
 
@@ -152,20 +134,15 @@ export default class SCssAnimation extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(
-        $elm: HTMLElement,
-        settings: Partial<ISCssAnimationCtorSettings>,
-    ) {
+    constructor($elm: HTMLElement, settings: Partial<ISCssAnimationSettings>) {
         super(
             __deepMerge(
                 {
-                    cssAnimation: {
-                        debug: false,
-                        easing: undefined,
-                        duration: undefined,
-                        iterations: undefined,
-                        yoyo: undefined,
-                    },
+                    debug: false,
+                    easing: undefined,
+                    duration: undefined,
+                    iterations: undefined,
+                    yoyo: undefined,
                 },
                 settings ?? {},
             ),
@@ -209,9 +186,9 @@ export default class SCssAnimation extends __SClass {
 
         // handle easing from settings
         const easingFn =
-            typeof this.cssAnimationSettings.easing === 'string'
+            typeof this.settings.easing === 'string'
                 ? __cssEasingStrToJsFunction('cubic-bezier(.72,-0.01,.42,.99)')
-                : this.cssAnimationSettings.easing;
+                : this.settings.easing;
 
         // setInterval(() => {
         //     __easeInterval(
@@ -471,26 +448,24 @@ export default class SCssAnimation extends __SClass {
                 typeof settings.easing === 'string'
                     ? __cssEasingStrToJsFunction(settings.easing)
                     : settings.easing;
-        } else if (this.cssAnimationSettings.easing) {
+        } else if (this.settings.easing) {
             easingFn =
-                typeof this.cssAnimationSettings.easing === 'string'
-                    ? __cssEasingStrToJsFunction(
-                          this.cssAnimationSettings.easing,
-                      )
-                    : this.cssAnimationSettings.easing;
+                typeof this.settings.easing === 'string'
+                    ? __cssEasingStrToJsFunction(this.settings.easing)
+                    : this.settings.easing;
         } else {
             easingFn = __cssEasingStrToJsFunction('linear');
         }
         const duration =
                 animationObj.duration ??
                 settings.duration ??
-                this.cssAnimationSettings.duration,
+                this.settings.duration,
             iterations =
                 animationObj.iterations ??
                 settings.iterations ??
-                this.cssAnimationSettings.iterations ??
+                this.settings.iterations ??
                 1,
-            yoyo = settings.yoyo ?? this.cssAnimationSettings.yoyo ?? false;
+            yoyo = settings.yoyo ?? this.settings.yoyo ?? false;
 
         return {
             easing: easingFn,

@@ -2,6 +2,7 @@
 
 import type { ISConfigEnvObj } from '@coffeekraken/s-config';
 import __SConfigAdapter from '@coffeekraken/s-config-adapter';
+import type { ISConfigAdapterSettings } from '@coffeekraken/s-config-adapter';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
@@ -23,20 +24,13 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISConfigInlineAdapterSettings {}
-export interface ISConfigInlineAdapterCtorSettings {
-    configJsonAdapter?: Partial<ISConfigInlineAdapterSettings>;
-    configAdapter?: any;
-}
+export interface ISConfigInlineAdapterSettings
+    extends ISConfigAdapterSettings {}
 
 export default class SConfigInlineAdapter extends __SConfigAdapter {
-    get configJsonAdapterSettings(): ISConfigInlineAdapterSettings {
-        return (<any>this).settings.configJsonAdapter;
-    }
-
     _json;
 
-    constructor(json, settings: Partial<ISConfigInlineAdapterCtorSettings>) {
+    constructor(json, settings: Partial<ISConfigInlineAdapterSettings>) {
         super(__deepMerge({}, settings || {}));
         this._json = json;
     }

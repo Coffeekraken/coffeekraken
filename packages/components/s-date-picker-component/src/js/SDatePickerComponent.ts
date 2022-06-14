@@ -253,12 +253,8 @@ export default class SDatePicker extends __SLitComponent {
 
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
-            componentUtils: {
-                interface: __SDatePickerComponentInterface,
-            },
+            shadowDom: false,
+            interface: __SDatePickerComponentInterface,
         });
 
         this._$input = this.querySelector('input');

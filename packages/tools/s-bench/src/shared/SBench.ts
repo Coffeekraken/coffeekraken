@@ -40,11 +40,6 @@ import __SClass from '@coffeekraken/s-class';
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISBenchCtorSettings {
-    bench: Partial<ISBenchSettings>;
-    promise: Partial<ISPromiseSettings>;
-}
-
 export interface ISBenchSettings {
     title: string;
     body: string;
@@ -246,20 +241,6 @@ export default class SBench extends __SClass {
     }
 
     /**
-     * @name        benchSettings
-     * @type        ISBenchSettings
-     * @get
-     *
-     * Access the bench settings
-     *
-     * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get benchSettings(): ISBenchSettings {
-        return (<any>this.settings).bench;
-    }
-
-    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -269,18 +250,16 @@ export default class SBench extends __SClass {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(id: string, settings?: Partial<ISBenchCtorSettings>) {
+    constructor(id: string, settings?: Partial<ISBenchSettings>) {
         super(
             __deepMerge(
                 {
                     metas: {
                         id,
                     },
-                    bench: {},
                     // do not use interface directly to avoir circular dependency with JEST
                     // @todo        find a way to fix this
                     // bench: __SBenchSettingsInterface.defaults(),
-                    promise: {},
                 },
                 settings ?? {},
             ),
@@ -317,7 +296,7 @@ export default class SBench extends __SClass {
     start(settings?: Partial<ISBenchSettings>): SBench {
         if (!this.isActive()) return this;
 
-        const finalSettings = __deepMerge(this.benchSettings, settings ?? {});
+        const finalSettings = __deepMerge(this.settings, settings ?? {});
 
         // reset potential old bench
         this._steps.push({
@@ -398,7 +377,7 @@ export default class SBench extends __SClass {
         if (!this.isActive()) return this;
 
         const finalSettings = <ISBenchSettings>(
-            __deepMerge(this.benchSettings, settings ?? {})
+            __deepMerge(this.settings, settings ?? {})
         );
 
         const startTime = this._steps[0].time;
@@ -439,7 +418,7 @@ export default class SBench extends __SClass {
     log(settings?: Partial<ISBenchSettings>): SBench {
         if (!this.isActive()) return this;
         const finalSettings = <ISBenchSettings>(
-            __deepMerge(this.benchSettings, settings ?? {})
+            __deepMerge(this.settings, settings ?? {})
         );
         console.log(this.toString(finalSettings));
         return this;
@@ -458,7 +437,7 @@ export default class SBench extends __SClass {
      */
     toString(settings?: Partial<ISBenchSettings>): string {
         const finalSettings = <ISBenchSettings>(
-            __deepMerge(this.benchSettings, settings ?? {})
+            __deepMerge(this.settings, settings ?? {})
         );
 
         let logsAr = [

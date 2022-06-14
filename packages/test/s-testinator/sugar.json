@@ -1,0 +1,30 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "testinator",
+            "description": "Testinator related actions",
+            "defaultAction": "start",
+            "actions": {
+                "start": {
+                    "scope": "global",
+                    "description": "Start the tests in the current package",
+                    "interface": "./dist/pkg/esm/node/interface/STestinatorStartParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/start.cli.js"
+                },
+                "test": {
+                    "scope": "global",
+                    "description": "Run the tests of a specific file",
+                    "interface": "./dist/pkg/esm/node/interface/STestinatorTestParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/test.cli.js"
+                }
+            }
+        }
+    ]
+}

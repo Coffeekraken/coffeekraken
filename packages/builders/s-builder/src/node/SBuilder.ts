@@ -1,5 +1,6 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SClass from '@coffeekraken/s-class';
+import type { ISClass } from '@coffeekraken/s-class';
 import __SPromise from '@coffeekraken/s-promise';
 import __SDuration from '@coffeekraken/s-duration';
 import __SInterface from '@coffeekraken/s-interface';
@@ -39,29 +40,11 @@ export interface ISBuilderSettings {
     interface: typeof __SInterface;
 }
 
-export interface ISBuilderCtorSettings {
-    builder?: Partial<ISBuilderSettings>;
-}
-
-export interface ISBuilder {
+export interface ISBuilder extends ISClass {
     build(params: any, settings?: any);
 }
 
 class SBuilder extends __SClass implements ISBuilder {
-    /**
-     * @name        builderSettings
-     * @type        any
-     * @get
-     *
-     * Access the builder settings
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get builderSettings(): any {
-        return (<any>this).settings.builder;
-    }
-
     /**
      * @name        constructor
      * @type        Function
@@ -72,13 +55,11 @@ class SBuilder extends __SClass implements ISBuilder {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings: ISBuilderCtorSettings) {
+    constructor(settings: Partial<ISBuilderSettings>) {
         super(
             __deepMerge(
                 {
-                    builder: {
-                        interface: undefined,
-                    },
+                    interface: undefined,
                 },
                 settings || {},
             ),
@@ -99,7 +80,7 @@ class SBuilder extends __SClass implements ISBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(params: any = {}, settings: any = {}) {
-        settings = __deepMerge(this.builderSettings, settings);
+        settings = __deepMerge(this.settings, settings);
 
         const duration = new __SDuration();
 

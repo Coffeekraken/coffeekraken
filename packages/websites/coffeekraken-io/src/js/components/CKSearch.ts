@@ -235,9 +235,7 @@ __sFiltrableInputDefine(
 export default class CKSearch extends __SLitComponent {
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
         const queryObj = __queryStringToObject(document.location.search ?? '');
         this._search = queryObj.search ?? '';

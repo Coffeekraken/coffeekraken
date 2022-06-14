@@ -9,10 +9,6 @@ import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 
-export interface ISStdioCtorSettings {
-    stdio?: ISStdioSettings;
-}
-
 export interface ISStdioSettings {
     filter: typeof Function;
     processor: typeof Function;
@@ -21,7 +17,10 @@ export interface ISStdioSettings {
 }
 
 export interface ISStdioCtor {
-    new (sources: ISPromise | ISPromise[], settings: ISStdioSettings): ISStdio;
+    new (
+        sources: ISPromise | ISPromise[],
+        settings: Partial<ISStdioSettings>,
+    ): ISStdio;
 }
 
 export interface ISStdioRegisteredComponents {
@@ -52,7 +51,7 @@ export interface ISStdio extends ISClass {
  * This class represent the base one for all the "Stdio"
  * compatible setting.
  *
- * @param     {ISStdioCtorSettings}     [settings={}]       Some settings to configure your Stdio
+ * @param     {ISStdioSettings}     [settings={}]       Some settings to configure your Stdio
  *
  * @todo      interface
  * @todo      doc
@@ -269,24 +268,11 @@ export default class SStdio extends __SClass implements ISStdio {
      */
     static new(id: string, sources, stdio: ISStdioUi, settings = {}) {
         return new Promise(async (resolve) => {
+            // @ts-ignore
             const __new = (await import('./new')).default;
             // @ts-ignore
             return __new(id, sources, stdio, settings);
         });
-    }
-
-    /**
-     * @name      stdioSettings
-     * @type      ISStdioSettings
-     * @get
-     *
-     * Access the stdio settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get stdioSettings(): ISStdioSettings {
-        return (<any>this).settings.stdio;
     }
 
     /**
@@ -317,14 +303,13 @@ export default class SStdio extends __SClass implements ISStdio {
     constructor(
         id: string,
         sources: ISEventEmitter | ISEventEmitter[],
-        settings: ISStdioCtorSettings = {},
+        settings?: Partial<ISStdioSettings>,
     ) {
         super(
             __deepMerge(
-                {
-                    stdio: __SStdioSettingsInterface.defaults(),
-                },
-                settings,
+                // @ts-ignore
+                __SStdioSettingsInterface.defaults(),
+                settings ?? {},
             ),
         );
 
@@ -583,9 +568,7 @@ export default class SStdio extends __SClass implements ISStdio {
      */
     // _isCleared = true;
     async ask(askObj: Partial<ISLogAsk>) {
-        let ask = <ISLogAsk>(
-            __deepMerge(this.stdioSettings.defaultAskObj, askObj)
-        );
+        let ask = <ISLogAsk>__deepMerge(this.settings.defaultAskObj, askObj);
 
         // @ts-ignore
         const answer = await this._ask(ask);

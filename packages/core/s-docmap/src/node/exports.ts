@@ -1,5 +1,5 @@
-import SDocMap from './SDocMap';
+import SDocmap from './SDocmap';
 
-export * from './SDocMap';
+export * from './SDocmap';
 
-export default SDocMap;
+export default SDocmap;

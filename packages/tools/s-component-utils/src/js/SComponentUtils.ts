@@ -35,10 +35,6 @@ export interface ISComponentUtilsPropsSettings {
     reflectAttributes: boolean;
 }
 
-export interface ISComponentUtilsCtorSettings {
-    componentUtils: Partial<ISComponentUtilsSettings>;
-}
-
 export interface ISComponentUtilsDispatchSettings {
     $elm: HTMLElement;
     bubbles: boolean;
@@ -88,9 +84,7 @@ export default class SComponentUtils extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get name(): string {
-        return (
-            this.componentUtilsSettings.name ?? this.node.tagName.toLowerCase()
-        );
+        return this.settings.name ?? this.node.tagName.toLowerCase();
     }
 
     /**
@@ -186,16 +180,12 @@ export default class SComponentUtils extends __SClass {
      */
     constructor(
         node: HTMLElement,
-        settings: Partial<ISComponentUtilsCtorSettings> = {},
+        settings?: Partial<ISComponentUtilsSettings>,
     ) {
         super(
             __deepMerge(
-                {
-                    componentUtils: __SComponentUtilsSettingsInterface.apply(
-                        {},
-                    ),
-                },
-                settings,
+                __SComponentUtilsSettingsInterface.defaults(),
+                settings ?? {},
             ),
         );
 
@@ -211,7 +201,7 @@ export default class SComponentUtils extends __SClass {
             });
 
         // @ts-ignore
-        const styleStr = this.componentUtilsSettings.style;
+        const styleStr = this.settings.style;
         this.injectStyle(styleStr ?? '');
     }
 
@@ -320,7 +310,7 @@ export default class SComponentUtils extends __SClass {
     ): void {
         const finalStateSettings: ISComponentUtilsStateSettings = {
             id: this.node.id,
-            ...(this.componentUtilsSettings.state ?? {}),
+            ...(this.settings.state ?? {}),
             ...(settings ?? {}),
         };
 
@@ -639,7 +629,7 @@ export default class SComponentUtils extends __SClass {
             __deepMerge(
                 // @ts-ignore
                 __SComponentUtilsDefaultPropsInterface.defaults(),
-                this.componentUtilsSettings.defaultProps ?? {},
+                this.settings.defaultProps ?? {},
                 (<any>this.constructor)._defaultProps['*'] ?? {},
                 (<any>this.constructor)._defaultProps[this.name] ?? {},
                 interf?.defaults() ?? {},
@@ -728,12 +718,11 @@ export default class SComponentUtils extends __SClass {
                 );
                 // class from the passed "name" in the settings
                 if (
-                    this.componentUtilsSettings.name &&
-                    this.node.tagName.toLowerCase() !==
-                        this.componentUtilsSettings.name
+                    this.settings.name &&
+                    this.node.tagName.toLowerCase() !== this.settings.name
                 ) {
                     clses.push(
-                        `${this.componentUtilsSettings.name.toLowerCase()}${
+                        `${this.settings.name.toLowerCase()}${
                             clsName && !clsName.match(/^__/) ? '-' : ''
                         }${clsName}`,
                     );

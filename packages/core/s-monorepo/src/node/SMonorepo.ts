@@ -84,7 +84,7 @@ export interface ISMonorepoListResult {
 export interface ISMonorepoDevParams {
     packagesGlobs: string[];
     buildInitial: boolean;
-    tests: boolean;
+    test: boolean;
     testInitial: boolean;
 }
 export interface ISMonorepoDevResult {}

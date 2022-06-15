@@ -46,14 +46,14 @@ export default function (env, config) {
              * @name        fields
              * @namespace   config.monorepo.upgrade
              * @type       string[]
-             * @default     ['package.json','composer.json']
+             * @default     ['version']
              *
-             * Specify some files to upgrade in each packages when doing a monorepo.upgrade call
+             * Specify some fields to upgrade in each packages files
              *
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            fields: ['package.json', 'composer.json'],
+            fields: ['version'],
         },
     };
 }

@@ -10,7 +10,7 @@ import __autoCast from '../../../shared/string/autoCast';
  * Parse the transform rule of an element and returns a simple object with each properties separated.
  *
  * @param 		 {string}		 transformStr	            The transform string to parse
- * @return
+ * @return        {IParseTransformRuleResult}               An object with all the parsed transform properties
  *
  * @todo      refactore
  * @todo      interface

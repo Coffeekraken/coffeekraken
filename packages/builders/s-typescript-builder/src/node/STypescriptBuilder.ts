@@ -448,9 +448,10 @@ export default class STypescriptBuilder extends __SBuilder {
                     __fs.writeFileSync(
                         packageJsonOutPath,
                         JSON.stringify({
-                            name: `@coffeekraken/internal-${__uniqid()}-${
-                                file.format === 'cjs' ? 'commonjs' : 'module'
-                            }`,
+                            // avoid specifying a name to prevent yarn to yiel for ducplicate workspaces
+                            // name: `@coffeekraken/internal-${__uniqid()}-${
+                            //     file.format === 'cjs' ? 'commonjs' : 'module'
+                            // }`,
                             type: file.format === 'cjs' ? 'commonjs' : 'module',
                             private: true,
                         }),

@@ -56,18 +56,11 @@
             }
         },
         {
-            "stack": "add",
-            "description": "Add related actions",
-            "defaultAction": "sugarJson",
+            "stack": "manifest",
+            "description": "Manifest related actions",
+            "defaultAction": "add",
             "actions": {
-                "sugarJson": {
-                    "scope": "global",
-                    "description": "Add the sugar.json file",
-                    "interface": "./dist/pkg/esm/node/add/interface/SCliAddSugarJsonParamsInterface.js",
-                    "process": "./dist/pkg/esm/cli/add/sugarJson.cli.js"
-                },
-                "manifestJson": {
-                    "scope": "global",
+                "add": {
                     "description": "Add the manifest.json file",
                     "interface": "./dist/pkg/esm/node/add/interface/SCliAddManifestJsonParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/add/manifestJson.cli.js"

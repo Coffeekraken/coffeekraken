@@ -1,16 +1,15 @@
 {
     "name": "@coffeekraken/s-frontend-checker",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "type": "module",
-    "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-class": "^2.0.0",
         "@coffeekraken/s-file": "^2.0.0",
-        "@coffeekraken/s-promise": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/s-promise": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "micromatch": "^4.0.5"
     },

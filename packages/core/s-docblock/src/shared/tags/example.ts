@@ -31,8 +31,7 @@ function example(data, blockSettings) {
             const parts = item.value.split(/\s{2,20000}/).map((l) => l.trim());
 
             const result = {
-                language:
-                    parts[0],
+                language: parts[0],
                 title: parts[1],
                 description: parts[2],
                 code: Array.isArray(item.content)
@@ -40,7 +39,6 @@ function example(data, blockSettings) {
                     : item.content.replace(/\\@/, '@'),
             };
 
-            
             if (result.title) {
                 result.title = new String(result.title);
                 result.title.render = true;
@@ -49,7 +47,7 @@ function example(data, blockSettings) {
                 result.description = new String(result.description);
                 result.description.render = true;
             }
-        
+
             return result;
         })
         .filter((item) => item !== null);

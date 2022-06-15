@@ -1,9 +1,8 @@
 {
     "name": "@coffeekraken/s-view-renderer",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "type": "module",
-    "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
@@ -16,8 +15,8 @@
         "@coffeekraken/s-promise": "^2.0.0",
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/s-view-renderer-engine-blade": "^2.0.0",
-        "@coffeekraken/s-view-renderer-engine-twig": "^2.0.0",
         "@coffeekraken/s-view-renderer-engine-lit": "^2.0.0",
+        "@coffeekraken/s-view-renderer-engine-twig": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "exec-php": "^0.0.5",
         "glob": "^8.0.3"

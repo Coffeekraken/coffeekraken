@@ -23,7 +23,8 @@ import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 async function typeTag(data, blockSettings) {
-    const value = await __resolveTypeString(`{${data.value}}`);
+    const value = new String(await __resolveTypeString(`{${data.value}}`));
+    value.toString = () => data.value;
     return value;
 }
 export default typeTag;

@@ -826,22 +826,44 @@ class SDocMap extends __SClass implements ISDocmap {
                     for (let j = 0; j < docblocks.length; j++) {
                         const docblock = docblocks[j];
 
+                        let matchFilters = true;
+
                         for (
                             let k = 0;
                             // @ts-ignore
                             k < Object.keys(finalParams.filters).length;
                             k++
                         ) {
+                            const key = Object.keys(finalParams.filters)[k];
                             const filterReg =
                                 // @ts-ignore
-                                finalParams.filters[
-                                    Object.keys(finalParams.filters)[k]
-                                ];
+                                finalParams.filters[key];
                             // @ts-ignore
-                            const value =
-                                docblock[Object.keys(finalParams.filters)[k]];
+                            let value = docblock[key];
+
+                            // do not take care of undefined value
                             if (value === undefined) continue;
-                            if (value.match(filterReg)) break;
+
+                            // if the "toString" method is a custom one
+                            // calling it to have the proper string value back
+                            if (
+                                value?.toString
+                                    .toString()
+                                    .indexOf('[native code]') === -1
+                            ) {
+                                value = value.toString();
+                            }
+
+                            // check if the value match the filter or not
+                            // if not, we do not take the docblock
+                            if (!value.match(filterReg)) {
+                                matchFilters = false;
+                                break;
+                            }
+                        }
+
+                        if (!matchFilters) {
+                            continue;
                         }
 
                         if (docblock.name && docblock.name.slice(0, 1) === '_')

@@ -1,9 +1,8 @@
 {
     "name": "@coffeekraken/s-event-emitter",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "type": "module",
-    "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
@@ -14,7 +13,6 @@
         "node-ipc": "^10.1.0",
         "strong-type": "^1.1.0"
     },
-    "devDependencies": {},
     "main": "./dist/pkg/cjs/shared/exports.js",
     "module": "./dist/pkg/esm/shared/exports.js",
     "exports": {

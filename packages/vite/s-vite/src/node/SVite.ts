@@ -508,13 +508,6 @@ export default class SVite extends __SClass {
                     detached: true,
                     cwd: __packageRoot(),
                 });
-
-                // if (finalParams.watch) {
-                //     process.on('SIGINT', () => {
-                //         pro.kill();
-                //     });
-                // }
-
                 pro.on('close', (e) => {
                     if (!finalParams.watch) {
                         resolve();

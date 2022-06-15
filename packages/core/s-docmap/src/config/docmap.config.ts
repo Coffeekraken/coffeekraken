@@ -139,21 +139,30 @@ export default function (env, config) {
                 /**
                  * @name        namespace
                  * @namespace   config.docmap.build.filters
-                 * @type        Object<String>
-                 * @default       /#\{.*\}/gm
+                 * @type        Regex
+                 * @default      /^.*$/
                  *
                  * Specify some regex to apply on different docblock properties
                  * to exclude some files from the builded docmap json
                  *
-                 * @example     js
-                 * {
-                 *    namespace: /#\{.*\}/gm
-                 * }
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                namespace: /^.*$/,
+
+                /**
+                 * @name        type
+                 * @namespace   config.docmap.build.filters
+                 * @type        Regex
+                 * @default       /^(?!CssClass)[a-zA-Z]+$/
+                 *
+                 * Specify some regex to apply on different docblock properties
+                 * to exclude some files from the builded docmap json
                  *
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                namespace: /#\{.*\}/gm,
+                type: /^(?!CssClass)[a-zA-Z]+$/,
             },
 
             /**

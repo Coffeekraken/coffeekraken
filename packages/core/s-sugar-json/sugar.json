@@ -15,6 +15,11 @@
                     "description": "Search and list for sugar.json files",
                     "interface": "./dist/pkg/esm/node/list/interface/SSugarJsonListParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/list.cli.js"
+                },
+                "add": {
+                    "description": "Add the sugar.json file",
+                    "interface": "./dist/pkg/esm/node/add/interface/SSugarJsonAddParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/add.cli.js"
                 }
             }
         }

@@ -1,7 +1,7 @@
 {
     "name": "@coffeekraken/sugar",
     "description": "A little sugar in your codebase",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "type": "module",
     "exports": {
         "./shared/*": {
@@ -51,8 +51,8 @@
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/s-sugar-element": "^2.0.0",
         "@coffeekraken/s-sugar-json": "^2.0.0",
-        "@coffeekraken/s-view-renderer": "^2.0.0",
         "@coffeekraken/s-validator": "^2.0.0",
+        "@coffeekraken/s-view-renderer": "^2.0.0",
         "@coffeekraken/s-vite": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "@csstools/convert-colors": "^2.0.0",
@@ -160,6 +160,5 @@
         "yaml": "^1.10.2",
         "yargs": "^17.0.1"
     },
-    "globalDependencies": {},
-    "devDependencies": {}
+    "globalDependencies": {}
 }

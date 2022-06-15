@@ -42,6 +42,9 @@ function cssClass(data, blockSettings) {
         description.render = true;
 
         res[name] = {
+            toString() {
+                return name;
+            },
             name: parts[0],
             description,
         };

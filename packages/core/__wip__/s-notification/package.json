@@ -5,7 +5,6 @@
   "type": "module",
   "main": "./src/node/exports.js",
   "browser": "./src/shared/exports.js",
-  "scripts": {},
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
   "license": "MIT",
   "dependencies": {

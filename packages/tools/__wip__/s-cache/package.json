@@ -5,7 +5,6 @@
   "type": "module",
   "main": "./src/node/SCache.js",
   "browser": "./src/js/SCache.js",
-  "scripts": {},
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
   "license": "MIT",
   "dependencies": {

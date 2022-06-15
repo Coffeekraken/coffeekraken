@@ -1,16 +1,14 @@
 {
     "name": "@coffeekraken/s-vite-postcss-plugin",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "type": "module",
-    "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "postcss": "^8.2.15",
-        "@coffeekraken/s-sugar-config": "^2.0.0"
+        "@coffeekraken/s-sugar-config": "^2.0.0",
+        "postcss": "^8.2.15"
     },
-    "peerDependencies": {},
     "main": "./dist/pkg/cjs/node/exports.js",
     "module": "./dist/pkg/esm/node/exports.js",
     "exports": {

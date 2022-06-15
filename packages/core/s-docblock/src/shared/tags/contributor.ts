@@ -25,13 +25,15 @@ function contributor(data, blockSettings) {
     const contributors: any[] = [];
 
     data.forEach((d) => {
-        const contributorNfo =
-            /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
-                d.value,
-            );
+        const contributorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
+            d.value,
+        );
         if (!contributorNfo) return null;
 
         contributors.push({
+            toString() {
+                return d.value;
+            },
             name: contributorNfo[1],
             email: contributorNfo[2],
             url: contributorNfo[3],

@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-color-picker-component",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -13,8 +13,8 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-lit-component": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/s-lit-component": "^2.0.0",
         "@coffeekraken/s-theme": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "@simonwep/pickr": "^1.8.1",

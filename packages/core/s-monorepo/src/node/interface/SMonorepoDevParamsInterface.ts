@@ -34,11 +34,11 @@ export default class SMonorepoDevParamsInterface extends __SInterface {
                 default: false,
                 alias: 'b',
             },
-            tests: {
+            test: {
                 description:
                     'Specify if you want to run the tests on saved files or not',
                 type: 'Boolean',
-                default: true,
+                default: false,
                 alias: 't',
             },
             testInitial: {

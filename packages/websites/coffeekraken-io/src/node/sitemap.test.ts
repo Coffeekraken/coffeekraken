@@ -6,6 +6,6 @@ describe('sitemap.test.ts', () => {
     });
 
     it('Should execute correctly 3', async () => {
-        expect('coco').toBe('ddcoco');
+        expect('coco').toBe('coco');
     });
 });

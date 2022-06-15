@@ -13,14 +13,24 @@ import { uglify as __uglifyPlugin } from 'rollup-plugin-uglify';
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
-import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
+import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
 import __SViteBuildParamsInterface from './interface/SViteBuildParamsInterface';
+import __SViteTestParamsInterface from './interface/SViteTestParamsInterface';
 import __SLog from '@coffeekraken/s-log';
+import __childProcess from 'child_process';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
+
+import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
 
 export interface ISViteSettings {}
 
+export interface ISViteTestParams {
+    dir: string;
+    watch: boolean;
+}
 export interface ISViteStartParams {}
 export interface ISViteBuildParams {
     input: string;
@@ -442,6 +452,88 @@ export default class SVite extends __SClass {
                 });
 
                 resolve(results);
+            },
+            {
+                metas: {
+                    id: this.metas.id,
+                },
+            },
+        );
+    }
+
+    /**
+     * @name          test
+     * @type          Function
+     *
+     * Launch the tests
+     *
+     * @param         {ISViteTestParams}         [params={}]             Some parameters to customize your process
+     *
+     * @since         2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    test(params: ISViteTestParams | String) {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe, on }) => {
+                const viteConfig = __SugarConfig.get('vite');
+                const duration = new __SDuration();
+
+                // @ts-ignore
+                const finalParams: ISViteTestParams = __SViteTestParamsInterface.apply(
+                    params,
+                );
+
+                const finalConfig = __deepMerge(viteConfig, {
+                    test: finalParams,
+                });
+
+                const configPath = __writeTmpFileSync(
+                    `export default ${JSON.stringify(finalConfig)};`,
+                    {
+                        path: 'vite.config.js',
+                    },
+                );
+
+                const command = `npx vitest --dir "${__path.relative(
+                    __packageRoot(),
+                    finalParams.dir,
+                )}" --config ${configPath} --root ${__packageRoot()} --passWithNoTests --changed HEAD~1 --dom --globals ${
+                    finalParams.watch ? '--watch' : '--run'
+                }`;
+
+                // run the test
+                const pro = __childProcess.spawn(command, [], {
+                    stdio: ['ignore', 1, 2],
+                    shell: true,
+                    detached: true,
+                    cwd: __packageRoot(),
+                });
+
+                // if (finalParams.watch) {
+                //     process.on('SIGINT', () => {
+                //         pro.kill();
+                //     });
+                // }
+
+                pro.on('close', (e) => {
+                    if (!finalParams.watch) {
+                        resolve();
+                    }
+                });
+
+                // cancel
+                on('cancel', () => {
+                    pro.kill?.();
+                });
+
+                if (!finalParams.watch) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<green>[success]</green> Tests completed <green>successfully</green> in <yellow>${
+                            duration.end().formatedDuration
+                        }</yellow>`,
+                    });
+                }
             },
             {
                 metas: {

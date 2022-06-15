@@ -298,7 +298,7 @@ function processPath(path, platform = 'node') {
 // js
 const chokidarJs = __chokidar.watch(
     // 'packages/*/*/src/js/**/*.ts'
-    'packages/*/*/src/js/**/SMochaTesterStartParamsInterface.ts',
+    'packages/*/*/src/js/**/vite.config.ts',
     {
         // ignoreInitial: true,
         ignored: ['**/node_modules'],
@@ -314,7 +314,7 @@ chokidarJs.on('change', chokidarJsCallback);
 // node, shared, etc...
 const chokidarNode = __chokidar.watch(
     // 'packages/*/*/src/(node|shared|config|views|pages|cli)/**/*.ts',
-    'packages/*/*/src/(node|shared|config|views|pages|cli)/**/SMochaTesterStartParamsInterface.ts',
+    'packages/*/*/src/(node|shared|config|views|pages|cli)/**/vite.config.ts',
     {
         // ignoreInitial: true,
         ignored: ['**/node_modules'],

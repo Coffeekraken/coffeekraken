@@ -5,6 +5,8 @@ import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
+import { configDefaults, defineConfig } from 'vitest/config';
+
 export async function preprocess(env, rawViteConfig, rawConfig) {
     const config = (await __loadConfigFile('vite.config.js')) ?? {};
     return __deepMerge(rawViteConfig, config);
@@ -13,7 +15,7 @@ export async function preprocess(env, rawViteConfig, rawConfig) {
 export default function (env, config) {
     if (env.platform !== 'node') return;
 
-    return {
+    return defineConfig({
         /**
          * @name          root
          * @namespace     config.vite
@@ -152,6 +154,11 @@ export default function (env, config) {
              */
             // exclude: ['static'],
             entries: ['index.html'],
+
+            esbuildOptions: {
+                // mainFields: ['module', 'main'],
+                resolveExtensions: ['.js', '.ts'],
+            },
         },
         build: {
             lib: {
@@ -272,5 +279,30 @@ export default function (env, config) {
         rewrites: [
             __path.resolve(`${__dirname()}/../node/rewrites/handlebars`),
         ],
-    };
+        test: {
+            /**
+             * @name          dir
+             * @namespace     config.vite.test
+             * @type          String
+             * @default      [config.storage.src.rootDir]
+             *
+             * Specify the directory to include for the tests
+             *
+             * @see         https://vitest.dev/config/#configuration
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            dir: '[config.storage.src.rootDir]',
+
+            exclude: [
+                ...configDefaults.exclude,
+                // '**/node_modules/**',
+                '**/__wip__/**',
+                '**/sugar/**',
+            ],
+            deps: {
+                inline: true,
+            },
+        },
+    });
 }

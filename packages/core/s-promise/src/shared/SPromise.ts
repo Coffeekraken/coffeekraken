@@ -291,7 +291,6 @@ class SPromise extends __SClass.extends(Promise)
                 'pipeErrors',
                 'pipeFrom',
                 'pipeTo',
-                'eventEmitterSettings',
             ],
         });
         this.bind = this._eventEmitter.bind.bind(this);

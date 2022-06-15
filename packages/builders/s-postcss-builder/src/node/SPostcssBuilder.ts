@@ -76,7 +76,6 @@ export interface ISPostcssBuilderBuildParams {
 }
 
 export default class SPostcssBuilder extends __SBuilder {
-
     /**
      * @name            constructor
      * @type            Function
@@ -118,10 +117,9 @@ export default class SPostcssBuilder extends __SBuilder {
             async ({ resolve, reject, emit }) => {
                 let finalCss;
 
-                const defaultParams = <ISPostcssBuilderBuildParams>(
-                    // @ts-ignore
-                    __SPostcssBuilderBuildParamsInterface.defaults()
-                );
+                const defaultParams = <
+                    ISPostcssBuilderBuildParams // @ts-ignore
+                >__SPostcssBuilderBuildParamsInterface.defaults();
 
                 // handle prod shortcut
                 if (params.prod) {
@@ -187,30 +185,22 @@ export default class SPostcssBuilder extends __SBuilder {
                     type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Plugins     :`,
                 });
-                this.settings.postcss.plugins.forEach(
-                    (pluginName) => {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<yellow>|------------</yellow> : ${pluginName}`,
-                        });
-                    },
-                );
+                this.settings.postcss.plugins.forEach((pluginName) => {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>|------------</yellow> : ${pluginName}`,
+                    });
+                });
 
                 // resolve plugins paths
                 const plugins: any[] = [];
-                for (
-                    let i = 0;
-                    i < this.settings.postcss.plugins.length;
-                    i++
-                ) {
+                for (let i = 0; i < this.settings.postcss.plugins.length; i++) {
                     const p = this.settings.postcss.plugins[i];
                     if (typeof p === 'string') {
                         const { default: plugin } = await import(p);
                         const fn = plugin.default ?? plugin;
                         const options =
-                            this.settings.postcss.pluginsOptions[
-                                p
-                            ] ?? {};
+                            this.settings.postcss.pluginsOptions[p] ?? {};
                         plugins.push(
                             fn({
                                 target: params.prod ? 'prod' : 'dev',
@@ -237,7 +227,7 @@ export default class SPostcssBuilder extends __SBuilder {
                 } catch (e) {
                     emit('log', {
                         type: __SLog.TYPE_ERROR,
-                        value: e.toString();
+                        value: e.toString(),
                     });
                     throw e;
                 }
@@ -388,20 +378,18 @@ export default class SPostcssBuilder extends __SBuilder {
                         } catch (e) {}
                     }
 
-                    this.settings.purgecss.content.forEach(
-                        (contentObj) => {
-                            if (typeof contentObj === 'string') {
-                                globs.push(contentObj);
-                            } else {
-                                if (contentObj.raw) {
-                                    contentObj.raw = __expandPleasantCssClassnames(
-                                        contentObj.raw,
-                                    );
-                                }
-                                content.push(contentObj);
+                    this.settings.purgecss.content.forEach((contentObj) => {
+                        if (typeof contentObj === 'string') {
+                            globs.push(contentObj);
+                        } else {
+                            if (contentObj.raw) {
+                                contentObj.raw = __expandPleasantCssClassnames(
+                                    contentObj.raw,
+                                );
                             }
-                        },
-                    );
+                            content.push(contentObj);
+                        }
+                    });
                     const files = __SGlob.resolve(globs);
                     files.forEach((file) => {
                         content.push({

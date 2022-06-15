@@ -14,11 +14,18 @@
       "actions": {
         "start": {
           "description": "Start the vite server and compilators development stack",
+          "interface": "./dist/pkg/esm/node/interface/SViteStartParamsInterface.js",
           "process": "./dist/pkg/esm/cli/start.cli.js"
         },
         "build": {
           "description": "Build your assets like js, and css using vite",
+          "interface": "./dist/pkg/esm/node/interface/SViteBuildParamsInterface.js",
           "process": "./dist/pkg/esm/cli/build.cli.js"
+        },
+        "test": {
+          "description": "Launch the tests using vitest",
+          "interface": "./dist/pkg/esm/node/interface/SViteTestParamsInterface.js",
+          "process": "./dist/pkg/esm/cli/test.cli.js"
         }
       }
     }

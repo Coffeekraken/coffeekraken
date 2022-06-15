@@ -15,7 +15,7 @@ import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __path from 'path';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __SPackage from '@coffeekraken/s-package';
-import __SJestTester from '@coffeekraken/s-jest-tester';
+import __SVite from '@coffeekraken/s-vite';
 
 import __srcDir from '@coffeekraken/sugar/node/path/srcRootDir';
 import __distDir from '@coffeekraken/sugar/node/path/distRootDir';
@@ -377,6 +377,17 @@ export default class SMonorepo extends __SClass {
                     value: `<yellow>[list]</yellow> Starting the typescript build process...`,
                 });
 
+                // tests
+                if (finalParams.test) {
+                    const vite = new __SVite();
+                    pipe(
+                        vite.test({
+                            watch: true,
+                            dir: __packageRoot(),
+                        }),
+                    );
+                }
+
                 packages.forEach((packageObj) => {
                     // typescript compilation
                     const inDir = `${packageObj.path}/${srcRelDir}`,
@@ -392,19 +403,6 @@ export default class SMonorepo extends __SClass {
                             watch: true,
                         }),
                     );
-
-                    // tests
-                    if (finalParams.tests) {
-                        const mochaTester = new __SJestTester();
-                        pipe(
-                            mochaTester.start({
-                                inDir,
-                                packageRoot: packageObj.path,
-                                testInitial: finalParams.testInitial,
-                                watch: true,
-                            }),
-                        );
-                    }
 
                     // exports
                     const pack = new __SPackage({

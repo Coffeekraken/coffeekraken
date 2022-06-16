@@ -1,18 +1,15 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { html } from 'lit';
 import './s-dashboard-browserstack-component.css';
-import __browserstack from 'browserstack/lib/browserstack';
-import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __filterObject from '@coffeekraken/sugar/shared/object/filter';
 
-import __safariSvg from './svg/safari.svg';
 import __chromeSvg from './svg/chrome.svg';
-import __firefoxSvg from './svg/firefox.svg';
 import __edgeSvg from './svg/edge.svg';
+import __firefoxSvg from './svg/firefox.svg';
 import __operaSvg from './svg/opera.svg';
+import __safariSvg from './svg/safari.svg';
 import __samsumgSvg from './svg/samsung.svg';
 import __yandexSvg from './svg/yandex.svg';
 

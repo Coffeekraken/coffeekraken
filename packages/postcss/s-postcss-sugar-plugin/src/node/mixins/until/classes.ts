@@ -71,10 +71,13 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             .s-until.s-until--${state}:not(.s-until--sibling):not(.s-until--siblings):not(.s-until--parent):not(.s-until--grandparent):not(.s-until--ancestor)[${state}] {
                 display: none;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -96,11 +99,14 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *.${state} + .s-until.s-until--sibling.s-until--${state},
             *[${state}] + .s-until.s-until--sibling.s-until--${state} {
                 display: none;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -122,11 +128,14 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *.${state} ~  .s-until.s-until--siblings.s-until--${state},
             *[${state}] ~ .s-until.s-until--siblings.s-until--${state} {
                 display: none;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -148,14 +157,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *:not([${state}]):not(.${state}) > .s-until.s-until--parent.s-until--${state} {
                 display: unset;
             }
             *[${state}] > .s-until.s-until--parent.s-until--${state},
             *.${state} > .s-until.s-until--parent.s-until--${state} {
                 display: none;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -177,14 +189,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *:not([${state}]):not(.${state}) > * > .s-until.s-until--grandparent.s-until--${state} {
                 display: unset;
             }
             *[${state}] > * > .s-until.s-until--grandparent.s-until--${state},
             *.${state} > * > .s-until.s-until--grandparent.s-until--${state} {
                 display: none;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -206,14 +221,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *:not([${state}]):not(.${state}) .s-until.s-until--ancestor.s-until--${state} {
                 display: unset;
             }
             *[${state}] .s-until.s-until--ancestor.s-until--${state},
             *.${state} .s-until.s-until--ancestor.s-until--${state} {
                 display: none;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
     });
 
     // Queries
@@ -235,12 +253,15 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             @sugar.media(${query}) {
                 .s-until--media.s-until--${query} {
                     display: none !important;
                 }
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

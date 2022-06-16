@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
@@ -101,6 +100,7 @@ export default function ({
             @sugar.link.stretch;
         }
     `,
+        { type: 'CssClass' },
     );
 
     return vars;

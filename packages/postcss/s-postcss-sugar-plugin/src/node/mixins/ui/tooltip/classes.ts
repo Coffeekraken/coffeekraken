@@ -1,6 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __faker from 'faker';
 import __STheme from '@coffeekraken/s-theme';
+import __faker from 'faker';
 
 /**
  * @name          classes
@@ -312,6 +312,7 @@ export default function ({
                 }
             }
         `,
+            { type: 'CssClass' },
         );
         vars.comment(
             () => `/**
@@ -359,6 +360,7 @@ export default function ({
                 @sugar.ui.tooltip($scope: bare);
             }
         `,
+            { type: 'CssClass' },
         );
     }
 
@@ -394,6 +396,7 @@ export default function ({
                     @sugar.ui.tooltip($style: ${style}, $scope: lnf);
                 }
             `,
+                { type: 'CssClass' },
             );
         });
     }
@@ -430,6 +433,7 @@ export default function ({
                     @sugar.ui.tooltip($shape: ${shape}, $scope: shape);
                 }
             `,
+                { type: 'CssClass' },
             );
         });
     }
@@ -460,6 +464,7 @@ export default function ({
             @sugar.ui.tooltip($interactive: true, $scope: 'interactive');
         }
     `,
+        { type: 'CssClass' },
     );
 
     // TOP
@@ -487,6 +492,7 @@ export default function ({
             @sugar.ui.tooltip($position: top, $scope: position);
         }
     `,
+        { type: 'CssClass' },
     );
 
     // RIGHT
@@ -514,6 +520,7 @@ export default function ({
             @sugar.ui.tooltip($position: right, $scope: position);
         }
     `,
+        { type: 'CssClass' },
     );
 
     // left
@@ -541,6 +548,7 @@ export default function ({
             @sugar.ui.tooltip($position: left, $scope: position);
         }
     `,
+        { type: 'CssClass' },
     );
 
     // BOTTOM
@@ -568,6 +576,7 @@ export default function ({
             @sugar.ui.tooltip($position: bottom, $scope: position);
         }
     `,
+        { type: 'CssClass' },
     );
 
     return vars;

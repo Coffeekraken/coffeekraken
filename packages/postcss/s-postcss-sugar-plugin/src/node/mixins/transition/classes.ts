@@ -114,10 +114,13 @@ export default function ({
   * </div>
   */
  `,
-        ).code(`
+        ).code(
+            `
 .s-transition${transitionName === 'default' ? '' : `--${transitionName}`} {
     @sugar.transition(${transitionName});
-}`);
+}`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

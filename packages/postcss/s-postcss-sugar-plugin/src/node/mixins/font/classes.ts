@@ -109,6 +109,7 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
+        'Styleguide',
     );
 
     vars.comment(
@@ -147,6 +148,7 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
+        'Styleguide',
     );
 
     vars.comment(
@@ -181,6 +183,7 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
+        'Styleguide',
     );
 
     vars.comment(
@@ -226,6 +229,7 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
+        'Styleguide',
     );
 
     vars.comment(
@@ -266,6 +270,7 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
+        'Styleguide',
     );
 
     vars.comment(
@@ -314,10 +319,13 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
 .s-font--${fontName} {
     @sugar.font.family(${fontName});
-}`);
+}`,
+            { type: 'CssClass' },
+        );
     });
 
     Object.keys(fontSizesObj).forEach((sizeName) => {
@@ -336,10 +344,13 @@ export default function ({
   * <h1 class="s-font:${sizeName}">Hello world</h1>
   */
  `,
-        ).code(`
+        ).code(
+            `
 .s-font--${sizeName} {
     @sugar.font.size(${sizeName});
-}`);
+}`,
+            { type: 'CssClass' },
+        );
     });
 
     // reset
@@ -360,10 +371,12 @@ export default function ({
   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
   */
  `,
-    ).code(`
+    ).code(
+        `
 .s-font--reset-size {
   font-size: sugar.scalable(1rem);
-}`);
+}`,
+    );
 
     vars.comment(
         () => `/**
@@ -382,10 +395,13 @@ export default function ({
   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
   */
  `,
-    ).code(`
+    ).code(
+        `
 .s-font--reset-family {
   @sugar.font.family(default);
-}`);
+}`,
+        { type: 'CssClass' },
+    );
 
     fontStretchProps.forEach((value) => {
         vars.comment(
@@ -405,10 +421,13 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-        ).code(`
+        ).code(
+            `
             .s-font--${value} {
                 font-stretch: ${value};
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
     });
 
     vars.comment(
@@ -428,10 +447,13 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-    ).code(`
+    ).code(
+        `
             .s-font--italic {
                 font-style: italic;
-            }`);
+            }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -450,10 +472,13 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-    ).code(`
+    ).code(
+        `
             .s-font--oblique {
                 font-style: oblique;
-            }`);
+            }`,
+        { type: 'CssClass' },
+    );
 
     fontWeightProps.forEach((value) => {
         vars.comment(
@@ -479,10 +504,13 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             .s-font--${value} {
                 font-weight: ${value.replace('weight-', '')};
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

@@ -3,10 +3,6 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
 import './s-dashboard-google-component.css';
-import __browserstack from 'browserstack/lib/browserstack';
-import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __filterObject from '@coffeekraken/sugar/shared/object/filter';
 
 export default class SDashboardGoogleComponent extends __SLitComponent {
     _gtm: string;

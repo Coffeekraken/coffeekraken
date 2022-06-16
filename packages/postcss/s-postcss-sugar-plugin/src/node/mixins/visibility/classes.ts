@@ -32,19 +32,21 @@ export { postcssSugarPluginOverflowClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginOverflowClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginOverflowClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(`
       /**
         * @name          Visibility
         * @namespace          sugar.style.helpers
@@ -75,7 +77,8 @@ export default function ({
         */
     `);
 
-    vars.push(`/**
+    vars.comment(
+        `/**
     * @name          s-visibility:hidden
     * @namespace          sugar.style.visibility
     * @type               CssClass
@@ -87,11 +90,17 @@ export default function ({
     * @example        html
     * <div class="s-visibility:hidden">Hello world</div>
     */
+   `,
+    ).code(
+        `
     .s-visibility--hidden {
         visibility: hidden;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
-    vars.push(`/**
+    vars.comment(
+        `/**
     * @name          s-visibility:visible
     * @namespace          sugar.style.visibility
     * @type               CssClass
@@ -103,11 +112,17 @@ export default function ({
     * @example        html
     * <div class="s-visibility:visible">Hello world</div>
     */
+   `,
+    ).code(
+        `
     .s-visibility--visible {
         visibility: visible;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
-    vars.push(`/**
+    vars.comment(
+        `/**
     * @name          s-visibility:collapse
     * @namespace          sugar.style.visibility
     * @type               CssClass
@@ -119,9 +134,14 @@ export default function ({
     * @example        html
     * <div class="s-visibility:collapse">Hello world</div>
     */
+   `,
+    ).code(
+        `
     .s-visibility--collapse {
         visibility: collapse;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

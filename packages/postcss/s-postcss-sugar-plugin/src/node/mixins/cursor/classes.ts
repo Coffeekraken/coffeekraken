@@ -127,9 +127,10 @@ export default function ({
     `,
     );
 
-    cursors.forEach((cursor) => {
-        vars.comment(
-            () => `/**
+    cursors.forEach(
+        (cursor) => {
+            vars.comment(
+                () => `/**
         * @name          s-cursor:${cursor}
         * @namespace          sugar.style.cursor
         * @type               CssClass
@@ -147,11 +148,13 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
-        ).code(`
+            ).code(`
         .s-cursor--${cursor} {
             cursor: ${cursor};
         }`);
-    });
+        },
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

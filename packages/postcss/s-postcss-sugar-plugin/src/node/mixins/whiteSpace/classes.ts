@@ -34,19 +34,21 @@ export { postcssSugarPluginWrapClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginWrapClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginWrapClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(`
       /**
         * @name          White space
         * @namespace          sugar.style.helpers
@@ -133,7 +135,8 @@ export default function ({
         'revert',
         'unset',
     ].forEach((value) => {
-        vars.push(`/**
+        vars.comment(
+            `/**
     * @name          s-white-space:${value}
     * @namespace          sugar.style.whiteSpace
     * @type               CssClass
@@ -145,9 +148,14 @@ export default function ({
     * @example        html
     * <div class="s-white-space:${value}">${__faker.lorem.paragraph()}</div>
     */
+   `,
+        ).code(
+            `
     .s-white-space--${value} {
         white-space: ${value};
-    }`);
+    }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
 import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
+import __faker from 'faker';
 
 /**
  * @name          classes
@@ -206,11 +206,16 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-        ).code(`
+        ).code(
+            `
         .s-input {
             @sugar.ui.input($scope: bare);
         }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
@@ -240,6 +245,9 @@ export default function ({
                     ` @sugar.ui.input($style: ${style}, $scope: lnf);`,
                     `}`,
                 ].join('\n'),
+                {
+                    type: 'CssClass',
+                },
             );
         });
     }
@@ -271,6 +279,9 @@ export default function ({
                     ` @sugar.ui.input($shape: ${shape}, $scope: shape);`,
                     `}`,
                 ].join('\n'),
+                {
+                    type: 'CssClass',
+                },
             );
         });
     }

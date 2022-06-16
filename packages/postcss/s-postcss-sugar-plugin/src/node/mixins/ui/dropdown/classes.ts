@@ -294,11 +294,16 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             .s-dropdown {
                 @sugar.ui.dropdown($scope: bare);
             }
-            `);
+            `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
@@ -328,13 +333,18 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-            ).code(`
+            ).code(
+                `
             .s-dropdown${
                 finalParams.defaultStyle === style ? '' : `--${style}`
             } {
                 @sugar.ui.dropdown($style: ${style}, $scope: lnf);
             }
-            `);
+            `,
+                {
+                    type: 'CssClass',
+                },
+            );
         });
     }
 
@@ -365,11 +375,16 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-            ).code(`
+            ).code(
+                `
         .s-dropdown${finalParams.defaultShape === shape ? '' : `--${shape}`} {
             @sugar.ui.dropdown($shape: ${shape}, $scope: shape);
         }
-        `);
+        `,
+                {
+                    type: 'CssClass',
+                },
+            );
         });
     }
 
@@ -395,11 +410,16 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-    ).code(`
+    ).code(
+        `
         .s-dropdown {
             @sugar.ui.dropdown($position: bottom, $scope: position);
         }
-        `);
+        `,
+        {
+            type: 'CssClass',
+        },
+    );
 
     vars.comment(
         () => `/**
@@ -423,11 +443,16 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-    ).code(`
+    ).code(
+        `
         .s-dropdown--bottom-start {
             @sugar.ui.dropdown($position: bottom-start, $scope: position);
         }
-        `);
+        `,
+        {
+            type: 'CssClass',
+        },
+    );
 
     vars.comment(
         () => `/**
@@ -451,11 +476,16 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-    ).code(`
+    ).code(
+        `
         .s-dropdown--bottom-end {
             @sugar.ui.dropdown($position: bottom-end, $scope: position);
         }
-        `);
+        `,
+        {
+            type: 'CssClass',
+        },
+    );
 
     vars.comment(
         () => `/**
@@ -479,11 +509,16 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-    ).code(`
+    ).code(
+        `
         .s-dropdown--top {
             @sugar.ui.dropdown($position: top, $scope: position);
         }
-        `);
+        `,
+        {
+            type: 'CssClass',
+        },
+    );
 
     vars.comment(
         () => `/**
@@ -507,11 +542,16 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-    ).code(`
+    ).code(
+        `
         .s-dropdown--top-start {
             @sugar.ui.dropdown($position: top-start, $scope: position);
         }
-        `);
+        `,
+        {
+            type: 'CssClass',
+        },
+    );
 
     vars.comment(
         () => `/**
@@ -535,11 +575,16 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-    ).code(`
+    ).code(
+        `
         .s-dropdown--top-end {
             @sugar.ui.dropdown($position: top-end, $scope: position);
         }
-        `);
+        `,
+        {
+            type: 'CssClass',
+        },
+    );
 
     if (finalParams.scope.includes('bare')) {
         vars.comment(
@@ -583,6 +628,9 @@ export default function ({
                 }
             }
         `,
+            {
+                type: 'CssClass',
+            },
         );
         vars.comment(
             () => `/**

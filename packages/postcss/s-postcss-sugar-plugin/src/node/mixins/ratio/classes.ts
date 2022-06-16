@@ -111,10 +111,13 @@ export default function ({
   * </div>
   */
  `,
-        ).code(`
+        ).code(
+            `
 .s-ratio--${ratioName.replace('/', '-')} {
     @sugar.ratio(${ratioValue});
-}`);
+}`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

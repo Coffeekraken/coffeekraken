@@ -1,7 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
-import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 /**
  * @name          classes
@@ -196,11 +194,16 @@ export default function ({
         `);
     }
     if (finalParams.scope.includes('lnf')) {
-        vars.code(`
+        vars.code(
+            `
         .s-input-container--group {
             @sugar.ui.inputContainer($style: group, $scope: lnf);
         }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     if (finalParams.scope.includes('bare')) {
@@ -227,18 +230,28 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-        ).code(`
+        ).code(
+            `
         .s-input-container--addon {
             @sugar.ui.inputContainer($style: addon, $scope: bare);
         }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
     if (finalParams.scope.includes('lnf')) {
-        vars.code(`
+        vars.code(
+            `
         .s-input-container--addon {
             @sugar.ui.inputContainer($style: addon, $scope: lnf);
         }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     return vars;

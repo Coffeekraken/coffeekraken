@@ -29,7 +29,6 @@
         "@coffeekraken/s-component-utils": "^2.0.0",
         "@coffeekraken/s-conductor": "^2.0.0",
         "@coffeekraken/s-config": "^2.0.0",
-        "@coffeekraken/s-css-animation": "^2.0.0",
         "@coffeekraken/s-dashboard": "^2.0.0",
         "@coffeekraken/s-date-picker-component": "^2.0.0",
         "@coffeekraken/s-descriptor": "^2.0.0",

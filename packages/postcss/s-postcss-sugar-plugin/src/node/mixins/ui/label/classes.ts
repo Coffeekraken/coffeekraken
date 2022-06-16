@@ -177,12 +177,17 @@ export default function ({
         );
 
         if (finalParams.scope.includes('bare')) {
-            vars.code(`.s-label${
-                finalParams.defaultStyle === style ? '' : `--${style}`
-            } {
+            vars.code(
+                `.s-label${
+                    finalParams.defaultStyle === style ? '' : `--${style}`
+                } {
                 @sugar.ui.label($style: ${style}, $scope: bare);
             } 
-            `);
+            `,
+                {
+                    type: 'CssClass',
+                },
+            );
         }
 
         if (finalParams.scope.includes('lnf')) {
@@ -192,6 +197,9 @@ export default function ({
                     @sugar.ui.label($style: ${style}, $scope: lnf);
                 } 
             `,
+                {
+                    type: 'CssClass',
+                },
             );
         }
     });
@@ -215,7 +223,8 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-    ).code(`
+    ).code(
+        `
         .s-label--responsive {
 
             > * {
@@ -230,7 +239,11 @@ export default function ({
                 }    
             }
         }
-        `);
+        `,
+        {
+            type: 'CssClass',
+        },
+    );
 
     return vars;
 }

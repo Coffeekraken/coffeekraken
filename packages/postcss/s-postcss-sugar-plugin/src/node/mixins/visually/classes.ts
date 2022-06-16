@@ -32,19 +32,21 @@ export { postcssSugarPluginOverflowClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginOverflowClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginOverflowClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(`
       /**
         * @name          Visually
         * @namespace          sugar.style.helpers
@@ -74,7 +76,8 @@ export default function ({
         */
     `);
 
-    vars.push(`/**
+    vars.comment(
+        `/**
     * @name          s-visually:hidden
     * @namespace          sugar.style.visually
     * @type               CssClass
@@ -86,9 +89,14 @@ export default function ({
     * @example        html
     * <div class="s-visually:hidden">Hello world</div>
     */
+    `,
+    ).code(
+        `
     .s-visually--hidden {
        @sugar.visually.hidden;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

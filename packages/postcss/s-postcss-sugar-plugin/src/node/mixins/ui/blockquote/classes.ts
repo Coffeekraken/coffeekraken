@@ -225,10 +225,13 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-        ).code(`
+        ).code(
+            `
         .s-blockquote {
             @sugar.ui.blockquote($scope: bare);
-        } `);
+        }`,
+            { type: 'CssClass' },
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
@@ -255,10 +258,13 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-            ).code(`
+            ).code(
+                `
             .${cls} {
                 @sugar.ui.blockquote($style: ${style}, $scope: lnf);
-            } `);
+            } `,
+                { type: 'CssClass' },
+            );
         });
     }
 
@@ -286,10 +292,13 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-            ).code(`
+            ).code(
+                `
         .${cls} {
             @sugar.ui.blockquote($shape: ${shape}, $scope: shape);
-        } `);
+        } `,
+                { type: 'CssClass' },
+            );
         });
     }
 
@@ -301,6 +310,7 @@ export default function ({
                 @sugar.color(${finalParams.defaultColor});
             }
         `,
+            { type: 'CssClass' },
         );
     }
 
@@ -324,7 +334,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             @sugar.format.text {
                 blockquote {
                     @sugar.ui.blockquote($scope: '${finalParams.scope.join(
@@ -333,7 +344,9 @@ export default function ({
                     @sugar.color(${finalParams.defaultColor});
                 } 
             }
-        `);
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
@@ -364,7 +377,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             @sugar.rhythm.vertical {
                 blockquote, .s-blockquote {
                     ${__STheme.jsObjectToCssProperties(
@@ -372,7 +386,9 @@ export default function ({
                     )}
                 } 
             }
-        `);
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     return vars;

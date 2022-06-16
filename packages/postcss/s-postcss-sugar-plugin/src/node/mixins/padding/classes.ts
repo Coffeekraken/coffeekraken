@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
 import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
+import __faker from 'faker';
 
 /**
  * @name           classes
@@ -138,10 +138,13 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMargin.replace(':', '--')} {
         padding: sugar.padding(${spaceName});
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginTop = `s-pbs:${spaceName}`;
         vars.comment(
             () => `/**
@@ -160,10 +163,13 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginTop.replace(':', '--')} {
         padding-block-start: sugar.padding(${spaceName}) !important;
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginBottom = `s-pbe:${spaceName}`;
         vars.comment(
             () => `/**
@@ -182,10 +188,13 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginBottom.replace(':', '--')} {
         padding-block-end: sugar.padding(${spaceName}) !important;
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginLeft = `s-pis:${spaceName}`;
         vars.comment(
             () => `/**
@@ -204,10 +213,13 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginLeft.replace(':', '--')} {
         padding-inline-start: sugar.padding(${spaceName}) !important;
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginRight = `s-pie:${spaceName}`;
         vars.comment(
             () => `/**
@@ -226,10 +238,13 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginRight.replace(':', '--')} {
         padding-inline-end: sugar.padding(${spaceName}) !important;
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginX = `s-pi:${spaceName}`;
         vars.comment(
             () => `/**
@@ -248,11 +263,14 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
      .${clsMarginX.replace(':', '--')} {
         padding-inline-start: sugar.padding(${spaceName}) !important;
         padding-inline-end: sugar.padding(${spaceName}) !important;
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginY = `s-pb:${spaceName}`;
         vars.comment(
             () => `/**
@@ -271,11 +289,14 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginY.replace(':', '--')} {
         padding-block-start: sugar.padding(${spaceName}) !important;
         padding-block-end: sugar.padding(${spaceName}) !important;
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

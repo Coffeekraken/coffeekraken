@@ -133,14 +133,17 @@ export default function ({
                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
             `,
-        ).code(`
+        ).code(
+            `
                 .s-clearfix${
                     clearfixName === finalParams.defaultClearfix
                         ? `${notStr}`
                         : `--${clearfixName}`
                 } {
                     @sugar.clearfix(${clearfixName});
-                }`);
+                }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

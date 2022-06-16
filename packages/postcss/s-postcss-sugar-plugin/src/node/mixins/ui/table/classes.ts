@@ -305,6 +305,7 @@ export default function ({
                 .s-table {
                     @sugar.ui.table($scope: bare);
                 }`,
+            { type: 'CssClass' },
         );
     }
 
@@ -348,6 +349,7 @@ export default function ({
                 ${cls} {
                     @sugar.ui.table($style: ${style}, $scope: lnf);
                 }`,
+                { type: 'CssClass' },
             );
         });
     }
@@ -392,6 +394,7 @@ export default function ({
                 ${cls} {
                     @sugar.ui.table($shape: ${shape}, $scope: shape);
                 }`,
+                { type: 'CssClass' },
             );
         });
     }
@@ -426,13 +429,16 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-    ).code(`
+    ).code(
+        `
         @sugar.format.text {
           table {
               @sugar.ui.table;
           }
         } 
-    `);
+    `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -480,7 +486,8 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-    ).code(`
+    ).code(
+        `
         @sugar.rhythm.vertical {
           table, .s-table {
               ${__STheme.jsObjectToCssProperties(
@@ -488,7 +495,9 @@ export default function ({
               )}
           }
         } 
-    `);
+    `,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

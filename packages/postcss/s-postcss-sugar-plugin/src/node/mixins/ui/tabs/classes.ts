@@ -220,11 +220,14 @@ export default function ({
               * </div>
             */
            `,
-        ).code(`
+        ).code(
+            `
           .s-tabs {
             @sugar.ui.tabs($scope: bare);
           }
-          `);
+          `,
+            { type: 'CssClass' },
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
@@ -248,11 +251,14 @@ export default function ({
               * </div>
             */
            `,
-            ).code(`
+            ).code(
+                `
           .s-tabs${finalParams.defaultStyle === style ? '' : `--${style}`} {
             @sugar.ui.tabs($style: ${style}, $scope: lnf);
           }
-        `);
+        `,
+                { type: 'CssClass' },
+            );
         });
     }
 
@@ -277,7 +283,8 @@ export default function ({
             * </div>
           */
          `,
-            ).code(`
+            ).code(
+                `
         .s-tabs${finalParams.defaultShape === shape ? '' : `--${shape}`} {
           @sugar.ui.tabs($shape: ${shape}, $scope: shape);
 
@@ -285,7 +292,9 @@ export default function ({
                 @sugar.ui.tabs($direction: vertical, $shape: ${shape}, $scope: 'shape');
             }
         }
-      `);
+      `,
+                { type: 'CssClass' },
+            );
         });
     }
 
@@ -304,11 +313,14 @@ export default function ({
         * </div>
       */
      `,
-    ).code(`
+    ).code(
+        `
     .s-tabs--grow {
       @sugar.ui.tabs($grow: true, $scope: grow);
     }
-  `);
+  `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -325,11 +337,14 @@ export default function ({
         * </div>
       */
      `,
-    ).code(`
+    ).code(
+        `
     .s-tabs--vertical {
       @sugar.ui.tabs($direction: vertical, $scope: 'direction');
     }
-  `);
+  `,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

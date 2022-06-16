@@ -326,11 +326,14 @@ export default function ({
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
           .s-avatar {
             @sugar.ui.avatar($scope: 'bare,notifications');
           }
-      `);
+      `,
+            { type: 'CssClass' },
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
@@ -353,11 +356,14 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`,
-            ).code(`
+            ).code(
+                `
             .s-avatar${style === finalParams.defaultStyle ? '' : `--${style}`} {
                 @sugar.ui.avatar($style: ${style}, $scope: 'lnf,notifications');
             }
-        `);
+        `,
+                { type: 'CssClass' },
+            );
         });
     }
 
@@ -381,11 +387,14 @@ export default function ({
           * @since    2.0.0
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-            ).code(`
+            ).code(
+                `
           .s-avatar${shape === finalParams.defaultShape ? '' : `--${shape}`} {
             @sugar.ui.avatar($shape: ${shape}, $scope: shape);
           }
-      `);
+      `,
+                { type: 'CssClass' },
+            );
         });
     }
 
@@ -405,11 +414,14 @@ export default function ({
           * @since    2.0.0
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-    ).code(`
+    ).code(
+        `
           .s-avatar--interactive {
               @sugar.ui.avatar($scope: 'interactive');
           }
-      `);
+      `,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

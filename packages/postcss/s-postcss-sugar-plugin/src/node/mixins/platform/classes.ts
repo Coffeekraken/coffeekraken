@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __fs from 'fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __fs from 'fs';
 
 /**
  * @name           classes
@@ -89,12 +89,15 @@ export default function ({
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `,
-        ).code(`
+        ).code(
+            `
         .s-platform--${name} {
           @sugar.platform(${name});
         }
 
-  `);
+  `,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

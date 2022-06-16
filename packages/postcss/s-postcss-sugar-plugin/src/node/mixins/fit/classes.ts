@@ -115,10 +115,13 @@ export default function ({
                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
             `,
-        ).code(`
+        ).code(
+            `
                 .s-fit--${fitSizeName} {
                     @sugar.fit(${fitSizeName});
-                }`);
+                }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

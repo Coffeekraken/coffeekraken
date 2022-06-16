@@ -66,7 +66,8 @@ export default function ({
     const vars = new CssVars();
 
     if (finalParams.types.indexOf('linear') !== -1) {
-        vars.comment(`/**
+        vars.comment(
+            `/**
         * @name             s-gradient:linear
         * @namespace          sugar.style.gradient
         * @type                 CssClass
@@ -84,14 +85,19 @@ export default function ({
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-       `).code(`
+       `,
+        ).code(
+            `
     .s-gradient--linear {
         --s-gradient-type-inline: linear;
-    }`);
+    }`,
+            { type: 'CssClass' },
+        );
     }
 
     if (finalParams.types.indexOf('radial') !== -1) {
-        vars.comment(`/**
+        vars.comment(
+            `/**
         * @name             s-gradient:radial
         * @namespace          sugar.style.gradient
         * @type                 CssClass
@@ -109,15 +115,20 @@ export default function ({
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-       `).code(`
+       `,
+        ).code(
+            `
     .s-gradient--radial {
         --s-gradient-type-inline: radial;
-    }`);
+    }`,
+            { type: 'CssClass' },
+        );
     }
 
     if (finalParams.angles) {
         finalParams.angles.forEach((angle) => {
-            vars.comment(`
+            vars.comment(
+                `
         /**
          * @name        .s-gradient:${angle}deg
          * @namespace          sugar.style.gradient
@@ -136,11 +147,15 @@ export default function ({
          * @since            2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        `).code(`
+        `,
+            ).code(
+                `
         .s-gradient--${angle}deg {
             --s-gradient-angle-inline: ${angle}deg;
         }
-    `);
+    `,
+                { type: 'CssClass' },
+            );
         });
     }
 
@@ -148,7 +163,8 @@ export default function ({
     __STheme.getTheme().loopOnColors(({ name, variant, value }) => {
         if (currentName !== name) {
             // default gradients
-            vars.comment(`
+            vars.comment(
+                `
           /**
            * @name        .s-gradient:${name}
            * @namespace          sugar.style.gradient
@@ -169,7 +185,9 @@ export default function ({
            * @since       2.0.0
            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
            */
-          `).code(`
+          `,
+            ).code(
+                `
           .s-gradient--${name} {
               @sugar.gradient(
                   $start: ${name},
@@ -178,14 +196,17 @@ export default function ({
                   $angle: ${__STheme.get('gradient.defaultAngle')}
               );
           }
-      `);
+      `,
+                { type: 'CssClass' },
+            );
         }
         currentName = name;
 
         const startColorClassName = `s-gradient:start-${name}${
             variant === 'default' ? '' : `-${variant}`
         }`;
-        vars.comment(`/**
+        vars.comment(
+            `/**
         * @name          ${startColorClassName}
         * @namespace          sugar.style.gradient
         * @type               CssClass
@@ -205,15 +226,20 @@ export default function ({
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-       `).code(`
+       `,
+        ).code(
+            `
       .${startColorClassName.replace(':', '--')} {
           --s-gradient-start-color-inline: sugar.color(${name}, ${variant});
-      }`);
+      }`,
+            { type: 'CssClass' },
+        );
 
         const endColorClassName = `s-gradient:end-${name}${
             variant === 'default' ? '' : `-${variant}`
         }`;
-        vars.comment(`/**
+        vars.comment(
+            `/**
       * @name          ${endColorClassName}
       * @namespace          sugar.style.gradient
       * @type               CssClass
@@ -221,26 +247,30 @@ export default function ({
       * @status           beta
       *
       * This class allows you to apply a "<yellow>${name}${
-            variant === 'default' ? '' : `-${variant}`
-        }</yellow>" gradient end color to any HTMLElement
+                variant === 'default' ? '' : `-${variant}`
+            }</yellow>" gradient end color to any HTMLElement
       *
       * @example        html
       * <div class="s-ratio\:16-9 ${endColorClassName.replace(
           ':',
           ':',
       )}\:start-${name}${
-            previous.variant === 'default' ? '' : `-${previous.variant}`
-        } ${endColorClassName}">
+                previous.variant === 'default' ? '' : `-${previous.variant}`
+            } ${endColorClassName}">
       *     <div class="s-center-abs">I'm a cool depth button</div>
       * </div>
       *
       * @since            2.0.0
       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
-     `).code(`
+     `,
+        ).code(
+            `
     .${endColorClassName.replace(':', '--')} {
         --s-gradient-end-color-inline: sugar.color(${name}, ${variant});
-    }`);
+    }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

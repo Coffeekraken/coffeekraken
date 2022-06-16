@@ -107,10 +107,13 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-    ).code(`
+    ).code(
+        `
             .s-scrollbar {
                 @sugar.scrollbar();
-            }`);
+            }`,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

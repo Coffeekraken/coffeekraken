@@ -103,10 +103,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-float--left {
         float: left;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -124,10 +127,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-float--right {
         float: right;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -145,10 +151,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-float--none {
         float: none;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

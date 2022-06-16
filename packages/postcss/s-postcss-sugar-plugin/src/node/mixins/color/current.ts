@@ -53,7 +53,8 @@ export default function ({
         ...params,
     };
 
-    const vars = new CssVars(`
+    const vars = new CssVars();
+    vars.code(`
         @sugar.color.remap(current, ${finalParams.color});
     `);
 

@@ -308,6 +308,7 @@ export default function ({
                 .s-select {
                     @sugar.ui.select($scope: bare);
                 }`,
+            { type: 'CssClass' },
         );
     }
 
@@ -341,6 +342,7 @@ export default function ({
                 ${cls} {
                     @sugar.ui.select($style: ${style}, $scope: lnf);
                 }`,
+                { type: 'CssClass' },
             );
         });
     }
@@ -375,6 +377,7 @@ export default function ({
             ${cls} {
                 @sugar.ui.select($shape: ${shape}, $scope: shape);
             }`,
+                { type: 'CssClass' },
             );
         });
     }
@@ -401,13 +404,16 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             @sugar.format.text {
                 select {
                     @sugar.ui.select($scope: '${finalParams.scope.join(',')}');
                 } 
             }
-        `);
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
@@ -444,7 +450,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             @sugar.rhythm.vertical {
                 select, .s-select {
                     ${__STheme.jsObjectToCssProperties(
@@ -452,7 +459,9 @@ export default function ({
                     )}
                 } 
             }
-        `);
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     return vars;

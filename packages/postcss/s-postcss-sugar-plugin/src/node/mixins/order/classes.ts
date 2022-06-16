@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __faker from 'faker';
 import __STheme from '@coffeekraken/s-theme';
 
 /**
@@ -106,10 +105,13 @@ export default function ({
                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
             `,
-        ).code(`
+        ).code(
+            `
             .s-order--${i} {
                 order: ${i};
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

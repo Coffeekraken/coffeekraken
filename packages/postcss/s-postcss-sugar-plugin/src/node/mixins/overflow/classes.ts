@@ -61,10 +61,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-overflow--auto {
         overflow: auto;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -82,10 +85,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-overflow--hidden {
         overflow: hidden;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -103,10 +109,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-overflow--inherit {
         overflow: inherit;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -124,10 +133,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-overflow--initial {
         overflow: initial;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -145,10 +157,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-overflow--overlay {
         overflow: overlay;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -166,10 +181,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-overflow--revert {
         overflow: revert;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -187,10 +205,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-overflow--scroll {
         overflow: scroll;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -208,10 +229,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-overflow--visible {
         overflow: visible;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -229,10 +253,13 @@ export default function ({
     * </div>
     */
     `,
-    ).code(`
+    ).code(
+        `
     .s-overflow--unset {
         overflow: unset;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

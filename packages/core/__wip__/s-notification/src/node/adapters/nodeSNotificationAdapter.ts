@@ -1,10 +1,10 @@
+import __SPromise from '@coffeekraken/s-promise';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import __notifier from 'node-notifier';
 import type {
     ISNotificationAdapter,
     ISNotificationObj,
 } from '../SNotification';
-import __notifier from 'node-notifier';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name            nodeSNotificationAdapter

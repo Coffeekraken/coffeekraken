@@ -94,11 +94,14 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-    ).code(`
+    ).code(
+        `
             .s-disabled,
             [disabled] {
                 @sugar.disabled;
-            }`);
+            }`,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

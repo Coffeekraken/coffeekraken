@@ -117,10 +117,13 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
         .${cls.replace(':', '--')} {
                 ${css}
-        }`);
+        }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -140,12 +143,15 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-        ).code(`
+        ).code(
+            `
         @sugar.format.text {
             ${typoName} {
                 ${css}
             }
-        }`);
+        }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -167,14 +173,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-        ).code(`
+        ).code(
+            `
         @sugar.rhythm.vertical {
             ${typoName}, .${typoName} {
                 ${__STheme.jsObjectToCssProperties(
                     typoObj.rhythmVertical ?? {},
                 )}
             }
-        }`);
+        }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

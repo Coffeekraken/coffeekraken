@@ -1,10 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __cacache from 'cacache';
-import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __STheme from '@coffeekraken/s-theme';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 
 /**
  * @name           classes

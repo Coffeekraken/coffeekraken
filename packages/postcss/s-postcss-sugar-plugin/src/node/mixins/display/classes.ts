@@ -156,11 +156,14 @@ export default function ({
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
     `,
-    ).code(`
+    ).code(
+        `
       .s-display--block{
           display: block !important;
       }
-    `);
+    `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `
@@ -182,11 +185,14 @@ export default function ({
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
     `,
-    ).code(`
+    ).code(
+        `
       .s-display--inline-block{
           display: inline-block !important;
       }
-      `);
+      `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `
@@ -208,11 +214,14 @@ export default function ({
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `,
-    ).code(`
+    ).code(
+        `
       .s-display--contents{
           display: contents !important;
       }
-      `);
+      `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `
@@ -234,11 +243,14 @@ export default function ({
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `,
-    ).code(`
+    ).code(
+        `
       .s-display--flex{
           display: flex !important;
       }
-    `);
+    `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `
@@ -260,11 +272,14 @@ export default function ({
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `,
-    ).code(`
+    ).code(
+        `
       .s-display--grid{
           display: grid !important;
       }
-      `);
+      `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `
@@ -286,11 +301,14 @@ export default function ({
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `,
-    ).code(`
+    ).code(
+        `
       .s-display--inline-flex{
           display: inline-flex !important;
       }
-      `);
+      `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `
@@ -312,11 +330,14 @@ export default function ({
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `,
-    ).code(`
+    ).code(
+        `
       .s-display--inline-grid{
           display: inline-grid !important;
       }
-      `);
+      `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `
@@ -338,11 +359,14 @@ export default function ({
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `,
-    ).code(`
+    ).code(
+        `
       .s-display--none{
           display: none !important;
       }
-      `);
+      `,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

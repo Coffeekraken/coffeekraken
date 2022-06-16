@@ -67,10 +67,13 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${opacityCls.replace(':', '--')} {
         opacity: sugar.opacity(${opacity});
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

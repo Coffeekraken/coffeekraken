@@ -1,16 +1,15 @@
-import __SClass from '@coffeekraken/s-class';
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __set from '@coffeekraken/sugar/shared/object/set';
 // import __micromatch from 'micromatch';
-import __flatten from '@coffeekraken/sugar/shared/object/flatten';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
+import __isColor from '@coffeekraken/sugar/shared/is/color';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
 import __objectHash from 'object-hash';
-import __isColor from '@coffeekraken/sugar/shared/is/color';
-import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 /**
  * @name            SThemeBase

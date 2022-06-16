@@ -1,8 +1,8 @@
+import __SGlob from '@coffeekraken/s-glob';
 import __SInterface from '@coffeekraken/s-interface';
 import __fileName from '@coffeekraken/sugar/node/fs/filename';
-import __isGlob from '@coffeekraken/sugar/shared/is/glob';
-import __SGlob from '@coffeekraken/s-glob';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 import __unquote from '@coffeekraken/sugar/shared/string/unquote';
 
 /**
@@ -241,11 +241,14 @@ export default function ({
                   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                   */
                 `,
-                ).code(`
+                ).code(
+                    `
                   .s-icon--${iconObj.as} {
                     @sugar.icon.fa(${iconObj.name}, ${iconObj.protocol});
                   }
-              `);
+              `,
+                    { type: 'CssClass' },
+                );
                 break;
             case 'fs':
                 vars.comment(
@@ -270,11 +273,14 @@ export default function ({
                          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                          */
                         `,
-                ).code(`
+                ).code(
+                    `
                         .s-icon--${iconObj.as} {
                             @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
                         }
-                    `);
+                    `,
+                    { type: 'CssClass' },
+                );
                 break;
         }
     });

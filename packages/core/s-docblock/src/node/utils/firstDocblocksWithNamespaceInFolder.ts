@@ -1,12 +1,12 @@
 // @ts-nocheck
 
+import __extension from '@coffeekraken/sugar/node/fs/extension';
+import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __findInFiles from 'find-in-files';
-import __minimatch from 'minimatch';
 import __fs from 'fs';
+import __minimatch from 'minimatch';
 import __path from 'path';
-import __getFilename from '@coffeekraken/sugar/node/fs/filename';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __SDocblock from '../../shared/SDocblock';
 
 /**
@@ -35,7 +35,10 @@ import __SDocblock from '../../shared/SDocblock';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default async function firstDocblockWithNamespaceInFolder(directory, settings = {}) {
+export default async function firstDocblockWithNamespaceInFolder(
+    directory,
+    settings = {},
+) {
     settings = __deepMerge(
         {
             exclude: '**/+(__tests__|__wip__)/**',
@@ -63,7 +66,9 @@ export default async function firstDocblockWithNamespaceInFolder(directory, sett
         if (!docblock) return;
         delete docblock.object.raw;
 
-        const name = docblock.object.name || __getFilename(path).replace(`.${__extension(path)}`, '');
+        const name =
+            docblock.object.name ||
+            __getFilename(path).replace(`.${__extension(path)}`, '');
 
         namespaceObj[docblock.object.namespace + '.' + name] = {
             ...docblock.object,

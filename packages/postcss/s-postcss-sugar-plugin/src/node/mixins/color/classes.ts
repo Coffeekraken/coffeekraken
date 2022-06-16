@@ -85,8 +85,9 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
     );
 
     Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
-        cssArray.comment(
-            () => `
+        cssArray
+            .comment(
+                () => `
       /**
        * @name        s-color:${colorName}
        * @namespace          sugar.style.ui.label
@@ -105,34 +106,43 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `,
-        ).code(`
+            )
+            .code(
+                `
       .s-color--${colorName} {
         @sugar.color(${colorName});
       }
-    `);
+    `,
+                { type: 'CssClass' },
+            );
 
-        cssArray.comment(() =>
-            [
-                `/**`,
-                ` * @name           s-bg:${colorName}`,
-                ` * @namespace          sugar.style.color.bg.${colorName}`,
-                ` * @type           CssClass`,
-                ` * @platform       css`,
-                ` * @status         beta`,
-                ` *`,
-                ` * This class allows you to apply the "${colorName}" color to the background of an HTMLElement`,
-                ` *`,
-                ` * @example        html`,
-                ` * <h1 class="s-bg:${colorName}">`,
-                ` *     Something cool`,
-                ` * </h1>`,
-                ` */`,
-            ].join('\n'),
-        ).code(`
+        cssArray
+            .comment(() =>
+                [
+                    `/**`,
+                    ` * @name           s-bg:${colorName}`,
+                    ` * @namespace          sugar.style.color.bg.${colorName}`,
+                    ` * @type           CssClass`,
+                    ` * @platform       css`,
+                    ` * @status         beta`,
+                    ` *`,
+                    ` * This class allows you to apply the "${colorName}" color to the background of an HTMLElement`,
+                    ` *`,
+                    ` * @example        html`,
+                    ` * <h1 class="s-bg:${colorName}">`,
+                    ` *     Something cool`,
+                    ` * </h1>`,
+                    ` */`,
+                ].join('\n'),
+            )
+            .code(
+                `
             .s-bg--${colorName} {
                    background-color: sugar.color(${colorName}) !important;
                 }
-        `);
+        `,
+                { type: 'CssClass' },
+            );
     });
 
     __STheme.getTheme().loopOnColors((colorObj) => {
@@ -140,107 +150,127 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         let modifierStr = '';
         if (colorObj.variant) modifierStr = `-${colorObj.variant}`;
 
-        cssArray.comment(() =>
-            [
-                `/**`,
-                ` * @name           s-tc:${colorName}${
-                    colorObj.variant === 'text' ? '' : modifierStr
-                }`,
-                ` * @namespace          sugar.style.color.${colorName}.${colorObj.variant}`,
-                ` * @type           CssClass`,
-                ` * @platform       css`,
-                ` * @status         beta`,
-                ` *`,
-                ` * This class allows you to apply the "${colorName}${modifierStr}" text color to an HTMLElement`,
-                ` *`,
-                ` * @example        html`,
-                ` * <h1 class="s-tc:${colorName}${
-                    colorObj.variant === 'text' ? '' : modifierStr
-                }">`,
-                ` *     Something cool`,
-                ` * </h1>`,
-                ` */`,
-            ].join('\n'),
-        ).code(`
+        cssArray
+            .comment(() =>
+                [
+                    `/**`,
+                    ` * @name           s-tc:${colorName}${
+                        colorObj.variant === 'text' ? '' : modifierStr
+                    }`,
+                    ` * @namespace          sugar.style.color.${colorName}.${colorObj.variant}`,
+                    ` * @type           CssClass`,
+                    ` * @platform       css`,
+                    ` * @status         beta`,
+                    ` *`,
+                    ` * This class allows you to apply the "${colorName}${modifierStr}" text color to an HTMLElement`,
+                    ` *`,
+                    ` * @example        html`,
+                    ` * <h1 class="s-tc:${colorName}${
+                        colorObj.variant === 'text' ? '' : modifierStr
+                    }">`,
+                    ` *     Something cool`,
+                    ` * </h1>`,
+                    ` */`,
+                ].join('\n'),
+            )
+            .code(
+                `
             .s-tc--${colorName}${
-            colorObj.variant === 'text' ? '' : modifierStr
-        } {
+                    colorObj.variant === 'text' ? '' : modifierStr
+                } {
             color: sugar.color(${colorName}, ${colorObj.variant}) !important;
         }
-        `);
+        `,
+                { type: 'CssClass' },
+            );
 
-        cssArray.comment(() =>
-            [
-                `/**`,
-                ` * @name           s-bg:${colorName}${modifierStr}`,
-                ` * @namespace          sugar.style.color.bg.${colorName}.${colorObj.variant}`,
-                ` * @type           CssClass`,
-                ` * @platform       css`,
-                ` * @status         beta`,
-                ` *`,
-                ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
-                ` *`,
-                ` * @example        html`,
-                ` * <h1 class="s-bg:${colorName}${modifierStr}">`,
-                ` *     Something cool`,
-                ` * </h1>`,
-                ` */`,
-            ].join('\n'),
-        ).code(`
+        cssArray
+            .comment(() =>
+                [
+                    `/**`,
+                    ` * @name           s-bg:${colorName}${modifierStr}`,
+                    ` * @namespace          sugar.style.color.bg.${colorName}.${colorObj.variant}`,
+                    ` * @type           CssClass`,
+                    ` * @platform       css`,
+                    ` * @status         beta`,
+                    ` *`,
+                    ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
+                    ` *`,
+                    ` * @example        html`,
+                    ` * <h1 class="s-bg:${colorName}${modifierStr}">`,
+                    ` *     Something cool`,
+                    ` * </h1>`,
+                    ` */`,
+                ].join('\n'),
+            )
+            .code(
+                `
             .s-bg--${colorName}${modifierStr} {
                    background-color: sugar.color(${colorName}, ${colorObj.variant}) !important;
                 }
-        `);
+        `,
+                { type: 'CssClass' },
+            );
     });
 
-    cssArray.comment(() =>
-        [
-            `/**`,
-            ` * @name           s-bg:odd`,
-            ` * @namespace          sugar.style.bg.classes`,
-            ` * @type           CssClass`,
-            ` * @platform       css`,
-            ` * @status         beta`,
-            ` *`,
-            ` * This class allows you to scope the applied bgs on the direct childs to only be applied on "odd" HTMLElement`,
-            ` *`,
-            ` * @example        html`,
-            ` * <ol class="s-bg:odd">`,
-            ` *     <li class="s-bg--accent">Something cool</li>`,
-            ` *     <li class="s-bg--accent">Something cool</li>`,
-            ` *     <li class="s-bg--accent">Something cool</li>`,
-            ` * </li>`,
-            ` */`,
-        ].join('\n'),
-    ).code(`
+    cssArray
+        .comment(() =>
+            [
+                `/**`,
+                ` * @name           s-bg:odd`,
+                ` * @namespace          sugar.style.bg.classes`,
+                ` * @type           CssClass`,
+                ` * @platform       css`,
+                ` * @status         beta`,
+                ` *`,
+                ` * This class allows you to scope the applied bgs on the direct childs to only be applied on "odd" HTMLElement`,
+                ` *`,
+                ` * @example        html`,
+                ` * <ol class="s-bg:odd">`,
+                ` *     <li class="s-bg--accent">Something cool</li>`,
+                ` *     <li class="s-bg--accent">Something cool</li>`,
+                ` *     <li class="s-bg--accent">Something cool</li>`,
+                ` * </li>`,
+                ` */`,
+            ].join('\n'),
+        )
+        .code(
+            `
         .s-bg--odd > *:nth-child(even) {
               background-color: transparent !important;
             }
-    `);
-    cssArray.comment(() =>
-        [
-            `/**`,
-            ` * @name           s-bg:even`,
-            ` * @namespace          sugar.style.color`,
-            ` * @type           CssClass`,
-            ` * @platform       css`,
-            ` * @status         beta`,
-            ` *`,
-            ` * This class allows you to scope the applied colors on the direct childs to only be applied on "even" HTMLElement`,
-            ` *`,
-            ` * @example        html`,
-            ` * <ol class="s-bg:even">`,
-            ` *     <li class="s-bg--accent">Something cool</li>`,
-            ` *     <li class="s-bg--accent">Something cool</li>`,
-            ` *     <li class="s-bg--accent">Something cool</li>`,
-            ` * </li>`,
-            ` */`,
-        ].join('\n'),
-    ).code(`
+    `,
+            { type: 'CssClass' },
+        );
+    cssArray
+        .comment(() =>
+            [
+                `/**`,
+                ` * @name           s-bg:even`,
+                ` * @namespace          sugar.style.color`,
+                ` * @type           CssClass`,
+                ` * @platform       css`,
+                ` * @status         beta`,
+                ` *`,
+                ` * This class allows you to scope the applied colors on the direct childs to only be applied on "even" HTMLElement`,
+                ` *`,
+                ` * @example        html`,
+                ` * <ol class="s-bg:even">`,
+                ` *     <li class="s-bg--accent">Something cool</li>`,
+                ` *     <li class="s-bg--accent">Something cool</li>`,
+                ` *     <li class="s-bg--accent">Something cool</li>`,
+                ` * </li>`,
+                ` */`,
+            ].join('\n'),
+        )
+        .code(
+            `
         .s-bg--even > *:nth-child(even) {
             background-color: transparent !important;
         }
-    `);
+    `,
+            { type: 'CssClass' },
+        );
 
     replaceWith(cssArray);
 }

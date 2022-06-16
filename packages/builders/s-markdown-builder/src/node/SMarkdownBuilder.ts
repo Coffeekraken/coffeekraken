@@ -469,8 +469,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                             this.constructor._registeredHelpers ?? [],
                         )[i];
                         // @ts-ignore
-                        const helperFn = // @ts-ignore
-                        (
+                        const helperFn = ( // @ts-ignore
                             await import(
                                 // @ts-ignore
                                 this.constructor._registeredHelpers[helperName]

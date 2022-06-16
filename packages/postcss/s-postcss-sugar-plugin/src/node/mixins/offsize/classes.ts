@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __faker from 'faker';
 import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 /**
@@ -134,7 +133,8 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMargin.replace(':', '--')} {
         position: relative;
         
@@ -148,7 +148,9 @@ export default function ({
 
         width: calc(var(--width, 100%) + sugar.offsize(${spaceName}) * 2);
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}) * 2);
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginTop = `s-osbs:${spaceName}`;
         vars.comment(
             () => `/**
@@ -167,12 +169,15 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginTop.replace(':', '--')} {
         position: relative;
         top: calc(sugar.offsize(${spaceName}) * -1);
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}));
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginBottom = `s-osbe:${spaceName}`;
         vars.comment(
             () => `/**
@@ -191,12 +196,15 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginBottom.replace(':', '--')} {
        position: relative;
        top: 0;
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}));
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginLeft = `s-osis:${spaceName}`;
         vars.comment(
             () => `/**
@@ -215,7 +223,8 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginLeft.replace(':', '--')} {
        position: relative;
         left: calc(sugar.offsize(${spaceName}) * -1);
@@ -225,7 +234,9 @@ export default function ({
             left: auto;
            right: calc(sugar.offsize(${spaceName}) * -1);
         }
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginRight = `s-osie:${spaceName}`;
         vars.comment(
             () => `/**
@@ -244,7 +255,8 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginRight.replace(':', '--')} {
        position: relative;
        left: 0;
@@ -254,7 +266,9 @@ export default function ({
             left: auto;
            right: 0;
         }
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginX = `s-osi:${spaceName}`;
         vars.comment(
             () => `/**
@@ -273,12 +287,15 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
      .${clsMarginX.replace(':', '--')} {
         position: relative;
         left: calc(sugar.offsize(${spaceName}) * -1);
         width: calc(var(--width, 100%) + sugar.offsize(${spaceName}) * 2);
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
         const clsMarginY = `s-osb:${spaceName}`;
         vars.comment(
             () => `/**
@@ -297,12 +314,15 @@ export default function ({
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
-        ).code(`
+        ).code(
+            `
    .${clsMarginY.replace(':', '--')} {
         position: relative;
         top: calc(sugar.offsize(${spaceName}) * -1);
         height: calc(var(--height, 100%) + sugar.offsize(${spaceName}) * 2);
-   }`);
+   }`,
+            { type: 'CssClass' },
+        );
     });
 
     //     vars.comment(

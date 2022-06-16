@@ -234,11 +234,16 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             .s-checkbox {
                 @sugar.ui.checkbox($scope: bare);
             }
-            `);
+            `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     finalParams.styles.forEach((style) => {
@@ -270,11 +275,16 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
-        ).code(`
+        ).code(
+            `
         .${cls} {
             @sugar.ui.checkbox($style: ${style}, $scope: lnf);
         }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     });
 
     if (finalParams.scope.includes('shape')) {
@@ -307,11 +317,16 @@ export default function ({
                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-            ).code(`
+            ).code(
+                `
             .${cls} {
                 @sugar.ui.checkbox($shape: ${shape}, $scope: shape);
             }
-        `);
+        `,
+                {
+                    type: 'CssClass',
+                },
+            );
         });
     }
 
@@ -335,7 +350,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             @sugar.format.text {
                 input[type="checkbox"] {
                     @sugar.ui.checkbox($scope: '${finalParams.scope.join(
@@ -343,7 +359,11 @@ export default function ({
                     )}');
                 } 
             }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
@@ -368,7 +388,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             @sugar.rhythm.vertical {
                 input[type="checkbox"], .s-checkbox {
                     ${__STheme.jsObjectToCssProperties(
@@ -376,7 +397,11 @@ export default function ({
                     )}
                 } 
             }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     return vars;

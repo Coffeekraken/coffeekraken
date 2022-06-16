@@ -34,19 +34,21 @@ export { postcssSugarPluginUserSelectClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUserSelectClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUserSelectClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(`
       /**
         * @name          User select
         * @namespace          sugar.style.helpers
@@ -93,7 +95,8 @@ export default function ({
     `);
 
     ['all', 'auto', 'none', 'text'].forEach((value) => {
-        vars.push(`/**
+        vars.comment(
+            `/**
     * @name          s-user-select:${value}
     * @namespace          sugar.style.whiteSpace
     * @type               CssClass
@@ -105,9 +108,14 @@ export default function ({
     * @example        html
     * <div class="s-user-select:${value}">${__faker.lorem.paragraph()}</div>
     */
+   `,
+        ).code(
+            `
     .s-user-select--${value} {
         user-select: ${value};
-    }`);
+    }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

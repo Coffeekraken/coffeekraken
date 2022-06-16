@@ -34,21 +34,23 @@ export { postcssSugarPluginWidthClassesMixinInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginWidthClassesMixinParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginWidthClassesMixinParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const widthObj = __STheme.get('width');
 
-    vars.push(`
+    vars.comment(`
       /**
         * @name          Widths
         * @namespace          sugar.style.helpers
@@ -83,7 +85,8 @@ export default function ({
         */
     `);
 
-    vars.push(`/**
+    vars.comment(
+        `/**
     * @name            s-width:viewport
     * @namespace          sugar.style.width
     * @type             CssClass
@@ -103,15 +106,21 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
+   `,
+    ).code(
+        `
    .s-width--viewport {
         position: relative;
         left: 50%;
         width: 100vw;
         transform: translate(-50%);
-   }`);
+   }`,
+        { type: 'CssClass' },
+    );
 
     Object.keys(widthObj).forEach((name) => {
-        vars.push(`/**
+        vars.comment(
+            `/**
         * @name            s-width:${name}
         * @namespace          sugar.style.width
         * @type             CssClass
@@ -131,9 +140,14 @@ export default function ({
         * @since        2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
+       `,
+        ).code(
+            `
       .s-width--${name} {
             width: ${widthObj[name]};
-      }`);
+      }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

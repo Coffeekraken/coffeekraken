@@ -120,10 +120,13 @@ export default function ({
   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
   */
  `,
-        ).code(`
+        ).code(
+            `
 .s-scale--${scaleName} {
     --s-scale: ${scaleValue};
-}`);
+}`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

@@ -132,11 +132,16 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
         `,
-        ).code(`
+        ).code(
+            `
             .s-loader--${loaderName} {
                 @sugar.ui.loader.${loaderName}();
             }
-            `);
+            `,
+            {
+                type: 'CssClass',
+            },
+        );
     });
 
     return vars;

@@ -63,10 +63,13 @@ export default function ({
     * </div>
     */
    `,
-    ).code(`
+    ).code(
+        `
     .s-pointer-events--none {
         pointer-events: none;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -84,10 +87,13 @@ export default function ({
     * </div>
     */
    `,
-    ).code(`
+    ).code(
+        `
     .s-pointer-events--all {
         pointer-events: all;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -105,10 +111,13 @@ export default function ({
     * </div>
     */
    `,
-    ).code(`
+    ).code(
+        `
     .s-pointer-events--auto {
         pointer-events: auto;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -126,10 +135,13 @@ export default function ({
     * </div>
     */
    `,
-    ).code(`
+    ).code(
+        `
     .s-pointer-events--fill {
         pointer-events: fill;
-    }`);
+    }`,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

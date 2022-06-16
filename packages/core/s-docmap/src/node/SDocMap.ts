@@ -335,27 +335,29 @@ class SDocMap extends __SClass implements ISDocmap {
                     extendedPackages.push(packageNameOrPath);
 
                     let currentPathDocmapJsonPath,
-                        potentialPackagePath = __path.resolve(
+                        potentialPackageDocmapJsonPath = __path.resolve(
                             docmapRootPath,
                             'node_modules',
                             packageNameOrPath,
                             'docmap.json',
                         ),
-                        potentialRootPackagePath = __path.resolve(
+                        potentialRootPackageDocmapJsonPath = __path.resolve(
                             packageMonoRoot,
                             'node_modules',
                             packageNameOrPath,
                             'docmap.json',
                         );
 
-                    if (__fs.existsSync(potentialPackagePath)) {
-                        currentPathDocmapJsonPath = potentialPackagePath;
+                    if (__fs.existsSync(potentialPackageDocmapJsonPath)) {
+                        currentPathDocmapJsonPath = potentialPackageDocmapJsonPath;
                     } else if (
                         __fs.existsSync(`${packageNameOrPath}/docmap.json`)
                     ) {
                         currentPathDocmapJsonPath = `${packageNameOrPath}/docmap.json`;
-                    } else if (__fs.existsSync(potentialRootPackagePath)) {
-                        currentPathDocmapJsonPath = potentialRootPackagePath;
+                    } else if (
+                        __fs.existsSync(potentialRootPackageDocmapJsonPath)
+                    ) {
+                        currentPathDocmapJsonPath = potentialRootPackageDocmapJsonPath;
                     } else {
                         emit('log', {
                             type: __SLog.TYPE_WARN,
@@ -765,6 +767,10 @@ class SDocMap extends __SClass implements ISDocmap {
 
                     const extendsArray: string[] = [];
                     currentDocmapFiles.forEach((file) => {
+                        if (!__fs.existsSync(`${file.dirPath}/package.json`)) {
+                            return;
+                        }
+
                         const currentPackageJson = __readJsonSync(
                             `${file.dirPath}/package.json`,
                         );

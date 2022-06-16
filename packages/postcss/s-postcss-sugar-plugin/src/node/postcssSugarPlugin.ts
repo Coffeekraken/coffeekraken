@@ -20,6 +20,8 @@ import __path from 'path';
 import __postcss from 'postcss';
 import __getRoot from './utils/getRoot';
 
+import __CssVars from './CssVars';
+
 let _mixinsPaths;
 
 const mixinsStack = {},
@@ -36,6 +38,15 @@ let loadedPromise,
 const _cacheObjById = {};
 
 pluginHash = 'hhh';
+
+export interface IPostcssSugarPluginSettings {
+    cache?: boolean;
+    excludeByTypes?: string[];
+    excludeCommentByTypes?: string[];
+    excludeCodeByTypes?: string[];
+    inlineImport?: boolean;
+    target?: 'development' | 'prod' | 'vite';
+}
 
 export function getFunctionsList() {
     return getMixinsOrFunctionsList('functions');
@@ -76,12 +87,21 @@ export function getMixinsOrFunctionsList(what: 'mixins' | 'functions') {
     return paths;
 }
 
-const plugin = (settings: any = {}) => {
+const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     settings = __deepMerge(
         {
+            excludeByTypes: __SSugarConfig.get(
+                'postcssSugarPlugin.excludeByTypes',
+            ),
+            excludeCommentByTypes: __SSugarConfig.get(
+                'postcssSugarPlugin.excludeCommentByTypes',
+            ),
+            excludeCodeByTypes: __SSugarConfig.get(
+                'postcssSugarPlugin.excludeCodeByTypes',
+            ),
             target: 'prod',
             inlineImport: true,
-            cache: true,
+            cache: false,
         },
         settings,
     );
@@ -89,13 +109,24 @@ const plugin = (settings: any = {}) => {
     settings.cache = false;
 
     // remove cache if not for vite target
-    if (settings.target !== 'vite') {
+    if (settings.cache === undefined && settings.target !== 'vite') {
         settings.cache = false;
     }
 
+    // if (settings.excludeByTypes?.length) {
+    //     __CssVars.excludeByTypes(settings.excludeByTypes);
+    // }
+    // if (settings.excludeCommentByTypes?.length) {
+    //     __CssVars.excludeCommentByTypes(settings.excludeCommentByTypes);
+    // }
+    // if (settings.excludeCodeByTypes?.length) {
+    //     __CssVars.excludeCodeByTypes(settings.excludeCodeByTypes);
+    // }
+
     function contentToArray(content) {
-        if (content instanceof CssVars) {
-            content = content._stack;
+        if (content instanceof __CssVars) {
+            content = content.toString();
+            console.log('TO', content);
         }
         if (!Array.isArray(content)) content = [content];
         return content;
@@ -170,10 +201,6 @@ const plugin = (settings: any = {}) => {
     //     }
     //     return scopes;
     // }
-
-    function commentsNeeded() {
-        return settings.target !== 'vite';
-    }
 
     function replaceWith(atRule, nodes) {
         nodes = contentToArray(nodes);
@@ -283,7 +310,10 @@ const plugin = (settings: any = {}) => {
         }
     }
 
-    async function _processDeclaration(value: string) {
+    async function _processDeclaration(
+        value: string,
+        type: 'mixin' | 'function',
+    ) {
         // replace vh units
         const vhMatches = value.match(/(var\(--vh,)?([0-9\.]+)vh(\s|;)?/gm);
         if (vhMatches) {
@@ -293,7 +323,6 @@ const plugin = (settings: any = {}) => {
                 value = value.replace(match, `calc(${val} * var(--vh,1vh)) `);
             });
         }
-
         if (!value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return value;
         const calls = value.match(
             /sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm,
@@ -326,19 +355,22 @@ const plugin = (settings: any = {}) => {
             );
 
             let fnId = functionName;
-            if (!functionsStack[fnId]) {
+
+            const stack = type === 'mixin' ? mixinsStack : functionsStack;
+
+            if (!stack[fnId]) {
                 fnId = `${fnId}.${fnId.split('.').slice(-1)[0]}`;
             }
 
-            const fnObject = functionsStack[fnId];
+            const fnObject = stack[fnId];
 
             if (!fnObject) {
                 throw new Error(
-                    `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${fnId}</yellow>" does not exists...`,
+                    `<red>[postcssSugarPlugin]</red> Sorry but the requested ${type} "<yellow>${fnId}</yellow>" does not exists...`,
                 );
             }
 
-            const functionInterface = functionsStack[fnId].interface;
+            const functionInterface = stack[fnId].interface;
             const params = functionInterface.apply(paramsStatement, {});
             delete params.help;
 
@@ -413,29 +445,6 @@ const plugin = (settings: any = {}) => {
         return loadedPromise;
     }
 
-    class CssVars {
-        _stack: string[] = [];
-        constructor(str) {
-            if (str) this._stack.push(str);
-        }
-        comment(str) {
-            if (!commentsNeeded()) return this;
-            if (typeof str === 'function') str = str();
-            if (Array.isArray(str)) str = str.join('\n');
-            this._stack.push(str);
-            return this;
-        }
-        code(str) {
-            if (typeof str === 'function') str = str();
-            if (Array.isArray(str)) str = str.join('\n');
-            this._stack.push(str);
-            return this;
-        }
-        toString() {
-            return this._stack.join('\n');
-        }
-    }
-
     return {
         postcssPlugin: 'sugar',
         async Once(root) {
@@ -477,11 +486,10 @@ const plugin = (settings: any = {}) => {
                     `${__dirname()}/postProcessors/${path}`
                 );
                 await processorFn({
-                    CssVars,
+                    CssVars: __CssVars,
                     pluginHash,
                     getRoot: __getRoot,
                     getCacheFilePath,
-                    commentsNeeded,
                     settings,
                     root,
                     sharedData,
@@ -573,6 +581,7 @@ const plugin = (settings: any = {}) => {
 
                 const processedParams = await _processDeclaration(
                     atRule.params,
+                    'mixin',
                 );
 
                 const params = mixinInterface.apply(processedParams, {});
@@ -583,11 +592,10 @@ const plugin = (settings: any = {}) => {
                     atRule,
                     findUp,
                     cache,
-                    CssVars,
+                    CssVars: __CssVars,
                     pluginHash,
                     getRoot: __getRoot,
                     getCacheFilePath,
-                    commentsNeeded,
                     replaceWith(nodes) {
                         replaceWith(atRule, nodes);
                     },
@@ -647,7 +655,7 @@ const plugin = (settings: any = {}) => {
         },
         async Declaration(decl) {
             if (!decl.prop) return;
-            decl.value = await _processDeclaration(decl.value);
+            decl.value = await _processDeclaration(decl.value, 'function');
         },
     };
 };

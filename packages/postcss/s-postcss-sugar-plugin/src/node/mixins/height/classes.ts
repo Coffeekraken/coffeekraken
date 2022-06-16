@@ -33,21 +33,24 @@ export { postcssSugarPluginWidthClassesMixinInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginWidthClassesMixinParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginWidthClassesMixinParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const heightObj = __STheme.get('height');
 
-    vars.push(`
+    vars.comment(
+        `
       /**
         * @name          Heights
         * @namespace          sugar.style.helpers
@@ -80,9 +83,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
-    `);
+    `,
+    );
 
-    vars.push(`/**
+    vars.comment(
+        `/**
     * @name            s-height:viewport
     * @namespace          sugar.style.width
     * @type             CssClass
@@ -102,15 +107,21 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
+   `,
+    ).code(
+        `
    .s-height--viewport {
         position: relative;
         left: 50%;
         height: 100vh;
         transform: translate(0, -50%);
-   }`);
+   }`,
+        { type: 'CssClass' },
+    );
 
     Object.keys(heightObj).forEach((name) => {
-        vars.push(`/**
+        vars.comment(
+            `/**
         * @name            s-height:${name}
         * @namespace          sugar.style.width
         * @type             CssClass
@@ -130,9 +141,14 @@ export default function ({
         * @since        2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
+       `,
+        ).code(
+            `
       .s-height--${name} {
             height: ${heightObj[name]};
-      }`);
+      }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

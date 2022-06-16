@@ -237,11 +237,16 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             .s-radio {
                 @sugar.ui.radio($scope: bare);
             }
-            `);
+            `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
@@ -274,11 +279,16 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-            ).code(`
+            ).code(
+                `
             .${cls} {
                 @sugar.ui.radio($style: ${style}, $scope: lnf);
             }
-            `);
+            `,
+                {
+                    type: 'CssClass',
+                },
+            );
         });
     }
 
@@ -312,11 +322,16 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-            ).code(`
+            ).code(
+                `
             .${cls} {
                 @sugar.ui.radio($shape: ${shape}, $scope: shape);
             }
-            `);
+            `,
+                {
+                    type: 'CssClass',
+                },
+            );
         });
     }
 
@@ -340,13 +355,18 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             @sugar.format.text {
                 input[type="radio"] {
                     @sugar.ui.radio($scope: '${finalParams.scope.join(',')}');
                 } 
             }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
@@ -371,7 +391,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             @sugar.rhythm.vertical {
                 input[type="radio"], .s-radio {
                     ${__STheme.jsObjectToCssProperties(
@@ -379,7 +400,11 @@ export default function ({
                     )}
                 } 
             }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     return vars;

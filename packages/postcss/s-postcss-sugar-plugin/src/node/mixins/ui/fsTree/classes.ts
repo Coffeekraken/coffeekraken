@@ -258,11 +258,16 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
         .s-fs-tree {
             @sugar.ui.fsTree($scope: bare);
         }
-    `);
+    `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
@@ -297,13 +302,18 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-            ).code(`
+            ).code(
+                `
             .s-fs-tree${
                 style === finalParams.defaultStyle ? '' : `--${style}`
             } {
                 @sugar.ui.fsTree($style: ${style}, $scope: lnf);
             }
-        `);
+        `,
+                {
+                    type: 'CssClass',
+                },
+            );
         });
     }
 
@@ -339,13 +349,18 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-            ).code(`
+            ).code(
+                `
             .s-fs-tree${
                 shape === finalParams.defaultShape ? '' : `--${shape}`
             } {
                 @sugar.ui.fsTree($shape: ${shape}, $scope: shape);
             }
-        `);
+        `,
+                {
+                    type: 'CssClass',
+                },
+            );
         });
     }
 
@@ -380,7 +395,8 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-        ).code(`
+        ).code(
+            `
             @sugar.rhythm.vertical {
                 .s-fs-tree {
                     ${__STheme.jsObjectToCssProperties(
@@ -388,7 +404,11 @@ export default function ({
                     )}
                 } 
             }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     return vars;

@@ -118,10 +118,13 @@ export default function ({
                 .join('<br />')}</p>
   */
  `,
-        ).code(`
+        ).code(
+            `
 .s-truncate--${i + 1} {
     @sugar.truncate(${i + 1});
-}`);
+}`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

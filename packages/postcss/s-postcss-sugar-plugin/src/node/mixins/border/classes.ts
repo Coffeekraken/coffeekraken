@@ -191,11 +191,14 @@ export default function ({
             * </div>
             */
  `;
-        vars.comment(() => radiusCss).code(`
+        vars.comment(() => radiusCss).code(
+            `
             .${cls} {
                 @sugar.border.radius(${radiusName});
             }
-        `);
+        `,
+            { type: 'CssClass' },
+        );
     });
 
     widthsKeys.forEach((widthName) => {
@@ -217,10 +220,13 @@ export default function ({
                 * </div>
                 */
         `,
-        ).code(`
+        ).code(
+            `
         .${clsName} {
             @sugar.border.width(${widthName});
-        }`);
+        }`,
+            { type: 'CssClass' },
+        );
     });
 
     Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
@@ -242,10 +248,13 @@ export default function ({
                 * </div>
                 */
         `,
-        ).code(`
+        ).code(
+            `
         .${clsName} {
             border-color: sugar.color(${colorName});
-        }`);
+        }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

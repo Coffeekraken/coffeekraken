@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import SAjax from '../http/SAjax';
 import __formSerialize from 'form-serialize';
+import SAjax from '../http/SAjax';
 
 /**
  * @name      sendForm

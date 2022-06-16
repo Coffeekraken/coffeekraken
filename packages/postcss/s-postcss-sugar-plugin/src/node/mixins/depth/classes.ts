@@ -112,11 +112,14 @@ export default function ({
                 }">I'm a cool depth button</a>
                 */
                 `,
-        ).code(`
+        ).code(
+            `
 .s-depth${depthName === 'default' ? '' : `--${depthName}`}:not(.s-depth--text),
 .s-depth--box.s-depth--${depthName === 'default' ? '' : `--${depthName}`} {
     @sugar.depth('${depthName}');
-}`);
+}`,
+            { type: 'CssClass' },
+        );
     });
 
     depthsArray.forEach((depthName) => {
@@ -138,10 +141,13 @@ export default function ({
                 }">I'm a cool depth button</a>
                 */
                 `,
-        ).code(`
+        ).code(
+            `
 .s-depth--text.s-depth${depthName === 'default' ? '' : `--${depthName}`} {
     @sugar.depth(${depthName}, $type: text);
-}`);
+}`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

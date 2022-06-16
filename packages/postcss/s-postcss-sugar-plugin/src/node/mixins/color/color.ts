@@ -79,8 +79,9 @@ export default function ({
     //         `You cannot remap the "<yellow>secondary</yellow>" color to "<cyan>secondary</cyan>"...`,
     //     );
 
-    const vars = new CssVars(`
-        @sugar.color.remap(current, ${finalParams.current});`);
+    const vars = new CssVars();
+
+    vars.code(`@sugar.color.remap(current, ${finalParams.current})`);
 
     if (finalParams.primary) {
         vars.code(`@sugar.color.remap(primary, ${finalParams.primary});`);

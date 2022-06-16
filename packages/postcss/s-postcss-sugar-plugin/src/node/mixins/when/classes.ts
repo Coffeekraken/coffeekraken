@@ -72,14 +72,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent):not([${state}]):not(.${state}) {
                 display: none;
             }
             .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent)[${state}],
             .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent).${state} {
                 display: unset;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -101,14 +104,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *:not([${state}]):not(.${state}) + .s-when.s-when--sibling.s-when--${state} {
                 display: none;
             }
             *[${state}] + .s-when.s-when--sibling.s-when--${state},
             *.${state} + .s-when.s-when--sibling.s-when--${state} {
                 display: unset !important;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -130,14 +136,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *:not([${state}]):not(.${state}) ~ .s-when.s-when--siblings.s-when--${state} {
                 display: none;
             }
             *[${state}] ~ .s-when.s-when--siblings.s-when--${state},
             *.${state} ~ .s-when.s-when--siblings.s-when--${state} {
                 display: unset !important;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -159,14 +168,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *:not([${state}]):not(.${state}) > .s-when.s-when--parent.s-when--${state} {
                 display: none;
             }
             *[${state}] > .s-when.s-when--parent.s-when--${state},
             *.${state} > .s-when.s-when--parent.s-when--${state} {
                 display: unset;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -188,14 +200,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *:not([${state}]):not(.${state}) > * > .s-when.s-when--grandparent.s-when--${state} {
                 display: none;
             }
             *[${state}] > * > .s-when.s-when--grandparent.s-when--${state},
             *.${state} > * > .s-when.s-when--grandparent.s-when--${state} {
                 display: unset;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
 
         vars.comment(
             () => `/**
@@ -217,14 +232,17 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             *:not([${state}]):not(.${state}) .s-when.s-when--ancestor.s-when--${state} {
                 display: none;
             }
             *[${state}] .s-when.s-when--ancestor.s-when--${state},
             *.${state} .s-when.s-when--ancestor.s-when--${state} {
                 display: unset;
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
     });
 
     vars.comment(
@@ -247,7 +265,8 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
-    ).code(`
+    ).code(
+        `
         .s-when--dark {
             display: none;
         }
@@ -255,7 +274,9 @@ export default function ({
         [theme$="dark"] .s-when--dark {
             display: inherit;
         }
-        `);
+        `,
+        { type: 'CssClass' },
+    );
 
     vars.comment(
         () => `/**
@@ -277,17 +298,23 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
-    ).code(`
+    ).code(
+        `
         [theme$="dark"] .s-when--light {
             display: none;
         }
-        `);
+        `,
+        { type: 'CssClass' },
+    );
 
     // Queries
-    vars.comment(() => ``).code(`
+    vars.comment(() => ``).code(
+        `
             .s-when--media {
                 display: none;
-            }`);
+            }`,
+        { type: 'CssClass' },
+    );
 
     Object.keys(queries).forEach((query) => {
         vars.comment(
@@ -307,12 +334,15 @@ export default function ({
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
-        ).code(`
+        ).code(
+            `
             @sugar.media(${query}) {
                 .s-when--media.s-when--${query} {
                     display: unset;
                 }
-            }`);
+            }`,
+            { type: 'CssClass' },
+        );
     });
 
     return vars;

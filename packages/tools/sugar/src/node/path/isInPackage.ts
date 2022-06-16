@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __packageRootDir from './packageRootDir';
-import __fs from 'fs';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __fs from 'fs';
+import __packageRootDir from './packageRootDir';
 
 /**
  * @name                    isInPackage

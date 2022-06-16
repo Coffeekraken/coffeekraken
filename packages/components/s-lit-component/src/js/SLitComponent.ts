@@ -1,10 +1,10 @@
 // @ts-nocheck
 // @TODO            check how to override private static methods
 
+import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
 import __SComponentUtils, {
     SComponentUtilsDefaultPropsInterface,
 } from '@coffeekraken/s-component-utils';
-import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';

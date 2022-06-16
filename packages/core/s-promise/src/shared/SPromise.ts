@@ -1,16 +1,16 @@
 // @shared
 // @ts-nocheck
 
-import __getMethods from '@coffeekraken/sugar/shared/class/getMethods';
 import __SClass from '@coffeekraken/s-class';
 import type {
-    ISEventEmitter,
     ISEmitterSettings,
+    ISEventEmitter,
 } from '@coffeekraken/s-event-emitter';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
+import __SLog from '@coffeekraken/s-log';
+import __getMethods from '@coffeekraken/sugar/shared/class/getMethods';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __SLog from '@coffeekraken/s-log';
 // import __SPromiseSettingsInterface from './interface/SPromiseSettingsInterface';
 import __treatAsValue, {
     ITreatAsValueProxy,

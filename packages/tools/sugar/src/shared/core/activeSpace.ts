@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
-import __minimatch from 'minimatch';
 import __isGlob from 'is-glob';
+import __minimatch from 'minimatch';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name                    activeSpace
@@ -264,12 +264,13 @@ const activeSpaceApi = {
                             activeSpaceCallbackObj.delete = true;
                         }
                         // filter activeSpaceCallbackObj to remove the "delete" once
-                        _activeSpaceCallbacksStack[activeSpaceToCheck] =
-                            _activeSpaceCallbacksStack[
-                                activeSpaceToCheck
-                            ].filter((obj) => {
-                                return obj.delete !== true;
-                            });
+                        _activeSpaceCallbacksStack[
+                            activeSpaceToCheck
+                        ] = _activeSpaceCallbacksStack[
+                            activeSpaceToCheck
+                        ].filter((obj) => {
+                            return obj.delete !== true;
+                        });
                     },
                 );
             },

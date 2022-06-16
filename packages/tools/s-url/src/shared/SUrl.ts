@@ -1,10 +1,9 @@
 // @ts-nocheck
 
-import __urlParse from 'url-parse';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __parseString from '@coffeekraken/sugar/shared/string/parse';
-import __parseSchema from '@coffeekraken/sugar/shared/url/parseSchema';
 import __SClass from '@coffeekraken/s-class';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __parseSchema from '@coffeekraken/sugar/shared/url/parseSchema';
+import __urlParse from 'url-parse';
 
 /**
  * @name            SUrl

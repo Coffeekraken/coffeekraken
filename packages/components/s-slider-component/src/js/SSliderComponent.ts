@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __SComponentUtils from '@coffeekraken/s-component-utils';
-import __SInterface from '@coffeekraken/s-interface';
 import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';

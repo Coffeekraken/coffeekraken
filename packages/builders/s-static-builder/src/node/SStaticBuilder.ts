@@ -1,30 +1,26 @@
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
+import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
+import __SFrontendServer from '@coffeekraken/s-frontend-server';
+import __SGlob from '@coffeekraken/s-glob';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SRequest from '@coffeekraken/s-request';
-import __SGlob from '@coffeekraken/s-glob';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __remove from '@coffeekraken/sugar/node/fs/remove';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
-import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __fs from 'fs';
-import __SLog from '@coffeekraken/s-log';
-import __path from 'path';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import { parseStringPromise } from 'xml2js';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
-import __copy from '@coffeekraken/sugar/node/fs/copy';
-import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
-import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __copySync from '@coffeekraken/sugar/node/fs/copySync';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __SFrontendServer from '@coffeekraken/s-frontend-server';
-import __SDuration from '@coffeekraken/s-duration';
+import __fs from 'fs';
+import __path from 'path';
+import { parseStringPromise } from 'xml2js';
 
 /**
  * @name                SStaticBuilder

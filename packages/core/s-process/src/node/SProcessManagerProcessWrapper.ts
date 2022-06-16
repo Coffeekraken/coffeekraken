@@ -1,14 +1,14 @@
 // @ts-nocheck
 
+import type { ISDurationObject } from '@coffeekraken/s-duration';
 import __SEventEmitter, {
     ISEventEmitterPipeSettingsFilterFn,
 } from '@coffeekraken/s-event-emitter';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SProcess from './SProcess';
 import __SPromise from '@coffeekraken/s-promise';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import type { ISDurationObject } from '@coffeekraken/s-duration';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __SProcess from './SProcess';
 
 /**
  * @name            SProcessManagerProcessWrapper

@@ -3,7 +3,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SEventEmitterBase, {
     ISEventEmitterSettings,
 } from '../shared/SEventEmitter';
-import __SEventEmitter from './exports';
 
 // export * from '../shared/SEventEmitter';
 

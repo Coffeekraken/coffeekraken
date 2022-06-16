@@ -1,6 +1,5 @@
-import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 // @ts-ignore
 if (!__isNode() && !document.env) {

@@ -1,9 +1,8 @@
 import __SFeature from '@coffeekraken/s-feature';
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __closestScrollable from '@coffeekraken/sugar/js/dom/query/closestScrollable';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 
 export interface ISActivateFeatureProps {
     href: string;

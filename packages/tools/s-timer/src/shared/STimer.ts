@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __convert from '@coffeekraken/sugar/shared/time/convert';
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __convert from '@coffeekraken/sugar/shared/time/convert';
 
 /**
  * @name 		            STimer

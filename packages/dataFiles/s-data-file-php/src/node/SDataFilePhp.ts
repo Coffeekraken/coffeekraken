@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __execPhp from '@coffeekraken/sugar/node/php/execPhp';
 import __path from 'path';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
  * @name          SDataFilePhp

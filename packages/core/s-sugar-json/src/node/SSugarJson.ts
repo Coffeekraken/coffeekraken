@@ -1,23 +1,13 @@
+import __SBench from '@coffeekraken/s-bench';
 import __SClass from '@coffeekraken/s-class';
+import type { ISFrontstackAction } from '@coffeekraken/s-frontstack';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __childProcess from 'child_process';
 import __fs from 'fs';
 import __glob from 'glob-all';
-import __tmpDir from 'temp-dir';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __sanitizeSugarJson from '@coffeekraken/sugar/shared/sugar/sanitizeSugarJson';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __childProcess from 'child_process';
-import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
-import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
-import __spawn from '@coffeekraken/sugar/node/process/spawn';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
-import __matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs';
-import __SBench from '@coffeekraken/s-bench';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import type { ISFrontstackAction } from '@coffeekraken/s-frontstack';
-import __SFrontstack from '@coffeekraken/s-frontstack';
 
 export interface ISSugarJsonSettings {
     packages: string | boolean;

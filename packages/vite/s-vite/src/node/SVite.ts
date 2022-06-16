@@ -1,27 +1,25 @@
 import __SClass from '@coffeekraken/s-class';
 import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __kill from '@coffeekraken/sugar/node/process/kill';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __childProcess from 'child_process';
 import __path from 'path';
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __rollupAnalyzerPlugin from 'rollup-plugin-analyzer';
 import { uglify as __uglifyPlugin } from 'rollup-plugin-uglify';
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
+import __SViteBuildParamsInterface from './interface/SViteBuildParamsInterface';
+import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
+import __SViteTestParamsInterface from './interface/SViteTestParamsInterface';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
-import __kill from '@coffeekraken/sugar/node/process/kill';
-import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
-import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
-import __SViteBuildParamsInterface from './interface/SViteBuildParamsInterface';
-import __SViteTestParamsInterface from './interface/SViteTestParamsInterface';
-import __SLog from '@coffeekraken/s-log';
-import __childProcess from 'child_process';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
 
 import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
 

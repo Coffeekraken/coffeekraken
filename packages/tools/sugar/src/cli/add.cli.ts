@@ -1,11 +1,11 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __SSugarToolkitParamsInterface from './interface/SSugarToolkitParamsInterface';
+import __prependToFileSync from '@coffeekraken/sugar/node/fs/prependToFileSync';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
 import __fs from 'fs';
-import __prependToFileSync from '@coffeekraken/sugar/node/fs/prependToFileSync';
+import __SSugarToolkitParamsInterface from './interface/SSugarToolkitParamsInterface';
 
 export default (stringArgs = '') => {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {

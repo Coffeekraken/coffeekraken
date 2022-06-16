@@ -1,5 +1,5 @@
-import __get from '@coffeekraken/sugar/shared/object/get';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __get from '@coffeekraken/sugar/shared/object/get';
 
 /**
  * @name                SSugarConfig

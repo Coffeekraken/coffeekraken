@@ -2,20 +2,19 @@
 
 import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __fs from 'fs';
-import __path from 'path';
 import __copySync from '@coffeekraken/sugar/node/fs/copySync';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __delete from '@coffeekraken/sugar/shared/object/delete';
-import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
-import __SLog from '@coffeekraken/s-log';
+import __fs from 'fs';
+import __path from 'path';
 import __SFrontspecAddParamsInterface from './interface/SFrontspecAddParamsInterface';
 
 /**

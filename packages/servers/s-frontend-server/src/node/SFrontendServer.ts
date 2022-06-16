@@ -1,35 +1,33 @@
-import __SLog from '@coffeekraken/s-log';
 import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __compression from 'compression';
 import __express from 'express';
 import __fs from 'fs';
-import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import __path from 'path';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface';
 import __SFrontendServerAddDefaultPagesParamsInterface from './interface/SFrontendServerAddDefaultPagesParamsInterface';
 import __SFrontendServerCorsProxyParamsInterface from './interface/SFrontendServerCorsProxyParamsInterface';
+import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface';
 // import __vhost from 'vhost';
-import __kill from '@coffeekraken/sugar/node/process/kill';
-import __SBench from '@coffeekraken/s-bench';
 import __SDuration from '@coffeekraken/s-duration';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __SGlob from '@coffeekraken/s-glob';
-import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __kill from '@coffeekraken/sugar/node/process/kill';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __recursiveCopy from 'recursive-copy';
 import __runMiddleware from 'run-middleware';
 
 import __viewRendererMiddleware from './middleware/viewRendererMiddleware';
 
-import __request from 'request';
 import __bodyParser from 'body-parser';
+import __request from 'request';
 
 /**
  * @name            SFrontendServer

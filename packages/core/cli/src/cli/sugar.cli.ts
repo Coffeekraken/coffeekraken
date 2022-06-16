@@ -4,34 +4,25 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SEnv from '@coffeekraken/s-env';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
-import __SInterface from '@coffeekraken/s-interface';
+import __SLog from '@coffeekraken/s-log';
 import type { ISStdio } from '@coffeekraken/s-stdio';
 import __SStdio from '@coffeekraken/s-stdio';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import '@coffeekraken/sugar/node/index';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
-import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
-import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
-import __argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
+import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
-import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
-import __SLog from '@coffeekraken/s-log';
-import __childProcess from 'child_process';
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface';
 import __replaceCommandTokens from './replaceCommandTokens';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
-
-import __parseSemverString from '@coffeekraken/sugar/shared/semver/parseSemverString';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;

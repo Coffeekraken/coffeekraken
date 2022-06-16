@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __uniqid from '../../../shared/string/uniqid';
+import __convert from '../../../shared/time/convert';
 import __injectStyle from '../../dom/css/injectStyle';
 import __emptyNode from '../manipulate/emptyNode';
-import __convert from '../../../shared/time/convert';
 
 /**
  * @name            innerHtml

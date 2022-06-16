@@ -1,5 +1,5 @@
-import __SBuilder from '@coffeekraken/s-builder';
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
+import __SBuilder from '@coffeekraken/s-builder';
 import __SDuration from '@coffeekraken/s-duration';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';

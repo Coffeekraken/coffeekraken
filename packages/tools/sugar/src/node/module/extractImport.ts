@@ -2,7 +2,6 @@ import { find as __find } from 'abstract-syntax-tree';
 import * as __acorn from 'acorn-loose';
 import { generate as __astring } from 'astring';
 import __fs from 'fs';
-import __isPath from '../../shared/is/path';
 import __deepMerge from '../../shared/object/deepMerge';
 
 /**

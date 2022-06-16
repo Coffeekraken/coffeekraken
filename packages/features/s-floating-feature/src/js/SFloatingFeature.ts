@@ -3,14 +3,14 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SFloatingFeatureInterface from './interface/SFloatingFeatureInterface';
 
 import {
+    arrow,
+    autoPlacement,
     computePosition,
     flip,
-    shift,
-    offset,
-    arrow,
     getScrollParents,
-    autoPlacement,
     inline,
+    offset,
+    shift,
 } from '@floating-ui/dom';
 
 // @ts-ignore

@@ -1,26 +1,26 @@
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
+import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
+import { registerHelpers } from '@coffeekraken/s-handlebars';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __getCoffeekrakenMetas from '@coffeekraken/sugar/node/coffeekraken/getCoffeekrakenMetas';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
+import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __fs from 'fs';
 import __handlebars from 'handlebars';
-import { registerHelpers } from '@coffeekraken/s-handlebars';
 import __marked from 'marked';
 import __path from 'path';
-import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
-import __SLog from '@coffeekraken/s-log';
-import __getCoffeekrakenMetas from '@coffeekraken/sugar/node/coffeekraken/getCoffeekrakenMetas';
-import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 
 /**
  * @name                SMarkdownBuilder
@@ -469,7 +469,8 @@ export default class SMarkdownBuilder extends __SBuilder {
                             this.constructor._registeredHelpers ?? [],
                         )[i];
                         // @ts-ignore
-                        const helperFn = ( // @ts-ignore
+                        const helperFn = // @ts-ignore
+                        (
                             await import(
                                 // @ts-ignore
                                 this.constructor._registeredHelpers[helperName]

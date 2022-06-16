@@ -1,8 +1,8 @@
 import { ICommonFileExtensionsSettings } from './commonFileExtensions';
 
+import __commonAudioFileExtensions from './commonAudioFileExtensions';
 import __commonImageFileExtensions from './commonImageFileExtensions';
 import __commonVideoFileExtensions from './commonVideoFileExtensions';
-import __commonAudioFileExtensions from './commonAudioFileExtensions';
 
 import __unique from '../array/unique';
 

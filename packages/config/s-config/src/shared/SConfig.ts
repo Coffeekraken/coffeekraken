@@ -2,10 +2,8 @@
 
 import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __applyScope from '@coffeekraken/sugar/shared/object/applyScope';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __get from '@coffeekraken/sugar/shared/object/get';

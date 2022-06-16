@@ -1,14 +1,12 @@
 // @ts-nocheck
 
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { html, css, unsafeCSS } from 'lit';
-import { property } from 'lit/decorators.js';
-import __SPanelComponentInterface from './interface/SPanelComponentInterface';
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __getTransitionProperties from '@coffeekraken/sugar/js/dom/style/getTransitionProperties';
+import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { css, html, unsafeCSS } from 'lit';
+import __SPanelComponentInterface from './interface/SPanelComponentInterface';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-panel.css'; // relative to /dist/pkg/esm/js

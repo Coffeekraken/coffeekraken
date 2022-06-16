@@ -1,8 +1,8 @@
-import SDescriptor from './_SDescriptor';
+import maxRule from './rules/maxRule';
+import minRule from './rules/minRule';
 import requiredRule from './rules/requiredRule';
 import typeRule from './rules/typeRule';
-import minRule from './rules/minRule';
-import maxRule from './rules/maxRule';
+import SDescriptor from './_SDescriptor';
 
 SDescriptor.registerRule(requiredRule);
 SDescriptor.registerRule(typeRule);

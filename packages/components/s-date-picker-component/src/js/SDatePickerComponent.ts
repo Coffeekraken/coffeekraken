@@ -1,25 +1,19 @@
 // @ts-nocheck
 
-import { html, css, unsafeCSS } from 'lit';
-import { html as staticHTML } from 'lit/static-html.js';
-import { queryAsync, queryAssignedNodes } from 'lit/decorators.js';
-import __SDatePickerComponentInterface from './interface/SDatePickerComponentInterface';
-import __SComponentUtils, {
-    SLitElement,
-    ISComponentUtilsDefaultProps,
-} from '@coffeekraken/s-lit-component';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __pikaday from 'pikaday';
 import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract';
+import { css, html, unsafeCSS } from 'lit';
+import { html as staticHTML } from 'lit/static-html.js';
+import __pikaday from 'pikaday';
+import __SDatePickerComponentInterface from './interface/SDatePickerComponentInterface';
 
 import __moment from 'moment';
 
-import __baseCss from 'pikaday/css/pikaday.css';
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __baseCss from 'pikaday/css/pikaday.css';
 
 // @ts-ignore
-import __css from '../../../../src/css/s-date-picker.css'; // relative to /dist/pkg/esm/js
 import __themeCss from '../../../../src/css/s-date-picker-theme.css'; // relative to /dist/pkg/esm/js
+import __css from '../../../../src/css/s-date-picker.css'; // relative to /dist/pkg/esm/js
 
 /**
  * @name                SDatePickerComponent

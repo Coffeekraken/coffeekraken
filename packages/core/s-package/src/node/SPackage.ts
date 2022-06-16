@@ -1,31 +1,27 @@
 import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
-import __SBuilder from '@coffeekraken/s-builder';
+import __SClass from '@coffeekraken/s-class';
 import __SFile from '@coffeekraken/s-file';
-import __SGlob from '@coffeekraken/s-glob/src/node/exports';
 import __SLog from '@coffeekraken/s-log';
+import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import __childProcess from 'child_process';
 import __chokidar from 'chokidar';
-import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
+import { cruise } from 'dependency-cruiser';
 import __fs from 'fs';
+import __glob from 'glob';
 import __path from 'path';
-import __ts from 'typescript';
-import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsInterface';
-import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsInterface';
 import __SPackageAddReadmeParamsInterface from './interface/SPackageAddReadmeParamsInterface';
 import __SPackageAddDefaultScriptsParamsInterface from './interface/SPackageApplyDefaultPackageJsonParamsInterface';
 import __SPackageCheckDependenciesParamsInterface from './interface/SPackageCheckDependenciesParamsInterface';
+import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsInterface';
+import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsInterface';
 import __SPackageSettingsInterface from './interface/SPackageSettingsInterface';
-import __childProcess from 'child_process';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
-import __glob from 'glob';
-import __SClass from '@coffeekraken/s-class';
-import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import { cruise, IReporterOutput } from 'dependency-cruiser';
 
 /**
  * @name                SPackage

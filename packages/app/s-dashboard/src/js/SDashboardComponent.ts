@@ -2,23 +2,22 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { property } from 'lit/decorators.js';
 // @ts-ignore
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 import __css from '../css/s-dashboard.css'; // relative to /dist/pkg/esm/js
 import __SDashboardComponentInterface from './interface/SDashboardComponentInterface';
-import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
+import { define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent';
+import { define as __SDashboardFrontendCheckerComponent } from './partials/s-dashboard-frontend-checker-component/SDashboardFrontendCheckerComponent';
+import { define as __SDashboardGoogleComponent } from './partials/s-dashboard-google-component/SDashboardGoogleComponent';
 import {
     define as __SDashboardPagesComponent,
     events as __SDashboardPagesComponentEvents,
 } from './partials/s-dashboard-pages-component/SDashboardPagesComponent';
-import { define as __SDashboardFrontendCheckerComponent } from './partials/s-dashboard-frontend-checker-component/SDashboardFrontendCheckerComponent';
-import { define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent';
-import { define as __SDashboardGoogleComponent } from './partials/s-dashboard-google-component/SDashboardGoogleComponent';
-import { define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent';
-import { define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent';
 import { define as __SDashboardProjectComponent } from './partials/s-dashboard-project-component/SDashboardProjectComponent';
+import { define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent';
+import { define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent';
 
 import __logoSvg from './partials/logo';
 

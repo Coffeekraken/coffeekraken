@@ -1,12 +1,6 @@
-import __getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
 import type { ISInterface } from '@coffeekraken/s-interface';
-import __isPlain from '@coffeekraken/sugar/shared/is/plainObject';
-import __deepAssign from '@coffeekraken/sugar/shared/object/deepAssign';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __get from '@coffeekraken/sugar/shared/object/get';
-import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
-import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toJson from '@coffeekraken/sugar/shared/object/toJson';
 
 /**

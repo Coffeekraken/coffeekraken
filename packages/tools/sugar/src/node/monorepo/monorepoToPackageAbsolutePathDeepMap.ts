@@ -1,6 +1,6 @@
+import __deepMap from '../../shared/object/deepMap';
 import __packageRoot from '../path/packageRoot';
 import __monorepoToPackageAbsolutePath from './monorepoToPackageAbsolutePath';
-import __deepMap from '../../shared/object/deepMap';
 
 /**
  * @name            monorepoToPackageAbsolutePathDeepMap

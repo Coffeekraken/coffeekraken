@@ -1,25 +1,19 @@
-import { html, css, unsafeCSS } from 'lit';
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
+import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface';
-import __SLitComponent from '@coffeekraken/s-lit-component';
-import __copy from '@coffeekraken/sugar/js/clipboard/copy';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __cloneClass from '@coffeekraken/sugar/shared/class/cloneClass';
 
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 
-import __clone from '@coffeekraken/sugar/shared/object/clone';
-import __SComponent from '@coffeekraken/s-lit-component';
-import __distanceFromElementTopToViewportBottom from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportBottom';
-import __getStyleProperty from '@coffeekraken/sugar/js/dom/style/getStyleProperty';
-import __distanceFromElementTopToViewportTop from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportTop';
-import __isFocus from '@coffeekraken/sugar/js/dom/is/focus';
-import __isFocusWithin from '@coffeekraken/sugar/js/dom/is/focusWithin';
-import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
-import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags';
 import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
+import __distanceFromElementTopToViewportBottom from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportBottom';
+import __distanceFromElementTopToViewportTop from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportTop';
+import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags';
+import __getStyleProperty from '@coffeekraken/sugar/js/dom/style/getStyleProperty';
+import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-filtrable-input.css'; // relative to /dist/pkg/esm/js

@@ -1,24 +1,18 @@
 // @ts-nocheck
 
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __fs from 'fs';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __diff from '@coffeekraken/sugar/shared/object/diff';
-import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
-import __SConfigAdapter from '@coffeekraken/s-config-adapter';
-import type { ISConfigAdapterSettings } from '@coffeekraken/s-config-adapter';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
-import __path from 'path';
-import * as __chokidar from 'chokidar';
 import type { ISConfigEnvObj } from '@coffeekraken/s-config';
 import __SConfig from '@coffeekraken/s-config';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
-import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
-import __grabFirstExisting from '@coffeekraken/sugar/node/fs/grabFirstExisting';
+import type { ISConfigAdapterSettings } from '@coffeekraken/s-config-adapter';
+import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
-import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmp';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
+import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
+import __fs from 'fs';
+import __path from 'path';
 
 /**
  * @name                  SConfigFolderAdapter

@@ -1,7 +1,7 @@
-import __SThemeBase from '../shared/SThemeBase';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SColor from '@coffeekraken/s-color';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
+import __SThemeBase from '../shared/SThemeBase';
 
 /**
  * @name            STheme

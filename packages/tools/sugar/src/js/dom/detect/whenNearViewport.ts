@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __whenVisible from './whenVisible';
-
 /**
  * @name      whenNearViewport
  * @namespace            js.dom.detect

@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __upperFirst from '../../shared/string/upperFirst';
 import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
 
 /**

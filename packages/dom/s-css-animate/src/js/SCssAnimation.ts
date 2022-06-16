@@ -1,5 +1,5 @@
-import * as __rematrix from 'rematrix';
-import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTranslateProperties';
+import __SClass from '@coffeekraken/s-class';
+import __cssEasingStrToJsFunction from '@coffeekraken/sugar/js/dom/style/cssEasingStrToJsFunction';
 import __getAnimationsFromElement, {
     IGetAnimationsFromElementResult,
 } from '@coffeekraken/sugar/js/dom/style/getAnimationsFromElement';
@@ -7,14 +7,12 @@ import __getKeyframesFromStylesheets, {
     IKeyframe,
 } from '@coffeekraken/sugar/js/dom/style/getKeyframesFromStylesheets';
 import __parseTransformRule from '@coffeekraken/sugar/js/dom/style/parseTransformRule';
+import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __set from '@coffeekraken/sugar/shared/object/set';
-import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
-import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
-import __SClass from '@coffeekraken/s-class';
-import __cssEasingStrToJsFunction from '@coffeekraken/sugar/js/dom/style/cssEasingStrToJsFunction';
+import * as __rematrix from 'rematrix';
 
 /**
  * @name            SCssAnimation

@@ -1,15 +1,14 @@
+import __SBench from '@coffeekraken/s-bench';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
+import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __execPhp from '@coffeekraken/sugar/node/php/execPhp';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __fs from 'fs';
 import __path from 'path';
-import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
 import __SViewRendererBladeEngineSettingsInterface from './interface/SViewRendererEngineBladeSettingsInterface';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __SBench from '@coffeekraken/s-bench';
-import __SLog from '@coffeekraken/s-log';
 
 /**
  * @name            SViewRendererEngineBlade

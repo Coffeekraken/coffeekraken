@@ -1,10 +1,8 @@
 import __SFeature from '@coffeekraken/s-feature';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SRefocusFeatureInterface from './interface/SRefocusFeatureInterface';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __closestScrollable from '@coffeekraken/sugar/js/dom/query/closestScrollable';
 import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SRefocusFeatureInterface from './interface/SRefocusFeatureInterface';
 
 export interface ISRefocusFeatureProps {
     trigger: string[];

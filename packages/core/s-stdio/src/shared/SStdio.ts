@@ -7,7 +7,6 @@ import type { ISPromise } from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
-import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 
 export interface ISStdioSettings {
     filter: typeof Function;

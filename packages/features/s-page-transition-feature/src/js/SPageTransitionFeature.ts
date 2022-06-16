@@ -1,9 +1,9 @@
 import __SFeature from '@coffeekraken/s-feature';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
 import __SRequest from '@coffeekraken/s-request';
 import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp';
 import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-page-transition.css'; // relative to /dist/pkg/esm/js

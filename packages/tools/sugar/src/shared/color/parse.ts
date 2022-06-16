@@ -1,13 +1,10 @@
 // @ts-nocheck
 
-import __parseRgba from './parseRgba';
-import __parseHsv from './parseHsv';
-import __hsv2rgba from './hsva2rgba';
-import __parseHsla from './parseHsla';
-import __hsla2rgba from './hsla2rgba';
 import __hex2rgba from './hex2rgba';
+import __hsla2rgba from './hsla2rgba';
+import __parseHsla from './parseHsla';
+import __parseRgba from './parseRgba';
 import __rgba2hsla from './rgba2hsla';
-import __rgba2hsv from './rgba2hsv';
 
 /**
  * @name            parse

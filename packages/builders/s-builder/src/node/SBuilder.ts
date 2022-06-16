@@ -1,10 +1,9 @@
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SClass from '@coffeekraken/s-class';
 import type { ISClass } from '@coffeekraken/s-class';
-import __SPromise from '@coffeekraken/s-promise';
+import __SClass from '@coffeekraken/s-class';
 import __SDuration from '@coffeekraken/s-duration';
 import __SInterface from '@coffeekraken/s-interface';
 import __SLog from '@coffeekraken/s-log';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
  * @name                SBuilder

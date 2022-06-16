@@ -1,15 +1,11 @@
 // @ts-nocheck
 
-import __axios from 'axios';
+import __SClass from '@coffeekraken/s-class';
 import __strToHtml from '@coffeekraken/sugar/js/html/strToHtml';
 import __htmlToString from '@coffeekraken/sugar/js/html/toString';
-import __SRequestConfig from './SRequestConfig';
-import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
-import __convert from '@coffeekraken/sugar/shared/time/convert';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SClass from '@coffeekraken/s-class';
+import __axios from 'axios';
 import __SRequestParamsInterface from './interface/SRequestParamsInterface';
-import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name 		                    SRequest

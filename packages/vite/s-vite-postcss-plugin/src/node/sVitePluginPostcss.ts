@@ -1,5 +1,5 @@
-import __postcss from 'postcss';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __postcss from 'postcss';
 
 /**
  * @name            sVitePluginPostcss

@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SClass from '@coffeekraken/s-class';
+import SFile from '@coffeekraken/s-file';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 import type { IResolveGlobSettings } from '@coffeekraken/sugar/node/glob/resolveGlob';
 import __resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
 import __extractGlob from '@coffeekraken/sugar/shared/glob/extractGlob';
 import __extractNoneGlob from '@coffeekraken/sugar/shared/glob/extractNoneGlob';
-import __SClass from '@coffeekraken/s-class';
-import SFile from '@coffeekraken/s-file';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __micromatch from 'micromatch';
-import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 
 /**
  * @name                SGlob

@@ -1,10 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';
 import '../../../../src/css/index.css';
+import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';
 
 /**
  * @name                SDashboard

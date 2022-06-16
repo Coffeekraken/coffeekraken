@@ -1,28 +1,24 @@
+import { replaceCommandTokens as __replaceCommandTokens } from '@coffeekraken/cli';
 import __SClass from '@coffeekraken/s-class';
 import __SDuration from '@coffeekraken/s-duration';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SLog from '@coffeekraken/s-log';
+import __SProcess, {
+    ISProcessManagerProcessSettings,
+    ISProcessSettings,
+    SProcessManager as __SProcessManager,
+} from '@coffeekraken/s-process';
+import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
+import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
+import __argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
+import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
 import __SFrontstackActionInterface from './interface/SFrontstackActionInterface';
-import __SFrontstackRecipeParamsInterface from './interface/SFrontstackRecipeParamsInterface';
 import __SFrontstackListParamsInterface from './interface/SFrontstackListParamsInterface';
 import __SFronstackNewParamsInterface from './interface/SFrontstackNewParamsInterface';
-import __SPromise from '@coffeekraken/s-promise';
-import __SSugarJson from '@coffeekraken/s-sugar-json';
-import __argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
-import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
-import __SProcess, {
-    SProcessManager as __SProcessManager,
-    ISProcessSettings,
-    ISProcessManagerProcessSettings,
-} from '@coffeekraken/s-process';
-import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
-import __SLog from '@coffeekraken/s-log';
-import { replaceCommandTokens as __replaceCommandTokens } from '@coffeekraken/cli';
-import __filter from '@coffeekraken/sugar/shared/object/filter';
-import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
-
-import __SFrontspec from '@coffeekraken/s-frontspec';
-import __SEventEmitter from '@coffeekraken/s-event-emitter';
+import __SFrontstackRecipeParamsInterface from './interface/SFrontstackRecipeParamsInterface';
 
 export interface ISFrontstackSettings {}
 

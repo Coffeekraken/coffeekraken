@@ -1,6 +1,6 @@
+import __path from 'path';
 import __isGlob from '../../shared/is/glob';
 import __isPath from '../../shared/is/path';
-import __path from 'path';
 import __packageRootDir from './packageRootDir';
 
 /**

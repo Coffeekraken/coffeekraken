@@ -1,14 +1,12 @@
-// @ts-nocheck
+p; // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __STheme from '@coffeekraken/s-theme';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __Pickr from '@simonwep/pickr';
 import __baseCss from '@simonwep/pickr/dist/themes/nano.min.css';
 import { css, html, unsafeCSS } from 'lit';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract';
-import __STheme from '@coffeekraken/s-theme';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-color-picker.css'; // relative to /dist/pkg/esm/js

@@ -3,18 +3,16 @@
 import __SClass from '@coffeekraken/s-class';
 import __SConfig, { ISConfigEnvObj } from '@coffeekraken/s-config';
 import __SConfigFolderAdapter from '@coffeekraken/s-config-folder-adapter';
+import __SDocblock from '@coffeekraken/s-docblock';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __get from '@coffeekraken/sugar/shared/object/get';
-import __fs from 'fs';
-import __path from 'path';
-import __SDocblock from '@coffeekraken/s-docblock';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
+import __fs from 'fs';
+import __path from 'path';
 
 /**
  * @name                  SSugarConfig

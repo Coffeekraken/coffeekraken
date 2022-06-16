@@ -1,17 +1,9 @@
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SClass from '@coffeekraken/s-class';
-import __SInterface from '@coffeekraken/s-interface';
-import __striptags from '@coffeekraken/sugar/shared/html/striptags';
-import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
-import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
-import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
-import __cloneClass from '@coffeekraken/sugar/shared/class/cloneClass';
-import __clone from '@coffeekraken/sugar/shared/object/clone';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
-import __SComponentUtils from '@coffeekraken/s-component-utils';
 import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
+import __SComponentUtils from '@coffeekraken/s-component-utils';
+import __SInterface from '@coffeekraken/s-interface';
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
  * @name                SFeature

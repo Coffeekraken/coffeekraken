@@ -6,16 +6,16 @@ import __hljs from 'highlight.js/lib/core';
 import __langBash from 'highlight.js/lib/languages/bash';
 import __langCss from './languages/css';
 // import __langCss from 'highlight.js/lib/languages/css';
+import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import __decodeHtmlEntities from '@coffeekraken/sugar/js/html/decodeHtmlEntities';
 import __langJavascript from 'highlight.js/lib/languages/javascript';
 import __langPhp from 'highlight.js/lib/languages/php';
 import __langHtml from 'highlight.js/lib/languages/xml';
 import { css, html, unsafeCSS } from 'lit';
+import { query } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { property, query, queryAssignedNodes } from 'lit/decorators.js';
-import __decodeHtmlEntities from '@coffeekraken/sugar/js/html/decodeHtmlEntities';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
-import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
-import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 
 // // @ts-ignore
 import __prettier from 'prettier/esm/standalone.mjs';
@@ -24,8 +24,8 @@ import __prettierJs from 'prettier/esm/parser-babel.mjs';
 // @ts-ignore
 import __prettierHtml from 'prettier/esm/parser-html.mjs';
 // @ts-ignore
-import __prettierCss from 'prettier/esm/parser-postcss.mjs';
 import __prettierPhp from '@prettier/plugin-php/standalone';
+import __prettierCss from 'prettier/esm/parser-postcss.mjs';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-code-example.css'; // relative to /dist/pkg/esm/js

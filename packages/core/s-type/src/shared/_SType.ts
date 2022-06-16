@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import __map from '@coffeekraken/sugar/shared/iterable/map';
+import __SInterface from '@coffeekraken/s-interface';
 import __getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
-import __typeOf from '@coffeekraken/sugar/shared/value/typeof';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
+import __map from '@coffeekraken/sugar/shared/iterable/map';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __parseTypeString, {
     IParseTypeStringResultObj,
 } from '@coffeekraken/sugar/shared/type/parseTypeString';
+import __typeOf from '@coffeekraken/sugar/shared/value/typeof';
 import __STypeResult from './STypeResult';
-import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SType

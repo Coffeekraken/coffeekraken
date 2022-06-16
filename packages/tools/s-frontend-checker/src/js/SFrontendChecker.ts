@@ -1,29 +1,29 @@
 // @ts-nocheck
 
 import __SClass from '@coffeekraken/s-class';
+import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SFrontendCheckerSettingsInterface from './interface/SFrontendCheckerSettingsInterface';
-import __SPromise from '@coffeekraken/s-promise';
 
-import __doctype from './checks/doctype';
-import __charset from './checks/charset';
-import __viewport from './checks/viewport';
-import __title from './checks/title';
-import __description from './checks/description';
-import __keywords from './checks/keywords';
 import __author from './checks/author';
-import __direction from './checks/direction';
-import __language from './checks/language';
-import __cssOrder from './checks/cssOrder';
-import __opengraph from './checks/opengraph';
-import __twitterCard from './checks/twitterCard';
-import __noopener from './checks/noopener';
+import __charset from './checks/charset';
 import __comments from './checks/comments';
-import __w3c from './checks/w3c';
-import __printStylesheet from './checks/printStylesheet';
-import __uniqueIds from './checks/uniqueIds';
-import __webpImages from './checks/webpImages';
+import __cssOrder from './checks/cssOrder';
+import __description from './checks/description';
+import __direction from './checks/direction';
+import __doctype from './checks/doctype';
 import __imagesAlt from './checks/imagesAlt';
+import __keywords from './checks/keywords';
+import __language from './checks/language';
+import __noopener from './checks/noopener';
+import __opengraph from './checks/opengraph';
+import __printStylesheet from './checks/printStylesheet';
+import __title from './checks/title';
+import __twitterCard from './checks/twitterCard';
+import __uniqueIds from './checks/uniqueIds';
+import __viewport from './checks/viewport';
+import __w3c from './checks/w3c';
+import __webpImages from './checks/webpImages';
 
 /**
  * @name                SFrontendCheckeer

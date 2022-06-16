@@ -1,24 +1,24 @@
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
+import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
 import type { IResolveGlobSettings } from '@coffeekraken/s-glob';
 import __SGlob from '@coffeekraken/s-glob';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __fs from 'fs';
 import __imageSize from 'image-size';
 import __minimatch from 'minimatch';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
-import __SDuration from '@coffeekraken/s-duration';
-import __fs from 'fs';
 import __sharp from 'sharp';
-import __SLog from '@coffeekraken/s-log';
 import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuildParamsInterface';
 import __SImagesBuilderSettingsInterface from './interface/SImagesBuilderSettingsInterface';
-import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 
 /**
  * @name            SImagesBuilder

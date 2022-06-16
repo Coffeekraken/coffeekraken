@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __tmpDir from 'temp-dir';
-import __fs from 'fs-extra';
 
 /**
  * @name                            systemTmpDir

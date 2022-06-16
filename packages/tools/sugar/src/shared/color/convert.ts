@@ -1,10 +1,9 @@
 // @ts-nocheck
 
-import __parse from './parse';
 import __hsla2rgba from './hsla2rgba';
-import __hsv2rgba from './hsva2rgba';
-import __rgba2hsl from './rgba2hsla';
+import __parse from './parse';
 import __rgba2hex from './rgba2hex';
+import __rgba2hsl from './rgba2hsla';
 
 /**
  * @name                  convert

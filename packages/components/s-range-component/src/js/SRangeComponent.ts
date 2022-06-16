@@ -1,12 +1,11 @@
 // @ts-nocheck
 
-import { html, css, unsafeCSS } from 'lit';
-import __SRangeComponentInterface from './interface/SRangeComponentInterface';
 import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { css, html, unsafeCSS } from 'lit';
+import __SRangeComponentInterface from './interface/SRangeComponentInterface';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-range.css'; // relative to /dist/pkg/esm/js

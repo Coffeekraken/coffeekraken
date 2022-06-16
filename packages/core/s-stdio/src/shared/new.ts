@@ -1,5 +1,3 @@
-import __isClass from '@coffeekraken/sugar/shared/is/class';
-import __isPath from '@coffeekraken/sugar/node/is/path';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __SBasicStdio from '../node/basic/SBasicStdio';
 import __SWebsocketStdio from '../node/websocket/SWebsocketStdio';

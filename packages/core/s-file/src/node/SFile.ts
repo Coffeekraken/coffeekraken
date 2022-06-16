@@ -4,19 +4,15 @@ import __SEventEmitter, {
     ISEventEmitterConstructorSettings,
 } from '@coffeekraken/s-event-emitter';
 // import __require from '@coffeekraken/sugar/node/esm/require';
-import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
-import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __writeFile from '@coffeekraken/sugar/node/fs/writeFile';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 // import __replacePathTokens from '@coffeekraken/sugar/node/path/replacePathTokens';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __fs from 'fs';
 import __minimatch from 'minimatch';
 import __path from 'path';

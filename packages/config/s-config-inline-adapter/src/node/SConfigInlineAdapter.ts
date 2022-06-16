@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import type { ISConfigEnvObj } from '@coffeekraken/s-config';
-import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import type { ISConfigAdapterSettings } from '@coffeekraken/s-config-adapter';
+import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 

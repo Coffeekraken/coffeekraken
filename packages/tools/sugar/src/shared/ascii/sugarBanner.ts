@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __deepMerge from '../object/deepMerge';
-import __parseHtml from '../console/parseHtml';
 
 /**
  * @name          sugarBanner

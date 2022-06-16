@@ -1,5 +1,4 @@
 import * as __rematrix from 'rematrix';
-import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTranslateProperties';
 
 export interface ISActivateFeatureProps {}
 

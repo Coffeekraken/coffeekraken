@@ -1,11 +1,11 @@
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
+import __preventScrollRestoration from '@coffeekraken/sugar/js/dom/scroll/preventScrollRestoration';
 import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
 import __inputAdditionalAttributes from '@coffeekraken/sugar/js/feature/inputAdditionalAttributes';
 import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
-import __preventScrollRestoration from '@coffeekraken/sugar/js/dom/scroll/preventScrollRestoration';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 
 export interface ISSugarFeatureProps {
     scrolled: boolean;

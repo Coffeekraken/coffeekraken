@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __em2px from './em2px';
-import __rem2px from './em2px';
+import { default as __em2px, default as __rem2px } from './em2px';
 import __px2em from './px2em';
 import __px2rem from './px2rem';
 

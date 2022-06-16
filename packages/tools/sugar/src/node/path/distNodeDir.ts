@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __fs from 'fs-extra';
 /**
  * @name                            distNodeDir
  * @namespace            node.path

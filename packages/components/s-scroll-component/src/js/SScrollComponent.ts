@@ -1,14 +1,13 @@
 // @ts-nocheck
 
-import { html, css, unsafeCSS } from 'lit';
-import __SScrollComponentInterface from './interface/SScrollComponentInterface';
 import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __STheme from '@coffeekraken/s-theme';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { css, html, unsafeCSS } from 'lit';
+import __SScrollComponentInterface from './interface/SScrollComponentInterface';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-scroll.css'; // relative to /dist/pkg/esm/js

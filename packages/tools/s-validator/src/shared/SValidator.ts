@@ -1,58 +1,57 @@
 // @ts-nocheck
 
-import __SInterface from '@coffeekraken/s-interface';
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __en from './i18n/en';
 
-import __minValidator, {
-    definition as __minValidatorDefinition,
-} from './validators/min';
-import __maxValidator, {
-    definition as __maxValidatorDefinition,
-} from './validators/max';
-import __emailValidator, {
-    definition as __emailValidatorDefinition,
-} from './validators/email';
-import __requiredValidator, {
-    definition as __requiredValidatorDefinition,
-} from './validators/required';
-import __isoDateValidator, {
-    definition as __isoDateValidatorDefinition,
-} from './validators/isoDate';
-import __isoTimeValidator, {
-    definition as __isoTimeValidatorDefinition,
-} from './validators/isoTime';
-import __isoDateTimeValidator, {
-    definition as __isoDateTimeValidatorDefinition,
-} from './validators/isoDateTime';
-import __integerValidator, {
-    definition as __integerValidatorDefinition,
-} from './validators/integer';
-import __numberValidator, {
-    definition as __numberValidatorDefinition,
-} from './validators/number';
-import __negativeValidator, {
-    definition as __negativeValidatorDefinition,
-} from './validators/negative';
-import __positiveValidator, {
-    definition as __positiveValidatorDefinition,
-} from './validators/positive';
-import __patternValidator, {
-    definition as __patternValidatorDefinition,
-} from './validators/pattern';
 import __alphanumValidator, {
     definition as __alphanumValidatorDefinition,
 } from './validators/alphanum';
-import __creditCardValidator, {
-    definition as __creditCardValidatorDefinition,
-} from './validators/creditCard';
 import __colorValidator, {
     definition as __colorValidatorDefinition,
 } from './validators/color';
+import __creditCardValidator, {
+    definition as __creditCardValidatorDefinition,
+} from './validators/creditCard';
+import __emailValidator, {
+    definition as __emailValidatorDefinition,
+} from './validators/email';
 import __hexValidator, {
     definition as __hexValidatorDefinition,
 } from './validators/hex';
+import __integerValidator, {
+    definition as __integerValidatorDefinition,
+} from './validators/integer';
+import __isoDateValidator, {
+    definition as __isoDateValidatorDefinition,
+} from './validators/isoDate';
+import __isoDateTimeValidator, {
+    definition as __isoDateTimeValidatorDefinition,
+} from './validators/isoDateTime';
+import __isoTimeValidator, {
+    definition as __isoTimeValidatorDefinition,
+} from './validators/isoTime';
+import __maxValidator, {
+    definition as __maxValidatorDefinition,
+} from './validators/max';
+import __minValidator, {
+    definition as __minValidatorDefinition,
+} from './validators/min';
+import __negativeValidator, {
+    definition as __negativeValidatorDefinition,
+} from './validators/negative';
+import __numberValidator, {
+    definition as __numberValidatorDefinition,
+} from './validators/number';
+import __patternValidator, {
+    definition as __patternValidatorDefinition,
+} from './validators/pattern';
+import __positiveValidator, {
+    definition as __positiveValidatorDefinition,
+} from './validators/positive';
+import __requiredValidator, {
+    definition as __requiredValidatorDefinition,
+} from './validators/required';
 
 /**
  * @name            SValidation

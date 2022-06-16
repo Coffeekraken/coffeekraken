@@ -1,22 +1,20 @@
-import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
-import __SBuilder from '@coffeekraken/s-builder';
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
+import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import type { IResolveGlobSettings } from '@coffeekraken/s-glob';
-import __SGlob from '@coffeekraken/s-glob';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __copySync from '@coffeekraken/sugar/node/fs/copySync';
-import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SFaviconBuilderBuildParamsInterface from './interface/SFaviconBuilderBuildParamsInterface';
-import __SFaviconBuilderAddParamsInterface from './interface/SFaviconBuilderAddParamsInterface';
-import __favicons from 'favicons';
-import __fs from 'fs';
 import __SLog from '@coffeekraken/s-log';
-import __path from 'path';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __SPromise from '@coffeekraken/s-promise';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageSyncJson from '@coffeekraken/sugar/node/package/jsonSync';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __favicons from 'favicons';
+import __fs from 'fs';
+import __path from 'path';
+import __SFaviconBuilderAddParamsInterface from './interface/SFaviconBuilderAddParamsInterface';
+import __SFaviconBuilderBuildParamsInterface from './interface/SFaviconBuilderBuildParamsInterface';
 
 /**
  * @name            SFaviconBuilder

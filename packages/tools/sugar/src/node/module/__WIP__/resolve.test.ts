@@ -1,6 +1,6 @@
-import __resolve from '../resolve';
-import __path from 'path';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __path from 'path';
+import __resolve from '../resolve';
 
 describe('sugar.node.module.resolve', () => {
     const settings = {

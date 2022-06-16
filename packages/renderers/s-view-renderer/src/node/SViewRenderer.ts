@@ -9,16 +9,16 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsInterface';
-import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
 
 /**
  * @name          SViewRenderer

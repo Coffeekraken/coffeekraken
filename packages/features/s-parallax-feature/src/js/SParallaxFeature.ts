@@ -1,10 +1,8 @@
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SParallaxFeatureInterface from './interface/SParallaxFeatureInterface';
-import __getTransformProperties from '@coffeekraken/sugar/js/dom/style/getTransformProperties';
 import * as __rematrix from 'rematrix';
-import __throttle from '@coffeekraken/sugar/shared/function/throttle';
+import __SParallaxFeatureInterface from './interface/SParallaxFeatureInterface';
 
 export interface ISParallaxFeatureProps {
     amount: number;

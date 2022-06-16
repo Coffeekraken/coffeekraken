@@ -1,10 +1,8 @@
-import { html, css, unsafeCSS } from 'lit';
-import { property } from 'lit/decorators.js';
-import __SClipboardCopyComponentInterface from './interface/SClipboardCopyComponentInterface';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { css, html, unsafeCSS } from 'lit';
+import __SClipboardCopyComponentInterface from './interface/SClipboardCopyComponentInterface';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-clipboard-copy.css'; // relative to /dist/pkg/esm/js

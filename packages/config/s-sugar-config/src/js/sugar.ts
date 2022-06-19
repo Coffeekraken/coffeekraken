@@ -1,5 +1,6 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __get from '@coffeekraken/sugar/shared/object/get';
+import __set from '@coffeekraken/sugar/shared/object/set';
 
 /**
  * @name                SSugarConfig
@@ -45,5 +46,24 @@ export default class SSugarConfig {
     static get(dotpath: string): any {
         // @ts-ignore
         return __get(SSugarConfig.finalConfig, dotpath);
+    }
+
+    /**
+     * @name            set
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to set a configuration value
+     *
+     * @param       {String}            dotpath             The dotpath representing the configuration you want to access
+     * @param       {any}               value               The value you want to set
+     * @return      {any}                                   The getted configuration
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static set(dotpath: string, value: any): any {
+        // @ts-ignore
+        return __set(SSugarConfig.finalConfig, dotpath, value);
     }
 }

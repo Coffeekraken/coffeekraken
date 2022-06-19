@@ -45,7 +45,7 @@ export interface IPostcssSugarPluginSettings {
     excludeCommentByTypes?: string[];
     excludeCodeByTypes?: string[];
     inlineImport?: boolean;
-    target?: 'development' | 'prod' | 'vite';
+    target?: 'development' | 'production' | 'vite';
 }
 
 export function getFunctionsList() {
@@ -99,7 +99,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeCodeByTypes: __SSugarConfig.get(
                 'postcssSugarPlugin.excludeCodeByTypes',
             ),
-            target: 'prod',
+            target: 'production',
             inlineImport: true,
             cache: false,
         },
@@ -113,20 +113,19 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         settings.cache = false;
     }
 
-    // if (settings.excludeByTypes?.length) {
-    //     __CssVars.excludeByTypes(settings.excludeByTypes);
-    // }
-    // if (settings.excludeCommentByTypes?.length) {
-    //     __CssVars.excludeCommentByTypes(settings.excludeCommentByTypes);
-    // }
-    // if (settings.excludeCodeByTypes?.length) {
-    //     __CssVars.excludeCodeByTypes(settings.excludeCodeByTypes);
-    // }
+    if (settings.excludeByTypes?.length) {
+        __CssVars.excludeByTypes(settings.excludeByTypes);
+    }
+    if (settings.excludeCommentByTypes?.length) {
+        __CssVars.excludeCommentByTypes(settings.excludeCommentByTypes);
+    }
+    if (settings.excludeCodeByTypes?.length) {
+        __CssVars.excludeCodeByTypes(settings.excludeCodeByTypes);
+    }
 
     function contentToArray(content) {
         if (content instanceof __CssVars) {
             content = content.toString();
-            console.log('TO', content);
         }
         if (!Array.isArray(content)) content = [content];
         return content;
@@ -137,6 +136,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     }
 
     function findUp(node, checker) {
+        if (!node) return;
         const res = checker(node);
         if (!res && node.parent) return findUp(node.parent, checker);
         else if (res) return res;
@@ -267,7 +267,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                         .toLowerCase()}`
                 ] = {
                     path,
-                    mixin: fn,
+                    fn,
                     interface: int,
                     dependencies,
                 };
@@ -278,7 +278,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                         .replace(/\.js$/, '')}`
                 ] = {
                     path,
-                    mixin: fn,
+                    fn,
                     interface: int,
                     dependencies,
                 };
@@ -310,10 +310,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         }
     }
 
-    async function _processDeclaration(
-        value: string,
-        type: 'mixin' | 'function',
-    ) {
+    async function _processDeclaration(value: string, atRule?: any) {
         // replace vh units
         const vhMatches = value.match(/(var\(--vh,)?([0-9\.]+)vh(\s|;)?/gm);
         if (vhMatches) {
@@ -324,8 +321,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             });
         }
         if (!value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return value;
+
         const calls = value.match(
-            /sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm,
+            /@?sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm,
         );
 
         if (!calls || !calls.length) return value;
@@ -345,6 +343,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 );
             }
 
+            let stack = functionsStack;
+            if (sugarStatement.trim().match(/^\@/)) {
+                stack = mixinsStack;
+            }
+
             // @ts-ignore
             const functionName = sugarStatement.match(
                 /sugar\.([a-zA-Z0-9\.]+)/,
@@ -355,9 +358,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             );
 
             let fnId = functionName;
-
-            const stack = type === 'mixin' ? mixinsStack : functionsStack;
-
             if (!stack[fnId]) {
                 fnId = `${fnId}.${fnId.split('.').slice(-1)[0]}`;
             }
@@ -366,7 +366,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
             if (!fnObject) {
                 throw new Error(
-                    `<red>[postcssSugarPlugin]</red> Sorry but the requested ${type} "<yellow>${fnId}</yellow>" does not exists...`,
+                    `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${fnId}</yellow>" does not exists...`,
                 );
             }
 
@@ -377,6 +377,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             try {
                 const result = await fnObject.fn({
                     params,
+                    atRule,
                     settings,
                 });
                 value = value.replace(sugarStatement, result);
@@ -576,12 +577,12 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                         ? __path.dirname(root.source.input.file)
                         : __dirname();
 
-                const mixinFn = mixinsStack[mixinId].mixin;
+                const mixinFn = mixinsStack[mixinId].fn;
                 const mixinInterface = mixinsStack[mixinId].interface;
 
                 const processedParams = await _processDeclaration(
                     atRule.params,
-                    'mixin',
+                    atRule,
                 );
 
                 const params = mixinInterface.apply(processedParams, {});
@@ -655,7 +656,8 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         },
         async Declaration(decl) {
             if (!decl.prop) return;
-            decl.value = await _processDeclaration(decl.value, 'function');
+
+            decl.value = await _processDeclaration(decl.value);
         },
     };
 };

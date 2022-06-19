@@ -38,7 +38,7 @@ export default function (env, config) {
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        excludeCommentByTypes: [],
+        excludeCommentByTypes: ['CssClass'],
 
         /**
          * @name            excludeCodeByTypes

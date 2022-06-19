@@ -390,6 +390,32 @@ export default class SSugarConfig extends __SClass {
         });
     }
 
+    /**
+     * @name            set
+     * @type            Function
+     *
+     * This static method allows you to set  a configuration
+     * by passing a dotpath like "something.cool" and (optional) a configuration "id"
+     *
+     * @param       {String}        dotpath         The dotpath that specify the configuration you want to get
+     * @param       {Any}           value       The configuration value you want to set
+     * @param       {String}        [id="default"]      The configuration id you want to get the config from
+     * @return      {any}                           The setted configuration
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static set(dotPath: string, value: any, id = 'default'): any {
+        if (!this._sSugarConfigInstances[id]) {
+            throw new Error(
+                `<red>[${this.name}]</red> You MUST load the configuration before accessing them by calling the SSugarConfig.load() async instance function`,
+            );
+        }
+
+        // get the config
+        return this._sSugarConfigInstances[id].set(dotPath, value);
+    }
+
     static async _searchConfigFiles() {
         const sugarJson = new __SSugarJson();
 
@@ -487,6 +513,23 @@ export default class SSugarConfig extends __SClass {
      */
     get(dotpath: string): any {
         return this._configInstance.get(dotpath);
+    }
+
+    /**
+     * @name            set
+     * @type            Function
+     *
+     * This method allows you to set a configuration back by passing a dotpath like "something.else"
+     *
+     * @param       {String}        dotpath         The dotpath that specify the config you want to get back
+     * @param       {any}           value           The value you want to set
+     * @return      {any}                           The getted configuration
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    set(dotpath: string, value: any): any {
+        return this._configInstance.set(dotpath, value);
     }
 
     /**

@@ -725,7 +725,6 @@ export default class SConfig {
      * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
      *
      * @param                 {String}                     path                 The dotted object path for the value wanted
-     * @param                 {String}                      [adapter=null]       The data adapter that you want to use to retreive this value
      * @param                 {Object}                      [settings={}]         The same object settings that you can pass in the constructor but just for this get process
      * @return                {Mixed}                                            The value getted
      *
@@ -734,7 +733,7 @@ export default class SConfig {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get(path, settings = {}, _level = 0) {
+    get(path: string, settings = {}) {
         settings = __deepMerge(this.settings, settings);
 
         if (Object.keys(this.config).length === 0) {
@@ -755,6 +754,34 @@ export default class SConfig {
         }
 
         return originalValue;
+    }
+
+    /**
+     * @name                                set
+     * @type                                Function
+     *
+     * Set a config depending on the dotted object path passed and the value to set
+     *
+     * @param                 {String}                     path                 The dotted object path for the value wanted
+     * @param               {Any}                       value          The value to set
+     * @param                 {Object}                      [settings={}]         The same object settings that you can pass in the constructor but just for this get process
+     * @return                {Mixed}                                            The value setted
+     *
+     * @example               js
+     * await config.get('log.frontend.mail.host'); // => gmail.google.com
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    set(path: string, value: any, settings = {}) {
+        settings = __deepMerge(this.settings, settings);
+
+        if (Object.keys(this.config).length === 0) {
+            throw new Error(
+                `<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async instance function`,
+            );
+        }
+        __set(this.config, path, value);
+        return value;
     }
 
     /**

@@ -378,6 +378,7 @@ class SDocMap extends __SClass implements ISDocmap {
                             type: __SLog.TYPE_WARN,
                             value: `<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`,
                         });
+                        return;
                     }
 
                     const currentPackageJson = __readJsonSync(packageJsonPath);

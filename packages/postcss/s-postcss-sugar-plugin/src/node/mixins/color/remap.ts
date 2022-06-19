@@ -59,11 +59,13 @@ export default function ({
         ...params,
     };
 
+    // console.log('dd', atRule);
+
     const vars: string[] = [
         ...__STheme.remapCssColor(finalParams.color, finalParams.toColor).vars,
     ];
 
-    if (atRule.parent.type === 'root') {
+    if (atRule?.parent.type === 'root') {
         vars.unshift(':root {');
         vars.push('}');
     }

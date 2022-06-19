@@ -16,7 +16,6 @@ import __fs from 'fs';
 import __path from 'path';
 import __postcss from 'postcss';
 import { PurgeCSS } from 'purgecss';
-import __SPostcssBuilderBuildParamsInterface from './interface/SPostcssBuilderBuildParamsInterface';
 import __SPostcssBuilderSettingsInterface from './interface/SPostcssBuilderSettingsInterface';
 
 /**
@@ -117,14 +116,14 @@ export default class SPostcssBuilder extends __SBuilder {
             async ({ resolve, reject, emit }) => {
                 let finalCss;
 
-                const defaultParams = <
-                    ISPostcssBuilderBuildParams // @ts-ignore
-                >__SPostcssBuilderBuildParamsInterface.defaults();
-
                 // handle prod shortcut
                 if (params.prod) {
                     params.minify = true;
                     params.purge = true;
+                    __SSugarConfig.set(
+                        'postcssSugarPlugin.excludeCommentByTypes',
+                        ['*'],
+                    );
                 }
 
                 // handle input
@@ -190,6 +189,51 @@ export default class SPostcssBuilder extends __SBuilder {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>|------------</yellow> : ${pluginName}`,
                     });
+                    if (pluginName === '@coffeekraken/s-postcss-sugar-plugin') {
+                        const postcssSugarPluginConfig = __SSugarConfig.get(
+                            'postcssSugarPlugin',
+                        );
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `              <yellow>○</yellow> Cache                     : ${
+                                postcssSugarPluginConfig.cache
+                                    ? '<green>true</green>'
+                                    : '<red>false</red>'
+                            }`,
+                        });
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `              <yellow>○</yellow> Exclude by types          : ${
+                                postcssSugarPluginConfig.excludeByTypes.length
+                                    ? `<yellow>${postcssSugarPluginConfig.excludeByTypes.join(
+                                          ',',
+                                      )}</yellow>`
+                                    : `<red>none</red>`
+                            }`,
+                        });
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `              <yellow>○</yellow> Exclude comments by types : ${
+                                postcssSugarPluginConfig.excludeCommentByTypes
+                                    .length
+                                    ? `<yellow>${postcssSugarPluginConfig.excludeCommentByTypes.join(
+                                          ',',
+                                      )}</yellow>`
+                                    : `<red>none</red>`
+                            }`,
+                        });
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `              <yellow>○</yellow> Exclude code by types     : ${
+                                postcssSugarPluginConfig.excludeCodeByTypes
+                                    .length
+                                    ? `<yellow>${postcssSugarPluginConfig.excludeCodeByTypes.join(
+                                          ',',
+                                      )}</yellow>`
+                                    : `<red>none</red>`
+                            }`,
+                        });
+                    }
                 });
 
                 // resolve plugins paths
@@ -203,7 +247,9 @@ export default class SPostcssBuilder extends __SBuilder {
                             this.settings.postcss.pluginsOptions[p] ?? {};
                         plugins.push(
                             fn({
-                                target: params.prod ? 'prod' : 'dev',
+                                target: params.prod
+                                    ? 'production'
+                                    : 'development',
                                 ...options,
                             }),
                         );

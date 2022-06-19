@@ -43,10 +43,12 @@ export { postcssUiFiltrableInputClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssUiFiltrableInputClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiFiltrableInputClassesParams = {
@@ -57,7 +59,7 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     // vars.push(`
     //   /**
@@ -145,7 +147,8 @@ export default function ({
             cls += `--${style}`;
         }
 
-        vars.push(`/**
+        vars.comment(
+            `/**
         * @name           ${cls}
         * @namespace          sugar.style.ui.filtrableInput
         * @type           CssClass
@@ -157,14 +160,20 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */
-     .${cls} {
+      */`,
+        ).code(
+            `.${cls} {
         @sugar.ui.filtrableInput($style: ${style});
-     }`);
+     }`,
+            {
+                type: 'CssClass',
+            },
+        );
     });
 
     if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            `/**
             * @name           s-rhythm:vertical
             * @namespace          sugar.style.ui.filtrableInput
             * @type           CssClass
@@ -188,15 +197,20 @@ export default function ({
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-            @sugar.rhythm.vertical {
+        */`,
+        ).code(
+            `@sugar.rhythm.vertical {
                 .s-filtrable-input {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.filtrableInput.rhythmVertical'),
                     )}
                 } 
             }
-        `);
+        `,
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     return vars;

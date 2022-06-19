@@ -35,6 +35,10 @@ export default class CssVars {
         if (typeof str === 'function') str = str();
         let type = metas?.type;
 
+        // global exclude
+        if (CssVars.excludedTypes.includes('*')) return this;
+        if (CssVars.excludedCommentTypes.includes('*')) return this;
+
         // try to get type if not setted
         if (!type) {
             const typeMatch = str.match(
@@ -46,10 +50,10 @@ export default class CssVars {
         }
 
         // exclude some comments by types
-        // if (type && CssVars.excludedTypes.includes(type.toLowerCase()))
-        //     return this;
-        // if (type && CssVars.excludedCommentTypes.includes(type.toLowerCase()))
-        //     return this;
+        if (type && CssVars.excludedTypes.includes(type.toLowerCase()))
+            return this;
+        if (type && CssVars.excludedCommentTypes.includes(type.toLowerCase()))
+            return this;
 
         if (Array.isArray(str)) str = str.join('\n');
         this._stack.push({
@@ -62,6 +66,10 @@ export default class CssVars {
         if (typeof str === 'function') str = str();
         let type = metas?.type;
 
+        // global exclude
+        if (CssVars.excludedTypes.includes('*')) return this;
+        if (CssVars.excludedCodeTypes.includes('*')) return this;
+
         // try to get type if not setted
         if (!type) {
             const typeMatch = str.match(
@@ -73,10 +81,10 @@ export default class CssVars {
         }
 
         // exclude some comments by types
-        // if (type && CssVars.excludedTypes.includes(type.toLowerCase()))
-        //     return this;
-        // if (type && CssVars.excludedCodeTypes.includes(type.toLowerCase()))
-        //     return this;
+        if (type && CssVars.excludedTypes.includes(type.toLowerCase()))
+            return this;
+        if (type && CssVars.excludedCodeTypes.includes(type.toLowerCase()))
+            return this;
 
         if (Array.isArray(str)) str = str.join('\n');
         this._stack.push({

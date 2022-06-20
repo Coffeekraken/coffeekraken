@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import uniqid from '../../../shared/string/uniqid';
-import matches from './matches';
 import __SPromise from '@coffeekraken/s-promise';
+import uniqid from '../../../shared/string/uniqid';
 
 /**
  * @name            querySelectorLive
@@ -45,6 +44,9 @@ export interface IQuerySelectorLiveSettings {
     once: boolean;
 }
 
+let _observer,
+    _stack = new Map();
+
 function querySelectorLive(
     selector: string,
     cb: Function<HTMLElement> = null,
@@ -79,54 +81,80 @@ function querySelectorLive(
     }
 
     // listen for updates in document
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.addedNodes && mutation.addedNodes.length) {
-                [].forEach.call(mutation.addedNodes, (node) => {
-                    if (!node.matches) return;
-                    if (node.matches(selector)) {
-                        // if (settings.once) observer.disconnect();
-                        if (_isNodeAlreadyHandledWhenSettingsOnceIsSet(node)) {
-                            return;
+    if (!_observer) {
+        _observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes && mutation.addedNodes.length) {
+                    [].forEach.call(mutation.addedNodes, (node) => {
+                        if (!node.matches) return;
+                        for (let [cb, stackItem] of _stack) {
+                            if (
+                                !node.matches(stackItem.selector) ||
+                                _isNodeAlreadyHandledWhenSettingsOnceIsSet(node)
+                            ) {
+                                continue;
+                            }
+                            cb(node);
+                            _emit?.('node', node);
+                            if (stackItem.settings.once) {
+                                _stack.delete(cb);
+                            }
                         }
-                        cb(node);
-                        _emit?.('node', node);
-                    }
-                    const nestedNodes = node.querySelectorAll(selector);
-                    [].forEach.call(nestedNodes, (nestedNode) => {
+                        const nestedNodes = node.querySelectorAll(selector);
+                        [].forEach.call(nestedNodes, (nestedNode) => {
+                            for (let [cb, stackItem] of _stack) {
+                                if (
+                                    !nestedNode.matches(stackItem.selector) ||
+                                    _isNodeAlreadyHandledWhenSettingsOnceIsSet(
+                                        nestedNode,
+                                    )
+                                ) {
+                                    continue;
+                                }
+                                cb(nestedNode);
+                                _emit?.('node', nestedNode);
+                                if (stackItem.settings.once) {
+                                    _stack.delete(cb);
+                                }
+                            }
+                        });
+                    });
+                } else if (mutation.attributeName) {
+                    if (!mutation.target.matches) return;
+                    for (let [cb, stackItem] of _stack) {
                         if (
+                            !mutation.target.matches(stackItem.selector) ||
                             _isNodeAlreadyHandledWhenSettingsOnceIsSet(
-                                nestedNode,
+                                mutation.target,
                             )
                         ) {
-                            return;
+                            continue;
                         }
-                        cb(nestedNode);
-                        _emit?.('node', nestedNode);
-                    });
-                });
-            } else if (mutation.attributeName) {
-                if (mutation.target.matches(selector)) {
-                    // if (settings.once) observer.disconnect();
-                    if (
-                        _isNodeAlreadyHandledWhenSettingsOnceIsSet(
-                            mutation.target,
-                        )
-                    ) {
-                        return;
+                        cb(mutation.target);
+                        _emit?.('node', mutation.target);
+                        if (stackItem.settings.once) {
+                            _stack.delete(cb);
+                        }
                     }
-                    cb(mutation.target);
-                    _emit?.('node', mutation.target);
                 }
-            }
+            });
         });
-    });
-    observer.observe(settings.rootNode, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['class', 'id'],
-    });
+        _observer.observe(document, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['class', 'id'],
+        });
+    }
+
+    const mapItem = {
+        selector,
+        cb,
+        settings,
+    };
+    if (!_stack.has(cb)) {
+        _stack.set(cb, mapItem);
+    }
 
     // first search
     [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {

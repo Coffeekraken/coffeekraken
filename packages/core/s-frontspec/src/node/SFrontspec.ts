@@ -12,7 +12,6 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __delete from '@coffeekraken/sugar/shared/object/delete';
 import __fs from 'fs';
 import __path from 'path';
 import __SFrontspecAddParamsInterface from './interface/SFrontspecAddParamsInterface';
@@ -113,14 +112,11 @@ export default class SFrontspec extends __SPromise {
             };
 
             if (res.assets) {
-                Object.keys(res.assets).forEach((type) => {
-                    const typeObj = res.assets[type];
-                    Object.keys(typeObj).forEach((asset) => {
-                        const assetObj = typeObj[asset];
-                        if (assetObj.env && !__SEnv.is(assetObj.env)) {
-                            __delete(res.assets, `${type}.${asset}`);
-                        }
-                    });
+                Object.keys(res.assets).forEach((id) => {
+                    const assetObj = res.assets[id];
+                    if (assetObj.env && !__SEnv.is(assetObj.env)) {
+                        delete res.assets[id];
+                    }
                 });
             }
 

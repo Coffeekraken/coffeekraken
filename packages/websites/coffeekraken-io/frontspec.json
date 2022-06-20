@@ -18,42 +18,27 @@
         }
     },
     "assets": {
-        "js": {
-            "dev": {
-                "id": "dev",
-                "type": "module",
-                "defer": true,
-                "src": "/src/js/index.ts",
-                "env": "development"
-            },
-            "module": {
-                "id": "module",
-                "type": "module",
-                "defer": true,
-                "src": "/dist/js/module.es.js",
-                "env": "production"
-            },
-            "main": {
-                "id": "main",
-                "nomodule": true,
-                "defer": true,
-                "src": "/dist/js/index.iife.js",
-                "env": "production"
-            }
+        "dev": {
+            "type": "module",
+            "defer": true,
+            "src": "/src/js/index.ts",
+            "env": "development"
         },
-        "css": {
-            "main": {
-                "id": "main",
-                "defer": true,
-                "src": "/dist/css/index.css"
-            }
+        "module": {
+            "type": "module",
+            "defer": true,
+            "src": "/dist/js/module.es.js",
+            "env": "production"
         },
-        "html": {
-            "manifest": {
-                "id": "manifest",
-                "src": "./dist/favicon/favicon.html"
-            }
+        "main": {
+            "nomodule": true,
+            "defer": true,
+            "src": "/dist/js/index.iife.js",
+            "env": "production"
+        },
+        "style": {
+            "defer": true,
+            "src": "/dist/css/index.css"
         }
-    },
-    "head": {}
+    }
 }

@@ -4,6 +4,10 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
 
 export default class CKFallingStars extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.createProperties();
+    }
+
     constructor() {
         super({
             litComponent: {
@@ -16,12 +20,9 @@ export default class CKFallingStars extends __SLitComponent {
     _maxCount = 10;
 
     async firstUpdated() {
-
-
-        for (let i=0; i<this._maxCount; i++) {
-            
+        for (let i = 0; i < this._maxCount; i++) {
             const left = `${Math.random() * 100}%`;
-            
+
             const $starStyle = document.createElement('style');
             $starStyle.rel = 'stylesheet';
             $starStyle.innerHTML = `
@@ -36,7 +37,9 @@ export default class CKFallingStars extends __SLitComponent {
                     }
                     100% {
                         top: 100%;
-                        left: calc(var(--left) - ${10 + Math.round(Math.random() * 0)}%);
+                        left: calc(var(--left) - ${
+                            10 + Math.round(Math.random() * 0)
+                        }%);
                         opacity: 0;
                     }
                 }
@@ -47,12 +50,10 @@ export default class CKFallingStars extends __SLitComponent {
             document.head.appendChild($starStyle);
         }
 
-        
         this.new();
     }
 
     new() {
-
         this._starsCount++;
 
         const starId = Math.round(Math.random() * this._maxCount);
@@ -78,11 +79,8 @@ export default class CKFallingStars extends __SLitComponent {
         setTimeout(this.new.bind(this), Math.random() * 3500);
     }
 
-
-
     render() {
-        return html`
-        `;
+        return html``;
     }
 }
 

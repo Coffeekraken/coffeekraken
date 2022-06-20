@@ -1,8 +1,8 @@
+import __readJson from '@coffeekraken/sugar/node/fs/readJson';
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
-import __fs from 'fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __readJson from '@coffeekraken/sugar/node/fs/readJson';
+import __fs from 'fs';
 
 export async function prepare(config) {
     const potentialFrontspecJsonFilePath = `${__packageRoot()}/frontspec.json`;
@@ -14,19 +14,22 @@ export async function prepare(config) {
 export default function (env, config) {
     if (env.platform !== 'node') return;
     return {
-        head: {
-              /**
-               * @name      viteClient
-               * @namespace     config.frontspec.head
-               * @type      Object
-               * @default     vite client script
-               *
-               * Specify some items you want to integrate to the head tag. It can be everything you want
-               *
-               * @since       2.0.0
-               * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-               */
-              viteClient: env.env === 'development' ? `
+        assets: {
+            /**
+             * @name      viteClient
+             * @namespace     config.frontspec.assets
+             * @type      Object
+             * @default     vite client script
+             *
+             * Specify some items you want to integrate to the head tag. It can be everything you want
+             *
+             * @since       2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            viteClient: {
+                src:
+                    env.env === 'development'
+                        ? `
         <script>
           document.addEventListener("DOMContentLoaded", function() {
             var $script = document.createElement("script");
@@ -36,7 +39,9 @@ export default function (env, config) {
             document.body.appendChild($script);
           });
         </script>
-      ` : '',
+      `
+                        : '',
+            },
         },
     };
 }

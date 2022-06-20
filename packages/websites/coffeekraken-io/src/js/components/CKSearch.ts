@@ -1,14 +1,13 @@
 // @ts-nocheck
 
-import __SRequest from '@coffeekraken/s-request';
-import { html } from 'lit';
-import __SLitComponent from '@coffeekraken/s-lit-component';
-import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
-import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
-import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import __SRequest from '@coffeekraken/s-request';
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
+import { html } from 'lit';
 
 __sFiltrableInputDefine(
     {
@@ -233,6 +232,10 @@ __sFiltrableInputDefine(
 );
 
 export default class CKSearch extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.createProperties();
+    }
+
     constructor() {
         super({
             shadowDom: false,
@@ -313,7 +316,7 @@ export default class CKSearch extends __SLitComponent {
                 <div class="ck-search__content s-color:accent">
                     <ck-search-input>
                         <input
-                            placeholder="Search..."
+                            placeholder="Search ( Ctrl+F )..."
                             type="text"
                             name="search"
                             value="${this._search}"

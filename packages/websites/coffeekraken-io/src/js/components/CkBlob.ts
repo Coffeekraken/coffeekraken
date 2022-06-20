@@ -18,6 +18,10 @@ interface IFlyingCoffee {
 }
 
 export default class CKBlob extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.createProperties();
+    }
+
     constructor() {
         super({
             shadowDom: false,

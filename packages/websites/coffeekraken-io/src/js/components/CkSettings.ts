@@ -1,12 +1,10 @@
 // @ts-nocheck
 
-import __SRequest from '@coffeekraken/s-request';
-import { html } from 'lit';
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import __STheme from '@coffeekraken/s-theme';
+import { html } from 'lit';
 
-import { setState, getState } from '../state/state';
+import { getState, setState } from '../state/state';
 
 export default class CkSettings extends __SLitComponent {
     _settings = {
@@ -19,6 +17,10 @@ export default class CkSettings extends __SLitComponent {
 
     _theme = __STheme.getCurrentTheme();
     state = getState();
+
+    static get properties() {
+        return __SLitComponent.createProperties();
+    }
 
     constructor() {
         super({

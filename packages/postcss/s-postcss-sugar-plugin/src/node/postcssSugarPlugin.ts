@@ -101,12 +101,10 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             ),
             target: 'production',
             inlineImport: true,
-            cache: false,
+            cache: true,
         },
         settings,
     );
-
-    settings.cache = false;
 
     // remove cache if not for vite target
     if (settings.cache === undefined && settings.target !== 'vite') {

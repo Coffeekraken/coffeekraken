@@ -1,12 +1,10 @@
 // @ts-nocheck
 
+import __SInterface from '@coffeekraken/s-interface';
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __filterObject from '@coffeekraken/sugar/shared/object/filter';
 import { html } from 'lit';
 import { loadDocmap } from '../state/state';
-import __filterObject from '@coffeekraken/sugar/shared/object/filter';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __SInterface from '@coffeekraken/s-interface';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 
 class SCKDiscoverPropsInterface extends __SInterface {
     static get _definition() {
@@ -25,9 +23,7 @@ export default class CKDiscover extends __SLitComponent {
 
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
+            shadowDom: false,
         });
     }
 

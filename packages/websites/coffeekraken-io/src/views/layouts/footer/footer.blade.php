@@ -30,7 +30,7 @@
                     <h3 class="s-typo:h5">
                         Links
                     </h3>
-                    <ol class="s-list">
+                    <ol class="s-list:ul s-color:accent">
                         <li>
                             <a href="/doc/get-started/get-started" title="Get Started with Coffeekraken">Get Started</a>
                         </li>
@@ -52,7 +52,7 @@
                     <h3 class="s-typo:h5">
                         Usefull
                     </h3>
-                    <ol class="s-list">
+                    <ol class="s-list:ul s-color:accent">
                         <li>
                             <a href="https://www.npmjs.com/search?q=coffeekraken" title="NPM" target="_blank">NPM
                                 Packages</a>
@@ -71,7 +71,7 @@
                     <h3 class="s-typo:h5">
                         Community
                     </h3>
-                    <ol class="s-list">
+                    <ol class="s-list:ul s-color:accent">
                         <li>
                             <a href="https://discord.com/channels/940362961682333767/940362962223378494" title="Discord"
                                 target="_blank">Join us on Discord</a>

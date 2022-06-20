@@ -113,7 +113,7 @@ export default class SLitComponent extends LitElement {
             }
             // set the component as mounted
             // @ts-ignore
-            this.mounted = true;
+            this.props.mounted = true;
         };
 
         // litElement shouldUpdate
@@ -301,6 +301,7 @@ export default class SLitComponent extends LitElement {
         if (this.props.adoptStyle && this.shadowRoot) {
             await this.componentUtils.adoptStyleInShadowRoot(this.shadowRoot);
         }
+
         return true;
     }
 }

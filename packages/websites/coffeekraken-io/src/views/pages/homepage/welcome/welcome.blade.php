@@ -1,14 +1,14 @@
 <section id="homepage-welcome">
 
-    <ck-falling-stars></ck-falling-stars>
+    {{-- <ck-falling-stars></ck-falling-stars> --}}
 
     <div class="__illustration">
 
-        {{-- <div class="__loader">
-            <i class="s-loader:spinner s-color:accent"></i>
-        </div> --}}
 
         <ck-blob></ck-blob>
+        <div class="__loader s-until:sibling:mounted">
+            <i class="s-loader:spinner s-color:accent"></i>
+        </div>
 
     </div>
 

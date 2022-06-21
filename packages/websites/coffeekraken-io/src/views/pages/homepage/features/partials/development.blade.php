@@ -225,7 +225,7 @@
                     </li>
                     <li>
                         <a href="/doc/recipes/create-your-recipe" title="Create your own recipe">
-                            <div class="icon-card" style="--image: url(https://media.giphy.com/media/9W6X9HzEX73VbjR2WV/giphy.gif);">
+                            <div class="icon-card s-color:error" style="--image: url(https://media.giphy.com/media/9W6X9HzEX73VbjR2WV/giphy.gif);">
                                 <div class="icon-card__content">
                                     <i class="s-icon:misc-build"></i>
                                     <p class="s-p">Build your<br />own</p>

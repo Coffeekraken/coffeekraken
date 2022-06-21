@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/coffeekraken-io",
-    "version": "2.0.0-alpha.0",
+    "version": "2.0.0",
     "description": "wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu",
     "main": "./src/shared/exports.js",
     "type": "module",
@@ -55,7 +55,6 @@
         "@coffeekraken/s-markdown-builder": "^2.0.0",
         "@coffeekraken/s-page-transition-feature": "^2.0.0",
         "@coffeekraken/s-panel-component": "^2.0.0",
-        "@coffeekraken/s-parallax-feature": "^2.0.0",
         "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0",
         "@coffeekraken/s-process": "^2.0.0",
         "@coffeekraken/s-promise": "^2.0.0",
@@ -70,7 +69,6 @@
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/s-sugar-feature": "^2.0.0",
         "@coffeekraken/s-sugar-json": "^2.0.0",
-        "@coffeekraken/s-testinator": "^2.0.0",
         "@coffeekraken/s-theme": "^2.0.0",
         "@coffeekraken/s-timer": "^2.0.0",
         "@coffeekraken/s-type": "^2.0.0",

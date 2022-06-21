@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-postcss-builder",
-    "version": "2.0.0-alpha.0",
+    "version": "2.0.0",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
@@ -19,6 +19,7 @@
         "@coffeekraken/sugar": "^2.0.0",
         "@fullhuman/postcss-purgecss": "^4.0.3",
         "autoprefixer": "^10.2.6",
+        "cssnano": "^5.1.12",
         "csso": "^4.2.0",
         "postcss": "^8.3.5",
         "postcss-atroot": "^0.2.3",

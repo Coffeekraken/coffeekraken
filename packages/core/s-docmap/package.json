@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-docmap",
-    "version": "2.0.0-alpha.0",
+    "version": "2.0.0",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",

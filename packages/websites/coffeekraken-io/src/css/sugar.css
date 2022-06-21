@@ -1,8 +1,11 @@
 @sugar.init;
 @sugar.theme (dark, null, true);
 
+@sugar.classes;
 @sugar.media.classes ('mobile,tablet') {
-    @sugar.classes;
+    @sugar.container.classes;
+    @sugar.grid.classes;
+    @sugar.margin.classes;
 }
 
 @sugar.ui.filtrableinput.classes;

@@ -9,7 +9,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  * @platform      postcss
  * @status        beta
  *
- * This mixin generate all the layout helper classes like s-layout:12, s-container, etc...
+ * This mixin generate all the layout helper classes like s-layout:12, etc...
  *
  * @return        {Css}         The generated css
  *
@@ -49,76 +49,6 @@ export default function ({
 
     const layoutConfig = __STheme.get('layout');
 
-    const containers = layoutConfig.container;
-    Object.keys(containers).forEach((containerName) => {
-        const cls =
-            containerName === 'default'
-                ? `s-container`
-                : `s-container:${containerName}`;
-
-        vars.comment(
-            () => `/**
-      * @name          ${cls}
-      * @namespace          sugar.style.layout
-      * @type               CssClass
-      * @platform       css
-      * @status         beta
-      * 
-      * This class allows you to apply the "<yellow>${containerName}</yellow>" container styling to any HTMLElement
-      * 
-      * @example        html
-      * <div class="${cls.replace(':', ':')}">
-      *     <h1 class="s-h1">Hello world</h1>
-      * </div>
-      */
-    `,
-        ).code(
-            `
-      .${cls.replace(':', '--')} {
-          @sugar.layout.container(${containerName});
-      }`,
-            { type: 'CssClass' },
-        );
-    });
-
-    const grids = layoutConfig.grid;
-    Object.keys(grids).forEach((id) => {
-        const grid = grids[id];
-        vars.comment(
-            () => `
-        /**
-         * @name       s-grid:${id}
-         * @namespace          sugar.style.layout
-         * @type          CssClass
-         * @platform      css
-         * @status      beta
-         * 
-         * This class represent a grid of "<yellow>${id}</yellow> columns"
-         * 
-         * @example     html
-         * <div class="s-container s-grid:${id}">
-         *    ${Array(12)
-             .map((idx) => {
-                 return `<div>I'm the grid item ${idx}</div>`;
-             })
-             .join('\n')}
-        * </div>
-        * 
-        * @since     2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-      `,
-        ).code(
-            `
-        .s-grid--${id} {
-          display: grid;
-          grid-template-columns: repeat(${grid}, minmax(0, 1fr));
-        }
-      `,
-            { type: 'CssClass' },
-        );
-    });
-
     const layouts = layoutConfig.layout;
     Object.keys(layouts).forEach((id) => {
         const layout = layouts[id];
@@ -156,36 +86,6 @@ export default function ({
             { type: 'CssClass' },
         );
     });
-
-    // vars.comment(
-    //         () => `
-    //   /**
-    //    * @name       s-layout:${id}
-    //    * @namespace          sugar.style.layout
-    //    * @type          CssClass
-    //    * @platform      css
-    //    * @status      beta
-    //    *
-    //    * This class represent a layout of "<yellow>${layout}</yellow>"
-    //    *
-    //    * @example     html
-    //    * <div class="s-container s-layout:${id}">
-    //    *    ${Array(colsCount)
-    //        .map((idx) => {
-    //            return `<div>I'm the area ${idx}</div>`;
-    //        })
-    //        .join('\n')}
-    //    * </div>
-    //    *
-    //    * @since     2.0.0
-    //    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //    */
-    //   `,
-    //     ).code(`
-    //   .s-layout--${id} {
-    //     @sugar.layout(${layout}, $scope: bare);
-    //   }
-    // `);
 
     const spaces = __STheme.get('space');
 

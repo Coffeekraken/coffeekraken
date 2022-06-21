@@ -3,26 +3,26 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           container
- * @namespace      node.mixin.layout
+ * @namespace      node.mixin.container
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the css needed for a container depending
- * on the config.theme.layout.container configuration stack
+ * on the config.theme.container.container configuration stack
  *
  * @return        {Css}         The generated css
  *
  * @example        css
  * .my-cool-container {
- *    \@sugar.layout.container;
+ *    \@sugar.container;
  * }
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-class postcssSugarPluginLayoutContainerInterface extends __SInterface {
+class postcssSugarPluginContainerInterface extends __SInterface {
     static get _definition() {
         return {
             name: {
@@ -34,31 +34,35 @@ class postcssSugarPluginLayoutContainerInterface extends __SInterface {
     }
 }
 
-export interface IPostcssSugarPluginLayoutContainerParams {
+export interface IPostcssSugarPluginContainerParams {
     name: string;
 }
 
-export { postcssSugarPluginLayoutContainerInterface as interface };
+export { postcssSugarPluginContainerInterface as interface };
 
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
-    params: Partial<IPostcssSugarPluginLayoutContainerParams>;
+    params: Partial<IPostcssSugarPluginContainerParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
-    const finalParams: IPostcssSugarPluginLayoutContainerParams = {
+    const finalParams: IPostcssSugarPluginContainerParams = {
         name: 'default',
         ...params,
     };
 
-    const vars: string[] = [
+    const vars = new CssVars();
+
+    vars.code(
         `
-    margin: auto;
+        margin: auto;
   `,
-    ];
+    );
 
     const containerConfig = __STheme.get(
         `layout.container.${finalParams.name}`,
@@ -66,12 +70,12 @@ export default function ({
 
     if (!containerConfig) {
         throw new Error(
-            `<red>[mixins.layout.container]</red> Sorry but the requested "<yellow>${finalParams.name}</yellow>" does not exists in the "<cyan>config.theme.layout.container</cyan>" configuration`,
+            `<red>[mixins.container]</red> Sorry but the requested "<yellow>${finalParams.name}</yellow>" does not exists in the "<cyan>config.theme.layout.container</cyan>" configuration`,
         );
     }
 
     Object.keys(containerConfig).forEach((key) => {
-        vars.push(`${key}: ${containerConfig[key]};`);
+        vars.code(`${key}: ${containerConfig[key]};`);
     });
 
     return vars;

@@ -1,8 +1,3 @@
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __path from 'path';
-
-import __SFrontstackCopyActionParamsInterface from '../node/interface/actions/SFrontstackCopyActionParamsInterface';
-
 export default function (env, config) {
     if (env.platform !== 'node') return;
     return {
@@ -653,7 +648,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: 'sugar postcss.build [arguments]',
+                command: 'sugar postcss.build [arguments] --prod',
                 params: {},
                 settings: {
                     processManager: {},

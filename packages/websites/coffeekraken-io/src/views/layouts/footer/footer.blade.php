@@ -27,7 +27,7 @@
 
             <div class="__columns">
                 <div>
-                    <h3 class="s-typo:h5">
+                    <h3 class="s-typo:h5 s-mbe:30">
                         Links
                     </h3>
                     <ol class="s-list:ul s-color:accent">
@@ -49,7 +49,7 @@
                 </div>
 
                 <div>
-                    <h3 class="s-typo:h5">
+                    <h3 class="s-typo:h5 s-mbe:30">
                         Usefull
                     </h3>
                     <ol class="s-list:ul s-color:accent">
@@ -68,7 +68,7 @@
                 </div>
 
                 <div>
-                    <h3 class="s-typo:h5">
+                    <h3 class="s-typo:h5 s-mbe:30">
                         Community
                     </h3>
                     <ol class="s-list:ul s-color:accent">

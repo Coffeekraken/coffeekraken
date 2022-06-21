@@ -1,6 +1,6 @@
 {
     "name": "coco",
-    "version": "2.0.0-alpha.0",
+    "version": "2.0.0",
     "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
     "type": "module",
     "scripts": {

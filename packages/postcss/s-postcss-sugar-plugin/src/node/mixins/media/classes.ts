@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __fs from 'fs';
 
 /**
  * @name           classes
@@ -50,19 +49,18 @@ class postcssSugarPluginMediaClassesMixinInterface extends __SInterface {
                 type: 'String',
                 default: Object.keys(__STheme.get('media.queries')).join(','),
             },
-            mediasOnly: {
-                type: 'Boolean',
-            },
         };
     }
 }
 
 export interface IPostcssSugarPluginMediaMixinClassesParams {
     query: string;
-    mediasOnly: boolean;
 }
 
 export { postcssSugarPluginMediaClassesMixinInterface as interface };
+
+const _mediasObj = {};
+let _postProcessorRegistered = false;
 
 export default function ({
     params,
@@ -71,6 +69,7 @@ export default function ({
     getRoot,
     postcssApi,
     registerPostProcessor,
+    nodesToString,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginMediaMixinClassesParams>;
@@ -79,98 +78,85 @@ export default function ({
     getRoot: Function;
     postcssApi: any;
     registerPostProcessor: Function;
+    nodesToString: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginMediaMixinClassesParams = {
         query: '',
-        mediasOnly: false,
         ...params,
     };
 
     const mediaConfig = __STheme.get('media');
 
     const medias = finalParams.query
-        ? finalParams.query.split(' ').map((l) => l.trim())
+        ? finalParams.query.split(/[\s,\,]/gm).map((l) => l.trim())
         : Object.keys(mediaConfig.queries);
 
-    atRule.replaceWith(`
-        /* S-MEDIA-CLASSES:${medias.join(',')} */
-        ${atRule.nodes.map((node) => node.toString())}
-        /* S-END-MEDIA-CLASSES:${medias.join(',')} */
-    `);
+    medias.forEach((media) => {
+        if (!_mediasObj[media]) {
+            _mediasObj[media] = [];
+        }
+        if (!atRule._sMedia) {
+            atRule._sMedia = [];
+        }
+        if (atRule._sMedia.includes(media)) {
+            return;
+        }
+        atRule._sMedia.push(media);
+        _mediasObj[media].push(atRule);
+        // _mediasObj[media].push(node);
+    });
+    // getRoot(atRule).insertBefore(atRule, node);
 
-    registerPostProcessor((root) => {
-        const mediaNodes: any[] = [];
-        let currentMedias = [];
+    // atRule.replaceWith(`
+    //     /* S-MEDIA-CLASSES:${medias.join(',')} */
+    //     ${nodesToString(atRule.nodes)}
+    //     /* S-MEDIA-CLASSES-END:${medias.join(',')} */
+    // `);
 
-        root.nodes.forEach((node, i) => {
-            if (
-                node.type === 'comment' &&
-                node.text.includes('S-MEDIA-CLASSES:')
-            ) {
-                const medias = node.text
-                    .replace('S-MEDIA-CLASSES:', '')
-                    .split(',')
-                    .map((l) => l.trim());
-                currentMedias = medias;
-                mediaNodes.push({
-                    nodes: [],
-                    medias,
-                });
-            } else if (
-                node.type === 'comment' &&
-                node.text.includes('S-END-MEDIA-CLASSES:')
-            ) {
-                const medias = node.text
-                    .replace('S-END-MEDIA-CLASSES:', '')
-                    .split(',')
-                    .map((l) => l.trim());
-                currentMedias = [];
-            } else if (currentMedias.length) {
-                const mediaNodeObj = mediaNodes.slice(-1)[0];
-                // @ts-ignore
-                mediaNodeObj.nodes.push(node.clone());
-            }
-        });
+    if (!_postProcessorRegistered) {
+        _postProcessorRegistered = true;
 
-        mediaNodes.forEach((mediaObj) => {
-            mediaObj.medias.forEach((media) => {
+        registerPostProcessor((root) => {
+            for (let [media, atRules] of Object.entries(_mediasObj)) {
                 const mediaRule = new postcssApi.AtRule({
                     name: 'media',
                     params: __STheme
                         .buildMediaQuery(media)
                         .replace('@media ', ''),
                 });
-
-                mediaObj.nodes.forEach((node) => {
-                    node = node.clone();
-                    if (node.type === 'comment') return;
-                    if (node.selector === ':root') return;
-                    if (!node.selector) {
-                        mediaRule.append(node);
-                    } else {
-                        let sels = node.selector
-                            .split(',')
-                            .map((l) => l.trim());
-                        sels = sels.map((sel) => {
-                            // sel = sel.replace(/___[a-zA-Z0-9_-]+/gm, '');
-                            const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
-                            if (!selectors) return sel;
-                            selectors.forEach((selector) => {
-                                sel = sel.replace(
-                                    selector,
-                                    `${selector}___${media}`,
+                // @ts-ignore
+                atRules.forEach((atRule) => {
+                    atRule.nodes.forEach((node) => {
+                        node = node.clone();
+                        if (node.type === 'comment') return;
+                        if (node.selector === ':root') return;
+                        if (!node.selector) {
+                            mediaRule.append(node);
+                        } else {
+                            let sels = node.selector
+                                .split(',')
+                                .map((l) => l.trim());
+                            sels = sels.map((sel) => {
+                                const selectors = sel.match(
+                                    /\.[a-zA-Z0-9_-]+/gm,
                                 );
+                                if (!selectors) return sel;
+                                selectors.forEach((selector) => {
+                                    sel = sel.replace(
+                                        selector,
+                                        `${selector}___${media}`,
+                                    );
+                                });
+                                return sel;
                             });
-                            return sel;
-                        });
-                        node.selector = sels.join(',');
-                        mediaRule.append(node);
-                    }
+                            node.selector = sels.join(',');
+                            mediaRule.append(node);
+                        }
+                    });
                 });
-
                 root.append(mediaRule);
-            });
+            }
         });
-    });
+    }
 }

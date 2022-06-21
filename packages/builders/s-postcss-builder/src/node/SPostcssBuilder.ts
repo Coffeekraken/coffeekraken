@@ -11,7 +11,6 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __csso from 'csso';
 import __fs from 'fs';
 import __path from 'path';
 import __postcss from 'postcss';
@@ -116,14 +115,22 @@ export default class SPostcssBuilder extends __SBuilder {
             async ({ resolve, reject, emit }) => {
                 let finalCss;
 
+                console.log('p', params);
+
                 // handle prod shortcut
                 if (params.prod) {
                     params.minify = true;
-                    params.purge = true;
+                    // params.purge = true;
+                    __SSugarConfig.set('postcssSugarPlugin.cache', false);
                     __SSugarConfig.set(
                         'postcssSugarPlugin.excludeCommentByTypes',
                         ['*'],
                     );
+                }
+
+                // minify using cssnano
+                if (params.minify) {
+                    this.settings.postcss.plugins.push('cssnano');
                 }
 
                 // handle input
@@ -467,25 +474,25 @@ export default class SPostcssBuilder extends __SBuilder {
                     finalCss = purgeCssResult[0].css;
                 }
 
-                // minify
-                if (params.minify) {
-                    const minifyDuration = new __SDuration();
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[minify]</yellow> Minifiying css...`,
-                    });
+                // // minify
+                // if (params.minify) {
+                //     const minifyDuration = new __SDuration();
+                //     emit('log', {
+                //         type: __SLog.TYPE_INFO,
+                //         value: `<yellow>[minify]</yellow> Minifiying css...`,
+                //     });
 
-                    finalCss = __csso.minify(finalCss, {
-                        restructure: true,
-                    }).css;
+                //     finalCss = __csso.minify(finalCss, {
+                //         restructure: true,
+                //     }).css;
 
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<green>[minify]</green> Minifiying final css finished <green>successfully</green> in <yellow>${
-                            minifyDuration.end().formatedDuration
-                        }</yellow>`,
-                    });
-                }
+                //     emit('log', {
+                //         type: __SLog.TYPE_INFO,
+                //         value: `<green>[minify]</green> Minifiying final css finished <green>successfully</green> in <yellow>${
+                //             minifyDuration.end().formatedDuration
+                //         }</yellow>`,
+                //     });
+                // }
 
                 if (params.output) {
                     __writeFileSync(params.output, finalCss);

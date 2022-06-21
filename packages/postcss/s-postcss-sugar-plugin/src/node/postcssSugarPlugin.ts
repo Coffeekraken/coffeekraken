@@ -101,7 +101,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             ),
             target: 'production',
             inlineImport: true,
-            cache: true,
+            cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         },
         settings,
     );
@@ -199,6 +199,17 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     //     }
     //     return scopes;
     // }
+
+    function nodesToString(nodes) {
+        return nodes
+            .map((node) => node.toString())
+            .map((l) => l.trim())
+            .map((n) => {
+                if (!n.match(/(\{|\}|\*\/|;)$/)) n += ';';
+                return n;
+            })
+            .join('\n');
+    }
 
     function replaceWith(atRule, nodes) {
         nodes = contentToArray(nodes);
@@ -591,6 +602,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     atRule,
                     findUp,
                     cache,
+                    nodesToString,
                     CssVars: __CssVars,
                     pluginHash,
                     getRoot: __getRoot,

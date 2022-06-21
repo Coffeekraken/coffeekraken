@@ -54,6 +54,8 @@ export default async function ({
 
     const cssArray: string[] = [
         '@sugar.typo.classes;',
+        '@sugar.container.classes;',
+        '@sugar.grid.classes;',
         '@sugar.layout.classes;',
         '@sugar.clearfix.classes;',
         '@sugar.cursor.classes;',

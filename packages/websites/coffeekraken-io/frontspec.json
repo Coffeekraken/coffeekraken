@@ -27,7 +27,7 @@
         "module": {
             "type": "module",
             "defer": true,
-            "src": "/dist/js/module.es.js",
+            "src": "/dist/js/index.esm.js",
             "env": "production"
         },
         "main": {

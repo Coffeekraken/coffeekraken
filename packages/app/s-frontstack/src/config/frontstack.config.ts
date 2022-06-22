@@ -648,7 +648,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: 'sugar postcss.build [arguments] --prod',
+                command: 'sugar postcss.build --prod [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -821,7 +821,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: 'sugar vite.build [arguments]',
+                command: 'sugar vite.build --prod [arguments]',
                 params: {},
                 settings: {
                     processManager: {},

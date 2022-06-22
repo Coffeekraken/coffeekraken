@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import uniqid from '../../../shared/string/uniqid';
 
 /**
  * @name            querySelectorLive
@@ -45,6 +44,7 @@ export interface IQuerySelectorLiveSettings {
 }
 
 let _observer,
+    _idx = 0,
     _stack = new Map();
 
 function querySelectorLive(
@@ -54,7 +54,8 @@ function querySelectorLive(
 ): __SPromise<HTMLElement> {
     let _emit;
 
-    const observerId = `s-query-selector-live-${uniqid()}`;
+    const observerId = `s${_idx}s`;
+    _idx++;
 
     // extend settings
     settings = Object.assign(
@@ -66,88 +67,104 @@ function querySelectorLive(
         settings,
     );
 
-    function _isNodeAlreadyHandledWhenSettingsOnceIsSet($node) {
-        if (settings.once) {
-            if (!$node._querySelectorLiveOverversIds) {
-                $node._querySelectorLiveOverversIds = {};
-            }
-
-            if ($node._querySelectorLiveOverversIds[observerId]) {
+    function _isNodeAlreadyHandledWhenSettingsOnceIsSet(node, stackItem) {
+        if (stackItem.settings.once) {
+            if (
+                node.hasAttribute('s-qsl') &&
+                node.getAttribute('s-qsl').includes(stackItem.observerId)
+            ) {
                 return true;
             }
-            $node._querySelectorLiveOverversIds[observerId] = true;
+            const currentIds = `${node.getAttribute('s-qsl') ?? ''}`
+                .split(',')
+                .filter((l) => l !== '');
+            currentIds.push(stackItem.observerId);
+            node.setAttribute('s-qsl', currentIds.join(','));
         }
         return false;
     }
 
+    function _nodeMatches(node, stackItem) {
+        const isAlreadyGetted = _isNodeAlreadyHandledWhenSettingsOnceIsSet(
+                node,
+                stackItem,
+            ),
+            matchSelector = node.matches(stackItem.selector);
+        return !isAlreadyGetted && matchSelector;
+    }
+
+    function _processNode(node, mutation, stackItem) {
+        if (!node.matches) return;
+
+        // prevent from attributes that does not have really changed
+        if (
+            mutation &&
+            mutation.attribute &&
+            node.getAttribute(mutation.attributeName) === mutation.oldValue
+        ) {
+            return;
+        }
+        if (!_nodeMatches(node, stackItem)) {
+            return;
+        }
+
+        stackItem.cb(node);
+        _emit?.('node', node);
+    }
+
+    function _findAndProcessNodes(stackItem) {
+        const finalSelector = stackItem.selector
+            .split(',')
+            .map((sel) => {
+                if (stackItem.settings.once) {
+                    return `${sel}:not([s-qsl*="${stackItem.observerId}"])`;
+                }
+                return sel;
+            })
+            .join(',');
+
+        [].forEach.call(
+            stackItem.settings.rootNode.querySelectorAll(finalSelector),
+            (node) => {
+                _processNode(node, null, stackItem);
+            },
+        );
+    }
+
     // listen for updates in document
     if (!_observer) {
+        let newSeachTimeout;
         _observer = new MutationObserver((mutations) => {
+            let needNewSearch = false;
+
             mutations.forEach((mutation) => {
                 if (mutation.addedNodes && mutation.addedNodes.length) {
-                    [].forEach.call(mutation.addedNodes, (node) => {
-                        if (!node.matches) return;
-                        for (let [cb, stackItem] of _stack) {
-                            if (
-                                !node.matches(stackItem.selector) ||
-                                _isNodeAlreadyHandledWhenSettingsOnceIsSet(node)
-                            ) {
-                                continue;
-                            }
-                            cb(node);
-                            _emit?.('node', node);
-                            if (stackItem.settings.once) {
-                                _stack.delete(cb);
-                            }
-                        }
-                        const nestedNodes = node.querySelectorAll(selector);
-                        [].forEach.call(nestedNodes, (nestedNode) => {
-                            for (let [cb, stackItem] of _stack) {
-                                if (
-                                    !nestedNode.matches(stackItem.selector) ||
-                                    _isNodeAlreadyHandledWhenSettingsOnceIsSet(
-                                        nestedNode,
-                                    )
-                                ) {
-                                    continue;
-                                }
-                                cb(nestedNode);
-                                _emit?.('node', nestedNode);
-                                if (stackItem.settings.once) {
-                                    _stack.delete(cb);
-                                }
-                            }
-                        });
-                    });
+                    needNewSearch = true;
                 } else if (mutation.attributeName) {
-                    if (!mutation.target.matches) return;
-                    for (let [cb, stackItem] of _stack) {
-                        if (
-                            !mutation.target.matches(stackItem.selector) ||
-                            _isNodeAlreadyHandledWhenSettingsOnceIsSet(
-                                mutation.target,
-                            )
-                        ) {
-                            continue;
-                        }
-                        cb(mutation.target);
-                        _emit?.('node', mutation.target);
-                        if (stackItem.settings.once) {
-                            _stack.delete(cb);
-                        }
-                    }
+                    needNewSearch = true;
                 }
             });
+
+            if (needNewSearch) {
+                clearTimeout(newSeachTimeout);
+                // newSeachTimeout = setTimeout(() => {
+                for (let [cb, stackItem] of _stack) {
+                    _findAndProcessNodes(stackItem);
+                }
+                // });
+            }
         });
         _observer.observe(document, {
             childList: true,
             subtree: true,
             attributes: true,
+            attributeOldValue: true,
             attributeFilter: ['class', 'id'],
         });
     }
 
     const mapItem = {
+        observerId,
         selector,
         cb,
         settings,
@@ -156,15 +173,8 @@ function querySelectorLive(
         _stack.set(cb, mapItem);
     }
 
-    // first search
-    [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {
-        if (!node.matches) return;
-        if (_isNodeAlreadyHandledWhenSettingsOnceIsSet(node)) {
-            return;
-        }
-        cb(node);
-        _emit?.('node', node);
-    });
+    // first query
+    _findAndProcessNodes(mapItem);
 
     return new __SPromise(({ resolve, reject, emit }) => {
         _emit = emit;

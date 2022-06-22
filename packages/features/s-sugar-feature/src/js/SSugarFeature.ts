@@ -103,9 +103,13 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
     _scrolled() {
         document.addEventListener('scroll', (e) => {
             if (window.scrollY >= this.props.scrolledDelta) {
-                document.body.classList.add('scrolled');
+                if (!document.body.classList.contains('scrolled')) {
+                    document.body.classList.add('scrolled');
+                }
             } else {
-                document.body.classList.remove('scrolled');
+                if (document.body.classList.contains('scrolled')) {
+                    document.body.classList.remove('scrolled');
+                }
             }
         });
     }

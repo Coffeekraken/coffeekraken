@@ -11,6 +11,7 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __unquote from '@coffeekraken/sugar/shared/string/unquote';
@@ -199,6 +200,19 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     //     }
     //     return scopes;
     // }
+
+    function compressVarName(name) {
+        const md5 = __md5.encrypt(name);
+        const dict = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        const sum = md5.split('').reduce((a, b) => {
+            return a + dict.indexOf(b);
+        }, 0);
+        const compressed = md5
+            .split('')
+            .filter((char, i) => !(i % 5))
+            .join('');
+        return `--s${sum}${compressed}`;
+    }
 
     function nodesToString(nodes) {
         return nodes
@@ -533,31 +547,25 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 __writeFileSync(cachePath, toCacheStr);
             });
 
-            // root.walkComments((comment) => {
-            //     if (comment.text.trim().match(/FROMCACHE:[a-zA-Z0-9@\._-]+/)) {
+            // compress --s-theme-... variables
+            root.walkDecls((node) => {
+                if (node.variable) {
+                    if (node.prop.match(/--s-theme/)) {
+                        const compressedProp = compressVarName(node.prop);
+                        node.prop = compressedProp;
+                    }
+                }
 
-            //         const parts = comment.text.split(':').map(l => l.trim());
-
-            //         const cacheHash = parts[1];
-            //         const cacheId = parts[2];
-            //         const fileName = `${cacheHash}.css`;
-            //         const cacheUrl = getCacheFilePath(cacheHash);
-
-            //         const cachedCss = __fs.readFileSync(cacheUrl).toString();
-
-            //         // let newRule = __postcss.parse(`@import "${cacheUrl}";`);
-            //         // if (settings.target === 'vite') {
-            //         //     newRule = __postcss.parse(`@import url("${cacheUrl}");`);
-            //         // }
-
-            //         root.append(cachedCss);
-
-            //         // comment.remove();
-            //         // root.prepend(newRule);
-
-            //         // comment.replaceWith(newRule);
-            //     }
-            // });
+                const valueMatches = node.value.match(/--s-theme-[^,\)]+/gm);
+                if (valueMatches) {
+                    valueMatches.forEach((match) => {
+                        node.value = node.value.replace(
+                            match,
+                            compressVarName(match),
+                        );
+                    });
+                }
+            });
 
             __SBench.end('postcssSugarPlugin').log({
                 body: `File: <cyan>${__path.relative(

@@ -162,7 +162,12 @@ export default class SPostcssBuilder extends __SBuilder {
                         )}</cyan>`,
                     });
                 }
-                if (params.saveDev && params.output) {
+                if (
+                    params.saveDev &&
+                    params.output &&
+                    !params.minify &&
+                    !params.purge
+                ) {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>○</yellow> Output dev  : <cyan>${__path.relative(
@@ -300,7 +305,12 @@ export default class SPostcssBuilder extends __SBuilder {
                 finalCss = result.css;
 
                 // saveDev
-                if (params.saveDev && params.output) {
+                if (
+                    params.saveDev &&
+                    params.output &&
+                    !params.minify &&
+                    !params.purge
+                ) {
                     __writeFileSync(
                         params.output.replace(/\.css$/, '.dev.css'),
                         finalCss,

@@ -44,7 +44,7 @@ export default function expandPleasantCssClassnamesLive(
         },
         {
             rootNode: settings?.rootNode,
-            once: false,
+            once: true,
         },
     );
 }

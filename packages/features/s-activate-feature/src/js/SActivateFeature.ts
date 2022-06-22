@@ -103,10 +103,12 @@ export default class SActivateFeature extends __SFeature {
         this.componentUtils.handleState(this.state, {
             save: this.props.saveState,
         });
-        this.componentUtils.handleState(this.groupState, {
-            save: this.props.saveState,
-            id: `s-activate-feature-group-${this.props.group}`,
-        });
+        if (this.props.group) {
+            this.componentUtils.handleState(this.groupState, {
+                save: this.props.saveState,
+                id: `s-activate-feature-group-${this.props.group}`,
+            });
+        }
 
         if (this.props.triggerer) {
             this._$triggerers = Array.from(
@@ -249,7 +251,10 @@ export default class SActivateFeature extends __SFeature {
     }
 
     _restoreState() {
-        if (this.groupState.activeId === this.node.id) {
+        if (
+            this.groupState.activeId &&
+            this.groupState.activeId === this.node.id
+        ) {
             return this.activate({
                 force: true,
             });
@@ -264,7 +269,7 @@ export default class SActivateFeature extends __SFeature {
             });
         }
 
-        if (this.state.active === undefined && this.props.active) {
+        if (this.state.active) {
             return this.activate({
                 force: true,
             });

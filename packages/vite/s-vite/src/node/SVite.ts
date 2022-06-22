@@ -37,7 +37,7 @@ export interface ISViteBuildParams {
     watch: boolean;
     verbose: boolean;
     target: string;
-    format: ('es' | 'umd' | 'cjs' | 'iife')[];
+    format: ('esm' | 'umd' | 'cjs' | 'iife')[];
     type: ('module' | 'modules' | 'lib' | 'bundle')[];
     chunks: boolean;
     bundle: boolean;
@@ -289,7 +289,7 @@ export default class SVite extends __SClass {
                                 break;
                             case 'module':
                             case 'lib':
-                                finalFormats = ['es'];
+                                finalFormats = ['esm'];
                                 break;
                         }
                     }
@@ -305,11 +305,7 @@ export default class SVite extends __SClass {
                                 ...(config.build.rollupOptions.output ?? {}),
                             }),
                         );
-                        outputsFilenames.push(
-                            `${
-                                buildType === 'bundle' ? 'index' : buildType
-                            }.${format}.js`,
-                        );
+                        outputsFilenames.push(`index.${format}.js`);
                     });
 
                     emit('log', {
@@ -345,7 +341,7 @@ export default class SVite extends __SClass {
                     });
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Format(s)   : ${finalFormats.join(
+                        value: `<yellow>○</yellow> Format      : ${finalFormats.join(
                             ',',
                         )}`,
                     });

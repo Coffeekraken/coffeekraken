@@ -2,10 +2,13 @@
     <div class="s-container">
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div>
-                <img class="__illustration s-when:light" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
+                <div class="illustration">
+                    <img s-inline src="/dist/img/illustrations/stack.svg" />
+                </div>
+                {{-- <img class="__illustration s-when:light" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
                     title="Sugar stack" />
                 <img class="__illustration s-when:dark" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
-                    title="Sugar stack" />
+                    title="Sugar stack" /> --}}
             </div>
             <div class="s-pb:100">
                 <h3 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-tc:accent">development<br>stack</span></h3>

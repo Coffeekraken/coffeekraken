@@ -13,6 +13,7 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
+        "@coffeekraken/s-color": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/s-lit-component": "^2.0.0",
         "@coffeekraken/s-theme": "^2.0.0",

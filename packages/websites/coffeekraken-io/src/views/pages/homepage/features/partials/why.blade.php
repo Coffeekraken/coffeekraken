@@ -41,9 +41,8 @@
                     <i class="s-icon:github"></i> Browse our codebase
                 </a>
             </div>
-            <div>
-                <img class="__illustration" src="/dist/img/illustrations/opensource.png" alt="Coffeekraken open source"
-                    title="Coffeekraken believe in open source" />
+            <div class="__illustration">
+                <img class="illustration" s-inline src="/dist/img/illustrations/opensource.svg" />
             </div>
         </div>
 

@@ -1,0 +1,15 @@
+.illustration,
+svg.illustration {
+    *[fill='#FFBB01'] {
+        fill: sugar.color(accent) !important;
+    }
+    *[stroke='#FFBB01'] {
+        stroke: sugar.color(accent) !important;
+    }
+    *[fill='#5100FF'] {
+        fill: sugar.color(error) !important;
+    }
+    *[stroke='#5100FF'] {
+        stroke: sugar.color(error) !important;
+    }
+}

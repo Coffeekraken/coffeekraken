@@ -161,11 +161,14 @@ export default class SFeature extends __SClass implements ISFeature {
         this.node = node;
 
         // assign props
-        this.props = this.componentUtils.handleProps(this.node.attributes, {
-            interface:
-                this.settings.interface ??
-                this.settings.componentUtils?.interface,
-        });
+        this.props = this.componentUtils.handleProps(
+            {},
+            {
+                interface:
+                    this.settings.interface ??
+                    this.settings.componentUtils?.interface,
+            },
+        );
 
         (async () => {
             // @ts-ignore

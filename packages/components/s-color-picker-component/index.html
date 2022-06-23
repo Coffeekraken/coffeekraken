@@ -9,16 +9,17 @@
     <body>
         <script type="module">
             import __css from './src/css/dev.css';
-            import { define } from './src/js/index.ts';
-
+            import { define } from './src/js/exports.ts';
             define();
         </script>
-        <s-color-picker value="#ffff00"></s-color-picker>
+        <s-color-picker value="#ffff00">
+            <input type="text" />
+        </s-color-picker>
 
-        <s-color-picker no-preview>
+        <!-- <s-color-picker no-preview>
             <input type="text" class="s-input" value="#ff000f" />
         </s-color-picker>
 
-        <s-color-picker no-input> </s-color-picker>
+        <s-color-picker no-input> </s-color-picker> -->
     </body>
 </html>

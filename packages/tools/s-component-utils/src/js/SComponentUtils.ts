@@ -222,22 +222,25 @@ export default class SComponentUtils extends __SClass {
         for (let [prop, definition] of Object.entries(
             PropsInterface.definition,
         )) {
-            if (this.node.getAttribute(__dashCase(prop)) !== null) {
-                let rawValue = this.node.getAttribute(__dashCase(prop)),
+            const camelProp = __camelCase(prop),
+                dashProp = __dashCase(prop);
+            if (this.node.getAttribute(dashProp) !== null) {
+                let rawValue = this.node.getAttribute(dashProp),
                     value = rawValue;
                 if (rawValue === null || rawValue.trim() === '') {
                     value = true;
                 } else {
                     value = value;
                 }
-                finalProps[prop] = value;
+                finalProps[camelProp] = value;
+            } else if (props[camelProp] !== undefined) {
+                finalProps[camelProp] = props[camelProp];
             } else {
-                finalProps[__camelCase(prop)] = definition.default;
+                finalProps[camelProp] = definition.default;
             }
         }
 
         finalProps = PropsInterface.apply(finalProps);
-
         const _this = this;
 
         const _props = Object.assign({}, finalProps);
@@ -289,7 +292,13 @@ export default class SComponentUtils extends __SClass {
         };
 
         // init props
-        props = this.initProps(props, finalSettings);
+        props = this.initProps(
+            {
+                ...SComponentUtils.getDefaultProps(this.name.toLowerCase()),
+                ...props,
+            },
+            finalSettings,
+        );
 
         // init responsive props
         if (finalSettings.responsive) {

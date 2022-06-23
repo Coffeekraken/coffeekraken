@@ -64,6 +64,16 @@ export interface ISColorSettings {
     defaultFormat: 'hex' | 'rgb' | 'rgba' | 'hsl' | 'hsla';
 }
 
+export interface ISColorObject {
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+    h: number;
+    s: number;
+    l: number;
+}
+
 class SColor extends __SClass {
     /**
      * @name                colors
@@ -281,7 +291,10 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(color: string, settings?: Partial<ISColorSettings>) {
+    constructor(
+        color: string | Partial<ISColorObject>,
+        settings?: Partial<ISColorSettings>,
+    ) {
         // save the instance settings
         super(
             __deepMerge(
@@ -297,9 +310,21 @@ class SColor extends __SClass {
         // save the original color
         this._originalSColor = color;
 
-        // parse the input color to
-        // split into rgba values
-        this._parse(color);
+        if (typeof color === 'string') {
+            // parse the input color to
+            // split into rgba values
+            this._parse(color);
+        } else {
+            // we assume that the passed color is an object of type ISColorObject
+            // so we construct our color from this
+            if (color.r !== undefined) this.r = color.r;
+            if (color.g !== undefined) this.g = color.g;
+            if (color.b !== undefined) this.b = color.b;
+            if (color.a !== undefined) this.a = color.a;
+            if (color.h !== undefined) this.h = color.h;
+            if (color.s !== undefined) this.s = color.s;
+            if (color.l !== undefined) this.l = color.l;
+        }
     }
 
     /**
@@ -912,6 +937,36 @@ class SColor extends __SClass {
         else if (this.l > 100) this.l = 100;
 
         return this;
+    }
+
+    /**
+     * @name                  toObject
+     * @type                  Function
+     *
+     * To simple json object. This object can be injected in the constructor to recover the same color
+     *
+     * @return 	            {object} 	              	The object representation of the color (r,g,b,a,h,s,l)
+     *
+     * @example           js
+     * myColor.toObject();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    toObject() {
+        return {
+            r: this.r,
+            g: this.b,
+            b: this.b,
+            a: this.a,
+            h: this.h,
+            s: this.s,
+            l: this.l,
+            hex: this.toHexString(),
+            rgb: this.toRgbString(),
+            rgba: this.toRgbaString(),
+            hsl: this.toHslString(),
+            hsla: this.toHslaString(),
+        };
     }
 
     /**

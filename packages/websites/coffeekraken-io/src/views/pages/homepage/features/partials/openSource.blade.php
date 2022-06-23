@@ -25,9 +25,13 @@
                         <i class="s-icon:github"></i> Join us on Github
                     </a>
                 </div>
-                <div class="s-text:center @mobile s-mbs:50">
-                    <img class="__illustration" src="/dist/img/illustrations/opensource.png"
+                <div class="__illustration @mobile s-mbs:50">
+                    {{-- <img class="__illustration" src="/dist/img/illustrations/opensource.png"
                         alt="Coffeekraken open source" title="Coffeekraken believe in open source" />
+
+                         --}}
+
+                    <img class="illustration" s-inline src="/dist/img/illustrations/opensource.svg" />
 
                     {{-- <input type="range" class="s-range s-color:accent" min="0" max="100" value="0" /> --}}
 

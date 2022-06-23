@@ -1,3 +1,6 @@
+body {
+}
+
 s-color-picker {
     display: inline-block;
     position: relative;
@@ -17,23 +20,107 @@ s-color-picker {
     .s-color-picker {
         display: flex;
         width: 100%;
+        min-width: 350px;
     }
 
-    .pcr-app {
+    .s-color-picker__picker {
         position: absolute !important;
         top: 100%;
         right: 0;
         left: auto;
     }
 
-    [dir='rtl'] & .pcr-app,
-    &[dir='rtl'] .pcr-app {
-        right: auto;
+    .s-color-picker__chest {
+        position: absolute;
+        top: 0;
         left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.05;
+        z-index: -1;
+        pointer-events: none;
+
+        &:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                #000 0,
+                #000 10px,
+                #fff 10px,
+                #fff 20px
+            );
+            background-position: 50% 50%;
+            z-index: -1;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                #000 0,
+                #000 10px,
+                #fff 10px,
+                #fff 20px
+            );
+            background-position: 50% 50%;
+            mix-blend-mode: difference;
+            z-index: -1;
+        }
     }
 
-    .pickr {
-        display: none;
+    .s-color-picker__selectors {
+        display: flex;
+        aspect-ratio: 16/9;
+        gap: sugar.margin(20);
+    }
+
+    .s-color-picker__shade-wrapper {
+        position: relative;
+        width: calc(100% - 60px - sugar.margin(20) * 2);
+        height: 100%;
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .s-color-picker__hue-wrapper {
+        position: relative;
+        width: 30px;
+        height: 100%;
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .s-color-picker__alpha-wrapper {
+        position: relative;
+        width: 30px;
+        height: 100%;
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    [dir='rtl'] & .s-color-picker__picker,
+    &[dir='rtl'] .s-color-picker__picker {
+        right: auto;
+        left: 0;
     }
 
     &:not([input]):not([button]) .s-color-picker {
@@ -43,6 +130,13 @@ s-color-picker {
 }
 
 s-color-picker[lnf='default'] {
+    .s-color-picker__shade-wrapper,
+    .s-color-picker__hue-wrapper,
+    .s-color-picker__alpha-wrapper {
+        border-radius: sugar.border.radius();
+        overflow: hidden;
+    }
+
     .s-color-picker__button {
         padding-inline: sugar.padding(ui.colorPicker.paddingInline);
         padding-block: sugar.padding(ui.colorPicker.paddingBlock);

@@ -3,7 +3,7 @@
 import __hsla2rgba from './hsla2rgba';
 import __parse from './parse';
 import __rgba2hex from './rgba2hex';
-import __rgba2hsl from './rgba2hsla';
+import __rgba2hsla from './rgba2hsla';
 
 /**
  * @name                  convert
@@ -56,15 +56,21 @@ function convert(input, format = 'rgba') {
         case 'rgba':
             return rgbaObj;
         case 'hsl':
-            return __rgba2hsl(rgbaObj);
+        case 'hsla':
+            return __rgba2hsla(rgbaObj);
         case 'hex':
         case 'hexString':
             return __rgba2hex(rgbaObj);
+        case 'rgbString':
+            return `rgb(${rgbaObj.r},${rgbaObj.g},${rgbaObj.b})`;
         case 'rgbaString':
             return `rgba(${rgbaObj.r},${rgbaObj.g},${rgbaObj.b},${rgbaObj.a})`;
         case 'hslString':
             const hslObj = convert(rgbaObj, 'hsl');
             return `hsl(${hslObj.h},${hslObj.s},${hslObj.l})`;
+        case 'hslaString':
+            const hslaObj = convert(rgbaObj, 'hsla');
+            return `hsla(${hslaObj.h},${hslaObj.s},${hslaObj.l},${hslaObj.a})`;
     }
 
     // if nothing supported

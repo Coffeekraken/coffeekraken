@@ -29,7 +29,6 @@ const descriptor: ISTypeDescriptor = {
         if (value !== false && params && params.nullishAsTrue && !value) {
             return true;
         }
-
         if (typeof value === 'boolean') return value;
         if (value === null || value === undefined) return false;
         if (typeof value === 'number') {

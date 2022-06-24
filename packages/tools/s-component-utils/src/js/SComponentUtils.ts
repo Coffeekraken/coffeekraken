@@ -26,6 +26,7 @@ export interface ISComponentUtilsSettings {
 
 export interface ISComponentUtilsStateSettings {
     save: boolean;
+    onUpdate: Function;
     id: string;
 }
 
@@ -351,7 +352,16 @@ export default class SComponentUtils extends __SClass {
                     },
                     set(value) {
                         if (_state[key] !== value) {
-                            _state[key] = value;
+                            let finalValue = value;
+                            if (finalStateSettings.onUpdate) {
+                                finalValue =
+                                    finalStateSettings.onUpdate({
+                                        value,
+                                        key,
+                                    }) ?? value;
+                            }
+
+                            _state[key] = finalValue;
 
                             if (preventSave) {
                                 preventSave = false;

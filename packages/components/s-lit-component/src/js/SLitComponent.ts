@@ -24,12 +24,13 @@ export interface ISLitComponentDefaultProps {
     lnf: string;
     mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
+    saveState: boolean;
     defaultStyle: boolean;
 }
 
 export default class SLitComponent extends LitElement {
     /**
-     * @name            _settings
+     * @name            settings
      * @type            Object
      * @private
      *
@@ -38,7 +39,7 @@ export default class SLitComponent extends LitElement {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _settings = {};
+    settings = {};
 
     /**
      * @name            props
@@ -49,7 +50,7 @@ export default class SLitComponent extends LitElement {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    props: any;
+    props: any = {};
     componentUtils: __SComponentUtils;
     _shouldUpdate = false;
 
@@ -71,125 +72,6 @@ export default class SLitComponent extends LitElement {
      */
     static setDefaultProps(selector: string | string[], props: any): void {
         __SComponentUtils.setDefaultProps(selector, props);
-    }
-
-    /**
-     * @name            constructor
-     * @type            Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    constructor(settings: Partial<ISLitComponentSettings> = {}) {
-        super();
-
-        this.settings = __deepMerge(
-            {
-                componentUtils: {},
-                shadowDom: true,
-                get rootNode() {
-                    return this.shadowRoot?.querySelector('*:first-child');
-                },
-            },
-            settings,
-        );
-
-        // shadow handler
-        if (this.settings.shadowDom === false) {
-            this.createRenderRoot = () => {
-                return this;
-            };
-        }
-
-        // @ts-ignore
-        const nodeFirstUpdated = this.firstUpdated?.bind(this);
-        // @ts-ignore
-        this.firstUpdated = async () => {
-            if (nodeFirstUpdated) {
-                await nodeFirstUpdated();
-            }
-            // set the component as mounted
-            // @ts-ignore
-            this.props.mounted = true;
-        };
-
-        // litElement shouldUpdate
-        // @ts-ignore
-        const nodeShouldUpdate = this.shouldUpdate?.bind(this);
-        // @ts-ignore
-        this.shouldUpdate = () => {
-            if (nodeShouldUpdate) {
-                const res = nodeShouldUpdate();
-                if (!res) return false;
-            }
-            return this._shouldUpdate;
-        };
-
-        setTimeout(async () => {
-            const _this = this,
-                defaultProps = __SComponentUtils.getDefaultProps(
-                    this.tagName.toLowerCase(),
-                );
-
-            let properties = this.constructor.properties;
-            if (!properties) {
-                properties = this.constructor.createProperties();
-            }
-
-            // this.state stack
-            this._state = Object.assign({}, this.state ?? {});
-            this.state = {};
-            for (let [prop, value] of Object.entries(this._state)) {
-                Object.defineProperty(this.state, prop, {
-                    get() {
-                        return _this._state[prop];
-                    },
-                    set(value) {
-                        _this._state[prop] = value;
-                        _this.requestUpdate();
-                    },
-                });
-            }
-
-            this.componentUtils = new __SComponentUtils(this, {
-                ...(this.settings ?? {}),
-                ...(this.settings.componentUtils ?? {}),
-                style:
-                    this.constructor.styles?.cssText ??
-                    this.settings.style ??
-                    this.settings.componentUtils?.style ??
-                    '',
-            });
-
-            // this.props stack
-            this.props = {};
-            for (let [prop, obj] of Object.entries(properties)) {
-                Object.defineProperty(this.props, prop, {
-                    enumerable: true,
-                    get() {
-                        return _this[prop];
-                    },
-                    set(value) {
-                        _this[prop] = value;
-                    },
-                });
-
-                // default props
-                if (this[prop] === undefined) {
-                    this[prop] = defaultProps[prop] ?? obj.default;
-                }
-            }
-            // make props responsive
-            this.componentUtils.makePropsResponsive(this.props);
-
-            await this.componentUtils.waitAndExecute(
-                this.props.mountWhen,
-                this._mount.bind(this),
-            );
-        });
     }
 
     static createProperties(properties: any, int: __SInterface): any {
@@ -273,6 +155,87 @@ export default class SLitComponent extends LitElement {
     }
 
     /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    constructor(settings: Partial<ISLitComponentSettings> = {}) {
+        super();
+
+        this.settings = __deepMerge(
+            {
+                componentUtils: {},
+                shadowDom: true,
+                get rootNode() {
+                    return this.shadowRoot?.querySelector('*:first-child');
+                },
+            },
+            settings,
+        );
+
+        // shadow handler
+        if (this.settings.shadowDom === false) {
+            this.createRenderRoot = () => {
+                return this;
+            };
+        }
+
+        // @ts-ignore
+        const nodeFirstUpdated = this.firstUpdated?.bind(this);
+        // @ts-ignore
+        this.firstUpdated = async () => {
+            if (nodeFirstUpdated) {
+                await nodeFirstUpdated();
+            }
+            // set the component as mounted
+            // @ts-ignore
+            this.props.mounted = true;
+        };
+
+        // litElement shouldUpdate
+        // @ts-ignore
+        const nodeShouldUpdate = this.shouldUpdate?.bind(this);
+        // @ts-ignore
+        this.shouldUpdate = () => {
+            if (nodeShouldUpdate) {
+                const res = nodeShouldUpdate();
+                if (!res) return false;
+            }
+            return this._shouldUpdate;
+        };
+
+        this.componentUtils = new __SComponentUtils(this, {
+            ...(this.settings ?? {}),
+            ...(this.settings.componentUtils ?? {}),
+            style:
+                this.constructor.styles?.cssText ??
+                this.settings.style ??
+                this.settings.componentUtils?.style ??
+                '',
+        });
+
+        (async () => {
+            const defaultProps = __SComponentUtils.getDefaultProps(
+                this.tagName.toLowerCase(),
+            );
+            const mountWhen =
+                this.getAttribute('mount-when') ??
+                defaultProps.mountWhen ??
+                'direct';
+            // wait until mount
+            await this.componentUtils.waitAndExecute(
+                mountWhen,
+                this._mount.bind(this),
+            );
+        })();
+    }
+
+    /**
      * @name            mount
      * @type            Function
      * @async
@@ -284,6 +247,61 @@ export default class SLitComponent extends LitElement {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     async _mount() {
+        const _this = this,
+            defaultProps = __SComponentUtils.getDefaultProps(
+                this.tagName.toLowerCase(),
+            );
+
+        let properties = this.constructor.properties;
+        if (!properties) {
+            properties = this.constructor.createProperties();
+        }
+
+        // this.props stack
+        let finalProps = {};
+        for (let [prop, obj] of Object.entries(properties)) {
+            Object.defineProperty(this.props, prop, {
+                enumerable: true,
+                get() {
+                    return _this[prop];
+                },
+                set(value) {
+                    _this[prop] = value;
+                },
+            });
+
+            let attrValue = this.getAttribute(__dashCase(prop));
+            if (attrValue !== null) {
+                if (attrValue === '') attrValue = true;
+                finalProps[prop] = attrValue;
+            }
+
+            // default props
+            if (finalProps[prop] === undefined && this[prop] === undefined) {
+                finalProps[prop] = defaultProps[prop] ?? obj.default;
+            }
+        }
+
+        if (this.settings.interface) {
+            finalProps = this.settings.interface.apply(finalProps);
+            Object.assign(this.props, finalProps);
+        }
+
+        // make props responsive
+        this.componentUtils.makePropsResponsive(this.props);
+
+        // handle state if needed
+        if (this.state) {
+            const _this = this;
+            this.componentUtils.handleState(this.state, {
+                save: this.props.saveState,
+                onUpdate({ key, value }) {
+                    _this.requestUpdate();
+                },
+            });
+        }
+
+        // custom mount function
         if (this.mount && typeof this.mount === 'function') {
             await this.mount();
         }

@@ -15,7 +15,14 @@ export interface ISColorPickerComponentProps {
     name: string;
     value: string;
     placeholder: string;
-    theme: 'nano' | 'monolith';
+    updateInput: (
+        | 'pointerdown'
+        | 'pointerup'
+        | 'pointermove'
+        | 'input'
+        | 'validate'
+        | 'close'
+    )[];
     input: boolean;
     button: boolean;
     position: 'top' | 'bottom';
@@ -133,12 +140,9 @@ export default class SColorPicker extends __SLitComponent {
     }
 
     state = {
-        hueR: 0,
-        hueG: 0,
-        hueB: 0,
-        r: 0,
-        g: 0,
-        b: 0,
+        h: 0,
+        s: 0,
+        l: 0,
         a: 1,
     };
 
@@ -157,6 +161,8 @@ export default class SColorPicker extends __SLitComponent {
     _hueColor;
     _color;
 
+    _isInInteraction = false;
+
     constructor() {
         super(
             __deepMerge({
@@ -164,18 +170,15 @@ export default class SColorPicker extends __SLitComponent {
                 interface: __SColorPickerComponentInterface,
             }),
         );
-
+    }
+    async mount() {
         this._$input = this.querySelector('input');
         this._hasInput = this._$input !== null;
         this._$button = this.querySelector('button');
         this._hasButton = this._$button !== null;
 
-        this._hueColor = new __SColor({
-            r: this.state.hueR,
-            g: this.state.hueG,
-            b: this.state.hueB,
-        });
-        this._color = new __SColor(this.state);
+        this._hueColor = new __SColor('#000');
+        this._color = new __SColor('#000');
     }
     async firstUpdated() {
         this._$root = this.querySelector(
@@ -240,145 +243,15 @@ export default class SColorPicker extends __SLitComponent {
         //     __STheme.applyCurrentColor(e.target.value, this._$root);
         // });
 
-        const value = this.props.value ?? this._$input?.value ?? '#ff0000';
-        // const pickr = __Pickr.create({
-        //     el: this.querySelector(
-        //         `.${this.componentUtils.className('__picker')}`,
-        //     ),
-        //     theme: 'nano', // or 'monolith', or 'nano'
-        //     container: this._$root,
-        //     default: value,
-        //     inline: true,
-        //     // autoReposition: false,
-        //     comparison: false,
-        //     swatches: [],
-        //     components: {
-        //         preview: true,
-        //         opacity: true,
-        //         hue: true,
-        //         interaction: {
-        //             hex: true,
-        //             rgba: true,
-        //             hsla: true,
-        //             // hsva: true,
-        //             // cmyk: true,
-        //             input: true,
-        //             clear: true,
-        //             // save: true
-        //         },
-        //     },
-        // });
-
-        // const $preview = this.querySelector('.pcr-button');
-        // if ($preview) {
-        //     $preview.innerHTML = `
-        //         ${
-        //             this.colorIcon
-        //                 ? `
-        //             ${this.colorIcon}
-        //         `
-        //                 : `
-        //             <i class="s-icon s-icon--color"></i>
-        //         `
-        //         }
-        //     `;
-        // }
-
-        // function getPickrState() {
-        //     const color = pickr.getColor();
-        //     const hsla = color.toHSLA(),
-        //         hsva = color.toHSVA(),
-        //         rgba = color.toRGBA(),
-        //         hex = color.toHEXA(),
-        //         cmyk = color.toCMYK();
-
-        //     return {
-        //         isOpened: pickr.isOpen(),
-        //         hsla: {
-        //             h: hsla[0],
-        //             s: hsla[1],
-        //             l: hsla[2],
-        //             a: hsla[3],
-        //             string: `hsla(${hsla[0]},${hsla[1]},${hsla[2]},${hsla[3]})`,
-        //         },
-        //         hsva: {
-        //             h: hsva[0],
-        //             s: hsva[1],
-        //             v: hsva[2],
-        //             a: hsva[3],
-        //             string: `hsva(${hsva[0]},${hsva[1]},${hsva[2]},${hsva[3]})`,
-        //         },
-        //         rgba: {
-        //             r: rgba[0],
-        //             g: rgba[1],
-        //             b: rgba[2],
-        //             a: rgba[3],
-        //             string: `rgba(${rgba[0]},${rgba[1]},${rgba[2]},${rgba[3]})`,
-        //         },
-        //         hex: hex.toString(),
-        //         cmyk: {
-        //             c: cmyk[0],
-        //             m: cmyk[1],
-        //             y: cmyk[2],
-        //             k: cmyk[3],
-        //             string: `cmyk(${cmyk[0]},${cmyk[1]},${cmyk[2]},${cmyk[3]})`,
-        //         },
-        //     };
-        // }
-
-        // __STheme.applyCurrentColor(value, this._$root);
-
-        // pickr.on('change', () => {
-        //     pickr.applyColor();
-        //     const detail = getPickrState();
-
-        //     const change = new CustomEvent('change', {
-        //         bubbles: true,
-        //         detail,
-        //     });
-
-        //     if (this._$input) {
-        //         this._$input.value = detail.hex;
-        //     }
-        //     this.dispatchEvent(change);
-
-        //     __STheme.applyCurrentColor(detail.hex, this._$root);
-        // });
-        // pickr.on('show', () => {
-        //     const detail = getPickrState();
-        //     const change = new CustomEvent('show', {
-        //         detail,
-        //     });
-        //     this.dispatchEvent(change);
-        // });
-        // pickr.on('hide', () => {
-        //     const detail = getPickrState();
-        //     const change = new CustomEvent('hide', {
-        //         detail,
-        //     });
-        //     this.dispatchEvent(change);
-        // });
-        // pickr.on('cancel', () => {
-        //     const detail = getPickrState();
-        //     const change = new CustomEvent('cancel', {
-        //         detail,
-        //     });
-        //     this.dispatchEvent(change);
-        // });
-
-        // if (this._$input) {
-        //     this._$input.addEventListener('focus', () => {
-        //         pickr.show();
-        //     });
-        //     this._$input.addEventListener('change', () => {
-        //         pickr.setColor(this._$input.value);
-        //     });
-        // }
-        // if (this._$button) {
-        //     this._$button.addEventListener('focus', () => {
-        //         pickr.show();
-        //     });
-        // }
+        const value = this.props.value ?? this._$input?.value;
+        if (value) {
+            this._color = new __SColor(value);
+        } else {
+            this._color.h = this.state.h;
+            this._color.s = this.state.s;
+            this._color.l = this.state.l;
+            this._color.a = this.state.a;
+        }
 
         // init hue selector
         this._initHueSelector();
@@ -391,19 +264,49 @@ export default class SColorPicker extends __SLitComponent {
 
         // init selection interactions
         this._initSelectionInteractions();
+
+        // restore state
+        this._restoreState();
     }
 
-    /**
-     * This method simply take the color getted from the canvas picker in rgba format
-     */
-    _applyColorToState() {
-        // Object.assign(this.state, this._hueColor.toObject());
+    _updateInput(
+        step:
+            | 'pointerdown'
+            | 'pointerup'
+            | 'pointermove'
+            | 'input'
+            | 'validate'
+            | 'close',
+    ) {
+        if (!this.props.updateInput.includes(step)) {
+            return;
+        }
+        console.log('update', this._color.toHex());
     }
 
-    _getPixelFrom($elm, ctx, event) {
+    _restoreState() {
+        this._setAlpha(this._color.a);
+        this._setHue(this._color.h);
+        this._setShade(this._color.s, this._color.l);
+
+        // const hueBounds = this._$hue.getBoundingClientRect();
+        // const pos = {
+        //     x: hueBounds.left,
+        //     y:
+        //         hueBounds.top +
+        //         Math.round(
+        //             hueBounds.height -
+        //                 (hueBounds.height / 100) * this.state.hue,
+        //         ),
+        // };
+        // const pixel = this._getPixelFrom(this._$hue, this._hueCtx, pos);
+        // this._setHueColorFromPixel(pixel);
+    }
+
+    _getPixelFrom($elm, ctx, pos) {
         const bounds = $elm.getBoundingClientRect();
-        let x = event.clientX - bounds.left;
-        let y = event.clientY - bounds.top;
+        let x = pos.x - bounds.left;
+        let y = pos.y - bounds.top;
         const pixel = ctx.getImageData(x, y, 1, 1)['data']; // Read pixel Color
         return pixel;
     }
@@ -415,58 +318,69 @@ export default class SColorPicker extends __SLitComponent {
         let isShadeDown = false;
         this._$shade.addEventListener('pointerdown', (e) => {
             isShadeDown = true;
-            const pixel = this._getPixelFrom(this._$shade, this._shadeCtx, e);
-            this._setColorFromPixel(pixel);
+            this._isInInteraction = true;
             this._$shade.setPointerCapture(e.pointerId);
+            this._setShadeFromEvent(e, true);
+            this._updateInput('pointerdown');
+            this.requestUpdate();
         });
         this._$shade.addEventListener('pointerup', (e) => {
             isShadeDown = false;
+            this._isInInteraction = false;
             this._$shade.releasePointerCapture(e.pointerId);
+            this._setShadeFromEvent(e, true);
+            this._updateInput('pointerup');
+            this.requestUpdate();
         });
         this._$shade.addEventListener('pointermove', (e) => {
             if (!isShadeDown) return;
-            const pixel = this._getPixelFrom(this._$shade, this._shadeCtx, e);
-            this._setColorFromPixel(pixel);
+            this._setShadeFromEvent(e, true);
+            this._updateInput('pointermove');
         });
 
         let isAlphaDown = false;
         this._$alpha.addEventListener('pointerdown', (e) => {
             isAlphaDown = true;
-            this._setAlphaFromEvent(e);
+            this._isInInteraction = true;
             this._$alpha.setPointerCapture(e.pointerId);
+            this._setAlphaFromEvent(e);
+            this._updateInput('pointerdown');
+            this.requestUpdate();
         });
         this._$alpha.addEventListener('pointerup', (e) => {
             isAlphaDown = false;
+            this._isInInteraction = false;
             this._$alpha.releasePointerCapture(e.pointerId);
+            this._setAlphaFromEvent(e, true);
+            this._updateInput('pointerup');
+            this.requestUpdate();
         });
         this._$alpha.addEventListener('pointermove', (e) => {
             if (!isAlphaDown) return;
             this._setAlphaFromEvent(e);
+            this._updateInput('pointermove');
         });
     }
 
     /**
      * This method simply take a pixel and assign it as the new selected color
      */
-    _setColorFromPixel(pixel) {
-        this._color.r = pixel[0];
-        this._color.g = pixel[1];
-        this._color.b = pixel[2];
+    _setHueFromEvent(e, saveState = false) {
+        const bounds = e.target.getBoundingClientRect();
+        const y = e.clientY - bounds.top;
+        const pY = 100 - Math.round((100 / bounds.height) * y);
+        // apply the opacity to the shade selector
+        let hue = 360 - Math.round((360 / 100) * pY);
 
-        this._applyColorToState();
-        // update the component
-        this.requestUpdate();
-    }
+        // constraint
+        if (hue < 0) hue = 0;
+        if (hue > 360) hue = 360;
 
-    /**
-     * This method simply take a pixel and assign it as the new selected color
-     */
-    _setHueColorFromPixel(pixel) {
-        this._hueColor.r = pixel[0];
-        this._hueColor.g = pixel[1];
-        this._hueColor.b = pixel[2];
+        this._setHue(hue);
+        if (saveState) {
+            this.state.h = hue;
+        }
 
-        this._applyColorToState();
         // update the shade canvas with the new color
         this._updateShadeCanvas();
         // update the alpha selector
@@ -474,16 +388,70 @@ export default class SColorPicker extends __SLitComponent {
         // update the component
         this.requestUpdate();
     }
+    _setHue(h: number): void {
+        this._color.h = h;
+        this.style.setProperty('--s-color-picker-h', h);
+    }
+
+    /**
+     * Apply the shade (saturation and lightness) when choosing it from the selector
+     */
+    _setShadeFromEvent(e, toState = false) {
+        const bounds = e.target.getBoundingClientRect();
+        const y = e.clientY - bounds.top,
+            x = e.clientX - bounds.left;
+        let pY = 100 - Math.round((100 / bounds.height) * y),
+            pX = Math.round((100 / bounds.width) * x);
+
+        // constraint
+        if (pY < 0) pY = 0;
+        if (pY > 100) pY = 100;
+        if (pX < 0) pX = 0;
+        if (pX > 100) pX = 100;
+
+        this._setShade(pX, pY);
+        if (toState) {
+            this.state.s = pX;
+            this.state.l = pY;
+        }
+
+        // update the shade canvas with the new color
+        this._updateShadeCanvas();
+        // update the component
+        this.requestUpdate();
+    }
+    _setShade(s: number, l: number): void {
+        this._color.s = s;
+        this._color.l = l;
+        // apply the --s-color-picker-a css variable
+        this.style.setProperty('--s-color-picker-s', s);
+        this.style.setProperty('--s-color-picker-l', l);
+    }
 
     /**
      * Apply the alpha when choosing it from the selector
      */
-    _setAlphaFromEvent(e) {
+    _setAlphaFromEvent(e, saveState = false) {
         const bounds = e.target.getBoundingClientRect();
         const y = e.clientY - bounds.top;
-        const pY = 100 - Math.round((100 / bounds.height) * y);
+        let pY = 100 - Math.round((100 / bounds.height) * y);
+
+        // contraints
+        if (pY < 0) pY = 0;
+        if (pY > 100) pY = 100;
+
         // apply the opacity to the shade selector
-        this._$shade.style.opacity = pY / 100;
+        this._setAlpha(pY / 100);
+
+        // save to state if needed
+        if (saveState) {
+            this.state.a = pY / 100;
+        }
+    }
+    _setAlpha(a: number): void {
+        this._$shade.style.opacity = a;
+        // apply the --s-color-picker-a css variable
+        this.style.setProperty('--s-color-picker-a', a);
     }
 
     /**
@@ -515,18 +483,24 @@ export default class SColorPicker extends __SLitComponent {
         let isHueDown = false;
         this._$hue.addEventListener('pointerdown', (e) => {
             isHueDown = true;
-            const pixel = this._getPixelFrom(this._$hue, this._hueCtx, e);
-            this._setHueColorFromPixel(pixel);
+            this._isInInteraction = true;
+            this.requestUpdate();
             this._$hue.setPointerCapture(e.pointerId);
+            this._setHueFromEvent(e, true);
+            this._updateInput('pointerdown');
         });
         this._$hue.addEventListener('pointerup', (e) => {
             isHueDown = false;
+            this._isInInteraction = false;
+            this.requestUpdate();
             this._$hue.releasePointerCapture(e.pointerId);
+            this._setHueFromEvent(e, true);
+            this._updateInput('pointerup');
         });
         this._$hue.addEventListener('pointermove', (e) => {
             if (!isHueDown) return;
-            const pixel = this._getPixelFrom(this._$hue, this._hueCtx, e);
-            this._setHueColorFromPixel(pixel);
+            this._setHueFromEvent(e);
+            this._updateInput('pointermove');
         });
     }
 
@@ -562,15 +536,19 @@ export default class SColorPicker extends __SLitComponent {
      * This method take care of updating the canvas with the good gradients depending on the picker state
      */
     _updateShadeCanvas() {
-        var color = this._hueColor.toRgbString();
         let gradientH = this._shadeCtx.createLinearGradient(
             0,
             0,
             this._shadeCtx.canvas.width,
             0,
         );
+
+        const newColor = this._color.clone();
+        newColor.s = 100;
+        newColor.l = 50;
+
         gradientH.addColorStop(0, '#fff');
-        gradientH.addColorStop(1, color);
+        gradientH.addColorStop(1, newColor.toHex());
         this._shadeCtx.fillStyle = gradientH;
         this._shadeCtx.fillRect(
             0,
@@ -597,7 +575,8 @@ export default class SColorPicker extends __SLitComponent {
             <div
                 class="${this.componentUtils.className(
                     '',
-                )} ${this.componentUtils.className('')}--${this.props.position}"
+                )} ${this.componentUtils.className('')}--${this.props
+                    .position} ${this._isInInteraction ? 'is-interacting' : ''}"
             >
                 ${!this._hasInput && this.props.input
                     ? html`

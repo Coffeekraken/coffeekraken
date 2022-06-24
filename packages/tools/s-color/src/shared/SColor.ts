@@ -2,9 +2,9 @@
 
 import __SClass from '@coffeekraken/s-class';
 import __convert from '@coffeekraken/sugar/shared/color/convert';
+import __hsla2hex from '@coffeekraken/sugar/shared/color/hsla2hex';
 import __hsla2rgba from '@coffeekraken/sugar/shared/color/hsla2rgba';
-import __rgba2hex from '@coffeekraken/sugar/shared/color/rgba2hex';
-import __rgba2hsl from '@coffeekraken/sugar/shared/color/rgba2hsla';
+import __rgba2hsla from '@coffeekraken/sugar/shared/color/rgba2hsla';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface';
 import __SColorSettingsInterface from './interface/SColorSettingsInterface';
@@ -240,6 +240,39 @@ class SColor extends __SClass {
     _originalSColor = null;
 
     /**
+     * @name            _h
+     * @type            Number
+     * @private
+     *
+     * Internal hue value
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _h = 0;
+
+    /**
+     * @name            _s
+     * @type            Number
+     * @private
+     *
+     * Internal saturation value
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _s = 0;
+
+    /**
+     * @name            _l
+     * @type            Number
+     * @private
+     *
+     * Internal lightness value
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _l = 0;
+
+    /**
      * @name            _r
      * @type            Number
      * @private
@@ -248,7 +281,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _r = null;
+    _r = 0;
 
     /**
      * @name                _g
@@ -259,7 +292,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _g = null;
+    _g = 0;
 
     /**
      * @name                  _b
@@ -270,7 +303,7 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _b = null;
+    _b = 0;
 
     /**
      * @name              _a
@@ -313,17 +346,41 @@ class SColor extends __SClass {
         if (typeof color === 'string') {
             // parse the input color to
             // split into rgba values
+            console.log('parse', color);
             this._parse(color);
         } else {
             // we assume that the passed color is an object of type ISColorObject
             // so we construct our color from this
-            if (color.r !== undefined) this.r = color.r;
-            if (color.g !== undefined) this.g = color.g;
-            if (color.b !== undefined) this.b = color.b;
-            if (color.a !== undefined) this.a = color.a;
-            if (color.h !== undefined) this.h = color.h;
-            if (color.s !== undefined) this.s = color.s;
-            if (color.l !== undefined) this.l = color.l;
+            if (
+                color.h !== undefined &&
+                color.s !== undefined &&
+                color.l !== undefined
+            ) {
+                this._h = color.h;
+                this._s = color.s;
+                this._l = color.l;
+                this._a = color.a ?? 1;
+            } else if (
+                color.r !== undefined &&
+                color.g !== undefined &&
+                color.b !== undefined
+            ) {
+                const converted = __rgba2hsla(
+                    color.r,
+                    color.g,
+                    color.b,
+                    color.a ?? 1,
+                );
+                this._h = converted.h;
+                this._s = converted.s;
+                this._l = converted.l;
+                this._a = converted.a;
+            } else {
+                console.error(color);
+                throw new Error(
+                    'Sorry but this passed value is not a valid color object or string...',
+                );
+            }
         }
     }
 
@@ -358,12 +415,14 @@ class SColor extends __SClass {
      */
     _parse(color) {
         // parse the color
-        color = __convert(color, 'rgba');
+        color = __convert(color, 'hsla');
+
+        console.log('co', color);
 
         // assign new color values
-        this.r = color.r;
-        this.g = color.g;
-        this.b = color.b;
+        this.h = color.h;
+        this.s = color.s;
+        this.l = color.l;
         this.a = color.a;
 
         // return the parsed color
@@ -390,19 +449,19 @@ class SColor extends __SClass {
         switch (format) {
             case 'rgba':
             case 'rgb':
-                return {
-                    r: this.r,
-                    g: this.g,
-                    b: this.b,
-                    a: this.a,
-                };
+                return __hsla2rgba(this._h, this._s, this._l, this._a);
                 break;
             case 'hsla':
             case 'hsl':
-                return __rgba2hsl(this.r, this.g, this.b, this.a);
+                return {
+                    h: this._h,
+                    s: this._s,
+                    l: this._l,
+                    a: this._a,
+                };
                 break;
             case 'hex':
-                return __rgba2hex(this.r, this.g, this.b, this.a);
+                return __hsla2hex(this._h, this._s, this._l, this._a);
                 break;
         }
     }
@@ -508,9 +567,12 @@ class SColor extends __SClass {
         return this._r;
     }
     set r(value) {
+        // protect
         value = parseInt(value);
         value = value > 255 ? 255 : value < 0 ? 0 : value;
+        // apply
         this._r = value;
+        this._applyFromRgbaUpdate();
     }
 
     /**
@@ -529,9 +591,12 @@ class SColor extends __SClass {
         return this._g;
     }
     set g(value) {
+        // protect
         value = parseInt(value);
         value = value > 255 ? 255 : value < 0 ? 0 : value;
+        // apply
         this._g = value;
+        this._applyFromRgbaUpdate();
     }
 
     /**
@@ -550,9 +615,12 @@ class SColor extends __SClass {
         return this._b;
     }
     set b(value) {
+        // protect
         value = parseInt(value);
         value = value > 255 ? 255 : value < 0 ? 0 : value;
+        // apply
         this._b = value;
+        this._applyFromRgbaUpdate();
     }
 
     /**
@@ -577,29 +645,27 @@ class SColor extends __SClass {
     }
 
     /**
-     * @name              l
+     * @name              h
      * @type              Number
      *
-     * The luminence value
+     * Get/set the hue
      *
-     * @example             js
-     * myColor.l;
-     * myColor.l = 10;
+     * @example         js
+     * myColor.h;
+     * myColor.h = 30;
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get l() {
-        return this._convert2('hsl').l;
+    get h() {
+        return this._h;
     }
-    set l(value) {
-        const hsl = this._convert2('hsl');
+    set h(value) {
+        // protect
         value = parseInt(value);
-        value = value > 100 ? 100 : value < 0 ? 0 : value;
-        hsl.l = value;
-        const rgba = __hsla2rgba(hsl.h, hsl.s, hsl.l);
-        this.r = rgba.r;
-        this.g = rgba.g;
-        this.b = rgba.b;
+        value = value > 360 ? 360 : value < 0 ? 0 : value;
+        // apply
+        this._h = value;
+        this._applyFromHslaUpdate();
     }
 
     /**
@@ -615,43 +681,60 @@ class SColor extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get s() {
-        return this._convert2('hsl').s;
+        return this._s;
     }
     set s(value) {
-        const hsl = this._convert2('hsl');
+        // protect
         value = parseInt(value);
         value = value > 100 ? 100 : value < 0 ? 0 : value;
-        hsl.s = value;
-        const rgba = __hsla2rgba(hsl.h, hsl.s, hsl.l);
-        this.r = rgba.r;
-        this.g = rgba.g;
-        this.b = rgba.b;
+        // apply
+        this._s = value;
+        this._applyFromHslaUpdate();
     }
 
     /**
-     * @name              h
+     * @name              l
      * @type              Number
      *
-     * Get/set the hue
+     * The luminence value
      *
-     * @example         js
-     * myColor.h;
-     * myColor.h = 30;
+     * @example             js
+     * myColor.l;
+     * myColor.l = 10;
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get h() {
-        return this._convert2('hsl').h;
+    get l() {
+        return this._l;
     }
-    set h(value) {
-        const hsl = this._convert2('hsl');
+    set l(value) {
+        // protect
         value = parseInt(value);
-        value = value > 360 ? 360 : value < 0 ? 0 : value;
-        hsl.h = value;
-        const rgba = __hsla2rgba(hsl.h, hsl.s, hsl.l);
-        this.r = rgba.r;
-        this.g = rgba.g;
-        this.b = rgba.b;
+        value = value > 100 ? 100 : value < 0 ? 0 : value;
+        // apply
+        this._l = value;
+        this._applyFromHslaUpdate();
+    }
+
+    /**
+     * @name          clone
+     * @type          Function
+     *
+     * Clone the SColor instance
+     *
+     * @example         js
+     * myColor.clone();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    clone() {
+        const newColor = new SColor({
+            h: this._h,
+            s: this._s,
+            l: this._l,
+            a: this._a,
+        });
+        return newColor;
     }
 
     /**
@@ -668,6 +751,23 @@ class SColor extends __SClass {
     reset() {
         // parse again the color
         this._parse(this._originalSColor);
+    }
+
+    _applyFromHslaUpdate() {
+        // convert
+        const rgba = __hsla2rgba(this._h, this._s, this._l, this._a);
+        this._r = rgba.r;
+        this._g = rgba.g;
+        this._b = rgba.b;
+        this._a = rgba.a;
+    }
+    _applyFromRgbaUpdate() {
+        // convert
+        const hsla = __rgba2hsla(this._r, this._g, this._b, this._a);
+        this._h = hsla.h;
+        this._s = hsla.s;
+        this._l = hsla.l;
+        this._a = hsla.a;
     }
 
     /**
@@ -734,7 +834,7 @@ class SColor extends __SClass {
     desaturate(amount, returnNewInstance = this.settings.returnNewInstance) {
         amount = parseInt(amount);
         if (returnNewInstance) {
-            const n = new SColor(this.toHex());
+            const n = this.clone();
             n.s -= amount;
             return n;
         }
@@ -760,7 +860,7 @@ class SColor extends __SClass {
     saturate(amount, returnNewInstance = this.settings.returnNewInstance) {
         amount = parseInt(amount);
         if (returnNewInstance) {
-            const n = new SColor(this.toHex());
+            const n = this.clone();
             n.s += amount;
             return n;
         }
@@ -784,7 +884,7 @@ class SColor extends __SClass {
      */
     grayscale(returnNewInstance = this.settings.returnNewInstance) {
         if (returnNewInstance) {
-            const n = new SColor(this.toHex());
+            const n = this.clone();
             n.s = 0;
             return n;
         }
@@ -815,7 +915,7 @@ class SColor extends __SClass {
             newHue -= 360;
         }
         if (returnNewInstance) {
-            const n = new SColor(this.toHex());
+            const n = this.clone();
             n.h = newHue;
             return n;
         }
@@ -841,7 +941,7 @@ class SColor extends __SClass {
     alpha(alpha, returnNewInstance = this.settings.returnNewInstance) {
         alpha = parseFloat(alpha);
         if (returnNewInstance) {
-            const n = new SColor(this.toHex());
+            const n = this.clone();
             n.a = alpha;
             return n;
         }
@@ -867,7 +967,7 @@ class SColor extends __SClass {
     darken(amount, returnNewInstance = this.settings.returnNewInstance) {
         amount = parseInt(amount);
         if (returnNewInstance) {
-            const n = new SColor(this.toHex());
+            const n = this.clone();
             n.l -= amount;
             return n;
         }
@@ -895,7 +995,7 @@ class SColor extends __SClass {
     lighten(amount, returnNewInstance = this.settings.returnNewInstance) {
         amount = parseInt(amount);
         if (returnNewInstance) {
-            const n = new SColor(this.toHex());
+            const n = this.clone();
             n.l += amount;
             return n;
         }
@@ -926,7 +1026,7 @@ class SColor extends __SClass {
         }
 
         if (returnNewInstance) {
-            const n = new SColor(this.toHex());
+            const n = this.clone();
             n.l = lightness;
             return n;
         } else {

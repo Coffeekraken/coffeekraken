@@ -47,6 +47,12 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 default: true,
                 physical: true,
             },
+            saveState: {
+                description:
+                    'Specify if you want to save the state of your component',
+                type: 'Boolean',
+                default: false,
+            },
             lnf: {
                 description:
                     'Specify the lnf (look-and-feel) of your component. This is used by the css to style your component',

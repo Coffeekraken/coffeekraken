@@ -25,6 +25,7 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function parseRgba(rgbaString) {
+    console.log('dddd', rgbaString);
     rgbaString = rgbaString.toLowerCase();
     const string = rgbaString
         .replace('rgba(', '')
@@ -32,6 +33,7 @@ function parseRgba(rgbaString) {
         .replace(')', '')
         .replace(/\s/g, '');
     const array = string.split(',');
+    console.log(array);
     return {
         r: parseInt(array[0]),
         g: parseInt(array[1]),

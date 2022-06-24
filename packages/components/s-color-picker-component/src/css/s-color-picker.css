@@ -21,6 +21,10 @@ s-color-picker {
         display: flex;
         width: 100%;
         min-width: 350px;
+
+        &.is-interacting * {
+            cursor: none !important;
+        }
     }
 
     .s-color-picker__picker {
@@ -36,7 +40,7 @@ s-color-picker {
         left: 0;
         width: 100%;
         height: 100%;
-        opacity: 0.05;
+        opacity: 0.02;
         z-index: -1;
         pointer-events: none;
 
@@ -88,6 +92,7 @@ s-color-picker {
         position: relative;
         width: calc(100% - 60px - sugar.margin(20) * 2);
         height: 100%;
+        cursor: all-scroll;
 
         canvas {
             width: 100%;
@@ -99,6 +104,7 @@ s-color-picker {
         position: relative;
         width: 30px;
         height: 100%;
+        cursor: row-resize;
 
         canvas {
             width: 100%;
@@ -110,10 +116,54 @@ s-color-picker {
         position: relative;
         width: 30px;
         height: 100%;
+        cursor: row-resize;
 
         canvas {
             width: 100%;
             height: 100%;
+        }
+    }
+
+    .s-color-picker__hue-wrapper,
+    .s-color-picker__alpha-wrapper {
+        &:after {
+            content: '';
+            display: block;
+            width: calc(100%);
+            height: 5px;
+            background: red;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            pointer-events: none;
+        }
+    }
+    .s-color-picker__hue-wrapper {
+        &:after {
+            top: calc((100 / 360 * var(--s-color-picker-h, 0)) * 1%);
+        }
+    }
+    .s-color-picker__alpha-wrapper {
+        &:after {
+            top: calc(100% - var(--s-color-picker-a, 0) * 100 * 1%);
+        }
+    }
+
+    .s-color-picker__shade-wrapper {
+        &:after {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: red;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            top: calc(100% - var(--s-color-picker-l, 0) * 1%);
+            left: calc(var(--s-color-picker-s, 0) * 1%);
+            pointer-events: none;
         }
     }
 
@@ -135,6 +185,39 @@ s-color-picker[lnf='default'] {
     .s-color-picker__alpha-wrapper {
         border-radius: sugar.border.radius();
         overflow: hidden;
+
+        &:after {
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            background: none;
+            border: solid 10px sugar.color(main, surface);
+            border-color: white;
+            transition: border-width 0.15s ease-in-out;
+            @sugar.depth (10);
+        }
+    }
+    .s-color-picker__shade-wrapper {
+        &:after {
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            background: none;
+            border: solid 10px sugar.color(main, surface);
+            border-color: white;
+            transition: border-width 0.15s ease-in-out;
+            @sugar.depth (10);
+        }
+    }
+
+    .s-color-picker.is-interacting {
+        .s-color-picker__hue-wrapper,
+        .s-color-picker__alpha-wrapper,
+        .s-color-picker__shade-wrapper {
+            &:after {
+                border-width: 3px;
+            }
+        }
     }
 
     .s-color-picker__button {

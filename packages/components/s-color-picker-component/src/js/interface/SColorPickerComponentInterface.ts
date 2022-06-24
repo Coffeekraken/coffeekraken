@@ -32,18 +32,35 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 description: 'Specify the initial value for your picker',
                 type: 'String',
             },
+            updateInput: {
+                description:
+                    'Specify when you want to updat the attached input. Can be "pointermove", "pointerup", "pointerdown", "input", "validate", "close"',
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [','],
+                },
+                values: [
+                    'pointerdown',
+                    'pointerup',
+                    'pointermove',
+                    'input',
+                    'validate',
+                    'close',
+                ],
+                default: [
+                    'pointerdown',
+                    'pointerup',
+                    'pointermove',
+                    'input',
+                    'validate',
+                    'close',
+                ],
+            },
             placeholder: {
                 description:
                     "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
                 type: 'String',
                 default: 'Select a color',
-            },
-            theme: {
-                description:
-                    'Specify the theme you want to use for this picker',
-                type: 'String',
-                values: ['nano', 'monolith'],
-                default: 'nano',
             },
             input: {
                 description:
@@ -52,8 +69,7 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 default: false,
             },
             button: {
-                description:
-                    'Specify if you want to display the button or not',
+                description: 'Specify if you want to display the button or not',
                 type: 'Boolean',
                 default: false,
                 physical: true,
@@ -74,7 +90,7 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 description: 'Specify if the color picker is disabled',
                 type: 'Boolean',
                 default: false,
-            }
+            },
         };
     }
 }

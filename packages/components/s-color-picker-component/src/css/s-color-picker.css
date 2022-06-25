@@ -30,8 +30,27 @@ s-color-picker {
     .s-color-picker__picker {
         position: absolute !important;
         top: 100%;
-        right: 0;
-        left: auto;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        background: sugar.color(base, background);
+        pointer-events: none;
+        opacity: 0;
+    }
+    &[inline] .s-color-picker__picker {
+        position: unset;
+        top: unset;
+        left: unset;
+        background: unset;
+        pointer-events: all;
+        opacity: 1;
+    }
+
+    &:focus-within {
+        .s-color-picker__picker {
+            opacity: 1;
+            pointer-events: all;
+        }
     }
 
     .s-color-picker__chest {
@@ -40,8 +59,8 @@ s-color-picker {
         left: 0;
         width: 100%;
         height: 100%;
-        opacity: 0.02;
-        z-index: -1;
+        opacity: 0.01;
+        /* z-index: -1; */
         pointer-events: none;
 
         &:before {
@@ -84,39 +103,32 @@ s-color-picker {
 
     .s-color-picker__selectors {
         display: flex;
-        aspect-ratio: 16/9;
         gap: sugar.margin(20);
+        height: 215px;
     }
 
     .s-color-picker__shade-wrapper {
         position: relative;
-        width: calc(100% - 60px - sugar.margin(20) * 2);
-        height: 100%;
+        /* width: calc(100% - 60px - sugar.margin(20) * 2); */
+        /* height: 100%; */
+        aspect-ratio: 16/9;
         cursor: all-scroll;
+        flex-grow: 1;
 
         canvas {
             width: 100%;
             height: 100%;
+            position: relative;
         }
     }
 
-    .s-color-picker__hue-wrapper {
-        position: relative;
-        width: 30px;
-        height: 100%;
-        cursor: row-resize;
-
-        canvas {
-            width: 100%;
-            height: 100%;
-        }
-    }
-
+    .s-color-picker__hue-wrapper,
     .s-color-picker__alpha-wrapper {
         position: relative;
         width: 30px;
-        height: 100%;
         cursor: row-resize;
+        flex-grow: 0;
+        flex-shrink: 0;
 
         canvas {
             width: 100%;
@@ -145,6 +157,12 @@ s-color-picker {
         }
     }
     .s-color-picker__alpha-wrapper {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+
         &:after {
             top: calc(100% - var(--s-color-picker-a, 0) * 100 * 1%);
         }
@@ -167,6 +185,56 @@ s-color-picker {
         }
     }
 
+    .s-color-picker__btn,
+    .s-color-picker__input {
+        padding: sugar.padding(20) sugar.padding(30);
+    }
+
+    .s-color-picker__metas {
+        display: flex;
+
+        .s-color-picker__btn {
+            flex-grow: 0;
+        }
+    }
+
+    .s-color-picker__actions {
+        display: flex;
+        padding-block-start: sugar.padding(20);
+        gap: sugar.margin(20);
+
+        button {
+            flex-grow: 1;
+            text-align: center;
+        }
+    }
+
+    .s-color-picker__input {
+        flex-shrink: 1;
+        flex-grow: 1;
+    }
+
+    .s-color-picker__preview {
+        background: red;
+        width: 40px;
+        flex-shrink: 0;
+        flex-grow: 0;
+        cursor: pointer;
+        background-color: hsla(
+            var(--s-color-picker-h),
+            calc(var(--s-color-picker-s) * 1%),
+            calc(var(--s-color-picker-l) * 1%),
+            var(--s-color-picker-a)
+        );
+
+        i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
     [dir='rtl'] & .s-color-picker__picker,
     &[dir='rtl'] .s-color-picker__picker {
         right: auto;
@@ -180,6 +248,20 @@ s-color-picker {
 }
 
 s-color-picker[lnf='default'] {
+    color: sugar.color(text);
+
+    .s-color-picker__picker {
+        @sugar.depth (100);
+        background: sugar.color(base, background);
+        padding: sugar.padding(30);
+        overflow: hidden;
+        border-radius: sugar.border.radius();
+    }
+    &[inline] .s-color-picker__picker {
+        box-shadow: none;
+        padding: 0;
+    }
+
     .s-color-picker__shade-wrapper,
     .s-color-picker__hue-wrapper,
     .s-color-picker__alpha-wrapper {
@@ -220,7 +302,55 @@ s-color-picker[lnf='default'] {
         }
     }
 
-    .s-color-picker__button {
+    .s-color-picker__metas {
+        padding-block-start: sugar.padding(20);
+
+        .s-color-picker__btn {
+            background: sugar.color(current, --darken 20);
+            color: sugar.color(current, foreground);
+            font-size: 0.8em;
+
+            &:first-child {
+                border-top-left-radius: sugar.border.radius();
+                border-bottom-left-radius: sugar.border.radius();
+            }
+            &:last-child {
+                border-top-right-radius: sugar.border.radius();
+                border-bottom-right-radius: sugar.border.radius();
+            }
+
+            &.active {
+                background: sugar.color(current);
+            }
+        }
+    }
+
+    .s-color-picker__actions {
+        .s-color-picker__btn {
+            background: sugar.color(current);
+            color: sugar.color(current, foreground);
+            border-radius: sugar.border.radius();
+        }
+    }
+
+    .s-color-picker__input {
+        border: solid 1px sugar.color(current, border);
+        border-right: none;
+    }
+    .s-color-picker__preview {
+        position: relative;
+        border: solid 1px sugar.color(current, border);
+        border-left: none;
+        border-top-right-radius: sugar.border.radius();
+        border-bottom-right-radius: sugar.border.radius();
+
+        i {
+            color: white;
+            font-size: 0.8em;
+        }
+    }
+
+    /* .s-color-picker__button {
         padding-inline: sugar.padding(ui.colorPicker.paddingInline);
         padding-block: sugar.padding(ui.colorPicker.paddingBlock);
         cursor: pointer;
@@ -258,5 +388,5 @@ s-color-picker[lnf='default'] {
                 ui.colorPicker.borderRadius
             );
         }
-    }
+    } */
 }

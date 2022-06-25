@@ -1,6 +1,10 @@
-@sugar.init ($variant: dark);
-/* @sugar.classes; */
+@sugar.init();
+@sugar.classes();
 
 .s-panel__container {
     max-width: 400px;
 }
+
+@sugar.icon.classes (
+    fa:copy:copy
+);

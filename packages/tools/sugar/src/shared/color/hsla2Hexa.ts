@@ -2,7 +2,7 @@
 import * as __convertColors from 'colors-convert';
 
 /**
- * @name              hsla2hex
+ * @name              hsla2hexa
  * @namespace            js.color
  * @type              Function
  * @platform          js
@@ -22,18 +22,19 @@ import * as __convertColors from 'colors-convert';
  * @todo      tests
  *
  * @example         js
- * import hsla2hex from '@coffeekraken/sugar/js/color/hsla2hex';
- * hsla2hex(10,20,30);
+ * import hsla2hexa from '@coffeekraken/sugar/js/color/hsla2hexa';
+ * hsla2hexa(10,20,30,1);
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function hsla2hex(h, s, l, a = 1) {
+export default function hsla2hexa(h, s, l, a = 1) {
     const hex = __convertColors.hslaToHex({
         h,
         s,
         l,
-        a,
+        a: 1,
     });
-    return hex.slice(0, -2);
+    console.log('ff');
+    return hex;
 }

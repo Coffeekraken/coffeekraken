@@ -56,6 +56,30 @@ export default class SColorPickerComponentInterface extends __SInterface {
                     'close',
                 ],
             },
+            format: {
+                description:
+                    'Specify the format of the color you want as end in the input value. Can be "hex", "hexa", "rgb", "rgba", "hsl" or "hsla"',
+                type: 'String',
+                values: ['hex', 'hexa', 'rgb', 'rgba', 'hsl', 'hsla'],
+                default: 'hex',
+            },
+            inline: {
+                description:
+                    'Specify if you want to initalize the color picker inline or if you want it to be displayed only when the focus is in the input',
+                type: 'Boolean',
+                default: false,
+                physical: true,
+            },
+            i18n: {
+                description:
+                    'Specify some translations for the color picker. You can translate the "reset", "clear" and "validate" buttons',
+                type: 'Object',
+                default: {
+                    reset: 'Reset',
+                    clear: 'Clear',
+                    validate: 'Validate',
+                },
+            },
             placeholder: {
                 description:
                     "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
@@ -80,6 +104,12 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 type: 'String',
                 values: ['top', 'bottom'],
                 default: 'bottom',
+            },
+            copyClass: {
+                description:
+                    'Specify the class you want to apply on the "i" that display the "copy" icon',
+                type: 'String',
+                default: 's-icon s-icon--copy',
             },
             swatches: {
                 description: 'Specify some colors you want in your swatches',

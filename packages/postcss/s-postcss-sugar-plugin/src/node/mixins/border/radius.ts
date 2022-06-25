@@ -60,6 +60,6 @@ export default function ({
     };
 
     const vars = new CssVars();
-    vars.code('border-radius: sugar.border.radius(${finalParams.radius});');
+    vars.code(`border-radius: sugar.border.radius(${finalParams.radius});`);
     return vars;
 }

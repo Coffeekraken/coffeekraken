@@ -23,8 +23,11 @@ export interface ISColorPickerComponentProps {
         | 'validate'
         | 'close'
     )[];
+    format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla';
+    inline: boolean;
     input: boolean;
     button: boolean;
+    copyClass: string;
     position: 'top' | 'bottom';
     swatches: string[];
     disabled: boolean;
@@ -144,6 +147,8 @@ export default class SColorPicker extends __SLitComponent {
         s: 0,
         l: 0,
         a: 1,
+        metasFormat: 'hex',
+        value: undefined,
     };
 
     _hasInput = false;
@@ -170,13 +175,12 @@ export default class SColorPicker extends __SLitComponent {
                 interface: __SColorPickerComponentInterface,
             }),
         );
-    }
-    async mount() {
         this._$input = this.querySelector('input');
         this._hasInput = this._$input !== null;
         this._$button = this.querySelector('button');
         this._hasButton = this._$button !== null;
-
+    }
+    async mount() {
         this._hueColor = new __SColor('#000');
         this._color = new __SColor('#000');
     }
@@ -219,18 +223,6 @@ export default class SColorPicker extends __SLitComponent {
             this._$input?.setAttribute('autocomplete', 'off');
         }
 
-        // button
-        if (!this._$button) {
-            this._$button = this.querySelector('button');
-        } else {
-            this._$root.append(this._$button);
-        }
-        if (this._$button) {
-            this._$button.classList.add(
-                this.componentUtils.className('__button'),
-            );
-        }
-
         // // handle form reset
         // this._$input?.form?.addEventListener('reset', () => {
         //     setTimeout(() => {
@@ -243,9 +235,17 @@ export default class SColorPicker extends __SLitComponent {
         //     __STheme.applyCurrentColor(e.target.value, this._$root);
         // });
 
+        // if alpha is not wanted, make sure to have it to 1 in the state
+        if (!this._isAlphaWanted()) {
+            this.state.a = 1;
+        }
+
         const value = this.props.value ?? this._$input?.value;
-        if (value) {
+        if (!this.state.value && value) {
             this._color = new __SColor(value);
+            if (!this._isAlphaWanted()) {
+                this._color.a = 1;
+            }
         } else {
             this._color.h = this.state.h;
             this._color.s = this.state.s;
@@ -267,10 +267,14 @@ export default class SColorPicker extends __SLitComponent {
 
         // restore state
         this._restoreState();
+
+        // first input update
+        this._updateInput('init');
     }
 
     _updateInput(
         step:
+            | 'init'
             | 'pointerdown'
             | 'pointerup'
             | 'pointermove'
@@ -278,29 +282,60 @@ export default class SColorPicker extends __SLitComponent {
             | 'validate'
             | 'close',
     ) {
-        if (!this.props.updateInput.includes(step)) {
+        if (step !== 'init' && !this.props.updateInput.includes(step)) {
             return;
         }
-        console.log('update', this._color.toHex());
+
+        switch (this.props.format) {
+            case 'hex':
+                this.state.value = this._color.toHexString();
+                break;
+            case 'hexa':
+                this.state.value = this._color.toHexaString();
+                break;
+            case 'rgb':
+                this.state.value = this._color.toRgbString();
+                break;
+            case 'rgba':
+                this.state.value = this._color.toRgbaString();
+                break;
+            case 'hsl':
+                this.state.value = this._color.toHslString();
+                break;
+            case 'hsla':
+                this.state.value = this._color.toHslaString();
+                break;
+        }
+
+        if (this._$input) {
+            this._$input.value = this.state.value;
+        }
+
+        this.requestUpdate();
     }
 
     _restoreState() {
         this._setAlpha(this._color.a);
         this._setHue(this._color.h);
         this._setShade(this._color.s, this._color.l);
+    }
 
-        // const hueBounds = this._$hue.getBoundingClientRect();
-        // const pos = {
-        //     x: hueBounds.left,
-        //     y:
-        //         hueBounds.top +
-        //         Math.round(
-        //             hueBounds.height -
-        //                 (hueBounds.height / 100) * this.state.hue,
-        //         ),
-        // };
-        // const pixel = this._getPixelFrom(this._$hue, this._hueCtx, pos);
-        // this._setHueColorFromPixel(pixel);
+    _setMetasFormat(format: 'hex' | 'rgb' | 'hsl'): void {
+        this.state.metasFormat = format;
+        this.requestUpdate();
+    }
+
+    _isAlphaWanted() {
+        return this.props.format.includes('a');
+    }
+
+    _finalInputValue(): string {
+        switch (this.props.format) {
+            case 'hex':
+                return this._color.toHexString();
+            case 'hexa':
+                return this._color.toHexa;
+        }
     }
 
     _getPixelFrom($elm, ctx, pos) {
@@ -585,7 +620,7 @@ export default class SColorPicker extends __SLitComponent {
                               type="text"
                               autocomplete="off"
                               name="${this.props.name}"
-                              value="${this.props.value}"
+                              value="${this.state.value ?? this.props.value}"
                               placeholder="${this.props.placeholder}"
                               class="${this.componentUtils.className(
                                   '__input',
@@ -599,7 +634,7 @@ export default class SColorPicker extends __SLitComponent {
                               ?disabled=${this.props.disabled}
                               type="hidden"
                               name="${this.props.name}"
-                              value="${this.props.value}"
+                              value="${this.state.value ?? this.props.value}"
                           />
                       `
                     : ``}
@@ -621,7 +656,10 @@ export default class SColorPicker extends __SLitComponent {
                           </button>
                       `
                     : ''}
-                <div class="${this.componentUtils.className('__picker')}">
+                <div
+                    class="${this.componentUtils.className('__picker')}"
+                    tabindex="-1"
+                >
                     <div
                         class="${this.componentUtils.className('__selectors')}"
                     >
@@ -660,7 +698,7 @@ export default class SColorPicker extends __SLitComponent {
                         <div
                             class="${this.componentUtils.className(
                                 '__alpha-wrapper',
-                            )}"
+                            )} ${this._isAlphaWanted() ? 'active' : ''}"
                         >
                             <div
                                 class="${this.componentUtils.className(
@@ -675,7 +713,100 @@ export default class SColorPicker extends __SLitComponent {
                         </div>
                     </div>
 
-                    < ${this._color.toHex()}
+                    <div class="${this.componentUtils.className('__metas')}">
+                        <button
+                            class="${this.componentUtils.className(
+                                '__btn',
+                            )} ${this.componentUtils.className(
+                                '__hex-btn',
+                            )} ${this.state.metasFormat === 'hex'
+                                ? 'active'
+                                : ''}"
+                            @click=${() => this._setMetasFormat('hex')}
+                        >
+                            HEX${this._isAlphaWanted() ? 'A' : ''}
+                        </button>
+                        <button
+                            class="${this.componentUtils.className(
+                                '__btn',
+                            )} ${this.componentUtils.className(
+                                '__rgb-btn',
+                            )} ${this.state.metasFormat === 'rgb'
+                                ? 'active'
+                                : ''}"
+                            @click=${() => this._setMetasFormat('rgb')}
+                        >
+                            RGB${this._isAlphaWanted() ? 'A' : ''}
+                        </button>
+                        <button
+                            class="${this.componentUtils.className(
+                                '__btn',
+                            )} ${this.componentUtils.className(
+                                '__hsl-btn',
+                            )} ${this.state.metasFormat === 'hsl'
+                                ? 'active'
+                                : ''}"
+                            @click=${() => this._setMetasFormat('hsl')}
+                        >
+                            HSL${this._isAlphaWanted() ? 'A' : ''}
+                        </button>
+                        <input
+                            type="text"
+                            readonly
+                            class="${this.componentUtils.className('__input')}"
+                            value="${this.state.metasFormat === 'hex'
+                                ? this._isAlphaWanted()
+                                    ? this._color.toHexaString()
+                                    : this._color.toHexString()
+                                : this.state.metasFormat === 'rgb'
+                                ? this._isAlphaWanted()
+                                    ? this._color.toRgbaString()
+                                    : this._color.toRgbString()
+                                : this._isAlphaWanted()
+                                ? this._color.toHslaString()
+                                : this._color.toHslString()}"
+                        />
+                        <div
+                            class="${this.componentUtils.className(
+                                '__preview',
+                            )} "
+                        >
+                            ${this.props.copyClass
+                                ? html`
+                                      <i class="${this.props.copyClass}"></i>
+                                  `
+                                : ''}
+                        </div>
+                    </div>
+                    <div class="${this.componentUtils.className('__actions')}">
+                        <button
+                            class="${this.componentUtils.className(
+                                '__reset',
+                                's-btn s-color--complementary',
+                            )}"
+                            @click=${() => this._reset()}
+                        >
+                            ${this.props.i18n.reset ?? 'Reset'}
+                        </button>
+                        <button
+                            class="${this.componentUtils.className(
+                                '__clear',
+                                's-btn s-color--complementary',
+                            )}"
+                            @click=${() => this._clear()}
+                        >
+                            ${this.props.i18n.clear ?? 'Clear'}
+                        </button>
+                        <button
+                            class="${this.componentUtils.className(
+                                '__validate',
+                                's-btn s-color--accent',
+                            )}"
+                            @click=${() => this._validate()}
+                        >
+                            ${this.props.i18n.validate ?? 'Validate'}
+                        </button>
+                    </div>
                 </div>
             </div>
         `;

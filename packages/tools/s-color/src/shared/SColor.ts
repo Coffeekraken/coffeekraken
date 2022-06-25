@@ -3,6 +3,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __convert from '@coffeekraken/sugar/shared/color/convert';
 import __hsla2hex from '@coffeekraken/sugar/shared/color/hsla2hex';
+import __hsla2hexa from '@coffeekraken/sugar/shared/color/hsla2hexa';
 import __hsla2rgba from '@coffeekraken/sugar/shared/color/hsla2rgba';
 import __rgba2hsla from '@coffeekraken/sugar/shared/color/rgba2hsla';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -460,8 +461,11 @@ class SColor extends __SClass {
                     a: this._a,
                 };
                 break;
+            case 'hexa':
+                return __hsla2hexa(this._h, this._s, this._l, this._a);
+                break;
             case 'hex':
-                return __hsla2hex(this._h, this._s, this._l, this._a);
+                return __hsla2hex(this._h, this._s, this._l);
                 break;
         }
     }
@@ -481,6 +485,23 @@ class SColor extends __SClass {
      */
     toHex() {
         return this._convert2('hex');
+    }
+
+    /**
+     * @name                toHexa
+     * @type                Function
+     *
+     * To hex
+     *
+     * @return 	{string} 		The hex string representation
+     *
+     * @example           js
+     * myColor.toHexa();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    toHexa() {
+        return this._convert2('hexa');
     }
 
     /**
@@ -1062,6 +1083,7 @@ class SColor extends __SClass {
             s: this.s,
             l: this.l,
             hex: this.toHexString(),
+            hexa: this.toHexaString(),
             rgb: this.toRgbString(),
             rgba: this.toRgbaString(),
             hsl: this.toHslString(),
@@ -1084,6 +1106,23 @@ class SColor extends __SClass {
      */
     toHexString() {
         return this._convert2('hex');
+    }
+
+    /**
+     * @name                  toHexaString
+     * @type                  Function
+     *
+     * To hex string
+     *
+     * @return 	            {string} 	              	The hex string representation of the color
+     *
+     * @example           js
+     * myColor.toHexaString();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    toHexaString() {
+        return this._convert2('hexa');
     }
 
     /**

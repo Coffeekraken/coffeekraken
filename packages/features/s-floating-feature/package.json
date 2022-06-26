@@ -15,7 +15,7 @@
         "@coffeekraken/s-feature": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
-        "@floating-ui/dom": "^0.2.0"
+        "@floating-ui/dom": "^0.5.4"
     },
     "main": "./dist/pkg/cjs/js/exports.js",
     "module": "./dist/pkg/esm/js/exports.js",

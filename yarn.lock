@@ -1424,7 +1424,6 @@ __metadata:
     "@coffeekraken/s-feature": ^2.0.0
     "@coffeekraken/s-file": ^2.0.0
     "@coffeekraken/s-filtrable-input-component": ^2.0.0
-    "@coffeekraken/s-floating-feature": ^2.0.0
     "@coffeekraken/s-form-validate-feature": ^2.0.0
     "@coffeekraken/s-frontend-server": ^2.0.0
     "@coffeekraken/s-frontspec": ^2.0.0
@@ -2439,6 +2438,7 @@ __metadata:
     "@coffeekraken/s-lit-component": ^2.0.0
     "@coffeekraken/s-theme": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
+    "@floating-ui/dom": ^0.5.4
     "@simonwep/pickr": ^1.8.1
     lit: ^2.0.0-rc.3
   languageName: unknown
@@ -2759,7 +2759,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-floating-feature@^2.0.0, @coffeekraken/s-floating-feature@workspace:packages/features/s-floating-feature":
+"@coffeekraken/s-floating-feature@workspace:packages/features/s-floating-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-floating-feature@workspace:packages/features/s-floating-feature"
   dependencies:
@@ -2767,7 +2767,7 @@ __metadata:
     "@coffeekraken/s-feature": ^2.0.0
     "@coffeekraken/s-interface": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
-    "@floating-ui/dom": ^0.2.0
+    "@floating-ui/dom": ^0.5.4
   languageName: unknown
   linkType: soft
 
@@ -3617,6 +3617,7 @@ __metadata:
     "@coffeekraken/s-vite": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
     "@csstools/convert-colors": ^2.0.0
+    "@floating-ui/dom": ^0.5.4
     "@types/blessed": ^0.1.17
     abstract-syntax-tree: ^2.17.2
     acorn-loose: ^8.0.2
@@ -3669,6 +3670,7 @@ __metadata:
     glob-parent: ^5.1.2
     hash-obj: ^4.0.0
     hotkeys-js: ^3.8.1
+    import: ^0.0.6
     in-view: ^0.6.1
     in-viewport: ^3.6.0
     inline-style-prefixer: ^6.0.0
@@ -3775,19 +3777,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/core@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@floating-ui/core@npm:0.4.0"
-  checksum: 655e7a79be50bb1cccac45979e51e5963fd9bd2fc1a68ed38e15fa98bf8d17a91f6a982214918f4f4ff1c8e586b0bb517e5dc41056f18e16db315abf8fc2c66b
+"@floating-ui/core@npm:^0.7.3":
+  version: 0.7.3
+  resolution: "@floating-ui/core@npm:0.7.3"
+  checksum: f48f9fb0d19dcbe7a68c38e8de7fabb11f0c0e6e0ef215ae60b5004900bacb1386e7b89cb377d91a90ff7d147ea1f06c2905136ecf34dea162d9696d8f448d5f
   languageName: node
   linkType: hard
 
-"@floating-ui/dom@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "@floating-ui/dom@npm:0.2.0"
+"@floating-ui/dom@npm:^0.5.4":
+  version: 0.5.4
+  resolution: "@floating-ui/dom@npm:0.5.4"
   dependencies:
-    "@floating-ui/core": ^0.4.0
-  checksum: 445cfd0b7e05b37e41ed147d792c654798c5b385481e9cf2afd2e4389544b07bbe300881000fe5f7b901de5579a9e5991daded57c82bbbd8c94db9637a24d4d0
+    "@floating-ui/core": ^0.7.3
+  checksum: 9f9d8a51a828c6be5f187204aa6d293c6c9ef70d51dcc5891a4d85683745fceebf79ff8826d0f75ae41b45c3b138367d339756f27f41be87a8770742ebc0de42
   languageName: node
   linkType: hard
 
@@ -13795,6 +13797,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"import@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "import@npm:0.0.6"
+  dependencies:
+    optimist: 0.3.x
+  bin:
+    import: import
+  checksum: 20f8a26203c864a9e15f0e9c5ed51328d247bd4456d00839e679e170f0c6ed161b0e1e6d5584f2662fb492466051c8c1bbee705d2818a57a254148ce25a5b2c4
+  languageName: node
+  linkType: hard
+
 "imurmurhash@npm:^0.1.4":
   version: 0.1.4
   resolution: "imurmurhash@npm:0.1.4"
@@ -18020,6 +18033,15 @@ __metadata:
   dependencies:
     is-wsl: ^1.1.0
   checksum: 7f8620c47a213c1e0ddea97a238be9cc35df99480bc43f165165e06c03867fdeea352b455af585ba7a7a788c0c5c934d04926d94ae54dddff30e7e4290b488bc
+  languageName: node
+  linkType: hard
+
+"optimist@npm:0.3.x":
+  version: 0.3.7
+  resolution: "optimist@npm:0.3.7"
+  dependencies:
+    wordwrap: ~0.0.2
+  checksum: adc02acb8b76d242e56714b47c8c96916b25a5ac2da7b9f735e1f946a970f266f71d53eff0b61d9582ef948301e94734f03b784fa7c309aed0fe7db403d22046
   languageName: node
   linkType: hard
 
@@ -24933,6 +24955,13 @@ __metadata:
   version: 1.0.0
   resolution: "wordwrap@npm:1.0.0"
   checksum: 2a44b2788165d0a3de71fd517d4880a8e20ea3a82c080ce46e294f0b68b69a2e49cff5f99c600e275c698a90d12c5ea32aff06c311f0db2eb3f1201f3e7b2a04
+  languageName: node
+  linkType: hard
+
+"wordwrap@npm:~0.0.2":
+  version: 0.0.3
+  resolution: "wordwrap@npm:0.0.3"
+  checksum: dfc2d3512e857ae4b3bc2e8d4e5d2c285c28a4b87cd1d81c977ce9a1a99152d355807e046851a3d61148f39d877fbb889352e07b65a9cbdd2256aa928e159026
   languageName: node
   linkType: hard
 

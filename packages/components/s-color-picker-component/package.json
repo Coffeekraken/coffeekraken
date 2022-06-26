@@ -18,6 +18,7 @@
         "@coffeekraken/s-lit-component": "^2.0.0",
         "@coffeekraken/s-theme": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
+        "@floating-ui/dom": "^0.5.4",
         "@simonwep/pickr": "^1.8.1",
         "lit": "^2.0.0-rc.3"
     },

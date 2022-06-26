@@ -41,7 +41,6 @@
         "@coffeekraken/s-feature": "^2.0.0",
         "@coffeekraken/s-file": "^2.0.0",
         "@coffeekraken/s-filtrable-input-component": "^2.0.0",
-        "@coffeekraken/s-floating-feature": "^2.0.0",
         "@coffeekraken/s-form-validate-feature": "^2.0.0",
         "@coffeekraken/s-frontend-server": "^2.0.0",
         "@coffeekraken/s-frontspec": "^2.0.0",

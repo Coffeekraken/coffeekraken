@@ -5,6 +5,10 @@ s-color-picker {
     display: inline-block;
     position: relative;
 
+    @sugar.media <=mobile {
+        position: unset;
+    }
+
     &:not([mounted]) > * {
         display: none;
     }
@@ -27,15 +31,37 @@ s-color-picker {
         }
     }
 
+    .s-color-picker__injected {
+        display: flex;
+
+        input {
+            flex-grow: 1;
+        }
+        button {
+            flex-grow: 0;
+        }
+    }
+
     .s-color-picker__picker {
-        position: absolute !important;
+        position: absolute;
         top: 100%;
         left: 0;
+        max-width: 100vw;
         display: flex;
         flex-direction: column;
         background: sugar.color(base, background);
         pointer-events: none;
         opacity: 0;
+
+        @sugar.media <=mobile {
+            position: fixed;
+            bottom: 0;
+            top: auto !important;
+            left: 0 !important;
+            right: auto;
+            width: 100vw;
+            transform: translate(0, 100%);
+        }
     }
     &[inline] .s-color-picker__picker {
         position: unset;
@@ -50,6 +76,10 @@ s-color-picker {
         .s-color-picker__picker {
             opacity: 1;
             pointer-events: all;
+
+            @sugar.media <=mobile {
+                transform: translate(0, 0);
+            }
         }
     }
 
@@ -59,7 +89,7 @@ s-color-picker {
         left: 0;
         width: 100%;
         height: 100%;
-        opacity: 0.01;
+        opacity: 0.02;
         /* z-index: -1; */
         pointer-events: none;
 
@@ -109,8 +139,6 @@ s-color-picker {
 
     .s-color-picker__shade-wrapper {
         position: relative;
-        /* width: calc(100% - 60px - sugar.margin(20) * 2); */
-        /* height: 100%; */
         aspect-ratio: 16/9;
         cursor: all-scroll;
         flex-grow: 1;
@@ -119,6 +147,11 @@ s-color-picker {
             width: 100%;
             height: 100%;
             position: relative;
+        }
+
+        @sugar.media <=mobile {
+            position: relative;
+            aspect-ratio: unset;
         }
     }
 
@@ -133,6 +166,7 @@ s-color-picker {
         canvas {
             width: 100%;
             height: 100%;
+            position: relative;
         }
     }
 
@@ -158,6 +192,7 @@ s-color-picker {
     }
     .s-color-picker__alpha-wrapper {
         display: none;
+        background: white;
 
         &.active {
             display: block;
@@ -186,21 +221,58 @@ s-color-picker {
     }
 
     .s-color-picker__btn,
-    .s-color-picker__input {
+    .s-color-picker__color-input {
         padding: sugar.padding(20) sugar.padding(30);
     }
 
     .s-color-picker__metas {
         display: flex;
+        flex-wrap: nowrap;
 
         .s-color-picker__btn {
             flex-grow: 0;
         }
     }
 
+    .s-color-picker__formats {
+        display: flex;
+    }
+
+    .s-color-picker__color {
+        display: flex;
+    }
+
+    @sugar.media <=mobile {
+        .s-color-picker__metas {
+            flex-wrap: wrap;
+        }
+
+        .s-color-picker__color {
+            margin-block-start: sugar.margin(20);
+        }
+
+        .s-color-picker__formats,
+        .s-color-picker__color {
+            width: 100%;
+
+            .s-color-picker__btn {
+                text-align: center;
+                flex-grow: 1 !important;
+            }
+        }
+    }
+
+    .s-color-picker__metas,
+    .s-color-picker__actions {
+        padding-block-start: sugar.padding(20);
+
+        @sugar.media <=mobile {
+            padding-block-start: sugar.padding(30);
+        }
+    }
+
     .s-color-picker__actions {
         display: flex;
-        padding-block-start: sugar.padding(20);
         gap: sugar.margin(20);
 
         button {
@@ -209,21 +281,20 @@ s-color-picker {
         }
     }
 
-    .s-color-picker__input {
+    .s-color-picker__color-input {
         flex-shrink: 1;
         flex-grow: 1;
     }
 
     .s-color-picker__preview {
-        background: red;
-        width: 40px;
+        width: 50px;
         flex-shrink: 0;
         flex-grow: 0;
         cursor: pointer;
         background-color: hsla(
             var(--s-color-picker-h),
             calc(var(--s-color-picker-s) * 1%),
-            calc(var(--s-color-picker-l) * 1%),
+            50%,
             var(--s-color-picker-a)
         );
 
@@ -250,14 +321,52 @@ s-color-picker {
 s-color-picker[lnf='default'] {
     color: sugar.color(text);
 
+    &[button] {
+        .s-color-picker__injected {
+            display: flex;
+
+            input {
+                &:not([dir='rtl'] input, input[dir='rtl']) {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+                [dir='rtl'] & &[dir='rtl'] {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
+        }
+    }
+
+    &[input] {
+        .s-color-picker__injected {
+            button {
+                &:not([dir='rtl'] input, input[dir='rtl']) {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+                [dir='rtl'] & &[dir='rtl'] {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+            }
+        }
+    }
+
     .s-color-picker__picker {
         @sugar.depth (100);
         background: sugar.color(base, background);
         padding: sugar.padding(30);
         overflow: hidden;
+        @sugar.transition (fast);
         border-radius: sugar.border.radius();
+
+        @sugar.media <=mobile {
+            border-radius: 0;
+        }
     }
     &[inline] .s-color-picker__picker {
+        background: none;
         box-shadow: none;
         padding: 0;
     }
@@ -266,7 +375,10 @@ s-color-picker[lnf='default'] {
     .s-color-picker__hue-wrapper,
     .s-color-picker__alpha-wrapper {
         border-radius: sugar.border.radius();
-        overflow: hidden;
+
+        canvas {
+            border-radius: sugar.border.radius();
+        }
 
         &:after {
             width: 20px;
@@ -302,26 +414,58 @@ s-color-picker[lnf='default'] {
         }
     }
 
-    .s-color-picker__metas {
-        padding-block-start: sugar.padding(20);
-
+    .s-color-picker__formats {
         .s-color-picker__btn {
-            background: sugar.color(current, --darken 20);
-            color: sugar.color(current, foreground);
+            border: 1px solid sugar.color(base, border);
+            color: sugar.color(base, text);
             font-size: 0.8em;
+            @sugar.font.family (code);
+
+            &:hover {
+                background: sugar.color(base, ui);
+            }
 
             &:first-child {
                 border-top-left-radius: sugar.border.radius();
                 border-bottom-left-radius: sugar.border.radius();
+
+                @sugar.media <=mobile {
+                    border-radius: 0;
+                    border-top-left-radius: sugar.border.radius();
+                    border-bottom-left-radius: sugar.border.radius();
+                }
             }
-            &:last-child {
-                border-top-right-radius: sugar.border.radius();
-                border-bottom-right-radius: sugar.border.radius();
+            &:nth-child(3) {
+                @sugar.media <=mobile {
+                    border-top-right-radius: sugar.border.radius();
+                    border-bottom-right-radius: sugar.border.radius();
+                }
+            }
+
+            @sugar.media >mobile {
+                &:nth-child(2),
+                &:nth-child(3) {
+                    border-left: none;
+                }
+                &:nth-child(3) {
+                    border-right: none;
+                }
             }
 
             &.active {
-                background: sugar.color(current);
+                background: sugar.color(base, ui);
+                color: sugar.color(base, text);
             }
+        }
+    }
+
+    @sugar.media <=mobile {
+        .s-color-picker__color-input {
+            border-top: none;
+            border-top-left-radius: sugar.border.radius();
+            border-bottom-left-radius: sugar.border.radius();
+        }
+        .s-color-picker__preview {
         }
     }
 
@@ -333,13 +477,20 @@ s-color-picker[lnf='default'] {
         }
     }
 
-    .s-color-picker__input {
-        border: solid 1px sugar.color(current, border);
+    .s-color-picker__color-input {
+        color: sugar.color(base, text);
+        border: solid 1px sugar.color(base, border);
         border-right: none;
     }
     .s-color-picker__preview {
         position: relative;
-        border: solid 1px sugar.color(current, border);
+        border: solid 1px
+            hsla(
+                var(--s-color-picker-h),
+                calc(var(--s-color-picker-s) * 1%),
+                calc(var(--s-solor-picker-l) * 1%),
+                var(--s-color-picker-a)
+            );
         border-left: none;
         border-top-right-radius: sugar.border.radius();
         border-bottom-right-radius: sugar.border.radius();
@@ -349,44 +500,4 @@ s-color-picker[lnf='default'] {
             font-size: 0.8em;
         }
     }
-
-    /* .s-color-picker__button {
-        padding-inline: sugar.padding(ui.colorPicker.paddingInline);
-        padding-block: sugar.padding(ui.colorPicker.paddingBlock);
-        cursor: pointer;
-    }
-
-    &[button][input] {
-        .s-color-picker__input {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-        .s-color-picker__button {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-    }
-    [dir='rtl'] &[button][input],
-    &[dir='rtl'][button][input] {
-        .s-color-picker__button {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            border-top-left-radius: sugar.border.radius(
-                ui.colorPicker.borderRadius
-            );
-            border-bottom-left-radius: sugar.border.radius(
-                ui.colorPicker.borderRadius
-            );
-        }
-        .s-color-picker__input {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-top-right-radius: sugar.border.radius(
-                ui.colorPicker.borderRadius
-            );
-            border-bottom-right-radius: sugar.border.radius(
-                ui.colorPicker.borderRadius
-            );
-        }
-    } */
 }

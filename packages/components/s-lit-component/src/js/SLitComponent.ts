@@ -272,6 +272,7 @@ export default class SLitComponent extends LitElement {
 
             let attrValue = this.getAttribute(__dashCase(prop));
             if (attrValue !== null) {
+                if (attrValue === 'false') attrValue = false;
                 if (attrValue === '') attrValue = true;
                 finalProps[prop] = attrValue;
             }

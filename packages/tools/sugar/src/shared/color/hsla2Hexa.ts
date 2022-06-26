@@ -33,8 +33,7 @@ export default function hsla2hexa(h, s, l, a = 1) {
         h,
         s,
         l,
-        a: 1,
+        a,
     });
-    console.log('ff');
     return hex;
 }

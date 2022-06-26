@@ -3,28 +3,48 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"
+            name="viewport"
+        />
+
+        <link rel="stylesheet" href="src/css/dev.css" />
+
         <title>Vue js component</title>
     </head>
     <body>
         <script type="module">
-            import __css from './src/css/dev.css';
             import { define } from './src/js/exports.ts';
             define();
         </script>
-        <!-- <s-color-picker id="okfwioejfiwuehf" save-state>
-            <input type="text" />
-        </s-color-picker> -->
 
-        <s-color-picker
-            mount-when="nearViewport"
-            id="okfwioejfiwueeeeehf"
-            update-input="pointerup"
-            save-state
-            format="hexa"
-        >
-            <input type="text" />
-        </s-color-picker>
+        <div class="section">
+            <s-color-picker id="okfwioejfiwuehf" save-state button>
+            </s-color-picker>
+        </div>
+
+        <div class="section">
+            <s-color-picker
+                mount-when="nearViewport"
+                id="test"
+                save-state
+                format="hexa"
+                value="#ff0000ff"
+            >
+                <input type="text" />
+            </s-color-picker>
+        </div>
+
+        <script>
+            const $colorPicker = document.querySelector('s-color-picker#test');
+            $colorPicker.addEventListener('change', (e) => {});
+        </script>
+
+        <div class="section" style="text-align: right;">
+            <s-color-picker id="okfwioejfiwuehfffefeff" format="hsla">
+                <input type="text" value="#ff0000ff" />
+            </s-color-picker>
+        </div>
 
         <!-- <s-color-picker no-preview>
             <input type="text" class="s-input" value="#ff000f" />

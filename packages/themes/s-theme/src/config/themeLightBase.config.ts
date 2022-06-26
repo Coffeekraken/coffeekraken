@@ -118,14 +118,14 @@ export default function (env, config) {
                  * @name          lighten
                  * @namespace     config.themeLightBase.colorSchema.ui
                  * @type          Number
-                 * @default      50
+                 * @default      40
                  *
                  * Specify the lighten value for the "ui" color variant
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                lighten: 50,
+                lighten: 40,
             },
             uiForeground: {
                 /**

@@ -2,7 +2,7 @@ import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
 import __SFeature from '@coffeekraken/s-feature';
 import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
-import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
+// import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
 import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
@@ -29,7 +29,6 @@ import { define as __CKDocSubNavComponent } from './components/CKDocSubNav/CKDoc
 import { define as __CkFallingStarsComponent } from './components/CkFallingStars';
 import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
-import { define as __VersionSelector } from './components/VersionSelector';
 
 // others
 import __SConductor from '@coffeekraken/s-conductor';
@@ -75,7 +74,7 @@ __SConductor.setup({
     __sPageTransitionFeature();
 
     // internal components
-    __VersionSelector();
+    // __VersionSelector();
     __CKSearchComponent();
     __CKBlobComponent();
     __CkFallingStarsComponent();
@@ -87,7 +86,7 @@ __SConductor.setup({
     __SCodeExampleWebcomponent();
     __SFiltrableInputComponent();
     __SSidePanelWebcomponent();
-    // __SColorPickerWebcomponent();
+    // __SColorPickerComponent();
     __SScrollComponent();
     // __SDatePickerWebcomponent();
     __SRangeWebcomponent();
@@ -106,7 +105,7 @@ __SConductor.setup({
 
     // features
     __sSugarFeature();
-    __sFloatingFeature();
+    // __sFloatingFeature();
     __sRefocusFeature();
     __sInlineFeature();
     // __sParallaxFeature();

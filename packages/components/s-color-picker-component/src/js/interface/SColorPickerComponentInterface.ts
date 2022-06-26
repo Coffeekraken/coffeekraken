@@ -43,16 +43,18 @@ export default class SColorPickerComponentInterface extends __SInterface {
                     'pointerdown',
                     'pointerup',
                     'pointermove',
-                    'input',
                     'validate',
+                    'reset',
+                    'clear',
                     'close',
                 ],
                 default: [
                     'pointerdown',
                     'pointerup',
                     'pointermove',
-                    'input',
                     'validate',
+                    'reset',
+                    'clear',
                     'close',
                 ],
             },
@@ -98,18 +100,54 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 default: false,
                 physical: true,
             },
-            position: {
+            clear: {
                 description:
-                    'Specify the position of the picker. Can be "top" or "bottom"',
-                type: 'String',
-                values: ['top', 'bottom'],
-                default: 'bottom',
+                    'Specify if you want the "clear" button that take the color picker back to his initial state (clear the state)',
+                type: 'Boolean',
+                default: true,
+            },
+            reset: {
+                description:
+                    'Specify if you want the "reset" button that take the color picker back to his "state" state',
+                type: 'Boolean',
+                default: true,
+            },
+            validate: {
+                description:
+                    'Specify if you want the "validate" button that apply the color and close the picker',
+                type: 'Boolean',
+                default: true,
+            },
+            floatSettings: {
+                description:
+                    'Specify some float settings to pass to the "makeFloat" function of the sugar toolkit',
+                type: 'Object',
+                default: {
+                    position: 'auto',
+                    shift: 10,
+                    offset: 0,
+                    arrow: false,
+                    arrowSize: 15,
+                    arrowPadding: 10,
+                },
             },
             copyClass: {
                 description:
                     'Specify the class you want to apply on the "i" that display the "copy" icon',
                 type: 'String',
                 default: 's-icon s-icon--copy',
+            },
+            copiedClass: {
+                description:
+                    'Specify the class you want to apply on the "i" that display the "copy" icon when the color has been copied',
+                type: 'String',
+                default: 's-icon s-icon--copied',
+            },
+            buttonIconClass: {
+                description:
+                    'Specify the class you want to apply on the injected button icon',
+                type: 'String',
+                default: 's-icon s-icon--color',
             },
             swatches: {
                 description: 'Specify some colors you want in your swatches',

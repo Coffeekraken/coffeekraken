@@ -118,14 +118,14 @@ export default function (env, config) {
                  * @name          darken
                  * @namespace     config.themeDarkBase.colorSchema.ui
                  * @type          Number
-                 * @default      20
+                 * @default      10
                  *
                  * Specify the darken value for the "ui" color variant
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                darken: 20,
+                darken: 10,
             },
             uiForeground: {
                 /**
@@ -146,14 +146,14 @@ export default function (env, config) {
                  * @name          alpha
                  * @namespace     config.themeDarkBase.colorSchema.border
                  * @type          Number
-                 * @default      0.2
+                 * @default      0.4
                  *
                  * Specify the alpha value for the "border" color variant
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                alpha: 0.2,
+                alpha: 0.4,
             },
             gradientStart: {
                 /**

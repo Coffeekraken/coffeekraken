@@ -347,7 +347,6 @@ class SColor extends __SClass {
         if (typeof color === 'string') {
             // parse the input color to
             // split into rgba values
-            console.log('parse', color);
             this._parse(color);
         } else {
             // we assume that the passed color is an object of type ISColorObject
@@ -417,9 +416,6 @@ class SColor extends __SClass {
     _parse(color) {
         // parse the color
         color = __convert(color, 'hsla');
-
-        console.log('co', color);
-
         // assign new color values
         this.h = color.h;
         this.s = color.s;

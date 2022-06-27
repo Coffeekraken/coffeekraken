@@ -39,7 +39,7 @@ export default function (env, config) {
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                color: 'hsla(212,14,50,1)',
+                color: 'hsla(220,9,52,1)',
                 /**
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.base

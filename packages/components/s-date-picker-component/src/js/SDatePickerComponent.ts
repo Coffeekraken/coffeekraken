@@ -247,7 +247,7 @@ export default class SDatePicker extends __SLitComponent {
 
     constructor() {
         super({
-            shadowDom: false,
+            name: 's-date-picker',
             interface: __SDatePickerComponentInterface,
         });
 

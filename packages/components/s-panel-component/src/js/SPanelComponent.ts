@@ -163,7 +163,7 @@ export default class SPanel extends __SLitComponent {
         super(
             __deepMerge({
                 name: 's-panel',
-                shadowDom: false,
+                interface: __SPanelComponentInterface,
             }),
         );
 
@@ -216,6 +216,8 @@ export default class SPanel extends __SLitComponent {
                 this._$backdrop,
             );
         }
+
+        console.log(this.props);
 
         // closeOn property
         this.props.closeOn.forEach((what) => {

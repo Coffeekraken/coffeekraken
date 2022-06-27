@@ -170,7 +170,7 @@ export default class SLitComponent extends LitElement {
         this.settings = __deepMerge(
             {
                 componentUtils: {},
-                shadowDom: true,
+                shadowDom: false,
                 get rootNode() {
                     return this.shadowRoot?.querySelector('*:first-child');
                 },

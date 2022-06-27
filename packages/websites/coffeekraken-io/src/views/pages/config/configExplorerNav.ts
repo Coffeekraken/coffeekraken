@@ -1,24 +1,19 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __SRequest from '@coffeekraken/s-request';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
+import __get from '@coffeekraken/sugar/shared/object/get';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
-import __SRequest from '@coffeekraken/s-request';
-import __set from '@coffeekraken/sugar/shared/object/set';
-import __get from '@coffeekraken/sugar/shared/object/get';
-import __filter from '@coffeekraken/sugar/shared/object/filter';
 
 export interface IConfigExplorerNavComponentProps {}
 
 export class ConfigExplorerNav extends __SLitComponent {
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
-            componentUtils: {
-                // interface: __ConfigExplorerNavComponentInterface,
-            },
+            shadowDom: false,
+            // interface: __ConfigExplorerNavComponentInterface,
         });
     }
 

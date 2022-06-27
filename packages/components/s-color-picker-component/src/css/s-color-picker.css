@@ -24,7 +24,6 @@ s-color-picker {
     .s-color-picker {
         display: flex;
         width: 100%;
-        min-width: 350px;
 
         &.is-interacting * {
             cursor: none !important;
@@ -46,10 +45,11 @@ s-color-picker {
         position: absolute;
         top: 100%;
         left: 0;
+        z-index: 100;
         max-width: 100vw;
         display: flex;
         flex-direction: column;
-        background: sugar.color(base, background);
+        background: sugar.color(main, background);
         pointer-events: none;
         opacity: 0;
 
@@ -214,8 +214,8 @@ s-color-picker {
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
-            top: calc(100% - var(--s-color-picker-l, 0) * 1%);
-            left: calc(var(--s-color-picker-s, 0) * 1%);
+            top: calc(100% - var(--s-color-picker-shade-y, 0) * 1%);
+            left: calc(var(--s-color-picker-shade-x, 0) * 1%);
             pointer-events: none;
         }
     }
@@ -294,7 +294,7 @@ s-color-picker {
         background-color: hsla(
             var(--s-color-picker-h),
             calc(var(--s-color-picker-s) * 1%),
-            50%,
+            calc(var(--s-color-picker-l) * 1%),
             var(--s-color-picker-a)
         );
 
@@ -355,10 +355,11 @@ s-color-picker[lnf='default'] {
 
     .s-color-picker__picker {
         @sugar.depth (100);
-        background: sugar.color(base, background);
+        background: sugar.color(main, background);
         padding: sugar.padding(30);
         overflow: hidden;
-        @sugar.transition (fast);
+        transition: sugar.transition(fast);
+        transition-property: opacity;
         border-radius: sugar.border.radius();
 
         @sugar.media <=mobile {
@@ -416,13 +417,13 @@ s-color-picker[lnf='default'] {
 
     .s-color-picker__formats {
         .s-color-picker__btn {
-            border: 1px solid sugar.color(base, border);
-            color: sugar.color(base, text);
+            border: 1px solid sugar.color(main, border);
+            color: sugar.color(main, text);
             font-size: 0.8em;
             @sugar.font.family (code);
 
             &:hover {
-                background: sugar.color(base, ui);
+                background: sugar.color(main, ui);
             }
 
             &:first-child {
@@ -453,8 +454,8 @@ s-color-picker[lnf='default'] {
             }
 
             &.active {
-                background: sugar.color(base, ui);
-                color: sugar.color(base, text);
+                background: sugar.color(main, ui);
+                color: sugar.color(main, text);
             }
         }
     }
@@ -478,8 +479,8 @@ s-color-picker[lnf='default'] {
     }
 
     .s-color-picker__color-input {
-        color: sugar.color(base, text);
-        border: solid 1px sugar.color(base, border);
+        color: sugar.color(main, text);
+        border: solid 1px sugar.color(main, border);
         border-right: none;
     }
     .s-color-picker__preview {
@@ -488,7 +489,7 @@ s-color-picker[lnf='default'] {
             hsla(
                 var(--s-color-picker-h),
                 calc(var(--s-color-picker-s) * 1%),
-                calc(var(--s-solor-picker-l) * 1%),
+                calc(var(--s-color-picker-l) * 1%),
                 var(--s-color-picker-a)
             );
         border-left: none;

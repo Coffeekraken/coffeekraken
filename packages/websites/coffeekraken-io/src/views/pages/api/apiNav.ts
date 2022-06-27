@@ -1,24 +1,19 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __SRequest from '@coffeekraken/s-request';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
+import __get from '@coffeekraken/sugar/shared/object/get';
+import __set from '@coffeekraken/sugar/shared/object/set';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
-import __SRequest from '@coffeekraken/s-request';
-import __set from '@coffeekraken/sugar/shared/object/set';
-import __get from '@coffeekraken/sugar/shared/object/get';
-import __filter from '@coffeekraken/sugar/shared/object/filter';
 
 export interface IApiNavComponentProps {}
 
 export class ApiNav extends __SLitComponent {
     constructor() {
         super({
-            litComponent: {
-                shadowDom: false,
-            },
-            componentUtils: {
-                // interface: __ApiNavComponentInterface,
-            },
+            shadowDom: false,
         });
     }
 
@@ -81,9 +76,9 @@ export class ApiNav extends __SLitComponent {
                 'feature',
             ];
 
-            if (!item.type) return false;
+            if (!item.type?.types) return false;
 
-            if (types.indexOf(item.type.types[0].type) === -1)
+            if (types.indexOf(item.type.types?.[0].type) === -1)
                 types.push(item.type.types[0].type);
 
             if (

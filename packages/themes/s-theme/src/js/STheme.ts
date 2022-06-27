@@ -338,8 +338,6 @@ export default class STheme extends __SThemeBase {
     save(): STheme {
         clearTimeout(this._saveTimeout);
         this._saveTimeout = setTimeout(() => {
-            console.log('save');
-
             // save in localStorage
             localStorage.setItem(
                 `s-theme-${this.id}`,
@@ -364,8 +362,6 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     restore(): STheme {
-        console.log('restore');
-
         let savedConfigs = {};
         // get from localStorage
         try {
@@ -374,8 +370,6 @@ export default class STheme extends __SThemeBase {
                 localStorage.getItem(`s-theme-${this.id}`),
             );
         } catch (e) {}
-
-        console.log(savedConfigs);
 
         // restore configs
         super.restore(savedConfigs);
@@ -397,13 +391,14 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     clear(): STheme {
-        console.log('clear');
         // delete the local storage
         localStorage.removeItem(`s-theme-${this.id}`);
         // clear in super class
         super.clear();
         // apply the configs
         this.applyOverridedConfigs();
+        // set theme again to dispatch event
+        this.constructor.setTheme();
         // maintain chainability
         return this;
     }

@@ -4,7 +4,6 @@
     background-color: sugar.color(main, background);
     min-width: 300px;
     width: 33vw;
-    max-width: 500px;
     overflow-y: scroll;
     @sugar.scrollbar();
     /* @sugar.depth (100); */

@@ -3,11 +3,12 @@
     <div class="s-container">
 
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
-            <div class="">
-                <img class="__illustration s-when:light" src="/dist/img/illustrations/toolkit.png" alt="Sugar toolkit"
+            <div>
+                <img s-inline class="illustration" src="/dist/img/illustrations/packages.svg" />
+                {{-- <img class="__illustration s-when:light" src="/dist/img/illustrations/toolkit.png" alt="Sugar toolkit"
                     title="Sugar toolkit" />
                 <img class="__illustration s-when:dark" src="/dist/img/illustrations/toolkit-dark.png"
-                    alt="Sugar toolkit" title="Sugar toolkit" />
+                    alt="Sugar toolkit" title="Sugar toolkit" /> --}}
             </div>
             <div>
                 <h3 class="s-typo:h3 s-mbe:30">

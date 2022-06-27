@@ -202,6 +202,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     // }
 
     function compressVarName(name) {
+        return name;
         const md5 = __md5.encrypt(name);
         const dict = 'abcdefghijklmnopqrstuvwxyz0123456789';
         const sum = md5.split('').reduce((a, b) => {

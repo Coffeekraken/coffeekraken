@@ -16,7 +16,8 @@
 }
 
 #features-opensource {
-    .__illustration {
+    .illustration {
+        height: 450px;
     }
 
     .__box {

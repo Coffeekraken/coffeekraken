@@ -7,9 +7,9 @@ svg.illustration {
         stroke: sugar.color(accent) !important;
     }
     *[fill='#5100FF'] {
-        fill: sugar.color(error) !important;
+        fill: sugar.color(complementary) !important;
     }
     *[stroke='#5100FF'] {
-        stroke: sugar.color(error) !important;
+        stroke: sugar.color(complementary) !important;
     }
 }

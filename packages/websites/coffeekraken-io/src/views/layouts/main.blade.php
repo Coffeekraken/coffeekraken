@@ -9,6 +9,11 @@
 @section('body')
 
     <script>
+        document.body.classList.add('initial-loading');
+        document.body.classList.add('loading');
+    </script>
+
+    <script>
         const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
         if (state.darkMode) {
             document.querySelector('html').setAttribute('theme', 'default-dark');
@@ -37,6 +42,7 @@
         <i class="s-icon:angle-up"></i>
     </s-scroll>
 
+    <div class="loader"></div>
     <div class="top-loader"></div>
 
 @endsection

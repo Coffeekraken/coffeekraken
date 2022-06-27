@@ -175,7 +175,7 @@ export default class SFiltrableInput extends __SLitComponent {
         super(
             __deepMerge({
                 name: 's-filtrable-input',
-                shadowDom: false,
+                interface: __SFiltrableInputComponentInterface,
             }),
         );
     }

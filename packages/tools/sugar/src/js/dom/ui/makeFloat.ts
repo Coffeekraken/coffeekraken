@@ -64,11 +64,16 @@ export interface IMakeFloatSettings {
     arrowPadding: number;
 }
 
+export interface IMakeFloatApi {
+    update: Function;
+    cleanup: Function;
+}
+
 export default function makeFloat(
     $elm: HTMLElement,
     $depending: HTMLElement,
     settings?: Partial<IMakeFloatSettings>,
-): void {
+): IMakeFloatApi {
     const finalSettings: IMakeFloatSettings = {
         position: 'auto',
         shift: 10,
@@ -78,6 +83,9 @@ export default function makeFloat(
         arrowPadding: 10,
         ...(settings ?? {}),
     };
+
+    // add base class
+    $depending.classList.add('s-floating');
 
     // preparing middlewares
     const middlewares = [
@@ -126,13 +134,38 @@ export default function makeFloat(
         );
 
         computePosition($depending, $elm, {
-            placement: 'top',
-            middleware: [flip(), shift()],
-        }).then(({ x, y }) => {
+            // @ts-ignore
+            placement: finalSettings.position,
+            middleware: middlewares,
+        }).then(({ x, y, placement, middlewareData }) => {
             Object.assign($elm.style, {
+                position: 'absolute',
                 top: `${y}px`,
                 left: `${x}px`,
             });
+
+            if (middlewareData.arrow) {
+                const staticSide = {
+                    top: 'bottom',
+                    right: 'left',
+                    bottom: 'top',
+                    left: 'right',
+                }[placement.split('-')[0]];
+                Object.assign($arrow.style, {
+                    position: 'absolute',
+                    left:
+                        middlewareData.arrow.x != null
+                            ? `${middlewareData.arrow.x}px`
+                            : '',
+                    top:
+                        middlewareData.arrow.y != null
+                            ? `${middlewareData.arrow.y}px`
+                            : '',
+                    right: '',
+                    bottom: '',
+                    [staticSide]: '-4px',
+                });
+            }
         });
     };
 
@@ -150,4 +183,10 @@ export default function makeFloat(
     __whenRemoved($depending).then(() => {
         cleanup();
     });
+
+    // return the update function
+    return {
+        update,
+        cleanup,
+    };
 }

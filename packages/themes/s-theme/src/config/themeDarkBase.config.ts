@@ -118,28 +118,28 @@ export default function (env, config) {
                  * @name          darken
                  * @namespace     config.themeDarkBase.colorSchema.ui
                  * @type          Number
-                 * @default      10
+                 * @default      25
                  *
                  * Specify the darken value for the "ui" color variant
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                darken: 10,
+                darken: 25,
             },
             uiForeground: {
                 /**
                  * @name          lighten
                  * @namespace     config.themeDarkBase.colorSchema.uiForeground
                  * @type          Number
-                 * @default      50
+                 * @default      45
                  *
                  * Specify the lighten value for the "uiForeground" color variant
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                lighten: 50,
+                lighten: 45,
             },
             border: {
                 /**

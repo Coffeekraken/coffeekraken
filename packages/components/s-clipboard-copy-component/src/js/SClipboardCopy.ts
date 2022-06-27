@@ -78,8 +78,8 @@ export default class SClipboardCopy extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                shadowDom: false,
                 name: 's-clipboard-copy',
+                interface: __SClipboardCopyComponentInterface,
             }),
         );
     }

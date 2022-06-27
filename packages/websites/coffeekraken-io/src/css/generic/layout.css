@@ -54,3 +54,24 @@
         opacity: 1;
     }
 }
+
+.loader {
+    @sugar.ui.loader.spinner();
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    @sugar.color (accent);
+    opacity: 0;
+    @sugar.transition (fast);
+
+    .initial-loading & {
+        opacity: 1;
+    }
+}
+
+body.initial-loading > *:not(.top-loader, .loader) {
+    opacity: 0;
+}

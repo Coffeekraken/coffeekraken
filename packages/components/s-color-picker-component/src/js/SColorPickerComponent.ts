@@ -3,7 +3,10 @@
 import __SColor from '@coffeekraken/s-color';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';
-import type { IFloatSettings } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
+import type {
+    IFloatApi,
+    IFloatSettings,
+} from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __makeFloat from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __baseCss from '@simonwep/pickr/dist/themes/nano.min.css';
@@ -161,6 +164,8 @@ export default class SColorPicker extends __SLitComponent {
     };
     _originalState = {};
 
+    _floatApi: IFloatApi;
+
     _hasInput = false;
     _hasButton = false;
     _$input;
@@ -184,7 +189,7 @@ export default class SColorPicker extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                shadowDom: false,
+                name: 's-color-picker',
                 interface: __SColorPickerComponentInterface,
             }),
         );
@@ -248,6 +253,11 @@ export default class SColorPicker extends __SLitComponent {
             this._$input?.setAttribute('autocomplete', 'off');
         }
 
+        // update float on focus
+        this.addEventListener('focusin', (e) => {
+            this._floatApi?.update();
+        });
+
         // handle form reset
         // this._$input?.form?.addEventListener('reset', () => {
         //     setTimeout(() => {
@@ -282,7 +292,11 @@ export default class SColorPicker extends __SLitComponent {
         this._updateInput('init');
 
         // make the panel float
-        __makeFloat(this._$picker, this._$root, this.props.floatSettings);
+        this._floatApi = __makeFloat(
+            this._$picker,
+            this._$root,
+            this.props.floatSettings,
+        );
     }
 
     _initColor() {
@@ -368,6 +382,7 @@ export default class SColorPicker extends __SLitComponent {
     _setMetasFormat(format: 'hex' | 'rgb' | 'hsl'): void {
         this.state.metasFormat = format;
         this.requestUpdate();
+        return false;
     }
 
     _validate() {
@@ -518,17 +533,22 @@ export default class SColorPicker extends __SLitComponent {
         this._setShade(pX, pY, saveState);
     }
     _setShade(s: number, l: number, saveState = true): void {
+        // calculate lighten correctly
+        let lightness = (l + (100 - s)) / 2;
+
         // save to state if wanted
         if (saveState) {
             this.state.s = s;
-            this.state.l = l;
+            this.state.l = lightness;
         }
         // set the actual color values
         this._color.s = s;
-        this._color.l = l;
+        this._color.l = lightness;
         // apply the --s-color-picker-a css variable
+        this.style.setProperty('--s-color-picker-shade-x', s);
+        this.style.setProperty('--s-color-picker-shade-y', l);
         this.style.setProperty('--s-color-picker-s', s);
-        this.style.setProperty('--s-color-picker-l', l);
+        this.style.setProperty('--s-color-picker-l', lightness);
         // update the shade canvas with the new color
         this._updateShadeCanvas();
         // update the component
@@ -824,7 +844,10 @@ export default class SColorPicker extends __SLitComponent {
                                 )} ${this.state.metasFormat === 'hex'
                                     ? 'active'
                                     : ''}"
-                                @click=${() => this._setMetasFormat('hex')}
+                                @click=${(e) => {
+                                    e.preventDefault();
+                                    this._setMetasFormat('hex');
+                                }}
                             >
                                 HEX${this._isAlphaWanted() ? 'A' : ''}
                             </button>
@@ -836,7 +859,10 @@ export default class SColorPicker extends __SLitComponent {
                                 )} ${this.state.metasFormat === 'rgb'
                                     ? 'active'
                                     : ''}"
-                                @click=${() => this._setMetasFormat('rgb')}
+                                @click=${(e) => {
+                                    e.preventDefault();
+                                    this._setMetasFormat('rgb');
+                                }}
                             >
                                 RGB${this._isAlphaWanted() ? 'A' : ''}
                             </button>
@@ -848,7 +874,10 @@ export default class SColorPicker extends __SLitComponent {
                                 )} ${this.state.metasFormat === 'hsl'
                                     ? 'active'
                                     : ''}"
-                                @click=${() => this._setMetasFormat('hsl')}
+                                @click=${(e) => {
+                                    e.preventDefault();
+                                    this._setMetasFormat('hsl');
+                                }}
                             >
                                 HSL${this._isAlphaWanted() ? 'A' : ''}
                             </button>
@@ -898,7 +927,10 @@ export default class SColorPicker extends __SLitComponent {
                                           '__clear',
                                           's-btn s-color--error',
                                       )}"
-                                      @click=${() => this._clear()}
+                                      @click=${(e) => {
+                                          e.preventDefault();
+                                          this._clear();
+                                      }}
                                   >
                                       ${this.props.i18n.clear ?? 'Clear'}
                                   </button>
@@ -911,7 +943,10 @@ export default class SColorPicker extends __SLitComponent {
                                           '__reset',
                                           's-btn s-color--complementary',
                                       )}"
-                                      @click=${() => this._reset()}
+                                      @click=${(e) => {
+                                          e.preventDefault();
+                                          this._reset();
+                                      }}
                                   >
                                       ${this.props.i18n.reset ?? 'Reset'}
                                   </button>
@@ -924,7 +959,10 @@ export default class SColorPicker extends __SLitComponent {
                                           '__validate',
                                           's-btn s-color--accent',
                                       )}"
-                                      @click=${() => this._validate()}
+                                      @click=${(e) => {
+                                          e.preventDefault();
+                                          this._validate();
+                                      }}
                                   >
                                       ${this.props.i18n.validate ?? 'Validate'}
                                   </button>

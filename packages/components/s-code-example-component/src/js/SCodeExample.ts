@@ -137,7 +137,7 @@ export default class SCodeExample extends __SLitComponent {
         super(
             __deepMerge({
                 name: 's-code-example',
-                shadowDom: false,
+                interface: __SCodeExampleComponentInterface,
             }),
         );
     }
@@ -248,6 +248,7 @@ export default class SCodeExample extends __SLitComponent {
         await __wait();
         this.state.activeTabId = id;
         this.highlight(id);
+        this.requestUpdate();
     }
     async setMoreClass() {
         if (this.state.more) {

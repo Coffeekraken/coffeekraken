@@ -87,7 +87,7 @@ export default class SCodeExampleComponentInterface extends __SInterface {
             },
             scrollToSettings: {
                 description: 'Specify some scrollTo settings',
-                type: 'IScrollToSettings',
+                type: 'Object',
                 default: {},
             },
         };

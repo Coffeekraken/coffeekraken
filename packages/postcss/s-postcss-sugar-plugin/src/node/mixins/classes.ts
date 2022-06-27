@@ -102,6 +102,8 @@ export default async function ({
 
     cssArray.unshift('@sugar.reset;');
 
+    return cssArray;
+
     const hash = `@sugar.classes.${__objectHash({
         finalParams,
         css: cssArray,

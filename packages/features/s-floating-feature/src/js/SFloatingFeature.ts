@@ -1,17 +1,7 @@
 import __SFeature from '@coffeekraken/s-feature';
+import __makeFloat from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SFloatingFeatureInterface from './interface/SFloatingFeatureInterface';
-
-import {
-    arrow,
-    autoPlacement,
-    computePosition,
-    flip,
-    getScrollParents,
-    inline,
-    offset,
-    shift,
-} from '@floating-ui/dom';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-floating-feature.css'; // relative to /dist/pkg/esm/js
@@ -68,7 +58,7 @@ export default class SFloatingFeature extends __SFeature {
 
         // handle ref
         if (!this.props.ref) {
-            this._$ref = this.node.previousElementSibling;
+            this._$ref = this.node.parentElement;
         } else {
             this._$ref = document.querySelector(this.props.ref);
         }
@@ -80,92 +70,8 @@ export default class SFloatingFeature extends __SFeature {
             this.props.offset = this.props.arrowSize;
         }
 
-        // preparing middlewares
-        const middlewares = [
-            offset(this.props.offset),
-            shift({
-                padding: this.props.shift,
-            }),
-            inline(),
-        ];
-
-        // check the placement
-        if (this.props.placement !== 'auto') {
-            middlewares.push(flip());
-        } else {
-            middlewares.push(autoPlacement());
-        }
-
-        // handling arrow injection
-        let $arrow;
-        if (this.props.arrow) {
-            $arrow = document.createElement('div');
-            $arrow.classList.add('s-floating__arrow');
-            this.node.append($arrow);
-            middlewares.push(
-                arrow({
-                    element: $arrow,
-                    padding: this.props.arrowPadding,
-                }),
-            );
-        }
-
-        // setting the arrow size through a css property
-        if (this.props.arrowSize) {
-            this.node.style.setProperty(
-                `--arrow-size`,
-                `${this.props.arrowSize}px`,
-            );
-        }
-
-        // updating routine
-        const update = async () => {
-            const { x, y, placement, middlewareData } = await computePosition(
-                this._$ref,
-                this.node,
-                {
-                    placement: this.props.placement,
-                    middleware: middlewares,
-                },
-            );
-            Object.assign(this.node.style, {
-                left: `${x}px`,
-                top: `${y}px`,
-            });
-
-            // handle arrow position
-            if ($arrow) {
-                // Accessing the data
-                const { x: arrowX, y: arrowY } = middlewareData.arrow;
-
-                const staticSide = {
-                    top: 'bottom',
-                    right: 'left',
-                    bottom: 'top',
-                    left: 'right',
-                }[placement.split('-')[0]];
-
-                Object.assign($arrow.style, {
-                    left: arrowX != null ? `${arrowX}px` : '',
-                    top: arrowY != null ? `${arrowY}px` : '',
-                    right: '',
-                    bottom: '',
-                    [staticSide]: `${this.props.arrowSize * 0.5 * -1}px`,
-                });
-            }
-        };
-
-        // first update
-        update();
-
-        // update when parent scrolling element resize or scroll
-        [
-            ...getScrollParents(this._$ref),
-            ...getScrollParents(this.node),
-        ].forEach((el) => {
-            el.addEventListener('scroll', update);
-            el.addEventListener('resize', update);
-        });
+        console.log(this.node, this.props);
+        __makeFloat(this.node, this._$ref, this.props);
     }
 }
 

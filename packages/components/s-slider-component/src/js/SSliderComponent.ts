@@ -313,7 +313,7 @@ export default class SSlider extends __SLitComponent {
         super(
             __deepMerge({
                 name: 's-slider',
-                shadowDom: false,
+                interface: __SSliderComponentInterface,
             }),
         );
     }

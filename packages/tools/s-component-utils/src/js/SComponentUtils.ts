@@ -341,48 +341,48 @@ export default class SComponentUtils extends __SClass {
             );
         }
 
-        if (finalStateSettings.save) {
-            let saveTimeout;
-            let _state = Object.assign({}, state);
-            for (let [key, value] of Object.entries(state)) {
-                Object.defineProperty(state, key, {
-                    enumerable: true,
-                    get() {
-                        return _state[key];
-                    },
-                    set(value) {
-                        if (_state[key] !== value) {
-                            let finalValue = value;
-                            if (finalStateSettings.onUpdate) {
-                                finalValue =
-                                    finalStateSettings.onUpdate({
-                                        value,
-                                        key,
-                                    }) ?? value;
-                            }
-
-                            _state[key] = finalValue;
-
-                            if (preventSave) {
-                                preventSave = false;
-                                return;
-                            }
-
-                            if (finalStateSettings.save) {
-                                clearTimeout(saveTimeout);
-                                saveTimeout = setTimeout(() => {
-                                    localStorage.setItem(
-                                        `s-component-utils-state-${finalStateSettings.id}`,
-                                        JSON.stringify(_state),
-                                    );
-                                });
-                            }
+        let saveTimeout;
+        let _state = Object.assign({}, state);
+        for (let [key, value] of Object.entries(state)) {
+            Object.defineProperty(state, key, {
+                enumerable: true,
+                get() {
+                    return _state[key];
+                },
+                set(value) {
+                    if (_state[key] !== value) {
+                        let finalValue = value;
+                        if (finalStateSettings.onUpdate) {
+                            finalValue =
+                                finalStateSettings.onUpdate({
+                                    value,
+                                    key,
+                                }) ?? value;
                         }
-                    },
-                });
-            }
 
-            // restoring state
+                        _state[key] = finalValue;
+
+                        if (preventSave) {
+                            preventSave = false;
+                            return;
+                        }
+
+                        if (finalStateSettings.save) {
+                            clearTimeout(saveTimeout);
+                            saveTimeout = setTimeout(() => {
+                                localStorage.setItem(
+                                    `s-component-utils-state-${finalStateSettings.id}`,
+                                    JSON.stringify(_state),
+                                );
+                            });
+                        }
+                    }
+                },
+            });
+        }
+
+        // restoring state
+        if (finalStateSettings.save) {
             const savedState = localStorage.getItem(
                 `s-component-utils-state-${finalStateSettings.id}`,
             );

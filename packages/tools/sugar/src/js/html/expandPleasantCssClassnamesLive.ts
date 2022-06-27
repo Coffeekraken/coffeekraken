@@ -23,6 +23,7 @@ import __querySelectorLive from '../dom/query/querySelectorLive';
  */
 
 export interface IExpandPleasantCssClassnamesLiveSettings {
+    afterFirst: Function;
     rootNode: any;
 }
 
@@ -30,6 +31,7 @@ export default function expandPleasantCssClassnamesLive(
     settings?: Partial<IExpandPleasantCssClassnamesLiveSettings>,
 ) {
     settings = {
+        afterFirst: undefined,
         rootNode: document,
         ...settings,
     };
@@ -43,8 +45,8 @@ export default function expandPleasantCssClassnamesLive(
             });
         },
         {
+            afterFirst: settings.afterFirst,
             rootNode: settings?.rootNode,
-            once: true,
         },
     );
 }

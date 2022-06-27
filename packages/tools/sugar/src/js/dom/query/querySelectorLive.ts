@@ -41,6 +41,7 @@ import __SPromise from '@coffeekraken/s-promise';
 export interface IQuerySelectorLiveSettings {
     rootNode: HTMLElement;
     once: boolean;
+    afterFirst: Function;
 }
 
 let _observer,
@@ -63,6 +64,7 @@ function querySelectorLive(
         {
             rootNode: document,
             once: true,
+            afterFirst: null,
         },
         settings,
     );
@@ -176,9 +178,14 @@ function querySelectorLive(
     // first query
     _findAndProcessNodes(mapItem);
 
-    return new __SPromise(({ resolve, reject, emit }) => {
+    // after first callback
+    settings.afterFirst?.();
+
+    const pro = new __SPromise(({ resolve, reject, emit }) => {
         _emit = emit;
     });
+
+    return pro;
 }
 
 export default querySelectorLive;

@@ -99,7 +99,7 @@ export default class SRange extends __SLitComponent {
         super(
             __deepMerge({
                 name: 's-range',
-                shadowDom: false,
+                interface: __SRangeComponentInterface,
             }),
         );
     }

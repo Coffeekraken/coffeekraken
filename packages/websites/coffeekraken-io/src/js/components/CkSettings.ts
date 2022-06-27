@@ -29,6 +29,7 @@ export default class CkSettings extends __SLitComponent {
     }
 
     async firstUpdated() {
+        const $baseColorPicker = this.querySelector('#setting-base-color');
         const $mainColorPicker = this.querySelector('#setting-main-color');
         const $accentColorPicker = this.querySelector('#setting-accent-color');
         const $complementaryColorPicker = this.querySelector(
@@ -36,6 +37,9 @@ export default class CkSettings extends __SLitComponent {
         );
         const $fontSizeRange = this.querySelector('#setting-font-size');
 
+        $baseColorPicker.addEventListener('change', (e) => {
+            this._theme.setColor('base', e.detail.hex);
+        });
         $mainColorPicker.addEventListener('change', (e) => {
             this._theme.setColor('main', e.detail.hex);
         });
@@ -94,6 +98,23 @@ export default class CkSettings extends __SLitComponent {
                         <li class="s-bg:main-surface">
                             <label
                                 class="s-label s-pi:40 s-pb:30"
+                                for="setting-base-color"
+                            >
+                                Base color
+                                <s-color-picker id="setting-base-color">
+                                    <input
+                                        type="text"
+                                        class="s-input"
+                                        value="${this._theme
+                                            .getColor('base')
+                                            .toHex()}"
+                                    />
+                                </s-color-picker>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label s-pi:40 s-pb:30"
                                 for="setting-main-color"
                             >
                                 Main color
@@ -114,7 +135,10 @@ export default class CkSettings extends __SLitComponent {
                                 for="setting-accent-color"
                             >
                                 Accent color
-                                <s-color-picker id="setting-accent-color">
+                                <s-color-picker
+                                    style="position:relative"
+                                    id="setting-accent-color"
+                                >
                                     <input
                                         type="text"
                                         class="s-input"

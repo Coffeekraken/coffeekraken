@@ -147,8 +147,9 @@ export default class SConductor extends __SClass {
      */
     static setup(settings: Partial<ISConductorSettings>): void {
         if (this._defaultInstance) {
-            throw new Error(
-                `Sorry but you need to call the "SConductor.setup" method before all other static methods like "when"`,
+            this._defaultInstance.settings = __deepMerge(
+                this._defaultInstance.settings,
+                settings,
             );
         }
         this._defaultInstanceSettings = settings;

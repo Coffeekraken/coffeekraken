@@ -78,7 +78,7 @@ export default class SScrollComponent extends __SLitComponent {
         super(
             __deepMerge({
                 name: 's-scroll',
-                shadowDom: false,
+                interface: __SScrollComponentInterface,
             }),
         );
     }

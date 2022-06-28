@@ -1,3 +1,3 @@
-import __SDatePickerComponent from './SDatePickerComponent';
-export * from './SDatePickerComponent';
-export default __SDatePickerComponent;
+import __SDatetimePickerComponent from './SDatetimePickerComponent';
+export * from './SDatetimePickerComponent';
+export default __SDatetimePickerComponent;

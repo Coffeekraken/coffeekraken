@@ -14,7 +14,11 @@
     "main": "./dist/pkg/cjs/shared/exports.js",
     "module": "./dist/pkg/esm/shared/exports.js",
     "exports": {
-        ".": {
+        "node": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "default": {
             "require": "./dist/pkg/cjs/shared/exports.js",
             "import": "./dist/pkg/esm/shared/exports.js"
         }

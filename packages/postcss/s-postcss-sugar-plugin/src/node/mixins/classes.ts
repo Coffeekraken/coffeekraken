@@ -56,6 +56,7 @@ export default async function ({
         '@sugar.typo.classes;',
         '@sugar.container.classes;',
         '@sugar.grid.classes;',
+        '@sugar.group.classes;',
         '@sugar.layout.classes;',
         '@sugar.clearfix.classes;',
         '@sugar.cursor.classes;',

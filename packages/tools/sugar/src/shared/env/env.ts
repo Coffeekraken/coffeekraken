@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __isNode from '../is/node';
+import __delete from '../object/delete';
 import __get from '../object/get';
 import __set from '../object/set';
-import __delete from '../object/delete';
 import __parse from '../string/parse';
 
 /**
@@ -36,7 +36,7 @@ function env(dotPath, value?) {
         if (!window.process) window.process = {};
         if (!window.process.env) window.process.env = {};
     }
-    const targetObj = __isNode() ? global.process.env : window.process.env;
+    const targetObj = __isNode() ? global?.process.env : window.process.env;
 
     if (value === -1) {
         // delete the variable

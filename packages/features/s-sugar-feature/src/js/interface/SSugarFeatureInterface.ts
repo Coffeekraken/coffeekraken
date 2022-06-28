@@ -22,6 +22,18 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SSugarFeatureInterface extends __SInterface {
     static get _definition() {
         return {
+            pleasantCss: {
+                description:
+                    'Specify if you want the "pleasant css" syntax in your pages',
+                type: 'Boolean',
+                default: true,
+            },
+            containerQuery: {
+                description:
+                    'Specify if you want support for container queries in your css or not',
+                type: 'Boolean',
+                default: true,
+            },
             scrolled: {
                 description:
                     'Specify if you want the `scrolled` class to be applied on the `body` element when the page has been scrolled',
@@ -41,25 +53,29 @@ export default class SSugarFeatureInterface extends __SInterface {
                 default: true,
             },
             inputAdditionalAttributes: {
-                description: 'Specify if you want to have the additional attributes on inputs like "has-value", "empty" and "dirty" or not',
+                description:
+                    'Specify if you want to have the additional attributes on inputs like "has-value", "empty" and "dirty" or not',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             resizeTransmations: {
-                description: 'Specify if you want all the transitions and animations cleared during window resize',
+                description:
+                    'Specify if you want all the transitions and animations cleared during window resize',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             linksStateAttributes: {
-                description: 'Specify if you want to have the state attributes on links like "actual" and "actual-child" or not',   
+                description:
+                    'Specify if you want to have the state attributes on links like "actual" and "actual-child" or not',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             preventScrollRestoration: {
-                description: 'Specify if you want to prevent the scroll restoration behavior on chrome that can usually be anoying',
+                description:
+                    'Specify if you want to prevent the scroll restoration behavior on chrome that can usually be anoying',
                 type: 'Boolean',
-                default: true
-            }
+                default: true,
+            },
         };
     }
 }

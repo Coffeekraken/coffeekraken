@@ -9,9 +9,10 @@ import type {
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __makeFloat from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __baseCss from '@simonwep/pickr/dist/themes/nano.min.css';
 import { css, html, unsafeCSS } from 'lit';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
+
+// import './cqfill';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-color-picker.css'; // relative to /dist/pkg/esm/js
@@ -37,18 +38,17 @@ export interface ISColorPickerComponentProps {
     reset: boolean;
     validate: boolean;
     floatSettings: Partial<IFloatSettings>;
-    copyClass: string;
-    copiedClass: string;
+    copyIconClass: string;
+    copiedIconClass: string;
     buttonIconClass: string;
     position: 'top' | 'bottom';
-    swatches: string[];
     disabled: boolean;
 }
 
 /**
  * @name                SColorPickerComponent
- * @as                Color Picker
- * @WIP-namespace           js
+ * @as                  Color Picker
+ * @namespace           js
  * @type                CustomElement
  * @interface           ./interface/SColorPickerComponentInterface.ts
  * @menu                Styleguide / Forms              /styleguide/form/s-color-picker
@@ -74,10 +74,6 @@ export interface ISColorPickerComponentProps {
  * import { define } from '@coffeekraken/s-color-picker-component';
  * define();
  *
- * @event           change              Emitted when the color is changing inside the picker
- * @event           show                Emitted when the color picker is shown
- * @event           hide                Emitted when the color picker is hided
- *
  * @example         html            Simple input
  * <label class="s-label:responsive">
  *      Choose a color
@@ -90,6 +86,12 @@ export interface ISColorPickerComponentProps {
  *      <s-color-picker value="#5101FF" placeholder="Choose a color" input button></s-color-picker>
  * </label>
  *
+ * @example         html            With a different format (hsla)
+ * <label class="s-label:responsive">
+ *      Choose a color
+ *      <s-color-picker value="#5101FF" format="hsla" placeholder="Choose a color" input button></s-color-picker>
+ * </label>
+ *
  * @example         html            Just a button
  * <label class="s-label:responsive">
  *      Choose a color
@@ -100,7 +102,7 @@ export interface ISColorPickerComponentProps {
  * <label class="s-label:responsive">
  *      Choose a color
  *      <s-color-picker>
- *          <input type="text" placeholder="Choose a color" value="#FABB03" />
+ *          <input type="text" class="s-input" placeholder="Choose a color" value="#FABB03" />
  *      </s-color-picker>
  * </label>
  *
@@ -116,8 +118,10 @@ export interface ISColorPickerComponentProps {
  * <label class="s-label:responsive">
  *      Choose a color
  *      <s-color-picker>
- *          <input type="text" placeholder="Choose a color" value="#FABB03" />
- *          <button class="s-btn s-color:error">Choose a color</button>
+ *          <div class="s-group">
+ *              <input type="text" class="s-input" placeholder="Choose a color" value="#FABB03" />
+ *              <button class="s-btn s-color:error">Choose a color</button>
+ *          </div>
  *      </s-color-picker>
  * </label>
  *
@@ -133,7 +137,6 @@ export interface ISColorPickerComponentProps {
  *      <s-color-picker value="#FABB03" placeholder="Choose a color" input button dir="rtl"></s-color-picker>
  * </label>
  *
- * @see             https://www.npmjs.com/package/@simonwep/pickr
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -148,7 +151,6 @@ export default class SColorPicker extends __SLitComponent {
     static get styles() {
         return css`
             ${unsafeCSS(`
-                ${__baseCss}
                 ${__css}
             `)}
         `;
@@ -196,6 +198,7 @@ export default class SColorPicker extends __SLitComponent {
         this._$input = this.querySelector('input');
         this._hasInput = this._$input !== null;
         this._$button = this.querySelector('button');
+        this._$button?.addEventListener('click', (e) => e.preventDefault());
         this._hasButton = this._$button !== null;
     }
     async mount() {
@@ -241,7 +244,7 @@ export default class SColorPicker extends __SLitComponent {
         if (!this._$input) {
             this._$input = this.querySelector('input');
         } else {
-            this._$root.append(this._$input);
+            // this._$root.append(this._$input);
         }
         if (!this._$input?.hasAttribute('name')) {
             this._$input?.setAttribute('name', this.props.name);
@@ -292,11 +295,13 @@ export default class SColorPicker extends __SLitComponent {
         this._updateInput('init');
 
         // make the panel float
-        this._floatApi = __makeFloat(
-            this._$picker,
-            this._$root,
-            this.props.floatSettings,
-        );
+        if (!this.props.inline) {
+            this._floatApi = __makeFloat(
+                this._$picker,
+                this._$root,
+                this.props.floatSettings,
+            );
+        }
     }
 
     _initColor() {
@@ -410,15 +415,6 @@ export default class SColorPicker extends __SLitComponent {
 
     _isAlphaWanted() {
         return this.props.format.includes('a');
-    }
-
-    _finalInputValue(): string {
-        switch (this.props.format) {
-            case 'hex':
-                return this._color.toHexString();
-            case 'hexa':
-                return this._color.toHexa;
-        }
     }
 
     _getPixelFrom($elm, ctx, pos) {
@@ -586,13 +582,13 @@ export default class SColorPicker extends __SLitComponent {
     }
 
     _copy() {
-        const originalClass = this.props.copyClass;
-        this.props.copyClass = this.props.copiedClass;
+        const originalClass = this.props.copyIconClass;
+        this.props.copyIconClass = this.props.copiedIconClass;
 
         __copy(this._$colorInput.value);
 
         setTimeout(() => {
-            this.props.copyClass = originalClass;
+            this.props.copyIconClass = originalClass;
         }, 1000);
     }
 
@@ -722,7 +718,23 @@ export default class SColorPicker extends __SLitComponent {
                     ? 'is-interacting'
                     : ''}"
             >
-                <div class="${this.componentUtils.className('__injected')}">
+                ${!this._hasInput && !this.props.input
+                    ? html`
+                          <input
+                              ?disabled=${this.props.disabled}
+                              type="hidden"
+                              name="${this.props.name}"
+                              value="${this.state.value ?? this.props.value}"
+                          />
+                      `
+                    : ''}
+
+                <div
+                    class="${this.componentUtils.className(
+                        '__injected',
+                        's-group',
+                    )}"
+                >
                     ${!this._hasInput && this.props.input
                         ? html`
                               <input
@@ -740,15 +752,7 @@ export default class SColorPicker extends __SLitComponent {
                               />
                           `
                         : !this._hasInput
-                        ? html`
-                              <input
-                                  ?disabled=${this.props.disabled}
-                                  type="hidden"
-                                  name="${this.props.name}"
-                                  value="${this.state.value ??
-                                  this.props.value}"
-                              />
-                          `
+                        ? ''
                         : ``}
                     ${!this._hasButton && this.props.button
                         ? html`
@@ -909,10 +913,11 @@ export default class SColorPicker extends __SLitComponent {
                                 )} "
                                 @click=${() => this._copy()}
                             >
-                                ${this.props.copyClass
+                                ${this.props.copyIconClass
                                     ? html`
                                           <i
-                                              class="${this.props.copyClass}"
+                                              class="${this.props
+                                                  .copyIconClass}"
                                           ></i>
                                       `
                                     : ''}

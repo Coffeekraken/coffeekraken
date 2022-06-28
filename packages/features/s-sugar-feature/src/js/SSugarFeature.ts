@@ -4,6 +4,7 @@ import __preventScrollRestoration from '@coffeekraken/sugar/js/dom/scroll/preven
 import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
 import __inputAdditionalAttributes from '@coffeekraken/sugar/js/feature/inputAdditionalAttributes';
 import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
+import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 
@@ -14,6 +15,8 @@ export interface ISSugarFeatureProps {
     inputAdditionalAttributes: boolean;
     linksStateAttributes: boolean;
     preventScrollRestoration: boolean;
+    containerQuery: boolean;
+    pleasantCss: boolean;
 }
 
 /**
@@ -33,6 +36,8 @@ export interface ISSugarFeatureProps {
  * value of the `--vh` variable if it exists.
  * More feature can be added in the future depending on the needs.
  *
+ * @feature         Support for "pleasant css" syntax like "s-btn:outline"
+ * @feature         Polyfill for container queries if needed
  * @feature        `scrolled` class applied on the body when the user has scrolled the page
  * @feature         Access to a `--vh` css variable that represent the exact viewport innerHeight and avoid having issues with mobile different viewport height values
  * @feature         Clear all transitions and animations on all the page during a window resize. Helps for performances and cleaner for user
@@ -69,7 +74,17 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
             ),
         );
     }
-    mount() {
+    async mount() {
+        // container query
+        // if (
+        //     this.props.containerQuery &&
+        //     !('container' in document.documentElement.style)
+        // ) {
+        //     // @ts-ignore
+        //     import('https://cdn.skypack.dev/container-query-polyfill');
+        // }
+        // pleasant css
+        if (this.props.pleasantCss) this._pleasantCss();
         // scrolled
         if (this.props.scrolled) this._scrolled();
         // vhvar
@@ -98,6 +113,17 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
                 this._isResizing = false;
                 resetFn?.();
             }, 100);
+        });
+    }
+    _pleasantCss() {
+        // layout related
+        __expandPleasantCssClassnamesLive({
+            afterFirst() {
+                setTimeout(() => {
+                    document.body.classList.remove('initial-loading');
+                    document.body.classList.remove('loading');
+                }, 500);
+            },
         });
     }
     _scrolled() {

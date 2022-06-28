@@ -1,5 +1,5 @@
 {
-    "name": "@coffeekraken/s-date-picker-component",
+    "name": "@coffeekraken/s-datetime-picker-component",
     "version": "2.0.0",
     "description": "",
     "type": "module",
@@ -13,15 +13,14 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
+        "@coffeekraken/s-color": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
         "@coffeekraken/s-lit-component": "^2.0.0",
-        "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/s-theme": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
+        "@floating-ui/dom": "^0.5.4",
         "@simonwep/pickr": "^1.8.1",
-        "jsdom": "^17.0.0",
-        "lit": "^2.2.5",
-        "moment": "^2.29.1",
-        "pikaday": "^1.8.2"
+        "lit": "^2.0.0-rc.3"
     },
     "main": "./dist/pkg/cjs/js/exports.js",
     "module": "./dist/pkg/esm/js/exports.js",

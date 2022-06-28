@@ -1,4 +1,3 @@
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 // @ts-ignore
@@ -160,17 +159,4 @@ export default class SEnv {
     static delete(name: string): void {
         delete SEnv.env[name.toUpperCase()];
     }
-
-    /**
-     * @name        packageJson
-     * @type        Object
-     * @static
-     *
-     * Access the package.json content from the current package the process
-     * runs in.
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static packageJson = __packageJsonSync();
 }

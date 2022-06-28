@@ -21,8 +21,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-panel-component';
 import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
 
-import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
-
 // Components
 import { define as __CKBlobComponent } from './components/CkBlob';
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
@@ -67,16 +65,6 @@ __SConductor.setup({
 
     // init theme
     __STheme.init();
-
-    // layout related
-    __expandPleasantCssClassnamesLive({
-        afterFirst() {
-            setTimeout(() => {
-                document.body.classList.remove('initial-loading');
-                document.body.classList.remove('loading');
-            }, 1000);
-        },
-    });
 
     // features
     __sActivateFeature();

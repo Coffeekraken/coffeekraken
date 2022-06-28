@@ -137,7 +137,6 @@ export default function ({
             })
             .join('\n')}
         * @cssClass            s-format:text button             Apply the button style on button tags inside the s-format:text scope 
-        * @cssClass            s-btn-group s-btn                Apply the button group style on a buttons wrapper
         * @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped button(s)
         * 
         ${finalParams.styles
@@ -162,14 +161,6 @@ export default function ({
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
-            *   <span class="s-btn-group s-mie:20 s-mbe:20">
-            *       <a tabindex="0" class="s-btn:${
-                finalParams.defaultStyle === style ? '' : `:${style}`
-            }"><span>Click me!</span></a>
-            *       <a tabindex="0" class="s-btn:${
-                finalParams.defaultStyle === style ? '' : `:${style}`
-            }"><span>+</span></a>
-            *   </span>
             *   <a tabindex="0" disabled class="s-btn:${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20 s-mbe:20"><span>Click me!</span></a>
@@ -199,14 +190,6 @@ export default function ({
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20 s-mbe:20 s-color:error">Click me!</a>
-            *   <span class="s-btn-group s-mie:20 s-mbe:20">
-            *       <a tabindex="0" class="s-btn:${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            }">Click me!</a>
-            *       <a tabindex="0" class="s-btn:${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            }"><span>+</span></a>
-            *   </span>
             *   <a tabindex="0" disabled class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20 s-mbe:20">Click me!</a>
@@ -343,62 +326,6 @@ export default function ({
         `
       .s-btn--block {
         display: block !important;
-      }
-    `,
-        {
-            type: 'CssClass',
-        },
-    );
-
-    vars.comment(
-        () => `/**
-        * @name           s-btn-group
-        * @namespace          sugar.style.ui.button
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">group</s-color>" of buttons
-        * 
-        * @example        html
-        * <span class="s-btn-group">
-        *   <a class="s-btn--block">I'm a cool block button</a>
-        *   <a class="s-btn--block">+</a>
-        * </span>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */`,
-    );
-    vars.code(
-        `
-      .s-btn-group {
-          display: inline-flex !important;   
-          flex-wrap: nowrap;
-          vertical-align: top;
-      }
-      .s-btn-group > .s-btn {
-
-        &:first-child:not(:last-child) {
-          border-inline-end: 1px solid sugar.color(current, --darken 5);
-        }
-
-        &:not(:first-child):not(:last-child),
-        &:not(:first-child):not(:last-child):before,
-        &:not(:first-child):not(:last-child):after {
-            border-radius: 0 !important;
-        }
-        &:first-child:not(:last-child),
-        &:first-child:not(:last-child):before,
-        &:first-child:not(:last-child):after {
-            border-top-right-radius: 0 !important;
-            border-bottom-right-radius: 0 !important;
-        }
-        &:last-child:not(:first-child),
-        &:last-child:not(:first-child):before,
-        &:last-child:not(:first-child):after {
-            border-top-left-radius: 0 !important;
-            border-bottom-left-radius: 0 !important;
-            border-inline-start: none !important;
-        }
       }
     `,
         {

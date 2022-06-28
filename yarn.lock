@@ -3348,6 +3348,7 @@ __metadata:
     "@coffeekraken/s-feature": ^2.0.0
     "@coffeekraken/s-interface": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
+    container-query-polyfill: ^0.1.2
   languageName: unknown
   linkType: soft
 
@@ -8712,6 +8713,15 @@ __metadata:
     tslib: ^2.0.3
     upper-case: ^2.0.2
   checksum: 6c3346d51afc28d9fae922e966c68eb77a19d94858dba230dd92d7b918b37d36db50f0311e9ecf6847e43e934b1c01406a0936973376ab17ec2c471fbcfb2cf3
+  languageName: node
+  linkType: hard
+
+"container-query-polyfill@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "container-query-polyfill@npm:0.1.2"
+  dependencies:
+    esbuild: ^0.13.13
+  checksum: 7f63f6e7560eeb861f9429b994b5cc63b1301952240617fb7cf7102191724ed945a3af0e4a6caf1a85e0ab71534d43b7c7e35fac7a313c8629efdc6eb87eb390
   languageName: node
   linkType: hard
 

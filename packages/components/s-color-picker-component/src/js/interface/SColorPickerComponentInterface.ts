@@ -131,13 +131,13 @@ export default class SColorPickerComponentInterface extends __SInterface {
                     arrowPadding: 10,
                 },
             },
-            copyClass: {
+            copyIconClass: {
                 description:
                     'Specify the class you want to apply on the "i" that display the "copy" icon',
                 type: 'String',
                 default: 's-icon s-icon--copy',
             },
-            copiedClass: {
+            copiedIconClass: {
                 description:
                     'Specify the class you want to apply on the "i" that display the "copy" icon when the color has been copied',
                 type: 'String',
@@ -148,11 +148,6 @@ export default class SColorPickerComponentInterface extends __SInterface {
                     'Specify the class you want to apply on the injected button icon',
                 type: 'String',
                 default: 's-icon s-icon--color',
-            },
-            swatches: {
-                description: 'Specify some colors you want in your swatches',
-                type: 'Array<String>',
-                default: [],
             },
             disabled: {
                 description: 'Specify if the color picker is disabled',

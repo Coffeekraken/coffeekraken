@@ -102,13 +102,18 @@ export default class CkSettings extends __SLitComponent {
                             >
                                 Base color
                                 <s-color-picker id="setting-base-color">
-                                    <input
-                                        type="text"
-                                        class="s-input"
-                                        value="${this._theme
-                                            .getColor('base')
-                                            .toHex()}"
-                                    />
+                                    <div class="s-group">
+                                        <input
+                                            type="text"
+                                            class="s-input"
+                                            value="${this._theme
+                                                .getColor('base')
+                                                .toHex()}"
+                                        />
+                                        <button class="s-btn s-color:base">
+                                            <i class="s-icon:color"></i>
+                                        </button>
+                                    </div>
                                 </s-color-picker>
                             </label>
                         </li>
@@ -119,13 +124,18 @@ export default class CkSettings extends __SLitComponent {
                             >
                                 Main color
                                 <s-color-picker id="setting-main-color">
-                                    <input
-                                        type="text"
-                                        class="s-input"
-                                        value="${this._theme
-                                            .getColor('main')
-                                            .toHex()}"
-                                    />
+                                    <div class="s-group">
+                                        <input
+                                            type="text"
+                                            class="s-input"
+                                            value="${this._theme
+                                                .getColor('main')
+                                                .toHex()}"
+                                        />
+                                        <button class="s-btn s-color:main">
+                                            <i class="s-icon:color"></i>
+                                        </button>
+                                    </div>
                                 </s-color-picker>
                             </label>
                         </li>
@@ -139,13 +149,18 @@ export default class CkSettings extends __SLitComponent {
                                     style="position:relative"
                                     id="setting-accent-color"
                                 >
-                                    <input
-                                        type="text"
-                                        class="s-input"
-                                        value="${this._theme
-                                            .getColor('accent')
-                                            .toHex()}"
-                                    />
+                                    <div class="s-group">
+                                        <input
+                                            type="text"
+                                            class="s-input"
+                                            value="${this._theme
+                                                .getColor('accent')
+                                                .toHex()}"
+                                        />
+                                        <button class="s-btn s-color:accent">
+                                            <i class="s-icon:color"></i>
+                                        </button>
+                                    </div>
                                 </s-color-picker>
                             </label>
                         </li>
@@ -158,13 +173,20 @@ export default class CkSettings extends __SLitComponent {
                                 <s-color-picker
                                     id="setting-complementary-color"
                                 >
-                                    <input
-                                        type="text"
-                                        class="s-input"
-                                        value="${this._theme
-                                            .getColor('complementary')
-                                            .toHex()}"
-                                    />
+                                    <div class="s-group">
+                                        <input
+                                            type="text"
+                                            class="s-input"
+                                            value="${this._theme
+                                                .getColor('complementary')
+                                                .toHex()}"
+                                        />
+                                        <button
+                                            class="s-btn s-color:complementary"
+                                        >
+                                            <i class="s-icon:color"></i>
+                                        </button>
+                                    </div>
                                 </s-color-picker>
                             </label>
                         </li>

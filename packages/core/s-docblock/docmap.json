@@ -24,7 +24,7 @@
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
             "@coffeekraken/s-data-file-php",
-            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-datetime-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",

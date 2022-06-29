@@ -29,6 +29,15 @@ body {
     border: none !important;
 }
 
+.s-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: blue;
+}
+
 .s-container {
     @sugar.media (>=wide) {
         @sugar.layout.container (wide);

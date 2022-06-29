@@ -100,23 +100,21 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 default: false,
                 physical: true,
             },
-            clear: {
+            backdrop: {
                 description:
-                    'Specify if you want the "clear" button that take the color picker back to his initial state (clear the state)',
+                    'Specify if you want the ".s-backdrop" element or not',
                 type: 'Boolean',
-                default: true,
+                default: false,
             },
-            reset: {
+            actions: {
                 description:
-                    'Specify if you want the "reset" button that take the color picker back to his "state" state',
-                type: 'Boolean',
-                default: true,
-            },
-            validate: {
-                description:
-                    'Specify if you want the "validate" button that apply the color and close the picker',
-                type: 'Boolean',
-                default: true,
+                    'Specify the actions buttons you want to display. Can be "clear", "reset" and "validate". If false, hide all button',
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['clear', 'reset', 'validate'],
+                default: ['reset', 'validate'],
             },
             floatSettings: {
                 description:

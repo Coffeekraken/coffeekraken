@@ -26,9 +26,18 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-let _isUserScrolling = false, _userScrollingTimeout;
+let _isUserScrolling = false,
+    _userScrollingTimeout;
 document.addEventListener('wheel', (e) => {
-    _isUserScrolling = true
+    _isUserScrolling = true;
+    clearTimeout(_userScrollingTimeout);
+    _userScrollingTimeout = setTimeout(() => {
+        _isUserScrolling = false;
+    }, 200);
+});
+
+document.addEventListener('touchmove', (e) => {
+    _isUserScrolling = true;
     clearTimeout(_userScrollingTimeout);
     _userScrollingTimeout = setTimeout(() => {
         _isUserScrolling = false;
@@ -37,13 +46,20 @@ document.addEventListener('wheel', (e) => {
 
 export default function userScrolling($elm) {
     $elm.addEventListener('mouseover', (e) => {
-        $elm._isMouseover = true;
+        $elm._isUserInteractive = true;
     });
     $elm.addEventListener('mouseout', (e) => {
-        $elm._isMouseover = false;
+        $elm._isUserInteractive = false;
     });
-    if ($elm._isMouseover && _isUserScrolling) {
+    $elm.addEventListener('touchstart', (e) => {
+        $elm._isUserInteractive = true;
+    });
+    $elm.addEventListener('touchend', (e) => {
+        $elm._isUserInteractive = false;
+    });
+
+    if ($elm._isUserInteractive && _isUserScrolling) {
         return true;
-    }   
+    }
     return false;
 }

@@ -22,7 +22,7 @@
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
             "@coffeekraken/s-data-file-php",
-            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-datetime-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -84,6 +84,35 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-color-picker-component.doc.README": {
+                "id": "@coffeekraken.s-color-picker-component.doc.README",
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-color-picker-component.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-color-picker-component.js.SColorPickerComponent": {
                 "id": "@coffeekraken.s-color-picker-component.js.SColorPickerComponent",
                 "name": "SColorPickerComponent",
@@ -118,13 +147,18 @@
                     },
                     {
                         "language": "html",
+                        "title": "With a different format (hsla)",
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker value=\"#5101FF\" format=\"hsla\" placeholder=\"Choose a color\" input button></s-color-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
                         "title": "Just a button",
                         "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker value=\"#55FFFF\" button></s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "With a custom input",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker>\n         <input type=\"text\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n     </s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker>\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n     </s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
@@ -134,7 +168,7 @@
                     {
                         "language": "html",
                         "title": "With a custom input and button",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker>\n         <div class=\"s-group\">\n             <input type=\"text\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n             <button class=\"s-btn s-color:error\">Choose a color</button>\n         </div>\n     </s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker>\n         <div class=\"s-group\">\n             <input type=\"text\" class=\"s-input\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n             <button class=\"s-btn s-color:error\">Choose a color</button>\n         </div>\n     </s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
@@ -231,20 +265,29 @@
                             "default": false,
                             "physical": true
                         },
-                        "clear": {
-                            "description": "Specify if you want the \"clear\" button that take the color picker back to his initial state (clear the state)",
+                        "backdrop": {
+                            "description": "Specify if you want the \".s-backdrop\" element or not",
                             "type": "Boolean",
-                            "default": true
+                            "default": false
                         },
-                        "reset": {
-                            "description": "Specify if you want the \"reset\" button that take the color picker back to his \"state\" state",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "validate": {
-                            "description": "Specify if you want the \"validate\" button that apply the color and close the picker",
-                            "type": "Boolean",
-                            "default": true
+                        "actions": {
+                            "description": "Specify the actions buttons you want to display. Can be \"clear\", \"reset\" and \"validate\". If false, hide all button",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "clear",
+                                "reset",
+                                "validate"
+                            ],
+                            "default": [
+                                "reset",
+                                "validate"
+                            ]
                         },
                         "floatSettings": {
                             "description": "Specify some float settings to pass to the \"makeFloat\" function of the sugar toolkit",

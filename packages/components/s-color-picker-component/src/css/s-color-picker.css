@@ -21,11 +21,19 @@ s-color-picker {
         opacity: 1 !important;
     }
 
+    .s-backdrop {
+        pointer-events: none;
+        opacity: 0;
+        @sugar.transition (fast);
+    }
+
     .s-color-picker {
         display: flex;
         width: 100%;
 
-        &.is-interacting * {
+        &.is-alpha-interacting *,
+        &.is-shade-interacting *,
+        &.is-hue-interacting * {
             cursor: none !important;
         }
     }
@@ -80,6 +88,11 @@ s-color-picker {
             @sugar.media <=mobile {
                 transform: translate(0, 0);
             }
+        }
+
+        .s-backdrop  {
+            opacity: 1;
+            pointer-events: all;
         }
     }
 
@@ -359,11 +372,12 @@ s-color-picker[lnf='default'] {
         padding: sugar.padding(30);
         overflow: hidden;
         transition: sugar.transition(fast);
-        transition-property: opacity;
+        transition-property: opacity, transform;
         border-radius: sugar.border.radius();
 
         @sugar.media <=mobile {
             border-radius: 0;
+            overflow: visible;
         }
     }
     &[inline] .s-color-picker__picker {
@@ -385,32 +399,84 @@ s-color-picker[lnf='default'] {
             width: 20px;
             height: 20px;
             border-radius: 999px;
-            background: none;
             border: solid 10px sugar.color(main, surface);
             border-color: white;
             transition: border-width 0.15s ease-in-out;
-            @sugar.depth (10);
-        }
-    }
-    .s-color-picker__shade-wrapper {
-        &:after {
-            width: 20px;
-            height: 20px;
-            border-radius: 999px;
-            background: none;
-            border: solid 10px sugar.color(main, surface);
-            border-color: white;
-            transition: border-width 0.15s ease-in-out;
+            transition-property: border-width, width, height, transform;
             @sugar.depth (10);
         }
     }
 
-    .s-color-picker.is-interacting {
-        .s-color-picker__hue-wrapper,
-        .s-color-picker__alpha-wrapper,
+    .s-color-picker__alpha-wrapper {
+        &:after {
+            background: hsla(
+                0,
+                0%,
+                calc((1 - var(--s-color-picker-a)) * 100%),
+                1
+            );
+        }
+    }
+    .s-color-picker.is-alpha-interacting {
+        .s-color-picker__alpha-wrapper {
+            &:after {
+                border-width: 3px;
+                width: 60px;
+                height: 60px;
+
+                @sugar.media <=mobile {
+                    height: 120px;
+                    width: 60px;
+                    transform: translate(-50%, calc(-100% + 30px));
+                }
+            }
+        }
+    }
+
+    .s-color-picker__shade-wrapper {
+        &:after {
+            background: hsla(
+                var(--s-color-picker-h),
+                calc(var(--s-color-picker-s) * 1%),
+                calc(var(--s-color-picker-l) * 1%),
+                var(--s-color-picker-a)
+            );
+        }
+    }
+
+    .s-color-picker.is-shade-interacting {
         .s-color-picker__shade-wrapper {
             &:after {
                 border-width: 3px;
+                width: 60px;
+                height: 60px;
+
+                @sugar.media <=mobile {
+                    height: 120px;
+                    width: 60px;
+                    transform: translate(-50%, calc(-100% + 30px));
+                }
+            }
+        }
+    }
+
+    .s-color-picker__hue-wrapper {
+        &:after {
+            background: hsla(var(--s-color-picker-h), 100%, 50%, 1);
+        }
+    }
+    .s-color-picker.is-hue-interacting {
+        .s-color-picker__hue-wrapper {
+            &:after {
+                border-width: 3px;
+                width: 60px;
+                height: 60px;
+
+                @sugar.media <=mobile {
+                    height: 120px;
+                    width: 60px;
+                    transform: translate(-50%, calc(-100% + 30px));
+                }
             }
         }
     }

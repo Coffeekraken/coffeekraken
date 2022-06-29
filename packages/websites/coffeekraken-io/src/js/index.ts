@@ -1,6 +1,7 @@
 import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
 import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
+import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
 import __SFeature from '@coffeekraken/s-feature';
 import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
 import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
@@ -84,8 +85,8 @@ __SConductor.setup({
     __SFiltrableInputComponent();
     __SSidePanelWebcomponent();
     __SColorPickerComponent();
+    __SDatetimePickerComponent();
     __SScrollComponent();
-    // __SDatePickerWebcomponent();
     __SRangeWebcomponent();
     __SSliderComponent({
         behaviors: {

@@ -39,35 +39,24 @@ export default class SDatetimePickerComponentInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [','],
                 },
-                values: [
-                    'pointerdown',
-                    'pointerup',
-                    'pointermove',
-                    'validate',
-                    'reset',
-                    'clear',
-                    'close',
-                ],
-                default: [
-                    'pointerdown',
-                    'pointerup',
-                    'pointermove',
-                    'validate',
-                    'reset',
-                    'clear',
-                    'close',
-                ],
+                values: ['select', 'validate', 'reset', 'clear', 'close'],
+                default: ['select', 'validate', 'reset', 'clear', 'close'],
             },
             format: {
                 description:
                     'Specify the format of the color you want as end in the input value. Can be "hex", "hexa", "rgb", "rgba", "hsl" or "hsla"',
                 type: 'String',
-                values: ['hex', 'hexa', 'rgb', 'rgba', 'hsl', 'hsla'],
-                default: 'hex',
+                default: 'yyyy-mm-dd',
             },
             inline: {
                 description:
                     'Specify if you want to initalize the color picker inline or if you want it to be displayed only when the focus is in the input',
+                type: 'Boolean',
+                default: false,
+                physical: true,
+            },
+            calendar: {
+                description: 'Specify if you want to display a calendar or not',
                 type: 'Boolean',
                 default: false,
                 physical: true,
@@ -114,24 +103,6 @@ export default class SDatetimePickerComponentInterface extends __SInterface {
                 default: false,
                 physical: true,
             },
-            clear: {
-                description:
-                    'Specify if you want the "clear" button that take the color picker back to his initial state (clear the state)',
-                type: 'Boolean',
-                default: true,
-            },
-            reset: {
-                description:
-                    'Specify if you want the "reset" button that take the color picker back to his "state" state',
-                type: 'Boolean',
-                default: true,
-            },
-            validate: {
-                description:
-                    'Specify if you want the "validate" button that apply the color and close the picker',
-                type: 'Boolean',
-                default: true,
-            },
             floatSettings: {
                 description:
                     'Specify some float settings to pass to the "makeFloat" function of the sugar toolkit',
@@ -163,10 +134,71 @@ export default class SDatetimePickerComponentInterface extends __SInterface {
                 type: 'String',
                 default: 's-icon s-icon--color',
             },
+            disable: {
+                description:
+                    'Specify what you want to disable. It can be "weekend", "week" or "2022-12-19" (dates)',
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                default: [],
+            },
             disabled: {
                 description: 'Specify if the color picker is disabled',
                 type: 'Boolean',
                 default: false,
+            },
+            backdrop: {
+                description:
+                    'Specify if you want the ".s-backdrop" element or not',
+                type: 'Boolean',
+                default: false,
+            },
+            actions: {
+                description:
+                    'Specify the actions buttons you want to display. Can be "clear", "reset" and "validate". If false, hide all button',
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['clear', 'reset', 'validate'],
+                default: ['reset', 'validate'],
+            },
+            hours: {
+                description: 'Specify the hours you want in the time selector',
+                type: 'Array<Number>',
+                default: [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                ],
+            },
+            minutes: {
+                description:
+                    'Specify the minutes you want in the time selector',
+                type: 'Array<Number>',
+                default: [0, 5, 10, 15, 20, 25, 30, 25, 40, 45, 50, 55],
             },
             fromYear: {
                 description: 'Specify the first year to allow selection from',

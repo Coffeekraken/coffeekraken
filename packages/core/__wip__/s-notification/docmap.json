@@ -18,7 +18,7 @@
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-datetime-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",

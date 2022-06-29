@@ -3,6 +3,7 @@
 import __SColor from '@coffeekraken/s-color';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';
+import __preventViewportMovement from '@coffeekraken/sugar/js/dom/touch/preventViewportMovement';
 import type {
     IFloatApi,
     IFloatSettings,
@@ -11,8 +12,6 @@ import __makeFloat from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
-
-// import './cqfill';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-color-picker.css'; // relative to /dist/pkg/esm/js
@@ -34,9 +33,8 @@ export interface ISColorPickerComponentProps {
     inline: boolean;
     input: boolean;
     button: boolean;
-    clear: boolean;
-    reset: boolean;
-    validate: boolean;
+    actions: ('clear' | 'reset' | 'validate')[];
+    backdrop: boolean;
     floatSettings: Partial<IFloatSettings>;
     copyIconClass: string;
     copiedIconClass: string;
@@ -186,7 +184,9 @@ export default class SColorPicker extends __SLitComponent {
     _inputColor;
     _color;
 
-    _isInInteraction = false;
+    _isShadeInInteraction = false;
+    _isAlphaInInteraction = false;
+    _isHueInInteraction = false;
 
     constructor() {
         super(
@@ -255,11 +255,17 @@ export default class SColorPicker extends __SLitComponent {
         if (!this._$input?.hasAttribute('autocomplete')) {
             this._$input?.setAttribute('autocomplete', 'off');
         }
+        this._$input.setAttribute('readonly', true);
 
         // update float on focus
         this.addEventListener('focusin', (e) => {
             this._floatApi?.update();
         });
+
+        __preventViewportMovement(
+            this.querySelector('.s-color-picker__selectors'),
+        );
+        __preventViewportMovement(this.querySelector('.s-color-picker__metas'));
 
         // handle form reset
         // this._$input?.form?.addEventListener('reset', () => {
@@ -432,48 +438,56 @@ export default class SColorPicker extends __SLitComponent {
         let isShadeDown = false;
         this._$shade.addEventListener('pointerdown', (e) => {
             isShadeDown = true;
-            this._isInInteraction = true;
+            this._isShadeInInteraction = true;
             this._$shade.setPointerCapture(e.pointerId);
             this._setShadeFromEvent(e, false);
             this._updateInput('pointerdown');
             this.requestUpdate();
         });
         this._$shade.addEventListener('pointermove', (e) => {
+            e.preventDefault();
             if (!isShadeDown) return;
             this._setShadeFromEvent(e, false);
             this._updateInput('pointermove');
         });
         this._$shade.addEventListener('pointerup', (e) => {
             isShadeDown = false;
-            this._isInInteraction = false;
+            this._isShadeInInteraction = false;
             this._$shade.releasePointerCapture(e.pointerId);
             this._setShadeFromEvent(e, true);
             this._updateInput('pointerup');
             this.requestUpdate();
         });
 
+        // prevent viewport movements
+        // __preventViewportMovement(this._$shade);
+
         let isAlphaDown = false;
         this._$alpha.addEventListener('pointerdown', (e) => {
             isAlphaDown = true;
-            this._isInInteraction = true;
+            this._isAlphaInInteraction = true;
             this._$alpha.setPointerCapture(e.pointerId);
             this._setAlphaFromEvent(e, false);
             this._updateInput('pointerdown');
             this.requestUpdate();
         });
         this._$alpha.addEventListener('pointermove', (e) => {
+            e.preventDefault();
             if (!isAlphaDown) return;
             this._setAlphaFromEvent(e, false);
             this._updateInput('pointermove');
         });
         this._$alpha.addEventListener('pointerup', (e) => {
             isAlphaDown = false;
-            this._isInInteraction = false;
+            this._isAlphaInInteraction = false;
             this._$alpha.releasePointerCapture(e.pointerId);
             this._setAlphaFromEvent(e, true);
             this._updateInput('pointerup');
             this.requestUpdate();
         });
+
+        // prevent viewport movements
+        // __preventViewportMovement(this._$alpha);
     }
 
     /**
@@ -621,25 +635,29 @@ export default class SColorPicker extends __SLitComponent {
         let isHueDown = false;
         this._$hue.addEventListener('pointerdown', (e) => {
             isHueDown = true;
-            this._isInInteraction = true;
+            this._isHueInInteraction = true;
             this.requestUpdate();
             this._$hue.setPointerCapture(e.pointerId);
             this._setHueFromEvent(e, false);
             this._updateInput('pointerdown');
         });
         this._$hue.addEventListener('pointermove', (e) => {
+            e.preventDefault();
             if (!isHueDown) return;
             this._setHueFromEvent(e);
             this._updateInput('pointermove', false);
         });
         this._$hue.addEventListener('pointerup', (e) => {
             isHueDown = false;
-            this._isInInteraction = false;
+            this._isHueInInteraction = false;
             this.requestUpdate();
             this._$hue.releasePointerCapture(e.pointerId);
             this._setHueFromEvent(e, true);
             this._updateInput('pointerup', true);
         });
+
+        // prevent viewport movements
+        // __preventViewportMovement(this._$hue);
     }
 
     /**
@@ -714,8 +732,12 @@ export default class SColorPicker extends __SLitComponent {
                 class="${this.componentUtils.className(
                     '',
                 )} ${this.componentUtils.className('')}--${this.props
-                    .floatSettings.position} ${this._isInInteraction
-                    ? 'is-interacting'
+                    .floatSettings.position} ${this._isShadeInInteraction
+                    ? 'is-shade-interacting'
+                    : ''} ${this._isAlphaInInteraction
+                    ? 'is-alpha-interacting'
+                    : ''} ${this._isHueInInteraction
+                    ? 'is-hue-interacting'
                     : ''}"
             >
                 ${!this._hasInput && !this.props.input
@@ -776,6 +798,9 @@ export default class SColorPicker extends __SLitComponent {
                           `
                         : ''}
                 </div>
+                ${this.props.backdrop
+                    ? html` <div class="s-backdrop"></div> `
+                    : ''}
                 <div
                     class="${this.componentUtils.className('__picker')}"
                     tabindex="-1"
@@ -924,56 +949,67 @@ export default class SColorPicker extends __SLitComponent {
                             </div>
                         </div>
                     </div>
-                    <div class="${this.componentUtils.className('__actions')}">
-                        ${this.props.clear
-                            ? html`
-                                  <button
-                                      class="${this.componentUtils.className(
-                                          '__clear',
-                                          's-btn s-color--error',
-                                      )}"
-                                      @click=${(e) => {
-                                          e.preventDefault();
-                                          this._clear();
-                                      }}
-                                  >
-                                      ${this.props.i18n.clear ?? 'Clear'}
-                                  </button>
-                              `
-                            : ''}
-                        ${this.props.reset
-                            ? html`
-                                  <button
-                                      class="${this.componentUtils.className(
-                                          '__reset',
-                                          's-btn s-color--complementary',
-                                      )}"
-                                      @click=${(e) => {
-                                          e.preventDefault();
-                                          this._reset();
-                                      }}
-                                  >
-                                      ${this.props.i18n.reset ?? 'Reset'}
-                                  </button>
-                              `
-                            : ''}
-                        ${this.props.validate
-                            ? html`
-                                  <button
-                                      class="${this.componentUtils.className(
-                                          '__validate',
-                                          's-btn s-color--accent',
-                                      )}"
-                                      @click=${(e) => {
-                                          e.preventDefault();
-                                          this._validate();
-                                      }}
-                                  >
-                                      ${this.props.i18n.validate ?? 'Validate'}
-                                  </button>
-                              `
-                            : ''}
-                    </div>
+                    ${this.props.actions.length
+                        ? html`
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__actions',
+                                  )}"
+                              >
+                                  ${this.props.actions.includes('clear')
+                                      ? html`
+                                            <button
+                                                class="${this.componentUtils.className(
+                                                    '__clear',
+                                                    's-btn s-color--error',
+                                                )}"
+                                                @click=${(e) => {
+                                                    e.preventDefault();
+                                                    this._clear();
+                                                }}
+                                            >
+                                                ${this.props.i18n.clear ??
+                                                'Clear'}
+                                            </button>
+                                        `
+                                      : ''}
+                                  ${this.props.actions.includes('reset')
+                                      ? html`
+                                            <button
+                                                class="${this.componentUtils.className(
+                                                    '__reset',
+                                                    's-btn s-color--complementary',
+                                                )}"
+                                                @click=${(e) => {
+                                                    e.preventDefault();
+                                                    this._reset();
+                                                }}
+                                            >
+                                                ${this.props.i18n.reset ??
+                                                'Reset'}
+                                            </button>
+                                        `
+                                      : ''}
+                                  ${this.props.actions.includes('validate')
+                                      ? html`
+                                            <button
+                                                class="${this.componentUtils.className(
+                                                    '__validate',
+                                                    's-btn s-color--accent',
+                                                )}"
+                                                @click=${(e) => {
+                                                    e.preventDefault();
+                                                    this._validate();
+                                                }}
+                                            >
+                                                ${this.props.i18n.validate ??
+                                                'Validate'}
+                                            </button>
+                                        `
+                                      : ''}
+                              </div>
+                          `
+                        : ''}
                 </div>
             </div>
         `;

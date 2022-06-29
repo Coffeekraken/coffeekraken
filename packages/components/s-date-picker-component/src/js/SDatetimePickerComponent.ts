@@ -1,18 +1,20 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __isUserScrolling from '@coffeekraken/sugar/js/dom/is/userScrolling';
 import type {
     IFloatApi,
     IFloatSettings,
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __makeFloat from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __dateFormat from 'dateformat';
 import { css, html, unsafeCSS } from 'lit';
 import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComponentInterface';
 
 // @ts-ignore
-// import __css from '../../../../src/css/s-datetime-picker.css'; // relative to /dist/pkg/esm/js
-import __css from '../css/s-datetime-picker.css'; // for dev
+import __css from '../../../../src/css/s-datetime-picker.css'; // relative to /dist/pkg/esm/js
+// import __css from '../css/s-datetime-picker.css'; // for dev
 
 export interface ISDatetimePickerComponentProps {
     name: string;
@@ -30,14 +32,14 @@ export interface ISDatetimePickerComponentProps {
     inline: boolean;
     input: boolean;
     button: boolean;
-    clear: boolean;
-    reset: boolean;
-    validate: boolean;
+    calendar: boolean;
     floatSettings: Partial<IFloatSettings>;
     copyIconClass: string;
     copiedIconClass: string;
     buttonIconClass: string;
+    actions: ('clear' | 'reset' | 'validate')[];
     position: 'top' | 'bottom';
+    backdrop: boolean;
     disabled: boolean;
     fromYear: number;
     toYear: number;
@@ -70,39 +72,45 @@ export interface ISDatetimePickerComponentProps {
  * define();
  *
  * @example         html            Simple input
- * <label class="s-label:responsive">
+ * <label class="s-label:responsive s-color:accent">
  *      Choose a date
- *      <s-datetime-picker value="#FABB03" placeholder="Choose a date" input></s-datetime-picker>
+ *      <s-datetime-picker calendar placeholder="Choose a date" input></s-datetime-picker>
+ * </label>
+ *
+ * @example         html            With a calendar
+ * <label class="s-label:responsive s-color:accent">
+ *      Choose a date
+ *      <s-datetime-picker calendar placeholder="Choose a date" input></s-datetime-picker>
  * </label>
  *
  * @example         html            With an input and a button
- * <label class="s-label:responsive">
+ * <label class="s-label:responsive s-color:accent">
  *      Choose a date
- *      <s-datetime-picker value="#5101FF" placeholder="Choose a date" input button></s-datetime-picker>
+ *      <s-datetime-picker placeholder="Choose a date" input button></s-datetime-picker>
  * </label>
  *
- * @example         html            With a different format (hsla)
- * <label class="s-label:responsive">
+ * @example         html            With a different format and a calendar
+ * <label class="s-label:responsive s-color:accent">
  *      Choose a date
- *      <s-datetime-picker value="#5101FF" format="hsla" placeholder="Choose a date" input button></s-datetime-picker>
+ *      <s-datetime-picker calendar format="yyyy-mm-dd:HH:MM" placeholder="Choose a date" input button></s-datetime-picker>
  * </label>
  *
- * @example         html            Just a button
- * <label class="s-label:responsive">
+ * @example         html            Just a button with disabled weekend
+ * <label class="s-label:responsive s-color:accent">
  *      Choose a date
- *      <s-datetime-picker value="#55FFFF" button></s-datetime-picker>
+ *      <s-datetime-picker calendar disable="weekend" button></s-datetime-picker>
  * </label>
  *
  * @example         html            With a custom input
- * <label class="s-label:responsive">
+ * <label class="s-label:responsive s-color:accent">
  *      Choose a date
  *      <s-datetime-picker>
- *          <input type="text" class="s-input" placeholder="Choose a date" value="#FABB03" />
+ *          <input type="text" class="s-input" placeholder="Choose a date" />
  *      </s-datetime-picker>
  * </label>
  *
  * @example         html            With a custom button
- * <label class="s-label:responsive">
+ * <label class="s-label:responsive s-color:accent">
  *      Choose a date
  *      <s-datetime-picker>
  *          <button class="s-btn s-color:error">Choose a date</button>
@@ -110,26 +118,26 @@ export interface ISDatetimePickerComponentProps {
  * </label>
  *
  * @example         html            With a custom input and button
- * <label class="s-label:responsive">
+ * <label class="s-label:responsive s-color:accent">
  *      Choose a date
  *      <s-datetime-picker>
  *          <div class="s-group">
- *              <input type="text" class="s-input" placeholder="Choose a date" value="#FABB03" />
+ *              <input type="text" class="s-input" placeholder="Choose a date" />
  *              <button class="s-btn s-color:error">Choose a date</button>
  *          </div>
  *      </s-datetime-picker>
  * </label>
  *
  * @example         html            Disabled
- * <label class="s-label:responsive">
+ * <label class="s-label:responsive s-color:accent">
  *      Choose a date
  *      <s-datetime-picker disabled input button></s-datetime-picker>
  * </label>
  *
  * @example         html            RTL Support
- * <label class="s-label:responsive" dir="rtl">
+ * <label class="s-label:responsive s-color:accent" dir="rtl">
  *      Choose a date
- *      <s-datetime-picker value="#FABB03" placeholder="Choose a date" input button dir="rtl"></s-datetime-picker>
+ *      <s-datetime-picker placeholder="Choose a date" input button dir="rtl"></s-datetime-picker>
  * </label>
  *
  * @since           2.0.0
@@ -155,9 +163,8 @@ export default class SDatetimePicker extends __SLitComponent {
         year: 0,
         month: 0,
         day: 0,
-        hours: 0,
+        hour: 12,
         minutes: 0,
-        seconds: 0,
         displayedYear: 0,
         displayedMonth: 0,
         format: undefined,
@@ -175,6 +182,8 @@ export default class SDatetimePicker extends __SLitComponent {
     _$days;
     _$months;
     _$years;
+    _$hours;
+    _$minutes;
 
     _date;
 
@@ -224,11 +233,14 @@ export default class SDatetimePicker extends __SLitComponent {
         if (!this._$input?.hasAttribute('autocomplete')) {
             this._$input?.setAttribute('autocomplete', 'off');
         }
+        this._$input.setAttribute('readonly', true);
 
         // selectors
         this._$days = this.querySelector('.s-datetime-picker__days');
         this._$months = this.querySelector('.s-datetime-picker__months');
         this._$years = this.querySelector('.s-datetime-picker__years');
+        this._$hours = this.querySelector('.s-datetime-picker__hours');
+        this._$minutes = this.querySelector('.s-datetime-picker__minutes');
 
         // update float on focus
         this.addEventListener('focusin', (e) => {
@@ -250,45 +262,231 @@ export default class SDatetimePicker extends __SLitComponent {
         // scroll all the selectors to the best item
         this._scrollSelectorsToStateValues('initial');
 
+        // init interactions
+        this._initInteractions();
+    }
+
+    _isDateNeeded(): boolean {
+        return this.props.format.match(/(d{1,4}|D{3,4}|m{1,4}|yy|yyyy)/);
+    }
+    _isTimeNeeded(): boolean {
+        return this.props.format.match(/(h{1,2}|H{1,2}|M{1,2})/);
+    }
+
+    _isSelectedDatetimeValid(): boolean {
+        return !this._isDateDisabled(
+            this.state.day,
+            this.state.month,
+            this.state.year,
+        );
+    }
+
+    _isDateDisabled(
+        date: number,
+        month: number = this.state.displayedMonth,
+        year: number = this.state.displayedYear,
+    ): boolean {
+        if (year !== -1) {
+            if (this.props.disable.includes(String(year))) {
+                return true;
+            }
+        }
+
+        if (month !== -1) {
+            // month
+            const months = [
+                'january',
+                'february',
+                'march',
+                'april',
+                'may',
+                'june',
+                'july',
+                'august',
+                'september',
+                'october',
+                'november',
+                'december',
+            ];
+            for (let i = 0; i < months.length; i++) {
+                const currentMonth = months[i];
+                if (this.props.disable.includes(currentMonth) && month === i) {
+                    return true;
+                }
+            }
+        }
+
+        if (date === -1) {
+            return false;
+        }
+
+        const dayInWeek = new Date(year, month, date).getDay();
+
+        // days
+        const days = [
+            'sunday',
+            'monday',
+            'thuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday',
+        ];
+        for (let i = 0; i < days.length; i++) {
+            const currentDay = days[i];
+            if (this.props.disable.includes(currentDay) && dayInWeek === i) {
+                return true;
+            }
+        }
+
+        // specific dates
+        if (this.props.disable.includes(this._getDisableDateFromDate(date))) {
+            return true;
+        }
+
+        // week and weekend
+        if (
+            this.props.disable.includes('week') &&
+            dayInWeek > 1 &&
+            dayInWeek <= 5
+        ) {
+            return true;
+        }
+        if (
+            this.props.disable.includes('weekend') &&
+            (dayInWeek === 0 || dayInWeek === 6)
+        ) {
+            return true;
+        }
+    }
+
+    _setDay(day: number, delay: getHourboolean = false): void {
+        this.state.day = day;
         setTimeout(() => {
-            // init interactions
-            this._initInteractions();
-        }, 2000);
+            this._scrollSelectorToActiveItem(this._$days, true, delay);
+        });
+        // update input on select
+        this._updateInput('select');
+    }
+    _setMonth(month: number): void {
+        this.state.month = month;
+        this.state.displayedMonth = month;
+        // update input on select
+        this._updateInput('select');
+    }
+    _setYear(year: number): void {
+        this.state.year = year;
+        this.state.displayedYear = year;
+        // update input on select
+        this._updateInput('select');
+    }
+    _setHour(hour: number): void {
+        this.state.hour = hour;
+        // update input on select
+        this._updateInput('select');
+    }
+    _setMinutes(minutes: number): void {
+        this.state.minutes = minutes;
+        // update input on select
+        this._updateInput('select');
     }
 
     _initInteractions() {
-        let daysTimeout, monthsTimeout, yearsTimeout;
-
-        const daysBounds = this._$days.getBoundingClientRect(),
-            monthsBounds = this._$months.getBoundingClientRect();
+        let daysTimeout,
+            monthsTimeout,
+            yearsTimeout,
+            hoursTimeout,
+            minutesTimeout;
 
         // years
         this._$years.addEventListener('scroll', (e) => {
+            if (!__isUserScrolling(this._$years)) {
+                return;
+            }
             clearTimeout(yearsTimeout);
+            this._$years.classList.add('scrolling');
             yearsTimeout = setTimeout(() => {
-                const scrollTop =
-                    this._$years.scrollTop + daysBounds.height / 2;
-                const scrollHeight = this._$years.scrollHeight;
-                const count = this.props.toYear - this.props.fromYear;
-                const idx = Math.round((count / scrollHeight) * scrollTop);
-                this.state.displayedYear = parseInt(
-                    this._$years.children[idx].innerText,
+                const idx = this._getSelectedIdxFromSelector(this._$years);
+                this._setYear(
+                    parseInt(this._$years.children[idx - 1].innerText),
                 );
-            }, 500);
+                this._$years.classList.remove('scrolling');
+            }, 400);
         });
 
         // months
         this._$months.addEventListener('scroll', (e) => {
+            if (!__isUserScrolling(this._$months)) {
+                return;
+            }
             clearTimeout(monthsTimeout);
+            this._$months.classList.add('scrolling');
             monthsTimeout = setTimeout(() => {
-                const scrollTop =
-                    this._$months.scrollTop + monthsBounds.height / 2;
-                const scrollHeight = this._$months.scrollHeight;
-                const count = 12;
-                const idx = Math.round((count / scrollHeight) * scrollTop);
-                this.state.displayedMonth = idx + 1;
-            }, 500);
+                const idx = this._getSelectedIdxFromSelector(this._$months);
+                this._setMonth(idx - 1);
+                this._$months.classList.remove('scrolling');
+            }, 400);
         });
+
+        // days
+        this._$days.addEventListener('scroll', (e) => {
+            if (!__isUserScrolling(this._$days)) {
+                return;
+            }
+            clearTimeout(daysTimeout);
+            this._$days.classList.add('scrolling');
+            daysTimeout = setTimeout(() => {
+                const idx = this._getSelectedIdxFromSelector(this._$days);
+                this._setDay(idx);
+                this._$days.classList.remove('scrolling');
+            }, 400);
+        });
+
+        // hour
+        this._$hours.addEventListener('scroll', (e) => {
+            if (!__isUserScrolling(this._$hours)) {
+                return;
+            }
+            clearTimeout(hoursTimeout);
+            this._$hours.classList.add('scrolling');
+            hoursTimeout = setTimeout(() => {
+                const idx = this._getSelectedIdxFromSelector(this._$hours);
+                this._setHour(
+                    parseInt(this._$hours.children[idx - 1].innerText),
+                );
+                this._$hours.classList.remove('scrolling');
+            }, 400);
+        });
+
+        // minutes
+        this._$minutes.addEventListener('scroll', (e) => {
+            if (!__isUserScrolling(this._$minutes)) {
+                return;
+            }
+            clearTimeout(minutesTimeout);
+            this._$minutes.classList.add('scrolling');
+            minutesTimeout = setTimeout(() => {
+                const idx = this._getSelectedIdxFromSelector(this._$minutes);
+                this._setMinutes(
+                    parseInt(this._$minutes.children[idx - 1].innerText),
+                );
+                this._$minutes.classList.remove('scrolling');
+            }, 400);
+        });
+    }
+
+    _getSelectedIdxFromSelector($selector: HTMLElement): number {
+        const bounds = $selector.getBoundingClientRect();
+        const scrollTop = $selector.scrollTop + bounds.height / 2;
+        const count = $selector.children.length;
+        const itemsHeight = Array.from($selector.children).reduce(
+            (current, $a) => {
+                const bounds = $a.getBoundingClientRect();
+                return current + bounds.height;
+            },
+            0,
+        );
+        return Math.round((count / itemsHeight) * scrollTop);
     }
 
     _scrollSelectorsToStateValues(step: 'initial' | string) {
@@ -296,10 +494,13 @@ export default class SDatetimePicker extends __SLitComponent {
         this._scrollSelectorToActiveItem(this._$years, smooth);
         this._scrollSelectorToActiveItem(this._$months, smooth);
         this._scrollSelectorToActiveItem(this._$days, smooth);
+        this._scrollSelectorToActiveItem(this._$hours, smooth);
+        this._scrollSelectorToActiveItem(this._$minutes, smooth);
     }
     _scrollSelectorToActiveItem(
         $selector: HTMLElement,
         smooth: boolean = true,
+        delay: boolean = false,
     ) {
         const $activeElement = $selector.querySelector('.active');
         if ($activeElement) {
@@ -329,15 +530,21 @@ export default class SDatetimePicker extends __SLitComponent {
             return;
         }
 
-        switch (this.props.format) {
-            default:
-                // this.state.value = 'coco';
-                break;
-        }
+        this._$input.value = __dateFormat(
+            new Date(
+                this.state.year,
+                this.state.month,
+                this.state.day,
+                this.state.hour,
+                this.state.minutes,
+                0,
+            ),
+            this.props.format,
+        );
 
-        if (this._$input && this._$input.value !== this.state.value) {
-            this._$input.value = this.state.value;
-        }
+        // if (this._$input && this._$input.value !== this.state.value) {
+        //     this._$input.value = this.state.value;
+        // }
 
         // dispatch a "change" event
         if (step !== 'init') {
@@ -371,15 +578,12 @@ export default class SDatetimePicker extends __SLitComponent {
             this.state.year = date.getFullYear();
             this.state.month = date.getMonth();
             this.state.day = date.getDate();
-            this.state.hours = date.getUTCHours();
-            this.state.minutes = date.getMinutes();
-            this.state.seconds = date.getSeconds();
+            // this.state.hours = date.getUTCHours();
+            // this.state.minutes = date.getMinutes();
 
             this.state.displayedYear = this.state.year;
             this.state.displayedMonth = this.state.month;
         }
-
-        console.log(this.state);
     }
 
     _validate() {
@@ -408,19 +612,39 @@ export default class SDatetimePicker extends __SLitComponent {
     _copy() {
         const originalClass = this.props.copyIconClass;
         this.props.copyIconClass = this.props.copiedIconClass;
-
-        // __copy(this._$colorInput.value);
-
         setTimeout(() => {
             this.props.copyIconClass = originalClass;
         }, 1000);
     }
 
+    _getDisableDateFromDate(date: number): string {
+        return `${this.state.displayedYear}-${String(
+            this.state.displayedMonth + 1,
+        ).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+    }
+
+    _getMinutes(): number[] {
+        return this.props.minutes;
+    }
+    _getHours(): number[] {
+        return this.props.hours;
+    }
     _getDaysInMonth(year: number, month: number): number {
-        return new Date(year, month, 0).getDate();
+        return new Date(year, month + 1, 0).getDate();
+    }
+    _getDays(): number[] {
+        const daysInMonth = this._getDaysInMonth(
+            this.state.displayedYear,
+            this.state.displayedMonth,
+        );
+        let days = Array.from(Array(daysInMonth).keys());
+        return days;
     }
     _getMonths(): string[] {
-        return this.props.i18n.months;
+        return this.props.i18n.months.filter((month, i) => {
+            return true;
+            return !this._isDateDisabled(10, i);
+        });
     }
     _getYears(): number[] {
         let i = this.props.fromYear;
@@ -445,8 +669,6 @@ export default class SDatetimePicker extends __SLitComponent {
             ).getDate();
         const today = new Date();
         let date = 1;
-
-        console.log(today.getMonth(), this.state.displayedMonth);
 
         return html`
             <div
@@ -515,23 +737,23 @@ export default class SDatetimePicker extends __SLitComponent {
                           `
                         : ''}
                 </div>
+                ${this.props.backdrop
+                    ? html` <div class="s-backdrop"></div> `
+                    : ''}
                 <div
                     class="${this.componentUtils.className('__picker')}"
                     tabindex="-1"
                 >
-                    <div class="${this.componentUtils.className('__calendar')}">
+                    <div
+                        class="${this.componentUtils.className(
+                            '__calendar',
+                        )} ${this._isDateNeeded() && this.props.calendar
+                            ? 'active'
+                            : ''}"
+                    >
                         <table>
                             <thead>
                                 <tr>
-                                    <th>
-                                        <div
-                                            class="${this.componentUtils.className(
-                                                '__calendar-day',
-                                            )}"
-                                        >
-                                            Sun
-                                        </div>
-                                    </th>
                                     <th>
                                         <div
                                             class="${this.componentUtils.className(
@@ -586,6 +808,15 @@ export default class SDatetimePicker extends __SLitComponent {
                                             Sat
                                         </div>
                                     </th>
+                                    <th>
+                                        <div
+                                            class="${this.componentUtils.className(
+                                                '__calendar-day',
+                                            )}"
+                                        >
+                                            Sun
+                                        </div>
+                                    </th>
                                 </tr>
                             </thead>
                             ${Array.from(Array(6).keys()).map(
@@ -593,15 +824,22 @@ export default class SDatetimePicker extends __SLitComponent {
                                     <tr>
                                         ${Array.from(Array(7).keys()).map(
                                             (j) => {
+                                                const day = date;
                                                 const res = html`
                                                     ${i === 0 &&
-                                                    j < firstDayOfTheMonth
+                                                    j < firstDayOfTheMonth - 1
                                                         ? html` <td></td>`
                                                         : date > daysInMonth
-                                                        ? html``
+                                                        ? html`<td></td>`
                                                         : html`
                                                               <td>
                                                                   <div
+                                                                      @click=${(
+                                                                          e,
+                                                                      ) =>
+                                                                          this._setDay(
+                                                                              day,
+                                                                          )}
                                                                       class="${this.componentUtils.className(
                                                                           '__calendar-item',
                                                                       )} ${date ===
@@ -614,15 +852,44 @@ export default class SDatetimePicker extends __SLitComponent {
                                                                           this
                                                                               .state
                                                                               .displayedYear
+                                                                          ? 'today'
+                                                                          : ''} ${this.componentUtils.className(
+                                                                          '__calendar-item',
+                                                                      )} ${date ===
+                                                                          this
+                                                                              .state
+                                                                              .day &&
+                                                                      this.state
+                                                                          .month ===
+                                                                          this
+                                                                              .state
+                                                                              .displayedMonth &&
+                                                                      this.state
+                                                                          .year ===
+                                                                          this
+                                                                              .state
+                                                                              .displayedYear
                                                                           ? 'active'
+                                                                          : ''} ${this._isDateDisabled(
+                                                                          date,
+                                                                      )
+                                                                          ? 'disabled'
                                                                           : ''}"
                                                                   >
-                                                                      ${date}
+                                                                      <span
+                                                                          >${date}</span
+                                                                      >
                                                                   </div>
                                                               </td>
                                                           `}
                                                 `;
-                                                date++;
+                                                if (
+                                                    i === 0 &&
+                                                    j < firstDayOfTheMonth - 1
+                                                ) {
+                                                } else {
+                                                    date++;
+                                                }
                                                 return res;
                                             },
                                         )}
@@ -631,25 +898,17 @@ export default class SDatetimePicker extends __SLitComponent {
                             )}
                         </table>
                     </div>
-
                     <div
                         class="${this.componentUtils.className(
                             '__date-selectors',
-                        )}"
+                        )} ${this._isDateNeeded() ? 'active' : ''}"
                     >
                         <div
                             class="${this.componentUtils.className(
                                 '__selector',
                             )} ${this.componentUtils.className('__days')}"
                         >
-                            ${Array.from(
-                                Array(
-                                    this._getDaysInMonth(
-                                        this.state.year,
-                                        this.state.month,
-                                    ),
-                                ).keys(),
-                            ).map(
+                            ${this._getDays().map(
                                 (i) => html`
                                     <div
                                         class="${this.componentUtils.className(
@@ -658,9 +917,13 @@ export default class SDatetimePicker extends __SLitComponent {
                                             '__day',
                                         )} ${this.state.day === i + 1
                                             ? 'active'
+                                            : ''} ${this._isDateDisabled(i + 1)
+                                            ? 'disabled'
                                             : ''}"
                                     >
-                                        ${String(i + 1).padStart(2, '0')}
+                                        <span>
+                                            ${String(i + 1).padStart(2, '0')}
+                                        </span>
                                     </div>
                                 `,
                             )}
@@ -679,9 +942,13 @@ export default class SDatetimePicker extends __SLitComponent {
                                             '__month',
                                         )} ${this.state.displayedMonth === i
                                             ? 'active'
+                                            : ''} ${this._isDateDisabled(-1, i)
+                                            ? 'disabled'
                                             : ''}"
                                     >
-                                        ${month}
+                                        <span>
+                                            ${month}
+                                        </span>
                                     </div>
                                 `,
                             )}
@@ -698,67 +965,138 @@ export default class SDatetimePicker extends __SLitComponent {
                                             '__selector-item',
                                         )} ${this.componentUtils.className(
                                             '__year',
-                                        )} ${this.state.year === year
+                                        )} ${this.state.displayedYear === year
                                             ? 'active'
+                                            : ''} ${this._isDateDisabled(
+                                            -1,
+                                            -1,
+                                            year,
+                                        )
+                                            ? 'disabled'
                                             : ''}"
                                     >
-                                        ${year}
+                                        <span>
+                                            ${year}
+                                        </span>
                                     </div>
                                 `,
                             )}
                         </div>
                     </div>
-
-                    <div class="${this.componentUtils.className('__actions')}">
-                        ${this.props.clear
-                            ? html`
-                                  <button
-                                      class="${this.componentUtils.className(
-                                          '__clear',
-                                          's-btn s-color--error',
-                                      )}"
-                                      @click=${(e) => {
-                                          e.preventDefault();
-                                          this._clear();
-                                      }}
-                                  >
-                                      ${this.props.i18n.clear ?? 'Clear'}
-                                  </button>
-                              `
-                            : ''}
-                        ${this.props.reset
-                            ? html`
-                                  <button
-                                      class="${this.componentUtils.className(
-                                          '__reset',
-                                          's-btn s-color--complementary',
-                                      )}"
-                                      @click=${(e) => {
-                                          e.preventDefault();
-                                          this._reset();
-                                      }}
-                                  >
-                                      ${this.props.i18n.reset ?? 'Reset'}
-                                  </button>
-                              `
-                            : ''}
-                        ${this.props.validate
-                            ? html`
-                                  <button
-                                      class="${this.componentUtils.className(
-                                          '__validate',
-                                          's-btn s-color--accent',
-                                      )}"
-                                      @click=${(e) => {
-                                          e.preventDefault();
-                                          this._validate();
-                                      }}
-                                  >
-                                      ${this.props.i18n.validate ?? 'Validate'}
-                                  </button>
-                              `
-                            : ''}
+                    <div
+                        class="${this.componentUtils.className(
+                            '__time-selectors',
+                        )} ${this._isTimeNeeded() ? 'active' : ''}"
+                    >
+                        <div
+                            class="${this.componentUtils.className(
+                                '__selector',
+                            )} ${this.componentUtils.className('__hours')}"
+                        >
+                            ${this._getHours().map(
+                                (hour) => html`
+                                    <div
+                                        class="${this.componentUtils.className(
+                                            '__selector-item',
+                                        )} ${this.componentUtils.className(
+                                            '__hour',
+                                        )} ${this.state.hour === hour
+                                            ? 'active'
+                                            : ''}"
+                                    >
+                                        <span>
+                                            ${String(hour).padStart(2, '0')}
+                                        </span>
+                                    </div>
+                                `,
+                            )}
+                        </div>
+                        <div
+                            class="${this.componentUtils.className(
+                                '__selector',
+                            )} ${this.componentUtils.className('__minutes')}"
+                        >
+                            ${this._getMinutes().map(
+                                (minute, i) => html`
+                                    <div
+                                        class="${this.componentUtils.className(
+                                            '__selector-item',
+                                        )} ${this.componentUtils.className(
+                                            '__minutes',
+                                        )} ${this.state.minutes === minute
+                                            ? 'active'
+                                            : ''}"
+                                    >
+                                        <span>
+                                            ${String(minute).padStart(2, '0')}
+                                        </span>
+                                    </div>
+                                `,
+                            )}
+                        </div>
                     </div>
+                    ${this.props.actions.length
+                        ? html`
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__actions',
+                                  )}"
+                              >
+                                  ${this.props.actions.includes('clear')
+                                      ? html`
+                                            <button
+                                                class="${this.componentUtils.className(
+                                                    '__clear',
+                                                    's-btn s-color--error',
+                                                )}"
+                                                @click=${(e) => {
+                                                    e.preventDefault();
+                                                    this._clear();
+                                                }}
+                                            >
+                                                ${this.props.i18n.clear ??
+                                                'Clear'}
+                                            </button>
+                                        `
+                                      : ''}
+                                  ${this.props.actions.includes('reset')
+                                      ? html`
+                                            <button
+                                                class="${this.componentUtils.className(
+                                                    '__reset',
+                                                    's-btn s-color--complementary',
+                                                )}"
+                                                @click=${(e) => {
+                                                    e.preventDefault();
+                                                    this._reset();
+                                                }}
+                                            >
+                                                ${this.props.i18n.reset ??
+                                                'Reset'}
+                                            </button>
+                                        `
+                                      : ''}
+                                  ${this.props.actions.includes('validate')
+                                      ? html`
+                                            <button
+                                                ?disabled=${!this._isSelectedDatetimeValid()}
+                                                class="${this.componentUtils.className(
+                                                    '__validate',
+                                                    's-btn s-color--accent',
+                                                )}"
+                                                @click=${(e) => {
+                                                    e.preventDefault();
+                                                    this._validate();
+                                                }}
+                                            >
+                                                ${this.props.i18n.validate ??
+                                                'Validate'}
+                                            </button>
+                                        `
+                                      : ''}
+                              </div>
+                          `
+                        : ''}
                 </div>
             </div>
         `;

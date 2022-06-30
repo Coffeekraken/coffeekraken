@@ -30,26 +30,26 @@ export default function (env, config) {
          * @name                offsetX
          * @namespace           config.themeScroll
          * @type                String
-         * @default             300
+         * @default             [theme.layout.offset.left]
          *
          * Specify the scroll offset x for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        offsetX: 0,
+        offsetX: `[theme.layout.offset.left]`,
 
         /**
          * @name                offsetY
          * @namespace           config.themeScroll
          * @type                String
-         * @default             300
+         * @default             [theme.layout.offset.top]
          *
          * Specify the scroll offset y for your theme
          *
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        offsetY: 0,
+        offsetY: `[theme.layout.offset.top]`,
     };
 }

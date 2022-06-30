@@ -147,6 +147,12 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 type: 'String',
                 default: 's-icon s-icon--color',
             },
+            backdropClass: {
+                description:
+                    'Specify the class to apply on the backdrop when the "backdrop" prop is true',
+                type: 'String',
+                default: 's-backdrop',
+            },
             disabled: {
                 description: 'Specify if the color picker is disabled',
                 type: 'Boolean',

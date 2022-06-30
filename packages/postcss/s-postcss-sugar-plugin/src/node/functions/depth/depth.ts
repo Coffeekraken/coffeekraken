@@ -50,10 +50,25 @@ export default function depth({
         ...params,
     };
 
-    // let intDepth = parseInt(finalParams.depth);
-    // if (typeof finalParams.depth !== 'number' && finalParams.depth !== 'default') {
-    //     return finalParams.depth;
-    // } else {
-    return __STheme.cssVar(`depth.${finalParams.depth}`, false);
-    // }
+    // try to get the padding with the pased
+    const val = __STheme.getSafe(`depth.${finalParams.depth}`);
+    if (val !== undefined) {
+        finalParams.depth = val;
+    }
+
+    // 0 - 20 - 100 - ...
+    if (`${finalParams.depth}`.match(/^[0-9]+$/)) {
+        return __STheme.cssVar(`depth.${finalParams.depth}`);
+    }
+
+    // dotPath
+    if (
+        typeof finalParams.depth === 'string' &&
+        finalParams.depth.match(/^[a-zA-Z0-9\.]+$/)
+    ) {
+        return __STheme.cssVar(`depth.${__STheme.get(finalParams.depth)}`);
+    }
+
+    // passed string
+    return finalParams.depth;
 }

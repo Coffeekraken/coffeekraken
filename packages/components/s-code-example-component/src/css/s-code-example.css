@@ -58,7 +58,7 @@
 [lnf='default'] .s-code-example__content {
     transition: sugar.theme(ui.codeExample.transition);
     border-radius: sugar.border.radius(ui.codeExample.borderRadius);
-    @sugar.depth (sugar.theme.value(ui.codeExample.depth));
+    @sugar.depth (ui.codeExample.depth);
 }
 
 .s-code-example__more-bar {

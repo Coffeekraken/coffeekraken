@@ -1032,6 +1032,24 @@ export default class SThemeBase extends __SEventEmitter {
     }
 
     /**
+     * @name            getSafe
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to access the active theme config without throwing an error if it not exists
+     *
+     * @param       {String}        dotPath           The dot path of the config you want
+     * @return      {any}                        The getted theme config
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static getSafe(dotPath: string, theme?: string, variant?: string): any {
+        const instance = this.getTheme(theme, variant);
+        return instance.get(dotPath, true);
+    }
+
+    /**
      * @name            get
      * @type            Function
      * @static
@@ -1133,9 +1151,9 @@ export default class SThemeBase extends __SEventEmitter {
             ),
         );
     }
-    get(dotPath): any {
+    get(dotPath, preventThrow: boolean = false): any {
         const value = __get(this._config, dotPath);
-        if (value === undefined) {
+        if (value === undefined && !preventThrow) {
             throw new Error(
                 `<red>[${this.constructor.name}]</red> Sorry but the requested "<yellow>${this.id}</yellow>" theme config "<cyan>${dotPath}</cyan>" does not exists...`,
             );

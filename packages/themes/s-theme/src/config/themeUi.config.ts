@@ -6,26 +6,26 @@ export default (env, config) => {
              * @name          paddingInline
              * @namespace     config.themeUi.default
              * @type          String
-             * @default      0.5
+             * @default      1.5
              *
              * Specify the default padding inline for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: 0.5,
+            paddingInline: 1.5,
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.default
              * @type          String
-             * @default      0.25
+             * @default      0.75
              *
              * Specify the default padding block for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: 0.25,
+            paddingBlock: 0.75,
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.default
@@ -131,26 +131,26 @@ export default (env, config) => {
              * @name          paddingInline
              * @namespace     config.themeUi.form
              * @type          String
-             * @default      0.25
+             * @default      1.5
              *
              * Specify the default padding inline for form items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: 0.5,
+            paddingInline: 1.5,
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.form
              * @type          String
-             * @default      0.16
+             * @default      0.75
              *
              * Specify the default padding block for form items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: 0.25,
+            paddingBlock: 0.75,
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.form
@@ -459,6 +459,32 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        backdrop: {
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.backdrop
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for backdrop ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.backdrop
+             * @type          Number
+             * @default      solid
+             *
+             * Specify the default style for your backdrop ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            defaultStyle: 'solid',
         },
         avatar: {
             borderRadius: '[theme.ui.default.borderRadius]',
@@ -2628,26 +2654,26 @@ export default (env, config) => {
              * @name          paddingInline
              * @namespace     config.themeUi.badge
              * @type          String
-             * @default         0.21
+             * @default         0.6
              *
              * Specify the default padding inline for badge ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: 0.21,
+            paddingInline: 0.6,
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.badge
              * @type          String
-             * @default      0.11
+             * @default      0.3
              *
              * Specify the default padding block for badge ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: 0.11,
+            paddingBlock: 0.3,
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.badge

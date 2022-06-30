@@ -149,7 +149,7 @@ export default class SSugarCli {
         const config = await __SSugarConfig.load({
             cache: true,
         });
-        // console.log(__SSugarConfig.get('frontendServer.public'));
+        // console.log(__SSugarConfig.get('themeUi.datetimePicker'));
         // return;
 
         // check the "sugar.lock" file in the tmp folder

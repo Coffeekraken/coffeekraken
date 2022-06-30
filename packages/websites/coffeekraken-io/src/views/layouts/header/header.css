@@ -7,7 +7,7 @@
     left: 50%;
     transform: translate(-50%, 0);
     width: calc(1280px + sugar.padding(30) * 2);
-    z-index: 999;
+    z-index: 99;
     height: 80px;
     display: flex;
     align-items: center;

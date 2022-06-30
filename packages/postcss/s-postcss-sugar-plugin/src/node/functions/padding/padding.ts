@@ -49,8 +49,10 @@ export interface IPostcssSugarPluginPaddingFunctionParams {
 
 export default function ({
     params,
+    themeValueProxy,
 }: {
     params: Partial<IPostcssSugarPluginPaddingFunctionParams>;
+    themeValueProxy: Function;
 }) {
     const finalParams: IPostcssSugarPluginPaddingFunctionParams = {
         padding: '',
@@ -59,37 +61,27 @@ export default function ({
     };
 
     const padding = finalParams.padding;
-    let paddings = padding.split(' ').map((s) => {
-        let registeredValue,
-            factor = '';
+    let paddings = `${padding}`.split(' ').map((s) => {
+        let factor = '';
 
-        // try to get the padding with the pased
-        try {
-            registeredValue = __STheme.get(`padding.${s}`);
-        } catch (e) {}
+        // theme value
+        s = themeValueProxy(s);
+
+        // try to get the padding with the passed
+        const val = __STheme.getSafe(`padding.${finalParams.padding}`);
+        if (val !== undefined) {
+            s = val;
+        }
 
         // default return simply his value
-        if (s === 'default') {
+        if (`${s}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
             factor = '1';
-        } else if (registeredValue !== undefined) {
-            factor = `sugar.theme(padding.${s}, ${finalParams.scalable})`;
-        } else if (
-            isNaN(parseFloat(s)) &&
-            s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
-        ) {
-            // support dotPath
-            factor = `sugar.theme(${s}, ${finalParams.scalable})`;
-        } else if (!isNaN(parseFloat(s))) {
-            // support simple number
-            factor = `${s}`;
         } else {
-            throw new Error(
-                `<yellow>[s-postcss-sugar-plugin]</yellow> Padding "<cyan>${s}</cyan>" is not a valid value`,
-            );
+            factor = s;
         }
-        // generate css value
-        return `calc(sugar.theme(padding.default) * ${factor})`;
+
+        return `calc(sugar.theme(padding.default, ${finalParams.scalable}) * ${factor})`;
     });
 
     return paddings.join(' ');

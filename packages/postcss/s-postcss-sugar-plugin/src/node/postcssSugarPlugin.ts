@@ -384,11 +384,33 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             const params = functionInterface.apply(paramsStatement, {});
             delete params.help;
 
+            // for (let [key, value] of Object.entries(params)) {
+            //     if (key === 'dotPath') continue;
+            //     if (
+            //         typeof value === 'string' &&
+            //         value.match(/^theme\.[a-zA-Z0-9_-]+/)
+            //     ) {
+            //         const themeValue = __STheme.getSafe(
+            //             value.replace(/^theme\./, ''),
+            //         );
+            //         if (themeValue === undefined) continue;
+            //         params[key] = themeValue;
+            //         console.log('THEME', params[key], key);
+            //     }
+            // }
+
+            function themeValueProxy(dotPathOrValue: string): any {
+                const value = __STheme.getSafe(dotPathOrValue);
+                if (value !== undefined) return value;
+                return dotPathOrValue;
+            }
+
             try {
                 const result = await fnObject.fn({
                     params,
                     atRule,
                     settings,
+                    themeValueProxy,
                 });
                 value = value.replace(sugarStatement, result);
             } catch (e) {

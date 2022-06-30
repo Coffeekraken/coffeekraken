@@ -39,6 +39,7 @@ export interface ISColorPickerComponentProps {
     copyIconClass: string;
     copiedIconClass: string;
     buttonIconClass: string;
+    backdropClass: string;
     position: 'top' | 'bottom';
     disabled: boolean;
 }
@@ -799,7 +800,13 @@ export default class SColorPicker extends __SLitComponent {
                         : ''}
                 </div>
                 ${this.props.backdrop
-                    ? html` <div class="s-backdrop"></div> `
+                    ? html`
+                          <div
+                              class="${this.componentUtils.className(
+                                  '__backdrop',
+                              )} ${this.props.backdropClass}"
+                          ></div>
+                      `
                     : ''}
                 <div
                     class="${this.componentUtils.className('__picker')}"

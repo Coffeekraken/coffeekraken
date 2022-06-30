@@ -1,5 +1,7 @@
 export default function (env, config) {
     return {
-        offsetY: 100,
+        offset: {
+            top: 100,
+        },
     };
 }

@@ -25,6 +25,7 @@ import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component'
 // Components
 import { define as __CKBlobComponent } from './components/CkBlob';
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
+import { define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed';
 import { define as __CKDocSubNavComponent } from './components/CKDocSubNav/CKDocSubNav';
 import { define as __CkFallingStarsComponent } from './components/CkFallingStars';
 import { define as __CKSearchComponent } from './components/CKSearch';
@@ -79,6 +80,7 @@ __SConductor.setup({
 
     // components
     __CKDiscoverComponent();
+    __CKDiscoverTabedComponent();
     __CKSettingsComponent();
     __CKDocSubNavComponent();
     __SCodeExampleWebcomponent();

@@ -9,6 +9,9 @@
 }
 
 @sugar.ui.filtrableinput.classes;
+@sugar.ui.datetimepicker;
+@sugar.highlightjs.theme;
+
 @sugar.platform.classes;
 
 @sugar.icon.classes (

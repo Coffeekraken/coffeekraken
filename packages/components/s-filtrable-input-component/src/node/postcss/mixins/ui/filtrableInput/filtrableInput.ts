@@ -83,7 +83,7 @@ export default function ({
         vars.push(`
         
             .s-filtrable-input__dropdown {
-                @sugar.depth(sugar.theme.value(ui.filtrableInput.depth));
+                @sugar.depth(ui.filtrableInput.depth);
                 transition: sugar.theme(ui.filtrableInput.transition);
             }
             .s-filtrable-input__list {

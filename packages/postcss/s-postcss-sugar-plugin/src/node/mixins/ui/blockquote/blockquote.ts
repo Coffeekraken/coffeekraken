@@ -97,7 +97,7 @@ export default function ({
                             border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(current);
                             color: sugar.color(current, surfaceForeground);
                             background-color: sugar.color(current, surface);
-                            @sugar.depth(sugar.theme.value(ui.blockquote.depth));
+                            @sugar.depth(ui.blockquote.depth);
                             font-size: sugar.scalable(1rem);
 
                             @sugar.font.family(quote);

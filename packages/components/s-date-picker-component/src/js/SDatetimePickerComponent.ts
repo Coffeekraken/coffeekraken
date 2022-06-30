@@ -37,6 +37,7 @@ export interface ISDatetimePickerComponentProps {
     copyIconClass: string;
     copiedIconClass: string;
     buttonIconClass: string;
+    backdropClass: string;
     actions: ('clear' | 'reset' | 'validate')[];
     position: 'top' | 'bottom';
     backdrop: boolean;
@@ -81,6 +82,12 @@ export interface ISDatetimePickerComponentProps {
  * <label class="s-label:responsive s-color:accent">
  *      Choose a date
  *      <s-datetime-picker calendar placeholder="Choose a date" input></s-datetime-picker>
+ * </label>
+ *
+ * @example         html            With a backdrop
+ * <label class="s-label:responsive s-color:accent">
+ *      Choose a date
+ *      <s-datetime-picker calendar backdrop placeholder="Choose a date" input></s-datetime-picker>
  * </label>
  *
  * @example         html            With an input and a button
@@ -252,11 +259,9 @@ export default class SDatetimePicker extends __SLitComponent {
 
         // make the panel float
         if (!this.props.inline) {
-            this._floatApi = __makeFloat(
-                this._$picker,
-                this._$root,
-                this.props.floatSettings,
-            );
+            this._floatApi = __makeFloat(this._$picker, this._$root, {
+                ...this.props.floatSettings,
+            });
         }
 
         // scroll all the selectors to the best item
@@ -738,7 +743,13 @@ export default class SDatetimePicker extends __SLitComponent {
                         : ''}
                 </div>
                 ${this.props.backdrop
-                    ? html` <div class="s-backdrop"></div> `
+                    ? html`
+                          <div
+                              class="${this.componentUtils.className(
+                                  '__backdrop',
+                              )} ${this.props.backdropClass}"
+                          ></div>
+                      `
                     : ''}
                 <div
                     class="${this.componentUtils.className('__picker')}"

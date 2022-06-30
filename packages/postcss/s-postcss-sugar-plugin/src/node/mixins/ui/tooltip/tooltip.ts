@@ -128,7 +128,7 @@ export default function ({
           transition: sugar.theme(ui.tooltip.transition);
           padding-inline: sugar.padding(ui.tooltip.paddingInline);
           padding-block: sugar.padding(ui.tooltip.paddingBlock);
-          @sugar.depth( sugar.theme.value(ui.tooltip.depth) );
+          @sugar.depth( theme.ui.tooltip.depth);
 
             &:not([s-floating]) {
                 &:after {

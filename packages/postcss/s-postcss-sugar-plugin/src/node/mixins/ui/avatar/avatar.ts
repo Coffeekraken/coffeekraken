@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __STheme from '@coffeekraken/s-theme';
 
 /**
@@ -111,7 +110,7 @@ export default function ({
                         border-width: sugar.theme(ui.avatar.borderWidth);
                         border-color: sugar.color(current);
                         border-style: solid;
-                        @sugar.depth(sugar.theme.value(ui.avatar.depth));
+                        @sugar.depth(ui.avatar.depth);
                     }
                 `);
                 break;
@@ -162,7 +161,7 @@ export default function ({
                         border-radius: 9999px;
                         padding: 0.33em;
                         font-weight: bold;
-                        @sugar.depth(sugar.theme.value(ui.avatar.depth));
+                        @sugar.depth(ui.avatar.depth);
                     }
                 }
             `);

@@ -42,7 +42,15 @@
         <i class="s-icon:angle-up"></i>
     </s-scroll>
 
-    <div class="loader"></div>
+    <div class="loader">
+        <p class="s-typo--p">
+            Welcome on
+        </p>
+        <div class="__logo">
+            @include ('layouts.header.partials.logo')
+        </div>
+        <div class="__spinner"></div>
+    </div>
     <div class="top-loader"></div>
 
 @endsection

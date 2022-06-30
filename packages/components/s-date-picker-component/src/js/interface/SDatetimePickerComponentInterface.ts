@@ -107,14 +107,7 @@ export default class SDatetimePickerComponentInterface extends __SInterface {
                 description:
                     'Specify some float settings to pass to the "makeFloat" function of the sugar toolkit',
                 type: 'Object',
-                default: {
-                    position: 'auto',
-                    shift: 10,
-                    offset: 0,
-                    arrow: false,
-                    arrowSize: 15,
-                    arrowPadding: 10,
-                },
+                default: {},
             },
             copyIconClass: {
                 description:
@@ -133,6 +126,12 @@ export default class SDatetimePickerComponentInterface extends __SInterface {
                     'Specify the class you want to apply on the injected button icon',
                 type: 'String',
                 default: 's-icon s-icon--color',
+            },
+            backdropClass: {
+                description:
+                    'Specify the class to apply on the backdrop when the "backdrop" prop is true',
+                type: 'String',
+                default: 's-backdrop',
             },
             disable: {
                 description:

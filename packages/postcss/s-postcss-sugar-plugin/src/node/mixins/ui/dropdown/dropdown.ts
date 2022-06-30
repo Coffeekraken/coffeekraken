@@ -125,15 +125,15 @@ export default function ({
                 vars.push(`
                     background-color: sugar.color(base, background);
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
-                    @sugar.border.radius(sugar.theme.value(ui.dropdown.borderRadius));
-                    @sugar.depth(sugar.theme.value(ui.dropdown.depth));
+                    @sugar.border.radius(ui.dropdown.borderRadius);
+                    @sugar.depth(ui.dropdown.depth);
                     @sugar.transition(fast);
 
                     &__item {
                         padding-inline: sugar.padding(ui.dropdown.paddingInline);
                         padding-block: sugar.padding(ui.dropdown.paddingBlock);
                         background-color: sugar.color(current, --alpha: 0);
-                        @sugar.border.radius(sugar.theme.value(ui.dropdown.borderRadius));
+                        @sugar.border.radius(ui.dropdown.borderRadius);
                         @sugar.transition(fast);
 
                         &:hover, &:focus {

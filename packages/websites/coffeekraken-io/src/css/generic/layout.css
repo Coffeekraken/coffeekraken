@@ -56,19 +56,65 @@
 }
 
 .loader {
-    @sugar.ui.loader.spinner();
     position: fixed;
     top: 50%;
     left: 50%;
     font-size: 20px;
     transform: translate(-50%, -50%);
     pointer-events: none;
-    @sugar.color (accent);
     opacity: 0;
     @sugar.transition (fast);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: sugar.margin(30);
 
     .initial-loading & {
         opacity: 1;
+    }
+
+    .__spinner {
+        @sugar.color (accent);
+        @sugar.ui.loader.spinner();
+    }
+
+    p {
+        opacity: 0.5;
+    }
+
+    .__logo {
+        width: 140px;
+        position: relative;
+        left: 12px;
+
+        svg {
+            height: 40px;
+            width: 140px;
+            transform-origin: 0 50%;
+            transform: translate(-10px, 0px);
+
+            @sugar.media mobile {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        svg .main {
+            fill: sugar.color(base, --darken 55);
+        }
+        svg .accent {
+            fill: sugar.color(accent);
+        }
+
+        @sugar.theme.when (dark) {
+            svg .main {
+                fill: sugar.color(main, text);
+            }
+            svg .accent {
+                fill: sugar.color(accent);
+            }
+        }
     }
 }
 

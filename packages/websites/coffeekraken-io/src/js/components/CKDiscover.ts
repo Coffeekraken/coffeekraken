@@ -88,20 +88,25 @@ export default class CKDiscover extends __SLitComponent {
                                     >&nbsp;
                                 `
                               : ''}
-                          <span class="s-badge s-color:complementary"
-                              >${this.item.type?.types?.[0]?.type}</span
-                          >
+                          ${this.item.type?.types?.[0].type || this.item.type
+                              ? html`
+                                    <span class="s-badge s-color:complementary"
+                                        >${this.item.type?.types?.[0]?.type ??
+                                        this.item.type}</span
+                                    >
+                                `
+                              : ''}
                           <br />
                           <br />
                           <h1 class="s-typo:h3 s-mbe:30">
                               ${this.item.name}
                           </h1>
-                          <p class="s-typo:p s-mbe:30">
+                          <p class="s-typo:p s-mbe:30 s-truncate:3">
                               ${this.item.description}
                           </p>
                           ${!this.timeout
                               ? html`
-                                    <s-code-example>
+                                    <s-code-example lines="8">
                                         <code
                                             lang="${this.props.platform ===
                                                 'ts' ||

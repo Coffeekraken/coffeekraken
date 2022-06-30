@@ -1,4 +1,4 @@
-<section id="features-why" class="diagonal-section diagonal-section--no-after s-pb:100 @mobile s-pi:30">
+<section id="features-why" class="s-pb:100 @mobile s-pi:30">
 
     <div class="s-container">
 

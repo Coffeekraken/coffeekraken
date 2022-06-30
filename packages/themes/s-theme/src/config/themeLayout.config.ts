@@ -1,5 +1,55 @@
 export default function (env, config) {
     return {
+        offset: {
+            /**
+             * @name                top
+             * @namespace           config.themeLayout.container.default
+             * @type                String
+             * @default             0
+             *
+             * Specify an offset top for your layout. This can be due to a sticky navigation, etc...
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            top: 0,
+            /**
+             * @name                right
+             * @namespace           config.themeLayout.container.default
+             * @type                String
+             * @default             0
+             *
+             * Specify an offset right for your layout. This can be due to a sticky navigation, etc...
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            right: 0,
+            /**
+             * @name                bottom
+             * @namespace           config.themeLayout.container.default
+             * @type                String
+             * @default             0
+             *
+             * Specify an offset bottom for your layout. This can be due to a sticky navigation, etc...
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            bottom: 0,
+            /**
+             * @name                left
+             * @namespace           config.themeLayout.container.default
+             * @type                String
+             * @default             0
+             *
+             * Specify an offset left for your layout. This can be due to a sticky navigation, etc...
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            left: 0,
+        },
         container: {
             default: {
                 /**

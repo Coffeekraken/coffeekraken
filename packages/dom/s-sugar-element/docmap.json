@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -44,8 +43,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -54,7 +53,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-sugar-element.js.SActivateFeature": {
                 "id": "@coffeekraken.s-sugar-element.js.SActivateFeature",
                 "name": "SActivateFeature",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "platform": [
                     {
                         "name": "js",
@@ -127,13 +120,7 @@
                     "$elm": {
                         "id": "b054ccfebb933501b6a69251d2e28644b4f83269d6ef4d71806ee2c31e8a3d62",
                         "name": "$elm",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "HTMLElement"
-                                }
-                            ]
-                        },
+                        "type": "HTMLElement",
                         "description": "Store the HTMLElement reference",
                         "since": "2.0.0",
                         "author": {
@@ -145,13 +132,7 @@
                     "matrix": {
                         "id": "ef5c98bfb62bb40b4dc5d55fdea1fb84de3a055b93d88ebc181c6bb105c85ce5",
                         "name": "matrix",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Array"
-                                }
-                            ]
-                        },
+                        "type": "Array",
                         "description": "Access the matrix array of the current element",
                         "since": "2.0.0",
                         "author": {
@@ -163,13 +144,7 @@
                     "matrixstr": {
                         "id": "1f700d2fdce021fb9956880e855eff2038d635adcffcd38642db9d1bd969a01b",
                         "name": "matrixStr",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ]
-                        },
+                        "type": "String",
                         "description": "Get the matrix string of the current element",
                         "since": "2.0.0",
                         "author": {
@@ -181,13 +156,7 @@
                     "constructor": {
                         "id": "1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -199,13 +168,7 @@
                     "applymatrix": {
                         "id": "8b21239c860ec1978e648d084cdda25075b657f891e86772d5cd21b8c08647e1",
                         "name": "applyMatrix",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Apply a matrix to the current element",
                         "since": "2.0.0",
                         "author": {
@@ -217,13 +180,7 @@
                     "overridematrix": {
                         "id": "3b5a46378a2ca1d7b8058d697e932c0668c02fc1e479e49a9ec693cac934d1b0",
                         "name": "overrideMatrix",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Apply a matrix to the current element",
                         "since": "2.0.0",
                         "author": {
@@ -235,13 +192,7 @@
                     "gettranslates": {
                         "id": "70930179f619ab1110777f9122030596689e3249ac74d1235363c5c0171cc586",
                         "name": "getTranslates",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to get the current translation of the element at a this specific time",
                         "since": "2.0.0",
                         "author": {
@@ -253,13 +204,7 @@
                     "getrotates": {
                         "id": "87e77c77f95a0a4ea38b2126eebcc215ab055c8556c1a0fbfb4691f95150e8ef",
                         "name": "getRotates",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to get the current translation of the element at a this specific time",
                         "since": "2.0.0",
                         "author": {
@@ -271,13 +216,7 @@
                     "settranslate": {
                         "id": "c396100ca6c469936269777f130c210fd44005a9f4b1b96f6371deb6bd4f3544",
                         "name": "setTranslate",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Allows you to set the translate of an HTMLElement by setting his transformation properties.\nThis will override the previous matrix translates. If you want to \"add\" a translation, use the `translate` method instead;",
                         "since": "2.0.0",
                         "author": {
@@ -289,13 +228,7 @@
                     "translate": {
                         "id": "dea9bc1545d3ac4cfdd939dd76e9badc714635911dc185aa427aefaa8881f5de",
                         "name": "translate",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Allows you to translate an HTMLElement by setting his transformation properties",
                         "since": "2.0.0",
                         "author": {
@@ -307,13 +240,7 @@
                     "rotate": {
                         "id": "05f8e93b14229b86b4747d0988a1e5f0f8e2a9f62b7df9726547f7b580b61666",
                         "name": "rotate",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Allows you to rotate an HTMLElement by setting his transformation properties",
                         "since": "2.0.0",
                         "author": {
@@ -325,13 +252,7 @@
                     "setrotates": {
                         "id": "b0656b3316ab22fd678d6da4c0a725e7f9f29453a33182b57c98f9c2d432a74c",
                         "name": "setRotates",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Allows you to set the rotates of any HTMLElement by setting his transformation properties",
                         "since": "2.0.0",
                         "author": {

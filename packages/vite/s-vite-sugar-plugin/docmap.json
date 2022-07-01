@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -44,8 +43,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -54,7 +53,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -76,6 +74,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-vite-sugar-plugin.node.sVitePluginSugar": {
                 "id": "@coffeekraken.s-vite-sugar-plugin.node.sVitePluginSugar",
                 "name": "sVitePluginSugar",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "description": "This plugin allows you to automate some things like injecting\nenvironment variables in the js, etc...",
                 "namespace": "@coffeekraken.s-vite-sugar-plugin.node",
                 "since": "2.0.0",

@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,8 +42,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingInline": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingInline",
                 "name": "paddingInline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[theme.ui.default.paddingInline]",
                 "description": "Specify the default padding inline for filtrable input ui",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -111,13 +104,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingBlock": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingBlock",
                 "name": "paddingBlock",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[theme.ui.default.paddingBlock]",
                 "description": "Specify the default padding block for filtrable input ui",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -134,13 +121,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderRadius": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderRadius",
                 "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[theme.ui.default.borderRadius]",
                 "description": "Specify the default border radius for filtrable input ui",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -157,13 +138,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderWidth": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderWidth",
                 "name": "borderWidth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[theme.ui.default.borderWidth]",
                 "description": "Specify the default border width for filtrable input ui",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -180,13 +155,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.transition": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.transition",
                 "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[theme.ui.default.transition]",
                 "description": "Specify the default transition for filtrable input ui",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -203,13 +172,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultColor": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultColor",
                 "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[theme.ui.default.defaultColor]",
                 "description": "Specify the default color for filtrable input ui",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -226,13 +189,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultStyle": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultStyle",
                 "name": "defaultStyle",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ]
-                },
+                "type": "Number",
                 "default": "[theme.ui.default.defaultStyle]",
                 "description": "Specify the default style for your filtrable input ui",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -249,13 +206,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.depth": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.depth",
                 "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "5",
                 "description": "Specify the default depth for input items",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -272,13 +223,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.outline": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.outline",
                 "name": "outline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ]
-                },
+                "type": "Object",
                 "default": "[theme.ui.outline.active]",
                 "description": "Specify if the focus outline is activated for this ui element",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -295,13 +240,7 @@
             "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.rhythmVertical": {
                 "id": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.rhythmVertical",
                 "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ]
-                },
+                "type": "Object",
                 "default": "[theme.ui.default.rhythmVertical]",
                 "description": "Specify the default vertical rhythm for your filtrable input ui",
                 "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
@@ -319,13 +258,7 @@
             "@coffeekraken.s-filtrable-input-component.doc.README": {
                 "id": "@coffeekraken.s-filtrable-input-component.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -355,13 +288,7 @@
                 "id": "@coffeekraken.s-filtrable-input-component.js.SFiltrableInputComponent",
                 "name": "SFiltrableInputComponent",
                 "as": "Filtrable input",
-                "type": {
-                    "types": [
-                        {
-                            "type": "CustomElement"
-                        }
-                    ]
-                },
+                "type": "CustomElement",
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -499,13 +426,7 @@
                     "define": {
                         "id": "5d7cf0c1b1fbc3f0d412c1fbf086814555863147510fa00426539708e5634760",
                         "name": "define",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This function allows you to define (register) your custom element with some default\nprops if needed.",
                         "since": "2.0.0",
                         "author": {
@@ -516,134 +437,10 @@
                     }
                 }
             },
-            "@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface": {
-                "id": "@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface",
-                "name": "SFiltrableInputComponentInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe parameters of the SFiltrableInputComponent",
-                "namespace": "@coffeekraken.s-filtrable-input-component.js.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SFiltrableInputComponentInterface",
-                    "description": "",
-                    "definition": {
-                        "items": {
-                            "description": "Specify an array of items to use in your filtrable list. Can be a JSON string, a function that take an object with the \"value\" property and must return an array of items to use",
-                            "type": "String|Function"
-                        },
-                        "value": {
-                            "description": "Specify the attribute in your items to use as a value. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as value",
-                            "type": "String",
-                            "default": "value"
-                        },
-                        "label": {
-                            "description": "Specify the attribute in your items to use as a label. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as label",
-                            "type": "String|Function",
-                            "default": "value"
-                        },
-                        "emptyText": {
-                            "description": "Specify the text to use for the default \"empty\" (no result) state",
-                            "type": "String",
-                            "default": "No item to display"
-                        },
-                        "searchValuePreprocess": {
-                            "description": "Specify a function used to preprocess the value just before actually searching through the items",
-                            "type": "Function"
-                        },
-                        "loadingText": {
-                            "description": "Specify the text to use for the default \"loading\" state",
-                            "type": "String",
-                            "default": "Loading please wait..."
-                        },
-                        "filter": {
-                            "description": "Specify a function to use to filter the items. Must return the filtered list of items",
-                            "type": "Function"
-                        },
-                        "filtrable": {
-                            "description": "Specify all the properties of your \"item\" to use as source for the filtrable process",
-                            "type": {
-                                "type": "Array<String>",
-                                "splitChars": [
-                                    ","
-                                ]
-                            },
-                            "default": []
-                        },
-                        "templates": {
-                            "description": "Specify either an object with properties like \"item\", \"empty\" and \"loading\", or a function returning the good template depending on tne \"type\" argument property",
-                            "type": "Object|Function"
-                        },
-                        "closeTimeout": {
-                            "description": "Specify the duration before closing the list when having selected an item",
-                            "type": "Number",
-                            "default": 100
-                        },
-                        "interactive": {
-                            "description": "Specify if your items in the list are interactive or not to let the user click and interact with them",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "closeOnSelect": {
-                            "description": "Specify if you wantr to close the list when selecting an item",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "notSelectable": {
-                            "description": "Specify if you want the items to be not selectable",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "maxItems": {
-                            "description": "Specify the maximum number of items to display at first in the list",
-                            "type": "Number",
-                            "default": 25
-                        },
-                        "classes": {
-                            "description": "Specify some additional classes to add to the component elements",
-                            "type": "Object",
-                            "default": {}
-                        },
-                        "inline": {
-                            "description": "Specify if you want the filterable input list to be always displayed and inline in the html",
-                            "type": "Boolean",
-                            "default": false,
-                            "physical": true
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SFiltrableInputComponentInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SFiltrableInputComponentInterface.ts",
-                "children": {}
-            },
             "@coffeekraken.s-filtrable-input-component.ui.filtrableInput.filtrableInput": {
                 "id": "@coffeekraken.s-filtrable-input-component.ui.filtrableInput.filtrableInput",
                 "name": "filtrableInput",
-                "type": {
-                    "types": [
-                        {
-                            "type": "PostcssMixin"
-                        }
-                    ]
-                },
+                "type": "PostcssMixin",
                 "platform": [
                     {
                         "name": "css",

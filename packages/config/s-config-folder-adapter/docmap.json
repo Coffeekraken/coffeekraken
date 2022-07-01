@@ -18,7 +18,6 @@
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,8 +42,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-config-folder-adapter.doc.README": {
                 "id": "@coffeekraken.s-config-folder-adapter.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -123,13 +116,7 @@
             "@coffeekraken.s-config-folder-adapter.node.SConfigFolderAdapter": {
                 "id": "@coffeekraken.s-config-folder-adapter.node.SConfigFolderAdapter",
                 "name": "SConfigFolderAdapter",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.\nEach file in the folder will be the first level of the final config object like for example the file \"colors.config.js\" will be stored\nin the final object under ```{ colors: ... }```.",
                 "namespace": "@coffeekraken.s-config-folder-adapter.node",
                 "status": "beta",

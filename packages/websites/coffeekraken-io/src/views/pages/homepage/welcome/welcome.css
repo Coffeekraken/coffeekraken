@@ -22,8 +22,10 @@
 
         @sugar.media mobile {
             position: relative;
-            top: 100px; left: 0;
-            width: 100%; height: 350px;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            height: 350px;
             transform: scale(1.4);
         }
 
@@ -44,16 +46,18 @@
         z-index: 9;
         top: 50%;
         left: 50%;
-        width: 1280px;
         transform: translate(-50%, -50%);
+        width: 100%;
+        @sugar.container (default);
 
         @sugar.media >=wide {
-            width: 1640px;
+            @sugar.container (wide);
         }
 
         @sugar.media mobile {
             position: relative;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             width: 100%;
             transform: none;
             padding: sugar.padding(100) sugar.padding(30);

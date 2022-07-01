@@ -30,7 +30,7 @@ body {
 
 .s-container {
     @sugar.media (>=wide) {
-        @sugar.layout.container (wide);
+        @sugar.container (wide);
     }
 }
 

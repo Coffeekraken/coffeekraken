@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -44,8 +43,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-log.doc.README": {
                 "id": "@coffeekraken.s-log.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -120,104 +113,10 @@
                 "relPath": "src/doc/README.md",
                 "children": {}
             },
-            "@coffeekraken.s-log.shared.ISLog": {
-                "id": "@coffeekraken.s-log.shared.ISLog",
-                "name": "ISLog",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    }
-                ],
-                "description": "This interface define the shape a an log object that can be used\nacross some other services/classes like SStdio, and others dependings\non the needs...",
-                "namespace": "@coffeekraken.s-log.shared",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { ISLog } from '@coffeekraken/s-log';\nfunction myCoolFunction(log: ISLog): void {\n   // do something...\n}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "ISLog.ts",
-                "extension": "ts",
-                "relPath": "src/shared/ISLog.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-log.shared.ISLogAsk": {
-                "id": "@coffeekraken.s-log.shared.ISLogAsk",
-                "name": "ISLogAsk",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    }
-                ],
-                "description": "This interface define the shape a an log ask object that can be used\nacross some other services/classes like SStdio, and others dependings\non the needs...",
-                "namespace": "@coffeekraken.s-log.shared",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { ISLogAsk } from '@coffeekraken/s-log';\nfunction myCoolFunction(ask: ISLogAsk): void {\n   // do something...\n}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "ISLogAsk.ts",
-                "extension": "ts",
-                "relPath": "src/shared/ISLogAsk.ts",
-                "children": {}
-            },
             "@coffeekraken.s-log.shared.SLog": {
                 "id": "@coffeekraken.s-log.shared.SLog",
                 "name": "SLog",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "platform": [
                     {
                         "name": "js",
@@ -246,38 +145,10 @@
                 "extension": "ts",
                 "relPath": "src/shared/SLog.ts",
                 "children": {
-                    "type_log": {
-                        "id": "a3afeafd3bffb2ce93f2d8e759aeb76375c92e3e0b5021c1587b3e6fb948af25",
-                        "name": "TYPE_LOG",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "ISLogType"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This static constant tells a log that it is of type \"LOG\"",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "type_info": {
                         "id": "476a3498bf1c4870e411a680bb962c0247ccabaa3449203dea081ab68343ee74",
                         "name": "TYPE_INFO",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISLogType"
-                                }
-                            ]
-                        },
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"INFO\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -290,13 +161,7 @@
                     "type_warn": {
                         "id": "94c8dd28710a14ce671389a144c026b115741597b32d131a789c1131201bbd5b",
                         "name": "TYPE_WARN",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISLogType"
-                                }
-                            ]
-                        },
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"WARN\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -309,13 +174,7 @@
                     "type_error": {
                         "id": "d6d6eefa56c8f6927330a6fb0f9168f715ce77ed8b79e71554926baa83a5cfb5",
                         "name": "TYPE_ERROR",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISLogType"
-                                }
-                            ]
-                        },
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"ERROR\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -328,13 +187,7 @@
                     "type_verbose": {
                         "id": "577766745c7cf515b61221ce612119a666f0c1d5d5d6d0d6e6ac3837f24a46c0",
                         "name": "TYPE_VERBOSE",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISLogType"
-                                }
-                            ]
-                        },
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"VERBOSE\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -347,13 +200,7 @@
                     "type_verboser": {
                         "id": "798e799e2802a57ce85a7cd4626d4ec89cee4e2008667e0b2c39ef7cf8720a51",
                         "name": "TYPE_VERBOSER",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISLogType"
-                                }
-                            ]
-                        },
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"VERBOSER\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -366,13 +213,7 @@
                     "type_decorator": {
                         "id": "e6c27a507f7a71e5be8383d222f869e3781c07d58fd7c4e2072dbebf469ea8a0",
                         "name": "TYPE_DECORATOR",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISLogType"
-                                }
-                            ]
-                        },
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"DECORATOR\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -385,13 +226,7 @@
                     "type_summary": {
                         "id": "7c2248a7c56a1a21c601085bdea4edc3985d83499bec92ab0039bcfc605c76d6",
                         "name": "TYPE_SUMMARY",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISLogType"
-                                }
-                            ]
-                        },
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"SUMMARY\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -404,190 +239,8 @@
                     "type_child_process": {
                         "id": "704805ae530cc07c9b596ddd7a7166add7c3ebeb387fd9c1607a8777f1dc05e1",
                         "name": "TYPE_CHILD_PROCESS",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISLogType"
-                                }
-                            ]
-                        },
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"CHILD_PROCESS\"",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "types": {
-                        "id": "fa85473a8073abea9dbc8e1eb3d88f7a296741462446e595a17ad32d2d958f00",
-                        "name": "TYPES",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "ISLogType"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This static constant store all the log types available",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "preset_silent": {
-                        "id": "bcbb2e75f4f24e5fe3f843a9fa0674621296d4d9d62dc37c6c8c50ef42df3a8c",
-                        "name": "PRESET_SILENT",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "ISLogType"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This static constant define a log preset called \"silent\" that display nothing",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "preset_default": {
-                        "id": "11f079cca87fc48d75196b5366c11d4867ad33742ba8efe27f33bd5a6286064e",
-                        "name": "PRESET_DEFAULT",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "ISLogType"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This static constant define a log preset called \"default\" that display:\n- LOG\n- INFO\n- WARN\n- ERROR\n- DECORATOR\n- SUMMARY",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "preset_warn": {
-                        "id": "597706a628bc56fb1e82cef00acf0be86ed29e380faf8e392fb123a4529733f4",
-                        "name": "PRESET_WARN",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "ISLogType"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This static constant define a log preset called \"warn\" that display:\n- WARN\n- ERROR",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "preset_error": {
-                        "id": "eef62529f91835496d405269ec5d68d5f34ef76977542befd04a2ff7861ba728",
-                        "name": "PRESET_ERROR",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "ISLogType"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This static constant define a log preset called \"error\" that display:\n- ERROR",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "preset_verbose": {
-                        "id": "a95b1924ca54cb07b4cbd65aa3772e2b09f12d9fb93e38e57d29674680f8b805",
-                        "name": "PRESET_VERBOSE",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "ISLogType"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This static constant define a log preset called \"verbose\" that display:\n- LOG\n- INFO\n- WARN\n- ERROR\n- VERBOSE\n- DECORATOR\n- SUMMARY",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "preset_verboser": {
-                        "id": "49de92fb6dc4dece8fdca74dc6db96b67e04670897abef00bbd0cee220c2e0c9",
-                        "name": "PRESET_VERBOSER",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "ISLogType"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This static constant define a log preset called \"verboser\" that display:\n- LOG\n- INFO\n- WARN\n- ERROR\n- VERBOSE\n- VERBOSER\n- DECORATOR\n- SUMMARY",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "presets": {
-                        "id": "a6450c0dc47de7f2a57b309b4554f30ab8b4534d1b0a2652b087bc0381d3381a",
-                        "name": "PRESETS",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "String"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This static constant store all the log presets available",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -599,13 +252,7 @@
                     "filter": {
                         "id": "a285a6e6b502c5935d3bbbd02d1e39b0d6384e0a89724a5518885fd318f3f0d9",
                         "name": "filter",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to filter the logs across your entire app\nat once. To do this, simply name your filter and pass an object describing\nwhat you want to apply as filter.\nThese filters will have as consequence to set the \"active\" property of each logs to\ntrue or false.",
                         "example": [
                             {
@@ -624,13 +271,7 @@
                     "clearfilters": {
                         "id": "4e716ccfbeed652b776b88b979f6ed4daf45f1051af4c15b0760925256c4a80f",
                         "name": "clearFilters",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to reset all the filters applied",
                         "static": "true",
                         "since": "2.0.0",
@@ -643,13 +284,7 @@
                     "setdefaultlogobj": {
                         "id": "9f12dfd2a3ac25c4183de14dc5750acd5d17a10a8176dbaf14aea25d89a7ecbb",
                         "name": "setDefaultLogObj",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to set a default log object\nabove every others will be extended.",
                         "static": "true",
                         "since": "2.0.0",
@@ -662,13 +297,7 @@
                     "istypeenabled": {
                         "id": "819fdbb514fe67d5939c0c878f220d64bbe2637caf39138081a48638c9a9eebf",
                         "name": "isTypeEnabled",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you Check if a particular log type is enabled or not.\nYou can pass as well multiple log types as an array.",
                         "static": "true",
                         "since": "2.0.0",
@@ -681,13 +310,7 @@
                     "constructor": {
                         "id": "1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -699,13 +322,7 @@
                     "value": {
                         "id": "d0f74081762ac2cfc3a7fb43b9683d215f5df188d72429dbb208440672f49f6f",
                         "name": "value",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Any"
-                                }
-                            ]
-                        },
+                        "type": "Any",
                         "description": "Access the \"value\" property of the SLog object",
                         "since": "2.0.0",
                         "author": {
@@ -717,13 +334,7 @@
                     "type": {
                         "id": "b2fe6696412dd80403487ec5065908f4e4bfee8829450e1bb909170a17d48cd4",
                         "name": "type",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ]
-                        },
+                        "type": "String",
                         "description": "Access the \"type\" property of the SLog object\nThis specify which type if the log. LOG, INFO, WARN, ERROR or VERBODE",
                         "since": "2.0.0",
                         "author": {
@@ -735,13 +346,7 @@
                     "active": {
                         "id": "e490d6d923a395cd4c4f29ac27927d3616bea60326efd6d0e2f23012606766e9",
                         "name": "active",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Boolean"
-                                }
-                            ]
-                        },
+                        "type": "Boolean",
                         "description": "Access the \"active\" property of the SLog object\nThis specify if the log is active depending on parameters like `SLog.filter`.\nCheck the documentation of this static method for more info.",
                         "since": "2.0.0",
                         "author": {
@@ -753,13 +358,7 @@
                     "decorators": {
                         "id": "fa0ee375401913670939254e305fca64001d44a34403c2fa0b17b1330287e2dd",
                         "name": "decorators",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Boolean"
-                                }
-                            ]
-                        },
+                        "type": "Boolean",
                         "description": "Access the \"decorators\" property of the SLog object.\nThis specify if the log has to be printed with decorators or not",
                         "since": "2.0.0",
                         "author": {
@@ -771,13 +370,7 @@
                     "time": {
                         "id": "475bf6e4ec61c28f5e672c44c4c607d9c6bd0bb651084f99b04b680c2c9a0d0e",
                         "name": "time",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Boolean"
-                                }
-                            ]
-                        },
+                        "type": "Boolean",
                         "description": "Access the \"time\" property of the SLog object.\nThis specify if the log has to be printed with his time or not",
                         "since": "2.0.0",
                         "author": {
@@ -789,13 +382,7 @@
                     "timestamp": {
                         "id": "1b4286a11d43e894d0c260c49a6763c8a6416e81b14c8da94c6929ef903cc8dd",
                         "name": "timestamp",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ]
-                        },
+                        "type": "String",
                         "description": "Access the \"timestamp\" property of the SLog object",
                         "since": "2.0.0",
                         "author": {
@@ -807,13 +394,7 @@
                     "clear": {
                         "id": "02b0a4a11e3a1bdb1121b021b3dff4e82be1e02ddbd15268325d35b0c218ed76",
                         "name": "clear",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Boolean"
-                                }
-                            ]
-                        },
+                        "type": "Boolean",
                         "description": "Access the \"clear\" property of the SLog object.\nThis specify if the previous logs have to be cleared before printing this one",
                         "since": "2.0.0",
                         "author": {
@@ -825,13 +406,7 @@
                     "margin": {
                         "id": "d4d75318fd254a20e9ce1585934ecc48efe0eb5db28e0141bf628099b85851f7",
                         "name": "margin",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISLogMargin"
-                                }
-                            ]
-                        },
+                        "type": "ISLogMargin",
                         "description": "Access the \"margin\" property of the SLog object.",
                         "since": "2.0.0",
                         "author": {
@@ -843,13 +418,7 @@
                     "temp": {
                         "id": "5d3f84e9d31899fe6ce9104824d531ce78df0d251831996f4dc36d53e799fbba",
                         "name": "temp",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Boolean"
-                                }
-                            ]
-                        },
+                        "type": "Boolean",
                         "description": "Access the \"temp\" property of the SLog object.\nThis specify if this log is a temporary one and if it has to be deleted\nwhen the next log appear.",
                         "since": "2.0.0",
                         "author": {
@@ -861,13 +430,7 @@
                     "as": {
                         "id": "88450756fe858f78606ff0f799e490e5f7c300129a6032af1a6ae2f3ac12c112",
                         "name": "as",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ]
-                        },
+                        "type": "String",
                         "description": "Access the \"as\" property of the SLog object.\nThis specify the optimal way the log has to be displayed.\nThis depends on the logger you use and how it can display logs.",
                         "since": "2.0.0",
                         "author": {

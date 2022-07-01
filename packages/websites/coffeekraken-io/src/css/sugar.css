@@ -3,9 +3,12 @@
 
 @sugar.classes;
 @sugar.media.classes ('mobile,tablet') {
-    @sugar.container.classes;
+    @sugar.classes;
+    /* @sugar.container.classes;
     @sugar.grid.classes;
+    @sugar.layout.classes;
     @sugar.margin.classes;
+    @sugar.display.classes; */
 }
 
 @sugar.ui.filtrableinput.classes;

@@ -47,12 +47,12 @@ function __toLowerCase(l = '') {
  * @extends             SPromise
  * @status              wip
  *
- * This class represent the ```docMap.json``` file and allows you to build it from some sources (glob pattern(s))
+ * This class represent the ```docmap.json``` file and allows you to build it from some sources (glob pattern(s))
  * and save it inside a directory you choose.
  *
- * @param           {Object}        [settings={}]           An object of settings to configure your docMap instance:
- * - filename (docMap.json) {String}: Specify the filename you want
- * - outputDir (packageRootDir()) {String}: Specify the directory where you want to save your docMap.json file when using the ```save``` method
+ * @param           {Object}        [settings={}]           An object of settings to configure your docmap instance:
+ * - filename (docmap.json) {String}: Specify the filename you want
+ * - outputDir (packageRootDir()) {String}: Specify the directory where you want to save your docmap.json file when using the ```save``` method
  *
  * @todo      interface
  * @todo      doc
@@ -184,7 +184,7 @@ class SDocMap extends __SClass implements ISDocmap {
      * @type           ISDocmapEntries
      * @private
      *
-     * This store the docMap.json entries
+     * This store the docmap.json entries
      *
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -265,14 +265,14 @@ class SDocMap extends __SClass implements ISDocmap {
      * @type          Function
      * @async
      *
-     * This static method allows you to search for docMap.json files and read them to get
+     * This static method allows you to search for docmap.json files and read them to get
      * back the content of them in one call. It can take advantage of the cache if
      *
      * @todo      update documentation
      * @todo      integrate the "cache" feature
      *
      * @param       {Object}        [settings={}]       A settings object to override the instance level ones
-     * @return      {SPromise<ISDocmapObj>}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
+     * @return      {SPromise<ISDocmapObj>}                          An SPromise instance that will be resolved once the docmap.json file(s) have been correctly read
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -924,7 +924,7 @@ class SDocMap extends __SClass implements ISDocmap {
                 emit('log', {
                     value: `<yellow>[build]</yellow> <green>${
                         Object.keys(this._entries).length
-                    }</green> entries gathered for this docMap`,
+                    }</green> entries gathered for this docmap`,
                 });
 
                 emit('notification', {

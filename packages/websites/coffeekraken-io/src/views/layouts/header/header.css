@@ -33,7 +33,7 @@
     }
 
     @sugar.media (>=wide) {
-        width: calc(1640px + sugar.padding(30) * 2);
+        width: calc(sugar.theme(layout.container.wide) + sugar.padding(30) * 2);
     }
 
     &:not(#homepage &),

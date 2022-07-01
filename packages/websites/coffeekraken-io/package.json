@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/coffeekraken-io",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu",
     "main": "./src/shared/exports.js",
     "type": "module",

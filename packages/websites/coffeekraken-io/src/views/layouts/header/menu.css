@@ -60,7 +60,7 @@
             @sugar.depth (10);
 
             @sugar.media (>=wide) {
-                width: 1640px;
+                @sugar.container (wide);
             }
             @sugar.media (<=dwarf) {
                 --max-height: calc(100vh - 200px);

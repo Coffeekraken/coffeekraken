@@ -16,6 +16,17 @@
                     @include ('layouts.header.partials.logo')
                 </a>
             </div>
+            <div class="__version">
+                @php
+                    $color = 'complementary';
+                    if (strpos($packageJson->version, 'alpha')) {
+                        $color = 'error';
+                    }
+                @endphp
+                <span class="s-badge s-color:{{ $color }}">
+                    {{ $packageJson->version }}
+                </span>
+            </div>
             <nav id="nav" class="__nav s-until:media:mobile">
                 <a class="s-typo:bold __main-link" href="/doc/get-started/get-started" title="Get Started">
                     <span>Get started</span>

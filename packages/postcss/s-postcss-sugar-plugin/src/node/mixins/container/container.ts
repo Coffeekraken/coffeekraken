@@ -74,9 +74,9 @@ export default function ({
         );
     }
 
-    Object.keys(containerConfig).forEach((key) => {
-        vars.code(`${key}: ${containerConfig[key]};`);
-    });
+    vars.code(`
+        max-width: sugar.theme(layout.container.${finalParams.name});
+    `);
 
     return vars;
 }

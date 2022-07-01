@@ -18,7 +18,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,6 +42,7 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
@@ -52,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -69,7 +68,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -142,6 +140,48 @@
                         "code": "@use 'node_modules/@coffeekraken/drawer-webcomponent/index' as drawer-webcomponent;\n\\@include drawer-webcomponent.classes(\n\t$name : menu,\n\t$side : right\n);\n\\@include drawer-webcomponent.element(drawer) {\n\tbackground-color: black;\n\tpadding: 20px;\n}\n\\@include drawer-webcomponent.element(overlay) {\n\tbackground-color: rgba(0,0,0,.5);\n}"
                     }
                 ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "testing.ts",
+                "extension": "ts",
+                "relPath": "src/data/tests/testing.ts"
+            },
+            "@coffeekraken.sugar.drawer-webcomponent.open": {
+                "id": "@coffeekraken.sugar.drawer-webcomponent.open",
+                "name": "open",
+                "type": "Function",
+                "description": "Open the drawer",
+                "namespace": "@coffeekraken.sugar.drawer-webcomponent",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "testing.ts",
+                "extension": "ts",
+                "relPath": "src/data/tests/testing.ts"
+            },
+            "@coffeekraken.sugar.drawer-webcomponent.close": {
+                "id": "@coffeekraken.sugar.drawer-webcomponent.close",
+                "name": "close",
+                "type": "Function",
+                "description": "Close the drawer",
+                "namespace": "@coffeekraken.sugar.drawer-webcomponent",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "testing.ts",
+                "extension": "ts",
+                "relPath": "src/data/tests/testing.ts"
+            },
+            "@coffeekraken.sugar.drawer-webcomponent.isOpen": {
+                "id": "@coffeekraken.sugar.drawer-webcomponent.isOpen",
+                "name": "isOpen",
+                "type": "Function",
+                "description": "Check if is opened",
+                "namespace": "@coffeekraken.sugar.drawer-webcomponent",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
@@ -5222,6 +5262,96 @@
                 "relPath": "src/php/array/pickRandom.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.frontspec.assets": {
+                "id": "@coffeekraken.sugar.php.frontspec.assets",
+                "name": "assets",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "Print the passed \"assets\" from the frontspec",
+                "namespace": "@coffeekraken.sugar.php.frontspec",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\frontspec\\assets($frontspec->assets);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "assets.php",
+                "extension": "php",
+                "relPath": "src/php/frontspec/assets.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.frontspec.metas": {
+                "id": "@coffeekraken.sugar.php.frontspec.metas",
+                "name": "metas",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "Print the passed \"metas\" from the frontspec",
+                "namespace": "@coffeekraken.sugar.php.frontspec",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\frontspec\\metas($frontspec->metas, 'production');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "metas.php",
+                "extension": "php",
+                "relPath": "src/php/frontspec/metas.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.frontspec.og": {
+                "id": "@coffeekraken.sugar.php.frontspec.og",
+                "name": "og",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "Print the passed \"og\" from the frontspec",
+                "namespace": "@coffeekraken.sugar.php.frontspec",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\frontspec\\og($frontspec->og);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "og.php",
+                "extension": "php",
+                "relPath": "src/php/frontspec/og.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.gravatar.url": {
                 "id": "@coffeekraken.sugar.php.gravatar.url",
                 "name": "url",
@@ -5400,6 +5530,36 @@
                 "filename": "ipAddress.php",
                 "extension": "php",
                 "relPath": "src/php/network/ipAddress.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.path.extension": {
+                "id": "@coffeekraken.sugar.php.path.extension",
+                "name": "extension",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "Return the extension of the passed path",
+                "namespace": "@coffeekraken.sugar.php.path",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\path\\extension('/path/to/file.ext'); // => ext"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "extension.php",
+                "extension": "php",
+                "relPath": "src/php/path/extension.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.string.generateRandomString": {
@@ -6246,6 +6406,40 @@
                 "relPath": "src/shared/cli/parseArgs.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.color.alpha2Hex": {
+                "id": "@coffeekraken.sugar.js.color.alpha2Hex",
+                "name": "alpha2Hex",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Take alpha (0-1) and convert it to hex like \"FF\", \"80\", etc...",
+                "namespace": "@coffeekraken.sugar.js.color",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import alpha2Hex from '@coffeekraken/sugar/js/color/alpha2Hex';\nalpha2Hex(1); // FF"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "alpha2Hex.ts",
+                "extension": "ts",
+                "relPath": "src/shared/color/alpha2Hex.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.color.convert": {
                 "id": "@coffeekraken.sugar.js.color.convert",
                 "name": "convert",
@@ -6312,6 +6506,74 @@
                 "filename": "hex2rgba.ts",
                 "extension": "ts",
                 "relPath": "src/shared/color/hex2rgba.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.color.hsla2hex": {
+                "id": "@coffeekraken.sugar.js.color.hsla2hex",
+                "name": "hsla2hex",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "HSLA to HEX",
+                "namespace": "@coffeekraken.sugar.js.color",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import hsla2hex from '@coffeekraken/sugar/js/color/hsla2hex';\nhsla2hex(10,20,30);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "hsla2hex.ts",
+                "extension": "ts",
+                "relPath": "src/shared/color/hsla2hex.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.color.hsla2hexa": {
+                "id": "@coffeekraken.sugar.js.color.hsla2hexa",
+                "name": "hsla2hexa",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "HSLA to HEX",
+                "namespace": "@coffeekraken.sugar.js.color",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import hsla2hexa from '@coffeekraken/sugar/js/color/hsla2hexa';\nhsla2hexa(10,20,30,1);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "hsla2Hexa.ts",
+                "extension": "ts",
+                "relPath": "src/shared/color/hsla2Hexa.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.hsl2rgba": {
@@ -6967,6 +7229,40 @@
                     }
                 }
             },
+            "@coffeekraken.sugar.shared.css.compressVarName": {
+                "id": "@coffeekraken.sugar.shared.css.compressVarName",
+                "name": "compressVarName",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to compress a css variable name only when the environment is production",
+                "namespace": "@coffeekraken.sugar.shared.css",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import compressVarName from '@coffeekraken/sugar/shared/css/compressVarName';\ncompressVarName('--something-long-that-you-want-to-compress');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "compressVarName.ts",
+                "extension": "ts",
+                "relPath": "src/shared/css/compressVarName.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.shared.css.isValidUnitValue": {
                 "id": "@coffeekraken.sugar.shared.css.isValidUnitValue",
                 "name": "isValidUnitValue",
@@ -7577,6 +7873,28 @@
                         "name": "star",
                         "type": "String",
                         "description": "Store the statement star name like \"import\nas coco from ...\"",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "constructor": {
+                        "id": "6aa2402964c1da24bb7f1ec0626e955bd10531337af52b852142f53f51ecb420",
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "tostring": {
+                        "id": "284cf311059f9a860cb590a0c043e4f8bd6dc27fe6fd36613f98bae29f9f35dd",
+                        "name": "toString",
+                        "type": "Function",
+                        "description": "Return the builded version of the import",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -13684,6 +14002,37 @@
                 "relPath": "src/js/dom/detect/whenOutOfViewport.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.dom.detect.whenRemoved": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenRemoved",
+                "name": "whenRemoved",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Resolve a promise when the passed node has been removed from the dom",
+                "namespace": "@coffeekraken.sugar.js.dom.detect",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import whenRemoved from '@coffeekraken/sugar/js/dom/whenRemoved'\nwhenRemoved(myCoolHTMLElement).then((value) => {\n\t\t// the element has been removed\n});"
+                    }
+                ],
+                "async": "true",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "whenRemoved.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/detect/whenRemoved.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.dom.detect.whenStylesheetsReady": {
                 "id": "@coffeekraken.sugar.js.dom.detect.whenStylesheetsReady",
                 "name": "whenStylesheetsReady",
@@ -15456,6 +15805,36 @@
                 "relPath": "src/js/dom/style/getCssRulesFromStylesheet.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.dom.style.getDefinedStyles": {
+                "id": "@coffeekraken.sugar.js.dom.style.getDefinedStyles",
+                "name": "getDefinedStyles",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Gets map of defined styles from CSS2Properties object",
+                "namespace": "@coffeekraken.sugar.js.dom.style",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __getDefinedStyles from '@coffeekraken/sugar/js/dom/style/getDefinedStyles';"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getDefinedStyles.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/style/getDefinedStyles.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.dom.style.getKeyframesDeclarations": {
                 "id": "@coffeekraken.sugar.js.dom.style.getKeyframesDeclarations",
                 "name": "getKeyframesDeclarations",
@@ -15966,6 +16345,36 @@
                 "relPath": "src/js/dom/tag/appendStyleTag.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.dom.touch.preventViewportMovement": {
+                "id": "@coffeekraken.sugar.js.dom.touch.preventViewportMovement",
+                "name": "preventViewportMovement",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Capture the \"touchstart\", \"touchmove\", \"touchend\" and \"touchcancel\" of the passed element and\napply a \"preventDefault()\" on all events",
+                "namespace": "@coffeekraken.sugar.js.dom.touch",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import preventViewportMovement from '@coffeekraken/sugar/js/touch/preventViewportMovement'\npreventViewportMovement($elm)"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "preventViewportMovement.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/touch/preventViewportMovement.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.dom.transmation.clearTransmations": {
                 "id": "@coffeekraken.sugar.js.dom.transmation.clearTransmations",
                 "name": "clearTransmations",
@@ -16024,6 +16433,36 @@
                 "filename": "up.ts",
                 "extension": "ts",
                 "relPath": "src/js/dom/traverse/up.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.ui.makeFloat": {
+                "id": "@coffeekraken.sugar.js.dom.ui.makeFloat",
+                "name": "makeFloat",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to make an element float depending on another one.\nIt will make sure the element is placed as best as possible dependong on the page position,\nsurroundings, etc...\nThis make use of the AMAZING [Floating UI](https://floating-ui.com) library.",
+                "namespace": "@coffeekraken.sugar.js.dom.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import up from '@coffeekraken/sugar/js/dom/traverse/up'\nconst $elm = up($myElement, elm => {\n     return elm.classList.contains('my-class')\n});"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "makeFloat.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/ui/makeFloat.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.utils.canHaveChildren": {
@@ -16400,6 +16839,69 @@
                 },
                 "filename": "SApp.ts",
                 "extension": "ts",
+                "relPath": "src/js/html/__wip__.wip/SApp.ts"
+            },
+            "@coffeekraken.sugar.js.class.SApp.config": {
+                "id": "@coffeekraken.sugar.js.class.SApp.config",
+                "name": "config",
+                "type": "Function",
+                "description": "Get a configuration value from the backend using an ajax call",
+                "namespace": "@coffeekraken.sugar.js.class.SApp",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "const host = await myApp.config('log.frontend.mail.host');"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SApp.ts",
+                "extension": "ts",
+                "relPath": "src/js/html/__wip__.wip/SApp.ts"
+            },
+            "@coffeekraken.sugar.js.class.SApp.meta": {
+                "id": "@coffeekraken.sugar.js.class.SApp.meta",
+                "name": "meta",
+                "type": "Function",
+                "description": "Usefull function that give you back an application meta taken depending on your passed dotted object path",
+                "namespace": "@coffeekraken.sugar.js.class.SApp",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "const name = await myApp.meta('name');"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SApp.ts",
+                "extension": "ts",
+                "relPath": "src/js/html/__wip__.wip/SApp.ts"
+            },
+            "@coffeekraken.sugar.squid.js.log.log": {
+                "id": "@coffeekraken.sugar.squid.js.log.log",
+                "name": "log",
+                "type": "Function",
+                "description": "Log a message using the transports log system.",
+                "namespace": "@coffeekraken.sugar.squid.js.log",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "Squid.log('Hello world', 'error').then(() => {\n   // do something if needed...\n});"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SApp.ts",
+                "extension": "ts",
                 "relPath": "src/js/html/__wip__.wip/SApp.ts",
                 "children": {}
             },
@@ -16422,7 +16924,18 @@
                 "filename": "SBind.ts",
                 "extension": "ts",
                 "relPath": "src/js/html/__wip__.wip/SBind.ts",
-                "children": {}
+                "children": {
+                    "bind": {
+                        "id": "bb8c4c6d83bb9c6d61f2e7518c756c0de931727ff5b9b34f19d630b3884f1f02",
+                        "name": "bind",
+                        "type": "Function",
+                        "description": "This method allows you to bind an Object|HTMLElement property to another Object|HTMLElement property\nThis mean that when the property of the first passed element is updated, the same property on the second\nelement will be updated as well",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
             },
             "@coffeekraken.sugar.js.class.SLocalStorageFonts": {
                 "id": "@coffeekraken.sugar.js.class.SLocalStorageFonts",
@@ -16485,6 +16998,46 @@
                 "default": "{}",
                 "description": "Save the events scoped settings objects",
                 "namespace": "@coffeekraken.sugar.js.class",
+                "filename": "SSocketDom.ts",
+                "extension": "ts",
+                "relPath": "src/js/html/__wip__.wip/SSocketDom.ts"
+            },
+            "@coffeekraken.sugar.js.class.emit": {
+                "id": "@coffeekraken.sugar.js.class.emit",
+                "name": "emit",
+                "type": "Function",
+                "description": "Emit an event with an object containing some values to pass to the server",
+                "namespace": "@coffeekraken.sugar.js.class",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "myCoolSocketDomInstance.emit('coco', { hello: 'world' });"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SSocketDom.ts",
+                "extension": "ts",
+                "relPath": "src/js/html/__wip__.wip/SSocketDom.ts"
+            },
+            "@coffeekraken.sugar.js.class.registerEvent": {
+                "id": "@coffeekraken.sugar.js.class.registerEvent",
+                "name": "registerEvent",
+                "type": "Function",
+                "description": "Register a new event with an handler function that will handle the event content",
+                "namespace": "@coffeekraken.sugar.js.class",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "myCoolSocketDomInstance.registerEvent('hello', (data, settings) => {\n   // do something with the event content and the settings\n});"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
                 "filename": "SSocketDom.ts",
                 "extension": "ts",
                 "relPath": "src/js/html/__wip__.wip/SSocketDom.ts",

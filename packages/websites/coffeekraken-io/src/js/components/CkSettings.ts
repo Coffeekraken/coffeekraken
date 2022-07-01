@@ -101,7 +101,10 @@ export default class CkSettings extends __SLitComponent {
                                 for="setting-base-color"
                             >
                                 Base color
-                                <s-color-picker id="setting-base-color">
+                                <s-color-picker
+                                    id="setting-base-color"
+                                    update-input="pointerup"
+                                >
                                     <div class="s-group">
                                         <input
                                             type="text"
@@ -123,7 +126,10 @@ export default class CkSettings extends __SLitComponent {
                                 for="setting-main-color"
                             >
                                 Main color
-                                <s-color-picker id="setting-main-color">
+                                <s-color-picker
+                                    id="setting-main-color"
+                                    update-input="pointerup"
+                                >
                                     <div class="s-group">
                                         <input
                                             type="text"
@@ -148,6 +154,7 @@ export default class CkSettings extends __SLitComponent {
                                 <s-color-picker
                                     style="position:relative"
                                     id="setting-accent-color"
+                                    update-input="pointerup"
                                 >
                                     <div class="s-group">
                                         <input
@@ -172,6 +179,7 @@ export default class CkSettings extends __SLitComponent {
                                 Complementary color
                                 <s-color-picker
                                     id="setting-complementary-color"
+                                    update-input="pointerup"
                                 >
                                     <div class="s-group">
                                         <input

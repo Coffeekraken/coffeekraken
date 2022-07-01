@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,8 +42,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-env.config.env.env": {
                 "id": "@coffeekraken.s-env.config.env.env",
                 "name": "env",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "process.env.NODE_ENV ?? document.env.ENV ?? 'dev`",
                 "description": "Specify the environment env. This is usually \"production\" or \"dev\" as value.",
                 "namespace": "@coffeekraken.s-env.config.env",
@@ -112,13 +105,7 @@
             "@coffeekraken.s-env.doc.README": {
                 "id": "@coffeekraken.s-env.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -144,16 +131,47 @@
                 "relPath": "src/doc/README.md",
                 "children": {}
             },
+            "@coffeekraken.s-env.s-env.node.SEnv": {
+                "id": "@coffeekraken.s-env.s-env.node.SEnv",
+                "name": "SEnv",
+                "type": "Class",
+                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
+                "namespace": "@coffeekraken.s-env.s-env.node",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('development');\n// etc..."
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SEnv.ts",
+                "extension": "ts",
+                "relPath": "src/node/SEnv.ts",
+                "children": {
+                    "packagejson": {
+                        "id": "d76e233b83378e16222bb382a1318b5cabcd6b9f8043a9dca26d3e254adceaec",
+                        "name": "packageJson",
+                        "type": "Object",
+                        "description": "Access the package.json content from the current package the process\nruns in.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-env.s-env.shared.SEnv": {
                 "id": "@coffeekraken.s-env.s-env.shared.SEnv",
                 "name": "SEnv",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
                 "namespace": "@coffeekraken.s-env.s-env.shared",
                 "example": [
@@ -175,13 +193,7 @@
                     "env": {
                         "id": "3c882527536778ebe3cda2c893232e50953fd4db23e2eafe4b5eca1b2cf49ecb",
                         "name": "env",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ]
-                        },
+                        "type": "Object",
                         "description": "Store the actual environment variables object. In node it will be process.env, in the browser,\ndocument.env",
                         "static": "true",
                         "since": "2.0.0",
@@ -194,13 +206,7 @@
                     "is": {
                         "id": "c357a00a09108492292733809ec56df14e55c2978e2c9a558fda1dfc19f11441",
                         "name": "is",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to check if the environment\nis \"dev\", \"development\", \"prod\" or \"production\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -213,13 +219,7 @@
                     "get": {
                         "id": "863b0c53622da90d13800cca8b98a09cad4b3c06e24f8b62484c4b9d11e227a0",
                         "name": "get",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to access an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
                         "static": "true",
                         "since": "2.0.0",
@@ -232,13 +232,7 @@
                     "set": {
                         "id": "3238cad0a4de2ae08a869eb13d976429eeb7b8431293a218aeab84660fa16510",
                         "name": "set",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to set an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
                         "static": "true",
                         "since": "2.0.0",
@@ -251,33 +245,8 @@
                     "delete": {
                         "id": "97f8f0f76311c34699d5fcbdac6092a7f8532ce564afee6fb15e9ba281e31c6f",
                         "name": "delete",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to delete an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "packagejson": {
-                        "id": "d76e233b83378e16222bb382a1318b5cabcd6b9f8043a9dca26d3e254adceaec",
-                        "name": "packageJson",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ]
-                        },
-                        "description": "Access the package.json content from the current package the process\nruns in.",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {

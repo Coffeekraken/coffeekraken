@@ -18,7 +18,6 @@
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,8 +42,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-config-inline-adapter.doc.README": {
                 "id": "@coffeekraken.s-config-inline-adapter.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -123,13 +116,7 @@
             "@coffeekraken.s-config-inline-adapter.node.SConfigInlineAdapter": {
                 "id": "@coffeekraken.s-config-inline-adapter.node.SConfigInlineAdapter",
                 "name": "SConfigInlineAdapter",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This adapter let you pass directly an object to the SConfig instance",
                 "namespace": "@coffeekraken.s-config-inline-adapter.node",
                 "status": "beta",

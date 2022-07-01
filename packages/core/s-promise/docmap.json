@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -44,8 +43,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -54,7 +53,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-promise.doc.README": {
                 "id": "@coffeekraken.s-promise.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -123,13 +116,7 @@
             "@coffeekraken.s-promise.shared.SPromise": {
                 "id": "@coffeekraken.s-promise.shared.SPromise",
                 "name": "SPromise",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This class works the same as the default Promise one. The difference is that you have more control on this one like\nthe possibility to resolve it multiple times. Here's a list of the \"differences\" and the \"features\" that this class provide:",
                 "namespace": "@coffeekraken.s-promise.shared",
                 "status": "beta",
@@ -151,13 +138,7 @@
                     "queue": {
                         "id": "ff567a761ffc0e7b41dbf47dc90045ed0d8ff1dac05dcfae4b5cf9fb6fcd5b8b",
                         "name": "queue",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to pass an array of promises that will be executed one after the other.\nIt will call the \"callback\" function if specified with the resolved promise as argument.",
                         "static": "true",
                         "since": "2.0.0",
@@ -169,13 +150,7 @@
                     "treatasvalue": {
                         "id": "00e36a3d4717582cc6e194605c1e7a84249f8e3ba59fa912a6e2f79cc91eadae",
                         "name": "treatAsValue",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method wrap the promise into a revocable proxy to allow\npassing this Promise to methods like ```then```, etc... and make\nthis promise treated as a value and not as a chained promise.\nOnce you have done with this behavior, you just have to call\nthe ```restorePromiseBehavior``` on the returned proxy and\nthe default promise behavior will be restored",
                         "since": "2.0.0",
                         "author": {
@@ -186,13 +161,7 @@
                     "promisesettings": {
                         "id": "3f5c1afa8aa2375efa20d3f903030ebc425ec7df24f6204647356ed558ff23d5",
                         "name": "promiseSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISPromiseSettings"
-                                }
-                            ]
-                        },
+                        "type": "ISPromiseSettings",
                         "description": "Access to the spromise settings",
                         "since": "2.0.0",
                         "author": {
@@ -203,13 +172,7 @@
                     "constructor": {
                         "id": "2e6cd6d68a574aca65881c323fd79b13719ee28e3ce9facbd09c389bdabbbf19",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "example": [
                             {
@@ -225,13 +188,7 @@
                     "promisestate": {
                         "id": "213d2ebb36a0975c5da2a4e77e9d1e8a0d0a25b1020b4b191dc8669fa3fc88d9",
                         "name": "promiseState",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ]
-                        },
+                        "type": "String",
                         "description": "Access the promise state. Can be one of these:\n- pending: When the promise is waiting for resolution or rejection\n- resolved: When the promise has been resolved\n- rejected: When the promise has been rejected\n- canceled: When the promise has been canceled\n- destroyed: When the promise has been destroyed",
                         "author": {
                             "name": "Olivier Bossel",
@@ -241,13 +198,7 @@
                     "registerproxy": {
                         "id": "d1951df0ba7960c16bea78231770443faf0532e991ee9cfbad8cea89a9cb409e",
                         "name": "registerProxy",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "ALlows you to register a proxy at a certain point of the promise lifecycle like:\n- resolve: Allows you to edit the value that will be sent to the resolve point\n- reject: Allows you to edit the value that will be sent to the reject point",
                         "since": "2.0.0",
                         "author": {
@@ -258,13 +209,7 @@
                     "is": {
                         "id": "58243c3224e2ea91c89caedab936f8a29ceb29e66e19522ae2fffdc7e8ca0b00",
                         "name": "is",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Check is the promise is on one of the passed status",
                         "author": {
                             "name": "Olivier Bossel",
@@ -274,13 +219,7 @@
                     "ispending": {
                         "id": "1e4fbce035d7243533c9ed718966f7e5b1bdcb6337c430ce98c314c6ccae15bf",
                         "name": "isPending",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Return back true or false depending on the promise status",
                         "author": {
                             "name": "Olivier Bossel",
@@ -290,13 +229,7 @@
                     "isresolved": {
                         "id": "c56a564ea74723aced24532aefb549f765eaf653f026b1574e9cd4a6cea82d2a",
                         "name": "isResolved",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Return back true or false depending on the promise status",
                         "author": {
                             "name": "Olivier Bossel",
@@ -306,13 +239,7 @@
                     "isrejected": {
                         "id": "0858ddd3f432afc2f00e99a4703d863d9f149ae7efecf8d6bd9728f97e577e72",
                         "name": "isRejected",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Return back true or false depending on the promise status",
                         "author": {
                             "name": "Olivier Bossel",
@@ -322,13 +249,7 @@
                     "iscanceled": {
                         "id": "11afd14c6493e4f699fac0d283cb4798d8ace9dc6f16ff65cba375cb7bb32b52",
                         "name": "isCanceled",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Return back true or false depending on the promise status",
                         "author": {
                             "name": "Olivier Bossel",
@@ -338,13 +259,7 @@
                     "isdestroyed": {
                         "id": "d2f614054e1aca5173bd1c381e5cae60fb08ddc09995735cf716f8c2cb2a19bf",
                         "name": "isDestroyed",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Return back true or false depending on the promise status",
                         "author": {
                             "name": "Olivier Bossel",
@@ -354,13 +269,7 @@
                     "resolve": {
                         "id": "21238e42829660402d4391e23c0ba5a2dd3ace05ccbd9a99cef9dcf3f0520546",
                         "name": "resolve",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This is the \"resolve\" method exposed on the promise itself for convinience",
                         "async": "true",
                         "author": {
@@ -371,13 +280,7 @@
                     "reject": {
                         "id": "fbf106460fda3e571071242bc614117e920de50203a1dd90e9fb4047591e7581",
                         "name": "reject",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This is the \"reject\" method exposed on the promise itself for convinience",
                         "async": "true",
                         "author": {
@@ -388,13 +291,7 @@
                     "cancel": {
                         "id": "3d58407ebf111964c04209a77ac1a88d1937bc3054fd81c2d297cb37081362dd",
                         "name": "cancel",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This is the \"cancel\" method exposed on the promise itself for convinience",
                         "async": "true",
                         "author": {
@@ -405,13 +302,7 @@
                     "catch": {
                         "id": "72ed39aacecc8dc9f58a2e7bcb436f6c0f749d9086ce0966a4321fcec5bdfc7c",
                         "name": "catch",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows the SPromise user to register a function that will be called every time the \"reject\" one is called in the executor\nThe context of the callback will be the SPromise instance itself so you can call all the methods available like \"resolve\", \"catch\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SPromise instance through the last parameter like so \"(value, sPromiseInstance) => { ... }\".",
                         "example": [
                             {
@@ -427,13 +318,7 @@
                     "finally": {
                         "id": "5704217295f5436af1681e165bd114eb686c4f16877a1bbd328e332dc5985a1e",
                         "name": "finally",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows the SPromise user to register a function that will be called every time the \"reject\" one is called in the executor\nThe context of the callback will be the SPromise instance itself so you can call all the methods available like \"resolve\", \"catch\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SPromise instance through the last parameter like so \"(value, sPromiseInstance) => { ... }\".",
                         "example": [
                             {
@@ -449,13 +334,7 @@
                     "destroy": {
                         "id": "89929483894df1ae855c8b724cb36b2898202c88b12696deef8d476a399662e5",
                         "name": "destroy",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Destroying the SPromise instance by unregister all the callbacks, etc...",
                         "author": {
                             "name": "Olivier Bossel",
@@ -467,13 +346,7 @@
             "@coffeekraken.s-promise.SPromise.js.treatAsValue": {
                 "id": "@coffeekraken.s-promise.SPromise.js.treatAsValue",
                 "name": "treatAsValue",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "description": "This function allows you to wrap a promise in a ```resolve``` call to prevent\nthis promise to be treated as a \"chaining\" promise but to be treated as\nnormal value passed in the resolve call.",
                 "namespace": "@coffeekraken.s-promise.SPromise.js",
                 "status": "beta",
@@ -491,86 +364,6 @@
                 "filename": "treatAsValue.ts",
                 "extension": "ts",
                 "relPath": "src/shared/treatAsValue.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-promise.shared.interface.SPromiseSettingsInterface": {
-                "id": "@coffeekraken.s-promise.shared.interface.SPromiseSettingsInterface",
-                "name": "SPromiseSettingsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe SPromise settings",
-                "namespace": "@coffeekraken.s-promise.shared.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SPromiseSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "treatCancelAs": {
-                            "description": "Specify if a \"cancel\" event/call has to be treated like a \"resolve\", or like a \"reject\" a promise level",
-                            "type": "String",
-                            "values": [
-                                "resolve",
-                                "reject"
-                            ],
-                            "default": "resolve"
-                        },
-                        "destroyTimeout": {
-                            "description": "Specify after how many milliseconds the promise will be destroyed after a \"finally\" event",
-                            "type": "Number",
-                            "default": 1
-                        },
-                        "preventRejectOnThrow": {
-                            "description": "Specify if you prefer your promise to be \"resolved\" when an underlying error is catched, or if is has to be rejected normally",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "emitLogErrorEventOnThrow": {
-                            "description": "Specify if you want a \"log\" of type \"error\" to be emitted when an underlying error is catched",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "resolveAtResolveEvent": {
-                            "description": "Specify if youw promise has to be resolved when catching a \"resolve\" event from deeper emitter",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "rejectAtRejectEvent": {
-                            "description": "Specify if youw promise has to be rejected when catching a \"reject\" event from deeper emitter",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "resolveProxies": {
-                            "description": "Specify some functions to be called just before resolving the promise. This function will take the current promise resolve value and must return the updated value",
-                            "type": "Array<Function>",
-                            "default": []
-                        },
-                        "rejectProxies": {
-                            "description": "Specify some functions to be called just before rejecting the promise. This function will take the current promise resolve value and must return the updated value",
-                            "type": "Array<Function>",
-                            "default": []
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SPromiseSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/shared/interface/SPromiseSettingsInterface.ts",
                 "children": {}
             }
         }

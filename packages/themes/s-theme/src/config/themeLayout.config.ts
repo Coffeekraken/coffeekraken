@@ -51,48 +51,42 @@ export default function (env, config) {
             left: 0,
         },
         container: {
-            default: {
-                /**
-                 * @name                max-width
-                 * @namespace           config.themeLayout.container.default
-                 * @type                String
-                 * @default             1280px
-                 *
-                 * Specify the "default" container max-width for your theme
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                'max-width': '1280px',
-            },
-            wide: {
-                /**
-                 * @name                max-width
-                 * @namespace           config.themeLayout.container.wide
-                 * @type                String
-                 * @default             1640px
-                 *
-                 * Specify the "wide" container max-width for your theme
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                'max-width': '1640px',
-            },
-            full: {
-                /**
-                 * @name                max-width
-                 * @namespace           config.themeLayout.container.full
-                 * @type                String
-                 * @default             none
-                 *
-                 * Specify the "full" container max-width for your theme
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                'max-width': 'none',
-            },
+            /**
+             * @name                default
+             * @namespace           config.themeLayout.container.default
+             * @type                String
+             * @default             1280px
+             *
+             * Specify the "default" container max-width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            default: '1280px',
+            /**
+             * @name                wide
+             * @namespace           config.themeLayout.container
+             * @type                String
+             * @default             1440px
+             *
+             * Specify the "wide" container max-width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            wide: '1440px',
+            /**
+             * @name                full
+             * @namespace           config.themeLayout.container
+             * @type                String
+             * @default             none
+             *
+             * Specify the "full" container max-width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            full: 'none',
         },
         grid: {
             /**

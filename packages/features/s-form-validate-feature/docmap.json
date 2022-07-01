@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,8 +42,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -89,13 +87,7 @@
             "@coffeekraken.s-form-validate-feature.doc.README": {
                 "id": "@coffeekraken.s-form-validate-feature.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -125,13 +117,7 @@
                 "id": "@coffeekraken.s-form-validate-feature.js.SFormValidateFeature",
                 "name": "SFormValidateFeature",
                 "as": "Form validate feature",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Feature"
-                        }
-                    ]
-                },
+                "type": "Feature",
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -391,218 +377,6 @@
                 "filename": "SFormValidateFeature.ts",
                 "extension": "ts",
                 "relPath": "src/js/SFormValidateFeature.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-form-validate-feature.js.interface.SFormValidateFeatureInterface": {
-                "id": "@coffeekraken.s-form-validate-feature.js.interface.SFormValidateFeatureInterface",
-                "name": "SFormValidateFeatureInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This interface represent the attributes of the SFormValidateFeature",
-                "namespace": "@coffeekraken.s-form-validate-feature.js.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SFormValidateFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "min": {
-                            "description": "Validate string, array, object and number using the \"min\" rule",
-                            "type": "String|Array|Object|Number"
-                        },
-                        "max": {
-                            "description": "Validate string, array, object and number using the \"max\" rule",
-                            "type": "String|Array|Object|Number"
-                        },
-                        "email": {
-                            "description": "Validate an email string",
-                            "type": "String"
-                        },
-                        "required": {
-                            "description": "Make sure a value has been provided",
-                            "type": "any"
-                        },
-                        "isoDate": {
-                            "description": "Validate an iso date string",
-                            "type": "String"
-                        },
-                        "isoTime": {
-                            "description": "Validate an iso time string",
-                            "type": "String"
-                        },
-                        "isoDateTime": {
-                            "description": "Validate an iso date string",
-                            "type": "String"
-                        },
-                        "integer": {
-                            "description": "Validate an integer",
-                            "type": "number"
-                        },
-                        "number": {
-                            "description": "Validate an number",
-                            "type": "number"
-                        },
-                        "negative": {
-                            "description": "Validate an negative number",
-                            "type": "number"
-                        },
-                        "positive": {
-                            "description": "Validate an positive number",
-                            "type": "number"
-                        },
-                        "pattern": {
-                            "description": "Validate a string using a regex pattern",
-                            "type": "String"
-                        },
-                        "alphanum": {
-                            "description": "Validate an alphanum string",
-                            "type": "String"
-                        },
-                        "creditCard": {
-                            "description": "Validate a credit card string",
-                            "type": "String"
-                        },
-                        "color": {
-                            "description": "Validate a color string",
-                            "type": "String"
-                        },
-                        "hex": {
-                            "description": "Validate a hexadecimal string",
-                            "type": "String"
-                        },
-                        "minMessage": {
-                            "description": "The message to display when the validator \"min\" fails",
-                            "type": "String"
-                        },
-                        "maxMessage": {
-                            "description": "The message to display when the validator \"max\" fails",
-                            "type": "String"
-                        },
-                        "emailMessage": {
-                            "description": "The message to display when the validator \"email\" fails",
-                            "type": "String"
-                        },
-                        "requiredMessage": {
-                            "description": "The message to display when the validator \"required\" fails",
-                            "type": "String"
-                        },
-                        "isoDateMessage": {
-                            "description": "The message to display when the validator \"isoDate\" fails",
-                            "type": "String"
-                        },
-                        "isoTimeMessage": {
-                            "description": "The message to display when the validator \"isoTime\" fails",
-                            "type": "String"
-                        },
-                        "isoDateTimeMessage": {
-                            "description": "The message to display when the validator \"isoDateTime\" fails",
-                            "type": "String"
-                        },
-                        "integerMessage": {
-                            "description": "The message to display when the validator \"integer\" fails",
-                            "type": "String"
-                        },
-                        "numberMessage": {
-                            "description": "The message to display when the validator \"number\" fails",
-                            "type": "String"
-                        },
-                        "negativeMessage": {
-                            "description": "The message to display when the validator \"negative\" fails",
-                            "type": "String"
-                        },
-                        "positiveMessage": {
-                            "description": "The message to display when the validator \"positive\" fails",
-                            "type": "String"
-                        },
-                        "patternMessage": {
-                            "description": "The message to display when the validator \"pattern\" fails",
-                            "type": "String"
-                        },
-                        "alphanumMessage": {
-                            "description": "The message to display when the validator \"alphanum\" fails",
-                            "type": "String"
-                        },
-                        "creditCardMessage": {
-                            "description": "The message to display when the validator \"creditCard\" fails",
-                            "type": "String"
-                        },
-                        "colorMessage": {
-                            "description": "The message to display when the validator \"color\" fails",
-                            "type": "String"
-                        },
-                        "hexMessage": {
-                            "description": "The message to display when the validator \"hex\" fails",
-                            "type": "String"
-                        },
-                        "type": {
-                            "description": "Specify the validation type. Usually automatically detected depending on the field type",
-                            "type": "String",
-                            "default": "text"
-                        },
-                        "on": {
-                            "description": "Specify when to trigger a validation. Can be \"change\",\"submit\",\"enter\" and/or \"reset\"",
-                            "type": "Array<String>",
-                            "values": [
-                                "keyup",
-                                "change",
-                                "submit",
-                                "enter",
-                                "reset"
-                            ],
-                            "default": [
-                                "keyup",
-                                "change",
-                                "submit",
-                                "enter",
-                                "reset"
-                            ]
-                        },
-                        "errorClass": {
-                            "description": "Specify the class to apply when theres an error",
-                            "type": "String",
-                            "default": "s-form-validate--error s-color--error"
-                        },
-                        "validClass": {
-                            "description": "Specify the class to apply on your s-form-validate element when validation is passed successfully",
-                            "type": "String",
-                            "default": "s-form-validate--valid s-color--success"
-                        },
-                        "language": {
-                            "description": "Specify the language you want to use for messages",
-                            "type": "String",
-                            "default": "en"
-                        },
-                        "displayError": {
-                            "description": "Specify if you want to display the error messages or not",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "errorContainerAttr": {
-                            "description": "Specify the attribute to search for the error container. If not found, a default container will be created and inserted after your s-form-validate element",
-                            "type": "String",
-                            "default": "s-form-validate-error"
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SFormValidateFeatureInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SFormValidateFeatureInterface.ts",
                 "children": {}
             }
         }

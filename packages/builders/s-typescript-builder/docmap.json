@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -44,8 +43,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -54,7 +53,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-typescript-builder.config.typescriptBuilder.glob": {
                 "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.glob",
                 "name": "glob",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[config.typescriptBuilder.inDir]/** /*",
                 "description": "Specify a glob pattern relative to the \"inDir\" to specify files you want to compress",
                 "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
@@ -111,13 +104,7 @@
             "@coffeekraken.s-typescript-builder.config.typescriptBuilder.inDir": {
                 "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.inDir",
                 "name": "inDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[config.storage.src.rootDir]",
                 "description": "Specify a directory from where to search for ts and js files to build",
                 "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
@@ -134,145 +121,9 @@
             "@coffeekraken.s-typescript-builder.config.typescriptBuilder.outDir": {
                 "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.outDir",
                 "name": "outDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[config.storage.dist.rootDir]/pkg/%moduleSystem",
                 "description": "Specify a directory where you want to put the builded files.\nYou can use the %moduleSystem and %platform token in your value",
-                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "typescriptBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/typescriptBuilder.config.ts"
-            },
-            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.formats": {
-                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.formats",
-                "name": "formats",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ]
-                },
-                "default": "['esm','cjs']",
-                "description": "Specify the formats you want to generate. Can be \"esm\" or/and \"cjs\"",
-                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "typescriptBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/typescriptBuilder.config.ts"
-            },
-            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.platform": {
-                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.platform",
-                "name": "platform",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ]
-                },
-                "default": "node",
-                "description": "Specify for which platform you want to build the typescript files. Can be \"browser\" or \"node\".",
-                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "typescriptBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/typescriptBuilder.config.ts"
-            },
-            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.customSettings": {
-                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.customSettings",
-                "name": "customSettings",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ]
-                },
-                "default": "['** /node_module']",
-                "description": "Specify some custom settings for the typescript builder based on the glob pattern used as property",
-                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "typescriptBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/typescriptBuilder.config.ts"
-            },
-            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.exclude": {
-                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.exclude",
-                "name": "exclude",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ]
-                },
-                "default": "['** /node_module']",
-                "description": "Specify some glob patterns for files/folders you want to exclude of the build process",
-                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "typescriptBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/typescriptBuilder.config.ts"
-            },
-            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.tsconfig": {
-                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.tsconfig",
-                "name": "tsconfig",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ]
-                },
-                "default": "[config.ts]",
-                "description": "Specify some tsconfig configurations.",
                 "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
                 "since": "2.0.0",
                 "author": {
@@ -288,13 +139,7 @@
             "@coffeekraken.s-typescript-builder.doc.README": {
                 "id": "@coffeekraken.s-typescript-builder.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -323,13 +168,7 @@
             "@coffeekraken.s-typescript-builder.node.STypescriptBuilder": {
                 "id": "@coffeekraken.s-typescript-builder.node.STypescriptBuilder",
                 "name": "STypescriptBuilder",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "platform": [
                     {
                         "name": "node",
@@ -342,7 +181,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import STypescriptBuilder from '@coffeekraken/s-postcss-builder';\nconst builder = new STypescriptBuilder({\n     typescriptBuilder: {\n         // settings here...\n     }\n});\nawait builder.build({\n     input: 'my-cool-file.css',\n     output: 'my/cool/file-output.css'\n});"
+                        "code": "import STypescriptBuilder from '@coffeekraken/s-postcss-builder';\nconst builder = new STypescriptBuilder({\n    // settings here...\n});\nawait builder.build({\n     input: 'my-cool-file.css',\n     output: 'my/cool/file-output.css'\n});"
                     }
                 ],
                 "since": "2.0.0",
@@ -355,17 +194,13 @@
                 "extension": "ts",
                 "relPath": "src/node/STypescriptBuilder.ts",
                 "children": {
-                    "typescriptbuildersettings": {
-                        "id": "f9eb418cfce5c1892cb23af9a65f064db30014cb2a628bae5fb8b614f3244093",
-                        "name": "typescriptBuilderSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISTypescriptBuilderSettings"
-                                }
-                            ]
-                        },
-                        "description": "Access the postcss builder settings",
+                    "buildtemporary": {
+                        "id": "cc189ed79e1109ba0a5163a06c623bbcf8788e868e1aef51728f2836c26bb09b",
+                        "name": "buildTemporary",
+                        "type": "Function",
+                        "description": "This static method allows you to build a file for and remove it after calling the returned callback.\nThis is usefull to compile a typescript file like tests, execute your test and deleting the compiled file.",
+                        "async": "true",
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -376,13 +211,7 @@
                     "constructor": {
                         "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -392,167 +221,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderBuildParamsInterface": {
-                "id": "@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderBuildParamsInterface",
-                "name": "STypescriptBuilderBuildParamsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This interface specify the parameters needed to the `sugar mono.list` command.",
-                "namespace": "@coffeekraken.s-typescript-builder.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "STypescriptBuilderBuildParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "glob": {
-                            "description": "Sppecify some globs relative to the inDir to find the files you want to build",
-                            "type": "Array<String>",
-                            "default": [
-                                "js/**/*.ts",
-                                "(node|shared|config|pages|views|cli)/**/*.ts"
-                            ],
-                            "alias": "g"
-                        },
-                        "inDir": {
-                            "description": "Specify a directory from where to search for ts and js files to build",
-                            "type": "String",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-typescript-builder/src",
-                            "alias": "i"
-                        },
-                        "outDir": {
-                            "description": "Specify a directory where you want to put the builded files. Support the %moduleSystem and %platform token.",
-                            "type": "String",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-typescript-builder/dist/pkg/%moduleSystem",
-                            "alias": "o"
-                        },
-                        "packageRoot": {
-                            "description": "Specify in which package the build is happening",
-                            "type": "String"
-                        },
-                        "formats": {
-                            "description": "Specify the formats you want to generate. Can be \"esm\" or/and \"cjs\"",
-                            "type": "Array<String>",
-                            "values": [
-                                "esm",
-                                "cjs"
-                            ],
-                            "default": [
-                                "esm",
-                                "cjs"
-                            ],
-                            "alias": "f"
-                        },
-                        "platform": {
-                            "description": "Specify for which platform you want to generate the typescript files. Can be \"browser\" or \"node\"",
-                            "type": "String",
-                            "values": [
-                                "esm",
-                                "cjs"
-                            ],
-                            "default": "node",
-                            "alias": "p"
-                        },
-                        "watch": {
-                            "description": "Specify if the files have to be build again at each update",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "w"
-                        },
-                        "buildInitial": {
-                            "description": "Specify if you want to build the files at start when using the \"watch\" flag",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "b"
-                        },
-                        "customSettings": {
-                            "description": "Specify some custom settings for the typescript builder by passing a glob pattern relative to the inDir, and some custom settings to use for these files",
-                            "type": "Object",
-                            "default": {
-                                "pages": {
-                                    "glob": "**/(pages|views)/**/*.ts",
-                                    "settings": {
-                                        "outDir": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-typescript-builder/src",
-                                        "formats": [
-                                            "esm"
-                                        ]
-                                    }
-                                }
-                            },
-                            "alias": "c"
-                        },
-                        "exclude": {
-                            "description": "Specify some glob patterns for files/folders you want to exclude of the build process",
-                            "type": "Array<String>",
-                            "default": [
-                                "**/node_modules"
-                            ],
-                            "alias": "e"
-                        },
-                        "save": {
-                            "description": "Specify if you want to save the result of the build in a file or not",
-                            "type": "Boolean",
-                            "default": true,
-                            "alias": "s"
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "STypescriptBuilderBuildParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/STypescriptBuilderBuildParamsInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderSettingsInterface": {
-                "id": "@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderSettingsInterface",
-                "name": "STypescriptBuilderSettingsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This interface specify the settings of the class STypescriptBuilder.",
-                "namespace": "@coffeekraken.s-typescript-builder.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "STypescriptBuilderSettingsInterface",
-                    "description": "",
-                    "definition": {}
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "STypescriptBuilderSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/STypescriptBuilderSettingsInterface.ts",
-                "children": {}
             }
         }
     }

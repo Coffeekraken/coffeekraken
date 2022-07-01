@@ -18,7 +18,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,8 +42,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-builder.doc.README": {
                 "id": "@coffeekraken.s-builder.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -123,13 +116,7 @@
             "@coffeekraken.s-builder.node.SBuilder": {
                 "id": "@coffeekraken.s-builder.node.SBuilder",
                 "name": "SBuilder",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This represent the main builder class that has to be extended for builders like typescript, scss, etc...\nHis main goal is to provide basic features like storing the inputs, settings, etc...",
                 "namespace": "@coffeekraken.s-builder.node",
                 "status": "wip",
@@ -149,34 +136,10 @@
                 "extension": "ts",
                 "relPath": "src/node/SBuilder.ts",
                 "children": {
-                    "buildersettings": {
-                        "id": "a2fa1e7f982b3184ce2f7b64678fa2701289ea6481c5a2f16d3537099e106431",
-                        "name": "builderSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "any"
-                                }
-                            ]
-                        },
-                        "description": "Access the builder settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -188,13 +151,7 @@
                     "build": {
                         "id": "26af01add86af5148ea7c707f0a3a5e5004c02af5debe854c1067dce6edd6271",
                         "name": "build",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method is the one you have to call when you want to launch a compilation process.\nIt will call the ```_build``` one which MUST return an instance of the SPromise class.",
                         "since": "2.0.0",
                         "author": {

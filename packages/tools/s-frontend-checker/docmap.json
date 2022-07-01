@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,8 +42,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-frontend-checker.js.SFrontendCheckeer": {
                 "id": "@coffeekraken.s-frontend-checker.js.SFrontendCheckeer",
                 "name": "SFrontendCheckeer",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "platform": [
                     {
                         "name": "js",
@@ -123,13 +116,7 @@
                     "level_low": {
                         "id": "5ebac42d7d0eb05aa3f7a57b2c539c090de0344c06d10c14205d4f899f5b7e9e",
                         "name": "LEVEL_LOW",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Store the \"low\" level id",
                         "static": "true",
                         "since": "2.0.0",
@@ -142,13 +129,7 @@
                     "level_medium": {
                         "id": "4f9d49229ea30d64d1959e3a5159d966cdbf9b088ea6042bc2edb2d0eeebdcb1",
                         "name": "LEVEL_MEDIUM",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Store the \"medium\" level id",
                         "static": "true",
                         "since": "2.0.0",
@@ -161,13 +142,7 @@
                     "level_high": {
                         "id": "761de26a2bc3ad8bf117159db733b68e9fb644041c332311cce65f3c05f588ef",
                         "name": "LEVEL_HIGH",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Store the \"high\" level id",
                         "static": "true",
                         "since": "2.0.0",
@@ -180,13 +155,7 @@
                     "status_success": {
                         "id": "88ca5b7d217e4b9b92a49dbc5d152c6070cac44b618116b3b068e1dd86b57ee8",
                         "name": "STATUS_SUCCESS",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Store the \"success\" status",
                         "static": "true",
                         "since": "2.0.0",
@@ -199,13 +168,7 @@
                     "status_warning": {
                         "id": "2b95fd5230e3e91077fa9e2a903f3f050bde47fd4efb1fad78053037cb16e562",
                         "name": "STATUS_WARNING",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Store the \"warning\" status",
                         "static": "true",
                         "since": "2.0.0",
@@ -218,13 +181,7 @@
                     "status_error": {
                         "id": "64c735c38133f9013ea021d872b65bfbe7bb5745b051574f2b11f9d84e08b56e",
                         "name": "STATUS_ERROR",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Store the \"error\" status",
                         "static": "true",
                         "since": "2.0.0",
@@ -237,13 +194,7 @@
                     "registercheck": {
                         "id": "a169de0839bf7470723a11dac3fadc234770941b31b538cdb65bd944be33bd3c",
                         "name": "registerCheck",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to register a new check to the SFrontendChecker class.",
                         "static": "true",
                         "since": "2.0.0",
@@ -256,13 +207,7 @@
                     "constructor": {
                         "id": "6edaeab4bf2880ab2804fef643fb12db70440d0576022006290e585721be66e2",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -274,13 +219,7 @@
                     "check": {
                         "id": "7d2d0f911933b4036ed9912c2485a571923dd3d819dcf439cb8efc21a87a0f41",
                         "name": "check",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Check the passed context and returns some insights about what is good and what's not.",
                         "since": "2.0.0",
                         "author": {
@@ -294,13 +233,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.author": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.author",
                 "name": "author",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -325,13 +258,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.charset": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.charset",
                 "name": "charset",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -356,13 +283,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.comments": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.comments",
                 "name": "comments",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -387,13 +308,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.cssOrder": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.cssOrder",
                 "name": "cssOrder",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -418,13 +333,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.description": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.description",
                 "name": "description",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -449,13 +358,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.direction": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.direction",
                 "name": "direction",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -480,13 +383,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.doctype": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.doctype",
                 "name": "doctype",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -511,13 +408,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.imagesAlt": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.imagesAlt",
                 "name": "imagesAlt",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -542,13 +433,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.keywords": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.keywords",
                 "name": "keywords",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -573,13 +458,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.language": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.language",
                 "name": "language",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -604,13 +483,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.noopener": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.noopener",
                 "name": "noopener",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -635,13 +508,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.opengraph": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.opengraph",
                 "name": "opengraph",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -666,13 +533,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.printStylesheet": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.printStylesheet",
                 "name": "printStylesheet",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -697,13 +558,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.title": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.title",
                 "name": "title",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -728,13 +583,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.twitterCard": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.twitterCard",
                 "name": "twitterCard",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -759,13 +608,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.uniqueIds": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.uniqueIds",
                 "name": "uniqueIds",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -790,13 +633,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.viewport": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.viewport",
                 "name": "viewport",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -821,13 +658,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.w3c": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.w3c",
                 "name": "w3c",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -852,13 +683,7 @@
             "@coffeekraken.s-frontend-checker.js.checks.webpImages": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.webpImages",
                 "name": "webpImages",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ]
-                },
+                "type": "Function",
                 "platform": [
                     {
                         "name": "js",
@@ -878,41 +703,6 @@
                 "filename": "webpImages.ts",
                 "extension": "ts",
                 "relPath": "src/js/checks/webpImages.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-checker.js.interface.SFrontendCheckerSettingsInterface": {
-                "id": "@coffeekraken.s-frontend-checker.js.interface.SFrontendCheckerSettingsInterface",
-                "name": "SFrontendCheckerSettingsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe settings of the SFrontendChecker class",
-                "namespace": "@coffeekraken.s-frontend-checker.js.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SFrontendCheckerSettingsInterface",
-                    "description": "",
-                    "definition": {}
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SFrontendCheckerSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SFrontendCheckerSettingsInterface.ts",
                 "children": {}
             }
         }

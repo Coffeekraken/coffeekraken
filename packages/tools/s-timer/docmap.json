@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -44,8 +43,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -54,7 +53,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-timer.shared.STimer": {
                 "id": "@coffeekraken.s-timer.shared.STimer",
                 "name": "STimer",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "Class that let you create and handle timer with ease.\nWith this class you can set some callback function that will be\ncalled each x ms or tell that you want your callbacks to be called\na certain number of time during the timer time.\nThis class extends the SPromise one, meaning that you can subscribe to differents \"events\" emited by the timer instance. Here's the list:\n- complete: emited when the timer is completed\n- tick: emited at each ticks depending on your settings\n- duration: emited when the duration has been changed\n- tickCount: emited when the tickCount has been changed\n- reset: emited when the timer has been reseted\n- start: emited when the timer starts\n- pause: emited when the timer has been paused\n- stop: emited when the timer has been stoped\n- destroy: emited when the timer has been destroyed",
                 "namespace": "@coffeekraken.s-timer.shared",
                 "status": "beta",
@@ -117,13 +110,7 @@
                     "constructor": {
                         "id": "ad22f5c709438ce8beb2cf4b3751a603d7b99fff55a08f5e06b3f9b978cc6f97",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "example": [
                             {
@@ -140,13 +127,7 @@
                     "remaing": {
                         "id": "0fe6f60740905b40a6afd89c507e5e84c30ca323deea5c619a34092f18b49232",
                         "name": "remaing",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Get the remaining time in ms",
                         "author": {
                             "name": "Olivier Bossel",
@@ -157,13 +138,7 @@
                     "duration": {
                         "id": "b0af5f438d9664d3babbbb0792ac69bdef2535f8e55d80ce8a92582aa2691c00",
                         "name": "duration",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Set or get the duration. Can be a number in milliseconds, or a time string like '1m', '2s', etc...",
                         "author": {
                             "name": "Olivier Bossel",
@@ -174,13 +149,7 @@
                     "tickcount": {
                         "id": "6e86492a6b364580f833b2a06d4884acec275fd49b59d951942c6d010b5bfa68",
                         "name": "tickCount",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Set of get the tickCount",
                         "author": {
                             "name": "Olivier Bossel",
@@ -191,13 +160,7 @@
                     "percentage": {
                         "id": "b0bfb83cf76d41bc1e2a3cada1237be80e661a32718ff326ceaf0a9528dd8659",
                         "name": "percentage",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Number"
-                                }
-                            ]
-                        },
+                        "type": "Number",
                         "description": "Get the current timer advancement percentage",
                         "author": {
                             "name": "Olivier Bossel",
@@ -208,13 +171,7 @@
                     "reset": {
                         "id": "284a595e129d6b2e63623cee681ee849f809c9a9c4b73ee8754b62767393b9d8",
                         "name": "reset",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Reset the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -225,13 +182,7 @@
                     "start": {
                         "id": "9ea4c891e0716da41745cea1938aa35c9080307cb29ce68f3dab715428070e2a",
                         "name": "start",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Start the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -242,13 +193,7 @@
                     "pause": {
                         "id": "871a6e31b296341985ef4d322e2431179d233691c27ed6ff12e77ca8d8eb0935",
                         "name": "pause",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Pause the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -259,13 +204,7 @@
                     "stop": {
                         "id": "9d21599b17b5af16d4627554d8332eedb3d80980136b325a50f60ff6ffdd3c56",
                         "name": "stop",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Stop the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -276,13 +215,7 @@
                     "destroy": {
                         "id": "d6fcbad8c0c65b720838fb95136385527d0e7511d1cc66a0b7116b5cf65455ba",
                         "name": "destroy",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Destroy the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -293,13 +226,7 @@
                     "isstarted": {
                         "id": "f7e3dd8e52059ade5b002faa6487370da655f73dda82429d3a2bd8c30240d631",
                         "name": "isStarted",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Check if the timer is started",
                         "author": {
                             "name": "Olivier Bossel",

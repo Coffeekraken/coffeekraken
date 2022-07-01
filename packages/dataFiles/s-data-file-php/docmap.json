@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,8 +42,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-data-file-php.doc.README": {
                 "id": "@coffeekraken.s-data-file-php.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -123,13 +116,7 @@
             "@coffeekraken.s-data-file-php.node.SDataFilePhp": {
                 "id": "@coffeekraken.s-data-file-php.node.SDataFilePhp",
                 "name": "SDataFilePhp",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This class represent the php data file loader",
                 "namespace": "@coffeekraken.s-data-file-php.node",
                 "status": "beta",
@@ -143,39 +130,10 @@
                 "extension": "ts",
                 "relPath": "src/node/SDataFilePhp.ts",
                 "children": {
-                    "extensions": {
-                        "id": "6d00930f46848afe6dab63284344bc30c85ddaf33f355c687b9e9dd718792efd",
-                        "name": "extensions",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "String"
-                                    ]
-                                }
-                            ]
-                        },
-                        "default": "['php']",
-                        "description": "This static property allow you to define the extensions that the data file loader",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "load": {
                         "id": "9cdf58ce73f21adfd98936b3dbd2dff0350881dd7e3001ecf11fcdc18af63fac",
                         "name": "load",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to actually load a data file",
                         "static": "true",
                         "since": "2.0.0",

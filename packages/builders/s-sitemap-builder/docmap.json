@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -44,8 +43,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -54,7 +53,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.build.output": {
                 "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.build.output",
                 "name": "output",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[config.storage.src.publicDir]/sitemap.xml",
                 "description": "Specify if you want to use the docmap.json as a sitemap source",
                 "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.build",
@@ -111,13 +104,7 @@
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.active": {
                 "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.active",
                 "name": "active",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Boolean"
-                        }
-                    ]
-                },
+                "type": "Boolean",
                 "default": "true",
                 "description": "Specify if you want to use the files (.sitemap.{ts,js}) as a sitemap source",
                 "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file",
@@ -134,13 +121,7 @@
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings": {
                 "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings",
                 "name": "settings",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ]
-                },
+                "type": "Object",
                 "default": "{}",
                 "description": "Specify some setting to pass to the file sitemap source",
                 "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file",
@@ -154,42 +135,10 @@
                 "extension": "config",
                 "relPath": "src/config/sitemapBuilder.config.ts"
             },
-            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings.glob": {
-                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings.glob",
-                "name": "glob",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ]
-                },
-                "default": "['** /*.sitemap.js']",
-                "description": "Specify the glob(s) to use to find the sitemap files",
-                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "sitemapBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/sitemapBuilder.config.ts"
-            },
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings.inDir": {
                 "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings.inDir",
                 "name": "inDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "[config.storage.src.rootDir]",
                 "description": "Specify the input directory where to search for sitemap files",
                 "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings",
@@ -206,13 +155,7 @@
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.path": {
                 "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.path",
                 "name": "path",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "__path.resolve(`${__dirname()}/../node/sources/SSitemapFileSource`)",
                 "description": "Specify where to find the file source",
                 "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file",
@@ -229,13 +172,7 @@
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.active": {
                 "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.active",
                 "name": "active",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Boolean"
-                        }
-                    ]
-                },
+                "type": "Boolean",
                 "default": "true",
                 "description": "Specify if you want to use the docmap.json as a sitemap source",
                 "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap",
@@ -252,13 +189,7 @@
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.settings": {
                 "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.settings",
                 "name": "settings",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ]
-                },
+                "type": "Object",
                 "default": "{}",
                 "description": "Specify some setting to pass to the docmap sitemap source",
                 "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap",
@@ -275,13 +206,7 @@
             "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.path": {
                 "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.path",
                 "name": "path",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ]
-                },
+                "type": "String",
                 "default": "__path.resolve(`${__dirname()}/../node/sources/SSitemapDocmapSource`)",
                 "description": "Specify where to find the docmap source",
                 "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap",
@@ -299,13 +224,7 @@
             "@coffeekraken.s-sitemap-builder.doc.README": {
                 "id": "@coffeekraken.s-sitemap-builder.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -334,13 +253,7 @@
             "@coffeekraken.s-sitemap-builder.node.SSitemapBuilder": {
                 "id": "@coffeekraken.s-sitemap-builder.node.SSitemapBuilder",
                 "name": "SSitemapBuilder",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "platform": [
                     {
                         "name": "js",
@@ -364,34 +277,10 @@
                 "extension": "ts",
                 "relPath": "src/node/SSitemapBuilder.ts",
                 "children": {
-                    "sitemapsettings": {
-                        "id": "244fc1ff49601db47dba3b41387bf5f86487f6e94149fa5369613d5e20bb81f8",
-                        "name": "sitemapSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISSitemapBuilderSettings"
-                                }
-                            ]
-                        },
-                        "description": "Access the sitemap settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "57c2ede804332c79d7556f5b9ab1a8e5245066fb344f1312a76148536c48c40a",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -403,13 +292,7 @@
                     "build": {
                         "id": "c13041192405a6baf35e34eaa6b960a41bc316550ac24ea53e3e3f8c91bb6668",
                         "name": "build",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to generate your sitemap with all the added sources\nand save it to disk, or just returns the result as a promise value",
                         "async": "true",
                         "since": "2.0.0",
@@ -422,13 +305,7 @@
                     "save": {
                         "id": "5e3d3c4f56f702e85600ec0feb6ea94964aeda8563837aca33aa786ec0f263af",
                         "name": "save",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method takes all the sitemap items with an output path and save your sitemap",
                         "async": "true",
                         "since": "2.0.0",
@@ -443,13 +320,7 @@
             "@coffeekraken.s-sitemap-builder.node.SSitemapBuilderSource": {
                 "id": "@coffeekraken.s-sitemap-builder.node.SSitemapBuilderSource",
                 "name": "SSitemapBuilderSource",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "platform": [
                     {
                         "name": "js",
@@ -476,13 +347,7 @@
                     "sitemapsourcesettings": {
                         "id": "e501b3a7a712a534807da297c15d88f446848f6d83b8134e2f5b978110f269bb",
                         "name": "sitemapSourceSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISSitemapBuilderSourceSettings"
-                                }
-                            ]
-                        },
+                        "type": "ISSitemapBuilderSourceSettings",
                         "description": "Access the sitemap source settings",
                         "since": "2.0.0",
                         "author": {
@@ -494,13 +359,7 @@
                     "constructor": {
                         "id": "57c2ede804332c79d7556f5b9ab1a8e5245066fb344f1312a76148536c48c40a",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -512,13 +371,7 @@
                     "build": {
                         "id": "eddd3d7b2dfa7ccc9a260e1bf95fd4d3457341d7db61702cecfdd51a058bf252",
                         "name": "build",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method MUST be implemented in your child class to build your particular sitemap.\nIs has to return a Promise and resolve it with an ISSitemapBuilderSourceBuildResult object type",
                         "async": "true",
                         "since": "2.0.0",
@@ -530,113 +383,10 @@
                     }
                 }
             },
-            "@coffeekraken.s-sitemap-builder.node.interface.SSitemapBuilderBuildParamsInterface": {
-                "id": "@coffeekraken.s-sitemap-builder.node.interface.SSitemapBuilderBuildParamsInterface",
-                "name": "SSitemapBuilderBuildParamsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the SSitemapBuilder build params",
-                "namespace": "@coffeekraken.s-sitemap-builder.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SSitemapBuilderBuildParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "source": {
-                            "description": "Specify the source(s) you want to build your sitemap. Can be all the configured sources specified under the \"config.sitemap.sources\" config",
-                            "type": "Array<String>",
-                            "default": []
-                        },
-                        "sourcesSettings": {
-                            "description": "Specigy sources settings by passing an object under each source \"id\" property",
-                            "type": "Object",
-                            "default": {}
-                        },
-                        "output": {
-                            "description": "Specify where to save the sitemap in xml format",
-                            "type": "String",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-sitemap-builder/src/public/sitemap.xml"
-                        },
-                        "save": {
-                            "description": "Specify if you want to save the sitemap or not",
-                            "type": "Boolean",
-                            "default": true
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SSitemapBuilderBuildParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SSitemapBuilderBuildParamsInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sitemap-builder.node.interface.SSitemapBuilderSettingsInterface": {
-                "id": "@coffeekraken.s-sitemap-builder.node.interface.SSitemapBuilderSettingsInterface",
-                "name": "SSitemapBuilderSettingsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the SSitemapBuilder settings",
-                "namespace": "@coffeekraken.s-sitemap-builder.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SSitemapBuilderSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "sources": {
-                            "description": "Specify the sources to use to build the sitemap. A source is a objet with the properties \"active\", \"settings\" and \"path\"",
-                            "type": "Object",
-                            "default": {}
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SSitemapBuilderSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SSitemapBuilderSettingsInterface.ts",
-                "children": {}
-            },
             "@coffeekraken.s-sitemap-builder.node.SSitemapBuilderDocmapSource": {
                 "id": "@coffeekraken.s-sitemap-builder.node.SSitemapBuilderDocmapSource",
                 "name": "SSitemapBuilderDocmapSource",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "platform": [
                     {
                         "name": "js",
@@ -663,13 +413,7 @@
                     "settingsid": {
                         "id": "7fc392f0e0b21d6d73c3a21b47ddf6c74da0a0c71ae3f6f89581efaf4171bfc1",
                         "name": "settingsId",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ]
-                        },
+                        "type": "String",
                         "description": "Store the source settings id",
                         "static": "true",
                         "since": "2.0.0",
@@ -682,13 +426,7 @@
                     "sitemapsourcedocmapsettings": {
                         "id": "6273a109fd853cf13d8d6fe6363de5c0371d08c7aabb67cfbb4624304fcd4754",
                         "name": "sitemapSourceDocmapSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISSitemapSourceSettings"
-                                }
-                            ]
-                        },
+                        "type": "ISSitemapSourceSettings",
                         "description": "Access the sitemap source docmap settings",
                         "since": "2.0.0",
                         "author": {
@@ -700,13 +438,7 @@
                     "constructor": {
                         "id": "57c2ede804332c79d7556f5b9ab1a8e5245066fb344f1312a76148536c48c40a",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -718,13 +450,7 @@
                     "build": {
                         "id": "f4ce279f5e4cf53327c8f8c4ac68c9cbf12ae69de49e484af6e036617f03d6f1",
                         "name": "build",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to build the sitemap from the docmap source.",
                         "async": "true",
                         "since": "2.0.0",
@@ -739,13 +465,7 @@
             "@coffeekraken.s-sitemap-builder.node.SSitemapBuilderFileSource": {
                 "id": "@coffeekraken.s-sitemap-builder.node.SSitemapBuilderFileSource",
                 "name": "SSitemapBuilderFileSource",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "platform": [
                     {
                         "name": "js",
@@ -772,13 +492,7 @@
                     "id": {
                         "id": "b7b4415d367d467b4c234448aceed10399946eda83af6be4633034eba9b71ba9",
                         "name": "id",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ]
-                        },
+                        "type": "String",
                         "description": "Store the source settings id",
                         "static": "true",
                         "since": "2.0.0",
@@ -791,13 +505,7 @@
                     "sitemapsourcefilesettings": {
                         "id": "5bb35165332ea4e0086ada92b341b4b72fcdfc4dc0d460896dfafe2f8fa2b8f7",
                         "name": "sitemapSourceFileSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISSitemapSourceSettings"
-                                }
-                            ]
-                        },
+                        "type": "ISSitemapSourceSettings",
                         "description": "Access the sitemap source docmap settings",
                         "since": "2.0.0",
                         "author": {
@@ -809,13 +517,7 @@
                     "constructor": {
                         "id": "57c2ede804332c79d7556f5b9ab1a8e5245066fb344f1312a76148536c48c40a",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -827,13 +529,7 @@
                     "build": {
                         "id": "f4ce279f5e4cf53327c8f8c4ac68c9cbf12ae69de49e484af6e036617f03d6f1",
                         "name": "build",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to build the sitemap from the docmap source.",
                         "async": "true",
                         "since": "2.0.0",

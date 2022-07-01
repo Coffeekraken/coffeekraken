@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -44,8 +43,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -54,7 +53,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-promise",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-process.doc.README": {
                 "id": "@coffeekraken.s-process.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -123,13 +116,7 @@
             "@coffeekraken.s-process.s-process.SCommandProcess": {
                 "id": "@coffeekraken.s-process.s-process.SCommandProcess",
                 "name": "SCommandProcess",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This class represent an SProcess started with a simple bash command like \"ls -la\" or whatever",
                 "namespace": "@coffeekraken.s-process.s-process",
                 "status": "wip",
@@ -152,13 +139,7 @@
                     "commandprocesssettings": {
                         "id": "ea481b8c82aba6294ebe5e562c00f24d78bb9968a9f1c8a9065ffb7c7e6bfcc4",
                         "name": "commandProcessSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISCommandProcessSettings"
-                                }
-                            ]
-                        },
+                        "type": "ISCommandProcessSettings",
                         "description": "Access the command process settings",
                         "since": "2.0.0",
                         "author": {
@@ -170,13 +151,7 @@
                     "constructor": {
                         "id": "1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -188,13 +163,7 @@
                     "process": {
                         "id": "13cd0dab8867cbdba89eb5474cea3f9a9fb493de4438700039953074dc63402c",
                         "name": "process",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Run the actual command through a ```spawn``` call.\nThe spawn function used here is the sugar one stored in \"sugar.node.process.spawn\"",
                         "async": "true",
                         "since": "2.0.0",
@@ -209,13 +178,7 @@
             "@coffeekraken.s-process.sugar.node.process.SProcess": {
                 "id": "@coffeekraken.s-process.sugar.node.process.SProcess",
                 "name": "SProcess",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This class represent an SProcess run iteration that store things like\nthe value, the startTime, endTime, duration, state, etc...",
                 "namespace": "@coffeekraken.s-process.sugar.node.process",
                 "status": "wip",
@@ -232,13 +195,7 @@
                     "params": {
                         "id": "924c5b822041fabd435ba4c555313199803ab27367bcb56630070ccd2e9828df",
                         "name": "params",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ]
-                        },
+                        "type": "String",
                         "description": "Access the process params",
                         "since": "2.0.0",
                         "author": {
@@ -250,13 +207,7 @@
                     "stdio": {
                         "id": "00c703928dafe0acd626e4669de693db6f42f426d7ddfa27d178b349b1e82e76",
                         "name": "stdio",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "SProcessOutput"
-                                }
-                            ]
-                        },
+                        "type": "SProcessOutput",
                         "description": "Access the stdio class initiated if exists",
                         "since": "2.0.0",
                         "author": {
@@ -268,35 +219,8 @@
                     "state": {
                         "id": "145d1953c21b37845c7732292dd039b188ca3bfb096d0dea1c4fa56fb02e2578",
                         "name": "state",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ]
-                        },
+                        "type": "String",
                         "description": "Access the process state like 'idle', 'ready', 'running', 'killed', 'error', 'success'",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "executionsstack": {
-                        "id": "d68904af7461c3168196778e67ea4a6918dce266d6d7faaf8abecc1744c51dd9",
-                        "name": "executionsStack",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "ISProcessProcessObj"
-                                    ]
-                                }
-                            ]
-                        },
-                        "description": "This array store each executions informations in separated objects\nthat store the duration, startTime, endTime, state, etc...",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -307,13 +231,7 @@
                     "currentexecutionobj": {
                         "id": "22602829dcc40fb632023a56c0384a775501fa6c9f7941ee165bff83aa425bb0",
                         "name": "currentExecutionObj",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISProcessProcessObj"
-                                }
-                            ]
-                        },
+                        "type": "ISProcessProcessObj",
                         "description": "Store the current execution object info like startTime, endTime, duration, state, etc...",
                         "since": "2.0.0",
                         "author": {
@@ -325,13 +243,7 @@
                     "paramsinterface": {
                         "id": "c2753aca267e5d1ebfbd8d88f856a67016ad81044e02daf3bc70f43b889cd0a8",
                         "name": "paramsInterface",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ]
-                        },
+                        "type": "Object",
                         "description": "Store the parameters interface to apply on the params object and on the initialParams object.\nCan come from the static ```interfaces.params``` property or the ```settings.interface``` one.",
                         "since": "2.0.0",
                         "author": {
@@ -343,13 +255,7 @@
                     "from": {
                         "id": "a42fbdfe8648d183e1b94c0e08b5d6289cbe1db2c61868d7182adac4099ac5d6",
                         "name": "from",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This static method allows you to pass arguments like:\n- file path: Will require it, check what's returned from and instanciate an SProcess depending on that\n- command string: Will instanciate a new SCommandProcess instance and returns it for you to run it\n- function: Will execute the function and instanciate the proper SPromise instance type depending on the returned value\n- SPromise instance: Will simply wrap the SPromise  instance inside an SProcess one and returns you this new SProcess instance\n- SProcess based class: This make not so much sens but at least you can rely on this method to instanciate event an SProcess based class\nOnce you get the proper instance back, you can use it the same as an SProcess based class instance and use the ```run``` method to\nexecute your process",
                         "async": "true",
                         "static": "true",
@@ -363,13 +269,7 @@
                     "fromcommand": {
                         "id": "354388ab55aa939285286ad260a93845b2b43615da3070aa844fa7b4e68f13c2",
                         "name": "fromCommand",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Initialize an SCommandProcess instance on which you can call the standard \"run\" method\nand execute a command by passing inside the params object the ```command``` prop.",
                         "async": "true",
                         "static": "true",
@@ -383,13 +283,7 @@
                     "run": {
                         "id": "4a868b6b0757ad6eb16bf19cdd1a46f9802fe5053e2a111378270772ca5c4a79",
                         "name": "run",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Run the process by calling the ```process``` method implemented on your\nSProcess class (if exists).\nTake care of starting timers for duration tracking, etc...",
                         "async": "true",
                         "since": "2.0.0",
@@ -402,13 +296,7 @@
                     "constructor": {
                         "id": "57c2ede804332c79d7556f5b9ab1a8e5245066fb344f1312a76148536c48c40a",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -420,26 +308,14 @@
                     "lastexecutionobj": {
                         "id": "e2abba16610ac152d62780d40e7cac9a55197b062c95391717ca23eb1780b4a2",
                         "name": "lastExecutionObj",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISProcessProcessObj"
-                                }
-                            ]
-                        },
+                        "type": "ISProcessProcessObj",
                         "description": "Get the last execution object",
                         "since": "2.0.0"
                     },
                     "process": {
                         "id": "0086e00155c667cbac422b2d47794a31cf30fd8ba3b8c39e6d1f92add80994a6",
                         "name": "process",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This is the method you have to implement in you SProcess class. It will be called\nwhen you call the ```run``` method with the params, etc...\nYou have to return an SPromise instance in order that the SProcess class is able to keep\ntrack of your process state, logs, etc...",
                         "since": "2.0.0",
                         "author": {
@@ -451,13 +327,7 @@
                     "ready": {
                         "id": "92e9bc00299fd51917fb4da2e7d4aa439065f97cc65b62db0ec5d843326e3c23",
                         "name": "ready",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to set the process in the \"ready\" state.\nThis will make the stdio initialize, etc...",
                         "since": "2.0.0",
                         "author": {
@@ -469,13 +339,7 @@
                     "kill": {
                         "id": "4384874ae922363b8744018480e152ebb81ab10e1c0bf9a0d20369008a4879e0",
                         "name": "kill",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method will simply kill the process and call the \"cancel\" method\non the SPromise super instance as well as on the passed \"promise\" instance",
                         "since": "2.0.0",
                         "author": {
@@ -487,13 +351,7 @@
                     "cancel": {
                         "id": "754f727da871115a2943e0aa6a5c4604f9bc0dad64d5edba8ce78346d1aebdcd",
                         "name": "cancel",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to cancel the process",
                         "since": "2.0.0",
                         "author": {
@@ -505,13 +363,7 @@
                     "isrunning": {
                         "id": "09572350b42674e86c0d9b2433d08125c44b70204837130791d082f8c52ef536",
                         "name": "isRunning",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to check if the process is currently running or not",
                         "since": "2.0.0",
                         "author": {
@@ -523,13 +375,7 @@
                     "isidle": {
                         "id": "3f0b757c747b1d0db161799c0a9febc8a42cda9329e70d774cf973b3b1d14471",
                         "name": "isIdle",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to check if the process is currently idle or not",
                         "since": "2.0.0",
                         "author": {
@@ -541,13 +387,7 @@
                     "isready": {
                         "id": "49987d4662c727a61d900005dc77a0bc55b196c673c801890caa2b5544a5709e",
                         "name": "isReady",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to check if the process is currently ready or not",
                         "since": "2.0.0",
                         "author": {
@@ -559,13 +399,7 @@
                     "iskilled": {
                         "id": "a2f72bbc1dea7b33cdb1ef257d04756962d0c712a60359429feb3b8cf2df4d94",
                         "name": "isKilled",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to check if the process has been killed or not",
                         "since": "2.0.0",
                         "author": {
@@ -577,13 +411,7 @@
                     "iserror": {
                         "id": "e5f2a7fdfa3e4175a6eae943130ce1df0cde99218a62ce4cfdc8346001e7dd97",
                         "name": "isError",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to check if the process is in error state or not",
                         "since": "2.0.0",
                         "author": {
@@ -595,13 +423,7 @@
                     "issuccess": {
                         "id": "71db9a6bbd38ac3174bdf1da727a99b8ef0aff8c020ecfa001af2c98d686287b",
                         "name": "isSuccess",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to check if the process is in success state or not",
                         "since": "2.0.0",
                         "author": {
@@ -613,13 +435,7 @@
                     "log": {
                         "id": "e48f5fbcefeb392e8894bdde37246a098cdaba354d77a06c45d6c0bbc10c9636",
                         "name": "log",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to log a message that will be catched by the parent manager class",
                         "author": {
                             "name": "Olivier Bossel",
@@ -630,13 +446,7 @@
                     "error": {
                         "id": "c1e67a5902b93a01b2b6a9818f20a1f83fe399ab5854292dbdc385e418ea5590",
                         "name": "error",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to error a message that will be catched by the parent manager class",
                         "author": {
                             "name": "Olivier Bossel",
@@ -649,13 +459,7 @@
             "@coffeekraken.s-process.s-process.SProcessManager": {
                 "id": "@coffeekraken.s-process.s-process.SProcessManager",
                 "name": "SProcessManager",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This class represent a process handler class that will fire up some SProcess processes",
                 "namespace": "@coffeekraken.s-process.s-process",
                 "status": "wip",
@@ -672,13 +476,7 @@
                     "processmanagesettings": {
                         "id": "177e3d4ce9ea78ea99765941aee756e27b929360abba36fa7821e589f5531fe1",
                         "name": "processManageSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISProcessManageSettings"
-                                }
-                            ]
-                        },
+                        "type": "ISProcessManageSettings",
                         "description": "Access the process manager process settings",
                         "since": "2.0.0",
                         "author": {
@@ -690,13 +488,7 @@
                     "constructor": {
                         "id": "8607c05ad0cfc16ac056f86be76b5fa0f46231044e5b08b362c1da5b01c6fec6",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "author": {
                             "name": "Olivier Bossel",
@@ -707,13 +499,7 @@
                     "attachprocess": {
                         "id": "a03de5c54f203abccd8347931e07646b9fc6dca87df9a6327b4b2c8304ada621",
                         "name": "attachProcess",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method allows you to attach a process to the manager with\nhis proper settings like restart, etc...",
                         "since": "2.0.0",
                         "author": {
@@ -725,13 +511,7 @@
                     "detachprocess": {
                         "id": "af7059c72fa84b0c7dd53d9dadbb4e134927f5d28656f3123da12f88d81dbdfa",
                         "name": "detachProcess",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Simple method to detach a process from the manager using his id.",
                         "since": "2.0.0",
                         "author": {
@@ -743,13 +523,7 @@
                     "run": {
                         "id": "85ddb96481742fb667ce6d432752fbc9c743324c0a6d48d445acdb07bd67b691",
                         "name": "run",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Proxy to the ```run``` method on the passed processInstance for the specified process id",
                         "async": "true",
                         "since": "2.0.0",
@@ -764,13 +538,7 @@
             "@coffeekraken.s-process.s-process.SProcessManagerProcessWrapper": {
                 "id": "@coffeekraken.s-process.s-process.SProcessManagerProcessWrapper",
                 "name": "SProcessManagerProcessWrapper",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This class represent a process manager process wrapper that handle the actual restarting, watch, etc...",
                 "namespace": "@coffeekraken.s-process.s-process",
                 "status": "wip",
@@ -787,13 +555,7 @@
                     "initialparams": {
                         "id": "2bd23a8ca5ce94eccdcfa9e6c67c726a3a5b0b5a834cad908e2132eb07185800",
                         "name": "initialParams",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ]
-                        },
+                        "type": "Object",
                         "description": "Store the initial params object",
                         "since": "2.0.0",
                         "author": {
@@ -805,13 +567,7 @@
                     "processinstance": {
                         "id": "6c382fcd6dc16a36285c3ced38c6cfeb7d41ac944b8cac92ad0c2fa80c296739",
                         "name": "processInstance",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "SProcess"
-                                }
-                            ]
-                        },
+                        "type": "SProcess",
                         "description": "Store the actual processInstance passed through the constructor",
                         "since": "2.0.0",
                         "author": {
@@ -823,13 +579,7 @@
                     "processmanagerprocesssettings": {
                         "id": "b01f040be0aa31feb2540138602b4efa485beea50580d4c4aed97d414dc08ef1",
                         "name": "processManagerProcessSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISProcessManagerProcessWrapperSettings"
-                                }
-                            ]
-                        },
+                        "type": "ISProcessManagerProcessWrapperSettings",
                         "description": "Access the process manager process settings",
                         "since": "2.0.0",
                         "author": {
@@ -841,13 +591,7 @@
                     "constructor": {
                         "id": "8607c05ad0cfc16ac056f86be76b5fa0f46231044e5b08b362c1da5b01c6fec6",
                         "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Constructor",
                         "author": {
                             "name": "Olivier Bossel",
@@ -858,13 +602,7 @@
                     "detach": {
                         "id": "08962a5b7a2faef9a00fb9f151426e9a8413a4913467f77052c85b498bcc8804",
                         "name": "detach",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "This method has to be called by the process manager when this process has been detached\nin order to clear some listeners, etc...",
                         "since": "2.0.0",
                         "author": {
@@ -876,13 +614,7 @@
                     "run": {
                         "id": "020f5c3dc99a4d79299014cd10c035b0680780c9d611006d8253f1a0b2e67440",
                         "name": "run",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ]
-                        },
+                        "type": "Function",
                         "description": "Proxy to the ```run``` method on the passed processInstance",
                         "async": "true",
                         "since": "2.0.0",
@@ -893,118 +625,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-process.node.interface.SCommandProcessInterface": {
-                "id": "@coffeekraken.s-process.node.interface.SCommandProcessInterface",
-                "name": "SCommandProcessInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-process.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SCommandProcessInterface",
-                    "description": "",
-                    "definition": {
-                        "command": {
-                            "description": "Specify the command to execute",
-                            "type": "String",
-                            "alias": "c",
-                            "required": true
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SCommandProcessInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SCommandProcessInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-process.node.interface.SProcessSettingsInterface": {
-                "id": "@coffeekraken.s-process.node.interface.SProcessSettingsInterface",
-                "name": "SProcessSettingsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-process.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SProcessSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "killOnError": {
-                            "description": "Specify if you want to kill the process when an error occurs",
-                            "type": "Boolean",
-                            "default": true
-                        },
-                        "stdio": {
-                            "description": "Specify the stdio to use for your process",
-                            "type": "String|SStdio|Boolean",
-                            "alias": "s",
-                            "default": "inherit"
-                        },
-                        "throw": {
-                            "description": "Specify if you want to throw error when an error occurs",
-                            "type": "Boolean",
-                            "alias": "t",
-                            "default": true
-                        },
-                        "exitAtEnd": {
-                            "description": "Specify if you want to kill the process at his end",
-                            "type": "Boolean",
-                            "alias": "e",
-                            "default": false
-                        },
-                        "runAsChild": {
-                            "description": "Specify if you want to run your process as a child one",
-                            "type": "Boolean",
-                            "alias": "c",
-                            "default": false
-                        },
-                        "processPath": {
-                            "description": "Specify a path to a process file that exports a process supported type like an SProcess based class, a function, etc...",
-                            "type": "String",
-                            "default": null
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SProcessSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SProcessSettingsInterface.ts",
-                "children": {}
             }
         }
     }

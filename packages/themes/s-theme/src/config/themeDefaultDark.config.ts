@@ -32,14 +32,14 @@ export default function (env, config) {
                  * @name                color
                  * @namespace            config.themeDefaultLight.color.base
                  * @type                Color
-                 * @default             hsla(206,11,21,1)
+                 * @default             hsla(212,14,50,1)
                  *
                  * Specify the "base" color value.
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                color: 'hsla(220,9,52,1)',
+                color: 'hsla(212,14,50,1)',
                 /**
                  * @name                ...
                  * @namespace            config.themeDefaultLight.color.base
@@ -65,7 +65,7 @@ export default function (env, config) {
                  * @name                color
                  * @namespace            config.themeDefaultDark.color.main
                  * @type                Color
-                 * @default             hsla(198,10,50,1)
+                 * @default             hsla(212,14,50,1)
                  *
                  * Specify the "main" color value.
                  *

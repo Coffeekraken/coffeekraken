@@ -3,6 +3,10 @@ import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SInlineFeatureInterface from './interface/SInlineFeatureInterface';
 
+// @ts-ignore
+import '../../../../src/css/s-inline-feature.css'; // relative to /dist/pkg/esm/js
+// import '../css/s-inline-feature.css'; // for dev
+
 export interface IInlineFeatureProps {}
 
 /**

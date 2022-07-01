@@ -5,10 +5,12 @@
     <div class="__illustration">
 
 
-        <ck-blob></ck-blob>
+        <img class="illustration" s-inline src="/dist/img/illustrations/kraken.svg" />
+
+        {{-- <ck-blob></ck-blob>
         <div class="__loader s-until:sibling:mounted">
             <i class="s-loader:spinner s-color:accent"></i>
-        </div>
+        </div> --}}
 
     </div>
 

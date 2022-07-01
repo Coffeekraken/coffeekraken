@@ -18,7 +18,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -43,8 +42,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -53,7 +52,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -75,6 +73,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-component-utils.doc.README": {
                 "id": "@coffeekraken.s-component-utils.doc.README",
                 "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ]
-                },
+                "type": "Markdown",
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -118,88 +111,6 @@
                 "filename": "README.md",
                 "extension": "md",
                 "relPath": "src/doc/README.md",
-                "children": {}
-            },
-            "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface": {
-                "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface",
-                "name": "SComponentUtilsDefaultPropsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe parameters of a basic SComponent",
-                "namespace": "@coffeekraken.s-component-utils.js.interface",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SComponentUtilsDefaultPropsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SComponentUtilsDefaultPropsInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface": {
-                "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface",
-                "name": "SComponentUtilsSettingsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe SComponentUtils settings",
-                "namespace": "@coffeekraken.s-component-utils.js.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SComponentUtilsSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "interface": {
-                            "description": "Specify an SInterface class to use as our properties definition",
-                            "type": "SInterface"
-                        },
-                        "props": {
-                            "description": "Specify a properties object to use as our properties definition",
-                            "type": "Object"
-                        },
-                        "style": {
-                            "description": "Specify a style string to use as style to inject for our component",
-                            "type": "String"
-                        },
-                        "defaultProps": {
-                            "description": "Pass an object that act as the default properties value for our component",
-                            "type": "Object"
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SComponentUtilsSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SComponentUtilsSettingsInterface.ts",
                 "children": {}
             }
         }

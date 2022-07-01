@@ -19,7 +19,6 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -44,8 +43,8 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -54,7 +53,6 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -76,6 +74,7 @@
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
             "@coffeekraken/s-view-renderer",
@@ -88,13 +87,7 @@
             "@coffeekraken.s-view-renderer-engine-blade.node.SViewRendererEngineBlade": {
                 "id": "@coffeekraken.s-view-renderer-engine-blade.node.SViewRendererEngineBlade",
                 "name": "SViewRendererEngineBlade",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ]
-                },
+                "type": "Class",
                 "description": "This class is the blade.php view engine that allows you\nto render .blade.php views.",
                 "namespace": "@coffeekraken.s-view-renderer-engine-blade.node",
                 "since": "2.0.0",
@@ -106,41 +99,6 @@
                 "filename": "SViewRendererEngineBlade.ts",
                 "extension": "ts",
                 "relPath": "src/node/SViewRendererEngineBlade.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-view-renderer-engine-blade.node.interface.SViewRendererEngineBladeSettingsInterface": {
-                "id": "@coffeekraken.s-view-renderer-engine-blade.node.interface.SViewRendererEngineBladeSettingsInterface",
-                "name": "SViewRendererEngineBladeSettingsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ]
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This interface represent the settings of the SViewRendererEngineBlade engine",
-                "namespace": "@coffeekraken.s-view-renderer-engine-blade.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SViewRendererEngineBladeSettingsInterface",
-                    "description": "",
-                    "definition": {}
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SViewRendererEngineBladeSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SViewRendererEngineBladeSettingsInterface.ts",
                 "children": {}
             }
         }

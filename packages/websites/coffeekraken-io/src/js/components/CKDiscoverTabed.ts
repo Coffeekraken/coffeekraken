@@ -31,7 +31,7 @@ export default class CKDiscoverTabed extends __SLitComponent {
     _tabs = [
         {
             id: 'js',
-            title: 'Javascript',
+            title: 'JS',
         },
         {
             id: 'css',

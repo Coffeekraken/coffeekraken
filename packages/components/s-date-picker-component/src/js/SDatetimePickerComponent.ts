@@ -373,25 +373,37 @@ export default class SDatetimePicker extends __SLitComponent {
         // update input on select
         this._updateInput('select');
     }
-    _setMonth(month: number): void {
+    _setMonth(month: number, delay: getHourboolean = false): void {
         this.state.month = month;
         this.state.displayedMonth = month;
+        setTimeout(() => {
+            this._scrollSelectorToActiveItem(this._$months, true, delay);
+        });
         // update input on select
         this._updateInput('select');
     }
-    _setYear(year: number): void {
+    _setYear(year: number, delay: getHourboolean = false): void {
         this.state.year = year;
         this.state.displayedYear = year;
+        setTimeout(() => {
+            this._scrollSelectorToActiveItem(this._$years, true, delay);
+        });
         // update input on select
         this._updateInput('select');
     }
-    _setHour(hour: number): void {
+    _setHour(hour: number, delay: getHourboolean = false): void {
         this.state.hour = hour;
+        setTimeout(() => {
+            this._scrollSelectorToActiveItem(this._$hours, true, delay);
+        });
         // update input on select
         this._updateInput('select');
     }
-    _setMinutes(minutes: number): void {
+    _setMinutes(minutes: number, delay: getHourboolean = false): void {
         this.state.minutes = minutes;
+        setTimeout(() => {
+            this._scrollSelectorToActiveItem(this._$minutes, true, delay);
+        });
         // update input on select
         this._updateInput('select');
     }
@@ -922,6 +934,7 @@ export default class SDatetimePicker extends __SLitComponent {
                             ${this._getDays().map(
                                 (i) => html`
                                     <div
+                                        @click=${() => this._setDay(i + 1)}
                                         class="${this.componentUtils.className(
                                             '__selector-item',
                                         )} ${this.componentUtils.className(
@@ -947,6 +960,7 @@ export default class SDatetimePicker extends __SLitComponent {
                             ${this._getMonths().map(
                                 (month, i) => html`
                                     <div
+                                        @click=${() => this._setMonth(i)}
                                         class="${this.componentUtils.className(
                                             '__selector-item',
                                         )} ${this.componentUtils.className(
@@ -972,6 +986,7 @@ export default class SDatetimePicker extends __SLitComponent {
                             ${this._getYears().map(
                                 (year, j) => html`
                                     <div
+                                        @click=${() => this._setYear(year)}
                                         class="${this.componentUtils.className(
                                             '__selector-item',
                                         )} ${this.componentUtils.className(
@@ -1007,6 +1022,7 @@ export default class SDatetimePicker extends __SLitComponent {
                             ${this._getHours().map(
                                 (hour) => html`
                                     <div
+                                        @click=${() => this._setHour(hour)}
                                         class="${this.componentUtils.className(
                                             '__selector-item',
                                         )} ${this.componentUtils.className(
@@ -1030,6 +1046,7 @@ export default class SDatetimePicker extends __SLitComponent {
                             ${this._getMinutes().map(
                                 (minute, i) => html`
                                     <div
+                                        @click=${() => this._setMinutes(minute)}
                                         class="${this.componentUtils.className(
                                             '__selector-item',
                                         )} ${this.componentUtils.className(

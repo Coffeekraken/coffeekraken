@@ -104,7 +104,7 @@ s-datetime-picker {
         flex-grow: 1;
     }
     .s-datetime-picker__selector-item {
-        scroll-snap-align: start;
+        scroll-snap-align: center;
 
         &:first-child {
             margin-block-start: 2.5em;
@@ -130,13 +130,13 @@ s-datetime-picker {
         }
 
         .s-datetime-picker__selector-item {
-            scroll-snap-align: start;
+            scroll-snap-align: center;
 
             &:first-child {
-                margin-block-start: 1.5em;
+                margin-block-start: 1em;
             }
             &:last-child {
-                margin-block-end: 1.5em;
+                margin-block-end: 1em;
             }
         }
     }

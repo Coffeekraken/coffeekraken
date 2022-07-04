@@ -104,7 +104,7 @@ export default function ({
     vars.code(
         `
       .s-group {
-          display: inline-flex !important;   
+          display: flex !important;   
           flex-wrap: nowrap;
           vertical-align: top;
       }

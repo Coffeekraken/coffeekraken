@@ -197,6 +197,8 @@ export default function ({
             -webkit-appearance: none;
             background: transparent;
 
+            margin-block: sugar.padding(sugar.theme(ui.form.paddingBlock));
+
             &::-moz-focus-outer {
                 border: 0;
             }

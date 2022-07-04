@@ -195,12 +195,11 @@ export default function ({
             default:
                 vars.push(`
                   display: flex;
-                  justify-content: space-between;    
-                  align-items: center;
+                  justify-content: space-between;
                   gap: sugar.margin(20);
 
-                  & > *:first-child {
-                    order: 2;
+                  > *:first-child {
+                    padding-block-start: sugar.padding(sugar.theme(ui.form.paddingBlock));
                   }
 
                 `);

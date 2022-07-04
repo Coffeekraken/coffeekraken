@@ -43,6 +43,9 @@ import __negativeValidator, {
 import __numberValidator, {
     definition as __numberValidatorDefinition,
 } from './validators/number';
+import __passwordValidator, {
+    definition as __passwordValidatorDefinition,
+} from './validators/password';
 import __patternValidator, {
     definition as __patternValidatorDefinition,
 } from './validators/pattern';
@@ -350,6 +353,8 @@ export default class SValidator extends __SClass {
                 result.valid = false;
                 result.rules[validator] = res;
                 result.messages.push(res.message);
+            } else {
+                result.rules[validator] = res;
             }
         }
 
@@ -406,4 +411,7 @@ SValidator.registerValidator('color', __colorValidator, {
 });
 SValidator.registerValidator('hex', __hexValidator, {
     definition: __hexValidatorDefinition,
+});
+SValidator.registerValidator('password', __passwordValidator, {
+    definition: __passwordValidatorDefinition,
 });

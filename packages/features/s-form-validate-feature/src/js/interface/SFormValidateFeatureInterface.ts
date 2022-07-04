@@ -59,6 +59,17 @@ export default class SFormValidateFeatureInterface extends __SInterface {
                 type: 'String',
                 default: 's-form-validate--valid s-color--success',
             },
+            handlers: {
+                description:
+                    'Specify some custom handlers by validator that will be executed in addition to the default validate behavior. The handler will take as argument an object containing the "result" SValidator result, the "$feature" that represent the s-validate node, the "$form" node if exists, the "$node" attached node if using the "nodes" property, the "$field" that represent the input field handled and the "props" that represent the feature properties',
+                type: 'Object',
+                default: {},
+            },
+            nodes: {
+                description:
+                    'Specify a css selector that target some HTMLElements used for the validation. Every HTMLElement has to specify 1 validator by using element attributes (same as on the feature itself). Classes are applied on each "node" to specify if the validator is valid or not',
+                type: 'String',
+            },
             language: {
                 description:
                     'Specify the language you want to use for messages',

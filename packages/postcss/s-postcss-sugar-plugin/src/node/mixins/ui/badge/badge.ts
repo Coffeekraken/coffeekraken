@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name          badge
@@ -122,6 +121,7 @@ export default function ({
                 vars.push(`
                      color: sugar.color(current, foreground);
                      background-color: sugar.color(current);
+                    text-shadow: 0px 0px 10px sugar.color(current, --darken 20 --alpha 0.8);
                 `);
                 break;
         }

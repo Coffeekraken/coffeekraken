@@ -5,6 +5,8 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 // @ts-ignore
 import __SValidator from '@coffeekraken/s-validator';
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
+import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js
 import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
 
@@ -37,33 +39,61 @@ import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInt
  * import { define } from '@coffeekraken/s-form-validate-feature';
  * define();
  *
+ * @example         html            Password
+ * <label class="s-label:responsive" s-form-validate password="strong">
+ *    <span>Password</span>
+ *    <div class="s-width:60">
+ *      <div class="s-input-container:addon">
+ *          <input type="text" class="s-input" required placeholder="olivierbossel" />
+ *          <div class="__levels">
+ *              <div class="__weak s-badge s-color:error">Weak</div>
+ *              <div class="__medium s-badge s-color:warning">Medium</div>
+ *              <div class="__strong s-badge s-color:success">Strong</div>
+ *          </div>
+ *      </div>
+ *   </div>
+ * </label>
+ *
+ * @example         html            Nodes
+ * <label class="s-label:responsive" s-form-validate nodes=".validate-node" error-class="s-tc--error" valid-class="s-tc--success">
+ *    <span>Username</span>
+ *    <div class="s-width:60">
+ *      <input type="text" class="s-input" required placeholder="olivierbossel" />
+ *      <ul class="s-list:dl s-text:right s-mbs:20">
+ *          <li class="validate-node" alphanum>Must be alphanumeric only</li>
+ *          <li class="validate-node" min="4">Min 4 characters</li>
+ *          <li class="validate-node" max="10">Max 10 characters</li>
+ *      </ul>
+ *   </div>
+ * </label>
+ *
  * @example         html            Email field
- * <label class="s-label:responsive" s-form-validate email email-message="Coco" required-message="PLOP">
- *    Email address
+ * <label class="s-label:responsive" s-form-validate email>
+ *    <span>Email address</span>
  *    <input type="text" class="s-input s-width:60" required placeholder="olivier.bossel@coffeekraken.io" />
  * </label>
  *
  * @example         html        Alphanumeric field
  * <label class="s-label:responsive" s-form-validate alphanum>
- *    Alphanumeric
+ *    <span>Alphanumeric</span>
  *    <input type="text" class="s-input s-width:60" placeholder="a-zA-Z0-9" />
  * </label>
  *
  * @example         html       Credit card field
  * <label class="s-label:responsive" s-form-validate credit-card>
- *    Credit card
+ *    <span>Credit card</span>
  *    <input type="text" class="s-input s-width:60" placeholder="340716737808634" />
  * </label>
  *
  * @example         html       Min / Max
  * <label class="s-label:responsive" s-form-validate min="3" max="6">
- *    Min and max
+ *    <span>Min and max</span>
  *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
  * </label>
  *
  * @example         html        Select field
  * <label class="s-label:responsive" s-form-validate>
- *    Select
+ *    <span>Select</span>
  *    <select class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
@@ -73,7 +103,7 @@ import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInt
  *
  * @example         html        Select min / max
  * <label class="s-label:responsive" s-form-validate min="2" max="2">
- *    Multiple select
+ *    <span>Multiple select</span>
  *    <select multiple class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
@@ -81,31 +111,37 @@ import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInt
  *    </select>
  * </label>
  *
+ * @example         html            Custom error message
+ * <label class="s-label:responsive" s-form-validate iso-date iso-date-message="Hey, you have to enter a valid ISO date!">
+ *    <span>ISO date</span>
+ *    <input type="text" class="s-input" name="my-cool-date" placeholder="2021-09-16" class="s-width:60" />
+ * </label>
+ *
  * @example         html            ISO date field
  * <label class="s-label:responsive" s-form-validate iso-date>
- *    ISO date
- *    <s-date-picker input button name="my-cool-date" placeholder="2021-09-16" class="s-width:60"></s-date-picker>
+ *    <span>ISO date</span>
+ *    <s-datetime-picker input button name="my-cool-date" placeholder="2021-09-16" class="s-width:60"></s-datetime-picker>
  * </label>
  *
  * @example         html            Range min / max
  * <label class="s-label:responsive" s-form-validate min="25" max="75">
- *    Value between 25 and 75
+ *    <span>Value between 25 and 75</span>
  *    <s-range class="s-width:60" min="0" max="100" tooltip></s-range>
  * </label>
  *
  * @example        html            Checkboxes min / max
  * <label class="s-label" s-form-validate min="2" max="2">
- *      Choose at least 2 items
+ *      <span>Choose at least 2 items</span>
  *      <div class="">
- *         <label class="s-label s-mb:20">
+ *         <label class="s-label s-mbe:20">
  *            Item 1
  *            <input type="checkbox" class="s-checkbox" value="value 1" />
  *         </label>
- *         <label class="s-label s-mb:20">
+ *         <label class="s-label s-mbe:20">
  *            Item 1
  *            <input type="checkbox" class="s-checkbox" value="value 2" />
  *         </label>
- *         <label class="s-label s-mb:20">
+ *         <label class="s-label s-mbe:20">
  *            Item 1
  *            <input type="checkbox" class="s-checkbox" value="value 3" />
  *         </label>
@@ -115,11 +151,11 @@ import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInt
  * @example            html           Submit / Reset
  * <form>
  * <label class="s-label:responsive" s-form-validate min="3" max="6">
- *    Min and max
+ *    <span>Min and max</span>
  *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
  * </label>
  * <label class="s-label:responsive s-mbs:30" s-form-validate min="2" max="2">
- *    Multiple select
+ *    <span>Multiple select</span>
  *    <select multiple class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
@@ -138,12 +174,17 @@ import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInt
 
 export interface ISFormValidateFeatureProps {
     errorContainerAttr: string;
+    nodes: string;
+    handlers: Record<string, Function>;
     [key: string]: any;
 }
 
 export default class SFormValidateFeature extends __SFeature {
     private _$field;
     private _$form;
+
+    private _$nodes;
+    private _nodeByValidator = {};
 
     private _validator;
 
@@ -173,6 +214,11 @@ export default class SFormValidateFeature extends __SFeature {
                 settings ?? {},
             ),
         );
+
+        // some default "handlers"
+        if (!this.props.handlers.password) {
+            this.props.handlers.password = this._passwordDefaultHandler;
+        }
 
         // init a new SValidator instance
         this._validator = new __SValidator();
@@ -243,6 +289,22 @@ export default class SFormValidateFeature extends __SFeature {
             this,
         );
 
+        // search and init "nodes"
+        if (this.props.nodes) {
+            this._$nodes = this.node.querySelectorAll(this.props.nodes);
+            this._$nodes.forEach(($node) => {
+                for (let i = 0; i < $node.attributes.length; i++) {
+                    const attr = $node.attributes[i];
+                    if (attr.name in this.props) {
+                        this.props[__camelCase(attr.name)] = __autoCast(
+                            attr.value,
+                        );
+                        this._nodeByValidator[__camelCase(attr.name)] = $node;
+                    }
+                }
+            });
+        }
+
         this.node.classList.add('s-form-validate');
     }
 
@@ -264,6 +326,18 @@ export default class SFormValidateFeature extends __SFeature {
             if (this.props.type === 'text') this._validationType = 'string';
             else this._validationType = this.props.type;
         }
+    }
+
+    _passwordDefaultHandler({ result, $feature }) {
+        console.log('result', result);
+
+        result.metas.levels.forEach((level) => {
+            if (result.metas.validLevels.includes(level)) {
+                $feature.classList.add(`level-${level}`);
+            } else {
+                $feature.classList.remove(`level-${level}`);
+            }
+        });
     }
 
     _initField($field) {
@@ -412,7 +486,26 @@ export default class SFormValidateFeature extends __SFeature {
     }
 
     _$error;
-    _applyResult(res, event) {
+    async _applyResult(res, event) {
+        for (let [validator, definition] of Object.entries(
+            __SValidator.getValidatorsDefinition(),
+        )) {
+            if (!this.props[validator]) {
+                continue;
+            }
+
+            if (this.props.handlers[validator]) {
+                await this.props.handlers[validator]({
+                    result: res.rules[validator],
+                    props: this.props,
+                    $feature: this.node,
+                    $form: this._$form,
+                    $field: this._$field,
+                    $node: this._nodeByValidator[validator],
+                });
+            }
+        }
+
         // @ts-ignore
         if (!res.valid) {
             // set the field as dirty
@@ -426,31 +519,62 @@ export default class SFormValidateFeature extends __SFeature {
 
             const firstInvalidValidator = Object.keys(res.rules)[0];
 
-            // grab the first error message from the validator or the attribute
-            const finalMessage =
-                this.props[`${firstInvalidValidator}Message`] ||
-                res.messages[0];
+            // handle either normal error message,
+            // or the "nodes" messages
+            if (!Object.keys(this._nodeByValidator).length) {
+                // grab the first error message from the validator or the attribute
+                const finalMessage =
+                    this.props[`${firstInvalidValidator}Message`] ||
+                    res.messages[0];
 
-            // display error if needed
-            if (this.props.displayError) {
-                this._$error =
-                    this.node.querySelector(
-                        `[${this.props.errorContainerAttr}]`,
-                    ) ?? this.node.nextElementSibling;
-                if (
-                    !this._$error ||
-                    !this._$error.hasAttribute('s-form-validate-error')
-                ) {
-                    this._$error = document.createElement('p');
-                    this._$error.setAttribute('s-form-validate-error', 'true');
-                    this._$error.classList.add('s-form-validate-error-message');
-                    // @ts-ignore
-                    this.node.parentNode.insertBefore(
-                        this._$error,
-                        this.node.nextSibling,
-                    );
+                // display error if needed
+                if (this.props.displayError) {
+                    this._$error =
+                        this.node.querySelector(
+                            `[${this.props.errorContainerAttr}]`,
+                        ) ?? this.node.nextElementSibling;
+                    if (
+                        !this._$error ||
+                        !this._$error.hasAttribute('s-form-validate-error')
+                    ) {
+                        this._$error = document.createElement('p');
+                        this._$error.setAttribute(
+                            's-form-validate-error',
+                            'true',
+                        );
+                        this._$error.classList.add(
+                            's-form-validate-error-message',
+                        );
+                        // @ts-ignore
+                        this.node.parentNode.insertBefore(
+                            this._$error,
+                            this.node.nextSibling,
+                        );
+                    }
+                    this._$error.innerHTML = finalMessage;
                 }
-                this._$error.innerHTML = finalMessage;
+            } else {
+                // handle the "nodes" errors
+                for (let [validator, validationObj] of Object.entries(
+                    res.rules,
+                )) {
+                    if (!this._nodeByValidator[validator]) continue;
+                    if (validationObj.valid) {
+                        this._nodeByValidator[validator].classList.remove(
+                            ...this.props.errorClass.split(' '),
+                        );
+                        this._nodeByValidator[validator].classList.add(
+                            ...this.props.validClass.split(' '),
+                        );
+                    } else {
+                        this._nodeByValidator[validator].classList.remove(
+                            ...this.props.validClass.split(' '),
+                        );
+                        this._nodeByValidator[validator].classList.add(
+                            ...this.props.errorClass.split(' '),
+                        );
+                    }
+                }
             }
 
             // dispatch en error event
@@ -472,6 +596,21 @@ export default class SFormValidateFeature extends __SFeature {
             // unwrap the field
             if (this._$error?.hasAttribute('s-form-validate-error')) {
                 this._$error?.remove();
+            }
+
+            // handle the "nodes" errors
+            if (Object.keys(this._nodeByValidator).length) {
+                for (let [validator, validationObj] of Object.entries(
+                    res.rules,
+                )) {
+                    if (!this._nodeByValidator[validator]) continue;
+                    this._nodeByValidator[validator].classList.remove(
+                        ...this.props.errorClass.split(' '),
+                    );
+                    this._nodeByValidator[validator].classList.add(
+                        ...this.props.validClass.split(' '),
+                    );
+                }
             }
 
             // dispatch en error event

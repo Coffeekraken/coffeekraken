@@ -72,6 +72,11 @@ export default function ({
         vars.push(`
           width: 100%;
           font-size: sugar.font.size(30);
+          display: flex;
+
+          > span {
+            order: -1;
+          }
 
           > * {
             cursor: pointer;
@@ -82,21 +87,22 @@ export default function ({
             case 'float':
                 vars.push(`
                   display: block;
-                  line-height: 1;
                   position: relative;
 
-                  & > *:first-child {
+                  & > span {
                     margin-inline-start: 0;
                   }
 
-                  --delta: 0em;
-                  --top: sugar.theme(ui.form.paddingBlock);
-                  --left: sugar.padding(ui.form.paddingInline);
+                  & input:not([type="checkbox"]):not([type="radio"]),
+                  & textarea {
+                    padding-block: calc(sugar.padding(ui.form.paddingBlock) * 1.5);
+                  }
 
-                  & > *:not(input):not(textarea):not(select) {
-                    top: calc(var(--top) + 0.6em + var(--delta));
-                    left: 0;
-                    padding-inline: sugar.padding(ui.form.paddingInline);
+                  & > span {
+                    top: 0;
+                    line-height: initial;
+                    left: sugar.padding(ui.form.paddingInline);
+                    padding-block: calc(sugar.padding(ui.form.paddingBlock) * 1.5);
                     position: absolute;
                     z-index: 1;
                     transform: scale(1);
@@ -106,17 +112,29 @@ export default function ({
 
                   &:focus,
                   &:focus-within {
-                    & > *:not(input):not(textarea):not(select) {
-                      top: calc(var(--top) + 0.2em);
-                      left: 0.2em;
+                    & > span {
+                      top: 0;
+                      left: sugar.padding(ui.form.paddingInline);
                       transform: scale(0.6);
                       opacity: 0.8;
                     }
+                    & input:not([type="checkbox"]):not([type="radio"]),
+                    & textarea {
+                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 1.3);
+                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 0.7);
+                    }
                   }
-                  & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + *,
-                  & > textarea:not(:placeholder-shown) + * {
-                    top: calc(var(--top) + 0.2em);
-                    left: 0.2em;
+                  
+                  & input:not(:placeholder-shown),
+                  & textarea:not(:placeholder-shown) {
+                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 1.3) !important;
+                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 0.7) !important;
+                  }
+                  
+                  & input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + span,
+                  & textarea:not(:placeholder-shown) + span {
+                    top: 0;
+                    left: sugar.padding(ui.form.paddingInline);
                     transform: scale(0.6);
                     opacity: 0.8;
                   }
@@ -125,48 +143,29 @@ export default function ({
                   &[dir="rtl"] {
                     & > *:not(input):not(textarea):not(select) {
                       left: auto;
-                      right: 0;
+                      right: sugar.padding(ui.form.paddingInline);
                       transform-origin: 100% 0;
                     }
                     &:focus,
                     &:focus-within {
                       & > *:not(input):not(textarea):not(select) {
                         left: auto;
-                        right: 0.2em;
+                        right: sugar.padding(ui.form.paddingInline);
                         opacity: 0.8;
                       }
                     }
-                    & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + *,
-                    & > textarea:not(:placeholder-shown) + * {
+                    & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + span,
+                    & > textarea:not(:placeholder-shown) + span {
                       left: auto;
-                      right: 0.2em;
+                      right: sugar.padding(ui.form.paddingInline);
                       opacity: 0.8;
                     }
                   }
 
-                  & > input:not([type="checkbox"]):not([type="radio"]),
-                  & > textarea,
-                  & > select {
+                  & input:not([type="checkbox"]):not([type="radio"]),
+                  & textarea {
                     width: 100%;
                     margin: 0;
-                    padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) + 0.35em + var(--delta));
-                    padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) + 0.35em + var(--delta));
-                    
-                  }
-
-                  &:focus,
-                  &:focus-within {
-                    & > input:not([type="checkbox"]):not([type="radio"]),
-                    & > textarea,
-                    & > select {
-                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
-                      padding-block-end: sugar.padding(ui.form.paddingBlock, true);
-                    }
-                  }
-                  & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]),
-                  & > textarea:not(:placeholder-shown) {
-                    padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
-                    padding-block-end: sugar.padding(ui.form.paddingBlock, true);
                   }
 
                   & > .disabled + *,
@@ -182,11 +181,10 @@ export default function ({
                   justify-content: space-between;
                   gap: sugar.margin(20);
                   flex-direction: column;
-
-                  & > *:first-child {
-                    order: 2;
-                  }
-                  & > *:first-child:not([type="checkbox"]):not([type="radio"]) {
+                  
+                  & input:not([type="checkbox"]):not([type="radio"]),
+                  & select,
+                  & textarea {
                     width: 100%;
                   }
                 `);
@@ -198,7 +196,7 @@ export default function ({
                   justify-content: space-between;
                   gap: sugar.margin(20);
 
-                  > *:first-child {
+                  > span {
                     padding-block-start: sugar.padding(sugar.theme(ui.form.paddingBlock));
                   }
 
@@ -218,7 +216,7 @@ export default function ({
                   }
 
                   & > *:not(input):not(textarea):not(select) {
-                    color: sugar.color(current);
+                    color: sugar.color(current, text);
                   }
 
                   & > input:not([type="checkbox"]):not([type="radio"]),

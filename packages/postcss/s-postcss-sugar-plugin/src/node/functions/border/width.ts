@@ -32,6 +32,10 @@ class postcssSugarPluginBorderWidthFunctionInterface extends __SInterface {
                 default: 'default',
                 required: true,
             },
+            scalable: {
+                type: 'Boolean',
+                default: false,
+            },
         };
     }
 }
@@ -39,15 +43,19 @@ export { postcssSugarPluginBorderWidthFunctionInterface as interface };
 
 export interface IPostcssSugarPluginBorderWidthFunctionParams {
     width: string;
+    scalable: boolean;
 }
 
 export default function ({
     params,
+    themeValueProxy,
 }: {
     params: Partial<IPostcssSugarPluginBorderWidthFunctionParams>;
+    themeValueProxy: Function;
 }) {
     const finalParams: IPostcssSugarPluginBorderWidthFunctionParams = {
         width: '',
+        scalable: false,
         ...params,
     };
 
@@ -56,11 +64,23 @@ export default function ({
     if (__STheme.get('border.width')[width] === undefined) return width;
 
     const widthes = width.split(' ').map((s) => {
-        const width = __STheme.get(`border.width.${s}`);
-        if (!width) return width;
-        return `var(${`--s-theme-border-width-${s}`}) ${
-            finalParams.width !== 'default' ? '!important' : ''
-        }`;
+        s = themeValueProxy(s);
+
+        const val = __STheme.getSafe(`border.width.${s}`);
+        if (val !== undefined) {
+            s = val;
+        }
+
+        // default return simply his value
+        if (`${s}`.match(/[a-zA-Z]+$/)) {
+            // @ts-ignore
+            if (finalParams.scalable) {
+                return `sugar.scalable(${s})`;
+            }
+            return `${s}`;
+        } else {
+            return `calc(sugar.theme(border.width.default, ${finalParams.scalable}) * ${s})`;
+        }
     });
 
     return widthes.join(' ');

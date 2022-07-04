@@ -80,9 +80,10 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         
-        font-size: sugar.scalable(0.8rem);
+        font-size: sugar.scalable(1rem);
+        margin-block: 0.7em 0.9em;
 
-        --thumb-size: 1em;
+        --thumb-size: 1.4em;
         --thumb-color-active: sugar.color(main, surface);
         --thumb-color-inactive: sugar.color(current);
         --thumb-color-highlight: sugar.color(current, --alpha 0.2);
@@ -104,7 +105,7 @@ export default function ({
         padding: var(--track-padding);
         inline-size: var(--track-size);
         block-size: var(--thumb-size);
-        
+
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
         appearance: none !important;

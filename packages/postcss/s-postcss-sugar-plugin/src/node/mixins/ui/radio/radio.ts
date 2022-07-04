@@ -87,9 +87,10 @@ export default function ({
                 -moz-appearance: none !important;
                 -webkit-appearance: none !important;
                 position: relative;
-                width: 1em;
-                height: 1em;
+                width: 1.4em;
+                height: 1.4em;
                 font-size: sugar.scalable(1rem);
+                margin-block: 0.7em 0.9em;
 
                 &:disabled {
                     @sugar.disabled;

@@ -62,13 +62,13 @@ export default function ({
 
     const margin = finalParams.margin;
     let margins = `${margin}`.split(' ').map((s) => {
-        let factor = '';
+        let val;
 
         // theme value
         s = themeValueProxy(s);
 
         // try to get the margin with the pased
-        const val = __STheme.getSafe(`margin.${finalParams.margin}`);
+        val = __STheme.getSafe(`margin.${s}`);
         if (val !== undefined) {
             s = val;
         }
@@ -76,12 +76,13 @@ export default function ({
         // default return simply his value
         if (`${s}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
-            factor = '1';
+            if (finalParams.scalable) {
+                return `sugar.scalable(${s})`;
+            }
+            return `${s}`;
         } else {
-            factor = s;
+            return `calc(sugar.theme(margin.default, ${finalParams.scalable}) * ${s})`;
         }
-
-        return `calc(sugar.theme(margin.default, ${finalParams.scalable}) * ${factor})`;
     });
 
     return margins.join(' ');

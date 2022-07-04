@@ -96,47 +96,47 @@ export default function ({
         * 
         * @example    html          Group
         * <label class="s-label:responsive s-mbe:30">
-        *      ${__faker.name.findName()}
+        *      <span>${__faker.name.findName()}</span>
         *      <div class="s-input-container:group s-width:50">
         *           <input type="text" placeholder="Keywords..." class="s-input" />
         *           <button class="s-btn s-color:accent">Search!</button>
         *      </div>
-        * <label>
+        * </label>
         * 
         * @example    html          Group (rtl)
         * <label dir="rtl" class="s-label:responsive s-mbe:30">
-        *      ${__faker.name.findName()}
+        *      <span>${__faker.name.findName()}</span>
         *      <div class="s-input-container:group s-width:50">
         *           <input type="text" placeholder="Keywords..." class="s-input" />
         *           <button class="s-btn s-color:accent">Search!</button>
         *      </div>
-        * <label>
+        * </label>
         * 
         * @example    html          Addon
         * <label class="s-label:responsive s-mbe:30">
-        *      ${__faker.name.findName()}
+        *      <span>${__faker.name.findName()}</span>
         *      <div class="s-input-container:addon s-width:50">
         *           <input type="text" placeholder="Keywords..." class="s-input" />
         *           <div>
         *              <i class="s-icon:ui-copy"></i>
         *           </div>
         *      </div>
-        * <label>
+        * </label>
         * 
         * @example    html          Addon (rtl)
         * <label dir="rtl" class="s-label:responsive s-mbe:30">
-        *      ${__faker.name.findName()}
+        *      <span>${__faker.name.findName()}</span>
         *      <div class="s-input-container:addon s-width:50">
         *           <input type="text" placeholder="Keywords..." class="s-input" />
         *           <div>
         *               <i class="s-icon:ui-copy"></i>
         *           </div>
         *      </div>
-        * <label>
+        * </label>
         * 
         * @example    html          Addon + group
         * <label class="s-label:responsive s-mbe:30">
-        *    ${__faker.name.findName()}
+        *    <span>${__faker.name.findName()}</span>
         *    <div class="s-input-container:group s-width:50">
         *       <div class="s-input-container:addon">
         *          <input type="text" placeholder="Keywords..." class="s-input" />
@@ -146,11 +146,11 @@ export default function ({
         *       </div>
         *       <button class="s-btn s-color:complementary">Search!</button>
         *    </div>
-        * <label>
+        * </label>
         * 
         * @example    html          Addon + group (rtl)
         * <label dir="rtl" class="s-label:responsive s-mbe:30">
-        *    ${__faker.name.findName()}
+        *    <span>${__faker.name.findName()}</span>
         *    <div class="s-input-container:group s-width:50">
         *       <div class="s-input-container:addon">
         *          <input type="text" placeholder="Keywords..." class="s-input" />
@@ -160,7 +160,7 @@ export default function ({
         *       </div>
         *       <button class="s-btn s-color:complementary">Search!</button>
         *    </div>
-        * <label>
+        * </label>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

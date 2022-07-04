@@ -133,16 +133,16 @@ import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInt
  * <label class="s-label" s-form-validate min="2" max="2">
  *      <span>Choose at least 2 items</span>
  *      <div class="">
- *         <label class="s-label s-mbe:20">
- *            Item 1
+ *         <label class="s-label">
+ *            <span>Item 1</span>
  *            <input type="checkbox" class="s-checkbox" value="value 1" />
  *         </label>
- *         <label class="s-label s-mbe:20">
- *            Item 1
+ *         <label class="s-label">
+ *            <span>Item 1</span>
  *            <input type="checkbox" class="s-checkbox" value="value 2" />
  *         </label>
- *         <label class="s-label s-mbe:20">
- *            Item 1
+ *         <label class="s-label">
+ *            <span>Item 1</span>
  *            <input type="checkbox" class="s-checkbox" value="value 3" />
  *         </label>
  *      </div>

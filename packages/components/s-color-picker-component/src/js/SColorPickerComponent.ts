@@ -75,31 +75,31 @@ export interface ISColorPickerComponentProps {
  *
  * @example         html            Simple input
  * <label class="s-label:responsive">
- *      Choose a color
+ *      <span>Choose a color</span>
  *      <s-color-picker value="#FABB03" placeholder="Choose a color" input></s-color-picker>
  * </label>
  *
  * @example         html            With an input and a button
  * <label class="s-label:responsive">
- *      Choose a color
+ *      <span>Choose a color</span>
  *      <s-color-picker value="#5101FF" placeholder="Choose a color" input button></s-color-picker>
  * </label>
  *
  * @example         html            With a different format (hsla)
  * <label class="s-label:responsive">
- *      Choose a color
+ *      <span>Choose a color</span>
  *      <s-color-picker value="#5101FF" format="hsla" placeholder="Choose a color" input button></s-color-picker>
  * </label>
  *
  * @example         html            Just a button
  * <label class="s-label:responsive">
- *      Choose a color
+ *      <span>Choose a color</span>
  *      <s-color-picker value="#55FFFF" button></s-color-picker>
  * </label>
  *
  * @example         html            With a custom input
  * <label class="s-label:responsive">
- *      Choose a color
+ *      <span>Choose a color</span>
  *      <s-color-picker>
  *          <input type="text" class="s-input" placeholder="Choose a color" value="#FABB03" />
  *      </s-color-picker>
@@ -107,7 +107,7 @@ export interface ISColorPickerComponentProps {
  *
  * @example         html            With a custom button
  * <label class="s-label:responsive">
- *      Choose a color
+ *      <span>Choose a color</span>
  *      <s-color-picker>
  *          <button class="s-btn s-color:error">Choose a color</button>
  *      </s-color-picker>
@@ -115,7 +115,7 @@ export interface ISColorPickerComponentProps {
  *
  * @example         html            With a custom input and button
  * <label class="s-label:responsive">
- *      Choose a color
+ *      <span>Choose a color</span>
  *      <s-color-picker>
  *          <div class="s-group">
  *              <input type="text" class="s-input" placeholder="Choose a color" value="#FABB03" />
@@ -126,13 +126,13 @@ export interface ISColorPickerComponentProps {
  *
  * @example         html            Disabled
  * <label class="s-label:responsive">
- *      Choose a color
+ *      <span>Choose a color</span>
  *      <s-color-picker disabled input button></s-color-picker>
  * </label>
  *
  * @example         html            RTL Support
  * <label class="s-label:responsive" dir="rtl">
- *      Choose a color
+ *      <span>Choose a color</span>
  *      <s-color-picker value="#FABB03" placeholder="Choose a color" input button dir="rtl"></s-color-picker>
  * </label>
  *

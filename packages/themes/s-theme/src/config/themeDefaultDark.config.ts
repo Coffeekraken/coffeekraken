@@ -55,9 +55,9 @@ export default function (env, config) {
                 text: {
                     lighten: 30,
                 },
-                surface: {
-                    lighten: 5,
-                },
+                // surface: {
+                //     lighten: 5,
+                // },
             },
 
             main: {

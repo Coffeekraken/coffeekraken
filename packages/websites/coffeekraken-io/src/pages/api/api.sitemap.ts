@@ -1,7 +1,7 @@
 import __SDocmap from '@coffeekraken/s-docmap';
-import { ISSitemapBuilderResultItem } from '@coffeekraken/s-sitemap-builder';
-import __SPromise from '@coffeekraken/s-promise';
 import __SLog from '@coffeekraken/s-log';
+import __SPromise from '@coffeekraken/s-promise';
+import { ISSitemapBuilderResultItem } from '@coffeekraken/s-sitemap-builder';
 import __fileHash from '@coffeekraken/sugar/node/fs/fileHash';
 import __fs from 'fs';
 
@@ -14,6 +14,14 @@ export default function apiSitemap() {
         const items: ISSitemapBuilderResultItem[] = [];
 
         for (let [namespace, docmapObj] of Object.entries(docmapJson.map)) {
+            // do not take ".config" items
+            if (
+                namespace.match(/\.config\./) &&
+                !namespace.match(/\.doc\.config/)
+            ) {
+                continue;
+            }
+
             // @ts-ignore
             let hash = hashesByPath[docmapObj.path];
             if (!hash) {

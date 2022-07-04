@@ -85,6 +85,34 @@ export default function (env, config) {
                  */
                 lighten: 50,
             },
+            middleground: {
+                /**
+                 * @name          darken
+                 * @namespace     config.themeDarkBase.colorSchema.middleground
+                 * @type          Number
+                 * @default      40
+                 *
+                 * Specify the darken value for the "surface" color variant
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                darken: 40,
+            },
+            middlegroundForeground: {
+                /**
+                 * @name          lighten
+                 * @namespace     config.themeDarkBase.colorSchema.middlegroundForeground
+                 * @type          Number
+                 * @default      50
+                 *
+                 * Specify the lighten value for the "middlegroundForeground" color variant
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                lighten: 50,
+            },
             surface: {
                 /**
                  * @name          darken

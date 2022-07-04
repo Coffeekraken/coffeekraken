@@ -9,7 +9,7 @@
 
         {{-- <ck-blob></ck-blob>
         <div class="__loader s-until:sibling:mounted">
-            <i class="s-loader:spinner s-color:accent"></i>
+            <i class="s-loader:square-dots s-color:accent"></i>
         </div> --}}
 
     </div>

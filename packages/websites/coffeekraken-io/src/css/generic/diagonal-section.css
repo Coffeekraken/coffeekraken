@@ -3,7 +3,7 @@
     position: relative;
 
     @sugar.theme.when dark {
-        background: sugar.color(base, surface, --alpha 0.05);
+        background: sugar.color(base, surface, --alpha 0.3);
     }
 
     &:before {
@@ -19,7 +19,7 @@
     }
     @sugar.theme.when dark {
         &:before {
-            background: sugar.color(base, surface, --alpha 0.05);
+            background: sugar.color(base, surface, --alpha 0.3);
         }
     }
 
@@ -36,7 +36,7 @@
     }
     @sugar.theme.when dark {
         &:after {
-            background: sugar.color(base, surface, --alpha 0.05);
+            background: sugar.color(base, surface, --alpha 0.3);
         }
     }
 

@@ -5,14 +5,14 @@ export default function (env, config) {
              * @name              default
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           [theme.border.width.10]
+             * @default           1px
              *
              * Specify the "default" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            default: '[theme.border.width.10]',
+            default: '1px',
 
             /**
              * @name              0
@@ -25,137 +25,137 @@ export default function (env, config) {
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            0: '0px',
+            0: 0,
 
             /**
              * @name              10
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           1px
+             * @default           1
              *
              * Specify the "10" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            10: '1px',
+            10: 1,
 
             /**
              * @name              20
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           2px
+             * @default           2
              *
              * Specify the "20" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            20: '2px',
+            20: 2,
 
             /**
              * @name              30
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           4px
+             * @default           4
              *
              * Specify the "30" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            30: '4px',
+            30: 4,
 
             /**
              * @name              40
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           6px
+             * @default           6
              *
              * Specify the "40" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            40: '6px',
+            40: 6,
 
             /**
              * @name              50
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           8px
+             * @default           8
              *
              * Specify the "50" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            50: '8px',
+            50: 8,
 
             /**
              * @name              60
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           12px
+             * @default           12
              *
              * Specify the "60" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            60: '12px',
+            60: 12,
 
             /**
              * @name              70
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           16px
+             * @default           16
              *
              * Specify the "70" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            70: '16px',
+            70: 16,
 
             /**
              * @name              80
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           20px
+             * @default           20
              *
              * Specify the "80" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            80: '20px',
+            80: 20,
 
             /**
              * @name              90
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           24px
+             * @default           24
              *
              * Specify the "90" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            90: '24px',
+            90: 24,
 
             /**
              * @name              100
              * @namespace         config.themeBorder.width
              * @type              Number
-             * @default           30px
+             * @default           30
              *
              * Specify the "90" border width
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            100: '30px',
+            100: 30,
         },
 
         radius: {

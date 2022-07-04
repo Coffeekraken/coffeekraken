@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 
 /**
  * @name          classes
@@ -10,7 +11,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Generate the loader classes
  *
- * @param       {('spinner'|'round'|'drop')}                [loaders=['spinner','round','drop']]         The loader(s) you want to generate
+ * @param       {('spinner'|'round'|'drop'|'square-dots')}                [loaders=['spinner','round','drop','square-dots']]         The loader(s) you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -29,15 +30,15 @@ class postcssSugarPluginUiLoaderClassesClassesInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['spinner', 'round', 'drop'],
-                default: ['spinner', 'round', 'drop'],
+                values: ['spinner', 'round', 'drop', 'square-dots'],
+                default: ['spinner', 'round', 'drop', 'square-dots'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiLoaderClassesParams {
-    loaders: ('spinner' | 'round' | 'drop')[];
+    loaders: ('spinner' | 'round' | 'drop' | 'square-dots')[];
 }
 
 export { postcssSugarPluginUiLoaderClassesClassesInterface as interface };
@@ -54,7 +55,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLoaderClassesParams = {
-        loaders: ['spinner', 'round', 'drop'],
+        loaders: ['spinner', 'round', 'drop', 'square-dots'],
         ...params,
     };
 
@@ -135,7 +136,7 @@ export default function ({
         ).code(
             `
             .s-loader--${loaderName} {
-                @sugar.ui.loader.${loaderName}();
+                @sugar.ui.loader.${__camelCase(loaderName)}();
             }
             `,
             {

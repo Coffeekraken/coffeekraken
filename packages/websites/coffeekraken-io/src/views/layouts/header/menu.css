@@ -46,7 +46,6 @@
             top: 60px;
             left: 50%;
             height: calc(var(--max-height) + 96px);
-            width: 1240px;
             max-width: 100vw;
             transform: translateX(-50%);
             z-index: 10;
@@ -58,6 +57,7 @@
             overflow: hidden;
             border-radius: sugar.border.radius();
             @sugar.depth (10);
+            @sugar.container (default);
 
             @sugar.media (>=wide) {
                 @sugar.container (wide);

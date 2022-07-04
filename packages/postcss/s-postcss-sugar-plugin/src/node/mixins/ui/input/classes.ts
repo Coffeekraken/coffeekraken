@@ -129,15 +129,15 @@ export default function ({
             .map((style) => {
                 return ` * @example        html       ${style} style
             *   <label class="s-label:responsive s-mbe:30">
-            *       ${__faker.name.findName()}
+            *       <span>${__faker.name.findName()}</span>
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40" />
             *  </label>
             *   <label class="s-label:responsive s-mbe:30">
-            *        I'm disabled
+            *        <span>I'm disabled</span>
             *       <input type="text" disabled placeholder="Type something!" class="s-input\:${style} s-width:40" />
             *   </label>
             *   <label dir="rtl" class="s-label:responsive s-mbe:30">
-            *        Support RTL
+            *       <span>Support RTL</span>
             *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${style} s-width:40" />
             *   </label>
             * 
@@ -149,11 +149,11 @@ export default function ({
             .map((shape) => {
                 return ` * @example        html       ${shape} shape
             *   <label class="s-label:responsive s-mbe:30">
-            *       ${__faker.name.findName()}
+            *       <span>${__faker.name.findName()}</span>
             *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40" />
             *   </label>
             *   <label class="s-label:responsive s-mbe:30">
-            *        I'm disabled
+            *        <span>I'm disabled</span>
             *       <input type="text" disabled placeholder="Type something!" class="s-input\:${shape} s-width:40" />
             *   </label>
             * `;
@@ -165,7 +165,7 @@ export default function ({
             .map((color) => {
                 return ` 
             *   <label class="s-label:responsive s-mbe:30">
-            *       ${__faker.name.findName()}
+            *       <span>${__faker.name.findName()}</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-color:${color} s-width:40" />
             *   </label>
             * `;
@@ -177,7 +177,7 @@ export default function ({
             .map((scale) => {
                 return ` 
             *   <label class="s-label:responsive s-mbe:30">
-            *       ${__faker.name.findName()}
+            *       <span>${__faker.name.findName()}</span>
             *       <input type="text" placeholder="Type something!" class="s-input s-scale:${scale} s-width:40" />
             *   </label>
             * `;

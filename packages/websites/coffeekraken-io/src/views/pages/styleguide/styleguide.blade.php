@@ -23,7 +23,7 @@ if ($firstBlock->status == 'wip') {
 
                 <div class="sidemenu-sub">
                     <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
-                    <div class="s-loader:spinner s-color:accent s-until:sibling:active"></div>
+                    <div class="s-loader:square-dots s-color:accent s-until:sibling:active"></div>
                 </div>
 
                 <div class="sidemenu-main">

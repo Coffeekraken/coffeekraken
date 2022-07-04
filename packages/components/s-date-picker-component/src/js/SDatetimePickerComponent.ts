@@ -74,43 +74,43 @@ export interface ISDatetimePickerComponentProps {
  *
  * @example         html            Simple input
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *     <span>Choose a date</span>
  *      <s-datetime-picker calendar placeholder="Choose a date" input></s-datetime-picker>
  * </label>
  *
  * @example         html            With a calendar
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker calendar placeholder="Choose a date" input></s-datetime-picker>
  * </label>
  *
  * @example         html            With a backdrop
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker calendar backdrop placeholder="Choose a date" input></s-datetime-picker>
  * </label>
  *
  * @example         html            With an input and a button
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker placeholder="Choose a date" input button></s-datetime-picker>
  * </label>
  *
  * @example         html            With a different format and a calendar
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker calendar format="yyyy-mm-dd:HH:MM" placeholder="Choose a date" input button></s-datetime-picker>
  * </label>
  *
  * @example         html            Just a button with disabled weekend
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker calendar disable="weekend" button></s-datetime-picker>
  * </label>
  *
  * @example         html            With a custom input
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker>
  *          <input type="text" class="s-input" placeholder="Choose a date" />
  *      </s-datetime-picker>
@@ -118,7 +118,7 @@ export interface ISDatetimePickerComponentProps {
  *
  * @example         html            With a custom button
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker>
  *          <button class="s-btn s-color:error">Choose a date</button>
  *      </s-datetime-picker>
@@ -126,7 +126,7 @@ export interface ISDatetimePickerComponentProps {
  *
  * @example         html            With a custom input and button
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker>
  *          <div class="s-group">
  *              <input type="text" class="s-input" placeholder="Choose a date" />
@@ -137,13 +137,13 @@ export interface ISDatetimePickerComponentProps {
  *
  * @example         html            Disabled
  * <label class="s-label:responsive s-color:accent">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker disabled input button></s-datetime-picker>
  * </label>
  *
  * @example         html            RTL Support
  * <label class="s-label:responsive s-color:accent" dir="rtl">
- *      Choose a date
+ *      <span>Choose a date</span>
  *      <s-datetime-picker placeholder="Choose a date" input button dir="rtl"></s-datetime-picker>
  * </label>
  *

@@ -139,11 +139,11 @@ export default function ({
             .map((style) => {
                 return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <input type="radio" checked class="s-radio" name="radio-style-${style}" value="hello 1" checked />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     I'm disabled
+            *     <span>I'm disabled</span>
             *     <input type="radio" disabled class="s-radio" name="radio-style-${style}" value="hello 3" />
             *   </label>
             * `;
@@ -154,13 +154,13 @@ export default function ({
             .map((shape) => {
                 return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <input type="radio" checked class="s-radio${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             }" name="radio-shape-${shape}" value="hello 1" checked />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     I'm disabled
+            *     <span>I'm disabled</span>
             *     <input type="radio" disabled class="s-radio${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             }" name="radio-shape-${shape}" value="hello 1" />
@@ -171,45 +171,45 @@ export default function ({
         * 
         * @example        html          Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="radio" checked class="s-radio" name="radio-style-color" value="hello 1" checked />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-color" value="hello 2" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="radio" class="s-radio s-color:complementary" name="radio-style-color" value="hello 3" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     I'm disabled
+        *     <span>I'm disabled</span>
         *     <input type="radio" disabled class="s-radio s-color:error" name="radio-style-color" value="hello 4" />
         *   </label>
         * 
         * @example        html          RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-ltr" value="hello 1" checked />
         *   </label>
         * </div>
         * 
         * @example        html          Scales
         *   <label class="s-mbe:30 s-label s-scale:07">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-scale" value="hello 1" checked />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 2" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:16">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
         *   </label>
         * 

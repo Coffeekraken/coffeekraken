@@ -1628,26 +1628,26 @@ export default (env, config) => {
              * @name          paddingInline
              * @namespace     config.themeUi.dropdown
              * @type          String
-             * @default      [theme.ui.default.paddingInline]
+             * @default      30
              *
              * Specify the default padding inline for dropdown ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingBlock]',
+            paddingInline: 30,
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.dropdown
              * @type          String
-             * @default      [theme.ui.default.paddingBlock]
+             * @default      30
              *
              * Specify the default padding block for dropdown ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            paddingBlock: 30,
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.dropdown
@@ -2811,19 +2811,33 @@ export default (env, config) => {
              */
             easing: '[theme.ui.loader.easing]',
         },
+        loaderSquareDots: {
+            /**
+             * @name          duration
+             * @namespace     config.themeUi.loaderSquareDots
+             * @type          String
+             * @default      [theme.ui.loaderSquareDots.duration]
+             *
+             * Specify the duration of the loaderSquareDots
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            duration: '[theme.ui.loader.duration]',
+        },
         loaderRound: {
             /**
              * @name          duration
              * @namespace     config.themeUi.loaderRound
              * @type          String
-             * @default      [theme.ui.loader.duration]
+             * @default      2s
              *
              * Specify the duration of the round loader
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            duration: '[theme.ui.loader.duration]',
+            duration: '2s',
             /**
              * @name          duration
              * @namespace     config.themeUi.loaderRound

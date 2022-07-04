@@ -143,7 +143,7 @@ export default function ({
             *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-${style}-1" value="hello 1" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     I'm disabled
+            *     <span>I'm disabled</span>
             *     <input type="checkbox" disabled class="s-checkbox s-color:accent" name="checkbox-style-${style}-3" value="hello 3" />
             *   </label>
             * `;
@@ -152,15 +152,15 @@ export default function ({
         * 
         * @example      html       Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-color-2" value="hello 2" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-checkbox s-color:complementary" name="checkbox-style-color-3" value="hello 3" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     I'm disabled
+        *     <span>I'm disabled</span>
         *     <input type="checkbox" disabled class="s-checkbox s-color:error" name="checkbox-style-color-4" value="hello 4" />
         *   </label>
         * 
@@ -168,11 +168,11 @@ export default function ({
             .map((shape) => {
                 return ` * @example        html       ${shape}
             *   <label class="s-mbe:30 s-label">
-                *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <input type="checkbox" checked class="s-checkbox:${shape}" name="checkbox-shape-${shape}-1" value="hello 1" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     I'm disabled
+            *     <span>I'm disabled</span>
             *     <input type="checkbox" disabled class="s-checkbox:${shape}" name="checkbox-shape-${shape}-3" value="hello 3" />
             *   </label>
             * `;
@@ -182,26 +182,26 @@ export default function ({
         * @example          html        RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     I'm disabled
+        *     <span>I'm disabled</span>
         *     <input type="checkbox" disabled class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
         *   </label>
         * </div>
         * 
         * @example          html        Scales
         *   <label class="s-mbe:30 s-label s-scale:07">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-2" value="hello 2" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
         *   </label>
         * 

@@ -40,7 +40,7 @@
                                                 <i
                                                     class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent s-until:sibling:loading s-mie:10"></i>
                                                 <div
-                                                    class="s-loader:spinner s-color:accent s-mie:10 s-when:siblings:loading">
+                                                    class="s-loader:square-dots s-color:accent s-mie:10 s-when:siblings:loading">
                                                 </div>
                                             </li>
                                         @endif

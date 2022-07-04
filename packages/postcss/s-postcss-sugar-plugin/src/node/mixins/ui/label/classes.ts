@@ -113,31 +113,41 @@ export default function ({
             *   <label class="s-mbe:30 s-label${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }">
-            *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
+            *     <input type="text" class="s-input ${
+                style !== 'block' ? 's-width:40' : ''
+            }" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
             *   <label class="s-mbe:30 s-label${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }">
-            *     <textarea class="s-input s-width:40" placeholder="Type something!" rows="3"></textarea>
+            *     <textarea class="s-input ${
+                style !== 'block' ? 's-width:40' : ''
+            }" placeholder="Type something!" rows="3"></textarea>
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
         *   <label class="s-mbe:30 s-label${
             style === finalParams.defaultStyle ? '' : `:${style}`
         }">
-    *     <input type="text" disabled class="s-input s-width:40" placeholder="Type something!" />
-    *     <span>I'm disabled</span>
+        *     <input type="text" disabled class="s-input ${
+            style !== 'block' ? 's-width:40' : ''
+        }" placeholder="Type something!" />
+        *     <span>I'm disabled</span>
     *   </label>
     *   <label dir="rtl" class="s-mbe:30 s-label${
         style === finalParams.defaultStyle ? '' : `:${style}`
     }">
-    *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
+    *     <input type="text" class="s-input ${
+        style !== 'block' ? 's-width:40' : ''
+    }" placeholder="Type something!" />
     *     <span>Support RTL</span>
     *   </label>
     *   <label class="s-mbe:30 s-label${
         style === finalParams.defaultStyle ? '' : `:${style}`
     } s-color:accent">
-    *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
+    *     <input type="text" class="s-input ${
+        style !== 'block' ? 's-width:40' : ''
+    }" placeholder="Type something!" />
     *     <span>With the accent color</span>
     *   </label>
             * `;
@@ -166,7 +176,7 @@ export default function ({
                 * 
                 * @example        html
                 * <label class="${cls.replace(':', ':')}">
-                *   Hello world
+                *   <span>Hello world</span>
                 *   <input type="text" class="s-input" placeholder="Type something!" />
                 * </label>
                 * 
@@ -215,7 +225,7 @@ export default function ({
         * 
         * @example        html
         * <label class="s-label:responsive">
-        *   Hello world
+        *   <span>Hello world</span>
         *   <input type="text" class="s-input" placeholder="Hello world" />
         * </label>
         * 

@@ -62,13 +62,13 @@ export default function ({
 
     const padding = finalParams.padding;
     let paddings = `${padding}`.split(' ').map((s) => {
-        let factor = '';
+        let val;
 
         // theme value
         s = themeValueProxy(s);
 
         // try to get the padding with the passed
-        const val = __STheme.getSafe(`padding.${finalParams.padding}`);
+        val = __STheme.getSafe(`padding.${s}`);
         if (val !== undefined) {
             s = val;
         }
@@ -76,12 +76,13 @@ export default function ({
         // default return simply his value
         if (`${s}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
-            factor = '1';
+            if (finalParams.scalable) {
+                return `sugar.scalable(${s})`;
+            }
+            return `${s}`;
         } else {
-            factor = s;
+            return `calc(sugar.theme(padding.default, ${finalParams.scalable}) * ${s})`;
         }
-
-        return `calc(sugar.theme(padding.default, ${finalParams.scalable}) * ${factor})`;
     });
 
     return paddings.join(' ');

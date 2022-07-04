@@ -76,7 +76,8 @@
 
     .__spinner {
         @sugar.color (accent);
-        @sugar.ui.loader.spinner();
+        @sugar.ui.loader.squareDots();
+        --s-scale: 2;
     }
 
     p {

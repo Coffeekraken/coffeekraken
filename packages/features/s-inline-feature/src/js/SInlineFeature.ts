@@ -11,7 +11,7 @@ export interface IInlineFeatureProps {}
 
 /**
  * @name            SInlineFeature
- * @as              Inline features
+ * @as              Inline feature
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SInlineFeatureInterface.ts

@@ -139,13 +139,13 @@ export default function ({
             .map((style) => {
                 return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <input type="checkbox" class="s-switch${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }" />
             *   </label>
                 <label class="s-mbe:30 s-label">
-            *     I'm disabled
+            *     <span>I'm disabled</span>
             *     <input type="checkbox" disabled class="s-switch${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }" />
@@ -158,13 +158,13 @@ export default function ({
             .map((shape) => {
                 return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <input type="checkbox" class="s-switch${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             }" />
             *   </label>
                 <label class="s-mbe:30 s-label">
-            *     I'm disabled
+            *     <span>I'm disabled</span>
             *     <input type="checkbox" disabled class="s-switch${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             }" />
@@ -176,7 +176,7 @@ export default function ({
         * @example      html            RTL Support
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         * </div>
@@ -186,7 +186,7 @@ export default function ({
             .map(
                 (color) => `
         *   <label class="s-mbe:30 s-label s-color:${color}">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         `,
@@ -195,19 +195,19 @@ export default function ({
         * 
         * @example      html            Scales
         *   <label class="s-mbe:30 s-label s-scale\:05">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:10">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:15">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:20">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *     <input type="checkbox" class="s-switch" />
         *   </label>
         * 
@@ -230,8 +230,8 @@ export default function ({
             * 
             * @example        html
             * <label class="s-label">
+            *   <span>${__faker.name.findName()}</span>
             *   <input type="checkbox" class="s-switch" />
-            *   ${__faker.name.findName()}
             * </label>
             * 
             * @since    2.0.0
@@ -267,10 +267,10 @@ export default function ({
                 * 
                 * @example        html
                 * <label class="s-label">
+                *   <span>${__faker.name.findName()}</span>
                 *   <input type="checkbox" class="${cls
                     .replace(/\./gm, ' ')
                     .trim()}" />
-                *   ${__faker.name.findName()}
                 * </label>
                 * 
                 * @since    2.0.0
@@ -305,8 +305,8 @@ export default function ({
         * 
         * @example        html
         * <label class="s-label">
+        *   <span>${__faker.name.findName()}</span>
         *   <input type="checkbox" class="${cls.replace(/\./gm, ' ').trim()}" />
-        *   ${__faker.name.findName()}
         * </label>
         * 
         * @since    2.0.0

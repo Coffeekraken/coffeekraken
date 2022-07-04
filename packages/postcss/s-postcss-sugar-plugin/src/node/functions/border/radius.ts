@@ -49,8 +49,10 @@ export interface IPostcssSugarPluginBorderRadiusFunctionParams {
 
 export default function ({
     params,
+    themeValueProxy,
 }: {
     params: Partial<IPostcssSugarPluginBorderRadiusFunctionParams>;
+    themeValueProxy: Function;
 }) {
     const finalParams: IPostcssSugarPluginBorderRadiusFunctionParams = {
         radius: '',
@@ -59,36 +61,28 @@ export default function ({
     };
 
     let radiuses = finalParams.radius.split(' ').map((s) => {
-        let registeredValue,
-            factor = '';
+        let val;
+
+        // theme value
+        s = themeValueProxy(s);
 
         // try to get the padding with the pased
-        try {
-            registeredValue = __STheme.get(`border.radius.${s}`);
-        } catch (e) {}
+        val = __STheme.getSafe(`border.radius.${s}`);
+
+        if (val !== undefined) {
+            s = val;
+        }
 
         // default return simply his value
-        if (s === 'default') {
+        if (`${s}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
-            factor = '1';
-        } else if (registeredValue !== undefined) {
-            factor = `sugar.theme(border.radius.${s}, ${finalParams.scalable})`;
-        } else if (
-            isNaN(parseFloat(s)) &&
-            s.match(/[a-zA-Z0-9]+\.[a-zA-Z0-9]+/)
-        ) {
-            // support dotPath
-            factor = `sugar.theme(${s}, ${finalParams.scalable})`;
-        } else if (!isNaN(parseFloat(s))) {
-            // support simple number
-            factor = `${s}`;
+            if (finalParams.scalable) {
+                return `sugar.scalable(${s})`;
+            }
+            return `${s}`;
         } else {
-            throw new Error(
-                `<yellow>[s-postcss-sugar-plugin]</yellow> Padding "<cyan>${s}</cyan>" is not a valid value`,
-            );
+            return `calc(sugar.theme(border.radius.default, ${finalParams.scalable}) * ${s})`;
         }
-        // generate css value
-        return `calc(sugar.theme(border.radius.default) * ${factor})`;
     });
 
     return radiuses.join(' ');

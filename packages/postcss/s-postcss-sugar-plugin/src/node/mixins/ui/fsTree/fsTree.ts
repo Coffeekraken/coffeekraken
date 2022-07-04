@@ -193,11 +193,16 @@ export default function ({
 
             @sugar.direction.rtl {
                 ul, ol {
-                    li {
+                    li > div {
                         &:before {
                             top: 0;
                             right: calc(0.15em * var(--s-fs-tree-inline-space-ratio, 1));
                             left: auto;
+                        }
+                        &:after {
+                            bottom: 0;
+                            left: auto;
+                            right: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
                         }
                     }
                 }

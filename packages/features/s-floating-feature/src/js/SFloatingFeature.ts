@@ -25,10 +25,14 @@ import __css from '../../../../src/css/s-floating-feature.css'; // relative to /
  * @support          edge
  *
  * @example         html            Email field
- * <label class="s-label" s-form-validate email>
- *    <input type="text" class="s-input s-width:60" placeholder="olivier.bossel@coffeekraken.io" />
- *    Email address
- * </label>
+ * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30">
+ *   Floating element preview. Try to scroll...
+ *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-floating>
+ *      I'm the floating element
+ *  </div>
+ * </div>
+ * <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+ * <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -1,4 +1,4 @@
-<section id="features-webcomponents" class="s-pb:100">
+<section id="features-webcomponents" class="s-pb:100" s-appear in="bottom">
 
     <div class="s-container">
 

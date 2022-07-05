@@ -79,7 +79,7 @@ export default function ({
                 const id = `s-transition-${__uniqid()}`;
                 return `
                 * @example          html        ${transition}
-                *   <div class="s-bg:main s-radius:30" id="${id}">
+                *   <div class="s-bg:main-surface s-radius:30" id="${id}">
                 *      <div class="s-transition${
                     transition === 'default' ? '' : `:${transition}`
                 } s-ratio:1 s-bg:accent s-radius:30"></div>

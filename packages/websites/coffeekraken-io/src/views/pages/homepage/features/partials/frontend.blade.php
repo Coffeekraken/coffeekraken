@@ -1,4 +1,4 @@
-<section id="features-frontend" class="s-pb:100 @mobile s-pi:30">
+<section id="features-frontend" class="s-pb:100 @mobile s-pi:30" s-appear in="bottom">
     <div class="s-container">
 
         <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Frontend<br><span class="s-tc:accent">Sugar</span></h3>
@@ -217,8 +217,8 @@
                      *
                      * |------|------|------|
                      * | 1    | 2    | 4    |
-                     * |------|      |------|
-                     * | 3    |      | 4    |
+                     * |------|      |      |
+                     * | 3    |      |      |
                      * |------|------|------|
                      *
                      */

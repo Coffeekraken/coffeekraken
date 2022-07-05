@@ -1402,6 +1402,7 @@ __metadata:
   dependencies:
     "@coffeekraken/cli": ^2.0.0
     "@coffeekraken/s-activate-feature": ^2.0.0
+    "@coffeekraken/s-appear-feature": ^2.0.0
     "@coffeekraken/s-bench": ^2.0.0
     "@coffeekraken/s-builder": ^2.0.0
     "@coffeekraken/s-class": ^2.0.0
@@ -2349,6 +2350,18 @@ __metadata:
     "@coffeekraken/s-feature": ^2.0.0
     "@coffeekraken/s-interface": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-appear-feature@^2.0.0, @coffeekraken/s-appear-feature@workspace:packages/features/s-appear-feature":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-appear-feature@workspace:packages/features/s-appear-feature"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0
+    "@coffeekraken/s-feature": ^2.0.0
+    "@coffeekraken/s-interface": ^2.0.0
+    "@coffeekraken/sugar": ^2.0.0
+    "@floating-ui/dom": ^0.5.4
   languageName: unknown
   linkType: soft
 
@@ -8133,12 +8146,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cjs-300f1b@workspace:packages/websites/coffeekraken-io/static/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "cjs-300f1b@workspace:packages/websites/coffeekraken-io/static/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
 "cjs-64a27f@workspace:packages/components/s-date-picker-component/dist/pkg/cjs":
   version: 0.0.0-use.local
   resolution: "cjs-64a27f@workspace:packages/components/s-date-picker-component/dist/pkg/cjs"
@@ -11181,15 +11188,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esm-9eb2f1@workspace:packages/websites/coffeekraken-io/static/dist/pkg/esm":
+"esm-4c84b6@workspace:packages/features/s-inline-feature/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "esm-9eb2f1@workspace:packages/websites/coffeekraken-io/static/dist/pkg/esm"
+  resolution: "esm-4c84b6@workspace:packages/features/s-inline-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
 "esm-a79906@workspace:packages/components/s-date-picker-component/dist/pkg/esm":
   version: 0.0.0-use.local
   resolution: "esm-a79906@workspace:packages/components/s-date-picker-component/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"esm-b026f9@workspace:packages/features/s-appear-feature/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "esm-b026f9@workspace:packages/features/s-appear-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
@@ -11475,12 +11488,6 @@ __metadata:
   checksum: b2c66beb52de53ef1872165aace40224e722bca3c2274c54cfa74b6d617d55cf0ccdbf36783ccd64dbea501b280098ed33fd0b207d4f15bc03cd3c7a24364a6a
   languageName: node
   linkType: hard
-
-"explorer-a5d2c5@workspace:packages/websites/coffeekraken-io/static/config/explorer":
-  version: 0.0.0-use.local
-  resolution: "explorer-a5d2c5@workspace:packages/websites/coffeekraken-io/static/config/explorer"
-  languageName: unknown
-  linkType: soft
 
 "express-session@npm:1.17.0":
   version: 1.17.0

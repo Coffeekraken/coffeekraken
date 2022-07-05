@@ -1,4 +1,4 @@
-<section id="features-frontend" class="diagonal-section s-pb:100 @mobile s-pi:30">
+<section id="features-frontend" class="diagonal-section s-pb:100 @mobile s-pi:30" s-appear in="bottom">
     <div class="s-container">
 
         <div class="section-top-background"></div>

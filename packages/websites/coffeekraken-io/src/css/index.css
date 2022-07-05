@@ -47,57 +47,18 @@ body {
 }
 
 [s-form-validate][password] {
-    /* width: 33.3%;
-    height: 3px;
-    border-top-left-radius: sugar.border.radius();
-    border-bottom-left-radius: sugar.border.radius();
-    position: relative; */
-
     .__levels * {
         display: none;
         margin-inline-end: sugar.margin(20);
     }
 
-    &.level-weak:not(.level-medium, .level-strong) .__levels .__weak {
+    &.password-weak .__levels .__weak {
         display: inline-block;
     }
-    &.level-medium:not(.level-strong) .__levels .__medium {
+    &.password-medium .__levels .__medium {
         display: inline-block;
     }
-    &.level-strong .__levels .__strong {
-        display: inline-block !important;
+    &.password-strong .__levels .__strong {
+        display: inline-block;
     }
-
-    /* .level-weak:not(.level-medium, .level-strong) & {
-        background: sugar.color(error, --alpha 1);
-
-        &:before {
-            background: sugar.color(warning, --alpha 0.3);
-        }
-        &:after {
-            background: sugar.color(success, --alpha 0.3);
-        }
-    }
-
-    .level-medium:not(.level-strong) & {
-        background: sugar.color(error, --alpha 0.3);
-
-        &:before {
-            background: sugar.color(warning, --alpha 1);
-        }
-        &:after {
-            background: sugar.color(success, --alpha 0.3);
-        }
-    }
-
-    .level-strong & {
-        background: sugar.color(error, --alpha 0.3);
-
-        &:before {
-            background: sugar.color(warning, --alpha 0.3);
-        }
-        &:after {
-            background: sugar.color(success, --alpha 1);
-        }
-    } */
 }

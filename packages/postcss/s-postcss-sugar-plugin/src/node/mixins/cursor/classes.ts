@@ -110,10 +110,10 @@ export default function ({
             .join('\n')}
         * 
         * @example         html
-        * <div class="s-grid:5">
+        * <div class="s-grid:5 s-gap:30 @tablet s-grid:3 @mobile s-grid:1">
         ${cursors
             .map((cursor) => {
-                return ` *   <div class="s-cursor:${cursor} s-p:30 s-text:center s-ratio:16-9" style="padding-block-start: 30%">
+                return ` *   <div class="s-cursor:${cursor} s-bg:main-surface s-p:30 s-text:center s-ratio:16-9" style="padding-block-start: 30%">
                 <p class="s-typo:p:bold">${cursor}</p>
         *   </div>
             * `;

@@ -1,4 +1,4 @@
-<section id="features-development" class="diagonal-section s-pbe:100 @mobile s-pi:30">
+<section id="features-development" class="diagonal-section s-pbe:100 @mobile s-pi:30" s-appear in="bottom">
     <div class="s-container">
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div>

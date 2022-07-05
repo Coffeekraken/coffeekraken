@@ -68,7 +68,7 @@ export default function ({
         * @feature     Ensure hidden things are not displayed
         * @feature     Set the \`box-sizing\` to \`border-box\` for all HTMLElement
         * @feature     Set the webkit highlight color to transparent color
-        * @feature     Remote outline on every elements
+        * @feature     Remove outline on every elements
         * @feature     Set the \`max-width\` to \`100%\` for images     
         * 
         * @support      chromium

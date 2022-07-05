@@ -133,6 +133,7 @@ export default function ({
             })
             .join('\n')}
         * @cssClass       s-tabs:grow        Make the tabs items grow and take the available space
+        * @cssClass       s-tabs:fill       Add a background to the tabs
         * @cssClass       s-tabs:vertical    Display the tabs horizontally
         * 
         ${finalParams.styles
@@ -169,6 +170,13 @@ export default function ({
         * 
         * @example        html       Grow
         *   <ul class="s-tabs:grow">
+        *     <li tabindex="0" active>${__faker.name.findName()}</li>
+        *     <li tabindex="0">${__faker.name.findName()}</li>
+        *     <li tabindex="0">${__faker.name.findName()}</li>
+        *   </ul>
+        * 
+        * @example        html       Fill
+        *   <ul class="s-tabs:fill">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -317,6 +325,30 @@ export default function ({
         `
     .s-tabs--grow {
       @sugar.ui.tabs($grow: true, $scope: grow);
+    }
+  `,
+        { type: 'CssClass' },
+    );
+
+    vars.comment(
+        () => `/**
+        * @name           s-tabs--fill
+        * @namespace          sugar.style.ui.tabs
+        * @type           CssClass
+        * 
+        * This class represent a "<yellow>fill</yellow>" tabs
+        * 
+        * @example        html
+        * <div class="s-tabs--fill">
+        *    <div class="active">An active tab</div>
+        *    <div>A tab</div>
+        * </div>
+      */
+     `,
+    ).code(
+        `
+    .s-tabs--fill {
+      @sugar.ui.tabs($fill: true, $scope: fill);
     }
   `,
         { type: 'CssClass' },

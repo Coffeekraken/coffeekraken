@@ -7,6 +7,9 @@ import __whenInViewport from './whenInViewport';
 import type { IWhenNearViewportSettings } from './whenNearViewport';
 import __whenNearViewport from './whenNearViewport';
 
+import type { IWhenEntersViewportSettings } from './whenEntersViewport';
+import __whenEntersViewport from './whenEntersViewport';
+
 import type { IWhenOutOfViewportSettings } from './whenOutOfViewport';
 import __whenOutOfViewport from './whenOutOfViewport';
 
@@ -54,6 +57,7 @@ import __whenStylesheetsReady from './whenStylesheetsReady';
 export interface IwhenSettings {
     whenInViewport?: IWhenInViewportSettings;
     whenNearViewport?: IWhenNearViewportSettings;
+    whenEntersViewport?: IWhenEntersViewportSettings;
     whenOutOfViewport?: IWhenOutOfViewportSettings;
     whenInteract?: IWhenInteractSettings;
     whenVisible?: IWhenVisibleSettings;
@@ -65,6 +69,7 @@ export type TWhenTrigger =
     | 'directly'
     | 'inViewport'
     | 'nearViewport'
+    | 'enterViewport'
     | 'outOfViewport'
     | 'interact'
     | 'visible'
@@ -75,6 +80,7 @@ export const triggers = [
     'directly',
     'inViewport',
     'nearViewport',
+    'enterViewport',
     'outOfViewport',
     'interact',
     'visible',
@@ -116,6 +122,14 @@ export default function when(
                         __whenNearViewport(
                             $elm,
                             finalSettings.whenNearViewport,
+                        ),
+                    );
+                    break;
+                case 'entersViewport':
+                    promises.push(
+                        __whenEntersViewport(
+                            $elm,
+                            finalSettings.whenEntersViewport,
                         ),
                     );
                     break;

@@ -17,7 +17,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.ratio.classes;
+ * \@sugar.reset;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0

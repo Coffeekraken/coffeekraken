@@ -1,4 +1,4 @@
-<section id="features-opensource" class="diagonal-section s-pb:50">
+<section id="features-opensource" class="diagonal-section s-pb:50" s-appear in="bottom">
     <div class="s-container">
 
         <div class="__box s-bg:main-surface s-radius s-p:50 s-mi:-50 @mobile s-mi:0 s-depth:0">

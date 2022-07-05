@@ -69,23 +69,43 @@ export default function ({
 
     vars.push(`
     display: inline-block;
+    position: relative;
     pointer-events: none;
     overflow: hidden;
     height: sugar.scalable(1em);
-    width: sugar.scalable(1ch);
+    width: sugar.scalable(1.2ch);
+    text-rendering: geometricPrecision;
 
-    &:after {
+    &:before {
         font-size: sugar.scalable(1em);
+        position: absolute;
+        top: 0;
+        left: calc(-0.225ch);
         white-space: nowrap;
         color: sugar.color(current);
         display: block;
-        content: "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏";
-        animation: s-loader-square-dots-${id} ${finalParams.duration} steps(10) infinite;
+        content: "⠁⠈⠀⠀⠀⠠⠄⠂";
+        z-index: 1;
+        text-indent: 0;
+        animation: s-loader-square-dots-${id} ${finalParams.duration} steps(8) infinite;
+    }
+    &:after {
+        font-size: sugar.scalable(1em);
+        white-space: nowrap;
+        position: absolute;
+        top: 0;
+        left: calc(0.59ch);
+        color: sugar.color(current);
+        content: "⠀⠀⠁⠂⠄⠀⠀⠀";
+        display: block;
+        text-indent: 0;
+        clip-path: polygon(0 0, 1ch 0, 1ch 100%, 0 100%);
+        animation: s-loader-square-dots-${id} ${finalParams.duration} steps(8) infinite;
     }
 
     @keyframes s-loader-square-dots-${id} {
         to {
-            transform: translateX(-12.2ch);
+            text-indent: -9.8ch;
         }
     }
   `);

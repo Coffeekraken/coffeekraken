@@ -61,8 +61,6 @@ export default function ({
 
     const width = finalParams.width;
 
-    if (__STheme.get('border.width')[width] === undefined) return width;
-
     const widthes = width.split(' ').map((s) => {
         s = themeValueProxy(s);
 

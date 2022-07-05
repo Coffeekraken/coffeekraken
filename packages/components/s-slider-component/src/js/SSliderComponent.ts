@@ -316,14 +316,13 @@ export default class SSlider extends __SLitComponent {
                 interface: __SSliderComponentInterface,
             }),
         );
-    }
-    async mount() {
         this.$slides = this.querySelectorAll('[s-slider-slide]');
         this.$slides.forEach(($item) => {
             // add the item class
             $item.classList.add(this.componentUtils.className('__slide'));
         });
     }
+    async mount() {}
     async firstUpdated() {
         // bare elements
         this.$root = this.querySelector(

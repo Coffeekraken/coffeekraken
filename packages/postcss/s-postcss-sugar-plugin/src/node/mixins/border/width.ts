@@ -59,8 +59,9 @@ export default function ({
         ...params,
     };
 
-    const vars = new CssVars(
-        `border-width: sugar.border.width(${finalParams.width});`,
-    );
+    const vars = new CssVars();
+    vars.code(`
+        border-width: sugar.border.width(${finalParams.width});
+    `);
     return vars;
 }

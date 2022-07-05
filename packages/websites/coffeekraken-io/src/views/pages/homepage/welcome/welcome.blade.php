@@ -4,8 +4,9 @@
 
     <div class="__illustration">
 
-
-        <img class="illustration" s-inline src="/dist/img/illustrations/kraken.svg" />
+        <div s-appear in="right">
+            <img class="illustration" s-inline src="/dist/img/illustrations/kraken.svg" />
+        </div>
 
         {{-- <ck-blob></ck-blob>
         <div class="__loader s-until:sibling:mounted">

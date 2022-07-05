@@ -1,4 +1,5 @@
 import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
+import { define as __sAppearFeature } from '@coffeekraken/s-appear-feature';
 import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
 import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
@@ -23,7 +24,7 @@ import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-panel-compon
 import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
 
 // Components
-import { define as __CKBlobComponent } from './components/CkBlob';
+// import { define as __CKBlobComponent } from './components/CkBlob';
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
 import { define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed';
 import { define as __CKDocSubNavComponent } from './components/CKDocSubNav/CKDocSubNav';
@@ -39,6 +40,12 @@ import __STheme from '@coffeekraken/s-theme';
 
 // import __SCssAnimation from '@coffeekraken/s-css-animation';
 
+interface HTMLElement {
+    classList: {
+        add(this: HTMLElement, cls: string): void;
+    };
+}
+
 // @ts-ignore
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
 // @ts-ignore
@@ -48,6 +55,40 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 __SConductor.setup({
     log: true,
 });
+
+// @ts-ignore
+// const $div = document.createElement('div');
+// const add = $div.classList.add;
+
+// HTMLElement.prototype.classList.add = function (cls) {
+//     console.log('CLS', cls);
+// }
+
+// HTMLElement.__proto__.classList = {
+//     ...HTMLElement.prototype.classList,
+//     add(...cls) {
+//         console.log('cls', cls, this);
+//     },
+// };
+
+// Object.defineProperty(HTMLElement.prototype, 'classList', {
+//     get() {
+//         const _this = this;
+//         return {
+//             ..._classList,
+//             add(cls) {
+//                 console.log(_classList);
+//                 console.log('cls', cls, _this);
+//                 _classList.add.call(_this, cls);
+//             },
+//         };
+//     },
+//     enumerable: true,
+// });
+
+// HTMLElement.classList.add = (cls) => {
+//     console.log('THI', cls, this);
+// };
 
 (async () => {
     __SFeature.setDefaultProps('*', {
@@ -75,7 +116,7 @@ __SConductor.setup({
     // internal components
     __VersionSelector();
     __CKSearchComponent();
-    __CKBlobComponent();
+    // __CKBlobComponent();
     __CkFallingStarsComponent();
 
     // components
@@ -106,6 +147,7 @@ __SConductor.setup({
     // features
     __sSugarFeature();
     __sFloatingFeature();
+    __sAppearFeature();
     __sRefocusFeature();
     __sInlineFeature();
     // __sParallaxFeature();

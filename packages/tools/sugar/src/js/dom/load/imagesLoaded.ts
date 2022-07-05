@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __imageLoaded from './imageLoaded';
 import __SPromise from '@coffeekraken/s-promise';
+import __imageLoaded from './imageLoaded';
 
 /**
  * @name      imagesLoaded
@@ -26,7 +26,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @todo      tests
  *
  * @example    js
- * import imagesLoaded from '@coffeekraken/sugar/js/dom/imagesLoaded'
+ * import imagesLoaded from '@coffeekraken/sugar/js/dom/load/imagesLoaded'
  * imagesLoaded([
  * 	$img1, $img2, $img3
  * ]).on('loaded', $img => {

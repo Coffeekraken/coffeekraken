@@ -49,25 +49,25 @@ export interface ISActivateActivateParams {
  *
  * @example         html            Simple click activation
  * <a class="s-btn s-color:accent" href="#my-element" s-activate>Click me!</a>
- * <div id="my-element">I will be activated on click</div>
+ * <div id="my-element" class="s-radius s-p:30">I will be activated on click</div>
  * <style>
  *    #my-element.active { background: green; }
  * </style>
  *
  * @example         html              Grouping
- * <a href="#my-grouped-element-1" class="s-btn s-color:accent" s-activate group="my-tabs">Tab 1</a>
+ * <a href="#my-grouped-element-1" class="s-btn s-color:accent" s-activate active group="my-tabs">Tab 1</a>
  * <a href="#my-grouped-element-2" class="s-btn s-color:accent" s-activate group="my-tabs">Tab 1</a>
  * <a href="#my-grouped-element-3" class="s-btn s-color:accent" s-activate group="my-tabs">Tab 1</a>
- * <div id="my-grouped-element-1">Content #1</div>
- * <div id="my-grouped-element-2">Content #2</div>
- * <div id="my-grouped-element-3">Content #3</div>
+ * <div id="my-grouped-element-1" class="s-radius s-p:30">Content #1</div>
+ * <div id="my-grouped-element-2" class="s-radius s-p:30">Content #2</div>
+ * <div id="my-grouped-element-3" class="s-radius s-p:30">Content #3</div>
  * <style>
  *    [id^="my-grouped-element-"].active { background: green; }
  * </style>
  *
  * @example         html            Toggle mode
  * <a class="s-btn s-color:accent" href="#my-element-toggle" s-activate toggle>Click me!</a>
- * <div id="my-element-toggle">I will be toggled on click</div>
+ * <div id="my-element-toggle" class="s-radius s-p:30">I will be toggled on click</div>
  * <style>
  *    #my-element-toggle.active { background: green; }
  * </style>

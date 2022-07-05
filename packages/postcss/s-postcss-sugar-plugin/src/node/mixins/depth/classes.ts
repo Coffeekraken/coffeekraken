@@ -81,7 +81,7 @@ export default function ({
         ${depthsArray
             .map((depthName) => {
                 return ` * @example          html        Depth ${depthName}
-                <div class="s-depth:${depthName} s-bg:main s-text:center s-radius s-p:30">
+                <div class="s-depth:${depthName} s-bg:main-surface s-width:40 s-ratio:16-9 s-text:center s-radius s-p:30 @tablet s-width:60 @mobile s-width:100">
                     <span class="s-depth:text:${depthName}">s-depth:${depthName}</span>
                 </div>`;
             })

@@ -1,0 +1,29 @@
+[s-appear] {
+    opacity: 0;
+
+    &[in='right'] {
+        transform: translateX(100px);
+    }
+    &[in='left'] {
+        transform: translateX(-100px);
+    }
+    &[in='top'] {
+        transform: translateY(-100px);
+    }
+    &[in='bottom'] {
+        transform: translateY(100px);
+    }
+
+    &[appear] {
+        @sugar.transition (slow);
+        transition-easing: ease-out;
+        opacity: 1;
+
+        &[in='right'],
+        &[in='left'],
+        &[in='top'],
+        &[in='bottom'] {
+            transform: translate(0, 0);
+        }
+    }
+}

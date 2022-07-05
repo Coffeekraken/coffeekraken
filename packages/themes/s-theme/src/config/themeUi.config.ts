@@ -2816,28 +2816,28 @@ export default (env, config) => {
              * @name          duration
              * @namespace     config.themeUi.loaderSquareDots
              * @type          String
-             * @default      [theme.ui.loaderSquareDots.duration]
+             * @default      1s
              *
              * Specify the duration of the loaderSquareDots
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            duration: '[theme.ui.loader.duration]',
+            duration: '1s',
         },
         loaderRound: {
             /**
              * @name          duration
              * @namespace     config.themeUi.loaderRound
              * @type          String
-             * @default      2s
+             * @default      [theme.ui.loader.duration]
              *
              * Specify the duration of the round loader
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            duration: '2s',
+            duration: '[theme.ui.loader.duration]',
             /**
              * @name          duration
              * @namespace     config.themeUi.loaderRound

@@ -47,6 +47,17 @@ export interface ISClipboardCopyComponentProps {
  *      <s-clipboard-copy class="s-mis:20" from="my-input"></s-clipboard-copy>
  * </div>
  *
+ * @example         html        Using the input container addon
+ * <label class="s-label">
+ *      <span>Enter something and copy it!</span>
+ *      <div class="s-input-container:addon s-width:40">
+ *          <input class="s-input" type="text" value="Hello world" id="my-input" />
+ *          <div>
+ *              <s-clipboard-copy class="s-mis:20" from="my-input"></s-clipboard-copy>
+ *          </div>
+ *      </div>
+ * </span>
+ *
  * @example         html        Copy from a paragraph
  * <div class="s-flex:align-center">
  *      <p class="s-typo:p" id="my-paragraph">Hello world</p>

@@ -1,9 +1,9 @@
 // @ts-nocheck
 
+import __SPromise from '@coffeekraken/s-promise';
+import __unquote from '../../../shared/string/unquote';
 import __getStyleProperty from '../style/getStyleProperty';
 import __imageLoaded from './imageLoaded';
-import __unquote from '../../../shared/string/unquote';
-import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name        backgroundImageLoaded
@@ -26,7 +26,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @todo      tests
  *
  * @example    js
- * import backgroundImageLoaded from '@coffeekraken/sugar/js/dom/backgroundImageLoaded'
+ * import backgroundImageLoaded from '@coffeekraken/sugar/js/dom/load/backgroundImageLoaded'
  * backgroundImageLoaded($myElm).then(() => {
  *   // do something when loaded
  * })

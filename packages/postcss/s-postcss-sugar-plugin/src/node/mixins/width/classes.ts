@@ -74,7 +74,7 @@ export default function ({
         ${Object.keys(widthObj)
             .map((width) => {
                 return ` * @example         html        ${width}%
-                *   <div class="s-bg:main s-radius:30">
+                *   <div class="s-bg:main-surface s-radius:30">
                 *      <div style="overflow:hidden" class="s-width:${width} s-text:center s-bg:accent s-p:30 s-radius:30">s-width:${width}</div>
                 *   </div>`;
             })

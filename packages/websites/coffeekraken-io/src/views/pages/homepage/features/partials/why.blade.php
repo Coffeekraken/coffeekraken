@@ -1,4 +1,4 @@
-<section id="features-why" class="s-pb:100 @mobile s-pi:30">
+<section id="features-why" class="s-pb:100 @mobile s-pi:30" s-appear in="bottom">
 
     <div class="s-container">
 

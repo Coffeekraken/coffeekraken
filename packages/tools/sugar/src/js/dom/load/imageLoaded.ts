@@ -23,7 +23,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @todo      tests
  *
  * @example  	js
- * import imageLoaded from '@coffeekraken/sugar/js/dom/imageLoaded'
+ * import imageLoaded from '@coffeekraken/sugar/js/dom/load/imageLoaded'
  * imageLoaded(myCoolHTMLImageElement).then(($img) => {
  * 		// do something when the image is loaded
  * });

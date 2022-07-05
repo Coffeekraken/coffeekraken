@@ -49,6 +49,12 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
                     'Specify if you want your tabs to take all the available place of not',
                 default: false,
             },
+            fill: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want your tabs to be filled with a background color or not',
+                default: false,
+            },
             direction: {
                 type: 'String',
                 description: 'Specigy the direction of your tabs',
@@ -67,8 +73,8 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
                     splitChars: [',', ' '],
                 },
                 description: 'Specify the scope(s) you want to generate',
-                values: ['bare', 'lnf', 'shape', 'grow', 'direction'],
-                default: ['bare', 'lnf', 'shape', 'grow', 'direction'],
+                values: ['bare', 'lnf', 'shape', 'grow', 'fill', 'direction'],
+                default: ['bare', 'lnf', 'shape', 'grow', 'fill', 'direction'],
             },
         };
     }
@@ -78,9 +84,10 @@ export interface IPostcssSugarPluginUiTabParams {
     style: 'solid';
     shape: 'default' | 'square' | 'pill';
     grow: boolean;
+    fill: boolean;
     direction: 'horizontal' | 'vertical';
     outline: boolean;
-    scope: ('bare' | 'lnf' | 'shape' | 'grow' | 'direction' | 'vr')[];
+    scope: ('bare' | 'lnf' | 'shape' | 'grow' | 'fill' | 'direction' | 'vr')[];
 }
 
 export { postcssSugarPluginUiTabInterface as interface };
@@ -98,9 +105,10 @@ export default function ({
         style: 'solid',
         shape: 'default',
         grow: false,
+        fill: false,
         direction: 'horizontal',
         outline: true,
-        scope: ['bare', 'lnf', 'grow', 'direction'],
+        scope: ['bare', 'lnf', 'grow', 'fill', 'direction'],
         ...params,
     };
 
@@ -131,6 +139,18 @@ export default function ({
         & > * {
           flex-grow: 1;
         }
+      `
+              : ''
+      }
+    `);
+    }
+
+    if (finalParams.fill && finalParams.scope.indexOf('fill') !== -1) {
+        vars.push(`
+      ${
+          finalParams.fill && finalParams.scope.indexOf('fill') !== -1
+              ? `
+              background: sugar.color(current, surface);
       `
               : ''
       }

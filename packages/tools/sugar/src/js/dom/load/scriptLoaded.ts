@@ -23,7 +23,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @todo      tests
  *
  * @example    js
- * import scriptLoaded from '@coffeekraken/sugar/js/dom/scriptLoaded'
+ * import scriptLoaded from '@coffeekraken/sugar/js/dom/load/scriptLoaded'
  * scriptLoaded($script).then(($script) => {
  *   // do something here
  * })

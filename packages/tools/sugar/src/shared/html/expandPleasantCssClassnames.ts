@@ -21,6 +21,7 @@ import __expandPleasantCssClassname from './expandPleasantCssClassname';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
 export default function expandPleasantCssClassnames(html: string): string {
     const reg = /class="[a-zA-Z0-9_\-:@\s]+"/gm;
 

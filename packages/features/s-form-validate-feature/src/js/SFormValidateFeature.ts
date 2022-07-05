@@ -20,9 +20,15 @@ import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInt
  * @platform        js
  * @status          beta
  *
- * This feature allows you to validate your forms by using under the hood the **AMAZING joi library**.
- * For now, you can validate data types like `string`, `number` or  `boolean` with options like `email`,
- * `date`, `greater`, `less`, `min`, `max`, and a lot more.
+ * This package expose a simple `SFormValidateFeature` class that allows you to validate
+ * your forms before sending them to your backend.
+ *
+ * @feature         Validate your field and display an error message if needed
+ * @feature         Prevent your form to be submited when an error occurs
+ * @feature         Built-in validators like `email`, `min`, `max`, `pattern`, etc...
+ * @feature         Support custom validators through the [@coffeekraken/s-validator](/package/@coffeekraken/s-validator/doc/readme) package
+ * @feature         Custom inline error message support
+ * @feature         And more...
  *
  * @support          chromium
  * @support          firefox
@@ -329,13 +335,11 @@ export default class SFormValidateFeature extends __SFeature {
     }
 
     _passwordDefaultHandler({ result, $feature }) {
-        console.log('result', result);
-
         result.metas.levels.forEach((level) => {
-            if (result.metas.validLevels.includes(level)) {
-                $feature.classList.add(`level-${level}`);
+            if (level !== result.metas.validLevels.slice(-1)[0]) {
+                $feature.classList.remove(`password-${level}`);
             } else {
-                $feature.classList.remove(`level-${level}`);
+                $feature.classList.add(`password-${level}`);
             }
         });
     }

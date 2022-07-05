@@ -21,7 +21,7 @@
  * @todo      tests
  *
  * @example  	js
- * import linkLoaded from '@coffeekraken/sugar/js/dom/linkLoaded'
+ * import linkLoaded from '@coffeekraken/sugar/js/dom/load/linkLoaded'
  * linkLoaded(myCoolHTMLLinlElement).then((link) => {
  * 		// do something when the link is loaded
  * });

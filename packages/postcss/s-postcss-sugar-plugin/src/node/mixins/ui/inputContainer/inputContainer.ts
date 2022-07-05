@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          inputContainer
@@ -82,6 +81,7 @@ export default function ({
                     position: relative;
 
                     & > *:first-child {
+                        width: 100%;
                         padding-inline-end: 3em;
                     }
                     & > *:first-child + * {

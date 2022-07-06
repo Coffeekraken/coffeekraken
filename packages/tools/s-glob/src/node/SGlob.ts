@@ -115,9 +115,7 @@ export default class SGlob extends __SClass {
         outDir: string,
         settings: Partial<IResolveGlobSettings> = {},
     ): SFile[] | string[] {
-        const sGlob = new SGlob(globs, {
-            glob: settings
-        });
+        const sGlob = new SGlob(globs, settings);
         return sGlob.copySync(outDir);
     }
 
@@ -239,6 +237,7 @@ export default class SGlob extends __SClass {
     ): SFile[] | string[] {
         settings = __deepMerge(this.settings, {}, settings);
         const files = this.resolve(this._globs, settings);
+
         const copiedFiles: SFile | string[] = [];
         for (let [key, file] of Object.entries(files)) {
             const outPath = `${outDir}/${file.relPath}`;

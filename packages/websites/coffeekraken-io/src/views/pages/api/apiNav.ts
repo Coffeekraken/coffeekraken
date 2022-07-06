@@ -52,9 +52,10 @@ export class ApiNav extends __SLitComponent {
             window.localStorage.getItem('apiNavStates') ?? '{}',
         );
 
-        const cachedNav = JSON.parse(
-            window.localStorage.getItem('apiNav') ?? '{}',
-        );
+        // const cachedNav = JSON.parse(
+        //     window.localStorage.getItem('apiNav') ?? '{}',
+        // );
+        const cachedNav = {};
         if (Object.keys(cachedNav).length) {
             this._menuStack = cachedNav;
             this._loaded = true;
@@ -69,23 +70,21 @@ export class ApiNav extends __SLitComponent {
                 'class',
                 // 'cssfontface',
                 'cssmixin',
+                'postcssmixin',
                 'cssfunction',
+                'postcssfunction',
                 'object',
                 // 'cssclass',
                 'customelement',
                 'feature',
             ];
 
-            if (!item.type?.types) return false;
+            if (!item.type) return false;
 
-            if (types.indexOf(item.type.types?.[0].type) === -1)
-                types.push(item.type.types[0].type);
+            if (types.indexOf(item.type.toLowerCase()) === -1)
+                types.push(item.type.toLowerCase());
 
-            if (
-                supportedTypes.indexOf(
-                    item.type.types[0]?.type?.toLowerCase(),
-                ) === -1
-            )
+            if (supportedTypes.indexOf(item.type.toLowerCase()) === -1)
                 return false;
             return true;
         });
@@ -97,7 +96,7 @@ export class ApiNav extends __SLitComponent {
         });
 
         // save new nav
-        window.localStorage.setItem('apiNav', JSON.stringify(this._menuStack));
+        // window.localStorage.setItem('apiNav', JSON.stringify(this._menuStack));
         this._loaded = true;
 
         this.requestUpdate();

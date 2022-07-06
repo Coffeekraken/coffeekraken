@@ -316,6 +316,9 @@ export default class SPageTransitionFeature extends __SFeature {
             });
         }
 
+        // scroll to top
+        __scrollTo('top');
+
         // push a new state
         if (code === 200 && newState && url) {
             window.history.pushState(newState, document.title, url);

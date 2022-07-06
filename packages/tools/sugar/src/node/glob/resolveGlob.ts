@@ -6,7 +6,6 @@ import __glob from 'glob';
 import __path from 'path';
 import __expandGlob from '../../shared/glob/expandGlob';
 import __deepMerge from '../../shared/object/deepMerge';
-import __isDirectory from '../is/directory';
 import __excludeGlobs from '../path/excludeGlobs';
 
 /**

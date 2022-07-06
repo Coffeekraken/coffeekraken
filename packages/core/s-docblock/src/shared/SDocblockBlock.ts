@@ -152,16 +152,16 @@ class SDocblockBlock extends __SClass {
             ),
         );
 
-        this._source = source
-            .trim()
-            .replace(/\s\*\s/gm, '\n * ')
-            .split(/\n/gm)
-            .map((l) => l.trim())
-            .filter((l) => l !== '')
-            .join('\n')
-            // .replace(/\*\s\*/gm, '*')
-            .replace(/^\/\*\*/, '/**\n*')
-            .replace(/\*\/$/, '\n*/');
+        // this._source = source
+        //     .trim()
+        //     .replace(/\s\*\s/gm, '\n * ')
+        //     .split(/\n/gm)
+        //     .map((l) => l.trim())
+        //     .filter((l) => l !== '')
+        //     .join('\n')
+        //     // .replace(/\*\s\*/gm, '*')
+        //     .replace(/^\/\*\*/, '/**\n*')
+        //     .replace(/\*\/$/, '\n*/');
     }
 
     /**

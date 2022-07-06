@@ -1,9 +1,7 @@
-import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
-import __path from 'path';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __path from 'path';
 
 import { configDefaults, defineConfig } from 'vitest/config';
 
@@ -294,13 +292,18 @@ export default function (env, config) {
              */
             dir: '[config.storage.src.rootDir]',
 
+            include: ['**/*.test.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+
             exclude: [
                 ...configDefaults.exclude,
                 // '**/node_modules/**',
+                '**/dist/**',
+                '**/__tests__.wip/**',
                 '**/__wip__/**',
                 '**/sugar/**',
             ],
             deps: {
+                external: ['**/node_modules/**'],
                 inline: true,
             },
         },

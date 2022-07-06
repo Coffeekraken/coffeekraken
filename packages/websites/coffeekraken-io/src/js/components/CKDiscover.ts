@@ -108,6 +108,7 @@ export default class CKDiscover extends __SLitComponent {
                               ? html`
                                     <s-code-example lines="8">
                                         <code
+                                            hidden
                                             lang="${this.props.platform ===
                                                 'ts' ||
                                             this.props.platform === 'node'

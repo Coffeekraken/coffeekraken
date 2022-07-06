@@ -23,7 +23,7 @@ sugar frontstack.init my-cool-project'
 <a class="s-btn s-color:accent s-mie:20" href="/doc/get-started/get-started" title="Coffeekraken get started!">
     Get started!
 </a>
-<a class="s-btn s-color:complementary" href="https://discord.com/channels/940362961682333767/940362962223378494"
+<a class="s-btn s-color:complementary" href="https://discord.com/channels/940362961682333767/940362962223378494" target="_blank"
     title="Join us on Discord!">
     <i class="s-icon:discord"></i> Join us on discord
 </a>

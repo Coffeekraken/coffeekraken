@@ -42,14 +42,14 @@ export default function (env, config) {
          * @name            failAfter
          * @namespace       config.staticBuilder
          * @type            Number
-         * @default         -1
+         * @default         5
          *
          * Specify the number of failures after which the build is considered as rejected. -1 to disable this feature
          *
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        failAfter: -1,
+        failAfter: 5,
 
         /**
          * @name            requestTimeout
@@ -81,14 +81,14 @@ export default function (env, config) {
          * @name            requestRetryTimeout
          * @namespace       config.staticBuilder
          * @type            Number
-         * @default         1000
+         * @default         500
          *
          * Specify how many long the builder has to wait between tries
          *
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        requestRetryTimeout: 1000,
+        requestRetryTimeout: 500,
 
         /**
          * @name            clean

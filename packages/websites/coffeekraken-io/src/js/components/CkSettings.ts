@@ -83,7 +83,9 @@ export default class CkSettings extends __SLitComponent {
                                 class="s-label s-pi:40 s-pb:30"
                                 for="theme-switcher"
                             >
-                                Dark mode
+                                <span>
+                                    Dark mode
+                                </span>
                                 <input
                                     class="s-switch s-color:accent"
                                     type="checkbox"
@@ -100,7 +102,9 @@ export default class CkSettings extends __SLitComponent {
                                 class="s-label s-pi:40 s-pb:30"
                                 for="setting-base-color"
                             >
-                                Base color
+                                <span>
+                                    Base color
+                                </span>
                                 <s-color-picker
                                     id="setting-base-color"
                                     update-input="pointerup"
@@ -125,7 +129,9 @@ export default class CkSettings extends __SLitComponent {
                                 class="s-label s-pi:40 s-pb:30"
                                 for="setting-main-color"
                             >
-                                Main color
+                                <span>
+                                    Main color
+                                </span>
                                 <s-color-picker
                                     id="setting-main-color"
                                     update-input="pointerup"
@@ -150,7 +156,9 @@ export default class CkSettings extends __SLitComponent {
                                 class="s-label s-pi:40 s-pb:30"
                                 for="setting-accent-color"
                             >
-                                Accent color
+                                <span>
+                                    Accent color
+                                </span>
                                 <s-color-picker
                                     style="position:relative"
                                     id="setting-accent-color"
@@ -176,7 +184,9 @@ export default class CkSettings extends __SLitComponent {
                                 class="s-label s-pi:40 s-pb:30"
                                 for="setting-complementary-color"
                             >
-                                Complementary color
+                                <span>
+                                    Complementary color
+                                </span>
                                 <s-color-picker
                                     id="setting-complementary-color"
                                     update-input="pointerup"

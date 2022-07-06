@@ -46,7 +46,7 @@
         "vite-plugin-imagemin": "^0.3.2",
         "vite-plugin-singlefile": "^0.5.1",
         "vite-plugin-virtual-plain-text": "^1.2.2",
-        "vitest": "^0.15.0"
+        "vitest": "^0.17.0"
     },
     "peerDependencies": {
         "postcss": "^7 || ^8"

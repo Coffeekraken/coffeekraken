@@ -491,9 +491,10 @@ export default class SVite extends __SClass {
                 const command = `npx vitest --dir "${__path.relative(
                     __packageRoot(),
                     finalParams.dir,
-                )}" --config ${configPath} --root ${__packageRoot()} --passWithNoTests --changed HEAD~1 --dom --globals ${
+                )}" --config ${configPath} --root ${__packageRoot()} --passWithNoTests --dom --globals ${
                     finalParams.watch ? '--watch' : '--run'
                 }`;
+                console.log('command', command);
 
                 // run the test
                 const pro = __childProcess.spawn(command, [], {

@@ -324,11 +324,6 @@ s-color-picker {
         right: auto;
         left: 0;
     }
-
-    &:not([input]):not([button]) .s-color-picker {
-        position: relative;
-        display: inline-block;
-    }
 }
 
 s-color-picker[lnf='default'] {

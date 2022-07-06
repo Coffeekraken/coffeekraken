@@ -209,6 +209,15 @@ export default class STypescriptBuilder extends __SBuilder {
     ): Promise<ISTypescriptBuilderResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
+                return resolve({
+                    glob: '',
+                    inDir: '',
+                    outDir: '',
+                    formats: ['esm'],
+                    platform: '',
+                    files: [],
+                });
+
                 let buildedFiles: ISTypescriptBuilderResultFile[] = [],
                     watchersReady: any[] = [],
                     buildPromises: Promise<any>[] = [];

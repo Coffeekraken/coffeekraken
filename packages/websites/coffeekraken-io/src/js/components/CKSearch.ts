@@ -346,7 +346,7 @@ export default class CKSearch extends __SLitComponent {
                                         class="s-badge s-color:complementary s-mie:10"
                                         >CTRL+F</span
                                     >
-                                    Search shortcut
+                                    Search
                                 </p>
                             </div>
                         </template>

@@ -1,7 +1,5 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;

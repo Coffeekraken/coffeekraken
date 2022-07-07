@@ -1,5 +1,5 @@
-import __SInterfaceRenderer from './SInterfaceRenderer';
 import __SInterface from '../SInterface';
+import __SInterfaceRenderer from './SInterfaceRenderer';
 
 import type { ISInterfaceRendererSettings } from '../../shared/renderers/ISInterfaceRenderer';
 

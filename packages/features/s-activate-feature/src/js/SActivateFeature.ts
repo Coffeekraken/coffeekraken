@@ -100,7 +100,7 @@ export default class SActivateFeature extends __SFeature {
                 settings ?? {},
             ),
         );
-        this.componentUtils.handleState(this.state, {
+        this.state = this.componentUtils.handleState(this.state, {
             save: this.props.saveState,
         });
         if (this.props.group) {

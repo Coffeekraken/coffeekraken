@@ -1,6 +1,4 @@
-import __callsites from 'callsites';
-import { fileURLToPath } from 'url';
-import __isCjs from '../../shared/module/isCjs';
+import __path from 'path';
 
 /**
  * @name            dirname
@@ -23,15 +21,34 @@ import __isCjs from '../../shared/module/isCjs';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function () {
-    if (__isCjs() || process.env.NODE_ENV === 'test') {
-        // @ts-ignore
-        return __callsites()[1].getFileName().split('/').slice(0, -1).join('/');
-    }
+export default function (importMeta: any): string {
+    const error = new Error();
 
     // @ts-ignore
-    return fileURLToPath(__callsites()[1].getFileName())
-        .split('/')
-        .slice(0, -1)
-        .join('/');
+    const stackArray = error.stack.split('\n');
+
+    let pathLine,
+        dirnameLineFound = false;
+
+    for (let i = 0; i < stackArray.length; i++) {
+        const line = stackArray[i];
+        if (!line.trim().match(/^at\s/)) {
+            continue;
+        }
+        if (line.match(/\/dirname\.js:[0-9]+:[0-9]+\)/)) {
+            dirnameLineFound = true;
+            continue;
+        } else if (!dirnameLineFound) {
+            continue;
+        }
+        pathLine = line;
+        break;
+    }
+
+    const filePathMatch = pathLine.match(/(\(|file:\/\/)(.*)\:[0-9]+\:[0-9]+/);
+
+    const filePath = filePathMatch[2];
+
+    const dirPath = __path.dirname(filePath).replace('file:', '');
+    return dirPath;
 }

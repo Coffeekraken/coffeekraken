@@ -3,7 +3,6 @@ import __SEventEmitter, {
     ISEventEmitter,
     ISEventEmitterConstructorSettings,
 } from '@coffeekraken/s-event-emitter';
-// import __require from '@coffeekraken/sugar/node/esm/require';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';

@@ -219,7 +219,10 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 }
 
                 // @TODO      check for delete cache with import
-                const importedConfig = await import(filePath);
+                let importedConfig = {};
+                if (process.env.NODE_ENV !== 'test') {
+                    importedConfig = await import(filePath);
+                }
 
                 if (deleteAfterLoad) {
                     setTimeout(() => {

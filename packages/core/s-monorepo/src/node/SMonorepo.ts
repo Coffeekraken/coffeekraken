@@ -382,37 +382,37 @@ export default class SMonorepo extends __SClass {
                             dir: __packageRoot(),
                         }),
                     );
-                }
+                } else {
+                    packages.forEach((packageObj) => {
+                        // typescript compilation
+                        const inDir = `${packageObj.path}/${srcRelDir}`,
+                            outDir = `${packageObj.path}/${distRelDir}`;
 
-                packages.forEach((packageObj) => {
-                    // typescript compilation
-                    const inDir = `${packageObj.path}/${srcRelDir}`,
-                        outDir = `${packageObj.path}/${distRelDir}`;
+                        const builder = new __STypescriptBuilder();
+                        pipe(
+                            builder.build({
+                                inDir,
+                                outDir,
+                                packageRoot: packageObj.path,
+                                buildInitial: finalParams.buildInitial,
+                                watch: true,
+                            }),
+                        );
 
-                    const builder = new __STypescriptBuilder();
-                    pipe(
-                        builder.build({
-                            inDir,
-                            outDir,
-                            packageRoot: packageObj.path,
-                            buildInitial: finalParams.buildInitial,
-                            watch: true,
-                        }),
-                    );
-
-                    // exports
-                    const pack = new __SPackage({
-                        package: {
-                            rootDir: packageObj.path,
-                        },
+                        // exports
+                        const pack = new __SPackage({
+                            package: {
+                                rootDir: packageObj.path,
+                            },
+                        });
+                        pipe(
+                            pack.exports({
+                                watch: true,
+                                buildInitial: finalParams.buildInitial,
+                            }),
+                        );
                     });
-                    pipe(
-                        pack.exports({
-                            watch: true,
-                            buildInitial: finalParams.buildInitial,
-                        }),
-                    );
-                });
+                }
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,

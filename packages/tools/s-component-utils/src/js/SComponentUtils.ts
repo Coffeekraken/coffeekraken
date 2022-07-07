@@ -5,6 +5,7 @@ import __SClass from '@coffeekraken/s-class';
 import __SConductor from '@coffeekraken/s-conductor';
 import __SInterface from '@coffeekraken/s-interface';
 import __SPromise from '@coffeekraken/s-promise';
+import __SState from '@coffeekraken/s-state';
 import __STheme from '@coffeekraken/s-theme';
 import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot';
 import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
@@ -26,7 +27,6 @@ export interface ISComponentUtilsSettings {
 
 export interface ISComponentUtilsStateSettings {
     save: boolean;
-    onUpdate: Function;
     id: string;
 }
 
@@ -341,55 +341,61 @@ export default class SComponentUtils extends __SClass {
             );
         }
 
-        let saveTimeout;
-        let _state = Object.assign({}, state);
-        for (let [key, value] of Object.entries(state)) {
-            Object.defineProperty(state, key, {
-                enumerable: true,
-                get() {
-                    return _state[key];
-                },
-                set(value) {
-                    if (_state[key] !== value) {
-                        let finalValue = value;
-                        if (finalStateSettings.onUpdate) {
-                            finalValue =
-                                finalStateSettings.onUpdate({
-                                    value,
-                                    key,
-                                }) ?? value;
-                        }
+        // let saveTimeout;
+        let _state = new __SState(state, {
+            id: finalStateSettings.id,
+            save: finalStateSettings.save,
+        });
+        // // let _state = Object.assign({}, state);
+        // for (let [key, value] of Object.entries(state)) {
+        //     Object.defineProperty(state, key, {
+        //         enumerable: true,
+        //         get() {
+        //             return _state[key];
+        //         },
+        //         set(value) {
+        //             if (_state[key] !== value) {
+        //                 // let finalValue = value;
+        //                 // if (finalStateSettings.onUpdate) {
+        //                 //     finalValue =
+        //                 //         finalStateSettings.onUpdate({
+        //                 //             value,
+        //                 //             key,
+        //                 //         }) ?? value;
+        //                 // }
 
-                        _state[key] = finalValue;
+        //                 // _state[key] = finalValue;
 
-                        if (preventSave) {
-                            preventSave = false;
-                            return;
-                        }
+        //                 // if (preventSave) {
+        //                 //     preventSave = false;
+        //                 //     return;
+        //                 // }
 
-                        if (finalStateSettings.save) {
-                            clearTimeout(saveTimeout);
-                            saveTimeout = setTimeout(() => {
-                                localStorage.setItem(
-                                    `s-component-utils-state-${finalStateSettings.id}`,
-                                    JSON.stringify(_state),
-                                );
-                            });
-                        }
-                    }
-                },
-            });
-        }
+        //                 // if (finalStateSettings.save) {
+        //                 //     clearTimeout(saveTimeout);
+        //                 //     saveTimeout = setTimeout(() => {
+        //                 //         localStorage.setItem(
+        //                 //             `s-component-utils-state-${finalStateSettings.id}`,
+        //                 //             JSON.stringify(_state),
+        //                 //         );
+        //                 //     });
+        //                 // }
+        //             }
+        //         },
+        //     });
+        // }
 
         // restoring state
-        if (finalStateSettings.save) {
-            const savedState = localStorage.getItem(
-                `s-component-utils-state-${finalStateSettings.id}`,
-            );
-            if (savedState) {
-                _state = Object.assign(_state, JSON.parse(savedState));
-            }
-        }
+        // if (finalStateSettings.save) {
+        //     const savedState = localStorage.getItem(
+        //         `s-component-utils-state-${finalStateSettings.id}`,
+        //     );
+        //     if (savedState) {
+        //         _state = Object.assign(_state, JSON.parse(savedState));
+        //     }
+        // }
+
+        return _state;
     }
 
     /**

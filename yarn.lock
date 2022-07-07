@@ -2470,6 +2470,7 @@ __metadata:
     "@coffeekraken/s-conductor": ^2.0.0
     "@coffeekraken/s-interface": ^2.0.0
     "@coffeekraken/s-promise": ^2.0.0
+    "@coffeekraken/s-state": ^2.0.0
     "@coffeekraken/s-theme": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
   languageName: unknown
@@ -2731,6 +2732,7 @@ __metadata:
     "@coffeekraken/s-component-utils": ^2.0.0
     "@coffeekraken/s-feature": ^2.0.0
     "@coffeekraken/s-interface": ^2.0.0
+    "@coffeekraken/s-state": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
   languageName: unknown
   linkType: soft
@@ -3272,7 +3274,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-state@workspace:packages/state/s-state":
+"@coffeekraken/s-state@^2.0.0, @coffeekraken/s-state@workspace:packages/state/s-state":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-state@workspace:packages/state/s-state"
   dependencies:
@@ -3671,6 +3673,7 @@ __metadata:
     deepmerge: ^4.2.2
     depcheck: ^1.4.0
     dependency-tree: ^8.1.0
+    dirname-filename-esm: ^1.1.1
     domready: ^1.0.8
     download-file: ^0.1.5
     enquire: ^0.0.2
@@ -3728,6 +3731,7 @@ __metadata:
     resolve-package-path: ^4.0.3
     semver: ^7.3.7
     sprintf-js: ^1.1.2
+    stack-trace: ^1.0.0-pre1
     strip-ansi: ^6.0.0
     strip-css-comments: ^4.1.0
     striptags: ^3.1.1
@@ -10056,6 +10060,13 @@ __metadata:
   dependencies:
     path-type: ^4.0.0
   checksum: fa05e18324510d7283f55862f3161c6759a3f2f8dbce491a2fc14c8324c498286c54282c1f0e933cb930da8419b30679389499b919122952a4f8592362ef4615
+  languageName: node
+  linkType: hard
+
+"dirname-filename-esm@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "dirname-filename-esm@npm:1.1.1"
+  checksum: 189edcefe7c3d2de25a1560c6d8eab1f3a607f3b1dd3f7e1ac3923c9c5662cabd5d8a940bb2484ca2acc595d1530d66a52926596707520d82fdc38b6b7dfe1d2
   languageName: node
   linkType: hard
 
@@ -22640,6 +22651,13 @@ __metadata:
   version: 0.0.10
   resolution: "stack-trace@npm:0.0.10"
   checksum: 473036ad32f8c00e889613153d6454f9be0536d430eb2358ca51cad6b95cea08a3cc33cc0e34de66b0dad221582b08ed2e61ef8e13f4087ab690f388362d6610
+  languageName: node
+  linkType: hard
+
+"stack-trace@npm:^1.0.0-pre1":
+  version: 1.0.0-pre1
+  resolution: "stack-trace@npm:1.0.0-pre1"
+  checksum: a97aad6b49b4366dafa3dab866bda18c23cb02a1d45966b4277e21215ea90a9e3a24a42723bc82ecfa79327cb3b5efb0408349b347e8ce38e75b24a0dde36d37
   languageName: node
   linkType: hard
 

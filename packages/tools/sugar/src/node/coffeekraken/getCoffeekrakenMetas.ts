@@ -1,11 +1,11 @@
-import __readJsonSync from '../fs/readJsonSync';
-import __packageRoot from '../path/packageRoot';
-import __dirname from '../fs/dirname';
-import __path from 'path';
 import __fs from 'fs';
+import __path from 'path';
 import __parseSemverString, {
     ISemverObject,
 } from '../../shared/semver/parseSemverString';
+import __dirname from '../fs/dirname';
+import __readJsonSync from '../fs/readJsonSync';
+import __packageRoot from '../path/packageRoot';
 
 /**
  * @name            getCoffeekrakenMetas

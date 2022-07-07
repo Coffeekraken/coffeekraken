@@ -1,5 +1,5 @@
-import __path from 'path';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __path from 'path';
 
 export default (env, config) => {
     if (env.platform !== 'node') return;
@@ -81,7 +81,9 @@ export default (env, config) => {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: __path.resolve(
-                    `${__dirname()}/../node/sources/SSitemapBuilderFileSource`,
+                    `${__dirname(
+                        import.meta,
+                    )}/../node/sources/SSitemapBuilderFileSource`,
                 ),
             },
             docmap: {
@@ -121,7 +123,9 @@ export default (env, config) => {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: __path.resolve(
-                    `${__dirname()}/../node/sources/SSitemapBuilderDocmapSource`,
+                    `${__dirname(
+                        import.meta,
+                    )}/../node/sources/SSitemapBuilderDocmapSource`,
                 ),
             },
         },

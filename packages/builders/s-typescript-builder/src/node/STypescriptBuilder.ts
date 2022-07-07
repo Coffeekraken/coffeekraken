@@ -209,15 +209,6 @@ export default class STypescriptBuilder extends __SBuilder {
     ): Promise<ISTypescriptBuilderResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
-                return resolve({
-                    glob: '',
-                    inDir: '',
-                    outDir: '',
-                    formats: ['esm'],
-                    platform: '',
-                    files: [],
-                });
-
                 let buildedFiles: ISTypescriptBuilderResultFile[] = [],
                     watchersReady: any[] = [],
                     buildPromises: Promise<any>[] = [];
@@ -226,7 +217,9 @@ export default class STypescriptBuilder extends __SBuilder {
                     default: __STypescriptBuilderBuildParamsInterface,
                     // @ts-ignore
                 } = await import(
-                    `${__dirname()}/interface/STypescriptBuilderBuildParamsInterface`
+                    `${__dirname(
+                        import.meta,
+                    )}/interface/STypescriptBuilderBuildParamsInterface`
                 );
 
                 // @ts-ignore

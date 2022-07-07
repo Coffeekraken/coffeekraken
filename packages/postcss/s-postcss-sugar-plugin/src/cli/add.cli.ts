@@ -1,17 +1,14 @@
 // @ts-nocheck
-import __SCliSugarPostcssPluginAddParamsInterface from './interface/SCliSugarPostcssPluginAddParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
-import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
-import __fs from 'fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
+import __fs from 'fs';
+import __SCliSugarPostcssPluginAddParamsInterface from './interface/SCliSugarPostcssPluginAddParamsInterface';
 
 import __pickOne from '@coffeekraken/sugar/node/fs/pickOne';
 

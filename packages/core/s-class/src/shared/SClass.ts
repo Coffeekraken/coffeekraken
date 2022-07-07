@@ -165,18 +165,13 @@ function expose(ctx: any, instance: any, settings: ISClassExposeSettings) {
         ctx[settings.as] = instance;
     }
 
-    if (settings.props) {
-        settings.props.forEach((prop) => {
-            if (
-                instance[prop].bind &&
-                typeof instance[prop].bind === 'function'
-            ) {
-                ctx[prop] = instance[prop].bind(instance);
-            } else {
-                ctx[prop] = instance[prop];
-            }
-        });
-    }
+    settings?.props?.forEach((prop) => {
+        if (instance[prop].bind && typeof instance[prop].bind === 'function') {
+            ctx[prop] = instance[prop].bind(instance);
+        } else {
+            ctx[prop] = instance[prop];
+        }
+    });
 }
 
 function toPlainObject(ctx: any): any {

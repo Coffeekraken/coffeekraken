@@ -1,3 +1,5 @@
 export default function (env, config) {
-    return {};
+    return {
+        coco: 'plop',
+    };
 }

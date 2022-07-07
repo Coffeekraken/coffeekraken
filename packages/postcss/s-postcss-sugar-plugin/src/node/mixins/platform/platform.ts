@@ -1,8 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import __fs from 'fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 /**
  * @name           platform

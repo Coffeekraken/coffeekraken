@@ -1,8 +1,8 @@
 import __SClass from '@coffeekraken/s-class';
 import __SPromise from '@coffeekraken/s-promise';
-import __require from '@coffeekraken/sugar/node/esm/require';
 import __isPath from '@coffeekraken/sugar/node/fs/isPath';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+import __fs from 'fs';
 // import __markdown from './markdown/index';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -137,7 +137,6 @@ class SDocblock extends __SClass implements ISDocblock {
                 throw new Error(
                     `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`,
                 );
-            const __fs = __require('fs');
             if (!__fs.existsSync(source))
                 throw new Error(
                     `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,

@@ -1,6 +1,5 @@
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
 
 export default function (env) {

@@ -294,16 +294,28 @@ export default function (env, config) {
 
             include: ['**/*.test.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
 
+            setupFiles: [
+                __path.resolve(`${__dirname()}/../node/test/globalSetup`),
+            ],
+
+            watchExclude: [
+                ...configDefaults.watchExclude,
+                '**/node_modules/**',
+                '**/dist/**',
+                '**/__tests__.wip/**',
+                '**/__wip__/**',
+                '**/sugar/**',
+            ],
+
             exclude: [
                 ...configDefaults.exclude,
-                // '**/node_modules/**',
+                '**/node_modules/**',
                 '**/dist/**',
                 '**/__tests__.wip/**',
                 '**/__wip__/**',
                 '**/sugar/**',
             ],
             deps: {
-                external: ['**/node_modules/**'],
                 inline: true,
             },
         },

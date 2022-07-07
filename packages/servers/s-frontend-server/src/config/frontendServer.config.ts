@@ -1,6 +1,4 @@
-import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __SDocmap from '@coffeekraken/s-docmap';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
@@ -274,7 +272,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname()}/../node/middleware/benchMiddleware`,
+                path: `${__dirname(
+                    import.meta,
+                )}/../node/middleware/benchMiddleware`,
                 settings: {},
             },
             request: {
@@ -300,7 +300,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname()}/../node/middleware/requestMiddleware`,
+                path: `${__dirname(
+                    import.meta,
+                )}/../node/middleware/requestMiddleware`,
                 settings: {},
             },
             env: {
@@ -326,7 +328,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname()}/../node/middleware/envMiddleware`,
+                path: `${__dirname(
+                    import.meta,
+                )}/../node/middleware/envMiddleware`,
                 settings: {},
             },
             packageJson: {
@@ -352,7 +356,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname()}/../node/middleware/packageJsonMiddleware`,
+                path: `${__dirname(
+                    import.meta,
+                )}/../node/middleware/packageJsonMiddleware`,
                 settings: {},
             },
         },
@@ -384,7 +390,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname()}/../node/modules/publicDir/publicDir`,
+                path: `${__dirname(
+                    import.meta,
+                )}/../node/modules/publicDir/publicDir`,
                 settings: {},
             },
             generic: {
@@ -411,7 +419,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname()}/../node/modules/generic/generic`,
+                path: `${__dirname(
+                    import.meta,
+                )}/../node/modules/generic/generic`,
                 settings: {},
             },
             docmap: {
@@ -492,7 +502,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname()}/../node/modules/redirect/redirect`,
+                path: `${__dirname(
+                    import.meta,
+                )}/../node/modules/redirect/redirect`,
                 settings: {},
             },
             config: {
@@ -546,7 +558,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname()}/../node/modules/frontspec/frontspec`,
+                path: `${__dirname(
+                    import.meta,
+                )}/../node/modules/frontspec/frontspec`,
                 settings: {},
             },
             404: {

@@ -1,6 +1,5 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __path from 'path';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
@@ -30,9 +29,6 @@ export default function (env, config) {
             '*.scss,*.sass': `${__packageRoot(
                 __dirname(),
             )}/src/node/scss/SScssFile`,
-            '*.svelte': `${__packageRoot(
-                __dirname(),
-            )}/src/node/svelte/SSvelteFile`,
         },
     };
 }

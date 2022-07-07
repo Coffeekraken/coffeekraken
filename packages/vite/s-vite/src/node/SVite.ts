@@ -9,6 +9,7 @@ import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __kill from '@coffeekraken/sugar/node/process/kill';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __childProcess from 'child_process';
 import __path from 'path';
@@ -494,7 +495,6 @@ export default class SVite extends __SClass {
                 )}" --config ${configPath} --root ${__packageRoot()} --passWithNoTests --dom --globals ${
                     finalParams.watch ? '--watch' : '--run'
                 }`;
-                console.log('command', command);
 
                 // run the test
                 const pro = __childProcess.spawn(command, [], {
@@ -507,6 +507,10 @@ export default class SVite extends __SClass {
                     if (!finalParams.watch) {
                         resolve();
                     }
+                });
+                __onProcessExit(() => {
+                    console.log('EXIT');
+                    pro.kill();
                 });
 
                 // cancel

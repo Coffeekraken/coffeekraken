@@ -293,12 +293,11 @@ export default class SLitComponent extends LitElement {
 
         // handle state if needed
         if (this.state) {
-            const _this = this;
-            this.componentUtils.handleState(this.state, {
+            this.state = this.componentUtils.handleState(this.state, {
                 save: this.props.saveState,
-                onUpdate({ key, value }) {
-                    _this.requestUpdate();
-                },
+            });
+            this.state.$set('*', () => {
+                this.requestUpdate();
             });
         }
 

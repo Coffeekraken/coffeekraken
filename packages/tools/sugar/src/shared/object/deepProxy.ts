@@ -1,9 +1,8 @@
 // @ts-nocheck
 
 import __proxy from '../array/proxy';
-import __deepMap from '../object/deepMap';
 import __clone from '../object/clone';
-import __delete from '../object/delete';
+import __deepMap from '../object/deepMap';
 import __deepMerge from '../object/deepMerge';
 
 /**
@@ -67,6 +66,8 @@ function deepProxy(object, handlerFn, settings = {}) {
         return {
             set(target, key, value) {
                 if (isRevoked || !settings.handleSet) return true;
+
+                if (value === target[key]) return true;
 
                 if (settings.deep && typeof value === 'object') {
                     value = proxify(value, [...path, key]);

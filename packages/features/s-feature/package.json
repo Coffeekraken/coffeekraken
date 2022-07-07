@@ -10,6 +10,7 @@
         "@coffeekraken/s-component-utils": "^2.0.0",
         "@coffeekraken/s-feature": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/s-state": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0"
     },
     "main": "./dist/pkg/cjs/js/exports.js",

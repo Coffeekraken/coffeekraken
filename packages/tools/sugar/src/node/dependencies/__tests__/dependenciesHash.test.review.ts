@@ -1,5 +1,5 @@
-import __dependenciesHash from '../dependenciesHash';
 import __dirname from '../../fs/dirname';
+import __dependenciesHash from '../dependenciesHash';
 
 describe('sugar.node.dependencies.dependenciesHash', () => {
     it('Should generate the same dependency hash for the same dependencies object', async () => {

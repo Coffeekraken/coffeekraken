@@ -1,6 +1,6 @@
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
@@ -86,7 +86,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_default.png`,
+                icon: `${__packageRootDir(
+                    __dirname(),
+                )}/src/data/notifications/ck_default.png`,
             },
 
             start: {
@@ -127,7 +129,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_start.png`,
+                icon: `${__packageRootDir(
+                    __dirname(),
+                )}/src/data/notifications/ck_start.png`,
             },
 
             success: {
@@ -168,7 +172,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_success.png`,
+                icon: `${__packageRootDir(
+                    __dirname(),
+                )}/src/data/notifications/ck_success.png`,
             },
 
             warning: {
@@ -211,7 +217,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_warning.png`,
+                icon: `${__packageRootDir(
+                    __dirname(),
+                )}/src/data/notifications/ck_warning.png`,
             },
 
             error: {
@@ -252,7 +260,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_error.png`,
+                icon: `${__packageRootDir(
+                    __dirname(),
+                )}/src/data/notifications/ck_error.png`,
             },
         },
     };

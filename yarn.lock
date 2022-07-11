@@ -2932,6 +2932,7 @@ __metadata:
     image-size: ^1.0.0
     minimatch: ^5.1.0
     sharp: ^0.30.3
+    svgo: ^2.8.0
   languageName: unknown
   linkType: soft
 
@@ -8173,12 +8174,6 @@ __metadata:
 "cjs-7ebabe@workspace:packages/components/s-color-picker-component/dist/pkg/cjs":
   version: 0.0.0-use.local
   resolution: "cjs-7ebabe@workspace:packages/components/s-color-picker-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"cjs-d9100c@workspace:packages/websites/coffeekraken-io/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "cjs-d9100c@workspace:packages/websites/coffeekraken-io/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
@@ -23225,7 +23220,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svgo@npm:^2.7.0":
+"svgo@npm:^2.7.0, svgo@npm:^2.8.0":
   version: 2.8.0
   resolution: "svgo@npm:2.8.0"
   dependencies:

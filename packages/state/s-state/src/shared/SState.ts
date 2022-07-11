@@ -1,6 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __deepAssign from '@coffeekraken/sugar/shared/object/deepAssign';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -92,14 +91,7 @@ export default class SState extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(object: any, settings?: Partial<ISStateSettings>) {
-        super(
-            __deepMerge(
-                {
-                    ...__SSugarConfig.get('state'),
-                },
-                settings ?? {},
-            ),
-        );
+        super(__deepMerge({}, settings ?? {}));
 
         // make sure the state has an id if want to save it
         if (this.settings.save && !this.settings.id) {
@@ -161,6 +153,12 @@ export default class SState extends __SClass {
                 return (event: string, handler: Function): any => {
                     return _this._eventEmitter.on(`delete.${event}`, handler);
                 };
+            },
+        });
+        Object.defineProperty(proxy, 'isSState', {
+            enumerable: false,
+            get() {
+                return true;
             },
         });
 

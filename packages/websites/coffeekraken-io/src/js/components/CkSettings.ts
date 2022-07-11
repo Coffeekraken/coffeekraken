@@ -4,7 +4,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __STheme from '@coffeekraken/s-theme';
 import { html } from 'lit';
 
-import { getState, setState } from '../state/state';
+import __state from '../state/state';
 
 export default class CkSettings extends __SLitComponent {
     _settings = {
@@ -16,7 +16,9 @@ export default class CkSettings extends __SLitComponent {
     };
 
     _theme = __STheme.getCurrentTheme();
-    state = getState();
+    state = __state.define('ck-settings', {
+        darkMode: false,
+    });
 
     static get properties() {
         return __SLitComponent.createProperties();
@@ -62,7 +64,6 @@ export default class CkSettings extends __SLitComponent {
         } else {
             this._theme = __STheme.setThemeVariant('light');
         }
-        setState(this.state);
     }
     render() {
         return html`

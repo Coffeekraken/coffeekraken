@@ -13,15 +13,6 @@
         document.body.classList.add('loading');
     </script>
 
-    <script>
-        const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
-        if (state.darkMode) {
-            document.querySelector('html').setAttribute('theme', 'default-dark');
-        } else {
-            document.querySelector('html').setAttribute('theme', 'default-light');
-        }
-    </script>
-
     @include('layouts.header.header')
 
     <div class="bkg"></div>

@@ -32,8 +32,8 @@ export default function sVitePluginSugar(settings: any = {}) {
         let envJsonStr = JSON.stringify({
             // @ts-ignore
             PLATFORM: 'browser',
-            ENV: __SEnv.env.env,
-            ENVIRONMENT: __SEnv.env.env,
+            ENV: 'development',
+            ENVIRONMENT: 'development',
             SUGAR: {
                 config: browserConfig,
             },
@@ -64,6 +64,7 @@ export default function sVitePluginSugar(settings: any = {}) {
                     return ___deepMerge(target, ...sources);
                 }
             `.replace('\n', ''),
+            'console.log("inject");',
             `document.env = ___deepMerge(JSON.parse(\`${envJsonStr}\`), {
                 SUGAR: document.SUGAR ?? {}
             })`,
@@ -90,6 +91,7 @@ export default function sVitePluginSugar(settings: any = {}) {
                         map: null,
                     };
                 }
+
                 if (config.build.rollupOptions?.input) {
                     if (!config.build.lib) {
                         src = await _injectEnvVars(src, id);

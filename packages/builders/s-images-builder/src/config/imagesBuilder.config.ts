@@ -19,14 +19,14 @@ export default function (env, config) {
          * @name            compressExts
          * @namespace       config.imagesBuilder
          * @type            String
-         * @default         ['jpg', 'jpeg', 'png', 'svg', 'webp']
+         * @default         ['jpg', 'jpeg', 'png', 'webp']
          *
          * Specify a which file extensions you want to compress
          *
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        compressExts: ['jpg', 'jpeg', 'png', 'svg', 'webp'],
+        compressExts: ['jpg', 'jpeg', 'png', 'webp'],
 
         /**
          * @name            inDir

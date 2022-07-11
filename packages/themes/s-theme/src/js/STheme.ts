@@ -48,18 +48,22 @@ export default class STheme extends __SThemeBase {
         variant?: string,
         $context = document.querySelector('html'),
     ): STheme {
-        __clearTransmations(document.querySelector('html'), {
-            timeout: 100,
-        });
-
+        let themeStr;
         if (theme && variant) {
-            $context.setAttribute('theme', `${theme}-${variant}`);
+            themeStr = `${theme}-${variant}`;
         } else if (theme) {
-            $context.setAttribute('theme', `${theme}-light`);
+            themeStr = `${theme}-light`;
         } else if (variant) {
-            $context.setAttribute('theme', `default-${variant}`);
+            themeStr = `default-${variant}`;
         }
 
+        // apply the theme on context
+        STheme.applyTheme(theme, variant, $context);
+
+        // save the theme in localstorage
+        localStorage.setItem('s-theme', themeStr);
+
+        // get the current theme instance
         const currentTheme = this.getCurrentTheme($context);
 
         // dispatch a change event
@@ -72,6 +76,64 @@ export default class STheme extends __SThemeBase {
         );
 
         return currentTheme;
+    }
+
+    /**
+     * @name            applyTheme
+     * @type            Function
+     * @static
+     *
+     * This method allows you to apply a theme on a particular $context HTMLElement
+     *
+     * @param               {String}            theme           The theme name to apply
+     * @param               {String}            variant         The theme variant to apply
+     * @param               {HTMLElement}       [$context=document.querySelector('html')]            The context element on which to apply the theme
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static applyTheme(
+        theme?: string,
+        variant?: string,
+        $context = document.querySelector('html'),
+    ): void {
+        __clearTransmations(document.querySelector('html'), {
+            timeout: 100,
+        });
+
+        if (theme && variant) {
+            $context.setAttribute('theme', `${theme}-${variant}`);
+        } else if (theme) {
+            $context.setAttribute(
+                'theme',
+                `${theme}-${__SSugarConfig.get('theme.variant')}`,
+            );
+        } else if (variant) {
+            $context.setAttribute(
+                'theme',
+                `${__SSugarConfig.get('theme.theme')}-${variant}`,
+            );
+        }
+    }
+
+    /**
+     * @name            preferDark
+     * @type            Function
+     * @static
+     *
+     * This method just check if the user prefer the dark mode or not.
+     *
+     * @return      {Boolean}               true if prefer dark mode, false if not
+     *
+     * @since       2.0.0
+     *
+     */
+    static preferDark(): boolean {
+        return (
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+        );
     }
 
     /**
@@ -108,11 +170,56 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static init($context = document.querySelector('html')): STheme {
-        const theme = this.getCurrentTheme($context);
+        // set the current theme in the env.SUGAR.theme property
+        const themeInstance = this.getCurrentTheme($context);
         if (!document.env) document.env = {};
         if (!document.env.SUGAR) document.env.SUGAR = {};
-        document.env.SUGAR.theme = theme;
-        return theme;
+        document.env.SUGAR.theme = themeInstance;
+
+        // apply the theme
+        STheme.applyTheme(themeInstance.theme, themeInstance.variant, $context);
+
+        // return the current theme
+        return themeInstance;
+    }
+
+    /**
+     * @name            getThemeMetas
+     * @type            Function
+     * @static
+     *
+     * This method allows you to get the theme metas like "name", "theme" and "variant" from the passed HTMLElement
+     *
+     * @param       {HTMLElement}       $context        The context from which to get the theme metas
+     * @return      {any}                               The theme metas object containing the "name", "theme" and "variant" properties
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static getThemeMetas($context: HTMLElement): any {
+        let defaultTheme = __SSugarConfig.get('theme.theme'),
+            defaultVariant = __SSugarConfig.get('theme.variant');
+
+        let theme = defaultTheme,
+            variant = defaultVariant;
+
+        // restore theme if needed
+        const savedTheme = localStorage.getItem('s-theme');
+        if (savedTheme && savedTheme.split('-').length === 2) {
+            const parts = savedTheme.split('-');
+            theme = parts[0];
+            variant = parts[1];
+        } else if ($context.hasAttribute('theme')) {
+            let attr = $context.getAttribute('theme') ?? '',
+                parts = attr.split('-').map((l) => l.trim());
+            (theme = parts[0]), (variant = parts[1]);
+        }
+
+        return {
+            name: `${theme ?? defaultTheme}-${variant ?? defaultVariant}`,
+            theme: theme ?? defaultTheme,
+            variant: variant ?? defaultVariant,
+        };
     }
 
     /**
@@ -127,39 +234,12 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static getCurrentTheme($context = document.querySelector('html')): STheme {
-        const theme = __SSugarConfig.get('theme.theme');
-        const variant = __SSugarConfig.get('theme.variant');
-
-        if (!$context.hasAttribute('theme')) {
-            return <STheme>this.getTheme(theme, variant);
-        }
-
-        let attr = $context.getAttribute('theme') ?? '',
-            parts = attr.split('-').map((l) => l.trim());
-
-        if (parts.length === 2) {
-            return <STheme>this.getTheme(parts[0], parts[1]);
-        }
-
-        const themes = __SSugarConfig.get('theme.themes');
-        for (let [key, value] of Object.entries(themes)) {
-            if (
-                key === `${parts[0]}-${variant}` ||
-                key === `${theme}-${parts[0]}`
-            ) {
-                const p = key.split('-').map((l) => l.trim()),
-                    t = p[0],
-                    v = p[1];
-                return <STheme>this.getTheme(t, v);
-            }
-        }
-
-        throw new Error(
-            `The requested current theme with the "theme" attribute "${$context.getAttribute(
-                'theme',
-            )}" on the context "${$context}" does not exists...`,
-        );
+    // @ts-ignore
+    static getCurrentTheme(
+        $context: HTMLElement = document.querySelector('html'),
+    ): STheme {
+        const themeMetas = STheme.getThemeMetas($context);
+        return <STheme>this.getTheme(themeMetas.theme, themeMetas.variant);
     }
 
     /**

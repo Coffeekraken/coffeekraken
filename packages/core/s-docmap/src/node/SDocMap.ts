@@ -863,7 +863,10 @@ class SDocMap extends __SClass implements ISDocmap {
 
                             // check if the value match the filter or not
                             // if not, we do not take the docblock
-                            if (!value.match(filterReg)) {
+                            if (
+                                typeof value === 'string' &&
+                                !value.match(filterReg)
+                            ) {
                                 matchFilters = false;
                                 break;
                             }

@@ -1,21 +1,14 @@
 // @ts-nocheck
 
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SRequest from '@coffeekraken/s-request';
+import { SStateManager } from '@coffeekraken/s-state';
 
-export function getState(): any {
-    const state = JSON.parse(
-        window.localStorage.getItem('coffeekrakenio') ?? '{}',
-    );
-    console.log('___S', state);
-    return state;
-}
+const state = new SStateManager({
+    id: 'ck-state',
+    save: true,
+});
 
-export function setState(stateObj) {
-    const state = getState();
-    const newState = __deepMerge(state, stateObj);
-    window.localStorage.setItem('coffeekrakenio', JSON.stringify(newState));
-}
+export default state;
 
 let _docmap, _docmapPromise;
 export async function loadDocmap(): Promise<any> {

@@ -341,59 +341,16 @@ export default class SComponentUtils extends __SClass {
             );
         }
 
-        // let saveTimeout;
-        let _state = new __SState(state, {
-            id: finalStateSettings.id,
-            save: finalStateSettings.save,
-        });
-        // // let _state = Object.assign({}, state);
-        // for (let [key, value] of Object.entries(state)) {
-        //     Object.defineProperty(state, key, {
-        //         enumerable: true,
-        //         get() {
-        //             return _state[key];
-        //         },
-        //         set(value) {
-        //             if (_state[key] !== value) {
-        //                 // let finalValue = value;
-        //                 // if (finalStateSettings.onUpdate) {
-        //                 //     finalValue =
-        //                 //         finalStateSettings.onUpdate({
-        //                 //             value,
-        //                 //             key,
-        //                 //         }) ?? value;
-        //                 // }
-
-        //                 // _state[key] = finalValue;
-
-        //                 // if (preventSave) {
-        //                 //     preventSave = false;
-        //                 //     return;
-        //                 // }
-
-        //                 // if (finalStateSettings.save) {
-        //                 //     clearTimeout(saveTimeout);
-        //                 //     saveTimeout = setTimeout(() => {
-        //                 //         localStorage.setItem(
-        //                 //             `s-component-utils-state-${finalStateSettings.id}`,
-        //                 //             JSON.stringify(_state),
-        //                 //         );
-        //                 //     });
-        //                 // }
-        //             }
-        //         },
-        //     });
-        // }
-
-        // restoring state
-        // if (finalStateSettings.save) {
-        //     const savedState = localStorage.getItem(
-        //         `s-component-utils-state-${finalStateSettings.id}`,
-        //     );
-        //     if (savedState) {
-        //         _state = Object.assign(_state, JSON.parse(savedState));
-        //     }
-        // }
+        // handling state
+        let _state;
+        if (state.isSState) {
+            _state = state;
+        } else {
+            _state = new __SState(state, {
+                id: finalStateSettings.id,
+                save: finalStateSettings.save,
+            });
+        }
 
         return _state;
     }

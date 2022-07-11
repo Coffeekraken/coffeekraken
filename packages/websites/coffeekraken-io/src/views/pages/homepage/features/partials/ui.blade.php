@@ -13,7 +13,7 @@
             <li>
                 <a href="/styleguide/ui/button" title="Coffeekraken buttons">
                     <div class="icon-card s-color:accent"
-                        style="--image: url(/dist/img/previews/preview-button.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-button"></i>
                             <p class="s-p">Buttons</p>
@@ -24,7 +24,7 @@
             <li>
                 <a href="/styleguide/ui/dropdown" title="Coffeekraken dropdowns">
                     <div class="icon-card s-color:complementary"
-                        style="--image: url(/dist/img/previews/preview-dropdown.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-dropdown"></i>
                             <p class="s-p">Dropdowns</p>
@@ -35,7 +35,7 @@
             <li>
                 <a href="/styleguide/ui/tooltip" title="Coffeekraken tooltips">
                     <div class="icon-card s-color:accent"
-                        style="--image: url(/dist/img/previews/preview-tooltip.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-tooltip"></i>
                             <p class="s-p">Tooltips</p>
@@ -46,7 +46,7 @@
             <li>
                 <a href="/styleguide/form/switch" title="Coffeekraken switch">
                     <div class="icon-card s-color:complementary"
-                        style="--image: url(/dist/img/previews/preview-switch.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-switch"></i>
                             <p class="s-p">Switches</p>
@@ -58,7 +58,7 @@
                 <a href="/@coffeekraken/s-date-picker-component/styleguide/form/s-date-picker"
                     title="Coffeekraken date picker">
                     <div class="icon-card s-color:accent"
-                        style="--image: url(/dist/img/previews/preview-datepicker.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-datepicker"></i>
                             <p class="s-p">Date Picker</p>
@@ -70,7 +70,7 @@
                 <a href="/@coffeekraken/s-filtrable-input-component/styleguide/ui/filtrable-input"
                     title="Coffeekraken filtrable input">
                     <div class="icon-card s-color:complementary"
-                        style="--image: url(/dist/img/previews/preview-filtrable-input.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-autocomplete"></i>
                             <p class="s-p">Filtrable Input</p>
@@ -81,7 +81,7 @@
             <li>
                 <a href="/styleguide/ui/loaders" title="Coffeekraken loaders">
                     <div class="icon-card s-color:accent"
-                        style="--image: url(/dist/img/previews/preview-loader.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-loader"></i>
                             <p class="s-p">Loaders</p>
@@ -92,7 +92,7 @@
             <li>
                 <a href="/@coffeekraken/s-range-component/styleguide/form/s-range" title="Coffeekraken range input">
                     <div class="icon-card s-color:complementary"
-                        style="--image: url(/dist/img/previews/preview-range.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-range"></i>
                             <p class="s-p">Range Input</p>
@@ -104,7 +104,7 @@
                 <a href="/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example"
                     title="Coffeekraken code example">
                     <div class="icon-card s-color:accent"
-                        style="--image: url(/dist/img/previews/preview-code-example.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-code"></i>
                             <p class="s-p">Code Example</p>
@@ -115,7 +115,7 @@
             <li>
                 <a href="/styleguide/ui/avatar" title="Coffeekraken avatar">
                     <div class="icon-card s-color:complementary"
-                        style="--image: url(/dist/img/previews/preview-avatar.jpg);">
+                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-avatar"></i>
                             <p class="s-p">Avatar</p>

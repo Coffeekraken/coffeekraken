@@ -66,6 +66,7 @@
         "@coffeekraken/s-sitemap-builder": "^2.0.0",
         "@coffeekraken/s-slider-component": "^2.0.0",
         "@coffeekraken/s-static-builder": "^2.0.0",
+        "@coffeekraken/s-state": "^2.0.0",
         "@coffeekraken/s-stdio": "^2.0.0",
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/s-sugar-feature": "^2.0.0",

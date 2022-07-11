@@ -79,13 +79,13 @@ export class ApiNav extends __SLitComponent {
                 'feature',
             ];
 
-            if (!item.type) return false;
+            let type = item.type?.types?.[0]?.type ?? item.type;
+            if (!type) return false;
 
-            if (types.indexOf(item.type.toLowerCase()) === -1)
-                types.push(item.type.toLowerCase());
+            if (types.indexOf(type.toLowerCase()) === -1)
+                types.push(type.toLowerCase());
 
-            if (supportedTypes.indexOf(item.type.toLowerCase()) === -1)
-                return false;
+            if (supportedTypes.indexOf(type.toLowerCase()) === -1) return false;
             return true;
         });
 

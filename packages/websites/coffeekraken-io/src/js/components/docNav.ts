@@ -9,7 +9,7 @@ import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToO
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import __miniSearch from 'minisearch';
-import { getState, loadDocmap, setState } from '../state/state';
+import { getState, loadDocmap } from '../state/state';
 
 export default class DocNav extends __SLitComponent {
     maxItems = 10;
@@ -180,7 +180,7 @@ export default class DocNav extends __SLitComponent {
             this._filterItems();
 
             // save state
-            this._saveState();
+            // this._saveState();
         }, 300);
     }
     _togglePlatform(platform) {
@@ -202,7 +202,7 @@ export default class DocNav extends __SLitComponent {
         this._filterItems();
 
         // save state
-        this._saveState();
+        // this._saveState();
     }
     _toggleType(type) {
         const idx = this._saved.types.indexOf(type);
@@ -223,7 +223,7 @@ export default class DocNav extends __SLitComponent {
         this._filterItems();
 
         // save state
-        this._saveState();
+        // this._saveState();
     }
     _toggleStatus(status) {
         const idx = this._saved.statuses.indexOf(status);
@@ -244,13 +244,13 @@ export default class DocNav extends __SLitComponent {
         this._filterItems();
 
         // save state
-        this._saveState();
+        // this._saveState();
     }
-    _saveState() {
-        setState({
-            docList: this._saved,
-        });
-    }
+    // _saveState() {
+    //     setState({
+    //         docList: this._saved,
+    //     });
+    // }
     async _restoreState() {
         // return;
         const state = await getState();

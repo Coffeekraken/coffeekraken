@@ -152,16 +152,16 @@ class SDocblockBlock extends __SClass {
             ),
         );
 
-        // this._source = source
-        //     .trim()
-        //     .replace(/\s\*\s/gm, '\n * ')
-        //     .split(/\n/gm)
-        //     .map((l) => l.trim())
-        //     .filter((l) => l !== '')
-        //     .join('\n')
-        //     // .replace(/\*\s\*/gm, '*')
-        //     .replace(/^\/\*\*/, '/**\n*')
-        //     .replace(/\*\/$/, '\n*/');
+        this._source = source
+            .trim()
+            .replace(/\s\*\s/gm, '\n * ')
+            .split(/\n/gm)
+            .map((l) => l.trim())
+            .filter((l) => l !== '')
+            .join('\n')
+            // .replace(/\*\s\*/gm, '*')
+            .replace(/^\/\*\*/, '/**\n*')
+            .replace(/\*\/$/, '\n*/');
     }
 
     /**
@@ -321,7 +321,11 @@ class SDocblockBlock extends __SClass {
                             value: `<red>[SDocblockBlock]</red> An error occured during the parsing of the docblock bellow on the tag <yellow>${prop}</yellow>:\n\n${this._source}\n\n${e.stack}`,
                         });
                     }
-                    if (res !== undefined) {
+                    if (res?.tags) {
+                        for (let [key, value] of Object.entries(res.tags)) {
+                            finalDocblockObj[key] = value;
+                        }
+                    } else if (res !== undefined) {
                         finalDocblockObj[prop] = res;
                     }
                 } else {
@@ -367,9 +371,10 @@ class SDocblockBlock extends __SClass {
                         `${finalDocblockObj.namespace}.${finalDocblockObj.name}`,
                     );
                 } else {
-                    finalDocblockObj.id = __sha256.encrypt(
+                    // ensure it start with a character for html id attribute to work correctly
+                    finalDocblockObj.id = `s${__sha256.encrypt(
                         finalDocblockObj.raw,
-                    );
+                    )}`;
                 }
             }
 

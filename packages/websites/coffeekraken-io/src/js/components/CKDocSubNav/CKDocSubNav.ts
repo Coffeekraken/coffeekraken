@@ -3,9 +3,6 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
-import __filterObject from '@coffeekraken/sugar/shared/object/filter';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 
 export default class CKDocSubNav extends __SLitComponent {
     @property({ type: String })
@@ -43,7 +40,7 @@ export default class CKDocSubNav extends __SLitComponent {
 
         this._$items = Array.from(
             $source.querySelectorAll(
-                '[id]:not(code [id]):not(template [id]):not(.preview-html [id])',
+                'section.docblock.first [id]:not(code [id]):not(template [id]):not(.preview-html [id]), h4#doc-api',
             ),
         ).filter(($item) => {
             if (!$item.id) return false;

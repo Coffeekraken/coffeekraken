@@ -27,6 +27,7 @@
         "@coffeekraken/s-sugar-json": "^2.0.0",
         "@coffeekraken/s-typescript-builder": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
+        "dotenv": "^16.0.1",
         "enquirer": "^2.3.6"
     },
     "main": "./dist/pkg/cjs/cli/exports.js",

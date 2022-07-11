@@ -18,6 +18,7 @@ import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __dotenv from 'dotenv';
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
 import __path from 'path';
@@ -69,6 +70,9 @@ if (!__SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`]) {
 }
 
 __SLog.filter(__SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`]);
+
+// dotenv
+__dotenv.config();
 
 export interface ISSugarCliArgs {
     command: string;
@@ -604,12 +608,7 @@ export default class SSugarCli {
                     ? '<cyan>test</cyan>'
                     : '<yellow>development</yellow>'
             } environment`,
-            !__SEnv.packageJson
-                ? `This process is running <yellow>outside of an existing package</yellow>.`
-                : '',
-            !__SEnv.packageJson
-                ? `Not all the features will be available...`
-                : '',
+            `<cyan>ENV</cyan> variable(s) loaded using <magenta>dotenv</magenta>`,
             '',
         ]
             .filter((l) => l !== '')

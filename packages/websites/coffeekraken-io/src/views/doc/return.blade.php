@@ -8,7 +8,7 @@
             {!! \Sugar\markdown\toHtml($block->return->description) !!}
         </div>
 
-        <div>
+        <div class="s-p:30">
             @include('doc.partials.paramType', ['type' => $block->return->type])
         </div>
     </header>

@@ -284,8 +284,9 @@ export default class SThemeBase extends __SEventEmitter {
             variant = __SSugarConfig.get('theme.variant');
         }
 
-        if (this._instanciatedThemes[`${theme}-${variant}`])
+        if (this._instanciatedThemes[`${theme}-${variant}`]) {
             return this._instanciatedThemes[`${theme}-${variant}`];
+        }
 
         const themes = __SSugarConfig.get('theme.themes');
 

@@ -110,6 +110,16 @@ Use it then in your html:
 
 > Note that the provided `html` function came from the AMAZING [lit-element](https://lit.dev) library used under the hood as template engine.
 
+## Items
+
+Each items have to be a simple javascript object. You can specify every properties you want but here's some special properties you can specify that will be used by the component:
+
+-   `value`: Specify the property name of your item you want to use as value. By default it will use `value`.
+-   `label`: Specify the property name of your item you want to use as label in the default item template.
+-   `preventSet`: Set it to true if you want to prevent the `input` to be filled with the selected item value
+-   `preventClose`: Set it to true if you want to prevent your filtrable list to close when the `closeOnSelect` prop is set to true
+-   `preventReset`: Set it to true if you want to prevent your filtrable list to be reseted when the `resetOnSelect` prop is set to true
+
 ## Attributes
 
 {{> interface namespace='@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface' }}

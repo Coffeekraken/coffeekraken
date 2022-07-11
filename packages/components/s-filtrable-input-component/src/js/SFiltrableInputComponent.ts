@@ -22,6 +22,7 @@ export interface ISFiltrableInputComponentProps {
     items: any[];
     value: string;
     label: string;
+    showKeywords: boolean;
     emptyText: string;
     loadingText: string;
     searchValudPreprocess: Function;
@@ -31,6 +32,7 @@ export interface ISFiltrableInputComponentProps {
     closeTimeout: number;
     interactive: boolean;
     closeOnSelect: boolean;
+    resetOnSelect: boolean;
     notSelectable: boolean;
     maxItems: number;
     classes: Record<string, string>;
@@ -38,15 +40,10 @@ export interface ISFiltrableInputComponentProps {
 }
 
 export interface ISFiltrableInputState {
-    baseTemplates: Record<string, Function>;
-    preselectedItems: any[];
-    selectedItems: any[];
     displayedMaxItems: number;
     value: string;
     isActive: boolean;
     isLoading: boolean;
-    items: any[];
-    filteredItems: any[];
 }
 
 /**
@@ -156,20 +153,23 @@ export default class SFiltrableInput extends __SLitComponent {
     $input: HTMLInputElement;
     // @ts-ignore
     $form: HTMLFormElement;
-
-    _templatesFromHtml: any = {};
-
+    // state
     state: ISFiltrableInputState = {
-        baseTemplates: {},
-        preselectedItems: [],
-        selectedItems: [],
         displayedMaxItems: 0,
         value: '',
         isActive: false,
         isLoading: false,
-        items: [],
-        filteredItems: [],
     };
+
+    // public properties
+    preselectedItems = [];
+    selectedItems = [];
+    filteredItems = [];
+
+    // private properties
+    _templatesFromHtml: any = {};
+    _baseTemplates = {};
+    _items = [];
 
     constructor() {
         super(
@@ -184,11 +184,11 @@ export default class SFiltrableInput extends __SLitComponent {
 
         if (this.props.items && typeof this.props.items === 'string') {
             try {
-                this.state.items = JSON.parse(this.props.items);
+                this._items = JSON.parse(this.props.items);
             } catch (e) {
                 const $itemsElm = document.querySelector(this.props.items);
                 if ($itemsElm) {
-                    this.state.items = JSON.parse($itemsElm.innerHTML.trim());
+                    this._items = JSON.parse($itemsElm.innerHTML.trim());
                 }
             }
 
@@ -197,14 +197,14 @@ export default class SFiltrableInput extends __SLitComponent {
                 new CustomEvent('s-filtrable-input.items', {
                     bubbles: true,
                     detail: {
-                        items: this.state.items,
+                        items: this._items,
                     },
                 }),
             );
         }
 
         // @ts-ignore
-        this.state.baseTemplates = ({ type, item, html }) => {
+        this._baseTemplates = ({ type, item, html }) => {
             switch (type) {
                 case 'item':
                     return html`
@@ -327,32 +327,28 @@ export default class SFiltrableInput extends __SLitComponent {
             await __wait();
 
             if (!this.state.isActive) return;
-            if (!this.state.filteredItems.length) return;
+            if (!this.filteredItems.length) return;
 
-            if (!this.state.preselectedItems.length) {
-                this.state.preselectedItems.push(
-                    this.state.filteredItems[
-                        this.state.filteredItems.length - 1
-                    ],
+            if (!this.preselectedItems.length) {
+                this.preselectedItems.push(
+                    this.filteredItems[this.filteredItems.length - 1],
                 );
             } else {
-                const currentIdx = this.state.filteredItems.indexOf(
-                    this.state.preselectedItems[0],
+                const currentIdx = this.filteredItems.indexOf(
+                    this.preselectedItems[0],
                 );
                 if (currentIdx === -1) {
                     return;
                 }
                 const newIdx = currentIdx - 1;
                 if (newIdx < 0) return;
-                this.state.preselectedItems = [];
-                this.state.preselectedItems.push(
-                    this.state.filteredItems[newIdx],
-                );
+                this.preselectedItems = [];
+                this.preselectedItems.push(this.filteredItems[newIdx]);
             }
             this.requestUpdate();
 
             const $item = this.$list.children[
-                this.state.filteredItems.indexOf(this.state.preselectedItems[0])
+                this.filteredItems.indexOf(this.preselectedItems[0])
             ];
             // @ts-ignore
             $item.focus();
@@ -363,29 +359,27 @@ export default class SFiltrableInput extends __SLitComponent {
             await __wait();
 
             if (!this.state.isActive) return;
-            if (!this.state.filteredItems.length) return;
+            if (!this.filteredItems.length) return;
 
-            if (!this.state.preselectedItems.length) {
-                this.state.preselectedItems.push(this.state.filteredItems[0]);
+            if (!this.preselectedItems.length) {
+                this.preselectedItems.push(this.filteredItems[0]);
             } else {
-                const currentIdx = this.state.filteredItems.indexOf(
-                    this.state.preselectedItems[0],
+                const currentIdx = this.filteredItems.indexOf(
+                    this.preselectedItems[0],
                 );
                 if (currentIdx === -1) {
                     return;
                 }
                 const newIdx = currentIdx + 1;
-                if (newIdx > this.state.filteredItems.length - 1) return;
-                this.state.preselectedItems = [];
-                this.state.preselectedItems.push(
-                    this.state.filteredItems[newIdx],
-                );
+                if (newIdx > this.filteredItems.length - 1) return;
+                this.preselectedItems = [];
+                this.preselectedItems.push(this.filteredItems[newIdx]);
             }
 
             this.requestUpdate();
 
             const $item = this.$list.children[
-                this.state.filteredItems.indexOf(this.state.preselectedItems[0])
+                this.filteredItems.indexOf(this.preselectedItems[0])
             ];
             // @ts-ignore
             $item.focus();
@@ -396,10 +390,15 @@ export default class SFiltrableInput extends __SLitComponent {
             this.validateAndClose();
         });
 
+        // restore value from state
+        if (this.state.value) {
+            this.$input.value = this.state.value;
+        }
+
         // open if a value exists
         if (this.$input.value) {
             this.state.value = this.$input.value;
-            __cursorToEnd(this.$input);
+            // __cursorToEnd(this.$input);
             this.filterItems(true);
         }
     }
@@ -426,26 +425,20 @@ export default class SFiltrableInput extends __SLitComponent {
             return html` ${unsafeHTML(this._templatesFromHtml[type])} `;
         }
         // @ts-ignore
-        return this.state.baseTemplates({
+        return this._baseTemplates({
             type,
             html,
         });
     }
-    get selectedItems() {
-        return this.state.selectedItems;
-    }
-    get preselectedItems() {
-        return this.state.preselectedItems;
-    }
     validate() {
-        this.state.selectedItems = this.state.preselectedItems;
-        this.state.preselectedItems = [];
+        this.selectedItems = this.preselectedItems;
+        this.preselectedItems = [];
 
         // protect against not selected item
-        if (!this.state.selectedItems.length) return;
+        if (!this.selectedItems.length) return;
 
         // temp thing cause we need to support multiple items selected at once
-        const item = this.state.selectedItems[0];
+        const item = this.selectedItems[0];
 
         // set the value in the input
         const itemProps: Partial<ISFiltrableInputComponentProps> = __deepMerge(
@@ -453,34 +446,43 @@ export default class SFiltrableInput extends __SLitComponent {
             item.props ?? {},
         );
 
-        if (typeof itemProps.value === 'string' && item[itemProps.value]) {
-            (<HTMLInputElement>this.$input).value = __stripTags(
-                // @ts-ignore
-                item[itemProps.value],
-            );
-        } else if (typeof itemProps.value === 'function') {
-            // @ts-ignore
-            const v = itemProps.value({
-                items: [item],
-            });
-            if (typeof v !== 'string') {
-                throw new Error(
-                    `<red>[s-filtrable-input]</red> Sorry but the returned value "<yellow>${v}</yellow>" has to be a string...`,
+        if (!item.preventSet) {
+            if (typeof itemProps.value === 'string' && item[itemProps.value]) {
+                (<HTMLInputElement>this.$input).value = __stripTags(
+                    // @ts-ignore
+                    item[itemProps.value],
                 );
+            } else if (typeof itemProps.value === 'function') {
+                // @ts-ignore
+                const v = itemProps.value({
+                    items: [item],
+                });
+                if (typeof v !== 'string') {
+                    throw new Error(
+                        `<red>[s-filtrable-input]</red> Sorry but the returned value "<yellow>${v}</yellow>" has to be a string...`,
+                    );
+                }
+                (<HTMLInputElement>this.$input).value = __stripTags(v);
             }
-            (<HTMLInputElement>this.$input).value = __stripTags(v);
         }
 
-        const $selectedItem = this.$list.children[
-            this.state.filteredItems.indexOf(item)
-        ];
+        let selectedItemItem = 0;
+        for (let i = 0; i < this.filteredItems.length; i++) {
+            const itemObj = this.filteredItems[i];
+            if (itemObj.id === item.id) {
+                selectedItemItem = i;
+                break;
+            }
+        }
+
+        const $selectedItem = this.$list.children[selectedItemItem];
 
         // dispatch an event
         const event = new CustomEvent('s-filtrable-input.select', {
             bubbles: true,
             detail: {
-                item: this.state.selectedItems[0],
-                items: this.state.selectedItems,
+                item: this.selectedItems[0],
+                items: this.selectedItems,
                 $elm: $selectedItem,
             },
         });
@@ -491,11 +493,13 @@ export default class SFiltrableInput extends __SLitComponent {
         // @ts-ignore
         this.requestUpdate();
         // close on select if needed
-        if (this.props.closeOnSelect) {
-            // reset
+        if (this.props.closeOnSelect && !item.preventClose) {
+            this.close();
+        }
+        // reset on select
+        if (this.props.resetOnSelect && !item.preventReset) {
             this.reset();
             this.filterItems();
-            this.close();
         }
     }
     validateAndClose() {
@@ -505,8 +509,8 @@ export default class SFiltrableInput extends __SLitComponent {
         }, this.props.closeTimeout);
     }
     resetSelected() {
-        this.state.preselectedItems = [];
-        this.state.selectedItems = [];
+        this.preselectedItems = [];
+        this.selectedItems = [];
     }
     reset() {
         this.resetSelected();
@@ -525,19 +529,20 @@ export default class SFiltrableInput extends __SLitComponent {
                 value: (<HTMLInputElement>this.$input).value,
             });
             if (__isPlainObject(items)) {
-                this.state.items = Object.values(items);
+                this._items = Object.values(items);
             } else if (Array.isArray(items)) {
                 // @ts-ignore
-                this.state.items = items;
+                this._items = items;
             } else {
                 throw new Error(`Sorry but the "items" MUST be an Array...`);
             }
+            this.requestUpdate();
             // @ts-ignore
             this.dispatchEvent(
                 new CustomEvent('s-filtrable-input.items', {
                     bubbles: true,
                     detail: {
-                        items: this.state.items,
+                        items: this._items,
                     },
                 }),
             );
@@ -549,7 +554,7 @@ export default class SFiltrableInput extends __SLitComponent {
         // reset selected
         this.resetSelected();
 
-        let items = this.state.items;
+        let items = this._items;
 
         let searchValue = this.state.value;
         if (this.props.searchValuePreprocess) {
@@ -617,7 +622,7 @@ export default class SFiltrableInput extends __SLitComponent {
         }
 
         // @ts-ignore
-        this.state.filteredItems = filteredItems;
+        this.filteredItems = filteredItems;
         this.state.isLoading = false;
         // @ts-ignore
         this.requestUpdate();
@@ -636,8 +641,8 @@ export default class SFiltrableInput extends __SLitComponent {
     _setPreselectedItem(item) {
         // check if the component is in not selectable mode
         if (this.props.notSelectable) return;
-        !this.state.preselectedItems.includes(item) &&
-            this.state.preselectedItems.push(item);
+        !this.preselectedItems.includes(item) &&
+            this.preselectedItems.push(item);
         // @ts-ignore
         this.requestUpdate();
     }
@@ -670,6 +675,20 @@ export default class SFiltrableInput extends __SLitComponent {
         this.$dropdown.style.maxHeight = `${maxHeight}px`;
     }
 
+    /**
+     * This function just remove a keyword from the input and filter the items again
+     */
+    _removeKeyword(keyword: string): void {
+        const newValue = this.state.value
+            .split(' ')
+            .filter((k) => k !== keyword)
+            .join(' ');
+        this.$input.value = newValue;
+        this.state.value = newValue;
+        this.filterItems();
+        __cursorToEnd(this.$input);
+    }
+
     render() {
         return html`
             <div
@@ -679,10 +698,38 @@ export default class SFiltrableInput extends __SLitComponent {
                 <div
                     class="${this.componentUtils.className('__before')} ${this
                         .props.classes.before}"
-                    tabindex="0"
+                    tabindex="-1"
                 >
                     ${this._getTemplate('before')}
                 </div>
+                ${this.$input && this.$input.value && this.props.showKeywords
+                    ? html`
+                          <div
+                              tabindex="-1"
+                              class="${this.componentUtils.className(
+                                  '__keywords',
+                              )} ${this.props.classes.keywords}"
+                          >
+                              ${this.$input.value
+                                  .split(' ')
+                                  .filter((s) => s !== '')
+                                  .map(
+                                      (keyword) => html`
+                                          <span
+                                              tabindex="-1"
+                                              @click=${() =>
+                                                  this._removeKeyword(keyword)}
+                                              class="${this.componentUtils.className(
+                                                  '__keyword',
+                                                  's-badge',
+                                              )}"
+                                              >${keyword}</span
+                                          >
+                                      `,
+                                  )}
+                          </div>
+                      `
+                    : ''}
                 <ul
                     class="${this.componentUtils.className('__list')} ${this
                         .props.classes.list}"
@@ -702,14 +749,14 @@ export default class SFiltrableInput extends __SLitComponent {
                                       html,
                                   }) ??
                                   // @ts-ignore
-                                  this.state.baseTemplates({
+                                  this._baseTemplates({
                                       type: 'loading',
                                       html,
                                   })}
                               </li>
                           `
                         : !this.state.isLoading &&
-                          this.state.filteredItems.length <= 0
+                          this.filteredItems.length <= 0
                         ? html`
                               <li
                                   class="${this.componentUtils.className(
@@ -724,15 +771,14 @@ export default class SFiltrableInput extends __SLitComponent {
                                       html,
                                   }) ??
                                   // @ts-ignore
-                                  this.state.baseTemplates({
+                                  this._baseTemplates({
                                       type: 'empty',
                                       html,
                                   })}
                               </li>
                           `
-                        : !this.state.isLoading &&
-                          this.state.filteredItems.length
-                        ? this.state.filteredItems.map((item, idx) =>
+                        : !this.state.isLoading && this.filteredItems.length
+                        ? this.filteredItems.map((item, idx) =>
                               idx < this.state.displayedMaxItems
                                   ? html`
                                         <li
@@ -745,11 +791,11 @@ export default class SFiltrableInput extends __SLitComponent {
                                             @focus=${() =>
                                                 this._setPreselectedItem(item)}
                                             style="z-index: ${999999999 - idx}"
-                                            tabindex="0"
+                                            tabindex="-1"
                                             class="${this.componentUtils.className(
                                                 '__list-item',
                                             )} ${this.props.classes
-                                                .listItem} ${this.state.selectedItems.includes(
+                                                .listItem} ${this.selectedItems.includes(
                                                 item,
                                             )
                                                 ? 'active'
@@ -764,7 +810,7 @@ export default class SFiltrableInput extends __SLitComponent {
                                                 idx,
                                             }) ??
                                             // @ts-ignore
-                                            this.state.baseTemplates({
+                                            this._baseTemplates({
                                                 type: 'item',
                                                 html,
                                                 unsafeHTML,
@@ -780,7 +826,7 @@ export default class SFiltrableInput extends __SLitComponent {
                 <div
                     class="${this.componentUtils.className('__after')} ${this
                         .props.classes.after}"
-                    tabindex="0"
+                    tabindex="-1"
                 >
                     ${this.props.templates?.({
                         type: 'after',

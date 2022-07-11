@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString';
 
 /**
@@ -23,8 +22,7 @@ import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 async function typeTag(data, blockSettings) {
-    const value = new String(await __resolveTypeString(`{${data.value}}`));
-    value.toString = () => data.value;
+    const value = await __resolveTypeString(`{${data.value}}`);
     return value;
 }
 export default typeTag;

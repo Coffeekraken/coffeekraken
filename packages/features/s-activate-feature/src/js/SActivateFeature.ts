@@ -103,6 +103,7 @@ export default class SActivateFeature extends __SFeature {
         this.state = this.componentUtils.handleState(this.state, {
             save: this.props.saveState,
         });
+
         if (this.props.group) {
             this.componentUtils.handleState(this.groupState, {
                 save: this.props.saveState,
@@ -264,12 +265,16 @@ export default class SActivateFeature extends __SFeature {
             this.groupState.activeId &&
             this.groupState.activeId !== this.node.id
         ) {
-            return this.unactivate({
+            return;
+        }
+
+        if (this.state.active) {
+            return this.activate({
                 force: true,
             });
         }
 
-        if (this.state.active) {
+        if (this.state.active === undefined && this.props.active) {
             return this.activate({
                 force: true,
             });
@@ -319,7 +324,7 @@ export default class SActivateFeature extends __SFeature {
                         return;
                     }
                     // @ts-ignore
-                    $element.unactivate?.();
+                    $element.unactivate();
                 });
             }
 

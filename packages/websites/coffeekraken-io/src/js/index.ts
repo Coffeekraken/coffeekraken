@@ -13,7 +13,6 @@ import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
 import {
     define as __SSliderComponent,
-    SSliderCssAnimationBehavior,
     SSliderSlideableBehavior,
 } from '@coffeekraken/s-slider-component';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
@@ -137,10 +136,10 @@ __SConductor.setup({
                 class: SSliderSlideableBehavior,
                 settings: {},
             },
-            cssAnimation: {
-                class: SSliderCssAnimationBehavior,
-                settings: {},
-            },
+            // cssAnimation: {
+            //     class: SSliderCssAnimationBehavior,
+            //     settings: {},
+            // },
         },
     });
 

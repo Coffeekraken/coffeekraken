@@ -15,7 +15,7 @@
                             {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($param->default)) }}
                         </div>
                     </div>
-                    <div>
+                    <div class="s-p:30">
                         @include('doc.partials.paramType', ['type' => $param->type])
                     </div>
                 </header>

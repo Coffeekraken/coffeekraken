@@ -70,10 +70,12 @@
                     $apiMenu = (object) [
                         'name' => 'API',
                         'search' => (object) [
+                            'id' => 'api-search',
                             'name' => 'Search',
                             'include' => 'generic/header/search-api.blade.php',
                         ],
                         'config' => (object) [
+                            'id' => 'api-configuration',
                             'name' => 'Configuration',
                             'overview' => (object) [
                                 'name' => 'Overview',
@@ -97,22 +99,27 @@
                             ],
                         ],
                         'cssDiscover' => (object) [
+                            'id' => 'api-discover-css',
                             'name' => 'Discover (css)',
                             'content' => '<ck-discover platform="css"></ck-discover>',
                         ],
                         'jsDiscover' => (object) [
+                            'id' => 'api-discover-js',
                             'name' => 'Discover (js)',
                             'content' => '<ck-discover platform="js"></ck-discover>',
                         ],
                         'postcssDiscover' => (object) [
+                            'id' => 'api-discover-postcss',
                             'name' => 'Discover (PostCSS)',
                             'content' => '<ck-discover platform="postcss"></ck-discover>',
                         ],
                         'nodeDiscover' => (object) [
+                            'id' => 'api-discover-node',
                             'name' => 'Discover (node)',
                             'content' => '<ck-discover platform="node"></ck-discover>',
                         ],
                         'phpDiscover' => (object) [
+                            'id' => 'api-discover-php',
                             'name' => 'Discover (php)',
                             'content' => '<ck-discover platform="php"></ck-discover>',
                         ],

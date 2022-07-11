@@ -77,7 +77,7 @@
                                             {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($docblock->default)) }}
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="s-p:30">
                                         @include('doc.partials.paramType', ['type' => $docblock->type])
                                     </div>
                                 </header>

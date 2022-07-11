@@ -20,7 +20,7 @@
 
     .__section-title {
         padding: sugar.padding(30);
-        font-size: sugar.font.size(50);
+        font-size: sugar.font.size(40);
         background: sugar.color(main, surface);
         border-radius: sugar.border.radius();
         margin-block-start: sugar.margin(20);

@@ -7,7 +7,7 @@ if ($block->get) {
 
 <h1 class="s-typo:h1 s-mbe:30 s-tc:accent">
 
-    @if ($block->type->types[0]->type == 'Function')
+    @if ($block->type->raw == 'Function')
         {!! $titleStr !!}()
     @else
         {!! $titleStr !!}

@@ -1,5 +1,6 @@
+import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __sanitizeJsonString from '@coffeekraken/sugar/shared/json/sanitizeJsonString';
 
 /**
@@ -18,29 +19,31 @@ export default function sVitePluginSugar(settings: any = {}) {
     let areEnvVarsInjected = false;
     let config;
 
-    const packageRoot = __packageRootDir();
-
     async function _injectEnvVars(src, id) {
         // if (areEnvVarsInjected) return src;
         // areEnvVarsInjected = true;
 
         const c = await __SSugarConfig.load({
             platform: 'browser',
-            env: 'development',
+            env: __SEnv.env.env,
         });
         const browserConfig = await c.instance.toObject();
 
         let envJsonStr = JSON.stringify({
             // @ts-ignore
-            platform: 'browser',
-            env: 'development',
-            config: browserConfig,
+            PLATFORM: 'browser',
+            ENV: __SEnv.env.env,
+            ENVIRONMENT: __SEnv.env.env,
+            SUGAR: {
+                config: browserConfig,
+            },
+            PACKAGE: __packageJson(),
         });
 
         envJsonStr = __sanitizeJsonString(envJsonStr);
 
         const code = [
-            `// sugar variables`,
+            `// sugar environment`,
             `
                 function ___isObject(item) {
                     return (item && typeof item === 'object' && !Array.isArray(item));
@@ -61,8 +64,9 @@ export default function sVitePluginSugar(settings: any = {}) {
                     return ___deepMerge(target, ...sources);
                 }
             `.replace('\n', ''),
-            `if (!document.env) document.env = {SUGAR:{}};`,
-            `document.env.SUGAR = ___deepMerge(JSON.parse(\`${envJsonStr}\`), document.SUGAR ?? {});`,
+            `document.env = ___deepMerge(JSON.parse(\`${envJsonStr}\`), {
+                SUGAR: document.SUGAR ?? {}
+            })`,
         ];
         return [code.join('\n'), src].join('\n');
     }

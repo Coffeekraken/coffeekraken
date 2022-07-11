@@ -1,11 +1,10 @@
-import __autoCast from '../../shared/string/autoCast';
+import __SInterface from '@coffeekraken/s-interface';
+import __fs from 'fs';
+import __path from 'path';
+import __replaceTokens from '../../shared/token/replaceTokens';
 import __parseTypeString, {
     ITypeStringObject,
 } from '../../shared/type/parseTypeString';
-import __SInterface from '@coffeekraken/s-interface';
-import __replaceTokens from '../../shared/token/replaceTokens';
-import __path from 'path';
-import __fs from 'fs';
 import __packageRoot from '../path/packageRoot';
 
 /**
@@ -44,6 +43,7 @@ import __packageRoot from '../path/packageRoot';
 export interface IResolveTypeStringResult {
     types: ITypeStringObject[];
     interface?: __SInterface;
+    raw: string;
 }
 
 export interface IResolveTypeStringSettings {
@@ -96,5 +96,6 @@ export default async function resolveTypeString(
     return {
         types,
         interface: interf,
+        raw: typeString.trim().replace(/^\{/, '').replace(/\}$/, ''),
     };
 }

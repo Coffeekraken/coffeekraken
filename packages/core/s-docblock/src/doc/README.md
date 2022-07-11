@@ -53,6 +53,21 @@ Here's the list of supported tags. This can be enhanced if needed (documentation
 -   **@{{this}}**
     {{/each}}
 
+## Register a new tag
+
+To register a new tag, you just have to call the static `registerTag` method on the `SDocblockBlock` class like so:
+
+```js
+import { SDocblockBlock } from '@coffeekraken/s-docblock';
+SDocblockBlock.registerTag('myTagName', (data, blockSettings) => {
+    // handle your tag logic here...
+    // and return what you want as a result
+    return {
+        something: 'cool',
+    };
+});
+```
+
 ## Settings
 
 {{> interface namespace='@coffeekraken.s-docblock.shared.interface.SDocblockSettingsInterface' }}

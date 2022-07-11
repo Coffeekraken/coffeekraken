@@ -4,9 +4,7 @@ import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-inp
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SRequest from '@coffeekraken/s-request';
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
-import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
 import { html } from 'lit';
 
 __sFiltrableInputDefine(
@@ -16,6 +14,9 @@ __sFiltrableInputDefine(
             return `${item.type} ${item.namespace}`;
         },
         closeOnSelect: true,
+        resetOnSelect: false,
+        showKeywords: true,
+        saveState: true,
         filtrable: ['namespace', 'name', 'type'],
         searchValuePreprocess: (value) => {
             // "@" searches
@@ -108,26 +109,14 @@ __sFiltrableInputDefine(
                 Object.keys(result.data.map).forEach((namespace) => {
                     const item = result.data.map[namespace];
                     item.fullNamespace = namespace;
+                    item.preventSet = true;
                     items.push(item);
                 });
-
-                // window.localStorage.setItem(
-                //     'ck-search-items',
-                //     JSON.stringify(items),
-                // );
 
                 return items;
             }
 
-            let items;
-
-            // const cached = window.localStorage.getItem('ck-search-items');
-            // if (!cached) {
-            items = await fetchItems();
-            // } else {
-            //     fetchItems();
-            //     items = JSON.parse(cached);
-            // }
+            let items = await fetchItems();
 
             if (value.match(/^@([a-z_-]+)?$/)) {
                 let packageName = value.replace(/^@/, '');
@@ -149,6 +138,7 @@ __sFiltrableInputDefine(
                                 type: 'package',
                                 name: item.package.name,
                                 description: item.package.description,
+                                preventClose: true,
                                 props: {
                                     value: 'value',
                                 },
@@ -167,6 +157,7 @@ __sFiltrableInputDefine(
                         type: 'category',
                         name: 'Documentation',
                         description: 'Search through the documentation',
+                        preventClose: true,
                         props: {
                             value: 'value',
                         },
@@ -177,6 +168,7 @@ __sFiltrableInputDefine(
                         type: 'category',
                         name: 'Styleguide',
                         description: 'Search through the styleguide',
+                        preventClose: true,
                         props: {
                             value: 'value',
                         },
@@ -187,6 +179,7 @@ __sFiltrableInputDefine(
                         type: 'category',
                         name: 'API',
                         description: 'Search through the API',
+                        preventClose: true,
                         props: {
                             value: 'value',
                         },
@@ -240,51 +233,35 @@ export default class CKSearch extends __SLitComponent {
         super({
             shadowDom: false,
         });
-        const queryObj = __queryStringToObject(document.location.search ?? '');
-        this._search = queryObj.search ?? '';
-
-        __querySelectorLive('[href^="#search="]', ($elm) => {
-            $elm.addEventListener('click', (e) => {
-                this._handleAnchor(e.target.href.split('#').pop());
-                e.preventDefault();
-                e.stopPropagation();
-            });
-        });
     }
-    _handleAnchor(anchor) {
-        const keywords = anchor.replace('search=', '').split('=').pop();
-        this._$input.value = keywords;
-        this._$input.focus();
-    }
-    _$input;
+    $input;
     _search;
     firstUpdated() {
-        this._$input = this.querySelector('input');
+        this.$input = this.querySelector('input');
 
         // if (document.location.hash) {
         //     this._handleAnchor(document.location.hash.replace('#', ''));
         // }
 
         __hotkey('ctrl+f').on('press', () => {
-            __cursorToEnd(this._$input);
+            __cursorToEnd(this.$input);
         });
 
         this.addEventListener('s-filtrable-input.select', (e) => {
             const { item, $elm } = e.detail;
 
             if (item.type === 'category' || item.type === 'package') {
-                this._$input.value = item.value + ' ';
-                __cursorToEnd(this._$input);
+                this.$input.value = item.value + ' ';
+                __cursorToEnd(this.$input);
             } else {
                 if (item.menu?.slug) {
-                    if (item.package.name !== window.packageJson.name) {
+                    if (item.package.name !== __SEnv.env.PACKAGE.name) {
                         $elm.dispatchEvent(
                             new CustomEvent('location.href', {
                                 detail: `/package/${item.package.name}${item.menu.slug}`,
                                 bubbles: true,
                             }),
                         );
-                        // document.location.href = `/${item.package.name}${item.menu.slug}`;
                     } else {
                         $elm.dispatchEvent(
                             new CustomEvent('location.href', {
@@ -292,7 +269,6 @@ export default class CKSearch extends __SLitComponent {
                                 bubbles: true,
                             }),
                         );
-                        // document.location.href = item.menu.slug;
                     }
                 } else {
                     $elm.dispatchEvent(
@@ -301,11 +277,7 @@ export default class CKSearch extends __SLitComponent {
                             bubbles: true,
                         }),
                     );
-                    // document.location.href = `/api/${item.fullNamespace}`;
                 }
-
-                this._$input.value = '';
-                this._$input.blur();
             }
         });
     }
@@ -314,7 +286,7 @@ export default class CKSearch extends __SLitComponent {
             <div class="ck-search">
                 <div class="ck-search__background"></div>
                 <div class="ck-search__content s-color:accent">
-                    <ck-search-input>
+                    <ck-search-input id="ck-search-input">
                         <input
                             placeholder="Search ( Ctrl+F )..."
                             type="text"
@@ -328,11 +300,6 @@ export default class CKSearch extends __SLitComponent {
                                     <span class="s-typo:p s-tc:current"
                                         >Search tips</span
                                     >
-                                    <i
-                                        class="s-icon:close s-float:right"
-                                        s-activate
-                                        href="#search-tips"
-                                    ></i>
                                 </p>
                                 <p class="s-typo:p">
                                     <span class="s-badge:outline s-mie:10"

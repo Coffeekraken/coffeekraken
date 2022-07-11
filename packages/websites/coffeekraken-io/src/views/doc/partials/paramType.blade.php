@@ -18,8 +18,8 @@
     
     <div class="s-dropdown-container" tabindex="-1">
 
-        <div class="s-typo:bold s-p:30 s-tc:info">
-            {{ $type->types[0]->type }}
+        <div class="s-typo:bold s-tc:info s-white-space:nowrap">
+            <span>{{ $type->types[0]->type }}</span>
             @if ($type->types[0]->of and count($type->types[0]->of))
                 <span class="s-tc:accent">&lt;{{ $typeOfToString($type->types[0]->of) }}&gt;</span>
             @endif

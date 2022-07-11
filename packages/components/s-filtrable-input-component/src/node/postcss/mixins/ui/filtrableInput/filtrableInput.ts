@@ -81,11 +81,16 @@ export default function ({
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-        
+
             .s-filtrable-input__dropdown {
                 @sugar.depth(ui.filtrableInput.depth);
                 transition: sugar.theme(ui.filtrableInput.transition);
             }
+
+            .s-filtrable-input__keywords {
+                padding: sugar.padding(ui.filtrableInput.paddingBlock) sugar.padding(ui.filtrableInput.paddingInline);
+            }
+
             .s-filtrable-input__list {
                 width: 100%;
                 transition: sugar.theme(ui.filtrableInput.transition);
@@ -104,6 +109,10 @@ export default function ({
                 .s-filtrable-input__dropdown {
                     background-color: sugar.color(base, background);
                     border-radius: sugar.border.radius(ui.filtrableInput.borderRadius);
+                }
+
+                .s-filtrable-input__keywords {
+                    background: sugar.color(main, background);
                 }
 
                 .s-filtrable-input__list-item {

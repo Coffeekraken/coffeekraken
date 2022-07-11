@@ -47,10 +47,9 @@ if ($firstBlock->status == 'wip') {
                     </div>
 
                 @else
-
                     @foreach ($docblocks as $docblock)
                         @if (!$docblock->private)
-                            @include('generic.docblock.block', ['block' => $docblock, 'isFirst' => $loop->first])
+                            @include('generic.docblock.block', ['block' => $docblock, 'isFirst' => $loop->first, 'index' => $loop->index])
                         @endif
                     @endforeach
 

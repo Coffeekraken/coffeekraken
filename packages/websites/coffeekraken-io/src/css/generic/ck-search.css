@@ -9,7 +9,7 @@
         max-height: 250px;
         transition: sugar.transition();
         overflow: hidden;
-        background: sugar.color(main, background);
+        background: sugar.color(main, background, --darken 3);
     }
     #search-tips.active {
         max-height: 0;
@@ -19,6 +19,11 @@
     .s-filtrable-input {
         width: 100%;
         @sugar.color (accent, accent, main);
+    }
+
+    .s-filtrable-input__keywords {
+        padding-inline: sugar.padding(30);
+        padding-block: sugar.padding(30);
     }
 
     .s-filtrable-input__dropdown {

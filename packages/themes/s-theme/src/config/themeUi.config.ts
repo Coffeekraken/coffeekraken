@@ -1628,26 +1628,50 @@ export default (env, config) => {
              * @name          paddingInline
              * @namespace     config.themeUi.dropdown
              * @type          String
-             * @default      30
+             * @default      '[theme.padding.10]'
              *
              * Specify the default padding inline for dropdown ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: 30,
+            paddingInline: '[theme.padding.10]',
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.dropdown
              * @type          String
-             * @default      30
+             * @default      '[theme.padding.10]'
              *
              * Specify the default padding block for dropdown ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: 30,
+            paddingBlock: '[theme.padding.10]',
+            /**
+             * @name          itemPaddingInline
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for dropdown ui item
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            itemPaddingInline: '[theme.ui.default.paddingInline]',
+            /**
+             * @name          itemPaddingBlock
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for dropdown ui item
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            itemPaddingBlock: '[theme.ui.default.paddingBlock]',
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.dropdown

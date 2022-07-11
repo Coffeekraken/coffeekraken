@@ -70,6 +70,12 @@ export default class SFiltrableInputComponentInterface extends __SInterface {
                 },
                 default: [],
             },
+            showKeywords: {
+                description:
+                    'Specify if you want to display the "keywords" section on top of the list results',
+                type: 'Boolean',
+                default: false,
+            },
             templates: {
                 description:
                     'Specify either an object with properties like "item", "empty" and "loading", or a function returning the good template depending on tne "type" argument property',
@@ -92,6 +98,12 @@ export default class SFiltrableInputComponentInterface extends __SInterface {
                     'Specify if you wantr to close the list when selecting an item',
                 type: 'Boolean',
                 default: false,
+            },
+            resetOnSelect: {
+                description:
+                    'Specify if you want your filtrable input to be reseted on select',
+                type: 'Boolean',
+                default: true,
             },
             notSelectable: {
                 description:

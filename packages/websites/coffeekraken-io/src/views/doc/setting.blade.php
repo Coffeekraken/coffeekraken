@@ -15,7 +15,7 @@
                             {{ \Sugar\string\toString($setting->default) }}
                         </div>
                     </div>
-                    <div>
+                    <div class="s-p:30">
                         @include('doc.partials.paramType', ['type' => $setting->type])
                     </div>
                 </header>

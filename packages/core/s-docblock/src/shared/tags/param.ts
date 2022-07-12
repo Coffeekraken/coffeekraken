@@ -1,14 +1,7 @@
 // @ts-nocheck
 
-import __parse from '@coffeekraken/sugar/shared/string/parse';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import __path, { resolve } from 'path';
-import __SFaviconBuilder from '../../../../../builders/s-favicon-builder/src/node/exports';
-import __fs from 'fs';
-import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __parseTypeString from '@coffeekraken/sugar/shared/type/parseTypeString';
 import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString';
+import __parse from '@coffeekraken/sugar/shared/string/parse';
 
 /**
  * @name              param
@@ -41,7 +34,7 @@ async function param(data, blockSettings) {
             typeof param.value !== 'string'
         )
             return;
-        const parts = param.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const parts = param.value.split(/\s{2,9999}|\t/).map((l) => l.trim());
         let typeStr = parts && parts[0] ? parts[0] : null;
         const variable = parts && parts[1] ? parts[1] : null;
         const description = new String(parts && parts[2] ? parts[2] : null);

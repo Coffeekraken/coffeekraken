@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString';
 
 /**
@@ -23,7 +22,7 @@ import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 async function returnTag(data, blockSettings) {
-    const stringArray = data.value.split(/\s{2,20000}/).map((l) => l.trim());
+    const stringArray = data.value.split(/\s{2,9999}|\t/).map((l) => l.trim());
 
     let type = stringArray && stringArray[0] ? stringArray[0] : null;
 

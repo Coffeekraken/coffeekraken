@@ -1,8 +1,5 @@
 // @ts-nocheck
 
-import __parse from '@coffeekraken/sugar/shared/string/parse';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-
 /**
  * @name              support
  * @namespace           shared.tags
@@ -36,7 +33,7 @@ function support(data, blockSettings): IPlatform[] {
     data.forEach((support) => {
         if (!support.value) return;
 
-        const parts = support.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const parts = support.value.split(/\s{2,9999}|\t/).map((l) => l.trim());
         const description = new String(parts[1] ?? '');
         description.render = true;
 

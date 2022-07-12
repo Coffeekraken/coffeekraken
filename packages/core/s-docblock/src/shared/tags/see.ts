@@ -1,9 +1,5 @@
 // @ts-nocheck
 
-import __parse from '@coffeekraken/sugar/shared/string/parse';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
-
 /**
  * @name              see
  * @namespace           shared.tags
@@ -30,7 +26,7 @@ function see(data, blockSettings) {
 
     data.forEach((see) => {
         if (!see.value) return;
-        const parts = see.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const parts = see.value.split(/\s{2,9999}|\t/).map((l) => l.trim());
         const url = parts[0],
             description = new String(parts[1] ?? '');
         description.render = true;

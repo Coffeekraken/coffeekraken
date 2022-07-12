@@ -10,6 +10,7 @@
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-bench": "^2.0.0",
+        "@coffeekraken/s-code-formatter": "^2.0.0",
         "@coffeekraken/s-config": "^2.0.0",
         "@coffeekraken/s-env": "^2.0.0",
         "@coffeekraken/s-event-emitter": "^2.0.0",

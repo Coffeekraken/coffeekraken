@@ -1,8 +1,5 @@
 // @ts-nocheck
 
-import __parse from '@coffeekraken/sugar/shared/string/parse';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-
 /**
  * @name              todo
  * @namespace           shared.tags
@@ -36,7 +33,7 @@ function todo(data, blockSettings): ITodo[] {
     data.forEach((todo) => {
         if (!todo.value) return;
 
-        const parts = todo.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const parts = todo.value.split(/\s{2,9999}|\t/).map((l) => l.trim());
 
         const priority = parts[1] ?? 'normal',
             description = new String(parts[0] ?? '');

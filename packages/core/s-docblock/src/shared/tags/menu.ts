@@ -22,7 +22,7 @@ import __urlFromString from '@coffeekraken/sugar/shared/url/urlFromString';
  */
 function menuTag(data, blockSettings) {
     if (data && data.value && typeof data.value === 'string') {
-        const parts = data.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const parts = data.value.split(/\s{2,9999}|\t/).map((l) => l.trim());
 
         let slug;
 

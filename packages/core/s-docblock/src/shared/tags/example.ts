@@ -28,7 +28,9 @@ function example(data, blockSettings) {
             }
             if (!item.content) return null;
 
-            const parts = item.value.split(/\s{2,20000}/).map((l) => l.trim());
+            const parts = item.value
+                .split(/\s{2,9999}|\t/)
+                .map((l) => l.trim());
 
             const result = {
                 language: parts[0],

@@ -1,8 +1,5 @@
 // @ts-nocheck
 
-import __parse from '@coffeekraken/sugar/shared/string/parse';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-
 /**
  * @name              param
  * @namespace           shared.tags
@@ -36,7 +33,7 @@ function param(data, blockSettings): IPlatform[] {
     data.forEach((param) => {
         if (!param.value) return;
 
-        const parts = param.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const parts = param.value.split(/\s{2,9999}|\t/).map((l) => l.trim());
 
         res.push({
             name: parts[0],

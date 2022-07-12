@@ -1,17 +1,17 @@
 .s-typo--lead,
 .s-typo--p:not(.s-dropdown .s-typo--p) {
-    /* color: sugar.color(main, --lighten 20); */
+/* color: sugar.color(main, --lighten 20); */
 }
 
 strong {
-    color: sugar.color(accent);
+color: sugar.color(accent);
 }
 
 /* code {
-    background: sugar.color(accent, --alpha 0.3);
-    padding-inline: sugar.padding(10);
+background: sugar.color(accent, --alpha 0.3);
+padding-inline: sugar.padding(10);
 
-    @sugar.theme.when (dark) {
-        color: white;
-    }
+@sugar.theme.when (dark) {
+color: white;
+}
 } */

@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __parse from '@coffeekraken/sugar/shared/string/parse';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __idCompliant from '@coffeekraken/sugar/shared/string/idCompliant';
 
 /**
@@ -35,7 +33,9 @@ function cssClass(data, blockSettings) {
             typeof cssClass.value !== 'string'
         )
             return;
-        const parts = cssClass.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const parts = cssClass.value
+            .split(/\s{2,9999}|\t/)
+            .map((l) => l.trim());
         let className = parts?.[0];
         const name = __idCompliant(className, {});
         const description = new String(parts && parts[1] ? parts[1] : null);

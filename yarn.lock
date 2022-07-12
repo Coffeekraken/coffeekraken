@@ -1373,6 +1373,7 @@ __metadata:
   resolution: "@coffeekraken/cli@workspace:packages/core/cli"
   dependencies:
     "@coffeekraken/s-bench": ^2.0.0
+    "@coffeekraken/s-code-formatter": ^2.0.0
     "@coffeekraken/s-config": ^2.0.0
     "@coffeekraken/s-env": ^2.0.0
     "@coffeekraken/s-event-emitter": ^2.0.0
@@ -1449,6 +1450,7 @@ __metadata:
     "@coffeekraken/s-scroll-component": ^2.0.0
     "@coffeekraken/s-sitemap-builder": ^2.0.0
     "@coffeekraken/s-slider-component": ^2.0.0
+    "@coffeekraken/s-state": ^2.0.0
     "@coffeekraken/s-static-builder": ^2.0.0
     "@coffeekraken/s-stdio": ^2.0.0
     "@coffeekraken/s-sugar-config": ^2.0.0
@@ -1488,12 +1490,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-00334dc0-ca99-4a5f-9eef-93a58be98891@workspace:packages/core/cli/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-00334dc0-ca99-4a5f-9eef-93a58be98891@workspace:packages/core/cli/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
 "@coffeekraken/internal-0317e827-ff37-4c9f-b9e7-1eb391a2a252@workspace:packages/core/s-descriptor/dist/pkg/esm":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/internal-0317e827-ff37-4c9f-b9e7-1eb391a2a252@workspace:packages/core/s-descriptor/dist/pkg/esm"
@@ -1509,12 +1505,6 @@ __metadata:
 "@coffeekraken/internal-03be5f38-f7fa-450e-b79e-d279f96c50e5@workspace:packages/features/s-floating-feature/dist/pkg/esm":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/internal-03be5f38-f7fa-450e-b79e-d279f96c50e5@workspace:packages/features/s-floating-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-0425d89c-3d5a-4dd4-81b4-0b606c872011@workspace:packages/websites/coffeekraken-io/static/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0425d89c-3d5a-4dd4-81b4-0b606c872011@workspace:packages/websites/coffeekraken-io/static/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
@@ -1935,12 +1925,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-6c013d0b-d85c-4e2a-93ee-2141ed8e9278@workspace:packages/websites/coffeekraken-io/static/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6c013d0b-d85c-4e2a-93ee-2141ed8e9278@workspace:packages/websites/coffeekraken-io/static/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
 "@coffeekraken/internal-6dc5b9db-a56b-4e42-a283-aeb63a23057d@workspace:packages/components/s-clipboard-copy-component/dist/pkg/esm":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/internal-6dc5b9db-a56b-4e42-a283-aeb63a23057d@workspace:packages/components/s-clipboard-copy-component/dist/pkg/esm"
@@ -2100,12 +2084,6 @@ __metadata:
 "@coffeekraken/internal-a2fbc1e3-16cd-4b9e-83a9-3cc1d0c7c16c@workspace:packages/core/s-file/dist/pkg/esm":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/internal-a2fbc1e3-16cd-4b9e-83a9-3cc1d0c7c16c@workspace:packages/core/s-file/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-a563cccc-2f97-4629-a1cc-c0a6af5e0241@workspace:packages/core/cli/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a563cccc-2f97-4629-a1cc-c0a6af5e0241@workspace:packages/core/cli/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
@@ -2434,6 +2412,37 @@ __metadata:
     known-css-properties: ^0.24.0
     lit: ^2.0.0-rc.3
     prettier: ^2.4.1
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-code-formatter-prettier@^2.0.0, @coffeekraken/s-code-formatter-prettier@workspace:packages/codeFormatters/s-code-formatter-prettier":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-code-formatter-prettier@workspace:packages/codeFormatters/s-code-formatter-prettier"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0
+    "@coffeekraken/s-code-formatter": ^2.0.0
+    "@coffeekraken/s-duration": ^2.0.0
+    "@coffeekraken/s-interface": ^2.0.0
+    "@coffeekraken/s-log": ^2.0.0
+    "@coffeekraken/s-promise": ^2.0.0
+    "@coffeekraken/sugar": ^2.0.0
+    "@prettier/plugin-php": ^0.18.9
+    prettier: ^2.7.1
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-code-formatter@^2.0.0, @coffeekraken/s-code-formatter@workspace:packages/codeFormatters/s-code-formatter":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-code-formatter@workspace:packages/codeFormatters/s-code-formatter"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0
+    "@coffeekraken/s-code-formatter-prettier": ^2.0.0
+    "@coffeekraken/s-duration": ^2.0.0
+    "@coffeekraken/s-interface": ^2.0.0
+    "@coffeekraken/s-log": ^2.0.0
+    "@coffeekraken/s-promise": ^2.0.0
+    "@coffeekraken/sugar": ^2.0.0
+    chokidar: ^3.5.3
   languageName: unknown
   linkType: soft
 
@@ -5374,6 +5383,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prettier/plugin-php@npm:^0.18.9":
+  version: 0.18.9
+  resolution: "@prettier/plugin-php@npm:0.18.9"
+  dependencies:
+    linguist-languages: ^7.21.0
+    mem: ^8.0.0
+    php-parser: 3.1.0-beta.11
+  peerDependencies:
+    prettier: ^1.15.0 || ^2.0.0
+  checksum: d6d9d11c7e82bcc6e271881dad16c237bbaca0b6f603e46cd9f5ea7121506190aa6fcf66ce18230263af53bc847044de2daa15138e7da6a9c4f0019189757e2a
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-babel@npm:^5.3.0":
   version: 5.3.1
   resolution: "@rollup/plugin-babel@npm:5.3.1"
@@ -8164,6 +8186,18 @@ __metadata:
   checksum: 244546317cca96955860d2cb8d0bf47dd66d9078bbe83a215fa87464ab24b352c6fc6f56027d1c82f002e3f833be253f1320d35ed7199bd81134f7788c657f3a
   languageName: node
   linkType: hard
+
+"cjs-2ec56c@workspace:packages/core/cli/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "cjs-2ec56c@workspace:packages/core/cli/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"cjs-509d32@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "cjs-509d32@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
 
 "cjs-64a27f@workspace:packages/components/s-date-picker-component/dist/pkg/cjs":
   version: 0.0.0-use.local
@@ -11432,9 +11466,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esm-3df21c@workspace:packages/core/cli/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "esm-3df21c@workspace:packages/core/cli/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
 "esm-4c84b6@workspace:packages/features/s-inline-feature/dist/pkg/esm":
   version: 0.0.0-use.local
   resolution: "esm-4c84b6@workspace:packages/features/s-inline-feature/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"esm-8afde1@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "esm-8afde1@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"esm-9eb2f1@workspace:packages/websites/coffeekraken-io/static/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "esm-9eb2f1@workspace:packages/websites/coffeekraken-io/static/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
@@ -16217,6 +16269,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"linguist-languages@npm:^7.21.0":
+  version: 7.21.0
+  resolution: "linguist-languages@npm:7.21.0"
+  checksum: b655daec0357ec5765a67c37441455d817a854ed1bba6875b379b4508fcf2376436827e4246dd049ce3de3a72dd1c149d42ceac8581deb79b76650a423fd1397
+  languageName: node
+  linkType: hard
+
 "linguist-languages@npm:^7.5.1":
   version: 7.15.0
   resolution: "linguist-languages@npm:7.15.0"
@@ -18992,6 +19051,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"php-parser@npm:3.1.0-beta.11":
+  version: 3.1.0-beta.11
+  resolution: "php-parser@npm:3.1.0-beta.11"
+  checksum: 7ab684fa69f6f647b5873f16cb6cb117f9b989244dfe28024add6c3beef68346c25a9a62cc70c34e5f89c4fdbb95d96e56c92da7278f4b296c6b671c7b2679f6
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^0.2.1":
   version: 0.2.1
   resolution: "picocolors@npm:0.2.1"
@@ -20214,6 +20280,15 @@ __metadata:
   bin:
     prettier: bin-prettier.js
   checksum: 48d08dde8e9fb1f5bccdd205baa7f192e9fc8bc98f86e1b97d919de804e28c806b0e6cc685e4a88211aa7987fa9668f30baae19580d87ced3ed0f2ec6572106f
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.7.1":
+  version: 2.7.1
+  resolution: "prettier@npm:2.7.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
   languageName: node
   linkType: hard
 

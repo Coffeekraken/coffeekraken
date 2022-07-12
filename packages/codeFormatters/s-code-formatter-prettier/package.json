@@ -1,0 +1,28 @@
+{
+    "name": "@coffeekraken/s-code-formatter-prettier",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0",
+        "@coffeekraken/s-code-formatter": "^2.0.0",
+        "@coffeekraken/s-duration": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0",
+        "@coffeekraken/s-log": "^2.0.0",
+        "@coffeekraken/s-promise": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0",
+        "@prettier/plugin-php": "^0.18.9",
+        "prettier": "^2.7.1"
+    },
+    "main": "./dist/pkg/cjs/node/exports.js",
+    "module": "./dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        }
+    }
+}

@@ -38,9 +38,9 @@ function namespace(data, blockSettings) {
             `${blockSettings.packageJson.name.replace(
                 '/',
                 '.',
-            )}.${namespace.replace(/\s{1,9999999}/gm, '-')}`,
+            )}.${namespace.replace(/\s{2,9999}|\t/gm, '-')}`,
         );
     }
-    return __namespaceCompliant(namespace.replace(/\s{1,999999}/gm, '-'));
+    return __namespaceCompliant(namespace.replace(/\s{2,9999}|\t/gm, '-'));
 }
 export default namespace;

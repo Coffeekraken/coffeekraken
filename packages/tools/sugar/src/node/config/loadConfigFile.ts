@@ -1,7 +1,7 @@
-import __packageRoot from '../path/packageRoot';
+import __fs from 'fs';
 import __path from 'path';
 import __yaml from 'yaml';
-import __fs from 'fs';
+import __packageRoot from '../path/packageRoot';
 
 /**
  * @name            loadConfigFile
@@ -83,6 +83,7 @@ export default async function loadConfigFile(
                 ).default
             );
             break;
+        case 'yaml':
         case 'yml':
             str = __fs
                 .readFileSync(

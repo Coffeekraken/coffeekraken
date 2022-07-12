@@ -1,4 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
+import __SCodeFormatter from '@coffeekraken/s-code-formatter';
 import __SDuration from '@coffeekraken/s-duration';
 import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
@@ -54,7 +55,7 @@ import __SMonorepoSettingsInterface from './interface/SMonorepoSettingsInterface
 
 export interface ISMonorepoSettings {
     rootDir: string;
-    packagesGlobs: string[];
+    packagesGlob: string;
 }
 
 export interface ISMonorepoCtorSettings {
@@ -63,12 +64,12 @@ export interface ISMonorepoCtorSettings {
 
 export interface ISMonorepoRunParams {
     command: string;
-    packagesGlobs: string[];
+    packagesGlob: string;
 }
 export interface ISMonorepoRunResult {}
 
 export interface ISMonorepoListParams {
-    packagesGlobs: string[];
+    packagesGlob: string;
 }
 export interface ISMonorepoListResult {
     name: string;
@@ -78,15 +79,18 @@ export interface ISMonorepoListResult {
 }
 
 export interface ISMonorepoDevParams {
-    packagesGlobs: string[];
+    packagesGlob: string;
+    build: boolean;
     buildInitial: boolean;
     test: boolean;
     testInitial: boolean;
+    format: boolean;
+    formatInitial: boolean;
 }
 export interface ISMonorepoDevResult {}
 
 export interface ISMonorepoUpgradeParams {
-    packagesGlobs: string;
+    packagesGlob: string;
     files: string[];
     fields: string[];
 }
@@ -151,9 +155,8 @@ export default class SMonorepo extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISMonorepoRunParams = __SMonorepoRunParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISMonorepoRunParams =
+                    __SMonorepoRunParamsInterface.apply(params);
 
                 const results: ISMonorepoRunResult[] = [];
 
@@ -164,7 +167,7 @@ export default class SMonorepo extends __SClass {
 
                 // get all the packages
                 const packages = await this.list({
-                    packagesGlobs: finalParams.packagesGlobs,
+                    packagesGlob: finalParams.packagesGlob,
                 });
 
                 emit('log', {
@@ -258,9 +261,8 @@ export default class SMonorepo extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISMonorepoListParams = __SMonorepoListParamsInteface.apply(
-                    params,
-                );
+                const finalParams: ISMonorepoListParams =
+                    __SMonorepoListParamsInteface.apply(params);
 
                 const result: ISMonorepoListResult[] = [];
 
@@ -273,7 +275,12 @@ export default class SMonorepo extends __SClass {
                     `${this.monorepoSettings.rootDir}/package.json`,
                 );
 
-                const files = __SGlob.resolve(finalParams.packagesGlobs, {
+                let finalPackagesGlob = finalParams.packagesGlob;
+                if (!finalPackagesGlob.match(/package\.json$/)) {
+                    finalPackagesGlob += '/package.json';
+                }
+
+                const files = __SGlob.resolve(finalPackagesGlob, {
                     cwd: this.monorepoSettings.rootDir,
                 });
 
@@ -343,22 +350,22 @@ export default class SMonorepo extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISMonorepoDevParams = __SMonorepoDevParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISMonorepoDevParams =
+                    __SMonorepoDevParamsInterface.apply(params);
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Searching for packages...`,
-                });
+                if (
+                    !finalParams.build &&
+                    !finalParams.test &&
+                    !finalParams.format
+                ) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: '<red>[dev]</red> You must at least make use of one of these development features. <magenta>build</magenta>, <magenta>format</magenta>, <magenta>test</magenta>',
+                    });
+                    return resolve();
+                }
 
                 const packages = await this.list(finalParams);
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Found <cyan>${packages.length}</cyan> package(s)`,
-                });
-
                 const srcRelDir = __path.relative(
                         this.monorepoSettings.rootDir,
                         __SSugarConfig.get('typescriptBuilder.inDir'),
@@ -370,7 +377,12 @@ export default class SMonorepo extends __SClass {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Starting the typescript build process...`,
+                    value: `<yellow>[list]</yellow> Searching for packages...`,
+                });
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[list]</yellow> Found <cyan>${packages.length}</cyan> package(s)`,
                 });
 
                 // tests
@@ -382,22 +394,50 @@ export default class SMonorepo extends __SClass {
                             dir: __packageRoot(),
                         }),
                     );
-                } else {
-                    packages.forEach((packageObj) => {
+                }
+
+                // code formatter
+                if (finalParams.format) {
+                    const formatter = new __SCodeFormatter();
+                    pipe(
+                        formatter.format({
+                            glob: `${__SSugarConfig.get(
+                                'monorepo.packagesGlob',
+                            )}/src/**/*`,
+                            inDir: __packageRoot(),
+                            watch: true,
+                            formatInitial: finalParams.formatInitial,
+                        }),
+                    );
+                }
+
+                if (finalParams.build) {
+                    emit(
+                        'log',
+                        {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[watch]</yellow> Watching for file changes...`,
+                        },
+                        {
+                            id: 'STypescriptBuilder',
+                        },
+                    );
+                }
+
+                packages.forEach((packageObj) => {
+                    if (finalParams.build) {
                         // typescript compilation
                         const inDir = `${packageObj.path}/${srcRelDir}`,
                             outDir = `${packageObj.path}/${distRelDir}`;
 
                         const builder = new __STypescriptBuilder();
-                        pipe(
-                            builder.build({
-                                inDir,
-                                outDir,
-                                packageRoot: packageObj.path,
-                                buildInitial: finalParams.buildInitial,
-                                watch: true,
-                            }),
-                        );
+                        builder.build({
+                            inDir,
+                            outDir,
+                            packageRoot: packageObj.path,
+                            buildInitial: finalParams.buildInitial,
+                            watch: true,
+                        });
 
                         // exports
                         const pack = new __SPackage({
@@ -411,12 +451,7 @@ export default class SMonorepo extends __SClass {
                                 buildInitial: finalParams.buildInitial,
                             }),
                         );
-                    });
-                }
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Watching for changes...`,
+                    }
                 });
             },
             {
@@ -445,9 +480,8 @@ export default class SMonorepo extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISMonorepoUpgradeParams = __SMonorepoListParamsInteface.apply(
-                    params,
-                );
+                const finalParams: ISMonorepoUpgradeParams =
+                    __SMonorepoListParamsInteface.apply(params);
 
                 const result: Record<string, ISMonorepoUpgradeResult> = {};
 
@@ -460,7 +494,7 @@ export default class SMonorepo extends __SClass {
                     `${this.monorepoSettings.rootDir}/package.json`,
                 );
 
-                const files = __SGlob.resolve(finalParams.packagesGlobs, {
+                const files = __SGlob.resolve(finalParams.packagesGlob, {
                     cwd: this.monorepoSettings.rootDir,
                 });
 

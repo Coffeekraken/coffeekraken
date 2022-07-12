@@ -1,10 +1,10 @@
-import __STheme from '@coffeekraken/s-theme';
+import __STheme from "@coffeekraken/s-theme";
 
 export default async function () {
-    const media = __STheme.get('media');
+  const media = __STheme.get("media");
 
-    return {
-        media,
-        mediaJson: JSON.stringify(media, null, 2),
-    };
+  return {
+    media,
+    mediaJson: JSON.stringify(media, null, 2),
+  };
 }

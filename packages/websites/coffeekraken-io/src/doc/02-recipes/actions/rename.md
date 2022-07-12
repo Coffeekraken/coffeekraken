@@ -26,31 +26,31 @@ This action allows you to rename a package. This will take care of:
 Here's an example of usage in a fictive recipe config file:
 
 ```js
-export default function(env, config) {
-    return {
-        title: 'My cool recipe',
-        description: '...',
-        defaultStack: 'dev',
-        stacks: {
-            new: {
-                description: 'Create a new project',
-                actions: {
-                    rename: {
-                        extends: 'rename',
-                        params: {
-                            name: undefined, // the user will be prompted for it...
-                            folder: true
-                        }
-                    },
-                    // etc...
-                }
+export default function (env, config) {
+  return {
+    title: "My cool recipe",
+    description: "...",
+    defaultStack: "dev",
+    stacks: {
+      new: {
+        description: "Create a new project",
+        actions: {
+          rename: {
+            extends: "rename",
+            params: {
+              name: undefined, // the user will be prompted for it...
+              folder: true,
             },
-            dev: {
-                // etc...
-            },
-            // etc...
-        }
-    }
+          },
+          // etc...
+        },
+      },
+      dev: {
+        // etc...
+      },
+      // etc...
+    },
+  };
 }
 ```
 

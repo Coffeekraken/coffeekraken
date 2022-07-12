@@ -24,13 +24,13 @@ Theming in Coffeekraken is a central part to help you decline your websites into
 
 Some theme(s) are available out of the box. These themes (parts) are useful to avoid starting from scratch but you can of course override everything you want during your development process.
 
--   `theme.config.ts`: Main theme file where all the available themes are listed as well as which theme is active.
--   `themeBase.config.ts`: Main configuration file that can be used as a base for your theme to avoid rewriting everything.
--   `themeLightBase.config.ts`: Extends `themeBase.config.ts` configuration and define some base settings for light themes.
--   `themeDarkBase.config.ts`: Extends `themeBase.config.ts` configuration and define some base settings for light themes.
--   `themeDefault.config.ts`: Define the `default` theme
--   `themeDefaultLight.config.ts`: Extends the `themeLightBase.config.ts` configuration and define some settings fot the default light theme.
--   `themeDefaultDark.config.ts`: Extends the `themeDarkBase.config.ts` configuration and define some settings fot the default dark theme.
+- `theme.config.ts`: Main theme file where all the available themes are listed as well as which theme is active.
+- `themeBase.config.ts`: Main configuration file that can be used as a base for your theme to avoid rewriting everything.
+- `themeLightBase.config.ts`: Extends `themeBase.config.ts` configuration and define some base settings for light themes.
+- `themeDarkBase.config.ts`: Extends `themeBase.config.ts` configuration and define some base settings for light themes.
+- `themeDefault.config.ts`: Define the `default` theme
+- `themeDefaultLight.config.ts`: Extends the `themeLightBase.config.ts` configuration and define some settings fot the default light theme.
+- `themeDefaultDark.config.ts`: Extends the `themeDarkBase.config.ts` configuration and define some settings fot the default dark theme.
 
 ## Main entry point
 
@@ -40,12 +40,12 @@ The main one is the `theme.config.ts` file that looks something like this:
 
 ```js
 export default function (env, config) {
-    return {
-        // Specify the theme name to use by default
-        theme: 'default',
-        // Specify the theme variant to use by default
-        variant: 'light',
-    };
+  return {
+    // Specify the theme name to use by default
+    theme: "default",
+    // Specify the theme variant to use by default
+    variant: "light",
+  };
 }
 ```
 
@@ -92,13 +92,13 @@ Let's admit that you use the `default` theme with the `light` variant and you wa
 
 ```js
 export default (env, config) => {
-    return {
-        color: {
-            main: {
-                color: 'hsl(156,50,50)',
-            },
-        },
-    };
+  return {
+    color: {
+      main: {
+        color: "hsl(156,50,50)",
+      },
+    },
+  };
 };
 ```
 

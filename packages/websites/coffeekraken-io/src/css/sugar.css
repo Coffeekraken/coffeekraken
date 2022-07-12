@@ -3,8 +3,8 @@
 
 @sugar.classes;
 @sugar.media.classes ('mobile,tablet') {
-    @sugar.classes;
-    /* @sugar.container.classes;
+  @sugar.classes;
+  /* @sugar.container.classes;
     @sugar.grid.classes;
     @sugar.layout.classes;
     @sugar.margin.classes;

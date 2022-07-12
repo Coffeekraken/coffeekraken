@@ -43,7 +43,7 @@ It may look like this:
  * @author      Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function (ar: any[]): any[] {
-    // ...
+  // ...
 }
 ```
 

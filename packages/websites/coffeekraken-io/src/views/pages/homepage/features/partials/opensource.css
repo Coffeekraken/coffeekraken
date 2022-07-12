@@ -1,57 +1,57 @@
 @keyframes opensource-animation {
-    0% {
-        padding: 20px 10px;
-        opacity: 1;
-        transform: translate(150px, 0) rotateZ(10deg) scale(1);
-    }
-    50% {
-        opacity: 0.2;
-        transform: translate(50px, 0) scale(1.2);
-    }
-    100% {
-        padding: 20px 30px;
-        opacity: 0;
-        transform: translate(-150px, 0) rotateZ(-180deg) scale(0.5);
-    }
+  0% {
+    padding: 20px 10px;
+    opacity: 1;
+    transform: translate(150px, 0) rotateZ(10deg) scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: translate(50px, 0) scale(1.2);
+  }
+  100% {
+    padding: 20px 30px;
+    opacity: 0;
+    transform: translate(-150px, 0) rotateZ(-180deg) scale(0.5);
+  }
 }
 
 #features-opensource {
-    .illustration {
-        height: 450px;
+  .illustration {
+    height: 450px;
+  }
+
+  .__box {
+    position: relative;
+    overflow: hidden;
+    margin-top: -300px;
+    @sugar.depth (10);
+
+    @sugar.theme.when dark {
+      @sugar.depth (100);
     }
 
-    .__box {
-        position: relative;
-        overflow: hidden;
-        margin-top: -300px;
-        @sugar.depth (10);
-
-        @sugar.theme.when dark {
-            @sugar.depth (100);
-        }
-
-        @sugar.media mobile {
-            margin-top: 0;
-        }
-
-        &:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('/dist/img/welcome/welcome-bg-light-01.jpg');
-            background-repeat: repeat-x;
-            background-size: cover;
-            background-position: 50% 0;
-            opacity: 0.1;
-        }
-        @sugar.theme.when dark {
-            &:before {
-                opacity: 0.05;
-                background-image: url('/dist/img/welcome/welcome-bg-01.jpg');
-            }
-        }
+    @sugar.media mobile {
+      margin-top: 0;
     }
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("/dist/img/welcome/welcome-bg-light-01.jpg");
+      background-repeat: repeat-x;
+      background-size: cover;
+      background-position: 50% 0;
+      opacity: 0.1;
+    }
+    @sugar.theme.when dark {
+      &:before {
+        opacity: 0.05;
+        background-image: url("/dist/img/welcome/welcome-bg-01.jpg");
+      }
+    }
+  }
 }

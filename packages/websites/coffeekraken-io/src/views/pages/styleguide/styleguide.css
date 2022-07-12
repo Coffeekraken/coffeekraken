@@ -1,36 +1,36 @@
 #styleguide {
-    .__toolbar {
-        background: sugar.color(main, background);
-        position: sticky;
-        top: 100px;
-        z-index: 500;
-        @sugar.depth (100);
+  .__toolbar {
+    background: sugar.color(main, background);
+    position: sticky;
+    top: 100px;
+    z-index: 500;
+    @sugar.depth (100);
 
-        .s-tooltip {
-            min-width: 400px;
-        }
-
-        [class*='s-platform-'] {
-            font-size: 1em;
-        }
+    .s-tooltip {
+      min-width: 400px;
     }
 
-    .__preview {
-        background-color: sugar.color(main, background);
-        background-position: 0 0;
-        background-size: cover;
-        animation: subnav-bkg 240s linear;
-        animation-fill-mode: both;
-        animation-iteration-count: infinite;
-
-        @sugar.theme.when (dark) {
-            background-image: url('/dist/img/discord-illustration-05-bkg.png');
-        }
+    [class*="s-platform-"] {
+      font-size: 1em;
     }
+  }
 
-    .__preview-metas {
-        position: sticky;
-        top: 208px;
-        /* max-height: calc(100vh - 140px); */
+  .__preview {
+    background-color: sugar.color(main, background);
+    background-position: 0 0;
+    background-size: cover;
+    animation: subnav-bkg 240s linear;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+
+    @sugar.theme.when (dark) {
+      background-image: url("/dist/img/discord-illustration-05-bkg.png");
     }
+  }
+
+  .__preview-metas {
+    position: sticky;
+    top: 208px;
+    /* max-height: calc(100vh - 140px); */
+  }
 }

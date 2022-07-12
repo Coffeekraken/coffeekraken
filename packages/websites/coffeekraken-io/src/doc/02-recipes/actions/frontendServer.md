@@ -25,25 +25,25 @@ This action allows you to start a `development` server that will handle things l
 Here's an example of usage in a fictive recipe config file:
 
 ```js
-export default function(env, config) {
-    return {
-        title: 'My cool recipe',
-        description: '...',
-        defaultStack: 'dev',
-        stacks: {
-            dev: {
-                description: 'Development stack',
-                actions: {
-                    frontendServer: {
-                        extends: 'frontendServer',
-                        params: {}
-                    },
-                    // etc...
-                }
-            },
-            // etc...
-        }
-    }
+export default function (env, config) {
+  return {
+    title: "My cool recipe",
+    description: "...",
+    defaultStack: "dev",
+    stacks: {
+      dev: {
+        description: "Development stack",
+        actions: {
+          frontendServer: {
+            extends: "frontendServer",
+            params: {},
+          },
+          // etc...
+        },
+      },
+      // etc...
+    },
+  };
 }
 ```
 

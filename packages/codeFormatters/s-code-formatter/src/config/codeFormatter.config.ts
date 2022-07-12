@@ -1,17 +1,17 @@
 export default (env, config) => {
     return {
         /**
-         * @name            input
+         * @name            glob
          * @namespace       config.codeFormatter
          * @type            String
          * @default         ** /*
          *
-         * Specify the default input for the SCodeFormatter.format process
+         * Specify the default glob for the SCodeFormatter.format process
          *
          * @since           2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com>
          */
-        input: '**/*',
+        glob: '**/*',
 
         /**
          * @name            inDir

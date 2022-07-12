@@ -1,89 +1,96 @@
 ck-falling-stars {
-    width: 100%; height: 50%;
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  user-select: none;
+  filter: blur(1px);
+
+  .__star {
+    display: block;
+    width: 5px;
+    height: 5px;
     position: absolute;
-    top: 0; left: 0;
-    pointer-events: none;
-    user-select: none;
-    filter: blur(1px);
+    background: sugar.color(accent, --lighten 20);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 0 sugar.color(accent, --lighten 50);
+    transform: rotate(-60deg) scale(var(--scale, 1));
 
-    .__star {
-        display: block;
-        width: 5px;
-        height: 5px;
-        position: absolute;
-        background: sugar.color(accent, --lighten 20);
-        border-radius: 50%;
-        box-shadow: 0 0 10px 0 sugar.color(accent, --lighten 50);
-        transform: rotate(-60deg) scale(var(--scale, 1));
-
-        &:before {
-            content: '';
-            position: absolute;
-            top: 0; left: 100%;
-            width: calc(var(--speed) * 500%); height: 100%;
-            border-top: 2.5px solid transparent;
-            border-bottom: 2.5px solid transparent;
-            border-left: calc(var(--speed) * 20px) solid sugar.color(accent, --lighten 20);
-            filter: drop-shadow(0 0 10px sugar.color(accent, --lighten 50));
-            animation: star-glitch 1s infinite;
-        }
-        &:after {
-            content: '';
-            position: absolute;
-            top: -500%; left: -100%;
-            width: 1000%; height: 1000%;
-            border-radius: 50%;
-            transform: rotate(80deg);
-            /* background: sugar.color(accent, --lighten 60); */
-            border-bottom: 2.5px solid sugar.color(accent, --lighten 60);
-            filter: blur(2px);
-            filter: drop-shadow(0 0 10px sugar.color(accent, --lighten 20));
-            opacity: 0.1;
-            animation: star-glitch 0.5s infinite;
-            display: none;
-        }
-
-        &.complementary {
-            background: sugar.color(complementary, --lighten 20);
-            box-shadow: 0 0 10px 0 sugar.color(complementary, --lighten 30);
-
-            &:before {
-                border-left: calc(var(--speed) * 20px) solid sugar.color(complementary, --lighten 20);
-            }
-            &:after {
-                border-bottom: 2.5px solid sugar.color(complementary, --lighten 60);
-            }
-        }
-
-        @keyframes star-glitch {
-            0% {
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.1;
-            }
-            30% {
-                opacity: 0;
-            }
-            40% {
-                opacity: 0.2;
-            }
-            60% {
-                opacity: 0;
-            }
-            70% {
-                opacity: 0.1;
-            }
-            80% {
-                opacity: 0;
-            }
-            90% {
-                opacity: 0.2;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: calc(var(--speed) * 500%);
+      height: 100%;
+      border-top: 2.5px solid transparent;
+      border-bottom: 2.5px solid transparent;
+      border-left: calc(var(--speed) * 20px) solid
+        sugar.color(accent, --lighten 20);
+      filter: drop-shadow(0 0 10px sugar.color(accent, --lighten 50));
+      animation: star-glitch 1s infinite;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: -500%;
+      left: -100%;
+      width: 1000%;
+      height: 1000%;
+      border-radius: 50%;
+      transform: rotate(80deg);
+      /* background: sugar.color(accent, --lighten 60); */
+      border-bottom: 2.5px solid sugar.color(accent, --lighten 60);
+      filter: blur(2px);
+      filter: drop-shadow(0 0 10px sugar.color(accent, --lighten 20));
+      opacity: 0.1;
+      animation: star-glitch 0.5s infinite;
+      display: none;
     }
 
+    &.complementary {
+      background: sugar.color(complementary, --lighten 20);
+      box-shadow: 0 0 10px 0 sugar.color(complementary, --lighten 30);
+
+      &:before {
+        border-left: calc(var(--speed) * 20px) solid
+          sugar.color(complementary, --lighten 20);
+      }
+      &:after {
+        border-bottom: 2.5px solid sugar.color(complementary, --lighten 60);
+      }
+    }
+
+    @keyframes star-glitch {
+      0% {
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.1;
+      }
+      30% {
+        opacity: 0;
+      }
+      40% {
+        opacity: 0.2;
+      }
+      60% {
+        opacity: 0;
+      }
+      70% {
+        opacity: 0.1;
+      }
+      80% {
+        opacity: 0;
+      }
+      90% {
+        opacity: 0.2;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  }
 }

@@ -19,8 +19,8 @@
 Coffeekraken is not here to tell you what language to use. Out of the box you can use every languages supported by [ViteJS](https://vitejs.dev).
 This does mean that you can add all ViteJS plugins if you need to handle more thant:
 
--   `JS`: ES6 javascript
--   `Typescript`: Typescript compiler through the [typescript compiler](https://www.typescriptlang.org/)
+- `JS`: ES6 javascript
+- `Typescript`: Typescript compiler through the [typescript compiler](https://www.typescriptlang.org/)
 
 ## Typescript
 

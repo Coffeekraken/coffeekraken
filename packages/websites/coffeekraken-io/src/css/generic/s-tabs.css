@@ -1,9 +1,9 @@
 .s-tabs:not(.preview-html .s-tabs) {
-    background: sugar.color(current, --darken 15);
-    display: inline-flex !important;
+  background: sugar.color(current, --darken 15);
+  display: inline-flex !important;
 
-    @sugar.media mobile {
-        max-width: 100%;
-        overflow-x: auto;
-    }
+  @sugar.media mobile {
+    max-width: 100%;
+    overflow-x: auto;
+  }
 }

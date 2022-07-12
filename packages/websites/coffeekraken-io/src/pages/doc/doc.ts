@@ -1,12 +1,12 @@
 export default {
-    slugs: ['/doc/*', '/package/:organisation/:package/doc/*'],
-    params: {
-        path: '*',
+  slugs: ["/doc/*", "/package/:organisation/:package/doc/*"],
+  params: {
+    path: "*",
+  },
+  views: [
+    {
+      data: "docmapDocumentation",
+      path: "pages.markdown.markdown",
     },
-    views: [
-        {
-            data: 'docmapDocumentation',
-            path: 'pages.markdown.markdown',
-        },
-    ],
+  ],
 };

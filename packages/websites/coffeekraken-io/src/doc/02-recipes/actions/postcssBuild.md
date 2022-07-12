@@ -25,25 +25,25 @@ This action allows you to build your postcss files down to a production ready cs
 Here's an example of usage in a fictive recipe config file:
 
 ```js
-export default function(env, config) {
-    return {
-        title: 'My cool recipe',
-        description: '...',
-        defaultStack: 'dev',
-        stacks: {
-            dev: {
-                description: 'Development stack',
-                actions: {
-                    postcssBuild: {
-                        extends: 'postcssBuild',
-                        params: {}
-                    },
-                    // etc...
-                }
-            },
-            // etc...
-        }
-    }
+export default function (env, config) {
+  return {
+    title: "My cool recipe",
+    description: "...",
+    defaultStack: "dev",
+    stacks: {
+      dev: {
+        description: "Development stack",
+        actions: {
+          postcssBuild: {
+            extends: "postcssBuild",
+            params: {},
+          },
+          // etc...
+        },
+      },
+      // etc...
+    },
+  };
 }
 ```
 

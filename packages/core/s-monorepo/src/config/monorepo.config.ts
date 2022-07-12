@@ -16,17 +16,17 @@ export default function (env, config) {
         rootDir: null,
 
         /**
-         * @name        packagesGlobs
+         * @name        packagesGlob
          * @namespace   config.monorepo
-         * @type       string[]
-         * @default     ['packages/* / * /package.json']
+         * @type       string
+         * @default     packages/* / *
          *
          * Specify some globs to search for packages relative to the monorepo root directory
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        packagesGlobs: ['packages/*/*/package.json'],
+        packagesGlob: 'packages/*/*',
 
         upgrade: {
             /**

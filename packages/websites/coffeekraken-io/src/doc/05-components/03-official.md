@@ -26,12 +26,12 @@ Coffeekraken comes with everything you need to create nice and clean UI's. Here'
 {{#ifMatch @key 'css.ui'}}
 {{#ifEqual (get this 'type') 'Styleguide'}}
 
--   [**{{this.name}}**]({{this.menu.slug}})
-    -   {{this.description}}
-    -   {{this.menu.tree}}
-        {{/ifEqual}}
-        {{/ifMatch}}
-        {{/each}}
+- [**{{this.name}}**]({{this.menu.slug}})
+  - {{this.description}}
+  - {{this.menu.tree}}
+    {{/ifEqual}}
+    {{/ifMatch}}
+    {{/each}}
 
 ## `Web`components
 
@@ -40,10 +40,10 @@ Coffeekraken comes with everything you need to create nice and clean UI's. Here'
 {{#each docmap.map}}
 {{#ifEqual (get this 'type') 'CustomElement'}}
 
--   [**{{this.name}}**]({{this.menu.slug}})
-    -   {{this.description}}
-    -   {{this.menu.tree}}
-        {{/ifEqual}}
-        {{/each}}
+- [**{{this.name}}**]({{this.menu.slug}})
+  - {{this.description}}
+  - {{this.menu.tree}}
+    {{/ifEqual}}
+    {{/each}}
 
 {{/layout-doc }}

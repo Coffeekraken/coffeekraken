@@ -24,7 +24,7 @@ The `postcssSugarPlugin` gives you access to a tone of useful mixins that can he
 
 {{#each mixins}}
 
--   [`@sugar.{{this.dotCall}}(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.{{this.dotPath}})
-    {{/each}}
+- [`@sugar.{{this.dotCall}}(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.{{this.dotPath}})
+  {{/each}}
 
 {{/layout-doc }}

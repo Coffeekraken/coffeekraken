@@ -23,28 +23,28 @@ This action allows you to make sure the current project has a `manifest.json` fi
 Here's an example of usage in a fictive recipe config file:
 
 ```js
-export default function(env, config) {
-    return {
-        title: 'My cool recipe',
-        description: '...',
-        defaultStack: 'dev',
-        stacks: {
-            new: {
-                description: 'Create a new project',
-                actions: {
-                    addManifestJson: {
-                        extends: 'addManifestJson',
-                        params: {}
-                    },
-                    // etc...
-                }
-            },
-            dev: {
-                // etc...
-            },
-            // etc...
-        }
-    }
+export default function (env, config) {
+  return {
+    title: "My cool recipe",
+    description: "...",
+    defaultStack: "dev",
+    stacks: {
+      new: {
+        description: "Create a new project",
+        actions: {
+          addManifestJson: {
+            extends: "addManifestJson",
+            params: {},
+          },
+          // etc...
+        },
+      },
+      dev: {
+        // etc...
+      },
+      // etc...
+    },
+  };
 }
 ```
 

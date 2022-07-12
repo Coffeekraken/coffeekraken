@@ -24,29 +24,29 @@ Here's a none-exhaustive list of our packages:
 
 #### Node
 
--   `@coffeekraken/s-frontstack`: Handle project dev, build, etc...
--   `@coffeekraken/s-images-builder`: Build images for production with ease
--   `@coffeekraken/s-postcss-builder`: Build your css with ease using postcss and pre-built plugins
--   `@coffeekraken/s-postcss-sugar-plugin`: Sugar plugin for postcss that gives you access to a tone of styling features
--   `@coffeekraken/s-config`: Easy and versatile configuration (files, etc...) handling
--   `@coffeekraken/s-sugar-config`: Easy access to sugar configs in node and in the browser
--   `@coffeekraken/s-docblock`: Read and parse docblocks with ease
--   `@coffeekraken/s-view-renderer`: Renders views like `BladePHP`, `Twig`, etc... with ease
--   `@coffeekraken/s-glob`: Handle and resolve globs with ease
--   `@coffeekraken/sugar`: Central toolkit that provide helpers, CLI, etc...
--   And more
+- `@coffeekraken/s-frontstack`: Handle project dev, build, etc...
+- `@coffeekraken/s-images-builder`: Build images for production with ease
+- `@coffeekraken/s-postcss-builder`: Build your css with ease using postcss and pre-built plugins
+- `@coffeekraken/s-postcss-sugar-plugin`: Sugar plugin for postcss that gives you access to a tone of styling features
+- `@coffeekraken/s-config`: Easy and versatile configuration (files, etc...) handling
+- `@coffeekraken/s-sugar-config`: Easy access to sugar configs in node and in the browser
+- `@coffeekraken/s-docblock`: Read and parse docblocks with ease
+- `@coffeekraken/s-view-renderer`: Renders views like `BladePHP`, `Twig`, etc... with ease
+- `@coffeekraken/s-glob`: Handle and resolve globs with ease
+- `@coffeekraken/sugar`: Central toolkit that provide helpers, CLI, etc...
+- And more
 
 #### JS (Dom)
 
--   `@coffeekraken/s-date-picker-component`: Nice ans simple date picker using [Pikaday](https://github.com/Pikaday/Pikaday) under the hood
--   `@coffeekraken/s-panel-component`: Easy to use (and customizable) panel components like modal, side panel, etc...
--   `@coffeekraken/s-form-validate-feature`: Easy, customizable and extendable form validation solution
--   And more...
+- `@coffeekraken/s-date-picker-component`: Nice ans simple date picker using [Pikaday](https://github.com/Pikaday/Pikaday) under the hood
+- `@coffeekraken/s-panel-component`: Easy to use (and customizable) panel components like modal, side panel, etc...
+- `@coffeekraken/s-form-validate-feature`: Easy, customizable and extendable form validation solution
+- And more...
 
 #### Shared (Node/JS)
 
--   `@coffeekraken/s-promise`: Extended `Promise` class that add event emitter capabilities
--   `@coffeekraken/s-color`: Manipulate and convert colors with ease
--   And more...
+- `@coffeekraken/s-promise`: Extended `Promise` class that add event emitter capabilities
+- `@coffeekraken/s-color`: Manipulate and convert colors with ease
+- And more...
 
 {{/layout-doc }}

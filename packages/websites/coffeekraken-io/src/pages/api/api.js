@@ -4,9 +4,9 @@ export default {
     },
     views: [
         {
-            data: 'docmapApi',
-            path: 'pages.api.api',
+            data: "docmapApi",
+            path: "pages.api.api",
         },
     ],
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWU7SUFDWCxNQUFNLEVBQUU7UUFDSixTQUFTLEVBQUUsSUFBSTtLQUNsQjtJQUNELEtBQUssRUFBRTtRQUNIO1lBQ0ksSUFBSSxFQUFFLFdBQVc7WUFDakIsSUFBSSxFQUFFLGVBQWU7U0FDeEI7S0FDSjtDQUNKLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWU7SUFDYixNQUFNLEVBQUU7UUFDTixTQUFTLEVBQUUsSUFBSTtLQUNoQjtJQUNELEtBQUssRUFBRTtRQUNMO1lBQ0UsSUFBSSxFQUFFLFdBQVc7WUFDakIsSUFBSSxFQUFFLGVBQWU7U0FDdEI7S0FDRjtDQUNGLENBQUMifQ==

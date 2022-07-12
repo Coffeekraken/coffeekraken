@@ -25,25 +25,25 @@ This action allows you to build, compress and optimize your images using our `@c
 Here's an example of usage in a fictive recipe config file:
 
 ```js
-export default function(env, config) {
-    return {
-        title: 'My cool recipe',
-        description: '...',
-        defaultStack: 'dev',
-        stacks: {
-            dev: {
-                description: 'Development stack',
-                actions: {
-                    imagesBuild: {
-                        extends: 'imagesBuild',
-                        params: {}
-                    },
-                    // etc...
-                }
-            },
-            // etc...
-        }
-    }
+export default function (env, config) {
+  return {
+    title: "My cool recipe",
+    description: "...",
+    defaultStack: "dev",
+    stacks: {
+      dev: {
+        description: "Development stack",
+        actions: {
+          imagesBuild: {
+            extends: "imagesBuild",
+            params: {},
+          },
+          // etc...
+        },
+      },
+      // etc...
+    },
+  };
 }
 ```
 

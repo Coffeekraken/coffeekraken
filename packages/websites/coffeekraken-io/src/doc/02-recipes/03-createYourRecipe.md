@@ -23,17 +23,17 @@ Recipes are what we use to drive a project. It is used to generate a new project
 To register a new recipe, you have to create a new file called `frontstack.config.ts` inside of the `.sugar` folder at your project root. Here's the content of this file:
 
 ```js
-export default function(env, config) {
-    return {
-        recipes: {
-            myCoolRecipe: {
-                title: 'My cool recipe',
-                description: 'A recipe that will beat the dark side of the force',
-                defaultStack: 'dev',
-                stacks: {}
-            }
-        }
-    }
+export default function (env, config) {
+  return {
+    recipes: {
+      myCoolRecipe: {
+        title: "My cool recipe",
+        description: "A recipe that will beat the dark side of the force",
+        defaultStack: "dev",
+        stacks: {},
+      },
+    },
+  };
 }
 ```
 
@@ -43,7 +43,7 @@ We just need to tell the `@coffeekraken/cli` CLI that our project make use of ou
 
 ```js
 {
-    "recipe": "myCoolRecipe" 
+    "recipe": "myCoolRecipe"
 }
 ```
 
@@ -74,25 +74,25 @@ To stick with our `default` recipe as an example, the `dev` stack is made of `2`
 Back to our recipe. Here's how to register a new `dev` stack into our recipe:
 
 ```js
-export default function(env, config) {
-    return {
-        recipes: {
-            myCoolRecipe: {
-                title: 'My cool recipe',
-                description: 'A recipe that will beat the dark side of the force',
-                defaultStack: 'dev',
-                stacks: {
-                    dev: {
-                        title: 'Development stack',
-                        description: 'Start our development environment',
-                        runInParallel: false,
-                        sharedParams: {},
-                        actions: {}
-                    }
-                }
-            }
-        }
-    }
+export default function (env, config) {
+  return {
+    recipes: {
+      myCoolRecipe: {
+        title: "My cool recipe",
+        description: "A recipe that will beat the dark side of the force",
+        defaultStack: "dev",
+        stacks: {
+          dev: {
+            title: "Development stack",
+            description: "Start our development environment",
+            runInParallel: false,
+            sharedParams: {},
+            actions: {},
+          },
+        },
+      },
+    },
+  };
 }
 ```
 
@@ -106,39 +106,39 @@ export default function(env, config) {
 Back to our recipe. We will integrate `2` actions which will be a simple command line one, and a node process one which will be detailed bellow.
 
 ```js
-export default function(env, config) {
-    return {
-        recipes: {
-            myCoolRecipe: {
-                title: 'My cool recipe',
-                description: 'A recipe that will beat the dark side of the force',
-                defaultStack: 'dev',
-                stacks: {
-                    dev: {
-                        title: 'Development stack',
-                        description: 'Start our development environment',
-                        runInParallel: false,
-                        sharedParams: {},
-                        actions: {
-                            installDeps: {
-                                title: 'Install dependencies',
-                                description: 'Install our node dependencies using npm',
-                                command: 'npm install'
-                            },
-                            customProcess: {
-                                title: 'Custom process',
-                                description: 'My cool custom process',
-                                process: '/absolute/path/to/myProcess.js',
-                                params: {
-                                    something: 'cool'
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+export default function (env, config) {
+  return {
+    recipes: {
+      myCoolRecipe: {
+        title: "My cool recipe",
+        description: "A recipe that will beat the dark side of the force",
+        defaultStack: "dev",
+        stacks: {
+          dev: {
+            title: "Development stack",
+            description: "Start our development environment",
+            runInParallel: false,
+            sharedParams: {},
+            actions: {
+              installDeps: {
+                title: "Install dependencies",
+                description: "Install our node dependencies using npm",
+                command: "npm install",
+              },
+              customProcess: {
+                title: "Custom process",
+                description: "My cool custom process",
+                process: "/absolute/path/to/myProcess.js",
+                params: {
+                  something: "cool",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 }
 ```
 
@@ -159,13 +159,13 @@ At this point, your recipe `dev` stack has to run and throw an error because we 
 A node process file is a simply nodejs file that exports a function that will be called when our action is runned.
 
 ```js
-export default function(params) {
-    return new Promise((resolve, reject) => {
-        console.log('Hello world');
-        console.log(params); // { something: 'cool' }
-        // do something...
-        resolve();
-    });
+export default function (params) {
+  return new Promise((resolve, reject) => {
+    console.log("Hello world");
+    console.log(params); // { something: 'cool' }
+    // do something...
+    resolve();
+  });
 }
 ```
 
@@ -174,16 +174,16 @@ This function **MUST** return a `Promise`. Inside it, you can do whatever you ne
 > We encourage you to make use of our [@coffeekraken/s-promise](/@coffeekraken/s-promise/doc/readme) extended promise package to make use of his `emit` capabilities in order to log your messages with more control...
 
 ```js
-import __SPromise from '@coffeekraken/s-promise';
+import __SPromise from "@coffeekraken/s-promise";
 
-export default function(params) {
-    return new __SPromise(({resolve, reject, emit}) => {
-        emit('log', {
-            value: 'Hello world'
-        });
-        // do something...
-        resolve();
+export default function (params) {
+  return new __SPromise(({ resolve, reject, emit }) => {
+    emit("log", {
+      value: "Hello world",
     });
+    // do something...
+    resolve();
+  });
 }
 ```
 

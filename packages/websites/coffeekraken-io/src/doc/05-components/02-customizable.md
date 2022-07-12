@@ -32,7 +32,7 @@ To integrate the `button` component inside your stylesheet with all his `scopes`
 @sugar.ui.button.classes;
 /* Applying button style on a custom element */
 .my-button {
-    @sugar.ui.button;
+  @sugar.ui.button;
 }
 ```
 
@@ -51,14 +51,14 @@ To integrate the `button` component inside your stylesheet with only the `bare` 
 @sugar.ui.button.classes ($scope: bare);
 /* Applying button style on a custom element */
 .my-button {
-    @sugar.ui.button ($scope: bare);
+  @sugar.ui.button ($scope: bare);
 }
 .s-btn,
 .my-button {
-    background: red;
-    color: white;
-    background: red;
-    color: white;
+  background: red;
+  color: white;
+  background: red;
+  color: white;
 }
 ```
 
@@ -78,13 +78,13 @@ If you want to have only the `bare` style and make your own visual display for a
 
 ```js
 // importing our component
-import { define } from '@coffeekraken/s-date-picker-component';
+import { define } from "@coffeekraken/s-date-picker-component";
 // define our component with the `bare` prop
 define({
-    bare: true,
+  bare: true,
 });
 // registering our component with another tag name without the `bare` prop applied by default
-define({}, 'my-cool-date-picker');
+define({}, "my-cool-date-picker");
 ```
 
 ```html

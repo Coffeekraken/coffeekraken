@@ -1,3 +1,3 @@
 export default {
-    views: ['lit.test'],
+  views: ["lit.test"],
 };

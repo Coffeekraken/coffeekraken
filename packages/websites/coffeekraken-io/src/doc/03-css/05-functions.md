@@ -26,7 +26,7 @@ It can be to access theme values like `padding`, `margin`, etc... as well as col
 
 {{#each functions}}
 
--   [`sugar.{{this.dotCall}}(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.function.{{this.dotPath}})
-    {{/each}}
+- [`sugar.{{this.dotCall}}(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.function.{{this.dotPath}})
+  {{/each}}
 
 {{/layout-doc }}

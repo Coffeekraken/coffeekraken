@@ -24,8 +24,8 @@ Our server comes with some built-in modules. Here's the list:
 
 {{#each config.frontendServer.modules}}
 
--   `{{@key}}`: {{this.description}}
-    {{/each}}
+- `{{@key}}`: {{this.description}}
+  {{/each}}
 
 ## Create your module
 
@@ -35,8 +35,8 @@ Here's the scaffold content that you can copy and past in your file:
 
 ```js
 export default function myModule(express, settings, config) {
-    // here you can update the config depending on the needs of your
-    // module, as well as access the express app instance to register routes, etc...
+  // here you can update the config depending on the needs of your
+  // module, as well as access the express app instance to register routes, etc...
 }
 ```
 
@@ -46,14 +46,14 @@ To to register your module, simply add it to the `config.frontendServer.modules`
 
 ```js
 export default function (env, config) {
-    return {
-        modules: {
-            myModule: {
-                path: '/absolute/path/to/your/module',
-                settings: {},
-            },
-        },
-    };
+  return {
+    modules: {
+      myModule: {
+        path: "/absolute/path/to/your/module",
+        settings: {},
+      },
+    },
+  };
 }
 ```
 

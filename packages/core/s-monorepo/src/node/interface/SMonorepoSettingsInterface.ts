@@ -24,11 +24,11 @@ export default class SMonorepoSettingsInterface extends __SInterface {
                 description: 'Specify the monorepo root directory',
                 type: 'string',
             },
-            packagesGlobs: {
+            packagesGlob: {
                 description:
                     'Specify a glob relative to the rootDir to search for packages',
                 type: 'String',
-                default: __SSugarConfig.get('monorepo.packagesGlobs'),
+                default: __SSugarConfig.get('monorepo.packagesGlob'),
             },
         };
     }

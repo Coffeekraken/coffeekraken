@@ -20,19 +20,24 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 export default class SMonorepoDevParamsInterface extends __SInterface {
     static get _definition() {
         return {
-            packagesGlobs: {
+            packagesGlob: {
                 description:
                     'Specify some globs to search for packages relative to the monorepo root directory',
-                type: 'Array<String>',
-                default: __SSugarConfig.get('monorepo.packagesGlobs'),
+                type: 'String',
+                default: __SSugarConfig.get('monorepo.packagesGlob'),
                 alias: 'p',
+            },
+            build: {
+                description: 'Specify if you want to build your files like the .ts ones or not',
+                type: 'Boolean',
+                default: false,
+                alias: 'b'
             },
             buildInitial: {
                 description:
                     'Specify if you want to build the files at launch before the watch process take care of the rest',
                 type: 'Boolean',
-                default: false,
-                alias: 'b',
+                default: false
             },
             test: {
                 description:
@@ -47,6 +52,17 @@ export default class SMonorepoDevParamsInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
+            format: {
+                description: 'Specify if you want to run the code formatter (SCodeFormatter) on your packages or not',
+                type: 'Boolean',
+                default: false,
+                alias: 'f',
+            },
+            formatInitial: {
+                description: 'Specify if you want to format your files at launch before the watch process take care of the rest',
+                type: 'Boolean',
+                default: false
+            }
         };
     }
 }

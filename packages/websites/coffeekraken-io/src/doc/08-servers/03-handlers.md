@@ -26,15 +26,15 @@ To register your own handler, the easiest way is to register it through a module
 
 ```js
 export default function myModule(express, settings, config) {
-    // register your handler
-    config.handlers.myHandler = {
-        path: `/absolute/path/to/my/handler`
-    };
+  // register your handler
+  config.handlers.myHandler = {
+    path: `/absolute/path/to/my/handler`,
+  };
 
-    // register some routes that will use this handler
-    config.routes['/myHandler/*'] = {
-        handler: 'myHandler',
-    };
+  // register some routes that will use this handler
+  config.routes["/myHandler/*"] = {
+    handler: "myHandler",
+  };
 }
 ```
 
@@ -44,15 +44,15 @@ Here's some base code that you can use for your handler:
 
 ```js
 export default function myHandler(req, res, settings = {}) {
-    return new Promise(async (resolve, reject) => {
-        // do something neat for your handler...
+  return new Promise(async (resolve, reject) => {
+    // do something neat for your handler...
 
-        // send result to the client
-        res.status(200);
-        res.type('text/html');
-        res.send(pageHtml.value);
-        resolve(pageHtml.value);
-    });
+    // send result to the client
+    res.status(200);
+    res.type("text/html");
+    res.send(pageHtml.value);
+    resolve(pageHtml.value);
+  });
 }
 ```
 

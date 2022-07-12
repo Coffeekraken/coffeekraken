@@ -66,17 +66,17 @@ The `viewspec.json` files has to live in at the same place of the view he's desc
 
 Here's the main data types that we think cover a lot of situations. Note that this is more to take as example that final types. You can specify your own types as well depending on your needs:
 
--   `String`: Simple string data
--   `Date`: Simple [ISO](https://en.wikipedia.org/wiki/ISO_8601) date string
--   `DateTime`: Simple [ISO](https://en.wikipedia.org/wiki/ISO_8601) datetime string
--   `Time`: Simple [ISO](https://en.wikipedia.org/wiki/ISO_8601) time string
--   `Number`: Simple number
--   `Integer`: Simple integer number
--   `Image`: Simple image data
-    -   `src`: The source of the image
-    -   `alt`: The alternative text
-    -   `title`: The image title
--   `Object`: An object described by his own `props`
+- `String`: Simple string data
+- `Date`: Simple [ISO](https://en.wikipedia.org/wiki/ISO_8601) date string
+- `DateTime`: Simple [ISO](https://en.wikipedia.org/wiki/ISO_8601) datetime string
+- `Time`: Simple [ISO](https://en.wikipedia.org/wiki/ISO_8601) time string
+- `Number`: Simple number
+- `Integer`: Simple integer number
+- `Image`: Simple image data
+  - `src`: The source of the image
+  - `alt`: The alternative text
+  - `title`: The image title
+- `Object`: An object described by his own `props`
 
 ## Repeatable types `array`
 
@@ -101,23 +101,23 @@ If we take the overview example above, the resulting data that has to be injecte
 
 ```php
 return [
-    'title' => 'Hello world',
-    'author' => [
-        'name' => 'Olivier Bossel',
-        'email' => 'something@gmail.com',
+  "title" => "Hello world",
+  "author" => [
+    "name" => "Olivier Bossel",
+    "email" => "something@gmail.com",
+  ],
+  "images" => [
+    [
+      "src" => "https://picsum.photos/200/300",
+      "title" => "Hello",
+      "alt" => "world",
     ],
-    'images' => [
-        [
-            'src' => 'https://picsum.photos/200/300',
-            'title' => 'Hello',
-            'alt' => 'world',
-        ],
-        [
-            'src' => 'https://picsum.photos/200/300',
-            'title' => 'Hello',
-            'alt' => 'world',
-        ],
+    [
+      "src" => "https://picsum.photos/200/300",
+      "title" => "Hello",
+      "alt" => "world",
     ],
+  ],
 ];
 ```
 

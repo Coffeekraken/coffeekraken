@@ -24,17 +24,17 @@ Through the CLI you will have access to all the primary features that Coffeekrak
 
 1. Full **development environment**
 2. Full **production ready build** stack for:
-    - `js/ts`
-    - `css` through [PostCSS](https://postcss.org) and our `@coffeekraken/s-postcss-sugar-plugin`
-    - **Images optimization** and different resolutions generation
-    - and more...
+   - `js/ts`
+   - `css` through [PostCSS](https://postcss.org) and our `@coffeekraken/s-postcss-sugar-plugin`
+   - **Images optimization** and different resolutions generation
+   - and more...
 3. Nice tooling like:
-    - **Sitemap** generation
-    - **Static website generation** for non-headless websites
-    - **Project scaffolding** for different things like website templates, lit element, etc...
-    - Utils like launching a command in multiple directories at once
-    - Killing processes by id or by port
-    - and more...
+   - **Sitemap** generation
+   - **Static website generation** for non-headless websites
+   - **Project scaffolding** for different things like website templates, lit element, etc...
+   - Utils like launching a command in multiple directories at once
+   - Killing processes by id or by port
+   - and more...
 
 ## How to start using it?
 
@@ -58,8 +58,8 @@ Here's a list of the available commands:
 
 {{#each availableCli.endpoints}}
 
--   `sugar {{@key}} [arguments]`
-    -   {{this.description}}
+- `sugar {{@key}} [arguments]`
+  - {{this.description}}
 
 {{/each}}
 

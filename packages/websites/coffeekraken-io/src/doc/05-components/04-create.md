@@ -28,11 +28,11 @@ On top of that, we make use of our own `SLitComponent` class that extends the `L
 
 1. Support for `SInterface` interfaces through the `SLitComponent.properties` static method
 2. Access to a `componentUtils` property that store a `SComponentUtils` instance and gives you access to methods like:
-    - `className`: Get classname linked to the component name
-    - Adopting root style when has a shadowRoot
-    - `SComponentDefaultInterface` exposed
-    - System to delaying the `firstUpdated` method execution when the component enter in viewport, etc...
-    - Utils method like `isMounted`, `isInViewport`, etc...
+   - `className`: Get classname linked to the component name
+   - Adopting root style when has a shadowRoot
+   - `SComponentDefaultInterface` exposed
+   - System to delaying the `firstUpdated` method execution when the component enter in viewport, etc...
+   - Utils method like `isMounted`, `isInViewport`, etc...
 3. And more.
 
 ## Creating your component project

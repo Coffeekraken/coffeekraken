@@ -20,13 +20,13 @@ To register some new configuration files for your package, you just need to crea
 
 ```json
 {
-    "config": {
-        "folders": [
-            {
-                "path": "./dist/pkg/%moduleSystem/config"
-            }
-        ]
-    }
+  "config": {
+    "folders": [
+      {
+        "path": "./dist/pkg/%moduleSystem/config"
+      }
+    ]
+  }
 }
 ```
 

@@ -18,10 +18,10 @@
 
 Our images build process will take care of:
 
--   Resizing your images
--   Compressing them depending on your specified configuration
--   Generating multiple version depending on your wanted resolutions `[1, 2, 3, ...]`
--   Generating a `.webp` version of your images if you want so
+- Resizing your images
+- Compressing them depending on your specified configuration
+- Generating multiple version depending on your wanted resolutions `[1, 2, 3, ...]`
+- Generating a `.webp` version of your images if you want so
 
 ## Sugar CLI
 

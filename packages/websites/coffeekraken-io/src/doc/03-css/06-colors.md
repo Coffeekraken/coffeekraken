@@ -46,11 +46,11 @@ export default function (env, config) {
 
 Colors can be defined in your theme configuration using one of these syntax:
 
--   `hsl(156,50,50)`: HSL syntax **prefered**
--   `hsla(156,50,50,1)`: HSLA syntax
--   `rgb(245,234,65)`: RGB syntax
--   `rgba(245,234,65,1)`: RGBA syntax
--   `#ff347f`: Hexadecimal syntax
+- `hsl(156,50,50)`: HSL syntax **prefered**
+- `hsla(156,50,50,1)`: HSLA syntax
+- `rgb(245,234,65)`: RGB syntax
+- `rgba(245,234,65,1)`: RGBA syntax
+- `#ff347f`: Hexadecimal syntax
 
 > It's preferable to **set your colors directly in HSL(A)** syntax cause under the hood this will be the used one. Setting them directly in HSL avoid unecessary conversion.
 
@@ -88,27 +88,27 @@ export default function (env, config) {
 
 These variants are the same color defined in the `color` property, but with some tweaks like:
 
--   `lighten`: Allows you to increase the `l` HSL color by 0|100
--   `darken`: Allows you to decrease the `l` HSL color by 0|100
--   `saturate`: Allows you to increase the `s` HSL color by 0|100
--   `desaturate`: Allows you to decrease the `s` HSL color by 0|100
--   `spin`: Allows you to "spin" the `h` HSL color by -360|360
--   `alpha`: Allows you to increase/decrease the `a` HSLA color by 0|1
+- `lighten`: Allows you to increase the `l` HSL color by 0|100
+- `darken`: Allows you to decrease the `l` HSL color by 0|100
+- `saturate`: Allows you to increase the `s` HSL color by 0|100
+- `desaturate`: Allows you to decrease the `s` HSL color by 0|100
+- `spin`: Allows you to "spin" the `h` HSL color by -360|360
+- `alpha`: Allows you to increase/decrease the `a` HSLA color by 0|1
 
 Some out of the box variants are available through the `themeLightBase.config.ts` and `themeDarkBase.config.ts` configuration file. Here's the list:
 
--   `text`: Used for texts
--   `placeholder`: Used for input placeholders
--   `foreground`: Used for elements displayed on top of the `color` itself
--   `ui`: Used for forms elements background, etc...
--   `uiForeground`: Used for forms elements text, etc...
--   `background`: Used for backgrounds like body one, etc...
--   `backgroundForeground`: Used for elements displayed on top of the `background` variant
--   `surface`: Used for some elements background like stripped tables rows
--   `surfaceForeground`: Used for elements displayed on top of the `surface`variant
--   `border`: Used for borders
--   `gradientStart`: Used for gradients as the start color
--   `gradientEnd`: Used for gradients as the end color
+- `text`: Used for texts
+- `placeholder`: Used for input placeholders
+- `foreground`: Used for elements displayed on top of the `color` itself
+- `ui`: Used for forms elements background, etc...
+- `uiForeground`: Used for forms elements text, etc...
+- `background`: Used for backgrounds like body one, etc...
+- `backgroundForeground`: Used for elements displayed on top of the `background` variant
+- `surface`: Used for some elements background like stripped tables rows
+- `surfaceForeground`: Used for elements displayed on top of the `surface`variant
+- `border`: Used for borders
+- `gradientStart`: Used for gradients as the start color
+- `gradientEnd`: Used for gradients as the end color
 
 ## `current` color
 
@@ -117,20 +117,20 @@ Take an example when we want to create a button that uses this `current` color, 
 
 ```css
 .btn {
-    background: sugar.color(current);
-    color: sugar.color(current, foreground);
+  background: sugar.color(current);
+  color: sugar.color(current, foreground);
 }
 .my-section {
-    @sugar.color (accent);
+  @sugar.color (accent);
 }
 .my-button {
-    @sugar.color (error);
+  @sugar.color (error);
 }
 ```
 
 ```html
 <div class="my-section">
-    <a class="btn">Hello world</a>
+  <a class="btn">Hello world</a>
 </div>
 <a class="my-button btn">Other button</a>
 ```

@@ -4,6 +4,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __getFiles from '@coffeekraken/sugar/node/fs/getFiles';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
@@ -34,7 +35,7 @@ import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFor
 export interface ISCodeFormatterSettings {}
 
 export interface ISCodeFormatterFormatParams {
-    input: string;
+    glob: string;
     inDir: string;
     watch: boolean;
     formatInitial: boolean;
@@ -117,7 +118,6 @@ class SCodeFormatter extends __SClass {
         for (let [id, formatter] of Object.entries(
             SCodeFormatter._registeredFormatters,
         )) {
-            console.log(id);
             exts = [...exts, ...formatter.extensions];
         }
         return __unique(exts);
@@ -193,20 +193,61 @@ class SCodeFormatter extends __SClass {
                 params,
             );
 
-            let finalInput = finalParams.input;
+            let finalGlob = finalParams.glob;
 
             const handledExtensions = this.constructor.getHandledExtensions();
-            if (finalParams.input.match(/\/\*$/)) {
-                finalInput += `.{${handledExtensions.join(',')}}`;
+            if (finalParams.glob.match(/\/\*$/)) {
+                finalGlob += `.{${handledExtensions.join(',')}}`;
+            }
+
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>○</yellow> Glob              : <yellow>${finalGlob}</yellow>`
+            });
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`
+            });
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>○</yellow> Watch             : ${finalParams.watch ? `<green>true</green>` : `<red>false</red>`}`
+            });
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>○</yellow> Format initial    : ${finalParams.formatInitial ? `<green>true</green>` : `<red>false</red>`}`
+            });
+
+            if (finalParams.watch) {
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[watch]</yellow> Watching for file changes...`
+                });
             }
 
             // watch using chokidar
-            const filesPromise = __getFiles(finalInput, {
+            const filesPromise = __getFiles(finalGlob, {
                 cwd: finalParams.inDir,
                 ignoreInitial: !finalParams.formatInitial,
                 watch: finalParams.watch,
             });
+
+            // save all the file paths that has just been savec by the formatter
+            // to avoid process it over and over...
+            const savedStack: string[] = [];
+
+            // listen for files change and add
             filesPromise.on('add,change', async (file) => {
+
+                // avoid to process in loop the same file saved over and over
+                const savedFileIdx = savedStack.indexOf(file);
+                if (savedFileIdx !== -1) {
+                    // remove the file for next process
+                    savedStack.splice(savedFileIdx, 1);
+                    return;
+                }
+
+                const relFilePath = __path.relative(__packageRoot(), file);
+
                 const duration = new __SDuration();
 
                 // grab the file content
@@ -225,7 +266,7 @@ class SCodeFormatter extends __SClass {
                 } else {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[format]</yellow> Formatting file "<cyan>${file}</cyan>"`,
+                        value: `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
                     });
                     try {
                         // apply the formatter on the file content
@@ -235,12 +276,13 @@ class SCodeFormatter extends __SClass {
                         });
 
                         // write file back with formatted code
+                        savedStack.push(file);
                         __fs.writeFileSync(file, result.code, 'utf-8');
 
                         emit('log', {
                             clear: 1,
                             type: __SLog.TYPE_INFO,
-                            value: `<green>[format]</green> File "<cyan>${file}</cyan>" formatted <green>successfully</green> in <yellow>${
+                            value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
                                 duration.end().formatedDuration
                             }</yellow>`,
                         });
@@ -255,6 +297,10 @@ class SCodeFormatter extends __SClass {
 
             if (!finalParams.watch) {
                 resolve();
+            }
+        }, {
+            eventEmitter: {
+                bind: this
             }
         });
     }

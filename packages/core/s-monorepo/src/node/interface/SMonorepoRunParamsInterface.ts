@@ -26,11 +26,11 @@ export default class SMonorepoRunParamsInterface extends __SInterface {
                 type: 'String',
                 required: true,
             },
-            packagesGlobs: {
+            packagesGlob: {
                 description:
                     'Specify some globs to search for packages relative to the monorepo root directory',
-                type: 'Array<String>',
-                default: __SSugarConfig.get('monorepo.packagesGlobs'),
+                type: 'String',
+                default: __SSugarConfig.get('monorepo.packagesGlob'),
             },
         };
     }

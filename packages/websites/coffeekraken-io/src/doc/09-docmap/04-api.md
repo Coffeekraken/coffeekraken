@@ -25,11 +25,11 @@ Don't worry, using the `SDocmap` api is pretty straightforward.
 To read your `docmap.json` file, simply use this code:
 
 ```js
-import __SDocmap from '@coffeekraken/s-docmap';
+import __SDocmap from "@coffeekraken/s-docmap";
 (async () => {
-    const docmapInstance = new __SDocmap();
-    const docmap = await docmapInstance.read();
-    // do something with your docmap...
+  const docmapInstance = new __SDocmap();
+  const docmap = await docmapInstance.read();
+  // do something with your docmap...
 })();
 ```
 

@@ -34,8 +34,8 @@ sugar dev
 
 By default, the compiler will take the `src/css/index.css` file as input and will save the builded one to:
 
--   `dist/css/index.css`: Production ready css
--   `dist/css/index.dev.css`: Development css with docblocks, etc...
+- `dist/css/index.css`: Production ready css
+- `dist/css/index.dev.css`: Development css with docblocks, etc...
 
 All of these configurations are specified inside the `postcssBuilder.config.ts` config file that you can override as all the others settings following the [configuration documentation](/doc/config/overview).
 
@@ -43,8 +43,8 @@ All of these configurations are specified inside the `postcssBuilder.config.ts` 
 
 The configuration used by the `SPostcssBuilder` are these ones:
 
--   `postcssBuilder.config.ts`: Direct builder configuration like input, output, etc...
--   `postcss.config.ts`: [PostCSS](https://postcss.org) under the hood configurations
--   `purgecss.config.ts`: [PurgeCSS](https://purgecss.com/) under the hood configurations
+- `postcssBuilder.config.ts`: Direct builder configuration like input, output, etc...
+- `postcss.config.ts`: [PostCSS](https://postcss.org) under the hood configurations
+- `purgecss.config.ts`: [PurgeCSS](https://purgecss.com/) under the hood configurations
 
 {{/layout-doc }}

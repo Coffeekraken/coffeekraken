@@ -223,10 +223,11 @@ export default class STypescriptBuilder extends __SBuilder {
                 );
 
                 // @ts-ignore
-                const finalParams: ISTypescriptBuilderBuildParams = __monorepoToPackageAbsolutePathDeepMap(
-                    __STypescriptBuilderBuildParamsInterface.apply(params),
-                    params.packageRoot ?? process.cwd(),
-                );
+                const finalParams: ISTypescriptBuilderBuildParams =
+                    __monorepoToPackageAbsolutePathDeepMap(
+                        __STypescriptBuilderBuildParamsInterface.apply(params),
+                        params.packageRoot ?? process.cwd(),
+                    );
 
                 // this can be overrided by customSettings bellow
                 let formats = Array.isArray(finalParams.formats)
@@ -258,6 +259,47 @@ export default class STypescriptBuilder extends __SBuilder {
                 const globs = Array.isArray(finalParams.glob)
                     ? finalParams.glob
                     : [finalParams.glob];
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Globs              : <yellow>${globs.join(
+                        ',',
+                    )}</yellow>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Output directory  : <cyan>${finalParams.outDir}</cyan>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Formats           : <yellow>${formats.join(
+                        ',',
+                    )}</yellow>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Platform          : <yellow>${finalParams.platform}</yellow>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Watch             : ${
+                        finalParams.watch
+                            ? `<green>true</green>`
+                            : `<red>false</red>`
+                    }`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Build initial     : ${
+                        finalParams.buildInitial
+                            ? `<green>true</green>`
+                            : `<red>false</red>`
+                    }`,
+                });
 
                 // loop on each glob(s) and build the files
                 globs.forEach((glob) => {
@@ -322,10 +364,11 @@ export default class STypescriptBuilder extends __SBuilder {
                             }
 
                             // "localize" the file paths to the current package root
-                            buildParams = __monorepoToPackageAbsolutePathDeepMap(
-                                buildParams,
-                                finalParams.packageRoot ?? process.cwd(),
-                            );
+                            buildParams =
+                                __monorepoToPackageAbsolutePathDeepMap(
+                                    buildParams,
+                                    finalParams.packageRoot ?? process.cwd(),
+                                );
 
                             // generate all the requested formats
                             formats.forEach(async (format) => {
@@ -437,9 +480,8 @@ export default class STypescriptBuilder extends __SBuilder {
 
             // package.json
             if (params.save) {
-                const packageJsonOutFolderPath = __path.dirname(
-                    packageJsonOutPath,
-                );
+                const packageJsonOutFolderPath =
+                    __path.dirname(packageJsonOutPath);
                 if (!__fs.existsSync(packageJsonOutFolderPath)) {
                     __fs.mkdirSync(packageJsonOutFolderPath, {
                         recursive: true,

@@ -1,41 +1,41 @@
 .footer {
-    background-color: sugar.color(main, surface);
-    padding-block: sugar.padding(100);
+  background-color: sugar.color(main, surface);
+  padding-block: sugar.padding(100);
 
-    padding-inline: sugar.padding(50);
+  padding-inline: sugar.padding(50);
 
-    svg {
-        height: 60px;
-        width: 140px;
-        margin-block-end: sugar.margin(30);
-    }
+  svg {
+    height: 60px;
+    width: 140px;
+    margin-block-end: sugar.margin(30);
+  }
+  svg .main {
+    fill: sugar.color(base, --darken 55);
+  }
+  svg .accent {
+    fill: sugar.color(accent);
+  }
+
+  @sugar.theme.when (dark) {
     svg .main {
-        fill: sugar.color(base, --darken 55);
+      fill: sugar.color(main, text);
     }
     svg .accent {
-        fill: sugar.color(accent);
+      fill: sugar.color(accent);
     }
+  }
 
-    @sugar.theme.when (dark) {
-        svg .main {
-            fill: sugar.color(main, text);
-        }
-        svg .accent {
-            fill: sugar.color(accent);
-        }
+  .__columns {
+    display: flex;
+    justify-content: space-between;
+
+    @sugar.media mobile {
+      flex-wrap: wrap;
+
+      > div {
+        width: 100%;
+        margin-block-start: sugar.margin(30);
+      }
     }
-
-    .__columns {
-        display: flex;
-        justify-content: space-between;
-
-        @sugar.media mobile {
-            flex-wrap: wrap;
-
-            > div {
-                width: 100%;
-                margin-block-start: sugar.margin(30);
-            }
-        }
-    }
+  }
 }

@@ -1,7 +1,7 @@
 import type {
     ISCodeFormatterFormatter,
     ISCodeFormatterFormatterMetas,
-    ISCodeFormatterFormatterResult,
+    ISCodeFormatterFormatterResult
 } from '@coffeekraken/s-code-formatter';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __prettier from 'prettier';
@@ -44,7 +44,6 @@ const formatter: ISCodeFormatterFormatter = {
             ...prettierConfig,
             filepath: metas.filePath,
         });
-
         return {
             code: formattedCode,
         };

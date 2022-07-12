@@ -47,7 +47,7 @@ Some classes will be generated from your theme configuration like these:
 
 {{#each typos}}
 
--   **s-typo:{{@key}}**
-    {{/each}}
+- **s-typo:{{@key}}**
+  {{/each}}
 
 {{/layout-doc }}

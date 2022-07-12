@@ -63,16 +63,16 @@ First possibility to apply layouts using this technique is to use the `@sugar.la
 
 ```css
 .my-layout {
-    @sugar.layout ('1 2 _ 3 4');
+  @sugar.layout ('1 2 _ 3 4');
 }
 ```
 
 ```html
 <div class="my-layout">
-    <div>Area 1</div>
-    <div>Area 2</div>
-    <div>Area 3</div>
-    <div>Area 4</div>
+  <div>Area 1</div>
+  <div>Area 2</div>
+  <div>Area 3</div>
+  <div>Area 4</div>
 </div>
 ```
 
@@ -86,8 +86,8 @@ Here's the built-in layout classes:
 
 {{#each layouts}}
 
--   **s-layout:{{@key}}**
-    {{/each}}
+- **s-layout:{{@key}}**
+  {{/each}}
 
 These classes are generated depending on your `theme.layout.layout` configuration.
 

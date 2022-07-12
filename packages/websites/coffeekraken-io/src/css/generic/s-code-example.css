@@ -1,37 +1,37 @@
 s-code-example {
-    display: block;
-    position: relative;
-    /* @sugar.theme (dark); */
+  display: block;
+  position: relative;
+  /* @sugar.theme (dark); */
 
-    /* @sugar.shadow.gradient (0, 10px, 10px, 1, sugar.color(accent), sugar.color(complementary)) {
+  /* @sugar.shadow.gradient (0, 10px, 10px, 1, sugar.color(accent), sugar.color(complementary)) {
         width: calc(100% - 40px);
         opacity: 0.3;
     } */
 }
 
 .s-code-example__tabs {
-    margin-bottom: calc(sugar.margin(20) * -1);
-    margin-left: calc(sugar.margin(20));
-    position: relative;
+  margin-bottom: calc(sugar.margin(20) * -1);
+  margin-left: calc(sugar.margin(20));
+  position: relative;
 }
 
 .s-code-example__toolbar {
-    color: rgba(0,0,0,.3);
-    position: relative;
-    top: calc(sugar.margin(10) * -1) !important;
+  color: rgba(0, 0, 0, 0.3);
+  position: relative;
+  top: calc(sugar.margin(10) * -1) !important;
 
-    @sugar.theme.when(dark) {
-        color: rgba(255,255,255,.3);
-    }
+  @sugar.theme.when (dark) {
+    color: rgba(255, 255, 255, 0.3);
+  }
 }
 
 .s-code-example-loader {
-    background: sugar.color(main, --lighten 46);
-    border-radius: sugar.border.radius();
-    padding: sugar.padding(30);
-    text-align: center;
+  background: sugar.color(main, --lighten 46);
+  border-radius: sugar.border.radius();
+  padding: sugar.padding(30);
+  text-align: center;
 
-    @sugar.theme.when dark {
-        background: sugar.color(main, surface);
-    }
+  @sugar.theme.when dark {
+    background: sugar.color(main, surface);
+  }
 }

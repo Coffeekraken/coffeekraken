@@ -24,15 +24,15 @@ You can specify a `params` object in your page file like so:
 
 ```js
 export default {
-    params: {
-        something: true, // required param
-        else: false, // optional param
+  params: {
+    something: true, // required param
+    else: false, // optional param
+  },
+  views: [
+    {
+      path: "hello.hello",
     },
-    views: [
-        {
-            path: 'hello.hello',
-        },
-    ],
+  ],
 };
 ```
 
@@ -44,12 +44,12 @@ You can also use directly the [express route](https://expressjs.com/en/guide/rou
 
 ```js
 export default {
-    slugs: ['/:something/:else?'],
-    views: [
-        {
-            path: 'hello.hello',
-        },
-    ],
+  slugs: ["/:something/:else?"],
+  views: [
+    {
+      path: "hello.hello",
+    },
+  ],
 };
 ```
 

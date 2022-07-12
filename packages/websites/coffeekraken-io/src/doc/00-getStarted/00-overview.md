@@ -25,11 +25,11 @@ First, Coffeekraken gives you access to a bunch of UI components ready to use li
 {{#each docmap.map}}
 {{#ifEqual (get this 'type') 'CustomElement'}}
 
--   [**{{this.name}}**]({{this.menu.slug}})
-    -   {{this.description}}
-    -   {{this.menu.tree}}
-        {{/ifEqual}}
-        {{/each}}
+- [**{{this.name}}**]({{this.menu.slug}})
+  - {{this.description}}
+  - {{this.menu.tree}}
+    {{/ifEqual}}
+    {{/each}}
 
 > For a more visual discovery of our UI's components, please check out our **styleguide**
 
@@ -41,11 +41,11 @@ This plugin allows you to make use of mixins and functions like these:
 
 ```css
 .my-button {
-    padding: sugar.padding(10) sugar.passing(30);
-    font-size: sugar.font.size(30);
-    background-color: sugar.color(accent);
-    color: sugar.color(accent, foreground);
-    /* and a lot more */
+  padding: sugar.padding(10) sugar.passing(30);
+  font-size: sugar.font.size(30);
+  background-color: sugar.color(accent);
+  color: sugar.color(accent, foreground);
+  /* and a lot more */
 }
 ```
 
@@ -70,9 +70,9 @@ In addition to this, you will have access to a lot of helper classes for things 
 
 In order to make your daily work experience as smooth as possible, we've built a complete development stack that will scaffold your project folder, install all the needed dependencies and expose simple commands to work with like:
 
--   `sugar dev`: Start the development environnment
--   `sugar build`: Generate a production ready package
--   `sugar prod`: Preview your website using the production generated assets
+- `sugar dev`: Start the development environnment
+- `sugar build`: Generate a production ready package
+- `sugar prod`: Preview your website using the production generated assets
 
 Our stack is as well modular and can be updated as you want through our [configuration system](/doc/config/overview).
 
@@ -110,23 +110,23 @@ sugar -h
 
 Coffeekraken is built has modular as possible. This mean that you have access to a lot of individual packages like:
 
--   `@coffeekraken/s-images-builder`
--   `@coffeekraken/s-typescript-builder`
--   `@coffeekraken/s-postcss-sugar-plugin`
--   `@coffeekraken/s-code-example-component`
--   `@coffeekraken/s-color-picker-component`
--   `@coffeekraken/s-sugar-config`
--   `@coffeekraken/s-docblock`
--   `@coffeekraken/s-interface`
--   `@coffeekraken/s-file`
--   `@coffeekraken/s-promise`
--   `@coffeekraken/s-form-validate-feature`
--   `@coffeekraken/s-view-renderer`
--   `@coffeekraken/s-frontend-server`
--   `@coffeekraken/s-theme`
--   `@coffeekraken/s-color`
--   `@coffeekraken/s-duration`
--   And a lot more...
+- `@coffeekraken/s-images-builder`
+- `@coffeekraken/s-typescript-builder`
+- `@coffeekraken/s-postcss-sugar-plugin`
+- `@coffeekraken/s-code-example-component`
+- `@coffeekraken/s-color-picker-component`
+- `@coffeekraken/s-sugar-config`
+- `@coffeekraken/s-docblock`
+- `@coffeekraken/s-interface`
+- `@coffeekraken/s-file`
+- `@coffeekraken/s-promise`
+- `@coffeekraken/s-form-validate-feature`
+- `@coffeekraken/s-view-renderer`
+- `@coffeekraken/s-frontend-server`
+- `@coffeekraken/s-theme`
+- `@coffeekraken/s-color`
+- `@coffeekraken/s-duration`
+- And a lot more...
 
 These packages are the bones of our development suite but they can be used as standelone packages without any issue.
 

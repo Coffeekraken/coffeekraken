@@ -22,31 +22,31 @@ To illustrate this, we will take as example of overriding the javascript sources
 
 ### Package level overriding
 
--   Create the file `.sugar/storage.config.js`
--   Fill it like so
+- Create the file `.sugar/storage.config.js`
+- Fill it like so
 
 ```js
 export default (env, config) => {
-    return {
-        src: {
-            jsDir: 'your new absolute directory path',
-        },
-    };
+  return {
+    src: {
+      jsDir: "your new absolute directory path",
+    },
+  };
 };
 ```
 
 ### User level overriding
 
--   Create the file `.local/.sugar/storage.config.js`
--   Fill it like so
+- Create the file `.local/.sugar/storage.config.js`
+- Fill it like so
 
 ```js
 export default (env, config) => {
-    return {
-        src: {
-            jsDir: 'your new absolute directory path',
-        },
-    };
+  return {
+    src: {
+      jsDir: "your new absolute directory path",
+    },
+  };
 };
 ```
 

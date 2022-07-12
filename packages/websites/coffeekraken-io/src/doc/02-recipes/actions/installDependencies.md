@@ -23,28 +23,28 @@ This action allows you to install your dependencies like the `node_modules` ones
 Here's an example of usage in a fictive recipe config file:
 
 ```js
-export default function(env, config) {
-    return {
-        title: 'My cool recipe',
-        description: '...',
-        defaultStack: 'dev',
-        stacks: {
-            new: {
-                description: 'Create a new project',
-                actions: {
-                    installDependencies: {
-                        extends: 'installDependencies',
-                        params: {}
-                    },
-                    // etc...
-                }
-            },
-            dev: {
-                // etc...
-            },
-            // etc...
-        }
-    }
+export default function (env, config) {
+  return {
+    title: "My cool recipe",
+    description: "...",
+    defaultStack: "dev",
+    stacks: {
+      new: {
+        description: "Create a new project",
+        actions: {
+          installDependencies: {
+            extends: "installDependencies",
+            params: {},
+          },
+          // etc...
+        },
+      },
+      dev: {
+        // etc...
+      },
+      // etc...
+    },
+  };
 }
 ```
 

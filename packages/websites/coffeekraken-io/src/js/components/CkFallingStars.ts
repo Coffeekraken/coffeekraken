@@ -1,31 +1,31 @@
 // @ts-nocheck
 
-import __SLitComponent from '@coffeekraken/s-lit-component';
-import { html } from 'lit';
+import __SLitComponent from "@coffeekraken/s-lit-component";
+import { html } from "lit";
 
 export default class CKFallingStars extends __SLitComponent {
-    static get properties() {
-        return __SLitComponent.createProperties();
-    }
+  static get properties() {
+    return __SLitComponent.createProperties();
+  }
 
-    constructor() {
-        super({
-            litComponent: {
-                shadowDom: false,
-            },
-        });
-    }
+  constructor() {
+    super({
+      litComponent: {
+        shadowDom: false,
+      },
+    });
+  }
 
-    _starsCount = 0;
-    _maxCount = 10;
+  _starsCount = 0;
+  _maxCount = 10;
 
-    async firstUpdated() {
-        for (let i = 0; i < this._maxCount; i++) {
-            const left = `${Math.random() * 100}%`;
+  async firstUpdated() {
+    for (let i = 0; i < this._maxCount; i++) {
+      const left = `${Math.random() * 100}%`;
 
-            const $starStyle = document.createElement('style');
-            $starStyle.rel = 'stylesheet';
-            $starStyle.innerHTML = `
+      const $starStyle = document.createElement("style");
+      $starStyle.rel = "stylesheet";
+      $starStyle.innerHTML = `
                 @keyframes star-${i} {
                     0% {
                         top: -50px;
@@ -38,7 +38,7 @@ export default class CKFallingStars extends __SLitComponent {
                     100% {
                         top: 100%;
                         left: calc(var(--left) - ${
-                            10 + Math.round(Math.random() * 0)
+                          10 + Math.round(Math.random() * 0)
                         }%);
                         opacity: 0;
                     }
@@ -47,44 +47,44 @@ export default class CKFallingStars extends __SLitComponent {
                     animation: star-${i} var(--falling-time, 1s) ease-in forwards;
                 }
             `;
-            document.head.appendChild($starStyle);
-        }
-
-        this.new();
+      document.head.appendChild($starStyle);
     }
 
-    new() {
-        this._starsCount++;
+    this.new();
+  }
 
-        const starId = Math.round(Math.random() * this._maxCount);
+  new() {
+    this._starsCount++;
 
-        const $star = document.createElement('div');
-        $star.classList.add('__star');
-        $star.classList.add(`__star-${starId}`);
-        $star.classList.add(Math.random() < 0.5 ? 'accent' : 'complementary');
+    const starId = Math.round(Math.random() * this._maxCount);
 
-        const speed = 1 + Math.random() * 1.5;
+    const $star = document.createElement("div");
+    $star.classList.add("__star");
+    $star.classList.add(`__star-${starId}`);
+    $star.classList.add(Math.random() < 0.5 ? "accent" : "complementary");
 
-        $star.style.setProperty('--left', `${Math.random() * 100}%`);
-        $star.style.setProperty('--falling-time', `${speed}s`);
-        $star.style.setProperty('--speed', speed);
-        $star.style.setProperty('--scale', Math.random() * 2);
+    const speed = 1 + Math.random() * 1.5;
 
-        setTimeout(() => {
-            $star.remove();
-        }, 5000);
+    $star.style.setProperty("--left", `${Math.random() * 100}%`);
+    $star.style.setProperty("--falling-time", `${speed}s`);
+    $star.style.setProperty("--speed", speed);
+    $star.style.setProperty("--scale", Math.random() * 2);
 
-        this.appendChild($star);
+    setTimeout(() => {
+      $star.remove();
+    }, 5000);
 
-        setTimeout(this.new.bind(this), Math.random() * 3500);
-    }
+    this.appendChild($star);
 
-    render() {
-        return html``;
-    }
+    setTimeout(this.new.bind(this), Math.random() * 3500);
+  }
+
+  render() {
+    return html``;
+  }
 }
 
-export function define(props: any = {}, tagName = 'ck-falling-stars') {
-    __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, CKFallingStars);
+export function define(props: any = {}, tagName = "ck-falling-stars") {
+  __SLitComponent.setDefaultProps(tagName, props);
+  customElements.define(tagName, CKFallingStars);
 }

@@ -18,11 +18,11 @@
 
 As described in the overview, the supported formats are:
 
--   `.jpg`
--   `.png`
--   `.gif`
--   `.svg`
--   `.webp`
+- `.jpg`
+- `.png`
+- `.gif`
+- `.svg`
+- `.webp`
 
 These file types are the most common in web today. Here's what we can say about each of them in the Coffeekraken world:
 

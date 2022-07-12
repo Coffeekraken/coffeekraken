@@ -20,20 +20,20 @@ To write your documentation as best as possible, you can use pretty much all the
 
 However, to generate the docmap, we only take these specifics tags:
 
--   `name`: The name of your function/class/etc... **required**
--   `namespace`: A namespace under which to store this doc element in the docmap **required**
--   `type`: The type of what you are documenting like "function", "class", "string", etc...
--   `menu`: A special tag to create menus inside the docmap. This is documented in [this documentation](/doc/docmap/menu)
--   `default`: The default value of what you are documenting like "true", "something", etc...
--   `platform`: The platform on which your item will run like "node", "browser", "php", etc...
--   `description`: The description of your item
--   `status`: The status of your item like "alpha", "beta", "stable", etc...
--   `example`: An example of how to use your item
--   `interface`: A relative path of where to find the associated SInterface interface definition file.
--   `async`: Define if your item is async or not
--   `static`: Define if your item is static of not
--   `since`: Define from when this item is available like "2.0.2", "1.2.3", etc...
--   `author`: Define which if the author of this item
+- `name`: The name of your function/class/etc... **required**
+- `namespace`: A namespace under which to store this doc element in the docmap **required**
+- `type`: The type of what you are documenting like "function", "class", "string", etc...
+- `menu`: A special tag to create menus inside the docmap. This is documented in [this documentation](/doc/docmap/menu)
+- `default`: The default value of what you are documenting like "true", "something", etc...
+- `platform`: The platform on which your item will run like "node", "browser", "php", etc...
+- `description`: The description of your item
+- `status`: The status of your item like "alpha", "beta", "stable", etc...
+- `example`: An example of how to use your item
+- `interface`: A relative path of where to find the associated SInterface interface definition file.
+- `async`: Define if your item is async or not
+- `static`: Define if your item is static of not
+- `since`: Define from when this item is available like "2.0.2", "1.2.3", etc...
+- `author`: Define which if the author of this item
 
 These tags are the one that will be written in the docmap. This does not mean that you cannot use other tags inside your docblocks. They just wont be listed inside the docmap.
 

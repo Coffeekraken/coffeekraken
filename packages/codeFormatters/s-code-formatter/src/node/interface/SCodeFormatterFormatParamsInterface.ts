@@ -22,11 +22,11 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 export default class SCodeFormatterFormatParamsInterface extends __SInterface {
     static get _definition() {
         return {
-            input: {
+            glob: {
                 description:
-                    'Specify what to format. Can be a string of code, directly a file path or a glob relative to the "cwd". If you pass a string of code, you MUST pass the language parameter alongside',
+                    'Specify a glog pattern relative to the "inDir"',
                 type: 'String',
-                default: __SSugarConfig.get('codeFormatter.input'),
+                default: __SSugarConfig.get('codeFormatter.glob'),
                 alias: 'i',
             },
             inDir: {

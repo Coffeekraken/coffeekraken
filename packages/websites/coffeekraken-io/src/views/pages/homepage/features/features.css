@@ -1,132 +1,132 @@
 #homepage-features {
+  position: relative;
+
+  .__bg {
+    display: block;
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.2;
+    z-index: -1;
+
+    @sugar.gradient (sugar.color(accent), sugar.color(complementary), $angle: 90deg);
+
+    &:before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      @sugar.gradient (sugar.color(current, background), rgba(0,0,0,0), $angle: 180deg);
+    }
+  }
+
+  .__header {
     position: relative;
+  }
 
-    .__bg {
-        display: block;
-        width: 100vw;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        opacity: 0.2;
-        z-index: -1;
+  .__tabs {
+    display: flex;
+    position: relative;
+    top: -33px;
 
-        @sugar.gradient (sugar.color(accent), sugar.color(complementary), $angle: 90deg);
+    .__item {
+      text-align: center;
+      flex-grow: 1;
+      padding: sugar.space(20);
+      background-color: sugar.color(surface, --lighten 10);
+      @sugar.transition (fast);
+      cursor: pointer;
+      display: inline;
 
-        &:before {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            @sugar.gradient (sugar.color(current, background), rgba(0,0,0,0), $angle: 180deg);
-        }
+      &:hover {
+        @sugar.gradient (sugar.color(accent), sugar.color(accent, --darken 10), $angle: 90);
+      }
+      @sugar.state.active {
+        /* transform: scale(1.2); */
+        @sugar.gradient (sugar.color(complementary), sugar.color(complementary, --darken 10), $angle: 90);
+      }
     }
+  }
+  .__contents {
+    position: relative;
+  }
 
-    .__header {
-        position: relative;
-    }
-
-    .__tabs {
-        display: flex;
-        position: relative;
-        top: -33px;
-
-        .__item {
-            text-align: center;
-            flex-grow: 1;
-            padding: sugar.space(20);
-            background-color: sugar.color(surface, --lighten 10);
-            @sugar.transition (fast);
-            cursor: pointer;
-            display: inline;
-
-            &:hover {
-                @sugar.gradient (sugar.color(accent), sugar.color(accent, --darken 10), $angle: 90);
-            }
-            @sugar.state.active {
-                /* transform: scale(1.2); */
-                @sugar.gradient (sugar.color(complementary), sugar.color(complementary, --darken 10), $angle: 90);
-            }
-        }
-    }
-    .__contents {
-        position: relative;
-    }
-
-    .__recipes-grid {
-        @sugar.layout (
+  .__recipes-grid {
+    @sugar.layout (
       1 2 3 4
       5 6 7 8
     , $gap: 30, $gapBetween: true);
 
-        @sugar.media mobile {
-            @sugar.layout (
+    @sugar.media mobile {
+      @sugar.layout (
             1 2
             3 4
             5 6
             7 8
             , $gap: 20, $gapBetween: true);
-        }
     }
+  }
 
-    .__webcomponents-grid {
-        @sugar.layout (
+  .__webcomponents-grid {
+    @sugar.layout (
       1 2 3 4 5
       6 7 8 9 10
     , $gap: 30, $gapBetween: true);
 
-        @sugar.media mobile {
-            @sugar.layout (
+    @sugar.media mobile {
+      @sugar.layout (
         1 2 
         3 4
         5 6
         7 8
         9 10
         , $gap: 30, $gapBetween: true);
-        }
     }
+  }
 
-    #features-development,
-    #features-webcomponents {
+  #features-development,
+  #features-webcomponents {
+    position: relative;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  #features-frontend,
+  #features-sugar {
+    position: relative;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  #features-development {
+    .__illustration {
+      @sugar.media mobile {
+        width: 60%;
         position: relative;
-
-        img {
-            max-width: 100%;
-        }
+        left: 20%;
+      }
     }
+  }
 
-    #features-frontend,
-    #features-sugar {
-        position: relative;
+  #features-sugar {
+    .__illustration {
+      transform-origin: 0 0;
+      transform: scale(1.3);
 
-        img {
-            max-width: 100%;
-        }
+      @sugar.media mobile {
+        transform: none;
+      }
     }
-
-    #features-development {
-        .__illustration {
-            @sugar.media mobile {
-                width: 60%;
-                position: relative;
-                left: 20%;
-            }
-        }
-    }
-
-    #features-sugar {
-        .__illustration {
-            transform-origin: 0 0;
-            transform: scale(1.3);
-
-            @sugar.media mobile {
-                transform: none;
-            }
-        }
-    }
+  }
 }

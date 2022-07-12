@@ -23,32 +23,32 @@ This action allows you to copy files/folder from a source (`src`), to a destinat
 Here's an example of usage in a fictive recipe config file:
 
 ```js
-export default function(env, config) {
-    return {
-        title: 'My cool recipe',
-        description: '...',
-        defaultStack: 'dev',
-        stacks: {
-            new: {
-                description: 'Create a new project',
-                actions: {
-                    copy: {
-                        extends: 'copy',
-                        params: {
-                            src: '...',
-                            dest: '...',
-                            chdir: true // tell the process to change into the copied folder if it is one
-                        }
-                    },
-                    // etc...
-                }
+export default function (env, config) {
+  return {
+    title: "My cool recipe",
+    description: "...",
+    defaultStack: "dev",
+    stacks: {
+      new: {
+        description: "Create a new project",
+        actions: {
+          copy: {
+            extends: "copy",
+            params: {
+              src: "...",
+              dest: "...",
+              chdir: true, // tell the process to change into the copied folder if it is one
             },
-            dev: {
-                // etc...
-            },
-            // etc...
-        }
-    }
+          },
+          // etc...
+        },
+      },
+      dev: {
+        // etc...
+      },
+      // etc...
+    },
+  };
 }
 ```
 

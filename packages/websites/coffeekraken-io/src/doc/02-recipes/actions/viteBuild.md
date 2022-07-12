@@ -27,26 +27,26 @@ Note that this embed the `@coffeekraken/s-postcss-sugar-plugin` plugin so you ca
 Here's an example of usage in a fictive recipe config file:
 
 ```js
-export default function(env, config) {
-    return {
-        title: 'My cool recipe',
-        description: '...',
-        defaultStack: 'dev',
-        stacks: {
-            build: {
-                description: 'Development stack',
-                actions: {
-                    viteBuild: {
-                        extends: 'viteBuild',
-                        params: {}
-                    },
-                    // etc...
-                }
-            },
-            dev: {},
-            // etc...
-        }
-    }
+export default function (env, config) {
+  return {
+    title: "My cool recipe",
+    description: "...",
+    defaultStack: "dev",
+    stacks: {
+      build: {
+        description: "Development stack",
+        actions: {
+          viteBuild: {
+            extends: "viteBuild",
+            params: {},
+          },
+          // etc...
+        },
+      },
+      dev: {},
+      // etc...
+    },
+  };
 }
 ```
 

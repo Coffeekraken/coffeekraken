@@ -20,11 +20,11 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 export default class SMonorepoUpgradeParamsInterface extends __SInterface {
     static get _definition() {
         return {
-            packagesGlobs: {
+            packagesGlob: {
                 description:
                     'Specify some globs to search for packages relative to the monorepo root directory',
-                type: 'Array<String>',
-                default: __SSugarConfig.get('monorepo.packagesGlobs'),
+                type: 'String',
+                default: __SSugarConfig.get('monorepo.packagesGlob'),
             },
             files: {
                 description:

@@ -19,8 +19,9 @@
 Some common actions are already built-in so you can reference them inside your recipe to avoid duplication. Here's the available actions list:
 
 {{#each config.frontstack.actions}}
+
 - `{{@key}}`: {{this.title}}
-{{/each}}
+  {{/each}}
 
 > You will find more documentation and examples in the `Actions` folder...
 

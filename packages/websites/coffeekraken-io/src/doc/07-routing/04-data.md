@@ -28,10 +28,10 @@ Let's create a new `src/views/hello/hello.data.js` file with this content:
 
 ```js
 export default async function ({ req, res, pageConfig }) {
-    // return variables to our view
-    return {
-        hello: 'world',
-    };
+  // return variables to our view
+  return {
+    hello: "world",
+  };
 }
 ```
 
@@ -47,15 +47,15 @@ To access your parameters from your `.data.js` file, assume we have this page co
 
 ```js
 export default {
-    params: {
-        something: true, // required param
-        else: false, // optional param
+  params: {
+    something: true, // required param
+    else: false, // optional param
+  },
+  views: [
+    {
+      path: "hello.hello",
     },
-    views: [
-        {
-            path: 'hello.hello',
-        },
-    ],
+  ],
 };
 ```
 
@@ -65,18 +65,18 @@ In your newly created `src/views/hello/hello.data.js` data file, access your par
 
 ```js
 export default async function ({ req, res, pageConfig }) {
-    // log our parameters
-    console.log(res.params); // { something: 'coco', else: 'world' }
-    // return variables to our view
-    return {
-        hello: req.params.something,
-    };
+  // log our parameters
+  console.log(res.params); // { something: 'coco', else: 'world' }
+  // return variables to our view
+  return {
+    hello: req.params.something,
+  };
 }
 ```
 
 From this point, you can handle pretty much all your data needs.
 
--   **Async functions** are supported as well
+- **Async functions** are supported as well
 
 > Data files can be `.data.js` as well as `.data.json` formats. More will come like `.data.php`, etc...
 

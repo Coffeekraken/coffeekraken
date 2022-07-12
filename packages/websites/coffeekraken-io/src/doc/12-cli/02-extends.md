@@ -28,9 +28,9 @@ When you launch the `sugar` CLI, it will search for all the `sugar.json` files a
 
 Your project structure can be something like:
 
--   `src`
--   `package.json`
--   `sugar.json`
+- `src`
+- `package.json`
+- `sugar.json`
 
 ## Simple example
 
@@ -65,11 +65,11 @@ This will tell the CLI that a `mySoCool` stack exists with a command(s) `prettyC
 Then you need to create the `src/node/prettyCommand.cli.js` file with this content:
 
 ```js
-export default function prettyCommand(stringArgs = '') {
-    return new Promise((resolve, reject) => {
-        console.log('hello world');
-        resolve();
-    });
+export default function prettyCommand(stringArgs = "") {
+  return new Promise((resolve, reject) => {
+    console.log("hello world");
+    resolve();
+  });
 }
 ```
 
@@ -78,15 +78,15 @@ This example will work fine and display `hello world` on the screen.
 However, using basic `Promise` force us to make use of the `console.log` command directly and this does not allows us to take advantage of our `@coffeekraken/s-stdio` that works by "listening" to `log` events and display your log as best as possible depending on the stdio you choose. Stop talking and let see our example rewritten:
 
 ```js
-import __SPromise from '@coffeekraken/s-promise';
+import __SPromise from "@coffeekraken/s-promise";
 
-export default function prettyCommand(stringArgs = '') {
-    return new __SPromise(({ resolve, reject, emit }) => {
-        emit('log', {
-            value: 'hello world',
-        });
-        resolve();
+export default function prettyCommand(stringArgs = "") {
+  return new __SPromise(({ resolve, reject, emit }) => {
+    emit("log", {
+      value: "hello world",
     });
+    resolve();
+  });
 }
 ```
 
@@ -142,19 +142,19 @@ For that, simply add the `interface` property inside your `sugar.json` file like
 Then create the `src/node/prettyCommandInterface.ts` with this as content:
 
 ```js
-import __SInterface from '@coffeekraken/s-interface';
+import __SInterface from "@coffeekraken/s-interface";
 
 export default class SActivateFeatureInterface extends __SInterface {
-    static get _definition() {
-        return {
-            something: {
-                description:
-                    'This is a nice and cool argument for our freaking awesome command!',
-                type: 'Boolean',
-                default: false,
-            },
-        };
-    }
+  static get _definition() {
+    return {
+      something: {
+        description:
+          "This is a nice and cool argument for our freaking awesome command!",
+        type: "Boolean",
+        default: false,
+      },
+    };
+  }
 }
 ```
 

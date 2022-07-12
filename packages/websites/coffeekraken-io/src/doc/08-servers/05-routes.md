@@ -32,15 +32,15 @@ To register your own route(e), the easiest way is to register it through a modul
 
 ```js
 export default function myModule(express, settings, config) {
-    // registering a new route to use the "styleguide" handler
-    config.routes['/my/route'] = {
-        handler: 'styleguide',
-    };
-    // you can as well register route with some "glob" patterns like so:
-    config.routes['/something/*'] = {
-        handler: 'view',
-    };
-    // etc...
+  // registering a new route to use the "styleguide" handler
+  config.routes["/my/route"] = {
+    handler: "styleguide",
+  };
+  // you can as well register route with some "glob" patterns like so:
+  config.routes["/something/*"] = {
+    handler: "view",
+  };
+  // etc...
 }
 ```
 

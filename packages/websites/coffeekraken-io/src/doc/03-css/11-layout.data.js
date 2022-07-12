@@ -1,9 +1,9 @@
-import __STheme from '@coffeekraken/s-theme';
+import __STheme from "@coffeekraken/s-theme";
 
 export default async function () {
-    const layouts = __STheme.get('layout.layout');
+  const layouts = __STheme.get("layout.layout");
 
-    return {
-        layouts,
-    };
+  return {
+    layouts,
+  };
 }

@@ -1,8 +1,8 @@
-import __SSugarCli from '@coffeekraken/cli';
+import __SSugarCli from "@coffeekraken/cli";
 
 export default async function () {
-    const availableCli = await __SSugarCli.getAvailableCli();
-    return {
-        availableCli,
-    };
+  const availableCli = await __SSugarCli.getAvailableCli();
+  return {
+    availableCli,
+  };
 }

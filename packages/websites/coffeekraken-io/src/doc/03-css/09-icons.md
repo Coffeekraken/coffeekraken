@@ -41,16 +41,16 @@ Each line define an icon using this syntax:
 
 `{protocol}:{name-or-path}:{internal-name-you-want}`
 
--   `protocol`: This define the source of the icon. See bellow the list of supported ones
--   `name-or-path`: This define the name or path where to find your icon
--   `internal-name-you-want`: This is optional and let you change the name to use which one you want internally
+- `protocol`: This define the source of the icon. See bellow the list of supported ones
+- `name-or-path`: This define the name or path where to find your icon
+- `internal-name-you-want`: This is optional and let you change the name to use which one you want internally
 
 ## Protocols
 
 For now, we support 2 protocols that are:
 
--   `fa|fab|fas|fad|fal`: These are [Font awesome](https://fontawesome.com) icons
--   `fs`: This is `filesystem` plain SVG icons
+- `fa|fab|fas|fad|fal`: These are [Font awesome](https://fontawesome.com) icons
+- `fs`: This is `filesystem` plain SVG icons
 
 > These are the supported protocols that we have for now. We can as well add some depending on your needs and requests through our different communication channels.
 

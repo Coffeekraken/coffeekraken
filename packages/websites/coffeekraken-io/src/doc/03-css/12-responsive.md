@@ -26,10 +26,10 @@ See this as a simpler replacement for the traditional `@media` css statement. He
 
 ```css
 .my-button {
-    background: red;
-    @sugar.media mobile {
-        background: green;
-    }
+  background: red;
+  @sugar.media mobile {
+    background: green;
+  }
 }
 ```
 
@@ -84,15 +84,15 @@ Consider having a some buttons with different colors like so:
  * to generate these classes ALSO for medias like tablet, mobile, etc...
  */
 @sugar.media.classes {
-    .btn {
-        background: red;
-    }
-    .btn-green {
-        background: green;
-    }
-    .btn-yellow {
-        background: yellow;
-    }
+  .btn {
+    background: red;
+  }
+  .btn-green {
+    background: green;
+  }
+  .btn-yellow {
+    background: yellow;
+  }
 }
 ```
 

@@ -20,21 +20,21 @@
 
 Coffeekraken uses simple routing strategy.
 
--   Create a `hello.ts` file into the `src/pages/hello` folder
--   Fill your file like so:
+- Create a `hello.ts` file into the `src/pages/hello` folder
+- Fill your file like so:
 
 ```js
 export default {
-    views: [
-        {
-            path: 'hello.hello',
-        },
-    ],
+  views: [
+    {
+      path: "hello.hello",
+    },
+  ],
 };
 ```
 
--   Create your view `hello.blade.php` (twig is also supported) unto the `src/views/hello` folder
--   Your page will be available under `/hello` url!
+- Create your view `hello.blade.php` (twig is also supported) unto the `src/views/hello` folder
+- Your page will be available under `/hello` url!
 
 > You can create nested folders to generate nested urls.
 
@@ -44,12 +44,12 @@ Obviously, you can specify a custom slug for your page. Here's how:
 
 ```js
 export default {
-    slugs: ['/my-cool-page'],
-    views: [
-        {
-            path: 'hello.hello',
-        },
-    ],
+  slugs: ["/my-cool-page"],
+  views: [
+    {
+      path: "hello.hello",
+    },
+  ],
 };
 ```
 
@@ -57,9 +57,9 @@ export default {
 
 Coffeekraken has a built-in server that support multiple views types like:
 
--   `.blade.php`
--   `.twig`
--   and more to come...
+- `.blade.php`
+- `.twig`
+- and more to come...
 
 These views are rendered using native PHP libraries through the `@coffeekraken/s-view-renderer` package.
 

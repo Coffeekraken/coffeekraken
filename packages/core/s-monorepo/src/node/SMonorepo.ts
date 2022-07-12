@@ -431,13 +431,16 @@ export default class SMonorepo extends __SClass {
                             outDir = `${packageObj.path}/${distRelDir}`;
 
                         const builder = new __STypescriptBuilder();
-                        builder.build({
-                            inDir,
-                            outDir,
-                            packageRoot: packageObj.path,
-                            buildInitial: finalParams.buildInitial,
-                            watch: true,
-                        });
+                        pipe(
+                            builder.build({
+                                silent: true, // @TODO      find a way more elegant to avoid settings displays
+                                inDir,
+                                outDir,
+                                packageRoot: packageObj.path,
+                                buildInitial: finalParams.buildInitial,
+                                watch: true,
+                            }),
+                        );
 
                         // exports
                         const pack = new __SPackage({

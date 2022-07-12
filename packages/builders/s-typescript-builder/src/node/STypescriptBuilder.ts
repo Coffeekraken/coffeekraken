@@ -260,46 +260,48 @@ export default class STypescriptBuilder extends __SBuilder {
                     ? finalParams.glob
                     : [finalParams.glob];
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Globs              : <yellow>${globs.join(
-                        ',',
-                    )}</yellow>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Output directory  : <cyan>${finalParams.outDir}</cyan>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Formats           : <yellow>${formats.join(
-                        ',',
-                    )}</yellow>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Platform          : <yellow>${finalParams.platform}</yellow>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Watch             : ${
-                        finalParams.watch
-                            ? `<green>true</green>`
-                            : `<red>false</red>`
-                    }`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Build initial     : ${
-                        finalParams.buildInitial
-                            ? `<green>true</green>`
-                            : `<red>false</red>`
-                    }`,
-                });
+                if (!finalParams.silent) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Globs              : <yellow>${globs.join(
+                            ',',
+                        )}</yellow>`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Output directory  : <cyan>${finalParams.outDir}</cyan>`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Formats           : <yellow>${formats.join(
+                            ',',
+                        )}</yellow>`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Platform          : <yellow>${finalParams.platform}</yellow>`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Watch             : ${
+                            finalParams.watch
+                                ? `<green>true</green>`
+                                : `<red>false</red>`
+                        }`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Build initial     : ${
+                            finalParams.buildInitial
+                                ? `<green>true</green>`
+                                : `<red>false</red>`
+                        }`,
+                    });
+                }
 
                 // loop on each glob(s) and build the files
                 globs.forEach((glob) => {

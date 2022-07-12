@@ -3,6 +3,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __chokidar from 'chokidar';
+import __onProcessExit from '../process/onProcessExit';
 
 /**
  * @name        getFiles
@@ -87,6 +88,11 @@ export default function getFiles(
                 ignored: finalSettings.exclude,
                 ignoreInitial:
                     finalSettings.watch && finalSettings.ignoreInitial,
+            });
+
+            // make sure we close the watching process
+            __onProcessExit(() => {
+                return watcher.close();
             });
 
             // keep track on the watchers ready state

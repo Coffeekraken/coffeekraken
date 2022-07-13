@@ -1,5 +1,5 @@
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name                SViteBuildParamsInterface
@@ -10,7 +10,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @status              beta
  * @platform             node
  *
- * This class represent the interface that describe parameters of the SFrontstackViteProcess
+ * This class represent the interface that describe parameters of the SKitchenViteProcess
  *
  * @todo      interface
  * @todo      doc

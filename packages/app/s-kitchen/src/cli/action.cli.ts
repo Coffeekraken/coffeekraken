@@ -1,10 +1,10 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __SFrontstack from '../node/SFrontstack';
+import __SKitchen from '../node/SKitchen';
 
 export default function action(stringArgs = '') {
     return new __SPromise(async ({ resolve, pipe }) => {
-        const frontstack = new __SFrontstack();
-        const promise = frontstack.new(stringArgs);
+        const kitchen = new __SKitchen();
+        const promise = kitchen.action(stringArgs);
         pipe(promise);
         resolve(await promise);
     });

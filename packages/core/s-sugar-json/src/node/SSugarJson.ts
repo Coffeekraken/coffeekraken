@@ -1,6 +1,5 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SClass from '@coffeekraken/s-class';
-import type { ISFrontstackAction } from '@coffeekraken/s-frontstack';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
@@ -8,6 +7,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __childProcess from 'child_process';
 import __fs from 'fs';
 import __glob from 'glob-all';
+import type { ISKitchenAction } from '../../../../app/s-kitchen/dist/pkg/cjs/node/exports';
 
 export interface ISSugarJsonSettings {
     packages: string | boolean;
@@ -46,7 +46,7 @@ export interface ISSugarJsonFile {
     recipe?: string;
     cli?: ISSugarJsonFileCli;
     config?: ISSugarJsonFileConfig;
-    frontstack?: Record<string, ISFrontstackAction>;
+    kitchen?: Record<string, ISKitchenAction>;
 }
 
 export default class SSugarJson extends __SClass {

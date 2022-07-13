@@ -38,7 +38,7 @@
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",

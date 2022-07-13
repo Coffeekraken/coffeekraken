@@ -8,59 +8,59 @@ export default function (env, config) {
         recipes: {
             /**
              * @name            generic
-             * @namespace       config.frontstack.recipes
+             * @namespace       config.kitchen.recipes
              * @type            String
-             * @default         [config.frontstackRecipeGeneric]
+             * @default         [config.kitchenRecipeGeneric]
              *
              * Specify the default recipe
              *
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            generic: '[config.frontstackRecipeGeneric]',
+            generic: '[config.kitchenRecipeGeneric]',
             /**
              * @name            nextJs
-             * @namespace       config.frontstack.recipes
+             * @namespace       config.kitchen.recipes
              * @type            String
-             * @default         [config.frontstackRecipeNextJs]
+             * @default         [config.kitchenRecipeNextJs]
              *
              * Specify the next.js recipe
              *
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            nextJs: '[config.frontstackRecipeNextJs]',
+            nextJs: '[config.kitchenRecipeNextJs]',
             /**
              * @name            litElement
-             * @namespace       config.frontstack.recipes
+             * @namespace       config.kitchen.recipes
              * @type            String
-             * @default         [config.frontstackRecipeLitElement]
+             * @default         [config.kitchenRecipeLitElement]
              *
              * Specify the litElement recipe
              *
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            litElement: '[config.frontstackRecipeLitElement]',
+            litElement: '[config.kitchenRecipeLitElement]',
             /**
              * @name            feature
-             * @namespace       config.frontstack.recipes
+             * @namespace       config.kitchen.recipes
              * @type            String
-             * @default         [config.frontstackRecipeFeature]
+             * @default         [config.kitchenRecipeFeature]
              *
              * Specify the feature recipe
              *
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            feature: '[config.frontstackRecipeFeature]',
+            feature: '[config.kitchenRecipeFeature]',
         },
 
         actions: {
             copy: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.copy
+                 * @namespace       config.kitchen.actions.copy
                  * @type            String
                  * @default        Frontend server
                  *
@@ -72,7 +72,7 @@ export default function (env, config) {
                 title: 'Copy file/directory',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.copy
+                 * @namespace       config.kitchen.actions.copy
                  * @type            String
                  * @default        ...
                  *
@@ -85,7 +85,7 @@ export default function (env, config) {
                     'Copy a file or a directory from the source to the destination passed in params',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.copy
+                 * @namespace       config.kitchen.actions.copy
                  * @type            String
                  * @default        sugar
                  *
@@ -101,7 +101,7 @@ export default function (env, config) {
             rename: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.rename
+                 * @namespace       config.kitchen.actions.rename
                  * @type            String
                  * @default        Frontend server
                  *
@@ -113,11 +113,11 @@ export default function (env, config) {
                 title: 'Rename project',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.rename
+                 * @namespace       config.kitchen.actions.rename
                  * @type            String
                  * @default        ...
                  *
-                 * Specify the frontstack rename action description
+                 * Specify the kitchen rename action description
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -125,11 +125,11 @@ export default function (env, config) {
                 description: 'Rename a project (folder, package.json, etc...)',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.rename
+                 * @namespace       config.kitchen.actions.rename
                  * @type            String
                  * @default        sugar
                  *
-                 * Specify the frontstack rename action command
+                 * Specify the kitchen rename action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -141,7 +141,7 @@ export default function (env, config) {
             initNpm: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.initNpm
+                 * @namespace       config.kitchen.actions.initNpm
                  * @type            String
                  * @default        Init npm package
                  *
@@ -153,11 +153,11 @@ export default function (env, config) {
                 title: 'Init npm package',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.initNpm
+                 * @namespace       config.kitchen.actions.initNpm
                  * @type            String
                  * @default        ...
                  *
-                 * Specify the frontstack initNpm action description
+                 * Specify the kitchen initNpm action description
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -165,11 +165,11 @@ export default function (env, config) {
                 description: 'Init npm package in the project',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.initNpm
+                 * @namespace       config.kitchen.actions.initNpm
                  * @type            String
                  * @default        sugar
                  *
-                 * Specify the frontstack initNpm action command
+                 * Specify the kitchen initNpm action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -181,7 +181,7 @@ export default function (env, config) {
             addSugarJson: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.addSugarJson
+                 * @namespace       config.kitchen.actions.addSugarJson
                  * @type            String
                  * @default        Adding sugar.json file
                  *
@@ -193,11 +193,11 @@ export default function (env, config) {
                 title: 'Adding sugar.json file',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.addSugarJson
+                 * @namespace       config.kitchen.actions.addSugarJson
                  * @type            String
                  * @default        ...
                  *
-                 * Specify the frontstack addSugarJson action description
+                 * Specify the kitchen addSugarJson action description
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -205,11 +205,11 @@ export default function (env, config) {
                 description: 'Adding the sugar.json file to the project',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.addSugarJson
+                 * @namespace       config.kitchen.actions.addSugarJson
                  * @type            String
                  * @default        sugar
                  *
-                 * Specify the frontstack addSugarJson action command
+                 * Specify the kitchen addSugarJson action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -221,7 +221,7 @@ export default function (env, config) {
             addFrontspecJson: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.addFrontspecJson
+                 * @namespace       config.kitchen.actions.addFrontspecJson
                  * @type            String
                  * @default        Adding sugar.json file
                  *
@@ -233,11 +233,11 @@ export default function (env, config) {
                 title: 'Adding frontspec.json file',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.addFrontspecJson
+                 * @namespace       config.kitchen.actions.addFrontspecJson
                  * @type            String
                  * @default        ...
                  *
-                 * Specify the frontstack addFrontspecJson action description
+                 * Specify the kitchen addFrontspecJson action description
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -245,11 +245,11 @@ export default function (env, config) {
                 description: 'Adding the frontspec.json file to the project',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.addFrontspecJson
+                 * @namespace       config.kitchen.actions.addFrontspecJson
                  * @type            String
                  * @default        sugar
                  *
-                 * Specify the frontstack addFrontspecJson action command
+                 * Specify the kitchen addFrontspecJson action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -261,7 +261,7 @@ export default function (env, config) {
             addManifestJson: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.addManifestJson
+                 * @namespace       config.kitchen.actions.addManifestJson
                  * @type            String
                  * @default        Adding manifest.json file
                  *
@@ -273,11 +273,11 @@ export default function (env, config) {
                 title: 'Adding manifest.json file',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.addManifestJson
+                 * @namespace       config.kitchen.actions.addManifestJson
                  * @type            String
                  * @default        ...
                  *
-                 * Specify the frontstack addManifestJson action description
+                 * Specify the kitchen addManifestJson action description
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -285,11 +285,11 @@ export default function (env, config) {
                 description: 'Adding the manifest.json file to the project',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.addManifestJson
+                 * @namespace       config.kitchen.actions.addManifestJson
                  * @type            String
                  * @default        sugar
                  *
-                 * Specify the frontstack addManifestJson action command
+                 * Specify the kitchen addManifestJson action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -301,7 +301,7 @@ export default function (env, config) {
             applyDefaultPackageJson: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.applyDefaultPackageJson
+                 * @namespace       config.kitchen.actions.applyDefaultPackageJson
                  * @type            String
                  * @default        Adding manifest.json file
                  *
@@ -313,7 +313,7 @@ export default function (env, config) {
                 title: 'Apply default package.json',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.applyDefaultPackageJson
+                 * @namespace       config.kitchen.actions.applyDefaultPackageJson
                  * @type            String
                  * @default        ...
                  *
@@ -326,7 +326,7 @@ export default function (env, config) {
                     'Apply the config.package.defaultPackageJson object on the package.json file',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.applyDefaultPackageJson
+                 * @namespace       config.kitchen.actions.applyDefaultPackageJson
                  * @type            String
                  * @default        sugar
                  *
@@ -342,7 +342,7 @@ export default function (env, config) {
             addFavicon: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.addFavicon
+                 * @namespace       config.kitchen.actions.addFavicon
                  * @type            String
                  * @default        Adding manifest.json file
                  *
@@ -354,11 +354,11 @@ export default function (env, config) {
                 title: 'Adding source favicon file',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.addFavicon
+                 * @namespace       config.kitchen.actions.addFavicon
                  * @type            String
                  * @default        ...
                  *
-                 * Specify the frontstack addFavicon action description
+                 * Specify the kitchen addFavicon action description
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -366,11 +366,11 @@ export default function (env, config) {
                 description: 'Adding the favicon source file to the project',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.addFavicon
+                 * @namespace       config.kitchen.actions.addFavicon
                  * @type            String
                  * @default        sugar
                  *
-                 * Specify the frontstack addFavicon action command
+                 * Specify the kitchen addFavicon action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -382,7 +382,7 @@ export default function (env, config) {
             addDefaultPages: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.addDefaultPages
+                 * @namespace       config.kitchen.actions.addDefaultPages
                  * @type            String
                  * @default        Adding manifest.json file
                  *
@@ -394,11 +394,11 @@ export default function (env, config) {
                 title: 'Adding default pages/views file',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.addDefaultPages
+                 * @namespace       config.kitchen.actions.addDefaultPages
                  * @type            String
                  * @default        ...
                  *
-                 * Specify the frontstack addDefaultPages action description
+                 * Specify the kitchen addDefaultPages action description
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -406,11 +406,11 @@ export default function (env, config) {
                 description: 'Adding some default pages/views to the project',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.addDefaultPages
+                 * @namespace       config.kitchen.actions.addDefaultPages
                  * @type            String
                  * @default        sugar
                  *
-                 * Specify the frontstack addDefaultPages action command
+                 * Specify the kitchen addDefaultPages action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -422,7 +422,7 @@ export default function (env, config) {
             addSugarPostcss: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.addSugarPostcss
+                 * @namespace       config.kitchen.actions.addSugarPostcss
                  * @type            String
                  * @default        Adding manifest.json file
                  *
@@ -434,11 +434,11 @@ export default function (env, config) {
                 title: 'Adding sugar postcss plugin',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.addSugarPostcss
+                 * @namespace       config.kitchen.actions.addSugarPostcss
                  * @type            String
                  * @default        ...
                  *
-                 * Specify the frontstack addSugarPostcss action description
+                 * Specify the kitchen addSugarPostcss action description
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -446,11 +446,11 @@ export default function (env, config) {
                 description: 'Adding the sugar postcss plugin to the project',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.addSugarPostcss
+                 * @namespace       config.kitchen.actions.addSugarPostcss
                  * @type            String
                  * @default        sugar
                  *
-                 * Specify the frontstack addSugarPostcss action command
+                 * Specify the kitchen addSugarPostcss action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -462,7 +462,7 @@ export default function (env, config) {
             installDependencies: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.installDependencies
+                 * @namespace       config.kitchen.actions.installDependencies
                  * @type            String
                  * @default        Install dependencies
                  *
@@ -474,11 +474,11 @@ export default function (env, config) {
                 title: 'Install dependencies',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.installDependencies
+                 * @namespace       config.kitchen.actions.installDependencies
                  * @type            String
                  * @default        ...
                  *
-                 * Specify the frontstack addManifestJson action description
+                 * Specify the kitchen addManifestJson action description
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -487,23 +487,36 @@ export default function (env, config) {
                     'Install dependencies like node_modules and composer if exists',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.installDependencies
+                 * @namespace       config.kitchen.actions.installDependencies
                  * @type            String
                  * @default        sugar
                  *
-                 * Specify the frontstack addManifestJson action command
+                 * Specify the kitchen addManifestJson action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: `sugar package.install [arguments]`,
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.installDependencies
+                 * @type            String
+                 * @default        @coffeekraken/s-package/node/interface/SPackageInstallParamsInterface
+                 *
+                 * Specify the installDependencies install action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-package/node/interface/SPackageInstallParamsInterface',
                 params: {},
                 settings: {},
             },
             frontendServer: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.frontendServer
+                 * @namespace       config.kitchen.actions.frontendServer
                  * @type            String
                  * @default        Frontend server
                  *
@@ -515,7 +528,7 @@ export default function (env, config) {
                 title: 'Frontend server',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.frontendServer
+                 * @namespace       config.kitchen.actions.frontendServer
                  * @type            String
                  * @default        ...
                  *
@@ -528,7 +541,7 @@ export default function (env, config) {
                     'Frontend server using the @coffeekraken/s-frontend-server package',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.frontendServer
+                 * @namespace       config.kitchen.actions.frontendServer
                  * @type            String
                  * @default        sugar frontendServer.start [arguments]
                  *
@@ -538,12 +551,25 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar frontendServer.start [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.frontendServer
+                 * @type            String
+                 * @default        @coffeekraken/s-frontend-server/node/interface/SFrontendServerStartParamsInterface
+                 *
+                 * Specify the frontendServerer start action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-frontend-server/node/interface/SFrontendServerStartParamsInterface',
                 params: {},
                 settings: {
                     processManager: {
                         /**
                          * @name            restart
-                         * @namespace       config.frontstack.actions.frontendServer.settings.processManager
+                         * @namespace       config.kitchen.actions.frontendServer.settings.processManager
                          * @type            String
                          * @default        true
                          *
@@ -559,7 +585,7 @@ export default function (env, config) {
             corsProxy: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.corsProxy
+                 * @namespace       config.kitchen.actions.corsProxy
                  * @type            String
                  * @default        Frontend server
                  *
@@ -571,7 +597,7 @@ export default function (env, config) {
                 title: 'Cors Proxy',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.corsProxy
+                 * @namespace       config.kitchen.actions.corsProxy
                  * @type            String
                  * @default        ...
                  *
@@ -584,7 +610,7 @@ export default function (env, config) {
                     'Frontend cors proxy server using the @coffeekraken/s-frontend-server package',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.corsProxy
+                 * @namespace       config.kitchen.actions.corsProxy
                  * @type            String
                  * @default        sugar corsProxy.start [arguments]
                  *
@@ -594,12 +620,25 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar frontendServer.corsProxy [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.corsProxy
+                 * @type            String
+                 * @default        @coffeekraken/s-frontend-server/node/interface/SFrontendServerCorsProxyParamsInterface
+                 *
+                 * Specify the corsProxy install action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-frontend-server/node/interface/SFrontendServerCorsProxyParamsInterface',
                 params: {},
                 settings: {
                     processManager: {
                         /**
                          * @name            restart
-                         * @namespace       config.frontstack.actions.corsProxy.settings.processManager
+                         * @namespace       config.kitchen.actions.corsProxy.settings.processManager
                          * @type            String
                          * @default        true
                          *
@@ -615,7 +654,7 @@ export default function (env, config) {
             postcssBuild: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.postcssBuild
+                 * @namespace       config.kitchen.actions.postcssBuild
                  * @type            String
                  * @default        Frontend server
                  *
@@ -627,7 +666,7 @@ export default function (env, config) {
                 title: 'PostCSS build action',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.postcssBuild
+                 * @namespace       config.kitchen.actions.postcssBuild
                  * @type            String
                  * @default        ...
                  *
@@ -639,7 +678,7 @@ export default function (env, config) {
                 description: 'Build css using the amazing PostCSS package',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.postcssBuild
+                 * @namespace       config.kitchen.actions.postcssBuild
                  * @type            String
                  * @default        sugar postcss.build [arguments]
                  *
@@ -649,6 +688,19 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar postcss.build --prod [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.postcssBuild
+                 * @type            String
+                 * @default        @coffeekraken/s-postcss-builder/node/interface/SPostcssBuilderBuilderBuildParamsInterface
+                 *
+                 * Specify the postcssBuild build action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-postcss-builder/node/interface/SPostcssBuilderBuilderBuildParamsInterface',
                 params: {},
                 settings: {
                     processManager: {},
@@ -657,7 +709,7 @@ export default function (env, config) {
             typescriptBuild: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.typescriptBuild
+                 * @namespace       config.kitchen.actions.typescriptBuild
                  * @type            String
                  * @default        Frontend server
                  *
@@ -669,7 +721,7 @@ export default function (env, config) {
                 title: 'Typescript builder build action',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.typescriptBuild
+                 * @namespace       config.kitchen.actions.typescriptBuild
                  * @type            String
                  * @default        ...
                  *
@@ -682,7 +734,7 @@ export default function (env, config) {
                     'Build typescript using the s-typescript-builder package',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.typescriptBuild
+                 * @namespace       config.kitchen.actions.typescriptBuild
                  * @type            String
                  * @default        sugar typescriptBuilder.build [arguments]
                  *
@@ -692,6 +744,19 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar typescript.build [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.typescriptBuild
+                 * @type            String
+                 * @default        @coffeekraken/s-typescript-builder/node/interface/STypescriptBuilderBuildParamsInterface
+                 *
+                 * Specify the typescriptBuilder build action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-typescript-builder/node/interface/STypescriptBuilderBuildParamsInterface',
                 params: {
                     watch: true,
                 },
@@ -702,7 +767,7 @@ export default function (env, config) {
             imagesBuild: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.imagesBuild
+                 * @namespace       config.kitchen.actions.imagesBuild
                  * @type            String
                  * @default        Frontend server
                  *
@@ -714,7 +779,7 @@ export default function (env, config) {
                 title: 'Images build action',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.imagesBuild
+                 * @namespace       config.kitchen.actions.imagesBuild
                  * @type            String
                  * @default        ...
                  *
@@ -727,7 +792,7 @@ export default function (env, config) {
                     'Build your images with ease. Compress, resize, webp version, etc...',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.imagesBuild
+                 * @namespace       config.kitchen.actions.imagesBuild
                  * @type            String
                  * @default        sugar images.build [arguments]
                  *
@@ -737,6 +802,19 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar images.build [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.imagesBuild
+                 * @type            String
+                 * @default        @coffeekraken/s-images-builder/node/interface/SImagesBuilderBuilderBuildParamsInterface
+                 *
+                 * Specify the imagesBuild build action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-images-builder/node/interface/SImagesBuilderBuilderBuildParamsInterface',
                 params: {},
                 settings: {
                     processManager: {},
@@ -745,7 +823,7 @@ export default function (env, config) {
             vite: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.vite
+                 * @namespace       config.kitchen.actions.vite
                  * @type            String
                  * @default        Vite development stack
                  *
@@ -757,7 +835,7 @@ export default function (env, config) {
                 title: 'Vite development stack',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.vite
+                 * @namespace       config.kitchen.actions.vite
                  * @type            String
                  * @default        ...
                  *
@@ -769,7 +847,7 @@ export default function (env, config) {
                 description: 'Allow to build files easily while developing',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.vite
+                 * @namespace       config.kitchen.actions.vite
                  * @type            String
                  * @default        sugar vite [arguments]
                  *
@@ -779,6 +857,19 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar vite [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.vite
+                 * @type            String
+                 * @default        @coffeekraken/s-vite/node/interface/SViteStartParamsInterface
+                 *
+                 * Specify the vite start action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-vite/node/interface/SViteStartParamsInterface',
                 params: {},
                 settings: {
                     processManager: {},
@@ -787,7 +878,7 @@ export default function (env, config) {
             viteBuild: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.viteBuild
+                 * @namespace       config.kitchen.actions.viteBuild
                  * @type            String
                  * @default        Vite build stasck
                  *
@@ -799,7 +890,7 @@ export default function (env, config) {
                 title: 'Vite build stack',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.viteBuild
+                 * @namespace       config.kitchen.actions.viteBuild
                  * @type            String
                  * @default        ...
                  *
@@ -812,7 +903,7 @@ export default function (env, config) {
                     'Allow to compile javascript (js, ts, riot, react, etc...) files easily',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.viteBuild
+                 * @namespace       config.kitchen.actions.viteBuild
                  * @type            String
                  * @default        sugar vite.build [arguments]
                  *
@@ -822,6 +913,19 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar vite.build --prod [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.viteBuild
+                 * @type            String
+                 * @default        @coffeekraken/s-vite/node/interface/SViteBuildParamsInterface
+                 *
+                 * Specify the vite build action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-vite/node/interface/SViteBuildParamsInterface',
                 params: {},
                 settings: {
                     processManager: {},
@@ -830,7 +934,7 @@ export default function (env, config) {
             docmapBuild: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @namespace       config.kitchen.actions.docmapBuild
                  * @type            String
                  * @default        ...
                  *
@@ -842,7 +946,7 @@ export default function (env, config) {
                 title: 'Docmap build action',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @namespace       config.kitchen.actions.docmapBuild
                  * @type            String
                  * @default        ...
                  *
@@ -855,7 +959,7 @@ export default function (env, config) {
                     'Allow to build and maintain up to date the docmap.json file',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @namespace       config.kitchen.actions.docmapBuild
                  * @type            String
                  * @default        sugar docmap.build [arguments]
                  *
@@ -865,6 +969,19 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar docmap.build [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.docmapBuild
+                 * @type            String
+                 * @default        @coffeekraken/s-docmap/node/interface/SDocmapBuildParamsInterface
+                 *
+                 * Specify the docmap build action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-docmap/node/interface/SDocmapBuildParamsInterface',
                 params: {},
                 settings: {
                     processManager: {},
@@ -873,7 +990,7 @@ export default function (env, config) {
             sitemapBuild: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.sitemapBuild
+                 * @namespace       config.kitchen.actions.sitemapBuild
                  * @type            String
                  * @default        ...
                  *
@@ -885,7 +1002,7 @@ export default function (env, config) {
                 title: 'Sitemap build action',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @namespace       config.kitchen.actions.sitemapBuild
                  * @type            String
                  * @default        ...
                  *
@@ -898,7 +1015,7 @@ export default function (env, config) {
                     'Allow to build and maintain up to date the sitemap.xml file',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @namespace       config.kitchen.actions.sitemapBuild
                  * @type            String
                  * @default        sugar sitemap.build [arguments]
                  *
@@ -908,6 +1025,19 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar sitemap.build [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.sitemapBuild
+                 * @type            String
+                 * @default        @coffeekraken/s-sitemap-builder/node/interface/SSitemapBuilderBuildParamsInterface
+                 *
+                 * Specify the sitemap build action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-sitemap-builder/node/interface/SSitemapBuilderBuildParamsInterface',
                 params: {},
                 settings: {
                     processManager: {},
@@ -916,7 +1046,7 @@ export default function (env, config) {
             faviconBuild: {
                 /**
                  * @name            title
-                 * @namespace       config.frontstack.actions.faviconBuild
+                 * @namespace       config.kitchen.actions.faviconBuild
                  * @type            String
                  * @default        ...
                  *
@@ -928,7 +1058,7 @@ export default function (env, config) {
                 title: 'Docmap build action',
                 /**
                  * @name            description
-                 * @namespace       config.frontstack.actions.faviconBuild
+                 * @namespace       config.kitchen.actions.faviconBuild
                  * @type            String
                  * @default        ...
                  *
@@ -941,7 +1071,7 @@ export default function (env, config) {
                     'Allow to build and maintain up to date your favicon files and the manifest.json',
                 /**
                  * @name            command
-                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @namespace       config.kitchen.actions.faviconBuild
                  * @type            String
                  * @default        sugar favicon.build [arguments]
                  *
@@ -951,7 +1081,78 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: 'sugar favicon.build [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.faviconBuild
+                 * @type            String
+                 * @default        @coffeekraken/s-favicon-builder/node/interface/SFaviconBuilderBuildParamsInterface
+                 *
+                 * Specify the favicon build action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-favicon-builder/node/interface/SFaviconBuilderBuildParamsInterface',
                 params: {},
+                settings: {
+                    processManager: {},
+                },
+            },
+            format: {
+                /**
+                 * @name            title
+                 * @namespace       config.kitchen.actions.format
+                 * @type            String
+                 * @default        SCodeFormatter format action
+                 *
+                 * Specify the format action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'SCodeFormatter format action',
+                /**
+                 * @name            description
+                 * @namespace       config.kitchen.actions.format
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the format build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'Format your code using the s-code-formatter package',
+                /**
+                 * @name            command
+                 * @namespace       config.kitchen.actions.format
+                 * @type            String
+                 * @default        sugar formatter.format [arguments]
+                 *
+                 * Specify the format action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: 'sugar formatter.format [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.format
+                 * @type            String
+                 * @default        @coffeekraken/s-typescript-builder/node/interface/STypescriptBuilderBuildParamsInterface
+                 *
+                 * Specify the format build action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-code-formatter/node/interface/SCodeFormatterFormatParamsInterface',
+                params: {
+                    watch: true,
+                },
                 settings: {
                     processManager: {},
                 },

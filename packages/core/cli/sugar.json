@@ -15,7 +15,7 @@
                 "project": {
                     "scope": "global",
                     "description": "Init a new project",
-                    "command": "sugar frontstack.new"
+                    "command": "sugar kitchen.new"
                 }
             }
         },
@@ -27,7 +27,7 @@
                 "start": {
                     "scope": "global",
                     "description": "Start the development stack",
-                    "command": "sugar frontstack.recipe dev"
+                    "command": "sugar kitchen.recipe dev"
                 }
             }
         },
@@ -39,7 +39,7 @@
                 "start": {
                     "scope": "global",
                     "description": "Start the production testing stack",
-                    "command": "sugar frontstack.recipe prod"
+                    "command": "sugar kitchen.recipe prod"
                 }
             }
         },
@@ -51,7 +51,7 @@
                 "prod": {
                     "scope": "global",
                     "description": "Build for production",
-                    "command": "sugar frontstack.recipe build"
+                    "command": "sugar kitchen.recipe build"
                 }
             }
         },

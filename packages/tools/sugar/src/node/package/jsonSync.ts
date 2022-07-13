@@ -1,10 +1,11 @@
 // @ts-nocheck
 
-import __packageRoot from './rootPath';
 import __fs from 'fs';
-import __readJsonSync from '../fs/readJsonSync';
 import __standardizeJson from '../../shared/npm/utils/standardizeJson';
 import __objectHash from '../../shared/object/objectHash';
+import __readJsonSync from '../fs/readJsonSync';
+import __packageJson from '../npm/packageJson';
+import __packageRoot from './rootPath';
 
 /**
  * @name          jsonSync
@@ -15,7 +16,7 @@ import __objectHash from '../../shared/object/objectHash';
  *
  * This function return you the package.json of the current working package into object format
  *
- * @param     {String}      [from=process.cwd()]      The path from where to search upward for the package.json file
+ * @param     {String}      [fromOrName=process.cwd()]      The path from where to search upward for the package.json file
  * @return    {Object}          The package.json into object format
  *
  * @todo      interface
@@ -35,9 +36,9 @@ export interface IPackageJsonSyncSettings {
     standardize: boolean;
 }
 
-let __packageJson = {};
+let __packageJsonCache = {};
 function jsonSync(
-    from = process.cwd(),
+    fromOrName = process.cwd(),
     settings?: Partial<IPackageJsonSyncSettings>,
 ): any {
     const finalSettings = {
@@ -46,31 +47,40 @@ function jsonSync(
         ...(settings ?? {}),
     };
 
+    // "cache"
     const hash = __objectHash({
-        from,
+        fromOrName,
         ...(settings ?? {}),
     });
-
-    if (__packageJson[hash]) {
-        return __packageJson[hash];
+    if (__packageJsonCache[hash]) {
+        return __packageJsonCache[hash];
     }
 
-    const path = `${__packageRoot(
-        from,
-        {
-            highest: finalSettings,
-        }.highest,
-    )}/package.json`;
-    if (!__fs.existsSync(path)) return false;
+    let json;
 
-    let json = __readJsonSync(path);
-    if (finalSettings.standardize) {
-        json = __standardizeJson(json);
+    // if the "fromOrName" starts with a "/"
+    // means that it's not a package name
+    if (fromOrName.match(/^\//)) {
+        const path = `${__packageRoot(
+            fromOrName,
+            {
+                highest: finalSettings,
+            }.highest,
+        )}/package.json`;
+        if (!__fs.existsSync(path)) return false;
+
+        json = __readJsonSync(path);
+        if (finalSettings.standardize) {
+            json = __standardizeJson(json);
+        }
+    } else {
+        json = __packageJson(fromOrName);
     }
 
     // cache
-    if (!__packageJson[hash]) __packageJson[hash] = json;
+    if (!__packageJsonCache[hash]) __packageJsonCache[hash] = json;
 
+    // return the json
     return json;
 }
 export default jsonSync;

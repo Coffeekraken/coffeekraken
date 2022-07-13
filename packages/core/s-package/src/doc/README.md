@@ -21,10 +21,11 @@ This package expose a simple `SPackage` class that allows you to perform actions
 ## Features
 
 -   Generate automatically the `exports` field in the package.json file
-    -   For this to work, you MUST name your file that exports things `exports.ts`
+    -   For this to work, you MUST name your file that exports things `exports.ts` at each code "root" like `src/js/exports.ts`, `src/node/exports.ts` and `src/shared/exports.ts`
+    -   Automatic support for `esm` and `cjs` modules
 -   Install dependencies through JS API
 -   Check if the used dependencies in your source files are well listed in your package.json
--   Apply a default package.json file
+-   Apply a default `package.json` file
 -   And more...
 
 ## Usage

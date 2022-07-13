@@ -4,8 +4,8 @@ export default {
     },
     views: [
         {
-            data: "docmapApi",
-            path: "pages.api.api",
+            data: 'docmapApi',
+            path: 'pages.api.api',
         },
     ],
 };

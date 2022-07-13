@@ -64,6 +64,11 @@ export default class SMarkdownBuilderBuildParamsInterface extends __SInterface {
                 type: 'String',
                 default: __SSugarConfig.get('markdownBuilder.default.outPath'),
             },
+            data: {
+                description: 'Pass some data to be used in the view',
+                tyoe: 'Object',
+                default: {}
+            },
             save: {
                 description:
                     'Specify if you want to save the builded files or not',

@@ -1,7 +1,8 @@
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __deepMerge from '../../shared/object/deepMerge';
-import __path from 'path';
 import __fs from 'fs';
+import __deepMerge from '../../shared/object/deepMerge';
+import __packageRoot from '../path/packageRoot';
+import __globalNodeModulesPath from './globalNodeModulesPath';
 
 /**
  * @name                packageJson
@@ -21,11 +22,15 @@ import __fs from 'fs';
  * import packageJson from '@coffeekraken/sugar/node/npm/packageJson`;
  * packagrJson('lodash');
  *
+ * @todo        Implement a cache strategy to avoid making same process again and again
+ *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 interface IPackageJsonSettings {
     rootDir: string;
+    monorepo: boolean;
+    global: boolean;
 }
 
 export default function packageJson(
@@ -34,21 +39,41 @@ export default function packageJson(
 ): any {
     const set = <IPackageJsonSettings>__deepMerge({
         rootDir: __SugarConfig.get('npm.rootDir'),
+        monorepo: true,
+        global: true,
     });
 
-    // check if the package exists
-    if (
-        !__fs.existsSync(`${set.rootDir}/${name}`) ||
-        !__fs.existsSync(`${set.rootDir}/${name}/package.json`)
-    ) {
-        throw new Error(
-            `packageJson: Sorry but the package named "<yellow>${name}</yellow>" from which you try to get the package.json content seems to not exists...`,
+    let json, monoDir, globalDir;
+
+    monoDir = `${__packageRoot(process.cwd(), {
+        highest: true,
+    })}/node_modules`;
+
+    // if the package.json exists in rootDir node_modules folder
+    if (__fs.existsSync(`${set.rootDir}/${name}/package.json`)) {
+        json = JSON.parse(
+            __fs.readFileSync(`${set.rootDir}/${name}/package.json`, 'utf8'),
         );
+        return json;
     }
 
-    // read the file
-    const json = JSON.parse(
-        __fs.readFileSync(`${set.rootDir}/${name}/package.json`, 'utf8'),
-    );
-    return json;
+    if (
+        set.monorepo &&
+        monoDir !== settings?.rootDir &&
+        __fs.existsSync(`${monoDir}/${name}/package.json`)
+    ) {
+        json = JSON.parse(
+            __fs.readFileSync(`${monoDir}/${name}/package.json`, 'utf8'),
+        );
+        return json;
+    }
+
+    globalDir = __globalNodeModulesPath();
+
+    if (set.global && __fs.existsSync(`${globalDir}/${name}/package.json`)) {
+        json = JSON.parse(
+            __fs.readFileSync(`${globalDir}/${name}/package.json`, 'utf8'),
+        );
+        return json;
+    }
 }

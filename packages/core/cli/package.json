@@ -14,9 +14,9 @@
         "@coffeekraken/s-config": "^2.0.0",
         "@coffeekraken/s-env": "^2.0.0",
         "@coffeekraken/s-event-emitter": "^2.0.0",
-        "@coffeekraken/s-frontstack": "^2.0.0",
         "@coffeekraken/s-glob": "^2.0.0",
         "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/s-kitchen": "^2.0.0",
         "@coffeekraken/s-log": "^2.0.0",
         "@coffeekraken/s-monorepo": "^2.0.0",
         "@coffeekraken/s-package": "^2.0.0",
@@ -37,6 +37,18 @@
         ".": {
             "require": "./dist/pkg/cjs/cli/exports.js",
             "import": "./dist/pkg/esm/cli/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
         }
     }
 }

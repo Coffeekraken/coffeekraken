@@ -1,6 +1,6 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __SFrontstack from '../node/SFrontstack';
 import __SStdio from '@coffeekraken/s-stdio';
+import __SKitchen from '../node/SKitchen';
 
 export const sugarCliSettings = {
     stdio: __SStdio.UI_TERMINAL,
@@ -8,8 +8,8 @@ export const sugarCliSettings = {
 
 export default function recipe(stringArgs = '') {
     return new __SPromise(async ({ resolve, pipe }) => {
-        const frontstack = new __SFrontstack();
-        const promise = frontstack.recipe(stringArgs);
+        const kitchen = new __SKitchen();
+        const promise = kitchen.recipe(stringArgs);
         pipe(promise);
         await promise;
         resolve(promise);

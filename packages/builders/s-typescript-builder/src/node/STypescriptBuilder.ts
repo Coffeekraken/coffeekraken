@@ -217,9 +217,7 @@ export default class STypescriptBuilder extends __SBuilder {
                     default: __STypescriptBuilderBuildParamsInterface,
                     // @ts-ignore
                 } = await import(
-                    `${__dirname(
-                        import.meta,
-                    )}/interface/STypescriptBuilderBuildParamsInterface`
+                    `${__dirname()}/interface/STypescriptBuilderBuildParamsInterface`
                 );
 
                 // @ts-ignore

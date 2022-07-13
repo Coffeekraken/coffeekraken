@@ -8,8 +8,8 @@
     },
     "cli": [
         {
-            "stack": "frontstack",
-            "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
+            "stack": "kitchen",
+            "description": "Sugar kitchen application that allows you to develop quickly and efficiently",
             "defaultAction": "recipe",
             "actions": {
                 "new": {
@@ -19,12 +19,12 @@
                 },
                 "action": {
                     "scope": "package",
-                    "description": "Exec an action of the frontstack application into the current working directory",
+                    "description": "Exec an action of the kitchen application into the current working directory",
                     "process": "./dist/pkg/esm/cli/action.cli.js"
                 },
                 "recipe": {
                     "scope": "package",
-                    "description": "Exec a recipe of the frontstack application into the current working directory",
+                    "description": "Exec a recipe of the kitchen application into the current working directory",
                     "process": "./dist/pkg/esm/cli/recipe.cli.js"
                 },
                 "list": {

@@ -1,16 +1,15 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SFrontstackListParamsInterface
+ * @name                SKitchenNewParamsInterface
  * @namespace           node.interface
  * @type.                      Class
  * @extends             SInterface
- * @interface
  * @status              beta
  * @platform             node
+ * @interface
  *
- * This class represent the interface that describe parameters of the SFrontstack.list method
+ * This class represent the interface that describe parameters of the SKitchen.new method
  *
  * @todo      interface
  * @todo      doc
@@ -19,14 +18,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SFrontstackListParamsInterface extends __SInterface {
+class SKitchenNewParamsInterface extends __SInterface {
     static get _definition() {
-        return {
-            recipe: {
-                type: 'String',
-            },
-        };
+        return {};
     }
 }
 
-export default SFrontstackListParamsInterface;
+export default SKitchenNewParamsInterface;

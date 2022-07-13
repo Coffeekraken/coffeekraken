@@ -1,7 +1,4 @@
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __path from 'path';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
@@ -9,7 +6,7 @@ export default function (env, config) {
     return {
         /**
          * @name            title
-         * @namespace       config.frontstackRecipeNextJs
+         * @namespace       config.kitchenRecipeNextJs
          * @type            String
          * @default         Default
          *
@@ -21,9 +18,9 @@ export default function (env, config) {
         title: 'NextJs',
         /**
          * @name            description
-         * @namespace       config.frontstackRecipeNextJs
+         * @namespace       config.kitchenRecipeNextJs
          * @type            String
-         * @default         Default s-frontstack recipe
+         * @default         Default s-kitchen recipe
          *
          * Specify the recipe description
          *
@@ -34,7 +31,7 @@ export default function (env, config) {
             'Create easily a next.js app with coffeekraken tools support',
         /**
          * @name            requirements
-         * @namespace       config.frontstackRecipeNextJs
+         * @namespace       config.kitchenRecipeNextJs
          * @type            String[]
          * @default         ['[config.package.manager]']
          *
@@ -48,7 +45,7 @@ export default function (env, config) {
         },
         /**
          * @name            defaultStack
-         * @namespace       config.frontstackRecipeNextJs
+         * @namespace       config.kitchenRecipeNextJs
          * @type            String
          * @default         dev
          *
@@ -62,7 +59,7 @@ export default function (env, config) {
             new: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeNextJs.stacks.init
+                 * @namespace       config.kitchenRecipeNextJs.stacks.init
                  * @type            String
                  * @default         Init a new project with this recipe
                  *
@@ -75,7 +72,7 @@ export default function (env, config) {
                 actions: {
                     /**
                      * @name            createApp
-                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack copy action
@@ -96,7 +93,7 @@ export default function (env, config) {
                     }),
                     /**
                      * @name            rename
-                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack rename action
@@ -104,12 +101,12 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    rename: __deepMerge(config.frontstack.actions.rename, {
+                    rename: __deepMerge(config.kitchen.actions.rename, {
                         params: {},
                     }),
                     /**
                      * @name            addSugarJson
-                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack addSugarJson action
@@ -118,7 +115,7 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     addSugarJson: __deepMerge(
-                        config.frontstack.actions.addSugarJson,
+                        config.kitchen.actions.addSugarJson,
                         {
                             params: {
                                 recipe: 'nextJs',
@@ -127,7 +124,7 @@ export default function (env, config) {
                     ),
                     /**
                      * @name            addManifestJson
-                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack addManifestJson action
@@ -136,7 +133,7 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     addManifestJson: __deepMerge(
-                        config.frontstack.actions.addManifestJson,
+                        config.kitchen.actions.addManifestJson,
                         {
                             params: {},
                         },
@@ -144,7 +141,7 @@ export default function (env, config) {
 
                     /**
                      * @name            addSugarPostcss
-                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack addSugarPostcss action
@@ -153,7 +150,7 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     addSugarPostcss: __deepMerge(
-                        config.frontstack.actions.addSugarPostcss,
+                        config.kitchen.actions.addSugarPostcss,
                         {
                             params: {},
                         },
@@ -161,7 +158,7 @@ export default function (env, config) {
 
                     // /**
                     //  * @name            installDependencies
-                    //  * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                    //  * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                     //  * @type            String
                     //  *
                     //  * Specify the recipe init stack installDependencies action
@@ -169,7 +166,7 @@ export default function (env, config) {
                     //  * @since       2.0.0
                     //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                     //  */
-                    // installDependencies: __deepMerge(config.frontstack.actions.installDependencies, {
+                    // installDependencies: __deepMerge(config.kitchen.actions.installDependencies, {
                     //     params: {}
                     // })
                 },
@@ -177,7 +174,7 @@ export default function (env, config) {
             dev: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeNextJs.stacks.dev
+                 * @namespace       config.kitchenRecipeNextJs.stacks.dev
                  * @type            String
                  * @default         Start the development stack
                  *
@@ -191,35 +188,34 @@ export default function (env, config) {
                 actions: {
                     /**
                      * @name            frontendServer
-                     * @namespace       config.frontstackRecipeNextJs.stacks.dev.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.dev.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.frontendServer]
+                     * @default         [config.kitchen.actions.frontendServer]
                      *
                      * Specify the recipe dev stack frontendServer action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    frontendServer:
-                        '[config.frontstack.actions.frontendServer]',
+                    frontendServer: '[config.kitchen.actions.frontendServer]',
                     /**
                      * @name            vite
-                     * @namespace       config.frontstackRecipeNextJs.stacks.dev.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.dev.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.vite]
+                     * @default         [config.kitchen.actions.vite]
                      *
                      * Specify the recipe dev stack description
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    vite: '[config.frontstack.actions.vite]',
+                    vite: '[config.kitchen.actions.vite]',
                 },
             },
             prod: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeNextJs.stacks.prod
+                 * @namespace       config.kitchenRecipeNextJs.stacks.prod
                  * @type            String
                  * @default         ...
                  *
@@ -232,7 +228,7 @@ export default function (env, config) {
                 sharedParams: {
                     /**
                      * @name            env
-                     * @namespace       config.frontstackRecipeNextJs.stacks.prod.sharedParams
+                     * @namespace       config.kitchenRecipeNextJs.stacks.prod.sharedParams
                      * @type            String
                      * @default         production
                      *
@@ -246,23 +242,22 @@ export default function (env, config) {
                 actions: {
                     /**
                      * @name            frontendServer
-                     * @namespace       config.frontstackRecipeNextJs.stacks.prod.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.prod.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.frontendServer]
+                     * @default         [config.kitchen.actions.frontendServer]
                      *
                      * Specify the recipe prod stack frontendServer action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    frontendServer:
-                        '[config.frontstack.actions.frontendServer]',
+                    frontendServer: '[config.kitchen.actions.frontendServer]',
                 },
             },
             build: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeNextJs.stacks.build
+                 * @namespace       config.kitchenRecipeNextJs.stacks.build
                  * @type            String
                  * @default         ...
                  *
@@ -275,7 +270,7 @@ export default function (env, config) {
                 sharedParams: {
                     /**
                      * @name            prod
-                     * @namespace       config.frontstackRecipeNextJs.stacks.build.sharedParams
+                     * @namespace       config.kitchenRecipeNextJs.stacks.build.sharedParams
                      * @type            String
                      * @default         true
                      *
@@ -289,40 +284,40 @@ export default function (env, config) {
                 actions: {
                     /**
                      * @name            postcssBuild
-                     * @namespace       config.frontstackRecipeNextJs.stacks.build.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.postcssBuild]
+                     * @default         [config.kitchen.actions.postcssBuild]
                      *
                      * Specify the recipe build stack postcssBuild action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    postcssBuild: '[config.frontstack.actions.postcssBuild]',
+                    postcssBuild: '[config.kitchen.actions.postcssBuild]',
                     /**
                      * @name            viteBuild
-                     * @namespace       config.frontstackRecipeNextJs.stacks.build.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.viteBuild]
+                     * @default         [config.kitchen.actions.viteBuild]
                      *
                      * Specify the recipe build stack viteBuild action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    viteBuild: '[config.frontstack.actions.viteBuild]',
+                    viteBuild: '[config.kitchen.actions.viteBuild]',
                     /**
                      * @name            imagesBuild
-                     * @namespace       config.frontstackRecipeNextJs.stacks.build.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.imagesBuild]
+                     * @default         [config.kitchen.actions.imagesBuild]
                      *
                      * Specify the recipe build stack imagesBuild action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    imagesBuild: '[config.frontstack.actions.imagesBuild]',
+                    imagesBuild: '[config.kitchen.actions.imagesBuild]',
                 },
             },
         },

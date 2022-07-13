@@ -1,8 +1,6 @@
-import __SBench from '@coffeekraken/s-bench';
-import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
-import __SViewRenderer from '@coffeekraken/s-view-renderer';
-import __SPromise from '@coffeekraken/s-promise';
 import __SDocMap from '@coffeekraken/s-docmap';
+import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
+import __SPromise from '@coffeekraken/s-promise';
 
 export default function docmapMarkdownData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
@@ -21,7 +19,6 @@ export default function docmapMarkdownData({ req, res, pageConfig }) {
 
         const markdownRes = await pipe(
             builder.build({
-                // inRaw: str,
                 inPath: docmapJson.map[req.params.namespace].path,
                 target: 'html',
                 save: false,

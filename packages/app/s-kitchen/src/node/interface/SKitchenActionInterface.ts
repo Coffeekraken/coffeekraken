@@ -1,8 +1,7 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SFrontstackActionInterface
+ * @name                SKitchenActionInterface
  * @namespace           node.interface
  * @type.                      Class
  * @extends             SInterface
@@ -10,7 +9,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @platform             node
  * @interface
  *
- * This class represent the interface that describe parameters of the SFrontstack.action method
+ * This class represent the interface that describe parameters of the SKitchen.action method
  *
  * @todo      interface
  * @todo      doc
@@ -19,7 +18,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SFrontstackActionInterface extends __SInterface {
+class SKitchenActionInterface extends __SInterface {
     static get _definition() {
         return {
             action: {
@@ -37,4 +36,4 @@ class SFrontstackActionInterface extends __SInterface {
     }
 }
 
-export default SFrontstackActionInterface;
+export default SKitchenActionInterface;

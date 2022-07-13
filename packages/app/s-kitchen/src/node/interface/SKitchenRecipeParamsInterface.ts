@@ -1,8 +1,7 @@
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SFrontstackRecipeParamsInterface
+ * @name                SKitchenRecipeParamsInterface
  * @namespace           node.interface
  * @type.                      Class
  * @extends             SInterface
@@ -10,7 +9,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @status              beta
  * @platform             node
  *
- * This class represent the interface that describe parameters of the SFrontstack.action method
+ * This class represent the interface that describe parameters of the SKitchen.action method
  *
  * @todo      interface
  * @todo      doc
@@ -19,7 +18,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SFrontstackRecipeParamsInterface extends __SInterface {
+class SKitchenRecipeParamsInterface extends __SInterface {
     static get _definition() {
         return {
             stack: {
@@ -35,9 +34,10 @@ class SFrontstackRecipeParamsInterface extends __SInterface {
                 alias: 'r',
             },
             runInParallel: {
-                description: 'Specify if you want the recipe actions to run in parallel of not',
+                description:
+                    'Specify if you want the recipe actions to run in parallel of not',
                 type: 'Boolean',
-                alias: 'p'
+                alias: 'p',
             },
             env: {
                 description:
@@ -48,4 +48,4 @@ class SFrontstackRecipeParamsInterface extends __SInterface {
     }
 }
 
-export default SFrontstackRecipeParamsInterface;
+export default SKitchenRecipeParamsInterface;

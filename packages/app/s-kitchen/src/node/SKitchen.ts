@@ -11,79 +11,79 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
-import __argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
+import __import from '@coffeekraken/sugar/node/esm/import';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
-import __SFrontstackActionInterface from './interface/SFrontstackActionInterface';
-import __SFrontstackListParamsInterface from './interface/SFrontstackListParamsInterface';
-import __SFronstackNewParamsInterface from './interface/SFrontstackNewParamsInterface';
-import __SFrontstackRecipeParamsInterface from './interface/SFrontstackRecipeParamsInterface';
+import __SKitchenActionInterface from './interface/SKitchenActionInterface';
+import __SKitchenListParamsInterface from './interface/SKitchenListParamsInterface';
+import __SFronstackNewParamsInterface from './interface/SKitchenNewParamsInterface';
+import __SKitchenRecipeParamsInterface from './interface/SKitchenRecipeParamsInterface';
 
-export interface ISFrontstackSettings {}
+export interface ISKitchenSettings {}
 
-export interface ISFrontstackNewParams {}
+export interface ISKitchenNewParams {}
 
-export interface ISFrontstackRecipesettings {
+export interface ISKitchenRecipesettings {
     process: Partial<ISProcessSettings>;
     processManager: Partial<ISProcessManagerProcessSettings>;
 }
 
-export interface ISFrontstackAction {
+export interface ISKitchenAction {
     id: string;
     title: string;
     description: string;
     params: any;
     command: string;
     process: string;
-    settings: Partial<ISFrontstackRecipesettings>;
+    settings: Partial<ISKitchenRecipesettings>;
     [key: string]: any;
 }
 
-export interface ISFrontstackActionWrapper {
-    action: ISFrontstackAction;
+export interface ISKitchenActionWrapper {
+    action: ISKitchenAction;
     params: any;
     [key: string]: any;
 }
 
-export interface ISFrontstackRecipeRequirements {
+export interface ISKitchenRecipeRequirements {
     commands: string[];
 }
 
-export interface ISFrontstackRecipeStack {
+export interface ISKitchenRecipeStack {
     description: string;
     sharedParams: any;
     runInParallel: boolean;
     actions:
-        | Record<string, ISFrontstackAction>
-        | Record<string, ISFrontstackActionWrapper>;
+        | Record<string, ISKitchenAction>
+        | Record<string, ISKitchenActionWrapper>;
 }
 
-export interface ISFrontstackRecipe {
+export interface ISKitchenRecipe {
     id: string;
     title: string;
     description: string;
-    requirements?: ISFrontstackRecipeRequirements;
+    requirements?: ISKitchenRecipeRequirements;
     defaultStack: string;
-    stacks: Record<string, ISFrontstackRecipeStack>;
+    stacks: Record<string, ISKitchenRecipeStack>;
 }
 
-export interface ISFrontstackActionParams {
+export interface ISKitchenActionParams {
     action: string;
     params: string;
 }
 
-export interface ISFrontstackRecipeParams {
+export interface ISKitchenRecipeParams {
     recipe: string;
     stack: string;
     exclude: string[];
 }
 
-export interface ISFrontstackListParams {
+export interface ISKitchenListParams {
     recipe: string;
 }
 
-export default class SFrontstack extends __SClass {
+export default class SKitchen extends __SClass {
     /**
      * @name            constructor
      * @type              Function
@@ -94,7 +94,7 @@ export default class SFrontstack extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISFrontstackSettings>) {
+    constructor(settings?: Partial<ISKitchenSettings>) {
         super(__deepMerge({}, settings ?? {}));
     }
 
@@ -108,19 +108,18 @@ export default class SFrontstack extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    new(params: ISFrontstackNewParams | string) {
+    new(params: ISKitchenNewParams | string) {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const frontstackConfig = __SSugarConfig.get('frontstack');
+            const kitchenConfig = __SSugarConfig.get('kitchen');
             const recipesObj = __filter(
-                frontstackConfig.recipes,
+                kitchenConfig.recipes,
                 (key, recipeObj) => {
                     return recipeObj.stacks?.new !== undefined;
                 },
             );
 
-            const finalParams: ISFrontstackNewParams = __SFronstackNewParamsInterface.apply(
-                params,
-            );
+            const finalParams: ISKitchenNewParams =
+                __SFronstackNewParamsInterface.apply(params);
 
             const availableRecipes = Object.keys(recipesObj);
 
@@ -155,19 +154,18 @@ export default class SFrontstack extends __SClass {
      * @type        Function
      * @async
      *
-     * This method allows you to action a frontstack process
+     * This method allows you to action a kitchen process
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    action(params: ISFrontstackActionParams | string) {
+    action(params: ISKitchenActionParams | string) {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const frontstackConfig = __SSugarConfig.get('frontstack');
-            const actionsObj = frontstackConfig.actions;
+            const kitchenConfig = __SSugarConfig.get('kitchen');
+            const actionsObj = kitchenConfig.actions;
 
-            const finalParams: ISFrontstackActionParams = __SFrontstackActionInterface.apply(
-                params,
-            );
+            const finalParams: ISKitchenActionParams =
+                __SKitchenActionInterface.apply(params);
 
             const availableActions = Object.keys(actionsObj);
 
@@ -185,11 +183,11 @@ export default class SFrontstack extends __SClass {
 
             emit('log', {
                 type: __SLog.TYPE_INFO,
-                value: `Starting frontstack process using "<yellow>${finalParams.action}</yellow>" action`,
+                value: `Starting kitchen process using "<yellow>${finalParams.action}</yellow>" action`,
             });
 
             // get the recipe object and treat it
-            const actionObj: Partial<ISFrontstackAction> =
+            const actionObj: Partial<ISKitchenAction> =
                 // @ts-ignore
                 actionsObj[finalParams.action];
 
@@ -232,32 +230,32 @@ export default class SFrontstack extends __SClass {
      * @type        Function
      * @async
      *
-     * This method allows you to exec a frontstack process
+     * This method allows you to exec a kitchen process
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    recipe(params: Partial<ISFrontstackRecipeParams> | string) {
+    recipe(params: Partial<ISKitchenRecipeParams> | string) {
         const processesPromises: any[] = [];
 
         const duration = new __SDuration();
 
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const frontstackConfig = __SSugarConfig.get('frontstack');
-            const recipesObj = frontstackConfig.recipes;
-            const actionsObj = frontstackConfig.actions;
-
-            const finalParams = __SFrontstackRecipeParamsInterface.apply(
-                params,
-            );
+            const kitchenConfig = __SSugarConfig.get('kitchen');
+            const recipesObj = kitchenConfig.recipes;
+            const actionsObj = kitchenConfig.actions;
 
             const sugarJson = new __SSugarJson().current();
+
+            // initalise final params.
+            // it will be merged with the "stackObj.sharedParams" later...
+            let finalParams = __SKitchenRecipeParamsInterface.apply(params);
 
             if (!finalParams.recipe) {
                 if (sugarJson.recipe) finalParams.recipe = sugarJson.recipe;
             }
             if (!finalParams.recipe) {
-                finalParams.recipe = frontstackConfig.defaultRecipe;
+                finalParams.recipe = kitchenConfig.defaultRecipe;
             }
 
             if (!finalParams.recipe) {
@@ -286,21 +284,27 @@ export default class SFrontstack extends __SClass {
             }
 
             // get the recipe object and treat it
-            const recipeObj: ISFrontstackRecipe =
+            const recipeObj: ISKitchenRecipe =
                 // @ts-ignore
                 recipesObj[finalParams.recipe];
 
+            const stackObj: Partial<ISKitchenRecipeStack> =
+                recipeObj.stacks[finalParams.stack];
+
+            // merge the finalParams with the stackObj.sharedParams object if exists...
+            finalParams = __deepMerge(stackObj.sharedParams ?? {}, finalParams);
+
             // defined actions in the sugar.jcon file
-            if (sugarJson.frontstack?.[finalParams.stack]) {
+            if (sugarJson.kitchen?.[finalParams.stack]) {
                 for (let [key, value] of Object.entries(
-                    sugarJson.frontstack?.[finalParams.stack],
+                    sugarJson.kitchen?.[finalParams.stack],
                 )) {
-                    if (!frontstackConfig.actions[value.action]) {
+                    if (!kitchenConfig.actions[value.action]) {
                         throw new Error(
                             `The requested action "<yellow>${
                                 value.action
-                            }</yellow>" does not exists in the config.frontstack.actions stack... Here's the available ones: <green>${Object.keys(
-                                frontstackConfig.actions,
+                            }</yellow>" does not exists in the config.kitchen.actions stack... Here's the available ones: <green>${Object.keys(
+                                kitchenConfig.actions,
                             ).join(',')}</green>`,
                         );
                     }
@@ -310,7 +314,7 @@ export default class SFrontstack extends __SClass {
                     ] = __deepMerge(
                         Object.assign(
                             {},
-                            frontstackConfig.actions[value.action],
+                            kitchenConfig.actions[value.action],
                             value,
                         ),
                     );
@@ -375,18 +379,16 @@ export default class SFrontstack extends __SClass {
                 }
             }
 
-            const stackObj: Partial<ISFrontstackRecipeStack> =
-                recipeObj.stacks[finalParams.stack];
-
-            if (!finalParams.runInParallel) {
+            // set runInParallel if not specified
+            if (finalParams.runInParallel === undefined) {
                 finalParams.runInParallel = stackObj.runInParallel ?? false;
             }
 
+            // some info logs
             emit('log', {
                 type: __SLog.TYPE_INFO,
-                value: `Starting frontstack process`,
+                value: `Starting kitchen process`,
             });
-
             emit('log', {
                 type: __SLog.TYPE_INFO,
                 value: `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`,
@@ -410,14 +412,6 @@ export default class SFrontstack extends __SClass {
             delete sharedParams.stack;
             delete sharedParams.help;
 
-            // extend with "sharedParams" if exists on the recipe stack
-            if (stackObj.sharedParams) {
-                sharedParams = {
-                    ...stackObj.sharedParams,
-                    ...sharedParams,
-                };
-            }
-
             // instanciate the process manager
             const processManager = new __SProcessManager({
                 processManager: {
@@ -433,10 +427,13 @@ export default class SFrontstack extends __SClass {
             if (stackObj.actions) {
                 for (let i = 0; i < Object.keys(stackObj.actions).length; i++) {
                     const actionName = Object.keys(stackObj.actions)[i];
+                    let actionObj = stackObj.actions[actionName];
+                    let actionParams = __deepMerge(
+                        actionObj.params ?? {},
+                        Object.assign({}, sharedParams),
+                    );
 
-                    // Object.keys(
-                    //     stackObj.actions,
-                    // ).forEach(async (actionName) => {
+                    // do not execute the action if it has benn excluded
                     if (
                         finalParams.exclude &&
                         finalParams.exclude.indexOf(actionName) !== -1
@@ -447,11 +444,6 @@ export default class SFrontstack extends __SClass {
                         });
                         return;
                     }
-
-                    // @ts-ignore
-                    let actionObj =
-                        // @ts-ignore
-                        stackObj.actions[actionName];
 
                     // check `extends` property
                     if (actionObj.extends) {
@@ -468,7 +460,7 @@ export default class SFrontstack extends __SClass {
                             type: __SLog.TYPE_VERBOSE,
                             value: `<yellow>○</yellow> <magenta>extends</magenta> : Your action "<yellow>${actionName}</yellow>" extends the "<cyan>${actionObj.extends}</cyan>" one`,
                         });
-                        actionObj = <ISFrontstackAction>(
+                        actionObj = <ISKitchenAction>(
                             __deepMerge(
                                 Object.assign(
                                     {},
@@ -479,37 +471,31 @@ export default class SFrontstack extends __SClass {
                         );
                     }
 
-                    let actionSpecificParams = {},
-                        actionParams = {};
-
-                    if (
-                        actionObj.action &&
-                        !actionObj.process &&
-                        !actionObj.command
-                    ) {
-                        actionSpecificParams = actionObj.params ?? {};
-                        actionObj = actionObj.action;
+                    // specific passed params like "--frontendServer.buildInitial"
+                    for (let [key, value] of Object.entries(sharedParams)) {
+                        if (key.startsWith(`${actionName}.`)) {
+                            actionParams[key.replace(`${actionName}.`, '')] =
+                                value;
+                        }
                     }
-                    actionParams = actionObj.params ?? {};
 
-                    const finalActionParams = __deepMerge(
-                        actionParams,
-                        actionSpecificParams,
-                    );
-
-                    const sharedParamsStr = __argsToString(sharedParams).trim();
-
-                    // build shared params cli string
+                    // filter action params depending on each action interface if specified
+                    let InterfaceClass;
+                    if (actionObj.interface) {
+                        InterfaceClass = await __import(actionObj.interface);
+                        // filter shared params using each action "interface"
+                        actionParams = __filter(
+                            actionParams,
+                            (key, value) =>
+                                InterfaceClass.definition[key] !== undefined,
+                        );
+                    }
 
                     const actionId = actionObj.id ?? actionName;
                     // create a process from the recipe object
-                    let finalCommand =
-                        (actionObj.command ?? actionObj.process).trim() +
-                        ' ' +
-                        sharedParamsStr;
-                    finalCommand = __replaceCommandTokens(
-                        finalCommand,
-                        finalActionParams,
+                    let finalCommand = __replaceCommandTokens(
+                        (actionObj.command ?? actionObj.process).trim(),
+                        actionParams,
                     );
 
                     emit('log', {
@@ -567,13 +553,13 @@ export default class SFrontstack extends __SClass {
      *
      * This method returns the recipes objects
      *
-     * @return     {Record<string, ISFrontstackRecipe>}        The recipes objects
+     * @return     {Record<string, ISKitchenRecipe>}        The recipes objects
      *
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    listRecipes(): Record<string, ISFrontstackRecipe> {
-        const recipes = __SSugarConfig.get('frontstack.recipes');
+    listRecipes(): Record<string, ISKitchenRecipe> {
+        const recipes = __SSugarConfig.get('kitchen.recipes');
         return recipes;
     }
 
@@ -590,19 +576,17 @@ export default class SFrontstack extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     list(
-        params: ISFrontstackListParams | string,
+        params: ISKitchenListParams | string,
     ): Promise<
-        | Record<string, ISFrontstackRecipe>
-        | Record<string, ISFrontstackRecipeStack>
-        | Record<string, ISFrontstackAction>
+        | Record<string, ISKitchenRecipe>
+        | Record<string, ISKitchenRecipeStack>
+        | Record<string, ISKitchenAction>
     > {
         return new __SPromise(
             ({ resolve, reject, emit }) => {
                 const recipes = this.listRecipes();
 
-                const finalParams = __SFrontstackListParamsInterface.apply(
-                    params,
-                );
+                const finalParams = __SKitchenListParamsInterface.apply(params);
 
                 let recipe, stack;
                 if (finalParams.recipe) {
@@ -635,7 +619,7 @@ export default class SFrontstack extends __SClass {
                 if (recipe) {
                     if (!recipes[recipe]) {
                         throw new Error(
-                            `<red>[SFrontstack.list]</red> Sorry but the recipe "<yellow>${recipe}</yellow> does not exists...`,
+                            `<red>[SKitchen.list]</red> Sorry but the recipe "<yellow>${recipe}</yellow> does not exists...`,
                         );
                     }
                 }
@@ -666,7 +650,7 @@ export default class SFrontstack extends __SClass {
                 if (stack) {
                     if (!recipes[recipe].stacks[stack]) {
                         throw new Error(
-                            `<red>[SFrontstack.list]</red> Sorry but the stack "<yellow>${stack}</yellow> does not exists in the recipe "<cyan>${recipe}</cyan>"...`,
+                            `<red>[SKitchen.list]</red> Sorry but the stack "<yellow>${stack}</yellow> does not exists in the recipe "<cyan>${recipe}</cyan>"...`,
                         );
                     }
                 }
@@ -696,7 +680,7 @@ export default class SFrontstack extends __SClass {
             },
             {
                 metas: {
-                    id: 'SFrontstack.list',
+                    id: 'SKitchen.list',
                 },
             },
         );

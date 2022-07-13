@@ -1,14 +1,12 @@
 import __SBench from '@coffeekraken/s-bench';
-import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
-import __SViewRenderer from '@coffeekraken/s-view-renderer';
-import __SPromise from '@coffeekraken/s-promise';
 import __SDocMap from '@coffeekraken/s-docmap';
+import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
+import __SPromise from '@coffeekraken/s-promise';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 
 export default function docmapDocumentationData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         let html;
-
-        console.log(req.params);
 
         if (!req.params.path) {
             throw new Error(
@@ -40,11 +38,18 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
 
         __SBench.step('data.docmapDocumentationData', 'afterDocmapRead');
 
+        let packageJson;
+        if (docObj.docmap?.package?.name) {
+            packageJson = __packageJsonSync(docObj.docmap.package.name);
+        }
+
         const builder = new __SMarkdownBuilder();
 
         const markdownRes = await pipe(
             builder.build({
-                // inRaw: str,
+                data: {
+                    packageJson,
+                },
                 inPath: docObj.docmap.path,
                 target: 'html',
                 save: false,

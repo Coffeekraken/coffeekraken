@@ -83,6 +83,7 @@ export interface ISMarkdownBuilderBuildParams {
     inRaw: string;
     outDir: string;
     outPath: string;
+    data: any;
     save: boolean;
     target: 'html' | 'markdown';
     preset: string[];
@@ -334,11 +335,12 @@ export default class SMarkdownBuilder extends __SBuilder {
                     // helpers
                     registerHelpers(handlebars);
 
-                    const finalParams: ISMarkdownBuilderBuildParams = __deepMerge(
-                        // @ts-ignore
-                        __SMarkdownBuilderBuildParamsInterface.defaults(),
-                        params ?? {},
-                    );
+                    const finalParams: ISMarkdownBuilderBuildParams =
+                        __deepMerge(
+                            // @ts-ignore
+                            __SMarkdownBuilderBuildParamsInterface.defaults(),
+                            params ?? {},
+                        );
 
                     const buildedFiles: ISMarkdownBuilderResult[] = [];
 
@@ -469,12 +471,15 @@ export default class SMarkdownBuilder extends __SBuilder {
                             this.constructor._registeredHelpers ?? [],
                         )[i];
                         // @ts-ignore
-                        const helperFn = ( // @ts-ignore
-                            await import(
-                                // @ts-ignore
-                                this.constructor._registeredHelpers[helperName]
-                            )
-                        ).default;
+                        const helperFn = // @ts-ignore
+                            (
+                                await import(
+                                    // @ts-ignore
+                                    this.constructor._registeredHelpers[
+                                        helperName
+                                    ]
+                                )
+                            ).default;
                         handlebars.registerHelper(helperName, helperFn);
                     }
 
@@ -567,21 +572,24 @@ export default class SMarkdownBuilder extends __SBuilder {
                     const docmap = await new __SDocmap().read();
 
                     // take some datas like packagejson, etc...
-                    const viewData = {
-                        config: __SSugarConfig.get('.'),
-                        flatConfig: __flatten(__SSugarConfig.get('.')),
-                        settings: this.settings,
-                        params,
-                        packageJson: __packageJson(),
-                        docMenu: docmap.menu,
-                        docmap,
-                        ck: __getCoffeekrakenMetas(),
-                        time: {
-                            year: new Date().getFullYear(),
-                            month: new Date().getMonth(),
-                            day: new Date().getDay(),
+                    const viewData = __deepMerge(
+                        {
+                            config: __SSugarConfig.get('.'),
+                            flatConfig: __flatten(__SSugarConfig.get('.')),
+                            settings: this.settings,
+                            params,
+                            packageJson: __packageJson(),
+                            docMenu: docmap.menu,
+                            docmap,
+                            ck: __getCoffeekrakenMetas(),
+                            time: {
+                                year: new Date().getFullYear(),
+                                month: new Date().getMonth(),
+                                day: new Date().getDay(),
+                            },
                         },
-                    };
+                        finalParams.data ?? {},
+                    );
 
                     if (!sourceObj.files.length) {
                         return reject();
@@ -667,18 +675,18 @@ export default class SMarkdownBuilder extends __SBuilder {
                                     const preprocessorFn = await import(
                                         transformerObj.preprocessor
                                     );
-                                    preprocessedData = await preprocessorFn.default(
-                                        match,
-                                    );
+                                    preprocessedData =
+                                        await preprocessorFn.default(match);
                                 }
 
                                 const result = tplFn({
                                     data: preprocessedData,
                                 });
-                                currentTransformedString = currentTransformedString.replace(
-                                    match[0],
-                                    result,
-                                );
+                                currentTransformedString =
+                                    currentTransformedString.replace(
+                                        match[0],
+                                        result,
+                                    );
                             }
                         }
 
@@ -689,9 +697,8 @@ export default class SMarkdownBuilder extends __SBuilder {
                                 `<${tag}[^>]*>[\\w\\W\\n]+?(?=<\\/${tag}>)<\\/${tag}>`,
                                 'gm',
                             );
-                            const tagMatches = currentTransformedString.match(
-                                tagReg,
-                            );
+                            const tagMatches =
+                                currentTransformedString.match(tagReg);
                             if (tagMatches) {
                                 protectedTagsMatches = [
                                     ...protectedTagsMatches,
@@ -700,10 +707,11 @@ export default class SMarkdownBuilder extends __SBuilder {
                             }
                         });
                         protectedTagsMatches?.forEach((match, i) => {
-                            currentTransformedString = currentTransformedString.replace(
-                                match,
-                                `{match:${i}}`,
-                            );
+                            currentTransformedString =
+                                currentTransformedString.replace(
+                                    match,
+                                    `{match:${i}}`,
+                                );
                         });
 
                         // marked if html is the target
@@ -716,10 +724,11 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                         // puth protected tags back
                         protectedTagsMatches?.forEach((match, i) => {
-                            currentTransformedString = currentTransformedString.replace(
-                                `{match:${i}}`,
-                                match,
-                            );
+                            currentTransformedString =
+                                currentTransformedString.replace(
+                                    `{match:${i}}`,
+                                    match,
+                                );
                         });
 
                         if (finalParams.save) {

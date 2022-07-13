@@ -1,12 +1,14 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 
+const recipe = 'default';
+
 export default function (env, config) {
     if (env.platform !== 'node') return;
     return {
         /**
          * @name            title
-         * @namespace       config.frontstackRecipeFeature
+         * @namespace       config.kitchenRecipeLitElement
          * @type            String
          * @default         LitElement component
          *
@@ -15,10 +17,10 @@ export default function (env, config) {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        title: 'Sugar feature',
+        title: 'LitElement component',
         /**
          * @name            description
-         * @namespace       config.frontstackRecipeFeature
+         * @namespace       config.kitchenRecipeLitElement
          * @type            String
          * @default         ...
          *
@@ -27,22 +29,22 @@ export default function (env, config) {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        description: 'Sugar feature recipe',
+        description: 'LitElement webcomponent recipe',
         /**
          * @name            templateDir
-         * @namespace       config.frontstackRecipeFeature
+         * @namespace       config.kitchenRecipeLitElement
          * @type            String
-         * @default         __path.resolve(`${__dirname()}/../templates/feature`)
+         * @default         __path.resolve(`${__dirname()}/../templates/litElement`)
          *
          * Specify the recipe template directory
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        templateDir: __path.resolve(`${__dirname()}/../templates/feature`),
+        templateDir: __path.resolve(`${__dirname()}/../templates/litElement`),
         /**
          * @name            defaultStack
-         * @namespace       config.frontstackRecipeFeature
+         * @namespace       config.kitchenRecipeLitElement
          * @type            String
          * @default         dev
          *
@@ -56,7 +58,7 @@ export default function (env, config) {
             dev: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeFeature.stacks.dev
+                 * @namespace       config.kitchenRecipeLitElement.stacks.dev
                  * @type            String
                  * @default        ...
                  *
@@ -69,22 +71,22 @@ export default function (env, config) {
                 actions: {
                     /**
                      * @name            vite
-                     * @namespace       config.frontstackRecipeFeature.stacks.dev.actions
+                     * @namespace       config.kitchenRecipeLitElement.stacks.dev.actions
                      * @type            String
-                     * @default        [config.frontstack.actions.vite]
+                     * @default        [config.kitchen.actions.vite]
                      *
                      * Specify the recipe dev stack vite action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    vite: '[config.frontstack.actions.vite]',
+                    vite: '[config.kitchen.actions.vite]',
                 },
             },
             build: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeFeature.stacks.build.actions
+                 * @namespace       config.kitchenRecipeLitElement.stacks.build.actions
                  * @type            String
                  * @default        ...
                  *
@@ -98,20 +100,20 @@ export default function (env, config) {
                     viteBuild: {
                         /**
                          * @name            action
-                         * @namespace       config.frontstackRecipeFeature.stacks.build.actions.viteBuild
+                         * @namespace       config.kitchenRecipeLitElement.stacks.build.actions.viteBuild
                          * @type            String
-                         * @default        [config.frontstack.actions.viteBuild]
+                         * @default        [config.kitchen.actions.viteBuild]
                          *
                          * Specify the recipe build stack viteBuild action
                          *
                          * @since       2.0.0
                          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                          */
-                        action: '[config.frontstack.actions.viteBuild]',
+                        action: '[config.kitchen.actions.viteBuild]',
                         params: {
                             /**
                              * @name            lib
-                             * @namespace       config.frontstackRecipeFeature.stacks.build.actions.viteBuild.params
+                             * @namespace       config.kitchenRecipeLitElement.stacks.build.actions.viteBuild.params
                              * @type            String
                              * @default        true
                              *

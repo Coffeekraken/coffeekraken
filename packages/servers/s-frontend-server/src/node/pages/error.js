@@ -33,29 +33,34 @@ import __deepMerge from '../../../../shared/object/deepMerge';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function error(data = {}) {
-    data = __deepMerge({
-        title: 'Error',
-        intro: 'Somethings wrong happend',
-        body: null,
-        ctas: [
-            {
-                text: 'Go back',
-                href: 'javascript:history.back()',
-                target: '_self'
-            }
-        ]
-    }, data);
+    data = __deepMerge(
+        {
+            title: 'Error',
+            intro: 'Somethings wrong happend',
+            body: null,
+            ctas: [
+                {
+                    text: 'Go back',
+                    href: 'javascript:history.back()',
+                    target: '_self',
+                },
+            ],
+        },
+        data,
+    );
     const settings = __deepMerge(__SugarConfig.get('frontend'), args);
     const server = __express();
     const promise = new __SPromise({
-        id: 'frontendServerError'
+        id: 'frontendServerError',
     });
     // build the "templateData" object to pass to the render engines
     const templateData = {
         frontspec: JSON.stringify(frontspec),
         env: process.env.NODE_ENV || 'development',
         settings: JSON.stringify(settings),
-        packageJson: __standardizeJson(require(__packageRootDir() + '/package.json'))
+        packageJson: __standardizeJson(
+            require(__packageRootDir() + '/package.json'),
+        ),
     };
 }
 export default error;

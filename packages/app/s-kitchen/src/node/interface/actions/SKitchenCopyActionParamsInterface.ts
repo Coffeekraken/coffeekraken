@@ -1,8 +1,7 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SFrontstackCopyActionParamsInterface
+ * @name                SKitchenCopyActionParamsInterface
  * @namespace           node.actions.interface
  * @type.                      Class
  * @extends             SInterface
@@ -19,26 +18,27 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SFrontstackCopyActionParamsInterface extends __SInterface {
+class SKitchenCopyActionParamsInterface extends __SInterface {
     static get _definition() {
         return {
             src: {
                 description: 'Specify what to copy',
                 type: 'String',
-                required: true
+                required: true,
             },
             dest: {
                 description: 'Specify where to paste',
                 type: 'String',
-                required: true
+                required: true,
             },
             chdir: {
-                description: 'Specify if need to change the cwd to the pasted folder location',
+                description:
+                    'Specify if need to change the cwd to the pasted folder location',
                 type: 'Boolean',
-                default: false
-            }
+                default: false,
+            },
         };
     }
 }
 
-export default SFrontstackCopyActionParamsInterface;
+export default SKitchenCopyActionParamsInterface;

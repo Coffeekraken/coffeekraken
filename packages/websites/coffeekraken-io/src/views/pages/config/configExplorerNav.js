@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 // // @ts-nocheck
 // import __SLitComponent from '@coffeekraken/s-lit-component';
 // import __SRequest from '@coffeekraken/s-request';

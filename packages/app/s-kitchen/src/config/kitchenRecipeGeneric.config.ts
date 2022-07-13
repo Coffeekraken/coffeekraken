@@ -7,7 +7,7 @@ export default function (env, config) {
     return {
         /**
          * @name            title
-         * @namespace       config.frontstackRecipeDefault
+         * @namespace       config.kitchenRecipeDefault
          * @type            String
          * @default         Default
          *
@@ -19,19 +19,19 @@ export default function (env, config) {
         title: 'Generic',
         /**
          * @name            description
-         * @namespace       config.frontstackRecipeDefault
+         * @namespace       config.kitchenRecipeDefault
          * @type            String
-         * @default         Default s-frontstack recipe
+         * @default         Default s-kitchen recipe
          *
          * Specify the recipe description
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        description: 'Generic s-frontstack recipe ',
+        description: 'Generic s-kitchen recipe ',
         /**
          * @name            templateDir
-         * @namespace       config.frontstackRecipeDefault
+         * @namespace       config.kitchenRecipeDefault
          * @type            String
          * @default         __path.resolve(`${__dirname()}/../templates/default`)e
          *
@@ -43,7 +43,7 @@ export default function (env, config) {
         templateDir: __path.resolve(`${__dirname()}/../templates/default`),
         /**
          * @name            requirements
-         * @namespace       config.frontstackRecipeDefault
+         * @namespace       config.kitchenRecipeDefault
          * @type            Object
          * @default         dev
          *
@@ -57,7 +57,7 @@ export default function (env, config) {
         },
         /**
          * @name            defaultStack
-         * @namespace       config.frontstackRecipeDefault
+         * @namespace       config.kitchenRecipeDefault
          * @type            String
          * @default         dev
          *
@@ -71,7 +71,7 @@ export default function (env, config) {
             new: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeDefault.stacks.init
+                 * @namespace       config.kitchenRecipeDefault.stacks.init
                  * @type            String
                  * @default         Init a new project with this recipe
                  *
@@ -84,7 +84,7 @@ export default function (env, config) {
                 actions: {
                     /**
                      * @name            createApp
-                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack createApp action
@@ -104,7 +104,7 @@ export default function (env, config) {
                     },
                     /**
                      * @name            initNpm
-                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack initNpm action
@@ -119,7 +119,7 @@ export default function (env, config) {
                     },
                     /**
                      * @name            rename
-                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack rename action
@@ -136,7 +136,7 @@ export default function (env, config) {
                     },
                     /**
                      * @name            rename
-                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack applyDefaultPackageJson action
@@ -150,7 +150,7 @@ export default function (env, config) {
 
                     /**
                      * @name            addSugarJson
-                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack addSugarJson action
@@ -168,7 +168,7 @@ export default function (env, config) {
                     },
                     /**
                      * @name            addFrontspecJson
-                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack addFrontspecJson action
@@ -185,7 +185,7 @@ export default function (env, config) {
                     },
                     /**
                      * @name            addDefaultPages
-                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack addDefaultPages action
@@ -198,7 +198,7 @@ export default function (env, config) {
                     },
                     /**
                      * @name            addManifestJson
-                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack addManifestJson action
@@ -214,7 +214,7 @@ export default function (env, config) {
                     },
                     /**
                      * @name            addSugarPostcss
-                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack addSugarPostcss action
@@ -227,7 +227,7 @@ export default function (env, config) {
                     },
                     /**
                      * @name            addFavicon
-                     * @namespace       config.frontstackRecipeNextJs.stacks.new.actions
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack addFavicon action
@@ -240,7 +240,7 @@ export default function (env, config) {
                     },
                     /**
                      * @name            installDependencies
-                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
                      * Specify the recipe init stack installDependencies action
@@ -260,7 +260,7 @@ export default function (env, config) {
             dev: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeDefault.stacks.dev
+                 * @namespace       config.kitchenRecipeDefault.stacks.dev
                  * @type            String
                  * @default         Start the development stack
                  *
@@ -274,60 +274,70 @@ export default function (env, config) {
                 actions: {
                     /**
                      * @name            typescriptBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.dev.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.typescriptBuild]
+                     * @default         [config.kitchen.actions.typescriptBuild]
                      *
                      * Specify the recipe dev stack frontendServer action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    typescriptBuild:
-                        '[config.frontstack.actions.typescriptBuild]',
+                    typescriptBuild: '[config.kitchen.actions.typescriptBuild]',
                     /**
                      * @name            frontendServer
-                     * @namespace       config.frontstackRecipeDefault.stacks.dev.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.frontendServer]
+                     * @default         [config.kitchen.actions.frontendServer]
                      *
                      * Specify the recipe dev stack frontendServer action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    frontendServer:
-                        '[config.frontstack.actions.frontendServer]',
+                    frontendServer: '[config.kitchen.actions.frontendServer]',
                     /**
                      * @name            corsProxy
-                     * @namespace       config.frontstackRecipeDefault.stacks.dev.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.corsProxy]
+                     * @default         [config.kitchen.actions.corsProxy]
                      *
                      * Specify the recipe prod stack corsProxy action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    corsProxy: '[config.frontstack.actions.corsProxy]',
+                    corsProxy: '[config.kitchen.actions.corsProxy]',
                     /**
                      * @name            vite
-                     * @namespace       config.frontstackRecipeDefault.stacks.dev.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.vite]
+                     * @default         [config.kitchen.actions.vite]
                      *
-                     * Specify the recipe dev stack description
+                     * Specify the vite action settings
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    vite: '[config.frontstack.actions.vite]',
+                    vite: '[config.kitchen.actions.vite]',
+                    /**
+                     * @name            format
+                     * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
+                     * @type            String
+                     * @default         [config.kitchen.actions.format]
+                     *
+                     * Specify the format action settings
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    format: '[config.kitchen.actions.format]',
                 },
             },
             prod: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeDefault.stacks.prod
+                 * @namespace       config.kitchenRecipeDefault.stacks.prod
                  * @type            String
                  * @default         ...
                  *
@@ -340,7 +350,7 @@ export default function (env, config) {
                 sharedParams: {
                     /**
                      * @name            env
-                     * @namespace       config.frontstackRecipeDefault.stacks.prod.sharedParams
+                     * @namespace       config.kitchenRecipeDefault.stacks.prod.sharedParams
                      * @type            String
                      * @default         production
                      *
@@ -354,35 +364,34 @@ export default function (env, config) {
                 actions: {
                     /**
                      * @name            frontendServer
-                     * @namespace       config.frontstackRecipeDefault.stacks.prod.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.prod.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.frontendServer]
+                     * @default         [config.kitchen.actions.frontendServer]
                      *
                      * Specify the recipe prod stack frontendServer action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    frontendServer:
-                        '[config.frontstack.actions.frontendServer]',
+                    frontendServer: '[config.kitchen.actions.frontendServer]',
                     /**
                      * @name            corsProxy
-                     * @namespace       config.frontstackRecipeDefault.stacks.prod.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.prod.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.corsProxy]
+                     * @default         [config.kitchen.actions.corsProxy]
                      *
                      * Specify the recipe prod stack corsProxy action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    corsProxy: '[config.frontstack.actions.corsProxy]',
+                    corsProxy: '[config.kitchen.actions.corsProxy]',
                 },
             },
             build: {
                 /**
                  * @name            description
-                 * @namespace       config.frontstackRecipeDefault.stacks.build
+                 * @namespace       config.kitchenRecipeDefault.stacks.build
                  * @type            String
                  * @default         ...
                  *
@@ -395,7 +404,7 @@ export default function (env, config) {
                 sharedParams: {
                     /**
                      * @name            prod
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.sharedParams
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.sharedParams
                      * @type            String
                      * @default         true
                      *
@@ -409,79 +418,79 @@ export default function (env, config) {
                 actions: {
                     /**
                      * @name            postcssBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.postcssBuild]
+                     * @default         [config.kitchen.actions.postcssBuild]
                      *
                      * Specify the recipe build stack postcssBuild action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    postcssBuild: '[config.frontstack.actions.postcssBuild]',
+                    postcssBuild: '[config.kitchen.actions.postcssBuild]',
                     /**
                      * @name            viteBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.viteBuild]
+                     * @default         [config.kitchen.actions.viteBuild]
                      *
                      * Specify the recipe build stack viteBuild action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    viteBuild: '[config.frontstack.actions.viteBuild]',
+                    viteBuild: '[config.kitchen.actions.viteBuild]',
                     /**
                      * @name            imagesBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.imagesBuild]
+                     * @default         [config.kitchen.actions.imagesBuild]
                      *
                      * Specify the recipe build stack imagesBuild action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    imagesBuild: '[config.frontstack.actions.imagesBuild]',
+                    imagesBuild: '[config.kitchen.actions.imagesBuild]',
                     /**
                      * @name            faviconBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.faviconBuild]
+                     * @default         [config.kitchen.actions.faviconBuild]
                      *
                      * Specify the recipe build stack faviconBuild action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    faviconBuild: '[config.frontstack.actions.faviconBuild]',
+                    faviconBuild: '[config.kitchen.actions.faviconBuild]',
                     /**
                      * @name            docmapBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.docmapBuild]
+                     * @default         [config.kitchen.actions.docmapBuild]
                      *
                      * Specify the recipe build stack docmapBuild action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    docmapBuild: '[config.frontstack.actions.docmapBuild]',
+                    docmapBuild: '[config.kitchen.actions.docmapBuild]',
                     /**
                      * @name            sitemapBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
                      * @type            String
-                     * @default         [config.frontstack.actions.sitemapBuild]
+                     * @default         [config.kitchen.actions.sitemapBuild]
                      *
                      * Specify the recipe build stack sitemapBuild action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    sitemapBuild: '[config.frontstack.actions.sitemapBuild]',
+                    sitemapBuild: '[config.kitchen.actions.sitemapBuild]',
                     /**
                      * @name            copyAssets
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
                      * @type            String
                      *
                      * Specify the recipe build stack copyAssets action

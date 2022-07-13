@@ -16,7 +16,7 @@
 
 ## What is this?
 
-Our `SFrontstack` class allows you to create and execute some **recipes** of **stacks** of **actions** with ease.
+Our `SKitchen` class allows you to create and execute some **recipes** of **stacks** of **actions** with ease.
 
 -   **Recipes**
     -   kind of "templates" for some kind of project like "React", "Next", "Nuxt", etc...
@@ -27,13 +27,13 @@ Our `SFrontstack` class allows you to create and execute some **recipes** of **s
 
 ## Usage
 
-The usage of this package is mainly through the `frontstack.config.js` file and the `sugar` CLI like described bellow:
+The usage of this package is mainly through the `kitchen.config.js` file and the `sugar` CLI like described bellow:
 
 ```shell
 # Create a new project
-sugar frontstack.new
+sugar kitchen.new
 # Run the "dev" recipe
-sugar frontstack.recipe dev
+sugar kitchen.recipe dev
 # etc...
 ```
 
@@ -44,7 +44,7 @@ sugar frontstack.recipe dev
 To list the available recipes, simply execute this command:
 
 ```shell
-sugar frontstack.list
+sugar kitchen.list
 ```
 
 ## Create your recipe

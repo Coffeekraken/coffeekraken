@@ -1,11 +1,3 @@
-import __SColor from '@coffeekraken/s-color';
-import __get from '@coffeekraken/sugar/shared/object/get';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __isColor from '@coffeekraken/sugar/shared/is/color';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __SInterface from '@coffeekraken/s-interface';
-import __filter from '@coffeekraken/sugar/shared/object/filter';
-import __SDuration from '@coffeekraken/s-duration';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 
 export function preprocess(env, rawThemeConfig, rawConfig) {
@@ -51,28 +43,28 @@ export function postprocess(env, themeConfig, config) {
                 themeObj.color.current = Object.assign({}, firstColor);
             }
         }
-        if (!themeObj.color.primary) {
+        if (!themeObj.color.accent) {
             if (themeObj.defaultColor) {
-                themeObj.color.primary = Object.assign(
+                themeObj.color.accent = Object.assign(
                     {},
                     themeObj.color[themeObj.defaultColor],
                 );
             } else {
                 const firstColor =
                     themeObj.color[Object.keys(themeObj.color)[0]];
-                themeObj.color.primary = Object.assign({}, firstColor);
+                themeObj.color.accent = Object.assign({}, firstColor);
             }
         }
-        if (!themeObj.color.secondary) {
+        if (!themeObj.color.complementary) {
             if (themeObj.defaultColor) {
-                themeObj.color.secondary = Object.assign(
+                themeObj.color.complementary = Object.assign(
                     {},
                     themeObj.color[themeObj.defaultColor],
                 );
             } else {
                 const firstColor =
                     themeObj.color[Object.keys(themeObj.color)[0]];
-                themeObj.color.secondary = Object.assign({}, firstColor);
+                themeObj.color.complementary = Object.assign({}, firstColor);
             }
         }
     });

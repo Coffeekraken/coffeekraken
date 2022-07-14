@@ -24,7 +24,7 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to (re)map a color to another one like saying you want the "warning" color as the "primary" one
+ * This mixin allows you to (re)map a color to another one like saying you want the "warning" color as the "accent" one
  *
  * @param       {String}        color           The color you want to map on another one
  * @param       {String}        toColor         THe color you want to override with the previous one
@@ -32,7 +32,7 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
  *
  * @example        css
  * .my-section {
- *      @sugar.color.remap(warning, primary);
+ *      @sugar.color.remap(warning, accent);
  * }
  *
  * @since       2.0.0
@@ -58,8 +58,6 @@ export default function ({
         toColor: '',
         ...params,
     };
-
-    // console.log('dd', atRule);
 
     const vars: string[] = [
         ...__STheme.remapCssColor(finalParams.color, finalParams.toColor).vars,

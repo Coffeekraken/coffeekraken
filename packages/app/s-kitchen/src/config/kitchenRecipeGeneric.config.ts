@@ -239,6 +239,19 @@ export default function (env, config) {
                         extends: 'addFavicon',
                     },
                     /**
+                     * @name            addReadme
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addReadme action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addReadme: {
+                        extends: 'addReadme',
+                    },
+                    /**
                      * @name            installDependencies
                      * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String

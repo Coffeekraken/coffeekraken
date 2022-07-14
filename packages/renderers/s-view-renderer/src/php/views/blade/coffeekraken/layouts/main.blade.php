@@ -12,7 +12,10 @@
 
 $ogObj = $metas->og;
 if ($frontspec->metas && $frontspec->metas->og) {
-    $ogObj = (object) array_merge((array) $frontspec->metas->og, (array) $ogObj);
+    $ogObj = (object) array_merge(
+        (array) $frontspec->metas->og,
+        (array) $ogObj
+    );
 }
 
 $metasObj = $metas;

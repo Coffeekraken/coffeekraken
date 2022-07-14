@@ -55,7 +55,7 @@
                 </a>
             </li>
             <li>
-                <a href="/@coffeekraken/s-date-picker-component/styleguide/form/s-date-picker"
+                <a href="/package/@coffeekraken/s-datetime-picker-component/styleguide/form/s-datetime-picker"
                     title="Coffeekraken date picker">
                     <div class="icon-card s-color:accent"
                         >
@@ -67,7 +67,7 @@
                 </a>
             </li>
             <li>
-                <a href="/@coffeekraken/s-filtrable-input-component/styleguide/ui/filtrable-input"
+                <a href="/package/@coffeekraken/s-filtrable-input-component/styleguide/ui/s-filtrable-einput"
                     title="Coffeekraken filtrable input">
                     <div class="icon-card s-color:complementary"
                         >
@@ -90,7 +90,7 @@
                 </a>
             </li>
             <li>
-                <a href="/@coffeekraken/s-range-component/styleguide/form/s-range" title="Coffeekraken range input">
+                <a href="/package/@coffeekraken/s-range-component/styleguide/form/s-range" title="Coffeekraken range input">
                     <div class="icon-card s-color:complementary"
                         >
                         <div class="icon-card__content">
@@ -101,7 +101,7 @@
                 </a>
             </li>
             <li>
-                <a href="/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example"
+                <a href="/package/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example"
                     title="Coffeekraken code example">
                     <div class="icon-card s-color:accent"
                         >

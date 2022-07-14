@@ -242,13 +242,14 @@ export default function (env, config) {
             proxy: {
                 // all files that match /dist/...css|ts|tsx|etc...
                 // have to target the "src" directory
-                '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)$': {
-                    target: `http://localhost:3000`,
-                    changeOrigin: true,
-                    rewrite: (path) => {
-                        return path.replace(/\/dist\//, '/src/');
+                '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)$':
+                    {
+                        target: `http://localhost:3000`,
+                        changeOrigin: true,
+                        rewrite: (path) => {
+                            return path.replace(/\/dist\//, '/src/');
+                        },
                     },
-                },
                 '^.*\\.(js(?!on)|css)(?!.map)(?!\\?)(.+){1,99999}$': {
                     target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
                     changeOrigin: true,
@@ -258,20 +259,22 @@ export default function (env, config) {
                 },
                 // all none css, js, ts, etc...
                 // have to go to frontend server
-                '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$': {
-                    target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
-                    changeOrigin: true,
-                    rewrite: (path) => {
-                        return path;
+                '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$':
+                    {
+                        target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
+                        changeOrigin: true,
+                        rewrite: (path) => {
+                            return path;
+                        },
                     },
-                },
-                '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|\\@id|__vite_ping|index.html).)*$': {
-                    target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
-                    changeOrigin: true,
-                    rewrite: (path) => {
-                        return path;
+                '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|\\@id|__vite_ping|index.html).)*$':
+                    {
+                        target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
+                        changeOrigin: true,
+                        rewrite: (path) => {
+                            return path;
+                        },
                     },
-                },
             },
         },
         rewrites: [
@@ -304,7 +307,7 @@ export default function (env, config) {
                 '**/dist/**',
                 '**/__tests__.wip/**',
                 '**/__wip__/**',
-                '**/sugar/**',
+                // '**/sugar/**',
             ],
 
             exclude: [
@@ -313,7 +316,7 @@ export default function (env, config) {
                 '**/dist/**',
                 '**/__tests__.wip/**',
                 '**/__wip__/**',
-                '**/sugar/**',
+                // '**/sugar/**',
             ],
             deps: {
                 inline: true,

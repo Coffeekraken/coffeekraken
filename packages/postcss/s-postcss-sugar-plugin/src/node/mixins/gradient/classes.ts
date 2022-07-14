@@ -74,7 +74,7 @@ export default function ({
         * @platform         css
         * @status           beta
         *
-        * This class allows you to apply a "<yellow>linear</yellow> gradient to any HTMLElement. Note that this will apply a linear gradient using the "<yellow>primary</yellow>" color. If you want
+        * This class allows you to apply a "<yellow>linear</yellow> gradient to any HTMLElement. Note that this will apply a linear gradient using the "<yellow>accent</yellow>" color. If you want
         * apply something different, make use of the "<cyan>s-gradient-start-{colorName}</cyan>" and "<cyan>s-gradient-end-{colorName}</cyan>" classes...
         *
         * @example        html
@@ -104,7 +104,7 @@ export default function ({
         * @platform       css
         * @status         beta
         *
-        * This class allows you to apply a "<yellow>radial</yellow> gradient to any HTMLElement. Note that this will apply a radial gradient using the "<yellow>primary</yellow>" color. If you want
+        * This class allows you to apply a "<yellow>radial</yellow> gradient to any HTMLElement. Note that this will apply a radial gradient using the "<yellow>accent</yellow>" color. If you want
         * apply something different, make use of the "<cyan>s-gradient-start-{colorName}</cyan>" and "<cyan>s-gradient-end-{colorName}</cyan>" classes...
         *
         * @example        html
@@ -140,7 +140,7 @@ export default function ({
          * is of type "<yellow>linear</yellow>" of course.
          * 
          * @example             html
-         * <div class="s-ratio\:16-9 s-gradient\:linear\:${angle}deg\:start-primary-50\:end-primary-70">
+         * <div class="s-ratio\:16-9 s-gradient\:linear\:${angle}deg\:start-accent-50\:end-accent-70">
          *     <div class="s-center-abs">I'm a cool depth button</div>
          * </div>
          * 

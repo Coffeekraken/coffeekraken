@@ -5,7 +5,6 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
-import __filterObject from '@coffeekraken/sugar/shared/object/filter';
 
 /**
  * @name                genericHandler

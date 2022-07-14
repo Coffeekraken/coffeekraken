@@ -2,10 +2,8 @@ import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
 import __SClass from '@coffeekraken/s-class';
 import __SFile from '@coffeekraken/s-file';
 import __SLog from '@coffeekraken/s-log';
-import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
@@ -16,7 +14,6 @@ import { cruise } from 'dependency-cruiser';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
-import __SPackageAddReadmeParamsInterface from './interface/SPackageAddReadmeParamsInterface';
 import __SPackageAddDefaultScriptsParamsInterface from './interface/SPackageApplyDefaultPackageJsonParamsInterface';
 import __SPackageCheckDependenciesParamsInterface from './interface/SPackageCheckDependenciesParamsInterface';
 import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsInterface';
@@ -695,74 +692,6 @@ export default class SPackage extends __SClass {
                 }
 
                 resolve();
-            },
-            {
-                eventEmitter: {
-                    bind: this,
-                },
-            },
-        );
-    }
-
-    /**
-     * @name            addReadme
-     * @type            Function
-     * @async
-     *
-     * This method allows you to add a readme to your package with informations about the coffeekraken
-     * version used, etc...
-     *
-     * @param       {Partial<ISPackageAddReadmeParams>}          [params={}]         Some params for your add readme process
-     * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the rename
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    addReadme(
-        params: Partial<ISPackageAddReadmeParams>,
-    ): Promise<ISPackageAddReadmeResult> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                // @ts-ignore
-                const finalParams: ISPackageAddReadmeParams =
-                    __SPackageAddReadmeParamsInterface.apply(params);
-
-                const packageRoot = __packageRoot();
-
-                if (
-                    __fs.existsSync(finalParams.path) &&
-                    !(await emit('ask', {
-                        type: 'confirm',
-                        message:
-                            'A README file already exists. Would you like to override it?',
-                        default: true,
-                    }))
-                ) {
-                    return resolve();
-                }
-
-                // Adding README
-                emit('log', {
-                    value: `<yellow>[addReadme]</yellow> Adding the <cyan>README.md</cyan> file to the package`,
-                });
-
-                // build source README.md file
-                const builder = new __SMarkdownBuilder();
-                const result = await builder.build({
-                    inPath: __path.resolve(
-                        __packageRoot(__dirname()),
-                        'src/md/README.md',
-                    ),
-                    outPath: finalParams.path,
-                });
-
-                emit('log', {
-                    value: `<green>[addReadme]</green> <cyan>README.md</cyan> added <green>successfully</green>`,
-                });
-
-                resolve({
-                    file: __SFile.new(finalParams.path),
-                });
             },
             {
                 eventEmitter: {

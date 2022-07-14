@@ -24,6 +24,10 @@ function assets($assets)
 {
     $assetsStr = [];
 
+    if (!$assets) {
+        return '';
+    }
+
     foreach ($assets as $name => $asset) {
         $extension = \Sugar\path\extension($asset->src);
         switch ($extension) {

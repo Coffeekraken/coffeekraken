@@ -27,7 +27,7 @@
                     forget about
                     it and import your own tools.
                 </p>
-                <a class="s-btn s-color:accent" href="/@coffeekraken/sugar/doc/readme" title="Get started with Sugar!">
+                <a class="s-btn s-color:accent" href="/package/@coffeekraken/sugar/doc/readme" title="Get started with Sugar!">
                     Discover that Sugar has to offer
                 </a>
             </div>
@@ -39,13 +39,16 @@
                     <h5 class="s-typo:h4 s-mbe:30">
                         A coherant <span class="s-tc:accent">CLI</span> with some cool features
                     </h5>
-                    <p class="s-typo:p ">
+                    <p class="s-typo:p s-mbe:50">
                         The <span class="s-typo:code">@@coffeekraken/cli</span> package is the one that provides
                         you these CLI features.
                         <br>Some other packages are extending the CLI with new features like the "<span
                             class="s-typo:code">@@coffeekraken/s-frontstack</span>" that represent the
                         development stack that provide his features through the Sugar CLI.
                     </p>
+                    <a class="s-btn s-color:complementary" href="/doc/cli/overview" title="More on the Coffeekraken Sugar CLI">
+                        More on our CLI
+                    </a>
                 </div>
                 <div>
                     <div class="s-mis:-50 @mobile s-mis:0">
@@ -68,13 +71,16 @@
                     <h5 class="s-typo:h4 s-mbe:30">
                         querySelector<span class="s-tc:accent">Live</span>
                     </h5>
-                    <p class="s-typo:p ">
+                    <p class="s-typo:p s-mbe:50">
                         This function allows you to do exactly the same as the <span
                             class="s-typo:code">querySelector</span> but
                         will <span class="s-tc:complementary">listen for new element that match your selector in the
                             DOM</span> and execute
                         your callback function with it as soon as it appears in your document.
                     </p>
+                    <a class="s-btn s-color:accent" href="/api/@coffeekraken.sugar.js.dom.query.querySelectorLive" title="querySelectorLive coffeekraken sugar documentation">
+                        querySelectorLive documentation
+                    </a>
                 </div>
                 <div>
                     <div class="s-mie:-100 s-mbe:30 @mobile s-mie:0">
@@ -100,12 +106,15 @@
                     <h5 class="s-typo:h4 s-mbe:30">
                         sha256,<span class="s-tc:accent">base64</span>/etc...
                     </h5>
-                    <p class="s-typo:p ">
+                    <p class="s-typo:p s-mbe:50">
                         These crypt functions allows you to encrypt strings with ease. Sugar support some encryption
                         algorhytm like <span class="s-typo:code">aes</span>,
                         <span class="s-typo:code">base64</span>, <span class="s-typo:code">md5</span>, <span
                             class="s-typo:code">sha256</span> and <span class="s-typo:code">sha512</span>.
                     </p>
+                    <a class="s-btn s-color:complementary" href="/api/@coffeekraken.sugar.js.crypt.md5" title="MD5 Coffeekraken sugar documentation">
+                        MD5 documentation
+                    </a>
                 </div>
                 <div>
                     <div class="s-mis:-50 @mobile s-mis:0">
@@ -125,10 +134,13 @@
                         is(<span class="s-tc:accent">Mobile</span>,<span class="s-tc:accent">Color</span>,<span
                             class="s-tc:accent">PlainObject</span>, etc...)
                     </h5>
-                    <p class="s-typo:p ">
+                    <p class="s-typo:p s-mbe:50">
                         These functions are made to check if your user is on mobile, if your javascript is executed into
                         a node environment, is the passed string is a URL, etc...
                     </p>
+                    <a class="s-btn s-color:accent" href="/api/@coffeekraken.sugar.js.is.isMobile" title="isMobile Coffeekraken sugar documentation">
+                        isMobile documentation
+                    </a>    
                 </div>
                 <div>
                     <div class="s-mie:-50 @mobile s-mie:0">
@@ -151,7 +163,7 @@
                     class="s-tc:complementary">learn
                     the rest step by step</span>.
             </p>
-            <a class="s-btn s-color:complementary" href="/@coffeekraken/sugar/doc/readme" title="Get started!">
+            <a class="s-btn s-color:complementary" href="/package/@coffeekraken/sugar/doc/readme" title="Discover what Coffeekraken Sugar has to offer!">
                 Discover all of what sugar has to offer!
             </a>
         </div>

@@ -5,18 +5,5 @@
                 "path": "./dist/pkg/%moduleSystem/config"
             }
         ]
-    },
-    "cli": [
-        {
-            "stack": "postcss",
-            "description": "Sugar postcss plugin related commands",
-            "actions": {
-                "add": {
-                    "scope": "package",
-                    "description": "Add the sugar postcss plugin into yout project",
-                    "process": "./dist/pkg/esm/cli/add.cli.js"
-                }
-            }
-        }
-    ]
+    }
 }

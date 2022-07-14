@@ -195,13 +195,12 @@ export default class SStdio extends __SClass implements ISStdio {
             this.registeredComponents[this.name] = {};
 
         // save the component inside the stack
-        this.registeredComponents[this.name][
-            as || component.id || 'default'
-        ] = {
-            component,
-            settings: settings || {},
-            as,
-        };
+        this.registeredComponents[this.name][as || component.id || 'default'] =
+            {
+                component,
+                settings: settings || {},
+                as,
+            };
     }
 
     /**

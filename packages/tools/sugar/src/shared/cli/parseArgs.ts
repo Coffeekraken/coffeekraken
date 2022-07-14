@@ -1,12 +1,13 @@
 // @ts-nocheck
 
+import __camelCaseProps from '../object/camelCaseProps';
 import __deepMerge from '../object/deepMerge';
 import __parse from '../string/parse';
 import __unquote from '../string/unquote';
 
 /**
  * @name                        parseArgs
- * @namespace            js.cli
+ * @namespace            shared.cli
  * @type                        Function
  * @platform          js
  * @platform          node
@@ -18,12 +19,21 @@ import __unquote from '../string/unquote';
  * @param             {Object}                    [settings={}]               A settings object that configure how the string will be parsed. Here's the settings options:
  * @return            {Object}                                                The object of funded arguments and their values
  *
+ * @feature             Support argument style string like "--something cool --hello 'world plop' -e"
+ * @feature             Support "function" style string like "($coco: true, $plop: 'hello world')"
+ * @feature             Support quoted values
+ * @feature             Support "treatNoAsBoolean" like "--no-format" => { format: false } (can be disabled in settings)
+ *
+ * @setting           {"'" | '"' | '`'}        [valueQuote=undefined]          Specify which quote is used for quoted values. If not set, will take the first quote of the passed string
+ * @setting             {Boolean}               [treatNoAsBoolean=true]         If true, the "no-..." argument will be treated as false boolean. "--no-format": { format: false }
+ * @setting             {Boolean}               [camelCase=true]                If true, will transform returned object properties to camelCase
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
  * @example         js
- * import parseArgs from '@coffeekraken/sugar/js/string/parseArgs';
+ * import parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
  * parseArgs('hello -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep" #blop', {
  *    param1: { type: 'String', alias: 'p' },
  *    world: { type: 'Array', alias: 'w', validator: value => {
@@ -33,9 +43,6 @@ import __unquote from '../string/unquote';
  *    'hello.world': { type: 'String' },
  *    help: { type: 'String', alias: 'h' },
  *    id: { type: 'String', alias: 'i', regexp: /^#([\S]+)$/ }
- * }, {
- *    treatDotsAsObject: true,
- *    handleOrphanOptions: true
  * });
  * {
  *    param1: 'hello',
@@ -51,19 +58,38 @@ import __unquote from '../string/unquote';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function parseArgs(string, settings = {}) {
+
+export interface IParseArgsSettings {
+    valueQuote: "'" | '"' | '`';
+    treatNoAsBoolean: boolean;
+    camelCase: boolean;
+}
+
+export default function parseArgs(
+    string,
+    settings?: Partial<IParseArgsSettings>,
+) {
     settings = __deepMerge(
         {
-            throw: true,
-            defaultObj: {},
-            cast: true,
             valueQuote: undefined,
+            treatNoAsBoolean: true,
+            camelCase: true,
         },
-        settings,
+        settings ?? {},
     );
 
     string = string.trim();
     string = string.replace(/(["'`])--/gm, '$1--§ --');
+
+    if (settings.treatNoAsBoolean) {
+        const noMatches = string.match(/--no-[\w]+/g);
+        noMatches?.forEach((match) => {
+            string = string.replace(
+                match,
+                `${match.replace('--no-', '--')} false`,
+            );
+        });
+    }
 
     let valueQuote = settings.valueQuote;
     if (!valueQuote) {
@@ -160,7 +186,7 @@ export default function parseArgs(string, settings = {}) {
 
     if (stringArray) stringArray = stringArray.map((item) => __unquote(item));
 
-    const argsObj = {};
+    let argsObj = {};
     let currentArgName = undefined;
     let currentValue;
     stringArray = stringArray.forEach((part, i) => {
@@ -224,6 +250,11 @@ export default function parseArgs(string, settings = {}) {
             }
         }
     });
+
+    // treat camelcase if needed
+    if (settings.camelCase) {
+        argsObj = __camelCaseProps(argsObj);
+    }
 
     Object.keys(argsObj).forEach((key) => {
         const value = argsObj[key];

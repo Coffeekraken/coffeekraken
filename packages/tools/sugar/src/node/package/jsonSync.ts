@@ -37,7 +37,7 @@ export interface IPackageJsonSyncSettings {
 }
 
 let __packageJsonCache = {};
-function jsonSync(
+export default function jsonSync(
     fromOrName = process.cwd(),
     settings?: Partial<IPackageJsonSyncSettings>,
 ): any {
@@ -83,4 +83,3 @@ function jsonSync(
     // return the json
     return json;
 }
-export default jsonSync;

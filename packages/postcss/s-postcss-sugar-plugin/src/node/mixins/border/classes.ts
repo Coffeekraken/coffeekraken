@@ -67,6 +67,7 @@ export default function ({
         * @support      safari          
         * @support      edge           
         * 
+        * @cssClass             s-radius            Apply the default border radius to any HTMLElement
         ${radiusesKeys
             .map((radiusName) => {
                 if (radiusName === 'default') return '';

@@ -128,9 +128,8 @@ export default class SFrontendServer extends __SClass {
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(params: Partial<ISFrontendServerStartParams> | string): Promise<any> {
-        const finalParams: ISFrontendServerStartParams = __SFrontendServerStartParamsInterface.apply(
-            params,
-        );
+        const finalParams: ISFrontendServerStartParams =
+            __SFrontendServerStartParamsInterface.apply(params);
 
         return new __SPromise(
             async ({ resolve, reject, emit, pipe, on }) => {
@@ -155,9 +154,8 @@ export default class SFrontendServer extends __SClass {
                     'silly',
                 ].indexOf(finalParams.logLevel);
 
-                const frontendServerConfig = __SSugarConfig.get(
-                    'frontendServer',
-                );
+                const frontendServerConfig =
+                    __SSugarConfig.get('frontendServer');
 
                 this._express.use((req, res, next) => {
                     if (req.path.substr(-1) == '/' && req.path.length > 1) {
@@ -408,9 +406,8 @@ export default class SFrontendServer extends __SClass {
     corsProxy(
         params: Partial<ISFrontendServerCorsProxyParams> | string,
     ): Promise<any> {
-        const finalParams: ISFrontendServerCorsProxyParams = __SFrontendServerCorsProxyParamsInterface.apply(
-            params,
-        );
+        const finalParams: ISFrontendServerCorsProxyParams =
+            __SFrontendServerCorsProxyParamsInterface.apply(params);
 
         return new __SPromise(
             ({ resolve, reject, emit, pipe }) => {
@@ -508,9 +505,10 @@ export default class SFrontendServer extends __SClass {
     ): Promise<any> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
-                const finalParams: ISFrontendServerAddDefaultPagesParams = __SFrontendServerAddDefaultPagesParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISFrontendServerAddDefaultPagesParams =
+                    __SFrontendServerAddDefaultPagesParamsInterface.apply(
+                        params,
+                    );
 
                 // adding default pages/views
                 emit('log', {
@@ -533,12 +531,12 @@ export default class SFrontendServer extends __SClass {
                 // source views folder path
                 const sourceViewsFolderPath = __path.resolve(
                     __path.resolve(__packageRoot(__dirname())),
-                    'src/views',
+                    'src/data/defaultPages/views',
                 );
                 // source pages folder path
                 const sourcePagesFolderPath = __path.resolve(
                     __path.resolve(__packageRoot(__dirname())),
-                    'src/pages',
+                    'src/data/defaultPages/pages',
                 );
 
                 const pagesResult = await __recursiveCopy(
@@ -647,9 +645,8 @@ export default class SFrontendServer extends __SClass {
                     slug = '',
                     slugs: string[] = pageConfig.slugs ?? [];
 
-                const frontendServerConfig = __SSugarConfig.get(
-                    'frontendServer',
-                );
+                const frontendServerConfig =
+                    __SSugarConfig.get('frontendServer');
 
                 // generate path
                 if (pageFile && !pageConfig.slugs) {

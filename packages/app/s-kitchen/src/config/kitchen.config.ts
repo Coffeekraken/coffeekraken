@@ -30,30 +30,6 @@ export default function (env, config) {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             nextJs: '[config.kitchenRecipeNextJs]',
-            /**
-             * @name            litElement
-             * @namespace       config.kitchen.recipes
-             * @type            String
-             * @default         [config.kitchenRecipeLitElement]
-             *
-             * Specify the litElement recipe
-             *
-             * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            litElement: '[config.kitchenRecipeLitElement]',
-            /**
-             * @name            feature
-             * @namespace       config.kitchen.recipes
-             * @type            String
-             * @default         [config.kitchenRecipeFeature]
-             *
-             * Specify the feature recipe
-             *
-             * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            feature: '[config.kitchenRecipeFeature]',
         },
 
         actions: {
@@ -214,7 +190,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: `sugar add.sugarJson [arguments]`,
+                command: `sugar kitchen.add sugarJson [arguments]`,
                 params: {},
                 settings: {},
             },
@@ -254,7 +230,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: `sugar frontspec.add [arguments]`,
+                command: `sugar kitchen.add frontspec [arguments]`,
                 params: {},
                 settings: {},
             },
@@ -294,7 +270,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: `sugar add.manifestJson [arguments]`,
+                command: `sugar kitchen.add manifest [arguments]`,
                 params: {},
                 settings: {},
             },
@@ -375,7 +351,48 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: `sugar favicon.add [arguments]`,
+                command: `sugar kitchen.add favicon [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addReadme: {
+                /**
+                 * @name            title
+                 * @namespace       config.kitchen.actions.addReadme
+                 * @type            String
+                 * @default        Adding manifest.json file
+                 *
+                 * Add the README.md file into the src/doc folder.
+                 * This is a base file that can be builded using the `sugar markdown.build` command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Adding source README.md file',
+                /**
+                 * @name            description
+                 * @namespace       config.kitchen.actions.addReadme
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the kitchen addReadme action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Adding the README.md source file to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.kitchen.actions.addReadme
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the kitchen addReadme action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar kitchen.add readme [arguments]`,
                 params: {},
                 settings: {},
             },

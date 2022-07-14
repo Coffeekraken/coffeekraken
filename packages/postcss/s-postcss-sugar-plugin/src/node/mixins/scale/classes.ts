@@ -73,8 +73,10 @@ export default function ({
         * 
         ${Object.keys(scaleObj)
             .map((scaleName) => {
-                return ` * @cssClass     s-scale:${scaleName.replace('/', '-')}
-                }            Apply the ${scaleName} scale`;
+                return ` * @cssClass     s-scale:${scaleName.replace(
+                    '/',
+                    '-',
+                )}             Apply the ${scaleName} scale`;
             })
             .join('\n')}
         * 

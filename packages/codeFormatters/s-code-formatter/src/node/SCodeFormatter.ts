@@ -23,6 +23,8 @@ import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFor
  *
  * @param           {Object}                        [settings={}]       Specify an object of settings to configure your formatting process
  *
+ * @setting         {Number}                [timeoutBetweenSameFileProcess=1000]            Specify a timeout between 2 same file processes to avoid loop of formatting
+ *
  * @example         js
  * import __SCodeFormatter from '@coffeekraken/s-code-formatter';
  * const formatter = new __SCodeFormatter();
@@ -32,7 +34,9 @@ import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFor
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISCodeFormatterSettings {}
+export interface ISCodeFormatterSettings {
+    timeoutBetweenSameFileProcess: number;
+}
 
 export interface ISCodeFormatterFormatParams {
     glob: string;
@@ -163,7 +167,14 @@ class SCodeFormatter extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISCodeFormatterSettings>) {
-        super(__deepMerge({}, settings ?? {}));
+        super(
+            __deepMerge(
+                {
+                    timeoutBetweenSameFileProcess: 1000,
+                },
+                settings ?? {},
+            ),
+        );
     }
 
     /**
@@ -184,125 +195,143 @@ class SCodeFormatter extends __SClass {
         params: any = {},
         settings: any = {},
     ): Promise<ISCodeFormatterFormatResult> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const finalSettings: ISCodeFormatterSettings = __deepMerge(
-                this.settings,
-                settings,
-            );
-            const finalParams: ISCodeFormatterFormatParams = __SCodeFormatterFormatParamsInterface.apply(
-                params,
-            );
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                const finalSettings: ISCodeFormatterSettings = __deepMerge(
+                    this.settings,
+                    settings,
+                );
+                const finalParams: ISCodeFormatterFormatParams =
+                    __SCodeFormatterFormatParamsInterface.apply(params);
 
-            let finalGlob = finalParams.glob;
+                let finalGlob = finalParams.glob;
 
-            const handledExtensions = this.constructor.getHandledExtensions();
-            if (finalParams.glob.match(/\/\*$/)) {
-                finalGlob += `.{${handledExtensions.join(',')}}`;
-            }
+                const handledExtensions =
+                    this.constructor.getHandledExtensions();
+                if (finalParams.glob.match(/\/\*$/)) {
+                    finalGlob += `.{${handledExtensions.join(',')}}`;
+                }
 
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<yellow>○</yellow> Glob              : <yellow>${finalGlob}</yellow>`
-            });
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`
-            });
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<yellow>○</yellow> Watch             : ${finalParams.watch ? `<green>true</green>` : `<red>false</red>`}`
-            });
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<yellow>○</yellow> Format initial    : ${finalParams.formatInitial ? `<green>true</green>` : `<red>false</red>`}`
-            });
-
-            if (finalParams.watch) {
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[watch]</yellow> Watching for file changes...`
+                    value: `<yellow>○</yellow> Glob              : <yellow>${finalGlob}</yellow>`,
                 });
-            }
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Watch             : ${
+                        finalParams.watch
+                            ? `<green>true</green>`
+                            : `<red>false</red>`
+                    }`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Format initial    : ${
+                        finalParams.formatInitial
+                            ? `<green>true</green>`
+                            : `<red>false</red>`
+                    }`,
+                });
 
-            // watch using chokidar
-            const filesPromise = __getFiles(finalGlob, {
-                cwd: finalParams.inDir,
-                ignoreInitial: !finalParams.formatInitial,
-                watch: finalParams.watch,
-            });
-
-            // save all the file paths that has just been savec by the formatter
-            // to avoid process it over and over...
-            const savedStack: string[] = [];
-
-            // listen for files change and add
-            filesPromise.on('add,change', async (file) => {
-
-                // avoid to process in loop the same file saved over and over
-                const savedFileIdx = savedStack.indexOf(file);
-                if (savedFileIdx !== -1) {
-                    // remove the file for next process
-                    savedStack.splice(savedFileIdx, 1);
-                    return;
-                }
-
-                const relFilePath = __path.relative(__packageRoot(), file);
-
-                const duration = new __SDuration();
-
-                // grab the file content
-                const code = __fs.readFileSync(file, 'utf-8').toString();
-                // get the file extension
-                const extension = __path.extname(file).replace(/^\./, '');
-                // get the appropriate formatter for this extension
-                const formatter = this.constructor.getFormatterForExtension(
-                    extension,
-                );
-                if (!formatter) {
-                    emit('log', {
-                        type: __SLog.TYPE_WARN,
-                        value: `<yellow>[format]</yellow> No formatter registered for the "<magenta>.${extension}</magenta>" files`,
-                    });
-                } else {
+                if (finalParams.watch) {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
+                        value: `<yellow>[watch]</yellow> Watching for file changes...`,
                     });
-                    try {
-                        // apply the formatter on the file content
-                        const result = await formatter.format(code, {
-                            filePath: file,
-                            extension,
-                        });
-
-                        // write file back with formatted code
-                        savedStack.push(file);
-                        __fs.writeFileSync(file, result.code, 'utf-8');
-
-                        emit('log', {
-                            clear: 1,
-                            type: __SLog.TYPE_INFO,
-                            value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
-                                duration.end().formatedDuration
-                            }</yellow>`,
-                        });
-                    } catch (e) {
-                        emit('log', {
-                            type: __SLog.TYPE_ERROR,
-                            value: e.toString(),
-                        });
-                    }
                 }
-            });
 
-            if (!finalParams.watch) {
-                resolve();
-            }
-        }, {
-            eventEmitter: {
-                bind: this
-            }
-        });
+                // watch using chokidar
+                const filesPromise = __getFiles(finalGlob, {
+                    cwd: finalParams.inDir,
+                    ignoreInitial: !finalParams.formatInitial,
+                    watch: finalParams.watch,
+                });
+
+                // save all the file paths that has just been savec by the formatter
+                // to avoid process it over and over...
+                const savedStack: string[] = [];
+
+                // listen for files change and add
+                filesPromise.on('add,change', async (file) => {
+                    // avoid to process in loop the same file saved over and over
+                    const savedFileIdx = savedStack.indexOf(file);
+                    if (savedFileIdx !== -1) {
+                        return;
+                    }
+
+                    const relFilePath = __path.relative(__packageRoot(), file);
+
+                    const duration = new __SDuration();
+
+                    // grab the file content
+                    const code = __fs.readFileSync(file, 'utf-8').toString();
+                    // get the file extension
+                    const extension = __path.extname(file).replace(/^\./, '');
+                    // get the appropriate formatter for this extension
+                    const formatter =
+                        this.constructor.getFormatterForExtension(extension);
+                    if (!formatter) {
+                        emit('log', {
+                            type: __SLog.TYPE_WARN,
+                            value: `<yellow>[format]</yellow> No formatter registered for the "<magenta>.${extension}</magenta>" files`,
+                        });
+                    } else {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
+                        });
+                        try {
+                            // apply the formatter on the file content
+                            const result = await formatter.format(code, {
+                                filePath: file,
+                                extension,
+                            });
+
+                            // avoid process the same file more than 1x by second
+                            // this is to avoid issues with multiple formatt process that might
+                            // save each in their corner and enter in a loop of formatting...
+                            savedStack.push(file);
+                            setTimeout(() => {
+                                const savedFileIdx = savedStack.indexOf(file);
+                                if (savedFileIdx !== -1) {
+                                    // remove the file for next process
+                                    savedStack.splice(savedFileIdx, 1);
+                                }
+                            }, finalSettings.timeoutBetweenSameFileProcess);
+
+                            // write file back with formatted code
+                            __fs.writeFileSync(file, result.code, 'utf-8');
+
+                            emit('log', {
+                                clear: 1,
+                                type: __SLog.TYPE_INFO,
+                                value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
+                                    duration.end().formatedDuration
+                                }</yellow>`,
+                            });
+                        } catch (e) {
+                            emit('log', {
+                                type: __SLog.TYPE_ERROR,
+                                value: e.toString(),
+                            });
+                        }
+                    }
+                });
+
+                if (!finalParams.watch) {
+                    resolve();
+                }
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
     }
 }
 

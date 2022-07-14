@@ -1,5 +1,5 @@
 {
-    "recipe": "litElement",
+    "recipe": "generic",
     "config": {
         "folders": [
             {

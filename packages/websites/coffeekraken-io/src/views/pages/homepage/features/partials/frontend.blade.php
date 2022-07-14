@@ -36,7 +36,7 @@
                             and more...
                         </li>
                     </ol>
-                    <a class="s-btn s-color:complementary" href="/doc/css/overview"
+                    <a class="s-btn s-color:complementary" href="/doc/css/pleasant-syntax"
                         title="Coffeekraken CSS pleasant syntax">
                         Discover more!
                     </a>
@@ -111,7 +111,7 @@
                             Easy <span class="s-typo:code">dark mode</span> support
                         </li>
                     </ol>
-                    <a class="s-btn s-color:accent" href="/doc/css/overview" title="Coffeekraken CSS pleasant syntax">
+                    <a class="s-btn s-color:accent" href="/doc/css/theming" title="Coffeekraken CSS pleasant syntax">
                         Discover more!
                     </a>
                 </div>
@@ -163,7 +163,7 @@
                                 Pre defined layouts as well as full custom capabilities
                             </li>
                         </ol>
-                        <a class="s-btn s-color:complementary" href="/doc/css/overview"
+                        <a class="s-btn s-color:complementary" href="/doc/css/layout"
                             title="Coffeekraken CSS pleasant syntax">
                             Discover more!
                         </a>

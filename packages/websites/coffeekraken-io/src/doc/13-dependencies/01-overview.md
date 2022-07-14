@@ -28,15 +28,9 @@ First of all, we want to **thanks all of these AMAZING packages authors/contribu
 
 <!-- og:https://github.com/highlightjs/highlight.js/ -->
 
-<!-- og:https://github.com/Simonwep/pickr -->
-
-<!-- og:https://github.com/Pikaday/Pikaday -->
-
 <!-- og:https://github.com/lit/lit -->
 
 <!-- og:https://github.com/floating-ui/floating-ui -->
-
-<!-- og:https://github.com/sideway/joi -->
 
 <!-- og:https://github.com/axios/axios -->
 

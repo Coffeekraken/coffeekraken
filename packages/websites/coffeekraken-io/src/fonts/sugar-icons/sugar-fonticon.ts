@@ -37,6 +37,8 @@ export type SugarFonticonId =
   | "logo-nextjs-solid"
   | "logo-nextjs"
   | "logo-opensource"
+  | "logo-vite-solid"
+  | "logo-vite"
   | "misc-build-solid"
   | "misc-build"
   | "misc-eye"
@@ -109,6 +111,8 @@ export type SugarFonticonKey =
   | "LogoNextjsSolid"
   | "LogoNextjs"
   | "LogoOpensource"
+  | "LogoViteSolid"
+  | "LogoVite"
   | "MiscBuildSolid"
   | "MiscBuild"
   | "MiscEye"
@@ -181,6 +185,8 @@ export enum SugarFonticon {
   LogoNextjsSolid = "logo-nextjs-solid",
   LogoNextjs = "logo-nextjs",
   LogoOpensource = "logo-opensource",
+  LogoViteSolid = "logo-vite-solid",
+  LogoVite = "logo-vite",
   MiscBuildSolid = "misc-build-solid",
   MiscBuild = "misc-build",
   MiscEye = "misc-eye",
@@ -254,36 +260,38 @@ export const SUGAR_FONTICON_CODEPOINTS: { [key in SugarFonticon]: string } = {
   [SugarFonticon.LogoNextjsSolid]: "61732",
   [SugarFonticon.LogoNextjs]: "61733",
   [SugarFonticon.LogoOpensource]: "61734",
-  [SugarFonticon.MiscBuildSolid]: "61735",
-  [SugarFonticon.MiscBuild]: "61736",
-  [SugarFonticon.MiscEye]: "61737",
-  [SugarFonticon.MiscTools]: "61738",
-  [SugarFonticon.SupportChromium]: "61739",
-  [SugarFonticon.SupportEdge]: "61740",
-  [SugarFonticon.SupportFirefox]: "61741",
-  [SugarFonticon.SupportRtl]: "61742",
-  [SugarFonticon.SupportSafari]: "61743",
-  [SugarFonticon.ThemeColors]: "61744",
-  [SugarFonticon.Theme]: "61745",
-  [SugarFonticon.UiAlign]: "61746",
-  [SugarFonticon.UiAutocomplete]: "61747",
-  [SugarFonticon.UiAvatar]: "61748",
-  [SugarFonticon.UiButton]: "61749",
-  [SugarFonticon.UiCode]: "61750",
-  [SugarFonticon.UiCopy]: "61751",
-  [SugarFonticon.UiDatepicker]: "61752",
-  [SugarFonticon.UiDisplayPreview]: "61753",
-  [SugarFonticon.UiDropdown]: "61754",
-  [SugarFonticon.UiLinkBrokenSolid]: "61755",
-  [SugarFonticon.UiLinkBroken]: "61756",
-  [SugarFonticon.UiLoaderSolid]: "61757",
-  [SugarFonticon.UiLoader]: "61758",
-  [SugarFonticon.UiMoreSolid]: "61759",
-  [SugarFonticon.UiMore]: "61760",
-  [SugarFonticon.UiRange]: "61761",
-  [SugarFonticon.UiRefresh]: "61762",
-  [SugarFonticon.UiSwitch]: "61763",
-  [SugarFonticon.UiTooltip]: "61764",
-  [SugarFonticon.UiTypography]: "61765",
-  [SugarFonticon.Vue]: "61766",
+  [SugarFonticon.LogoViteSolid]: "61735",
+  [SugarFonticon.LogoVite]: "61736",
+  [SugarFonticon.MiscBuildSolid]: "61737",
+  [SugarFonticon.MiscBuild]: "61738",
+  [SugarFonticon.MiscEye]: "61739",
+  [SugarFonticon.MiscTools]: "61740",
+  [SugarFonticon.SupportChromium]: "61741",
+  [SugarFonticon.SupportEdge]: "61742",
+  [SugarFonticon.SupportFirefox]: "61743",
+  [SugarFonticon.SupportRtl]: "61744",
+  [SugarFonticon.SupportSafari]: "61745",
+  [SugarFonticon.ThemeColors]: "61746",
+  [SugarFonticon.Theme]: "61747",
+  [SugarFonticon.UiAlign]: "61748",
+  [SugarFonticon.UiAutocomplete]: "61749",
+  [SugarFonticon.UiAvatar]: "61750",
+  [SugarFonticon.UiButton]: "61751",
+  [SugarFonticon.UiCode]: "61752",
+  [SugarFonticon.UiCopy]: "61753",
+  [SugarFonticon.UiDatepicker]: "61754",
+  [SugarFonticon.UiDisplayPreview]: "61755",
+  [SugarFonticon.UiDropdown]: "61756",
+  [SugarFonticon.UiLinkBrokenSolid]: "61757",
+  [SugarFonticon.UiLinkBroken]: "61758",
+  [SugarFonticon.UiLoaderSolid]: "61759",
+  [SugarFonticon.UiLoader]: "61760",
+  [SugarFonticon.UiMoreSolid]: "61761",
+  [SugarFonticon.UiMore]: "61762",
+  [SugarFonticon.UiRange]: "61763",
+  [SugarFonticon.UiRefresh]: "61764",
+  [SugarFonticon.UiSwitch]: "61765",
+  [SugarFonticon.UiTooltip]: "61766",
+  [SugarFonticon.UiTypography]: "61767",
+  [SugarFonticon.Vue]: "61768",
 };

@@ -31,6 +31,11 @@
                     "scope": "package",
                     "description": "List either all the recipes available or particular recipe actions stack",
                     "process": "./dist/pkg/esm/cli/list.cli.js"
+                },
+                "add": {
+                    "scope": "package",
+                    "description": "Add some ingredient(s) to your project like \"frontspec\", \"favicon\", etc...",
+                    "process": "./dist/pkg/esm/cli/add.cli.js"
                 }
             }
         }

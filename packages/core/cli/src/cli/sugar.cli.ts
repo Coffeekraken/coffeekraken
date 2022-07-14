@@ -12,6 +12,7 @@ import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import '@coffeekraken/sugar/node/index';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
@@ -139,7 +140,7 @@ export default class SSugarCli {
             process.env.TREAT_AS_MAIN = false;
         }
 
-        this.packageJson = __SEnv.packageJson;
+        this.packageJson = __packageJsonSync();
 
         this.args = this._parseArgs(process.argv);
 
@@ -342,9 +343,8 @@ export default class SSugarCli {
     }
 
     static _getCliObj() {
-        const defaultStackAction = this._availableCli.defaultByStack[
-            this.args.stack
-        ];
+        const defaultStackAction =
+            this._availableCli.defaultByStack[this.args.stack];
 
         if (
             !this._availableCli.endpoints[
@@ -354,9 +354,10 @@ export default class SSugarCli {
             this._displayHelpAfterError();
             process.exit(0);
         }
-        let cliObj = this._availableCli.endpoints[
-            `${this.args.stack}.${this.args.action ?? defaultStackAction}`
-        ];
+        let cliObj =
+            this._availableCli.endpoints[
+                `${this.args.stack}.${this.args.action ?? defaultStackAction}`
+            ];
 
         return cliObj;
     }
@@ -539,20 +540,18 @@ export default class SSugarCli {
                         cliObj.defaultAction &&
                         action === cliObj.defaultAction
                     ) {
-                        this._availableCli.defaultByStack[
-                            cliObj.stack
-                        ] = action;
+                        this._availableCli.defaultByStack[cliObj.stack] =
+                            action;
                     }
 
-                    this._availableCli.endpoints[
-                        `${cliObj.stack}.${action}`
-                    ] = {
-                        packageJson,
-                        ...actionObj,
-                        processPath,
-                        command,
-                        interfacePath,
-                    };
+                    this._availableCli.endpoints[`${cliObj.stack}.${action}`] =
+                        {
+                            packageJson,
+                            ...actionObj,
+                            processPath,
+                            command,
+                            interfacePath,
+                        };
                 });
             });
         }
@@ -659,9 +658,10 @@ export default class SSugarCli {
         this._newStep();
 
         if (this.args.stack && this.args.action) {
-            const commandObj = this._availableCli.endpoints[
-                `${this.args.stack}.${this.args.action}`
-            ];
+            const commandObj =
+                this._availableCli.endpoints[
+                    `${this.args.stack}.${this.args.action}`
+                ];
 
             this.log(
                 ` Action <cyan>${this.args.stack}.${this.args.action}</cyan>`,
@@ -721,9 +721,8 @@ export default class SSugarCli {
 
             if (!sortedByStack[_stack]) sortedByStack[_stack] = {};
 
-            sortedByStack[_stack][_action] = this._availableCli.endpoints[
-                stackAction
-            ];
+            sortedByStack[_stack][_action] =
+                this._availableCli.endpoints[stackAction];
         });
 
         // this.log(

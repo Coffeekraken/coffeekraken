@@ -56,18 +56,6 @@
             }
         },
         {
-            "stack": "manifest",
-            "description": "Manifest related actions",
-            "defaultAction": "add",
-            "actions": {
-                "add": {
-                    "description": "Add the manifest.json file",
-                    "interface": "./dist/pkg/esm/node/add/interface/SCliAddManifestJsonParamsInterface.js",
-                    "process": "./dist/pkg/esm/cli/add/manifestJson.cli.js"
-                }
-            }
-        },
-        {
             "stack": "fs",
             "description": "Filesystem related actions",
             "defaultAction": "copy",

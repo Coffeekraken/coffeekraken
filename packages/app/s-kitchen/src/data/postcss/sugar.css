@@ -1,0 +1,11 @@
+/**
+ * Init sugar. This will import a reset css and print the
+ * needed variables
+ */
+@sugar.init();
+
+/**
+ * Generate some utility classes like "s-tc:accent, s-mb:30", etc...
+ * that depends on your theme configuration
+ */
+@sugar.classes();

@@ -28,16 +28,17 @@ export default class SMonorepoDevParamsInterface extends __SInterface {
                 alias: 'p',
             },
             build: {
-                description: 'Specify if you want to build your files like the .ts ones or not',
+                description:
+                    'Specify if you want to build your files like the .ts ones or not',
                 type: 'Boolean',
-                default: false,
-                alias: 'b'
+                default: true,
+                alias: 'b',
             },
             buildInitial: {
                 description:
                     'Specify if you want to build the files at launch before the watch process take care of the rest',
                 type: 'Boolean',
-                default: false
+                default: false,
             },
             test: {
                 description:
@@ -53,16 +54,18 @@ export default class SMonorepoDevParamsInterface extends __SInterface {
                 default: false,
             },
             format: {
-                description: 'Specify if you want to run the code formatter (SCodeFormatter) on your packages or not',
+                description:
+                    'Specify if you want to run the code formatter (SCodeFormatter) on your packages or not',
                 type: 'Boolean',
-                default: false,
+                default: true,
                 alias: 'f',
             },
             formatInitial: {
-                description: 'Specify if you want to format your files at launch before the watch process take care of the rest',
+                description:
+                    'Specify if you want to format your files at launch before the watch process take care of the rest',
                 type: 'Boolean',
-                default: false
-            }
+                default: false,
+            },
         };
     }
 }

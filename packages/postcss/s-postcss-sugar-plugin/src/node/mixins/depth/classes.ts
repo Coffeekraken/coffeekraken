@@ -107,7 +107,7 @@ export default function ({
                 * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any HTMLElement
                 * 
                 * @example        html
-                * <a class="s-btn s-btn--primary s-depth:${
+                * <a class="s-btn s-btn--accent s-depth:${
                     depthName === 'default' ? '' : depthName
                 }">I'm a cool depth button</a>
                 */
@@ -136,7 +136,7 @@ export default function ({
                 * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any text
                 * 
                 * @example        html
-                * <a class="s-btn s-btn--primary s-depth:text:${
+                * <a class="s-btn s-btn--accent s-depth:text:${
                     depthName === 'default' ? '' : depthName
                 }">I'm a cool depth button</a>
                 */

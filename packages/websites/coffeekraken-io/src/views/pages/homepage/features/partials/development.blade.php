@@ -36,8 +36,8 @@
                     you <span class="s-tc:accent">start as soom as possible</span> with production grade ready
                     capabilities.
                 </p>
-                <a class="s-btn s-color:accent" href="/@coffeekraken/cli/doc/readme" title="More on the Sugar CLI">
-                    Discover more about the Sugar CLI
+                <a class="s-btn s-color:accent" href="/doc/cli/overview" title="Discover more about the Coffeekraken Sugar CLI">
+                    More on Sugar CLI
                 </a>
             </div>
             <div>
@@ -66,8 +66,8 @@
                     experience as well as our powerfull <span class="s-typo:code">postcss</span> plugin to write nice
                     and maintainable css!
                 </p>
-                <a class="s-btn s-color:complementary" href="/@coffeekraken/sugar/doc/readme" title="More on Sugar">
-                    Discover more Sugar
+                <a class="s-btn s-color:complementary" href="/package/@coffeekraken/sugar/doc/readme" title="More on Coffeekraken Sugar">
+                    Discover more on Sugar
                 </a>
             </div>
             <div>
@@ -103,9 +103,9 @@
                     like <span class="s-typo:code">blade</span>, <span class="s-typo:code">twig</span>, and even
                     more to come...
                 </p>
-                <a class="s-btn s-color:accent" href="/@coffeekraken/s-frontend-server/doc/readme"
+                <a class="s-btn s-color:accent" href="/doc/servers/overview"
                     title="More on the Coffeekraken frontend server">
-                    Discover more on our frontend server
+                    More on our servers
                 </a>
             </div>
             <div>
@@ -121,10 +121,15 @@
         <div
             class="s-layout:123 s-gap:column:50 s-p:80 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0">
             <div class="@mobile s-mbe:50">
-                <h5 class="s-typo:h5 s-mbe:30">
-                    Under<br />
-                    <span class="s-tc:complementary">the hood</span>
-                </h5>
+                <div class="s-flex s-gap:30">
+                    <div>
+                        <i class="s-icon:computer s-font:90 s-opacity:30"></i>
+                    </div>
+                    <h5 class="s-typo:h5 s-mbe:30">
+                        Under<br />
+                        <span class="s-tc:complementary">the hood</span>
+                    </h5>
+                </div>
                 <p class="s-typo:p ">
                     Our development server strategy is to make use of <span class="s-typo:code">two different
                         servers</span>. See aside the explaination
@@ -132,10 +137,15 @@
                 </p>
             </div>
             <div class="@mobile s-mbe:50">
-                <h5 class="s-typo:h5 s-mbe:30">
-                    <span class="s-tc:accent">ViteJS</span><br />server
-                </h5>
-                <p class="s-typo:p ">
+                <div class="s-flex s-gap:30">
+                    <div>
+                        <i class="s-icon:logo-vite-solid s-font:90 s-opacity:30"></i>
+                    </div>
+                    <h5 class="s-typo:h5 s-mbe:30">
+                        <span class="s-tc:accent">ViteJS</span><br />server
+                    </h5>
+                </div>
+                <p class="s-typo:p">
                     The ViteJs development server is used for the <span class="s-typo:code">js/ts</span> and <span
                         class="s-typo:code">css</span> assets.
                     <br />
@@ -143,9 +153,14 @@
                 </p>
             </div>
             <div class="@mobile s-mbe:50">
-                <h5 class="s-typo:h5 s-mbe:30">
-                    <span class="s-tc:complementary">Internal</span><br />server
-                </h5>
+                <div class="s-flex s-gap:30">
+                    <div>
+                        <i class="s-icon:server s-font:90 s-opacity:30"></i>
+                    </div>
+                     <h5 class="s-typo:h5 s-mbe:30">
+                        <span class="s-tc:complementary">Internal</span><br />server
+                    </h5>
+                </div>
                 <p class="s-typo:p ">
                     Our internal server based on <span class="s-typo:code">Express</span> is used to serve all the
                     rest like <span class="s-typo:code">views</span> (blade and twig for now), static assets like

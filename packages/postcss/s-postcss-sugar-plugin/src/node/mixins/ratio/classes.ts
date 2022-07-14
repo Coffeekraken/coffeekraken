@@ -72,8 +72,10 @@ export default function ({
         * 
         ${Object.keys(ratioObj)
             .map((ratioName) => {
-                return ` * @cssClass     s-ratio:${ratioName.replace('/', '-')}
-                }            Apply the ${ratioName} ratio`;
+                return ` * @cssClass     s-ratio:${ratioName.replace(
+                    '/',
+                    '-',
+                )}             Apply the ${ratioName} ratio`;
             })
             .join('\n')}
         * 

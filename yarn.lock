@@ -2431,8 +2431,9 @@ __metadata:
     "@coffeekraken/s-color": ^2.0.0
     "@coffeekraken/s-interface": ^2.0.0
     "@coffeekraken/s-lit-component": ^2.0.0
+    "@coffeekraken/s-postcss-sugar-plugin": "workspace:^"
     "@coffeekraken/s-theme": ^2.0.0
-    "@coffeekraken/sugar": ^2.0.0
+    "@coffeekraken/sugar": "workspace:^"
     "@floating-ui/dom": ^0.5.4
     "@simonwep/pickr": ^1.8.1
     lit: ^2.0.0-rc.3
@@ -2941,6 +2942,8 @@ __metadata:
     "@coffeekraken/cli": ^2.0.0
     "@coffeekraken/s-class": ^2.0.0
     "@coffeekraken/s-duration": ^2.0.0
+    "@coffeekraken/s-favicon-builder": ^2.0.0
+    "@coffeekraken/s-frontspec": ^2.0.0
     "@coffeekraken/s-images-builder": ^2.0.0
     "@coffeekraken/s-interface": ^2.0.0
     "@coffeekraken/s-log": ^2.0.0
@@ -3104,7 +3107,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-postcss-sugar-plugin@^2.0.0, @coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin":
+"@coffeekraken/s-postcss-sugar-plugin@^2.0.0, @coffeekraken/s-postcss-sugar-plugin@workspace:^, @coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin"
   dependencies:
@@ -3602,7 +3605,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/sugar@^2.0.0, @coffeekraken/sugar@workspace:packages/tools/sugar":
+"@coffeekraken/sugar@^2.0.0, @coffeekraken/sugar@workspace:^, @coffeekraken/sugar@workspace:packages/tools/sugar":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/sugar@workspace:packages/tools/sugar"
   dependencies:

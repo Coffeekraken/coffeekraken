@@ -7,10 +7,10 @@ class postcssSugarPluginColorMixinInterface extends __SInterface {
                 type: 'String',
                 required: true,
             },
-            primary: {
+            accent: {
                 type: 'String',
             },
-            secondary: {
+            complementary: {
                 type: 'String',
             },
         };
@@ -25,12 +25,12 @@ export { postcssSugarPluginColorMixinInterface as interface };
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to (re)map the "current", "primary" and "secondary" color to any other colors you want like "accent", "success, "etc...""
- * Note that is you don't specify any "primary" and "secondary" color, these once will be set to the passed "current" color.
+ * This mixin allows you to (re)map the "current", "accent" and "complementary" color to any other colors you want like "accent", "success, "etc...""
+ * Note that is you don't specify any "accent" and "complementary" color, these once will be set to the passed "current" color.
  *
  * @param       {String}        current             The new color you want for the "current" one
- * @param       {String}        [primary=null]             The new color you want for the "primary" one
- * @param       {String}        [secondary=null]             The new color you want for the "secondary" one
+ * @param       {String}        [accent=null]             The new color you want for the "accent" one
+ * @param       {String}        [complementary=null]             The new color you want for the "complementary" one
  * @return      {Css}                     The generated remap css
  *
  * @example        css
@@ -44,8 +44,8 @@ export { postcssSugarPluginColorMixinInterface as interface };
 
 export interface IPostcssSugarPluginColorParams {
     current: string;
-    primary?: string;
-    secondary?: string;
+    accent?: string;
+    complementary?: string;
 }
 
 export default function ({
@@ -61,8 +61,8 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginColorParams = {
         current: '',
-        primary: undefined,
-        secondary: undefined,
+        accent: undefined,
+        complementary: undefined,
         ...params,
     };
 
@@ -70,28 +70,26 @@ export default function ({
     //     throw new Error(
     //         `You cannot remap the "<yellow>current</yellow>" color to "<cyan>current</cyan>"...`,
     //     );
-    // if (finalParams.primary === 'primary')
+    // if (finalParams.accent === 'accent')
     //     throw new Error(
-    //         `You cannot remap the "<yellow>primary</yellow>" color to "<cyan>primary</cyan>"...`,
+    //         `You cannot remap the "<yellow>accent</yellow>" color to "<cyan>accent</cyan>"...`,
     //     );
-    // if (finalParams.secondary === 'secondary')
+    // if (finalParams.complementary === 'complementary')
     //     throw new Error(
-    //         `You cannot remap the "<yellow>secondary</yellow>" color to "<cyan>secondary</cyan>"...`,
+    //         `You cannot remap the "<yellow>complementary</yellow>" color to "<cyan>complementary</cyan>"...`,
     //     );
 
     const vars = new CssVars();
 
     vars.code(`@sugar.color.remap(current, ${finalParams.current})`);
 
-    if (finalParams.primary) {
-        vars.code(`@sugar.color.remap(primary, ${finalParams.primary});`);
-    } else {
-        vars.code(`@sugar.color.remap(primary, ${finalParams.current});`);
+    if (finalParams.accent) {
+        vars.code(`@sugar.color.remap(accent, ${finalParams.accent});`);
     }
-    if (finalParams.secondary) {
-        vars.code(`@sugar.color.remap(secondary, ${finalParams.secondary});`);
-    } else {
-        vars.code(`@sugar.color.remap(secondary, ${finalParams.current});`);
+    if (finalParams.complementary) {
+        vars.code(
+            `@sugar.color.remap(complementary, ${finalParams.complementary});`,
+        );
     }
 
     return vars;

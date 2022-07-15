@@ -887,7 +887,7 @@ class SKitchen extends __SClass {
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[${ingredientObj.id}]</yellow> "<yellow>${ingredientObj.id}</yellow>" ingredient addedd <green>successfully</green>!`,
+                        value: `<yellow>[${ingredientObj.id}]</yellow> Ingredient addedd <green>successfully</green>!`,
                     });
                 }
 

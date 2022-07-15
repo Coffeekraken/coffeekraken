@@ -97,6 +97,11 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         if (this.props.linksStateAttributes) __linksStateAttributes();
         // prevent scroll restoration
         if (this.props.preventScrollRestoration) __preventScrollRestoration();
+
+        // remove some classes like "initial-loading", etc...
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.remove('initial-loading');
+        });
     }
     _clearTransmationsOnResizeTimeout;
     _isResizing = false;

@@ -2,7 +2,7 @@
  * Init sugar. This will import a reset css and print the
  * needed variables
  */
-@sugar.init();
+@sugar.init ($variant: 'dark');
 
 /**
  * Generate some utility classes like "s-tc:accent, s-mb:30", etc...

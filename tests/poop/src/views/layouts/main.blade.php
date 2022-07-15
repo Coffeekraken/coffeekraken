@@ -1,7 +1,8 @@
 @extends('coffeekraken.layouts.main', [
     'bodyAttributes' => [
         'id' => ($request->path != '/' and $request->path != '') ? \Sugar\string\idCompliant($request->path) : 'homepage',
-        's-sugar' => true
+        's-sugar' => true,
+        'class' => 'initial-loading'
     ]
 ])
 @section('title', $title)

@@ -38,7 +38,7 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 description: 'Specify when your component will be mounted',
                 type: 'String',
                 values: triggers,
-                default: 'direct',
+                default: 'nearViewport',
             },
             adoptStyle: {
                 description:

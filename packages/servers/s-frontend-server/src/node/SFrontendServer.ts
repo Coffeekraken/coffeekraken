@@ -10,18 +10,15 @@ import __express from 'express';
 import __fs from 'fs';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import __path from 'path';
-import __SFrontendServerAddDefaultPagesParamsInterface from './interface/SFrontendServerAddDefaultPagesParamsInterface';
 import __SFrontendServerCorsProxyParamsInterface from './interface/SFrontendServerCorsProxyParamsInterface';
 import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface';
 // import __vhost from 'vhost';
 import __SDuration from '@coffeekraken/s-duration';
 import __SGlob from '@coffeekraken/s-glob';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
-import __recursiveCopy from 'recursive-copy';
 import __runMiddleware from 'run-middleware';
 
 import __viewRendererMiddleware from './middleware/viewRendererMiddleware';
@@ -491,85 +488,6 @@ export default class SFrontendServer extends __SClass {
     }
 
     /**
-     * @name        addDefaultPages
-     * @type           Function
-     * @async
-     *
-     * This method will add some default pages to your project with the pages configuration in the "src/pages" folder.
-     *
-     * @since       2.0.0
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    addDefaultPages(
-        params: Partial<ISFrontendServerStartParams> | string,
-    ): Promise<any> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const finalParams: ISFrontendServerAddDefaultPagesParams =
-                    __SFrontendServerAddDefaultPagesParamsInterface.apply(
-                        params,
-                    );
-
-                // adding default pages/views
-                emit('log', {
-                    value: `<yellow>[add]</yellow> Adding default pages to your project...`,
-                });
-
-                if (!finalParams.yes) {
-                    if (
-                        !(await emit('ask', {
-                            type: 'confirm',
-                            message:
-                                'This process will override your current pages/views if some already exists and match with the default pages/views that will be added. Are you ok with that?',
-                            default: true,
-                        }))
-                    ) {
-                        return resolve();
-                    }
-                }
-
-                // source views folder path
-                const sourceViewsFolderPath = __path.resolve(
-                    __path.resolve(__packageRoot(__dirname())),
-                    'src/data/defaultPages/views',
-                );
-                // source pages folder path
-                const sourcePagesFolderPath = __path.resolve(
-                    __path.resolve(__packageRoot(__dirname())),
-                    'src/data/defaultPages/pages',
-                );
-
-                const pagesResult = await __recursiveCopy(
-                    sourcePagesFolderPath,
-                    finalParams.pagesDir,
-                    {
-                        overwrite: true,
-                    },
-                );
-                const viewsResult = await __recursiveCopy(
-                    sourceViewsFolderPath,
-                    finalParams.viewsDir,
-                    {
-                        overwrite: true,
-                    },
-                );
-
-                // adding default pages/views
-                emit('log', {
-                    value: `<green>[add]</green> Default pages added <green>successfully</green>`,
-                });
-
-                resolve();
-            },
-            {
-                eventEmitter: {
-                    bind: this,
-                },
-            },
-        );
-    }
-
-    /**
      * Get the handler function for the given handler name or directly a path
      */
     async _getHandlerFn(handlerNameOrPath: string) {
@@ -598,14 +516,25 @@ export default class SFrontendServer extends __SClass {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             const pagesFolder = __SSugarConfig.get('storage.src.pagesDir');
 
-            const pagesFiles = __SGlob
-                .resolve(`**/*.js`, {
-                    cwd: pagesFolder,
-                })
-                .filter((file) => {
-                    if (file.name.split('.').length > 2) return false;
-                    return true;
-                });
+            let pagesFiles = __SGlob.resolve(`**/*.{ts,js}`, {
+                cwd: pagesFolder,
+            });
+            const pagesFilesPaths = pagesFiles.map((f) => f.path);
+            pagesFiles = pagesFiles.filter((file) => {
+                if (file.name.split('.').length > 2) return false;
+
+                // remove js files if the .ts equivalent exists
+                if (
+                    file.extension === 'js' &&
+                    pagesFilesPaths.includes(
+                        `${file.path.replace(/\.js$/, '.ts')}`,
+                    )
+                ) {
+                    return false;
+                }
+
+                return true;
+            });
 
             let _404PageFile;
 
@@ -615,14 +544,41 @@ export default class SFrontendServer extends __SClass {
                     _404PageFile = pageFile;
                     continue;
                 }
+
+                // build final path. If is a typescript,
+                // it will be transpiled and override the default
+                let finalPagePath = pageFile.path,
+                    buildedFileRes;
+
+                // compile typescript if needed
+                if (pageFile.extension === 'ts') {
+                    buildedFileRes = await __STypescriptBuilder.buildTemporary(
+                        finalPagePath,
+                    );
+                    finalPagePath = buildedFileRes.path;
+                }
+
                 // @ts-ignore
-                const { default: pageConfig } = await import(pageFile.path);
+                const { default: pageConfig } = await import(finalPagePath);
+                buildedFileRes?.remove?.();
                 await pipe(this._registerPageConfig(pageConfig, pageFile));
             }
 
             if (_404PageFile) {
+                let _404BuildedFileRes,
+                    final404PagePath = _404PageFile.path;
+                // compile typescript if needed
+                if (_404PageFile.extension === 'ts') {
+                    _404BuildedFileRes =
+                        await __STypescriptBuilder.buildTemporary(
+                            final404PagePath,
+                        );
+                    final404PagePath = _404BuildedFileRes.path;
+                }
+
                 // @ts-ignore
-                const { default: pageConfig } = await import(_404PageFile.path);
+                const { default: pageConfig } = await import(final404PagePath);
+                _404BuildedFileRes?.remove?.();
                 await pipe(this._registerPageConfig(pageConfig, _404PageFile));
             }
 

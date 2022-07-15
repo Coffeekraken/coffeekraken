@@ -143,6 +143,7 @@ export default class STypescriptBuilder extends __SBuilder {
         return new Promise(async (resolve, reject) => {
             if (path.match(/\.ts$/)) {
                 const builder = new STypescriptBuilder(settings ?? {});
+
                 // @ts-ignore
                 const res = await builder.build({
                     inDir: __path.dirname(path),
@@ -151,6 +152,7 @@ export default class STypescriptBuilder extends __SBuilder {
                     formats: ['esm'],
                     ...(params ?? {}),
                 });
+
                 resolve({
                     path: res.files[0].file.path,
                     remove() {

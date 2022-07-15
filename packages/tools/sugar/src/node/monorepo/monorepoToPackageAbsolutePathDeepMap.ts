@@ -7,7 +7,7 @@ import __monorepoToPackageAbsolutePath from './monorepoToPackageAbsolutePath';
  * @type            Function
  * @static
  *
- * This static method allows you to make the passed path absolute to the package root passed.
+ * This method allows you to make the passed path absolute to the package root passed.
  * This uses the `monorepoToPackageAbsolutePath` method to make all the paths in the passed object
  * absolute to the package root path.
  *

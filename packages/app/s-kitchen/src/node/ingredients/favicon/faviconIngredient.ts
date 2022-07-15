@@ -1,4 +1,3 @@
-import __SLog from '@coffeekraken/s-log';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
@@ -19,12 +18,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const faviconIngredient: ISKitchenIngredient = {
     id: 'favicon',
+    projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit }) {
-        emit('log', {
-            type: __SLog.TYPE_INFO,
-            value: `<yellow>[favicon]</yellow> Adding default <cyan>favicon.png</cyan> file...`,
-        });
-
         // source file path
         const sourceFilePath = __path.resolve(
             __packageRoot(__dirname()),
@@ -35,11 +30,6 @@ const faviconIngredient: ISKitchenIngredient = {
 
         // copy the file to his destination
         __copySync(sourceFilePath, output);
-
-        emit('log', {
-            type: __SLog.TYPE_INFO,
-            value: `<green>[favicon]</green> Default <cyan>favicon.png</cyan> file addedd <green>successfully</green>`,
-        });
 
         return true;
     },

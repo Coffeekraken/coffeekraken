@@ -1,0 +1,36 @@
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          wip
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{{#> layout-readme }}
+
+## @coffeekraken/sugar
+
+My cool description
+
+## Features
+
+-   What is my package capable of...
+
+## Usage
+
+How to make use of it...
+
+> It's a good practice to add some examples like so:
+
+```js
+import __myCoolPackage from '@coffeekraken/my-cool-package';
+// etc...
+```
+
+{{/ layout-readme }}

@@ -14,6 +14,8 @@ import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
 import __import from '@coffeekraken/sugar/node/esm/import';
 import __sharedContext from '@coffeekraken/sugar/node/process/sharedContext';
+import type { IDetectTypeResult } from '@coffeekraken/sugar/node/project/detectType';
+import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
@@ -23,6 +25,9 @@ import __SKitchenListParamsInterface from './interface/SKitchenListParamsInterfa
 import __SFronstackNewParamsInterface from './interface/SKitchenNewParamsInterface';
 import __SKitchenRecipeParamsInterface from './interface/SKitchenRecipeParamsInterface';
 
+import __defaultPackageJsonIngredient from './ingredients/defaultPackageJson/defaultPackageJsonIngredient';
+import __defaultPagesIngredient from './ingredients/defaultPages/defaultPagesIngredient';
+import __defaultScriptsIngredient from './ingredients/defaultScripts/defaultScriptsIngredient';
 import __faviconIngredient from './ingredients/favicon/faviconIngredient';
 import __frontspecIngredient from './ingredients/frontspec/frontspecIngredient';
 import __manifestIngredient from './ingredients/manifest/manifestIngredient';
@@ -40,16 +45,23 @@ export interface ISKitchenRecipesettings {
     processManager: Partial<ISProcessManagerProcessSettings>;
 }
 
+export interface ISKitchenIngredientContext {
+    recipe?: string;
+    projectType: IDetectTypeResult;
+    new: boolean;
+}
+
 export interface ISKitchenIngredientAddApi {
     ask(askObj: ISLogAsk): Promise<any>;
     log(message: string): void;
     emit(type: 'log' | 'ask', what: any): void;
     pipe: Function;
-    context: any;
+    context: ISKitchenIngredientContext;
 }
 
 export interface ISKitchenIngredient {
     id: string;
+    projectTypes: string[];
     add(api: ISKitchenIngredientAddApi): Promise<any>;
 }
 
@@ -822,6 +834,41 @@ class SKitchen extends __SClass {
 
                     const ingredientObj = SKitchen._registeredIngredients[id];
 
+                    let context = {
+                        ...__sharedContext(),
+                        projectType: __detectProjectType(),
+                    };
+
+                    // check project type compatibility
+                    if (
+                        !ingredientObj.projectTypes.includes('*') &&
+                        !ingredientObj.projectTypes.includes(
+                            context.projectType.type,
+                        )
+                    ) {
+                        emit('log', {
+                            type: __SLog.TYPE_WARNING,
+                            value: `<magenta>[${ingredientObj.id}]</magenta> The "<yellow>${ingredientObj.id}</yellow>" is not compatible with your project type "<cyan>${context.projectType.type}</cyan>"`,
+                        });
+                    }
+
+                    // check if the process is a "new" installation one or
+                    // the add process has been called after the installation
+                    context.new = context.recipe !== undefined;
+
+                    // make sure we have a recipe
+                    if (!context.recipe) {
+                        const sugarJson = new __SSugarJson().current();
+                        if (sugarJson.recipe) {
+                            context.recipe = sugarJson.recipe;
+                        }
+                    }
+
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[${ingredientObj.id}]</yellow> Adding the "<yellow>${ingredientObj.id}</yellow>" ingredient to your "<cyan>${context.projectType.type}</cyan>" project...`,
+                    });
+
                     await ingredientObj.add({
                         ask(askObj: ISLogAsk) {
                             return emit('ask', askObj);
@@ -835,7 +882,12 @@ class SKitchen extends __SClass {
                             return pipe(...args);
                         },
                         emit,
-                        context: __sharedContext(),
+                        context,
+                    });
+
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[${ingredientObj.id}]</yellow> "<yellow>${ingredientObj.id}</yellow>" ingredient addedd <green>successfully</green>!`,
                     });
                 }
 
@@ -858,5 +910,8 @@ SKitchen.registerIngredient(__faviconIngredient);
 SKitchen.registerIngredient(__postcssIngredient);
 SKitchen.registerIngredient(__sugarIngredient);
 SKitchen.registerIngredient(__readmeIngredient);
+SKitchen.registerIngredient(__defaultPagesIngredient);
+SKitchen.registerIngredient(__defaultPackageJsonIngredient);
+SKitchen.registerIngredient(__defaultScriptsIngredient);
 
 export default SKitchen;

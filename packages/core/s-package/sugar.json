@@ -45,8 +45,8 @@
                 "applyDefaultPackageJson": {
                     "scope": "global",
                     "description": "Applying the default package json defined in the config.package.defaultPackageJson to the current package.json file",
-                    "interface": "./dist/pkg/esm/node/interface/SPackageAddDefaultScriptsParamsInterface.js",
-                    "process": "./dist/pkg/esm/cli/addDefaultScripts.cli.js"
+                    "interface": "./dist/pkg/esm/node/interface/SPackageApplyDefaultPackageJsonParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/applyDefaultPackageJson.cli.js"
                 }
             }
         }

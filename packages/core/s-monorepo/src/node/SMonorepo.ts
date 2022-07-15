@@ -8,6 +8,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __SVite from '@coffeekraken/s-vite';
+import __copy from '@coffeekraken/sugar/node/clipboard/copy';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
@@ -21,6 +22,7 @@ import __SMonorepoDevParamsInterface from './interface/SMonorepoDevParamsInterfa
 import __SMonorepoListParamsInteface from './interface/SMonorepoListParamsInterface';
 import __SMonorepoRunParamsInterface from './interface/SMonorepoRunParamsInterface';
 import __SMonorepoSettingsInterface from './interface/SMonorepoSettingsInterface';
+import __SMonorepoUpgradeParamsInterface from './interface/SMonorepoUpgradeParamsInterface';
 
 /**
  * @name                SMonorepo
@@ -70,6 +72,7 @@ export interface ISMonorepoRunResult {}
 
 export interface ISMonorepoListParams {
     packagesGlob: string;
+    json: boolean;
 }
 export interface ISMonorepoListResult {
     name: string;
@@ -151,7 +154,7 @@ export default class SMonorepo extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    run(params: ISMonorepoRunParams): Promise<ISMonorepoRunResult> {
+    run(params: Partial<ISMonorepoRunParams>): Promise<ISMonorepoRunResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
@@ -257,7 +260,9 @@ export default class SMonorepo extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    list(params: ISMonorepoListParams): Promise<ISMonorepoListResult[]> {
+    list(
+        params: Partial<ISMonorepoListParams>,
+    ): Promise<ISMonorepoListResult[]> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
@@ -265,6 +270,7 @@ export default class SMonorepo extends __SClass {
                     __SMonorepoListParamsInteface.apply(params);
 
                 const result: ISMonorepoListResult[] = [];
+                const jsonResult: Record<string, string> = {};
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
@@ -275,14 +281,12 @@ export default class SMonorepo extends __SClass {
                     `${this.monorepoSettings.rootDir}/package.json`,
                 );
 
-                let finalPackagesGlob = finalParams.packagesGlob;
-                if (!finalPackagesGlob.match(/package\.json$/)) {
-                    finalPackagesGlob += '/package.json';
-                }
-
-                const files = __SGlob.resolve(finalPackagesGlob, {
-                    cwd: this.monorepoSettings.rootDir,
-                });
+                const files = __SGlob.resolve(
+                    `${finalParams.packagesGlob}/package.json`,
+                    {
+                        cwd: this.monorepoSettings.rootDir,
+                    },
+                );
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
@@ -306,23 +310,36 @@ export default class SMonorepo extends __SClass {
                         path: __path.dirname(file.path),
                     });
 
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>${
-                            name ?? file.relPath.split('/').pop()
-                        }</yellow> (<${
-                            version === rootPackageJson.version
-                                ? 'green'
-                                : 'red'
-                        }>${version}</${
-                            version === rootPackageJson.version
-                                ? 'green'
-                                : 'red'
-                        }>) <cyan>${file.relPath}</cyan>`,
-                    });
+                    jsonResult[name] = `^${version}`;
+
+                    if (!finalParams.json) {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>${
+                                name ?? file.relPath.split('/').pop()
+                            }</yellow> (<${
+                                version === rootPackageJson.version
+                                    ? 'green'
+                                    : 'red'
+                            }>${version}</${
+                                version === rootPackageJson.version
+                                    ? 'green'
+                                    : 'red'
+                            }>) <cyan>${file.relPath}</cyan>`,
+                        });
+                    }
                 });
 
-                resolve(result);
+                if (finalParams.json) {
+                    const jsonStr = JSON.stringify(jsonResult, null, 4);
+                    __copy(jsonStr);
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<green>[list]</green> JSON copied into your clipboard`,
+                    });
+                }
+
+                resolve(finalParams.json ? jsonResult : result);
             },
             {
                 metas: {
@@ -346,7 +363,7 @@ export default class SMonorepo extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    dev(params: ISMonorepoDevParams): Promise<ISMonorepoListResult[]> {
+    dev(params: Partial<ISMonorepoDevParams>): Promise<ISMonorepoListResult[]> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
@@ -365,7 +382,9 @@ export default class SMonorepo extends __SClass {
                     return resolve();
                 }
 
-                const packages = await this.list(finalParams);
+                const packages = await this.list({
+                    packagesGlob: finalParams.packagesGlob,
+                });
                 const srcRelDir = __path.relative(
                         this.monorepoSettings.rootDir,
                         __SSugarConfig.get('typescriptBuilder.inDir'),
@@ -484,7 +503,7 @@ export default class SMonorepo extends __SClass {
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
                 const finalParams: ISMonorepoUpgradeParams =
-                    __SMonorepoListParamsInteface.apply(params);
+                    __SMonorepoUpgradeParamsInterface.apply(params);
 
                 const result: Record<string, ISMonorepoUpgradeResult> = {};
 
@@ -497,8 +516,17 @@ export default class SMonorepo extends __SClass {
                     `${this.monorepoSettings.rootDir}/package.json`,
                 );
 
-                const files = __SGlob.resolve(finalParams.packagesGlob, {
-                    cwd: this.monorepoSettings.rootDir,
+                const files = __SGlob.resolve(
+                    `${finalParams.packagesGlob}/package.json`,
+                    {
+                        cwd: this.monorepoSettings.rootDir,
+                    },
+                );
+
+                // get the packages as json list
+                const packagesListJson = await this.list({
+                    packagesGlob: finalParams.packagesGlob,
+                    json: true,
                 });
 
                 emit('log', {
@@ -538,10 +566,61 @@ export default class SMonorepo extends __SClass {
                             json[field] = rootPackageJson[field];
                         });
 
+                        const packageNameColor = json.mainSugarEntryPackage
+                            ? 'magenta'
+                            : 'yellow';
+
+                        // check if is a mainSugarEntryPoint
+                        // if true, add all the monorepo packages as dependencies
+                        if (json.mainSugarEntryPackage) {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<${packageNameColor}>${json.name}</${packageNameColor}> Treat this package as a <magenta>main sugar entry</magenta> one.`,
+                            });
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<${packageNameColor}>${json.name}</${packageNameColor}> Adding all the monorepo packages as dependencies.`,
+                            });
+                            json.dependencies = {
+                                ...(json.dependencies ?? {}),
+                                ...(packagesListJson ?? {}),
+                            };
+                            // delete current package name
+                            delete json.dependencies[json.name];
+                        }
+
+                        function updateDependencies(obj) {
+                            // updating dependencies versions
+                            for (let [
+                                packageName,
+                                packageVersion,
+                            ] of Object.entries(obj)) {
+                                if (
+                                    packageName.startsWith(
+                                        `${
+                                            rootPackageJson?.name?.split?.(
+                                                '/',
+                                            )[0]
+                                        }/`,
+                                    )
+                                ) {
+                                    obj[
+                                        packageName
+                                    ] = `^${rootPackageJson.version}`;
+                                }
+                            }
+                            return obj;
+                        }
+
+                        json.dependencies &&
+                            updateDependencies(json.dependencies);
+                        json.devDependencies &&
+                            updateDependencies(json.devDependencies);
+
                         __writeJsonSync(filePath, json);
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<green>✓</green> <yellow>${json.name}</yellow> <cyan>${fileName}</cyan> upgraded <green>successfully</green>`,
+                            value: `<green>✓</green> <${packageNameColor}>${json.name}</${packageNameColor}> <cyan>${fileName}</cyan> upgraded <green>successfully</green>`,
                         });
                     });
                 });

@@ -20,6 +20,7 @@ import __path from 'path';
  */
 const readmeIngredient: ISKitchenIngredient = {
     id: 'readme',
+    projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit }) {
         const input = __SSugarConfig.get('readme.input'),
             output = __SSugarConfig.get('readme.output');
@@ -35,11 +36,6 @@ const readmeIngredient: ISKitchenIngredient = {
         ) {
             return false;
         }
-
-        // Adding README
-        emit('log', {
-            value: `<yellow>[readme]</yellow> Adding the <cyan>README.md</cyan> file to the package`,
-        });
 
         const sourceReadmePath = __path.resolve(
             __packageRoot(__dirname()),
@@ -62,7 +58,10 @@ const readmeIngredient: ISKitchenIngredient = {
         // });
 
         emit('log', {
-            value: `<green>[readme]</green> <cyan>README.md</cyan> added <green>successfully</green> under "<cyan>${input}</cyan>"`,
+            value: `<green>[readme]</green> <cyan>${__path.relative(
+                __packageRoot(),
+                input,
+            )}</cyan> added <green>successfully</green>`,
         });
 
         return true;

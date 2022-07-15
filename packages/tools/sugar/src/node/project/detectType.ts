@@ -44,8 +44,32 @@ export default function detectType(cwd = process.cwd()): IDetectTypeResult {
             fix: parseInt(version.split('.')[2]),
         };
     }
+
+    // detect sugar projects
+    if (__fs.existsSync(`${cwd}/sugar.json`)) {
+        let sugarVersion;
+        for (let [packageName, version] of Object.entries(
+            packageJson.dependencies,
+        )) {
+            if (packageName.match(/^@coffeekraken\//)) {
+                sugarVersion = version;
+                break;
+            }
+        }
+        if (sugarVersion) {
+            return {
+                type: 'sugar',
+                version: sugarVersion,
+                rawVersion: packageJson.dependencies.next,
+                major: parseInt(sugarVersion.split('.')[0]),
+                minor: parseInt(sugarVersion.split('.')[1]),
+                fix: parseInt(sugarVersion.split('.')[2]),
+            };
+        }
+    }
+
     return {
-        type: 'generic',
+        type: 'unknown',
         version: '1.0.0',
         rawVersion: '1.0.0',
         major: 1,

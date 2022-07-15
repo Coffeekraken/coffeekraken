@@ -274,47 +274,6 @@ export default function (env, config) {
                 params: {},
                 settings: {},
             },
-            applyDefaultPackageJson: {
-                /**
-                 * @name            title
-                 * @namespace       config.kitchen.actions.applyDefaultPackageJson
-                 * @type            String
-                 * @default        Adding manifest.json file
-                 *
-                 * Apply the config.package.defaultPackageJson object on the package.json file
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                title: 'Apply default package.json',
-                /**
-                 * @name            description
-                 * @namespace       config.kitchen.actions.applyDefaultPackageJson
-                 * @type            String
-                 * @default        ...
-                 *
-                 * Apply the config.package.defaultPackageJson object on the package.json file
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                description:
-                    'Apply the config.package.defaultPackageJson object on the package.json file',
-                /**
-                 * @name            command
-                 * @namespace       config.kitchen.actions.applyDefaultPackageJson
-                 * @type            String
-                 * @default        sugar
-                 *
-                 * Apply the config.package.defaultPackageJson object on the package.json file
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                command: `sugar add.applyDefaultPackageJson [arguments]`,
-                params: {},
-                settings: {},
-            },
             addFavicon: {
                 /**
                  * @name            title
@@ -432,7 +391,87 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: `sugar frontendServer.addDefaultPages -y [arguments]`,
+                command: `sugar kitchen.add defaultPages [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addDefaultScripts: {
+                /**
+                 * @name            title
+                 * @namespace       config.kitchen.actions.addDefaultScripts
+                 * @type            String
+                 * @default        Adding manifest.json file
+                 *
+                 * Add the script files
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Adding default script files',
+                /**
+                 * @name            description
+                 * @namespace       config.kitchen.actions.addDefaultScripts
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the kitchen addDefaultScripts action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Adding some default scripts to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.kitchen.actions.addDefaultScripts
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the kitchen addDefaultScripts action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar kitchen.add defaultScripts [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addDefaultPackageJson: {
+                /**
+                 * @name            title
+                 * @namespace       config.kitchen.actions.addDefaultPackageJson
+                 * @type            String
+                 * @default        Adding manifest.json file
+                 *
+                 * Add/merge default package.json defined in config.package.defaultPackageJson
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Adding default package.json file',
+                /**
+                 * @name            description
+                 * @namespace       config.kitchen.actions.addDefaultPackageJson
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the kitchen addDefaultPackageJson action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Adding default package.json to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.kitchen.actions.addDefaultPackageJson
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the kitchen addDefaultPackageJson action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar kitchen.add defaultPackageJson [arguments]`,
                 params: {},
                 settings: {},
             },
@@ -472,7 +511,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                command: `sugar postcss.add [arguments]`,
+                command: `sugar kitchen.add postcss [arguments]`,
                 params: {},
                 settings: {},
             },

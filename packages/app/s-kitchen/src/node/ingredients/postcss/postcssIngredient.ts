@@ -1,13 +1,12 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __npmInstall from '@coffeekraken/sugar/node/npm/install';
-import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
 
 import __pickOne from '@coffeekraken/sugar/node/fs/pickOne';
 
@@ -24,8 +23,14 @@ import __pickOne from '@coffeekraken/sugar/node/fs/pickOne';
  */
 const postcssIngredient: ISKitchenIngredient = {
     id: 'postcss',
-    async add({ ask, log, emit, pipe }) {
+    projectTypes: ['unknown', 'sugar', 'next'],
+    async add({ ask, log, emit, pipe, context }) {
         const packageRoot = __packageRoot();
+
+        const sKitchenPackageRoot = __packageRoot(__dirname());
+        const sKitchenPackageJson = __readJsonSync(
+            `${sKitchenPackageRoot}/package.json`,
+        );
 
         let currentConfig = {};
 
@@ -95,13 +100,18 @@ const postcssIngredient: ISKitchenIngredient = {
         emit('log', {
             value: `<yellow>[postcss]</yellow> Installing the actual <cyan>@coffeekraken/s-postcss-sugar-plugin</cyan>...`,
         });
-        try {
-            await pipe(__npmInstall('@coffeekraken/s-postcss-sugar-plugin'));
-        } catch (e) {
-            emit('log', {
-                value: `<red>[postcss]</red> Something went wrong when installing the @coffeekraken/s-postcss-sugar-plugin package. Please try to install it manually.`,
-            });
-        }
+        const packageJson = __readJsonSync(`${packageRoot}/package.json`);
+        packageJson.dependencies[
+            '@coffeekraken/s-postcss-sugar-plugin'
+        ] = `^${sKitchenPackageJson.version}`;
+        __writeJsonSync(`${packageRoot}/package.json`, packageJson);
+        // try {
+        //     await pipe(__npmInstall('@coffeekraken/s-postcss-sugar-plugin'));
+        // } catch (e) {
+        //     emit('log', {
+        //         value: `<red>[postcss]</red> Something went wrong when installing the @coffeekraken/s-postcss-sugar-plugin package. Please try to install it manually.`,
+        //     });
+        // }
 
         // saving new config
         emit('log', {
@@ -136,7 +146,7 @@ const postcssIngredient: ISKitchenIngredient = {
 
         let globalCss;
 
-        switch (__detectProjectType().type) {
+        switch (context.projectType.type) {
             case 'next':
                 emit('log', {
                     value: '<yellow>postcss</yellow> <cyan>Nextjs</cyan> project detected. Adding sugar css files...',

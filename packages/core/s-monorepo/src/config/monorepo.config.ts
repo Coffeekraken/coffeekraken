@@ -19,9 +19,12 @@ export default function (env, config) {
          * @name        packagesGlob
          * @namespace   config.monorepo
          * @type       string
-         * @default     packages/* / *
+         * @default     packages/(!@)* /*
          *
-         * Specify some globs to search for packages relative to the monorepo root directory
+         * Specify some globs to search for packages relative to the monorepo root directory.
+         * !!! target folders and not a package.json file, etc...
+         * The "packages/@..." folders are excluded cause they have as goal to store the none-distributed
+         * "projects".
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

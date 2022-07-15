@@ -18,12 +18,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const frontspecIngredient: ISKitchenIngredient = {
     id: 'frontspec',
+    projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit }) {
-        emit('log', {
-            type: __SLog.TYPE_INFO,
-            value: `<yellow>[frontspec]</yellow> Adding default <cyan>frontspec.json</cyan> file...`,
-        });
-
         const frontspecPath = `${__packageRoot()}/frontspec.json`;
         const sourceJsonPath = __path.resolve(
             __packageRoot(__dirname()),

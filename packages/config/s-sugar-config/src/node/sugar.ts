@@ -58,6 +58,7 @@ export interface ISSugarConfigSettings {
     env: 'development' | 'production' | 'test';
     platform: 'node' | 'browser';
     cache: boolean;
+    clean: boolean;
 }
 
 export default class SSugarConfig extends __SClass {
@@ -198,53 +199,61 @@ export default class SSugarConfig extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _loadPromise;
+    static _loadPromises = {};
     static load(
         settings?: Partial<ISSugarConfigSettings>,
     ): ISSugarConfigLoadedObj {
-        // singleton promise
-        if (this._loadPromise) {
-            return this._loadPromise;
-        }
-
         const finalSettings: ISSugarConfigSettings = __deepMerge(
             {
                 id: 'default',
                 env: process.env.NODE_ENV,
                 platform: 'node',
                 cache: true,
+                clean: false,
             },
             settings ?? {},
         );
 
-        this._loadPromise = new Promise(async (resolve, reject) => {
-            if (this._sSugarConfigInstances[finalSettings.id]) {
-                return resolve({
+        // singleton promise
+        if (SSugarConfig._loadPromises[finalSettings.id]) {
+            return SSugarConfig._loadPromises[finalSettings.id];
+        }
+
+        SSugarConfig._loadPromises[finalSettings.id] = new Promise(
+            async (resolve, reject) => {
+                if (SSugarConfig._sSugarConfigInstances[finalSettings.id]) {
+                    return resolve({
+                        id: finalSettings.id,
+                        config: SSugarConfig._sSugarConfigInstances[
+                            finalSettings.id
+                        ].get('.'),
+                        instance:
+                            SSugarConfig._sSugarConfigInstances[
+                                finalSettings.id
+                            ],
+                    });
+                }
+
+                SSugarConfig._sSugarConfigInstances[finalSettings.id] =
+                    new SSugarConfig({
+                        metas: {
+                            id: finalSettings.id,
+                        },
+                        sugarConfig: finalSettings ?? {},
+                    });
+                const config = await SSugarConfig._sSugarConfigInstances[
+                    finalSettings.id
+                ]._load(finalSettings);
+                resolve({
                     id: finalSettings.id,
-                    config: this._sSugarConfigInstances[finalSettings.id].get(
-                        '.',
-                    ),
-                    instance: this._sSugarConfigInstances[finalSettings.id],
+                    config,
+                    instance:
+                        SSugarConfig._sSugarConfigInstances[finalSettings.id],
                 });
-            }
+            },
+        );
 
-            this._sSugarConfigInstances[finalSettings.id] = new SSugarConfig({
-                metas: {
-                    id: finalSettings.id,
-                },
-                sugarConfig: finalSettings ?? {},
-            });
-            const config = await SSugarConfig._sSugarConfigInstances[
-                finalSettings.id
-            ]._load(finalSettings);
-            resolve({
-                id: finalSettings.id,
-                config,
-                instance: SSugarConfig._sSugarConfigInstances[finalSettings.id],
-            });
-        });
-
-        return SSugarConfig._loadPromise;
+        return SSugarConfig._loadPromises[finalSettings.id];
     }
 
     /**
@@ -693,7 +702,9 @@ export default class SSugarConfig extends __SClass {
             ],
         });
 
-        const res = await this._configInstance.load({});
+        const res = await this._configInstance.load({
+            clean: settings.clean,
+        });
 
         return res;
     }

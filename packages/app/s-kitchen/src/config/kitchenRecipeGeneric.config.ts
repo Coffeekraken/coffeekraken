@@ -135,19 +135,18 @@ export default function (env, config) {
                         params: {},
                     },
                     /**
-                     * @name            rename
+                     * @name            addDefaultPackageJson
                      * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
-                     * Specify the recipe init stack applyDefaultPackageJson action
+                     * Specify the recipe init stack addDefaultPackageJson action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    applyDefaultPackageJson: {
-                        extends: 'applyDefaultPackageJson',
+                    addDefaultPackageJson: {
+                        extends: 'addDefaultPackageJson',
                     },
-
                     /**
                      * @name            addSugarJson
                      * @namespace       config.kitchenRecipeDefault.stacks.new.actions
@@ -162,9 +161,7 @@ export default function (env, config) {
                         extends: 'addSugarJson',
                         title: 'Add the sugar.json file',
                         description: 'Add the sugar.json file',
-                        params: {
-                            recipe: 'generic',
-                        },
+                        params: {},
                     },
                     /**
                      * @name            addFrontspecJson
@@ -195,6 +192,19 @@ export default function (env, config) {
                      */
                     addDefaultPages: {
                         extends: 'addDefaultPages',
+                    },
+                    /**
+                     * @name            addDefaultScripts
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addDefaultScripts action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addDefaultScripts: {
+                        extends: 'addDefaultScripts',
                     },
                     /**
                      * @name            addManifestJson

@@ -13,7 +13,7 @@ export default function (env, config) {
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        glob: ['js/**/*.ts', '(node|shared|config|pages|views|cli)/**/*.ts'],
+        glob: ['js/**/*.ts', '(node|shared|config|cli)/**/*.ts'],
 
         /**
          * @name            inDir
@@ -72,22 +72,14 @@ export default function (env, config) {
          * @name            customSettings
          * @namespace       config.typescriptBuilder
          * @type            String[]
-         * @default         ['** /node_module']
+         * @default         {}
          *
          * Specify some custom settings for the typescript builder based on the glob pattern used as property
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        customSettings: {
-            pages: {
-                glob: '**/(pages|views)/**/*.ts',
-                settings: {
-                    outDir: '[config.storage.src.rootDir]',
-                    formats: ['esm'],
-                },
-            },
-        },
+        customSettings: {},
 
         /**
          * @name            exclude

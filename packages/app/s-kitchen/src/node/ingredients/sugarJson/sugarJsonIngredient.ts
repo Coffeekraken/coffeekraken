@@ -18,12 +18,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const sugarJsonIngredient: ISKitchenIngredient = {
     id: 'sugarJson',
+    projectTypes: ['*'],
     async add({ ask, log, emit, context }) {
-        emit('log', {
-            type: __SLog.TYPE_INFO,
-            value: `<yellow>[sugarJson]</yellow> Adding the sugar.json file with the recipe <cyan>generic</cyan>`,
-        });
-
         const packageRoot = __packageRoot();
 
         if (__fs.existsSync(`${packageRoot}/sugar.json`)) {
@@ -35,6 +31,11 @@ const sugarJsonIngredient: ISKitchenIngredient = {
                 recipe: context.recipe ?? 'generic',
             });
         }
+
+        emit('log', {
+            type: __SLog.TYPE_INFO,
+            value: `<yellow>[sugarJson]</yellow> "<cyan>sugar.json</cyan>" file added <green>successfully</green> with the recipe <cyan>generic</cyan>`,
+        });
 
         return true;
     },

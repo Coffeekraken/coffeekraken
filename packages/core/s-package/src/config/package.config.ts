@@ -63,7 +63,6 @@ export default function (env, config) {
             },
             dependencies: {
                 '@coffeekraken/sugar': '^2.0.0',
-                '@coffeekraken/s-typescript-builder': '^2.0.0',
             },
         },
 

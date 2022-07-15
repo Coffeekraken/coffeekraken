@@ -1,7 +1,6 @@
 import __prependToFileSync from '@coffeekraken/sugar/node/fs/prependToFileSync';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
@@ -22,13 +21,9 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const sugarIngredient: ISKitchenIngredient = {
     id: 'sugar',
-    async add({ ask, log, emit, pipe }) {
+    projectTypes: ['unknown', 'sugar'],
+    async add({ ask, log, emit, pipe, context }) {
         const rootPath = __packageRoot(process.cwd());
-        const projectType = __detectProjectType(rootPath);
-
-        emit('log', {
-            value: `<yellow>sugar</yellow> <cyan>${projectType.type}</cyan> project detected in version <cyan>${projectType.version}</cyan>`,
-        });
 
         // installing the actual package
         emit('log', {
@@ -52,7 +47,7 @@ const sugarIngredient: ISKitchenIngredient = {
         ) {
             // @TODO            Finish next integration and add "generic" one
 
-            switch (projectType.type) {
+            switch (context.projectType.type) {
                 case 'next':
                     // adding the js needed
                     __fs.writeFileSync(

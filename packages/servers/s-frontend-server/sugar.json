@@ -16,10 +16,6 @@
           "description": "Start a new frontend server process",
           "process": "./dist/pkg/esm/cli/start.cli.js"
         },
-        "addDefaultPages": {
-          "description": "Add default pages to the frontend server like the index, the 404, etc...",
-          "process": "./dist/pkg/esm/cli/addDefaultPages.cli.js"
-        },
         "corsProxy": {
           "description": "Start a cors proxy server",
           "process": "./dist/pkg/esm/cli/corsProxy.cli.js"

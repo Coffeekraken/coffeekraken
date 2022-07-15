@@ -21,12 +21,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const manifestIngredient: ISKitchenIngredient = {
     id: 'manifest',
+    projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit }) {
-        emit('log', {
-            type: __SLog.TYPE_INFO,
-            value: `<yellow>[manifest]</yellow> Adding the manifest.json file into the public folder`,
-        });
-
         const packageJson = __packageJson();
 
         const publicDir = __SSugarConfig.get('storage.src.publicDir');

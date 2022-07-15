@@ -6,6 +6,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import __SConfigAdapter from './adapters/SConfigAdapter';
@@ -66,6 +67,7 @@ export interface ISConfigEnvObj {
 
 export interface ISConfigLoadSettings {
     isUpdate: boolean;
+    clean: boolean;
 }
 
 export interface ISConfigSettings {
@@ -341,6 +343,7 @@ export default class SConfig {
 
         const finalSettings: ISConfigLoadSettings = {
             isUpdate: false,
+            clean: false,
             ...(settings ?? {}),
         };
 
@@ -436,11 +439,10 @@ export default class SConfig {
                 const configKey = Object.keys(
                     this.constructor._registeredPreprocesses[this.id],
                 )[k];
-                this.config[
-                    configKey
-                ] = await this.constructor._registeredPreprocesses[this.id][
-                    configKey
-                ](this.settings.env, this.config[configKey], this.config);
+                this.config[configKey] =
+                    await this.constructor._registeredPreprocesses[this.id][
+                        configKey
+                    ](this.settings.env, this.config[configKey], this.config);
             }
         }
 
@@ -483,11 +485,10 @@ export default class SConfig {
                 const configKey = Object.keys(
                     this.constructor._registeredPostprocess[this.id],
                 )[k];
-                this.config[
-                    configKey
-                ] = await this.constructor._registeredPostprocess[this.id][
-                    configKey
-                ](this.settings.env, this.config[configKey], this.config);
+                this.config[configKey] =
+                    await this.constructor._registeredPostprocess[this.id][
+                        configKey
+                    ](this.settings.env, this.config[configKey], this.config);
             }
         }
 
@@ -526,6 +527,15 @@ export default class SConfig {
 
         // cache for later
         this.cache();
+
+        // filter the empty config
+        if (finalSettings.clean) {
+            this.config = __filter(this.config, (key, value) => {
+                if (__isPlainObject(value) && !Object.keys(value).length)
+                    return false;
+                return true;
+            });
+        }
 
         // return the config
         return this.config;

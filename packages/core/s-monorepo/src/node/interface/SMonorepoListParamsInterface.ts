@@ -25,6 +25,13 @@ export default class SMonorepoListParamsInterface extends __SInterface {
                     'Specify some globs to search for packages relative to the monorepo root directory',
                 type: 'String',
                 default: __SSugarConfig.get('monorepo.packagesGlob'),
+                alias: 'g',
+            },
+            json: {
+                description: 'Specify if you want the list into a json object',
+                type: 'Boolean',
+                default: false,
+                alias: 'j',
             },
         };
     }

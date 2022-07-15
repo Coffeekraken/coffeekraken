@@ -1,5 +1,4 @@
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __commonTextFileExtensions from '@coffeekraken/sugar/shared/extension/commonTextFileExtensions';
 
 export default function (env, config) {

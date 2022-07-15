@@ -355,17 +355,6 @@ export default class SFrontendServer extends __SClass {
                                 // group: `s-frontend-server-${this.metas.id}`,
                                 value: `Log level: <yellow>${finalParams.logLevel}</yellow>`,
                             });
-
-                            // setTimeout(() => {
-                            //     emit('log', {
-                            //         type: 'summary',
-                            //         value: {
-                            //             status: 'success',
-                            //             value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
-                            //             collapse: true,
-                            //         },
-                            //     });
-                            // }, 2000);
                         },
                     );
 

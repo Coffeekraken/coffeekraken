@@ -1,3 +1,3 @@
 export default {
-  views: ["index.index"],
+    views: ['index.index'],
 };

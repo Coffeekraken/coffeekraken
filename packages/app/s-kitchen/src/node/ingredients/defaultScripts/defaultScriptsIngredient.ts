@@ -18,6 +18,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const defaultScriptsIngredient: ISKitchenIngredient = {
     id: 'defaultScripts',
+    description:
+        'Add default scripts ("<cyan>index.ts</cyan>") to your <magenta>sugar<magenta> project',
     projectTypes: ['sugar', 'unknown'],
     async add({ ask, log, emit, context }) {
         // source file path

@@ -20,6 +20,8 @@ import __path from 'path';
  */
 const readmeIngredient: ISKitchenIngredient = {
     id: 'readme',
+    description:
+        'Add the default <cyan>README.md</cyan> file into your project',
     projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit }) {
         const input = __SSugarConfig.get('readme.input'),

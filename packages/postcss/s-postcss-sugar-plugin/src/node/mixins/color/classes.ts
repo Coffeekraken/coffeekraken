@@ -148,16 +148,16 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
     __STheme.getTheme().loopOnColors((colorObj) => {
         const colorName = colorObj.name;
         let modifierStr = '';
-        if (colorObj.variant) modifierStr = `-${colorObj.variant}`;
+        if (colorObj.schema) modifierStr = `-${colorObj.schema}`;
 
         cssArray
             .comment(() =>
                 [
                     `/**`,
                     ` * @name           s-tc:${colorName}${
-                        colorObj.variant === 'text' ? '' : modifierStr
+                        colorObj.schema === 'text' ? '' : modifierStr
                     }`,
-                    ` * @namespace          sugar.style.color.${colorName}.${colorObj.variant}`,
+                    ` * @namespace          sugar.style.color.${colorName}.${colorObj.schema}`,
                     ` * @type           CssClass`,
                     ` * @platform       css`,
                     ` * @status         beta`,
@@ -166,7 +166,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                     ` *`,
                     ` * @example        html`,
                     ` * <h1 class="s-tc:${colorName}${
-                        colorObj.variant === 'text' ? '' : modifierStr
+                        colorObj.schema === 'text' ? '' : modifierStr
                     }">`,
                     ` *     Something cool`,
                     ` * </h1>`,
@@ -176,9 +176,9 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .code(
                 `
             .s-tc--${colorName}${
-                    colorObj.variant === 'text' ? '' : modifierStr
+                    colorObj.schema === 'text' ? '' : modifierStr
                 } {
-            color: sugar.color(${colorName}, ${colorObj.variant}) !important;
+            color: sugar.color(${colorName}, ${colorObj.schema}) !important;
         }
         `,
                 { type: 'CssClass' },
@@ -189,7 +189,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                 [
                     `/**`,
                     ` * @name           s-bg:${colorName}${modifierStr}`,
-                    ` * @namespace          sugar.style.color.bg.${colorName}.${colorObj.variant}`,
+                    ` * @namespace          sugar.style.color.bg.${colorName}.${colorObj.schema}`,
                     ` * @type           CssClass`,
                     ` * @platform       css`,
                     ` * @status         beta`,
@@ -206,7 +206,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .code(
                 `
             .s-bg--${colorName}${modifierStr} {
-                   background-color: sugar.color(${colorName}, ${colorObj.variant}) !important;
+                   background-color: sugar.color(${colorName}, ${colorObj.schema}) !important;
                 }
         `,
                 { type: 'CssClass' },

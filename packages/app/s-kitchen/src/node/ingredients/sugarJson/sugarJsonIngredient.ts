@@ -18,6 +18,7 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const sugarJsonIngredient: ISKitchenIngredient = {
     id: 'sugarJson',
+    description: 'Add the default <cyan>sugar.json</cyan> in your project',
     projectTypes: ['*'],
     async add({ ask, log, emit, context }) {
         const packageRoot = __packageRoot();

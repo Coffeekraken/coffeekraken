@@ -1,6 +1,32 @@
 export default function (env, config) {
     return {
         /**
+         * @name            defaultColor
+         * @namespace        config.themeBase
+         * @type            String
+         * @default         main
+         *
+         * Specify which color to use by default for elements that make use of the "sugar.color(current)" color.
+         *
+         * @since           2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        defaultColor: 'main',
+
+        /**
+         * @name            color
+         * @namespace        config.themeBase
+         * @type            String
+         * @default         [config.themeColor]
+         *
+         * Specify the color schema to be used in the dark theme
+         *
+         * @since           2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        color: '[config.themeColor]',
+
+        /**
          * @name            easing
          * @namespace       config.themeBase
          * @type            Object
@@ -168,8 +194,6 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         depth: '[config.themeDepth]',
-
-        color: {},
 
         /**
          * @name            size

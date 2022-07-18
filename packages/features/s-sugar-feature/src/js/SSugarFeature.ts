@@ -44,6 +44,7 @@ export interface ISSugarFeatureProps {
  * @feature         Additional input attributes like `empty`, `dirty` and `has-value`
  * @feature         Add state attributes to links like `actual` and `actual-child` depending on the document location url
  * @feature         Prevent the scroll restoration behavior on chrome that can usually be anoying
+ * @feature         Remove some classes at page loading end: "initial-loading", "loading"
  *
  * @support          chromium
  * @support          firefox
@@ -101,6 +102,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         // remove some classes like "initial-loading", etc...
         document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('initial-loading');
+            document.body.classList.remove('loading');
         });
     }
     _clearTransmationsOnResizeTimeout;

@@ -18,7 +18,7 @@ import __SThemeBase from '../shared/SThemeBase';
  * @example         js
  * import STheme from '@coffeekraken/s-theme';
  * const theme = new STheme();
- * theme.loopOnColors(({name, modifier, value}) => {
+ * theme.loopOnColors(({name, schema, value}) => {
  *      // do something...
  * });
  *
@@ -383,9 +383,8 @@ export default class STheme extends __SThemeBase {
         }
 
         if (!$context._sThemeOverridedConfigs[this.id]) {
-            $context._sThemeOverridedConfigs[this.id] = document.createElement(
-                'style',
-            );
+            $context._sThemeOverridedConfigs[this.id] =
+                document.createElement('style');
             $context._sThemeOverridedConfigs[this.id].setAttribute(
                 'id',
                 this.id,

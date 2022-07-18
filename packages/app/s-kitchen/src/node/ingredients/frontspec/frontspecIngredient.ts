@@ -18,6 +18,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const frontspecIngredient: ISKitchenIngredient = {
     id: 'frontspec',
+    description:
+        'Add the default <cyan>frontspec.json</cyan> file into your <magenta>sugar</magenta> project',
     projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit }) {
         const frontspecPath = `${__packageRoot()}/frontspec.json`;

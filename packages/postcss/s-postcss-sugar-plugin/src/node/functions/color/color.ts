@@ -15,7 +15,7 @@ import __isColor from '@coffeekraken/sugar/shared/is/color';
  * This function allows you to get a color value depending on your theme config.
  *
  * @param       {String}        color      The color to get
- * @param       {String}        [variant=null]      The color variant to get
+ * @param       {String}        [schema=null]      The color schema to get
  * @param       {String}        [modifier=null]     A color modifier like "--alpha 0.3 --saturate 20", etc...
  * @return      {Css}                   The corresponding css
  *
@@ -28,7 +28,7 @@ import __isColor from '@coffeekraken/sugar/shared/is/color';
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-class colorVariantNameInterface extends __SInterface {
+class colorSchemaNameInterface extends __SInterface {
     static get _definition() {
         return {
             saturate: {
@@ -66,7 +66,7 @@ class postcssSugarPluginColorInterface extends __SInterface {
                 type: 'String',
                 alias: 'c',
             },
-            variant: {
+            schema: {
                 type: 'String',
                 alias: 'v',
             },
@@ -81,7 +81,7 @@ export { postcssSugarPluginColorInterface as interface };
 
 export interface IPostcssSugarPluginColorParams {
     name: string;
-    variant: string;
+    schema: string;
     modifier: string;
 }
 
@@ -92,7 +92,7 @@ export default function color({
 }) {
     const finalParams: IPostcssSugarPluginColorParams = {
         color: '',
-        variant: undefined,
+        schema: undefined,
         modifier: undefined,
         ...params,
     };
@@ -102,25 +102,17 @@ export default function color({
     if (finalParams.color.match(/^var\(--/)) return finalParams.color;
 
     let colorName = finalParams.color;
-    let colorVariantName = finalParams.variant ?? '';
+    let colorSchemaName = finalParams.schema ?? '';
     let colorModifier = finalParams.modifier ?? '';
-    let colorStateName = '';
 
-    if (colorVariantName.match(/^--[a-z]+/)) {
-        colorModifier = colorVariantName;
-        colorVariantName = undefined;
-    }
-
-    const nameParts = finalParams.color.split(':');
-
-    if (nameParts.length === 2) {
-        colorName = nameParts[0];
-        colorStateName = nameParts[1];
+    if (colorSchemaName.match(/^--[a-z]+/)) {
+        colorModifier = colorSchemaName;
+        colorSchemaName = undefined;
     }
 
     let modifierParams = {};
     if (colorModifier) {
-        modifierParams = colorVariantNameInterface.apply(colorModifier);
+        modifierParams = colorSchemaNameInterface.apply(colorModifier);
     }
 
     if (__isColor(colorName)) {
@@ -132,27 +124,24 @@ export default function color({
     } else {
         const colorVar = `--s-theme-color-${colorName}`;
 
-        let colorVariantNameVar = `s-theme-color-${colorName}`;
-        if (colorStateName) {
-            colorVariantNameVar += `-${colorStateName}`;
-        }
-        if (colorVariantName) {
-            colorVariantNameVar += `-${colorVariantName}`;
+        let colorSchemaNameVar = `s-theme-color-${colorName}`;
+        if (colorSchemaName) {
+            colorSchemaNameVar += `-${colorSchemaName}`;
         }
 
-        colorVariantNameVar =
-            '--' + colorVariantNameVar.replace(/-{2,999}/gm, '-');
+        colorSchemaNameVar =
+            '--' + colorSchemaNameVar.replace(/-{2,999}/gm, '-');
 
         let finalValue = colorVar;
 
         const hParts = [
             `var(${colorVar}-h, 0)`,
-            `var(${colorVariantNameVar}-spin ,${modifierParams.spin ?? 0})`,
+            `var(${colorSchemaNameVar}-spin ,${modifierParams.spin ?? 0})`,
         ];
 
         const sParts = [`var(${colorVar}-s, 0)`];
-        if (colorVariantName) {
-            sParts.push(`var(${colorVariantNameVar}-saturation-offset, 0)`);
+        if (colorSchemaName) {
+            sParts.push(`var(${colorSchemaNameVar}-saturation-offset, 0)`);
         }
         let saturationOffset = modifierParams.saturate
             ? modifierParams.saturate
@@ -164,8 +153,8 @@ export default function color({
         }
 
         const lParts = [`var(${colorVar}-l, 0)`];
-        if (colorVariantName) {
-            lParts.push(`var(${colorVariantNameVar}-lightness-offset, 0)`);
+        if (colorSchemaName) {
+            lParts.push(`var(${colorSchemaNameVar}-lightness-offset, 0)`);
         }
         let lightnessOffset = modifierParams.lighten
             ? modifierParams.lighten
@@ -192,7 +181,7 @@ export default function color({
             ${
                 modifierParams.alpha !== undefined
                     ? modifierParams.alpha
-                    : `var(${colorVariantNameVar}-a, 1)`
+                    : `var(${colorSchemaNameVar}-a, 1)`
             }
     )`;
 

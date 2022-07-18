@@ -22,7 +22,16 @@ class SKitchenListParamsInterface extends __SInterface {
     static get _definition() {
         return {
             recipe: {
+                description: 'Specify a recipe you want to list details for',
                 type: 'String',
+                alias: 'r',
+            },
+            ingredients: {
+                description:
+                    'Specify if you want to list the available ingredients in your kitchen',
+                type: 'Boolean',
+                default: false,
+                alias: 'i',
             },
         };
     }

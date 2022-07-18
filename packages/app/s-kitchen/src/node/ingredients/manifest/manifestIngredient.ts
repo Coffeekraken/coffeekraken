@@ -21,6 +21,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const manifestIngredient: ISKitchenIngredient = {
     id: 'manifest',
+    description:
+        'Add the default <cyan>manifest.json</cyan> into your <magenta>sugar</magenta> project',
     projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit }) {
         const packageJson = __packageJson();

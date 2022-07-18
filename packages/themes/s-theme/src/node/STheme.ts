@@ -1,6 +1,5 @@
-import __SThemeBase from '../shared/SThemeBase';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SColor from '@coffeekraken/s-color';
+import __SThemeBase from '../shared/SThemeBase';
 
 /**
  * @name            STheme
@@ -17,7 +16,7 @@ import __SColor from '@coffeekraken/s-color';
  * @example         js
  * import STheme from '@coffeekraken/s-theme';
  * const theme = new STheme();
- * theme.loopOnColors(({name, modifier, value}) => {
+ * theme.loopOnColors(({name, schema, value}) => {
  *      // do something...
  * });
  *
@@ -63,8 +62,7 @@ export default class STheme extends __SThemeBase {
      * THis method allows you to access a particular theme color
      *
      * @param           {String}            name            The color name you want to get
-     * @param           {String}            [variant=null]     The color variant you want to get
-     * @param           {String}           [state='default']    The state in which to get the color back
+     * @param           {String}            [schema=null]     The color schema you want to get
      * @param           {HTMLElement}       [$context=document.body]        The context in which to get the color
      * @return          {SColor}                                    An SColor instance that you can make use of
      *
@@ -73,7 +71,7 @@ export default class STheme extends __SThemeBase {
      */
     getColor(
         name: string,
-        variant?: string,
+        schema?: string,
         state: string = 'default',
     ): __SColor {
         const color = this.get(`color.${name}.color`);
@@ -82,17 +80,17 @@ export default class STheme extends __SThemeBase {
                 `Sorry but the requested "<yellow>${name}</yellow> color does not exists...`,
             );
         }
-        if (!variant) {
+        if (!schema) {
             return new __SColor(color);
         }
-        const variantObj = this.get(`color.${name}.${state}.${variant}`);
-        if (!variantObj) {
+        const schemaObj = this.get(`colorSchema.${schema}`);
+        if (!schemaObj) {
             throw new Error(
-                `Sorry but the requested "<yellow>${name}</yellow>"color, variant "<cyan>${variant}</cyan>" and state "<magenta>${state}</magenta>" does not exists...`,
+                `Sorry but the requested "<yellow>${name}</yellow>"color, schema "<cyan>${schema}</cyan>" and state "<magenta>${state}</magenta>" does not exists...`,
             );
         }
         const colorInstance = new __SColor(color);
-        colorInstance.apply(variantObj);
+        colorInstance.apply(schemaObj);
         return colorInstance;
     }
 }

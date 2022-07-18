@@ -18,6 +18,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const defaultPagesIngredient: ISKitchenIngredient = {
     id: 'defaultPages',
+    description:
+        'Add default pages like index, 404, etc in a <magenta>sugar</magenta> project',
     projectTypes: ['sugar'],
     async add({ ask, log, emit, context }) {
         // source file path

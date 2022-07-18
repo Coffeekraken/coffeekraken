@@ -18,6 +18,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const faviconIngredient: ISKitchenIngredient = {
     id: 'favicon',
+    description:
+        'Add the base <cyan>favicon.png</cyan> file into your <magenta>sugar</magenta> project',
     projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit }) {
         // source file path

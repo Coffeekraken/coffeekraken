@@ -9,3 +9,11 @@
  * that depends on your theme configuration
  */
 @sugar.classes();
+
+/**
+ * Generate media scoped classes to use like "@mobile s-pbe:100", etc...
+ * that depends on your theme configuration
+ */
+/* @sugar.media.classes ('mobile,tablet') {
+    @sugar.classes();
+} */

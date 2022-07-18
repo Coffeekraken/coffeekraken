@@ -27,7 +27,7 @@ import __objectHash from 'object-hash';
  * @example         js
  * import STheme from '@coffeekraken/s-theme';
  * const theme = new STheme();
- * theme.loopOnColors(({name, modifier, value}) => {
+ * theme.loopOnColors(({name, schema, value}) => {
  *      // do something...
  * });
  *
@@ -138,8 +138,7 @@ export interface ISThemeConfig {
 
 export interface ISThemeLoopOnColorsColor {
     name: string;
-    variant: string;
-    state?: string;
+    schema: string;
     value: ISThemeColor | ISThemeColorModifiers;
 }
 
@@ -752,12 +751,12 @@ export default class SThemeBase extends __SEventEmitter {
             this.getTheme().loopOnColors((colorObj) => {
                 if (colorObj.name === toColorName) {
                     if (toColorVariant) {
-                        if (colorObj.variant === toColorVariant) {
+                        if (colorObj.schema === toColorVariant) {
                             result.vars.push(
                                 `${__compressVarName(
                                     `${fromVariable}-saturation-offset`,
                                 )}: var(${__compressVarName(
-                                    `${toVariable}-${colorObj.variant}-saturation-offset`,
+                                    `${toVariable}-${colorObj.schema}-saturation-offset`,
                                 )}, 0);`,
                             );
                             result.properties[
@@ -765,13 +764,13 @@ export default class SThemeBase extends __SEventEmitter {
                                     `${fromVariable}-saturation-offset`,
                                 )}`
                             ] = `var(${__compressVarName(
-                                `${toVariable}-${colorObj.variant}-saturation-offset`,
+                                `${toVariable}-${colorObj.schema}-saturation-offset`,
                             )}, 0)`;
                             result.vars.push(
                                 `${__compressVarName(
                                     `${fromVariable}-lightness-offset`,
                                 )}: var(${__compressVarName(
-                                    `${toVariable}-${colorObj.variant}-lightness-offset`,
+                                    `${toVariable}-${colorObj.schema}-lightness-offset`,
                                 )}, 0);`,
                             );
                             result.properties[
@@ -779,7 +778,7 @@ export default class SThemeBase extends __SEventEmitter {
                                     `${fromVariable}-lightness-offset`,
                                 )}`
                             ] = `var(${__compressVarName(
-                                `${toVariable}-${colorObj.variant}-lightness-offset`,
+                                `${toVariable}-${colorObj.schema}-lightness-offset`,
                             )}, 0)`;
                             result.vars.push(
                                 `${__compressVarName(
@@ -795,11 +794,7 @@ export default class SThemeBase extends __SEventEmitter {
                             )}, 1)`;
                         }
                     } else {
-                        if (
-                            !colorObj.state &&
-                            !colorObj.variant &&
-                            colorObj.value.color
-                        ) {
+                        if (!colorObj.schema && colorObj.value.color) {
                             result.vars.push(
                                 `${__compressVarName(
                                     `${fromVariable}-h`,
@@ -830,34 +825,34 @@ export default class SThemeBase extends __SEventEmitter {
                             result.properties[
                                 `${__compressVarName(`${fromVariable}-l`)}`
                             ] = `var(${__compressVarName(`${toVariable}-l`)})`;
-                        } else if (!colorObj.value.color) {
+                        } else {
                             result.vars.push(
                                 `${__compressVarName(
-                                    `${fromVariable}-${colorObj.variant}-saturation-offset`,
+                                    `${fromVariable}-${colorObj.schema}-saturation-offset`,
                                 )}: var(${__compressVarName(
-                                    `${toVariable}-${colorObj.variant}-saturation-offset`,
+                                    `${toVariable}-${colorObj.schema}-saturation-offset`,
                                 )}, 0);`,
                             );
                             result.properties[
                                 `${__compressVarName(
-                                    `${fromVariable}-${colorObj.variant}-saturation-offset`,
+                                    `${fromVariable}-${colorObj.schema}-saturation-offset`,
                                 )}`
                             ] = `var(${__compressVarName(
-                                `${toVariable}-${colorObj.variant}-saturation-offset`,
+                                `${toVariable}-${colorObj.schema}-saturation-offset`,
                             )}, 0)`;
                             result.vars.push(
                                 `${__compressVarName(
-                                    `${fromVariable}-${colorObj.variant}-lightness-offset`,
+                                    `${fromVariable}-${colorObj.schema}-lightness-offset`,
                                 )}: var(${__compressVarName(
-                                    `${toVariable}-${colorObj.variant}-lightness-offset`,
+                                    `${toVariable}-${colorObj.schema}-lightness-offset`,
                                 )}, 0);`,
                             );
                             result.properties[
                                 `${__compressVarName(
-                                    `${fromVariable}-${colorObj.variant}-lightness-offset`,
+                                    `${fromVariable}-${colorObj.schema}-lightness-offset`,
                                 )}`
                             ] = `var(${__compressVarName(
-                                `${toVariable}-${colorObj.variant}-lightness-offset`,
+                                `${toVariable}-${colorObj.schema}-lightness-offset`,
                             )}, 0)`;
                             result.vars.push(
                                 `${__compressVarName(
@@ -907,7 +902,7 @@ export default class SThemeBase extends __SEventEmitter {
         themeInstance.loopOnColors((colorObj) => {
             const baseVariable = colorObj.value.variable;
 
-            if (!colorObj.state && !colorObj.variant && colorObj.value.color) {
+            if (!colorObj.schema && colorObj.value.color) {
                 vars.push(
                     `${__compressVarName(`${baseVariable}-h`)}: ${
                         colorObj.value.h
@@ -948,7 +943,7 @@ export default class SThemeBase extends __SEventEmitter {
                         colorObj.value.a
                     };`,
                 );
-            } else if (!colorObj.value.color) {
+            } else if (colorObj.schema) {
                 if (colorObj.value.saturate) {
                     vars.push(
                         `${__compressVarName(
@@ -1320,13 +1315,12 @@ export default class SThemeBase extends __SEventEmitter {
      */
     baseColors(): Record<string, ISThemeColor> {
         const map = {};
-        Object.keys(this._config.color).forEach((color) => {
-            const colorObj = this._config.color[color];
-            if (!colorObj.color) return;
-            const c = new __SColor(colorObj.color);
-            map[color] = {
-                color: colorObj.color,
-                variable: __compressVarName(`--s-theme-color-${color}`),
+
+        for (let [colorName, colorValue] of Object.entries(this.get('color'))) {
+            const c = new __SColor(colorValue);
+            map[colorName] = {
+                color: colorValue,
+                variable: __compressVarName(`--s-theme-color-${colorName}`),
                 r: c.r,
                 g: c.g,
                 b: c.b,
@@ -1335,7 +1329,7 @@ export default class SThemeBase extends __SEventEmitter {
                 l: c.l,
                 a: c.a,
             };
-        });
+        }
         return map;
     }
 
@@ -1349,8 +1343,7 @@ export default class SThemeBase extends __SEventEmitter {
      *
      * @param       {Function}      callback            Specify the callback that will be called for each color with an object containing these properties:
      * - name       {String}        The name of the color like "accent", "complementary", etc...
-     * - variant    {String}        The name of the variant like "background", "surface", etc...
-     * - state      {String}        The name of the state like "hover", "active", etc...
+     * - schema    {String}        The name of the variant like "background", "surface", etc...
      * - value      {ISThemeColor | ISThemeColorModifiers}        The actual color object
      *
      * @since             2.0.0
@@ -1359,30 +1352,29 @@ export default class SThemeBase extends __SEventEmitter {
     async loopOnColors(
         callback: ISThemeLoopOnColorsCallback,
     ): Promise<boolean> {
-        const colorsObj = this.get('color');
-        let triggeredStop = false;
+        const colorsObj = this.get('color'),
+            colorSchemasObj = this.get('colorSchema');
+        // let triggeredStop = false;
 
-        for (let [colorName, colorObj] of Object.entries(colorsObj)) {
+        for (let [colorName, colorValue] of Object.entries(colorsObj)) {
             // if (triggeredStop) return;
-            const colorObj = colorsObj[colorName];
 
-            const defaultColorObj = Object.assign({}, colorObj.default ?? {});
+            // const defaultColorObj = Object.assign({}, colorObj.default ?? {});
 
-            if (!colorObj.color) {
-                throw new Error(
-                    `Sorry but your color "<yellow>${colorName}</yellow>" does not provide a "<cyan>color</cyan>" property and this is required...`,
-                );
-            }
+            // if (!colorObj.color) {
+            //     throw new Error(
+            //         `Sorry but your color "<yellow>${colorName}</yellow>" does not provide a "<cyan>color</cyan>" property and this is required...`,
+            //     );
+            // }
 
-            const c = new __SColor(colorObj.color);
+            const c = new __SColor(colorValue);
 
             const _res = callback({
                 name: colorName,
-                variant: '',
-                state: '',
+                schema: '',
                 // @ts-ignore
                 value: {
-                    color: colorObj.color,
+                    color: colorValue,
                     variable: __compressVarName(`--s-theme-color-${colorName}`),
                     r: c.r,
                     g: c.g,
@@ -1393,51 +1385,50 @@ export default class SThemeBase extends __SEventEmitter {
                     a: c.a,
                 },
             });
-            // @ts-ignore
-            if (_res === false || _res === -1) {
-                return true;
-            }
 
-            for (let [stateName, stateObj] of Object.entries(colorObj)) {
-                // if (triggeredStop) return;
-                const originalStateName = stateName;
+            for (let [schemaName, schemaObj] of Object.entries(
+                colorSchemasObj,
+            )) {
+                const newColor = c.apply(schemaObj, true);
+                const res = callback(<ISThemeLoopOnColorsColor>{
+                    name: colorName,
+                    schema: schemaName,
+                    value: {
+                        variable: __compressVarName(
+                            `--s-theme-color-${colorName}-${schemaName}`,
+                        ),
+                        // @ts-ignore
+                        ...schemaObj,
+                        r: newColor.r,
+                        g: newColor.g,
+                        b: newColor.b,
+                        h: newColor.h,
+                        s: newColor.s,
+                        l: newColor.l,
+                        a: newColor.a,
+                    },
+                });
 
-                if (stateName === 'default') stateName = ':default';
+                // @ts-ignore
+                if (schemaObj.color) {
+                    for (let [
+                        colorSchemaColorName,
+                        colorSchemaObj,
+                        // @ts-ignore
+                    ] of Object.entries(schemaObj.color)) {
+                        if (colorSchemaColorName !== colorName) continue;
 
-                let state = stateName.match(/^:/) ? stateName.slice(1) : '',
-                    variant = !stateName.match(/^:/) ? stateName : '',
-                    res;
+                        const newColor = c.apply(colorSchemaObj, true);
 
-                let variantColorObj = Object.assign(
-                    {},
-                    colorObj[originalStateName],
-                );
-                if (state !== 'default')
-                    variantColorObj = {
-                        ...defaultColorObj,
-                        ...variantColorObj,
-                    };
-
-                if (stateName === 'color') {
-                } else if (stateName.match(/^:/)) {
-                    for (let [variant, variantObj] of Object.entries(
-                        variantColorObj,
-                    )) {
-                        const newColor = c.apply(variantObj, true);
-                        res = callback(<ISThemeLoopOnColorsColor>{
-                            name: colorName,
-                            state: state === 'default' ? '' : state,
-                            variant,
+                        callback(<ISThemeLoopOnColorsColor>{
+                            name: colorSchemaColorName,
+                            schema: schemaName,
                             value: {
-                                variable:
-                                    state && state !== 'default'
-                                        ? __compressVarName(
-                                              `--s-theme-color-${colorName}-${state}-${variant}`,
-                                          )
-                                        : __compressVarName(
-                                              `--s-theme-color-${colorName}-${variant}`,
-                                          ),
-                                ...variantColorObj[variant],
+                                variable: __compressVarName(
+                                    `--s-theme-color-${colorSchemaColorName}-${schemaName}`,
+                                ),
+                                // @ts-ignore
+                                ...colorSchemaObj,
                                 r: newColor.r,
                                 g: newColor.g,
                                 b: newColor.b,
@@ -1447,36 +1438,6 @@ export default class SThemeBase extends __SEventEmitter {
                                 a: newColor.a,
                             },
                         });
-                        if (res === false || res === -1) {
-                            return true;
-                        }
-                    }
-                } else {
-                    const newColor = c.apply(variantColorObj, true);
-                    res = callback(<ISThemeLoopOnColorsColor>{
-                        name: colorName,
-                        variant,
-                        state,
-                        value: {
-                            variable: state
-                                ? __compressVarName(
-                                      `--s-theme-color-${colorName}-${state}-${variant}`,
-                                  )
-                                : __compressVarName(
-                                      `--s-theme-color-${colorName}-${variant}`,
-                                  ),
-                            ...variantColorObj,
-                            r: newColor.r,
-                            g: newColor.g,
-                            b: newColor.b,
-                            h: newColor.h,
-                            s: newColor.s,
-                            l: newColor.l,
-                            a: newColor.a,
-                        },
-                    });
-                    if (res === false || res === -1) {
-                        return true;
                     }
                 }
             }

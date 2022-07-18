@@ -449,11 +449,12 @@ export default class SStdio extends __SClass implements ISStdio {
                 const hash = __objectHash({ value: log.value, type: log.type });
                 log.hash = hash;
             }
-            if (this._hashBuffer.includes(log.hash)) return;
-            this._hashBuffer.push(log.hash);
-            setTimeout(() => {
-                this._hashBuffer.shift();
-            }, 1000);
+
+            // if (this._hashBuffer.includes(log.hash)) return;
+            // this._hashBuffer.push(log.hash);
+            // setTimeout(() => {
+            //     this._hashBuffer.shift();
+            // }, 0);
 
             // put in buffer if not displayed
             if (!this.isDisplayed() || this._isClearing) {

@@ -61,6 +61,7 @@ export interface ISKitchenIngredientAddApi {
 
 export interface ISKitchenIngredient {
     id: string;
+    description: string;
     projectTypes: string[];
     add(api: ISKitchenIngredientAddApi): Promise<any>;
 }
@@ -128,6 +129,7 @@ export interface ISKitchenRecipeParams {
 
 export interface ISKitchenListParams {
     recipe: string;
+    ingredients: boolean;
 }
 
 class SKitchen extends __SClass {
@@ -691,18 +693,13 @@ class SKitchen extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    list(
-        params: ISKitchenListParams | string,
-    ): Promise<
-        | Record<string, ISKitchenRecipe>
-        | Record<string, ISKitchenRecipeStack>
-        | Record<string, ISKitchenAction>
-    > {
+    list(params: ISKitchenListParams | string): Promise<any> {
         return new __SPromise(
             ({ resolve, reject, emit }) => {
                 const recipes = this.listRecipes();
 
-                const finalParams = __SKitchenListParamsInterface.apply(params);
+                const finalParams: ISKitchenL =
+                    __SKitchenListParamsInterface.apply(params);
 
                 let recipe, stack;
                 if (finalParams.recipe) {
@@ -710,6 +707,45 @@ class SKitchen extends __SClass {
                     stack = finalParams.recipe.split('.')[1];
                 }
 
+                // list the ingredients
+                if (finalParams.ingredients) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `Available ingredient(s) list:`,
+                    });
+
+                    for (let [id, ingredientObj] of Object.entries(
+                        SKitchen._registeredIngredients,
+                    )) {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `- <magenta>${id}</magenta>${' '.repeat(
+                                30 - id.length,
+                            )}: ${ingredientObj.description}`,
+                        });
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `   - Project type(s)${' '.repeat(
+                                12,
+                            )}: <cyan>${ingredientObj.projectTypes.join(
+                                ',',
+                            )}</cyan>`,
+                        });
+                        emit('log', {
+                            margin: {
+                                bottom: 1,
+                            },
+                            type: __SLog.TYPE_INFO,
+                            value: `   - Command ${' '.repeat(
+                                19,
+                            )}: <yellow>sugar kitchen.add <magenta>${id}</magenta></yellow>`,
+                        });
+                    }
+
+                    return resolve();
+                }
+
+                // available recipes
                 if (!recipe) {
                     emit('log', {
                         type: __SLog.TYPE_INFO,

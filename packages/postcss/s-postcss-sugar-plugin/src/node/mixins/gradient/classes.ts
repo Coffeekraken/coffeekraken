@@ -160,7 +160,7 @@ export default function ({
     }
 
     let currentName;
-    __STheme.getTheme().loopOnColors(({ name, variant, value }) => {
+    __STheme.getTheme().loopOnColors(({ name, schema, value }) => {
         if (currentName !== name) {
             // default gradients
             vars.comment(
@@ -203,7 +203,7 @@ export default function ({
         currentName = name;
 
         const startColorClassName = `s-gradient:start-${name}${
-            variant === 'default' ? '' : `-${variant}`
+            schema === 'default' ? '' : `-${schema}`
         }`;
         vars.comment(
             `/**
@@ -219,7 +219,7 @@ export default function ({
         * <div class="s-ratio\:16-9 ${startColorClassName.replace(
             ':',
             ':',
-        )}\:end-${name}${next.variant === 'default' ? '' : `-${next.variant}`}">
+        )}\:end-${name}${next.schema === 'default' ? '' : `-${next.schema}`}">
         *     <div class="s-center-abs">I'm a cool depth button</div>
         * </div>
         *
@@ -230,13 +230,13 @@ export default function ({
         ).code(
             `
       .${startColorClassName.replace(':', '--')} {
-          --s-gradient-start-color-inline: sugar.color(${name}, ${variant});
+          --s-gradient-start-color-inline: sugar.color(${name}, ${schema});
       }`,
             { type: 'CssClass' },
         );
 
         const endColorClassName = `s-gradient:end-${name}${
-            variant === 'default' ? '' : `-${variant}`
+            schema === 'default' ? '' : `-${schema}`
         }`;
         vars.comment(
             `/**
@@ -247,7 +247,7 @@ export default function ({
       * @status           beta
       *
       * This class allows you to apply a "<yellow>${name}${
-                variant === 'default' ? '' : `-${variant}`
+                schema === 'default' ? '' : `-${schema}`
             }</yellow>" gradient end color to any HTMLElement
       *
       * @example        html
@@ -255,7 +255,7 @@ export default function ({
           ':',
           ':',
       )}\:start-${name}${
-                previous.variant === 'default' ? '' : `-${previous.variant}`
+                previous.schema === 'default' ? '' : `-${previous.schema}`
             } ${endColorClassName}">
       *     <div class="s-center-abs">I'm a cool depth button</div>
       * </div>
@@ -267,7 +267,7 @@ export default function ({
         ).code(
             `
     .${endColorClassName.replace(':', '--')} {
-        --s-gradient-end-color-inline: sugar.color(${name}, ${variant});
+        --s-gradient-end-color-inline: sugar.color(${name}, ${schema});
     }`,
             { type: 'CssClass' },
         );

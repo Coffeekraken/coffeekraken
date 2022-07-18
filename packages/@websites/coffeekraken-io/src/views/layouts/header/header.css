@@ -69,7 +69,7 @@
     }
 
     svg .main {
-      fill: sugar.color(base, --darken 55);
+      fill: sugar.color(main, --darken 10);
     }
     svg .accent {
       fill: sugar.color(accent);

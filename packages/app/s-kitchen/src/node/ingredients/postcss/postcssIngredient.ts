@@ -23,6 +23,8 @@ import __pickOne from '@coffeekraken/sugar/node/fs/pickOne';
  */
 const postcssIngredient: ISKitchenIngredient = {
     id: 'postcss',
+    description:
+        'Add support for <yellow>postcss</yellow> and the <yellow>@coffeekraken/s-postcss-sugar-plugin</yellow> into your project',
     projectTypes: ['unknown', 'sugar', 'next'],
     async add({ ask, log, emit, pipe, context }) {
         const packageRoot = __packageRoot();

@@ -21,6 +21,8 @@ import type { ISKitchenIngredient } from '../../SKitchen';
  */
 const sugarIngredient: ISKitchenIngredient = {
     id: 'sugar',
+    description:
+        'Add the <yellow>@coffeekraken/sugar</yellow> package to your project',
     projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit, pipe, context }) {
         const rootPath = __packageRoot(process.cwd());
